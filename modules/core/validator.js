@@ -9,21 +9,21 @@ import * as Validations from '../validations/index';
 
 
 export function coreValidator(context) {
-  let dispatch = d3_dispatch('validated', 'focusedIssue');
+  const dispatch = d3_dispatch('validated', 'focusedIssue');
   const validator = {};
 
-  let _rules = {};
+  const _rules = {};
   let _disabledRules = {};
 
-  let _ignoredIssueIDs = new Set();
-  let _resolvedIssueIDs = new Set();
+  const _ignoredIssueIDs = new Set();
+  const _resolvedIssueIDs = new Set();
   let _baseCache = validationCache('base');   // issues before any user edits
   let _headCache = validationCache('head');   // issues after all user edits
   let _completeDiff = {};                     // complete diff base -> head of what the user changed
   let _headIsCurrent = false;
 
   let _deferredRIC = {};          // Object( RequestIdleCallback handle : rejectPromise method )
-  let _deferredST = new Set();    // Set( SetTimeout handles )
+  const _deferredST = new Set();    // Set( SetTimeout handles )
   let _headPromise;               // Promise fulfilled when validation is performed up to headGraph snapshot
 
   const RETRY = 5000;             // wait 5sec before revalidating provisional entities
@@ -52,8 +52,8 @@ export function coreValidator(context) {
   //   Array of Objects like { type: RegExp, subtype: RegExp }
   //
   function parseHashParam(param) {
-    let result = [];
-    let rules = (param || '').split(',');
+    const result = [];
+    const rules = (param || '').split(',');
     rules.forEach(rule => {
       rule = rule.trim();
       const parts = rule.split('/', 2);  // "type/subtype"
@@ -84,7 +84,7 @@ export function coreValidator(context) {
       _rules[key] = fn;
     });
 
-    let disabledRules = prefs('validate-disabledRules');
+    const disabledRules = prefs('validate-disabledRules');
     if (disabledRules) {
       disabledRules.split(',').forEach(k => _disabledRules[k] = true);
     }
@@ -187,8 +187,8 @@ export function coreValidator(context) {
   validator.getIssues = (options) => {
     const opts = Object.assign({ what: 'all', where: 'all', includeIgnored: false, includeDisabledRules: false }, options);
     const view = context.map().extent();
-    let seen = new Set();
-    let results = [];
+    const seen = new Set();
+    const results = [];
 
     // collect head issues - present in the user edits
     if (_headCache.graph && _headCache.graph !== _baseCache.graph) {
@@ -331,7 +331,7 @@ export function coreValidator(context) {
   //   }
   //
   validator.getIssuesBySeverity = (options) => {
-    let groups = utilArrayGroupBy(validator.getIssues(options), 'severity');
+    const groups = utilArrayGroupBy(validator.getIssues(options), 'severity');
     groups.error = groups.error || [];
     groups.warning = groups.warning || [];
     return groups;
@@ -602,7 +602,7 @@ export function coreValidator(context) {
   //   }
   //
   function validateEntity(entity, graph) {
-    let result = { issues: [], provisional: false };
+    const result = { issues: [], provisional: false };
     Object.keys(_rules).forEach(runValidation);   // run all rules
     return result;
 
@@ -814,7 +814,7 @@ export function coreValidator(context) {
 //   `which` - just a String 'base' or 'head' to keep track of it
 //
 function validationCache(which) {
-  let cache = {
+  const cache = {
     which: which,
     graph: null,
     queue: [],
@@ -889,7 +889,7 @@ function validationCache(which) {
   //   `entityIDs` - Array or Set containing entityIDs.
   //
   cache.withAllRelatedEntities = (entityIDs) => {
-    let result = new Set();
+    const result = new Set();
     (entityIDs || []).forEach(entityID => {
       result.add(entityID);  // include self
 

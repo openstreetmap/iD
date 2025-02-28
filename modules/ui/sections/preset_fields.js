@@ -11,42 +11,42 @@ import { uiSection } from '../section';
 
 export function uiSectionPresetFields(context) {
 
-    var section = uiSection('preset-fields', context)
+    const section = uiSection('preset-fields', context)
         .label(() => t.append('inspector.fields'))
         .disclosureContent(renderDisclosureContent);
 
-    var dispatch = d3_dispatch('change', 'revert');
-    var formFields = uiFormFields(context);
-    var _state;
-    var _fieldsArr;
-    var _presets = [];
-    var _tags;
-    var _entityIDs;
+    const dispatch = d3_dispatch('change', 'revert');
+    const formFields = uiFormFields(context);
+    let _state;
+    let _fieldsArr;
+    let _presets = [];
+    let _tags;
+    let _entityIDs;
 
     function renderDisclosureContent(selection) {
         if (!_fieldsArr) {
 
-            var graph = context.graph();
+            const graph = context.graph();
 
-            var geometries = Object.keys(_entityIDs.reduce(function(geoms, entityID) {
+            const geometries = Object.keys(_entityIDs.reduce(function(geoms, entityID) {
                 geoms[graph.entity(entityID).geometry(graph)] = true;
                 return geoms;
             }, {}));
 
             const loc = _entityIDs.reduce(function(extent, entityID) {
-                var entity = context.graph().entity(entityID);
+                const entity = context.graph().entity(entityID);
                 return extent.extend(entity.extent(context.graph()));
             }, geoExtent()).center();
 
-            var presetsManager = presetManager;
+            const presetsManager = presetManager;
 
-            var allFields = [];
-            var allMoreFields = [];
-            var sharedTotalFields;
+            let allFields = [];
+            let allMoreFields = [];
+            let sharedTotalFields;
 
             _presets.forEach(function(preset) {
-                var fields = preset.fields(loc);
-                var moreFields = preset.moreFields(loc);
+                const fields = preset.fields(loc);
+                const moreFields = preset.moreFields(loc);
 
                 allFields = utilArrayUnion(allFields, fields);
                 allMoreFields = utilArrayUnion(allMoreFields, moreFields);
@@ -60,10 +60,10 @@ export function uiSectionPresetFields(context) {
                 }
             });
 
-            var sharedFields = allFields.filter(function(field) {
+            const sharedFields = allFields.filter(function(field) {
                 return sharedTotalFields.indexOf(field) !== -1;
             });
-            var sharedMoreFields = allMoreFields.filter(function(field) {
+            const sharedMoreFields = allMoreFields.filter(function(field) {
                 return sharedTotalFields.indexOf(field) !== -1;
             });
 
@@ -77,14 +77,14 @@ export function uiSectionPresetFields(context) {
                 }
             });
 
-            var singularEntity = _entityIDs.length === 1 && graph.hasEntity(_entityIDs[0]);
+            const singularEntity = _entityIDs.length === 1 && graph.hasEntity(_entityIDs[0]);
             if (singularEntity && singularEntity.isHighwayIntersection(graph) && presetsManager.field('restrictions')) {
                 _fieldsArr.push(
                     uiField(context, presetsManager.field('restrictions'), _entityIDs)
                 );
             }
 
-            var additionalFields = utilArrayUnion(sharedMoreFields, presetsManager.universal());
+            const additionalFields = utilArrayUnion(sharedMoreFields, presetsManager.universal());
             additionalFields.sort(function(field1, field2) {
                 return field1.title().localeCompare(field2.title(), localizer.localeCode());
             });

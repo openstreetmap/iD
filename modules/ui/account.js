@@ -18,15 +18,15 @@ export function uiAccount(context) {
 
 
   function render(selection, user) {
-    let userInfo = selection.select('.userInfo');
-    let loginLogout = selection.select('.loginLogout');
+    const userInfo = selection.select('.userInfo');
+    const loginLogout = selection.select('.loginLogout');
 
     if (user) {
       userInfo
         .html('')
         .classed('hide', false);
 
-      let userLink = userInfo
+      const userLink = userInfo
         .append('a')
         .attr('href', osm.userURL(user.display_name))
         .attr('target', '_blank');

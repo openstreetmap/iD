@@ -10,8 +10,8 @@ import { utilArrayUnion, utilArrayUniq } from '../util';
 
 export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTags, formatUser) {
     discardTags = discardTags || {};
-    var _option = 'safe';  // 'safe', 'force_local', 'force_remote'
-    var _conflicts = [];
+    let _option = 'safe';  // 'safe', 'force_local', 'force_remote'
+    const _conflicts = [];
 
 
     function user(d) {
@@ -21,7 +21,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
 
     function mergeLocation(remote, target) {
         function pointEqual(a, b) {
-            var epsilon = 1e-6;
+            const epsilon = 1e-6;
             return (Math.abs(a[0] - b[0]) < epsilon) && (Math.abs(a[1] - b[1]) < epsilon);
         }
 
@@ -45,21 +45,21 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
             return target.update({nodes: remote.nodes});
         }
 
-        var ccount = _conflicts.length;
-        var o = base.nodes || [];
-        var a = target.nodes || [];
-        var b = remote.nodes || [];
-        var nodes = [];
-        var hunks = diff3Merge(a, o, b, { excludeFalseConflicts: true });
+        const ccount = _conflicts.length;
+        const o = base.nodes || [];
+        const a = target.nodes || [];
+        const b = remote.nodes || [];
+        const nodes = [];
+        const hunks = diff3Merge(a, o, b, { excludeFalseConflicts: true });
 
-        for (var i = 0; i < hunks.length; i++) {
-            var hunk = hunks[i];
+        for (let i = 0; i < hunks.length; i++) {
+            const hunk = hunks[i];
             if (hunk.ok) {
                 nodes.push.apply(nodes, hunk.ok);
             } else {
                 // for all conflicts, we can assume c.a !== c.b
                 // because `diff3Merge` called with `true` option to exclude false conflicts..
-                var c = hunk.conflict;
+                const c = hunk.conflict;
                 if (deepEqual(c.o, c.a)) {  // only changed remotely
                     nodes.push.apply(nodes, c.b);
                 } else if (deepEqual(c.o, c.b)) {  // only changed locally
@@ -77,7 +77,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
 
     function mergeChildren(targetWay, children, updates, graph) {
         function isUsed(node, targetWay) {
-            var hasInterestingParent = graph.parentWays(node)
+            const hasInterestingParent = graph.parentWays(node)
                 .some(function(way) { return way.id !== targetWay.id; });
 
             return node.hasInterestingTags() ||
@@ -85,11 +85,11 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
                 graph.parentRelations(node).length > 0;
         }
 
-        var ccount = _conflicts.length;
+        const ccount = _conflicts.length;
 
-        for (var i = 0; i < children.length; i++) {
-            var id = children[i];
-            var node = graph.hasEntity(id);
+        for (let i = 0; i < children.length; i++) {
+            const id = children[i];
+            const node = graph.hasEntity(id);
 
             // remove unused childNodes..
             if (targetWay.nodes.indexOf(id) === -1) {
@@ -100,9 +100,9 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
             }
 
             // restore used childNodes..
-            var local = localGraph.hasEntity(id);
-            var remote = remoteGraph.hasEntity(id);
-            var target;
+            const local = localGraph.hasEntity(id);
+            const remote = remoteGraph.hasEntity(id);
+            let target;
 
             if (_option === 'force_remote' && remote && remote.visible) {
                 updates.replacements.push(remote);
@@ -132,7 +132,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
 
 
     function updateChildren(updates, graph) {
-        for (var i = 0; i < updates.replacements.length; i++) {
+        for (let i = 0; i < updates.replacements.length; i++) {
             graph = graph.replace(updates.replacements[i]);
         }
         if (updates.removeIds.length) {
@@ -163,17 +163,17 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
             return target.update({tags: remote.tags});
         }
 
-        var ccount = _conflicts.length;
-        var o = base.tags || {};
-        var a = target.tags || {};
-        var b = remote.tags || {};
-        var keys = utilArrayUnion(utilArrayUnion(Object.keys(o), Object.keys(a)), Object.keys(b))
+        const ccount = _conflicts.length;
+        const o = base.tags || {};
+        const a = target.tags || {};
+        const b = remote.tags || {};
+        const keys = utilArrayUnion(utilArrayUnion(Object.keys(o), Object.keys(a)), Object.keys(b))
             .filter(function(k) { return !discardTags[k]; });
-        var tags = Object.assign({}, a);   // shallow copy
-        var changed = false;
+        const tags = Object.assign({}, a);   // shallow copy
+        let changed = false;
 
-        for (var i = 0; i < keys.length; i++) {
-            var k = keys[i];
+        for (let i = 0; i < keys.length; i++) {
+            const k = keys[i];
 
             if (o[k] !== b[k] && a[k] !== b[k]) {    // changed remotely..
                 if (o[k] !== a[k]) {      // changed locally..
@@ -204,12 +204,12 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
     //                 /
     //  `graph.base()` --- ... --- `remoteGraph`
     //
-    var action = function(graph) {
-        var updates = { replacements: [], removeIds: [] };
-        var base = graph.base().entities[id];
-        var local = localGraph.entity(id);
-        var remote = remoteGraph.entity(id);
-        var target = osmEntity(local, { version: remote.version });
+    const action = function(graph) {
+        const updates = { replacements: [], removeIds: [] };
+        const base = graph.base().entities[id];
+        const local = localGraph.entity(id);
+        const remote = remoteGraph.entity(id);
+        let target = osmEntity(local, { version: remote.version });
 
         // delete/undelete
         if (!remote.visible) {

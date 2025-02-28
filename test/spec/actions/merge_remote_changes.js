@@ -1,7 +1,7 @@
 describe('iD.actionMergeRemoteChanges', function () {
-    var discardTags = { created_by: true };
+    const discardTags = { created_by: true };
 
-    var base = iD.coreGraph([
+    const base = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [1, 1], version: '1', tags: {foo: 'foo'}}),
 
             iD.osmNode({id: 'p1', loc: [ 10,  10], version: '1'}),
@@ -69,20 +69,20 @@ describe('iD.actionMergeRemoteChanges', function () {
         describe('tags', function() {
             it('doesn\'t merge tags if conflict (local change, remote change)', function () {
 
-                var localTags = {foo: 'foo_local'},      // changed foo
+                const localTags = {foo: 'foo_local'},      // changed foo
                     remoteTags = {foo: 'foo_remote'},    // changed foo
                     local = base.entity('a').update({tags: localTags}),
                     remote = base.entity('a').update({tags: remoteTags, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
                     action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags);
-                  var  result = action(localGraph);
+                  const  result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
             });
 
             it('doesn\'t merge tags if conflict (local change, remote delete)', function () {
-                var localTags = {foo: 'foo_local'},     // changed foo
+                const localTags = {foo: 'foo_local'},     // changed foo
                     remoteTags = {},                    // deleted foo
                     local = base.entity('a').update({tags: localTags}),
                     remote = base.entity('a').update({tags: remoteTags, version: '2'}),
@@ -95,7 +95,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('doesn\'t merge tags if conflict (local delete, remote change)', function () {
-                var localTags = {},                     // deleted foo
+                const localTags = {},                     // deleted foo
                     remoteTags = {foo: 'foo_remote'},   // changed foo
                     local = base.entity('a').update({tags: localTags}),
                     remote = base.entity('a').update({tags: remoteTags, version: '2'}),
@@ -108,7 +108,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('doesn\'t merge tags if conflict (local add, remote add)', function () {
-                var localTags = {foo: 'foo', bar: 'bar_local'},    // same foo, added bar
+                const localTags = {foo: 'foo', bar: 'bar_local'},    // same foo, added bar
                     remoteTags = {foo: 'foo', bar: 'bar_remote'},  // same foo, added bar
                     local = base.entity('a').update({tags: localTags}),
                     remote = base.entity('a').update({tags: remoteTags, version: '2'}),
@@ -121,7 +121,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('merges tags if no conflict (remote delete)', function () {
-                var localTags = {foo: 'foo', bar: 'bar_local'},   // same foo, added bar
+                const localTags = {foo: 'foo', bar: 'bar_local'},   // same foo, added bar
                     remoteTags = {},                              // deleted foo
                     mergedTags = {bar: 'bar_local'},
                     local = base.entity('a').update({tags: localTags}),
@@ -136,7 +136,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('merges tags if no conflict (local delete)', function () {
-                var localTags = {},                                 // deleted foo
+                const localTags = {},                                 // deleted foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote'},   // same foo, added bar
                     mergedTags = {bar: 'bar_remote'},
                     local = base.entity('a').update({tags: localTags}),
@@ -154,7 +154,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
         describe('nodes', function () {
             it('doesn\'t merge nodes if location is different', function () {
-                var localTags = {foo: 'foo_local'},                // changed foo
+                const localTags = {foo: 'foo_local'},                // changed foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote'},  // same foo, added bar
                     localLoc = [2, 2],                             // moved node
                     remoteLoc = [3, 3],                            // moved node
@@ -169,7 +169,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('merges nodes if location is same', function () {
-                var localTags = {foo: 'foo_local'},                // changed foo
+                const localTags = {foo: 'foo_local'},                // changed foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote'},  // same foo, added bar
                     mergedTags = {foo: 'foo_local', bar: 'bar_remote'},
                     localLoc = [2, 2],                             // moved node
@@ -190,7 +190,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
         describe('ways', function () {
             it('merges ways if nodelist is same', function () {
-                var localTags = {foo: 'foo_local', area: 'yes'},                // changed foo
+                const localTags = {foo: 'foo_local', area: 'yes'},                // changed foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote', area: 'yes'},  // same foo, added bar
                     mergedTags = {foo: 'foo_local', bar: 'bar_remote', area: 'yes'},
                     local = base.entity('w1').update({tags: localTags}),
@@ -205,7 +205,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('merges ways if nodelist changed only remotely', function () {
-                var localTags = {foo: 'foo_local', area: 'yes'},                // changed foo
+                const localTags = {foo: 'foo_local', area: 'yes'},                // changed foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote', area: 'yes'},  // same foo, added bar
                     mergedTags = {foo: 'foo_local', bar: 'bar_remote', area: 'yes'},
                     localNodes = ['p1', 'p2', 'p3', 'p4', 'p1'],                // didn't change nodes
@@ -225,7 +225,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('merges ways if nodelist changed only locally', function () {
-                var localTags = {foo: 'foo_local', area: 'yes'},                // changed foo
+                const localTags = {foo: 'foo_local', area: 'yes'},                // changed foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote', area: 'yes'},  // same foo, added bar
                     mergedTags = {foo: 'foo_local', bar: 'bar_remote', area: 'yes'},
                     localNodes = ['p1', 'r2', 'r3', 'p4', 'p1'],                // changed nodes
@@ -243,7 +243,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('merges ways if nodelist changes don\'t overlap', function () {
-                var localTags   = {foo: 'foo_local', area: 'yes'},                 // changed foo
+                const localTags   = {foo: 'foo_local', area: 'yes'},                 // changed foo
                     remoteTags  = {foo: 'foo', bar: 'bar_remote', area: 'yes'},    // same foo, added bar
                     mergedTags  = {foo: 'foo_local', bar: 'bar_remote', area: 'yes'},
                     localNodes  = ['p1', 'r1', 'r2',  'p3',     'p4',     'p1'],   // changed p2 -> r1, r2
@@ -264,7 +264,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('doesn\'t merge ways if nodelist changes overlap', function () {
-                var localTags   = {foo: 'foo_local', area: 'yes'},                // changed foo
+                const localTags   = {foo: 'foo_local', area: 'yes'},                // changed foo
                     remoteTags  = {foo: 'foo', bar: 'bar_remote', area: 'yes'},   // same foo, added bar
                     localNodes  = ['p1', 'r1', 'r2', 'p3', 'p4', 'p1'],           // changed p2 -> r1, r2
                     remoteNodes = ['p1', 'r3', 'r4', 'p3', 'p4', 'p1'],           // changed p2 -> r3, r4
@@ -279,7 +279,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('merges ways if childNode location is same', function () {
-                var localLoc = [12, 12],     // moved node
+                const localLoc = [12, 12],     // moved node
                     remoteLoc = [12, 12],    // moved node
                     local = base.entity('p1').update({loc: localLoc}),
                     remote = base.entity('p1').update({loc: remoteLoc, version: '2'}),
@@ -293,7 +293,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('doesn\'t merge ways if childNode location is different', function () {
-                var localLoc = [12, 12],     // moved node
+                const localLoc = [12, 12],     // moved node
                     remoteLoc = [13, 13],    // moved node
                     local = base.entity('p1').update({loc: localLoc}),
                     remote = base.entity('p1').update({loc: remoteLoc, version: '2'}),
@@ -309,7 +309,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
         describe('relations', function () {
             it('doesn\'t merge relations if members have changed', function () {
-                var localTags   = {foo: 'foo_local', type: 'multipolygon'},                  // changed foo
+                const localTags   = {foo: 'foo_local', type: 'multipolygon'},                  // changed foo
                     remoteTags  = {foo: 'foo', bar: 'bar_remote', type: 'multipolygon'},     // same foo, added bar
                     localMembers = [{id: 'w1', role: 'outer'}, {id: 'w2', role: 'inner'}],   // same members
                     remoteMembers = [{id: 'w1', role: 'outer'}, {id: 'w4', role: 'inner'}],  // changed inner to w4
@@ -324,7 +324,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('merges relations if members are same and changed tags don\'t conflict', function () {
-                var localTags   = {foo: 'foo_local', type: 'multipolygon'},                  // changed foo
+                const localTags   = {foo: 'foo_local', type: 'multipolygon'},                  // changed foo
                     remoteTags  = {foo: 'foo', bar: 'bar_remote', type: 'multipolygon'},     // same foo, added bar
                     mergedTags  = {foo: 'foo_local', bar: 'bar_remote', type: 'multipolygon'},
                     localMembers = [{id: 'w1', role: 'outer'}, {id: 'w2', role: 'inner'}],   // same members
@@ -344,7 +344,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
         describe('#conflicts', function () {
             it('returns conflict details', function () {
-                var localTags = {foo: 'foo_local'},                // changed foo
+                const localTags = {foo: 'foo_local'},                // changed foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote'},  // same foo, added bar
                     remoteLoc = [2, 2],                            // moved node
                     local = base.entity('a').update({tags: localTags}),
@@ -363,7 +363,7 @@ describe('iD.actionMergeRemoteChanges', function () {
     describe('destuctive merging', function () {
         describe('nodes', function () {
             it('merges nodes with \'force_local\' option', function () {
-                var localTags = {foo: 'foo_local'},       // changed foo
+                const localTags = {foo: 'foo_local'},       // changed foo
                     remoteTags = {foo: 'foo_remote'},     // changed foo
                     localLoc = [2, 2],                    // moved node
                     remoteLoc = [3, 3],                   // moved node
@@ -380,7 +380,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('merges nodes with \'force_remote\' option', function () {
-                var localTags = {foo: 'foo_local'},       // changed foo
+                const localTags = {foo: 'foo_local'},       // changed foo
                     remoteTags = {foo: 'foo_remote'},     // changed foo
                     localLoc = [2, 2],                    // moved node
                     remoteLoc = [3, 3],                   // moved node
@@ -400,7 +400,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
         describe('ways', function () {
             it('merges ways with \'force_local\' option', function () {
-                var localTags   = {foo: 'foo_local', area: 'yes'},        // changed foo
+                const localTags   = {foo: 'foo_local', area: 'yes'},        // changed foo
                     remoteTags  = {foo: 'foo_remote', area: 'yes'},       // changed foo
                     localNodes  = ['p1', 'r1', 'r2', 'p3', 'p4', 'p1'],   // changed p2 -> r1, r2
                     remoteNodes = ['p1', 'r3', 'r4', 'p3', 'p4', 'p1'],   // changed p2 -> r3, r4
@@ -417,7 +417,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('merges ways with \'force_remote\' option', function () {
-                var localTags   = {foo: 'foo_local', area: 'yes'},        // changed foo
+                const localTags   = {foo: 'foo_local', area: 'yes'},        // changed foo
                     remoteTags  = {foo: 'foo_remote', area: 'yes'},       // changed foo
                     localNodes  = ['p1', 'r1', 'r2', 'p3', 'p4', 'p1'],   // changed p2 -> r1, r2
                     remoteNodes = ['p1', 'r3', 'r4', 'p3', 'p4', 'p1'],   // changed p2 -> r3, r4
@@ -436,7 +436,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('merges way childNodes with \'force_local\' option', function () {
-                var localLoc = [12, 12],     // moved node
+                const localLoc = [12, 12],     // moved node
                     remoteLoc = [13, 13],    // moved node
                     local = base.entity('p1').update({loc: localLoc}),
                     remote = base.entity('p1').update({loc: remoteLoc, version: '2'}),
@@ -450,7 +450,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('merges way childNodes with \'force_remote\' option', function () {
-                var localLoc = [12, 12],     // moved node
+                const localLoc = [12, 12],     // moved node
                     remoteLoc = [13, 13],    // moved node
                     local = base.entity('p1').update({loc: localLoc}),
                     remote = base.entity('p1').update({loc: remoteLoc, version: '2'}),
@@ -464,7 +464,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('keeps only important childNodes when merging', function () {
-                var localNodes  = ['p1', 'r1', 'r2', 'p3', 'p4', 'p1'],    // changed p2 -> r1, r2
+                const localNodes  = ['p1', 'r1', 'r2', 'p3', 'p4', 'p1'],    // changed p2 -> r1, r2
                     remoteNodes = ['p1', 'r3', 'r4', 'p3', 'p4', 'p1'],    // changed p2 -> r3, r4
                     localr1 = r1.update({tags: {highway: 'traffic_signals'}}),  // r1 has interesting tags
                     local = base.entity('w1').update({nodes: localNodes}),
@@ -483,7 +483,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
         describe('relations', function () {
             it('merges relations with \'force_local\' option', function () {
-                var localTags = {foo: 'foo_local', type: 'multipolygon'},      // changed foo
+                const localTags = {foo: 'foo_local', type: 'multipolygon'},      // changed foo
                     remoteTags = {foo: 'foo_remote', type: 'multipolygon'},    // changed foo
                     localMembers = [{id: 'w3', role: 'outer'}, {id: 'w2', role: 'inner'}],   // changed outer to w3
                     remoteMembers = [{id: 'w1', role: 'outer'}, {id: 'w4', role: 'inner'}],  // changed inner to w4
@@ -500,7 +500,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             });
 
             it('merges relations with \'force_remote\' option', function () {
-                var localTags = {foo: 'foo_local', type: 'multipolygon'},      // changed foo
+                const localTags = {foo: 'foo_local', type: 'multipolygon'},      // changed foo
                     remoteTags = {foo: 'foo_remote', type: 'multipolygon'},    // changed foo
                     localMembers = [{id: 'w3', role: 'outer'}, {id: 'w2', role: 'inner'}],   // changed outer to w3
                     remoteMembers = [{id: 'w1', role: 'outer'}, {id: 'w4', role: 'inner'}],  // changed inner to w4

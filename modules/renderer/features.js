@@ -7,11 +7,11 @@ import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '..
 
 
 export function rendererFeatures(context) {
-    var dispatch = d3_dispatch('change', 'redraw');
+    const dispatch = d3_dispatch('change', 'redraw');
     const features = {};
-    var _deferred = new Set();
+    const _deferred = new Set();
 
-    var traffic_roads = {
+    const traffic_roads = {
         'motorway': true,
         'motorway_link': true,
         'trunk': true,
@@ -28,13 +28,13 @@ export function rendererFeatures(context) {
         'busway': true
     };
 
-    var service_roads = {
+    const service_roads = {
         'service': true,
         'road': true,
         'track': true
     };
 
-    var paths = {
+    const paths = {
         'path': true,
         'footway': true,
         'cycleway': true,
@@ -44,19 +44,19 @@ export function rendererFeatures(context) {
         'pedestrian': true
     };
 
-    var _cullFactor = 1;
-    var _cache = {};
-    var _rules = {};
-    var _stats = {};
-    var _keys = [];
-    var _hidden = [];
-    var _forceVisible = {};
+    let _cullFactor = 1;
+    let _cache = {};
+    const _rules = {};
+    const _stats = {};
+    const _keys = [];
+    let _hidden = [];
+    let _forceVisible = {};
 
 
     function update() {
         if (!window.mocha) {
-            var hash = utilStringQs(window.location.hash);
-            var disabled = features.disabled();
+            const hash = utilStringQs(window.location.hash);
+            const disabled = features.disabled();
             if (disabled.length) {
                 hash.disable_features = disabled.join(',');
             } else {
@@ -84,7 +84,7 @@ export function rendererFeatures(context) {
      * @param {number} [max]
      */
     function defineRule(k, filter, max) {
-        var isEnabled = true;
+        const isEnabled = true;
 
         _keys.push(k);
         _rules[k] = {
@@ -290,8 +290,8 @@ export function rendererFeatures(context) {
     };
 
     features.enableAll = function() {
-        var didEnable = false;
-        for (var k in _rules) {
+        let didEnable = false;
+        for (const k in _rules) {
             if (!_rules[k].enabled) {
                 didEnable = true;
                 _rules[k].enable();
@@ -309,8 +309,8 @@ export function rendererFeatures(context) {
     };
 
     features.disableAll = function() {
-        var didDisable = false;
-        for (var k in _rules) {
+        let didDisable = false;
+        for (const k in _rules) {
             if (_rules[k].enabled) {
                 didDisable = true;
                 _rules[k].disable();
@@ -329,7 +329,7 @@ export function rendererFeatures(context) {
 
 
     features.resetStats = function() {
-        for (var i = 0; i < _keys.length; i++) {
+        for (let i = 0; i < _keys.length; i++) {
             _rules[_keys[i]].count = 0;
         }
         dispatch.call('change');
@@ -337,10 +337,10 @@ export function rendererFeatures(context) {
 
 
     features.gatherStats = function(d, resolver, dimensions) {
-        var needsRedraw = false;
-        var types = utilArrayGroupBy(d, 'type');
-        var entities = [].concat(types.relation || [], types.way || [], types.node || []);
-        var currHidden, geometry, matches, i, j;
+        let needsRedraw = false;
+        const types = utilArrayGroupBy(d, 'type');
+        const entities = [].concat(types.relation || [], types.way || [], types.node || []);
+        let geometry, matches, i, j;
 
         for (i = 0; i < _keys.length; i++) {
             _rules[_keys[i]].count = 0;
@@ -358,7 +358,7 @@ export function rendererFeatures(context) {
             }
         }
 
-        currHidden = features.hidden();
+        const currHidden = features.hidden();
         if (currHidden !== _hidden) {
             _hidden = currHidden;
             needsRedraw = true;
@@ -370,7 +370,7 @@ export function rendererFeatures(context) {
 
 
     features.stats = function() {
-        for (var i = 0; i < _keys.length; i++) {
+        for (let i = 0; i < _keys.length; i++) {
             _stats[_keys[i]] = _rules[_keys[i]].count;
         }
 
@@ -379,7 +379,7 @@ export function rendererFeatures(context) {
 
 
     features.clear = function(d) {
-        for (var i = 0; i < d.length; i++) {
+        for (let i = 0; i < d.length; i++) {
             features.clearEntity(d[i]);
         }
     };
@@ -409,23 +409,23 @@ export function rendererFeatures(context) {
         if (geometry === 'vertex' ||
             (geometry === 'relation' && !relationShouldBeChecked(entity))) return {};
 
-        var ent = osmEntity.key(entity);
+        const ent = osmEntity.key(entity);
         if (!_cache[ent]) {
             _cache[ent] = {};
         }
 
         if (!_cache[ent].matches) {
-            var matches = {};
-            var hasMatch = false;
+            let matches = {};
+            let hasMatch = false;
 
-            for (var i = 0; i < _keys.length; i++) {
+            for (let i = 0; i < _keys.length; i++) {
                 if (_keys[i] === 'others') {
                     if (hasMatch) continue;
 
                     // If an entity...
                     //   1. is a way that hasn't matched other 'interesting' feature rules,
                     if (entity.type === 'way') {
-                        var parents = features.getParents(entity, resolver, geometry);
+                        const parents = features.getParents(entity, resolver, geometry);
 
                         //   2a. belongs only to a single multipolygon relation
                         if ((parents.length === 1 && parents[0].isMultipolygon()) ||
@@ -438,7 +438,7 @@ export function rendererFeatures(context) {
                             // IMPORTANT:
                             // For this to work, getMatches must be called on relations before ways.
                             //
-                            var pkey = osmEntity.key(parents[0]);
+                            const pkey = osmEntity.key(parents[0]);
                             if (_cache[pkey] && _cache[pkey].matches) {
                                 matches = Object.assign({}, _cache[pkey].matches);  // shallow copy
                                 continue;
@@ -461,13 +461,13 @@ export function rendererFeatures(context) {
     features.getParents = function(entity, resolver, geometry) {
         if (geometry === 'point') return [];
 
-        var ent = osmEntity.key(entity);
+        const ent = osmEntity.key(entity);
         if (!_cache[ent]) {
             _cache[ent] = {};
         }
 
         if (!_cache[ent].parents) {
-            var parents = [];
+            let parents = [];
             if (geometry === 'vertex') {
                 parents = resolver.parentWays(entity);
             } else {   // 'line', 'area', 'relation'
@@ -483,8 +483,8 @@ export function rendererFeatures(context) {
         if (!_hidden.length) return false;
         if (!preset.tags) return false;
 
-        var test = preset.setTags({}, geometry);
-        for (var key in _rules) {
+        const test = preset.setTags({}, geometry);
+        for (const key in _rules) {
             if (_rules[key].filter(test, geometry)) {
                 if (_hidden.indexOf(key) !== -1) {
                     return key;
@@ -501,7 +501,7 @@ export function rendererFeatures(context) {
         if (!entity.version) return false;
         if (_forceVisible[entity.id]) return false;
 
-        var matches = Object.keys(features.getMatches(entity, resolver, geometry));
+        const matches = Object.keys(features.getMatches(entity, resolver, geometry));
         return matches.length && matches.every(function(k) { return features.hidden(k); });
     };
 
@@ -511,10 +511,10 @@ export function rendererFeatures(context) {
         if (!entity.version || geometry === 'point') return false;
         if (_forceVisible[entity.id]) return false;
 
-        var parents = features.getParents(entity, resolver, geometry);
+        const parents = features.getParents(entity, resolver, geometry);
         if (!parents.length) return false;
 
-        for (var i = 0; i < parents.length; i++) {
+        for (let i = 0; i < parents.length; i++) {
             if (!features.isHidden(parents[i], resolver, parents[i].geometry(resolver))) {
                 return false;
             }
@@ -526,7 +526,7 @@ export function rendererFeatures(context) {
     features.hasHiddenConnections = function(entity, resolver) {
         if (!_hidden.length) return false;
 
-        var childNodes, connections;
+        let childNodes, connections;
         if (entity.type === 'midpoint') {
             childNodes = [resolver.entity(entity.edge[0]), resolver.entity(entity.edge[1])];
             connections = [];
@@ -550,7 +550,7 @@ export function rendererFeatures(context) {
         if (!_hidden.length) return false;
         if (!entity.version) return false;
 
-        var fn = (geometry === 'vertex' ? features.isHiddenChild : features.isHiddenFeature);
+        const fn = (geometry === 'vertex' ? features.isHiddenChild : features.isHiddenFeature);
         return fn(entity, resolver, geometry);
     };
 
@@ -558,9 +558,9 @@ export function rendererFeatures(context) {
     features.filter = function(d, resolver) {
         if (!_hidden.length) return d;
 
-        var result = [];
-        for (var i = 0; i < d.length; i++) {
-            var entity = d[i];
+        const result = [];
+        for (let i = 0; i < d.length; i++) {
+            const entity = d[i];
             if (!features.isHidden(entity, resolver, entity.geometry(resolver))) {
                 result.push(entity);
             }
@@ -573,12 +573,12 @@ export function rendererFeatures(context) {
         if (!arguments.length) return Object.keys(_forceVisible);
 
         _forceVisible = {};
-        for (var i = 0; i < entityIDs.length; i++) {
+        for (let i = 0; i < entityIDs.length; i++) {
             _forceVisible[entityIDs[i]] = true;
-            var entity = context.hasEntity(entityIDs[i]);
+            const entity = context.hasEntity(entityIDs[i]);
             if (entity && entity.type === 'relation') {
                 // also show relation members (one level deep)
-                for (var j in entity.members) {
+                for (const j in entity.members) {
                     _forceVisible[entity.members[j].id] = true;
                 }
             }
@@ -588,15 +588,15 @@ export function rendererFeatures(context) {
 
 
     features.init = function() {
-        var storage = prefs('disabled-features');
+        const storage = prefs('disabled-features');
         if (storage) {
-            var storageDisabled = storage.replace(/;/g, ',').split(',');
+            const storageDisabled = storage.replace(/;/g, ',').split(',');
             storageDisabled.forEach(features.disable);
         }
 
-        var hash = utilStringQs(window.location.hash);
+        const hash = utilStringQs(window.location.hash);
         if (hash.disable_features) {
-            var hashDisabled = hash.disable_features.replace(/;/g, ',').split(',');
+            const hashDisabled = hash.disable_features.replace(/;/g, ',').split(',');
             hashDisabled.forEach(features.disable);
         }
     };
@@ -605,13 +605,13 @@ export function rendererFeatures(context) {
     // warm up the feature matching cache upon merging fetched data
     context.history().on('merge.features', function(newEntities) {
         if (!newEntities) return;
-        var handle = window.requestIdleCallback(function() {
-            var graph = context.graph();
-            var types = utilArrayGroupBy(newEntities, 'type');
+        const handle = window.requestIdleCallback(function() {
+            const graph = context.graph();
+            const types = utilArrayGroupBy(newEntities, 'type');
             // ensure that getMatches is called on relations before ways
-            var entities = [].concat(types.relation || [], types.way || [], types.node || []);
-            for (var i = 0; i < entities.length; i++) {
-                var geometry = entities[i].geometry(graph);
+            const entities = [].concat(types.relation || [], types.way || [], types.node || []);
+            for (let i = 0; i < entities.length; i++) {
+                const geometry = entities[i].geometry(graph);
                 features.getMatches(entities[i], graph, geometry);
             }
         });

@@ -13,7 +13,7 @@ import { utilArrayUnion, utilArrayUniq, utilDisplayName, utilDisplayType, utilRe
 
 export function coreUploader(context) {
 
-    var dispatch = d3_dispatch(
+    const dispatch = d3_dispatch(
         // Start and end events are dispatched exactly once each per legitimate outside call to `save`
         'saveStarted', // dispatched as soon as a call to `save` has been deemed legitimate
         'saveEnded',   // dispatched after the result event has been dispatched
@@ -28,13 +28,13 @@ export function coreUploader(context) {
         'resultSuccess'    // upload completed without errors
     );
 
-    var _isSaving = false;
+    let _isSaving = false;
 
-    var _conflicts = [];
-    var _errors = [];
-    var _origChanges;
+    let _conflicts = [];
+    let _errors = [];
+    let _origChanges;
 
-    var _discardTags = {};
+    let _discardTags = {};
     fileFetcher.get('discarded')
         .then(function(d) { _discardTags = d; })
         .catch(function() { /* ignore */ });
@@ -51,7 +51,7 @@ export function coreUploader(context) {
             return;
         }
 
-        var osm = context.connection();
+        const osm = context.connection();
         if (!osm) return;
 
         // If user somehow got logged out mid-save, try to reauthenticate..
@@ -70,7 +70,7 @@ export function coreUploader(context) {
             dispatch.call('saveStarted', this);
         }
 
-        var history = context.history();
+        const history = context.history();
 
         _conflicts = [];
         _errors = [];
@@ -99,27 +99,27 @@ export function coreUploader(context) {
 
     function performFullConflictCheck(changeset) {
 
-        var osm = context.connection();
+        const osm = context.connection();
         if (!osm) return;
 
-        var history = context.history();
+        const history = context.history();
 
-        var localGraph = context.graph();
-        var remoteGraph = coreGraph(history.base(), true);
+        const localGraph = context.graph();
+        const remoteGraph = coreGraph(history.base(), true);
 
-        var summary = history.difference().summary();
-        var _toCheck = [];
-        for (var i = 0; i < summary.length; i++) {
-            var item = summary[i];
+        const summary = history.difference().summary();
+        const _toCheck = [];
+        for (let i = 0; i < summary.length; i++) {
+            const item = summary[i];
             if (item.changeType === 'modified') {
                 _toCheck.push(item.entity.id);
             }
         }
 
-        var _toLoad = withChildNodes(_toCheck, localGraph);
-        var _loaded = {};
-        var _toLoadCount = 0;
-        var _toLoadTotal = _toLoad.length;
+        let _toLoad = withChildNodes(_toCheck, localGraph);
+        const _loaded = {};
+        let _toLoadCount = 0;
+        let _toLoadTotal = _toLoad.length;
 
         if (_toCheck.length) {
             dispatch.call('progressChanged', this, _toLoadCount, _toLoadTotal);
@@ -132,9 +132,9 @@ export function coreUploader(context) {
         return;
 
         function withChildNodes(ids, graph) {
-            var s = new Set(ids);
+            const s = new Set(ids);
             ids.forEach(function(id) {
-                var entity = graph.entity(id);
+                const entity = graph.entity(id);
                 if (entity.type !== 'way') return;
 
                 graph.childNodes(entity).forEach(function(child) {
@@ -160,7 +160,7 @@ export function coreUploader(context) {
                 didResultInErrors();
 
             } else {
-                var loadMore = [];
+                const loadMore = [];
 
                 result.data.forEach(function(entity) {
                     remoteGraph.replace(entity);
@@ -171,7 +171,7 @@ export function coreUploader(context) {
 
                     // Because loadMultiple doesn't download /full like loadEntity,
                     // need to also load children that aren't already being checked..
-                    var i, id;
+                    let i, id;
                     if (entity.type === 'way') {
                         for (i = 0; i < entity.nodes.length; i++) {
                             id = entity.nodes[i];
@@ -229,10 +229,10 @@ export function coreUploader(context) {
                 if (local.version !== remote.version) return false;
 
                 if (local.type === 'way') {
-                    var children = utilArrayUnion(local.nodes, remote.nodes);
-                    for (var i = 0; i < children.length; i++) {
-                        var a = localGraph.hasEntity(children[i]);
-                        var b = remoteGraph.hasEntity(children[i]);
+                    const children = utilArrayUnion(local.nodes, remote.nodes);
+                    for (let i = 0; i < children.length; i++) {
+                        const a = localGraph.hasEntity(children[i]);
+                        const b = remoteGraph.hasEntity(children[i]);
                         if (a && b && a.version !== b.version) return false;
                     }
                 }
@@ -241,22 +241,22 @@ export function coreUploader(context) {
             }
 
             _toCheck.forEach(function(id) {
-                var local = localGraph.entity(id);
-                var remote = remoteGraph.entity(id);
+                const local = localGraph.entity(id);
+                const remote = remoteGraph.entity(id);
 
                 if (sameVersions(local, remote)) return;
 
-                var merge = actionMergeRemoteChanges(id, localGraph, remoteGraph, _discardTags, formatUser);
+                const merge = actionMergeRemoteChanges(id, localGraph, remoteGraph, _discardTags, formatUser);
 
                 history.replace(merge);
 
-                var mergeConflicts = merge.conflicts();
+                const mergeConflicts = merge.conflicts();
                 if (!mergeConflicts.length) return;  // merged safely
 
-                var forceLocal = actionMergeRemoteChanges(id, localGraph, remoteGraph, _discardTags).withOption('force_local');
-                var forceRemote = actionMergeRemoteChanges(id, localGraph, remoteGraph, _discardTags).withOption('force_remote');
-                var keepMine = t('save.conflict.' + (remote.visible ? 'keep_local' : 'restore'));
-                var keepTheirs = t('save.conflict.' + (remote.visible ? 'keep_remote' : 'delete'));
+                const forceLocal = actionMergeRemoteChanges(id, localGraph, remoteGraph, _discardTags).withOption('force_local');
+                const forceRemote = actionMergeRemoteChanges(id, localGraph, remoteGraph, _discardTags).withOption('force_remote');
+                const keepMine = t('save.conflict.' + (remote.visible ? 'keep_local' : 'restore'));
+                const keepTheirs = t('save.conflict.' + (remote.visible ? 'keep_remote' : 'delete'));
 
                 _conflicts.push({
                     id: id,
@@ -274,7 +274,7 @@ export function coreUploader(context) {
 
 
     function upload(changeset) {
-        var osm = context.connection();
+        const osm = context.connection();
         if (!osm) {
             _errors.push({ msg: 'No OSM Service' });
         }
@@ -286,8 +286,8 @@ export function coreUploader(context) {
             didResultInErrors();
 
         } else {
-            var history = context.history();
-            var changes = history.changes(actionDiscardTags(history.difference(), _discardTags));
+            const history = context.history();
+            const changes = history.changes(actionDiscardTags(history.difference(), _discardTags));
             if (changes.modified.length || changes.created.length || changes.deleted.length) {
 
                 dispatch.call('willAttemptUpload', this);
@@ -378,14 +378,14 @@ export function coreUploader(context) {
 
 
     uploader.processResolvedConflicts = function(changeset) {
-        var history = context.history();
+        const history = context.history();
 
-        for (var i = 0; i < _conflicts.length; i++) {
+        for (let i = 0; i < _conflicts.length; i++) {
             if (_conflicts[i].chosen === 1) {  // user chose "use theirs"
-                var entity = context.hasEntity(_conflicts[i].id);
+                const entity = context.hasEntity(_conflicts[i].id);
                 if (entity && entity.type === 'way') {
-                    var children = utilArrayUniq(entity.nodes);
-                    for (var j = 0; j < children.length; j++) {
+                    const children = utilArrayUniq(entity.nodes);
+                    for (let j = 0; j < children.length; j++) {
                         history.replace(actionRevert(children[j]));
                     }
                 }

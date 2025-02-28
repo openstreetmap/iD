@@ -9,18 +9,18 @@ import { likelyRawNumberFormat } from './input';
 
 
 export function uiFieldRoadheight(field, context) {
-    var dispatch = d3_dispatch('change');
-    var primaryUnitInput = d3_select(null);
-    var primaryInput = d3_select(null);
-    var secondaryInput = d3_select(null);
-    var secondaryUnitInput = d3_select(null);
-    var _entityIDs = [];
-    var _tags;
-    var _isImperial;
-    var formatFloat = localizer.floatFormatter(localizer.languageCode());
-    var parseLocaleFloat = localizer.floatParser(localizer.languageCode());
+    const dispatch = d3_dispatch('change');
+    let primaryUnitInput = d3_select(null);
+    let primaryInput = d3_select(null);
+    let secondaryInput = d3_select(null);
+    let secondaryUnitInput = d3_select(null);
+    let _entityIDs = [];
+    let _tags;
+    let _isImperial;
+    const formatFloat = localizer.floatFormatter(localizer.languageCode());
+    const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
 
-    var primaryUnits = [
+    const primaryUnits = [
         {
             value: 'm',
             title: t('inspector.roadheight.meter'),
@@ -31,12 +31,12 @@ export function uiFieldRoadheight(field, context) {
         },
     ];
 
-    var unitCombo = uiCombobox(context, 'roadheight-unit')
+    const unitCombo = uiCombobox(context, 'roadheight-unit')
         .data(primaryUnits);
 
     function roadheight(selection) {
 
-        var wrap = selection.selectAll('.form-field-input-wrap')
+        let wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
@@ -60,7 +60,7 @@ export function uiFieldRoadheight(field, context) {
             .on('change', change)
             .on('blur', change);
 
-        var loc = combinedEntityExtent().center();
+        const loc = combinedEntityExtent().center();
         _isImperial = countryCoder.roadHeightUnit(loc) === 'ft';
 
         primaryUnitInput = wrap.selectAll('input.roadheight-unit')
@@ -104,7 +104,7 @@ export function uiFieldRoadheight(field, context) {
 
 
         function changeUnits() {
-            var primaryUnit = utilGetSetValue(primaryUnitInput);
+            const primaryUnit = utilGetSetValue(primaryUnitInput);
             if (primaryUnit === 'm') {
                 _isImperial = false;
             } else if (primaryUnit === 'ft') {
@@ -123,9 +123,9 @@ export function uiFieldRoadheight(field, context) {
 
 
     function change() {
-        var tag = {};
-        var primaryValue = utilGetSetValue(primaryInput).trim();
-        var secondaryValue = utilGetSetValue(secondaryInput).trim();
+        const tag = {};
+        const primaryValue = utilGetSetValue(primaryInput).trim();
+        const secondaryValue = utilGetSetValue(secondaryInput).trim();
 
         // don't override multiple values with blank string
         if (!primaryValue && !secondaryValue && Array.isArray(_tags[field.key])) return;
@@ -133,11 +133,11 @@ export function uiFieldRoadheight(field, context) {
         if (!primaryValue && !secondaryValue) {
             tag[field.key] = undefined;
         } else {
-            var rawPrimaryValue = likelyRawNumberFormat.test(primaryValue)
+            let rawPrimaryValue = likelyRawNumberFormat.test(primaryValue)
                 ? parseFloat(primaryValue)
                 : parseLocaleFloat(primaryValue);
             if (isNaN(rawPrimaryValue)) rawPrimaryValue = primaryValue;
-            var rawSecondaryValue = likelyRawNumberFormat.test(secondaryValue)
+            let rawSecondaryValue = likelyRawNumberFormat.test(secondaryValue)
                 ? parseFloat(secondaryValue)
                 : parseLocaleFloat(secondaryValue);
             if (isNaN(rawSecondaryValue)) rawSecondaryValue = secondaryValue;
@@ -162,9 +162,9 @@ export function uiFieldRoadheight(field, context) {
     roadheight.tags = function(tags) {
         _tags = tags;
 
-        var primaryValue = tags[field.key];
-        var secondaryValue;
-        var isMixed = Array.isArray(primaryValue);
+        let primaryValue = tags[field.key];
+        let secondaryValue;
+        const isMixed = Array.isArray(primaryValue);
 
         if (!isMixed) {
             if (primaryValue && (primaryValue.indexOf('\'') >= 0 || primaryValue.indexOf('"') >= 0)) {
@@ -178,7 +178,7 @@ export function uiFieldRoadheight(field, context) {
                 }
                 _isImperial = true;
             } else if (primaryValue) {
-                var rawValue = primaryValue;
+                const rawValue = primaryValue;
                 primaryValue = parseFloat(rawValue);
                 if (isNaN(primaryValue)) {
                     primaryValue = rawValue;
@@ -192,7 +192,7 @@ export function uiFieldRoadheight(field, context) {
         setUnitSuggestions();
 
         // If feet are specified but inches are omitted, assume zero inches.
-        var inchesPlaceholder = formatFloat(0);
+        const inchesPlaceholder = formatFloat(0);
 
         utilGetSetValue(primaryInput, typeof primaryValue === 'string' ? primaryValue : '')
             .attr('title', isMixed ? primaryValue.filter(Boolean).join('\n') : null)

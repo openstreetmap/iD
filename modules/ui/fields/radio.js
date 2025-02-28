@@ -11,20 +11,20 @@ export { uiFieldRadio as uiFieldStructureRadio };
 
 
 export function uiFieldRadio(field, context) {
-    var dispatch = d3_dispatch('change');
-    var placeholder = d3_select(null);
-    var wrap = d3_select(null);
-    var labels = d3_select(null);
-    var radios = d3_select(null);
-    var radioData = (field.options || field.keys).slice();  // shallow copy
-    var typeField;
-    var layerField;
-    var _oldType = {};
-    var _entityIDs = [];
+    const dispatch = d3_dispatch('change');
+    let placeholder = d3_select(null);
+    let wrap = d3_select(null);
+    let labels = d3_select(null);
+    let radios = d3_select(null);
+    const radioData = (field.options || field.keys).slice();  // shallow copy
+    let typeField;
+    let layerField;
+    let _oldType = {};
+    let _entityIDs = [];
 
 
     function selectedKey() {
-        var node = wrap.selectAll('.form-field-input-radio label.active input');
+        const node = wrap.selectAll('.form-field-input-radio label.active input');
         return !node.empty() && node.datum();
     }
 
@@ -35,7 +35,7 @@ export function uiFieldRadio(field, context) {
         wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
-        var enter = wrap.enter()
+        let enter = wrap.enter()
             .append('div')
             .attr('class', 'form-field-input-wrap form-field-input-radio');
 
@@ -55,7 +55,7 @@ export function uiFieldRadio(field, context) {
         enter = labels.enter()
             .append('label');
 
-        var stringsField = field.resolveReference('stringsCrossReference');
+        const stringsField = field.resolveReference('stringsCrossReference');
         enter
             .append('input')
             .attr('type', 'radio')
@@ -77,13 +77,13 @@ export function uiFieldRadio(field, context) {
 
 
     function structureExtras(selection, tags) {
-        var selected = selectedKey() || tags.layer !== undefined;
-        var type = presetManager.field(selected);
-        var layer = presetManager.field('layer');
-        var showLayer = (selected === 'bridge' || selected === 'tunnel' || tags.layer !== undefined);
+        const selected = selectedKey() || tags.layer !== undefined;
+        const type = presetManager.field(selected);
+        const layer = presetManager.field('layer');
+        const showLayer = (selected === 'bridge' || selected === 'tunnel' || tags.layer !== undefined);
 
 
-        var extrasWrap = selection.selectAll('.structure-extras-wrap')
+        let extrasWrap = selection.selectAll('.structure-extras-wrap')
             .data(selected ? [0] : []);
 
         extrasWrap.exit()
@@ -94,7 +94,7 @@ export function uiFieldRadio(field, context) {
             .attr('class', 'structure-extras-wrap')
             .merge(extrasWrap);
 
-        var list = extrasWrap.selectAll('ul')
+        let list = extrasWrap.selectAll('ul')
             .data([0]);
 
         list = list.enter()
@@ -114,7 +114,7 @@ export function uiFieldRadio(field, context) {
             typeField = null;
         }
 
-        var typeItem = list.selectAll('.structure-type-item')
+        let typeItem = list.selectAll('.structure-type-item')
             .data(typeField ? [typeField] : [], function(d) { return d.id; });
 
         // Exit
@@ -122,7 +122,7 @@ export function uiFieldRadio(field, context) {
             .remove();
 
         // Enter
-        var typeEnter = typeItem.enter()
+        const typeEnter = typeItem.enter()
             .insert('li', ':first-child')
             .attr('class', 'labeled-input structure-type-item');
 
@@ -159,7 +159,7 @@ export function uiFieldRadio(field, context) {
             field.keys = field.keys.filter(function(k) { return k !== 'layer'; });
         }
 
-        var layerItem = list.selectAll('.structure-layer-item')
+        let layerItem = list.selectAll('.structure-layer-item')
             .data(layerField ? [layerField] : []);
 
         // Exit
@@ -167,7 +167,7 @@ export function uiFieldRadio(field, context) {
             .remove();
 
         // Enter
-        var layerEnter = layerItem.enter()
+        const layerEnter = layerItem.enter()
             .append('li')
             .attr('class', 'labeled-input structure-layer-item');
 
@@ -193,10 +193,10 @@ export function uiFieldRadio(field, context) {
 
 
     function changeType(t, onInput) {
-        var key = selectedKey();
+        const key = selectedKey();
         if (!key) return;
 
-        var val = t[key];
+        const val = t[key];
         if (val !== 'no') {
             _oldType[key] = val;
         }
@@ -232,21 +232,21 @@ export function uiFieldRadio(field, context) {
 
 
     function changeRadio() {
-        var t = {};
-        var activeKey;
+        const t = {};
+        let activeKey;
 
         if (field.key) {
             t[field.key] = undefined;
         }
 
         radios.each(function(d) {
-            var active = d3_select(this).property('checked');
+            const active = d3_select(this).property('checked');
             if (active) activeKey = d;
 
             if (field.key) {
                 if (active) t[field.key] = d;
             } else {
-                var val = _oldType[activeKey] || 'yes';
+                const val = _oldType[activeKey] || 'yes';
                 t[d] = active ? val : undefined;
             }
         });
@@ -300,7 +300,7 @@ export function uiFieldRadio(field, context) {
             });
 
 
-        var selection = radios.filter(function() { return this.checked; });
+        const selection = radios.filter(function() { return this.checked; });
 
         if (selection.empty()) {
             placeholder.text('');

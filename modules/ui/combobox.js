@@ -13,26 +13,26 @@ import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 //       terms:   ['search terms'] // optional
 //   }, ...]
 
-var _comboHideTimerID;
+let _comboHideTimerID;
 
 export function uiCombobox(context, klass) {
-    var dispatch = d3_dispatch('accept', 'cancel', 'update');
-    var container = context.container();
+    const dispatch = d3_dispatch('accept', 'cancel', 'update');
+    const container = context.container();
 
-    var _suggestions = [];
-    var _data = [];
-    var _fetched = {};
-    var _selected = null;
-    var _canAutocomplete = true;
-    var _caseSensitive = false;
-    var _cancelFetch = false;
-    var _minItems = 2;
-    var _tDown = 0;
-    var _mouseEnterHandler, _mouseLeaveHandler;
+    let _suggestions = [];
+    let _data = [];
+    const _fetched = {};
+    let _selected = null;
+    let _canAutocomplete = true;
+    let _caseSensitive = false;
+    let _cancelFetch = false;
+    let _minItems = 2;
+    let _tDown = 0;
+    let _mouseEnterHandler, _mouseLeaveHandler;
 
-    var _fetcher = function(val, cb) {
+    let _fetcher = function(val, cb) {
         cb(_data.filter(function(d) {
-            var terms = d.terms || [];
+            const terms = d.terms || [];
             terms.push(d.value);
             if (d.key) {
                 terms.push(d.key);
@@ -46,7 +46,7 @@ export function uiCombobox(context, klass) {
         }));
     };
 
-    var combobox = function(input, attachTo) {
+    const combobox = function(input, attachTo) {
         if (!input || input.empty()) return;
 
         input
@@ -58,8 +58,8 @@ export function uiCombobox(context, klass) {
             .on('input.combo-input', change)
             .on('mousedown.combo-input', mousedown)
             .each(function() {
-                var parent = this.parentNode;
-                var sibling = this.nextSibling;
+                const parent = this.parentNode;
+                const sibling = this.nextSibling;
 
                 d3_select(parent).selectAll('.combobox-caret')
                     .filter(function(d) { return d === input.node(); })
@@ -85,10 +85,10 @@ export function uiCombobox(context, klass) {
             _tDown = +new Date();
 
             // clear selection
-            var start = input.property('selectionStart');
-            var end = input.property('selectionEnd');
+            const start = input.property('selectionStart');
+            const end = input.property('selectionEnd');
             if (start !== end) {
-                var val = utilGetSetValue(input);
+                const val = utilGetSetValue(input);
                 input.node().setSelectionRange(val.length, val.length);
                 return;
             }
@@ -103,14 +103,14 @@ export function uiCombobox(context, klass) {
             if (input.classed('disabled')) return;
             if (input.node() !== document.activeElement) return;   // exit if this input is not focused
 
-            var start = input.property('selectionStart');
-            var end = input.property('selectionEnd');
+            const start = input.property('selectionStart');
+            const end = input.property('selectionEnd');
             if (start !== end) return;  // exit if user is selecting
 
             // not showing or showing for a different field - try to show it.
-            var combo = container.selectAll('.combobox');
+            const combo = container.selectAll('.combobox');
             if (combo.empty() || combo.datum() !== input.node()) {
-                var tOrig = _tDown;
+                const tOrig = _tDown;
                 window.setTimeout(function() {
                     if (tOrig !== _tDown) return;   // exit if user double clicked
                     fetchComboData('', function() {
@@ -160,8 +160,8 @@ export function uiCombobox(context, klass) {
 
 
         function keydown(d3_event) {
-            var shown = !container.selectAll('.combobox').empty();
-            var tagName = input.node() ? input.node().tagName.toLowerCase() : '';
+            const shown = !container.selectAll('.combobox').empty();
+            const tagName = input.node() ? input.node().tagName.toLowerCase() : '';
 
             switch (d3_event.keyCode) {
                 case 8:   // ⌫ Backspace
@@ -170,7 +170,7 @@ export function uiCombobox(context, klass) {
                     _selected = null;
                     render();
                     input.on('input.combo-input', function() {
-                        var start = input.property('selectionStart');
+                        const start = input.property('selectionStart');
                         input.node().setSelectionRange(start, start);
                         input.on('input.combo-input', change); // reset event handler
                         change(false);
@@ -222,7 +222,7 @@ export function uiCombobox(context, klass) {
             if (doAutoComplete === undefined) doAutoComplete = true;
             fetchComboData(value(), function(skipAutosuggest) {
                 _selected = null;
-                var val = input.property('value');
+                const val = input.property('value');
 
                 if (_suggestions.length) {
                     if (doAutoComplete && !skipAutosuggest && input.property('selectionEnd') === val.length) {
@@ -235,7 +235,7 @@ export function uiCombobox(context, klass) {
                 }
 
                 if (val.length) {
-                    var combo = container.selectAll('.combobox');
+                    const combo = container.selectAll('.combobox');
                     if (combo.empty()) {
                         show();
                     }
@@ -252,8 +252,8 @@ export function uiCombobox(context, klass) {
         function nav(dir) {
             if (_suggestions.length) {
                 // try to determine previously selected index..
-                var index = -1;
-                for (var i = 0; i < _suggestions.length; i++) {
+                let index = -1;
+                for (let i = 0; i < _suggestions.length; i++) {
                     if (_selected && _suggestions[i].value === _selected) {
                         index = i;
                         break;
@@ -273,20 +273,20 @@ export function uiCombobox(context, klass) {
 
 
         function ensureVisible() {
-            var combo = container.selectAll('.combobox');
+            const combo = container.selectAll('.combobox');
             if (combo.empty()) return;
 
-            var containerRect = container.node().getBoundingClientRect();
-            var comboRect = combo.node().getBoundingClientRect();
+            const containerRect = container.node().getBoundingClientRect();
+            const comboRect = combo.node().getBoundingClientRect();
 
             if (comboRect.bottom > containerRect.bottom) {
-                var node = attachTo ? attachTo.node() : input.node();
+                const node = attachTo ? attachTo.node() : input.node();
                 node.scrollIntoView({ behavior: 'instant', block: 'center' });
                 render();
             }
 
             // https://stackoverflow.com/questions/11039885/scrollintoview-causing-the-whole-page-to-move
-            var selected = combo.selectAll('.combobox-option.selected').node();
+            const selected = combo.selectAll('.combobox-option.selected').node();
             if (selected) {
                 selected.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' });
             }
@@ -294,9 +294,9 @@ export function uiCombobox(context, klass) {
 
 
         function value() {
-            var value = input.property('value');
-            var start = input.property('selectionStart');
-            var end = input.property('selectionEnd');
+            let value = input.property('value');
+            const start = input.property('selectionStart');
+            const end = input.property('selectionEnd');
 
             if (start && end) {
                 value = value.substring(0, start);
@@ -326,7 +326,7 @@ export function uiCombobox(context, klass) {
         function tryAutocomplete() {
             if (!_canAutocomplete) return;
 
-            var val = _caseSensitive ? value() : value().toLowerCase();
+            const val = _caseSensitive ? value() : value().toLowerCase();
             if (!val) return;
 
             // Don't autocomplete if user is typing a number - #4935
@@ -340,10 +340,10 @@ export function uiCombobox(context, klass) {
                 }
             });
 
-            var bestIndex = -1;
-            for (var i = 0; i < suggestionValues.length; i++) {
-                var suggestion = suggestionValues[i];
-                var compare = _caseSensitive ? suggestion : suggestion.toLowerCase();
+            let bestIndex = -1;
+            for (let i = 0; i < suggestionValues.length; i++) {
+                const suggestion = suggestionValues[i];
+                const compare = _caseSensitive ? suggestion : suggestion.toLowerCase();
 
                 // if search string matches suggestion exactly, pick it..
                 if (compare === val) {
@@ -357,7 +357,7 @@ export function uiCombobox(context, klass) {
             }
 
             if (bestIndex !== -1) {
-                var bestVal = suggestionValues[bestIndex];
+                const bestVal = suggestionValues[bestIndex];
                 input.property('value', bestVal);
                 input.node().setSelectionRange(val.length, bestVal.length);
                 dispatch.call('update');
@@ -372,11 +372,11 @@ export function uiCombobox(context, klass) {
                 return;
             }
 
-            var shown = !container.selectAll('.combobox').empty();
+            const shown = !container.selectAll('.combobox').empty();
             if (!shown) return;
 
-            var combo = container.selectAll('.combobox');
-            var options = combo.selectAll('.combobox-option')
+            const combo = container.selectAll('.combobox');
+            const options = combo.selectAll('.combobox-option')
                 .data(_suggestions, function(d) { return d.value; });
 
             options.exit()
@@ -403,9 +403,9 @@ export function uiCombobox(context, klass) {
                 .on('click.combo-option', accept)
                 .order();
 
-            var node = attachTo ? attachTo.node() : input.node();
-            var containerRect = container.node().getBoundingClientRect();
-            var rect = node.getBoundingClientRect();
+            const node = attachTo ? attachTo.node() : input.node();
+            const containerRect = container.node().getBoundingClientRect();
+            const rect = node.getBoundingClientRect();
 
             combo
                 .style('left', (rect.left + 5 - containerRect.left) + 'px')
@@ -418,7 +418,7 @@ export function uiCombobox(context, klass) {
         // Then hides the combobox.
         function accept(d3_event, d) {
             _cancelFetch = true;
-            var thiz = input.node();
+            const thiz = input.node();
 
             if (d) {   // user clicked on a suggestion
                 utilGetSetValue(input, d.value);    // replace field contents
@@ -426,7 +426,7 @@ export function uiCombobox(context, klass) {
             }
 
             // clear (and keep) selection
-            var val = utilGetSetValue(input);
+            const val = utilGetSetValue(input);
             thiz.setSelectionRange(val.length, val.length);
 
             if (!d) {
@@ -441,12 +441,12 @@ export function uiCombobox(context, klass) {
         // Then hides the combobox.
         function cancel() {
             _cancelFetch = true;
-            var thiz = input.node();
+            const thiz = input.node();
 
             // clear (and remove) selection, and replace field contents
-            var val = utilGetSetValue(input);
-            var start = input.property('selectionStart');
-            var end = input.property('selectionEnd');
+            let val = utilGetSetValue(input);
+            const start = input.property('selectionStart');
+            const end = input.property('selectionEnd');
             val = val.slice(0, start) + val.slice(end);
             utilGetSetValue(input, val);
             thiz.setSelectionRange(val.length, val.length);

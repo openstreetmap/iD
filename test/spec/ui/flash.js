@@ -1,10 +1,10 @@
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.uiFlash', function () {
-    var context;
+    let context;
 
     beforeEach(function() {
-        var container = d3.select('body');
+        const container = d3.select('body');
         context = iD.coreContext().assetPath('../dist/').init().container(container);
         container
             .append('div')
@@ -20,8 +20,8 @@ describe('iD.uiFlash', function () {
 
     it('flash is shown', function() {
         iD.uiFlash(context).duration(200)();
-        var flashWrap = d3.selectAll('.flash-wrap');
-        var footerWrap = d3.selectAll('.main-footer-wrap');
+        const flashWrap = d3.selectAll('.flash-wrap');
+        const footerWrap = d3.selectAll('.main-footer-wrap');
         expect(flashWrap.classed('footer-show')).to.be.ok;
         expect(footerWrap.classed('footer-hide')).to.be.ok;
     });
@@ -30,8 +30,8 @@ describe('iD.uiFlash', function () {
         iD.uiFlash(context).duration(200)();
         await setTimeout(225);
         d3.timerFlush();
-        var flashWrap = d3.selectAll('.flash-wrap');
-        var footerWrap = d3.selectAll('.main-footer-wrap');
+        const flashWrap = d3.selectAll('.flash-wrap');
+        const footerWrap = d3.selectAll('.main-footer-wrap');
         expect(flashWrap.classed('footer-hide')).to.be.ok;
         expect(footerWrap.classed('footer-show')).to.be.ok;
     });

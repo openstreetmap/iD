@@ -1,12 +1,12 @@
 export function actionUpgradeTags(entityId, oldTags, replaceTags) {
 
     return function(graph) {
-        var entity = graph.entity(entityId);
-        var tags = Object.assign({}, entity.tags);  // shallow copy
-        var transferValue;
-        var semiIndex;
+        const entity = graph.entity(entityId);
+        const tags = Object.assign({}, entity.tags);  // shallow copy
+        let transferValue;
+        let semiIndex;
 
-        for (var oldTagKey in oldTags) {
+        for (const oldTagKey in oldTags) {
             if (!(oldTagKey in tags)) continue;
             // wildcard match
             if (oldTags[oldTagKey] === '*') {
@@ -18,8 +18,8 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
                 delete tags[oldTagKey];
             // match is within semicolon-delimited values
             } else {
-                var vals = tags[oldTagKey].split(';').filter(Boolean);
-                var oldIndex = vals.indexOf(oldTags[oldTagKey]);
+                const vals = tags[oldTagKey].split(';').filter(Boolean);
+                const oldIndex = vals.indexOf(oldTags[oldTagKey]);
                 if (vals.length === 1 || oldIndex === -1) {
                     delete tags[oldTagKey];
                 } else {
@@ -34,8 +34,8 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
         }
 
         if (replaceTags) {
-            for (var replaceKey in replaceTags) {
-                var replaceValue = replaceTags[replaceKey];
+            for (const replaceKey in replaceTags) {
+                const replaceValue = replaceTags[replaceKey];
                 if (replaceValue === '*') {
                     if (tags[replaceKey] && tags[replaceKey] !== 'no') {
                         // allow any pre-existing value except `no` (troll tag)
@@ -49,7 +49,7 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
                 } else {
                     if (tags[replaceKey] && oldTags[replaceKey] && semiIndex !== undefined) {
                         // don't override preexisting values
-                        var existingVals = tags[replaceKey].split(';').filter(Boolean);
+                        const existingVals = tags[replaceKey].split(';').filter(Boolean);
                         if (existingVals.indexOf(replaceValue) === -1) {
                             existingVals.splice(semiIndex, 0, replaceValue);
                             tags[replaceKey] = existingVals.join(';');

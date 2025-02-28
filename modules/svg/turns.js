@@ -4,7 +4,7 @@ import { geoAngle, geoPathLength } from '../geo';
 export function svgTurns(projection, context) {
 
     function icon(turn) {
-        var u = turn.u ? '-u' : '';
+        const u = turn.u ? '-u' : '';
         if (turn.no) return '#iD-turn-no' + u;
         if (turn.only) return '#iD-turn-only' + u;
         return '#iD-turn-yes' + u;
@@ -13,19 +13,19 @@ export function svgTurns(projection, context) {
     function drawTurns(selection, graph, turns) {
 
         function turnTransform(d) {
-            var pxRadius = 50;
-            var toWay = graph.entity(d.to.way);
-            var toPoints = graph.childNodes(toWay)
+            const pxRadius = 50;
+            const toWay = graph.entity(d.to.way);
+            const toPoints = graph.childNodes(toWay)
                 .map(function (n) { return n.loc; })
                 .map(projection);
-            var toLength = geoPathLength(toPoints);
-            var mid = toLength / 2;    // midpoint of destination way
+            const toLength = geoPathLength(toPoints);
+            const mid = toLength / 2;    // midpoint of destination way
 
-            var toNode = graph.entity(d.to.node);
-            var toVertex = graph.entity(d.to.vertex);
-            var a = geoAngle(toVertex, toNode, projection);
-            var o = projection(toVertex.loc);
-            var r = d.u ? 0                  // u-turn: no radius
+            const toNode = graph.entity(d.to.node);
+            const toVertex = graph.entity(d.to.vertex);
+            const a = geoAngle(toVertex, toNode, projection);
+            const o = projection(toVertex.loc);
+            const r = d.u ? 0                  // u-turn: no radius
                 : !toWay.__via ? pxRadius    // leaf way: put marker at pxRadius
                 : Math.min(mid, pxRadius);   // via way: prefer pxRadius, fallback to mid for very short ways
 
@@ -34,11 +34,11 @@ export function svgTurns(projection, context) {
         }
 
 
-        var drawLayer = selection.selectAll('.layer-osm.points .points-group.turns');
-        var touchLayer = selection.selectAll('.layer-touch.turns');
+        const drawLayer = selection.selectAll('.layer-osm.points .points-group.turns');
+        const touchLayer = selection.selectAll('.layer-touch.turns');
 
         // Draw turns..
-        var groups = drawLayer.selectAll('g.turn')
+        let groups = drawLayer.selectAll('g.turn')
             .data(turns, function(d) { return d.key; });
 
         // exit
@@ -46,11 +46,11 @@ export function svgTurns(projection, context) {
             .remove();
 
         // enter
-        var groupsEnter = groups.enter()
+        let groupsEnter = groups.enter()
             .append('g')
             .attr('class', function(d) { return 'turn ' + d.key; });
 
-        var turnsEnter = groupsEnter
+        let turnsEnter = groupsEnter
             .filter(function(d) { return !d.u; });
 
         turnsEnter.append('rect')
@@ -63,7 +63,7 @@ export function svgTurns(projection, context) {
             .attr('width', '44')
             .attr('height', '24');
 
-        var uEnter = groupsEnter
+        let uEnter = groupsEnter
             .filter(function(d) { return d.u; });
 
         uEnter.append('circle')
@@ -88,7 +88,7 @@ export function svgTurns(projection, context) {
 
 
         // Draw touch targets..
-        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        const fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         groups = touchLayer.selectAll('g.turn')
             .data(turns, function(d) { return d.key; });
 

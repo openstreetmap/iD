@@ -8,14 +8,14 @@ import { uiTooltip } from './tooltip';
 
 export function uiIssuesInfo(context) {
 
-    var warningsItem = {
+    const warningsItem = {
         id: 'warnings',
         count: 0,
         iconID: 'iD-icon-alert',
         descriptionID: 'issues.warnings_and_errors'
     };
 
-    var resolvedItem = {
+    const resolvedItem = {
         id: 'resolved',
         count: 0,
         iconID: 'iD-icon-apply',
@@ -24,9 +24,9 @@ export function uiIssuesInfo(context) {
 
     function update(selection) {
 
-        var shownItems = [];
+        const shownItems = [];
 
-        var liveIssues = context.validator().getIssues({
+        const liveIssues = context.validator().getIssues({
             what: prefs('validate-what') || 'edited',
             where: prefs('validate-where') || 'all'
         });
@@ -36,21 +36,21 @@ export function uiIssuesInfo(context) {
         }
 
         if (prefs('validate-what') === 'all') {
-            var resolvedIssues = context.validator().getResolvedIssues();
+            const resolvedIssues = context.validator().getResolvedIssues();
             if (resolvedIssues.length) {
                 resolvedItem.count = resolvedIssues.length;
                 shownItems.push(resolvedItem);
             }
         }
 
-        var chips = selection.selectAll('.chip')
+        const chips = selection.selectAll('.chip')
             .data(shownItems, function(d) {
                 return d.id;
             });
 
         chips.exit().remove();
 
-        var enter = chips.enter()
+        const enter = chips.enter()
             .append('a')
             .attr('class', function(d) {
                 return 'chip ' + d.id + '-count';
@@ -58,9 +58,9 @@ export function uiIssuesInfo(context) {
             .attr('href', '#')
             .each(function(d) {
 
-                var chipSelection = d3_select(this);
+                const chipSelection = d3_select(this);
 
-                var tooltipBehavior = uiTooltip()
+                const tooltipBehavior = uiTooltip()
                     .placement('top')
                     .title(() => t.append(d.descriptionID));
 

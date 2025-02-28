@@ -42,7 +42,7 @@ const chapterFlow = [
 
 export function uiIntro(context) {
   const INTRO_IMAGERY = 'EsriWorldImageryClarity';
-  let _introGraph = {};
+  const _introGraph = {};
   let _currChapter;
 
 
@@ -50,7 +50,7 @@ export function uiIntro(context) {
     fileFetcher.get('intro_graph')
       .then(dataIntroGraph => {
         // create entities for intro graph and localize names
-        for (let id in dataIntroGraph) {
+        for (const id in dataIntroGraph) {
           if (!_introGraph[id]) {
             _introGraph[id] = osmEntity(localize(dataIntroGraph[id]));
           }
@@ -65,16 +65,16 @@ export function uiIntro(context) {
     context.enter(modeBrowse(context));
 
     // Save current map state
-    let osm = context.connection();
-    let history = context.history().toJSON();
-    let hash = window.location.hash;
-    let center = context.map().center();
-    let zoom = context.map().zoom();
-    let background = context.background().baseLayerSource();
-    let overlays = context.background().overlayLayerSources();
-    let opacity = context.container().selectAll('.main-map .layer-background').style('opacity');
-    let caches = osm && osm.caches();
-    let baseEntities = context.history().graph().base().entities;
+    const osm = context.connection();
+    const history = context.history().toJSON();
+    const hash = window.location.hash;
+    const center = context.map().center();
+    const zoom = context.map().zoom();
+    const background = context.background().baseLayerSource();
+    const overlays = context.background().overlayLayerSources();
+    const opacity = context.container().selectAll('.main-map .layer-background').style('opacity');
+    const caches = osm && osm.caches();
+    const baseEntities = context.history().graph().base().entities;
 
     // Show sidebar and disable the sidebar resizing button
     // (this needs to be before `context.inIntro(true)`)
@@ -91,7 +91,7 @@ export function uiIntro(context) {
     context.history().checkpoint('initial');
 
     // Setup imagery
-    let imagery = context.background().findSource(INTRO_IMAGERY);
+    const imagery = context.background().findSource(INTRO_IMAGERY);
     if (imagery) {
       context.background().baseLayerSource(imagery);
     } else {
@@ -100,7 +100,7 @@ export function uiIntro(context) {
     overlays.forEach(d => context.background().toggleOverlayLayer(d));
 
     // Setup data layers (only OSM)
-    let layers = context.layers();
+    const layers = context.layers();
     layers.all().forEach(item => {
       // if the layer has the function `enabled`
       if (typeof item.layer.enabled === 'function') {
@@ -111,18 +111,18 @@ export function uiIntro(context) {
 
     context.container().selectAll('.main-map .layer-background').style('opacity', 1);
 
-    let curtain = uiCurtain(context.container().node());
+    const curtain = uiCurtain(context.container().node());
     selection.call(curtain);
 
     // Store that the user started the walkthrough..
     prefs('walkthrough_started', 'yes');
 
     // Restore previous walkthrough progress..
-    let storedProgress = prefs('walkthrough_progress') || '';
-    let progress = storedProgress.split(';').filter(Boolean);
+    const storedProgress = prefs('walkthrough_progress') || '';
+    const progress = storedProgress.split(';').filter(Boolean);
 
-    let chapters = chapterFlow.map((chapter, i) => {
-      let s = chapterUi[chapter](context, curtain.reveal)
+    const chapters = chapterFlow.map((chapter, i) => {
+      const s = chapterUi[chapter](context, curtain.reveal)
         .on('done', () => {
 
           buttons
@@ -148,7 +148,7 @@ export function uiIntro(context) {
       prefs('walkthrough_progress', utilArrayUniq(progress).join(';'));
 
       // Store if walkthrough is completed..
-      let incomplete = utilArrayDifference(chapterFlow, progress);
+      const incomplete = utilArrayDifference(chapterFlow, progress);
       if (!incomplete.length) {
         prefs('walkthrough_completed', 'yes');
       }
@@ -167,7 +167,7 @@ export function uiIntro(context) {
       context.inIntro(false);
     });
 
-    let navwrap = selection
+    const navwrap = selection
       .append('div')
       .attr('class', 'intro-nav-wrap fillD');
 
@@ -177,12 +177,12 @@ export function uiIntro(context) {
       .append('use')
       .attr('xlink:href', '#iD-logo-walkthrough');
 
-    let buttonwrap = navwrap
+    const buttonwrap = navwrap
       .append('div')
       .attr('class', 'joined')
       .selectAll('button.chapter');
 
-    let buttons = buttonwrap
+    const buttons = buttonwrap
       .data(chapters)
       .enter()
       .append('button')

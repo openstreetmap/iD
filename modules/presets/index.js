@@ -16,7 +16,7 @@ export { presetCollection };
 export { presetField };
 export { presetPreset };
 
-let _mainPresetIndex = presetIndex(); // singleton
+const _mainPresetIndex = presetIndex(); // singleton
 export { _mainPresetIndex as presetManager };
 
 //
@@ -33,10 +33,10 @@ export function presetIndex() {
   const AREA = presetPreset('area', { name: 'Area', tags: { area: 'yes' }, geometry: ['area'], matchScore: 0.1 } );
   const RELATION = presetPreset('relation', { name: 'Relation', tags: {}, geometry: ['relation'], matchScore: 0.1 } );
 
-  let _this = presetCollection([POINT, LINE, AREA, RELATION]);
-  let _presets = { point: POINT, line: LINE, area: AREA, relation: RELATION };
+  const _this = presetCollection([POINT, LINE, AREA, RELATION]);
+  const _presets = { point: POINT, line: LINE, area: AREA, relation: RELATION };
 
-  let _defaults = {
+  const _defaults = {
     point: presetCollection([POINT]),
     vertex: presetCollection([POINT]),
     line: presetCollection([LINE]),
@@ -44,8 +44,8 @@ export function presetIndex() {
     relation: presetCollection([RELATION])
   };
 
-  let _fields = {};
-  let _categories = {};
+  const _fields = {};
+  const _categories = {};
   let _universal = [];
   let _addablePresetIDs = null;   // Set of preset IDs that the user can add
   let _recents;
@@ -90,7 +90,7 @@ export function presetIndex() {
   //   featureCollection: {}
   //}
   _this.merge = (d) => {
-    let newLocationSets = [];
+    const newLocationSets = [];
 
     // Merge Fields
     if (d.fields) {
@@ -168,10 +168,10 @@ export function presetIndex() {
     _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
     _this.collection.forEach(preset => {
       (preset.geometry || []).forEach(geometry => {
-        let g = _geometryIndex[geometry];
-        for (let key in preset.tags) {
+        const g = _geometryIndex[geometry];
+        for (const key in preset.tags) {
           g[key] = g[key] || {};
-          let value = preset.tags[key];
+          const value = preset.tags[key];
           (g[key][value] = g[key][value] || []).push(preset);
         }
       });
@@ -208,17 +208,17 @@ export function presetIndex() {
     const keyIndex = _geometryIndex[geometry];
     let bestScore = -1;
     let bestMatch;
-    let matchCandidates = [];
+    const matchCandidates = [];
 
-    for (let k in tags) {
-      let indexMatches = [];
+    for (const k in tags) {
+      const indexMatches = [];
 
-      let valueIndex = keyIndex[k];
+      const valueIndex = keyIndex[k];
       if (!valueIndex) continue;
 
-      let keyValueMatches = valueIndex[tags[k]];
+      const keyValueMatches = valueIndex[tags[k]];
       if (keyValueMatches) indexMatches.push(...keyValueMatches);
-      let keyStarMatches = valueIndex['*'];
+      const keyStarMatches = valueIndex['*'];
       if (keyStarMatches) indexMatches.push(...keyStarMatches);
 
       if (indexMatches.length === 0) continue;
@@ -256,7 +256,7 @@ export function presetIndex() {
 
     // If any part of an address is present, allow fallback to "Address" preset - #4353
     if (!bestMatch || bestMatch.isFallback()) {
-      for (let k in tags){
+      for (const k in tags){
           if (/^addr:/.test(k) && keyIndex['addr:*'] && keyIndex['addr:*']['*']) {
             bestMatch = keyIndex['addr:*']['*'][0];
             break;
@@ -305,7 +305,7 @@ export function presetIndex() {
       junction: true,
       type: true
     };
-    let areaKeys = {};
+    const areaKeys = {};
 
     // ignore name-suggestion-index and deprecated presets
     const presets = _this.collection.filter(p => !p.suggestion && !p.replacement);
@@ -414,7 +414,7 @@ export function presetIndex() {
     let defaults;
     if (_addablePresetIDs) {
       defaults = Array.from(_addablePresetIDs).map(function(id) {
-        var preset = _this.item(id);
+        const preset = _this.item(id);
         if (preset && preset.matchGeometry(geometry)) return preset;
         return null;
       }).filter(Boolean);
@@ -422,7 +422,7 @@ export function presetIndex() {
       defaults = _defaults[geometry].collection.concat(_this.fallback(geometry));
     }
 
-    let result = presetCollection(
+    const result = presetCollection(
       utilArrayUniq(recents.concat(defaults).concat(extraPresets || [])).slice(0, n - 1)
     );
 
@@ -467,7 +467,7 @@ export function presetIndex() {
 
 
   function RibbonItem(preset, source) {
-    let item = {};
+    const item = {};
     item.preset = preset;
     item.source = source;
 
@@ -519,7 +519,7 @@ export function presetIndex() {
       // fetch from local storage
       _recents = (JSON.parse(prefs('preset_recents')) || [])
         .reduce((acc, d) => {
-          let item = ribbonItemForMinified(d, 'recent');
+          const item = ribbonItemForMinified(d, 'recent');
           if (item && item.preset.addable()) acc.push(item);
           return acc;
         }, []);
@@ -544,7 +544,7 @@ export function presetIndex() {
   _this.removeRecent = (preset) => {
     const item = _this.recentMatching(preset);
     if (item) {
-      let items = _this.getRecents();
+      const items = _this.getRecents();
       items.splice(items.indexOf(item), 1);
       setRecents(items);
     }
@@ -553,7 +553,7 @@ export function presetIndex() {
 
   _this.recentMatching = (preset) => {
     const items = _this.getRecents();
-    for (let i in items) {
+    for (const i in items) {
       if (items[i].matches(preset)) {
         return items[i];
       }
@@ -585,7 +585,7 @@ export function presetIndex() {
   _this.setMostRecent = (preset) => {
     if (preset.searchable === false) return;
 
-    let items = _this.getRecents();
+    const items = _this.getRecents();
     let item = _this.recentMatching(preset);
     if (item) {
       items.splice(items.indexOf(item), 1);
@@ -675,7 +675,7 @@ export function presetIndex() {
 
   _this.favoriteMatching = (preset) => {
     const favs = _this.getFavorites();
-    for (let index in favs) {
+    for (const index in favs) {
       if (favs[index].matches(preset)) {
         return favs[index];
       }

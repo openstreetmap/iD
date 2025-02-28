@@ -18,16 +18,16 @@ import { utilKeybinding, utilRebind } from '../util';
    have the .hover class.
  */
 export function behaviorHover(context) {
-    var dispatch = d3_dispatch('hover');
-    var _selection = d3_select(null);
-    var _newNodeId = null;
-    var _initialNodeID = null;
-    var _altDisables;
-    var _ignoreVertex;
-    var _targets = [];
+    const dispatch = d3_dispatch('hover');
+    let _selection = d3_select(null);
+    let _newNodeId = null;
+    let _initialNodeID = null;
+    let _altDisables;
+    let _ignoreVertex;
+    let _targets = [];
 
     // use pointer events on supported platforms; fallback to mouse events
-    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+    const _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
 
     function keydown(d3_event) {
@@ -83,7 +83,7 @@ export function behaviorHover(context) {
 
 
         function eventTarget(d3_event) {
-            var datum = d3_event.target && d3_event.target.__data__;
+            const datum = d3_event.target && d3_event.target.__data__;
             if (typeof datum !== 'object') return null;
             if (!(datum instanceof osmEntity) && datum.properties && (datum.properties.entity instanceof osmEntity)) {
                 return datum.properties.entity;
@@ -97,7 +97,7 @@ export function behaviorHover(context) {
                 (!d3_event.pointerType || d3_event.pointerType === 'mouse') &&
                 d3_event.buttons) return;
 
-            var target = eventTarget(d3_event);
+            const target = eventTarget(d3_event);
             if (target && _targets.indexOf(target) === -1) {
                 _targets.push(target);
                 updateHover(d3_event, _targets);
@@ -106,8 +106,8 @@ export function behaviorHover(context) {
 
         function pointerout(d3_event) {
 
-            var target = eventTarget(d3_event);
-            var index = _targets.indexOf(target);
+            const target = eventTarget(d3_event);
+            const index = _targets.indexOf(target);
             if (index !== -1) {
                 _targets.splice(index);
                 updateHover(d3_event, _targets);
@@ -119,7 +119,7 @@ export function behaviorHover(context) {
         }
 
         function modeAllowsHover(target) {
-            var mode = context.mode();
+            const mode = context.mode();
             if (mode.id === 'add-point') {
                 return mode.preset.matchGeometry('vertex') ||
                     (target.type !== 'way' && target.geometry(context.graph()) !== 'vertex');
@@ -134,10 +134,10 @@ export function behaviorHover(context) {
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
 
-            var mode = context.mode();
+            const mode = context.mode();
 
             if (!_newNodeId && (mode.id === 'draw-line' || mode.id === 'draw-area')) {
-                var node = targets.find(function(target) {
+                const node = targets.find(function(target) {
                     return target instanceof osmEntity && target.type === 'node';
                 });
                 _newNodeId = node && node.id;
@@ -153,10 +153,10 @@ export function behaviorHover(context) {
                 return true;
             });
 
-            var selector = '';
+            let selector = '';
 
-            for (var i in targets) {
-                var datum = targets[i];
+            for (const i in targets) {
+                const datum = targets[i];
 
                 // What are we hovering over?
                 if (datum.__featurehash__) {
@@ -172,14 +172,14 @@ export function behaviorHover(context) {
                 } else if (datum instanceof osmEntity) {
                     selector += ', .' + datum.id;
                     if (datum.type === 'relation') {
-                        for (var j in datum.members) {
+                        for (const j in datum.members) {
                             selector += ', .' + datum.members[j].id;
                         }
                     }
                 }
             }
 
-            var suppressed = _altDisables && d3_event && d3_event.altKey;
+            const suppressed = _altDisables && d3_event && d3_event.altKey;
 
             if (selector.trim().length) {
                 // remove the first comma

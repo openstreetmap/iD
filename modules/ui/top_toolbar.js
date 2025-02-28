@@ -8,14 +8,14 @@ import { uiToolDrawModes, uiToolNotes, uiToolSave, uiToolSidebarToggle, uiToolUn
 
 export function uiTopToolbar(context) {
 
-    var sidebarToggle = uiToolSidebarToggle(context),
+    const sidebarToggle = uiToolSidebarToggle(context),
         modes = uiToolDrawModes(context),
         notes = uiToolNotes(context),
         undoRedo = uiToolUndoRedo(context),
         save = uiToolSave(context);
 
     function notesEnabled() {
-        var noteLayer = context.layers().layer('notes');
+        const noteLayer = context.layers().layer('notes');
         return noteLayer && noteLayer.enabled();
     }
 
@@ -29,7 +29,7 @@ export function uiTopToolbar(context) {
             }
         });
 
-        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
+        const debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
         context.layers()
             .on('change.topToolbar', debouncedUpdate);
 
@@ -37,7 +37,7 @@ export function uiTopToolbar(context) {
 
         function update() {
 
-            var tools = [
+            let tools = [
                 sidebarToggle,
                 'spacer',
                 modes
@@ -51,7 +51,7 @@ export function uiTopToolbar(context) {
 
             tools = tools.concat([undoRedo, save]);
 
-            var toolbarItems = bar.selectAll('.toolbar-item')
+            const toolbarItems = bar.selectAll('.toolbar-item')
                 .data(tools, function(d) {
                     return d.id || d;
                 });
@@ -64,16 +64,16 @@ export function uiTopToolbar(context) {
                 })
                 .remove();
 
-            var itemsEnter = toolbarItems
+            const itemsEnter = toolbarItems
                 .enter()
                 .append('div')
                 .attr('class', function(d) {
-                    var classes = 'toolbar-item ' + (d.id || d).replace('_', '-');
+                    let classes = 'toolbar-item ' + (d.id || d).replace('_', '-');
                     if (d.klass) classes += ' ' + d.klass;
                     return classes;
                 });
 
-            var actionableItems = itemsEnter.filter(function(d) { return d !== 'spacer'; });
+            const actionableItems = itemsEnter.filter(function(d) { return d !== 'spacer'; });
 
             actionableItems
                 .append('div')

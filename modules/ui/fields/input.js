@@ -27,14 +27,14 @@ export {
 const likelyRawNumberFormat = /^-?(0\.\d*|\d*\.\d{0,2}(\d{4,})?|\d{4,}\.\d{3})$/;
 
 export function uiFieldText(field, context) {
-    var dispatch = d3_dispatch('change');
-    var input = d3_select(null);
-    var outlinkButton = d3_select(null);
-    var wrap = d3_select(null);
-    var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
-    var _entityIDs = [];
-    var _tags;
-    var _phoneFormats = {};
+    const dispatch = d3_dispatch('change');
+    let input = d3_select(null);
+    let outlinkButton = d3_select(null);
+    let wrap = d3_select(null);
+    const _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
+    let _entityIDs = [];
+    let _tags;
+    let _phoneFormats = {};
     const isDirectionField = field.key.split(':').some(keyPart => keyPart === 'direction');
     const formatFloat = localizer.floatFormatter(localizer.languageCode());
     const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
@@ -52,20 +52,20 @@ export function uiFieldText(field, context) {
 
     function calcLocked() {
         // Protect certain fields that have a companion `*:wikidata` value
-        var isLocked = (field.id === 'brand' || field.id === 'network' || field.id === 'operator' || field.id === 'flag') &&
+        const isLocked = (field.id === 'brand' || field.id === 'network' || field.id === 'operator' || field.id === 'flag') &&
             _entityIDs.length &&
             _entityIDs.some(function(entityID) {
-                var entity = context.graph().hasEntity(entityID);
+                const entity = context.graph().hasEntity(entityID);
                 if (!entity) return false;
 
                 // Features linked to Wikidata are likely important and should be protected
                 if (entity.tags.wikidata) return true;
 
-                var preset = presetManager.match(entity, context.graph());
-                var isSuggestion = preset && preset.suggestion;
+                const preset = presetManager.match(entity, context.graph());
+                const isSuggestion = preset && preset.suggestion;
 
                 // Lock the field if there is a value and a companion `*:wikidata` value
-                var which = field.id;   // 'brand', 'network', 'operator', 'flag'
+                const which = field.id;   // 'brand', 'network', 'operator', 'flag'
                 return isSuggestion && !!entity.tags[which] && !!entity.tags[which + ':wikidata'];
             });
 
@@ -75,7 +75,7 @@ export function uiFieldText(field, context) {
 
     function i(selection) {
         calcLocked();
-        var isLocked = field.locked();
+        const isLocked = field.locked();
 
         wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
@@ -109,23 +109,23 @@ export function uiFieldText(field, context) {
             updatePhonePlaceholder();
 
         } else if (field.type === 'number') {
-            var rtl = (localizer.textDirection() === 'rtl');
+            const rtl = (localizer.textDirection() === 'rtl');
 
             input.attr('type', 'text');
 
-            var inc = field.increment;
+            const inc = field.increment;
 
-            var buttons = wrap.selectAll('.increment, .decrement')
+            const buttons = wrap.selectAll('.increment, .decrement')
                 .data(rtl ? [inc, -inc] : [-inc, inc]);
 
             buttons.enter()
                 .append('button')
                 .attr('class', function(d) {
-                    var which = (d > 0 ? 'increment' : 'decrement');
+                    const which = (d > 0 ? 'increment' : 'decrement');
                     return 'form-field-button ' + which;
                 })
                 .attr('title', function(d) {
-                    var which = (d > 0 ? 'increment' : 'decrement');
+                    const which = (d > 0 ? 'increment' : 'decrement');
                     return t(`inspector.${which}`);
                 })
                 .merge(buttons)
@@ -133,15 +133,15 @@ export function uiFieldText(field, context) {
                     d3_event.preventDefault();
 
                     // do nothing if this is a multi-selection with mixed values
-                    var isMixed = Array.isArray(_tags[field.key]);
+                    const isMixed = Array.isArray(_tags[field.key]);
                     if (isMixed) return;
 
-                    var raw_vals = input.node().value || '0';
-                    var vals = raw_vals.split(';');
+                    const raw_vals = input.node().value || '0';
+                    let vals = raw_vals.split(';');
                     vals = vals.map(function(v) {
                         v = v.trim();
                         const isRawNumber = likelyRawNumberFormat.test(v);
-                        var num = isRawNumber ? parseFloat(v) : parseLocaleFloat(v);
+                        let num = isRawNumber ? parseFloat(v) : parseLocaleFloat(v);
                         if (isDirectionField) {
                             const compassDir = cardinal[v.toLowerCase()];
                             if (compassDir !== undefined) {
@@ -179,9 +179,9 @@ export function uiFieldText(field, context) {
                 .call(svgIcon('#iD-icon-out-link'))
                 .attr('class', 'form-field-button foreign-id-permalink')
                 .attr('title', function() {
-                    var domainResults = /^https?:\/\/(.{1,}?)\//.exec(field.urlFormat);
+                    const domainResults = /^https?:\/\/(.{1,}?)\//.exec(field.urlFormat);
                     if (domainResults.length >= 2 && domainResults[1]) {
-                        var domain = domainResults[1];
+                        const domain = domainResults[1];
                         return t('icons.view_on', { domain: domain });
                     }
                     return '';
@@ -190,9 +190,9 @@ export function uiFieldText(field, context) {
             outlinkButton
                 .on('click', function(d3_event) {
                     d3_event.preventDefault();
-                    var value = validIdentifierValueForLink();
+                    const value = validIdentifierValueForLink();
                     if (value) {
-                        var url = field.urlFormat.replace(/{value}/, encodeURIComponent(value));
+                        const url = field.urlFormat.replace(/{value}/, encodeURIComponent(value));
                         window.open(url, '_blank');
                     }
                 })
@@ -240,7 +240,7 @@ export function uiFieldText(field, context) {
             return;
         }
 
-        var colourSelector = wrap.selectAll('.colour-selector')
+        const colourSelector = wrap.selectAll('.colour-selector')
             .data([0]);
 
         colourSelector
@@ -250,7 +250,7 @@ export function uiFieldText(field, context) {
             .attr('class', 'colour-selector')
             .on('input', _debounce(function(d3_event) {
                 d3_event.preventDefault();
-                var colour = this.value;
+                const colour = this.value;
                 if (!isColourValid(colour)) return;
                 utilGetSetValue(input, this.value);
                 change()();
@@ -259,7 +259,7 @@ export function uiFieldText(field, context) {
         wrap.selectAll('input.colour-selector')
             .attr('value', colour);
 
-        var chooserButton = wrap.selectAll('.colour-preview')
+        let chooserButton = wrap.selectAll('.colour-preview')
             .data([colour]);
         chooserButton = chooserButton
             .enter()
@@ -313,7 +313,7 @@ export function uiFieldText(field, context) {
             // opening of the calendar pick is not yet supported in safari <= 16
             // https://caniuse.com/mdn-api_htmlinputelement_showpicker_date_input
 
-            var dateSelector = wrap.selectAll('.date-selector')
+            const dateSelector = wrap.selectAll('.date-selector')
                 .data([0]);
 
             dateSelector
@@ -323,7 +323,7 @@ export function uiFieldText(field, context) {
                 .attr('class', 'date-selector')
                 .on('input', _debounce(function(d3_event) {
                     d3_event.preventDefault();
-                    var date = this.value;
+                    const date = this.value;
                     if (!isDateValid(date)) return;
                     utilGetSetValue(input, this.value);
                     change()();
@@ -332,7 +332,7 @@ export function uiFieldText(field, context) {
             wrap.selectAll('input.date-selector')
                 .attr('value', date);
 
-            var calendarButton = wrap.selectAll('.date-calendar')
+            let calendarButton = wrap.selectAll('.date-calendar')
                 .data([date]);
             calendarButton = calendarButton
                 .enter()
@@ -349,9 +349,9 @@ export function uiFieldText(field, context) {
     function updatePhonePlaceholder() {
         if (input.empty() || !Object.keys(_phoneFormats).length) return;
 
-        var extent = combinedEntityExtent();
-        var countryCode = extent && countryCoder.iso1A2Code(extent.center());
-        var format = countryCode && _phoneFormats[countryCode.toLowerCase()];
+        const extent = combinedEntityExtent();
+        const countryCode = extent && countryCoder.iso1A2Code(extent.center());
+        const format = countryCode && _phoneFormats[countryCode.toLowerCase()];
         if (format) input.attr('placeholder', format);
     }
 
@@ -407,22 +407,22 @@ export function uiFieldText(field, context) {
 
     function change(onInput) {
         return function() {
-            var t = {};
-            var val = utilGetSetValue(input);
+            const t = {};
+            let val = utilGetSetValue(input);
             if (!onInput) val = context.cleanTagValue(val);
 
             // don't override multiple values with blank string
             if (!val && getVals(_tags).size > 1) return;
 
-            var displayVal = val;
+            const displayVal = val;
             if (field.type === 'number' && val) {
-                var numbers = val.split(';');
+                let numbers = val.split(';');
                 numbers = numbers.map(function(v) {
                     if (likelyRawNumberFormat.test(v)) {
                         // input number likely in "raw" format
                         return v;
                     }
-                    var num = parseLocaleFloat(v);
+                    const num = parseLocaleFloat(v);
                     const fractionDigits = countDecimalPlaces(v);
                     return isFinite(num) ? clamped(num).toFixed(fractionDigits) : v;
                 });
@@ -463,16 +463,16 @@ export function uiFieldText(field, context) {
 
         const vals = getVals(tags);
         const isMixed = vals.size > 1;
-        var val = vals.size === 1 ? [...vals][0] ?? '' : '';
-        var shouldUpdate;
+        let val = vals.size === 1 ? [...vals][0] ?? '' : '';
+        let shouldUpdate;
 
         if (field.type === 'number' && val) {
-            var numbers = val.split(';');
-            var oriNumbers = utilGetSetValue(input).split(';');
+            let numbers = val.split(';');
+            const oriNumbers = utilGetSetValue(input).split(';');
             if (numbers.length !== oriNumbers.length) shouldUpdate = true;
             numbers = numbers.map(function(v) {
                 v = v.trim();
-                var num = Number(v);
+                const num = Number(v);
                 if (!isFinite(num) || v === '') return v;
                 const fractionDigits = v.includes('.') ? v.split('.')[1].length : 0;
                 return formatFloat(num, fractionDigits);
@@ -507,7 +507,7 @@ export function uiFieldText(field, context) {
             if (isMixed) {
                 buttons.attr('disabled', 'disabled').classed('disabled', true);
             } else {
-                var raw_vals = tags[field.key] || '0';
+                const raw_vals = tags[field.key] || '0';
                 const canIncDec = raw_vals.split(';').some((val) =>
                     isFinite(Number(val))
                     || (isDirectionField && (val.trim().toLowerCase() in cardinal))
@@ -523,7 +523,7 @@ export function uiFieldText(field, context) {
         if (field.type === 'date') updateDateField();
 
         if (outlinkButton && !outlinkButton.empty()) {
-            var disabled = !validIdentifierValueForLink();
+            const disabled = !validIdentifierValueForLink();
             outlinkButton.classed('disabled', disabled);
         }
 
@@ -534,7 +534,7 @@ export function uiFieldText(field, context) {
 
 
     i.focus = function() {
-        var node = input.node();
+        const node = input.node();
         if (node) node.focus();
     };
 

@@ -370,7 +370,7 @@ export default {
             .attr('d', viewfieldPath);
 
         function viewfieldPath() {
-            let d = this.parentNode.__data__;
+            const d = this.parentNode.__data__;
             if (d.isPano && d.id !== selectedImageId) {
                 return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
@@ -383,7 +383,7 @@ export default {
 
     updateUrlImage: function(imageKey) {
         if (!window.mocha) {
-            var hash = utilStringQs(window.location.hash);
+            const hash = utilStringQs(window.location.hash);
             if (imageKey) {
                 hash.photo = 'panoramax/' + imageKey;
             } else {
@@ -394,15 +394,15 @@ export default {
     },
 
     selectImage: function (context, id) {
-        let that = this;
+        const that = this;
 
-        let d = that.cachedImage(id);
+        const d = that.cachedImage(id);
         that.setActiveImage(d);
         that.updateUrlImage(d.id);
 
         const viewerLink = `${viewerUrl}#pic=${d.id}&focus=pic`;
 
-        let viewer = context.container()
+        const viewer = context.container()
             .select('.photoviewer');
 
         if (!viewer.empty()) viewer.datum(d);
@@ -411,18 +411,18 @@ export default {
 
         if (!d) return this;
 
-        let wrap = context.container()
+        const wrap = context.container()
             .select('.photoviewer .panoramax-wrapper');
 
-        let attribution = wrap.selectAll('.photo-attribution').text('');
+        const attribution = wrap.selectAll('.photo-attribution').text('');
 
-        let line1 = attribution
+        const line1 = attribution
             .append('div')
             .attr('class', 'attribution-row');
 
         const hdDomId = utilUniqueDomId('panoramax-hd');
 
-        let label = line1
+        const label = line1
             .append('label')
             .attr('for', hdDomId)
             .attr('class', 'panoramax-hd');
@@ -507,8 +507,8 @@ export default {
 
         function localeDateString(s) {
             if (!s) return null;
-            var options = { day: 'numeric', month: 'short', year: 'numeric' };
-            var d = new Date(s);
+            const options = { day: 'numeric', month: 'short', year: 'numeric' };
+            const d = new Date(s);
             if (isNaN(d.getTime())) return null;
             return d.toLocaleDateString(localizer.localeCode(), options);
         }
@@ -518,7 +518,7 @@ export default {
                 .append('span')
                 .text('|');
 
-            let line2 = attribution
+            const line2 = attribution
                 .append('span')
                 .attr('class', 'attribution-row');
 
@@ -539,9 +539,9 @@ export default {
 
     ensureViewerLoaded: function(context) {
 
-        let that = this;
+        const that = this;
 
-        let imgWrap = context.container()
+        const imgWrap = context.container()
             .select('#ideditor-viewer-panoramax-simple > img');
 
         if (!imgWrap.empty()) {
@@ -550,12 +550,12 @@ export default {
 
         if (_loadViewerPromise) return _loadViewerPromise;
 
-        let wrap = context.container()
+        const wrap = context.container()
             .select('.photoviewer')
             .selectAll('.panoramax-wrapper')
             .data([0]);
 
-        let wrapEnter = wrap.enter()
+        const wrapEnter = wrap.enter()
             .append('div')
             .attr('class', 'photo-wrapper panoramax-wrapper')
             .classed('hide', true)
@@ -617,9 +617,9 @@ export default {
     },
 
     showViewer: function (context) {
-        let wrap = context.container().select('.photoviewer')
+        const wrap = context.container().select('.photoviewer')
             .classed('hide', false);
-        let isHidden = wrap.selectAll('.photo-wrapper.panoramax-wrapper.hide').size();
+        const isHidden = wrap.selectAll('.photo-wrapper.panoramax-wrapper.hide').size();
         if (isHidden) {
             wrap
                 .selectAll('.photo-wrapper:not(.panoramax-wrapper)')
@@ -632,7 +632,7 @@ export default {
     },
 
     hideViewer: function (context) {
-        let viewer = context.container().select('.photoviewer');
+        const viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
         this.updateUrlImage(null);
         viewer

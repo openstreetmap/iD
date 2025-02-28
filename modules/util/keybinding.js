@@ -6,13 +6,13 @@ import { utilArrayUniq } from './array';
 
 
 export function utilKeybinding(namespace) {
-    var _keybindings = {};
+    let _keybindings = {};
 
 
     function testBindings(d3_event, isCapturing) {
-        var didMatch = false;
-        var bindings = Object.keys(_keybindings).map(function(id) { return _keybindings[id]; });
-        var i, binding;
+        let didMatch = false;
+        const bindings = Object.keys(_keybindings).map(function(id) { return _keybindings[id]; });
+        let i, binding;
 
         // Most key shortcuts will accept either lower or uppercase ('h' or 'H'),
         // so we don't strictly match on the shift key, but we prioritize
@@ -48,9 +48,9 @@ export function utilKeybinding(namespace) {
 
 
         function matches(d3_event, binding, testShift) {
-            var event = d3_event;
-            var isMatch = false;
-            var tryKeyCode = true;
+            const event = d3_event;
+            let isMatch = false;
+            let tryKeyCode = true;
 
             // Prefer a match on `KeyboardEvent.key`
             if (event.key !== undefined) {
@@ -100,7 +100,7 @@ export function utilKeybinding(namespace) {
 
 
     function bubble(d3_event) {
-        var tagName = d3_select(d3_event.target).node().tagName;
+        const tagName = d3_select(d3_event.target).node().tagName;
         if (tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA') {
             return;
         }
@@ -133,10 +133,10 @@ export function utilKeybinding(namespace) {
 
     // Remove one or more keycode bindings.
     keybinding.off = function(codes, capture) {
-        var arr = utilArrayUniq([].concat(codes));
+        const arr = utilArrayUniq([].concat(codes));
 
-        for (var i = 0; i < arr.length; i++) {
-            var id = arr[i] + (capture ? '-capture' : '-bubble');
+        for (let i = 0; i < arr.length; i++) {
+            const id = arr[i] + (capture ? '-capture' : '-bubble');
             delete _keybindings[id];
         }
         return keybinding;
@@ -149,11 +149,11 @@ export function utilKeybinding(namespace) {
             return keybinding.off(codes, capture);
         }
 
-        var arr = utilArrayUniq([].concat(codes));
+        const arr = utilArrayUniq([].concat(codes));
 
-        for (var i = 0; i < arr.length; i++) {
-            var id = arr[i] + (capture ? '-capture' : '-bubble');
-            var binding = {
+        for (let i = 0; i < arr.length; i++) {
+            const id = arr[i] + (capture ? '-capture' : '-bubble');
+            const binding = {
                 id: id,
                 capture: capture,
                 callback: callback,
@@ -175,13 +175,13 @@ export function utilKeybinding(namespace) {
 
             _keybindings[id] = binding;
 
-            var matches = arr[i].toLowerCase().match(/(?:(?:[^+⇧⌃⌥⌘])+|[⇧⌃⌥⌘]|\+\+|^\+$)/g);
-            for (var j = 0; j < matches.length; j++) {
+            const matches = arr[i].toLowerCase().match(/(?:(?:[^+⇧⌃⌥⌘])+|[⇧⌃⌥⌘]|\+\+|^\+$)/g);
+            for (let j = 0; j < matches.length; j++) {
                 // Normalise matching errors
                 if (matches[j] === '++') matches[j] = '+';
 
                 if (matches[j] in utilKeybinding.modifierCodes) {
-                    var prop = utilKeybinding.modifierProperties[utilKeybinding.modifierCodes[matches[j]]];
+                    const prop = utilKeybinding.modifierProperties[utilKeybinding.modifierCodes[matches[j]]];
                     binding.event.modifiers[prop] = true;
                 } else {
                     binding.event.key = utilKeybinding.keys[matches[j]] || matches[j];
@@ -401,7 +401,7 @@ utilKeybinding.keyCodes = {
 };
 
 // NUMPAD 0-9
-var i = 95, n = 0;
+let i = 95, n = 0;
 while (++i < 106) {
     utilKeybinding.keyCodes['num-' + n] = i;
     ++n;

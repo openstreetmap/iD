@@ -37,7 +37,7 @@ export function osmRemoveLifecyclePrefix(key) {
     return key;
 }
 
-export var osmAreaKeys = {};
+export let osmAreaKeys = {};
 export function osmSetAreaKeys(value) {
     osmAreaKeys = value;
 }
@@ -45,7 +45,7 @@ export function osmSetAreaKeys(value) {
 // `highway` and `railway` are typically linear features, but there
 // are a few exceptions that should be treated as areas, even in the
 // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
-export var osmAreaKeysExceptions = {
+export const osmAreaKeysExceptions = {
     highway: {
         elevator: true,
         rest_area: true,
@@ -76,8 +76,8 @@ export function osmTagSuggestingArea(tags) {
     if (tags.area === 'yes') return { area: 'yes' };
     if (tags.area === 'no') return null;
 
-    var returnTags = {};
-    for (var realKey in tags) {
+    const returnTags = {};
+    for (const realKey in tags) {
         const key = osmRemoveLifecyclePrefix(realKey);
         if (key in osmAreaKeys && !(tags[realKey] in osmAreaKeys[key])) {
             returnTags[realKey] = tags[realKey];
@@ -91,27 +91,27 @@ export function osmTagSuggestingArea(tags) {
     return null;
 }
 
-export var osmLineTags = {};
+export let osmLineTags = {};
 export function osmSetLineTags(value) {
     osmLineTags = value;
 }
 
 // Tags that indicate a node can be a standalone point
 // e.g. { amenity: { bar: true, parking: true, ... } ... }
-export var osmPointTags = {};
+export let osmPointTags = {};
 export function osmSetPointTags(value) {
     osmPointTags = value;
 }
 // Tags that indicate a node can be part of a way
 // e.g. { amenity: { parking: true, ... }, highway: { stop: true ... } ... }
-export var osmVertexTags = {};
+export let osmVertexTags = {};
 export function osmSetVertexTags(value) {
     osmVertexTags = value;
 }
 
 export function osmNodeGeometriesForTags(nodeTags) {
-    var geometries = {};
-    for (var key in nodeTags) {
+    const geometries = {};
+    for (const key in nodeTags) {
         if (osmPointTags[key] &&
             (osmPointTags[key]['*'] || osmPointTags[key][nodeTags[key]])) {
             geometries.point = true;
@@ -203,7 +203,7 @@ export const osmOneWayTags = merge(
 );
 
 // solid and smooth surfaces akin to the assumed default road surface in OSM
-export var osmPavedTags = {
+export const osmPavedTags = {
     'surface': {
         'paved': true,
         'asphalt': true,
@@ -218,7 +218,7 @@ export var osmPavedTags = {
 };
 
 // solid, if somewhat uncommon surfaces with a high range of smoothness
-export var osmSemipavedTags = {
+export const osmSemipavedTags = {
     'surface': {
         'cobblestone': true,
         'cobblestone:flattened': true,
@@ -230,7 +230,7 @@ export var osmSemipavedTags = {
     }
 };
 
-export var osmRightSideIsInsideTags = {
+export const osmRightSideIsInsideTags = {
     'natural': {
         'cliff': true,
         'coastline': 'coastline'
@@ -252,7 +252,7 @@ export var osmRightSideIsInsideTags = {
 
 // "highway" tag values for pedestrian or vehicle right-of-ways that make up the routable network
 // (does not include `raceway`)
-export var osmRoutableHighwayTagValues = {
+export const osmRoutableHighwayTagValues = {
     motorway: true, trunk: true, primary: true, secondary: true, tertiary: true, residential: true,
     motorway_link: true, trunk_link: true, primary_link: true, secondary_link: true, tertiary_link: true,
     unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true, busway: true,
@@ -263,19 +263,19 @@ export const osmRoutableAerowayTags = {
     runway: true, taxiway: true
 };
 // "highway" tag values that generally do not allow motor vehicles
-export var osmPathHighwayTagValues = {
+export const osmPathHighwayTagValues = {
     path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true, ladder: true
 };
 
 // "railway" tag values representing existing railroad tracks (purposely does not include 'abandoned')
-export var osmRailwayTrackTagValues = {
+export const osmRailwayTrackTagValues = {
     rail: true, light_rail: true, tram: true, subway: true,
     monorail: true, funicular: true, miniature: true, narrow_gauge: true,
     disused: true, preserved: true
 };
 
 // "waterway" tag values for line features representing water flow
-export var osmFlowingWaterwayTagValues = {
+export const osmFlowingWaterwayTagValues = {
     canal: true, ditch: true, drain: true, fish_pass: true, flowline: true, river: true, stream: true, tidal_channel: true
 };
 
@@ -296,7 +296,7 @@ export function isColourValid(value) {
 }
 
 // https://wiki.openstreetmap.org/wiki/Special:WhatLinksHere/Property:P44
-export var osmMutuallyExclusiveTagPairs = [
+export const osmMutuallyExclusiveTagPairs = [
     ['noname', 'name'],
     ['noref', 'ref'],
     ['nohousenumber', 'addr:housenumber'],

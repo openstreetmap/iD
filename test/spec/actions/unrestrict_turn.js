@@ -3,7 +3,7 @@ describe('iD.actionUnrestrictTurn', function() {
         //
         // u === * --- w
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({ id: 'u' }),
             iD.osmNode({ id: '*' }),
             iD.osmNode({ id: 'w' }),
@@ -15,7 +15,7 @@ describe('iD.actionUnrestrictTurn', function() {
                 { id: '*', role: 'via', type: 'node' }
             ]})
         ]);
-        var action = iD.actionUnrestrictTurn({ restrictionID: 'r' });
+        const action = iD.actionUnrestrictTurn({ restrictionID: 'r' });
 
         graph = action(graph);
         expect(graph.hasEntity('r')).to.be.undefined;

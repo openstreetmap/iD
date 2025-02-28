@@ -10,9 +10,9 @@ import { utilArrayUniq } from '../util';
 */
 export function svgDefs(context) {
 
-    var _defsSelection = d3_select(null);
+    let _defsSelection = d3_select(null);
 
-    var _spritesheetIds = [
+    let _spritesheetIds = [
         'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'roentgen-sprite', 'community-sprite'
     ];
 
@@ -117,7 +117,7 @@ export function svgDefs(context) {
             .attr('stroke-opacity', '0.75');
 
         // add patterns
-        var patterns = _defsSelection.selectAll('pattern')
+        const patterns = _defsSelection.selectAll('pattern')
             .data([
                 // pattern name, pattern image name
                 ['beach', 'dots'],
@@ -217,7 +217,7 @@ export function svgDefs(context) {
     function addSprites(ids, overrideColors) {
         _spritesheetIds = utilArrayUniq(_spritesheetIds.concat(ids));
 
-        var spritesheets = _defsSelection
+        const spritesheets = _defsSelection
             .selectAll('.spritesheet')
             .data(_spritesheetIds);
 
@@ -226,8 +226,8 @@ export function svgDefs(context) {
             .append('g')
             .attr('class', function(d) { return 'spritesheet spritesheet-' + d; })
             .each(function(d) {
-                var url = context.imagePath(d + '.svg');
-                var node = d3_select(this).node();
+                const url = context.imagePath(d + '.svg');
+                const node = d3_select(this).node();
 
                 d3_svg(url)
                     .then(function(svg) {

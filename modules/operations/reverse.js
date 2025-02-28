@@ -5,7 +5,7 @@ import { behaviorOperation } from '../behavior/operation';
 
 export function operationReverse(context, selectedIDs) {
 
-    var operation = function() {
+    const operation = function() {
         context.perform(function combinedReverseAction(graph) {
             actions().forEach(function(action) {
                 graph = action(graph);
@@ -17,7 +17,7 @@ export function operationReverse(context, selectedIDs) {
 
     function actions(situation) {
         return selectedIDs.map(function(entityID) {
-            var entity = context.hasEntity(entityID);
+            const entity = context.hasEntity(entityID);
             if (!entity) return null;
 
             if (situation === 'toolbar') {
@@ -25,10 +25,10 @@ export function operationReverse(context, selectedIDs) {
                     (!entity.isOneWay() && !entity.isSided())) return null;
             }
 
-            var geometry = entity.geometry(context.graph());
+            const geometry = entity.geometry(context.graph());
             if (entity.type !== 'node' && geometry !== 'line') return null;
 
-            var action = actionReverse(entityID);
+            const action = actionReverse(entityID);
             if (action.disabled(context.graph())) return null;
 
             return action;
@@ -36,9 +36,9 @@ export function operationReverse(context, selectedIDs) {
     }
 
     function reverseTypeID() {
-        var acts = actions();
-        var nodeActionCount = acts.filter(function(act) {
-            var entity = context.hasEntity(act.entityID());
+        const acts = actions();
+        const nodeActionCount = acts.filter(function(act) {
+            const entity = context.hasEntity(act.entityID());
             return entity && entity.type === 'node';
         }).length;
         if (nodeActionCount === 0) return 'line';
@@ -63,7 +63,7 @@ export function operationReverse(context, selectedIDs) {
 
 
     operation.annotation = function() {
-        var acts = actions();
+        const acts = actions();
         return t('operations.reverse.annotation.' + reverseTypeID(), { n: acts.length });
     };
 

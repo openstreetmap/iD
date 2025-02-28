@@ -4,23 +4,23 @@
 
 import { WordShaper } from 'alif-toolkit';
 
-export var rtlRegex = /[\u0590-\u05FF\u0600-\u06FF\u0750-\u07BF\u08A0–\u08BF]/;
+export const rtlRegex = /[\u0590-\u05FF\u0600-\u06FF\u0750-\u07BF\u08A0–\u08BF]/;
 
 export function fixRTLTextForSvg(inputText) {
-    var ret = '', rtlBuffer = [];
-    var arabicRegex = /[\u0600-\u06FF]/g;
-    var arabicDiacritics = /[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]/g;
-    var arabicMath = /[\u0660-\u066C\u06F0-\u06F9]+/g;
-    var thaanaVowel = /[\u07A6-\u07B0]/;
-    var hebrewSign = /[\u0591-\u05bd\u05bf\u05c1-\u05c5\u05c7]/;
+    let ret = '', rtlBuffer = [];
+    const arabicRegex = /[\u0600-\u06FF]/g;
+    const arabicDiacritics = /[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]/g;
+    const arabicMath = /[\u0660-\u066C\u06F0-\u06F9]+/g;
+    const thaanaVowel = /[\u07A6-\u07B0]/;
+    const hebrewSign = /[\u0591-\u05bd\u05bf\u05c1-\u05c5\u05c7]/;
 
     // Arabic word shaping
     if (arabicRegex.test(inputText)) {
         inputText = WordShaper(inputText);
     }
 
-    for (var n = 0; n < inputText.length; n++) {
-        var c = inputText[n];
+    for (let n = 0; n < inputText.length; n++) {
+        const c = inputText[n];
         if (arabicMath.test(c)) {
             // Arabic numbers go LTR
             ret += rtlBuffer.reverse().join('');

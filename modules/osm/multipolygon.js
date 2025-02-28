@@ -33,7 +33,7 @@ export function osmJoinWays(toJoin, graph) {
     }
 
     function reverse(item) {
-        var action = actionReverse(item.id, { reverseOneway: true });
+        const action = actionReverse(item.id, { reverseOneway: true });
         sequences.actions.push(action);
         return (item instanceof osmWay) ? action(graph).entity(item.id) : item;
     }
@@ -45,8 +45,8 @@ export function osmJoinWays(toJoin, graph) {
 
     // Are the things we are joining relation members or `osmWays`?
     // If `osmWays`, skip the "prefer a forward path" code below (see #4872)
-    var i;
-    var joinAsMembers = true;
+    let i;
+    let joinAsMembers = true;
     for (i = 0; i < toJoin.length; i++) {
         if (toJoin[i] instanceof osmWay) {
             joinAsMembers = false;
@@ -54,21 +54,21 @@ export function osmJoinWays(toJoin, graph) {
         }
     }
 
-    var sequences = [];
+    const sequences = [];
     sequences.actions = [];
 
     while (toJoin.length) {
         // start a new sequence
-        var item = toJoin.shift();
-        var currWays = [item];
-        var currNodes = resolve(item).slice();
+        let item = toJoin.shift();
+        const currWays = [item];
+        const currNodes = resolve(item).slice();
 
         // add to it
         while (toJoin.length) {
-            var start = currNodes[0];
-            var end = currNodes[currNodes.length - 1];
-            var fn = null;
-            var nodes = null;
+            let start = currNodes[0];
+            let end = currNodes[currNodes.length - 1];
+            let fn = null;
+            let nodes = null;
 
             // Find the next way/member to join.
             for (i = 0; i < toJoin.length; i++) {

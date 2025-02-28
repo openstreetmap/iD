@@ -14,31 +14,31 @@ export { uiFieldCheck as uiFieldOnewayCheck };
 
 
 export function uiFieldCheck(field, context) {
-    var dispatch = d3_dispatch('change');
-    var options = field.options;
-    var values = [];
-    var texts = [];
+    const dispatch = d3_dispatch('change');
+    let options = field.options;
+    let values = [];
+    let texts = [];
 
-    var _tags;
+    let _tags;
 
-    var input = d3_select(null);
-    var text = d3_select(null);
-    var label = d3_select(null);
-    var reverser = d3_select(null);
+    let input = d3_select(null);
+    let text = d3_select(null);
+    let label = d3_select(null);
+    let reverser = d3_select(null);
 
-    var _impliedYes;
-    var _entityIDs = [];
-    var _value;
+    let _impliedYes;
+    let _entityIDs = [];
+    let _value;
 
 
-    var stringsField = field.resolveReference('stringsCrossReference');
+    const stringsField = field.resolveReference('stringsCrossReference');
     if (!options && stringsField.options) {
         options = stringsField.options;
     }
 
     if (options) {
-        for (var i in options) {
-            var v = options[i];
+        for (const i in options) {
+            const v = options[i];
             values.push(v === 'undefined' ? undefined : v);
             texts.push(stringsField.t.html('options.' + v, { 'default': v }));
         }
@@ -59,7 +59,7 @@ export function uiFieldCheck(field, context) {
         // hack: pretend `oneway` field is a `oneway_yes` field
         // where implied oneway tag exists (e.g. `junction=roundabout`) #2220, #1841
         if (field.id === 'oneway') {
-            var entity = context.entity(_entityIDs[0]);
+            const entity = context.entity(_entityIDs[0]);
             if (entity.type === 'way' && entity.isOneWay()) {
                 _impliedYes = true;
                 texts[0] = t.html('_tagging.presets.fields.oneway_yes.options.undefined');
@@ -75,13 +75,13 @@ export function uiFieldCheck(field, context) {
 
 
     function reverserSetText(selection) {
-        var entity = _entityIDs.length && context.hasEntity(_entityIDs[0]);
+        const entity = _entityIDs.length && context.hasEntity(_entityIDs[0]);
         if (reverserHidden() || !entity) return selection;
 
-        var first = entity.first();
-        var last = entity.isClosed() ? entity.nodes[entity.nodes.length - 2] : entity.last();
-        var pseudoDirection = first < last;
-        var icon = pseudoDirection ? '#iD-icon-forward' : '#iD-icon-backward';
+        const first = entity.first();
+        const last = entity.isClosed() ? entity.nodes[entity.nodes.length - 2] : entity.last();
+        const pseudoDirection = first < last;
+        const icon = pseudoDirection ? '#iD-icon-forward' : '#iD-icon-backward';
 
         selection.selectAll('.reverser-span')
             .html('')
@@ -92,13 +92,13 @@ export function uiFieldCheck(field, context) {
     }
 
 
-    var check = function(selection) {
+    const check = function(selection) {
         checkImpliedYes();
 
         label = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
-        var enter = label.enter()
+        const enter = label.enter()
             .append('label')
             .attr('class', 'form-field-input-wrap form-field-input-check');
 
@@ -128,7 +128,7 @@ export function uiFieldCheck(field, context) {
         input
             .on('click', function(d3_event) {
                 d3_event.stopPropagation();
-                var t = {};
+                const t = {};
 
                 if (Array.isArray(_tags[field.key])) {
                     if (values.indexOf('yes') !== -1) {
@@ -159,7 +159,7 @@ export function uiFieldCheck(field, context) {
                     d3_event.stopPropagation();
                     context.perform(
                         function(graph) {
-                            for (var i in _entityIDs) {
+                            for (const i in _entityIDs) {
                                 graph = actionReverse(_entityIDs[i])(graph);
                             }
                             return graph;
@@ -194,13 +194,13 @@ export function uiFieldCheck(field, context) {
 
         function textFor(val) {
             if (val === '') val = undefined;
-            var index = values.indexOf(val);
+            const index = values.indexOf(val);
             return (index !== -1 ? texts[index] : ('"' + val + '"'));
         }
 
         checkImpliedYes();
 
-        var isMixed = Array.isArray(tags[field.key]);
+        const isMixed = Array.isArray(tags[field.key]);
 
         _value = !isMixed && tags[field.key] && tags[field.key].toLowerCase();
 

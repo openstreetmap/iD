@@ -11,15 +11,15 @@ import { uiSection } from '../section';
 export function uiSectionEntityIssues(context) {
     // Does the user prefer to expand the active issue?  Useful for viewing tag diff.
     // Expand by default so first timers see it - #6408, #8143
-    var preference = prefs('entity-issues.reference.expanded');
-    var _expanded = preference === null ? true : (preference === 'true');
+    const preference = prefs('entity-issues.reference.expanded');
+    let _expanded = preference === null ? true : (preference === 'true');
 
-    var _entityIDs = [];
-    var _issues = [];
-    var _activeIssueID;
+    let _entityIDs = [];
+    let _issues = [];
+    let _activeIssueID;
 
 
-    var section = uiSection('entity-issues', context)
+    const section = uiSection('entity-issues', context)
         .shouldDisplay(function() {
             return _issues.length > 0;
         })
@@ -54,7 +54,7 @@ export function uiSectionEntityIssues(context) {
 
         _activeIssueID = _issues.length > 0 ? _issues[0].id : null;
 
-        var containers = selection.selectAll('.issue-container')
+        let containers = selection.selectAll('.issue-container')
             .data(_issues, function(d) { return d.key; });
 
         // Exit
@@ -62,49 +62,49 @@ export function uiSectionEntityIssues(context) {
             .remove();
 
         // Enter
-        var containersEnter = containers.enter()
+        const containersEnter = containers.enter()
             .append('div')
             .attr('class', 'issue-container');
 
 
-        var itemsEnter = containersEnter
+        const itemsEnter = containersEnter
             .append('div')
             .attr('class', function(d) { return 'issue severity-' + d.severity; })
             .on('mouseover.highlight', function(d3_event, d) {
                 // don't hover-highlight the selected entity
-                var ids = d.entityIds
+                const ids = d.entityIds
                     .filter(function(e) { return _entityIDs.indexOf(e) === -1; });
 
                 utilHighlightEntities(ids, true, context);
             })
             .on('mouseout.highlight', function(d3_event, d) {
-                var ids = d.entityIds
+                const ids = d.entityIds
                     .filter(function(e) { return _entityIDs.indexOf(e) === -1; });
 
                 utilHighlightEntities(ids, false, context);
             });
 
-        var labelsEnter = itemsEnter
+        const labelsEnter = itemsEnter
             .append('div')
             .attr('class', 'issue-label');
 
-        var textEnter = labelsEnter
+        const textEnter = labelsEnter
             .append('button')
             .attr('class', 'issue-text')
             .on('click', function(d3_event, d) {
 
                 makeActiveIssue(d.id); // expand only the clicked item
 
-                var extent = d.extent(context.graph());
+                const extent = d.extent(context.graph());
                 if (extent) {
-                    var setZoom = Math.max(context.map().zoom(), 19);
+                    const setZoom = Math.max(context.map().zoom(), 19);
                     context.map().unobscuredCenterZoomEase(extent.center(), setZoom);
                 }
             });
 
         textEnter
             .each(function(d) {
-                var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
+                const iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
                 d3_select(this)
                     .call(svgIcon(iconName, 'issue-icon'));
             });
@@ -114,7 +114,7 @@ export function uiSectionEntityIssues(context) {
             .attr('class', 'issue-message');
 
 
-        var infoButton = labelsEnter
+        const infoButton = labelsEnter
             .append('button')
             .attr('class', 'issue-info-button')
             .attr('title', t('icons.information'))
@@ -126,9 +126,9 @@ export function uiSectionEntityIssues(context) {
                 d3_event.preventDefault();
                 this.blur();    // avoid keeping focus on the button - #4641
 
-                var container = d3_select(this.parentNode.parentNode.parentNode);
-                var info = container.selectAll('.issue-info');
-                var isExpanded = info.classed('expanded');
+                const container = d3_select(this.parentNode.parentNode.parentNode);
+                const info = container.selectAll('.issue-info');
+                const isExpanded = info.classed('expanded');
                 _expanded = !isExpanded;
                 prefs('entity-issues.reference.expanded', _expanded);  // update preference
 
@@ -186,19 +186,19 @@ export function uiSectionEntityIssues(context) {
             });
 
         // fixes
-        var fixLists = containers.selectAll('.issue-fix-list');
+        const fixLists = containers.selectAll('.issue-fix-list');
 
-        var fixes = fixLists.selectAll('.issue-fix-item')
+        const fixes = fixLists.selectAll('.issue-fix-item')
             .data(function(d) { return d.fixes ? d.fixes(context) : []; }, function(fix) { return fix.id; });
 
         fixes.exit()
             .remove();
 
-        var fixesEnter = fixes.enter()
+        const fixesEnter = fixes.enter()
             .append('li')
             .attr('class', 'issue-fix-item');
 
-        var buttons = fixesEnter
+        const buttons = fixesEnter
             .append('button')
             .on('click', function(d3_event, d) {
                 // not all fixes are actionable
@@ -233,7 +233,7 @@ export function uiSectionEntityIssues(context) {
 
         buttons
             .each(function(d) {
-                var iconName = d.icon || 'iD-icon-wrench';
+                let iconName = d.icon || 'iD-icon-wrench';
                 if (iconName.startsWith('maki')) {
                     iconName += '-15';
                 }

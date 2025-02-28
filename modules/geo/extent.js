@@ -104,8 +104,8 @@ Object.assign(geoExtent.prototype, {
 
     percentContainedIn: function(obj) {
         if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
-        var a1 = this.intersection(obj).area();
-        var a2 = this.area();
+        const a1 = this.intersection(obj).area();
+        const a2 = this.area();
 
         if (a1 === Infinity || a2 === Infinity) {
             return 0;
@@ -121,8 +121,8 @@ Object.assign(geoExtent.prototype, {
 
 
     padByMeters: function(meters) {
-        var dLat = geoMetersToLat(meters);
-        var dLon = geoMetersToLon(meters, this.center()[1]);
+        const dLat = geoMetersToLat(meters);
+        const dLon = geoMetersToLon(meters, this.center()[1]);
         return geoExtent(
             [this[0][0] - dLon, this[0][1] - dLat],
             [this[1][0] + dLon, this[1][1] + dLat]

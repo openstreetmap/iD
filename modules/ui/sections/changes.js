@@ -17,27 +17,27 @@ import {
 
 
 export function uiSectionChanges(context) {
-    var _discardTags = {};
+    let _discardTags = {};
     fileFetcher.get('discarded')
         .then(function(d) { _discardTags = d; })
         .catch(function() { /* ignore */ });
 
-    var section = uiSection('changes-list', context)
+    const section = uiSection('changes-list', context)
         .label(function() {
-            var history = context.history();
-            var summary = history.difference().summary();
+            const history = context.history();
+            const summary = history.difference().summary();
             return t.append('inspector.title_count', { title: t('commit.changes'), count: summary.length });
         })
         .disclosureContent(renderDisclosureContent);
 
     function renderDisclosureContent(selection) {
-        var history = context.history();
-        var summary = history.difference().summary();
+        const history = context.history();
+        const summary = history.difference().summary();
 
-        var container = selection.selectAll('.commit-section')
+        let container = selection.selectAll('.commit-section')
             .data([0]);
 
-        var containerEnter = container.enter()
+        const containerEnter = container.enter()
             .append('div')
             .attr('class', 'commit-section');
 
@@ -49,14 +49,14 @@ export function uiSectionChanges(context) {
             .merge(container);
 
 
-        var items = container.select('ul').selectAll('li')
+        let items = container.select('ul').selectAll('li')
             .data(summary);
 
-        var itemsEnter = items.enter()
+        const itemsEnter = items.enter()
             .append('li')
             .attr('class', 'change-item');
 
-        var buttons = itemsEnter
+        const buttons = itemsEnter
             .append('button')
             .on('mouseover', mouseover)
             .on('mouseout', mouseout)
@@ -77,7 +77,7 @@ export function uiSectionChanges(context) {
             .append('strong')
             .attr('class', 'entity-type')
             .text(function(d) {
-                var matched = presetManager.match(d.entity, d.graph);
+                const matched = presetManager.match(d.entity, d.graph);
                 return (matched && matched.name()) || utilDisplayType(d.entity.id);
             });
 
@@ -85,8 +85,8 @@ export function uiSectionChanges(context) {
             .append('span')
             .attr('class', 'entity-name')
             .text(function(d) {
-                var name = utilDisplayName(d.entity) || '',
-                    string = '';
+                const name = utilDisplayName(d.entity) || '';
+                let string = '';
                 if (name !== '') {
                     string += ':';
                 }
@@ -98,16 +98,16 @@ export function uiSectionChanges(context) {
 
 
         // Download changeset link
-        var changeset = new osmChangeset().update({ id: undefined });
-        var changes = history.changes(actionDiscardTags(history.difference(), _discardTags));
+        const changeset = new osmChangeset().update({ id: undefined });
+        const changes = history.changes(actionDiscardTags(history.difference(), _discardTags));
 
         delete changeset.id;  // Export without chnageset_id
 
-        var data = JXON.stringify(changeset.osmChangeJXON(changes));
-        var blob = new Blob([data], {type: 'text/xml;charset=utf-8;'});
-        var fileName = 'changes.osc';
+        const data = JXON.stringify(changeset.osmChangeJXON(changes));
+        const blob = new Blob([data], {type: 'text/xml;charset=utf-8;'});
+        const fileName = 'changes.osc';
 
-        var linkEnter = container.selectAll('.download-changes')
+        const linkEnter = container.selectAll('.download-changes')
             .data([0])
             .enter()
             .append('a')
@@ -140,7 +140,7 @@ export function uiSectionChanges(context) {
 
         function click(d3_event, change) {
             if (change.changeType !== 'deleted') {
-                var entity = change.entity;
+                const entity = change.entity;
                 context.map().zoomToEase(entity);
                 context.surface().selectAll(utilEntityOrMemberSelector([entity.id], context.graph()))
                     .classed('hover', true);

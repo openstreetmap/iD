@@ -9,19 +9,19 @@ import { uiTooltip } from '../tooltip';
 
 export function uiToolSave(context) {
 
-    var tool = {
+    const tool = {
         id: 'save',
         label: t.append('save.title')
     };
 
-    var button = null;
-    var tooltipBehavior = null;
-    var history = context.history();
-    var key = uiCmd('⌘S');
-    var _numChanges = 0;
+    let button = null;
+    let tooltipBehavior = null;
+    const history = context.history();
+    const key = uiCmd('⌘S');
+    let _numChanges = 0;
 
     function isSaving() {
-        var mode = context.mode();
+        const mode = context.mode();
         return mode && mode.id === 'save';
     }
 
@@ -37,7 +37,7 @@ export function uiToolSave(context) {
     }
 
     function bgColor(numChanges) {
-        var step;
+        let step;
         if (numChanges === 0) {
             return null;
         } else if (numChanges <= 50) {
@@ -50,7 +50,7 @@ export function uiToolSave(context) {
     }
 
     function updateCount() {
-        var val = history.difference().summary().length;
+        const val = history.difference().summary().length;
         if (val === _numChanges) return;
 
         _numChanges = val;
@@ -79,7 +79,7 @@ export function uiToolSave(context) {
             .keys([key])
             .scrollContainer(context.container().select('.top-toolbar'));
 
-        var lastPointerUpType;
+        let lastPointerUpType;
 
         button = selection
             .append('button')

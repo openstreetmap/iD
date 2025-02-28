@@ -20,7 +20,7 @@ export function validationIssue(attrs) {
     // A unique, deterministic string hash.
     // Issues with identical id values are considered identical.
     function generateID() {
-        var parts = [this.type];
+        const parts = [this.type];
 
         if (this.hash) {   // subclasses can pass in their own differentiator
             parts.push(this.hash);
@@ -33,7 +33,7 @@ export function validationIssue(attrs) {
         // include the entities this issue is for
         // (sort them so the id is deterministic)
         if (this.entityIds) {
-            var entityKeys = this.entityIds.slice().sort();
+            const entityKeys = this.entityIds.slice().sort();
             parts.push.apply(parts, entityKeys);
         }
 
@@ -60,8 +60,8 @@ export function validationIssue(attrs) {
     };
 
     this.fixes = function(context) {
-        var fixes = this.dynamicFixes ? this.dynamicFixes(context) : [];
-        var issue = this;
+        const fixes = this.dynamicFixes ? this.dynamicFixes(context) : [];
+        const issue = this;
 
         if (issue.severity === 'warning') {
             // allow ignoring any issue that's not an error

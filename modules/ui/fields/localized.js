@@ -12,18 +12,18 @@ import { uiCombobox } from '../combobox';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUniqueDomId } from '../../util';
 import { uiLengthIndicator } from '../length_indicator';
 
-var _languagesArray = [];
+const _languagesArray = [];
 
 export const LANGUAGE_SUFFIX_REGEX = /^(.*):([a-z]{2,3}(?:-[A-Z][a-z]{3})?(?:-[A-Z]{2})?)$/;
 
 export function uiFieldLocalized(field, context) {
-    var dispatch = d3_dispatch('change', 'input');
-    var wikipedia = services.wikipedia;
-    var input = d3_select(null);
-    var localizedInputs = d3_select(null);
-    var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
-    var _countryCode;
-    var _tags;
+    const dispatch = d3_dispatch('change', 'input');
+    const wikipedia = services.wikipedia;
+    let input = d3_select(null);
+    let localizedInputs = d3_select(null);
+    const _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
+    let _countryCode;
+    let _tags;
 
 
     // A concern here in switching to async data means that _languagesArray will not
@@ -33,37 +33,37 @@ export function uiFieldLocalized(field, context) {
         .then(loadLanguagesArray)
         .catch(function() { /* ignore */ });
 
-    var _territoryLanguages = {};
+    let _territoryLanguages = {};
     fileFetcher.get('territory_languages')
         .then(function(d) { _territoryLanguages = d; })
         .catch(function() { /* ignore */ });
 
     // reuse these combos
-    var langCombo = uiCombobox(context, 'localized-lang')
+    const langCombo = uiCombobox(context, 'localized-lang')
         .fetcher(fetchLanguages)
         .minItems(0);
 
-    var _selection = d3_select(null);
-    var _multilingual = [];
-    var _buttonTip = uiTooltip()
+    let _selection = d3_select(null);
+    let _multilingual = [];
+    const _buttonTip = uiTooltip()
         .title(() => t.append('translate.translate'))
         .placement('left');
-    var _wikiTitles;
-    var _entityIDs = [];
+    let _wikiTitles;
+    let _entityIDs = [];
 
 
     function loadLanguagesArray(dataLanguages) {
         if (_languagesArray.length !== 0) return;
 
         // some conversion is needed to ensure correct OSM tags are used
-        var replacements = {
+        const replacements = {
             sr: 'sr-Cyrl',      // in OSM, `sr` implies Cyrillic
             'sr-Cyrl': false    // `sr-Cyrl` isn't used in OSM
         };
 
-        for (var code in dataLanguages) {
+        for (const code in dataLanguages) {
             if (replacements[code] === false) continue;
-            var metaCode = code;
+            let metaCode = code;
             if (replacements[code]) metaCode = replacements[code];
 
             _languagesArray.push({
@@ -78,10 +78,10 @@ export function uiFieldLocalized(field, context) {
 
     function calcLocked() {
         // Protect name field for suggestion presets that don't display a brand/operator field
-        var isLocked = (field.id === 'name') &&
+        const isLocked = (field.id === 'name') &&
             _entityIDs.length &&
             _entityIDs.some(function(entityID) {
-                var entity = context.graph().hasEntity(entityID);
+                const entity = context.graph().hasEntity(entityID);
                 if (!entity) return false;
 
                 // Features linked to Wikidata are likely important and should be protected
@@ -94,15 +94,15 @@ export function uiFieldLocalized(field, context) {
                 // and the preset does not display a `brand` or `operator` field.
                 // (For presets like hotels, car dealerships, post offices, the `name` should remain editable)
                 // see also similar logic in `outdated_tags.js`
-                var preset = presetManager.match(entity, context.graph());
+                const preset = presetManager.match(entity, context.graph());
                 if (preset) {
-                    var isSuggestion = preset.suggestion;
-                    var fields = preset.fields(entity.extent(context.graph()).center());
-                    var showsBrandField = fields.some(function(d) { return d.id === 'brand'; });
-                    var showsOperatorField = fields.some(function(d) { return d.id === 'operator'; });
-                    var setsName = preset.addTags.name;
-                    var setsBrandWikidata = preset.addTags['brand:wikidata'];
-                    var setsOperatorWikidata = preset.addTags['operator:wikidata'];
+                    const isSuggestion = preset.suggestion;
+                    const fields = preset.fields(entity.extent(context.graph()).center());
+                    const showsBrandField = fields.some(function(d) { return d.id === 'brand'; });
+                    const showsOperatorField = fields.some(function(d) { return d.id === 'operator'; });
+                    const setsName = preset.addTags.name;
+                    const setsBrandWikidata = preset.addTags['brand:wikidata'];
+                    const setsOperatorWikidata = preset.addTags['operator:wikidata'];
 
                     return (isSuggestion && setsName && (
                         (setsBrandWikidata && !showsBrandField) ||
@@ -119,18 +119,18 @@ export function uiFieldLocalized(field, context) {
 
     // update _multilingual, maintaining the existing order
     function calcMultilingual(tags) {
-        var existingLangsOrdered = _multilingual.map(function(item) {
+        const existingLangsOrdered = _multilingual.map(function(item) {
             return item.lang;
         });
-        var existingLangs = new Set(existingLangsOrdered.filter(Boolean));
+        const existingLangs = new Set(existingLangsOrdered.filter(Boolean));
 
-        for (var k in tags) {
+        for (const k in tags) {
             // matches for field:<code>, where <code> is a BCP 47 locale code
             // motivation is to avoid matching on similarly formatted tags that are
             // not for languages, e.g. name:left, name:source, etc.
-            var m = k.match(LANGUAGE_SUFFIX_REGEX);
+            const m = k.match(LANGUAGE_SUFFIX_REGEX);
             if (m && m[1] === field.key && m[2]) {
-                var item = { lang: m[2], value: tags[k] };
+                const item = { lang: m[2], value: tags[k] };
                 if (existingLangs.has(item.lang)) {
                     // update the value
                     _multilingual[existingLangsOrdered.indexOf(item.lang)].value = item.value;
@@ -154,9 +154,9 @@ export function uiFieldLocalized(field, context) {
     function localized(selection) {
         _selection = selection;
         calcLocked();
-        var isLocked = field.locked();
+        const isLocked = field.locked();
 
-        var wrap = selection.selectAll('.form-field-input-wrap')
+        let wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         // enter/update
@@ -187,7 +187,7 @@ export function uiFieldLocalized(field, context) {
         wrap.call(_lengthIndicator);
 
 
-        var translateButton = wrap.selectAll('.localized-add')
+        let translateButton = wrap.selectAll('.localized-add')
             .data([0]);
 
         translateButton = translateButton.enter()
@@ -228,9 +228,9 @@ export function uiFieldLocalized(field, context) {
             d3_event.preventDefault();
             if (field.locked()) return;
 
-            var defaultLang = localizer.languageCode().toLowerCase();
-            var langExists = _multilingual.find(function(datum) { return datum.lang === defaultLang; });
-            var isLangEn = defaultLang.indexOf('en') > -1;
+            let defaultLang = localizer.languageCode().toLowerCase();
+            let langExists = _multilingual.find(function(datum) { return datum.lang === defaultLang; });
+            const isLangEn = defaultLang.indexOf('en') > -1;
             if (isLangEn || langExists) {
                 defaultLang = '';
                 langExists = _multilingual.find(function(datum) { return datum.lang === defaultLang; });
@@ -253,13 +253,13 @@ export function uiFieldLocalized(field, context) {
                     return;
                 }
 
-                var val = utilGetSetValue(d3_select(this));
+                let val = utilGetSetValue(d3_select(this));
                 if (!onInput) val = context.cleanTagValue(val);
 
                 // don't override multiple values with blank string
                 if (!val && Array.isArray(_tags[field.key])) return;
 
-                var t = {};
+                const t = {};
 
                 t[field.key] = val || undefined;
                 dispatch.call('change', this, t, onInput);
@@ -274,12 +274,12 @@ export function uiFieldLocalized(field, context) {
 
 
     function changeLang(d3_event, d) {
-        var tags = {};
+        const tags = {};
 
         // make sure unrecognized suffixes are lowercase - #7156
-        var lang = utilGetSetValue(d3_select(this)).toLowerCase();
+        let lang = utilGetSetValue(d3_select(this)).toLowerCase();
 
-        var language = _languagesArray.find(function(d) {
+        const language = _languagesArray.find(function(d) {
             return d.label.toLowerCase() === lang ||
                 (d.localName && d.localName.toLowerCase() === lang) ||
                 (d.nativeName && d.nativeName.toLowerCase() === lang);
@@ -290,9 +290,9 @@ export function uiFieldLocalized(field, context) {
             tags[key(d.lang)] = undefined;
         }
 
-        var newKey = lang && context.cleanTagKey(key(lang));
+        const newKey = lang && context.cleanTagKey(key(lang));
 
-        var value = utilGetSetValue(d3_select(this.parentNode).selectAll('.localized-value'));
+        const value = utilGetSetValue(d3_select(this.parentNode).selectAll('.localized-value'));
 
         if (newKey && value) {
             tags[newKey] = value;
@@ -307,12 +307,12 @@ export function uiFieldLocalized(field, context) {
 
     function changeValue(d3_event, d) {
         if (!d.lang) return;
-        var value = context.cleanTagValue(utilGetSetValue(d3_select(this))) || undefined;
+        const value = context.cleanTagValue(utilGetSetValue(d3_select(this))) || undefined;
 
         // don't override multiple values with blank string
         if (!value && Array.isArray(d.value)) return;
 
-        var t = {};
+        const t = {};
         t[key(d.lang)] = value;
         d.value = value;
         dispatch.call('change', this, t);
@@ -320,18 +320,18 @@ export function uiFieldLocalized(field, context) {
 
 
     function fetchLanguages(value, cb) {
-        var v = value.toLowerCase();
+        const v = value.toLowerCase();
 
         // show the user's language first
-        var langCodes = [localizer.localeCode(), localizer.languageCode()];
+        let langCodes = [localizer.localeCode(), localizer.languageCode()];
 
         if (_countryCode && _territoryLanguages[_countryCode]) {
             langCodes = langCodes.concat(_territoryLanguages[_countryCode]);
         }
 
-        var langItems = [];
+        let langItems = [];
         langCodes.forEach(function(code) {
-            var langItem = _languagesArray.find(function(item) {
+            const langItem = _languagesArray.find(function(item) {
                 return item.code === code;
             });
             if (langItem) langItems.push(langItem);
@@ -350,7 +350,7 @@ export function uiFieldLocalized(field, context) {
 
 
     function renderMultilingual(selection) {
-        var entries = selection.selectAll('div.entry')
+        let entries = selection.selectAll('div.entry')
             .data(_multilingual, function(d) { return d.lang; });
 
         entries.exit()
@@ -362,20 +362,20 @@ export function uiFieldLocalized(field, context) {
             .style('max-height', '0px')
             .remove();
 
-        var entriesEnter = entries.enter()
+        const entriesEnter = entries.enter()
             .append('div')
             .attr('class', 'entry')
             .each(function(_, index) {
-                var wrap = d3_select(this);
+                const wrap = d3_select(this);
 
-                var domId = utilUniqueDomId(index);
+                const domId = utilUniqueDomId(index);
 
-                var label = wrap
+                const label = wrap
                     .append('label')
                     .attr('class', 'field-label')
                     .attr('for', domId);
 
-                var text = label
+                const text = label
                     .append('span')
                     .attr('class', 'label-text');
 
@@ -399,11 +399,11 @@ export function uiFieldLocalized(field, context) {
                         // remove the UI item manually
                         _multilingual.splice(_multilingual.indexOf(d), 1);
 
-                        var langKey = d.lang && key(d.lang);
+                        const langKey = d.lang && key(d.lang);
                         if (langKey && langKey in _tags) {
                             delete _tags[langKey];
                             // remove from entity tags
-                            var t = {};
+                            const t = {};
                             t[langKey] = undefined;
                             dispatch.call('change', this, t);
                             return;
@@ -454,7 +454,7 @@ export function uiFieldLocalized(field, context) {
         entries.classed('present', true);
 
         utilGetSetValue(entries.select('.localized-lang'), function(d) {
-            var langItem = _languagesArray.find(function(item) {
+            const langItem = _languagesArray.find(function(item) {
                 return item.code === d.lang;
             });
             if (langItem) return langItem.label;
@@ -485,7 +485,7 @@ export function uiFieldLocalized(field, context) {
         // Fetch translations from wikipedia
         if (typeof tags.wikipedia === 'string' && !_wikiTitles) {
             _wikiTitles = {};
-            var wm = tags.wikipedia.match(/([^:]+):(.+)/);
+            const wm = tags.wikipedia.match(/([^:]+):(.+)/);
             if (wm && wm[0] && wm[1]) {
                 wikipedia.translations(wm[1], wm[2], function(err, d) {
                     if (err || !d) return;
@@ -494,7 +494,7 @@ export function uiFieldLocalized(field, context) {
             }
         }
 
-        var isMixed = Array.isArray(tags[field.key]);
+        const isMixed = Array.isArray(tags[field.key]);
 
         utilGetSetValue(input, typeof tags[field.key] === 'string' ? tags[field.key] : '')
             .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)
@@ -526,8 +526,8 @@ export function uiFieldLocalized(field, context) {
     };
 
     function loadCountryCode() {
-        var extent = combinedEntityExtent();
-        var countryCode = extent && countryCoder.iso1A2Code(extent.center());
+        const extent = combinedEntityExtent();
+        const countryCode = extent && countryCoder.iso1A2Code(extent.center());
         _countryCode = countryCode && countryCode.toLowerCase();
     }
 

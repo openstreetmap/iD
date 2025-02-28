@@ -47,31 +47,31 @@ describe('iD.geo - vector', function() {
 
     describe('geoVecInterp', function() {
         it('interpolates halfway', function() {
-            var a = [0, 0];
-            var b = [10, 10];
+            const a = [0, 0];
+            const b = [10, 10];
             expect(iD.geoVecInterp(a, b, 0.5)).to.eql([5, 5]);
         });
         it('interpolates to one side', function() {
-            var a = [0, 0];
-            var b = [10, 10];
+            const a = [0, 0];
+            const b = [10, 10];
             expect(iD.geoVecInterp(a, b, 0)).to.eql([0, 0]);
         });
     });
 
     describe('geoVecLength (was: geoEuclideanDistance)', function() {
         it('distance between two same points is zero', function() {
-            var a = [0, 0];
-            var b = [0, 0];
+            const a = [0, 0];
+            const b = [0, 0];
             expect(iD.geoVecLength(a, b)).to.eql(0);
         });
         it('a straight 10 unit line is 10', function() {
-            var a = [0, 0];
-            var b = [10, 0];
+            const a = [0, 0];
+            const b = [10, 0];
             expect(iD.geoVecLength(a, b)).to.eql(10);
         });
         it('a pythagorean triangle is right', function() {
-            var a = [0, 0];
-            var b = [4, 3];
+            const a = [0, 0];
+            const b = [4, 3];
             expect(iD.geoVecLength(a, b)).to.eql(5);
         });
     });
@@ -98,49 +98,49 @@ describe('iD.geo - vector', function() {
 
     describe('geoVecDot', function() {
         it('dot product of right angle is zero', function() {
-            var a = [1, 0];
-            var b = [0, 1];
+            const a = [1, 0];
+            const b = [0, 1];
             expect(iD.geoVecDot(a, b)).to.eql(0);
         });
         it('dot product of same vector multiplies', function() {
-            var a = [2, 0];
-            var b = [2, 0];
+            const a = [2, 0];
+            const b = [2, 0];
             expect(iD.geoVecDot(a, b)).to.eql(4);
         });
     });
 
     describe('geoVecNormalizedDot', function() {
         it('normalized dot product of right angle is zero', function() {
-            var a = [2, 0];
-            var b = [0, 2];
+            const a = [2, 0];
+            const b = [0, 2];
             expect(iD.geoVecNormalizedDot(a, b)).to.eql(0);
         });
         it('normalized dot product of same vector multiplies unit vectors', function() {
-            var a = [2, 0];
-            var b = [2, 0];
+            const a = [2, 0];
+            const b = [2, 0];
             expect(iD.geoVecNormalizedDot(a, b)).to.eql(1);
         });
         it('normalized dot product of 45 degrees', function() {
-            var a = [0, 2];
-            var b = [2, 2];
+            const a = [0, 2];
+            const b = [2, 2];
             expect(iD.geoVecNormalizedDot(a, b)).to.be.closeTo(Math.sqrt(2)/2, 1e-6);
         });
     });
 
     describe('geoVecCross', function() {
         it('2D cross product of right hand turn is positive', function() {
-            var a = [2, 0];
-            var b = [0, 2];
+            const a = [2, 0];
+            const b = [0, 2];
             expect(iD.geoVecCross(a, b)).to.eql(4);
         });
         it('2D cross product of left hand turn is negative', function() {
-            var a = [2, 0];
-            var b = [0, -2];
+            const a = [2, 0];
+            const b = [0, -2];
             expect(iD.geoVecCross(a, b)).to.eql(-4);
         });
         it('2D cross product of colinear points is zero', function() {
-            var a = [-2, 0];
-            var b = [2, 0];
+            const a = [-2, 0];
+            const b = [2, 0];
             expect(iD.geoVecCross(a, b)).to.equal(0);
         });
     });
@@ -161,30 +161,30 @@ describe('iD.geo - vector', function() {
             // a --*--- b
             //
             // * = [2, 0]
-            var a = [0, 0];
-            var b = [5, 0];
-            var c = [2, 1];
-            var choice = iD.geoVecProject(c, [a, b]);
+            const a = [0, 0];
+            const b = [5, 0];
+            const c = [2, 1];
+            const choice = iD.geoVecProject(c, [a, b]);
             expect(choice.index).to.eql(1);
             expect(choice.distance).to.eql(1);
             expect(choice.target).to.eql([2, 0]);
         });
 
         it('returns the starting vertex when the orthogonal projection is < 0', function() {
-            var a = [0, 0];
-            var b = [5, 0];
-            var c = [-3, 4];
-            var choice = iD.geoVecProject(c, [a, b]);
+            const a = [0, 0];
+            const b = [5, 0];
+            const c = [-3, 4];
+            const choice = iD.geoVecProject(c, [a, b]);
             expect(choice.index).to.eql(1);
             expect(choice.distance).to.eql(5);
             expect(choice.target).to.eql([0, 0]);
         });
 
         it('returns the ending vertex when the orthogonal projection is > 1', function() {
-            var a = [0, 0];
-            var b = [5, 0];
-            var c = [8, 4];
-            var choice = iD.geoVecProject(c, [a, b]);
+            const a = [0, 0];
+            const b = [5, 0];
+            const c = [8, 4];
+            const choice = iD.geoVecProject(c, [a, b]);
             expect(choice.index).to.eql(1);
             expect(choice.distance).to.eql(5);
             expect(choice.target).to.eql([5, 0]);

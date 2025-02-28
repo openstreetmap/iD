@@ -13,32 +13,34 @@ import { utilSetTransform } from '../util';
 export function uiMapInMap(context) {
 
     function mapInMap(selection) {
-        var backgroundLayer = rendererTileLayer(context)
+        const backgroundLayer = rendererTileLayer(context)
             .underzoom(2);
-        var overlayLayers = {};
-        var projection = geoRawMercator();
-        var dataLayer = svgData(projection, context).showLabels(false);
-        var debugLayer = svgDebug(projection, context);
-        var zoom = d3_zoom()
+        const overlayLayers = {};
+        const projection = geoRawMercator();
+        const dataLayer = svgData(projection, context).showLabels(false);
+        const debugLayer = svgDebug(projection, context);
+        const zoom = d3_zoom()
             .scaleExtent([geoZoomToScale(0.5), geoZoomToScale(24)])
             .on('start', zoomStarted)
             .on('zoom', zoomed)
             .on('end', zoomEnded);
 
-        var wrap = d3_select(null);
-        var tiles = d3_select(null);
-        var viewport = d3_select(null);
+        let wrap = d3_select(null);
+        let tiles = d3_select(null);
+        let viewport = d3_select(null);
 
-        var _isTransformed = false;
-        var _isHidden = true;
-        var _skipEvents = false;
-        var _gesture = null;
-        var _zDiff = 6;    // by default, minimap renders at (main zoom - 6)
-        var _dMini;        // dimensions of minimap
-        var _cMini;        // center pixel of minimap
-        var _tStart;       // transform at start of gesture
-        var _tCurr;        // transform at most recent event
-        var _timeoutID;
+        let _isTransformed = false;
+        let _isHidden = true;
+        let _skipEvents = false;
+        let _gesture = null;
+        let _zDiff = 6;    // by default, minimap renders at (main zoom - 6)
+        let _tStart;       // transform at start of gesture
+        let _tCurr;        // transform at most recent event
+        let _timeoutID;
+
+        // reflow warning: Hardcode dimensions - currently can't resize it anyway..
+        const _dMini = [200,150];                 // dimensions of minimap
+        const _cMini = geoVecScale(_dMini, 0.5);  // center pixel of minimap
 
 
         function zoomStarted() {
@@ -51,11 +53,11 @@ export function uiMapInMap(context) {
         function zoomed(d3_event) {
             if (_skipEvents) return;
 
-            var x = d3_event.transform.x;
-            var y = d3_event.transform.y;
-            var k = d3_event.transform.k;
-            var isZooming = (k !== _tStart.k);
-            var isPanning = (x !== _tStart.x || y !== _tStart.y);
+            const x = d3_event.transform.x;
+            const y = d3_event.transform.y;
+            let k = d3_event.transform.k;
+            const isZooming = (k !== _tStart.k);
+            const isPanning = (x !== _tStart.x || y !== _tStart.y);
 
             if (!isZooming && !isPanning) {
                 return;  // no change
@@ -66,8 +68,8 @@ export function uiMapInMap(context) {
                 _gesture = isZooming ? 'zoom' : 'pan';
             }
 
-            var tMini = projection.transform();
-            var tX, tY, scale;
+            const tMini = projection.transform();
+            let tX, tY, scale;
 
             if (_gesture === 'zoom') {
                 scale = k / tMini.k;
@@ -85,8 +87,8 @@ export function uiMapInMap(context) {
             _isTransformed = true;
             _tCurr = d3_zoomIdentity.translate(x, y).scale(k);
 
-            var zMain = geoScaleToZoom(context.projection.scale());
-            var zMini = geoScaleToZoom(k);
+            const zMain = geoScaleToZoom(context.projection.scale());
+            const zMini = geoScaleToZoom(k);
 
             _zDiff = zMain - zMini;
 
@@ -105,20 +107,20 @@ export function uiMapInMap(context) {
 
 
         function updateProjection() {
-            var loc = context.map().center();
-            var tMain = context.projection.transform();
-            var zMain = geoScaleToZoom(tMain.k);
-            var zMini = Math.max(zMain - _zDiff, 0.5);
-            var kMini = geoZoomToScale(zMini);
+            const loc = context.map().center();
+            const tMain = context.projection.transform();
+            const zMain = geoScaleToZoom(tMain.k);
+            const zMini = Math.max(zMain - _zDiff, 0.5);
+            const kMini = geoZoomToScale(zMini);
 
             projection
                 .translate([tMain.x, tMain.y])
                 .scale(kMini);
 
-            var point = projection(loc);
-            var mouse = (_gesture === 'pan') ? geoVecSubtract([_tCurr.x, _tCurr.y], [_tStart.x, _tStart.y]) : [0, 0];
-            var xMini = _cMini[0] - point[0] + tMain.x + mouse[0];
-            var yMini = _cMini[1] - point[1] + tMain.y + mouse[1];
+            const point = projection(loc);
+            const mouse = (_gesture === 'pan') ? geoVecSubtract([_tCurr.x, _tCurr.y], [_tStart.x, _tStart.y]) : [0, 0];
+            const xMini = _cMini[0] - point[0] + tMain.x + mouse[0];
+            const yMini = _cMini[1] - point[1] + tMain.y + mouse[1];
 
             projection
                 .translate([xMini, yMini])
@@ -146,7 +148,7 @@ export function uiMapInMap(context) {
             if (_isHidden) return;
 
             updateProjection();
-            var zMini = geoScaleToZoom(projection.scale());
+            const zMini = geoScaleToZoom(projection.scale());
 
             // setup tile container
             tiles = wrap
@@ -164,7 +166,7 @@ export function uiMapInMap(context) {
                 .projection(projection)
                 .dimensions(_dMini);
 
-            var background = tiles
+            const background = tiles
                 .selectAll('.map-in-map-background')
                 .data([0]);
 
@@ -176,9 +178,9 @@ export function uiMapInMap(context) {
 
 
             // redraw overlay
-            var overlaySources = context.background().overlayLayerSources();
-            var activeOverlayLayers = [];
-            for (var i = 0; i < overlaySources.length; i++) {
+            const overlaySources = context.background().overlayLayerSources();
+            const activeOverlayLayers = [];
+            for (let i = 0; i < overlaySources.length; i++) {
                 if (overlaySources[i].validZoom(zMini)) {
                     if (!overlayLayers[i]) overlayLayers[i] = rendererTileLayer(context);
                     activeOverlayLayers.push(overlayLayers[i]
@@ -188,7 +190,7 @@ export function uiMapInMap(context) {
                 }
             }
 
-            var overlay = tiles
+            let overlay = tiles
                 .selectAll('.map-in-map-overlay')
                 .data([0]);
 
@@ -198,7 +200,7 @@ export function uiMapInMap(context) {
                 .merge(overlay);
 
 
-            var overlays = overlay
+            let overlays = overlay
                 .selectAll('div')
                 .data(activeOverlayLayers, function(d) { return d.source().name(); });
 
@@ -211,7 +213,7 @@ export function uiMapInMap(context) {
                 .each(function(layer) { d3_select(this).call(layer); });
 
 
-            var dataLayers = tiles
+            let dataLayers = tiles
                 .selectAll('.map-in-map-data')
                 .data([0]);
 
@@ -228,8 +230,8 @@ export function uiMapInMap(context) {
 
             // redraw viewport bounding box
             if (_gesture !== 'pan') {
-                var getPath = d3_geoPath(projection);
-                var bbox = { type: 'Polygon', coordinates: [context.map().extent().polygon()] };
+                const getPath = d3_geoPath(projection);
+                const bbox = { type: 'Polygon', coordinates: [context.map().extent().polygon()] };
 
                 viewport = wrap.selectAll('.map-in-map-viewport')
                     .data([0]);
@@ -240,7 +242,7 @@ export function uiMapInMap(context) {
                     .merge(viewport);
 
 
-                var path = viewport.selectAll('.map-in-map-bbox')
+                const path = viewport.selectAll('.map-in-map-bbox')
                     .data([bbox]);
 
                 path.enter()
@@ -306,10 +308,6 @@ export function uiMapInMap(context) {
             .call(zoom)
             .on('dblclick.zoom', null)
             .merge(wrap);
-
-        // reflow warning: Hardcode dimensions - currently can't resize it anyway..
-        _dMini = [200,150]; //utilGetDimensions(wrap);
-        _cMini = geoVecScale(_dMini, 0.5);
 
         context.map()
             .on('drawn.map-in-map', function(drawn) {

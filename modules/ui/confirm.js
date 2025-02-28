@@ -3,12 +3,12 @@ import { uiModal } from './modal';
 
 
 export function uiConfirm(selection) {
-    var modalSelection = uiModal(selection);
+    const modalSelection = uiModal(selection);
 
     modalSelection.select('.modal')
         .classed('modal-alert', true);
 
-    var section = modalSelection.select('.content');
+    const section = modalSelection.select('.content');
 
     section.append('div')
         .attr('class', 'modal-section header');
@@ -16,7 +16,7 @@ export function uiConfirm(selection) {
     section.append('div')
         .attr('class', 'modal-section message-text');
 
-    var buttons = section.append('div')
+    const buttons = section.append('div')
         .attr('class', 'modal-section buttons cf');
 
 

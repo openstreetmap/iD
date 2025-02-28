@@ -11,40 +11,40 @@ import { svgIcon } from '../svg/icon';
 
 
 export function uiEditMenu(context) {
-    var dispatch = d3_dispatch('toggled');
+    const dispatch = d3_dispatch('toggled');
 
-    var _menu = d3_select(null);
-    var _operations = [];
+    let _menu = d3_select(null);
+    let _operations = [];
     // the position the menu should be displayed relative to
-    var _anchorLoc = [0, 0];
-    var _anchorLocLonLat = [0, 0];
+    let _anchorLoc = [0, 0];
+    let _anchorLocLonLat = [0, 0];
     // a string indicating how the menu was opened
-    var _triggerType = '';
+    let _triggerType = '';
 
-    var _vpTopMargin = 85; // viewport top margin
-    var _vpBottomMargin = 45; // viewport bottom margin
-    var _vpSideMargin = 35;   // viewport side margin
+    const _vpTopMargin = 85; // viewport top margin
+    const _vpBottomMargin = 45; // viewport bottom margin
+    const _vpSideMargin = 35;   // viewport side margin
 
-    var _menuTop = false;
-    var _menuHeight;
-    var _menuWidth;
+    let _menuTop = false;
+    let _menuHeight;
+    let _menuWidth;
 
     // hardcode these values to make menu positioning easier
-    var _verticalPadding = 4;
+    const _verticalPadding = 4;
 
     // see also `.edit-menu .tooltip` CSS; include margin
-    var _tooltipWidth = 210;
+    const _tooltipWidth = 210;
 
     // offset the menu slightly from the target location
-    var _menuSideMargin = 10;
+    const _menuSideMargin = 10;
 
-    var _tooltips = [];
+    let _tooltips = [];
 
-    var editMenu = function(selection) {
+    const editMenu = function(selection) {
 
-        var isTouchMenu = _triggerType.includes('touch') || _triggerType.includes('pen');
+        const isTouchMenu = _triggerType.includes('touch') || _triggerType.includes('pen');
 
-        var ops = _operations.filter(function(op) {
+        const ops = _operations.filter(function(op) {
             return !isTouchMenu || !op.mouseOnly;
         });
 
@@ -57,9 +57,9 @@ export function uiEditMenu(context) {
         _menuTop = isTouchMenu;
 
         // Show labels for touch input since there aren't hover tooltips
-        var showLabels = isTouchMenu;
+        const showLabels = isTouchMenu;
 
-        var buttonHeight = showLabels ? 32 : 34;
+        const buttonHeight = showLabels ? 32 : 34;
         if (showLabels) {
             // Get a general idea of the width based on the length of the label
             _menuWidth = 52 + Math.min(120, 6 * Math.max.apply(Math, ops.map(function(op) {
@@ -77,11 +77,11 @@ export function uiEditMenu(context) {
             .classed('touch-menu', isTouchMenu)
             .style('padding', _verticalPadding + 'px 0');
 
-        var buttons = _menu.selectAll('.edit-menu-item')
+        const buttons = _menu.selectAll('.edit-menu-item')
             .data(ops);
 
         // enter
-        var buttonsEnter = buttons.enter()
+        const buttonsEnter = buttons.enter()
             .append('button')
             .attr('class', function (d) { return 'edit-menu-item edit-menu-item-' + d.id; })
             .style('height', buttonHeight + 'px')
@@ -104,7 +104,7 @@ export function uiEditMenu(context) {
             });
 
         buttonsEnter.each(function(d) {
-            var tooltip = uiTooltip()
+            const tooltip = uiTooltip()
                 .heading(() => d.title)
                 .title(d.tooltip)
                 .keys([d.keys[0]]);
@@ -133,7 +133,7 @@ export function uiEditMenu(context) {
 
         updatePosition();
 
-        var initialScale = context.projection.scale();
+        const initialScale = context.projection.scale();
         context.map()
             .on('move.edit-menu', function() {
                 if (initialScale !== context.projection.scale()) {
@@ -144,7 +144,7 @@ export function uiEditMenu(context) {
                 if (info.full) updatePosition();
             });
 
-        var lastPointerUpType;
+        let lastPointerUpType;
         // `pointerup` is always called before `click`
         function pointerup(d3_event) {
             lastPointerUpType = d3_event.pointerType;
@@ -190,9 +190,9 @@ export function uiEditMenu(context) {
 
         if (!_menu || _menu.empty()) return;
 
-        var anchorLoc = context.projection(_anchorLocLonLat);
+        const anchorLoc = context.projection(_anchorLocLonLat);
 
-        var viewport = context.surfaceRect();
+        const viewport = context.surfaceRect();
 
         if (anchorLoc[0] < 0 ||
             anchorLoc[0] > viewport.width ||
@@ -204,9 +204,9 @@ export function uiEditMenu(context) {
             return;
         }
 
-        var menuLeft = displayOnLeft(viewport);
+        const menuLeft = displayOnLeft(viewport);
 
-        var offset = [0, 0];
+        const offset = [0, 0];
 
         offset[0] = menuLeft ? -1 * (_menuSideMargin + _menuWidth) : _menuSideMargin;
 
@@ -226,16 +226,16 @@ export function uiEditMenu(context) {
             }
         }
 
-        var origin = geoVecAdd(anchorLoc, offset);
+        const origin = geoVecAdd(anchorLoc, offset);
         // repositioning the menu to account for the top menu height
-        var _verticalOffset = parseFloat(utilGetDimensions(d3_select('.top-toolbar-wrap'))[1]);
+        const _verticalOffset = parseFloat(utilGetDimensions(d3_select('.top-toolbar-wrap'))[1]);
         origin[1] -= _verticalOffset;
 
         _menu
             .style('left', origin[0] + 'px')
             .style('top', origin[1] + 'px');
 
-        var tooltipSide = tooltipPosition(viewport, menuLeft);
+        const tooltipSide = tooltipPosition(viewport, menuLeft);
         _tooltips.forEach(function(tooltip) {
             tooltip.placement(tooltipSide);
         });

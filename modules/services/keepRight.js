@@ -94,9 +94,8 @@ function tokenReplacements(d) {
 
   for (let i = 1; i < errorMatch.length; i++) {   // skip first
     let capture = errorMatch[i];
-    let idType;
 
-    idType = 'IDs' in issueTemplate ? issueTemplate.IDs[i-1] : '';
+    const idType = 'IDs' in issueTemplate ? issueTemplate.IDs[i-1] : '';
     if (idType && capture) {   // link IDs if present in the capture
       capture = parseError(capture, idType);
     } else {
@@ -173,12 +172,12 @@ function parseError(capture, idType) {
 
   // arbitrary node list of form: #ID, #ID, #ID...
   function parse211(capture) {
-    let newList = [];
+    const newList = [];
     const items = capture.split(', ');
 
     items.forEach(item => {
       // ID has # at the front
-      let id = linkEntity('n' + item.slice(1));
+      const id = linkEntity('n' + item.slice(1));
       newList.push(id);
     });
 
@@ -187,7 +186,7 @@ function parseError(capture, idType) {
 
   // arbitrary way list of form: #ID(layer),#ID(layer),#ID(layer)...
   function parse231(capture) {
-    let newList = [];
+    const newList = [];
     // unfortunately 'layer' can itself contain commas, so we split on '),'
     const items = capture.split('),');
 
@@ -205,7 +204,7 @@ function parseError(capture, idType) {
 
   // arbitrary node/relation list of form: from node #ID,to relation #ID,to node #ID...
   function parse294(capture) {
-    let newList = [];
+    const newList = [];
     const items = capture.split(',');
 
     items.forEach(item => {
@@ -241,7 +240,7 @@ function parseError(capture, idType) {
 
   // arbitrary node list of form: #ID,#ID,#ID...
   function parse20(capture) {
-    let newList = [];
+    const newList = [];
     const items = capture.split(',');
 
     items.forEach(item => {
@@ -378,13 +377,13 @@ export default {
             let coincident = false;
             do {
               // first time, move marker up. after that, move marker right.
-              let delta = coincident ? [0.00001, 0] : [0, 0.00001];
+              const delta = coincident ? [0.00001, 0] : [0, 0.00001];
               loc = geoVecAdd(loc, delta);
-              let bbox = geoExtent(loc).bbox();
+              const bbox = geoExtent(loc).bbox();
               coincident = _cache.rtree.search(bbox).length;
             } while (coincident);
 
-            let d = new QAItem(loc, this, itemType, id, {
+            const d = new QAItem(loc, this, itemType, id, {
               comment,
               description,
               whichType,

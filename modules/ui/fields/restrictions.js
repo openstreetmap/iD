@@ -15,25 +15,25 @@ import { utilGetDimensions, utilSetDimensions } from '../../util/dimensions';
 
 
 export function uiFieldRestrictions(field, context) {
-    var dispatch = d3_dispatch('change');
-    var breathe = behaviorBreathe(context);
+    const dispatch = d3_dispatch('change');
+    const breathe = behaviorBreathe(context);
 
     prefs('turn-restriction-via-way', null);                 // remove old key
-    var storedViaWay = prefs('turn-restriction-via-way0');   // use new key #6922
-    var storedDistance = prefs('turn-restriction-distance');
+    const storedViaWay = prefs('turn-restriction-via-way0');   // use new key #6922
+    const storedDistance = prefs('turn-restriction-distance');
 
-    var _maxViaWay = storedViaWay !== null ? (+storedViaWay) : 0;
-    var _maxDistance = storedDistance ? (+storedDistance) : 30;
-    var _initialized = false;
-    var _parent = d3_select(null);       // the entire field
-    var _container = d3_select(null);    // just the map
-    var _oldTurns;
-    var _graph;
-    var _vertexID;
-    var _intersection;
-    var _fromWayID;
+    let _maxViaWay = storedViaWay !== null ? (+storedViaWay) : 0;
+    let _maxDistance = storedDistance ? (+storedDistance) : 30;
+    let _initialized = false;
+    let _parent = d3_select(null);       // the entire field
+    let _container = d3_select(null);    // just the map
+    let _oldTurns;
+    let _graph;
+    let _vertexID;
+    let _intersection;
+    let _fromWayID;
 
-    var _lastXPos;
+    let _lastXPos;
 
 
     function restrictions(selection) {
@@ -48,7 +48,7 @@ export function uiFieldRestrictions(field, context) {
         // It's possible for there to be no actual intersection here.
         // for example, a vertex of two `highway=path`
         // In this case, hide the field.
-        var isOK = (
+        const isOK = (
             _intersection &&
             _intersection.vertices.length &&           // has vertices
             _intersection.vertices                     // has the vertex that the user selected
@@ -69,7 +69,7 @@ export function uiFieldRestrictions(field, context) {
         }
 
 
-        var wrap = selection.selectAll('.form-field-input-wrap')
+        let wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
@@ -77,11 +77,11 @@ export function uiFieldRestrictions(field, context) {
             .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
-        var container = wrap.selectAll('.restriction-container')
+        const container = wrap.selectAll('.restriction-container')
             .data([0]);
 
         // enter
-        var containerEnter = container.enter()
+        const containerEnter = container.enter()
             .append('div')
             .attr('class', 'restriction-container');
 
@@ -94,7 +94,7 @@ export function uiFieldRestrictions(field, context) {
             .merge(container)
             .call(renderViewer);
 
-        var controls = wrap.selectAll('.restriction-controls')
+        const controls = wrap.selectAll('.restriction-controls')
             .data([0]);
 
         // enter/update
@@ -109,13 +109,13 @@ export function uiFieldRestrictions(field, context) {
 
 
     function renderControls(selection) {
-        var distControl = selection.selectAll('.restriction-distance')
+        const distControl = selection.selectAll('.restriction-distance')
             .data([0]);
 
         distControl.exit()
             .remove();
 
-        var distControlEnter = distControl.enter()
+        const distControlEnter = distControl.enter()
             .append('div')
             .attr('class', 'restriction-control restriction-distance');
 
@@ -140,7 +140,7 @@ export function uiFieldRestrictions(field, context) {
         selection.selectAll('.restriction-distance-input')
             .property('value', _maxDistance)
             .on('input', function() {
-                var val = d3_select(this).property('value');
+                const val = d3_select(this).property('value');
                 _maxDistance = +val;
                 _intersection = null;
                 _container.selectAll('.layer-osm .layer-turns *').remove();
@@ -152,13 +152,13 @@ export function uiFieldRestrictions(field, context) {
             .call(displayMaxDistance(_maxDistance));
 
 
-        var viaControl = selection.selectAll('.restriction-via-way')
+        const viaControl = selection.selectAll('.restriction-via-way')
             .data([0]);
 
         viaControl.exit()
             .remove();
 
-        var viaControlEnter = viaControl.enter()
+        const viaControlEnter = viaControl.enter()
             .append('div')
             .attr('class', 'restriction-control restriction-via-way');
 
@@ -183,7 +183,7 @@ export function uiFieldRestrictions(field, context) {
         selection.selectAll('.restriction-via-way-input')
             .property('value', _maxViaWay)
             .on('input', function() {
-                var val = d3_select(this).property('value');
+                const val = d3_select(this).property('value');
                 _maxViaWay = +val;
                 _container.selectAll('.layer-osm .layer-turns *').remove();
                 prefs('turn-restriction-via-way0', _maxViaWay);
@@ -198,9 +198,9 @@ export function uiFieldRestrictions(field, context) {
     function renderViewer(selection) {
         if (!_intersection) return;
 
-        var vgraph = _intersection.graph;
-        var filter = utilFunctor(true);
-        var projection = geoRawMercator();
+        const vgraph = _intersection.graph;
+        const filter = utilFunctor(true);
+        const projection = geoRawMercator();
 
         // Reflow warning: `utilGetDimensions` calls `getBoundingClientRect`
         // Instead of asking the restriction-container for its dimensions,
@@ -208,53 +208,53 @@ export function uiFieldRestrictions(field, context) {
         // width: calc as sidebar - padding
         // height: hardcoded (from `80_app.css`)
         // var d = utilGetDimensions(selection);
-        var sdims = utilGetDimensions(context.container().select('.sidebar'));
-        var d = [ sdims[0] - 50, 370 ];
-        var c = geoVecScale(d, 0.5);
-        var z = 22;
+        const sdims = utilGetDimensions(context.container().select('.sidebar'));
+        const d = [ sdims[0] - 50, 370 ];
+        const c = geoVecScale(d, 0.5);
+        let z = 22;
 
         projection.scale(geoZoomToScale(z));
 
         // Calculate extent of all key vertices
-        var extent = geoExtent();
-        for (var i = 0; i < _intersection.vertices.length; i++) {
+        const extent = geoExtent();
+        for (let i = 0; i < _intersection.vertices.length; i++) {
             extent._extend(_intersection.vertices[i].extent());
         }
 
-        var padTop = 35; // reserve top space for hint text
+        const padTop = 35; // reserve top space for hint text
 
         // If this is a large intersection, adjust zoom to fit extent
         if (_intersection.vertices.length > 1) {
-            var hPadding = Math.min(160, Math.max(110, d[0] * 0.4));
-            var vPadding = 160;
-            var tl = projection([extent[0][0], extent[1][1]]);
-            var br = projection([extent[1][0], extent[0][1]]);
-            var hFactor = (br[0] - tl[0]) / (d[0] - hPadding);
-            var vFactor = (br[1] - tl[1]) / (d[1] - vPadding - padTop);
-            var hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2;
-            var vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2;
+            const hPadding = Math.min(160, Math.max(110, d[0] * 0.4));
+            const vPadding = 160;
+            const tl = projection([extent[0][0], extent[1][1]]);
+            const br = projection([extent[1][0], extent[0][1]]);
+            const hFactor = (br[0] - tl[0]) / (d[0] - hPadding);
+            const vFactor = (br[1] - tl[1]) / (d[1] - vPadding - padTop);
+            const hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2;
+            const vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2;
             z = z - Math.max(hZoomDiff, vZoomDiff);
             projection.scale(geoZoomToScale(z));
         }
 
-        var extentCenter = projection(extent.center());
+        const extentCenter = projection(extent.center());
         extentCenter[1] = extentCenter[1] - padTop / 2;
 
         projection
             .translate(geoVecSubtract(c, extentCenter))
             .clipExtent([[0, 0], d]);
 
-        var drawLayers = svgLayers(projection, context).only(['osm','touch']).dimensions(d);
-        var drawVertices = svgVertices(projection, context);
-        var drawLines = svgLines(projection, context);
-        var drawTurns = svgTurns(projection, context);
+        const drawLayers = svgLayers(projection, context).only(['osm','touch']).dimensions(d);
+        const drawVertices = svgVertices(projection, context);
+        const drawLines = svgLines(projection, context);
+        const drawTurns = svgTurns(projection, context);
 
-        var firstTime = selection.selectAll('.surface').empty();
+        const firstTime = selection.selectAll('.surface').empty();
 
         selection
             .call(drawLayers);
 
-        var surface = selection.selectAll('.surface')
+        const surface = selection.selectAll('.surface')
             .classed('tr', true);
 
         if (firstTime) {
@@ -289,7 +289,7 @@ export function uiFieldRestrictions(field, context) {
             .selectAll('.related')
             .classed('related', false);
 
-        var way;
+        let way;
         if (_fromWayID) {
             way = vgraph.entity(_fromWayID);
             surface
@@ -311,8 +311,8 @@ export function uiFieldRestrictions(field, context) {
                 .call(breathe.off)
                 .call(breathe);
 
-            var datum = d3_event.target.__data__;
-            var entity = datum && datum.properties && datum.properties.entity;
+            let datum = d3_event.target.__data__;
+            const entity = datum && datum.properties && datum.properties.entity;
             if (entity) {
                 datum = entity;
             }
@@ -323,15 +323,15 @@ export function uiFieldRestrictions(field, context) {
                 redraw();
 
             } else if (datum instanceof osmTurn) {
-                var actions, extraActions, turns, i;
-                var restrictionType = osmInferRestriction(vgraph, datum, projection);
+                let actions, extraActions, turns, i;
+                let restrictionType = osmInferRestriction(vgraph, datum, projection);
 
                 if (datum.restrictionID && !datum.direct) {
                     return;
 
                 } else if (datum.restrictionID && !datum.only) {    // NO -> ONLY
-                    var seen = {};
-                    var datumOnly = JSON.parse(JSON.stringify(datum));   // deep clone the datum
+                    const seen = {};
+                    const datumOnly = JSON.parse(JSON.stringify(datum));   // deep clone the datum
                     datumOnly.only = true;                               // but change this property
                     restrictionType = restrictionType.replace(/^no/, 'only');
 
@@ -341,7 +341,7 @@ export function uiFieldRestrictions(field, context) {
                     extraActions = [];
                     _oldTurns = [];
                     for (i = 0; i < turns.length; i++) {
-                        var turn = turns[i];
+                        const turn = turns[i];
                         if (seen[turn.restrictionID]) continue;  // avoid deleting the turn twice (#4968, #4928)
 
                         if (turn.direct && turn.path[1] === datum.path[1]) {
@@ -386,7 +386,7 @@ export function uiFieldRestrictions(field, context) {
 
                 // At this point the datum will be changed, but will have same key..
                 // Refresh it and update the help..
-                var s = surface.selectAll('.' + datum.key);
+                const s = surface.selectAll('.' + datum.key);
                 datum = s.empty() ? null : s.datum();
                 updateHints(datum);
 
@@ -399,14 +399,14 @@ export function uiFieldRestrictions(field, context) {
 
 
         function mouseover(d3_event) {
-            var datum = d3_event.target.__data__;
+            const datum = d3_event.target.__data__;
             updateHints(datum);
         }
 
         _lastXPos = _lastXPos || sdims[0];
 
         function redraw(minChange) {
-            var xPos = -1;
+            let xPos = -1;
 
             if (minChange) {
                 xPos = utilGetDimensions(context.container().select('.sidebar'))[0];
@@ -432,11 +432,11 @@ export function uiFieldRestrictions(field, context) {
                 .classed('related', true);
 
             if (wayID) {
-                var turns = _intersection.turns(wayID, _maxViaWay);
-                for (var i = 0; i < turns.length; i++) {
-                    var turn = turns[i];
-                    var ids = [turn.to.way];
-                    var klass = (turn.no ? 'restrict' : (turn.only ? 'only' : 'allow'));
+                const turns = _intersection.turns(wayID, _maxViaWay);
+                for (let i = 0; i < turns.length; i++) {
+                    const turn = turns[i];
+                    let ids = [turn.to.way];
+                    const klass = (turn.no ? 'restrict' : (turn.only ? 'only' : 'allow'));
 
                     if (turn.only || turns.length === 1) {
                         if (turn.via.ways) {
@@ -457,14 +457,14 @@ export function uiFieldRestrictions(field, context) {
 
 
         function updateHints(datum) {
-            var help = _container.selectAll('.restriction-help').html('');
+            const help = _container.selectAll('.restriction-help').html('');
 
-            var placeholders = {};
+            const placeholders = {};
             ['from', 'via', 'to'].forEach(function(k) {
                 placeholders[k] = { html: '<span class="qualifier">' + t('restriction.help.' + k) + '</span>' };
             });
 
-            var entity = datum && datum.properties && datum.properties.entity;
+            const entity = datum && datum.properties && datum.properties.entity;
             if (entity) {
                 datum = entity;
             }
@@ -485,7 +485,7 @@ export function uiFieldRestrictions(field, context) {
                 surface.selectAll('.' + way.id)
                     .classed('related', true);
 
-                var clickSelect = (!_fromWayID || _fromWayID !== way.id);
+                const clickSelect = (!_fromWayID || _fromWayID !== way.id);
                 help
                     .append('div')      // "Click to select FROM {fromName}." / "FROM {fromName}"
                     .html(t.html('restriction.help.' + (clickSelect ? 'select_from_name' : 'from_name'), {
@@ -496,10 +496,10 @@ export function uiFieldRestrictions(field, context) {
 
             // Hovering a turn arrow
             } else if (datum instanceof osmTurn) {
-                var restrictionType = osmInferRestriction(vgraph, datum, projection);
-                var turnType = restrictionType.replace(/^(only|no)\_/, '');
-                var indirect = (datum.direct === false ? t.html('restriction.help.indirect') : '');
-                var klass, turnText, nextText;
+                const restrictionType = osmInferRestriction(vgraph, datum, projection);
+                const turnType = restrictionType.replace(/^(only|no)\_/, '');
+                const indirect = (datum.direct === false ? t.html('restriction.help.indirect') : '');
+                let klass, turnText, nextText;
 
                 if (datum.no) {
                     klass = 'restrict';
@@ -530,10 +530,10 @@ export function uiFieldRestrictions(field, context) {
                     }));
 
                 if (datum.via.ways && datum.via.ways.length) {
-                    var names = [];
-                    for (var i = 0; i < datum.via.ways.length; i++) {
-                        var prev = names[names.length - 1];
-                        var curr = displayName(datum.via.ways[i], vgraph);
+                    const names = [];
+                    for (let i = 0; i < datum.via.ways.length; i++) {
+                        const prev = names[names.length - 1];
+                        const curr = displayName(datum.via.ways[i], vgraph);
                         if (!prev || curr !== prev) {
                             // collapse identical names
                             names.push(curr);
@@ -555,7 +555,7 @@ export function uiFieldRestrictions(field, context) {
                 }
 
                 highlightPathsFrom(null);
-                var alongIDs = datum.path.slice();
+                const alongIDs = datum.path.slice();
                 surface.selectAll(utilEntitySelector(alongIDs))
                     .classed('related', true)
                     .classed('allow', (klass === 'allow'))
@@ -588,11 +588,11 @@ export function uiFieldRestrictions(field, context) {
 
     function displayMaxDistance(maxDist) {
         return selection => {
-            var isImperial = !localizer.usesMetric();
-            var opts;
+            const isImperial = !localizer.usesMetric();
+            let opts;
 
             if (isImperial) {
-                var distToFeet = {   // imprecise conversion for prettier display
+                const distToFeet = {   // imprecise conversion for prettier display
                     20: 70, 25: 85, 30: 100, 35: 115, 40: 130, 45: 145, 50: 160
                 }[maxDist];
                 opts = { distance: t('units.feet', { quantity: distToFeet }) };
@@ -618,10 +618,10 @@ export function uiFieldRestrictions(field, context) {
 
 
     function displayName(entityID, graph) {
-        var entity = graph.entity(entityID);
-        var name = utilDisplayName(entity) || '';
-        var matched = presetManager.match(entity, graph);
-        var type = (matched && matched.name()) || utilDisplayType(entity.id);
+        const entity = graph.entity(entityID);
+        const name = utilDisplayName(entity) || '';
+        const matched = presetManager.match(entity, graph);
+        const type = (matched && matched.name()) || utilDisplayType(entity.id);
         return name || type;
     }
 

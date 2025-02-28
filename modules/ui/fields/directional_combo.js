@@ -6,12 +6,12 @@ import { uiFieldCombo } from './combo';
 
 
 export function uiFieldDirectionalCombo(field, context) {
-    var dispatch = d3_dispatch('change');
-    var items = d3_select(null);
-    var wrap = d3_select(null);
-    var _tags;
+    const dispatch = d3_dispatch('change');
+    let items = d3_select(null);
+    let wrap = d3_select(null);
+    let _tags;
 
-    var _combos = {};
+    const _combos = {};
 
     // fallback for schema-builder v5's cycleway field type: can be removed eventually
     if (field.type === 'cycleway') {
@@ -38,7 +38,7 @@ export function uiFieldDirectionalCombo(field, context) {
             .merge(wrap);
 
 
-        var div = wrap.selectAll('ul')
+        let div = wrap.selectAll('ul')
             .data([0]);
 
         div = div.enter()
@@ -49,7 +49,7 @@ export function uiFieldDirectionalCombo(field, context) {
         items = div.selectAll('li')
             .data(field.keys);
 
-        var enter = items.enter()
+        const enter = items.enter()
             .append('li')
             .attr('class', function(d) { return 'labeled-input preset-directionalcombo-' + stripcolon(d); });
 
@@ -116,7 +116,7 @@ export function uiFieldDirectionalCombo(field, context) {
         _tags = tags;
 
         const commonKey = field.key.replace(/:both$/, '');
-        for (let key in _combos) {
+        for (const key in _combos) {
             const uniqueValues = [... new Set([]
                 .concat(_tags[commonKey])
                 .concat(_tags[`${commonKey}:both`])
@@ -128,7 +128,7 @@ export function uiFieldDirectionalCombo(field, context) {
 
 
     directionalCombo.focus = function() {
-        var node = wrap.selectAll('input').node();
+        const node = wrap.selectAll('input').node();
         if (node) node.focus();
     };
 

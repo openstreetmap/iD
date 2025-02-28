@@ -5,7 +5,7 @@ describe('iD.actionSplit', function () {
             //
             //  a ---> b ---> c         split at 'b' not disabled
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -23,7 +23,7 @@ describe('iD.actionSplit', function () {
             //         |
             //         d
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [-1, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [0, 1] }),
@@ -44,7 +44,7 @@ describe('iD.actionSplit', function () {
             //         |
             //         d
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [-1, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [0, 1] }),
@@ -65,7 +65,7 @@ describe('iD.actionSplit', function () {
             //  | /
             //  a -- b
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [0, 2] }),
                 iD.osmNode({ id: 'c', loc: [1, 2] }),
@@ -80,7 +80,7 @@ describe('iD.actionSplit', function () {
             //
             //  a ---> b                split at 'a' disabled - 'not eligible'
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmWay({ id: '-', nodes: ['a', 'b'] })
@@ -93,7 +93,7 @@ describe('iD.actionSplit', function () {
             //
             //  a ---> b                split at 'b' disabled - 'not eligible'
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmWay({ id: '-', nodes: ['a', 'b'] })
@@ -110,7 +110,7 @@ describe('iD.actionSplit', function () {
             //         |                (there is no '=' here)
             //         d
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [-1, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [0, 1] }),
@@ -132,7 +132,7 @@ describe('iD.actionSplit', function () {
             // Expected result:
             //    forbidden, because correct order of -/= cannot be determined
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -143,7 +143,7 @@ describe('iD.actionSplit', function () {
                 ]})
             ]);
 
-            var action = iD.actionSplit('b', ['=']);
+            const action = iD.actionSplit('b', ['=']);
             expect(action.disabled(graph)).to.equal('parent_incomplete');
         });
 
@@ -156,7 +156,7 @@ describe('iD.actionSplit', function () {
             // Expected result:
             //    any order is allowed, because the way is the only member of the relation
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -166,7 +166,7 @@ describe('iD.actionSplit', function () {
                 ]})
             ]);
 
-            var action = iD.actionSplit('b', ['=']);
+            const action = iD.actionSplit('b', ['=']);
             expect(action.disabled(graph)).to.be.not.ok;
         });
 
@@ -179,7 +179,7 @@ describe('iD.actionSplit', function () {
             // Expected result:
             //    forbidden, because the split action would break the connectedness of the route relation
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [1, 1] }),
@@ -195,7 +195,7 @@ describe('iD.actionSplit', function () {
                 ], tags: { type: 'route' }})
             ]);
 
-            var action = iD.actionSplit('b', ['*']);
+            const action = iD.actionSplit('b', ['*']);
             expect(action.disabled(graph)).to.equal('simple_roundabout');
         });
 
@@ -205,7 +205,7 @@ describe('iD.actionSplit', function () {
             //    a ---> b ---> c ---> a      split at 'b'
             //    Relation: ['-'], '-' tagged as 'junction=roundabout'
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [1, 1] }),
@@ -215,7 +215,7 @@ describe('iD.actionSplit', function () {
                 ], tags: { type: 'junction' }})
             ]);
 
-            var action = iD.actionSplit('a', ['*']);
+            const action = iD.actionSplit('a', ['*']);
             expect(action.disabled(graph)).to.not.be.ok;
         });
     });
@@ -231,7 +231,7 @@ describe('iD.actionSplit', function () {
             // Expected result:
             //    a ---> b ===> c
             //
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -245,8 +245,8 @@ describe('iD.actionSplit', function () {
         });
 
         it('copies tags to the new way', function () {
-            var tags = { highway: 'residential' };
-            var graph = iD.coreGraph([
+            const tags = { highway: 'residential' };
+            let graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -268,7 +268,7 @@ describe('iD.actionSplit', function () {
             // Expected result:
             //    a ---> b ---> c ---> d ===> e ===> f
             //
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -292,7 +292,7 @@ describe('iD.actionSplit', function () {
             // Expected result:
             //    a ===> b ===> c ---> d ---> e ---> f
             //
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -316,7 +316,7 @@ describe('iD.actionSplit', function () {
             // Expected result:
             //    a ---> b ---> c ===> d ===> e
             //
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -339,7 +339,7 @@ describe('iD.actionSplit', function () {
             // Expected result:
             //    a -----------------> d ===> e ===> f
             //
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'd', loc: [3, 0] }),
                 iD.osmNode({ id: 'e', loc: [4, 0] }),
@@ -365,7 +365,7 @@ describe('iD.actionSplit', function () {
             //           |
             //           d
             //
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [-1, 0] }),
                 iD.osmNode({ id: 'b', loc: [0, 0] }),
                 iD.osmNode({ id: 'c', loc: [1, 0] }),
@@ -397,7 +397,7 @@ describe('iD.actionSplit', function () {
             //         ¦
             //         d
             //
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [-1, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [0, 1] }),
@@ -423,7 +423,7 @@ describe('iD.actionSplit', function () {
             //         |
             //         d
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [-1, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [0, 1] }),
@@ -433,17 +433,17 @@ describe('iD.actionSplit', function () {
                 iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
             ]);
 
-            var g1 = iD.actionSplit('*', ['=']).limitWays(['-'])(graph);
+            const g1 = iD.actionSplit('*', ['=']).limitWays(['-'])(graph);
             expect(g1.entity('-').nodes).to.eql(['a', '*']);
             expect(g1.entity('=').nodes).to.eql(['*', 'b']);
             expect(g1.entity('|').nodes).to.eql(['c', '*', 'd']);
 
-            var g2 = iD.actionSplit('*', ['¦']).limitWays(['|'])(graph);
+            const g2 = iD.actionSplit('*', ['¦']).limitWays(['|'])(graph);
             expect(g2.entity('-').nodes).to.eql(['a', '*', 'b']);
             expect(g2.entity('|').nodes).to.eql(['c', '*']);
             expect(g2.entity('¦').nodes).to.eql(['*', 'd']);
 
-            var g3 = iD.actionSplit('*', ['=', '¦']).limitWays(['-', '|'])(graph);
+            const g3 = iD.actionSplit('*', ['=', '¦']).limitWays(['-', '|'])(graph);
             expect(g3.entity('-').nodes).to.eql(['a', '*']);
             expect(g3.entity('=').nodes).to.eql(['*', 'b']);
             expect(g3.entity('|').nodes).to.eql(['c', '*']);
@@ -466,7 +466,7 @@ describe('iD.actionSplit', function () {
             //          /  |
             //         c - a == d
             //
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [0, 2] }),
                 iD.osmNode({ id: 'c', loc: [-1, 0] }),
@@ -487,7 +487,7 @@ describe('iD.actionSplit', function () {
             //    |      |
             //    d ---- c
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 1] }),
                 iD.osmNode({ id: 'b', loc: [1, 1] }),
                 iD.osmNode({ id: 'c', loc: [1, 0] }),
@@ -495,19 +495,19 @@ describe('iD.actionSplit', function () {
                 iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
 
-            var g1 = iD.actionSplit('a', ['='])(graph);
+            const g1 = iD.actionSplit('a', ['='])(graph);
             expect(g1.entity('-').nodes).to.eql(['c', 'd', 'a']);
             expect(g1.entity('=').nodes).to.eql(['a', 'b', 'c']);
 
-            var g2 = iD.actionSplit('b', ['='])(graph);
+            const g2 = iD.actionSplit('b', ['='])(graph);
             expect(g2.entity('-').nodes).to.eql(['b', 'c', 'd']);
             expect(g2.entity('=').nodes).to.eql(['d', 'a', 'b']);
 
-            var g3 = iD.actionSplit('c', ['='])(graph);
+            const g3 = iD.actionSplit('c', ['='])(graph);
             expect(g3.entity('-').nodes).to.eql(['c', 'd', 'a']);
             expect(g3.entity('=').nodes).to.eql(['a', 'b', 'c']);
 
-            var g4 = iD.actionSplit('d', ['='])(graph);
+            const g4 = iD.actionSplit('d', ['='])(graph);
             expect(g4.entity('-').nodes).to.eql(['b', 'c', 'd']);
             expect(g4.entity('=').nodes).to.eql(['d', 'a', 'b']);
         });
@@ -519,7 +519,7 @@ describe('iD.actionSplit', function () {
             //    |      |
             //    d ---- c
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 1] }),
                 iD.osmNode({ id: 'b', loc: [1, 1] }),
                 iD.osmNode({ id: 'c', loc: [1, 0] }),
@@ -527,7 +527,7 @@ describe('iD.actionSplit', function () {
                 iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
 
-            var g1 = iD.actionSplit(['a', 'b'], ['='])(graph);
+            const g1 = iD.actionSplit(['a', 'b'], ['='])(graph);
             expect(g1.entity('-').nodes).to.eql(['b', 'c', 'd', 'a']);
             expect(g1.entity('=').nodes).to.eql(['a', 'b']);
         });
@@ -550,7 +550,7 @@ describe('iD.actionSplit', function () {
             //    a ~~~> b ---> c ===> d
             //    Relation: ['~', '-', '=', '?']
             //
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -564,7 +564,7 @@ describe('iD.actionSplit', function () {
                 ]})
             ]);
 
-            var action = iD.actionSplit('c', ['=']);
+            const action = iD.actionSplit('c', ['=']);
             expect(action.disabled(graph)).to.be.not.ok;
             graph = action(graph);
             expect(members(graph)).to.eql(['~', '-', '=', '?']);
@@ -580,7 +580,7 @@ describe('iD.actionSplit', function () {
             //    a ---> b ===> c ~~~> d
             //    Relation: ['?', '-', '=', '~']
             //
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -594,7 +594,7 @@ describe('iD.actionSplit', function () {
                 ]})
             ]);
 
-            var action = iD.actionSplit('b', ['=']);
+            const action = iD.actionSplit('b', ['=']);
             expect(action.disabled(graph)).to.be.not.ok;
             graph = action(graph);
             expect(members(graph)).to.eql(['?', '-', '=', '~']);
@@ -613,7 +613,7 @@ describe('iD.actionSplit', function () {
                 //    a ---> b ===> c
                 //    Relation: ['-', '=']
                 //
-                var graph = iD.coreGraph([
+                let graph = iD.coreGraph([
                     iD.osmNode({ id: 'a', loc: [0, 0] }),
                     iD.osmNode({ id: 'b', loc: [1, 0] }),
                     iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -641,7 +641,7 @@ describe('iD.actionSplit', function () {
                 //    a ---> b ===> c ~~~> d
                 //    Relation: ['-', '=', '~']
                 //
-                var graph = iD.coreGraph([
+                let graph = iD.coreGraph([
                     iD.osmNode({ id: 'a', loc: [0, 0] }),
                     iD.osmNode({ id: 'b', loc: [1, 0] }),
                     iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -668,7 +668,7 @@ describe('iD.actionSplit', function () {
                 //    a ---> b ===> c ~~~> d
                 //    Relation: ['~', '=', '-']
                 //
-                var graph = iD.coreGraph([
+                let graph = iD.coreGraph([
                     iD.osmNode({ id: 'a', loc: [0, 0] }),
                     iD.osmNode({ id: 'b', loc: [1, 0] }),
                     iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -695,7 +695,7 @@ describe('iD.actionSplit', function () {
                 //    a ---> b ---> c ===> d
                 //    Relation: ['-', '=']
                 //
-                var graph = iD.coreGraph([
+                let graph = iD.coreGraph([
                     iD.osmNode({ id: 'a', loc: [0, 0] }),
                     iD.osmNode({ id: 'b', loc: [1, 0] }),
                     iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -724,7 +724,7 @@ describe('iD.actionSplit', function () {
                 //    a ===> b ---> c ---> d
                 //    Relation: ['=', '-']
                 //
-                var graph = iD.coreGraph([
+                let graph = iD.coreGraph([
                     iD.osmNode({ id: 'a', loc: [0, 0] }),
                     iD.osmNode({ id: 'b', loc: [1, 0] }),
                     iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -744,7 +744,7 @@ describe('iD.actionSplit', function () {
             });
 
             it('preserves other members (example: Public Transport routing)', function () {
-                var graph = iD.coreGraph([
+                let graph = iD.coreGraph([
                     iD.osmNode({ id: 'a', loc: [0, 0] }),
                     iD.osmNode({ id: 'b', loc: [1, 0] }),
                     iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -770,18 +770,18 @@ describe('iD.actionSplit', function () {
         });
 
         describe('splitting out-and-back routes', function () {
-            var a = iD.osmNode({ id: 'a', loc: [0, 0] });
-            var b = iD.osmNode({ id: 'b', loc: [0, 1] });
-            var c = iD.osmNode({ id: 'c', loc: [0, 2] });
-            var d = iD.osmNode({ id: 'd', loc: [0, 3] });
-            var e = iD.osmNode({ id: 'e', loc: [0, 4] });
+            const a = iD.osmNode({ id: 'a', loc: [0, 0] });
+            const b = iD.osmNode({ id: 'b', loc: [0, 1] });
+            const c = iD.osmNode({ id: 'c', loc: [0, 2] });
+            const d = iD.osmNode({ id: 'd', loc: [0, 3] });
+            const e = iD.osmNode({ id: 'e', loc: [0, 4] });
 
             //
             // Situation:
             //    a ---> b ---> c ---> d ~~~> e
             //    Relation: ['-', '~', '~', '-']
             //
-            var outAndBack1 = iD.coreGraph([
+            const outAndBack1 = iD.coreGraph([
                 a, b, c, d, e,
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
                 iD.osmWay({id: '~', nodes: ['d', 'e']}),
@@ -798,7 +798,7 @@ describe('iD.actionSplit', function () {
             //    a <--- b <--- c <--- d ~~~> e
             //    Relation: ['-', '~', '~', '-']
             //
-            var outAndBack2 = iD.coreGraph([
+            const outAndBack2 = iD.coreGraph([
                 a, b, c, d, e,
                 iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a']}),
                 iD.osmWay({id: '~', nodes: ['d', 'e']}),
@@ -815,7 +815,7 @@ describe('iD.actionSplit', function () {
             //    a ---> b ---> c ---> d <~~~ e
             //    Relation: ['-', '~', '~', '-']
             //
-            var outAndBack3 = iD.coreGraph([
+            const outAndBack3 = iD.coreGraph([
                 a, b, c, d, e,
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
                 iD.osmWay({id: '~', nodes: ['e', 'd']}),
@@ -832,7 +832,7 @@ describe('iD.actionSplit', function () {
             //    a <--- b <--- c <--- d <~~~ e
             //    Relation: ['-', '~', '~', '-']
             //
-            var outAndBack4 = iD.coreGraph([
+            const outAndBack4 = iD.coreGraph([
                 a, b, c, d, e,
                 iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a']}),
                 iD.osmWay({id: '~', nodes: ['e', 'd']}),
@@ -850,7 +850,7 @@ describe('iD.actionSplit', function () {
                 //    a ---> b ---> c ===> d ~~~> e
                 //    Relation: ['-', '=', '~', '~', '=', '-']
                 //
-                var graph = outAndBack1;
+                let graph = outAndBack1;
                 graph = iD.actionSplit('c', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
@@ -865,7 +865,7 @@ describe('iD.actionSplit', function () {
                 //    a ===> b ---> c ---> d ~~~> e
                 //    Relation: ['=', '-', '~', '~', '-', '=']
                 //
-                var graph = outAndBack1;
+                let graph = outAndBack1;
                 graph = iD.actionSplit('b', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['b', 'c', 'd']);
@@ -880,7 +880,7 @@ describe('iD.actionSplit', function () {
                 //    a <=== b <--- c <--- d ~~~> e
                 //    Relation: ['=', '-', '~', '~', '-', '=']
                 //
-                var graph = outAndBack2;
+                let graph = outAndBack2;
                 graph = iD.actionSplit('b', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['d', 'c', 'b']);
@@ -895,7 +895,7 @@ describe('iD.actionSplit', function () {
                 //    a <--- b <--- c <=== d ~~~> e
                 //    Relation: ['-', '=', '~', '~', '=', '-']
                 //
-                var graph = outAndBack2;
+                let graph = outAndBack2;
                 graph = iD.actionSplit('c', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
@@ -910,7 +910,7 @@ describe('iD.actionSplit', function () {
                 //    a ---> b ---> c ===> d <~~~ e
                 //    Relation: ['-', '=', '~', '~', '=', '-']
                 //
-                var graph = outAndBack3;
+                let graph = outAndBack3;
                 graph = iD.actionSplit('c', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
@@ -925,7 +925,7 @@ describe('iD.actionSplit', function () {
                 //    a ===> b ---> c ---> d <~~~ e
                 //    Relation: ['=', '-', '~', '~', '-', '=']
                 //
-                var graph = outAndBack3;
+                let graph = outAndBack3;
                 graph = iD.actionSplit('b', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['b', 'c', 'd']);
@@ -940,7 +940,7 @@ describe('iD.actionSplit', function () {
                 //    a <=== b <--- c <--- d <~~~ e
                 //    Relation: ['=', '-', '~', '~', '-', '=']
                 //
-                var graph = outAndBack4;
+                let graph = outAndBack4;
                 graph = iD.actionSplit('b', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['d', 'c', 'b']);
@@ -955,7 +955,7 @@ describe('iD.actionSplit', function () {
                 //    a <--- b <--- c <=== d <~~~ e
                 //    Relation: ['-', '=', '~', '~', '=', '-']
                 //
-                var graph = outAndBack4;
+                let graph = outAndBack4;
                 graph = iD.actionSplit('c', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
@@ -966,11 +966,11 @@ describe('iD.actionSplit', function () {
         });
 
         describe('splitting hat routes', function () {
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [1, 0]});
-            var c = iD.osmNode({id: 'c', loc: [2, 1]});
-            var d = iD.osmNode({id: 'd', loc: [3, 0]});
-            var e = iD.osmNode({id: 'e', loc: [4, 0]});
+            const a = iD.osmNode({id: 'a', loc: [0, 0]});
+            const b = iD.osmNode({id: 'b', loc: [1, 0]});
+            const c = iD.osmNode({id: 'c', loc: [2, 1]});
+            const d = iD.osmNode({id: 'd', loc: [3, 0]});
+            const e = iD.osmNode({id: 'e', loc: [4, 0]});
 
             //
             // Situation:
@@ -980,7 +980,7 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['-', '#', '~', '#', '=']
             //
-            var hat1a = iD.coreGraph([
+            const hat1a = iD.coreGraph([
                 a, b, c, d, e,
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
                 iD.osmWay({id: '#', nodes: ['b', 'c', 'd']}),
@@ -1005,7 +1005,7 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['-', '~', '#', '~', '=']
             //
-            var hat1b = iD.coreGraph([
+            const hat1b = iD.coreGraph([
                 a, b, c, d, e,
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
                 iD.osmWay({id: '#', nodes: ['b', 'c', 'd']}),
@@ -1030,7 +1030,7 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['-', '#', '~', '#', '=']
             //
-            var hat2 = iD.coreGraph([
+            const hat2 = iD.coreGraph([
                 a, b, c, d, e,
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
                 iD.osmWay({id: '#', nodes: ['d', 'c', 'b']}),
@@ -1055,7 +1055,7 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['-', '#', '~', '#', '=']
             //
-            var hat3 = iD.coreGraph([
+            const hat3 = iD.coreGraph([
                 a, b, c, d, e,
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
                 iD.osmWay({id: '#', nodes: ['d', 'c', 'b']}),
@@ -1080,7 +1080,7 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['-', '#', '~', '#', '=']
             //
-            var hat4 = iD.coreGraph([
+            const hat4 = iD.coreGraph([
                 a, b, c, d, e,
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
                 iD.osmWay({id: '#', nodes: ['b', 'c', 'd']}),
@@ -1105,7 +1105,7 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['-', '#', '~', '#', '=']
             //
-            var hat5 = iD.coreGraph([
+            const hat5 = iD.coreGraph([
                 a, b, c, d, e,
                 iD.osmWay({id: '-', nodes: ['b', 'a']}),
                 iD.osmWay({id: '#', nodes: ['b', 'c', 'd']}),
@@ -1131,7 +1131,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['-', '#', '*', '~', '#', '*', '=']
                 //
-                var graph = hat1a;
+                let graph = hat1a;
                 graph = iD.actionSplit('c', ['*'])(graph);
 
                 expect(graph.entity('#').nodes).to.eql(['b', 'c']);
@@ -1148,7 +1148,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['-', '~', '*', '#', '~', '=']
                 //
-                var graph = hat1b;
+                let graph = hat1b;
                 graph = iD.actionSplit('c', ['*'])(graph);
 
                 expect(graph.entity('#').nodes).to.eql(['b', 'c']);
@@ -1165,7 +1165,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['-', '*', '#', '~', '*', '#', '=']
                 //
-                var graph = hat2;
+                let graph = hat2;
                 graph = iD.actionSplit('c', ['*'])(graph);
 
                 expect(graph.entity('#').nodes).to.eql(['d', 'c']);
@@ -1182,7 +1182,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['-', '*', '#', '~', '*', '#', '=']
                 //
-                var graph = hat3;
+                let graph = hat3;
                 graph = iD.actionSplit('c', ['*'])(graph);
 
                 expect(graph.entity('#').nodes).to.eql(['d', 'c']);
@@ -1199,7 +1199,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['-', '*', '#', '~', '*', '#', '=']
                 //
-                var graph = hat4;
+                let graph = hat4;
                 graph = iD.actionSplit('c', ['*'])(graph);
 
                 expect(graph.entity('#').nodes).to.eql(['b', 'c']);
@@ -1216,7 +1216,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['-', '#', '*', '~', '#', '*', '=']
                 //
-                var graph = hat5;
+                let graph = hat5;
                 graph = iD.actionSplit('c', ['*'])(graph);
 
                 expect(graph.entity('#').nodes).to.eql(['b', 'c']);
@@ -1227,12 +1227,12 @@ describe('iD.actionSplit', function () {
         });
 
         describe('splitting spoon routes', function () {
-            var a = iD.osmNode({ id: 'a', loc: [0, 0] });
-            var b = iD.osmNode({ id: 'b', loc: [0, 1] });
-            var c = iD.osmNode({ id: 'c', loc: [1, 1] });
-            var d = iD.osmNode({ id: 'd', loc: [1, 0] });
-            var e = iD.osmNode({ id: 'e', loc: [2, 0] });
-            var f = iD.osmNode({ id: 'f', loc: [3, 0] });
+            const a = iD.osmNode({ id: 'a', loc: [0, 0] });
+            const b = iD.osmNode({ id: 'b', loc: [0, 1] });
+            const c = iD.osmNode({ id: 'c', loc: [1, 1] });
+            const d = iD.osmNode({ id: 'd', loc: [1, 0] });
+            const e = iD.osmNode({ id: 'e', loc: [2, 0] });
+            const f = iD.osmNode({ id: 'f', loc: [3, 0] });
 
             //
             // Situation:
@@ -1242,7 +1242,7 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['~', '-', '~']
             //
-            var spoon1 = iD.coreGraph([
+            const spoon1 = iD.coreGraph([
                 a, b, c, d, e, f,
                 iD.osmWay({id: '-', nodes: ['d', 'a', 'b', 'c', 'd']}),
                 iD.osmWay({id: '~', nodes: ['d', 'e', 'f']}),
@@ -1261,7 +1261,7 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['~', '-', '~']
             //
-            var spoon2 = iD.coreGraph([
+            const spoon2 = iD.coreGraph([
                 a, b, c, d, e, f,
                 iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a', 'd']}),
                 iD.osmWay({id: '~', nodes: ['d', 'e', 'f']}),
@@ -1280,7 +1280,7 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['~', '-', '~']
             //
-            var spoon3 = iD.coreGraph([
+            const spoon3 = iD.coreGraph([
                 a, b, c, d, e, f,
                 iD.osmWay({id: '-', nodes: ['d', 'a', 'b', 'c', 'd']}),
                 iD.osmWay({id: '~', nodes: ['f', 'e', 'd']}),
@@ -1299,7 +1299,7 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['~', '-', '~']
             //
-            var spoon4 = iD.coreGraph([
+            const spoon4 = iD.coreGraph([
                 a, b, c, d, e, f,
                 iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a', 'd']}),
                 iD.osmWay({id: '~', nodes: ['f', 'e', 'd']}),
@@ -1319,7 +1319,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['~', '-', '=', '~']
                 //
-                var graph = spoon1;
+                let graph = spoon1;
                 graph = iD.actionSplit('d', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['d', 'a', 'b']);
@@ -1337,7 +1337,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['~', '-', '=', '~']
                 //
-                var graph = spoon2;
+                let graph = spoon2;
                 graph = iD.actionSplit('d', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['b', 'a', 'd']);
@@ -1355,7 +1355,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['~', '-', '=', '~']
                 //
-                var graph = spoon3;
+                let graph = spoon3;
                 graph = iD.actionSplit('d', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['d', 'a', 'b']);
@@ -1373,7 +1373,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['~', '-', '=', '~']
                 //
-                var graph = spoon4;
+                let graph = spoon4;
                 graph = iD.actionSplit('d', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['b', 'a', 'd']);
@@ -1391,7 +1391,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['=', '~', '-', '~', '=']
                 //
-                var graph = spoon1;
+                let graph = spoon1;
                 graph = iD.actionSplit('e', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['d', 'a', 'b', 'c', 'd']);
@@ -1409,7 +1409,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['=', '~', '-', '~', '=']
                 //
-                var graph = spoon2;
+                let graph = spoon2;
                 graph = iD.actionSplit('e', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['d', 'c', 'b', 'a', 'd']);
@@ -1427,7 +1427,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['~', '=', '-', '=', '~']
                 //
-                var graph = spoon3;
+                let graph = spoon3;
                 graph = iD.actionSplit('e', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['d', 'a', 'b', 'c', 'd']);
@@ -1445,7 +1445,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['~', '=', '-', '=', '~']
                 //
-                var graph = spoon4;
+                let graph = spoon4;
                 graph = iD.actionSplit('e', ['='])(graph);
 
                 expect(graph.entity('-').nodes).to.eql(['d', 'c', 'b', 'a', 'd']);
@@ -1457,11 +1457,11 @@ describe('iD.actionSplit', function () {
         });
 
         describe('splitting Y routes', function () {
-            var a = iD.osmNode({ id: 'a', loc: [0, 0] });
-            var b = iD.osmNode({ id: 'b', loc: [1, 0] });
-            var c = iD.osmNode({ id: 'c', loc: [2, 0] });
-            var d = iD.osmNode({ id: 'd', loc: [2, -1] });
-            var e = iD.osmNode({ id: 'e', loc: [3, -1] });
+            const a = iD.osmNode({ id: 'a', loc: [0, 0] });
+            const b = iD.osmNode({ id: 'b', loc: [1, 0] });
+            const c = iD.osmNode({ id: 'c', loc: [2, 0] });
+            const d = iD.osmNode({ id: 'd', loc: [2, -1] });
+            const e = iD.osmNode({ id: 'e', loc: [3, -1] });
 
             it('splits excursion part of a forking route', function () {
                 //
@@ -1480,7 +1480,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['-', '~', '#', '*']
                 //
-                var graph = iD.coreGraph([
+                let graph = iD.coreGraph([
                     a, b, c, d, e,
                     iD.osmWay({id: '-', nodes: ['a', 'b']}),
                     iD.osmWay({id: '~', nodes: ['b', 'c']}),
@@ -1515,7 +1515,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['-', '~', '*', '#']
                 //
-                var graph = iD.coreGraph([
+                let graph = iD.coreGraph([
                     a, b, c, d, e,
                     iD.osmWay({id: '-', nodes: ['a', 'b']}),
                     iD.osmWay({id: '~', nodes: ['b', 'd', 'e']}),
@@ -1535,11 +1535,11 @@ describe('iD.actionSplit', function () {
         });
 
         describe('splitting dual carriageway routes', function () {
-            var a = iD.osmNode({ id: 'a', loc: [0, 0] });
-            var b = iD.osmNode({ id: 'b', loc: [1, 0] });
-            var c = iD.osmNode({ id: 'c', loc: [2, 0] });
-            var d = iD.osmNode({ id: 'd', loc: [3, 0] });
-            var e = iD.osmNode({ id: 'e', loc: [1.5, -1] });
+            const a = iD.osmNode({ id: 'a', loc: [0, 0] });
+            const b = iD.osmNode({ id: 'b', loc: [1, 0] });
+            const c = iD.osmNode({ id: 'c', loc: [2, 0] });
+            const d = iD.osmNode({ id: 'd', loc: [3, 0] });
+            const e = iD.osmNode({ id: 'e', loc: [1.5, -1] });
 
             it('splits dual-carriageway route, preserving role (forward way)', function () {
                 //
@@ -1558,7 +1558,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['-', '~', '#', '*', '=']
                 //
-                var graph = iD.coreGraph([
+                let graph = iD.coreGraph([
                     a, b, c, d, e,
                     iD.osmWay({id: '-', nodes: ['a', 'b']}),
                     iD.osmWay({id: '~', nodes: ['b', 'c']}),
@@ -1595,7 +1595,7 @@ describe('iD.actionSplit', function () {
                 //
                 //    Relation: ['-', '~', '*', '#', '=']
                 //
-                var graph = iD.coreGraph([
+                let graph = iD.coreGraph([
                     a, b, c, d, e,
                     iD.osmWay({id: '-', nodes: ['a', 'b']}),
                     iD.osmWay({id: '~', nodes: ['b', 'c']}),
@@ -1633,7 +1633,7 @@ describe('iD.actionSplit', function () {
                 //    ||     |
                 //    d ==== c
                 //
-                var graph = iD.coreGraph([
+                let graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0,1]}),
                     iD.osmNode({id: 'b', loc: [1,1]}),
                     iD.osmNode({id: 'c', loc: [1,0]}),
@@ -1646,7 +1646,7 @@ describe('iD.actionSplit', function () {
                 expect(graph.entity('=').tags).to.eql({});
                 expect(graph.parentRelations(graph.entity('-'))).to.have.length(1);
 
-                var relation = graph.parentRelations(graph.entity('-'))[0];
+                const relation = graph.parentRelations(graph.entity('-'))[0];
                 expect(relation.tags).to.eql({type: 'multipolygon', area: 'yes'});
                 expect(relation.members).to.eql([
                     {id: '-', role: 'outer', type: 'way'},
@@ -1655,7 +1655,7 @@ describe('iD.actionSplit', function () {
             });
 
             it('splits only the line of a node shared by a line and an area', function () {
-                var graph = iD.coreGraph([
+                let graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0,1]}),
                     iD.osmNode({id: 'b', loc: [1,1]}),
                     iD.osmNode({id: 'c', loc: [1,0]}),
@@ -1677,19 +1677,19 @@ describe('iD.actionSplit', function () {
             const viaRole = type === 'destination_sign' ? 'intersection' : 'via';
 
             describe('type = ' + type, function () {
-                var a = iD.osmNode({id: 'a', loc: [0, 0]});
-                var b = iD.osmNode({id: 'b', loc: [1, 0]});
-                var c = iD.osmNode({id: 'c', loc: [2, 0]});
-                var d = iD.osmNode({id: 'd', loc: [3, 0]});
-                var e = iD.osmNode({id: 'e', loc: [4, 0]});
-                var f = iD.osmNode({id: 'f', loc: [5, 0]});
+                const a = iD.osmNode({id: 'a', loc: [0, 0]});
+                const b = iD.osmNode({id: 'b', loc: [1, 0]});
+                const c = iD.osmNode({id: 'c', loc: [2, 0]});
+                const d = iD.osmNode({id: 'd', loc: [3, 0]});
+                const e = iD.osmNode({id: 'e', loc: [4, 0]});
+                const f = iD.osmNode({id: 'f', loc: [5, 0]});
 
                 //
                 // Situation:
                 //    a ----> b ----> c ----> d ~~~~ e
                 // A restriction from ---- to ~~~~ via node d.
                 //
-                var restriction1 = iD.coreGraph([
+                const restriction1 = iD.coreGraph([
                     a, b, c, d, e,
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
                     iD.osmWay({id: '~', nodes: ['d', 'e']}),
@@ -1705,7 +1705,7 @@ describe('iD.actionSplit', function () {
                 //    a ----> b ----> c ----> d ~~~~ e
                 // A restriction from ~~~~ to ---- via node d.
                 //
-                var restriction2 = iD.coreGraph([
+                const restriction2 = iD.coreGraph([
                     a, b, c, d, e,
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
                     iD.osmWay({id: '~', nodes: ['d', 'e']}),
@@ -1721,7 +1721,7 @@ describe('iD.actionSplit', function () {
                 //    a ----> b ----> c ----> d ~~~~ e
                 // A restriction from ---- to ---- via node d.
                 //
-                var restriction3 = iD.coreGraph([
+                const restriction3 = iD.coreGraph([
                     a, b, c, d, e,
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
                     iD.osmWay({id: '~', nodes: ['d', 'e']}),
@@ -1741,7 +1741,7 @@ describe('iD.actionSplit', function () {
                 //
                 // A restriction from ---- to ~~~~ via way |
                 //
-                var restriction4 = iD.coreGraph([
+                const restriction4 = iD.coreGraph([
                     a, b, c, d, e, f,
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
                     iD.osmWay({id: '|', nodes: ['d', 'e']}),
@@ -1762,7 +1762,7 @@ describe('iD.actionSplit', function () {
                 //
                 // A restriction from ~~~~ to ---- via way |
                 //
-                var restriction5 = iD.coreGraph([
+                const restriction5 = iD.coreGraph([
                     a, b, c, d, e, f,
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
                     iD.osmWay({id: '|', nodes: ['d', 'e']}),
@@ -1783,7 +1783,7 @@ describe('iD.actionSplit', function () {
                 //
                 // A restriction from | to ‖ via way ----
                 //
-                var restriction6 = iD.coreGraph([
+                const restriction6 = iD.coreGraph([
                     a, b, c, d, e, f,
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
                     iD.osmWay({id: '|', nodes: ['e', 'a']}),
@@ -1800,7 +1800,7 @@ describe('iD.actionSplit', function () {
                 //    a <---- b <---- c <---- d ~~~~ e
                 // A restriction from ---- to ~~~~ via d.
                 //
-                var restriction7 = iD.coreGraph([
+                const restriction7 = iD.coreGraph([
                     a, b, c, d, e,
                     iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a']}),
                     iD.osmWay({id: '~', nodes: ['d', 'e']}),
@@ -1817,7 +1817,7 @@ describe('iD.actionSplit', function () {
                     //    a ----> b ----> c ====> d ~~~~ e
                     // A restriction from ==== to ~~~~ via node d.
                     //
-                    var graph = restriction1;
+                    let graph = restriction1;
                     graph = iD.actionSplit('c', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([
@@ -1833,7 +1833,7 @@ describe('iD.actionSplit', function () {
                     //    a ====> b ----> c ----> d ~~~~ e
                     // A restriction from ---- to ~~~~ via node d.
                     //
-                    var graph = restriction1;
+                    let graph = restriction1;
                     graph = iD.actionSplit('b', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([
@@ -1849,7 +1849,7 @@ describe('iD.actionSplit', function () {
                     //    a ----> b ----> c ====> d ~~~~ e
                     // A restriction from ~~~~ to ==== via node d.
                     //
-                    var graph = restriction2;
+                    let graph = restriction2;
                     graph = iD.actionSplit('c', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([
@@ -1865,7 +1865,7 @@ describe('iD.actionSplit', function () {
                     //    a ====> b ----> c ----> d ~~~~ e
                     // A restriction from ~~~~ to ---- via node d.
                     //
-                    var graph = restriction2;
+                    let graph = restriction2;
                     graph = iD.actionSplit('b', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([
@@ -1881,7 +1881,7 @@ describe('iD.actionSplit', function () {
                     //    a ----> b ----> c ====> d ~~~~ e
                     // A restriction from ==== to ==== via node d.
                     //
-                    var graph = restriction3;
+                    let graph = restriction3;
                     graph = iD.actionSplit('c', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([
@@ -1897,7 +1897,7 @@ describe('iD.actionSplit', function () {
                     //    a ====> b ----> c ----> d ~~~~ e
                     // A restriction from ---- to ---- via node d.
                     //
-                    var graph = restriction3;
+                    let graph = restriction3;
                     graph = iD.actionSplit('b', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([
@@ -1917,7 +1917,7 @@ describe('iD.actionSplit', function () {
                     //
                     // A restriction from ==== to ~~~~ via way |
                     //
-                    var graph = restriction4;
+                    let graph = restriction4;
                     graph = iD.actionSplit('c', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([
@@ -1937,7 +1937,7 @@ describe('iD.actionSplit', function () {
                     //
                     // A restriction from ---- to ~~~~ via way |
                     //
-                    var graph = restriction4;
+                    let graph = restriction4;
                     graph = iD.actionSplit('b', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([
@@ -1957,7 +1957,7 @@ describe('iD.actionSplit', function () {
                     //
                     // A restriction from ~~~~ to ==== via way |
                     //
-                    var graph = restriction5;
+                    let graph = restriction5;
                     graph = iD.actionSplit('c', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([
@@ -1977,7 +1977,7 @@ describe('iD.actionSplit', function () {
                     //
                     // A restriction from ~~~~ to ---- via way |
                     //
-                    var graph = restriction5;
+                    let graph = restriction5;
                     graph = iD.actionSplit('b', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([
@@ -1997,7 +1997,7 @@ describe('iD.actionSplit', function () {
                     //
                     // A restriction from | to ‖ via ways ----, ====
                     //
-                    var graph = restriction6;
+                    let graph = restriction6;
                     graph = iD.actionSplit('c', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([
@@ -2018,7 +2018,7 @@ describe('iD.actionSplit', function () {
                     //
                     // A restriction from | to ‖ via ways ----, ====
                     //
-                    var graph = restriction6;
+                    let graph = restriction6;
                     graph = iD.actionSplit('c', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([
@@ -2035,7 +2035,7 @@ describe('iD.actionSplit', function () {
                     //    a <==== b <---- c <---- d ~~~~ e
                     // A restriction from ---- to ~~~~ via d.
                     //
-                    var graph = restriction7;
+                    let graph = restriction7;
                     graph = iD.actionSplit('b', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([
@@ -2051,7 +2051,7 @@ describe('iD.actionSplit', function () {
                     //    a <---- b <---- c <==== d ~~~~ e
                     // A restriction from ---- to ~~~~ via d.
                     //
-                    var graph = restriction7;
+                    let graph = restriction7;
                     graph = iD.actionSplit('c', ['='])(graph);
 
                     expect(graph.entity('r').members).to.eql([

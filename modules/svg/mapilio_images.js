@@ -108,10 +108,10 @@ export function svgMapilioImages(projection, context, dispatch) {
         const showViewfields = (z >= viewFieldZoomLevel);
 
         const service = getService();
-        let sequences = (service ? service.sequences(projection) : []);
-        let images = (service ? service.images(projection) : []);
+        const sequences = (service ? service.sequences(projection) : []);
+        const images = (service ? service.images(projection) : []);
 
-        let traces = layer.selectAll('.sequences').selectAll('.sequence')
+        const traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.id; });
 
         // exit

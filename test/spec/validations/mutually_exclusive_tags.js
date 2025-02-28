@@ -1,7 +1,7 @@
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.validations.mutually_exclusive_tags', function () {
-    var context;
+    let context;
 
     beforeEach(function() {
         context = iD.coreContext().init();
@@ -14,9 +14,9 @@ describe('iD.validations.mutually_exclusive_tags', function () {
     }
 
     function validate(validator) {
-        var changes = context.history().changes();
-        var entities = changes.modified.concat(changes.created);
-        var issues = [];
+        const changes = context.history().changes();
+        const entities = changes.modified.concat(changes.created);
+        let issues = [];
         entities.forEach(function(entity) {
             issues = issues.concat(validator(entity, context.graph()));
         });
@@ -25,27 +25,27 @@ describe('iD.validations.mutually_exclusive_tags', function () {
 
 
     it('has no errors on init', async () => {
-        var validator = iD.validationMutuallyExclusiveTags(context);
+        const validator = iD.validationMutuallyExclusiveTags(context);
         await setTimeout(20);
-        var issues = validate(validator);
+        const issues = validate(validator);
         expect(issues).to.have.lengthOf(0);
     });
 
     it('has no errors on good tags', async () => {
         createNode({'name': 'Trader Joe', 'not:name': 'Trader Jane'});
-        var validator = iD.validationMutuallyExclusiveTags(context);
+        const validator = iD.validationMutuallyExclusiveTags(context);
         await setTimeout(20);
-        var issues = validate(validator);
+        const issues = validate(validator);
         expect(issues).to.have.lengthOf(0);
     });
 
     it('flags mutually exclusive tags', async () => {
         createNode({'name': 'Trader Joe', 'noname': 'yes'});
-        var validator = iD.validationMutuallyExclusiveTags(context);
+        const validator = iD.validationMutuallyExclusiveTags(context);
         await setTimeout(20);
-        var issues = validate(validator);
+        const issues = validate(validator);
         expect(issues).to.have.lengthOf(1);
-        var issue = issues[0];
+        const issue = issues[0];
         expect(issue.type).to.eql('mutually_exclusive_tags');
         expect(issue.subtype).to.eql('default');
         expect(issue.severity).to.eql('warning');
@@ -55,11 +55,11 @@ describe('iD.validations.mutually_exclusive_tags', function () {
 
     it('flags feature with a mutually exclusive `not:name` value', async () => {
         createNode({ shop: 'supermarket', name: 'Lous', 'not:name': 'Lous' });
-        var validator = iD.validationMutuallyExclusiveTags(context);
+        const validator = iD.validationMutuallyExclusiveTags(context);
         await setTimeout(20);
-        var issues = validate(validator);
+        const issues = validate(validator);
         expect(issues).to.have.lengthOf(1);
-        var issue = issues[0];
+        const issue = issues[0];
         expect(issue.type).to.eql('mutually_exclusive_tags');
         expect(issue.subtype).to.eql('same_value');
         expect(issue.severity).to.eql('warning');
@@ -70,11 +70,11 @@ describe('iD.validations.mutually_exclusive_tags', function () {
 
     it('flags feature with a mutually exclusive semicolon-separated `not:name` value', async () => {
         createNode({ shop: 'supermarket', name: 'Lous', 'not:name': 'Louis\';Lous;Louis\'s' });
-        var validator = iD.validationMutuallyExclusiveTags(context);
+        const validator = iD.validationMutuallyExclusiveTags(context);
         await setTimeout(20);
-        var issues = validate(validator);
+        const issues = validate(validator);
         expect(issues).to.have.lengthOf(1);
-        var issue = issues[0];
+        const issue = issues[0];
         expect(issue.type).to.eql('mutually_exclusive_tags');
         expect(issue.subtype).to.eql('same_value');
         expect(issue.severity).to.eql('warning');

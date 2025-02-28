@@ -69,8 +69,8 @@ const prototype = {
 
     // Inspect tags and geometry to determine which direction(s) this node/vertex points
     directions: function(resolver, projection) {
-        var val;
-        var i;
+        let val;
+        let i;
 
         // which tag to use?
         if (this.isHighwayIntersection(resolver) && (this.tags.stop || '').toLowerCase() === 'all') {
@@ -81,8 +81,8 @@ const prototype = {
             val = (this.tags.direction || '').toLowerCase();
 
             // better suffix-style direction tag
-            var re = /:direction$/i;
-            var keys = Object.keys(this.tags);
+            const re = /:direction$/i;
+            const keys = Object.keys(this.tags);
             for (i = 0; i < keys.length; i++) {
                 if (re.test(keys[i])) {
                     val = this.tags[keys[i]].toLowerCase();
@@ -94,8 +94,8 @@ const prototype = {
         if (val === '') return [];
 
 
-        var values = val.split(';');
-        var results = [];
+        const values = val.split(';');
+        const results = [];
 
         values.forEach(function(v) {
             // swap cardinal for numeric directions
@@ -110,20 +110,20 @@ const prototype = {
             }
 
             // string direction - inspect parent ways
-            var lookBackward =
+            const lookBackward =
                 (this.tags['traffic_sign:backward'] || v === 'backward' || v === 'both' || v === 'all');
-            var lookForward =
+            const lookForward =
                 (this.tags['traffic_sign:forward'] || v === 'forward' || v === 'both' || v === 'all');
 
             if (!lookForward && !lookBackward) return;
 
-            var nodeIds = {};
+            const nodeIds = {};
             resolver.parentWays(this)
                 .filter(p => (this.tags.highway || this.tags.traffic_sign || this.tags.traffic_calming || this.tags.barrier || this.tags.cycleway) ? p.tags.highway : true)
                 .filter(p => (this.tags.railway) ? p.tags.railway : true)
                 .filter(p => (this.tags.waterway) ? p.tags.waterway : true)
                 .forEach(function(parent) {
-                    var nodes = parent.nodes;
+                    const nodes = parent.nodes;
                     for (i = 0; i < nodes.length; i++) {
                         if (nodes[i] === this.id) {  // match current entity
                             if (lookForward && i > 0) {
@@ -155,7 +155,7 @@ const prototype = {
 
     isEndpoint: function(resolver) {
         return resolver.transient(this, 'isEndpoint', function() {
-            var id = this.id;
+            const id = this.id;
             return resolver.parentWays(this).filter(function(parent) {
                 return !parent.isClosed() && !!parent.affix(id);
             }).length > 0;
@@ -165,17 +165,17 @@ const prototype = {
 
     isConnected: function(resolver) {
         return resolver.transient(this, 'isConnected', function() {
-            var parents = resolver.parentWays(this);
+            const parents = resolver.parentWays(this);
 
             if (parents.length > 1) {
                 // vertex is connected to multiple parent ways
-                for (var i in parents) {
+                for (const i in parents) {
                     if (parents[i].geometry(resolver) === 'line' &&
                         parents[i].hasInterestingTags()) return true;
                 }
             } else if (parents.length === 1) {
-                var way = parents[0];
-                var nodes = way.nodes.slice();
+                const way = parents[0];
+                const nodes = way.nodes.slice();
                 if (way.isClosed()) { nodes.pop(); }  // ignore connecting node if closed
 
                 // return true if vertex appears multiple times (way is self intersecting)
@@ -225,7 +225,7 @@ const prototype = {
 
 
     asJXON: function(changeset_id) {
-        var r = {
+        const r = {
             node: {
                 '@id': this.osmId(),
                 '@lon': this.loc[0],

@@ -6,12 +6,12 @@ export function uiRestore(context) {
   return function(selection) {
     if (!context.history().hasRestorableChanges()) return;
 
-    let modalSelection = uiModal(selection, true);
+    const modalSelection = uiModal(selection, true);
 
     modalSelection.select('.modal')
       .attr('class', 'modal fillL');
 
-    let introModal = modalSelection.select('.content');
+    const introModal = modalSelection.select('.content');
 
     introModal
       .append('div')
@@ -25,11 +25,11 @@ export function uiRestore(context) {
       .append('p')
       .call(t.append('restore.description'));
 
-    let buttonWrap = introModal
+    const buttonWrap = introModal
       .append('div')
       .attr('class', 'modal-actions');
 
-    let restore = buttonWrap
+    const restore = buttonWrap
       .append('button')
       .attr('class', 'restore')
       .on('click', () => {
@@ -47,7 +47,7 @@ export function uiRestore(context) {
       .append('div')
       .call(t.append('restore.restore'));
 
-    let reset = buttonWrap
+    const reset = buttonWrap
       .append('button')
       .attr('class', 'reset')
       .on('click', () => {

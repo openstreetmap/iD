@@ -2,11 +2,11 @@ import { setTimeout } from 'node:timers/promises';
 
 describe('iD.behaviorHash', function () {
 
-    var hash, context;
+    let hash, context;
 
     beforeEach(function () {
         window.location.hash = '#background=none';   // Try not to load imagery
-        var container = d3.select(document.createElement('div'));
+        const container = d3.select(document.createElement('div'));
         context = iD.coreContext().assetPath('../dist/').init().container(container);
         container.call(context.map());
         hash = iD.behaviorHash(context);
@@ -80,7 +80,7 @@ describe('iD.behaviorHash', function () {
 
     it('accepts default changeset comment as hash parameter', function () {
         window.location.hash = '#comment=foo+bar%20%2B1';
-        var container = d3.select(document.createElement('div'));
+        const container = d3.select(document.createElement('div'));
         context = iD.coreContext().assetPath('../dist/').init().container(container);
         iD.behaviorHash(context);
         expect(context.defaultChangesetComment()).to.eql('foo bar +1');

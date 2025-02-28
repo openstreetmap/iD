@@ -25,11 +25,11 @@ import {
 
 
 export function uiFeatureList(context) {
-    var _geocodeResults;
+    let _geocodeResults;
 
 
     function featureList(selection) {
-        var header = selection
+        const header = selection
             .append('div')
             .attr('class', 'header fillL');
 
@@ -37,14 +37,14 @@ export function uiFeatureList(context) {
             .append('h2')
             .call(t.append('inspector.feature_list'));
 
-        var searchWrap = selection
+        const searchWrap = selection
             .append('div')
             .attr('class', 'search-header');
 
         searchWrap
             .call(svgIcon('#iD-icon-search', 'pre-text'));
 
-        var search = searchWrap
+        const search = searchWrap
             .append('input')
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
@@ -53,11 +53,11 @@ export function uiFeatureList(context) {
             .on('keydown', keydown)
             .on('input', inputevent);
 
-        var listWrap = selection
+        const listWrap = selection
             .append('div')
             .attr('class', 'inspector-body');
 
-        var list = listWrap
+        const list = listWrap
             .append('div')
             .attr('class', 'feature-list');
 
@@ -71,7 +71,7 @@ export function uiFeatureList(context) {
 
 
         function focusSearch(d3_event) {
-            var mode = context.mode() && context.mode().id;
+            const mode = context.mode() && context.mode().id;
             if (mode !== 'browse') return;
 
             d3_event.preventDefault();
@@ -87,7 +87,7 @@ export function uiFeatureList(context) {
 
 
         function keypress(d3_event) {
-            var q = search.property('value'),
+            const q = search.property('value'),
                 items = list.selectAll('.feature-list-item');
             if (d3_event.keyCode === 13 && // ↩ Return
                 q.length &&
@@ -117,14 +117,14 @@ export function uiFeatureList(context) {
 
 
         function features() {
-            var result = [];
-            var graph = context.graph();
-            var visibleCenter = context.map().extent().center();
-            var q = search.property('value').toLowerCase();
+            let result = [];
+            const graph = context.graph();
+            const visibleCenter = context.map().extent().center();
+            const q = search.property('value').toLowerCase();
 
             if (!q) return result;
 
-            var locationMatch = sexagesimal.pair(q.toUpperCase()) || dmsMatcher(q);
+            const locationMatch = sexagesimal.pair(q.toUpperCase()) || dmsMatcher(q);
 
             if (locationMatch) {
                 const latLon = [Number(locationMatch[0]), Number(locationMatch[1])];
@@ -156,11 +156,11 @@ export function uiFeatureList(context) {
             }
 
             // A location search takes priority over an ID search
-            var idMatch = !locationMatch && q.match(/(?:^|\W)(node|way|relation|note|[nwr])\W{0,2}0*([1-9]\d*)(?:\W|$)/i);
+            const idMatch = !locationMatch && q.match(/(?:^|\W)(node|way|relation|note|[nwr])\W{0,2}0*([1-9]\d*)(?:\W|$)/i);
 
             if (idMatch) {
-                var elemType = idMatch[1] === 'note' ? idMatch[1] : idMatch[1].charAt(0);
-                var elemId = idMatch[2];
+                const elemType = idMatch[1] === 'note' ? idMatch[1] : idMatch[1].charAt(0);
+                const elemId = idMatch[2];
                 result.push({
                     id: elemType + elemId,
                     geometry: elemType === 'n' ? 'point' : elemType === 'w' ? 'line' : elemType === 'note' ? 'note' : 'relation',
@@ -169,19 +169,19 @@ export function uiFeatureList(context) {
                 });
             }
 
-            var allEntities = graph.entities;
-            var localResults = [];
-            for (var id in allEntities) {
-                var entity = allEntities[id];
+            const allEntities = graph.entities;
+            let localResults = [];
+            for (const id in allEntities) {
+                const entity = allEntities[id];
                 if (!entity) continue;
 
-                var name = utilDisplayName(entity) || '';
+                const name = utilDisplayName(entity) || '';
                 if (name.toLowerCase().indexOf(q) < 0) continue;
 
-                var matched = presetManager.match(entity, graph);
-                var type = (matched && matched.name()) || utilDisplayType(entity.id);
-                var extent = entity.extent(graph);
-                var distance = extent ? geoSphericalDistance(visibleCenter, extent.center()) : 0;
+                const matched = presetManager.match(entity, graph);
+                const type = (matched && matched.name()) || utilDisplayType(entity.id);
+                const extent = entity.extent(graph);
+                const distance = extent ? geoSphericalDistance(visibleCenter, extent.center()) : 0;
 
                 localResults.push({
                     id: entity.id,
@@ -204,19 +204,19 @@ export function uiFeatureList(context) {
 
                     // Make a temporary osmEntity so we can preset match
                     // and better localize the search result - #4725
-                    var id = osmEntity.id.fromOSM(d.osm_type, d.osm_id);
-                    var tags = {};
+                    const id = osmEntity.id.fromOSM(d.osm_type, d.osm_id);
+                    const tags = {};
                     tags[d.class] = d.type;
 
-                    var attrs = { id: id, type: d.osm_type, tags: tags };
+                    const attrs = { id: id, type: d.osm_type, tags: tags };
                     if (d.osm_type === 'way') {   // for ways, add some fake closed nodes
                         attrs.nodes = ['a','a'];  // so that geometry area is possible
                     }
 
-                    var tempEntity = osmEntity(attrs);
-                    var tempGraph = coreGraph([tempEntity]);
-                    var matched = presetManager.match(tempEntity, tempGraph);
-                    var type = (matched && matched.name()) || utilDisplayType(id);
+                    const tempEntity = osmEntity(attrs);
+                    const tempGraph = coreGraph([tempEntity]);
+                    const matched = presetManager.match(tempEntity, tempGraph);
+                    const type = (matched && matched.name()) || utilDisplayType(id);
 
                     result.push({
                         id: tempEntity.id,
@@ -263,12 +263,12 @@ export function uiFeatureList(context) {
 
 
         function drawList() {
-            var value = search.property('value');
-            var results = features();
+            const value = search.property('value');
+            const results = features();
 
             list.classed('filtered', value.length);
 
-            var resultsIndicator = list.selectAll('.no-results-item')
+            const resultsIndicator = list.selectAll('.no-results-item')
                 .data([0])
                 .enter()
                 .append('button')
@@ -303,10 +303,10 @@ export function uiFeatureList(context) {
             list.selectAll('.geocode-item')
                 .style('display', (value && _geocodeResults === undefined) ? 'block' : 'none');
 
-            var items = list.selectAll('.feature-list-item')
+            const items = list.selectAll('.feature-list-item')
                 .data(results, function(d) { return d.id; });
 
-            var enter = items.enter()
+            const enter = items.enter()
                 .insert('button', '.geocode-item')
                 .attr('class', 'feature-list-item')
                 .on('pointerenter', mouseover)
@@ -315,7 +315,7 @@ export function uiFeatureList(context) {
                 .on('blur', mouseout)
                 .on('click', click);
 
-            var label = enter
+            const label = enter
                 .append('div')
                 .attr('class', 'label');
 

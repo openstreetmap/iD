@@ -30,12 +30,12 @@ export function uiSplash(context) {
     // fetch intro graph data now, while user is looking at the splash screen
     fileFetcher.get('intro_graph');
 
-    let modalSelection = uiModal(selection);
+    const modalSelection = uiModal(selection);
 
     modalSelection.select('.modal')
       .attr('class', 'modal-splash modal');
 
-    let introModal = modalSelection.select('.content')
+    const introModal = modalSelection.select('.content')
       .append('div')
       .attr('class', 'fillL');
 
@@ -45,7 +45,7 @@ export function uiSplash(context) {
       .append('h3')
       .call(t.append('splash.welcome'));
 
-    let modalSection = introModal
+    const modalSection = introModal
       .append('div')
       .attr('class','modal-section');
 
@@ -69,11 +69,11 @@ export function uiSplash(context) {
       .label(() => t.append('splash.privacy_settings'))
       .render(modalSection);
 
-    let buttonWrap = introModal
+    const buttonWrap = introModal
       .append('div')
       .attr('class', 'modal-actions');
 
-    let walkthrough = buttonWrap
+    const walkthrough = buttonWrap
       .append('button')
       .attr('class', 'walkthrough')
       .on('click', () => {
@@ -91,7 +91,7 @@ export function uiSplash(context) {
       .append('div')
       .call(t.append('splash.walkthrough'));
 
-    let startEditing = buttonWrap
+    const startEditing = buttonWrap
       .append('button')
       .attr('class', 'start-editing')
       .on('click', modalSelection.close);

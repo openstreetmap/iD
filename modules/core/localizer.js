@@ -6,8 +6,8 @@ import { utilStringQs } from '../util';
 import { utilArrayUniq } from '../util/array';
 import { presetsCdnUrl } from '../../config/id.js';
 
-let _mainLocalizer = coreLocalizer(); // singleton
-let _t = _mainLocalizer.t;
+const _mainLocalizer = coreLocalizer(); // singleton
+const _t = _mainLocalizer.t;
 
 export {
     _mainLocalizer as localizer,
@@ -20,7 +20,7 @@ export {
 //
 export function coreLocalizer() {
 
-    let localizer = {};
+    const localizer = {};
 
     let _dataLanguages = {};
 
@@ -41,7 +41,7 @@ export function coreLocalizer() {
     // de: { icons: {…}, toolbar: {…}, modes: {…}, operations: {…}, … },
     // …
     // }
-    let _localeStrings = {};
+    const _localeStrings = {};
 
     // the current locale
     let _localeCode = 'en-US';
@@ -78,12 +78,12 @@ export function coreLocalizer() {
     };
 
 
-    var _loadPromise;
+    let _loadPromise;
 
     localizer.ensureLoaded = () => {
         if (_loadPromise) return _loadPromise;
 
-        let filesToFetch = [
+        const filesToFetch = [
             'languages',  // load the list of languages
             'locales'     // load the list of supported locales
         ];
@@ -93,8 +93,8 @@ export function coreLocalizer() {
             tagging: presetsCdnUrl + 'dist/translations'
         };
 
-        let fileMap = fileFetcher.fileMap();
-        for (let scopeId in localeDirs) {
+        const fileMap = fileFetcher.fileMap();
+        for (const scopeId in localeDirs) {
             const key = `locales_index_${scopeId}`;
             if (!fileMap[key]) {
                 fileMap[key] = localeDirs[scopeId] + '/index.min.json';
@@ -107,15 +107,15 @@ export function coreLocalizer() {
                 _dataLanguages = results[0];
                 _dataLocales = results[1];
 
-                let indexes = results.slice(2);
-                let requestedLocales = (_preferredLocaleCodes || [])
+                const indexes = results.slice(2);
+                const requestedLocales = (_preferredLocaleCodes || [])
                     .concat(utilDetect().browserLocales)   // List of locales preferred by the browser in priority order.
                     .concat(['en']);   // fallback to English since it's the only guaranteed complete language
 
                 _localeCodes = localesToUseFrom(requestedLocales);
                 _localeCode = _localeCodes[0];   // Run iD in the highest-priority locale; the rest are fallbacks
 
-                let loadStringsPromises = [];
+                const loadStringsPromises = [];
 
                 indexes.forEach((index, i) => {
                     // Will always return the index for `en` if nothing else
@@ -124,8 +124,8 @@ export function coreLocalizer() {
                     });
                     // We only need to load locales up until we find one with full coverage
                     _localeCodes.slice(0, fullCoverageIndex + 1).forEach(function(code) {
-                        let scopeId = Object.keys(localeDirs)[i];
-                        let directory = Object.values(localeDirs)[i];
+                        const scopeId = Object.keys(localeDirs)[i];
+                        const directory = Object.values(localeDirs)[i];
                         if (index[code]) loadStringsPromises.push(localizer.loadLocale(code, scopeId, directory));
                     });
                 });
@@ -140,16 +140,16 @@ export function coreLocalizer() {
 
     // Returns the locales from `requestedLocales` supported by iD that we should use
     function localesToUseFrom(requestedLocales) {
-        let supportedLocales = _dataLocales;
+        const supportedLocales = _dataLocales;
 
-        let toUse = [];
-        for (let i in requestedLocales) {
-            let locale = requestedLocales[i];
+        const toUse = [];
+        for (const i in requestedLocales) {
+            const locale = requestedLocales[i];
             if (supportedLocales[locale]) toUse.push(locale);
 
             if (locale.includes('-')) {
                 // Full locale ('es-ES'), add fallback to the base ('es')
-                let langPart = locale.split('-')[0];
+                const langPart = locale.split('-')[0];
                 if (supportedLocales[langPart]) toUse.push(langPart);
             }
         }
@@ -203,7 +203,7 @@ export function coreLocalizer() {
             return Promise.resolve(locale);
         }
 
-        let fileMap = fileFetcher.fileMap();
+        const fileMap = fileFetcher.fileMap();
         const key = `locale_${scopeId}_${locale}`;
         if (!fileMap[key]) {
             fileMap[key] = `${directory}/${locale}.min.json`;
@@ -252,14 +252,14 @@ export function coreLocalizer() {
         let scopeId = 'general';
 
         if (stringId[0] === '_') {
-            let split = stringId.split('.');
+            const split = stringId.split('.');
             scopeId = split[0].slice(1);
             stringId = split.slice(1).join('.');
         }
 
         locale = locale || _localeCode;
 
-        let path = stringId
+        const path = stringId
           .split('.')
           .map(s => s.replace(/<TX_DOT>/g, '.'))
           .reverse();
@@ -294,7 +294,7 @@ export function coreLocalizer() {
                 }
             }
             if (typeof result === 'string') {
-              for (let key in replacements) {
+              for (const key in replacements) {
                 let value = replacements[key];
                 if (typeof value === 'number') {
                   if (value.toLocaleString) {
@@ -325,10 +325,10 @@ export function coreLocalizer() {
         // no localized string found...
 
         // attempt to fallback to a lower-priority language
-        let index = _localeCodes.indexOf(locale);
+        const index = _localeCodes.indexOf(locale);
         if (index >= 0 && index < _localeCodes.length - 1) {
             // eventually this will be 'en' or another locale with 100% coverage
-            let fallback = _localeCodes[index + 1];
+            const fallback = _localeCodes[index + 1];
             return localizer.tInfo(origStringId, replacements, fallback);
         }
 
@@ -366,7 +366,7 @@ export function coreLocalizer() {
     localizer.t.html = function(stringId, replacements, locale) {
       // replacement string might be html unsafe, so we need to escape it except if it is explicitly marked as html code
       replacements = Object.assign({}, replacements);
-      for (var k in replacements) {
+      for (const k in replacements) {
         if (typeof replacements[k] === 'string') {
           replacements[k] = escape(replacements[k]);
         }
@@ -505,7 +505,7 @@ export function coreLocalizer() {
      * formatted number string.
      */
     localizer.decimalPlaceCounter = (locale) => {
-        var literal, group, decimal;
+        let literal, group, decimal;
         if ('Intl' in window && 'NumberFormat' in Intl) {
             const format = new Intl.NumberFormat(locale, { maximumFractionDigits: 20 });
             if ('formatToParts' in format) {

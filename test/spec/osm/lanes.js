@@ -404,14 +404,14 @@ describe('iD.Lanes', function() {
 
     describe.skip('lanes array', function() {
       it('should have correct number of direction elements', function() {
-        var lanes = iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 0, 'lanes:backward': 3 }}).lanes().lanes;
-        var forward = lanes.filter(function(l) {
+        const lanes = iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 0, 'lanes:backward': 3 }}).lanes().lanes;
+        const forward = lanes.filter(function(l) {
           return l.direction === 'forward';
         });
-        var backward = lanes.filter(function(l) {
+        const backward = lanes.filter(function(l) {
           return l.direction === 'backward';
         });
-        var bothways = lanes.filter(function(l) {
+        const bothways = lanes.filter(function(l) {
           return l.direction === 'bothways';
         });
         expect(forward.length).to.eql(2);
@@ -420,14 +420,14 @@ describe('iD.Lanes', function() {
 
       });
       it('should have correct number of direction elements', function() {
-        var lanes = iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().lanes;
-        var forward = lanes.filter(function(l) {
+        const lanes = iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().lanes;
+        const forward = lanes.filter(function(l) {
           return l.direction === 'forward';
         });
-        var backward = lanes.filter(function(l) {
+        const backward = lanes.filter(function(l) {
           return l.direction === 'backward';
         });
-        var bothways = lanes.filter(function(l) {
+        const bothways = lanes.filter(function(l) {
           return l.direction === 'bothways';
         });
         expect(forward.length).to.eql(3);
@@ -438,7 +438,7 @@ describe('iD.Lanes', function() {
 
     describe('turn lanes', function() {
         it('returns correctly when oneway=yes', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'trunk',
                     oneway: 'yes',
@@ -452,7 +452,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly when oneway=yes and lanes=2', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     oneway: 'yes',
@@ -468,7 +468,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly when lanes=5 and both_ways=1', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -489,7 +489,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly when multiple values are present in a lane and oneway=yes', function() {
-            var lanesData = iD.osmWay({
+            const lanesData = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -509,7 +509,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns correctly when multiple values are present in a lane and oneway=no', function() {
-            var lanesData = iD.osmWay({
+            const lanesData = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -534,7 +534,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns unknown for every invalid value in turn:lanes', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 3,
@@ -549,7 +549,7 @@ describe('iD.Lanes', function() {
         });
 
         it('returns unknown for every invalid value in turn:lanes:forward & turn:lanes:backward', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -570,7 +570,7 @@ describe('iD.Lanes', function() {
         });
 
         it.skip('fills with [\'unknown\'] when given turn:lanes are less than lanes count', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -586,7 +586,7 @@ describe('iD.Lanes', function() {
         });
 
         it.skip('fills with [\'unknown\'] when given turn:lanes:forward are less than lanes forward count', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -608,7 +608,7 @@ describe('iD.Lanes', function() {
         });
 
         it.skip('clips when turn lane information is more than lane count', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 2,
@@ -624,7 +624,7 @@ describe('iD.Lanes', function() {
         });
 
         it('turnLanes is undefined when not present', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 2,
@@ -641,7 +641,7 @@ describe('iD.Lanes', function() {
         });
 
         it('turnLanes.forward and turnLanes.backward are both undefined when both are not provided', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 2,
@@ -659,7 +659,7 @@ describe('iD.Lanes', function() {
         });
 
         it('parses turnLane correctly when lanes:both_ways=1', function() {
-            var lanes = iD.osmWay({
+            const lanes = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -678,7 +678,7 @@ describe('iD.Lanes', function() {
         });
 
         it('parses turnLane correctly when lanes:both_ways=1 & lanes:forward < lanes:backward', function() {
-            var lanes = iD.osmWay({
+            const lanes = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -697,7 +697,7 @@ describe('iD.Lanes', function() {
         });
 
         it('parses correctly when turn:lanes= ||x', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 3,
@@ -711,7 +711,7 @@ describe('iD.Lanes', function() {
         });
 
         it('parses correctly when turn:lanes= |x|', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -724,7 +724,7 @@ describe('iD.Lanes', function() {
         });
 
         it('parses correctly when turn:lanes:forward= ||x', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 4,
@@ -743,7 +743,7 @@ describe('iD.Lanes', function() {
         });
 
         it('parses correctly when turn:lanes:backward= |', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -762,7 +762,7 @@ describe('iD.Lanes', function() {
         });
 
         it('fills lanes.unspecified with key \'turnLane\' correctly', function() {
-            var lanes = iD.osmWay({
+            const lanes = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -770,7 +770,7 @@ describe('iD.Lanes', function() {
                     'turn:lanes': 'slight_left||through|through;slight_right|slight_right'
                 }
             }).lanes().lanes;
-            var turnLanesUnspecified = lanes.unspecified.map(function(l) { return l.turnLane; });
+            const turnLanesUnspecified = lanes.unspecified.map(function(l) { return l.turnLane; });
             expect(turnLanesUnspecified).to.deep.equal([
                 ['slight_left'], ['none'], ['through'], ['through', 'slight_right'], ['slight_right']
             ]);
@@ -779,7 +779,7 @@ describe('iD.Lanes', function() {
         });
 
         it('fills lanes.forward & lanes.backward with key \'turnLane\' correctly', function() {
-            var lanes = iD.osmWay({
+            const lanes = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
                     lanes: 5,
@@ -790,8 +790,8 @@ describe('iD.Lanes', function() {
                 }
             }).lanes().lanes;
             expect(lanes.unspecified).to.deep.equal([]);
-            var turnLanesForward = lanes.forward.map(function(l) { return l.turnLane; });
-            var turnLanesBackward = lanes.backward.map(function(l) { return l.turnLane; });
+            const turnLanesForward = lanes.forward.map(function(l) { return l.turnLane; });
+            const turnLanesBackward = lanes.backward.map(function(l) { return l.turnLane; });
             expect(turnLanesForward).to.deep.equal([
                 ['slight_left'], ['none'], ['none']
             ]);
@@ -803,7 +803,7 @@ describe('iD.Lanes', function() {
 
     describe('maxspeed', function() {
         it('should parse maxspeed without any units correctly', function() {
-            var maxspeed = iD.osmWay({
+            let maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -822,7 +822,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed with km/h correctly', function() {
-            var maxspeed = iD.osmWay({
+            const maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -833,7 +833,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed with kmh correctly', function() {
-            var maxspeed = iD.osmWay({
+            const maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -844,7 +844,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed with kph correctly', function() {
-            var maxspeed = iD.osmWay({
+            const maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -855,7 +855,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed with mph correctly', function() {
-            var maxspeed = iD.osmWay({
+            const maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -866,7 +866,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed with knots correctly', function() {
-            var maxspeed = iD.osmWay({
+            const maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -877,7 +877,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should return undefined when incorrect maxspeed unit provided ', function() {
-            var maxspeed = iD.osmWay({
+            const maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -888,7 +888,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should return undefined when incorrect maxspeed value provided ', function() {
-            var maxspeed = iD.osmWay({
+            const maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -899,7 +899,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should return undefined when maxspeed not provided ', function() {
-            var maxspeed = iD.osmWay({
+            const maxspeed = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -912,7 +912,7 @@ describe('iD.Lanes', function() {
     describe('maxspeed:lanes', function() {
 
         it('should parse correctly', function() {
-            var maxspeedLanes = iD.osmWay({
+            const maxspeedLanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -925,7 +925,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed:lanes:forward/backward correctly', function() {
-            var metadata = iD.osmWay({
+            const metadata = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -945,7 +945,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse correctly when some values maxspeed:lanes are implied by x||y notation', function() {
-            var maxspeedLanes = iD.osmWay({
+            const maxspeedLanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 4,
@@ -959,7 +959,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse correctly when some values maxspeed:lanes are implied by x||| notation', function() {
-            var lanes = iD.osmWay({
+            const lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -977,7 +977,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should return none for each maxspeed:lanes which equals maxspeed', function() {
-            var maxspeedLanes = iD.osmWay({
+            let maxspeedLanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -1013,7 +1013,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should return \'unknown\' for every invalid maxspeed:lane value', function() {
-            var maxspeedLanes = iD.osmWay({
+            let maxspeedLanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -1039,7 +1039,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse maxspeed when none', function() {
-            var maxspeedLanes = iD.osmWay({
+            const maxspeedLanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -1052,7 +1052,7 @@ describe('iD.Lanes', function() {
         });
 
         it('fills lanes.unspecified with key \'maxspeed\' correctly', function() {
-            var lanes = iD.osmWay({
+            const lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -1060,7 +1060,7 @@ describe('iD.Lanes', function() {
                     'maxspeed:lanes': '30|40|forty|40|40'
                 }
             }).lanes().lanes;
-            var maxspeedLanes = lanes.unspecified.map(function (l) {
+            const maxspeedLanes = lanes.unspecified.map(function (l) {
                 return l.maxspeed;
             });
             expect(maxspeedLanes).to.deep.equal([
@@ -1071,7 +1071,7 @@ describe('iD.Lanes', function() {
 
     describe('bicycle lanes', function() {
         it('should parse bicycle:lanes correctly', function() {
-            var lanes = iD.osmWay({
+            const lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 3,
@@ -1084,7 +1084,7 @@ describe('iD.Lanes', function() {
             expect(lanes.metadata.bicyclewayLanes.unspecified).to.deep.equal([
                 'no','yes','no', 'designated', 'no'
             ]);
-            var bicyclewayLanes = lanes.lanes.unspecified.map(function(l) {
+            const bicyclewayLanes = lanes.lanes.unspecified.map(function(l) {
                 return l.bicycleway;
             });
             expect(bicyclewayLanes).to.deep.equal([
@@ -1093,7 +1093,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should parse bicycle:lanes:forward/backward correctly', function() {
-            var lanes = iD.osmWay({
+            const lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     'lanes:forward': 4,
@@ -1109,13 +1109,13 @@ describe('iD.Lanes', function() {
             expect(lanes.metadata.bicyclewayLanes.backward).to.deep.equal([
                 'lane','no','no', 'no'
             ]);
-            var bicyclewayLanesForward = lanes.lanes.forward.map(function(l) {
+            const bicyclewayLanesForward = lanes.lanes.forward.map(function(l) {
                 return l.bicycleway;
             });
             expect(bicyclewayLanesForward).to.deep.equal([
                 'lane','no','no', 'no', 'no'
             ]);
-            var bicyclewayLanesBackward = lanes.lanes.backward.map(function(l) {
+            const bicyclewayLanesBackward = lanes.lanes.backward.map(function(l) {
                 return l.bicycleway;
             });
             expect(bicyclewayLanesBackward).to.deep.equal([
@@ -1124,7 +1124,7 @@ describe('iD.Lanes', function() {
         });
 
         it('should replace any invalid value with unknown', function() {
-            var lanes = iD.osmWay({
+            const lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 3,
@@ -1136,7 +1136,7 @@ describe('iD.Lanes', function() {
             expect(lanes.metadata.bicyclewayLanes.unspecified).to.deep.equal([
                 'no','unknown','no', 'designated', 'no'
             ]);
-            var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
+            const psvLanesForward = lanes.lanes.unspecified.map(function(l) {
                 return l.bicycleway;
             });
             expect(psvLanesForward).to.deep.equal([
@@ -1147,7 +1147,7 @@ describe('iD.Lanes', function() {
 
     describe('miscellaneous lanes', function() {
         it('should parse psv:lanes correctly', function() {
-            var lanes = iD.osmWay({
+            const lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -1158,7 +1158,7 @@ describe('iD.Lanes', function() {
             expect(lanes.metadata.psvLanes.unspecified).to.deep.equal([
                 'yes','no','no', 'no', 'no'
             ]);
-            var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
+            const psvLanesForward = lanes.lanes.unspecified.map(function(l) {
                 return l.psv;
             });
             expect(psvLanesForward).to.deep.equal([
@@ -1166,7 +1166,7 @@ describe('iD.Lanes', function() {
             ]);
         });
         it('should parse psv:lanes:forward/backward correctly', function() {
-            var lanes = iD.osmWay({
+            const lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 5,
@@ -1181,10 +1181,10 @@ describe('iD.Lanes', function() {
             expect(lanes.metadata.psvLanes.backward).to.deep.equal([
                 'yes', 'designated'
             ]);
-            var psvLanesForward = lanes.lanes.forward.map(function(l) {
+            const psvLanesForward = lanes.lanes.forward.map(function(l) {
                 return l.psv;
             });
-            var psvLanesBackward = lanes.lanes.backward.map(function(l) {
+            const psvLanesBackward = lanes.lanes.backward.map(function(l) {
                 return l.psv;
             });
             expect(psvLanesForward).to.deep.equal([
@@ -1195,7 +1195,7 @@ describe('iD.Lanes', function() {
             ]);
         });
         it('should replace any invalid value with unknown', function() {
-            var lanes = iD.osmWay({
+            const lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
                     lanes: 3,
@@ -1206,7 +1206,7 @@ describe('iD.Lanes', function() {
             expect(lanes.metadata.psvLanes.unspecified).to.deep.equal([
                 'yes','no', 'unknown'
             ]);
-            var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
+            const psvLanesForward = lanes.lanes.unspecified.map(function(l) {
                 return l.psv;
             });
             expect(psvLanesForward).to.deep.equal([

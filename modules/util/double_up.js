@@ -8,11 +8,11 @@ import { geoVecLength } from '../geo/vector';
 // if pointer events are supported. Falls back to default `dblclick` event.
 export function utilDoubleUp() {
 
-    var dispatch = d3_dispatch('doubleUp');
+    const dispatch = d3_dispatch('doubleUp');
 
-    var _maxTimespan = 500; // milliseconds
-    var _maxDistance = 20; // web pixels; be somewhat generous to account for touch devices
-    var _pointer; // object representing the pointer that could trigger double up
+    const _maxTimespan = 500; // milliseconds
+    const _maxDistance = 20; // web pixels; be somewhat generous to account for touch devices
+    let _pointer; // object representing the pointer that could trigger double up
 
     function pointerIsValidFor(loc) {
         // second pointerup must occur within a small timeframe after the first pointerdown
@@ -26,7 +26,7 @@ export function utilDoubleUp() {
         // ignore right-click
         if (d3_event.ctrlKey || d3_event.button === 2) return;
 
-        var loc = [d3_event.clientX, d3_event.clientY];
+        const loc = [d3_event.clientX, d3_event.clientY];
 
         // Don't rely on pointerId here since it can change between pointerdown
         // events on touch devices
@@ -57,9 +57,9 @@ export function utilDoubleUp() {
         _pointer.upCount += 1;
 
         if (_pointer.upCount === 2) { // double up!
-            var loc = [d3_event.clientX, d3_event.clientY];
+            const loc = [d3_event.clientX, d3_event.clientY];
             if (pointerIsValidFor(loc)) {
-                var locInThis = utilFastMouse(this)(d3_event);
+                const locInThis = utilFastMouse(this)(d3_event);
                 dispatch.call('doubleUp', this, d3_event, locInThis);
             }
             // clear the pointer info in any case

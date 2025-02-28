@@ -1,5 +1,5 @@
 describe.skip('iD.modeAddNote', function() {
-    var context;
+    let context;
 
     before(function() {
         window.location.hash = '#background=none';  // Try not to load imagery
@@ -11,7 +11,7 @@ describe.skip('iD.modeAddNote', function() {
     });
 
     beforeEach(function() {
-        var container = d3.select(document.createElement('div'));
+        const container = d3.select(document.createElement('div'));
         context = iD.coreContext().assetPath('../dist/').container(container).init();
 
         context.loadTiles = function () {};

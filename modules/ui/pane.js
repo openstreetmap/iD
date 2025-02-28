@@ -9,17 +9,17 @@ import { uiTooltip } from './tooltip';
 
 export function uiPane(id, context) {
 
-    var _key;
-    var _label = '';
-    var _description = '';
-    var _iconName = '';
-    var _sections; // array of uiSection objects
+    let _key;
+    let _label = '';
+    let _description = '';
+    let _iconName = '';
+    let _sections; // array of uiSection objects
 
-    var _paneSelection = d3_select(null);
+    let _paneSelection = d3_select(null);
 
-    var _paneTooltip;
+    let _paneTooltip;
 
-    var pane = {
+    const pane = {
         id: id
     };
 
@@ -100,7 +100,7 @@ export function uiPane(id, context) {
             .attr('class', 'fillL map-pane hide ' + id + '-pane')
             .attr('pane', id);
 
-        var heading = _paneSelection
+        const heading = _paneSelection
             .append('div')
             .attr('class', 'pane-heading');
 

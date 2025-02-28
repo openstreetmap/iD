@@ -7,22 +7,22 @@ import { utilArrayUniq } from '../util/array';
 
 export function operationExtract(context, selectedIDs) {
 
-    var _amount = selectedIDs.length === 1 ? 'single' : 'multiple';
-    var _geometries = utilArrayUniq(selectedIDs.map(function(entityID) {
+    const _amount = selectedIDs.length === 1 ? 'single' : 'multiple';
+    const _geometries = utilArrayUniq(selectedIDs.map(function(entityID) {
         return context.graph().hasEntity(entityID) && context.graph().geometry(entityID);
     }).filter(Boolean));
-    var _geometryID = _geometries.length === 1 ? _geometries[0] : 'feature';
+    const _geometryID = _geometries.length === 1 ? _geometries[0] : 'feature';
 
-    var _extent;
-    var _actions = selectedIDs.map(function(entityID) {
-        var graph = context.graph();
-        var entity = graph.hasEntity(entityID);
+    let _extent;
+    const _actions = selectedIDs.map(function(entityID) {
+        const graph = context.graph();
+        const entity = graph.hasEntity(entityID);
         if (!entity || !entity.hasInterestingTags()) return null;
 
         if (entity.type === 'node' && graph.parentWays(entity).length === 0) return null;
 
         if (entity.type !== 'node') {
-            var preset = presetManager.match(entity, graph);
+            const preset = presetManager.match(entity, graph);
             // only allow extraction from ways/relations if the preset supports points
             if (preset.geometry.indexOf('point') === -1) return null;
         }
@@ -33,10 +33,10 @@ export function operationExtract(context, selectedIDs) {
     }).filter(Boolean);
 
     /** @param {KeyboardEvent | undefined} d3_event */
-    var operation = function (d3_event) {
+    const operation = function (d3_event) {
         const shiftKeyPressed = d3_event?.shiftKey || false;
 
-        var combinedAction = function(graph) {
+        const combinedAction = function(graph) {
             _actions.forEach(function(action) {
                 graph = action(graph, shiftKeyPressed);
             });
@@ -44,7 +44,7 @@ export function operationExtract(context, selectedIDs) {
         };
         context.perform(combinedAction, operation.annotation());  // do the extract
 
-        var extractedNodeIDs = _actions.map(function(action) {
+        const extractedNodeIDs = _actions.map(function(action) {
             return action.getExtractedNodeID();
         });
         context.enter(modeSelect(context, extractedNodeIDs));
@@ -71,7 +71,7 @@ export function operationExtract(context, selectedIDs) {
 
 
     operation.tooltip = function () {
-        var disableReason = operation.disabled();
+        const disableReason = operation.disabled();
         if (disableReason) {
             return t.append('operations.extract.' + disableReason + '.' + _amount);
         } else {

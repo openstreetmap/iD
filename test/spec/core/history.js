@@ -1,9 +1,9 @@
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.coreHistory', function () {
-    var context, history, spy;
-    var actionNoop = function(g) { return g; };
-    var actionAddNode = function (nodeID) {
+    let context, history, spy;
+    const actionNoop = function(g) { return g; };
+    const actionAddNode = function (nodeID) {
         return function(g) {
             return g.replace(iD.osmNode({ id: nodeID }));
         };
@@ -25,13 +25,13 @@ describe('iD.coreHistory', function () {
 
     describe('#merge', function () {
         it('merges the entities into all graph versions', function () {
-            var n = iD.osmNode({id: 'n'});
+            const n = iD.osmNode({id: 'n'});
             history.merge([n]);
             expect(history.graph().entity('n')).to.equal(n);
         });
 
         it('emits a merge event with the new entities', function () {
-            var n = iD.osmNode({id: 'n'});
+            const n = iD.osmNode({id: 'n'});
             history.on('merge', spy);
             history.merge([n]);
             expect(spy).to.have.been.calledWith([n]);
@@ -44,7 +44,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('updates the graph', function () {
-            var node = iD.osmNode();
+            const node = iD.osmNode();
             history.perform(function (graph) { return graph.replace(node); });
             expect(history.graph().entity(node.id)).to.equal(node);
         });
@@ -56,14 +56,14 @@ describe('iD.coreHistory', function () {
 
         it('emits a change event', function () {
             history.on('change', spy);
-            var difference = history.perform(actionNoop);
+            const difference = history.perform(actionNoop);
             expect(spy).to.have.been.calledWith(difference);
             expect(spy.callCount).to.eql(1);
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.coreGraph());
-            var action2 = sinon.stub().returns(iD.coreGraph());
+            const action1 = sinon.stub().returns(iD.coreGraph());
+            const action2 = sinon.stub().returns(iD.coreGraph());
             history.perform(action1, action2, 'annotation');
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
@@ -71,7 +71,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('performs transitionable actions in a transition', async () => {
-            var action1 = function() { return iD.coreGraph(); };
+            const action1 = function() { return iD.coreGraph(); };
             action1.transitionable = true;
             history.on('change', spy);
             history.perform(action1);
@@ -86,7 +86,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('updates the graph', function () {
-            var node = iD.osmNode();
+            const node = iD.osmNode();
             history.replace(function (graph) { return graph.replace(node); });
             expect(history.graph().entity(node.id)).to.equal(node);
         });
@@ -99,13 +99,13 @@ describe('iD.coreHistory', function () {
 
         it('emits a change event', function () {
             history.on('change', spy);
-            var difference = history.replace(actionNoop);
+            const difference = history.replace(actionNoop);
             expect(spy).to.have.been.calledWith(difference);
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.coreGraph());
-            var action2 = sinon.stub().returns(iD.coreGraph());
+            const action1 = sinon.stub().returns(iD.coreGraph());
+            const action2 = sinon.stub().returns(iD.coreGraph());
             history.replace(action1, action2, 'annotation');
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
@@ -134,7 +134,7 @@ describe('iD.coreHistory', function () {
         it('emits a change event', function () {
             history.perform(actionNoop);
             history.on('change', spy);
-            var difference = history.pop();
+            const difference = history.pop();
             expect(spy).to.have.been.calledWith(difference);
         });
 
@@ -173,7 +173,7 @@ describe('iD.coreHistory', function () {
 
         it('updates the graph', function () {
             history.perform(actionNoop, 'annotation');
-            var node = iD.osmNode();
+            const node = iD.osmNode();
             history.overwrite(function (graph) { return graph.replace(node); });
             expect(history.graph().entity(node.id)).to.equal(node);
         });
@@ -193,13 +193,13 @@ describe('iD.coreHistory', function () {
         it('emits a change event', function () {
             history.perform(actionNoop, 'annotation');
             history.on('change', spy);
-            var difference = history.overwrite(actionNoop, 'annotation2');
+            const difference = history.overwrite(actionNoop, 'annotation2');
             expect(spy).to.have.been.calledWith(difference);
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.coreGraph());
-            var action2 = sinon.stub().returns(iD.coreGraph());
+            const action1 = sinon.stub().returns(iD.coreGraph());
+            const action2 = sinon.stub().returns(iD.coreGraph());
             history.perform(actionNoop, 'annotation');
             history.overwrite(action1, action2, 'annotation2');
             expect(action1).to.have.been.called;
@@ -235,7 +235,7 @@ describe('iD.coreHistory', function () {
         it('emits a change event', function () {
             history.perform(actionNoop);
             history.on('change', spy);
-            var difference = history.undo();
+            const difference = history.undo();
             expect(spy).to.have.been.calledWith(difference);
         });
     });
@@ -266,7 +266,7 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop);
             history.undo();
             history.on('change', spy);
-            var difference = history.redo();
+            const difference = history.redo();
             expect(spy).to.have.been.calledWith(difference);
         });
     });
@@ -291,7 +291,7 @@ describe('iD.coreHistory', function () {
             history.pop();
             expect(spy).to.have.not.been.called;
 
-            var diff = history.resumeChangeDispatch();
+            const diff = history.resumeChangeDispatch();
             expect(spy).to.have.been.calledOnceWith(diff);
         });
 
@@ -313,7 +313,7 @@ describe('iD.coreHistory', function () {
             history.pauseChangeDispatch();
             history.perform(actionAddNode('b'), 'perform');
 
-            var diff = history.resumeChangeDispatch();
+            const diff = history.resumeChangeDispatch();
             expect(spy).to.have.been.calledOnceWith(diff);
             expect(diff.changes()).to.include.keys(['a', 'b']);
         });
@@ -321,21 +321,21 @@ describe('iD.coreHistory', function () {
 
     describe('#changes', function () {
         it('includes created entities', function () {
-            var node = iD.osmNode();
+            const node = iD.osmNode();
             history.perform(function (graph) { return graph.replace(node); });
             expect(history.changes().created).to.eql([node]);
         });
 
         it('includes modified entities', function () {
-            var node1 = iD.osmNode({id: 'n1'});
-            var node2 = node1.update({ tags: { yes: 'no' } });
+            const node1 = iD.osmNode({id: 'n1'});
+            const node2 = node1.update({ tags: { yes: 'no' } });
             history.merge([node1]);
             history.perform(function (graph) { return graph.replace(node2); });
             expect(history.changes().modified).to.eql([node2]);
         });
 
         it('includes deleted entities', function () {
-            var node = iD.osmNode({id: 'n1'});
+            const node = iD.osmNode({id: 'n1'});
             history.merge([node]);
             history.perform(function (graph) { return graph.remove(node); });
             expect(history.changes().deleted).to.eql([node]);
@@ -344,7 +344,7 @@ describe('iD.coreHistory', function () {
 
     describe('#hasChanges', function() {
         it('is true when any of change\'s values are nonempty', function() {
-            var node = iD.osmNode();
+            const node = iD.osmNode();
             history.perform(function (graph) { return graph.replace(node); });
             expect(history.hasChanges()).to.eql(true);
         });
@@ -409,21 +409,21 @@ describe('iD.coreHistory', function () {
         });
 
         it('generates v3 JSON', function() {
-            var node_1 = iD.osmNode({id: 'n-1'});
-            var node1 = iD.osmNode({id: 'n1'});
-            var node2 = iD.osmNode({id: 'n2'});
-            var node3 = iD.osmNode({id: 'n3'});
+            const node_1 = iD.osmNode({id: 'n-1'});
+            const node1 = iD.osmNode({id: 'n1'});
+            const node2 = iD.osmNode({id: 'n2'});
+            const node3 = iD.osmNode({id: 'n3'});
             history.merge([node1, node2, node3]);
             history.perform(iD.actionAddEntity(node_1));           // addition
             history.perform(iD.actionChangeTags('n2', {k: 'v'}));  // modification
             history.perform(iD.actionDeleteNode('n3'));            // deletion
 
-            var json = JSON.parse(history.toJSON());
-            var node_1_json = JSON.parse(JSON.stringify(node_1));
-            var node1_json = JSON.parse(JSON.stringify(node1));
-            var node2_json = JSON.parse(JSON.stringify(node2));
-            var node2_upd_json = JSON.parse(JSON.stringify(node2.update({tags: {k: 'v'}})));
-            var node3_json = JSON.parse(JSON.stringify(node3));
+            const json = JSON.parse(history.toJSON());
+            const node_1_json = JSON.parse(JSON.stringify(node_1));
+            const node1_json = JSON.parse(JSON.stringify(node1));
+            const node2_json = JSON.parse(JSON.stringify(node2));
+            const node2_upd_json = JSON.parse(JSON.stringify(node2.update({tags: {k: 'v'}})));
+            const node3_json = JSON.parse(JSON.stringify(node3));
 
             expect(json.version).to.eql(3);
             expect(json.entities).to.deep.own.include(node_1_json);
@@ -440,7 +440,7 @@ describe('iD.coreHistory', function () {
 
     describe('#fromJSON', function() {
         it('restores from v1 JSON (creation)', function() {
-            var json = {
+            const json = {
                 'stack': [
                     {'entities': {}},
                     {'entities': {'n-1': {'loc': [1, 2], 'id': 'n-1'}}, 'imageryUsed': ['Bing'], 'annotation': 'Added a point.'}
@@ -456,7 +456,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('restores from v1 JSON (modification)', function() {
-            var json = {
+            const json = {
                 'stack': [
                     {'entities': {}},
                     {'entities': {'n-1': {'loc': [1, 2], 'id': 'n-1'}}, 'imageryUsed': ['Bing'], 'annotation': 'Added a point.'},
@@ -473,7 +473,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('restores from v1 JSON (deletion)', function() {
-            var json = {
+            const json = {
                 'stack': [
                     {'entities': {}},
                     {'entities': {'n1': 'undefined'}, 'imageryUsed': ['Bing'], 'annotation': 'Deleted a point.'}
@@ -490,7 +490,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('restores from v2 JSON (creation)', function() {
-            var json = {
+            const json = {
                 'version': 2,
                 'entities': [
                     {'loc': [1, 2], 'id': 'n-1'}
@@ -511,7 +511,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('restores from v2 JSON (modification)', function() {
-            var json = {
+            const json = {
                 'version': 2,
                 'entities': [
                     {'loc': [2, 3], 'id': 'n1', 'v': 1}
@@ -533,7 +533,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('restores from v2 JSON (deletion)', function() {
-            var json = {
+            const json = {
                 'version': 2,
                 'entities': [],
                 'stack': [
@@ -553,7 +553,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('restores from v3 JSON (creation)', function() {
-            var json = {
+            const json = {
                 'version': 3,
                 'entities': [
                     {'loc': [1, 2], 'id': 'n-1'}
@@ -575,7 +575,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('restores from v3 JSON (modification)', function() {
-            var json = {
+            const json = {
                 'version': 3,
                 'entities': [
                     {'loc': [2, 3], 'id': 'n1', 'v': 1}
@@ -597,7 +597,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('restores from v3 JSON (deletion)', function() {
-            var json = {
+            const json = {
                 'version': 3,
                 'entities': [],
                 'baseEntities': [{'loc': [1, 2], 'id': 'n1'}],

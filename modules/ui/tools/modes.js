@@ -16,12 +16,12 @@ import { uiTooltip } from '../tooltip';
 
 export function uiToolDrawModes(context) {
 
-    var tool = {
+    const tool = {
         id: 'old_modes',
         label: t.append('toolbar.add_feature')
     };
 
-    var modes = [
+    const modes = [
         modeAddPoint(context, {
             title: t.append('modes.add_point.title'),
             button: 'point',
@@ -71,12 +71,12 @@ export function uiToolDrawModes(context) {
 
     tool.render = function(selection) {
 
-        var wrap = selection
+        const wrap = selection
             .append('div')
             .attr('class', 'joined')
             .style('display', 'flex');
 
-        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
+        const debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
             .on('move.modes', debouncedUpdate)
@@ -90,7 +90,7 @@ export function uiToolDrawModes(context) {
 
         function update() {
 
-            var buttons = wrap.selectAll('button.add-button')
+            let buttons = wrap.selectAll('button.add-button')
                 .data(modes, function(d) { return d.id; });
 
             // exit
@@ -98,14 +98,14 @@ export function uiToolDrawModes(context) {
                 .remove();
 
             // enter
-            var buttonsEnter = buttons.enter()
+            const buttonsEnter = buttons.enter()
                 .append('button')
                 .attr('class', function(d) { return d.id + ' add-button bar-button'; })
                 .on('click.mode-buttons', function(d3_event, d) {
                     if (!enabled(d)) return;
 
                     // When drawing, ignore accidental clicks on mode buttons - #4042
-                    var currMode = context.mode().id;
+                    const currMode = context.mode().id;
                     if (/^draw/.test(currMode)) return;
 
                     if (d.id === currMode) {

@@ -3,8 +3,8 @@ import { geoSphericalDistance, geoVecNormalizedDot } from '../../geo';
 import { uiCmd } from '../cmd';
 
 export function pointBox(loc, context) {
-    var rect = context.surfaceRect();
-    var point = context.curtainProjection(loc);
+    const rect = context.surfaceRect();
+    const point = context.curtainProjection(loc);
     return {
         left: point[0] + rect.left - 40,
         top: point[1] + rect.top - 60,
@@ -15,10 +15,10 @@ export function pointBox(loc, context) {
 
 
 export function pad(locOrBox, padding, context) {
-    var box;
+    let box;
     if (locOrBox instanceof Array) {
-        var rect = context.surfaceRect();
-        var point = context.curtainProjection(locOrBox);
+        const rect = context.surfaceRect();
+        const point = context.curtainProjection(locOrBox);
         box = {
             left: point[0] + rect.left,
             top: point[1] + rect.top
@@ -42,7 +42,7 @@ export function icon(name, svgklass, useklass) {
          (useklass ? ' class="' + useklass + '"' : '') + '></use></svg>';
 }
 
-var helpStringReplacements;
+let helpStringReplacements;
 
 // Returns the localized HTML element for `id` with a standardized set of icon, key, and
 // label replacements suitable for tutorials and documentation. Optionally supplemented
@@ -146,12 +146,12 @@ export function helpHtml(id, replacements) {
         help: t.html('help.title'),
         ok: t.html('intro.ok')
         };
-        for (var key in helpStringReplacements) {
+        for (const key in helpStringReplacements) {
             helpStringReplacements[key] = { html: helpStringReplacements[key] };
         }
     }
 
-    var reps;
+    let reps;
     if (replacements) {
         reps = Object.assign(replacements, helpStringReplacements);
     } else {
@@ -175,22 +175,22 @@ function slugify(text) {
 
 
 // console warning for missing walkthrough names
-export var missingStrings = {};
+export const missingStrings = {};
 function checkKey(key, text) {
     if (t(key, { default: undefined}) === undefined) {
         if (missingStrings.hasOwnProperty(key)) return;  // warn once
         missingStrings[key] = text;
-        var missing = key + ': ' + text;
+        const missing = key + ': ' + text;
         if (typeof console !== 'undefined') console.log(missing); // eslint-disable-line
     }
 }
 
 
 export function localize(obj) {
-    var key;
+    let key;
 
     // Assign name if entity has one..
-    var name = obj.tags && obj.tags.name;
+    const name = obj.tags && obj.tags.name;
     if (name) {
         key = 'intro.graph.name.' + slugify(name);
         obj.tags.name = t(key, { default: name });
@@ -198,22 +198,22 @@ export function localize(obj) {
     }
 
     // Assign street name if entity has one..
-    var street = obj.tags && obj.tags['addr:street'];
+    const street = obj.tags && obj.tags['addr:street'];
     if (street) {
         key = 'intro.graph.name.' + slugify(street);
         obj.tags['addr:street'] = t(key, { default: street });
         checkKey(key, street);
 
         // Add address details common across walkthrough..
-        var addrTags = [
+        const addrTags = [
             'block_number', 'city', 'county', 'district', 'hamlet', 'neighbourhood',
             'postcode', 'province', 'quarter', 'state', 'subdistrict', 'suburb'
         ];
         addrTags.forEach(function(k) {
-            var key = 'intro.graph.' + k;
-            var tag = 'addr:' + k;
-            var val = obj.tags && obj.tags[tag];
-            var str = t(key, { default: val });
+            const key = 'intro.graph.' + k;
+            const tag = 'addr:' + k;
+            const val = obj.tags && obj.tags[tag];
+            const str = t(key, { default: val });
 
             if (str) {
                 if (str.match(/^<.*>$/) !== null) {
@@ -233,17 +233,17 @@ export function localize(obj) {
 export function isMostlySquare(points) {
     // note: uses 15 here instead of the 12 from actionOrthogonalize because
     // actionOrthogonalize can actually straighten some larger angles as it iterates
-    var threshold = 15; // degrees within right or straight
-    var lowerBound = Math.cos((90 - threshold) * Math.PI / 180);  // near right
-    var upperBound = Math.cos(threshold * Math.PI / 180);         // near straight
+    const threshold = 15; // degrees within right or straight
+    const lowerBound = Math.cos((90 - threshold) * Math.PI / 180);  // near right
+    const upperBound = Math.cos(threshold * Math.PI / 180);         // near straight
 
-    for (var i = 0; i < points.length; i++) {
-        var a = points[(i - 1 + points.length) % points.length];
-        var origin = points[i];
-        var b = points[(i + 1) % points.length];
+    for (let i = 0; i < points.length; i++) {
+        const a = points[(i - 1 + points.length) % points.length];
+        const origin = points[i];
+        const b = points[(i + 1) % points.length];
 
-        var dotp = geoVecNormalizedDot(a, b, origin);
-        var mag = Math.abs(dotp);
+        const dotp = geoVecNormalizedDot(a, b, origin);
+        const mag = Math.abs(dotp);
         if (mag > lowerBound && mag < upperBound) {
             return false;
         }
@@ -259,7 +259,7 @@ export function selectMenuItem(context, operation) {
 
 
 export function transitionTime(point1, point2) {
-    var distance = geoSphericalDistance(point1, point2);
+    const distance = geoSphericalDistance(point1, point2);
     if (distance === 0) {
         return 0;
     } else if (distance < 80) {

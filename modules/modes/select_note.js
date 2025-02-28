@@ -18,22 +18,22 @@ import { utilKeybinding } from '../util';
 
 
 export function modeSelectNote(context, selectedNoteID) {
-    var mode = {
+    const mode = {
         id: 'select-note',
         button: 'browse'
     };
 
-    var _keybinding = utilKeybinding('select-note');
-    var _noteEditor = uiNoteEditor(context)
+    const _keybinding = utilKeybinding('select-note');
+    const _noteEditor = uiNoteEditor(context)
         .on('change', function() {
             context.map().pan([0,0]);  // trigger a redraw
-            var note = checkSelectedID();
+            const note = checkSelectedID();
             if (!note) return;
             context.ui().sidebar
                 .show(_noteEditor.note(note));
         });
 
-    var _behaviors = [
+    const _behaviors = [
         behaviorBreathe(context),
         behaviorHover(context),
         behaviorSelect(context),
@@ -42,12 +42,12 @@ export function modeSelectNote(context, selectedNoteID) {
         modeDragNote(context).behavior
     ];
 
-    var _newFeature = false;
+    let _newFeature = false;
 
 
     function checkSelectedID() {
         if (!services.osm) return;
-        var note = services.osm.getNote(selectedNoteID);
+        const note = services.osm.getNote(selectedNoteID);
         if (!note) {
             context.enter(modeBrowse(context));
         }
@@ -59,12 +59,12 @@ export function modeSelectNote(context, selectedNoteID) {
     function selectNote(d3_event, drawn) {
         if (!checkSelectedID()) return;
 
-        var selection = context.surface().selectAll('.layer-notes .note-' + selectedNoteID);
+        const selection = context.surface().selectAll('.layer-notes .note-' + selectedNoteID);
 
         if (selection.empty()) {
             // Return to browse mode if selected DOM elements have
             // disappeared because the user moved them out of view..
-            var source = d3_event && d3_event.type === 'zoom' && d3_event.sourceEvent;
+            const source = d3_event && d3_event.type === 'zoom' && d3_event.sourceEvent;
             if (drawn && source && (source.type === 'pointermove' || source.type === 'mousemove' || source.type === 'touchmove')) {
                 context.enter(modeBrowse(context));
             }
@@ -86,7 +86,7 @@ export function modeSelectNote(context, selectedNoteID) {
 
     mode.zoomToSelected = function() {
         if (!services.osm) return;
-        var note = services.osm.getNote(selectedNoteID);
+        const note = services.osm.getNote(selectedNoteID);
         if (note) {
             context.map().centerZoomEase(note.loc, 20);
         }
@@ -101,7 +101,7 @@ export function modeSelectNote(context, selectedNoteID) {
 
 
     mode.enter = function() {
-        var note = checkSelectedID();
+        const note = checkSelectedID();
         if (!note) return;
 
         _behaviors.forEach(context.install);
@@ -115,7 +115,7 @@ export function modeSelectNote(context, selectedNoteID) {
 
         selectNote();
 
-        var sidebar = context.ui().sidebar;
+        const sidebar = context.ui().sidebar;
         sidebar.show(_noteEditor.note(note).newNote(_newFeature));
 
         // expand the sidebar, avoid obscuring the note if needed

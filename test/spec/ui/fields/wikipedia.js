@@ -1,7 +1,7 @@
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.uiFieldWikipedia', function() {
-    var entity, context, selection, field;
+    let entity, context, selection, field;
 
     before(function() {
         iD.fileFetcher.cache().wmf_sitematrix = [
@@ -42,14 +42,14 @@ describe('iD.uiFieldWikipedia', function() {
 
 
     function changeTags(changed) {
-        var e = context.entity(entity.id);
-        var annotation = 'Changed tags.';
-        var tags = JSON.parse(JSON.stringify(e.tags));   // deep copy
-        var didChange = false;
+        const e = context.entity(entity.id);
+        const annotation = 'Changed tags.';
+        const tags = JSON.parse(JSON.stringify(e.tags));   // deep copy
+        let didChange = false;
 
-        for (var k in changed) {
+        for (const k in changed) {
             if (changed.hasOwnProperty(k)) {
-                var v = changed[k];
+                const v = changed[k];
                 if (tags[k] !== v && (v !== undefined || tags.hasOwnProperty(k))) {
                     tags[k] = v;
                     didChange = true;
@@ -63,7 +63,7 @@ describe('iD.uiFieldWikipedia', function() {
     }
 
     it('recognizes lang:title format', async () => {
-        var wikipedia = iD.uiFieldWikipedia(field, context);
+        const wikipedia = iD.uiFieldWikipedia(field, context);
         await setTimeout(20);
         selection.call(wikipedia);
         wikipedia.tags({wikipedia: 'en:Title'});
@@ -73,12 +73,12 @@ describe('iD.uiFieldWikipedia', function() {
     });
 
     it('sets language, value', async () => {
-        var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+        const wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
         await setTimeout(20);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
 
-        var spy = sinon.spy();
+        const spy = sinon.spy();
         wikipedia.on('change.spy', spy);
 
         iD.utilGetSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
@@ -97,7 +97,7 @@ describe('iD.uiFieldWikipedia', function() {
     });
 
     it('recognizes pasted URLs', async () => {
-        var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+        const wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
         await setTimeout(20);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
@@ -111,12 +111,12 @@ describe('iD.uiFieldWikipedia', function() {
 
     describe('encodePath', function() {
         it('returns an encoded URI component that contains the title with spaces replaced by underscores', () => {
-            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            const wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
             expect(wikipedia.encodePath('? (film)', undefined)).to.equal('%3F_(film)');
         });
 
         it('returns an encoded URI component that includes an anchor fragment', () => {
-            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            const wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
             // this can be tested manually by entering '? (film)#Themes and style in the search box before focusing out'
             expect(wikipedia.encodePath('? (film)', 'Themes and style')).to.equal('%3F_(film)#Themes_and_style');
         });
@@ -124,35 +124,35 @@ describe('iD.uiFieldWikipedia', function() {
 
     describe('encodeURIAnchorFragment', function() {
         it('returns an encoded URI anchor fragment', () => {
-            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            const wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
             // this can be similarly tested by entering 'Section#Arts, entertainment and media' in the search box before focusing out'
             expect(wikipedia.encodeURIAnchorFragment('Theme?')).to.equal('#Theme%3F');
         });
 
         it('replaces all whitespace characters with underscore', () => {
-            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            const wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
             expect(wikipedia.encodeURIAnchorFragment('Themes And Styles')).to.equal('#Themes_And_Styles');
         });
 
         it('encodes % characters, does not replace them with a dot', () => {
-            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            const wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
             expect(wikipedia.encodeURIAnchorFragment('Is%this_100% correct')).to.equal('#Is%25this_100%25_correct');
         });
 
         it('encodes characters that are URI encoded characters', () => {
-            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            const wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
             expect(wikipedia.encodeURIAnchorFragment('Section %20%25')).to.equal('#Section_%2520%2525');
         });
     });
 
     // note - currently skipping the tests that use `options` to delay responses
     it('preserves existing language', async () => {
-        var wikipedia1 = iD.uiFieldWikipedia(field, context);
+        const wikipedia1 = iD.uiFieldWikipedia(field, context);
         await setTimeout(20);
         selection.call(wikipedia1);
         iD.utilGetSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
 
-        var wikipedia2 = iD.uiFieldWikipedia(field, context);
+        const wikipedia2 = iD.uiFieldWikipedia(field, context);
         await setTimeout(20);
         selection.call(wikipedia2);
         wikipedia2.tags({});
@@ -160,11 +160,11 @@ describe('iD.uiFieldWikipedia', function() {
     });
 
     it.skip('does not set delayed wikidata tag if graph has changed', async () => {
-        var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+        const wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
 
-        var spy = sinon.spy();
+        const spy = sinon.spy();
         wikipedia.on('change.spy', spy);
 
         // Create an XHR server that will respond after 60ms

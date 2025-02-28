@@ -1,5 +1,5 @@
 describe('iD.utilSessionMutex', function() {
-    var a, b;
+    let a, b;
 
     afterEach(function() {
         if (a) a.unlock();

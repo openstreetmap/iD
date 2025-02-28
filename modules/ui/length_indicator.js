@@ -10,8 +10,8 @@ import { uiPopover } from './popover';
 
 
 export function uiLengthIndicator(maxChars) {
-    var _wrap = d3_select(null);
-    var _tooltip = uiPopover('tooltip max-length-warning')
+    let _wrap = d3_select(null);
+    const _tooltip = uiPopover('tooltip max-length-warning')
         .placement('bottom')
         .hasArrow(true)
         .content(() => selection => {
@@ -19,9 +19,9 @@ export function uiLengthIndicator(maxChars) {
             selection.call(svgIcon('#iD-icon-alert', 'inline'));
             selection.call(t.append('inspector.max_length_reached', { maxChars }));
         });
-    var _silent = false;
+    let _silent = false;
 
-    var lengthIndicator = function(selection) {
+    const lengthIndicator = function(selection) {
         _wrap = selection.selectAll('span.length-indicator-wrap').data([0]);
         _wrap = _wrap.enter()
             .append('span')
@@ -33,7 +33,7 @@ export function uiLengthIndicator(maxChars) {
     lengthIndicator.update = function(val) {
         const strLen = utilUnicodeCharsCount(utilCleanOsmString(val, Number.POSITIVE_INFINITY));
 
-        let indicator = _wrap.selectAll('span.length-indicator')
+        const indicator = _wrap.selectAll('span.length-indicator')
             .data([strLen]);
 
         indicator.enter()

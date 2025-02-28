@@ -24,20 +24,20 @@ import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } f
 
 export function uiSectionRawMembershipEditor(context) {
 
-    var section = uiSection('raw-membership-editor', context)
+    const section = uiSection('raw-membership-editor', context)
         .shouldDisplay(function() {
             return _entityIDs && _entityIDs.length;
         })
         .label(function() {
-            var parents = getSharedParentRelations();
-            var gt = parents.length > _maxMemberships ? '>' : '';
-            var count = gt + parents.slice(0, _maxMemberships).length;
+            const parents = getSharedParentRelations();
+            const gt = parents.length > _maxMemberships ? '>' : '';
+            const count = gt + parents.slice(0, _maxMemberships).length;
             return t.append('inspector.title_count', { title: t('inspector.relations'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
-    var taginfo = services.taginfo;
-    var nearbyCombo = uiCombobox(context, 'parent-relation')
+    const taginfo = services.taginfo;
+    const nearbyCombo = uiCombobox(context, 'parent-relation')
         .minItems(1)
         .fetcher(fetchNearbyRelations)
         .itemsMouseEnter(function(d3_event, d) {
@@ -46,17 +46,17 @@ export function uiSectionRawMembershipEditor(context) {
         .itemsMouseLeave(function(d3_event, d) {
             if (d.relation) utilHighlightEntities([d.relation.id], false, context);
         });
-    var _inChange = false;
-    var _entityIDs = [];
-    var _showBlank;
-    var _maxMemberships = 1000;
+    let _inChange = false;
+    let _entityIDs = [];
+    let _showBlank;
+    const _maxMemberships = 1000;
     /** @type {Set<string>} relations that were added after this panel was opened */
     const recentlyAdded = new Set();
 
     function getSharedParentRelations() {
-        var parents = [];
-        for (var i = 0; i < _entityIDs.length; i++) {
-            var entity = context.graph().hasEntity(_entityIDs[i]);
+        let parents = [];
+        for (let i = 0; i < _entityIDs.length; i++) {
+            const entity = context.graph().hasEntity(_entityIDs[i]);
             if (!entity) continue;
 
             if (i === 0) {
@@ -71,12 +71,12 @@ export function uiSectionRawMembershipEditor(context) {
 
     function getMemberships() {
 
-        var memberships = [];
-        var relations = getSharedParentRelations().slice(0, _maxMemberships);
+        const memberships = [];
+        const relations = getSharedParentRelations().slice(0, _maxMemberships);
 
-        var isMultiselect = _entityIDs.length > 1;
+        const isMultiselect = _entityIDs.length > 1;
 
-        var i, relation, membership, index, member, indexedMember;
+        let i, relation, membership, index, member, indexedMember;
         for (i = 0; i < relations.length; i++) {
             relation = relations[i];
             membership = {
@@ -109,7 +109,7 @@ export function uiSectionRawMembershipEditor(context) {
 
         memberships.forEach(function(membership) {
             membership.domId = utilUniqueDomId('membership-' + membership.relation.id);
-            var roles = [];
+            const roles = [];
             membership.members.forEach(function(member) {
                 if (roles.indexOf(member.role) === -1) roles.push(member.role);
             });
@@ -161,7 +161,7 @@ export function uiSectionRawMembershipEditor(context) {
     function zoomToRelation(d3_event, d) {
         d3_event.preventDefault();
 
-        var entity = context.entity(d.relation.id);
+        const entity = context.entity(d.relation.id);
         context.map().zoomToEase(entity);
 
         // highlight the relation in case it wasn't previously on-screen
@@ -173,11 +173,11 @@ export function uiSectionRawMembershipEditor(context) {
         if (d === 0) return;    // called on newrow (shouldn't happen)
         if (_inChange) return;  // avoid accidental recursive call #5731
 
-        var newRole = context.cleanRelationRole(d3_select(this).property('value'));
+        const newRole = context.cleanRelationRole(d3_select(this).property('value'));
 
         if (!newRole.trim() && typeof d.role !== 'string') return;
 
-        var membersToUpdate = d.members.filter(function(member) {
+        const membersToUpdate = d.members.filter(function(member) {
             return member.role !== newRole;
         });
 
@@ -186,7 +186,7 @@ export function uiSectionRawMembershipEditor(context) {
             context.perform(
                 function actionChangeMemberRoles(graph) {
                     membersToUpdate.forEach(function(member) {
-                        var newMember = Object.assign({}, member, { role: newRole });
+                        const newMember = Object.assign({}, member, { role: newRole });
                         delete newMember.index;
                         graph = actionChangeMember(d.relation.id, newMember, member.index)(graph);
                     });
@@ -207,8 +207,8 @@ export function uiSectionRawMembershipEditor(context) {
 
         function actionAddMembers(relationId, ids, role) {
             return function(graph) {
-                for (var i in ids) {
-                    var member = { id: ids[i], type: graph.entity(ids[i]).type, role: role };
+                for (const i in ids) {
+                    const member = { id: ids[i], type: graph.entity(ids[i]).type, role: role };
                     graph = actionAddMember(relationId, member)(graph);
                 }
                 return graph;
@@ -226,7 +226,7 @@ export function uiSectionRawMembershipEditor(context) {
             context.validator().validate();
 
         } else {
-            var relation = osmRelation();
+            const relation = osmRelation();
             context.perform(
                 actionAddEntity(relation),
                 actionAddMembers(relation.id, _entityIDs, role),
@@ -257,7 +257,7 @@ export function uiSectionRawMembershipEditor(context) {
         // remove the hover-highlight styling
         utilHighlightEntities([d.relation.id], false, context);
 
-        var indexes = d.members.map(function(member) {
+        const indexes = d.members.map(function(member) {
             return member.index;
         });
 
@@ -272,22 +272,22 @@ export function uiSectionRawMembershipEditor(context) {
 
 
     function fetchNearbyRelations(q, callback) {
-        var newRelation = {
+        const newRelation = {
             relation: null,
             value: t('inspector.new_relation'),
             display: t.append('inspector.new_relation')
         };
 
-        var entityID = _entityIDs[0];
+        const entityID = _entityIDs[0];
 
-        var result = [];
+        const result = [];
 
-        var graph = context.graph();
+        const graph = context.graph();
 
         function baseDisplayLabel(entity) {
-            var matched = presetManager.match(entity, graph);
-            var presetName = (matched && matched.name()) || t('inspector.relation');
-            var entityName = utilDisplayName(entity) || '';
+            const matched = presetManager.match(entity, graph);
+            const presetName = (matched && matched.name()) || t('inspector.relation');
+            const entityName = utilDisplayName(entity) || '';
 
             return selection => {
                 selection
@@ -301,7 +301,7 @@ export function uiSectionRawMembershipEditor(context) {
             };
         }
 
-        var explicitRelation = q && context.hasEntity(q.toLowerCase());
+        const explicitRelation = q && context.hasEntity(q.toLowerCase());
         if (explicitRelation && explicitRelation.type === 'relation' && explicitRelation.id !== entityID) {
             // loaded relation is specified explicitly, only show that
 
@@ -315,7 +315,7 @@ export function uiSectionRawMembershipEditor(context) {
             context.history().intersects(context.map().extent()).forEach(function(entity) {
                 if (entity.type !== 'relation' || entity.id === entityID) return;
 
-                var value = baseDisplayValue(entity);
+                const value = baseDisplayValue(entity);
                 if (q && (value + ' ' + entity.id).toLowerCase().indexOf(q.toLowerCase()) === -1) return;
 
                 result.push({
@@ -330,7 +330,7 @@ export function uiSectionRawMembershipEditor(context) {
             });
 
             // Dedupe identical names by appending relation id - see #2891
-            var dupeGroups = Object.values(utilArrayGroupBy(result, 'value'))
+            const dupeGroups = Object.values(utilArrayGroupBy(result, 'value'))
                 .filter(function(v) { return v.length > 1; });
 
             dupeGroups.forEach(function(group) {
@@ -350,18 +350,18 @@ export function uiSectionRawMembershipEditor(context) {
 
     function baseDisplayValue(entity) {
         const graph = context.graph();
-        var matched = presetManager.match(entity, graph);
-        var presetName = (matched && matched.name()) || t('inspector.relation');
-        var entityName = utilDisplayName(entity) || '';
+        const matched = presetManager.match(entity, graph);
+        const presetName = (matched && matched.name()) || t('inspector.relation');
+        const entityName = utilDisplayName(entity) || '';
 
         return presetName + ' ' + entityName;
     }
 
     function renderDisclosureContent(selection) {
 
-        var memberships = getMemberships();
+        const memberships = getMemberships();
 
-        var list = selection.selectAll('.member-list')
+        let list = selection.selectAll('.member-list')
             .data([0]);
 
         list = list.enter()
@@ -370,7 +370,7 @@ export function uiSectionRawMembershipEditor(context) {
             .merge(list);
 
 
-        var items = list.selectAll('li.member-row-normal')
+        let items = list.selectAll('li.member-row-normal')
             .data(memberships, function(d) {
                 return d.hash;
             });
@@ -380,7 +380,7 @@ export function uiSectionRawMembershipEditor(context) {
             .remove();
 
         // Enter
-        var itemsEnter = items.enter()
+        const itemsEnter = items.enter()
             .append('li')
             .attr('class', 'member-row member-row-normal form-field');
 
@@ -392,14 +392,14 @@ export function uiSectionRawMembershipEditor(context) {
                 utilHighlightEntities([d.relation.id], false, context);
             });
 
-        var labelEnter = itemsEnter
+        const labelEnter = itemsEnter
             .append('label')
             .attr('class', 'field-label')
             .attr('for', function(d) {
                 return d.domId;
             });
 
-        var labelLink = labelEnter
+        const labelLink = labelEnter
             .append('span')
             .attr('class', 'label-text')
             .append('a')
@@ -410,7 +410,7 @@ export function uiSectionRawMembershipEditor(context) {
             .append('span')
             .attr('class', 'member-entity-type')
             .text(function(d) {
-                var matched = presetManager.match(d.relation, context.graph());
+                const matched = presetManager.match(d.relation, context.graph());
                 return (matched && matched.name()) || t.html('inspector.relation');
             });
 
@@ -453,7 +453,7 @@ export function uiSectionRawMembershipEditor(context) {
                 return d.relation.members.every(m => graph.hasEntity(m.id));
             });
 
-        var wrapEnter = itemsEnter
+        const wrapEnter = itemsEnter
             .append('div')
             .attr('class', 'form-field-input-wrap form-field-input-member');
 
@@ -484,7 +484,7 @@ export function uiSectionRawMembershipEditor(context) {
             wrapEnter.each(bindTypeahead);
         }
 
-        var newMembership = list.selectAll('.member-row-new')
+        let newMembership = list.selectAll('.member-row-new')
             .data(_showBlank ? [0] : []);
 
         // Exit
@@ -492,11 +492,11 @@ export function uiSectionRawMembershipEditor(context) {
             .remove();
 
         // Enter
-        var newMembershipEnter = newMembership.enter()
+        const newMembershipEnter = newMembership.enter()
             .append('li')
             .attr('class', 'member-row member-row-new form-field');
 
-        var newLabelEnter = newMembershipEnter
+        const newLabelEnter = newMembershipEnter
             .append('label')
             .attr('class', 'field-label');
 
@@ -517,7 +517,7 @@ export function uiSectionRawMembershipEditor(context) {
                     .remove();
             });
 
-        var newWrapEnter = newMembershipEnter
+        const newWrapEnter = newMembershipEnter
             .append('div')
             .attr('class', 'form-field-input-wrap form-field-input-member');
 
@@ -544,15 +544,15 @@ export function uiSectionRawMembershipEditor(context) {
 
 
         // Container for the Add button
-        var addRow = selection.selectAll('.add-row')
+        let addRow = selection.selectAll('.add-row')
             .data([0]);
 
         // enter
-        var addRowEnter = addRow.enter()
+        const addRowEnter = addRow.enter()
             .append('div')
             .attr('class', 'add-row');
 
-        var addRelationButton = addRowEnter
+        const addRelationButton = addRowEnter
             .append('button')
             .attr('class', 'add-relation')
             .attr('aria-label', t('inspector.add_to_relation'));
@@ -592,13 +592,13 @@ export function uiSectionRawMembershipEditor(context) {
             // remove hover-higlighting
             if (d.relation) utilHighlightEntities([d.relation.id], false, context);
 
-            var role = context.cleanRelationRole(list.selectAll('.member-row-new .member-role').property('value'));
+            const role = context.cleanRelationRole(list.selectAll('.member-row-new .member-role').property('value'));
             addMembership(d, role);
         }
 
 
         function cancelEntity() {
-            var input = newMembership.selectAll('.member-entity-input');
+            const input = newMembership.selectAll('.member-entity-input');
             input.property('value', '');
 
             // remove hover-higlighting
@@ -608,14 +608,14 @@ export function uiSectionRawMembershipEditor(context) {
 
 
         function bindTypeahead(d) {
-            var row = d3_select(this);
-            var role = row.selectAll('input.member-role');
-            var origValue = role.property('value');
+            const row = d3_select(this);
+            const role = row.selectAll('input.member-role');
+            const origValue = role.property('value');
 
             function sort(value, data) {
-                var sameletter = [];
-                var other = [];
-                for (var i = 0; i < data.length; i++) {
+                const sameletter = [];
+                const other = [];
+                for (let i = 0; i < data.length; i++) {
                     if (data[i].value.substring(0, value.length) === value) {
                         sameletter.push(data[i]);
                     } else {
@@ -627,7 +627,7 @@ export function uiSectionRawMembershipEditor(context) {
 
             role.call(uiCombobox(context, 'member-role')
                 .fetcher(function(role, callback) {
-                    var rtype = d.relation.tags.type;
+                    const rtype = d.relation.tags.type;
                     taginfo.roles({
                         debounce: true,
                         rtype: rtype || '',
@@ -645,7 +645,7 @@ export function uiSectionRawMembershipEditor(context) {
 
 
         function unbind() {
-            var row = d3_select(this);
+            const row = d3_select(this);
 
             row.selectAll('input.member-role')
                 .call(uiCombobox.off, context);

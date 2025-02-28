@@ -12,7 +12,7 @@ export function validationMutuallyExclusiveTags(/* context */) {
 
     const validation = function checkMutuallyExclusiveTags(entity /*, graph */) {
 
-        let pairsFounds = tagKeyPairs.filter((pair) => {
+        const pairsFounds = tagKeyPairs.filter((pair) => {
             return (pair[0] in entity.tags && pair[1] in entity.tags);
         }).filter((pair) => {
             // noname=no is double-negation, thus positive and not conflicting. We'll ignore those
@@ -38,14 +38,14 @@ export function validationMutuallyExclusiveTags(/* context */) {
             }
         });
 
-        let issues = pairsFounds.map((pair) => {
+        const issues = pairsFounds.map((pair) => {
             const subtype = pair[2] || 'default';
             return new validationIssue({
                 type: type,
                 subtype: subtype,
                 severity: 'warning',
                 message: function(context) {
-                    let entity = context.hasEntity(this.entityIds[0]);
+                    const entity = context.hasEntity(this.entityIds[0]);
                     return entity ? t.append(`issues.${type}.${subtype}.message`, {
                         feature: utilDisplayLabel(entity, context.graph()),
                         tag1: pair[0],
@@ -65,7 +65,7 @@ export function validationMutuallyExclusiveTags(/* context */) {
                 onClick: function(context) {
                     const entityId = this.issue.entityIds[0];
                     const entity = context.entity(entityId);
-                    let tags = Object.assign({}, entity.tags);   // shallow copy
+                    const tags = Object.assign({}, entity.tags);   // shallow copy
                     delete tags[tagToRemove];
                     context.perform(
                         actionChangeTags(entityId, tags),

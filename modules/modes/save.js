@@ -11,17 +11,17 @@ import { utilKeybinding } from '../util';
 
 
 export function modeSave(context) {
-    var mode = { id: 'save' };
-    var keybinding = utilKeybinding('modeSave');
+    const mode = { id: 'save' };
+    const keybinding = utilKeybinding('modeSave');
 
-    var commit = uiCommit(context)
+    const commit = uiCommit(context)
         .on('cancel', cancel);
-    var _conflictsUi; // uiConflicts
+    let _conflictsUi; // uiConflicts
 
-    var _location;
-    var _success;
+    let _location;
+    let _success;
 
-    var uploader = context.uploader()
+    const uploader = context.uploader()
         .on('saveStarted.modeSave', function() {
             keybindingOff();
         })
@@ -42,8 +42,8 @@ export function modeSave(context) {
 
 
     function showProgress(num, total) {
-        var modal = context.container().select('.loading-modal .modal-section');
-        var progress = modal.selectAll('.progress')
+        const modal = context.container().select('.loading-modal .modal-section');
+        const progress = modal.selectAll('.progress')
             .data([0]);
 
         // enter/update
@@ -57,7 +57,7 @@ export function modeSave(context) {
 
     function showConflicts(changeset, conflicts, origChanges) {
 
-        var selection = context.container()
+        const selection = context.container()
             .select('.sidebar')
             .append('div')
             .attr('class','sidebar-component');
@@ -94,7 +94,7 @@ export function modeSave(context) {
     function showErrors(errors) {
         keybindingOn();
 
-        var selection = uiConfirm(context.container());
+        const selection = uiConfirm(context.container());
         selection
             .select('.modal-section.header')
             .append('h3')
@@ -106,14 +106,14 @@ export function modeSave(context) {
 
 
     function addErrors(selection, data) {
-        var message = selection
+        const message = selection
             .select('.modal-section.message-text');
 
-        var items = message
+        const items = message
             .selectAll('.error-container')
             .data(data);
 
-        var enter = items.enter()
+        const enter = items.enter()
             .append('div')
             .attr('class', 'error-container');
 
@@ -126,15 +126,15 @@ export function modeSave(context) {
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
 
-                var error = d3_select(this);
-                var detail = d3_select(this.nextElementSibling);
-                var exp = error.classed('expanded');
+                const error = d3_select(this);
+                const detail = d3_select(this.nextElementSibling);
+                const exp = error.classed('expanded');
 
                 detail.style('display', exp ? 'none' : 'block');
                 error.classed('expanded', !exp);
             });
 
-        var details = enter
+        const details = enter
             .append('div')
             .attr('class', 'error-detail-container')
             .style('display', 'none');
@@ -157,7 +157,7 @@ export function modeSave(context) {
     function showSuccess(changeset) {
         commit.reset();
 
-        var ui = _success
+        const ui = _success
             .changeset(changeset)
             .location(_location)
             .on('cancel', function() { context.ui().sidebar.hide(); });
@@ -188,10 +188,10 @@ export function modeSave(context) {
         services.geocoder.reverse(context.map().center(), function(err, result) {
             if (err || !result || !result.address) return;
 
-            var addr = result.address;
-            var place = (addr && (addr.town || addr.city || addr.county)) || '';
-            var region = (addr && (addr.state || addr.country)) || '';
-            var separator = (place && region) ? t('success.thank_you_where.separator') : '';
+            const addr = result.address;
+            const place = (addr && (addr.town || addr.city || addr.county)) || '';
+            const region = (addr && (addr.state || addr.country)) || '';
+            const separator = (place && region) ? t('success.thank_you_where.separator') : '';
 
             _location = t('success.thank_you_where.format',
                 { place: place, separator: separator, region: region }
@@ -219,7 +219,7 @@ export function modeSave(context) {
             .classed('active', false)
             .classed('inactive', true);
 
-        var osm = context.connection();
+        const osm = context.connection();
         if (!osm) {
             cancel();
             return;

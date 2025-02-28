@@ -6,20 +6,20 @@ import { utilGetSetValue, utilNoAuto } from '../util';
 
 
 export function uiFormFields(context) {
-    var moreCombo = uiCombobox(context, 'more-fields').minItems(1);
-    var _fieldsArr = [];
-    var _lastPlaceholder = '';
-    var _state = '';
-    var _klass = '';
+    const moreCombo = uiCombobox(context, 'more-fields').minItems(1);
+    let _fieldsArr = [];
+    let _lastPlaceholder = '';
+    let _state = '';
+    let _klass = '';
 
 
     function formFields(selection) {
-        var allowedFields = _fieldsArr.filter(function(field) { return field.isAllowed(); });
-        var shown = allowedFields.filter(function(field) { return field.isShown(); });
-        var notShown = allowedFields.filter(function(field) { return !field.isShown(); })
+        const allowedFields = _fieldsArr.filter(function(field) { return field.isAllowed(); });
+        const shown = allowedFields.filter(function(field) { return field.isShown(); });
+        const notShown = allowedFields.filter(function(field) { return !field.isShown(); })
             .sort(function(a, b) { return (a.universal === b.universal ? 0 : a.universal ? 1 : -1); });
 
-        var container = selection.selectAll('.form-fields-container')
+        let container = selection.selectAll('.form-fields-container')
             .data([0]);
 
         container = container.enter()
@@ -28,14 +28,14 @@ export function uiFormFields(context) {
             .merge(container);
 
 
-        var fields = container.selectAll('.wrap-form-field')
+        let fields = container.selectAll('.wrap-form-field')
             .data(shown, function(d) { return d.id + (d.entityIDs ? d.entityIDs.join() : ''); });
 
         fields.exit()
             .remove();
 
         // Enter
-        var enter = fields.enter()
+        const enter = fields.enter()
             .append('div')
             .attr('class', function(d) { return 'wrap-form-field wrap-form-field-' + d.safeid; });
 
@@ -51,12 +51,12 @@ export function uiFormFields(context) {
             });
 
 
-        var titles = [];
-        var moreFields = notShown.map(function(field) {
-            var title = field.title();
+        const titles = [];
+        const moreFields = notShown.map(function(field) {
+            const title = field.title();
             titles.push(title);
 
-            var terms = field.terms();
+            let terms = field.terms();
             if (field.key) terms.push(field.key);
             if (field.keys) terms = terms.concat(field.keys);
 
@@ -69,16 +69,16 @@ export function uiFormFields(context) {
             };
         });
 
-        var placeholder = titles.slice(0,3).join(', ') + ((titles.length > 3) ? '…' : '');
+        const placeholder = titles.slice(0,3).join(', ') + ((titles.length > 3) ? '…' : '');
 
 
-        var more = selection.selectAll('.more-fields')
+        let more = selection.selectAll('.more-fields')
             .data((_state === 'hover' || moreFields.length === 0) ? [] : [0]);
 
         more.exit()
             .remove();
 
-        var moreEnter = more.enter()
+        const moreEnter = more.enter()
             .append('div')
             .attr('class', 'more-fields')
             .append('label');
@@ -91,7 +91,7 @@ export function uiFormFields(context) {
             .merge(more);
 
 
-        var input = more.selectAll('.value')
+        let input = more.selectAll('.value')
             .data([0]);
 
         input.exit()
@@ -111,7 +111,7 @@ export function uiFormFields(context) {
                 .data(moreFields)
                 .on('accept', function (d) {
                     if (!d) return;  // user entered something that was not matched
-                    var field = d.field;
+                    const field = d.field;
                     field.show();
                     selection.call(formFields);  // rerender
                     field.focus();

@@ -2,7 +2,7 @@ describe('iD.actionJoin', function () {
     describe('#disabled', function () {
         it('returns falsy for ways that share an end/start node', function () {
             // a --> b ==> c
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]}),
                 iD.osmNode({id: 'b', loc: [2,0]}),
                 iD.osmNode({id: 'c', loc: [4,0]}),
@@ -15,7 +15,7 @@ describe('iD.actionJoin', function () {
 
         it('returns falsy for ways that share a start/end node', function () {
             // a <-- b <== c
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]}),
                 iD.osmNode({id: 'b', loc: [2,0]}),
                 iD.osmNode({id: 'c', loc: [4,0]}),
@@ -28,7 +28,7 @@ describe('iD.actionJoin', function () {
 
         it('returns falsy for ways that share a start/start node', function () {
             // a <-- b ==> c
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]}),
                 iD.osmNode({id: 'b', loc: [2,0]}),
                 iD.osmNode({id: 'c', loc: [4,0]}),
@@ -41,7 +41,7 @@ describe('iD.actionJoin', function () {
 
         it('returns falsy for ways that share an end/end node', function () {
             // a --> b <== c
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]}),
                 iD.osmNode({id: 'b', loc: [2,0]}),
                 iD.osmNode({id: 'c', loc: [4,0]}),
@@ -54,7 +54,7 @@ describe('iD.actionJoin', function () {
 
         it('returns falsy for more than two ways when connected, regardless of order', function () {
             // a --> b ==> c ~~> d
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]}),
                 iD.osmNode({id: 'b', loc: [2,0]}),
                 iD.osmNode({id: 'c', loc: [4,0]}),
@@ -73,7 +73,7 @@ describe('iD.actionJoin', function () {
         });
 
         it('returns \'not_eligible\' for non-line geometries', function () {
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]})
             ]);
 
@@ -84,7 +84,7 @@ describe('iD.actionJoin', function () {
             // a -- b -- c
             //      |
             //      d
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]}),
                 iD.osmNode({id: 'b', loc: [2,0]}),
                 iD.osmNode({id: 'c', loc: [4,0]}),
@@ -102,7 +102,7 @@ describe('iD.actionJoin', function () {
                 // from: -
                 // to: =
                 // via: b
-                var graph = iD.coreGraph([
+                const graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0,0]}),
                     iD.osmNode({id: 'b', loc: [2,0]}),
                     iD.osmNode({id: 'c', loc: [4,0]}),
@@ -125,7 +125,7 @@ describe('iD.actionJoin', function () {
                 // from: -
                 // to: |
                 // via: b
-                var graph = iD.coreGraph([
+                const graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0,0]}),
                     iD.osmNode({id: 'b', loc: [2,0]}),
                     iD.osmNode({id: 'c', loc: [4,0]}),
@@ -150,7 +150,7 @@ describe('iD.actionJoin', function () {
                 // from: -
                 // to: |
                 // via: a
-                var graph = iD.coreGraph([
+                const graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0,0]}),
                     iD.osmNode({id: 'b', loc: [2,0]}),
                     iD.osmNode({id: 'c', loc: [4,0]}),
@@ -177,7 +177,7 @@ describe('iD.actionJoin', function () {
                 // from: |
                 // to: \
                 // via: b
-                var graph = iD.coreGraph([
+                const graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0,0]}),
                     iD.osmNode({id: 'b', loc: [2,0]}),
                     iD.osmNode({id: 'c', loc: [4,0]}),
@@ -202,7 +202,7 @@ describe('iD.actionJoin', function () {
             // a --> b ==> c
             // members: -
             // not member: =
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]}),
                 iD.osmNode({id: 'b', loc: [2,0]}),
                 iD.osmNode({id: 'c', loc: [4,0]}),
@@ -222,7 +222,7 @@ describe('iD.actionJoin', function () {
             //       d
             // members: -, =
             // not member: |
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]}),
                 iD.osmNode({id: 'b', loc: [2,0]}),
                 iD.osmNode({id: 'c', loc: [4,0]}),
@@ -246,7 +246,7 @@ describe('iD.actionJoin', function () {
             //   |  /
             //   | /
             //   c
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]}),
                 iD.osmNode({id: 'b', loc: [0,10]}),
                 iD.osmNode({id: 'c', loc: [5,5]}),
@@ -259,7 +259,7 @@ describe('iD.actionJoin', function () {
         });
 
         it('returns \'conflicting_tags\' for two entities that have conflicting tags', function () {
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]}),
                 iD.osmNode({id: 'b', loc: [2,0]}),
                 iD.osmNode({id: 'c', loc: [4,0]}),
@@ -271,7 +271,7 @@ describe('iD.actionJoin', function () {
         });
 
         it('takes tag reversals into account when calculating conflicts', function () {
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]}),
                 iD.osmNode({id: 'b', loc: [2,0]}),
                 iD.osmNode({id: 'c', loc: [4,0]}),
@@ -283,7 +283,7 @@ describe('iD.actionJoin', function () {
         });
 
         it('returns falsy for exceptions to tag conflicts: missing tag', function () {
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]}),
                 iD.osmNode({id: 'b', loc: [2,0]}),
                 iD.osmNode({id: 'c', loc: [4,0]}),
@@ -295,7 +295,7 @@ describe('iD.actionJoin', function () {
         });
 
         it('returns falsy for exceptions to tag conflicts: uninteresting tag', function () {
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0,0]}),
                 iD.osmNode({id: 'b', loc: [2,0]}),
                 iD.osmNode({id: 'c', loc: [4,0]}),
@@ -310,7 +310,7 @@ describe('iD.actionJoin', function () {
     it('joins a --> b ==> c', function () {
         // Expected result:
         // a --> b --> c
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -327,7 +327,7 @@ describe('iD.actionJoin', function () {
     it('joins a <-- b <== c', function () {
         // Expected result:
         // a <-- b <-- c
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -343,7 +343,7 @@ describe('iD.actionJoin', function () {
     it('joins a <-- b ==> c', function () {
         // Expected result:
         // a --> b --> c
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -362,7 +362,7 @@ describe('iD.actionJoin', function () {
         // Expected result:
         // a --> b --> c
         // tags on === reversed
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -381,7 +381,7 @@ describe('iD.actionJoin', function () {
         // Expected result:
         // a --> b --> c --> d --> e
         // tags on === reversed
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -407,7 +407,7 @@ describe('iD.actionJoin', function () {
         // --- is new, === is existing, +++ is new
         // Expected result:
         // a ==> b ==> c ==> d
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -429,7 +429,7 @@ describe('iD.actionJoin', function () {
         // ==> is existing, ++> is existing, --> is new
         // Expected result:
         // n1 ==> n2 ==> n3 ==> n4
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({ id: 'n1', loc: [0,0] }),
             iD.osmNode({ id: 'n2', loc: [2,0] }),
             iD.osmNode({ id: 'n3', loc: [4,0] }),
@@ -448,7 +448,7 @@ describe('iD.actionJoin', function () {
     });
 
     it('keeps the oldest id - oldest first', function () {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -466,7 +466,7 @@ describe('iD.actionJoin', function () {
     });
 
     it('keeps the oldest id - oldest last', function () {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -484,7 +484,7 @@ describe('iD.actionJoin', function () {
     });
 
     it('keeps the oldest id - oldest middle', function () {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -502,7 +502,7 @@ describe('iD.actionJoin', function () {
     });
 
     it('merges tags', function () {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -526,7 +526,7 @@ describe('iD.actionJoin', function () {
         // a -----> b -----> c
         //   v v v    v v v
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -546,7 +546,7 @@ describe('iD.actionJoin', function () {
         // a -----> b -----> c
         //   v v v    v v v
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -566,7 +566,7 @@ describe('iD.actionJoin', function () {
         // a -----> b -----> c
         //   v v v    v v v
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -586,7 +586,7 @@ describe('iD.actionJoin', function () {
         // a <----- b <----- c
         //    v v v    v v v
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -600,7 +600,7 @@ describe('iD.actionJoin', function () {
 
 
     it('merges relations', function () {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [2,0]}),
             iD.osmNode({id: 'c', loc: [4,0]}),
@@ -631,7 +631,7 @@ describe('iD.actionJoin', function () {
         //    a ---> b ---> c ~~~~> d
         //    Relation: ['-', '~', '~', '-']
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({ id: 'a', loc: [0, 0] }),
             iD.osmNode({ id: 'b', loc: [1, 0] }),
             iD.osmNode({ id: 'c', loc: [2, 0] }),
@@ -675,7 +675,7 @@ describe('iD.actionJoin', function () {
         // |#####|
         // |#####|
         // d <-- c
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [0,2]}),
             iD.osmNode({id: 'c', loc: [2,2]}),
@@ -713,7 +713,7 @@ describe('iD.actionJoin', function () {
         // |# m #|
         // |#####|
         // d <-- c
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
             iD.osmNode({id: 'b', loc: [0,2]}),
             iD.osmNode({id: 'c', loc: [2,2]}),

@@ -1,5 +1,5 @@
 describe('iD.rendererTileLayer', function() {
-    var context, d, c;
+    let context, d, c;
 
     beforeEach(function() {
         context = iD.coreContext().assetPath('../dist/').init();

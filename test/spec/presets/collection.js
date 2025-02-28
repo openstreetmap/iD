@@ -2,7 +2,7 @@ describe('iD.presetCollection', function() {
     // Note: __TEST is added to these because the search uses localized
     //   preset.name() keyed on id, which would use the names from en.json.
     // Except for fallback presets which must have those names because of the logic in fallback()
-    var p = {
+    const p = {
         point: iD.presetPreset('point',
             { name: 'Point', tags: {}, geometry: ['point'], matchScore: 0.1 }
         ),
@@ -42,7 +42,7 @@ describe('iD.presetCollection', function() {
     };
 
 
-    var c = iD.presetCollection([
+    const c = iD.presetCollection([
         p.point, p.line, p.area, p.grill, p.sandpit, p.residential,
         p.grass1, p.grass2, p.park, p.parking, p.soccer, p.football
     ]);
@@ -72,12 +72,12 @@ describe('iD.presetCollection', function() {
 
     describe('#search', function() {
         it('matches leading name', function() {
-            var result = c.search('resid', 'area').collection;
+            const result = c.search('resid', 'area').collection;
             expect(result.indexOf(p.residential)).to.eql(0);  // 1. 'Residential' (by name)
         });
 
         it('returns alternate matches in correct order', function() {
-            var result = c.search('gri', 'point').matchGeometry('point').collection;
+            const result = c.search('gri', 'point').matchGeometry('point').collection;
             expect(result.indexOf(p.grill), 'Grill').to.eql(0);            // 1. 'Grill' (leading name)
             expect(result.indexOf(p.football), 'Football').to.eql(1);      // 2. 'Football' (leading term 'gridiron')
             expect(result.indexOf(p.sandpit), 'Sandpit').to.eql(2);        // 3. 'Sandpit' (leading tag value 'grit_bin')
@@ -87,30 +87,30 @@ describe('iD.presetCollection', function() {
         });
 
         it('matches alias', function() {
-            var result = c.search('Field', 'area').collection;
+            const result = c.search('Field', 'area').collection;
             expect(result.indexOf(p.park)).to.eql(0);  // 1. 'Park' (by alias)
         });
 
         it('sorts preset with matchScore penalty below others', function() {
-            var result = c.search('par', 'point').matchGeometry('point').collection;
+            const result = c.search('par', 'point').matchGeometry('point').collection;
             expect(result.indexOf(p.parking), 'Parking').to.eql(0);   // 1. 'Parking' (default matchScore)
             expect(result.indexOf(p.park), 'Park').to.eql(1);         // 2. 'Park' (low matchScore)
         });
 
         it('ignores matchScore penalty for exact name match', function() {
-            var result = c.search('park', 'point').matchGeometry('point').collection;
+            const result = c.search('park', 'point').matchGeometry('point').collection;
             expect(result.indexOf(p.park), 'Park').to.eql(0);         // 1. 'Park' (low matchScore)
             expect(result.indexOf(p.parking), 'Parking').to.eql(1);   // 2. 'Parking' (default matchScore)
         });
 
         it('considers diacritics on exact matches', function() {
-            var result = c.search('ğṝȁ', 'point').matchGeometry('point').collection;
+            const result = c.search('ğṝȁ', 'point').matchGeometry('point').collection;
             expect(result.indexOf(p.grass2), 'Ğṝȁß').to.eql(0);    // 1. 'Ğṝȁß'  (leading name)
             expect(result.indexOf(p.grass1), 'Grass').to.eql(1);   // 2. 'Grass' (similar name)
         });
 
         it('replaces diacritics on fuzzy matches', function() {
-            var result = c.search('graß', 'point').matchGeometry('point').collection;
+            const result = c.search('graß', 'point').matchGeometry('point').collection;
             expect(result.indexOf(p.grass1), 'Grass').to.be.within(0,1);   // 1. 'Grass' (similar name)
             expect(result.indexOf(p.grass2), 'Ğṝȁß').to.be.within(0,1);    // 2. 'Ğṝȁß'  (similar name)
         });
@@ -122,18 +122,18 @@ describe('iD.presetCollection', function() {
         });
 
         it('excludes presets with searchable: false', function() {
-            var excluded = iD.presetPreset('excluded', {
+            const excluded = iD.presetPreset('excluded', {
                 name: 'excluded',
                 tags: { amenity: 'excluded' },
                 geometry: ['point'],
                 searchable: false
             });
-            var collection = iD.presetCollection([excluded, p.point]);
+            const collection = iD.presetCollection([excluded, p.point]);
             expect(collection.search('excluded', 'point').collection).not.to.include(excluded);
         });
 
         it('matches tag key=value', function() {
-            var result = c.search('landuse=grass', 'area').collection;
+            const result = c.search('landuse=grass', 'area').collection;
             expect(result.indexOf(p.grass1)).to.eql(0);  // 1. 'Grass' (by tag key=value)
         });
     });

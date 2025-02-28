@@ -22,23 +22,23 @@ export function uiField(context, presetField, entityIDs, options) {
         info: true
     }, options);
 
-    var dispatch = d3_dispatch('change', 'revert');
-    var field = Object.assign({}, presetField);   // shallow copy
+    const dispatch = d3_dispatch('change', 'revert');
+    const field = Object.assign({}, presetField);   // shallow copy
     field.domId = utilUniqueDomId('form-field-' + field.safeid);
-    var _show = options.show;
-    var _state = '';
-    var _tags = {};
+    let _show = options.show;
+    let _state = '';
+    let _tags = {};
 
-    var _entityExtent;
+    let _entityExtent;
     if (entityIDs && entityIDs.length) {
         _entityExtent = entityIDs.reduce(function(extent, entityID) {
-            var entity = context.graph().entity(entityID);
+            const entity = context.graph().entity(entityID);
             return extent.extend(entity.extent(context.graph()));
         }, geoExtent());
     }
 
-    var _locked = false;
-    var _lockedTip = uiTooltip()
+    let _locked = false;
+    const _lockedTip = uiTooltip()
         .title(() => t.append('inspector.lock.suggestion', { label: field.title }))
         .placement('bottom');
 
@@ -81,8 +81,8 @@ export function uiField(context, presetField, entityIDs, options) {
     function isModified() {
         if (!entityIDs || !entityIDs.length) return false;
         return entityIDs.some(function(entityID) {
-            var original = context.graph().base().entities[entityID];
-            var latest = context.graph().entity(entityID);
+            const original = context.graph().base().entities[entityID];
+            const latest = context.graph().entity(entityID);
             return allKeys().some(function(key) {
                 return original ? latest.tags[key] !== original.tags[key] : latest.tags[key];
             });
@@ -93,7 +93,7 @@ export function uiField(context, presetField, entityIDs, options) {
     function tagsContainFieldKey() {
         return allKeys().some(function(key) {
             if (field.type === 'multiCombo') {
-                for (var tagKey in _tags) {
+                for (const tagKey in _tags) {
                     if (tagKey.indexOf(key) === 0) {
                         return true;
                     }
@@ -101,9 +101,9 @@ export function uiField(context, presetField, entityIDs, options) {
                 return false;
             }
             if (field.type === 'localized') {
-                for (let tagKey in _tags) {
+                for (const tagKey in _tags) {
                     // matches for field:<code>, where <code> is a BCP 47 locale code
-                    let match = tagKey.match(LANGUAGE_SUFFIX_REGEX);
+                    const match = tagKey.match(LANGUAGE_SUFFIX_REGEX);
                     if (match && match[1] === field.key && match[2]) {
                         return true;
                     }
@@ -128,7 +128,7 @@ export function uiField(context, presetField, entityIDs, options) {
         d3_event.preventDefault();
         if (_locked) return;
 
-        var t = {};
+        const t = {};
         allKeys().forEach(function(key) {
             t[key] = undefined;
         });
@@ -138,22 +138,22 @@ export function uiField(context, presetField, entityIDs, options) {
 
 
     field.render = function(selection) {
-        var container = selection.selectAll('.form-field')
+        let container = selection.selectAll('.form-field')
             .data([field]);
 
         // Enter
-        var enter = container.enter()
+        const enter = container.enter()
             .append('div')
             .attr('class', function(d) { return 'form-field form-field-' + d.safeid; })
             .classed('nowrap', !options.wrap);
 
         if (options.wrap) {
-            var labelEnter = enter
+            const labelEnter = enter
                 .append('label')
                 .attr('class', 'field-label')
                 .attr('for', function(d) { return d.domId; });
 
-            var textEnter = labelEnter
+            const textEnter = labelEnter
                 .append('span')
                 .attr('class', 'label-text');
 
@@ -196,13 +196,13 @@ export function uiField(context, presetField, entityIDs, options) {
 
         container
             .each(function(d) {
-                var selection = d3_select(this);
+                const selection = d3_select(this);
 
                 if (!d.impl) {
                     createField();
                 }
 
-                var reference, help;
+                let reference, help;
 
                 // instantiate field help
                 if (options.wrap && field.type === 'restrictions') {
@@ -211,12 +211,12 @@ export function uiField(context, presetField, entityIDs, options) {
 
                 // instantiate tag reference
                 if (options.wrap && options.info) {
-                    var referenceKey = d.key || '';
+                    let referenceKey = d.key || '';
                     if (d.type === 'multiCombo') {   // lookup key without the trailing ':'
                         referenceKey = referenceKey.replace(/:$/, '');
                     }
 
-                    var referenceOptions = d.reference || {
+                    const referenceOptions = d.reference || {
                         key: referenceKey,
                         value: _tags[referenceKey]
                     };
@@ -256,8 +256,8 @@ export function uiField(context, presetField, entityIDs, options) {
 
 
             // show a tip and lock icon if the field is locked
-            var annotation = container.selectAll('.field-label .label-textannotation');
-            var icon = annotation.selectAll('.icon')
+            const annotation = container.selectAll('.field-label .label-textannotation');
+            const icon = annotation.selectAll('.icon')
                 .data(_locked ? [0]: []);
 
             icon.exit()
@@ -309,7 +309,7 @@ export function uiField(context, presetField, entityIDs, options) {
             createField();
         }
         if (field.default && field.key && _tags[field.key] !== field.default) {
-            var t = {};
+            const t = {};
             t[field.key] = field.default;
             dispatch.call('change', this, t);
         }
@@ -334,20 +334,20 @@ export function uiField(context, presetField, entityIDs, options) {
         })) return false;
 
         if (entityIDs && _entityExtent && field.locationSetID) {   // is field allowed in this location?
-            var validHere = locationManager.locationSetsAt(_entityExtent.center());
+            const validHere = locationManager.locationSetsAt(_entityExtent.center());
             if (!validHere[field.locationSetID]) return false;
         }
 
-        var prerequisiteTag = field.prerequisiteTag;
+        const prerequisiteTag = field.prerequisiteTag;
 
         if (entityIDs &&
             !tagsContainFieldKey() && // ignore tagging prerequisites if a value is already present
             prerequisiteTag) {
 
             if (!entityIDs.every(function(entityID) {
-                var entity = context.graph().entity(entityID);
+                const entity = context.graph().entity(entityID);
                 if (prerequisiteTag.key) {
-                    var value = entity.tags[prerequisiteTag.key];
+                    const value = entity.tags[prerequisiteTag.key];
                     if (!value) return false;
 
                     if (prerequisiteTag.valueNot) {

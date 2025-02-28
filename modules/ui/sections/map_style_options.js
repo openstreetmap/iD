@@ -4,13 +4,13 @@ import { uiSection } from '../section';
 
 export function uiSectionMapStyleOptions(context) {
 
-    var section = uiSection('fill-area', context)
+    const section = uiSection('fill-area', context)
         .label(() => t.append('map_data.style_options'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
     function renderDisclosureContent(selection) {
-        var container = selection.selectAll('.layer-fill-list')
+        const container = selection.selectAll('.layer-fill-list')
             .data([0]);
 
         container.enter()
@@ -19,7 +19,7 @@ export function uiSectionMapStyleOptions(context) {
             .merge(container)
             .call(drawListItems, context.map().areaFillOptions, 'radio', 'area_fill', setFill, isActiveFill);
 
-        var container2 = selection.selectAll('.layer-visual-diff-list')
+        const container2 = selection.selectAll('.layer-visual-diff-list')
             .data([0]);
 
         container2.enter()
@@ -32,7 +32,7 @@ export function uiSectionMapStyleOptions(context) {
     }
 
     function drawListItems(selection, data, type, name, change, active) {
-        var items = selection.selectAll('li')
+        let items = selection.selectAll('li')
             .data(data);
 
         // Exit
@@ -40,21 +40,21 @@ export function uiSectionMapStyleOptions(context) {
             .remove();
 
         // Enter
-        var enter = items.enter()
+        const enter = items.enter()
             .append('li')
             .call(uiTooltip()
                 .title(function(d) {
                     return t.append(name + '.' + d + '.tooltip');
                 })
                 .keys(function(d) {
-                    var key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
+                    let key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
                     if (d === 'highlight_edits') key = t('map_data.highlight_edits.key');
                     return key ? [key] : null;
                 })
                 .placement('top')
             );
 
-        var label = enter
+        const label = enter
             .append('label');
 
         label

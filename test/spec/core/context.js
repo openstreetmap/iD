@@ -1,11 +1,11 @@
 describe('iD.coreContext', function() {
-    var assets = {
+    const assets = {
         'iD/img/loader.gif': '/assets/iD/img/loader-b66184b5c4afbccc25f.gif'
     };
 
     describe('#assetPath', function() {
         it('sets and gets assetPath', function() {
-            var context = iD.coreContext();
+            const context = iD.coreContext();
             expect(context.assetPath()).to.eql('');
 
             context.assetPath('iD/');
@@ -15,7 +15,7 @@ describe('iD.coreContext', function() {
 
     describe('#assetMap', function() {
         it('sets and gets assetMap', function() {
-            var context = iD.coreContext();
+            const context = iD.coreContext();
             expect(context.assetMap()).to.eql({});
 
             context.assetMap(assets);
@@ -24,7 +24,7 @@ describe('iD.coreContext', function() {
     });
 
     describe('#asset', function() {
-        var context;
+        let context;
         beforeEach(function() {
             context = iD.coreContext().assetPath('iD/').assetMap(assets);
         });
@@ -42,7 +42,7 @@ describe('iD.coreContext', function() {
     });
 
     describe('#imagePath', function() {
-        var context;
+        let context;
         beforeEach(function() {
             context = iD.coreContext().assetPath('iD/').assetMap(assets);
         });
@@ -57,8 +57,8 @@ describe('iD.coreContext', function() {
 
     describe('#debug', function() {
         it('sets and gets debug flags', function() {
-            var context = iD.coreContext();
-            var flags = {
+            const context = iD.coreContext();
+            const flags = {
                 tile: false,
                 collision: false,
                 imagery: false,

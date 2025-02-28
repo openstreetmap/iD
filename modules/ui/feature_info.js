@@ -3,10 +3,10 @@ import { uiTooltip } from './tooltip';
 
 export function uiFeatureInfo(context) {
     function update(selection) {
-        var features = context.features();
-        var stats = features.stats();
-        var count = 0;
-        var hiddenList = features.hidden().map(function(k) {
+        const features = context.features();
+        const stats = features.stats();
+        let count = 0;
+        const hiddenList = features.hidden().map(function(k) {
             if (stats[k]) {
                 count += stats[k];
                 return t.append('inspector.title_count', {
@@ -20,7 +20,7 @@ export function uiFeatureInfo(context) {
         selection.text('');
 
         if (hiddenList.length) {
-            var tooltipBehavior = uiTooltip()
+            const tooltipBehavior = uiTooltip()
                 .placement('top')
                 .title(function() {
                     return selection => {

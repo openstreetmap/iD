@@ -17,7 +17,7 @@ import serviceMapilio from './mapilio';
 import servicePanoramax from './panoramax';
 
 
-export let services = {
+export const services = {
   geocoder: serviceNominatim,
   keepRight: serviceKeepRight,
   osmose: serviceOsmose,

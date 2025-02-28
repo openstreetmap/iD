@@ -1,12 +1,12 @@
 describe('iD.actionExtract', function () {
-    var tags = { 'name': 'test' };
+    const tags = { 'name': 'test' };
 
     function createTargetNode(id, lonlat) {
         return iD.osmNode({ id: id, loc: lonlat, tags: tags });
     }
 
     describe('linear way', function () {
-        var graph;
+        let graph;
         beforeEach(function () {
             //
             // a -- b -- c -- d
@@ -23,25 +23,25 @@ describe('iD.actionExtract', function () {
         describe('target in first position', function () {
             beforeEach(function () {
                 // Swap target into the location & position of A
-                var targetNode = createTargetNode('a', graph.entity('a').loc);
+                const targetNode = createTargetNode('a', graph.entity('a').loc);
                 graph = graph.replace(targetNode);
             });
 
             it('does not change length of way', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('a')(graph);
+                const assertionGraph = iD.actionExtract('a')(graph);
 
                 // Confirm that the way still has 4 nodes
-                var target = assertionGraph.entity('-');
+                const target = assertionGraph.entity('-');
                 expect(target.nodes.length).to.eql(4);
             });
 
             it('does not change order of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('a')(graph);
+                const assertionGraph = iD.actionExtract('a')(graph);
 
                 // Confirm that the way is ordered correctly
-                var target = assertionGraph.entity('-');
+                const target = assertionGraph.entity('-');
                 // Note that we can't be sure of the id of the replacement node
                 // so we only assert the nodes we know the ids for
                 // As we have already confirmed the size of the array we can assume
@@ -53,10 +53,10 @@ describe('iD.actionExtract', function () {
 
             it('does not change location of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('a')(graph);
+                const assertionGraph = iD.actionExtract('a')(graph);
 
                 // Confirm that the nodes have not moved, including the replacement node
-                var nodes = assertionGraph.entity('-').nodes;
+                const nodes = assertionGraph.entity('-').nodes;
                 expect(assertionGraph.entity(nodes[0]).loc).to.eql([0, 0]);
                 expect(assertionGraph.entity(nodes[1]).loc).to.eql([1, 0]);
                 expect(assertionGraph.entity(nodes[2]).loc).to.eql([2, 0]);
@@ -65,9 +65,9 @@ describe('iD.actionExtract', function () {
 
             it('does replace target node', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('a')(graph);
+                const assertionGraph = iD.actionExtract('a')(graph);
 
-                var nodes = assertionGraph.entity('-').nodes;
+                const nodes = assertionGraph.entity('-').nodes;
                 // Confirm that the target is no longer "a"
                 expect(nodes[0]).not.to.eql('a');
                 // and that the tags are not present
@@ -76,10 +76,10 @@ describe('iD.actionExtract', function () {
 
             it('does detach target node', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('a')(graph);
+                const assertionGraph = iD.actionExtract('a')(graph);
 
                 // confirm that a still exists
-                var targetNode = assertionGraph.entity('a');
+                const targetNode = assertionGraph.entity('a');
                 expect(targetNode).not.to.eql(undefined);
                 // ... and that the location is correct
                 expect(targetNode.loc).to.eql([0, 0]);
@@ -93,25 +93,25 @@ describe('iD.actionExtract', function () {
         describe('target in second position', function () {
             beforeEach(function () {
                 // Swap target into the location & position of B
-                var targetNode = createTargetNode('b', graph.entity('b').loc);
+                const targetNode = createTargetNode('b', graph.entity('b').loc);
                 graph = graph.replace(targetNode);
             });
 
             it('does not change length of way', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('b')(graph);
+                const assertionGraph = iD.actionExtract('b')(graph);
 
                 // Confirm that the way still has 4 nodes
-                var target = assertionGraph.entity('-');
+                const target = assertionGraph.entity('-');
                 expect(target.nodes.length).to.eql(4);
             });
 
             it('does not change order of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('b')(graph);
+                const assertionGraph = iD.actionExtract('b')(graph);
 
                 // Confirm that the way is ordered correctly
-                var target = assertionGraph.entity('-');
+                const target = assertionGraph.entity('-');
                 // Note that we can't be sure of the id of the replacement node
                 // so we only assert the nodes we know the ids for
                 // As we have already confirmed the size of the array we can assume
@@ -123,10 +123,10 @@ describe('iD.actionExtract', function () {
 
             it('does not change location of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('b')(graph);
+                const assertionGraph = iD.actionExtract('b')(graph);
 
                 // Confirm that the nodes have not moved, including the replacement node
-                var nodes = assertionGraph.entity('-').nodes;
+                const nodes = assertionGraph.entity('-').nodes;
                 expect(assertionGraph.entity(nodes[0]).loc).to.eql([0, 0]);
                 expect(assertionGraph.entity(nodes[1]).loc).to.eql([1, 0]);
                 expect(assertionGraph.entity(nodes[2]).loc).to.eql([2, 0]);
@@ -135,9 +135,9 @@ describe('iD.actionExtract', function () {
 
             it('does replace target node', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('b')(graph);
+                const assertionGraph = iD.actionExtract('b')(graph);
 
-                var nodes = assertionGraph.entity('-').nodes;
+                const nodes = assertionGraph.entity('-').nodes;
                 // Confirm that the target is no longer "a"
                 expect(nodes[1]).not.to.eql('b');
                 // and that the tags are not present
@@ -146,10 +146,10 @@ describe('iD.actionExtract', function () {
 
             it('does detach target node', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('b')(graph);
+                const assertionGraph = iD.actionExtract('b')(graph);
 
                 // confirm that a still exists
-                var targetNode = assertionGraph.entity('b');
+                const targetNode = assertionGraph.entity('b');
                 expect(targetNode).not.to.eql(undefined);
                 // ... and that the location is correct
                 expect(targetNode.loc).to.eql([1, 0]);
@@ -163,7 +163,7 @@ describe('iD.actionExtract', function () {
 
 
     describe('closed way', function () {
-        var graph;
+        let graph;
         beforeEach(function () {
             //
             //  d -- c
@@ -182,25 +182,25 @@ describe('iD.actionExtract', function () {
         describe('target in first position', function () {
             beforeEach(function () {
                 // Swap target into the location & position of A
-                var targetNode = createTargetNode('a', graph.entity('a').loc);
+                const targetNode = createTargetNode('a', graph.entity('a').loc);
                 graph = graph.replace(targetNode);
             });
 
             it('does not change length of way', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('a')(graph);
+                const assertionGraph = iD.actionExtract('a')(graph);
 
                 // Confirm that the way still has 5 nodes
-                var target = assertionGraph.entity('-');
+                const target = assertionGraph.entity('-');
                 expect(target.nodes.length).to.eql(5);
             });
 
             it('does not change order of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('a')(graph);
+                const assertionGraph = iD.actionExtract('a')(graph);
 
                 // Confirm that the way is ordered correctly
-                var target = assertionGraph.entity('-');
+                const target = assertionGraph.entity('-');
                 // Note that we can't be sure of the id of the replacement node
                 // so we only assert the nodes we know the ids for
                 // As we have already confirmed the size of the array we can assume
@@ -214,10 +214,10 @@ describe('iD.actionExtract', function () {
 
             it('does not change location of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('a')(graph);
+                const assertionGraph = iD.actionExtract('a')(graph);
 
                 // Confirm that the nodes have not moved, including the replacement node
-                var nodes = assertionGraph.entity('-').nodes;
+                const nodes = assertionGraph.entity('-').nodes;
                 expect(assertionGraph.entity(nodes[0]).loc).to.eql([0, 0]);
                 expect(assertionGraph.entity(nodes[1]).loc).to.eql([1, 0]);
                 expect(assertionGraph.entity(nodes[2]).loc).to.eql([1, 1]);
@@ -227,9 +227,9 @@ describe('iD.actionExtract', function () {
 
             it('does replace target node', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('a')(graph);
+                const assertionGraph = iD.actionExtract('a')(graph);
 
-                var nodes = assertionGraph.entity('-').nodes;
+                const nodes = assertionGraph.entity('-').nodes;
                 // Confirm that the target is no longer "a"
                 expect(nodes[0]).not.to.eql('a');
                 // .. also in the tail position
@@ -240,10 +240,10 @@ describe('iD.actionExtract', function () {
 
             it('does detach target node', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('a')(graph);
+                const assertionGraph = iD.actionExtract('a')(graph);
 
                 // confirm that a still exists
-                var targetNode = assertionGraph.entity('a');
+                const targetNode = assertionGraph.entity('a');
                 expect(targetNode).not.to.eql(undefined);
                 // ... and that the location is correct
                 expect(targetNode.loc).to.eql([0, 0]);
@@ -257,25 +257,25 @@ describe('iD.actionExtract', function () {
         describe('target in second position', function () {
             beforeEach(function () {
                 // Swap target into the location & position of B
-                var targetNode = createTargetNode('b', graph.entity('b').loc);
+                const targetNode = createTargetNode('b', graph.entity('b').loc);
                 graph = graph.replace(targetNode);
             });
 
             it('does not change length of way', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('b')(graph);
+                const assertionGraph = iD.actionExtract('b')(graph);
 
                 // Confirm that the way still has 5 nodes
-                var target = assertionGraph.entity('-');
+                const target = assertionGraph.entity('-');
                 expect(target.nodes.length).to.eql(5);
             });
 
             it('does not change order of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('b')(graph);
+                const assertionGraph = iD.actionExtract('b')(graph);
 
                 // Confirm that the way is ordered correctly
-                var target = assertionGraph.entity('-');
+                const target = assertionGraph.entity('-');
                 // Note that we can't be sure of the id of the replacement node
                 // so we only assert the nodes we know the ids for
                 // As we have already confirmed the size of the array we can assume
@@ -288,10 +288,10 @@ describe('iD.actionExtract', function () {
 
             it('does not change location of nodes', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('b')(graph);
+                const assertionGraph = iD.actionExtract('b')(graph);
 
                 // Confirm that the nodes have not moved, including the replacement node
-                var nodes = assertionGraph.entity('-').nodes;
+                const nodes = assertionGraph.entity('-').nodes;
                 expect(assertionGraph.entity(nodes[0]).loc).to.eql([0, 0]);
                 expect(assertionGraph.entity(nodes[1]).loc).to.eql([1, 0]);
                 expect(assertionGraph.entity(nodes[2]).loc).to.eql([1, 1]);
@@ -301,9 +301,9 @@ describe('iD.actionExtract', function () {
 
             it('does replace target node', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('b')(graph);
+                const assertionGraph = iD.actionExtract('b')(graph);
 
-                var nodes = assertionGraph.entity('-').nodes;
+                const nodes = assertionGraph.entity('-').nodes;
                 // Confirm that the target is no longer "a"
                 expect(nodes[1]).not.to.eql('b');
                 // and that the tags are not present
@@ -312,10 +312,10 @@ describe('iD.actionExtract', function () {
 
             it('does detach target node', function () {
                 // Act
-                var assertionGraph = iD.actionExtract('b')(graph);
+                const assertionGraph = iD.actionExtract('b')(graph);
 
                 // confirm that a still exists
-                var targetNode = assertionGraph.entity('b');
+                const targetNode = assertionGraph.entity('b');
                 expect(targetNode).not.to.eql(undefined);
                 // ... and that the location is correct
                 expect(targetNode.loc).to.eql([1, 0]);
@@ -329,7 +329,7 @@ describe('iD.actionExtract', function () {
 
 
     describe('intersecting linear ways', function () {
-        var graph;
+        let graph;
         beforeEach(function () {
             //
             //           f
@@ -354,10 +354,10 @@ describe('iD.actionExtract', function () {
 
         it('does not change length of ways', function () {
             // Act
-            var assertionGraph = iD.actionExtract('c')(graph);
+            const assertionGraph = iD.actionExtract('c')(graph);
 
             // Confirm that the way still has 4 nodes
-            var target = assertionGraph.entity('-');
+            let target = assertionGraph.entity('-');
             expect(target.nodes.length).to.eql(4);
             // .. and second way has 3
             target = assertionGraph.entity('=');
@@ -366,10 +366,10 @@ describe('iD.actionExtract', function () {
 
         it('does not change order of nodes', function () {
             // Act
-            var assertionGraph = iD.actionExtract('c')(graph);
+            const assertionGraph = iD.actionExtract('c')(graph);
 
             // Confirm that the way is ordered correctly
-            var target = assertionGraph.entity('-');
+            let target = assertionGraph.entity('-');
             // Note that we can't be sure of the id of the replacement node
             // so we only assert the nodes we know the ids for
             // As we have already confirmed the size of the array we can assume
@@ -385,10 +385,10 @@ describe('iD.actionExtract', function () {
 
         it('does not change location of nodes', function () {
             // Act
-            var assertionGraph = iD.actionExtract('c')(graph);
+            const assertionGraph = iD.actionExtract('c')(graph);
 
             // Confirm that the nodes have not moved, including the replacement node
-            var nodes = assertionGraph.entity('-').nodes;
+            let nodes = assertionGraph.entity('-').nodes;
             expect(assertionGraph.entity(nodes[0]).loc).to.eql([0, 0]);
             expect(assertionGraph.entity(nodes[1]).loc).to.eql([1, 0]);
             expect(assertionGraph.entity(nodes[2]).loc).to.eql([2, 0]);
@@ -402,16 +402,16 @@ describe('iD.actionExtract', function () {
 
         it('uses same replacement node at intersection', function () {
             // Act
-            var assertionGraph = iD.actionExtract('c')(graph);
+            const assertionGraph = iD.actionExtract('c')(graph);
             // Confirm both ways have the same replacement node
             expect(assertionGraph.entity('-').nodes[2]).to.eql(assertionGraph.entity('=').nodes[0]);
         });
 
         it('does replace target node', function () {
             // Act
-            var assertionGraph = iD.actionExtract('c')(graph);
+            const assertionGraph = iD.actionExtract('c')(graph);
 
-            var nodes = assertionGraph.entity('-').nodes;
+            const nodes = assertionGraph.entity('-').nodes;
             // Confirm that the target is no longer "c"
             expect(nodes[2]).not.to.eql('c');
             // and that the tags are not present
@@ -422,10 +422,10 @@ describe('iD.actionExtract', function () {
 
         it('does detach target node', function () {
             // Act
-            var assertionGraph = iD.actionExtract('c')(graph);
+            const assertionGraph = iD.actionExtract('c')(graph);
 
             // confirm that a still exists
-            var targetNode = assertionGraph.entity('c');
+            const targetNode = assertionGraph.entity('c');
             expect(targetNode).not.to.eql(undefined);
             // ... and that the location is correct
             expect(targetNode.loc).to.eql([2, 0]);
@@ -438,7 +438,7 @@ describe('iD.actionExtract', function () {
 
 
     describe('intersecting closed way', function () {
-        var graph;
+        let graph;
         beforeEach(function () {
             //
             //       g == f
@@ -464,10 +464,10 @@ describe('iD.actionExtract', function () {
 
         it('does not change length of ways', function () {
             // Act
-            var assertionGraph = iD.actionExtract('c')(graph);
+            const assertionGraph = iD.actionExtract('c')(graph);
 
             // Confirm that the way still has 5 nodes
-            var target = assertionGraph.entity('-');
+            let target = assertionGraph.entity('-');
             expect(target.nodes.length).to.eql(5);
             // and the second
             target = assertionGraph.entity('=');
@@ -476,10 +476,10 @@ describe('iD.actionExtract', function () {
 
         it('does not change order of nodes', function () {
             // Act
-            var assertionGraph = iD.actionExtract('c')(graph);
+            const assertionGraph = iD.actionExtract('c')(graph);
 
             // Confirm that the way is ordered correctly
-            var target = assertionGraph.entity('-');
+            let target = assertionGraph.entity('-');
             // Note that we can't be sure of the id of the replacement node
             // so we only assert the nodes we know the ids for
             // As we have already confirmed the size of the array we can assume
@@ -499,10 +499,10 @@ describe('iD.actionExtract', function () {
 
         it('does not change location of nodes', function () {
             // Act
-            var assertionGraph = iD.actionExtract('c')(graph);
+            const assertionGraph = iD.actionExtract('c')(graph);
 
             // Confirm that the nodes have not moved, including the replacement node
-            var nodes = assertionGraph.entity('-').nodes;
+            let nodes = assertionGraph.entity('-').nodes;
             expect(assertionGraph.entity(nodes[0]).loc).to.eql([0, 0]);
             expect(assertionGraph.entity(nodes[1]).loc).to.eql([1, 0]);
             expect(assertionGraph.entity(nodes[2]).loc).to.eql([1, 1]);
@@ -518,16 +518,16 @@ describe('iD.actionExtract', function () {
 
         it('uses same replacement node at intersection', function () {
             // Act
-            var assertionGraph = iD.actionExtract('c')(graph);
+            const assertionGraph = iD.actionExtract('c')(graph);
             // Confirm both ways have the same replacement node
             expect(assertionGraph.entity('-').nodes[2]).to.eql(assertionGraph.entity('=').nodes[0]);
         });
 
         it('does replace target node', function () {
             // Act
-            var assertionGraph = iD.actionExtract('c')(graph);
+            const assertionGraph = iD.actionExtract('c')(graph);
 
-            var nodes = assertionGraph.entity('-').nodes;
+            const nodes = assertionGraph.entity('-').nodes;
             // Confirm that the target is no longer "c"
             expect(nodes[0]).not.to.eql('c');
             // .. also in the tail position
@@ -539,10 +539,10 @@ describe('iD.actionExtract', function () {
 
         it('does detach target node', function () {
             // Act
-            var assertionGraph = iD.actionExtract('c')(graph);
+            const assertionGraph = iD.actionExtract('c')(graph);
 
             // confirm that a still exists
-            var targetNode = assertionGraph.entity('c');
+            const targetNode = assertionGraph.entity('c');
             expect(targetNode).not.to.eql(undefined);
             // ... and that the location is correct
             expect(targetNode.loc).to.eql([1, 1]);
@@ -555,7 +555,7 @@ describe('iD.actionExtract', function () {
 
 
     describe('with relation', function () {
-        var graph;
+        let graph;
 
         beforeEach(function () {
             //
@@ -587,22 +587,22 @@ describe('iD.actionExtract', function () {
         });
 
         it('detached node not a member of relation', function () {
-            var assertionGraph = iD.actionExtract('b')(graph, true);
+            const assertionGraph = iD.actionExtract('b')(graph, true);
 
-            var targetNode = assertionGraph.entity('b');
+            const targetNode = assertionGraph.entity('b');
             // Confirm is not a member of the relation
             expect(assertionGraph.parentRelations(targetNode).length).to.eql(0);
         });
 
         it('new node is a member of relation', function () {
-            var assertionGraph = iD.actionExtract('b')(graph, true);
+            const assertionGraph = iD.actionExtract('b')(graph, true);
 
             // Find the new node
-            var targetWay = assertionGraph.entity('-');
-            var newNodeId = targetWay.nodes.filter(function (m) {
+            const targetWay = assertionGraph.entity('-');
+            const newNodeId = targetWay.nodes.filter(function (m) {
                 return m !== 'a' && m !== 'b' && m !== 'c';
             })[0];
-            var newNode = assertionGraph.entity(newNodeId);
+            const newNode = assertionGraph.entity(newNodeId);
 
             // Confirm is a member of the relation
             expect(assertionGraph.parentRelations(newNode).length).to.eql(1);
@@ -610,18 +610,18 @@ describe('iD.actionExtract', function () {
         });
 
         it('Relation membership has the same properties', function () {
-            var assertionGraph = iD.actionExtract('b')(graph, true);
+            const assertionGraph = iD.actionExtract('b')(graph, true);
 
             // Find the new node
-            var targetWay = assertionGraph.entity('-');
-            var newNodeId = targetWay.nodes.filter(function (m) {
+            const targetWay = assertionGraph.entity('-');
+            const newNodeId = targetWay.nodes.filter(function (m) {
                 return m !== 'a' && m !== 'b' && m !== 'c';
             })[0];
 
             // Get the relation
-            var targetRelation = assertionGraph.entity('r');
+            const targetRelation = assertionGraph.entity('r');
             // Find the member
-            var targetMember = targetRelation.memberById(newNodeId);
+            const targetMember = targetRelation.memberById(newNodeId);
 
             // Confirm membership is the same as original (except for the new id)
             expect(targetMember).to.eql({ id: newNodeId, index: 1, type: 'node', role: 'point' });

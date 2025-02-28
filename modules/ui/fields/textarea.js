@@ -11,15 +11,15 @@ import { uiLengthIndicator } from '..';
 
 
 export function uiFieldTextarea(field, context) {
-    var dispatch = d3_dispatch('change');
-    var input = d3_select(null);
-    var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue())
+    const dispatch = d3_dispatch('change');
+    let input = d3_select(null);
+    const _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue())
         .silent(field.usage === 'changeset' && field.key === 'comment');
-    var _tags;
+    let _tags;
 
 
     function textarea(selection) {
-        var wrap = selection.selectAll('.form-field-input-wrap')
+        let wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
@@ -45,13 +45,13 @@ export function uiFieldTextarea(field, context) {
         function change(onInput) {
             return function() {
 
-                var val = utilGetSetValue(input);
+                let val = utilGetSetValue(input);
                 if (!onInput) val = context.cleanTagValue(val);
 
                 // don't override multiple values with blank string
                 if (!val && Array.isArray(_tags[field.key])) return;
 
-                var t = {};
+                const t = {};
                 t[field.key] = val || undefined;
                 dispatch.call('change', this, t, onInput);
             };
@@ -62,7 +62,7 @@ export function uiFieldTextarea(field, context) {
     textarea.tags = function(tags) {
         _tags = tags;
 
-        var isMixed = Array.isArray(tags[field.key]);
+        const isMixed = Array.isArray(tags[field.key]);
 
         utilGetSetValue(input, !isMixed && tags[field.key] ? tags[field.key] : '')
             .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)

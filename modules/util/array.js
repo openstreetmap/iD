@@ -4,7 +4,7 @@ export function utilArrayIdentical(a, b) {
     // an array is always identical to itself
     if (a === b) return true;
 
-    var i = a.length;
+    let i = a.length;
     if (i !== b.length) return false;
     while (i--) {
         if (a[i] !== b[i]) return false;
@@ -23,7 +23,7 @@ export function utilArrayIdentical(a, b) {
 // utilArrayDifference(b, a)
 //   [4]
 export function utilArrayDifference(a, b) {
-    var other = new Set(b);
+    const other = new Set(b);
     return Array.from(new Set(a))
         .filter(function(v) { return !other.has(v); });
 }
@@ -34,7 +34,7 @@ export function utilArrayDifference(a, b) {
 // utilArrayIntersection(a, b)
 //   [2,3]
 export function utilArrayIntersection(a, b) {
-    var other = new Set(b);
+    const other = new Set(b);
     return Array.from(new Set(a))
         .filter(function(v) { return other.has(v); });
 }
@@ -45,7 +45,7 @@ export function utilArrayIntersection(a, b) {
 // utilArrayUnion(a, b)
 //   [1,2,3,4]
 export function utilArrayUnion(a, b) {
-    var result = new Set(a);
+    const result = new Set(a);
     b.forEach(function(v) { result.add(v); });
     return Array.from(result);
 }
@@ -66,7 +66,7 @@ export function utilArrayUniq(a) {
 export function utilArrayChunk(a, chunkSize) {
     if (!chunkSize || chunkSize < 0) return [a.slice()];
 
-    var result = new Array(Math.ceil(a.length / chunkSize));
+    const result = new Array(Math.ceil(a.length / chunkSize));
     return Array.from(result, function(item, i) {
         return a.slice(i * chunkSize, i * chunkSize + chunkSize);
     });
@@ -108,7 +108,7 @@ export function utilArrayFlatten(a) {
 //   }
 export function utilArrayGroupBy(a, key) {
     return a.reduce(function(acc, item) {
-        var group = (typeof key === 'function') ? key(item) : item[key];
+        const group = (typeof key === 'function') ? key(item) : item[key];
         (acc[group] = acc[group] || []).push(item);
         return acc;
     }, {});
@@ -139,9 +139,9 @@ export function utilArrayGroupBy(a, key) {
 //     { type: 'Cat', name: 'Leo' }
 //   }
 export function utilArrayUniqBy(a, key) {
-    var seen = new Set();
+    const seen = new Set();
     return a.reduce(function(acc, item) {
-        var val = (typeof key === 'function') ? key(item) : item[key];
+        const val = (typeof key === 'function') ? key(item) : item[key];
         if (val && !seen.has(val)) {
             seen.add(val);
             acc.push(item);

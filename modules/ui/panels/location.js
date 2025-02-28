@@ -6,17 +6,17 @@ import { services } from '../../services';
 
 
 export function uiPanelLocation(context) {
-    var currLocation = '';
+    let currLocation = '';
 
 
     function redraw(selection) {
         selection.html('');
 
-        var list = selection
+        const list = selection
             .append('ul');
 
         // Mouse coordinates
-        var coord = context.map().mouseCoordinates();
+        let coord = context.map().mouseCoordinates();
         if (coord.some(isNaN)) {
             coord = context.map().center();
         }
@@ -37,7 +37,7 @@ export function uiPanelLocation(context) {
     }
 
 
-    var debouncedGetLocation = _debounce(getLocation, 250);
+    const debouncedGetLocation = _debounce(getLocation, 250);
     function getLocation(selection, coord) {
         if (!services.geocoder) {
             currLocation = t('info_panels.location.unknown_location');
@@ -53,7 +53,7 @@ export function uiPanelLocation(context) {
     }
 
 
-    var panel = function(selection) {
+    const panel = function(selection) {
         selection.call(redraw);
 
         context.surface()

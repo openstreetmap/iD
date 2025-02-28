@@ -27,7 +27,7 @@ export function geoEdgeEqual(a, b) {
 // Rotate all points counterclockwise around a pivot point by given angle
 export function geoRotate(points, angle, around) {
     return points.map(function(point) {
-        var radial = geoVecSubtract(point, around);
+        const radial = geoVecSubtract(point, around);
         return [
             radial[0] * Math.cos(angle) - radial[1] * Math.sin(angle) + around[0],
             radial[0] * Math.sin(angle) + radial[1] * Math.cos(angle) + around[1]
@@ -41,21 +41,21 @@ export function geoRotate(points, angle, around) {
 // the closest vertex on that edge. Returns an object with the `index` of the
 // chosen edge, the chosen `loc` on that edge, and the `distance` to to it.
 export function geoChooseEdge(nodes, point, projection, activeID) {
-    var dist = geoVecLength;
-    var points = nodes.map(function(n) { return projection(n.loc); });
-    var ids = nodes.map(function(n) { return n.id; });
-    var min = Infinity;
-    var idx;
-    var loc;
+    const dist = geoVecLength;
+    const points = nodes.map(function(n) { return projection(n.loc); });
+    const ids = nodes.map(function(n) { return n.id; });
+    let min = Infinity;
+    let idx;
+    let loc;
 
-    for (var i = 0; i < points.length - 1; i++) {
+    for (let i = 0; i < points.length - 1; i++) {
         if (ids[i] === activeID || ids[i + 1] === activeID) continue;
 
-        var o = points[i];
-        var s = geoVecSubtract(points[i + 1], o);
-        var v = geoVecSubtract(point, o);
-        var proj = geoVecDot(v, s) / geoVecDot(s, s);
-        var p;
+        const o = points[i];
+        const s = geoVecSubtract(points[i + 1], o);
+        const v = geoVecSubtract(point, o);
+        const proj = geoVecDot(v, s) / geoVecDot(s, s);
+        let p;
 
         if (proj < 0) {
             p = o;
@@ -65,7 +65,7 @@ export function geoChooseEdge(nodes, point, projection, activeID) {
             p = [o[0] + proj * s[0], o[1] + proj * s[1]];
         }
 
-        var d = dist(p, point);
+        const d = dist(p, point);
         if (d < min) {
             min = d;
             idx = i + 1;
@@ -86,9 +86,9 @@ export function geoChooseEdge(nodes, point, projection, activeID) {
 // `activeNodes` is the ring containing the activeID being dragged.
 // `inactiveNodes` is the other ring to test against
 export function geoHasLineIntersections(activeNodes, inactiveNodes, activeID) {
-    var actives = [];
-    var inactives = [];
-    var j, k, n1, n2, segment;
+    const actives = [];
+    const inactives = [];
+    let j, k, n1, n2, segment;
 
     // gather active segments (only segments in activeNodes that contain the activeID)
     for (j = 0; j < activeNodes.length - 1; j++) {
@@ -111,9 +111,9 @@ export function geoHasLineIntersections(activeNodes, inactiveNodes, activeID) {
     // test
     for (j = 0; j < actives.length; j++) {
         for (k = 0; k < inactives.length; k++) {
-            var p = actives[j];
-            var q = inactives[k];
-            var hit = geoLineIntersection(p, q);
+            const p = actives[j];
+            const q = inactives[k];
+            const hit = geoLineIntersection(p, q);
             if (hit) {
                 return true;
             }
@@ -127,15 +127,15 @@ export function geoHasLineIntersections(activeNodes, inactiveNodes, activeID) {
 // Test active (dragged or drawing) segments against inactive segments
 // This is used to test whether a way intersects with itself.
 export function geoHasSelfIntersections(nodes, activeID) {
-    var actives = [];
-    var inactives = [];
-    var j, k;
+    const actives = [];
+    const inactives = [];
+    let j, k;
 
     // group active and passive segments along the nodes
     for (j = 0; j < nodes.length - 1; j++) {
-        var n1 = nodes[j];
-        var n2 = nodes[j+1];
-        var segment = [n1.loc, n2.loc];
+        const n1 = nodes[j];
+        const n2 = nodes[j+1];
+        const segment = [n1.loc, n2.loc];
         if (n1.id === activeID || n2.id === activeID) {
             actives.push(segment);
         } else {
@@ -146,17 +146,17 @@ export function geoHasSelfIntersections(nodes, activeID) {
     // test
     for (j = 0; j < actives.length; j++) {
         for (k = 0; k < inactives.length; k++) {
-            var p = actives[j];
-            var q = inactives[k];
+            const p = actives[j];
+            const q = inactives[k];
             // skip if segments share an endpoint
             if (geoVecEqual(p[1], q[0]) || geoVecEqual(p[0], q[1]) ||
                 geoVecEqual(p[0], q[0]) || geoVecEqual(p[1], q[1]) ) {
                 continue;
             }
 
-            var hit = geoLineIntersection(p, q);
+            const hit = geoLineIntersection(p, q);
             if (hit) {
-                var epsilon = 1e-8;
+                const epsilon = 1e-8;
                 // skip if the hit is at the segment's endpoint
                 if (geoVecEqual(p[1], hit, epsilon) || geoVecEqual(p[0], hit, epsilon) ||
                     geoVecEqual(q[1], hit, epsilon) || geoVecEqual(q[0], hit, epsilon) ) {
@@ -177,18 +177,18 @@ export function geoHasSelfIntersections(nodes, activeID) {
 // This uses the vector cross product approach described below:
 //  http://stackoverflow.com/a/565282/786339
 export function geoLineIntersection(a, b) {
-    var p = [a[0][0], a[0][1]];
-    var p2 = [a[1][0], a[1][1]];
-    var q = [b[0][0], b[0][1]];
-    var q2 = [b[1][0], b[1][1]];
-    var r = geoVecSubtract(p2, p);
-    var s = geoVecSubtract(q2, q);
-    var uNumerator = geoVecCross(geoVecSubtract(q, p), r);
-    var denominator = geoVecCross(r, s);
+    const p = [a[0][0], a[0][1]];
+    const p2 = [a[1][0], a[1][1]];
+    const q = [b[0][0], b[0][1]];
+    const q2 = [b[1][0], b[1][1]];
+    const r = geoVecSubtract(p2, p);
+    const s = geoVecSubtract(q2, q);
+    const uNumerator = geoVecCross(geoVecSubtract(q, p), r);
+    const denominator = geoVecCross(r, s);
 
     if (uNumerator && denominator) {
-        var u = uNumerator / denominator;
-        var t = geoVecCross(geoVecSubtract(q, p), s) / denominator;
+        const u = uNumerator / denominator;
+        const t = geoVecCross(geoVecSubtract(q, p), s) / denominator;
 
         if ((t >= 0) && (t <= 1) && (u >= 0) && (u <= 1)) {
             return geoVecInterp(p, p2, t);
@@ -200,12 +200,12 @@ export function geoLineIntersection(a, b) {
 
 
 export function geoPathIntersections(path1, path2) {
-    var intersections = [];
-    for (var i = 0; i < path1.length - 1; i++) {
-        for (var j = 0; j < path2.length - 1; j++) {
-            var a = [ path1[i], path1[i+1] ];
-            var b = [ path2[j], path2[j+1] ];
-            var hit = geoLineIntersection(a, b);
+    const intersections = [];
+    for (let i = 0; i < path1.length - 1; i++) {
+        for (let j = 0; j < path2.length - 1; j++) {
+            const a = [ path1[i], path1[i+1] ];
+            const b = [ path2[j], path2[j+1] ];
+            const hit = geoLineIntersection(a, b);
             if (hit) {
                 intersections.push(hit);
             }
@@ -215,11 +215,11 @@ export function geoPathIntersections(path1, path2) {
 }
 
 export function geoPathHasIntersections(path1, path2) {
-    for (var i = 0; i < path1.length - 1; i++) {
-        for (var j = 0; j < path2.length - 1; j++) {
-            var a = [ path1[i], path1[i+1] ];
-            var b = [ path2[j], path2[j+1] ];
-            var hit = geoLineIntersection(a, b);
+    for (let i = 0; i < path1.length - 1; i++) {
+        for (let j = 0; j < path2.length - 1; j++) {
+            const a = [ path1[i], path1[i+1] ];
+            const b = [ path2[j], path2[j+1] ];
+            const hit = geoLineIntersection(a, b);
             if (hit) {
                 return true;
             }
@@ -239,17 +239,17 @@ export function geoPathHasIntersections(path1, path2) {
 // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
 //
 export function geoPointInPolygon(point, polygon) {
-    var x = point[0];
-    var y = point[1];
-    var inside = false;
+    const x = point[0];
+    const y = point[1];
+    let inside = false;
 
-    for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-        var xi = polygon[i][0];
-        var yi = polygon[i][1];
-        var xj = polygon[j][0];
-        var yj = polygon[j][1];
+    for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+        const xi = polygon[i][0];
+        const yi = polygon[i][1];
+        const xj = polygon[j][0];
+        const yj = polygon[j][1];
 
-        var intersect = ((yi > y) !== (yj > y)) &&
+        const intersect = ((yi > y) !== (yj > y)) &&
             (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
         if (intersect) inside = !inside;
     }
@@ -279,22 +279,22 @@ export function geoPolygonIntersectsPolygon(outer, inner, checkSegments) {
 // http://gis.stackexchange.com/questions/22895/finding-minimum-area-rectangle-for-given-points
 // http://gis.stackexchange.com/questions/3739/generalisation-strategies-for-building-outlines/3756#3756
 export function geoGetSmallestSurroundingRectangle(points) {
-    var hull = d3_polygonHull(points);
-    var centroid = d3_polygonCentroid(hull);
-    var minArea = Infinity;
-    var ssrExtent = [];
-    var ssrAngle = 0;
-    var c1 = hull[0];
+    const hull = d3_polygonHull(points);
+    const centroid = d3_polygonCentroid(hull);
+    let minArea = Infinity;
+    let ssrExtent = [];
+    let ssrAngle = 0;
+    let c1 = hull[0];
 
-    for (var i = 0; i <= hull.length - 1; i++) {
-        var c2 = (i === hull.length - 1) ? hull[0] : hull[i + 1];
-        var angle = Math.atan2(c2[1] - c1[1], c2[0] - c1[0]);
-        var poly = geoRotate(hull, -angle, centroid);
-        var extent = poly.reduce(function(extent, point) {
+    for (let i = 0; i <= hull.length - 1; i++) {
+        const c2 = (i === hull.length - 1) ? hull[0] : hull[i + 1];
+        const angle = Math.atan2(c2[1] - c1[1], c2[0] - c1[0]);
+        const poly = geoRotate(hull, -angle, centroid);
+        const extent = poly.reduce(function(extent, point) {
             return extent.extend(geoExtent(point));
         }, geoExtent());
 
-        var area = extent.area();
+        const area = extent.area();
         if (area < minArea) {
             minArea = area;
             ssrExtent = extent;
@@ -311,8 +311,8 @@ export function geoGetSmallestSurroundingRectangle(points) {
 
 
 export function geoPathLength(path) {
-    var length = 0;
-    for (var i = 0; i < path.length - 1; i++) {
+    let length = 0;
+    for (let i = 0; i < path.length - 1; i++) {
         length += geoVecLength(path[i], path[i + 1]);
     }
     return length;
@@ -322,9 +322,9 @@ export function geoPathLength(path) {
 // If the given point is at the edge of the padded viewport,
 // return a vector that will nudge the viewport in that direction
 export function geoViewportEdge(point, dimensions) {
-    var pad = [80, 20, 50, 20];   // top, right, bottom, left
-    var x = 0;
-    var y = 0;
+    const pad = [80, 20, 50, 20];   // top, right, bottom, left
+    let x = 0;
+    let y = 0;
 
     if (point[0] > dimensions[0] - pad[1]) {
         x = -10;

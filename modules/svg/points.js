@@ -22,17 +22,17 @@ export function svgPoints(projection, context) {
     // Avoid exit/enter if we're just moving stuff around.
     // The node will get a new version but we only need to run the update selection.
     function fastEntityKey(d) {
-        var mode = context.mode();
-        var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
+        const mode = context.mode();
+        const isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
         return isMoving ? d.id : osmEntity.key(d);
     }
 
 
     function drawTargets(selection, graph, entities, filter) {
-        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
-        var getTransform = svgPointTransform(projection).geojson;
-        var activeID = context.activeID();
-        var data = [];
+        const fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        const getTransform = svgPointTransform(projection).geojson;
+        const activeID = context.activeID();
+        const data = [];
 
         entities.forEach(function(node) {
             if (activeID === node.id) return;   // draw no target on the activeID
@@ -48,7 +48,7 @@ export function svgPoints(projection, context) {
             });
         });
 
-        var targets = selection.selectAll('.point.target')
+        const targets = selection.selectAll('.point.target')
             .filter(function(d) { return filter(d.properties.entity); })
             .data(data, function key(d) { return d.id; });
 
@@ -70,9 +70,9 @@ export function svgPoints(projection, context) {
 
 
     function drawPoints(selection, graph, entities, filter) {
-        var wireframe = context.surface().classed('fill-wireframe');
-        var zoom = geoScaleToZoom(projection.scale());
-        var base = context.history().base();
+        const wireframe = context.surface().classed('fill-wireframe');
+        const zoom = geoScaleToZoom(projection.scale());
+        const base = context.history().base();
 
         // Points with a direction will render as vertices at higher zooms..
         function renderAsPoint(entity) {
@@ -81,22 +81,22 @@ export function svgPoints(projection, context) {
         }
 
         // All points will render as vertices in wireframe mode too..
-        var points = wireframe ? [] : entities.filter(renderAsPoint);
+        const points = wireframe ? [] : entities.filter(renderAsPoint);
         points.sort(sortY);
 
 
-        var drawLayer = selection.selectAll('.layer-osm.points .points-group.points');
-        var touchLayer = selection.selectAll('.layer-touch.points');
+        const drawLayer = selection.selectAll('.layer-osm.points .points-group.points');
+        const touchLayer = selection.selectAll('.layer-touch.points');
 
         // Draw points..
-        var groups = drawLayer.selectAll('g.point')
+        let groups = drawLayer.selectAll('g.point')
             .filter(filter)
             .data(points, fastEntityKey);
 
         groups.exit()
             .remove();
 
-        var enter = groups.enter()
+        const enter = groups.enter()
             .append('g')
             .attr('class', function(d) { return 'node point ' + d.id; })
             .order();
@@ -142,8 +142,8 @@ export function svgPoints(projection, context) {
         groups.select('.stroke');   // propagate bound data
         groups.select('.icon')      // propagate bound data
             .attr('xlink:href', function(entity) {
-                var preset = presetManager.match(entity, graph);
-                var picon = preset && preset.icon;
+                const preset = presetManager.match(entity, graph);
+                const picon = preset && preset.icon;
                 return picon ? '#' + picon : '';
             });
 

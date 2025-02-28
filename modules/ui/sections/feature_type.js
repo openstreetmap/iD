@@ -13,14 +13,14 @@ import { uiTagReference } from '../tag_reference';
 
 export function uiSectionFeatureType(context) {
 
-    var dispatch = d3_dispatch('choose');
+    const dispatch = d3_dispatch('choose');
 
-    var _entityIDs = [];
-    var _presets = [];
+    let _entityIDs = [];
+    let _presets = [];
 
-    var _tagReference;
+    let _tagReference;
 
-    var section = uiSection('feature-type', context)
+    const section = uiSection('feature-type', context)
         .label(() => t.append('inspector.feature_type'))
         .disclosureContent(renderDisclosureContent);
 
@@ -29,14 +29,14 @@ export function uiSectionFeatureType(context) {
         selection.classed('preset-list-item', true);
         selection.classed('mixed-types', _presets.length > 1);
 
-        var presetButtonWrap = selection
+        const presetButtonWrap = selection
             .selectAll('.preset-list-button-wrap')
             .data([0])
             .enter()
             .append('div')
             .attr('class', 'preset-list-button-wrap');
 
-        var presetButton = presetButtonWrap
+        const presetButton = presetButtonWrap
             .append('button')
             .attr('class', 'preset-list-button preset-reset')
             .call(uiTooltip()
@@ -56,7 +56,7 @@ export function uiSectionFeatureType(context) {
         presetButtonWrap.append('div')
             .attr('class', 'accessory-buttons');
 
-        var tagReferenceBodyWrap = selection
+        let tagReferenceBodyWrap = selection
             .selectAll('.tag-reference-body-wrap')
             .data([0]);
 
@@ -86,20 +86,20 @@ export function uiSectionFeatureType(context) {
                 d3_event.stopPropagation();
             });
 
-        var geometries = entityGeometries();
+        const geometries = entityGeometries();
         selection.select('.preset-list-item button')
             .call(uiPresetIcon()
                 .geometry(_presets.length === 1 ? (geometries.length === 1 && geometries[0]) : null)
                 .preset(_presets.length === 1 ? _presets[0] : presetManager.item('point'))
             );
 
-        var names = _presets.length === 1 ? [
+        const names = _presets.length === 1 ? [
             _presets[0].nameLabel(),
             _presets[0].subtitleLabel()
         ].filter(Boolean) : [ t.append('inspector.multiple_types') ];
 
-        var label = selection.select('.label-inner');
-        var nameparts = label.selectAll('.namepart')
+        const label = selection.select('.label-inner');
+        const nameparts = label.selectAll('.namepart')
             .data(names, d => d.stringId);
 
         nameparts.exit()
@@ -137,10 +137,10 @@ export function uiSectionFeatureType(context) {
 
     function entityGeometries() {
 
-        var counts = {};
+        const counts = {};
 
-        for (var i in _entityIDs) {
-            var geometry = context.graph().geometry(_entityIDs[i]);
+        for (const i in _entityIDs) {
+            const geometry = context.graph().geometry(_entityIDs[i]);
             if (!counts[geometry]) counts[geometry] = 0;
             counts[geometry] += 1;
         }

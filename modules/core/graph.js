@@ -6,7 +6,7 @@ export function coreGraph(other, mutable) {
     if (!(this instanceof coreGraph)) return new coreGraph(other, mutable);
 
     if (other instanceof coreGraph) {
-        var base = other.base();
+        const base = other.base();
         this.entities = Object.assign(Object.create(base.entities), other.entities);
         this._parentWays = Object.assign(Object.create(base.parentWays), other._parentWays);
         this._parentRels = Object.assign(Object.create(base.parentRels), other._parentRels);
@@ -32,7 +32,7 @@ coreGraph.prototype = {
 
 
     entity: function(id) {
-        var entity = this.entities[id];
+        let entity = this.entities[id];
 
         //https://github.com/openstreetmap/iD/issues/3973#issuecomment-307052376
         if (!entity) {
@@ -52,8 +52,8 @@ coreGraph.prototype = {
 
 
     transient: function(entity, key, fn) {
-        var id = entity.id;
-        var transients = this.transients[id] || (this.transients[id] = {});
+        const id = entity.id;
+        const transients = this.transients[id] || (this.transients[id] = {});
 
         if (transients[key] !== undefined) {
             return transients[key];
@@ -66,8 +66,8 @@ coreGraph.prototype = {
 
 
     parentWays: function(entity) {
-        var parents = this._parentWays[entity.id];
-        var result = [];
+        const parents = this._parentWays[entity.id];
+        const result = [];
         if (parents) {
             parents.forEach(function(id) {
                 result.push(this.entity(id));
@@ -78,20 +78,20 @@ coreGraph.prototype = {
 
 
     isPoi: function(entity) {
-        var parents = this._parentWays[entity.id];
+        const parents = this._parentWays[entity.id];
         return !parents || parents.size === 0;
     },
 
 
     isShared: function(entity) {
-        var parents = this._parentWays[entity.id];
+        const parents = this._parentWays[entity.id];
         return parents && parents.size > 1;
     },
 
 
     parentRelations: function(entity) {
-        var parents = this._parentRels[entity.id];
-        var result = [];
+        const parents = this._parentRels[entity.id];
+        const result = [];
         if (parents) {
             parents.forEach(function(id) {
                 result.push(this.entity(id));
@@ -111,8 +111,8 @@ coreGraph.prototype = {
         if (this._childNodes[entity.id]) return this._childNodes[entity.id];
         if (!entity.nodes) return [];
 
-        var nodes = [];
-        for (var i = 0; i < entity.nodes.length; i++) {
+        const nodes = [];
+        for (let i = 0; i < entity.nodes.length; i++) {
             nodes[i] = this.entity(entity.nodes[i]);
         }
 
@@ -137,11 +137,11 @@ coreGraph.prototype = {
     // data into each state. To external consumers, it should appear as if the
     // graph always contained the newly downloaded data.
     rebase: function(entities, stack, force) {
-        var base = this.base();
-        var i, j, k, id;
+        const base = this.base();
+        let i, j, k, id;
 
         for (i = 0; i < entities.length; i++) {
-            var entity = entities[i];
+            const entity = entities[i];
 
             if (!entity.visible || (!force && base.entities[entity.id])) continue;
 
@@ -154,7 +154,7 @@ coreGraph.prototype = {
                 for (j = 0; j < entity.nodes.length; j++) {
                     id = entity.nodes[j];
                     for (k = 1; k < stack.length; k++) {
-                        var ents = stack[k].entities;
+                        const ents = stack[k].entities;
                         if (ents.hasOwnProperty(id) && ents[id] === undefined) {
                             delete ents[id];
                         }
@@ -170,7 +170,7 @@ coreGraph.prototype = {
 
 
     _updateRebased: function() {
-        var base = this.base();
+        const base = this.base();
 
         Object.keys(this._parentWays).forEach(function(child) {
             if (base.parentWays[child]) {
@@ -204,8 +204,8 @@ coreGraph.prototype = {
         parentWays = parentWays || this._parentWays;
         parentRels = parentRels || this._parentRels;
 
-        var type = entity && entity.type || oldentity && oldentity.type;
-        var removed, added, i;
+        const type = entity && entity.type || oldentity && oldentity.type;
+        let removed, added, i;
 
         if (type === 'way') {   // Update parentWays
             if (oldentity && entity) {
@@ -232,8 +232,8 @@ coreGraph.prototype = {
         } else if (type === 'relation') {   // Update parentRels
 
             // diff only on the IDs since the same entity can be a member multiple times with different roles
-            var oldentityMemberIDs = oldentity ? oldentity.members.map(function(m) { return m.id; }) : [];
-            var entityMemberIDs = entity ? entity.members.map(function(m) { return m.id; }) : [];
+            const oldentityMemberIDs = oldentity ? oldentity.members.map(function(m) { return m.id; }) : [];
+            const entityMemberIDs = entity ? entity.members.map(function(m) { return m.id; }) : [];
 
             if (oldentity && entity) {
                 removed = utilArrayDifference(oldentityMemberIDs, entityMemberIDs);
@@ -278,8 +278,8 @@ coreGraph.prototype = {
 
 
     revert: function(id) {
-        var baseEntity = this.base().entities[id];
-        var headEntity = this.entities[id];
+        const baseEntity = this.base().entities[id];
+        const headEntity = this.entities[id];
         if (headEntity === baseEntity) return this;
 
         return this.update(function() {
@@ -290,8 +290,8 @@ coreGraph.prototype = {
 
 
     update: function() {
-        var graph = this.frozen ? coreGraph(this, true) : this;
-        for (var i = 0; i < arguments.length; i++) {
+        const graph = this.frozen ? coreGraph(this, true) : this;
+        for (let i = 0; i < arguments.length; i++) {
             arguments[i].call(graph, graph);
         }
 
@@ -303,10 +303,10 @@ coreGraph.prototype = {
 
     // Obliterates any existing entities
     load: function(entities) {
-        var base = this.base();
+        const base = this.base();
         this.entities = Object.create(base.entities);
 
-        for (var i in entities) {
+        for (const i in entities) {
             this.entities[i] = entities[i];
             this._updateCalculated(base.entities[i], this.entities[i]);
         }

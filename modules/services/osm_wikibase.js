@@ -6,17 +6,17 @@ import { localizer } from '../core/localizer';
 import { utilQsString } from '../util';
 
 
-var apibase = 'https://wiki.openstreetmap.org/w/api.php';
-var _inflight = {};
-var _wikibaseCache = {};
-var _localeIDs = { en: false };
+let apibase = 'https://wiki.openstreetmap.org/w/api.php';
+let _inflight = {};
+let _wikibaseCache = {};
+let _localeIDs = { en: false };
 
 
-var debouncedRequest = _debounce(request, 500, { leading: false });
+const debouncedRequest = _debounce(request, 500, { leading: false });
 
 function request(url, callback) {
     if (_inflight[url]) return;
-    var controller = new AbortController();
+    const controller = new AbortController();
     _inflight[url] = controller;
 
     d3_json(url, { signal: controller.signal })
@@ -55,8 +55,8 @@ export default {
      */
     claimToValue: function(entity, property, langCode) {
         if (!entity.claims[property]) return undefined;
-        var locale = _localeIDs[langCode];
-        var preferredPick, localePick;
+        const locale = _localeIDs[langCode];
+        let preferredPick, localePick;
 
         entity.claims[property].forEach(function(stmt) {
             // If exists, use value limited to the needed language (has a qualifier P26 = locale)
@@ -71,9 +71,9 @@ export default {
             }
         });
 
-        var result = localePick || preferredPick;
+        const result = localePick || preferredPick;
         if (result) {
-            var datavalue = result.mainsnak.datavalue;
+            const datavalue = result.mainsnak.datavalue;
             return datavalue.type === 'wikibase-entityid' ? datavalue.value.id : datavalue.value;
         } else {
             return undefined;
@@ -90,7 +90,7 @@ export default {
         if (!entity || !entity.claims[property]) return undefined;
 
         return entity.claims[property].reduce(function(acc, obj) {
-            var value = obj.mainsnak.datavalue.value;
+            const value = obj.mainsnak.datavalue.value;
             acc[value.language] = value.text;
             return acc;
         }, {});
@@ -98,7 +98,7 @@ export default {
 
 
     toSitelink: function(key, value) {
-        var result = value ? ('Tag:' + key + '=' + value) : 'Key:' + key;
+        const result = value ? ('Tag:' + key + '=' + value) : 'Key:' + key;
         return result.replace(/_/g, ' ').trim();
     },
 
@@ -144,13 +144,13 @@ export default {
     // }
     //
     getEntity: function(params, callback) {
-        var doRequest = params.debounce ? debouncedRequest : request;
-        var that = this;
-        var titles = [];
-        var result = {};
-        var rtypeSitelink = (params.key === 'type' && params.value) ? ('Relation:' + params.value).replace(/_/g, ' ').trim() : false;
-        var keySitelink = params.key ? this.toSitelink(params.key) : false;
-        var tagSitelink = (params.key && params.value) ? this.toSitelink(params.key, params.value) : false;
+        const doRequest = params.debounce ? debouncedRequest : request;
+        const that = this;
+        const titles = [];
+        const result = {};
+        const rtypeSitelink = (params.key === 'type' && params.value) ? ('Relation:' + params.value).replace(/_/g, ' ').trim() : false;
+        const keySitelink = params.key ? this.toSitelink(params.key) : false;
+        const tagSitelink = (params.key && params.value) ? this.toSitelink(params.key, params.value) : false;
         const localeSitelinks = [];
 
         if (params.langCodes) {
@@ -159,7 +159,7 @@ export default {
                     // If this is the first time we are asking about this locale,
                     // fetch corresponding entity (if it exists), and cache it.
                     // If there is no such entry, cache `false` value to avoid re-requesting it.
-                    let localeSitelink = ('Locale:' + langCode).replace(/_/g, ' ').trim();
+                    const localeSitelink = ('Locale:' + langCode).replace(/_/g, ' ').trim();
                     titles.push(localeSitelink);
 
                     // initialize with false, such that if locale ID is not found in first request,
@@ -203,7 +203,7 @@ export default {
         // and the result will contain the requested code. If not, all values are returned:
         // {"zh-tw":{"value":"...","language":"zh-tw","source-language":"zh-hant"}
         // {"pt-br":{"value":"...","language":"pt","for-language":"pt-br"}}
-        var obj = {
+        const obj = {
             action: 'wbgetentities',
             sites: 'wiki',
             titles: titles.join('|'),
@@ -216,7 +216,7 @@ export default {
             // formatversion: 2,
         };
 
-        var url = apibase + '?' + utilQsString(obj);
+        const url = apibase + '?' + utilQsString(obj);
         doRequest(url, function(err, d) {
             if (err) {
                 callback(err);
@@ -226,7 +226,7 @@ export default {
                 Object.values(d.entities).forEach(function(res) {
                     if (res.missing !== '') {
 
-                        var title = res.sitelinks.wiki.title;
+                        const title = res.sitelinks.wiki.title;
                         if (title === rtypeSitelink) {
                             _wikibaseCache[rtypeSitelink] = res;
                             result.rtype = res;
@@ -268,8 +268,8 @@ export default {
     // }
     //
     getDocs: function(params, callback) {
-        var that = this;
-        var langCodes = localizer.localeCodes().map(function(code) {
+        const that = this;
+        const langCodes = localizer.localeCodes().map(function(code) {
             return code.toLowerCase();
         });
         params.langCodes = langCodes;
@@ -280,16 +280,16 @@ export default {
                 return;
             }
 
-            var entity = data.rtype || data.tag || data.key;
+            const entity = data.rtype || data.tag || data.key;
             if (!entity) {
                 callback('No entity');
                 return;
             }
 
-            var i;
-            var description;
+            let i;
+            let description;
             for (i in langCodes) {
-                let code = langCodes[i];
+                const code = langCodes[i];
                 if (entity.descriptions[code] && entity.descriptions[code].language === code) {
                     description = entity.descriptions[code];
                     break;
@@ -298,7 +298,7 @@ export default {
             if (!description && Object.values(entity.descriptions).length) description = Object.values(entity.descriptions)[0];
 
             // prepare result
-            var result = {
+            const result = {
                 title: entity.title,
                 description: that.linkifyWikiText(description?.value || ''),
                 descriptionLocaleCode: description ? description.language : '',
@@ -307,8 +307,8 @@ export default {
 
             // add image
             if (entity.claims) {
-                var imageroot;
-                var image = that.claimToValue(entity, 'P4', langCodes[0]);
+                let imageroot;
+                let image = that.claimToValue(entity, 'P4', langCodes[0]);
                 if (image) {
                     imageroot = 'https://commons.wikimedia.org/w/index.php';
                 } else {
@@ -328,17 +328,17 @@ export default {
             // Try to get a wiki page from tag data item first, followed by the corresponding key data item.
             // If neither tag nor key data item contain a wiki page in the needed language nor English,
             // get the first found wiki page from either the tag or the key item.
-            var rtypeWiki = that.monolingualClaimToValueObj(data.rtype, 'P31');
-            var tagWiki = that.monolingualClaimToValueObj(data.tag, 'P31');
-            var keyWiki = that.monolingualClaimToValueObj(data.key, 'P31');
+            const rtypeWiki = that.monolingualClaimToValueObj(data.rtype, 'P31');
+            const tagWiki = that.monolingualClaimToValueObj(data.tag, 'P31');
+            const keyWiki = that.monolingualClaimToValueObj(data.key, 'P31');
 
-            var wikis = [rtypeWiki, tagWiki, keyWiki];
+            const wikis = [rtypeWiki, tagWiki, keyWiki];
             for (i in wikis) {
-                var wiki = wikis[i];
-                for (var j in langCodes) {
-                    var code = langCodes[j];
-                    var referenceId = (langCodes[0].split('-')[0] !== 'en' && code.split('-')[0] === 'en') ? 'inspector.wiki_en_reference' : 'inspector.wiki_reference';
-                    var info = getWikiInfo(wiki, code, referenceId);
+                const wiki = wikis[i];
+                for (const j in langCodes) {
+                    const code = langCodes[j];
+                    const referenceId = (langCodes[0].split('-')[0] !== 'en' && code.split('-')[0] === 'en') ? 'inspector.wiki_en_reference' : 'inspector.wiki_reference';
+                    const info = getWikiInfo(wiki, code, referenceId);
                     if (info) {
                         result.wiki = info;
                         break;

@@ -20,15 +20,15 @@ import { utilKeybinding } from '../util';
 
 
 export function modeSelectData(context, selectedDatum) {
-    var mode = {
+    const mode = {
         id: 'select-data',
         button: 'browse'
     };
 
-    var keybinding = utilKeybinding('select-data');
-    var dataEditor = uiDataEditor(context);
+    const keybinding = utilKeybinding('select-data');
+    const dataEditor = uiDataEditor(context);
 
-    var behaviors = [
+    const behaviors = [
         behaviorBreathe(context),
         behaviorHover(context),
         behaviorSelect(context),
@@ -40,12 +40,12 @@ export function modeSelectData(context, selectedDatum) {
 
     // class the data as selected, or return to browse mode if the data is gone
     function selectData(d3_event, drawn) {
-        var selection = context.surface().selectAll('.layer-mapdata .data' + selectedDatum.__featurehash__);
+        const selection = context.surface().selectAll('.layer-mapdata .data' + selectedDatum.__featurehash__);
 
         if (selection.empty()) {
             // Return to browse mode if selected DOM elements have
             // disappeared because the user moved them out of view..
-            var source = d3_event && d3_event.type === 'zoom' && d3_event.sourceEvent;
+            const source = d3_event && d3_event.type === 'zoom' && d3_event.sourceEvent;
             if (drawn && source && (source.type === 'pointermove' || source.type === 'mousemove' || source.type === 'touchmove')) {
                 context.enter(modeBrowse(context));
             }
@@ -62,7 +62,7 @@ export function modeSelectData(context, selectedDatum) {
 
 
     mode.zoomToSelected = function() {
-        var extent = geoExtent(d3_geoBounds(selectedDatum));
+        const extent = geoExtent(d3_geoBounds(selectedDatum));
         context.map().centerZoomEase(extent.center(), context.map().trimmedExtentZoom(extent));
     };
 
@@ -79,11 +79,11 @@ export function modeSelectData(context, selectedDatum) {
 
         selectData();
 
-        var sidebar = context.ui().sidebar;
+        const sidebar = context.ui().sidebar;
         sidebar.show(dataEditor.datum(selectedDatum));
 
         // expand the sidebar, avoid obscuring the data if needed
-        var extent = geoExtent(d3_geoBounds(selectedDatum));
+        const extent = geoExtent(d3_geoBounds(selectedDatum));
         sidebar.expand(sidebar.intersects(extent));
 
         context.map()

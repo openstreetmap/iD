@@ -3,13 +3,13 @@ import { geoExtent, geoScaleToZoom } from '../geo';
 
 
 export function utilTiler() {
-    var _size = [256, 256];
-    var _scale = 256;
-    var _tileSize = 256;
-    var _zoomExtent = [0, 20];
-    var _translate = [_size[0] / 2, _size[1] / 2];
-    var _margin = 0;
-    var _skipNullIsland = false;
+    let _size = [256, 256];
+    let _scale = 256;
+    let _tileSize = 256;
+    let _zoomExtent = [0, 20];
+    let _translate = [_size[0] / 2, _size[1] / 2];
+    let _margin = 0;
+    let _skipNullIsland = false;
 
 
     function clamp(num, min, max) {
@@ -18,14 +18,14 @@ export function utilTiler() {
 
 
     function nearNullIsland(tile) {
-        var x = tile[0];
-        var y = tile[1];
-        var z = tile[2];
+        const x = tile[0];
+        const y = tile[1];
+        const z = tile[2];
         if (z >= 7) {
-            var center = Math.pow(2, z - 1);
-            var width = Math.pow(2, z - 6);
-            var min = center - (width / 2);
-            var max = center + (width / 2) - 1;
+            const center = Math.pow(2, z - 1);
+            const width = Math.pow(2, z - 6);
+            const min = center - (width / 2);
+            const max = center + (width / 2) - 1;
             return x >= min && x <= max && y >= min && y <= max;
         }
         return false;
@@ -33,31 +33,31 @@ export function utilTiler() {
 
 
     function tiler() {
-        var z = geoScaleToZoom(_scale / (2 * Math.PI), _tileSize);
-        var z0 = clamp(Math.round(z), _zoomExtent[0], _zoomExtent[1]);
-        var tileMin = 0;
-        var tileMax = Math.pow(2, z0) - 1;
-        var log2ts = Math.log(_tileSize) * Math.LOG2E;
-        var k = Math.pow(2, z - z0 + log2ts);
-        var origin = [
+        const z = geoScaleToZoom(_scale / (2 * Math.PI), _tileSize);
+        const z0 = clamp(Math.round(z), _zoomExtent[0], _zoomExtent[1]);
+        const tileMin = 0;
+        const tileMax = Math.pow(2, z0) - 1;
+        const log2ts = Math.log(_tileSize) * Math.LOG2E;
+        const k = Math.pow(2, z - z0 + log2ts);
+        const origin = [
             (_translate[0] - _scale / 2) / k,
             (_translate[1] - _scale / 2) / k
         ];
 
-        var cols = d3_range(
+        const cols = d3_range(
             clamp(Math.floor(-origin[0]) - _margin,               tileMin, tileMax + 1),
             clamp(Math.ceil(_size[0] / k - origin[0]) + _margin,  tileMin, tileMax + 1)
         );
-        var rows = d3_range(
+        const rows = d3_range(
             clamp(Math.floor(-origin[1]) - _margin,               tileMin, tileMax + 1),
             clamp(Math.ceil(_size[1] / k - origin[1]) + _margin,  tileMin, tileMax + 1)
         );
 
-        var tiles = [];
-        for (var i = 0; i < rows.length; i++) {
-            var y = rows[i];
-            for (var j = 0; j < cols.length; j++) {
-                var x = cols[j];
+        const tiles = [];
+        for (let i = 0; i < rows.length; i++) {
+            const y = rows[i];
+            for (let j = 0; j < cols.length; j++) {
+                const x = cols[j];
 
                 if (i >= _margin && i <= rows.length - _margin &&
                     j >= _margin && j <= cols.length - _margin) {
@@ -79,7 +79,7 @@ export function utilTiler() {
      * getTiles() returns an array of tiles that cover the map view
      */
     tiler.getTiles = function(projection) {
-        var origin = [
+        const origin = [
             projection.scale() * Math.PI - projection.translate()[0],
             projection.scale() * Math.PI - projection.translate()[1]
         ];
@@ -89,16 +89,16 @@ export function utilTiler() {
             .scale(projection.scale() * 2 * Math.PI)
             .translate(projection.translate());
 
-        var tiles = tiler();
-        var ts = tiles.scale;
+        const tiles = tiler();
+        const ts = tiles.scale;
 
         return tiles
             .map(function(tile) {
                 if (_skipNullIsland && nearNullIsland(tile)) {
                     return false;
                 }
-                var x = tile[0] * ts - origin[0];
-                var y = tile[1] * ts - origin[1];
+                const x = tile[0] * ts - origin[0];
+                const y = tile[1] * ts - origin[1];
                 return {
                     id: tile.toString(),
                     xyz: tile,
@@ -115,7 +115,7 @@ export function utilTiler() {
      * getGeoJSON() returns a FeatureCollection for debugging tiles
      */
     tiler.getGeoJSON = function(projection) {
-        var features = tiler.getTiles(projection).map(function(tile) {
+        const features = tiler.getTiles(projection).map(function(tile) {
             return {
                 type: 'Feature',
                 properties: {

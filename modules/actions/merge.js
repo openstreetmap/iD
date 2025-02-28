@@ -5,7 +5,7 @@ import { utilArrayGroupBy, utilArrayUniq, utilCompareIDs } from '../util';
 export function actionMerge(ids) {
 
     function groupEntitiesByGeometry(graph) {
-        var entities = ids.map(function(id) { return graph.entity(id); });
+        const entities = ids.map(function(id) { return graph.entity(id); });
         return Object.assign(
             { point: [], area: [], line: [], relation: [] },
             utilArrayGroupBy(entities, function(entity) { return entity.geometry(graph); })
@@ -13,10 +13,10 @@ export function actionMerge(ids) {
     }
 
 
-    var action = function(graph) {
-        var geometries = groupEntitiesByGeometry(graph);
-        var target = geometries.area[0] || geometries.line[0];
-        var points = geometries.point;
+    const action = function(graph) {
+        const geometries = groupEntitiesByGeometry(graph);
+        let target = geometries.area[0] || geometries.line[0];
+        const points = geometries.point;
 
         points.forEach(function(point) {
             target = target.mergeTags(point.tags);
@@ -26,21 +26,21 @@ export function actionMerge(ids) {
                 graph = graph.replace(parent.replaceMember(point, target));
             });
 
-            var nodes = utilArrayUniq(graph.childNodes(target));
-            var removeNode = point;
+            const nodes = utilArrayUniq(graph.childNodes(target));
+            let removeNode = point;
 
             if (!point.isNew()) {
                 // Try to preserve the original point if it already has
                 // an ID in the database.
 
-                var inserted = false;
+                let inserted = false;
 
-                var canBeReplaced = function(node) {
+                const canBeReplaced = function(node) {
                     return !(graph.parentWays(node).length > 1 ||
                         graph.parentRelations(node).length);
                 };
 
-                var replaceNode = function(node) {
+                const replaceNode = function(node) {
                     graph = graph.replace(point.update({ tags: node.tags, loc: node.loc }));
                     target = target.replaceNode(node.id, point.id);
                     graph = graph.replace(target);
@@ -48,8 +48,8 @@ export function actionMerge(ids) {
                     inserted = true;
                 };
 
-                var i;
-                var node;
+                let i;
+                let node;
 
                 // First, try to replace a new child node on the target way.
                 for (i = 0; i < nodes.length; i++) {
@@ -94,7 +94,7 @@ export function actionMerge(ids) {
         });
 
         if (target.tags.area === 'yes') {
-            var tags = Object.assign({}, target.tags); // shallow copy
+            const tags = Object.assign({}, target.tags); // shallow copy
             delete tags.area;
             if (osmTagSuggestingArea(tags)) {
                 // remove the `area` tag if area geometry is now implied - #3851
@@ -108,7 +108,7 @@ export function actionMerge(ids) {
 
 
     action.disabled = function(graph) {
-        var geometries = groupEntitiesByGeometry(graph);
+        const geometries = groupEntitiesByGeometry(graph);
         if (geometries.point.length === 0 ||
             (geometries.area.length + geometries.line.length) !== 1 ||
             geometries.relation.length !== 0) {

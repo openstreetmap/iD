@@ -5,7 +5,7 @@ import { svgIcon } from '../svg/icon';
 
 
 export function uiStatus(context) {
-    var osm = context.connection();
+    const osm = context.connection();
 
 
     return function(selection) {
@@ -37,7 +37,7 @@ export function uiStatus(context) {
                 } else {
 
                     // don't allow retrying too rapidly
-                    var throttledRetry = _throttle(function() {
+                    const throttledRetry = _throttle(function() {
                         // try loading the visible tiles
                         context.loadTiles(context.projection);
                         // manually reload the status too in case all visible tiles were already loaded

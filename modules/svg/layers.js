@@ -24,9 +24,9 @@ import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
 
 
 export function svgLayers(projection, context) {
-    var dispatch = d3_dispatch('change');
-    var svg = d3_select(null);
-    var _layers = [
+    const dispatch = d3_dispatch('change');
+    let svg = d3_select(null);
+    let _layers = [
         { id: 'osm', layer: svgOsm(projection, context, dispatch) },
         { id: 'notes', layer: svgNotes(projection, context, dispatch) },
         { id: 'data', layer: svgData(projection, context, dispatch) },
@@ -57,14 +57,14 @@ export function svgLayers(projection, context) {
             .attr('class', 'surface')
             .merge(svg);
 
-        var defs = svg.selectAll('.surface-defs')
+        const defs = svg.selectAll('.surface-defs')
             .data([0]);
 
         defs.enter()
             .append('defs')
             .attr('class', 'surface-defs');
 
-        var groups = svg.selectAll('.data-layer')
+        const groups = svg.selectAll('.data-layer')
             .data(_layers);
 
         groups.exit()
@@ -84,20 +84,20 @@ export function svgLayers(projection, context) {
 
 
     drawLayers.layer = function(id) {
-        var obj = _layers.find(function(o) { return o.id === id; });
+        const obj = _layers.find(function(o) { return o.id === id; });
         return obj && obj.layer;
     };
 
 
     drawLayers.only = function(what) {
-        var arr = [].concat(what);
-        var all = _layers.map(function(layer) { return layer.id; });
+        const arr = [].concat(what);
+        const all = _layers.map(function(layer) { return layer.id; });
         return drawLayers.remove(utilArrayDifference(all, arr));
     };
 
 
     drawLayers.remove = function(what) {
-        var arr = [].concat(what);
+        const arr = [].concat(what);
         arr.forEach(function(id) {
             _layers = _layers.filter(function(o) { return o.id !== id; });
         });
@@ -107,7 +107,7 @@ export function svgLayers(projection, context) {
 
 
     drawLayers.add = function(what) {
-        var arr = [].concat(what);
+        const arr = [].concat(what);
         arr.forEach(function(obj) {
             if ('id' in obj && 'layer' in obj) {
                 _layers.push(obj);

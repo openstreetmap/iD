@@ -16,7 +16,7 @@ import { utilArrayGroupBy, utilRebind, utilUniqueDomId } from '../util';
 import { utilDetect } from '../util/detect';
 
 
-var readOnlyTags = [
+const readOnlyTags = [
     /^changesets_count$/,
     /^created_by$/,
     /^ideditor:/,
@@ -32,21 +32,21 @@ var readOnlyTags = [
 
 // treat most punctuation (except -, _, +, &) as hashtag delimiters - #4398
 // from https://stackoverflow.com/a/25575009
-var hashtagRegex = /([#＃][^\u2000-\u206F\u2E00-\u2E7F\s\\'!"#$%()*,.\/:;<=>?@\[\]^`{|}~]+)/g;
+const hashtagRegex = /([#＃][^\u2000-\u206F\u2E00-\u2E7F\s\\'!"#$%()*,.\/:;<=>?@\[\]^`{|}~]+)/g;
 
 
 export function uiCommit(context) {
-    var dispatch = d3_dispatch('cancel');
-    var _userDetails;
-    var _selection;
+    const dispatch = d3_dispatch('cancel');
+    let _userDetails;
+    let _selection;
 
-    var changesetEditor = uiChangesetEditor(context)
+    const changesetEditor = uiChangesetEditor(context)
         .on('change', changeTags);
-    var rawTagEditor = uiSectionRawTagEditor('changeset-tag-editor', context)
+    const rawTagEditor = uiSectionRawTagEditor('changeset-tag-editor', context)
         .on('change', changeTags)
         .readOnlyTags(readOnlyTags);
-    var commitChanges = uiSectionChanges(context);
-    var commitWarnings = uiCommitWarnings(context);
+    const commitChanges = uiSectionChanges(context);
+    const commitWarnings = uiCommitWarnings(context);
 
 
     function commit(selection) {
@@ -63,9 +63,9 @@ export function uiCommit(context) {
     function initChangeset() {
 
         // expire stored comment, hashtags, source after cutoff datetime - #3947 #4899
-        var commentDate = +prefs('commentDate') || 0;
-        var currDate = Date.now();
-        var cutoff = 2 * 86400 * 1000;   // 2 days
+        const commentDate = +prefs('commentDate') || 0;
+        const currDate = Date.now();
+        const cutoff = 2 * 86400 * 1000;   // 2 days
         if (commentDate > currDate || currDate - commentDate > cutoff) {
             prefs('comment', null);
             prefs('hashtags', null);
@@ -86,8 +86,8 @@ export function uiCommit(context) {
             prefs('commentDate', Date.now());
         }
 
-        var detected = utilDetect();
-        var tags = {
+        const detected = utilDetect();
+        const tags = {
             comment: prefs('comment') || '',
             created_by: context.cleanTagValue('iD ' + context.version),
             host: context.cleanTagValue(detected.host),
@@ -98,18 +98,18 @@ export function uiCommit(context) {
         // hashtags if any hashtags are found in the comment - #4304
         findHashtags(tags, true);
 
-        var hashtags = prefs('hashtags');
+        const hashtags = prefs('hashtags');
         if (hashtags) {
             tags.hashtags = hashtags;
         }
 
-        var source = prefs('source');
+        const source = prefs('source');
         if (source) {
             tags.source = source;
         }
-        var photoOverlaysUsed = context.history().photoOverlaysUsed();
+        const photoOverlaysUsed = context.history().photoOverlaysUsed();
         if (photoOverlaysUsed.length) {
-            var sources = (tags.source || '').split(';');
+            const sources = (tags.source || '').split(';');
 
             // include this tag for any photo layer
             if (sources.indexOf('streetlevel imagery') === -1) {
@@ -133,49 +133,49 @@ export function uiCommit(context) {
     // them to the changeset.
     function loadDerivedChangesetTags() {
 
-        var osm = context.connection();
+        const osm = context.connection();
         if (!osm) return;
 
-        var tags = Object.assign({}, context.changeset.tags);   // shallow copy
+        const tags = Object.assign({}, context.changeset.tags);   // shallow copy
 
         // assign tags for imagery used
-        var imageryUsed = context.cleanTagValue(context.history().imageryUsed().join(';'));
+        const imageryUsed = context.cleanTagValue(context.history().imageryUsed().join(';'));
         tags.imagery_used = imageryUsed || 'None';
 
         // assign tags for closed issues and notes
-        var osmClosed = osm.getClosedIDs();
-        var itemType;
+        const osmClosed = osm.getClosedIDs();
+        let itemType;
         if (osmClosed.length) {
             tags['closed:note'] = context.cleanTagValue(osmClosed.join(';'));
         }
         if (services.keepRight) {
-            var krClosed = services.keepRight.getClosedIDs();
+            const krClosed = services.keepRight.getClosedIDs();
             if (krClosed.length) {
                 tags['closed:keepright'] = context.cleanTagValue(krClosed.join(';'));
             }
         }
         if (services.osmose) {
-            var osmoseClosed = services.osmose.getClosedCounts();
+            const osmoseClosed = services.osmose.getClosedCounts();
             for (itemType in osmoseClosed) {
                 tags['closed:osmose:' + itemType] = context.cleanTagValue(osmoseClosed[itemType].toString());
             }
         }
 
         // remove existing issue counts
-        for (var key in tags) {
+        for (const key in tags) {
             if (key.match(/(^warnings:)|(^resolved:)/)) {
                 delete tags[key];
             }
         }
 
         function addIssueCounts(issues, prefix) {
-            var issuesByType = utilArrayGroupBy(issues, 'type');
-            for (var issueType in issuesByType) {
-                var issuesOfType = issuesByType[issueType];
+            const issuesByType = utilArrayGroupBy(issues, 'type');
+            for (const issueType in issuesByType) {
+                const issuesOfType = issuesByType[issueType];
                 if (issuesOfType[0].subtype) {
-                    var issuesBySubtype = utilArrayGroupBy(issuesOfType, 'subtype');
-                    for (var issueSubtype in issuesBySubtype) {
-                        var issuesOfSubtype = issuesBySubtype[issueSubtype];
+                    const issuesBySubtype = utilArrayGroupBy(issuesOfType, 'subtype');
+                    for (const issueSubtype in issuesBySubtype) {
+                        const issuesOfSubtype = issuesBySubtype[issueSubtype];
                         tags[prefix + ':' + issueType + ':' + issueSubtype] = context.cleanTagValue(issuesOfSubtype.length.toString());
                     }
                 } else {
@@ -185,7 +185,7 @@ export function uiCommit(context) {
         }
 
         // add counts of warnings generated by the user's edits
-        var warnings = context.validator()
+        const warnings = context.validator()
             .getIssuesBySeverity({ what: 'edited', where: 'all', includeIgnored: true, includeDisabledRules: true })
             .warning
             .filter(function(issue) { return issue.type !== 'help_request'; });    // exclude 'fixme' and similar - #8603
@@ -193,7 +193,7 @@ export function uiCommit(context) {
         addIssueCounts(warnings, 'warnings');
 
         // add counts of issues resolved by the user's edits
-        var resolvedIssues = context.validator().getResolvedIssues();
+        const resolvedIssues = context.validator().getResolvedIssues();
         addIssueCounts(resolvedIssues, 'resolved');
 
         context.changeset = context.changeset.update({ tags: tags });
@@ -201,13 +201,13 @@ export function uiCommit(context) {
 
     function render(selection) {
 
-        var osm = context.connection();
+        const osm = context.connection();
         if (!osm) return;
 
-        var header = selection.selectAll('.header')
+        const header = selection.selectAll('.header')
             .data([0]);
 
-        var headerTitle = header.enter()
+        const headerTitle = header.enter()
             .append('div')
             .attr('class', 'header fillL');
 
@@ -225,7 +225,7 @@ export function uiCommit(context) {
             })
             .call(svgIcon('#iD-icon-close'));
 
-        var body = selection.selectAll('.body')
+        let body = selection.selectAll('.body')
             .data([0]);
 
         body = body.enter()
@@ -235,7 +235,7 @@ export function uiCommit(context) {
 
 
         // Changeset Section
-        var changesetSection = body.selectAll('.changeset-editor')
+        let changesetSection = body.selectAll('.changeset-editor')
             .data([0]);
 
         changesetSection = changesetSection.enter()
@@ -255,7 +255,7 @@ export function uiCommit(context) {
 
 
         // Upload Explanation
-        var saveSection = body.selectAll('.save-section')
+        let saveSection = body.selectAll('.save-section')
             .data([0]);
 
         saveSection = saveSection.enter()
@@ -263,7 +263,7 @@ export function uiCommit(context) {
             .attr('class','modal-section save-section fillL')
             .merge(saveSection);
 
-        var prose = saveSection.selectAll('.commit-info')
+        let prose = saveSection.selectAll('.commit-info')
             .data([0]);
 
         if (prose.enter().size()) {   // first time, make sure to update user details in prose
@@ -284,7 +284,7 @@ export function uiCommit(context) {
             if (_userDetails === user) return;  // no change
             _userDetails = user;
 
-            var userLink = d3_select(document.createElement('div'));
+            const userLink = d3_select(document.createElement('div'));
 
             if (user.image_url) {
                 userLink
@@ -306,17 +306,17 @@ export function uiCommit(context) {
 
 
         // Request Review
-        var requestReview = saveSection.selectAll('.request-review')
+        let requestReview = saveSection.selectAll('.request-review')
             .data([0]);
 
         // Enter
-        var requestReviewEnter = requestReview.enter()
+        const requestReviewEnter = requestReview.enter()
             .append('div')
             .attr('class', 'request-review');
 
-        var requestReviewDomId = utilUniqueDomId('commit-input-request-review');
+        const requestReviewDomId = utilUniqueDomId('commit-input-request-review');
 
-        var labelEnter = requestReviewEnter
+        const labelEnter = requestReviewEnter
             .append('label')
             .attr('for', requestReviewDomId);
 
@@ -340,17 +340,17 @@ export function uiCommit(context) {
         requestReview = requestReview
             .merge(requestReviewEnter);
 
-        var requestReviewInput = requestReview.selectAll('input')
+        const requestReviewInput = requestReview.selectAll('input')
             .property('checked', isReviewRequested(context.changeset.tags))
             .on('change', toggleRequestReview);
 
 
         // Buttons
-        var buttonSection = saveSection.selectAll('.buttons')
+        let buttonSection = saveSection.selectAll('.buttons')
             .data([0]);
 
         // enter
-        var buttonEnter = buttonSection.enter()
+        const buttonEnter = buttonSection.enter()
             .append('div')
             .attr('class', 'buttons fillL');
 
@@ -361,7 +361,7 @@ export function uiCommit(context) {
             .attr('class', 'label')
             .call(t.append('commit.cancel'));
 
-        var uploadButton = buttonEnter
+        const uploadButton = buttonEnter
             .append('button')
             .attr('class', 'action button save-button');
 
@@ -369,7 +369,7 @@ export function uiCommit(context) {
             .attr('class', 'label')
             .call(t.append('commit.save'));
 
-        var uploadBlockerTooltipText = getUploadBlockerMessage();
+        const uploadBlockerTooltipText = getUploadBlockerMessage();
 
         // update
         buttonSection = buttonSection
@@ -386,7 +386,7 @@ export function uiCommit(context) {
                 if (!d3_select(this).classed('disabled')) {
                     this.blur();    // avoid keeping focus on the button - #4641
 
-                    for (var key in context.changeset.tags) {
+                    for (const key in context.changeset.tags) {
                         // remove any empty keys before upload
                         if (!key) delete context.changeset.tags[key];
                     }
@@ -406,7 +406,7 @@ export function uiCommit(context) {
         }
 
         // Raw Tag Editor
-        var tagSection = body.selectAll('.tag-section.raw-tag-editor')
+        let tagSection = body.selectAll('.tag-section.raw-tag-editor')
             .data([0]);
 
         tagSection = tagSection.enter()
@@ -420,7 +420,7 @@ export function uiCommit(context) {
                 .render
             );
 
-        var changesSection = body.selectAll('.commit-changes-section')
+        let changesSection = body.selectAll('.commit-changes-section')
             .data([0]);
 
         changesSection = changesSection.enter()
@@ -433,7 +433,7 @@ export function uiCommit(context) {
 
 
         function toggleRequestReview() {
-            var rr = requestReviewInput.property('checked');
+            const rr = requestReviewInput.property('checked');
             updateChangeset({ review_requested: (rr ? 'yes' : undefined) });
 
             tagSection
@@ -446,13 +446,13 @@ export function uiCommit(context) {
 
 
     function getUploadBlockerMessage() {
-        var errors = context.validator()
+        const errors = context.validator()
             .getIssuesBySeverity({ what: 'edited', where: 'all' }).error;
 
         if (errors.length) {
             return t.append('commit.outstanding_errors_message', { count: errors.length });
         } else {
-            var hasChangesetComment = context.changeset && context.changeset.tags.comment && context.changeset.tags.comment.trim().length;
+            const hasChangesetComment = context.changeset && context.changeset.tags.comment && context.changeset.tags.comment.trim().length;
             if (!hasChangesetComment) {
                 return t.append('commit.comment_needed_message');
             }
@@ -487,7 +487,7 @@ export function uiCommit(context) {
 
 
     function findHashtags(tags, commentOnly) {
-        var detectedHashtags = commentHashtags();
+        let detectedHashtags = commentHashtags();
 
         if (detectedHashtags.length) {
             // always remove stored hashtags if there are hashtags in the comment - #4304
@@ -497,10 +497,10 @@ export function uiCommit(context) {
             detectedHashtags = detectedHashtags.concat(hashtagHashtags());
         }
 
-        var allLowerCase = new Set();
+        const allLowerCase = new Set();
         return detectedHashtags.filter(function(hashtag) {
             // Compare tags as lowercase strings, but keep original case tags
-            var lowerCase = hashtag.toLowerCase();
+            const lowerCase = hashtag.toLowerCase();
             if (!allLowerCase.has(lowerCase)) {
                 allLowerCase.add(lowerCase);
                 return true;
@@ -510,7 +510,7 @@ export function uiCommit(context) {
 
         // Extract hashtags from `comment`
         function commentHashtags() {
-            var matches = (tags.comment || '')
+            const matches = (tags.comment || '')
                 .replace(/http\S*/g, '')  // drop anything that looks like a URL - #4289
                 .match(hashtagRegex);
 
@@ -519,11 +519,11 @@ export function uiCommit(context) {
 
         // Extract and clean hashtags from `hashtags`
         function hashtagHashtags() {
-            var matches = (tags.hashtags || '')
+            const matches = (tags.hashtags || '')
                 .split(/[,;\s]+/)
                 .map(function (s) {
                     if (s[0] !== '#') { s = '#' + s; }    // prepend '#'
-                    var matched = s.match(hashtagRegex);
+                    const matched = s.match(hashtagRegex);
                     return matched && matched[0];
                 }).filter(Boolean);                       // exclude falsy
 
@@ -533,7 +533,7 @@ export function uiCommit(context) {
 
 
     function isReviewRequested(tags) {
-        var rr = tags.review_requested;
+        let rr = tags.review_requested;
         if (rr === undefined) return false;
         rr = rr.trim().toLowerCase();
         return !(rr === '' || rr === 'no');
@@ -541,10 +541,10 @@ export function uiCommit(context) {
 
 
     function updateChangeset(changed, onInput) {
-        var tags = Object.assign({}, context.changeset.tags);   // shallow copy
+        const tags = Object.assign({}, context.changeset.tags);   // shallow copy
 
         Object.keys(changed).forEach(function(k) {
-            var v = changed[k];
+            const v = changed[k];
             k = context.cleanTagKey(k);
             if (readOnlyTags.indexOf(k) !== -1) return;
 
@@ -559,8 +559,8 @@ export function uiCommit(context) {
 
         if (!onInput) {
             // when changing the comment, override hashtags with any found in comment.
-            var commentOnly = changed.hasOwnProperty('comment') && (changed.comment !== '');
-            var arr = findHashtags(tags, commentOnly);
+            const commentOnly = changed.hasOwnProperty('comment') && (changed.comment !== '');
+            const arr = findHashtags(tags, commentOnly);
             if (arr.length) {
                 tags.hashtags = context.cleanTagValue(arr.join(';'));
                 prefs('hashtags', tags.hashtags);
@@ -572,12 +572,12 @@ export function uiCommit(context) {
 
         // always update userdetails, just in case user reauthenticates as someone else
         if (_userDetails && _userDetails.changesets_count !== undefined) {
-            var changesetsCount = parseInt(_userDetails.changesets_count, 10) + 1;  // #4283
+            const changesetsCount = parseInt(_userDetails.changesets_count, 10) + 1;  // #4283
             tags.changesets_count = String(changesetsCount);
 
             // first 100 edits - new user
             if (changesetsCount <= 100) {
-                var s;
+                let s;
                 s = prefs('walkthrough_completed');
                 if (s) {
                     tags['ideditor:walkthrough_completed'] = s;

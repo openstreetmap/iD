@@ -27,26 +27,26 @@ import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../
  */
 
 export function behaviorDrag() {
-    var dispatch = d3_dispatch('start', 'move', 'end');
+    const dispatch = d3_dispatch('start', 'move', 'end');
 
     // see also behaviorSelect
-    var _tolerancePx = 1; // keep this low to facilitate pixel-perfect micromapping
-    var _penTolerancePx = 4; // styluses can be touchy so require greater movement - #1981
+    const _tolerancePx = 1; // keep this low to facilitate pixel-perfect micromapping
+    const _penTolerancePx = 4; // styluses can be touchy so require greater movement - #1981
 
-    var _origin = null;
-    var _selector = '';
-    var _targetNode;
-    var _targetEntity;
-    var _surface;
-    var _pointerId;
+    let _origin = null;
+    let _selector = '';
+    let _targetNode;
+    let _targetEntity;
+    let _surface;
+    let _pointerId;
 
     // use pointer events on supported platforms; fallback to mouse events
-    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+    const _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
-    var d3_event_userSelectProperty = utilPrefixCSSProperty('UserSelect');
-    var d3_event_userSelectSuppress = function() {
-            var selection = d3_selection();
-            var select = selection.style(d3_event_userSelectProperty);
+    const d3_event_userSelectProperty = utilPrefixCSSProperty('UserSelect');
+    const d3_event_userSelectSuppress = function() {
+            const selection = d3_selection();
+            const select = selection.style(d3_event_userSelectProperty);
             selection.style(d3_event_userSelectProperty, 'none');
             return function() {
                 selection.style(d3_event_userSelectProperty, select);
@@ -63,12 +63,12 @@ export function behaviorDrag() {
         _targetNode = this;
 
         // only force reflow once per drag
-        var pointerLocGetter = utilFastMouse(_surface || _targetNode.parentNode);
+        const pointerLocGetter = utilFastMouse(_surface || _targetNode.parentNode);
 
-        var offset;
-        var startOrigin = pointerLocGetter(d3_event);
-        var started = false;
-        var selectEnable = d3_event_userSelectSuppress();
+        let offset;
+        let startOrigin = pointerLocGetter(d3_event);
+        let started = false;
+        const selectEnable = d3_event_userSelectSuppress();
 
         d3_select(window)
             .on(_pointerPrefix + 'move.drag', pointermove)
@@ -87,11 +87,11 @@ export function behaviorDrag() {
         function pointermove(d3_event) {
             if (_pointerId !== (d3_event.pointerId || 'mouse')) return;
 
-            var p = pointerLocGetter(d3_event);
+            const p = pointerLocGetter(d3_event);
 
             if (!started) {
-                var dist = geoVecLength(startOrigin,  p);
-                var tolerance = d3_event.pointerType === 'pen' ? _penTolerancePx : _tolerancePx;
+                const dist = geoVecLength(startOrigin,  p);
+                const tolerance = d3_event.pointerType === 'pen' ? _penTolerancePx : _tolerancePx;
                 // don't start until the drag has actually moved somewhat
                 if (dist < tolerance) return;
 
@@ -106,8 +106,8 @@ export function behaviorDrag() {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
 
-                var dx = p[0] - startOrigin[0];
-                var dy = p[1] - startOrigin[1];
+                const dx = p[0] - startOrigin[0];
+                const dy = p[1] - startOrigin[1];
                 dispatch.call('move', this, d3_event, _targetEntity, [p[0] + offset[0],  p[1] + offset[1]], [dx, dy]);
             }
         }
@@ -134,15 +134,15 @@ export function behaviorDrag() {
 
 
     function behavior(selection) {
-        var matchesSelector = utilPrefixDOMProperty('matchesSelector');
-        var delegate = pointerdown;
+        const matchesSelector = utilPrefixDOMProperty('matchesSelector');
+        let delegate = pointerdown;
 
         if (_selector) {
             delegate = function(d3_event) {
-                var root = this;
-                var target = d3_event.target;
+                const root = this;
+                let target = d3_event.target;
                 for (; target && target !== root; target = target.parentNode) {
-                    var datum = target.__data__;
+                    const datum = target.__data__;
 
                     _targetEntity = datum instanceof osmNote ? datum
                         : datum && datum.properties && datum.properties.entity;

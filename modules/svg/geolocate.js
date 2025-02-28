@@ -5,8 +5,8 @@ import { geoMetersToLat } from '../geo';
 
 
 export function svgGeolocate(projection) {
-    var layer = d3_select(null);
-    var _position;
+    let layer = d3_select(null);
+    let _position;
 
 
     function init() {
@@ -45,7 +45,7 @@ export function svgGeolocate(projection) {
     }
 
     function accuracy(accuracy, loc) { // converts accuracy to pixels...
-        var degreesRadius = geoMetersToLat(accuracy),
+        const degreesRadius = geoMetersToLat(accuracy),
             tangentLoc = [loc[0], loc[1] + degreesRadius],
             projectedTangent = projection(tangentLoc),
             projectedLoc = projection([loc[0], loc[1]]);
@@ -55,15 +55,15 @@ export function svgGeolocate(projection) {
     }
 
     function update() {
-        var geolocation = { loc: [_position.coords.longitude, _position.coords.latitude] };
+        const geolocation = { loc: [_position.coords.longitude, _position.coords.latitude] };
 
-        var groups = layer.selectAll('.geolocations').selectAll('.geolocation')
+        const groups = layer.selectAll('.geolocations').selectAll('.geolocation')
             .data([geolocation]);
 
         groups.exit()
             .remove();
 
-        var pointsEnter = groups.enter()
+        const pointsEnter = groups.enter()
             .append('g')
             .attr('class', 'geolocation');
 
@@ -92,7 +92,7 @@ export function svgGeolocate(projection) {
     }
 
     function drawLocation(selection) {
-        var enabled = svgGeolocate.enabled;
+        const enabled = svgGeolocate.enabled;
 
         layer = selection.selectAll('.layer-geolocate')
             .data([0]);
@@ -100,7 +100,7 @@ export function svgGeolocate(projection) {
         layer.exit()
             .remove();
 
-        var layerEnter = layer.enter()
+        const layerEnter = layer.enter()
             .append('g')
             .attr('class', 'layer-geolocate')
             .style('display', enabled ? 'block' : 'none');

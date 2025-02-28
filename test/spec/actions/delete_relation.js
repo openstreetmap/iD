@@ -1,13 +1,13 @@
 describe('iD.actionDeleteRelation', function () {
     it('removes the relation from the graph', function () {
-        var relation = iD.osmRelation(),
+        const relation = iD.osmRelation(),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(iD.coreGraph([relation]));
         expect(graph.hasEntity(relation.id)).to.be.undefined;
     });
 
     it('removes the relation from parent relations', function () {
-        var a      = iD.osmRelation(),
+        const a      = iD.osmRelation(),
             b      = iD.osmRelation(),
             parent = iD.osmRelation({members: [{ id: a.id }, { id: b.id }]}),
             action = iD.actionDeleteRelation(a.id),
@@ -16,7 +16,7 @@ describe('iD.actionDeleteRelation', function () {
     });
 
     it('deletes member nodes not referenced by another parent', function() {
-        var node     = iD.osmNode(),
+        const node     = iD.osmNode(),
             relation = iD.osmRelation({members: [{id: node.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(iD.coreGraph([node, relation]));
@@ -24,7 +24,7 @@ describe('iD.actionDeleteRelation', function () {
     });
 
     it('does not delete member nodes referenced by another parent', function() {
-        var node     = iD.osmNode(),
+        const node     = iD.osmNode(),
             way      = iD.osmWay({nodes: [node.id]}),
             relation = iD.osmRelation({members: [{id: node.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
@@ -33,7 +33,7 @@ describe('iD.actionDeleteRelation', function () {
     });
 
     it('does not delete member nodes with interesting tags', function() {
-        var node     = iD.osmNode({tags: {highway: 'traffic_signals'}}),
+        const node     = iD.osmNode({tags: {highway: 'traffic_signals'}}),
             relation = iD.osmRelation({members: [{id: node.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(iD.coreGraph([node, relation]));
@@ -41,7 +41,7 @@ describe('iD.actionDeleteRelation', function () {
     });
 
     it('deletes member ways not referenced by another parent', function() {
-        var way      = iD.osmWay(),
+        const way      = iD.osmWay(),
             relation = iD.osmRelation({members: [{id: way.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(iD.coreGraph([way, relation]));
@@ -49,7 +49,7 @@ describe('iD.actionDeleteRelation', function () {
     });
 
     it('does not delete member ways referenced by another parent', function() {
-        var way       = iD.osmWay(),
+        const way       = iD.osmWay(),
             relation1 = iD.osmRelation({members: [{id: way.id}]}),
             relation2 = iD.osmRelation({members: [{id: way.id}]}),
             action    = iD.actionDeleteRelation(relation1.id),
@@ -58,7 +58,7 @@ describe('iD.actionDeleteRelation', function () {
     });
 
     it('does not delete member ways with interesting tags', function() {
-        var way      = iD.osmNode({tags: {highway: 'residential'}}),
+        const way      = iD.osmNode({tags: {highway: 'residential'}}),
             relation = iD.osmRelation({members: [{id: way.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(iD.coreGraph([way, relation]));
@@ -66,7 +66,7 @@ describe('iD.actionDeleteRelation', function () {
     });
 
     it('deletes nodes of deleted member ways', function() {
-        var node     = iD.osmNode(),
+        const node     = iD.osmNode(),
             way      = iD.osmWay({nodes: [node.id]}),
             relation = iD.osmRelation({members: [{id: way.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
@@ -75,7 +75,7 @@ describe('iD.actionDeleteRelation', function () {
     });
 
     it('deletes parent relations that become empty', function () {
-        var child  = iD.osmRelation(),
+        const child  = iD.osmRelation(),
             parent = iD.osmRelation({members: [{ id: child.id }]}),
             action = iD.actionDeleteRelation(child.id),
             graph  = action(iD.coreGraph([child, parent]));

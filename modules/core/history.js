@@ -15,33 +15,33 @@ import {
 
 
 export function coreHistory(context) {
-    var dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone', 'storage_error');
-    var lock = utilSessionMutex('lock');
+    const dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone', 'storage_error');
+    const lock = utilSessionMutex('lock');
 
     // restorable if iD not open in another window/tab and a saved history exists in localStorage
-    var _hasUnresolvedRestorableChanges = lock.lock() && !!prefs(getKey('saved_history'));
+    let _hasUnresolvedRestorableChanges = lock.lock() && !!prefs(getKey('saved_history'));
 
-    var duration = 150;
-    var _imageryUsed = [];
-    var _photoOverlaysUsed = [];
-    var _checkpoints = {};
-    var _pausedGraph;
-    var _stack;
-    var _index;
-    var _tree;
+    const duration = 150;
+    let _imageryUsed = [];
+    let _photoOverlaysUsed = [];
+    let _checkpoints = {};
+    let _pausedGraph;
+    let _stack;
+    let _index;
+    let _tree;
 
 
     // internal _act, accepts list of actions and eased time
     function _act(actions, t) {
         actions = Array.prototype.slice.call(actions);
 
-        var annotation;
+        let annotation;
         if (typeof actions[actions.length - 1] !== 'function') {
             annotation = actions.pop();
         }
 
-        var graph = _stack[_index].graph;
-        for (var i = 0; i < actions.length; i++) {
+        let graph = _stack[_index].graph;
+        for (let i = 0; i < actions.length; i++) {
             graph = actions[i](graph, t);
         }
 
@@ -58,9 +58,9 @@ export function coreHistory(context) {
 
     // internal _perform with eased time
     function _perform(args, t) {
-        var previous = _stack[_index].graph;
+        const previous = _stack[_index].graph;
         _stack = _stack.slice(0, _index + 1);
-        var actionResult = _act(args, t);
+        const actionResult = _act(args, t);
         _stack.push(actionResult);
         _index++;
         return change(previous);
@@ -69,9 +69,9 @@ export function coreHistory(context) {
 
     // internal _replace with eased time
     function _replace(args, t) {
-        var previous = _stack[_index].graph;
+        const previous = _stack[_index].graph;
         // assert(_index == _stack.length - 1)
-        var actionResult = _act(args, t);
+        const actionResult = _act(args, t);
         _stack[_index] = actionResult;
         return change(previous);
     }
@@ -79,13 +79,13 @@ export function coreHistory(context) {
 
     // internal _overwrite with eased time
     function _overwrite(args, t) {
-        var previous = _stack[_index].graph;
+        const previous = _stack[_index].graph;
         if (_index > 0) {
             _index--;
             _stack.pop();
         }
         _stack = _stack.slice(0, _index + 1);
-        var actionResult = _act(args, t);
+        const actionResult = _act(args, t);
         _stack.push(actionResult);
         _index++;
         return change(previous);
@@ -94,7 +94,7 @@ export function coreHistory(context) {
 
     // determine difference and dispatch a change event
     function change(previous) {
-        var difference = coreDifference(previous, history.graph());
+        const difference = coreDifference(previous, history.graph());
         if (!_pausedGraph) {
             dispatch.call('change', this, difference);
         }
@@ -108,7 +108,7 @@ export function coreHistory(context) {
     }
 
 
-    var history = {
+    const history = {
 
         graph: function() {
             return _stack[_index].graph;
@@ -126,7 +126,7 @@ export function coreHistory(context) {
 
 
         merge: function(entities/*, extent*/) {
-            var stack = _stack.map(function(state) { return state.graph; });
+            const stack = _stack.map(function(state) { return state.graph; });
             _stack[0].graph.rebase(entities, stack, false);
             _tree.rebase(entities, false);
 
@@ -138,8 +138,8 @@ export function coreHistory(context) {
             // complete any transition already in progress
             d3_select(document).interrupt('history.perform');
 
-            var transitionable = false;
-            var action0 = arguments[0];
+            let transitionable = false;
+            const action0 = arguments[0];
 
             if (arguments.length === 1 ||
                 (arguments.length === 2 && (typeof arguments[1] !== 'function'))) {
@@ -147,7 +147,7 @@ export function coreHistory(context) {
             }
 
             if (transitionable) {
-                var origArguments = arguments;
+                const origArguments = arguments;
                 d3_select(document)
                     .transition('history.perform')
                     .duration(duration)
@@ -186,7 +186,7 @@ export function coreHistory(context) {
         pop: function(n) {
             d3_select(document).interrupt('history.perform');
 
-            var previous = _stack[_index].graph;
+            const previous = _stack[_index].graph;
             if (isNaN(+n) || +n < 0) {
                 n = 1;
             }
@@ -202,8 +202,8 @@ export function coreHistory(context) {
         undo: function() {
             d3_select(document).interrupt('history.perform');
 
-            var previousStack = _stack[_index];
-            var previous = previousStack.graph;
+            const previousStack = _stack[_index];
+            const previous = previousStack.graph;
             while (_index > 0) {
                 _index--;
                 if (_stack[_index].annotation) break;
@@ -218,9 +218,9 @@ export function coreHistory(context) {
         redo: function() {
             d3_select(document).interrupt('history.perform');
 
-            var previousStack = _stack[_index];
-            var previous = previousStack.graph;
-            var tryIndex = _index;
+            const previousStack = _stack[_index];
+            const previous = previousStack.graph;
+            let tryIndex = _index;
             while (tryIndex < _stack.length - 1) {
                 tryIndex++;
                 if (_stack[tryIndex].annotation) {
@@ -243,7 +243,7 @@ export function coreHistory(context) {
 
         resumeChangeDispatch: function() {
             if (_pausedGraph) {
-                var previous = _pausedGraph;
+                const previous = _pausedGraph;
                 _pausedGraph = null;
                 return change(previous);
             }
@@ -251,7 +251,7 @@ export function coreHistory(context) {
 
 
         undoAnnotation: function() {
-            var i = _index;
+            let i = _index;
             while (i >= 0) {
                 if (_stack[i].annotation) return _stack[i].annotation;
                 i--;
@@ -260,7 +260,7 @@ export function coreHistory(context) {
 
 
         redoAnnotation: function() {
-            var i = _index + 1;
+            let i = _index + 1;
             while (i <= _stack.length - 1) {
                 if (_stack[i].annotation) return _stack[i].annotation;
                 i++;
@@ -276,21 +276,21 @@ export function coreHistory(context) {
 
 
         difference: function() {
-            var base = _stack[0].graph;
-            var head = _stack[_index].graph;
+            const base = _stack[0].graph;
+            const head = _stack[_index].graph;
             return coreDifference(base, head);
         },
 
 
         changes: function(action) {
-            var base = _stack[0].graph;
-            var head = _stack[_index].graph;
+            const base = _stack[0].graph;
+            let head = _stack[_index].graph;
 
             if (action) {
                 head = action(head);
             }
 
-            var difference = coreDifference(base, head);
+            const difference = coreDifference(base, head);
 
             return {
                 modified: difference.modified(),
@@ -310,7 +310,7 @@ export function coreHistory(context) {
                 _imageryUsed = sources;
                 return history;
             } else {
-                var s = new Set();
+                const s = new Set();
                 _stack.slice(1, _index + 1).forEach(function(state) {
                     state.imageryUsed.forEach(function(source) {
                         if (source !== 'Custom') {
@@ -328,7 +328,7 @@ export function coreHistory(context) {
                 _photoOverlaysUsed = sources;
                 return history;
             } else {
-                var s = new Set();
+                const s = new Set();
                 _stack.slice(1, _index + 1).forEach(function(state) {
                     if (state.photoOverlaysUsed && Array.isArray(state.photoOverlaysUsed)) {
                         state.photoOverlaysUsed.forEach(function(photoOverlay) {
@@ -379,22 +379,22 @@ export function coreHistory(context) {
         //  5. This outputs stringified JSON to the browser console
         //  6. Copy it to `data/intro_graph.json` and prettify it in your code editor
         toIntroGraph: function() {
-            var nextID = { n: 0, r: 0, w: 0 };
-            var permIDs = {};
-            var graph = this.graph();
-            var baseEntities = {};
+            const nextID = { n: 0, r: 0, w: 0 };
+            const permIDs = {};
+            const graph = this.graph();
+            const baseEntities = {};
 
             // clone base entities..
             Object.values(graph.base().entities).forEach(function(entity) {
-                var copy = copyIntroEntity(entity);
+                const copy = copyIntroEntity(entity);
                 baseEntities[copy.id] = copy;
             });
 
             // replace base entities with head entities..
             Object.keys(graph.entities).forEach(function(id) {
-                var entity = graph.entities[id];
+                const entity = graph.entities[id];
                 if (entity) {
-                    var copy = copyIntroEntity(entity);
+                    const copy = copyIntroEntity(entity);
                     baseEntities[copy.id] = copy;
                 } else {
                     delete baseEntities[id];
@@ -420,7 +420,7 @@ export function coreHistory(context) {
 
 
             function copyIntroEntity(source) {
-                var copy = utilObjectOmit(source, ['type', 'user', 'v', 'version', 'visible']);
+                const copy = utilObjectOmit(source, ['type', 'user', 'v', 'version', 'visible']);
 
                 // Note: the copy is no longer an osmEntity, so it might not have `tags`
                 if (copy.tags && !Object.keys(copy.tags)) {
@@ -432,10 +432,10 @@ export function coreHistory(context) {
                     copy.loc[1] = +copy.loc[1].toFixed(6);
                 }
 
-                var match = source.id.match(/([nrw])-\d*/);  // temporary id
+                const match = source.id.match(/([nrw])-\d*/);  // temporary id
                 if (match !== null) {
-                    var nrw = match[1];
-                    var permID;
+                    const nrw = match[1];
+                    let permID;
                     do { permID = nrw + (++nextID[nrw]); }
                     while (baseEntities.hasOwnProperty(permID));
 
@@ -449,18 +449,18 @@ export function coreHistory(context) {
         toJSON: function() {
             if (!this.hasChanges()) return;
 
-            var allEntities = {};
-            var baseEntities = {};
-            var base = _stack[0];
+            const allEntities = {};
+            const baseEntities = {};
+            const base = _stack[0];
 
-            var s = _stack.map(function(i) {
-                var modified = [];
-                var deleted = [];
+            const s = _stack.map(function(i) {
+                const modified = [];
+                const deleted = [];
 
                 Object.keys(i.graph.entities).forEach(function(id) {
-                    var entity = i.graph.entities[id];
+                    const entity = i.graph.entities[id];
                     if (entity) {
-                        var key = osmEntity.key(entity);
+                        const key = osmEntity.key(entity);
                         allEntities[key] = entity;
                         modified.push(key);
                     } else {
@@ -481,7 +481,7 @@ export function coreHistory(context) {
                         });
                     }
                     // get originals of parent entities too
-                    var baseParents = base.graph._parentWays[id];
+                    const baseParents = base.graph._parentWays[id];
                     if (baseParents) {
                         baseParents.forEach(function(parentID) {
                             if (parentID in base.graph.entities) {
@@ -491,7 +491,7 @@ export function coreHistory(context) {
                     }
                 });
 
-                var x = {};
+                const x = {};
 
                 if (modified.length) x.modified = modified;
                 if (deleted.length) x.deleted = deleted;
@@ -518,14 +518,14 @@ export function coreHistory(context) {
 
 
         fromJSON: function(json, loadChildNodes) {
-            var h = JSON.parse(json);
-            var loadComplete = true;
+            const h = JSON.parse(json);
+            let loadComplete = true;
 
             osmEntity.id.next = h.nextIDs;
             _index = h.index;
 
             if (h.version === 2 || h.version === 3) {
-                var allEntities = {};
+                const allEntities = {};
 
                 h.entities.forEach(function(entity) {
                     allEntities[osmEntity.key(entity)] = osmEntity(entity);
@@ -535,38 +535,38 @@ export function coreHistory(context) {
                     // This merges originals for changed entities into the base of
                     // the _stack even if the current _stack doesn't have them (for
                     // example when iD has been restarted in a different region)
-                    var baseEntities = h.baseEntities.map(function(d) { return osmEntity(d); });
-                    var stack = _stack.map(function(state) { return state.graph; });
+                    const baseEntities = h.baseEntities.map(function(d) { return osmEntity(d); });
+                    const stack = _stack.map(function(state) { return state.graph; });
                     _stack[0].graph.rebase(baseEntities, stack, true);
                     _tree.rebase(baseEntities, true);
 
                     // When we restore a modified way, we also need to fetch any missing
                     // childnodes that would normally have been downloaded with it.. #2142
                     if (loadChildNodes) {
-                        var osm = context.connection();
-                        var baseWays = baseEntities
+                        const osm = context.connection();
+                        const baseWays = baseEntities
                             .filter(function(e) { return e.type === 'way'; });
-                        var nodeIDs = baseWays
+                        const nodeIDs = baseWays
                             .reduce(function(acc, way) { return utilArrayUnion(acc, way.nodes); }, []);
-                        var missing = nodeIDs
+                        let missing = nodeIDs
                             .filter(function(n) { return !_stack[0].graph.hasEntity(n); });
 
                         if (missing.length && osm) {
                             loadComplete = false;
                             context.map().redrawEnable(false);
 
-                            var loading = uiLoading(context).blocking(true);
+                            const loading = uiLoading(context).blocking(true);
                             context.container().call(loading);
 
-                            var childNodesLoaded = function(err, result) {
+                            const childNodesLoaded = function(err, result) {
                                 if (!err) {
-                                    var visibleGroups = utilArrayGroupBy(result.data, 'visible');
-                                    var visibles = visibleGroups.true || [];      // alive nodes
-                                    var invisibles = visibleGroups.false || [];   // deleted nodes
+                                    const visibleGroups = utilArrayGroupBy(result.data, 'visible');
+                                    const visibles = visibleGroups.true || [];      // alive nodes
+                                    const invisibles = visibleGroups.false || [];   // deleted nodes
 
                                     if (visibles.length) {
-                                        var visibleIDs = visibles.map(function(entity) { return entity.id; });
-                                        var stack = _stack.map(function(state) { return state.graph; });
+                                        const visibleIDs = visibles.map(function(entity) { return entity.id; });
+                                        const stack = _stack.map(function(state) { return state.graph; });
                                         missing = utilArrayDifference(missing, visibleIDs);
                                         _stack[0].graph.rebase(visibles, stack, true);
                                         _tree.rebase(visibles, true);
@@ -592,7 +592,8 @@ export function coreHistory(context) {
                 }
 
                 _stack = h.stack.map(function(d) {
-                    var entities = {}, entity;
+                    const entities = {};
+                    let entity;
 
                     if (d.modified) {
                         d.modified.forEach(function(key) {
@@ -619,10 +620,10 @@ export function coreHistory(context) {
 
             } else { // original version
                 _stack = h.stack.map(function(d) {
-                    var entities = {};
+                    const entities = {};
 
-                    for (var i in d.entities) {
-                        var entity = d.entities[i];
+                    for (const i in d.entities) {
+                        const entity = d.entities[i];
                         entities[i] = entity === 'undefined' ? undefined : osmEntity(entity);
                     }
 
@@ -631,7 +632,7 @@ export function coreHistory(context) {
                 });
             }
 
-            var transform = _stack[_index].transform;
+            const transform = _stack[_index].transform;
             if (transform) {
                 context.map().transformEase(transform, 0);   // 0 = immediate, no easing
             }
@@ -697,7 +698,7 @@ export function coreHistory(context) {
         restore: function() {
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
-                var json = this.savedHistoryJSON();
+                const json = this.savedHistoryJSON();
                 if (json) history.fromJSON(json, true);
             }
         },

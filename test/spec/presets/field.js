@@ -1,9 +1,9 @@
 describe('iD.presetField', function() {
     describe('#references', function() {
         it('references label and terms of another field', function() {
-            var allFields = {};
-            var other = iD.presetField('other', {}, allFields);
-            var field = iD.presetField('test', {label: '{other}'}, allFields);
+            const allFields = {};
+            const other = iD.presetField('other', {}, allFields);
+            const field = iD.presetField('test', {label: '{other}'}, allFields);
             allFields.other = other;
             allFields.preset = field;
 
@@ -24,9 +24,9 @@ describe('iD.presetField', function() {
         });
 
         it('references placeholder of another field', function() {
-            var allFields = {};
-            var other = iD.presetField('other', {}, allFields);
-            var field = iD.presetField('test', {placeholder: '{other}'}, allFields);
+            const allFields = {};
+            const other = iD.presetField('other', {}, allFields);
+            const field = iD.presetField('test', {placeholder: '{other}'}, allFields);
             allFields.other = other;
             allFields.preset = field;
 
@@ -40,9 +40,9 @@ describe('iD.presetField', function() {
         });
 
         it('references string options of another field', function() {
-            var allFields = {};
-            var other = iD.presetField('other', {}, allFields);
-            var field = iD.presetField('test', {stringsCrossReference: '{other}', options: ['v'], key: 'k'}, allFields);
+            const allFields = {};
+            const other = iD.presetField('other', {}, allFields);
+            const field = iD.presetField('test', {stringsCrossReference: '{other}', options: ['v'], key: 'k'}, allFields);
             allFields.other = other;
             allFields.preset = field;
 
@@ -51,8 +51,8 @@ describe('iD.presetField', function() {
             sinon.spy(field.t, 'append');
             sinon.stub(other, 'hasTextForStringId').returns(true);
 
-            var context = iD.coreContext().assetPath('../dist/').init();
-            var uiField = iD.uiFieldCombo(field, context);
+            const context = iD.coreContext().assetPath('../dist/').init();
+            const uiField = iD.uiFieldCombo(field, context);
             uiField(d3.select(document.createElement('div')).classed('form-field-input-wrap', true));
             uiField.tags({k: 'v'});
             expect(field.t.append).not.to.have.been.called;

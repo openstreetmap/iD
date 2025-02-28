@@ -3,7 +3,7 @@ import { utilArrayIntersection } from '../util';
 import { validationIssue } from '../core/validation';
 
 
-var buildRuleChecks = function() {
+const buildRuleChecks = function() {
     return {
         equals: function (equals) {
             return function(tags) {
@@ -30,50 +30,50 @@ var buildRuleChecks = function() {
             };
         },
         greaterThan: function(greaterThan) {
-            var key = Object.keys(greaterThan)[0];
-            var value = greaterThan[key];
+            const key = Object.keys(greaterThan)[0];
+            const value = greaterThan[key];
 
             return function(tags) {
                 return tags[key] > value;
             };
         },
         greaterThanEqual: function(greaterThanEqual) {
-            var key = Object.keys(greaterThanEqual)[0];
-            var value = greaterThanEqual[key];
+            const key = Object.keys(greaterThanEqual)[0];
+            const value = greaterThanEqual[key];
 
             return function(tags) {
                 return tags[key] >= value;
             };
         },
         lessThan: function(lessThan) {
-            var key = Object.keys(lessThan)[0];
-            var value = lessThan[key];
+            const key = Object.keys(lessThan)[0];
+            const value = lessThan[key];
 
             return function(tags) {
                 return tags[key] < value;
             };
         },
         lessThanEqual: function(lessThanEqual) {
-            var key = Object.keys(lessThanEqual)[0];
-            var value = lessThanEqual[key];
+            const key = Object.keys(lessThanEqual)[0];
+            const value = lessThanEqual[key];
 
             return function(tags) {
                 return tags[key] <= value;
             };
         },
         positiveRegex: function(positiveRegex) {
-            var tagKey = Object.keys(positiveRegex)[0];
-            var expression = positiveRegex[tagKey].join('|');
-            var regex = new RegExp(expression);
+            const tagKey = Object.keys(positiveRegex)[0];
+            const expression = positiveRegex[tagKey].join('|');
+            const regex = new RegExp(expression);
 
             return function(tags) {
                 return regex.test(tags[tagKey]);
             };
         },
         negativeRegex: function(negativeRegex) {
-            var tagKey = Object.keys(negativeRegex)[0];
-            var expression = negativeRegex[tagKey].join('|');
-            var regex = new RegExp(expression);
+            const tagKey = Object.keys(negativeRegex)[0];
+            const expression = negativeRegex[tagKey].join('|');
+            const regex = new RegExp(expression);
 
             return function(tags) {
                 return !regex.test(tags[tagKey]);
@@ -82,7 +82,7 @@ var buildRuleChecks = function() {
     };
 };
 
-var buildLineKeys = function() {
+const buildLineKeys = function() {
     return {
         highway: {
             rest_area: true,
@@ -108,7 +108,7 @@ export default {
 
     // list of rules only relevant to tag checks...
     filterRuleChecks: function(selector) {
-        var _ruleChecks = this._ruleChecks;
+        const _ruleChecks = this._ruleChecks;
         return Object.keys(selector).reduce(function(rules, key) {
             if (['geometry', 'error', 'warning'].indexOf(key) === -1) {
                 rules.push(_ruleChecks[key](selector[key]));
@@ -119,16 +119,16 @@ export default {
 
     // builds tagMap from mapcss-parse selector object...
     buildTagMap: function(selector) {
-        var getRegexValues = function(regexes) {
+        const getRegexValues = function(regexes) {
             return regexes.map(function(regex) {
                 return regex.replace(/\$|\^/g, '');
             });
         };
 
-        var tagMap = Object.keys(selector).reduce(function (expectedTags, key) {
-            var values;
-            var isRegex = /regex/gi.test(key);
-            var isEqual = /equals/gi.test(key);
+        const tagMap = Object.keys(selector).reduce(function (expectedTags, key) {
+            let values;
+            const isRegex = /regex/gi.test(key);
+            const isEqual = /equals/gi.test(key);
 
             if (isRegex || isEqual) {
                 Object.keys(selector[key]).forEach(function(selectorKey) {
@@ -142,7 +142,7 @@ export default {
                 });
 
             } else if (/(greater|less)Than(Equal)?|presence/g.test(key)) {
-                var tagKey = /presence/.test(key) ? selector[key] : Object.keys(selector[key])[0];
+                const tagKey = /presence/.test(key) ? selector[key] : Object.keys(selector[key])[0];
 
                 values = [selector[key][tagKey]];
 
@@ -161,13 +161,13 @@ export default {
 
     // inspired by osmWay#isArea()
     inferGeometry: function(tagMap) {
-        var _lineKeys = this._lineKeys;
-        var _areaKeys = this._areaKeys;
+        const _lineKeys = this._lineKeys;
+        const _areaKeys = this._areaKeys;
 
-        var keyValueDoesNotImplyArea = function(key) {
+        const keyValueDoesNotImplyArea = function(key) {
             return utilArrayIntersection(tagMap[key], Object.keys(_areaKeys[key])).length > 0;
         };
-        var keyValueImpliesLine = function(key) {
+        const keyValueImpliesLine = function(key) {
             return utilArrayIntersection(tagMap[key], Object.keys(_lineKeys[key])).length > 0;
         };
 
@@ -180,7 +180,7 @@ export default {
             }
         }
 
-        for (var key in tagMap) {
+        for (const key in tagMap) {
             if (key in _areaKeys && !keyValueDoesNotImplyArea(key)) {
                 return 'area';
             }
@@ -194,7 +194,7 @@ export default {
 
     // adds from mapcss-parse selector check...
     addRule: function(selector) {
-        var rule = {
+        const rule = {
             // checks relevant to mapcss-selector
             checks: this.filterRuleChecks(selector),
             // true if all conditions for a tag error are true..
@@ -215,10 +215,10 @@ export default {
             // when geometries match and tag matches are present, return a warning...
             findIssues: function (entity, graph, issues) {
                 if (this.geometryMatches(entity, graph) && this.matches(entity)) {
-                    var severity = Object.keys(selector).indexOf('error') > -1
+                    const severity = Object.keys(selector).indexOf('error') > -1
                             ? 'error'
                             : 'warning';
-                    var message = selector[severity];
+                    const message = selector[severity];
                     issues.push(new validationIssue({
                         type: 'maprules',
                         severity: severity,

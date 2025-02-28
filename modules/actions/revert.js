@@ -3,8 +3,8 @@ import { actionDeleteWay } from './delete_way';
 
 
 export function actionRevert(id) {
-    var action = function(graph) {
-        var entity = graph.hasEntity(id),
+    const action = function(graph) {
+        const entity = graph.hasEntity(id),
             base = graph.base().entities[id];
 
         if (entity && !base) {    // entity will be removed..

@@ -45,7 +45,7 @@ export function validationAlmostJunction(context) {
     const tree = context.history().tree();
     const extendableNodeInfos = findConnectableEndNodesByExtension(entity);
 
-    let issues = [];
+    const issues = [];
 
     extendableNodeInfos.forEach(extendableNodeInfo => {
       issues.push(new validationIssue({
@@ -86,7 +86,7 @@ export function validationAlmostJunction(context) {
     return issues;
 
     function makeFixes(context) {
-      let fixes = [new validationIssueFix({
+      const fixes = [new validationIssueFix({
         icon: 'iD-icon-abutment',
         title: t.append('issues.fix.connect_features.title'),
         onClick: function(context) {
@@ -183,7 +183,7 @@ export function validationAlmostJunction(context) {
     }
 
     function findConnectableEndNodesByExtension(way) {
-      let results = [];
+      const results = [];
       if (way.isClosed()) return results;
 
       let testNodes;
@@ -294,22 +294,22 @@ export function validationAlmostJunction(context) {
       // then, check if the extension part [tipNode.loc -> extTipLoc] intersects any other ways
       const segmentInfos = tree.waySegments(queryExtent, graph);
       for (let i = 0; i < segmentInfos.length; i++) {
-        let segmentInfo = segmentInfos[i];
+        const segmentInfo = segmentInfos[i];
 
-        let way2 = graph.entity(segmentInfo.wayId);
+        const way2 = graph.entity(segmentInfo.wayId);
 
         if (!isHighway(way2)) continue;
 
         if (!canConnectWays(way, way2)) continue;
 
-        let nAid = segmentInfo.nodes[0],
+        const nAid = segmentInfo.nodes[0],
           nBid = segmentInfo.nodes[1];
 
         if (nAid === tipNid || nBid === tipNid) continue;
 
-        let nA = graph.entity(nAid),
+        const nA = graph.entity(nAid),
           nB = graph.entity(nBid);
-        let crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
+        const crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
         if (crossLoc) {
           return {
             mid: midNode,

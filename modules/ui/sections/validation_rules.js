@@ -10,15 +10,15 @@ import { uiSection } from '../section';
 
 export function uiSectionValidationRules(context) {
 
-    var MINSQUARE = 0;
-    var MAXSQUARE = 20;
-    var DEFAULTSQUARE = 5;  // see also unsquare_way.js
+    const MINSQUARE = 0;
+    const MAXSQUARE = 20;
+    const DEFAULTSQUARE = 5;  // see also unsquare_way.js
 
-    var section = uiSection('issues-rules', context)
+    const section = uiSection('issues-rules', context)
         .disclosureContent(renderDisclosureContent)
         .label(() => t.append('issues.rules.title'));
 
-    var _ruleKeys = context.validator().getRuleKeys()
+    const _ruleKeys = context.validator().getRuleKeys()
         .filter(function(key) { return key !== 'maprules'; })
         .sort(function(key1, key2) {
             // alphabetize by localized title
@@ -26,10 +26,10 @@ export function uiSectionValidationRules(context) {
         });
 
     function renderDisclosureContent(selection) {
-        var container = selection.selectAll('.issues-rulelist-container')
+        let container = selection.selectAll('.issues-rulelist-container')
             .data([0]);
 
-        var containerEnter = container.enter()
+        const containerEnter = container.enter()
             .append('div')
             .attr('class', 'issues-rulelist-container');
 
@@ -37,7 +37,7 @@ export function uiSectionValidationRules(context) {
             .append('ul')
             .attr('class', 'layer-list issue-rules-list');
 
-        var ruleLinks = containerEnter
+        const ruleLinks = containerEnter
             .append('div')
             .attr('class', 'issue-rules-links section-footer');
 
@@ -73,7 +73,7 @@ export function uiSectionValidationRules(context) {
     }
 
     function drawListItems(selection, data, type, name, change, active) {
-        var items = selection.selectAll('li')
+        let items = selection.selectAll('li')
             .data(data);
 
         // Exit
@@ -81,7 +81,7 @@ export function uiSectionValidationRules(context) {
             .remove();
 
         // Enter
-        var enter = items.enter()
+        const enter = items.enter()
             .append('li');
 
         if (name === 'rule') {
@@ -92,7 +92,7 @@ export function uiSectionValidationRules(context) {
                 );
         }
 
-        var label = enter
+        const label = enter
             .append('label');
 
         label
@@ -104,7 +104,7 @@ export function uiSectionValidationRules(context) {
         label
             .append('span')
             .html(function(d) {
-                var params = {};
+                const params = {};
                 if (d === 'unsquare_way') {
                     params.val = { html: '<span class="square-degrees"></span>' };
                 }
@@ -123,13 +123,13 @@ export function uiSectionValidationRules(context) {
 
 
         // user-configurable square threshold
-        var degStr = prefs('validate-square-degrees');
+        let degStr = prefs('validate-square-degrees');
         if (degStr === null) {
             degStr = DEFAULTSQUARE.toString();
         }
 
-        var span = items.selectAll('.square-degrees');
-        var input = span.selectAll('.square-degrees-input')
+        const span = items.selectAll('.square-degrees');
+        const input = span.selectAll('.square-degrees-input')
             .data([0]);
 
         // enter / update
@@ -158,9 +158,9 @@ export function uiSectionValidationRules(context) {
     }
 
     function changeSquare() {
-        var input = d3_select(this);
-        var degStr = utilGetSetValue(input).trim();
-        var degNum = Number(degStr);
+        const input = d3_select(this);
+        let degStr = utilGetSetValue(input).trim();
+        let degNum = Number(degStr);
 
         if (!isFinite(degNum)) {
             degNum = DEFAULTSQUARE;

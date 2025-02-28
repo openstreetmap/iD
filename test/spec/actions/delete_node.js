@@ -1,13 +1,13 @@
 describe('iD.actionDeleteNode', function () {
     it('removes the node from the graph', function () {
-        var node   = iD.osmNode(),
+        const node   = iD.osmNode(),
             action = iD.actionDeleteNode(node.id),
             graph  = action(iD.coreGraph([node]));
         expect(graph.hasEntity(node.id)).to.be.undefined;
     });
 
     it('removes the node from parent ways', function () {
-        var node1  = iD.osmNode(),
+        const node1  = iD.osmNode(),
             node2  = iD.osmNode(),
             node3  = iD.osmNode(),
             way    = iD.osmWay({nodes: [node1.id, node2.id, node3.id]}),
@@ -17,7 +17,7 @@ describe('iD.actionDeleteNode', function () {
     });
 
     it('removes the node from parent relations', function () {
-        var node1    = iD.osmNode(),
+        const node1    = iD.osmNode(),
             node2    = iD.osmNode(),
             relation = iD.osmRelation({members: [{ id: node1.id }, { id: node2.id }]}),
             action   = iD.actionDeleteNode(node1.id),
@@ -26,7 +26,7 @@ describe('iD.actionDeleteNode', function () {
     });
 
     it('deletes parent ways that would otherwise have less than two nodes', function () {
-        var node1  = iD.osmNode(),
+        const node1  = iD.osmNode(),
             node2  = iD.osmNode(),
             way    = iD.osmWay({nodes: [node1.id, node2.id]}),
             action = iD.actionDeleteNode(node1.id),
@@ -35,7 +35,7 @@ describe('iD.actionDeleteNode', function () {
     });
 
     it('deletes degenerate circular ways', function () {
-        var node1  = iD.osmNode(),
+        const node1  = iD.osmNode(),
             node2  = iD.osmNode(),
             way    = iD.osmWay({nodes: [node1.id, node2.id, node1.id]}),
             action = iD.actionDeleteNode(node2.id),
@@ -44,7 +44,7 @@ describe('iD.actionDeleteNode', function () {
     });
 
     it('deletes parent relations that become empty', function () {
-        var node1    = iD.osmNode(),
+        const node1    = iD.osmNode(),
             relation = iD.osmRelation({members: [{ id: node1.id }]}),
             action   = iD.actionDeleteNode(node1.id),
             graph    = action(iD.coreGraph([node1, relation]));

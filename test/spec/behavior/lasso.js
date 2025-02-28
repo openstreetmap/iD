@@ -1,5 +1,5 @@
 describe('iD.behaviorLasso', function () {
-    var context, lasso;
+    let context, lasso;
 
     beforeEach(function () {
         context = iD.coreContext().assetPath('../dist/').init();

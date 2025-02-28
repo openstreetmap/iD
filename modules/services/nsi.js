@@ -61,7 +61,7 @@ function setNsiSources() {
     'nsi_trees': cdn + 'dist/trees.min.json'
   };
 
-  let fileMap = fileFetcher.fileMap();
+  const fileMap = fileFetcher.fileMap();
   for (const k in sources) {
     if (!fileMap[k]) fileMap[k] = sources[k];
   }
@@ -246,8 +246,8 @@ matcher.locationIndex = (bbox) => {
 //   }
 //
 function gatherKVs(tags) {
-  let primary = new Set();
-  let alternate = new Set();
+  const primary = new Set();
+  const alternate = new Set();
 
   Object.keys(tags).forEach(osmkey => {
     const osmvalue = tags[osmkey];
@@ -335,15 +335,15 @@ function identifyTree(tags) {
 //
 function gatherNames(tags) {
   const empty = { primary: new Set(), alternate: new Set() };
-  let primary = new Set();
-  let alternate = new Set();
+  const primary = new Set();
+  const alternate = new Set();
   let foundSemi = false;
   let testNameFragments = false;
   let patterns;
 
   // Patterns for matching OSM keys that might contain namelike values.
   // These roughly correspond to the "trees" concept in name-suggestion-index,
-  let t = identifyTree(tags);
+  const t = identifyTree(tags);
   if (!t) return empty;
 
   if (t === 'transit') {
@@ -443,7 +443,7 @@ function gatherNames(tags) {
 //   `Array`: tuple objects ordered by priority
 //
 function gatherTuples(tryKVs, tryNames) {
-  let tuples = [];
+  const tuples = [];
   ['primary', 'alternate'].forEach(whichName => {
     // test names longest to shortest
     const arr = Array.from(tryNames[whichName]).sort((a, b) => b.length - a.length);
@@ -477,7 +477,7 @@ function gatherTuples(tryKVs, tryNames) {
 //   }
 //
 function _upgradeTags(tags, loc) {
-  let newTags = Object.assign({}, tags);  // shallow copy
+  const newTags = Object.assign({}, tags);  // shallow copy
   let changed = false;
 
   // Before anything, perform trivial Wikipedia/Wikidata replacements
@@ -577,7 +577,7 @@ function _upgradeTags(tags, loc) {
     const properties = category.properties || {};
 
     // Preserve some tags that we specifically don't want NSI to overwrite. ('^name', sometimes)
-    let preserveTags = item.preserveTags || properties.preserveTags || [];
+    const preserveTags = item.preserveTags || properties.preserveTags || [];
 
     // These tags can be toplevel tags -or- attributes - so we generally want to preserve existing values - #8615
     // We'll only _replace_ the tag value if this tag is the toplevel/defining tag for the matched item (`k`)
@@ -587,7 +587,7 @@ function _upgradeTags(tags, loc) {
 
     const regexes = preserveTags.map(s => new RegExp(s, 'i'));
 
-    let keepTags = {};
+    const keepTags = {};
     Object.keys(newTags).forEach(osmkey => {
       if (regexes.some(regex => regex.test(osmkey))) {
         keepTags[osmkey] = newTags[osmkey];

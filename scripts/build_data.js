@@ -48,7 +48,7 @@ function buildData() {
     img: 'dist/img'
   };
 
-  for (let target of Object.keys(symlinks)) {
+  for (const target of Object.keys(symlinks)) {
     if (!shell.test('-L', target)) {
       console.log(`Creating symlink:  ${target} -> ${symlinks[target]}`);
       shell.ln('-sf', symlinks[target], target);
@@ -64,7 +64,7 @@ function buildData() {
   ]);
 
   // compile Font Awesome icons
-  let faIcons = new Set([
+  const faIcons = new Set([
     // list here the icons we want to use in the UI that aren't tied to other data
     'fas-i-cursor',
     'fas-lock',
@@ -76,7 +76,7 @@ function buildData() {
   // add icons for QA integrations
   readQAIssueIcons(faIcons);
 
-  let territoryLanguages = generateTerritoryLanguages();
+  const territoryLanguages = generateTerritoryLanguages();
   fs.writeFileSync('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) );
 
   writeEnJson();
@@ -86,7 +86,7 @@ function buildData() {
   fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
 
   // Save individual data files
-  let tasks = [
+  const tasks = [
     minifyJSON('data/address_formats.json', 'dist/data/address_formats.min.json'),
     minifyJSON('data/imagery.json', 'dist/data/imagery.min.json'),
     minifyJSON('data/intro_graph.json', 'dist/data/intro_graph.min.json'),
@@ -106,8 +106,8 @@ function buildData() {
     .then((results) => {
       // compile the icons used by all the presets
       results.forEach(function(data) {
-        for (var key in data) {
-          var datum  = data[key];
+        for (const key in data) {
+          const datum  = data[key];
           // fontawesome icon
           if (datum.icon && /^fa[srb]-/.test(datum.icon)) {
             faIcons.add(datum.icon);
@@ -165,17 +165,17 @@ function readQAIssueIcons(faIcons) {
 
 
 function generateTerritoryLanguages() {
-  let allRawInfo = require('cldr-core/supplemental/territoryInfo.json').supplemental.territoryInfo;
-  let territoryLanguages = {};
+  const allRawInfo = require('cldr-core/supplemental/territoryInfo.json').supplemental.territoryInfo;
+  const territoryLanguages = {};
 
   Object.keys(allRawInfo).forEach(territoryCode => {
-    let territoryLangInfo = allRawInfo[territoryCode].languagePopulation;
+    const territoryLangInfo = allRawInfo[territoryCode].languagePopulation;
     if (!territoryLangInfo) return;
-    let langCodes = Object.keys(territoryLangInfo);
+    const langCodes = Object.keys(territoryLangInfo);
 
     territoryLanguages[territoryCode.toLowerCase()] = langCodes.sort((langCode1, langCode2) => {
-      let popPercent1 = parseFloat(territoryLangInfo[langCode1]._populationPercent);
-      let popPercent2 = parseFloat(territoryLangInfo[langCode2]._populationPercent);
+      const popPercent1 = parseFloat(territoryLangInfo[langCode1]._populationPercent);
+      const popPercent2 = parseFloat(territoryLangInfo[langCode2]._populationPercent);
       if (popPercent1 === popPercent2) {
         return langCode1.localeCompare(langCode2, 'en', { sensitivity: 'base' });
       }
@@ -205,17 +205,17 @@ function writeEnJson() {
 
   return Promise.all([readCoreYaml, readImagery, readCommunity, readManualImagery])
     .then(data => {
-      let core = YAML.load(data[0]);
-      let imagery = YAML.load(data[1]);
-      let community = YAML.load(data[2]);
-      let manualImagery = JSON.parse(data[3]);
+      const core = YAML.load(data[0]);
+      const imagery = YAML.load(data[1]);
+      const community = YAML.load(data[2]);
+      const manualImagery = JSON.parse(data[3]);
 
-      for (let i in manualImagery) {
-        let layer = manualImagery[i];
-        let id = layer.id;
-        for (let key in layer) {
+      for (const i in manualImagery) {
+        const layer = manualImagery[i];
+        const id = layer.id;
+        for (const key in layer) {
           if (key === 'attribution') {
-            for (let attrKey in layer[key]) {
+            for (const attrKey in layer[key]) {
               if (attrKey !== 'text') {
                 delete layer[key][attrKey];
               }
@@ -228,8 +228,8 @@ function writeEnJson() {
         imagery.en.imagery[id] = layer;
       }
 
-      let enjson = core;
-      let props = ['imagery', 'community', 'languageNames', 'scriptNames'];
+      const enjson = core;
+      const props = ['imagery', 'community', 'languageNames', 'scriptNames'];
       props.forEach(function(prop) {
         if (enjson.en[prop]) {
           console.error(`Error: Reserved property '${prop}' already exists in core strings`);

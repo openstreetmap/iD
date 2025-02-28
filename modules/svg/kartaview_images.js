@@ -5,12 +5,12 @@ import { services } from '../services';
 
 
 export function svgKartaviewImages(projection, context, dispatch) {
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    var minZoom = 12;
-    var minMarkerZoom = 16;
-    var minViewfieldZoom = 18;
-    var layer = d3_select(null);
-    var _kartaview;
+    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    const minZoom = 12;
+    const minMarkerZoom = 16;
+    const minViewfieldZoom = 18;
+    let layer = d3_select(null);
+    let _kartaview;
 
 
     function init() {
@@ -33,7 +33,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
 
 
     function showLayer() {
-        var service = getService();
+        const service = getService();
         if (!service) return;
 
         editOn();
@@ -70,7 +70,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
 
 
     function click(d3_event, d) {
-        var service = getService();
+        const service = getService();
         if (!service) return;
 
         service
@@ -85,19 +85,19 @@ export function svgKartaviewImages(projection, context, dispatch) {
 
 
     function mouseover(d3_event, d) {
-        var service = getService();
+        const service = getService();
         if (service) service.setStyles(context, d);
     }
 
 
     function mouseout() {
-        var service = getService();
+        const service = getService();
         if (service) service.setStyles(context, null);
     }
 
 
     function transform(d) {
-        var t = svgPointTransform(projection)(d);
+        let t = svgPointTransform(projection)(d);
         if (d.ca) {
             t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
         }
@@ -106,18 +106,18 @@ export function svgKartaviewImages(projection, context, dispatch) {
 
 
     function filterImages(images) {
-        var fromDate = context.photos().fromDate();
-        var toDate = context.photos().toDate();
-        var usernames = context.photos().usernames();
+        const fromDate = context.photos().fromDate();
+        const toDate = context.photos().toDate();
+        const usernames = context.photos().usernames();
 
         if (fromDate) {
-            var fromTimestamp = new Date(fromDate).getTime();
+            const fromTimestamp = new Date(fromDate).getTime();
             images = images.filter(function(item) {
                 return new Date(item.captured_at).getTime() >= fromTimestamp;
             });
         }
         if (toDate) {
-            var toTimestamp = new Date(toDate).getTime();
+            const toTimestamp = new Date(toDate).getTime();
             images = images.filter(function(item) {
                 return new Date(item.captured_at).getTime() <= toTimestamp;
             });
@@ -132,18 +132,18 @@ export function svgKartaviewImages(projection, context, dispatch) {
     }
 
     function filterSequences(sequences) {
-        var fromDate = context.photos().fromDate();
-        var toDate = context.photos().toDate();
-        var usernames = context.photos().usernames();
+        const fromDate = context.photos().fromDate();
+        const toDate = context.photos().toDate();
+        const usernames = context.photos().usernames();
 
         if (fromDate) {
-            var fromTimestamp = new Date(fromDate).getTime();
+            const fromTimestamp = new Date(fromDate).getTime();
             sequences = sequences.filter(function(image) {
                 return new Date(image.properties.captured_at).getTime() >= fromTimestamp;
             });
         }
         if (toDate) {
-            var toTimestamp = new Date(toDate).getTime();
+            const toTimestamp = new Date(toDate).getTime();
             sequences = sequences.filter(function(image) {
                 return new Date(image.properties.captured_at).getTime() <= toTimestamp;
             });
@@ -158,16 +158,16 @@ export function svgKartaviewImages(projection, context, dispatch) {
     }
 
     function update() {
-        var viewer = context.container().select('.photoviewer');
-        var selected = viewer.empty() ? undefined : viewer.datum();
+        const viewer = context.container().select('.photoviewer');
+        const selected = viewer.empty() ? undefined : viewer.datum();
 
-        var z = ~~context.map().zoom();
-        var showMarkers = (z >= minMarkerZoom);
-        var showViewfields = (z >= minViewfieldZoom);
+        const z = ~~context.map().zoom();
+        const showMarkers = (z >= minMarkerZoom);
+        const showViewfields = (z >= minViewfieldZoom);
 
-        var service = getService();
-        var sequences = [];
-        var images = [];
+        const service = getService();
+        let sequences = [];
+        let images = [];
 
         if (context.photos().showsFlat()) {
             sequences = (service ? service.sequences(projection) : []);
@@ -176,7 +176,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
             images = filterImages(images);
         }
 
-        var traces = layer.selectAll('.sequences').selectAll('.sequence')
+        let traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
 
         // exit
@@ -191,7 +191,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
             .attr('d', svgPath(projection).geojson);
 
 
-        var groups = layer.selectAll('.markers').selectAll('.viewfield-group')
+        const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
             .data(images, function(d) { return d.key; });
 
         // exit
@@ -199,7 +199,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
             .remove();
 
         // enter
-        var groupsEnter = groups.enter()
+        const groupsEnter = groups.enter()
             .append('g')
             .attr('class', 'viewfield-group')
             .on('mouseenter', mouseover)
@@ -211,7 +211,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
             .attr('class', 'viewfield-scale');
 
         // update
-        var markers = groups
+        const markers = groups
             .merge(groupsEnter)
             .sort(function(a, b) {
                 return (a === selected) ? 1
@@ -230,7 +230,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
             .attr('dy', '0')
             .attr('r', '6');
 
-        var viewfields = markers.selectAll('.viewfield')
+        const viewfields = markers.selectAll('.viewfield')
             .data(showViewfields ? [0] : []);
 
         viewfields.exit()
@@ -245,7 +245,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
 
 
     function drawImages(selection) {
-        var enabled = svgKartaviewImages.enabled,
+        const enabled = svgKartaviewImages.enabled,
             service = getService();
 
         layer = selection.selectAll('.layer-kartaview')
@@ -254,7 +254,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
         layer.exit()
             .remove();
 
-        var layerEnter = layer.enter()
+        const layerEnter = layer.enter()
             .append('g')
             .attr('class', 'layer-kartaview')
             .style('display', enabled ? 'block' : 'none');

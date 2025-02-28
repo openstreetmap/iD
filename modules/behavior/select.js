@@ -11,24 +11,24 @@ import { utilFastMouse } from '../util/util';
 
 
 export function behaviorSelect(context) {
-    var _tolerancePx = 4; // see also behaviorDrag
-    var _lastMouseEvent = null;
-    var _showMenu = false;
-    var _downPointers = {};
-    var _longPressTimeout = null;
-    var _lastInteractionType = null;
+    const _tolerancePx = 4; // see also behaviorDrag
+    let _lastMouseEvent = null;
+    let _showMenu = false;
+    const _downPointers = {};
+    let _longPressTimeout = null;
+    let _lastInteractionType = null;
     // the id of the down pointer that's enabling multiselection while down
-    var _multiselectionPointerId = null;
+    let _multiselectionPointerId = null;
 
     // use pointer events on supported platforms; fallback to mouse events
-    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+    const _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
 
     function keydown(d3_event) {
 
         if (d3_event.keyCode === 32) {
             // don't react to spacebar events during text input
-            var activeNode = document.activeElement;
+            const activeNode = document.activeElement;
             if (activeNode && new Set(['INPUT', 'TEXTAREA']).has(activeNode.nodeName)) return;
         }
 
@@ -74,7 +74,7 @@ export function behaviorSelect(context) {
             _lastInteractionType = 'menukey';
             contextmenu(d3_event);
         } else if (d3_event.keyCode === 32) {  // spacebar
-            var pointer = _downPointers.spacebar;
+            const pointer = _downPointers.spacebar;
             if (pointer) {
                 delete _downPointers.spacebar;
 
@@ -89,7 +89,7 @@ export function behaviorSelect(context) {
 
 
     function pointerdown(d3_event) {
-        var id = (d3_event.pointerId || 'mouse').toString();
+        const id = (d3_event.pointerId || 'mouse').toString();
 
         cancelLongPress();
 
@@ -109,10 +109,10 @@ export function behaviorSelect(context) {
 
 
     function didLongPress(id, interactionType) {
-        var pointer = _downPointers[id];
+        const pointer = _downPointers[id];
         if (!pointer) return;
 
-        for (var i in _downPointers) {
+        for (const i in _downPointers) {
             // don't allow this or any currently down pointer to trigger another click
             _downPointers[i].done = true;
         }
@@ -127,7 +127,7 @@ export function behaviorSelect(context) {
 
 
     function pointermove(d3_event) {
-        var id = (d3_event.pointerId || 'mouse').toString();
+        const id = (d3_event.pointerId || 'mouse').toString();
         if (_downPointers[id]) {
             _downPointers[id].lastEvent = d3_event;
         }
@@ -141,8 +141,8 @@ export function behaviorSelect(context) {
 
 
     function pointerup(d3_event) {
-        var id = (d3_event.pointerId || 'mouse').toString();
-        var pointer = _downPointers[id];
+        const id = (d3_event.pointerId || 'mouse').toString();
+        const pointer = _downPointers[id];
         if (!pointer) return;
 
         delete _downPointers[id];
@@ -158,7 +158,7 @@ export function behaviorSelect(context) {
 
 
     function pointercancel(d3_event) {
-        var id = (d3_event.pointerId || 'mouse').toString();
+        const id = (d3_event.pointerId || 'mouse').toString();
         if (!_downPointers[id]) return;
 
         delete _downPointers[id];
@@ -198,14 +198,14 @@ export function behaviorSelect(context) {
     function click(firstEvent, lastEvent, pointerId) {
         cancelLongPress();
 
-        var mapNode = context.container().select('.main-map').node();
+        const mapNode = context.container().select('.main-map').node();
 
         // Use the `main-map` coordinate system since the surface and supersurface
         // are transformed when drag-panning.
-        var pointGetter = utilFastMouse(mapNode);
-        var p1 = pointGetter(firstEvent);
-        var p2 = pointGetter(lastEvent);
-        var dist = geoVecLength(p1, p2);
+        const pointGetter = utilFastMouse(mapNode);
+        const p1 = pointGetter(firstEvent);
+        const p2 = pointGetter(lastEvent);
+        const dist = geoVecLength(p1, p2);
 
         if (dist > _tolerancePx ||
             !mapContains(lastEvent)) {
@@ -214,15 +214,15 @@ export function behaviorSelect(context) {
             return;
         }
 
-        var targetDatum = lastEvent.target.__data__;
+        const targetDatum = lastEvent.target.__data__;
 
-        var multiselectEntityId;
+        let multiselectEntityId;
 
         if (!_multiselectionPointerId) {
             // If a different pointer than the one triggering this click is down on a
             // feature, treat this and all future clicks as multiselection until that
             // pointer is raised.
-            var selectPointerInfo = pointerDownOnSelection(pointerId);
+            const selectPointerInfo = pointerDownOnSelection(pointerId);
             if (selectPointerInfo) {
                 _multiselectionPointerId = selectPointerInfo.pointerId;
                 // if the other feature isn't selected yet, make sure we select it
@@ -232,7 +232,7 @@ export function behaviorSelect(context) {
         }
 
         // support multiselect if data is already selected
-        var isMultiselect = context.mode().id === 'select' && (
+        const isMultiselect = context.mode().id === 'select' && (
             // and shift key is down
             (lastEvent && lastEvent.shiftKey) ||
             // or we're lasso-selecting
@@ -244,7 +244,7 @@ export function behaviorSelect(context) {
         processClick(targetDatum, isMultiselect, p2, multiselectEntityId);
 
         function mapContains(event) {
-            var rect = mapNode.getBoundingClientRect();
+            const rect = mapNode.getBoundingClientRect();
             return event.clientX >= rect.left &&
                 event.clientX <= rect.right &&
                 event.clientY >= rect.top &&
@@ -252,19 +252,19 @@ export function behaviorSelect(context) {
         }
 
         function pointerDownOnSelection(skipPointerId) {
-            var mode = context.mode();
-            var selectedIDs = mode.id === 'select' ? mode.selectedIDs() : [];
-            for (var pointerId in _downPointers) {
+            const mode = context.mode();
+            const selectedIDs = mode.id === 'select' ? mode.selectedIDs() : [];
+            for (const pointerId in _downPointers) {
                 if (pointerId === 'spacebar' || pointerId === skipPointerId) continue;
 
-                var pointerInfo = _downPointers[pointerId];
+                const pointerInfo = _downPointers[pointerId];
 
-                var p1 = pointGetter(pointerInfo.firstEvent);
-                var p2 = pointGetter(pointerInfo.lastEvent);
+                const p1 = pointGetter(pointerInfo.firstEvent);
+                const p2 = pointGetter(pointerInfo.lastEvent);
                 if (geoVecLength(p1, p2) > _tolerancePx) continue;
 
-                var datum = pointerInfo.firstEvent.target.__data__;
-                var entity = (datum && datum.properties && datum.properties.entity) || datum;
+                const datum = pointerInfo.firstEvent.target.__data__;
+                const entity = (datum && datum.properties && datum.properties.entity) || datum;
                 if (context.graph().hasEntity(entity.id)) {
                     return {
                         pointerId: pointerId,
@@ -279,11 +279,11 @@ export function behaviorSelect(context) {
 
 
     function processClick(datum, isMultiselect, point, alsoSelectId) {
-        var mode = context.mode();
-        var showMenu = _showMenu;
-        var interactionType = _lastInteractionType;
+        const mode = context.mode();
+        const showMenu = _showMenu;
+        const interactionType = _lastInteractionType;
 
-        var entity = datum && datum.properties && datum.properties.entity;
+        const entity = datum && datum.properties && datum.properties.entity;
         if (entity) datum = entity;
 
         if (datum && datum.type === 'midpoint') {
@@ -291,11 +291,11 @@ export function behaviorSelect(context) {
             datum = datum.parents[0];
         }
 
-        var newMode;
+        let newMode;
 
         if (datum instanceof osmEntity) {
             // targeting an entity
-            var selectedIDs = context.selectedIDs();
+            let selectedIDs = context.selectedIDs();
             context.selectedNoteID(null);
             context.selectedErrorID(null);
 
@@ -396,7 +396,7 @@ export function behaviorSelect(context) {
                 // Edge and IE really like to show the contextmenu on the
                 // menubar when user presses a keyboard menu button
                 // even after we've already preventdefaulted the key event.
-                var e = d3_event;
+                const e = d3_event;
                 if (+e.clientX === 0 && +e.clientY === 0) {
                     d3_event.preventDefault();
                 }

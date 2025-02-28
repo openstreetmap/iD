@@ -2,7 +2,7 @@ import { setTimeout } from 'node:timers/promises';
 import css from '../../../css/55_cursors.css?raw';
 
 describe('iD.Map', function() {
-    var content, context, map;
+    let content, context, map;
 
     beforeEach(function() {
         d3.select('head').append('style').html(css);
@@ -23,7 +23,7 @@ describe('iD.Map', function() {
         });
 
         it('dispatches move event when zoom changes', function() {
-            var spy = sinon.spy();
+            const spy = sinon.spy();
             map.zoom(4);
             map.on('move', spy);
             map.zoom(5);
@@ -31,7 +31,7 @@ describe('iD.Map', function() {
         });
 
         it('dispatches no move event when zoom does not change', function() {
-            var spy = sinon.spy();
+            const spy = sinon.spy();
             map.zoom(4);
             map.on('move', spy);
             map.zoom(4);
@@ -82,7 +82,7 @@ describe('iD.Map', function() {
         });
 
         it('dispatches move event when center changes', function() {
-            var spy = sinon.spy();
+            const spy = sinon.spy();
             map.center([0, 0]);
             map.on('move', spy);
             map.center([1, 1]);
@@ -90,7 +90,7 @@ describe('iD.Map', function() {
         });
 
         it('dispatches no move event when center does not change', function() {
-            var spy = sinon.spy();
+            const spy = sinon.spy();
             map.center([0, 0]);
             map.on('move', spy);
             map.center([0, 0]);
@@ -141,7 +141,7 @@ describe('iD.Map', function() {
     });
 
     describe('cursors', function() {
-        var mode, behavior, point, vertex, line, area, midpoint;
+        let mode, behavior, point, vertex, line, area, midpoint;
 
         beforeEach(function() {
             mode = d3.select('body').append('div');

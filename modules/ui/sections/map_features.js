@@ -4,19 +4,19 @@ import { uiSection } from '../section';
 
 export function uiSectionMapFeatures(context) {
 
-    var _features = context.features().keys();
+    const _features = context.features().keys();
 
-    var section = uiSection('map-features', context)
+    const section = uiSection('map-features', context)
         .label(() => t.append('map_data.map_features'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
     function renderDisclosureContent(selection) {
 
-        var container = selection.selectAll('.layer-feature-list-container')
+        let container = selection.selectAll('.layer-feature-list-container')
             .data([0]);
 
-        var containerEnter = container.enter()
+        const containerEnter = container.enter()
             .append('div')
             .attr('class', 'layer-feature-list-container');
 
@@ -24,7 +24,7 @@ export function uiSectionMapFeatures(context) {
             .append('ul')
             .attr('class', 'layer-list layer-feature-list');
 
-        var footer = containerEnter
+        const footer = containerEnter
             .append('div')
             .attr('class', 'feature-list-links section-footer');
 
@@ -59,7 +59,7 @@ export function uiSectionMapFeatures(context) {
     }
 
     function drawListItems(selection, data, type, name, change, active) {
-        var items = selection.selectAll('li')
+        let items = selection.selectAll('li')
             .data(data);
 
         // Exit
@@ -67,13 +67,13 @@ export function uiSectionMapFeatures(context) {
             .remove();
 
         // Enter
-        var enter = items.enter()
+        const enter = items.enter()
             .append('li')
             .call(uiTooltip()
                 .title(function(d) {
-                    var tip = t.append(name + '.' + d + '.tooltip');
+                    const tip = t.append(name + '.' + d + '.tooltip');
                     if (autoHiddenFeature(d)) {
-                        var msg = showsLayer('osm') ? t.append('map_data.autohidden') : t.append('map_data.osmhidden');
+                        const msg = showsLayer('osm') ? t.append('map_data.autohidden') : t.append('map_data.osmhidden');
                         return selection => {
                             selection.call(tip);
                             selection.append('div').call(msg);
@@ -84,7 +84,7 @@ export function uiSectionMapFeatures(context) {
                 .placement('top')
             );
 
-        var label = enter
+        const label = enter
             .append('label');
 
         label
@@ -121,7 +121,7 @@ export function uiSectionMapFeatures(context) {
     }
 
     function showsLayer(id) {
-        var layer = context.layers().layer(id);
+        const layer = context.layers().layer(id);
         return layer && layer.enabled();
     }
 

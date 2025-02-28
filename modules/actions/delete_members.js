@@ -6,7 +6,7 @@ export function actionDeleteMembers(relationId, memberIndexes) {
         // Remove the members in descending order so removals won't shift what members
         // are at the remaining indexes
         memberIndexes.sort((a, b) => b - a);
-        for (var i in memberIndexes) {
+        for (const i in memberIndexes) {
             graph = actionDeleteMember(relationId, memberIndexes[i])(graph);
         }
         return graph;

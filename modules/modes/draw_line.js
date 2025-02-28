@@ -3,12 +3,12 @@ import { behaviorDrawWay } from '../behavior/draw_way';
 
 
 export function modeDrawLine(context, wayID, startGraph, button, affix, continuing) {
-    var mode = {
+    const mode = {
         button: button,
         id: 'draw-line'
     };
 
-    var behavior = behaviorDrawWay(context, wayID, mode, startGraph)
+    const behavior = behaviorDrawWay(context, wayID, mode, startGraph)
         .on('rejectedSelfIntersection.modeDrawLine', function() {
             context.ui().flash
                 .iconName('#iD-icon-no')

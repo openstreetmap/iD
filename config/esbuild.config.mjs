@@ -4,7 +4,7 @@ import parse from 'minimist';
 import envs from './envs.mjs';
 import browserslistToEsbuild from 'browserslist-to-esbuild';
 
-let args = parse(process.argv.slice(2), {boolean: true});
+const args = parse(process.argv.slice(2), {boolean: true});
 
 const context = await esbuild.context({
   define: envs,

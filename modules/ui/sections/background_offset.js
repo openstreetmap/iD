@@ -10,14 +10,14 @@ import { uiSection } from '../section';
 
 export function uiSectionBackgroundOffset(context) {
 
-    var section = uiSection('background-offset', context)
+    const section = uiSection('background-offset', context)
         .label(() => t.append('background.fix_misalignment'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
-    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+    const _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
-    var _directions = [
+    const _directions = [
         ['top', [0, -0.5]],
         ['left', [-0.5, 0]],
         ['right', [0.5, 0]],
@@ -26,9 +26,9 @@ export function uiSectionBackgroundOffset(context) {
 
 
     function updateValue() {
-        var meters = geoOffsetToMeters(context.background().offset());
-        var x = +meters[0].toFixed(2);
-        var y = +meters[1].toFixed(2);
+        const meters = geoOffsetToMeters(context.background().offset());
+        const x = +meters[0].toFixed(2);
+        const y = +meters[1].toFixed(2);
 
         context.container().selectAll('.nudge-inner-rect')
             .select('input')
@@ -55,8 +55,8 @@ export function uiSectionBackgroundOffset(context) {
 
 
     function inputOffset() {
-        var input = d3_select(this);
-        var d = input.node().value;
+        const input = d3_select(this);
+        let d = input.node().value;
 
         if (d === '') return resetOffset();
 
@@ -78,9 +78,9 @@ export function uiSectionBackgroundOffset(context) {
     function dragOffset(d3_event) {
         if (d3_event.button !== 0) return;
 
-        var origin = [d3_event.clientX, d3_event.clientY];
+        let origin = [d3_event.clientX, d3_event.clientY];
 
-        var pointerId = d3_event.pointerId || 'mouse';
+        const pointerId = d3_event.pointerId || 'mouse';
 
         context.container()
             .append('div')
@@ -98,8 +98,8 @@ export function uiSectionBackgroundOffset(context) {
         function pointermove(d3_event) {
             if (pointerId !== (d3_event.pointerId || 'mouse')) return;
 
-            var latest = [d3_event.clientX, d3_event.clientY];
-            var d = [
+            const latest = [d3_event.clientX, d3_event.clientY];
+            const d = [
                 -(origin[0] - latest[0]) / 4,
                 -(origin[1] - latest[1]) / 4
             ];
@@ -122,10 +122,10 @@ export function uiSectionBackgroundOffset(context) {
 
 
     function renderDisclosureContent(selection) {
-        var container = selection.selectAll('.nudge-container')
+        const container = selection.selectAll('.nudge-container')
             .data([0]);
 
-        var containerEnter = container.enter()
+        const containerEnter = container.enter()
             .append('div')
             .attr('class', 'nudge-container');
 
@@ -134,11 +134,11 @@ export function uiSectionBackgroundOffset(context) {
             .attr('class', 'nudge-instructions')
             .call(t.append('background.offset'));
 
-        var nudgeWrapEnter = containerEnter
+        const nudgeWrapEnter = containerEnter
             .append('div')
             .attr('class', 'nudge-controls-wrap');
 
-        var nudgeEnter = nudgeWrapEnter
+        const nudgeEnter = nudgeWrapEnter
             .append('div')
             .attr('class', 'nudge-outer-rect')
             .on(_pointerPrefix + 'down', dragOffset);

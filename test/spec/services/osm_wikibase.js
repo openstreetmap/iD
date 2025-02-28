@@ -1,7 +1,7 @@
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.serviceOsmWikibase', function () {
-  var wikibase;
+  let wikibase;
 
   before(function () {
     iD.services.osmWikibase = iD.serviceOsmWikibase;
@@ -258,14 +258,14 @@ describe('iD.serviceOsmWikibase', function () {
   }
 
 
-  var localeData = {
+  const localeData = {
     id: 'Q7792',
     sitelinks: {wiki: {site: 'wiki', title: 'Locale:fr'}}
   };
 
   describe('#getEntity', function () {
     it('calls the given callback with the results of the getEntity data item query', async () => {
-      var callback = sinon.spy();
+      const callback = sinon.spy();
       fetchMock.mock(/action=wbgetentities/, {
         body: JSON.stringify({
           entities: {

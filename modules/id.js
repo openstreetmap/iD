@@ -5,7 +5,7 @@ import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
 // polyfill idle callback functions (not included in core-js)
 window.requestIdleCallback = window.requestIdleCallback ||
     function(cb) {
-        var start = Date.now();
+        const start = Date.now();
         return window.requestAnimationFrame(function() {
             cb({
                 didTimeout: false,

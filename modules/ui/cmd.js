@@ -4,8 +4,8 @@ import { utilDetect } from '../util/detect';
 
 // Translate a MacOS key command into the appropriate Windows/Linux equivalent.
 // For example, ⌘Z -> Ctrl+Z
-export var uiCmd = function (code) {
-    var detected = utilDetect();
+export const uiCmd = function (code) {
+    const detected = utilDetect();
 
     if (detected.os === 'mac') {
         return code;
@@ -15,8 +15,8 @@ export var uiCmd = function (code) {
         if (code === '⌘⇧Z') return 'Ctrl+Y';
     }
 
-    var result = '',
-        replacements = {
+    let result = '';
+    const replacements = {
             '⌘': 'Ctrl',
             '⇧': 'Shift',
             '⌥': 'Alt',
@@ -24,7 +24,7 @@ export var uiCmd = function (code) {
             '⌦': 'Delete'
         };
 
-    for (var i = 0; i < code.length; i++) {
+    for (let i = 0; i < code.length; i++) {
         if (code[i] in replacements) {
             result += replacements[code[i]] + (i < code.length - 1 ? '+' : '');
         } else {
@@ -40,9 +40,9 @@ export var uiCmd = function (code) {
 uiCmd.display = function(code) {
     if (code.length !== 1) return code;
 
-    var detected = utilDetect();
-    var mac = (detected.os === 'mac');
-    var replacements = {
+    const detected = utilDetect();
+    const mac = (detected.os === 'mac');
+    const replacements = {
         '⌘': mac ? '⌘ ' + t('shortcuts.key.cmd')    : t('shortcuts.key.ctrl'),
         '⇧': mac ? '⇧ ' + t('shortcuts.key.shift')  : t('shortcuts.key.shift'),
         '⌥': mac ? '⌥ ' + t('shortcuts.key.option') : t('shortcuts.key.alt'),

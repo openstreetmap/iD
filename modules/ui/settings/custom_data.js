@@ -7,23 +7,23 @@ import { utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiSettingsCustomData(context) {
-    var dispatch = d3_dispatch('change');
+    const dispatch = d3_dispatch('change');
 
     function render(selection) {
-        var dataLayer = context.layers().layer('data');
+        const dataLayer = context.layers().layer('data');
 
         // keep separate copies of original and current settings
-        var _origSettings = {
+        const _origSettings = {
             fileList: (dataLayer && dataLayer.fileList()) || null,
             url: prefs('settings-custom-data-url')
         };
-        var _currSettings = {
+        const _currSettings = {
             fileList: (dataLayer && dataLayer.fileList()) || null,
             // url: prefs('settings-custom-data-url')
         };
 
         // var example = 'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png';
-        var modal = uiConfirm(selection).okButton();
+        const modal = uiConfirm(selection).okButton();
 
         modal
             .classed('settings-modal settings-custom-data', true);
@@ -33,7 +33,7 @@ export function uiSettingsCustomData(context) {
             .call(t.append('settings.custom_data.header'));
 
 
-        var textSection = modal.select('.modal-section.message-text');
+        const textSection = modal.select('.modal-section.message-text');
 
         textSection
             .append('pre')
@@ -47,7 +47,7 @@ export function uiSettingsCustomData(context) {
             .attr('accept', '.gpx,.kml,.geojson,.json,application/gpx+xml,application/vnd.google-earth.kml+xml,application/geo+json,application/json')
             .property('files', _currSettings.fileList)
             .on('change', function(d3_event) {
-                var files = d3_event.target.files;
+                const files = d3_event.target.files;
                 if (files && files.length) {
                     _currSettings.url = '';
                     textSection.select('.field-url').property('value', '');
@@ -75,7 +75,7 @@ export function uiSettingsCustomData(context) {
 
 
         // insert a cancel button
-        var buttonSection = modal.select('.modal-section.buttons');
+        const buttonSection = modal.select('.modal-section.buttons');
 
         buttonSection
             .insert('button', '.ok-button')

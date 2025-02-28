@@ -5,25 +5,25 @@ import { modeSelect } from '../modes/select';
 
 
 export function operationSplit(context, selectedIDs) {
-    var _vertexIds = selectedIDs.filter(function(id) {
+    const _vertexIds = selectedIDs.filter(function(id) {
         return context.graph().geometry(id) === 'vertex';
     });
-    var _selectedWayIds = selectedIDs.filter(function(id) {
-        var entity = context.graph().hasEntity(id);
+    const _selectedWayIds = selectedIDs.filter(function(id) {
+        const entity = context.graph().hasEntity(id);
         return entity && entity.type === 'way';
     });
-    var _isAvailable = _vertexIds.length > 0 &&
+    const _isAvailable = _vertexIds.length > 0 &&
         _vertexIds.length + _selectedWayIds.length === selectedIDs.length;
-    var _action = actionSplit(_vertexIds);
-    var _ways = [];
-    var _geometry = 'feature';
-    var _waysAmount = 'single';
-    var _nodesAmount = _vertexIds.length === 1 ? 'single' : 'multiple';
+    const _action = actionSplit(_vertexIds);
+    let _ways = [];
+    let _geometry = 'feature';
+    let _waysAmount = 'single';
+    const _nodesAmount = _vertexIds.length === 1 ? 'single' : 'multiple';
 
     if (_isAvailable) {
         if (_selectedWayIds.length) _action.limitWays(_selectedWayIds);
         _ways = _action.ways(context.graph());
-        var geometries = {};
+        const geometries = {};
         _ways.forEach(function(way) {
             geometries[way.geometry(context.graph())] = true;
         });
@@ -34,10 +34,10 @@ export function operationSplit(context, selectedIDs) {
     }
 
 
-    var operation = function() {
-        var difference = context.perform(_action, operation.annotation());
+    const operation = function() {
+        const difference = context.perform(_action, operation.annotation());
         // select both the nodes and the ways so the mapper can immediately disconnect them if desired
-        var idsToSelect = _vertexIds.concat(difference.extantIDs().filter(function(id) {
+        const idsToSelect = _vertexIds.concat(difference.extantIDs().filter(function(id) {
             // filter out relations that may have had member additions
             return context.entity(id).type === 'way';
         }));
@@ -56,7 +56,7 @@ export function operationSplit(context, selectedIDs) {
 
 
     operation.disabled = function() {
-        var reason = _action.disabled(context.graph());
+        const reason = _action.disabled(context.graph());
         if (reason) {
             return reason;
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
@@ -67,7 +67,7 @@ export function operationSplit(context, selectedIDs) {
 
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
+        const disable = operation.disabled();
         return disable ?
             t.append('operations.split.' + disable) :
             t.append('operations.split.description.' + _geometry + '.' + _waysAmount + '.' + _nodesAmount + '_node');

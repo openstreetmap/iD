@@ -9,10 +9,10 @@ import { uiInfoPanels } from './panels';
 
 
 export function uiInfo(context) {
-    var ids = Object.keys(uiInfoPanels);
-    var wasActive = ['measurement'];
-    var panels = {};
-    var active = {};
+    const ids = Object.keys(uiInfoPanels);
+    let wasActive = ['measurement'];
+    const panels = {};
+    const active = {};
 
     // create panels
     ids.forEach(function(k) {
@@ -26,9 +26,9 @@ export function uiInfo(context) {
     function info(selection) {
 
         function redraw() {
-            var activeids = ids.filter(function(k) { return active[k]; }).sort();
+            const activeids = ids.filter(function(k) { return active[k]; }).sort();
 
-            var containers = infoPanels.selectAll('.panel-container')
+            const containers = infoPanels.selectAll('.panel-container')
                 .data(activeids, function(k) { return k; });
 
             containers.exit()
@@ -42,7 +42,7 @@ export function uiInfo(context) {
                         .remove();
                 });
 
-            var enter = containers.enter()
+            const enter = containers.enter()
                 .append('div')
                 .attr('class', function(d) { return 'fillD2 panel-container panel-container-' + d; });
 
@@ -52,7 +52,7 @@ export function uiInfo(context) {
                 .duration(200)
                 .style('opacity', 1);
 
-            var title = enter
+            const title = enter
                 .append('div')
                 .attr('class', 'panel-title fillD2');
 
@@ -85,7 +85,7 @@ export function uiInfo(context) {
 
 
         info.toggle = function(which) {
-            var activeids = ids.filter(function(k) { return active[k]; });
+            const activeids = ids.filter(function(k) { return active[k]; });
 
             if (which) {  // toggle one
                 active[which] = !active[which];
@@ -111,7 +111,7 @@ export function uiInfo(context) {
         };
 
 
-        var infoPanels = selection.selectAll('.info-panels')
+        let infoPanels = selection.selectAll('.info-panels')
             .data([0]);
 
         infoPanels = infoPanels.enter()
@@ -129,7 +129,7 @@ export function uiInfo(context) {
             });
 
         ids.forEach(function(k) {
-            var key = t('info_panels.' + k + '.key', { default: null });
+            const key = t('info_panels.' + k + '.key', { default: null });
             if (!key) return;
             context.keybinding()
                 .on(uiCmd('⌘⇧' + key), function(d3_event) {

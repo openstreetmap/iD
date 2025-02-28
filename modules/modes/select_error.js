@@ -18,21 +18,21 @@ import { utilKeybinding } from '../util';
 
 // NOTE: Don't change name of this until UI v3 is merged
 export function modeSelectError(context, selectedErrorID, selectedErrorService) {
-    var mode = {
+    const mode = {
         id: 'select-error',
         button: 'browse'
     };
 
-    var keybinding = utilKeybinding('select-error');
+    const keybinding = utilKeybinding('select-error');
 
-    var errorService = services[selectedErrorService];
-    var errorEditor;
+    const errorService = services[selectedErrorService];
+    let errorEditor;
     switch (selectedErrorService) {
         case 'keepRight':
             errorEditor = uiKeepRightEditor(context)
             .on('change', function() {
                 context.map().pan([0,0]);  // trigger a redraw
-                var error = checkSelectedID();
+                const error = checkSelectedID();
                 if (!error) return;
                 context.ui().sidebar
                     .show(errorEditor.error(error));
@@ -42,7 +42,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
             errorEditor = uiOsmoseEditor(context)
             .on('change', function() {
                 context.map().pan([0,0]);  // trigger a redraw
-                var error = checkSelectedID();
+                const error = checkSelectedID();
                 if (!error) return;
                 context.ui().sidebar
                     .show(errorEditor.error(error));
@@ -51,7 +51,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
     }
 
 
-    var behaviors = [
+    const behaviors = [
         behaviorBreathe(context),
         behaviorHover(context),
         behaviorSelect(context),
@@ -63,7 +63,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
 
     function checkSelectedID() {
         if (!errorService) return;
-        var error = errorService.getError(selectedErrorID);
+        const error = errorService.getError(selectedErrorID);
         if (!error) {
             context.enter(modeBrowse(context));
         }
@@ -73,7 +73,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
 
     mode.zoomToSelected = function() {
         if (!errorService) return;
-        var error = errorService.getError(selectedErrorID);
+        const error = errorService.getError(selectedErrorID);
         if (error) {
             context.map().centerZoomEase(error.loc, 20);
         }
@@ -81,7 +81,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
 
 
     mode.enter = function() {
-        var error = checkSelectedID();
+        const error = checkSelectedID();
         if (!error) return;
 
         behaviors.forEach(context.install);
@@ -94,7 +94,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
 
         selectError();
 
-        var sidebar = context.ui().sidebar;
+        const sidebar = context.ui().sidebar;
         sidebar.show(errorEditor.error(error));
 
         context.map()
@@ -105,13 +105,13 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
         function selectError(d3_event, drawn) {
             if (!checkSelectedID()) return;
 
-            var selection = context.surface()
+            const selection = context.surface()
                 .selectAll('.itemId-' + selectedErrorID + '.' + selectedErrorService);
 
             if (selection.empty()) {
                 // Return to browse mode if selected DOM elements have
                 // disappeared because the user moved them out of view..
-                var source = d3_event && d3_event.type === 'zoom' && d3_event.sourceEvent;
+                const source = d3_event && d3_event.type === 'zoom' && d3_event.sourceEvent;
                 if (drawn && source && (source.type === 'pointermove' || source.type === 'mousemove' || source.type === 'touchmove')) {
                     context.enter(modeBrowse(context));
                 }

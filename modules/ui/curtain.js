@@ -11,7 +11,7 @@ import { uiToggle } from './toggle';
 // Tooltips and svg mask used to highlight certain features
 export function uiCurtain(containerNode) {
 
-    var surface = d3_select(null),
+    let surface = d3_select(null),
         tooltip = d3_select(null),
         darkness = d3_select(null);
 
@@ -76,7 +76,7 @@ export function uiCurtain(containerNode) {
             box = copyBox(box.getBoundingClientRect());
         }
         if (box) {
-            var containerRect = containerNode.getBoundingClientRect();
+            const containerRect = containerNode.getBoundingClientRect();
             box.top -= containerRect.top;
             box.left -= containerRect.left;
         }
@@ -89,7 +89,7 @@ export function uiCurtain(containerNode) {
             box.width += options.padding * 2;
         }
 
-        var tooltipBox;
+        let tooltipBox;
         if (options.tooltipBox) {
             tooltipBox = options.tooltipBox;
             if (typeof tooltipBox === 'string') {
@@ -122,14 +122,14 @@ export function uiCurtain(containerNode) {
                     '<button href="#" class="button action">' + options.buttonText + '</button></div>';
             }
 
-            var classes = 'curtain-tooltip popover tooltip arrowed in ' + (options.tooltipClass || '');
+            const classes = 'curtain-tooltip popover tooltip arrowed in ' + (options.tooltipClass || '');
             tooltip
                 .classed(classes, true)
                 .selectAll('.popover-inner')
                 .html(html);
 
             if (options.buttonText && options.buttonCallback) {
-                var button = tooltip.selectAll('.button-section .button.action');
+                const button = tooltip.selectAll('.button-section .button.action');
                 button
                     .on('click', function(d3_event) {
                         d3_event.preventDefault();
@@ -137,12 +137,12 @@ export function uiCurtain(containerNode) {
                     });
             }
 
-            var tip = copyBox(tooltip.node().getBoundingClientRect()),
-                w = containerNode.clientWidth,
-                h = containerNode.clientHeight,
-                tooltipWidth = 200,
-                tooltipArrow = 5,
-                side, pos;
+            const tip = copyBox(tooltip.node().getBoundingClientRect()),
+                  w = containerNode.clientWidth,
+                  h = containerNode.clientHeight,
+                  tooltipWidth = 200,
+                  tooltipArrow = 5;
+            let side, pos;
 
 
             // hack: this will have bottom placement,
@@ -179,7 +179,7 @@ export function uiCurtain(containerNode) {
 
             } else {
                 // tooltip to the side of the tooltipBox..
-                var tipY = tooltipBox.top + tooltipBox.height / 2 - tip.height / 2;
+                const tipY = tooltipBox.top + tooltipBox.height / 2 - tip.height / 2;
 
                 if (localizer.textDirection() === 'rtl') {
                     if (tooltipBox.left - tooltipWidth - tooltipArrow < 70) {
@@ -214,7 +214,7 @@ export function uiCurtain(containerNode) {
 
             // shift popover-inner if it is very close to the top or bottom edge
             // (doesn't affect the placement of the popover-arrow)
-            var shiftY = 0;
+            let shiftY = 0;
             if (side === 'left' || side === 'right') {
                 if (pos[1] < 60) {
                     shiftY = 60 - pos[1];
@@ -241,7 +241,7 @@ export function uiCurtain(containerNode) {
         darkness.datum(datum)
             .interrupt();
 
-        var selection;
+        let selection;
         if (duration === 0) {
             selection = darkness;
         } else {
@@ -253,9 +253,9 @@ export function uiCurtain(containerNode) {
 
         selection
             .attr('d', function(d) {
-                var containerWidth = containerNode.clientWidth;
-                var containerHeight = containerNode.clientHeight;
-                var string = 'M 0,0 L 0,' + containerHeight + ' L ' +
+                const containerWidth = containerNode.clientWidth;
+                const containerHeight = containerNode.clientHeight;
+                const string = 'M 0,0 L 0,' + containerHeight + ' L ' +
                     containerWidth + ',' + containerHeight + 'L' +
                     containerWidth + ',0 Z';
 

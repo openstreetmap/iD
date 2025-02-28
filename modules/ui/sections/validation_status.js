@@ -7,10 +7,10 @@ import { uiSection } from '../section';
 
 export function uiSectionValidationStatus(context) {
 
-    var section = uiSection('issues-status', context)
+    const section = uiSection('issues-status', context)
         .content(renderContent)
         .shouldDisplay(function() {
-            var issues = context.validator().getIssues(getOptions());
+            const issues = context.validator().getIssues(getOptions());
             return issues.length === 0;
         });
 
@@ -23,10 +23,10 @@ export function uiSectionValidationStatus(context) {
 
     function renderContent(selection) {
 
-        var box = selection.selectAll('.box')
+        const box = selection.selectAll('.box')
             .data([0]);
 
-        var boxEnter = box.enter()
+        const boxEnter = box.enter()
             .append('div')
             .attr('class', 'box');
 
@@ -34,7 +34,7 @@ export function uiSectionValidationStatus(context) {
             .append('div')
             .call(svgIcon('#iD-icon-apply', 'pre-text'));
 
-        var noIssuesMessage = boxEnter
+        const noIssuesMessage = boxEnter
             .append('span');
 
         noIssuesMessage
@@ -54,10 +54,10 @@ export function uiSectionValidationStatus(context) {
 
     function renderIgnoredIssuesReset(selection) {
 
-        var ignoredIssues = context.validator()
+        const ignoredIssues = context.validator()
             .getIssues({ what: 'all', where: 'all', includeDisabledRules: true, includeIgnored: 'only' });
 
-        var resetIgnored = selection.selectAll('.reset-ignored')
+        let resetIgnored = selection.selectAll('.reset-ignored')
             .data(ignoredIssues.length ? [0] : []);
 
         // exit
@@ -65,7 +65,7 @@ export function uiSectionValidationStatus(context) {
             .remove();
 
         // enter
-        var resetIgnoredEnter = resetIgnored.enter()
+        const resetIgnoredEnter = resetIgnored.enter()
             .append('div')
             .attr('class', 'reset-ignored section-footer');
 
@@ -88,12 +88,12 @@ export function uiSectionValidationStatus(context) {
 
     function setNoIssuesText(selection) {
 
-        var opts = getOptions();
+        const opts = getOptions();
 
         function checkForHiddenIssues(cases) {
-            for (var type in cases) {
-                var hiddenOpts = cases[type];
-                var hiddenIssues = context.validator().getIssues(hiddenOpts);
+            for (const type in cases) {
+                const hiddenOpts = cases[type];
+                const hiddenIssues = context.validator().getIssues(hiddenOpts);
                 if (hiddenIssues.length) {
                     selection.select('.box .details')
                         .html('')
@@ -109,7 +109,7 @@ export function uiSectionValidationStatus(context) {
                 .call(t.append('issues.no_issues.hidden_issues.none'));
         }
 
-        var messageType;
+        let messageType;
 
         if (opts.what === 'edited' && opts.where === 'visible') {
 

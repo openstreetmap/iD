@@ -9,36 +9,36 @@ import { utilGetAllNodes, utilTotalExtent } from '../util';
 
 
 export function operationDelete(context, selectedIDs) {
-    var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
-    var action = actionDeleteMultiple(selectedIDs);
-    var nodes = utilGetAllNodes(selectedIDs, context.graph());
-    var coords = nodes.map(function(n) { return n.loc; });
-    var extent = utilTotalExtent(selectedIDs, context.graph());
+    const multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
+    const action = actionDeleteMultiple(selectedIDs);
+    const nodes = utilGetAllNodes(selectedIDs, context.graph());
+    const coords = nodes.map(function(n) { return n.loc; });
+    const extent = utilTotalExtent(selectedIDs, context.graph());
 
 
-    var operation = function() {
-        var nextSelectedID;
-        var nextSelectedLoc;
+    const operation = function() {
+        let nextSelectedID;
+        let nextSelectedLoc;
 
         if (selectedIDs.length === 1) {
-            var id = selectedIDs[0];
-            var entity = context.entity(id);
-            var geometry = entity.geometry(context.graph());
-            var parents = context.graph().parentWays(entity);
-            var parent = parents[0];
+            const id = selectedIDs[0];
+            const entity = context.entity(id);
+            const geometry = entity.geometry(context.graph());
+            const parents = context.graph().parentWays(entity);
+            const parent = parents[0];
 
             // Select the next closest node in the way.
             if (geometry === 'vertex') {
-                var nodes = parent.nodes;
-                var i = nodes.indexOf(id);
+                const nodes = parent.nodes;
+                let i = nodes.indexOf(id);
 
                 if (i === 0) {
                     i++;
                 } else if (i === nodes.length - 1) {
                     i--;
                 } else {
-                    var a = geoSphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc);
-                    var b = geoSphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
+                    const a = geoSphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc);
+                    const b = geoSphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
                     i = a < b ? i - 1 : i + 1;
                 }
 
@@ -89,9 +89,9 @@ export function operationDelete(context, selectedIDs) {
 
         function someMissing() {
             if (context.inIntro()) return false;
-            var osm = context.connection();
+            const osm = context.connection();
             if (osm) {
-                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                const missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
                 if (missing.length) {
                     missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
                     return true;
@@ -101,24 +101,24 @@ export function operationDelete(context, selectedIDs) {
         }
 
         function hasWikidataTag(id) {
-            var entity = context.entity(id);
+            const entity = context.entity(id);
             return entity.tags.wikidata && entity.tags.wikidata.trim().length > 0;
         }
 
         function incompleteRelation(id) {
-            var entity = context.entity(id);
+            const entity = context.entity(id);
             return entity.type === 'relation' && !entity.isComplete(context.graph());
         }
 
         function protectedMember(id) {
-            var entity = context.entity(id);
+            const entity = context.entity(id);
             if (entity.type !== 'way') return false;
 
-            var parents = context.graph().parentRelations(entity);
-            for (var i = 0; i < parents.length; i++) {
-                var parent = parents[i];
-                var type = parent.tags.type;
-                var role = parent.memberById(id).role || 'outer';
+            const parents = context.graph().parentRelations(entity);
+            for (let i = 0; i < parents.length; i++) {
+                const parent = parents[i];
+                const type = parent.tags.type;
+                const role = parent.memberById(id).role || 'outer';
                 if (type === 'route' || type === 'boundary' || (type === 'multipolygon' && role === 'outer')) {
                     return true;
                 }
@@ -129,7 +129,7 @@ export function operationDelete(context, selectedIDs) {
 
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
+        const disable = operation.disabled();
         return disable ?
             t.append('operations.delete.' + disable + '.' + multi) :
             t.append('operations.delete.description.' + multi);

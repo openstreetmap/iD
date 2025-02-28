@@ -9,8 +9,8 @@ import { utilEditDistance } from '../util';
 //
 export function presetCollection(collection) {
   const MAXRESULTS = 50;
-  let _this = {};
-  let _memo = {};
+  const _this = {};
+  const _memo = {};
 
   _this.collection = collection;
 
@@ -168,7 +168,7 @@ export function presetCollection(collection) {
           Object.keys(a.tags).some(key => leading(key + '=' + a.tags[key]))));
     }
 
-    let results = leadingNames.concat(
+    const results = leadingNames.concat(
       leadingSuggestions,
       leadingNamesStripped,
       leadingSuggestionsStripped,

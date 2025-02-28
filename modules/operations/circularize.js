@@ -5,15 +5,15 @@ import { utilGetAllNodes } from '../util';
 
 
 export function operationCircularize(context, selectedIDs) {
-    var _extent;
-    var _actions = selectedIDs.map(getAction).filter(Boolean);
-    var _amount = _actions.length === 1 ? 'single' : 'multiple';
-    var _coords = utilGetAllNodes(selectedIDs, context.graph())
+    let _extent;
+    const _actions = selectedIDs.map(getAction).filter(Boolean);
+    const _amount = _actions.length === 1 ? 'single' : 'multiple';
+    const _coords = utilGetAllNodes(selectedIDs, context.graph())
         .map(function(n) { return n.loc; });
 
     function getAction(entityID) {
 
-        var entity = context.entity(entityID);
+        const entity = context.entity(entityID);
 
         if (entity.type !== 'way' || new Set(entity.nodes).size <= 1) return null;
 
@@ -26,10 +26,10 @@ export function operationCircularize(context, selectedIDs) {
         return actionCircularize(entityID, context.projection);
     }
 
-    var operation = function() {
+    const operation = function() {
         if (!_actions.length) return;
 
-        var combinedAction = function(graph, t) {
+        const combinedAction = function(graph, t) {
             _actions.forEach(function(action) {
                 if (!action.disabled(graph)) {
                     graph = action(graph, t);
@@ -56,7 +56,7 @@ export function operationCircularize(context, selectedIDs) {
     operation.disabled = function() {
         if (!_actions.length) return '';
 
-        var actionDisableds = _actions.map(function(action) {
+        const actionDisableds = _actions.map(function(action) {
             return action.disabled(context.graph());
         }).filter(Boolean);
 
@@ -80,9 +80,9 @@ export function operationCircularize(context, selectedIDs) {
 
         function someMissing() {
             if (context.inIntro()) return false;
-            var osm = context.connection();
+            const osm = context.connection();
             if (osm) {
-                var missing = _coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                const missing = _coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
                 if (missing.length) {
                     missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
                     return true;
@@ -94,7 +94,7 @@ export function operationCircularize(context, selectedIDs) {
 
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
+        const disable = operation.disabled();
         return disable ?
             t.append('operations.circularize.' + disable + '.' + _amount) :
             t.append('operations.circularize.description.' + _amount);

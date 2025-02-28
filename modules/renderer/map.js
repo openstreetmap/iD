@@ -20,11 +20,11 @@ import { utilDoubleUp } from '../util/double_up';
 import { isArray } from 'lodash-es';
 
 // constants
-var TILESIZE = 256;
-var minZoom = 2;
-var maxZoom = 24;
-var kMin = geoZoomToScale(minZoom, TILESIZE);
-var kMax = geoZoomToScale(maxZoom, TILESIZE);
+const TILESIZE = 256;
+const minZoom = 2;
+const maxZoom = 24;
+const kMin = geoZoomToScale(minZoom, TILESIZE);
+const kMax = geoZoomToScale(maxZoom, TILESIZE);
 
 function clamp(num, min, max) {
     return Math.max(min, Math.min(num, max));
@@ -32,48 +32,48 @@ function clamp(num, min, max) {
 
 
 export function rendererMap(context) {
-    var dispatch = d3_dispatch(
+    const dispatch = d3_dispatch(
         'move', 'drawn',
         'crossEditableZoom', 'hitMinZoom',
         'changeHighlighting', 'changeAreaFill'
     );
-    var projection = context.projection;
-    var curtainProjection = context.curtainProjection;
-    var drawLayers;
-    var drawPoints;
-    var drawVertices;
-    var drawLines;
-    var drawAreas;
-    var drawMidpoints;
-    var drawLabels;
+    const projection = context.projection;
+    const curtainProjection = context.curtainProjection;
+    let drawLayers;
+    let drawPoints;
+    let drawVertices;
+    let drawLines;
+    let drawAreas;
+    let drawMidpoints;
+    let drawLabels;
 
-    var _selection = d3_select(null);
-    var supersurface = d3_select(null);
-    var wrapper = d3_select(null);
-    var surface = d3_select(null);
+    let _selection = d3_select(null);
+    let supersurface = d3_select(null);
+    let wrapper = d3_select(null);
+    let surface = d3_select(null);
 
-    var _dimensions = [1, 1];
-    var _dblClickZoomEnabled = true;
-    var _redrawEnabled = true;
-    var _gestureTransformStart;
-    var _transformStart = projection.transform();
-    var _transformLast;
-    var _isTransformed = false;
-    var _minzoom = 0;
-    var _getMouseCoords;
-    var _lastPointerEvent;
-    var _lastWithinEditableZoom;
+    let _dimensions = [1, 1];
+    let _dblClickZoomEnabled = true;
+    let _redrawEnabled = true;
+    let _gestureTransformStart;
+    let _transformStart = projection.transform();
+    let _transformLast;
+    let _isTransformed = false;
+    let _minzoom = 0;
+    let _getMouseCoords;
+    let _lastPointerEvent;
+    let _lastWithinEditableZoom;
 
     // whether a pointerdown event started the zoom
-    var _pointerDown = false;
+    let _pointerDown = false;
 
     // use pointer events on supported platforms; fallback to mouse events
-    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+    const _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
     // use pointer event interaction if supported; fallback to touch/mouse events in d3-zoom
-    var _zoomerPannerFunction = 'PointerEvent' in window ? utilZoomPan : d3_zoom;
+    const _zoomerPannerFunction = 'PointerEvent' in window ? utilZoomPan : d3_zoom;
 
-    var _zoomerPanner = _zoomerPannerFunction()
+    const _zoomerPanner = _zoomerPannerFunction()
         .scaleExtent([kMin, kMax])
         .interpolate(d3_interpolate)
         .filter(zoomEventFilter)
@@ -85,17 +85,17 @@ export function rendererMap(context) {
         .on('end.map', function() {
             _pointerDown = false;
         });
-    var _doubleUpHandler = utilDoubleUp();
+    const _doubleUpHandler = utilDoubleUp();
 
-    var scheduleRedraw = _throttle(redraw, 750);
-    // var isRedrawScheduled = false;
-    // var pendingRedrawCall;
+    const scheduleRedraw = _throttle(redraw, 750);
+    // let isRedrawScheduled = false;
+    // let pendingRedrawCall;
     // function scheduleRedraw() {
     //     // Only schedule the redraw if one has not already been set.
     //     if (isRedrawScheduled) return;
     //     isRedrawScheduled = true;
-    //     var that = this;
-    //     var args = arguments;
+    //     let that = this;
+    //     let args = arguments;
     //     pendingRedrawCall = window.requestIdleCallback(function () {
     //         // Reset the boolean so future redraws can be set.
     //         isRedrawScheduled = false;
@@ -116,13 +116,13 @@ export function rendererMap(context) {
         context
             .on('change.map', immediateRedraw);
 
-        var osm = context.connection();
+        const osm = context.connection();
         if (osm) {
             osm.on('change.map', immediateRedraw);
         }
 
         function didUndoOrRedo(targetTransform) {
-            var mode = context.mode().id;
+            const mode = context.mode().id;
             if (mode !== 'browse' && mode !== 'select') return;
             if (targetTransform) {
                 map.transformEase(targetTransform);
@@ -194,20 +194,20 @@ export function rendererMap(context) {
             })
             .on(_pointerPrefix + 'over.vertices', function(d3_event) {
                 if (map.editableDataEnabled() && !_isTransformed) {
-                    var hover = d3_event.target.__data__;
+                    const hover = d3_event.target.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent());
                     dispatch.call('drawn', this, { full: false });
                 }
             })
             .on(_pointerPrefix + 'out.vertices', function(d3_event) {
                 if (map.editableDataEnabled() && !_isTransformed) {
-                    var hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
+                    const hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent());
                     dispatch.call('drawn', this, { full: false });
                 }
             });
 
-        var detected = utilDetect();
+        const detected = utilDetect();
 
         // only WebKit supports gesture events
         if ('GestureEvent' in window &&
@@ -236,11 +236,11 @@ export function rendererMap(context) {
                 // or area fills
                 !d3_select(d3_event.target).classed('fill')) return;
 
-            var zoomOut = d3_event.shiftKey;
+            const zoomOut = d3_event.shiftKey;
 
-            var t = projection.transform();
+            let t = projection.transform();
 
-            var p1 = t.invert(p0);
+            const p1 = t.invert(p0);
 
             t = t.scale(zoomOut ? 0.5 : 2);
 
@@ -255,10 +255,10 @@ export function rendererMap(context) {
             if (_isTransformed) return;
 
             // redraw immediately any objects affected by a change in selectedIDs.
-            var graph = context.graph();
-            var selectedAndParents = {};
+            const graph = context.graph();
+            const selectedAndParents = {};
             context.selectedIDs().forEach(function(id) {
-                var entity = graph.hasEntity(id);
+                const entity = graph.hasEntity(id);
                 if (entity) {
                     selectedAndParents[entity.id] = entity;
                     if (entity.type === 'node') {
@@ -268,8 +268,8 @@ export function rendererMap(context) {
                     }
                 }
             });
-            var data = Object.values(selectedAndParents);
-            var filter = function(d) { return d.id in selectedAndParents; };
+            let data = Object.values(selectedAndParents);
+            const filter = function(d) { return d.id in selectedAndParents; };
 
             data = context.features().filter(data, graph);
 
@@ -296,17 +296,17 @@ export function rendererMap(context) {
         // If we detect this, dispatch `mouseup` to complete the orphaned gesture,
         // so that d3-zoom won't stop propagation of new `mousedown` events.
         if (d3_event.type === 'mousedown') {
-            var hasOrphan = false;
-            var listeners = window.__on;
-            for (var i = 0; i < listeners.length; i++) {
-                var listener = listeners[i];
+            let hasOrphan = false;
+            const listeners = window.__on;
+            for (let i = 0; i < listeners.length; i++) {
+                const listener = listeners[i];
                 if (listener.name === 'zoom' && listener.type === 'mouseup') {
                     hasOrphan = true;
                     break;
                 }
             }
             if (hasOrphan) {
-                var event = window.CustomEvent;
+                let event = window.CustomEvent;
                 if (event) {
                     event = new event('mouseup');
                 } else {
@@ -329,20 +329,20 @@ export function rendererMap(context) {
 
 
     function drawEditable(difference, extent) {
-        var mode = context.mode();
-        var graph = context.graph();
-        var features = context.features();
-        var all = context.history().intersects(map.extent());
-        var fullRedraw = false;
-        var data;
-        var set;
-        var filter;
-        var applyFeatureLayerFilters = true;
+        const mode = context.mode();
+        const graph = context.graph();
+        const features = context.features();
+        const all = context.history().intersects(map.extent());
+        let fullRedraw = false;
+        let data;
+        let set;
+        let filter;
+        let applyFeatureLayerFilters = true;
 
         if (map.isInWideSelection()) {
             data = [];
             utilEntityAndDeepMemberIDs(mode.selectedIDs(), context.graph()).forEach(function(id) {
-                var entity = context.hasEntity(id);
+                const entity = context.hasEntity(id);
                 if (entity) data.push(entity);
             });
             fullRedraw = true;
@@ -351,7 +351,7 @@ export function rendererMap(context) {
             applyFeatureLayerFilters = false;
 
         } else if (difference) {
-            var complete = difference.complete(map.extent());
+            const complete = difference.complete(map.extent());
             data = Object.values(complete).filter(Boolean);
             set = new Set(Object.keys(complete));
             filter = function(d) { return set.has(d.id); };
@@ -414,7 +414,7 @@ export function rendererMap(context) {
         surface.selectAll('.layer-osm *').remove();
         surface.selectAll('.layer-touch:not(.markers) *').remove();
 
-        var allowed = {
+        const allowed = {
             'browse': true,
             'save': true,
             'select-note': true,
@@ -422,7 +422,7 @@ export function rendererMap(context) {
             'select-error': true
         };
 
-        var mode = context.mode();
+        const mode = context.mode();
         if (mode && !allowed[mode.id]) {
             context.enter(modeBrowse(context));
         }
@@ -438,10 +438,10 @@ export function rendererMap(context) {
         // Remap Safari gesture events to wheel events - #5492
         // We want these disabled most places, but enabled for zoom/unzoom on map surface
         // https://developer.mozilla.org/en-US/docs/Web/API/GestureEvent
-        var e = d3_event;
+        const e = d3_event;
         e.preventDefault();
 
-        var props = {
+        const props = {
             deltaMode: 0,    // dummy values to ignore in zoomPan
             deltaY: 1,       // dummy values to ignore in zoomPan
             clientX: e.clientX,
@@ -452,7 +452,7 @@ export function rendererMap(context) {
             y: e.y
         };
 
-        var e2 = new WheelEvent('wheel', props);
+        const e2 = new WheelEvent('wheel', props);
         e2._scale = e.scale;         // preserve the original scale
         e2._rotation = e.rotation;   // preserve the original rotation
 
@@ -461,11 +461,11 @@ export function rendererMap(context) {
 
 
     function zoomPan(event, key, transform) {
-        var source = event && event.sourceEvent || event;
-        var eventTransform = transform || (event && event.transform);
-        var x = eventTransform.x;
-        var y = eventTransform.y;
-        var k = eventTransform.k;
+        const source = event && event.sourceEvent || event;
+        let eventTransform = transform || (event && event.transform);
+        let x = eventTransform.x;
+        let y = eventTransform.y;
+        let k = eventTransform.k;
 
         // Special handling of 'wheel' events:
         // They might be triggered by the user scrolling the mouse wheel,
@@ -475,13 +475,13 @@ export function rendererMap(context) {
             // assume that the gesture is already handled by pointer events
             if (_pointerDown) return;
 
-            var detected = utilDetect();
-            var dX = source.deltaX;
-            var dY = source.deltaY;
-            var x2 = x;
-            var y2 = y;
-            var k2 = k;
-            var t0, p0, p1;
+            const detected = utilDetect();
+            const dX = source.deltaX;
+            let dY = source.deltaY;
+            let x2 = x;
+            let y2 = y;
+            let k2 = k;
+            let t0, p0, p1;
 
             // Normalize mousewheel scroll speed (Firefox) - #3029
             // If wheel delta is provided in LINE units, recalculate it in PIXEL units
@@ -493,8 +493,8 @@ export function rendererMap(context) {
                 // Convert from lines to pixels, more if the user is scrolling fast.
                 // (I made up the exp function to roughly match Firefox to what Chrome does)
                 // These numbers should be floats, because integers are treated as pan gesture below.
-                var lines = Math.abs(source.deltaY);
-                var sign = (source.deltaY > 0) ? 1 : -1;
+                const lines = Math.abs(source.deltaY);
+                const sign = (source.deltaY > 0) ? 1 : -1;
                 dY = sign * clamp(
                     Math.exp((lines - 1) * 0.75) * 4.000244140625,
                     4.000244140625,    // min
@@ -602,7 +602,7 @@ export function rendererMap(context) {
 
         projection.transform(eventTransform);
 
-        var withinEditableZoom = map.withinEditableZoom();
+        const withinEditableZoom = map.withinEditableZoom();
         if (_lastWithinEditableZoom !== withinEditableZoom) {
             if (_lastWithinEditableZoom !== undefined) {
                 // notify that the map zoomed in or out over the editable zoom threshold
@@ -611,9 +611,9 @@ export function rendererMap(context) {
             _lastWithinEditableZoom = withinEditableZoom;
         }
 
-        var scale = k / _transformStart.k;
-        var tX = (x / scale - _transformStart.x) * scale;
-        var tY = (y / scale - _transformStart.y) * scale;
+        const scale = k / _transformStart.k;
+        const tX = (x / scale - _transformStart.x) * scale;
+        const tY = (y / scale - _transformStart.y) * scale;
 
         if (context.inIntro()) {
             curtainProjection.transform({
@@ -665,16 +665,16 @@ export function rendererMap(context) {
             difference = extent = undefined;
         }
 
-        var zoom = map.zoom();
-        var z = String(~~zoom);
+        const zoom = map.zoom();
+        const z = String(~~zoom);
 
         if (surface.attr('data-zoom') !== z) {
             surface.attr('data-zoom', z);
         }
 
         // class surface as `lowzoom` around z17-z18.5 (based on latitude)
-        var lat = map.center()[1];
-        var lowzoom = d3_scaleLinear()
+        const lat = map.center()[1];
+        const lowzoom = d3_scaleLinear()
             .domain([-60, 0, 60])
             .range([17, 18.5, 17])
             .clamp(true);
@@ -703,7 +703,7 @@ export function rendererMap(context) {
 
 
 
-    var immediateRedraw = function(difference, extent) {
+    const immediateRedraw = function(difference, extent) {
         if (!difference && !extent) cancelPendingRedraw();
         redraw(difference, extent);
     };
@@ -715,9 +715,9 @@ export function rendererMap(context) {
 
 
     map.mouse = function(d3_event) {
-        var event = d3_event || _lastPointerEvent;
+        let event = d3_event || _lastPointerEvent;
         if (event) {
-            var s;
+            let s;
             while ((s = event.sourceEvent)) { event = s; }
             return _getMouseCoords(event);
         }
@@ -727,7 +727,7 @@ export function rendererMap(context) {
 
     // returns Lng/Lat
     map.mouseCoordinates = function() {
-        var coord = map.mouse() || pxCenter();
+        const coord = map.mouse() || pxCenter();
         return projection.invert(coord);
     };
 
@@ -752,7 +752,7 @@ export function rendererMap(context) {
 
 
     function setTransform(t2, duration, force) {
-        var t = projection.transform();
+        const t = projection.transform();
         if (!force && t2.k === t.k && t2.x === t.x && t2.y === t.y) return false;
 
         if (duration) {
@@ -772,19 +772,19 @@ export function rendererMap(context) {
 
 
     function setCenterZoom(loc2, z2, duration, force) {
-        var c = map.center();
-        var z = map.zoom();
+        const c = map.center();
+        const z = map.zoom();
         if (loc2[0] === c[0] && loc2[1] === c[1] && z2 === z && !force) return false;
 
-        var proj = geoRawMercator().transform(projection.transform());  // copy projection
+        const proj = geoRawMercator().transform(projection.transform());  // copy projection
 
-        var k2 = clamp(geoZoomToScale(z2, TILESIZE), kMin, kMax);
+        const k2 = clamp(geoZoomToScale(z2, TILESIZE), kMin, kMax);
         proj.scale(k2);
 
-        var t = proj.translate();
-        var point = proj(loc2);
+        const t = proj.translate();
+        const point = proj(loc2);
 
-        var center = pxCenter();
+        const center = pxCenter();
         t[0] += center[0] - point[0];
         t[1] += center[1] - point[1];
 
@@ -793,8 +793,8 @@ export function rendererMap(context) {
 
 
     map.pan = function(delta, duration) {
-        var t = projection.translate();
-        var k = projection.scale();
+        const t = projection.translate();
+        const k = projection.scale();
 
         t[0] += delta[0];
         t[1] += delta[1];
@@ -861,21 +861,21 @@ export function rendererMap(context) {
     };
 
     map.unobscuredCenterZoomEase = function(loc, zoom) {
-        var offset = map.unobscuredOffsetPx();
+        const offset = map.unobscuredOffsetPx();
 
-        var proj = geoRawMercator().transform(projection.transform());  // copy projection
+        const proj = geoRawMercator().transform(projection.transform());  // copy projection
         // use the target zoom to calculate the offset center
         proj.scale(geoZoomToScale(zoom, TILESIZE));
 
-        var locPx = proj(loc);
-        var offsetLocPx = [locPx[0] + offset[0], locPx[1] + offset[1]];
-        var offsetLoc = proj.invert(offsetLocPx);
+        const locPx = proj(loc);
+        const offsetLocPx = [locPx[0] + offset[0], locPx[1] + offset[1]];
+        const offsetLoc = proj.invert(offsetLocPx);
 
         map.centerZoomEase(offsetLoc, zoom);
     };
 
     map.unobscuredOffsetPx = function() {
-        var openPane = context.container().select('.map-panes .map-pane.shown');
+        const openPane = context.container().select('.map-panes .map-pane.shown');
         if (!openPane.empty()) {
             return [openPane.node().offsetWidth/2, 0];
         }
@@ -919,13 +919,13 @@ export function rendererMap(context) {
 
         if (entities.length === 0) return map;
 
-        var extent = entities
+        const extent = entities
             .map(entity => entity.extent(context.graph()))
             .reduce((a, b) => a.extend(b));
 
         if (!isFinite(extent.area())) return map;
 
-        var z2 = clamp(map.trimmedExtentZoom(extent), 0, 20);
+        const z2 = clamp(map.trimmedExtentZoom(extent), 0, 20);
         return map.centerZoom(extent.center(), z2);
     };
 
@@ -959,10 +959,10 @@ export function rendererMap(context) {
 
 
     map.zoomToEase = function(obj, duration) {
-        var extent;
+        let extent;
         if (Array.isArray(obj)) {
             obj.forEach(function(entity) {
-                var entityExtent = entity.extent(context.graph());
+                const entityExtent = entity.extent(context.graph());
                 if (!extent) {
                     extent = entityExtent;
                 } else {
@@ -974,7 +974,7 @@ export function rendererMap(context) {
         }
         if (!isFinite(extent.area())) return map;
 
-        var z2 = clamp(map.trimmedExtentZoom(extent), 0, 20);
+        const z2 = clamp(map.trimmedExtentZoom(extent), 0, 20);
         return map.centerZoomEase(extent.center(), z2, duration);
     };
 
@@ -1000,7 +1000,7 @@ export function rendererMap(context) {
                 projection.invert([_dimensions[0], 0])
             );
         } else {
-            var extent = geoExtent(val);
+            const extent = geoExtent(val);
             map.centerZoom(extent.center(), map.extentZoom(extent));
         }
     };
@@ -1008,30 +1008,30 @@ export function rendererMap(context) {
 
     map.trimmedExtent = function(val) {
         if (!arguments.length) {
-            var headerY = 71;
-            var footerY = 30;
-            var pad = 10;
+            const headerY = 71;
+            const footerY = 30;
+            const pad = 10;
             return new geoExtent(
                 projection.invert([pad, _dimensions[1] - footerY - pad]),
                 projection.invert([_dimensions[0] - pad, headerY + pad])
             );
         } else {
-            var extent = geoExtent(val);
+            const extent = geoExtent(val);
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
     };
 
 
     function calcExtentZoom(extent, dim) {
-        var tl = projection([extent[0][0], extent[1][1]]);
-        var br = projection([extent[1][0], extent[0][1]]);
+        const tl = projection([extent[0][0], extent[1][1]]);
+        const br = projection([extent[1][0], extent[0][1]]);
 
         // Calculate maximum zoom that fits extent
-        var hFactor = (br[0] - tl[0]) / dim[0];
-        var vFactor = (br[1] - tl[1]) / dim[1];
-        var hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2;
-        var vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2;
-        var newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
+        const hFactor = (br[0] - tl[0]) / dim[0];
+        const vFactor = (br[1] - tl[1]) / dim[1];
+        const hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2;
+        const vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2;
+        const newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
 
         return newZoom;
     }
@@ -1043,9 +1043,9 @@ export function rendererMap(context) {
 
 
     map.trimmedExtentZoom = function(val) {
-        var trimY = 120;
-        var trimX = 40;
-        var trimmed = [_dimensions[0] - trimX, _dimensions[1] - trimY];
+        const trimY = 120;
+        const trimX = 40;
+        const trimmed = [_dimensions[0] - trimX, _dimensions[1] - trimY];
         return calcExtentZoom(geoExtent(val), trimmed);
     };
 
@@ -1062,7 +1062,7 @@ export function rendererMap(context) {
 
     map.editableDataEnabled = function(skipZoomCheck) {
 
-        var layer = context.layers().layer('osm');
+        const layer = context.layers().layer('osm');
         if (!layer || !layer.enabled()) return false;
 
         return skipZoomCheck || map.withinEditableZoom();
@@ -1070,7 +1070,7 @@ export function rendererMap(context) {
 
 
     map.notesEditable = function() {
-        var layer = context.layers().layer('notes');
+        const layer = context.layers().layer('notes');
         if (!layer || !layer.enabled()) return false;
 
         return map.withinEditableZoom();
@@ -1108,7 +1108,7 @@ export function rendererMap(context) {
 
     map.toggleWireframe = function() {
 
-        var activeFill = map.activeAreaFill();
+        let activeFill = map.activeAreaFill();
 
         if (activeFill === 'wireframe') {
             activeFill = prefs('area-fill-toggle') || 'partial';
@@ -1120,7 +1120,7 @@ export function rendererMap(context) {
     };
 
     function updateAreaFill() {
-        var activeFill = map.activeAreaFill();
+        const activeFill = map.activeAreaFill();
         map.areaFillOptions.forEach(function(opt) {
             surface.classed('fill-' + opt, Boolean(opt === activeFill));
         });

@@ -7,14 +7,14 @@ import { uiViewOnOSM } from './view_on_osm';
 
 
 export function uiInspector(context) {
-    var presetList = uiPresetList(context);
-    var entityEditor = uiEntityEditor(context);
-    var wrap = d3_select(null),
+    const presetList = uiPresetList(context);
+    const entityEditor = uiEntityEditor(context);
+    let wrap = d3_select(null),
         presetPane = d3_select(null),
         editorPane = d3_select(null);
-    var _state = 'select';
-    var _entityIDs;
-    var _newFeature = false;
+    let _state = 'select';
+    let _entityIDs;
+    let _newFeature = false;
 
 
     function inspector(selection) {
@@ -34,7 +34,7 @@ export function uiInspector(context) {
         wrap = selection.selectAll('.panewrap')
             .data([0]);
 
-        var enter = wrap.enter()
+        const enter = wrap.enter()
             .append('div')
             .attr('class', 'panewrap');
 
@@ -57,8 +57,8 @@ export function uiInspector(context) {
             // can only change preset on single selection
             if (_entityIDs.length !== 1) return false;
 
-            var entityID = _entityIDs[0];
-            var entity = context.hasEntity(entityID);
+            const entityID = _entityIDs[0];
+            const entity = context.hasEntity(entityID);
             if (!entity) return false;
 
             // default to inspector if there are already tags
@@ -95,7 +95,7 @@ export function uiInspector(context) {
                 .call(entityEditor);
         }
 
-        var footer = selection.selectAll('.footer')
+        let footer = selection.selectAll('.footer')
             .data([0]);
 
         footer = footer.enter()

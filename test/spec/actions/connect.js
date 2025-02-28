@@ -1,6 +1,6 @@
 describe('iD.actionConnect', function() {
     it('merges tags', function() {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', tags: { highway: 'traffic_signals' }}),
             iD.osmNode({id: 'b', tags: { crossing: 'marked' }}),
         ]);
@@ -8,13 +8,13 @@ describe('iD.actionConnect', function() {
         graph = iD.actionConnect(['a', 'b'])(graph);
         expect(graph.hasEntity('a')).not.to.be.ok;
 
-        var survivor = graph.hasEntity('b');
+        const survivor = graph.hasEntity('b');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
         expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
     });
 
     it('chooses the oldest node as the survivor', function() {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'n3'}),
             iD.osmNode({id: 'n-1'}),
             iD.osmNode({id: 'n2'}),
@@ -29,7 +29,7 @@ describe('iD.actionConnect', function() {
     });
 
     it('chooses the oldest interesting node as the survivor', function() {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'n3'}),
             iD.osmNode({id: 'n1'}),
             iD.osmNode({id: 'n2', tags: { highway: 'traffic_signals' }}),
@@ -42,13 +42,13 @@ describe('iD.actionConnect', function() {
         expect(graph.hasEntity('n1')).not.to.be.ok;
         expect(graph.hasEntity('n4')).not.to.be.ok;
 
-        var survivor = graph.hasEntity('n2');
+        const survivor = graph.hasEntity('n2');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
         expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
     });
 
     it('chooses an existing node as the survivor', function() {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'n3'}),
             iD.osmNode({id: 'n-1'}),
             iD.osmNode({id: 'n-2', tags: { highway: 'traffic_signals' }}),
@@ -61,13 +61,13 @@ describe('iD.actionConnect', function() {
         expect(graph.hasEntity('n-2')).not.to.be.ok;
         expect(graph.hasEntity('n-4')).not.to.be.ok;
 
-        var survivor = graph.hasEntity('n3');
+        const survivor = graph.hasEntity('n3');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
         expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
     });
 
     it('chooses the last node as the survivor when all are new', function() {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', tags: { highway: 'traffic_signals' }}),
             iD.osmNode({id: 'b', tags: { crossing: 'marked' }}),
             iD.osmNode({id: 'c'})
@@ -77,7 +77,7 @@ describe('iD.actionConnect', function() {
         expect(graph.hasEntity('a')).not.to.be.ok;
         expect(graph.hasEntity('b')).not.to.be.ok;
 
-        var survivor = graph.hasEntity('c');
+        const survivor = graph.hasEntity('c');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
         expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
     });
@@ -98,7 +98,7 @@ describe('iD.actionConnect', function() {
         //       |
         //       d
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a'}),
             iD.osmNode({id: 'b'}),
             iD.osmNode({id: 'c'}),
@@ -122,7 +122,7 @@ describe('iD.actionConnect', function() {
         //
         // Connect [a, d].
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a'}),
             iD.osmNode({id: 'b'}),
             iD.osmNode({id: 'c'}),
@@ -145,7 +145,7 @@ describe('iD.actionConnect', function() {
         //
         // a --- c
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a'}),
             iD.osmNode({id: 'b'}),
             iD.osmNode({id: 'c'}),
@@ -170,7 +170,7 @@ describe('iD.actionConnect', function() {
         //       |
         //       d
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a'}),
             iD.osmNode({id: 'b'}),
             iD.osmNode({id: 'c'}),
@@ -190,7 +190,7 @@ describe('iD.actionConnect', function() {
         //
         // Connect [a, b]
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a'}),
             iD.osmNode({id: 'b'}),
             iD.osmWay({id: '-', nodes: ['a', 'b']})
@@ -202,7 +202,7 @@ describe('iD.actionConnect', function() {
     });
 
     it('merges tags to the surviving node', function() {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', tags: {a: 'a'}}),
             iD.osmNode({id: 'b', tags: {b: 'b'}}),
             iD.osmNode({id: 'c', tags: {c: 'c'}})
@@ -213,7 +213,7 @@ describe('iD.actionConnect', function() {
     });
 
     it('merges memberships to the surviving node', function() {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a'}),
             iD.osmNode({id: 'b'}),
             iD.osmNode({id: 'c'}),
@@ -232,7 +232,7 @@ describe('iD.actionConnect', function() {
 
     describe('#disabled', function () {
         it('returns falsy when connecting members of the same relation and same roles', function () {
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -247,7 +247,7 @@ describe('iD.actionConnect', function() {
         });
 
         it('returns falsy when connecting members of different relation and different roles', function () {
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -260,7 +260,7 @@ describe('iD.actionConnect', function() {
         });
 
         it('returns \'relation\' when connecting members of the same relation but different roles', function () {
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -281,7 +281,7 @@ describe('iD.actionConnect', function() {
             //        |                        VIA  'b'
             //        c                        TO   '|'
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -310,7 +310,7 @@ describe('iD.actionConnect', function() {
             //              |            TO   '|'
             //              e
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -340,7 +340,7 @@ describe('iD.actionConnect', function() {
             //              |            TO   '-'
             //  g === f === e
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -375,7 +375,7 @@ describe('iD.actionConnect', function() {
             //              |            TO   '|'
             //              e
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -405,7 +405,7 @@ describe('iD.actionConnect', function() {
             //              |            TO   '-'
             //              e
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -433,7 +433,7 @@ describe('iD.actionConnect', function() {
             //              |            TO   '-'
             //  g === f === e
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -469,7 +469,7 @@ describe('iD.actionConnect', function() {
             //        |            VIA  'b'
             //        c            TO   '|'
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -493,7 +493,7 @@ describe('iD.actionConnect', function() {
             //        |            VIA  '|'
             //  d === c            TO   '-'
             //
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),

@@ -226,7 +226,7 @@ export function svgVegbilder(projection, context, dispatch) {
       sequences = filterSequences(sequences);
     }
 
-    let traces = layer.selectAll('.sequences').selectAll('.sequence')
+    const traces = layer.selectAll('.sequences').selectAll('.sequence')
       .data(sequences, d => d.key);
 
     // exit

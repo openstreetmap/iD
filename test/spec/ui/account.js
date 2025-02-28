@@ -1,7 +1,7 @@
 describe('iD.uiAccount', function () {
     it('properly escapes user name', function() {
-        var selection = d3.select('body').append('div');
-        var osmConnectionMock = {
+        const selection = d3.select('body').append('div');
+        const osmConnectionMock = {
             authenticated: () => true,
             userDetails: (callback) => {
                 callback(null, {
@@ -15,7 +15,7 @@ describe('iD.uiAccount', function () {
                 }
             }
         };
-        var onChangeAccountHandler;
+        let onChangeAccountHandler;
         iD.uiAccount({ connection: () => osmConnectionMock })(selection);
         onChangeAccountHandler.call();
         expect(selection.select('.userInfo span.label').text()).to.equal('x<br>y');

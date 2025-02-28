@@ -8,9 +8,9 @@ import { localizer } from '../core';
 import { nominatimApiUrl } from '../../config/id.js';
 
 
-var apibase = nominatimApiUrl;
-var _inflight = {};
-var _nominatimCache;
+const apibase = nominatimApiUrl;
+let _inflight = {};
+let _nominatimCache;
 
 
 export default {
@@ -41,7 +41,7 @@ export default {
 
 
     reverse: function (loc, callback) {
-        var cached = _nominatimCache.search(
+        const cached = _nominatimCache.search(
             { minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1] }
         );
 
@@ -50,11 +50,11 @@ export default {
             return;
         }
 
-        var params = { zoom: 13, format: 'json', addressdetails: 1, lat: loc[1], lon: loc[0] };
-        var url = apibase + 'reverse?' + utilQsString(params);
+        const params = { zoom: 13, format: 'json', addressdetails: 1, lat: loc[1], lon: loc[0] };
+        const url = apibase + 'reverse?' + utilQsString(params);
 
         if (_inflight[url]) return;
-        var controller = new AbortController();
+        const controller = new AbortController();
         _inflight[url] = controller;
 
         d3_json(url, {
@@ -68,7 +68,7 @@ export default {
                 if (result && result.error) {
                     throw new Error(result.error);
                 }
-                var extent = geoExtent(loc).padByMeters(200);
+                const extent = geoExtent(loc).padByMeters(200);
                 _nominatimCache.insert(Object.assign(extent.bbox(), {data: result}));
                 if (callback) callback(null, result);
             })
@@ -86,10 +86,10 @@ export default {
             limit:10,
             format: 'json'
         };
-        var url = apibase + 'search?' + utilQsString(params);
+        const url = apibase + 'search?' + utilQsString(params);
 
         if (_inflight[url]) return;
-        var controller = new AbortController();
+        const controller = new AbortController();
         _inflight[url] = controller;
 
         d3_json(url, {

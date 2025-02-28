@@ -6,10 +6,10 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationPrivateData() {
-    var type = 'private_data';
+    const type = 'private_data';
 
     // assume that some buildings are private
-    var privateBuildingValues = {
+    const privateBuildingValues = {
         detached: true,
         farm: true,
         house: true,
@@ -20,7 +20,7 @@ export function validationPrivateData() {
     };
 
     // but they might be public if they have one of these other tags
-    var publicKeys = {
+    const publicKeys = {
         amenity: true,
         craft: true,
         historic: true,
@@ -31,7 +31,7 @@ export function validationPrivateData() {
     };
 
     // these tags may contain personally identifying info
-    var personalTags = {
+    const personalTags = {
         'contact:email': true,
         'contact:fax': true,
         'contact:phone': true,
@@ -41,22 +41,22 @@ export function validationPrivateData() {
     };
 
 
-    var validation = function checkPrivateData(entity) {
-        var tags = entity.tags;
+    const validation = function checkPrivateData(entity) {
+        const tags = entity.tags;
         if (!tags.building || !privateBuildingValues[tags.building]) return [];
 
-        var keepTags = {};
-        for (var k in tags) {
+        const keepTags = {};
+        for (const k in tags) {
             if (publicKeys[k]) return [];  // probably a public feature
             if (!personalTags[k]) {
                 keepTags[k] = tags[k];
             }
         }
 
-        var tagDiff = utilTagDiff(tags, keepTags);
+        const tagDiff = utilTagDiff(tags, keepTags);
         if (!tagDiff.length) return [];
 
-        var fixID = tagDiff.length === 1 ? 'remove_tag' : 'remove_tags';
+        const fixID = tagDiff.length === 1 ? 'remove_tag' : 'remove_tags';
 
         return [new validationIssue({
             type: type,
@@ -79,10 +79,10 @@ export function validationPrivateData() {
 
 
         function doUpgrade(graph) {
-            var currEntity = graph.hasEntity(entity.id);
+            const currEntity = graph.hasEntity(entity.id);
             if (!currEntity) return graph;
 
-            var newTags = Object.assign({}, currEntity.tags);  // shallow copy
+            const newTags = Object.assign({}, currEntity.tags);  // shallow copy
             tagDiff.forEach(function(diff) {
                 if (diff.type === '-') {
                     delete newTags[diff.key];
@@ -96,7 +96,7 @@ export function validationPrivateData() {
 
 
         function showMessage(context) {
-            var currEntity = context.hasEntity(this.entityIds[0]);
+            const currEntity = context.hasEntity(this.entityIds[0]);
             if (!currEntity) return '';
 
             return t.append('issues.private_data.contact.message',
@@ -106,7 +106,7 @@ export function validationPrivateData() {
 
 
         function showReference(selection) {
-            var enter = selection.selectAll('.issue-reference')
+            const enter = selection.selectAll('.issue-reference')
                 .data([0])
                 .enter();
 
@@ -129,7 +129,7 @@ export function validationPrivateData() {
                 .attr('class', 'tagDiff-row')
                 .append('td')
                 .attr('class', function(d) {
-                    var klass = d.type === '+' ? 'add' : 'remove';
+                    const klass = d.type === '+' ? 'add' : 'remove';
                     return 'tagDiff-cell tagDiff-cell-' + klass;
                 })
                 .html(function(d) { return d.display; });

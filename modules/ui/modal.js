@@ -6,16 +6,16 @@ import { utilKeybinding } from '../util';
 
 
 export function uiModal(selection, blocking) {
-  let keybinding = utilKeybinding('modal');
-  let previous = selection.select('div.modal');
-  let animate = previous.empty();
+  const keybinding = utilKeybinding('modal');
+  const previous = selection.select('div.modal');
+  const animate = previous.empty();
 
   previous.transition()
     .duration(200)
     .style('opacity', 0)
     .remove();
 
-  let shaded = selection
+  const shaded = selection
     .append('div')
     .attr('class', 'shaded')
     .style('opacity', 0);
@@ -37,7 +37,7 @@ export function uiModal(selection, blocking) {
   };
 
 
-  let modal = shaded
+  const modal = shaded
     .append('div')
     .attr('class', 'modal fillL');
 
@@ -87,7 +87,7 @@ export function uiModal(selection, blocking) {
 
 
   function moveFocusToFirst() {
-    let node = modal
+    const node = modal
       // there are additional rules about what's focusable, but this suits our purposes
       .select('a, button, input:not(.keytrap), select, textarea')
       .node();
@@ -100,7 +100,7 @@ export function uiModal(selection, blocking) {
   }
 
   function moveFocusToLast() {
-    let nodes = modal
+    const nodes = modal
       .selectAll('a, button, input:not(.keytrap), select, textarea')
       .nodes();
 

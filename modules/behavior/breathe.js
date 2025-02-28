@@ -11,20 +11,20 @@ import { timer as d3_timer } from 'd3-timer';
 
 
 export function behaviorBreathe() {
-    var duration = 800;
-    var steps = 4;
-    var selector = '.selected.shadow, .selected .shadow';
-    var _selected = d3_select(null);
-    var _classed = '';
-    var _params = {};
-    var _done = false;
-    var _timer;
+    const duration = 800;
+    const steps = 4;
+    const selector = '.selected.shadow, .selected .shadow';
+    let _selected = d3_select(null);
+    let _classed = '';
+    const _params = {};
+    let _done = false;
+    let _timer;
 
 
     function ratchetyInterpolator(a, b, steps, units) {
         a = Number(a);
         b = Number(b);
-        var sample = d3_scaleQuantize()
+        const sample = d3_scaleQuantize()
             .domain([0, 1])
             .range(d3_quantize(d3_interpolateNumber(a, b), steps));
 
@@ -44,7 +44,7 @@ export function behaviorBreathe() {
 
 
     function setAnimationParams(transition, fromTo) {
-        var toFrom = (fromTo === 'from' ? 'to' : 'from');
+        const toFrom = (fromTo === 'from' ? 'to' : 'from');
 
         transition
             .styleTween('stroke-opacity', function(d) {
@@ -84,11 +84,11 @@ export function behaviorBreathe() {
         selection
             .call(reset)
             .each(function(d) {
-                var s = d3_select(this);
-                var tag = s.node().tagName;
-                var p = {'from': {}, 'to': {}};
-                var opacity;
-                var width;
+                const s = d3_select(this);
+                const tag = s.node().tagName;
+                const p = {'from': {}, 'to': {}};
+                let opacity;
+                let width;
 
                 // determine base opacity and width
                 if (tag === 'circle') {
@@ -111,9 +111,9 @@ export function behaviorBreathe() {
 
 
     function run(surface, fromTo) {
-        var toFrom = (fromTo === 'from' ? 'to' : 'from');
-        var currSelected = surface.selectAll(selector);
-        var currClassed = surface.attr('class');
+        const toFrom = (fromTo === 'from' ? 'to' : 'from');
+        const currSelected = surface.selectAll(selector);
+        const currClassed = surface.attr('class');
 
         if (_done || currSelected.empty()) {
             _selected.call(reset);
@@ -127,7 +127,7 @@ export function behaviorBreathe() {
             _selected = currSelected.call(calcAnimationParams);
         }
 
-        var didCallNextRun = false;
+        let didCallNextRun = false;
 
         _selected
             .transition()

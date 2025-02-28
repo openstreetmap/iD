@@ -3,15 +3,15 @@ import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue } from '../core/validation';
 
 export function validationFormatting() {
-    var type = 'invalid_format';
+    const type = 'invalid_format';
 
-    var validation = function(entity) {
-        var issues = [];
+    const validation = function(entity) {
+        const issues = [];
 
         function isValidEmail(email) {
             // Emails in OSM are going to be official so they should be pretty simple
             // Using negated lists to better support all possible unicode characters (#6494)
-            var valid_email = /^[^\(\)\\,":;<>@\[\]]+@[^\(\)\\,":;<>@\[\]\.]+(?:\.[a-z0-9-]+)*$/i;
+            const valid_email = /^[^\(\)\\,":;<>@\[\]]+@[^\(\)\\,":;<>@\[\]\.]+(?:\.[a-z0-9-]+)*$/i;
 
             // An empty value is also acceptable
             return (!email || valid_email.test(email));
@@ -68,7 +68,7 @@ export function validationFormatting() {
 
         if (entity.tags.email) {
             // Multiple emails are possible
-            var emails = entity.tags.email
+            const emails = entity.tags.email
                 .split(';')
                 .map(function(s) { return s.trim(); })
                 .filter(function(x) { return !isValidEmail(x); });
@@ -79,7 +79,7 @@ export function validationFormatting() {
                     subtype: 'email',
                     severity: 'warning',
                     message: function(context) {
-                        var entity = context.hasEntity(this.entityIds[0]);
+                        const entity = context.hasEntity(this.entityIds[0]);
                         return entity ? t.append('issues.invalid_format.email.message' + this.data,
                             { feature: utilDisplayLabel(entity, context.graph()), email: emails.join(', ') }) : '';
                     },

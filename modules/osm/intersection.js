@@ -17,8 +17,8 @@ export function osmTurn(turn) {
 
 export function osmIntersection(graph, startVertexId, maxDistance) {
     maxDistance = maxDistance || 30;    // in meters
-    var vgraph = coreGraph();           // virtual graph
-    var i, j, k;
+    let vgraph = coreGraph();           // virtual graph
+    let i, j, k;
 
 
     function memberOfRestriction(entity) {
@@ -28,7 +28,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
     function isRoad(way) {
         if (way.isArea() || way.isDegenerate()) return false;
-        var roads = {
+        const roads = {
             'motorway': true,
             'motorway_link': true,
             'trunk': true,
@@ -51,26 +51,26 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     }
 
 
-    var startNode = graph.entity(startVertexId);
-    var checkVertices = [startNode];
-    var checkWays;
-    var vertices = [];
-    var vertexIds = [];
-    var vertex;
-    var ways = [];
-    var wayIds = [];
-    var way;
-    var nodes = [];
-    var node;
-    var parents = [];
-    var parent;
+    const startNode = graph.entity(startVertexId);
+    let checkVertices = [startNode];
+    let checkWays;
+    let vertices = [];
+    let vertexIds = [];
+    let vertex;
+    let ways = [];
+    let wayIds = [];
+    let way;
+    let nodes = [];
+    let node;
+    let parents = [];
+    let parent;
 
     // `actions` will store whatever actions must be performed to satisfy
     // preconditions for adding a turn restriction to this intersection.
     //  - Remove any existing degenerate turn restrictions (missing from/to, etc)
     //  - Reverse oneways so that they are drawn in the forward direction
     //  - Split ways on key vertices
-    var actions = [];
+    const actions = [];
 
 
     // STEP 1:  walk the graph outwards from starting vertex to search
@@ -81,7 +81,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
         // check this vertex for parent ways that are roads
         checkWays = graph.parentWays(vertex);
-        var hasWays = false;
+        let hasWays = false;
         for (i = 0; i < checkWays.length; i++) {
             way = checkWays[i];
             if (!isRoad(way) && !memberOfRestriction(way)) continue;
@@ -98,7 +98,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                 if (geoSphericalDistance(node.loc, startNode.loc) > maxDistance) continue;   // too far from start
 
                 // a key vertex will have parents that are also roads
-                var hasParents = false;
+                let hasParents = false;
                 parents = graph.parentWays(node);
                 for (k = 0; k < parents.length; k++) {
                     parent = parents[k];
@@ -148,9 +148,9 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
     // STEP 3:  Force all oneways to be drawn in the forward direction
     ways.forEach(function(w) {
-        var way = vgraph.entity(w.id);
+        const way = vgraph.entity(w.id);
         if (way.tags.oneway === '-1') {
-            var action = actionReverse(way.id, { reverseOneway: true });
+            const action = actionReverse(way.id, { reverseOneway: true });
             actions.push(action);
             vgraph = action(vgraph);
         }
@@ -158,17 +158,17 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
 
     // STEP 4:  Split ways on key vertices
-    var origCount = osmEntity.id.next.way;
+    const origCount = osmEntity.id.next.way;
     vertices.forEach(function(v) {
         // This is an odd way to do it, but we need to find all the ways that
         // will be split here, then split them one at a time to ensure that these
         // actions can be replayed on the main graph exactly in the same order.
         // (It is unintuitive, but the order of ways returned from graph.parentWays()
         // is arbitrary, depending on how the main graph and vgraph were built)
-        var splitAll = actionSplit([v.id]).keepHistoryOn('first');
+        const splitAll = actionSplit([v.id]).keepHistoryOn('first');
         if (!splitAll.disabled(vgraph)) {
             splitAll.ways(vgraph).forEach(function(way) {
-                var splitOne = actionSplit([v.id]).limitWays([way.id]).keepHistoryOn('first');
+                const splitOne = actionSplit([v.id]).limitWays([way.id]).keepHistoryOn('first');
                 actions.push(splitOne);
                 vgraph = splitOne(vgraph);
             });
@@ -194,8 +194,8 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     ways = [];
 
     vertexIds.forEach(function(id) {
-        var vertex = vgraph.entity(id);
-        var parents = vgraph.parentWays(vertex);
+        const vertex = vgraph.entity(id);
+        const parents = vgraph.parentWays(vertex);
         vertices.push(vertex);
         ways = ways.concat(parents);
     });
@@ -212,16 +212,16 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
     function withMetadata(way, vertexIds) {
         // bidirectional ways are two-way from an intersection's perspective
-        var __oneWay = way.isOneWay() && !way.isBiDirectional();
+        const __oneWay = way.isOneWay() && !way.isBiDirectional();
 
         // which affixes are key vertices?
-        var __first = (vertexIds.indexOf(way.first()) !== -1);
-        var __last = (vertexIds.indexOf(way.last()) !== -1);
+        const __first = (vertexIds.indexOf(way.first()) !== -1);
+        const __last = (vertexIds.indexOf(way.last()) !== -1);
 
         // what roles is this way eligible for?
-        var __via = (__first && __last);
-        var __from = ((__first && !__oneWay) || __last);
-        var __to = (__first || (__last && !__oneWay));
+        const __via = (__first && __last);
+        const __from = ((__first && !__oneWay) || __last);
+        const __to = (__first || (__last && !__oneWay));
 
         return way.update({
             __first:  __first,
@@ -235,7 +235,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
     ways = [];
     wayIds.forEach(function(id) {
-        var way = withMetadata(vgraph.entity(id), vertexIds);
+        const way = withMetadata(vgraph.entity(id), vertexIds);
         vgraph = vgraph.replace(way);
         ways.push(way);
     });
@@ -245,16 +245,16 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     //  1. Find trivial vertices with only 2 parents
     //  2. trim off the leaf way from those vertices and remove from vgraph
 
-    var keepGoing;
-    var removeWayIds = [];
-    var removeVertexIds = [];
+    let keepGoing;
+    const removeWayIds = [];
+    const removeVertexIds = [];
 
     do {
         keepGoing = false;
         checkVertices = vertexIds.slice();
 
         for (i = 0; i < checkVertices.length; i++) {
-            var vertexId = checkVertices[i];
+            const vertexId = checkVertices[i];
             vertex = vgraph.hasEntity(vertexId);
 
             if (!vertex) {
@@ -273,11 +273,11 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             }
 
             if (parents.length === 2) {     // vertex with 2 parents is trivial
-                var a = parents[0];
-                var b = parents[1];
-                var aIsLeaf = a && !a.__via;
-                var bIsLeaf = b && !b.__via;
-                var leaf, survivor;
+                const a = parents[0];
+                const b = parents[1];
+                const aIsLeaf = a && !a.__via;
+                const bIsLeaf = b && !b.__via;
+                let leaf, survivor;
 
                 if (aIsLeaf && !bIsLeaf) {
                     leaf = a;
@@ -322,7 +322,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
 
     // OK!  Here is our intersection..
-    var intersection = {
+    const intersection = {
         graph: vgraph,
         actions: actions,
         vertices: vertices,
@@ -343,17 +343,17 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
         if (!fromWayId) return [];
         if (!maxViaWay) maxViaWay = 0;
 
-        var vgraph = intersection.graph;
-        var keyVertexIds = intersection.vertices.map(function(v) { return v.id; });
+        const vgraph = intersection.graph;
+        const keyVertexIds = intersection.vertices.map(function(v) { return v.id; });
 
-        var start = vgraph.entity(fromWayId);
+        const start = vgraph.entity(fromWayId);
         if (!start || !(start.__from || start.__via)) return [];
 
         // maxViaWay=0   from-*-to              (0 vias)
         // maxViaWay=1   from-*-via-*-to        (1 via max)
         // maxViaWay=2   from-*-via-*-via-*-to  (2 vias max)
-        var maxPathLength = (maxViaWay * 2) + 3;
-        var turns = [];
+        const maxPathLength = (maxViaWay * 2) + 3;
+        const turns = [];
 
         step(start);
         return turns;
@@ -374,13 +374,13 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
         }
 
         function stepNode(entity, currPath, currRestrictions) {
-            var i, j;
-            var parents = vgraph.parentWays(entity);
-            var nextWays = [];
+            let i, j;
+            const parents = vgraph.parentWays(entity);
+            const nextWays = [];
 
             // which ways can we step into?
             for (i = 0; i < parents.length; i++) {
-                var way = parents[i];
+                const way = parents[i];
 
                 // if next way is a oneway incoming to this vertex, skip
                 if (way.__oneWay && way.nodes[0] !== entity.id) continue;
@@ -389,23 +389,23 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                 if (currPath.indexOf(way.id) !== -1 && currPath.length >= 3) continue;
 
                 // Check all "current" restrictions (where we've already walked the `FROM`)
-                var restrict = null;
+                let restrict = null;
                 for (j = 0; j < currRestrictions.length; j++) {
-                    var restriction = currRestrictions[j];
-                    var f = restriction.memberByRole('from');
-                    var v = restriction.membersByRole('via');
-                    var t = restriction.memberByRole('to');
-                    var isNo = /^no_/.test(restriction.tags.restriction);
-                    var isOnly = /^only_/.test(restriction.tags.restriction);
+                    const restriction = currRestrictions[j];
+                    const f = restriction.memberByRole('from');
+                    const v = restriction.membersByRole('via');
+                    const t = restriction.memberByRole('to');
+                    const isNo = /^no_/.test(restriction.tags.restriction);
+                    const isOnly = /^only_/.test(restriction.tags.restriction);
 
                     if (!(isNo || isOnly)) {
                         continue; // skip unsupported restriction values
                     }
 
                     // Does the current path match this turn restriction?
-                    var matchesFrom = (f.id === fromWayId);
-                    var matchesViaTo = false;
-                    var isAlongOnlyPath = false;
+                    const matchesFrom = (f.id === fromWayId);
+                    let matchesViaTo = false;
+                    let isAlongOnlyPath = false;
 
                     if (t.id === way.id) {     // match TO
 
@@ -416,17 +416,17 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                             ));
 
                         } else {                                         // match all VIA ways
-                            var pathVias = [];
+                            const pathVias = [];
                             for (k = 2; k < currPath.length; k +=2 ) {   // k = 2 skips FROM
                                 pathVias.push(currPath[k]);              // (path goes way-node-way...)
                             }
-                            var restrictionVias = [];
+                            const restrictionVias = [];
                             for (k = 0; k < v.length; k++) {
                                 if (v[k].type === 'way') {
                                     restrictionVias.push(v[k].id);
                                 }
                             }
-                            var diff = utilArrayDifference(pathVias, restrictionVias);
+                            const diff = utilArrayDifference(pathVias, restrictionVias);
                             matchesViaTo = !diff.length;
                         }
 
@@ -467,9 +467,9 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
         }
 
         function stepWay(entity, currPath, currRestrictions, matchedRestriction) {
-            var i;
+            let i;
             if (currPath.length >= 3) {     // this is a "complete" path..
-                var turnPath = currPath.slice();   // shallow copy
+                let turnPath = currPath.slice();   // shallow copy
 
                 // an indirect restriction - only include the partial path (starting at FROM)
                 if (matchedRestriction && matchedRestriction.direct === false) {
@@ -481,7 +481,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                     }
                 }
 
-                var turn = pathToTurn(turnPath);
+                const turn = pathToTurn(turnPath);
                 if (turn) {
                     if (matchedRestriction) {
                         turn.restrictionID = matchedRestriction.id;
@@ -498,10 +498,10 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             if (matchedRestriction && matchedRestriction.end) return;  // don't advance any further
 
             // which nodes can we step into?
-            var n1 = vgraph.entity(entity.first());
-            var n2 = vgraph.entity(entity.last());
-            var dist = geoSphericalDistance(n1.loc, n2.loc);
-            var nextNodes = [];
+            const n1 = vgraph.entity(entity.first());
+            const n2 = vgraph.entity(entity.last());
+            const dist = geoSphericalDistance(n1.loc, n2.loc);
+            const nextNodes = [];
 
             if (currPath.length > 1) {
                 if (dist > maxDistance) return;   // the next node is too far
@@ -520,24 +520,24 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
             nextNodes.forEach(function(nextNode) {
                 // gather restrictions FROM this way
-                var fromRestrictions = vgraph.parentRelations(entity).filter(function(r) {
+                const fromRestrictions = vgraph.parentRelations(entity).filter(function(r) {
                     if (!r.isRestriction()) return false;
 
-                    var f = r.memberByRole('from');
+                    const f = r.memberByRole('from');
                     if (!f || f.id !== entity.id) return false;
 
-                    var isOnly = /^only_/.test(r.tags.restriction);
+                    const isOnly = /^only_/.test(r.tags.restriction);
                     if (!isOnly) return true;
 
                     // `only_` restrictions only matter along the direction of the VIA - #4849
-                    var isOnlyVia = false;
-                    var v = r.membersByRole('via');
+                    let isOnlyVia = false;
+                    const v = r.membersByRole('via');
                     if (v.length === 1 && v[0].type === 'node') {   // via node
                         isOnlyVia = (v[0].id === nextNode.id);
                     } else {                                        // via way(s)
-                        for (var i = 0; i < v.length; i++) {
+                        for (let i = 0; i < v.length; i++) {
                             if (v[i].type !== 'way') continue;
-                            var viaWay = vgraph.entity(v[i].id);
+                            const viaWay = vgraph.entity(v[i].id);
                             if (viaWay.first() === nextNode.id || viaWay.last() === nextNode.id) {
                                 isOnlyVia = true;
                                 break;
@@ -555,15 +555,15 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
         // assumes path is alternating way-node-way of odd length
         function pathToTurn(path) {
             if (path.length < 3) return;
-            var fromWayId, fromNodeId, fromVertexId;
-            var toWayId, toNodeId, toVertexId;
-            var viaWayIds, viaNodeId, isUturn;
+            let fromNodeId, fromVertexId;
+            let toNodeId, toVertexId;
+            let viaWayIds, viaNodeId, isUturn;
 
-            fromWayId = path[0];
-            toWayId = path[path.length - 1];
+            const fromWayId = path[0];
+            const toWayId = path[path.length - 1];
 
             if (path.length === 3 && fromWayId === toWayId) {  // u turn
-                var way = vgraph.entity(fromWayId);
+                const way = vgraph.entity(fromWayId);
                 if (way.__oneWay) return null;
 
                 isUturn = true;
@@ -596,7 +596,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
 
             function adjacentNode(wayId, affixId) {
-                var nodes = vgraph.entity(wayId).nodes;
+                const nodes = vgraph.entity(wayId).nodes;
                 return affixId === nodes[0] ? nodes[1] : nodes[nodes.length - 2];
             }
         }
@@ -608,16 +608,16 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
 
 export function osmInferRestriction(graph, turn, projection) {
-    var fromWay = graph.entity(turn.from.way);
-    var fromNode = graph.entity(turn.from.node);
-    var fromVertex = graph.entity(turn.from.vertex);
-    var toWay = graph.entity(turn.to.way);
-    var toNode = graph.entity(turn.to.node);
-    var toVertex = graph.entity(turn.to.vertex);
+    const fromWay = graph.entity(turn.from.way);
+    const fromNode = graph.entity(turn.from.node);
+    const fromVertex = graph.entity(turn.from.vertex);
+    const toWay = graph.entity(turn.to.way);
+    const toNode = graph.entity(turn.to.node);
+    const toVertex = graph.entity(turn.to.vertex);
 
-    var fromOneWay = (fromWay.tags.oneway === 'yes');
-    var toOneWay = (toWay.tags.oneway === 'yes');
-    var angle = (geoAngle(fromVertex, fromNode, projection) -
+    const fromOneWay = (fromWay.tags.oneway === 'yes');
+    const toOneWay = (toWay.tags.oneway === 'yes');
+    let angle = (geoAngle(fromVertex, fromNode, projection) -
                 geoAngle(toVertex, toNode, projection)) * 180 / Math.PI;
 
     while (angle < 0) {

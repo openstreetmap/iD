@@ -17,36 +17,36 @@ export function behaviorPaste(context) {
 
         d3_event.preventDefault();
 
-        var baseGraph = context.graph();
-        var mouse = context.map().mouse();
-        var projection = context.projection;
-        var viewport = geoExtent(projection.clipExtent()).polygon();
+        const baseGraph = context.graph();
+        const mouse = context.map().mouse();
+        const projection = context.projection;
+        const viewport = geoExtent(projection.clipExtent()).polygon();
 
         if (!geoPointInPolygon(mouse, viewport)) return;
 
-        var oldIDs = context.copyIDs();
+        const oldIDs = context.copyIDs();
         if (!oldIDs.length) return;
 
-        var extent = geoExtent();
-        var oldGraph = context.copyGraph();
-        var newIDs = [];
+        const extent = geoExtent();
+        const oldGraph = context.copyGraph();
+        const newIDs = [];
 
-        var action = actionCopyEntities(oldIDs, oldGraph);
+        const action = actionCopyEntities(oldIDs, oldGraph);
         context.perform(action);
 
-        var copies = action.copies();
-        var originals = new Set();
+        const copies = action.copies();
+        const originals = new Set();
         Object.values(copies).forEach(function(entity) { originals.add(entity.id); });
 
-        for (var id in copies) {
-            var oldEntity = oldGraph.entity(id);
-            var newEntity = copies[id];
+        for (const id in copies) {
+            const oldEntity = oldGraph.entity(id);
+            const newEntity = copies[id];
 
             extent._extend(oldEntity.extent(oldGraph));
 
             // Exclude child nodes from newIDs if their parent way was also copied.
-            var parents = context.graph().parentWays(newEntity);
-            var parentCopied = parents.some(function(parent) {
+            const parents = context.graph().parentWays(newEntity);
+            const parentCopied = parents.some(function(parent) {
                 return originals.has(parent.id);
             });
 
@@ -56,8 +56,8 @@ export function behaviorPaste(context) {
         }
 
         // Put pasted objects where mouse pointer is..
-        var copyPoint = (context.copyLonLat() && projection(context.copyLonLat())) || projection(extent.center());
-        var delta = geoVecSubtract(mouse, copyPoint);
+        const copyPoint = (context.copyLonLat() && projection(context.copyLonLat())) || projection(extent.center());
+        const delta = geoVecSubtract(mouse, copyPoint);
 
         context.perform(actionMove(newIDs, delta, projection));
         context.enter(modeMove(context, newIDs, baseGraph));

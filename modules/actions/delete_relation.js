@@ -12,8 +12,8 @@ export function actionDeleteRelation(relationID, allowUntaggedMembers) {
     }
 
 
-    var action = function(graph) {
-        var relation = graph.entity(relationID);
+    const action = function(graph) {
+        const relation = graph.entity(relationID);
 
         graph.parentRelations(relation)
             .forEach(function(parent) {
@@ -25,11 +25,11 @@ export function actionDeleteRelation(relationID, allowUntaggedMembers) {
                 }
             });
 
-        var memberIDs = utilArrayUniq(relation.members.map(function(m) { return m.id; }));
+        const memberIDs = utilArrayUniq(relation.members.map(function(m) { return m.id; }));
         memberIDs.forEach(function(memberID) {
             graph = graph.replace(relation.removeMembersWithID(memberID));
 
-            var entity = graph.entity(memberID);
+            const entity = graph.entity(memberID);
             if (canDeleteEntity(entity, graph)) {
                 graph = actionDeleteMultiple([memberID])(graph);
             }

@@ -10,17 +10,17 @@ import { uiSection } from '../section';
 
 export function uiSectionBackgroundDisplayOptions(context) {
 
-    var section = uiSection('background-display-options', context)
+    const section = uiSection('background-display-options', context)
         .label(() => t.append('background.display_options'))
         .disclosureContent(renderDisclosureContent);
 
-    var _storedOpacity = prefs('background-opacity');
-    var _minVal = 0;
-    var _maxVal = 3;
+    const _storedOpacity = prefs('background-opacity');
+    const _minVal = 0;
+    const _maxVal = 3;
 
-    var _sliders = ['brightness', 'contrast', 'saturation', 'sharpness'];
+    const _sliders = ['brightness', 'contrast', 'saturation', 'sharpness'];
 
-    var _options = {
+    const _options = {
         brightness: (_storedOpacity !== null ? (+_storedOpacity) : 1),
         contrast: 1,
         saturation: 1,
@@ -45,15 +45,15 @@ export function uiSectionBackgroundDisplayOptions(context) {
     }
 
     function renderDisclosureContent(selection) {
-        var container = selection.selectAll('.display-options-container')
+        let container = selection.selectAll('.display-options-container')
             .data([0]);
 
-        var containerEnter = container.enter()
+        const containerEnter = container.enter()
             .append('div')
             .attr('class', 'display-options-container controls-list');
 
         // add slider controls
-        var slidersEnter = containerEnter.selectAll('.display-control')
+        const slidersEnter = containerEnter.selectAll('.display-control')
             .data(_sliders)
             .enter()
             .append('label')
@@ -64,7 +64,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .append('span')
             .attr('class', function(d) { return 'display-option-value display-option-value-' + d; });
 
-        var sildersControlEnter = slidersEnter
+        const sildersControlEnter = slidersEnter
             .append('div')
             .attr('class', 'control-wrap');
 
@@ -76,7 +76,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('max', _maxVal)
             .attr('step', '0.05')
             .on('input', function(d3_event, d) {
-                var val = d3_select(this).property('value');
+                let val = d3_select(this).property('value');
                 if (!val && d3_event && d3_event.target) {
                     val = d3_event.target.value;
                 }
@@ -102,7 +102,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .call(t.append('background.reset_all'))
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
-                for (var i = 0; i < _sliders.length; i++) {
+                for (let i = 0; i < _sliders.length; i++) {
                     updateValue(_sliders[i], 1);
                 }
             });

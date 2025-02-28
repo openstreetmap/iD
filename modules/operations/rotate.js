@@ -5,13 +5,13 @@ import { utilGetAllNodes, utilTotalExtent } from '../util/util';
 
 
 export function operationRotate(context, selectedIDs) {
-    var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
-    var nodes = utilGetAllNodes(selectedIDs, context.graph());
-    var coords = nodes.map(function(n) { return n.loc; });
-    var extent = utilTotalExtent(selectedIDs, context.graph());
+    const multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
+    const nodes = utilGetAllNodes(selectedIDs, context.graph());
+    const coords = nodes.map(function(n) { return n.loc; });
+    const extent = utilTotalExtent(selectedIDs, context.graph());
 
 
-    var operation = function() {
+    const operation = function() {
         context.enter(modeRotate(context, selectedIDs));
     };
 
@@ -38,9 +38,9 @@ export function operationRotate(context, selectedIDs) {
 
         function someMissing() {
             if (context.inIntro()) return false;
-            var osm = context.connection();
+            const osm = context.connection();
             if (osm) {
-                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                const missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
                 if (missing.length) {
                     missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
                     return true;
@@ -50,14 +50,14 @@ export function operationRotate(context, selectedIDs) {
         }
 
         function incompleteRelation(id) {
-            var entity = context.entity(id);
+            const entity = context.entity(id);
             return entity.type === 'relation' && !entity.isComplete(context.graph());
         }
     };
 
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
+        const disable = operation.disabled();
         return disable ?
             t.append('operations.rotate.' + disable + '.' + multi) :
             t.append('operations.rotate.description.' + multi);

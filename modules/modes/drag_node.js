@@ -30,21 +30,21 @@ import { utilArrayIntersection, utilKeybinding } from '../util';
 
 
 export function modeDragNode(context) {
-    var mode = {
+    const mode = {
         id: 'drag-node',
         button: 'browse'
     };
-    var hover = behaviorHover(context).altDisables(true)
+    const hover = behaviorHover(context).altDisables(true)
         .on('hover', context.ui().sidebar.hover);
-    var edit = behaviorEdit(context);
+    const edit = behaviorEdit(context);
 
-    var _nudgeInterval;
-    var _restoreSelectedIDs = [];
-    var _wasMidpoint = false;
-    var _isCancelled = false;
-    var _activeEntity;
-    var _startLoc;
-    var _lastLoc;
+    let _nudgeInterval;
+    let _restoreSelectedIDs = [];
+    let _wasMidpoint = false;
+    let _isCancelled = false;
+    let _activeEntity;
+    let _startLoc;
+    let _lastLoc;
 
 
     function startNudge(d3_event, entity, nudge) {
@@ -70,12 +70,12 @@ export function modeDragNode(context) {
 
 
     function connectAnnotation(nodeEntity, targetEntity) {
-        var nodeGeometry = nodeEntity.geometry(context.graph());
-        var targetGeometry = targetEntity.geometry(context.graph());
+        const nodeGeometry = nodeEntity.geometry(context.graph());
+        const targetGeometry = targetEntity.geometry(context.graph());
         if (nodeGeometry === 'vertex' && targetGeometry === 'vertex') {
-            var nodeParentWayIDs = context.graph().parentWays(nodeEntity);
-            var targetParentWayIDs = context.graph().parentWays(targetEntity);
-            var sharedParentWays = utilArrayIntersection(nodeParentWayIDs, targetParentWayIDs);
+            const nodeParentWayIDs = context.graph().parentWays(nodeEntity);
+            const targetParentWayIDs = context.graph().parentWays(targetEntity);
+            const sharedParentWays = utilArrayIntersection(nodeParentWayIDs, targetParentWayIDs);
             // if both vertices are part of the same way
             if (sharedParentWays.length !== 0) {
                 // if the nodes are next to each other, they are merged
@@ -129,7 +129,7 @@ export function modeDragNode(context) {
 
     function start(d3_event, entity) {
         _wasMidpoint = entity.type === 'midpoint';
-        var hasHidden = context.features().hasHiddenConnections(entity, context.graph());
+        const hasHidden = context.features().hasHiddenConnections(entity, context.graph());
         _isCancelled = !context.editable() || d3_event.shiftKey || hasHidden;
 
 
@@ -144,12 +144,12 @@ export function modeDragNode(context) {
         }
 
         if (_wasMidpoint) {
-            var midpoint = entity;
+            const midpoint = entity;
             entity = osmNode();
             context.perform(actionAddMidpoint(midpoint, entity));
             entity = context.entity(entity.id);   // get post-action entity
 
-            var vertex = context.surface().selectAll('.' + entity.id);
+            const vertex = context.surface().selectAll('.' + entity.id);
             drag.targetNode(vertex.node())
                 .targetEntity(entity);
 
@@ -177,7 +177,7 @@ export function modeDragNode(context) {
         } else {
             // When dragging, snap only to touch targets..
             // (this excludes area fills and active drawing elements)
-            var d = d3_event.target.__data__;
+            const d = d3_event.target.__data__;
             return (d && d.properties && d.properties.target) ? d : {};
         }
     }
@@ -186,21 +186,21 @@ export function modeDragNode(context) {
     function doMove(d3_event, entity, nudge) {
         nudge = nudge || [0, 0];
 
-        var currPoint = (d3_event && d3_event.point) || context.projection(_lastLoc);
-        var currMouse = geoVecSubtract(currPoint, nudge);
-        var loc = context.projection.invert(currMouse);
+        const currPoint = (d3_event && d3_event.point) || context.projection(_lastLoc);
+        const currMouse = geoVecSubtract(currPoint, nudge);
+        let loc = context.projection.invert(currMouse);
 
-        var target, edge;
+        let target, edge;
 
         if (!_nudgeInterval) {   // If not nudging at the edge of the viewport, try to snap..
             // related code
             // - `mode/drag_node.js`     `doMove()`
             // - `behavior/draw.js`      `click()`
             // - `behavior/draw_way.js`  `move()`
-            var d = datum(d3_event);
+            const d = datum(d3_event);
             target = d && d.properties && d.properties.entity;
-            var targetLoc = target && target.loc;
-            var targetNodes = d && d.properties && d.properties.nodes;
+            const targetLoc = target && target.loc;
+            const targetNodes = d && d.properties && d.properties.nodes;
 
             if (targetLoc) {   // snap to node/vertex - a point target with `.loc`
                 if (shouldSnapToNode(target)) {
@@ -220,7 +220,7 @@ export function modeDragNode(context) {
         );
 
         // Below here: validations
-        var isInvalid = false;
+        let isInvalid = false;
 
         // Check if this connection to `target` could cause relations to break..
         if (target) {
@@ -233,7 +233,7 @@ export function modeDragNode(context) {
         }
 
 
-        var nope = context.surface().classed('nope');
+        const nope = context.surface().classed('nope');
         if (isInvalid === 'relation' || isInvalid === 'restriction') {
             if (!nope) {   // about to nope - show hint
                 context.ui().flash
@@ -244,7 +244,7 @@ export function modeDragNode(context) {
                     ))();
             }
         } else if (isInvalid) {
-            var errorID = isInvalid === 'line' ? 'lines' : 'areas';
+            const errorID = isInvalid === 'line' ? 'lines' : 'areas';
             context.ui().flash
                 .duration(3000)
                 .iconName('#iD-icon-no')
@@ -258,7 +258,7 @@ export function modeDragNode(context) {
         }
 
 
-        var nopeDisabled = context.surface().classed('nope-disabled');
+        const nopeDisabled = context.surface().classed('nope-disabled');
         if (nopeDisabled) {
             context.surface()
                 .classed('nope', false)
@@ -275,12 +275,12 @@ export function modeDragNode(context) {
 
     // Uses `actionConnect.disabled()` to know whether this connection is ok..
     function hasRelationConflict(entity, target, edge, graph) {
-        var testGraph = graph.update();  // copy
+        let testGraph = graph.update();  // copy
 
         // if snapping to way - add midpoint there and consider that the target..
         if (edge) {
-            var midpoint = osmNode();
-            var action = actionAddMidpoint({
+            const midpoint = osmNode();
+            const action = actionAddMidpoint({
                 loc: edge.loc,
                 edge: [target.nodes[edge.index - 1], target.nodes[edge.index]]
             }, midpoint);
@@ -290,26 +290,26 @@ export function modeDragNode(context) {
         }
 
         // can we connect to it?
-        var ids = [entity.id, target.id];
+        const ids = [entity.id, target.id];
         return actionConnect(ids).disabled(testGraph);
     }
 
 
     function hasInvalidGeometry(entity, graph) {
-        var parents = graph.parentWays(entity);
-        var i, j, k;
+        const parents = graph.parentWays(entity);
+        let i, j, k;
 
         for (i = 0; i < parents.length; i++) {
-            var parent = parents[i];
-            var nodes = [];
-            var activeIndex = null;    // which multipolygon ring contains node being dragged
+            const parent = parents[i];
+            let nodes = [];
+            let activeIndex = null;    // which multipolygon ring contains node being dragged
 
             // test any parent multipolygons for valid geometry
-            var relations = graph.parentRelations(parent);
+            const relations = graph.parentRelations(parent);
             for (j = 0; j < relations.length; j++) {
                 if (!relations[j].isMultipolygon()) continue;
 
-                var rings = osmJoinWays(relations[j].members, graph);
+                const rings = osmJoinWays(relations[j].members, graph);
 
                 // find active ring and test it for self intersections
                 for (k = 0; k < rings.length; k++) {
@@ -359,7 +359,7 @@ export function modeDragNode(context) {
         _lastLoc = context.projection.invert(point);
 
         doMove(d3_event, entity);
-        var nudge = geoViewportEdge(point, context.map().dimensions());
+        const nudge = geoViewportEdge(point, context.map().dimensions());
         if (nudge) {
             startNudge(d3_event, entity, nudge);
         } else {
@@ -370,11 +370,11 @@ export function modeDragNode(context) {
     function end(d3_event, entity) {
         if (_isCancelled) return;
 
-        var wasPoint = entity.geometry(context.graph()) === 'point';
+        const wasPoint = entity.geometry(context.graph()) === 'point';
 
-        var d = datum(d3_event);
-        var nope = (d && d.properties && d.properties.nope) || context.surface().classed('nope');
-        var target = d && d.properties && d.properties.entity;   // entity to snap to
+        const d = datum(d3_event);
+        const nope = (d && d.properties && d.properties.nope) || context.surface().classed('nope');
+        const target = d && d.properties && d.properties.entity;   // entity to snap to
 
         if (nope) {   // bounce back
             context.perform(
@@ -382,7 +382,7 @@ export function modeDragNode(context) {
             );
 
         } else if (target && target.type === 'way') {
-            var choice = geoChooseEdge(context.graph().childNodes(target), context.map().mouse(), context.projection, entity.id);
+            const choice = geoChooseEdge(context.graph().childNodes(target), context.map().mouse(), context.projection, entity.id);
             context.replace(
                 actionAddMidpoint({
                     loc: choice.loc,
@@ -414,7 +414,7 @@ export function modeDragNode(context) {
             context.enter(modeSelect(context, [entity.id]));
 
         } else {
-            var reselection = _restoreSelectedIDs.filter(function(id) {
+            const reselection = _restoreSelectedIDs.filter(function(id) {
                 return context.graph().hasEntity(id);
             });
 
@@ -428,8 +428,8 @@ export function modeDragNode(context) {
 
 
     function _actionBounceBack(nodeID, toLoc) {
-        var moveNode = actionMoveNode(nodeID, toLoc);
-        var action = function(graph, t) {
+        const moveNode = actionMoveNode(nodeID, toLoc);
+        const action = function(graph, t) {
             // last time through, pop off the bounceback perform.
             // it will then overwrite the initial perform with a moveNode that does nothing
             if (t === 1) context.pop();
@@ -446,7 +446,7 @@ export function modeDragNode(context) {
     }
 
 
-    var drag = behaviorDrag()
+    const drag = behaviorDrag()
         .selector('.layer-touch.points .target')
         .surface(context.container().select('.main-map').node())
         .origin(origin)

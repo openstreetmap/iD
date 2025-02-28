@@ -1,7 +1,7 @@
 describe('iD.coreTree', function() {
     describe('#rebase', function() {
         it('adds entities to the tree', function() {
-            var graph = iD.coreGraph(),
+            const graph = iD.coreGraph(),
                 tree = iD.coreTree(graph),
                 node = iD.osmNode({id: 'n', loc: [1, 1]});
 
@@ -12,7 +12,7 @@ describe('iD.coreTree', function() {
         });
 
         it('is idempotent', function() {
-            var graph = iD.coreGraph(),
+            const graph = iD.coreGraph(),
                 tree = iD.coreTree(graph),
                 node = iD.osmNode({id: 'n', loc: [1, 1]}),
                 extent = iD.geoExtent([0, 0], [2, 2]);
@@ -27,7 +27,7 @@ describe('iD.coreTree', function() {
         });
 
         it('does not insert if entity has a modified version', function() {
-            var graph = iD.coreGraph(),
+            const graph = iD.coreGraph(),
                 tree = iD.coreTree(graph),
                 node = iD.osmNode({id: 'n', loc: [1, 1]}),
                 node_ = node.update({loc: [10, 10]}),
@@ -43,10 +43,10 @@ describe('iD.coreTree', function() {
         });
 
         it('does not error on self-referencing relations', function() {
-            var graph = iD.coreGraph(),
+            const graph = iD.coreGraph(),
                 tree = iD.coreTree(graph),
-                node = iD.osmNode({id: 'n', loc: [1, 1]}),
-                relation = iD.osmRelation();
+                node = iD.osmNode({id: 'n', loc: [1, 1]});
+            let relation = iD.osmRelation();
 
             relation = relation.addMember({id: node.id});
             relation = relation.addMember({id: relation.id});
@@ -58,9 +58,9 @@ describe('iD.coreTree', function() {
         });
 
         it('adjusts entities that are force-rebased', function() {
-            var graph = iD.coreGraph(),
-                tree = iD.coreTree(graph),
-                node = iD.osmNode({id: 'n', loc: [1, 1]});
+            const graph = iD.coreGraph(),
+                tree = iD.coreTree(graph);
+            let node = iD.osmNode({id: 'n', loc: [1, 1]});
 
             graph.rebase([node], [graph]);
             tree.rebase([node]);
@@ -75,8 +75,8 @@ describe('iD.coreTree', function() {
 
     describe('#intersects', function() {
         it('includes entities within extent, excludes those without', function() {
-            var graph = iD.coreGraph(),
-                tree = iD.coreTree(graph),
+            let graph = iD.coreGraph();
+            const tree = iD.coreTree(graph),
                 n1 = iD.osmNode({loc: [1, 1]}),
                 n2 = iD.osmNode({loc: [3, 3]}),
                 extent = iD.geoExtent([0, 0], [2, 2]);
@@ -86,7 +86,7 @@ describe('iD.coreTree', function() {
         });
 
         it('includes intersecting relations after incomplete members are loaded', function() {
-            var graph = iD.coreGraph(),
+            const graph = iD.coreGraph(),
                 tree = iD.coreTree(graph),
                 n1 = iD.osmNode({id: 'n1', loc: [0, 0]}),
                 n2 = iD.osmNode({id: 'n2', loc: [1, 1]}),
@@ -104,7 +104,7 @@ describe('iD.coreTree', function() {
 
         // This happens when local storage includes a changed way but not its nodes.
         it('includes intersecting ways after missing nodes are loaded', function() {
-            var base = iD.coreGraph(),
+            const base = iD.coreGraph(),
                 tree = iD.coreTree(base),
                 node = iD.osmNode({id: 'n', loc: [0.5, 0.5]}),
                 way = iD.osmWay({nodes: ['n']}),
@@ -119,8 +119,8 @@ describe('iD.coreTree', function() {
         });
 
         it('adjusts parent ways when a member node is moved', function() {
-            var graph = iD.coreGraph(),
-                tree = iD.coreTree(graph),
+            let graph = iD.coreGraph();
+            const tree = iD.coreTree(graph),
                 node = iD.osmNode({id: 'n', loc: [1, 1]}),
                 way = iD.osmWay({nodes: ['n']}),
                 extent = iD.geoExtent([0, 0], [2, 2]);
@@ -133,8 +133,8 @@ describe('iD.coreTree', function() {
         });
 
         it('adjusts parent relations when a member node is moved', function() {
-            var graph = iD.coreGraph(),
-                tree = iD.coreTree(graph),
+            let graph = iD.coreGraph();
+            const tree = iD.coreTree(graph),
                 node = iD.osmNode({id: 'n', loc: [1, 1]}),
                 relation = iD.osmRelation({members: [{type: 'node', id: 'n'}]}),
                 extent = iD.geoExtent([0, 0], [2, 2]);
@@ -147,8 +147,8 @@ describe('iD.coreTree', function() {
         });
 
         it('adjusts all parent relations when a member node is moved', function() {
-            var graph = iD.coreGraph(),
-                tree = iD.coreTree(graph),
+            let graph = iD.coreGraph();
+            const tree = iD.coreTree(graph),
                 node = iD.osmNode({id: 'n', loc: [1, 1]}),
                 relation1 = iD.osmRelation({members: [{type: 'node', id: 'n'}]}),
                 relation2 = iD.osmRelation({members: [{type: 'node', id: 'n'}]}),
@@ -162,8 +162,8 @@ describe('iD.coreTree', function() {
         });
 
         it('adjusts parent relations of parent ways when a member node is moved', function() {
-            var graph = iD.coreGraph(),
-                tree = iD.coreTree(graph),
+            let graph = iD.coreGraph();
+            const tree = iD.coreTree(graph),
                 node = iD.osmNode({id: 'n', loc: [1, 1]}),
                 way = iD.osmWay({id: 'w', nodes: ['n']}),
                 relation = iD.osmRelation({members: [{type: 'multipolygon', id: 'w'}]}),
@@ -177,8 +177,8 @@ describe('iD.coreTree', function() {
         });
 
         it('adjusts parent ways when a member node is removed', function() {
-            var graph = iD.coreGraph(),
-                tree = iD.coreTree(graph),
+            let graph = iD.coreGraph();
+            const tree = iD.coreTree(graph),
                 n1 = iD.osmNode({id: 'n1', loc: [1, 1]}),
                 n2 = iD.osmNode({id: 'n2', loc: [3, 3]}),
                 way = iD.osmWay({nodes: ['n1', 'n2']}),
@@ -193,8 +193,8 @@ describe('iD.coreTree', function() {
 
         it('don\'t include parent way multiple times when multiple child nodes are moved', function() {
             // checks against the following regression: https://github.com/openstreetmap/iD/issues/1978
-            var graph = iD.coreGraph(),
-                tree = iD.coreTree(graph),
+            let graph = iD.coreGraph();
+            const tree = iD.coreTree(graph),
                 n1 = iD.osmNode({id: 'n1', loc: [1, 1]}),
                 n2 = iD.osmNode({id: 'n2', loc: [3, 3]}),
                 way = iD.osmWay({id: 'w1', nodes: ['n1', 'n2']}),
@@ -204,13 +204,13 @@ describe('iD.coreTree', function() {
             expect(tree.intersects(extent, graph)).to.eql([n1, n2, way]);
 
             graph = graph.replace(n1.move([1.1,1.1])).replace(n2.move([2.1,2.1]));
-            var intersects = tree.intersects(extent, graph).map(function(e) { return e.id; });
+            const intersects = tree.intersects(extent, graph).map(function(e) { return e.id; });
             expect(intersects).to.have.same.members(['n1','n2','w1']);
         });
 
         it('doesn\'t include removed entities', function() {
-            var graph = iD.coreGraph(),
-                tree = iD.coreTree(graph),
+            let graph = iD.coreGraph();
+            const tree = iD.coreTree(graph),
                 node = iD.osmNode({loc: [1, 1]}),
                 extent = iD.geoExtent([0, 0], [2, 2]);
 
@@ -222,12 +222,12 @@ describe('iD.coreTree', function() {
         });
 
         it('doesn\'t include removed entities after rebase', function() {
-            var base = iD.coreGraph(),
+            const base = iD.coreGraph(),
                 tree = iD.coreTree(base),
                 node = iD.osmNode({id: 'n', loc: [1, 1]}),
                 extent = iD.geoExtent([0, 0], [2, 2]);
 
-            var graph = base.replace(node).remove(node);
+            const graph = base.replace(node).remove(node);
             expect(tree.intersects(extent, graph)).to.eql([]);
 
             base.rebase([node], [base]);
@@ -236,14 +236,14 @@ describe('iD.coreTree', function() {
         });
 
         it('handles recursive relations', function() {
-            var base = iD.coreGraph(),
+            const base = iD.coreGraph(),
                 tree = iD.coreTree(base),
                 node = iD.osmNode({id: 'n', loc: [1, 1]}),
                 r1   = iD.osmRelation({id: 'r1', members: [{id: 'n'}]}),
                 r2   = iD.osmRelation({id: 'r2', members: [{id: 'r1'}]}),
                 extent = iD.geoExtent([0, 0], [2, 2]);
 
-            var graph = base.replace(r1).replace(r2);
+            const graph = base.replace(r1).replace(r2);
             expect(tree.intersects(extent, graph)).to.eql([]);
 
             base.rebase([node], [base, graph]);

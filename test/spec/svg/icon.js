@@ -1,5 +1,5 @@
 describe('iD.svgIcon', function () {
-    var selection;
+    let selection;
 
     beforeEach(function () {
         selection = d3.select(document.createElement('div'));

@@ -1,7 +1,7 @@
 
 // Patterns only work in Firefox when set directly on element.
 // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
-var patterns = {
+const patterns = {
     // tag - pattern name
     // -or-
     // tag - value - pattern name
@@ -83,31 +83,31 @@ export function svgTagPattern(tags) {
         return null;
     }
 
-    for (var tag in patterns) {
-        var entityValue = tags[tag];
+    for (const tag in patterns) {
+        const entityValue = tags[tag];
         if (!entityValue) continue;
 
         if (typeof patterns[tag] === 'string') { // extra short syntax (just tag) - pattern name
             return 'pattern-' + patterns[tag];
         } else {
-            var values = patterns[tag];
-            for (var value in values) {
+            const values = patterns[tag];
+            for (const value in values) {
                 if (entityValue !== value) continue;
 
-                var rules = values[value];
+                const rules = values[value];
                 if (typeof rules === 'string') { // short syntax - pattern name
                     return 'pattern-' + rules;
                 }
 
                 // long syntax - rule array
-                for (var ruleKey in rules) {
-                    var rule = rules[ruleKey];
+                for (const ruleKey in rules) {
+                    const rule = rules[ruleKey];
 
-                    var pass = true;
-                    for (var criterion in rule) {
+                    let pass = true;
+                    for (const criterion in rule) {
                         if (criterion !== 'pattern') { // reserved for pattern name
                             // The only rule is a required tag-value pair
-                            var v = tags[criterion];
+                            const v = tags[criterion];
                             if (!v || v !== rule[criterion]) {
                                 pass = false;
                                 break;

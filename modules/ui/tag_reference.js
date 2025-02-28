@@ -18,13 +18,13 @@ import { svgIcon } from '../svg/icon';
 // }
 //
 export function uiTagReference(what) {
-    var wikibase = what.qid ? services.wikidata : services.osmWikibase;
-    var tagReference = {};
+    const wikibase = what.qid ? services.wikidata : services.osmWikibase;
+    const tagReference = {};
 
-    var _button = d3_select(null);
-    var _body = d3_select(null);
-    var _loaded;
-    var _showing;
+    let _button = d3_select(null);
+    let _body = d3_select(null);
+    let _loaded;
+    let _showing;
 
 
     function load() {
@@ -61,7 +61,7 @@ export function uiTagReference(what) {
             done();
         }
 
-        var tagReferenceDescription = _body
+        let tagReferenceDescription = _body
             .append('p')
             .attr('class', 'tag-reference-description')
             .append('span');
@@ -123,7 +123,7 @@ export function uiTagReference(what) {
         _showing = true;
 
         _button.selectAll('svg.icon use').each(function() {
-            var iconUse = d3_select(this);
+            const iconUse = d3_select(this);
             if (iconUse.attr('href') === '#iD-icon-info') {
                 iconUse.attr('href', '#iD-icon-info-filled');
             }
@@ -144,7 +144,7 @@ export function uiTagReference(what) {
         _showing = false;
 
         _button.selectAll('svg.icon use').each(function() {
-            var iconUse = d3_select(this);
+            const iconUse = d3_select(this);
             if (iconUse.attr('href') === '#iD-icon-info-filled') {
                 iconUse.attr('href', '#iD-icon-info');
             }
@@ -181,7 +181,7 @@ export function uiTagReference(what) {
 
 
     tagReference.body = function(selection) {
-        var itemID = what.qid || (what.key + '-' + (what.value || ''));
+        const itemID = what.qid || (what.key + '-' + (what.value || ''));
         _body = selection.selectAll('.tag-reference-body')
             .data([itemID], function(d) { return d; });
 

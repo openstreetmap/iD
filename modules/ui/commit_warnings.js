@@ -9,26 +9,26 @@ import { utilEntityOrMemberSelector } from '../util';
 export function uiCommitWarnings(context) {
 
     function commitWarnings(selection) {
-        var issuesBySeverity = context.validator()
+        const issuesBySeverity = context.validator()
             .getIssuesBySeverity({ what: 'edited', where: 'all', includeDisabledRules: true });
 
-        for (var severity in issuesBySeverity) {
-            var issues = issuesBySeverity[severity];
+        for (const severity in issuesBySeverity) {
+            let issues = issuesBySeverity[severity];
 
             if (severity !== 'error') {      // exclude 'fixme' and similar - #8603
                 issues = issues.filter(function(issue) { return issue.type !== 'help_request'; });
             }
 
-            var section = severity + '-section';
-            var issueItem = severity + '-item';
+            const section = severity + '-section';
+            const issueItem = severity + '-item';
 
-            var container = selection.selectAll('.' + section)
+            let container = selection.selectAll('.' + section)
                 .data(issues.length ? [0] : []);
 
             container.exit()
                 .remove();
 
-            var containerEnter = container.enter()
+            const containerEnter = container.enter()
                 .append('div')
                 .attr('class', 'modal-section ' + section + ' fillL2');
 
@@ -44,17 +44,17 @@ export function uiCommitWarnings(context) {
                 .merge(container);
 
 
-            var items = container.select('ul').selectAll('li')
+            let items = container.select('ul').selectAll('li')
                 .data(issues, function(d) { return d.key; });
 
             items.exit()
                 .remove();
 
-            var itemsEnter = items.enter()
+            const itemsEnter = items.enter()
                 .append('li')
                 .attr('class', issueItem);
 
-            var buttons = itemsEnter
+            const buttons = itemsEnter
                 .append('button')
                 .on('mouseover', function(d3_event, d) {
                     if (d.entityIds) {

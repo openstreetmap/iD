@@ -6,8 +6,8 @@ import { utilRebind } from '../util/rebind';
 
 
 export function behaviorAddWay(context) {
-    var dispatch = d3_dispatch('start', 'startFromWay', 'startFromNode');
-    var draw = behaviorDraw(context);
+    const dispatch = d3_dispatch('start', 'startFromWay', 'startFromNode');
+    const draw = behaviorDraw(context);
 
     function behavior(surface) {
         draw.on('click', function() { dispatch.apply('start', this, arguments); })

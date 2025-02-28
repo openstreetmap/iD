@@ -8,12 +8,12 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';
 
 export function validationUnsquareWay(context) {
-    var type = 'unsquare_way';
-    var DEFAULT_DEG_THRESHOLD = 5;   // see also issues.js
+    const type = 'unsquare_way';
+    const DEFAULT_DEG_THRESHOLD = 5;   // see also issues.js
 
     // use looser epsilon for detection to reduce warnings of buildings that are essentially square already
-    var epsilon = 0.05;
-    var nodeThreshold = 10;
+    const epsilon = 0.05;
+    const nodeThreshold = 10;
 
     function isBuilding(entity, graph) {
         if (entity.type !== 'way' || entity.geometry(graph) !== 'area') return false;
@@ -21,26 +21,26 @@ export function validationUnsquareWay(context) {
     }
 
 
-    var validation = function checkUnsquareWay(entity, graph) {
+    const validation = function checkUnsquareWay(entity, graph) {
 
         if (!isBuilding(entity, graph)) return [];
 
         // don't flag ways marked as physically unsquare
         if (entity.tags.nonsquare === 'yes') return [];
 
-        var isClosed = entity.isClosed();
+        const isClosed = entity.isClosed();
         if (!isClosed) return [];        // this building has bigger problems
 
         // don't flag ways with lots of nodes since they are likely detail-mapped
-        var nodes = graph.childNodes(entity).slice();    // shallow copy
+        const nodes = graph.childNodes(entity).slice();    // shallow copy
         if (nodes.length > nodeThreshold + 1) return [];   // +1 because closing node appears twice
 
         // ignore if not all nodes are fully downloaded
-        var osm = services.osm;
+        const osm = services.osm;
         if (!osm || nodes.some(function(node) { return !osm.isDataLoaded(node.loc); })) return [];
 
         // don't flag connected ways to avoid unresolvable unsquare loops
-        var hasConnectedSquarableWays = nodes.some(function(node) {
+        const hasConnectedSquarableWays = nodes.some(function(node) {
             return graph.parentWays(node).some(function(way) {
                 if (way.id === entity.id) return false;
                 if (isBuilding(way, graph)) return true;
@@ -55,17 +55,17 @@ export function validationUnsquareWay(context) {
 
 
         // user-configurable square threshold
-        var storedDegreeThreshold = prefs('validate-square-degrees');
-        var degreeThreshold = isFinite(storedDegreeThreshold) ? Number(storedDegreeThreshold) : DEFAULT_DEG_THRESHOLD;
+        const storedDegreeThreshold = prefs('validate-square-degrees');
+        const degreeThreshold = isFinite(storedDegreeThreshold) ? Number(storedDegreeThreshold) : DEFAULT_DEG_THRESHOLD;
 
-        var points = nodes.map(function(node) { return context.projection(node.loc); });
+        const points = nodes.map(function(node) { return context.projection(node.loc); });
         if (!geoOrthoCanOrthogonalize(points, isClosed, epsilon, degreeThreshold, true)) return [];
 
-        var autoArgs;
+        let autoArgs;
         // don't allow autosquaring features linked to wikidata
         if (!entity.tags.wikidata) {
             // use same degree threshold as for detection
-            var autoAction = actionOrthogonalize(entity.id, context.projection, undefined, degreeThreshold);
+            const autoAction = actionOrthogonalize(entity.id, context.projection, undefined, degreeThreshold);
             autoAction.transitionable = false;  // when autofixing, do it instantly
             autoArgs = [autoAction, t('operations.orthogonalize.annotation.feature', { n: 1 })];
         }
@@ -75,7 +75,7 @@ export function validationUnsquareWay(context) {
             subtype: 'building',
             severity: 'warning',
             message: function(context) {
-                var entity = context.hasEntity(this.entityIds[0]);
+                const entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.unsquare_way.message', {
                     feature: utilDisplayLabel(entity, context.graph())
                 }) : '';
@@ -90,7 +90,7 @@ export function validationUnsquareWay(context) {
                         title: t.append('issues.fix.square_feature.title'),
                         autoArgs: autoArgs,
                         onClick: function(context, completionHandler) {
-                            var entityId = this.issue.entityIds[0];
+                            const entityId = this.issue.entityIds[0];
                             // use same degree threshold as for detection
                             context.perform(
                                 actionOrthogonalize(entityId, context.projection, undefined, degreeThreshold),

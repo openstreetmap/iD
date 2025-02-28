@@ -219,7 +219,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         images = await filterImages(images);
         sequences = await filterSequences(sequences, service);
 
-        let traces = layer.selectAll('.sequences').selectAll('.sequence')
+        const traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.id; });
 
         // exit
@@ -345,7 +345,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .merge(layer);
 
         if (enabled) {
-            let zoom = ~~context.map().zoom();
+            const zoom = ~~context.map().zoom();
             if (service){
                 if (zoom >= imageMinZoom) {
                     editOn();

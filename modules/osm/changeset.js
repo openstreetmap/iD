@@ -48,16 +48,16 @@ Object.assign(osmChangeset.prototype, {
     // Generate [osmChange](http://wiki.openstreetmap.org/wiki/OsmChange)
     // XML. Returns a string.
     osmChangeJXON: function(changes) {
-        var changeset_id = this.id;
+        const changeset_id = this.id;
 
         function nest(x, order) {
-            var groups = {};
-            for (var i = 0; i < x.length; i++) {
-                var tagName = Object.keys(x[i])[0];
+            const groups = {};
+            for (let i = 0; i < x.length; i++) {
+                const tagName = Object.keys(x[i])[0];
                 if (!groups[tagName]) groups[tagName] = [];
                 groups[tagName].push(x[i][tagName]);
             }
-            var ordered = {};
+            const ordered = {};
             order.forEach(function(o) {
                 if (groups[o]) ordered[o] = groups[o];
             });
@@ -83,14 +83,14 @@ Object.assign(osmChangeset.prototype, {
                 });
             }
 
-            var processing = [];
-            var sorted = {};
-            var relations = changes.relation;
+            let processing = [];
+            const sorted = {};
+            const relations = changes.relation;
 
             if (!relations) return changes;
 
-            for (var i = 0; i < relations.length; i++) {
-                var relation = relations[i];
+            for (let i = 0; i < relations.length; i++) {
+                const relation = relations[i];
 
                 // skip relation if already sorted
                 if (!sorted[relation['@id']]) {
@@ -98,7 +98,7 @@ Object.assign(osmChangeset.prototype, {
                 }
 
                 while (processing.length > 0) {
-                    var next = processing[0],
+                    const next = processing[0],
                     deps = next.member.map(resolve).filter(Boolean).filter(isNew);
                     if (deps.length === 0) {
                         sorted[next['@id']] = next;

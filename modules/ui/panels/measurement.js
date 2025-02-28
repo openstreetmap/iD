@@ -25,7 +25,7 @@ export function uiPanelMeasurement(context) {
     function toLineString(feature) {
         if (feature.type === 'LineString') return feature;
 
-        var result = { type: 'LineString', coordinates: [] };
+        const result = { type: 'LineString', coordinates: [] };
         if (feature.type === 'Polygon') {
             result.coordinates = feature.coordinates[0];
         } else if (feature.type === 'MultiPolygon') {
@@ -35,32 +35,32 @@ export function uiPanelMeasurement(context) {
         return result;
     }
 
-    var _isImperial = !localizer.usesMetric();
+    let _isImperial = !localizer.usesMetric();
 
     function redraw(selection) {
-        var graph = context.graph();
-        var selectedNoteID = context.selectedNoteID();
-        var osm = services.osm;
+        const graph = context.graph();
+        const selectedNoteID = context.selectedNoteID();
+        const osm = services.osm;
 
-        var localeCode = localizer.localeCode();
+        const localeCode = localizer.localeCode();
 
-        var heading;
-        var center, location, centroid;
-        var closed, geometry;
-        var totalNodeCount, length = 0, area = 0, distance;
+        let heading;
+        let center, location, centroid;
+        let closed, geometry;
+        let totalNodeCount, length = 0, area = 0, distance;
 
         if (selectedNoteID && osm) {       // selected 1 note
 
-            var note = osm.getNote(selectedNoteID);
+            const note = osm.getNote(selectedNoteID);
             heading = t.html('note.note') + ' ' + selectedNoteID;
             location = note.loc;
             geometry = 'note';
 
         } else {                           // selected 1..n entities
-            var selectedIDs = context.selectedIDs().filter(function(id) {
+            const selectedIDs = context.selectedIDs().filter(function(id) {
                 return context.hasEntity(id);
             });
-            var selected = selectedIDs.map(function(id) {
+            const selected = selectedIDs.map(function(id) {
                 return context.entity(id);
             });
 
@@ -68,15 +68,15 @@ export function uiPanelMeasurement(context) {
                 t.html('info_panels.selected', { n: selected.length });
 
             if (selected.length) {
-                var extent = geoExtent();
-                for (var i in selected) {
-                    var entity = selected[i];
+                const extent = geoExtent();
+                for (const i in selected) {
+                    const entity = selected[i];
                     extent._extend(entity.extent(graph));
 
                     geometry = entity.geometry(graph);
                     if (geometry === 'line' || geometry === 'area') {
                         closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate());
-                        var feature = entity.asGeoJSON(graph);
+                        const feature = entity.asGeoJSON(graph);
                         length += radiansToMeters(d3_geoLength(toLineString(feature)));
                         centroid = d3_geoPath(context.projection).centroid(entity.asGeoJSON(graph));
                         centroid = centroid && context.projection.invert(centroid);
@@ -122,9 +122,9 @@ export function uiPanelMeasurement(context) {
                 .html(heading);
         }
 
-        var list = selection
+        const list = selection
             .append('ul');
-        var coordItem;
+        let coordItem;
 
         if (geometry) {
             list
@@ -199,7 +199,7 @@ export function uiPanelMeasurement(context) {
         }
 
         if (length || area || typeof distance === 'number') {
-            var toggle  = _isImperial ? 'imperial' : 'metric';
+            const toggle  = _isImperial ? 'imperial' : 'metric';
             selection
                 .append('a')
                 .call(t.append('info_panels.measurement.' + toggle))
@@ -214,7 +214,7 @@ export function uiPanelMeasurement(context) {
     }
 
 
-    var panel = function(selection) {
+    const panel = function(selection) {
         selection.call(redraw);
 
         context.map()

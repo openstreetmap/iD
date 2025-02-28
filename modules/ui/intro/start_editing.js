@@ -10,11 +10,11 @@ import { utilRebind } from '../../util/rebind';
 
 
 export function uiIntroStartEditing(context, reveal) {
-    var dispatch = d3_dispatch('done', 'startEditing');
-    var modalSelection = d3_select(null);
+    const dispatch = d3_dispatch('done', 'startEditing');
+    let modalSelection = d3_select(null);
 
 
-    var chapter = {
+    const chapter = {
         title: 'intro.startediting.title'
     };
 
@@ -56,7 +56,7 @@ export function uiIntroStartEditing(context, reveal) {
 
         modalSelection.selectAll('.close').remove();
 
-        var startbutton = modalSelection.select('.content')
+        const startbutton = modalSelection.select('.content')
             .attr('class', 'fillL')
             .append('button')
                 .attr('class', 'modal-section huge-modal-button')

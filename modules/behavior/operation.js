@@ -2,7 +2,7 @@
 
 /* Creates a keybinding behavior for an operation */
 export function behaviorOperation(context) {
-    var _operation;
+    let _operation;
 
     /** @param {KeyboardEvent} d3_event */
     function keypress(d3_event) {
@@ -13,7 +13,7 @@ export function behaviorOperation(context) {
 
         d3_event.preventDefault();
 
-        var disabled = _operation.disabled();
+        const disabled = _operation.disabled();
 
         if (disabled) {
             context.ui().flash

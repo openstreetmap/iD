@@ -17,18 +17,18 @@ import { fileFetcher } from '../../core';
 
 export function uiSectionRawTagEditor(id, context) {
 
-    var section = uiSection(id, context)
+    const section = uiSection(id, context)
         .classes('raw-tag-editor')
         .label(function() {
-            var count = Object.keys(_tags).filter(function(d) { return d; }).length;
+            const count = Object.keys(_tags).filter(function(d) { return d; }).length;
             return t.append('inspector.title_count', { title: t('inspector.tags'), count: count });
         })
         .expandedByDefault(false)
         .disclosureContent(renderDisclosureContent);
 
-    var taginfo = services.taginfo;
-    var dispatch = d3_dispatch('change');
-    var availableViews = [
+    const taginfo = services.taginfo;
+    const dispatch = d3_dispatch('change');
+    const availableViews = [
         { id: 'list', icon: '#fas-th-list' },
         { id: 'text', icon: '#fas-i-cursor' }
     ];
@@ -38,17 +38,17 @@ export function uiSectionRawTagEditor(id, context) {
         .then((d) => { _discardTags = d; })
         .catch(() => { /* ignore */ });
 
-    var _tagView = (prefs('raw-tag-editor-view') || 'list');   // 'list, 'text'
-    var _readOnlyTags = [];
+    let _tagView = (prefs('raw-tag-editor-view') || 'list');   // 'list, 'text'
+    let _readOnlyTags = [];
     // the keys in the order we want them to display
-    var _orderedKeys = [];
-    var _showBlank = false;
-    var _pendingChange = null;
-    var _state;
-    var _presets;
-    var _tags;
-    var _entityIDs;
-    var _didInteract = false;
+    let _orderedKeys = [];
+    let _showBlank = false;
+    let _pendingChange = null;
+    let _state;
+    let _presets;
+    let _tags;
+    let _entityIDs;
+    let _didInteract = false;
 
     function interacted() {
         _didInteract = true;
@@ -65,14 +65,14 @@ export function uiSectionRawTagEditor(id, context) {
         // reorder the keys alphabetically.
         // We trigger this by emptying the `_orderedKeys` array, then it will be rebuilt here.
         // Otherwise leave their order alone - #5857, #5927
-        var all = Object.keys(_tags).sort();
-        var missingKeys = utilArrayDifference(all, _orderedKeys);
-        for (var i in missingKeys) {
+        const all = Object.keys(_tags).sort();
+        const missingKeys = utilArrayDifference(all, _orderedKeys);
+        for (const i in missingKeys) {
             _orderedKeys.push(missingKeys[i]);
         }
 
         // assemble row data
-        var rowData = _orderedKeys.map(function(key, i) {
+        const rowData = _orderedKeys.map(function(key, i) {
             return { index: i, key: key, value: _tags[key] };
         });
 
@@ -84,18 +84,18 @@ export function uiSectionRawTagEditor(id, context) {
 
 
         // View Options
-        var options = wrap.selectAll('.raw-tag-options')
+        const options = wrap.selectAll('.raw-tag-options')
             .data([0]);
 
         options.exit()
             .remove();
 
-        var optionsEnter = options.enter()
+        const optionsEnter = options.enter()
             .insert('div', ':first-child')
             .attr('class', 'raw-tag-options')
             .attr('role', 'tablist');
 
-        var optionEnter = optionsEnter.selectAll('.raw-tag-option')
+        const optionEnter = optionsEnter.selectAll('.raw-tag-option')
             .data(availableViews, function(d) { return d.id; })
             .enter();
 
@@ -129,8 +129,8 @@ export function uiSectionRawTagEditor(id, context) {
 
 
         // View as Text
-        var textData = rowsToText(rowData);
-        var textarea = wrap.selectAll('.tag-text')
+        const textData = rowsToText(rowData);
+        let textarea = wrap.selectAll('.tag-text')
             .data([0]);
 
         textarea = textarea.enter()
@@ -151,7 +151,7 @@ export function uiSectionRawTagEditor(id, context) {
 
 
         // View as List
-        var list = wrap.selectAll('.tag-list')
+        let list = wrap.selectAll('.tag-list')
             .data([0]);
 
         list = list.enter()
@@ -161,7 +161,7 @@ export function uiSectionRawTagEditor(id, context) {
 
 
         // Container for the Add button
-        var addRowEnter = wrap.selectAll('.add-row')
+        const addRowEnter = wrap.selectAll('.add-row')
             .data([0])
             .enter()
             .append('div')
@@ -187,7 +187,7 @@ export function uiSectionRawTagEditor(id, context) {
 
 
         // Tag list items
-        var items = list.selectAll('.tag-row')
+        let items = list.selectAll('.tag-row')
             .data(rowData, function(d) { return d.key; });
 
         items.exit()
@@ -196,12 +196,12 @@ export function uiSectionRawTagEditor(id, context) {
 
 
         // Enter
-        var itemsEnter = items.enter()
+        const itemsEnter = items.enter()
             .append('li')
             .attr('class', 'tag-row')
             .classed('readonly', isReadOnly);
 
-        var innerWrap = itemsEnter.append('div')
+        const innerWrap = itemsEnter.append('div')
             .attr('class', 'inner-wrap');
 
         innerWrap
@@ -241,19 +241,19 @@ export function uiSectionRawTagEditor(id, context) {
 
         items
             .each(function(d) {
-                var row = d3_select(this);
-                var key = row.select('input.key');      // propagate bound data
-                var value = row.select('input.value');  // propagate bound data
+                const row = d3_select(this);
+                const key = row.select('input.key');      // propagate bound data
+                const value = row.select('input.value');  // propagate bound data
 
                 if (_entityIDs && taginfo && _state !== 'hover') {
                     bindTypeahead(key, value);
                 }
 
-                var referenceOptions = { key: d.key };
+                const referenceOptions = { key: d.key };
                 if (typeof d.value === 'string') {
                     referenceOptions.value = d.value;
                 }
-                var reference = uiTagReference(referenceOptions, context);
+                const reference = uiTagReference(referenceOptions, context);
 
                 if (_state === 'hover') {
                     reference.showing(false);
@@ -301,7 +301,7 @@ export function uiSectionRawTagEditor(id, context) {
     }
 
     function isReadOnly(d) {
-        for (var i = 0; i < _readOnlyTags.length; i++) {
+        for (let i = 0; i < _readOnlyTags.length; i++) {
             if (d.key.match(_readOnlyTags[i]) !== null) {
                 return true;
             }
@@ -312,10 +312,10 @@ export function uiSectionRawTagEditor(id, context) {
     function setTextareaHeight() {
         if (_tagView !== 'text') return;
 
-        var selection = d3_select(this);
-        var matches = selection.node().value.match(/\n/g);
-        var lineCount = 2 + Number(matches && matches.length);
-        var lineHeight = 20;
+        const selection = d3_select(this);
+        const matches = selection.node().value.match(/\n/g);
+        const lineCount = 2 + Number(matches && matches.length);
+        const lineHeight = 20;
 
         selection.style('height', lineCount * lineHeight + 'px');
     }
@@ -343,12 +343,12 @@ export function uiSectionRawTagEditor(id, context) {
     }
 
     function rowsToText(rows) {
-        var str = rows
+        const str = rows
             .filter(function(row) { return row.key && row.key.trim() !== ''; })
             .map(function(row) {
-                var rawVal = row.value;
+                let rawVal = row.value;
                 if (typeof rawVal !== 'string') rawVal = '*';
-                var val = rawVal ? stringify(rawVal) : '';
+                const val = rawVal ? stringify(rawVal) : '';
                 return stringify(row.key) + '=' + val;
             })
             .join('\n');
@@ -360,18 +360,18 @@ export function uiSectionRawTagEditor(id, context) {
     }
 
     function textChanged() {
-        var newText = this.value.trim();
-        var newTags = {};
+        const newText = this.value.trim();
+        const newTags = {};
         newText.split('\n').forEach(function(row) {
-            var m = row.match(/^\s*([^=]+)=(.*)$/);
+            const m = row.match(/^\s*([^=]+)=(.*)$/);
             if (m !== null) {
-                var k = context.cleanTagKey(unstringify(m[1].trim()));
-                var v = context.cleanTagValue(unstringify(m[2].trim()));
+                const k = context.cleanTagKey(unstringify(m[1].trim()));
+                const v = context.cleanTagValue(unstringify(m[2].trim()));
                 newTags[k] = v;
             }
         });
 
-        var tagDiff = utilTagDiff(_tags, newTags);
+        const tagDiff = utilTagDiff(_tags, newTags);
 
         _pendingChange  = _pendingChange || {};
 
@@ -413,9 +413,9 @@ export function uiSectionRawTagEditor(id, context) {
             value.call(uiCombobox(context, 'tag-value')
                 .minItems(1)
                 .fetcher(function(value, callback) {
-                    var keyString = utilGetSetValue(key);
+                    const keyString = utilGetSetValue(key);
                     if (!_tags[keyString]) return;
-                    var data = _tags[keyString].map(function(tagValue) {
+                    const data = _tags[keyString].map(function(tagValue) {
                         if (!tagValue) {
                             return {
                                 value: ' ',
@@ -435,7 +435,7 @@ export function uiSectionRawTagEditor(id, context) {
             return;
         }
 
-        var geometry = context.graph().geometry(_entityIDs[0]);
+        const geometry = context.graph().geometry(_entityIDs[0]);
 
         key.call(uiCombobox(context, 'tag-key')
             .fetcher(function(value, callback) {
@@ -473,9 +473,9 @@ export function uiSectionRawTagEditor(id, context) {
 
 
         function sort(value, data) {
-            var sameletter = [];
-            var other = [];
-            for (var i = 0; i < data.length; i++) {
+            const sameletter = [];
+            const other = [];
+            for (let i = 0; i < data.length; i++) {
                 if (data[i].value.substring(0, value.length) === value) {
                     sameletter.push(data[i]);
                 } else {
@@ -487,7 +487,7 @@ export function uiSectionRawTagEditor(id, context) {
     }
 
     function unbind() {
-        var row = d3_select(this);
+        const row = d3_select(this);
 
         row.selectAll('input.key')
             .call(uiCombobox.off, context);
@@ -499,12 +499,12 @@ export function uiSectionRawTagEditor(id, context) {
     function keyChange(d3_event, d) {
         if (d3_select(this).attr('readonly')) return;
 
-        var kOld = d.key;
+        const kOld = d.key;
 
         // exit if we are currently about to delete this row anyway - #6366
         if (_pendingChange && _pendingChange.hasOwnProperty(kOld) && _pendingChange[kOld] === undefined) return;
 
-        var kNew = context.cleanTagKey(this.value.trim());
+        const kNew = context.cleanTagKey(this.value.trim());
 
         // allow no change if the key should be readonly
         if (isReadOnly({ key: kNew })) {
@@ -521,7 +521,7 @@ export function uiSectionRawTagEditor(id, context) {
             section.selection().selectAll('.tag-list input.value')
                 .each(function(d) {
                     if (d.key === kNew) {     // send focus to that other value combo instead
-                        var input = d3_select(this).node();
+                        const input = d3_select(this).node();
                         input.focus();
                         input.select();
                     }
@@ -539,15 +539,15 @@ export function uiSectionRawTagEditor(id, context) {
             _pendingChange[kOld] = undefined;
         } else {
             // a new tag was added
-            let row = this.parentNode.parentNode;
-            let inputVal = d3_select(row).selectAll('input.value');
-            let vNew = context.cleanTagValue(utilGetSetValue(inputVal));
+            const row = this.parentNode.parentNode;
+            const inputVal = d3_select(row).selectAll('input.value');
+            const vNew = context.cleanTagValue(utilGetSetValue(inputVal));
             _pendingChange[kNew] = vNew;
             utilGetSetValue(inputVal, vNew);
         }
 
         // update the ordered key index so this row doesn't change position
-        var existingKeyIndex = _orderedKeys.indexOf(kOld);
+        const existingKeyIndex = _orderedKeys.indexOf(kOld);
         if (existingKeyIndex !== -1) _orderedKeys[existingKeyIndex] = kNew;
 
         d.key = kNew;    // update datum to avoid exit/enter on tag update
@@ -600,7 +600,7 @@ export function uiSectionRawTagEditor(id, context) {
 
     function scheduleChange() {
         // Cache IDs in case the editor is reloaded before the change event is called. - #6028
-        var entityIDs = _entityIDs;
+        const entityIDs = _entityIDs;
 
         // Delay change in case this change is blurring an edited combo. - #5878
         window.setTimeout(function() {

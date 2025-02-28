@@ -10,7 +10,7 @@ export function geoOrthoNormalizedDotProduct(a, b, origin) {
 
 
 function geoOrthoFilterDotProduct(dotp, epsilon, lowerThreshold, upperThreshold, allowStraightAngles) {
-    var val = Math.abs(dotp);
+    const val = Math.abs(dotp);
     if (val < epsilon) {
         return 0;      // already orthogonal
     } else if (allowStraightAngles && Math.abs(val-1) < epsilon) {
@@ -24,20 +24,20 @@ function geoOrthoFilterDotProduct(dotp, epsilon, lowerThreshold, upperThreshold,
 
 
 export function geoOrthoCalcScore(points, isClosed, epsilon, threshold) {
-    var score = 0;
-    var first = isClosed ? 0 : 1;
-    var last = isClosed ? points.length : points.length - 1;
-    var coords = points.map(function(p) { return p.coord; });
+    let score = 0;
+    const first = isClosed ? 0 : 1;
+    const last = isClosed ? points.length : points.length - 1;
+    const coords = points.map(function(p) { return p.coord; });
 
-    var lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180);
-    var upperThreshold = Math.cos(threshold * Math.PI / 180);
+    const lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180);
+    const upperThreshold = Math.cos(threshold * Math.PI / 180);
 
-    for (var i = first; i < last; i++) {
-        var a = coords[(i - 1 + coords.length) % coords.length];
-        var origin = coords[i];
-        var b = coords[(i + 1) % coords.length];
+    for (let i = first; i < last; i++) {
+        const a = coords[(i - 1 + coords.length) % coords.length];
+        const origin = coords[i];
+        const b = coords[(i + 1) % coords.length];
 
-        var dotp = geoOrthoFilterDotProduct(geoOrthoNormalizedDotProduct(a, b, origin), epsilon, lowerThreshold, upperThreshold);
+        const dotp = geoOrthoFilterDotProduct(geoOrthoNormalizedDotProduct(a, b, origin), epsilon, lowerThreshold, upperThreshold);
         if (dotp === null) continue;    // ignore vertex
         score = score + 2.0 * Math.min(Math.abs(dotp - 1.0), Math.min(Math.abs(dotp), Math.abs(dotp + 1)));
     }
@@ -47,18 +47,18 @@ export function geoOrthoCalcScore(points, isClosed, epsilon, threshold) {
 
 // returns the maximum angle less than `lessThan` between the actual corner and a 0° or 90° corner
 export function geoOrthoMaxOffsetAngle(coords, isClosed, lessThan) {
-    var max = -Infinity;
+    let max = -Infinity;
 
-    var first = isClosed ? 0 : 1;
-    var last = isClosed ? coords.length : coords.length - 1;
+    const first = isClosed ? 0 : 1;
+    const last = isClosed ? coords.length : coords.length - 1;
 
-    for (var i = first; i < last; i++) {
-        var a = coords[(i - 1 + coords.length) % coords.length];
-        var origin = coords[i];
-        var b = coords[(i + 1) % coords.length];
-        var normalizedDotP = geoOrthoNormalizedDotProduct(a, b, origin);
+    for (let i = first; i < last; i++) {
+        const a = coords[(i - 1 + coords.length) % coords.length];
+        const origin = coords[i];
+        const b = coords[(i + 1) % coords.length];
+        const normalizedDotP = geoOrthoNormalizedDotProduct(a, b, origin);
 
-        var angle = Math.acos(Math.abs(normalizedDotP)) * 180 / Math.PI;
+        let angle = Math.acos(Math.abs(normalizedDotP)) * 180 / Math.PI;
 
         if (angle > 45) angle = 90 - angle;
 
@@ -75,19 +75,19 @@ export function geoOrthoMaxOffsetAngle(coords, isClosed, lessThan) {
 
 // similar to geoOrthoCalcScore, but returns quickly if there is something to do
 export function geoOrthoCanOrthogonalize(coords, isClosed, epsilon, threshold, allowStraightAngles) {
-    var score = null;
-    var first = isClosed ? 0 : 1;
-    var last = isClosed ? coords.length : coords.length - 1;
+    let score = null;
+    const first = isClosed ? 0 : 1;
+    const last = isClosed ? coords.length : coords.length - 1;
 
-    var lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180);
-    var upperThreshold = Math.cos(threshold * Math.PI / 180);
+    const lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180);
+    const upperThreshold = Math.cos(threshold * Math.PI / 180);
 
-    for (var i = first; i < last; i++) {
-        var a = coords[(i - 1 + coords.length) % coords.length];
-        var origin = coords[i];
-        var b = coords[(i + 1) % coords.length];
+    for (let i = first; i < last; i++) {
+        const a = coords[(i - 1 + coords.length) % coords.length];
+        const origin = coords[i];
+        const b = coords[(i + 1) % coords.length];
 
-        var dotp = geoOrthoFilterDotProduct(geoOrthoNormalizedDotProduct(a, b, origin), epsilon, lowerThreshold, upperThreshold, allowStraightAngles);
+        const dotp = geoOrthoFilterDotProduct(geoOrthoNormalizedDotProduct(a, b, origin), epsilon, lowerThreshold, upperThreshold, allowStraightAngles);
         if (dotp === null) continue;        // ignore vertex
         if (Math.abs(dotp) > 0) return 1;   // something to do
         score = 0;                          // already square

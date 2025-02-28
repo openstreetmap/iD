@@ -8,7 +8,7 @@ import { uiPanelHistory } from './history';
 import { uiPanelLocation } from './location';
 import { uiPanelMeasurement } from './measurement';
 
-export var uiInfoPanels = {
+export const uiInfoPanels = {
     background: uiPanelBackground,
     history: uiPanelHistory,
     location: uiPanelLocation,

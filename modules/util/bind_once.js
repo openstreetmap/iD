@@ -1,5 +1,5 @@
 export function utilBindOnce(target, type, listener, capture) {
-    var typeOnce = type + '.once';
+    const typeOnce = type + '.once';
     function one() {
         target.on(typeOnce, null);
         listener.apply(this, arguments);

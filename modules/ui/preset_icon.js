@@ -33,7 +33,7 @@ export function uiPresetIcon() {
     pointBorder.exit()
       .remove();
 
-    let pointBorderEnter = pointBorder.enter();
+    const pointBorderEnter = pointBorder.enter();
 
     const w = 40;
     const h = 40;
@@ -59,11 +59,11 @@ export function uiPresetIcon() {
     categoryBorder.exit()
       .remove();
 
-    let categoryBorderEnter = categoryBorder.enter();
+    const categoryBorderEnter = categoryBorder.enter();
 
     const d = 60;
 
-    let svgEnter = categoryBorderEnter
+    const svgEnter = categoryBorderEnter
       .append('svg')
       .attr('class', 'preset-icon-fill preset-icon-category-border')
       .attr('width', d)
@@ -91,7 +91,7 @@ export function uiPresetIcon() {
     vertexFill.exit()
       .remove();
 
-    let vertexFillEnter = vertexFill.enter();
+    const vertexFillEnter = vertexFill.enter();
 
     const w = 60;
     const h = 60;
@@ -281,9 +281,9 @@ export function uiPresetIcon() {
     route = routeEnter.merge(route);
 
     if (drawRoute) {
-      let routeType = p.tags.type === 'waterway' ? 'waterway' : p.tags.route;
+      const routeType = p.tags.type === 'waterway' ? 'waterway' : p.tags.route;
       const segmentPresetIDs = routeSegments[routeType];
-      for (let i in segmentPresetIDs) {
+      for (const i in segmentPresetIDs) {
         const segmentPreset = presetManager.item(segmentPresetIDs[i]);
         const segmentTagClasses = svgTagClasses().getClassesString(segmentPreset.tags, '');
         route.selectAll(`path.stroke.segment${i}`)
@@ -375,7 +375,7 @@ export function uiPresetIcon() {
 
 
   function render() {
-    let p = _preset.apply(this, arguments);
+    const p = _preset.apply(this, arguments);
     let geom = _geometry ? _geometry.apply(this, arguments) : null;
     if (geom === 'relation' &&
       p.tags &&
@@ -395,15 +395,15 @@ export function uiPresetIcon() {
     const drawRoute = picon && geom === 'route';
     const isFramed = drawVertex || drawArea || drawLine || drawRoute || isCategory;
 
-    let tags = !isCategory ? p.setTags({}, geom) : {};
-    for (let k in tags) {
+    const tags = !isCategory ? p.setTags({}, geom) : {};
+    for (const k in tags) {
       if (tags[k] === '*') {
         tags[k] = 'yes';
       }
     }
 
-    let tagClasses = svgTagClasses().getClassesString(tags, '');
-    let selection = d3_select(this);
+    const tagClasses = svgTagClasses().getClassesString(tags, '');
+    const selection = d3_select(this);
 
     let container = selection.selectAll('.preset-icon-container')
       .data([0]);

@@ -8,20 +8,20 @@ import { svgPassiveVertex, svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 
 export function svgVertices(projection, context) {
-    var radiuses = {
+    const radiuses = {
         //       z16-, z17,   z18+,  w/icon
         shadow: [6,    7.5,   7.5,   12],
         stroke: [2.5,  3.5,   3.5,   8],
         fill:   [1,    1.5,   1.5,   1.5]
     };
 
-    var _currHoverTarget;
-    var _currPersistent = {};
-    var _currHover = {};
-    var _prevHover = {};
-    var _currSelected = {};
-    var _prevSelected = {};
-    var _radii = {};
+    let _currHoverTarget;
+    let _currPersistent = {};
+    let _currHover = {};
+    let _prevHover = {};
+    let _currSelected = {};
+    let _prevSelected = {};
+    let _radii = {};
 
 
     function sortY(a, b) {
@@ -31,8 +31,8 @@ export function svgVertices(projection, context) {
     // Avoid exit/enter if we're just moving stuff around.
     // The node will get a new version but we only need to run the update selection.
     function fastEntityKey(d) {
-        var mode = context.mode();
-        var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
+        const mode = context.mode();
+        const isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
         return isMoving ? d.id : osmEntity.key(d);
     }
 
@@ -40,18 +40,18 @@ export function svgVertices(projection, context) {
     function draw(selection, graph, vertices, sets, filter) {
         sets = sets || { selected: {}, important: {}, hovered: {} };
 
-        var icons = {};
-        var directions = {};
-        var wireframe = context.surface().classed('fill-wireframe');
-        var zoom = geoScaleToZoom(projection.scale());
-        var z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
-        var activeID = context.activeID();
-        var base = context.history().base();
+        const icons = {};
+        const directions = {};
+        const wireframe = context.surface().classed('fill-wireframe');
+        const zoom = geoScaleToZoom(projection.scale());
+        const z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
+        const activeID = context.activeID();
+        const base = context.history().base();
 
 
         function getIcon(d) {
             // always check latest entity, as fastEntityKey avoids enter/exit now
-            var entity = graph.entity(d.id);
+            const entity = graph.entity(d.id);
             if (entity.id in icons) return icons[entity.id];
 
             icons[entity.id] =
@@ -66,7 +66,7 @@ export function svgVertices(projection, context) {
         function getDirections(entity) {
             if (entity.id in directions) return directions[entity.id];
 
-            var angles = entity.directions(graph, projection);
+            const angles = entity.directions(graph, projection);
             directions[entity.id] = angles.length ? angles : false;
             return angles;
         }
@@ -74,11 +74,11 @@ export function svgVertices(projection, context) {
 
         function updateAttributes(selection) {
             ['shadow', 'stroke', 'fill'].forEach(function(klass) {
-                var rads = radiuses[klass];
+                const rads = radiuses[klass];
                 selection.selectAll('.' + klass)
                     .each(function(entity) {
-                        var i = z && getIcon(entity);
-                        var r = rads[i ? 3 : z];
+                        const i = z && getIcon(entity);
+                        let r = rads[i ? 3 : z];
 
                         // slightly increase the size of unconnected endpoints #3775
                         if (entity.id !== activeID && entity.isEndpoint(graph) && !entity.isConnected(graph)) {
@@ -98,7 +98,7 @@ export function svgVertices(projection, context) {
 
         vertices.sort(sortY);
 
-        var groups = selection.selectAll('g.vertex')
+        let groups = selection.selectAll('g.vertex')
             .filter(filter)
             .data(vertices, fastEntityKey);
 
@@ -107,7 +107,7 @@ export function svgVertices(projection, context) {
             .remove();
 
         // enter
-        var enter = groups.enter()
+        const enter = groups.enter()
             .append('g')
             .attr('class', function(d) { return 'node vertex ' + d.id; })
             .order();
@@ -145,7 +145,7 @@ export function svgVertices(projection, context) {
             .call(updateAttributes);
 
         // Vertices with icons get a `use`.
-        var iconUse = groups
+        const iconUse = groups
             .selectAll('.icon')
             .data(function data(d) { return zoom >= 17 && getIcon(d) ? [d] : []; }, fastEntityKey);
 
@@ -161,13 +161,13 @@ export function svgVertices(projection, context) {
             .attr('height', '12px')
             .attr('transform', 'translate(-6, -6)')
             .attr('xlink:href', function(d) {
-                var picon = getIcon(d);
+                const picon = getIcon(d);
                 return picon ? '#' + picon : '';
             });
 
 
         // Vertices with directions get viewfields
-        var dgroups = groups
+        let dgroups = groups
             .selectAll('.viewfieldgroup')
             .data(function data(d) { return zoom >= 18 && getDirections(d) ? [d] : []; }, fastEntityKey);
 
@@ -181,7 +181,7 @@ export function svgVertices(projection, context) {
             .attr('class', 'viewfieldgroup')
             .merge(dgroups);
 
-        var viewfields = dgroups.selectAll('.viewfield')
+        const viewfields = dgroups.selectAll('.viewfield')
             .data(getDirections, function key(d) { return osmEntity.key(d); });
 
         // exit
@@ -200,16 +200,16 @@ export function svgVertices(projection, context) {
 
 
     function drawTargets(selection, graph, entities, filter) {
-        var targetClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
-        var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
-        var getTransform = svgPointTransform(projection).geojson;
-        var activeID = context.activeID();
-        var data = { targets: [], nopes: [] };
+        const targetClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        const nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
+        const getTransform = svgPointTransform(projection).geojson;
+        const activeID = context.activeID();
+        const data = { targets: [], nopes: [] };
 
         entities.forEach(function(node) {
             if (activeID === node.id) return;   // draw no target on the activeID
 
-            var vertexType = svgPassiveVertex(node, graph, activeID);
+            const vertexType = svgPassiveVertex(node, graph, activeID);
             if (vertexType !== 0) {     // passive or adjacent - allow to connect
                 data.targets.push({
                     type: 'Feature',
@@ -235,7 +235,7 @@ export function svgVertices(projection, context) {
         });
 
         // Targets allow hover and vertex snapping
-        var targets = selection.selectAll('.vertex.target-allowed')
+        const targets = selection.selectAll('.vertex.target-allowed')
             .filter(function(d) { return filter(d.properties.entity); })
             .data(data.targets, function key(d) { return d.id; });
 
@@ -259,7 +259,7 @@ export function svgVertices(projection, context) {
 
 
         // NOPE
-        var nopes = selection.selectAll('.vertex.target-nope')
+        const nopes = selection.selectAll('.vertex.target-nope')
             .filter(function(d) { return filter(d.properties.entity); })
             .data(data.nopes, function key(d) { return d.id; });
 
@@ -281,7 +281,7 @@ export function svgVertices(projection, context) {
     // 1. in wireframe mode or
     // 2. at higher zooms if they have a direction
     function renderAsVertex(entity, graph, wireframe, zoom) {
-        var geometry = entity.geometry(graph);
+        const geometry = entity.geometry(graph);
         return geometry === 'vertex' || (geometry === 'point' && (
             wireframe || (zoom >= 18 && entity.directions(graph, projection).length)
         ));
@@ -289,8 +289,8 @@ export function svgVertices(projection, context) {
 
 
     function isEditedNode(node, base, head) {
-        var baseNode = base.entities[node.id];
-        var headNode = head.entities[node.id];
+        const baseNode = base.entities[node.id];
+        const headNode = head.entities[node.id];
         return !headNode ||
             !baseNode ||
             !deepEqual(headNode.tags, baseNode.tags) ||
@@ -299,9 +299,9 @@ export function svgVertices(projection, context) {
 
 
     function getSiblingAndChildVertices(ids, graph, wireframe, zoom) {
-        var results = {};
+        const results = {};
 
-        var seenIds = {};
+        const seenIds = {};
 
         function addChildVertices(entity) {
 
@@ -309,19 +309,19 @@ export function svgVertices(projection, context) {
             if (seenIds[entity.id]) return;
             seenIds[entity.id] = true;
 
-            var geometry = entity.geometry(graph);
+            const geometry = entity.geometry(graph);
             if (!context.features().isHiddenFeature(entity, graph, geometry)) {
-                var i;
+                let i;
                 if (entity.type === 'way') {
                     for (i = 0; i < entity.nodes.length; i++) {
-                        var child = graph.hasEntity(entity.nodes[i]);
+                        const child = graph.hasEntity(entity.nodes[i]);
                         if (child) {
                             addChildVertices(child);
                         }
                     }
                 } else if (entity.type === 'relation') {
                     for (i = 0; i < entity.members.length; i++) {
-                        var member = graph.hasEntity(entity.members[i].id);
+                        const member = graph.hasEntity(entity.members[i].id);
                         if (member) {
                             addChildVertices(member);
                         }
@@ -333,7 +333,7 @@ export function svgVertices(projection, context) {
         }
 
         ids.forEach(function(id) {
-            var entity = graph.hasEntity(id);
+            const entity = graph.hasEntity(id);
             if (!entity) return;
 
             if (entity.type === 'node') {
@@ -353,15 +353,15 @@ export function svgVertices(projection, context) {
 
 
     function drawVertices(selection, graph, entities, filter, extent, fullRedraw) {
-        var wireframe = context.surface().classed('fill-wireframe');
-        var visualDiff = context.surface().classed('highlight-edited');
-        var zoom = geoScaleToZoom(projection.scale());
-        var mode = context.mode();
-        var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
-        var base = context.history().base();
+        const wireframe = context.surface().classed('fill-wireframe');
+        const visualDiff = context.surface().classed('highlight-edited');
+        const zoom = geoScaleToZoom(projection.scale());
+        const mode = context.mode();
+        const isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
+        const base = context.history().base();
 
-        var drawLayer = selection.selectAll('.layer-osm.points .points-group.vertices');
-        var touchLayer = selection.selectAll('.layer-touch.points');
+        const drawLayer = selection.selectAll('.layer-osm.points .points-group.vertices');
+        const touchLayer = selection.selectAll('.layer-touch.points');
 
         if (fullRedraw) {
             _currPersistent = {};
@@ -370,10 +370,10 @@ export function svgVertices(projection, context) {
 
         // Collect important vertices from the `entities` list..
         // (during a partial redraw, it will not contain everything)
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
-            var geometry = entity.geometry(graph);
-            var keep = false;
+        for (let i = 0; i < entities.length; i++) {
+            const entity = entities[i];
+            const geometry = entity.geometry(graph);
+            let keep = false;
 
             // a point that looks like a vertex..
             if ((geometry === 'point') && renderAsVertex(entity, graph, wireframe, zoom)) {
@@ -395,18 +395,18 @@ export function svgVertices(projection, context) {
         }
 
         // 3 sets of vertices to consider:
-        var sets = {
+        const sets = {
             persistent: _currPersistent,  // persistent = important vertices (render always)
             selected: _currSelected,      // selected + siblings of selected (render always)
             hovered: _currHover           // hovered + siblings of hovered (render only in draw modes)
         };
 
-        var all = Object.assign({}, (isMoving ? _currHover : {}), _currSelected, _currPersistent);
+        const all = Object.assign({}, (isMoving ? _currHover : {}), _currSelected, _currPersistent);
 
         // Draw the vertices..
         // The filter function controls the scope of what objects d3 will touch (exit/enter/update)
         // Adjust the filter function to expand the scope beyond whatever entities were passed in.
-        var filterRendered = function(d) {
+        const filterRendered = function(d) {
             return d.id in _currPersistent || d.id in _currSelected || d.id in _currHover || filter(d);
         };
         drawLayer
@@ -414,7 +414,7 @@ export function svgVertices(projection, context) {
 
         // Draw touch targets..
         // When drawing, render all targets (not just those affected by a partial redraw)
-        var filterTouch = function(d) {
+        const filterTouch = function(d) {
             return isMoving ? true : filterRendered(d);
         };
         touchLayer
@@ -431,14 +431,14 @@ export function svgVertices(projection, context) {
 
     // partial redraw - only update the selected items..
     drawVertices.drawSelected = function(selection, graph, extent) {
-        var wireframe = context.surface().classed('fill-wireframe');
-        var zoom = geoScaleToZoom(projection.scale());
+        const wireframe = context.surface().classed('fill-wireframe');
+        const zoom = geoScaleToZoom(projection.scale());
 
         _prevSelected = _currSelected || {};
         if (context.map().isInWideSelection()) {
             _currSelected = {};
             context.selectedIDs().forEach(function(id) {
-                var entity = graph.hasEntity(id);
+                const entity = graph.hasEntity(id);
                 if (!entity) return;
 
                 if (entity.type === 'node') {
@@ -453,7 +453,7 @@ export function svgVertices(projection, context) {
         }
 
         // note that drawVertices will add `_currSelected` automatically if needed..
-        var filter = function(d) { return d.id in _prevSelected; };
+        const filter = function(d) { return d.id in _prevSelected; };
         drawVertices(selection, graph, Object.values(_prevSelected), filter, extent, false);
     };
 
@@ -462,12 +462,12 @@ export function svgVertices(projection, context) {
     drawVertices.drawHover = function(selection, graph, target, extent) {
         if (target === _currHoverTarget) return;  // continue only if something changed
 
-        var wireframe = context.surface().classed('fill-wireframe');
-        var zoom = geoScaleToZoom(projection.scale());
+        const wireframe = context.surface().classed('fill-wireframe');
+        const zoom = geoScaleToZoom(projection.scale());
 
         _prevHover = _currHover || {};
         _currHoverTarget = target;
-        var entity = target && target.properties && target.properties.entity;
+        const entity = target && target.properties && target.properties.entity;
 
         if (entity) {
             _currHover = getSiblingAndChildVertices([entity.id], graph, wireframe, zoom);
@@ -476,7 +476,7 @@ export function svgVertices(projection, context) {
         }
 
         // note that drawVertices will add `_currHover` automatically if needed..
-        var filter = function(d) { return d.id in _prevHover; };
+        const filter = function(d) { return d.id in _prevHover; };
         drawVertices(selection, graph, Object.values(_prevHover), filter, extent, false);
     };
 

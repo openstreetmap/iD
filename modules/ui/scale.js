@@ -4,18 +4,18 @@ import { localizer } from '../core/localizer';
 
 
 export function uiScale(context) {
-    var projection = context.projection,
-        isImperial = !localizer.usesMetric(),
-        maxLength = 180,
-        tickHeight = 8;
+    let isImperial = !localizer.usesMetric();
+    const projection = context.projection,
+          maxLength = 180,
+          tickHeight = 8;
 
 
     function scaleDefs(loc1, loc2) {
-        var lat = (loc2[1] + loc1[1]) / 2,
-            conversion = (isImperial ? 3.28084 : 1),
-            dist = geoLonToMeters(loc2[0] - loc1[0], lat) * conversion,
-            scale = { dist: 0, px: 0, text: '' },
-            buckets, i, val, dLon;
+        const lat = (loc2[1] + loc1[1]) / 2,
+              conversion = (isImperial ? 3.28084 : 1),
+              dist = geoLonToMeters(loc2[0] - loc1[0], lat) * conversion,
+              scale = { dist: 0, px: 0, text: '' };
+        let buckets, i, val;
 
         if (isImperial) {
             buckets = [5280000, 528000, 52800, 5280, 500, 50, 5, 1];
@@ -34,7 +34,7 @@ export function uiScale(context) {
             }
         }
 
-        dLon = geoMetersToLon(scale.dist / conversion, lat);
+        const dLon = geoMetersToLon(scale.dist / conversion, lat);
         scale.px = Math.round(projection([loc1[0] + dLon, loc1[1]])[0]);
 
         scale.text = displayLength(scale.dist / conversion, isImperial);
@@ -45,7 +45,7 @@ export function uiScale(context) {
 
     function update(selection) {
         // choose loc1, loc2 along bottom of viewport (near where the scale will be drawn)
-        var dims = context.map().dimensions(),
+        const dims = context.map().dimensions(),
             loc1 = projection.invert([0, dims[1]]),
             loc2 = projection.invert([maxLength, dims[1]]),
             scale = scaleDefs(loc1, loc2);
@@ -65,7 +65,7 @@ export function uiScale(context) {
             selection.call(update);
         }
 
-        var scalegroup = selection.append('svg')
+        const scalegroup = selection.append('svg')
             .attr('class', 'scale')
             .on('click', switchUnits)
             .append('g')

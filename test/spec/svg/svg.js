@@ -1,6 +1,6 @@
 describe('iD.svgRelationMemberTags', function() {
     it('includes tags from parent multipolygon relations', function() {
-        var graph = iD.coreGraph([
+        const graph = iD.coreGraph([
             iD.osmWay({id: 'w'}),
             iD.osmRelation({id: 'r', members: [{id: 'w'}], tags: {type: 'multipolygon'}})
         ]);
@@ -10,7 +10,7 @@ describe('iD.svgRelationMemberTags', function() {
     });
 
     it('includes tags from parent boundary relations', function() {
-        var graph = iD.coreGraph([
+        const graph = iD.coreGraph([
             iD.osmWay({id: 'w'}),
             iD.osmRelation({id: 'r', members: [{id: 'w'}], tags: {type: 'boundary'}})
         ]);

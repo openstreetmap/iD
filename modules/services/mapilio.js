@@ -32,7 +32,7 @@ let _activeImage;
 let _cache;
 let _loadViewerPromise;
 let _pannellumViewer;
-let _sceneOptions = {
+const _sceneOptions = {
     showFullscreenCtrl: false,
     autoLoad: true,
     yaw: 0,
@@ -134,10 +134,10 @@ function loadTileDataToCache(data, tile) {
             const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
             const loc = feature.geometry.coordinates;
 
-            let resolutionArr = feature.properties.resolution.split('x');
-            let sourceWidth = Math.max(resolutionArr[0], resolutionArr[1]);
-            let sourceHeight = Math.min(resolutionArr[0] ,resolutionArr[1]);
-            let isPano = sourceWidth % sourceHeight === 0;
+            const resolutionArr = feature.properties.resolution.split('x');
+            const sourceWidth = Math.max(resolutionArr[0], resolutionArr[1]);
+            const sourceHeight = Math.min(resolutionArr[0] ,resolutionArr[1]);
+            const isPano = sourceWidth % sourceHeight === 0;
 
             const d = {
                 loc: loc,
@@ -193,7 +193,7 @@ function getImageData(imageId, sequenceId) {
             return response.json();
         })
         .then(function (data) {
-            let index = data.data.findIndex((feature) => feature.id === imageId);
+            const index = data.data.findIndex((feature) => feature.id === imageId);
             const {filename, uploaded_hash} = data.data[index];
             _sceneOptions.panorama = imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + resolution;
         });
@@ -238,13 +238,13 @@ export default {
 
     // Load images in the visible area
     loadImages: function(projection) {
-        let url = baseTileUrl + pointLayer + tileStyle;
+        const url = baseTileUrl + pointLayer + tileStyle;
         loadTiles('images', url, 14, projection);
     },
 
     // Load line in the visible area
     loadLines: function(projection) {
-        let url = baseTileUrl + lineLayer + tileStyle;
+        const url = baseTileUrl + lineLayer + tileStyle;
         loadTiles('line', url, 14, projection);
     },
 
@@ -308,7 +308,7 @@ export default {
 
     updateUrlImage: function(imageKey) {
         if (!window.mocha) {
-            var hash = utilStringQs(window.location.hash);
+            const hash = utilStringQs(window.location.hash);
             if (imageKey) {
                 hash.photo = 'mapilio/' + imageKey;
             } else {
@@ -335,23 +335,23 @@ export default {
 
     selectImage: function (context, id) {
 
-        let that = this;
+        const that = this;
 
-        let d = this.cachedImage(id);
+        const d = this.cachedImage(id);
 
         this.setActiveImage(d);
 
         this.updateUrlImage(d.id);
 
-        let viewer = context.container().select('.photoviewer');
+        const viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
 
         this.setStyles(context, null);
 
         if (!d) return this;
 
-        let wrap = context.container().select('.photoviewer .mapilio-wrapper');
-        let attribution = wrap.selectAll('.photo-attribution').text('');
+        const wrap = context.container().select('.photoviewer .mapilio-wrapper');
+        const attribution = wrap.selectAll('.photo-attribution').text('');
 
         if (d.capture_time) {
             attribution
@@ -416,8 +416,8 @@ export default {
 
         function localeDateString(s) {
             if (!s) return null;
-            var options = { day: 'numeric', month: 'short', year: 'numeric' };
-            var d = new Date(s);
+            const options = { day: 'numeric', month: 'short', year: 'numeric' };
+            const d = new Date(s);
             if (isNaN(d.getTime())) return null;
             return d.toLocaleDateString(localizer.localeCode(), options);
         }
@@ -432,9 +432,9 @@ export default {
             _pannellumViewer = null;
         }
 
-        let wrap = context.container().select('#ideditor-viewer-mapilio-simple');
+        const wrap = context.container().select('#ideditor-viewer-mapilio-simple');
 
-        let imgWrap = wrap.select('img');
+        const imgWrap = wrap.select('img');
 
         if (!imgWrap.empty()) {
             imgWrap.attr('src',_sceneOptions.panorama);
@@ -447,9 +447,9 @@ export default {
 
     ensureViewerLoaded: function(context) {
 
-        let that = this;
+        const that = this;
 
-        let imgWrap = context.container().select('#ideditor-viewer-mapilio-simple > img');
+        const imgWrap = context.container().select('#ideditor-viewer-mapilio-simple > img');
 
         if (!imgWrap.empty()) {
             imgWrap.remove();
@@ -457,10 +457,10 @@ export default {
 
         if (_loadViewerPromise) return _loadViewerPromise;
 
-        let wrap = context.container().select('.photoviewer').selectAll('.mapilio-wrapper')
+        const wrap = context.container().select('.photoviewer').selectAll('.mapilio-wrapper')
             .data([0]);
 
-        let wrapEnter = wrap.enter()
+        const wrapEnter = wrap.enter()
             .append('div')
             .attr('class', 'photo-wrapper mapilio-wrapper')
             .classed('hide', true)
@@ -567,7 +567,7 @@ export default {
         }
 
         function zoomPan(d3_event) {
-            var t = d3_event.transform;
+            const t = d3_event.transform;
             context.container().select('.photoviewer #ideditor-viewer-mapilio-simple')
                 .call(utilSetTransform, t.x, t.y, t.k);
         }
@@ -576,10 +576,10 @@ export default {
     },
 
     showViewer:function (context) {
-        let wrap = context.container().select('.photoviewer')
+        const wrap = context.container().select('.photoviewer')
             .classed('hide', false);
 
-        let isHidden = wrap.selectAll('.photo-wrapper.mapilio-wrapper.hide').size();
+        const isHidden = wrap.selectAll('.photo-wrapper.mapilio-wrapper.hide').size();
 
         if (isHidden) {
             wrap
@@ -598,7 +598,7 @@ export default {
      * hideViewer()
      */
     hideViewer: function (context) {
-        let viewer = context.container().select('.photoviewer');
+        const viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
 
         this.updateUrlImage(null);

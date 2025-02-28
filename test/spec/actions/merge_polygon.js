@@ -8,7 +8,7 @@ describe('iD.actionMergePolygon', function () {
         e.push(iD.osmWay({ id: id, nodes: nodes.map(function(n) { return 'n' + n; }) }));
     }
 
-    var e = [];
+    const e = [];
 
     node('n0', 0, 0);
     node('n1', 5, 0);
@@ -38,7 +38,7 @@ describe('iD.actionMergePolygon', function () {
 
     way('w5', [13, 14, 15, 13]);
 
-    var graph;
+    let graph;
 
     beforeEach(function() {
         graph = iD.coreGraph(e);
@@ -50,7 +50,7 @@ describe('iD.actionMergePolygon', function () {
 
     it('creates a multipolygon from two closed ways', function() {
         graph = iD.actionMergePolygon(['w0', 'w1'], 'r')(graph);
-        var r = graph.entity('r');
+        const r = graph.entity('r');
         expect(!!r).to.equal(true);
         expect(r.geometry(graph)).to.equal('area');
         expect(r.isMultipolygon()).to.equal(true);
@@ -64,7 +64,7 @@ describe('iD.actionMergePolygon', function () {
     it('creates a multipolygon from a closed way and a multipolygon relation', function() {
         graph = iD.actionMergePolygon(['w0', 'w1'], 'r')(graph);
         graph = iD.actionMergePolygon(['r', 'w2'])(graph);
-        var r = graph.entity('r');
+        const r = graph.entity('r');
         expect(r.members.length).to.equal(3);
     });
 
@@ -76,7 +76,7 @@ describe('iD.actionMergePolygon', function () {
         // Delete other relation
         expect(graph.hasEntity('r2')).to.equal(undefined);
 
-        var r = graph.entity('r1');
+        const r = graph.entity('r1');
         expect(find(r, 'w0').role).to.equal('outer');
         expect(find(r, 'w1').role).to.equal('inner');
         expect(find(r, 'w2').role).to.equal('outer');
@@ -84,7 +84,7 @@ describe('iD.actionMergePolygon', function () {
     });
 
     it('merges multipolygon tags', function() {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmRelation({id: 'r1', tags: {type: 'multipolygon', a: 'a'}}),
             iD.osmRelation({id: 'r2', tags: {type: 'multipolygon', b: 'b'}})
         ]);
@@ -105,8 +105,8 @@ describe('iD.actionMergePolygon', function () {
     it('merges no tags from unclosed outer ways', function() {
         graph = graph.replace(graph.entity('w3').update({ tags: { 'natural': 'water' }}));
 
-        var r1 = iD.osmRelation({id: 'r1', tags: {type: 'multipolygon'}});
-        var r2 = iD.osmRelation({id: 'r2', tags: {type: 'multipolygon'},
+        const r1 = iD.osmRelation({id: 'r1', tags: {type: 'multipolygon'}});
+        const r2 = iD.osmRelation({id: 'r2', tags: {type: 'multipolygon'},
             members: [
                 { type: 'way', role: 'outer', id: 'w3' },
                 { type: 'way', role: 'outer', id: 'w4' }
@@ -128,13 +128,13 @@ describe('iD.actionMergePolygon', function () {
     it('doesn\'t copy area tags from ways', function() {
         graph = graph.replace(graph.entity('w0').update({ tags: { 'area': 'yes' }}));
         graph = iD.actionMergePolygon(['w0', 'w1'], 'r')(graph);
-        var r = graph.entity('r');
+        const r = graph.entity('r');
         expect(r.tags.area).to.equal(undefined);
     });
 
     it('creates a multipolygon with two disjunct outer rings', function() {
         graph = iD.actionMergePolygon(['w0', 'w5'], 'r')(graph);
-        var r = graph.entity('r');
+        const r = graph.entity('r');
         expect(find(r, 'w0').role).to.equal('outer');
         expect(find(r, 'w5').role).to.equal('outer');
     });
@@ -142,14 +142,14 @@ describe('iD.actionMergePolygon', function () {
     it('creates a multipolygon with an island in a hole', function() {
         graph = iD.actionMergePolygon(['w0', 'w1'], 'r')(graph);
         graph = iD.actionMergePolygon(['r', 'w2'])(graph);
-        var r = graph.entity('r');
+        const r = graph.entity('r');
         expect(find(r, 'w0').role).to.equal('outer');
         expect(find(r, 'w1').role).to.equal('inner');
         expect(find(r, 'w2').role).to.equal('outer');
     });
 
     it('extends a multipolygon with multi-way rings', function() {
-        var r = iD.osmRelation({ id: 'r', tags: { type: 'multipolygon' }, members: [
+        let r = iD.osmRelation({ id: 'r', tags: { type: 'multipolygon' }, members: [
             { type: 'way', role: 'outer', id: 'w0' },
             { type: 'way', role: 'inner', id: 'w3' },
             { type: 'way', role: 'inner', id: 'w4' }

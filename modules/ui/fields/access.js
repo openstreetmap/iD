@@ -6,12 +6,12 @@ import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 import { t } from '../../core/localizer';
 
 export function uiFieldAccess(field, context) {
-    var dispatch = d3_dispatch('change');
-    var items = d3_select(null);
-    var _tags;
+    const dispatch = d3_dispatch('change');
+    let items = d3_select(null);
+    let _tags;
 
     function access(selection) {
-        var wrap = selection.selectAll('.form-field-input-wrap')
+        let wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
@@ -19,7 +19,7 @@ export function uiFieldAccess(field, context) {
             .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
-        var list = wrap.selectAll('ul')
+        let list = wrap.selectAll('ul')
             .data([0]);
 
         list = list.enter()
@@ -32,7 +32,7 @@ export function uiFieldAccess(field, context) {
             .data(field.keys);
 
         // Enter
-        var enter = items.enter()
+        const enter = items.enter()
             .append('li')
             .attr('class', function(d) { return 'labeled-input preset-access-' + d; });
 
@@ -67,8 +67,8 @@ export function uiFieldAccess(field, context) {
 
 
     function change(d3_event, d) {
-        var tag = {};
-        var value = context.cleanTagValue(utilGetSetValue(d3_select(this)));
+        const tag = {};
+        const value = context.cleanTagValue(utilGetSetValue(d3_select(this)));
 
         // don't override multiple values with blank string
         if (!value && typeof _tags[d] !== 'string') return;
@@ -79,7 +79,7 @@ export function uiFieldAccess(field, context) {
 
 
     access.options = function(type) {
-        var options = [
+        let options = [
             'yes',
             'no',
             'designated',
@@ -98,7 +98,7 @@ export function uiFieldAccess(field, context) {
             options.splice(options.length - 4, 0, 'dismount');
         }
 
-        var stringsField = field.resolveReference('stringsCrossReference');
+        const stringsField = field.resolveReference('stringsCrossReference');
         return options.map(function(option) {
             return {
                 title: stringsField.t('options.' + option + '.description'),
@@ -302,7 +302,7 @@ export function uiFieldAccess(field, context) {
                             return placeholdersByKey[tags[key]][d];
                         }
                     } else {
-                        var impliedAccesses = tags[key].filter(Boolean).map(function(val) {
+                        const impliedAccesses = tags[key].filter(Boolean).map(function(val) {
                             return placeholdersByKey[val] && placeholdersByKey[val][d];
                         }).filter(Boolean);
 

@@ -53,7 +53,7 @@ export class LocationManager {
     if (obj.locationSetID) return;  // work was done already
 
     try {
-      let locationSet = obj.locationSet;
+      const locationSet = obj.locationSet;
       if (!locationSet) {
         throw new Error('object missing locationSet property');
       }
@@ -139,7 +139,7 @@ export class LocationManager {
         throw new Error(`locationSet ${locationSetID} resolves to an empty feature.`);
       }
 
-      let geojson = JSON.parse(JSON.stringify(result.feature));   // deep clone
+      const geojson = JSON.parse(JSON.stringify(result.feature));   // deep clone
       geojson.id = locationSetID;      // Important: always use the locationSet `id` (`+[Q30]`), not the feature `id` (`Q30`)
       geojson.properties.id = locationSetID;
       this._resolved.set(locationSetID, geojson);
@@ -183,7 +183,7 @@ export class LocationManager {
 
     fc.features.forEach(feature => {
       feature.properties = feature.properties || {};
-      let props = feature.properties;
+      const props = feature.properties;
 
       // Get `id` from either `id` or `properties`
       let id = feature.id || props.id;
@@ -288,7 +288,7 @@ export class LocationManager {
    * @return  Object of locationSetIDs valid at given location
    */
   locationSetsAt(loc) {
-    let result = {};
+    const result = {};
 
     const hits = this._wp(loc, true) || [];
     const thiz = this;

@@ -3,11 +3,11 @@ import { svgIcon } from '../svg/icon';
 
 
 export function uiDataHeader() {
-    var _datum;
+    let _datum;
 
 
     function dataHeader(selection) {
-        var header = selection.selectAll('.data-header')
+        const header = selection.selectAll('.data-header')
             .data(
                 (_datum ? [_datum] : []),
                 function(d) { return d.__featurehash__; }
@@ -16,11 +16,11 @@ export function uiDataHeader() {
         header.exit()
             .remove();
 
-        var headerEnter = header.enter()
+        const headerEnter = header.enter()
             .append('div')
             .attr('class', 'data-header');
 
-        var iconEnter = headerEnter
+        const iconEnter = headerEnter
             .append('div')
             .attr('class', 'data-header-icon');
 

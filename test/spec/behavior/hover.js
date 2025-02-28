@@ -1,7 +1,7 @@
 describe('iD.behaviorHover', function() {
-    var _container;
-    var _context;
-    var _graph;
+    let _container;
+    let _context;
+    let _graph;
 
     beforeEach(function() {
         _container = d3.select('body').append('div');
@@ -32,8 +32,8 @@ describe('iD.behaviorHover', function() {
 
     describe('mouseover and mouseout', function () {
         it('adds the .hover class to all elements to which the same datum is bound', function () {
-            var a = iD.osmNode({id: 'a'});
-            var b = iD.osmNode({id: 'b'});
+            const a = iD.osmNode({id: 'a'});
+            const b = iD.osmNode({id: 'b'});
             _graph = iD.coreGraph([a, b]);
 
             _container.selectAll('span')
@@ -51,8 +51,8 @@ describe('iD.behaviorHover', function() {
         });
 
         it('adds the .hover class to all members of a relation', function() {
-            var a = iD.osmRelation({id: 'a', members: [{id: 'b'}]});
-            var b = iD.osmNode({id: 'b'});
+            const a = iD.osmRelation({id: 'a', members: [{id: 'b'}]});
+            const b = iD.osmNode({id: 'b'});
             _graph = iD.coreGraph([a, b]);
 
             _container.selectAll('span')

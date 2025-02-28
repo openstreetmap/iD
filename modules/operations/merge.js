@@ -11,20 +11,20 @@ import { presetManager } from '../presets';
 
 export function operationMerge(context, selectedIDs) {
 
-    var _action = getAction();
+    const _action = getAction();
 
     function getAction() {
         // prefer a non-disabled action first
-        var join = actionJoin(selectedIDs);
+        const join = actionJoin(selectedIDs);
         if (!join.disabled(context.graph())) return join;
 
-        var merge = actionMerge(selectedIDs);
+        const merge = actionMerge(selectedIDs);
         if (!merge.disabled(context.graph())) return merge;
 
-        var mergePolygon = actionMergePolygon(selectedIDs);
+        const mergePolygon = actionMergePolygon(selectedIDs);
         if (!mergePolygon.disabled(context.graph())) return mergePolygon;
 
-        var mergeNodes = actionMergeNodes(selectedIDs);
+        const mergeNodes = actionMergeNodes(selectedIDs);
         if (!mergeNodes.disabled(context.graph())) return mergeNodes;
 
         // otherwise prefer an action with an interesting disabled reason
@@ -35,7 +35,7 @@ export function operationMerge(context, selectedIDs) {
         return mergeNodes;
     }
 
-    var operation = function() {
+    const operation = function() {
 
         if (operation.disabled()) return;
 
@@ -43,9 +43,9 @@ export function operationMerge(context, selectedIDs) {
 
         context.validator().validate();
 
-        var resultIDs = selectedIDs.filter(context.hasEntity);
+        let resultIDs = selectedIDs.filter(context.hasEntity);
         if (resultIDs.length > 1) {
-            var interestingIDs = resultIDs.filter(function(id) {
+            const interestingIDs = resultIDs.filter(function(id) {
                 return context.entity(id).hasInterestingTags();
             });
             if (interestingIDs.length) resultIDs = interestingIDs;
@@ -58,10 +58,10 @@ export function operationMerge(context, selectedIDs) {
     };
 
     operation.disabled = function() {
-        var actionDisabled = _action.disabled(context.graph());
+        const actionDisabled = _action.disabled(context.graph());
         if (actionDisabled) return actionDisabled;
 
-        var osm = context.connection();
+        const osm = context.connection();
         if (osm &&
             _action.resultingWayNodesLength &&
             _action.resultingWayNodesLength(context.graph()) > osm.maxWayNodes()) {
@@ -72,7 +72,7 @@ export function operationMerge(context, selectedIDs) {
     };
 
     operation.tooltip = function() {
-        var disabled = operation.disabled();
+        const disabled = operation.disabled();
         if (disabled) {
             if (disabled === 'conflicting_relations') {
                 return t.append('operations.merge.conflicting_relations');

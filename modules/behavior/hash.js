@@ -15,22 +15,22 @@ import { prefs } from '../core/preferences';
 export function behaviorHash(context) {
 
     // cached window.location.hash
-    var _cachedHash = null;
+    let _cachedHash = null;
     // allowable latitude range
-    var _latitudeLimit = 90 - 1e-8;
+    const _latitudeLimit = 90 - 1e-8;
 
     function computedHashParameters() {
-        var map = context.map();
-        var center = map.center();
-        var zoom = map.zoom();
-        var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
-        var oldParams = utilObjectOmit(utilStringQs(window.location.hash),
+        const map = context.map();
+        const center = map.center();
+        const zoom = map.zoom();
+        const precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
+        const oldParams = utilObjectOmit(utilStringQs(window.location.hash),
             ['comment', 'source', 'hashtags', 'walkthrough']
         );
-        var newParams = {};
+        const newParams = {};
 
         delete oldParams.id;
-        var selected = context.selectedIDs().filter(function(id) {
+        const selected = context.selectedIDs().filter(function(id) {
             return context.hasEntity(id);
         });
         if (selected.length) {
@@ -52,16 +52,16 @@ export function behaviorHash(context) {
 
     function computedTitle(includeChangeCount) {
 
-        var baseTitle = context.documentTitleBase() || 'iD';
-        var contextual;
-        var changeCount;
-        var titleID;
+        const baseTitle = context.documentTitleBase() || 'iD';
+        let contextual;
+        let changeCount;
+        let titleID;
 
-        var selected = context.selectedIDs().filter(function(id) {
+        const selected = context.selectedIDs().filter(function(id) {
             return context.hasEntity(id);
         });
         if (selected.length) {
-            var firstLabel = utilDisplayLabel(context.entity(selected[0]), context.graph());
+            const firstLabel = utilDisplayLabel(context.entity(selected[0]), context.graph());
             if (selected.length > 1) {
                 contextual = t('title.labeled_and_more', {
                     labeled: firstLabel,
@@ -94,7 +94,7 @@ export function behaviorHash(context) {
     function updateTitle(includeChangeCount) {
         if (!context.setsDocumentTitle()) return;
 
-        var newTitle = computedTitle(includeChangeCount);
+        const newTitle = computedTitle(includeChangeCount);
         if (document.title !== newTitle) {
             document.title = newTitle;
         }
@@ -103,7 +103,7 @@ export function behaviorHash(context) {
     function updateHashIfNeeded() {
         if (context.inIntro()) return;
 
-        var latestHash = computedHash();
+        const latestHash = computedHash();
         if (_cachedHash !== latestHash) {
             _cachedHash = latestHash;
 
@@ -122,8 +122,8 @@ export function behaviorHash(context) {
         }
     }
 
-    var _throttledUpdate = _throttle(updateHashIfNeeded, 500);
-    var _throttledUpdateTitle = _throttle(function() {
+    const _throttledUpdate = _throttle(updateHashIfNeeded, 500);
+    const _throttledUpdateTitle = _throttle(function() {
         updateTitle(true /* includeChangeCount */);
     }, 500);
 
@@ -134,8 +134,8 @@ export function behaviorHash(context) {
 
         _cachedHash = window.location.hash;
 
-        var q = utilStringQs(_cachedHash);
-        var mapArgs = (q.map || '').split('/').map(Number);
+        const q = utilStringQs(_cachedHash);
+        const mapArgs = (q.map || '').split('/').map(Number);
 
         if (mapArgs.length < 3 || mapArgs.some(isNaN)) {
             // replace bogus hash
@@ -145,12 +145,12 @@ export function behaviorHash(context) {
             // don't update if the new hash already reflects the state of iD
             if (_cachedHash === computedHash()) return;
 
-            var mode = context.mode();
+            const mode = context.mode();
 
             context.map().centerZoom([mapArgs[2], Math.min(_latitudeLimit, Math.max(-_latitudeLimit, mapArgs[1]))], mapArgs[0]);
 
             if (q.id && mode) {
-                var ids = q.id.split(',').filter(function(id) {
+                const ids = q.id.split(',').filter(function(id) {
                     return context.hasEntity(id) || id.startsWith('note/');
                 });
                 if (ids.length && ['browse', 'select-note', 'select'].includes(mode.id)) {
@@ -163,9 +163,9 @@ export function behaviorHash(context) {
                 }
             }
 
-            var center = context.map().center();
-            var dist = geoSphericalDistance(center, [mapArgs[2], mapArgs[1]]);
-            var maxdist = 500;
+            const center = context.map().center();
+            const dist = geoSphericalDistance(center, [mapArgs[2], mapArgs[1]]);
+            const maxdist = 500;
 
             // Don't allow the hash location to change too much while drawing
             // This can happen if the user accidentally hit the back button.  #3996
@@ -189,7 +189,7 @@ export function behaviorHash(context) {
         d3_select(window)
             .on('hashchange.behaviorHash', hashchange);
 
-        var q = utilStringQs(window.location.hash);
+        const q = utilStringQs(window.location.hash);
 
         if (q.id) {
             // targeting specific features: download, select, and zoom to them

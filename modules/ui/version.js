@@ -5,15 +5,15 @@ import { uiTooltip } from './tooltip';
 
 
 // these are module variables so they are preserved through a ui.restart()
-var sawVersion = null;
-var isNewVersion = false;
-var isNewUser = false;
+let sawVersion = null;
+let isNewVersion = false;
+let isNewUser = false;
 
 
 export function uiVersion(context) {
 
-    var currVersion = context.version;
-    var matchedVersion = currVersion.match(/\d+\.\d+\.\d+.*/);
+    const currVersion = context.version;
+    const matchedVersion = currVersion.match(/\d+\.\d+\.\d+.*/);
 
     if (sawVersion === null && matchedVersion !== null) {
         if (prefs('sawVersion')) {

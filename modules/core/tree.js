@@ -5,19 +5,19 @@ import { coreDifference } from './difference';
 
 export function coreTree(head) {
     // tree for entities
-    var _rtree = new RBush();
-    var _bboxes = {};
+    const _rtree = new RBush();
+    const _bboxes = {};
 
     // maintain a separate tree for granular way segments
-    var _segmentsRTree = new RBush();
-    var _segmentsBBoxes = {};
-    var _segmentsByWayId = {};
+    const _segmentsRTree = new RBush();
+    const _segmentsBBoxes = {};
+    const _segmentsByWayId = {};
 
-    var tree = {};
+    const tree = {};
 
 
     function entityBBox(entity) {
-        var bbox = entity.extent(head).bbox();
+        const bbox = entity.extent(head).bbox();
         bbox.id = entity.id;
         _bboxes[entity.id] = bbox;
         return bbox;
@@ -25,11 +25,11 @@ export function coreTree(head) {
 
 
     function segmentBBox(segment) {
-        var extent = segment.extent(head);
+        const extent = segment.extent(head);
         // extent can be null if the node entities aren't in the graph for some reason
         if (!extent) return null;
 
-        var bbox = extent.bbox();
+        const bbox = extent.bbox();
         bbox.segment = segment;
         _segmentsBBoxes[segment.id] = bbox;
         return bbox;
@@ -53,10 +53,10 @@ export function coreTree(head) {
     function loadEntities(entities) {
         _rtree.load(entities.map(entityBBox));
 
-        var segments = [];
+        let segments = [];
         entities.forEach(function(entity) {
             if (entity.segments) {
-                var entitySegments = entity.segments(head);
+                const entitySegments = entity.segments(head);
                 // cache these to make them easy to remove later
                 _segmentsByWayId[entity.id] = entitySegments;
                 segments = segments.concat(entitySegments);
@@ -88,10 +88,10 @@ export function coreTree(head) {
 
 
     tree.rebase = function(entities, force) {
-        var insertions = {};
+        const insertions = {};
 
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
+        for (let i = 0; i < entities.length; i++) {
+            const entity = entities[i];
             if (!entity.visible) continue;
 
             if (head.entities.hasOwnProperty(entity.id) || _bboxes[entity.id]) {
@@ -115,14 +115,14 @@ export function coreTree(head) {
     function updateToGraph(graph) {
         if (graph === head) return;
 
-        var diff = coreDifference(head, graph);
+        const diff = coreDifference(head, graph);
 
         head = graph;
 
-        var changed = diff.didChange;
+        const changed = diff.didChange;
         if (!changed.addition && !changed.deletion && !changed.geometry) return;
 
-        var insertions = {};
+        const insertions = {};
 
         if (changed.deletion) {
             diff.deleted().forEach(function(entity) {

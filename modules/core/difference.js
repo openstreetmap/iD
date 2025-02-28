@@ -13,13 +13,13 @@ import { utilArrayDifference, utilArrayUnion, utilArrayUniq } from '../util/arra
     child and parent relationships.
  */
 export function coreDifference(base, head) {
-    var _changes = {};
-    var _didChange = {};  // 'addition', 'deletion', 'geometry', 'properties'
-    var _diff = {};
+    const _changes = {};
+    const _didChange = {};  // 'addition', 'deletion', 'geometry', 'properties'
+    const _diff = {};
 
     function checkEntityID(id) {
-        var h = head.entities[id];
-        var b = base.entities[id];
+        const h = head.entities[id];
+        const b = base.entities[id];
 
         if (h === b) return;
         if (_changes[id]) return;
@@ -61,8 +61,8 @@ export function coreDifference(base, head) {
         // HOT CODE: there can be many thousands of downloaded entities, so looping
         // through them all can become a performance bottleneck. Optimize by
         // resolving duplicates and using a basic `for` loop
-        var ids = utilArrayUniq(Object.keys(head.entities).concat(Object.keys(base.entities)));
-        for (var i = 0; i < ids.length; i++) {
+        const ids = utilArrayUniq(Object.keys(head.entities).concat(Object.keys(base.entities)));
+        for (let i = 0; i < ids.length; i++) {
             checkEntityID(ids[i]);
         }
     }
@@ -83,19 +83,19 @@ export function coreDifference(base, head) {
 
     // pass true to include affected relation members
     _diff.extantIDs = function extantIDs(includeRelMembers) {
-        var result = new Set();
+        const result = new Set();
         Object.keys(_changes).forEach(function(id) {
             if (_changes[id].head) {
                 result.add(id);
             }
 
-            var h = _changes[id].head;
-            var b = _changes[id].base;
-            var entity = h || b;
+            const h = _changes[id].head;
+            const b = _changes[id].base;
+            const entity = h || b;
 
             if (includeRelMembers && entity.type === 'relation') {
-                var mh = h ? h.members.map(function(m) { return m.id; }) : [];
-                var mb = b ? b.members.map(function(m) { return m.id; }) : [];
+                const mh = h ? h.members.map(function(m) { return m.id; }) : [];
+                const mb = b ? b.members.map(function(m) { return m.id; }) : [];
                 utilArrayUnion(mh, mb).forEach(function(memberID) {
                     if (head.hasEntity(memberID)) {
                         result.add(memberID);
@@ -109,7 +109,7 @@ export function coreDifference(base, head) {
 
 
     _diff.modified = function modified() {
-        var result = [];
+        const result = [];
         Object.values(_changes).forEach(function(change) {
             if (change.base && change.head) {
                 result.push(change.head);
@@ -120,7 +120,7 @@ export function coreDifference(base, head) {
 
 
     _diff.created = function created() {
-        var result = [];
+        const result = [];
         Object.values(_changes).forEach(function(change) {
             if (!change.base && change.head) {
                 result.push(change.head);
@@ -131,7 +131,7 @@ export function coreDifference(base, head) {
 
 
     _diff.deleted = function deleted() {
-        var result = [];
+        const result = [];
         Object.values(_changes).forEach(function(change) {
             if (change.base && !change.head) {
                 result.push(change.base);
@@ -142,11 +142,11 @@ export function coreDifference(base, head) {
 
 
     _diff.summary = function summary() {
-        var relevant = {};
+        const relevant = {};
 
-        var keys = Object.keys(_changes);
-        for (var i = 0; i < keys.length; i++) {
-            var change = _changes[keys[i]];
+        const keys = Object.keys(_changes);
+        for (let i = 0; i < keys.length; i++) {
+            const change = _changes[keys[i]];
 
             if (change.head && change.head.geometry(head) !== 'vertex') {
                 addEntity(change.head, head, change.base ? 'modified' : 'created');
@@ -155,8 +155,8 @@ export function coreDifference(base, head) {
                 addEntity(change.base, base, 'deleted');
 
             } else if (change.base && change.head) { // modified vertex
-                var moved    = !deepEqual(change.base.loc,  change.head.loc);
-                var retagged = !deepEqual(change.base.tags, change.head.tags);
+                const moved    = !deepEqual(change.base.loc,  change.head.loc);
+                const retagged = !deepEqual(change.base.tags, change.head.tags);
 
                 if (moved) {
                     addParents(change.head);
@@ -186,9 +186,9 @@ export function coreDifference(base, head) {
         }
 
         function addParents(entity) {
-            var parents = head.parentWays(entity);
-            for (var j = parents.length - 1; j >= 0; j--) {
-                var parent = parents[j];
+            const parents = head.parentWays(entity);
+            for (let j = parents.length - 1; j >= 0; j--) {
+                const parent = parents[j];
                 if (!(parent.id in relevant)) {
                     addEntity(parent, head, 'modified');
                 }
@@ -200,16 +200,16 @@ export function coreDifference(base, head) {
     // returns complete set of entities that require a redraw
     //  (optionally within given `extent`)
     _diff.complete = function complete(extent) {
-        var result = {};
-        var id, change;
+        const result = {};
+        let id, change;
 
         for (id in _changes) {
             change = _changes[id];
 
-            var h = change.head;
-            var b = change.base;
-            var entity = h || b;
-            var i;
+            const h = change.head;
+            const b = change.base;
+            const entity = h || b;
+            let i;
 
             if (extent &&
                 (!h || !h.intersects(extent, head)) &&
@@ -220,9 +220,9 @@ export function coreDifference(base, head) {
             result[id] = h;
 
             if (entity.type === 'way') {
-                var nh = h ? h.nodes : [];
-                var nb = b ? b.nodes : [];
-                var diff;
+                const nh = h ? h.nodes : [];
+                const nb = b ? b.nodes : [];
+                let diff;
 
                 diff = utilArrayDifference(nh, nb);
                 for (i = 0; i < diff.length; i++) {
@@ -236,11 +236,11 @@ export function coreDifference(base, head) {
             }
 
             if (entity.type === 'relation' && entity.isMultipolygon()) {
-                var mh = h ? h.members.map(function(m) { return m.id; }) : [];
-                var mb = b ? b.members.map(function(m) { return m.id; }) : [];
-                var ids = utilArrayUnion(mh, mb);
+                const mh = h ? h.members.map(function(m) { return m.id; }) : [];
+                const mb = b ? b.members.map(function(m) { return m.id; }) : [];
+                const ids = utilArrayUnion(mh, mb);
                 for (i = 0; i < ids.length; i++) {
-                    var member = head.hasEntity(ids[i]);
+                    const member = head.hasEntity(ids[i]);
                     if (!member) continue;   // not downloaded
                     if (extent && !member.intersects(extent, head)) continue;   // not visible
                     result[ids[i]] = member;
@@ -255,8 +255,8 @@ export function coreDifference(base, head) {
 
 
         function addParents(parents, result) {
-            for (var i = 0; i < parents.length; i++) {
-                var parent = parents[i];
+            for (let i = 0; i < parents.length; i++) {
+                const parent = parents[i];
                 if (parent.id in result) continue;
 
                 result[parent.id] = parent;

@@ -8,7 +8,7 @@ import { utilQsString, utilStringQs } from '../util';
 import { utilAesDecrypt } from '../util/aes';
 import { IntervalTasksQueue } from '../util/IntervalTasksQueue';
 
-var isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
+let isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 
 // listen for DPI change, e.g. when dragging a browser window from a retina to non-retina screen
 window.matchMedia?.(`
@@ -23,14 +23,14 @@ window.matchMedia?.(`
 
 function localeDateString(s) {
     if (!s) return null;
-    var options = { day: 'numeric', month: 'short', year: 'numeric' };
-    var d = new Date(s);
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+    const d = new Date(s);
     if (isNaN(d.getTime())) return null;
     return d.toLocaleDateString(localizer.localeCode(), options);
 }
 
 function vintageRange(vintage) {
-    var s;
+    let s;
     if (vintage.start || vintage.end) {
         s = (vintage.start || '?');
         if (vintage.start !== vintage.end) {
@@ -42,12 +42,12 @@ function vintageRange(vintage) {
 
 
 export function rendererBackgroundSource(data) {
-    var source = Object.assign({}, data);   // shallow copy
-    var _offset = [0, 0];
-    var _name = source.name;
-    var _description = source.description;
-    var _best = !!source.best;
-    var _template = source.encrypted ? utilAesDecrypt(source.template) : source.template;
+    const source = Object.assign({}, data);   // shallow copy
+    let _offset = [0, 0];
+    const _name = source.name;
+    const _description = source.description;
+    const _best = !!source.best;
+    let _template = source.encrypted ? utilAesDecrypt(source.template) : source.template;
 
     source.tileSize = data.tileSize || 256;
     source.zoomExtent = data.zoomExtent || [0, 22];
@@ -68,26 +68,26 @@ export function rendererBackgroundSource(data) {
 
 
     source.name = function() {
-        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        const id_safe = source.id.replace(/\./g, '<TX_DOT>');
         return t('imagery.' + id_safe + '.name', { default: escape(_name) });
     };
 
 
     source.label = function() {
-        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        const id_safe = source.id.replace(/\./g, '<TX_DOT>');
         return t.append('imagery.' + id_safe + '.name', { default: escape(_name) });
     };
 
 
     source.hasDescription = function() {
-        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).text;
+        const id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        const descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).text;
         return descriptionText !== '';
     };
 
 
     source.description = function() {
-        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        const id_safe = source.id.replace(/\./g, '<TX_DOT>');
         return t.append('imagery.' + id_safe + '.description', { default: escape(_description) });
     };
 
@@ -99,7 +99,7 @@ export function rendererBackgroundSource(data) {
 
     source.area = function() {
         if (!data.polygon) return Number.MAX_VALUE;  // worldwide
-        var area = d3_geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
+        const area = d3_geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
         return isNaN(area) ? 0 : area;
     };
 
@@ -119,7 +119,7 @@ export function rendererBackgroundSource(data) {
 
 
     source.url = function(coord) {
-        var result = _template.replace(/#[\s\S]*/u, ''); // strip hash part of URL
+        let result = _template.replace(/#[\s\S]*/u, ''); // strip hash part of URL
         if (result === '') return result;   // source 'none'
 
 
@@ -138,10 +138,10 @@ export function rendererBackgroundSource(data) {
 
 
         if (source.type === 'wms') {
-            var tileToProjectedCoords = (function(x, y, z) {
-                var zoomSize = Math.pow(2, z);
-                var lon = x / zoomSize * Math.PI * 2 - Math.PI;
-                var lat = Math.atan(Math.sinh(Math.PI * (1 - 2 * y / zoomSize)));
+            const tileToProjectedCoords = (function(x, y, z) {
+                const zoomSize = Math.pow(2, z);
+                const lon = x / zoomSize * Math.PI * 2 - Math.PI;
+                const lat = Math.atan(Math.sinh(Math.PI * (1 - 2 * y / zoomSize)));
 
                 switch (source.projection) {
                     case 'EPSG:4326':
@@ -150,18 +150,19 @@ export function rendererBackgroundSource(data) {
                             y: lat * 180 / Math.PI
                         };
                     default: // EPSG:3857 and synonyms
-                        var mercCoords = d3_geoMercatorRaw(lon, lat);
-                        return {
-                            x: 20037508.34 / Math.PI * mercCoords[0],
-                            y: 20037508.34 / Math.PI * mercCoords[1]
-                        };
+                        return d3_geoMercatorRaw(lon, lat)
+                            .map(c => 20037508.34 / Math.PI * c)
+                            .reduce((acc, c, i) => {
+                                acc['xy'[i]] = c;
+                                return acc;
+                            }, {});
                 }
             });
 
-            var tileSize = source.tileSize;
-            var projection = source.projection;
-            var minXmaxY = tileToProjectedCoords(coord[0], coord[1], coord[2]);
-            var maxXminY = tileToProjectedCoords(coord[0]+1, coord[1]+1, coord[2]);
+            const tileSize = source.tileSize;
+            const projection = source.projection;
+            const minXmaxY = tileToProjectedCoords(coord[0], coord[1], coord[2]);
+            const maxXminY = tileToProjectedCoords(coord[0]+1, coord[1]+1, coord[2]);
 
             result = result.replace(/\{(\w+)\}/g, function (token, key) {
               switch (key) {
@@ -207,10 +208,10 @@ export function rendererBackgroundSource(data) {
         } else if (source.type === 'bing') {
             result = result
                 .replace('{u}', function() {
-                    var u = '';
-                    for (var zoom = coord[2]; zoom > 0; zoom--) {
-                        var b = 0;
-                        var mask = 1 << (zoom - 1);
+                    let u = '';
+                    for (let zoom = coord[2]; zoom > 0; zoom--) {
+                        let b = 0;
+                        const mask = 1 << (zoom - 1);
                         if ((coord[0] & mask) !== 0) b++;
                         if ((coord[1] & mask) !== 0) b += 2;
                         u += b.toString();
@@ -221,7 +222,7 @@ export function rendererBackgroundSource(data) {
 
         // these apply to any type..
         result = result.replace(/\{switch:([^}]+)\}/, function(s, r) {
-            var subdomains = r.split(',');
+            const subdomains = r.split(',');
             return subdomains[(coord[0] + coord[1]) % subdomains.length];
         });
 
@@ -253,13 +254,13 @@ export function rendererBackgroundSource(data) {
 
 
     source.getMetadata = function(center, tileCoord, callback) {
-        var vintage = {
+        const vintage = {
             start: localeDateString(source.startDate),
             end: localeDateString(source.endDate)
         };
         vintage.range = vintageRange(vintage);
 
-        var metadata = { vintage: vintage };
+        const metadata = { vintage: vintage };
         callback(null, metadata);
     };
 
@@ -275,8 +276,8 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     //fallback url template
     data.template = 'https://ecn.t{switch:0,1,2,3}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=1&pr=odbl&n=z';
 
-    var bing = rendererBackgroundSource(data);
-    var key = utilAesDecrypt('5c875730b09c6b422433e807e1ff060b6536c791dbfffcffc4c6b18a1bdba1f14593d151adb50e19e1be1ab19aef813bf135d0f103475e5c724dec94389e45d0');
+    const bing = rendererBackgroundSource(data);
+    const key = utilAesDecrypt('5c875730b09c6b422433e807e1ff060b6536c791dbfffcffc4c6b18a1bdba1f14593d151adb50e19e1be1ab19aef813bf135d0f103475e5c724dec94389e45d0');
     /*
     missing tile image strictness param (n=)
     •	n=f -> (Fail) returns a 404
@@ -285,21 +286,21 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     */
     const strictParam = 'n';
 
-    var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/AerialOSM?include=ImageryProviders&uriScheme=https&key=' + key;
-    var cache = {};
-    var inflight = {};
-    var providers = [];
-    var taskQueue = new IntervalTasksQueue(250);
-    var metadataLastZoom = -1;
+    const url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/AerialOSM?include=ImageryProviders&uriScheme=https&key=' + key;
+    const cache = {};
+    const inflight = {};
+    let providers = [];
+    const taskQueue = new IntervalTasksQueue(250);
+    let metadataLastZoom = -1;
 
     d3_json(url)
         .then(function(json) {
-            let imageryResource = json.resourceSets[0].resources[0];
+            const imageryResource = json.resourceSets[0].resources[0];
 
             //retrieve and prepare up to date imagery template
             let template = imageryResource.imageUrl; //https://ecn.{subdomain}.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=10339
-            let subDomains = imageryResource.imageUrlSubdomains; //["t0, t1, t2, t3"]
-            let subDomainNumbers = subDomains.map((subDomain) => {
+            const subDomains = imageryResource.imageUrlSubdomains; //["t0, t1, t2, t3"]
+            const subDomainNumbers = subDomains.map((subDomain) => {
                 return subDomain.substring(1);
             } ).join(',');
 
@@ -342,10 +343,10 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
 
 
     bing.getMetadata = function(center, tileCoord, callback) {
-        var tileID = tileCoord.slice(0, 3).join('/');
-        var zoom = Math.min(tileCoord[2], 21);
-        var centerPoint = center[1] + ',' + center[0];  // lat,lng
-        var url = 'https://dev.virtualearth.net/REST/v1/Imagery/BasicMetadata/AerialOSM/' + centerPoint +
+        const tileID = tileCoord.slice(0, 3).join('/');
+        const zoom = Math.min(tileCoord[2], 21);
+        const centerPoint = center[1] + ',' + center[0];  // lat,lng
+        const url = 'https://dev.virtualearth.net/REST/v1/Imagery/BasicMetadata/AerialOSM/' + centerPoint +
                 '?zl=' + zoom + '&key=' + key;
 
         if (inflight[tileID]) return;
@@ -371,13 +372,13 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
                     if (!result) {
                         throw new Error('Unknown Error');
                     }
-                    var vintage = {
+                    const vintage = {
                         start: localeDateString(result.resourceSets[0].resources[0].vintageStart),
                         end: localeDateString(result.resourceSets[0].resources[0].vintageEnd)
                     };
                     vintage.range = vintageRange(vintage);
 
-                    var metadata = { vintage: vintage };
+                    const metadata = { vintage: vintage };
                     cache[tileID].metadata = metadata;
                     if (callback) callback(null, metadata);
                 })
@@ -403,10 +404,10 @@ rendererBackgroundSource.Esri = function(data) {
         data.template = data.template + '?blankTile=false';
     }
 
-    var esri = rendererBackgroundSource(data);
-    var cache = {};
-    var inflight = {};
-    var _prevCenter;
+    const esri = rendererBackgroundSource(data);
+    const cache = {};
+    const inflight = {};
+    let _prevCenter;
 
     // use a tilemap service to set maximum zoom for esri tiles dynamically
     // https://developers.arcgis.com/documentation/tiled-elevation-service/
@@ -416,17 +417,17 @@ rendererBackgroundSource.Esri = function(data) {
         _prevCenter = center;
 
         // tiles are available globally to zoom level 19, afterward they may or may not be present
-        var z = 20;
+        const z = 20;
 
         // first generate a random url using the template
-        var dummyUrl = esri.url([1,2,3]);
+        const dummyUrl = esri.url([1,2,3]);
 
         // calculate url z/y/x from the lat/long of the center of the map
-        var x = (Math.floor((center[0] + 180) / 360 * Math.pow(2, z)));
-        var y = (Math.floor((1 - Math.log(Math.tan(center[1] * Math.PI / 180) + 1 / Math.cos(center[1] * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, z)));
+        const x = (Math.floor((center[0] + 180) / 360 * Math.pow(2, z)));
+        const y = (Math.floor((1 - Math.log(Math.tan(center[1] * Math.PI / 180) + 1 / Math.cos(center[1] * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, z)));
 
         // fetch an 8x8 grid to leverage cache
-        var tilemapUrl = dummyUrl.replace(/tile\/[0-9]+\/[0-9]+\/[0-9]+\?blankTile=false/, 'tilemap') + '/' + z + '/' + y + '/' + x + '/8/8';
+        const tilemapUrl = dummyUrl.replace(/tile\/[0-9]+\/[0-9]+\/[0-9]+\?blankTile=false/, 'tilemap') + '/' + z + '/' + y + '/' + x + '/8/8';
 
         // make the request and introspect the response from the tilemap server
         d3_json(tilemapUrl)
@@ -434,8 +435,8 @@ rendererBackgroundSource.Esri = function(data) {
                 if (!tilemap) {
                     throw new Error('Unknown Error');
                 }
-                var hasTiles = true;
-                for (var i = 0; i < tilemap.data.length; i++) {
+                let hasTiles = true;
+                for (let i = 0; i < tilemap.data.length; i++) {
                     // 0 means an individual tile in the grid doesn't exist
                     if (!tilemap.data[i]) {
                         hasTiles = false;
@@ -457,17 +458,17 @@ rendererBackgroundSource.Esri = function(data) {
             // rest endpoint is not available for ESRI's "clarity" imagery
             return callback(null, {});
         }
-        var tileID = tileCoord.slice(0, 3).join('/');
-        var zoom = Math.min(tileCoord[2], esri.zoomExtent[1]);
-        var centerPoint = center[0] + ',' + center[1];  // long, lat (as it should be)
-        var unknown = t('info_panels.background.unknown');
-        var vintage = {};
-        var metadata = {};
+        const tileID = tileCoord.slice(0, 3).join('/');
+        const zoom = Math.min(tileCoord[2], esri.zoomExtent[1]);
+        const centerPoint = center[0] + ',' + center[1];  // long, lat (as it should be)
+        const unknown = t('info_panels.background.unknown');
+        let vintage = {};
+        let metadata = {};
 
         if (inflight[tileID]) return;
 
         // build up query using the layer appropriate to the current zoom
-        var url = 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/4/query';
+        let url = 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/4/query';
         url += '?returnGeometry=false&geometry=' + centerPoint + '&inSR=4326&geometryType=esriGeometryPoint&outFields=*&f=json';
 
         if (!cache[tileID]) {
@@ -494,7 +495,7 @@ rendererBackgroundSource.Esri = function(data) {
                 }
 
                 // pass through the discrete capture date from metadata
-                var captureDate = localeDateString(result.SRC_DATE2);
+                const captureDate = localeDateString(result.SRC_DATE2);
                 vintage = {
                     start: captureDate,
                     end: captureDate,
@@ -535,7 +536,7 @@ rendererBackgroundSource.Esri = function(data) {
 
 
 rendererBackgroundSource.None = function() {
-    var source = rendererBackgroundSource({ id: 'none', template: '' });
+    const source = rendererBackgroundSource({ id: 'none', template: '' });
 
 
     source.name = function() {
@@ -563,7 +564,7 @@ rendererBackgroundSource.None = function() {
 
 
 rendererBackgroundSource.Custom = function(template) {
-    var source = rendererBackgroundSource({ id: 'custom', template: template });
+    const source = rendererBackgroundSource({ id: 'custom', template: template });
 
 
     source.name = function() {
@@ -577,12 +578,12 @@ rendererBackgroundSource.Custom = function(template) {
 
     source.imageryUsed = function() {
         // sanitize personal connection tokens - #6801
-        var cleaned = source.template();
+        let cleaned = source.template();
 
         // from query string parameters
         if (cleaned.indexOf('?') !== -1) {
-            var parts = cleaned.split('?', 2);
-            var qs = utilStringQs(parts[1]);
+            const parts = cleaned.split('?', 2);
+            const qs = utilStringQs(parts[1]);
 
             ['access_token', 'connectId', 'token', 'Signature'].forEach(function(param) {
                 if (qs[param]) {

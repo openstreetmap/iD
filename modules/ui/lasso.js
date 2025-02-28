@@ -4,7 +4,7 @@ import { uiToggle } from './toggle';
 
 
 export function uiLasso(context) {
-    var group, polygon;
+    let group, polygon;
 
     lasso.coordinates = [];
 

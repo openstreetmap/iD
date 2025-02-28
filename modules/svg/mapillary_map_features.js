@@ -126,7 +126,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         enter
             .append('title')
             .text(function(d) {
-                var id = d.value.replace(/--/g, '.').replace(/-/g, '_');
+                const id = d.value.replace(/--/g, '.').replace(/-/g, '_');
                 return t('mapillary_map_features.' + id);
             });
 

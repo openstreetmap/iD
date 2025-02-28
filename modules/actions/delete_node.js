@@ -4,8 +4,8 @@ import { actionDeleteWay } from './delete_way';
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteNodeAction.as
 export function actionDeleteNode(nodeId) {
-    var action = function(graph) {
-        var node = graph.entity(nodeId);
+    const action = function(graph) {
+        const node = graph.entity(nodeId);
 
         graph.parentWays(node)
             .forEach(function(parent) {

@@ -6,16 +6,16 @@ import { utilPrefixCSSProperty, utilTiler } from '../util';
 
 
 export function rendererTileLayer(context) {
-    var transformProp = utilPrefixCSSProperty('Transform');
-    var tiler = utilTiler();
+    const transformProp = utilPrefixCSSProperty('Transform');
+    const tiler = utilTiler();
 
-    var _tileSize = 256;
-    var _projection;
-    var _cache = {};
-    var _tileOrigin;
-    var _zoom;
-    var _source;
-    var _underzoom = 0;
+    let _tileSize = 256;
+    let _projection;
+    let _cache = {};
+    let _tileOrigin;
+    let _zoom;
+    let _source;
+    let _underzoom = 0;
 
     function tileSizeAtZoom(d, z) {
         return (d.tileSize * Math.pow(2, z - d[2])) / d.tileSize;
@@ -23,7 +23,7 @@ export function rendererTileLayer(context) {
 
 
     function atZoom(t, distance) {
-        var power = Math.pow(2, distance);
+        const power = Math.pow(2, distance);
         return [
             Math.floor(t[0] * power),
             Math.floor(t[1] * power),
@@ -33,8 +33,8 @@ export function rendererTileLayer(context) {
 
 
     function lookUp(d) {
-        for (var up = -1; up > -d[2]; up--) {
-            var tile = atZoom(d, up);
+        for (let up = -1; up > -d[2]; up--) {
+            const tile = atZoom(d, up);
             if (_cache[_source.url(tile)] !== false) {
                 return tile;
             }
@@ -43,9 +43,9 @@ export function rendererTileLayer(context) {
 
 
     function uniqueBy(a, n) {
-        var o = [];
-        var seen = {};
-        for (var i = 0; i < a.length; i++) {
+        const o = [];
+        const seen = {};
+        for (let i = 0; i < a.length; i++) {
             if (seen[a[i][n]] === undefined) {
                 o.push(a[i]);
                 seen[a[i][n]] = true;
@@ -67,7 +67,7 @@ export function rendererTileLayer(context) {
     function background(selection) {
         _zoom = geoScaleToZoom(_projection.scale(), _tileSize);
 
-        var pixelOffset;
+        let pixelOffset;
         if (_source) {
             pixelOffset = [
                 _source.offset()[0] * Math.pow(2, _zoom),
@@ -99,8 +99,8 @@ export function rendererTileLayer(context) {
     // rendered when tiles load/error (see #644).
     function render(selection) {
         if (!_source) return;
-        var requests = [];
-        var showDebug = context.getDebug('tile') && !_source.overlay;
+        let requests = [];
+        const showDebug = context.getDebug('tile') && !_source.overlay;
 
         if (_source.validZoom(_zoom, _underzoom)) {
             tiler.skipNullIsland(!!_source.overlay);
@@ -139,8 +139,8 @@ export function rendererTileLayer(context) {
         }
 
         function imageTransform(d) {
-            var ts = d.tileSize * Math.pow(2, _zoom - d[2]);
-            var scale = tileSizeAtZoom(d, _zoom);
+            const ts = d.tileSize * Math.pow(2, _zoom - d[2]);
+            const scale = tileSizeAtZoom(d, _zoom);
             return 'translate(' +
                 ((d[0] * ts + d.source.offset()[0] * Math.pow(2, _zoom)) * _tileSize / d.tileSize - _tileOrigin[0]
             ) + 'px,' +
@@ -150,7 +150,7 @@ export function rendererTileLayer(context) {
         }
 
         function tileCenter(d) {
-            var ts = d.tileSize * Math.pow(2, _zoom - d[2]);
+            const ts = d.tileSize * Math.pow(2, _zoom - d[2]);
             return [
                 ((d[0] * ts) - _tileOrigin[0] + (ts / 2)),
                 ((d[1] * ts) - _tileOrigin[1] + (ts / 2))
@@ -158,21 +158,21 @@ export function rendererTileLayer(context) {
         }
 
         function debugTransform(d) {
-            var coord = tileCenter(d);
+            const coord = tileCenter(d);
             return 'translate(' + coord[0] + 'px,' + coord[1] + 'px)';
         }
 
 
         // Pick a representative tile near the center of the viewport
         // (This is useful for sampling the imagery vintage)
-        var dims = tiler.size();
-        var mapCenter = [dims[0] / 2, dims[1] / 2];
-        var minDist = Math.max(dims[0], dims[1]);
-        var nearCenter;
+        const dims = tiler.size();
+        const mapCenter = [dims[0] / 2, dims[1] / 2];
+        let minDist = Math.max(dims[0], dims[1]);
+        let nearCenter;
 
         requests.forEach(function(d) {
-            var c = tileCenter(d);
-            var dist = geoVecLength(c, mapCenter);
+            const c = tileCenter(d);
+            const dist = geoVecLength(c, mapCenter);
             if (dist < minDist) {
                 minDist = dist;
                 nearCenter = d;
@@ -180,7 +180,7 @@ export function rendererTileLayer(context) {
         });
 
 
-        var image = selection.selectAll('img')
+        const image = selection.selectAll('img')
             .data(requests, function(d) { return d.url; });
 
         image.exit()
@@ -213,14 +213,14 @@ export function rendererTileLayer(context) {
 
 
 
-        var debug = selection.selectAll('.tile-label-debug')
+        let debug = selection.selectAll('.tile-label-debug')
             .data(showDebug ? requests : [], function(d) { return d.url; });
 
         debug.exit()
             .remove();
 
         if (showDebug) {
-            var debugEnter = debug.enter()
+            const debugEnter = debug.enter()
                 .append('div')
                 .attr('class', 'tile-label-debug');
 
@@ -244,8 +244,8 @@ export function rendererTileLayer(context) {
             debug
                 .selectAll('.tile-label-debug-vintage')
                 .each(function(d) {
-                    var span = d3_select(this);
-                    var center = context.projection.invert(tileCenter(d));
+                    const span = d3_select(this);
+                    const center = context.projection.invert(tileCenter(d));
                     _source.getMetadata(center, d, function(err, result) {
                         if (result && result.vintage && result.vintage.range) {
                           span.text(result.vintage.range);

@@ -18,31 +18,31 @@ import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
 import { uiSectionSelectionList } from './sections/selection_list';
 
 export function uiEntityEditor(context) {
-    var dispatch = d3_dispatch('choose');
-    var _state = 'select';
-    var _coalesceChanges = false;
-    var _modified = false;
-    var _base;
-    var _entityIDs;
-    var _activePresets = [];
-    var _newFeature;
+    const dispatch = d3_dispatch('choose');
+    let _state = 'select';
+    let _coalesceChanges = false;
+    let _modified = false;
+    let _base;
+    let _entityIDs;
+    let _activePresets = [];
+    let _newFeature;
 
-    var _sections;
+    let _sections;
 
     function entityEditor(selection) {
 
-        var combinedTags = utilCombinedTags(_entityIDs, context.graph());
+        const combinedTags = utilCombinedTags(_entityIDs, context.graph());
 
         // Header
-        var header = selection.selectAll('.header')
+        let header = selection.selectAll('.header')
             .data([0]);
 
         // Enter
-        var headerEnter = header.enter()
+        const headerEnter = header.enter()
             .append('div')
             .attr('class', 'header fillL');
 
-        var direction = (localizer.textDirection() === 'rtl') ? 'forward' : 'backward';
+        const direction = (localizer.textDirection() === 'rtl') ? 'forward' : 'backward';
 
         headerEnter
             .append('button')
@@ -74,11 +74,11 @@ export function uiEntityEditor(context) {
             });
 
         // Body
-        var body = selection.selectAll('.inspector-body')
+        let body = selection.selectAll('.inspector-body')
             .data([0]);
 
         // Enter
-        var bodyEnter = body.enter()
+        const bodyEnter = body.enter()
             .append('div')
             .attr('class', 'entity-editor inspector-body sep-top');
 
@@ -122,7 +122,7 @@ export function uiEntityEditor(context) {
         function historyChanged(difference) {
             if (selection.selectAll('.entity-editor').empty()) return;
             if (_state === 'hide') return;
-            var significant = !difference ||
+            const significant = !difference ||
                     difference.didChange.properties ||
                     difference.didChange.addition ||
                     difference.didChange.deletion;
@@ -131,11 +131,11 @@ export function uiEntityEditor(context) {
             _entityIDs = _entityIDs.filter(context.hasEntity);
             if (!_entityIDs.length) return;
 
-            var priorActivePreset = _activePresets.length === 1 && _activePresets[0];
+            const priorActivePreset = _activePresets.length === 1 && _activePresets[0];
 
             loadActivePresets();
 
-            var graph = context.graph();
+            const graph = context.graph();
             entityEditor.modified(_base !== graph);
             entityEditor(selection);
 
@@ -156,20 +156,20 @@ export function uiEntityEditor(context) {
     // Use explicit entityIDs in case the selection changes before the event is fired.
     function changeTags(entityIDs, changed, onInput) {
 
-        var actions = [];
-        for (var i in entityIDs) {
-            var entityID = entityIDs[i];
-            var entity = context.entity(entityID);
+        const actions = [];
+        for (const i in entityIDs) {
+            const entityID = entityIDs[i];
+            const entity = context.entity(entityID);
 
-            var tags = Object.assign({}, entity.tags);   // shallow copy
+            let tags = Object.assign({}, entity.tags);   // shallow copy
 
             if (typeof changed === 'function') {
                 // a complex callback tag change
                 tags = changed(tags);
             } else {
-                for (var k in changed) {
+                for (const k in changed) {
                     if (!k) continue;
-                    var v = changed[k];
+                    const v = changed[k];
                     if (typeof v === 'object') {
                         // a "key only" tag change
                         tags[k] = tags[v.oldKey];
@@ -189,14 +189,14 @@ export function uiEntityEditor(context) {
         }
 
         if (actions.length) {
-            var combinedAction = function(graph) {
+            const combinedAction = function(graph) {
                 actions.forEach(function(action) {
                     graph = action(graph);
                 });
                 return graph;
             };
 
-            var annotation = t('operations.change_tags.annotation');
+            const annotation = t('operations.change_tags.annotation');
 
             if (_coalesceChanges) {
                 context.overwrite(combinedAction, annotation);
@@ -214,23 +214,23 @@ export function uiEntityEditor(context) {
 
     function revertTags(keys) {
 
-        var actions = [];
-        for (var i in _entityIDs) {
-            var entityID = _entityIDs[i];
+        const actions = [];
+        for (const i in _entityIDs) {
+            const entityID = _entityIDs[i];
 
-            var original = context.graph().base().entities[entityID];
-            var changed = {};
-            for (var j in keys) {
-                var key = keys[j];
+            const original = context.graph().base().entities[entityID];
+            const changed = {};
+            for (const j in keys) {
+                const key = keys[j];
                 changed[key] = original ? original.tags[key] : undefined;
             }
 
-            var entity = context.entity(entityID);
-            var tags = Object.assign({}, entity.tags);   // shallow copy
+            const entity = context.entity(entityID);
+            let tags = Object.assign({}, entity.tags);   // shallow copy
 
-            for (var k in changed) {
+            for (const k in changed) {
                 if (!k) continue;
-                var v = changed[k];
+                const v = changed[k];
                 if (v !== undefined || tags.hasOwnProperty(k)) {
                     tags[k] = v;
                 }
@@ -246,14 +246,14 @@ export function uiEntityEditor(context) {
         }
 
         if (actions.length) {
-            var combinedAction = function(graph) {
+            const combinedAction = function(graph) {
                 actions.forEach(function(action) {
                     graph = action(graph);
                 });
                 return graph;
             };
 
-            var annotation = t('operations.change_tags.annotation');
+            const annotation = t('operations.change_tags.annotation');
 
             if (_coalesceChanges) {
                 context.overwrite(combinedAction, annotation);
@@ -309,21 +309,21 @@ export function uiEntityEditor(context) {
 
     function loadActivePresets(isForNewSelection) {
 
-        var graph = context.graph();
+        const graph = context.graph();
 
-        var counts = {};
+        const counts = {};
 
-        for (var i in _entityIDs) {
-            var entity = graph.hasEntity(_entityIDs[i]);
+        for (const i in _entityIDs) {
+            const entity = graph.hasEntity(_entityIDs[i]);
             if (!entity) return;
 
-            var match = presetManager.match(entity, graph);
+            const match = presetManager.match(entity, graph);
 
             if (!counts[match.id]) counts[match.id] = 0;
             counts[match.id] += 1;
         }
 
-        var matches = Object.keys(counts).sort(function(p1, p2) {
+        const matches = Object.keys(counts).sort(function(p1, p2) {
             return counts[p2] - counts[p1];
         }).map(function(pID) {
             return presetManager.item(pID);
@@ -331,7 +331,7 @@ export function uiEntityEditor(context) {
 
         if (!isForNewSelection) {
             // A "weak" preset doesn't set any tags. (e.g. "Address")
-            var weakPreset = _activePresets.length === 1 &&
+            const weakPreset = _activePresets.length === 1 &&
                 !_activePresets[0].isFallback() &&
                 Object.keys(_activePresets[0].addTags || {}).length === 0;
             // Don't replace a weak preset with a fallback preset (e.g. "Point")

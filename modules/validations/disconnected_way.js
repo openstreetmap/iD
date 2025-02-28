@@ -7,15 +7,15 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';
 
 export function validationDisconnectedWay() {
-    var type = 'disconnected_way';
+    const type = 'disconnected_way';
 
     function isTaggedAsHighway(entity) {
         return osmRoutableHighwayTagValues[entity.tags.highway];
     }
 
-    var validation = function checkDisconnectedWay(entity, graph) {
+    const validation = function checkDisconnectedWay(entity, graph) {
 
-        var routingIslandWays = routingIslandForEntity(entity);
+        const routingIslandWays = routingIslandForEntity(entity);
         if (!routingIslandWays) return [];
 
         return [new validationIssue({
@@ -23,8 +23,8 @@ export function validationDisconnectedWay() {
             subtype: 'highway',
             severity: 'warning',
             message: function(context) {
-                var entity = this.entityIds.length && context.hasEntity(this.entityIds[0]);
-                var label = entity && utilDisplayLabel(entity, context.graph());
+                const entity = this.entityIds.length && context.hasEntity(this.entityIds[0]);
+                const label = entity && utilDisplayLabel(entity, context.graph());
                 return t.append('issues.disconnected_way.routable.message', { count: this.entityIds.length, highway: label });
             },
             reference: showReference,
@@ -35,20 +35,20 @@ export function validationDisconnectedWay() {
 
         function makeFixes(context) {
 
-            var fixes = [];
+            const fixes = [];
 
-            var singleEntity = this.entityIds.length === 1 && context.hasEntity(this.entityIds[0]);
+            const singleEntity = this.entityIds.length === 1 && context.hasEntity(this.entityIds[0]);
 
             if (singleEntity) {
 
                 if (singleEntity.type === 'way' && !singleEntity.isClosed()) {
 
-                    var textDirection = localizer.textDirection();
+                    const textDirection = localizer.textDirection();
 
-                    var startFix = makeContinueDrawingFixIfAllowed(textDirection, singleEntity.first(), 'start');
+                    const startFix = makeContinueDrawingFixIfAllowed(textDirection, singleEntity.first(), 'start');
                     if (startFix) fixes.push(startFix);
 
-                    var endFix = makeContinueDrawingFixIfAllowed(textDirection, singleEntity.last(), 'end');
+                    const endFix = makeContinueDrawingFixIfAllowed(textDirection, singleEntity.last(), 'end');
                     if (endFix) fixes.push(endFix);
                 }
                 if (!fixes.length) {
@@ -62,8 +62,8 @@ export function validationDisconnectedWay() {
                     title: t.append('issues.fix.delete_feature.title'),
                     entityIds: [singleEntity.id],
                     onClick: function(context) {
-                        var id = this.issue.entityIds[0];
-                        var operation = operationDelete(context, [id]);
+                        const id = this.issue.entityIds[0];
+                        const operation = operationDelete(context, [id]);
                         if (!operation.disabled()) {
                             operation();
                         }
@@ -90,8 +90,8 @@ export function validationDisconnectedWay() {
 
         function routingIslandForEntity(entity) {
 
-            var routingIsland = new Set();  // the interconnected routable features
-            var waysToCheck = [];           // the queue of remaining routable ways to traverse
+            const routingIsland = new Set();  // the interconnected routable features
+            const waysToCheck = [];           // the queue of remaining routable ways to traverse
 
             function queueParentWays(node) {
                 graph.parentWays(node).forEach(function(parentWay) {
@@ -119,10 +119,10 @@ export function validationDisconnectedWay() {
             }
 
             while (waysToCheck.length) {
-                var wayToCheck = waysToCheck.pop();
-                var childNodes = graph.childNodes(wayToCheck);
-                for (var i in childNodes) {
-                    var vertex = childNodes[i];
+                const wayToCheck = waysToCheck.pop();
+                const childNodes = graph.childNodes(wayToCheck);
+                for (const i in childNodes) {
+                    const vertex = childNodes[i];
 
                     if (isConnectedVertex(vertex)) {
                         // found a link to the wider network, not a routing island
@@ -143,7 +143,7 @@ export function validationDisconnectedWay() {
 
         function isConnectedVertex(vertex) {
             // assume ways overlapping unloaded tiles are connected to the wider road network  - #5938
-            var osm = services.osm;
+            const osm = services.osm;
             if (osm && !osm.isDataLoaded(vertex.loc)) return true;
 
             // entrances are considered connected
@@ -176,10 +176,10 @@ export function validationDisconnectedWay() {
         }
 
         function makeContinueDrawingFixIfAllowed(textDirection, vertexID, whichEnd) {
-            var vertex = graph.hasEntity(vertexID);
+            const vertex = graph.hasEntity(vertexID);
             if (!vertex || vertex.tags.noexit === 'yes') return null;
 
-            var useLeftContinue = (whichEnd === 'start' && textDirection === 'ltr') ||
+            const useLeftContinue = (whichEnd === 'start' && textDirection === 'ltr') ||
                 (whichEnd === 'end' && textDirection === 'rtl');
 
             return new validationIssueFix({
@@ -187,15 +187,15 @@ export function validationDisconnectedWay() {
                 title: t.append('issues.fix.continue_from_' + whichEnd + '.title'),
                 entityIds: [vertexID],
                 onClick: function(context) {
-                    var wayId = this.issue.entityIds[0];
-                    var way = context.hasEntity(wayId);
-                    var vertexId = this.entityIds[0];
-                    var vertex = context.hasEntity(vertexId);
+                    const wayId = this.issue.entityIds[0];
+                    const way = context.hasEntity(wayId);
+                    const vertexId = this.entityIds[0];
+                    const vertex = context.hasEntity(vertexId);
 
                     if (!way || !vertex) return;
 
                     // make sure the vertex is actually visible and editable
-                    var map = context.map();
+                    const map = context.map();
                     if (!context.editable() || !map.trimmedExtent().contains(vertex.loc)) {
                         map.zoomToEase(vertex);
                     }

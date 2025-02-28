@@ -1,7 +1,7 @@
 describe('uiCombobox', function() {
-    var body, context, container, content, input, combobox;
+    let body, context, container, content, input, combobox;
 
-    var data = [
+    const data = [
         {title: 'foobar', value: 'foobar'},
         {title: 'foo', value: 'foo'},
         {title: 'bar', value: 'bar'},
@@ -10,10 +10,10 @@ describe('uiCombobox', function() {
     ];
 
     function simulateKeypress(key) {
-        var keyCode = iD.utilKeybinding.keyCodes[key];
-        var value = input.property('value');
-        var start = input.property('selectionStart');
-        var finish = input.property('selectionEnd');
+        const keyCode = iD.utilKeybinding.keyCodes[key];
+        let value = input.property('value');
+        let start = input.property('selectionStart');
+        let finish = input.property('selectionEnd');
 
         input.node().dispatchEvent(new KeyboardEvent('keydown', { keyCode }));
 
@@ -128,7 +128,7 @@ describe('uiCombobox', function() {
     });
 
     it('does not autocomplete numeric options', function() {
-        var numeric = [
+        const numeric = [
             {title: '100', value: '100'},
             {title: '110', value: '110'}
         ];
@@ -252,7 +252,7 @@ describe('uiCombobox', function() {
     });
 
     it('emits cancel event on ⎋', function() {
-        var spy = sinon.spy();
+        const spy = sinon.spy();
         combobox.on('cancel', spy);
 
         input.call(combobox.data(data));

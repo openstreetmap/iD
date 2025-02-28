@@ -28,7 +28,7 @@ export const setDebug = (newValue) => { debug = newValue; };
 
 // Reexport just what our tests use, see #4379
 import * as D3 from 'd3';
-export let d3 = {
+export const d3 = {
   dispatch:  D3.dispatch,
   geoMercator: D3.geoMercator,
   geoProjection: D3.geoProjection,

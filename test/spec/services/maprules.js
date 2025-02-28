@@ -1,5 +1,5 @@
 describe('maprules', function() {
-    var _ruleChecks, _savedAreaKeys, validationRules;
+    let _ruleChecks, _savedAreaKeys, validationRules;
 
     before(function() {
         _savedAreaKeys = iD.osmAreaKeys;
@@ -17,16 +17,16 @@ describe('maprules', function() {
 
     describe('#filterRuleChecks', function() {
         it('returns shortlist of mapcss checks relevant to provided selector', function() {
-            var selector = {
+            const selector = {
                 geometry: 'closedway',
                 equals: {amenity: 'marketplace'},
                 absence: 'name',
                 error: '\'Marketplace\' preset must be coupled with name'
             };
-            var filteredChecks = iD.serviceMapRules.filterRuleChecks(selector);
-            var equalsCheck = filteredChecks[0];
-            var absenceCheck = filteredChecks[1];
-            var entityTags = { amenity: 'marketplace' };
+            const filteredChecks = iD.serviceMapRules.filterRuleChecks(selector);
+            const equalsCheck = filteredChecks[0];
+            const absenceCheck = filteredChecks[1];
+            const entityTags = { amenity: 'marketplace' };
 
             expect(filteredChecks.length).eql(2);
             expect(equalsCheck(entityTags)).to.be.true;
@@ -99,33 +99,33 @@ describe('maprules', function() {
     describe('#inferGeometry', function() {
         it('infers geometry using selector keys', function() {
 
-            var amenityDerivedArea = {
+            const amenityDerivedArea = {
                 geometry: 'closedway',
                 presence: 'amenity',
                 positiveRegex: { amenity: ['^school$', '^healthcare$'] },
                 error: 'amenity cannot be healthcare or school!'
             };
 
-            var areaDerivedArea = {
+            const areaDerivedArea = {
                 geometry: 'closedway',
                 equals: { area: 'yes' },
             };
 
-            var badAreaDerivedLine = {
+            const badAreaDerivedLine = {
                 geometry: 'closedway',
                 equals: { 'area': 'no' }
             };
 
-            var roundHouseRailwayDerivedArea = {
+            const roundHouseRailwayDerivedArea = {
                 geometry: 'closedway',
                 equals: { 'railway': 'roundhouse' }
             };
 
-            var justClosedWayDerivedLine = {
+            const justClosedWayDerivedLine = {
                 geometry: 'closedway'
             };
 
-            var tagMap, geom;
+            let tagMap, geom;
             tagMap = iD.serviceMapRules.buildTagMap(amenityDerivedArea);
             geom = iD.serviceMapRules.inferGeometry(tagMap);
             expect(geom).to.be.eql('area');
@@ -150,7 +150,7 @@ describe('maprules', function() {
 
     describe('#addRule', function() {
         it('builds a rule from provided selector and adds it to _validationRules', function () {
-            var selector = {
+            const selector = {
                 geometry:'node',
                 equals: {amenity:'marketplace'},
                 absence:'name',
@@ -181,14 +181,14 @@ describe('maprules', function() {
 
     describe('#validationRules', function() {
         it('returns _validationRules array', function() {
-            var selector = {
+            const selector = {
                 geometry: 'closedway',
                 equals: {amenity: 'marketplace'},
                 absence: 'name',
                 error: '\'Marketplace\' preset must be coupled with name'
             };
             iD.serviceMapRules.addRule(selector);
-            var rules = iD.serviceMapRules.validationRules();
+            const rules = iD.serviceMapRules.validationRules();
             expect(rules).instanceof(Array);
             expect(rules.length).to.eql(1);
         });
@@ -197,60 +197,60 @@ describe('maprules', function() {
     describe('_ruleChecks', function () {
         describe('#equals', function() {
             it('is true when two tag maps intersect', function() {
-                var a = { amenity: 'school' };
-                var b = { amenity: 'school' };
+                const a = { amenity: 'school' };
+                const b = { amenity: 'school' };
                 expect(_ruleChecks.equals(a)(b)).to.be.true;
             });
             it('is false when two tag maps intersect', function() {
-                var a = { man_made: 'water_tap' };
-                var b = { amenity: 'school' };
+                const a = { man_made: 'water_tap' };
+                const b = { amenity: 'school' };
                 expect(_ruleChecks.equals(a)(b)).to.be.false;
             });
         });
         describe('#notEquals', function() {
             it('is true when two tag maps do not intersect', function() {
-                var a = { man_made: 'water_tap' };
-                var b = { amenity: 'school' };
+                const a = { man_made: 'water_tap' };
+                const b = { amenity: 'school' };
                 expect(_ruleChecks.notEquals(a)(b)).to.be.true;
             });
             it('is not true when two tag maps intersect', function() {
-                var a = { amenity: 'school' };
-                var b = { amenity: 'school', opening_hours: '9-5' };
+                const a = { amenity: 'school' };
+                const b = { amenity: 'school', opening_hours: '9-5' };
                 expect(_ruleChecks.notEquals(a)(b)).to.be.false;
             });
         });
         describe('absence', function() {
             it('is true when tag map keys does not include key in question', function() {
-                var key = 'amenity';
-                var map = { building: 'yes' };
+                const key = 'amenity';
+                const map = { building: 'yes' };
                 expect(_ruleChecks.absence(key)(map)).to.be.true;
             });
             it('is false when tag map keys does include key in question', function() {
-                var key = 'amenity';
-                var map = { amenity: 'school' };
+                const key = 'amenity';
+                const map = { amenity: 'school' };
                 expect(_ruleChecks.absence(key)(map)).to.be.false;
             });
         });
         describe('presence', function() {
             it('is true when tag map keys includes key in question', function() {
-                var key = 'amenity';
-                var map = { amenity: 'school'};
+                const key = 'amenity';
+                const map = { amenity: 'school'};
                 expect(_ruleChecks.presence(key)(map)).to.be.true;
             });
             it('is false when tag map keys do not include key in question', function() {
-                var key = 'amenity';
-                var map = { building: 'yes'};
+                const key = 'amenity';
+                const map = { building: 'yes'};
                 expect(_ruleChecks.presence(key)(map)).to.be.false;
             });
         });
         describe('greaterThan', function() {
             it('is true when a tag value is greater than the selector value', function() {
-                var selectorTags = { lanes: 5 };
-                var tags = { lanes : 6 };
+                const selectorTags = { lanes: 5 };
+                const tags = { lanes : 6 };
                 expect(_ruleChecks.greaterThan(selectorTags)(tags)).to.be.true;
             });
             it('is false when a tag value is less than or equal to the selector value', function() {
-                var selectorTags = { lanes: 5 };
+                const selectorTags = { lanes: 5 };
                 [4, 5].forEach(function(val) {
                     expect(_ruleChecks.greaterThan(selectorTags)({ lanes: val })).to.be.false;
                 });
@@ -258,25 +258,25 @@ describe('maprules', function() {
         });
         describe('greaterThanEqual', function() {
             it('is true when a tag value is greater than or equal to the selector value', function() {
-                var selectorTags = { lanes: 5 };
+                const selectorTags = { lanes: 5 };
                 [5, 6].forEach(function(val) {
                     expect(_ruleChecks.greaterThanEqual(selectorTags)({ lanes: val })).to.be.true;
                 });
             });
             it('is false when a tag value is less than the selector value', function () {
-                var selectorTags = { lanes: 5 };
-                var tags = { lanes: 4 };
+                const selectorTags = { lanes: 5 };
+                const tags = { lanes: 4 };
                 expect(_ruleChecks.greaterThanEqual(selectorTags)(tags)).to.be.false;
             });
         });
         describe('lessThan', function() {
             it('is true when a tag value is less than the selector value', function() {
-                var selectorTags = { lanes: 5 };
-                var tags = { lanes: 4 };
+                const selectorTags = { lanes: 5 };
+                const tags = { lanes: 4 };
                 expect(_ruleChecks.lessThan(selectorTags)(tags)).to.be.true;
             });
             it('is false when a tag value is greater than or equal to the selector value', function() {
-                var selectorTags = { lanes: 5 };
+                const selectorTags = { lanes: 5 };
                 [6, 7].forEach(function(val) {
 					expect(_ruleChecks.lessThan(selectorTags)({ lanes: val })).to.be.false;
 				});
@@ -284,42 +284,42 @@ describe('maprules', function() {
         });
         describe('lessThanEqual', function() {
             it('is true when a tag value  is less than or equal to the selector value', function() {
-                var selectorTags = { lanes: 5 };
+                const selectorTags = { lanes: 5 };
                 [4, 5].forEach(function(val) {
                     expect(_ruleChecks.lessThanEqual(selectorTags)({ lanes: val })).to.be.true;
                 });
             });
             it('is false when a tag value is greater than the selector value', function() {
-               var selectorTags = { lanes: 5 };
-               var tags = { lanes: 6 };
+               const selectorTags = { lanes: 5 };
+               const tags = { lanes: 6 };
                expect(_ruleChecks.lessThanEqual(selectorTags)(tags)).to.be.false;
             });
         });
         describe('positiveRegex', function() {
-            var positiveRegex = { amenity: ['^hospital$','^clinic$']};
+            const positiveRegex = { amenity: ['^hospital$','^clinic$']};
             it('is true when tag value matches positiveRegex', function() {
-                var tags = { amenity: 'hospital' };
+                const tags = { amenity: 'hospital' };
                 expect(_ruleChecks.positiveRegex(positiveRegex)(tags)).to.be.true;
             });
             it('is false when tag value does not match negative regex', function() {
-                var tags = { amenity: 'school' };
+                const tags = { amenity: 'school' };
                 expect(_ruleChecks.positiveRegex(positiveRegex)(tags)).to.be.false;
             });
         });
         describe('negativeRegex', function() {
-            var negativeRegex = { bicycle: [ 'use_path', 'designated' ] };
+            const negativeRegex = { bicycle: [ 'use_path', 'designated' ] };
             it('is true when tag value does not match negativeRegex', function() {
-                var tags = { bicycle: 'yes' };
+                const tags = { bicycle: 'yes' };
                 expect(_ruleChecks.negativeRegex(negativeRegex)(tags)).to.be.true;
             });
             it('is false when tag value matches negativeRegex', function() {
-                var tags = { bicycle: 'designated' };
+                const tags = { bicycle: 'designated' };
                 expect(_ruleChecks.negativeRegex(negativeRegex)(tags)).to.be.false;
             });
         });
     });
     describe('rule', function() {
-        var selectors;
+        let selectors;
         before(function() {
             selectors = [
                 {
@@ -382,7 +382,7 @@ describe('maprules', function() {
             validationRules = iD.serviceMapRules.validationRules();
         });
         describe('#matches', function() {
-            var selectors, entities;
+            let selectors, entities;
             before(function() {
                 selectors = [
                     {
@@ -461,22 +461,22 @@ describe('maprules', function() {
                 });
             });
             it('is true when at least one rule check is \'false\'', function() {
-                var selector = {
+                const selector = {
                     geometry: 'way',
                     equals: { highway: 'residential' },
                     positiveRegex: { structure: ['embarkment', 'bridge'] },
                     error: '\'suburban road\' structure tag cannot be \'bridge\' or \'tunnel\''
                 };
-                var entity = iD.osmWay({ tags: { highway: 'residential', structure: 'tunnel' }});
+                const entity = iD.osmWay({ tags: { highway: 'residential', structure: 'tunnel' }});
                 iD.serviceMapRules.clearRules();
                 iD.serviceMapRules.addRule(selector);
-                var rule = iD.serviceMapRules.validationRules()[0];
+                const rule = iD.serviceMapRules.validationRules()[0];
 
                 expect(rule.matches(entity)).to.be.false;
             });
         });
         describe('#findIssues', function() {
-            var selectors, entities, _graph;
+            let selectors, entities, _graph;
 
             before(function() {
                 selectors = [
@@ -546,7 +546,7 @@ describe('maprules', function() {
                     iD.osmWay({ tags: { highway: 'residential', structure: 'bridge' }}),
                 ];
 
-                var wayNodes = [
+                const wayNodes = [
                     iD.osmNode({ id: 'a' }),
                     iD.osmNode({ id: 'b' }),
                     iD.osmNode({ id: 'c' }),
@@ -561,14 +561,14 @@ describe('maprules', function() {
             });
             it('finds issues', function() {
                 validationRules.forEach(function(rule, i) {
-                    var issues = [];
-                    var entity = entities[i];
-                    var selector = selectors[i];
+                    const issues = [];
+                    const entity = entities[i];
+                    const selector = selectors[i];
 
                     rule.findIssues(entity, _graph, issues);
 
-                    var issue = issues[0];
-                    var type = Object.keys(selector).indexOf('error') ? 'error' : 'warning';
+                    const issue = issues[0];
+                    const type = Object.keys(selector).indexOf('error') ? 'error' : 'warning';
 
                     expect(issues.length).to.eql(1);
                     expect(issue.entityIds).to.eql([entity.id]);

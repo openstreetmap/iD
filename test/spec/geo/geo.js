@@ -74,12 +74,12 @@ describe('iD.geo - geography', function() {
 
     describe('geoOffsetToMeters', function() {
         it('[0, 0] pixel offset is [0, -0] meter offset', function() {
-            var meters = iD.geoOffsetToMeters([0, 0]);
+            const meters = iD.geoOffsetToMeters([0, 0]);
             expect(meters[0]).to.eql(0);
             expect(meters[1]).to.eql(-0);
         });
         it('[0.00064, -0.00064] pixel offset is roughly [100, 100] meter offset', function() {
-            var meters = iD.geoOffsetToMeters([0.00064, -0.00064]);
+            const meters = iD.geoOffsetToMeters([0.00064, -0.00064]);
             expect(meters[0]).to.be.within(99.5, 100.5);
             expect(meters[1]).to.be.within(99.5, 100.5);
         });
@@ -87,12 +87,12 @@ describe('iD.geo - geography', function() {
 
     describe('geoMetersToOffset', function() {
         it('[0, 0] meter offset is [0, -0] pixel offset', function() {
-            var offset = iD.geoMetersToOffset([0, 0]);
+            const offset = iD.geoMetersToOffset([0, 0]);
             expect(offset[0]).to.eql(0);
             expect(offset[1]).to.eql(-0);
         });
         it('[100, 100] meter offset is roughly [0.00064, -0.00064] pixel offset', function() {
-            var offset = iD.geoMetersToOffset([100, 100]);
+            const offset = iD.geoMetersToOffset([100, 100]);
             expect(offset[0]).to.be.within(0.000635, 0.000645);
             expect(offset[1]).to.be.within(-0.000645, -0.000635);
         });
@@ -100,28 +100,28 @@ describe('iD.geo - geography', function() {
 
     describe('geoSphericalDistance', function() {
         it('distance between two same points is zero', function() {
-            var a = [0, 0];
-            var b = [0, 0];
+            const a = [0, 0];
+            const b = [0, 0];
             expect(iD.geoSphericalDistance(a, b)).to.eql(0);
         });
         it('a straight 1 degree line at the equator is approximately 111 km', function() {
-            var a = [0, 0];
-            var b = [1, 0];
+            const a = [0, 0];
+            const b = [1, 0];
             expect(iD.geoSphericalDistance(a, b)).to.be.closeTo(111319, 10);
         });
         it('a pythagorean triangle is (nearly) right', function() {
-            var a = [0, 0];
-            var b = [4, 3];
+            const a = [0, 0];
+            const b = [4, 3];
             expect(iD.geoSphericalDistance(a, b)).to.be.closeTo(555804, 10);
         });
         it('east-west distances at high latitude are shorter', function() {
-            var a = [0, 60];
-            var b = [1, 60];
+            const a = [0, 60];
+            const b = [1, 60];
             expect(iD.geoSphericalDistance(a, b)).to.be.closeTo(55659, 10);
         });
         it('north-south distances at high latitude are not shorter', function() {
-            var a = [0, 60];
-            var b = [0, 61];
+            const a = [0, 60];
+            const b = [0, 61];
             expect(iD.geoSphericalDistance(a, b)).to.be.closeTo(110946, 10);
         });
     });

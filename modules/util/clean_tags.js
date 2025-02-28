@@ -1,8 +1,8 @@
 export function utilCleanTags(tags) {
-    var out = {};
-    for (var k in tags) {
+    const out = {};
+    for (const k in tags) {
         if (!k) continue;
-        var v = tags[k];
+        const v = tags[k];
         if (v !== undefined) {
             out[k] = cleanValue(k, v);
         }
@@ -22,7 +22,7 @@ export function utilCleanTags(tags) {
 
         if (skip(k)) return v;
 
-        var cleaned = v
+        let cleaned = v
             .split(';')
             .map(function(s) { return s.trim(); })
             .join(keepSpaces(k) ? '; ' : ';');

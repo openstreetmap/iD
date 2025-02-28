@@ -23,9 +23,9 @@ Object.assign(osmNote.prototype, {
     type: 'note',
 
     initialize: function(sources) {
-        for (var i = 0; i < sources.length; ++i) {
-            var source = sources[i];
-            for (var prop in source) {
+        for (let i = 0; i < sources.length; ++i) {
+            const source = sources[i];
+            for (const prop in source) {
                 if (Object.prototype.hasOwnProperty.call(source, prop)) {
                     if (source[prop] === undefined) {
                         delete this[prop];

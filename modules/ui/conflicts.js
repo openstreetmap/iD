@@ -19,11 +19,11 @@ import {
 
 
 export function uiConflicts(context) {
-    var dispatch = d3_dispatch('cancel', 'save');
-    var keybinding = utilKeybinding('conflicts');
-    var _origChanges;
-    var _conflictList;
-    var _shownConflictIndex;
+    const dispatch = d3_dispatch('cancel', 'save');
+    const keybinding = utilKeybinding('conflicts');
+    let _origChanges;
+    let _conflictList;
+    let _shownConflictIndex;
 
 
     function keybindingOn() {
@@ -50,7 +50,7 @@ export function uiConflicts(context) {
     function conflicts(selection) {
         keybindingOn();
 
-        var headerEnter = selection.selectAll('.header')
+        const headerEnter = selection.selectAll('.header')
             .data([0])
             .enter()
             .append('div')
@@ -67,28 +67,28 @@ export function uiConflicts(context) {
             .append('h2')
             .call(t.append('save.conflict.header'));
 
-        var bodyEnter = selection.selectAll('.body')
+        const bodyEnter = selection.selectAll('.body')
             .data([0])
             .enter()
             .append('div')
             .attr('class', 'body fillL');
 
-        var conflictsHelpEnter = bodyEnter
+        const conflictsHelpEnter = bodyEnter
             .append('div')
             .attr('class', 'conflicts-help')
             .call(t.append('save.conflict.help'));
 
 
         // Download changes link
-        var changeset = new osmChangeset();
+        const changeset = new osmChangeset();
 
         delete changeset.id;  // Export without changeset_id
 
-        var data = JXON.stringify(changeset.osmChangeJXON(_origChanges));
-        var blob = new Blob([data], { type: 'text/xml;charset=utf-8;' });
-        var fileName = 'changes.osc';
+        const data = JXON.stringify(changeset.osmChangeJXON(_origChanges));
+        const blob = new Blob([data], { type: 'text/xml;charset=utf-8;' });
+        const fileName = 'changes.osc';
 
-        var linkEnter = conflictsHelpEnter.selectAll('.download-changes')
+        const linkEnter = conflictsHelpEnter.selectAll('.download-changes')
             .append('a')
             .attr('class', 'download-changes');
 
@@ -115,7 +115,7 @@ export function uiConflicts(context) {
             .style('display', 'none')
             .call(t.append('save.conflict.done'));
 
-        var buttonsEnter = bodyEnter
+        const buttonsEnter = bodyEnter
             .append('div')
             .attr('class','buttons col12 joined conflicts-buttons');
 
@@ -138,7 +138,7 @@ export function uiConflicts(context) {
         index = utilWrap(index, _conflictList.length);
         _shownConflictIndex = index;
 
-        var parent = d3_select(selection.node().parentNode);
+        const parent = d3_select(selection.node().parentNode);
 
         // enable save button if this is the last conflict being reviewed..
         if (index === _conflictList.length - 1) {
@@ -153,14 +153,14 @@ export function uiConflicts(context) {
             }, 250);
         }
 
-        var conflict = selection
+        const conflict = selection
             .selectAll('.conflict')
             .data([_conflictList[index]]);
 
         conflict.exit()
             .remove();
 
-        var conflictEnter = conflict.enter()
+        const conflictEnter = conflict.enter()
             .append('div')
             .attr('class', 'conflict');
 
@@ -179,7 +179,7 @@ export function uiConflicts(context) {
                 zoomToEntity(d.id);
             });
 
-        var details = conflictEnter
+        const details = conflictEnter
             .append('div')
             .attr('class', 'conflict-detail-container');
 
@@ -213,8 +213,8 @@ export function uiConflicts(context) {
             .on('click', function(d3_event, d) {
                 d3_event.preventDefault();
 
-                var container = parent.selectAll('.conflict-container');
-                var sign = (d === 'previous' ? -1 : 1);
+                const container = parent.selectAll('.conflict-container');
+                const sign = (d === 'previous' ? -1 : 1);
 
                 container
                     .selectAll('.conflict')
@@ -229,18 +229,18 @@ export function uiConflicts(context) {
 
 
     function addChoices(selection) {
-        var choices = selection
+        const choices = selection
             .append('ul')
             .attr('class', 'layer-list')
             .selectAll('li')
             .data(function(d) { return d.choices || []; });
 
         // enter
-        var choicesEnter = choices.enter()
+        const choicesEnter = choices.enter()
             .append('li')
             .attr('class', 'layer');
 
-        var labelEnter = choicesEnter
+        const labelEnter = choicesEnter
             .append('label');
 
         labelEnter
@@ -248,7 +248,7 @@ export function uiConflicts(context) {
             .attr('type', 'radio')
             .attr('name', function(d) { return d.id; })
             .on('change', function(d3_event, d) {
-                var ul = this.parentNode.parentNode.parentNode;
+                const ul = this.parentNode.parentNode.parentNode;
                 ul.__data__.chosen = d.id;
                 choose(d3_event, ul, d);
             });
@@ -261,7 +261,7 @@ export function uiConflicts(context) {
         choicesEnter
             .merge(choices)
             .each(function(d) {
-                var ul = this.parentNode;
+                const ul = this.parentNode;
                 if (ul.__data__.chosen === d.id) {
                     choose(null, ul, d);
                 }
@@ -278,8 +278,8 @@ export function uiConflicts(context) {
             .selectAll('input')
             .property('checked', function(d) { return d === datum; });
 
-        var extent = geoExtent();
-        var entity;
+        const extent = geoExtent();
+        let entity;
 
         entity = context.graph().hasEntity(datum.id);
         if (entity) extent._extend(entity.extent(context.graph()));
@@ -297,7 +297,7 @@ export function uiConflicts(context) {
         context.surface().selectAll('.hover')
             .classed('hover', false);
 
-        var entity = context.graph().hasEntity(id);
+        const entity = context.graph().hasEntity(id);
         if (entity) {
             if (extent) {
                 context.map().trimmedExtent(extent);

@@ -1,5 +1,5 @@
 describe('iD.utilKeybinding', function() {
-    var keybinding, spy, input;
+    let keybinding, spy, input;
 
     beforeEach(function () {
         keybinding = iD.utilKeybinding('keybinding-test');
@@ -46,7 +46,7 @@ describe('iD.utilKeybinding', function() {
         });
 
         it('matches shifted bindings before unshifted bindings', function () {
-            var spy2 = sinon.spy();
+            const spy2 = sinon.spy();
             d3.select(document).call(keybinding.on('A', spy2));
             d3.select(document).call(keybinding.on('⇧A', spy));
 

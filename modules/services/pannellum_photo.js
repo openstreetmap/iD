@@ -7,7 +7,7 @@ const pannellumViewerCSS = 'pannellum/pannellum.css';
 const pannellumViewerJS = 'pannellum/pannellum.js';
 const dispatch = d3_dispatch('viewerChanged');
 
-let _currScenes = [];
+const _currScenes = [];
 let _pannellumViewer;
 
 export default {
@@ -118,7 +118,7 @@ export default {
   selectPhoto: function (data, keepOrientation) {
     const {key} = data;
     if ( !(key in _currScenes) ) {
-      let newSceneOptions = {
+      const newSceneOptions = {
         showFullscreenCtrl: false,
         autoLoad: false,
         compass: false,

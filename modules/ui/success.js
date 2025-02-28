@@ -39,7 +39,7 @@ export function uiSuccess(context) {
           locationManager.mergeCustomGeoJSON(vals[0]);
         }
 
-        let ociResources = Object.values(vals[1].resources);
+        const ociResources = Object.values(vals[1].resources);
         if (ociResources.length) {
           // Resolve all locationSet features.
           return locationManager.mergeLocationSets(ociResources)
@@ -78,7 +78,7 @@ export function uiSuccess(context) {
 
 
   function success(selection) {
-    let header = selection
+    const header = selection
       .append('div')
       .attr('class', 'header fillL');
 
@@ -93,11 +93,11 @@ export function uiSuccess(context) {
       .on('click', () => dispatch.call('cancel'))
       .call(svgIcon('#iD-icon-close'));
 
-    let body = selection
+    const body = selection
       .append('div')
       .attr('class', 'body save-success fillL');
 
-    let summary = body
+    const summary = body
       .append('div')
       .attr('class', 'save-summary');
 
@@ -116,10 +116,10 @@ export function uiSuccess(context) {
       .append('span')
       .call(t.append('success.help_link_text'));
 
-    let osm = context.connection();
+    const osm = context.connection();
     if (!osm) return;
 
-    let changesetURL = osm.changesetURL(_changeset.id);
+    const changesetURL = osm.changesetURL(_changeset.id);
 
     let table = summary
       .append('table')
@@ -140,7 +140,7 @@ export function uiSuccess(context) {
       .append('use')
       .attr('xlink:href', '#iD-logo-osm');
 
-    let summaryDetail = row
+    const summaryDetail = row
       .append('td')
       .attr('class', 'cell-detail summary-detail');
 
@@ -160,7 +160,7 @@ export function uiSuccess(context) {
     if (showDonationMessage !== false) {
       // support ask
       const donationUrl = 'https://supporting.openstreetmap.org/';
-      let supporting = body
+      const supporting = body
         .append('div')
         .attr('class', 'save-supporting');
 
@@ -191,7 +191,7 @@ export function uiSuccess(context) {
         .append('use')
         .attr('xlink:href', '#iD-donation');
 
-      let supportingDetail = row
+      const supportingDetail = row
         .append('td')
         .attr('class', 'cell-detail supporting-detail');
 
@@ -214,9 +214,9 @@ export function uiSuccess(context) {
         const validHere = locationManager.locationSetsAt(loc);
 
         // Gather the communities
-        let communities = [];
+        const communities = [];
         oci.resources.forEach(resource => {
-          let area = validHere[resource.locationSetID];
+          const area = validHere[resource.locationSetID];
           if (!area) return;
 
           // Resolve strings
@@ -240,7 +240,7 @@ export function uiSuccess(context) {
 
 
   function showCommunityLinks(selection, resources) {
-    let communityLinks = selection
+    const communityLinks = selection
       .append('div')
       .attr('class', 'save-communityLinks');
 
@@ -248,14 +248,14 @@ export function uiSuccess(context) {
       .append('h3')
       .call(t.append('success.like_osm'));
 
-    let table = communityLinks
+    const table = communityLinks
       .append('table')
       .attr('class', 'community-table');
 
-    let row = table.selectAll('.community-row')
+    const row = table.selectAll('.community-row')
       .data(resources);
 
-    let rowEnter = row.enter()
+    const rowEnter = row.enter()
       .append('tr')
       .attr('class', 'community-row');
 
@@ -270,7 +270,7 @@ export function uiSuccess(context) {
       .append('use')
       .attr('xlink:href', d => `#community-${d.type}`);
 
-    let communityDetail = rowEnter
+    const communityDetail = rowEnter
       .append('td')
       .attr('class', 'cell-detail community-detail');
 
@@ -292,8 +292,8 @@ export function uiSuccess(context) {
 
 
   function showCommunityDetails(d) {
-    let selection = d3_select(this);
-    let communityID = d.id;
+    const selection = d3_select(this);
+    const communityID = d.id;
 
     selection
       .append('div')
@@ -317,7 +317,7 @@ export function uiSuccess(context) {
         );
     }
 
-    let nextEvents = (d.events || [])
+    const nextEvents = (d.events || [])
       .map(event => {
         event.date = parseEventDate(event.when);
         return event;
@@ -349,10 +349,10 @@ export function uiSuccess(context) {
 
 
     function showMore(selection) {
-      let more = selection.selectAll('.community-more')
+      const more = selection.selectAll('.community-more')
         .data([0]);
 
-      let moreEnter = more.enter()
+      const moreEnter = more.enter()
         .append('div')
         .attr('class', 'community-more');
 
@@ -377,14 +377,14 @@ export function uiSuccess(context) {
 
 
     function showNextEvents(selection) {
-      let events = selection
+      const events = selection
         .append('div')
         .attr('class', 'community-events');
 
-      let item = events.selectAll('.community-event')
+      const item = events.selectAll('.community-event')
         .data(nextEvents);
 
-      let itemEnter = item.enter()
+      const itemEnter = item.enter()
         .append('div')
         .attr('class', 'community-event');
 
@@ -406,7 +406,7 @@ export function uiSuccess(context) {
         .append('div')
         .attr('class', 'community-event-when')
         .text(d => {
-          let options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
+          const options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
           if (d.date.getHours() || d.date.getMinutes()) {   // include time if it has one
             options.hour = 'numeric';
             options.minute = 'numeric';

@@ -9,19 +9,19 @@ import { utilFunctor } from '../util';
 // Can be labeled and collapsible.
 export function uiSection(id, context) {
 
-    var _classes = utilFunctor('');
-    var _shouldDisplay;
-    var _content;
+    let _classes = utilFunctor('');
+    let _shouldDisplay;
+    let _content;
 
-    var _disclosure;
-    var _label;
-    var _expandedByDefault = utilFunctor(true);
-    var _disclosureContent;
-    var _disclosureExpanded;
+    let _disclosure;
+    let _label;
+    let _expandedByDefault = utilFunctor(true);
+    let _disclosureContent;
+    let _disclosureExpanded;
 
-    var _containerSelection = d3_select(null);
+    let _containerSelection = d3_select(null);
 
-    var section = {
+    const section = {
         id: id
     };
 
@@ -74,7 +74,7 @@ export function uiSection(id, context) {
             .selectAll('.section-' + id)
             .data([0]);
 
-        var sectionEnter = _containerSelection
+        const sectionEnter = _containerSelection
             .enter()
             .append('div')
             .attr('class', 'section section-' + id + ' ' + (_classes && _classes() || ''));
@@ -102,7 +102,7 @@ export function uiSection(id, context) {
     // may be called multiple times
     function renderContent(selection) {
         if (_shouldDisplay) {
-            var shouldDisplay = _shouldDisplay();
+            const shouldDisplay = _shouldDisplay();
             selection.classed('hide', !shouldDisplay);
             if (!shouldDisplay) {
                 selection.html('');

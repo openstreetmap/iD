@@ -3,7 +3,7 @@ import { presetsCdnUrl, ociCdnUrl, wmfSitematrixCdnUrl } from '../../config/id.j
 
 import packageJSON from '../../package.json';
 
-let _mainFileFetcher = coreFileFetcher(); // singleton
+const _mainFileFetcher = coreFileFetcher(); // singleton
 
 export { _mainFileFetcher as fileFetcher };
 
@@ -16,8 +16,8 @@ export function coreFileFetcher() {
   const ociVersionMinor = `${v.major}.${v.minor}`;
   const presetsVersion = packageJSON.devDependencies['@openstreetmap/id-tagging-schema'];
 
-  let _this = {};
-  let _inflight = {};
+  const _this = {};
+  const _inflight = {};
   let _fileMap = {
     'address_formats': 'data/address_formats.min.json',
     'imagery': 'data/imagery.min.json',
@@ -42,7 +42,7 @@ export function coreFileFetcher() {
     'wmf_sitematrix': wmfSitematrixCdnUrl.replace('{version}', '0.2') + 'data/wikipedia.min.json'
   };
 
-  let _cachedData = {};
+  const _cachedData = {};
   // expose the cache; useful for tests
   _this.cache = () => _cachedData;
 

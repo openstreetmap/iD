@@ -15,7 +15,7 @@ export function uiKeepRightDetails(context) {
   function issueDetail(d) {
     const { itemType, parentIssueType } = d;
     const unknown = { html: t.html('inspector.unknown') };
-    let replacements = d.replacements || {};
+    const replacements = d.replacements || {};
     replacements.default = unknown;  // special key `default` works as a fallback string
 
     if (localizer.hasTextForStringId(`QA.keepRight.errorTypes.${itemType}.title`)) {
@@ -55,7 +55,7 @@ export function uiKeepRightDetails(context) {
         .html(issueDetail);
 
     // If there are entity links in the error message..
-    let relatedEntities = [];
+    const relatedEntities = [];
     descriptionEnter.selectAll('.error_entity_link, .error_object_link')
       .attr('href', '#')
       .each(function() {

@@ -11,9 +11,9 @@ import { VectorTile } from '@mapbox/vector-tile';
 import { utilHashcode, utilRebind, utilTiler } from '../util';
 
 
-var tiler = utilTiler().tileSize(512).margin(1);
-var dispatch = d3_dispatch('loadedData');
-var _vtCache;
+const tiler = utilTiler().tileSize(512).margin(1);
+const dispatch = d3_dispatch('loadedData');
+let _vtCache;
 
 
 function abortRequest(controller) {
@@ -22,17 +22,17 @@ function abortRequest(controller) {
 
 
 function vtToGeoJSON(data, tile, mergeCache) {
-    var vectorTile = new VectorTile(new Protobuf(data));
-    var layers = Object.keys(vectorTile.layers);
+    const vectorTile = new VectorTile(new Protobuf(data));
+    let layers = Object.keys(vectorTile.layers);
     if (!Array.isArray(layers)) { layers = [layers]; }
 
-    var features = [];
+    const features = [];
     layers.forEach(function(layerID) {
-        var layer = vectorTile.layers[layerID];
+        const layer = vectorTile.layers[layerID];
         if (layer) {
-            for (var i = 0; i < layer.length; i++) {
-                var feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
-                var geometry = feature.geometry;
+            for (let i = 0; i < layer.length; i++) {
+                const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+                const geometry = feature.geometry;
 
                 // Treat all Polygons as MultiPolygons
                 if (geometry.type === 'Polygon') {
@@ -40,11 +40,11 @@ function vtToGeoJSON(data, tile, mergeCache) {
                     geometry.coordinates = [geometry.coordinates];
                 }
 
-                var isClipped = false;
+                let isClipped = false;
 
                 // Clip to tile bounds
                 if (geometry.type === 'MultiPolygon') {
-                    var featureClip = turf_bboxClip(feature, tile.extent.rectangle());
+                    const featureClip = turf_bboxClip(feature, tile.extent.rectangle());
                     if (!deepEqual(feature.geometry, featureClip.geometry)) {
                         // feature = featureClip;
                         isClipped = true;
@@ -54,8 +54,8 @@ function vtToGeoJSON(data, tile, mergeCache) {
                 }
 
                 // Generate some unique IDs and add some metadata
-                var featurehash = utilHashcode(stringify(feature));
-                var propertyhash = utilHashcode(stringify(feature.properties || {}));
+                const featurehash = utilHashcode(stringify(feature));
+                const propertyhash = utilHashcode(stringify(feature.properties || {}));
                 feature.__layerID__ = layerID.replace(/[^_a-zA-Z0-9\-]/g, '_');
                 feature.__featurehash__ = featurehash;
                 feature.__propertyhash__ = propertyhash;
@@ -63,10 +63,10 @@ function vtToGeoJSON(data, tile, mergeCache) {
 
                 // Clipped Polygons at same zoom with identical properties can get merged
                 if (isClipped && geometry.type === 'MultiPolygon') {
-                    var merged = mergeCache[propertyhash];
+                    const merged = mergeCache[propertyhash];
                     if (merged && merged.length) {
-                        var other = merged[0];
-                        var coords = polygonClipping.union(
+                        const other = merged[0];
+                        const coords = polygonClipping.union(
                             feature.geometry.coordinates,
                             other.geometry.coordinates
                         );
@@ -76,7 +76,7 @@ function vtToGeoJSON(data, tile, mergeCache) {
                         }
 
                         merged.push(feature);
-                        for (var j = 0; j < merged.length; j++) {      // all these features get...
+                        for (let j = 0; j < merged.length; j++) {      // all these features get...
                             merged[j].geometry.coordinates = coords;   // same coords
                             merged[j].__featurehash__ = featurehash;   // same hash, so deduplication works
                         }
@@ -95,19 +95,19 @@ function vtToGeoJSON(data, tile, mergeCache) {
 function loadTile(source, tile) {
     if (source.loaded[tile.id] || source.inflight[tile.id]) return;
 
-    var url = source.template
+    const url = source.template
         .replace('{x}', tile.xyz[0])
         .replace('{y}', tile.xyz[1])
         // TMS-flipped y coordinate
         .replace(/\{[t-]y\}/, Math.pow(2, tile.xyz[2]) - tile.xyz[1] - 1)
         .replace(/\{z(oom)?\}/, tile.xyz[2])
         .replace(/\{switch:([^}]+)\}/, function(s, r) {
-            var subdomains = r.split(',');
+            const subdomains = r.split(',');
             return subdomains[(tile.xyz[0] + tile.xyz[1]) % subdomains.length];
         });
 
 
-    var controller = new AbortController();
+    const controller = new AbortController();
     source.inflight[tile.id] = controller;
 
     fetch(url, { signal: controller.signal })
@@ -124,7 +124,7 @@ function loadTile(source, tile) {
                 throw new Error('No Data');
             }
 
-            var z = tile.xyz[2];
+            const z = tile.xyz[2];
             if (!source.canMerge[z]) {
                 source.canMerge[z] = {};  // initialize mergeCache
             }
@@ -151,8 +151,8 @@ export default {
 
 
     reset: function() {
-        for (var sourceID in _vtCache) {
-            var source = _vtCache[sourceID];
+        for (const sourceID in _vtCache) {
+            const source = _vtCache[sourceID];
             if (source && source.inflight) {
                 Object.values(source.inflight).forEach(abortRequest);
             }
@@ -169,20 +169,20 @@ export default {
 
 
     data: function(sourceID, projection) {
-        var source = _vtCache[sourceID];
+        const source = _vtCache[sourceID];
         if (!source) return [];
 
-        var tiles = tiler.getTiles(projection);
-        var seen = {};
-        var results = [];
+        const tiles = tiler.getTiles(projection);
+        const seen = {};
+        const results = [];
 
-        for (var i = 0; i < tiles.length; i++) {
-            var features = source.loaded[tiles[i].id];
+        for (let i = 0; i < tiles.length; i++) {
+            const features = source.loaded[tiles[i].id];
             if (!features || !features.length) continue;
 
-            for (var j = 0; j < features.length; j++) {
-                var feature = features[j];
-                var hash = feature.__featurehash__;
+            for (let j = 0; j < features.length; j++) {
+                const feature = features[j];
+                const hash = feature.__featurehash__;
                 if (seen[hash]) continue;
                 seen[hash] = true;
 
@@ -197,16 +197,16 @@ export default {
 
 
     loadTiles: function(sourceID, template, projection) {
-        var source = _vtCache[sourceID];
+        let source = _vtCache[sourceID];
         if (!source) {
             source = this.addSource(sourceID, template);
         }
 
-        var tiles = tiler.getTiles(projection);
+        const tiles = tiler.getTiles(projection);
 
         // abort inflight requests that are no longer needed
         Object.keys(source.inflight).forEach(function(k) {
-            var wanted = tiles.find(function(tile) { return k === tile.id; });
+            const wanted = tiles.find(function(tile) { return k === tile.id; });
             if (!wanted) {
                 abortRequest(source.inflight[k]);
                 delete source.inflight[k];

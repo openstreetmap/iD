@@ -4,19 +4,19 @@ import { svgIcon } from '../svg/icon';
 
 
 export function uiViewOnOSM(context) {
-    var _what;   // an osmEntity or osmNote
+    let _what;   // an osmEntity or osmNote
 
 
     function viewOnOSM(selection) {
-        var url;
+        let url;
         if (_what instanceof osmEntity) {
             url = context.connection().entityURL(_what);
         } else if (_what instanceof osmNote) {
             url = context.connection().noteURL(_what);
         }
 
-        var data = ((!_what || _what.isNew()) ? [] : [_what]);
-        var link = selection.selectAll('.view-on-osm')
+        const data = ((!_what || _what.isNew()) ? [] : [_what]);
+        const link = selection.selectAll('.view-on-osm')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -24,7 +24,7 @@ export function uiViewOnOSM(context) {
             .remove();
 
         // enter
-        var linkEnter = link.enter()
+        const linkEnter = link.enter()
             .append('a')
             .attr('class', 'view-on-osm')
             .attr('target', '_blank')

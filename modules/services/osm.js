@@ -14,13 +14,13 @@ import { localizer } from '../core/localizer.js';
 import { osmApiConnections } from '../../config/id.js';
 
 
-var tiler = utilTiler();
-var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
+const tiler = utilTiler();
+const dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 
-var urlroot = osmApiConnections[0].url;
-var apiUrlroot = osmApiConnections[0].apiUrl || urlroot;
-var redirectPath = window.location.origin + window.location.pathname;
-var oauth = osmAuth({
+let urlroot = osmApiConnections[0].url;
+let apiUrlroot = osmApiConnections[0].apiUrl || urlroot;
+const redirectPath = window.location.origin + window.location.pathname;
+const oauth = osmAuth({
     url: urlroot,
     apiUrl: apiUrlroot,
     client_id: osmApiConnections[0].client_id,
@@ -29,27 +29,27 @@ var oauth = osmAuth({
     loading: authLoading,
     done: authDone
 });
-var _apiConnections = osmApiConnections;
+let _apiConnections = osmApiConnections;
 
 // hardcode default block of Google Maps
-var _imageryBlocklists = [/.*\.google(apis)?\..*\/(vt|kh)[\?\/].*([xyz]=.*){3}.*/];
-var _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: new RBush() };
-var _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: new RBush() };
-var _userCache = { toLoad: {}, user: {} };
-var _cachedApiStatus;
-var _changeset = {};
+let _imageryBlocklists = [/.*\.google(apis)?\..*\/(vt|kh)[\?\/].*([xyz]=.*){3}.*/];
+let _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: new RBush() };
+let _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: new RBush() };
+let _userCache = { toLoad: {}, user: {} };
+let _cachedApiStatus;
+let _changeset = {};
 
-var _deferred = new Set();
-var _connectionID = 1;
-var _tileZoom = 16;
-var _noteZoom = 12;
-var _rateLimitError;
-var _userChangesets;
-var _userDetails;
-var _off;
+const _deferred = new Set();
+let _connectionID = 1;
+let _tileZoom = 16;
+const _noteZoom = 12;
+let _rateLimitError;
+let _userChangesets;
+let _userDetails;
+let _off;
 
 // set a default but also load this from the API status
-var _maxWayNodes = 2000;
+let _maxWayNodes = 2000;
 
 
 function authLoading() {
@@ -86,35 +86,35 @@ function abortUnwantedRequests(cache, visibleTiles) {
 
 
 function getLoc(attrs) {
-    var lon = attrs.lon && attrs.lon.value;
-    var lat = attrs.lat && attrs.lat.value;
+    const lon = attrs.lon && attrs.lon.value;
+    const lat = attrs.lat && attrs.lat.value;
     return [Number(lon), Number(lat)];
 }
 
 
 function getNodes(obj) {
-    var elems = obj.getElementsByTagName('nd');
-    var nodes = new Array(elems.length);
-    for (var i = 0, l = elems.length; i < l; i++) {
+    const elems = obj.getElementsByTagName('nd');
+    const nodes = new Array(elems.length);
+    for (let i = 0, l = elems.length; i < l; i++) {
         nodes[i] = 'n' + elems[i].attributes.ref.value;
     }
     return nodes;
 }
 
 function getNodesJSON(obj) {
-    var elems = obj.nodes;
-    var nodes = new Array(elems.length);
-    for (var i = 0, l = elems.length; i < l; i++) {
+    const elems = obj.nodes;
+    const nodes = new Array(elems.length);
+    for (let i = 0, l = elems.length; i < l; i++) {
         nodes[i] = 'n' + elems[i];
     }
     return nodes;
 }
 
 function getTags(obj) {
-    var elems = obj.getElementsByTagName('tag');
-    var tags = {};
-    for (var i = 0, l = elems.length; i < l; i++) {
-        var attrs = elems[i].attributes;
+    const elems = obj.getElementsByTagName('tag');
+    const tags = {};
+    for (let i = 0, l = elems.length; i < l; i++) {
+        const attrs = elems[i].attributes;
         tags[attrs.k.value] = attrs.v.value;
     }
 
@@ -123,10 +123,10 @@ function getTags(obj) {
 
 
 function getMembers(obj) {
-    var elems = obj.getElementsByTagName('member');
-    var members = new Array(elems.length);
-    for (var i = 0, l = elems.length; i < l; i++) {
-        var attrs = elems[i].attributes;
+    const elems = obj.getElementsByTagName('member');
+    const members = new Array(elems.length);
+    for (let i = 0, l = elems.length; i < l; i++) {
+        const attrs = elems[i].attributes;
         members[i] = {
             id: attrs.type.value[0] + attrs.ref.value,
             type: attrs.type.value,
@@ -137,10 +137,10 @@ function getMembers(obj) {
 }
 
 function getMembersJSON(obj) {
-    var elems = obj.members;
-    var members = new Array(elems.length);
-    for (var i = 0, l = elems.length; i < l; i++) {
-        var attrs = elems[i];
+    const elems = obj.members;
+    const members = new Array(elems.length);
+    for (let i = 0, l = elems.length; i < l; i++) {
+        const attrs = elems[i];
         members[i] = {
             id: attrs.type[0] + attrs.ref,
             type: attrs.type,
@@ -156,23 +156,23 @@ function getVisible(attrs) {
 
 
 function parseComments(comments) {
-    var parsedComments = [];
+    const parsedComments = [];
 
     // for each comment
-    for (var i = 0; i < comments.length; i++) {
-        var comment = comments[i];
+    for (let i = 0; i < comments.length; i++) {
+        const comment = comments[i];
         if (comment.nodeName === 'comment') {
-            var childNodes = comment.childNodes;
-            var parsedComment = {};
+            const childNodes = comment.childNodes;
+            const parsedComment = {};
 
-            for (var j = 0; j < childNodes.length; j++) {
-                var node = childNodes[j];
-                var nodeName = node.nodeName;
+            for (let j = 0; j < childNodes.length; j++) {
+                const node = childNodes[j];
+                const nodeName = node.nodeName;
                 if (nodeName === '#text') continue;
                 parsedComment[nodeName] = node.textContent;
 
                 if (nodeName === 'uid') {
-                    var uid = node.textContent;
+                    const uid = node.textContent;
                     if (uid && !_userCache.user[uid]) {
                         _userCache.toLoad[uid] = true;
                     }
@@ -199,7 +199,7 @@ function encodeNoteRtree(note) {
 }
 
 
-var jsonparsers = {
+const jsonparsers = {
 
     node: function nodeData(obj, uid) {
         return new osmNode({
@@ -261,18 +261,18 @@ function parseJSON(payload, callback, options) {
         return callback({ message: 'No JSON', status: -1 });
     }
 
-    var json = payload;
+    let json = payload;
     if (typeof json !== 'object') json = JSON.parse(payload);
 
     if (!json.elements) return callback({ message: 'No JSON', status: -1 });
 
-    var children = json.elements;
+    const children = json.elements;
 
-    var handle = window.requestIdleCallback(function() {
+    const handle = window.requestIdleCallback(function() {
         _deferred.delete(handle);
-        var results = [];
-        var result;
-        for (var i = 0; i < children.length; i++) {
+        const results = [];
+        let result;
+        for (let i = 0; i < children.length; i++) {
             result = parseChild(children[i]);
             if (result) results.push(result);
         }
@@ -281,12 +281,10 @@ function parseJSON(payload, callback, options) {
     _deferred.add(handle);
 
     function parseChild(child) {
-        var parser = jsonparsers[child.type];
+        const parser = jsonparsers[child.type];
         if (!parser) return null;
 
-        var uid;
-
-        uid = osmEntity.id.fromOSM(child.type, child.id);
+        const uid = osmEntity.id.fromOSM(child.type, child.id);
         if (options.skipSeen) {
             if (_tileCache.seen[uid]) return null;  // avoid reparsing a "seen" entity
             _tileCache.seen[uid] = true;
@@ -302,18 +300,18 @@ function parseUserJSON(payload, callback, options) {
         return callback({ message: 'No JSON', status: -1 });
     }
 
-    var json = payload;
+    let json = payload;
     if (typeof json !== 'object') json = JSON.parse(payload);
 
     if (!json.users && !json.user) return callback({ message: 'No JSON', status: -1 });
 
-    var objs = json.users || [json];
+    const objs = json.users || [json];
 
-    var handle = window.requestIdleCallback(function() {
+    const handle = window.requestIdleCallback(function() {
         _deferred.delete(handle);
-        var results = [];
-        var result;
-        for (var i = 0; i < objs.length; i++) {
+        const results = [];
+        let result;
+        for (let i = 0; i < objs.length; i++) {
             result = parseObj(objs[i]);
             if (result) results.push(result);
         }
@@ -322,21 +320,21 @@ function parseUserJSON(payload, callback, options) {
     _deferred.add(handle);
 
     function parseObj(obj) {
-        var uid = obj.user.id && obj.user.id.toString();
+        const uid = obj.user.id && obj.user.id.toString();
         if (options.skipSeen && _userCache.user[uid]) {
             delete _userCache.toLoad[uid];
             return null;
         }
-        var user = jsonparsers.user(obj.user, uid);
+        const user = jsonparsers.user(obj.user, uid);
         _userCache.user[uid] = user;
         delete _userCache.toLoad[uid];
         return user;
     }
 }
 
-var parsers = {
+const parsers = {
     node: function nodeData(obj, uid) {
-        var attrs = obj.attributes;
+        const attrs = obj.attributes;
         return new osmNode({
             id: uid,
             visible: getVisible(attrs),
@@ -351,7 +349,7 @@ var parsers = {
     },
 
     way: function wayData(obj, uid) {
-        var attrs = obj.attributes;
+        const attrs = obj.attributes;
         return new osmWay({
             id: uid,
             visible: getVisible(attrs),
@@ -366,7 +364,7 @@ var parsers = {
     },
 
     relation: function relationData(obj, uid) {
-        var attrs = obj.attributes;
+        const attrs = obj.attributes;
         return new osmRelation({
             id: uid,
             visible: getVisible(attrs),
@@ -381,9 +379,9 @@ var parsers = {
     },
 
     note: function parseNote(obj, uid) {
-        var attrs = obj.attributes;
-        var childNodes = obj.childNodes;
-        var props = {};
+        const attrs = obj.attributes;
+        const childNodes = obj.childNodes;
+        const props = {};
 
         props.id = uid;
         props.loc = getLoc(attrs);
@@ -405,9 +403,9 @@ var parsers = {
         }
 
         // parse note contents
-        for (var i = 0; i < childNodes.length; i++) {
-            var node = childNodes[i];
-            var nodeName = node.nodeName;
+        for (let i = 0; i < childNodes.length; i++) {
+            const node = childNodes[i];
+            const nodeName = node.nodeName;
             if (nodeName === '#text') continue;
 
             // if the element is comments, parse the comments
@@ -418,8 +416,8 @@ var parsers = {
             }
         }
 
-        var note = new osmNote(props);
-        var item = encodeNoteRtree(note);
+        const note = new osmNote(props);
+        const item = encodeNoteRtree(note);
         _noteCache.note[note.id] = note;
         updateRtree(item, true);
 
@@ -427,8 +425,8 @@ var parsers = {
     },
 
     user: function parseUser(obj, uid) {
-        var attrs = obj.attributes;
-        var user = {
+        const attrs = obj.attributes;
+        const user = {
             id: uid,
             display_name: attrs.display_name && attrs.display_name.value,
             account_created: attrs.account_created && attrs.account_created.value,
@@ -436,19 +434,19 @@ var parsers = {
             active_blocks: '0'
         };
 
-        var img = obj.getElementsByTagName('img');
+        const img = obj.getElementsByTagName('img');
         if (img && img[0] && img[0].getAttribute('href')) {
             user.image_url = img[0].getAttribute('href');
         }
 
-        var changesets = obj.getElementsByTagName('changesets');
+        const changesets = obj.getElementsByTagName('changesets');
         if (changesets && changesets[0] && changesets[0].getAttribute('count')) {
             user.changesets_count = changesets[0].getAttribute('count');
         }
 
-        var blocks = obj.getElementsByTagName('blocks');
+        const blocks = obj.getElementsByTagName('blocks');
         if (blocks && blocks[0]) {
-            var received = blocks[0].getElementsByTagName('received');
+            const received = blocks[0].getElementsByTagName('received');
             if (received && received[0] && received[0].getAttribute('active')) {
                 user.active_blocks = received[0].getAttribute('active');
             }
@@ -467,14 +465,14 @@ function parseXML(xml, callback, options) {
         return callback({ message: 'No XML', status: -1 });
     }
 
-    var root = xml.childNodes[0];
-    var children = root.childNodes;
+    const root = xml.childNodes[0];
+    const children = root.childNodes;
 
-    var handle = window.requestIdleCallback(function() {
+    const handle = window.requestIdleCallback(function() {
         _deferred.delete(handle);
-        var results = [];
-        var result;
-        for (var i = 0; i < children.length; i++) {
+        const results = [];
+        let result;
+        for (let i = 0; i < children.length; i++) {
             result = parseChild(children[i]);
             if (result) results.push(result);
         }
@@ -484,10 +482,10 @@ function parseXML(xml, callback, options) {
 
 
     function parseChild(child) {
-        var parser = parsers[child.nodeName];
+        const parser = parsers[child.nodeName];
         if (!parser) return null;
 
-        var uid;
+        let uid;
         if (child.nodeName === 'user') {
             uid = child.attributes.id.value;
             if (options.skipSeen && _userCache.user[uid]) {
@@ -594,7 +592,7 @@ export default {
 
 
     changesetsURL: function(center, zoom) {
-        var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
+        const precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
         return urlroot + '/history#map=' +
             Math.floor(zoom) + '/' +
             center[1].toFixed(precision) + '/' +
@@ -631,8 +629,8 @@ export default {
     // Can handle either auth or unauth calls.
     loadFromAPI: function(path, callback, options) {
         options = Object.assign({ skipSeen: true }, options);
-        var that = this;
-        var cid = _connectionID;
+        const that = this;
+        const cid = _connectionID;
 
         function done(err, payload) {
             if (that.getConnectionId() !== cid) {
@@ -640,7 +638,7 @@ export default {
                 return;
             }
 
-            var isAuthenticated = that.authenticated();
+            const isAuthenticated = that.authenticated();
 
             // 401 Unauthorized, 403 Forbidden
             // Logout and retry the request.
@@ -684,9 +682,9 @@ export default {
                 path
             }, done);
         } else {
-            var url = apiUrlroot + path;
-            var controller = new AbortController();
-            var fn;
+            const url = apiUrlroot + path;
+            const controller = new AbortController();
+            let fn;
             if (path.indexOf('.json') !== -1) {
                 fn = d3_json;
             } else {
@@ -702,7 +700,7 @@ export default {
                     // d3-fetch includes status in the error message,
                     // but we can't access the response itself
                     // https://github.com/d3/d3-fetch/issues/27
-                    var match = err.message.match(/^\d{3}/);
+                    const match = err.message.match(/^\d{3}/);
                     if (match) {
                         done({ status: +match[0], statusText: err.message });
                     } else {
@@ -719,9 +717,9 @@ export default {
     // GET /api/0.6/node/#id
     // GET /api/0.6/[way|relation]/#id/full
     loadEntity: function(id, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
-        var options = { skipSeen: false };
+        const type = osmEntity.id.type(id);
+        const osmID = osmEntity.id.toOSM(id);
+        const options = { skipSeen: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : '') + '.json',
@@ -735,7 +733,7 @@ export default {
     // Load a single note by id , XML format
     // GET /api/0.6/notes/#id
     loadEntityNote: function(id, callback) {
-        var options = { skipSeen: false };
+        const options = { skipSeen: false };
         this.loadFromAPI(
             '/api/0.6/notes/' + id ,
             function(err, entities) {
@@ -749,9 +747,9 @@ export default {
     // Load a single entity with a specific version
     // GET /api/0.6/[node|way|relation]/#id/#version
     loadEntityVersion: function(id, version, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
-        var options = { skipSeen: false };
+        const type = osmEntity.id.type(id);
+        const osmID = osmEntity.id.toOSM(id);
+        const options = { skipSeen: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + '/' + version + '.json',
@@ -766,9 +764,9 @@ export default {
     // Load the relations of a single entity with the given.
     // GET /api/0.6/[node|way|relation]/#id/relations
     loadEntityRelations: function(id, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
-        var options = { skipSeen: false };
+        const type = osmEntity.id.type(id);
+        const osmID = osmEntity.id.toOSM(id);
+        const options = { skipSeen: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + '/relations.json',
@@ -785,13 +783,13 @@ export default {
     // Unlike `loadEntity`, child nodes and members are not fetched
     // GET /api/0.6/[nodes|ways|relations]?#parameters
     loadMultiple: function(ids, callback) {
-        var that = this;
-        var groups = utilArrayGroupBy(utilArrayUniq(ids), osmEntity.id.type);
+        const that = this;
+        const groups = utilArrayGroupBy(utilArrayUniq(ids), osmEntity.id.type);
 
         Object.keys(groups).forEach(function(k) {
-            var type = k + 's';   // nodes, ways, relations
-            var osmIDs = groups[k].map(function(id) { return osmEntity.id.toOSM(id); });
-            var options = { skipSeen: false };
+            const type = k + 's';   // nodes, ways, relations
+            const osmIDs = groups[k].map(function(id) { return osmEntity.id.toOSM(id); });
+            const options = { skipSeen: false };
 
             utilArrayChunk(osmIDs, 150).forEach(function(arr) {
                 that.loadFromAPI(
@@ -811,7 +809,7 @@ export default {
     // POST /api/0.6/changeset/#id/upload
     // PUT /api/0.6/changeset/#id/close
     putChangeset: function(changeset, changes, callback) {
-        var cid = _connectionID;
+        const cid = _connectionID;
 
         if (_changeset.inflight) {
             return callback({ message: 'Changeset already inflight', status: -2 }, changeset);
@@ -820,7 +818,7 @@ export default {
             return createdChangeset.call(this, null, _changeset.open);
 
         } else {   // Open a new changeset..
-            var options = {
+            const options = {
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 headers: { 'Content-Type': 'text/xml' },
@@ -841,7 +839,7 @@ export default {
             changeset = changeset.update({ id: changesetID });
 
             // Upload the changeset..
-            var options = {
+            const options = {
                 method: 'POST',
                 path: '/api/0.6/changeset/' + changesetID + '/upload',
                 headers: { 'Content-Type': 'text/xml' },
@@ -881,8 +879,8 @@ export default {
     // (note: callback may be called multiple times)
     // GET /api/0.6/users?users=#id1,#id2,...,#idn
     loadUsers: function(uids, callback) {
-        var toLoad = [];
-        var cached = [];
+        const toLoad = [];
+        const cached = [];
 
         utilArrayUniq(uids).forEach(function(uid) {
             if (_userCache.user[uid]) {
@@ -908,7 +906,7 @@ export default {
         function done(err, payload) {
             if (err) return callback(err);
 
-            var options = { skipSeen: true };
+            const options = { skipSeen: true };
             return parseUserJSON(payload, function(err, results) {
                 if (err) return callback(err);
                 return callback(undefined, results);
@@ -933,7 +931,7 @@ export default {
         function done(err, payload) {
             if (err) return callback(err);
 
-            var options = { skipSeen: true };
+            const options = { skipSeen: true };
             return parseUserJSON(payload, function(err, results) {
                 if (err) return callback(err);
                 return callback(undefined, results[0]);
@@ -957,7 +955,7 @@ export default {
         function done(err, payload) {
             if (err) return callback(err);
 
-            var options = { skipSeen: false };
+            const options = { skipSeen: false };
             return parseUserJSON(payload, function(err, results) {
                 if (err) return callback(err);
                 _userDetails = results[0];
@@ -995,7 +993,7 @@ export default {
                 xml.getElementsByTagName('changeset'),
                 function (changeset) { return { tags: getTags(changeset) }; }
             ).filter(function (changeset) {
-                var comment = changeset.tags.comment;
+                const comment = changeset.tags.comment;
                 return comment && comment !== '';
             });
 
@@ -1007,8 +1005,8 @@ export default {
     // Fetch the status of the OSM API
     // GET /api/capabilities
     status: function(callback) {
-        var url = apiUrlroot + '/api/capabilities';
-        var errback = wrapcb(this, done, _connectionID);
+        const url = apiUrlroot + '/api/capabilities';
+        const errback = wrapcb(this, done, _connectionID);
         d3_xml(url)
             .then(function(data) { errback(null, data); })
             .catch(function(err) { errback(err.message); });
@@ -1020,13 +1018,13 @@ export default {
             }
 
             // update blocklists
-            var elements = xml.getElementsByTagName('blacklist');
-            var regexes = [];
-            for (var i = 0; i < elements.length; i++) {
-                var regexString = elements[i].getAttribute('regex');  // needs unencode?
+            const elements = xml.getElementsByTagName('blacklist');
+            const regexes = [];
+            for (let i = 0; i < elements.length; i++) {
+                const regexString = elements[i].getAttribute('regex');  // needs unencode?
                 if (regexString) {
                     try {
-                        var regex = new RegExp(regexString);
+                        const regex = new RegExp(regexString);
                         regexes.push(regex);
                     } catch {
                         /* noop */
@@ -1040,12 +1038,12 @@ export default {
             if (_rateLimitError) {
                 return callback(_rateLimitError, 'rateLimited');
             } else {
-                var waynodes = xml.getElementsByTagName('waynodes');
-                var maxWayNodes = waynodes.length && parseInt(waynodes[0].getAttribute('maximum'), 10);
+                const waynodes = xml.getElementsByTagName('waynodes');
+                const maxWayNodes = waynodes.length && parseInt(waynodes[0].getAttribute('maximum'), 10);
                 if (maxWayNodes && isFinite(maxWayNodes)) _maxWayNodes = maxWayNodes;
 
-                var apiStatus = xml.getElementsByTagName('status');
-                var val = apiStatus[0].getAttribute('api');
+                const apiStatus = xml.getElementsByTagName('status');
+                const val = apiStatus[0].getAttribute('api');
                 return callback(undefined, val);
             }
         }
@@ -1056,7 +1054,7 @@ export default {
     reloadApiStatus: function() {
         // throttle to avoid unnecessary API calls
         if (!this.throttledReloadApiStatus) {
-            var that = this;
+            const that = this;
             this.throttledReloadApiStatus = _throttle(function() {
                 that.status(function(err, status) {
                     if (status !== _cachedApiStatus) {
@@ -1082,10 +1080,10 @@ export default {
         if (_off) return;
 
         // determine the needed tiles to cover the view
-        var tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
+        const tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
 
         // abort inflight requests that are no longer needed
-        var hadRequests = hasInflightRequests(_tileCache);
+        const hadRequests = hasInflightRequests(_tileCache);
         abortUnwantedRequests(_tileCache, tiles);
         if (hadRequests && !hasInflightRequests(_tileCache)) {
             dispatch.call('loaded');    // stop the spinner
@@ -1108,8 +1106,8 @@ export default {
             dispatch.call('loading');   // start the spinner
         }
 
-        var path = '/api/0.6/map.json?bbox=';
-        var options = { skipSeen: true };
+        const path = '/api/0.6/map.json?bbox=';
+        const options = { skipSeen: true };
 
         _tileCache.inflight[tile.id] = this.loadFromAPI(
             path + tile.extent.toParam(),
@@ -1122,7 +1120,7 @@ export default {
             if (!err) {
                 delete _tileCache.toLoad[tile.id];
                 _tileCache.loaded[tile.id] = true;
-                var bbox = tile.extent.bbox();
+                const bbox = tile.extent.bbox();
                 bbox.id = tile.id;
                 _tileCache.rtree.insert(bbox);
             }
@@ -1137,7 +1135,7 @@ export default {
 
 
     isDataLoaded: function(loc) {
-        var bbox = { minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1] };
+        const bbox = { minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1] };
         return _tileCache.rtree.collides(bbox);
     },
 
@@ -1149,10 +1147,10 @@ export default {
         // let users safely edit geometries which extend to unloaded tiles.  We can drop some.)
         if (Object.keys(_tileCache.toLoad).length > 50) return;
 
-        var k = geoZoomToScale(_tileZoom + 1);
-        var offset = geoRawMercator().scale(k)(loc);
-        var projection = geoRawMercator().transform({ k: k, x: -offset[0], y: -offset[1] });
-        var tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
+        const k = geoZoomToScale(_tileZoom + 1);
+        const offset = geoRawMercator().scale(k)(loc);
+        const projection = geoRawMercator().transform({ k: k, x: -offset[0], y: -offset[1] });
+        const tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
 
         tiles.forEach(function(tile) {
             if (_tileCache.toLoad[tile.id] || _tileCache.loaded[tile.id] || _tileCache.inflight[tile.id]) return;
@@ -1169,16 +1167,16 @@ export default {
         noteOptions = Object.assign({ limit: 10000, closed: 7 }, noteOptions);
         if (_off) return;
 
-        var that = this;
-        var path = '/api/0.6/notes?limit=' + noteOptions.limit + '&closed=' + noteOptions.closed + '&bbox=';
-        var throttleLoadUsers = _throttle(function() {
-            var uids = Object.keys(_userCache.toLoad);
+        const that = this;
+        const path = '/api/0.6/notes?limit=' + noteOptions.limit + '&closed=' + noteOptions.closed + '&bbox=';
+        const throttleLoadUsers = _throttle(function() {
+            const uids = Object.keys(_userCache.toLoad);
             if (!uids.length) return;
             that.loadUsers(uids, function() {});  // eagerly load user details
         }, 750);
 
         // determine the needed tiles to cover the view
-        var tiles = tiler.zoomExtent([_noteZoom, _noteZoom]).getTiles(projection);
+        const tiles = tiler.zoomExtent([_noteZoom, _noteZoom]).getTiles(projection);
 
         // abort inflight requests that are no longer needed
         abortUnwantedRequests(_noteCache, tiles);
@@ -1187,7 +1185,7 @@ export default {
         tiles.forEach(function(tile) {
             if (_noteCache.loaded[tile.id] || _noteCache.inflight[tile.id]) return;
 
-            var options = { skipSeen: false };
+            const options = { skipSeen: false };
             _noteCache.inflight[tile.id] = that.loadFromAPI(
                 path + tile.extent.toParam(),
                 function(err) {
@@ -1216,10 +1214,10 @@ export default {
 
         if (!note.loc[0] || !note.loc[1] || !note.newComment) return; // location & description required
 
-        var comment = note.newComment;
+        let comment = note.newComment;
         if (note.newCategory && note.newCategory !== 'None') { comment += ' #' + note.newCategory; }
 
-        var path = '/api/0.6/notes?' + utilQsString({ lon: note.loc[0], lat: note.loc[1], text: comment });
+        const path = '/api/0.6/notes?' + utilQsString({ lon: note.loc[0], lat: note.loc[1], text: comment });
 
         _noteCache.inflightPost[note.id] = oauth.xhr({
             method: 'POST',
@@ -1234,7 +1232,7 @@ export default {
             // we get the updated note back, remove from caches and reparse..
             this.removeNote(note);
 
-            var options = { skipSeen: false };
+            const options = { skipSeen: false };
             return parseXML(xml, function(err, results) {
                 if (err) {
                     return callback(err);
@@ -1258,7 +1256,7 @@ export default {
             return callback({ message: 'Note update already inflight', status: -2 }, note);
         }
 
-        var action;
+        let action;
         if (note.status !== 'closed' && newStatus === 'closed') {
             action = 'close';
         } else if (note.status !== 'open' && newStatus === 'open') {
@@ -1268,7 +1266,7 @@ export default {
             if (!note.newComment) return; // when commenting, comment required
         }
 
-        var path = '/api/0.6/notes/' + note.id + '/' + action;
+        let path = '/api/0.6/notes/' + note.id + '/' + action;
         if (note.newComment) {
             path += '?' + utilQsString({ text: note.newComment });
         }
@@ -1293,7 +1291,7 @@ export default {
                 delete _noteCache.closed[note.id];
             }
 
-            var options = { skipSeen: false };
+            const options = { skipSeen: false };
             return parseXML(xml, function(err, results) {
                 if (err) {
                     return callback(err);
@@ -1351,7 +1349,7 @@ export default {
     // Also used for testing purposes.
     caches: function(obj) {
         function cloneCache(source) {
-            var target = {};
+            const target = {};
             Object.keys(source).forEach(function(k) {
                 if (k === 'rtree') {
                     target.rtree = new RBush().fromJSON(source.rtree.toJSON());  // clone rbush
@@ -1417,8 +1415,8 @@ export default {
 
     /** @param {import('osm-auth').LoginOptions} options */
     authenticate: function(callback, options) {
-        var that = this;
-        var cid = _connectionID;
+        const that = this;
+        const cid = _connectionID;
         _userChangesets = undefined;
         _userDetails = undefined;
 
@@ -1461,10 +1459,10 @@ export default {
 
     // get all cached notes covering the viewport
     notes: function(projection) {
-        var viewport = projection.clipExtent();
-        var min = [viewport[0][0], viewport[1][1]];
-        var max = [viewport[1][0], viewport[0][1]];
-        var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
+        const viewport = projection.clipExtent();
+        const min = [viewport[0][0], viewport[1][1]];
+        const max = [viewport[1][0], viewport[0][1]];
+        const bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
 
         return _noteCache.rtree.search(bbox)
             .map(function(d) { return d.data; });

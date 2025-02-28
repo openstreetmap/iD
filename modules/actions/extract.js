@@ -5,11 +5,11 @@ import { osmNode } from '../osm/node';
 
 export function actionExtract(entityID, projection) {
 
-    var extractedNodeID;
+    let extractedNodeID;
 
     /** @param {boolean} shiftKeyPressed */
-    var action = function(graph, shiftKeyPressed) {
-        var entity = graph.entity(entityID);
+    const action = function(graph, shiftKeyPressed) {
+        const entity = graph.entity(entityID);
 
         if (entity.type === 'node') {
             return extractFromNode(entity, graph, shiftKeyPressed);
@@ -24,7 +24,7 @@ export function actionExtract(entityID, projection) {
         extractedNodeID = node.id;
 
         // Create a new node to replace the one we will detach
-        var replacement = osmNode({ loc: node.loc });
+        const replacement = osmNode({ loc: node.loc });
         graph = graph.replace(replacement);
 
         // Process each way in turn, updating the graph as we go
@@ -45,19 +45,19 @@ export function actionExtract(entityID, projection) {
 
     function extractFromWayOrRelation(entity, graph) {
 
-        var fromGeometry = entity.geometry(graph);
+        const fromGeometry = entity.geometry(graph);
 
-        var keysToCopyAndRetain = ['source', 'wheelchair'];
-        var keysToRetain = ['area'];
-        var buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin'];
+        const keysToCopyAndRetain = ['source', 'wheelchair'];
+        const keysToRetain = ['area'];
+        const buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin'];
 
-        var extractedLoc = d3_geoPath(projection).centroid(entity.asGeoJSON(graph));
+        let extractedLoc = d3_geoPath(projection).centroid(entity.asGeoJSON(graph));
         extractedLoc = extractedLoc && projection.invert(extractedLoc);
         if (!extractedLoc  || !isFinite(extractedLoc[0]) || !isFinite(extractedLoc[1])) {
             extractedLoc = entity.extent(graph).center();
         }
 
-        var indoorAreaValues = {
+        const indoorAreaValues = {
             area: true,
             corridor: true,
             elevator: true,
@@ -65,14 +65,14 @@ export function actionExtract(entityID, projection) {
             room: true
         };
 
-        var isBuilding = (entity.tags.building && entity.tags.building !== 'no') ||
+        const isBuilding = (entity.tags.building && entity.tags.building !== 'no') ||
             (entity.tags['building:part'] && entity.tags['building:part'] !== 'no');
 
-        var isIndoorArea = fromGeometry === 'area' && entity.tags.indoor && indoorAreaValues[entity.tags.indoor];
+        const isIndoorArea = fromGeometry === 'area' && entity.tags.indoor && indoorAreaValues[entity.tags.indoor];
 
-        var entityTags = Object.assign({}, entity.tags);  // shallow copy
-        var pointTags = {};
-        for (var key in entityTags) {
+        const entityTags = Object.assign({}, entity.tags);  // shallow copy
+        const pointTags = {};
+        for (const key in entityTags) {
 
             if (entity.type === 'relation' &&
                 key === 'type') {
@@ -115,7 +115,7 @@ export function actionExtract(entityID, projection) {
             entityTags.area = 'yes';
         }
 
-        var replacement = osmNode({ loc: extractedLoc, tags: pointTags });
+        const replacement = osmNode({ loc: extractedLoc, tags: pointTags });
         graph = graph.replace(replacement);
 
         extractedNodeID = replacement.id;

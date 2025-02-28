@@ -1,7 +1,7 @@
 describe('iD.actionDisconnect', function () {
     describe('#disabled', function () {
         it('returns \'not_connected\' for a node shared by less than two ways', function () {
-            var graph = iD.coreGraph([iD.osmNode({id: 'a'})]);
+            const graph = iD.coreGraph([iD.osmNode({id: 'a'})]);
             expect(iD.actionDisconnect('a').disabled(graph)).to.equal('not_connected');
         });
 
@@ -9,7 +9,7 @@ describe('iD.actionDisconnect', function () {
             //    a ---- b
             //    |      |
             //    d ---- c
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -23,7 +23,7 @@ describe('iD.actionDisconnect', function () {
             //    a ---- b
             //    |      |
             //    d ---- c
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -37,7 +37,7 @@ describe('iD.actionDisconnect', function () {
             //    a --- b --- c
             //          |     |
             //          e --- d
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                     iD.osmNode({id: 'a'}),
                     iD.osmNode({id: 'b'}),
                     iD.osmNode({id: 'c'}),
@@ -53,7 +53,7 @@ describe('iD.actionDisconnect', function () {
             //    a ---- b ---- c
             //           |
             //           d
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                     iD.osmNode({id: 'a'}),
                     iD.osmNode({id: 'b'}),
                     iD.osmNode({id: 'c'}),
@@ -69,7 +69,7 @@ describe('iD.actionDisconnect', function () {
             //    a ---- b ---- c
             //           |
             //           d
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                     iD.osmNode({id: 'a'}),
                     iD.osmNode({id: 'b'}),
                     iD.osmNode({id: 'c'}),
@@ -84,7 +84,7 @@ describe('iD.actionDisconnect', function () {
         it('returns \'relation\' for a node connecting any two members of the same relation', function () {
             // Covers restriction relations, routes, multipolygons.
             // a ---- b ---- c
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -104,7 +104,7 @@ describe('iD.actionDisconnect', function () {
             //        |
             //        d
 
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -136,7 +136,7 @@ describe('iD.actionDisconnect', function () {
         //           |
         //           d
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -163,7 +163,7 @@ describe('iD.actionDisconnect', function () {
         //               |
         //               d
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -194,7 +194,7 @@ describe('iD.actionDisconnect', function () {
         //               = ==
         //               d
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -222,7 +222,7 @@ describe('iD.actionDisconnect', function () {
         //        |
         //  d --- c
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
@@ -247,7 +247,7 @@ describe('iD.actionDisconnect', function () {
         //           e -- d
         // 2 ways a-b  and  *-c-d-e-*
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a'}),
             iD.osmNode({id: 'b'}),
             iD.osmNode({id: 'c'}),
@@ -276,7 +276,7 @@ describe('iD.actionDisconnect', function () {
         //  |         |
         //  * -- e -- d
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a'}),
             iD.osmNode({id: 'b'}),
             iD.osmNode({id: 'c'}),
@@ -307,7 +307,7 @@ describe('iD.actionDisconnect', function () {
         //    c         e
         // 2 areas: a-b-c-a  and  *-d-e-*
 
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a'}),
             iD.osmNode({id: 'b'}),
             iD.osmNode({id: 'c'}),
@@ -340,7 +340,7 @@ describe('iD.actionDisconnect', function () {
         //    c         e
         // 2 areas: b-c-a-b  and  *-d-e-*
 
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a'}),
             iD.osmNode({id: 'b'}),
             iD.osmNode({id: 'c'}),
@@ -357,9 +357,9 @@ describe('iD.actionDisconnect', function () {
     });
 
     it('copies location and tags to the new nodes', function () {
-        var tags  = {highway: 'traffic_signals'},
-            loc   = [1, 2],
-            graph = iD.coreGraph([
+        const tags  = {highway: 'traffic_signals'},
+              loc   = [1, 2];
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b', loc: loc, tags: tags}),
                 iD.osmNode({id: 'c'}),

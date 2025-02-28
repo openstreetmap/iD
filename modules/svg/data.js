@@ -14,20 +14,20 @@ import { utilDetect } from '../util/detect';
 import { utilArrayFlatten, utilArrayUnion, utilHashcode } from '../util';
 
 
-var _initialized = false;
-var _enabled = false;
-var _geojson;
+let _initialized = false;
+let _enabled = false;
+let _geojson;
 
 
 export function svgData(projection, context, dispatch) {
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    var _showLabels = true;
-    var detected = utilDetect();
-    var layer = d3_select(null);
-    var _vtService;
-    var _fileList;
-    var _template;
-    var _src;
+    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    let _showLabels = true;
+    const detected = utilDetect();
+    let layer = d3_select(null);
+    let _vtService;
+    let _fileList;
+    let _template;
+    let _src;
 
     const supportedFormats = [
         '.gpx',
@@ -55,8 +55,8 @@ export function svgData(projection, context, dispatch) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
                 if (!detected.filedrop) return;
-                var f = d3_event.dataTransfer.files[0];
-                var extension = getExtension(f.name);
+                const f = d3_event.dataTransfer.files[0];
+                const extension = getExtension(f.name);
                 if (!supportedFormats.includes(extension)) return;
                 drawData.fileList(d3_event.dataTransfer.files);
             })
@@ -119,7 +119,7 @@ export function svgData(projection, context, dispatch) {
         if (!gj) return null;
 
         if (gj.type === 'FeatureCollection') {
-            for (var i = 0; i < gj.features.length; i++) {
+            for (let i = 0; i < gj.features.length; i++) {
                 ensureFeatureID(gj.features[i]);
             }
         } else {
@@ -175,10 +175,10 @@ export function svgData(projection, context, dispatch) {
 
 
     function drawData(selection) {
-        var vtService = getService();
-        var getPath = svgPath(projection).geojson;
-        var getAreaPath = svgPath(projection, null, true).geojson;
-        var hasData = drawData.hasData();
+        const vtService = getService();
+        const getPath = svgPath(projection).geojson;
+        const getAreaPath = svgPath(projection, null, true).geojson;
+        const hasData = drawData.hasData();
 
         layer = selection.selectAll('.layer-mapdata')
             .data(_enabled && hasData ? [0] : []);
@@ -191,31 +191,31 @@ export function svgData(projection, context, dispatch) {
             .attr('class', 'layer-mapdata')
             .merge(layer);
 
-        var surface = context.surface();
+        const surface = context.surface();
         if (!surface || surface.empty()) return;  // not ready to draw yet, starting up
 
 
         // Gather data
-        var geoData, polygonData;
+        let geoData;
         if (_template && vtService) {   // fetch data from vector tile service
-            var sourceID = _template;
+            const sourceID = _template;
             vtService.loadTiles(sourceID, _template, projection);
             geoData = vtService.data(sourceID, projection);
         } else {
             geoData = getFeatures(_geojson);
         }
         geoData = geoData.filter(getPath);
-        polygonData = geoData.filter(isPolygon);
+        const polygonData = geoData.filter(isPolygon);
 
 
         // Draw clip paths for polygons
-        var clipPaths = surface.selectAll('defs').selectAll('.clipPath-data')
+        const clipPaths = surface.selectAll('defs').selectAll('.clipPath-data')
            .data(polygonData, featureKey);
 
         clipPaths.exit()
            .remove();
 
-        var clipPathsEnter = clipPaths.enter()
+        const clipPathsEnter = clipPaths.enter()
            .append('clipPath')
            .attr('class', 'clipPath-data')
            .attr('id', clipPathID);
@@ -229,7 +229,7 @@ export function svgData(projection, context, dispatch) {
 
 
         // Draw fill, shadow, stroke layers
-        var datagroups = layer
+        let datagroups = layer
             .selectAll('g.datagroup')
             .data(['fill', 'shadow', 'stroke']);
 
@@ -240,13 +240,13 @@ export function svgData(projection, context, dispatch) {
 
 
         // Draw paths
-        var pathData = {
+        const pathData = {
             fill: polygonData,
             shadow: geoData,
             stroke: geoData
         };
 
-        var paths = datagroups
+        let paths = datagroups
             .selectAll('path')
             .data(function(layer) { return pathData[layer]; }, featureKey);
 
@@ -258,16 +258,16 @@ export function svgData(projection, context, dispatch) {
         paths = paths.enter()
             .append('path')
             .attr('class', function(d) {
-                var datagroup = this.parentNode.__data__;
+                const datagroup = this.parentNode.__data__;
                 return 'pathdata ' + datagroup + ' ' + featureClasses(d);
             })
             .attr('clip-path', function(d) {
-                var datagroup = this.parentNode.__data__;
+                const datagroup = this.parentNode.__data__;
                 return datagroup === 'fill' ? ('url(#' + clipPathID(d) + ')') : null;
             })
             .merge(paths)
             .attr('d', function(d) {
-                var datagroup = this.parentNode.__data__;
+                const datagroup = this.parentNode.__data__;
                 return datagroup === 'fill' ? getAreaPath(d) : getPath(d);
             });
 
@@ -279,12 +279,12 @@ export function svgData(projection, context, dispatch) {
 
 
         function drawLabels(selection, textClass, data) {
-            var labelPath = d3_geoPath(projection);
-            var labelData = data.filter(function(d) {
+            const labelPath = d3_geoPath(projection);
+            const labelData = data.filter(function(d) {
                 return _showLabels && d.properties && (d.properties.desc || d.properties.name);
             });
 
-            var labels = selection.selectAll('text.' + textClass)
+            let labels = selection.selectAll('text.' + textClass)
                 .data(labelData, featureKey);
 
             // exit
@@ -300,11 +300,11 @@ export function svgData(projection, context, dispatch) {
                     return d.properties.desc || d.properties.name;
                 })
                 .attr('x', function(d) {
-                    var centroid = labelPath.centroid(d);
+                    const centroid = labelPath.centroid(d);
                     return centroid[0] + 11;
                 })
                 .attr('y', function(d) {
-                    var centroid = labelPath.centroid(d);
+                    const centroid = labelPath.centroid(d);
                     return centroid[1];
                 });
         }
@@ -314,8 +314,8 @@ export function svgData(projection, context, dispatch) {
     function getExtension(fileName) {
         if (!fileName) return;
 
-        var re = /\.(gpx|kml|(geo)?json|png)$/i;
-        var match = fileName.toLowerCase().match(re);
+        const re = /\.(gpx|kml|(geo)?json|png)$/i;
+        const match = fileName.toLowerCase().match(re);
         return match && match.length && match[0];
     }
 
@@ -346,7 +346,7 @@ export function svgData(projection, context, dispatch) {
         _geojson = null;
         _src = null;
 
-        var gj;
+        let gj;
         switch (extension) {
             case '.gpx':
                 gj = gpx(xmlToDom(data));
@@ -401,7 +401,7 @@ export function svgData(projection, context, dispatch) {
 
 
     drawData.hasData = function() {
-        var gj = _geojson || {};
+        const gj = _geojson || {};
         return !!(_template || Object.keys(gj).length);
     };
 
@@ -410,14 +410,14 @@ export function svgData(projection, context, dispatch) {
         if (!arguments.length) return _template;
 
         // test source against OSM imagery blocklists..
-        var osm = context.connection();
+        const osm = context.connection();
         if (osm) {
-            var blocklists = osm.imageryBlocklists();
-            var fail = false;
-            var tested = 0;
-            var regex;
+            const blocklists = osm.imageryBlocklists();
+            let fail = false;
+            let tested = 0;
+            let regex;
 
-            for (var i = 0; i < blocklists.length; i++) {
+            for (let i = 0; i < blocklists.length; i++) {
                 regex = blocklists[i];
                 fail = regex.test(val);
                 tested++;
@@ -472,9 +472,9 @@ export function svgData(projection, context, dispatch) {
         _fileList = fileList;
 
         if (!fileList || !fileList.length) return this;
-        var f = fileList[0];
-        var extension = getExtension(f.name);
-        var reader = new FileReader();
+        const f = fileList[0];
+        const extension = getExtension(f.name);
+        const reader = new FileReader();
         reader.onload = (function() {
             return function(e) {
                 drawData.setFile(extension, e.target.result);
@@ -494,8 +494,8 @@ export function svgData(projection, context, dispatch) {
         _src = null;
 
         // strip off any querystring/hash from the url before checking extension
-        var testUrl = url.split(/[?#]/)[0];
-        var extension = getExtension(testUrl) || defaultExtension;
+        const testUrl = url.split(/[?#]/)[0];
+        const extension = getExtension(testUrl) || defaultExtension;
         if (extension) {
             _template = null;
             d3_text(url)
@@ -520,16 +520,16 @@ export function svgData(projection, context, dispatch) {
 
 
     drawData.fitZoom = function() {
-        var features = getFeatures(_geojson);
+        const features = getFeatures(_geojson);
         if (!features.length) return;
 
-        var map = context.map();
-        var viewport = map.trimmedExtent().polygon();
-        var coords = features.reduce(function(coords, feature) {
-            var geom = feature.geometry;
+        const map = context.map();
+        const viewport = map.trimmedExtent().polygon();
+        const coords = features.reduce(function(coords, feature) {
+            const geom = feature.geometry;
             if (!geom) return coords;
 
-            var c = geom.coordinates;
+            let c = geom.coordinates;
 
             /* eslint-disable no-fallthrough */
             switch (geom.type) {
@@ -552,7 +552,7 @@ export function svgData(projection, context, dispatch) {
         }, []);
 
         if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
-            var extent = geoExtent(d3_geoBounds({ type: 'LineString', coordinates: coords }));
+            const extent = geoExtent(d3_geoBounds({ type: 'LineString', coordinates: coords }));
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
 

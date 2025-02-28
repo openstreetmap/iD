@@ -10,7 +10,7 @@ let imgZoom;
 let _widthOverflow;
 
 function zoomPan (d3_event) {
-  let t = d3_event.transform;
+  const t = d3_event.transform;
   _photo.call(utilSetTransform, t.x, t.y, t.k);
 }
 

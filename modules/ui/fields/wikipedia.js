@@ -48,8 +48,8 @@ export function uiFieldWikipedia(field, context) {
     .fetcher((value, callback) => {
       if (!value) {
         value = '';
-        for (let i in _entityIDs) {
-          let entity = context.hasEntity(_entityIDs[i]);
+        for (const i in _entityIDs) {
+          const entity = context.hasEntity(_entityIDs[i]);
           if (entity.tags.name) {
             value = entity.tags.name;
             break;
@@ -149,8 +149,8 @@ export function uiFieldWikipedia(field, context) {
   function defaultLanguageInfo(skipEnglishFallback) {
     const langCode = localizer.languageCode().toLowerCase();
 
-    for (let i in _dataWikipedia) {
-      let d = _dataWikipedia[i];
+    for (const i in _dataWikipedia) {
+      const d = _dataWikipedia[i];
       // default to the language of iD's current locale
       if (d[2] === langCode) return d;
     }
@@ -163,8 +163,8 @@ export function uiFieldWikipedia(field, context) {
   function language(skipEnglishFallback) {
     const value = utilGetSetValue(_langInput).toLowerCase();
 
-    for (let i in _dataWikipedia) {
-      let d = _dataWikipedia[i];
+    for (const i in _dataWikipedia) {
+      const d = _dataWikipedia[i];
       // return the language already set in the UI, if supported
       if (d[0].toLowerCase() === value ||
         d[1].toLowerCase() === value ||
@@ -186,20 +186,19 @@ export function uiFieldWikipedia(field, context) {
     let value = utilGetSetValue(_titleInput);
     const m = value.match(/https?:\/\/([-a-z]+)\.wikipedia\.org\/(?:wiki|\1-[-a-z]+)\/([^#]+)(?:#(.+))?/);
     const langInfo = m && _dataWikipedia.find(d => m[1] === d[2]);
-    let syncTags = {};
+    const syncTags = {};
 
     if (langInfo) {
       const nativeLangName = langInfo[1];
       // Normalize title http://www.mediawiki.org/wiki/API:Query#Title_normalization
       value = decodeURIComponent(m[2]).replace(/_/g, ' ');
       if (m[3]) {
-        let anchor;
         // try {
         // leave this out for now - #6232
           // Best-effort `anchordecode:` implementation
           // anchor = decodeURIComponent(m[3].replace(/\.([0-9A-F]{2})/g, '%$1'));
         // } catch (e) {
-        anchor = decodeURIComponent(m[3]);
+        const anchor = decodeURIComponent(m[3]);
         // }
         value += '#' + anchor.replace(/_/g, ' ');
       }
@@ -233,9 +232,9 @@ export function uiFieldWikipedia(field, context) {
       const qids = Object.keys(data);
       const value = qids && qids.find(id => id.match(/^Q\d+$/));
 
-      let actions = initEntityIDs.map((entityID) => {
-        let entity = context.entity(entityID).tags;
-        let currTags = Object.assign({}, entity);  // shallow copy
+      const actions = initEntityIDs.map((entityID) => {
+        const entity = context.entity(entityID).tags;
+        const currTags = Object.assign({}, entity);  // shallow copy
         if (currTags.wikidata !== value) {
             currTags.wikidata = value;
             return actionChangeTags(entityID, currTags);
@@ -275,7 +274,7 @@ export function uiFieldWikipedia(field, context) {
     const m = value.match(/([^:]+):([^#]+)(?:#(.+))?/);
     const tagLang = m && m[1];
     const tagArticleTitle = m && m[2];
-    let anchor = m && m[3];
+    const anchor = m && m[3];
     const tagLangInfo = tagLang && _dataWikipedia.find(d => tagLang === d[2]);
 
     // value in correct format

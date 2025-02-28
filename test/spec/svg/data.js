@@ -1,15 +1,15 @@
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.svgData', function () {
-    var context;
-    var surface;
-    var dispatch = d3.dispatch('change');
-    var projection = iD.geoRawMercator()
+    let context;
+    let surface;
+    const dispatch = d3.dispatch('change');
+    const projection = iD.geoRawMercator()
         .translate([6934098.868981334, 4092682.5519805425])
         .scale(iD.geoZoomToScale(17))
         .clipExtent([[0, 0], [1000, 1000]]);
 
-    var geojson =
+    const geojson =
         '{' +
         '  "type": "FeatureCollection",' +
         '  "features": [' +
@@ -35,9 +35,9 @@ describe('iD.svgData', function () {
         '  ]' +
         '}';
 
-    var gj = JSON.parse(geojson);
+    const gj = JSON.parse(geojson);
 
-    var gpx =
+    const gpx =
         '<?xml version="1.0"?>' +
         '<gpx version="1.1" creator="GDAL 2.2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://osgeo.org/gdal" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">' +
         '<metadata><bounds minlat="40.150275473401365" minlon="-74.389286041259766" maxlat="40.150275473401365" maxlon="-74.389286041259766"/></metadata>' +
@@ -52,7 +52,7 @@ describe('iD.svgData', function () {
         '</wpt>' +
         '</gpx>';
 
-    var kml =
+    const kml =
         '<?xml version="1.0" encoding="utf-8" ?>' +
         '<kml xmlns="http://www.opengis.net/kml/2.2">' +
         '<Document id="root_doc">' +
@@ -78,7 +78,7 @@ describe('iD.svgData', function () {
         '</kml>';
 
     function makeFile(contents, fileName, mimeType) {
-        var blob = new Blob([contents], { type: mimeType });
+        const blob = new Blob([contents], { type: mimeType });
         blob.lastModifiedDate = new Date();
         blob.name = fileName;
         return blob;
@@ -95,18 +95,18 @@ describe('iD.svgData', function () {
 
 
     it('creates layer-mapdata', function () {
-        var render = iD.svgData(projection, context, dispatch).geojson(gj);
+        const render = iD.svgData(projection, context, dispatch).geojson(gj);
         surface.call(render);
 
-        var layers = surface.selectAll('g.layer-mapdata').nodes();
+        const layers = surface.selectAll('g.layer-mapdata').nodes();
         expect(layers.length).to.eql(1);
     });
 
     it('draws geojson', function () {
-        var render = iD.svgData(projection, context, dispatch).geojson(gj);
+        const render = iD.svgData(projection, context, dispatch).geojson(gj);
         surface.call(render);
 
-        var path;
+        let path;
         path = surface.selectAll('path.shadow');
         expect(path.nodes().length).to.eql(1);
         expect(path.attr('d')).to.match(/^M.*z$/);
@@ -117,16 +117,16 @@ describe('iD.svgData', function () {
 
     describe('#fileList', function() {
         it('handles gpx files', async () => {
-            var files = [ makeFile(gpx, 'test.gpx', 'application/gpx+xml') ];
-            var render = iD.svgData(projection, context, dispatch);
-            var spy = sinon.spy();
+            const files = [ makeFile(gpx, 'test.gpx', 'application/gpx+xml') ];
+            const render = iD.svgData(projection, context, dispatch);
+            const spy = sinon.spy();
             dispatch.on('change', spy);
             render.fileList(files);
 
             await setTimeout(200);
             expect(spy).to.have.been.calledOnce;
             surface.call(render);
-            var path;
+            let path;
             path = surface.selectAll('path.shadow');
             expect(path.nodes().length).to.eql(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
@@ -136,16 +136,16 @@ describe('iD.svgData', function () {
         });
 
         it('handles kml files', async () => {
-            var files = [ makeFile(kml, 'test.kml', 'application/vnd.google-earth.kml+xml') ];
-            var render = iD.svgData(projection, context, dispatch);
-            var spy = sinon.spy();
+            const files = [ makeFile(kml, 'test.kml', 'application/vnd.google-earth.kml+xml') ];
+            const render = iD.svgData(projection, context, dispatch);
+            const spy = sinon.spy();
             dispatch.on('change', spy);
             render.fileList(files);
 
             await setTimeout(200);
             expect(spy).to.have.been.calledOnce;
             surface.call(render);
-            var path;
+            let path;
             path = surface.selectAll('path.shadow');
             expect(path.nodes().length).to.eql(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
@@ -155,16 +155,16 @@ describe('iD.svgData', function () {
         });
 
         it('handles geojson files', async () => {
-            var files = [ makeFile(geojson, 'test.geojson', 'application/vnd.geo+json') ];
-            var render = iD.svgData(projection, context, dispatch);
-            var spy = sinon.spy();
+            const files = [ makeFile(geojson, 'test.geojson', 'application/vnd.geo+json') ];
+            const render = iD.svgData(projection, context, dispatch);
+            const spy = sinon.spy();
             dispatch.on('change', spy);
             render.fileList(files);
 
             await setTimeout(200);
             expect(spy).to.have.been.calledOnce;
             surface.call(render);
-            var path;
+            let path;
             path = surface.selectAll('path.shadow');
             expect(path.nodes().length).to.eql(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
@@ -182,21 +182,21 @@ describe('iD.svgData', function () {
 
     describe('#showLabels', function() {
         it('shows labels by default', function () {
-            var render = iD.svgData(projection, context, dispatch).geojson(gj);
+            const render = iD.svgData(projection, context, dispatch).geojson(gj);
             surface.call(render);
 
-            var label = surface.selectAll('text.label');
+            const label = surface.selectAll('text.label');
             expect(label.nodes().length).to.eql(1);
             expect(label.text()).to.eql('New Jersey');
 
-            var halo = surface.selectAll('text.label-halo');
+            const halo = surface.selectAll('text.label-halo');
             expect(halo.nodes().length).to.eql(1);
             expect(halo.text()).to.eql('New Jersey');
         });
 
 
         it('hides labels with showLabels(false)', function () {
-            var render = iD.svgData(projection, context, dispatch).geojson(gj).showLabels(false);
+            const render = iD.svgData(projection, context, dispatch).geojson(gj).showLabels(false);
             surface.call(render);
 
             expect(surface.selectAll('text.label').empty()).to.be.ok;

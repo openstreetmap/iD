@@ -9,18 +9,18 @@ import { geoExtent, geoScaleToZoom } from '../geo';
 import { utilQsString, utilRebind, utilSetTransform, utilStringQs, utilTiler } from '../util';
 
 
-var apibase = 'https://kartaview.org';
-var maxResults = 1000;
-var tileZoom = 14;
-var tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
-var dispatch = d3_dispatch('loadedImages');
-var imgZoom = d3_zoom()
+const apibase = 'https://kartaview.org';
+const maxResults = 1000;
+const tileZoom = 14;
+const tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
+const dispatch = d3_dispatch('loadedImages');
+const imgZoom = d3_zoom()
     .extent([[0, 0], [320, 240]])
     .translateExtent([[0, 0], [320, 240]])
     .scaleExtent([1, 15]);
-var _oscCache;
-var _oscSelectedImage;
-var _loadViewerPromise;
+let _oscCache;
+let _oscSelectedImage;
+let _loadViewerPromise;
 
 
 function abortRequest(controller) {
@@ -39,13 +39,13 @@ function maxPageAtZoom(z) {
 
 
 function loadTiles(which, url, projection) {
-    var currZoom = Math.floor(geoScaleToZoom(projection.scale()));
-    var tiles = tiler.getTiles(projection);
+    const currZoom = Math.floor(geoScaleToZoom(projection.scale()));
+    const tiles = tiler.getTiles(projection);
 
     // abort inflight requests that are no longer needed
-    var cache = _oscCache[which];
+    const cache = _oscCache[which];
     Object.keys(cache.inflight).forEach(function(k) {
-        var wanted = tiles.find(function(tile) { return k.indexOf(tile.id + ',') === 0; });
+        const wanted = tiles.find(function(tile) { return k.indexOf(tile.id + ',') === 0; });
         if (!wanted) {
             abortRequest(cache.inflight[k]);
             delete cache.inflight[k];
@@ -59,11 +59,11 @@ function loadTiles(which, url, projection) {
 
 
 function loadNextTilePage(which, currZoom, url, tile) {
-    var cache = _oscCache[which];
-    var bbox = tile.extent.bbox();
-    var maxPages = maxPageAtZoom(currZoom);
-    var nextPage = cache.nextPage[tile.id] || 1;
-    var params = utilQsString({
+    const cache = _oscCache[which];
+    const bbox = tile.extent.bbox();
+    const maxPages = maxPageAtZoom(currZoom);
+    const nextPage = cache.nextPage[tile.id] || 1;
+    const params = utilQsString({
         ipp: maxResults,
         page: nextPage,
         // client_id: clientId,
@@ -73,13 +73,13 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
     if (nextPage > maxPages) return;
 
-    var id = tile.id + ',' + String(nextPage);
+    const id = tile.id + ',' + String(nextPage);
     if (cache.loaded[id] || cache.inflight[id]) return;
 
-    var controller = new AbortController();
+    const controller = new AbortController();
     cache.inflight[id] = controller;
 
-    var options = {
+    const options = {
         method: 'POST',
         signal: controller.signal,
         body: params,
@@ -94,9 +94,9 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 throw new Error('No Data');
             }
 
-            var features = data.currentPageItems.map(function(item) {
-                var loc = [+item.lng, +item.lat];
-                var d;
+            const features = data.currentPageItems.map(function(item) {
+                const loc = [+item.lng, +item.lat];
+                let d;
 
                 if (which === 'images') {
                     d = {
@@ -111,7 +111,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
                     };
 
                     // cache sequence info
-                    var seq = _oscCache.sequences[d.sequence_id];
+                    let seq = _oscCache.sequences[d.sequence_id];
                     if (!seq) {
                         seq = { rotation: 0, images: [] };
                         _oscCache.sequences[d.sequence_id] = seq;
@@ -147,9 +147,9 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
 // partition viewport into higher zoom tiles
 function partitionViewport(projection) {
-    var z = geoScaleToZoom(projection.scale());
-    var z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
-    var tiler = utilTiler().zoomExtent([z2, z2]);
+    const z = geoScaleToZoom(projection.scale());
+    const z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
+    const tiler = utilTiler().zoomExtent([z2, z2]);
 
     return tiler.getTiles(projection)
         .map(function(tile) { return tile.extent; });
@@ -162,7 +162,7 @@ function searchLimited(limit, projection, rtree) {
 
     return partitionViewport(projection)
         .reduce(function(result, extent) {
-            var found = rtree.search(extent.bbox())
+            const found = rtree.search(extent.bbox())
                 .slice(0, limit)
                 .map(function(d) { return d.data; });
 
@@ -196,28 +196,28 @@ export default {
 
 
     images: function(projection) {
-        var limit = 5;
+        const limit = 5;
         return searchLimited(limit, projection, _oscCache.images.rtree);
     },
 
 
     sequences: function(projection) {
-        var viewport = projection.clipExtent();
-        var min = [viewport[0][0], viewport[1][1]];
-        var max = [viewport[1][0], viewport[0][1]];
-        var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
-        var sequenceKeys = {};
+        const viewport = projection.clipExtent();
+        const min = [viewport[0][0], viewport[1][1]];
+        const max = [viewport[1][0], viewport[0][1]];
+        const bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
+        const sequenceKeys = {};
 
         // all sequences for images in viewport
         _oscCache.images.rtree.search(bbox)
             .forEach(function(d) { sequenceKeys[d.data.sequence_id] = true; });
 
         // make linestrings from those sequences
-        var lineStrings = [];
+        const lineStrings = [];
         Object.keys(sequenceKeys)
             .forEach(function(sequenceKey) {
-                var seq = _oscCache.sequences[sequenceKey];
-                var images = seq && seq.images;
+                const seq = _oscCache.sequences[sequenceKey];
+                const images = seq && seq.images;
 
                 if (images) {
                     lineStrings.push({
@@ -241,7 +241,7 @@ export default {
 
 
     loadImages: function(projection) {
-        var url = apibase + '/1.0/list/nearby-photos/';
+        const url = apibase + '/1.0/list/nearby-photos/';
         loadTiles('images', url, projection);
     },
 
@@ -251,12 +251,12 @@ export default {
         if (_loadViewerPromise) return _loadViewerPromise;
 
         // add kartaview-wrapper
-        var wrap = context.container().select('.photoviewer').selectAll('.kartaview-wrapper')
+        const wrap = context.container().select('.photoviewer').selectAll('.kartaview-wrapper')
             .data([0]);
 
-        var that = this;
+        const that = this;
 
-        var wrapEnter = wrap.enter()
+        const wrapEnter = wrap.enter()
             .append('div')
             .attr('class', 'photo-wrapper kartaview-wrapper')
             .classed('hide', true)
@@ -267,7 +267,7 @@ export default {
             .append('div')
             .attr('class', 'photo-attribution fillD');
 
-        var controlsEnter = wrapEnter
+        const controlsEnter = wrapEnter
             .append('div')
             .attr('class', 'photo-controls-wrap')
             .append('div')
@@ -307,7 +307,7 @@ export default {
 
 
         function zoomPan(d3_event) {
-            var t = d3_event.transform;
+            const t = d3_event.transform;
             context.container().select('.photoviewer .kartaview-image-wrap')
                 .call(utilSetTransform, t.x, t.y, t.k);
         }
@@ -316,18 +316,18 @@ export default {
         function rotate(deg) {
             return function() {
                 if (!_oscSelectedImage) return;
-                var sequenceKey = _oscSelectedImage.sequence_id;
-                var sequence = _oscCache.sequences[sequenceKey];
+                const sequenceKey = _oscSelectedImage.sequence_id;
+                const sequence = _oscCache.sequences[sequenceKey];
                 if (!sequence) return;
 
-                var r = sequence.rotation || 0;
+                let r = sequence.rotation || 0;
                 r += deg;
 
                 if (r > 180) r -= 360;
                 if (r < -180) r += 360;
                 sequence.rotation = r;
 
-                var wrap = context.container().select('.photoviewer .kartaview-wrapper');
+                const wrap = context.container().select('.photoviewer .kartaview-wrapper');
 
                 wrap
                     .transition()
@@ -344,12 +344,12 @@ export default {
         function step(stepBy) {
             return function() {
                 if (!_oscSelectedImage) return;
-                var sequenceKey = _oscSelectedImage.sequence_id;
-                var sequence = _oscCache.sequences[sequenceKey];
+                const sequenceKey = _oscSelectedImage.sequence_id;
+                const sequence = _oscCache.sequences[sequenceKey];
                 if (!sequence) return;
 
-                var nextIndex = _oscSelectedImage.sequence_index + stepBy;
-                var nextImage = sequence.images[nextIndex];
+                const nextIndex = _oscSelectedImage.sequence_index + stepBy;
+                const nextImage = sequence.images[nextIndex];
                 if (!nextImage) return;
 
                 context.map().centerEase(nextImage.loc);
@@ -367,10 +367,10 @@ export default {
 
 
     showViewer: function(context) {
-        var viewer = context.container().select('.photoviewer')
+        const viewer = context.container().select('.photoviewer')
             .classed('hide', false);
 
-        var isHidden = viewer.selectAll('.photo-wrapper.kartaview-wrapper.hide').size();
+        const isHidden = viewer.selectAll('.photo-wrapper.kartaview-wrapper.hide').size();
 
         if (isHidden) {
             viewer
@@ -391,7 +391,7 @@ export default {
 
         this.updateUrlImage(null);
 
-        var viewer = context.container().select('.photoviewer');
+        const viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
 
         viewer
@@ -408,13 +408,13 @@ export default {
 
     selectImage: function(context, imageKey) {
 
-        var d = this.cachedImage(imageKey);
+        const d = this.cachedImage(imageKey);
 
         _oscSelectedImage = d;
 
         this.updateUrlImage(imageKey);
 
-        var viewer = context.container().select('.photoviewer');
+        const viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
 
         this.setStyles(context, null, true);
@@ -424,9 +424,9 @@ export default {
 
         if (!d) return this;
 
-        var wrap = context.container().select('.photoviewer .kartaview-wrapper');
-        var imageWrap = wrap.selectAll('.kartaview-image-wrap');
-        var attribution = wrap.selectAll('.photo-attribution').text('');
+        const wrap = context.container().select('.photoviewer .kartaview-wrapper');
+        const imageWrap = wrap.selectAll('.kartaview-image-wrap');
+        const attribution = wrap.selectAll('.photo-attribution').text('');
 
         wrap
             .transition()
@@ -438,8 +438,8 @@ export default {
             .remove();
 
         if (d) {
-            var sequence = _oscCache.sequences[d.sequence_id];
-            var r = (sequence && sequence.rotation) || 0;
+            const sequence = _oscCache.sequences[d.sequence_id];
+            const r = (sequence && sequence.rotation) || 0;
 
             imageWrap
                 .append('img')
@@ -484,8 +484,8 @@ export default {
 
         function localeDateString(s) {
             if (!s) return null;
-            var options = { day: 'numeric', month: 'short', year: 'numeric' };
-            var d = new Date(s);
+            const options = { day: 'numeric', month: 'short', year: 'numeric' };
+            const d = new Date(s);
             if (isNaN(d.getTime())) return null;
             return d.toLocaleDateString(localizer.localeCode(), options);
         }
@@ -517,13 +517,13 @@ export default {
                 .classed('currentView', false);
         }
 
-        var hoveredImageId = hovered && hovered.key;
-        var hoveredSequenceId = this.getSequenceKeyForImage(hovered);
+        const hoveredImageId = hovered && hovered.key;
+        const hoveredSequenceId = this.getSequenceKeyForImage(hovered);
 
-        var viewer = context.container().select('.photoviewer');
-        var selected = viewer.empty() ? undefined : viewer.datum();
-        var selectedImageId = selected && selected.key;
-        var selectedSequenceId = this.getSequenceKeyForImage(selected);
+        const viewer = context.container().select('.photoviewer');
+        const selected = viewer.empty() ? undefined : viewer.datum();
+        const selectedImageId = selected && selected.key;
+        const selectedSequenceId = this.getSequenceKeyForImage(selected);
 
         // highlight sibling viewfields on either the selected or the hovered sequences
         context.container().selectAll('.layer-kartaview .viewfield-group')
@@ -540,7 +540,7 @@ export default {
             .attr('d', viewfieldPath);
 
         function viewfieldPath() {
-            var d = this.parentNode.__data__;
+            const d = this.parentNode.__data__;
             if (d.pano && d.key !== selectedImageId) {
                 return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
@@ -554,7 +554,7 @@ export default {
 
     updateUrlImage: function(imageKey) {
         if (!window.mocha) {
-            var hash = utilStringQs(window.location.hash);
+            const hash = utilStringQs(window.location.hash);
             if (imageKey) {
                 hash.photo = 'kartaview/' + imageKey;
             } else {

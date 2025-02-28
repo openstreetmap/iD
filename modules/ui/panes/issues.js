@@ -9,7 +9,7 @@ import { uiSectionValidationStatus } from '../sections/validation_status';
 
 export function uiPaneIssues(context) {
 
-    var issuesPane = uiPane('issues', context)
+    const issuesPane = uiPane('issues', context)
         .key(t('issues.key'))
         .label(t.append('issues.title'))
         .description(t.append('issues.title'))

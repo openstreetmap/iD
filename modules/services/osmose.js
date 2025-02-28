@@ -28,7 +28,7 @@ function abortRequest(controller) {
 
 function abortUnwantedRequests(cache, tiles) {
   Object.keys(cache.inflightTile).forEach(k => {
-    let wanted = tiles.find(tile => k === tile.id);
+    const wanted = tiles.find(tile => k === tile.id);
     if (!wanted) {
       abortRequest(cache.inflightTile[k]);
       delete cache.inflightTile[k];
@@ -54,9 +54,9 @@ function preventCoincident(loc) {
   let coincident = false;
   do {
     // first time, move marker up. after that, move marker right.
-    let delta = coincident ? [0.00001, 0] : [0, 0.00001];
+    const delta = coincident ? [0.00001, 0] : [0, 0.00001];
     loc = geoVecAdd(loc, delta);
-    let bbox = geoExtent(loc).bbox();
+    const bbox = geoExtent(loc).bbox();
     coincident = _cache.rtree.search(bbox).length;
   } while (coincident);
 
@@ -104,14 +104,14 @@ export default {
   },
 
   loadIssues(projection) {
-    let params = {
+    const params = {
       // Tiles return a maximum # of issues
       // So we want to filter our request for only types iD supports
       item: _osmoseData.items
     };
 
     // determine the needed tiles to cover the view
-    let tiles = tiler
+    const tiles = tiler
       .zoomExtent([_tileZoom, _tileZoom])
       .getTiles(projection);
 
@@ -122,10 +122,10 @@ export default {
     tiles.forEach(tile => {
       if (_cache.loadedTile[tile.id] || _cache.inflightTile[tile.id]) return;
 
-      let [ x, y, z ] = tile.xyz;
-      let url = `${_osmoseUrlRoot}/issues/${z}/${x}/${y}.geojson?` + utilQsString(params);
+      const [ x, y, z ] = tile.xyz;
+      const url = `${_osmoseUrlRoot}/issues/${z}/${x}/${y}.geojson?` + utilQsString(params);
 
-      let controller = new AbortController();
+      const controller = new AbortController();
       _cache.inflightTile[tile.id] = controller;
 
       d3_json(url, { signal: controller.signal })
@@ -145,7 +145,7 @@ export default {
                 let loc = issue.geometry.coordinates; // lon, lat
                 loc = preventCoincident(loc);
 
-                let d = new QAItem(loc, this, itemType, id, { item });
+                const d = new QAItem(loc, this, itemType, id, { item });
 
                 // Setting elems here prevents UI detail requests
                 if (item === 8300 || item === 8360) {
@@ -234,7 +234,7 @@ export default {
         const { title, detail, fix, trap } = cl;
 
         // Osmose titles shouldn't contain markdown
-        let issueStrings = {};
+        const issueStrings = {};
         if (title) issueStrings.title = title.auto;
         if (detail) issueStrings.detail = marked(detail.auto);
         if (trap) issueStrings.trap = marked(trap.auto);

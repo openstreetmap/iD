@@ -1,6 +1,6 @@
 import { t, localizer } from '../core/localizer';
 
-var OSM_PRECISION = 7;
+const OSM_PRECISION = 7;
 
 /**
  * Returns a localized representation of the given length measurement.
@@ -9,8 +9,8 @@ var OSM_PRECISION = 7;
  * @param {Boolean} isImperial true for U.S. customary units; false for metric
  */
 export function displayLength(m, isImperial) {
-    var d = m * (isImperial ? 3.28084 : 1);
-    var unit;
+    let d = m * (isImperial ? 3.28084 : 1);
+    let unit;
 
     if (isImperial) {
         if (d >= 5280) {
@@ -42,11 +42,11 @@ export function displayLength(m, isImperial) {
  * @param {Boolean} isImperial true for U.S. customary units; false for metric
  */
 export function displayArea(m2, isImperial) {
-    var locale = localizer.localeCode();
-    var d = m2 * (isImperial ? 10.7639111056 : 1);
-    var d1, d2, area;
-    var unit1 = '';
-    var unit2 = '';
+    const locale = localizer.localeCode();
+    const d = m2 * (isImperial ? 10.7639111056 : 1);
+    let d1, d2;
+    let unit1 = '';
+    let unit2 = '';
 
     if (isImperial) {
         if (d >= 6969600) { // > 0.25mi² show mi²
@@ -77,7 +77,7 @@ export function displayArea(m2, isImperial) {
         }
     }
 
-    area = t('units.' + unit1, {
+    const area = t('units.' + unit1, {
         quantity: d1.toLocaleString(locale, {
             maximumSignificantDigits: 4
         })
@@ -98,7 +98,7 @@ export function displayArea(m2, isImperial) {
 }
 
 function wrap(x, min, max) {
-    var d = max - min;
+    const d = max - min;
     return ((x - min) % d + d) % d + min;
 }
 
@@ -114,21 +114,20 @@ function roundToDecimal (target, decimalPlace) {
 }
 
 function displayCoordinate(deg, pos, neg) {
-    var displayCoordinate;
-    var locale = localizer.localeCode();
+    const locale = localizer.localeCode();
 
-    var degreesFloor = Math.floor(Math.abs(deg));
-    var min = (Math.abs(deg) - degreesFloor) * 60;
-    var minFloor = Math.floor(min);
-    var sec = (min - minFloor) * 60;
+    let degreesFloor = Math.floor(Math.abs(deg));
+    const min = (Math.abs(deg) - degreesFloor) * 60;
+    let minFloor = Math.floor(min);
+    const sec = (min - minFloor) * 60;
 
 
     // if you input 45°,90°0'0.5" , sec should be 0.5 instead 0.499999…
     // in order to mitigate precision errors after calculating, round two time
     // 0.499999… => 0.5
-    var fix = roundToDecimal(sec, 8);
+    const fix = roundToDecimal(sec, 8);
     // 0.5 => 1
-    var secRounded = roundToDecimal(fix, 0);
+    let secRounded = roundToDecimal(fix, 0);
 
     if (secRounded === 60) {
         secRounded = 0;
@@ -138,7 +137,7 @@ function displayCoordinate(deg, pos, neg) {
             degreesFloor += 1;
         }
     }
-    displayCoordinate =
+    const displayCoordinate =
         t('units.arcdegrees', {
             quantity: degreesFloor.toLocaleString(locale)
         }) +

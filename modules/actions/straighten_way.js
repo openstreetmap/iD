@@ -14,19 +14,19 @@ export function actionStraightenWay(selectedIDs, projection) {
 
     // Return all selected ways as a continuous, ordered array of nodes
     function allNodes(graph) {
-        var nodes = [];
-        var startNodes = [];
-        var endNodes = [];
-        var remainingWays = [];
-        var selectedWays = selectedIDs.filter(function(w) {
+        let nodes = [];
+        let startNodes = [];
+        let endNodes = [];
+        let remainingWays = [];
+        const selectedWays = selectedIDs.filter(function(w) {
             return graph.entity(w).type === 'way';
         });
-        var selectedNodes = selectedIDs.filter(function(n) {
+        const selectedNodes = selectedIDs.filter(function(n) {
             return graph.entity(n).type === 'node';
         });
 
-        for (var i = 0; i < selectedWays.length; i++) {
-            var way = graph.entity(selectedWays[i]);
+        for (let i = 0; i < selectedWays.length; i++) {
+            const way = graph.entity(selectedWays[i]);
             nodes = way.nodes.slice(0);
             remainingWays.push(nodes);
             startNodes.push(nodes[0]);
@@ -44,13 +44,13 @@ export function actionStraightenWay(selectedIDs, projection) {
         });
 
         // Choose the initial endpoint to start from
-        var currNode = utilArrayDifference(startNodes, endNodes)
+        let currNode = utilArrayDifference(startNodes, endNodes)
             .concat(utilArrayDifference(endNodes, startNodes))[0];
-        var nextWay = [];
+        let nextWay = [];
         nodes = [];
 
         // Create nested function outside of loop to avoid "function in loop" lint error
-        var getNextWay = function(currNode, remainingWays) {
+        const getNextWay = function(currNode, remainingWays) {
             return remainingWays.filter(function(way) {
                 return way[0] === currNode || way[way.length-1] === currNode;
             })[0];
@@ -70,9 +70,9 @@ export function actionStraightenWay(selectedIDs, projection) {
 
         // If user selected 2 nodes to straighten between, then slice nodes array to those nodes
         if (selectedNodes.length === 2) {
-            var startNodeIdx = nodes.indexOf(selectedNodes[0]);
-            var endNodeIdx = nodes.indexOf(selectedNodes[1]);
-            var sortedStartEnd = [startNodeIdx, endNodeIdx];
+            const startNodeIdx = nodes.indexOf(selectedNodes[0]);
+            const endNodeIdx = nodes.indexOf(selectedNodes[1]);
+            const sortedStartEnd = [startNodeIdx, endNodeIdx];
 
             sortedStartEnd.sort(function(a, b) { return a - b; });
             nodes = nodes.slice(sortedStartEnd[0], sortedStartEnd[1]+1);
@@ -88,25 +88,25 @@ export function actionStraightenWay(selectedIDs, projection) {
     }
 
 
-    var action = function(graph, t) {
+    const action = function(graph, t) {
         if (t === null || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
-        var nodes = allNodes(graph);
-        var points = nodes.map(function(n) { return projection(n.loc); });
-        var startPoint = points[0];
-        var endPoint = points[points.length-1];
-        var toDelete = [];
-        var i;
+        const nodes = allNodes(graph);
+        const points = nodes.map(function(n) { return projection(n.loc); });
+        const startPoint = points[0];
+        const endPoint = points[points.length-1];
+        const toDelete = [];
+        let i;
 
         for (i = 1; i < points.length-1; i++) {
-            var node = nodes[i];
-            var point = points[i];
+            const node = nodes[i];
+            const point = points[i];
 
             if (t < 1 || shouldKeepNode(node, graph)) {
-                var u = positionAlongWay(point, startPoint, endPoint);
-                var p = geoVecInterp(startPoint, endPoint, u);
-                var loc2 = projection.invert(p);
+                const u = positionAlongWay(point, startPoint, endPoint);
+                const p = geoVecInterp(startPoint, endPoint, u);
+                const loc2 = projection.invert(p);
                 graph = graph.replace(node.move(geoVecInterp(node.loc, loc2, t)));
 
             } else {
@@ -127,24 +127,24 @@ export function actionStraightenWay(selectedIDs, projection) {
 
     action.disabled = function(graph) {
         // check way isn't too bendy
-        var nodes = allNodes(graph);
-        var points = nodes.map(function(n) { return projection(n.loc); });
-        var startPoint = points[0];
-        var endPoint = points[points.length-1];
-        var threshold = 0.2 * geoVecLength(startPoint, endPoint);
-        var i;
+        const nodes = allNodes(graph);
+        const points = nodes.map(function(n) { return projection(n.loc); });
+        const startPoint = points[0];
+        const endPoint = points[points.length-1];
+        const threshold = 0.2 * geoVecLength(startPoint, endPoint);
+        let i;
 
         if (threshold === 0) {
             return 'too_bendy';
         }
 
-        var maxDistance = 0;
+        let maxDistance = 0;
 
         for (i = 1; i < points.length - 1; i++) {
-            var point = points[i];
-            var u = positionAlongWay(point, startPoint, endPoint);
-            var p = geoVecInterp(startPoint, endPoint, u);
-            var dist = geoVecLength(p, point);
+            const point = points[i];
+            const u = positionAlongWay(point, startPoint, endPoint);
+            const p = geoVecInterp(startPoint, endPoint, u);
+            const dist = geoVecLength(p, point);
 
             // to bendy if point is off by 20% of total start/end distance in projected space
             if (isNaN(dist) || dist > threshold) {
@@ -154,7 +154,7 @@ export function actionStraightenWay(selectedIDs, projection) {
             }
         }
 
-        var keepingAllNodes = nodes.every(function(node, i) {
+        const keepingAllNodes = nodes.every(function(node, i) {
             return i === 0 || i === nodes.length - 1 || shouldKeepNode(node, graph);
         });
 

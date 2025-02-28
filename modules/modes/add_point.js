@@ -12,7 +12,7 @@ export function modeAddPoint(context, mode) {
 
     mode.id = 'add-point';
 
-    var behavior = behaviorDraw(context)
+    const behavior = behaviorDraw(context)
         .on('click', add)
         .on('clickWay', addWay)
         .on('clickNode', addNode)
@@ -20,14 +20,14 @@ export function modeAddPoint(context, mode) {
         .on('finish', cancel);
 
     function defaultTags(loc) {
-        var defaultTags = {};
+        let defaultTags = {};
         if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'point', false, loc);
         return defaultTags;
     }
 
 
     function add(loc) {
-        var node = osmNode({ loc: loc, tags: defaultTags(loc) });
+        const node = osmNode({ loc: loc, tags: defaultTags(loc) });
 
         context.perform(
             actionAddEntity(node),
@@ -39,7 +39,7 @@ export function modeAddPoint(context, mode) {
 
 
     function addWay(loc, edge) {
-        var node = osmNode({ tags: defaultTags(loc) });
+        const node = osmNode({ tags: defaultTags(loc) });
 
         context.perform(
             actionAddMidpoint({loc: loc, edge: edge}, node),
@@ -63,8 +63,8 @@ export function modeAddPoint(context, mode) {
             return;
         }
 
-        var tags = Object.assign({}, node.tags);  // shallow copy
-        for (var key in _defaultTags) {
+        const tags = Object.assign({}, node.tags);  // shallow copy
+        for (const key in _defaultTags) {
             tags[key] = _defaultTags[key];
         }
 

@@ -3,7 +3,7 @@ import { json as d3_json } from 'd3-fetch';
 import { utilQsString } from '../util';
 
 
-var endpoint = 'https://en.wikipedia.org/w/api.php?';
+const endpoint = 'https://en.wikipedia.org/w/api.php?';
 
 export default {
 
@@ -18,7 +18,7 @@ export default {
         }
 
         lang = lang || 'en';
-        var url = endpoint.replace('en', lang) +
+        const url = endpoint.replace('en', lang) +
             utilQsString({
                 action: 'query',
                 list: 'search',
@@ -37,7 +37,7 @@ export default {
                     throw new Error('No Results');
                 }
                 if (callback) {
-                    var titles = result.query.search.map(function(d) { return d.title; });
+                    const titles = result.query.search.map(function(d) { return d.title; });
                     callback(null, titles);
                 }
             })
@@ -54,7 +54,7 @@ export default {
         }
 
         lang = lang || 'en';
-        var url = endpoint.replace('en', lang) +
+        const url = endpoint.replace('en', lang) +
             utilQsString({
                 action: 'opensearch',
                 namespace: 0,
@@ -85,7 +85,7 @@ export default {
             return;
         }
 
-        var url = endpoint.replace('en', lang) +
+        const url = endpoint.replace('en', lang) +
             utilQsString({
                 action: 'query',
                 prop: 'langlinks',
@@ -103,8 +103,8 @@ export default {
                     throw new Error('No Results');
                 }
                 if (callback) {
-                    var list = result.query.pages[Object.keys(result.query.pages)[0]];
-                    var translations = {};
+                    const list = result.query.pages[Object.keys(result.query.pages)[0]];
+                    const translations = {};
                     if (list && list.langlinks) {
                         list.langlinks.forEach(function(d) { translations[d.lang] = d['*']; });
                     }

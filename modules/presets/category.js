@@ -7,7 +7,7 @@ import { presetCollection } from './collection';
 // decorated with some extra methods for searching and matching geometry
 //
 export function presetCategory(categoryID, category, allPresets) {
-  let _this = Object.assign({}, category);   // shallow copy
+  const _this = Object.assign({}, category);   // shallow copy
   let _searchName; // cache
   let _searchNameStripped; // cache
 
@@ -19,7 +19,7 @@ export function presetCategory(categoryID, category, allPresets) {
 
   _this.geometry = _this.members.collection
     .reduce((acc, preset) => {
-      for (let i in preset.geometry) {
+      for (const i in preset.geometry) {
         const geometry = preset.geometry[i];
         if (acc.indexOf(geometry) === -1) {
           acc.push(geometry);

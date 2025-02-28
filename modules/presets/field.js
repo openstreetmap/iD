@@ -8,7 +8,7 @@ import { utilSafeClassName } from '../util/util';
 //
 export function presetField(fieldID, field, allFields) {
   allFields = allFields || {};
-  let _this = Object.assign({}, field);   // shallow copy
+  const _this = Object.assign({}, field);   // shallow copy
 
   _this.id = fieldID;
 

@@ -6,8 +6,8 @@ import { utilDetect } from '../util/detect';
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import planePhotoFrame from '../services/plane_photo';
 
-var _initialized = false;
-var _enabled = false;
+let _initialized = false;
+let _enabled = false;
 const minViewfieldZoom = 16;
 
 export function svgLocalPhotos(projection, context, dispatch) {
@@ -115,7 +115,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
     function transform(d) {
         // projection expects [long, lat]
-        var svgpoint = projection(d.loc);
+        const svgpoint = projection(d.loc);
         return 'translate(' + svgpoint[0] + ',' + svgpoint[1] + ')';
     }
 
@@ -308,7 +308,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .reduce((a, b) => a.extend(b));
 
         const map = context.map();
-        var viewport = map.trimmedExtent().polygon();
+        const viewport = map.trimmedExtent().polygon();
 
         if (force !== false || !geoPolygonIntersectsPolygon(viewport, coords, true)) {
             map.centerZoom(extent.center(), Math.min(18, map.trimmedExtentZoom(extent)));

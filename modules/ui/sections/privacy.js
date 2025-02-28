@@ -5,7 +5,7 @@ import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
 
 export function uiSectionPrivacy(context) {
-    let section = uiSection('preferences-third-party', context)
+    const section = uiSection('preferences-third-party', context)
       .label(() => t.append('preferences.privacy.title'))
       .disclosureContent(renderDisclosureContent);
 
@@ -17,7 +17,7 @@ export function uiSectionPrivacy(context) {
         .append('ul')
         .attr('class', 'layer-list privacy-options-list');
 
-      let thirdPartyIconsEnter = selection.select('.privacy-options-list')
+      const thirdPartyIconsEnter = selection.select('.privacy-options-list')
         .selectAll('.privacy-third-party-icons-item')
         .data([prefs('preferences.privacy.thirdpartyicons') || 'true'])
         .enter()

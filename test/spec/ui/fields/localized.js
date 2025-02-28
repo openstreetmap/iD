@@ -1,7 +1,7 @@
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.uiFieldLocalized', function() {
-    var context, selection, field;
+    let context, selection, field;
 
     before(function() {
         iD.fileFetcher.cache().languages = {
@@ -25,7 +25,7 @@ describe('iD.uiFieldLocalized', function() {
 
 
     it('adds a blank set of fields when the + button is clicked', async () => {
-        var localized = iD.uiFieldLocalized(field, context);
+        const localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
@@ -34,7 +34,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('doesn\'t create a tag when the value is empty', async () => {
-        var localized = iD.uiFieldLocalized(field, context);
+        const localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
@@ -49,7 +49,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('doesn\'t create a tag when the name is empty', async () => {
-        var localized = iD.uiFieldLocalized(field, context);
+        const localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
@@ -64,7 +64,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('creates a tag after setting language then value', async () => {
-        var localized = iD.uiFieldLocalized(field, context);
+        const localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
@@ -81,7 +81,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('creates a tag after setting value then language', async () => {
-        var localized = iD.uiFieldLocalized(field, context);
+        const localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
@@ -98,7 +98,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('changes an existing language', async () => {
-        var localized = iD.uiFieldLocalized(field, context);
+        const localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
         localized.tags({'name:de': 'Value'});
@@ -114,7 +114,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('ignores similar keys like `old_name`', async () => {
-        var localized = iD.uiFieldLocalized(field, context);
+        const localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
         localized.tags({'old_name:de': 'Value'});
@@ -124,7 +124,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('removes the tag when the language is emptied', async () => {
-        var localized = iD.uiFieldLocalized(field, context);
+        const localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
         localized.tags({'name:de': 'Value'});
@@ -138,7 +138,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('removes the tag when the value is emptied', async () => {
-        var localized = iD.uiFieldLocalized(field, context);
+        const localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
         localized.tags({'name:de': 'Value'});
@@ -152,7 +152,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('has a lang attribute on an existing multilingual name field', async () => {
-        var localized = iD.uiFieldLocalized(field, context);
+        const localized = iD.uiFieldLocalized(field, context);
         localized.tags({'name:de': 'Value'});
         await setTimeout(20);
         selection.call(localized);

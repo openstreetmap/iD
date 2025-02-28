@@ -10,7 +10,7 @@ export function actionDiscardTags(difference, discardTags) {
     function checkTags(entity) {
       const keys = Object.keys(entity.tags);
       let didDiscard = false;
-      let tags = {};
+      const tags = {};
 
       for (let i = 0; i < keys.length; i++) {
         const k = keys[i];

@@ -26,7 +26,7 @@ import { utilKeybinding, utilRebind, utilStringQs, utilCleanOsmString } from '..
 export function coreContext() {
   const dispatch = d3_dispatch('enter', 'exit', 'change');
   const context = {};
-  let _deferred = new Set();
+  const _deferred = new Set();
 
   context.version = packageJSON.version;
   context.privacyVersion = '20201202';
@@ -81,7 +81,7 @@ export function coreContext() {
   context.ui = () => _ui;
   context.lastPointerType = () => _ui.lastPointerType();
 
-  let _keybinding = utilKeybinding('context');
+  const _keybinding = utilKeybinding('context');
   context.keybinding = () => _keybinding;
   d3_select(document).call(_keybinding);
 
@@ -89,7 +89,7 @@ export function coreContext() {
   /* Straight accessors. Avoid using these if you can. */
   // Instantiate the connection here because it doesn't require passing in
   // `context` and it's needed for pre-init calls like `preauth`
-  let _connection = services.osm;
+  const _connection = services.osm;
   let _history;
   let _validator;
   let _uploader;
@@ -192,7 +192,7 @@ export function coreContext() {
 
   context.zoomToEntities = (entityIDs, zoomTo) => {
     // be sure to load the entity even if we're not going to zoom to it
-    let loadedEntities = [];
+    const loadedEntities = [];
     const throttledZoomTo = _throttle(() => _map.zoomTo(loadedEntities), 500);
     entityIDs.forEach(entityID => context.loadEntity(entityID, (err, result) => {
       if (err) return;
@@ -408,7 +408,7 @@ export function coreContext() {
 
 
   /* Debug */
-  let _debugFlags = {
+  const _debugFlags = {
     tile: false,        // tile boundaries
     collision: false,   // label collision bounding boxes
     imagery: false,     // imagery bounding polygons

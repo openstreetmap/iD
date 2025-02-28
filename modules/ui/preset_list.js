@@ -15,25 +15,25 @@ import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
 
 
 export function uiPresetList(context) {
-    var dispatch = d3_dispatch('cancel', 'choose');
-    var _entityIDs;
-    var _currLoc;
-    var _currentPresets;
-    var _autofocus = false;
+    const dispatch = d3_dispatch('cancel', 'choose');
+    let _entityIDs;
+    let _currLoc;
+    let _currentPresets;
+    let _autofocus = false;
 
 
     function presetList(selection) {
         if (!_entityIDs) return;
 
-        var presets = presetManager.matchAllGeometry(entityGeometries());
+        const presets = presetManager.matchAllGeometry(entityGeometries());
 
         selection.html('');
 
-        var messagewrap = selection
+        const messagewrap = selection
             .append('div')
             .attr('class', 'header fillL');
 
-        var message = messagewrap
+        const message = messagewrap
             .append('h2')
             .call(t.append('inspector.choose'));
 
@@ -75,14 +75,14 @@ export function uiPresetList(context) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
                 // move focus to the first item in the preset list
-                var buttons = list.selectAll('.preset-list-button');
+                const buttons = list.selectAll('.preset-list-button');
                 if (!buttons.empty()) buttons.nodes()[0].focus();
             }
         }
 
         function keypress(d3_event) {
             // enter
-            var value = search.property('value');
+            const value = search.property('value');
             if (d3_event.keyCode === 13 && // ↩ Return
                 value.length) {
                 list.selectAll('.preset-list-item:first-child')
@@ -91,10 +91,10 @@ export function uiPresetList(context) {
         }
 
         function inputevent() {
-            var value = search.property('value');
+            const value = search.property('value');
             list.classed('filtered', value.length);
 
-            var results, messageText;
+            let results, messageText;
             if (value.length) {
                 results = presets.search(value, entityGeometries()[0], _currLoc);
                 messageText = t.html('inspector.results', {
@@ -102,7 +102,7 @@ export function uiPresetList(context) {
                     search: value
                 });
             } else {
-                var entityPresets = _entityIDs.map(entityID =>
+                const entityPresets = _entityIDs.map(entityID =>
                     presetManager.match(context.graph().entity(entityID), context.graph()));
                 results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets);
                 messageText = t.html('inspector.choose');
@@ -111,14 +111,14 @@ export function uiPresetList(context) {
             message.html(messageText);
         }
 
-        var searchWrap = selection
+        const searchWrap = selection
             .append('div')
             .attr('class', 'search-header');
 
         searchWrap
             .call(svgIcon('#iD-icon-search', 'pre-text'));
 
-        var search = searchWrap
+        const search = searchWrap
             .append('input')
             .attr('class', 'preset-search-input')
             .attr('placeholder', t('inspector.search_feature_type'))
@@ -138,13 +138,13 @@ export function uiPresetList(context) {
             }, 0);
         }
 
-        var listWrap = selection
+        const listWrap = selection
             .append('div')
             .attr('class', 'inspector-body');
 
-        var entityPresets = _entityIDs.map(entityID =>
+        const entityPresets = _entityIDs.map(entityID =>
             presetManager.match(context.graph().entity(entityID), context.graph()));
-        var list = listWrap
+        const list = listWrap
             .append('div')
             .attr('class', 'preset-list')
             .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets));
@@ -155,7 +155,7 @@ export function uiPresetList(context) {
 
     function drawList(list, presets) {
         presets = presets.matchAllGeometry(entityGeometries());
-        var collection = presets.collection.reduce(function(collection, preset) {
+        const collection = presets.collection.reduce(function(collection, preset) {
             if (!preset) return collection;
 
             if (preset.members) {
@@ -170,7 +170,7 @@ export function uiPresetList(context) {
             return collection;
         }, []);
 
-        var items = list.selectAll('.preset-list-item')
+        const items = list.selectAll('.preset-list-item')
             .data(collection, function(d) { return d.preset.id; });
 
         items.order();
@@ -192,15 +192,15 @@ export function uiPresetList(context) {
 
     function itemKeydown(d3_event) {
         // the actively focused item
-        var item = d3_select(this.closest('.preset-list-item'));
-        var parentItem = d3_select(item.node().parentNode.closest('.preset-list-item'));
+        const item = d3_select(this.closest('.preset-list-item'));
+        const parentItem = d3_select(item.node().parentNode.closest('.preset-list-item'));
 
         // arrow down, move focus to the next, lower item
         if (d3_event.keyCode === utilKeybinding.keyCodes['↓']) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
             // the next item in the list at the same level
-            var nextItem = d3_select(item.node().nextElementSibling);
+            let nextItem = d3_select(item.node().nextElementSibling);
             // if there is no next item in this list
             if (nextItem.empty()) {
                 // if there is a parent item
@@ -224,7 +224,7 @@ export function uiPresetList(context) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
             // the previous item in the list at the same level
-            var previousItem = d3_select(item.node().previousElementSibling);
+            let previousItem = d3_select(item.node().previousElementSibling);
 
             // if there is no previous item in this list
             if (previousItem.empty()) {
@@ -244,7 +244,7 @@ export function uiPresetList(context) {
                 previousItem.select('.preset-list-button').node().focus();
             } else {
                 // the focus is at the top of the list, move focus back to the search field
-                var search = d3_select(this.closest('.preset-list-pane')).select('.preset-search-input');
+                const search = d3_select(this.closest('.preset-list-pane')).select('.preset-search-input');
                 search.node().focus();
             }
 
@@ -267,15 +267,15 @@ export function uiPresetList(context) {
 
 
     function CategoryItem(preset) {
-        var box, sublist, shown = false;
+        let box, sublist, shown = false;
 
         function item(selection) {
-            var wrap = selection.append('div')
+            const wrap = selection.append('div')
                 .attr('class', 'preset-list-button-wrap category');
 
             function click() {
-                var isExpanded = d3_select(this).classed('expanded');
-                var iconName = isExpanded ?
+                const isExpanded = d3_select(this).classed('expanded');
+                const iconName = isExpanded ?
                     (localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward') : '#iD-icon-down';
                 d3_select(this)
                     .classed('expanded', !isExpanded)
@@ -285,9 +285,9 @@ export function uiPresetList(context) {
                 item.choose();
             }
 
-            var geometries = entityGeometries();
+            const geometries = entityGeometries();
 
-            var button = wrap
+            const button = wrap
                 .append('button')
                 .attr('class', 'preset-list-button')
                 .attr('title', t('icons.expand'))
@@ -320,7 +320,7 @@ export function uiPresetList(context) {
                     }
                 });
 
-            var label = button
+            const label = button
                 .append('div')
                 .attr('class', 'label')
                 .append('div')
@@ -359,7 +359,7 @@ export function uiPresetList(context) {
                     .style('padding-bottom', '0px');
             } else {
                 shown = true;
-                var members = preset.members.matchAllGeometry(entityGeometries());
+                const members = preset.members.matchAllGeometry(entityGeometries());
                 sublist.call(drawList, members);
                 box.transition()
                     .duration(200)
@@ -376,12 +376,12 @@ export function uiPresetList(context) {
 
     function PresetItem(preset) {
         function item(selection) {
-            var wrap = selection.append('div')
+            const wrap = selection.append('div')
                 .attr('class', 'preset-list-button-wrap');
 
-            var geometries = entityGeometries();
+            const geometries = entityGeometries();
 
-            var button = wrap.append('button')
+            const button = wrap.append('button')
                 .attr('class', 'preset-list-button')
                 .call(uiPresetIcon()
                     .geometry(geometries.length === 1 && geometries[0])
@@ -389,13 +389,13 @@ export function uiPresetList(context) {
                 .on('click', item.choose)
                 .on('keydown', itemKeydown);
 
-            var label = button
+            const label = button
                 .append('div')
                 .attr('class', 'label')
                 .append('div')
                 .attr('class', 'label-inner');
 
-            var nameparts = [
+            const nameparts = [
                 preset.nameLabel(),
                 preset.subtitleLabel()
             ].filter(Boolean);
@@ -419,9 +419,9 @@ export function uiPresetList(context) {
             }
             context.perform(
                 function(graph) {
-                    for (var i in _entityIDs) {
-                        var entityID = _entityIDs[i];
-                        var oldPreset = presetManager.match(graph.entity(entityID), graph);
+                    for (const i in _entityIDs) {
+                        const entityID = _entityIDs[i];
+                        const oldPreset = presetManager.match(graph.entity(entityID), graph);
                         graph = actionChangePreset(entityID, oldPreset, preset)(graph);
                     }
                     return graph;
@@ -448,19 +448,19 @@ export function uiPresetList(context) {
     function updateForFeatureHiddenState() {
         if (!_entityIDs.every(context.hasEntity)) return;
 
-        var geometries = entityGeometries();
-        var button = context.container().selectAll('.preset-list .preset-list-button');
+        const geometries = entityGeometries();
+        const button = context.container().selectAll('.preset-list .preset-list-button');
 
         // remove existing tooltips
         button.call(uiTooltip().destroyAny);
 
         button.each(function(item, index) {
-            var hiddenPresetFeaturesId;
-            for (var i in geometries) {
+            let hiddenPresetFeaturesId;
+            for (const i in geometries) {
                 hiddenPresetFeaturesId = context.features().isHiddenPreset(item.preset, geometries[i]);
                 if (hiddenPresetFeaturesId) break;
             }
-            var isHiddenPreset = !context.inIntro() &&
+            const isHiddenPreset = !context.inIntro() &&
                 !!hiddenPresetFeaturesId &&
                 (_currentPresets.length !== 1 || item.preset !== _currentPresets[0]);
 
@@ -468,7 +468,7 @@ export function uiPresetList(context) {
                 .classed('disabled', isHiddenPreset);
 
             if (isHiddenPreset) {
-                var isAutoHidden = context.features().autoHidden(hiddenPresetFeaturesId);
+                const isAutoHidden = context.features().autoHidden(hiddenPresetFeaturesId);
                 d3_select(this).call(uiTooltip()
                     .title(() => t.append('inspector.hidden_preset.' + (isAutoHidden ? 'zoom' : 'manual'), {
                         features: t('feature.' + hiddenPresetFeaturesId + '.description')
@@ -494,13 +494,13 @@ export function uiPresetList(context) {
         if (_entityIDs && _entityIDs.length) {
             // calculate current location
             const extent = _entityIDs.reduce(function(extent, entityID) {
-                var entity = context.graph().entity(entityID);
+                const entity = context.graph().entity(entityID);
                 return extent.extend(entity.extent(context.graph()));
             }, geoExtent());
             _currLoc = extent.center();
 
             // match presets
-            var presets = _entityIDs.map(function(entityID) {
+            const presets = _entityIDs.map(function(entityID) {
                 return presetManager.match(context.entity(entityID), context.graph());
             });
             presetList.presets(presets);
@@ -517,12 +517,12 @@ export function uiPresetList(context) {
 
     function entityGeometries() {
 
-        var counts = {};
+        const counts = {};
 
-        for (var i in _entityIDs) {
-            var entityID = _entityIDs[i];
-            var entity = context.entity(entityID);
-            var geometry = entity.geometry(context.graph());
+        for (const i in _entityIDs) {
+            const entityID = _entityIDs[i];
+            const entity = context.entity(entityID);
+            let geometry = entity.geometry(context.graph());
 
             // Treat entities on addr:interpolation lines as points, not vertices (#3241)
             if (geometry === 'vertex' && entity.isOnAddressLine(context.graph())) {

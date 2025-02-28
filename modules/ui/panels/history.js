@@ -3,15 +3,15 @@ import { svgIcon } from '../../svg';
 
 
 export function uiPanelHistory(context) {
-    var osm;
+    let osm;
 
     function displayTimestamp(timestamp) {
         if (!timestamp) return t('info_panels.history.unknown');
-        var options = {
+        const options = {
             day: 'numeric', month: 'short', year: 'numeric',
             hour: 'numeric', minute: 'numeric', second: 'numeric'
         };
-        var d = new Date(timestamp);
+        const d = new Date(timestamp);
         if (isNaN(d.getTime())) return t('info_panels.history.unknown');
         return d.toLocaleString(localizer.localeCode(), options);
     }
@@ -30,7 +30,7 @@ export function uiPanelHistory(context) {
             .attr('class', 'user-name')
             .text(userName);
 
-        var links = selection
+        const links = selection
             .append('div')
             .attr('class', 'links');
 
@@ -66,7 +66,7 @@ export function uiPanelHistory(context) {
             .attr('class', 'changeset-id')
             .text(changeset);
 
-        var links = selection
+        const links = selection
             .append('div')
             .attr('class', 'links');
 
@@ -96,9 +96,9 @@ export function uiPanelHistory(context) {
 
 
     function redraw(selection) {
-        var selectedNoteID = context.selectedNoteID();
+        const selectedNoteID = context.selectedNoteID();
         osm = context.connection();
-        var selected, note, entity;
+        let selected, note, entity;
         if (selectedNoteID && osm) {       // selected 1 note
             selected = [ t.html('note.note') + ' ' + selectedNoteID ];
             note = osm.getNote(selectedNoteID);
@@ -110,7 +110,7 @@ export function uiPanelHistory(context) {
             }
         }
 
-        var singular = selected.length === 1 ? selected[0] : null;
+        const singular = selected.length === 1 ? selected[0] : null;
 
         selection.html('');
 
@@ -144,7 +144,7 @@ export function uiPanelHistory(context) {
             return;
         }
 
-        var list = selection
+        const list = selection
             .append('ul');
 
         list
@@ -187,7 +187,7 @@ export function uiPanelHistory(context) {
             return;
         }
 
-        var links = selection
+        const links = selection
             .append('div')
             .attr('class', 'links');
 
@@ -207,7 +207,7 @@ export function uiPanelHistory(context) {
             .attr('tabindex', -1)
             .text('PeWu');
 
-        var list = selection
+        const list = selection
             .append('ul');
 
         list
@@ -234,7 +234,7 @@ export function uiPanelHistory(context) {
     }
 
 
-    var panel = function(selection) {
+    const panel = function(selection) {
         selection.call(redraw);
 
         context.map()

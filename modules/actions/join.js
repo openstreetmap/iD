@@ -17,7 +17,7 @@ import { utilArrayGroupBy, utilArrayIdentical, utilArrayIntersection, utilOldest
 export function actionJoin(ids) {
 
     function groupEntitiesByGeometry(graph) {
-        var entities = ids.map(function(id) { return graph.entity(id); });
+        const entities = ids.map(function(id) { return graph.entity(id); });
         return Object.assign(
             { line: [] },
             utilArrayGroupBy(entities, function(entity) { return entity.geometry(graph); })
@@ -25,32 +25,32 @@ export function actionJoin(ids) {
     }
 
 
-    var action = function(graph) {
-        var ways = ids.map(graph.entity, graph);
+    const action = function(graph) {
+        const ways = ids.map(graph.entity, graph);
 
         // Prefer to keep an existing way.
         // if there are multiple existing ways, keep the oldest one
         // the oldest way is determined by the ID of the way.
-        var survivorID = utilOldestID(ways.map(way => way.id));
+        const survivorID = utilOldestID(ways.map(way => way.id));
 
         // if any of the ways are sided (e.g. coastline, cliff, kerb)
         // sort them first so they establish the overall order - #6033
         ways.sort(function(a, b) {
-            var aSided = a.isSided();
-            var bSided = b.isSided();
+            const aSided = a.isSided();
+            const bSided = b.isSided();
             return (aSided && !bSided) ? -1
                 : (bSided && !aSided) ? 1
                 : 0;
         });
 
-        var sequences = osmJoinWays(ways, graph);
-        var joined = sequences[0];
+        const sequences = osmJoinWays(ways, graph);
+        const joined = sequences[0];
 
         // We might need to reverse some of these ways before joining them.  #4688
         // `joined.actions` property will contain any actions we need to apply.
         graph = sequences.actions.reduce(function(g, action) { return action(g); }, graph);
 
-        var survivor = graph.entity(survivorID);
+        let survivor = graph.entity(survivorID);
         survivor = survivor.update({ nodes: joined.nodes.map(function(n) { return n.id; }) });
         graph = graph.replace(survivor);
 
@@ -72,7 +72,7 @@ export function actionJoin(ids) {
         function checkForSimpleMultipolygon() {
             if (!survivor.isClosed()) return;
 
-            var multipolygons = graph.parentMultipolygons(survivor).filter(function(multipolygon) {
+            const multipolygons = graph.parentMultipolygons(survivor).filter(function(multipolygon) {
                 // find multipolygons where the survivor is the only member
                 return multipolygon.members.length === 1;
             });
@@ -80,9 +80,9 @@ export function actionJoin(ids) {
             // skip if this is the single member of multiple multipolygons
             if (multipolygons.length !== 1) return;
 
-            var multipolygon = multipolygons[0];
+            const multipolygon = multipolygons[0];
 
-            for (var key in survivor.tags) {
+            for (const key in survivor.tags) {
                 if (multipolygon.tags[key] &&
                     // don't collapse if tags cannot be cleanly merged
                     multipolygon.tags[key] !== survivor.tags[key]) return;
@@ -92,7 +92,7 @@ export function actionJoin(ids) {
             graph = graph.replace(survivor);
             graph = actionDeleteRelation(multipolygon.id, true /* allow untagged members */)(graph);
 
-            var tags = Object.assign({}, survivor.tags);
+            const tags = Object.assign({}, survivor.tags);
             if (survivor.geometry(graph) !== 'area') {
                 // ensure the feature persists as an area
                 tags.area = 'yes';
@@ -115,29 +115,29 @@ export function actionJoin(ids) {
 
 
     action.disabled = function(graph) {
-        var geometries = groupEntitiesByGeometry(graph);
+        const geometries = groupEntitiesByGeometry(graph);
         if (ids.length < 2 || ids.length !== geometries.line.length) {
             return 'not_eligible';
         }
 
-        var joined = osmJoinWays(ids.map(graph.entity, graph), graph);
+        const joined = osmJoinWays(ids.map(graph.entity, graph), graph);
         if (joined.length > 1) {
             return 'not_adjacent';
         }
 
-        var i;
+        let i;
 
         // All joined ways must belong to the same set of (non-restriction) relations.
         // Restriction relations have different logic, below, which allows some cases
         // this prohibits, and prohibits some cases this allows.
-        var sortedParentRelations = function (id) {
+        const sortedParentRelations = function (id) {
             return graph.parentRelations(graph.entity(id))
                 .filter((rel) => !rel.isRestriction() && !rel.isConnectivity())
                 .sort((a, b) => a.id.localeCompare(b.id));
         };
-        var relsA = sortedParentRelations(ids[0]);
+        const relsA = sortedParentRelations(ids[0]);
         for (i = 1; i < ids.length; i++) {
-            var relsB = sortedParentRelations(ids[i]);
+            const relsB = sortedParentRelations(ids[i]);
             if (!utilArrayIdentical(relsA, relsB)) {
                 return 'conflicting_relations';
             }
@@ -146,16 +146,16 @@ export function actionJoin(ids) {
         // Loop through all combinations of path-pairs
         // to check potential intersections between all pairs
         for (i = 0; i < ids.length - 1; i++) {
-            for (var j = i + 1; j < ids.length; j++) {
-                var path1 = graph.childNodes(graph.entity(ids[i]))
+            for (let j = i + 1; j < ids.length; j++) {
+                const path1 = graph.childNodes(graph.entity(ids[i]))
                     .map(function(e) { return e.loc; });
-                var path2 = graph.childNodes(graph.entity(ids[j]))
+                const path2 = graph.childNodes(graph.entity(ids[j]))
                     .map(function(e) { return e.loc; });
-                var intersections = geoPathIntersections(path1, path2);
+                const intersections = geoPathIntersections(path1, path2);
 
                 // Check if intersections are just nodes lying on top of
                 // each other/the line, as opposed to crossing it
-                var common = utilArrayIntersection(
+                const common = utilArrayIntersection(
                     joined[0].nodes.map(function(n) { return n.loc.toString(); }),
                     intersections.map(function(n) { return n.toString(); })
                 );
@@ -165,20 +165,20 @@ export function actionJoin(ids) {
             }
         }
 
-        var nodeIds = joined[0].nodes.map(function(n) { return n.id; }).slice(1, -1);
-        var relation;
-        var tags = {};
-        var conflicting = false;
+        const nodeIds = joined[0].nodes.map(function(n) { return n.id; }).slice(1, -1);
+        let relation;
+        const tags = {};
+        let conflicting = false;
 
         joined[0].forEach(function(way) {
-            var parents = graph.parentRelations(way);
+            const parents = graph.parentRelations(way);
             parents.forEach(function(parent) {
                 if ((parent.isRestriction() || parent.isConnectivity()) && parent.members.some(function(m) { return nodeIds.indexOf(m.id) >= 0; })) {
                     relation = parent;
                 }
             });
 
-            for (var k in way.tags) {
+            for (const k in way.tags) {
                 if (!(k in tags)) {
                     tags[k] = way.tags[k];
                 } else if (tags[k] && osmIsInterestingTag(k) && tags[k] !== way.tags[k]) {

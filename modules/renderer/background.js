@@ -22,7 +22,7 @@ export function rendererBackground(context) {
   const baseLayer = rendererTileLayer(context).projection(context.projection);
   let _checkedBlocklists = [];
   let _isValid = true;
-  let _overlayLayers = [];
+  const _overlayLayers = [];
   let _brightness = 1;
   let _contrast = 1;
   let _saturation = 1;
@@ -78,7 +78,7 @@ export function rendererBackground(context) {
         _imageryIndex.backgrounds.unshift(rendererBackgroundSource.None());
 
         // Add 'Custom'
-        let template = prefs('background-custom-template') || '';
+        const template = prefs('background-custom-template') || '';
         const custom = rendererBackgroundSource.Custom(template);
         _imageryIndex.backgrounds.unshift(custom);
 
@@ -135,7 +135,7 @@ export function rendererBackground(context) {
     base.style('filter', baseFilter || null);
 
 
-    let imagery = base.selectAll('.layer-imagery')
+    const imagery = base.selectAll('.layer-imagery')
       .data([0]);
 
     imagery.enter()
@@ -151,14 +151,14 @@ export function rendererBackground(context) {
       mixBlendMode = 'overlay';
       maskFilter = 'saturate(0) blur(3px) invert(1)';
 
-      let contrast = _sharpness - 1;
+      const contrast = _sharpness - 1;
       maskFilter += ` contrast(${contrast})`;
 
-      let brightness = d3_interpolateNumber(1, 0.85)(_sharpness - 1);
+      const brightness = d3_interpolateNumber(1, 0.85)(_sharpness - 1);
       maskFilter += ` brightness(${brightness})`;
     }
 
-    let mask = base.selectAll('.layer-unsharp-mask')
+    const mask = base.selectAll('.layer-unsharp-mask')
       .data(_sharpness > 1 ? [0] : []);
 
     mask.exit()
@@ -173,7 +173,7 @@ export function rendererBackground(context) {
       .style('mix-blend-mode', mixBlendMode || null);
 
 
-    let overlays = selection.selectAll('.layer-overlay')
+    const overlays = selection.selectAll('.layer-overlay')
       .data(_overlayLayers, d => d.source().name());
 
     overlays.exit()
@@ -188,10 +188,10 @@ export function rendererBackground(context) {
 
 
   background.updateImagery = function() {
-    let currSource = baseLayer.source();
+    const currSource = baseLayer.source();
     if (context.inIntro() || !currSource) return;
 
-    let o = _overlayLayers
+    const o = _overlayLayers
       .filter(d => !d.source().isLocatorOverlay() && !d.source().isHidden())
       .map(d => d.source().id)
       .join(',');
@@ -200,7 +200,7 @@ export function rendererBackground(context) {
     const EPSILON = 0.01;
     const x = +meters[0].toFixed(2);
     const y = +meters[1].toFixed(2);
-    let hash = utilStringQs(window.location.hash);
+    const hash = utilStringQs(window.location.hash);
 
     let id = currSource.id;
     if (id === 'custom') {
@@ -229,8 +229,8 @@ export function rendererBackground(context) {
       window.location.replace('#' + utilQsString(hash, true));
     }
 
-    let imageryUsed = [];
-    let photoOverlaysUsed = [];
+    const imageryUsed = [];
+    const photoOverlaysUsed = [];
 
     const currUsed = currSource.imageryUsed();
     if (currUsed && _isValid) {
@@ -257,7 +257,7 @@ export function rendererBackground(context) {
       panoramax: 'Panoramax Images'
     };
 
-    for (let layerID in photoOverlayLayers) {
+    for (const layerID in photoOverlayLayers) {
       const layer = context.layers().layer(layerID);
       if (layer && layer.enabled()) {
         photoOverlaysUsed.push(layerID);
@@ -273,7 +273,7 @@ export function rendererBackground(context) {
   background.sources = (extent, zoom, includeCurrent) => {
     if (!_imageryIndex) return [];   // called before init()?
 
-    let visible = {};
+    const visible = {};
     (_imageryIndex.query.bbox(extent.rectangle(), true) || [])
       .forEach(d => visible[d.id] = true);
 
@@ -471,10 +471,10 @@ export function rendererBackground(context) {
         const viewArea = extent.area();
         best = validBackgrounds.find(s => {
           if (!s.best() || s.overlay) return false;
-          let bbox = turf_bbox(turf_bboxClip(
+          const bbox = turf_bbox(turf_bboxClip(
                 { type: 'MultiPolygon', coordinates: [ s.polygon || [extent.polygon()] ] },
                 extent.rectangle()));
-          let area = geoExtent(bbox.slice(0,2), bbox.slice(2,4)).area();
+          const area = geoExtent(bbox.slice(0,2), bbox.slice(2,4)).area();
           return area / viewArea > 0.5; // min visible size: 50% of viewport area
         });
       }

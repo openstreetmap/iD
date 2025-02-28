@@ -6,15 +6,15 @@ import { utilArrayDifference, utilGetAllNodes, utilTotalExtent } from '../util/i
 
 
 export function operationStraighten(context, selectedIDs) {
-    var _wayIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'w'; });
-    var _nodeIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'n'; });
-    var _amount = ((_wayIDs.length ? _wayIDs : _nodeIDs).length === 1 ? 'single' : 'multiple');
+    let _geometry;
+    const _wayIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'w'; });
+    const _nodeIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'n'; });
+    const _amount = ((_wayIDs.length ? _wayIDs : _nodeIDs).length === 1 ? 'single' : 'multiple');
 
-    var _nodes = utilGetAllNodes(selectedIDs, context.graph());
-    var _coords = _nodes.map(function(n) { return n.loc; });
-    var _extent = utilTotalExtent(selectedIDs, context.graph());
-    var _action = chooseAction();
-    var _geometry;
+    const _nodes = utilGetAllNodes(selectedIDs, context.graph());
+    const _coords = _nodes.map(function(n) { return n.loc; });
+    let _extent = utilTotalExtent(selectedIDs, context.graph());
+    const _action = chooseAction();
 
 
     function chooseAction() {
@@ -25,11 +25,11 @@ export function operationStraighten(context, selectedIDs) {
 
         // straighten selected ways (possibly between range of 2 selected nodes)
         } else if (_wayIDs.length > 0 && (_nodeIDs.length === 0 || _nodeIDs.length === 2)) {
-            var startNodeIDs = [];
-            var endNodeIDs = [];
+            let startNodeIDs = [];
+            let endNodeIDs = [];
 
-            for (var i = 0; i < selectedIDs.length; i++) {
-                var entity = context.entity(selectedIDs[i]);
+            for (let i = 0; i < selectedIDs.length; i++) {
+                const entity = context.entity(selectedIDs[i]);
                 if (entity.type === 'node') {
                     continue;
                 } else if (entity.type !== 'way' || entity.isClosed()) {
@@ -53,7 +53,7 @@ export function operationStraighten(context, selectedIDs) {
                 utilArrayDifference(endNodeIDs, startNodeIDs).length !== 2) return null;
 
             // Ensure path contains at least 3 unique nodes
-            var wayNodeIDs = utilGetAllNodes(_wayIDs, context.graph())
+            const wayNodeIDs = utilGetAllNodes(_wayIDs, context.graph())
                 .map(function(node) { return node.id; });
             if (wayNodeIDs.length <= 2) return null;
 
@@ -92,7 +92,7 @@ export function operationStraighten(context, selectedIDs) {
 
 
     operation.disabled = function() {
-        var reason = _action.disabled(context.graph());
+        const reason = _action.disabled(context.graph());
         if (reason) {
             return reason;
         } else if (_extent.percentContainedIn(context.map().extent()) < 0.8) {
@@ -108,9 +108,9 @@ export function operationStraighten(context, selectedIDs) {
 
         function someMissing() {
             if (context.inIntro()) return false;
-            var osm = context.connection();
+            const osm = context.connection();
             if (osm) {
-                var missing = _coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                const missing = _coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
                 if (missing.length) {
                     missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
                     return true;
@@ -122,7 +122,7 @@ export function operationStraighten(context, selectedIDs) {
 
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
+        const disable = operation.disabled();
         return disable ?
             t.append('operations.straighten.' + disable + '.' + _amount) :
             t.append('operations.straighten.description.' + _geometry + (_wayIDs.length === 1 ? '' : 's'));

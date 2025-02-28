@@ -10,9 +10,9 @@ import { utilDisplayName, utilHighlightEntities } from '../../util';
 
 export function uiSectionSelectionList(context) {
 
-    var _selectedIDs = [];
+    let _selectedIDs = [];
 
-    var section = uiSection('selected-features', context)
+    const section = uiSection('selected-features', context)
         .shouldDisplay(function() {
             return _selectedIDs.length > 1;
         })
@@ -39,8 +39,8 @@ export function uiSectionSelectionList(context) {
     }
 
     function deselectEntity(d3_event, entity) {
-        var selectedIDs = _selectedIDs.slice();
-        var index = selectedIDs.indexOf(entity.id);
+        const selectedIDs = _selectedIDs.slice();
+        const index = selectedIDs.indexOf(entity.id);
         if (index > -1) {
             selectedIDs.splice(index, 1);
             context.enter(modeSelect(context, selectedIDs));
@@ -49,7 +49,7 @@ export function uiSectionSelectionList(context) {
 
     function renderDisclosureContent(selection) {
 
-        var list = selection.selectAll('.feature-list')
+        let list = selection.selectAll('.feature-list')
             .data([0]);
 
         list = list.enter()
@@ -57,18 +57,18 @@ export function uiSectionSelectionList(context) {
             .attr('class', 'feature-list')
             .merge(list);
 
-        var entities = _selectedIDs
+        const entities = _selectedIDs
             .map(function(id) { return context.hasEntity(id); })
             .filter(Boolean);
 
-        var items = list.selectAll('.feature-list-item')
+        let items = list.selectAll('.feature-list-item')
             .data(entities, osmEntity.key);
 
         items.exit()
             .remove();
 
         // Enter
-        var enter = items.enter()
+        const enter = items.enter()
             .append('li')
             .attr('class', 'feature-list-item')
             .each(function(d) {
@@ -81,7 +81,7 @@ export function uiSectionSelectionList(context) {
                     });
             });
 
-        var label = enter
+        const label = enter
             .append('button')
             .attr('class', 'label')
             .on('click', selectEntity);
@@ -111,7 +111,7 @@ export function uiSectionSelectionList(context) {
 
         items.selectAll('.entity-geom-icon use')
             .attr('href', function() {
-                var entity = this.parentNode.parentNode.__data__;
+                const entity = this.parentNode.parentNode.__data__;
                 return '#iD-icon-' + entity.geometry(context.graph());
             });
 
@@ -121,7 +121,7 @@ export function uiSectionSelectionList(context) {
         items.selectAll('.entity-name')
             .text(function(d) {
                 // fetch latest entity
-                var entity = context.entity(d.id);
+                const entity = context.entity(d.id);
                 return utilDisplayName(entity);
             });
     }

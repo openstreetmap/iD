@@ -1,7 +1,7 @@
 describe('iD.uiCmd', function () {
-    var orig;
-    var ua = navigator.userAgent;
-    var uaMock = function () { return ua; };
+    let orig;
+    let ua = navigator.userAgent;
+    const uaMock = function () { return ua; };
 
     beforeEach(function() {
         /* mock userAgent */

@@ -15,18 +15,18 @@ import { uiSettingsCustomData } from '../settings/custom_data';
 
 export function uiSectionDataLayers(context) {
 
-    var settingsCustomData = uiSettingsCustomData(context)
+    const settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
 
     // refers to `modules/svg/layers.js` -> function drawLayers(selection) {...}
-    var layers = context.layers();
+    const layers = context.layers();
 
-    var section = uiSection('data-layers', context)
+    const section = uiSection('data-layers', context)
         .label(() => t.append('map_data.data_layers'))
         .disclosureContent(renderDisclosureContent);
 
     function renderDisclosureContent(selection) {
-        var container = selection.selectAll('.data-layer-container')
+        const container = selection.selectAll('.data-layer-container')
             .data([0]);
 
         container.enter()
@@ -41,7 +41,7 @@ export function uiSectionDataLayers(context) {
     }
 
     function showsLayer(which) {
-        var layer = layers.layer(which);
+        const layer = layers.layer(which);
         if (layer) {
             return layer.enabled();
         }
@@ -50,10 +50,10 @@ export function uiSectionDataLayers(context) {
 
     function setLayer(which, enabled) {
         // Don't allow layer changes while drawing - #6584
-        var mode = context.mode();
+        const mode = context.mode();
         if (mode && /^draw/.test(mode.id)) return;
 
-        var layer = layers.layer(which);
+        const layer = layers.layer(which);
         if (layer) {
             layer.enabled(enabled);
 
@@ -68,10 +68,10 @@ export function uiSectionDataLayers(context) {
     }
 
     function drawOsmItems(selection) {
-        var osmKeys = ['osm', 'notes'];
-        var osmLayers = layers.all().filter(function(obj) { return osmKeys.indexOf(obj.id) !== -1; });
+        const osmKeys = ['osm', 'notes'];
+        const osmLayers = layers.all().filter(function(obj) { return osmKeys.indexOf(obj.id) !== -1; });
 
-        var ul = selection
+        let ul = selection
             .selectAll('.layer-list-osm')
             .data([0]);
 
@@ -80,17 +80,17 @@ export function uiSectionDataLayers(context) {
             .attr('class', 'layer-list layer-list-osm')
             .merge(ul);
 
-        var li = ul.selectAll('.list-item')
+        const li = ul.selectAll('.list-item')
             .data(osmLayers);
 
         li.exit()
             .remove();
 
-        var liEnter = li.enter()
+        const liEnter = li.enter()
             .append('li')
             .attr('class', function(d) { return 'list-item list-item-' + d.id; });
 
-        var labelEnter = liEnter
+        const labelEnter = liEnter
             .append('label')
             .each(function(d) {
                 if (d.id === 'osm') {
@@ -128,10 +128,10 @@ export function uiSectionDataLayers(context) {
     }
 
     function drawQAItems(selection) {
-        var qaKeys = ['keepRight', 'osmose'];
-        var qaLayers = layers.all().filter(function(obj) { return qaKeys.indexOf(obj.id) !== -1; });
+        const qaKeys = ['keepRight', 'osmose'];
+        const qaLayers = layers.all().filter(function(obj) { return qaKeys.indexOf(obj.id) !== -1; });
 
-        var ul = selection
+        let ul = selection
             .selectAll('.layer-list-qa')
             .data([0]);
 
@@ -140,17 +140,17 @@ export function uiSectionDataLayers(context) {
             .attr('class', 'layer-list layer-list-qa')
             .merge(ul);
 
-        var li = ul.selectAll('.list-item')
+        const li = ul.selectAll('.list-item')
             .data(qaLayers);
 
         li.exit()
             .remove();
 
-        var liEnter = li.enter()
+        const liEnter = li.enter()
             .append('li')
             .attr('class', function(d) { return 'list-item list-item-' + d.id; });
 
-        var labelEnter = liEnter
+        const labelEnter = liEnter
             .append('label')
             .each(function(d) {
                 d3_select(this)
@@ -181,8 +181,8 @@ export function uiSectionDataLayers(context) {
     // Beta feature - sample vector layers to support Detroit Mapping Challenge
     // https://github.com/osmus/detroit-mapping-challenge
     function drawVectorItems(selection) {
-        var dataLayer = layers.layer('data');
-        var vtData = [
+        const dataLayer = layers.layer('data');
+        const vtData = [
             {
                 name: 'Detroit Neighborhoods/Parks',
                 src: 'neighborhoods-parks',
@@ -202,16 +202,16 @@ export function uiSectionDataLayers(context) {
         ];
 
         // Only show this if the map is around Detroit..
-        var detroit = geoExtent([-83.5, 42.1], [-82.8, 42.5]);
-        var showVectorItems = (context.map().zoom() > 9 && detroit.contains(context.map().center()));
+        const detroit = geoExtent([-83.5, 42.1], [-82.8, 42.5]);
+        const showVectorItems = (context.map().zoom() > 9 && detroit.contains(context.map().center()));
 
-        var container = selection.selectAll('.vectortile-container')
+        let container = selection.selectAll('.vectortile-container')
             .data(showVectorItems ? [0] : []);
 
         container.exit()
             .remove();
 
-        var containerEnter = container.enter()
+        const containerEnter = container.enter()
             .append('div')
             .attr('class', 'vectortile-container');
 
@@ -238,19 +238,19 @@ export function uiSectionDataLayers(context) {
             .merge(containerEnter);
 
 
-        var ul = container.selectAll('.layer-list-vectortile');
+        const ul = container.selectAll('.layer-list-vectortile');
 
-        var li = ul.selectAll('.list-item')
+        const li = ul.selectAll('.list-item')
             .data(vtData);
 
         li.exit()
             .remove();
 
-        var liEnter = li.enter()
+        const liEnter = li.enter()
             .append('li')
             .attr('class', function(d) { return 'list-item list-item-' + d.src; });
 
-        var labelEnter = liEnter
+        const labelEnter = liEnter
             .append('label')
             .each(function(d) {
                 d3_select(this).call(
@@ -290,11 +290,11 @@ export function uiSectionDataLayers(context) {
     }
 
     function drawCustomDataItems(selection) {
-        var dataLayer = layers.layer('data');
-        var hasData = dataLayer && dataLayer.hasData();
-        var showsData = hasData && dataLayer.enabled();
+        const dataLayer = layers.layer('data');
+        const hasData = dataLayer && dataLayer.hasData();
+        const showsData = hasData && dataLayer.enabled();
 
-        var ul = selection
+        let ul = selection
             .selectAll('.layer-list-data')
             .data(dataLayer ? [0] : []);
 
@@ -303,15 +303,15 @@ export function uiSectionDataLayers(context) {
             .remove();
 
         // Enter
-        var ulEnter = ul.enter()
+        const ulEnter = ul.enter()
             .append('ul')
             .attr('class', 'layer-list layer-list-data');
 
-        var liEnter = ulEnter
+        const liEnter = ulEnter
             .append('li')
             .attr('class', 'list-item-data');
 
-        var labelEnter = liEnter
+        const labelEnter = liEnter
             .append('label')
             .call(uiTooltip()
                 .title(() => t.append('map_data.layers.custom.tooltip'))
@@ -378,7 +378,7 @@ export function uiSectionDataLayers(context) {
     }
 
     function customChanged(d) {
-        var dataLayer = layers.layer('data');
+        const dataLayer = layers.layer('data');
 
         if (d && d.url) {
             dataLayer.url(d.url);
@@ -389,13 +389,13 @@ export function uiSectionDataLayers(context) {
 
     function drawPanelItems(selection) {
 
-        var panelsListEnter = selection.selectAll('.md-extras-list')
+        const panelsListEnter = selection.selectAll('.md-extras-list')
             .data([0])
             .enter()
             .append('ul')
             .attr('class', 'layer-list md-extras-list');
 
-        var historyPanelLabelEnter = panelsListEnter
+        const historyPanelLabelEnter = panelsListEnter
             .append('li')
             .attr('class', 'history-panel-toggle-item')
             .append('label')
@@ -417,7 +417,7 @@ export function uiSectionDataLayers(context) {
             .append('span')
             .call(t.append('map_data.history_panel.title'));
 
-        var measurementPanelLabelEnter = panelsListEnter
+        const measurementPanelLabelEnter = panelsListEnter
             .append('li')
             .attr('class', 'measurement-panel-toggle-item')
             .append('label')

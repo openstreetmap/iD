@@ -3,7 +3,7 @@ import { actionDeleteRelation } from './delete_relation';
 
 export function actionDeleteMember(relationId, memberIndex) {
     return function(graph) {
-        var relation = graph.entity(relationId)
+        const relation = graph.entity(relationId)
             .removeMember(memberIndex);
 
         graph = graph.replace(relation);

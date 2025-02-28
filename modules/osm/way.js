@@ -32,9 +32,9 @@ const prototype = {
     copy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
 
-        var copy = osmEntity.prototype.copy.call(this, resolver, copies);
+        let copy = osmEntity.prototype.copy.call(this, resolver, copies);
 
-        var nodes = this.nodes.map(function(id) {
+        const nodes = this.nodes.map(function(id) {
             return resolver.entity(id).copy(resolver, copies).id;
         });
 
@@ -47,9 +47,9 @@ const prototype = {
 
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
-            var extent = geoExtent();
-            for (var i = 0; i < this.nodes.length; i++) {
-                var node = resolver.hasEntity(this.nodes[i]);
+            const extent = geoExtent();
+            for (let i = 0; i < this.nodes.length; i++) {
+                const node = resolver.hasEntity(this.nodes[i]);
                 if (node) {
                     extent._extend(node.extent());
                 }
@@ -107,7 +107,7 @@ const prototype = {
 
     // the approximate width of the line based on its tags except its `width` tag
     impliedLineWidthMeters: function() {
-        var averageWidths = {
+        const averageWidths = {
             highway: { // width is for single lane
                 motorway: 5, motorway_link: 5, trunk: 4.5, trunk_link: 4.5,
                 primary: 4, secondary: 4, tertiary: 4,
@@ -125,11 +125,11 @@ const prototype = {
                 river: 50, canal: 25, stream: 5, tidal_channel: 5, fish_pass: 2.5, drain: 2.5, ditch: 1.5
             }
         };
-        for (var key in averageWidths) {
+        for (const key in averageWidths) {
             if (this.tags[key] && averageWidths[key][this.tags[key]]) {
-                var width = averageWidths[key][this.tags[key]];
+                const width = averageWidths[key][this.tags[key]];
                 if (key === 'highway') {
-                    var laneCount = this.tags.lanes && parseInt(this.tags.lanes, 10);
+                    let laneCount = this.tags.lanes && parseInt(this.tags.lanes, 10);
                     if (!laneCount) laneCount = this.isOneWay() ? 1 : 2;
 
                     return width * laneCount;
@@ -213,16 +213,16 @@ const prototype = {
     isConvex: function(resolver) {
         if (!this.isClosed() || this.isDegenerate()) return null;
 
-        var nodes = utilArrayUniq(resolver.childNodes(this));
-        var coords = nodes.map(function(n) { return n.loc; });
-        var curr = 0;
-        var prev = 0;
+        const nodes = utilArrayUniq(resolver.childNodes(this));
+        const coords = nodes.map(function(n) { return n.loc; });
+        let curr = 0;
+        let prev = 0;
 
-        for (var i = 0; i < coords.length; i++) {
-            var o = coords[(i+1) % coords.length];
-            var a = coords[i];
-            var b = coords[(i+2) % coords.length];
-            var res = geoVecCross(a, b, o);
+        for (let i = 0; i < coords.length; i++) {
+            const o = coords[(i+1) % coords.length];
+            const a = coords[i];
+            const b = coords[(i+2) % coords.length];
+            const res = geoVecCross(a, b, o);
 
             curr = (res > 0) ? 1 : (res < 0) ? -1 : 0;
             if (curr === 0) {
@@ -253,7 +253,7 @@ const prototype = {
 
 
     areAdjacent: function(n1, n2) {
-        for (var i = 0; i < this.nodes.length; i++) {
+        for (let i = 0; i < this.nodes.length; i++) {
             if (this.nodes[i] === n1) {
                 if (this.nodes[i - 1] === n2) return true;
                 if (this.nodes[i + 1] === n2) return true;
@@ -274,8 +274,8 @@ const prototype = {
     segments: function(graph) {
 
         function segmentExtent(graph) {
-            var n1 = graph.hasEntity(this.nodes[0]);
-            var n2 = graph.hasEntity(this.nodes[1]);
+            const n1 = graph.hasEntity(this.nodes[0]);
+            const n2 = graph.hasEntity(this.nodes[1]);
             return n1 && n2 && geoExtent([
                 [
                     Math.min(n1.loc[0], n2.loc[0]),
@@ -289,8 +289,8 @@ const prototype = {
         }
 
         return graph.transient(this, 'segments', function() {
-            var segments = [];
-            for (var i = 0; i < this.nodes.length - 1; i++) {
+            const segments = [];
+            for (let i = 0; i < this.nodes.length - 1; i++) {
                 segments.push({
                     id: this.id + '-' + i,
                     wayId: this.id,
@@ -308,7 +308,7 @@ const prototype = {
     close: function() {
         if (this.isClosed() || !this.nodes.length) return this;
 
-        var nodes = this.nodes.slice();
+        let nodes = this.nodes.slice();
         nodes = nodes.filter(noRepeatNodes);
         nodes.push(nodes[0]);
         return this.update({ nodes: nodes });
@@ -319,9 +319,9 @@ const prototype = {
     unclose: function() {
         if (!this.isClosed()) return this;
 
-        var nodes = this.nodes.slice();
-        var connector = this.first();
-        var i = nodes.length - 1;
+        let nodes = this.nodes.slice();
+        const connector = this.first();
+        let i = nodes.length - 1;
 
         // remove trailing connectors..
         while (i > 0 && nodes.length > 1 && nodes[i] === connector) {
@@ -340,9 +340,9 @@ const prototype = {
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is always preserved when adding a node.
     addNode: function(id, index) {
-        var nodes = this.nodes.slice();
-        var isClosed = this.isClosed();
-        var max = isClosed ? nodes.length - 1 : nodes.length;
+        let nodes = this.nodes.slice();
+        const isClosed = this.isClosed();
+        const max = isClosed ? nodes.length - 1 : nodes.length;
 
         if (index === undefined) {
             index = max;
@@ -355,10 +355,10 @@ const prototype = {
         // If this is a closed way, remove all connector nodes except the first one
         // (there may be duplicates) and adjust index if necessary..
         if (isClosed) {
-            var connector = this.first();
+            const connector = this.first();
 
             // leading connectors..
-            var i = 1;
+            let i = 1;
             while (i < nodes.length && nodes.length > 2 && nodes[i] === connector) {
                 nodes.splice(i, 1);
                 if (index > i) index--;
@@ -389,9 +389,9 @@ const prototype = {
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is preserved when updating a node.
     updateNode: function(id, index) {
-        var nodes = this.nodes.slice();
-        var isClosed = this.isClosed();
-        var max = nodes.length - 1;
+        let nodes = this.nodes.slice();
+        const isClosed = this.isClosed();
+        const max = nodes.length - 1;
 
         if (index === undefined || index < 0 || index > max) {
             throw new RangeError('index ' + index + ' out of range 0..' + max);
@@ -400,10 +400,10 @@ const prototype = {
         // If this is a closed way, remove all connector nodes except the first one
         // (there may be duplicates) and adjust index if necessary..
         if (isClosed) {
-            var connector = this.first();
+            const connector = this.first();
 
             // leading connectors..
-            var i = 1;
+            let i = 1;
             while (i < nodes.length && nodes.length > 2 && nodes[i] === connector) {
                 nodes.splice(i, 1);
                 if (index > i) index--;
@@ -434,10 +434,10 @@ const prototype = {
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is preserved.
     replaceNode: function(needleID, replacementID) {
-        var nodes = this.nodes.slice();
-        var isClosed = this.isClosed();
+        let nodes = this.nodes.slice();
+        const isClosed = this.isClosed();
 
-        for (var i = 0; i < nodes.length; i++) {
+        for (let i = 0; i < nodes.length; i++) {
             if (nodes[i] === needleID) {
                 nodes[i] = replacementID;
             }
@@ -458,8 +458,8 @@ const prototype = {
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is preserved.
     removeNode: function(id) {
-        var nodes = this.nodes.slice();
-        var isClosed = this.isClosed();
+        let nodes = this.nodes.slice();
+        const isClosed = this.isClosed();
 
         nodes = nodes
             .filter(function(node) { return node !== id; })
@@ -475,7 +475,7 @@ const prototype = {
 
 
     asJXON: function(changeset_id) {
-        var r = {
+        const r = {
             way: {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
@@ -496,7 +496,7 @@ const prototype = {
 
     asGeoJSON: function(resolver) {
         return resolver.transient(this, 'GeoJSON', function() {
-            var coordinates = resolver.childNodes(this)
+            const coordinates = resolver.childNodes(this)
                 .map(function(n) { return n.loc; });
 
             if (this.isArea() && this.isClosed()) {
@@ -516,9 +516,9 @@ const prototype = {
 
     area: function(resolver) {
         return resolver.transient(this, 'area', function() {
-            var nodes = resolver.childNodes(this);
+            const nodes = resolver.childNodes(this);
 
-            var json = {
+            const json = {
                 type: 'Polygon',
                 coordinates: [ nodes.map(function(n) { return n.loc; }) ]
             };
@@ -527,7 +527,7 @@ const prototype = {
                 json.coordinates[0].push(nodes[0].loc);
             }
 
-            var area = d3_geoArea(json);
+            let area = d3_geoArea(json);
 
             // Heuristic for detecting counterclockwise winding order. Assumes
             // that OpenStreetMap polygons are not hemisphere-spanning.

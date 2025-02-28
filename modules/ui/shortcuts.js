@@ -10,18 +10,18 @@ import { utilDetect } from '../util/detect';
 
 
 export function uiShortcuts(context) {
-    var detected = utilDetect();
-    var _activeTab = 0;
-    var _modalSelection;
-    var _selection = d3_select(null);
-    var _dataShortcuts;
+    const detected = utilDetect();
+    let _activeTab = 0;
+    let _modalSelection;
+    let _selection = d3_select(null);
+    let _dataShortcuts;
 
 
     function shortcutsModal(_modalSelection) {
         _modalSelection.select('.modal')
             .classed('modal-shortcuts', true);
 
-        var content = _modalSelection.select('.content');
+        const content = _modalSelection.select('.content');
 
         content
             .append('div')
@@ -41,37 +41,37 @@ export function uiShortcuts(context) {
     function render(selection) {
         if (!_dataShortcuts) return;
 
-        var wrapper = selection
+        let wrapper = selection
             .selectAll('.wrapper')
             .data([0]);
 
-        var wrapperEnter = wrapper
+        const wrapperEnter = wrapper
             .enter()
             .append('div')
             .attr('class', 'wrapper modal-section');
 
-        var tabsBar = wrapperEnter
+        const tabsBar = wrapperEnter
             .append('div')
             .attr('class', 'tabs-bar');
 
-        var shortcutsList = wrapperEnter
+        const shortcutsList = wrapperEnter
             .append('div')
             .attr('class', 'shortcuts-list');
 
         wrapper = wrapper.merge(wrapperEnter);
 
-        var tabs = tabsBar
+        const tabs = tabsBar
             .selectAll('.tab')
             .data(_dataShortcuts);
 
-        var tabsEnter = tabs
+        const tabsEnter = tabs
             .enter()
             .append('a')
             .attr('class', 'tab')
             .attr('href', '#')
             .on('click', function (d3_event, d) {
                 d3_event.preventDefault();
-                var i = _dataShortcuts.indexOf(d);
+                const i = _dataShortcuts.indexOf(d);
                 _activeTab = i;
                 render(selection);
             });
@@ -87,23 +87,23 @@ export function uiShortcuts(context) {
             });
 
 
-        var shortcuts = shortcutsList
+        const shortcuts = shortcutsList
             .selectAll('.shortcut-tab')
             .data(_dataShortcuts);
 
-        var shortcutsEnter = shortcuts
+        const shortcutsEnter = shortcuts
             .enter()
             .append('div')
             .attr('class', function(d) { return 'shortcut-tab shortcut-tab-' + d.tab; });
 
-        var columnsEnter = shortcutsEnter
+        const columnsEnter = shortcutsEnter
             .selectAll('.shortcut-column')
             .data(function (d) { return d.columns; })
             .enter()
             .append('table')
             .attr('class', 'shortcut-column');
 
-        var rowsEnter = columnsEnter
+        const rowsEnter = columnsEnter
             .selectAll('.shortcut-row')
             .data(function (d) { return d.rows; })
             .enter()
@@ -111,7 +111,7 @@ export function uiShortcuts(context) {
             .attr('class', 'shortcut-row');
 
 
-        var sectionRows = rowsEnter
+        const sectionRows = rowsEnter
             .filter(function (d) { return !d.shortcuts; });
 
         sectionRows
@@ -124,14 +124,14 @@ export function uiShortcuts(context) {
             .html(function (d) { return t.html(d.text); });
 
 
-        var shortcutRows = rowsEnter
+        const shortcutRows = rowsEnter
             .filter(function (d) { return d.shortcuts; });
 
-        var shortcutKeys = shortcutRows
+        const shortcutKeys = shortcutRows
             .append('td')
             .attr('class', 'shortcut-keys');
 
-        var modifierKeys = shortcutKeys
+        const modifierKeys = shortcutKeys
             .filter(function (d) { return d.modifiers; });
 
         modifierKeys
@@ -147,7 +147,7 @@ export function uiShortcuts(context) {
             })
             .enter()
             .each(function () {
-                var selection = d3_select(this);
+                const selection = d3_select(this);
 
                 selection
                     .append('kbd')
@@ -163,7 +163,7 @@ export function uiShortcuts(context) {
         shortcutKeys
             .selectAll('kbd.shortcut')
             .data(function (d) {
-                var arr = d.shortcuts;
+                let arr = d.shortcuts;
                 if (detected.os === 'win' && d.text === 'shortcuts.editing.commands.redo') {
                     arr = ['Y'];
                 } else if (detected.os !== 'mac' && d.text === 'shortcuts.browsing.display_options.fullscreen') {
@@ -185,8 +185,8 @@ export function uiShortcuts(context) {
             })
             .enter()
             .each(function (d, i, nodes) {
-                var selection = d3_select(this);
-                var click = d.shortcut.toLowerCase().match(/(.*).click/);
+                const selection = d3_select(this);
+                const click = d.shortcut.toLowerCase().match(/(.*).click/);
 
                 if (click && click[1]) {   // replace "left_click", "right_click" with mouse icon
                     selection
@@ -219,7 +219,7 @@ export function uiShortcuts(context) {
         shortcutKeys
             .filter(function(d) { return d.gesture; })
             .each(function () {
-                var selection = d3_select(this);
+                const selection = d3_select(this);
 
                 selection
                     .append('span')

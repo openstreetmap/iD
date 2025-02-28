@@ -29,26 +29,26 @@ import {
 
 
 export function modeSelect(context, selectedIDs) {
-    var mode = {
+    const mode = {
         id: 'select',
         button: 'browse'
     };
 
-    var keybinding = utilKeybinding('select');
+    const keybinding = utilKeybinding('select');
 
-    var _breatheBehavior = behaviorBreathe(context);
-    var _modeDragNode = modeDragNode(context);
-    var _selectBehavior;
-    var _behaviors = [];
+    const _breatheBehavior = behaviorBreathe(context);
+    const _modeDragNode = modeDragNode(context);
+    let _selectBehavior;
+    let _behaviors = [];
 
-    var _operations = [];
-    var _newFeature = false;
-    var _follow = false;
+    let _operations = [];
+    let _newFeature = false;
+    let _follow = false;
 
     // `_focusedParentWayId` is used when we visit a vertex with multiple
     // parents, and we want to remember which parent line we started on.
-    var _focusedParentWayId;
-    var _focusedVertexIds;
+    let _focusedParentWayId;
+    let _focusedVertexIds;
 
 
     function singular() {
@@ -65,7 +65,7 @@ export function modeSelect(context, selectedIDs) {
 
 
     function checkSelectedIDs() {
-        var ids = [];
+        let ids = [];
         if (Array.isArray(selectedIDs)) {
             ids = selectedIDs.filter(function(id) {
                 return context.hasEntity(id);
@@ -89,16 +89,16 @@ export function modeSelect(context, selectedIDs) {
 
     // find the parent ways for nextVertex, previousVertex, and selectParent
     function parentWaysIdsOfSelection(onlyCommonParents) {
-        var graph = context.graph();
-        var parents = [];
+        const graph = context.graph();
+        let parents = [];
 
-        for (var i = 0; i < selectedIDs.length; i++) {
-            var entity = context.hasEntity(selectedIDs[i]);
+        for (let i = 0; i < selectedIDs.length; i++) {
+            const entity = context.hasEntity(selectedIDs[i]);
             if (!entity || entity.geometry(graph) !== 'vertex') {
                 return [];  // selection includes some non-vertices
             }
 
-            var currParents = graph.parentWays(entity).map(function(w) { return w.id; });
+            const currParents = graph.parentWays(entity).map(function(w) { return w.id; });
             if (!parents.length) {
                 parents = currParents;
                 continue;
@@ -115,16 +115,16 @@ export function modeSelect(context, selectedIDs) {
 
     // find the child nodes for selected ways
     function childNodeIdsOfSelection(onlyCommon) {
-        var graph = context.graph();
-        var childs = [];
+        const graph = context.graph();
+        let childs = [];
 
-        for (var i = 0; i < selectedIDs.length; i++) {
-            var entity = context.hasEntity(selectedIDs[i]);
+        for (let i = 0; i < selectedIDs.length; i++) {
+            const entity = context.hasEntity(selectedIDs[i]);
 
             if (!entity || !['area', 'line'].includes(entity.geometry(graph))){
                 return [];  // selection includes non-area/non-line
             }
-            var currChilds = graph.childNodes(entity).map(function(node) { return node.id; });
+            const currChilds = graph.childNodes(entity).map(function(node) { return node.id; });
             if (!childs.length) {
                 childs = currChilds;
                 continue;
@@ -141,14 +141,14 @@ export function modeSelect(context, selectedIDs) {
 
     function checkFocusedParent() {
         if (_focusedParentWayId) {
-            var parents = parentWaysIdsOfSelection(true);
+            const parents = parentWaysIdsOfSelection(true);
             if (parents.indexOf(_focusedParentWayId) === -1) _focusedParentWayId = null;
         }
     }
 
 
     function parentWayIdForVertexNavigation() {
-        var parentIds = parentWaysIdsOfSelection(true);
+        const parentIds = parentWaysIdsOfSelection(true);
 
         if (_focusedParentWayId && parentIds.indexOf(_focusedParentWayId) !== -1) {
             // prefer the previously seen parent
@@ -302,14 +302,14 @@ export function modeSelect(context, selectedIDs) {
         selectElements();
 
         if (_follow) {
-            var extent = geoExtent();
-            var graph = context.graph();
+            const extent = geoExtent();
+            const graph = context.graph();
             selectedIDs.forEach(function(id) {
-                var entity = context.entity(id);
+                const entity = context.entity(id);
                 extent._extend(entity.extent(graph));
             });
 
-            var loc = extent.center();
+            const loc = extent.center();
             context.map().centerEase(loc);
             // we could enter the mode multiple times, so reset follow for next time
             _follow = false;
@@ -321,7 +321,7 @@ export function modeSelect(context, selectedIDs) {
                 // prevent nudging during low zoom selection
                 if (!context.map().withinEditableZoom()) return;
 
-                var moveOp = operationMove(context, selectedIDs);
+                const moveOp = operationMove(context, selectedIDs);
                 if (moveOp.disabled()) {
                     context.ui().flash
                         .duration(4000)
@@ -340,14 +340,14 @@ export function modeSelect(context, selectedIDs) {
                 // prevent scaling during low zoom selection
                 if (!context.map().withinEditableZoom()) return;
 
-                let nodes = utilGetAllNodes(selectedIDs, context.graph());
+                const nodes = utilGetAllNodes(selectedIDs, context.graph());
 
-                let isUp = factor > 1;
+                const isUp = factor > 1;
 
                 // can only scale if multiple nodes are selected
                 if (nodes.length <= 1) return;
 
-                let extent = utilTotalExtent(selectedIDs, context.graph());
+                const extent = utilTotalExtent(selectedIDs, context.graph());
 
                 // These disabled checks would normally be handled by an operation
                 // object, but we don't want an actual scale operation at this point.
@@ -367,17 +367,17 @@ export function modeSelect(context, selectedIDs) {
 
                     function tooSmall() {
                         if (isUp) return false;
-                        let dLon = Math.abs(extent[1][0] - extent[0][0]);
-                        let dLat = Math.abs(extent[1][1] - extent[0][1]);
+                        const dLon = Math.abs(extent[1][0] - extent[0][0]);
+                        const dLat = Math.abs(extent[1][1] - extent[0][1]);
                         return dLon < geoMetersToLon(1, extent[1][1]) &&
                             dLat < geoMetersToLat(1);
                     }
 
                     function someMissing() {
                         if (context.inIntro()) return false;
-                        let osm = context.connection();
+                        const osm = context.connection();
                         if (osm) {
-                            let missing = nodes.filter(function(n) { return !osm.isDataLoaded(n.loc); });
+                            const missing = nodes.filter(function(n) { return !osm.isDataLoaded(n.loc); });
                             if (missing.length) {
                                 missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
                                 return true;
@@ -387,7 +387,7 @@ export function modeSelect(context, selectedIDs) {
                     }
 
                     function incompleteRelation(id) {
-                        let entity = context.entity(id);
+                        const entity = context.entity(id);
                         return entity.type === 'relation' && !entity.isComplete(context.graph());
                     }
                 }
@@ -395,7 +395,7 @@ export function modeSelect(context, selectedIDs) {
                 const disabled = scalingDisabled();
 
                 if (disabled) {
-                    let multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
+                    const multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
                     context.ui().flash
                         .duration(4000)
                         .iconName('#iD-icon-no')
@@ -414,16 +414,16 @@ export function modeSelect(context, selectedIDs) {
         function didDoubleUp(d3_event, loc) {
             if (!context.map().withinEditableZoom()) return;
 
-            var target = d3_select(d3_event.target);
+            const target = d3_select(d3_event.target);
 
-            var datum = target.datum();
-            var entity = datum && datum.properties && datum.properties.entity;
+            const datum = target.datum();
+            const entity = datum && datum.properties && datum.properties.entity;
             if (!entity) return;
 
             if (entity instanceof osmWay && target.classed('target')) {
-                var choice = geoChooseEdge(context.graph().childNodes(entity), loc, context.projection);
-                var prev = entity.nodes[choice.index - 1];
-                var next = entity.nodes[choice.index];
+                const choice = geoChooseEdge(context.graph().childNodes(entity), loc, context.projection);
+                const prev = entity.nodes[choice.index - 1];
+                const next = entity.nodes[choice.index];
 
                 context.perform(
                     actionAddMidpoint({ loc: choice.loc, edge: [prev, next] }, osmNode()),
@@ -444,7 +444,7 @@ export function modeSelect(context, selectedIDs) {
         function selectElements() {
             if (!checkSelectedIDs()) return;
 
-            var surface = context.surface();
+            const surface = context.surface();
 
             surface.selectAll('.selected-member')
                 .classed('selected-member', false);
@@ -484,9 +484,9 @@ export function modeSelect(context, selectedIDs) {
 
         function firstVertex(d3_event) {
             d3_event.preventDefault();
-            var entity = singular();
-            var parentId = parentWayIdForVertexNavigation();
-            var way;
+            const entity = singular();
+            const parentId = parentWayIdForVertexNavigation();
+            let way;
 
             if (entity && entity.type === 'way') {
                 way = entity;
@@ -506,9 +506,9 @@ export function modeSelect(context, selectedIDs) {
 
         function lastVertex(d3_event) {
             d3_event.preventDefault();
-            var entity = singular();
-            var parentId = parentWayIdForVertexNavigation();
-            var way;
+            const entity = singular();
+            const parentId = parentWayIdForVertexNavigation();
+            let way;
 
             if (entity && entity.type === 'way') {
                 way = entity;
@@ -528,14 +528,14 @@ export function modeSelect(context, selectedIDs) {
 
         function previousVertex(d3_event) {
             d3_event.preventDefault();
-            var parentId = parentWayIdForVertexNavigation();
+            const parentId = parentWayIdForVertexNavigation();
             _focusedParentWayId = parentId;
             if (!parentId) return;
 
-            var way = context.entity(parentId);
-            var length = way.nodes.length;
-            var curr = way.nodes.indexOf(selectedIDs[0]);
-            var index = -1;
+            const way = context.entity(parentId);
+            const length = way.nodes.length;
+            const curr = way.nodes.indexOf(selectedIDs[0]);
+            let index = -1;
 
             if (curr > 0) {
                 index = curr - 1;
@@ -554,14 +554,14 @@ export function modeSelect(context, selectedIDs) {
 
         function nextVertex(d3_event) {
             d3_event.preventDefault();
-            var parentId = parentWayIdForVertexNavigation();
+            const parentId = parentWayIdForVertexNavigation();
             _focusedParentWayId = parentId;
             if (!parentId) return;
 
-            var way = context.entity(parentId);
-            var length = way.nodes.length;
-            var curr = way.nodes.indexOf(selectedIDs[0]);
-            var index = -1;
+            const way = context.entity(parentId);
+            const length = way.nodes.length;
+            const curr = way.nodes.indexOf(selectedIDs[0]);
+            let index = -1;
 
             if (curr < length - 1) {
                 index = curr + 1;
@@ -580,17 +580,17 @@ export function modeSelect(context, selectedIDs) {
 
         function focusNextParent(d3_event) {
             d3_event.preventDefault();
-            var parents = parentWaysIdsOfSelection(true);
+            const parents = parentWaysIdsOfSelection(true);
             if (!parents || parents.length < 2) return;
 
-            var index = parents.indexOf(_focusedParentWayId);
+            const index = parents.indexOf(_focusedParentWayId);
             if (index < 0 || index > parents.length - 2) {
                 _focusedParentWayId = parents[0];
             } else {
                 _focusedParentWayId = parents[index + 1];
             }
 
-            var surface = context.surface();
+            const surface = context.surface();
             surface.selectAll('.related')
                 .classed('related', false);
 
@@ -603,8 +603,8 @@ export function modeSelect(context, selectedIDs) {
         function selectParent(d3_event) {
             d3_event.preventDefault();
 
-            var currentSelectedIds = mode.selectedIDs();
-            var parentIds = _focusedParentWayId ? [_focusedParentWayId] : parentWaysIdsOfSelection(false);
+            const currentSelectedIds = mode.selectedIDs();
+            const parentIds = _focusedParentWayId ? [_focusedParentWayId] : parentWaysIdsOfSelection(false);
             if (!parentIds.length) return;
 
             context.enter(
@@ -617,9 +617,9 @@ export function modeSelect(context, selectedIDs) {
         function selectChild(d3_event) {
             d3_event.preventDefault();
 
-            var currentSelectedIds = mode.selectedIDs();
+            const currentSelectedIds = mode.selectedIDs();
 
-            var childIds = _focusedVertexIds ? _focusedVertexIds.filter(id => context.hasEntity(id)) : childNodeIdsOfSelection(true);
+            const childIds = _focusedVertexIds ? _focusedVertexIds.filter(id => context.hasEntity(id)) : childNodeIdsOfSelection(true);
             if (!childIds || !childIds.length) return;
 
             if (currentSelectedIds.length === 1) _focusedParentWayId = currentSelectedIds[0];
@@ -657,7 +657,7 @@ export function modeSelect(context, selectedIDs) {
             .on('undone.select', null)
             .on('redone.select', null);
 
-        var surface = context.surface();
+        const surface = context.surface();
 
         surface
             .selectAll('.selected-member')
@@ -679,7 +679,7 @@ export function modeSelect(context, selectedIDs) {
         context.ui().sidebar.hide();
         context.features().forceVisible([]);
 
-        var entity = singular();
+        const entity = singular();
         if (_newFeature && entity && entity.type === 'relation' &&
             // no tags
             Object.keys(entity.tags).length === 0 &&
@@ -689,7 +689,7 @@ export function modeSelect(context, selectedIDs) {
             (entity.members.length === 0 || (entity.members.length === 1 && !entity.members[0].role))
         ) {
             // the user added this relation but didn't edit it at all, so just delete it
-            var deleteAction = actionDeleteRelation(entity.id, true /* don't delete untagged members */);
+            const deleteAction = actionDeleteRelation(entity.id, true /* don't delete untagged members */);
             context.perform(deleteAction, t('operations.delete.annotation.relation'));
             context.validator().validate();
         }

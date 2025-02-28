@@ -4,12 +4,12 @@ import { uiSection } from '../section';
 
 export function uiSectionValidationOptions(context) {
 
-    var section = uiSection('issues-options', context)
+    const section = uiSection('issues-options', context)
         .content(renderContent);
 
     function renderContent(selection) {
 
-        var container = selection.selectAll('.issues-options-container')
+        let container = selection.selectAll('.issues-options-container')
             .data([0]);
 
         container = container.enter()
@@ -17,15 +17,15 @@ export function uiSectionValidationOptions(context) {
             .attr('class', 'issues-options-container')
             .merge(container);
 
-        var data = [
+        const data = [
             { key: 'what', values: ['edited', 'all'] },
             { key: 'where', values: ['visible', 'all'] }
         ];
 
-        var options = container.selectAll('.issues-option')
+        const options = container.selectAll('.issues-option')
             .data(data, function(d) { return d.key; });
 
-        var optionsEnter = options.enter()
+        const optionsEnter = options.enter()
             .append('div')
             .attr('class', function(d) { return 'issues-option issues-option-' + d.key; });
 
@@ -34,7 +34,7 @@ export function uiSectionValidationOptions(context) {
             .attr('class', 'issues-option-title')
             .html(function(d) { return t.html('issues.options.' + d.key + '.title'); });
 
-        var valuesEnter = optionsEnter.selectAll('label')
+        const valuesEnter = optionsEnter.selectAll('label')
             .data(function(d) {
                 return d.values.map(function(val) { return { value: val, key: d.key }; });
             })

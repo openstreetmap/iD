@@ -5,18 +5,18 @@ import { utilGetAllNodes } from '../util';
 
 
 export function operationOrthogonalize(context, selectedIDs) {
-    var _extent;
-    var _type;
-    var _actions = selectedIDs.map(chooseAction).filter(Boolean);
-    var _amount = _actions.length === 1 ? 'single' : 'multiple';
-    var _coords = utilGetAllNodes(selectedIDs, context.graph())
+    let _extent;
+    let _type;
+    const _actions = selectedIDs.map(chooseAction).filter(Boolean);
+    const _amount = _actions.length === 1 ? 'single' : 'multiple';
+    const _coords = utilGetAllNodes(selectedIDs, context.graph())
         .map(function(n) { return n.loc; });
 
 
     function chooseAction(entityID) {
 
-        var entity = context.entity(entityID);
-        var geometry = entity.geometry(context.graph());
+        const entity = context.entity(entityID);
+        const geometry = entity.geometry(context.graph());
 
         if (!_extent) {
             _extent =  entity.extent(context.graph());
@@ -34,10 +34,10 @@ export function operationOrthogonalize(context, selectedIDs) {
         } else if (geometry === 'vertex') {
             if (_type && _type !== 'corner') return null;
             _type = 'corner';
-            var graph = context.graph();
-            var parents = graph.parentWays(entity);
+            const graph = context.graph();
+            const parents = graph.parentWays(entity);
             if (parents.length === 1) {
-                var way = parents[0];
+                const way = parents[0];
                 if (way.nodes.indexOf(entityID) !== -1) {
                     return actionOrthogonalize(way.id, context.projection, entityID);
                 }
@@ -48,10 +48,10 @@ export function operationOrthogonalize(context, selectedIDs) {
     }
 
 
-    var operation = function() {
+    const operation = function() {
         if (!_actions.length) return;
 
-        var combinedAction = function(graph, t) {
+        const combinedAction = function(graph, t) {
             _actions.forEach(function(action) {
                 if (!action.disabled(graph)) {
                     graph = action(graph, t);
@@ -78,7 +78,7 @@ export function operationOrthogonalize(context, selectedIDs) {
     operation.disabled = function() {
         if (!_actions.length) return '';
 
-        var actionDisableds = _actions.map(function(action) {
+        const actionDisableds = _actions.map(function(action) {
             return action.disabled(context.graph());
         }).filter(Boolean);
 
@@ -103,9 +103,9 @@ export function operationOrthogonalize(context, selectedIDs) {
 
         function someMissing() {
             if (context.inIntro()) return false;
-            var osm = context.connection();
+            const osm = context.connection();
             if (osm) {
-                var missing = _coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                const missing = _coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
                 if (missing.length) {
                     missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
                     return true;
@@ -117,7 +117,7 @@ export function operationOrthogonalize(context, selectedIDs) {
 
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
+        const disable = operation.disabled();
         return disable ?
             t.append('operations.orthogonalize.' + disable + '.' + _amount) :
             t.append('operations.orthogonalize.description.' + _type + '.' + _amount);

@@ -3,33 +3,33 @@ import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags, osmLifecyclePr
 
 
 export function svgTagClasses() {
-    var primaries = [
+    const primaries = [
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
         'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
         'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
         'roller_coaster', 'building:part', 'indoor'
     ];
-    var statuses = Object.keys(osmLifecyclePrefixes);
-    var secondaries = [
+    const statuses = Object.keys(osmLifecyclePrefixes);
+    const secondaries = [
         'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
         'public_transport', 'location', 'parking', 'golf', 'type', 'leisure',
         'man_made', 'indoor', 'construction', 'proposed'
     ];
-    var _tags = function(entity) { return entity.tags; };
+    let _tags = function(entity) { return entity.tags; };
 
 
-    var tagClasses = function(selection) {
+    const tagClasses = function(selection) {
         selection.each(function tagClassesEach(entity) {
-            var value = this.className;
+            let value = this.className;
 
             if (value.baseVal !== undefined) {
                 value = value.baseVal;
             }
 
-            var t = _tags(entity);
+            const t = _tags(entity);
 
-            var computed = tagClasses.getClassesString(t, value);
+            const computed = tagClasses.getClassesString(t, value);
 
             if (computed !== value) {
                 d3_select(this).attr('class', computed);
@@ -39,11 +39,11 @@ export function svgTagClasses() {
 
 
     tagClasses.getClassesString = function(t, value) {
-        var primary, status;
-        var i, j, k, v;
+        let primary, status;
+        let i, j, k, v;
 
         // in some situations we want to render perimeter strokes a certain way
-        var overrideGeometry;
+        let overrideGeometry;
         if (/\bstroke\b/.test(value)) {
             if (!!t.barrier && t.barrier !== 'no') {
                 overrideGeometry = 'line';
@@ -51,7 +51,7 @@ export function svgTagClasses() {
         }
 
         // preserve base classes (nothing with `tag-`)
-        var classes = value.trim().split(/\s+/)
+        const classes = value.trim().split(/\s+/)
             .filter(function(klass) {
                 return klass.length && !/^tag-/.test(klass);
             })
@@ -133,7 +133,7 @@ export function svgTagClasses() {
 
         // For highways, look for surface tagging..
         if ((primary === 'highway' && !osmPathHighwayTagValues[t.highway]) || primary === 'aeroway') {
-            var surface = t.highway === 'track' ? 'unpaved' : 'paved';
+            let surface = t.highway === 'track' ? 'unpaved' : 'paved';
             for (k in t) {
                 v = t[k];
                 if (k in osmPavedTags) {
@@ -147,7 +147,7 @@ export function svgTagClasses() {
         }
 
         // If this is a wikidata-tagged item, add a class for that..
-        var qid = (
+        const qid = (
             t.wikidata ||
             t['flag:wikidata'] ||
             t['brand:wikidata'] ||

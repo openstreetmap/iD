@@ -30,7 +30,7 @@ export function validationSuspiciousName(context) {
   // Test if the name is just the key or tag value (e.g. "park")
   function nameMatchesRawTag(lowercaseName, tags) {
     for (let i = 0; i < keysToTestForGenericValues.length; i++) {
-      let key = keysToTestForGenericValues[i];
+      const key = keysToTestForGenericValues[i];
       let val = tags[key];
       if (val) {
         val = val.toLowerCase();
@@ -64,10 +64,10 @@ export function validationSuspiciousName(context) {
       subtype: 'generic_name',
       severity: 'warning',
       message: function(context) {
-        let entity = context.hasEntity(this.entityIds[0]);
+        const entity = context.hasEntity(this.entityIds[0]);
         if (!entity) return '';
-        let preset = presetManager.match(entity, context.graph());
-        let langName = langCode && localizer.languageName(langCode);
+        const preset = presetManager.match(entity, context.graph());
+        const langName = langCode && localizer.languageName(langCode);
         return t.append('issues.generic_name.message' + (langName ? '_language' : ''),
           { feature: preset.name(), name: genericName, language: langName }
         );
@@ -81,9 +81,9 @@ export function validationSuspiciousName(context) {
             icon: 'iD-operation-delete',
             title: t.append('issues.fix.remove_the_name.title'),
             onClick: function(context) {
-              let entityId = this.issue.entityIds[0];
-              let entity = context.entity(entityId);
-              let tags = Object.assign({}, entity.tags);   // shallow copy
+              const entityId = this.issue.entityIds[0];
+              const entity = context.entity(entityId);
+              const tags = Object.assign({}, entity.tags);   // shallow copy
               delete tags[nameKey];
               context.perform(
                 actionChangeTags(entityId, tags), t('issues.fix.remove_generic_name.annotation')
@@ -104,18 +104,18 @@ export function validationSuspiciousName(context) {
     }
   }
 
-  let validation = function checkGenericName(entity) {
+  const validation = function checkGenericName(entity) {
     const tags = entity.tags;
 
     // a generic name is allowed if it's a known brand or entity
     const hasWikidata = (!!tags.wikidata || !!tags['brand:wikidata'] || !!tags['operator:wikidata']);
     if (hasWikidata) return [];
 
-    let issues = [];
+    const issues = [];
 
     const presetName = presetManager.match(entity, context.graph()).name();
 
-    for (let key in tags) {
+    for (const key in tags) {
       const m = key.match(/^name(?:(?::)([a-zA-Z_-]+))?$/);
       if (!m) continue;
 

@@ -10,17 +10,17 @@ export function actionStraightenNodes(nodeIDs, projection) {
 
     // returns the endpoints of the long axis of symmetry of the `points` bounding rect
     function getEndpoints(points) {
-        var ssr = geoGetSmallestSurroundingRectangle(points);
+        const ssr = geoGetSmallestSurroundingRectangle(points);
 
         // Choose line pq = axis of symmetry.
         // The shape's surrounding rectangle has 2 axes of symmetry.
         // Snap points to the long axis
-        var p1 = [(ssr.poly[0][0] + ssr.poly[1][0]) / 2, (ssr.poly[0][1] + ssr.poly[1][1]) / 2 ];
-        var q1 = [(ssr.poly[2][0] + ssr.poly[3][0]) / 2, (ssr.poly[2][1] + ssr.poly[3][1]) / 2 ];
-        var p2 = [(ssr.poly[3][0] + ssr.poly[4][0]) / 2, (ssr.poly[3][1] + ssr.poly[4][1]) / 2 ];
-        var q2 = [(ssr.poly[1][0] + ssr.poly[2][0]) / 2, (ssr.poly[1][1] + ssr.poly[2][1]) / 2 ];
+        const p1 = [(ssr.poly[0][0] + ssr.poly[1][0]) / 2, (ssr.poly[0][1] + ssr.poly[1][1]) / 2 ];
+        const q1 = [(ssr.poly[2][0] + ssr.poly[3][0]) / 2, (ssr.poly[2][1] + ssr.poly[3][1]) / 2 ];
+        const p2 = [(ssr.poly[3][0] + ssr.poly[4][0]) / 2, (ssr.poly[3][1] + ssr.poly[4][1]) / 2 ];
+        const q2 = [(ssr.poly[1][0] + ssr.poly[2][0]) / 2, (ssr.poly[1][1] + ssr.poly[2][1]) / 2 ];
 
-        var isLong = (geoVecLength(p1, q1) > geoVecLength(p2, q2));
+        const isLong = (geoVecLength(p1, q1) > geoVecLength(p2, q2));
         if (isLong) {
             return [p1, q1];
         }
@@ -28,23 +28,23 @@ export function actionStraightenNodes(nodeIDs, projection) {
     }
 
 
-    var action = function(graph, t) {
+    const action = function(graph, t) {
         if (t === null || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
-        var nodes = nodeIDs.map(function(id) { return graph.entity(id); });
-        var points = nodes.map(function(n) { return projection(n.loc); });
-        var endpoints = getEndpoints(points);
-        var startPoint = endpoints[0];
-        var endPoint = endpoints[1];
+        const nodes = nodeIDs.map(function(id) { return graph.entity(id); });
+        const points = nodes.map(function(n) { return projection(n.loc); });
+        const endpoints = getEndpoints(points);
+        const startPoint = endpoints[0];
+        const endPoint = endpoints[1];
 
         // Move points onto the line connecting the endpoints
-        for (var i = 0; i < points.length; i++) {
-            var node = nodes[i];
-            var point = points[i];
-            var u = positionAlongWay(point, startPoint, endPoint);
-            var point2 = geoVecInterp(startPoint, endPoint, u);
-            var loc2 = projection.invert(point2);
+        for (let i = 0; i < points.length; i++) {
+            const node = nodes[i];
+            const point = points[i];
+            const u = positionAlongWay(point, startPoint, endPoint);
+            const point2 = geoVecInterp(startPoint, endPoint, u);
+            const loc2 = projection.invert(point2);
             graph = graph.replace(node.move(geoVecInterp(node.loc, loc2, t)));
         }
 
@@ -54,19 +54,19 @@ export function actionStraightenNodes(nodeIDs, projection) {
 
     action.disabled = function(graph) {
 
-        var nodes = nodeIDs.map(function(id) { return graph.entity(id); });
-        var points = nodes.map(function(n) { return projection(n.loc); });
-        var endpoints = getEndpoints(points);
-        var startPoint = endpoints[0];
-        var endPoint = endpoints[1];
+        const nodes = nodeIDs.map(function(id) { return graph.entity(id); });
+        const points = nodes.map(function(n) { return projection(n.loc); });
+        const endpoints = getEndpoints(points);
+        const startPoint = endpoints[0];
+        const endPoint = endpoints[1];
 
-        var maxDistance = 0;
+        let maxDistance = 0;
 
-        for (var i = 0; i < points.length; i++) {
-            var point = points[i];
-            var u = positionAlongWay(point, startPoint, endPoint);
-            var p = geoVecInterp(startPoint, endPoint, u);
-            var dist = geoVecLength(p, point);
+        for (let i = 0; i < points.length; i++) {
+            const point = points[i];
+            const u = positionAlongWay(point, startPoint, endPoint);
+            const p = geoVecInterp(startPoint, endPoint, u);
+            const dist = geoVecLength(p, point);
 
             if (!isNaN(dist) && dist > maxDistance) {
                 maxDistance = dist;

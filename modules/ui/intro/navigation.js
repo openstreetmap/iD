@@ -13,18 +13,18 @@ import { helpHtml, icon, pointBox, transitionTime } from './helper';
 
 
 export function uiIntroNavigation(context, reveal) {
-    var dispatch = d3_dispatch('done');
-    var timeouts = [];
-    var hallId = 'n2061';
-    var townHall = [-85.63591, 41.94285];
-    var springStreetId = 'w397';
-    var springStreetEndId = 'n1834';
-    var springStreet = [-85.63582, 41.94255];
-    var onewayField = presetManager.field('oneway');
-    var maxspeedField = presetManager.field('maxspeed');
+    const dispatch = d3_dispatch('done');
+    const timeouts = [];
+    const hallId = 'n2061';
+    const townHall = [-85.63591, 41.94285];
+    const springStreetId = 'w397';
+    const springStreetEndId = 'n1834';
+    const springStreet = [-85.63582, 41.94255];
+    const onewayField = presetManager.field('oneway');
+    const maxspeedField = presetManager.field('maxspeed');
 
 
-    var chapter = {
+    const chapter = {
         title: 'intro.navigation.title'
     };
 
@@ -41,7 +41,7 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function isTownHallSelected() {
-        var ids = context.selectedIDs();
+        const ids = context.selectedIDs();
         return ids.length === 1 && ids[0] === hallId;
     }
 
@@ -50,22 +50,22 @@ export function uiIntroNavigation(context, reveal) {
         context.enter(modeBrowse(context));
         context.history().reset('initial');
 
-        var msec = transitionTime(townHall, context.map().center());
+        const msec = transitionTime(townHall, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
         context.map().centerZoomEase(townHall, 19, msec);
 
         timeout(function() {
-            var centerStart = context.map().center();
+            const centerStart = context.map().center();
 
-            var textId = context.lastPointerType() === 'mouse' ? 'drag' : 'drag_touch';
-            var dragString = helpHtml('intro.navigation.map_info') + '{br}' + helpHtml('intro.navigation.' + textId);
+            const textId = context.lastPointerType() === 'mouse' ? 'drag' : 'drag_touch';
+            const dragString = helpHtml('intro.navigation.map_info') + '{br}' + helpHtml('intro.navigation.' + textId);
             reveal('.main-map .surface', dragString);
             context.map().on('drawn.intro', function() {
                 reveal('.main-map .surface', dragString, { duration: 0 });
             });
 
             context.map().on('move.intro', function() {
-                var centerNow = context.map().center();
+                const centerNow = context.map().center();
                 if (centerStart[0] !== centerNow[0] || centerStart[1] !== centerNow[1]) {
                     context.map().on('move.intro', null);
                     timeout(function() { continueTo(zoomMap); }, 3000);
@@ -82,10 +82,10 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function zoomMap() {
-        var zoomStart = context.map().zoom();
+        const zoomStart = context.map().zoom();
 
-        var textId = context.lastPointerType() === 'mouse' ? 'zoom' : 'zoom_touch';
-        var zoomString = helpHtml('intro.navigation.' + textId);
+        const textId = context.lastPointerType() === 'mouse' ? 'zoom' : 'zoom_touch';
+        const zoomString = helpHtml('intro.navigation.' + textId);
 
         reveal('.main-map .surface', zoomString);
 
@@ -108,7 +108,7 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function features() {
-        var onClick = function() { continueTo(pointsLinesAreas); };
+        const onClick = function() { continueTo(pointsLinesAreas); };
 
         reveal('.main-map .surface', helpHtml('intro.navigation.features'),
             { buttonText: t.html('intro.ok'), buttonCallback: onClick }
@@ -127,7 +127,7 @@ export function uiIntroNavigation(context, reveal) {
     }
 
     function pointsLinesAreas() {
-        var onClick = function() { continueTo(nodesWays); };
+        const onClick = function() { continueTo(nodesWays); };
 
         reveal('.main-map .surface', helpHtml('intro.navigation.points_lines_areas'),
             { buttonText: t.html('intro.ok'), buttonCallback: onClick }
@@ -146,7 +146,7 @@ export function uiIntroNavigation(context, reveal) {
     }
 
     function nodesWays() {
-        var onClick = function() { continueTo(clickTownHall); };
+        const onClick = function() { continueTo(clickTownHall); };
 
         reveal('.main-map .surface', helpHtml('intro.navigation.nodes_ways'),
             { buttonText: t.html('intro.ok'), buttonCallback: onClick }
@@ -168,22 +168,22 @@ export function uiIntroNavigation(context, reveal) {
         context.enter(modeBrowse(context));
         context.history().reset('initial');
 
-        var entity = context.hasEntity(hallId);
+        const entity = context.hasEntity(hallId);
         if (!entity) return;
         reveal(null, null, { duration: 0 });
         context.map().centerZoomEase(entity.loc, 19, 500);
 
         timeout(function() {
-            var entity = context.hasEntity(hallId);
+            const entity = context.hasEntity(hallId);
             if (!entity) return;
-            var box = pointBox(entity.loc, context);
-            var textId = context.lastPointerType() === 'mouse' ? 'click_townhall' : 'tap_townhall';
+            const box = pointBox(entity.loc, context);
+            const textId = context.lastPointerType() === 'mouse' ? 'click_townhall' : 'tap_townhall';
             reveal(box, helpHtml('intro.navigation.' + textId));
 
             context.map().on('move.intro drawn.intro', function() {
-                var entity = context.hasEntity(hallId);
+                const entity = context.hasEntity(hallId);
                 if (!entity) return;
-                var box = pointBox(entity.loc, context);
+                const box = pointBox(entity.loc, context);
                 reveal(box, helpHtml('intro.navigation.' + textId), { duration: 0 });
             });
 
@@ -211,20 +211,20 @@ export function uiIntroNavigation(context, reveal) {
     function selectedTownHall() {
         if (!isTownHallSelected()) return clickTownHall();
 
-        var entity = context.hasEntity(hallId);
+        const entity = context.hasEntity(hallId);
         if (!entity) return clickTownHall();
 
-        var box = pointBox(entity.loc, context);
-        var onClick = function() { continueTo(editorTownHall); };
+        const box = pointBox(entity.loc, context);
+        const onClick = function() { continueTo(editorTownHall); };
 
         reveal(box, helpHtml('intro.navigation.selected_townhall'),
             { buttonText: t.html('intro.ok'), buttonCallback: onClick }
         );
 
         context.map().on('move.intro drawn.intro', function() {
-            var entity = context.hasEntity(hallId);
+            const entity = context.hasEntity(hallId);
             if (!entity) return;
-            var box = pointBox(entity.loc, context);
+            const box = pointBox(entity.loc, context);
             reveal(box, helpHtml('intro.navigation.selected_townhall'),
                 { duration: 0, buttonText: t.html('intro.ok'), buttonCallback: onClick }
             );
@@ -250,7 +250,7 @@ export function uiIntroNavigation(context, reveal) {
         // disallow scrolling
         context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
-        var onClick = function() { continueTo(presetTownHall); };
+        const onClick = function() { continueTo(presetTownHall); };
 
         reveal('.entity-editor-pane',
             helpHtml('intro.navigation.editor_townhall'),
@@ -285,10 +285,10 @@ export function uiIntroNavigation(context, reveal) {
         context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         // preset match, in case the user happened to change it.
-        var entity = context.entity(context.selectedIDs()[0]);
-        var preset = presetManager.match(entity, context.graph());
+        const entity = context.entity(context.selectedIDs()[0]);
+        const preset = presetManager.match(entity, context.graph());
 
-        var onClick = function() { continueTo(fieldsTownHall); };
+        const onClick = function() { continueTo(fieldsTownHall); };
 
         reveal('.entity-editor-pane .section-feature-type',
             helpHtml('intro.navigation.preset_townhall', { preset: preset.name() }),
@@ -322,7 +322,7 @@ export function uiIntroNavigation(context, reveal) {
         // disallow scrolling
         context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
-        var onClick = function() { continueTo(closeTownHall); };
+        const onClick = function() { continueTo(closeTownHall); };
 
         reveal('.entity-editor-pane .section-preset-fields',
             helpHtml('intro.navigation.fields_townhall'),
@@ -351,8 +351,8 @@ export function uiIntroNavigation(context, reveal) {
     function closeTownHall() {
         if (!isTownHallSelected()) return clickTownHall();
 
-        var selector = '.entity-editor-pane button.close svg use';
-        var href = d3_select(selector).attr('href') || '#iD-icon-close';
+        const selector = '.entity-editor-pane button.close svg use';
+        const href = d3_select(selector).attr('href') || '#iD-icon-close';
 
         reveal('.entity-editor-pane',
             helpHtml('intro.navigation.close_townhall', { button: { html: icon(href, 'inline') } })
@@ -364,8 +364,8 @@ export function uiIntroNavigation(context, reveal) {
 
         context.history().on('change.intro', function() {
             // update the close icon in the tooltip if the user edits something.
-            var selector = '.entity-editor-pane button.close svg use';
-            var href = d3_select(selector).attr('href') || '#iD-icon-close';
+            const selector = '.entity-editor-pane button.close svg use';
+            const href = d3_select(selector).attr('href') || '#iD-icon-close';
 
             reveal('.entity-editor-pane',
                 helpHtml('intro.navigation.close_townhall', { button: { html: icon(href, 'inline') } }),
@@ -385,7 +385,7 @@ export function uiIntroNavigation(context, reveal) {
         context.enter(modeBrowse(context));
         context.history().reset('initial');  // ensure spring street exists
 
-        var msec = transitionTime(springStreet, context.map().center());
+        const msec = transitionTime(springStreet, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
         context.map().centerZoomEase(springStreet, 19, msec);  // ..and user can see it
 
@@ -401,9 +401,9 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function checkSearchResult() {
-        var first = context.container().select('.feature-list-item:nth-child(0n+2)');  // skip "No Results" item
-        var firstName = first.select('.entity-name');
-        var name = t('intro.graph.name.spring-street');
+        const first = context.container().select('.feature-list-item:nth-child(0n+2)');  // skip "No Results" item
+        const firstName = first.select('.entity-name');
+        const name = t('intro.graph.name.spring-street');
 
         if (!firstName.empty() && firstName.html() === name) {
             reveal(first.node(),
@@ -435,9 +435,9 @@ export function uiIntroNavigation(context, reveal) {
             return searchStreet();
         }
 
-        var onClick = function() { continueTo(editorStreet); };
-        var entity = context.entity(springStreetEndId);
-        var box = pointBox(entity.loc, context);
+        const onClick = function() { continueTo(editorStreet); };
+        const entity = context.entity(springStreetEndId);
+        const box = pointBox(entity.loc, context);
         box.height = 500;
 
         reveal(box,
@@ -447,9 +447,9 @@ export function uiIntroNavigation(context, reveal) {
 
         timeout(function() {
             context.map().on('move.intro drawn.intro', function() {
-                var entity = context.hasEntity(springStreetEndId);
+                const entity = context.hasEntity(springStreetEndId);
                 if (!entity) return;
-                var box = pointBox(entity.loc, context);
+                const box = pointBox(entity.loc, context);
                 box.height = 500;
                 reveal(box,
                     helpHtml('intro.navigation.selected_street', { name: t('intro.graph.name.spring-street') }),
@@ -462,7 +462,7 @@ export function uiIntroNavigation(context, reveal) {
             if (!context.hasEntity(springStreetId)) {
                 return continueTo(searchStreet);
             }
-            var ids = context.selectedIDs();
+            const ids = context.selectedIDs();
             if (mode.id !== 'select' || !ids.length || ids[0] !== springStreetId) {
                 // keep Spring Street selected..
                 context.enter(modeSelect(context, [springStreetId]));
@@ -487,8 +487,8 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function editorStreet() {
-        var selector = '.entity-editor-pane button.close svg use';
-        var href = d3_select(selector).attr('href') || '#iD-icon-close';
+        const selector = '.entity-editor-pane button.close svg use';
+        const href = d3_select(selector).attr('href') || '#iD-icon-close';
 
         reveal('.entity-editor-pane', helpHtml('intro.navigation.street_different_fields') + '{br}' +
             helpHtml('intro.navigation.editor_street', {
@@ -503,8 +503,8 @@ export function uiIntroNavigation(context, reveal) {
 
         context.history().on('change.intro', function() {
             // update the close icon in the tooltip if the user edits something.
-            var selector = '.entity-editor-pane button.close svg use';
-            var href = d3_select(selector).attr('href') || '#iD-icon-close';
+            const selector = '.entity-editor-pane button.close svg use';
+            const href = d3_select(selector).attr('href') || '#iD-icon-close';
 
             reveal('.entity-editor-pane', helpHtml('intro.navigation.street_different_fields') + '{br}' +
                 helpHtml('intro.navigation.editor_street', {

@@ -1,6 +1,6 @@
 describe('iD.svgPoints', function () {
-    var context, surface;
-    var projection = d3.geoProjection(function(x, y) { return [x, -y]; })
+    let context, surface;
+    const projection = d3.geoProjection(function(x, y) { return [x, -y]; })
         .translate([0, 0])
         .scale(iD.geoZoomToScale(17))
         .clipExtent([[0, 0], [Infinity, Infinity]]);
@@ -15,8 +15,8 @@ describe('iD.svgPoints', function () {
 
 
     it('adds tag classes', function () {
-        var point = iD.osmNode({tags: {amenity: 'cafe'}, loc: [0, 0]});
-        var graph = iD.coreGraph([point]);
+        const point = iD.osmNode({tags: {amenity: 'cafe'}, loc: [0, 0]});
+        const graph = iD.coreGraph([point]);
 
         surface.call(iD.svgPoints(projection, context), graph, [point]);
 

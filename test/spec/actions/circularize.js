@@ -1,8 +1,8 @@
 describe('iD.actionCircularize', function () {
-    var projection = d3.geoMercator().scale(150);
+    const projection = d3.geoMercator().scale(150);
 
     function isCircular(id, graph) {
-        var points = graph.childNodes(graph.entity(id))
+        const points = graph.childNodes(graph.entity(id))
                 .map(function (n) { return projection(n.loc); }),
             centroid = d3.polygonCentroid(points),
             radius = iD.geoVecLength(centroid, points[0]),
@@ -14,20 +14,20 @@ describe('iD.actionCircularize', function () {
     }
 
     function intersection(a, b) {
-        var seen = a.reduce(function (h, k) {
+        const seen = a.reduce(function (h, k) {
             h[k] = true;
             return h;
         }, {});
 
         return b.filter(function (k) {
-            var exists = seen[k];
+            const exists = seen[k];
             delete seen[k];
             return exists;
         });
     }
 
     function angle(point1, point2, center) {
-        var vector1 = [point1[0] - center[0], point1[1] - center[1]],
+        let vector1 = [point1[0] - center[0], point1[1] - center[1]],
             vector2 = [point2[0] - center[0], point2[1] - center[1]],
             distance;
 
@@ -41,7 +41,7 @@ describe('iD.actionCircularize', function () {
     }
 
     function area(id, graph) {
-        var points = graph.childNodes(graph.entity(id)).map(function (n) { return n.loc; });
+        const points = graph.childNodes(graph.entity(id)).map(function (n) { return n.loc; });
         return d3.polygonArea(points);
     }
 
@@ -50,7 +50,7 @@ describe('iD.actionCircularize', function () {
         //    d ---- c
         //    |      |
         //    a ---- b
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [2, 0]}),
                 iD.osmNode({id: 'c', loc: [2, 2]}),
@@ -68,21 +68,20 @@ describe('iD.actionCircularize', function () {
         //    d,e -- c
         //    |      |
         //    a ---- b
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [2, 0]}),
                 iD.osmNode({id: 'c', loc: [2, 2]}),
                 iD.osmNode({id: 'd', loc: [0, 2]}),
                 iD.osmNode({id: 'e', loc: [0, 2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
-            ]),
-            nodes;
+            ]);
 
         graph = iD.actionCircularize('-', projection)(graph);
 
         expect(isCircular('-', graph)).to.be.ok;
 
-        nodes = graph.entity('-').nodes;
+        const nodes = graph.entity('-').nodes;
         expect(nodes).to.contain('a');
         expect(nodes).to.contain('b');
         expect(nodes).to.contain('c');
@@ -94,7 +93,7 @@ describe('iD.actionCircularize', function () {
         //    b ---- a
         //    |      |
         //    c ---- d
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [2, 2]}),
                 iD.osmNode({id: 'b', loc: [-2, 2]}),
                 iD.osmNode({id: 'c', loc: [-2, -2]}),
@@ -113,23 +112,22 @@ describe('iD.actionCircularize', function () {
         //    d ---- c
         //    |      |
         //    a ---- b
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [2, 0]}),
                 iD.osmNode({id: 'c', loc: [2, 2]}),
                 iD.osmNode({id: 'd', loc: [0, 2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
-            ]),
-            centroid, points;
+            ]);
 
         graph = iD.actionCircularize('-', projection, 20)(graph);
 
         expect(isCircular('-', graph)).to.be.ok;
-        points = graph.childNodes(graph.entity('-'))
+        const points = graph.childNodes(graph.entity('-'))
             .map(function (n) { return projection(n.loc); });
-        centroid = d3.polygonCentroid(points);
+        const centroid = d3.polygonCentroid(points);
 
-        for (var i = 0; i < points.length - 1; i++) {
+        for (let i = 0; i < points.length - 1; i++) {
             expect(angle(points[i], points[i+1], centroid)).to.be.lte(20);
         }
 
@@ -140,7 +138,7 @@ describe('iD.actionCircularize', function () {
         //    d ---- c
         //    |      |
         //    a ---- b
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [2, 0]}),
                 iD.osmNode({id: 'c', loc: [2, 2]}),
@@ -160,7 +158,7 @@ describe('iD.actionCircularize', function () {
         //    d ---- c
         //    |      |
         //    a ---- b
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [2, 0]}),
                 iD.osmNode({id: 'c', loc: [2, 2]}),
@@ -186,7 +184,7 @@ describe('iD.actionCircularize', function () {
         //  a-b-c-d-e-a is counterclockwise
         //  a-b-f-g-e-a is clockwise
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [ 0,  0]}),
                 iD.osmNode({id: 'b', loc: [ 1,  2]}),
                 iD.osmNode({id: 'c', loc: [-2,  2]}),
@@ -220,7 +218,7 @@ describe('iD.actionCircularize', function () {
         //  a-b-c-d-e-a is counterclockwise
         //  a-e-g-f-b-a is counterclockwise
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [ 0,  0]}),
                 iD.osmNode({id: 'b', loc: [ 1,  2]}),
                 iD.osmNode({id: 'c', loc: [-2,  2]}),
@@ -253,7 +251,7 @@ describe('iD.actionCircularize', function () {
         //
         //  a-b-c-d-e-a is extremely concave and 'a' is to the left of centoid..
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [ 0,  0]}),
                 iD.osmNode({id: 'b', loc: [10,  2]}),
                 iD.osmNode({id: 'c', loc: [-2,  2]}),
@@ -275,7 +273,7 @@ describe('iD.actionCircularize', function () {
     });
 
     it('circularizes a closed single line way', function () {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [0, 2]}),
                 iD.osmNode({id: 'c', loc: [2, 0]}),
@@ -290,20 +288,20 @@ describe('iD.actionCircularize', function () {
     });
 
     it('not disable circularize when its not circular', function(){
-        var graph = iD.coreGraph([
+        const graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0, 0]}),
             iD.osmNode({id: 'b', loc: [2, 0]}),
             iD.osmNode({id: 'c', loc: [2, 2]}),
             iD.osmNode({id: 'd', loc: [0, 2]}),
             iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
         ]);
-        var result = iD.actionCircularize('-', projection).disabled(graph);
+        const result = iD.actionCircularize('-', projection).disabled(graph);
         expect(result).to.be.false;
 
     });
 
     it('disable circularize twice', function(){
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0, 0]}),
             iD.osmNode({id: 'b', loc: [2, 0]}),
             iD.osmNode({id: 'c', loc: [2, 2]}),
@@ -311,7 +309,7 @@ describe('iD.actionCircularize', function () {
             iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
         ]);
         graph = iD.actionCircularize('-', projection)(graph);
-        var result = iD.actionCircularize('-', projection).disabled(graph);
+        const result = iD.actionCircularize('-', projection).disabled(graph);
         expect(result).to.eql('already_circular');
 
     });
@@ -323,7 +321,7 @@ describe('iD.actionCircularize', function () {
         });
 
         it('circularize at t = 0', function() {
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0, 0]}),
                     iD.osmNode({id: 'b', loc: [2, 0]}),
                     iD.osmNode({id: 'c', loc: [2, 2]}),
@@ -337,7 +335,7 @@ describe('iD.actionCircularize', function () {
         });
 
         it('circularize at t = 0.5', function() {
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0, 0]}),
                     iD.osmNode({id: 'b', loc: [2, 0]}),
                     iD.osmNode({id: 'c', loc: [2, 2]}),
@@ -351,7 +349,7 @@ describe('iD.actionCircularize', function () {
         });
 
         it('circularize at t = 1', function() {
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0, 0]}),
                     iD.osmNode({id: 'b', loc: [2, 0]}),
                     iD.osmNode({id: 'c', loc: [2, 2]}),

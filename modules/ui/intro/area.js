@@ -13,16 +13,16 @@ import { helpHtml, icon, pad, transitionTime } from './helper';
 
 
 export function uiIntroArea(context, reveal) {
-    var dispatch = d3_dispatch('done');
-    var playground = [-85.63552, 41.94159];
-    var playgroundPreset = presetManager.item('leisure/playground');
-    var nameField = presetManager.field('name');
-    var descriptionField = presetManager.field('description');
-    var timeouts = [];
-    var _areaID;
+    const dispatch = d3_dispatch('done');
+    const playground = [-85.63552, 41.94159];
+    const playgroundPreset = presetManager.item('leisure/playground');
+    const nameField = presetManager.field('name');
+    const descriptionField = presetManager.field('description');
+    const timeouts = [];
+    let _areaID;
 
 
-    var chapter = {
+    const chapter = {
         title: 'intro.areas.title'
     };
 
@@ -39,8 +39,8 @@ export function uiIntroArea(context, reveal) {
 
 
     function revealPlayground(center, text, options) {
-        var padding = 180 * Math.pow(2, context.map().zoom() - 19.5);
-        var box = pad(center, padding, context);
+        const padding = 180 * Math.pow(2, context.map().zoom() - 19.5);
+        const box = pad(center, padding, context);
         reveal(box, text, options);
     }
 
@@ -50,12 +50,12 @@ export function uiIntroArea(context, reveal) {
         context.history().reset('initial');
         _areaID = null;
 
-        var msec = transitionTime(playground, context.map().center());
+        const msec = transitionTime(playground, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
         context.map().centerZoomEase(playground, 19, msec);
 
         timeout(function() {
-            var tooltip = reveal('button.add-area',
+            const tooltip = reveal('button.add-area',
                 helpHtml('intro.areas.add_playground'));
 
             tooltip.selectAll('.popover-inner')
@@ -86,8 +86,8 @@ export function uiIntroArea(context, reveal) {
         context.map().zoomEase(19.5, 500);
 
         timeout(function() {
-            var textId = context.lastPointerType() === 'mouse' ? 'starting_node_click' : 'starting_node_tap';
-            var startDrawString = helpHtml('intro.areas.start_playground') + helpHtml('intro.areas.' + textId);
+            const textId = context.lastPointerType() === 'mouse' ? 'starting_node_click' : 'starting_node_tap';
+            const startDrawString = helpHtml('intro.areas.start_playground') + helpHtml('intro.areas.' + textId);
             revealPlayground(playground,
                 startDrawString, { duration: 250 }
             );
@@ -136,7 +136,7 @@ export function uiIntroArea(context, reveal) {
 
         context.on('enter.intro', function(mode) {
             if (mode.id === 'draw-area') {
-                var entity = context.hasEntity(context.selectedIDs()[0]);
+                const entity = context.hasEntity(context.selectedIDs()[0]);
                 if (entity && entity.nodes.length >= 6) {
                     return continueTo(finishPlayground);
                 } else {
@@ -165,7 +165,7 @@ export function uiIntroArea(context, reveal) {
 
         _areaID = null;
 
-        var finishString = helpHtml('intro.areas.finish_area_' + (context.lastPointerType() === 'mouse' ? 'click' : 'tap')) +
+        const finishString = helpHtml('intro.areas.finish_area_' + (context.lastPointerType() === 'mouse' ? 'click' : 'tap')) +
             helpHtml('intro.areas.finish_playground');
         revealPlayground(playground,
             finishString, { duration: 250 }
@@ -202,7 +202,7 @@ export function uiIntroArea(context, reveal) {
         if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
-        var ids = context.selectedIDs();
+        const ids = context.selectedIDs();
         if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
             context.enter(modeSelect(context, [_areaID]));
         }
@@ -228,7 +228,7 @@ export function uiIntroArea(context, reveal) {
                 return continueTo(addArea);
             }
 
-            var ids = context.selectedIDs();
+            const ids = context.selectedIDs();
             if (mode.id !== 'select' || !ids.length || ids[0] !== _areaID) {
                 // keep the user's area selected..
                 context.enter(modeSelect(context, [_areaID]));
@@ -251,7 +251,7 @@ export function uiIntroArea(context, reveal) {
         });
 
         function checkPresetSearch() {
-            var first = context.container().select('.preset-list-item:first-child');
+            const first = context.container().select('.preset-list-item:first-child');
 
             if (first.classed('preset-leisure-playground')) {
                 reveal(first.select('.preset-list-button').node(),
@@ -283,7 +283,7 @@ export function uiIntroArea(context, reveal) {
         if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
-        var ids = context.selectedIDs();
+        const ids = context.selectedIDs();
         if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
             return searchPresets();
         }
@@ -301,24 +301,24 @@ export function uiIntroArea(context, reveal) {
 
             // It's possible for the user to add a description in a previous step..
             // If they did this already, just continue to next step.
-            var entity = context.entity(_areaID);
+            const entity = context.entity(_areaID);
             if (entity.tags.description) {
                 return continueTo(play);
             }
 
             // scroll "Add field" into view
-            var box = context.container().select('.more-fields').node().getBoundingClientRect();
+            const box = context.container().select('.more-fields').node().getBoundingClientRect();
             if (box.top > 300) {
-                var pane = context.container().select('.entity-editor-pane .inspector-body');
-                var start = pane.node().scrollTop;
-                var end = start + (box.top - 300);
+                const pane = context.container().select('.entity-editor-pane .inspector-body');
+                const start = pane.node().scrollTop;
+                const end = start + (box.top - 300);
 
                 pane
                     .transition()
                     .duration(250)
                     .tween('scroll.inspector', function() {
-                        var node = this;
-                        var i = d3_interpolateNumber(start, end);
+                        const node = this;
+                        const i = d3_interpolateNumber(start, end);
                         return function(t) {
                             node.scrollTop = i(t);
                         };
@@ -337,8 +337,7 @@ export function uiIntroArea(context, reveal) {
                 context.container().select('.more-fields .combobox-input')
                     .on('click.intro', function() {
                         // Watch for the combobox to appear...
-                        var watcher;
-                        watcher = window.setInterval(function() {
+                        const watcher = window.setInterval(function() {
                             if (!context.container().select('div.combobox').empty()) {
                                 window.clearInterval(watcher);
                                 continueTo(chooseDescriptionField);
@@ -366,7 +365,7 @@ export function uiIntroArea(context, reveal) {
         if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
-        var ids = context.selectedIDs();
+        const ids = context.selectedIDs();
         if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
             return searchPresets();
         }
@@ -380,8 +379,7 @@ export function uiIntroArea(context, reveal) {
             return continueTo(clickAddField);
         }
         // Watch for the combobox to go away..
-        var watcher;
-        watcher = window.setInterval(function() {
+        const watcher = window.setInterval(function() {
             if (context.container().select('div.combobox').empty()) {
                 window.clearInterval(watcher);
                 timeout(function() {
@@ -415,7 +413,7 @@ export function uiIntroArea(context, reveal) {
         if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
-        var ids = context.selectedIDs();
+        const ids = context.selectedIDs();
         if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
             return searchPresets();
         }
@@ -447,7 +445,7 @@ export function uiIntroArea(context, reveal) {
         if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
-        var ids = context.selectedIDs();
+        const ids = context.selectedIDs();
         if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
             return searchPresets();
         }

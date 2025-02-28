@@ -9,7 +9,7 @@ import { helpHtml } from '../intro/helper';
 
 export function uiPaneHelp(context) {
 
-    var docKeys = [
+    const docKeys = [
         ['help', [
             'welcome',
             'open_data_h',
@@ -204,7 +204,7 @@ export function uiPaneHelp(context) {
         ]]
     ];
 
-    var headings = {
+    const headings = {
         'help.help.open_data_h': 3,
         'help.help.before_start_h': 3,
         'help.help.open_source_h': 3,
@@ -253,13 +253,13 @@ export function uiPaneHelp(context) {
     };
 
     // For each section, squash all the texts into a single markdown document
-    var docs = docKeys.map(function(key) {
-        var helpkey = 'help.' + key[0];
-        var helpPaneReplacements = { version: context.version };
-        var text = key[1].reduce(function(all, part) {
-            var subkey = helpkey + '.' + part;
-            var depth = headings[subkey];                              // is this subkey a heading?
-            var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
+    const docs = docKeys.map(function(key) {
+        const helpkey = 'help.' + key[0];
+        const helpPaneReplacements = { version: context.version };
+        const text = key[1].reduce(function(all, part) {
+            const subkey = helpkey + '.' + part;
+            const depth = headings[subkey];                              // is this subkey a heading?
+            const hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
             return all + hhh + helpHtml(subkey, helpPaneReplacements) + '\n\n';
         }, '');
 
@@ -272,7 +272,7 @@ export function uiPaneHelp(context) {
         };
     });
 
-    var helpPane = uiPane('help', context)
+    const helpPane = uiPane('help', context)
         .key(t('help.key'))
         .label(t.append('help.title'))
         .description(t.append('help.title'))
@@ -282,7 +282,7 @@ export function uiPaneHelp(context) {
 
         function clickHelp(d, i) {
 
-            var rtl = (localizer.textDirection() === 'rtl');
+            const rtl = (localizer.textDirection() === 'rtl');
             content.property('scrollTop', 0);
             helpPane.selection().select('.pane-heading h2').html(d.title);
 
@@ -303,7 +303,7 @@ export function uiPaneHelp(context) {
 
             function drawNext(selection) {
                 if (i < docs.length - 1) {
-                    var nextLink = selection
+                    const nextLink = selection
                         .append('a')
                         .attr('href', '#')
                         .attr('class', 'next')
@@ -322,7 +322,7 @@ export function uiPaneHelp(context) {
 
             function drawPrevious(selection) {
                 if (i > 0) {
-                    var prevLink = selection
+                    const prevLink = selection
                         .append('a')
                         .attr('href', '#')
                         .attr('class', 'previous')
@@ -353,11 +353,11 @@ export function uiPaneHelp(context) {
             context.container().call(context.ui().shortcuts, true);
         }
 
-        var toc = content
+        const toc = content
             .append('ul')
             .attr('class', 'toc');
 
-        var menuItems = toc.selectAll('li')
+        const menuItems = toc.selectAll('li')
             .data(docs)
             .enter()
             .append('li')
@@ -370,7 +370,7 @@ export function uiPaneHelp(context) {
                 clickHelp(d, docs.indexOf(d));
             });
 
-        var shortcuts = toc
+        const shortcuts = toc
             .append('li')
             .attr('class', 'shortcuts')
             .call(uiTooltip()
@@ -386,7 +386,7 @@ export function uiPaneHelp(context) {
             .append('div')
             .call(t.append('shortcuts.title'));
 
-        var walkthrough = toc
+        const walkthrough = toc
             .append('li')
             .attr('class', 'walkthrough')
             .append('a')
@@ -404,15 +404,15 @@ export function uiPaneHelp(context) {
             .call(t.append('splash.walkthrough'));
 
 
-        var helpContent = content
+        const helpContent = content
             .append('div')
             .attr('class', 'left-content');
 
-        var body = helpContent
+        const body = helpContent
             .append('div')
             .attr('class', 'body');
 
-        var nav = helpContent
+        const nav = helpContent
             .append('div')
             .attr('class', 'nav');
 

@@ -10,22 +10,22 @@ import { t } from '../../core/localizer';
 
 
 export function uiFieldWikidata(field, context) {
-    var wikidata = services.wikidata;
-    var dispatch = d3_dispatch('change');
+    const wikidata = services.wikidata;
+    const dispatch = d3_dispatch('change');
 
-    var _selection = d3_select(null);
-    var _searchInput = d3_select(null);
-    var _qid = null;
-    var _wikidataEntity = null;
-    var _wikiURL = '';
-    var _entityIDs = [];
+    let _selection = d3_select(null);
+    let _searchInput = d3_select(null);
+    let _qid = null;
+    let _wikidataEntity = null;
+    let _wikiURL = '';
+    let _entityIDs = [];
 
-    var _wikipediaKey = field.keys && field.keys.find(function(key) {
+    const _wikipediaKey = field.keys && field.keys.find(function(key) {
         return key.includes('wikipedia');
     });
-    var _hintKey = field.key === 'wikidata' ? 'name' : field.key.split(':')[0];
+    const _hintKey = field.key === 'wikidata' ? 'name' : field.key.split(':')[0];
 
-    var combobox = uiCombobox(context, 'combo-' + field.safeid)
+    const combobox = uiCombobox(context, 'combo-' + field.safeid)
         .caseSensitive(true)
         .minItems(1);
 
@@ -33,7 +33,7 @@ export function uiFieldWikidata(field, context) {
     function wiki(selection) {
         _selection = selection;
 
-        var wrap = selection.selectAll('.form-field-input-wrap')
+        let wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
@@ -42,7 +42,7 @@ export function uiFieldWikidata(field, context) {
             .merge(wrap);
 
 
-        var list = wrap.selectAll('ul')
+        let list = wrap.selectAll('ul')
             .data([0]);
 
         list = list.enter()
@@ -50,10 +50,10 @@ export function uiFieldWikidata(field, context) {
             .attr('class', 'rows')
             .merge(list);
 
-        var searchRow = list.selectAll('li.wikidata-search')
+        let searchRow = list.selectAll('li.wikidata-search')
             .data([0]);
 
-        var searchRowEnter = searchRow.enter()
+        const searchRowEnter = searchRow.enter()
             .append('li')
             .attr('class', 'wikidata-search');
 
@@ -64,7 +64,7 @@ export function uiFieldWikidata(field, context) {
             .style('flex', '1')
             .call(utilNoAuto)
             .on('focus', function() {
-                var node = d3_select(this).node();
+                const node = d3_select(this).node();
                 node.setSelectionRange(0, node.value.length);
             })
             .on('blur', function() {
@@ -95,13 +95,13 @@ export function uiFieldWikidata(field, context) {
 
         _searchInput = searchRow.select('input');
 
-        var wikidataProperties = ['description', 'identifier'];
+        const wikidataProperties = ['description', 'identifier'];
 
-        var items = list.selectAll('li.labeled-input')
+        const items = list.selectAll('li.labeled-input')
             .data(wikidataProperties);
 
         // Enter
-        var enter = items.enter()
+        const enter = items.enter()
             .append('li')
             .attr('class', function(d) { return 'labeled-input preset-wikidata-' + d; });
 
@@ -136,8 +136,8 @@ export function uiFieldWikidata(field, context) {
     function fetchWikidataItems(q, callback) {
         if (!q && _hintKey) {
             // other tags may be good search terms
-            for (var i in _entityIDs) {
-                var entity = context.hasEntity(_entityIDs[i]);
+            for (const i in _entityIDs) {
+                const entity = context.hasEntity(_entityIDs[i]);
                 if (entity.tags[_hintKey]) {
                     q = entity.tags[_hintKey];
                     break;
@@ -151,7 +151,7 @@ export function uiFieldWikidata(field, context) {
                 return;
             }
 
-            var result = data.map(function (item) {
+            const result = data.map(function (item) {
                 return {
                     id: item.id,
                     value: item.display.label.value + ' (' + item.id + ')',
@@ -170,13 +170,13 @@ export function uiFieldWikidata(field, context) {
 
 
     function change() {
-        var syncTags = {};
+        const syncTags = {};
         syncTags[field.key] = _qid;
         dispatch.call('change', this, syncTags);
 
         // attempt asynchronous update of wikidata tag..
-        var initGraph = context.graph();
-        var initEntityIDs = _entityIDs;
+        const initGraph = context.graph();
+        const initEntityIDs = _entityIDs;
 
         wikidata.entityByQID(_qid, function(err, entity) {
             if (err) return;
@@ -186,27 +186,27 @@ export function uiFieldWikidata(field, context) {
 
             if (!entity.sitelinks) return;
 
-            var langs = wikidata.languagesToQuery();
+            const langs = wikidata.languagesToQuery();
             // use the label and description languages as fallbacks
             ['labels', 'descriptions'].forEach(function(key) {
                 if (!entity[key]) return;
 
-                var valueLangs = Object.keys(entity[key]);
+                const valueLangs = Object.keys(entity[key]);
                 if (valueLangs.length === 0) return;
-                var valueLang = valueLangs[0];
+                const valueLang = valueLangs[0];
 
                 if (langs.indexOf(valueLang) === -1) {
                     langs.push(valueLang);
                 }
             });
 
-            var newWikipediaValue;
+            let newWikipediaValue;
 
             if (_wikipediaKey) {
-                var foundPreferred;
-                for (var i in langs) {
-                    var lang = langs[i];
-                    var siteID = lang.replace('-', '_') + 'wiki';
+                let foundPreferred;
+                for (const i in langs) {
+                    const lang = langs[i];
+                    const siteID = lang.replace('-', '_') + 'wiki';
                     if (entity.sitelinks[siteID]) {
                         foundPreferred = true;
                         newWikipediaValue = lang + ':' + entity.sitelinks[siteID].title;
@@ -219,7 +219,7 @@ export function uiFieldWikidata(field, context) {
                     // No wikipedia sites available in the user's language or the fallback languages,
                     // default to any wikipedia sitelink
 
-                    var wikiSiteKeys = Object.keys(entity.sitelinks).filter(function(site) {
+                    const wikiSiteKeys = Object.keys(entity.sitelinks).filter(function(site) {
                         return site.endsWith('wiki');
                     });
 
@@ -227,8 +227,8 @@ export function uiFieldWikidata(field, context) {
                         // if no wikipedia pages are linked to this wikidata entity, delete that tag
                         newWikipediaValue = null;
                     } else {
-                        var wikiLang = wikiSiteKeys[0].slice(0, -4).replace('_', '-');
-                        var wikiTitle = entity.sitelinks[wikiSiteKeys[0]].title;
+                        const wikiLang = wikiSiteKeys[0].slice(0, -4).replace('_', '-');
+                        const wikiTitle = entity.sitelinks[wikiSiteKeys[0]].title;
                         newWikipediaValue = wikiLang + ':' + wikiTitle;
                     }
                 }
@@ -240,11 +240,11 @@ export function uiFieldWikidata(field, context) {
 
             if (typeof newWikipediaValue === 'undefined') return;
 
-            var actions = initEntityIDs.map(function(entityID) {
-                var entity = context.hasEntity(entityID);
+            const actions = initEntityIDs.map(function(entityID) {
+                const entity = context.hasEntity(entityID);
                 if (!entity) return null;
 
-                var currTags = Object.assign({}, entity.tags);  // shallow copy
+                const currTags = Object.assign({}, entity.tags);  // shallow copy
                 if (newWikipediaValue === null) {
                     if (!currTags[_wikipediaKey]) return null;
 
@@ -275,7 +275,7 @@ export function uiFieldWikidata(field, context) {
     }
 
     function setLabelForEntity() {
-        var label = {
+        let label = {
           value: ''
         };
         if (_wikidataEntity) {
@@ -291,7 +291,7 @@ export function uiFieldWikidata(field, context) {
 
     wiki.tags = function(tags) {
 
-        var isMixed = Array.isArray(tags[field.key]);
+        const isMixed = Array.isArray(tags[field.key]);
         _searchInput
             .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : null)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : '')
@@ -315,7 +315,7 @@ export function uiFieldWikidata(field, context) {
 
             setLabelForEntity();
 
-            var description = entityPropertyForDisplay(entity, 'descriptions');
+            const description = entityPropertyForDisplay(entity, 'descriptions');
 
             _selection.select('button.wiki-link')
                 .classed('disabled', false);
@@ -359,16 +359,16 @@ export function uiFieldWikidata(field, context) {
     };
 
     function entityPropertyForDisplay(wikidataEntity, propKey) {
-        var blankResponse = { value: '' };
+        const blankResponse = { value: '' };
         if (!wikidataEntity[propKey]) return blankResponse;
-        var propObj = wikidataEntity[propKey];
-        var langKeys = Object.keys(propObj);
+        const propObj = wikidataEntity[propKey];
+        const langKeys = Object.keys(propObj);
         if (langKeys.length === 0) return blankResponse;
         // sorted by priority, since we want to show the user's language first if possible
-        var langs = wikidata.languagesToQuery();
-        for (var i in langs) {
-            var lang = langs[i];
-            var valueObj = propObj[lang];
+        const langs = wikidata.languagesToQuery();
+        for (const i in langs) {
+            const lang = langs[i];
+            const valueObj = propObj[lang];
             if (valueObj && valueObj.value && valueObj.value.length > 0) return valueObj;
         }
         // default to any available value

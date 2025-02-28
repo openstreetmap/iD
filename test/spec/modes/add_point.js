@@ -1,8 +1,8 @@
 describe.skip('iD.modeAddPoint', function() {
-    var context;
+    let context;
 
     beforeEach(function() {
-        var container = d3.select(document.createElement('div'));
+        const container = d3.select(document.createElement('div'));
         context = iD.coreContext().assetPath('../dist/').container(container).init();
         context.loadTiles = function () {};
 

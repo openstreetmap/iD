@@ -5,20 +5,20 @@ import { utilGetDimensions } from '../../util/dimensions';
 
 
 export function uiFieldLanes(field, context) {
-    var dispatch = d3_dispatch('change');
-    var LANE_WIDTH = 40;
-    var LANE_HEIGHT = 200;
-    var _entityIDs = [];
+    const dispatch = d3_dispatch('change');
+    const LANE_WIDTH = 40;
+    const LANE_HEIGHT = 200;
+    let _entityIDs = [];
 
     function lanes(selection) {
-        var lanesData = context.entity(_entityIDs[0]).lanes();
+        const lanesData = context.entity(_entityIDs[0]).lanes();
 
         if (!context.container().select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
             selection.call(lanes.off);
             return;
         }
 
-        var wrap = selection.selectAll('.form-field-input-wrap')
+        let wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
@@ -26,11 +26,11 @@ export function uiFieldLanes(field, context) {
             .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
-        var surface =  wrap.selectAll('.surface')
+        let surface =  wrap.selectAll('.surface')
             .data([0]);
 
-        var d = utilGetDimensions(wrap);
-        var freeSpace = d[0] - lanesData.lanes.length * LANE_WIDTH * 1.5 + LANE_WIDTH * 0.5;
+        const d = utilGetDimensions(wrap);
+        const freeSpace = d[0] - lanesData.lanes.length * LANE_WIDTH * 1.5 + LANE_WIDTH * 0.5;
 
         surface = surface.enter()
             .append('svg')
@@ -40,7 +40,7 @@ export function uiFieldLanes(field, context) {
             .merge(surface);
 
 
-        var lanesSelection = surface.selectAll('.lanes')
+        let lanesSelection = surface.selectAll('.lanes')
             .data([0]);
 
         lanesSelection = lanesSelection.enter()
@@ -54,13 +54,13 @@ export function uiFieldLanes(field, context) {
             });
 
 
-        var lane = lanesSelection.selectAll('.lane')
+        let lane = lanesSelection.selectAll('.lane')
            .data(lanesData.lanes);
 
         lane.exit()
             .remove();
 
-        var enter = lane.enter()
+        const enter = lane.enter()
             .append('g')
             .attr('class', 'lane');
 

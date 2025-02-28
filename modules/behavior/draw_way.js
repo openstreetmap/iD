@@ -20,25 +20,25 @@ import { utilKeybinding } from '../util';
 export function behaviorDrawWay(context, wayID, mode, startGraph) {
     const keybinding = utilKeybinding('drawWay');
 
-    var dispatch = d3_dispatch('rejectedSelfIntersection');
+    const dispatch = d3_dispatch('rejectedSelfIntersection');
 
-    var behavior = behaviorDraw(context);
+    const behavior = behaviorDraw(context);
 
     // Must be set by `drawWay.nodeIndex` before each install of this behavior.
-    var _nodeIndex;
+    let _nodeIndex;
 
-    var _origWay;
-    var _wayGeometry;
-    var _headNodeID;
-    var _annotation;
+    let _origWay;
+    let _wayGeometry;
+    let _headNodeID;
+    let _annotation;
 
-    var _pointerHasMoved = false;
+    let _pointerHasMoved = false;
 
     // The osmNode to be placed.
     // This is temporary and just follows the mouse cursor until an "add" event occurs.
-    var _drawNode;
+    let _drawNode;
 
-    var _didResolveTempEdit = false;
+    let _didResolveTempEdit = false;
 
     function createDrawNode(loc) {
         // don't make the draw node until we actually need it
@@ -47,7 +47,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         context.pauseChangeDispatch();
         context.replace(function actionAddDrawNode(graph) {
             // add the draw node to the graph and insert it into the way
-            var way = graph.entity(wayID);
+            const way = graph.entity(wayID);
             return graph
                 .replace(_drawNode)
                 .replace(way.addNode(_drawNode.id, _nodeIndex));
@@ -62,7 +62,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         context.pauseChangeDispatch();
         context.replace(
             function actionDeleteDrawNode(graph) {
-               var way = graph.entity(wayID);
+               const way = graph.entity(wayID);
                return graph
                    .replace(way.removeNode(_drawNode.id))
                    .remove(_drawNode);
@@ -111,21 +111,21 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     // - `behavior/draw_way.js`  `move()`
     function move(d3_event, datum) {
 
-        var loc = context.map().mouseCoordinates();
+        let loc = context.map().mouseCoordinates();
 
         if (!_drawNode) createDrawNode(loc);
 
         context.surface().classed('nope-disabled', d3_event.altKey);
 
-        var targetLoc = datum && datum.properties && datum.properties.entity &&
+        const targetLoc = datum && datum.properties && datum.properties.entity &&
             allowsVertex(datum.properties.entity) && datum.properties.entity.loc;
-        var targetNodes = datum && datum.properties && datum.properties.nodes;
+        const targetNodes = datum && datum.properties && datum.properties.nodes;
 
         if (targetLoc) {   // snap to node/vertex - a point target with `.loc`
             loc = targetLoc;
 
         } else if (targetNodes) {   // snap to way - a line target with `.nodes`
-            var choice = geoChooseEdge(targetNodes, context.map().mouse(), context.projection, _drawNode.id);
+            const choice = geoChooseEdge(targetNodes, context.map().mouse(), context.projection, _drawNode.id);
             if (choice) {
                 loc = choice.loc;
             }
@@ -141,8 +141,8 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     // If so, class the surface with a nope cursor.
     // `includeDrawNode` - Only check the relevant line segments if finishing drawing
     function checkGeometry(includeDrawNode) {
-        var nopeDisabled = context.surface().classed('nope-disabled');
-        var isInvalid = isInvalidGeometry(includeDrawNode);
+        const nopeDisabled = context.surface().classed('nope-disabled');
+        const isInvalid = isInvalidGeometry(includeDrawNode);
 
         if (nopeDisabled) {
             context.surface()
@@ -158,11 +158,11 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
     function isInvalidGeometry(includeDrawNode) {
 
-        var testNode = _drawNode;
+        let testNode = _drawNode;
 
         // we only need to test the single way we're drawing
-        var parentWay = context.graph().entity(wayID);
-        var nodes = context.graph().childNodes(parentWay).slice();  // shallow copy
+        const parentWay = context.graph().entity(wayID);
+        const nodes = context.graph().childNodes(parentWay).slice();  // shallow copy
 
         if (includeDrawNode) {
             if (parentWay.isClosed()) {
@@ -193,7 +193,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
         context.pauseChangeDispatch();
 
-        var nextMode;
+        let nextMode;
 
         if (context.graph() === startGraph) {
             // We've undone back to the initial state before we started drawing.
@@ -235,7 +235,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     }
 
 
-    var drawWay = function(surface) {
+    const drawWay = function(surface) {
         _drawNode = undefined;
         _didResolveTempEdit = false;
         _origWay = context.entity(wayID);
@@ -524,7 +524,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         _didResolveTempEdit = true;
         context.resumeChangeDispatch();
 
-        var way = context.hasEntity(wayID);
+        const way = context.hasEntity(wayID);
         if (!way || way.isDegenerate()) {
             drawWay.cancel();
             return;
@@ -534,7 +534,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             context.map().dblclickZoomEnable(true);
         }, 1000);
 
-        var isNewFeature = !mode.isContinuing;
+        const isNewFeature = !mode.isContinuing;
         context.enter(modeSelect(context, [wayID]).newFeature(isNewFeature));
     };
 

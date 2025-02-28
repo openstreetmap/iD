@@ -9,7 +9,7 @@ export function uiKeepRightHeader() {
   function issueTitle(d) {
     const { itemType, parentIssueType } = d;
     const unknown = t.html('inspector.unknown');
-    let replacements = d.replacements || {};
+    const replacements = d.replacements || {};
     replacements.default = { html: unknown };  // special key `default` works as a fallback string
 
     if (localizer.hasTextForStringId(`QA.keepRight.errorTypes.${itemType}.title`)) {

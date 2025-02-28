@@ -5,15 +5,15 @@ import { svgIcon } from '../svg/icon';
 
 
 export function uiNoteReport() {
-    var _note;
+    let _note;
 
     function noteReport(selection) {
-        var url;
+        let url;
         if (services.osm && (_note instanceof osmNote) && (!_note.isNew())) {
             url = services.osm.noteReportURL(_note);
         }
 
-        var link = selection.selectAll('.note-report')
+        const link = selection.selectAll('.note-report')
             .data(url ? [url] : []);
 
         // exit
@@ -21,7 +21,7 @@ export function uiNoteReport() {
             .remove();
 
         // enter
-        var linkEnter = link.enter()
+        const linkEnter = link.enter()
             .append('a')
             .attr('class', 'note-report')
             .attr('target', '_blank')

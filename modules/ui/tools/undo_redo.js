@@ -12,12 +12,12 @@ import { uiTooltip } from '../tooltip';
 
 export function uiToolUndoRedo(context) {
 
-    var tool = {
+    const tool = {
         id: 'undo_redo',
         label: t.append('toolbar.undo_redo')
     };
 
-    var commands = [{
+    const commands = [{
         id: 'undo',
         cmd: uiCmd('⌘Z'),
         action: function() {
@@ -46,7 +46,7 @@ export function uiToolUndoRedo(context) {
 
 
     tool.render = function(selection) {
-        var tooltipBehavior = uiTooltip()
+        const tooltipBehavior = uiTooltip()
             .placement('bottom')
             .title(function (d) {
                 return d.annotation() ?
@@ -58,9 +58,9 @@ export function uiToolUndoRedo(context) {
             })
             .scrollContainer(context.container().select('.top-toolbar'));
 
-        var lastPointerUpType;
+        let lastPointerUpType;
 
-        var buttons = selection.selectAll('button')
+        const buttons = selection.selectAll('button')
             .data(commands)
             .enter()
             .append('button')
@@ -72,7 +72,7 @@ export function uiToolUndoRedo(context) {
             .on('click', function(d3_event, d) {
                 d3_event.preventDefault();
 
-                var annotation = d.annotation();
+                const annotation = d.annotation();
 
                 if (editable() && annotation) {
                     d.action();
@@ -84,7 +84,7 @@ export function uiToolUndoRedo(context) {
                 ) {
                     // there are no tooltips for touch interactions so flash feedback instead
 
-                    var label = annotation ?
+                    const label = annotation ?
                         t.append(d.id + '.tooltip', { action: annotation }) :
                         t.append(d.id + '.nothing');
                     context.ui().flash
@@ -113,7 +113,7 @@ export function uiToolUndoRedo(context) {
             });
 
 
-        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
+        const debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
             .on('move.undo_redo', debouncedUpdate)
@@ -134,7 +134,7 @@ export function uiToolUndoRedo(context) {
                     return !editable() || !d.annotation();
                 })
                 .each(function() {
-                    var selection = d3_select(this);
+                    const selection = d3_select(this);
                     if (!selection.select('.tooltip.in').empty()) {
                         selection.call(tooltipBehavior.updateContent);
                     }

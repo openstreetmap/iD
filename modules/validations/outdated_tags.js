@@ -103,7 +103,7 @@ export function validationOutdatedTags() {
       }
     }
 
-    let issues = [];
+    const issues = [];
     issues.provisional = (_waitingForDeprecated || waitingForNsi);
 
     // determine diff
@@ -121,7 +121,7 @@ export function validationOutdatedTags() {
     }
 
     // don't allow autofixing brand tags
-    let autoArgs = subtype !== 'noncanonical_brand' ? [doUpgrade, t('issues.fix.upgrade_tags.annotation')] : null;
+    const autoArgs = subtype !== 'noncanonical_brand' ? [doUpgrade, t('issues.fix.upgrade_tags.annotation')] : null;
 
     issues.push(new validationIssue({
       type: type,
@@ -132,7 +132,7 @@ export function validationOutdatedTags() {
       entityIds: [entity.id],
       hash: utilHashcode(JSON.stringify(tagDiff)),
       dynamicFixes: () => {
-        let fixes = [
+        const fixes = [
           new validationIssueFix({
             autoArgs: autoArgs,
             title: t.append('issues.fix.upgrade_tags.title'),
@@ -164,7 +164,7 @@ export function validationOutdatedTags() {
       const currEntity = graph.hasEntity(entity.id);
       if (!currEntity) return graph;
 
-      let newTags = Object.assign({}, currEntity.tags);  // shallow copy
+      const newTags = Object.assign({}, currEntity.tags);  // shallow copy
       tagDiff.forEach(diff => {
         if (diff.type === '-') {
           delete newTags[diff.key];
@@ -184,7 +184,7 @@ export function validationOutdatedTags() {
       const item = nsiResult && nsiResult.matched;
       if (!item) return graph;
 
-      let newTags = Object.assign({}, currEntity.tags);  // shallow copy
+      const newTags = Object.assign({}, currEntity.tags);  // shallow copy
       const wd = item.mainTag;     // e.g. `brand:wikidata`
       const notwd = `not:${wd}`;   // e.g. `not:brand:wikidata`
       const qid = item.tags[wd];
@@ -215,7 +215,7 @@ export function validationOutdatedTags() {
 
 
     function showReference(selection) {
-      let enter = selection.selectAll('.issue-reference')
+      const enter = selection.selectAll('.issue-reference')
         .data([0])
         .enter();
 
@@ -238,7 +238,7 @@ export function validationOutdatedTags() {
         .attr('class', 'tagDiff-row')
         .append('td')
         .attr('class', d => {
-          let klass = d.type === '+' ? 'add' : 'remove';
+          const klass = d.type === '+' ? 'add' : 'remove';
           return `tagDiff-cell tagDiff-cell-${klass}`;
         })
         .html(d => d.display);
@@ -246,7 +246,7 @@ export function validationOutdatedTags() {
   }
 
 
-  let validation = oldTagIssues;
+  const validation = oldTagIssues;
 
   validation.type = type;
 

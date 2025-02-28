@@ -7,19 +7,19 @@ import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
 
 
 export function uiDataEditor(context) {
-    var dataHeader = uiDataHeader();
-    var rawTagEditor = uiSectionRawTagEditor('custom-data-tag-editor', context)
+    const dataHeader = uiDataHeader();
+    const rawTagEditor = uiSectionRawTagEditor('custom-data-tag-editor', context)
         .expandedByDefault(true)
         .readOnlyTags([/./]);
-    var _datum;
+    let _datum;
 
 
     function dataEditor(selection) {
 
-        var header = selection.selectAll('.header')
+        const header = selection.selectAll('.header')
             .data([0]);
 
-        var headerEnter = header.enter()
+        const headerEnter = header.enter()
             .append('div')
             .attr('class', 'header fillL');
 
@@ -37,7 +37,7 @@ export function uiDataEditor(context) {
             .call(t.append('map_data.title'));
 
 
-        var body = selection.selectAll('.body')
+        let body = selection.selectAll('.body')
             .data([0]);
 
         body = body.enter()
@@ -45,7 +45,7 @@ export function uiDataEditor(context) {
             .attr('class', 'body')
             .merge(body);
 
-        var editor = body.selectAll('.data-editor')
+        const editor = body.selectAll('.data-editor')
             .data([0]);
 
         // enter/update
@@ -55,7 +55,7 @@ export function uiDataEditor(context) {
             .merge(editor)
             .call(dataHeader.datum(_datum));
 
-        var rte = body.selectAll('.raw-tag-editor')
+        const rte = body.selectAll('.raw-tag-editor')
             .data([0]);
 
         // enter/update

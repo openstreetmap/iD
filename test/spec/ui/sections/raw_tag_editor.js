@@ -1,7 +1,7 @@
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.uiSectionRawTagEditor', function() {
-    var taglist, element, entity, context;
+    let taglist, element, entity, context;
 
     function render(tags) {
         taglist = iD.uiSectionRawTagEditor('raw-tag-editor', context)
@@ -58,7 +58,7 @@ describe('iD.uiSectionRawTagEditor', function() {
 
     it('adds tags when pressing the TAB key on last input.value', async () => {
         expect(element.selectAll('.tag-list li').nodes().length).to.eql(1);
-        var input = d3.select('.tag-list li:last-child input.value').nodes()[0];
+        const input = d3.select('.tag-list li:last-child input.value').nodes()[0];
         happen.keydown(d3.select(input).node(), {keyCode: 9});
         await setTimeout(20);
         expect(element.selectAll('.tag-list li').nodes().length).to.eql(2);
@@ -68,7 +68,7 @@ describe('iD.uiSectionRawTagEditor', function() {
 
     it('does not add a tag when pressing TAB while shift is pressed', async () => {
         expect(element.selectAll('.tag-list li').nodes().length).to.eql(1);
-        var input = d3.select('.tag-list li:last-child input.value').nodes()[0];
+        const input = d3.select('.tag-list li:last-child input.value').nodes()[0];
         happen.keydown(d3.select(input).node(), {keyCode: 9, shiftKey: true});
         await setTimeout(20);
         expect(element.selectAll('.tag-list li').nodes().length).to.eql(1);

@@ -46,7 +46,7 @@ export function uiOsmoseEditor(context) {
         .attr('class', 'body')
       .merge(body);
 
-    let editor = body.selectAll('.qa-editor')
+    const editor = body.selectAll('.qa-editor')
       .data([0]);
 
     editor.enter()

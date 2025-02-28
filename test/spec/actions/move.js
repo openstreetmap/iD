@@ -1,5 +1,5 @@
 describe('iD.actionMove', function() {
-    var projection = d3.geoMercator().scale(250 / Math.PI);
+    const projection = d3.geoMercator().scale(250 / Math.PI);
 
     // This was moved to operationMove.  We should test operations and move this test there.
     // describe('#disabled', function() {
@@ -27,7 +27,7 @@ describe('iD.actionMove', function() {
     // });
 
     it('moves all nodes in a way by the given amount', function() {
-        var node1  = iD.osmNode({loc: [0, 0]}),
+        const node1  = iD.osmNode({loc: [0, 0]}),
             node2  = iD.osmNode({loc: [5, 10]}),
             way    = iD.osmWay({nodes: [node1.id, node2.id]}),
             delta  = [2, 3],
@@ -41,7 +41,7 @@ describe('iD.actionMove', function() {
     });
 
     it('moves repeated nodes only once', function() {
-        var node   = iD.osmNode({loc: [0, 0]}),
+        const node   = iD.osmNode({loc: [0, 0]}),
             way    = iD.osmWay({nodes: [node.id, node.id]}),
             delta  = [2, 3],
             graph  = iD.actionMove([way.id], delta, projection)(iD.coreGraph([node, way])),
@@ -51,7 +51,7 @@ describe('iD.actionMove', function() {
     });
 
     it('moves multiple ways', function() {
-        var node   = iD.osmNode({loc: [0, 0]}),
+        const node   = iD.osmNode({loc: [0, 0]}),
             way1   = iD.osmWay({nodes: [node.id]}),
             way2   = iD.osmWay({nodes: [node.id]}),
             delta  = [2, 3],
@@ -62,7 +62,7 @@ describe('iD.actionMove', function() {
     });
 
     it('moves leaf nodes of a relation', function() {
-        var node     = iD.osmNode({loc: [0, 0]}),
+        const node     = iD.osmNode({loc: [0, 0]}),
             way      = iD.osmWay({nodes: [node.id]}),
             relation = iD.osmRelation({members: [{id: way.id}]}),
             delta    = [2, 3],

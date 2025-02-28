@@ -7,13 +7,13 @@ import { modeBrowse } from '../modes/browse';
 
 
 export function uiSourceSwitch(context) {
-    var keys;
+    let keys;
 
 
     function click(d3_event) {
         d3_event.preventDefault();
 
-        var osm = context.connection();
+        const osm = context.connection();
         if (!osm) return;
 
         if (context.inIntro()) return;
@@ -21,7 +21,7 @@ export function uiSourceSwitch(context) {
         if (context.history().hasChanges() &&
             !window.confirm(t('source_switch.lose_changes'))) return;
 
-        var isLive = d3_select(this)
+        let isLive = d3_select(this)
             .classed('live');
 
         isLive = !isLive;
@@ -37,7 +37,7 @@ export function uiSourceSwitch(context) {
         osm.switch(isLive ? keys[0] : keys[1]);  // switch connection (warning: dispatches 'change' event)
     }
 
-    var sourceSwitch = function(selection) {
+    const sourceSwitch = function(selection) {
         selection
             .append('a')
             .attr('href', '#')

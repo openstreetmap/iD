@@ -10,19 +10,19 @@ import { uiSection } from '../section';
 
 export function uiSectionOverlayList(context) {
 
-    var section = uiSection('overlay-list', context)
+    const section = uiSection('overlay-list', context)
         .label(() => t.append('background.overlays'))
         .disclosureContent(renderDisclosureContent);
 
-    var _overlayList = d3_select(null);
+    let _overlayList = d3_select(null);
 
     function setTooltips(selection) {
         selection.each(function(d, i, nodes) {
-            var item = d3_select(this).select('label');
-            var span = item.select('span');
-            var placement = (i < nodes.length / 2) ? 'bottom' : 'top';
-            var description = d.description();
-            var isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
+            const item = d3_select(this).select('label');
+            const span = item.select('span');
+            const placement = (i < nodes.length / 2) ? 'bottom' : 'top';
+            const description = d.description();
+            const isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
 
             item.call(uiTooltip().destroyAny);
 
@@ -56,20 +56,20 @@ export function uiSectionOverlayList(context) {
     }
 
     function drawListItems(layerList, type, change, filter) {
-        var sources = context.background()
+        const sources = context.background()
             .sources(context.map().extent(), context.map().zoom(), true)
             .filter(filter);
 
-        var layerLinks = layerList.selectAll('li')
+        const layerLinks = layerList.selectAll('li')
             .data(sources, function(d) { return d.name(); });
 
         layerLinks.exit()
             .remove();
 
-        var enter = layerLinks.enter()
+        const enter = layerLinks.enter()
             .append('li');
 
-        var label = enter
+        const label = enter
             .append('label');
 
         label
@@ -99,7 +99,7 @@ export function uiSectionOverlayList(context) {
 
     function renderDisclosureContent(selection) {
 
-        var container = selection.selectAll('.layer-overlay-list')
+        const container = selection.selectAll('.layer-overlay-list')
             .data([0]);
 
         _overlayList = container.enter()

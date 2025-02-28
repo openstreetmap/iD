@@ -10,14 +10,14 @@ import { utilGetAllNodes } from '../util/util';
 export function behaviorLasso(context) {
 
     // use pointer events on supported platforms; fallback to mouse events
-    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+    const _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
-    var behavior = function(selection) {
-        var lasso;
+    const behavior = function(selection) {
+        let lasso;
 
 
         function pointerdown(d3_event) {
-            var button = 0;  // left
+            const button = 0;  // left
             if (d3_event.button === button && d3_event.shiftKey === true) {
                 lasso = null;
 
@@ -51,8 +51,8 @@ export function behaviorLasso(context) {
         function lassoed() {
             if (!lasso) return [];
 
-            var graph = context.graph();
-            var limitToNodes;
+            const graph = context.graph();
+            let limitToNodes;
 
             if (context.map().editableDataEnabled(true /* skipZoomCheck */) && context.map().isInWideSelection()) {
                 // only select from the visible nodes
@@ -61,10 +61,10 @@ export function behaviorLasso(context) {
                 return [];
             }
 
-            var bounds = lasso.extent().map(context.projection.invert);
-            var extent = geoExtent(normalize(bounds[0], bounds[1]));
+            const bounds = lasso.extent().map(context.projection.invert);
+            const extent = geoExtent(normalize(bounds[0], bounds[1]));
 
-            var intersects = context.history().intersects(extent).filter(function(entity) {
+            const intersects = context.history().intersects(extent).filter(function(entity) {
                 return entity.type === 'node' &&
                     (!limitToNodes || limitToNodes.has(entity)) &&
                     geoPointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
@@ -73,14 +73,14 @@ export function behaviorLasso(context) {
 
             // sort the lassoed nodes as best we can
             intersects.sort(function(node1, node2) {
-                var parents1 = graph.parentWays(node1);
-                var parents2 = graph.parentWays(node2);
+                const parents1 = graph.parentWays(node1);
+                const parents2 = graph.parentWays(node2);
                 if (parents1.length && parents2.length) {
                     // both nodes are vertices
 
-                    var sharedParents = utilArrayIntersection(parents1, parents2);
+                    const sharedParents = utilArrayIntersection(parents1, parents2);
                     if (sharedParents.length) {
-                        var sharedParentNodes = sharedParents[0].nodes;
+                        const sharedParentNodes = sharedParents[0].nodes;
                         // vertices are members of the same way; sort them in their listed order
                         return sharedParentNodes.indexOf(node1.id) -
                             sharedParentNodes.indexOf(node2.id);
@@ -109,7 +109,7 @@ export function behaviorLasso(context) {
 
             if (!lasso) return;
 
-            var ids = lassoed();
+            const ids = lassoed();
             lasso.close();
 
             if (ids.length) {

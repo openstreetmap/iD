@@ -24,15 +24,15 @@ import { operationRotate } from '../operations/rotate';
 
 export function modeMove(context, entityIDs, baseGraph) {
 
-    var _tolerancePx = 4; // see also behaviorDrag, behaviorSelect, modeRotate
+    const _tolerancePx = 4; // see also behaviorDrag, behaviorSelect, modeRotate
 
-    var mode = {
+    const mode = {
         id: 'move',
         button: 'browse'
     };
 
-    var keybinding = utilKeybinding('move');
-    var behaviors = [
+    const keybinding = utilKeybinding('move');
+    const behaviors = [
         behaviorEdit(context),
         operationCircularize(context, entityIDs).behavior,
         operationDelete(context, entityIDs).behavior,
@@ -41,23 +41,23 @@ export function modeMove(context, entityIDs, baseGraph) {
         operationReflectShort(context, entityIDs).behavior,
         operationRotate(context, entityIDs).behavior
     ];
-    var annotation = entityIDs.length === 1 ?
+    const annotation = entityIDs.length === 1 ?
         t('operations.move.annotation.' + context.graph().geometry(entityIDs[0])) :
         t('operations.move.annotation.feature', { n: entityIDs.length });
 
-    var _prevGraph;
-    var _cache;
-    var _origin;
-    var _nudgeInterval;
+    let _prevGraph;
+    let _cache;
+    let _origin;
+    let _nudgeInterval;
 
     // use pointer events on supported platforms; fallback to mouse events
-    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+    const _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
 
     function doMove(nudge) {
         nudge = nudge || [0, 0];
 
-        var fn;
+        let fn;
         if (_prevGraph !== context.graph()) {
             _cache = {};
             _origin = context.map().mouseCoordinates();
@@ -66,9 +66,9 @@ export function modeMove(context, entityIDs, baseGraph) {
             fn = context.overwrite;
         }
 
-        var currMouse = context.map().mouse();
-        var origMouse = context.projection(_origin);
-        var delta = geoVecSubtract(geoVecSubtract(currMouse, origMouse), nudge);
+        const currMouse = context.map().mouse();
+        const origMouse = context.projection(_origin);
+        const delta = geoVecSubtract(geoVecSubtract(currMouse, origMouse), nudge);
 
         fn(actionMove(entityIDs, delta, context.projection, _cache));
         _prevGraph = context.graph();
@@ -94,7 +94,7 @@ export function modeMove(context, entityIDs, baseGraph) {
 
     function move() {
         doMove();
-        var nudge = geoViewportEdge(context.map().mouse(), context.map().dimensions());
+        const nudge = geoViewportEdge(context.map().mouse(), context.map().dimensions());
         if (nudge) {
             startNudge(nudge);
         } else {
@@ -137,7 +137,7 @@ export function modeMove(context, entityIDs, baseGraph) {
 
         behaviors.forEach(context.install);
 
-        var downEvent;
+        let downEvent;
 
         context.surface()
             .on(_pointerPrefix + 'down.modeMove', function(d3_event) {
@@ -148,11 +148,11 @@ export function modeMove(context, entityIDs, baseGraph) {
             .on(_pointerPrefix + 'move.modeMove', move, true)
             .on(_pointerPrefix + 'up.modeMove', function(d3_event) {
                 if (!downEvent) return;
-                var mapNode = context.container().select('.main-map').node();
-                var pointGetter = utilFastMouse(mapNode);
-                var p1 = pointGetter(downEvent);
-                var p2 = pointGetter(d3_event);
-                var dist = geoVecLength(p1, p2);
+                const mapNode = context.container().select('.main-map').node();
+                const pointGetter = utilFastMouse(mapNode);
+                const p1 = pointGetter(downEvent);
+                const p2 = pointGetter(d3_event);
+                const dist = geoVecLength(p1, p2);
 
                 if (dist <= _tolerancePx) finish(d3_event);
                 downEvent = null;

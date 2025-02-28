@@ -14,7 +14,7 @@ export function utilGetSetValue(selection, value, shouldUpdate) {
         }
 
         function valueFunction() {
-            var x = value.apply(this, arguments);
+            const x = value.apply(this, arguments);
             if (x === null || x === undefined) {
                 delete this.value;
             } else if (shouldUpdate(this.value, x)) {

@@ -3,8 +3,8 @@ import { json as d3_json } from 'd3-fetch';
 import { utilQsString } from '../util';
 import { localizer } from '../core/localizer';
 
-var apibase = 'https://www.wikidata.org/w/api.php?';
-var _wikidataCache = {};
+const apibase = 'https://www.wikidata.org/w/api.php?';
+let _wikidataCache = {};
 
 
 export default {
@@ -23,9 +23,9 @@ export default {
             return;
         }
 
-        var lang = this.languagesToQuery()[0];
+        const lang = this.languagesToQuery()[0];
 
-        var url = apibase + utilQsString({
+        const url = apibase + utilQsString({
             action: 'wbsearchentities',
             format: 'json',
             formatversion: 2,
@@ -69,7 +69,7 @@ export default {
         }
 
         lang = lang || 'en';
-        var url = apibase + utilQsString({
+        const url = apibase + utilQsString({
             action: 'wbgetentities',
             format: 'json',
             formatversion: 2,
@@ -113,8 +113,8 @@ export default {
             return;
         }
 
-        var langs = this.languagesToQuery();
-        var url = apibase + utilQsString({
+        const langs = this.languagesToQuery();
+        const url = apibase + utilQsString({
             action: 'wbgetentities',
             format: 'json',
             formatversion: 2,
@@ -154,17 +154,17 @@ export default {
     // }
     //
     getDocs: function(params, callback) {
-        var langs = this.languagesToQuery();
+        const langs = this.languagesToQuery();
         this.entityByQID(params.qid, function(err, entity) {
             if (err || !entity) {
                 callback(err || 'No entity');
                 return;
             }
 
-            var i;
-            var description;
+            let i;
+            let description;
             for (i in langs) {
-                let code = langs[i];
+                const code = langs[i];
                 if (entity.descriptions[code] && entity.descriptions[code].language === code) {
                     description = entity.descriptions[code];
                     break;
@@ -173,7 +173,7 @@ export default {
             if (!description && Object.values(entity.descriptions).length) description = Object.values(entity.descriptions)[0];
 
             // prepare result
-            var result = {
+            const result = {
                 title: entity.id,
                 description: description ? description.value : '',
                 descriptionLocaleCode: description ? description.language : '',
@@ -182,9 +182,9 @@ export default {
 
             // add image
             if (entity.claims) {
-                var imageroot = 'https://commons.wikimedia.org/w/index.php';
-                var props = ['P154','P18'];  // logo image, image
-                var prop, image;
+                const imageroot = 'https://commons.wikimedia.org/w/index.php';
+                const props = ['P154','P18'];  // logo image, image
+                let prop, image;
                 for (i = 0; i < props.length; i++) {
                     prop = entity.claims[props[i]];
                     if (prop && Object.keys(prop).length > 0) {
@@ -201,14 +201,14 @@ export default {
             }
 
             if (entity.sitelinks) {
-                var englishLocale = localizer.languageCode().toLowerCase() === 'en';
+                const englishLocale = localizer.languageCode().toLowerCase() === 'en';
 
                 // must be one of these that we requested..
                 for (i = 0; i < langs.length; i++) {   // check each, in order of preference
-                    var w = langs[i] + 'wiki';
+                    const w = langs[i] + 'wiki';
                     if (entity.sitelinks[w]) {
-                        var title = entity.sitelinks[w].title;
-                        var tKey = 'inspector.wiki_reference';
+                        const title = entity.sitelinks[w].title;
+                        let tKey = 'inspector.wiki_reference';
                         if (!englishLocale && langs[i] === 'en') {   // user's locale isn't English but
                             tKey = 'inspector.wiki_en_reference';    // we are sending them to enwiki anyway..
                         }

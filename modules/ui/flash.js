@@ -1,12 +1,12 @@
 import { timeout as d3_timeout } from 'd3-timer';
 
 export function uiFlash(context) {
-    var _flashTimer;
+    let _flashTimer;
 
-    var _duration = 2000;
-    var _iconName = '#iD-icon-no';
-    var _iconClass = 'disabled';
-    var _label = s => s.text('');
+    let _duration = 2000;
+    let _iconName = '#iD-icon-no';
+    let _iconClass = 'disabled';
+    let _label = s => s.text('');
 
     function flash() {
         if (_flashTimer) {
@@ -20,15 +20,15 @@ export function uiFlash(context) {
             .classed('footer-hide', false)
             .classed('footer-show', true);
 
-        var content = context.container().select('.flash-wrap').selectAll('.flash-content')
+        let content = context.container().select('.flash-wrap').selectAll('.flash-content')
             .data([0]);
 
         // Enter
-        var contentEnter = content.enter()
+        const contentEnter = content.enter()
             .append('div')
             .attr('class', 'flash-content');
 
-        var iconEnter = contentEnter
+        const iconEnter = contentEnter
             .append('svg')
             .attr('class', 'flash-icon icon')
             .append('g')

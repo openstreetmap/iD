@@ -11,12 +11,12 @@ import { utilArrayUniqBy, utilCleanOsmString, utilRebind, utilTriggerEvent, util
 
 
 export function uiChangesetEditor(context) {
-    var dispatch = d3_dispatch('change');
-    var formFields = uiFormFields(context);
-    var commentCombo = uiCombobox(context, 'comment').caseSensitive(true);
-    var _fieldsArr;
-    var _tags;
-    var _changesetID;
+    const dispatch = d3_dispatch('change');
+    const formFields = uiFormFields(context);
+    const commentCombo = uiCombobox(context, 'comment').caseSensitive(true);
+    let _fieldsArr;
+    let _tags;
+    let _changesetID;
 
 
     function changesetEditor(selection) {
@@ -25,11 +25,11 @@ export function uiChangesetEditor(context) {
 
 
     function render(selection) {
-        var initial = false;
+        let initial = false;
 
         if (!_fieldsArr) {
             initial = true;
-            var presets = presetManager;
+            const presets = presetManager;
 
             _fieldsArr = [
                 uiField(context, presets.field('comment'), null, { show: true, revert: false }),
@@ -56,9 +56,9 @@ export function uiChangesetEditor(context) {
 
 
         if (initial) {
-            var commentField = selection.select('.form-field-comment textarea');
+            const commentField = selection.select('.form-field-comment textarea');
             const sourceField = _fieldsArr.find(field => field.id === 'source');
-            var commentNode = commentField.node();
+            const commentNode = commentField.node();
 
             if (commentNode) {
                 commentNode.focus();
@@ -69,13 +69,13 @@ export function uiChangesetEditor(context) {
             // and checked for hashtags, even if retrieved from localstorage
             utilTriggerEvent(commentField, 'blur');
 
-            var osm = context.connection();
+            const osm = context.connection();
             if (osm) {
                 osm.userChangesets(function (err, changesets) {
                     if (err) return;
 
-                    var comments = changesets.map(function(changeset) {
-                        var comment = changeset.tags.comment;
+                    const comments = changesets.map(function(changeset) {
+                        const comment = changeset.tags.comment;
                         return comment ? { title: comment, value: comment } : null;
                     }).filter(Boolean);
 
@@ -115,7 +115,7 @@ export function uiChangesetEditor(context) {
             });
         }
 
-        var commentWarning = selection.select('.form-field-comment').selectAll('.comment-warning')
+        const commentWarning = selection.select('.form-field-comment').selectAll('.comment-warning')
             .data(warnings, d => d.id);
 
         commentWarning.exit()
@@ -124,7 +124,7 @@ export function uiChangesetEditor(context) {
             .style('opacity', 0)
             .remove();
 
-        var commentEnter = commentWarning.enter()
+        const commentEnter = commentWarning.enter()
             .insert('div', '.comment-warning')
             .attr('class', 'comment-warning field-warning')
             .style('opacity', 0);

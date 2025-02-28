@@ -20,11 +20,11 @@ import { osmRelation } from '../osm/relation';
 export function actionRestrictTurn(turn, restrictionType, restrictionID) {
 
     return function(graph) {
-        var fromWay = graph.entity(turn.from.way);
-        var toWay = graph.entity(turn.to.way);
-        var viaNode = turn.via.node && graph.entity(turn.via.node);
-        var viaWays = turn.via.ways && turn.via.ways.map(function(id) { return graph.entity(id); });
-        var members = [];
+        const fromWay = graph.entity(turn.from.way);
+        const toWay = graph.entity(turn.to.way);
+        const viaNode = turn.via.node && graph.entity(turn.via.node);
+        const viaWays = turn.via.ways && turn.via.ways.map(function(id) { return graph.entity(id); });
+        const members = [];
 
         members.push({ id: fromWay.id, type: 'way',  role: 'from' });
 

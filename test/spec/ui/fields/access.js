@@ -1,5 +1,5 @@
 describe('iD.uiFieldAccess', function() {
-    var context, selection, field;
+    let context, selection, field;
 
     beforeEach(function() {
         context = iD.coreContext().assetPath('../dist/').init();
@@ -11,7 +11,7 @@ describe('iD.uiFieldAccess', function() {
     });
 
     it('creates inputs for a variety of modes of access', function() {
-        var access = iD.uiFieldAccess(field, context);
+        const access = iD.uiFieldAccess(field, context);
         selection.call(access);
         expect(selection.selectAll('.preset-access-access').size()).to.equal(1);
         expect(selection.selectAll('.preset-access-foot').size()).to.equal(1);
@@ -21,16 +21,16 @@ describe('iD.uiFieldAccess', function() {
     });
 
     it('does not include "yes", "designated", "dismount" options for general access (#934), (#2213)', function() {
-        var access = iD.uiFieldAccess(field, context);
-        var options = access.options('access').map(function(v) { return v.value; });
+        const access = iD.uiFieldAccess(field, context);
+        const options = access.options('access').map(function(v) { return v.value; });
         expect(options).not.to.include('yes');
         expect(options).not.to.include('designated');
         expect(options).not.to.include('dismount');
     });
 
     it('does include a "dismount" option for bicycles (#2726)', function() {
-        var access = iD.uiFieldAccess(field, context);
-        var options;
+        const access = iD.uiFieldAccess(field, context);
+        let options;
 
         options = access.options('bicycle').map(function(v) { return v.value; });
         expect(options).to.include('dismount');
@@ -40,7 +40,7 @@ describe('iD.uiFieldAccess', function() {
     });
 
     it('sets foot placeholder to "yes" for steps and pedestrian', function() {
-        var access = iD.uiFieldAccess(field, context);
+        const access = iD.uiFieldAccess(field, context);
         selection.call(access);
 
         access.tags({highway: 'steps'});
@@ -51,7 +51,7 @@ describe('iD.uiFieldAccess', function() {
     });
 
     it('sets foot placeholder to "designated" for footways', function() {
-        var access = iD.uiFieldAccess(field, context);
+        const access = iD.uiFieldAccess(field, context);
         selection.call(access);
 
         access.tags({highway: 'footway'});
@@ -59,7 +59,7 @@ describe('iD.uiFieldAccess', function() {
     });
 
     it('sets bicycle placeholder to "designated" for cycleways', function() {
-        var access = iD.uiFieldAccess(field, context);
+        const access = iD.uiFieldAccess(field, context);
         selection.call(access);
 
         access.tags({highway: 'cycleway'});
@@ -67,7 +67,7 @@ describe('iD.uiFieldAccess', function() {
     });
 
     it('sets horse placeholder to "designated" for bridleways', function() {
-        var access = iD.uiFieldAccess(field, context);
+        const access = iD.uiFieldAccess(field, context);
         selection.call(access);
 
         access.tags({highway: 'bridleway'});
@@ -75,7 +75,7 @@ describe('iD.uiFieldAccess', function() {
     });
 
     it('sets motor_vehicle placeholder to "no" for footways, steps, pedestrian, cycleway, bridleway, and path', function() {
-        var access = iD.uiFieldAccess(field, context);
+        const access = iD.uiFieldAccess(field, context);
         selection.call(access);
         ['footway', 'steps', 'pedestrian', 'cycleway', 'bridleway', 'path'].forEach(function(value) {
             access.tags({highway: value});
@@ -84,7 +84,7 @@ describe('iD.uiFieldAccess', function() {
     });
 
     it('sets motor_vehicle placeholder to "yes" for various other highway tags', function() {
-        var access = iD.uiFieldAccess(field, context);
+        const access = iD.uiFieldAccess(field, context);
         selection.call(access);
         ['residential', 'motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'service',
          'unclassified', 'motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link'].forEach(function(value) {
@@ -94,7 +94,7 @@ describe('iD.uiFieldAccess', function() {
     });
 
     it('overrides a "yes" or "designated" placeholder with more specific access tag (#2213)', function() {
-        var access = iD.uiFieldAccess(field, context);
+        const access = iD.uiFieldAccess(field, context);
         selection.call(access);
 
         access.tags({highway: 'service', access: 'emergency'});
@@ -105,7 +105,7 @@ describe('iD.uiFieldAccess', function() {
     });
 
     it('overrides a "no" placeholder with more specific access tag (#2763)', function() {
-        var access = iD.uiFieldAccess(field, context);
+        const access = iD.uiFieldAccess(field, context);
         selection.call(access);
 
         access.tags({highway: 'cycleway', access: 'destination'});

@@ -1,8 +1,8 @@
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.serviceKartaview', function() {
-    var dimensions = [64, 64];
-    var context, kartaview;
+    const dimensions = [64, 64];
+    let context, kartaview;
 
     before(function() {
         iD.services.kartaview = iD.serviceKartaview;
@@ -32,12 +32,12 @@ describe('iD.serviceKartaview', function() {
 
     describe('#init', function() {
         it('Initializes cache one time', function() {
-            var cache = kartaview.cache();
+            const cache = kartaview.cache();
             expect(cache).to.have.property('images');
             expect(cache).to.have.property('sequences');
 
             kartaview.init();
-            var cache2 = kartaview.cache();
+            const cache2 = kartaview.cache();
             expect(cache).to.equal(cache2);
         });
     });
@@ -55,7 +55,7 @@ describe('iD.serviceKartaview', function() {
 
     describe('#loadImages', function() {
         it('fires loadedImages when images are loaded', async () => {
-            var data = {
+            const data = {
                 status: { apiCode: '600', httpCode: 200, httpMessage: 'Success' },
                 currentPageItems:[{
                     id: '1',
@@ -110,7 +110,7 @@ describe('iD.serviceKartaview', function() {
         });
 
         it('does not load images around null island', async () => {
-            var data = {
+            const data = {
                 status: { apiCode: '600', httpCode: 200, httpMessage: 'Success' },
                 currentPageItems:[{
                     id: '1',
@@ -152,7 +152,7 @@ describe('iD.serviceKartaview', function() {
                 totalFilteredItems: ['3']
             };
 
-            var spy = sinon.spy();
+            const spy = sinon.spy();
             fetchMock.mock(new RegExp('/nearby-photos/'), {
                 body: JSON.stringify(data),
                 status: 200,
@@ -170,9 +170,9 @@ describe('iD.serviceKartaview', function() {
         });
 
         it('loads multiple pages of image results', async () => {
-            var features = [];
-            for (var i = 0; i < 1000; i++) {
-                var key = String(i);
+            const features = [];
+            for (let i = 0; i < 1000; i++) {
+                const key = String(i);
                 features.push({
                     id: key,
                     sequence_id: '100',
@@ -188,7 +188,7 @@ describe('iD.serviceKartaview', function() {
                 });
             }
 
-            var response = {
+            const response = {
                 status: { apiCode: '600', httpCode: 200, httpMessage: 'Success' },
                 currentPageItems: features,
                 totalFilteredItems: ['1000']
@@ -210,14 +210,14 @@ describe('iD.serviceKartaview', function() {
 
     describe('#images', function() {
         it('returns images in the visible map area', function() {
-            var features = [
+            const features = [
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 1 } },
                 { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, sequence_id: '100', sequence_index: 2 } }
             ];
 
             kartaview.cache().images.rtree.load(features);
-            var res = kartaview.images(context.projection);
+            const res = kartaview.images(context.projection);
 
             expect(res).to.deep.eql([
                 { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 },
@@ -226,7 +226,7 @@ describe('iD.serviceKartaview', function() {
         });
 
         it('limits results no more than 5 stacked images in one spot', function() {
-            var features = [
+            const features = [
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 1 } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '2', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 2 } },
@@ -236,7 +236,7 @@ describe('iD.serviceKartaview', function() {
             ];
 
             kartaview.cache().images.rtree.load(features);
-            var res = kartaview.images(context.projection);
+            const res = kartaview.images(context.projection);
             expect(res).to.have.length.of.at.most(5);
         });
     });
@@ -244,7 +244,7 @@ describe('iD.serviceKartaview', function() {
 
     describe('#sequences', function() {
         it('returns sequence linestrings in the visible map area', function() {
-            var features = [
+            const features = [
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 1 } },
                 { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, sequence_id: '100', sequence_index: 2 } }
@@ -253,7 +253,7 @@ describe('iD.serviceKartaview', function() {
             kartaview.cache().images.rtree.load(features);
             kartaview.cache().sequences['100'] = { rotation: 0, images: [ features[0].data, features[1].data, features[2].data ] };
 
-            var res = kartaview.sequences(context.projection);
+            const res = kartaview.sequences(context.projection);
             expect(res).to.deep.eql([{
                 type: 'LineString',
                 coordinates: [[10,0], [10,0], [10,1]],
@@ -268,7 +268,7 @@ describe('iD.serviceKartaview', function() {
 
     describe('#selectedImage', function() {
         it('sets and gets selected image', function() {
-            var d = { key: 'foo' };
+            const d = { key: 'foo' };
             kartaview.cache().images = { forImageKey: { foo: d }};
             kartaview.selectImage(context, 'foo');
             expect(kartaview.getSelectedImage()).to.eql(d);

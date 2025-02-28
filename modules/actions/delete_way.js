@@ -10,7 +10,7 @@ export function actionDeleteWay(wayID) {
         if (graph.parentWays(node).length ||
             graph.parentRelations(node).length) return false;
 
-        var geometries = osmNodeGeometriesForTags(node.tags);
+        const geometries = osmNodeGeometriesForTags(node.tags);
         // don't delete if this node can be a standalone point
         if (geometries.point) return false;
         // delete if this node only be a vertex
@@ -22,8 +22,8 @@ export function actionDeleteWay(wayID) {
     }
 
 
-    var action = function(graph) {
-        var way = graph.entity(wayID);
+    const action = function(graph) {
+        const way = graph.entity(wayID);
 
         graph.parentRelations(way).forEach(function(parent) {
             parent = parent.removeMembersWithID(wayID);
@@ -37,7 +37,7 @@ export function actionDeleteWay(wayID) {
         (new Set(way.nodes)).forEach(function(nodeID) {
             graph = graph.replace(way.removeNode(nodeID));
 
-            var node = graph.entity(nodeID);
+            const node = graph.entity(nodeID);
             if (canDeleteNode(node, graph)) {
                 graph = graph.remove(node);
             }

@@ -27,10 +27,10 @@ if (fs.existsSync('./data/manual_imagery.json')) {
   );
 }
 
-let imagery = [];
+const imagery = [];
 
 // ignore imagery more than 20 years old..
-let cutoffDate = new Date();
+const cutoffDate = new Date();
 cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
 
 const discard = [
@@ -86,7 +86,7 @@ sources.features.forEach(feature => {
   if (source.type !== 'tms' && source.type !== 'wms' && source.type !== 'bing') return;
   if (discard.some(regex => regex.test(source.id))) return;
 
-  let im = {
+  const im = {
     id: source.id,
     name: source.name,
     type: source.type,
@@ -132,7 +132,7 @@ sources.features.forEach(feature => {
     }
   }
 
-  let extent = source;
+  const extent = source;
   if (extent.min_zoom || extent.max_zoom) {
     im.zoomExtent = [
       extent.min_zoom || 0,

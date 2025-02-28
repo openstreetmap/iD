@@ -10,36 +10,36 @@ import { utilDisplayLabel } from '../util/utilDisplayLabel';
 // see also `behaviorPaste`
 export function operationPaste(context) {
 
-    var _pastePoint;
+    let _pastePoint;
 
-    var operation = function() {
+    const operation = function() {
 
         if (!_pastePoint) return;
 
-        var oldIDs = context.copyIDs();
+        const oldIDs = context.copyIDs();
         if (!oldIDs.length) return;
 
-        var projection = context.projection;
-        var extent = geoExtent();
-        var oldGraph = context.copyGraph();
-        var newIDs = [];
+        const projection = context.projection;
+        const extent = geoExtent();
+        const oldGraph = context.copyGraph();
+        const newIDs = [];
 
-        var action = actionCopyEntities(oldIDs, oldGraph);
+        const action = actionCopyEntities(oldIDs, oldGraph);
         context.perform(action);
 
-        var copies = action.copies();
-        var originals = new Set();
+        const copies = action.copies();
+        const originals = new Set();
         Object.values(copies).forEach(function(entity) { originals.add(entity.id); });
 
-        for (var id in copies) {
-            var oldEntity = oldGraph.entity(id);
-            var newEntity = copies[id];
+        for (const id in copies) {
+            const oldEntity = oldGraph.entity(id);
+            const newEntity = copies[id];
 
             extent._extend(oldEntity.extent(oldGraph));
 
             // Exclude child nodes from newIDs if their parent way was also copied.
-            var parents = context.graph().parentWays(newEntity);
-            var parentCopied = parents.some(function(parent) {
+            const parents = context.graph().parentWays(newEntity);
+            const parentCopied = parents.some(function(parent) {
                 return originals.has(parent.id);
             });
 
@@ -50,9 +50,9 @@ export function operationPaste(context) {
 
         // Use the location of the copy operation to offset the paste location,
         // or else use the center of the pasted extent
-        var copyPoint = (context.copyLonLat() && projection(context.copyLonLat())) ||
+        const copyPoint = (context.copyLonLat() && projection(context.copyLonLat())) ||
             projection(extent.center());
-        var delta = geoVecSubtract(_pastePoint, copyPoint);
+        const delta = geoVecSubtract(_pastePoint, copyPoint);
 
         // Move the pasted objects to be anchored at the paste location
         context.replace(actionMove(newIDs, delta, projection), operation.annotation());
@@ -73,8 +73,8 @@ export function operationPaste(context) {
     };
 
     operation.tooltip = function() {
-        var oldGraph = context.copyGraph();
-        var ids = context.copyIDs();
+        const oldGraph = context.copyGraph();
+        const ids = context.copyIDs();
         if (!ids.length) {
             return t.append('operations.paste.nothing_copied');
         }
@@ -82,7 +82,7 @@ export function operationPaste(context) {
     };
 
     operation.annotation = function() {
-        var ids = context.copyIDs();
+        const ids = context.copyIDs();
         return t('operations.paste.annotation', { n: ids.length });
     };
 

@@ -4,9 +4,9 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationHelpRequest(context) {
-    var type = 'help_request';
+    const type = 'help_request';
 
-    var validation = function checkFixmeTag(entity) {
+    const validation = function checkFixmeTag(entity) {
 
         if (!entity.tags.fixme) return [];
 
@@ -14,7 +14,7 @@ export function validationHelpRequest(context) {
         if (entity.version === undefined) return [];
 
         if (entity.v !== undefined) {
-            var baseEntity = context.history().base().hasEntity(entity.id);
+            const baseEntity = context.history().base().hasEntity(entity.id);
             // don't flag fixmes added by the user on existing features
             if (!baseEntity || !baseEntity.tags.fixme) return [];
         }
@@ -24,7 +24,7 @@ export function validationHelpRequest(context) {
             subtype: 'fixme_tag',
             severity: 'warning',
             message: function(context) {
-                var entity = context.hasEntity(this.entityIds[0]);
+                const entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.fixme_tag.message', {
                     feature: utilDisplayLabel(entity, context.graph(), true /* verbose */)
                 }) : '';

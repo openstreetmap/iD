@@ -16,19 +16,19 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationMismatchedGeometry() {
-    var type = 'mismatched_geometry';
+    const type = 'mismatched_geometry';
 
     function tagSuggestingLineIsArea(entity) {
         if (entity.type !== 'way' || entity.isClosed()) return null;
 
-        var tagSuggestingArea = entity.tagSuggestingArea();
+        const tagSuggestingArea = entity.tagSuggestingArea();
 
         if (!tagSuggestingArea) {
             return null;
         }
 
-        var asLine = presetManager.matchTags(tagSuggestingArea, 'line');
-        var asArea = presetManager.matchTags(tagSuggestingArea, 'area');
+        const asLine = presetManager.matchTags(tagSuggestingArea, 'line');
+        const asArea = presetManager.matchTags(tagSuggestingArea, 'area');
         if (asLine && asArea && deepEqual(asLine.tags, asArea.tags)) {
             // this tag also allows lines and making this an area wouldn't matter
             return null;
@@ -48,8 +48,9 @@ export function validationMismatchedGeometry() {
         // must have at least three nodes to close this automatically
         if (way.nodes.length < 3) return null;
 
-        var nodes = graph.childNodes(way), testNodes;
-        var firstToLastDistanceMeters = geoSphericalDistance(nodes[0].loc, nodes[nodes.length-1].loc);
+        const nodes = graph.childNodes(way);
+        let testNodes;
+        const firstToLastDistanceMeters = geoSphericalDistance(nodes[0].loc, nodes[nodes.length-1].loc);
 
         // if the distance is very small, attempt to merge the endpoints
         if (firstToLastDistanceMeters < 0.75) {
@@ -59,7 +60,7 @@ export function validationMismatchedGeometry() {
             // make sure this will not create a self-intersection
             if (!geoHasSelfIntersections(testNodes, testNodes[0].id)) {
                 return function(context) {
-                    var way = context.entity(this.issue.entityIds[0]);
+                    const way = context.entity(this.issue.entityIds[0]);
                     context.perform(
                         actionMergeNodes([way.nodes[0], way.nodes[way.nodes.length-1]], nodes[0].loc),
                         t('issues.fix.connect_endpoints.annotation')
@@ -74,10 +75,10 @@ export function validationMismatchedGeometry() {
         // make sure this will not create a self-intersection
         if (!geoHasSelfIntersections(testNodes, testNodes[0].id)) {
             return function(context) {
-                var wayId = this.issue.entityIds[0];
-                var way = context.entity(wayId);
-                var nodeId = way.nodes[0];
-                var index = way.nodes.length;
+                const wayId = this.issue.entityIds[0];
+                const way = context.entity(wayId);
+                const nodeId = way.nodes[0];
+                const index = way.nodes.length;
                 context.perform(
                     actionAddVertex(wayId, nodeId, index),
                     t('issues.fix.connect_endpoints.annotation')
@@ -88,14 +89,14 @@ export function validationMismatchedGeometry() {
 
     function lineTaggedAsAreaIssue(entity) {
 
-        var tagSuggestingArea = tagSuggestingLineIsArea(entity);
+        const tagSuggestingArea = tagSuggestingLineIsArea(entity);
         if (!tagSuggestingArea) return null;
 
-        var validAsLine = false;
-        var presetAsLine = presetManager.matchTags(entity.tags, 'line');
+        let validAsLine = false;
+        const presetAsLine = presetManager.matchTags(entity.tags, 'line');
         if (presetAsLine) {
             validAsLine = true;
-            var key = Object.keys(tagSuggestingArea)[0];
+            const key = Object.keys(tagSuggestingArea)[0];
             if (presetAsLine.tags[key] && presetAsLine.tags[key] === '*') {
                 // only matches a fallback preset of the tag which is suggesting to be an area
                 validAsLine = false;
@@ -111,7 +112,7 @@ export function validationMismatchedGeometry() {
             subtype: 'area_as_line',
             severity: 'warning',
             message: function(context) {
-                var entity = context.hasEntity(this.entityIds[0]);
+                const entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.tag_suggests_area.message', {
                     feature: utilDisplayLabel(entity, 'area', true /* verbose */),
                     tag: utilTagText({ tags: tagSuggestingArea })
@@ -122,10 +123,10 @@ export function validationMismatchedGeometry() {
             hash: JSON.stringify(tagSuggestingArea),
             dynamicFixes: function(context) {
 
-                var fixes = [];
+                const fixes = [];
 
-                var entity = context.entity(this.entityIds[0]);
-                var connectEndsOnClick = makeConnectEndpointsFixOnClick(entity, context.graph());
+                const entity = context.entity(this.entityIds[0]);
+                const connectEndsOnClick = makeConnectEndpointsFixOnClick(entity, context.graph());
 
                 if (!validAsLine) {
                     // only suggest to "connect the ends" if the feature is not also valid as a line
@@ -139,10 +140,10 @@ export function validationMismatchedGeometry() {
                     icon: 'iD-operation-delete',
                     title: t.append('issues.fix.remove_tag.title'),
                     onClick: function(context) {
-                        var entityId = this.issue.entityIds[0];
-                        var entity = context.entity(entityId);
-                        var tags = Object.assign({}, entity.tags);  // shallow copy
-                        for (var key in tagSuggestingArea) {
+                        const entityId = this.issue.entityIds[0];
+                        const entity = context.entity(entityId);
+                        const tags = Object.assign({}, entity.tags);  // shallow copy
+                        for (const key in tagSuggestingArea) {
                             delete tags[key];
                         }
                         context.perform(
@@ -177,8 +178,8 @@ export function validationMismatchedGeometry() {
         // address lines are special so just ignore them
         if (entity.isOnAddressLine(graph)) return null;
 
-        var geometry = entity.geometry(graph);
-        var allowedGeometries = osmNodeGeometriesForTags(entity.tags);
+        const geometry = entity.geometry(graph);
+        const allowedGeometries = osmNodeGeometriesForTags(entity.tags);
 
         if (geometry === 'point' && !allowedGeometries.point && allowedGeometries.vertex) {
 
@@ -187,7 +188,7 @@ export function validationMismatchedGeometry() {
                 subtype: 'vertex_as_point',
                 severity: 'warning',
                 message: function(context) {
-                    var entity = context.hasEntity(this.entityIds[0]);
+                    const entity = context.hasEntity(this.entityIds[0]);
                     return entity ? t.append('issues.vertex_as_point.message', {
                         feature: utilDisplayLabel(entity, 'vertex', true /* verbose */)
                     }) : '';
@@ -210,7 +211,7 @@ export function validationMismatchedGeometry() {
                 subtype: 'point_as_vertex',
                 severity: 'warning',
                 message: function(context) {
-                    var entity = context.hasEntity(this.entityIds[0]);
+                    const entity = context.hasEntity(this.entityIds[0]);
                     return entity ? t.append('issues.point_as_vertex.message', {
                         feature: utilDisplayLabel(entity, 'point', true /* verbose */)
                     }) : '';
@@ -241,15 +242,15 @@ export function validationMismatchedGeometry() {
         // address lines are special so just ignore them
         if (entity.type === 'node' && entity.isOnAddressLine(graph)) return null;
 
-        var sourceGeom = entity.geometry(graph);
+        let sourceGeom = entity.geometry(graph);
 
-        var targetGeoms = entity.type === 'way' ? ['point', 'vertex'] : ['line', 'area'];
+        const targetGeoms = entity.type === 'way' ? ['point', 'vertex'] : ['line', 'area'];
 
         if (sourceGeom === 'area') targetGeoms.unshift('line');
 
-        var asSource = presetManager.match(entity, graph);
+        const asSource = presetManager.match(entity, graph);
 
-        var targetGeom = targetGeoms.find(nodeGeom => {
+        let targetGeom = targetGeoms.find(nodeGeom => {
             const asTarget = presetManager.matchTags(
                 entity.tags,
                 nodeGeom,
@@ -262,7 +263,7 @@ export function validationMismatchedGeometry() {
 
             if (asTarget.isFallback()) return false;
 
-            var primaryKey = Object.keys(asTarget.tags)[0];
+            const primaryKey = Object.keys(asTarget.tags)[0];
 
             // special case: buildings-as-points are discouraged by iD, but common in OSM, so ignore them
             if (primaryKey === 'building') return false;
@@ -274,14 +275,14 @@ export function validationMismatchedGeometry() {
 
         if (!targetGeom) return null;
 
-        var subtype = targetGeom + '_as_' + sourceGeom;
+        const subtype = targetGeom + '_as_' + sourceGeom;
 
         if (targetGeom === 'vertex') targetGeom = 'point';
         if (sourceGeom === 'vertex') sourceGeom = 'point';
 
-        var referenceId = targetGeom + '_as_' + sourceGeom;
+        const referenceId = targetGeom + '_as_' + sourceGeom;
 
-        var dynamicFixes;
+        let dynamicFixes;
         if (targetGeom === 'point') {
             dynamicFixes = extractPointDynamicFixes;
 
@@ -294,7 +295,7 @@ export function validationMismatchedGeometry() {
             subtype: subtype,
             severity: 'warning',
             message: function(context) {
-                var entity = context.hasEntity(this.entityIds[0]);
+                const entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.' + referenceId + '.message', {
                     feature: utilDisplayLabel(entity, targetGeom, true /* verbose */)
                 }) : '';
@@ -314,18 +315,18 @@ export function validationMismatchedGeometry() {
 
     function lineToAreaDynamicFixes(context) {
 
-        var convertOnClick;
+        let convertOnClick;
 
-        var entityId = this.entityIds[0];
-        var entity = context.entity(entityId);
-        var tags = Object.assign({}, entity.tags);  // shallow copy
+        const entityId = this.entityIds[0];
+        const entity = context.entity(entityId);
+        const tags = Object.assign({}, entity.tags);  // shallow copy
         delete tags.area;
         if (!osmTagSuggestingArea(tags)) {
             // if removing the area tag would make this a line, offer that as a quick fix
             convertOnClick = function(context) {
-                var entityId = this.issue.entityIds[0];
-                var entity = context.entity(entityId);
-                var tags = Object.assign({}, entity.tags);  // shallow copy
+                const entityId = this.issue.entityIds[0];
+                const entity = context.entity(entityId);
+                const tags = Object.assign({}, entity.tags);  // shallow copy
                 if (tags.area) {
                     delete tags.area;
                 }
@@ -347,14 +348,14 @@ export function validationMismatchedGeometry() {
 
     function extractPointDynamicFixes(context) {
 
-        var entityId = this.entityIds[0];
+        const entityId = this.entityIds[0];
 
-        var extractOnClick = null;
+        let extractOnClick = null;
         if (!context.hasHiddenConnections(entityId)) {
 
             extractOnClick = function(context) {
-                var entityId = this.issue.entityIds[0];
-                var action = actionExtract(entityId, context.projection);
+                const entityId = this.issue.entityIds[0];
+                const action = actionExtract(entityId, context.projection);
                 context.perform(
                     action,
                     t('operations.extract.annotation', { n: 1 })
@@ -381,27 +382,27 @@ export function validationMismatchedGeometry() {
             // cannot determine issues for incompletely-downloaded relations
             !entity.isComplete(graph)) return [];
 
-        var sequences = osmJoinWays(entity.members, graph);
+        const sequences = osmJoinWays(entity.members, graph);
 
-        var issues = [];
+        const issues = [];
 
-        for (var i in sequences) {
-            var sequence = sequences[i];
+        for (const i in sequences) {
+            const sequence = sequences[i];
 
             if (!sequence.nodes) continue;
 
-            var firstNode = sequence.nodes[0];
-            var lastNode = sequence.nodes[sequence.nodes.length - 1];
+            const firstNode = sequence.nodes[0];
+            const lastNode = sequence.nodes[sequence.nodes.length - 1];
 
             // part is closed if the first and last nodes are the same
             if (firstNode === lastNode) continue;
 
-            var issue = new validationIssue({
+            const issue = new validationIssue({
                 type: type,
                 subtype: 'unclosed_multipolygon_part',
                 severity: 'warning',
                 message: function(context) {
-                    var entity = context.hasEntity(this.entityIds[0]);
+                    const entity = context.hasEntity(this.entityIds[0]);
                     return entity ? t.append('issues.unclosed_multipolygon_part.message', {
                         feature: utilDisplayLabel(entity, context.graph(), true /* verbose */)
                     }) : '';
@@ -428,14 +429,14 @@ export function validationMismatchedGeometry() {
         }
     }
 
-    var validation = function checkMismatchedGeometry(entity, graph) {
-        var vertexPoint = vertexPointIssue(entity, graph);
+    const validation = function checkMismatchedGeometry(entity, graph) {
+        const vertexPoint = vertexPointIssue(entity, graph);
         if (vertexPoint) return [vertexPoint];
 
-        var lineAsArea = lineTaggedAsAreaIssue(entity);
+        const lineAsArea = lineTaggedAsAreaIssue(entity);
         if (lineAsArea) return [lineAsArea];
 
-        var mismatch = otherMismatchIssue(entity, graph);
+        const mismatch = otherMismatchIssue(entity, graph);
         if (mismatch) return [mismatch];
 
         return unclosedMultipolygonPartIssues(entity, graph);

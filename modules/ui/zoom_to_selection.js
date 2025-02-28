@@ -5,11 +5,11 @@ import { svgIcon } from '../svg/icon';
 export function uiZoomToSelection(context) {
 
     function isDisabled() {
-        var mode = context.mode();
+        const mode = context.mode();
         return !mode || !mode.zoomToSelected;
     }
 
-    var _lastPointerUpType;
+    let _lastPointerUpType;
 
     function pointerup(d3_event) {
         _lastPointerUpType = d3_event.pointerType;
@@ -27,7 +27,7 @@ export function uiZoomToSelection(context) {
                     .label(t.append('inspector.zoom_to.no_selection'))();
             }
         } else {
-            var mode = context.mode();
+            const mode = context.mode();
             if (mode && mode.zoomToSelected) {
                 mode.zoomToSelected();
             }
@@ -38,7 +38,7 @@ export function uiZoomToSelection(context) {
 
     return function(selection) {
 
-        var tooltipBehavior = uiTooltip()
+        const tooltipBehavior = uiTooltip()
             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             .title(function() {
                 if (isDisabled()) {
@@ -48,7 +48,7 @@ export function uiZoomToSelection(context) {
             })
             .keys([t('inspector.zoom_to.key')]);
 
-        var button = selection
+        const button = selection
             .append('button')
             .on('pointerup', pointerup)
             .on('click', click)

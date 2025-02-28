@@ -2,16 +2,16 @@ import { services } from '../services';
 
 
 export function validationMaprules() {
-    var type = 'maprules';
+    const type = 'maprules';
 
-    var validation = function checkMaprules(entity, graph) {
+    const validation = function checkMaprules(entity, graph) {
         if (!services.maprules) return [];
 
-        var rules = services.maprules.validationRules();
-        var issues = [];
+        const rules = services.maprules.validationRules();
+        const issues = [];
 
-        for (var i = 0; i < rules.length; i++) {
-            var rule = rules[i];
+        for (let i = 0; i < rules.length; i++) {
+            const rule = rules[i];
             rule.findIssues(entity, graph, issues);
         }
 

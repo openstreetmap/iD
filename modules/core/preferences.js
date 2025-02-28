@@ -4,7 +4,7 @@
 let _storage;
 try { _storage = localStorage; } catch {}  // eslint-disable-line no-empty
 _storage = _storage || (() => {
-  let s = {};
+  const s = {};
   return {
     getItem: (k) => s[k],
     setItem: (k, v) => s[k] = v,

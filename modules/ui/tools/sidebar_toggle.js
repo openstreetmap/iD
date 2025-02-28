@@ -4,7 +4,7 @@ import { uiTooltip } from '../tooltip';
 
 export function uiToolSidebarToggle(context) {
 
-    var tool = {
+    const tool = {
         id: 'sidebar_toggle',
         label: t.append('toolbar.inspect')
     };

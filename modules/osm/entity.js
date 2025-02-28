@@ -36,7 +36,7 @@ osmEntity.id.fromOSM = function(type, id) {
 
 
 osmEntity.id.toOSM = function(id) {
-    var match = id.match(/^[cnwr](-?\d+)$/);
+    const match = id.match(/^[cnwr](-?\d+)$/);
     if (match) {
         return match[1];
     }
@@ -54,16 +54,16 @@ osmEntity.key = function(entity) {
     return entity.id + 'v' + (entity.v || 0);
 };
 
-var _deprecatedTagValuesByKey;
+let _deprecatedTagValuesByKey;
 
 osmEntity.deprecatedTagValuesByKey = function(dataDeprecated) {
     if (!_deprecatedTagValuesByKey) {
         _deprecatedTagValuesByKey = {};
         dataDeprecated.forEach(function(d) {
-            var oldKeys = Object.keys(d.old);
+            const oldKeys = Object.keys(d.old);
             if (oldKeys.length === 1) {
-                var oldKey = oldKeys[0];
-                var oldValue = d.old[oldKey];
+                const oldKey = oldKeys[0];
+                const oldValue = d.old[oldKey];
                 if (oldValue !== '*') {
                     if (!_deprecatedTagValuesByKey[oldKey]) {
                         _deprecatedTagValuesByKey[oldKey] = [oldValue];
@@ -85,9 +85,9 @@ osmEntity.prototype = {
 
 
     initialize: function(sources) {
-        for (var i = 0; i < sources.length; ++i) {
-            var source = sources[i];
-            for (var prop in source) {
+        for (let i = 0; i < sources.length; ++i) {
+            const source = sources[i];
+            for (const prop in source) {
                 if (Object.prototype.hasOwnProperty.call(source, prop)) {
                     if (source[prop] === undefined) {
                         delete this[prop];
@@ -121,7 +121,7 @@ osmEntity.prototype = {
     copy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
 
-        var copy = osmEntity(this, { id: undefined, user: undefined, version: undefined });
+        const copy = osmEntity(this, { id: undefined, user: undefined, version: undefined });
         copies[this.id] = copy;
 
         return copy;
@@ -134,7 +134,7 @@ osmEntity.prototype = {
 
 
     isNew: function() {
-        var osmId = osmEntity.id.toOSM(this.id);
+        const osmId = osmEntity.id.toOSM(this.id);
         return osmId.length === 0 || osmId[0] === '-';
     },
 
@@ -145,11 +145,11 @@ osmEntity.prototype = {
 
 
     mergeTags: function(tags) {
-        var merged = Object.assign({}, this.tags);   // shallow copy
-        var changed = false;
-        for (var k in tags) {
-            var t1 = merged[k];
-            var t2 = tags[k];
+        const merged = Object.assign({}, this.tags);   // shallow copy
+        let changed = false;
+        for (const k in tags) {
+            const t1 = merged[k];
+            const t2 = tags[k];
             if (!t1) {
                 changed = true;
                 merged[k] = t2;
@@ -191,18 +191,18 @@ osmEntity.prototype = {
     },
 
     deprecatedTags: function(dataDeprecated) {
-        var tags = this.tags;
+        const tags = this.tags;
 
         // if there are no tags, none can be deprecated
         if (Object.keys(tags).length === 0) return [];
 
-        var deprecated = [];
+        const deprecated = [];
         dataDeprecated.forEach(function(d) {
-            var oldKeys = Object.keys(d.old);
+            const oldKeys = Object.keys(d.old);
             if (d.replace) {
-                var hasExistingValues = Object.keys(d.replace).some(function(replaceKey) {
+                const hasExistingValues = Object.keys(d.replace).some(function(replaceKey) {
                     if (!tags[replaceKey] || d.old[replaceKey]) return false;
-                    var replaceValue = d.replace[replaceKey];
+                    const replaceValue = d.replace[replaceKey];
                     if (replaceValue === '*') return false;
                     if (replaceValue === tags[replaceKey]) return false;
                     return true;
@@ -210,12 +210,12 @@ osmEntity.prototype = {
                 // don't flag deprecated tags if the upgrade path would overwrite existing data - #7843
                 if (hasExistingValues) return;
             }
-            var matchesDeprecatedTags = oldKeys.every(function(oldKey) {
+            const matchesDeprecatedTags = oldKeys.every(function(oldKey) {
                 if (!tags[oldKey]) return false;
                 if (d.old[oldKey] === '*') return true;
                 if (d.old[oldKey] === tags[oldKey]) return true;
 
-                var vals = tags[oldKey].split(';').filter(Boolean);
+                const vals = tags[oldKey].split(';').filter(Boolean);
                 if (vals.length === 0) {
                     return false;
                 } else if (vals.length > 1) {
@@ -223,7 +223,7 @@ osmEntity.prototype = {
                 } else {
                     if (tags[oldKey] === d.old[oldKey]) {
                         if (d.replace && d.old[oldKey] === d.replace[oldKey]) {
-                            var replaceKeys = Object.keys(d.replace);
+                            const replaceKeys = Object.keys(d.replace);
                             return !replaceKeys.every(function(replaceKey) {
                                 return tags[replaceKey] === d.replace[replaceKey];
                             });

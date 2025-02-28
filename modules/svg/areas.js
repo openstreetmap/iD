@@ -10,7 +10,7 @@ export function svgAreas(projection, context) {
 
 
     function getPatternStyle(tags) {
-        var imageID = svgTagPattern(tags);
+        const imageID = svgTagPattern(tags);
         if (imageID) {
             return 'url("#ideditor-' + imageID + '")';
         }
@@ -19,25 +19,25 @@ export function svgAreas(projection, context) {
 
 
     function drawTargets(selection, graph, entities, filter) {
-        var targetClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
-        var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
-        var getPath = svgPath(projection).geojson;
-        var activeID = context.activeID();
-        var base = context.history().base();
+        const targetClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        const nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
+        const getPath = svgPath(projection).geojson;
+        const activeID = context.activeID();
+        const base = context.history().base();
 
         // The targets and nopes will be MultiLineString sub-segments of the ways
-        var data = { targets: [], nopes: [] };
+        const data = { targets: [], nopes: [] };
 
         entities.forEach(function(way) {
-            var features = svgSegmentWay(way, graph, activeID);
+            const features = svgSegmentWay(way, graph, activeID);
             data.targets.push.apply(data.targets, features.passive);
             data.nopes.push.apply(data.nopes, features.active);
         });
 
 
         // Targets allow hover and vertex snapping
-        var targetData = data.targets.filter(getPath);
-        var targets = selection.selectAll('.area.target-allowed')
+        const targetData = data.targets.filter(getPath);
+        const targets = selection.selectAll('.area.target-allowed')
             .filter(function(d) { return filter(d.properties.entity); })
             .data(targetData, function key(d) { return d.id; });
 
@@ -45,8 +45,8 @@ export function svgAreas(projection, context) {
         targets.exit()
             .remove();
 
-        var segmentWasEdited = function(d) {
-            var wayID = d.properties.entity.id;
+        const segmentWasEdited = function(d) {
+            const wayID = d.properties.entity.id;
             // if the whole line was edited, don't draw segment changes
             if (!base.entities[wayID] ||
                 !deepEqual(graph.entities[wayID].nodes, base.entities[wayID].nodes)) {
@@ -68,8 +68,8 @@ export function svgAreas(projection, context) {
 
 
         // NOPE
-        var nopeData = data.nopes.filter(getPath);
-        var nopes = selection.selectAll('.area.target-nope')
+        const nopeData = data.nopes.filter(getPath);
+        const nopes = selection.selectAll('.area.target-nope')
             .filter(function(d) { return filter(d.properties.entity); })
             .data(nopeData, function key(d) { return d.id; });
 
@@ -88,12 +88,12 @@ export function svgAreas(projection, context) {
 
 
     function drawAreas(selection, graph, entities, filter) {
-        var path = svgPath(projection, graph, true);
-        var areas = {};
-        var base = context.history().base();
+        const path = svgPath(projection, graph, true);
+        const areas = {};
+        const base = context.history().base();
 
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
+        for (let i = 0; i < entities.length; i++) {
+            const entity = entities[i];
             if (entity.geometry(graph) !== 'area') continue;
             if (!areas[entity.id]) {
                 areas[entity.id] = {
@@ -103,27 +103,27 @@ export function svgAreas(projection, context) {
             }
         }
 
-        var fills = Object.values(areas).filter(function hasPath(a) { return path(a.entity); });
+        let fills = Object.values(areas).filter(function hasPath(a) { return path(a.entity); });
         fills.sort(function areaSort(a, b) { return b.area - a.area; });
         fills = fills.map(function(a) { return a.entity; });
 
-        var strokes = fills.filter(function(area) { return area.type === 'way'; });
+        const strokes = fills.filter(function(area) { return area.type === 'way'; });
 
-        var data = {
+        const data = {
             clip: fills,
             shadow: strokes,
             stroke: strokes,
             fill: fills
         };
 
-        var clipPaths = context.surface().selectAll('defs').selectAll('.clipPath-osm')
+        const clipPaths = context.surface().selectAll('defs').selectAll('.clipPath-osm')
            .filter(filter)
            .data(data.clip, osmEntity.key);
 
         clipPaths.exit()
            .remove();
 
-        var clipPathsEnter = clipPaths.enter()
+        const clipPathsEnter = clipPaths.enter()
            .append('clipPath')
            .attr('class', 'clipPath-osm')
            .attr('id', function(entity) { return 'ideditor-' + entity.id + '-clippath'; });
@@ -136,11 +136,11 @@ export function svgAreas(projection, context) {
            .attr('d', path);
 
 
-        var drawLayer = selection.selectAll('.layer-osm.areas');
-        var touchLayer = selection.selectAll('.layer-touch.areas');
+        const drawLayer = selection.selectAll('.layer-osm.areas');
+        const touchLayer = selection.selectAll('.layer-touch.areas');
 
         // Draw areas..
-        var areagroup = drawLayer
+        let areagroup = drawLayer
             .selectAll('g.areagroup')
             .data(['fill', 'shadow', 'stroke']);
 
@@ -149,7 +149,7 @@ export function svgAreas(projection, context) {
             .attr('class', function(d) { return 'areagroup area-' + d; })
             .merge(areagroup);
 
-        var paths = areagroup
+        let paths = areagroup
             .selectAll('path')
             .filter(filter)
             .data(function(layer) { return data[layer]; }, osmEntity.key);
@@ -158,8 +158,8 @@ export function svgAreas(projection, context) {
             .remove();
 
 
-        var fillpaths = selection.selectAll('.area-fill path.area').nodes();
-        var bisect = d3_bisector(function(node) { return -node.__data__.area(graph); }).left;
+        const fillpaths = selection.selectAll('.area-fill path.area').nodes();
+        const bisect = d3_bisector(function(node) { return -node.__data__.area(graph); }).left;
 
         function sortedByArea(entity) {
             if (this._parent.__data__ === 'fill') {
@@ -171,7 +171,7 @@ export function svgAreas(projection, context) {
             .insert('path', sortedByArea)
             .merge(paths)
             .each(function(entity) {
-                var layer = this.parentNode.__data__;
+                const layer = this.parentNode.__data__;
                 this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
 
                 if (layer === 'fill') {

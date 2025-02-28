@@ -1,5 +1,5 @@
 export function svgOsm(projection, context, dispatch) {
-    var enabled = true;
+    let enabled = true;
 
 
     function drawOsm(selection) {
@@ -18,7 +18,7 @@ export function svgOsm(projection, context, dispatch) {
 
 
     function showLayer() {
-        var layer = context.surface().selectAll('.data-layer.osm');
+        const layer = context.surface().selectAll('.data-layer.osm');
         layer.interrupt();
 
         layer
@@ -34,7 +34,7 @@ export function svgOsm(projection, context, dispatch) {
 
 
     function hideLayer() {
-        var layer = context.surface().selectAll('.data-layer.osm');
+        const layer = context.surface().selectAll('.data-layer.osm');
         layer.interrupt();
 
         layer

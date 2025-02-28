@@ -4,21 +4,21 @@
 
 // This accepts a string and returns an object that complies with utilSessionMutexType
 export function utilSessionMutex(name) {
-    var mutex = {};
-    var intervalID;
+    const mutex = {};
+    let intervalID;
 
     function renew() {
         // in unit tests, we need to abort if the test has already completed
         if (typeof window === 'undefined') return;
 
-        var expires = new Date();
+        const expires = new Date();
         expires.setSeconds(expires.getSeconds() + 5);
         document.cookie = name + '=1; expires=' + expires.toUTCString() + '; sameSite=strict';
     }
 
     mutex.lock = function () {
         if (intervalID) return true;
-        var cookie = document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + name + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1');
+        const cookie = document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + name + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1');
         if (cookie) return false;
         renew();
         intervalID = window.setInterval(renew, 4000);

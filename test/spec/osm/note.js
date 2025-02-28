@@ -18,14 +18,14 @@ describe('iD.osmNote', function () {
 
     describe('#isNew', function() {
         it('returns true if a note is new', function() {
-            var note = iD.osmNote({
+            const note = iD.osmNote({
                 id: -1,
                 loc: [5, 10]
             });
             expect(note.isNew()).to.be.true;
         });
         it('returns false if a note is not new', function() {
-            var note = iD.osmNote({
+            const note = iD.osmNote({
                 id: 1,
                 loc: [5, 10]
             });
@@ -35,7 +35,7 @@ describe('iD.osmNote', function () {
 
     describe('#move', function() {
         it('returns an moved note', function() {
-            var note = iD.osmNote({
+            let note = iD.osmNote({
                 id: 1,
                 loc: [5, 5]
             });

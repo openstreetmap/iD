@@ -7,24 +7,24 @@ import { services } from '../services';
 
 
 export function modeAddNote(context) {
-    var mode = {
+    const mode = {
         id: 'add-note',
         button: 'note',
         description: t.append('modes.add_note.description'),
         key: t('modes.add_note.key')
     };
 
-    var behavior = behaviorDraw(context)
+    const behavior = behaviorDraw(context)
         .on('click', add)
         .on('cancel', cancel)
         .on('finish', cancel);
 
 
     function add(loc) {
-        var osm = services.osm;
+        const osm = services.osm;
         if (!osm) return;
 
-        var note = osmNote({ loc: loc, status: 'open', comments: [] });
+        const note = osmNote({ loc: loc, status: 'open', comments: [] });
         osm.replaceNote(note);
 
         // force a reraw (there is no history change that would otherwise do this)

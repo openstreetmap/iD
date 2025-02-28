@@ -30,14 +30,14 @@ describe('iD.osmNode', function () {
 
     describe('#geometry', function () {
         it('returns \'vertex\' if the node is a member of any way', function () {
-            var node = iD.osmNode(),
+            const node = iD.osmNode(),
                 way  = iD.osmWay({nodes: [node.id]}),
                 graph = iD.coreGraph([node, way]);
             expect(node.geometry(graph)).to.equal('vertex');
         });
 
         it('returns \'point\' if the node is not a member of any way', function () {
-            var node = iD.osmNode(),
+            const node = iD.osmNode(),
                 graph = iD.coreGraph([node]);
             expect(node.geometry(graph)).to.equal('point');
         });
@@ -45,7 +45,7 @@ describe('iD.osmNode', function () {
 
     describe('#isEndpoint', function () {
         it('returns true for a node at an endpoint along a linear way', function () {
-            var a = iD.osmNode({id: 'a'}),
+            const a = iD.osmNode({id: 'a'}),
                 b = iD.osmNode({id: 'b'}),
                 c = iD.osmNode({id: 'c'}),
                 w = iD.osmWay({nodes: ['a', 'b', 'c']}),
@@ -56,7 +56,7 @@ describe('iD.osmNode', function () {
         });
 
         it('returns false for nodes along a circular way', function () {
-            var a = iD.osmNode({id: 'a'}),
+            const a = iD.osmNode({id: 'a'}),
                 b = iD.osmNode({id: 'b'}),
                 c = iD.osmNode({id: 'c'}),
                 w = iD.osmWay({nodes: ['a', 'b', 'c', 'a']}),
@@ -69,7 +69,7 @@ describe('iD.osmNode', function () {
 
     describe('#isConnected', function () {
         it('returns true for a node with multiple parent ways, at least one interesting', function () {
-            var node = iD.osmNode(),
+            const node = iD.osmNode(),
                 w1 = iD.osmWay({nodes: [node.id]}),
                 w2 = iD.osmWay({nodes: [node.id], tags: { highway: 'residential' }}),
                 graph = iD.coreGraph([node, w1, w2]);
@@ -77,7 +77,7 @@ describe('iD.osmNode', function () {
         });
 
         it('returns false for a node with only area parent ways', function () {
-            var node = iD.osmNode(),
+            const node = iD.osmNode(),
                 w1 = iD.osmWay({nodes: [node.id], tags: { area: 'yes' }}),
                 w2 = iD.osmWay({nodes: [node.id], tags: { area: 'yes' }}),
                 graph = iD.coreGraph([node, w1, w2]);
@@ -85,7 +85,7 @@ describe('iD.osmNode', function () {
         });
 
         it('returns false for a node with only uninteresting parent ways', function () {
-            var node = iD.osmNode(),
+            const node = iD.osmNode(),
                 w1 = iD.osmWay({nodes: [node.id]}),
                 w2 = iD.osmWay({nodes: [node.id]}),
                 graph = iD.coreGraph([node, w1, w2]);
@@ -93,14 +93,14 @@ describe('iD.osmNode', function () {
         });
 
         it('returns false for a standalone node on a single parent way', function () {
-            var node = iD.osmNode(),
+            const node = iD.osmNode(),
                 way = iD.osmWay({nodes: [node.id]}),
                 graph = iD.coreGraph([node, way]);
             expect(node.isConnected(graph)).to.equal(false);
         });
 
         it('returns true for a self-intersecting node on a single parent way', function () {
-            var a = iD.osmNode({id: 'a'}),
+            const a = iD.osmNode({id: 'a'}),
                 b = iD.osmNode({id: 'b'}),
                 c = iD.osmNode({id: 'c'}),
                 w = iD.osmWay({nodes: ['a', 'b', 'c', 'b']}),
@@ -109,7 +109,7 @@ describe('iD.osmNode', function () {
         });
 
         it('returns false for the connecting node of a closed way', function () {
-            var a = iD.osmNode({id: 'a'}),
+            const a = iD.osmNode({id: 'a'}),
                 b = iD.osmNode({id: 'b'}),
                 c = iD.osmNode({id: 'c'}),
                 w = iD.osmWay({nodes: ['a', 'b', 'c', 'a']}),
@@ -120,7 +120,7 @@ describe('iD.osmNode', function () {
 
     describe('#isIntersection', function () {
         it('returns true for a node shared by more than one highway', function () {
-            var node = iD.osmNode(),
+            const node = iD.osmNode(),
                 w1 = iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}}),
                 w2 = iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}}),
                 graph = iD.coreGraph([node, w1, w2]);
@@ -128,7 +128,7 @@ describe('iD.osmNode', function () {
         });
 
         it('returns true for a node shared by more than one waterway', function () {
-            var node = iD.osmNode(),
+            const node = iD.osmNode(),
                 w1 = iD.osmWay({nodes: [node.id], tags: {waterway: 'river'}}),
                 w2 = iD.osmWay({nodes: [node.id], tags: {waterway: 'river'}}),
                 graph = iD.coreGraph([node, w1, w2]);
@@ -138,7 +138,7 @@ describe('iD.osmNode', function () {
 
     describe('#isHighwayIntersection', function () {
         it('returns true for a node shared by more than one highway', function () {
-            var node = iD.osmNode(),
+            const node = iD.osmNode(),
                 w1 = iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}}),
                 w2 = iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}}),
                 graph = iD.coreGraph([node, w1, w2]);
@@ -146,7 +146,7 @@ describe('iD.osmNode', function () {
         });
 
         it('returns false for a node shared by more than one waterway', function () {
-            var node = iD.osmNode(),
+            const node = iD.osmNode(),
                 w1 = iD.osmWay({nodes: [node.id], tags: {waterway: 'river'}}),
                 w2 = iD.osmWay({nodes: [node.id], tags: {waterway: 'river'}}),
                 graph = iD.coreGraph([node, w1, w2]);
@@ -181,19 +181,19 @@ describe('iD.osmNode', function () {
     });
 
     describe('#directions', function () {
-        var projection = function (_) { return _; };
+        const projection = function (_) { return _; };
         it('returns empty array if no direction tag', function () {
-            var node1 = iD.osmNode({ loc: [0, 0], tags: {}});
-            var graph = iD.coreGraph([node1]);
+            const node1 = iD.osmNode({ loc: [0, 0], tags: {}});
+            const graph = iD.coreGraph([node1]);
             expect(node1.directions(graph, projection)).to.eql([], 'no direction tag');
         });
 
         it('returns empty array if nonsense direction tag', function () {
-            var node1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'blah' }});
-            var node2 = iD.osmNode({ loc: [0, 0], tags: { direction: '' }});
-            var node3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'NaN' }});
-            var node4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'eastwest' }});
-            var graph = iD.coreGraph([node1, node2, node3, node4]);
+            const node1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'blah' }});
+            const node2 = iD.osmNode({ loc: [0, 0], tags: { direction: '' }});
+            const node3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'NaN' }});
+            const node4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'eastwest' }});
+            const graph = iD.coreGraph([node1, node2, node3, node4]);
 
             expect(node1.directions(graph, projection)).to.eql([], 'nonsense direction tag');
             expect(node2.directions(graph, projection)).to.eql([], 'empty string direction tag');
@@ -202,12 +202,12 @@ describe('iD.osmNode', function () {
         });
 
         it('supports numeric direction tag', function () {
-            var node1 = iD.osmNode({ loc: [0, 0], tags: { direction: '0' }});
-            var node2 = iD.osmNode({ loc: [0, 0], tags: { direction: '45' }});
-            var node3 = iD.osmNode({ loc: [0, 0], tags: { direction: '-45' }});
-            var node4 = iD.osmNode({ loc: [0, 0], tags: { direction: '360' }});
-            var node5 = iD.osmNode({ loc: [0, 0], tags: { direction: '1000' }});
-            var graph = iD.coreGraph([node1, node2, node3, node4, node5]);
+            const node1 = iD.osmNode({ loc: [0, 0], tags: { direction: '0' }});
+            const node2 = iD.osmNode({ loc: [0, 0], tags: { direction: '45' }});
+            const node3 = iD.osmNode({ loc: [0, 0], tags: { direction: '-45' }});
+            const node4 = iD.osmNode({ loc: [0, 0], tags: { direction: '360' }});
+            const node5 = iD.osmNode({ loc: [0, 0], tags: { direction: '1000' }});
+            const graph = iD.coreGraph([node1, node2, node3, node4, node5]);
 
             expect(node1.directions(graph, projection)).to.eql([0], 'numeric 0');
             expect(node2.directions(graph, projection)).to.eql([45], 'numeric 45');
@@ -217,87 +217,87 @@ describe('iD.osmNode', function () {
         });
 
         it('supports cardinal direction tags (test abbreviated and mixed case)', function () {
-            var nodeN1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'n' }});
-            var nodeN2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'N' }});
-            var nodeN3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'north' }});
-            var nodeN4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'NOrth' }});
+            const nodeN1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'n' }});
+            const nodeN2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'N' }});
+            const nodeN3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'north' }});
+            const nodeN4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'NOrth' }});
 
-            var nodeNNE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'nne' }});
-            var nodeNNE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'NnE' }});
-            var nodeNNE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'northnortheast' }});
-            var nodeNNE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'NOrthnorTHEast' }});
+            const nodeNNE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'nne' }});
+            const nodeNNE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'NnE' }});
+            const nodeNNE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'northnortheast' }});
+            const nodeNNE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'NOrthnorTHEast' }});
 
-            var nodeNE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'ne' }});
-            var nodeNE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'nE' }});
-            var nodeNE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'northeast' }});
-            var nodeNE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'norTHEast' }});
+            const nodeNE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'ne' }});
+            const nodeNE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'nE' }});
+            const nodeNE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'northeast' }});
+            const nodeNE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'norTHEast' }});
 
-            var nodeENE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'ene' }});
-            var nodeENE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'EnE' }});
-            var nodeENE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'eastnortheast' }});
-            var nodeENE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'EAstnorTHEast' }});
+            const nodeENE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'ene' }});
+            const nodeENE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'EnE' }});
+            const nodeENE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'eastnortheast' }});
+            const nodeENE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'EAstnorTHEast' }});
 
-            var nodeE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'e' }});
-            var nodeE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'E' }});
-            var nodeE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'east' }});
-            var nodeE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'EAst' }});
+            const nodeE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'e' }});
+            const nodeE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'E' }});
+            const nodeE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'east' }});
+            const nodeE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'EAst' }});
 
-            var nodeESE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'ese' }});
-            var nodeESE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'EsE' }});
-            var nodeESE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'eastsoutheast' }});
-            var nodeESE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'EAstsouTHEast' }});
+            const nodeESE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'ese' }});
+            const nodeESE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'EsE' }});
+            const nodeESE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'eastsoutheast' }});
+            const nodeESE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'EAstsouTHEast' }});
 
-            var nodeSE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'se' }});
-            var nodeSE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'sE' }});
-            var nodeSE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'southeast' }});
-            var nodeSE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'souTHEast' }});
+            const nodeSE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'se' }});
+            const nodeSE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'sE' }});
+            const nodeSE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'southeast' }});
+            const nodeSE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'souTHEast' }});
 
-            var nodeSSE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'sse' }});
-            var nodeSSE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'SsE' }});
-            var nodeSSE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'southsoutheast' }});
-            var nodeSSE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'SOuthsouTHEast' }});
+            const nodeSSE1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'sse' }});
+            const nodeSSE2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'SsE' }});
+            const nodeSSE3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'southsoutheast' }});
+            const nodeSSE4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'SOuthsouTHEast' }});
 
-            var nodeS1 = iD.osmNode({ loc: [0, 0], tags: { direction: 's' }});
-            var nodeS2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'S' }});
-            var nodeS3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'south' }});
-            var nodeS4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'SOuth' }});
+            const nodeS1 = iD.osmNode({ loc: [0, 0], tags: { direction: 's' }});
+            const nodeS2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'S' }});
+            const nodeS3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'south' }});
+            const nodeS4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'SOuth' }});
 
-            var nodeSSW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'ssw' }});
-            var nodeSSW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'SsW' }});
-            var nodeSSW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'southsouthwest' }});
-            var nodeSSW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'SOuthsouTHWest' }});
+            const nodeSSW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'ssw' }});
+            const nodeSSW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'SsW' }});
+            const nodeSSW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'southsouthwest' }});
+            const nodeSSW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'SOuthsouTHWest' }});
 
-            var nodeSW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'sw' }});
-            var nodeSW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'sW' }});
-            var nodeSW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'southwest' }});
-            var nodeSW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'souTHWest' }});
+            const nodeSW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'sw' }});
+            const nodeSW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'sW' }});
+            const nodeSW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'southwest' }});
+            const nodeSW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'souTHWest' }});
 
-            var nodeWSW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'wsw' }});
-            var nodeWSW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'WsW' }});
-            var nodeWSW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'westsouthwest' }});
-            var nodeWSW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'WEstsouTHWest' }});
+            const nodeWSW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'wsw' }});
+            const nodeWSW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'WsW' }});
+            const nodeWSW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'westsouthwest' }});
+            const nodeWSW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'WEstsouTHWest' }});
 
-            var nodeW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'w' }});
-            var nodeW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'W' }});
-            var nodeW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'west' }});
-            var nodeW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'WEst' }});
+            const nodeW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'w' }});
+            const nodeW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'W' }});
+            const nodeW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'west' }});
+            const nodeW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'WEst' }});
 
-            var nodeWNW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'wnw' }});
-            var nodeWNW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'WnW' }});
-            var nodeWNW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'westnorthwest' }});
-            var nodeWNW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'WEstnorTHWest' }});
+            const nodeWNW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'wnw' }});
+            const nodeWNW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'WnW' }});
+            const nodeWNW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'westnorthwest' }});
+            const nodeWNW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'WEstnorTHWest' }});
 
-            var nodeNW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'nw' }});
-            var nodeNW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'nW' }});
-            var nodeNW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'northwest' }});
-            var nodeNW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'norTHWest' }});
+            const nodeNW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'nw' }});
+            const nodeNW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'nW' }});
+            const nodeNW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'northwest' }});
+            const nodeNW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'norTHWest' }});
 
-            var nodeNNW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'nnw' }});
-            var nodeNNW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'NnW' }});
-            var nodeNNW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'northnorthwest' }});
-            var nodeNNW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'NOrthnorTHWest' }});
+            const nodeNNW1 = iD.osmNode({ loc: [0, 0], tags: { direction: 'nnw' }});
+            const nodeNNW2 = iD.osmNode({ loc: [0, 0], tags: { direction: 'NnW' }});
+            const nodeNNW3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'northnorthwest' }});
+            const nodeNNW4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'NOrthnorTHWest' }});
 
-            var graph = iD.coreGraph([
+            const graph = iD.coreGraph([
                 nodeN1, nodeN2, nodeN3, nodeN4,
                 nodeNNE1, nodeNNE2, nodeNNE3, nodeNNE4,
                 nodeNE1, nodeNE2, nodeNE3, nodeNE4,
@@ -398,180 +398,180 @@ describe('iD.osmNode', function () {
         });
 
         it('supports direction=forward', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'direction': 'forward' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'direction': 'forward' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.eql([270]);
         });
 
         it('supports direction=backward', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'direction': 'backward' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'direction': 'backward' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.eql([90]);
         });
 
         it('supports direction=both', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'direction': 'both' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'direction': 'both' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.have.members([90, 270]);
         });
 
         it('supports direction=all', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'direction': 'all' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'direction': 'all' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.have.members([90, 270]);
         });
 
         it('supports traffic_signals:direction=forward', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'traffic_signals:direction': 'forward' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'traffic_signals:direction': 'forward' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.eql([270]);
         });
 
         it('supports traffic_signals:direction=backward', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'traffic_signals:direction': 'backward' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'traffic_signals:direction': 'backward' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.eql([90]);
         });
 
         it('supports traffic_signals:direction=both', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'traffic_signals:direction': 'both' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'traffic_signals:direction': 'both' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.have.members([90, 270]);
         });
 
         it('supports traffic_signals:direction=all', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'traffic_signals:direction': 'all' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'traffic_signals:direction': 'all' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.have.members([90, 270]);
         });
 
         it('supports railway:signal:direction=forward', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'railway:signal:direction': 'forward' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'railway:signal:direction': 'forward' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.eql([270]);
         });
 
         it('supports railway:signal:direction=backward', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'railway:signal:direction': 'backward' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'railway:signal:direction': 'backward' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.eql([90]);
         });
 
         it('supports railway:signal:direction=both', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'railway:signal:direction': 'both' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'railway:signal:direction': 'both' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.have.members([90, 270]);
         });
 
         it('supports railway:signal:direction=all', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'railway:signal:direction': 'all' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'railway:signal:direction': 'all' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.have.members([90, 270]);
         });
 
         it('supports camera:direction=forward', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'forward' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'forward' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.eql([270]);
         });
 
         it('supports camera:direction=backward', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'backward' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'backward' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.eql([90]);
         });
 
         it('supports camera:direction=both', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'both' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'both' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.have.members([90, 270]);
         });
 
         it('supports camera:direction=all', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'all' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'all' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.have.members([90, 270]);
         });
 
         it('returns directions for an all-way stop at a highway interstction', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'highway': 'stop', 'stop': 'all' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var node4 = iD.osmNode({ id: 'n4', loc: [0, -1] });
-            var node5 = iD.osmNode({ id: 'n5', loc: [0, 1] });
-            var way1 = iD.osmWay({ id: 'w1', nodes: ['n1','n2','n3'], tags: { 'highway': 'residential' } });
-            var way2 = iD.osmWay({ id: 'w2', nodes: ['n4','n2','n5'], tags: { 'highway': 'residential' } });
-            var graph = iD.coreGraph([node1, node2, node3, node4, node5, way1, way2]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'highway': 'stop', 'stop': 'all' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const node4 = iD.osmNode({ id: 'n4', loc: [0, -1] });
+            const node5 = iD.osmNode({ id: 'n5', loc: [0, 1] });
+            const way1 = iD.osmWay({ id: 'w1', nodes: ['n1','n2','n3'], tags: { 'highway': 'residential' } });
+            const way2 = iD.osmWay({ id: 'w2', nodes: ['n4','n2','n5'], tags: { 'highway': 'residential' } });
+            const graph = iD.coreGraph([node1, node2, node3, node4, node5, way1, way2]);
             expect(node2.directions(graph, projection)).to.have.members([0, 90, 180, 270]);
         });
 
         it('does not return directions for an all-way stop not at a highway interstction', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0], tags: { 'highway': 'stop', 'stop': 'all' } });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0] });
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0], tags: { 'highway': 'stop', 'stop': 'all' } });
-            var node4 = iD.osmNode({ id: 'n4', loc: [0, -1], tags: { 'highway': 'stop', 'stop': 'all' } });
-            var node5 = iD.osmNode({ id: 'n5', loc: [0, 1], tags: { 'highway': 'stop', 'stop': 'all' } });
-            var way1 = iD.osmWay({ id: 'w1', nodes: ['n1','n2','n3'], tags: { 'highway': 'residential' } });
-            var way2 = iD.osmWay({ id: 'w2', nodes: ['n4','n2','n5'], tags: { 'highway': 'residential' } });
-            var graph = iD.coreGraph([node1, node2, node3, node4, node5, way1, way2]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0], tags: { 'highway': 'stop', 'stop': 'all' } });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0] });
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0], tags: { 'highway': 'stop', 'stop': 'all' } });
+            const node4 = iD.osmNode({ id: 'n4', loc: [0, -1], tags: { 'highway': 'stop', 'stop': 'all' } });
+            const node5 = iD.osmNode({ id: 'n5', loc: [0, 1], tags: { 'highway': 'stop', 'stop': 'all' } });
+            const way1 = iD.osmWay({ id: 'w1', nodes: ['n1','n2','n3'], tags: { 'highway': 'residential' } });
+            const way2 = iD.osmWay({ id: 'w2', nodes: ['n4','n2','n5'], tags: { 'highway': 'residential' } });
+            const graph = iD.coreGraph([node1, node2, node3, node4, node5, way1, way2]);
             expect(node2.directions(graph, projection)).to.eql([]);
         });
 
         it('supports multiple directions delimited by ;', function () {
-            var node1 = iD.osmNode({ loc: [0, 0], tags: { direction: '0;45' }});
-            var node2 = iD.osmNode({ loc: [0, 0], tags: { direction: '45;north' }});
-            var node3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'north;east' }});
-            var node4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'n;s;e;w' }});
-            var node5 = iD.osmNode({ loc: [0, 0], tags: { direction: 's;wat' }});
-            var graph = iD.coreGraph([node1, node2, node3, node4, node5]);
+            const node1 = iD.osmNode({ loc: [0, 0], tags: { direction: '0;45' }});
+            const node2 = iD.osmNode({ loc: [0, 0], tags: { direction: '45;north' }});
+            const node3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'north;east' }});
+            const node4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'n;s;e;w' }});
+            const node5 = iD.osmNode({ loc: [0, 0], tags: { direction: 's;wat' }});
+            const graph = iD.coreGraph([node1, node2, node3, node4, node5]);
 
             expect(node1.directions(graph, projection)).to.eql([0, 45], 'numeric 0, numeric 45');
             expect(node2.directions(graph, projection)).to.eql([45, 0], 'numeric 45, cardinal north');
@@ -581,11 +581,11 @@ describe('iD.osmNode', function () {
         });
 
         it('supports mixing textual, cardinal, numeric directions, delimited by ;', function () {
-            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'both;ne;60' }});
-            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
-            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
-            var graph = iD.coreGraph([node1, node2, node3, way]);
+            const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'both;ne;60' }});
+            const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            const graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.have.members([90, 270, 45, 60]);
         });
 
@@ -593,7 +593,7 @@ describe('iD.osmNode', function () {
 
     describe('#asJXON', function () {
         it('converts a node to jxon', function() {
-            var node = iD.osmNode({id: 'n-1', loc: [-77, 38], tags: {amenity: 'cafe'}});
+            const node = iD.osmNode({id: 'n-1', loc: [-77, 38], tags: {amenity: 'cafe'}});
             expect(node.asJXON()).to.eql({node: {
                 '@id': '-1',
                 '@lon': -77,
@@ -609,7 +609,7 @@ describe('iD.osmNode', function () {
 
     describe('#asGeoJSON', function () {
         it('converts to a GeoJSON Point geometry', function () {
-            var node = iD.osmNode({tags: {amenity: 'cafe'}, loc: [1, 2]}),
+            const node = iD.osmNode({tags: {amenity: 'cafe'}, loc: [1, 2]}),
                 json = node.asGeoJSON();
 
             expect(json.type).to.equal('Point');

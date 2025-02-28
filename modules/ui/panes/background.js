@@ -9,7 +9,7 @@ import { uiSectionOverlayList } from '../sections/overlay_list';
 
 export function uiPaneBackground(context) {
 
-    var backgroundPane = uiPane('background', context)
+    const backgroundPane = uiPane('background', context)
         .key(t('background.key'))
         .label(t.append('background.title'))
         .description(t.append('background.description'))

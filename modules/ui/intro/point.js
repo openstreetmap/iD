@@ -13,15 +13,15 @@ import { helpHtml, icon, pointBox, pad, selectMenuItem, transitionTime } from '.
 
 
 export function uiIntroPoint(context, reveal) {
-    var dispatch = d3_dispatch('done');
-    var timeouts = [];
-    var intersection = [-85.63279, 41.94394];
-    var building = [-85.632422, 41.944045];
-    var cafePreset = presetManager.item('amenity/cafe');
-    var _pointID = null;
+    const dispatch = d3_dispatch('done');
+    const timeouts = [];
+    const intersection = [-85.63279, 41.94394];
+    const building = [-85.632422, 41.944045];
+    const cafePreset = presetManager.item('amenity/cafe');
+    let _pointID = null;
 
 
-    var chapter = {
+    const chapter = {
         title: 'intro.points.title'
     };
 
@@ -41,12 +41,12 @@ export function uiIntroPoint(context, reveal) {
         context.enter(modeBrowse(context));
         context.history().reset('initial');
 
-        var msec = transitionTime(intersection, context.map().center());
+        const msec = transitionTime(intersection, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
         context.map().centerZoomEase(intersection, 19, msec);
 
         timeout(function() {
-            var tooltip = reveal('button.add-point',
+            const tooltip = reveal('button.add-point',
                 helpHtml('intro.points.points_info') + '{br}' + helpHtml('intro.points.add_point'));
 
             _pointID = null;
@@ -75,8 +75,8 @@ export function uiIntroPoint(context, reveal) {
             return chapter.restart();
         }
 
-        var pointBox = pad(building, 150, context);
-        var textId = context.lastPointerType() === 'mouse' ? 'place_point' : 'place_point_touch';
+        let pointBox = pad(building, 150, context);
+        const textId = context.lastPointerType() === 'mouse' ? 'place_point' : 'place_point_touch';
         reveal(pointBox, helpHtml('intro.points.' + textId));
 
         context.map().on('move.intro drawn.intro', function() {
@@ -132,7 +132,7 @@ export function uiIntroPoint(context, reveal) {
                 return continueTo(addPoint);
             }
 
-            var ids = context.selectedIDs();
+            const ids = context.selectedIDs();
             if (mode.id !== 'select' || !ids.length || ids[0] !== _pointID) {
                 // keep the user's point selected..
                 context.enter(modeSelect(context, [_pointID]));
@@ -154,7 +154,7 @@ export function uiIntroPoint(context, reveal) {
 
 
         function checkPresetSearch() {
-            var first = context.container().select('.preset-list-item:first-child');
+            const first = context.container().select('.preset-list-item:first-child');
 
             if (first.classed('preset-amenity-cafe')) {
                 context.container().select('.preset-search-input')
@@ -215,15 +215,15 @@ export function uiIntroPoint(context, reveal) {
         // reset pane, in case user happened to change it..
         context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
-        var addNameString = helpHtml('intro.points.fields_info') + '{br}' + helpHtml('intro.points.add_name') + '{br}' + helpHtml('intro.points.add_reminder');
+        const addNameString = helpHtml('intro.points.fields_info') + '{br}' + helpHtml('intro.points.add_name') + '{br}' + helpHtml('intro.points.add_reminder');
 
         timeout(function() {
             // It's possible for the user to add a name in a previous step..
             // If so, don't tell them to add the name in this step.
             // Give them an OK button instead.
-            var entity = context.entity(_pointID);
+            const entity = context.entity(_pointID);
             if (entity.tags.name) {
-                var tooltip = reveal('.entity-editor-pane', addNameString, {
+                const tooltip = reveal('.entity-editor-pane', addNameString, {
                     tooltipClass: 'intro-points-describe',
                     buttonText: t.html('intro.ok'),
                     buttonCallback: function() { continueTo(addCloseEditor); }
@@ -258,8 +258,8 @@ export function uiIntroPoint(context, reveal) {
         // reset pane, in case user happened to change it..
         context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
-        var selector = '.entity-editor-pane button.close svg use';
-        var href = d3_select(selector).attr('href') || '#iD-icon-close';
+        const selector = '.entity-editor-pane button.close svg use';
+        const href = d3_select(selector).attr('href') || '#iD-icon-close';
 
         context.on('exit.intro', function() {
             continueTo(reselectPoint);
@@ -278,28 +278,28 @@ export function uiIntroPoint(context, reveal) {
 
     function reselectPoint() {
         if (!_pointID) return chapter.restart();
-        var entity = context.hasEntity(_pointID);
+        const entity = context.hasEntity(_pointID);
         if (!entity) return chapter.restart();
 
         // make sure it's still a cafe, in case user somehow changed it..
-        var oldPreset = presetManager.match(entity, context.graph());
+        const oldPreset = presetManager.match(entity, context.graph());
         context.replace(actionChangePreset(_pointID, oldPreset, cafePreset));
 
         context.enter(modeBrowse(context));
 
-        var msec = transitionTime(entity.loc, context.map().center());
+        const msec = transitionTime(entity.loc, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
         context.map().centerEase(entity.loc, msec);
 
         timeout(function() {
-            var box = pointBox(entity.loc, context);
+            const box = pointBox(entity.loc, context);
             reveal(box, helpHtml('intro.points.reselect'), { duration: 600 });
 
             timeout(function() {
                 context.map().on('move.intro drawn.intro', function() {
-                    var entity = context.hasEntity(_pointID);
+                    const entity = context.hasEntity(_pointID);
                     if (!entity) return chapter.restart();
-                    var box = pointBox(entity.loc, context);
+                    const box = pointBox(entity.loc, context);
                     reveal(box, helpHtml('intro.points.reselect'), { duration: 0 });
                 });
             }, 600); // after reveal..
@@ -376,31 +376,31 @@ export function uiIntroPoint(context, reveal) {
 
     function rightClickPoint() {
         if (!_pointID) return chapter.restart();
-        var entity = context.hasEntity(_pointID);
+        const entity = context.hasEntity(_pointID);
         if (!entity) return chapter.restart();
 
         context.enter(modeBrowse(context));
 
-        var box = pointBox(entity.loc, context);
-        var textId = context.lastPointerType() === 'mouse' ? 'rightclick' : 'edit_menu_touch';
+        const box = pointBox(entity.loc, context);
+        const textId = context.lastPointerType() === 'mouse' ? 'rightclick' : 'edit_menu_touch';
         reveal(box, helpHtml('intro.points.' + textId), { duration: 600 });
 
         timeout(function() {
             context.map().on('move.intro', function() {
-                var entity = context.hasEntity(_pointID);
+                const entity = context.hasEntity(_pointID);
                 if (!entity) return chapter.restart();
-                var box = pointBox(entity.loc, context);
+                const box = pointBox(entity.loc, context);
                 reveal(box, helpHtml('intro.points.' + textId), { duration: 0 });
             });
         }, 600); // after reveal
 
         context.on('enter.intro', function(mode) {
             if (mode.id !== 'select') return;
-            var ids = context.selectedIDs();
+            const ids = context.selectedIDs();
             if (ids.length !== 1 || ids[0] !== _pointID) return;
 
             timeout(function() {
-                var node = selectMenuItem(context, 'delete').node();
+                const node = selectMenuItem(context, 'delete').node();
                 if (!node) return;
                 continueTo(enterDelete);
             }, 50);  // after menu visible
@@ -416,10 +416,10 @@ export function uiIntroPoint(context, reveal) {
 
     function enterDelete() {
         if (!_pointID) return chapter.restart();
-        var entity = context.hasEntity(_pointID);
+        const entity = context.hasEntity(_pointID);
         if (!entity) return chapter.restart();
 
-        var node = selectMenuItem(context, 'delete').node();
+        const node = selectMenuItem(context, 'delete').node();
         if (!node) { return continueTo(rightClickPoint); }
 
         reveal('.edit-menu',
@@ -441,7 +441,7 @@ export function uiIntroPoint(context, reveal) {
 
         context.on('exit.intro', function() {
             if (!_pointID) return chapter.restart();
-            var entity = context.hasEntity(_pointID);
+            const entity = context.hasEntity(_pointID);
             if (entity) return continueTo(rightClickPoint);  // point still exists
         });
 

@@ -1,13 +1,13 @@
 describe('iD.actionDeleteWay', function() {
     it('removes the way from the graph', function() {
-        var way    = iD.osmWay(),
+        const way    = iD.osmWay(),
             action = iD.actionDeleteWay(way.id),
             graph  = iD.coreGraph([way]).update(action);
         expect(graph.hasEntity(way.id)).to.be.undefined;
     });
 
     it('removes a way from parent relations', function() {
-        var way      = iD.osmWay(),
+        const way      = iD.osmWay(),
             relation = iD.osmRelation({members: [{ id: way.id }, { id: 'w-99' }]}),
             action   = iD.actionDeleteWay(way.id),
             graph    = iD.coreGraph([way, relation]).update(action),
@@ -16,7 +16,7 @@ describe('iD.actionDeleteWay', function() {
     });
 
     it('deletes member nodes not referenced by another parent', function() {
-        var node   = iD.osmNode(),
+        const node   = iD.osmNode(),
             way    = iD.osmWay({nodes: [node.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = iD.coreGraph([node, way]).update(action);
@@ -24,7 +24,7 @@ describe('iD.actionDeleteWay', function() {
     });
 
     it('does not delete member nodes referenced by another parent', function() {
-        var node   = iD.osmNode(),
+        const node   = iD.osmNode(),
             way1   = iD.osmWay({nodes: [node.id]}),
             way2   = iD.osmWay({nodes: [node.id]}),
             action = iD.actionDeleteWay(way1.id),
@@ -33,7 +33,7 @@ describe('iD.actionDeleteWay', function() {
     });
 
     it('deletes multiple member nodes', function() {
-        var a      = iD.osmNode(),
+        const a      = iD.osmNode(),
             b      = iD.osmNode(),
             way    = iD.osmWay({nodes: [a.id, b.id]}),
             action = iD.actionDeleteWay(way.id),
@@ -43,7 +43,7 @@ describe('iD.actionDeleteWay', function() {
     });
 
     it('deletes a circular way\'s start/end node', function() {
-        var a      = iD.osmNode(),
+        const a      = iD.osmNode(),
             b      = iD.osmNode(),
             c      = iD.osmNode(),
             way    = iD.osmWay({nodes: [a.id, b.id, c.id, a.id]}),
@@ -55,7 +55,7 @@ describe('iD.actionDeleteWay', function() {
     });
 
     it('does not delete member nodes with interesting tags', function() {
-        var node   = iD.osmNode({tags: {highway: 'traffic_signals'}}),
+        const node   = iD.osmNode({tags: {highway: 'traffic_signals'}}),
             way    = iD.osmWay({nodes: [node.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = iD.coreGraph([node, way]).update(action);
@@ -63,7 +63,7 @@ describe('iD.actionDeleteWay', function() {
     });
 
     it('deletes parent relations that become empty', function () {
-        var way      = iD.osmWay(),
+        const way      = iD.osmWay(),
             relation = iD.osmRelation({members: [{ id: way.id }]}),
             action   = iD.actionDeleteWay(way.id),
             graph    = iD.coreGraph([way, relation]).update(action);

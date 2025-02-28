@@ -13,24 +13,24 @@ import { uiTooltip } from '../tooltip';
 
 export function uiToolNotes(context) {
 
-    var tool = {
+    const tool = {
         id: 'notes',
         label: t.append('modes.add_note.label')
     };
 
-    var mode = modeAddNote(context);
+    const mode = modeAddNote(context);
 
     function enabled() {
         return notesEnabled() && notesEditable();
     }
 
     function notesEnabled() {
-        var noteLayer = context.layers().layer('notes');
+        const noteLayer = context.layers().layer('notes');
         return noteLayer && noteLayer.enabled();
     }
 
     function notesEditable() {
-        var mode = context.mode();
+        const mode = context.mode();
         return context.map().notesEditable() && mode && mode.id !== 'save';
     }
 
@@ -46,7 +46,7 @@ export function uiToolNotes(context) {
 
     tool.render = function(selection) {
 
-        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
+        const debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
             .on('move.notes', debouncedUpdate)
@@ -59,10 +59,10 @@ export function uiToolNotes(context) {
 
 
         function update() {
-            var showNotes = notesEnabled();
-            var data = showNotes ? [mode] : [];
+            const showNotes = notesEnabled();
+            const data = showNotes ? [mode] : [];
 
-            var buttons = selection.selectAll('button.add-button')
+            let buttons = selection.selectAll('button.add-button')
                 .data(data, function(d) { return d.id; });
 
             // exit
@@ -70,14 +70,14 @@ export function uiToolNotes(context) {
                 .remove();
 
             // enter
-            var buttonsEnter = buttons.enter()
+            const buttonsEnter = buttons.enter()
                 .append('button')
                 .attr('class', function(d) { return d.id + ' add-button bar-button'; })
                 .on('click.notes', function(d3_event, d) {
                     if (!enabled()) return;
 
                     // When drawing, ignore accidental clicks on mode buttons - #4042
-                    var currMode = context.mode().id;
+                    const currMode = context.mode().id;
                     if (/^draw/.test(currMode)) return;
 
                     if (d.id === currMode) {

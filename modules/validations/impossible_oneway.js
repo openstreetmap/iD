@@ -7,9 +7,9 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';
 
 export function validationImpossibleOneway() {
-    var type = 'impossible_oneway';
+    const type = 'impossible_oneway';
 
-    var validation = function checkImpossibleOneway(entity, graph) {
+    const validation = function checkImpossibleOneway(entity, graph) {
 
         if (entity.type !== 'way' || entity.geometry(graph) !== 'line') return [];
 
@@ -19,8 +19,8 @@ export function validationImpossibleOneway() {
 
         if (!entity.isOneWay()) return [];
 
-        var firstIssues = issuesForNode(entity, entity.first());
-        var lastIssues = issuesForNode(entity, entity.last());
+        const firstIssues = issuesForNode(entity, entity.first());
+        const lastIssues = issuesForNode(entity, entity.last());
 
         return firstIssues.concat(lastIssues);
 
@@ -33,8 +33,8 @@ export function validationImpossibleOneway() {
         }
 
         function nodeOccursMoreThanOnce(way, nodeID) {
-            var occurrences = 0;
-            for (var index in way.nodes) {
+            let occurrences = 0;
+            for (const index in way.nodes) {
                 if (way.nodes[index] === nodeID) {
                     occurrences += 1;
                     if (occurrences > 1) return true;
@@ -45,7 +45,7 @@ export function validationImpossibleOneway() {
 
         function isConnectedViaOtherTypes(way, node) {
 
-            var wayType = typeForWay(way);
+            const wayType = typeForWay(way);
 
             if (wayType === 'highway') {
                 // entrances are considered connected
@@ -91,24 +91,24 @@ export function validationImpossibleOneway() {
 
         function issuesForNode(way, nodeID) {
 
-            var isFirst = nodeID === way.first();
+            const isFirst = nodeID === way.first();
 
-            var wayType = typeForWay(way);
+            const wayType = typeForWay(way);
 
             // ignore if this way is self-connected at this node
             if (nodeOccursMoreThanOnce(way, nodeID)) return [];
 
-            var osm = services.osm;
+            const osm = services.osm;
             if (!osm) return [];
 
-            var node = graph.hasEntity(nodeID);
+            const node = graph.hasEntity(nodeID);
 
             // ignore if this node or its tile are unloaded
             if (!node || !osm.isDataLoaded(node.loc)) return [];
 
             if (isConnectedViaOtherTypes(way, node)) return [];
 
-            var attachedWaysOfSameType = graph.parentWays(node).filter(function(parentWay) {
+            const attachedWaysOfSameType = graph.parentWays(node).filter(function(parentWay) {
                 if (parentWay.id === way.id) return false;
                 return typeForWay(parentWay) === wayType;
             });
@@ -116,7 +116,7 @@ export function validationImpossibleOneway() {
             // assume it's okay for waterways to start or end disconnected for now
             if (wayType === 'waterway' && attachedWaysOfSameType.length === 0) return [];
 
-            var attachedOneways = attachedWaysOfSameType.filter(function(attachedWay) {
+            const attachedOneways = attachedWaysOfSameType.filter(function(attachedWay) {
                 return attachedWay.isOneWay();
             });
 
@@ -124,7 +124,7 @@ export function validationImpossibleOneway() {
             if (attachedOneways.length < attachedWaysOfSameType.length) return [];
 
             if (attachedOneways.length) {
-                var connectedEndpointsOkay = attachedOneways.some(function(attachedOneway) {
+                const connectedEndpointsOkay = attachedOneways.some(function(attachedOneway) {
                     if ((isFirst ? attachedOneway.first() : attachedOneway.last()) !== nodeID) return true;
                     if (nodeOccursMoreThanOnce(attachedOneway, nodeID)) return true;
                     return false;
@@ -132,8 +132,8 @@ export function validationImpossibleOneway() {
                 if (connectedEndpointsOkay) return [];
             }
 
-            var placement = isFirst ? 'start' : 'end',
-                messageID = wayType + '.',
+            const placement = isFirst ? 'start' : 'end';
+            let messageID = wayType + '.',
                 referenceID = wayType + '.';
 
             if (wayType === 'waterway') {
@@ -149,7 +149,7 @@ export function validationImpossibleOneway() {
                 subtype: wayType,
                 severity: 'warning',
                 message: function(context) {
-                    var entity = context.hasEntity(this.entityIds[0]);
+                    const entity = context.hasEntity(this.entityIds[0]);
                     return entity ? t.append('issues.impossible_oneway.' + messageID + '.message', {
                         feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
@@ -158,7 +158,7 @@ export function validationImpossibleOneway() {
                 entityIds: [way.id, node.id],
                 dynamicFixes: function() {
 
-                    var fixes = [];
+                    const fixes = [];
 
                     if (attachedOneways.length) {
                         fixes.push(new validationIssueFix({
@@ -166,23 +166,23 @@ export function validationImpossibleOneway() {
                             title: t.append('issues.fix.reverse_feature.title'),
                             entityIds: [way.id],
                             onClick: function(context) {
-                                var id = this.issue.entityIds[0];
+                                const id = this.issue.entityIds[0];
                                 context.perform(actionReverse(id), t('operations.reverse.annotation.line', { n: 1 }));
                             }
                         }));
                     }
                     if (node.tags.noexit !== 'yes') {
-                        var textDirection = localizer.textDirection();
-                        var useLeftContinue = (isFirst && textDirection === 'ltr') ||
+                        const textDirection = localizer.textDirection();
+                        const useLeftContinue = (isFirst && textDirection === 'ltr') ||
                             (!isFirst && textDirection === 'rtl');
                         fixes.push(new validationIssueFix({
                             icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
                             title: t.append('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
                             onClick: function(context) {
-                                var entityID = this.issue.entityIds[0];
-                                var vertexID = this.issue.entityIds[1];
-                                var way = context.entity(entityID);
-                                var vertex = context.entity(vertexID);
+                                const entityID = this.issue.entityIds[0];
+                                const vertexID = this.issue.entityIds[1];
+                                const way = context.entity(entityID);
+                                const vertex = context.entity(vertexID);
                                 continueDrawing(way, vertex, context);
                             }
                         }));
@@ -208,7 +208,7 @@ export function validationImpossibleOneway() {
 
     function continueDrawing(way, vertex, context) {
         // make sure the vertex is actually visible and editable
-        var map = context.map();
+        const map = context.map();
         if (!context.editable() || !map.trimmedExtent().contains(vertex.loc)) {
             map.zoomToEase(vertex);
         }

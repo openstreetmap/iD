@@ -17,7 +17,7 @@ export class IntervalTasksQueue {
   }
 
   enqueue(task) {
-    let taskTimeout = this.time;
+    const taskTimeout = this.time;
     this.time += this.intervalInMs;
     this.pendingHandles.push(setTimeout(() => {
       this.time -= this.intervalInMs;

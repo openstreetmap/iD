@@ -152,8 +152,8 @@ function loadNextTilePage(which, url, tile) {
  * getBubbles() handles the request to the server for a tile extent of 'bubbles' (streetside image locations).
  */
 function getBubbles(url, tile, callback) {
-  let rect = tile.extent.rectangle();
-  let urlForRequest = url
+  const rect = tile.extent.rectangle();
+  const urlForRequest = url
     .replace('{key}', bubbleAppKey)
     .replace('{bbox}', [rect[1], rect[0], rect[3], rect[2]].join(','))
     .replace('{count}', maxResults);
@@ -183,9 +183,9 @@ function getBubbles(url, tile, callback) {
 
 // partition viewport into higher zoom tiles
 function partitionViewport(projection) {
-  let z = geoScaleToZoom(projection.scale());
-  let z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
-  let tiler = utilTiler().zoomExtent([z2, z2]);
+  const z = geoScaleToZoom(projection.scale());
+  const z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
+  const tiler = utilTiler().zoomExtent([z2, z2]);
 
   return tiler.getTiles(projection)
     .map(tile => tile.extent);
@@ -198,7 +198,7 @@ function searchLimited(limit, projection, rtree) {
 
   return partitionViewport(projection)
     .reduce((result, extent) => {
-      let found = rtree.search(extent.bbox())
+      const found = rtree.search(extent.bbox())
         .slice(0, limit)
         .map(d => d.data);
 
@@ -212,10 +212,10 @@ function searchLimited(limit, projection, rtree) {
  */
 function loadImage(imgInfo) {
   return new Promise(resolve => {
-    let img = new Image();
+    const img = new Image();
     img.onload = () => {
-      let canvas = document.getElementById('ideditor-canvas' + imgInfo.face);
-      let ctx = canvas.getContext('2d');
+      const canvas = document.getElementById('ideditor-canvas' + imgInfo.face);
+      const ctx = canvas.getContext('2d');
       ctx.drawImage(img, imgInfo.x, imgInfo.y);
       resolve({ imgInfo: imgInfo, status: 'ok' });
     };
@@ -234,9 +234,9 @@ function loadImage(imgInfo) {
 function loadCanvas(imageGroup) {
   return Promise.all(imageGroup.map(loadImage))
     .then((data) => {
-      let canvas = document.getElementById('ideditor-canvas' + data[0].imgInfo.face);
+      const canvas = document.getElementById('ideditor-canvas' + data[0].imgInfo.face);
       const which = { '01': 0, '02': 1, '03': 2, '10': 3, '11': 4, '12': 5 };
-      let face = data[0].imgInfo.face;
+      const face = data[0].imgInfo.face;
       _sceneOptions.cubeMap[which[face]] = canvas.toDataURL('image/jpeg', 1.0);
       return { status: 'loadCanvas for face ' + data[0].imgInfo.face + 'ok'};
     });
@@ -291,7 +291,7 @@ function qkToXY(qk) {
 
 
 function getQuadKeys() {
-  let dim = _resolution / 256;
+  const dim = _resolution / 256;
   let quadKeys;
 
   if (dim === 16) {
@@ -394,8 +394,8 @@ export default {
     const min = [viewport[0][0], viewport[1][1]];
     const max = [viewport[1][0], viewport[0][1]];
     const bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
-    let seen = {};
-    let results = [];
+    const seen = {};
+    const results = [];
 
     // all sequences for bubbles in viewport
     _ssCache.bubbles.rtree.search(bbox)
@@ -453,14 +453,14 @@ export default {
 
     // inject ms-wrapper into the photoviewer div
     // (used by all to house each custom photo viewer)
-    let wrapEnter = wrap.enter()
+    const wrapEnter = wrap.enter()
       .append('div')
       .attr('class', 'photo-wrapper ms-wrapper')
       .classed('hide', true);
 
-    let that = this;
+    const that = this;
 
-    let pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+    const pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
     // inject div to support streetside viewer (pannellum) and attribution line
     wrapEnter
@@ -477,7 +477,7 @@ export default {
           .on(pointerPrefix + 'move.streetside', null);
 
         // continue dispatching events for a few seconds, in case viewer has inertia.
-        let t = d3_timer(elapsed => {
+        const t = d3_timer(elapsed => {
           dispatch.call('viewerChanged');
           if (elapsed > 2000) {
             t.stop();
@@ -487,7 +487,7 @@ export default {
       .append('div')
       .attr('class', 'photo-attribution fillD');
 
-    let controlsEnter = wrapEnter
+    const controlsEnter = wrapEnter
       .append('div')
       .attr('class', 'photo-controls-wrap')
       .append('div')
@@ -562,30 +562,30 @@ export default {
 
     function step(stepBy) {
       return () => {
-        let viewer = context.container().select('.photoviewer');
-        let selected = viewer.empty() ? undefined : viewer.datum();
+        const viewer = context.container().select('.photoviewer');
+        const selected = viewer.empty() ? undefined : viewer.datum();
         if (!selected) return;
 
         let nextID = (stepBy === 1 ? selected.ne : selected.pr);
-        let yaw = _pannellumViewer.getYaw();
-        let ca = selected.ca + yaw;
-        let origin = selected.loc;
+        const yaw = _pannellumViewer.getYaw();
+        const ca = selected.ca + yaw;
+        const origin = selected.loc;
 
         // construct a search trapezoid pointing out from current bubble
         const meters = 35;
-        let p1 = [
+        const p1 = [
           origin[0] + geoMetersToLon(meters / 5, origin[1]),
           origin[1]
         ];
-        let p2 = [
+        const p2 = [
           origin[0] + geoMetersToLon(meters / 2, origin[1]),
           origin[1] + geoMetersToLat(meters)
         ];
-        let p3 = [
+        const p3 = [
           origin[0] - geoMetersToLon(meters / 2, origin[1]),
           origin[1] + geoMetersToLat(meters)
         ];
-        let p4 = [
+        const p4 = [
           origin[0] - geoMetersToLon(meters / 5, origin[1]),
           origin[1]
         ];
@@ -593,10 +593,10 @@ export default {
         let poly = [p1, p2, p3, p4, p1];
 
         // rotate it to face forward/backward
-        let angle = (stepBy === 1 ? ca : ca + 180) * (Math.PI / 180);
+        const angle = (stepBy === 1 ? ca : ca + 180) * (Math.PI / 180);
         poly = geoRotate(poly, -angle, origin);
 
-        let extent = poly.reduce((extent, point) => {
+        const extent = poly.reduce((extent, point) => {
           return extent.extend(geoExtent(point));
         }, geoExtent());
 
@@ -608,8 +608,8 @@ export default {
             if (!geoPointInPolygon(d.data.loc, poly)) return;
 
             let dist = geoVecLength(d.data.loc, selected.loc);
-            let theta = selected.ca - d.data.ca;
-            let minTheta = Math.min(Math.abs(theta), 360 - Math.abs(theta));
+            const theta = selected.ca - d.data.ca;
+            const minTheta = Math.min(Math.abs(theta), 360 - Math.abs(theta));
             if (minTheta > 20) {
               dist += 5;  // penalize distance if camera angles don't match
             }
@@ -620,7 +620,7 @@ export default {
             }
           });
 
-        let nextBubble = nextID && that.cachedImage(nextID);
+        const nextBubble = nextID && that.cachedImage(nextID);
         if (!nextBubble) return;
 
         context.map().centerEase(nextBubble.loc);
@@ -644,10 +644,10 @@ export default {
    */
   showViewer: function(context) {
 
-    let wrap = context.container().select('.photoviewer')
+    const wrap = context.container().select('.photoviewer')
       .classed('hide', false);
 
-    let isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
+    const isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
 
     if (isHidden) {
       wrap
@@ -667,7 +667,7 @@ export default {
    * hideViewer()
    */
   hideViewer: function (context) {
-    let viewer = context.container().select('.photoviewer');
+    const viewer = context.container().select('.photoviewer');
     if (!viewer.empty()) viewer.datum(null);
 
     viewer
@@ -688,17 +688,17 @@ export default {
    * selectImage().
    */
   selectImage: function (context, key) {
-    let that = this;
+    const that = this;
 
-    let d = this.cachedImage(key);
+    const d = this.cachedImage(key);
 
-    let viewer = context.container().select('.photoviewer');
+    const viewer = context.container().select('.photoviewer');
     if (!viewer.empty()) viewer.datum(d);
 
     this.setStyles(context, null, true);
 
-    let wrap = context.container().select('.photoviewer .ms-wrapper');
-    let attribution = wrap.selectAll('.photo-attribution').html('');
+    const wrap = context.container().select('.photoviewer .ms-wrapper');
+    const attribution = wrap.selectAll('.photo-attribution').html('');
 
     wrap.selectAll('.pnlm-load-box')   // display "loading.."
       .style('display', 'block');
@@ -709,14 +709,14 @@ export default {
 
     _sceneOptions.northOffset = d.ca;
 
-    let line1 = attribution
+    const line1 = attribution
       .append('div')
       .attr('class', 'attribution-row');
 
     const hiresDomId = utilUniqueDomId('streetside-hires');
 
     // Add hires checkbox
-    let label = line1
+    const label = line1
       .append('label')
       .attr('for', hiresDomId)
       .attr('class', 'streetside-hires');
@@ -733,7 +733,7 @@ export default {
         _resolution = _hires ? 1024 : 512;
         wrap.call(setupCanvas, true);
 
-        let viewstate = {
+        const viewstate = {
           yaw: _pannellumViewer.getYaw(),
           pitch: _pannellumViewer.getPitch(),
           hfov: _pannellumViewer.getHfov()
@@ -749,7 +749,7 @@ export default {
       .call(t.append('streetside.hires'));
 
 
-    let captureInfo = line1
+    const captureInfo = line1
       .append('div')
       .attr('class', 'attribution-capture-info');
 
@@ -777,7 +777,7 @@ export default {
     }
 
     // Add image links
-    let line2 = attribution
+    const line2 = attribution
       .append('div')
       .attr('class', 'attribution-row');
 
@@ -801,8 +801,8 @@ export default {
     const faceKeys = ['01','02','03','10','11','12'];
 
     // Map images to cube faces
-    let quadKeys = getQuadKeys();
-    let faces = faceKeys.map((faceKey) => {
+    const quadKeys = getQuadKeys();
+    const faces = faceKeys.map((faceKey) => {
       return quadKeys.map((quadKey) => {
         const xy = qkToXY(quadKey);
         return {
@@ -862,20 +862,20 @@ export default {
         .classed('currentView', false);
     }
 
-    let hoveredBubbleKey = hovered && hovered.key;
-    let hoveredSequenceKey = this.getSequenceKeyForBubble(hovered);
-    let hoveredSequence = hoveredSequenceKey && _ssCache.sequences[hoveredSequenceKey];
-    let hoveredBubbleKeys =  (hoveredSequence && hoveredSequence.bubbles.map(d => d.key)) || [];
+    const hoveredBubbleKey = hovered && hovered.key;
+    const hoveredSequenceKey = this.getSequenceKeyForBubble(hovered);
+    const hoveredSequence = hoveredSequenceKey && _ssCache.sequences[hoveredSequenceKey];
+    const hoveredBubbleKeys =  (hoveredSequence && hoveredSequence.bubbles.map(d => d.key)) || [];
 
-    let viewer = context.container().select('.photoviewer');
-    let selected = viewer.empty() ? undefined : viewer.datum();
-    let selectedBubbleKey = selected && selected.key;
-    let selectedSequenceKey = this.getSequenceKeyForBubble(selected);
-    let selectedSequence = selectedSequenceKey && _ssCache.sequences[selectedSequenceKey];
-    let selectedBubbleKeys = (selectedSequence && selectedSequence.bubbles.map(d => d.key)) || [];
+    const viewer = context.container().select('.photoviewer');
+    const selected = viewer.empty() ? undefined : viewer.datum();
+    const selectedBubbleKey = selected && selected.key;
+    const selectedSequenceKey = this.getSequenceKeyForBubble(selected);
+    const selectedSequence = selectedSequenceKey && _ssCache.sequences[selectedSequenceKey];
+    const selectedBubbleKeys = (selectedSequence && selectedSequence.bubbles.map(d => d.key)) || [];
 
     // highlight sibling viewfields on either the selected or the hovered sequences
-    let highlightedBubbleKeys = utilArrayUnion(hoveredBubbleKeys, selectedBubbleKeys);
+    const highlightedBubbleKeys = utilArrayUnion(hoveredBubbleKeys, selectedBubbleKeys);
 
     context.container().selectAll('.layer-streetside-images .viewfield-group')
       .classed('highlighted', d => highlightedBubbleKeys.indexOf(d.key) !== -1)
@@ -891,7 +891,7 @@ export default {
       .attr('d', viewfieldPath);
 
     function viewfieldPath() {
-      let d = this.parentNode.__data__;
+      const d = this.parentNode.__data__;
       if (d.pano && d.key !== selectedBubbleKey) {
         return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
       } else {
@@ -905,7 +905,7 @@ export default {
 
   updateUrlImage: function(imageKey) {
       if (!window.mocha) {
-          var hash = utilStringQs(window.location.hash);
+          const hash = utilStringQs(window.location.hash);
           if (imageKey) {
               hash.photo = 'streetside/' + imageKey;
           } else {

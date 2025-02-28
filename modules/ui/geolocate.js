@@ -8,18 +8,18 @@ import { svgIcon } from '../svg/icon';
 import { uiLoading } from './loading';
 
 export function uiGeolocate(context) {
-    var _geolocationOptions = {
+    const _geolocationOptions = {
         // prioritize speed and power usage over precision
         enableHighAccuracy: false,
         // don't hang indefinitely getting the location
         timeout: 6000 // 6sec
     };
-    var _locating = uiLoading(context).message(t.html('geolocate.locating')).blocking(true);
-    var _layer = context.layers().layer('geolocate');
-    var _position;
-    var _extent;
-    var _timeoutID;
-    var _button = d3_select(null);
+    const _locating = uiLoading(context).message(t.html('geolocate.locating')).blocking(true);
+    const _layer = context.layers().layer('geolocate');
+    let _position;
+    let _extent;
+    let _timeoutID;
+    let _button = d3_select(null);
 
     function click() {
         if (context.inIntro()) return;
@@ -42,7 +42,7 @@ export function uiGeolocate(context) {
     function zoomTo() {
         context.enter(modeBrowse(context));
 
-        var map = context.map();
+        const map = context.map();
         _layer.enabled(_position, true);
         updateButtonState();
         map.centerZoomEase(_extent.center(), Math.min(20, map.extentZoom(_extent)));
@@ -50,7 +50,7 @@ export function uiGeolocate(context) {
 
     function success(geolocation) {
         _position = geolocation;
-        var coords = _position.coords;
+        const coords = _position.coords;
         _extent = geoExtent([coords.longitude, coords.latitude]).padByMeters(coords.accuracy);
         zoomTo();
         finish();

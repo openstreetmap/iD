@@ -4,11 +4,11 @@ import { uiPopover } from './popover';
 
 export function uiTooltip(klass) {
 
-    var tooltip = uiPopover((klass || '') + ' tooltip')
+    const tooltip = uiPopover((klass || '') + ' tooltip')
         .displayType('hover');
 
-    var _title = function() {
-        var title = this.getAttribute('data-original-title');
+    let _title = function() {
+        let title = this.getAttribute('data-original-title');
         if (title) {
             return title;
         } else {
@@ -19,8 +19,8 @@ export function uiTooltip(klass) {
         return title;
     };
 
-    var _heading = utilFunctor(null);
-    var _keys = utilFunctor(null);
+    let _heading = utilFunctor(null);
+    let _keys = utilFunctor(null);
 
     tooltip.title = function(val) {
         if (!arguments.length) return _title;
@@ -41,16 +41,16 @@ export function uiTooltip(klass) {
     };
 
     tooltip.content(function() {
-        var heading = _heading.apply(this, arguments);
-        var text = _title.apply(this, arguments);
-        var keys = _keys.apply(this, arguments);
+        const heading = _heading.apply(this, arguments);
+        const text = _title.apply(this, arguments);
+        const keys = _keys.apply(this, arguments);
 
-        var headingCallback = typeof heading === 'function' ? heading : s => s.text(heading);
-        var textCallback = typeof text === 'function' ? text : s => s.text(text);
+        const headingCallback = typeof heading === 'function' ? heading : s => s.text(heading);
+        const textCallback = typeof text === 'function' ? text : s => s.text(text);
 
         return function(selection) {
 
-            var headingSelect = selection
+            const headingSelect = selection
                 .selectAll('.tooltip-heading')
                 .data(heading ? [heading] :[]);
 
@@ -64,7 +64,7 @@ export function uiTooltip(klass) {
                 .text('')
                 .call(headingCallback);
 
-            var textSelect = selection
+            const textSelect = selection
                 .selectAll('.tooltip-text')
                 .data(text ? [text] :[]);
 
@@ -78,14 +78,14 @@ export function uiTooltip(klass) {
                 .text('')
                 .call(textCallback);
 
-            var keyhintWrap = selection
+            let keyhintWrap = selection
                 .selectAll('.keyhint-wrap')
                 .data(keys && keys.length ? [0] : []);
 
             keyhintWrap.exit()
                 .remove();
 
-            var keyhintWrapEnter = keyhintWrap.enter()
+            const keyhintWrapEnter = keyhintWrap.enter()
                 .append('div')
                 .attr('class', 'keyhint-wrap');
 

@@ -7,20 +7,20 @@ export function operationCopy(context, selectedIDs) {
 
     function getFilteredIdsToCopy() {
         return selectedIDs.filter(function(selectedID) {
-            var entity = context.graph().hasEntity(selectedID);
+            const entity = context.graph().hasEntity(selectedID);
             // don't copy untagged vertices separately from ways
             return entity.hasInterestingTags() || entity.geometry(context.graph()) !== 'vertex';
         });
     }
 
-    var operation = function() {
+    const operation = function() {
 
-        var graph = context.graph();
-        var selected = groupEntities(getFilteredIdsToCopy(), graph);
-        var canCopy = [];
-        var skip = {};
-        var entity;
-        var i;
+        const graph = context.graph();
+        const selected = groupEntities(getFilteredIdsToCopy(), graph);
+        const canCopy = [];
+        let skip = {};
+        let entity;
+        let i;
 
         for (i = 0; i < selected.relation.length; i++) {
             entity = selected.relation[i];
@@ -56,7 +56,7 @@ export function operationCopy(context, selectedIDs) {
 
 
     function groupEntities(ids, graph) {
-        var entities = ids.map(function (id) { return graph.entity(id); });
+        const entities = ids.map(function (id) { return graph.entity(id); });
         return Object.assign(
             { relation: [], way: [], node: [] },
             utilArrayGroupBy(entities, 'type')
@@ -65,8 +65,8 @@ export function operationCopy(context, selectedIDs) {
 
 
     function getDescendants(id, graph, descendants) {
-        var entity = graph.entity(id);
-        var children;
+        const entity = graph.entity(id);
+        let children;
 
         descendants = descendants || {};
 
@@ -78,7 +78,7 @@ export function operationCopy(context, selectedIDs) {
             children = [];
         }
 
-        for (var i = 0; i < children.length; i++) {
+        for (let i = 0; i < children.length; i++) {
             if (!descendants[children[i]]) {
                 descendants[children[i]] = true;
                 descendants = getDescendants(children[i], graph, descendants);
@@ -95,7 +95,7 @@ export function operationCopy(context, selectedIDs) {
 
 
     operation.disabled = function() {
-        var extent = utilTotalExtent(getFilteredIdsToCopy(), context.graph());
+        const extent = utilTotalExtent(getFilteredIdsToCopy(), context.graph());
         if (extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         }
@@ -104,14 +104,14 @@ export function operationCopy(context, selectedIDs) {
 
 
     operation.availableForKeypress = function() {
-        var selection = window.getSelection && window.getSelection();
+        const selection = window.getSelection && window.getSelection();
         // if the user has text selected then let them copy that, not the selected feature
         return !selection || !selection.toString();
     };
 
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
+        const disable = operation.disabled();
         return disable ?
             t.append('operations.copy.' + disable, { n: selectedIDs.length }) :
             t.append('operations.copy.description', { n: selectedIDs.length });
@@ -123,7 +123,7 @@ export function operationCopy(context, selectedIDs) {
     };
 
 
-    var _point;
+    let _point;
     operation.point = function(val) {
         _point = val;
         return operation;

@@ -12,12 +12,12 @@ import { icon } from './intro/helper';
 // It borrows some code from uiHelp
 
 export function uiFieldHelp(context, fieldName) {
-    var fieldHelp = {};
-    var _inspector = d3_select(null);
-    var _wrap = d3_select(null);
-    var _body = d3_select(null);
+    const fieldHelp = {};
+    let _inspector = d3_select(null);
+    let _wrap = d3_select(null);
+    let _body = d3_select(null);
 
-    var fieldHelpKeys = {
+    const fieldHelpKeys = {
         restrictions: [
             ['about',[
                 'about',
@@ -51,9 +51,9 @@ export function uiFieldHelp(context, fieldName) {
         ]
     };
 
-    var fieldHelpHeadings = {};
+    const fieldHelpHeadings = {};
 
-    var replacements = {
+    const replacements = {
         distField: { html: t.html('restriction.controls.distance') },
         viaField: { html: t.html('restriction.controls.via') },
         fromShadow: { html: icon('#iD-turn-shadow', 'inline shadow from') },
@@ -67,12 +67,12 @@ export function uiFieldHelp(context, fieldName) {
 
 
     // For each section, squash all the texts into a single markdown document
-    var docs = fieldHelpKeys[fieldName].map(function(key) {
-        var helpkey = 'help.field.' + fieldName + '.' + key[0];
-        var text = key[1].reduce(function(all, part) {
-            var subkey = helpkey + '.' + part;
-            var depth = fieldHelpHeadings[subkey];                     // is this subkey a heading?
-            var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
+    const docs = fieldHelpKeys[fieldName].map(function(key) {
+        const helpkey = 'help.field.' + fieldName + '.' + key[0];
+        const text = key[1].reduce(function(all, part) {
+            const subkey = helpkey + '.' + part;
+            const depth = fieldHelpHeadings[subkey];                     // is this subkey a heading?
+            const hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
             return all + hhh + t.html(subkey, replacements) + '\n\n';
         }, '');
 
@@ -109,13 +109,13 @@ export function uiFieldHelp(context, fieldName) {
 
 
     function clickHelp(index) {
-        var d = docs[index];
-        var tkeys = fieldHelpKeys[fieldName][index][1];
+        const d = docs[index];
+        const tkeys = fieldHelpKeys[fieldName][index][1];
 
         _body.selectAll('.field-help-nav-item')
             .classed('active', function(d, i) { return i === index; });
 
-        var content = _body.selectAll('.field-help-content')
+        const content = _body.selectAll('.field-help-content')
             .html(d.html);
 
         // class the paragraphs so we can find and style them
@@ -141,7 +141,7 @@ export function uiFieldHelp(context, fieldName) {
     fieldHelp.button = function(selection) {
         if (_body.empty()) return;
 
-        var button = selection.selectAll('.field-help-button')
+        const button = selection.selectAll('.field-help-button')
             .data([0]);
 
         // enter/update
@@ -163,10 +163,10 @@ export function uiFieldHelp(context, fieldName) {
 
 
     function updatePosition() {
-        var wrap = _wrap.node();
-        var inspector = _inspector.node();
-        var wRect = wrap.getBoundingClientRect();
-        var iRect = inspector.getBoundingClientRect();
+        const wrap = _wrap.node();
+        const inspector = _inspector.node();
+        const wRect = wrap.getBoundingClientRect();
+        const iRect = inspector.getBoundingClientRect();
 
         _body
             .style('top', wRect.top + inspector.scrollTop - iRect.top + 'px');
@@ -185,11 +185,11 @@ export function uiFieldHelp(context, fieldName) {
         _body = _inspector.selectAll('.field-help-body')
             .data([0]);
 
-        var enter = _body.enter()
+        const enter = _body.enter()
             .append('div')
             .attr('class', 'field-help-body hide');   // initially hidden
 
-        var titleEnter = enter
+        const titleEnter = enter
             .append('div')
             .attr('class', 'field-help-title cf');
 
@@ -209,11 +209,11 @@ export function uiFieldHelp(context, fieldName) {
             })
             .call(svgIcon('#iD-icon-close'));
 
-        var navEnter = enter
+        const navEnter = enter
             .append('div')
             .attr('class', 'field-help-nav cf');
 
-        var titles = docs.map(function(d) { return d.title; });
+        const titles = docs.map(function(d) { return d.title; });
         navEnter.selectAll('.field-help-nav-item')
             .data(titles)
             .enter()

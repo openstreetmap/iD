@@ -8,10 +8,10 @@ export function uiLoading(context) {
   let _blocking = false;
 
 
-  let loading = (selection) => {
+  const loading = (selection) => {
     _modalSelection = uiModal(selection, _blocking);
 
-    let loadertext = _modalSelection.select('.content')
+    const loadertext = _modalSelection.select('.content')
       .classed('loading-modal', true)
       .append('div')
       .attr('class', 'modal-section fillL');

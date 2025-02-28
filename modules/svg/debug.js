@@ -12,7 +12,7 @@ export function svgDebug(projection, context) {
     const showTouchTargets = context.getDebug('target');
     const showDownloaded = context.getDebug('downloaded');
 
-    let debugData = [];
+    const debugData = [];
     if (showTile) {
       debugData.push({ class: 'red', label: 'tile' });
     }
@@ -43,7 +43,7 @@ export function svgDebug(projection, context) {
       .merge(legend);
 
 
-    let legendItems = legend.selectAll('.debug-legend-item')
+    const legendItems = legend.selectAll('.debug-legend-item')
       .data(debugData, d => d.label);
 
     legendItems.exit()
@@ -74,7 +74,7 @@ export function svgDebug(projection, context) {
         const hits = (showImagery && d.query.bbox(extent.rectangle(), true)) || [];
         const features = hits.map(d => d.features[d.id]);
 
-        let imagery = layer.selectAll('path.debug-imagery')
+        const imagery = layer.selectAll('path.debug-imagery')
           .data(features);
 
         imagery.exit()
@@ -109,7 +109,7 @@ export function svgDebug(projection, context) {
       });
     }
 
-    let downloaded = layer
+    const downloaded = layer
       .selectAll('path.debug-downloaded')
       .data(showDownloaded ? dataDownloaded : []);
 

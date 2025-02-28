@@ -8,19 +8,19 @@ import { svgPointTransform } from './helpers';
 import { services } from '../services';
 import { utilStringQs } from '../util';
 
-var hash = utilStringQs(window.location.hash);
+const hash = utilStringQs(window.location.hash);
 
-var _notesEnabled = !!hash.notes;
-var _osmService;
+let _notesEnabled = !!hash.notes;
+let _osmService;
 
 
 export function svgNotes(projection, context, dispatch) {
     if (!dispatch) { dispatch = d3_dispatch('change'); }
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    var minZoom = 12;
-    var touchLayer = d3_select(null);
-    var drawLayer = d3_select(null);
-    var _notesVisible = false;
+    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    const minZoom = 12;
+    let touchLayer = d3_select(null);
+    let drawLayer = d3_select(null);
+    let _notesVisible = false;
 
 
     function markerPath(selection, klass) {
@@ -105,13 +105,13 @@ export function svgNotes(projection, context, dispatch) {
     function updateMarkers() {
         if (!_notesVisible || !_notesEnabled) return;
 
-        var service = getService();
-        var selectedID = context.selectedNoteID();
-        var data = (service ? service.notes(projection) : []);
-        var getTransform = svgPointTransform(projection);
+        const service = getService();
+        const selectedID = context.selectedNoteID();
+        const data = (service ? service.notes(projection) : []);
+        const getTransform = svgPointTransform(projection);
 
         // Draw markers..
-        var notes = drawLayer.selectAll('.note')
+        const notes = drawLayer.selectAll('.note')
             .data(data, function(d) { return d.status + d.id; });
 
         // exit
@@ -119,7 +119,7 @@ export function svgNotes(projection, context, dispatch) {
             .remove();
 
         // enter
-        var notesEnter = notes.enter()
+        const notesEnter = notes.enter()
             .append('g')
             .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; })
             .classed('new', function(d) { return d.id < 0; });
@@ -165,8 +165,8 @@ export function svgNotes(projection, context, dispatch) {
             .merge(notesEnter)
             .sort(sortY)
             .classed('selected', function(d) {
-                var mode = context.mode();
-                var isMoving = mode && mode.id === 'drag-note';  // no shadows when dragging
+                const mode = context.mode();
+                const isMoving = mode && mode.id === 'drag-note';  // no shadows when dragging
                 return !isMoving && d.id === selectedID;
             })
             .attr('transform', getTransform);
@@ -174,9 +174,9 @@ export function svgNotes(projection, context, dispatch) {
 
         // Draw targets..
         if (touchLayer.empty()) return;
-        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        const fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
 
-        var targets = touchLayer.selectAll('.note')
+        const targets = touchLayer.selectAll('.note')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -193,7 +193,7 @@ export function svgNotes(projection, context, dispatch) {
             .merge(targets)
             .sort(sortY)
             .attr('class', function(d) {
-                var newClass = (d.id < 0 ? 'new' : '');
+                const newClass = (d.id < 0 ? 'new' : '');
                 return 'note target note-' + d.id + ' ' + fillClass + newClass;
             })
             .attr('transform', getTransform);
@@ -209,9 +209,9 @@ export function svgNotes(projection, context, dispatch) {
 
     // Draw the notes layer and schedule loading notes and updating markers.
     function drawNotes(selection) {
-        var service = getService();
+        const service = getService();
 
-        var surface = context.surface();
+        const surface = context.surface();
         if (surface && !surface.empty()) {
             touchLayer = surface.selectAll('.data-layer.touch .layer-touch.markers');
         }

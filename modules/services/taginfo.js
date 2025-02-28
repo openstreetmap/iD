@@ -8,31 +8,31 @@ import { allowUpperCaseTagValues } from '../osm/tags';
 
 import { taginfoApiUrl } from '../../config/id.js';
 
-var apibase = taginfoApiUrl;
-var _inflight = {};
-var _popularKeys = {};
-var _taginfoCache = {};
+let apibase = taginfoApiUrl;
+let _inflight = {};
+let _popularKeys = {};
+let _taginfoCache = {};
 
-var tag_sorts = {
+const tag_sorts = {
     point: 'count_nodes',
     vertex: 'count_nodes',
     area: 'count_ways',
     line: 'count_ways'
 };
-var tag_sort_members = {
+const tag_sort_members = {
     point: 'count_node_members',
     vertex: 'count_node_members',
     area: 'count_way_members',
     line: 'count_way_members',
     relation: 'count_relation_members'
 };
-var tag_filters = {
+const tag_filters = {
     point: 'nodes',
     vertex: 'nodes',
     area: 'ways',
     line: 'ways'
 };
-var tag_members_fractions = {
+const tag_members_fractions = {
     point: 'count_node_members_fraction',
     vertex: 'count_node_members_fraction',
     area: 'count_way_members_fraction',
@@ -70,7 +70,7 @@ function clean(params) {
 
 
 function filterKeys(type) {
-    var count_type = type ? 'count_' + type : 'count_all';
+    const count_type = type ? 'count_' + type : 'count_all';
     return function(d) {
         return Number(d[count_type]) > 2500 || d.in_wiki;
     };
@@ -80,8 +80,8 @@ function filterKeys(type) {
 function filterMultikeys(prefix) {
     return function(d) {
         // d.key begins with prefix, and d.key contains no additional ':'s
-        var re = new RegExp('^' + prefix + '(.*)$', 'i');
-        var matches = d.key.match(re) || [];
+        const re = new RegExp('^' + prefix + '(.*)$', 'i');
+        const matches = d.key.match(re) || [];
         return (matches.length === 2 && matches[1].indexOf(':') === -1);
     };
 }
@@ -114,7 +114,7 @@ function valKey(d) {
 
 
 function valKeyDescription(d) {
-    var obj = {
+    const obj = {
         value: d.value,
         title: d.description || d.value
     };
@@ -138,14 +138,14 @@ function sortKeys(a, b) {
 }
 
 
-var debouncedRequest = _debounce(request, 300, { leading: false });
+const debouncedRequest = _debounce(request, 300, { leading: false });
 
 function request(url, params, exactMatch, callback, loaded) {
     if (_inflight[url]) return;
 
     if (checkCache(url, params, exactMatch, callback)) return;
 
-    var controller = new AbortController();
+    const controller = new AbortController();
     _inflight[url] = controller;
 
     d3_json(url, { signal: controller.signal })
@@ -162,12 +162,12 @@ function request(url, params, exactMatch, callback, loaded) {
 
 
 function checkCache(url, params, exactMatch, callback) {
-    var rp = params.rp || 25;
-    var testQuery = params.query || '';
-    var testUrl = url;
+    const rp = params.rp || 25;
+    let testQuery = params.query || '';
+    let testUrl = url;
 
     do {
-        var hit = _taginfoCache[testUrl];
+        const hit = _taginfoCache[testUrl];
 
         // exact match, or shorter match yielding fewer than max results (rp)
         if (hit && (url === testUrl || hit.length < rp)) {
@@ -211,7 +211,7 @@ export default {
         // Fetch popular keys.  We'll exclude these from `values`
         // lookups because they stress taginfo, and they aren't likely
         // to yield meaningful autocomplete results.. see #3955
-        var params = {
+        const params = {
             rp: 100,
             sortname: 'values_all',
             sortorder: 'desc',
@@ -236,7 +236,7 @@ export default {
 
 
     keys: function(params, callback) {
-        var doRequest = params.debounce ? debouncedRequest : request;
+        const doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
         params = Object.assign({
             rp: 10,
@@ -246,13 +246,13 @@ export default {
             lang: localizer.languageCode()
         }, params);
 
-        var url = apibase + 'keys/all?' + utilQsString(params);
+        const url = apibase + 'keys/all?' + utilQsString(params);
         doRequest(url, params, false, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
-                var f = filterKeys(params.filter);
-                var result = d.data.filter(f).sort(sortKeys).map(valKey);
+                const f = filterKeys(params.filter);
+                const result = d.data.filter(f).sort(sortKeys).map(valKey);
                 _taginfoCache[url] = result;
                 callback(null, result);
             }
@@ -261,7 +261,7 @@ export default {
 
 
     multikeys: function(params, callback) {
-        var doRequest = params.debounce ? debouncedRequest : request;
+        const doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
         params = Object.assign({
             rp: 25,
@@ -271,14 +271,14 @@ export default {
             lang: localizer.languageCode()
         }, params);
 
-        var prefix = params.query;
-        var url = apibase + 'keys/all?' + utilQsString(params);
+        const prefix = params.query;
+        const url = apibase + 'keys/all?' + utilQsString(params);
         doRequest(url, params, true, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
-                var f = filterMultikeys(prefix);
-                var result = d.data.filter(f).map(valKey);
+                const f = filterMultikeys(prefix);
+                const result = d.data.filter(f).map(valKey);
                 _taginfoCache[url] = result;
                 callback(null, result);
             }
@@ -288,13 +288,13 @@ export default {
 
     values: function(params, callback) {
         // Exclude popular keys from values lookups.. see #3955
-        var key = params.key;
+        const key = params.key;
         if (key && _popularKeys[key]) {
             callback(null, []);
             return;
         }
 
-        var doRequest = params.debounce ? debouncedRequest : request;
+        const doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(setFilter(params)));
         params = Object.assign({
             rp: 25,
@@ -304,7 +304,7 @@ export default {
             lang: localizer.languageCode()
         }, params);
 
-        var url = apibase + 'key/values?' + utilQsString(params);
+        const url = apibase + 'key/values?' + utilQsString(params);
         doRequest(url, params, false, callback, function(err, d) {
             if (err) {
                 callback(err);
@@ -313,10 +313,10 @@ export default {
                 // A few OSM keys expect values to contain uppercase values (see #3377).
                 // This is not an exhaustive list (e.g. `name` also has uppercase values)
                 // but these are the fields where taginfo value lookup is most useful.
-                var allowUpperCase = allowUpperCaseTagValues.test(params.key);
-                var f = filterValues(allowUpperCase);
+                const allowUpperCase = allowUpperCaseTagValues.test(params.key);
+                const f = filterValues(allowUpperCase);
 
-                var result = d.data.filter(f).map(valKeyDescription);
+                const result = d.data.filter(f).map(valKeyDescription);
                 _taginfoCache[url] = result;
                 callback(null, result);
             }
@@ -325,8 +325,8 @@ export default {
 
 
     roles: function(params, callback) {
-        var doRequest = params.debounce ? debouncedRequest : request;
-        var geometry = params.geometry;
+        const doRequest = params.debounce ? debouncedRequest : request;
+        const geometry = params.geometry;
         params = clean(setSortMembers(params));
         params = Object.assign({
             rp: 25,
@@ -336,13 +336,13 @@ export default {
             lang: localizer.languageCode()
         }, params);
 
-        var url = apibase + 'relation/roles?' + utilQsString(params);
+        const url = apibase + 'relation/roles?' + utilQsString(params);
         doRequest(url, params, true, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
-                var f = filterRoles(geometry);
-                var result = d.data.filter(f).map(roleKey);
+                const f = filterRoles(geometry);
+                const result = d.data.filter(f).map(roleKey);
                 _taginfoCache[url] = result;
                 callback(null, result);
             }
@@ -351,17 +351,17 @@ export default {
 
 
     docs: function(params, callback) {
-        var doRequest = params.debounce ? debouncedRequest : request;
+        const doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
 
-        var path = 'key/wiki_pages?';
+        let path = 'key/wiki_pages?';
         if (params.value) {
             path = 'tag/wiki_pages?';
         } else if (params.rtype) {
             path = 'relation/wiki_pages?';
         }
 
-        var url = apibase + path + utilQsString(params);
+        const url = apibase + path + utilQsString(params);
         doRequest(url, params, true, callback, function(err, d) {
             if (err) {
                 callback(err);

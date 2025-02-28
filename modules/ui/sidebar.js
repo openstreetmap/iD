@@ -19,26 +19,26 @@ import { localizer } from '../core/localizer';
 
 
 export function uiSidebar(context) {
-    var inspector = uiInspector(context);
-    var dataEditor = uiDataEditor(context);
-    var noteEditor = uiNoteEditor(context);
-    var keepRightEditor = uiKeepRightEditor(context);
-    var osmoseEditor = uiOsmoseEditor(context);
-    var _current;
-    var _wasData = false;
-    var _wasNote = false;
-    var _wasQaItem = false;
+    const inspector = uiInspector(context);
+    const dataEditor = uiDataEditor(context);
+    const noteEditor = uiNoteEditor(context);
+    const keepRightEditor = uiKeepRightEditor(context);
+    const osmoseEditor = uiOsmoseEditor(context);
+    let _current;
+    let _wasData = false;
+    let _wasNote = false;
+    let _wasQaItem = false;
 
     // use pointer events on supported platforms; fallback to mouse events
-    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+    const _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
 
     function sidebar(selection) {
-        var container = context.container();
-        var minWidth = 240;
-        var sidebarWidth;
-        var containerWidth;
-        var dragOffset;
+        const container = context.container();
+        const minWidth = 240;
+        let sidebarWidth;
+        let containerWidth;
+        let dragOffset;
 
         // Set the initial width constraints
         selection
@@ -46,12 +46,12 @@ export function uiSidebar(context) {
             .style('max-width', '400px')
             .style('width', '33.3333%');
 
-        var resizer = selection
+        const resizer = selection
             .append('div')
             .attr('class', 'sidebar-resizer')
             .on(_pointerPrefix + 'down.sidebar-resizer', pointerdown);
 
-        var downPointerId, lastClientX, containerLocGetter;
+        let downPointerId, lastClientX, containerLocGetter;
 
         function pointerdown(d3_event) {
             if (downPointerId) return;
@@ -69,7 +69,7 @@ export function uiSidebar(context) {
 
             sidebarWidth = selection.node().getBoundingClientRect().width;
             containerWidth = container.node().getBoundingClientRect().width;
-            var widthPct = (sidebarWidth / containerWidth) * 100;
+            const widthPct = (sidebarWidth / containerWidth) * 100;
             selection
                 .style('width', widthPct + '%')    // lock in current width
                 .style('max-width', '85%');        // but allow larger widths
@@ -91,19 +91,19 @@ export function uiSidebar(context) {
 
             d3_event.preventDefault();
 
-            var dx = d3_event.clientX - lastClientX;
+            const dx = d3_event.clientX - lastClientX;
 
             lastClientX = d3_event.clientX;
 
-            var isRTL = (localizer.textDirection() === 'rtl');
-            var scaleX = isRTL ? 0 : 1;
-            var xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
+            const isRTL = (localizer.textDirection() === 'rtl');
+            const scaleX = isRTL ? 0 : 1;
+            const xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
 
-            var x = containerLocGetter(d3_event)[0] - dragOffset;
+            const x = containerLocGetter(d3_event)[0] - dragOffset;
             sidebarWidth = isRTL ? containerWidth - x : x;
 
-            var isCollapsed = selection.classed('collapsed');
-            var shouldCollapse = sidebarWidth < minWidth;
+            const isCollapsed = selection.classed('collapsed');
+            const shouldCollapse = sidebarWidth < minWidth;
 
             selection.classed('collapsed', shouldCollapse);
 
@@ -117,7 +117,7 @@ export function uiSidebar(context) {
                 }
 
             } else {
-                var widthPct = (sidebarWidth / containerWidth) * 100;
+                const widthPct = (sidebarWidth / containerWidth) * 100;
                 selection
                     .style(xMarginProperty, null)
                     .style('width', widthPct + '%');
@@ -143,22 +143,22 @@ export function uiSidebar(context) {
                 .on(_pointerPrefix + 'up.sidebar-resizer pointercancel.sidebar-resizer', null);
         }
 
-        var featureListWrap = selection
+        const featureListWrap = selection
             .append('div')
             .attr('class', 'feature-list-pane')
             .call(uiFeatureList(context));
 
-        var inspectorWrap = selection
+        const inspectorWrap = selection
             .append('div')
             .attr('class', 'inspector-hidden inspector-wrap');
 
-        var hoverModeSelect = function(targets) {
+        const hoverModeSelect = function(targets) {
             context.container().selectAll('.feature-list-item button').classed('hover', false);
 
             if (context.selectedIDs().length > 1 &&
                 targets && targets.length) {
 
-                var elements = context.container().selectAll('.feature-list-item button')
+                const elements = context.container().selectAll('.feature-list-item button')
                     .filter(function (node) {
                         return targets.indexOf(node) !== -1;
                     });
@@ -172,7 +172,7 @@ export function uiSidebar(context) {
         sidebar.hoverModeSelect = _throttle(hoverModeSelect, 200);
 
         function hover(targets) {
-            var datum = targets && targets.length && targets[0];
+            let datum = targets && targets.length && targets[0];
             if (datum && datum.__featurehash__) {   // hovering on data
                 _wasData = true;
                 sidebar
@@ -185,7 +185,7 @@ export function uiSidebar(context) {
                 if (context.mode().id === 'drag-note') return;
                 _wasNote = true;
 
-                var osm = services.osm;
+                const osm = services.osm;
                 if (osm) {
                     datum = osm.getNote(datum.id);   // marker may contain stale data - get latest
                 }
@@ -199,14 +199,14 @@ export function uiSidebar(context) {
             } else if (datum instanceof QAItem) {
                 _wasQaItem = true;
 
-                var errService = services[datum.service];
+                const errService = services[datum.service];
                 if (errService) {
                     // marker may contain stale data - get latest
                     datum = errService.getError(datum.id);
                 }
 
                 // Currently only three possible services
-                var errEditor;
+                let errEditor;
                 if (datum.service === 'keepRight') {
                     errEditor = keepRightEditor;
                 } else {
@@ -262,7 +262,7 @@ export function uiSidebar(context) {
 
 
         sidebar.intersects = function(extent) {
-            var rect = selection.node().getBoundingClientRect();
+            const rect = selection.node().getBoundingClientRect();
             return extent.intersects([
                 context.projection.invert([0, rect.height]),
                 context.projection.invert([rect.width, 0])
@@ -275,10 +275,10 @@ export function uiSidebar(context) {
 
             if (ids && ids.length) {
 
-                var entity = ids.length === 1 && context.entity(ids[0]);
+                const entity = ids.length === 1 && context.entity(ids[0]);
                 if (entity && newFeature && selection.classed('collapsed')) {
                     // uncollapse the sidebar
-                    var extent = entity.extent(context.graph());
+                    const extent = entity.extent(context.graph());
                     sidebar.expand(sidebar.intersects(extent));
                 }
 
@@ -355,18 +355,18 @@ export function uiSidebar(context) {
             // Don't allow sidebar to toggle when the user is in the walkthrough.
             if (context.inIntro()) return;
 
-            var isCollapsed = selection.classed('collapsed');
-            var isCollapsing = !isCollapsed;
-            var isRTL = (localizer.textDirection() === 'rtl');
-            var scaleX = isRTL ? 0 : 1;
-            var xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
+            const isCollapsed = selection.classed('collapsed');
+            const isCollapsing = !isCollapsed;
+            const isRTL = (localizer.textDirection() === 'rtl');
+            const scaleX = isRTL ? 0 : 1;
+            const xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
 
             sidebarWidth = selection.node().getBoundingClientRect().width;
 
             // switch from % to px
             selection.style('width', sidebarWidth + 'px');
 
-            var startMargin, endMargin, lastMargin;
+            let startMargin, endMargin, lastMargin;
             if (isCollapsing) {
                 startMargin = lastMargin = 0;
                 endMargin = -sidebarWidth;
@@ -384,9 +384,9 @@ export function uiSidebar(context) {
                 .transition()
                 .style(xMarginProperty, endMargin + 'px')
                 .tween('panner', function() {
-                    var i = d3_interpolateNumber(startMargin, endMargin);
+                    const i = d3_interpolateNumber(startMargin, endMargin);
                     return function(t) {
-                        var dx = lastMargin - Math.round(i(t));
+                        const dx = lastMargin - Math.round(i(t));
                         lastMargin = lastMargin - dx;
                         context.ui().onResize(moveMap ? undefined : [dx * scaleX, 0]);
                     };
@@ -399,8 +399,8 @@ export function uiSidebar(context) {
 
                     // switch back from px to %
                     if (!isCollapsing) {
-                        var containerWidth = container.node().getBoundingClientRect().width;
-                        var widthPct = (sidebarWidth / containerWidth) * 100;
+                        const containerWidth = container.node().getBoundingClientRect().width;
+                        const widthPct = (sidebarWidth / containerWidth) * 100;
                         selection
                             .style(xMarginProperty, null)
                             .style('width', widthPct + '%');

@@ -11,16 +11,16 @@ import { modeDragNote } from './drag_note';
 import { operationPaste } from '../operations/paste';
 
 export function modeBrowse(context) {
-    var mode = {
+    const mode = {
         button: 'browse',
         id: 'browse',
         title: t.append('modes.browse.title'),
         description: t.append('modes.browse.description')
     };
-    var sidebar;
+    let sidebar;
 
-    var _selectBehavior;
-    var _behaviors = [];
+    let _selectBehavior;
+    let _behaviors = [];
 
 
     mode.selectBehavior = function(val) {

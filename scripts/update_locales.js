@@ -31,14 +31,14 @@ if (process.env.transifex_password) {
 
 const dataShortcuts = JSON.parse(fs.readFileSync('data/shortcuts.json', 'utf8'));
 
-let shortcuts = [];
+const shortcuts = [];
 dataShortcuts.forEach(tab => {
   tab.columns.forEach(col => {
     col.rows.forEach(row => {
       if (!row.shortcuts) return;
       row.shortcuts.forEach(shortcut => {
         if (shortcut.includes('.')) {
-          let info = { shortcut: shortcut };
+          const info = { shortcut: shortcut };
           if (row.modifiers) {
             info.modifier = row.modifiers.join('');
           }
@@ -49,7 +49,7 @@ dataShortcuts.forEach(tab => {
   });
 });
 
-let coverageByLocaleCode = {};
+const coverageByLocaleCode = {};
 
 // There's a race condition here, but it's highly unlikely that the info will
 // return after the resources. There's an error check just in case.
@@ -76,12 +76,12 @@ function gotResourceInfo(err, results) {
   if (err) return console.log(err);
   results.forEach(info => {
     info.forEach(stat => {
-      let code = stat.relationships.language.data.id.substr(2).replace(/_/g, '-');
+      const code = stat.relationships.language.data.id.substr(2).replace(/_/g, '-');
       let type = 'translated_strings';
       if (reviewedOnlyLangs.indexOf(code) !== -1) {
         type = 'reviewed_strings';
       }
-      let coveragePart = (stat.attributes[type] /  stat.attributes.total_strings) / results.length;
+      const coveragePart = (stat.attributes[type] /  stat.attributes.total_strings) / results.length;
 
       if (coverageByLocaleCode[code] === undefined) coverageByLocaleCode[code] = 0;
       coverageByLocaleCode[code] += coveragePart;
@@ -93,18 +93,18 @@ function gotResource(err, results) {
   if (err) return console.log(err);
 
   // merge in strings fetched from transifex
-  let allStrings = {};
+  const allStrings = {};
   results.forEach(resourceStrings => {
     Object.keys(resourceStrings).forEach(code => {
       if (!allStrings[code]) { allStrings[code] = {}; }
-      let source = resourceStrings[code];
-      let target = allStrings[code];
+      const source = resourceStrings[code];
+      const target = allStrings[code];
       Object.keys(source).forEach(k => target[k] = source[k]);
     });
   });
 
   // write files and fetch language info for each locale
-  let dataLocales = {
+  const dataLocales = {
     en: { rtl: false, pct: 1 }
   };
   asyncMap(Object.keys(allStrings),
@@ -112,13 +112,13 @@ function gotResource(err, results) {
       if (code === 'en') {
         done();
       } else {
-        let obj = {};
+        const obj = {};
         obj[code] = allStrings[code] || {};
-        let lNames = languageNames.languageNamesInLanguageOf(code) || {};
+        const lNames = languageNames.languageNamesInLanguageOf(code) || {};
         if (Object.keys(lNames).length) {
           obj[code].languageNames = lNames;
         }
-        let sNames = languageNames.scriptNamesInLanguageOf(code) || {};
+        const sNames = languageNames.scriptNamesInLanguageOf(code) || {};
         if (Object.keys(sNames).length) {
           obj[code].scriptNames = sNames;
         }
@@ -156,7 +156,7 @@ function gotResource(err, results) {
         // list the default locale as explicitly supported
         dataLocales['en-US'] = dataLocales.en;
         const keys = Object.keys(dataLocales).sort();
-        let sortedLocales = {};
+        const sortedLocales = {};
         keys.forEach(k => sortedLocales[k] = dataLocales[k]);
         fs.writeFileSync('dist/locales/index.min.json', JSON.stringify(sortedLocales));
       }
@@ -172,7 +172,7 @@ function getResource(resourceId, callback) {
     asyncMap(codes, getLanguage(resourceId), (err, results) => {
       if (err) return callback(err);
 
-      let locale = {};
+      const locale = {};
       results.forEach((result, i) => {
         if (resourceId === 'community' && Object.keys(result).length) {
           locale[codes[i]] = { community: result };  // add namespace
@@ -254,7 +254,7 @@ async function getLanguages(callback) {
 function asyncMap(inputs, func, callback) {
   let index = 0;
   let remaining = inputs.length;
-  let results = [];
+  const results = [];
   let error;
 
   next();
@@ -267,7 +267,7 @@ function asyncMap(inputs, func, callback) {
   }
 
   function callFunc(i) {
-    let d = inputs[i];
+    const d = inputs[i];
     func(d, (err, data) => {
       if (err) error = err;
       results[i] = data;
@@ -279,13 +279,13 @@ function asyncMap(inputs, func, callback) {
 
 
 function checkForDuplicateShortcuts(code, coreStrings) {
-  let usedShortcuts = {};
+  const usedShortcuts = {};
 
   shortcuts.forEach(shortcutInfo => {
-    let shortcutPathString = shortcutInfo.shortcut;
-    let modifier = shortcutInfo.modifier || '';
+    const shortcutPathString = shortcutInfo.shortcut;
+    const modifier = shortcutInfo.modifier || '';
 
-    let path = shortcutPathString
+    const path = shortcutPathString
       .split('.')
       .map(s => s.replace(/<TX_DOT>/g, '.'))
       .reverse();
@@ -297,9 +297,9 @@ function checkForDuplicateShortcuts(code, coreStrings) {
     }
 
     if (rep !== undefined) {
-      let shortcut = modifier + rep;
+      const shortcut = modifier + rep;
       if (usedShortcuts[shortcut] && usedShortcuts[shortcut] !== shortcutPathString) {
-        let message = code + ': duplicate shortcut "' + shortcut + '" for "' + usedShortcuts[shortcut] + '" and "' + shortcutPathString + '"';
+        const message = code + ': duplicate shortcut "' + shortcut + '" for "' + usedShortcuts[shortcut] + '" and "' + shortcutPathString + '"';
         console.warn(chalk.yellow(message));
       } else {
         usedShortcuts[shortcut] = shortcutPathString;

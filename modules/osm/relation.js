@@ -23,8 +23,8 @@ osmRelation.prototype = Object.create(osmEntity.prototype);
 
 
 osmRelation.creationOrder = function(a, b) {
-    var aId = parseInt(osmEntity.id.toOSM(a.id), 10);
-    var bId = parseInt(osmEntity.id.toOSM(b.id), 10);
+    const aId = parseInt(osmEntity.id.toOSM(a.id), 10);
+    const bId = parseInt(osmEntity.id.toOSM(b.id), 10);
 
     if (aId < 0 || bId < 0) return aId - bId;
     return bId - aId;
@@ -39,9 +39,9 @@ const prototype = {
     copy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
 
-        var copy = osmEntity.prototype.copy.call(this, resolver, copies);
+        let copy = osmEntity.prototype.copy.call(this, resolver, copies);
 
-        var members = this.members.map(function(member) {
+        const members = this.members.map(function(member) {
             return Object.assign({}, member, { id: resolver.entity(member.id).copy(resolver, copies).id });
         });
 
@@ -58,9 +58,9 @@ const prototype = {
             memo = memo || {};
             memo[this.id] = true;
 
-            var extent = geoExtent();
-            for (var i = 0; i < this.members.length; i++) {
-                var member = resolver.hasEntity(this.members[i].id);
+            const extent = geoExtent();
+            for (let i = 0; i < this.members.length; i++) {
+                const member = resolver.hasEntity(this.members[i].id);
                 if (member) {
                     extent._extend(member.extent(resolver, memo));
                 }
@@ -85,8 +85,8 @@ const prototype = {
     // Return an array of members, each extended with an 'index' property whose value
     // is the member index.
     indexedMembers: function() {
-        var result = new Array(this.members.length);
-        for (var i = 0; i < this.members.length; i++) {
+        const result = new Array(this.members.length);
+        for (let i = 0; i < this.members.length; i++) {
             result[i] = Object.assign({}, this.members[i], {index: i});
         }
         return result;
@@ -96,7 +96,7 @@ const prototype = {
     // Return the first member with the given role. A copy of the member object
     // is returned, extended with an 'index' property whose value is the member index.
     memberByRole: function(role) {
-        for (var i = 0; i < this.members.length; i++) {
+        for (let i = 0; i < this.members.length; i++) {
             if (this.members[i].role === role) {
                 return Object.assign({}, this.members[i], {index: i});
             }
@@ -105,8 +105,8 @@ const prototype = {
 
     // Same as memberByRole, but returns all members with the given role
     membersByRole: function(role) {
-        var result = [];
-        for (var i = 0; i < this.members.length; i++) {
+        const result = [];
+        for (let i = 0; i < this.members.length; i++) {
             if (this.members[i].role === role) {
                 result.push(Object.assign({}, this.members[i], {index: i}));
             }
@@ -117,7 +117,7 @@ const prototype = {
     // Return the first member with the given id. A copy of the member object
     // is returned, extended with an 'index' property whose value is the member index.
     memberById: function(id) {
-        for (var i = 0; i < this.members.length; i++) {
+        for (let i = 0; i < this.members.length; i++) {
             if (this.members[i].id === id) {
                 return Object.assign({}, this.members[i], {index: i});
             }
@@ -128,7 +128,7 @@ const prototype = {
     // Return the first member with the given id and role. A copy of the member object
     // is returned, extended with an 'index' property whose value is the member index.
     memberByIdAndRole: function(id, role) {
-        for (var i = 0; i < this.members.length; i++) {
+        for (let i = 0; i < this.members.length; i++) {
             if (this.members[i].id === id && this.members[i].role === role) {
                 return Object.assign({}, this.members[i], {index: i});
             }
@@ -137,33 +137,33 @@ const prototype = {
 
 
     addMember: function(member, index) {
-        var members = this.members.slice();
+        const members = this.members.slice();
         members.splice(index === undefined ? members.length : index, 0, member);
         return this.update({members: members});
     },
 
 
     updateMember: function(member, index) {
-        var members = this.members.slice();
+        const members = this.members.slice();
         members.splice(index, 1, Object.assign({}, members[index], member));
         return this.update({members: members});
     },
 
 
     removeMember: function(index) {
-        var members = this.members.slice();
+        const members = this.members.slice();
         members.splice(index, 1);
         return this.update({members: members});
     },
 
 
     removeMembersWithID: function(id) {
-        var members = this.members.filter(function(m) { return m.id !== id; });
+        const members = this.members.filter(function(m) { return m.id !== id; });
         return this.update({members: members});
     },
 
     moveMember: function(fromIndex, toIndex) {
-        var members = this.members.slice();
+        const members = this.members.slice();
         members.splice(toIndex, 0, members.splice(fromIndex, 1)[0]);
         return this.update({members: members});
     },
@@ -176,10 +176,10 @@ const prototype = {
     replaceMember: function(needle, replacement, keepDuplicates) {
         if (!this.memberById(needle.id)) return this;
 
-        var members = [];
+        const members = [];
 
-        for (var i = 0; i < this.members.length; i++) {
-            var member = this.members[i];
+        for (let i = 0; i < this.members.length; i++) {
+            const member = this.members[i];
             if (member.id !== needle.id) {
                 members.push(member);
             } else if (keepDuplicates || !this.memberByIdAndRole(replacement.id, member.role)) {
@@ -192,7 +192,7 @@ const prototype = {
 
 
     asJXON: function(changeset_id) {
-        var r = {
+        const r = {
             relation: {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
@@ -250,7 +250,7 @@ const prototype = {
 
 
     isComplete: function(resolver) {
-        for (var i = 0; i < this.members.length; i++) {
+        for (let i = 0; i < this.members.length; i++) {
             if (!resolver.hasEntity(this.members[i].id)) {
                 return false;
             }
@@ -279,9 +279,9 @@ const prototype = {
     isValidRestriction: function() {
         if (!this.isRestriction()) return false;
 
-        var froms = this.members.filter(function(m) { return m.role === 'from'; });
-        var vias = this.members.filter(function(m) { return m.role === 'via'; });
-        var tos = this.members.filter(function(m) { return m.role === 'to'; });
+        const froms = this.members.filter(function(m) { return m.role === 'from'; });
+        const vias = this.members.filter(function(m) { return m.role === 'via'; });
+        const tos = this.members.filter(function(m) { return m.role === 'to'; });
 
         if (froms.length !== 1 && this.tags.restriction !== 'no_entry') return false;
         if (froms.some(function(m) { return m.type !== 'way'; })) return false;
@@ -310,13 +310,13 @@ const prototype = {
     // rings not matched with the intended outer ring.
     //
     multipolygon: function(resolver) {
-        var outers = this.members.filter(function(m) { return 'outer' === (m.role || 'outer'); });
-        var inners = this.members.filter(function(m) { return 'inner' === m.role; });
+        let outers = this.members.filter(function(m) { return 'outer' === (m.role || 'outer'); });
+        let inners = this.members.filter(function(m) { return 'inner' === m.role; });
 
         outers = osmJoinWays(outers, resolver);
         inners = osmJoinWays(inners, resolver);
 
-        var sequenceToLineString = function(sequence) {
+        const sequenceToLineString = function(sequence) {
             if (sequence.nodes.length > 2 &&
                 sequence.nodes[0] !== sequence.nodes[sequence.nodes.length - 1]) {
                 // close unclosed parts to ensure correct area rendering - #2945
@@ -328,14 +328,14 @@ const prototype = {
         outers = outers.map(sequenceToLineString);
         inners = inners.map(sequenceToLineString);
 
-        var result = outers.map(function(o) {
+        const result = outers.map(function(o) {
             // Heuristic for detecting counterclockwise winding order. Assumes
             // that OpenStreetMap polygons are not hemisphere-spanning.
             return [d3_geoArea({ type: 'Polygon', coordinates: [o] }) > 2 * Math.PI ? o.reverse() : o];
         });
 
         function findOuter(inner) {
-            var o, outer;
+            let o, outer;
 
             for (o = 0; o < outers.length; o++) {
                 outer = outers[o];
@@ -352,14 +352,14 @@ const prototype = {
             }
         }
 
-        for (var i = 0; i < inners.length; i++) {
-            var inner = inners[i];
+        for (let i = 0; i < inners.length; i++) {
+            let inner = inners[i];
 
             if (d3_geoArea({ type: 'Polygon', coordinates: [inner] }) < 2 * Math.PI) {
                 inner = inner.reverse();
             }
 
-            var o = findOuter(inners[i]);
+            const o = findOuter(inners[i]);
             if (o !== undefined) {
                 result[o].push(inners[i]);
             } else {

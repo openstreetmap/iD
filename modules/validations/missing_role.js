@@ -6,22 +6,22 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationMissingRole() {
-    var type = 'missing_role';
+    const type = 'missing_role';
 
-    var validation = function checkMissingRole(entity, graph) {
-        var issues = [];
+    const validation = function checkMissingRole(entity, graph) {
+        const issues = [];
         if (entity.type === 'way') {
             graph.parentRelations(entity).forEach(function(relation) {
                 if (!relation.isMultipolygon()) return;
 
-                var member = relation.memberById(entity.id);
+                const member = relation.memberById(entity.id);
                 if (member && isMissingRole(member)) {
                     issues.push(makeIssue(entity, relation, member));
                 }
             });
         } else if (entity.type === 'relation' && entity.isMultipolygon()) {
             entity.indexedMembers().forEach(function(member) {
-                var way = graph.hasEntity(member.id);
+                const way = graph.hasEntity(member.id);
                 if (way && isMissingRole(member)) {
                     issues.push(makeIssue(way, entity, member));
                 }
@@ -42,7 +42,7 @@ export function validationMissingRole() {
             type: type,
             severity: 'warning',
             message: function(context) {
-                var member = context.hasEntity(this.entityIds[1]),
+                const member = context.hasEntity(this.entityIds[1]),
                     relation = context.hasEntity(this.entityIds[0]);
                 return (member && relation) ? t.append('issues.missing_role.message', {
                     member: utilDisplayLabel(member, context.graph()),
@@ -91,8 +91,8 @@ export function validationMissingRole() {
         return new validationIssueFix({
             title: t.append('issues.fix.set_as_' + role + '.title'),
             onClick: function(context) {
-                var oldMember = this.issue.data.member;
-                var member = { id: this.issue.entityIds[1], type: oldMember.type, role: role };
+                const oldMember = this.issue.data.member;
+                const member = { id: this.issue.entityIds[1], type: oldMember.type, role: role };
                 context.perform(
                     actionChangeMember(this.issue.entityIds[0], member, oldMember.index),
                     t('operations.change_role.annotation', {

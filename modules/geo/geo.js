@@ -1,5 +1,5 @@
 // constants
-var TAU = 2 * Math.PI;
+const TAU = 2 * Math.PI;
 const EQUATORIAL_RADIUS = 6.3781370E6;
 const POLAR_RADIUS = 6.3567523E6;
 
@@ -46,8 +46,8 @@ export function geoOffsetToMeters(offset, tileSize) {
 
 // Equirectangular approximation of spherical distances on Earth
 export function geoSphericalDistance(a, b) {
-    var x = geoLonToMeters(a[0] - b[0], (a[1] + b[1]) / 2);
-    var y = geoLatToMeters(a[1] - b[1]);
+    const x = geoLonToMeters(a[0] - b[0], (a[1] + b[1]) / 2);
+    const y = geoLatToMeters(a[1] - b[1]);
     return Math.sqrt((x * x) + (y * y));
 }
 
@@ -55,7 +55,7 @@ export function geoSphericalDistance(a, b) {
 // scale to zoom
 export function geoScaleToZoom(k, tileSize) {
     tileSize = tileSize || 256;
-    var log2ts = Math.log(tileSize) * Math.LOG2E;
+    const log2ts = Math.log(tileSize) * Math.LOG2E;
     return Math.log(k * TAU) / Math.LN2 - log2ts;
 }
 
@@ -69,10 +69,10 @@ export function geoZoomToScale(z, tileSize) {
 
 // returns info about the node from `nodes` closest to the given `point`
 export function geoSphericalClosestNode(nodes, point) {
-    var minDistance = Infinity, distance;
-    var indexOfMin;
+    let minDistance = Infinity, distance;
+    let indexOfMin;
 
-    for (var i in nodes) {
+    for (const i in nodes) {
         distance = geoSphericalDistance(nodes[i].loc, point);
         if (distance < minDistance) {
             minDistance = distance;

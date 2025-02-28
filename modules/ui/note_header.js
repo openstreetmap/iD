@@ -3,11 +3,11 @@ import { svgIcon } from '../svg/icon';
 
 
 export function uiNoteHeader() {
-    var _note;
+    let _note;
 
 
     function noteHeader(selection) {
-        var header = selection.selectAll('.note-header')
+        const header = selection.selectAll('.note-header')
             .data(
                 (_note ? [_note] : []),
                 function(d) { return d.status + d.id; }
@@ -16,11 +16,11 @@ export function uiNoteHeader() {
         header.exit()
             .remove();
 
-        var headerEnter = header.enter()
+        const headerEnter = header.enter()
             .append('div')
             .attr('class', 'note-header');
 
-        var iconEnter = headerEnter
+        const iconEnter = headerEnter
             .append('div')
             .attr('class', function(d) { return 'note-header-icon ' + d.status; })
             .classed('new', function(d) { return d.id < 0; });
@@ -31,7 +31,7 @@ export function uiNoteHeader() {
             .call(svgIcon('#iD-icon-note', 'note-fill'));
 
         iconEnter.each(function(d) {
-            var statusIcon;
+            let statusIcon;
             if (d.id < 0) {
                 statusIcon = '#iD-icon-plus';
             } else if (d.status === 'open') {

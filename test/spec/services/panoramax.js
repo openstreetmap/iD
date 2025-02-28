@@ -1,6 +1,6 @@
 describe('iD.servicePanoramax', function() {
-    var dimensions = [64, 64];
-    var context, panoramax;
+    const dimensions = [64, 64];
+    let context, panoramax;
 
     before(function() {
         iD.services.panoramax = iD.servicePanoramax;
@@ -33,12 +33,12 @@ describe('iD.servicePanoramax', function() {
 
     describe('#init', function() {
         it('Initializes cache one time', function() {
-            var cache = panoramax.cache();
+            const cache = panoramax.cache();
             expect(cache).to.have.property('images');
             expect(cache).to.have.property('sequences');
 
             panoramax.init();
-            var cache2 = panoramax.cache();
+            const cache2 = panoramax.cache();
             expect(cache).to.equal(cache2);
         });
     });
@@ -56,14 +56,14 @@ describe('iD.servicePanoramax', function() {
 
     describe('#images', function() {
         it('returns images in the visible map area', function() {
-            var features = [
+            const features = [
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { id: '0', loc: [10,0], heading: 90, sequence_id: '100', account_id: '0' } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { id: '1', loc: [10,0], heading: 90, sequence_id: '100', account_id: '1' } },
                 { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { id: '2', loc: [10,1], heading: 90, sequence_id: '100', account_id: '2' } }
             ];
 
             panoramax.cache().images.rtree.load(features);
-            var res = panoramax.images(context.projection);
+            const res = panoramax.images(context.projection);
 
             expect(res).to.deep.eql([
                 { id: '0', loc: [10,0], heading: 90, sequence_id: '100', account_id: '0' },
@@ -72,7 +72,7 @@ describe('iD.servicePanoramax', function() {
         });
 
         it('limits results no more than 5 stacked images in one spot', function() {
-            var features = [
+            const features = [
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { id: '0', loc: [10,0], heading: 90, sequence_id: '100', account_id: '0' } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { id: '1', loc: [10,0], heading: 90, sequence_id: '100', account_id: '1' } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { id: '2', loc: [10,0], heading: 90, sequence_id: '100', account_id: '2' } },
@@ -82,7 +82,7 @@ describe('iD.servicePanoramax', function() {
             ];
 
             panoramax.cache().images.rtree.load(features);
-            var res = panoramax.images(context.projection);
+            const res = panoramax.images(context.projection);
             expect(res).to.have.length.of.at.most(5);
         });
     });
@@ -90,7 +90,7 @@ describe('iD.servicePanoramax', function() {
 
     describe('#sequences', function() {
         it('returns sequence linestrings in the visible map area', function() {
-            var features = [
+            const features = [
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { id: '0', loc: [10,0], heading: 90, sequence_id: '100', account_id: '0' } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { id: '1', loc: [10,0], heading: 90, sequence_id: '100', account_id: '1' } },
                 { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { id: '2', loc: [10,1], heading: 90, sequence_id: '100', account_id: '2' } }
@@ -99,7 +99,7 @@ describe('iD.servicePanoramax', function() {
             panoramax.cache().images.rtree.load(features);
             panoramax.cache().sequences.lineString['100'] = { rotation: 0, images: [ features[0].data, features[1].data, features[2].data ] };
 
-            var res = panoramax.sequences(context.projection, 15);
+            const res = panoramax.sequences(context.projection, 15);
             expect(res).to.deep.eql([{
                 rotation: 0, images: [features[0].data, features[1].data, features[2].data]
             }]);
@@ -108,7 +108,7 @@ describe('iD.servicePanoramax', function() {
 
     describe('#selectedImage', function() {
         it('sets and gets selected image', function() {
-            var d = { id: 'foo', sequence_id: '100'};
+            const d = { id: 'foo', sequence_id: '100'};
             panoramax.cache().images = { forImageId: { foo: d }};
             panoramax.selectImage(context, 'foo');
             expect(panoramax.getActiveImage()).to.eql(d);

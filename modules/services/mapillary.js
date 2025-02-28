@@ -714,7 +714,6 @@ export default {
             const valueParts = data.value.split('--');
             if (!valueParts.length) return;
 
-            let tag;
             let text;
             let color = 0xffffff;
 
@@ -729,9 +728,9 @@ export default {
                 _mlyHighlightedDetection = null;
             }
 
-            var decodedGeometry = window.atob(data.geometry);
-            var uintArray = new Uint8Array(decodedGeometry.length);
-            for (var i = 0; i < decodedGeometry.length; i++) {
+            const decodedGeometry = window.atob(data.geometry);
+            const uintArray = new Uint8Array(decodedGeometry.length);
+            for (let i = 0; i < decodedGeometry.length; i++) {
                 uintArray[i] = decodedGeometry.charCodeAt(i);
             }
             const tile = new VectorTile(new Protobuf(uintArray.buffer));
@@ -743,7 +742,7 @@ export default {
                 ring.map(point =>
                     [point.x / layer.extent, point.y / layer.extent]));
 
-            tag = new mapillary.OutlineTag(
+            const tag = new mapillary.OutlineTag(
                 data.id,
                 new mapillary.PolygonGeometry(polygon[0]),
                 {

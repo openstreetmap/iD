@@ -9,26 +9,26 @@ import { likelyRawNumberFormat } from './input';
 
 
 export function uiFieldRoadspeed(field, context) {
-    var dispatch = d3_dispatch('change');
-    var unitInput = d3_select(null);
-    var input = d3_select(null);
-    var _entityIDs = [];
-    var _tags;
-    var _isImperial;
-    var formatFloat = localizer.floatFormatter(localizer.languageCode());
-    var parseLocaleFloat = localizer.floatParser(localizer.languageCode());
+    const dispatch = d3_dispatch('change');
+    let unitInput = d3_select(null);
+    let input = d3_select(null);
+    let _entityIDs = [];
+    let _tags;
+    let _isImperial;
+    const formatFloat = localizer.floatFormatter(localizer.languageCode());
+    const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
 
-    var speedCombo = uiCombobox(context, 'roadspeed');
-    var unitCombo = uiCombobox(context, 'roadspeed-unit')
+    const speedCombo = uiCombobox(context, 'roadspeed');
+    const unitCombo = uiCombobox(context, 'roadspeed-unit')
             .data(['km/h', 'mph'].map(comboValues));
 
-    var metricValues = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120];
-    var imperialValues = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
+    const metricValues = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120];
+    const imperialValues = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
 
 
     function roadspeed(selection) {
 
-        var wrap = selection.selectAll('.form-field-input-wrap')
+        let wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
@@ -53,7 +53,7 @@ export function uiFieldRoadspeed(field, context) {
             .on('change', change)
             .on('blur', change);
 
-        var loc = combinedEntityExtent().center();
+        const loc = combinedEntityExtent().center();
         _isImperial = countryCoder.roadSpeedUnit(loc) === 'mph';
 
         unitInput = wrap.selectAll('input.roadspeed-unit')
@@ -73,7 +73,7 @@ export function uiFieldRoadspeed(field, context) {
 
 
         function changeUnits() {
-            var unit = utilGetSetValue(unitInput);
+            const unit = utilGetSetValue(unitInput);
             if (unit === 'km/h') {
                 _isImperial = false;
             } else if (unit === 'mph') {
@@ -101,8 +101,8 @@ export function uiFieldRoadspeed(field, context) {
 
 
     function change() {
-        var tag = {};
-        var value = utilGetSetValue(input).trim();
+        const tag = {};
+        const value = utilGetSetValue(input).trim();
 
         // don't override multiple values with blank string
         if (!value && Array.isArray(_tags[field.key])) return;
@@ -110,7 +110,7 @@ export function uiFieldRoadspeed(field, context) {
         if (!value) {
             tag[field.key] = undefined;
         } else {
-            var rawValue = likelyRawNumberFormat.test(value)
+            let rawValue = likelyRawNumberFormat.test(value)
                 ? parseFloat(value)
                 : parseLocaleFloat(value);
             if (isNaN(rawValue)) rawValue = value;
@@ -128,9 +128,9 @@ export function uiFieldRoadspeed(field, context) {
     roadspeed.tags = function(tags) {
         _tags = tags;
 
-        var rawValue = tags[field.key];
-        var value = rawValue;
-        var isMixed = Array.isArray(value);
+        const rawValue = tags[field.key];
+        let value = rawValue;
+        const isMixed = Array.isArray(value);
 
         if (!isMixed) {
             if (rawValue && rawValue.indexOf('mph') >= 0) {

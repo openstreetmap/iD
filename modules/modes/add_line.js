@@ -10,22 +10,22 @@ import { osmNode, osmWay } from '../osm';
 export function modeAddLine(context, mode) {
     mode.id = 'add-line';
 
-    var behavior = behaviorAddWay(context)
+    const behavior = behaviorAddWay(context)
         .on('start', start)
         .on('startFromWay', startFromWay)
         .on('startFromNode', startFromNode);
 
     function defaultTags(loc) {
-        var defaultTags = {};
+        let defaultTags = {};
         if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'line', false, loc);
         return defaultTags;
     }
 
 
     function start(loc) {
-        var startGraph = context.graph();
-        var node = osmNode({ loc: loc });
-        var way = osmWay({ tags: defaultTags(loc) });
+        const startGraph = context.graph();
+        const node = osmNode({ loc: loc });
+        const way = osmWay({ tags: defaultTags(loc) });
 
         context.perform(
             actionAddEntity(node),
@@ -38,9 +38,9 @@ export function modeAddLine(context, mode) {
 
 
     function startFromWay(loc, edge) {
-        var startGraph = context.graph();
-        var node = osmNode({ loc: loc });
-        var way = osmWay({ tags: defaultTags(loc) });
+        const startGraph = context.graph();
+        const node = osmNode({ loc: loc });
+        const way = osmWay({ tags: defaultTags(loc) });
 
         context.perform(
             actionAddEntity(node),
@@ -54,8 +54,8 @@ export function modeAddLine(context, mode) {
 
 
     function startFromNode(node) {
-        var startGraph = context.graph();
-        var way = osmWay({ tags: defaultTags(node.loc) });
+        const startGraph = context.graph();
+        const way = osmWay({ tags: defaultTags(node.loc) });
 
         context.perform(
             actionAddEntity(way),

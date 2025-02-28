@@ -2,7 +2,7 @@ import { uiCmd } from './cmd';
 import { utilDetect } from '../util/detect';
 
 export function uiFullScreen(context) {
-    var element = context.container().node();
+    const element = context.container().node();
     // var button = d3_select(null);
 
 
@@ -68,8 +68,8 @@ export function uiFullScreen(context) {
         // button.append('span')
         //     .attr('class', 'icon full-screen');
 
-        var detected = utilDetect();
-        var keys = (detected.os === 'mac' ? [uiCmd('⌃⌘F'), 'f11'] : ['f11']);
+        const detected = utilDetect();
+        const keys = (detected.os === 'mac' ? [uiCmd('⌃⌘F'), 'f11'] : ['f11']);
         context.keybinding().on(keys, fullScreen);
     };
 }

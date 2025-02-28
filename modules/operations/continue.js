@@ -7,12 +7,12 @@ import { actionChangeTags } from '../actions';
 
 export function operationContinue(context, selectedIDs) {
 
-    var _entities = selectedIDs.map(function(id) { return context.graph().entity(id); });
-    var _geometries = Object.assign(
+    const _entities = selectedIDs.map(function(id) { return context.graph().entity(id); });
+    const _geometries = Object.assign(
         { line: [], vertex: [] },
         utilArrayGroupBy(_entities, function(entity) { return entity.geometry(context.graph()); })
     );
-    var _vertex = _geometries.vertex.length && _geometries.vertex[0];
+    const _vertex = _geometries.vertex.length && _geometries.vertex[0];
 
 
     function candidateWays() {
@@ -25,11 +25,11 @@ export function operationContinue(context, selectedIDs) {
         }) : [];
     }
 
-    var _candidates = candidateWays();
+    const _candidates = candidateWays();
 
 
-    var operation = function() {
-        var candidate = _candidates[0];
+    const operation = function() {
+        const candidate = _candidates[0];
 
         // remove fixme=continue or noexit=yes from the vertex.
         const tagsToRemove = new Set();
@@ -77,7 +77,7 @@ export function operationContinue(context, selectedIDs) {
 
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
+        const disable = operation.disabled();
         return disable ?
             t.append('operations.continue.' + disable) :
             t.append('operations.continue.description');

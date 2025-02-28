@@ -11,7 +11,7 @@ import { utilKeybinding } from '../util/keybinding';
 
 export function uiZoom(context) {
 
-    var zooms = [{
+    const zooms = [{
         id: 'zoom-in',
         icon: 'iD-icon-plus',
         title: t.append('zoom.in'),
@@ -58,7 +58,7 @@ export function uiZoom(context) {
     }
 
     return function(selection) {
-        var tooltipBehavior = uiTooltip()
+        const tooltipBehavior = uiTooltip()
             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             .title(function(d) {
                 if (d.disabled()) {
@@ -70,9 +70,9 @@ export function uiZoom(context) {
                 return [d.key];
             });
 
-        var lastPointerUpType;
+        let lastPointerUpType;
 
-        var buttons = selection.selectAll('button')
+        const buttons = selection.selectAll('button')
             .data(zooms)
             .enter()
             .append('button')
@@ -115,7 +115,7 @@ export function uiZoom(context) {
                     return d.disabled();
                 })
                 .each(function() {
-                    var selection = d3_select(this);
+                    const selection = d3_select(this);
                     if (!selection.select('.tooltip.in').empty()) {
                         selection.call(tooltipBehavior.updateContent);
                     }

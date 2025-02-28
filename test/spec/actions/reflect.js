@@ -1,8 +1,8 @@
 describe('iD.actionReflect', function() {
-    var projection = d3.geoMercator();
+    const projection = d3.geoMercator();
 
     it('does not create or remove nodes', function () {
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [4, 0]}),
                 iD.osmNode({id: 'c', loc: [4, 2]}),
@@ -20,7 +20,7 @@ describe('iD.actionReflect', function() {
         //   /     |  ->   \     |
         //  a ---- b        d -- c
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [4, 0]}),
                 iD.osmNode({id: 'c', loc: [4, 2]}),
@@ -45,7 +45,7 @@ describe('iD.actionReflect', function() {
         //   /     |  ->  |     \
         //  a ---- b      b ---- a
         //
-        var graph = iD.coreGraph([
+        let graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [4, 0]}),
                 iD.osmNode({id: 'c', loc: [4, 2]}),
@@ -70,7 +70,7 @@ describe('iD.actionReflect', function() {
         });
 
         it('reflect long at t = 0', function() {
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0, 0]}),
                     iD.osmNode({id: 'b', loc: [4, 0]}),
                     iD.osmNode({id: 'c', loc: [4, 2]}),
@@ -89,7 +89,7 @@ describe('iD.actionReflect', function() {
         });
 
         it('reflect long at t = 0.5', function() {
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0, 0]}),
                     iD.osmNode({id: 'b', loc: [4, 0]}),
                     iD.osmNode({id: 'c', loc: [4, 2]}),
@@ -108,7 +108,7 @@ describe('iD.actionReflect', function() {
         });
 
         it('reflect long at t = 1', function() {
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0, 0]}),
                     iD.osmNode({id: 'b', loc: [4, 0]}),
                     iD.osmNode({id: 'c', loc: [4, 2]}),
@@ -127,7 +127,7 @@ describe('iD.actionReflect', function() {
         });
 
         it('reflect short at t = 0', function() {
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0, 0]}),
                     iD.osmNode({id: 'b', loc: [4, 0]}),
                     iD.osmNode({id: 'c', loc: [4, 2]}),
@@ -146,7 +146,7 @@ describe('iD.actionReflect', function() {
         });
 
         it('reflect short at t = 0.5', function() {
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0, 0]}),
                     iD.osmNode({id: 'b', loc: [4, 0]}),
                     iD.osmNode({id: 'c', loc: [4, 2]}),
@@ -165,7 +165,7 @@ describe('iD.actionReflect', function() {
         });
 
         it('reflect short at t = 1', function() {
-            var graph = iD.coreGraph([
+            let graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0, 0]}),
                     iD.osmNode({id: 'b', loc: [4, 0]}),
                     iD.osmNode({id: 'c', loc: [4, 2]}),

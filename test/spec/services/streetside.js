@@ -1,8 +1,8 @@
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.serviceStreetside', function() {
-    var dimensions = [64, 64];
-    var context, streetside;
+    const dimensions = [64, 64];
+    let context, streetside;
 
     before(function() {
         iD.services.streetside = iD.serviceStreetside;
@@ -30,12 +30,12 @@ describe('iD.serviceStreetside', function() {
 
     describe('#init', function() {
         it('Initializes cache one time', function() {
-            var cache = streetside.cache();
+            const cache = streetside.cache();
             expect(cache).to.have.property('bubbles');
             expect(cache).to.have.property('sequences');
 
             streetside.init();
-            var cache2 = streetside.cache();
+            const cache2 = streetside.cache();
             expect(cache).to.equal(cache2);
         });
     });
@@ -57,10 +57,10 @@ describe('iD.serviceStreetside', function() {
                 .translate([-1863988.9381333336, 762.8270222954452])  // 10.002,0.002
                 .clipExtent([[0,0], dimensions]);
 
-            var spy = sinon.spy();
+            const spy = sinon.spy();
             streetside.on('loadedImages', spy);
 
-            var mockData = {
+            const mockData = {
                 resourceSets: [{
                     resources: []
                 }]
@@ -83,10 +83,10 @@ describe('iD.serviceStreetside', function() {
                 .translate([0, 0])
                 .clipExtent([[0,0], dimensions]);
 
-            var spy = sinon.spy();
+            const spy = sinon.spy();
             streetside.on('loadedImages', spy);
 
-            var mockData = {
+            const mockData = {
                 resourceSets: [{
                     resources: [{}]
                 }]
@@ -107,14 +107,14 @@ describe('iD.serviceStreetside', function() {
 
     describe('#bubbles', function() {
         it('returns bubbles in the visible map area', function() {
-            var features = [
+            const features = [
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 1, loc: [10, 0], ca: 90, pr: undefined, ne: 2, pano: true, sequenceKey: 1 } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 2, loc: [10, 0], ca: 90, pr: 1, ne: 3, pano: true, sequenceKey: 1 } },
                 { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: 3, loc: [10, 1], ca: 90, pr: 2, ne: undefined, pano: true, sequenceKey: 1 } }
             ];
 
             streetside.cache().bubbles.rtree.load(features);
-            var res = streetside.bubbles(context.projection);
+            const res = streetside.bubbles(context.projection);
 
             expect(res).to.deep.eql([
                 { key: 1, loc: [10, 0], ca: 90, pr: undefined, ne: 2, pano: true, sequenceKey: 1 },
@@ -123,7 +123,7 @@ describe('iD.serviceStreetside', function() {
         });
 
         it('limits results no more than 5 stacked bubbles in one spot', function() {
-            var features = [
+            const features = [
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 1, loc: [10, 0], ca: 90, pr: undefined, ne: 2, pano: true, sequence_id: 1 } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 2, loc: [10, 0], ca: 90, pr: 1, ne: 3, pano: true, sequence_id: 1 } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 3, loc: [10, 0], ca: 90, pr: 2, ne: 4, pano: true, sequence_id: 1 } },
@@ -133,7 +133,7 @@ describe('iD.serviceStreetside', function() {
             ];
 
             streetside.cache().bubbles.rtree.load(features);
-            var res = streetside.bubbles(context.projection);
+            const res = streetside.bubbles(context.projection);
             expect(res).to.have.length.of.at.most(5);
         });
     });
@@ -141,7 +141,7 @@ describe('iD.serviceStreetside', function() {
 
     describe('#sequences', function() {
         it('returns sequence linestrings in the visible map area', function() {
-            var features = [
+            const features = [
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 1, loc: [10, 0], ca: 90, pr: undefined, ne: 2, pano: true, sequenceKey: 1 } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 2, loc: [10, 0], ca: 90, pr: 1, ne: 3, pano: true, sequenceKey: 1 } },
                 { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: 3, loc: [10, 1], ca: 90, pr: 2, ne: undefined, pano: true, sequenceKey: 1 } }
@@ -149,7 +149,7 @@ describe('iD.serviceStreetside', function() {
 
             streetside.cache().bubbles.rtree.load(features);
 
-            var seq = {
+            const seq = {
                 key: 1,
                 bubbles: features.map(function(f) { return f.data; }),
                 geojson: {
@@ -161,7 +161,7 @@ describe('iD.serviceStreetside', function() {
 
             streetside.cache().sequences[1] = seq;
 
-            var res = streetside.sequences(context.projection);
+            const res = streetside.sequences(context.projection);
             expect(res).to.deep.eql([seq.geojson]);
         });
     });

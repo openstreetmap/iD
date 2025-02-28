@@ -6,11 +6,11 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationMissingTag(context) {
-    var type = 'missing_tag';
+    const type = 'missing_tag';
 
     function hasDescriptiveTags(entity) {
-        var onlyAttributeKeys = ['description', 'name', 'note', 'start_date', 'oneway'];
-        var entityDescriptiveKeys = Object.keys(entity.tags)
+        const onlyAttributeKeys = ['description', 'name', 'note', 'start_date', 'oneway'];
+        const entityDescriptiveKeys = Object.keys(entity.tags)
             .filter(function(k) {
                 if (k === 'area' || !osmIsInterestingTag(k)) return false;
 
@@ -38,12 +38,12 @@ export function validationMissingTag(context) {
         return entity.type === 'relation' && !entity.tags.type;
     }
 
-    var validation = function checkMissingTag(entity, graph) {
+    const validation = function checkMissingTag(entity, graph) {
 
-        var subtype;
+        let subtype;
 
-        var osm = context.connection();
-        var isUnloadedNode = entity.type === 'node' && osm && !osm.isDataLoaded(entity.loc);
+        const osm = context.connection();
+        const isUnloadedNode = entity.type === 'node' && osm && !osm.isDataLoaded(entity.loc);
 
         // we can't know if the node is a vertex if the tile is undownloaded
         if (!isUnloadedNode &&
@@ -68,19 +68,19 @@ export function validationMissingTag(context) {
 
         if (!subtype) return [];
 
-        var messageID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag.' + subtype;
-        var referenceID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag';
+        const messageID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag.' + subtype;
+        const referenceID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag';
 
         // can always delete if the user created it in the first place..
-        var canDelete = (entity.version === undefined || entity.v !== undefined);
-        var severity = (canDelete && subtype !== 'highway_classification') ? 'error' : 'warning';
+        const canDelete = (entity.version === undefined || entity.v !== undefined);
+        const severity = (canDelete && subtype !== 'highway_classification') ? 'error' : 'warning';
 
         return [new validationIssue({
             type: type,
             subtype: subtype,
             severity: severity,
             message: function(context) {
-                var entity = context.hasEntity(this.entityIds[0]);
+                const entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.' + messageID + '.message', {
                     feature: utilDisplayLabel(entity, context.graph())
                 }) : '';
@@ -89,9 +89,9 @@ export function validationMissingTag(context) {
             entityIds: [entity.id],
             dynamicFixes: function(context) {
 
-                var fixes = [];
+                const fixes = [];
 
-                var selectFixType = subtype === 'highway_classification' ? 'select_road_type' : 'select_preset';
+                const selectFixType = subtype === 'highway_classification' ? 'select_road_type' : 'select_preset';
 
                 fixes.push(new validationIssueFix({
                     icon: 'iD-icon-search',
@@ -101,15 +101,15 @@ export function validationMissingTag(context) {
                     }
                 }));
 
-                var deleteOnClick;
+                let deleteOnClick;
 
-                var id = this.entityIds[0];
-                var operation = operationDelete(context, [id]);
-                var disabledReasonID = operation.disabled();
+                const id = this.entityIds[0];
+                const operation = operationDelete(context, [id]);
+                const disabledReasonID = operation.disabled();
                 if (!disabledReasonID) {
                     deleteOnClick = function(context) {
-                        var id = this.issue.entityIds[0];
-                        var operation = operationDelete(context, [id]);
+                        const id = this.issue.entityIds[0];
+                        const operation = operationDelete(context, [id]);
                         if (!operation.disabled()) {
                             operation();
                         }

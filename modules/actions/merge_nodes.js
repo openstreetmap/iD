@@ -13,12 +13,12 @@ export function actionMergeNodes(nodeIDs, loc) {
     // Otherwise return the average location of all the nodes.
     function chooseLoc(graph) {
         if (!nodeIDs.length) return null;
-        var sum = [0,0];
-        var interestingCount = 0;
-        var interestingLoc;
+        let sum = [0,0];
+        let interestingCount = 0;
+        let interestingLoc;
 
-        for (var i = 0; i < nodeIDs.length; i++) {
-            var node = graph.entity(nodeIDs[i]);
+        for (let i = 0; i < nodeIDs.length; i++) {
+            const node = graph.entity(nodeIDs[i]);
             if (node.hasInterestingTags()) {
                 interestingLoc = (++interestingCount === 1) ? node.loc : null;
             }
@@ -29,15 +29,15 @@ export function actionMergeNodes(nodeIDs, loc) {
     }
 
 
-    var action = function(graph) {
+    const action = function(graph) {
         if (nodeIDs.length < 2) return graph;
-        var toLoc = loc;
+        let toLoc = loc;
         if (!toLoc) {
             toLoc = chooseLoc(graph);
         }
 
-        for (var i = 0; i < nodeIDs.length; i++) {
-            var node = graph.entity(nodeIDs[i]);
+        for (let i = 0; i < nodeIDs.length; i++) {
+            const node = graph.entity(nodeIDs[i]);
             if (node.loc !== toLoc) {
                 graph = graph.replace(node.move(toLoc));
             }
@@ -50,8 +50,8 @@ export function actionMergeNodes(nodeIDs, loc) {
     action.disabled = function(graph) {
         if (nodeIDs.length < 2) return 'not_eligible';
 
-        for (var i = 0; i < nodeIDs.length; i++) {
-            var entity = graph.entity(nodeIDs[i]);
+        for (let i = 0; i < nodeIDs.length; i++) {
+            const entity = graph.entity(nodeIDs[i]);
             if (entity.type !== 'node') return 'not_eligible';
         }
 

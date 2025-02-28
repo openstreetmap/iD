@@ -9,9 +9,9 @@ import { svgIcon } from '../../svg';
 
 
 export function uiSettingsLocalPhotos(context) {
-    var dispatch = d3_dispatch('change');
-    var photoLayer = context.layers().layer('local-photos');
-    var modal;
+    const dispatch = d3_dispatch('change');
+    const photoLayer = context.layers().layer('local-photos');
+    let modal;
 
     function render(selection) {
 
@@ -28,7 +28,7 @@ export function uiSettingsLocalPhotos(context) {
             .append('div')
             .classed('local-photos', true);
 
-        var instructionsSection = modal.select('.modal-section.message-text .local-photos')
+        const instructionsSection = modal.select('.modal-section.message-text .local-photos')
             .append('div')
             .classed('instructions', true);
 
@@ -46,7 +46,7 @@ export function uiSettingsLocalPhotos(context) {
             .style('visibility', 'hidden')
             .attr('id', 'local-photo-files')
             .on('change', function(d3_event) {
-                var files = d3_event.target.files;
+                const files = d3_event.target.files;
                 if (files && files.length) {
                     photoList
                         .select('ul')

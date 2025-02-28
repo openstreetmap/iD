@@ -6,9 +6,9 @@ import { utilRebind } from '../../util/rebind';
 
 
 export function uiIntroWelcome(context, reveal) {
-    var dispatch = d3_dispatch('done');
+    const dispatch = d3_dispatch('done');
 
-    var chapter = {
+    const chapter = {
         title: 'intro.welcome.title'
     };
 

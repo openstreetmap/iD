@@ -13,12 +13,12 @@ import { uiSection } from '../section';
 
 export function uiSectionValidationIssues(id, severity, context) {
 
-    var _issues = [];
+    let _issues = [];
 
-    var section = uiSection(id, context)
+    const section = uiSection(id, context)
         .label(function() {
             if (!_issues) return '';
-            var issueCountText = _issues.length > 1000 ? '1000+' : String(_issues.length);
+            const issueCountText = _issues.length > 1000 ? '1000+' : String(_issues.length);
             return t.append('inspector.title_count', { title: t('issues.' + severity + 's.list_title'), count: issueCountText });
         })
         .disclosureContent(renderDisclosureContent)
@@ -40,13 +40,13 @@ export function uiSectionValidationIssues(id, severity, context) {
 
     function renderDisclosureContent(selection) {
 
-        var center = context.map().center();
-        var graph = context.graph();
+        const center = context.map().center();
+        const graph = context.graph();
 
         // sort issues by distance away from the center of the map
-        var issues = _issues.map(function withDistance(issue) {
-                var extent = issue.extent(graph);
-                var dist = extent ? geoSphericalDistance(center, extent.center()) : 0;
+        let issues = _issues.map(function withDistance(issue) {
+                const extent = issue.extent(graph);
+                const dist = extent ? geoSphericalDistance(center, extent.center()) : 0;
                 return Object.assign(issue, { dist: dist });
             })
             .sort(function byDistance(a, b) {
@@ -63,7 +63,7 @@ export function uiSectionValidationIssues(id, severity, context) {
     }
 
     function drawIssuesList(selection, issues) {
-        var list = selection.selectAll('.issues-list')
+        let list = selection.selectAll('.issues-list')
             .data([0]);
 
         list = list.enter()
@@ -72,7 +72,7 @@ export function uiSectionValidationIssues(id, severity, context) {
             .merge(list);
 
 
-        var items = list.selectAll('li')
+        let items = list.selectAll('li')
             .data(issues, function(d) { return d.key; });
 
         // Exit
@@ -80,11 +80,11 @@ export function uiSectionValidationIssues(id, severity, context) {
             .remove();
 
         // Enter
-        var itemsEnter = items.enter()
+        const itemsEnter = items.enter()
             .append('li')
             .attr('class', function (d) { return 'issue severity-' + d.severity; });
 
-        var labelsEnter = itemsEnter
+        const labelsEnter = itemsEnter
             .append('button')
             .attr('class', 'issue-label')
             .on('click', function(d3_event, d) {
@@ -97,7 +97,7 @@ export function uiSectionValidationIssues(id, severity, context) {
                 utilHighlightEntities(d.entityIds, false, context);
             });
 
-        var textEnter = labelsEnter
+        const textEnter = labelsEnter
             .append('span')
             .attr('class', 'issue-text');
 
@@ -105,7 +105,7 @@ export function uiSectionValidationIssues(id, severity, context) {
             .append('span')
             .attr('class', 'issue-icon')
             .each(function(d) {
-                var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
+                const iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
                 d3_select(this)
                     .call(svgIcon(iconName));
             });

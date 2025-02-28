@@ -6,22 +6,22 @@ import { utilQsString, utilStringQs } from '../util';
 
 
 export function rendererPhotos(context) {
-    var dispatch = d3_dispatch('change');
-    var _layerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio', 'vegbilder', 'panoramax'];
-    var _allPhotoTypes = ['flat', 'panoramic'];
-    var _shownPhotoTypes = _allPhotoTypes.slice();   // shallow copy
-    var _dateFilters = ['fromDate', 'toDate'];
-    var _fromDate;
-    var _toDate;
-    var _usernames;
+    const dispatch = d3_dispatch('change');
+    const _layerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio', 'vegbilder', 'panoramax'];
+    const _allPhotoTypes = ['flat', 'panoramic'];
+    const _shownPhotoTypes = _allPhotoTypes.slice();   // shallow copy
+    const _dateFilters = ['fromDate', 'toDate'];
+    let _fromDate;
+    let _toDate;
+    let _usernames;
 
     function photos() {}
 
     function updateStorage() {
         if (window.mocha) return;
 
-        var hash = utilStringQs(window.location.hash);
-        var enabled = context.layers().all().filter(function(d) {
+        const hash = utilStringQs(window.location.hash);
+        const enabled = context.layers().all().filter(function(d) {
             return _layerIDs.indexOf(d.id) !== -1 && d.layer && d.layer.supported() && d.layer.enabled();
         }).map(function(d) {
             return d.id;
@@ -52,7 +52,7 @@ export function rendererPhotos(context) {
 
     photos.setDateFilter = function(type, val, updateUrl) {
         // validate the date
-        var date = val && new Date(val);
+        const date = val && new Date(val);
         if (date && !isNaN(date)) {
             val = date.toISOString().slice(0, 10);
         } else {
@@ -72,7 +72,7 @@ export function rendererPhotos(context) {
         }
         dispatch.call('change', this);
         if (updateUrl) {
-            var rangeString;
+            let rangeString;
             if (_fromDate || _toDate) {
                 rangeString = (_fromDate || '') + '_' + (_toDate || '');
             }
@@ -91,7 +91,7 @@ export function rendererPhotos(context) {
         _usernames = val;
         dispatch.call('change', this);
         if (updateUrl) {
-            var hashString;
+            let hashString;
             if (_usernames) {
                 hashString = _usernames.join(',');
             }
@@ -101,7 +101,7 @@ export function rendererPhotos(context) {
 
     function setUrlFilterValue(property, val) {
         if (!window.mocha) {
-            var hash = utilStringQs(window.location.hash);
+            const hash = utilStringQs(window.location.hash);
             if (val) {
                 if (hash[property] === val) return;
                 hash[property] = val;
@@ -114,7 +114,7 @@ export function rendererPhotos(context) {
     }
 
     function showsLayer(id) {
-        var layer = context.layers().layer(id);
+        const layer = context.layers().layer(id);
         return layer && layer.supported() && layer.enabled();
     }
 
@@ -154,7 +154,7 @@ export function rendererPhotos(context) {
     };
 
     photos.togglePhotoType = function(val) {
-        var index = _shownPhotoTypes.indexOf(val);
+        const index = _shownPhotoTypes.indexOf(val);
         if (index !== -1) {
             _shownPhotoTypes.splice(index, 1);
         } else {
@@ -169,10 +169,10 @@ export function rendererPhotos(context) {
     };
 
     photos.init = function() {
-        var hash = utilStringQs(window.location.hash);
+        const hash = utilStringQs(window.location.hash);
         if (hash.photo_dates) {
             // expect format like `photo_dates=2019-01-01_2020-12-31`, but allow a couple different separators
-            var parts = /^(.*)[–_](.*)$/g.exec(hash.photo_dates.trim());
+            const parts = /^(.*)[–_](.*)$/g.exec(hash.photo_dates.trim());
             this.setDateFilter('fromDate', parts && parts.length >= 2 && parts[1], false);
             this.setDateFilter('toDate', parts && parts.length >= 3 && parts[2], false);
         }
@@ -181,30 +181,30 @@ export function rendererPhotos(context) {
         }
         if (hash.photo_overlay) {
             // support enabling photo layers by default via a URL parameter, e.g. `photo_overlay=kartaview;mapillary;streetside`
-            var hashOverlayIDs = hash.photo_overlay.replace(/;/g, ',').split(',');
+            const hashOverlayIDs = hash.photo_overlay.replace(/;/g, ',').split(',');
             hashOverlayIDs.forEach(function(id) {
                 if (id === 'openstreetcam') id = 'kartaview'; // legacy alias
-                var layer = _layerIDs.indexOf(id) !== -1 && context.layers().layer(id);
+                const layer = _layerIDs.indexOf(id) !== -1 && context.layers().layer(id);
                 if (layer && !layer.enabled()) layer.enabled(true);
             });
         }
         if (hash.photo) {
             // support opening a photo via a URL parameter, e.g. `photo=mapillary-fztgSDtLpa08ohPZFZjeRQ`
-            var photoIds = hash.photo.replace(/;/g, ',').split(',');
-            var photoId = photoIds.length && photoIds[0].trim();
-            var results = /(.*)\/(.*)/g.exec(photoId);
+            const photoIds = hash.photo.replace(/;/g, ',').split(',');
+            const photoId = photoIds.length && photoIds[0].trim();
+            const results = /(.*)\/(.*)/g.exec(photoId);
             if (results && results.length >= 3) {
-                var serviceId = results[1];
+                let serviceId = results[1];
                 if (serviceId === 'openstreetcam') serviceId = 'kartaview'; // legacy alias
-                var photoKey = results[2];
-                var service = services[serviceId];
+                const photoKey = results[2];
+                const service = services[serviceId];
                 if (service && service.ensureViewerLoaded) {
 
                     // if we're showing a photo then make sure its layer is enabled too
-                    var layer = _layerIDs.indexOf(serviceId) !== -1 && context.layers().layer(serviceId);
+                    const layer = _layerIDs.indexOf(serviceId) !== -1 && context.layers().layer(serviceId);
                     if (layer && !layer.enabled()) layer.enabled(true);
 
-                    var baselineTime = Date.now();
+                    const baselineTime = Date.now();
 
                     service.on('loadedImages.rendererPhotos', function() {
                         // don't open the viewer if too much time has elapsed

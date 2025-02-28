@@ -18,9 +18,9 @@ References:
     http://wiki.openstreetmap.org/wiki/Key:traffic_sign#On_a_way_or_area
 */
 export function actionReverse(entityID, options) {
-    var numeric = /^([+\-]?)(?=[\d.])/;
-    var directionKey = /direction$/;
-    var keyReplacements = [
+    const numeric = /^([+\-]?)(?=[\d.])/;
+    const directionKey = /direction$/;
+    const keyReplacements = [
         [/:right$/, ':left'],
         [/:left$/, ':right'],
         [/:forward$/, ':backward'],
@@ -30,7 +30,7 @@ export function actionReverse(entityID, options) {
         [/:forward:/, ':backward:'],
         [/:backward:/, ':forward:']
     ];
-    var valueReplacements = {
+    const valueReplacements = {
         left: 'right',
         right: 'left',
         up: 'down',
@@ -61,19 +61,19 @@ export function actionReverse(entityID, options) {
             prerequisiteTags: [{highway: 'cyclist_waiting_aid'}]
         }
     ];
-    var roleReplacements = {
+    const roleReplacements = {
         forward: 'backward',
         backward: 'forward',
         forwards: 'backward',
         backwards: 'forward'
     };
-    var onewayReplacements = {
+    const onewayReplacements = {
         yes: '-1',
         '1': '-1',
         '-1': 'yes'
     };
 
-    var compassReplacements = {
+    const compassReplacements = {
         N: 'S',
         NNE: 'SSW',
         NE: 'SW',
@@ -97,8 +97,8 @@ export function actionReverse(entityID, options) {
         if (keysToKeepUnchanged.some(keyRegex => keyRegex.test(key))) {
             return key;
         }
-        for (var i = 0; i < keyReplacements.length; ++i) {
-            var replacement = keyReplacements[i];
+        for (let i = 0; i < keyReplacements.length; ++i) {
+            const replacement = keyReplacements[i];
             if (replacement[0].test(key)) {
                 return key.replace(replacement[0], replacement[1]);
             }
@@ -108,7 +108,7 @@ export function actionReverse(entityID, options) {
 
 
     function reverseValue(key, value, includeAbsolute, allTags) {
-        for (let { keyRegex, prerequisiteTags } of keyValuesToKeepUnchanged) {
+        for (const { keyRegex, prerequisiteTags } of keyValuesToKeepUnchanged) {
             if (keyRegex.test(key) && prerequisiteTags.some(expectedTags =>
                 Object.entries(expectedTags).every(([k, v]) => {
                     return allTags[k] && (v === '*' || allTags[k] === v);
@@ -128,7 +128,7 @@ export function actionReverse(entityID, options) {
             return value.split(';').map(value => {
                 if (compassReplacements[value]) return compassReplacements[value];
 
-                var degrees = Number(value);
+                let degrees = Number(value);
                 if (isFinite(degrees)) {
                     if (degrees < 180) {
                         degrees += 180;
@@ -147,12 +147,12 @@ export function actionReverse(entityID, options) {
 
     // Reverse the direction of tags attached to the nodes - #3076
     function reverseNodeTags(graph, nodeIDs) {
-        for (var i = 0; i < nodeIDs.length; i++) {
-            var node = graph.hasEntity(nodeIDs[i]);
+        for (let i = 0; i < nodeIDs.length; i++) {
+            const node = graph.hasEntity(nodeIDs[i]);
             if (!node || !Object.keys(node.tags).length) continue;
 
-            var tags = {};
-            for (var key in node.tags) {
+            const tags = {};
+            for (const key in node.tags) {
                 tags[reverseKey(key)] = reverseValue(key, node.tags[key], node.id === entityID, node.tags);
             }
             graph = graph.replace(node.update({tags: tags}));
@@ -162,11 +162,11 @@ export function actionReverse(entityID, options) {
 
 
     function reverseWay(graph, way) {
-        var nodes = way.nodes.slice().reverse();
-        var tags = {};
-        var role;
+        const nodes = way.nodes.slice().reverse();
+        const tags = {};
+        let role;
 
-        for (var key in way.tags) {
+        for (const key in way.tags) {
             tags[reverseKey(key)] = reverseValue(key, way.tags[key], false, way.tags);
         }
 
@@ -186,8 +186,8 @@ export function actionReverse(entityID, options) {
     }
 
 
-    var action = function(graph) {
-        var entity = graph.entity(entityID);
+    const action = function(graph) {
+        const entity = graph.entity(entityID);
         if (entity.type === 'way') {
             return reverseWay(graph, entity);
         }
@@ -195,11 +195,11 @@ export function actionReverse(entityID, options) {
     };
 
     action.disabled = function(graph) {
-        var entity = graph.hasEntity(entityID);
+        const entity = graph.hasEntity(entityID);
         if (!entity || entity.type === 'way') return false;
 
-        for (var key in entity.tags) {
-            var value = entity.tags[key];
+        for (const key in entity.tags) {
+            const value = entity.tags[key];
             if (reverseKey(key) !== key || reverseValue(key, value, true, entity.tags) !== value) {
                 return false;
             }

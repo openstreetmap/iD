@@ -23,23 +23,23 @@ import {
 
 
 export function uiNoteEditor(context) {
-    var dispatch = d3_dispatch('change');
-    var noteComments = uiNoteComments(context);
-    var noteHeader = uiNoteHeader();
+    const dispatch = d3_dispatch('change');
+    const noteComments = uiNoteComments(context);
+    const noteHeader = uiNoteHeader();
 
     // var formFields = uiFormFields(context);
 
-    var _note;
-    var _newNote;
+    let _note;
+    let _newNote;
     // var _fieldsArr;
 
 
     function noteEditor(selection) {
 
-        var header = selection.selectAll('.header')
+        const header = selection.selectAll('.header')
             .data([0]);
 
-        var headerEnter = header.enter()
+        const headerEnter = header.enter()
             .append('div')
             .attr('class', 'header fillL');
 
@@ -57,7 +57,7 @@ export function uiNoteEditor(context) {
             .call(t.append('note.title'));
 
 
-        var body = selection.selectAll('.body')
+        let body = selection.selectAll('.body')
             .data([0]);
 
         body = body.enter()
@@ -65,7 +65,7 @@ export function uiNoteEditor(context) {
             .attr('class', 'body')
             .merge(body);
 
-        var editor = body.selectAll('.note-editor')
+        const editor = body.selectAll('.note-editor')
             .data([0]);
 
         editor.enter()
@@ -76,7 +76,7 @@ export function uiNoteEditor(context) {
             .call(noteComments.note(_note))
             .call(noteSaveSection);
 
-        var footer = selection.selectAll('.footer')
+        const footer = selection.selectAll('.footer')
             .data([0]);
 
         footer.enter()
@@ -88,7 +88,7 @@ export function uiNoteEditor(context) {
 
 
         // rerender the note editor on any auth change
-        var osm = services.osm;
+        const osm = services.osm;
         if (osm) {
             osm.on('change.note-save', function() {
                 selection.call(noteEditor);
@@ -98,8 +98,8 @@ export function uiNoteEditor(context) {
 
 
     function noteSaveSection(selection) {
-        var isSelected = (_note && _note.id === context.selectedNoteID());
-        var noteSave = selection.selectAll('.note-save')
+        const isSelected = (_note && _note.id === context.selectedNoteID());
+        let noteSave = selection.selectAll('.note-save')
             .data((isSelected ? [_note] : []), function(d) { return d.status + d.id; });
 
         // exit
@@ -107,7 +107,7 @@ export function uiNoteEditor(context) {
             .remove();
 
         // enter
-        var noteSaveEnter = noteSave.enter()
+        const noteSaveEnter = noteSave.enter()
             .append('div')
             .attr('class', 'note-save save-section cf');
 
@@ -157,7 +157,7 @@ export function uiNoteEditor(context) {
                 }
             });
 
-        var commentTextarea = noteSaveEnter
+        const commentTextarea = noteSaveEnter
             .append('textarea')
             .attr('class', 'new-comment-input')
             .attr('placeholder', t('note.inputPlaceholder'))
@@ -185,10 +185,10 @@ export function uiNoteEditor(context) {
             if (!(d3_event.keyCode === 13 && // ↩ Return
                 d3_event.metaKey)) return;
 
-            var osm = services.osm;
+            const osm = services.osm;
             if (!osm) return;
 
-            var hasAuth = osm.authenticated();
+            const hasAuth = osm.authenticated();
             if (!hasAuth) return;
 
             if (!_note.newComment) return;
@@ -212,13 +212,13 @@ export function uiNoteEditor(context) {
 
 
         function changeInput() {
-            var input = d3_select(this);
-            var val = input.property('value').trim() || undefined;
+            const input = d3_select(this);
+            const val = input.property('value').trim() || undefined;
 
             // store the unsaved comment with the note itself
             _note = _note.update({ newComment: val });
 
-            var osm = services.osm;
+            const osm = services.osm;
             if (osm) {
                 osm.replaceNote(_note);  // update note cache
             }
@@ -230,7 +230,7 @@ export function uiNoteEditor(context) {
 
 
     function userDetails(selection) {
-        var detailSection = selection.selectAll('.detail-section')
+        let detailSection = selection.selectAll('.detail-section')
             .data([0]);
 
         detailSection = detailSection.enter()
@@ -238,12 +238,12 @@ export function uiNoteEditor(context) {
             .attr('class', 'detail-section')
             .merge(detailSection);
 
-        var osm = services.osm;
+        const osm = services.osm;
         if (!osm) return;
 
         // Add warning if user is not logged in
-        var hasAuth = osm.authenticated();
-        var authWarning = detailSection.selectAll('.auth-warning')
+        const hasAuth = osm.authenticated();
+        const authWarning = detailSection.selectAll('.auth-warning')
             .data(hasAuth ? [] : [0]);
 
         authWarning.exit()
@@ -252,7 +252,7 @@ export function uiNoteEditor(context) {
             .style('opacity', 0)
             .remove();
 
-        var authEnter = authWarning.enter()
+        const authEnter = authWarning.enter()
             .insert('div', '.tag-reference-body')
             .attr('class', 'field-warning auth-warning')
             .style('opacity', 0);
@@ -281,7 +281,7 @@ export function uiNoteEditor(context) {
             .style('opacity', 1);
 
 
-        var prose = detailSection.selectAll('.note-save-prose')
+        let prose = detailSection.selectAll('.note-save-prose')
             .data(hasAuth ? [0] : []);
 
         prose.exit()
@@ -296,7 +296,7 @@ export function uiNoteEditor(context) {
         osm.userDetails(function(err, user) {
             if (err) return;
 
-            var userLink = d3_select(document.createElement('div'));
+            const userLink = d3_select(document.createElement('div'));
 
             if (user.image_url) {
                 userLink
@@ -319,11 +319,11 @@ export function uiNoteEditor(context) {
 
 
     function noteSaveButtons(selection) {
-        var osm = services.osm;
-        var hasAuth = osm && osm.authenticated();
+        const osm = services.osm;
+        const hasAuth = osm && osm.authenticated();
 
-        var isSelected = (_note && _note.id === context.selectedNoteID());
-        var buttonSection = selection.selectAll('.buttons')
+        const isSelected = (_note && _note.id === context.selectedNoteID());
+        let buttonSection = selection.selectAll('.buttons')
             .data((isSelected ? [_note] : []), function(d) { return d.status + d.id; });
 
         // exit
@@ -331,7 +331,7 @@ export function uiNoteEditor(context) {
             .remove();
 
         // enter
-        var buttonEnter = buttonSection.enter()
+        const buttonEnter = buttonSection.enter()
             .append('div')
             .attr('class', 'buttons');
 
@@ -372,8 +372,8 @@ export function uiNoteEditor(context) {
         buttonSection.select('.status-button')   // select and propagate data
             .attr('disabled', (hasAuth ? null : true))
             .each(function(d) {
-                var action = (d.status === 'open' ? 'close' : 'open');
-                var andComment = (d.newComment ? '_comment' : '');
+                const action = (d.status === 'open' ? 'close' : 'open');
+                const andComment = (d.newComment ? '_comment' : '');
                 t.addOrUpdate('note.' + action + andComment)(d3_select(this));
             })
             .on('click.status', clickStatus);
@@ -392,7 +392,7 @@ export function uiNoteEditor(context) {
 
     function clickCancel(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
-        var osm = services.osm;
+        const osm = services.osm;
         if (osm) {
             osm.removeNote(d);
         }
@@ -403,7 +403,7 @@ export function uiNoteEditor(context) {
 
     function clickSave(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
-        var osm = services.osm;
+        const osm = services.osm;
         if (osm) {
             osm.postNoteCreate(d, function(err, note) {
                 dispatch.call('change', note);
@@ -414,9 +414,9 @@ export function uiNoteEditor(context) {
 
     function clickStatus(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
-        var osm = services.osm;
+        const osm = services.osm;
         if (osm) {
-            var setStatus = (d.status === 'open' ? 'closed' : 'open');
+            const setStatus = (d.status === 'open' ? 'closed' : 'open');
             osm.postNoteUpdate(d, setStatus, function(err, note) {
                 dispatch.call('change', note);
             });
@@ -425,7 +425,7 @@ export function uiNoteEditor(context) {
 
     function clickComment(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
-        var osm = services.osm;
+        const osm = services.osm;
         if (osm) {
             osm.postNoteUpdate(d, d.status, function(err, note) {
                 dispatch.call('change', note);

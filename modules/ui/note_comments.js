@@ -7,13 +7,13 @@ import { services } from '../services';
 
 
 export function uiNoteComments() {
-    var _note;
+    let _note;
 
 
     function noteComments(selection) {
         if (_note.isNew()) return; // don't draw .comments-container
 
-        var comments = selection.selectAll('.comments-container')
+        let comments = selection.selectAll('.comments-container')
             .data([0]);
 
         comments = comments.enter()
@@ -21,7 +21,7 @@ export function uiNoteComments() {
             .attr('class', 'comments-container')
             .merge(comments);
 
-        var commentEnter = comments.selectAll('.comment')
+        const commentEnter = comments.selectAll('.comment')
             .data(_note.comments)
             .enter()
             .append('div')
@@ -32,11 +32,11 @@ export function uiNoteComments() {
             .attr('class', function(d) { return 'comment-avatar user-' + d.uid; })
             .call(svgIcon('#iD-icon-avatar', 'comment-avatar-icon'));
 
-        var mainEnter = commentEnter
+        const mainEnter = commentEnter
             .append('div')
             .attr('class', 'comment-main');
 
-        var metadataEnter = mainEnter
+        const metadataEnter = mainEnter
             .append('div')
             .attr('class', 'comment-metadata');
 
@@ -44,8 +44,8 @@ export function uiNoteComments() {
             .append('div')
             .attr('class', 'comment-author')
             .each(function(d) {
-                var selection = d3_select(this);
-                var osm = services.osm;
+                let selection = d3_select(this);
+                const osm = services.osm;
                 if (osm && d.user) {
                     selection = selection
                         .append('a')
@@ -81,11 +81,11 @@ export function uiNoteComments() {
 
 
     function replaceAvatars(selection) {
-        var showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
-        var osm = services.osm;
+        const showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
+        const osm = services.osm;
         if (showThirdPartyIcons !== 'true' || !osm) return;
 
-        var uids = {};  // gather uids in the comment thread
+        const uids = {};  // gather uids in the comment thread
         _note.comments.forEach(function(d) {
             if (d.uid) uids[d.uid] = true;
         });
@@ -107,9 +107,9 @@ export function uiNoteComments() {
 
     function localeDateString(s) {
         if (!s) return null;
-        var options = { day: 'numeric', month: 'short', year: 'numeric' };
+        const options = { day: 'numeric', month: 'short', year: 'numeric' };
         s = s.replace(/-/g, '/'); // fix browser-specific Date() issues
-        var d = new Date(s);
+        const d = new Date(s);
         if (isNaN(d.getTime())) return null;
         return d.toLocaleDateString(localizer.localeCode(), options);
     }

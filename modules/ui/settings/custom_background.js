@@ -8,19 +8,19 @@ import { utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiSettingsCustomBackground() {
-    var dispatch = d3_dispatch('change');
+    const dispatch = d3_dispatch('change');
 
     function render(selection) {
         // keep separate copies of original and current settings
-        var _origSettings = {
+        const _origSettings = {
             template: prefs('background-custom-template')
         };
-        var _currSettings = {
+        const _currSettings = {
             template: prefs('background-custom-template')
         };
 
-        var example = 'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png';
-        var modal = uiConfirm(selection).okButton();
+        const example = 'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png';
+        const modal = uiConfirm(selection).okButton();
 
         modal
             .classed('settings-modal settings-custom-background', true);
@@ -30,9 +30,9 @@ export function uiSettingsCustomBackground() {
             .call(t.append('settings.custom_background.header'));
 
 
-        var textSection = modal.select('.modal-section.message-text');
+        const textSection = modal.select('.modal-section.message-text');
 
-        var instructions =
+        const instructions =
             `${t.html('settings.custom_background.instructions.info')}\n` +
             '\n' +
             `#### ${t.html('settings.custom_background.instructions.wms.tokens_label')}\n` +
@@ -65,7 +65,7 @@ export function uiSettingsCustomBackground() {
 
 
         // insert a cancel button
-        var buttonSection = modal.select('.modal-section.buttons');
+        const buttonSection = modal.select('.modal-section.buttons');
 
         buttonSection
             .insert('button', '.ok-button')

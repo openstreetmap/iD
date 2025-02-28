@@ -49,12 +49,12 @@ import { uiPaneMapData } from './panes/map_data';
 import { uiPanePreferences } from './panes/preferences';
 
 export function uiInit(context) {
-    var _initCounter = 0;
-    var _needWidth = {};
+    let _initCounter = 0;
+    const _needWidth = {};
 
-    var _lastPointerType;
+    let _lastPointerType;
 
-    var overMap;
+    let overMap;
 
     function render(container) {
 
@@ -66,7 +66,7 @@ export function uiInit(context) {
                 if (!d3_event.composedPath) return;
 
                 // some targets have default click events we don't want to override
-                var isOkayTarget = d3_event.composedPath().some(function(node) {
+                const isOkayTarget = d3_event.composedPath().some(function(node) {
                     // we only care about element nodes
                     return node.nodeType === 1 &&
                         // clicking <input> focuses it and/or changes a value
@@ -82,7 +82,7 @@ export function uiInit(context) {
                 d3_event.preventDefault();
             });
 
-        var detected = utilDetect();
+        const detected = utilDetect();
 
         // only WebKit supports gesture events
         if ('GestureEvent' in window &&
@@ -102,7 +102,7 @@ export function uiInit(context) {
         if ('PointerEvent' in window) {
             d3_select(window)
                 .on('pointerdown.ui pointerup.ui', function(d3_event) {
-                    var pointerType = d3_event.pointerType || 'mouse';
+                    const pointerType = d3_event.pointerType || 'mouse';
                     if (_lastPointerType !== pointerType) {
                         _lastPointerType = pointerType;
                         container
@@ -123,7 +123,7 @@ export function uiInit(context) {
         container
             .call(uiFullScreen(context));
 
-        var map = context.map();
+        const map = context.map();
         map.redrawEnable(false);  // don't draw until we've set zoom/lat/long
 
         map
@@ -143,7 +143,7 @@ export function uiInit(context) {
             .attr('class', 'sidebar')
             .call(ui.sidebar);
 
-        var content = container
+        const content = container
             .append('div')
             .attr('class', 'main-content active');
 
@@ -184,11 +184,11 @@ export function uiInit(context) {
             .call(uiSpinner(context));
 
         // Map controls
-        var controlsWrap = overMap
+        const controlsWrap = overMap
             .append('div')
             .attr('class', 'map-controls-wrap');
 
-        var controls = controlsWrap
+        const controls = controlsWrap
             .append('div')
             .attr('class', 'map-controls');
 
@@ -215,11 +215,11 @@ export function uiInit(context) {
 
         // Add panes
         // This should happen after map is initialized, as some require surface()
-        var panes = overMap
+        const panes = overMap
             .append('div')
             .attr('class', 'map-panes');
 
-        var uiPanes = [
+        const uiPanes = [
             uiPaneBackground(context),
             uiPaneMapData(context),
             uiPaneIssues(context),
@@ -257,7 +257,7 @@ export function uiInit(context) {
 
 
         // Add footer
-        var about = content
+        const about = content
             .append('div')
             .attr('class', 'map-footer');
 
@@ -267,7 +267,7 @@ export function uiInit(context) {
             .call(uiStatus(context));
 
 
-        var footer = about
+        const footer = about
             .append('div')
             .attr('class', 'map-footer-bar fillD');
 
@@ -275,7 +275,7 @@ export function uiInit(context) {
             .append('div')
             .attr('class', 'flash-wrap footer-hide');
 
-        var footerWrap = footer
+        const footerWrap = footer
             .append('div')
             .attr('class', 'main-footer-wrap footer-show');
 
@@ -284,7 +284,7 @@ export function uiInit(context) {
             .attr('class', 'scale-block')
             .call(uiScale(context));
 
-        var aboutList = footerWrap
+        const aboutList = footerWrap
             .append('div')
             .attr('class', 'info-block')
             .append('ul')
@@ -295,7 +295,7 @@ export function uiInit(context) {
             .attr('class', 'user-list')
             .call(uiContributors(context));
 
-        var apiConnections = context.connection().apiConnections();
+        const apiConnections = context.connection().apiConnections();
         if (apiConnections && apiConnections.length > 1) {
             aboutList
                 .append('li')
@@ -315,7 +315,7 @@ export function uiInit(context) {
             .attr('class', 'feature-warning')
             .call(uiFeatureInfo(context));
 
-        var issueLinks = aboutList
+        const issueLinks = aboutList
             .append('li');
 
         issueLinks
@@ -374,7 +374,7 @@ export function uiInit(context) {
             });
 
 
-        var panPixels = 80;
+        const panPixels = 80;
         context.keybinding()
             .on([t('sidebar.key'), '`', '²', '@'], ui.sidebar.toggle)   // #5663, #6864 - common QWERTY, AZERTY
             .on('←', pan([panPixels, 0]))
@@ -390,9 +390,9 @@ export function uiInit(context) {
                     d3_event.stopImmediatePropagation();
                     d3_event.preventDefault();
                 }
-                var previousBackground = context.background().findSource(prefs('background-last-used-toggle'));
+                const previousBackground = context.background().findSource(prefs('background-last-used-toggle'));
                 if (previousBackground) {
-                    var currentBackground = context.background().baseLayerSource();
+                    const currentBackground = context.background().baseLayerSource();
                     prefs('background-last-used-toggle', currentBackground.id);
                     prefs('background-last-used', previousBackground.id);
                     context.background().baseLayerSource(previousBackground);
@@ -408,10 +408,10 @@ export function uiInit(context) {
                 d3_event.stopPropagation();
 
                 // Don't allow layer changes while drawing - #6584
-                var mode = context.mode();
+                const mode = context.mode();
                 if (mode && /^draw/.test(mode.id)) return;
 
-                var layer = context.layers().layer('osm');
+                const layer = context.layers().layer('osm');
                 if (layer) {
                     layer.enabled(!layer.enabled());
                     if (!layer.enabled()) {
@@ -447,8 +447,8 @@ export function uiInit(context) {
                 .call(ui.shortcuts);
         }
 
-        var osm = context.connection();
-        var auth = uiLoading(context).message(t.html('loading_auth')).blocking(true);
+        const osm = context.connection();
+        const auth = uiLoading(context).message(t.html('loading_auth')).blocking(true);
 
         if (osm && auth) {
             osm
@@ -481,7 +481,7 @@ export function uiInit(context) {
     }
 
 
-    let ui = {};
+    const ui = {};
 
     let _loadPromise;
     // renders the iD interface into the container node
@@ -528,12 +528,12 @@ export function uiInit(context) {
     ui.shortcuts = uiShortcuts(context);
 
     ui.onResize = function(withPan) {
-        var map = context.map();
+        const map = context.map();
 
         // Recalc dimensions of map and sidebar.. (`true` = force recalc)
         // This will call `getBoundingClientRect` and trigger reflow,
         //  but the values will be cached for later use.
-        var mapDimensions = utilGetDimensions(context.container().select('.main-content'), true);
+        const mapDimensions = utilGetDimensions(context.container().select('.main-content'), true);
         utilGetDimensions(context.container().select('.sidebar'), true);
 
         if (withPan !== undefined) {
@@ -550,7 +550,7 @@ export function uiInit(context) {
         ui.checkOverflow('.map-footer-bar');
 
         // Use outdated code so it works on Explorer
-        var resizeWindowEvent = document.createEvent('Event');
+        const resizeWindowEvent = document.createEvent('Event');
 
         resizeWindowEvent.initEvent('resizeWindow', true, true);
 
@@ -564,12 +564,12 @@ export function uiInit(context) {
             delete _needWidth[selector];
         }
 
-        var selection = context.container().select(selector);
+        const selection = context.container().select(selector);
         if (selection.empty()) return;
 
-        var scrollWidth = selection.property('scrollWidth');
-        var clientWidth = selection.property('clientWidth');
-        var needed = _needWidth[selector] || scrollWidth;
+        const scrollWidth = selection.property('scrollWidth');
+        const clientWidth = selection.property('clientWidth');
+        const needed = _needWidth[selector] || scrollWidth;
 
         if (scrollWidth > clientWidth) {    // overflow happening
             selection.classed('narrow', true);
@@ -583,9 +583,9 @@ export function uiInit(context) {
     };
 
     ui.togglePanes = function(showPane) {
-        var hidePanes = context.container().selectAll('.map-pane.shown');
+        const hidePanes = context.container().selectAll('.map-pane.shown');
 
-        var side = localizer.textDirection() === 'ltr' ? 'right' : 'left';
+        const side = localizer.textDirection() === 'ltr' ? 'right' : 'left';
 
         hidePanes
             .classed('shown', false)
@@ -633,7 +633,7 @@ export function uiInit(context) {
     };
 
 
-    var _editMenu = uiEditMenu(context);
+    const _editMenu = uiEditMenu(context);
 
     ui.editMenu = function() {
         return _editMenu;
@@ -650,7 +650,7 @@ export function uiInit(context) {
         // disable menu if in wide selection, for example
         if (!context.map().editableDataEnabled()) return;
 
-        var surfaceNode = context.surface().node();
+        const surfaceNode = context.surface().node();
         if (surfaceNode.focus) {   // FF doesn't support it
             // focus the surface or else clicking off the menu may not trigger modeBrowse
             surfaceNode.focus();
@@ -678,7 +678,7 @@ export function uiInit(context) {
     };
 
 
-    var _saveLoading = d3_select(null);
+    let _saveLoading = d3_select(null);
 
     context.uploader()
         .on('saveStarted.ui', function() {

@@ -14,7 +14,7 @@ import { locationManager } from '../core/LocationManager';
 export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   allFields = allFields || {};
   allPresets = allPresets || {};
-  let _this = Object.assign({}, preset); // shallow copy
+  const _this = Object.assign({}, preset); // shallow copy
   let _addable = addable || false;
   let _searchName;            // cache
   let _searchNameStripped;    // cache
@@ -59,11 +59,11 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.matchScore = (entityTags) => {
     const tags = _this.tags;
-    let seen = {};
+    const seen = {};
     let score = 0;
 
     // match on tags
-    for (let k in tags) {
+    for (const k in tags) {
       seen[k] = true;
       if (entityTags[k] === tags[k]) {
         score += _this.originalScore;
@@ -76,7 +76,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
     // boost score for additional matches in addTags - #6802
     const addTags = _this.addTags;
-    for (let k in addTags) {
+    for (const k in addTags) {
       if (!seen[k] && entityTags[k] === addTags[k]) {
         score += _this.originalScore;
       }
@@ -124,7 +124,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.subtitle = () => {
       if (_this.suggestion) {
-        let path = presetID.split('/');
+        const path = presetID.split('/');
         path.pop();  // remove brand name
         return t('_tagging.presets.presets.' + path.join('/') + '.name');
       }
@@ -133,7 +133,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.subtitleLabel = () => {
       if (_this.suggestion) {
-        let path = presetID.split('/');
+        const path = presetID.split('/');
         path.pop();  // remove brand name
         return t.append('_tagging.presets.presets.' + path.join('/') + '.name');
       }
@@ -207,8 +207,8 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     }
 
     // Lookup documentation on OSM Wikibase...
-    let key = _this.originalReference.key || Object.keys(utilObjectOmit(_this.tags, 'name'))[0];
-    let value = _this.originalReference.value || _this.tags[key];
+    const key = _this.originalReference.key || Object.keys(utilObjectOmit(_this.tags, 'name'))[0];
+    const value = _this.originalReference.value || _this.tags[key];
 
     if (value === '*') {
       return { key: key };
@@ -220,7 +220,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.unsetTags = (tags, geometry, ignoringKeys, skipFieldDefaults, loc) => {
     // allow manually keeping some tags
-    let removeTags = ignoringKeys ? utilObjectOmit(_this.removeTags, ignoringKeys) : _this.removeTags;
+    const removeTags = ignoringKeys ? utilObjectOmit(_this.removeTags, ignoringKeys) : _this.removeTags;
     tags = utilObjectOmit(tags, Object.keys(removeTags));
 
     if (geometry && !skipFieldDefaults) {
@@ -242,7 +242,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     const addTags = _this.addTags;
     tags = Object.assign({}, tags);   // shallow copy
 
-    for (let k in addTags) {
+    for (const k in addTags) {
       if (addTags[k] === '*') {
         // if this tag is ancillary, don't override an existing value since any value is okay
         if (_this.tags[k] || !tags[k]) {
@@ -262,7 +262,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       delete tags.area;
       if (geometry === 'area') {
         let needsAreaTag = true;
-        for (let k in addTags) {
+        for (const k in addTags) {
           if (_this.geometry.indexOf('line') === -1 && k in osmAreaKeys
               || k in osmAreaKeysExceptions && addTags[k] in osmAreaKeysExceptions[k]) {
             needsAreaTag = false;

@@ -4,13 +4,13 @@ import { geoAngle, geoLineIntersection, geoVecInterp, geoVecLength } from '../ge
 
 
 export function svgMidpoints(projection, context) {
-    var targetRadius = 8;
+    const targetRadius = 8;
 
     function drawTargets(selection, graph, entities, filter) {
-        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
-        var getTransform = svgPointTransform(projection).geojson;
+        const fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        const getTransform = svgPointTransform(projection).geojson;
 
-        var data = entities.map(function(midpoint) {
+        const data = entities.map(function(midpoint) {
             return {
                 type: 'Feature',
                 id: midpoint.id,
@@ -25,7 +25,7 @@ export function svgMidpoints(projection, context) {
             };
         });
 
-        var targets = selection.selectAll('.midpoint.target')
+        const targets = selection.selectAll('.midpoint.target')
             .filter(function(d) { return filter(d.properties.entity); })
             .data(data, function key(d) { return d.id; });
 
@@ -44,42 +44,42 @@ export function svgMidpoints(projection, context) {
 
 
     function drawMidpoints(selection, graph, entities, filter, extent) {
-        var drawLayer = selection.selectAll('.layer-osm.points .points-group.midpoints');
-        var touchLayer = selection.selectAll('.layer-touch.points');
+        const drawLayer = selection.selectAll('.layer-osm.points .points-group.midpoints');
+        const touchLayer = selection.selectAll('.layer-touch.points');
 
-        var mode = context.mode();
+        const mode = context.mode();
         if ((mode && mode.id !== 'select') || !context.map().withinEditableZoom()) {
             drawLayer.selectAll('.midpoint').remove();
             touchLayer.selectAll('.midpoint.target').remove();
             return;
         }
 
-        var poly = extent.polygon();
-        var midpoints = {};
+        const poly = extent.polygon();
+        const midpoints = {};
 
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
+        for (let i = 0; i < entities.length; i++) {
+            const entity = entities[i];
 
             if (entity.type !== 'way') continue;
             if (!filter(entity)) continue;
             if (context.selectedIDs().indexOf(entity.id) < 0) continue;
 
-            var nodes = graph.childNodes(entity);
-            for (var j = 0; j < nodes.length - 1; j++) {
-                var a = nodes[j];
-                var b = nodes[j + 1];
-                var id = [a.id, b.id].sort().join('-');
+            const nodes = graph.childNodes(entity);
+            for (let j = 0; j < nodes.length - 1; j++) {
+                const a = nodes[j];
+                const b = nodes[j + 1];
+                const id = [a.id, b.id].sort().join('-');
 
                 if (midpoints[id]) {
                     midpoints[id].parents.push(entity);
                 } else if (geoVecLength(projection(a.loc), projection(b.loc)) > 40) {
-                    var point = geoVecInterp(a.loc, b.loc, 0.5);
-                    var loc = null;
+                    let point = geoVecInterp(a.loc, b.loc, 0.5);
+                    let loc = null;
 
                     if (extent.intersects(point)) {
                         loc = point;
                     } else {
-                        for (var k = 0; k < 4; k++) {
+                        for (let k = 0; k < 4; k++) {
                             point = geoLineIntersection([a.loc, b.loc], [poly[k], poly[k + 1]]);
                             if (point &&
                                 geoVecLength(projection(a.loc), projection(point)) > 20 &&
@@ -107,7 +107,7 @@ export function svgMidpoints(projection, context) {
         function midpointFilter(d) {
             if (midpoints[d.id]) return true;
 
-            for (var i = 0; i < d.parents.length; i++) {
+            for (let i = 0; i < d.parents.length; i++) {
                 if (filter(d.parents[i])) {
                     return true;
                 }
@@ -117,14 +117,14 @@ export function svgMidpoints(projection, context) {
         }
 
 
-        var groups = drawLayer.selectAll('.midpoint')
+        let groups = drawLayer.selectAll('.midpoint')
             .filter(midpointFilter)
             .data(Object.values(midpoints), function(d) { return d.id; });
 
         groups.exit()
             .remove();
 
-        var enter = groups.enter()
+        const enter = groups.enter()
             .insert('g', ':first-child')
             .attr('class', 'midpoint');
 
@@ -141,10 +141,10 @@ export function svgMidpoints(projection, context) {
         groups = groups
             .merge(enter)
             .attr('transform', function(d) {
-                var translate = svgPointTransform(projection);
-                var a = graph.entity(d.edge[0]);
-                var b = graph.entity(d.edge[1]);
-                var angle = geoAngle(a, b, projection) * (180 / Math.PI);
+                const translate = svgPointTransform(projection);
+                const a = graph.entity(d.edge[0]);
+                const b = graph.entity(d.edge[1]);
+                const angle = geoAngle(a, b, projection) * (180 / Math.PI);
                 return translate(d) + ' rotate(' + angle + ')';
             })
             .call(svgTagClasses().tags(

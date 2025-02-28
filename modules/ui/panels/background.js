@@ -4,22 +4,22 @@ import { t } from '../../core/localizer';
 
 
 export function uiPanelBackground(context) {
-    var background = context.background();
-    var _currSourceName = null;
-    var _metadata = {};
-    var _metadataKeys = [
+    const background = context.background();
+    let _currSourceName = null;
+    let _metadata = {};
+    const _metadataKeys = [
         'zoom', 'vintage', 'source', 'description', 'resolution', 'accuracy'
     ];
 
-    var debouncedRedraw = _debounce(redraw, 250);
+    const debouncedRedraw = _debounce(redraw, 250);
 
     function redraw(selection) {
-        var source = background.baseLayerSource();
+        const source = background.baseLayerSource();
         if (!source) return;
 
-        var isDG = (source.id.match(/^DigitalGlobe/i) !== null);
+        const isDG = (source.id.match(/^DigitalGlobe/i) !== null);
 
-        var sourceLabel = source.label();
+        const sourceLabel = source.label();
         if (_currSourceName !== sourceLabel) {
             _currSourceName = sourceLabel;
             _metadata = {};
@@ -27,7 +27,7 @@ export function uiPanelBackground(context) {
 
         selection.text('');
 
-        var list = selection
+        const list = selection
             .append('ul')
             .attr('class', 'background-info');
 
@@ -51,7 +51,7 @@ export function uiPanelBackground(context) {
 
         debouncedGetMetadata(selection);
 
-        var toggleTiles = context.getDebug('tile') ? 'hide_tiles' : 'show_tiles';
+        const toggleTiles = context.getDebug('tile') ? 'hide_tiles' : 'show_tiles';
 
         selection
             .append('a')
@@ -65,10 +65,10 @@ export function uiPanelBackground(context) {
             });
 
         if (isDG) {
-            var key = source.id + '-vintage';
-            var sourceVintage = context.background().findSource(key);
-            var showsVintage = context.background().showsLayer(sourceVintage);
-            var toggleVintage = showsVintage ? 'hide_vintage' : 'show_vintage';
+            const key = source.id + '-vintage';
+            const sourceVintage = context.background().findSource(key);
+            const showsVintage = context.background().showsLayer(sourceVintage);
+            const toggleVintage = showsVintage ? 'hide_vintage' : 'show_vintage';
             selection
                 .append('a')
                 .call(t.append('info_panels.background.' + toggleVintage))
@@ -84,8 +84,8 @@ export function uiPanelBackground(context) {
         // disable if necessary
         ['DigitalGlobe-Premium', 'DigitalGlobe-Standard'].forEach(function(layerId) {
             if (source.id !== layerId) {
-                var key = layerId + '-vintage';
-                var sourceVintage = context.background().findSource(key);
+                const key = layerId + '-vintage';
+                const sourceVintage = context.background().findSource(key);
                 if (context.background().showsLayer(sourceVintage)) {
                     context.background().toggleOverlayLayer(sourceVintage);
                 }
@@ -94,16 +94,16 @@ export function uiPanelBackground(context) {
     }
 
 
-    var debouncedGetMetadata = _debounce(getMetadata, 250);
+    const debouncedGetMetadata = _debounce(getMetadata, 250);
 
     function getMetadata(selection) {
-        var tile = context.container().select('.layer-background img.tile-center');   // tile near viewport center
+        const tile = context.container().select('.layer-background img.tile-center');   // tile near viewport center
         if (tile.empty()) return;
 
-        var sourceName = _currSourceName;
-        var d = tile.datum();
-        var zoom = (d && d.length >= 3 && d[2]) || Math.floor(context.map().zoom());
-        var center = context.map().center();
+        const sourceName = _currSourceName;
+        const d = tile.datum();
+        const zoom = (d && d.length >= 3 && d[2]) || Math.floor(context.map().zoom());
+        const center = context.map().center();
 
         // update zoom
         _metadata.zoom = String(zoom);
@@ -118,7 +118,7 @@ export function uiPanelBackground(context) {
             if (err || _currSourceName !== sourceName) return;
 
             // update vintage
-            var vintage = result.vintage;
+            const vintage = result.vintage;
             _metadata.vintage = (vintage && vintage.range) || t('info_panels.background.unknown');
             selection.selectAll('.background-info-list-vintage')
                 .classed('hide', false)
@@ -128,7 +128,7 @@ export function uiPanelBackground(context) {
             // update other _metadata
             _metadataKeys.forEach(function(k) {
                 if (k === 'zoom' || k === 'vintage') return;  // done already
-                var val = result[k];
+                const val = result[k];
                 _metadata[k] = val;
                 selection.selectAll('.background-info-list-' + k)
                     .classed('hide', !val)
@@ -139,7 +139,7 @@ export function uiPanelBackground(context) {
     }
 
 
-    var panel = function(selection) {
+    const panel = function(selection) {
         selection.call(redraw);
 
         context.map()

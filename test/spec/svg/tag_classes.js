@@ -1,5 +1,5 @@
 describe('iD.svgTagClasses', function () {
-    var selection;
+    let selection;
 
     beforeEach(function () {
         selection = d3.select(document.createElement('div'));
@@ -235,7 +235,7 @@ describe('iD.svgTagClasses', function () {
     });
 
     it('adds tags based on the result of the `tags` accessor', function() {
-        var primary = function () { return { railway: 'rail'}; };
+        const primary = function () { return { railway: 'rail'}; };
         selection
             .datum(iD.osmEntity())
             .call(iD.svgTagClasses().tags(primary));

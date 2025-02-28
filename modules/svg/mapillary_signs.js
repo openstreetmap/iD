@@ -85,17 +85,17 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
 
     function filterData(detectedFeatures) {
-        var fromDate = context.photos().fromDate();
-        var toDate = context.photos().toDate();
+        const fromDate = context.photos().fromDate();
+        const toDate = context.photos().toDate();
 
         if (fromDate) {
-            var fromTimestamp = new Date(fromDate).getTime();
+            const fromTimestamp = new Date(fromDate).getTime();
             detectedFeatures = detectedFeatures.filter(function(feature) {
                 return new Date(feature.last_seen_at).getTime() >= fromTimestamp;
             });
         }
         if (toDate) {
-            var toTimestamp = new Date(toDate).getTime();
+            const toTimestamp = new Date(toDate).getTime();
             detectedFeatures = detectedFeatures.filter(function(feature) {
                 return new Date(feature.first_seen_at).getTime() <= toTimestamp;
             });

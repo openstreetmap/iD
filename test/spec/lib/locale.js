@@ -2,7 +2,7 @@
 /* eslint no-console: 0 */
 
 describe.skip('locale', function() {
-    var saved, error;
+    let saved, error;
 
     beforeEach(function() {
         saved = locale;

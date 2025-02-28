@@ -15,12 +15,12 @@ import { utilDisplayName, utilDisplayType } from './util';
  * @returns {string}
  */
 export function utilDisplayLabel(entity, graphOrGeometry, verbose) {
-    var result;
-    var displayName = utilDisplayName(entity);
-    var preset = typeof graphOrGeometry === 'string' ?
+    let result;
+    const displayName = utilDisplayName(entity);
+    const preset = typeof graphOrGeometry === 'string' ?
         presetManager.matchTags(entity.tags, graphOrGeometry) :
         presetManager.match(entity, graphOrGeometry);
-    var presetName = preset && (preset.suggestion ? preset.subtitle() : preset.name());
+    const presetName = preset && (preset.suggestion ? preset.subtitle() : preset.name());
 
     if (verbose) {
         result = [presetName, displayName].filter(Boolean).join(' ');

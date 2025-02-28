@@ -24,9 +24,9 @@ export function svgPassiveVertex(node, graph, activeID) {
     if (!activeID) return 1;
     if (activeID === node.id) return 0;
 
-    var parents = graph.parentWays(node);
+    const parents = graph.parentWays(node);
 
-    var i, j, nodes, isClosed, ix1, ix2, ix3, ix4, max;
+    let i, j, nodes, isClosed, ix1, ix2, ix3, ix4, max;
 
     for (i = 0; i < parents.length; i++) {
         nodes = parents[i].nodes;
@@ -63,12 +63,12 @@ export function svgMarkerSegments(projection, graph, dt,
                                   shouldReverse,
                                   bothDirections) {
     return function(entity) {
-        var i = 0;
-        var offset = dt;
-        var segments = [];
-        var clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream;
-        var coordinates = graph.childNodes(entity).map(function(n) { return n.loc; });
-        var a, b;
+        let i = 0;
+        let offset = dt;
+        const segments = [];
+        const clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream;
+        const coordinates = graph.childNodes(entity).map(function(n) { return n.loc; });
+        let a, b;
 
         if (shouldReverse(entity)) {
             coordinates.reverse();
@@ -84,19 +84,19 @@ export function svgMarkerSegments(projection, graph, dt,
                 b = [x, y];
 
                 if (a) {
-                    var span = geoVecLength(a, b) - offset;
+                    let span = geoVecLength(a, b) - offset;
 
                     if (span >= 0) {
-                        var heading = geoVecAngle(a, b);
-                        var dx = dt * Math.cos(heading);
-                        var dy = dt * Math.sin(heading);
-                        var p = [
+                        const heading = geoVecAngle(a, b);
+                        const dx = dt * Math.cos(heading);
+                        const dy = dt * Math.sin(heading);
+                        let p = [
                             a[0] + offset * Math.cos(heading),
                             a[1] + offset * Math.sin(heading)
                         ];
 
                         // gather coordinates
-                        var coord = [a, p];
+                        const coord = [a, p];
                         for (span -= dt; span >= 0; span -= dt) {
                             p = geoVecAdd(p, [dx, dy]);
                             coord.push(p);
@@ -104,8 +104,8 @@ export function svgMarkerSegments(projection, graph, dt,
                         coord.push(b);
 
                         // generate svg paths
-                        var segment = '';
-                        var j;
+                        let segment = '';
+                        let j;
 
                         for (j = 0; j < coord.length; j++) {
                             segment += (j === 0 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
@@ -144,19 +144,19 @@ export function svgPath(projection, graph, isArea) {
     // When drawing areas, pad viewport by 65px in each direction to allow
     // for 60px area fill stroke (see ".fill-partial path.fill" css rule)
 
-    var cache = {};
-    var padding = isArea ? 65 : 5;
-    var viewport = projection.clipExtent();
-    var paddedExtent = [
+    const cache = {};
+    const padding = isArea ? 65 : 5;
+    const viewport = projection.clipExtent();
+    const paddedExtent = [
         [viewport[0][0] - padding, viewport[0][1] - padding],
         [viewport[1][0] + padding, viewport[1][1] + padding]
     ];
-    var clip = d3_geoIdentity().clipExtent(paddedExtent).stream;
-    var project = projection.stream;
-    var path = d3_geoPath()
+    const clip = d3_geoIdentity().clipExtent(paddedExtent).stream;
+    const project = projection.stream;
+    const path = d3_geoPath()
         .projection({stream: function(output) { return project(clip(output)); }});
 
-    var svgpath = function(entity) {
+    const svgpath = function(entity) {
         if (entity.id in cache) {
             return cache[entity.id];
         } else {
@@ -181,9 +181,9 @@ export function svgPath(projection, graph, isArea) {
 
 
 export function svgPointTransform(projection) {
-    var svgpoint = function(entity) {
+    const svgpoint = function(entity) {
         // http://jsperf.com/short-array-join
-        var pt = projection(entity.loc);
+        const pt = projection(entity.loc);
         return 'translate(' + pt[0] + ',' + pt[1] + ')';
     };
 
@@ -197,10 +197,10 @@ export function svgPointTransform(projection) {
 
 export function svgRelationMemberTags(graph) {
     return function(entity) {
-        var tags = entity.tags;
-        var shouldCopyMultipolygonTags = !entity.hasInterestingTags();
+        let tags = entity.tags;
+        const shouldCopyMultipolygonTags = !entity.hasInterestingTags();
         graph.parentRelations(entity).forEach(function(relation) {
-            var type = relation.tags.type;
+            const type = relation.tags.type;
             if ((type === 'multipolygon' && shouldCopyMultipolygonTags) || type === 'boundary') {
                 tags = Object.assign({}, relation.tags, tags);
             }
@@ -219,13 +219,13 @@ export function svgSegmentWay(way, graph, activeID) {
     }
 
     function getWaySegments() {
-        var isActiveWay = (way.nodes.indexOf(activeID) !== -1);
-        var features = { passive: [], active: [] };
-        var start = {};
-        var end = {};
-        var node, type;
+        const isActiveWay = (way.nodes.indexOf(activeID) !== -1);
+        const features = { passive: [], active: [] };
+        let start = {};
+        let end = {};
+        let node, type;
 
-        for (var i = 0; i < way.nodes.length; i++) {
+        for (let i = 0; i < way.nodes.length; i++) {
             node = graph.entity(way.nodes[i]);
             type = svgPassiveVertex(node, graph, activeID);
             end = { node: node, type: type };
