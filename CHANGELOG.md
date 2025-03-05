@@ -44,6 +44,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Allow broken (unclosed) areas to be continued ([#9635], thanks [@k-yle])
 * Render `*_link` roads narrower than their "regular" counterpart ([#10722])
 * Remove `noexit=yes` and `fixme=continue` when you continue a line ([#9634], thanks [@k-yle])
+* Don't zoom out when interacting with notes ([#10807], thanks [@hlfan])
+* Add a changeset tag if a merge conflict occurred ([#9636], thanks [@k-yle])
 #### :scissors: Operations
 * Fix splitting of closed ways (or areas) when two or more split-points are selected
 * Keep `red_turn:left/right` tags unchanged when reversing a way ([#10737], thanks [@burrscurr])
@@ -68,6 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix too dim markers of selected/hovered photo of some street level imagery layers ([#10755], thanks [@draunger])
 * Fix `+` symbol appearing in changeset comments from external tools ([#10766], thanks [@k-yle])
 * Fix `destination_sign` relations from being corrupted when splitting a way ([#10646], thanks [@k-yle])
+* Fix combobox dropdown menu sticking around under certain conditions (e.g. while editing the role of a relation member and deselecting a feature #10319)
 #### :earth_asia: Localization
 * Add `housename` to address format in Bolivia ([#10727])
 #### :hourglass: Performance
@@ -83,6 +86,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9586]: https://github.com/openstreetmap/iD/pull/9586
 [#9634]: https://github.com/openstreetmap/iD/pull/9634
 [#9635]: https://github.com/openstreetmap/iD/pull/9635
+[#9636]: https://github.com/openstreetmap/iD/pull/9636
 [#10003]: https://github.com/openstreetmap/iD/pull/10003
 [#10618]: https://github.com/openstreetmap/iD/pull/10618
 [#10646]: https://github.com/openstreetmap/iD/pull/10646
@@ -102,6 +106,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10778]: https://github.com/openstreetmap/iD/issues/10778
 [#10798]: https://github.com/openstreetmap/iD/pull/10798
 [#10800]: https://github.com/openstreetmap/iD/pull/10800
+[#10807]: https://github.com/openstreetmap/iD/issues/10807
 [@hlfan]: https://github.com/hlfan
 [@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
 [@draunger]: https://github.com/draunger

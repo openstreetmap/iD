@@ -463,9 +463,6 @@ export function uiCommit(context) {
 
     function changeTags(_, changed, onInput) {
         if (changed.hasOwnProperty('comment')) {
-            if (changed.comment === undefined) {
-                changed.comment = '';
-            }
             if (!onInput) {
                 prefs('comment', changed.comment);
                 prefs('commentDate', Date.now());
