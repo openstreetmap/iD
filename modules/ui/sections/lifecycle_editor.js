@@ -42,12 +42,10 @@ export function uiSectionLifecycleEditor(context) {
         _currentLifecycle = _presets[0].getLifecycle(_tags);
         var lifecycleToRender = getLifecycleToRender();
 
-        // Outer Wrap
         outerWrap = selection
             .append('div')
             .attr('class', 'wrap-form-field wrap-form-field-lifecycle');
 
-        // Title Card with Buttons
         titleWrap = outerWrap
             .append('label')
             .attr('class', 'field-label');
@@ -61,12 +59,10 @@ export function uiSectionLifecycleEditor(context) {
             .attr('class', 'label-textvalue')
             .text('Select Lifecycle');
 
-        // Lifecycle List
         radioOuterWrap = outerWrap
             .append('div')
             .attr('class', 'form-field-input-wrap form-field-input-radio');
 
-        // Append hidden placeholder radio button
         radioOuterWrap
             .append('input')
             .attr('type', 'radio')

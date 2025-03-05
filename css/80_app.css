@@ -1043,18 +1043,27 @@ a.hide-toggle {
 
 /* Lifecycle Section */
 
-.lifecycle-reference-button{
+.lifecycle-reference-button {
     float: right;
     height: 100%;
     border: 1px solid #ccc;
 }
 
-.lifecycle-icon{
+.lifecycle-icon {
     padding-right: 5px;
 }
 
-.lifecycle-radio-row{
+.lifecycle-radio-row {
     width: 95%;
+}
+
+.lifecycle-icon-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 2px;
+    background-color: white;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
 .wrap-form-field-lifecycle-disabled {

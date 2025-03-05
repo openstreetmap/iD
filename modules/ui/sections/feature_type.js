@@ -9,6 +9,8 @@ import { utilRebind } from '../../util';
 import { uiPresetIcon } from '../preset_icon';
 import { uiSection } from '../section';
 import { uiTagReference } from '../tag_reference';
+import { osmLifecyclePrefixes } from '../../osm/tags';
+import { svgIcon } from '../../svg/icon';
 
 
 export function uiSectionFeatureType(context) {
@@ -113,19 +115,27 @@ export function uiSectionFeatureType(context) {
             .text('')
             .each(function(d) { d(d3_select(this)); });
 
-        nameparts
-            .selectAll('.lifecycle')
-            .remove();
-
-        let lifecycleSpan = nameparts
-            .append('span')
-            .attr('class', 'lifecycle');
-
         let lifecycle = _presets[0].getLifecycle(_tags);
 
-        if (lifecycle !== 'functional') {
-            lifecycleSpan
-                .text(' (' + t('lifecycle.' + lifecycle) + ')');
+        let presetIconContainer = selection.select('.preset-icon-container');
+        let namepartContainer = selection.select('.namepart');
+
+        presetIconContainer.selectAll('.lifecycle-icon-container').remove();
+        namepartContainer.selectAll('.lifecycle').remove();
+
+        let presetKeys = Object.keys(_presets[0].tags);
+
+        if (!presetKeys.some(e => e.includes(lifecycle))) {    
+            if (lifecycle && lifecycle !== 'functional') {
+                namepartContainer
+                    .append('span')
+                    .attr('class', 'lifecycle')
+                    .text(' (' + t('lifecycle.' + lifecycle) + ')');
+    
+                presetIconContainer.append('div')
+                    .attr('class', 'lifecycle-icon-container')
+                    .call(svgIcon(osmLifecyclePrefixes[lifecycle].icon));
+            }
         }
     }
 
