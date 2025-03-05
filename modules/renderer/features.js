@@ -135,7 +135,10 @@ export function rendererFeatures(context) {
     });
 
     defineRule('indoor', function isIndoor(tags) {
-        return !!tags.indoor;
+        return (
+            (!!tags.indoor && tags.indoor !== 'no') ||
+            (!!tags.indoormark && tags.indoormark !== 'no')
+        );
     });
 
     defineRule('landuse', function isLanduse(tags, geometry) {

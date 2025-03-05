@@ -5,6 +5,7 @@ import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
+import { isEqual } from 'lodash';
 
 import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } from '../util';
 import {geoExtent, geoScaleToZoom} from '../geo';
@@ -124,28 +125,21 @@ function loadTile(which, url, tile) {
 // Load the data from the vector tile into cache
 function loadTileDataToCache(data, tile) {
     const vectorTile = new VectorTile(new Protobuf(data));
-    let features,
-        cache,
-        layer,
-        i,
-        feature,
-        loc,
-        d;
     if (vectorTile.layers.hasOwnProperty(pointLayer)) {
-        features = [];
-        cache = _cache.images;
-        layer = vectorTile.layers[pointLayer];
+        const features = [];
+        const cache = _cache.images;
+        const layer = vectorTile.layers[pointLayer];
 
-        for (i = 0; i < layer.length; i++) {
-            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
-            loc = feature.geometry.coordinates;
+        for (let i = 0; i < layer.length; i++) {
+            const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+            const loc = feature.geometry.coordinates;
 
             let resolutionArr = feature.properties.resolution.split('x');
             let sourceWidth = Math.max(resolutionArr[0], resolutionArr[1]);
             let sourceHeight = Math.min(resolutionArr[0] ,resolutionArr[1]);
             let isPano = sourceWidth % sourceHeight === 0;
 
-            d = {
+            const d = {
                 loc: loc,
                 capture_time: feature.properties.capture_time,
                 id: feature.properties.id,
@@ -165,13 +159,22 @@ function loadTileDataToCache(data, tile) {
     }
 
     if (vectorTile.layers.hasOwnProperty(lineLayer)) {
-        cache = _cache.sequences;
-        layer = vectorTile.layers[lineLayer];
+        const cache = _cache.sequences;
+        const layer = vectorTile.layers[lineLayer];
 
-        for (i = 0; i < layer.length; i++) {
-            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+        for (let i = 0; i < layer.length; i++) {
+            const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
             if (cache.lineString[feature.properties.sequence_uuid]) {
-                cache.lineString[feature.properties.sequence_uuid].push(feature);
+                const cacheEntry = cache.lineString[feature.properties.sequence_uuid];
+                if (cacheEntry.some(f => {
+                    // for some reason, mapilio sometimes returns a large amount of duplicate
+                    // sequence lines, causing very poor performance. this de-duplicates them,
+                    // see https://github.com/openstreetmap/iD/issues/10532
+                    const cachedCoords = f.geometry.coordinates;
+                    const featureCoords = feature.geometry.coordinates;
+                    return isEqual(cachedCoords, featureCoords);
+                })) continue;
+                cacheEntry.push(feature);
             } else {
                 cache.lineString[feature.properties.sequence_uuid] = [feature];
             }

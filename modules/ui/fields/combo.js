@@ -210,6 +210,10 @@ export function uiFieldCombo(field, context) {
 
         _comboData = objectDifference(_comboData, _multiData);
         _combobox.data(_comboData);
+
+        // hide the caret if there are no suggestions
+        _container.classed('empty-combobox', _comboData.length === 0);
+
         if (callback) callback(_comboData);
     }
 

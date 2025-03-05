@@ -298,12 +298,6 @@ describe('iD.osmEntity', function () {
         });
     });
 
-    describe('#isHighwayIntersection', function () {
-        it('returns false', function () {
-            expect(iD.osmEntity().isHighwayIntersection()).to.be.false;
-        });
-    });
-
     describe('#isDegenerate', function () {
         it('returns true', function () {
             expect(iD.osmEntity().isDegenerate()).to.be.true;

@@ -219,22 +219,21 @@ export function coreContext() {
     });
   };
 
-  context.zoomToNote = (noteId, zoomTo) => {
+  context.moveToNote = (noteId, moveTo) => {
     context.loadNote(noteId, (err, result) => {
       if (err) return;
       const entity = result.data.find(e => e.id === noteId);
-      if (entity) {
-        // zoom to, used note loc
-        const note = services.osm.getNote(noteId);
-        if (zoomTo !== false) {
-          context.map().centerZoom(note.loc,15);
-        }
-        // open note layer
-        const noteLayer = context.layers().layer('notes');
-        noteLayer.enabled(true);
-        // select the note
-        context.enter(modeSelectNote(context, noteId));
+      if (!entity) return;
+      // zoom to, used note loc
+      const note = services.osm.getNote(noteId);
+      if (moveTo !== false) {
+        context.map().center(note.loc);
       }
+      // open note layer
+      const noteLayer = context.layers().layer('notes');
+      noteLayer.enabled(true);
+      // select the note
+      context.enter(modeSelectNote(context, noteId));
     });
   };
 
