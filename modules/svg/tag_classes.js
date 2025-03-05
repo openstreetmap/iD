@@ -1,7 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags, osmLifecyclePrefixes } from '../osm/tags';
 
-
+// TODO: change this
 export function svgTagClasses() {
     var primaries = [
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
@@ -14,7 +14,7 @@ export function svgTagClasses() {
         'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
         'public_transport', 'location', 'parking', 'golf', 'type', 'leisure',
-        'man_made', 'indoor', 'construction', 'proposed'
+        'man_made', 'indoor', 'construction'
     ];
     var _tags = function(entity) { return entity.tags; };
 
@@ -40,7 +40,7 @@ export function svgTagClasses() {
 
     tagClasses.getClassesString = function(t, value) {
         var primary, status;
-        var i, j, k, v;
+        var i, j, k, v; 
 
         // in some situations we want to render perimeter strokes a certain way
         var overrideGeometry;
@@ -91,6 +91,8 @@ export function svgTagClasses() {
                     if (!v || v === 'no') continue;
 
                     status = statuses[i];
+                    primary = primaries[j];
+                    classes.push('tag-' + primary);
                     break;
                 }
             }

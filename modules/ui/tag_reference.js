@@ -41,6 +41,7 @@ export function uiTagReference(what) {
     function gotDocs(err, docs) {
         _body.html('');
 
+        // TODO: change this
         if (!docs || !docs.title) {
             if (what.value && what.key === 'customStringMessage') {
                 _body

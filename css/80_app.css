@@ -1064,6 +1064,7 @@ a.hide-toggle {
     padding: 2px;
     background-color: white;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    z-index: 2;
 }
 
 .wrap-form-field-lifecycle-disabled {

@@ -89,6 +89,8 @@ export function uiSectionFeatureType(context) {
                 d3_event.stopPropagation();
             });
 
+        let lifecycle = _presets[0].getLifecycle(_tags);
+
         var geometries = entityGeometries();
         selection.select('.preset-list-item button')
             .call(uiPresetIcon()
@@ -114,8 +116,6 @@ export function uiSectionFeatureType(context) {
             .attr('class', 'namepart')
             .text('')
             .each(function(d) { d(d3_select(this)); });
-
-        let lifecycle = _presets[0].getLifecycle(_tags);
 
         let presetIconContainer = selection.select('.preset-icon-container');
         let namepartContainer = selection.select('.namepart');
