@@ -113,7 +113,7 @@
     "mapillary-js": "4.1.2",
     "minimist": "^1.2.8",
     "name-suggestion-index": "~6.0",
-    "netlify-cli": "^19.0.0",
+    "netlify-cli": "^19.0.1",
     "npm-run-all": "^4.0.0",
     "osm-community-index": "~5.9.1",
     "postcss": "^8.5.3",
