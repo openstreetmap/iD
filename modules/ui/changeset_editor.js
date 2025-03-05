@@ -88,6 +88,7 @@ export function uiChangesetEditor(context) {
                     // based on the values used in recent changesets.
                     const recentSources = changesets
                         .flatMap((changeset) => changeset.tags.source?.split(';'))
+                        .filter(value => !sourceField.options.includes(value))
                         .filter(Boolean)
                         .map(title => ({ title, value: title, klass: 'raw-option' }));
 
@@ -98,7 +99,7 @@ export function uiChangesetEditor(context) {
 
         // Show warning(s) if comment mentions Google or comment length exceeds 255 chars
         const warnings = [];
-        if (_tags.comment.match(/google/i)) {
+        if (_tags.comment?.match(/google/i)) {
             warnings.push({
                 id: 'contains "google"',
                 msg: t.append('commit.google_warning'),

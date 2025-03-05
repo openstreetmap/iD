@@ -383,7 +383,7 @@ export function uiFeatureList(context) {
                 const noteId = d.id.replace(/\D/g, '');
 
                 // load note
-                context.zoomToNote(noteId);
+                context.moveToNote(noteId);
             } else {
                 // download, zoom to, and select the entity with the given ID
                 context.zoomToEntity(d.id);

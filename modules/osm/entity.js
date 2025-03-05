@@ -182,10 +182,6 @@ osmEntity.prototype = {
         return Object.keys(this.tags).some(osmIsInterestingTag);
     },
 
-    isHighwayIntersection: function() {
-        return false;
-    },
-
     isDegenerate: function() {
         return true;
     },
