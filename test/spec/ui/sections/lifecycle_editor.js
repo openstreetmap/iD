@@ -37,7 +37,7 @@ describe('iD.uiSectionLifecycleEditor', () => {
         lifecycle.tags({ building: 'yes' });
         lifecycle.presets([{ tags: { building: 'yes' }, getLifecycle: vi.fn(() => 'functional') }]);
         lifecycle.disclosureContent(selection);
-    
+
         const radio = d3.select('input[value="construction"]');
         radio.trigger('click');
         radio.on('change')();

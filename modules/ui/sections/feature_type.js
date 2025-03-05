@@ -125,13 +125,13 @@ export function uiSectionFeatureType(context) {
 
         let presetKeys = Object.keys(_presets[0].tags);
 
-        if (!presetKeys.some(e => e.includes(lifecycle))) {    
+        if (!presetKeys.some(e => e.includes(lifecycle))) {
             if (lifecycle && lifecycle !== 'functional') {
                 namepartContainer
                     .append('span')
                     .attr('class', 'lifecycle')
                     .text(' (' + t('lifecycle.' + lifecycle) + ')');
-    
+
                 presetIconContainer.append('div')
                     .attr('class', 'lifecycle-icon-container')
                     .call(svgIcon(osmLifecyclePrefixes[lifecycle].icon));
