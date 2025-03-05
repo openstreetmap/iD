@@ -496,17 +496,10 @@ export function rendererMap(context) {
                 var lines = Math.abs(source.deltaY);
                 var sign = (source.deltaY > 0) ? 1 : -1;
                 dY = sign * clamp(
-                    Math.exp((lines - 1) * 0.75) * 4.000244140625,
+                    lines * 18.001,
                     4.000244140625,    // min
                     350.000244140625   // max
                 );
-
-                // On Firefox Windows and Linux we always get +/- the scroll line amount (default 3)
-                // There doesn't seem to be any scroll acceleration.
-                // This multiplier increases the speed a little bit - #5512
-                if (detected.os !== 'mac') {
-                    dY *= 5;
-                }
 
                 // recalculate x2,y2,k2
                 t0 = _isTransformed ? _transformLast : _transformStart;
