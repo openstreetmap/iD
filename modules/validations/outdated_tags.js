@@ -9,6 +9,7 @@ import { services } from '../services';
 import {  utilHashcode, utilTagDiff } from '../util';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import { getDeprecatedTags } from '../osm/deprecated';
 
 /** @import { TagDiff } from '../util/util'. */
 
@@ -43,7 +44,7 @@ export function validationOutdatedTags() {
 
     // Upgrade deprecated tags..
     if (_dataDeprecated) {
-      const deprecatedTags = entity.deprecatedTags(_dataDeprecated);
+      const deprecatedTags = getDeprecatedTags(entity.tags, _dataDeprecated);
       if (entity.type === 'way' && entity.isClosed() &&
           entity.tags.traffic_calming === 'island' && !entity.tags.highway) {
         // https://github.com/openstreetmap/id-tagging-schema/issues/1162#issuecomment-2000356902
