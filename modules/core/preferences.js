@@ -1,4 +1,4 @@
-export * as asyncPrefs from 'idb-keyval';
+import { get, set } from 'idb-keyval';
 
 // https://github.com/openstreetmap/iD/issues/772
 // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
@@ -51,3 +51,18 @@ corePreferences.onChange = function(k, handler) {
 };
 
 export { corePreferences as prefs };
+
+export const asyncPrefs = {
+  /** @param {string} key */
+  get(key) {
+    // migration from localStorage which was used until December 2024
+    if (corePreferences(key)) {
+      const parsed = JSON.parse(corePreferences(key));
+      corePreferences(key, null);
+      return parsed;
+    }
+
+    return get(key);
+  },
+  set,
+};

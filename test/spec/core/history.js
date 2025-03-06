@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 describe('iD.coreHistory', function () {
     var context, history, spy;
     var actionNoop = function(g) { return g; };
@@ -68,15 +70,13 @@ describe('iD.coreHistory', function () {
             expect(history.undoAnnotation()).to.equal('annotation');
         });
 
-        it('performs transitionable actions in a transition', function (done) {
+        it('performs transitionable actions in a transition', async () => {
             var action1 = function() { return iD.coreGraph(); };
             action1.transitionable = true;
             history.on('change', spy);
             history.perform(action1);
-            window.setTimeout(function() {
-                expect(spy.callCount).to.be.above(2);
-                done();
-            }, 300);
+            await setTimeout(300);
+            expect(spy.callCount).to.be.above(2);
         });
     });
 

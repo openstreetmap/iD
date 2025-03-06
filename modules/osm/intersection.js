@@ -211,7 +211,8 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     // walking the intersection graph later and rendering turn arrows.
 
     function withMetadata(way, vertexIds) {
-        var __oneWay = way.isOneWay();
+        // bidirectional ways are two-way from an intersection's perspective
+        var __oneWay = way.isOneWay() && !way.isBiDirectional();
 
         // which affixes are key vertices?
         var __first = (vertexIds.indexOf(way.first()) !== -1);

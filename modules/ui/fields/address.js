@@ -187,10 +187,10 @@ export function uiFieldAddress(field, context) {
             .enter()
             .append('input')
             .property('type', 'text')
-            .call(updatePlaceholder)
             .attr('class', function (d) { return 'addr-' + d.id; })
             .call(utilNoAuto)
             .each(addDropdown)
+            .call(updatePlaceholder)
             .style('width', function (d) { return d.width * 100 + '%'; });
 
 

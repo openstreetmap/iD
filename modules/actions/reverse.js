@@ -18,10 +18,8 @@ References:
     http://wiki.openstreetmap.org/wiki/Key:traffic_sign#On_a_way_or_area
 */
 export function actionReverse(entityID, options) {
-    var ignoreKey = /^.*(_|:)?(description|name|note|website|ref|source|comment|watch|attribution)(_|:)?/;
     var numeric = /^([+\-]?)(?=[\d.])/;
     var directionKey = /direction$/;
-    var turn_lanes = /^turn:lanes:?/;
     var keyReplacements = [
         [/:right$/, ':left'],
         [/:left$/, ':right'],
@@ -42,13 +40,27 @@ export function actionReverse(entityID, options) {
         forwards: 'backward',
         backwards: 'forward',
     };
-    // tags whose values should not be reversed when certain other tags are also present
-    // https://github.com/openstreetmap/iD/issues/10128
-    const valueReplacementsExceptions = {
-        'side': [
-            {highway: 'cyclist_waiting_aid'}
-        ]
-    };
+    // For some tags, keys or values like left/right/… don't refer to
+    // way direction and thus should not be reversed.
+    const keysToKeepUnchanged = [
+        // https://github.com/openstreetmap/iD/issues/10736
+        /^red_turn:(right|left):?/
+    ];
+    // If a key matches the key regex and any of the provided context
+    // tag sets, it will not be reversed.
+    const keyValuesToKeepUnchanged = [{
+            keyRegex: /^.*(_|:)?(description|name|note|website|ref|source|comment|watch|attribution)(_|:)?/,
+            prerequisiteTags: [{}]
+        }, {
+            // Turn lanes are left/right to key (not way) direction - #5674
+            keyRegex: /^turn:lanes:?/,
+            prerequisiteTags: [{}]
+        }, {
+            // https://github.com/openstreetmap/iD/issues/10128
+            keyRegex: /^side$/,
+            prerequisiteTags: [{highway: 'cyclist_waiting_aid'}]
+        }
+    ];
     var roleReplacements = {
         forward: 'backward',
         backward: 'forward',
@@ -82,6 +94,9 @@ export function actionReverse(entityID, options) {
 
 
     function reverseKey(key) {
+        if (keysToKeepUnchanged.some(keyRegex => keyRegex.test(key))) {
+            return key;
+        }
         for (var i = 0; i < keyReplacements.length; ++i) {
             var replacement = keyReplacements[i];
             if (replacement[0].test(key)) {
@@ -93,13 +108,17 @@ export function actionReverse(entityID, options) {
 
 
     function reverseValue(key, value, includeAbsolute, allTags) {
-        if (ignoreKey.test(key)) return value;
+        for (let { keyRegex, prerequisiteTags } of keyValuesToKeepUnchanged) {
+            if (keyRegex.test(key) && prerequisiteTags.some(expectedTags =>
+                Object.entries(expectedTags).every(([k, v]) => {
+                    return allTags[k] && (v === '*' || allTags[k] === v);
+                })
+            )) {
+                return value;
+            }
+        }
 
-        // Turn lanes are left/right to key (not way) direction - #5674
-        if (turn_lanes.test(key)) {
-            return value;
-
-        } else if (key === 'incline' && numeric.test(value)) {
+        if (key === 'incline' && numeric.test(value)) {
             return value.replace(numeric, function(_, sign) { return sign === '-' ? '' : '-'; });
 
         } else if (options && options.reverseOneway && key === 'oneway') {
@@ -121,17 +140,6 @@ export function actionReverse(entityID, options) {
                     return valueReplacements[value] || value;
                 }
             }).join(';');
-        }
-
-        if (valueReplacementsExceptions[key] && valueReplacementsExceptions[key].some(exceptionTags =>
-            Object.keys(exceptionTags).every(k => {
-                const v = exceptionTags[k];
-                return allTags[k] && (v === '*' || allTags[k] === v);
-            })
-        )) {
-            // don't reverse, for example, side=left/right on highway=cyclist_waiting_aid features
-            // see https://github.com/openstreetmap/iD/issues/10128
-            return value;
         }
         return valueReplacements[value] || value;
     }

@@ -504,7 +504,7 @@ export function coreHistory(context) {
                 return x;
             });
 
-            return JSON.stringify({
+            return {
                 version: 3,
                 entities: Object.values(allEntities),
                 baseEntities: Object.values(baseEntities),
@@ -513,12 +513,11 @@ export function coreHistory(context) {
                 index: _index,
                 // note the time the changes were saved
                 timestamp: (new Date()).getTime()
-            });
+            };
         },
 
 
-        fromJSON: function(json, loadChildNodes) {
-            var h = JSON.parse(json);
+        fromJSON: function(h, loadChildNodes) {
             var loadComplete = true;
 
             osmEntity.id.next = h.nextIDs;

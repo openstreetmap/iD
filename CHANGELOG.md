@@ -35,37 +35,98 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.32.0-dev)
+# unreleased (v2.33.0-dev)
 
 #### :sparkles: Usability & Accessibility
-* Also show search result for coordinates in `lon/lat` order in search results ([#10720], thanks [@Deeptanshu-sankhwar])
+* Increase the 5MB storage limit by storing history in IndexedDB instead of localStorage ([#10619], thanks [@k-yle])
 #### :scissors: Operations
-* Fix splitting of closed ways (or areas) when two or more split-points are selected
 #### :camera: Street-Level
 #### :white_check_mark: Validation
-* Add warning if aeroways cross each other, buildings or highways ([#9315], thanks [@k-yle])
-* Warn when a way with more than the maximum allowed number of nodes is to be uploaded and provide a way to fix it ([#7381])
 #### :bug: Bugfixes
-* Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
-* Fix briefly disappearing data layer during background layer tile layer switching transition ([#10748])
-* Preserve imagery offset during tile layer switching transition ([#10748])
-* Fix over-saturated map tiles near the border of the tile service's coverage area ([#10747], thanks [@hlfan])
-* Fix too dim markers of selected/hovered photo of some street level imagery layers ([#10755], thanks [@draunger])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
-#### :rocket: Presets
 #### :hammer: Development
 
+[#10619]: https://github.com/openstreetmap/iD/pull/10619
+
+
+# 2.32.0
+##### 2025-03-05
+
+#### :sparkles: Usability & Accessibility
+* Autocomplete changeset `source` tag with sources of the previous 100 changesets of the user ([#10764], thanks [@k-yle])
+* Also show search result for coordinates in `lon/lat` order in search results ([#10720], thanks [@Deeptanshu-sankhwar])
+* Linkify keys & tags in the preset docs from the wiki ([#10763], thanks [@k-yle])
+* Allow broken (unclosed) areas to be continued ([#9635], thanks [@k-yle])
+* Render `*_link` roads narrower than their "regular" counterpart ([#10722])
+* Remove `noexit=yes` and `fixme=continue` when you continue a line ([#9634], thanks [@k-yle])
+* Don't zoom out when interacting with notes ([#10807], thanks [@hlfan])
+* Add a changeset tag if a merge conflict occurred ([#9636], thanks [@k-yle])
+#### :scissors: Operations
+* Fix splitting of closed ways (or areas) when two or more split-points are selected
+* Keep `red_turn:left/right` tags unchanged when reversing a way ([#10737], thanks [@burrscurr])
+#### :camera: Street-Level
+* Always use HTTPS to load Bing Streetside images ([#10798], thanks [@k-yle])
+#### :white_check_mark: Validation
+* Add warning if aeroways cross each other, buildings or highways ([#9315], thanks [@k-yle])
+* Warn when a way with more than the maximum allowed number of nodes is to be uploaded and provide a way to fix it ([#7381])
+* The Suspicious Names validator warning now compares the Name field to the preset’s name in the user’s language, not just the raw tag value (typically in British English). ([#9522], thanks [@k-yle])
+* Revalidate ways that are connected to the currently edited way to also properly update/catch _disconnected way_s and _impossible oneway_ errors ([#8911], thanks [@andrewpmk])
+* Revalidate ways that are added to or removed from relations ([#10786])
+* Preserve `crossing:markings` tag when fixing missing connection of crossing path and road ([#9586], thanks [@jtracey])
+* Add a dedicated description to fix waterway-road intersections by adding a _culvert_ ([#10778], thanks [@matkoniecz])
+* Separate tag-upgrade warnings from NSI suggestions ([#10800], thanks [@k-yle])
+#### :bug: Bugfixes
+* Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
+* Fix briefly disappearing data layer during background layer tile layer switching transition ([#10748])
+* Fix the turn restriction editor not supporting bidirectional roads ([#10731], thanks [@k-yle])
+* Preserve imagery offset during tile layer switching transition ([#10748])
+* Fix the relation membership list using a non-deterministic order ([#10648], thanks [@k-yle])
+* Fix over-saturated map tiles near the border of the tile service's coverage area ([#10747], thanks [@hlfan])
+* Fix too dim markers of selected/hovered photo of some street level imagery layers ([#10755], thanks [@draunger])
+* Fix `+` symbol appearing in changeset comments from external tools ([#10766], thanks [@k-yle])
+* Fix `destination_sign` relations from being corrupted when splitting a way ([#10646], thanks [@k-yle])
+* Fix combobox dropdown menu sticking around under certain conditions (e.g. while editing the role of a relation member and deselecting a feature #10319)
+#### :earth_asia: Localization
+* Add `housename` to address format in Bolivia ([#10727])
+#### :mortar_board: Walkthrough / Help
+* Fix walkthrough from not correctly registering deleted ways in "Lines" step ([#10776])
+#### :hammer: Development
+* Enable Intellisense (IDE auto-completion) for the main classes ([#10618], thanks [@k-yle])
+
 [#7381]: https://github.com/openstreetmap/iD/issues/7381
+[#8911]: https://github.com/openstreetmap/iD/pull/8911
+[#9522]: https://github.com/openstreetmap/iD/issues/9522
+[#9586]: https://github.com/openstreetmap/iD/pull/9586
+[#9634]: https://github.com/openstreetmap/iD/pull/9634
+[#9635]: https://github.com/openstreetmap/iD/pull/9635
+[#9636]: https://github.com/openstreetmap/iD/pull/9636
 [#10003]: https://github.com/openstreetmap/iD/pull/10003
+[#10618]: https://github.com/openstreetmap/iD/pull/10618
+[#10646]: https://github.com/openstreetmap/iD/pull/10646
+[#10648]: https://github.com/openstreetmap/iD/pull/10648
 [#10720]: https://github.com/openstreetmap/iD/issues/10720
+[#10722]: https://github.com/openstreetmap/iD/pull/10722
+[#10727]: https://github.com/openstreetmap/iD/issues/10727
+[#10731]: https://github.com/openstreetmap/iD/pull/10731
+[#10737]: https://github.com/openstreetmap/iD/pull/10737
 [#10747]: https://github.com/openstreetmap/iD/issues/10747
 [#10748]: https://github.com/openstreetmap/iD/issues/10748
 [#10755]: https://github.com/openstreetmap/iD/issues/10755
+[#10763]: https://github.com/openstreetmap/iD/pull/10763
+[#10764]: https://github.com/openstreetmap/iD/issues/10764
+[#10766]: https://github.com/openstreetmap/iD/pull/10766
+[#10776]: https://github.com/openstreetmap/iD/issues/10776
+[#10778]: https://github.com/openstreetmap/iD/issues/10778
+[#10798]: https://github.com/openstreetmap/iD/pull/10798
+[#10800]: https://github.com/openstreetmap/iD/pull/10800
+[#10807]: https://github.com/openstreetmap/iD/issues/10807
 [@hlfan]: https://github.com/hlfan
 [@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
 [@draunger]: https://github.com/draunger
+[@burrscurr]: https://github.com/burrscurr
+[@andrewpmk]: https://github.com/andrewpmk
 
 
 # 2.31.1
@@ -108,6 +169,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add Ladin (language code `lld`) as an available option for multilingual names
 * Add 30 indigenous languages as dropdown options for multilingual names ([#10684], thanks [@k-yle])
 * Add `lang`uage attributes to input fields for multilingual names, as well as wikidata and wikipedia fields ([#10716], thanks [@mapmeld])
+#### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 * Fix walkthrough from showing tooltips on wrong location under certain circumstances ([#10650], [#10624], [#10634])
 #### :rocket: Presets

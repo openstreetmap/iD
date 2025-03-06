@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 describe('iD.serviceStreetside', function() {
     var dimensions = [64, 64];
     var context, streetside;
@@ -47,7 +49,7 @@ describe('iD.serviceStreetside', function() {
     });
 
     describe('#loadBubbles', function() {
-        it('fires loadedImages when bubbles are loaded', function(done) {
+        it('fires loadedImages when bubbles are loaded', async () => {
             // adjust projection so that only one tile is fetched
             // (JSONP hack will return the same data for every fetch)
             context.projection
@@ -71,13 +73,11 @@ describe('iD.serviceStreetside', function() {
 
             streetside.loadBubbles(context.projection, 0);  // 0 = don't fetch margin tiles
 
-            window.setTimeout(function() {
-                expect(spy).to.have.been.calledOnce;
-                done();
-            }, 200);
+            await setTimeout(200);
+            expect(spy).to.have.been.calledOnce;
         });
 
-        it('does not load bubbles around null island', function(done) {
+        it('does not load bubbles around null island', async () => {
             context.projection
                 .scale(iD.geoZoomToScale(18))
                 .translate([0, 0])
@@ -99,10 +99,8 @@ describe('iD.serviceStreetside', function() {
 
             streetside.loadBubbles(context.projection, 0);  // 0 = don't fetch margin tiles
 
-            window.setTimeout(function() {
-                expect(spy).to.have.been.not.called;
-                done();
-            }, 200);
+            await setTimeout(200);
+            expect(spy).to.have.been.not.called;
         });
     });
 

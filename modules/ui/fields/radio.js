@@ -311,10 +311,13 @@ export function uiFieldRadio(field, context) {
         }
 
         if (field.type === 'structureRadio') {
-            // For waterways without a tunnel tag, set 'culvert' as
-            // the _oldType to default to if the user picks 'tunnel'
             if (!!tags.waterway && !_oldType.tunnel) {
+                // default waterway tunnels to 'culvert'
                 _oldType.tunnel = 'culvert';
+            }
+            if (!!tags.waterway && !_oldType.bridge) {
+                // default waterway bridges to 'aqueduct'
+                _oldType.bridge = 'aqueduct';
             }
 
             wrap.call(structureExtras, tags);

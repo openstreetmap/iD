@@ -80,6 +80,7 @@ osmEntity.deprecatedTagValuesByKey = function(dataDeprecated) {
 
 osmEntity.prototype = {
 
+    /** @type {Tags} */
     tags: {},
 
 
@@ -179,10 +180,6 @@ osmEntity.prototype = {
 
     hasInterestingTags: function() {
         return Object.keys(this.tags).some(osmIsInterestingTag);
-    },
-
-    isHighwayIntersection: function() {
-        return false;
     },
 
     isDegenerate: function() {

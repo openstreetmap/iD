@@ -11,6 +11,7 @@ import { t } from '../core/localizer';
 import { utilArrayUnion, utilArrayUniq, utilDisplayName, utilDisplayType, utilRebind } from '../util';
 
 
+/** @param {iD.Context} context */
 export function coreUploader(context) {
 
     var dispatch = d3_dispatch(
@@ -30,6 +31,7 @@ export function coreUploader(context) {
 
     var _isSaving = false;
 
+    let _anyConflictsAutomaticallyResolved = false;
     var _conflicts = [];
     var _errors = [];
     var _origChanges;
@@ -39,7 +41,7 @@ export function coreUploader(context) {
         .then(function(d) { _discardTags = d; })
         .catch(function() { /* ignore */ });
 
-    var uploader = utilRebind({}, dispatch, 'on');
+    const uploader = {};
 
     uploader.isSaving = function() {
         return _isSaving;
@@ -72,6 +74,7 @@ export function coreUploader(context) {
 
         var history = context.history();
 
+        _anyConflictsAutomaticallyResolved = false;
         _conflicts = [];
         _errors = [];
 
@@ -251,7 +254,10 @@ export function coreUploader(context) {
                 history.replace(merge);
 
                 var mergeConflicts = merge.conflicts();
-                if (!mergeConflicts.length) return;  // merged safely
+                if (!mergeConflicts.length) {
+                    _anyConflictsAutomaticallyResolved = true;
+                    return; // merged safely
+                }
 
                 var forceLocal = actionMergeRemoteChanges(id, localGraph, remoteGraph, _discardTags).withOption('force_local');
                 var forceRemote = actionMergeRemoteChanges(id, localGraph, remoteGraph, _discardTags).withOption('force_remote');
@@ -273,7 +279,7 @@ export function coreUploader(context) {
     }
 
 
-    function upload(changeset) {
+    async function upload(changeset) {
         var osm = context.connection();
         if (!osm) {
             _errors.push({ msg: 'No OSM Service' });
@@ -286,6 +292,11 @@ export function coreUploader(context) {
             didResultInErrors();
 
         } else {
+            if (_anyConflictsAutomaticallyResolved) {
+                // add a changeset tag to aid reviewers
+                changeset.tags.merge_conflict_resolved = 'automatically';
+                await osm.updateChangesetTags(changeset);
+            }
             var history = context.history();
             var changes = history.changes(actionDiscardTags(history.difference(), _discardTags));
             if (changes.modified.length || changes.created.length || changes.deleted.length) {
@@ -339,6 +350,9 @@ export function coreUploader(context) {
 
 
     function didResultInConflicts(changeset) {
+        // add a changeset tag to aid reviewers
+        changeset.tags.merge_conflict_resolved = 'manually';
+        context.connection().updateChangesetTags(changeset);
 
         _conflicts.sort(function(a, b) { return b.id.localeCompare(a.id); });
 
@@ -402,5 +416,5 @@ export function coreUploader(context) {
     };
 
 
-    return uploader;
+    return utilRebind(uploader, dispatch, 'on');
 }

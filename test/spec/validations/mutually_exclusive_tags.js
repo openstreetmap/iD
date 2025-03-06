@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 describe('iD.validations.mutually_exclusive_tags', function () {
     var context;
 
@@ -22,71 +24,61 @@ describe('iD.validations.mutually_exclusive_tags', function () {
     }
 
 
-    it('has no errors on init', function(done) {
+    it('has no errors on init', async () => {
         var validator = iD.validationMutuallyExclusiveTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('has no errors on good tags', function(done) {
+    it('has no errors on good tags', async () => {
         createNode({'name': 'Trader Joe', 'not:name': 'Trader Jane'});
         var validator = iD.validationMutuallyExclusiveTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('flags mutually exclusive tags', function(done) {
+    it('flags mutually exclusive tags', async () => {
         createNode({'name': 'Trader Joe', 'noname': 'yes'});
         var validator = iD.validationMutuallyExclusiveTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('mutually_exclusive_tags');
-            expect(issue.subtype).to.eql('default');
-            expect(issue.severity).to.eql('warning');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('n-1');
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('mutually_exclusive_tags');
+        expect(issue.subtype).to.eql('default');
+        expect(issue.severity).to.eql('warning');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('n-1');
     });
 
-    it('flags feature with a mutually exclusive `not:name` value', function(done) {
+    it('flags feature with a mutually exclusive `not:name` value', async () => {
         createNode({ shop: 'supermarket', name: 'Lous', 'not:name': 'Lous' });
         var validator = iD.validationMutuallyExclusiveTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('mutually_exclusive_tags');
-            expect(issue.subtype).to.eql('same_value');
-            expect(issue.severity).to.eql('warning');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('n-1');
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('mutually_exclusive_tags');
+        expect(issue.subtype).to.eql('same_value');
+        expect(issue.severity).to.eql('warning');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('n-1');
     });
 
 
-    it('flags feature with a mutually exclusive semicolon-separated `not:name` value', function(done) {
+    it('flags feature with a mutually exclusive semicolon-separated `not:name` value', async () => {
         createNode({ shop: 'supermarket', name: 'Lous', 'not:name': 'Louis\';Lous;Louis\'s' });
         var validator = iD.validationMutuallyExclusiveTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('mutually_exclusive_tags');
-            expect(issue.subtype).to.eql('same_value');
-            expect(issue.severity).to.eql('warning');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('n-1');
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('mutually_exclusive_tags');
+        expect(issue.subtype).to.eql('same_value');
+        expect(issue.severity).to.eql('warning');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('n-1');
     });
 });

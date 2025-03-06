@@ -4,7 +4,10 @@ import { osmEntity } from './entity';
 import { osmJoinWays } from './multipolygon';
 import { geoExtent, geoPolygonContainsPolygon, geoPolygonIntersectsPolygon } from '../geo';
 
-
+/**
+ * @typedef {typeof prototype & iD.AbstractEntity} OsmRelation
+ * @returns {OsmRelation}
+ */
 export function osmRelation() {
     if (!(this instanceof osmRelation)) {
         return (new osmRelation()).initialize(arguments);
@@ -28,7 +31,7 @@ osmRelation.creationOrder = function(a, b) {
 };
 
 
-Object.assign(osmRelation.prototype, {
+const prototype = {
     type: 'relation',
     members: [],
 
@@ -259,7 +262,10 @@ Object.assign(osmRelation.prototype, {
     hasFromViaTo: function() {
         return (
             this.members.some(function(m) { return m.role === 'from'; }) &&
-            this.members.some(function(m) { return m.role === 'via'; }) &&
+            this.members.some((m) =>
+                m.role === 'via' ||
+                (m.role === 'intersection' && this.tags.type === 'destination_sign')
+            ) &&
             this.members.some(function(m) { return m.role === 'to'; })
         );
     },
@@ -363,4 +369,5 @@ Object.assign(osmRelation.prototype, {
 
         return result;
     }
-});
+};
+Object.assign(osmRelation.prototype, prototype);
