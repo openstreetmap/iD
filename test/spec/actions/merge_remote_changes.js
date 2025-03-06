@@ -79,6 +79,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                   var  result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
+                expect(action.conflicts()).toHaveLength(1);
             });
 
             it('doesn\'t merge tags if conflict (local change, remote delete)', function () {
@@ -92,6 +93,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
+                expect(action.conflicts()).toHaveLength(1);
             });
 
             it('doesn\'t merge tags if conflict (local delete, remote change)', function () {
@@ -105,6 +107,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
+                expect(action.conflicts()).toHaveLength(1);
             });
 
             it('doesn\'t merge tags if conflict (local add, remote add)', function () {
@@ -118,6 +121,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
+                expect(action.conflicts()).toHaveLength(1);
             });
 
             it('merges tags if no conflict (remote delete)', function () {
@@ -133,6 +137,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
                 expect(result.entity('a').version).to.eql('2');
                 expect(result.entity('a').tags).to.eql(mergedTags);
+                expect(action.conflicts()).toHaveLength(0);
             });
 
             it('merges tags if no conflict (local delete)', function () {
@@ -148,6 +153,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
                 expect(result.entity('a').version).to.eql('2');
                 expect(result.entity('a').tags).to.eql(mergedTags);
+                expect(action.conflicts()).toHaveLength(0);
             });
         });
 
@@ -184,6 +190,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                 expect(result.entity('a').version).to.eql('2');
                 expect(result.entity('a').tags).to.eql(mergedTags);
                 expect(result.entity('a').loc).to.eql([2, 2]);
+                expect(action.conflicts()).toHaveLength(0);
             });
         });
 
@@ -202,6 +209,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
                 expect(result.entity('w1').version).to.eql('2');
                 expect(result.entity('w1').tags).to.eql(mergedTags);
+                expect(action.conflicts()).toHaveLength(0);
             });
 
             it('merges ways if nodelist changed only remotely', function () {
@@ -222,6 +230,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                 expect(result.entity('w1').nodes).to.eql(remoteNodes);
                 expect(result.hasEntity('r2')).to.eql(r2);
                 expect(result.hasEntity('r3')).to.eql(r3);
+                expect(action.conflicts()).toHaveLength(0);
             });
 
             it('merges ways if nodelist changed only locally', function () {
@@ -240,6 +249,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                 expect(result.entity('w1').version).to.eql('2');
                 expect(result.entity('w1').tags).to.eql(mergedTags);
                 expect(result.entity('w1').nodes).to.eql(localNodes);
+                expect(action.conflicts()).toHaveLength(0);
             });
 
             it('merges ways if nodelist changes don\'t overlap', function () {
@@ -261,6 +271,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                 expect(result.entity('w1').nodes).to.eql(mergedNodes);
                 expect(result.hasEntity('r3')).to.eql(r3);
                 expect(result.hasEntity('r4')).to.eql(r4);
+                expect(action.conflicts()).toHaveLength(0);
             });
 
             it('doesn\'t merge ways if nodelist changes overlap', function () {
@@ -276,6 +287,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
+                expect(action.conflicts()).toHaveLength(1);
             });
 
             it('merges ways if childNode location is same', function () {
@@ -290,6 +302,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
                 expect(result.entity('p1').version).to.eql('2');
                 expect(result.entity('p1').loc).to.eql(remoteLoc);
+                expect(action.conflicts()).toHaveLength(0);
             });
 
             it('doesn\'t merge ways if childNode location is different', function () {
@@ -303,6 +316,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
+                expect(action.conflicts()).toHaveLength(1);
             });
         });
 
@@ -321,6 +335,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
+                expect(action.conflicts()).toHaveLength(1);
             });
 
             it('merges relations if members are same and changed tags don\'t conflict', function () {
@@ -338,6 +353,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
                 expect(result.entity('r').version).to.eql('2');
                 expect(result.entity('r').tags).to.eql(mergedTags);
+                expect(action.conflicts()).toHaveLength(0);
             });
         });
 
@@ -377,6 +393,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                 expect(result.entity('a').version).to.eql('2');
                 expect(result.entity('a').tags).to.eql(localTags);
                 expect(result.entity('a').loc).to.eql(localLoc);
+                expect(action.conflicts()).toHaveLength(0);
             });
 
             it('merges nodes with \'force_remote\' option', function () {
@@ -394,6 +411,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                 expect(result.entity('a').version).to.eql('2');
                 expect(result.entity('a').tags).to.eql(remoteTags);
                 expect(result.entity('a').loc).to.eql(remoteLoc);
+                expect(action.conflicts()).toHaveLength(0);
             });
         });
 
@@ -414,6 +432,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                 expect(result.entity('w1').version).to.eql('2');
                 expect(result.entity('w1').tags).to.eql(localTags);
                 expect(result.entity('w1').nodes).to.eql(localNodes);
+                expect(action.conflicts()).toHaveLength(0);
             });
 
             it('merges ways with \'force_remote\' option', function () {
@@ -433,6 +452,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                 expect(result.entity('w1').nodes).to.eql(remoteNodes);
                 expect(result.hasEntity('r3')).to.eql(r3);
                 expect(result.hasEntity('r4')).to.eql(r4);
+                expect(action.conflicts()).toHaveLength(0);
             });
 
             it('merges way childNodes with \'force_local\' option', function () {
@@ -447,6 +467,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
                 expect(result.entity('p1').version).to.eql('2');
                 expect(result.entity('p1').loc).to.eql(localLoc);
+                expect(action.conflicts()).toHaveLength(0);
             });
 
             it('merges way childNodes with \'force_remote\' option', function () {
@@ -477,6 +498,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                 expect(result.entity('w1').nodes).to.eql(remoteNodes);
                 expect(result.hasEntity('r1')).to.eql(localr1);
                 expect(result.hasEntity('r2')).to.be.not.ok;
+                expect(action.conflicts()).toHaveLength(0);
             });
         });
 
@@ -497,6 +519,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                 expect(result.entity('r').version).to.eql('2');
                 expect(result.entity('r').tags).to.eql(localTags);
                 expect(result.entity('r').members).to.eql(localMembers);
+                expect(action.conflicts()).toHaveLength(0);
             });
 
             it('merges relations with \'force_remote\' option', function () {
@@ -514,6 +537,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                 expect(result.entity('r').version).to.eql('2');
                 expect(result.entity('r').tags).to.eql(remoteTags);
                 expect(result.entity('r').members).to.eql(remoteMembers);
+                expect(action.conflicts()).toHaveLength(0);
             });
         });
     });

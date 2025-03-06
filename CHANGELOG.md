@@ -35,7 +35,21 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.32.0-dev)
+# unreleased (v2.33.0-dev)
+
+#### :sparkles: Usability & Accessibility
+#### :scissors: Operations
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+#### :bug: Bugfixes
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :hammer: Development
+
+
+# 2.32.0
+##### 2025-03-05
 
 #### :sparkles: Usability & Accessibility
 * Autocomplete changeset `source` tag with sources of the previous 100 changesets of the user ([#10764], thanks [@k-yle])
@@ -45,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render `*_link` roads narrower than their "regular" counterpart ([#10722])
 * Remove `noexit=yes` and `fixme=continue` when you continue a line ([#9634], thanks [@k-yle])
 * Don't zoom out when interacting with notes ([#10807], thanks [@hlfan])
+* Add a changeset tag if a merge conflict occurred ([#9636], thanks [@k-yle])
 #### :scissors: Operations
 * Fix splitting of closed ways (or areas) when two or more split-points are selected
 * Keep `red_turn:left/right` tags unchanged when reversing a way ([#10737], thanks [@burrscurr])
@@ -58,6 +73,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Revalidate ways that are added to or removed from relations ([#10786])
 * Preserve `crossing:markings` tag when fixing missing connection of crossing path and road ([#9586], thanks [@jtracey])
 * Add a dedicated description to fix waterway-road intersections by adding a _culvert_ ([#10778], thanks [@matkoniecz])
+* Separate tag-upgrade warnings from NSI suggestions ([#10800], thanks [@k-yle])
 #### :bug: Bugfixes
 * Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
 * Fix briefly disappearing data layer during background layer tile layer switching transition ([#10748])
@@ -71,10 +87,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix combobox dropdown menu sticking around under certain conditions (e.g. while editing the role of a relation member and deselecting a feature #10319)
 #### :earth_asia: Localization
 * Add `housename` to address format in Bolivia ([#10727])
-#### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 * Fix walkthrough from not correctly registering deleted ways in "Lines" step ([#10776])
-#### :rocket: Presets
 #### :hammer: Development
 * Enable Intellisense (IDE auto-completion) for the main classes ([#10618], thanks [@k-yle])
 
@@ -84,6 +98,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9586]: https://github.com/openstreetmap/iD/pull/9586
 [#9634]: https://github.com/openstreetmap/iD/pull/9634
 [#9635]: https://github.com/openstreetmap/iD/pull/9635
+[#9636]: https://github.com/openstreetmap/iD/pull/9636
 [#10003]: https://github.com/openstreetmap/iD/pull/10003
 [#10618]: https://github.com/openstreetmap/iD/pull/10618
 [#10646]: https://github.com/openstreetmap/iD/pull/10646
@@ -102,6 +117,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10776]: https://github.com/openstreetmap/iD/issues/10776
 [#10778]: https://github.com/openstreetmap/iD/issues/10778
 [#10798]: https://github.com/openstreetmap/iD/pull/10798
+[#10800]: https://github.com/openstreetmap/iD/pull/10800
 [#10807]: https://github.com/openstreetmap/iD/issues/10807
 [@hlfan]: https://github.com/hlfan
 [@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar

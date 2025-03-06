@@ -10,6 +10,8 @@ import {  utilHashcode, utilTagDiff } from '../util';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
+/** @import { TagDiff } from '../util/util'. */
+
 
 export function validationOutdatedTags() {
   const type = 'outdated_tags';
@@ -30,7 +32,6 @@ export function validationOutdatedTags() {
     if (!preset) return [];
 
     const oldTags = Object.assign({}, entity.tags);  // shallow copy
-    let subtype = 'deprecated_tags';
 
     // Upgrade preset, if a replacement is available..
     if (preset.replacement) {
@@ -39,8 +40,6 @@ export function validationOutdatedTags() {
       entity = graph.entity(entity.id);
       preset = newPreset;
     }
-
-    const upgradeReasons = [];
 
     // Upgrade deprecated tags..
     if (_dataDeprecated) {
@@ -56,10 +55,6 @@ export function validationOutdatedTags() {
       if (deprecatedTags.length) {
         deprecatedTags.forEach(tag => {
           graph = actionUpgradeTags(entity.id, tag.old, tag.replace)(graph);
-          upgradeReasons.push({
-            source: 'id-tagging-schema--deprecated',
-            data: tag
-          });
         });
         entity = graph.entity(entity.id);
       }
@@ -75,13 +70,11 @@ export function validationOutdatedTags() {
           } else if (preset.addTags[k]) {
             newTags[k] = preset.addTags[k];
           }
-          upgradeReasons.push({
-            source: 'id-tagging-schema--preset-addTags',
-            data: preset
-          });
         }
       });
     }
+
+    const deprecationDiff = utilTagDiff(oldTags, newTags);
 
     // Attempt to match a canonical record in the name-suggestion-index.
     const nsi = services.nsi;
@@ -91,81 +84,106 @@ export function validationOutdatedTags() {
       waitingForNsi = (nsi.status() === 'loading');
       if (!waitingForNsi) {
         const loc = entity.extent(graph).center();
-        nsiResult = nsi.upgradeTags(newTags, loc);
-        if (nsiResult) {
-          newTags = nsiResult.newTags;
-          subtype = 'noncanonical_brand';
-          upgradeReasons.push({
-            source: 'name-suggestion-index',
-            data: nsiResult
-          });
-        }
+        nsiResult = nsi.upgradeTags(oldTags, loc);
       }
     }
+
+    const nsiDiff = nsiResult ? utilTagDiff(oldTags, nsiResult.newTags) : [];
 
     let issues = [];
     issues.provisional = (_waitingForDeprecated || waitingForNsi);
 
-    // determine diff
-    const tagDiff = utilTagDiff(oldTags, newTags);
-    if (!tagDiff.length) return issues;
+    if (deprecationDiff.length) {
+      const isOnlyAddingTags = deprecationDiff.every(d => d.type === '+');
+      const prefix = isOnlyAddingTags ? 'incomplete.' : '';
 
-    const isOnlyAddingTags = tagDiff.every(d => d.type === '+');
+      issues.push(new validationIssue({
+        type: type,
+        subtype: isOnlyAddingTags ? 'incomplete_tags' : 'deprecated_tags',
+        severity: 'warning',
+        message: (context) => {
+          const currEntity = context.hasEntity(entity.id);
+          if (!currEntity) return '';
 
-    let prefix = '';
-    if (nsiResult) {
-      prefix = 'noncanonical_brand.';
-    } else if (subtype === 'deprecated_tags' && isOnlyAddingTags) {
-      subtype = 'incomplete_tags';
-      prefix = 'incomplete.';
+          const feature = utilDisplayLabel(currEntity, context.graph(), /* verbose */ true);
+
+          return t.append(`issues.outdated_tags.${prefix}message`, { feature });
+        },
+        reference: selection => showReference(
+          selection,
+          t.append(`issues.outdated_tags.${prefix}reference`),
+          deprecationDiff
+        ),
+        entityIds: [entity.id],
+        hash: utilHashcode(JSON.stringify(deprecationDiff)),
+        dynamicFixes: () => {
+          let fixes = [
+            new validationIssueFix({
+              title: t.append('issues.fix.upgrade_tags.title'),
+              onClick: (context) => {
+                context.perform(graph => doUpgrade(graph, deprecationDiff), t('issues.fix.upgrade_tags.annotation'));
+              }
+            })
+          ];
+          return fixes;
+        }
+      }));
     }
 
-    // don't allow autofixing brand tags
-    let autoArgs = subtype !== 'noncanonical_brand' ? [doUpgrade, t('issues.fix.upgrade_tags.annotation')] : null;
+    if (nsiDiff.length) {
+      const isOnlyAddingTags = nsiDiff.every(d => d.type === '+');
 
-    issues.push(new validationIssue({
-      type: type,
-      subtype: subtype,
-      severity: 'warning',
-      message: showMessage,
-      reference: showReference,
-      entityIds: [entity.id],
-      hash: utilHashcode(JSON.stringify(tagDiff)),
-      dynamicFixes: () => {
-        let fixes = [
-          new validationIssueFix({
-            autoArgs: autoArgs,
-            title: t.append('issues.fix.upgrade_tags.title'),
-            onClick: (context) => {
-              context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
-            }
-          })
-        ];
+      issues.push(new validationIssue({
+        type: type,
+        subtype: 'noncanonical_brand',
+        severity: 'warning',
+        message: (context) => {
+          const currEntity = context.hasEntity(entity.id);
+          if (!currEntity) return '';
 
-        const item = nsiResult && nsiResult.matched;
-        if (item) {
-          fixes.push(
+          const feature = utilDisplayLabel(currEntity, context.graph(), /* verbose */ true);
+
+          return isOnlyAddingTags
+            ? t.append('issues.outdated_tags.noncanonical_brand.message_incomplete', { feature })
+            : t.append('issues.outdated_tags.noncanonical_brand.message', { feature });
+        },
+        reference: selection => showReference(
+          selection,
+          t.append('issues.outdated_tags.noncanonical_brand.reference'),
+          nsiDiff
+        ),
+        entityIds: [entity.id],
+        hash: utilHashcode(JSON.stringify(nsiDiff)),
+        dynamicFixes: () => {
+          let fixes = [
             new validationIssueFix({
-              title: t.append('issues.fix.tag_as_not.title', { name: item.displayName }),
+              title: t.append('issues.fix.upgrade_tags.title'),
+              onClick: (context) => {
+                context.perform(graph => doUpgrade(graph, nsiDiff), t('issues.fix.upgrade_tags.annotation'));
+              }
+            }),
+            new validationIssueFix({
+              title: t.append('issues.fix.tag_as_not.title', { name: nsiResult.matched.displayName }),
               onClick: (context) => {
                 context.perform(addNotTag, t('issues.fix.tag_as_not.annotation'));
               }
             })
-          );
+          ];
+          return fixes;
         }
-        return fixes;
+      }));
+    }
 
-      }
-    }));
     return issues;
 
 
-    function doUpgrade(graph) {
+    /** @param {iD.Graph} graph @param {TagDiff[]} diff */
+    function doUpgrade(graph, diff) {
       const currEntity = graph.hasEntity(entity.id);
       if (!currEntity) return graph;
 
       let newTags = Object.assign({}, currEntity.tags);  // shallow copy
-      tagDiff.forEach(diff => {
+      diff.forEach(diff => {
         if (diff.type === '-') {
           delete newTags[diff.key];
         } else if (diff.type === '+') {
@@ -200,21 +218,7 @@ export function validationOutdatedTags() {
     }
 
 
-    function showMessage(context) {
-      const currEntity = context.hasEntity(entity.id);
-      if (!currEntity) return '';
-
-      let messageID = `issues.outdated_tags.${prefix}message`;
-      if (subtype === 'noncanonical_brand' && isOnlyAddingTags) {
-        messageID += '_incomplete';
-      }
-      return t.append(messageID, {
-        feature: utilDisplayLabel(currEntity, context.graph(), true /* verbose */)
-      });
-    }
-
-
-    function showReference(selection) {
+    function showReference(selection, reference, tagDiff) {
       let enter = selection.selectAll('.issue-reference')
         .data([0])
         .enter();
@@ -222,7 +226,7 @@ export function validationOutdatedTags() {
       enter
         .append('div')
         .attr('class', 'issue-reference')
-        .call(t.append(`issues.outdated_tags.${prefix}reference`));
+        .call(reference);
 
       enter
         .append('strong')

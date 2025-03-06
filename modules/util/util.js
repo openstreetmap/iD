@@ -28,8 +28,13 @@ export function utilTotalExtent(array, graph) {
     return extent;
 }
 
-
+/**
+ * @typedef {{ type: '-' | '+'; key: string; oldVal: string; newVal: string; display: string; }} TagDiff
+ * @param {Tags} oldTags
+ * @param {Tags} newTags
+ */
 export function utilTagDiff(oldTags, newTags) {
+    /** @type {TagDiff[]} */
     var tagDiff = [];
     var keys = utilArrayUnion(Object.keys(oldTags), Object.keys(newTags)).sort();
     keys.forEach(function(k) {
