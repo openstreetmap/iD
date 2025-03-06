@@ -11,11 +11,15 @@ import { svgIcon } from '../svg/icon';
 // {
 //   key: 'string',             // required
 //   value: 'string'            // optional
-//   referenceLink : 'string'   // optional
 // }
 //   -or-
 // {
 //   qid: 'string'      // brand wikidata  (e.g. 'Q37158')
+// }
+//   -or-
+// {
+//   message: 'string'          // custom String id to display
+//   referenceLink : 'string'   // optional link to website
 // }
 //
 export function uiTagReference(what) {
@@ -41,13 +45,12 @@ export function uiTagReference(what) {
     function gotDocs(err, docs) {
         _body.html('');
 
-        // TODO: change this
         if (!docs || !docs.title) {
-            if (what.value && what.key === 'customStringMessage') {
+            if (what.message) {
                 _body
                     .append('p')
                     .attr('class', 'tag-reference-description')
-                    .call(t.append('inspector.' + what.value));
+                    .call(t.append('inspector.' + what.message));
 
                     if (what.referenceLink) {
                         _body

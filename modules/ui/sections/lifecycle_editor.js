@@ -16,7 +16,8 @@ export function uiSectionLifecycleEditor(context) {
     var _tags;
     var _pendingChange = null;
     var _currentLifecycle = 'functional';
-    var _currentMainTag = '';
+    var _mainTag = '';
+    var _extraTags;
     var _presets = [];
 
     const _lifecyclePresets = Object.values(osmLifecyclePrefixes);
@@ -30,11 +31,17 @@ export function uiSectionLifecycleEditor(context) {
         .expandedByDefault(false)
         .disclosureContent(renderDisclosureContent);
 
+    var mainLifecycleWrap = d3_select(null);
+    var extraLifecycleWrap = d3_select(null);
+    var referenceWrap = d3_select(null);
+
     var outerWrap = d3_select(null);
     var titleWrap = d3_select(null);
     var radioOuterWrap = d3_select(null);
     var radioRowWrap = d3_select(null);
     var radioButtonWrap = d3_select(null);
+
+    var extraTagList = d3_select(null);
 
     function renderDisclosureContent(selection) {
         outerWrap.remove();
@@ -46,7 +53,12 @@ export function uiSectionLifecycleEditor(context) {
             .append('div')
             .attr('class', 'wrap-form-field wrap-form-field-lifecycle');
 
-        titleWrap = outerWrap
+        mainLifecycleWrap = outerWrap.append('div').attr('class', 'lifecycle-main');
+        extraLifecycleWrap = outerWrap.append('div').attr('class', 'lifecycle-extra');
+        referenceWrap = outerWrap.append('div').attr('class', 'lifecyce-reference');
+
+        // Main Lifecycle Menu
+        titleWrap = mainLifecycleWrap
             .append('label')
             .attr('class', 'field-label');
 
@@ -59,7 +71,7 @@ export function uiSectionLifecycleEditor(context) {
             .attr('class', 'label-textvalue')
             .text('Select Lifecycle');
 
-        radioOuterWrap = outerWrap
+        radioOuterWrap = mainLifecycleWrap
             .append('div')
             .attr('class', 'form-field-input-wrap form-field-input-radio');
 
@@ -80,27 +92,11 @@ export function uiSectionLifecycleEditor(context) {
             .call(svgIcon('#iD-operation-delete'))
             .on('click', makeFunctional);
 
-        let reference = uiTagReference(
-            {
-                key: 'customStringMessage',
-                value: 'lifecycleReference',
-                referenceLink : 'https://wiki.openstreetmap.org/wiki/Lifecycle_prefix'
-            },
-            context);
-
-        titleWrap
-            .call(reference.button);
-
         radioRowWrap = radioOuterWrap
             .selectAll('.lifecycle-radio-row')
             .data(lifecycleToRender)
             .enter()
             .append('label');
-
-        radioOuterWrap
-            .append('div')
-            .call(reference.body)
-            .attr('class', 'reference-box');
 
         radioButtonWrap = radioRowWrap
             .append('div')
@@ -130,8 +126,76 @@ export function uiSectionLifecycleEditor(context) {
         if (Object.keys(_presets[0].tags).length === 0) {
             outerWrap.attr('class', 'wrap-form-field-lifecycle-disabled');
         }
+        _mainTag = getMainTag();
 
-        _currentMainTag = getMainTag();
+        // Extra Lifecycle Menu
+        _extraTags = getExtraTags();
+
+        const extraTagKeys = Object.keys(_extraTags);
+
+        if (extraTagKeys.length) {
+            extraTagList = extraLifecycleWrap
+            .append('ul')
+            .attr('class', 'member-list')
+            .selectAll('li')
+            .data(extraTagKeys)
+            .enter();
+
+            var extraTagRow = extraTagList
+                .append('li')
+                .attr('class', 'lifecycle-row lifecycle-row-normal form-field');
+
+            var innerRowLabel = extraTagRow
+                .append('label')
+                .attr('class', 'field-label');
+
+            innerRowLabel
+                .append('span')
+                .attr('class', 'label-text')
+                .append('a')
+                .text(d => d.split(':')[1]);
+
+            innerRowLabel
+                .append('button')
+                .attr('class', 'remove lifecycle-extra-delete')
+                .attr('title', t('icons.remove'))
+                .call(svgIcon('#iD-operation-delete'))
+                .on('click', makeExtraFunctional);
+
+            var innerRowWrap = extraTagRow
+                .append('div')
+                .attr('class', 'form-field-input-wrap form-field-input-member');
+
+            innerRowWrap
+                .append('input')
+                .attr('type', 'text')
+                .property('id', d => d)
+                .property('value', d => d.split(':')[0])
+                .attr('class', 'lifecycle-extra combobox-input')
+                .on('blur', changeExtraLifecycle)
+                .on('change', changeExtraLifecycle);
+
+            extraTagRow
+                .append('div')
+                .attr('style', 'height: 20px');
+
+        }
+
+        // Reference
+        let reference = uiTagReference(
+            {
+                message: 'lifecycleReference',
+                referenceLink : 'https://wiki.openstreetmap.org/wiki/Lifecycle_prefix'
+            },
+            context);
+
+        titleWrap
+            .call(reference.button);
+
+        referenceWrap
+            .append('div')
+            .call(reference.body)
+            .attr('class', 'reference-box');
     }
 
     function getLifecycleToRender(){
@@ -189,6 +253,24 @@ export function uiSectionLifecycleEditor(context) {
         return null;
     }
 
+    function getExtraTags() {
+        const tags = _tags;
+        const mainTag = _mainTag;
+
+        const tagsWithLifecycles = Object.fromEntries(
+            ids.flatMap(id =>
+                Object.entries(tags).filter(([key]) => key.includes(':') && key.split(':')[0] === id)
+            )
+        );
+
+        if (tagsWithLifecycles.hasOwnProperty(mainTag)) {
+            delete tagsWithLifecycles[mainTag];
+        }
+
+        return tagsWithLifecycles;
+    }
+
+
     function changeLifecycle() {
         if (d3_select(this).attr('readonly')) return;
 
@@ -196,7 +278,7 @@ export function uiSectionLifecycleEditor(context) {
         let presetTags = _presets[0].tags;
 
         const newLifecycle = d3_select(this).attr('value');
-        const oldLifecycleTag = _currentMainTag;
+        const oldLifecycleTag = _mainTag;
 
         _pendingChange = _pendingChange ?? {};
         _pendingChange.construction = undefined;
@@ -223,8 +305,53 @@ export function uiSectionLifecycleEditor(context) {
         scheduleChange();
     }
 
+    function changeExtraLifecycle() {
+        if (d3_select(this).attr('readonly')) return;
+
+        const tags = _tags;
+
+        const newLifecycle = d3_select(this).property('value');
+        const oldLifecycleTag = d3_select(this).property('id');
+
+        if (!ids.includes(newLifecycle)) {
+            d3_select(this).property('value', oldLifecycleTag.split(':')[0]);
+            return;
+        }
+
+        _pendingChange = _pendingChange ?? {};
+
+        if (oldLifecycleTag) {
+            const [, tag] = oldLifecycleTag.split(':');
+            _pendingChange[oldLifecycleTag] = undefined;
+            _pendingChange[newLifecycle !== 'construction' ? `${newLifecycle}:${tag}` : newLifecycle] = tags[oldLifecycleTag];
+
+            if (newLifecycle === 'construction') {
+                _pendingChange[tag] = tags[oldLifecycleTag];
+            }
+        }
+
+        scheduleChange();
+    }
+
     function makeFunctional() {
-        const oldLifecycleTag = _currentMainTag;
+        const oldLifecycleTag = _mainTag;
+        const tags = _tags;
+
+        _pendingChange = _pendingChange ?? {};
+
+        if (oldLifecycleTag) {
+            const [, newTag] = oldLifecycleTag.split(':');
+            _pendingChange[newTag] = tags[oldLifecycleTag];
+            _pendingChange[oldLifecycleTag] = undefined;
+        } else if (tags.construction) {
+            _pendingChange.construction = undefined;
+        }
+
+        scheduleChange();
+    }
+
+    function makeExtraFunctional(d) {
+        const oldLifecycleTag = d.currentTarget.__data__;
         const tags = _tags;
 
         _pendingChange = _pendingChange ?? {};
@@ -242,8 +369,13 @@ export function uiSectionLifecycleEditor(context) {
 
     function scheduleChange() {
         var entityID = _entityID;
-        dispatch.call('change', this, entityID, _pendingChange);
-        _pendingChange = null;
+
+        window.setTimeout(function() {
+            if (!_pendingChange) return;
+
+            dispatch.call('change', this, entityID, _pendingChange);
+            _pendingChange = null;
+        }, 10);
     }
 
     section.entityIDs = function(val) {

@@ -402,7 +402,7 @@ export function uiPresetIcon() {
       }
     }
 
-    if(p.lifecycle) {
+    if (p.lifecycle) {
       tags[p.lifecycle] = 'yes';
     }
 

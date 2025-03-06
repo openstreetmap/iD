@@ -1067,6 +1067,10 @@ a.hide-toggle {
     z-index: 2;
 }
 
+.lifecycle-row {
+    margin: 10px 0;
+}
+
 .wrap-form-field-lifecycle-disabled {
     pointer-events: none;
     opacity: 0.5;

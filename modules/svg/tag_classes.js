@@ -1,7 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags, osmLifecyclePrefixes } from '../osm/tags';
 
-// TODO: change this
 export function svgTagClasses() {
     var primaries = [
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
@@ -40,7 +39,7 @@ export function svgTagClasses() {
 
     tagClasses.getClassesString = function(t, value) {
         var primary, status;
-        var i, j, k, v; 
+        var i, j, k, v;
 
         // in some situations we want to render perimeter strokes a certain way
         var overrideGeometry;
