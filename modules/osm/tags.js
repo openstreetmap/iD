@@ -306,3 +306,19 @@ export var osmMutuallyExclusiveTagPairs = [
     ['addr:nostreet', 'addr:street']
 ];
 
+
+/**
+ * @param {Tags} vertexTags @param {Tags} wayTags
+ * returns true if iD should render the `direction` tag for
+ * this vertex+way combination.
+ */
+export function osmShouldRenderDirection(vertexTags, wayTags) {
+    if (vertexTags.highway || vertexTags.traffic_sign || vertexTags.traffic_calming || vertexTags.barrier) {
+        // allowed on roads and tramways
+        return !!(wayTags.highway || wayTags.railway);
+    }
+    if (vertexTags.railway) return !!wayTags.railway;
+    if (vertexTags.waterway) return !!wayTags.waterway;
+    if (vertexTags.cycleway === 'asl') return !!wayTags.highway;
+    return true;
+}

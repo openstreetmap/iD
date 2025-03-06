@@ -42,11 +42,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* fix some direction cones not appearing on railway tracks ([#10843], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 
+[#10843]: https://github.com/openstreetmap/iD/pull/10843
 
 # 2.32.0
 ##### 2025-03-05
