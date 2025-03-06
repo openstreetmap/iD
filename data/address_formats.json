@@ -67,8 +67,7 @@
   {
     "countryCodes": ["fr", "lu"],
     "format": [
-      ["housenumber", "street+place"],
-      ["postcode", "city"]
+      ["housenumber", "street+place"]
     ]
   },
   {
