@@ -49,6 +49,7 @@ export function svgDefs(context) {
         addOnewayMarker('black', '#000'); // default
         addOnewayMarker('white', '#fff'); // for dark lines (bridges under construction, railways, etc.)
         addOnewayMarker('pink', '#eaf'); // for dark lines where white arrows don't work
+        addOnewayMarker('light-blue', '#96caff'); // for railway lines where dark arrows don't work
 
 
         function addSidedMarker(name, color, offset) {
