@@ -15,19 +15,25 @@ import {
     * Resampling
 */
 export function geoRawMercator() {
-    var project = d3_geoMercatorRaw;
-    var k = 512 / Math.PI; // scale
-    var x = 0;
-    var y = 0; // translate
-    var clipExtent = [[0, 0], [0, 0]];
+    const project = d3_geoMercatorRaw;
+    let k = 512 / Math.PI; // scale
+    let x = 0;
+    let y = 0; // translate
+    let clipExtent = [[0, 0], [0, 0]];
 
-
+    /**
+     * @param {[number, number]} point
+     * @returns {[number, number]}
+     */
     function projection(point) {
         point = project(point[0] * Math.PI / 180, point[1] * Math.PI / 180);
         return [point[0] * k + x, y - point[1] * k];
     }
 
-
+    /**
+     * @param {[number, number]} point
+     * @returns {[number, number]}
+     */
     projection.invert = function(point) {
         point = project.invert((point[0] - x) / k, (y - point[1]) / k);
         return point && [point[0] * 180 / Math.PI, point[1] * 180 / Math.PI];
@@ -67,7 +73,7 @@ export function geoRawMercator() {
 
     projection.stream = d3_geoTransform({
         point: function(x, y) {
-            var vec = projection([x, y]);
+            const vec = projection([x, y]);
             this.stream.point(vec[0], vec[1]);
         }
     }).stream;
@@ -75,3 +81,6 @@ export function geoRawMercator() {
 
     return projection;
 }
+/**
+ * @typedef {ReturnType<geoRawMercator>} Projection
+ */

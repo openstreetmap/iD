@@ -58,17 +58,23 @@ export function svgPassiveVertex(node, graph, activeID) {
     return 1;   // ok
 }
 
-
-export function svgMarkerSegments(projection, graph, dt,
-                                  shouldReverse,
-                                  bothDirections) {
+/**
+ *
+ * @param {iD.Projection} projection
+ * @param {iD.Graph} graph
+ * @param {Number} dt spacing between segments
+ * @param {Function<Boolean>} [shouldReverse]
+ * @param {Function<Boolean>} [bothDirections]
+ * @returns
+ */
+export function svgMarkerSegments(projection, graph, dt, shouldReverse = () => false, bothDirections = () => false) {
     return function(entity) {
-        var i = 0;
-        var offset = dt / 2;
-        var segments = [];
-        var clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream;
-        var coordinates = graph.childNodes(entity).map(function(n) { return n.loc; });
-        var a, b;
+        let i = 0;
+        let offset = dt / 2;
+        const segments = [];
+        const clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream;
+        const coordinates = graph.childNodes(entity).map(function(n) { return n.loc; });
+        let a, b;
 
         const _shouldReverse = shouldReverse(entity);
         const _bothDirections = bothDirections(entity);
@@ -83,19 +89,19 @@ export function svgMarkerSegments(projection, graph, dt,
                 b = [x, y];
 
                 if (a) {
-                    var span = geoVecLength(a, b) - offset;
+                    let span = geoVecLength(a, b) - offset;
 
                     if (span >= 0) {
-                        var heading = geoVecAngle(a, b);
-                        var dx = dt * Math.cos(heading);
-                        var dy = dt * Math.sin(heading);
-                        var p = [
+                        const heading = geoVecAngle(a, b);
+                        const dx = dt * Math.cos(heading);
+                        const dy = dt * Math.sin(heading);
+                        let p = [
                             a[0] + offset * Math.cos(heading),
                             a[1] + offset * Math.sin(heading)
                         ];
 
                         // gather coordinates
-                        var coord = [a, p];
+                        const coord = [a, p];
                         for (span -= dt; span >= 0; span -= dt) {
                             p = geoVecAdd(p, [dx, dy]);
                             coord.push(p);
@@ -103,11 +109,10 @@ export function svgMarkerSegments(projection, graph, dt,
                         coord.push(b);
 
                         // generate svg paths
-                        var segment = '';
-                        var j;
+                        let segment = '';
 
                         if (!_shouldReverse || _bothDirections) {
-                            for (j = 0; j < coord.length; j++) {
+                            for (let j = 0; j < coord.length; j++) {
                                 segment += (j === 0 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
                             }
                             segments.push({ id: entity.id, index: i++, d: segment });
@@ -115,7 +120,7 @@ export function svgMarkerSegments(projection, graph, dt,
 
                         if (_shouldReverse || _bothDirections) {
                             segment = '';
-                            for (j = coord.length - 1; j >= 0; j--) {
+                            for (let j = coord.length - 1; j >= 0; j--) {
                                 segment += (j === coord.length - 1 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
                             }
                             segments.push({ id: entity.id, index: i++, d: segment });

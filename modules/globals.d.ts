@@ -21,6 +21,8 @@ declare global {
 
     export type AbstractEntity = InstanceType<typeof iD.osmEntity>;
     export type OsmEntity = OsmNode | OsmWay | OsmRelation;
+
+    export type Projection = import('./geo/raw_mercator').Projection;
   }
 
   declare namespace d3 {

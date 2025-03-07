@@ -272,9 +272,7 @@ export function svgLines(projection, context) {
 
             var sidedArr = v.filter(function(d) { return d.isSided(); });
             var sidedSegments = svgMarkerSegments(
-                projection, graph, 30,
-                function shouldReverse() { return false; },
-                function bothDirections() { return false; }
+                projection, graph, 30
             );
             sideddata[k] = utilArrayFlatten(sidedArr.map(sidedSegments));
         });
