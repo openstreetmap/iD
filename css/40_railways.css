@@ -20,7 +20,11 @@ path.line.casing.tag-railway {
 path.line.stroke.tag-railway {
     stroke-width: 2;
     stroke-linecap: butt;
-    stroke-dasharray: 12, 12;
+    stroke-dasharray: 10,8;
+}
+path.line.stroke.tag-railway.tag-oneway {
+    stroke-dasharray: 10, 26;
+    stroke-dashoffset: 5;
 }
 .low-zoom path.line.shadow.tag-railway {
     stroke-width: 12;

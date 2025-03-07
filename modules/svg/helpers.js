@@ -64,15 +64,14 @@ export function svgMarkerSegments(projection, graph, dt,
                                   bothDirections) {
     return function(entity) {
         var i = 0;
-        var offset = dt;
+        var offset = dt / 2;
         var segments = [];
         var clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream;
         var coordinates = graph.childNodes(entity).map(function(n) { return n.loc; });
         var a, b;
 
-        if (shouldReverse(entity)) {
-            coordinates.reverse();
-        }
+        const _shouldReverse = shouldReverse(entity);
+        const _bothDirections = bothDirections(entity);
 
         d3_geoStream({
             type: 'LineString',
@@ -107,12 +106,14 @@ export function svgMarkerSegments(projection, graph, dt,
                         var segment = '';
                         var j;
 
-                        for (j = 0; j < coord.length; j++) {
-                            segment += (j === 0 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
+                        if (!_shouldReverse || _bothDirections) {
+                            for (j = 0; j < coord.length; j++) {
+                                segment += (j === 0 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
+                            }
+                            segments.push({ id: entity.id, index: i++, d: segment });
                         }
-                        segments.push({ id: entity.id, index: i++, d: segment });
 
-                        if (bothDirections(entity)) {
+                        if (_shouldReverse || _bothDirections) {
                             segment = '';
                             for (j = coord.length - 1; j >= 0; j--) {
                                 segment += (j === coord.length - 1 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];

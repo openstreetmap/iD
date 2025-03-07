@@ -14,9 +14,9 @@ import { utilDetect } from '../util/detect';
 function onewayArrowColour(tags) {
     // the return value must be defined in ./defs.js
     if (tags.highway === 'construction' && tags.bridge) return 'white';
-    if (tags.highway === 'pedestrian' && tags.bridge) return 'pink';
-    if (tags.railway) return 'black'; // TODO: use a better colour
-    if (tags.aeroway === 'runway') return 'pink';
+    if (tags.highway === 'pedestrian') return 'gray';
+    if (tags.railway) return 'gray';
+    if (tags.aeroway === 'runway') return 'white';
 
     return 'black';
 }
@@ -264,7 +264,7 @@ export function svgLines(projection, context) {
             var v = pathdata[k];
             var onewayArr = v.filter(function(d) { return d.isOneWay(); });
             var onewaySegments = svgMarkerSegments(
-                projection, graph, 35,
+                projection, graph, 36,
                 entity => entity.isOneWayBackwards(),
                 entity => entity.isBiDirectional(),
             );

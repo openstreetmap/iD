@@ -405,8 +405,13 @@ path.line.stroke.tag-highway-pedestrian,
 path.line.stroke.tag-pedestrian {
     stroke: #fff;
     stroke-width: 3.5;
-    stroke-dasharray: 8, 8;
+    stroke-dasharray: 6, 6;
     stroke-linecap: butt;
+}
+path.line.stroke.tag-highway-pedestrian.tag-oneway,
+path.line.stroke.tag-pedestrian.tag-oneway {
+    stroke-dasharray: 6, 6, 6, 18;
+    stroke-dashoffset: 9;
 }
 .low-zoom path.line.stroke.tag-highway-pedestrian,
 .low-zoom path.line.stroke.tag-pedestrian {
@@ -483,6 +488,13 @@ path.line.stroke.tag-highway-cycleway,
 path.line.stroke.tag-highway-bridleway {
     stroke-linecap: butt;
     stroke-dasharray: 6, 6;
+}
+path.line.stroke.tag-highway-path.tag-oneway,
+path.line.stroke.tag-highway-footway.tag-oneway,
+path.line.stroke.tag-highway-cycleway.tag-oneway,
+path.line.stroke.tag-highway-bridleway.tag-oneway {
+    stroke-dasharray: 6, 6, 6, 18;
+    stroke-dashoffset: 9;
 }
 .low-zoom path.line.stroke.tag-highway-path,
 .low-zoom path.line.stroke.tag-highway-footway,
@@ -632,6 +644,10 @@ path.line.stroke.tag-highway-ladder,
 /* crossings */
 path.line.stroke.tag-highway.tag-crossing-unmarked {
     stroke-dasharray: 6, 4;
+}
+path.line.stroke.tag-highway.tag-crossing-unmarked.tag-oneway {
+    stroke-dasharray: 6, 4, 6, 20;
+    stroke-dashoffset: 8;
 }
 .low-zoom path.line.stroke.tag-highway.tag-crossing-unmarked {
     stroke-dasharray: 3, 2;
