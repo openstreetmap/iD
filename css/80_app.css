@@ -1067,6 +1067,11 @@ a.hide-toggle {
     z-index: 2;
 }
 
+.lifecycle-extra {
+    width: 100%;
+    border: 0 !important;
+}
+
 .lifecycle-row {
     margin: 10px 0;
 }
@@ -2965,6 +2970,7 @@ img.tag-reference-wiki-image {
 }
 .add-row .add-tag,
 .add-row .add-relation,
+.add-lifecycle,
 .add-row .space-value {
     flex: 1 1 50%;
 }

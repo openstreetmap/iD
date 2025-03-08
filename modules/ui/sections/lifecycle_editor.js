@@ -18,6 +18,7 @@ export function uiSectionLifecycleEditor(context) {
     var _currentLifecycle = 'functional';
     var _mainTag = '';
     var _extraTags;
+    var _showBlank = false;
     var _presets = [];
 
     const _lifecyclePresets = Object.values(osmLifecyclePrefixes);
@@ -41,10 +42,12 @@ export function uiSectionLifecycleEditor(context) {
     var radioRowWrap = d3_select(null);
     var radioButtonWrap = d3_select(null);
 
-    var extraTagList = d3_select(null);
+    var addExtraTagList = d3_select(null);
 
     function renderDisclosureContent(selection) {
         outerWrap.remove();
+
+        _showBlank = false;
 
         _currentLifecycle = _presets[0].lifecycle;
         var lifecycleToRender = getLifecycleToRender();
@@ -123,7 +126,7 @@ export function uiSectionLifecycleEditor(context) {
                 t.append('lifecycle.' + d.id)(d3_select(this));
             });
 
-        if (Object.keys(_presets[0].tags).length === 0) {
+        if (Object.keys(_presets[0].tags).length === 0 || _presets[0].id === 'area') {
             outerWrap.attr('class', 'wrap-form-field-lifecycle-disabled');
         }
         _mainTag = getMainTag();
@@ -133,53 +136,126 @@ export function uiSectionLifecycleEditor(context) {
 
         const extraTagKeys = Object.keys(_extraTags);
 
-        if (extraTagKeys.length) {
-            extraTagList = extraLifecycleWrap
+        addExtraTagList = extraLifecycleWrap
             .append('ul')
-            .attr('class', 'member-list')
-            .selectAll('li')
-            .data(extraTagKeys)
-            .enter();
+            .attr('class', 'member-list');
 
-            var extraTagRow = extraTagList
+        // Already Existing Extra Tags
+        if (extraTagKeys.length) {
+
+            addExtraTagList = addExtraTagList
+                .selectAll('li')
+                .data(extraTagKeys)
+                .enter();
+
+            let extraTagRow = addExtraTagList
                 .append('li')
-                .attr('class', 'lifecycle-row lifecycle-row-normal form-field');
+                .attr('class', 'lifecycle-row form-field');
 
-            var innerRowLabel = extraTagRow
+            let innerRowLabel = extraTagRow
                 .append('label')
                 .attr('class', 'field-label');
 
             innerRowLabel
                 .append('span')
-                .attr('class', 'label-text')
+                .attr('class', 'label-text lifecycle-extra')
                 .append('a')
                 .text(d => d.split(':')[1]);
 
             innerRowLabel
-                .append('button')
-                .attr('class', 'remove lifecycle-extra-delete')
-                .attr('title', t('icons.remove'))
-                .call(svgIcon('#iD-operation-delete'))
-                .on('click', makeExtraFunctional);
-
-            var innerRowWrap = extraTagRow
-                .append('div')
-                .attr('class', 'form-field-input-wrap form-field-input-member');
-
-            innerRowWrap
                 .append('input')
                 .attr('type', 'text')
                 .property('id', d => d)
                 .property('value', d => d.split(':')[0])
-                .attr('class', 'lifecycle-extra combobox-input')
+                .attr('class', 'lifecycle-extra')
+                .attr('stlye', 'border-left : 1px solid #ccc !important')
                 .on('blur', changeExtraLifecycle)
                 .on('change', changeExtraLifecycle);
 
-            extraTagRow
-                .append('div')
-                .attr('style', 'height: 20px');
-
+            innerRowLabel
+                .append('button')
+                .attr('class', 'remove')
+                .attr('title', t('icons.remove'))
+                .call(svgIcon('#iD-operation-delete'))
+                .on('click', makeExtraFunctional);
         }
+
+        // New Extra Tags
+        let addExtraTagRowNew = extraLifecycleWrap
+            .append('li')
+            .attr('class', 'lifecycle-row form-field')
+            .attr('style', _showBlank ? 'display:block' : 'display:none');
+
+        let innerRowLabelNew = addExtraTagRowNew
+            .append('label')
+            .attr('class', 'field-label');
+
+        innerRowLabelNew
+            .append('input')
+            .attr('type', 'text')
+            .attr('placeholder', 'prefix')
+            .attr('style', 'border-right : 1px solid #ccc !important')
+            .attr('class', 'lifecycle-extra lifecycle-extra-new-prefix')
+            .on('blur', addExtraTag)
+            .on('change', addExtraTag);
+
+        innerRowLabelNew
+            .append('input')
+            .attr('type', 'text')
+            .attr('class', 'lifecycle-extra lifecycle-extra-new-key')
+            .attr('placeholder', 'key')
+            .on('blur', addExtraTag)
+            .on('change', addExtraTag);
+
+        innerRowLabelNew
+            .append('button')
+            .attr('class', 'remove lifecycle-extra-delete')
+            .attr('title', t('icons.remove'))
+            .call(svgIcon('#iD-operation-delete'))
+            .on('click', hideNewExtraTag);
+
+        let innerRowWrapNew = addExtraTagRowNew
+            .append('div')
+            .attr('class', 'form-field-input-wrap form-field-input-member');
+
+        innerRowWrapNew
+            .append('input')
+            .attr('type', 'text')
+            .attr('placeholder', 'value')
+            .attr('class', 'combobox-input lifecycle-extra-new-value')
+            .on('blur', addExtraTag)
+            .on('change', addExtraTag);
+
+        extraLifecycleWrap
+            .append('div')
+            .attr('style', 'height: 10px');
+
+        let addRowEnterNew = extraLifecycleWrap
+            .append('div')
+            .attr('class', 'add-row');
+
+        let addLifecycleButton = addRowEnterNew
+            .append('button')
+            .attr('class', 'add-lifecycle');
+
+        addLifecycleButton
+            .call(svgIcon('#iD-icon-plus', 'light'));
+
+        addLifecycleButton.on('click', function() {
+
+            if (!_showBlank) {
+                _showBlank = true;
+                addExtraTagRowNew.attr('style', 'display:block');
+            }
+        });
+
+        addRowEnterNew
+            .append('div')
+            .attr('class', 'space-value');   // preserve space
+
+        addRowEnterNew
+            .append('div')
+            .attr('class', 'space-buttons');  // preserve space
 
         // Reference
         let reference = uiTagReference(
@@ -196,6 +272,16 @@ export function uiSectionLifecycleEditor(context) {
             .append('div')
             .call(reference.body)
             .attr('class', 'reference-box');
+    }
+
+    function hideNewExtraTag() {
+        d3_select('.lifecycle-extra-new-key').property('value', '');
+        d3_select('.lifecycle-extra-new-prefix').property('value', '');
+        d3_select('.lifecycle-extra-new-value').property('value', '');
+
+        d3_select(this.parentNode.parentNode).attr('style', 'display:none');
+
+        _showBlank = false;
     }
 
     function getLifecycleToRender(){
@@ -270,6 +356,31 @@ export function uiSectionLifecycleEditor(context) {
         return tagsWithLifecycles;
     }
 
+    function addExtraTag() {
+        const newTag =  d3_select('.lifecycle-extra-new-key').property('value');
+        const newPrefix = d3_select('.lifecycle-extra-new-prefix').property('value');
+        const newValue = d3_select('.lifecycle-extra-new-value').property('value');
+
+        if (!newTag || newTag === '' || !newPrefix || newPrefix === '' || !newValue || newValue === '') {
+            return;
+        }
+
+        if (!ids.includes(newPrefix)) {
+            return;
+        }
+
+        _pendingChange = _pendingChange ?? {};
+
+        if (newPrefix === 'construction') {
+            _pendingChange[newPrefix] = newTag;
+        } else {
+            _pendingChange[newPrefix + ':' + newTag] = newValue;
+        }
+
+        _showBlank = false;
+
+        scheduleChange();
+    }
 
     function changeLifecycle() {
         if (d3_select(this).attr('readonly')) return;
@@ -311,23 +422,23 @@ export function uiSectionLifecycleEditor(context) {
         const tags = _tags;
 
         const newLifecycle = d3_select(this).property('value');
-        const oldLifecycleTag = d3_select(this).property('id');
+        const oldTag = d3_select(this).property('id');
+        const [, oldKey] = oldTag.split(':');
+        const oldTagValue = tags[oldTag];
 
         if (!ids.includes(newLifecycle)) {
-            d3_select(this).property('value', oldLifecycleTag.split(':')[0]);
+            d3_select(this).property('value', oldTag.split(':')[0]);
             return;
         }
 
         _pendingChange = _pendingChange ?? {};
+        _pendingChange[oldTag] = undefined;
 
-        if (oldLifecycleTag) {
-            const [, tag] = oldLifecycleTag.split(':');
-            _pendingChange[oldLifecycleTag] = undefined;
-            _pendingChange[newLifecycle !== 'construction' ? `${newLifecycle}:${tag}` : newLifecycle] = tags[oldLifecycleTag];
-
-            if (newLifecycle === 'construction') {
-                _pendingChange[tag] = tags[oldLifecycleTag];
-            }
+        if (newLifecycle === 'construction') {
+            _pendingChange.construction = oldKey;
+            _pendingChange[oldKey] = oldTagValue;
+        } else {
+            _pendingChange[newLifecycle + ':' + oldKey] = oldTagValue;
         }
 
         scheduleChange();
