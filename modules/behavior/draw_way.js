@@ -457,7 +457,11 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
             const featureType = getFeatureType(lastNodesParents);
 
-            if (lastNodesParents.length !== 1 || secondLastNodesParents.length === 0) {
+            const sameAllParents =
+                lastNodesParents.length === secondLastNodesParents.length &&
+                lastNodesParents.every(w => secondLastNodesParents.some(n => n.id === w.id));
+
+            if (!sameAllParents && lastNodesParents.length !== 1 || secondLastNodesParents.length === 0) {
                 context.ui().flash
                     .duration(4000)
                     .iconName('#iD-icon-no')
