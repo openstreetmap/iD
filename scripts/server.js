@@ -12,6 +12,7 @@ gaze(['css/**/*.css'], (err, watcher) => {
 
 const server = http.createServer((request, response) => {
   return serve(request, response, {
+    cleanUrls: false,
     symlinks: true,
     headers: [{
       source: '**',
