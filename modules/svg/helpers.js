@@ -58,6 +58,7 @@ export function svgPassiveVertex(node, graph, activeID) {
     return 1;   // ok
 }
 
+
 /**
  *
  * @param {iD.Projection} projection
@@ -65,14 +66,19 @@ export function svgPassiveVertex(node, graph, activeID) {
  * @param {Number} dt spacing between segments
  * @param {Function<Boolean>} [shouldReverse]
  * @param {Function<Boolean>} [bothDirections]
- * @returns
  */
 export function svgMarkerSegments(projection, graph, dt, shouldReverse = () => false, bothDirections = () => false) {
+    /**
+     * @param {iD.OsmWay} entity
+     * @returns {[{id: String, d: String}]} list of svg path segments corres
+     */
     return function(entity) {
         let i = 0;
         let offset = dt / 2;
         const segments = [];
-        const clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream;
+
+        const clip = paddedClipExtent(projection);
+
         const coordinates = graph.childNodes(entity).map(function(n) { return n.loc; });
         let a, b;
 
@@ -139,30 +145,19 @@ export function svgMarkerSegments(projection, graph, dt, shouldReverse = () => f
 }
 
 
+/**
+ * @param {iD.Projection} projection
+ * @param {iD.Graph} graph
+ * @param {Boolean} isArea
+ */
 export function svgPath(projection, graph, isArea) {
-
-    // Explanation of magic numbers:
-    // "padding" here allows space for strokes to extend beyond the viewport,
-    // so that the stroke isn't drawn along the edge of the viewport when
-    // the shape is clipped.
-    //
-    // When drawing lines, pad viewport by 5px.
-    // When drawing areas, pad viewport by 65px in each direction to allow
-    // for 60px area fill stroke (see ".fill-partial path.fill" css rule)
-
-    var cache = {};
-    var padding = isArea ? 65 : 5;
-    var viewport = projection.clipExtent();
-    var paddedExtent = [
-        [viewport[0][0] - padding, viewport[0][1] - padding],
-        [viewport[1][0] + padding, viewport[1][1] + padding]
-    ];
-    var clip = d3_geoIdentity().clipExtent(paddedExtent).stream;
-    var project = projection.stream;
-    var path = d3_geoPath()
+    const cache = {};
+    const project = projection.stream;
+    const clip = paddedClipExtent(projection, isArea);
+    const path = d3_geoPath()
         .projection({stream: function(output) { return project(clip(output)); }});
 
-    var svgpath = function(entity) {
+    const svgpath = function(entity) {
         if (entity.id in cache) {
             return cache[entity.id];
         } else {
@@ -288,4 +283,30 @@ export function svgSegmentWay(way, graph, activeID) {
             });
         }
     }
+}
+
+
+/**
+ * Returns a d3 projection stream that clips the given geometries to an
+ * extent that is slightly padded.
+ *
+ * Explanation of magic numbers:
+ * "padding" here allows space for strokes to extend beyond the viewport,
+ * so that the stroke isn't drawn along the edge of the viewport when
+ * the shape is clipped.
+ * When drawing lines, pad viewport by 5px.
+ * When drawing areas, pad viewport by 65px in each direction to allow
+ * for 60px area fill stroke (see ".fill-partial path.fill" css rule)
+ *
+ * @param {import('../geo/raw_mercator').Projection} projection
+ * @param {Boolean} isArea
+ */
+function paddedClipExtent(projection, isArea = false) {
+    var padding = isArea ? 65 : 5;
+    var viewport = projection.clipExtent();
+    var paddedExtent = [
+        [viewport[0][0] - padding, viewport[0][1] - padding],
+        [viewport[1][0] + padding, viewport[1][1] + padding]
+    ];
+    return d3_geoIdentity().clipExtent(paddedExtent).stream;
 }
