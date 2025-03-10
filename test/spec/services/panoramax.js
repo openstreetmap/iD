@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 describe('iD.servicePanoramax', function() {
     const dimensions = [64, 64];
     var context, panoramax;
@@ -88,9 +90,10 @@ describe('iD.servicePanoramax', function() {
     });
 
     describe('#loadImages', function() {
-        it('does not load images around null island', function (done) {
+        it('does not load images around null island', async () => {
             var spy = sinon.spy();
-            fetchMock.mock(new RegExp('/panoramax-test/'), {
+            fetchMock.reset();
+            fetchMock.mock(new RegExp('/api\.panoramax\.xyz/'), {
                 body: JSON.stringify(data),
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
@@ -103,19 +106,16 @@ describe('iD.servicePanoramax', function() {
             panoramax.on('loadedImages', spy);
             panoramax.loadImages(context.projection);
 
-            window.setTimeout(function() {
-                expect(spy).to.have.been.not.called;
-                expect(fetchMock.calls().length).to.eql(0);   // no tile requests of any kind
-                done();
-            }, 200);
+            await setTimeout(200);
+            expect(spy).to.have.been.not.called;
+            expect(fetchMock.calls().length).to.eql(0);   // no tile requests of any kind
         });
 
-        it('handle API error response', function(done) {
-            fetchMock.mock('/panoramax-test/', 500);
-
-            panoramax.getImageData('collection1', 'image1')
-                .then(() => done(new Error('Expected method to reject.')))
-                .catch(() => done());
+        it('handle API error response', async ({ expect }) => {
+            fetchMock.reset();
+            fetchMock.mock('/api\.panoramax\.xyz/', 500);
+            const promise = panoramax.getImageData('collection1', 'image1');
+            await expect(promise).rejects.toThrowError();
         });
     });
 

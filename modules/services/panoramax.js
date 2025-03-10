@@ -219,7 +219,7 @@ function loadTileDataToCache(data, tile, zoom) {
 
 /**
  * Fetches the username from Panoramax
- * @param {string} user_id 
+ * @param {string} user_id
  * @returns the username
  */
 async function getUsername(user_id){
@@ -271,14 +271,14 @@ export default {
     /**
      * Get a specific image from cache
      * @param {*} imageKey the image id
-     * @returns 
+     * @returns
      */
     cachedImage: function(imageKey) {
         return _cache.images.forImageId[imageKey];
     },
 
     /**
-     * Fetches images data for the visible area 
+     * Fetches images data for the visible area
      * @param {*} projection Current Projection
      */
     loadImages: function(projection) {
@@ -286,7 +286,7 @@ export default {
     },
 
     /**
-     * Fetches sequences data for the visible area 
+     * Fetches sequences data for the visible area
      * @param {*} projection Current Projection
      */
     loadLines: function(projection, zoom) {
@@ -408,7 +408,7 @@ export default {
 
     /**
      * Updates the URL to save the current shown image
-     * @param {*} imageKey 
+     * @param {*} imageKey
      */
     updateUrlImage: function(imageKey) {
         if (!window.mocha) {
@@ -426,7 +426,7 @@ export default {
      * Loads the selected image in the frame
      * @param {*} context Current HTML context
      * @param {*} id of the selected image
-     * @returns 
+     * @returns
      */
     selectImage: function (context, id) {
         let that = this;
@@ -575,7 +575,7 @@ export default {
     /**
      * Fetches the data for a specific image
      * @param {*} collection_id
-     * @param {*} image_id 
+     * @param {*} image_id
      * @returns The fetched image data
      */
     getImageData: async function(collection_id, image_id){
@@ -650,7 +650,7 @@ export default {
         /**
          * Loads the next image in the sequence
          * @param {number} stepBy '-1' if backwards or '1' if foward
-         * @returns 
+         * @returns
          */
         function step(stepBy) {
             return function () {
@@ -676,7 +676,7 @@ export default {
 
     /**
      * Shows the current viewer if hidden
-     * @param {*} context 
+     * @param {*} context
      */
     showViewer: function (context) {
         let wrap = context.container().select('.photoviewer')
@@ -695,7 +695,7 @@ export default {
 
     /**
      * Hides the current viewer if shown, resets the active image and sequence
-     * @param {*} context 
+     * @param {*} context
      */
     hideViewer: function (context) {
         let viewer = context.container().select('.photoviewer');
