@@ -15,7 +15,7 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
   DNS multiplexing.<br/>
   _Example:_ `background=custom:https://tile.openstreetmap.org/{zoom}/{x}/{y}.png`
-* __`comment`__ - Prefills the changeset comment. Pass a url encoded string.<br/>
+* __`comment`__ - Prefills the changeset comment.<br/>
   _Example:_ `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon`
 * __`disable_features`__ - Disables features in the list.<br/>
   _Example:_ `disable_features=water,service_roads,points,paths,boundaries`<br/>
@@ -24,12 +24,12 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
 * __`gpx`__ - A custom URL for loading a gpx track.  Specifying a `gpx` parameter will
   automatically enable the gpx layer for display.<br/>
   _Example:_ `gpx=https://gist.githubusercontent.com/answerquest/9445352b60ca5b44714675eae00f243a/raw/56a6343a29223318f4a697bfd16cbb2c3b8155ad/sample_boundary.gpx`
-* __`hashtags`__ - Prefills the changeset hashtags.  Pass a url encoded list of event
+* __`hashtags`__ - Prefills the changeset hashtags.  Pass a list of event
   hashtags separated by commas, semicolons, or spaces.  Leading '#' symbols are
   optional and will be added automatically. (Note that hashtag-like strings are
   automatically detected in the `comment`).<br/>
   _Example:_ `hashtags=%23hotosm-task-592,%23MissingMaps`
-* __`id`__ - Selects the specified OSM node, way, relation or note, and, unless a `map` parameter is also provided, centers the map on it. Supported formats are: a) `[nwr]<osm-id>` where the character 'n', 'w', or 'r' correspond to a OSM node, way or relation, respectively; or b) `<osm-type>/<osm-id>` which also allows to specify OSM notes (example: `note/1`).<br/>
+* __`id`__ - Selects the specified OSM node, way, relation or note, and, unless a `map` parameter is also provided, centers the map on it. Supported formats are: a) `[nwr]<osm-id>` where the character 'n', 'w', or 'r' correspond to an OSM node, way or relation, respectively; or b) `<osm-type>/<osm-id>` which also allows specifying OSM notes (example: `note/1`).<br/>
   _Example:_ `id=n1207480649`
 * __`locale`__ - A code specifying the localization to use, affecting the language, layout, and keyboard shortcuts. Multiple codes may be specified in order of preference. The first valid code will be the locale, while the rest will be used as fallbacks if certain text hasn't been translated. The default locale preferences are set by the browser.<br/>
   _Example:_ `locale=ja`, `locale=pt-BR`, `locale=nl,fr,de`<br/>
@@ -38,6 +38,8 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   _Example:_ `map=20.00/38.90085/-77.02271`
 * __`maprules`__ - A path to a [MapRules](https://github.com/radiant-maxar/maprules) service endpoint for enhanced tag validation.<br/>
   _Example:_ `maprules=https://path/to/file.json`
+* __`notes`__ - Enables the notes layer by default.<br/>
+  _Example:_ `notes=true`
 * __`offset`__ - Background imagery alignment offset in meters, formatted as `east,north`.<br/>
   _Example:_ `offset=-10,5`
 * __`photo_overlay`__ - The street-level photo overlay layers to enable.<br/>
@@ -53,15 +55,18 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
 * __`presets`__ - A comma-separated list of preset IDs. These will be the only presets the user may select.<br/>
   _Example:_ `presets=building,highway/residential,highway/unclassified`
 * __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).
-* __`source`__ - Prefills the changeset source. Pass a url encoded string.<br/>
+* __`source`__ - Prefills the changeset source.<br/>
   _Example:_ `source=Bing%3BMapillary`
-* __`validationDisable`__ - The issues identified by these types/subtypes will be disabled (i.e. Issues will not be shown at all). Each parameter value should contain a urlencoded, comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
+* __`validationDisable`__ - The issues identified by these types/subtypes will be disabled (i.e. Issues will not be shown at all). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
   _Example:_ `validationDisable=crossing_ways/highway*,crossing_ways/tunnel*`
-* __`validationWarning`__ - The issues identified by these types/subtypes will be treated as warnings (i.e. Issues will be surfaced to the user but not block changeset upload). Each parameter value should contain a urlencoded, comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
+* __`validationWarning`__ - The issues identified by these types/subtypes will be treated as warnings (i.e. Issues will be surfaced to the user but not block changeset upload). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
   _Example:_ `validationWarning=crossing_ways/highway*,crossing_ways/tunnel*`
-* __`validationError`__ - The issues identified by these types/subtypes will be treated as errors (i.e. Issues will be surfaced to the user but will block changeset upload). Each parameter value should contain a urlencoded, comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
+* __`validationError`__ - The issues identified by these types/subtypes will be treated as errors (i.e. Issues will be surfaced to the user but will block changeset upload). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
   _Example:_ `validationError=crossing_ways/highway*,crossing_ways/tunnel*`
 * __`walkthrough=true`__ - Start the walkthrough automatically
+
+Pass these parameters as a `x-www-form-urlencoded` string in the _hash_ portion of the URL, similarly to how a _query_ string of a URL is typically constructed. Input strings have to be [percent encoded](https://en.wikipedia.org/wiki/Percent-encoding) (spaces can be represented either as `+` or `%20`), for example using [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/toString) in Javascript.
+
 
 ##### iD on openstreetmap.org (Rails Port)
 
@@ -77,6 +82,7 @@ _Example:_ `https://www.openstreetmap.org/edit?editor=id#gpx=https://gist.github
 * __`hashtags`__
 * __`locale`__
 * __`maprules`__
+* __`notes`__
 * __`offset`__
 * __`photo`__
 * __`photo_dates`__
@@ -107,9 +113,9 @@ In addition, the following parameters are available as **URL query parameters**:
 Environment variables or a dotenv file can be used to configure certain aspects of iD at build time.
 
 * __`ID_API_CONNECTION_URL`__, [__`ID_API_CONNECTION_API_URL`__,] __`ID_API_CONNECTION_CLIENT_ID`__  - Custom [OAuth2](https://wiki.openstreetmap.org/wiki/OAuth#OAuth_2.0_2) connection details to an OSM API server.
-* __`ID_API_CONNECTION_API_URL`__ Optional url to use for OSM API calls aftern the initial authentication is complete when using a custom OAuth2 connection (see above). If unspecified, `ID_API_CONNECTION_URL` will be used for both the authentication and subsequent API calls.
+* __`ID_API_CONNECTION_API_URL`__ Optional url to use for OSM API calls after the initial authentication is complete when using a custom OAuth2 connection (see above). If unspecified, `ID_API_CONNECTION_URL` will be used for both the authentication and subsequent API calls.
 * __`ID_API_CONNECTION`__ - Either `live` or `dev`, if only either one should be made offered for editing.
-* __`ID_PRESETS_CDN_URL`__ - The URL where iD should fetch it's tagging presets from. Needs to point to a CORS enabled web server which is serving the `package.json` and `dist` folder of a repository built on [`@ideditor/schema-builder`](https://github.com/ideditor/schema-builder).
+* __`ID_PRESETS_CDN_URL`__ - The URL where iD should fetch its tagging presets from. Needs to point to a CORS-enabled web server which is serving the `package.json` and `dist` folder of a repository built on [`@ideditor/schema-builder`](https://github.com/ideditor/schema-builder).
 * __`ENV__ID_OCI_CDN_URL`__ - URL to a hosted version of the [osm-community-index](https://github.com/osmlab/osm-community-index)
 * __`ENV__ID_NSI_CDN_URL`__ - URL to a hosted version of the [name-suggestion-index](https://github.com/osmlab/name-suggestion-index)
 * __`ENV__ID_WMF_SITEMATRIX_CDN_URL`__ - URL to a hosted version of the [wmf-sitematrix](https://github.com/osmlab/wmf-sitematrix)
@@ -145,13 +151,13 @@ established a related geometric vocabulary consisting of points, vertices, midpo
 lines, and areas.
 
 A **point** is a node that is not a member of any way. Elements representing points
-have a `.point` class. Since a point is always a node, they also have a `.node` class.
+have a `.point` class. Since a point is always a node, it also has a `.node` class.
 
 A **vertex** is a node that is a member of one or more ways. Elements representing
 points have `.vertex` and `.node` classes.
 
 A **midpoint** is a virtual point drawn midway between two vertices along a way.
-Midpoints indicate the direction that the way, but can also be selected and dragged
+Midpoints indicate the direction of the way, but can also be selected and dragged
 to create a new point along the way.  Midpoints are classed with a `.midpoint` class.
 
 A **line** is a way that is not an area. Elements representing lines have a `.line`
@@ -167,7 +173,7 @@ have `.area` and `.way` classes.
 Elements also receive classes according to certain of the OSM key-value tags that are
 assigned to them.
 
-Tag classes are prefixed with `tag-` (see [`iD.svgTagClasses`](https://github.com/openstreetmap/iD/blob/develop/js/id/svg/tag_classes.js) for details).
+Tag classes are prefixed with `tag-` (see [`iD.svgTagClasses`](https://github.com/openstreetmap/iD/blob/develop/modules/svg/tag_classes.js) for details).
 
 #### Primary
 
@@ -184,7 +190,7 @@ interesting OSM keys -- "bridge", "tunnel", "barrier", "surface", etc.
 #### Status
 
 An element may be classed with at most one status tag.  Status tagging in OSM can
-be either key or value based, but iD attempts to detect most common lifecycle tagging
+be either key or value-based, but iD attempts to detect the most common lifecycle tagging
 schemes -- "construction", "proposed", "abandoned", "disused", etc.
 (e.g. `.tag-status .tag-status-construction`).
 
@@ -203,7 +209,7 @@ indicating a bumpy surface.
 - Two or more nodes at identical coordinates shall each have an `.overlapped` class. (TODO)
 
 - Elements comprising the entity currently under the cursor shall have the `.hover` class.
-(The `:hover` psuedo-class is insufficient when an entity's visual representation consists
+(The `:hover` pseudo-class is insufficient when an entity's visual representation consists
 of several elements, only one of which can be `:hover`ed.)
 
 - Elements that are currently active (being clicked or dragged) shall have the `.active`
@@ -221,7 +227,7 @@ iD is written in a modular style and bundled with [rollup.js](http://rollupjs.or
 which makes hot code replacement tricky.  (ES6 module exports are
 [immutable live bindings](http://www.2ality.com/2015/07/es6-module-exports.html)).
 Because of this, the parts of iD which are designed for customization are exported
-as live bound objects that can be overridden at runtime _before initializing the iD context_.
+as live-bound objects that can be overridden at runtime _before initializing the iD context_.
 
 ### Services
 
@@ -243,7 +249,7 @@ delete iD.services.mapillary;
 ### Background Imagery
 
 iD's background imagery database is stored in the `iD.fileFetcher.cache().imagery` array and can be
-overridden or modified prior to creating the iD context.
+overridden or modified before creating the iD context.
 
 Note that the "None" and "Custom" options will always be shown in the list.
 
@@ -264,7 +270,7 @@ iD.fileFetcher.cache().imagery = [{
 
 Each imagery source should have the following properties:
 * `id` - Unique identifier for this source (also used as a url parameter)
-* `name` - Display name for the source
+* `name` - Label of the source
 * `type` - Source type, currently only `tms` is supported
 * `template` - Url template, valid replacement tokens include:
   * `{z}`, `{x}`, `{y}` - for Z/X/Y scheme
@@ -274,12 +280,12 @@ Each imagery source should have the following properties:
 
 Optional properties:
 * `description` - A longer source description which, if included, will be displayed in a popup when viewing the background imagery list
-* `overlay` - If `true`, this is an overlay layer (a transparent layer rendered above base imagery layer). Defaults to `false`
+* `overlay` - If `true`, this is an overlay layer (a transparent layer rendered above a base imagery layer). Defaults to `false`
 * `zoomExtent` - Allowable min and max zoom levels, defaults to `[0, 22]`
 * `polygon` - Array of coordinate rings within which imagery is valid.  If omitted, imagery is assumed to be valid worldwide
 * `overzoom` - Can this imagery be scaled up when zooming in beyond the max zoom?  Defaults to `true`
 * `terms_url` - Url to link to when displaying the imagery terms
-* `terms_html` - Html content to display in the imagery terms
+* `terms_html` - HTML content to display in the imagery terms
 * `terms_text` - Text content to display in the imagery terms
 * `best` - If set to `true`, this imagery is considered "better than Bing" and may be chosen by default when iD starts.  Will display with a star in the background imagery list.  Defaults to `false`
 
@@ -290,7 +296,7 @@ For more details about the `iD.fileFetcher.cache().imagery` structure, see
 ### Presets
 
 iD's preset database is stored in the `iD.fileFetcher.cache().presets` object and can be overridden
-or modified prior to creating the iD context.
+or modified before creating the iD context.
 
 The format of the `presets` object is
 [documented as part of the schema-builder project](https://github.com/ideditor/schema-builder#presets).
@@ -346,7 +352,7 @@ iD.fileFetcher.cache().presets = {
 
 ### Minimum Editable Zoom
 
-The minimum zoom at which iD enters the edit mode is configured using the `context.minEditableZoom()` accessor. The default value is 16. To change this initialise the iD context as:
+The minimum zoom at which iD enters the edit mode is configured using the `context.minEditableZoom()` accessor. The default value is 16. To change this initialize the iD context as:
 
 ```js
 
@@ -360,7 +366,7 @@ This should be set with caution for performance reasons. The OpenStreetMap API h
 
 ### Custom Presets
 
-iD supports deployments which use a custom set of presets. You can supply presets via
+iD supports deployments that use a custom set of presets. You can supply presets via
 the `presets` accessor:
 
 ```js

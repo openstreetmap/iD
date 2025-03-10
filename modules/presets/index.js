@@ -56,8 +56,9 @@ export function presetIndex() {
   let _loadPromise;
 
 
-  _this.ensureLoaded = () => {
-    if (_loadPromise) return _loadPromise;
+  /** @param {boolean=} bypassCache - used by unit tests */
+  _this.ensureLoaded = (bypassCache) => {
+    if (_loadPromise && !bypassCache) return _loadPromise;
 
     return _loadPromise = Promise.all([
         fileFetcher.get('preset_categories'),

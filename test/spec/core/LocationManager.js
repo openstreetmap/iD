@@ -38,56 +38,35 @@ describe('LocationManager', () => {
 
 
   describe('#mergeLocationSets', () => {
-    it('returns a promise rejected if not passed an array', done => {
+    it('returns a promise rejected if not passed an array', async () => {
       const prom = locationManager.mergeLocationSets({});
-      prom
-        .then(() => {
-          done(new Error('This was supposed to fail, but somehow succeeded.'));
-        })
-        .catch(err => {
-          expect(/^nothing to do/.test(err)).to.be.true;
-          done();
-        });
-
-      window.setTimeout(() => {}, 20);  // async - to let the promise settle in phantomjs
+      await expect(prom).rejects.toThrow(/^nothing to do/);
     });
 
-    it('resolves locationSets, assigning locationSetID', done => {
+    it('resolves locationSets, assigning locationSetID', async () => {
       const data = [
         { id: 'world', locationSet: { include: ['001'] } },
         { id: 'usa',   locationSet: { include: ['usa'] } }
       ];
 
       const prom = locationManager.mergeLocationSets(data);
-      prom
-        .then(data => {
-          expect(data).to.be.a('array');
-          expect(data[0].locationSetID).to.eql('+[Q2]');
-          expect(data[1].locationSetID).to.eql('+[Q30]');
-          done();
-        })
-        .catch(err => done(err));
-
-      window.setTimeout(() => {}, 20); // async - to let the promise settle in phantomjs
+      await prom;
+      expect(data).to.be.a('array');
+      expect(data[0].locationSetID).to.eql('+[Q2]');
+      expect(data[1].locationSetID).to.eql('+[Q30]');
     });
 
-    it('resolves locationSets, falls back to world locationSetID on errror', done => {
+    it('resolves locationSets, falls back to world locationSetID on errror', async () => {
       const data = [
         { id: 'bogus1', locationSet: { foo: 'bar' } },
         { id: 'bogus2', locationSet: { include: ['fake.geojson'] } }
       ];
 
       const prom = locationManager.mergeLocationSets(data);
-      prom
-        .then(data => {
-          expect(data).to.be.a('array');
-          expect(data[0].locationSetID).to.eql('+[Q2]');
-          expect(data[1].locationSetID).to.eql('+[Q2]');
-          done();
-        })
-        .catch(err => done(err));
-
-      window.setTimeout(() => {}, 20); // async - to let the promise settle in phantomjs
+      await prom;
+      expect(data).to.be.a('array');
+      expect(data[0].locationSetID).to.eql('+[Q2]');
+      expect(data[1].locationSetID).to.eql('+[Q2]');
     });
   });
 
@@ -127,26 +106,20 @@ describe('LocationManager', () => {
       expect(result3).to.be.an('object').that.has.all.keys('+[Q2]');
     });
 
-    it('returns valid locationSets at a given lon,lat', done => {
+    it('returns valid locationSets at a given lon,lat', async () => {
       // setup, load colorado.geojson and resolve some locationSets
       locationManager.mergeCustomGeoJSON(fc);
-      locationManager.mergeLocationSets([
+      await locationManager.mergeLocationSets([
         { id: 'OSM-World', locationSet: { include: ['001'] } },
         { id: 'OSM-USA', locationSet: { include: ['us'] } },
         { id: 'OSM-Colorado', locationSet: { include: ['colorado.geojson'] } }
-      ])
-        .then(() => {
-          const result1 = locationManager.locationSetsAt([-108.557, 39.065]);  // Grand Junction
-          expect(result1).to.be.an('object').that.has.all.keys('+[Q2]', '+[Q30]', '+[colorado.geojson]');
-          const result2 = locationManager.locationSetsAt([-74.481, 40.797]);   // Morristown
-          expect(result2).to.be.an('object').that.has.all.keys('+[Q2]', '+[Q30]');
-          const result3 = locationManager.locationSetsAt([13.575, 41.207,]);   // Gaeta
-          expect(result3).to.be.an('object').that.has.all.keys('+[Q2]');
-          done();
-        })
-        .catch(err => done(err));
-
-      window.setTimeout(() => {}, 20);  // async - to let the promise settle in phantomjs
+      ]);
+      const result1 = locationManager.locationSetsAt([-108.557, 39.065]);  // Grand Junction
+      expect(result1).to.be.an('object').that.has.all.keys('+[Q2]', '+[Q30]', '+[colorado.geojson]');
+      const result2 = locationManager.locationSetsAt([-74.481, 40.797]);   // Morristown
+      expect(result2).to.be.an('object').that.has.all.keys('+[Q2]', '+[Q30]');
+      const result3 = locationManager.locationSetsAt([13.575, 41.207,]);   // Gaeta
+      expect(result3).to.be.an('object').that.has.all.keys('+[Q2]');
     });
   });
 

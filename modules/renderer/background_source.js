@@ -11,7 +11,7 @@ import { IntervalTasksQueue } from '../util/IntervalTasksQueue';
 var isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 
 // listen for DPI change, e.g. when dragging a browser window from a retina to non-retina screen
-window.matchMedia(`
+window.matchMedia?.(`
         (-webkit-min-device-pixel-ratio: 2), /* Safari */
         (min-resolution: 2dppx),             /* standard */
         (min-resolution: 192dpi)             /* fallback */
@@ -230,8 +230,9 @@ export function rendererBackgroundSource(data) {
     };
 
 
-    source.validZoom = function(z) {
-        return source.zoomExtent[0] <= z &&
+    source.validZoom = function(z, underzoom) {
+        if (underzoom === undefined) underzoom = 0;
+        return source.zoomExtent[0] - underzoom <= z &&
             (source.overzoom || source.zoomExtent[1] > z);
     };
 

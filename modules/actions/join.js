@@ -133,7 +133,7 @@ export function actionJoin(ids) {
         var sortedParentRelations = function (id) {
             return graph.parentRelations(graph.entity(id))
                 .filter((rel) => !rel.isRestriction() && !rel.isConnectivity())
-                .sort((a, b) => a.id - b.id);
+                .sort((a, b) => a.id.localeCompare(b.id));
         };
         var relsA = sortedParentRelations(ids[0]);
         for (i = 1; i < ids.length; i++) {

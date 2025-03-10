@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 describe('iD.behaviorSelect', function() {
     var a, b, context, behavior, container;
 
@@ -55,62 +57,50 @@ describe('iD.behaviorSelect', function() {
         expect(context.mode().id).to.eql('browse');
     });
 
-    it('click on entity selects the entity', function(done) {
+    it('click on entity selects the entity', async () => {
         var el = context.surface().selectAll('.' + a.id).node();
         simulateClick(el, {});
-        window.setTimeout(function() {
-            expect(context.selectedIDs()).to.eql([a.id]);
-            done();
-        }, 50);
+        await setTimeout(50);
+        expect(context.selectedIDs()).to.eql([a.id]);
     });
 
-    it('click on empty space clears the selection', function(done) {
+    it('click on empty space clears the selection', async () => {
         context.enter(iD.modeSelect(context, [a.id]));
         var el = context.surface().node();
         simulateClick(el, {});
-        window.setTimeout(function() {
-            expect(context.mode().id).to.eql('browse');
-            done();
-        }, 50);
+        await setTimeout(50);
+        expect(context.mode().id).to.eql('browse');
     });
 
-    it('shift-click on unselected entity adds it to the selection', function(done) {
+    it('shift-click on unselected entity adds it to the selection', async () => {
         context.enter(iD.modeSelect(context, [a.id]));
         var el = context.surface().selectAll('.' + b.id).node();
         simulateClick(el, { shiftKey: true });
-        window.setTimeout(function() {
-            expect(context.selectedIDs()).to.eql([a.id, b.id]);
-            done();
-        }, 50);
+        await setTimeout(50);
+        expect(context.selectedIDs()).to.eql([a.id, b.id]);
     });
 
-    it('shift-click on selected entity removes it from the selection', function(done) {
+    it('shift-click on selected entity removes it from the selection', async () => {
         context.enter(iD.modeSelect(context, [a.id, b.id]));
         var el = context.surface().selectAll('.' + b.id).node();
         simulateClick(el, { shiftKey: true });
-        window.setTimeout(function() {
-            expect(context.selectedIDs()).to.eql([a.id]);
-            done();
-        }, 50);
+        await setTimeout(50);
+        expect(context.selectedIDs()).to.eql([a.id]);
     });
 
-    it('shift-click on last selected entity clears the selection', function(done) {
+    it('shift-click on last selected entity clears the selection', async () => {
         context.enter(iD.modeSelect(context, [a.id]));
         var el = context.surface().selectAll('.' + a.id).node();
         simulateClick(el, { shiftKey: true });
-        window.setTimeout(function() {
-            expect(context.mode().id).to.eql('browse');
-            done();
-        }, 50);
+        await setTimeout(50);
+        expect(context.mode().id).to.eql('browse');
     });
 
-    it('shift-click on empty space leaves the selection unchanged', function(done) {
+    it('shift-click on empty space leaves the selection unchanged', async () => {
         context.enter(iD.modeSelect(context, [a.id]));
         var el = context.surface().node();
         simulateClick(el, { shiftKey: true });
-        window.setTimeout(function() {
-            expect(context.selectedIDs()).to.eql([a.id]);
-            done();
-        }, 50);
+        await setTimeout(50);
+        expect(context.selectedIDs()).to.eql([a.id]);
     });
 });

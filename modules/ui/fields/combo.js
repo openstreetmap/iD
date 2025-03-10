@@ -4,7 +4,6 @@ import { drag as d3_drag } from 'd3-drag';
 import * as countryCoder from '@rapideditor/country-coder';
 
 import { fileFetcher } from '../../core/file_fetcher';
-import { osmEntity } from '../../osm/entity';
 import { t } from '../../core/localizer';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
@@ -13,6 +12,7 @@ import { svgIcon } from '../../svg/icon';
 import { utilKeybinding } from '../../util/keybinding';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
 import { uiLengthIndicator } from '../length_indicator';
+import { deprecatedTagValuesByKey } from '../../osm/deprecated';
 
 export {
     uiFieldCombo as uiFieldManyCombo,
@@ -43,6 +43,7 @@ export function uiFieldCombo(field, context) {
     var _tags;
     var _countryCode;
     var _staticPlaceholder;
+    var _customOptions = [];
 
     // initialize deprecated tags array
     var _dataDeprecated = [];
@@ -181,7 +182,7 @@ export function uiFieldCombo(field, context) {
         } else {
             options = [].concat(field.options, stringsField.options).filter(Boolean);
         }
-        return options.map(function(v) {
+        const result = options.map(function(v) {
             const labelId = getLabelId(stringsField, v);
             return {
                 key: v,
@@ -191,6 +192,7 @@ export function uiFieldCombo(field, context) {
                 klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
             };
         });
+        return [...result, ..._customOptions];
     }
 
 
@@ -208,6 +210,10 @@ export function uiFieldCombo(field, context) {
 
         _comboData = objectDifference(_comboData, _multiData);
         _combobox.data(_comboData);
+
+        // hide the caret if there are no suggestions
+        _container.classed('empty-combobox', _comboData.length === 0);
+
         if (callback) callback(_comboData);
     }
 
@@ -252,7 +258,7 @@ export function uiFieldCombo(field, context) {
                 return value === restrictTagValueSpelling(value);
             });
 
-            var deprecatedValues = osmEntity.deprecatedTagValuesByKey(_dataDeprecated)[field.key];
+            var deprecatedValues = deprecatedTagValuesByKey(_dataDeprecated)[field.key];
             if (deprecatedValues) {
                 // don't suggest deprecated tag values
                 data = data.filter(d  =>
@@ -925,6 +931,10 @@ export function uiFieldCombo(field, context) {
             })
         );
     }
+
+    combo.setCustomOptions = (newValue) => {
+        _customOptions = newValue;
+    };
 
 
     combo.focus = function() {

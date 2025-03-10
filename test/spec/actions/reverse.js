@@ -15,6 +15,7 @@ describe('iD.actionReverse', function () {
         expect(graph.entity(way.id).tags).to.eql({'highway': 'residential'});
     });
 
+
     describe('reverses directional tags on nodes', function () {
         it('reverses relative directions', function () {
             var node1 = iD.osmNode({ tags: { 'direction': 'forward' } });
@@ -94,6 +95,7 @@ describe('iD.actionReverse', function () {
             expect(graph.entity(node1.id).tags).to.eql({ 'direction': 'both' });
         });
     });
+
 
     describe('reverses oneway', function () {
         it('preserves oneway tags', function () {
@@ -588,6 +590,47 @@ describe('iD.actionReverse', function () {
             var target = graph.entity(node2.id);
             expect(target.tags['traffic_signals:direction']).to.eql('empty');
         });
+    });
+
+
+    describe('does not reverse values which are relative to another reversed tag', function () {
+        it('preserves the turn direction of a single lane road', function () {
+            var way = iD.osmWay({tags: {'turn:lanes': 'right'}});
+            var graph = iD.actionReverse(way.id)(iD.coreGraph([way]));
+            var target = graph.entity(way.id);
+            expect(target.tags['turn:lanes']).to.eql('right');
+        });
+
+        it('preserves the turn directions of a multi-lane road', function () {
+            var way = iD.osmWay({tags: {'turn:lanes': 'through|through|right'}});
+            var graph = iD.actionReverse(way.id)(iD.coreGraph([way]));
+            var target = graph.entity(way.id);
+            expect(target.tags['turn:lanes']).to.eql('through|through|right');
+        });
+
+        // https://github.com/openstreetmap/iD/issues/5674
+        it('preserves the turn direction of each direction with a single lane', function () {
+            var way = iD.osmWay({tags: {'turn:lanes:forward': 'right', 'turn:lanes:backward': 'left'}});
+            var graph = iD.actionReverse(way.id)(iD.coreGraph([way]));
+            var target = graph.entity(way.id);
+            expect(target.tags['turn:lanes:backward']).to.eql('right');
+            expect(target.tags['turn:lanes:forward']).to.eql('left');
+        });
+
+        it('preserves the turn direction of each direction with multiple lanes', function () {
+            var way = iD.osmWay({tags: {'turn:lanes:forward': 'through|right', 'turn:lanes:backward': 'through|through|left'}});
+            var graph = iD.actionReverse(way.id)(iD.coreGraph([way]));
+            var target = graph.entity(way.id);
+            expect(target.tags['turn:lanes:backward']).to.eql('through|right');
+            expect(target.tags['turn:lanes:forward']).to.eql('through|through|left');
+        });
+
+        it('preserves the turn direction of explicitly bidirectional turn lane values', function () {
+            var way = iD.osmWay({tags: {'turn:lanes:both_ways': 'left'}});
+            var graph = iD.actionReverse(way.id)(iD.coreGraph([way]));
+            var target = graph.entity(way.id);
+            expect(target.tags['turn:lanes:both_ways']).to.eql('left');
+        });
 
         it('preserves the value of the side tag of a cycling waiting aid', function () {
             var node1 = iD.osmNode();
@@ -602,6 +645,23 @@ describe('iD.actionReverse', function () {
             var target = graph.entity(node2.id);
             expect(target.tags.direction).to.eql('backward');
             expect(target.tags.side).to.eql('right');
+        });
+
+        it('preserves the direction of a red turn at a traffic signal', function () {
+            var node1 = iD.osmNode();
+            var node2 = iD.osmNode({tags: {
+                'highway': 'traffic_signals',
+                'traffic_signals:direction': 'forward',
+                'red_turn:right': 'no',
+                'red_turn:right:bicycle': 'yes'
+            }});
+            var node3 = iD.osmNode();
+            var way = iD.osmWay({nodes: [node1.id, node2.id, node3.id]});
+            var graph = iD.actionReverse(way.id)(iD.coreGraph([node1, node2, node3, way]));
+            var target = graph.entity(node2.id);
+            expect(target.tags['traffic_signals:direction']).to.eql('backward');
+            expect(target.tags['red_turn:right']).to.eql('no');
+            expect(target.tags['red_turn:right:bicycle']).to.eql('yes');
         });
     });
 });

@@ -8,6 +8,9 @@ export function utilSessionMutex(name) {
     var intervalID;
 
     function renew() {
+        // in unit tests, we need to abort if the test has already completed
+        if (typeof window === 'undefined') return;
+
         var expires = new Date();
         expires.setSeconds(expires.getSeconds() + 5);
         document.cookie = name + '=1; expires=' + expires.toUTCString() + '; sameSite=strict';

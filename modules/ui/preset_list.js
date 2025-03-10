@@ -37,14 +37,12 @@ export function uiPresetList(context) {
             .append('h2')
             .call(t.append('inspector.choose'));
 
-        var direction = (localizer.textDirection() === 'rtl') ? 'backward' : 'forward';
-
         messagewrap
             .append('button')
             .attr('class', 'preset-choose')
             .attr('title', _entityIDs.length === 1 ? t('inspector.edit') : t('inspector.edit_features'))
             .on('click', function() { dispatch.call('cancel', this); })
-            .call(svgIcon(`#iD-icon-${direction}`));
+            .call(svgIcon('#iD-icon-close'));
 
         function initialKeydown(d3_event) {
             // hack to let delete shortcut work when search is autofocused
@@ -123,7 +121,7 @@ export function uiPresetList(context) {
         var search = searchWrap
             .append('input')
             .attr('class', 'preset-search-input')
-            .attr('placeholder', t('inspector.search'))
+            .attr('placeholder', t('inspector.search_feature_type'))
             .attr('type', 'search')
             .call(utilNoAuto)
             .on('keydown', initialKeydown)

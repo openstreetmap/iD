@@ -215,7 +215,7 @@ export function uiIntroPoint(context, reveal) {
         // reset pane, in case user happened to change it..
         context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
-        var addNameString = helpHtml('intro.points.fields_info') + '{br}' + helpHtml('intro.points.add_name');
+        var addNameString = helpHtml('intro.points.fields_info') + '{br}' + helpHtml('intro.points.add_name') + '{br}' + helpHtml('intro.points.add_reminder');
 
         timeout(function() {
             // It's possible for the user to add a name in a previous step..
@@ -429,6 +429,9 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             context.map().on('move.intro', function() {
+                if (selectMenuItem(context, 'delete').empty()) {
+                    return continueTo(rightClickPoint);
+                }
                 reveal('.edit-menu',
                     helpHtml('intro.points.delete'),
                     { duration: 0,  padding: 50 }

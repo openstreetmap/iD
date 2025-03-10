@@ -163,7 +163,17 @@ describe('maprules', function() {
     });
     describe('#clearRules', function() {
         it('clears _validationRules array', function() {
+            iD.serviceMapRules.clearRules();
+            expect(iD.serviceMapRules.validationRules()).to.be.empty;
+
+            iD.serviceMapRules.addRule({
+                geometry:'node',
+                equals: {amenity:'marketplace'},
+                absence:'name',
+                warning:'\'Marketplace\' preset must be coupled with name'
+            });
             expect(iD.serviceMapRules.validationRules().length).to.eql(1);
+
             iD.serviceMapRules.clearRules();
             expect(iD.serviceMapRules.validationRules()).to.be.empty;
         });

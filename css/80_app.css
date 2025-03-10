@@ -2342,15 +2342,15 @@ input.date-selector {
 
 /* Field - Changeset Comment
 ------------------------------------------------------- */
-.form-field-comment:not(.present) #preset-input-comment {
-    border-color: rgb(230, 100, 100);
+.form-field-comment:not(.present) textarea {
+    border-color: rgb(160, 160, 160);
 }
 .form-field-comment:not(.present) .field-label {
-    border-color: rgb(230, 100, 100);
-    background: rgba(230, 100, 100, 0.2);
+    border-color: rgb(160, 160, 160);
+    background-color: rgba(160, 160, 160, 0.2);
 }
 .form-field-comment:not(.present) button {
-    border-color: rgb(230, 100, 100);
+    border-color: rgb(160, 160, 160);
 }
 
 
@@ -3069,6 +3069,7 @@ img.tag-reference-wiki-image {
 .comment-date {
     color: #aaa;
 }
+.inspector-hover .comment-text,
 .comment-text {
     color: #333;
     margin-top: 10px;
@@ -4178,11 +4179,13 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .help-pane .nav {
     position: relative;
     padding-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .help-pane .nav a {
-    float: left;
-    width: 50%;
+    flex: 0 0 50%;
     text-align: center;
 }
 
@@ -4196,7 +4199,7 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 }
 
 .help-pane .nav a:only-child {
-    width: 100%;
+    flex: 0 0 100%;
     border-radius: 4px;
 }
 
@@ -4232,10 +4235,10 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     border: 1px solid #ccc;
 }
 
-/* scrollbars only when necessary*/
+/* no scrollbars */
 .inspector-hover div {
     overflow-x: visible;
-    overflow-y: auto;
+    overflow-y: visible;
 }
 
 /* hide and remove from layout */
@@ -4361,17 +4364,32 @@ img.tile {
 
     -webkit-user-drag: none;
 
-    opacity: 0;
-
-    transition: opacity 200ms linear;
-}
-
-img.tile-loaded {
     opacity: 1;
+    transition: opacity 250ms linear;
+
+    /* prevent brief flickering of "broken image" on tile loading errors, see https://zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement/ */
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-img.tile-removing {
+.layer-overlay .img.tile,
+.map-in-map-overlay .img.tile {
+    /* dummy transition such that the `ontransitionend` event can be triggered, see https://github.com/openstreetmap/iD/pull/10785 */
+    transition: opacity 1ms linear;
+}
+
+.layer-background img.tile,
+.map-in-map-background img.tile {
+    filter: url(#alpha-slope5);
+}
+
+.layer-background img.tile-removing,
+.layer-overlay img.tile-removing,
+.map-in-map-background img.tile-removing,
+.map-in-map-overlay img.tile-removing {
     opacity: 0;
+    z-index: 1;
 }
 
 .tile-label-debug {
@@ -4428,6 +4446,15 @@ img.tile-debug {
     bottom: 0;
 }
 
+.layer-background {
+    z-index: 1;
+}
+.layer-overlay {
+    z-index: 2;
+}
+.layer-data {
+    z-index: 3;
+}
 
 /* Map-In-Map
 ------------------------------------------------------- */
@@ -5769,6 +5796,7 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     border: solid transparent;
     border-width: 3px 3px 3px 4px;
     border-radius: 6px;
+    cursor: auto;
 }
 ::-webkit-scrollbar-track:active {
     background-color: rgba(0,0,0,.05);
@@ -5778,8 +5806,11 @@ li.hide + li.version .badge .tooltip .popover-arrow {
         background-color: rgba(0,0,0,.05);
     }
 }
-body {
-    scrollbar-width: 10px;
+/* Firefox */
+@-moz-document url-prefix() {
+	* {
+	    scrollbar-width: thin;
+	}
 }
 
 

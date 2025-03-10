@@ -8,7 +8,7 @@ import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '..
 
 export function rendererFeatures(context) {
     var dispatch = d3_dispatch('change', 'redraw');
-    var features = utilRebind({}, dispatch, 'on');
+    const features = {};
     var _deferred = new Set();
 
     var traffic_roads = {
@@ -135,7 +135,10 @@ export function rendererFeatures(context) {
     });
 
     defineRule('indoor', function isIndoor(tags) {
-        return !!tags.indoor;
+        return (
+            (!!tags.indoor && tags.indoor !== 'no') ||
+            (!!tags.indoormark && tags.indoormark !== 'no')
+        );
     });
 
     defineRule('landuse', function isLanduse(tags, geometry) {
@@ -616,5 +619,5 @@ export function rendererFeatures(context) {
     });
 
 
-    return features;
+    return utilRebind(features, dispatch, 'on');
 }

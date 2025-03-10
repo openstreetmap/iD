@@ -8,7 +8,7 @@ import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { t } from '../core/localizer';
-import { utilDisplayLabel } from '../util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';

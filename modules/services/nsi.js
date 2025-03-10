@@ -581,7 +581,7 @@ function _upgradeTags(tags, loc) {
 
     // These tags can be toplevel tags -or- attributes - so we generally want to preserve existing values - #8615
     // We'll only _replace_ the tag value if this tag is the toplevel/defining tag for the matched item (`k`)
-    ['building', 'emergency', 'internet_access', 'takeaway'].forEach(osmkey => {
+    ['building', 'emergency', 'internet_access', 'opening_hours', 'takeaway'].forEach(osmkey => {
       if (k !== osmkey) preserveTags.push(`^${osmkey}$`);
     });
 

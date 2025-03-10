@@ -5,7 +5,7 @@ import { modeSelect } from '../modes/select';
 import { geoExtent, geoVecSubtract } from '../geo';
 import { t } from '../core/localizer';
 import { uiCmd } from '../ui/cmd';
-import { utilDisplayLabel } from '../util/util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 
 // see also `behaviorPaste`
 export function operationPaste(context) {

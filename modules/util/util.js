@@ -1,7 +1,6 @@
 import { remove as removeDiacritics } from 'diacritics';
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
-import { presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
 import { utilArrayUnion } from './array';
 import { utilDetect } from './detect';
@@ -29,8 +28,13 @@ export function utilTotalExtent(array, graph) {
     return extent;
 }
 
-
+/**
+ * @typedef {{ type: '-' | '+'; key: string; oldVal: string; newVal: string; display: string; }} TagDiff
+ * @param {Tags} oldTags
+ * @param {Tags} newTags
+ */
 export function utilTagDiff(oldTags, newTags) {
+    /** @type {TagDiff[]} */
     var tagDiff = [];
     var keys = utilArrayUnion(Object.keys(oldTags), Object.keys(newTags)).sort();
     keys.forEach(function(k) {
@@ -178,20 +182,35 @@ export function utilGetAllNodes(ids, graph) {
     }
 }
 
-
-export function utilDisplayName(entity) {
+/**
+ * @param {boolean} hideNetwork If true, the `network` tag will not be used in the name to prevent
+ *                              it being shown twice (see PR #8707#discussion_r712658175)
+ */
+export function utilDisplayName(entity, hideNetwork) {
     var localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
     var name = entity.tags[localizedNameKey] || entity.tags.name || '';
-    if (name) return name;
 
     var tags = {
         direction: entity.tags.direction,
         from: entity.tags.from,
-        network: entity.tags.cycle_network || entity.tags.network,
+        name,
+        network: hideNetwork ? undefined : (entity.tags.cycle_network || entity.tags.network),
         ref: entity.tags.ref,
         to: entity.tags.to,
         via: entity.tags.via
     };
+
+    // A right or left-right arrow likely indicates a formulaic “name” as specified by the Public Transport v2 schema.
+    // This name format already contains enough details to disambiguate the feature; avoid duplicating these details.
+    if (entity.tags.route && entity.tags.name && entity.tags.name.match(/[→⇒↔⇔]|[-=]>/)) {
+        return entity.tags.name;
+    }
+
+    // Non-routes tend to be labeled in many places besides the relation lists, such as the map, where brevity is important.
+    if (!entity.tags.route && name) {
+        return name;
+    }
+
     var keyComponents = [];
 
     if (tags.network) {
@@ -199,6 +218,9 @@ export function utilDisplayName(entity) {
     }
     if (tags.ref) {
         keyComponents.push('ref');
+    }
+    if (tags.name) {
+        keyComponents.push('name');
     }
 
     // Routes may need more disambiguation based on direction or destination
@@ -241,32 +263,6 @@ export function utilDisplayType(id) {
         w: t('inspector.way'),
         r: t('inspector.relation')
     }[id.charAt(0)];
-}
-
-
-// `utilDisplayLabel`
-// Returns a string suitable for display
-// By default returns something like name/ref, fallback to preset type, fallback to OSM type
-//   "Main Street" or "Tertiary Road"
-// If `verbose=true`, include both preset name and feature name.
-//   "Tertiary Road Main Street"
-//
-export function utilDisplayLabel(entity, graphOrGeometry, verbose) {
-    var result;
-    var displayName = utilDisplayName(entity);
-    var preset = typeof graphOrGeometry === 'string' ?
-        presetManager.matchTags(entity.tags, graphOrGeometry) :
-        presetManager.match(entity, graphOrGeometry);
-    var presetName = preset && (preset.suggestion ? preset.subtitle() : preset.name());
-
-    if (verbose) {
-        result = [presetName, displayName].filter(Boolean).join(' ');
-    } else {
-        result = displayName || presetName;
-    }
-
-    // Fallback to the OSM type (node/way/relation)
-    return result || utilDisplayType(entity.id);
 }
 
 
@@ -367,31 +363,21 @@ export function utilCombinedTags(entityIDs, graph) {
 
 
 export function utilStringQs(str) {
-    var i = 0;  // advance past any leading '?' or '#' characters
-    while (i < str.length && (str[i] === '?' || str[i] === '#')) i++;
-    str = str.slice(i);
-
-    return str.split('&').reduce(function(obj, pair){
-        var parts = pair.split('=');
-        if (parts.length === 2) {
-            obj[parts[0]] = (null === parts[1]) ? '' : decodeURIComponent(parts[1]);
-        }
-        return obj;
-    }, {});
+    str = str.replace(/^[#?]{0,2}/, ''); // advance past any leading '?' or '#' characters
+    return Object.fromEntries(new URLSearchParams(str));
 }
 
 
-export function utilQsString(obj, noencode) {
-    // encode everything except special characters used in certain hash parameters:
-    // "/" in map states, ":", ",", {" and "}" in background
-    function softEncode(s) {
-        return encodeURIComponent(s).replace(/(%2F|%3A|%2C|%7B|%7D)/g, decodeURIComponent);
+export function utilQsString(obj, softEncode) {
+    let str = new URLSearchParams(obj).toString();
+    if (softEncode) {
+        // for better readability of URL hashes: optionally
+        // leave some special characters unescaped
+        //   "/" used in map state
+        //   ":", ",", {" and "}" used in background param
+        str = str.replace(/(%2F|%3A|%2C|%7B|%7D)/g, decodeURIComponent);
     }
-
-    return Object.keys(obj).sort().map(function(key) {
-        return encodeURIComponent(key) + '=' + (
-            noencode ? softEncode(obj[key]) : encodeURIComponent(obj[key]));
-    }).join('&');
+    return str;
 }
 
 
@@ -536,6 +522,10 @@ export function utilNoAuto(selection) {
         .attr('autocomplete', 'new-password')
         .attr('autocorrect', 'off')
         .attr('autocapitalize', 'off')
+        .attr('data-1p-ignore', 'true')  // 1Password
+        .attr('data-bwignore', 'true')   // Bitwarden
+        .attr('data-form-type', 'other') // Dashlane
+        .attr('data-lpignore', 'true')   // LastPass
         .attr('spellcheck', isText ? 'true' : 'false');
 }
 

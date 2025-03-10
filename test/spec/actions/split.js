@@ -511,6 +511,26 @@ describe('iD.actionSplit', function () {
             expect(g4.entity('-').nodes).to.eql(['b', 'c', 'd']);
             expect(g4.entity('=').nodes).to.eql(['d', 'a', 'b']);
         });
+
+        it('splits a closed way at the given points', function () {
+            //
+            // Situation:
+            //    a ---- b
+            //    |      |
+            //    d ---- c
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({ id: 'a', loc: [0, 1] }),
+                iD.osmNode({ id: 'b', loc: [1, 1] }),
+                iD.osmNode({ id: 'c', loc: [1, 0] }),
+                iD.osmNode({ id: 'd', loc: [0, 0] }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            ]);
+
+            var g1 = iD.actionSplit(['a', 'b'], ['='])(graph);
+            expect(g1.entity('-').nodes).to.eql(['b', 'c', 'd', 'a']);
+            expect(g1.entity('=').nodes).to.eql(['a', 'b']);
+        });
     });
 
 
@@ -1653,7 +1673,9 @@ describe('iD.actionSplit', function () {
         });
 
 
-        ['restriction', 'restriction:bus', 'manoeuvre'].forEach(function (type) {
+        ['restriction', 'restriction:bus', 'manoeuvre', 'destination_sign'].forEach(function (type) {
+            const viaRole = type === 'destination_sign' ? 'intersection' : 'via';
+
             describe('type = ' + type, function () {
                 var a = iD.osmNode({id: 'a', loc: [0, 0]});
                 var b = iD.osmNode({id: 'b', loc: [1, 0]});
@@ -1674,7 +1696,7 @@ describe('iD.actionSplit', function () {
                     iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '-', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]})
                 ]);
 
@@ -1690,7 +1712,7 @@ describe('iD.actionSplit', function () {
                     iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '~', role: 'from', type: 'way'},
                         {id: '-', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]})
                 ]);
 
@@ -1706,7 +1728,7 @@ describe('iD.actionSplit', function () {
                     iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '-', role: 'from', type: 'way'},
                         {id: '-', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]})
                 ]);
 
@@ -1727,7 +1749,7 @@ describe('iD.actionSplit', function () {
                     iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '-', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: '|', role: 'via', type: 'way'}
+                        {id: '|', role: viaRole, type: 'way'}
                     ]})
                 ]);
 
@@ -1748,7 +1770,7 @@ describe('iD.actionSplit', function () {
                     iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '~', role: 'from', type: 'way'},
                         {id: '-', role: 'to', type: 'way'},
-                        {id: '|', role: 'via', type: 'way'}
+                        {id: '|', role: viaRole, type: 'way'}
                     ]})
                 ]);
 
@@ -1768,7 +1790,7 @@ describe('iD.actionSplit', function () {
                     iD.osmWay({id: '‖', nodes: ['f', 'd']}),
                     iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '|', role: 'from', type: 'way'},
-                        {id: '-', role: 'via', type: 'way'},
+                        {id: '-', role: viaRole, type: 'way'},
                         {id: '‖', role: 'to', type: 'way'}
                     ]})
                 ]);
@@ -1785,7 +1807,7 @@ describe('iD.actionSplit', function () {
                     iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '-', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]})
                 ]);
 
@@ -1801,7 +1823,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '=', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -1817,7 +1839,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '-', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -1833,7 +1855,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '~', role: 'from', type: 'way'},
                         {id: '=', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -1849,7 +1871,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '~', role: 'from', type: 'way'},
                         {id: '-', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -1865,7 +1887,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '=', role: 'from', type: 'way'},
                         {id: '=', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -1881,7 +1903,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '-', role: 'from', type: 'way'},
                         {id: '-', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -1901,7 +1923,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '=', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: '|', role: 'via', type: 'way'}
+                        {id: '|', role: viaRole, type: 'way'}
                     ]);
                 });
 
@@ -1921,7 +1943,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '-', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: '|', role: 'via', type: 'way'}
+                        {id: '|', role: viaRole, type: 'way'}
                     ]);
                 });
 
@@ -1941,7 +1963,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '~', role: 'from', type: 'way'},
                         {id: '=', role: 'to', type: 'way'},
-                        {id: '|', role: 'via', type: 'way'}
+                        {id: '|', role: viaRole, type: 'way'}
                     ]);
                 });
 
@@ -1961,7 +1983,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '~', role: 'from', type: 'way'},
                         {id: '-', role: 'to', type: 'way'},
-                        {id: '|', role: 'via', type: 'way'}
+                        {id: '|', role: viaRole, type: 'way'}
                     ]);
                 });
 
@@ -1980,8 +2002,8 @@ describe('iD.actionSplit', function () {
 
                     expect(graph.entity('r').members).to.eql([
                         {id: '|', role: 'from', type: 'way'},
-                        {id: '-', role: 'via', type: 'way'},
-                        {id: '=', role: 'via', type: 'way'},
+                        {id: '-', role: viaRole, type: 'way'},
+                        {id: '=', role: viaRole, type: 'way'},
                         {id: '‖', role: 'to', type: 'way'}
                     ]);
                 });
@@ -2001,8 +2023,8 @@ describe('iD.actionSplit', function () {
 
                     expect(graph.entity('r').members).to.eql([
                         {id: '|', role: 'from', type: 'way'},
-                        {id: '-', role: 'via', type: 'way'},
-                        {id: '=', role: 'via', type: 'way'},
+                        {id: '-', role: viaRole, type: 'way'},
+                        {id: '=', role: viaRole, type: 'way'},
                         {id: '‖', role: 'to', type: 'way'}
                     ]);
                 });
@@ -2019,7 +2041,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '-', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -2035,7 +2057,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '=', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
             });

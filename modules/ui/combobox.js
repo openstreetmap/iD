@@ -154,18 +154,8 @@ export function uiCombobox(context, klass) {
                 .on('scroll.combo-scroll', render, true);
         }
 
-
         function hide() {
-            if (_comboHideTimerID) {
-                window.clearTimeout(_comboHideTimerID);
-                _comboHideTimerID = undefined;
-            }
-
-            container.selectAll('.combobox')
-                .remove();
-
-            container
-                .on('scroll.combo-scroll', null);
+            _hide(container);
         }
 
 
@@ -298,7 +288,7 @@ export function uiCombobox(context, klass) {
             // https://stackoverflow.com/questions/11039885/scrollintoview-causing-the-whole-page-to-move
             var selected = combo.selectAll('.combobox-option.selected').node();
             if (selected) {
-                selected.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                selected.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' });
             }
         }
 
@@ -515,7 +505,22 @@ export function uiCombobox(context, klass) {
 }
 
 
+function _hide(container) {
+    if (_comboHideTimerID) {
+        window.clearTimeout(_comboHideTimerID);
+        _comboHideTimerID = undefined;
+    }
+
+    container.selectAll('.combobox')
+        .remove();
+
+    container
+        .on('scroll.combo-scroll', null);
+}
+
+
 uiCombobox.off = function(input, context) {
+    _hide(context.container());
     input
         .on('focus.combo-input', null)
         .on('blur.combo-input', null)

@@ -7,3 +7,16 @@ describe('iD.utilObjectOmit', function() {
     });
 });
 
+
+describe('iD.utilCheckTagDictionary', () => {
+    it('can search a standard tag-dictionary', () => {
+        expect(iD.utilCheckTagDictionary({}, iD.osmPavedTags)).toBeUndefined();
+        expect(iD.utilCheckTagDictionary({ surface: 'asphalt' }, iD.osmPavedTags)).toBe(true);
+    });
+
+    it('works for falsy values', () => {
+        const dictionary = { surface: { paved: 0 } };
+        expect(iD.utilCheckTagDictionary({}, dictionary)).toBeUndefined();
+        expect(iD.utilCheckTagDictionary({ surface: 'paved' }, dictionary)).toBe(0);
+    });
+});

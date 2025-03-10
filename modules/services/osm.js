@@ -524,8 +524,8 @@ function updateRtree(item, replace) {
 function wrapcb(thisArg, callback, cid) {
     return function(err, result) {
         if (err) {
-            // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-            if (err.status === 400 || err.status === 401 || err.status === 403) {
+            // 401 Unauthorized, 403 Forbidden
+            if (err.status === 401 || err.status === 403) {
                 thisArg.logout();
             }
             return callback.call(thisArg, err);
@@ -642,23 +642,21 @@ export default {
 
             var isAuthenticated = that.authenticated();
 
-            // 400 Bad Request, 401 Unauthorized, 403 Forbidden
-            // Logout and retry the request..
+            // 401 Unauthorized, 403 Forbidden
+            // Logout and retry the request.
             if (isAuthenticated && err && err.status &&
-                    (err.status === 400 || err.status === 401 || err.status === 403)) {
+                    (err.status === 401 || err.status === 403)) {
                 that.logout();
                 that.loadFromAPI(path, callback, options);
-
-            // else, no retry..
+            // else, no retry.
             } else {
                 // 509 Bandwidth Limit Exceeded, 429 Too Many Requests
-                // Set the rateLimitError flag and trigger a warning..
+                // Set the rateLimitError flag and trigger a warning.
                 if (!isAuthenticated && !_rateLimitError && err && err.status &&
                         (err.status === 509 || err.status === 429)) {
                     _rateLimitError = err;
                     dispatch.call('change');
                     that.reloadApiStatus();
-
                 } else if ((err && _cachedApiStatus === 'online') ||
                     (!err && _cachedApiStatus !== 'online')) {
                     // If the response's error state doesn't match the status,
@@ -876,6 +874,16 @@ export default {
                 }, function() { return true; });
             }
         }
+    },
+
+    /** updates the tags on an existing unclosed changeset */
+    // PUT /api/0.6/changeset/#id
+    updateChangesetTags: (changeset) => {
+        return oauth.fetch(`${oauth.options().apiUrl}/api/0.6/changeset/${changeset.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'text/xml' },
+            body: JXON.stringify(changeset.asJXON())
+        });
     },
 
 
@@ -1417,7 +1425,8 @@ export default {
     },
 
 
-    authenticate: function(callback) {
+    /** @param {import('osm-auth').LoginOptions} options */
+    authenticate: function(callback, options) {
         var that = this;
         var cid = _connectionID;
         _userChangesets = undefined;
@@ -1444,7 +1453,7 @@ export default {
             locale: localizer.localeCode(),
         });
 
-        oauth.authenticate(done);
+        oauth.authenticate(done, options);
     },
 
 

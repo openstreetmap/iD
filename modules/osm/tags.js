@@ -1,3 +1,5 @@
+import { merge } from 'lodash-es';
+
 export function osmIsInterestingTag(key) {
     return key !== 'attribution' &&
         key !== 'created_by' &&
@@ -124,7 +126,7 @@ export function osmNodeGeometriesForTags(nodeTags) {
     return geometries;
 }
 
-export var osmOneWayTags = {
+export const osmOneWayForwardTags = {
     'aerialway': {
         'chair_lift': true,
         'drag_lift': true,
@@ -138,8 +140,6 @@ export var osmOneWayTags = {
     },
     'conveying': {
         'forward': true,
-        'backward': true,
-        'reversible': true,
     },
     'highway': {
         'motorway': true
@@ -151,6 +151,9 @@ export var osmOneWayTags = {
     'man_made': {
         'goods_conveyor': true,
         'piste:halfpipe': true
+    },
+    'oneway': {
+        'yes': true,
     },
     'piste:type': {
         'downhill': true,
@@ -176,6 +179,28 @@ export var osmOneWayTags = {
         'tidal_channel': true
     }
 };
+export const osmOneWayBackwardTags = {
+    'conveying': {
+        'backward': true,
+    },
+    'oneway': {
+        '-1': true,
+    },
+};
+export const osmOneWayBiDirectionalTags = {
+    'conveying': {
+        'reversible': true,
+    },
+    'oneway': {
+        'alternating': true,
+        'reversible': true,
+    },
+};
+export const osmOneWayTags = merge(
+    osmOneWayForwardTags,
+    osmOneWayBackwardTags,
+    osmOneWayBiDirectionalTags,
+);
 
 // solid and smooth surfaces akin to the assumed default road surface in OSM
 export var osmPavedTags = {
@@ -233,6 +258,10 @@ export var osmRoutableHighwayTagValues = {
     unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true, busway: true,
     path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true, ladder: true
 };
+/** aeroway tags that are treated as routable for aircraft */
+export const osmRoutableAerowayTags = {
+    runway: true, taxiway: true
+};
 // "highway" tag values that generally do not allow motor vehicles
 export var osmPathHighwayTagValues = {
     path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true, ladder: true
@@ -277,3 +306,19 @@ export var osmMutuallyExclusiveTagPairs = [
     ['addr:nostreet', 'addr:street']
 ];
 
+
+/**
+ * @param {Tags} vertexTags @param {Tags} wayTags
+ * returns true if iD should render the `direction` tag for
+ * this vertex+way combination.
+ */
+export function osmShouldRenderDirection(vertexTags, wayTags) {
+    if (vertexTags.highway || vertexTags.traffic_sign || vertexTags.traffic_calming || vertexTags.barrier) {
+        // allowed on roads and tramways
+        return !!(wayTags.highway || wayTags.railway);
+    }
+    if (vertexTags.railway) return !!wayTags.railway;
+    if (vertexTags.waterway) return !!wayTags.waterway;
+    if (vertexTags.cycleway === 'asl') return !!wayTags.highway;
+    return true;
+}

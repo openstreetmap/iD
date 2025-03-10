@@ -127,14 +127,32 @@ export function uiFeatureList(context) {
             var locationMatch = sexagesimal.pair(q.toUpperCase()) || dmsMatcher(q);
 
             if (locationMatch) {
-                var loc = [Number(locationMatch[0]), Number(locationMatch[1])];
-                result.push({
-                    id: -1,
-                    geometry: 'point',
-                    type: t('inspector.location'),
-                    name: dmsCoordinatePair([loc[1], loc[0]]),
-                    location: loc
-                });
+                const latLon = [Number(locationMatch[0]), Number(locationMatch[1])];
+                const lonLat = [latLon[1], latLon[0]];  // also try swapped order
+
+                const isLatLonValid = latLon[0] >= -90 && latLon[0] <= 90 && latLon[1] >= -180 && latLon[1] <= 180;
+                let   isLonLatValid = lonLat[0] >= -90 && lonLat[0] <= 90 && lonLat[1] >= -180 && lonLat[1] <= 180;
+                isLonLatValid &&= !q.match(/[NSEW]/i);
+                isLonLatValid &&= lonLat[0] !== lonLat[1];
+
+                if (isLatLonValid) {
+                    result.push({
+                        id: latLon[0] + '/' + latLon[1],
+                        geometry: 'point',
+                        type: t('inspector.location'),
+                        name: dmsCoordinatePair([latLon[1], latLon[0]]),
+                        location: latLon
+                    });
+                }
+                if (isLonLatValid) {
+                    result.push({
+                        id: lonLat[0] + '/' + lonLat[1],
+                        geometry: 'point',
+                        type: t('inspector.location'),
+                        name: dmsCoordinatePair([lonLat[1], lonLat[0]]),
+                        location: lonLat
+                    });
+                }
             }
 
             // A location search takes priority over an ID search
@@ -285,18 +303,16 @@ export function uiFeatureList(context) {
             list.selectAll('.geocode-item')
                 .style('display', (value && _geocodeResults === undefined) ? 'block' : 'none');
 
-            list.selectAll('.feature-list-item')
-                .data([-1])
-                .remove();
-
             var items = list.selectAll('.feature-list-item')
                 .data(results, function(d) { return d.id; });
 
             var enter = items.enter()
                 .insert('button', '.geocode-item')
                 .attr('class', 'feature-list-item')
-                .on('mouseover', mouseover)
-                .on('mouseout', mouseout)
+                .on('pointerenter', mouseover)
+                .on('pointerleave', mouseout)
+                .on('focus', mouseover)
+                .on('blur', mouseout)
                 .on('click', click);
 
             var label = enter
@@ -326,22 +342,24 @@ export function uiFeatureList(context) {
                 .transition()
                 .style('opacity', 1);
 
-            items.order();
-
             items.exit()
+                .each(d => mouseout(undefined, d))
                 .remove();
+
+            items.merge(enter)
+                .order();
         }
 
 
         function mouseover(d3_event, d) {
-            if (d.id === -1) return;
+            if (d.location !== undefined) return;
 
             utilHighlightEntities([d.id], true, context);
         }
 
 
         function mouseout(d3_event, d) {
-            if (d.id === -1) return;
+            if (d.location !== undefined) return;
 
             utilHighlightEntities([d.id], false, context);
         }
@@ -365,7 +383,7 @@ export function uiFeatureList(context) {
                 const noteId = d.id.replace(/\D/g, '');
 
                 // load note
-                context.zoomToNote(noteId);
+                context.moveToNote(noteId);
             } else {
                 // download, zoom to, and select the entity with the given ID
                 context.zoomToEntity(d.id);

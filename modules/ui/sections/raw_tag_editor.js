@@ -372,7 +372,6 @@ export function uiSectionRawTagEditor(id, context) {
         });
 
         var tagDiff = utilTagDiff(_tags, newTags);
-        if (!tagDiff.length) return;
 
         _pendingChange  = _pendingChange || {};
 
@@ -391,6 +390,7 @@ export function uiSectionRawTagEditor(id, context) {
 
         if (Object.keys(_pendingChange).length === 0) {
             _pendingChange = null;
+            section.reRender();
             return;
         }
 

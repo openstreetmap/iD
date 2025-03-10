@@ -34,18 +34,9 @@ async function fetchAvailableLayers() {
 
   const urlForRequest = owsEndpoint + utilQsString(params);
   const response = await d3_xml(urlForRequest);
-  const xPathSelector = '/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType/wfs:Name';
   const regexMatcher = /^vegbilder_1_0:Vegbilder(?<image_type>_360)?_(?<year>\d{4})$/;
-  const NSResolver = response.createNSResolver(response);
-  const l = response.evaluate(
-    xPathSelector,
-    response,
-    NSResolver,
-    XPathResult.ANY_TYPE
-    );
-  let node;
   const availableLayers = [];
-  while ( (node = l.iterateNext()) !== null ) {
+  for (const node of response.querySelectorAll('FeatureType > Name')) {
     const match = node.textContent?.match(regexMatcher);
     if (match) {
       availableLayers.push({

@@ -5,8 +5,9 @@ import { select as d3_select } from 'd3-selection';
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect, modeSelectNote } from '../modes';
-import { utilDisplayLabel, utilObjectOmit, utilQsString, utilStringQs } from '../util';
+import { utilObjectOmit, utilQsString, utilStringQs } from '../util';
 import { utilArrayIdentical } from '../util/array';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { t } from '../core/localizer';
 import { prefs } from '../core/preferences';
 
@@ -195,7 +196,7 @@ export function behaviorHash(context) {
             const selectIds = q.id.split(',');
             if (selectIds.length === 1 && selectIds[0].startsWith('note/')) {
                 const noteId = selectIds[0].split('/')[1];
-                context.zoomToNote(noteId, !q.map);
+                context.moveToNote(noteId, !q.map);
             } else {
                 context.zoomToEntities(
                     // convert ids to short form id: node/123 -> n123

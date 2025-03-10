@@ -6,7 +6,7 @@ import RBush from 'rbush';
 
 import { localizer } from '../core/localizer';
 import { geoExtent, geoScaleToZoom } from '../geo';
-import { utilArrayUnion, utilQsString, utilRebind, utilSetTransform, utilStringQs, utilTiler } from '../util';
+import { utilQsString, utilRebind, utilSetTransform, utilStringQs, utilTiler } from '../util';
 
 
 var apibase = 'https://kartaview.org';
@@ -517,29 +517,23 @@ export default {
                 .classed('currentView', false);
         }
 
-        var hoveredImageKey = hovered && hovered.key;
-        var hoveredSequenceKey = this.getSequenceKeyForImage(hovered);
-        var hoveredSequence = hoveredSequenceKey && _oscCache.sequences[hoveredSequenceKey];
-        var hoveredImageKeys = (hoveredSequence && hoveredSequence.images.map(function (d) { return d.key; })) || [];
+        var hoveredImageId = hovered && hovered.key;
+        var hoveredSequenceId = this.getSequenceKeyForImage(hovered);
 
         var viewer = context.container().select('.photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
-        var selectedImageKey = selected && selected.key;
-        var selectedSequenceKey = this.getSequenceKeyForImage(selected);
-        var selectedSequence = selectedSequenceKey && _oscCache.sequences[selectedSequenceKey];
-        var selectedImageKeys = (selectedSequence && selectedSequence.images.map(function (d) { return d.key; })) || [];
+        var selectedImageId = selected && selected.key;
+        var selectedSequenceId = this.getSequenceKeyForImage(selected);
 
         // highlight sibling viewfields on either the selected or the hovered sequences
-        var highlightedImageKeys = utilArrayUnion(hoveredImageKeys, selectedImageKeys);
-
         context.container().selectAll('.layer-kartaview .viewfield-group')
-            .classed('highlighted', function(d) { return highlightedImageKeys.indexOf(d.key) !== -1; })
-            .classed('hovered', function(d) { return d.key === hoveredImageKey; })
-            .classed('currentView', function(d) { return d.key === selectedImageKey; });
+            .classed('highlighted', function(d) { return d.sequence_id === selectedSequenceId || d.id === hoveredImageId; })
+            .classed('hovered', function(d) { return d.key === hoveredImageId; })
+            .classed('currentView', function(d) { return d.key === selectedImageId; });
 
         context.container().selectAll('.layer-kartaview .sequence')
-            .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceKey; })
-            .classed('currentView', function(d) { return d.properties.key === selectedSequenceKey; });
+            .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceId; })
+            .classed('currentView', function(d) { return d.properties.key === selectedSequenceId; });
 
         // update viewfields if needed
         context.container().selectAll('.layer-kartaview .viewfield-group .viewfield')
@@ -547,7 +541,7 @@ export default {
 
         function viewfieldPath() {
             var d = this.parentNode.__data__;
-            if (d.pano && d.key !== selectedImageKey) {
+            if (d.pano && d.key !== selectedImageId) {
                 return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
                 return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';

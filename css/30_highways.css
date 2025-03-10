@@ -224,21 +224,36 @@ path.line.shadow.tag-highway-living_street,
 path.line.shadow.tag-highway-bus_guideway,
 path.line.shadow.tag-highway-service,
 path.line.shadow.tag-highway-track,
-path.line.shadow.tag-highway-road {
+path.line.shadow.tag-highway-road,
+path.line.shadow.tag-highway-motorway_link,
+path.line.shadow.tag-highway-trunk_link,
+path.line.shadow.tag-highway-primary_link,
+path.line.shadow.tag-highway-secondary_link,
+path.line.shadow.tag-highway-tertiary_link {
     stroke-width: 16;
 }
 path.line.casing.tag-highway-living_street,
 path.line.casing.tag-highway-bus_guideway,
 path.line.casing.tag-highway-service,
 path.line.casing.tag-highway-track,
-path.line.casing.tag-highway-road {
+path.line.casing.tag-highway-road,
+path.line.casing.tag-highway-motorway_link,
+path.line.casing.tag-highway-trunk_link,
+path.line.casing.tag-highway-primary_link,
+path.line.casing.tag-highway-secondary_link,
+path.line.casing.tag-highway-tertiary_link {
     stroke-width: 7;
 }
 path.line.stroke.tag-highway-living_street,
 path.line.stroke.tag-highway-bus_guideway,
 path.line.stroke.tag-highway-service,
 path.line.stroke.tag-highway-track,
-path.line.stroke.tag-highway-road {
+path.line.stroke.tag-highway-road,
+path.line.stroke.tag-highway-motorway_link,
+path.line.stroke.tag-highway-trunk_link,
+path.line.stroke.tag-highway-primary_link,
+path.line.stroke.tag-highway-secondary_link,
+path.line.stroke.tag-highway-tertiary_link {
     stroke-width: 5;
 }
 path.line.casing.tag-highway-service.tag-service-driveway {
@@ -280,21 +295,36 @@ path.line.stroke.tag-highway-steps {
 .low-zoom path.line.shadow.tag-highway-bus_guideway,
 .low-zoom path.line.shadow.tag-highway-service,
 .low-zoom path.line.shadow.tag-highway-track,
-.low-zoom path.line.shadow.tag-highway-road {
+.low-zoom path.line.shadow.tag-highway-road,
+.low-zoom path.line.shadow.tag-highway-motorway_link,
+.low-zoom path.line.shadow.tag-highway-trunk_link,
+.low-zoom path.line.shadow.tag-highway-primary_link,
+.low-zoom path.line.shadow.tag-highway-secondary_link,
+.low-zoom path.line.shadow.tag-highway-tertiary_link {
     stroke-width: 12;
 }
 .low-zoom path.line.casing.tag-highway-living_street,
 .low-zoom path.line.casing.tag-highway-bus_guideway,
 .low-zoom path.line.casing.tag-highway-service,
 .low-zoom path.line.casing.tag-highway-track,
-.low-zoom path.line.casing.tag-highway-road {
+.low-zoom path.line.casing.tag-highway-road,
+.low-zoom path.line.casing.tag-highway-motorway_link,
+.low-zoom path.line.casing.tag-highway-trunk_link,
+.low-zoom path.line.casing.tag-highway-primary_link,
+.low-zoom path.line.casing.tag-highway-secondary_link,
+.low-zoom path.line.casing.tag-highway-tertiary_link {
     stroke-width: 5;
 }
 .low-zoom path.line.stroke.tag-highway-living_street,
 .low-zoom path.line.stroke.tag-highway-bus_guideway,
 .low-zoom path.line.stroke.tag-highway-service,
 .low-zoom path.line.stroke.tag-highway-track,
-.low-zoom path.line.stroke.tag-highway-road {
+.low-zoom path.line.stroke.tag-highway-road,
+.low-zoom path.line.stroke.tag-highway-motorway_link,
+.low-zoom path.line.stroke.tag-highway-trunk_link,
+.low-zoom path.line.stroke.tag-highway-primary_link,
+.low-zoom path.line.stroke.tag-highway-secondary_link,
+.low-zoom path.line.stroke.tag-highway-tertiary_link {
     stroke-width: 3;
 }
 .low-zoom  path.line.casing.tag-highway-service.tag-service-driveway {
@@ -408,25 +438,21 @@ path.line.casing.tag-road {
 }
 
 /* service roads */
-path.line.stroke.tag-highway-service,
-path.line.stroke.tag-service {
+path.line.stroke.tag-highway-service {
     stroke: #fff;
 }
-path.line.casing.tag-highway-service,
-path.line.casing.tag-service {
+path.line.casing.tag-highway-service {
     stroke: #666;
 }
 
 /* special service roads and bus guideways */
 /* with `service=* tag`  (e.g. parking_aisle, alley, drive-through) */
 path.line.stroke.tag-highway-bus_guideway,
-path.line.stroke.tag-highway-service.tag-service,
-path.line.stroke.tag-service.tag-service {
+path.line.stroke.tag-highway-service.tag-service {
     stroke: #dca;
 }
 path.line.casing.tag-highway-bus_guideway,
-path.line.casing.tag-highway-service.tag-service,
-path.line.casing.tag-service.tag-service {
+path.line.casing.tag-highway-service.tag-service {
     stroke: #666;
 }
 
@@ -515,7 +541,7 @@ path.line.stroke.tag-highway-path.tag-bridge-boardwalk {
     fill: #fff;
 }
 path.line.stroke.tag-highway-footway,
-path.line.stroke.tag-highway_bus_stop,
+path.line.stroke.tag-highway-bus_stop,
 .preset-icon-container path.casing.tag-highway-footway {
     stroke: #988;
 }

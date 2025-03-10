@@ -1,7 +1,7 @@
 import { t, localizer } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
 import { operationDelete } from '../operations/delete';
-import { utilDisplayLabel } from '../util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';

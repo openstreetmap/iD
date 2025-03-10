@@ -130,7 +130,7 @@ export function uiPhotoviewer(context) {
                     .attr('class', 'set-photo-from-viewer')
                     .call(svgIcon('#iD-icon-plus'))
                     .call(uiTooltip()
-                        .title(() => t.append('inspector.set_photo_from_viewer'))
+                        .title(() => t.append('inspector.set_photo_from_viewer.enable'))
                         .placement('right')
                     );
 
@@ -156,7 +156,8 @@ export function uiPhotoviewer(context) {
                 if (entities.map(entity => entity.tags.mapillary)
                     .every(value => value === activeImage?.id)) {
                     buttonDisable('already_set');
-                } else if (activeImage && entities.map(entity => entity.extent().center())
+                } else if (activeImage && entities
+                    .map(entity => entity.extent(context.graph()).center())
                     .every(loc => geoSphericalDistance(loc, activeImage.loc) > 100)) {
                     buttonDisable('too_far');
                 } else {
@@ -209,13 +210,17 @@ export function uiPhotoviewer(context) {
                 var mapSize = context.map().dimensions();
 
                 if (resizeOnX) {
-                    var maxWidth = mapSize[0];
-                    var newWidth = clamp((startWidth + d3_event.clientX - startX), minWidth, maxWidth);
+                    var mapWidth = mapSize[0];
+                    const viewerMargin = parseInt(d3_select('.photoviewer').style('margin-left'), 10);
+                    var newWidth = clamp((startWidth + d3_event.clientX - startX), minWidth, mapWidth - viewerMargin * 2);
                     target.style('width', newWidth + 'px');
                 }
 
                 if (resizeOnY) {
-                    var maxHeight = mapSize[1] - 90;  // preserve space at top/bottom of map
+                    const menuHeight = utilGetDimensions(d3_select('.top-toolbar'))[1] +
+                                       utilGetDimensions(d3_select('.map-footer'))[1];
+                    const viewerMargin = parseInt(d3_select('.photoviewer').style('margin-bottom'), 10);
+                    var maxHeight = mapSize[1] - menuHeight - viewerMargin * 2;  // preserve space at top/bottom of map
                     var newHeight = clamp((startHeight + startY - d3_event.clientY), minHeight, maxHeight);
                     target.style('height', newHeight + 'px');
                 }
@@ -266,13 +271,15 @@ export function uiPhotoviewer(context) {
         var photoviewer = context.container().select('.photoviewer');
         var content = context.container().select('.main-content');
         var mapDimensions = utilGetDimensions(content, true);
-        // shrink photo viewer if it is too big
-        // (-90 preserves space at top and bottom of map used by menus)
+        const menuHeight = utilGetDimensions(d3_select('.top-toolbar'))[1] +
+                           utilGetDimensions(d3_select('.map-footer'))[1];
+        const viewerMargin = parseInt(d3_select('.photoviewer').style('margin-bottom'), 10);
+        // shrink photo viewer if it is too big (preserves space at top and bottom of map used by menus)
         var photoDimensions = utilGetDimensions(photoviewer, true);
-        if (photoDimensions[0] > mapDimensions[0] || photoDimensions[1] > (mapDimensions[1] - 90)) {
+        if (photoDimensions[0] > mapDimensions[0] || photoDimensions[1] > (mapDimensions[1] - menuHeight - viewerMargin * 2)) {
             var setPhotoDimensions = [
                 Math.min(photoDimensions[0], mapDimensions[0]),
-                Math.min(photoDimensions[1], mapDimensions[1] - 90),
+                Math.min(photoDimensions[1], mapDimensions[1] - menuHeight - viewerMargin * 2),
             ];
 
             photoviewer

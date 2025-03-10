@@ -39,7 +39,7 @@ export function coreFileFetcher() {
     'preset_defaults': presetsCdnUrl + 'dist/preset_defaults.min.json',
     'preset_fields': presetsCdnUrl + 'dist/fields.min.json',
     'preset_presets': presetsCdnUrl + 'dist/presets.min.json',
-    'wmf_sitematrix': wmfSitematrixCdnUrl.replace('{version}', '0.1') + 'wikipedia.min.json'
+    'wmf_sitematrix': wmfSitematrixCdnUrl.replace('{version}', '0.2') + 'data/wikipedia.min.json'
   };
 
   let _cachedData = {};
@@ -74,8 +74,10 @@ export function coreFileFetcher() {
   function getUrl(url, which) {
     let prom = _inflight[url];
     if (!prom) {
-      _inflight[url] = prom = fetch(url)
+      _inflight[url] = prom = (window.VITEST ? import(`../${url}`) : fetch(url))
         .then(response => {
+          if (window.VITEST) return response.default;
+
           if (!response.ok || !response.json) {
             throw new Error(response.status + ' ' + response.statusText);
           }
