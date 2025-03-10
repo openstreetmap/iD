@@ -138,19 +138,19 @@ export function svgKartaviewImages(projection, context, dispatch) {
 
         if (fromDate) {
             var fromTimestamp = new Date(fromDate).getTime();
-            sequences = sequences.filter(function(image) {
-                return new Date(image.properties.captured_at).getTime() >= fromTimestamp;
+            sequences = sequences.filter(function(sequence) {
+                return new Date(sequence.properties.captured_at).getTime() >= fromTimestamp;
             });
         }
         if (toDate) {
             var toTimestamp = new Date(toDate).getTime();
-            sequences = sequences.filter(function(image) {
-                return new Date(image.properties.captured_at).getTime() <= toTimestamp;
+            sequences = sequences.filter(function(sequence) {
+                return new Date(sequence.properties.captured_at).getTime() <= toTimestamp;
             });
         }
         if (usernames) {
-            sequences = sequences.filter(function(image) {
-                return usernames.indexOf(image.properties.captured_by) !== -1;
+            sequences = sequences.filter(function(sequence) {
+                return usernames.indexOf(sequence.properties.captured_by) !== -1;
             });
         }
 
@@ -175,6 +175,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
             sequences = filterSequences(sequences);
             images = filterImages(images);
         }
+        dispatch.call('photoDatesChanged', this, 'kartaview', [...images.map(p => p.captured_at), ...sequences.map(s => s.properties.captured_at)]);
 
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
@@ -276,8 +277,11 @@ export function svgKartaviewImages(projection, context, dispatch) {
                 update();
                 service.loadImages(projection);
             } else {
+                dispatch.call('photoDatesChanged', this, 'kartaview', []);
                 editOff();
             }
+        } else {
+            dispatch.call('photoDatesChanged', this, 'kartaview', []);
         }
     }
 

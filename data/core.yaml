@@ -905,11 +905,10 @@ en:
       title: "Username"
       tooltip: "Show only photos by this user"
     age_slider_filter:
-      title: "Year Slider"
-      tooltip: "Select oldest photo year"
-      one_year: "Last year"
-      three_year: "Three years"
-      all: "Show all"
+      title: "Date Range"
+      tooltip: "Shows only photos that are newer than the selected date"
+      label_all: "All photos visible."
+      label_date: "Showing photos newer than {date}."
   feature:
     points:
       description: Points

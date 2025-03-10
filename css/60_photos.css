@@ -395,12 +395,12 @@ label.panoramax-hd {
     width: 100%;
 }
 
-.year-datalist {
+.date-slider-label {
     display: flex;
     justify-content: space-between;
 }
 
-.list-option-date-slider{
+.list-option-date-slider {
     direction: rtl;
     width: 100%;
 }

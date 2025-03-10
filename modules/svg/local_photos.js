@@ -2,6 +2,7 @@ import { select as d3_select } from 'd3-selection';
 import exifr from 'exifr';
 import { isArray, isNumber } from 'lodash-es';
 
+import { localizer } from '../core/localizer';
 import { utilDetect } from '../util/detect';
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import planePhotoFrame from '../services/plane_photo';
@@ -87,7 +88,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             if (image.date) {
                 attribution
                     .append('span')
-                    .text(image.date.toLocaleString());
+                    .text(image.date.toLocaleString(localizer.localeCode()));
             }
             if (image.name) {
                 attribution

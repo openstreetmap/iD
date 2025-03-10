@@ -180,6 +180,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         //    "is_pano":false,
         //    "sequence_id":"zcyumxorbza3dq3twjybam"
         //    }
+        dispatch.call('photoDatesChanged', this, 'mapillary', [...images.map(p => p.captured_at), ...sequences.map(s => s.properties.captured_at)]);
 
         images = filterImages(images);
         sequences = filterSequences(sequences, service);
@@ -293,8 +294,11 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 update();
                 service.loadImages(projection);
             } else {
+                dispatch.call('photoDatesChanged', this, 'mapillary', []);
                 editOff();
             }
+        } else {
+            dispatch.call('photoDatesChanged', this, 'mapillary', []);
         }
     }
 

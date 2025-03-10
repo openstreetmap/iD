@@ -24,6 +24,8 @@ export function uiSectionPhotoOverlays(context) {
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
+    const photoDates = {};
+
     /**
      * Calls all draw function
      * @param {*} selection Current HTML selection
@@ -39,11 +41,10 @@ export function uiSectionPhotoOverlays(context) {
             .call(drawPhotoItems)
             .call(drawPhotoTypeItems)
             .call(drawDateSlider)
-            .call(drawDateFilter)
             .call(drawUsernameFilter)
             .call(drawLocalPhotos);
     }
-    
+
     /**
      * Draws the streetlevels in the right panel
      */
@@ -204,85 +205,10 @@ export function uiSectionPhotoOverlays(context) {
     }
 
     /**
-     * Draws the date filter in the right panel
-     */
-    function drawDateFilter(selection) {
-        var data = context.photos().dateFilters();
-
-        function filterEnabled(d) {
-            return context.photos().dateFilterValue(d);
-        }
-
-        var ul = selection
-            .selectAll('.layer-list-date-filter')
-            .data([0]);
-
-        ul.exit()
-            .remove();
-
-        ul = ul.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-list-date-filter')
-            .merge(ul);
-
-        var li = ul.selectAll('.list-item-date-filter')
-            .data(context.photos().shouldFilterByDate() ? data : []);
-
-        li.exit()
-            .remove();
-
-        var liEnter = li.enter()
-            .append('li')
-            .attr('class', 'list-item-date-filter');
-
-        var labelEnter = liEnter
-            .append('label')
-            .each(function(d) {
-                d3_select(this)
-                    .call(uiTooltip()
-                        .title(() => t.append('photo_overlays.date_filter.' + d + '.tooltip'))
-                        .placement('top')
-                    );
-            });
-
-        labelEnter
-            .append('span')
-            .each(function(d) {
-                t.append('photo_overlays.date_filter.' + d + '.title')(d3_select(this));
-            });
-
-        labelEnter
-            .append('input')
-            .attr('type', 'date')
-            .attr('class', 'list-item-input')
-            .attr('placeholder', t('units.year_month_day'))
-            .call(utilNoAuto)
-            .each(function(d) {
-                utilGetSetValue(d3_select(this), context.photos().dateFilterValue(d) || '');
-            })
-            .on('change', function(d3_event, d) {
-                var value = utilGetSetValue(d3_select(this)).trim();
-                context.photos().setDateFilter(d, value, true);
-                // reload the displayed dates
-                li.selectAll('input')
-                    .each(function(d) {
-                        utilGetSetValue(d3_select(this), context.photos().dateFilterValue(d) || '');
-                    });
-            });
-
-        li = li
-            .merge(liEnter)
-            .classed('active', filterEnabled);
-    }
-
-    /**
-     * Draws the date sliderbar filter in the right panel
+     * Draws the date slider filter in the right panel
      */
     function drawDateSlider(selection){
-
-        function filterEnabled() {
-            return context.photos().yearSliderValue();
-        }
+        const now = +new Date();
 
         var ul = selection
             .selectAll('.layer-list-date-slider')
@@ -318,7 +244,7 @@ export function uiSectionPhotoOverlays(context) {
 
         labelEnter
             .append('span')
-            .attr('class', 'yearSliderSpan')
+            .attr('class', 'dateSliderSpan')
             .call(t.append('photo_overlays.age_slider_filter.title'));
 
         let sliderWrap = labelEnter
@@ -328,54 +254,85 @@ export function uiSectionPhotoOverlays(context) {
         sliderWrap
             .append('input')
             .attr('type', 'range')
-            .attr('min', 1)
-            .attr('max', 5)
-            .attr('list', 'dateValues')
-            .attr('value', yearSliderValue)
+            .attr('min', 0)
+            .attr('max', 1)
+            .attr('step', 0.001)
+            .attr('list', 'photo-overlay-data-range')
+            .attr('value', dateSliderValue)
             .attr('class', 'list-option-date-slider')
             .call(utilNoAuto)
             .on('change', function() {
                 let value = d3_select(this).property('value');
-                context.photos().setFromYearFilter(value, true);
+                setFromYearFilter(value, true);
             });
 
-            let datalist = sliderWrap.append('datalist')
-                .attr('id', 'dateValues')
-                .attr('class', 'year-datalist');
+        sliderWrap.append('div')
+            .attr('class', 'date-slider-label');
 
-            datalist
-                .append('option')
-                .attr('value', 5)
-                .call(t.append('photo_overlays.age_slider_filter.all'));
+        selection.select('.date-slider-label')
+            .call(dateSliderValue() === 1
+                ? t.addOrUpdate('photo_overlays.age_slider_filter.label_all')
+                : t.addOrUpdate('photo_overlays.age_slider_filter.label_date', {
+                    date: new Date(now - Math.pow(dateSliderValue(), 1.45) * 10 * 365.25 * 86400 * 1000).toLocaleDateString(localizer.localeCode()) }));
 
-            datalist
-                .append('option')
-                .attr('value', 4);
+        sliderWrap.append('datalist')
+            .attr('class', 'date-slider-values')
+            .attr('id', 'photo-overlay-data-range');
 
-            datalist
-                .append('option')
-                .attr('value', 3)
-                .call(t.append('photo_overlays.age_slider_filter.three_year'));
+        const dateTicks = new Set();
+        for (const dates of Object.values(photoDates)) {
+            dates.forEach(date => {
+                dateTicks.add(Math.round(1000 * Math.pow((now - date) / (10 * 365.25 * 86400 * 1000), 1/1.45)) / 1000);
+            });
+        }
+        const ticks = selection.select('datalist.date-slider-values').selectAll('option')
+            .data([...dateTicks].concat([1, 0]));
+        ticks.exit()
+            .remove();
+        ticks.enter()
+            .append('option')
+            .merge(ticks)
+            .attr('value', d => d);
 
-            datalist
-                .append('option')
-                .attr('value', 2);
-
-            datalist
-                .append('option')
-                .attr('value', 1)
-                .call(t.append('photo_overlays.age_slider_filter.one_year'));
 
         li
             .merge(liEnter)
             .classed('active', filterEnabled);
 
-        function yearSliderValue() {
-            var sliderValue = context.photos().yearSliderValue();
-            if (sliderValue) return sliderValue;
-            return 5;
+        function dateSliderValue() {
+            if (context.photos().fromDate()) {
+                let date = +new Date(context.photos().fromDate());
+                return Math.pow((now - date) / (10 * 365.25 * 86400 * 1000), 1/1.45);
+            } else return 1;
+        }
+
+        function filterEnabled() {
+            return !!context.photos().fromDate();
         }
     }
+
+    /**
+     * Util function to set the slider date filter
+     * @param {Number} value The slider value
+     * @param {Boolean} updateUrl whether the URL should update or not
+     */
+    function setFromYearFilter(value, updateUrl){
+        value = +value;
+
+        if (value !== 1) {
+            let days = 365.25 * (Math.pow(value + 0.001, 1.45)) * 10;
+            var fromDate = new Date();
+            fromDate.setDate(fromDate.getDate() - days);
+            var dd = String(fromDate.getDate()).padStart(2, '0');
+            var mm = String(fromDate.getMonth() + 1).padStart(2, '0');
+            var yyyy = fromDate.getFullYear();
+
+            fromDate = mm + '/' + dd + '/' + yyyy;
+            context.photos().setDateFilter('fromDate', fromDate, updateUrl);
+        } else {
+            context.photos().setDateFilter('fromDate', null, updateUrl);
+        }
+    };
 
     /**
      * Draws the username filter in the right panel
@@ -466,7 +423,7 @@ export function uiSectionPhotoOverlays(context) {
     /**
      * Set the selected layer
      * @param {string} which Id of the selected layer
-     * @param {boolean} enabled 
+     * @param {boolean} enabled
      */
     function setLayer(which, enabled) {
         var layer = layers.layer(which);
@@ -590,6 +547,10 @@ export function uiSectionPhotoOverlays(context) {
 
     context.layers().on('change.uiSectionPhotoOverlays', section.reRender);
     context.photos().on('change.uiSectionPhotoOverlays', section.reRender);
+    context.layers().on('photoDatesChanged.uiSectionPhotoOverlays', function(service, dates) {
+        photoDates[service] = dates.map(date => +new Date(date));
+        section.reRender();
+    });
     context.keybinding().on('⇧P', toggleStreetSide);
 
     context.map()

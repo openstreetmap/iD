@@ -13,7 +13,6 @@ export function rendererPhotos(context) {
     var _dateFilters = ['fromDate', 'toDate'];
     var _fromDate;
     var _toDate;
-    var _yearSliderValue;
     var _usernames;
 
     function photos() {}
@@ -54,13 +53,6 @@ export function rendererPhotos(context) {
      */
     photos.dateFilters = function() {
         return _dateFilters;
-    };
-
-    /**
-     * @returns The year date filter value
-     */
-    photos.yearSliderValue = function() {
-        return _yearSliderValue;
     };
 
     photos.dateFilterValue = function(val) {
@@ -129,34 +121,6 @@ export function rendererPhotos(context) {
 
     /**
      * Util function to set the slider date filter
-     * @param {*} year The slider value
-     * @param {boolean} updateUrl whether the URL should update or not
-     */
-    photos.setFromYearFilter = function(year, updateUrl){
-
-        _yearSliderValue = year;
-
-        if (year !== '5') {
-            let days = 365 * year;
-            var fromDate = new Date();
-            fromDate.setDate(fromDate.getDate() - days);
-            var dd = String(fromDate.getDate()).padStart(2, '0');
-            var mm = String(fromDate.getMonth() + 1).padStart(2, '0');
-            var yyyy = fromDate.getFullYear();
-
-            fromDate = mm + '/' + dd + '/' + yyyy;
-            photos.setDateFilter('fromDate', fromDate, updateUrl);
-        } else {
-            photos.setDateFilter('fromDate', null, updateUrl);
-        }
-
-        if (updateUrl) {
-            setUrlFilterValue('year_slider', year);
-        }
-    };
-
-    /**
-     * Util function to set the slider date filter
      * @param {*} val Either 'panoramic' or 'flat'
      * @param {boolean} updateUrl Whether the URL should update or not
      */
@@ -205,13 +169,6 @@ export function rendererPhotos(context) {
     }
 
     /**
-     * @returns If the Date filter should be drawn
-     */
-    photos.shouldFilterByDate = function() {
-        return false;
-    };
-
-    /**
      * @returns If the Date Slider filter should be drawn
      */
     photos.shouldFilterDateBySlider = function(){
@@ -223,6 +180,7 @@ export function rendererPhotos(context) {
      * @returns If the Photo Type filter should be drawn
      */
     photos.shouldFilterByPhotoType = function() {
+        // todo: fix
         return showsLayer('mapillary') ||
             (showsLayer('streetside') && showsLayer('kartaview')) || showsLayer('vegbilder') || showsLayer('panoramax');
     };
@@ -271,9 +229,6 @@ export function rendererPhotos(context) {
             parts = /^(.*)[–_](.*)$/g.exec(hash.photo_dates.trim());
             this.setDateFilter('fromDate', parts && parts.length >= 2 && parts[1], false);
             this.setDateFilter('toDate', parts && parts.length >= 3 && parts[2], false);
-        }
-        if (hash.year_slider){
-            this.setFromYearFilter(hash.year_slider, false);
         }
         if (hash.photo_username) {
             this.setUsernameFilter(hash.photo_username, false);

@@ -37,8 +37,8 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     }
 
     /**
-     * Filters the images given the filters on the right panel 
-     * @param {*} images 
+     * Filters the images given the filters on the right panel
+     * @param {*} images
      * @returns array of filtered images
      */
     async function filterImages(images) {
@@ -87,8 +87,8 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     }
 
     /**
-     * Filters the sequences given the filters on the right panel 
-     * @param {*} sequences 
+     * Filters the sequences given the filters on the right panel
+     * @param {*} sequences
      * @returns array of filtered sequences
      */
     async function filterSequences(sequences) {
@@ -233,6 +233,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         const service = getService();
         let sequences = (service ? service.sequences(projection, zoom) : []);
         let images = (service && zoom >= imageMinZoom ? service.images(projection) : []);
+        dispatch.call('photoDatesChanged', this, 'panoramax', [...images.map(p => p.capture_time), ...sequences.map(s => s.properties.date)]);
 
         let isHidden = d3_select('.photo-wrapper.panoramax-wrapper.hide').size();
 
@@ -383,10 +384,13 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                     service.loadLines(projection, zoom);
                 } else {
                     editOff();
+                    dispatch.call('photoDatesChanged', this, 'panoramax', []);
                 }
             } else {
                 editOff();
             }
+        } else {
+            dispatch.call('photoDatesChanged', this, 'panoramax', []);
         }
     }
 
