@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # unreleased (v2.33.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Allow searching for coordinates in localized number format in search box ([#10805])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -49,6 +50,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 
+[#10805]: https://github.com/openstreetmap/iD/pull/10805
 [#10299]: https://github.com/openstreetmap/iD/issues/10299
 [#10843]: https://github.com/openstreetmap/iD/pull/10843
 
