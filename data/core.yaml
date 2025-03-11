@@ -2408,8 +2408,8 @@ en:
         zoom_to: "Zoom to selected features"
       vertex_selected:
         title: "With node selected"
-        previous: "Jump to previous node"
-        next: "Jump to next node"
+        previous: "Jump to previous node / photo"
+        next: "Jump to next node / photo"
         first: "Jump to first node"
         last: "Jump to last node"
         parent: "Select parent way"
