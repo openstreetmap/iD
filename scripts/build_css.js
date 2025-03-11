@@ -4,7 +4,7 @@ const concat = require('concat-files');
 const glob = require('glob');
 const fs = require('fs');
 const postcss = require('postcss');
-const prepend = require('postcss-selector-prepend');
+const prepend = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 
 let _currBuild = null;
@@ -35,7 +35,7 @@ function buildCSS() {
         const css = fs.readFileSync('dist/iD.css', 'utf8');
         return postcss([
             autoprefixer,
-            prepend({ selector: '.ideditor ' })
+            prepend({ prefix: '.ideditor', exclude: [ /^\.ideditor(\[.*?\])*/ ] })
           ])
           .process(css, { from: 'dist/iD.css', to: 'dist/iD.css' });
       })

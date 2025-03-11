@@ -114,9 +114,10 @@ export function uiFieldAddress(field, context) {
     }
 
     function getNearPostcodes() {
-        return [... new Set([]
+        const postcodes = []
             .concat(getNearValues('postcode'))
-            .concat(getNear(d => d.tags.postal_code, 'postcode', 200, 'postal_code')))];
+            .concat(getNear(d => d.tags.postal_code, 'postcode', 200, 'postal_code'));
+        return utilArrayUniqBy(postcodes, item => item.value);
     }
 
     function getNearValues(key) {
@@ -187,10 +188,10 @@ export function uiFieldAddress(field, context) {
             .enter()
             .append('input')
             .property('type', 'text')
-            .call(updatePlaceholder)
             .attr('class', function (d) { return 'addr-' + d.id; })
             .call(utilNoAuto)
             .each(addDropdown)
+            .call(updatePlaceholder)
             .style('width', function (d) { return d.width * 100 + '%'; });
 
 

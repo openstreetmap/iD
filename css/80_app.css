@@ -2342,15 +2342,15 @@ input.date-selector {
 
 /* Field - Changeset Comment
 ------------------------------------------------------- */
-.form-field-comment:not(.present) #preset-input-comment {
-    border-color: rgb(230, 100, 100);
+.form-field-comment:not(.present) textarea {
+    border-color: rgb(160, 160, 160);
 }
 .form-field-comment:not(.present) .field-label {
-    border-color: rgb(230, 100, 100);
-    background: rgba(230, 100, 100, 0.2);
+    border-color: rgb(160, 160, 160);
+    background-color: rgba(160, 160, 160, 0.2);
 }
 .form-field-comment:not(.present) button {
-    border-color: rgb(230, 100, 100);
+    border-color: rgb(160, 160, 160);
 }
 
 

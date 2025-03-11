@@ -196,7 +196,7 @@ export function behaviorHash(context) {
             const selectIds = q.id.split(',');
             if (selectIds.length === 1 && selectIds[0].startsWith('note/')) {
                 const noteId = selectIds[0].split('/')[1];
-                context.zoomToNote(noteId, !q.map);
+                context.moveToNote(noteId, !q.map);
             } else {
                 context.zoomToEntities(
                     // convert ids to short form id: node/123 -> n123

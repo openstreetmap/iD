@@ -78,7 +78,7 @@ export function uiSectionPresetFields(context) {
             });
 
             var singularEntity = _entityIDs.length === 1 && graph.hasEntity(_entityIDs[0]);
-            if (singularEntity && singularEntity.isHighwayIntersection(graph) && presetsManager.field('restrictions')) {
+            if (singularEntity && singularEntity.type === 'node' && singularEntity.isHighwayIntersection(graph) && presetsManager.field('restrictions')) {
                 _fieldsArr.push(
                     uiField(context, presetsManager.field('restrictions'), _entityIDs)
                 );

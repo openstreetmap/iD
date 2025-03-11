@@ -99,7 +99,7 @@ export function uiChangesetEditor(context) {
 
         // Show warning(s) if comment mentions Google or comment length exceeds 255 chars
         const warnings = [];
-        if (_tags.comment.match(/google/i)) {
+        if (_tags.comment?.match(/google/i)) {
             warnings.push({
                 id: 'contains "google"',
                 msg: t.append('commit.google_warning'),
