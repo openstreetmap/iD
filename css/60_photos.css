@@ -681,3 +681,18 @@ label.streetside-hires {
     cursor: pointer;
 }
 
+.photo-controls-local {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+.photo-controls-local button {
+    padding:0 6px;
+    pointer-events: initial;
+}
+
+.photo-controls-local button:disabled {
+    background: rgba(255,255,255,.25);
+}
+

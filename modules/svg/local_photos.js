@@ -17,6 +17,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
     let _photos = [];
     let _idAutoinc = 0;
     let _photoFrame;
+    let _activePhotoIdx;
 
     function init() {
         if (_initialized) return;  // run once
@@ -45,6 +46,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .on('dragexit.svgLocalPhotos', over)
             .on('dragover.svgLocalPhotos', over);
 
+        _activePhotoIdx = (_photos && _photos.length > 0) ? 0 : undefined;
         _initialized = true;
     }
 
@@ -66,10 +68,38 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .append('div')
             .attr('class', 'photo-attribution photo-attribution-dual fillD');
 
+        const controlsEnter = viewerEnter
+            .append('div')
+            .attr('class', 'photo-controls-wrap')
+            .append('div')
+            .attr('class', 'photo-controls-local');
+
+        controlsEnter
+            .append('button')
+            .classed('back', true)
+            .on('click.back', () => stepPhotos(-1))
+            .text('◀');
+
+         controlsEnter
+            .append('button')
+            .classed('forward', true)
+            .on('click.forward', () => stepPhotos(1))
+            .text('▶');
+
         return planePhotoFrame.init(context, viewerEnter)
             .then(planePhotoFrame => {
                 _photoFrame = planePhotoFrame;
             });
+    }
+
+    function stepPhotos(stepBy){
+        if (!_photos || _photos.length === 0) return;
+        if (_activePhotoIdx === undefined) _activePhotoIdx = 0;
+
+        const newIndex = _activePhotoIdx + stepBy;
+        _activePhotoIdx = Math.max(0, Math.min(_photos.length - 1, newIndex));
+
+        click(null, _photos[_activePhotoIdx], false);
     }
 
     // opens the image at bottom left
@@ -81,6 +111,14 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
             const viewerWrap = viewer.select('.local-photos-wrapper')
                 .classed('hide', false);
+
+            const controlsWrap = viewer.select('.photo-controls-wrap');
+
+            controlsWrap.select('.back')
+                .attr('disabled', _activePhotoIdx <= 0 ? true: null);
+
+            controlsWrap.select('.forward')
+                .attr('disabled', _activePhotoIdx >= _photos.length - 1  ? true: null);
 
             const attribution = viewerWrap.selectAll('.photo-attribution').text('');
 
