@@ -40,15 +40,18 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 #### :scissors: Operations
 #### :camera: Street-Level
+* Add prev/next button to viewer for local georeferenced photos ([#10852], thanks [@0xatulpatil])
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
-* fix some direction cones not appearing on railway tracks ([#10843], thanks [@k-yle])
+* Fix some direction cones not appearing on railway tracks ([#10843], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 
 [#10843]: https://github.com/openstreetmap/iD/pull/10843
+[@0xatulpatil]: https://github.com/0xatulpatil
+
 
 # 2.32.0
 ##### 2025-03-05
