@@ -46,7 +46,6 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .on('dragexit.svgLocalPhotos', over)
             .on('dragover.svgLocalPhotos', over);
 
-        _activePhotoIdx = (_photos && _photos.length > 0) ? 0 : undefined;
         _initialized = true;
     }
 
@@ -80,7 +79,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .on('click.back', () => stepPhotos(-1))
             .text('◀');
 
-         controlsEnter
+        controlsEnter
             .append('button')
             .classed('forward', true)
             .on('click.forward', () => stepPhotos(1))
@@ -104,6 +103,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
     // opens the image at bottom left
     function click(d3_event, image, zoomTo) {
+        _activePhotoIdx = _photos.indexOf(image);
         ensureViewerLoaded(context).then(() => {
             const viewer = context.container().select('.photoviewer')
                 .datum(image)
@@ -116,7 +116,6 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
             controlsWrap.select('.back')
                 .attr('disabled', _activePhotoIdx <= 0 ? true: null);
-
             controlsWrap.select('.forward')
                 .attr('disabled', _activePhotoIdx >= _photos.length - 1  ? true: null);
 
