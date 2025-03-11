@@ -300,9 +300,9 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     return tags;
   };
 
-  _this.getLifecycle = (entitytags) => {
+  _this.getLifecycle = (entity) => {
     let lifecycle = 'functional';
-    entitytags = Object.keys(entitytags);
+    let entitytags = Object.keys(entity);
     const presetTags = Object.keys(_this.tags);
     const ids = Object.keys(osmLifecyclePrefixes);
     let presetPrefix;
@@ -314,8 +314,8 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     if (presetPrefix && ids.includes(presetPrefix)) {
       lifecycle = presetPrefix;
     } else {
-      if (entitytags.includes('construction')) {
-        lifecycle = 'construction';
+      if ((entitytags.includes('construction')) && (entity.construction === 'yes' || entity.construction === _this.id.split('/')[0])) {
+          lifecycle = 'construction';
       } else {
         entitytags.forEach(tag => {
           if (tag.includes(':')) {

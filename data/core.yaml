@@ -727,6 +727,9 @@ en:
     members: Members
     relations: Relations
     features: Features
+    prefix: Prefix
+    key: Key
+    value: Value
     title_count: "{title} ({count})"
     add_to_relation: Add to a relation
     add_to_tag: Add a tag
