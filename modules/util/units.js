@@ -188,7 +188,7 @@ export function decimalCoordinatePair(coord) {
 
 // Return the parsed value  that @mapbox/sexagesimal can't parse
 // return value format : [D, D]  ex:[ 35.1861, 136.83161 ]
-export function dmsMatcher(q) {
+export function dmsMatcher(q, _localeCode = undefined) {
     const matchers = [
         // D M SS , D M SS  ex: 35 11 10.1 , 136 49 53.8
         {
@@ -216,7 +216,7 @@ export function dmsMatcher(q) {
         },
         // zoom/x/y ex: 2/1.23/34.44
         {
-            condition: /^\s*(\d+\.?\d*)\/(-?\d+\.?\d*)\/(-?\d+\.?\d*)\s*$/,
+            condition: /^\s*(\d+\.?\d*)\s*\/\s*(-?\d+\.?\d*)\s*\/\s*(-?\d+\.?\d*)\s*$/,
             parser: function(q) {
                 const match = this.condition.exec(q);
                 const lat = +match[2];
@@ -225,18 +225,21 @@ export function dmsMatcher(q) {
                 return [lat, lng, zoom];
             }
         },
-        // x/y , x,y , x y  where x and y are localized floats, e.g. in German locale: 49,4109399, 8,7147086
+        // x/y , x, y , x y  where x and y are localized floats, e.g. in German locale: 49,4109399, 8,7147086
         {
-            condition: { test: q => q.split(/,?\s+|[\/\\]\s*/).length === 2 },
-            parser: function(q) {
-                const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
-                const parts = q.split(/,?\s+/);
-                const lat = parseLocaleFloat(parts[0]);
-                const lng = parseLocaleFloat(parts[1]);
-                return [lat, lng];
-            }
+            condition: { test: q => !!localizedNumberCoordsParser(q) },
+            parser: localizedNumberCoordsParser
         }
     ];
+    function localizedNumberCoordsParser(q, ) {
+        const parseLocaleFloat = localizer.floatParser(_localeCode || localizer.localeCode());
+        let parts = q.split(/,?\s+|\s*[\/\\]\s*/);
+        if (parts.length !== 2) return false;
+        const lat = parseLocaleFloat(parts[0]);
+        const lng = parseLocaleFloat(parts[1]);
+        if (isNaN(lat) || isNaN(lng)) return false;
+        return [lat, lng];
+    }
     for (const matcher of matchers) {
         if (matcher.condition.test(q)){
             return matcher.parser(q);
