@@ -13,6 +13,7 @@ import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util
 import { uiTooltip } from '..';
 import { allowUpperCaseTagValues } from '../../osm/tags';
 import { fileFetcher } from '../../core';
+import { uiCmd } from '../cmd';
 
 
 export function uiSectionRawTagEditor(id, context) {
@@ -659,6 +660,30 @@ export function uiSectionRawTagEditor(id, context) {
         _readOnlyTags = val;
         return section;
     };
+    
+
+    // register Alt + 1-9 keybindings
+    if (context) {
+        document.addEventListener('keydown', function(d3_event) {
+            // check if the Alt key is pressed and the key is 1-9
+            if (d3_event.altKey && /^[1-9]$/.test(d3_event.key)) {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                var targetIndex = parseInt(d3_event.key, 10);
+                var targetInput = section.selection().select(`.tag-list li:nth-child(${targetIndex}) div.inner-wrap div.value-wrap input`);
+                if (!targetInput.empty()) {
+                    // blur current focus and shift to new input
+                    if (document.activeElement) {
+                        document.activeElement.blur();
+                    }
+                    targetInput.node().focus();
+                    section.reRender();
+                }
+            }
+        });
+    } else {
+        console.warn('Context not available');
+    }
 
 
     return utilRebind(section, dispatch, 'on');
