@@ -1,10 +1,11 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
 
 import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 
-import { utilRebind, utilTiler, utilQsString, utilStringQs, utilUniqueDomId} from '../util';
+import { utilRebind, utilTiler, utilQsString, utilStringQs, utilUniqueDomId, utilKeybinding} from '../util';
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { t, localizer } from '../core/localizer';
 import pannellumPhotoFrame from './pannellum_photo';
@@ -46,7 +47,7 @@ let _currentScene = {
 };
 
 let _activeImage;
-
+let keybinding = utilKeybinding('phoneviewer-panoramax');
 
 // Partition viewport into higher zoom tiles
 function partitionViewport(projection) {
@@ -594,6 +595,44 @@ export default {
             _planeFrame.event.on('viewerChanged', () => dispatch.call('viewerChanged'));
           });
 
+    keybinding
+            .on(['[', 'pgup'], handlePreviousPhoto)
+            .on([']', 'pgdown'], handleNextPhoto);
+
+        d3_select(document).call(keybinding);
+
+        function handleNextPhoto(d3_event) {
+            d3_event.preventDefault();
+
+            const selectedIDs = context.selectedIDs();
+
+            if (selectedIDs.length > 0) {
+                const entity = context.entity(selectedIDs[0]);
+                const entityType = entity.geometry(context.graph());
+                if (entityType === 'vertex') {
+                    return;
+                }
+            }
+
+            step(1)();
+        }
+
+        function handlePreviousPhoto(d3_event) {
+            d3_event.preventDefault();
+
+            const selectedIDs = context.selectedIDs();
+
+            if (selectedIDs.length > 0) {
+                const entity = context.entity(selectedIDs[0]);
+                const entityType = entity.geometry(context.graph());
+                if (entityType === 'vertex') {
+                    return;
+                }
+            }
+
+            step(-1)();
+        }
+
         function step(stepBy) {
             return function () {
                 if (!_currentScene.currentImage) return;
@@ -642,6 +681,10 @@ export default {
         context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('currentView', false);
         this.setActiveImage();
+
+        d3_select(document)
+            .call(keybinding.unbind);
+
         return this.setStyles(context, null);
     },
 
