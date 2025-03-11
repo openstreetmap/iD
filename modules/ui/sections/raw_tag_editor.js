@@ -13,7 +13,6 @@ import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util
 import { uiTooltip } from '..';
 import { allowUpperCaseTagValues } from '../../osm/tags';
 import { fileFetcher } from '../../core';
-import { uiCmd } from '../cmd';
 
 
 export function uiSectionRawTagEditor(id, context) {
