@@ -237,6 +237,11 @@ function getCLDROverrides() {
       script: 'Hant',
       nativeName: '粵語（繁體）'
     },
+    'zh-Bopo': {
+      base: 'zh',
+      script: 'Bopo',
+      nativeName: 'ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ​'
+    },
     'zh-Latn-pinyin': {
       base: 'zh',
       script: 'Latn',
