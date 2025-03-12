@@ -1,12 +1,12 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
-
+import * as d3 from 'd3';
 import RBush from 'rbush';
 
 import { localizer } from '../core/localizer';
 import { geoExtent, geoScaleToZoom } from '../geo';
-import { utilQsString, utilRebind, utilSetTransform, utilStringQs, utilTiler } from '../util';
+import { utilQsString, utilRebind, utilSetTransform, utilStringQs, utilTiler, utilKeybinding} from '../util';
 
 
 var apibase = 'https://kartaview.org';
@@ -21,7 +21,7 @@ var imgZoom = d3_zoom()
 var _oscCache;
 var _oscSelectedImage;
 var _loadViewerPromise;
-
+let keybinding = utilKeybinding('keybind-kartaview');
 
 function abortRequest(controller) {
     controller.abort();
@@ -277,6 +277,12 @@ export default {
             .append('button')
             .on('click.back', step(-1))
             .text('◄');
+        
+        keybinding
+            .on(['pgup'], getNext)
+            .on(['pgdown'], getPrevious);
+
+         d3.select(document).call(keybinding);
 
         controlsEnter
             .append('button')
@@ -304,6 +310,28 @@ export default {
                 .extent([[0, 0], dimensions])
                 .translateExtent([[0, 0], dimensions]);
         });
+       
+        function getNext(d3_event) {
+            d3_event.preventDefault();
+        
+            const selectedID = context.selectedIDs()[0];
+            const entity = selectedID ? context.hasEntity(selectedID) : null;
+        
+            if (entity?.geometry(context.graph()) === 'vertex') return;
+        
+            step(1)();
+        }
+
+        function getPrevious(d3_event) {
+            d3_event.preventDefault();
+        
+            const selectedID = context.selectedIDs()[0];
+            const entity = selectedID ? context.hasEntity(selectedID) : null;
+        
+            if (entity?.geometry(context.graph()) === 'vertex') return;
+        
+            step(-1)();
+        }
 
 
         function zoomPan(d3_event) {
