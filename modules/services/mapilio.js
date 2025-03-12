@@ -7,7 +7,7 @@ import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 import { isEqual } from 'lodash';
 
-import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } from '../util';
+import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform, utilKeybinding } from '../util';
 import {geoExtent, geoScaleToZoom} from '../geo';
 import {localizer} from '../core/localizer';
 
@@ -42,6 +42,7 @@ let _sceneOptions = {
 };
 let _currScene = 0;
 
+let keybinding = utilKeybinding('phoneviewer-mapillio');
 
 // Partition viewport into higher zoom tiles
 function partitionViewport(projection) {
@@ -488,6 +489,12 @@ export default {
             .on('click.forward', step(1))
             .text('►');
 
+        keybinding
+            .on(['[', 'pgup'], handlePreviousPhoto)
+            .on([']', 'pgdown'], handleNextPhoto);
+
+        d3_select(document).call(keybinding);
+
         wrapEnter
             .append('div')
             .attr('id', 'ideditor-viewer-mapilio-pnlm');
@@ -549,6 +556,38 @@ export default {
             .catch(function() {
                 _loadViewerPromise = null;
             });
+
+            function handleNextPhoto(d3_event) {
+                d3_event.preventDefault();
+
+                const selectedIDs = context.selectedIDs();
+
+                if (selectedIDs.length > 0) {
+                    const entity = context.entity(selectedIDs[0]);
+                    const entityType = entity.geometry(context.graph());
+                    if (entityType === 'vertex') {
+                        return;
+                    }
+                }
+
+                step(1)();
+            }
+
+            function handlePreviousPhoto(d3_event) {
+                d3_event.preventDefault();
+
+                const selectedIDs = context.selectedIDs();
+
+                if (selectedIDs.length > 0) {
+                    const entity = context.entity(selectedIDs[0]);
+                    const entityType = entity.geometry(context.graph());
+                    if (entityType === 'vertex') {
+                        return;
+                    }
+                }
+
+                step(-1)();
+            }
 
         function step(stepBy) {
             return function () {
@@ -612,6 +651,9 @@ export default {
             .classed('currentView', false);
 
         this.setActiveImage();
+
+        d3_select(document)
+            .call(keybinding.unbind);
 
         return this.setStyles(context, null);
     },
