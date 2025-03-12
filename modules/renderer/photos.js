@@ -192,11 +192,11 @@ export function rendererPhotos(context) {
             // support opening a photo via a URL parameter, e.g. `photo=mapillary-fztgSDtLpa08ohPZFZjeRQ`
             var photoIds = hash.photo.replace(/;/g, ',').split(',');
             var photoId = photoIds.length && photoIds[0].trim();
-            var results = /(.*)\/(.*)/g.exec(photoId);
-            if (results && results.length >= 3) {
-                var serviceId = results[1];
+            var results = photoId.split('/');
+            if (results && results.length >= 2) {
+                var serviceId = results[0];
                 if (serviceId === 'openstreetcam') serviceId = 'kartaview'; // legacy alias
-                var photoKey = results[2];
+                var photoKey = results.slice(1).join('/');
                 var service = services[serviceId];
                 if (service && service.ensureViewerLoaded) {
 
