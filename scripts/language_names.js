@@ -130,7 +130,6 @@ function getCLDROverrides() {
     'kls': {
       nativeName: 'Kal\'as\'amondr'
     },
-    kar: { nativeName: 'ကညီကျိာ်'},
     'ko-Hani': {
       base: 'ko',
       script: 'Hani',
@@ -140,6 +139,7 @@ function getCLDROverrides() {
       base: 'ko',
       script: 'Latn'
     },
+    ksw: { nativeName: 'ကညီကျိာ်'},
     'mnc-Latn': {
       base: 'mnc',
       script: 'Latn',
