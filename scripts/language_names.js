@@ -120,7 +120,6 @@ function getLangNamesInNativeLang() {
     'kls': {
       nativeName: 'Kal\'as\'amondr'
     },
-    kar: { nativeName: 'ကညီကျိာ်'},
     'ko-Hani': {
       base: 'ko',
       script: 'Hani',
@@ -130,6 +129,7 @@ function getLangNamesInNativeLang() {
       base: 'ko',
       script: 'Latn'
     },
+    ksw: { nativeName: 'ကညီကျိာ်'},
     'mnc-Latn': {
       base: 'mnc',
       script: 'Latn',
