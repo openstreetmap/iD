@@ -120,7 +120,7 @@ export function uiFeatureList(context) {
             var result = [];
             var graph = context.graph();
             var visibleCenter = context.map().extent().center();
-            var q = search.property('value').toLowerCase();
+            var q = search.property('value').toLowerCase().trim();
 
             if (!q) return result;
 
@@ -132,8 +132,9 @@ export function uiFeatureList(context) {
 
                 const isLatLonValid = latLon[0] >= -90 && latLon[0] <= 90 && latLon[1] >= -180 && latLon[1] <= 180;
                 let   isLonLatValid = lonLat[0] >= -90 && lonLat[0] <= 90 && lonLat[1] >= -180 && lonLat[1] <= 180;
-                isLonLatValid &&= !q.match(/[NSEW]/i);
-                isLonLatValid &&= lonLat[0] !== lonLat[1];
+                isLonLatValid &&= !q.match(/[NSEW]/i);     // don't flip coords with explicit cardinal directions
+                isLonLatValid &&= !locationMatch[2];       // don't flip zoom/x/y coords
+                isLonLatValid &&= lonLat[0] !== lonLat[1]; // don't flip when lat=lon
 
                 if (isLatLonValid) {
                     result.push({
@@ -141,7 +142,8 @@ export function uiFeatureList(context) {
                         geometry: 'point',
                         type: t('inspector.location'),
                         name: dmsCoordinatePair([latLon[1], latLon[0]]),
-                        location: latLon
+                        location: latLon,
+                        zoom: locationMatch[2]
                     });
                 }
                 if (isLonLatValid) {
@@ -369,7 +371,7 @@ export function uiFeatureList(context) {
             d3_event.preventDefault();
 
             if (d.location) {
-                context.map().centerZoomEase([d.location[1], d.location[0]], 19);
+                context.map().centerZoomEase([d.location[1], d.location[0]], d.zoom || 19);
 
             } else if (d.entity) {
                 utilHighlightEntities([d.id], false, context);

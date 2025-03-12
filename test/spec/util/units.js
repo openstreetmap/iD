@@ -21,6 +21,28 @@ describe('iD.units', function() {
             expect(result[0]).to.be.closeTo( -35.18614, 0.00001);
             expect(result[1]).to.be.closeTo(-136.83161, 0.00001);
         });
+        it('parses z/x/y coordinate', () => {
+            var result = iD.dmsMatcher('2/-1.23/34.44');
+            expect(result[0]).to.be.closeTo(-1.23, 0.00001);
+            expect(result[1]).to.be.closeTo(34.44, 0.00001);
+            expect(result[2]).to.eql(2);
+        });
+        it('parses x/y coordinate', () => {
+            var result = iD.dmsMatcher('-1.23/34.44');
+            expect(result[0]).to.be.closeTo(-1.23, 0.00001);
+            expect(result[1]).to.be.closeTo(34.44, 0.00001);
+        });
+        it('parses z/x/y coordinate', () => {
+            var result = iD.dmsMatcher('2/-1.23/34.44');
+            expect(result[0]).to.be.closeTo(-1.23, 0.00001);
+            expect(result[1]).to.be.closeTo(34.44, 0.00001);
+            expect(result[2]).to.eql(2);
+        });
+        it('parses coordinate with localized numbers', () => {
+            var result = iD.dmsMatcher('49,4109399, 8,7147086', 'de');
+            expect(result[0]).to.be.closeTo(49.4109399, 0.00001);
+            expect(result[1]).to.be.closeTo( 8.7147086, 0.00001);
+        });
 
         it('handles invalid input', function() {
             var result = iD.dmsMatcher('!@#$');
