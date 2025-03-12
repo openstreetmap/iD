@@ -29,6 +29,7 @@ function getLangNamesInNativeLang() {
     'bha': {
       nativeName: 'भरीयाटी'
     },
+    'blk': { nativeName: 'ပအိုဝ်ႏဘာႏသာႏ'},
     'brh': {
       nativeName: 'براہوئی'
     },
@@ -119,6 +120,12 @@ function getLangNamesInNativeLang() {
     'kls': {
       nativeName: 'Kal\'as\'amondr'
     },
+    kar: { nativeName: 'ကညီကျိာ်'},
+    'ko-Hani': {
+      base: 'ko',
+      script: 'Hani',
+      nativeName: '韓國語(漢字)'
+    },
     'ko-Latn': {
       base: 'ko',
       script: 'Latn'
@@ -163,6 +170,7 @@ function getLangNamesInNativeLang() {
     'pnb': {
       nativeName: 'پنجابی'
     },
+    prk: { nativeName: 'Lox vax'},
     rop: { nativeName: 'Australian Kriol' },
     rrm: { nativeName: 'Moriori' },
     'scl': {
@@ -182,6 +190,11 @@ function getLangNamesInNativeLang() {
     ulk: { nativeName: 'Meriam Mir' },
     'wbl': {
       nativeName: 'وخی'
+    },
+    'vi-Hani': {
+      base: 'vi',
+      script: 'Hani',
+      nativeName: '㗂越（漢喃）'
     },
     wlp: { nativeName: 'Warlpiri' },
     'wuu': {
