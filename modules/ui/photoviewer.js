@@ -159,7 +159,7 @@ export function uiPhotoviewer(context) {
 
                 const entitiesWithTag = entities.map(entity => entity.tags[tagName] ? entity.tags[tagName] : undefined).filter(e => e);
                 const isPhotoUsed = entitiesWithTag
-                    .some(value => value === activeImage?.id);
+                    .some(value => value.includes(activeImage?.id));
 
                 if (isPhotoUsed) {
                     buttonDisable('already_set');
