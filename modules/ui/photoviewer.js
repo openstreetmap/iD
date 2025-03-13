@@ -82,7 +82,7 @@ export function uiPhotoviewer(context) {
             const mapillaryOrPanoramax = (layerStatus(service) && PHOTO_SERVICES_WITH_TAG_BUTTON.includes(service));
 
             if (isActiveService) {
-                if (context.mode().id !== 'select' || !(mapillaryOrPanoramax)) {
+                if (context.mode().id !== 'select' || !mapillaryOrPanoramax) {
                     buttonRemove();
                 } else {
                     if (selection.select('.set-photo-from-viewer').empty()) {
@@ -173,7 +173,7 @@ export function uiPhotoviewer(context) {
                 const entities = context.selectedIDs()
                     .map(id => graph.entity(id));
 
-                const entitiesWithTag = entities.map(entity => entity.tags[tagName] ? entity.tags[tagName] : undefined).filter(e => e);
+                const entitiesWithTag = entities.map(entity => entity.tags[tagName]).filter(Boolean);
                 const isPhotoUsed = entitiesWithTag
                     .some(value => value.includes(activeImage?.id));
 
