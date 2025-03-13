@@ -67,14 +67,14 @@ export function uiPhotoviewer(context) {
 
         // update sett_photo_from_viewer button on selection change and when tags change
         context.features().on('change.setPhotoFromViewer', function() {
-            setPhotoFromViewerButton();
+            addPhotoServiceTag();
         });
         context.history().on('change.setPhotoFromViewer', function() {
-            setPhotoFromViewerButton();
+            addPhotoServiceTag();
         });
 
 
-        function setPhotoFromViewerButton() {
+        function addPhotoServiceTag() {
             const service = getServiceId();
             const isActiveService = ['mapillary', 'panoramax'].includes(service) && services[service].isViewerOpen();
             const mapillaryOrPanoramax = (layerStatus(service) && ['mapillary', 'panoramax'].includes(service));
