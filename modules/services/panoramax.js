@@ -46,6 +46,7 @@ let _currentScene = {
 };
 
 let _activeImage;
+let _isViewerOpen = false;
 
 
 // Partition viewport into higher zoom tiles
@@ -381,6 +382,11 @@ export default {
         return this;
     },
 
+    // Get viewer status
+    isViewerOpen: function() {
+        return _isViewerOpen;
+    },
+
     updateUrlImage: function(imageKey) {
         if (!window.mocha) {
             var hash = utilStringQs(window.location.hash);
@@ -628,6 +634,9 @@ export default {
                 .selectAll('.photo-wrapper.panoramax-wrapper')
                 .classed('hide', false);
         }
+
+        _isViewerOpen = true;
+
         return this;
     },
 
@@ -642,6 +651,9 @@ export default {
         context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('currentView', false);
         this.setActiveImage();
+
+        _isViewerOpen = false;
+
         return this.setStyles(context, null);
     },
 
