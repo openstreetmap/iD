@@ -75,8 +75,12 @@ export function uiPhotoviewer(context) {
 
 
         function setPhotoFromViewerButton() {
-            if (services.mapillary.isViewerOpen()) {
-                if (context.mode().id !== 'select' || !(layerStatus('mapillary') && getServiceId() === 'mapillary')) {
+            const service = getServiceId();
+            const isActiveService = ['mapillary', 'panoramax'].includes(service) && services[service].isViewerOpen();
+            const mapillaryOrPanoramax = (layerStatus(service) && ['mapillary', 'panoramax'].includes(service));
+
+            if (isActiveService) {
+                if (context.mode().id !== 'select' || !(mapillaryOrPanoramax)) {
                     buttonRemove();
                 } else {
                     if (selection.select('.set-photo-from-viewer').empty()) {
@@ -84,21 +88,21 @@ export function uiPhotoviewer(context) {
                         button.on('click', function (e) {
                             e.preventDefault();
                             e.stopPropagation();
-                            setMapillaryPhotoId();
+                            setMapillaryOrPanoramaxPhotoId();
                             buttonDisable('already_set');
                         });
                     }
-                    buttonShowHide();
+                    buttonShowHide(service);
                 }
 
-                function setMapillaryPhotoId() {
-                    const service = services.mapillary;
-                    const image = service.getActiveImage();
+                function setMapillaryOrPanoramaxPhotoId() {
+                    const activeServiceId = getServiceId();
+                    const image = services[activeServiceId].getActiveImage();
 
                     const action = graph =>
                         context.selectedIDs().reduce((graph, entityID) => {
                             const tags = graph.entity(entityID).tags;
-                            const action = actionChangeTags(entityID, {...tags, mapillary: image.id});
+                            const action = actionChangeTags(entityID, {...tags, [activeServiceId]: image.id});
                             return action(graph);
                         }, graph);
 
@@ -146,15 +150,18 @@ export function uiPhotoviewer(context) {
                 button.remove();
             }
 
-            function buttonShowHide() {
-                const activeImage = services.mapillary.getActiveImage();
+            function buttonShowHide(tagName) {
+                const activeImage = services[tagName].getActiveImage();
 
                 const graph = context.graph();
                 const entities = context.selectedIDs()
                     .map(id => graph.entity(id));
 
-                if (entities.map(entity => entity.tags.mapillary)
-                    .every(value => value === activeImage?.id)) {
+                const entitiesWithTag = entities.map(entity => entity.tags[tagName] ? entity.tags[tagName] : undefined).filter(e => e);
+                const isPhotoUsed = entitiesWithTag
+                    .some(value => value === activeImage?.id);
+
+                if (isPhotoUsed) {
                     buttonDisable('already_set');
                 } else if (activeImage && entities
                     .map(entity => entity.extent(context.graph()).center())
