@@ -192,6 +192,19 @@ function generateTerritoryLanguages() {
     'ulk', 'wbp', 'wrh', 'wth', 'wyi', 'xdk', 'xni', 'xph', 'xrd', 'zku'
   ]; // https://github.com/openstreetmap/iD/pull/10684
   territoryLanguages.nz.push('rrm'); // https://github.com/openstreetmap/iD/pull/10684
+  territoryLanguages.cn = [
+    'zh-Hans', 'zh', 'zh-Hant', 'zh-Latn-pinyin', 'wuu', 'yue', 'yue-Hans', 'hsn', 'hak', 'nan', 'gan', 'ii',
+    'ug', 'za', 'mn-Mong', 'bo', 'ko', 'kk-Arab', 'lis', 'ky-Arab', 'nxq', 'khb', 'tdd', 'lcp', 'en', 'hnj',
+    'ru', 'vi-Hani', 'vi', 'uz-Cyrl', 'lzh'];
+  territoryLanguages.jp.splice(1, 0, 'ja-Hira', 'ja-Latn');
+  territoryLanguages.kp.push('ko-Hani', 'ko-Latn');
+  territoryLanguages.kr.push('ko-Hani', 'ko-Latn');
+  territoryLanguages.mm.splice(5, 0, 'ksw', 'zh-Hans', 'zh-Hant', 'blk', 'prk');
+  territoryLanguages.my.splice(2, 0, 'zh-Hans');
+  territoryLanguages.sg.splice(1, 0, 'zh-Hans');
+  territoryLanguages.tw.splice(1, 0, 'zh-Latn-pinyin', 'nan', 'nan-Hant', 'nan-Latn-pehoeji', 'nan-Latn-tailo',
+    'hak', 'hak-Hant', 'hak-Latn');
+  territoryLanguages.vn.splice(1, 0, 'vi-Hani', 'lzh');// https://github.com/openstreetmap/iD/pull/10867
 
   return territoryLanguages;
 }
