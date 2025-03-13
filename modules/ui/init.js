@@ -425,8 +425,7 @@ export function uiInit(context) {
                 d3_event.preventDefault();
                 context.map().toggleHighlightEdited();
                 // save the last state of the highlightEdited
-                if (prefs('map_data.highlight_edits') === null) prefs('map_data.highlight_edits', 'true'); // if this is the firts ones, set it to true
-                else prefs('map_data.highlight_edits', prefs('map_data.highlight_edits') === 'true' ? 'false' : 'true'); // toggle the state, if it's already exist
+                prefs('map_data.highlight_edits', prefs('map_data.highlight_edits') === 'true' ? 'false' : 'true'); // Toggle the state. If it's the first time (value is null) or the value is (false), prefs change it to true and vice versa.
             });
 
         context
