@@ -79,9 +79,10 @@ export function uiPhotoviewer(context) {
         function addPhotoServiceTag() {
             const service = getServiceId();
             const isActiveService = PHOTO_SERVICES_WITH_TAG_BUTTON.includes(service) && services[service].isViewerOpen();
-            const mapillaryOrPanoramax = (layerStatus(service) && PHOTO_SERVICES_WITH_TAG_BUTTON.includes(service));
 
             if (isActiveService) {
+                const mapillaryOrPanoramax = (layerStatus(service));
+
                 if (context.mode().id !== 'select' || !mapillaryOrPanoramax) {
                     buttonRemove();
                 } else {
