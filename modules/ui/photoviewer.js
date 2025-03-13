@@ -157,7 +157,7 @@ export function uiPhotoviewer(context) {
                 const entities = context.selectedIDs()
                     .map(id => graph.entity(id));
 
-                const entitiesWithTag = entities.map(entity => entity.tags[tagName] ? entity.tags[tagName] : undefined).filter(e => e);
+                const entitiesWithTag = entities.map(entity => entity.tags[tagName]).filter(Boolean);
                 const isPhotoUsed = entitiesWithTag
                     .some(value => value === activeImage?.id);
 
