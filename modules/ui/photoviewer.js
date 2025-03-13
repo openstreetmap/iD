@@ -18,6 +18,8 @@ export function uiPhotoviewer(context) {
 
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
+    const PHOTO_SERVICES_WITH_TAG_BUTTON = ['mapillary', 'panoramax'];
+
     function photoviewer(selection) {
         selection
             .append('button')
@@ -76,8 +78,8 @@ export function uiPhotoviewer(context) {
 
         function addPhotoServiceTag() {
             const service = getServiceId();
-            const isActiveService = ['mapillary', 'panoramax'].includes(service) && services[service].isViewerOpen();
-            const mapillaryOrPanoramax = (layerStatus(service) && ['mapillary', 'panoramax'].includes(service));
+            const isActiveService = PHOTO_SERVICES_WITH_TAG_BUTTON.includes(service) && services[service].isViewerOpen();
+            const mapillaryOrPanoramax = (layerStatus(service) && PHOTO_SERVICES_WITH_TAG_BUTTON.includes(service));
 
             if (isActiveService) {
                 if (context.mode().id !== 'select' || !(mapillaryOrPanoramax)) {
