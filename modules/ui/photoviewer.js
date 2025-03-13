@@ -80,7 +80,7 @@ export function uiPhotoviewer(context) {
             const mapillaryOrPanoramax = (layerStatus(service) && ['mapillary', 'panoramax'].includes(service));
 
             if (isActiveService) {
-                if (context.mode().id !== 'select' || !(mapillaryOrPanoramax)) {
+                if (context.mode().id !== 'select' || !mapillaryOrPanoramax) {
                     buttonRemove();
                 } else {
                     if (selection.select('.set-photo-from-viewer').empty()) {
