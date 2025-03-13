@@ -373,6 +373,8 @@ export function uiInit(context) {
                 ui.onResize();
             });
 
+        // Reload the previous settings to highlight unsaved changes.
+        if (prefs('map_data.highlight_edits') === 'true') context.map().toggleHighlightEdited();
 
         var panPixels = 80;
         context.keybinding()
@@ -422,6 +424,9 @@ export function uiInit(context) {
             .on(t('map_data.highlight_edits.key'), function toggleHighlightEdited(d3_event) {
                 d3_event.preventDefault();
                 context.map().toggleHighlightEdited();
+                // save the last state of the highlightEdited
+                if (prefs('map_data.highlight_edits') === null) prefs('map_data.highlight_edits', 'true'); // if this is the firts ones, set it to true
+                else prefs('map_data.highlight_edits', prefs('map_data.highlight_edits') === 'true' ? 'false' : 'true'); // toggle the state, if it's already exist
             });
 
         context
