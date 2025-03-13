@@ -144,12 +144,26 @@ export function uiPhotoviewer(context) {
                     .classed('dark', true)
                     .style('width', '300px');
 
+                if (service === 'panoramax') {
+                    const panoramaxControls = selection.select('.pnlm-zoom-controls.pnlm-controls');
+
+                    panoramaxControls
+                        .style('margin-top', '36px');
+                }
+
                 return buttonEnter;
             }
 
             function buttonRemove() {
                 const button = selection.selectAll('.set-photo-from-viewer').data([0]);
                 button.remove();
+
+                if (service === 'panoramax') {
+                    const panoramaxControls = selection.select('.pnlm-zoom-controls.pnlm-controls');
+
+                    panoramaxControls
+                        .style('margin-top', '6px');
+                }
             }
 
             function buttonShowHide(tagName) {
