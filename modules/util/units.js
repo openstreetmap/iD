@@ -214,6 +214,14 @@ export function dmsMatcher(q, _localeCode = undefined) {
                 return [isNegLat, isNegLng];
             }
         },
+        // D/D ex: 46.112785/72.921033
+        {
+            condition: /^\s*(-?\d+\.?\d*)\s*\/\s*(-?\d+\.?\d*)\s*$/,
+            parser: function(q) {
+                const match = this.condition.exec(q);
+                return [+match[1], +match[2]];
+            }
+        },
         // zoom/x/y ex: 2/1.23/34.44
         {
             condition: /^\s*(\d+\.?\d*)\s*\/\s*(-?\d+\.?\d*)\s*\/\s*(-?\d+\.?\d*)\s*$/,
