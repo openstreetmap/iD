@@ -407,6 +407,11 @@ export function rendererMap(context) {
         drawAreas = svgAreas(projection, context);
         drawMidpoints = svgMidpoints(projection, context);
         drawLabels = svgLabels(projection, context);
+        if (prefs('edit-highlight-toggle') === 'true'){
+            surface.classed('highlight-edited', prefs('edit-highlight-toggle') === 'true');
+            map.pan([0,0]);  // trigger a redraw
+            dispatch.call('changeHighlighting', this);
+        }
     };
 
     function editOff() {
@@ -1078,7 +1083,9 @@ export function rendererMap(context) {
 
 
     map.toggleHighlightEdited = function() {
-        surface.classed('highlight-edited', !surface.classed('highlight-edited'));
+        const lastEditHighlightToggle = prefs('edit-highlight-toggle');
+        surface.classed('highlight-edited', !(lastEditHighlightToggle === 'true'));
+        prefs('edit-highlight-toggle', !(lastEditHighlightToggle === 'true'));
         map.pan([0,0]);  // trigger a redraw
         dispatch.call('changeHighlighting', this);
     };

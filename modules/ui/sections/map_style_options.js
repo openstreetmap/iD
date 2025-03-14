@@ -1,6 +1,7 @@
 import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
+import { prefs } from '../../core';
 
 export function uiSectionMapStyleOptions(context) {
 
@@ -27,7 +28,7 @@ export function uiSectionMapStyleOptions(context) {
             .attr('class', 'layer-list layer-visual-diff-list')
             .merge(container2)
             .call(drawListItems, ['highlight_edits'], 'checkbox', 'visual_diff', toggleHighlightEdited, function() {
-                return context.surface().classed('highlight-edited');
+                return prefs('edit-highlight-toggle') === 'true';
             });
     }
 
