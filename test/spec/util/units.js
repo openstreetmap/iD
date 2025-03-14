@@ -28,7 +28,7 @@ describe('iD.units', function() {
             expect(result[2]).to.eql(2);
         });
         it('parses x/y coordinate', () => {
-            var result = iD.dmsMatcher('-1.23/34.44');
+            var result = iD.dmsMatcher('-1.23/34.44', 'de');
             expect(result[0]).to.be.closeTo(-1.23, 0.00001);
             expect(result[1]).to.be.closeTo(34.44, 0.00001);
         });
