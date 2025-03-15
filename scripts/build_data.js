@@ -200,8 +200,8 @@ function generateTerritoryLanguages() {
   territoryLanguages.mm.splice(5, 0, 'ksw', 'zh-Hans', 'zh-Hant', 'blk', 'prk');
   territoryLanguages.my.splice(2, 0, 'zh-Hans');
   territoryLanguages.sg.splice(1, 0, 'zh-Hans');
-  territoryLanguages.tw.splice(1, 0, 'zh-Latn-pinyin', 'nan', 'nan-Hant', 'nan-Latn-pehoeji', 'nan-Latn-tailo',
-    'hak', 'hak-Hant', 'hak-Latn');
+  territoryLanguages.tw.splice(1, 2, 'zh-Latn-pinyin', 'nan-Hant', 'nan-Latn-pehoeji', 'nan-Latn-tailo',
+    'hak-Hant', 'hak-Latn');
   territoryLanguages.vn.splice(1, 0, 'vi-Hani', 'lzh');// https://github.com/openstreetmap/iD/pull/10867
 
   return territoryLanguages;
