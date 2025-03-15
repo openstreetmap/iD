@@ -192,10 +192,8 @@ function generateTerritoryLanguages() {
     'ulk', 'wbp', 'wrh', 'wth', 'wyi', 'xdk', 'xni', 'xph', 'xrd', 'zku'
   ]; // https://github.com/openstreetmap/iD/pull/10684
   territoryLanguages.nz.push('rrm'); // https://github.com/openstreetmap/iD/pull/10684
-  territoryLanguages.cn = [
-    'zh-Hans', 'zh', 'zh-Hant', 'zh-Latn-pinyin', 'wuu', 'yue', 'yue-Hans', 'hsn', 'hak', 'nan', 'gan', 'ii',
-    'ug', 'za', 'mn-Mong', 'bo', 'ko', 'kk-Arab', 'lis', 'ky-Arab', 'nxq', 'khb', 'tdd', 'lcp', 'en', 'hnj',
-    'ru', 'vi-Hani', 'vi', 'uz-Cyrl', 'lzh'];
+  territoryLanguages.cn.splice(0, 1, 'zh-Hans', 'zh', 'zh-Hant', 'zh-Latn-pinyin');
+  territoryLanguages.cn.splice(27, 0, 'vi-Hani');
   territoryLanguages.jp.splice(1, 0, 'ja-Hira', 'ja-Latn');
   territoryLanguages.kp.push('ko-Hani', 'ko-Latn');
   territoryLanguages.kr.push('ko-Hani', 'ko-Latn');
