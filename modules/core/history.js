@@ -29,6 +29,7 @@ export function coreHistory(context) {
     var _stack;
     var _index;
     var _tree;
+    var _surface = d3_select(null);
 
 
     // internal _act, accepts list of actions and eased time
@@ -699,6 +700,7 @@ export function coreHistory(context) {
                 _hasUnresolvedRestorableChanges = false;
                 var json = this.savedHistoryJSON();
                 if (json) history.fromJSON(json, true);
+                _surface.classed('highlight-edited', (prefs('edit-highlight-toggle')=== 'true'));
             }
         },
 
