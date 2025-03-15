@@ -163,65 +163,8 @@ describe('iD.serviceOsm', function () {
             expect(typeof payload).to.eql('object');
         });
 
-        it('retries an authenticated call unauthenticated if 401 Unauthorized', async () => {
-            fetchMock.mock('https://www.openstreetmap.org' + path, {
-                body: response,
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            });
-            serverXHR.respondWith('GET', 'https://www.openstreetmap.org' + path,
-                [401, { 'Content-Type': 'text/plain' }, 'Unauthorized']);
-
-            login();
-
-            const xml = promisify(connection.loadFromAPI).call(connection, path);
-            serverXHR.respond();
-
-            expect(typeof await xml).to.eql('object');
-            expect(connection.authenticated()).to.be.not.ok;
-            expect(fetchMock.called()).to.be.true;
-        });
-
-        it('retries an authenticated call unauthenticated if 401 Unauthorized', async () => {
-            fetchMock.mock('https://www.openstreetmap.org' + path, {
-                body: response,
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            });
-            serverXHR.respondWith('GET', 'https://www.openstreetmap.org' + path,
-                [401, { 'Content-Type': 'text/plain' }, 'Unauthorized']);
-
-            login();
-
-            const xml = promisify(connection.loadFromAPI).call(connection, path);
-            serverXHR.respond();
-
-            expect(typeof await xml).to.eql('object');
-            expect(connection.authenticated()).to.be.not.ok;
-            expect(fetchMock.called()).to.be.true;
-        });
-
-        it('retries an authenticated call unauthenticated if 403 Forbidden', async () => {
-            fetchMock.mock('https://www.openstreetmap.org' + path, {
-                body: response,
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            });
-            serverXHR.respondWith('GET', 'https://www.openstreetmap.org' + path,
-                [403, { 'Content-Type': 'text/plain' }, 'Forbidden']);
-
-            login();
-            const xml = promisify(connection.loadFromAPI).call(connection, path);
-            serverXHR.respond();
-
-            expect(typeof await xml).to.eql('object');
-            expect(connection.authenticated()).to.be.not.ok;
-            expect(fetchMock.called()).to.be.true;
-        });
-
-
         it('dispatches change event if 509 Bandwidth Limit Exceeded', async () => {
-            fetchMock.mock('https://www.openstreetmap.org' + path, {
+            fetchMock.mock(`https://www.openstreetmap.org${path}?bbox=`, {
                 body: 'Bandwidth Limit Exceeded',
                 status: 509,
                 headers: { 'Content-Type': 'text/plain' }
@@ -229,7 +172,7 @@ describe('iD.serviceOsm', function () {
 
             logout();
             connection.on('change', spy);
-            const promise = promisify(connection.loadFromAPI).call(connection, path);
+            const promise = promisify(connection.loadTile).call(connection, { id: '0', extent: { toParam: () => '', bbox: () => ({}) } });
 
             await expect(promise).rejects.toThrow(expect.objectContaining({ status: 509 }));
 
@@ -237,7 +180,7 @@ describe('iD.serviceOsm', function () {
         });
 
         it('dispatches change event if 429 Too Many Requests', async () => {
-            fetchMock.mock('https://www.openstreetmap.org' + path, {
+            fetchMock.mock(`https://www.openstreetmap.org${path}?bbox=`, {
                 body: '429 Too Many Requests',
                 status: 429,
                 headers: { 'Content-Type': 'text/plain' }
@@ -245,7 +188,7 @@ describe('iD.serviceOsm', function () {
 
             logout();
             connection.on('change', spy);
-            const promise = promisify(connection.loadFromAPI).call(connection, path);
+            const promise = promisify(connection.loadTile).call(connection, { id: '0', extent: { toParam: () => '', bbox: () => ({}) } });
 
             await expect(promise).rejects.toThrow(expect.objectContaining({ status: 429 }));
             expect(spy).to.have.been.calledOnce;

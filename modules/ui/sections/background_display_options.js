@@ -74,7 +74,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('type', 'range')
             .attr('min', _minVal)
             .attr('max', _maxVal)
-            .attr('step', '0.05')
+            .attr('step', '0.01')
             .on('input', function(d3_event, d) {
                 var val = d3_select(this).property('value');
                 if (!val && d3_event && d3_event.target) {

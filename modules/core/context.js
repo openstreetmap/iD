@@ -118,12 +118,6 @@ export function coreContext() {
   function afterLoad(cid, callback) {
     return (err, result) => {
       if (err) {
-        // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-        if (err.status === 400 || err.status === 401 || err.status === 403) {
-          if (_connection) {
-            _connection.logout();
-          }
-        }
         if (typeof callback === 'function') {
           callback(err);
         }

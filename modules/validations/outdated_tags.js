@@ -42,6 +42,19 @@ export function validationOutdatedTags() {
       preset = newPreset;
     }
 
+    // Attempt to match a canonical record in the name-suggestion-index.
+    const nsi = services.nsi;
+    let waitingForNsi = false;
+    let nsiResult;
+    if (nsi) {
+      waitingForNsi = (nsi.status() === 'loading');
+      if (!waitingForNsi) {
+        const loc = entity.extent(graph).center();
+        nsiResult = nsi.upgradeTags(oldTags, loc);
+      }
+    }
+    const nsiDiff = nsiResult ? utilTagDiff(oldTags, nsiResult.newTags) : [];
+
     // Upgrade deprecated tags..
     if (_dataDeprecated) {
       const deprecatedTags = getDeprecatedTags(entity.tags, _dataDeprecated);
@@ -64,7 +77,10 @@ export function validationOutdatedTags() {
     // Add missing addTags from the detected preset
     let newTags = Object.assign({}, entity.tags);  // shallow copy
     if (preset.tags !== preset.addTags) {
-      Object.keys(preset.addTags).forEach(k => {
+      Object.keys(preset.addTags).filter(k => {
+        // if nsi suggestion already includes this tag: don't repeat it in "incomplete tags"
+        return !nsiResult?.newTags[k];
+      }).forEach(k => {
         if (!newTags[k]) {
           if (preset.addTags[k] === '*') {
             newTags[k] = 'yes';
@@ -74,22 +90,7 @@ export function validationOutdatedTags() {
         }
       });
     }
-
     const deprecationDiff = utilTagDiff(oldTags, newTags);
-
-    // Attempt to match a canonical record in the name-suggestion-index.
-    const nsi = services.nsi;
-    let waitingForNsi = false;
-    let nsiResult;
-    if (nsi) {
-      waitingForNsi = (nsi.status() === 'loading');
-      if (!waitingForNsi) {
-        const loc = entity.extent(graph).center();
-        nsiResult = nsi.upgradeTags(oldTags, loc);
-      }
-    }
-
-    const nsiDiff = nsiResult ? utilTagDiff(oldTags, nsiResult.newTags) : [];
 
     let issues = [];
     issues.provisional = (_waitingForDeprecated || waitingForNsi);

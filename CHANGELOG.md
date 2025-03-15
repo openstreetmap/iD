@@ -38,17 +38,26 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # unreleased (v2.33.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Allow searching for coordinates in localized number format in search box ([#10805])
 #### :scissors: Operations
 #### :camera: Street-Level
+* Add prev/next button to viewer for local georeferenced photos ([#10852], thanks [@0xatulpatil])
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
-* fix some direction cones not appearing on railway tracks ([#10843], thanks [@k-yle])
+* Fix some direction cones not appearing on railway tracks ([#10843], thanks [@k-yle])
+* Better handling of rate limited API calls and other API errors ([#10299])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 
+[#10805]: https://github.com/openstreetmap/iD/pull/10805
+[#10299]: https://github.com/openstreetmap/iD/issues/10299
 [#10843]: https://github.com/openstreetmap/iD/pull/10843
+[#10852]: https://github.com/openstreetmap/iD/issues/10852
+[@0xatulpatil]: https://github.com/0xatulpatil
+
+
 
 # 2.32.0
 ##### 2025-03-05
