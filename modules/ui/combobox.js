@@ -322,7 +322,6 @@ export function uiCombobox(context, klass) {
             });
         }
 
-
         function tryAutocomplete() {
             if (!_canAutocomplete) return;
 

@@ -1041,6 +1041,47 @@ a.hide-toggle {
     border-bottom-left-radius: 0;
 }
 
+/* Lifecycle Section */
+
+.lifecycle-reference-button {
+    float: right;
+    height: 100%;
+    border: 1px solid #ccc;
+}
+
+.lifecycle-icon {
+    padding-right: 5px;
+}
+
+.lifecycle-radio-row {
+    width: 95%;
+}
+
+.lifecycle-icon-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 2px;
+    background-color: white;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.lifecycle-extra {
+    width: 100%;
+    border: 0 !important;
+}
+
+.lifecycle-row {
+    margin: 10px 0;
+}
+
+.wrap-form-field-lifecycle-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+
 /* Preset List and Icons
 ------------------------------------------------------- */
 .preset-list  {
@@ -1125,6 +1166,7 @@ a.hide-toggle {
     width: 100%;
     height: 100%;
 }
+
 .preset-icon-container path {
     cursor: inherit;
 }
@@ -2928,6 +2970,7 @@ img.tag-reference-wiki-image {
 }
 .add-row .add-tag,
 .add-row .add-relation,
+.add-lifecycle,
 .add-row .space-value {
     flex: 1 1 50%;
 }

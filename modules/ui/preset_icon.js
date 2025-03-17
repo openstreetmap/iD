@@ -402,6 +402,10 @@ export function uiPresetIcon() {
       }
     }
 
+    if (p.lifecycle) {
+      tags[p.lifecycle] = 'yes';
+    }
+
     let tagClasses = svgTagClasses().getClassesString(tags, '');
     let selection = d3_select(this);
 

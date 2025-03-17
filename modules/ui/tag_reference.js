@@ -9,12 +9,17 @@ import { svgIcon } from '../svg/icon';
 
 // Pass `what` object of the form:
 // {
-//   key: 'string',     // required
-//   value: 'string'    // optional
+//   key: 'string',             // required
+//   value: 'string'            // optional
 // }
 //   -or-
 // {
 //   qid: 'string'      // brand wikidata  (e.g. 'Q37158')
+// }
+//   -or-
+// {
+//   message: 'string'          // custom String id to display
+//   referenceLink : 'string'   // optional link to website
 // }
 //
 export function uiTagReference(what) {
@@ -41,10 +46,28 @@ export function uiTagReference(what) {
         _body.html('');
 
         if (!docs || !docs.title) {
-            _body
-                .append('p')
-                .attr('class', 'tag-reference-description')
-                .call(t.append('inspector.no_documentation_key'));
+            if (what.message) {
+                _body
+                    .append('p')
+                    .attr('class', 'tag-reference-description')
+                    .call(t.append('inspector.' + what.message));
+
+                    if (what.referenceLink) {
+                        _body
+                            .append('a')
+                            .attr('class', 'tag-reference-link')
+                            .attr('target', '_blank')
+                            .attr('href', what.referenceLink)
+                            .call(svgIcon('#iD-icon-out-link', 'inline'))
+                            .append('span')
+                            .call(t.append('inspector.wiki_reference'));
+                    }
+            } else {
+                _body
+                    .append('p')
+                    .attr('class', 'tag-reference-description')
+                    .call(t.append('inspector.no_documentation_key'));
+            }
             done();
             return;
         }

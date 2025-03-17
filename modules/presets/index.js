@@ -208,13 +208,22 @@ export function presetIndex() {
     const keyIndex = _geometryIndex[geometry];
     let bestScore = -1;
     let bestMatch;
+    let split;
     let matchCandidates = [];
 
     for (let k in tags) {
       let indexMatches = [];
 
       let valueIndex = keyIndex[k];
-      if (!valueIndex) continue;
+
+      if (!valueIndex && k.indexOf(':') !== -1) {
+        split = k.split(':');
+        valueIndex = keyIndex[split[1]];
+      }
+
+      if (!valueIndex) {
+        continue;
+      }
 
       let keyValueMatches = valueIndex[tags[k]];
       if (keyValueMatches) indexMatches.push(...keyValueMatches);

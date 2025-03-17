@@ -1,4 +1,19 @@
 en:
+  lifecycle:
+    proposed: Proposed 
+    planned: Planned
+    construction: Under Construction 
+    disused: Disused
+    was : Was
+    dismantled : Dismantled
+    razed: Razed
+    destroyed : Destroyed
+    removed : Removed
+    obliterated: Obliterated
+    intermittent: Intermittent
+    abandoned: Abandoned
+    demolished: Demolished
+    functional: Functional
   icons:
     download: download
     information: info
@@ -697,6 +712,8 @@ en:
     locating: "Locating, please wait..."
     location_unavailable: Your location is unavailable.
   inspector:
+    lifecycle : 'Lifecycle'
+    lifecycleReference: A lifecycle prefix is a tag prefix used to indicate the current state of an object. These prefixes help track changes in infrastructure over time.
     zoom_to:
       key: Z
       title: Zoom To Selection
@@ -711,6 +728,9 @@ en:
     members: Members
     relations: Relations
     features: Features
+    prefix: Prefix
+    key: Key
+    value: Value
     title_count: "{title} ({count})"
     add_to_relation: Add to a relation
     add_to_tag: Add a tag

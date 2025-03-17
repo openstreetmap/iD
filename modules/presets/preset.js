@@ -1,7 +1,7 @@
 import { isEqual } from 'lodash';
 
 import { t } from '../core/localizer';
-import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
+import { osmLifecyclePrefixes, osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
 import { utilArrayUniq, utilObjectOmit } from '../util';
 import { utilSafeClassName } from '../util/util';
 import { locationManager } from '../core/LocationManager';
@@ -41,6 +41,8 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.originalMoreFields = (_this.moreFields || []);
 
+  _this.lifecycle = _this.lifecycle || 'functional';
+
   _this.fields = loc => resolveFields('fields', loc);
 
   _this.moreFields = loc => resolveFields('moreFields', loc);
@@ -62,12 +64,25 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     let seen = {};
     let score = 0;
 
+    // entityTags without prefixes
+    const entityTagsWithoutPrefixes = Object.fromEntries(
+      Object.entries(entityTags).map(([key, value]) => {
+          const newKey = key.includes(':') ? key.split(':')[1] : key;
+          return [newKey, value];
+      })
+    );
+
     // match on tags
     for (let k in tags) {
+
       seen[k] = true;
       if (entityTags[k] === tags[k]) {
         score += _this.originalScore;
       } else if (tags[k] === '*' && k in entityTags) {
+        score += _this.originalScore / 2;
+      } else if (entityTagsWithoutPrefixes[k] === tags[k]) {
+        score += _this.originalScore;
+      } else if (tags[k] === '*' && k in entityTagsWithoutPrefixes) {
         score += _this.originalScore / 2;
       } else {
         return -1;
@@ -237,7 +252,6 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     return tags;
   };
 
-
   _this.setTags = (tags, geometry, skipFieldDefaults, loc) => {
     const addTags = _this.addTags;
     tags = Object.assign({}, tags);   // shallow copy
@@ -284,6 +298,37 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     }
 
     return tags;
+  };
+
+  _this.getLifecycle = (entity) => {
+    let lifecycle = 'functional';
+    let entitytags = Object.keys(entity);
+    const presetTags = Object.keys(_this.tags);
+    const ids = Object.keys(osmLifecyclePrefixes);
+    let presetPrefix;
+
+    if (presetTags[0]) {
+      presetPrefix = presetTags[0].split(':')[0] ?? null;
+    }
+
+    if (presetPrefix && ids.includes(presetPrefix)) {
+      lifecycle = presetPrefix;
+    } else {
+      if ((entitytags.includes('construction')) && (entity.construction === 'yes' || entity.construction === _this.id.split('/')[0])) {
+          lifecycle = 'construction';
+      } else {
+        entitytags.forEach(tag => {
+          if (tag.includes(':')) {
+              let [prefix, base] = tag.split(':', 2);
+              if (presetTags.includes(base) && ids.includes(prefix)) {
+                lifecycle = prefix;
+              }
+          }
+        });
+      }
+    }
+    _this.lifecycle = lifecycle;
+    return lifecycle;
   };
 
 
