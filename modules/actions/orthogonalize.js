@@ -56,9 +56,9 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
 
         if (points.length === 3) {   // move only one vertex for right triangle
             for (i = 0; i < 1000; i++) {
-                motions = points.map(calcMotion);
+                const motion = calcMotion(points[1], 1, points);
 
-                points[corner.i].coord = geoVecAdd(points[corner.i].coord, motions[corner.i]);
+                points[corner.i].coord = geoVecAdd(points[corner.i].coord, motion);
                 score = corner.dotp;
                 if (score < epsilon) {
                     break;
@@ -217,7 +217,7 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
         way = way.removeNode('');  // sanity check - remove any consecutive duplicates
         graph = graph.replace(way);
 
-        var isClosed = way.isClosed();
+        const isClosed = way.isClosed() && vertexID === undefined;
         var nodes = graph.childNodes(way).slice();  // shallow copy
         if (isClosed) nodes.pop();
 

@@ -11,6 +11,10 @@ export function validationSuspiciousName(context) {
     'aerialway', 'aeroway', 'amenity', 'building', 'craft', 'highway',
     'leisure', 'railway', 'man_made', 'office', 'shop', 'tourism', 'waterway'
   ];
+  const ignoredPresets = new Set([
+    'amenity/place_of_worship/christian/jehovahs_witness',
+    '__test__ignored_preset' // for unit tests
+  ]);
   let _waitingForNsi = false;
 
 
@@ -45,17 +49,19 @@ export function validationSuspiciousName(context) {
     return false;
   }
 
-  /** @param {string} name @param {string} presetName */
-  function nameMatchesPresetName(name, presetName) {
-    if (!presetName) return false;
+  /** @param {string} name */
+  function nameMatchesPresetName(name, preset) {
+    if (!preset) return false;
+    if (ignoredPresets.has(preset.id)) return false;
 
-    return name.toLowerCase() === presetName.toLowerCase();
+    name = name.toLowerCase();
+    return name === preset.name().toLowerCase() || preset.aliases().some(alias => name === alias.toLowerCase());
   }
 
-  /** @param {string} name @param {string} presetName */
-  function isGenericName(name, tags, presetName) {
+  /** @param {string} name */
+  function isGenericName(name, tags, preset) {
     name = name.toLowerCase();
-    return nameMatchesRawTag(name, tags) || nameMatchesPresetName(name, presetName) || isGenericMatchInNsi(tags);
+    return nameMatchesRawTag(name, tags) || nameMatchesPresetName(name, preset) || isGenericMatchInNsi(tags);
   }
 
   function makeGenericNameIssue(entityId, nameKey, genericName, langCode) {
@@ -113,7 +119,7 @@ export function validationSuspiciousName(context) {
 
     let issues = [];
 
-    const presetName = presetManager.match(entity, context.graph()).name();
+    const preset = presetManager.match(entity, context.graph());
 
     for (let key in tags) {
       const m = key.match(/^name(?:(?::)([a-zA-Z_-]+))?$/);
@@ -122,7 +128,7 @@ export function validationSuspiciousName(context) {
       const langCode = m.length >= 2 ? m[1] : null;
       const value = tags[key];
 
-      if (isGenericName(value, tags, presetName)) {
+      if (isGenericName(value, tags, preset)) {
         issues.provisional = _waitingForNsi;  // retry later if we are waiting on NSI to finish loading
         issues.push(makeGenericNameIssue(entity.id, key, value, langCode));
       }
