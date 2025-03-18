@@ -258,26 +258,51 @@ export function uiSectionPhotoOverlays(context) {
             .attr('max', 1)
             .attr('step', 0.001)
             .attr('list', 'photo-overlay-data-range')
-            .attr('value', dateSliderValue)
-            .attr('class', 'list-option-date-slider')
+            .attr('value', () => dateSliderValue('from'))
+            .classed('list-option-date-slider', true)
+            .classed('from-date', true)
+            .style('direction', localizer.textDirection() === 'rtl' ? 'ltr' : 'rtl')
             .call(utilNoAuto)
             .on('change', function() {
                 let value = d3_select(this).property('value');
-                setFromYearFilter(value, true);
+                setYearFilter(value, true, 'from');
             });
+        selection.select('input.from-date').each(function() { this.value = dateSliderValue('from'); });
 
         sliderWrap.append('div')
             .attr('class', 'date-slider-label');
 
+        sliderWrap
+            .append('input')
+            .attr('type', 'range')
+            .attr('min', 0)
+            .attr('max', 1)
+            .attr('step', 0.001)
+            .attr('list', 'photo-overlay-data-range-inverted')
+            .attr('value', () => 1 - dateSliderValue('to'))
+            .classed('list-option-date-slider', true)
+            .classed('to-date', true)
+            .style('display', () => dateSliderValue('to') === 0 ? 'none' : null)
+            .style('direction', localizer.textDirection())
+            .call(utilNoAuto)
+            .on('change', function() {
+                let value = d3_select(this).property('value');
+                setYearFilter(1-value, true, 'to');
+            });
+        selection.select('input.to-date').each(function() { this.value = 1 - dateSliderValue('to'); });
+
         selection.select('.date-slider-label')
-            .call(dateSliderValue() === 1
+            .call(dateSliderValue('from') === 1
                 ? t.addOrUpdate('photo_overlays.age_slider_filter.label_all')
                 : t.addOrUpdate('photo_overlays.age_slider_filter.label_date', {
-                    date: new Date(now - Math.pow(dateSliderValue(), 1.45) * 10 * 365.25 * 86400 * 1000).toLocaleDateString(localizer.localeCode()) }));
+                    date: new Date(now - Math.pow(dateSliderValue('from'), 1.45) * 10 * 365.25 * 86400 * 1000).toLocaleDateString(localizer.localeCode()) }));
 
         sliderWrap.append('datalist')
             .attr('class', 'date-slider-values')
             .attr('id', 'photo-overlay-data-range');
+        sliderWrap.append('datalist')
+            .attr('class', 'date-slider-values')
+            .attr('id', 'photo-overlay-data-range-inverted');
 
         const dateTicks = new Set();
         for (const dates of Object.values(photoDates)) {
@@ -285,7 +310,7 @@ export function uiSectionPhotoOverlays(context) {
                 dateTicks.add(Math.round(1000 * Math.pow((now - date) / (10 * 365.25 * 86400 * 1000), 1/1.45)) / 1000);
             });
         }
-        const ticks = selection.select('datalist.date-slider-values').selectAll('option')
+        const ticks = selection.select('datalist#photo-overlay-data-range').selectAll('option')
             .data([...dateTicks].concat([1, 0]));
         ticks.exit()
             .remove();
@@ -293,38 +318,48 @@ export function uiSectionPhotoOverlays(context) {
             .append('option')
             .merge(ticks)
             .attr('value', d => d);
+        const ticksInverted = selection.select('datalist#photo-overlay-data-range-inverted').selectAll('option')
+            .data([...dateTicks].concat([1, 0]));
+            ticksInverted.exit()
+            .remove();
+        ticksInverted.enter()
+            .append('option')
+            .merge(ticksInverted)
+            .attr('value', d => 1 - d);
 
 
         li
             .merge(liEnter)
             .classed('active', filterEnabled);
 
-        function dateSliderValue() {
-            if (context.photos().fromDate()) {
-                let date = +new Date(context.photos().fromDate());
-                return Math.pow((now - date) / (10 * 365.25 * 86400 * 1000), 1/1.45);
-            } else return 1;
-        }
-
         function filterEnabled() {
             return !!context.photos().fromDate();
         }
+    }
+
+    function dateSliderValue(which) {
+        const val = which === 'from' ? context.photos().fromDate() : context.photos().toDate();
+        if (val) {
+            const date = +new Date(val);
+            return Math.pow((now - date) / (10 * 365.25 * 86400 * 1000), 1/1.45);
+        } else return which === 'from' ? 1 : 0;
     }
 
     /**
      * Util function to set the slider date filter
      * @param {Number} value The slider value
      * @param {Boolean} updateUrl whether the URL should update or not
+     * @param {string} which to set either the 'from' or 'to' date
      */
-    function setFromYearFilter(value, updateUrl){
+    function setYearFilter(value, updateUrl, which){
         value = +value + (which === 'from' ? 0.001 : -0.001);
 
-        if (value !== 1) {
+        if (value < 1 && value > 0) {
             const date = new Date(now - Math.pow(value, 1.45) * 10 * 365.25 * 86400 * 1000)
                 .toISOString().substring(0,10);
-            context.photos().setDateFilter('fromDate', date, updateUrl);
+            context.photos().setDateFilter(`${which}Date`, date, updateUrl);
         } else {
-            context.photos().setDateFilter('fromDate', null, updateUrl);
+            context.photos().setDateFilter(`${which}Date`, null, updateUrl);
         }
     };
 
