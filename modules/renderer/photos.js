@@ -180,7 +180,6 @@ export function rendererPhotos(context) {
      * @returns If the Photo Type filter should be drawn
      */
     photos.shouldFilterByPhotoType = function() {
-        // todo: fix
         return showsLayer('mapillary') ||
             (showsLayer('streetside') && showsLayer('kartaview')) || showsLayer('vegbilder') || showsLayer('panoramax');
     };

@@ -4,7 +4,7 @@ import { select as d3_select } from 'd3-selection';
 import { localizer, t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
-import { utilGetSetValue, utilNoAuto } from '../../util';
+import { utilNoAuto } from '../../util';
 import { uiSettingsLocalPhotos } from '../settings/local_photos';
 import { svgIcon } from '../../svg';
 
