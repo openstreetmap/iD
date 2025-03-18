@@ -40,6 +40,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 #### :scissors: Operations
 #### :camera: Street-Level
+* Replace date filter input boxes with a slider to select photos by freshness ([#10394], thanks [@mattiapezzotti])
+* Preserve relative viewing direction when switching between 360° panoramas in Panoramax([#10392], thanks [@mattiapezzotti])
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * fix some direction cones not appearing on railway tracks ([#10843], thanks [@k-yle])
@@ -48,7 +50,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 
+[#10392]: https://github.com/openstreetmap/iD/issues/10392
+[#10394]: https://github.com/openstreetmap/iD/pull/10394
 [#10843]: https://github.com/openstreetmap/iD/pull/10843
+
 
 # 2.32.0
 ##### 2025-03-05
