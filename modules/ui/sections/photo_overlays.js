@@ -25,6 +25,7 @@ export function uiSectionPhotoOverlays(context) {
         .expandedByDefault(false);
 
     const photoDates = {};
+    const now = +new Date();
 
     /**
      * Calls all draw function
@@ -208,7 +209,6 @@ export function uiSectionPhotoOverlays(context) {
      * Draws the date slider filter in the right panel
      */
     function drawDateSlider(selection){
-        const now = +new Date();
 
         var ul = selection
             .selectAll('.layer-list-date-slider')
@@ -317,18 +317,12 @@ export function uiSectionPhotoOverlays(context) {
      * @param {Boolean} updateUrl whether the URL should update or not
      */
     function setFromYearFilter(value, updateUrl){
-        value = +value;
+        value = +value + (which === 'from' ? 0.001 : -0.001);
 
         if (value !== 1) {
-            let days = 365.25 * (Math.pow(value + 0.001, 1.45)) * 10;
-            var fromDate = new Date();
-            fromDate.setDate(fromDate.getDate() - days);
-            var dd = String(fromDate.getDate()).padStart(2, '0');
-            var mm = String(fromDate.getMonth() + 1).padStart(2, '0');
-            var yyyy = fromDate.getFullYear();
-
-            fromDate = mm + '/' + dd + '/' + yyyy;
-            context.photos().setDateFilter('fromDate', fromDate, updateUrl);
+            const date = new Date(now - Math.pow(value, 1.45) * 10 * 365.25 * 86400 * 1000)
+                .toISOString().substring(0,10);
+            context.photos().setDateFilter('fromDate', date, updateUrl);
         } else {
             context.photos().setDateFilter('fromDate', null, updateUrl);
         }
