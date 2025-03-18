@@ -13,7 +13,7 @@ import {
   geoRotate, geoScaleToZoom, geoVecLength
 } from '../geo';
 
-import { utilAesDecrypt, utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
+import { utilAesDecrypt, utilArrayUnion, utilKeybinding, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
 
 
 const streetsideApi = 'https://dev.virtualearth.net/REST/v1/Imagery/MetaData/Streetside?mapArea={bbox}&key={key}&count={count}&uriScheme=https';
@@ -46,6 +46,7 @@ let _sceneOptions = {
 };
 let _loadViewerPromise;
 
+let keybinding = utilKeybinding('phoneviewer-streetside');
 
 /**
  * abortRequest().
@@ -503,6 +504,11 @@ export default {
       .on('click.forward', step(1))
       .text('►');
 
+      keybinding
+        .on(['[', 'pgup'], handlePreviousPhoto)
+        .on([']', 'pgdown'], handleNextPhoto);
+
+      d3_select(document).call(keybinding);
 
     // create working canvas for stitching together images
     wrap = wrap
@@ -559,6 +565,38 @@ export default {
       });
 
     return _loadViewerPromise;
+
+    function handleNextPhoto(d3_event) {
+      d3_event.preventDefault();
+
+      const selectedIDs = context.selectedIDs();
+
+      if (selectedIDs.length > 0) {
+        const entity = context.entity(selectedIDs[0]);
+        const entityType = entity.geometry(context.graph());
+        if (entityType === 'vertex') {
+          return;
+        }
+      }
+
+      step(1)();
+    }
+
+    function handlePreviousPhoto(d3_event) {
+      d3_event.preventDefault();
+
+      const selectedIDs = context.selectedIDs();
+
+      if (selectedIDs.length > 0) {
+        const entity = context.entity(selectedIDs[0]);
+        const entityType = entity.geometry(context.graph());
+        if (entityType === 'vertex') {
+          return;
+        }
+      }
+
+      step(-1)();
+    }
 
     function step(stepBy) {
       return () => {
@@ -679,6 +717,9 @@ export default {
       .classed('currentView', false);
 
     this.updateUrlImage(null);
+
+    d3_select(document)
+      .call(keybinding.unbind);
 
     return this.setStyles(context, null, true);
   },
