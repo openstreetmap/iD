@@ -2424,7 +2424,7 @@ en:
         title: "With way selected"
         child: "Select child nodes"
       enable:
-        streetlevel: "Toggle streetlevel photo view"
+        streetlevel: "Toggle active street level photo layers"
     editing:
       title: "Editing"
       drawing:
