@@ -44,6 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 * Replace date filter input boxes with a slider to select photos by freshness ([#10394], thanks [@mattiapezzotti])
 * Preserve relative viewing direction when switching between 360° panoramas in Panoramax([#10392], thanks [@mattiapezzotti])
+* Add keyboard shortcut `Shift + P` to toggle active street level photo layers ([#10394], thanks [@mattiapezzotti]))
 * Add prev/next button to viewer for local georeferenced photos ([#10852], thanks [@0xatulpatil])
 #### :white_check_mark: Validation
 * The Suspicious Names validator warning now also compares the Name field to the preset’s aliases (in addition to the preset’s name) in the user’s language
