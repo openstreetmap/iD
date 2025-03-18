@@ -169,13 +169,11 @@ export function svgKartaviewImages(projection, context, dispatch) {
         var sequences = [];
         var images = [];
 
-        if (context.photos().showsFlat()) {
-            sequences = (service ? service.sequences(projection) : []);
-            images = (service && showMarkers ? service.images(projection) : []);
-            sequences = filterSequences(sequences);
-            images = filterImages(images);
-        }
+        sequences = (service ? service.sequences(projection) : []);
+        images = (service && showMarkers ? service.images(projection) : []);
         dispatch.call('photoDatesChanged', this, 'kartaview', [...images.map(p => p.captured_at), ...sequences.map(s => s.properties.captured_at)]);
+        sequences = filterSequences(sequences);
+        images = filterImages(images);
 
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
