@@ -524,10 +524,6 @@ function updateRtree(item, replace) {
 function wrapcb(thisArg, callback, cid) {
     return function(err, result) {
         if (err) {
-            // 401 Unauthorized, 403 Forbidden
-            if (err.status === 401 || err.status === 403) {
-                thisArg.logout();
-            }
             return callback.call(thisArg, err);
 
         } else if (thisArg.getConnectionId() !== cid) {
@@ -640,39 +636,23 @@ export default {
                 return;
             }
 
-            var isAuthenticated = that.authenticated();
+            if ((err && _cachedApiStatus === 'online') ||
+                (!err && _cachedApiStatus !== 'online')) {
+                // If the response's error state doesn't match the status,
+                // it's likely we lost or gained the connection so reload the status
+                that.reloadApiStatus();
+            }
 
-            // 401 Unauthorized, 403 Forbidden
-            // Logout and retry the request.
-            if (isAuthenticated && err && err.status &&
-                    (err.status === 401 || err.status === 403)) {
-                that.logout();
-                that.loadFromAPI(path, callback, options);
-            // else, no retry.
-            } else {
-                // 509 Bandwidth Limit Exceeded, 429 Too Many Requests
-                // Set the rateLimitError flag and trigger a warning.
-                if (!isAuthenticated && !_rateLimitError && err && err.status &&
-                        (err.status === 509 || err.status === 429)) {
-                    _rateLimitError = err;
-                    dispatch.call('change');
-                    that.reloadApiStatus();
-                } else if ((err && _cachedApiStatus === 'online') ||
-                    (!err && _cachedApiStatus !== 'online')) {
-                    // If the response's error state doesn't match the status,
-                    // it's likely we lost or gained the connection so reload the status
-                    that.reloadApiStatus();
-                }
-
-                if (callback) {
-                    if (err) {
-                        return callback(err);
+            if (callback) {
+                if (err) {
+                    // eslint-disable-next-line no-console
+                    console.error('API error:', err);
+                    return callback(err);
+                } else {
+                    if (path.indexOf('.json') !== -1) {
+                        return parseJSON(payload, callback, options);
                     } else {
-                        if (path.indexOf('.json') !== -1) {
-                            return parseJSON(payload, callback, options);
-                        } else {
-                            return parseXML(payload, callback, options);
-                        }
+                        return parseXML(payload, callback, options);
                     }
                 }
             }
@@ -1098,6 +1078,12 @@ export default {
         var hadRequests = hasInflightRequests(_tileCache);
         abortUnwantedRequests(_tileCache, tiles);
         if (hadRequests && !hasInflightRequests(_tileCache)) {
+            if (_rateLimitError) {
+                // was rate limited, but has settled
+                _rateLimitError = undefined;
+                dispatch.call('change');
+                this.reloadApiStatus();
+            }
             dispatch.call('loaded');    // stop the spinner
         }
 
@@ -1123,23 +1109,43 @@ export default {
 
         _tileCache.inflight[tile.id] = this.loadFromAPI(
             path + tile.extent.toParam(),
-            tileCallback,
+            tileCallback.bind(this),
             options
         );
 
         function tileCallback(err, parsed) {
-            delete _tileCache.inflight[tile.id];
             if (!err) {
+                delete _tileCache.inflight[tile.id];
                 delete _tileCache.toLoad[tile.id];
                 _tileCache.loaded[tile.id] = true;
                 var bbox = tile.extent.bbox();
                 bbox.id = tile.id;
                 _tileCache.rtree.insert(bbox);
+            } else {
+                // map tile loading error: e.g. network connection error,
+                // 509 Bandwidth Limit Exceeded, 429 Too Many Requests
+                if (!_rateLimitError && err.status === 509 || err.status === 429) {
+                    // show "API rate limiting" warning
+                    _rateLimitError = err;
+                    dispatch.call('change');
+                    this.reloadApiStatus();
+                }
+                setTimeout(() => {
+                    // retry loading the tiles
+                    delete _tileCache.inflight[tile.id];
+                    this.loadTile(tile, callback);
+                }, 8000);
             }
             if (callback) {
                 callback(err, Object.assign({ data: parsed }, tile));
             }
             if (!hasInflightRequests(_tileCache)) {
+                if (_rateLimitError) {
+                    // was rate limited, but has settled
+                    _rateLimitError = undefined;
+                    dispatch.call('change');
+                    this.reloadApiStatus();
+                }
                 dispatch.call('loaded');     // stop the spinner
             }
         }

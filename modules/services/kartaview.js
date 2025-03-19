@@ -444,7 +444,7 @@ export default {
             imageWrap
                 .append('img')
                 .attr('class', 'kartaview-image')
-                .attr('src', apibase + '/' + d.imagePath)
+                .attr('src', (apibase + '/' + d.imagePath).replace('https://kartaview.org/storage2/', 'https://storage2.openstreetcam.org/'))
                 .style('transform', 'rotate(' + r + 'deg)');
 
             if (d.captured_by) {

@@ -5,25 +5,16 @@ import { utilSetTransform, utilRebind } from '../util';
 const dispatch = d3_dispatch('viewerChanged');
 
 let _photo;
-let _wrapper;
-let imgZoom;
-let _widthOverflow;
+let _imageWrapper;
+let _planeWrapper;
+let _imgZoom = d3_zoom()
+  .extent([[0, 0], [320, 240]])
+  .translateExtent([[0, 0], [320, 240]])
+  .scaleExtent([1, 15]);
 
 function zoomPan (d3_event) {
   let t = d3_event.transform;
-  _photo.call(utilSetTransform, t.x, t.y, t.k);
-}
-
-function zoomBeahvior () {
-  const {width: wrapperWidth, height: wrapperHeight} = _wrapper.node().getBoundingClientRect();
-  const {naturalHeight, naturalWidth} = _photo.node();
-  const intrinsicRatio = naturalWidth / naturalHeight;
-  _widthOverflow = wrapperHeight * intrinsicRatio - wrapperWidth;
-  return d3_zoom()
-        .extent([[0, 0], [wrapperWidth, wrapperHeight]])
-        .translateExtent([[0, 0], [wrapperWidth + _widthOverflow, wrapperHeight]])
-        .scaleExtent([1, 15])
-        .on('zoom', zoomPan);
+  _imageWrapper.call(utilSetTransform, t.x, t.y, t.k);
 }
 
 function loadImage (selection, path) {
@@ -35,31 +26,38 @@ function loadImage (selection, path) {
   });
 }
 
-
 export default {
 
   init: async function(context, selection) {
     this.event = utilRebind(this, dispatch, 'on');
 
-    _wrapper = selection
+    _planeWrapper = selection;
+    _planeWrapper.call(_imgZoom.on('zoom', zoomPan));
+
+    _imageWrapper = _planeWrapper
       .append('div')
       .attr('class', 'photo-frame plane-frame')
       .classed('hide', true);
 
-    _photo = _wrapper
+    _photo = _imageWrapper
       .append('img')
       .attr('class', 'plane-photo');
 
-    context.ui().photoviewer.on('resize.plane', () => {
-      imgZoom = zoomBeahvior();
-      _wrapper.call(imgZoom);
-    });
+      context.ui().photoviewer.on('resize.plane', function(dimensions) {
+        _imgZoom
+            .extent([[0, 0], dimensions])
+            .translateExtent([[0, 0], dimensions]);
+      });
 
     await Promise.resolve();
 
     return this;
   },
 
+  /**
+   * Shows the photo frame if hidden
+   * @param {*} context the HTML wrap of the frame
+   */
   showPhotoFrame: function (context) {
     const isHidden = context.selectAll('.photo-frame.plane-frame.hide').size();
 
@@ -76,7 +74,10 @@ export default {
     return this;
   },
 
-
+  /**
+   * Hides the photo frame if shown
+   * @param {*} context the HTML wrap of the frame
+   */
   hidePhotoFrame: function (context) {
     context
       .select('photo-frame.plane-frame')
@@ -85,15 +86,17 @@ export default {
     return this;
   },
 
+  /**
+   * Renders an image inside the frame
+   * @param {*} data the image data, it should contain an image_path attribute, a link to the actual image.
+   */
   selectPhoto: function (data) {
     dispatch.call('viewerChanged');
 
     loadImage(_photo, '');
     loadImage(_photo, data.image_path)
       .then(() => {
-        imgZoom = zoomBeahvior();
-        _wrapper.call(imgZoom);
-        _wrapper.call(imgZoom.transform, d3_zoomIdentity.translate(-_widthOverflow / 2, 0));
+        _planeWrapper.call(_imgZoom.transform, d3_zoomIdentity);
       });
     return this;
   },

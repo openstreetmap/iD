@@ -222,6 +222,9 @@ export function svgVegbilder(projection, context, dispatch) {
 
       sequences = service.sequences(projection);
       images = showMarkers ? service.images(projection) : [];
+
+      dispatch.call('photoDatesChanged', this, 'vegbilder', images.map(p => p.captured_at));
+
       images = filterImages(images);
       sequences = filterSequences(sequences);
     }
