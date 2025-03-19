@@ -358,7 +358,8 @@ export default {
         if (image && image.id && image.sequence_id) {
             _activeImage = {
                 id: image.id,
-                sequence_id: image.sequence_id
+                sequence_id: image.sequence_id,
+                loc: image.loc
             };
         } else {
             _activeImage = null;
@@ -655,7 +656,7 @@ export default {
 
         /**
          * Loads the next image in the sequence
-         * @param {number} stepBy '-1' if backwards or '1' if foward
+         * @param {number} stepBy '-1' if backwards or '1' if forward
          * @returns
          */
         function step(stepBy) {
