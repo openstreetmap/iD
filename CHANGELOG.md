@@ -46,6 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Preserve relative viewing direction when switching between 360° panoramas in Panoramax([#10392], thanks [@mattiapezzotti])
 * Add keyboard shortcut `Shift + P` to toggle active street level photo layers ([#10394], thanks [@mattiapezzotti]))
 * Add prev/next button to viewer for local georeferenced photos ([#10852], thanks [@0xatulpatil])
+* Add button to directly attach the id of a Panoramax photo as the `panoramax` tag of selected map features ([#10856], thanks [@MohamedAli00949])
 #### :white_check_mark: Validation
 * The Suspicious Names validator warning now also compares the Name field to the preset’s aliases (in addition to the preset’s name) in the user’s language
 #### :bug: Bugfixes
@@ -70,7 +71,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10852]: https://github.com/openstreetmap/iD/issues/10852
 [#10885]: https://github.com/openstreetmap/iD/issues/10885
 [@0xatulpatil]: https://github.com/0xatulpatil
-
+[@MohamedAli00949]: https://github.com/MohamedAli00949
 
 
 # 2.32.0
