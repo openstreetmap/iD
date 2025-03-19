@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
+import { isEmpty } from 'lodash-es';
 
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
@@ -7,10 +8,9 @@ import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
 import { uiTagReference } from '../tag_reference';
 import { prefs } from '../../core/preferences';
-import { localizer, t } from '../../core/localizer';
+import { t } from '../../core/localizer';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
-import { uiTooltip } from '..';
 import { allowUpperCaseTagValues } from '../../osm/tags';
 import { fileFetcher } from '../../core';
 
@@ -42,7 +42,6 @@ export function uiSectionRawTagEditor(id, context) {
     var _readOnlyTags = [];
     // the keys in the order we want them to display
     var _orderedKeys = [];
-    var _showBlank = false;
     var _pendingChange = null;
     var _state;
     var _presets;
@@ -76,11 +75,8 @@ export function uiSectionRawTagEditor(id, context) {
             return { index: i, key: key, value: _tags[key] };
         });
 
-        // append blank row last, if necessary
-        if (!rowData.length || _showBlank) {
-            _showBlank = false;
-            rowData.push({ index: rowData.length, key: '', value: '' });
-        }
+        // append blank row last
+        rowData.push({ index: rowData.length, key: '', value: '' });
 
 
         // View Options
@@ -160,32 +156,6 @@ export function uiSectionRawTagEditor(id, context) {
             .merge(list);
 
 
-        // Container for the Add button
-        var addRowEnter = wrap.selectAll('.add-row')
-            .data([0])
-            .enter()
-            .append('div')
-            .attr('class', 'add-row' + (_tagView !== 'list' ? ' hide' : ''));
-
-        addRowEnter
-            .append('button')
-            .attr('class', 'add-tag')
-            .attr('aria-label', t('inspector.add_to_tag'))
-            .call(svgIcon('#iD-icon-plus', 'light'))
-            .call(uiTooltip()
-                .title(() => t.append('inspector.add_to_tag'))
-                .placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'))
-            .on('click', addTag);
-
-        addRowEnter
-            .append('div')
-            .attr('class', 'space-value');   // preserve space
-
-        addRowEnter
-            .append('div')
-            .attr('class', 'space-buttons');  // preserve space
-
-
         // Tag list items
         var items = list.selectAll('.tag-row')
             .data(rowData, function(d) { return d.key; });
@@ -224,11 +194,11 @@ export function uiSectionRawTagEditor(id, context) {
             .call(utilNoAuto)
             .on('focus', interacted)
             .on('blur', valueChange)
-            .on('change', valueChange)
-            .on('keydown.push-more', pushMore);
+            .on('change', valueChange);
 
         innerWrap
             .append('button')
+            .attr('tabindex', -1)
             .attr('class', 'form-field-button remove')
             .attr('title', t('icons.remove'))
             .call(svgIcon('#iD-operation-delete'));
@@ -240,6 +210,7 @@ export function uiSectionRawTagEditor(id, context) {
             .sort(function(a, b) { return a.index - b.index; });
 
         items
+            .classed('add-tag', d => d.key === '')
             .each(function(d) {
                 var row = d3_select(this);
                 var key = row.select('input.key');      // propagate bound data
@@ -260,7 +231,10 @@ export function uiSectionRawTagEditor(id, context) {
                 }
 
                 row.select('.inner-wrap')      // propagate bound data
-                    .call(reference.button);
+                    .call(reference.button)
+                    .select('.tag-reference-button')
+                    .attr('tabindex', -1)
+                    .classed('disabled', d => d.key === '');  // disabled for blank tag line
 
                 row.call(reference.body);
 
@@ -269,10 +243,13 @@ export function uiSectionRawTagEditor(id, context) {
 
         items.selectAll('input.key')
             .attr('title', function(d) { return d.key; })
-            .call(utilGetSetValue, function(d) { return d.key; })
             .attr('readonly', function(d) {
                 return isReadOnly(d) || null;
-            });
+            })
+            .call(utilGetSetValue,
+                d => d.key,
+                (_, newKey) => _pendingChange === null || isEmpty(_pendingChange) || _pendingChange[newKey] // if there are pending changes: skip untouched keys
+            );
 
         items.selectAll('input.value')
             .attr('title', function(d) {
@@ -284,14 +261,21 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('placeholder', function(d) {
                 return typeof d.value === 'string' ? null : t('inspector.multiple_values');
             })
-            .call(utilGetSetValue, function(d) {
-                return typeof d.value === 'string' ? d.value : '';
-            })
             .attr('readonly', function(d) {
                 return isReadOnly(d) || null;
-            });
+            })
+            .call(utilGetSetValue,
+                d => {
+                    if (_pendingChange !== null && !isEmpty(_pendingChange) && !_pendingChange[d.value]) {
+                        // if there are pending changes: skip untouched values
+                        return null;
+                    }
+                    return typeof d.value === 'string' ? d.value : '';
+                }, (_, newValue) => newValue !== null
+            );
 
         items.selectAll('button.remove')
+            .classed('disabled', d => d.key === '')  // disabled for blank tag line
             .on(('PointerEvent' in window ? 'pointer' : 'mouse') + 'down', // 'click' fires too late - #5878
                 (d3_event, d) => {
                     if (d3_event.button !== 0) return;
@@ -388,22 +372,13 @@ export function uiSectionRawTagEditor(id, context) {
             }
         });
 
-        if (Object.keys(_pendingChange).length === 0) {
+        if (isEmpty(_pendingChange)) {
             _pendingChange = null;
             section.reRender();
             return;
         }
 
         scheduleChange();
-    }
-
-    function pushMore(d3_event) {
-        // if pressing Tab on the last value field with content, add a blank row
-        if (d3_event.keyCode === 9 && !d3_event.shiftKey &&
-            section.selection().selectAll('.tag-list li:last-child input.value').node() === this &&
-            utilGetSetValue(d3_select(this))) {
-            addTag();
-        }
     }
 
     function bindTypeahead(key, value) {
@@ -574,41 +549,22 @@ export function uiSectionRawTagEditor(id, context) {
     function removeTag(d3_event, d) {
         if (isReadOnly(d)) return;
 
-        if (d.key === '') {    // removing the blank row
-            _showBlank = false;
-            section.reRender();
+        // remove the key from the ordered key index
+        _orderedKeys = _orderedKeys.filter(function(key) { return key !== d.key; });
 
-        } else {
-            // remove the key from the ordered key index
-            _orderedKeys = _orderedKeys.filter(function(key) { return key !== d.key; });
-
-            _pendingChange  = _pendingChange || {};
-            _pendingChange[d.key] = undefined;
-            scheduleChange();
-        }
-    }
-
-    function addTag() {
-        // Delay render in case this click is blurring an edited combo.
-        // Without the setTimeout, the `content` render would wipe out the pending tag change.
-        window.setTimeout(function() {
-            _showBlank = true;
-            section.reRender();
-            section.selection().selectAll('.tag-list li:last-child input.key').node().focus();
-        }, 20);
+        _pendingChange  = _pendingChange || {};
+        _pendingChange[d.key] = undefined;
+        scheduleChange();
     }
 
     function scheduleChange() {
-        // Cache IDs in case the editor is reloaded before the change event is called. - #6028
-        var entityIDs = _entityIDs;
+        if (!_pendingChange) return;
 
-        // Delay change in case this change is blurring an edited combo. - #5878
-        window.setTimeout(function() {
-            if (!_pendingChange) return;
-
-            dispatch.call('change', this, entityIDs, _pendingChange);
-            _pendingChange = null;
-        }, 10);
+        for (const key in _pendingChange) {
+            _tags[key] = _pendingChange[key];
+        }
+        dispatch.call('change', this, _entityIDs, _pendingChange);
+        _pendingChange = null;
     }
 
 

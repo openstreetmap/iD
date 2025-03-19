@@ -359,6 +359,9 @@ button.disabled {
     color: rgba(0,0,0,.4);
     cursor: not-allowed;
 }
+button.disabled .icon {
+    fill: rgba(0,0,0,.4);
+}
 
 .joined > * {
     border-radius: 0;
@@ -4250,7 +4253,8 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .inspector-hover .form-field-input-radio label,
 .inspector-hover .form-field-input-radio label span,
 .inspector-hover .form-field-input-radio label.remove .icon,
-.inspector-hover .add-row,
+.inspector-hover .tag-row button,
+.inspector-hover .tag-row.add-tag,
 .inspector-hover .section-entity-issues .issue-container .issue-fix-list,
 .inspector-hover .section-entity-issues .issue-container .issue-info-button {
     display: none;
@@ -4264,9 +4268,8 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-fields,
 .inspector-hover .field-label button,
-.inspector-hover .tag-row button,
 .inspector-hover .footer * {
-    opacity: 0;
+    visibility: hidden;
 }
 
 /* Unstyle the active entity issue on hover */
