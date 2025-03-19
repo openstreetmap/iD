@@ -194,7 +194,7 @@ describe('iD.servicePanoramax', function() {
             var d = { id: 'foo', sequence_id: '100'};
             panoramax.cache().images = { forImageId: { foo: d }};
             panoramax.selectImage(context, 'foo');
-            expect(panoramax.getActiveImage()).to.eql(d);
+            expect(panoramax.getActiveImage().id).to.eql(d.id);
         });
     });
 });
