@@ -18,7 +18,7 @@ export function uiPhotoviewer(context) {
 
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
-    const PHOTO_SERVICES_WITH_TAG_BUTTON = ['mapillary', 'panoramax'];
+    const addPhotoIdButton = new Set(['mapillary', 'panoramax']);
 
     function photoviewer(selection) {
         selection
@@ -69,21 +69,19 @@ export function uiPhotoviewer(context) {
 
         // update sett_photo_from_viewer button on selection change and when tags change
         context.features().on('change.setPhotoFromViewer', function() {
-            addPhotoServiceTag();
+            setPhotoTagButton();
         });
         context.history().on('change.setPhotoFromViewer', function() {
-            addPhotoServiceTag();
+            setPhotoTagButton();
         });
 
 
-        function addPhotoServiceTag() {
+        function setPhotoTagButton() {
             const service = getServiceId();
-            const isActiveService = PHOTO_SERVICES_WITH_TAG_BUTTON.includes(service) && services[service].isViewerOpen();
+            const isActiveForService = addPhotoIdButton.has(service) && services[service].isViewerOpen();
 
-            if (isActiveService) {
-                const mapillaryOrPanoramax = (layerStatus(service));
-
-                if (context.mode().id !== 'select' || !mapillaryOrPanoramax) {
+            if (isActiveForService) {
+                if (context.mode().id !== 'select' || !layerEnabled(service)) {
                     buttonRemove();
                 } else {
                     if (selection.select('.set-photo-from-viewer').empty()) {
@@ -91,14 +89,14 @@ export function uiPhotoviewer(context) {
                         button.on('click', function (e) {
                             e.preventDefault();
                             e.stopPropagation();
-                            setMapillaryOrPanoramaxPhotoId();
+                            setPhotoId();
                             buttonDisable('already_set');
                         });
                     }
                     buttonShowHide(service);
                 }
 
-                function setMapillaryOrPanoramaxPhotoId() {
+                function setPhotoId() {
                     const activeServiceId = getServiceId();
                     const image = services[activeServiceId].getActiveImage();
 
@@ -114,7 +112,7 @@ export function uiPhotoviewer(context) {
                 }
             }
 
-            function layerStatus(which) {
+            function layerEnabled(which) {
                 const layers = context.layers();
                 const layer = layers.layer(which);
                 return layer.enabled();
