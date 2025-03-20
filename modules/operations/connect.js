@@ -37,7 +37,7 @@ export function operationConnect(context, selectedIDs) {
         var action = actionConnect(nodeIDs);
         var disabledReason = action.disabled(context.graph());
         if (disabledReason) {
-            console.warn(`Cannot connect ${nodeID} and ${matchingNodeID}: ${disabledReason}`);
+            console.warn(`Cannot connect ${nodeID} and ${_matchingNodeID}: ${disabledReason}`);
             return;
         }
 
