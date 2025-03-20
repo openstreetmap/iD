@@ -1,22 +1,3 @@
-// To-do-list
-
-//-1. Transition from snap_node connect_node
-//~2. Implement data and ------image------- with internal functionality of circularize
-
-//-3. Check it at same coordinate another node exist
-    //-1. If exists then only proceed 
-
-//-4. Connect the nodes
-
-//-5. Return appropiate operation
-// 6. Add test cases 
-
-
-// Bugs
-//-1. Multiple re-renders
-//-2. Action only on click other time just check if node is present
-// 3. No keybinding
-
 import { t } from '../core/localizer';
 import { actionConnect } from '../actions/connect';
 import { behaviorOperation } from '../behavior/operation';
@@ -49,7 +30,6 @@ export function operationConnect(context, selectedIDs) {
     var _isAvailable = graph.entity(nodeID).type === 'node' && !!_matchingNodeID;
 
     var operation = function () {
-        console.count("triggered")
         // No coincident node, nothing to do
         if (!_matchingNodeID) return;
 
@@ -57,26 +37,22 @@ export function operationConnect(context, selectedIDs) {
         var action = actionConnect(nodeIDs);
         var disabledReason = action.disabled(context.graph());
         if (disabledReason) {
-            console.log(`Cannot connect ${nodeID} and ${matchingNodeID}: ${disabledReason}`);
+            console.warn(`Cannot connect ${nodeID} and ${matchingNodeID}: ${disabledReason}`);
             return;
         }
 
-        // Perform the merge and switch to select mode
-        context.perform(action, operation.annotation());
-        context.enter(modeSelect(context, [nodeID])); // Select the surviving node
+        context.perform(action);
+        context.enter(modeSelect(context, [nodeID]));
     };
 
-    // Define related entity IDs (empty for now, as we’re only dealing with nodes)
     operation.relatedEntityIds = function () {
         return [];
     };
 
-    // Check if the operation is available
     operation.available = function () {
         return _isAvailable;
     };
 
-    // Check if the operation is disabled
     operation.disabled = function () {
         var graph = context.graph();
         if (graph.entity(nodeID).type !== 'node') {
@@ -100,16 +76,15 @@ export function operationConnect(context, selectedIDs) {
         return '#iD-operation-connect';
     };
 
-    // Tooltip based on enabled/disabled state
     operation.tooltip = function () {
         var disable = operation.disabled();
         return disable
             ? t.append(`operations.connect.${disable}`)
-            : t.append('operations.connect.description.' + "single");
+            : t.append('operations.connect.description.single');
     };
 
     operation.annotation = function () {
-        return t('operations.connect.annotation', { node1: nodeID, node2: _matchingNodeID });
+        return t('operations.connect.annotation.from_point.to_point', { node1: nodeID, node2: _matchingNodeID });
     };
 
     operation.id = 'connect';

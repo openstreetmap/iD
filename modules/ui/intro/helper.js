@@ -84,6 +84,7 @@ export function helpHtml(id, replacements) {
         rotate_icon: icon('#iD-operation-rotate', 'inline operation'),
         split_icon: icon('#iD-operation-split', 'inline operation'),
         straighten_icon: icon('#iD-operation-straighten', 'inline operation'),
+        connect_icon: icon('#iD-operation-connect', 'inline operation'),
 
         // interaction icons
         leftclick: icon('#iD-walkthrough-mouse-left', 'inline operation'),
