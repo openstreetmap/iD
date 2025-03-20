@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Allow searching for coordinates in localized number format in search box ([#10805])
+* Improve visibility of oneway arrows for dashed line styles (such as railway lines, foot paths, etc.): they are now rendered such that the arrows seemlessly integrate into the line dashes ([#10849])
 #### :scissors: Operations
 * Fix unexpected behavior of squaring operation on individual vertices ([#10401])
 #### :camera: Street-Level
