@@ -6,6 +6,7 @@ languageIds:
   - typescriptreact
 
 usageMatchRegex:
+  - "[^\\w\\d]t\\.addOrUpdate\\(['\"`]({key})['\"`]" # matches t.addOrUpdate("{key}"
   - "[^\\w\\d]t\\.append\\(['\"`]({key})['\"`]" # matches t.append("{key}"
   - "[^\\w\\d]t\\.html\\(['\"`]({key})['\"`]" # matches t.html("{key}"
   - "[^\\w\\d]t\\(['\"`]({key})['\"`]" # matches t.html("{key}"

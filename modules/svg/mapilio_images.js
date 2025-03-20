@@ -102,6 +102,47 @@ export function svgMapilioImages(projection, context, dispatch) {
         if (service) service.setStyles(context, null);
     }
 
+
+    function filterImages(images) {
+        var fromDate = context.photos().fromDate();
+        var toDate = context.photos().toDate();
+
+        if (fromDate) {
+            var fromTimestamp = new Date(fromDate).getTime();
+            images = images.filter(function(photo) {
+                return new Date(photo.capture_time).getTime() >= fromTimestamp;
+            });
+        }
+        if (toDate) {
+            var toTimestamp = new Date(toDate).getTime();
+            images = images.filter(function(photo) {
+                return new Date(photo.capture_time).getTime() <= toTimestamp;
+            });
+        }
+
+        return images;
+    }
+
+    function filterSequences(sequences) {
+        var fromDate = context.photos().fromDate();
+        var toDate = context.photos().toDate();
+
+        if (fromDate) {
+            var fromTimestamp = new Date(fromDate).getTime();
+            sequences = sequences.filter(function(sequence) {
+                return new Date(sequence.properties.capture_time).getTime() >= fromTimestamp;
+            });
+        }
+        if (toDate) {
+            var toTimestamp = new Date(toDate).getTime();
+            sequences = sequences.filter(function(sequence) {
+                return new Date(sequence.properties.capture_time).getTime() <= toTimestamp;
+            });
+        }
+
+        return sequences;
+    }
+
     function update() {
 
         const z = ~~context.map().zoom();
@@ -110,6 +151,11 @@ export function svgMapilioImages(projection, context, dispatch) {
         const service = getService();
         let sequences = (service ? service.sequences(projection) : []);
         let images = (service ? service.images(projection) : []);
+
+        dispatch.call('photoDatesChanged', this, 'mapilio', [...images.map(p => p.capture_time), ...sequences.map(s => s.properties.capture_time)]);
+
+        sequences = filterSequences(sequences);
+        images = filterImages(images);
 
         let traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.id; });
@@ -218,8 +264,11 @@ export function svgMapilioImages(projection, context, dispatch) {
                 service.loadImages(projection);
                 service.loadLines(projection);
             } else {
+                dispatch.call('photoDatesChanged', this, 'mapilio', []);
                 editOff();
             }
+        } else {
+            dispatch.call('photoDatesChanged', this, 'mapilio', []);
         }
     }
 

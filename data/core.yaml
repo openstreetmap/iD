@@ -596,6 +596,7 @@ en:
       offline: The OpenStreetMap API is offline. Your edits are safe locally. Please come back later.
       readonly: The OpenStreetMap API is currently read-only. You can continue editing, but must wait to save your changes.
       rateLimit: The OpenStreetMap API is limiting anonymous connections. You can fix this by logging in.
+      rateLimited: The OpenStreetMap API is limiting your connection, please wait.
       local_storage_full: You have made too many edits to back up. Consider saving your changes now.
     retry: Retry
   commit:
@@ -904,6 +905,11 @@ en:
     username_filter:
       title: "Username"
       tooltip: "Show only photos by this user"
+    age_slider_filter:
+      title: "Date Range"
+      tooltip: "Shows only photos that are newer than the selected date"
+      label_all: "All photos visible."
+      label_date: "Showing photos newer than {date}."
   feature:
     points:
       description: Points
@@ -2417,6 +2423,8 @@ en:
       way_selected:
         title: "With way selected"
         child: "Select child nodes"
+      enable:
+        streetlevel: "Toggle active street level photo layers"
     editing:
       title: "Editing"
       drawing:

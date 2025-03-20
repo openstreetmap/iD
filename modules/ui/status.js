@@ -21,19 +21,23 @@ export function uiStatus(context) {
                     return;
 
                 } else if (apiStatus === 'rateLimited') {
-                    selection
-                        .call(t.append('osm_api_status.message.rateLimit'))
-                        .append('a')
-                        .attr('href', '#')
-                        .attr('class', 'api-status-login')
-                        .attr('target', '_blank')
-                        .call(svgIcon('#iD-icon-out-link', 'inline'))
-                        .append('span')
-                        .call(t.append('login'))
-                        .on('click.login', function(d3_event) {
-                            d3_event.preventDefault();
-                            osm.authenticate();
-                        });
+                    if (!osm.authenticated()) {
+                        selection
+                            .call(t.append('osm_api_status.message.rateLimit'))
+                            .append('a')
+                            .attr('href', '#')
+                            .attr('class', 'api-status-login')
+                            .attr('target', '_blank')
+                            .call(svgIcon('#iD-icon-out-link', 'inline'))
+                            .append('span')
+                            .call(t.append('login'))
+                            .on('click.login', function(d3_event) {
+                                d3_event.preventDefault();
+                                osm.authenticate();
+                            });
+                    } else {
+                        selection.call(t.append('osm_api_status.message.rateLimited'));
+                    }
                 } else {
 
                     // don't allow retrying too rapidly

@@ -18,6 +18,8 @@ export function uiPhotoviewer(context) {
 
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
+    const addPhotoIdButton = new Set(['mapillary', 'panoramax']);
+
     function photoviewer(selection) {
         selection
             .append('button')
@@ -67,16 +69,19 @@ export function uiPhotoviewer(context) {
 
         // update sett_photo_from_viewer button on selection change and when tags change
         context.features().on('change.setPhotoFromViewer', function() {
-            setPhotoFromViewerButton();
+            setPhotoTagButton();
         });
         context.history().on('change.setPhotoFromViewer', function() {
-            setPhotoFromViewerButton();
+            setPhotoTagButton();
         });
 
 
-        function setPhotoFromViewerButton() {
-            if (services.mapillary.isViewerOpen()) {
-                if (context.mode().id !== 'select' || !(layerStatus('mapillary') && getServiceId() === 'mapillary')) {
+        function setPhotoTagButton() {
+            const service = getServiceId();
+            const isActiveForService = addPhotoIdButton.has(service) && services[service].isViewerOpen();
+
+            if (isActiveForService) {
+                if (context.mode().id !== 'select' || !layerEnabled(service)) {
                     buttonRemove();
                 } else {
                     if (selection.select('.set-photo-from-viewer').empty()) {
@@ -84,21 +89,21 @@ export function uiPhotoviewer(context) {
                         button.on('click', function (e) {
                             e.preventDefault();
                             e.stopPropagation();
-                            setMapillaryPhotoId();
+                            setPhotoId();
                             buttonDisable('already_set');
                         });
                     }
-                    buttonShowHide();
+                    buttonShowHide(service);
                 }
 
-                function setMapillaryPhotoId() {
-                    const service = services.mapillary;
-                    const image = service.getActiveImage();
+                function setPhotoId() {
+                    const activeServiceId = getServiceId();
+                    const image = services[activeServiceId].getActiveImage();
 
                     const action = graph =>
                         context.selectedIDs().reduce((graph, entityID) => {
                             const tags = graph.entity(entityID).tags;
-                            const action = actionChangeTags(entityID, {...tags, mapillary: image.id});
+                            const action = actionChangeTags(entityID, {...tags, [activeServiceId]: image.id});
                             return action(graph);
                         }, graph);
 
@@ -107,7 +112,7 @@ export function uiPhotoviewer(context) {
                 }
             }
 
-            function layerStatus(which) {
+            function layerEnabled(which) {
                 const layers = context.layers();
                 const layer = layers.layer(which);
                 return layer.enabled();
@@ -128,7 +133,7 @@ export function uiPhotoviewer(context) {
                 const buttonEnter = button.enter()
                     .append('button')
                     .attr('class', 'set-photo-from-viewer')
-                    .call(svgIcon('#iD-icon-plus'))
+                    .call(svgIcon('#fas-eye-dropper'))
                     .call(uiTooltip()
                         .title(() => t.append('inspector.set_photo_from_viewer.enable'))
                         .placement('right')
@@ -138,22 +143,36 @@ export function uiPhotoviewer(context) {
                     .classed('dark', true)
                     .style('width', '300px');
 
+                if (service === 'panoramax') {
+                    const panoramaxControls = selection.select('.pnlm-zoom-controls.pnlm-controls');
+
+                    panoramaxControls
+                        .style('margin-top', '36px');
+                }
+
                 return buttonEnter;
             }
 
             function buttonRemove() {
                 const button = selection.selectAll('.set-photo-from-viewer').data([0]);
                 button.remove();
+
+                if (service === 'panoramax') {
+                    const panoramaxControls = selection.select('.pnlm-zoom-controls.pnlm-controls');
+
+                    panoramaxControls
+                        .style('margin-top', '6px');
+                }
             }
 
-            function buttonShowHide() {
-                const activeImage = services.mapillary.getActiveImage();
+            function buttonShowHide(tagName) {
+                const activeImage = services[tagName].getActiveImage();
 
                 const graph = context.graph();
                 const entities = context.selectedIDs()
                     .map(id => graph.entity(id));
 
-                if (entities.map(entity => entity.tags.mapillary)
+                if (entities.map(entity => entity.tags[tagName])
                     .every(value => value === activeImage?.id)) {
                     buttonDisable('already_set');
                 } else if (activeImage && entities

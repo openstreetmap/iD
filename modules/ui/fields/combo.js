@@ -4,7 +4,6 @@ import { drag as d3_drag } from 'd3-drag';
 import * as countryCoder from '@rapideditor/country-coder';
 
 import { fileFetcher } from '../../core/file_fetcher';
-import { osmEntity } from '../../osm/entity';
 import { t } from '../../core/localizer';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
@@ -13,6 +12,7 @@ import { svgIcon } from '../../svg/icon';
 import { utilKeybinding } from '../../util/keybinding';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
 import { uiLengthIndicator } from '../length_indicator';
+import { deprecatedTagValuesByKey } from '../../osm/deprecated';
 
 export {
     uiFieldCombo as uiFieldManyCombo,
@@ -258,7 +258,7 @@ export function uiFieldCombo(field, context) {
                 return value === restrictTagValueSpelling(value);
             });
 
-            var deprecatedValues = osmEntity.deprecatedTagValuesByKey(_dataDeprecated)[field.key];
+            var deprecatedValues = deprecatedTagValuesByKey(_dataDeprecated)[field.key];
             if (deprecatedValues) {
                 // don't suggest deprecated tag values
                 data = data.filter(d  =>

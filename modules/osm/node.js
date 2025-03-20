@@ -1,6 +1,7 @@
 import { osmEntity } from './entity';
 import { geoAngle, geoExtent } from '../geo';
 import { utilArrayUniq } from '../util';
+import { osmShouldRenderDirection } from './tags';
 
 export const cardinal = {
     north: 0,               n: 0,
@@ -119,9 +120,7 @@ const prototype = {
 
             var nodeIds = {};
             resolver.parentWays(this)
-                .filter(p => (this.tags.highway || this.tags.traffic_sign || this.tags.traffic_calming || this.tags.barrier || this.tags.cycleway) ? p.tags.highway : true)
-                .filter(p => (this.tags.railway) ? p.tags.railway : true)
-                .filter(p => (this.tags.waterway) ? p.tags.waterway : true)
+                .filter(way => osmShouldRenderDirection(this.tags, way.tags))
                 .forEach(function(parent) {
                     var nodes = parent.nodes;
                     for (i = 0; i < nodes.length; i++) {

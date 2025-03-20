@@ -233,6 +233,8 @@ export function svgStreetside(projection, context, dispatch) {
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
 
+        dispatch.call('photoDatesChanged', this, 'streetside', [...bubbles.map(p => p.captured_at), ...sequences.map(t => t.properties.vintageStart)]);
+
         // exit
         traces.exit()
             .remove();
@@ -349,8 +351,11 @@ export function svgStreetside(projection, context, dispatch) {
                 update();
                 service.loadBubbles(projection);
             } else {
+                dispatch.call('photoDatesChanged', this, 'streetside', []);
                 editOff();
             }
+        } else {
+            dispatch.call('photoDatesChanged', this, 'streetside', []);
         }
     }
 

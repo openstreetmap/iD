@@ -34,14 +34,23 @@ export function rendererPhotos(context) {
         window.location.replace('#' + utilQsString(hash, true));
     }
 
+    /**
+     * @returns The layer ID
+     */
     photos.overlayLayerIDs = function() {
         return _layerIDs;
     };
 
+    /**
+     * @returns All the photo types
+     */
     photos.allPhotoTypes = function() {
         return _allPhotoTypes;
     };
 
+    /**
+     * @returns The date filters value
+     */
     photos.dateFilters = function() {
         return _dateFilters;
     };
@@ -50,6 +59,12 @@ export function rendererPhotos(context) {
         return val === _dateFilters[0] ? _fromDate : _toDate;
     };
 
+    /**
+     * Sets the date filter (min/max date)
+     * @param {*} type Either 'fromDate' or 'toDate'
+     * @param {*} val The actual Date
+     * @param {boolean} updateUrl Whether the URL should update or not
+     */
     photos.setDateFilter = function(type, val, updateUrl) {
         // validate the date
         var date = val && new Date(val);
@@ -80,6 +95,11 @@ export function rendererPhotos(context) {
         }
     };
 
+    /**
+     * Sets the username filter
+     * @param {string} val The username
+     * @param {boolean} updateUrl Whether the URL should update or not
+     */
     photos.setUsernameFilter = function(val, updateUrl) {
         if (val && typeof val === 'string') val = val.replace(/;/g, ',').split(',');
         if (val) {
@@ -99,6 +119,36 @@ export function rendererPhotos(context) {
         }
     };
 
+    /**
+     * Util function to set the slider date filter
+     * @param {*} val Either 'panoramic' or 'flat'
+     * @param {boolean} updateUrl Whether the URL should update or not
+     */
+    photos.togglePhotoType = function(val, updateUrl) {
+        var index = _shownPhotoTypes.indexOf(val);
+        if (index !== -1) {
+            _shownPhotoTypes.splice(index, 1);
+        } else {
+            _shownPhotoTypes.push(val);
+        }
+
+        if (updateUrl) {
+            var hashString;
+            if (_shownPhotoTypes) {
+                hashString = _shownPhotoTypes.join(',');
+            }
+            setUrlFilterValue('photo_type', hashString);
+        }
+
+        dispatch.call('change', this);
+        return photos;
+    };
+
+    /**
+     * Updates the URL with new values
+     * @param {*} val value to save
+     * @param {string} property Name of the value
+     */
     function setUrlFilterValue(property, val) {
         if (!window.mocha) {
             var hash = utilStringQs(window.location.hash);
@@ -118,15 +168,25 @@ export function rendererPhotos(context) {
         return layer && layer.supported() && layer.enabled();
     }
 
-    photos.shouldFilterByDate = function() {
-        return showsLayer('mapillary') || showsLayer('kartaview') || showsLayer('streetside') || showsLayer('vegbilder') || showsLayer('panoramax');
+    /**
+     * @returns If the Date Slider filter should be drawn
+     */
+    photos.shouldFilterDateBySlider = function(){
+        return showsLayer('mapillary') || showsLayer('kartaview') || showsLayer('mapilio')
+        || showsLayer('streetside') || showsLayer('vegbilder') || showsLayer('panoramax');
     };
 
+    /**
+     * @returns If the Photo Type filter should be drawn
+     */
     photos.shouldFilterByPhotoType = function() {
         return showsLayer('mapillary') ||
             (showsLayer('streetside') && showsLayer('kartaview')) || showsLayer('vegbilder') || showsLayer('panoramax');
     };
 
+    /**
+     * @returns If the Username filter should be drawn
+     */
     photos.shouldFilterByUsername = function() {
         return !showsLayer('mapillary') && showsLayer('kartaview') && !showsLayer('streetside') || showsLayer('panoramax');
     };
@@ -153,31 +213,30 @@ export function rendererPhotos(context) {
         return _toDate;
     };
 
-    photos.togglePhotoType = function(val) {
-        var index = _shownPhotoTypes.indexOf(val);
-        if (index !== -1) {
-            _shownPhotoTypes.splice(index, 1);
-        } else {
-            _shownPhotoTypes.push(val);
-        }
-        dispatch.call('change', this);
-        return photos;
-    };
-
     photos.usernames = function() {
         return _usernames;
     };
 
+    /**
+     * Inits the streetlevel layer given the saved values in the URL
+     */
     photos.init = function() {
         var hash = utilStringQs(window.location.hash);
+        var parts;
         if (hash.photo_dates) {
             // expect format like `photo_dates=2019-01-01_2020-12-31`, but allow a couple different separators
-            var parts = /^(.*)[–_](.*)$/g.exec(hash.photo_dates.trim());
+            parts = /^(.*)[–_](.*)$/g.exec(hash.photo_dates.trim());
             this.setDateFilter('fromDate', parts && parts.length >= 2 && parts[1], false);
             this.setDateFilter('toDate', parts && parts.length >= 3 && parts[2], false);
         }
         if (hash.photo_username) {
             this.setUsernameFilter(hash.photo_username, false);
+        }
+        if (hash.photo_type) {
+            parts = hash.photo_type.replace(/;/g, ',').split(',');
+            _allPhotoTypes.forEach(d => {
+                if (!parts.includes(d)) this.togglePhotoType(d, false);
+            });
         }
         if (hash.photo_overlay) {
             // support enabling photo layers by default via a URL parameter, e.g. `photo_overlay=kartaview;mapillary;streetside`

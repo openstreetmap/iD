@@ -38,14 +38,44 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # unreleased (v2.33.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Allow searching for coordinates in localized number format in search box ([#10805])
 #### :scissors: Operations
+* Fix unexpected behavior of squaring operation on individual vertices ([#10401])
 #### :camera: Street-Level
+* Replace date filter input boxes with a slider to select photos by freshness ([#10394], thanks [@mattiapezzotti])
+* Preserve relative viewing direction when switching between 360° panoramas in Panoramax([#10392], thanks [@mattiapezzotti])
+* Add keyboard shortcut `Shift + P` to toggle active street level photo layers ([#10394], thanks [@mattiapezzotti]))
+* Add prev/next button to viewer for local georeferenced photos ([#10852], thanks [@0xatulpatil])
+* Add button to directly attach the id of a Panoramax photo as the `panoramax` tag of selected map features ([#10856], thanks [@MohamedAli00949])
 #### :white_check_mark: Validation
+* The Suspicious Names validator warning now also compares the Name field to the preset’s aliases (in addition to the preset’s name) in the user’s language
 #### :bug: Bugfixes
+* Fix some direction cones not appearing on railway tracks ([#10843], thanks [@k-yle])
+* Better handling of rate limited API calls and other API errors ([#10299])
+* Fix info boxes for descriptions of brands referenced by [NSI](https://github.com/osmlab/name-suggestion-index) presets ([#10885])
+* Make features clickable when "Full Fill" rendering style is selected
+* Fix calculation of access field placeholders for multi selections ([#9333])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* Don't inherit fields which the current preset already has a dedicated field for
+* Take location into account when setting a presets default values from regional fields
+* Roads with `motorroad=yes` show implied access restrictions (`foot=no`, `bicycle=no`, `horse=no`) ([id-tagging-schema#609], [#9333])
 #### :hammer: Development
+
+[#9333]: https://github.com/openstreetmap/iD/pull/9333
+[#10299]: https://github.com/openstreetmap/iD/issues/10299
+[#10392]: https://github.com/openstreetmap/iD/issues/10392
+[#10394]: https://github.com/openstreetmap/iD/pull/10394
+[#10401]: https://github.com/openstreetmap/iD/issues/10401
+[#10805]: https://github.com/openstreetmap/iD/pull/10805
+[#10843]: https://github.com/openstreetmap/iD/pull/10843
+[#10852]: https://github.com/openstreetmap/iD/issues/10852
+[#10885]: https://github.com/openstreetmap/iD/issues/10885
+[id-tagging-schema#609]: https://github.com/openstreetmap/id-tagging-schema/issues/609
+[@0xatulpatil]: https://github.com/0xatulpatil
+[@MohamedAli00949]: https://github.com/MohamedAli00949
 
 
 # 2.32.0
@@ -73,7 +103,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Revalidate ways that are added to or removed from relations ([#10786])
 * Preserve `crossing:markings` tag when fixing missing connection of crossing path and road ([#9586], thanks [@jtracey])
 * Add a dedicated description to fix waterway-road intersections by adding a _culvert_ ([#10778], thanks [@matkoniecz])
-* Separate tag-upgrade warnings from NSI suggestions ([#10800], thanks [@k-yle])
+* Separate tag-upgrade warnings from NSI suggestions ([#10801], thanks [@k-yle])
 #### :bug: Bugfixes
 * Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
 * Fix briefly disappearing data layer during background layer tile layer switching transition ([#10748])
@@ -117,7 +147,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10776]: https://github.com/openstreetmap/iD/issues/10776
 [#10778]: https://github.com/openstreetmap/iD/issues/10778
 [#10798]: https://github.com/openstreetmap/iD/pull/10798
-[#10800]: https://github.com/openstreetmap/iD/pull/10800
+[#10801]: https://github.com/openstreetmap/iD/pull/10801
 [#10807]: https://github.com/openstreetmap/iD/issues/10807
 [@hlfan]: https://github.com/hlfan
 [@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
@@ -297,7 +327,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add button to fully load incompletely downloaded relations ([#5420])
 #### :camera: Street-Level
 * Show Mapillary username and deep link to external viewer on Mapillary photos ([#10135], thanks [@Sushil642])
-* Add button to directly attach the id of a mapillary photo as the `mapillary` tag of selected map features ([#9339])
+* Add button to directly attach the id of a Mapillary photo as the `mapillary` tag of selected map features ([#9339], thanks [@laigyu])
 #### :white_check_mark: Validation
 * Drop validation which checks for [old style multipolygons](https://wiki.openstreetmap.org/wiki/Old_style_multipolygons), as these have long been [fixed](https://blog.jochentopf.com/2017-08-28-polygon-fixing-effort-concluded.html) in OSM
 * Upgrade closed ways with `traffic_calming=island` to `area:highway=traffic_island` ([id-tagging-schema#1162])

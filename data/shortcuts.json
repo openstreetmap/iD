@@ -75,6 +75,11 @@
             "text": "shortcuts.browsing.display_options.osm_data"
           },
           {
+            "modifiers": ["⇧"],
+            "shortcuts": ["P"],
+            "text": "shortcuts.browsing.enable.streetlevel"
+          },
+          {
             "shortcuts": ["background.minimap.key"],
             "text": "shortcuts.browsing.display_options.minimap"
           },
