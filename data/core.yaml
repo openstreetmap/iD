@@ -261,6 +261,10 @@ en:
     reorder_members:
       annotation: Reordered a relation's members.
     connect:
+      title: Connect
+      description:
+        single: Connect the node.
+      key: J
       annotation:
         from_vertex:
           to_point: Connected a way to a point.
