@@ -348,6 +348,10 @@ export function uiInit(context) {
                 .call(uiAccount(context));
         }
 
+        if (prefs('highlight-edited')=='true'){
+            context.map().toggleHighlightEdited();
+        }
+
 
         // Setup map dimensions and move map to initial center/zoom.
         // This should happen after .main-content and toolbars exist.
@@ -422,6 +426,8 @@ export function uiInit(context) {
             .on(t('map_data.highlight_edits.key'), function toggleHighlightEdited(d3_event) {
                 d3_event.preventDefault();
                 context.map().toggleHighlightEdited();
+                var highlightEditedStatus=prefs('highlight-edited')=='true';
+                prefs('highlight-edited',highlightEditedStatus?'false':'true');
             });
 
         context
