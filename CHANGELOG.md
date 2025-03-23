@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 * Allow searching for coordinates in localized number format in search box ([#10805])
 * Improve visibility of oneway arrows for dashed line styles (such as railway lines, foot paths, etc.): they are now rendered such that the arrows seemlessly integrate into the line dashes ([#10849])
+* Persist "highlight unsaved edits" mode across editing sessions, so users don't need to re-enable it manually ([#10903])
 #### :scissors: Operations
 * Fix unexpected behavior of squaring operation on individual vertices ([#10401])
 #### :camera: Street-Level
@@ -74,6 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10843]: https://github.com/openstreetmap/iD/pull/10843
 [#10852]: https://github.com/openstreetmap/iD/issues/10852
 [#10885]: https://github.com/openstreetmap/iD/issues/10885
+[#10903]: https://github.com/openstreetmap/iD/pull/10903
 [id-tagging-schema#609]: https://github.com/openstreetmap/id-tagging-schema/issues/609
 [@0xatulpatil]: https://github.com/0xatulpatil
 [@MohamedAli00949]: https://github.com/MohamedAli00949
