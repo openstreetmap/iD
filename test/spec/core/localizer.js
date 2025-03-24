@@ -90,4 +90,29 @@ describe('iD.coreLocalizer', function() {
             expect(countDecimalPlaces('10')).to.eql(0);
         });
     });
+
+    describe('localesToUseFrom', () => {
+        const SUPPORTED_LANGS = {
+            en: true,
+            'en-AU': true,
+            fr: true,
+            zh: true,
+            'zh-CN': true,
+        };
+        it.each([
+            /* [requested, matching] */
+            [[], ['en']],
+            [['en'], ['en']],
+            [['en-AU'], ['en-AU', 'en']],
+            [['zh'], ['zh', 'en']],
+            [['zh-CN'], ['zh-CN', 'zh', 'en']],
+            [['zh-Hans-CN'], ['zh-CN', 'zh', 'en']],
+            [['zh-Hans'], ['zh', 'en']],
+            [['fr-Latn'], ['fr', 'en']],
+        ])('resolves %s to %s', (requested, matching) => {
+            const localiser = iD.coreLocalizer();
+            localiser.preferredLocaleCodes(requested);
+            expect(localiser.localesToUseFrom(SUPPORTED_LANGS)).toStrictEqual(matching);
+        });
+    });
 });
