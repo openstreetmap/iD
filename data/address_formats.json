@@ -72,6 +72,13 @@
     ]
   },
   {
+    "countryCodes": ["hk"],
+    "format": [
+      ["unit", "floor"],
+      ["housenumber", "street"]
+    ]
+  },
+  {
     "countryCodes": ["mo"],
     "format": [
       ["housenumber", "street"],
