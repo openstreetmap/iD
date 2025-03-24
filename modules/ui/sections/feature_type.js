@@ -89,7 +89,7 @@ export function uiSectionFeatureType(context) {
                 d3_event.stopPropagation();
             });
 
-        let lifecycle = _presets[0].getLifecycle(_tags);
+        let lifecycle = _presets[0].setLifecycle(_tags);
 
         var geometries = entityGeometries();
         selection.select('.preset-list-item button')
@@ -123,9 +123,9 @@ export function uiSectionFeatureType(context) {
         presetIconContainer.selectAll('.lifecycle-icon-container').remove();
         namepartContainer.selectAll('.lifecycle').remove();
 
-        let presetKeys = Object.keys(_presets[0].tags);
-
-        if (!presetKeys.some(e => e.includes(lifecycle))) {
+        let presetID = _presets[0].id;
+        
+        if (!(Object.keys(osmLifecyclePrefixes).some(el => presetID.includes(el)))) {
             if (lifecycle && lifecycle !== 'functional') {
                 namepartContainer
                     .append('span')

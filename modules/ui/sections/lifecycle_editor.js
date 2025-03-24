@@ -16,7 +16,7 @@ export function uiSectionLifecycleEditor(context) {
     var _tags;
     var _pendingChange = null;
     var _currentLifecycle = 'functional';
-    var _mainTag = '';
+    var _mainKey = '';
     var _extraTags;
     var _showBlank = false;
     var _presets = [];
@@ -53,6 +53,9 @@ export function uiSectionLifecycleEditor(context) {
         _showBlank = false;
 
         _currentLifecycle = _presets[0].lifecycle;
+        ids.includes(_presets[0].id.split('/')[0]) ? 
+            _mainKey = _presets[0].id.split('/')[1] : _mainKey = _presets[0].id.split('/')[0];
+
         var lifecycleToRender = getLifecycleToRender();
 
         outerWrap = selection
@@ -132,7 +135,10 @@ export function uiSectionLifecycleEditor(context) {
         if (Object.keys(_presets[0].tags).length === 0 || _presets[0].id === 'area') {
             outerWrap.attr('class', 'wrap-form-field-lifecycle-disabled');
         }
-        _mainTag = getMainTag();
+
+        if (_presets.length > 1) {
+            outerWrap.attr('class', 'wrap-form-field-lifecycle-disabled');
+        }
 
         // Extra Lifecycle Menu
         _extraTags = getExtraTags();
@@ -329,31 +335,8 @@ export function uiSectionLifecycleEditor(context) {
         return null;
     }
 
-    function getMainTag() {
-        const presetKeys = Object.keys(_presets[0].tags);
-
-        const existingTag = presetKeys.find(key =>
-            ids.some(id => key.includes(id))
-        );
-
-        if (existingTag) return existingTag;
-
-        if (_currentLifecycle !== 'functional' && _currentLifecycle !== 'construction') {
-            return presetKeys.map(tag => `${_currentLifecycle}:${tag}`).find(tag =>
-                ids.some(id => tag.includes(id))
-            );
-        } else {
-            if (_currentLifecycle === 'construction') {
-                return 'construction';
-            }
-        }
-
-        return null;
-    }
-
     function getExtraTags() {
         const tags = _tags;
-        const mainTag = _mainTag;
 
         const tagsWithLifecycles = Object.fromEntries(
             ids.flatMap(id =>
@@ -367,10 +350,12 @@ export function uiSectionLifecycleEditor(context) {
             }
         }
 
-        if (tagsWithLifecycles.hasOwnProperty(mainTag)) {
-            delete tagsWithLifecycles[mainTag];
-        }
-
+        Object.keys(_presets[0].tags).forEach(pt => {
+            if (tagsWithLifecycles.hasOwnProperty(pt)) {
+                delete tagsWithLifecycles[pt];
+            }
+        });
+        
         return tagsWithLifecycles;
     }
 
@@ -404,40 +389,37 @@ export function uiSectionLifecycleEditor(context) {
         if (d3_select(this).attr('readonly')) return;
 
         const tags = _tags;
-        let presetTags = _presets[0].tags;
-
+        const mainKey = _mainKey
+        let oldValue = tags[mainKey];
         const newLifecycle = d3_select(this).attr('value');
-        const oldLifecycleTag = _mainTag;
-        let constructionValue = _presets[0].id.split('/')[0];
-
-        if (ids.some(id => id.includes(constructionValue))) {
-            constructionValue = _presets[0].id.split('/')[1];
-        }
+        const oldLifecycle = _currentLifecycle;
+        
+        if (ids.includes(oldValue)) oldValue = 'yes';
+        if (oldLifecycle === 'construction' && tags[mainKey]) oldValue = tags.construction ?? 'yes';
 
         _pendingChange = _pendingChange ?? {};
+        _pendingChange[mainKey] = undefined;
+        _pendingChange[oldLifecycle] = undefined;
+        _pendingChange[oldLifecycle + ':' + mainKey] = undefined;
 
-        if (oldLifecycleTag?.includes(':')) {
-            const [, tag] = oldLifecycleTag.split(':');
-            _pendingChange[oldLifecycleTag] = undefined;
-
-            if (newLifecycle === 'construction') {
-                _pendingChange[tag] = tags[oldLifecycleTag];
-                _pendingChange.construction = constructionValue ?? 'yes';
+        if (oldLifecycle === 'functional') {
+            if (newLifecycle !== 'construction') {
+                _pendingChange[newLifecycle + ':' + mainKey] = oldValue ?? 'yes';
             } else {
-                _pendingChange[newLifecycle + ':' + tag] = tags[oldLifecycleTag];
+                _pendingChange[mainKey] = 'construction'
+                _pendingChange.construction = oldValue ?? 'yes';
             }
         } else {
-            Object.keys(presetTags).forEach(pt => {
-                if (newLifecycle !== 'construction') {
-                    _pendingChange[pt] = undefined;
-                    _pendingChange[`${newLifecycle}:${pt}`] = tags[pt] ?? 'yes';
-                    if (oldLifecycleTag === 'construction') {
-                        _pendingChange.construction = undefined;
-                    }
+            if (oldLifecycle !== 'construction') {
+                if (newLifecycle === 'construction') {
+                    _pendingChange[mainKey] = 'construction';
+                    _pendingChange.construction = tags[oldLifecycle + ':' + mainKey] ?? 'yes';
                 } else {
-                    _pendingChange.construction = constructionValue ?? 'yes';
+                    _pendingChange[newLifecycle + ':' + mainKey] = tags[oldLifecycle + ':' + mainKey] ?? oldValue ?? 'yes';
                 }
-            });
+            } else {
+                _pendingChange[newLifecycle + ':' + mainKey] = oldValue;
+            }
         }
 
         scheduleChange();
@@ -482,19 +464,20 @@ export function uiSectionLifecycleEditor(context) {
     }
 
     function makeFunctional() {
-        const oldLifecycleTag = _mainTag;
+        const oldLifecycle = _currentLifecycle;
         const tags = _tags;
+        const mainKey = _mainKey;
+        let mainValue = tags[oldLifecycle + ':' + mainKey] ?? tags[mainKey];
+
+        if (ids.includes(mainValue)) mainValue = 'yes';
+
+        if(oldLifecycle === 'construction') mainValue = tags.construction;
 
         _pendingChange = _pendingChange ?? {};
-
-        if (oldLifecycleTag) {
-            const [oldPrefix, newTag] = oldLifecycleTag.split(':');
-            _pendingChange[oldLifecycleTag] = undefined;
-            if (oldPrefix !== 'construction') {
-                _pendingChange[newTag] = tags[oldLifecycleTag];
-            }
-        }
-
+        _pendingChange[mainKey] =  mainValue ?? 'yes';
+        _pendingChange[oldLifecycle] = undefined;
+        _pendingChange[oldLifecycle + ':' + mainKey] = undefined;
+        
         scheduleChange();
     }
 
@@ -541,7 +524,6 @@ export function uiSectionLifecycleEditor(context) {
 
     section.presets = function(val) {
         if (!arguments.length) return _presets;
-
         // don't reload the same preset
         if (!utilArrayIdentical(val, _presets)) {
             _presets = val;

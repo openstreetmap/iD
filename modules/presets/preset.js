@@ -300,13 +300,20 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     return tags;
   };
 
-  _this.getLifecycle = (entity) => {
+  _this.setLifecycle = (entity) => {
     let lifecycle = 'functional';
-    let entitytags = Object.keys(entity);
+    const entityTags = Object.keys(entity);
+    const entityValues = Object.values(entity);
     const presetTags = Object.keys(_this.tags);
     const ids = Object.keys(osmLifecyclePrefixes);
     let presetPrefix;
 
+    entityValues.forEach(tag => {
+      if (ids.includes(tag)) {
+        lifecycle = tag;
+      }
+    });
+    
     if (presetTags[0]) {
       presetPrefix = presetTags[0].split(':')[0] ?? null;
     }
@@ -314,10 +321,10 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     if (presetPrefix && ids.includes(presetPrefix)) {
       lifecycle = presetPrefix;
     } else {
-      if ((entitytags.includes('construction')) && (entity.construction === 'yes' || entity.construction === _this.id.split('/')[0])) {
+      if ((entityTags.includes('construction'))) {
           lifecycle = 'construction';
       } else {
-        entitytags.forEach(tag => {
+        entityTags.forEach(tag => {
           if (tag.includes(':')) {
               let [prefix, base] = tag.split(':', 2);
               if (presetTags.includes(base) && ids.includes(prefix)) {
@@ -327,6 +334,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
         });
       }
     }
+
     _this.lifecycle = lifecycle;
     return lifecycle;
   };
