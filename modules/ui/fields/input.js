@@ -345,13 +345,34 @@ export function uiFieldText(field, context) {
         }
     }
 
+    function generateRandomPhoneNumber() {
+        // Generate a random country code between +1 and +999
+        const countryCode = `+${Math.floor(Math.random() * 99) + 1}`;
+
+        // Generate a random phone number with 10 or 11 digits
+        const phoneNumberLength = Math.floor(Math.random() * 2) + 10 - (countryCode.length - 1);
+        let phoneNumber = '';
+
+        for (let i = 0; i < phoneNumberLength; i++) {
+            phoneNumber += Math.floor(Math.random() * 10);
+        }
+
+        // Format the number with spaces every 3 or 4 digits
+        const formattedNumber = phoneNumber.replace(/(\d{3})(?=\d{4,7})/g, '$1 ');
+
+        return `${countryCode} ${formattedNumber}`;
+    }
+
 
     function updatePhonePlaceholder() {
         if (input.empty() || !Object.keys(_phoneFormats).length) return;
 
         var extent = combinedEntityExtent();
         var countryCode = extent && countryCoder.iso1A2Code(extent.center());
-        var format = countryCode && _phoneFormats[countryCode.toLowerCase()];
+        var format;
+
+        if (countryCode && !_phoneFormats[countryCode.toLowerCase()]) format = generateRandomPhoneNumber(); // if the phone format is not listed
+        else format = (countryCode && _phoneFormats[countryCode.toLowerCase()]); // if the phone format is listed
         if (format) input.attr('placeholder', format);
     }
 
