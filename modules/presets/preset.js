@@ -313,7 +313,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
         lifecycle = tag;
       }
     });
-    
+
     if (presetTags[0]) {
       presetPrefix = presetTags[0].split(':')[0] ?? null;
     }

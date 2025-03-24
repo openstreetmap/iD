@@ -53,8 +53,12 @@ export function uiSectionLifecycleEditor(context) {
         _showBlank = false;
 
         _currentLifecycle = _presets[0].lifecycle;
-        ids.includes(_presets[0].id.split('/')[0]) ? 
-            _mainKey = _presets[0].id.split('/')[1] : _mainKey = _presets[0].id.split('/')[0];
+
+        if (ids.includes(_presets[0].id.split('/')[0])) {
+            _mainKey = _presets[0].id.split('/')[1];
+        } else {
+            _mainKey = _presets[0].id.split('/')[0];
+        }
 
         var lifecycleToRender = getLifecycleToRender();
 
@@ -355,7 +359,7 @@ export function uiSectionLifecycleEditor(context) {
                 delete tagsWithLifecycles[pt];
             }
         });
-        
+
         return tagsWithLifecycles;
     }
 
@@ -389,11 +393,11 @@ export function uiSectionLifecycleEditor(context) {
         if (d3_select(this).attr('readonly')) return;
 
         const tags = _tags;
-        const mainKey = _mainKey
+        const mainKey = _mainKey;
         let oldValue = tags[mainKey];
         const newLifecycle = d3_select(this).attr('value');
         const oldLifecycle = _currentLifecycle;
-        
+
         if (ids.includes(oldValue)) oldValue = 'yes';
         if (oldLifecycle === 'construction' && tags[mainKey]) oldValue = tags.construction ?? 'yes';
 
@@ -406,7 +410,7 @@ export function uiSectionLifecycleEditor(context) {
             if (newLifecycle !== 'construction') {
                 _pendingChange[newLifecycle + ':' + mainKey] = oldValue ?? 'yes';
             } else {
-                _pendingChange[mainKey] = 'construction'
+                _pendingChange[mainKey] = 'construction';
                 _pendingChange.construction = oldValue ?? 'yes';
             }
         } else {
@@ -471,13 +475,13 @@ export function uiSectionLifecycleEditor(context) {
 
         if (ids.includes(mainValue)) mainValue = 'yes';
 
-        if(oldLifecycle === 'construction') mainValue = tags.construction;
+        if (oldLifecycle === 'construction') mainValue = tags.construction;
 
         _pendingChange = _pendingChange ?? {};
         _pendingChange[mainKey] =  mainValue ?? 'yes';
         _pendingChange[oldLifecycle] = undefined;
         _pendingChange[oldLifecycle + ':' + mainKey] = undefined;
-        
+
         scheduleChange();
     }
 

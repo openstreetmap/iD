@@ -124,7 +124,7 @@ export function uiSectionFeatureType(context) {
         namepartContainer.selectAll('.lifecycle').remove();
 
         let presetID = _presets[0].id;
-        
+
         if (!(Object.keys(osmLifecyclePrefixes).some(el => presetID.includes(el)))) {
             if (lifecycle && lifecycle !== 'functional') {
                 namepartContainer
