@@ -58,6 +58,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix calculation of access field placeholders for multi selections ([#9333])
 #### :earth_asia: Localization
 * Consider language scripts when determining the locale to use ([#10910], thanks [@k-yle])
+* Add phone format for Egypt ([#10916], thanks [@youssefelzedy])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
@@ -76,9 +77,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10852]: https://github.com/openstreetmap/iD/issues/10852
 [#10885]: https://github.com/openstreetmap/iD/issues/10885
 [#10910]: https://github.com/openstreetmap/iD/pull/10910
+[#10916]: https://github.com/openstreetmap/iD/pull/10916
 [id-tagging-schema#609]: https://github.com/openstreetmap/id-tagging-schema/issues/609
 [@0xatulpatil]: https://github.com/0xatulpatil
 [@MohamedAli00949]: https://github.com/MohamedAli00949
+[@youssefelzedy]: https://github.com/youssefelzedy
 
 
 # 2.32.0
