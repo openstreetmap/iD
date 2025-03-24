@@ -81,8 +81,8 @@
   {
     "countryCodes": ["mo"],
     "format": [
-      ["unit", "floor"],
-      ["housenumber", "street"]
+      ["street", "housenumber", "unit"],
+      ["floor"]
     ]
   },
   {
