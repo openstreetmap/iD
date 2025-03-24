@@ -350,7 +350,7 @@ export function uiFieldText(field, context) {
         if (input.empty() || !Object.keys(_phoneFormats).length) return;
 
         var extent = combinedEntityExtent();
-        var countryCode = extent && countryCoder.iso1A2Code(extent.center());
+        var countryCode = extent && countryCoder.iso1A2Code(extent.center(), { level: 'territory' });
         var format = countryCode && _phoneFormats[countryCode.toLowerCase()];
         if (format) input.attr('placeholder', format);
     }
