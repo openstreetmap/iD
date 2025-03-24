@@ -201,8 +201,9 @@ export function utilDisplayName(entity: iD.OsmEntity, flags: {
     hideRef?: boolean,
     isMapLabel?: boolean
 }): string {
-    const localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
-    const name = entity.tags[localizedNameKey] || entity.tags.name || '';
+    const name = localizer.expandedLocaleCodes()
+        .map(code => entity.tags[`name:${code}`])
+        .find(Boolean) || entity.tags.name || '';
 
     const tags = {
         direction: entity.tags.direction,

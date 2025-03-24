@@ -53,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix minor styling issues in the presets list ([#12321], thanks [@k-yle])
 * Hide icons that failed to load in the relations list ([#12320], thanks [@k-yle])
 #### :earth_asia: Localization
+* When labelling features, match locale codes like `zh-CN` to name tags like `name:zh-Hans` ([#10911], thanks [@k-yle])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
@@ -61,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Update name-suggestion-index to v7.2 ([#12337], thanks [@bjornstar])
 
 [#8848]: https://github.com/openstreetmap/iD/issues/8848
+[#10911]: https://github.com/openstreetmap/iD/pull/10911
 [#11634]: https://github.com/openstreetmap/iD/pull/11634
 [#12297]: https://github.com/openstreetmap/iD/issues/12297
 [#12299]: https://github.com/openstreetmap/iD/issues/12299
