@@ -14,7 +14,7 @@ export function uiFieldAddress(field, context) {
     var dispatch = d3_dispatch('change');
     var _selection = d3_select(null);
     var _wrap = d3_select(null);
-    var addrField = presetManager.field('address');   // needed for placeholder strings
+    var addrField = presetManager.field('address'); // needed for placeholder strings
 
     var _entityIDs = [];
     var _tags;
@@ -24,7 +24,7 @@ export function uiFieldAddress(field, context) {
             ['housenumber', 'street'],
             ['city', 'postcode']
         ]
-      }];
+    }];
 
     fileFetcher.get('address_formats')
         .then(function(d) {
@@ -139,9 +139,9 @@ export function uiFieldAddress(field, context) {
         for (var i = 0; i < _addressFormats.length; i++) {
             var format = _addressFormats[i];
             if (!format.countryCodes) {
-                addressFormat = format;   // choose the default format, keep going
+                addressFormat = format; // choose the default format, keep going
             } else if (format.countryCodes.indexOf(_countryCode) !== -1) {
-                addressFormat = format;   // choose the country format, stop here
+                addressFormat = format; // choose the country format, stop here
                 break;
             }
         }
@@ -153,8 +153,13 @@ export function uiFieldAddress(field, context) {
         ];
 
         var widths = addressFormat.widths || {
-            housenumber: 1/5, unit: 1/5, street: 1/2, place: 1/2,
-            city: 2/3, state: 1/4, postcode: 1/3
+            housenumber: 1 / 5,
+            unit: 1 / 5,
+            street: 1 / 2,
+            place: 1 / 2,
+            city: 2 / 3,
+            state: 1 / 4,
+            postcode: 1 / 3
         };
 
         function row(r) {
@@ -188,37 +193,37 @@ export function uiFieldAddress(field, context) {
             .enter()
             .append('input')
             .property('type', 'text')
-            .attr('class', function (d) { return 'addr-' + d.id; })
+            .attr('class', function(d) { return 'addr-' + d.id; })
             .call(utilNoAuto)
             .each(addDropdown)
             .call(updatePlaceholder)
-            .style('width', function (d) { return d.width * 100 + '%'; });
+            .style('width', function(d) { return d.width * 100 + '%'; });
 
 
         function addDropdown(d) {
-            if (dropdowns.indexOf(d.id) === -1) return;  // not a dropdown
+            if (dropdowns.indexOf(d.id) === -1) return; // not a dropdown
 
             var nearValues;
             switch (d.id) {
                 case 'street':
                     nearValues = getNearStreets;
-                break;
+                    break;
                 case 'place':
                     nearValues = getNearPlaces;
-                break;
+                    break;
                 case 'street+place':
                     nearValues = () => []
                         .concat(getNearStreets())
                         .concat(getNearPlaces());
                     d.isAutoStreetPlace = true;
                     d.id = _tags[`${field.key}:place`] ? 'place' : 'street';
-                break;
+                    break;
                 case 'city':
                     nearValues = getNearCities;
-                break;
+                    break;
                 case 'postcode':
                     nearValues = getNearPostcodes;
-                break;
+                    break;
                 default:
                     nearValues = getNearValues;
             }
@@ -274,6 +279,14 @@ export function uiFieldAddress(field, context) {
             } else {
                 var center = extent.center();
                 countryCode = countryCoder.iso1A2Code(center);
+                // Handle HK/MO special case
+                if (countryCode === 'CN') {
+                    if (inHongKongBounds(center)) {
+                        countryCode = 'HK';
+                    } else if (inMacauBounds(center)) {
+                        countryCode = 'MO';
+                    }
+                }
             }
             if (countryCode) {
                 _countryCode = countryCode.toLowerCase();
@@ -281,6 +294,26 @@ export function uiFieldAddress(field, context) {
             }
         }
     }
+    // Cover macau bounds, specified by longtitude and latitude
+    function inMacauBounds(loc) {
+        var lng = loc[0];
+        var lat = loc[1];
+        return (
+            lat >= 22.06 && lat <= 22.21 &&
+            lng >= 113.52 && lng <= 113.60
+        );
+    }
+    // Cover hk bounds, specified by longtitude and latitude
+    function inHongKongBounds(loc) {
+        var lng = loc[0];
+        var lat = loc[1];
+        return (
+            lat >= 22.12 && lat <= 22.56 &&
+            lng >= 113.82 && lng <= 114.44
+        );
+    }
+
+
 
 
     function change(onInput) {
@@ -288,7 +321,7 @@ export function uiFieldAddress(field, context) {
             var tags = {};
 
             _wrap.selectAll('input')
-                .each(function (subfield) {
+                .each(function(subfield) {
                     var key = field.key + ':' + subfield.id;
 
                     var value = this.value;
