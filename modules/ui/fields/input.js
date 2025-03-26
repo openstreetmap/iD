@@ -349,10 +349,25 @@ export function uiFieldText(field, context) {
     function updatePhonePlaceholder() {
         if (input.empty() || !Object.keys(_phoneFormats).length) return;
 
-        var extent = combinedEntityExtent();
-        var countryCode = extent && countryCoder.iso1A2Code(extent.center(), { level: 'territory' });
-        var format = countryCode && _phoneFormats[countryCode.toLowerCase()];
-        if (format) input.attr('placeholder', format);
+        const extent = combinedEntityExtent();
+        // some territories have their own phone format (e.g. Hong Kong); use them first
+        // if such territory-level format is unknown, then fall back to use the usual country-level format
+        const countryCode = extent && countryCoder.iso1A2Code(extent.center(), { level: 'territory' });
+        if (!countryCode) {
+            // can assume the geometry input has bad data
+            return;
+        }
+        let format = _phoneFormats[countryCode.toLowerCase()];
+        if (!format) {
+            // detect whether countryCode is actually territory-level
+            const countryCodeSovereign = countryCoder.iso1A2Code(extent.center());
+            if (countryCodeSovereign !== countryCode) {
+                format = _phoneFormats[countryCodeSovereign.toLowerCase()]
+            }
+        }
+        if (format) {
+            input.attr('placeholder', format);
+        }
     }
 
 
