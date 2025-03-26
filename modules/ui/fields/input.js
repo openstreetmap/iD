@@ -362,7 +362,7 @@ export function uiFieldText(field, context) {
             // detect whether countryCode is actually territory-level
             const countryCodeSovereign = countryCoder.iso1A2Code(extent.center());
             if (countryCodeSovereign !== countryCode) {
-                format = _phoneFormats[countryCodeSovereign.toLowerCase()]
+                format = _phoneFormats[countryCodeSovereign.toLowerCase()];
             }
         }
         if (format) {
