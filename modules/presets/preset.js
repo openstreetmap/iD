@@ -305,11 +305,12 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     const entityTags = Object.keys(entity);
     const entityValues = Object.values(entity);
     const presetTags = Object.keys(_this.tags);
+    const presetID = _this.id;
     const ids = Object.keys(osmLifecyclePrefixes);
     let presetPrefix;
 
     entityValues.forEach(tag => {
-      if (ids.includes(tag)) {
+      if (ids.includes(tag) && tag !== 'construction') {
         lifecycle = tag;
       }
     });
@@ -321,7 +322,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     if (presetPrefix && ids.includes(presetPrefix)) {
       lifecycle = presetPrefix;
     } else {
-      if ((entityTags.includes('construction'))) {
+      if ((entityTags.includes('construction') && presetID.indexOf('construction') !== -1) || entity.contruction === presetID) {
           lifecycle = 'construction';
       } else {
         entityTags.forEach(tag => {
