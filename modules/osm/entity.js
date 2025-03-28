@@ -137,13 +137,21 @@ osmEntity.prototype = {
                 var opperation = matchKey(k);
 
                 switch (opperation) {
-                    case 'addition':
+                    case 'sum':
                         changed = true;
                         merged[k] = ((+t1) + (+t2)).toString();
                         break;
-                    case 'average':
+                    case 'avg':
                         changed = true;
                         merged[k] = parseInt(((+t1) + (+t2)) / 2, 10).toString();
+                        break;
+                    case 'max':
+                        changed = true;
+                        merged[k] = (+t1) > (+t2) ? t1 : t2;
+                        break;
+                    case 'min':
+                        changed = true;
+                        merged[k] = (+t1) > (+t2) ? t2 : t1;
                         break;
                     default:
                         if (t1 !== t2) {
@@ -159,10 +167,14 @@ osmEntity.prototype = {
 
         function matchKey (key) {
             switch (true) {
-                case ['step_count', 'parking:left:capacity', 'parking:right:capacity'].includes(key):
-                    return 'addition';
-                case ['maxspeed'].includes(key):
-                    return 'average';
+                case ['step_count', 'parking:left:capacity', 'parking:right:capacity', 'capacity', 'population'].includes(key):
+                    return 'sum';
+                case ['maxspeed', 'width', 'height', 'minspeed'].includes(key):
+                    return 'avg';
+                case ['maxheight', 'maxweight', 'max_age'].includes(key):
+                    return 'max';
+                case ['min_age', 'min_height', 'min_level'].includes(key):
+                    return 'min';
                 default:
                     return null;
             };
