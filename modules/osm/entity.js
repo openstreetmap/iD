@@ -129,17 +129,45 @@ osmEntity.prototype = {
         for (var k in tags) {
             var t1 = merged[k];
             var t2 = tags[k];
+
             if (!t1) {
                 changed = true;
                 merged[k] = t2;
-            } else if (t1 !== t2) {
-                changed = true;
-                merged[k] = utilUnicodeCharsTruncated(
-                    utilArrayUnion(t1.split(/;\s*/), t2.split(/;\s*/)).join(';'),
-                    255 // avoid exceeding character limit; see also context.maxCharsForTagValue()
-                );
+            } else {
+                var opperation = matchKey(k);
+
+                switch (opperation) {
+                    case 'addition':
+                        changed = true;
+                        merged[k] = ((+t1) + (+t2)).toString();
+                        break;
+                    case 'average':
+                        changed = true;
+                        merged[k] = parseInt(((+t1) + (+t2)) / 2, 10).toString();
+                        break;
+                    default:
+                        if (t1 !== t2) {
+                            changed = true;
+                            merged[k] = utilUnicodeCharsTruncated(
+                                utilArrayUnion(t1.split(/;\s*/), t2.split(/;\s*/)).join(';'),
+                                255 // avoid exceeding character limit; see also context.maxCharsForTagValue()
+                            );
+                        }
+                };
             }
         }
+
+        function matchKey (key) {
+            switch (true) {
+                case ['step_count', 'parking:left:capacity', 'parking:right:capacity'].includes(key):
+                    return 'addition';
+                case ['maxspeed'].includes(key):
+                    return 'average';
+                default:
+                    return null;
+            };
+        }
+
         return changed ? this.update({ tags: merged }) : this;
     },
 
