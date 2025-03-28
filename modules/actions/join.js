@@ -4,6 +4,7 @@ import { osmIsInterestingTag } from '../osm/tags';
 import { osmJoinWays } from '../osm/multipolygon';
 import { geoPathIntersections } from '../geo';
 import { utilArrayGroupBy, utilArrayIdentical, utilArrayIntersection, utilOldestID } from '../util';
+import { allTagOperations } from '../tagOperations';
 
 
 // Join ways at the end node they share.
@@ -181,7 +182,7 @@ export function actionJoin(ids) {
             for (var k in way.tags) {
                 if (!(k in tags)) {
                     tags[k] = way.tags[k];
-                } else if (tags[k] && osmIsInterestingTag(k) && tags[k] !== way.tags[k] && !['step_count', 'parking:left:capacity', 'parking:right:capacity', 'capacity', 'population','maxspeed', 'width', 'height', 'minspeed','maxheight', 'maxweight', 'max_age','min_age', 'min_height', 'min_level'].includes(k)) {
+                } else if (tags[k] && osmIsInterestingTag(k) && tags[k] !== way.tags[k] && !allTagOperations.includes(k)) {
                     conflicting = true;
                 }
             }

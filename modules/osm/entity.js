@@ -2,6 +2,7 @@ import { debug } from '../index';
 import { osmIsInterestingTag } from './tags';
 import { utilArrayUnion } from '../util/array';
 import { utilUnicodeCharsTruncated } from '../util/util';
+import { tagOperations } from '../tagOperations';
 
 
 export function osmEntity(attrs) {
@@ -167,13 +168,13 @@ osmEntity.prototype = {
 
         function matchKey (key) {
             switch (true) {
-                case ['step_count', 'parking:left:capacity', 'parking:right:capacity', 'capacity', 'population'].includes(key):
+                case tagOperations.sum.includes(key):
                     return 'sum';
-                case ['maxspeed', 'width', 'height', 'minspeed'].includes(key):
+                case tagOperations.avg.includes(key):
                     return 'avg';
-                case ['maxheight', 'maxweight', 'max_age'].includes(key):
+                case tagOperations.max.includes(key):
                     return 'max';
-                case ['min_age', 'min_height', 'min_level'].includes(key):
+                case tagOperations.min.includes(key):
                     return 'min';
                 default:
                     return null;
