@@ -33,6 +33,7 @@ en:
     expand: expand
     collapse: collapse
     plus: add
+    make_functional: make functional
   toolbar:
     inspect: Inspect
     undo_redo: Undo / Redo

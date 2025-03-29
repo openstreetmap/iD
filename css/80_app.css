@@ -1093,8 +1093,18 @@ a.hide-toggle {
 
 }
 
+.lifecycle-new-wrap {
+    width: 100% !important;
+}
+
+.lifecycle-new-wrap > input {
+    width: inherit;
+    border: 0 !important;
+    border-radius: 0 0 0 0 !important;
+}
+
 .lifecycle-extra-icon > label {
-    padding-left: 5px;
+    padding-left: 10px;
 }
 
 .lifecycle-extra-icon > input {
@@ -1137,6 +1147,12 @@ a.hide-toggle {
 .lifecycle-extra .remove {
     border-radius: 0 0 0 0 !important;
     border-left: 0 !important;
+}
+
+.lifecycle-extra .make-functional {
+    border-radius: 0 0 0 0 !important;
+    border-left: 0 !important;
+    border-right: 1px solid #ccc;
 }
 
 .lifecycle-row {
