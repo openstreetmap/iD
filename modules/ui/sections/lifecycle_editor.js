@@ -27,8 +27,8 @@ export function uiSectionLifecycleEditor(context) {
 
     const _lifecyclePresets = Object.values(osmLifecyclePrefixes);
     const _ids = Object.keys(osmLifecyclePrefixes);
-    const _visibleByDeafult = _lifecyclePresets
-        .filter(obj => obj.visibleByDeafult)
+    const _visibleByDefault = _lifecyclePresets
+        .filter(obj => obj.visibleByDefault)
         .map(obj => ({ value: obj.id }));
 
     var section = uiSection('lifecycle-editor', context)
@@ -171,7 +171,7 @@ export function uiSectionLifecycleEditor(context) {
 
         const extraTagKeys = Object.keys(extraTags);
 
-        const prefixCombobox = uiCombobox(context).data(_visibleByDeafult);
+        const prefixCombobox = uiCombobox(context).data(_visibleByDefault);
         const fieldKeyCombobox = uiCombobox(context).data(presetFieldsKey.map(data => ({ value: data })));
 
         addExtraTagList = selection
@@ -394,7 +394,7 @@ export function uiSectionLifecycleEditor(context) {
     }
 
     function getLifecycleToRender(){
-        const render = _lifecyclePresets.filter(tag => tag.visibleByDeafult);
+        const render = _lifecyclePresets.filter(tag => tag.visibleByDefault);
         const renderIds = new Set(render.map(tag => tag.id));
         const entityTag = _tags;
         const preset = _presets[0];

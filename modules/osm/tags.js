@@ -18,13 +18,13 @@ export const osmLifecyclePrefixes = {
     proposed: {
         id : 'proposed',
         referenceKey : 'proposed:*',
-        visibleByDeafult : true,
+        visibleByDefault : true,
         icon : '#iD-icon-lightbulb'
     },
     planned: {
         id : 'planned',
         referenceKey : 'planned:*',
-        visibleByDeafult : true,
+        visibleByDefault : true,
         icon : '#iD-icon-planned'
     },
 
@@ -32,7 +32,7 @@ export const osmLifecyclePrefixes = {
     disused: {
         id : 'disused',
         referenceKey : 'disused:*',
-        visibleByDeafult : true,
+        visibleByDefault : true,
         icon : '#iD-icon-closed'
     },
 
@@ -40,13 +40,13 @@ export const osmLifecyclePrefixes = {
     abandoned: {
         id : 'abandoned',
         referenceKey : 'abandoned:*',
-        visibleByDeafult : true,
+        visibleByDefault : true,
         icon : '#iD-icon-cobweb'
     },
     was: {
         id : 'was',
         referenceKey : 'was:*',
-        visibleByDeafult : false,
+        visibleByDefault : false,
         icon : defaultIcon
     },
 
@@ -54,37 +54,37 @@ export const osmLifecyclePrefixes = {
     dismantled: {
         id : 'dismantled',
         referenceKey : 'dismantled:*',
-        visibleByDeafult : false,
+        visibleByDefault : false,
         icon : defaultIcon
     },
     razed: {
         id : 'razed',
         referenceKey : 'razed:*',
-        visibleByDeafult : false,
+        visibleByDefault : false,
         icon : defaultIcon
     },
     demolished: {
         id : 'demolished',
         referenceKey : 'demolished:*',
-        visibleByDeafult : true,
+        visibleByDefault : true,
         icon : '#iD-icon-destroy'
     },
     destroyed: {
         id : 'destroyed',
         referenceKey : 'destroyed:*',
-        visibleByDeafult : false,
+        visibleByDefault : false,
         icon : defaultIcon
     },
     removed: {
         id : 'removed',
         referenceKey : 'removed:*',
-        visibleByDeafult : false,
+        visibleByDefault : false,
         icon : defaultIcon
     },
     obliterated: {
         id : 'obliterated',
         referenceKey : 'obliterated:*',
-        visibleByDeafult : false,
+        visibleByDefault : false,
         icon : defaultIcon
     },
 
@@ -92,7 +92,7 @@ export const osmLifecyclePrefixes = {
     intermittent: {
         id : 'intermittent',
         referenceKey : 'intermittent:*',
-        visibleByDeafult : false,
+        visibleByDefault : false,
         icon : defaultIcon
     },
 
@@ -100,7 +100,7 @@ export const osmLifecyclePrefixes = {
     construction: {
         id : 'construction',
         referenceKey : 'construction',
-        visibleByDeafult : true,
+        visibleByDefault : true,
         icon : '#iD-icon-hammer-wrench'
     }
 };
