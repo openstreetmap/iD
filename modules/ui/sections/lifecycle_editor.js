@@ -203,7 +203,7 @@ export function uiSectionLifecycleEditor(context) {
                 .on('change', changeExtraLifecycle);
 
             prefixCombobox(alreadyExistingKeyInput);
-        
+
             innerRowLabel
                 .each(function(d) {
                     const field = _extraFieldsWithLifecycle.find(a => a.key === d.split(':')[1] || a.key === d);
@@ -215,25 +215,24 @@ export function uiSectionLifecycleEditor(context) {
                             const keyNoLifecycle = key.includes(':') ? key.split(':')[1] : key;
                             tagsWithoutLifecycles[keyNoLifecycle] = value;
                         });
-                        
-                        fieldUI['lifecycle'] = d.includes(':') ? d.split(':')[0] : 'construction';
+
+                        fieldUI.lifecycle = d.includes(':') ? d.split(':')[0] : 'construction';
                         fieldUI.tags(tagsWithoutLifecycles);
                         _fieldsArr.push(fieldUI);
                         d3_select(this).call(fieldUI.render);
-                }        
+                }
             });
 
             _fieldsArr.forEach(function(field) {
                 field
                     .on('change', function(t, onInput) {
-                        if(field['lifecycle'] !== 'construction') {
+                        if (field.lifecycle !== 'construction') {
                             t = Object.fromEntries(
-                                Object.entries(t).map(([key, value]) => [`${field['lifecycle']}:${key}`, value ?? 'yes'])
+                                Object.entries(t).map(([key, value]) => [`${field.lifecycle}:${key}`, value ?? 'yes'])
                             );
-                        }
-                        else {
+                        } else {
                             t = Object.fromEntries(
-                                Object.entries(t).map(([key, value]) => [`construction`, value ?? 'yes'])
+                                Object.entries(t).map(([, value]) => ['construction', value ?? 'yes'])
                             );
                         }
                         dispatch.call('change', field, _entityIDs, t, onInput);
@@ -245,7 +244,7 @@ export function uiSectionLifecycleEditor(context) {
 
             innerRowLabel.selectAll('.remove-icon').remove();
             innerRowLabel.selectAll('.form-field-button').remove();
-            
+
             innerRowLabel
                 .append('button')
                 .property('id', d => _tags[d] === 'construction' ? 'construction:' + d : d)
@@ -309,7 +308,7 @@ export function uiSectionLifecycleEditor(context) {
             .append('div')
             .attr('class', 'form-field-input-wrap form-field-input-member');
 
-        let valueInput = innerRowWrapNew
+        innerRowWrapNew
             .append('input')
             .attr('type', 'text')
             .attr('placeholder', t('inspector.value'))
@@ -439,6 +438,7 @@ export function uiSectionLifecycleEditor(context) {
                     } else if (value.includes('construction') && _currentLifecycle !== 'construction') {
                         return presetFieldsKey.includes(key);
                     }
+                    return true;
                 })
             )
         );
@@ -457,12 +457,12 @@ export function uiSectionLifecycleEditor(context) {
 
         const presetFields = _presetFieldsKey;
 
-        if ((!newKey || newKey === '' || !newLifecycle || newLifecycle === '' || !newValue || newValue === '') || 
+        if ((!newKey || newKey === '' || !newLifecycle || newLifecycle === '' || !newValue || newValue === '') ||
             (!ids.includes(newLifecycle) || !presetFields.includes(newKey)) ||
             (newLifecycle === 'construction' && _currentLifecycle === 'construction')) {
             return;
         }
-        
+
         _pendingChange = _pendingChange ?? {};
 
         if (newLifecycle === 'construction') {
@@ -524,22 +524,21 @@ export function uiSectionLifecycleEditor(context) {
         const newLifecycle = d3_select(this).property('value');
         const oldTag = d3_select(this).property('id');
         let [oldLifecycle, oldKey] = oldTag.split(':');
-        let oldValue = tags[oldTag]; 
+        let oldValue = tags[oldTag];
 
         _pendingChange = _pendingChange ?? {};
 
-        if ((!ids.includes(newLifecycle) || newLifecycle === oldLifecycle) 
+        if ((!ids.includes(newLifecycle) || newLifecycle === oldLifecycle)
             || (_currentLifecycle === 'construction' && newLifecycle === 'construction')) {
             d3_select(this).property('value', t('lifecycle.' + osmLifecyclePrefixes[oldTag.split(':')[0]].id));
             return;
         }
 
-        if(oldLifecycle === 'construction') {
+        if (oldLifecycle === 'construction') {
             oldValue = tags.construction;
             _pendingChange.construction = undefined;
         }
 
-        
         _pendingChange[oldKey] = undefined;
         _pendingChange[oldLifecycle + ':' + oldKey] = undefined;
 
@@ -575,7 +574,7 @@ export function uiSectionLifecycleEditor(context) {
         scheduleChange();
     }
 
-    function makeExtraFunctional(d) {
+    function makeExtraFunctional() {
         const oldLifecycleTag = d3_select(this).attr('id');
         const tags = _tags;
 
@@ -593,7 +592,7 @@ export function uiSectionLifecycleEditor(context) {
         scheduleChange();
     }
 
-    function trashExtraTag(d) {
+    function trashExtraTag() {
         const oldLifecycleTag = d3_select(this).attr('id');
 
         _pendingChange = _pendingChange ?? {};
