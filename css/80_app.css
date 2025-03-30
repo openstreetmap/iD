@@ -1081,13 +1081,14 @@ a.hide-toggle {
 .lifecycle-extra .member-list li {
     position: relative;
     border-radius: 4px;
-    margin: 0;
+    margin-bottom: 5px !important;
 }
 
 .lifecycle-extra-icon {
-    border: 0 !important;
+    border-right: 1px solid #ccc;
     display: flex;
     height: 100%;
+    min-width: 100px;
     align-items: center;
     background: none;
 
@@ -1114,16 +1115,22 @@ a.hide-toggle {
     background: none;
 }
 
-.lifecycle-extra .field-label .field-label {
+.lifecycle-extra .field-label .form-field input {
     border-radius: 0 0 0 0 !important;
-    border-top: 0 !important;
 }
 
-.lifecycle-extra .field-label .form-field .combobox-input,
-.lifecycle-extra .field-label .form-field .form-field-input-wrap input,
-.lifecycle-extra .field-label .form-field .form-field-input-check {
+.lifecycle-extra .field-label .form-field {
     border-radius: 0 0 0 0 !important;
-    border-bottom: 0 !important;
+    margin: 5px !important;
+}
+
+.lifecycle-extra button {
+    min-width: 32px;
+}
+
+.add-lifecycle{
+    flex: 1 1 50%;
+    margin-top: 5px !important;
 }
 
 .lifecycle-extra .tag-reference-body.expanded {
@@ -1149,14 +1156,22 @@ a.hide-toggle {
     border-left: 0 !important;
 }
 
+.lifecycle-extra .form-field-input-wrap button {
+    flex: 0 0 auto;
+    border-left: 0 !important;
+    width: 32px;
+    border-radius: 0;
+}
+
 .lifecycle-extra .make-functional {
     border-radius: 0 0 0 0 !important;
-    border-left: 0 !important;
+    border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
 }
 
-.lifecycle-row {
-    margin: 10px 0;
+.lifecycle-new-row {
+    margin-bottom: 5px !important;
+    margin-top: 5px !important;
 }
 
 .wrap-form-field-lifecycle-disabled {

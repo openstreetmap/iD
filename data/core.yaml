@@ -33,7 +33,7 @@ en:
     expand: expand
     collapse: collapse
     plus: add
-    make_functional: make functional
+    make_functional: remove lifecycle
   toolbar:
     inspect: Inspect
     undo_redo: Undo / Redo
@@ -712,8 +712,9 @@ en:
     locating: "Locating, please wait..."
     location_unavailable: Your location is unavailable.
   inspector:
-    lifecycle : 'Lifecycle'
+    lifecycle : Lifecycle
     lifecycleReference: A lifecycle prefix is a tag prefix used to indicate the current state of an object. These prefixes help track changes in infrastructure over time.
+    lifecycle_title: Select Lifecycle
     zoom_to:
       key: Z
       title: Zoom To Selection

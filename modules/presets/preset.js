@@ -1,7 +1,7 @@
 import { isEqual } from 'lodash';
 
 import { t } from '../core/localizer';
-import { osmLifecyclePrefixes, osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
+import { osmLifecyclePrefixes, osmAreaKeys, osmAreaKeysExceptions, osmGetKeyWithoutLifecycle, osmGetLifecyclePrefix } from '../osm/tags';
 import { utilArrayUniq, utilObjectOmit } from '../util';
 import { utilSafeClassName } from '../util/util';
 import { locationManager } from '../core/LocationManager';
@@ -327,10 +327,11 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       } else {
         entityTags.forEach(tag => {
           if (tag.includes(':')) {
-              let [prefix, base] = tag.split(':', 2);
-              if (presetTags.includes(base) && ids.includes(prefix)) {
-                lifecycle = prefix;
-              }
+            let prefix = osmGetLifecyclePrefix(tag);
+            let base = osmGetKeyWithoutLifecycle(tag);
+            if (presetTags[0] && presetTags[0].includes(base) && ids.includes(prefix)) {
+              lifecycle = prefix;
+            }
           }
         });
       }

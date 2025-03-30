@@ -129,6 +129,19 @@ export function osmGetLifecyclePrefix(key) {
     return key;
 }
 
+/** @param {string} key */
+export function osmGetKeyWithoutLifecycle(key) {
+    const keySegments = key.split(':');
+
+    if (keySegments.length === 1) return key;
+
+    if (!(keySegments[0] in osmLifecyclePrefixes)) {
+        return key;
+    }
+
+    return [keySegments.shift(), keySegments.join(':')][1];
+}
+
 export var osmAreaKeys = {};
 export function osmSetAreaKeys(value) {
     osmAreaKeys = value;
