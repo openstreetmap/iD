@@ -101,7 +101,7 @@
     "d3": "~7.9.0",
     "dotenv": "^16.4.7",
     "editor-layer-index": "github:osmlab/editor-layer-index#gh-pages",
-    "esbuild": "^0.25.1",
+    "esbuild": "^0.25.2",
     "esbuild-visualizer": "^0.7.0",
     "eslint": "^9.23.0",
     "fetch-mock": "^11.1.1",
