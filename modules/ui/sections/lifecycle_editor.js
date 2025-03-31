@@ -468,8 +468,8 @@ export function uiSectionLifecycleEditor(context) {
     }
 
     function addExtraLifecycle() {
-        const newKey =  d3_select('.lifecycle-extra-new-key').property('value');
-        const newLifecycle = d3_select('.lifecycle-extra-new-prefix').property('value');
+        const newKey =  d3_select('.lifecycle-extra-new-key').property('value').toLowerCase();
+        const newLifecycle = d3_select('.lifecycle-extra-new-prefix').property('value').toLowerCase();
         // const newValue = d3_select('.lifecycle-extra-new-value').property('value') ?? 'yes';
 
         const tags = _tags;
@@ -550,7 +550,7 @@ export function uiSectionLifecycleEditor(context) {
         if (d3_select(this).attr('readonly')) return;
 
         const tags = _tags;
-        const newLifecycle = d3_select(this).property('value');
+        const newLifecycle = d3_select(this).property('value').toLowerCase();
         const oldTag = d3_select(this).property('id');
         const parts = oldTag.split(':');
         const [oldLifecycle, oldKey] = [parts.shift(), parts.join(':')];
