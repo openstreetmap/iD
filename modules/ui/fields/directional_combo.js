@@ -11,7 +11,8 @@ export function uiFieldDirectionalCombo(field, context) {
     var wrap = d3_select(null);
     var _tags;
 
-    var _combos = {};
+    /** @type {Record<string, ReturnType<typeof uiFieldCombo>>} */
+    const _combos = {};
 
     // fallback for schema-builder v5's cycleway field type: can be removed eventually
     if (field.type === 'cycleway') {
@@ -93,7 +94,11 @@ export function uiFieldDirectionalCombo(field, context) {
         const otherKey = key === field.keys[0] ? field.keys[1] : field.keys[0];
 
         dispatch.call('change', this, tags => {
-            const otherValue = tags[otherKey] || tags[commonKey] || tags[otherCommonKey];
+            let otherValue = tags[otherKey] || tags[commonKey] || tags[otherCommonKey];
+            if (otherValue === 'left') { otherValue = otherKey.endsWith(':right') ? 'no' : 'yes'; }
+            if (otherValue === 'right') { otherValue = otherKey.endsWith(':left') ? 'no' : 'yes'; }
+            if (otherValue === 'both') { otherValue = 'yes'; }
+
             if (newValue === otherValue) {
                 // both tags match, use the common tag to tag both sides the same way
                 tags[commonKey] = newValue;
@@ -115,14 +120,42 @@ export function uiFieldDirectionalCombo(field, context) {
     directionalCombo.tags = function(tags) {
         _tags = tags;
 
+        /**
+         * @param {Array<any>} input - The input array.
+         */
+        const uniqueValues = (input) => [...new Set(input)].filter(Boolean);
+
         const commonKey = field.key.replace(/:both$/, '');
-        for (let key in _combos) {
-            const uniqueValues = [... new Set([]
-                .concat(_tags[commonKey])
-                .concat(_tags[`${commonKey}:both`])
-                .concat(_tags[key])
-                .filter(Boolean))];
-            _combos[key].tags({ [key]: uniqueValues.length > 1 ? uniqueValues : uniqueValues[0] });
+        const bothValue = [
+            tags[field.key] === 'both' ? 'yes' : undefined, // transform sidewalk=both
+            _tags[commonKey],
+            _tags[`${commonKey}:both`
+        ]];
+        const leftValue = uniqueValues([
+            // transform sidewalk=both once the UI was used to change one side to a specific value; we end up with sidewalk:left=separate+sidewalk:right=both|left because the original value is copied to the key:SIDE.
+            _tags[`${commonKey}:left`] === 'both' ? 'yes' : undefined,
+            _tags[`${commonKey}:left`] === 'left' ? 'yes' : undefined,
+            _tags[`${commonKey}:left`],
+            tags[field.key] === 'left' ? 'yes' : undefined,
+            tags[field.key] === 'right' ? 'no' : undefined,
+            ...bothValue
+        ]);
+        const rightValue = uniqueValues([
+            _tags[`${commonKey}:right`] === 'both' ? 'yes' : undefined,
+            _tags[`${commonKey}:right`] === 'right' ? 'yes' : undefined,
+            _tags[`${commonKey}:right`],
+            tags[field.key] === 'left' ? 'no' : undefined,
+            tags[field.key] === 'right' ? 'yes' : undefined,
+            ...bothValue
+        ]);
+
+        for (const key in _combos) {
+            if (key.endsWith(':left')) {
+                _combos[key].tags({ [key]: leftValue.at(0) });
+            }
+            if (key.endsWith(':right')) {
+                _combos[key].tags({ [key]: rightValue.at(0) });
+            }
         }
     };
 

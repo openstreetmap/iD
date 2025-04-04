@@ -89,7 +89,6 @@ describe('iD.uiFieldDirectionalCombo', () => {
             expect(left.value).toBe('lane');
             expect(right.value).toBe('lane');
 
-
             left.value = 'shoulder';
             d3.select(left).dispatch('change');
 
@@ -105,6 +104,159 @@ describe('iD.uiFieldDirectionalCombo', () => {
             expect(onChange).toHaveBeenCalledTimes(2);
             expect(onChange).toHaveBeenNthCalledWith(2, {
                 [commonKey]: 'shoulder', // now left & right have been updated
+            });
+        });
+    });
+
+    describe('handle `[key]=left|right|both` schema', function() {
+        it('transform `left` to yes/no', () => {
+            const field = iD.presetField('name', {
+                key: 'cycleway:both',
+                keys: ['cycleway:left', 'cycleway:right'],
+            });
+            const instance = iD.uiFieldDirectionalCombo(field, context);
+            selection.call(instance);
+            let tags = { 'cycleway': 'left' };
+            instance.tags(tags);
+            const onChange = vi.fn();
+            instance.on('change', v => onChange(tags = v(tags)));
+
+            // Check the initial data that is invisible in the UI
+            expect(selection.selectAll('input').nodes()).toHaveLength(2);
+            const [left, right] = selection.selectAll('input').nodes();
+            expect(left.value).toBe('left');
+            expect(right.value).toBe('left');
+
+            // Check the result of the initial transformation that transform `cycleway=left` to `yes` and `no` in the UI
+            d3.select(left).dispatch('change');
+            expect(onChange).toHaveBeenCalledTimes(1);
+            expect(onChange).toHaveBeenNthCalledWith(1, {
+                'cycleway:left': 'left', // we can ignore this
+                'cycleway:right': 'no',
+            });
+            d3.select(right).dispatch('change');
+            expect(onChange).toHaveBeenCalledTimes(2);
+            expect(onChange).toHaveBeenNthCalledWith(2, {
+                'cycleway:left': 'yes',
+                'cycleway:right': 'left', // we can ignore this
+            });
+
+            // Check regular changes by a user on one side
+            left.value = 'track';
+            d3.select(left).dispatch('change');
+            expect(onChange).toHaveBeenCalledTimes(3);
+            expect(onChange).toHaveBeenNthCalledWith(3, {
+                'cycleway:left': 'track', // left was updated
+                'cycleway:right': 'no',
+            });
+
+            // Check regular changes by a user on the other side which makes it the `both` case
+            right.value = 'track';
+            d3.select(right).dispatch('change');
+            expect(onChange).toHaveBeenCalledTimes(4);
+            expect(onChange).toHaveBeenNthCalledWith(4, {
+                'cycleway:both': 'track', // now left & right have been updated
+            });
+        });
+
+        it('transform `right` to no/yes', () => {
+            const field = iD.presetField('name', {
+                key: 'cycleway:both',
+                keys: ['cycleway:left', 'cycleway:right'],
+            });
+            const instance = iD.uiFieldDirectionalCombo(field, context);
+            selection.call(instance);
+            let tags = { 'cycleway': 'right' };
+            instance.tags(tags);
+            const onChange = vi.fn();
+            instance.on('change', v => onChange(tags = v(tags)));
+
+            // Check the initial data that is invisible in the UI
+            expect(selection.selectAll('input').nodes()).toHaveLength(2);
+            const [left, right] = selection.selectAll('input').nodes();
+            expect(left.value).toBe('right');
+            expect(right.value).toBe('right');
+
+            // Check the result of the initial transformation that transform `cycleway=left` to `yes` and `no` in the UI
+            d3.select(left).dispatch('change');
+            expect(onChange).toHaveBeenCalledTimes(1);
+            expect(onChange).toHaveBeenNthCalledWith(1, {
+                'cycleway:left': 'right', // we can ignore this
+                'cycleway:right': 'yes',
+            });
+            d3.select(right).dispatch('change');
+            expect(onChange).toHaveBeenCalledTimes(2);
+            expect(onChange).toHaveBeenNthCalledWith(2, {
+                'cycleway:left': 'no',
+                'cycleway:right': 'right', // we can ignore this
+            });
+
+            // Check regular changes by a user on one side
+            right.value = 'separate';
+            d3.select(right).dispatch('change');
+            expect(onChange).toHaveBeenCalledTimes(3);
+            expect(onChange).toHaveBeenNthCalledWith(3, {
+                'cycleway:left': 'no',
+                'cycleway:right': 'separate', // left was updated
+            });
+
+            // Check regular changes by a user on the other side which makes it the `both` case
+            left.value = 'track';
+            d3.select(left).dispatch('change');
+            expect(onChange).toHaveBeenCalledTimes(4);
+            expect(onChange).toHaveBeenNthCalledWith(4, {
+                'cycleway:left': 'track', // left was updated
+                'cycleway:right': 'separate',
+            });
+        });
+
+        it('transform `both` to yes/yes', () => {
+            const field = iD.presetField('name', {
+                key: 'cycleway:both',
+                keys: ['cycleway:left', 'cycleway:right'],
+            });
+            const instance = iD.uiFieldDirectionalCombo(field, context);
+            selection.call(instance);
+            let tags = { 'cycleway': 'both' };
+            instance.tags(tags);
+            const onChange = vi.fn();
+            instance.on('change', v => onChange(tags = v(tags)));
+
+            // Check the initial data that is invisible in the UI
+            expect(selection.selectAll('input').nodes()).toHaveLength(2);
+            const [left, right] = selection.selectAll('input').nodes();
+            expect(left.value).toBe('both');
+            expect(right.value).toBe('both');
+
+            // Check the result of the initial transformation that transform `cycleway=left` to `yes` and `no` in the UI
+            d3.select(left).dispatch('change');
+            expect(onChange).toHaveBeenCalledTimes(1);
+            expect(onChange).toHaveBeenNthCalledWith(1, {
+                'cycleway:left': 'both', // we can ignore this
+                'cycleway:right': 'yes',
+            });
+            d3.select(right).dispatch('change');
+            expect(onChange).toHaveBeenCalledTimes(2);
+            expect(onChange).toHaveBeenNthCalledWith(2, {
+                'cycleway:left': 'yes',
+                'cycleway:right': 'both', // we can ignore this
+            });
+
+            // Check regular changes by a user on one side
+            left.value = 'track';
+            d3.select(left).dispatch('change');
+            expect(onChange).toHaveBeenCalledTimes(3);
+            expect(onChange).toHaveBeenNthCalledWith(3, {
+                'cycleway:left': 'track', // left was updated
+                'cycleway:right': 'yes',
+            });
+
+            // Check regular changes by a user on the other side which makes it the `both` case
+            right.value = 'track';
+            d3.select(right).dispatch('change');
+            expect(onChange).toHaveBeenCalledTimes(4);
+            expect(onChange).toHaveBeenNthCalledWith(4, {
+                'cycleway:both': 'track', // now left & right have been updated
             });
         });
     });
