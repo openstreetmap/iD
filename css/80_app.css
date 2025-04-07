@@ -1128,7 +1128,7 @@ a.hide-toggle {
     min-width: 32px;
 }
 
-.add-lifecycle{
+.add-lifecycle {
     flex: 1 1 50%;
     margin-top: 5px !important;
 }
@@ -1144,11 +1144,11 @@ a.hide-toggle {
 }
 
 .lifecycle-extra .form-field-input-check > .reverser {
-    flex: 0 1 auto;
+    flex: 0 1 auto !important;
     background-color: #eff2f7 !important;
-    padding: 0px 8px;
-    color: inherit;
-    width: 50%;
+    padding: 0px 8px !important;
+    color: inherit !important;
+    width: 50% !important;
 }
 
 .lifecycle-extra .remove {
@@ -1156,12 +1156,6 @@ a.hide-toggle {
     border-left: 0 !important;
 }
 
-.lifecycle-extra .form-field-input-wrap button {
-    flex: 0 0 auto;
-    border-left: 0 !important;
-    width: 32px;
-    border-radius: 0;
-}
 
 .lifecycle-extra .make-functional {
     border-radius: 0 0 0 0 !important;
@@ -1177,6 +1171,11 @@ a.hide-toggle {
 .wrap-form-field-lifecycle-disabled {
     pointer-events: none;
     opacity: 0.5;
+}
+
+.lifecycle-error {
+    color: red;
+    
 }
 
 

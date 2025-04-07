@@ -10,6 +10,9 @@ import { select as d3_select } from 'd3-selection';
 import { osmLifecyclePrefixes, osmGetLifecyclePrefix, osmGetKeyWithoutLifecycle} from '../../osm/tags';
 import { uiCombobox } from '../combobox';
 
+// TODO: don't recreate everything all the time (preset_field class)
+// TODO: expanded by deafult if there already is a lifecycle (dunno)
+// TODO: check for universal fields (where?)
 export function uiSectionLifecycleEditor(context) {
 
     var dispatch = d3_dispatch('change');
@@ -17,8 +20,8 @@ export function uiSectionLifecycleEditor(context) {
     var _tags;
     var _pendingChange = null;
     var _currentLifecycle = 'functional';
+    var _currentFields = [];
     var _mainKey = '';
-    var _extraFieldsWithLifecycle;
     var _extraTags;
     var _showBlank = false;
     var _presets = [];
@@ -48,6 +51,7 @@ export function uiSectionLifecycleEditor(context) {
     var radioRowWrap = d3_select(null);
     var radioButtonWrap = d3_select(null);
     var addExtraTagList = d3_select(null);
+    var extraLifecycleError = d3_select(null);
 
     function renderDisclosureContent(selection) {
         outerWrap.remove();
@@ -56,7 +60,7 @@ export function uiSectionLifecycleEditor(context) {
         _fieldsArr = [];
 
         _currentLifecycle = _presets[0].lifecycle;
-
+   
         const presetSplit = _presets[0].id.split('/');
 
         if (_ids.includes(presetSplit[0])) {
@@ -73,17 +77,18 @@ export function uiSectionLifecycleEditor(context) {
         extraLifecycleWrap = outerWrap.append('div').attr('class', 'lifecycle-extra');
         referenceWrap = outerWrap.append('div').attr('class', 'lifecyce-reference');
 
-        _presetFieldsKey = _presets[0].fields().filter(a => a.key).map(a => a.key);
-
+        _presetFieldsKey = (
+            _presets[0].fields().flatMap(obj => obj.keys ? obj.keys : [obj.key])).concat(
+            _presets[0].moreFields().flatMap(obj => obj.keys ? obj.keys : [obj.key])
+        );
+        
+        if (_presetFieldsKey.includes(_mainKey)) _presetFieldsKey.splice(_presetFieldsKey.indexOf(_mainKey), 1);
 
         createMainLifecycleMenu(mainLifecycleWrap);
 
         _extraTags = getExtraTags();
-        if (Object.entries(_extraTags).length !== 0) {
-            _extraFieldsWithLifecycle = getExtraFieldsWithLifecycle();
-        }
-
         createExtraLifecycleMenu(extraLifecycleWrap);
+
         createReference(referenceWrap);
     }
 
@@ -201,7 +206,7 @@ export function uiSectionLifecycleEditor(context) {
             buttonWrap
                 .append('label')
                 .each(function(d) {
-                    let comp = osmLifecyclePrefixes[osmGetLifecyclePrefix(d)] ?? osmLifecyclePrefixes.construction;
+                    let comp = osmLifecyclePrefixes[osmGetLifecyclePrefix(d)];
                     const icon = comp.icon;
                     d3_select(this).call(svgIcon(icon));
                 });
@@ -210,9 +215,9 @@ export function uiSectionLifecycleEditor(context) {
                 .append('input')
                 .attr('type', 'text')
                 .attr('class', 'lifecycle-extra-input member-role')
-                .property('id', d => _tags[d] === 'construction' ? 'construction:' + d : d)
+                .property('id', d => d)
                 .property('value', d => {
-                    let s = osmLifecyclePrefixes[osmGetLifecyclePrefix(d)] ?? osmLifecyclePrefixes.construction;
+                    let s = osmLifecyclePrefixes[osmGetLifecyclePrefix(d)];
                     return t('lifecycle.' + s.id);
                 })
                 .on('blur', changeExtraLifecycle)
@@ -220,46 +225,52 @@ export function uiSectionLifecycleEditor(context) {
 
             prefixCombobox(alreadyExistingKeyInput);
 
+            const extraTagsWithoutLifecycle = Object.keys(_extraTags).map(a => osmGetKeyWithoutLifecycle(a));
+
+            const myExtraFields = (_presets[0].fields().filter(field => 
+                extraTagsWithoutLifecycle.includes(field.key) || 
+                (field.keys && field.keys.some(k => extraTagsWithoutLifecycle.includes(k)))
+            )).concat(
+                _presets[0].moreFields().filter(field => 
+                    extraTagsWithoutLifecycle.includes(field.key) || 
+                    (field.keys && field.keys.some(k => extraTagsWithoutLifecycle.includes(k)))
+            ));
 
             innerRowLabel
                 .each(function(d) {
-                    const field = _extraFieldsWithLifecycle.find(a =>
-                        d.includes(':') ? a.key === osmGetKeyWithoutLifecycle(d) : a.key === d
-                    );
-                    if (field) {
+                    const field = myExtraFields.find(obj => obj.key === osmGetKeyWithoutLifecycle(d) || 
+                        (obj.keys && obj.keys.includes(osmGetKeyWithoutLifecycle(d))));
+                    if(field && !_currentFields.includes(field)){
                         let tagsWithoutLifecycles = {};
                         const fieldUI = uiField(context, field, _entityIDs);
+                        if (!_fieldsArr.find(obj => obj.key === fieldUI.key)) {
 
-                        Object.entries(_tags).forEach(([key, value]) => {
-                            let keyNoLifecycle = key.includes(':') ? osmGetKeyWithoutLifecycle(key) : key;
-                            tagsWithoutLifecycles[keyNoLifecycle] = value;
-                        });
-
-                        fieldUI.lifecycle = d.includes(':') ? osmGetLifecyclePrefix(d) : 'construction';
-                        fieldUI.tags(tagsWithoutLifecycles);
-                        _fieldsArr.push(fieldUI);
-                        d3_select(this).call(fieldUI.render);
-                }
-            });
+                            Object.entries(_tags).forEach(([key, value]) => {
+                                let keyNoLifecycle = osmGetKeyWithoutLifecycle(key);
+                                tagsWithoutLifecycles[keyNoLifecycle] = value;
+                            });
+    
+                            fieldUI.lifecycle = osmGetLifecyclePrefix(d);
+                            fieldUI.tags(tagsWithoutLifecycles);
+                            _fieldsArr.push(fieldUI);
+                            d3_select(this).call(fieldUI.render);
+                        } else {
+                            d3_select(this).remove();
+                        }
+                    }
+                });
 
             _fieldsArr.forEach(function(field) {
-                field
-                    .on('change', function(t, onInput) {
-                        if (field.lifecycle !== 'construction') {
-                            t = Object.fromEntries(
-                                Object.entries(t).map(([key, value]) => [`${field.lifecycle}:${key}`, value ?? ''])
-                            );
-                        } else {
-                            t = Object.fromEntries(
-                                Object.entries(t).map(([, value]) => ['construction', value ?? ''])
-                            );
-                        }
-                        dispatch.call('change', field, _entityIDs, t, onInput);
+                field.on('change', function(t, onInput) {
+                    t = Object.fromEntries(
+                            Object.entries(t).map(([key, value]) => [`${field.lifecycle}:${key}`, value ?? 'yes'])
+                        );
+                    dispatch.call('change', field, _entityIDs, t, onInput);
                 });
             });
 
+            innerRowLabel.selectAll('.modified-icon').remove();
             innerRowLabel.selectAll('.remove-icon').remove();
-            // innerRowLabel.selectAll('.form-field-button').remove();
 
             innerRowLabel
                 .append('button')
@@ -320,20 +331,6 @@ export function uiSectionLifecycleEditor(context) {
             .call(svgIcon('#iD-operation-delete'))
             .on('click', hideNewExtraTag);
 
-        /*
-        let innerRowWrapNew = addExtraTagRowNew
-            .append('div')
-            .attr('class', 'form-field-input-wrap form-field-input-member');
-
-        innerRowWrapNew
-            .append('input')
-            .attr('type', 'text')
-            .attr('placeholder', t('inspector.value'))
-            .attr('class', 'combobox-input lifecycle-extra-new-value')
-            .on('blur', addExtraTag)
-            .on('change', addExtraTag);
-        */
-
         let addRowEnterNew = selection
             .append('div')
             .attr('class', 'add-row');
@@ -342,6 +339,10 @@ export function uiSectionLifecycleEditor(context) {
             .append('button')
             .attr('class', 'add-lifecycle');
 
+        extraLifecycleError = addExtraTagRowNew
+            .append('div')
+            .attr('class', 'lifecycle-error');
+
         addLifecycleButton
             .call(svgIcon('#iD-icon-plus', 'light'));
 
@@ -349,6 +350,7 @@ export function uiSectionLifecycleEditor(context) {
 
             if (!_showBlank) {
                 _showBlank = true;
+                extraLifecycleError.text('');
                 addExtraTagRowNew.attr('style', 'display:block');
             }
         });
@@ -431,12 +433,6 @@ export function uiSectionLifecycleEditor(context) {
         return null;
     }
 
-    function getExtraFieldsWithLifecycle() {
-        const extraTagsWithoutLifecycle = Object.keys(_extraTags).map(a => osmGetKeyWithoutLifecycle(a));
-        const extraFields = _presets[0].fields();
-        return extraFields.filter(field => extraTagsWithoutLifecycle.includes(field.key));
-    }
-
     function getExtraTags() {
         const tags = _tags;
         const mainKey = _mainKey;
@@ -444,13 +440,11 @@ export function uiSectionLifecycleEditor(context) {
 
         const tagsWithLifecycles = Object.fromEntries(
             _ids.flatMap(id =>
-                Object.entries(tags).filter(([key, value]) => {
-                    if (key.includes(':') && value !== 'construction') {
+                Object.entries(tags).filter(([key, ]) => {
+                    if (key.includes(':')) {
                         let parts = key.split(':');
                         let [prefix, tag] = [parts.shift(), parts.join(':')];
                         return prefix === id && presetFieldsKey.includes(tag);
-                    } else if (value === 'construction' && _currentLifecycle !== 'construction') {
-                        return presetFieldsKey.includes(key);
                     }
                     return false;
                 })
@@ -459,7 +453,7 @@ export function uiSectionLifecycleEditor(context) {
 
         Object.keys(tagsWithLifecycles).forEach((key) => {
             const keyNoLifecycle = osmGetKeyWithoutLifecycle(key);
-            if ((keyNoLifecycle === mainKey) || (keyNoLifecycle.includes('addr:'))) {
+            if (keyNoLifecycle === mainKey) {
                 delete tagsWithLifecycles[key];
             }
         });
@@ -468,38 +462,33 @@ export function uiSectionLifecycleEditor(context) {
     }
 
     function addExtraLifecycle() {
-        const newKey =  d3_select('.lifecycle-extra-new-key').property('value').toLowerCase();
+        let newKey =  d3_select('.lifecycle-extra-new-key').property('value').toLowerCase();
         const newLifecycle = d3_select('.lifecycle-extra-new-prefix').property('value').toLowerCase();
-        // const newValue = d3_select('.lifecycle-extra-new-value').property('value') ?? 'yes';
 
         const tags = _tags;
         const ids = _ids;
 
-        const newValue = tags[newKey];
+        const oldValue = tags[newKey];
 
         const presetFields = _presetFieldsKey;
 
         // Check if the new values are all valid
         if ((!newKey || newKey === '' || !newLifecycle || newLifecycle === '') ||
-            (!_ids.includes(newLifecycle) || !presetFields.includes(newKey)) ||
-            (newLifecycle === 'construction' && _currentLifecycle === 'construction')) {
+            (!_ids.includes(newLifecycle) || !presetFields.includes(newKey))) {
             return;
         }
 
         // Check if the new key already exists
         for (let id of ids) {
-            if (tags[id + ':' + newKey]) return;
+            if (tags[id + ':' + newKey] !== undefined){
+                extraLifecycleError.text(t('lifecycle.error.error') + ': ' + t('lifecycle.error.duplicate'));
+                return;
+            }
         }
 
         _pendingChange = _pendingChange ?? {};
-
-        if (newLifecycle === 'construction') {
-            _pendingChange[newKey] = 'construction';
-            _pendingChange.construction = newValue ?? '';
-        } else {
-            _pendingChange[newKey] = undefined;
-            _pendingChange[newLifecycle + ':' + newKey] = newValue ?? '';
-        }
+        _pendingChange[newKey] = undefined;
+        _pendingChange[newLifecycle + ':' + newKey] = oldValue || '';
 
         _showBlank = false;
 
@@ -558,40 +547,14 @@ export function uiSectionLifecycleEditor(context) {
 
         _pendingChange = _pendingChange ?? {};
 
-        if ((!_ids.includes(newLifecycle) || newLifecycle === oldLifecycle)
-            || (_currentLifecycle === 'construction' && newLifecycle === 'construction')) {
+        if ((!_ids.includes(newLifecycle) || newLifecycle === oldLifecycle)) {
             d3_select(this).property('value', t('lifecycle.' + osmLifecyclePrefixes[osmGetLifecyclePrefix(oldTag)].id));
             return;
         }
 
-        if (oldKey.includes('addr')) {
-            Object.keys(tags).forEach((key) => {
-                if (key.includes('addr')) {
-                    if (newLifecycle !== 'construction') {
-                        _pendingChange[newLifecycle + ':' + osmGetKeyWithoutLifecycle(key)] = tags[key];
-                    } else {
-                        _pendingChange[osmGetKeyWithoutLifecycle(key)] = tags[key] ?? 'addr';
-                    }
-                    _pendingChange[key] = undefined;
-                }
-            });
-        }
-
         _pendingChange[oldKey] = undefined;
         _pendingChange[oldLifecycle + ':' + oldKey] = undefined;
-
-        if (oldLifecycle !== 'construction') {
-            if (newLifecycle === 'construction') {
-                _pendingChange[oldKey] = 'construction';
-                _pendingChange.construction = tags[oldLifecycle + ':' + oldKey] ?? '';
-            } else {
-                _pendingChange[newLifecycle + ':' + oldKey] = tags[oldLifecycle + ':' + oldKey] ?? oldValue ?? '';
-            }
-        } else {
-            oldValue = tags.construction;
-            _pendingChange.construction = undefined;
-            _pendingChange[newLifecycle + ':' + oldKey] = oldValue;
-        }
+        _pendingChange[newLifecycle + ':' + oldKey] = tags[oldLifecycle + ':' + oldKey] ?? oldValue ?? '';
 
         scheduleChange();
     }
@@ -620,24 +583,12 @@ export function uiSectionLifecycleEditor(context) {
 
         _pendingChange = _pendingChange ?? {};
 
-        if (oldLifecycleTag.includes('addr')) {
-            Object.keys(tags).forEach((key) => {
-                if (key.includes('addr')) {
-                    _pendingChange[osmGetKeyWithoutLifecycle(key)] = tags[key];
-                    _pendingChange[key] = undefined;
-                }
-            });
-        } else {
-            if (oldLifecycleTag) {
-                const oldTag = osmGetKeyWithoutLifecycle(oldLifecycleTag);
-                const oldPrefix = osmGetLifecyclePrefix(oldLifecycleTag);
-                _pendingChange[oldTag] = tags[oldLifecycleTag];
-                _pendingChange[oldLifecycleTag] = undefined;
-                if (oldPrefix === 'construction') {
-                    _pendingChange.construction = undefined;
-                }
-            }
+        if (oldLifecycleTag) {
+            const oldTag = osmGetKeyWithoutLifecycle(oldLifecycleTag);
+            _pendingChange[oldTag] = tags[oldLifecycleTag];
+            _pendingChange[oldLifecycleTag] = undefined;
         }
+        
 
         scheduleChange();
     }
@@ -648,21 +599,12 @@ export function uiSectionLifecycleEditor(context) {
 
         _pendingChange = _pendingChange ?? {};
 
-        if (oldLifecycleTag.includes('addr')) {
-            Object.keys(tags).forEach((key) => {
-                if (key.includes('addr')) _pendingChange[key] = undefined;
-            });
-        } else {
-            if (oldLifecycleTag) {
-                const oldKey = osmGetKeyWithoutLifecycle(oldLifecycleTag);
-                const oldPrefix = osmGetLifecyclePrefix(oldLifecycleTag);
-                _pendingChange[oldKey] = undefined;
-                _pendingChange[oldLifecycleTag] = undefined;
-                if (oldPrefix === 'construction') {
-                    _pendingChange.construction = undefined;
-                }
-            }
+        if (oldLifecycleTag) {
+            const oldKey = osmGetKeyWithoutLifecycle(oldLifecycleTag);
+            _pendingChange[oldKey] = undefined;
+            _pendingChange[oldLifecycleTag] = undefined;
         }
+        
 
         scheduleChange();
     }

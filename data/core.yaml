@@ -14,6 +14,9 @@ en:
     abandoned: Abandoned
     demolished: Demolished
     functional: Functional
+    error:
+      error: Error
+      duplicate: Tag already exists
   icons:
     download: download
     information: info
