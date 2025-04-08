@@ -1,10 +1,9 @@
 import { actionDeleteRelation } from './delete_relation';
 import { actionDeleteWay } from './delete_way';
-import { osmIsInterestingTag } from '../osm/tags';
+import { osmIsInterestingTag, summableTags } from '../osm/tags';
 import { osmJoinWays } from '../osm/multipolygon';
 import { geoPathIntersections } from '../geo';
 import { utilArrayGroupBy, utilArrayIdentical, utilArrayIntersection, utilOldestID } from '../util';
-import { allTagOperations } from '../tagOperations';
 
 
 // Join ways at the end node they share.
@@ -182,9 +181,16 @@ export function actionJoin(ids) {
             for (var k in way.tags) {
                 if (!(k in tags)) {
                     tags[k] = way.tags[k];
-                } else if (tags[k] && osmIsInterestingTag(k) && tags[k] !== way.tags[k] && !allTagOperations.includes(k)) {
+                } else if (tags[k] && osmIsInterestingTag(k) && tags[k] !== way.tags[k] && !matchKeys(k)) {
                     conflicting = true;
                 }
+            }
+
+            function matchKeys (key) {
+                return summableTags.some((tag) => {
+                    var regex = new RegExp('^' + tag, 'i' );
+                    return regex.test(key);
+                });
             }
         });
 

@@ -322,3 +322,5 @@ export function osmShouldRenderDirection(vertexTags, wayTags) {
     if (vertexTags.cycleway === 'asl') return !!wayTags.highway;
     return true;
 }
+
+export var summableTags = ['step_count', 'parking'];

@@ -1,8 +1,7 @@
 import { debug } from '../index';
-import { osmIsInterestingTag } from './tags';
+import { osmIsInterestingTag, summableTags } from './tags';
 import { utilArrayUnion } from '../util/array';
 import { utilUnicodeCharsTruncated } from '../util/util';
-import { tagOperations } from '../tagOperations';
 
 
 export function osmEntity(attrs) {
@@ -127,58 +126,30 @@ osmEntity.prototype = {
     mergeTags: function(tags) {
         var merged = Object.assign({}, this.tags);   // shallow copy
         var changed = false;
+
         for (var k in tags) {
             var t1 = merged[k];
             var t2 = tags[k];
-
             if (!t1) {
                 changed = true;
                 merged[k] = t2;
-            } else {
-                var opperation = matchKey(k);
-
-                switch (opperation) {
-                    case 'sum':
-                        changed = true;
-                        merged[k] = ((+t1) + (+t2)).toString();
-                        break;
-                    case 'avg':
-                        changed = true;
-                        merged[k] = parseInt(((+t1) + (+t2)) / 2, 10).toString();
-                        break;
-                    case 'max':
-                        changed = true;
-                        merged[k] = (+t1) > (+t2) ? t1 : t2;
-                        break;
-                    case 'min':
-                        changed = true;
-                        merged[k] = (+t1) > (+t2) ? t2 : t1;
-                        break;
-                    default:
-                        if (t1 !== t2) {
-                            changed = true;
-                            merged[k] = utilUnicodeCharsTruncated(
-                                utilArrayUnion(t1.split(/;\s*/), t2.split(/;\s*/)).join(';'),
-                                255 // avoid exceeding character limit; see also context.maxCharsForTagValue()
-                            );
-                        }
-                };
+            } else if (matchKeys(k)) {
+                changed = true;
+                merged[k] = ((+t1) + (+t2)).toString();
+            } else if (t1 !== t2) {
+                changed = true;
+                merged[k] = utilUnicodeCharsTruncated(
+                    utilArrayUnion(t1.split(/;\s*/), t2.split(/;\s*/)).join(';'),
+                    255 // avoid exceeding character limit; see also context.maxCharsForTagValue()
+                );
             }
         }
 
-        function matchKey (key) {
-            switch (true) {
-                case tagOperations.sum.includes(key):
-                    return 'sum';
-                case tagOperations.avg.includes(key):
-                    return 'avg';
-                case tagOperations.max.includes(key):
-                    return 'max';
-                case tagOperations.min.includes(key):
-                    return 'min';
-                default:
-                    return null;
-            };
+        function matchKeys(key) {
+            return summableTags.some((tag) => {
+                var regex = new RegExp('^' + tag, 'i' );
+                return regex.test(key);
+            });
         }
 
         return changed ? this.update({ tags: merged }) : this;
