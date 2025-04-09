@@ -75,6 +75,7 @@
     "countryCodes": ["hk"],
     "format": [
       ["unit", "floor"],
+      ["housename"],
       ["housenumber", "street+place"]
     ]
   },
