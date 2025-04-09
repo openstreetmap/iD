@@ -4,7 +4,7 @@ import * as countryCoder from '@rapideditor/country-coder';
 
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
-import { geoChooseEdge, geoSphericalDistance, geoPolygonContainsPolygon } from '../../geo';
+import { geoChooseEdge, geoSphericalDistance, geoPolygonContainsPolygon, geoPointInPolygon } from '../../geo';
 import { uiCombobox } from '../combobox';
 import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilTriggerEvent } from '../../util';
 import { t } from '../../core/localizer';
@@ -97,6 +97,7 @@ export function uiFieldAddress(field, context) {
                     title: value,
                     value,
                     dist: 0,
+                    geom,
                     type,
                     klass: `address-${type}`
                 };
@@ -161,11 +162,29 @@ export function uiFieldAddress(field, context) {
     function getEnclosingValues(key) {
         const tagKey = `${field.key}:${key}`;
 
+        // 1. areas encompassing the feature that have the address tag
         function hasTag(d) {
             return _entityIDs.indexOf(d.id) === -1 && d.tags[tagKey];
         }
+        const enclosingAddresses = getEnclosing(hasTag, key, tagKey);
 
-        return getEnclosing(hasTag, key, tagKey);
+        // 2. also include addresses from points which are encompassed by
+        // the same building area as the current feature
+        function isBuilding(d) {
+            return _entityIDs.indexOf(d.id) === -1 && d.tags.building && d.tags.building !== 'no';
+        }
+        const enclosingBuildings = getEnclosing(isBuilding, 'building', 'building').map(d => d.geom);
+        function isInNearbyBuilding(d) {
+            return hasTag(d) &&
+                d.type === 'node' &&
+                enclosingBuildings.some(geom => geoPointInPolygon(d.loc, geom));
+        }
+        const nearPointAddresses = getNear(isInNearbyBuilding, key, 100, tagKey);
+
+        return utilArrayUniqBy([
+            ...enclosingAddresses,
+            ...nearPointAddresses
+        ], 'value');
     }
 
 
