@@ -177,14 +177,17 @@ export function uiFieldAddress(field, context) {
         function isInNearbyBuilding(d) {
             return hasTag(d) &&
                 d.type === 'node' &&
-                enclosingBuildings.some(geom => geoPointInPolygon(d.loc, geom));
+                enclosingBuildings.some(geom =>
+                    geoPointInPolygon(d.loc, geom) ||
+                    geom.indexOf(d.loc) !== -1
+                );
         }
         const nearPointAddresses = getNear(isInNearbyBuilding, key, 100, tagKey);
 
         return utilArrayUniqBy([
             ...enclosingAddresses,
             ...nearPointAddresses
-        ], 'value');
+        ], 'value').sort((a, b) => a.value > b.value ? 1 : -1);
     }
 
 
