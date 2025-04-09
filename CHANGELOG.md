@@ -45,7 +45,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* Suggest housenumber/housename values from surrounding areas ([#10946])
 #### :hammer: Development
+
+[#10946]: https://github.com/openstreetmap/iD/issues/10946
 
 
 # v2.33.0

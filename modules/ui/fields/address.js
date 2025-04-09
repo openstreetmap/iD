@@ -4,7 +4,7 @@ import * as countryCoder from '@rapideditor/country-coder';
 
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
-import { geoExtent, geoChooseEdge, geoSphericalDistance } from '../../geo';
+import { geoChooseEdge, geoSphericalDistance, geoPolygonContainsPolygon } from '../../geo';
 import { uiCombobox } from '../combobox';
 import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilTriggerEvent } from '../../util';
 import { t } from '../../core/localizer';
@@ -39,7 +39,7 @@ export function uiFieldAddress(field, context) {
     function getNear(isAddressable, type, searchRadius, resultProp) {
         var extent = combinedEntityExtent();
         var l = extent.center();
-        var box = geoExtent(l).padByMeters(searchRadius);
+        var box = extent.padByMeters(searchRadius);
 
         var features = context.history().intersects(box)
             .filter(isAddressable)
@@ -73,6 +73,34 @@ export function uiFieldAddress(field, context) {
             .sort(function(a, b) {
                 return a.dist - b.dist;
             });
+
+        return utilArrayUniqBy(features, 'value');
+    }
+
+    function getEnclosing(isAddressable, type, resultProp) {
+        var extent = combinedEntityExtent();
+
+        var features = context.history().intersects(extent)
+            .filter(isAddressable)
+            .map(d => {
+                if (d.geometry(context.graph()) !== 'area') {
+                    return false;
+                }
+
+                const geom = d.asGeoJSON(context.graph()).coordinates[0];
+                if (!geoPolygonContainsPolygon(geom, extent.polygon())) {
+                    return false;
+                }
+
+                const value = resultProp && d.tags[resultProp] ? d.tags[resultProp] : d.tags.name;
+                return {
+                    title: value,
+                    value,
+                    dist: 0,
+                    type,
+                    klass: `address-${type}`
+                };
+            }).filter(Boolean);
 
         return utilArrayUniqBy(features, 'value');
     }
@@ -130,6 +158,16 @@ export function uiFieldAddress(field, context) {
         return getNear(hasTag, key, 200, tagKey);
     }
 
+    function getEnclosingValues(key) {
+        const tagKey = `${field.key}:${key}`;
+
+        function hasTag(d) {
+            return _entityIDs.indexOf(d.id) === -1 && d.tags[tagKey];
+        }
+
+        return getEnclosing(hasTag, key, tagKey);
+    }
+
 
     function updateForCountryCode() {
 
@@ -146,6 +184,10 @@ export function uiFieldAddress(field, context) {
             }
         }
 
+        const maybeDropdowns = new Set([
+            'housenumber',
+            'housename'
+        ]);
         const dropdowns = new Set([
             'block_number',
             'city',
@@ -164,7 +206,8 @@ export function uiFieldAddress(field, context) {
             'street+place',
             'subdistrict',
             'suburb',
-            'town'
+            'town',
+            ...maybeDropdowns
         ]);
 
         var widths = addressFormat.widths || {
@@ -211,7 +254,9 @@ export function uiFieldAddress(field, context) {
 
 
         function addDropdown(d) {
-            if (!dropdowns.has(d.id)) return;  // not a dropdown
+            if (!dropdowns.has(d.id)) {
+                return false;  // not a dropdown
+            }
 
             var nearValues;
             switch (d.id) {
@@ -234,8 +279,21 @@ export function uiFieldAddress(field, context) {
                 case 'postcode':
                     nearValues = getNearPostcodes;
                 break;
+                case 'housenumber':
+                case 'housename':
+                    nearValues = getEnclosingValues;
+                break;
                 default:
                     nearValues = getNearValues;
+            }
+
+            if (maybeDropdowns.has(d.id)) {
+                const candidates = nearValues(d.id);
+                // only add dropdown if there are possible values for the
+                // corresponding tag: e.g. only show ▼ caret for
+                // housenumber/housename if the feature is actually
+                // encompassed by another feature with such an address
+                if (candidates.length === 0) return false;
             }
 
             d3_select(this)
