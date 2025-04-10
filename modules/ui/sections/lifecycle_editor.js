@@ -10,7 +10,6 @@ import { select as d3_select } from 'd3-selection';
 import { osmLifecyclePrefixes, osmGetLifecyclePrefix, osmGetKeyWithoutLifecycle} from '../../osm/tags';
 import { uiCombobox } from '../combobox';
 
-// TODO: don't recreate everything all the time (preset_field class)
 // TODO: expanded by deafult if there already is a lifecycle (dunno)
 // TODO: check for universal fields (where?)
 export function uiSectionLifecycleEditor(context) {
@@ -27,6 +26,7 @@ export function uiSectionLifecycleEditor(context) {
     var _presets = [];
     var _presetFieldsKey = [];
     var _fieldsArr = [];
+    var _focusNodeID = null;
 
     const _lifecyclePresets = Object.values(osmLifecyclePrefixes);
     const _ids = Object.keys(osmLifecyclePrefixes);
@@ -193,6 +193,7 @@ export function uiSectionLifecycleEditor(context) {
 
             let extraTagRow = addExtraTagList
                 .append('li')
+                .attr('id', d => d + '-li')
                 .attr('class', 'member-row form-field');
 
             let innerRowLabel = extraTagRow
@@ -263,7 +264,13 @@ export function uiSectionLifecycleEditor(context) {
             _fieldsArr.forEach(function(field) {
                 field.on('change', function(t, onInput) {
                     t = Object.fromEntries(
-                            Object.entries(t).map(([key, value]) => [`${field.lifecycle}:${key}`, value ?? 'yes'])
+                            Object.entries(t)
+                            .filter(([, value]) => value !== undefined)
+                            .map(([key, value]) => {
+                                const newTag = `${field.lifecycle}:${key}`;
+                                if (_tags[newTag] !== value) _focusNodeID = newTag;
+                                return [newTag, value];
+                            })
                         );
                     dispatch.call('change', field, _entityIDs, t, onInput);
                 });
@@ -271,6 +278,13 @@ export function uiSectionLifecycleEditor(context) {
 
             innerRowLabel.selectAll('.modified-icon').remove();
             innerRowLabel.selectAll('.remove-icon').remove();
+
+            if(_focusNodeID) {
+                const safeId = _focusNodeID.replace(/:/g, "\\:");
+                const nodeToFocus = selection.select('#' + safeId + '-li').selectAll('input').nodes()[1];
+                if (nodeToFocus) nodeToFocus.focus();
+                _focusNodeID = null;
+            }
 
             innerRowLabel
                 .append('button')
