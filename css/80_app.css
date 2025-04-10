@@ -1067,21 +1067,23 @@ a.hide-toggle {
     z-index: 2;
 }
 
-.lifecycle-extra .member-list:empty,
 .lifecycle-extra .member-list:empty {
     display: none;
 }
 
-.lifecycle-extra .member-list,
 .lifecycle-extra .member-list {
-    position: relative; /* required for drag-and-drop */
     padding-top: 5px;
 }
-.lifecycle-extra .member-list li,
+
 .lifecycle-extra .member-list li {
     position: relative;
     border-radius: 4px;
     margin-bottom: 5px !important;
+}
+
+.lifecycle-extra .member-list > li > label {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .lifecycle-extra-icon {
@@ -1122,6 +1124,7 @@ a.hide-toggle {
 .lifecycle-extra .field-label .form-field {
     border-radius: 0 0 0 0 !important;
     margin: 5px !important;
+    width: 100% !important;
 }
 
 .lifecycle-extra button {
@@ -1151,16 +1154,30 @@ a.hide-toggle {
     width: 50% !important;
 }
 
-.lifecycle-extra .remove {
-    border-radius: 0 0 0 0 !important;
+.lifecycle-extra .form-field-button {
     border-left: 0 !important;
 }
 
+.lifecycle-extra-buttons {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+    border-left: 1px solid #ccc !important;
+
+}
 
 .lifecycle-extra .make-functional {
-    border-radius: 0 0 0 0 !important;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc !important;
+    flex: 1 1 50%;
+}
+
+.lifecycle-extra .remove {
+    flex: 1 1 50%;
+}
+
+.lifecycle-extra-buttons > button {
+    border: 0px !important;
 }
 
 .lifecycle-new-row {
