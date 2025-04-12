@@ -59,7 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 * Replace date filter input boxes with a slider to select photos by freshness ([#10394], thanks [@mattiapezzotti])
 * Preserve relative viewing direction when switching between 360° panoramas in Panoramax([#10392], thanks [@mattiapezzotti])
-* Add keyboard shortcut `Shift + P` to toggle active street level photo layers ([#10394], thanks [@mattiapezzotti]))
+* Add keyboard shortcut `Shift + P` to toggle active street level photo layers ([#10394], thanks [@mattiapezzotti])
 * Add prev/next button to viewer for local georeferenced photos ([#10852], thanks [@0xatulpatil])
 * Add button to directly attach the id of a Panoramax photo as the `panoramax` tag of selected map features ([#10856], thanks [@MohamedAli00949])
 * Fix unreliable availability of KartaView images by requesting full resolution images ([#10927])
@@ -79,22 +79,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Take location into account when setting a presets default values from regional fields
 * Roads with `motorroad=yes` show implied access restrictions (`foot=no`, `bicycle=no`, `horse=no`) ([id-tagging-schema#609], [#9333])
 
-[#9333]: https://github.com/openstreetmap/iD/pull/9333
-[#10299]: https://github.com/openstreetmap/iD/issues/10299
-[#10392]: https://github.com/openstreetmap/iD/issues/10392
-[#10394]: https://github.com/openstreetmap/iD/pull/10394
-[#10401]: https://github.com/openstreetmap/iD/issues/10401
-[#10805]: https://github.com/openstreetmap/iD/pull/10805
-[#10843]: https://github.com/openstreetmap/iD/pull/10843
-[#10852]: https://github.com/openstreetmap/iD/issues/10852
-[#10885]: https://github.com/openstreetmap/iD/issues/10885
-[#10910]: https://github.com/openstreetmap/iD/pull/10910
-[#10916]: https://github.com/openstreetmap/iD/pull/10916
-[#10927]: https://github.com/openstreetmap/iD/issues/10927
-[id-tagging-schema#609]: https://github.com/openstreetmap/id-tagging-schema/issues/609
-[@0xatulpatil]: https://github.com/0xatulpatil
-[@MohamedAli00949]: https://github.com/MohamedAli00949
-[@youssefelzedy]: https://github.com/youssefelzedy
+
 
 
 # 2.32.0
@@ -141,38 +126,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Enable Intellisense (IDE auto-completion) for the main classes ([#10618], thanks [@k-yle])
 
-[#7381]: https://github.com/openstreetmap/iD/issues/7381
-[#8911]: https://github.com/openstreetmap/iD/pull/8911
-[#9522]: https://github.com/openstreetmap/iD/issues/9522
-[#9586]: https://github.com/openstreetmap/iD/pull/9586
-[#9634]: https://github.com/openstreetmap/iD/pull/9634
-[#9635]: https://github.com/openstreetmap/iD/pull/9635
-[#9636]: https://github.com/openstreetmap/iD/pull/9636
-[#10003]: https://github.com/openstreetmap/iD/pull/10003
-[#10618]: https://github.com/openstreetmap/iD/pull/10618
-[#10646]: https://github.com/openstreetmap/iD/pull/10646
-[#10648]: https://github.com/openstreetmap/iD/pull/10648
-[#10720]: https://github.com/openstreetmap/iD/issues/10720
-[#10722]: https://github.com/openstreetmap/iD/pull/10722
-[#10727]: https://github.com/openstreetmap/iD/issues/10727
-[#10731]: https://github.com/openstreetmap/iD/pull/10731
-[#10737]: https://github.com/openstreetmap/iD/pull/10737
-[#10747]: https://github.com/openstreetmap/iD/issues/10747
-[#10748]: https://github.com/openstreetmap/iD/issues/10748
-[#10755]: https://github.com/openstreetmap/iD/issues/10755
-[#10763]: https://github.com/openstreetmap/iD/pull/10763
-[#10764]: https://github.com/openstreetmap/iD/issues/10764
-[#10766]: https://github.com/openstreetmap/iD/pull/10766
-[#10776]: https://github.com/openstreetmap/iD/issues/10776
-[#10778]: https://github.com/openstreetmap/iD/issues/10778
-[#10798]: https://github.com/openstreetmap/iD/pull/10798
-[#10801]: https://github.com/openstreetmap/iD/pull/10801
-[#10807]: https://github.com/openstreetmap/iD/issues/10807
-[@hlfan]: https://github.com/hlfan
-[@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
-[@draunger]: https://github.com/draunger
-[@burrscurr]: https://github.com/burrscurr
-[@andrewpmk]: https://github.com/andrewpmk
+
 
 
 # 2.31.1
@@ -180,7 +134,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 * Fix flickering when switching background layers or zooming ([#10738])
 
-[#10738]: https://github.com/openstreetmap/iD/issues/10738
+
 
 
 # 2.31.0
@@ -223,35 +177,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Migrate unit tests from karma to vitest ([#10452], thanks [@k-yle])
 
-[#8042]: https://github.com/openstreetmap/iD/pull/8042
-[#9013]: https://github.com/openstreetmap/iD/issues/9013
-[#9143]: https://github.com/openstreetmap/iD/pull/9143
-[#9587]: https://github.com/openstreetmap/iD/issues/9587
-[#9816]: https://github.com/openstreetmap/iD/issues/9816
-[#9933]: https://github.com/openstreetmap/iD/pull/9933
-[#9998]: https://github.com/openstreetmap/iD/pull/9998
-[#9999]: https://github.com/openstreetmap/iD/issues/9999
-[#10442]: https://github.com/openstreetmap/iD/pull/10442
-[#10452]: https://github.com/openstreetmap/iD/pull/10452
-[#10459]: https://github.com/openstreetmap/iD/pull/10459
-[#10478]: https://github.com/openstreetmap/iD/pull/10478
-[#10488]: https://github.com/openstreetmap/iD/pull/10488
-[#10489]: https://github.com/openstreetmap/iD/pull/10489
-[#10495]: https://github.com/openstreetmap/iD/issues/10495
-[#10508]: https://github.com/openstreetmap/iD/pull/10508
-[#10564]: https://github.com/openstreetmap/iD/pull/10564
-[#10594]: https://github.com/openstreetmap/iD/pull/10594
-[#10624]: https://github.com/openstreetmap/iD/issues/10624
-[#10634]: https://github.com/openstreetmap/iD/issues/10634
-[#10650]: https://github.com/openstreetmap/iD/issues/10650
-[#10651]: https://github.com/openstreetmap/iD/issues/10651
-[#10653]: https://github.com/openstreetmap/iD/issues/10653
-[#10683]: https://github.com/openstreetmap/iD/issues/10683
-[#10684]: https://github.com/openstreetmap/iD/pull/10684
-[#10716]: https://github.com/openstreetmap/iD/pull/10716
-[@winstonsung]: https://github.com/winstonsung/
-[@Nekzuris]: https://github.com/Nekzuris
-[@michaelabon]: https://github.com/michaelabon
+
 
 
 # 2.30.4
@@ -259,7 +185,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 * Refresh background imagery dataset ([#10486])
 
-[#10486]: https://github.com/openstreetmap/iD/issues/10486
+
 
 
 # 2.30.3
@@ -268,7 +194,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Refresh background imagery dataset ([#10483])
 
 
-[#10483]: https://github.com/openstreetmap/iD/issues/10483
+
 
 
 # 2.30.2
@@ -316,26 +242,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Update dependencies, including `osm-community-index` to v5.7, `osm-auth` to v2.5
 
-[#3595]: https://github.com/openstreetmap/iD/issues/3595
-[#7582]: https://github.com/openstreetmap/iD/issues/7582
-[#8994]: https://github.com/openstreetmap/iD/issues/8994
-[#9993]: https://github.com/openstreetmap/iD/issues/9993
-[#9941]: https://github.com/openstreetmap/iD/issues/9941
-[#10181]: https://github.com/openstreetmap/iD/pull/10181
-[#10255]: https://github.com/openstreetmap/iD/pull/10255
-[#10257]: https://github.com/openstreetmap/iD/pull/10257
-[#10260]: https://github.com/openstreetmap/iD/issues/10260
-[#10283]: https://github.com/openstreetmap/iD/pull/10283
-[#10291]: https://github.com/openstreetmap/iD/pull/10291
-[#10302]: https://github.com/openstreetmap/iD/issues/10302
-[#10323]: https://github.com/openstreetmap/iD/issues/10323
-[#10341]: https://github.com/openstreetmap/iD/issues/10341
-[#10342]: https://github.com/openstreetmap/iD/issues/10342
-[#10369]: https://github.com/openstreetmap/iD/issues/10369
-[@zbycz]: https://github.com/zbycz
-[@samhoooo]: https://github.com/samhoooo
-[@cmoffroad]: https://github.com/cmoffroad
-[@waldyrious]: https://github.com/waldyrious
+
 
 
 # 2.29.0
@@ -361,21 +268,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Upgrade eslint config to version 9
 
 
-[#5420]: https://github.com/openstreetmap/iD/issues/5420
-[#7653]: https://github.com/openstreetmap/iD/issues/7653
-[#8415]: https://github.com/openstreetmap/iD/issues/8415
-[#9339]: https://github.com/openstreetmap/iD/issues/9339
-[#9439]: https://github.com/openstreetmap/iD/issues/9439
-[#10135]: https://github.com/openstreetmap/iD/issues/10135
-[#10145]: https://github.com/openstreetmap/iD/issues/10145
-[#10153]: https://github.com/openstreetmap/iD/issues/10153
-[#10175]: https://github.com/openstreetmap/iD/pull/10175
-[#10188]: https://github.com/openstreetmap/iD/issues/10188
-[id-tagging-schema#1162]: https://github.com/openstreetmap/id-tagging-schema/issues/1162
-[@Sushil642]: https://github.com/Sushil642
-[@mattiapezzotti]: https://github.com/mattiapezzotti
-[@Asif-Sheriff]: https://github.com/Asif-Sheriff
-[@laigyu]: https://github.com/laigyu
+
 
 
 # 2.28.1
@@ -386,8 +279,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 * Add address format for New Zealand ([#10123], thanks [@k-yle])
 
-[#10123]: https://github.com/openstreetmap/iD/pull/10123
-[#10140]: https://github.com/openstreetmap/iD/issues/10140
+
 
 
 # 2.28.0
@@ -419,27 +311,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop `*:wikipedia` tags when switching to a new NSI-based preset which specifies a corresponding `*:wikidata` tag ([#9103])
 * Add rendering style for `waterway=flowline` features: as wide as rivers, but without border and slightly opaque ([#10283])
 
-[#9103]: https://github.com/openstreetmap/iD/issues/9103
-[#9424]: https://github.com/openstreetmap/iD/pull/9424
-[#9422]: https://github.com/openstreetmap/iD/issues/9422
-[#9876]: https://github.com/openstreetmap/iD/issues/9876
-[#9891]: https://github.com/openstreetmap/iD/pull/9891
-[#9974]: https://github.com/openstreetmap/iD/pull/9974
-[#9983]: https://github.com/openstreetmap/iD/issues/9983
-[#9992]: https://github.com/openstreetmap/iD/issues/9992
-[#10035]: https://github.com/openstreetmap/iD/pull/10035
-[#10054]: https://github.com/openstreetmap/iD/issues/10054
-[#10062]: https://github.com/openstreetmap/iD/pull/10062
-[#10066]: https://github.com/openstreetmap/iD/pull/10066
-[#10074]: https://github.com/openstreetmap/iD/issues/10074
-[#10127]: https://github.com/openstreetmap/iD/issues/10127
-[#10128]: https://github.com/openstreetmap/iD/issues/10128
-[id-tagging-schema#1076]: https://github.com/openstreetmap/id-tagging-schema/pull/1076
-[@ramith-kulal]: https://github.com/ramith-kulal
-[@mangerlahn]: https://github.com/mangerlahn
-[@NaVis0mple]: https://github.com/NaVis0mple
-[@mtmail]: https://github.com/mtmail
-[@lefuturiste]: https://github.com/lefuturiste
+
 
 
 # 2.27.3
@@ -461,10 +333,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Improve backwards compatibility with some old browsers ([#9934], thanks [@k-yle])
 * Refresh dependencies, including `osm-community-index` to 5.6.0, `temaki` to 5.6
 
-[#9898]: https://github.com/openstreetmap/iD/issues/9898
-[#9906]: https://github.com/openstreetmap/iD/pull/9906
-[#9934]: https://github.com/openstreetmap/iD/pull/9934
-[operations#951]: https://github.com/openstreetmap/operations/issues/951
+
 
 
 # 2.27.1
@@ -474,9 +343,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix stuck cursor in input fields on Safari ([#9848])
 * Fix non-360° Mapilio images from being zoomed in too far ([#9846], thanks [@ozcan-durak])
 
-[#9846]: https://github.com/openstreetmap/iD/issues/9846
-[#9848]: https://github.com/openstreetmap/iD/issues/9848
-[@ozcan-durak]: https://github.com/ozcan-durak
+
 
 
 # 2.27.0
@@ -504,17 +371,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Upgrade osm-auth to v2.2
 * Upgrade dependencies, including the following major version upgrades: `marked` to v7, `esbuild` to v0.18
 
-[#8997]: https://github.com/openstreetmap/iD/issues/8997
-[#9233]: https://github.com/openstreetmap/iD/issues/9233
-[#9291]: https://github.com/openstreetmap/iD/pull/9291
-[#9509]: https://github.com/openstreetmap/iD/pull/9509
-[#9664]: https://github.com/openstreetmap/iD/pull/9664
-[#9786]: https://github.com/openstreetmap/iD/issues/9786
-[#9817]: https://github.com/openstreetmap/iD/pull/9817
-[#9822]: https://github.com/openstreetmap/iD/issues/9822
-[@channel-s]: https://github.com/channel-s
-[@noenandre]: https://github.com/noenandre
-[@nontech]: https://github.com/nontech
+
 
 
 # 2.26.2
@@ -522,7 +379,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 * Fix broken in raw tag editor ([#9766], thanks [@k-yle])
 
-[#9766]: https://github.com/openstreetmap/iD/pull/9766
+
 
 
 # 2.26.1
@@ -530,7 +387,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 * Fix crash when rendering an `email` UI field ([#9752])
 
-[#9752]: https://github.com/openstreetmap/iD/issues/9752
+
 
 
 # 2.26.0
@@ -578,33 +435,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Upgrade dev dependencies, including the following major version upgrades: `glob` to v10, `marked` to v5, `cldr-core` and `cldr-localenames-full` to v43, `esbuild` to v0.18
 * Build icons from configured presets source and also process field value `icons` in `npm run build:data`
 
-[#8769]: https://github.com/openstreetmap/iD/pull/8769
-[#8775]: https://github.com/openstreetmap/iD/pull/8775
-[#7427]: https://github.com/openstreetmap/iD/issues/7427
-[#9433]: https://github.com/openstreetmap/iD/pull/9433
-[#9482]: https://github.com/openstreetmap/iD/pull/9482
-[#9483]: https://github.com/openstreetmap/iD/pull/9483
-[#9492]: https://github.com/openstreetmap/iD/pull/9492
-[#9493]: https://github.com/openstreetmap/iD/pull/9493
-[#9501]: https://github.com/openstreetmap/iD/pull/9501
-[#9520]: https://github.com/openstreetmap/iD/pull/9520
-[#9524]: https://github.com/openstreetmap/iD/issues/9524
-[#9603]: https://github.com/openstreetmap/iD/pull/9603
-[#9630]: https://github.com/openstreetmap/iD/pull/9630
-[#9637]: https://github.com/openstreetmap/iD/pull/9637
-[#9638]: https://github.com/openstreetmap/iD/pull/9638
-[#9640]: https://github.com/openstreetmap/iD/issues/9640
-[#9650]: https://github.com/openstreetmap/iD/pull/9650
-[#9667]: https://github.com/openstreetmap/iD/pull/9667
-[#9673]: https://github.com/openstreetmap/iD/pull/9673
-[#9710]: https://github.com/openstreetmap/iD/issues/9710
-[#9737]: https://github.com/openstreetmap/iD/pull/9737
-[#9738]: https://github.com/openstreetmap/iD/pull/9738
-[schema-builder#98]: https://github.com/ideditor/schema-builder/pull/98
-[@biswajit-k]: https://github.com/biswajit-k
-[@bryceco]: https://github.com/bryceco
-[@soshial]: https://github.com/soshial
-[@Yogurt4]: https://github.com/Yogurt4
+
 
 
 # 2.25.2
@@ -632,8 +463,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * CDNs for resources (id-tagging-schema, osm-community-index, name-suggestion-index and others) are now configurable via environment variables (or a dotenv file)
 * API connections (main OSM API, taginfo, nominatim) are now configurable via environment variables (or a dotenv file)
 
-[#9425]: https://github.com/openstreetmap/iD/issues/9425
-[#9477]: https://github.com/openstreetmap/iD/issues/9477
+
 
 
 # 2.24.2
@@ -674,27 +504,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Upgrade to Transifex API v3 ([#9375])
 * Upgrade dependencies: `d3` to v7.8, `@ideditor/country-coder` to v5.1, `@ideditor/location-conflation` to v1.1, `esbuild` to v0.17, `osm-community-index` to `v5.5`
 
-[#7943]: https://github.com/openstreetmap/iD/issues/7943
-[#9372]: https://github.com/openstreetmap/iD/issues/9372
-[#9374]: https://github.com/openstreetmap/iD/issues/9374
-[#9375]: https://github.com/openstreetmap/iD/pull/9375
-[#9386]: https://github.com/openstreetmap/iD/issues/9386
-[#9390]: https://github.com/openstreetmap/iD/pull/9390
-[#9392]: https://github.com/openstreetmap/iD/pull/9392
-[#9397]: https://github.com/openstreetmap/iD/issues/9397
-[#9413]: https://github.com/openstreetmap/iD/pull/9413
-[#9423]: https://github.com/openstreetmap/iD/pull/9423
-[#9434]: https://github.com/openstreetmap/iD/pull/9434
-[#9443]: https://github.com/openstreetmap/iD/pull/9443
-[#9446]: https://github.com/openstreetmap/iD/pull/9446
-[#9471]: https://github.com/openstreetmap/iD/issues/9471
-[#9458]: https://github.com/openstreetmap/iD/pull/9458
-[@alanb43]: https://github.com/alanb43
-[@Rewinteer]: https://github.com/Rewinteer
-[@Zaczero]: https://github.com/Zaczero
-[@Dimitar5555]: https://github.com/Dimitar5555
-[@furkanmutlu-tomtom]: https://github.com/furkanmutlu-tomtom
-[@arch0345]: https://github.com/arch0345
+
 
 
 # 2.23.2
@@ -703,7 +513,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix crash when performing a multiselection of objects with differing tags values in a combo field ([#9369])
 
-[#9369]: https://github.com/openstreetmap/iD/issues/9369
+
 
 
 # 2.23.1
@@ -745,19 +555,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Make settings like CDN and API urls configurable in a central config file (`/config/is.js`)
 * Upgrade dependencies: `temaki` to v5.2, `marked` to v4.2
 
-[#8105]: https://github.com/openstreetmap/iD/issues/8105
-[#8380]: https://github.com/openstreetmap/iD/issues/8380
-[#9104]: https://github.com/openstreetmap/iD/issues/9104
-[#9294]: https://github.com/openstreetmap/iD/issues/9294
-[#9320]: https://github.com/openstreetmap/iD/pull/9320
-[#9325]: https://github.com/openstreetmap/iD/issues/9325
-[#9337]: https://github.com/openstreetmap/iD/issues/9337
-[#9341]: https://github.com/openstreetmap/iD/issues/9341
-[#9342]: https://github.com/openstreetmap/iD/issues/9342
-[#9344]: https://github.com/openstreetmap/iD/pull/9344
-[#9345]: https://github.com/openstreetmap/iD/issues/9345
-[#9347]: https://github.com/openstreetmap/iD/pull/9347
-[schema-builder#38]: https://github.com/ideditor/schema-builder/pull/38
+
 
 # 2.22.0
 ##### 2022-Sep-27
@@ -801,40 +599,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Upgrade dependencies: maki to `v8.0`, `osm-community-index` to `v5.2`, `d3` to `v7.6`, `togeojson` to `v5.2`, `mocha` to `v10`
 
 
-[#7790]: https://github.com/openstreetmap/iD/issues/7790
-[#8419]: https://github.com/openstreetmap/iD/issues/8419
-[#8732]: https://github.com/openstreetmap/iD/issues/8732
-[#8881]: https://github.com/openstreetmap/iD/issues/8881
-[#8975]: https://github.com/openstreetmap/iD/pull/8975
-[#9018]: https://github.com/openstreetmap/iD/issues/9018
-[#9054]: https://github.com/openstreetmap/iD/issues/9054
-[#9067]: https://github.com/openstreetmap/iD/issues/9067
-[#9074]: https://github.com/openstreetmap/iD/pull/9074
-[#9110]: https://github.com/openstreetmap/iD/issues/9110
-[#9139]: https://github.com/openstreetmap/iD/pull/9139
-[#9140]: https://github.com/openstreetmap/iD/pull/9140
-[#9141]: https://github.com/openstreetmap/iD/pull/9141
-[#9142]: https://github.com/openstreetmap/iD/pull/9142
-[#9157]: https://github.com/openstreetmap/iD/issues/9157
-[#9164]: https://github.com/openstreetmap/iD/issues/9164
-[#9169]: https://github.com/openstreetmap/iD/issues/9169
-[#9171]: https://github.com/openstreetmap/iD/pull/9171
-[#9172]: https://github.com/openstreetmap/iD/pull/9172
-[#9176]: https://github.com/openstreetmap/iD/pull/9176
-[#9208]: https://github.com/openstreetmap/iD/issues/9208
-[#9227]: https://github.com/openstreetmap/iD/issues/9227
-[#9293]: https://github.com/openstreetmap/iD/issues/9293
-[#9241]: https://github.com/openstreetmap/iD/pull/9241
-[#9242]: https://github.com/openstreetmap/iD/pull/9242
-[#9298]: https://github.com/openstreetmap/iD/issues/9298
-[@furkanmutlu]: https://github.com/furkanmutlu
-[@JackNUMBER]: https://github.com/JackNUMBER
-[@aaditya0000]: https://github.com/aaditya0000
-[@paulklie]: https://github.com/paulklie
-[@renancleyson-dev]: https://github.com/renancleyson-dev
-[@bvercelli99]: https://github.com/bvercelli99
-[@faebebin]: https://github.com/faebebin
-[@bgo-eiu]: https://github.com/bgo-eiu
+
 
 
 # 2.21.1
@@ -843,7 +608,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix compatibility with older versions of browsers (Firefox ≤ v77, Chrome ≤ v61, Safari ≤ v11) ([#9163], thanks [@1ec5])
 
-[#9163]: https://github.com/openstreetmap/iD/issues/9163
+
 
 
 # 2.21.0
@@ -879,27 +644,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@mbrzakovic] and [@bhousel])
 * Upgrade dependencies: maki to `v7.1`, `fontawesome` to `v6.1`, `d3` to `v7.4`, `node-diff` to `v3.1`, `mocha` to `v9.2`, `svg-sprite` to `v1.5.4`, `marked` to `v4.0`, `temaki` to `v5.1`, `mapillary-js` to `v4.1`
 
-[#6139]: https://github.com/openstreetmap/iD/issues/6139
-[#8774]: https://github.com/openstreetmap/iD/pull/8774
-[#8811]: https://github.com/openstreetmap/iD/issues/8811
-[#8869]: https://github.com/openstreetmap/iD/issues/8869
-[#8905]: https://github.com/openstreetmap/iD/issues/8905
-[#8925]: https://github.com/openstreetmap/iD/issues/8925
-[#8927]: https://github.com/openstreetmap/iD/issues/8927
-[#8944]: https://github.com/openstreetmap/iD/issues/8944
-[#8945]: https://github.com/openstreetmap/iD/issues/8945
-[#8963]: https://github.com/openstreetmap/iD/issues/8963
-[#8976]: https://github.com/openstreetmap/iD/issues/8976
-[#8985]: https://github.com/openstreetmap/iD/issues/8985
-[#9021]: https://github.com/openstreetmap/iD/pull/9021
-[#9097]: https://github.com/openstreetmap/iD/pull/9097
-[#9102]: https://github.com/openstreetmap/iD/issues/9102
-[#9118]: https://github.com/openstreetmap/iD/issues/9118
-[#9124]: https://github.com/openstreetmap/iD/pull/9124
-[#9133]: https://github.com/openstreetmap/iD/pull/9133
-[#9134]: https://github.com/openstreetmap/iD/pull/9134
-[@wcedmisten]: https://github.com/wcedmisten
-[@dakotabenjamin]: https://github.com/dakotabenjamin
+
 
 # 2.20.4
 ##### 2022-Feb-03
@@ -908,8 +653,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix rendering of HTML content in ~~KeepRight and~~ ImproveOSM issues ([#8928])
 * Fix "local storage is exceeded" error message showing up multiple times ([#8930])
 
-[#8928]: https://github.com/openstreetmap/iD/pull/8928
-[#8930]: https://github.com/openstreetmap/iD/pull/8930
+
 
 
 # 2.20.3
@@ -961,44 +705,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Switch to `chalk` package for build scripts
 * Upgrade to temaki library to v5 ([#8434])
 
-[#8057]: https://github.com/openstreetmap/iD/issues/8057
-[#8434]: https://github.com/openstreetmap/iD/pull/8434
-[#8519]: https://github.com/openstreetmap/iD/issues/8519
-[#8676]: https://github.com/openstreetmap/iD/issues/8676
-[#8743]: https://github.com/openstreetmap/iD/issues/8743
-[#8764]: https://github.com/openstreetmap/iD/pull/8764
-[#8771]: https://github.com/openstreetmap/iD/issues/8771
-[#8781]: https://github.com/openstreetmap/iD/issues/8781
-[#8782]: https://github.com/openstreetmap/iD/pull/8782
-[#8792]: https://github.com/openstreetmap/iD/pull/8792
-[#8796]: https://github.com/openstreetmap/iD/issues/8796
-[#8799]: https://github.com/openstreetmap/iD/issues/8799
-[#8800]: https://github.com/openstreetmap/iD/pull/8800
-[#8805]: https://github.com/openstreetmap/iD/issues/8805
-[#8807]: https://github.com/openstreetmap/iD/issues/8807
-[#8813]: https://github.com/openstreetmap/iD/issues/8813
-[#8817]: https://github.com/openstreetmap/iD/pull/8817
-[#8818]: https://github.com/openstreetmap/iD/issues/8818
-[#8825]: https://github.com/openstreetmap/iD/pull/8825
-[#8828]: https://github.com/openstreetmap/iD/pull/8828
-[#8831]: https://github.com/openstreetmap/iD/issues/8831
-[#8835]: https://github.com/openstreetmap/iD/pull/8835
-[#8844]: https://github.com/openstreetmap/iD/pull/8844
-[#8836]: https://github.com/openstreetmap/iD/issues/8836
-[#8839]: https://github.com/openstreetmap/iD/pull/8839
-[#8860]: https://github.com/openstreetmap/iD/pull/8860
-[#8871]: https://github.com/openstreetmap/iD/issues/8871
-[#8876]: https://github.com/openstreetmap/iD/pull/8876
-[#8880]: https://github.com/openstreetmap/iD/pull/8880
-[#8889]: https://github.com/openstreetmap/iD/pull/8889
-[#8906]: https://github.com/openstreetmap/iD/pull/8906
-[@k-yle]: https://github.com/k-yle
-[@tpetillon]: https://github.com/tpetillon
-[@mbrzakovic]: https://github.com/mbrzakovic
-[@wvanderp]: https://github.com/wvanderp
-[@hodigabi]: https://github.com/hodigabi
-[@jtracey]: https://github.com/jtracey
-[@cicku]: https://github.com/cicku
+
 
 # 2.20.2
 ##### 2021-Oct-28
@@ -1025,25 +732,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Introduced github issue templates ([#pr8746])
 * Few unit tests improvements ([#pr8642], [#pr8762])
 
-[#8647]: https://github.com/openstreetmap/iD/issues/8647
-[#8727]: https://github.com/openstreetmap/iD/issues/8727
-[#8708]: https://github.com/openstreetmap/iD/issues/8708
-[#pr8685]: https://github.com/openstreetmap/iD/pull/8685
-[#pr8650]: https://github.com/openstreetmap/iD/pull/8650
-[#pr8663]: https://github.com/openstreetmap/iD/pull/8663
-[#pr8671]: https://github.com/openstreetmap/iD/pull/8671
-[#pr8773]: https://github.com/openstreetmap/iD/pull/8773
-[#pr8675]: https://github.com/openstreetmap/iD/pull/8675
-[#pr8701]: https://github.com/openstreetmap/iD/pull/8701
-[#pr8628]: https://github.com/openstreetmap/iD/pull/8628
-[#pr8741]: https://github.com/openstreetmap/iD/pull/8741
-[#pr8768]: https://github.com/openstreetmap/iD/pull/8768
-[#pr8761]: https://github.com/openstreetmap/iD/pull/8761
-[#8612]: https://github.com/openstreetmap/iD/issues/8612
-[#8288]: https://github.com/openstreetmap/iD/issues/8288
-[#pr8746]: https://github.com/openstreetmap/iD/pull/8746
-[#pr8642]: https://github.com/openstreetmap/iD/pull/8642
-[#pr8762]: https://github.com/openstreetmap/iD/pull/8762
+
 
 # 2.20.1
 ##### 2021-Aug-17
@@ -1052,8 +741,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Splash message now links to changelog instead of inactive ideditor.blog ([#8604])
 * Maxar Premium imagery - new url ([#pr8623])
 
-[#8604]: https://github.com/openstreetmap/iD/issues/8604
-[#pr8623]: https://github.com/openstreetmap/iD/pull/8623
+
 
 #### :bug: Bugfixes
 * Fix NSI (name suggestion index) bug where tagging warning recommended removing tags considered as 'primary' ([#8615])
@@ -1062,25 +750,18 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix Validator bug where pre-existing issues were treated as current/edited issues ([#8613], [#8632])
 * Fix Validator bug where 'fix-me' requests were being treated as outstanding issues ([#8603])
 
-[#8615]: https://github.com/openstreetmap/iD/issues/8615
-[#8617]: https://github.com/openstreetmap/iD/issues/8617
-[#pr8627]: https://github.com/openstreetmap/iD/pull/8627
-[#8613]: https://github.com/openstreetmap/iD/issues/8613
-[#8632]: https://github.com/openstreetmap/iD/issues/8632
-[#8603]: https://github.com/openstreetmap/iD/issues/8603
+
 
 #### :white_check_mark: Validation
 * Crossing ways - Smarter node repurposing ([#pr8625])
 * Improve focusing on an issue ([#pr8626], [#pr8638])
 
-[#pr8625]: https://github.com/openstreetmap/iD/pull/8625
-[#pr8626]: https://github.com/openstreetmap/iD/pull/8626
-[#pr8638]: https://github.com/openstreetmap/iD/pull/8638
+
 
 #### :hammer: Development
 * Switch from @mapbox/togeojson to more maintained @tmcw/togeojson ([#pr8636])
 
-[#pr8636]: https://github.com/openstreetmap/iD/pull/8636
+
 
 # 2.20.0
 ##### 2021-Jul-20
@@ -1096,10 +777,7 @@ _Additionally, presets now support [location set constraints](https://github.com
 * :book: **Combo field now supports translatable options**. Thanks [@quincylvania]! ([#pr8238]) <br/>
 _The text styling indicates which values are raw tags and which are translated labels. It works for semiCombo and multiCombo as well as single-value combos_
 
-[#pr8229]: https://github.com/openstreetmap/iD/pull/8229
-[#pr8372]: https://github.com/openstreetmap/iD/pull/8372
-[#pr8305]: https://github.com/openstreetmap/iD/pull/8305
-[#pr8238]: https://github.com/openstreetmap/iD/pull/8238
+
 
 #### :sparkles: Usability & Accessibility
 * Enabled node dragging at the bottom of the screen ([#8233])
@@ -1108,32 +786,23 @@ _The text styling indicates which values are raw tags and which are translated l
 * Improved distinction between preset categories and presets icons in sidebar ([#6085])
 * Enhance labels for route relations to include direction and via points ([#8276], thanks [@1ec5])
 
-[#8233]: https://github.com/openstreetmap/iD/issues/8233
-[#8242]: https://github.com/openstreetmap/iD/issues/8242
-[#8164]: https://github.com/openstreetmap/iD/issues/8164
-[#6085]: https://github.com/openstreetmap/iD/issues/6085
-[#8276]: https://github.com/openstreetmap/iD/pull/8276
+
 
 #### :scissors: Operations
 * New operations: Select parent way operation (<kbd>Ctrl</kbd><kbd>↑</kbd>)/ select child nodes operation (<kbd>Ctrl</kbd><kbd>↓</kbd>) ([#pr8264], [#pr8577]) Thanks [@1ec5]
 * Move (<kbd>M</kbd>) now works for nodes ([#8225])
 * Move does not exit while moving the map ([#8187])
 
-[@1ec5]: https://github.com/1ec5
 
-[#pr8264]: https://github.com/openstreetmap/iD/pull/8264
-[#pr8577]: https://github.com/openstreetmap/iD/pull/8577
-[#8225]: https://github.com/openstreetmap/iD/issues/8225
-[#8187]: https://github.com/openstreetmap/iD/issues/8187
+
+
 
 #### :white_check_mark: Validation
 * Several rules added for the case when tagging is used with wrong geometry ([#8231])
 * Missing tag validation improvement ([#8273])
 * Smarter suspicious tag and outdated tag validators (thanks to the new NSI matcher) ([#pr8305])
 
-[#8231]: https://github.com/openstreetmap/iD/issues/8231
-[#8273]: https://github.com/openstreetmap/iD/issues/8273
-[#pr8305]: https://github.com/openstreetmap/iD/pull/8305
+
 
 #### :bug: Bugfixes
 * Extract POI node now ends up in expected center ([#8246])
@@ -1144,26 +813,19 @@ _The text styling indicates which values are raw tags and which are translated l
 * Fixed Centroid calculation in measurement panel ([#pr8341]) Thanks to ([@jleedev])
 * Disabled edge case no-op move/rotate (move/rotate + <kbd>Esc</kbd>) to pop previous edit of history ([#pr8442])
 
-[@rbuffat]: https://github.com/rbuffat
-[@jleedev]: https://github.com/jleedev
 
-[#8246]: https://github.com/openstreetmap/iD/issues/8246
-[#6731]: https://github.com/openstreetmap/iD/issues/6731
-[#pr8310]: https://github.com/openstreetmap/iD/pull/8310
-[#pr8322]: https://github.com/openstreetmap/iD/pull/8322
-[#pr8473]: https://github.com/openstreetmap/iD/pull/8473
-[#pr8341]: https://github.com/openstreetmap/iD/pull/8341
-[#pr8442]: https://github.com/openstreetmap/iD/pull/8442
+
+
 
 #### :hourglass: Performance
 * Validator now uses work queue and executes rule-jobs during idle cycles ([#pr8305])
 
-[#pr8305]: https://github.com/openstreetmap/iD/pull/8305
+
 
 #### :mortar_board: Walkthrough / Help
 * Tooltip added to 'Review my edits' ([#7227])
 
-[#7227]: https://github.com/openstreetmap/iD/issues/7227
+
 
 #### :rocket: Presets
 * For preset changes please follow [id-tagging-schema repo](https://github.com/openstreetmap/id-tagging-schema)
@@ -1172,8 +834,7 @@ _The text styling indicates which values are raw tags and which are translated l
 * Use JSON endpoints for user OSM API ([#8188])
 * Migrated from Travis CI to Github Actions ([#pr8258])
 
-[#8188]: https://github.com/openstreetmap/iD/issues/8188
-[#pr8258]: https://github.com/openstreetmap/iD/pull/8258
+
 
 # 2.19.6
 ##### 2021-Mar-3
@@ -1187,28 +848,24 @@ _The text styling indicates which values are raw tags and which are translated l
 #### :sparkles: Usability & Accessibility
 * Enable loading iD with a feature selected even when zoomed out ([#8122])
 
-[#8122]: https://github.com/openstreetmap/iD/issues/8122
+
 
 #### :bug: Bugfixes
 * Fix an issue where some fields that allow multiple values would not show existing tags ([#8155])
 * Fix a bug where points could move back unexpectedly when changing their tags after dragging them ([#7606])
 * Fix rare instances where iD could add an invalid localized name tag ([#8165])
 
-[#8155]: https://github.com/openstreetmap/iD/issues/8155
-[#7606]: https://github.com/openstreetmap/iD/issues/7606
-[#8165]: https://github.com/openstreetmap/iD/issues/8165
+
 
 #### :earth_asia: Localization
 * Support dozens of additional languages in the Multilingual Name field ([#8165])
 
-[#8165]: https://github.com/openstreetmap/iD/issues/8165
+
 
 #### :rocket: Presets
 * Indicate the units for the Capacity field on storage tank presets ([#8078], [#8112], thanks [@karmanya007])
 
-[#8078]: https://github.com/openstreetmap/iD/issues/8078
-[#8112]: https://github.com/openstreetmap/iD/issues/8112
-[@karmanya007]: https://github.com/karmanya007
+
 
 # 2.19.4
 ##### 2020-Nov-2
@@ -1218,15 +875,12 @@ _The text styling indicates which values are raw tags and which are translated l
 * Fix a bug where deselecting items in the selected features list would instead select them in some browsers ([#8151])
 * Properly open the Custom Background screen when a custom layer is requested but not set ([#8141], thanks [@willemarcel])
 
-[#8137]: https://github.com/openstreetmap/iD/issues/8137
-[#8151]: https://github.com/openstreetmap/iD/issues/8151
-[#8141]: https://github.com/openstreetmap/iD/issues/8141
-[@willemarcel]: https://github.com/willemarcel
+
 
 #### :rocket: Presets
 * Add Telephone field to Warehouse preset ([#8150])
 
-[#8150]: https://github.com/openstreetmap/iD/issues/8150
+
 
 # 2.19.3
 ##### 2020-Oct-29
@@ -1241,12 +895,12 @@ _The text styling indicates which values are raw tags and which are translated l
 #### :scissors: Operations
 * Don't remove `source:date` or other `source:` tags when downgrading features to basic buildings or addresses ([#8097])
 
-[#8097]: https://github.com/openstreetmap/iD/issues/8097
+
 
 #### :camera: Street-Level
 * Apply the date and username filters to the Map Features and Traffic Signs layers as well as photo layers ([#8133])
 
-[#8133]: https://github.com/openstreetmap/iD/issues/8133
+
 
 #### :bug: Bugfixes
 * Fix an issue where setting the Wikidata field value wouldn't update the `wikidata` tag ([#8132])
@@ -1256,8 +910,7 @@ _The text styling indicates which values are raw tags and which are translated l
 * Fix a bug where a point extracted from an area could be placed very far from away from the expected location
 * Avoid a potential error due to resizing the sidebar when iD is embedded in Tasking Manager
 
-[#8132]: https://github.com/openstreetmap/iD/issues/8132
-[#8134]: https://github.com/openstreetmap/iD/issues/8134
+
 
 # 2.19.2
 ##### 2020-Oct-28
@@ -1265,9 +918,9 @@ _The text styling indicates which values are raw tags and which are translated l
 #### :bug: Bugfixes
 * Fix an issue where the Lines chapter of the walkthrough could not be completed ([#8128], thanks [@ricloy])
 
-[#8128]: https://github.com/openstreetmap/iD/issues/8128
 
-[@ricloy]: https://github.com/ricloy
+
+
 
 # 2.19.1
 ##### 2020-Oct-27
@@ -1277,7 +930,7 @@ _The text styling indicates which values are raw tags and which are translated l
 * Fix an issue with automatically opening the sidebar after drawing a new feature
 * Correct the alignment of the new update badge icon
 
-[#8126]: https://github.com/openstreetmap/iD/issues/8126
+
 
 # 2.19.0
 ##### 2020-Oct-27
@@ -1297,7 +950,7 @@ _For best results, make sure that every language you understand is listed in you
 #### :boom: Breaking Changes
 * The modifier key to zoom and move the map or selection by a lot has changed from <kbd>Cmd</kbd> / <kbd>Ctrl</kbd> to <kbd>Opt</kbd> / <kbd>Alt</kbd> ([#7976])
 
-[#7976]: https://github.com/openstreetmap/iD/issues/7976
+
 
 #### :sparkles: Usability & Accessibility
 * Make the interface (except map elements) navigable using only a keyboard ([#7770], [#8004])
@@ -1310,16 +963,7 @@ _For best results, make sure that every language you understand is listed in you
 * Reduce situations where the Keyboard Shortcuts list becomes one big column ([#8021])
 * Increase the possible range of background imagery Brightness, Contrast, Saturation, and Sharpness from 25-200% to 0-300%
 
-[#7770]: https://github.com/openstreetmap/iD/issues/7770
-[#8004]: https://github.com/openstreetmap/iD/issues/8004
-[#7753]: https://github.com/openstreetmap/iD/issues/7753
-[#7965]: https://github.com/openstreetmap/iD/issues/7965
-[#7979]: https://github.com/openstreetmap/iD/issues/7979
-[#7976]: https://github.com/openstreetmap/iD/issues/7976
-[#7952]: https://github.com/openstreetmap/iD/issues/7952
-[#7961]: https://github.com/openstreetmap/iD/issues/7961
-[#8055]: https://github.com/openstreetmap/iD/issues/8055
-[#8021]: https://github.com/openstreetmap/iD/issues/8021
+
 
 #### :scissors: Operations
 * Improve the Circularize animation ([#8083], thanks [@teymour-aldridge])
@@ -1334,20 +978,9 @@ _For best results, make sure that every language you understand is listed in you
 * Make Delete and Downgrade separate operations with different shortcuts ([#7682])
 * Enable the removal of all tags from selected vertices with the Downgrade operation ([#6756])
 
-[@teymour-aldridge]: https://github.com/teymour-aldridge
 
-[#8083]: https://github.com/openstreetmap/iD/issues/8083
-[#3372]: https://github.com/openstreetmap/iD/issues/3372
-[#8012]: https://github.com/openstreetmap/iD/issues/8012
-[#7824]: https://github.com/openstreetmap/iD/issues/7824
-[#7990]: https://github.com/openstreetmap/iD/issues/7990
-[#7795]: https://github.com/openstreetmap/iD/issues/7795
-[#8069]: https://github.com/openstreetmap/iD/issues/8069
-[#6047]: https://github.com/openstreetmap/iD/issues/6047
-[#5174]: https://github.com/openstreetmap/iD/issues/5174
-[#8034]: https://github.com/openstreetmap/iD/issues/8034
-[#7682]: https://github.com/openstreetmap/iD/issues/7682
-[#6756]: https://github.com/openstreetmap/iD/issues/6756
+
+
 
 #### :camera: Street-Level
 * Add controls to filter photos by capture date and contributor ([#4518], [#7342], [#5307], [#7847], [#8076], thanks [@nickplesha])
@@ -1357,23 +990,9 @@ _For best results, make sure that every language you understand is listed in you
 * Fix issue where some photo viewer controls could not be clicked ([#7974])
 * Fix issue where some button icons wouldn't appear in the Mapillary viewer ([#7920], [#8063])
 
-[@nickplesha]: https://github.com/nickplesha
 
-[#8063]: https://github.com/openstreetmap/iD/issues/8063
-[#7920]: https://github.com/openstreetmap/iD/issues/7920
-[#4518]: https://github.com/openstreetmap/iD/issues/4518
-[#7342]: https://github.com/openstreetmap/iD/issues/7342
-[#5307]: https://github.com/openstreetmap/iD/issues/5307
-[#7847]: https://github.com/openstreetmap/iD/issues/7847
-[#8076]: https://github.com/openstreetmap/iD/issues/8076
-[#6398]: https://github.com/openstreetmap/iD/issues/6398
-[#7885]: https://github.com/openstreetmap/iD/issues/7885
-[#7048]: https://github.com/openstreetmap/iD/issues/7048
-[#7177]: https://github.com/openstreetmap/iD/issues/7177
-[#7885]: https://github.com/openstreetmap/iD/issues/7885
-[#7982]: https://github.com/openstreetmap/iD/issues/7982
-[#8061]: https://github.com/openstreetmap/iD/issues/8061
-[#7974]: https://github.com/openstreetmap/iD/issues/7974
+
+
 
 #### :white_check_mark: Validation
 * Offer to upgrade `capacity` to `seats` on `amenity=bench` ([#8002], [#7886], thanks [@mikenath223])
@@ -1386,17 +1005,9 @@ _For best results, make sure that every language you understand is listed in you
 * Don't offer to add `toilets:disposal=chemical` with Portable Toilet preset ([#8044])
 * Offer to upgrade nonstandard tags `amenity=notice_board` and `service=drive_through`
 
-[@mikenath223]: https://github.com/mikenath223
 
-[#7843]: https://github.com/openstreetmap/iD/issues/7843
-[#8002]: https://github.com/openstreetmap/iD/issues/8002
-[#7886]: https://github.com/openstreetmap/iD/issues/7886
-[#8018]: https://github.com/openstreetmap/iD/issues/8018
-[#7988]: https://github.com/openstreetmap/iD/issues/7988
-[#8045]: https://github.com/openstreetmap/iD/issues/8045
-[#8089]: https://github.com/openstreetmap/iD/issues/8089
-[#8072]: https://github.com/openstreetmap/iD/issues/8072
-[#8044]: https://github.com/openstreetmap/iD/issues/8044
+
+
 
 #### :bug: Bugfixes
 * Don't return entity IDs when searching by geographic coordinates ([#7995], thanks [@kymckay])
@@ -1408,16 +1019,9 @@ _For best results, make sure that every language you understand is listed in you
 * Fix regression where the imagery layer IDs were used instead of the layer names in the `imagery_used` changeset tag ([#7842])
 * Fix issue where double-clicking a midpoint might not add a new node ([#7972])
 
-[@kymckay]: https://github.com/kymckay
 
-[#7995]: https://github.com/openstreetmap/iD/issues/7995
-[#7999]: https://github.com/openstreetmap/iD/issues/7999
-[#7962]: https://github.com/openstreetmap/iD/issues/7962
-[#8003]: https://github.com/openstreetmap/iD/issues/8003
-[#7536]: https://github.com/openstreetmap/iD/issues/7536
-[#1881]: https://github.com/openstreetmap/iD/issues/1881
-[#7842]: https://github.com/openstreetmap/iD/issues/7842
-[#7972]: https://github.com/openstreetmap/iD/issues/7972
+
+
 
 #### :earth_asia: Localization
 * If the user's requested language isn't fully translated, fallback to their other preferred languages before English ([#7996])
@@ -1425,33 +1029,23 @@ _For best results, make sure that every language you understand is listed in you
 * Use local number formats in labels ([#7993])
 * Add `lang` attribute to labels to help with formatting, transliteration, and text-to-speech ([#7963], [#7998])
 
-[#7996]: https://github.com/openstreetmap/iD/issues/7996
-[#597]: https://github.com/openstreetmap/iD/issues/597
-[#7991]: https://github.com/openstreetmap/iD/issues/7991
-[#8026]: https://github.com/openstreetmap/iD/issues/8026
-[#7993]: https://github.com/openstreetmap/iD/issues/7993
-[#7963]: https://github.com/openstreetmap/iD/issues/7963
-[#7998]: https://github.com/openstreetmap/iD/issues/7998
+
 
 #### :hourglass: Performance
 * Avoid costly calculation when using iD with the text tag editor open ([#7980], thanks [@bjornstar])
 * Don't load the English locale file if one of the user's preferred languages is fully translated ([#7994])
 
-[@bjornstar]: https://github.com/bjornstar
 
-[#7980]: https://github.com/openstreetmap/iD/issues/7980
-[#7994]: https://github.com/openstreetmap/iD/issues/7994
+
+
 
 #### :mortar_board: Walkthrough / Help
 * Add Operations section to the Help pane to detail commands from the edit menu ([#7803], [#7992], [#7829], thanks [@manfredbrandl])
 * Clarify in the Help pane that the Bing aerial imagery may not always be the default ([#7840])
 
-[@manfredbrandl]: https://github.com/manfredbrandl
 
-[#7803]: https://github.com/openstreetmap/iD/issues/7803
-[#7992]: https://github.com/openstreetmap/iD/issues/7992
-[#7829]: https://github.com/openstreetmap/iD/issues/7829
-[#7840]: https://github.com/openstreetmap/iD/issues/7840
+
+
 
 #### :rocket: Presets
 
@@ -1486,40 +1080,9 @@ _For best results, make sure that every language you understand is listed in you
 * Show Telephone and Website fields by default on more presets ([#7877])
 * Make the Direction field stepper use 5° increments ([#7867])
 
-[@mikenath223]: https://github.com/mikenath223
-[@animesh-007]: https://github.com/animesh-007
-[@irevenko]: https://github.com/irevenko
-[@TheAdventurer64]: https://github.com/TheAdventurer64
-[@evansiroky]: https://github.com/evansiroky
 
-[#7846]: https://github.com/openstreetmap/iD/issues/7846
-[#7960]: https://github.com/openstreetmap/iD/issues/7960
-[#8000]: https://github.com/openstreetmap/iD/issues/8000
-[#8031]: https://github.com/openstreetmap/iD/issues/8031
-[#7914]: https://github.com/openstreetmap/iD/issues/7914
-[#8040]: https://github.com/openstreetmap/iD/issues/8040
-[#7947]: https://github.com/openstreetmap/iD/issues/7947
-[#8039]: https://github.com/openstreetmap/iD/issues/8039
-[#7958]: https://github.com/openstreetmap/iD/issues/7958
-[#8038]: https://github.com/openstreetmap/iD/issues/8038
-[#8013]: https://github.com/openstreetmap/iD/issues/8013
-[#7985]: https://github.com/openstreetmap/iD/issues/7985
-[#7709]: https://github.com/openstreetmap/iD/issues/7709
-[#7970]: https://github.com/openstreetmap/iD/issues/7970
-[#8051]: https://github.com/openstreetmap/iD/issues/8051
-[#8019]: https://github.com/openstreetmap/iD/issues/8019
-[#8023]: https://github.com/openstreetmap/iD/issues/8023
-[#8008]: https://github.com/openstreetmap/iD/issues/8008
-[#7986]: https://github.com/openstreetmap/iD/issues/7986
-[#7987]: https://github.com/openstreetmap/iD/issues/7987
-[#8093]: https://github.com/openstreetmap/iD/issues/8093
-[#7977]: https://github.com/openstreetmap/iD/issues/7977
-[#7968]: https://github.com/openstreetmap/iD/issues/7968
-[#6142]: https://github.com/openstreetmap/iD/issues/6142
-[#8007]: https://github.com/openstreetmap/iD/issues/8007
-[#8009]: https://github.com/openstreetmap/iD/issues/8009
-[#7877]: https://github.com/openstreetmap/iD/issues/7877
-[#7867]: https://github.com/openstreetmap/iD/issues/7867
+
+
 
 #### :hammer: Development
 * :warning: Update to D3 v6 ([#8056])
@@ -1537,19 +1100,9 @@ _For best results, make sure that every language you understand is listed in you
 * Remove unused `direction_cardinal` field and its translations ([#8096])
 * :warning: Rename functions that now accept HTML instead of plaintext: `uiFlash.text` to `uiFlash.label`, `uiDisclosure.title` to `uiDisclosure.label`, `uiSection.title` to `uiSection.label`, `uiPane.title` to `uiPane.label`
 
-[@peternewman]: https://github.com/peternewman
 
-[#8056]: https://github.com/openstreetmap/iD/issues/8056
-[#8065]: https://github.com/openstreetmap/iD/issues/8065
-[#8054]: https://github.com/openstreetmap/iD/issues/8054
-[#7752]: https://github.com/openstreetmap/iD/issues/7752
-[#7963]: https://github.com/openstreetmap/iD/issues/7963
-[#7998]: https://github.com/openstreetmap/iD/issues/7998
-[#7536]: https://github.com/openstreetmap/iD/issues/7536
-[#7959]: https://github.com/openstreetmap/iD/issues/7959
-[#8030]: https://github.com/openstreetmap/iD/issues/8030
-[#7867]: https://github.com/openstreetmap/iD/issues/7867
-[#8096]: https://github.com/openstreetmap/iD/issues/8096
+
+
 
 # 2.18.5
 ##### 2020-Sep-08
@@ -1563,22 +1116,16 @@ _For best results, make sure that every language you understand is listed in you
 * Leave behind the area tags when extracting a point from a building part or indoor room ([#7862])
 * Hide background imagery sources that are blocked by the OpenStreetMap API ([#7871], [#7905])
 
-[#7883]: https://github.com/openstreetmap/iD/issues/7883
-[#7893]: https://github.com/openstreetmap/iD/issues/7893
-[#7944]: https://github.com/openstreetmap/iD/issues/7944
-[#7862]: https://github.com/openstreetmap/iD/issues/7862
-[#7871]: https://github.com/openstreetmap/iD/issues/7871
-[#7905]: https://github.com/openstreetmap/iD/issues/7905
 
-[@JeeZeh]: https://github.com/JeeZeh
+
+
 
 #### :white_check_mark: Validation
 * Properly let tags on multipolygons fix crossing issues ([#7935])
 * Use tram crossings instead of railway crossings when connecting paths and roads to tram tracks ([#7902])
 * Deprecate `fast_food=pizza` and `fast_food=shawarma` tags
 
-[#7935]: https://github.com/openstreetmap/iD/issues/7935
-[#7902]: https://github.com/openstreetmap/iD/issues/7902
+
 
 #### :bug: Bugfixes
 * Fix problem where nodes could not be dragged after long-clicking if something was previously selected ([#7826])
@@ -1588,19 +1135,14 @@ _For best results, make sure that every language you understand is listed in you
 * Fix issue where the Wikipedia field would not default to the user's preferred language ([#7890])
 * Properly show scroll bars for overflowing text area inputs ([#7869])
 
-[#7826]: https://github.com/openstreetmap/iD/issues/7826
-[#7772]: https://github.com/openstreetmap/iD/issues/7772
-[#7908]: https://github.com/openstreetmap/iD/issues/7908
-[#7386]: https://github.com/openstreetmap/iD/issues/7386
-[#7890]: https://github.com/openstreetmap/iD/issues/7890
-[#7869]: https://github.com/openstreetmap/iD/issues/7869
+
 
 #### :mortar_board: Walkthrough / Help
 * Use a consistent term for photo overlays in the Help pane ([#7859], thanks [@mikini])
 
-[#7859]: https://github.com/openstreetmap/iD/issues/7859
 
-[@mikini]: https://github.com/mikini
+
+
 
 #### :rocket: Presets
 
@@ -1634,40 +1176,9 @@ _For best results, make sure that every language you understand is listed in you
 * Add more fields to Ferry Route
 * Show Diet Types field by default on Restaurant ([#7918])
 
-[#7832]: https://github.com/openstreetmap/iD/issues/7832
-[#7783]: https://github.com/openstreetmap/iD/issues/7783
-[#7851]: https://github.com/openstreetmap/iD/issues/7851
-[#7878]: https://github.com/openstreetmap/iD/issues/7878
-[#7912]: https://github.com/openstreetmap/iD/issues/7912
-[#7852]: https://github.com/openstreetmap/iD/issues/7852
-[#7902]: https://github.com/openstreetmap/iD/issues/7902
-[#7408]: https://github.com/openstreetmap/iD/issues/7408
-[#7904]: https://github.com/openstreetmap/iD/issues/7904
-[#7916]: https://github.com/openstreetmap/iD/issues/7916
-[#7934]: https://github.com/openstreetmap/iD/issues/7934
-[#7818]: https://github.com/openstreetmap/iD/issues/7818
-[#7764]: https://github.com/openstreetmap/iD/issues/7764
-[#7857]: https://github.com/openstreetmap/iD/issues/7857
-[#7874]: https://github.com/openstreetmap/iD/issues/7874
-[#7730]: https://github.com/openstreetmap/iD/issues/7730
-[#7945]: https://github.com/openstreetmap/iD/issues/7945
-[#7915]: https://github.com/openstreetmap/iD/issues/7915
-[#7856]: https://github.com/openstreetmap/iD/issues/7856
-[#7896]: https://github.com/openstreetmap/iD/issues/7896
-[#7925]: https://github.com/openstreetmap/iD/issues/7925
-[#7900]: https://github.com/openstreetmap/iD/issues/7900
-[#7909]: https://github.com/openstreetmap/iD/issues/7909
-[#7865]: https://github.com/openstreetmap/iD/issues/7865
-[#7875]: https://github.com/openstreetmap/iD/issues/7875
-[#7918]: https://github.com/openstreetmap/iD/issues/7918
 
-[@fakeharahman]: https://github.com/fakeharahman
-[@Nimisha94]: https://github.com/Nimisha94
-[@rory]: https://github.com/rory
-[@ogbeche77]: https://github.com/ogbeche77
-[@nlehuby]: https://github.com/nlehuby
-[@brokemyspoke]: https://github.com/brokemyspoke
-[@thibaultmol]: https://github.com/thibaultmol
+
+
 
 #### :hammer: Development
 * Replace unnecessary logic in the raw tag editor ([#7932], thanks [@til-schneider])
@@ -1676,14 +1187,9 @@ _For best results, make sure that every language you understand is listed in you
 * :warning: `serviceOsm.imageryBlacklists` has been renamed to `serviceOsm.imageryBlocklists` and now returns an array of `RegExp` objects rather than strings
 * Remove redundant `coreContext()` call ([#7926])
 
-[#7932]: https://github.com/openstreetmap/iD/issues/7932
-[#7894]: https://github.com/openstreetmap/iD/issues/7894
-[#7892]: https://github.com/openstreetmap/iD/issues/7892
-[#7926]: https://github.com/openstreetmap/iD/issues/7926
-[#7897]: https://github.com/openstreetmap/iD/issues/7897
 
-[@til-schneider]: https://github.com/til-schneider
-[@peternewman]: https://github.com/peternewman
+
+
 
 # 2.18.4
 ##### 2020-Jul-31
@@ -1691,10 +1197,9 @@ _For best results, make sure that every language you understand is listed in you
 #### :white_check_mark: Validation
 * Offer to upgrade `access=customer` tag to `access=customers` ([#7831], [#7836], thanks [@sun-geo])
 
-[#7831]: https://github.com/openstreetmap/iD/issues/7831
-[#7836]: https://github.com/openstreetmap/iD/issues/7836
 
-[@sun-geo]: https://github.com/sun-geo
+
+
 
 #### :bug: Bugfixes
 * Fix critical bug where iD would be unusable in some places ([#7858])
@@ -1702,12 +1207,9 @@ _For best results, make sure that every language you understand is listed in you
 * Fix typo in message for multiple features that are too bendy to straighten ([#7845], thanks [@manfredbrandl])
 * Make sure the Add Note label in the Help pane matches the toolbar label ([#7841])
 
-[#7858]: https://github.com/openstreetmap/iD/issues/7858
-[#7557]: https://github.com/openstreetmap/iD/issues/7557
-[#7845]: https://github.com/openstreetmap/iD/issues/7845
-[#7841]: https://github.com/openstreetmap/iD/issues/7841
 
-[@manfredbrandl]: https://github.com/manfredbrandl
+
+
 
 # 2.18.3
 ##### 2020-Jul-22
@@ -1718,10 +1220,7 @@ _For best results, make sure that every language you understand is listed in you
 * Properly update the inspector when switching between features with generic presets ([#7827])
 * Fix broken Browse button for custom map data files ([#7828])
 
-[#7820]: https://github.com/openstreetmap/iD/issues/7820
-[#7823]: https://github.com/openstreetmap/iD/issues/7823
-[#7827]: https://github.com/openstreetmap/iD/issues/7827
-[#7828]: https://github.com/openstreetmap/iD/issues/7828
+
 
 # 2.18.2
 ##### 2020-Jul-21
@@ -1735,8 +1234,7 @@ _For best results, make sure that every language you understand is listed in you
 #### :rocket: Presets
 * Add search term to Arts & Crafts Store ([#7811], thanks [@nisargshh])
 
-[#7811]: https://github.com/openstreetmap/iD/issues/7811
-[@nisargshh]: https://github.com/nisargshh
+
 
 #### :hammer: Development
 * Re-add `coreContext.locale` endpoint
@@ -1752,7 +1250,7 @@ _<kbd>⇧ Shift</kbd> + click to select multiple features. On touchscreens, tap-
 * :ballot_box_with_check: **[Osmose](http://osmose.openstreetmap.fr)** data quality issues can now be browsed and resolved within iD. Thanks, [@kymckay], for this integration!<br/>
 _Press <kbd>F</kbd> to open the Map Data pane and toggle on Osmose Issues under Data Layers._
 
-[@kymckay]: https://github.com/kymckay
+
 
 #### :tada: New Features
 You can now:
@@ -1772,28 +1270,9 @@ You can now:
 * Browse and resolve Osmose quality assurance issues ([#5682], [#7095], thanks [@kymckay])
 * Add basic WMS endpoints as custom background layers ([#4977], [#7510], thanks [@1ec5])
 
-[@kymckay]: https://github.com/kymckay
-[@1ec5]: https://github.com/1ec5
 
-[#7577]: https://github.com/openstreetmap/iD/issues/7577
-[#7590]: https://github.com/openstreetmap/iD/issues/7590
-[#2677]: https://github.com/openstreetmap/iD/issues/2677
-[#7415]: https://github.com/openstreetmap/iD/issues/7415
-[#1981]: https://github.com/openstreetmap/iD/issues/1981
-[#7396]: https://github.com/openstreetmap/iD/issues/7396
-[#6598]: https://github.com/openstreetmap/iD/issues/6598
-[#3843]: https://github.com/openstreetmap/iD/issues/3843
-[#7186]: https://github.com/openstreetmap/iD/issues/7186
-[#7186]: https://github.com/openstreetmap/iD/issues/7186
-[#2508]: https://github.com/openstreetmap/iD/issues/2508
-[#1761]: https://github.com/openstreetmap/iD/issues/1761
-[#7262]: https://github.com/openstreetmap/iD/issues/7262
-[#7306]: https://github.com/openstreetmap/iD/issues/7306
-[#7324]: https://github.com/openstreetmap/iD/issues/7324
-[#5682]: https://github.com/openstreetmap/iD/issues/5682
-[#7095]: https://github.com/openstreetmap/iD/issues/7095
-[#4977]: https://github.com/openstreetmap/iD/issues/4977
-[#7510]: https://github.com/openstreetmap/iD/issues/7510
+
+
 
 #### :boom: Breaking Changes
 * Pressing <kbd>Space</kbd> with features selected no longer opens the edit menu, since the spacebar can now be used to select and deselect things. You can use the [menu key](https://en.wikipedia.org/wiki/Menu_key) instead, or hold down <kbd>Space</kbd> with the cursor hovering over a feature
@@ -1810,13 +1289,7 @@ You can now:
 * Disable elastic page bouncing on standalone iD ([#7576])
 * Make it easier to select features via clicking with a multi-touch mouse
 
-[#6035]: https://github.com/openstreetmap/iD/issues/6035
-[#7699]: https://github.com/openstreetmap/iD/issues/7699
-[#7643]: https://github.com/openstreetmap/iD/issues/7643
-[#5552]: https://github.com/openstreetmap/iD/issues/5552
-[#7659]: https://github.com/openstreetmap/iD/issues/7659
-[#6049]: https://github.com/openstreetmap/iD/issues/6049
-[#7576]: https://github.com/openstreetmap/iD/issues/7576
+
 
 ###### Operations
 * Support disconnecting multiple selected features from each other and from all connected features ([#7652])
@@ -1826,12 +1299,7 @@ You can now:
 * Support extracting points from multiple selected features at once ([#7600])
 * Disable the Straighten operation for ways that are already straight ([#7658])
 
-[#7652]: https://github.com/openstreetmap/iD/issues/7652
-[#7326]: https://github.com/openstreetmap/iD/issues/7326
-[#6674]: https://github.com/openstreetmap/iD/issues/6674
-[#7598]: https://github.com/openstreetmap/iD/issues/7598
-[#7600]: https://github.com/openstreetmap/iD/issues/7600
-[#7658]: https://github.com/openstreetmap/iD/issues/7658
+
 
 ###### Sidebar
 * Accept more formats when searching for nodes, ways, and relations by ID ([#7627], [#7282], [#7775], thanks [@blackboxlogic])
@@ -1848,27 +1316,9 @@ You can now:
 * Autofocus Description field when adding a new OSM note ([#7680])
 * Prevent browsers from showing their own lists of autocomplete values for fields ([#6444])
 
-[@blackboxlogic]: https://github.com/blackboxlogic
-[@jgscherber]: https://github.com/jgscherber
-[@zengchu2]: https://github.com/zengchu2
 
-[#7627]: https://github.com/openstreetmap/iD/issues/7627
-[#7282]: https://github.com/openstreetmap/iD/issues/7282
-[#7775]: https://github.com/openstreetmap/iD/issues/7775
-[#2949]: https://github.com/openstreetmap/iD/issues/2949
-[#7628]: https://github.com/openstreetmap/iD/issues/7628
-[#7297]: https://github.com/openstreetmap/iD/issues/7297
-[#7363]: https://github.com/openstreetmap/iD/issues/7363
-[#7729]: https://github.com/openstreetmap/iD/issues/7729
-[#7273]: https://github.com/openstreetmap/iD/issues/7273
-[#6811]: https://github.com/openstreetmap/iD/issues/6811
-[#7722]: https://github.com/openstreetmap/iD/issues/7722
-[#6601]: https://github.com/openstreetmap/iD/issues/6601
-[#7391]: https://github.com/openstreetmap/iD/issues/7391
-[#7486]: https://github.com/openstreetmap/iD/issues/7486
-[#7690]: https://github.com/openstreetmap/iD/issues/7690
-[#7680]: https://github.com/openstreetmap/iD/issues/7680
-[#6444]: https://github.com/openstreetmap/iD/issues/6444
+
+
 
 ###### Map
 * Update the Locator Overlay ([#7025], thanks [@mikelmaron])
@@ -1878,19 +1328,9 @@ You can now:
 * Render the focused feature at any zoom level during conflict resolution ([#7330])
 * Support the `{@2x}` and `{r}` parameters for dynamic retina tiles in custom backgrounds ([#7712])
 
-[@mikelmaron]: https://github.com/mikelmaron
-[@nickplesha]: https://github.com/nickplesha
-[@jgscherber]: https://github.com/jgscherber
-[@JamesKingdom]: https://github.com/JamesKingdom
 
-[#7025]: https://github.com/openstreetmap/iD/issues/7025
-[#7762]: https://github.com/openstreetmap/iD/issues/7762
-[#7640]: https://github.com/openstreetmap/iD/issues/7640
-[#7642]: https://github.com/openstreetmap/iD/issues/7642
-[#7478]: https://github.com/openstreetmap/iD/issues/7478
-[#7548]: https://github.com/openstreetmap/iD/issues/7548
-[#7330]: https://github.com/openstreetmap/iD/issues/7330
-[#7712]: https://github.com/openstreetmap/iD/issues/7712
+
+
 
 ###### Tools
 * Include contextual information in the page title ([#6209], [#7444], thanks [@CarycaKatarzyna])
@@ -1904,17 +1344,9 @@ You can now:
 * Flash error feedback when attempting to draw self-intersecting lines or areas
 * Redact API tokens detected in custom background imagery sources ([#6801])
 
-[@CarycaKatarzyna]: https://github.com/CarycaKatarzyna
-[@willemarcel]: https://github.com/willemarcel
 
-[#6209]: https://github.com/openstreetmap/iD/issues/6209
-[#7444]: https://github.com/openstreetmap/iD/issues/7444
-[#7555]: https://github.com/openstreetmap/iD/issues/7555
-[#6397]: https://github.com/openstreetmap/iD/issues/6397
-[#7395]: https://github.com/openstreetmap/iD/issues/7395
-[#7390]: https://github.com/openstreetmap/iD/issues/7390
-[#7329]: https://github.com/openstreetmap/iD/issues/7329
-[#6801]: https://github.com/openstreetmap/iD/issues/6801
+
+
 
 #### :white_check_mark: Validation
 * Improve connection of "Almost Junctions" when the lines are nearly co-linear ([#7201], [#7309], thanks [@kymckay])
@@ -1931,23 +1363,9 @@ You can now:
 * Deprecate various `parking` tag values ([#7578])
 * Deprecate various `tower:type` values for newly-approved `line_management` tag ([#7726])
 
-[@kymckay]: https://github.com/kymckay
-[@guylamar2006]: https://github.com/guylamar2006
-[@peternewman]: https://github.com/peternewman
 
-[#7201]: https://github.com/openstreetmap/iD/issues/7201
-[#7309]: https://github.com/openstreetmap/iD/issues/7309
-[#7514]: https://github.com/openstreetmap/iD/issues/7514
-[#7749]: https://github.com/openstreetmap/iD/issues/7749
-[#7603]: https://github.com/openstreetmap/iD/issues/7603
-[#7675]: https://github.com/openstreetmap/iD/issues/7675
-[#6030]: https://github.com/openstreetmap/iD/issues/6030
-[#6817]: https://github.com/openstreetmap/iD/issues/6817
-[#7423]: https://github.com/openstreetmap/iD/issues/7423
-[#7379]: https://github.com/openstreetmap/iD/issues/7379
-[#7545]: https://github.com/openstreetmap/iD/issues/7545
-[#7578]: https://github.com/openstreetmap/iD/issues/7578
-[#7726]: https://github.com/openstreetmap/iD/issues/7726
+
+
 
 #### :bug: Bugfixes
 * Fix issue where panning without zooming could become impossible on touchscreens ([#6745])
@@ -1969,33 +1387,15 @@ You can now:
 * Fix infinite recursion error when creating cyclical relations ([#7691])
 * Prevent lasso from selecting hidden points ([#7728])
 
-[#6745]: https://github.com/openstreetmap/iD/issues/6745
-[#7432]: https://github.com/openstreetmap/iD/issues/7432
-[#7419]: https://github.com/openstreetmap/iD/issues/7419
-[#2128]: https://github.com/openstreetmap/iD/issues/2128
-[#7380]: https://github.com/openstreetmap/iD/issues/7380
-[#6547]: https://github.com/openstreetmap/iD/issues/6547
-[#7349]: https://github.com/openstreetmap/iD/issues/7349
-[#7446]: https://github.com/openstreetmap/iD/issues/7446
-[#7143]: https://github.com/openstreetmap/iD/issues/7143
-[#7570]: https://github.com/openstreetmap/iD/issues/7570
-[#7553]: https://github.com/openstreetmap/iD/issues/7553
-[#7569]: https://github.com/openstreetmap/iD/issues/7569
-[#7613]: https://github.com/openstreetmap/iD/issues/7613
-[#7156]: https://github.com/openstreetmap/iD/issues/7156
-[#7572]: https://github.com/openstreetmap/iD/issues/7572
-[#7560]: https://github.com/openstreetmap/iD/issues/7560
-[#7691]: https://github.com/openstreetmap/iD/issues/7691
-[#7728]: https://github.com/openstreetmap/iD/issues/7728
+
 
 #### :hourglass: Performance
 * Request JSON responses from the OpenStreetMap API for supported endpoints ([#7188], thanks [@mmd-osm])
 * Improve performance considerably when editing some types of long lines ([#7656])
 
-[@mmd-osm]: https://github.com/mmd-osm
 
-[#7188]: https://github.com/openstreetmap/iD/issues/7188
-[#7656]: https://github.com/openstreetmap/iD/issues/7656
+
+
 
 #### :mortar_board: Walkthrough / Help
 * Show touch-specific instructions in the walkthrough when the mapper is using a touchscreen ([#7692], [#7745])
@@ -2003,8 +1403,7 @@ You can now:
 * Use mouse/touch icons in the walkthrough and style shortcuts as keyboard keys
 * Reference interface labels directly in the help docs to ensure they always correspond to what's onscreen
 
-[#7692]: https://github.com/openstreetmap/iD/issues/7692
-[#7745]: https://github.com/openstreetmap/iD/issues/7745
+
 
 #### :rocket: Presets
 
@@ -2024,22 +1423,9 @@ You can now:
 * Add Destination Sign relation preset ([#6970])
 * Add Coffeehouse and Courtyard presets
 
-[@nisargshh]: https://github.com/nisargshh
 
-[#7776]: https://github.com/openstreetmap/iD/issues/7776
-[#7779]: https://github.com/openstreetmap/iD/issues/7779
-[#7539]: https://github.com/openstreetmap/iD/issues/7539
-[#7534]: https://github.com/openstreetmap/iD/issues/7534
-[#7562]: https://github.com/openstreetmap/iD/issues/7562
-[#7575]: https://github.com/openstreetmap/iD/issues/7575
-[#7632]: https://github.com/openstreetmap/iD/issues/7632
-[#7588]: https://github.com/openstreetmap/iD/issues/7588
-[#7574]: https://github.com/openstreetmap/iD/issues/7574
-[#7637]: https://github.com/openstreetmap/iD/issues/7637
-[#7641]: https://github.com/openstreetmap/iD/issues/7641
-[#7483]: https://github.com/openstreetmap/iD/issues/7483
-[#7725]: https://github.com/openstreetmap/iD/issues/7725
-[#6970]: https://github.com/openstreetmap/iD/issues/6970
+
+
 
 ###### Changed Presets
 * Rename Metal Construction preset to Metalworker ([#7549], [#7568], thanks [@animesh-007])
@@ -2054,21 +1440,9 @@ You can now:
 * Support Marine Fuel Station features as vertices
 * Add search terms to Lift Gate, Height Restrictor, and Storage Rental ([#7537], [#7538], [#7681])
 
-[@animesh-007]: https://github.com/animesh-007
-[@Eric-Sparks]: https://github.com/Eric-Sparks
-[@henry4442]: https://github.com/henry4442
 
-[#7549]: https://github.com/openstreetmap/iD/issues/7549
-[#7568]: https://github.com/openstreetmap/iD/issues/7568
-[#7621]: https://github.com/openstreetmap/iD/issues/7621
-[#7703]: https://github.com/openstreetmap/iD/issues/7703
-[#7678]: https://github.com/openstreetmap/iD/issues/7678
-[#7714]: https://github.com/openstreetmap/iD/issues/7714
-[#7730]: https://github.com/openstreetmap/iD/issues/7730
-[#7515]: https://github.com/openstreetmap/iD/issues/7515
-[#7537]: https://github.com/openstreetmap/iD/issues/7537
-[#7538]: https://github.com/openstreetmap/iD/issues/7538
-[#7681]: https://github.com/openstreetmap/iD/issues/7681
+
+
 
 ###### New Fields
 * Add Support, Color, and Material fields to Post Box ([#7738], [#7777], thanks [@yyazdi13])
@@ -2086,34 +1460,15 @@ You can now:
 * Add Phone and Website fields to commercial building presets ([#7541])
 * Add Mount and Type fields to Street Lamp
 
-[@yyazdi13]: https://github.com/yyazdi13
-[@hikemaniac]: https://github.com/hikemaniac
-[@animesh-007]: https://github.com/animesh-007
-[@rory]: https://github.com/rory
 
-[#7738]: https://github.com/openstreetmap/iD/issues/7738
-[#7777]: https://github.com/openstreetmap/iD/issues/7777
-[#7507]: https://github.com/openstreetmap/iD/issues/7507
-[#7580]: https://github.com/openstreetmap/iD/issues/7580
-[#7584]: https://github.com/openstreetmap/iD/issues/7584
-[#7579]: https://github.com/openstreetmap/iD/issues/7579
-[#7585]: https://github.com/openstreetmap/iD/issues/7585
-[#7630]: https://github.com/openstreetmap/iD/issues/7630
-[#7531]: https://github.com/openstreetmap/iD/issues/7531
-[#7622]: https://github.com/openstreetmap/iD/issues/7622
-[#7571]: https://github.com/openstreetmap/iD/issues/7571
-[#7519]: https://github.com/openstreetmap/iD/issues/7519
-[#7726]: https://github.com/openstreetmap/iD/issues/7726
-[#7532]: https://github.com/openstreetmap/iD/issues/7532
-[#7671]: https://github.com/openstreetmap/iD/issues/7671
-[#7541]: https://github.com/openstreetmap/iD/issues/7541
+
+
 
 ###### Changed Fields
 * Allow custom values in the Public Bath Specialty field ([#7481])
 * Remove Both/All option from Yield Sign Direction field ([#7581])
 
-[#7481]: https://github.com/openstreetmap/iD/issues/7481
-[#7581]: https://github.com/openstreetmap/iD/issues/7581
+
 
 #### :hammer: Development
 * :warning: Add dedicated initialization step to `coreContext` ([#7304])
@@ -2132,16 +1487,7 @@ You can now:
 * Fix cases where iD might miscalculate element positions when embedded ([#7551])
 * Replace Greenkeeper with Dependabot for keeping dependencies up-to-date ([#7430])
 
-[#7304]: https://github.com/openstreetmap/iD/issues/7304
-[#4994]: https://github.com/openstreetmap/iD/issues/4994
-[#7247]: https://github.com/openstreetmap/iD/issues/7247
-[#7333]: https://github.com/openstreetmap/iD/issues/7333
-[#7596]: https://github.com/openstreetmap/iD/issues/7596
-[#7614]: https://github.com/openstreetmap/iD/issues/7614
-[#7503]: https://github.com/openstreetmap/iD/issues/7503
-[#5505]: https://github.com/openstreetmap/iD/issues/5505
-[#7551]: https://github.com/openstreetmap/iD/issues/7551
-[#7430]: https://github.com/openstreetmap/iD/issues/7430
+
 
 # 2.17.3
 ##### 2020-Apr-24
@@ -2155,15 +1501,14 @@ You can now:
 * Update links to iD's documentation on GitHub for the changed branch names ([#7453])
 * Update iD's privacy policy to reflect the changed branch names
 
-[#7453]: https://github.com/openstreetmap/iD/issues/7453
+
 
 #### :sparkles: Usability
 * Use custom line styling for non-asphalt, non-unpaved surfaces like cobblestone, sett, and metal ([#7466])
 * Style pedestrian streets as wider and distinct from corridors ([#7058])
 * Style `planned` but not `disused` features with a dashed stroke
 
-[#7058]: https://github.com/openstreetmap/iD/issues/7058
-[#7466]: https://github.com/openstreetmap/iD/issues/7466
+
 
 #### :white_check_mark: Validation
 * Upgrade `car` to `motorcar` on vehicle charging stations ([#7339], thanks [@nlehuby])
@@ -2174,22 +1519,15 @@ You can now:
 * Deprecate `building:height` and `building:min_height` keys ([#7285])
 * Deprecate tags: `bridge=1`, `building:material=Brick`, `disabled_spaces`, `man_made=telephone_exchange`, `tunnel=1`
 
-[#7455]: https://github.com/openstreetmap/iD/issues/7455
-[#7472]: https://github.com/openstreetmap/iD/issues/7472
-[#7447]: https://github.com/openstreetmap/iD/issues/7447
-[#7339]: https://github.com/openstreetmap/iD/issues/7339
-[#7281]: https://github.com/openstreetmap/iD/issues/7281
-[#7285]: https://github.com/openstreetmap/iD/issues/7285
 
-[@nlehuby]: https://github.com/nlehuby
+
+
 
 #### :bug: Bugfixes
 * Fix issue where some labels could not be translated ([#7358])
 * Don't insert generic values when focusing the Information Board, Bridge Area, or Tunnel Area Type fields ([#7265], [#7509])
 
-[#7358]: https://github.com/openstreetmap/iD/issues/7358
-[#7265]: https://github.com/openstreetmap/iD/issues/7265
-[#7509]: https://github.com/openstreetmap/iD/issues/7509
+
 
 #### :rocket: Presets
 * Add Exhibition Center preset ([#7268], thanks [@hikemaniac])
@@ -2236,58 +1574,9 @@ You can now:
 * Update Power Pole icon ([#7516])
 * Update icons for presets: Community Garden Plot, Bicycle Lockers, Parking Space, Quaker Meeting House, Police, RV Toilet Disposal, Town Hall, City Hall, Government Office, Bollard, Bollard Row, Border Control, Cycle Barrier, Trench, Hedge, Stile, Carport, Static Mobile Home, Caterer, Floorer, Parquet Layer, Plasterer, Scaffolder, Stonemason, Tiler, Disused Railway Feature, Golf Course, Golf Hole, Miniature Golf, Access Aisle, Motorsport Racetrack, Karting Racetrack, Racetrack (Non-Motorsport), Barracks, Naval Base, Military Obstacle Course, Military Range, Plant Nursery, Quarry, Field Hockey Pitch, Adit, Bunker Silo, Mineshaft, Observatory, Pumping Station, Survey Point, Water Works, Military Checkpoint, Military Trench, Cliff, Heath, Ridge, Saddle, Scrub, Valley, Rail Yard, Curtain Store, Deli, Fireplace Store, Pet Grooming Store, Spice Shop, Tattoo Parlor, Tile Shop, Weapon Shop, Speed Bump, Chicane, Speed Cushion, Speed Dip, Speed Hump, Rumble Strip, Speed Table, Power Feature, Railway Feature, Notice Board, Poster Box, Information Board, Information Terminal, Goods Aerialway, Airport, Apron, Airport Gate, Hangar, Aircraft Holding Position, Aircraft Parking Position, Taxiway, Windsock
 
-[#7518]: https://github.com/openstreetmap/iD/issues/7518
-[#7529]: https://github.com/openstreetmap/iD/issues/7529
-[#7521]: https://github.com/openstreetmap/iD/issues/7521
-[#7516]: https://github.com/openstreetmap/iD/issues/7516
-[#7268]: https://github.com/openstreetmap/iD/issues/7268
-[#7347]: https://github.com/openstreetmap/iD/issues/7347
-[#7354]: https://github.com/openstreetmap/iD/issues/7354
-[#7296]: https://github.com/openstreetmap/iD/issues/7296
-[#7323]: https://github.com/openstreetmap/iD/issues/7323
-[#7313]: https://github.com/openstreetmap/iD/issues/7313
-[#7332]: https://github.com/openstreetmap/iD/issues/7332
-[#7274]: https://github.com/openstreetmap/iD/issues/7274
-[#7310]: https://github.com/openstreetmap/iD/issues/7310
-[#7501]: https://github.com/openstreetmap/iD/issues/7501
-[#7289]: https://github.com/openstreetmap/iD/issues/7289
-[#7400]: https://github.com/openstreetmap/iD/issues/7400
-[#7442]: https://github.com/openstreetmap/iD/issues/7442
-[#7284]: https://github.com/openstreetmap/iD/issues/7284
-[#7465]: https://github.com/openstreetmap/iD/issues/7465
-[#7407]: https://github.com/openstreetmap/iD/issues/7407
-[#7321]: https://github.com/openstreetmap/iD/issues/7321
-[#6780]: https://github.com/openstreetmap/iD/issues/6780
-[#7482]: https://github.com/openstreetmap/iD/issues/7482
-[#7440]: https://github.com/openstreetmap/iD/issues/7440
-[#7452]: https://github.com/openstreetmap/iD/issues/7452
-[#7307]: https://github.com/openstreetmap/iD/issues/7307
-[#7371]: https://github.com/openstreetmap/iD/issues/7371
-[#7488]: https://github.com/openstreetmap/iD/issues/7488
-[#7477]: https://github.com/openstreetmap/iD/issues/7477
-[#7494]: https://github.com/openstreetmap/iD/issues/7494
-[#7492]: https://github.com/openstreetmap/iD/issues/7492
-[#7215]: https://github.com/openstreetmap/iD/issues/7215
-[#7259]: https://github.com/openstreetmap/iD/issues/7259
-[#7270]: https://github.com/openstreetmap/iD/issues/7270
-[#7499]: https://github.com/openstreetmap/iD/issues/7499
-[#7493]: https://github.com/openstreetmap/iD/issues/7493
-[#7487]: https://github.com/openstreetmap/iD/issues/7487
-[#7479]: https://github.com/openstreetmap/iD/issues/7479
-[#7287]: https://github.com/openstreetmap/iD/issues/7287
-[#7392]: https://github.com/openstreetmap/iD/issues/7392
-[#7394]: https://github.com/openstreetmap/iD/issues/7394
-[#7255]: https://github.com/openstreetmap/iD/issues/7255
-[#7476]: https://github.com/openstreetmap/iD/issues/7476
-[#7475]: https://github.com/openstreetmap/iD/issues/7475
 
-[@morray]: https://github.com/morray
-[@hikemaniac]: https://github.com/hikemaniac
-[@animesh-007]: https://github.com/animesh-007
-[@stragu]: https://github.com/stragu
-[@ToastHawaii]: https://github.com/ToastHawaii
-[@Lukas458]: https://github.com/Lukas458
-[@ferdinand0101]: https://github.com/ferdinand0101
+
+
 
 #### :hammer: Development
 * Define the main package file as `dist/iD.min.js` ([#7449], thanks [@willemarcel])
@@ -2296,13 +1585,9 @@ You can now:
 * Fix combobox suggestion list placement when embedding iD ([#7458])
 * Persist the changeset comment, hashtags, and sources from the URL through UI reloads ([#7504])
 
-[#7449]: https://github.com/openstreetmap/iD/issues/7449
-[#7437]: https://github.com/openstreetmap/iD/issues/7437
-[#7457]: https://github.com/openstreetmap/iD/issues/7457
-[#7458]: https://github.com/openstreetmap/iD/issues/7458
-[#7504]: https://github.com/openstreetmap/iD/issues/7504
 
-[@willemarcel]: https://github.com/willemarcel
+
+
 
 # 2.17.2
 ##### 2020-Feb-14
@@ -2310,7 +1595,7 @@ You can now:
 #### :tada: New Features
 * Restore Maxar Imagery layers, using masked iD-specific connection keys ([#7355])
 
-[#7355]: https://github.com/openstreetmap/iD/issues/7355
+
 
 
 # 2.17.1
@@ -2323,18 +1608,16 @@ You can now:
 #### :tada: New Features
 * Enable drag-and-drop reordering in fields that allow multiple values ([#5728], [#7024], thanks [@TAQ2])
 
-[#5728]: https://github.com/openstreetmap/iD/issues/5728
-[#7024]: https://github.com/openstreetmap/iD/issues/7024
 
-[@TAQ2]: https://github.com/TAQ2
+
+
 
 #### :sparkles: Usability
 * Don't show very low-usage tag values as field suggestions ([#7203])
 * Use a lighter font weight for brand subtitles
 * Don't autofocus the tag text editor when selecting a feature with the "Add fields" section closed ([#6685])
 
-[#7203]: https://github.com/openstreetmap/iD/issues/7203
-[#6685]: https://github.com/openstreetmap/iD/issues/6685
+
 
 #### :white_check_mark: Validation
 * Account for the type and angle of crossings when setting the length of bridge and tunnel fixes
@@ -2349,16 +1632,12 @@ You can now:
 * Offer to add `public_transport=stop_position` and `tram=yes` to `railway=tram_stop` features
 * Make Churchyard preset unsearchable
 
-[#7153]: https://github.com/openstreetmap/iD/issues/7153
-[#7202]: https://github.com/openstreetmap/iD/issues/7202
-[#7212]: https://github.com/openstreetmap/iD/issues/7212
-[#7236]: https://github.com/openstreetmap/iD/issues/7236
-[#7231]: https://github.com/openstreetmap/iD/issues/7231
+
 
 #### :bug: Bugfixes
 * Fix issue where validation warnings could appear unexpectedly ([#7166])
 
-[#7166]: https://github.com/openstreetmap/iD/issues/7166
+
 
 #### :earth_asia: Localization
 * Add Peruvian address and phone number formats ([#7159], thanks [@sguinetti])
@@ -2367,16 +1646,9 @@ You can now:
 * Make privacy policy link text translatable ([#7171])
 * Differentiate the "toggle issues pane" and "toggle preferences pane" hotkeys in the German localization ([#7181])
 
-[#7159]: https://github.com/openstreetmap/iD/issues/7159
-[#7160]: https://github.com/openstreetmap/iD/issues/7160
-[#7104]: https://github.com/openstreetmap/iD/issues/7104
-[#7182]: https://github.com/openstreetmap/iD/issues/7182
-[#7171]: https://github.com/openstreetmap/iD/issues/7171
-[#7181]: https://github.com/openstreetmap/iD/issues/7181
 
-[@sguinetti]: https://github.com/sguinetti
-[@tastrax]: https://github.com/tastrax
-[@mapmeld]: https://github.com/mapmeld
+
+
 
 #### :rocket: Presets
 * Add Door Shop preset ([#7192], thanks [@hikemaniac])
@@ -2409,30 +1681,9 @@ You can now:
 * Show the Website field by default on Restaurants ([#7226])
 * Show the Hours field by default on Pharmacy Counters ([#7220])
 
-[#7237]: https://github.com/openstreetmap/iD/issues/7237
-[#7234]: https://github.com/openstreetmap/iD/issues/7234
-[#7192]: https://github.com/openstreetmap/iD/issues/7192
-[#7219]: https://github.com/openstreetmap/iD/issues/7219
-[#7208]: https://github.com/openstreetmap/iD/issues/7208
-[#7232]: https://github.com/openstreetmap/iD/issues/7232
-[#7198]: https://github.com/openstreetmap/iD/issues/7198
-[#7164]: https://github.com/openstreetmap/iD/issues/7164
-[#7225]: https://github.com/openstreetmap/iD/issues/7225
-[#7223]: https://github.com/openstreetmap/iD/issues/7223
-[#7228]: https://github.com/openstreetmap/iD/issues/7228
-[#7229]: https://github.com/openstreetmap/iD/issues/7229
-[#7170]: https://github.com/openstreetmap/iD/issues/7170
-[#7216]: https://github.com/openstreetmap/iD/issues/7216
-[#7152]: https://github.com/openstreetmap/iD/issues/7152
-[#7204]: https://github.com/openstreetmap/iD/issues/7204
-[#7214]: https://github.com/openstreetmap/iD/issues/7214
-[#7169]: https://github.com/openstreetmap/iD/issues/7169
-[#7176]: https://github.com/openstreetmap/iD/issues/7176
-[#7226]: https://github.com/openstreetmap/iD/issues/7226
-[#7220]: https://github.com/openstreetmap/iD/issues/7220
 
-[@hikemaniac]: https://github.com/hikemaniac
-[@andrewharvey]: https://github.com/andrewharvey
+
+
 
 # 2.17.0
 ##### 2019-Dec-23
@@ -2440,7 +1691,7 @@ You can now:
 #### :newspaper: News
 * We've launched the [iD Blog](https://ideditor.blog) providing news and insights into the project from its maintainers and contributors ([#7045])
 
-[#7045]: https://github.com/openstreetmap/iD/issues/7045
+
 
 #### :mega: Release Highlights
 * :metro: You can now add bridges and tunnels with a single click to fix crossing roads, rails, and waterways. Thanks to [@CarycaKatarzyna] for working on this!<br/>
@@ -2457,9 +1708,7 @@ _Press <kbd>P</kbd> to view privacy preferences._
 * Display selected features at any zoom level ([#2962], [#5001])
 * Add Privacy Policy and ability to opt-out of icons loaded from third-party sites ([#7040])
 
-[#2962]: https://github.com/openstreetmap/iD/issues/2962
-[#5001]: https://github.com/openstreetmap/iD/issues/5001
-[#7040]: https://github.com/openstreetmap/iD/issues/7040
+
 
 #### :sparkles: Usability
 * Support squaring multiple selected features at the same time ([#6565])
@@ -2483,27 +1732,9 @@ _Press <kbd>P</kbd> to view privacy preferences._
 * Render `landuse=village_green` areas in green ([#7011])
 * Render Putting Greens and similar features in light green ([#7101])
 
-[#6565]: https://github.com/openstreetmap/iD/issues/6565
-[#6696]: https://github.com/openstreetmap/iD/issues/6696
-[#5766]: https://github.com/openstreetmap/iD/issues/5766
-[#6515]: https://github.com/openstreetmap/iD/issues/6515
-[#7112]: https://github.com/openstreetmap/iD/issues/7112
-[#6574]: https://github.com/openstreetmap/iD/issues/6574
-[#6755]: https://github.com/openstreetmap/iD/issues/6755
-[#6911]: https://github.com/openstreetmap/iD/issues/6911
-[#6816]: https://github.com/openstreetmap/iD/issues/6816
-[#6993]: https://github.com/openstreetmap/iD/issues/6993
-[#7028]: https://github.com/openstreetmap/iD/issues/7028
-[#5085]: https://github.com/openstreetmap/iD/issues/5085
-[#7061]: https://github.com/openstreetmap/iD/issues/7061
-[#7062]: https://github.com/openstreetmap/iD/issues/7062
-[#7079]: https://github.com/openstreetmap/iD/issues/7079
-[#6650]: https://github.com/openstreetmap/iD/issues/6650
-[#7021]: https://github.com/openstreetmap/iD/issues/7021
-[#7011]: https://github.com/openstreetmap/iD/issues/7011
-[#7101]: https://github.com/openstreetmap/iD/issues/7101
 
-[@CarycaKatarzyna]: https://github.com/CarycaKatarzyna
+
+
 
 #### :white_check_mark: Validation
 * For crossing ways issues, offer one-click "Add a bridge" and "Add a tunnel" fixes ([#6617], [#7055], thanks [@CarycaKatarzyna])
@@ -2526,26 +1757,9 @@ _Press <kbd>P</kbd> to view privacy preferences._
 * Deprecate `type=audio`, `type=video`, `type=caldera`, `type=extinct`, `type=scoria`, `type=shield`, `type=strato`, `type=extinct`
 * Deprecate `amenity=research_institution`, `barrier=railing`, `craft=glass`, `man_made=gas_well`, `man_made=oil_well`, `man_made=village_pump`, `power=marker`
 
-[#6617]: https://github.com/openstreetmap/iD/issues/6617
-[#7055]: https://github.com/openstreetmap/iD/issues/7055
-[#5924]: https://github.com/openstreetmap/iD/issues/5924
-[#6911]: https://github.com/openstreetmap/iD/issues/6911
-[#2223]: https://github.com/openstreetmap/iD/issues/2223
-[#6513]: https://github.com/openstreetmap/iD/issues/6513
-[#6479]: https://github.com/openstreetmap/iD/issues/6479
-[#6998]: https://github.com/openstreetmap/iD/issues/6998
-[#6577]: https://github.com/openstreetmap/iD/issues/6577
-[#7033]: https://github.com/openstreetmap/iD/issues/7033
-[#6982]: https://github.com/openstreetmap/iD/issues/6982
-[#6515]: https://github.com/openstreetmap/iD/issues/6515
-[#7013]: https://github.com/openstreetmap/iD/issues/7013
-[#6933]: https://github.com/openstreetmap/iD/issues/6933
-[#6994]: https://github.com/openstreetmap/iD/issues/6994
-[#6962]: https://github.com/openstreetmap/iD/issues/6962
-[#6252]: https://github.com/openstreetmap/iD/issues/6252
-[#7053]: https://github.com/openstreetmap/iD/issues/7053
 
-[@CarycaKatarzyna]: https://github.com/CarycaKatarzyna
+
+
 
 #### :bug: Bugfixes
 * Fix issue with rotating multiple points together ([#6977], [#6979], thanks [@hackily])
@@ -2565,26 +1779,9 @@ _Press <kbd>P</kbd> to view privacy preferences._
 * Fix issue where the Unsquare Corners degree input could be too narrow in some browsers ([#7126], thanks [@iriman])
 * Correct vertical centering of checkmark fields
 
-[#6977]: https://github.com/openstreetmap/iD/issues/6977
-[#6979]: https://github.com/openstreetmap/iD/issues/6979
-[#6588]: https://github.com/openstreetmap/iD/issues/6588
-[#7037]: https://github.com/openstreetmap/iD/issues/7037
-[#7044]: https://github.com/openstreetmap/iD/issues/7044
-[#7057]: https://github.com/openstreetmap/iD/issues/7057
-[#2945]: https://github.com/openstreetmap/iD/issues/2945
-[#7070]: https://github.com/openstreetmap/iD/issues/7070
-[#6580]: https://github.com/openstreetmap/iD/issues/6580
-[#7087]: https://github.com/openstreetmap/iD/issues/7087
-[#6650]: https://github.com/openstreetmap/iD/issues/6650
-[#7091]: https://github.com/openstreetmap/iD/issues/7091
-[#6804]: https://github.com/openstreetmap/iD/issues/6804
-[#6787]: https://github.com/openstreetmap/iD/issues/6787
-[#7118]: https://github.com/openstreetmap/iD/issues/7118
-[#7115]: https://github.com/openstreetmap/iD/issues/7115
-[#7126]: https://github.com/openstreetmap/iD/issues/7126
 
-[@hackily]: https://github.com/hackily
-[@iriman]: https://github.com/iriman
+
+
 
 #### :earth_asia: Localization
 * Differentiate the "wireframe mode" and "highlight changes" hotkeys in the German localization ([#6972], thanks [@manfredbrandl])
@@ -2592,30 +1789,23 @@ _Press <kbd>P</kbd> to view privacy preferences._
 * Add Bolivia-specific address and phone number formats ([#7147], thanks [@51114u9])
 * Add the Occitan language to the Multilingual Name field ([#7156])
 
-[#6972]: https://github.com/openstreetmap/iD/issues/6972
-[#7075]: https://github.com/openstreetmap/iD/issues/7075
-[#7147]: https://github.com/openstreetmap/iD/issues/7147
-[#7156]: https://github.com/openstreetmap/iD/issues/7156
 
-[@manfredbrandl]: https://github.com/manfredbrandl
-[@koaber]: https://github.com/koaber
-[@51114u9]: https://github.com/51114u9
+
+
 
 #### :hourglass: Performance
 * Determine locations' country codes without calling out to a geocoding server ([#6941])
 * Reduce rendering lag considerably when many features are selected at once ([#3571])
 
-[#6941]: https://github.com/openstreetmap/iD/issues/6941
-[#3571]: https://github.com/openstreetmap/iD/issues/3571
+
 
 #### :mortar_board: Walkthrough / Help
 * Update links in the README to avoid http-to-https redirects ([#6984], thanks [@mbrickn])
 * Add the <kbd>I</kbd> hotkey to the Keyboard Shortcuts list ([#6997])
 
-[#6984]: https://github.com/openstreetmap/iD/issues/6984
-[#6997]: https://github.com/openstreetmap/iD/issues/6997
 
-[@mbrickn]: https://github.com/mbrickn
+
+
 
 #### :rocket: Presets
 * Add Notice Board, Poster Box, and Advertising Totem presets ([#6965], thanks [@hikemaniac])
@@ -2670,42 +1860,9 @@ _Press <kbd>P</kbd> to view privacy preferences._
 * Only show the Country field on Flagpole features with `flag:type=national` ([#7099])
 * Don't show the Denomination field on features with `religion=none` ([#7135])
 
-[#7139]: https://github.com/openstreetmap/iD/issues/7139
-[#6965]: https://github.com/openstreetmap/iD/issues/6965
-[#7039]: https://github.com/openstreetmap/iD/issues/7039
-[#7031]: https://github.com/openstreetmap/iD/issues/7031
-[#7059]: https://github.com/openstreetmap/iD/issues/7059
-[#6978]: https://github.com/openstreetmap/iD/issues/6978
-[#7083]: https://github.com/openstreetmap/iD/issues/7083
-[#7078]: https://github.com/openstreetmap/iD/issues/7078
-[#7014]: https://github.com/openstreetmap/iD/issues/7014
-[#7105]: https://github.com/openstreetmap/iD/issues/7105
-[#7066]: https://github.com/openstreetmap/iD/issues/7066
-[#7119]: https://github.com/openstreetmap/iD/issues/7119
-[#7098]: https://github.com/openstreetmap/iD/issues/7098
-[#6992]: https://github.com/openstreetmap/iD/issues/6992
-[#7015]: https://github.com/openstreetmap/iD/issues/7015
-[#6985]: https://github.com/openstreetmap/iD/issues/6985
-[#6814]: https://github.com/openstreetmap/iD/issues/6814
-[#6489]: https://github.com/openstreetmap/iD/issues/6489
-[#6633]: https://github.com/openstreetmap/iD/issues/6633
-[#7097]: https://github.com/openstreetmap/iD/issues/7097
-[#7052]: https://github.com/openstreetmap/iD/issues/7052
-[#7137]: https://github.com/openstreetmap/iD/issues/7137
-[#7085]: https://github.com/openstreetmap/iD/issues/7085
-[#7086]: https://github.com/openstreetmap/iD/issues/7086
-[#6880]: https://github.com/openstreetmap/iD/issues/6880
-[#7064]: https://github.com/openstreetmap/iD/issues/7064
-[#7010]: https://github.com/openstreetmap/iD/issues/7010
-[#7082]: https://github.com/openstreetmap/iD/issues/7082
-[#7002]: https://github.com/openstreetmap/iD/issues/7002
-[#7099]: https://github.com/openstreetmap/iD/issues/7099
-[#7135]: https://github.com/openstreetmap/iD/issues/7135
 
-[@hikemaniac]: https://github.com/hikemaniac
-[@scaidermern]: https://github.com/scaidermern
-[@ToastHawaii]: https://github.com/ToastHawaii
-[@stragu]: https://github.com/stragu
+
+
 
 # 2.16.0
 ##### 2019-Oct-23
@@ -2723,16 +1880,9 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Allow reversing directional nodes via the Reverse menu item and keyboard shortcut ([#6850])
 * Add link to the Achavi changeset viewer to the History panel ([#6855])
 
-[#5845]: https://github.com/openstreetmap/iD/issues/5845
-[#6792]: https://github.com/openstreetmap/iD/issues/6792
-[#6843]: https://github.com/openstreetmap/iD/issues/6843
-[#6935]: https://github.com/openstreetmap/iD/issues/6935
-[#6940]: https://github.com/openstreetmap/iD/issues/6940
-[#6850]: https://github.com/openstreetmap/iD/issues/6850
-[#6855]: https://github.com/openstreetmap/iD/issues/6855
 
-[@kratico]: https://github.com/kratico
-[@Bonkles]: https://github.com/Bonkles
+
+
 
 #### :sparkles: Usability
 * Flash the feature type button when a feature's preset changes during editing ([#6764])
@@ -2749,22 +1899,9 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Make the "Report an Imagery Problem" text clearer ([#6820])
 * Open the Map Data pane when clicking the "hidden features" badge
 
-[#6764]: https://github.com/openstreetmap/iD/issues/6764
-[#6839]: https://github.com/openstreetmap/iD/issues/6839
-[#6810]: https://github.com/openstreetmap/iD/issues/6810
-[#6918]: https://github.com/openstreetmap/iD/issues/6918
-[#6919]: https://github.com/openstreetmap/iD/issues/6919
-[#6865]: https://github.com/openstreetmap/iD/issues/6865
-[#6887]: https://github.com/openstreetmap/iD/issues/6887
-[#6921]: https://github.com/openstreetmap/iD/issues/6921
-[#6851]: https://github.com/openstreetmap/iD/issues/6851
-[#6847]: https://github.com/openstreetmap/iD/issues/6847
-[#4233]: https://github.com/openstreetmap/iD/issues/4233
-[#6752]: https://github.com/openstreetmap/iD/issues/6752
-[#6820]: https://github.com/openstreetmap/iD/issues/6820
 
-[@huonw]: https://github.com/huonw
-[@cbeddow]: https://github.com/cbeddow
+
+
 
 #### :white_check_mark: Validation
 * Only show the user issues their edits created, not preexisting issues with features they modified ([#6459])
@@ -2782,19 +1919,9 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Upgrade outdated golf and jet bridge presets in one step rather than two ([#6901], [#6912], thanks [@guylamar2006])
 * Add documentation of all validation issue types, severities, and changeset tags ([#6100])
 
-[#6459]: https://github.com/openstreetmap/iD/issues/6459
-[#6831]: https://github.com/openstreetmap/iD/issues/6831
-[#6812]: https://github.com/openstreetmap/iD/issues/6812
-[#6319]: https://github.com/openstreetmap/iD/issues/6319
-[#6411]: https://github.com/openstreetmap/iD/issues/6411
-[#6876]: https://github.com/openstreetmap/iD/issues/6876
-[#6909]: https://github.com/openstreetmap/iD/issues/6909
-[#6705]: https://github.com/openstreetmap/iD/issues/6705
-[#6901]: https://github.com/openstreetmap/iD/issues/6901
-[#6912]: https://github.com/openstreetmap/iD/issues/6912
-[#6100]: https://github.com/openstreetmap/iD/issues/6100
 
-[@guylamar2006]: https://github.com/guylamar2006
+
+
 
 #### :bug: Bugfixes
 * Fix an issue where some Mapillary traffic signs would not appear ([#6510], [#6921], thanks [@cbeddow])
@@ -2802,11 +1929,9 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Fix an issue where operations might not be correctly enabled or disabled while editing a feature
 * Properly show uppercase suggestions in the Country, Target, and Draft Beers fields
 
-[#6510]: https://github.com/openstreetmap/iD/issues/6510
-[#6921]: https://github.com/openstreetmap/iD/issues/6921
-[#6800]: https://github.com/openstreetmap/iD/issues/6800
 
-[@cbeddow]: https://github.com/cbeddow
+
+
 
 #### :earth_asia: Localization
 * Add Seychelles and Pitcairn Islands to the list of places that drive on the left ([#6827], thanks [@leighghunt])
@@ -2816,22 +1941,17 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Let the <kbd>@</kbd> key on French/AZERTY keyboards also toggle the sidebar ([#6864])
 * Update language data with Unicode CLDR 36
 
-[#6827]: https://github.com/openstreetmap/iD/issues/6827
-[#6937]: https://github.com/openstreetmap/iD/issues/6937
-[#6815]: https://github.com/openstreetmap/iD/issues/6815
-[#6878]: https://github.com/openstreetmap/iD/issues/6878
-[#6864]: https://github.com/openstreetmap/iD/issues/6864
 
-[@leighghunt]: https://github.com/leighghunt
+
+
 
 #### :mortar_board: Walkthrough / Help
 * Update the link to the Mapbox Imagery Request site ([#6874], thanks [@1ec5])
 * Fix issue where walkthrough could not be completed if certain data layers were disabled ([#6634])
 
-[#6874]: https://github.com/openstreetmap/iD/issues/6874
-[#6634]: https://github.com/openstreetmap/iD/issues/6634
 
-[@1ec5]: https://github.com/1ec5
+
+
 
 #### :rocket: Presets
 * Add Electrical Equipment Store and Telecom Retail Store presets
@@ -2862,24 +1982,9 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Rename Construction to Construction Area and render it with a yellow icon
 * Improve searchability of cycle presets in English ([#6825])
 
-[#6866]: https://github.com/openstreetmap/iD/issues/6866
-[#6955]: https://github.com/openstreetmap/iD/issues/6955
-[#6949]: https://github.com/openstreetmap/iD/issues/6949
-[#6863]: https://github.com/openstreetmap/iD/issues/6863
-[#6849]: https://github.com/openstreetmap/iD/issues/6849
-[#6848]: https://github.com/openstreetmap/iD/issues/6848
-[#6826]: https://github.com/openstreetmap/iD/issues/6826
-[#6857]: https://github.com/openstreetmap/iD/issues/6857
-[#6821]: https://github.com/openstreetmap/iD/issues/6821
-[#6861]: https://github.com/openstreetmap/iD/issues/6861
-[#6833]: https://github.com/openstreetmap/iD/issues/6833
-[#6836]: https://github.com/openstreetmap/iD/issues/6836
-[#6882]: https://github.com/openstreetmap/iD/issues/6882
-[#6825]: https://github.com/openstreetmap/iD/issues/6825
 
-[@simonbilskyrollins]: https://github.com/simonbilskyrollins
-[@danielsjf]: https://github.com/danielsjf
-[@ewnh]: https://github.com/ewnh
+
+
 
 # 2.15.5
 ##### 2019-Aug-26
@@ -2902,18 +2007,9 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Allow selecting and copying tags from Custom Map Data ([#6710])
 * Select points after dragging them ([#5747])
 
-[#2946]: https://github.com/openstreetmap/iD/issues/2946
-[#3487]: https://github.com/openstreetmap/iD/issues/3487
-[#5747]: https://github.com/openstreetmap/iD/issues/5747
-[#5763]: https://github.com/openstreetmap/iD/issues/5763
-[#6522]: https://github.com/openstreetmap/iD/issues/6522
-[#6644]: https://github.com/openstreetmap/iD/issues/6644
-[#6701]: https://github.com/openstreetmap/iD/issues/6701
-[#6703]: https://github.com/openstreetmap/iD/issues/6703
-[#6710]: https://github.com/openstreetmap/iD/issues/6710
-[#6712]: https://github.com/openstreetmap/iD/issues/6712
 
-[@Abbe98]: https://github.com/Abbe98
+
+
 
 #### :white_check_mark: Validation
 * Don't flag known brands for having generic names ([#6761], [#6754], thanks [@kymckay])
@@ -2927,19 +2023,9 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Deprecate `landuse=garden` ([#6758])
 * Deprecate `roof:shape=half_hipped` ([#6704])
 
-[#6529]: https://github.com/openstreetmap/iD/issues/6529
-[#6683]: https://github.com/openstreetmap/iD/issues/6683
-[#6704]: https://github.com/openstreetmap/iD/issues/6704
-[#6716]: https://github.com/openstreetmap/iD/issues/6716
-[#6734]: https://github.com/openstreetmap/iD/issues/6734
-[#6748]: https://github.com/openstreetmap/iD/issues/6748
-[#6754]: https://github.com/openstreetmap/iD/issues/6754
-[#6758]: https://github.com/openstreetmap/iD/issues/6758
-[#6761]: https://github.com/openstreetmap/iD/issues/6761
-[#6762]: https://github.com/openstreetmap/iD/issues/6762
-[#6775]: https://github.com/openstreetmap/iD/issues/6775
 
-[@kymckay]: https://github.com/kymckay
+
+
 
 #### :bug: Bugfixes
 * Boost preset matching score if match occurs in addTags ([#6802])
@@ -2952,23 +2038,13 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Properly resize Mapillary and Bing Streetside photos when resizing the viewer ([#6286])
 * Fix issue where the Background Offset field could not be focused ([#6698])
 
-[#6141]: https://github.com/openstreetmap/iD/issues/6141
-[#6286]: https://github.com/openstreetmap/iD/issues/6286
-[#6480]: https://github.com/openstreetmap/iD/issues/6480
-[#6491]: https://github.com/openstreetmap/iD/issues/6491
-[#6582]: https://github.com/openstreetmap/iD/issues/6582
-[#6690]: https://github.com/openstreetmap/iD/issues/6690
-[#6698]: https://github.com/openstreetmap/iD/issues/6698
-[#6742]: https://github.com/openstreetmap/iD/issues/6742
-[#6802]: https://github.com/openstreetmap/iD/issues/6802
+
 
 #### :earth_asia: Localization
 * Display the languages for the Multilingual Name field in the user's language, if available ([#2457], [#6702])
 * Translate language names in the post-upload community list ([#4990])
 
-[#2457]: https://github.com/openstreetmap/iD/issues/2457
-[#4990]: https://github.com/openstreetmap/iD/issues/4990
-[#6702]: https://github.com/openstreetmap/iD/issues/6702
+
 
 #### :rocket: Presets
 * Add Rental Shop preset
@@ -2989,23 +2065,9 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Update icon for cycle paths, crossings, and tracks
 * Only allow `power=transformer` on nodes ([#6779])
 
-[#6411]: https://github.com/openstreetmap/iD/issues/6411
-[#6490]: https://github.com/openstreetmap/iD/issues/6490
-[#6652]: https://github.com/openstreetmap/iD/issues/6652
-[#6718]: https://github.com/openstreetmap/iD/issues/6718
-[#6722]: https://github.com/openstreetmap/iD/issues/6722
-[#6725]: https://github.com/openstreetmap/iD/issues/6725
-[#6739]: https://github.com/openstreetmap/iD/issues/6739
-[#6748]: https://github.com/openstreetmap/iD/issues/6748
-[#6762]: https://github.com/openstreetmap/iD/issues/6762
-[#6773]: https://github.com/openstreetmap/iD/issues/6773
-[#6777]: https://github.com/openstreetmap/iD/issues/6777
-[#6779]: https://github.com/openstreetmap/iD/issues/6779
-[#6786]: https://github.com/openstreetmap/iD/issues/6786
-[#6790]: https://github.com/openstreetmap/iD/issues/6790
-[#6791]: https://github.com/openstreetmap/iD/issues/6791
 
-[@ENT8R]: https://github.com/ENT8R
+
+
 
 # 2.15.4
 ##### 2019-Jul-26
@@ -3013,36 +2075,31 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 #### :tada: New Features
 * Render side direction arrows on weirs ([#6615])
 
-[#6615]: https://github.com/openstreetmap/iD/issues/6615
+
 
 #### :sparkles: Usability
 * Don't reuse the changeset comment, sources, and hashtags by default after uploading or discarding edits ([#6642])
 
-[#6642]: https://github.com/openstreetmap/iD/issues/6642
+
 
 #### :white_check_mark: Validation
 * Don't flag very close points on different layers or levels ([#6612])
 * Don't flag Google Books as a source ([#6556])
 * Add `preschool=yes` when upgrading `amenity=preschool` ([#6636])
 
-[#6612]: https://github.com/openstreetmap/iD/issues/6612
-[#6556]: https://github.com/openstreetmap/iD/issues/6556
-[#6636]: https://github.com/openstreetmap/iD/issues/6636
+
 
 #### :bug: Bugfixes
 * Fix issue where the info in the Background panel wouldn't update when switching backgrounds ([#6627])
 * Fix issue where side direction arrows might not update when switching presets ([#6032])
 
-[#6627]: https://github.com/openstreetmap/iD/issues/6627
-[#6032]: https://github.com/openstreetmap/iD/issues/6032
+
 
 #### :earth_asia: Localization
 * Default speed limit units to miles per hour in Puerto Rico ([#6626])
 * Fix issue where Arabic numerals would not render correctly on the map ([#6679], [#6682], thanks [@mapmeld])
 
-[#6626]: https://github.com/openstreetmap/iD/issues/6626
-[#6679]: https://github.com/openstreetmap/iD/issues/6679
-[#6682]: https://github.com/openstreetmap/iD/issues/6682
+
 
 #### :rocket: Presets
 * Add Dressing Room preset ([#6643])
@@ -3055,12 +2112,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Fix tag misspelling for the Camp Pitch preset ([#6608])
 * Update icons for the Cairn, Sandwich Fast Food, Hifi Store, and Party Store presets
 
-[#6643]: https://github.com/openstreetmap/iD/issues/6643
-[#6564]: https://github.com/openstreetmap/iD/issues/6564
-[#6628]: https://github.com/openstreetmap/iD/issues/6628
-[#4220]: https://github.com/openstreetmap/iD/issues/4220
-[#6599]: https://github.com/openstreetmap/iD/issues/6599
-[#6608]: https://github.com/openstreetmap/iD/issues/6608
+
 
 # 2.15.3
 ##### 2019-Jun-30
@@ -3069,30 +2121,25 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Deprecate unsupported DigitalGlobe imagery sources ([editor-layer-index/#680])
 * Limit addable presets via comma-separated IDs in the `presets` URL parameter ([#6553])
 
-[editor-layer-index/#680]: https://github.com/osmlab/editor-layer-index/pull/680
-[#6553]: https://github.com/openstreetmap/iD/issues/6553
+
 
 #### :sparkles: Usability
 * Add support for fords drawn as lines ([#6576])
 
-[#6576]: https://github.com/openstreetmap/iD/issues/6576
+
 
 #### :white_check_mark: Validation
 * Allow for some tags (`takeaway`) to be kept when upgrading tags ([#6530], [#6581])
 * Remove existing match keys before upgrading to a name-suggestion-index preset ([#6575])
 * Deprecate `camp_site=camp_pitch`, prefer `tourism=camp_pitch` ([#6591])
 
-[#6591]: https://github.com/openstreetmap/iD/issues/6591
-[#6581]: https://github.com/openstreetmap/iD/issues/6581
-[#6575]: https://github.com/openstreetmap/iD/issues/6575
-[#6530]: https://github.com/openstreetmap/iD/issues/6530
+
 
 #### :bug: Bugfixes
 * Fix issue displaying preset name for suggestions with a '/' in name ([#6594])
 * Fix crash when disabling the OSM layer while drawing ([#6584])
 
-[#6594]: https://github.com/openstreetmap/iD/issues/6594
-[#6584]: https://github.com/openstreetmap/iD/issues/6584
+
 
 #### :rocket: Presets
 * Update camera icon on surveillance presets
@@ -3106,14 +2153,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Add Structure field to the Canal preset ([#6548])
 * Add polling place presets and field ([#6542])
 
-[#6587]: https://github.com/openstreetmap/iD/issues/6587
-[#6566]: https://github.com/openstreetmap/iD/issues/6566
-[#6555]: https://github.com/openstreetmap/iD/issues/6555
-[#6548]: https://github.com/openstreetmap/iD/issues/6548
-[#6542]: https://github.com/openstreetmap/iD/issues/6542
-[#6538]: https://github.com/openstreetmap/iD/issues/6538
-[#6537]: https://github.com/openstreetmap/iD/issues/6537
-[@kymckay]: https://github.com/kymckay
+
 
 
 # 2.15.2
@@ -3122,7 +2162,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 #### :sparkles: Usability
 * Prefer a Wikipedia commons logo over social media logo in some situations ([#6361])
 
-[#6361]: https://github.com/openstreetmap/iD/issues/6361
+
 
 #### :white_check_mark: Validation
 * Remove issue "autofix" buttons
@@ -3137,27 +2177,14 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Fix issue where upgrading `office=administrative` could also remove `building=yes` ([#6466])
 * Fix issue where cuisine -> diet upgrades could overwrite existing values ([#6462])
 
-[#6525]: https://github.com/openstreetmap/iD/issues/6525
-[#6508]: https://github.com/openstreetmap/iD/issues/6508
-[#6506]: https://github.com/openstreetmap/iD/issues/6506
-[#6494]: https://github.com/openstreetmap/iD/issues/6494
-[#6466]: https://github.com/openstreetmap/iD/issues/6466
-[#6462]: https://github.com/openstreetmap/iD/issues/6462
-[#6443]: https://github.com/openstreetmap/iD/issues/6443
-[#6440]: https://github.com/openstreetmap/iD/issues/6440
-[#6409]: https://github.com/openstreetmap/iD/issues/6409
-[#6332]: https://github.com/openstreetmap/iD/issues/6332
-[#6229]: https://github.com/openstreetmap/iD/issues/6229
-[#6042]: https://github.com/openstreetmap/iD/issues/6042
-[@kymckay]: https://github.com/kymckay
+
 
 
 #### :bug: Bugfixes
 * Fix issue with deleting a member from a relation with a duplicate entity but different roles ([#6504])
 * Fix issue where iD could crash upon save if user had edits stored before iD 2.15 ([#6496])
 
-[#6504]: https://github.com/openstreetmap/iD/issues/6504
-[#6496]: https://github.com/openstreetmap/iD/issues/6496
+
 
 #### :rocket: Presets
 * Add presets for `craft=signmaker`, `healthcare=counselling`, `shop=fashion_accessories`
@@ -3180,24 +2207,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Add preset for `leisure=escape_game` ([#6447])
 * Update Hackerspace fields
 
-[#6535]: https://github.com/openstreetmap/iD/issues/6535
-[#6524]: https://github.com/openstreetmap/iD/issues/6524
-[#6518]: https://github.com/openstreetmap/iD/issues/6518
-[#6512]: https://github.com/openstreetmap/iD/issues/6512
-[#6509]: https://github.com/openstreetmap/iD/issues/6509
-[#6503]: https://github.com/openstreetmap/iD/issues/6503
-[#6478]: https://github.com/openstreetmap/iD/issues/6478
-[#6477]: https://github.com/openstreetmap/iD/issues/6477
-[#6474]: https://github.com/openstreetmap/iD/issues/6474
-[#6472]: https://github.com/openstreetmap/iD/issues/6472
-[#6470]: https://github.com/openstreetmap/iD/issues/6470
-[#6469]: https://github.com/openstreetmap/iD/issues/6469
-[#6455]: https://github.com/openstreetmap/iD/issues/6455
-[#6447]: https://github.com/openstreetmap/iD/issues/6447
-[#6393]: https://github.com/openstreetmap/iD/issues/6393
-[@matkoniecz]: https://github.com/matkoniecz
-[@ToastHawaii]: https://github.com/ToastHawaii
-[@BjornRasmussen]: https://github.com/BjornRasmussen
+
 
 
 # 2.15.1
@@ -3208,8 +2218,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Add feature filters for pistes and aerialways
 * Add ability to hide indoor areas and building part areas ([#6352])
 
-[#6352]: https://github.com/openstreetmap/iD/issues/6352
-[editor-layer-index#668]: https://github.com/osmlab/editor-layer-index/pull/668
+
 
 #### :sparkles: Usability
 * Prevent Chrome autofill of recent values in the Allowed Access inputs ([#6414])
@@ -3217,9 +2226,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Make unsquare threshold field wider to account for stepper control in Firefox ([#6418])
 * Add "Disable All" and "Enable All" buttons for the Map Features list ([#5234])
 
-[#6418]: https://github.com/openstreetmap/iD/issues/6418
-[#6414]: https://github.com/openstreetmap/iD/issues/6414
-[#5234]: https://github.com/openstreetmap/iD/issues/5234
+
 
 #### :white_check_mark: Validation
 * Swap `wikidata`/`wikipedia` for `brand:` tags if possible ([#6416])
@@ -3232,11 +2239,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Flag private data on `building=houseboat`
 * Add ability to upgrade a tag value within a semicolon-delimited list
 
-[#6373]: https://github.com/openstreetmap/iD/issues/6373
-[#6394]: https://github.com/openstreetmap/iD/issues/6394
-[#6404]: https://github.com/openstreetmap/iD/issues/6404
-[#6410]: https://github.com/openstreetmap/iD/issues/6410
-[#6416]: https://github.com/openstreetmap/iD/issues/6416
+
 
 #### :bug: Bugfixes
 * Fix raw tag editor styling for custom data editor ([#6427])
@@ -3246,19 +2249,13 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Fix issue causing duplicate expanded community entries to appear ([#6422])
 * Fix bug where iD could add empty source tag to changesets ([#6405])
 
-[#6384]: https://github.com/openstreetmap/iD/issues/6384
-[#6405]: https://github.com/openstreetmap/iD/issues/6405
-[#6407]: https://github.com/openstreetmap/iD/issues/6407
-[#6422]: https://github.com/openstreetmap/iD/issues/6422
-[#6426]: https://github.com/openstreetmap/iD/issues/6426
-[#6427]: https://github.com/openstreetmap/iD/issues/6427
+
 
 #### :hourglass: Performance
 * Prevent iD from loading too many off screen tiles ([#6417])
 * Switch Bing Imagery Key to avoid overages ([#5833])
 
-[#6417]: https://github.com/openstreetmap/iD/issues/6417
-[#5833]: https://github.com/openstreetmap/iD/issues/5833
+
 
 #### :rocket: Presets
 * Update several preset icons (dry cleaning, disc golf, shuffleboard, horseshoes pit)
@@ -3274,8 +2271,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Add layer field to aerialway presets
 * Improve search terms to Cycle & Foot Path preset ([#6406])
 
-[#6406]: https://github.com/openstreetmap/iD/issues/6406
-[#6403]: https://github.com/openstreetmap/iD/issues/6403
+
 
 
 # 2.15.0
@@ -3327,27 +2323,9 @@ _Map all the branded businesses in your town!_
 - Allow disconnecting closed lines at their endpoint node ([#6149], [#6161], thanks [@jguthrie100])
 - Add YouthMappers chapters to the community entries that appear after saving
 
-[#6279]: https://github.com/openstreetmap/iD/issues/6279
-[#6302]: https://github.com/openstreetmap/iD/issues/6302
-[#6299]: https://github.com/openstreetmap/iD/issues/6299
-[#6279]: https://github.com/openstreetmap/iD/issues/6279
-[#6217]: https://github.com/openstreetmap/iD/issues/6217
-[#6203]: https://github.com/openstreetmap/iD/issues/6203
-[#6185]: https://github.com/openstreetmap/iD/issues/6185
-[#6164]: https://github.com/openstreetmap/iD/issues/6164
-[#6161]: https://github.com/openstreetmap/iD/issues/6161
-[#6149]: https://github.com/openstreetmap/iD/issues/6149
-[#5999]: https://github.com/openstreetmap/iD/issues/5999
-[#5740]: https://github.com/openstreetmap/iD/issues/5740
-[#5433]: https://github.com/openstreetmap/iD/issues/5433
-[#5093]: https://github.com/openstreetmap/iD/issues/5093
-[#4245]: https://github.com/openstreetmap/iD/issues/4245
-[#2283]: https://github.com/openstreetmap/iD/issues/2283
-[#2205]: https://github.com/openstreetmap/iD/issues/2205
-[#2058]: https://github.com/openstreetmap/iD/issues/2058
-[#839]: https://github.com/openstreetmap/iD/issues/839
 
-[@jguthrie100]: https://github.com/jguthrie100
+
+
 
 #### :sparkles: Usability
 - Improved marker styling and lock icon for protected fields on Wikidata-tagged features ([#6389])
@@ -3375,31 +2353,9 @@ _Map all the branded businesses in your town!_
 - Prevent deleting features with `wikidata` tags ([#5853])
 - Add `photo_overlay` API parameter to show default photo overlays and persist them between sessions ([#5813])
 
-[#6389]: https://github.com/openstreetmap/iD/issues/6389
-[#6383]: https://github.com/openstreetmap/iD/issues/6383
-[#6306]: https://github.com/openstreetmap/iD/issues/6306
-[#6221]: https://github.com/openstreetmap/iD/issues/6221
-[#6202]: https://github.com/openstreetmap/iD/issues/6202
-[#6104]: https://github.com/openstreetmap/iD/issues/6104
-[#6103]: https://github.com/openstreetmap/iD/issues/6103
-[#6091]: https://github.com/openstreetmap/iD/issues/6091
-[#6022]: https://github.com/openstreetmap/iD/issues/6022
-[#6013]: https://github.com/openstreetmap/iD/issues/6013
-[#5994]: https://github.com/openstreetmap/iD/issues/5994
-[#5967]: https://github.com/openstreetmap/iD/issues/5967
-[#5927]: https://github.com/openstreetmap/iD/issues/5927
-[#5913]: https://github.com/openstreetmap/iD/issues/5913
-[#5889]: https://github.com/openstreetmap/iD/issues/5889
-[#5853]: https://github.com/openstreetmap/iD/issues/5853
-[#5813]: https://github.com/openstreetmap/iD/issues/5813
-[#5544]: https://github.com/openstreetmap/iD/issues/5544
-[#5543]: https://github.com/openstreetmap/iD/issues/5543
-[#5503]: https://github.com/openstreetmap/iD/issues/5503
-[#4322]: https://github.com/openstreetmap/iD/issues/4322
-[#3812]: https://github.com/openstreetmap/iD/issues/3812
-[#2472]: https://github.com/openstreetmap/iD/issues/2472
 
-[@alphagamer7]: https://github.com/alphagamer7
+
+
 
 
 #### :white_check_mark: Validation
@@ -3443,44 +2399,9 @@ _Map all the branded businesses in your town!_
 - Indicate iD's tag deprecations on Taginfo ([#5995])
 - When connecting crossing paths and roads, don't automatically set the `crossing` tag of the connection node if it is ambiguous ([#6244])
 
-[#6386]: https://github.com/openstreetmap/iD/issues/6386
-[#6385]: https://github.com/openstreetmap/iD/issues/6385
-[#6376]: https://github.com/openstreetmap/iD/issues/6376
-[#6355]: https://github.com/openstreetmap/iD/issues/6355
-[#6332]: https://github.com/openstreetmap/iD/issues/6332
-[#6326]: https://github.com/openstreetmap/iD/issues/6326
-[#6287]: https://github.com/openstreetmap/iD/issues/6287
-[#6284]: https://github.com/openstreetmap/iD/issues/6284
-[#6267]: https://github.com/openstreetmap/iD/issues/6267
-[#6244]: https://github.com/openstreetmap/iD/issues/6244
-[#6242]: https://github.com/openstreetmap/iD/issues/6242
-[#6241]: https://github.com/openstreetmap/iD/issues/6241
-[#6236]: https://github.com/openstreetmap/iD/issues/6236
-[#6234]: https://github.com/openstreetmap/iD/issues/6234
-[#6224]: https://github.com/openstreetmap/iD/issues/6224
-[#6216]: https://github.com/openstreetmap/iD/issues/6216
-[#6215]: https://github.com/openstreetmap/iD/issues/6215
-[#6214]: https://github.com/openstreetmap/iD/issues/6214
-[#6140]: https://github.com/openstreetmap/iD/issues/6140
-[#6135]: https://github.com/openstreetmap/iD/issues/6135
-[#6123]: https://github.com/openstreetmap/iD/issues/6123
-[#6084]: https://github.com/openstreetmap/iD/issues/6084
-[#6075]: https://github.com/openstreetmap/iD/issues/6075
-[#6070]: https://github.com/openstreetmap/iD/issues/6070
-[#6062]: https://github.com/openstreetmap/iD/issues/6062
-[#6042]: https://github.com/openstreetmap/iD/issues/6042
-[#6038]: https://github.com/openstreetmap/iD/issues/6038
-[#5998]: https://github.com/openstreetmap/iD/issues/5998
-[#5995]: https://github.com/openstreetmap/iD/issues/5995
-[#5993]: https://github.com/openstreetmap/iD/issues/5993
-[#5943]: https://github.com/openstreetmap/iD/issues/5943
-[#5938]: https://github.com/openstreetmap/iD/issues/5938
-[#5930]: https://github.com/openstreetmap/iD/issues/5930
-[#5906]: https://github.com/openstreetmap/iD/issues/5906
-[#5850]: https://github.com/openstreetmap/iD/issues/5850
 
-[@gaoxm]: https://github.com/gaoxm
-[@Bonkles]: https://github.com/Bonkles
+
+
 
 #### :bug: Bugfixes
 - Don't move connected ways when squaring ([#1979], [#5999])
@@ -3503,34 +2424,13 @@ _Map all the branded businesses in your town!_
 - Fix layout issue with the Label field ([#6344])
 - Fix issue where lines could have unexpected styling when first added to multipolygons ([#3613])
 
-[#6344]: https://github.com/openstreetmap/iD/issues/6344
-[#6336]: https://github.com/openstreetmap/iD/issues/6336
-[#6328]: https://github.com/openstreetmap/iD/issues/6328
-[#6296]: https://github.com/openstreetmap/iD/issues/6296
-[#6295]: https://github.com/openstreetmap/iD/issues/6295
-[#6235]: https://github.com/openstreetmap/iD/issues/6235
-[#6232]: https://github.com/openstreetmap/iD/issues/6232
-[#6220]: https://github.com/openstreetmap/iD/issues/6220
-[#6201]: https://github.com/openstreetmap/iD/issues/6201
-[#6105]: https://github.com/openstreetmap/iD/issues/6105
-[#6034]: https://github.com/openstreetmap/iD/issues/6034
-[#6033]: https://github.com/openstreetmap/iD/issues/6033
-[#6028]: https://github.com/openstreetmap/iD/issues/6028
-[#5996]: https://github.com/openstreetmap/iD/issues/5996
-[#5831]: https://github.com/openstreetmap/iD/issues/5831
-[#5612]: https://github.com/openstreetmap/iD/issues/5612
-[#5212]: https://github.com/openstreetmap/iD/issues/5212
-[#4733]: https://github.com/openstreetmap/iD/issues/4733
-[#3613]: https://github.com/openstreetmap/iD/issues/3613
-[#2248]: https://github.com/openstreetmap/iD/issues/2248
-[#1979]: https://github.com/openstreetmap/iD/issues/1979
+
 
 #### :earth_asia: Localization
 - Make the place format in the contribution thank-you message localizable ([#6269])
 - Add Papiamento localization ([#6222])
 
-[#6269]: https://github.com/openstreetmap/iD/issues/6269
-[#6222]: https://github.com/openstreetmap/iD/issues/6222
+
 
 #### :hourglass: Performance
 - Significantly improve validation performance ([#6054], [#5901], [#6140])
@@ -3540,18 +2440,12 @@ _Map all the branded businesses in your town!_
 - Update to D3 v5 ([#6245])
 - Replace the `ecstastic` development dependency with `static-server` ([#6342])
 
-[#6342]: https://github.com/openstreetmap/iD/issues/6342
-[#6249]: https://github.com/openstreetmap/iD/issues/6249
-[#6245]: https://github.com/openstreetmap/iD/issues/6245
-[#6237]: https://github.com/openstreetmap/iD/issues/6237
-[#6086]: https://github.com/openstreetmap/iD/issues/6086
-[#6054]: https://github.com/openstreetmap/iD/issues/6054
-[#5901]: https://github.com/openstreetmap/iD/issues/5901
+
 
 #### :mortar_board: Walkthrough / Help
 - Make the keyboard shortcuts viewable on narrow window sizes ([#6174])
 
-[#6174]: https://github.com/openstreetmap/iD/issues/6174
+
 
 #### :rocket: Presets
 - Add presets for Test Prep School, Financial Advisor
@@ -3622,56 +2516,9 @@ _Map all the branded businesses in your town!_
 - Change the swimmer icon so its head will not be missing when the icon is displayed on point markers ([#6307])
 - Add more search terms to the Road Surface preset ([#6309])
 
-[#6381]: https://github.com/openstreetmap/iD/issues/6381
-[#6379]: https://github.com/openstreetmap/iD/issues/6379
-[#6360]: https://github.com/openstreetmap/iD/issues/6360
-[#6340]: https://github.com/openstreetmap/iD/issues/6340
-[#6339]: https://github.com/openstreetmap/iD/issues/6339
-[#6337]: https://github.com/openstreetmap/iD/issues/6337
-[#6321]: https://github.com/openstreetmap/iD/issues/6321
-[#6317]: https://github.com/openstreetmap/iD/issues/6317
-[#6316]: https://github.com/openstreetmap/iD/issues/6316
-[#6315]: https://github.com/openstreetmap/iD/issues/6315
-[#6314]: https://github.com/openstreetmap/iD/issues/6314
-[#6313]: https://github.com/openstreetmap/iD/issues/6313
-[#6311]: https://github.com/openstreetmap/iD/issues/6311
-[#6309]: https://github.com/openstreetmap/iD/issues/6309
-[#6307]: https://github.com/openstreetmap/iD/issues/6307
-[#6301]: https://github.com/openstreetmap/iD/issues/6301
-[#6275]: https://github.com/openstreetmap/iD/issues/6275
-[#6265]: https://github.com/openstreetmap/iD/issues/6265
-[#6260]: https://github.com/openstreetmap/iD/issues/6260
-[#6259]: https://github.com/openstreetmap/iD/issues/6259
-[#6238]: https://github.com/openstreetmap/iD/issues/6238
-[#6233]: https://github.com/openstreetmap/iD/issues/6233
-[#6207]: https://github.com/openstreetmap/iD/issues/6207
-[#6165]: https://github.com/openstreetmap/iD/issues/6165
-[#6155]: https://github.com/openstreetmap/iD/issues/6155
-[#6152]: https://github.com/openstreetmap/iD/issues/6152
-[#6151]: https://github.com/openstreetmap/iD/issues/6151
-[#6144]: https://github.com/openstreetmap/iD/issues/6144
-[#6124]: https://github.com/openstreetmap/iD/issues/6124
-[#6117]: https://github.com/openstreetmap/iD/issues/6117
-[#6114]: https://github.com/openstreetmap/iD/issues/6114
-[#6088]: https://github.com/openstreetmap/iD/issues/6088
-[#6082]: https://github.com/openstreetmap/iD/issues/6082
-[#6080]: https://github.com/openstreetmap/iD/issues/6080
-[#6078]: https://github.com/openstreetmap/iD/issues/6078
-[#6077]: https://github.com/openstreetmap/iD/issues/6077
-[#6065]: https://github.com/openstreetmap/iD/issues/6065
-[#6036]: https://github.com/openstreetmap/iD/issues/6036
-[#6020]: https://github.com/openstreetmap/iD/issues/6020
-[#6015]: https://github.com/openstreetmap/iD/issues/6015
-[#5940]: https://github.com/openstreetmap/iD/issues/5940
-[#5926]: https://github.com/openstreetmap/iD/issues/5926
-[#5757]: https://github.com/openstreetmap/iD/issues/5757
-[#5691]: https://github.com/openstreetmap/iD/issues/5691
-[#5390]: https://github.com/openstreetmap/iD/issues/5390
-[#5167]: https://github.com/openstreetmap/iD/issues/5167
 
-[@rory]: https://github.com/rory
-[@nlehuby]: https://github.com/nlehuby
-[@westnordost]: https://github.com/westnordost
+
+
 
 # 2.14.3
 ##### 2019-Feb-26
@@ -3679,7 +2526,7 @@ _Map all the branded businesses in your town!_
 #### :tada: New Features
 * Add a Rules section to the Issues pane where all validation types are listed and can be toggled on or off ([#5979])
 
-[#5979]: https://github.com/openstreetmap/iD/issues/5979
+
 
 #### :white_check_mark: Validation
 * Flag multipolygon members without roles ([#5851])
@@ -3689,18 +2536,9 @@ _Map all the branded businesses in your town!_
 * Deprecate various "footway" ([#5935]) and "wood" ([#5958]) values
 * Deprecate "highway=abandoned" ([#5968]), "natural=waterfall" ([#5972]), and "postcode" ([#5959])
 
-[#5972]: https://github.com/openstreetmap/iD/issues/5972
-[#5968]: https://github.com/openstreetmap/iD/issues/5968
-[#5959]: https://github.com/openstreetmap/iD/issues/5959
-[#5958]: https://github.com/openstreetmap/iD/issues/5958
-[#5957]: https://github.com/openstreetmap/iD/issues/5957
-[#5956]: https://github.com/openstreetmap/iD/issues/5956
-[#5953]: https://github.com/openstreetmap/iD/issues/5953
-[#5935]: https://github.com/openstreetmap/iD/issues/5935
-[#5933]: https://github.com/openstreetmap/iD/issues/5933
-[#5851]: https://github.com/openstreetmap/iD/issues/5851
 
-[@matkoniecz]: https://github.com/matkoniecz
+
+
 
 #### :bug: Bugfixes
 * Fix error upon pressing escape when drawing an area  with only one point ([#5941], [#5950], thanks [@jguthrie100])
@@ -3709,18 +2547,14 @@ _Map all the branded businesses in your town!_
 * Fix an issue where all feature types would be disabled if Other Features were hidden ([#5934])
 * Fix an issue where the sidebar UI would flash when adding a node while drawing an area
 
-[#5950]: https://github.com/openstreetmap/iD/issues/5950
-[#5942]: https://github.com/openstreetmap/iD/issues/5942
-[#5941]: https://github.com/openstreetmap/iD/issues/5941
-[#5934]: https://github.com/openstreetmap/iD/issues/5934
-[#5921]: https://github.com/openstreetmap/iD/issues/5921
 
-[@jguthrie100]: https://github.com/jguthrie100
+
+
 
 #### :hourglass: Performance
 * Add option to turn off specific validation rules if they are slowing down iD ([#5979])
 
-[#5979]: https://github.com/openstreetmap/iD/issues/5979
+
 
 #### :rocket: Presets
 * Add Bar field to Restaurant, Cafe, and Hotel ([#5947], [#5970], thanks [@alphagamer7])
@@ -3729,14 +2563,9 @@ _Map all the branded businesses in your town!_
 * Don't render roads with a "footway" tag too thin ([#5936])
 * Allow Traffic Islands to be drawn as lines ([#5945])
 
-[#5975]: https://github.com/openstreetmap/iD/issues/5975
-[#5970]: https://github.com/openstreetmap/iD/issues/5970
-[#5948]: https://github.com/openstreetmap/iD/issues/5948
-[#5947]: https://github.com/openstreetmap/iD/issues/5947
-[#5945]: https://github.com/openstreetmap/iD/issues/5945
-[#5936]: https://github.com/openstreetmap/iD/issues/5936
 
-[@alphagamer7]: https://github.com/alphagamer7
+
+
 
 
 # 2.14.2
@@ -3747,29 +2576,27 @@ _Map all the branded businesses in your town!_
 * Don't flag lines or areas as untagged while they are being drawn
 * Deprecate "amenity=public_building" tag ([#5916])
 
-[#5922]: https://github.com/openstreetmap/iD/issues/5922
-[#5916]: https://github.com/openstreetmap/iD/issues/5916
+
 
 #### :bug: Bugfixes
 * Fix an issue where all map data would be removed upon switching modes while drawing a line or area ([#5917])
 * Fix an issue where cancelling line or area drawing could leave an extra error ([#5918])
 * Show all warnings and errors in the save sidebar
 
-[#5917]: https://github.com/openstreetmap/iD/issues/5917
-[#5918]: https://github.com/openstreetmap/iD/issues/5918
+
 
 #### :hourglass: Performance
 * Speed up validation, particularly the crossing ways check ([#5923])
 
-[#5923]: https://github.com/openstreetmap/iD/issues/5923
+
 
 #### :rocket: Presets
 * Rename Excrement Bag Vending Machine to Excrement Bag Dispenser ([#5920], thanks [@SelfishSeahorse])
 * Add Covered field to waterway presets
 
-[#5920]: https://github.com/openstreetmap/iD/issues/5920
 
-[@SelfishSeahorse]: https://github.com/SelfishSeahorse
+
+
 
 
 # 2.14.1
@@ -3796,19 +2623,9 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
     * View more details below in the new :white_check_mark: **Validation** section of this changelog
 * Integrate ImproveOSM data detection tools ([#5683], [#5739], thanks [@kymckay])
 
-[#5830]: https://github.com/openstreetmap/iD/issues/5830
-[#5683]: https://github.com/openstreetmap/iD/issues/5683
-[#5739]: https://github.com/openstreetmap/iD/issues/5739
 
-[@quincylvania]: https://github.com/quincylvania
-[@bhousel]: https://github.com/bhousel
-[@gaoxm]: https://github.com/gaoxm
-[@wonga00]: https://github.com/wonga00
-[@chrisklaiber]: https://github.com/chrisklaiber
-[@abalosc1]: https://github.com/abalosc1
-[@maxgrossman]: https://github.com/maxgrossman
-[@brianhatchl]: https://github.com/brianhatchl
-[@kymckay]: https://github.com/kymckay
+
+
 
 #### :sparkles: Usability
 * Don't close the open photo when toggling the photo overlay ([#5829], [#5836], thanks [@maxgrossman])
@@ -3825,24 +2642,9 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 * When upload is disabled, show a tooltip on the button explaining the reason ([#5830])
 * Don't squish the panes at narrow window widths ([#5890])
 
-[#5829]: https://github.com/openstreetmap/iD/issues/5829
-[#5836]: https://github.com/openstreetmap/iD/issues/5836
-[#5844]: https://github.com/openstreetmap/iD/issues/5844
-[#5852]: https://github.com/openstreetmap/iD/issues/5852
-[#5839]: https://github.com/openstreetmap/iD/issues/5839
-[#5888]: https://github.com/openstreetmap/iD/issues/5888
-[#5765]: https://github.com/openstreetmap/iD/issues/5765
-[#5880]: https://github.com/openstreetmap/iD/issues/5880
-[#2896]: https://github.com/openstreetmap/iD/issues/2896
-[#3625]: https://github.com/openstreetmap/iD/issues/3625
-[#5872]: https://github.com/openstreetmap/iD/issues/5872
-[#5878]: https://github.com/openstreetmap/iD/issues/5878
-[#5887]: https://github.com/openstreetmap/iD/issues/5887
-[#5753]: https://github.com/openstreetmap/iD/issues/5753
-[#5830]: https://github.com/openstreetmap/iD/issues/5830
-[#5890]: https://github.com/openstreetmap/iD/issues/5890
 
-[@AndreasHae]: https://github.com/AndreasHae
+
+
 
 #### :white_check_mark: Validation
 * Flag crossing highways, railways, waterways, and buildings ([#1669], [#5217], [#5830], thanks [@gaoxm])
@@ -3865,18 +2667,9 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 * Disable adding features of a hidden feature type to avoid redundant mapping ([#5876], [#5884])
 * Don't count vertices when warning about many deletions ([#5830])
 
-[#1669]: https://github.com/openstreetmap/iD/issues/1669
-[#5217]: https://github.com/openstreetmap/iD/issues/5217
-[#5745]: https://github.com/openstreetmap/iD/issues/5745
-[#5811]: https://github.com/openstreetmap/iD/issues/5811
-[#5875]: https://github.com/openstreetmap/iD/issues/5875
-[#5870]: https://github.com/openstreetmap/iD/issues/5870
-[#5876]: https://github.com/openstreetmap/iD/issues/5876
-[#5884]: https://github.com/openstreetmap/iD/issues/5884
-[#4591]: https://github.com/openstreetmap/iD/issues/4591
-[#5830]: https://github.com/openstreetmap/iD/issues/5830
 
-[@gaoxm]: https://github.com/gaoxm
+
+
 
 #### :bug: Bugfixes
 * Fix reversal of turn lanes when reversing a way ([#5674], [#5826], thanks [@kymckay])
@@ -3889,33 +2682,21 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 * Hide lines that are part of boundary relations when boundaries are hidden ([#5601])
 * Fix mangling of the undo history when undoing while drawing a way  ([#5830])
 
-[#5674]: https://github.com/openstreetmap/iD/issues/5674
-[#5826]: https://github.com/openstreetmap/iD/issues/5826
-[#5494]: https://github.com/openstreetmap/iD/issues/5494
-[#5816]: https://github.com/openstreetmap/iD/issues/5816
-[#1264]: https://github.com/openstreetmap/iD/issues/1264
-[#5837]: https://github.com/openstreetmap/iD/issues/5837
-[#5842]: https://github.com/openstreetmap/iD/issues/5842
-[#5840]: https://github.com/openstreetmap/iD/issues/5840
-[#5860]: https://github.com/openstreetmap/iD/issues/5860
-[#5601]: https://github.com/openstreetmap/iD/issues/5601
-[#5830]: https://github.com/openstreetmap/iD/issues/5830
 
-[@kymckay]: https://github.com/kymckay
+
+
 
 #### :earth_asia: Localization
 * Update the Museum and Planetarium preset icons to not include the letter "M" ([#5751])
 * Don't capitalize feature names in KeepRight messages in right-to-left layouts ([#5877])
 * Keep the map still when resizing the sidebar in right-to-left layouts ([#5881])
 
-[#5751]: https://github.com/openstreetmap/iD/issues/5751
-[#5877]: https://github.com/openstreetmap/iD/issues/5877
-[#5881]: https://github.com/openstreetmap/iD/issues/5881
+
 
 #### :hourglass: Performance
 * Optimize code tests by not reloading all presets for every test ([#5832])
 
-[#5832]: https://github.com/openstreetmap/iD/issues/5832
+
 
 #### :rocket: Presets
 * Add Golf Cartpath, Golf Walking Path, and Driving Range presets ([#5859], [#5862], thanks [@chadrockey])
@@ -3934,24 +2715,9 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 * Add "box office" as a search term for Ticket Shop ([#5849])
 * Add more search terms to various other Shops
 
-[#5859]: https://github.com/openstreetmap/iD/issues/5859
-[#5862]: https://github.com/openstreetmap/iD/issues/5862
-[#5892]: https://github.com/openstreetmap/iD/issues/5892
-[#5894]: https://github.com/openstreetmap/iD/issues/5894
-[#5749]: https://github.com/openstreetmap/iD/issues/5749
-[#5772]: https://github.com/openstreetmap/iD/issues/5772
-[#5817]: https://github.com/openstreetmap/iD/issues/5817
-[#5771]: https://github.com/openstreetmap/iD/issues/5771
-[#5822]: https://github.com/openstreetmap/iD/issues/5822
-[#5843]: https://github.com/openstreetmap/iD/issues/5843
-[#5759]: https://github.com/openstreetmap/iD/issues/5759
-[#5761]: https://github.com/openstreetmap/iD/issues/5761
-[#5854]: https://github.com/openstreetmap/iD/issues/5854
-[#5903]: https://github.com/openstreetmap/iD/issues/5903
-[#5849]: https://github.com/openstreetmap/iD/issues/5849
 
-[@chadrockey]: https://github.com/chadrockey
-[@danielwu830]: https://github.com/danielwu830
+
+
 
 # 2.13.1
 ##### 2019-Jan-28
@@ -3962,9 +2728,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 * Prevent Chrome and Firefox autofill suggestions from appearing in fields like Address or Email  ([#5818])
 * Restore the pointing hand cursor when hovering over combobox carets ([#5769])
 
-[#5818]: https://github.com/openstreetmap/iD/issues/5818
-[#5769]: https://github.com/openstreetmap/iD/issues/5769
-[#5752]: https://github.com/openstreetmap/iD/issues/5752
+
 
 #### :bug: Bugfixes
 
@@ -3974,11 +2738,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 * Fix issue where optional Cycleway fields would not appear by default when the left and right lane values were equivalent ([#5756])
 * Fix issue where optional `multiCombo` fields like Diet Types or Currency Types would not appear by default even if values existed ([#5764])
 
-[#5825]: https://github.com/openstreetmap/iD/issues/5825
-[#5756]: https://github.com/openstreetmap/iD/issues/5756
-[#5760]: https://github.com/openstreetmap/iD/issues/5760
-[#5764]: https://github.com/openstreetmap/iD/issues/5764
-[#5770]: https://github.com/openstreetmap/iD/issues/5770
+
 
 #### :mortar_board: Walkthrough / Help
 
@@ -4002,10 +2762,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 * Add "riverbank" as a search term for the River area preset
 * Add additional search terms to Managed Forest
 
-[#5750]: https://github.com/openstreetmap/iD/issues/5750
-[#5755]: https://github.com/openstreetmap/iD/issues/5755
-[#5758]: https://github.com/openstreetmap/iD/issues/5758
-[#5812]: https://github.com/openstreetmap/iD/issues/5812
+
 
 # 2.13.0
 ##### 2019-Jan-23
@@ -4019,7 +2776,7 @@ _Check out the [maprules repo](https://github.com/radiant-maxar/maprules) for mo
 * :mag: You can now quickly center and zoom the map on any feature, note, or data issue!<br/>
 _Click the new "zoom to" link on the sidebar under the preset icon, or press <kbd>Z</kbd> keyboard shortcut to focus on the selected feature._
 
-[@thomas-hervey]: https://github.com/thomas-hervey
+
 
 #### :tada: New Features
 
@@ -4031,19 +2788,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Add validation check for generic feature names ([#5590])
 * Support `{wkid}`, `{w}`, `{s}`, `{n}`, and `{e}` tokens in WMS-style background imagery templates ([#5738], thanks [@1ec5])
 
-[#3452]: https://github.com/openstreetmap/iD/issues/3452
-[#5201]: https://github.com/openstreetmap/iD/issues/5201
-[#5590]: https://github.com/openstreetmap/iD/issues/5590
-[#5169]: https://github.com/openstreetmap/iD/issues/5169
-[#5738]: https://github.com/openstreetmap/iD/issues/5738
-[#5617]: https://github.com/openstreetmap/iD/issues/5617
-[#5581]: https://github.com/openstreetmap/iD/issues/5581
-[#5583]: https://github.com/openstreetmap/iD/issues/5583
-[#5587]: https://github.com/openstreetmap/iD/issues/5587
-[#5629]: https://github.com/openstreetmap/iD/issues/5629
-[@maxgrossman]: https://github.com/maxgrossman
-[@1ec5]: https://github.com/1ec5
-[@thomas-hervey]: https://github.com/thomas-hervey
+
 
 #### :sparkles: Usability
 
@@ -4062,20 +2807,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Style multipolygons as areas instead of lines
 * Style the icons of building-like presets like buildings
 
-[#5730]: https://github.com/openstreetmap/iD/issues/5730
-[#5729]: https://github.com/openstreetmap/iD/issues/5729
-[#5725]: https://github.com/openstreetmap/iD/issues/5725
-[#5711]: https://github.com/openstreetmap/iD/issues/5711
-[#5602]: https://github.com/openstreetmap/iD/issues/5602
-[#5596]: https://github.com/openstreetmap/iD/issues/5596
-[#5636]: https://github.com/openstreetmap/iD/issues/5636
-[#5622]: https://github.com/openstreetmap/iD/issues/5622
-[#5614]: https://github.com/openstreetmap/iD/issues/5614
-[#5606]: https://github.com/openstreetmap/iD/issues/5606
-[#5632]: https://github.com/openstreetmap/iD/issues/5632
-[#3967]: https://github.com/openstreetmap/iD/issues/3967
-[@RudyTheDev]: https://github.com/RudyTheDev
-[@maxgrossman]: https://github.com/maxgrossman
+
 
 #### :bug: Bugfixes
 
@@ -4085,13 +2817,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Fix an issue where sections of the Map Data and Background panes might not display ([#5743])
 * Fix a visual glitch where the buttons in the top bar could wrap in an undesirable way ([#5746])
 
-[#5746]: https://github.com/openstreetmap/iD/issues/5746
-[#5743]: https://github.com/openstreetmap/iD/issues/5743
-[#5731]: https://github.com/openstreetmap/iD/issues/5731
-[#5612]: https://github.com/openstreetmap/iD/issues/5612
-[#5638]: https://github.com/openstreetmap/iD/issues/5638
-[#4108]: https://github.com/openstreetmap/iD/issues/4108
-[@maxgrossman]: https://github.com/maxgrossman
+
 
 #### :earth_asia: Localization
 
@@ -4102,18 +2828,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Press <kbd>?</kbd> to toggle the help pane regardless of the localization ([#5663])
 * Display translated names and descriptions of more background sources ([#5737])
 
-[#5737]: https://github.com/openstreetmap/iD/issues/5737
-[#5663]: https://github.com/openstreetmap/iD/issues/5663
-[#5647]: https://github.com/openstreetmap/iD/issues/5647
-[#5644]: https://github.com/openstreetmap/iD/issues/5644
-[#5650]: https://github.com/openstreetmap/iD/issues/5650
-[#5687]: https://github.com/openstreetmap/iD/issues/5687
-[#5692]: https://github.com/openstreetmap/iD/issues/5692
-[#5699]: https://github.com/openstreetmap/iD/issues/5699
-[#5705]: https://github.com/openstreetmap/iD/issues/5705
-[@nyurik]: https://github.com/nyurik
-[@tordans]: https://github.com/tordans
-[@iriman]: https://github.com/iriman
+
 
 #### :hourglass: Performance
 
@@ -4142,25 +2857,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Reduce the use of universal fields ([#5719])
 * Add more fields to the `Add field:` dropdown of various presets
 
-[via `scottdejonge/map-icons`]: https://github.com/bhousel/temaki/issues/2
-[#5709]: https://github.com/openstreetmap/iD/issues/5709
-[#5620]: https://github.com/openstreetmap/iD/issues/5620
-[#5611]: https://github.com/openstreetmap/iD/issues/5611
-[#5610]: https://github.com/openstreetmap/iD/issues/5610
-[#5591]: https://github.com/openstreetmap/iD/issues/5591
-[#5580]: https://github.com/openstreetmap/iD/issues/5580
-[#5651]: https://github.com/openstreetmap/iD/issues/5651
-[#5653]: https://github.com/openstreetmap/iD/issues/5653
-[#5710]: https://github.com/openstreetmap/iD/issues/5710
-[#5712]: https://github.com/openstreetmap/iD/issues/5712
-[#5719]: https://github.com/openstreetmap/iD/issues/5719
-[#5724]: https://github.com/openstreetmap/iD/issues/5724
-[#4178]: https://github.com/openstreetmap/iD/issues/4178
-[#5604]: https://github.com/openstreetmap/iD/issues/5604
-[#5605]: https://github.com/openstreetmap/iD/issues/5605
-[@scottdejonge]: https://github.com/scottdejonge
-[@hikemaniac]: https://github.com/hikemaniac
-[@CloCkWeRX]: https://github.com/CloCkWeRX
+
 
 
 # 2.12.2
@@ -4169,9 +2866,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 #### :tada: New Features
 * Add `"moreFields"` property so a preset can control the fields shown in the "Add field" dropdown ([#4871], [#5582], thanks [@quincylvania])
 
-[#5582]: https://github.com/openstreetmap/iD/issues/5582
-[#4871]: https://github.com/openstreetmap/iD/issues/4871
-[@quincylvania]: https://github.com/quincylvania
+
 
 #### :sparkles: Usability
 * Improve mousewheel scrolling speed on Windows/Linux Firefox ([#5512])
@@ -4183,12 +2878,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
   (User can click carat, press down arrow, or start typing to make it appear)
 * Make sure combobox can always receive arrow and esc keyboard events
 
-[#5584]: https://github.com/openstreetmap/iD/issues/5584
-[#5576]: https://github.com/openstreetmap/iD/issues/5576
-[#5574]: https://github.com/openstreetmap/iD/issues/5574
-[#5558]: https://github.com/openstreetmap/iD/issues/5558
-[#5512]: https://github.com/openstreetmap/iD/issues/5512
-[@RudyTheDev]: https://github.com/RudyTheDev
+
 
 #### :bug: Bugfixes
 * Fix broken member role dropdown for members that are not downloaded ([#5592])
@@ -4203,21 +2893,12 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Fix rendering of combobox near bottom of sidebar when using up/down arrows
   (Before, `scrollIntoView` would move the entire map container)
 
-[#5592]: https://github.com/openstreetmap/iD/issues/5592
-[#5589]: https://github.com/openstreetmap/iD/issues/5589
-[#5575]: https://github.com/openstreetmap/iD/issues/5575
-[#5573]: https://github.com/openstreetmap/iD/issues/5573
-[#5565]: https://github.com/openstreetmap/iD/issues/5565
-[#5458]: https://github.com/openstreetmap/iD/issues/5458
-[#5449]: https://github.com/openstreetmap/iD/issues/5449
-[#5438]: https://github.com/openstreetmap/iD/issues/5438
-[#4900]: https://github.com/openstreetmap/iD/issues/4900
-[#4827]: https://github.com/openstreetmap/iD/issues/4827
+
 
 #### :earth_asia: Localization
 * Use user's locale for fetching wikidata label/description ([#5563])
 
-[#5563]: https://github.com/openstreetmap/iD/issues/5563
+
 
 #### :hourglass: Performance
 * Don't create hidden/universal fields until they are actually needed
@@ -4225,7 +2906,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Don't recreate as many comboboxes on every render ([#5568])
   * :warning: Code refactor - Move lib/d3.combobox.js -> ui/combobox.js
 
-[#5568]: https://github.com/openstreetmap/iD/issues/5568
+
 
 #### :rocket: Presets
 * Make separate presets for "Apartment Building" and "Apartment Complex" ([#5594], thanks [@kreed])
@@ -4234,13 +2915,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Add an icon for Grit Bin preset
 * Lowered the match score for the Wi-Fi Hotspot preset ([#5560], [#5561], [@quincylvania])
 
-[#5594]: https://github.com/openstreetmap/iD/issues/5594
-[#5562]: https://github.com/openstreetmap/iD/issues/5562
-[#5561]: https://github.com/openstreetmap/iD/issues/5561
-[#5560]: https://github.com/openstreetmap/iD/issues/5560
-[#5497]: https://github.com/openstreetmap/iD/issues/5497
-[@kreed]: https://github.com/kreed
-[@quincylvania]: https://github.com/quincylvania
+
 
 
 # 2.12.1
@@ -4250,10 +2925,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Fix bug preventing walkthrough from starting ([#5553], [#5555], thanks [@quincylvania])
 * Fix bug causing tooltips on background pane not to disappear ([#5551])
 
-[#5555]: https://github.com/openstreetmap/iD/issues/5555
-[#5553]: https://github.com/openstreetmap/iD/issues/5553
-[#5551]: https://github.com/openstreetmap/iD/issues/5551
-[@quincylvania]: https://github.com/quincylvania
+
 
 
 # 2.12.0
@@ -4274,8 +2946,7 @@ _Make sure prominent features have a Wikidata tag, for added protection against 
 _Check out the "All Relations" and "All Members" sections of the sidebar to try out the new relation editing tools._
 * :octocat: Hacktoberfest happened!  We merged 40 pull requests during the month of October.  Thank you to all of our new contributors!<br/>
 
-[@huonw]: https://github.com/huonw
-[@quincylvania]: https://github.com/quincylvania
+
 
 #### :tada: New Features
 * Make `name`, `brand` fields readonly when there is a `wikidata` or `brand:wikidata` tag ([#5515])
@@ -4296,25 +2967,7 @@ _Check out the "All Relations" and "All Members" sections of the sidebar to try 
 * Add a button to download an undownloaded relation child ([#2284], [#5396], thanks [@quincylvania])
 * Display type (node, way, or relation) in the name of undownloaded relation children ([#5399], thanks [@quincylvania])
 
-[#5529]: https://github.com/openstreetmap/iD/issues/5529
-[#5515]: https://github.com/openstreetmap/iD/issues/5515
-[#5514]: https://github.com/openstreetmap/iD/issues/5514
-[#5500]: https://github.com/openstreetmap/iD/issues/5500
-[#5487]: https://github.com/openstreetmap/iD/issues/5487
-[#5443]: https://github.com/openstreetmap/iD/issues/5443
-[#5429]: https://github.com/openstreetmap/iD/issues/5429
-[#5405]: https://github.com/openstreetmap/iD/issues/5405
-[#5404]: https://github.com/openstreetmap/iD/issues/5404
-[#5402]: https://github.com/openstreetmap/iD/issues/5402
-[#5399]: https://github.com/openstreetmap/iD/issues/5399
-[#5396]: https://github.com/openstreetmap/iD/issues/5396
-[#4382]: https://github.com/openstreetmap/iD/issues/4382
-[#3447]: https://github.com/openstreetmap/iD/issues/3447
-[#2946]: https://github.com/openstreetmap/iD/issues/2946
-[#2284]: https://github.com/openstreetmap/iD/issues/2284
-[#1475]: https://github.com/openstreetmap/iD/issues/1475
-[@huonw]: https://github.com/huonw
-[@quincylvania]: https://github.com/quincylvania
+
 
 #### :sparkles: Usability
 * Redraw restrictions editor when resizing sidebar ([#5474], [#5502], thanks [@jguthrie100])
@@ -4337,31 +2990,7 @@ _Check out the "All Relations" and "All Members" sections of the sidebar to try 
 * Make "search worldwide" button look like a button ([#5386], thanks [@jguthrie100])
 * Make OpenTopoMap imagery layer available ([#5277])
 
-[#5526]: https://github.com/openstreetmap/iD/issues/5526
-[#5522]: https://github.com/openstreetmap/iD/issues/5522
-[#5509]: https://github.com/openstreetmap/iD/issues/5509
-[#5502]: https://github.com/openstreetmap/iD/issues/5502
-[#5499]: https://github.com/openstreetmap/iD/issues/5499
-[#5492]: https://github.com/openstreetmap/iD/issues/5492
-[#5489]: https://github.com/openstreetmap/iD/issues/5489
-[#5474]: https://github.com/openstreetmap/iD/issues/5474
-[#5468]: https://github.com/openstreetmap/iD/issues/5468
-[#5467]: https://github.com/openstreetmap/iD/issues/5467
-[#5459]: https://github.com/openstreetmap/iD/issues/5459
-[#5455]: https://github.com/openstreetmap/iD/issues/5455
-[#5442]: https://github.com/openstreetmap/iD/issues/5442
-[#5416]: https://github.com/openstreetmap/iD/issues/5416
-[#5414]: https://github.com/openstreetmap/iD/issues/5414
-[#5392]: https://github.com/openstreetmap/iD/issues/5392
-[#5386]: https://github.com/openstreetmap/iD/issues/5386
-[#5304]: https://github.com/openstreetmap/iD/issues/5304
-[#5280]: https://github.com/openstreetmap/iD/issues/5280
-[#5277]: https://github.com/openstreetmap/iD/issues/5277
-[#4356]: https://github.com/openstreetmap/iD/issues/4356
-[#1252]: https://github.com/openstreetmap/iD/issues/1252
-[@RudyTheDev]: https://github.com/RudyTheDev
-[@jguthrie100]: https://github.com/jguthrie100
-[@quincylvania]: https://github.com/quincylvania
+
 
 #### :bug: Bugfixes
 * Prevent Mapillary signs and markers from flickering as the user pans the map ([#4297])
@@ -4376,36 +3005,13 @@ _Check out the "All Relations" and "All Members" sections of the sidebar to try 
 * Treat multicombo values other than 'no' and '' as if they are set ([#5291])
 * Fix bug preventing use of gpx files with an uppercase file extension ([#5266], thanks [@JamesKingdom])
 
-[#5485]: https://github.com/openstreetmap/iD/issues/5485
-[#5479]: https://github.com/openstreetmap/iD/issues/5479
-[#5461]: https://github.com/openstreetmap/iD/issues/5461
-[#5460]: https://github.com/openstreetmap/iD/issues/5460
-[#5450]: https://github.com/openstreetmap/iD/issues/5450
-[#5413]: https://github.com/openstreetmap/iD/issues/5413
-[#5409]: https://github.com/openstreetmap/iD/issues/5409
-[#5395]: https://github.com/openstreetmap/iD/issues/5395
-[#5374]: https://github.com/openstreetmap/iD/issues/5374
-[#5291]: https://github.com/openstreetmap/iD/issues/5291
-[#5272]: https://github.com/openstreetmap/iD/issues/5272
-[#5266]: https://github.com/openstreetmap/iD/issues/5266
-[#5264]: https://github.com/openstreetmap/iD/issues/5264
-[#5257]: https://github.com/openstreetmap/iD/issues/5257
-[#5250]: https://github.com/openstreetmap/iD/issues/5250
-[#5191]: https://github.com/openstreetmap/iD/issues/5191
-[#4297]: https://github.com/openstreetmap/iD/issues/4297
-[@cbeddow]: https://github.com/cbeddow
-[@JamesKingdom]: https://github.com/JamesKingdom
-[@matkoniecz]: https://github.com/matkoniecz
-[@quincylvania]: https://github.com/quincylvania
+
 
 #### :earth_asia: Localization
 * Localize combo box tooltip descriptions ([#5523], [#5524], thanks [@jguthrie100])
 * Switch parking icons from "P" to car icon ([#5341])
 
-[#5524]: https://github.com/openstreetmap/iD/issues/5524
-[#5523]: https://github.com/openstreetmap/iD/issues/5523
-[#5341]: https://github.com/openstreetmap/iD/issues/5341
-[@jguthrie100]: https://github.com/jguthrie100
+
 
 #### :hourglass: Performance
 * Avoid reflow caused by restriction editor checking its dimensions
@@ -4417,11 +3023,7 @@ _Check out the "All Relations" and "All Members" sections of the sidebar to try 
 * When switching chapters in Help, return to the top ([#5439], [#5441], thanks [@n42k])
 * Fix crash if user cancels drawing of Tulip Road in walkthrough ([#5295])
 
-[#5441]: https://github.com/openstreetmap/iD/issues/5441
-[#5439]: https://github.com/openstreetmap/iD/issues/5439
-[#5295]: https://github.com/openstreetmap/iD/issues/5295
-[#5136]: https://github.com/openstreetmap/iD/issues/5136
-[@n42k]: https://github.com/n42k
+
 
 #### :rocket: Presets
 * Add Flush Curb preset ([#5534], thanks [@quincylvania])
@@ -4490,116 +3092,7 @@ _Check out the "All Relations" and "All Members" sections of the sidebar to try 
 * Add WiFi Hotspot preset ([#5239], [#5251], thanks [@simonbilskyrollins])
 * Add name, bridge type, layer and maxweight fields to Bridge preset ([#5269], thanks [@LaszloEr])
 
-[#5534]: https://github.com/openstreetmap/iD/issues/5534
-[#5532]: https://github.com/openstreetmap/iD/issues/5532
-[#5528]: https://github.com/openstreetmap/iD/issues/5528
-[#5527]: https://github.com/openstreetmap/iD/issues/5527
-[#5519]: https://github.com/openstreetmap/iD/issues/5519
-[#5518]: https://github.com/openstreetmap/iD/issues/5518
-[#5510]: https://github.com/openstreetmap/iD/issues/5510
-[#5486]: https://github.com/openstreetmap/iD/issues/5486
-[#5483]: https://github.com/openstreetmap/iD/issues/5483
-[#5476]: https://github.com/openstreetmap/iD/issues/5476
-[#5469]: https://github.com/openstreetmap/iD/issues/5469
-[#5453]: https://github.com/openstreetmap/iD/issues/5453
-[#5451]: https://github.com/openstreetmap/iD/issues/5451
-[#5447]: https://github.com/openstreetmap/iD/issues/5447
-[#5432]: https://github.com/openstreetmap/iD/issues/5432
-[#5425]: https://github.com/openstreetmap/iD/issues/5425
-[#5422]: https://github.com/openstreetmap/iD/issues/5422
-[#5421]: https://github.com/openstreetmap/iD/issues/5421
-[#5419]: https://github.com/openstreetmap/iD/issues/5419
-[#5418]: https://github.com/openstreetmap/iD/issues/5418
-[#5417]: https://github.com/openstreetmap/iD/issues/5417
-[#5410]: https://github.com/openstreetmap/iD/issues/5410
-[#5408]: https://github.com/openstreetmap/iD/issues/5408
-[#5403]: https://github.com/openstreetmap/iD/issues/5403
-[#5397]: https://github.com/openstreetmap/iD/issues/5397
-[#5387]: https://github.com/openstreetmap/iD/issues/5387
-[#5384]: https://github.com/openstreetmap/iD/issues/5384
-[#5382]: https://github.com/openstreetmap/iD/issues/5382
-[#5381]: https://github.com/openstreetmap/iD/issues/5381
-[#5380]: https://github.com/openstreetmap/iD/issues/5380
-[#5375]: https://github.com/openstreetmap/iD/issues/5375
-[#5372]: https://github.com/openstreetmap/iD/issues/5372
-[#5371]: https://github.com/openstreetmap/iD/issues/5371
-[#5368]: https://github.com/openstreetmap/iD/issues/5368
-[#5367]: https://github.com/openstreetmap/iD/issues/5367
-[#5365]: https://github.com/openstreetmap/iD/issues/5365
-[#5363]: https://github.com/openstreetmap/iD/issues/5363
-[#5360]: https://github.com/openstreetmap/iD/issues/5360
-[#5359]: https://github.com/openstreetmap/iD/issues/5359
-[#5358]: https://github.com/openstreetmap/iD/issues/5358
-[#5357]: https://github.com/openstreetmap/iD/issues/5357
-[#5356]: https://github.com/openstreetmap/iD/issues/5356
-[#5355]: https://github.com/openstreetmap/iD/issues/5355
-[#5353]: https://github.com/openstreetmap/iD/issues/5353
-[#5352]: https://github.com/openstreetmap/iD/issues/5352
-[#5350]: https://github.com/openstreetmap/iD/issues/5350
-[#5349]: https://github.com/openstreetmap/iD/issues/5349
-[#5348]: https://github.com/openstreetmap/iD/issues/5348
-[#5347]: https://github.com/openstreetmap/iD/issues/5347
-[#5346]: https://github.com/openstreetmap/iD/issues/5346
-[#5345]: https://github.com/openstreetmap/iD/issues/5345
-[#5344]: https://github.com/openstreetmap/iD/issues/5344
-[#5339]: https://github.com/openstreetmap/iD/issues/5339
-[#5338]: https://github.com/openstreetmap/iD/issues/5338
-[#5337]: https://github.com/openstreetmap/iD/issues/5337
-[#5334]: https://github.com/openstreetmap/iD/issues/5334
-[#5333]: https://github.com/openstreetmap/iD/issues/5333
-[#5331]: https://github.com/openstreetmap/iD/issues/5331
-[#5328]: https://github.com/openstreetmap/iD/issues/5328
-[#5327]: https://github.com/openstreetmap/iD/issues/5327
-[#5325]: https://github.com/openstreetmap/iD/issues/5325
-[#5316]: https://github.com/openstreetmap/iD/issues/5316
-[#5315]: https://github.com/openstreetmap/iD/issues/5315
-[#5310]: https://github.com/openstreetmap/iD/issues/5310
-[#5309]: https://github.com/openstreetmap/iD/issues/5309
-[#5303]: https://github.com/openstreetmap/iD/issues/5303
-[#5302]: https://github.com/openstreetmap/iD/issues/5302
-[#5301]: https://github.com/openstreetmap/iD/issues/5301
-[#5300]: https://github.com/openstreetmap/iD/issues/5300
-[#5297]: https://github.com/openstreetmap/iD/issues/5297
-[#5293]: https://github.com/openstreetmap/iD/issues/5293
-[#5292]: https://github.com/openstreetmap/iD/issues/5292
-[#5288]: https://github.com/openstreetmap/iD/issues/5288
-[#5287]: https://github.com/openstreetmap/iD/issues/5287
-[#5286]: https://github.com/openstreetmap/iD/issues/5286
-[#5284]: https://github.com/openstreetmap/iD/issues/5284
-[#5270]: https://github.com/openstreetmap/iD/issues/5270
-[#5269]: https://github.com/openstreetmap/iD/issues/5269
-[#5268]: https://github.com/openstreetmap/iD/issues/5268
-[#5267]: https://github.com/openstreetmap/iD/issues/5267
-[#5262]: https://github.com/openstreetmap/iD/issues/5262
-[#5261]: https://github.com/openstreetmap/iD/issues/5261
-[#5260]: https://github.com/openstreetmap/iD/issues/5260
-[#5259]: https://github.com/openstreetmap/iD/issues/5259
-[#5251]: https://github.com/openstreetmap/iD/issues/5251
-[#5245]: https://github.com/openstreetmap/iD/issues/5245
-[#5244]: https://github.com/openstreetmap/iD/issues/5244
-[#5239]: https://github.com/openstreetmap/iD/issues/5239
-[@AndreasHae]: https://github.com/AndreasHae
-[@castriganoj]: https://github.com/castriganoj
-[@enighter]: https://github.com/enighter
-[@FrikanRw]: https://github.com/FrikanRw
-[@hchho]: https://github.com/hchho
-[@hikemaniac]: https://github.com/hikemaniac
-[@LaszloEr]: https://github.com/LaszloEr
-[@mchlp]: https://github.com/mchlp
-[@nadyafebi]: https://github.com/nadyafebi
-[@programistka]: https://github.com/programistka
-[@quincylvania]: https://github.com/quincylvania
-[@Raubraupe]: https://github.com/Raubraupe
-[@RudyTheDev]: https://github.com/RudyTheDev
-[@s-Hale]: https://github.com/s-Hale
-[@kymckay]: https://github.com/kymckay
-[@simonbilskyrollins]: https://github.com/simonbilskyrollins
-[@Stormheg]: https://github.com/Stormheg
-[@thefifthisa]: https://github.com/thefifthisa
-[@tordans]: https://github.com/tordans
-[@wvanderp]: https://github.com/wvanderp
-[@xmile1]: https://github.com/xmile1
-[@yvecai]: https://github.com/yvecai
+
 
 
 # 2.11.1
@@ -4608,7 +3101,7 @@ _Check out the "All Relations" and "All Members" sections of the sidebar to try 
 #### :bug: Bugfixes
 * Fix handling of `.gpx` files passed in via url ([#5253])
 
-[#5253]: https://github.com/openstreetmap/iD/issues/5253
+
 
 
 # 2.11.0
@@ -4620,8 +3113,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and choose "Custom Map Data" to 
 * :trophy: To get ready for [State of the Map US](https://2018.stateofthemap.us/), let's make Detroit, USA the [best mapped city in the world](https://www.openstreetmap.us/2018/07/detroit-mapping-challenge-sotmus2018/)!  iD includes 3 vector tile layers of public data, built by [@jonahadkins], to support the Detroit Mapping Challenge.  More info is available on the [osmus/detroid-mapping-challenge repository](https://github.com/osmus/detroit-mapping-challenge).<br/>
 _When mapping around Detroit, try out the special Detroit vector tile layers on the Map Data pane (shortcut <kbd>F</kbd>)_
 
-[@vershwal]: https://github.com/vershwal
-[@jonahadkins]: https://github.com/jonahadkins
+
 
 #### :tada: New Features
 * Add support for vector tile data ([#3742], [#5072], [#5243], thanks [@vershwal] and [@geohacker])
@@ -4630,12 +3122,7 @@ _When mapping around Detroit, try out the special Detroit vector tile layers on 
   * :warning: We refactored `svgGpx`->`svgData` module, which now handles both data files and data from vector tile urls. (Important: the URL parameter for loading gpx files has **not** changed, and remains compatible with applications like the HOT Task Manager).
   * Added `serviceVectorTile` for fetching and caching data from vector tile servers, and merging and deduplicating features that cross tile boundaries.
 
-[#5243]: https://github.com/openstreetmap/iD/issues/5243
-[#5072]: https://github.com/openstreetmap/iD/issues/5072
-[#3742]: https://github.com/openstreetmap/iD/issues/3742
-[@vershwal]: https://github.com/vershwal
-[@geohacker]: https://github.com/geohacker
-[@jonahadkins]: https://github.com/jonahadkins
+
 
 #### :sparkles: Usability
 * Replace "Custom Imagery" alert box with a modal settings screen ([#5207], thanks [@vershwal])
@@ -4645,13 +3132,7 @@ _When mapping around Detroit, try out the special Detroit vector tile layers on 
 * Allow submit note comments with shortcut <kbd>cmd</kbd>+<kbd>enter</kbd> ([#5193])
 * Disable note and streetview interactivity while the user is drawing ([#5202])
 
-[#5207]: https://github.com/openstreetmap/iD/issues/5207
-[#5202]: https://github.com/openstreetmap/iD/issues/5202
-[#5193]: https://github.com/openstreetmap/iD/issues/5193
-[#5158]: https://github.com/openstreetmap/iD/issues/5158
-[#4806]: https://github.com/openstreetmap/iD/issues/4806
-[#4802]: https://github.com/openstreetmap/iD/issues/4802
-[@vershwal]: https://github.com/vershwal
+
 
 #### :bug: Bugfixes
 * Fix dragging of points and notes while a note is selected
@@ -4664,28 +3145,17 @@ _When mapping around Detroit, try out the special Detroit vector tile layers on 
 * Don't reverse cardinal direction roles on relations anymore ([#2004-comment])
 * Allow float/decimal values for height field ([#5184], [#5198], thanks [@jguthrie100])
 
-[#5248]: https://github.com/openstreetmap/iD/issues/5248
-[#5229]: https://github.com/openstreetmap/iD/issues/5229
-[#5228]: https://github.com/openstreetmap/iD/issues/5228
-[#5222]: https://github.com/openstreetmap/iD/issues/5222
-[#5200]: https://github.com/openstreetmap/iD/issues/5200
-[#5198]: https://github.com/openstreetmap/iD/issues/5198
-[#5190]: https://github.com/openstreetmap/iD/issues/5190
-[#5184]: https://github.com/openstreetmap/iD/issues/5184
-[#4898]: https://github.com/openstreetmap/iD/issues/4898
-[#2004-comment]: https://github.com/openstreetmap/iD/pull/2004#issuecomment-407995998
-[@jgravois]: https://github.com/jgravois
-[@jguthrie100]: https://github.com/jguthrie100
+
 
 #### :earth_asia: Localization
 * Fix note status string to be translateable ([#5189])
 
-[#5189]: https://github.com/openstreetmap/iD/issues/5189
+
 
 #### :hourglass: Performance
 * Speedup imagery index with which-polygon ([#5226])
 
-[#5226]: https://github.com/openstreetmap/iD/issues/5226
+
 
 #### :rocket: Presets
 * Add "apothecary" as a search term for pharmacies and chemists ([#5235])
@@ -4700,19 +3170,7 @@ _When mapping around Detroit, try out the special Detroit vector tile layers on 
 * Add `layer` field to a few more presets ([#5204], thanks [@Lukas458])
 * Allow `tourism=artwork` on line geometry, silence `tag_suggests_area` warning ([#5206])
 
-[#5235]: https://github.com/openstreetmap/iD/issues/5235
-[#5233]: https://github.com/openstreetmap/iD/issues/5233
-[#5232]: https://github.com/openstreetmap/iD/issues/5232
-[#5231]: https://github.com/openstreetmap/iD/issues/5231
-[#5223]: https://github.com/openstreetmap/iD/issues/5223
-[#5216]: https://github.com/openstreetmap/iD/issues/5216
-[#5206]: https://github.com/openstreetmap/iD/issues/5206
-[#5204]: https://github.com/openstreetmap/iD/issues/5204
-[#5195]: https://github.com/openstreetmap/iD/issues/5195
-[#5157]: https://github.com/openstreetmap/iD/issues/5157
-[@rene78]: https://github.com/rene78
-[@manfredbrandl]: https://github.com/manfredbrandl
-[@Lukas458]: https://github.com/Lukas458
+
 
 
 # 2.10.0
@@ -4726,9 +3184,7 @@ _With a node selected, use the right-click edit menu to find the Detach command 
 * :arrow_upper_right: The photo viewer (Mapillary, OpenStreetCam, and Bing Streetside) is now resizable by dragging any of its edges.  Thanks [@kratico]!<br/>
 _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and resizing the viewer._
 
-[@thomas-hervey]: https://github.com/thomas-hervey
-[@Psigio]: https://github.com/Psigio
-[@kratico]: https://github.com/kratico
+
 
 #### :tada: New Features
 * Add support for OpenStreetMap notes ([#2629], [#5107], [#5162], thanks [@thomas-hervey] and [@kamicut])
@@ -4740,21 +3196,7 @@ _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and 
 * Add ability to resize Mapillary / OpenStreetCam / Bing Streetside photo viewer ([#5138], [#4930], thanks [@kratico])
 * Add "View on Bing Maps" link and Forward/Backward controls to Bing Streetside ([#5125])
 
-[#5179]: https://github.com/openstreetmap/iD/issues/5179
-[#5162]: https://github.com/openstreetmap/iD/issues/5162
-[#5148]: https://github.com/openstreetmap/iD/issues/5148
-[#5138]: https://github.com/openstreetmap/iD/issues/5138
-[#5127]: https://github.com/openstreetmap/iD/issues/5127
-[#5125]: https://github.com/openstreetmap/iD/issues/5125
-[#5107]: https://github.com/openstreetmap/iD/issues/5107
-[#5104]: https://github.com/openstreetmap/iD/issues/5104
-[#4930]: https://github.com/openstreetmap/iD/issues/4930
-[#4320]: https://github.com/openstreetmap/iD/issues/4320
-[#2629]: https://github.com/openstreetmap/iD/issues/2629
-[@thomas-hervey]: https://github.com/thomas-hervey
-[@kamicut]: https://github.com/kamicut
-[@Psigio]: https://github.com/Psigio
-[@kratico]: https://github.com/kratico
+
 
 #### :sparkles: Usability
 * Update viewfield to match bearing of Mapillary viewer when viewing panoramic images ([#5161], thanks [@kratico])
@@ -4762,11 +3204,7 @@ _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and 
 * Improve Mapillary viewer attribution display ([#5137], thanks [@kratico])
 * Improve visibility and styling for `footway=crossing` and other special paths ([#5126])
 
-[#5161]: https://github.com/openstreetmap/iD/issues/5161
-[#5139]: https://github.com/openstreetmap/iD/issues/5139
-[#5137]: https://github.com/openstreetmap/iD/issues/5137
-[#5126]: https://github.com/openstreetmap/iD/issues/5126
-[@kratico]: https://github.com/kratico
+
 
 #### :bug: Bugfixes
 * Make sure railway bridges with a `service=*` tag render with dark casing ([#5159])
@@ -4776,26 +3214,18 @@ _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and 
 * Fix event management of the spinner - it was possible for it to get stuck spinning ([#5107-comment])
 * Add doublequotes to iD-sprite input file param so builds work on Windows ([#5077])
 
-[#5159]: https://github.com/openstreetmap/iD/issues/5159
-[#5121]: https://github.com/openstreetmap/iD/issues/5121
-[#5107-comment]: https://github.com/openstreetmap/iD/pull/5107#issuecomment-401617938
-[#5077]: https://github.com/openstreetmap/iD/issues/5077
+
 
 #### :hourglass: Performance
 * Use XHR instead of JSONP wherever possible ([#5123], [#5040], thanks [@tomhughes])
 * Check Esri Tilemaps to avoid extra requests for unavailable imagery ([#5116], [#5029], thanks [@jgravois])
 
-[#5123]: https://github.com/openstreetmap/iD/issues/5123
-[#5116]: https://github.com/openstreetmap/iD/issues/5116
-[#5040]: https://github.com/openstreetmap/iD/issues/5040
-[#5029]: https://github.com/openstreetmap/iD/issues/5029
-[@tomhughes]: https://github.com/tomhughes
-[@jgravois]: https://github.com/jgravois
+
 
 #### :mortar_board: Walkthrough / Help
 * Add section about OpenStreetMap notes to Help pane ([#5162], thanks [@thomas-hervey])
 
-[@thomas-hervey]: https://github.com/thomas-hervey
+
 
 #### :rocket: Presets
 * Add `aeroway=aerodrome` to Military Airfield preset, adjust terms ([#5164])
@@ -4807,20 +3237,7 @@ _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and 
 * Improve search terms for Entrance preset ([#5130], thanks [@tohaklim])
 * Add `capacity` field to `playground=swing` preset ([#5120], thanks [@tordans])
 
-[#5164]: https://github.com/openstreetmap/iD/issues/5164
-[#5142]: https://github.com/openstreetmap/iD/issues/5142
-[#5131]: https://github.com/openstreetmap/iD/issues/5131
-[#5133]: https://github.com/openstreetmap/iD/issues/5133
-[#5124]: https://github.com/openstreetmap/iD/issues/5124
-[#5119]: https://github.com/openstreetmap/iD/issues/5119
-[#5118]: https://github.com/openstreetmap/iD/issues/5118
-[#5130]: https://github.com/openstreetmap/iD/issues/5130
-[#5120]: https://github.com/openstreetmap/iD/issues/5120
-[@AndreasHae]: https://github.com/AndreasHae
-[@vershwal]: https://github.com/vershwal
-[@JamesKingdom]: https://github.com/JamesKingdom
-[@tohaklim]: https://github.com/tohaklim
-[@tordans]: https://github.com/tordans
+
 
 
 # 2.9.2
@@ -4841,19 +3258,13 @@ _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and 
 * Don't zoom in so far when searching for a point ([#5099])
 * `amenity=shelter` no longer assumed to be a building for rendering or feature filtering ([#5084])
 
-[#5102]: https://github.com/openstreetmap/iD/issues/5102
-[#5101]: https://github.com/openstreetmap/iD/issues/5101
-[#5099]: https://github.com/openstreetmap/iD/issues/5099
-[#5084]: https://github.com/openstreetmap/iD/issues/5084
-[@jharpster]: https://github.com/jharpster
-[@LorenMueller]: https://github.com/LorenMueller
+
 
 #### :bug: Bugfixes
 * Add `royal_cypher` to list of tags that allow capital letters ([#5109])
 * Fix bug that caused '0' to be written into a numeric field when tabbing ([#5087])
 
-[#5109]: https://github.com/openstreetmap/iD/issues/5109
-[#5087]: https://github.com/openstreetmap/iD/issues/5087
+
 
 #### :mortar_board: Walkthrough / Help
 * Use "Esri World Imagery (Clarity)" imagery in the intro walkthrough
@@ -4871,18 +3282,7 @@ _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and 
 * Add `name` field to `highway=motorway_junction` preset ([#5090], [#5092], thanks [@vershwal])
 * Add `building` and `bench` fields to `amenity=shelter` preset ([#5084])
 
-[#5113]: https://github.com/openstreetmap/iD/issues/5113
-[#5103]: https://github.com/openstreetmap/iD/issues/5103
-[#5100]: https://github.com/openstreetmap/iD/issues/5100
-[#5097]: https://github.com/openstreetmap/iD/issues/5097
-[#5095]: https://github.com/openstreetmap/iD/issues/5095
-[#5092]: https://github.com/openstreetmap/iD/issues/5092
-[#5090]: https://github.com/openstreetmap/iD/issues/5090
-[#5088]: https://github.com/openstreetmap/iD/issues/5088
-[#5084]: https://github.com/openstreetmap/iD/issues/5084
-[#4918]: https://github.com/openstreetmap/iD/issues/4918
-[@tordans]: https://github.com/tordans
-[@vershwal]: https://github.com/vershwal
+
 
 
 # 2.9.0
@@ -4900,12 +3300,7 @@ _Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>
   * Many presets that previously did not have a suitable icon now have one.
   * :warning: All icons in iD now use prefixed names. (e.g. `iD-`, `maki-`, etc). See the [preset README](https://github.com/openstreetmap/iD/blob/develop/data/presets/README.md#icons) for more details.
 
-[#5050]: https://github.com/openstreetmap/iD/issues/5050
-[#3924]: https://github.com/openstreetmap/iD/issues/3924
-[#3025]: https://github.com/openstreetmap/iD/issues/3025
-[@jharpster]: https://github.com/jharpster
-[@shawnaparadee]: https://github.com/shawnaparadee
-[@LorenMueller]: https://github.com/LorenMueller
+
 
 #### :sparkles: Usability
 * When pasting a `key=value` string into tag editor, put `key` and `value` into correct fields ([#5024], [#5070], thanks [@AndreasHae])
@@ -4916,26 +3311,18 @@ _Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>
 * Render piers similar to other walkable features (sidewalks, rail platforms) ([#5068], thanks [@JamesKingdom])
 * Support `minValue`/`maxValue` on numeric fields. Avoid negative values for many fields ([#5043])
 
-[#5070]: https://github.com/openstreetmap/iD/issues/5070
-[#5068]: https://github.com/openstreetmap/iD/issues/5068
-[#5043]: https://github.com/openstreetmap/iD/issues/5043
-[#5024]: https://github.com/openstreetmap/iD/issues/5024
-[#4145]: https://github.com/openstreetmap/iD/issues/4145
-[@AndreasHae]: https://github.com/AndreasHae
-[@JamesKingdom]: https://github.com/JamesKingdom
+
 
 #### :bug: Bugfixes
 * Fix bug causing icons not to update after a node drag ([#5045])
 * Fix tooltip location for data layers button ([#5042], thanks [@thomas-hervey])
 
-[#5045]: https://github.com/openstreetmap/iD/issues/5045
-[#5042]: https://github.com/openstreetmap/iD/issues/5042
-[@thomas-hervey]: https://github.com/thomas-hervey
+
 
 #### :earth_asia: Localization
 * Add Australian address format ([#5039])
 
-[#5039]: https://github.com/openstreetmap/iD/issues/5039
+
 
 #### :rocket: Presets
 * Add a window icon, use it for `craft=glaziery` and a few other presets ([#5018])
@@ -4943,13 +3330,7 @@ _Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>
 * Add preset for `shop=motorcycle_repair` ([#5054], thanks [@demonshreder])
 * Add preset for `leisure=bleachers` ([#5031], thanks [@rivermont])
 
-[#5059]: https://github.com/openstreetmap/iD/issues/5059
-[#5054]: https://github.com/openstreetmap/iD/issues/5054
-[#5051]: https://github.com/openstreetmap/iD/issues/5051
-[#5031]: https://github.com/openstreetmap/iD/issues/5031
-[#5018]: https://github.com/openstreetmap/iD/issues/5018
-[@demonshreder]: https://github.com/demonshreder
-[@rivermont]: https://github.com/rivermont
+
 
 
 # 2.8.2
@@ -4959,29 +3340,21 @@ _Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>
 * Allow performing Merge command when several nodes are selected ([#3774], [#4484], thanks [@ferdibiflator])
 * Add support for building iD on Node 10 ([#5028])
 
-[#5028]: https://github.com/openstreetmap/iD/issues/5028
-[#4484]: https://github.com/openstreetmap/iD/issues/4484
-[#3774]: https://github.com/openstreetmap/iD/issues/3774
-[@ferdibiflator]: https://github.com/ferdibiflator
+
 
 #### :sparkles: Usability
 * Exclude non-administrative boundary from address city suggestions ([#5034])
 * Replace `suburb` with `town` in "Thank you for editing near.." message ([#4989])
 * Rename "Phone" to "Telephone" in Add Field dropdown (so user can type either) ([#5019])
 
-[#5034]: https://github.com/openstreetmap/iD/issues/5034
-[#5019]: https://github.com/openstreetmap/iD/issues/5019
-[#4989]: https://github.com/openstreetmap/iD/issues/4989
+
 
 #### :bug: Bugfixes
 * Don't write 'undefined' to storage when deleting the changeset source ([#5021])
 * Make date parsing from community index more consistent ([#5011])
 * Fix a bug in setting some tags as read-only ([#5025], thanks [@guyarad])
 
-[#5025]: https://github.com/openstreetmap/iD/issues/5025
-[#5021]: https://github.com/openstreetmap/iD/issues/5021
-[#5011]: https://github.com/openstreetmap/iD/issues/5011
-[@guyarad]: https://github.com/guyarad
+
 
 #### :rocket: Presets
 * Add preset for `man_made=clearcut` ([#5027], thanks [@obama])
@@ -4990,14 +3363,7 @@ _Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>
 * Added dance style field to dance hall preset ([#5020], thanks [@hikemaniac])
 * Add `natural=reef` preset ([#5006], thanks [@obama])
 
-[#5027]: https://github.com/openstreetmap/iD/issues/5027
-[#5026]: https://github.com/openstreetmap/iD/issues/5026
-[#5022]: https://github.com/openstreetmap/iD/issues/5022
-[#5020]: https://github.com/openstreetmap/iD/issues/5020
-[#5006]: https://github.com/openstreetmap/iD/issues/5006
-[@obama]: https://github.com/obama
-[@tyrasd]: https://github.com/tyrasd
-[@hikemaniac]: https://github.com/hikemaniac
+
 
 
 # 2.8.1
@@ -5006,7 +3372,7 @@ _Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>
 #### :sparkles: Usability
 * Linkify subreddit in community description ([#4997])
 
-[#4997]: https://github.com/openstreetmap/iD/issues/4997
+
 
 #### :bug: Bugfixes
 * Avoid reversing ways when using the join operation ([#4872])
@@ -5014,21 +3380,14 @@ _Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>
 * Fix tabbing between fields in the tag editor on Firefox ([#4991])
 * Don't add empty `source` tag on a changeset ([#4993])
 
-[#4993]: https://github.com/openstreetmap/iD/issues/4993
-[#4991]: https://github.com/openstreetmap/iD/issues/4991
-[#4887]: https://github.com/openstreetmap/iD/issues/4887
-[#4872]: https://github.com/openstreetmap/iD/issues/4872
+
 
 #### :rocket: Presets
 * Change `amenity=bureau_de_change` to allow tagging as a building/area ([#5005])
 * Remove point as allowable geometry from `barrier=gate` ([#5004])
 * Add `brand=*` field to `shop=car` preset ([#4998], [#4999], thanks [@hikemaniac])
 
-[#5005]: https://github.com/openstreetmap/iD/issues/5005
-[#5004]: https://github.com/openstreetmap/iD/issues/5004
-[#4999]: https://github.com/openstreetmap/iD/issues/4999
-[#4998]: https://github.com/openstreetmap/iD/issues/4998
-[@hikemaniac]: https://github.com/hikemaniac
+
 
 
 # 2.8.0
@@ -5043,7 +3402,7 @@ _Reach out to nearby mappers and say hello!_
 * Drop support for node 4 / npm 2 ([#4853])
   * :warning: If you are building the iD project, you will need to upgrade your node version.
 
-[#4853]: https://github.com/openstreetmap/iD/issues/4853
+
 
 #### :tada: New Features
 * Post-upload dialog improvements, and [community index](https://github.com/osmlab/osm-community-index/) integration ([#4815])
@@ -5058,12 +3417,7 @@ _Reach out to nearby mappers and say hello!_
 * Send more information about iD presets to Taginfo service - fields, geometries, icons ([#4940], [#4937], [#3598], thanks [@mmd-osm])
 * Remember changeset `source` tag value, make it settable via url param ([#4899])
 
-[#4940]: https://github.com/openstreetmap/iD/issues/4940
-[#4937]: https://github.com/openstreetmap/iD/issues/4937
-[#4899]: https://github.com/openstreetmap/iD/issues/4899
-[#4815]: https://github.com/openstreetmap/iD/issues/4815
-[#3598]: https://github.com/openstreetmap/iD/issues/3598
-[@mmd-osm]: https://github.com/mmd-osm
+
 
 #### :sparkles: Usability
 * Show a message on the History Panel if the selected feature is new ([#4975])
@@ -5076,20 +3430,7 @@ _Reach out to nearby mappers and say hello!_
 * Add pencil "edit" icon to custom background item ([#4908], [#4798], thanks [@vershwal])
 * Add hint alt text for "remove", "undo", "info" buttons ([#4904], [#4833], [#4892] thanks [@vershwal])
 
-[#4975]: https://github.com/openstreetmap/iD/issues/4975
-[#4970]: https://github.com/openstreetmap/iD/issues/4970
-[#4959]: https://github.com/openstreetmap/iD/issues/4959
-[#4952]: https://github.com/openstreetmap/iD/issues/4952
-[#4935]: https://github.com/openstreetmap/iD/issues/4935
-[#4934]: https://github.com/openstreetmap/iD/issues/4934
-[#4913]: https://github.com/openstreetmap/iD/issues/4913
-[#4908]: https://github.com/openstreetmap/iD/issues/4908
-[#4904]: https://github.com/openstreetmap/iD/issues/4904
-[#4892]: https://github.com/openstreetmap/iD/issues/4892
-[#4833]: https://github.com/openstreetmap/iD/issues/4833
-[#4798]: https://github.com/openstreetmap/iD/issues/4798
-[#4599]: https://github.com/openstreetmap/iD/issues/4599
-[@vershwal]: https://github.com/vershwal
+
 
 #### :bug: Bugfixes
 * Prevent node drags from breaking many kinds of relations / turn restrictions ([#4921])
@@ -5102,17 +3443,7 @@ _Reach out to nearby mappers and say hello!_
 * Handle "entry only" and "exit only" variants of 'stop' and 'platform' when identifying PTv2 members ([#4946])
 * Fix ';'-space delimiting within `conditional` opening hours style files, add tests ([#4925])
 
-[#4974]: https://github.com/openstreetmap/iD/issues/4974
-[#4973]: https://github.com/openstreetmap/iD/issues/4973
-[#4969]: https://github.com/openstreetmap/iD/issues/4969
-[#4968]: https://github.com/openstreetmap/iD/issues/4968
-[#4951]: https://github.com/openstreetmap/iD/issues/4951
-[#4946]: https://github.com/openstreetmap/iD/issues/4946
-[#4928]: https://github.com/openstreetmap/iD/issues/4928
-[#4925]: https://github.com/openstreetmap/iD/issues/4925
-[#4921]: https://github.com/openstreetmap/iD/issues/4921
-[#4674]: https://github.com/openstreetmap/iD/issues/4674
-[@tyrasd]: https://github.com/tyrasd
+
 
 #### :rocket: Presets
 * Add preset for `attraction=maze` ([#4987], [#4986], thanks [@sulfo])
@@ -5138,49 +3469,7 @@ _Reach out to nearby mappers and say hello!_
 * Add field for `maxspeed:advisory=*` to presets for link roads ([#4870], [#4522], thanks [@umarpreet1])
 * Add more search terms for memorial (including "stolperstein")
 
-[#4987]: https://github.com/openstreetmap/iD/issues/4987
-[#4986]: https://github.com/openstreetmap/iD/issues/4986
-[#4982]: https://github.com/openstreetmap/iD/issues/4982
-[#4980]: https://github.com/openstreetmap/iD/issues/4980
-[#4976]: https://github.com/openstreetmap/iD/issues/4976
-[#4963]: https://github.com/openstreetmap/iD/issues/4963
-[#4962]: https://github.com/openstreetmap/iD/issues/4962
-[#4961]: https://github.com/openstreetmap/iD/issues/4961
-[#4956]: https://github.com/openstreetmap/iD/issues/4956
-[#4955]: https://github.com/openstreetmap/iD/issues/4955
-[#4949]: https://github.com/openstreetmap/iD/issues/4949
-[#4942]: https://github.com/openstreetmap/iD/issues/4942
-[#4939]: https://github.com/openstreetmap/iD/issues/4939
-[#4938]: https://github.com/openstreetmap/iD/issues/4938
-[#4936]: https://github.com/openstreetmap/iD/issues/4936
-[#4933]: https://github.com/openstreetmap/iD/issues/4933
-[#4932]: https://github.com/openstreetmap/iD/issues/4932
-[#4931]: https://github.com/openstreetmap/iD/issues/4931
-[#4926]: https://github.com/openstreetmap/iD/issues/4926
-[#4923]: https://github.com/openstreetmap/iD/issues/4923
-[#4920]: https://github.com/openstreetmap/iD/issues/4920
-[#4919]: https://github.com/openstreetmap/iD/issues/4919
-[#4917]: https://github.com/openstreetmap/iD/issues/4917
-[#4912]: https://github.com/openstreetmap/iD/issues/4912
-[#4906]: https://github.com/openstreetmap/iD/issues/4906
-[#4905]: https://github.com/openstreetmap/iD/issues/4905
-[#4891]: https://github.com/openstreetmap/iD/issues/4891
-[#4888]: https://github.com/openstreetmap/iD/issues/4888
-[#4883]: https://github.com/openstreetmap/iD/issues/4883
-[#4889]: https://github.com/openstreetmap/iD/issues/4889
-[#4870]: https://github.com/openstreetmap/iD/issues/4870
-[#4857]: https://github.com/openstreetmap/iD/issues/4857
-[#4855]: https://github.com/openstreetmap/iD/issues/4855
-[#4522]: https://github.com/openstreetmap/iD/issues/4522
-[#2455]: https://github.com/openstreetmap/iD/issues/2455
-[#2300]: https://github.com/openstreetmap/iD/issues/2300
-[@sulfo]: https://github.com/sulfo
-[@vershwal]: https://github.com/vershwal
-[@Xavier-J-Ortiz]: https://github.com/Xavier-J-Ortiz
-[@hikemaniac]: https://github.com/hikemaniac
-[@NopMap]: https://github.com/NopMap
-[@obama]: https://github.com/obama
-[@umarpreet1]: https://github.com/umarpreet1
+
 
 
 # 2.7.1
@@ -5189,8 +3478,7 @@ _Reach out to nearby mappers and say hello!_
 #### :tada: New Features
 * Add support for EPSG:4326 WMS layers ([#4858], thanks [@tyrasd])
 
-[#4858]: https://github.com/openstreetmap/iD/issues/4858
-[@tyrasd]: https://github.com/tyrasd
+
 
 #### :bug: Bugfixes
 * Allow user to press <kbd>esc</kbd> to finish drawing in an invalid position ([#4845], [#4860], thanks [@jguthrie100])
@@ -5199,18 +3487,12 @@ _Reach out to nearby mappers and say hello!_
 * Avoid reordering stops and platforms in PTv2 routes ([#4864])
 * `only_` restrictions should only count if they leave the FROM towards the VIA ([#4849])
 
-[#4869]: https://github.com/openstreetmap/iD/issues/4869
-[#4864]: https://github.com/openstreetmap/iD/issues/4864
-[#4861]: https://github.com/openstreetmap/iD/issues/4861
-[#4860]: https://github.com/openstreetmap/iD/issues/4860
-[#4849]: https://github.com/openstreetmap/iD/issues/4849
-[#4845]: https://github.com/openstreetmap/iD/issues/4845
-[@jguthrie100]: https://github.com/jguthrie100
+
 
 #### :earth_asia: Localization
 * For Kurdish languages - set `ckb` to RTL and `ku` to LTR ([#4783])
 
-[#4783]: https://github.com/openstreetmap/iD/issues/4783
+
 
 #### :rocket: Presets
 * Fix duplicate `opening_hours` on `shop=beauty` preset ([#4868], [#4867], thanks [@hikemaniac])
@@ -5218,14 +3500,7 @@ _Reach out to nearby mappers and say hello!_
 * Fix subway platform presets to use `subway=yes` tag ([#4862])
 * Add preset for Dance School - `leisure=dance`+`dance:teaching=yes` ([#4846], thanks [@hikemaniac])
 
-[#4868]: https://github.com/openstreetmap/iD/issues/4868
-[#4867]: https://github.com/openstreetmap/iD/issues/4867
-[#4865]: https://github.com/openstreetmap/iD/issues/4865
-[#4857]: https://github.com/openstreetmap/iD/issues/4857
-[#4862]: https://github.com/openstreetmap/iD/issues/4862
-[#4846]: https://github.com/openstreetmap/iD/issues/4846
-[@hikemaniac]: https://github.com/hikemaniac
-[@umarpreet1]: https://github.com/umarpreet1
+
 
 
 # 2.7.0
@@ -5245,8 +3520,7 @@ _Reach out to nearby mappers and say hello!_
 
   _Try selecting a junction node in a complex intersection, editing turn restrictions, and viewing the popup help._
 
-[@tyrasd]: https://github.com/tyrasd
-[@grischard]: https://github.com/grischard
+
 
 #### :tada: New Features
 * Support background imagery on WMS servers supporting EPSG:3857 ([#1141], [#4814], thanks [@tyrasd] and [@grischard])
@@ -5255,13 +3529,7 @@ _Reach out to nearby mappers and say hello!_
   `actionRestrictTurn`, `actionUnrestrictTurn`, `osmIntersection`, `osmInferRestriction`, `uiFieldRestrictions`
 * Added `uiFieldHelp` component for popup field help (currently used only for restrictions field) ([#4768])
 
-[#4814]: https://github.com/openstreetmap/iD/issues/4814
-[#4768]: https://github.com/openstreetmap/iD/issues/4768
-[#2622]: https://github.com/openstreetmap/iD/issues/2622
-[#2346]: https://github.com/openstreetmap/iD/issues/2346
-[#1141]: https://github.com/openstreetmap/iD/issues/1141
-[@tyrasd]: https://github.com/tyrasd
-[@grischard]: https://github.com/grischard
+
 
 #### :sparkles: Usability
 * When combobox is attached to textarea, let user up/down arrow ([#4750])
@@ -5270,43 +3538,26 @@ _Reach out to nearby mappers and say hello!_
 * Improve combobox option visibility ([#4761])
 * Increase max height of combobox, so they can show more items ([#4819], [#4831], thanks [@SteevenBosse])
 
-[#4841]: https://github.com/openstreetmap/iD/issues/4841
-[#4831]: https://github.com/openstreetmap/iD/issues/4831
-[#4825]: https://github.com/openstreetmap/iD/issues/4825
-[#4819]: https://github.com/openstreetmap/iD/issues/4819
-[#4761]: https://github.com/openstreetmap/iD/issues/4761
-[#4750]: https://github.com/openstreetmap/iD/issues/4750
-[@SteevenBosse]: https://github.com/SteevenBosse
+
 
 #### :bug: Bugfixes
 * Fix bug trying to stop Mapillary autoplaying if `_mlyViewer` is not initialized ([#4804], [#4809], thanks [@fritruc])
 * Fix bug trying to show labels when `.geojson` file has `null` properties ([#4795], [#4805], thanks [@vershwal])
 * Query the appropriate metadata for esri clarity background imagery ([#4766], [#4767], thanks [@jgravois])
 
-[#4809]: https://github.com/openstreetmap/iD/issues/4809
-[#4805]: https://github.com/openstreetmap/iD/issues/4805
-[#4804]: https://github.com/openstreetmap/iD/issues/4804
-[#4795]: https://github.com/openstreetmap/iD/issues/4795
-[#4767]: https://github.com/openstreetmap/iD/issues/4767
-[#4766]: https://github.com/openstreetmap/iD/issues/4766
-[@fritruc]: https://github.com/fritruc
-[@vershwal]: https://github.com/vershwal
-[@jgravois]: https://github.com/jgravois
+
 
 #### :earth_asia: Localization
 * Do not localize decimalCoordinatePair appearing in info panels ([#4765])
 * Fix Polish address format to not show place and city together ([#4784], thanks [@MKuranowski])
 
-[#4784]: https://github.com/openstreetmap/iD/issues/4784
-[#4765]: https://github.com/openstreetmap/iD/issues/4765
-[@MKuranowski]: https://github.com/MKuranowski
+
 
 #### :hourglass: Performance
 * Don't draw line and area touch targets for segments outside the viewport
 * Improve performance of `coreDifference`, `actionDiscardTags` (slow changeset comment typing) ([#2743], [#4611])
 
-[#4611]: https://github.com/openstreetmap/iD/issues/4611
-[#2743]: https://github.com/openstreetmap/iD/issues/2743
+
 
 #### :rocket: Presets
 * Rename `building=farm` to "Farm House", add `building=farm_auxiliary` as "Farm Building" ([#4839], [#4826], thanks [@MaciejWWojcik])
@@ -5318,21 +3569,7 @@ _Reach out to nearby mappers and say hello!_
 * Add `dispensing` field to `amenity=pharmacy` preset ([#4763])
 * Add `opening_hours` field to `amenity=police` preset ([#4753])
 
-[#4839]: https://github.com/openstreetmap/iD/issues/4839
-[#4826]: https://github.com/openstreetmap/iD/issues/4826
-[#4808]: https://github.com/openstreetmap/iD/issues/4808
-[#4785]: https://github.com/openstreetmap/iD/issues/4785
-[#4774]: https://github.com/openstreetmap/iD/issues/4774
-[#4777]: https://github.com/openstreetmap/iD/issues/4777
-[#4775]: https://github.com/openstreetmap/iD/issues/4775
-[#4754]: https://github.com/openstreetmap/iD/issues/4754
-[#4773]: https://github.com/openstreetmap/iD/issues/4773
-[#4763]: https://github.com/openstreetmap/iD/issues/4763
-[#4753]: https://github.com/openstreetmap/iD/issues/4753
-[@MaciejWWojcik]: https://github.com/MaciejWWojcik
-[@bencostamagna]: https://github.com/bencostamagna
-[@hikemaniac]: https://github.com/hikemaniac
-[@fritruc]: https://github.com/fritruc
+
 
 
 # 2.6.1
@@ -5343,10 +3580,7 @@ _Reach out to nearby mappers and say hello!_
 * Support multiple semicolon delimited direction values ([#4755])
 * No longer imply `oneway=yes` for `highway=motorway_link` without a `oneway` tag ([#4727])
 
-[editor-layer-index#391]: https://github.com/osmlab/editor-layer-index/pull/391
-[#4755]: https://github.com/openstreetmap/iD/issues/4755
-[#4727]: https://github.com/openstreetmap/iD/issues/4727
-[@jgravois]: https://github.com/jgravois
+
 
 #### :sparkles: Usability
 * Replace help icon ([#4650])
@@ -5361,22 +3595,7 @@ _Reach out to nearby mappers and say hello!_
 * Increase GPX labels readability ([#4617], [#4678], thanks [@nnodot])
 * Draw covered/underground lines beneath areas ([#4718])
 
-[#4751]: https://github.com/openstreetmap/iD/issues/4751
-[#4739]: https://github.com/openstreetmap/iD/issues/4739
-[#4738]: https://github.com/openstreetmap/iD/issues/4738
-[#4720]: https://github.com/openstreetmap/iD/issues/4720
-[#4718]: https://github.com/openstreetmap/iD/issues/4718
-[#4694]: https://github.com/openstreetmap/iD/issues/4694
-[#4678]: https://github.com/openstreetmap/iD/issues/4678
-[#4666]: https://github.com/openstreetmap/iD/issues/4666
-[#4650]: https://github.com/openstreetmap/iD/issues/4650
-[#4617]: https://github.com/openstreetmap/iD/issues/4617
-[#3804]: https://github.com/openstreetmap/iD/issues/3804
-[#2864]: https://github.com/openstreetmap/iD/issues/2864
-[@bencostamagna]: https://github.com/bencostamagna
-[@1ec5]: https://github.com/1ec5
-[@bagage]: https://github.com/bagage
-[@nnodot]: https://github.com/nnodot
+
 
 #### :bug: Bugfixes
 * Remove any duplicate vertex created when moving a way ([#4433], [#3797])
@@ -5386,21 +3605,13 @@ _Reach out to nearby mappers and say hello!_
 * Fix bug making nodes undraggable along a degenerate multipolygon ([#4741])
 * Fix <kbd>⌘S</kbd>/<kbd>Ctrl+S</kbd> keybinding ([#4728])
 
-[#4741]: https://github.com/openstreetmap/iD/issues/4741
-[#4728]: https://github.com/openstreetmap/iD/issues/4728
-[#4707]: https://github.com/openstreetmap/iD/issues/4707
-[#4536]: https://github.com/openstreetmap/iD/issues/4536
-[#4433]: https://github.com/openstreetmap/iD/issues/4433
-[#4146]: https://github.com/openstreetmap/iD/issues/4146
-[#3797]: https://github.com/openstreetmap/iD/issues/3797
+
 
 #### :earth_asia: Localization
 * Localize nominatim search results ([#4725])
 * Localize numbers, units in scale, info panels ([#4672], thanks [@1ec5])
 
-[#4725]: https://github.com/openstreetmap/iD/issues/4725
-[#4672]: https://github.com/openstreetmap/iD/issues/4672
-[@1ec5]: https://github.com/1ec5
+
 
 #### :rocket: Presets
 * Remove address field from parking preset ([#4748], [#4756], thanks [@bencostamagna])
@@ -5410,17 +3621,7 @@ _Reach out to nearby mappers and say hello!_
 * Add religion, denomination fields to school preset ([#4722])
 * Add religion, denomination fields to religious landuse preset ([#4721])
 
-[#4756]: https://github.com/openstreetmap/iD/issues/4756
-[#4748]: https://github.com/openstreetmap/iD/issues/4748
-[#4737]: https://github.com/openstreetmap/iD/issues/4737
-[#4736]: https://github.com/openstreetmap/iD/issues/4736
-[#4722]: https://github.com/openstreetmap/iD/issues/4722
-[#4721]: https://github.com/openstreetmap/iD/issues/4721
-[#4715]: https://github.com/openstreetmap/iD/issues/4715
-[#4702]: https://github.com/openstreetmap/iD/issues/4702
-[#4701]: https://github.com/openstreetmap/iD/issues/4701
-[@bencostamagna]: https://github.com/bencostamagna
-[@jay-manday]: https://github.com/jay-manday
+
 
 
 # 2.6.0
@@ -5442,9 +3643,7 @@ _Try mapping some transit platforms, stations, stop positions, etc._
 * :book: We've completely refreshed the in-app Help content in iD. Huge thanks to Manfred Brandl [@manfredbrandl], Minh Nguyễn [@1ec5], and our many volunteers on Transifex for their work on this!<br/>
 _Check out the new help texts by opening the Help pane (shortcut <kbd>H</kbd>)._
 
-[#4646]: https://github.com/openstreetmap/iD/issues/4646
-[@manfredbrandl]: https://github.com/manfredbrandl
-[@1ec5]: https://github.com/1ec5
+
 
 #### :tada: New Features
 * Prevent self-intersecting lines and areas without a junction node ([#4646], [#4013], [#4602])
@@ -5459,16 +3658,7 @@ _Check out the new help texts by opening the Help pane (shortcut <kbd>H</kbd>)._
 * Draw directional cones on nodes that have a direction ([#3815], [#4602])
 * Add scroll zooming support to the OpenStreetCam viewer ([#4561])
 
-[#4646]: https://github.com/openstreetmap/iD/issues/4646
-[#4644]: https://github.com/openstreetmap/iD/issues/4644
-[#4602]: https://github.com/openstreetmap/iD/issues/4602
-[#4575]: https://github.com/openstreetmap/iD/issues/4575
-[#4561]: https://github.com/openstreetmap/iD/issues/4561
-[#4291]: https://github.com/openstreetmap/iD/issues/4291
-[#4013]: https://github.com/openstreetmap/iD/issues/4013
-[#3815]: https://github.com/openstreetmap/iD/issues/3815
-[#2211]: https://github.com/openstreetmap/iD/issues/2211
-[@willemarcel]: https://github.com/willemarcel
+
 
 #### :sparkles: Usability
 * Make Help pane slightly wider ([#4651])
@@ -5485,18 +3675,7 @@ _Check out the new help texts by opening the Help pane (shortcut <kbd>H</kbd>)._
 * Restyle uiDisclosures, larger text, svg expand/contract icon
 * When deleting final nodes from a way, pan to final node's location ([#4541])
 
-[#4651]: https://github.com/openstreetmap/iD/issues/4651
-[#4624]: https://github.com/openstreetmap/iD/issues/4624
-[#4613]: https://github.com/openstreetmap/iD/issues/4613
-[#4549]: https://github.com/openstreetmap/iD/issues/4549
-[#4546]: https://github.com/openstreetmap/iD/issues/4546
-[#4545]: https://github.com/openstreetmap/iD/issues/4545
-[#4541]: https://github.com/openstreetmap/iD/issues/4541
-[#4493]: https://github.com/openstreetmap/iD/issues/4493
-[#4271]: https://github.com/openstreetmap/iD/issues/4271
-[#3636]: https://github.com/openstreetmap/iD/issues/3636
-[#3003]: https://github.com/openstreetmap/iD/issues/3003
-[@nnodot]: https://github.com/nnodot
+
 
 
 #### :bug: Bugfixes
@@ -5515,24 +3694,7 @@ _Check out the new help texts by opening the Help pane (shortcut <kbd>H</kbd>)._
 * When reversing direction of a way, reverse `traffic_signals:direction` on children ([#4595])
 * Don't try to override capital letters entered in the `source=*` field  ([#4558])
 
-[#4706]: https://github.com/openstreetmap/iD/issues/4706
-[#4696]: https://github.com/openstreetmap/iD/issues/4696
-[#4688]: https://github.com/openstreetmap/iD/issues/4688
-[#4664]: https://github.com/openstreetmap/iD/issues/4664
-[#4658]: https://github.com/openstreetmap/iD/issues/4658
-[#4641]: https://github.com/openstreetmap/iD/issues/4641
-[#4630]: https://github.com/openstreetmap/iD/issues/4630
-[#4605]: https://github.com/openstreetmap/iD/issues/4605
-[#4596]: https://github.com/openstreetmap/iD/issues/4596
-[#4595]: https://github.com/openstreetmap/iD/issues/4595
-[#4589]: https://github.com/openstreetmap/iD/issues/4589
-[#4570]: https://github.com/openstreetmap/iD/issues/4570
-[#4558]: https://github.com/openstreetmap/iD/issues/4558
-[#4455]: https://github.com/openstreetmap/iD/issues/4455
-[#4553]: https://github.com/openstreetmap/iD/issues/4553
-[#4351]: https://github.com/openstreetmap/iD/issues/4351
-[@briandaviddavidson]: https://github.com/briandaviddavidson
-[@ajlomagno]: https://github.com/ajlomagno
+
 
 #### :earth_asia: Localization
 * Remove `addr:unit` from several local address formats:
@@ -5543,34 +3705,20 @@ _Check out the new help texts by opening the Help pane (shortcut <kbd>H</kbd>)._
 * Fix key shortcuts on non-Latin keyboard layouts (e.g. Cyrillic) ([#4618])
 * Improve int'l date/time strings on imagery and history tools ([#4594])
 
-[#4675]: https://github.com/openstreetmap/iD/issues/4675
-[#4671]: https://github.com/openstreetmap/iD/issues/4671
-[#4667]: https://github.com/openstreetmap/iD/issues/4667
-[#4618]: https://github.com/openstreetmap/iD/issues/4618
-[#4594]: https://github.com/openstreetmap/iD/issues/4594
-[@althio]: https://github.com/althio
-[@Andygol]: https://github.com/Andygol
+
 
 #### :hourglass: Performance
 * Faster uploading - only perform conflict check if the server returns "409 Conflict" ([#3056])
 * Avoid deferred fetching of OSM tiles at low zooms or with layer disabled ([#4572])
 * Optimise image files in `dist/` ([#4573], thanks [@grischard])
 
-[#4573]: https://github.com/openstreetmap/iD/issues/4573
-[#4572]: https://github.com/openstreetmap/iD/issues/4572
-[#3056]: https://github.com/openstreetmap/iD/issues/3056
-[@grischard]: https://github.com/grischard
+
 
 #### :mortar_board: Walkthrough / Help
 * Fixed typo in add playground walkthrough instruction: extra word "be" ([#4620], thanks [@SeanBarber])
 * Updated all the help content! ([#4468], [#4018], thanks [@manfredbrandl] and [@1ec5])
 
-[#4620]: https://github.com/openstreetmap/iD/issues/4620
-[#4468]: https://github.com/openstreetmap/iD/issues/4468
-[#4018]: https://github.com/openstreetmap/iD/issues/4018
-[@SeanBarber]: https://github.com/SeanBarber
-[@manfredbrandl]: https://github.com/manfredbrandl
-[@1ec5]: https://github.com/1ec5
+
 
 #### :rocket: Presets
 * Add preset for `highway=bus_guideway` ([#4638], [#4709], thanks [@bencostamagna])
@@ -5615,59 +3763,7 @@ _Check out the new help texts by opening the Help pane (shortcut <kbd>H</kbd>)._
 * Rename "News Kiosk" preset to simply "Kiosk" ([#4539], thanks [@tohaklim])
 * Add common fields to Telephone preset (operator, phone, fee, etc) ([#4535], thanks [@Vonter])
 
-[#4709]: https://github.com/openstreetmap/iD/issues/4709
-[#4708]: https://github.com/openstreetmap/iD/issues/4708
-[#4705]: https://github.com/openstreetmap/iD/issues/4705
-[#4700]: https://github.com/openstreetmap/iD/issues/4700
-[#4699]: https://github.com/openstreetmap/iD/issues/4699
-[#4697]: https://github.com/openstreetmap/iD/issues/4697
-[#4684]: https://github.com/openstreetmap/iD/issues/4684
-[#4682]: https://github.com/openstreetmap/iD/issues/4682
-[#4661]: https://github.com/openstreetmap/iD/issues/4661
-[#4647]: https://github.com/openstreetmap/iD/issues/4647
-[#4643]: https://github.com/openstreetmap/iD/issues/4643
-[#4638]: https://github.com/openstreetmap/iD/issues/4638
-[#4637]: https://github.com/openstreetmap/iD/issues/4637
-[#4634]: https://github.com/openstreetmap/iD/issues/4634
-[#4623]: https://github.com/openstreetmap/iD/issues/4623
-[#4612]: https://github.com/openstreetmap/iD/issues/4612
-[#4609]: https://github.com/openstreetmap/iD/issues/4609
-[#4602]: https://github.com/openstreetmap/iD/issues/4602
-[#4598]: https://github.com/openstreetmap/iD/issues/4598
-[#4590]: https://github.com/openstreetmap/iD/issues/4590
-[#4586]: https://github.com/openstreetmap/iD/issues/4586
-[#4585]: https://github.com/openstreetmap/iD/issues/4585
-[#4584]: https://github.com/openstreetmap/iD/issues/4584
-[#4581]: https://github.com/openstreetmap/iD/issues/4581
-[#4578]: https://github.com/openstreetmap/iD/issues/4578
-[#4571]: https://github.com/openstreetmap/iD/issues/4571
-[#4569]: https://github.com/openstreetmap/iD/issues/4569
-[#4568]: https://github.com/openstreetmap/iD/issues/4568
-[#4566]: https://github.com/openstreetmap/iD/issues/4566
-[#4563]: https://github.com/openstreetmap/iD/issues/4563
-[#4559]: https://github.com/openstreetmap/iD/issues/4559
-[#4555]: https://github.com/openstreetmap/iD/issues/4555
-[#4548]: https://github.com/openstreetmap/iD/issues/4548
-[#4539]: https://github.com/openstreetmap/iD/issues/4539
-[#4538]: https://github.com/openstreetmap/iD/issues/4538
-[#4535]: https://github.com/openstreetmap/iD/issues/4535
-[#4505]: https://github.com/openstreetmap/iD/issues/4505
-[#4437]: https://github.com/openstreetmap/iD/issues/4437
-[#4355]: https://github.com/openstreetmap/iD/issues/4355
-[#3815]: https://github.com/openstreetmap/iD/issues/3815
-[#3508]: https://github.com/openstreetmap/iD/issues/3508
-[#3041]: https://github.com/openstreetmap/iD/issues/3041
-[@bencostamagna]: https://github.com/bencostamagna
-[@planemad]: https://github.com/planemad
-[@JamesKingdom]: https://github.com/JamesKingdom
-[@ltog]: https://github.com/ltog
-[@willemarcel]: https://github.com/willemarcel
-[@nlehuby]: https://github.com/nlehuby
-[@lucymk]: https://github.com/lucymk
-[@abdeldjalil09]: https://github.com/abdeldjalil09
-[@tastrax]: https://github.com/tastrax
-[@tohaklim]: https://github.com/tohaklim
-[@Vonter]: https://github.com/Vonter
+
 
 
 # 2.5.1
@@ -5677,7 +3773,7 @@ _Check out the new help texts by opening the Help pane (shortcut <kbd>H</kbd>)._
 
 * Keep the highlighted feature selected when cancelling save mode ([#4407])
 
-[#4407]: https://github.com/openstreetmap/iD/issues/4407
+
 
 #### :bug: Bugfixes
 
@@ -5689,21 +3785,13 @@ _Check out the new help texts by opening the Help pane (shortcut <kbd>H</kbd>)._
 * Switch OpenStreetCam from `http` to `https` to avoid mixed content issues ([#4527])
 * Fix issue where Mapillary sitelink was always linking to first image viewed ([#4526])
 
-[#4533]: https://github.com/openstreetmap/iD/issues/4533
-[#4530]: https://github.com/openstreetmap/iD/issues/4530
-[#4527]: https://github.com/openstreetmap/iD/issues/4527
-[#4526]: https://github.com/openstreetmap/iD/issues/4526
-[#4473]: https://github.com/openstreetmap/iD/issues/4473
-[#4421]: https://github.com/openstreetmap/iD/issues/4421
-[#4288]: https://github.com/openstreetmap/iD/issues/4288
+
 
 #### :rocket: Presets
 
 * Add preset for `railway=light_rail` ([#4531], [#4528], thanks [@Vonter])
 
-[#4531]: https://github.com/openstreetmap/iD/issues/4531
-[#4528]: https://github.com/openstreetmap/iD/issues/4528
-[@Vonter]: https://github.com/Vonter
+
 
 
 # 2.5.0
@@ -5726,18 +3814,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 * Display name of gpx file in `imagery_used` instead of "Local GPX" ([#4440], [#4385], thanks [@ferdibiflator])
 * Remove lodash from build scripts ([#4447], [#4378], [@DzikowskiW])
 
-[editor-layer-index/issues/#371]: https://github.com/osmlab/editor-layer-index/issues/371
-[#4499]: https://github.com/openstreetmap/iD/issues/4499
-[#4447]: https://github.com/openstreetmap/iD/issues/4447
-[#4440]: https://github.com/openstreetmap/iD/issues/4440
-[#4439]: https://github.com/openstreetmap/iD/issues/4439
-[#4393]: https://github.com/openstreetmap/iD/issues/4393
-[#4385]: https://github.com/openstreetmap/iD/issues/4385
-[#4378]: https://github.com/openstreetmap/iD/issues/4378
-[#3795]: https://github.com/openstreetmap/iD/issues/3795
-[@marracci]: https://github.com/marracci
-[@ferdibiflator]: https://github.com/ferdibiflator
-[@DzikowskiW]: https://github.com/DzikowskiW
+
 
 #### :sparkles: Usability
 
@@ -5753,12 +3830,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 * Move "Zoom in to edit" button out of the way, and allow wheel events to pass through to the map ([#4482])
 * Better capitalization for "Zoom in", "Zoom out", "Edit now", "Zoom in to edit" ([#4492], thanks [@jaller94])
 
-[#4512]: https://github.com/openstreetmap/iD/issues/4512
-[#4492]: https://github.com/openstreetmap/iD/issues/4492
-[#4482]: https://github.com/openstreetmap/iD/issues/4482
-[#4471]: https://github.com/openstreetmap/iD/issues/4471
-[#3154]: https://github.com/openstreetmap/iD/issues/3154
-[@jaller94]: https://github.com/jaller94
+
 
 #### :bug: Bugfixes
 
@@ -5771,21 +3843,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 * Make sure `imagery_used` field is updated if a user cancels save and makes more edits ([#4445], [#4443], thanks [@moshen])
 * Fallback Area preset should preserve the `area=yes` tag ([#4424])
 
-[#4516]: https://github.com/openstreetmap/iD/issues/4516
-[#4479]: https://github.com/openstreetmap/iD/issues/4479
-[#4475]: https://github.com/openstreetmap/iD/issues/4475
-[#4474]: https://github.com/openstreetmap/iD/issues/4474
-[#4456]: https://github.com/openstreetmap/iD/issues/4456
-[#4445]: https://github.com/openstreetmap/iD/issues/4445
-[#4443]: https://github.com/openstreetmap/iD/issues/4443
-[#4424]: https://github.com/openstreetmap/iD/issues/4424
-[#4406]: https://github.com/openstreetmap/iD/issues/4406
-[#4276]: https://github.com/openstreetmap/iD/issues/4276
-[#3544]: https://github.com/openstreetmap/iD/issues/3544
-[#3058]: https://github.com/openstreetmap/iD/issues/3058
-[@octagonal]: https://github.com/octagonal
-[@ferdibiflator]: https://github.com/ferdibiflator
-[@moshen]: https://github.com/moshen
+
 
 #### :rocket: Presets
 
@@ -5818,59 +3876,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 * Add `substance=*` field to pipeline preset ([#4432], [#4430], thanks [@xmile1])
 * Add `place=plot` preset ([#4427], [#4423], thanks [@humanforklift])
 
-[#4517]: https://github.com/openstreetmap/iD/issues/4517
-[#4510]: https://github.com/openstreetmap/iD/issues/4510
-[#4507]: https://github.com/openstreetmap/iD/issues/4507
-[#4506]: https://github.com/openstreetmap/iD/issues/4506
-[#4504]: https://github.com/openstreetmap/iD/issues/4504
-[#4500]: https://github.com/openstreetmap/iD/issues/4500
-[#4441]: https://github.com/openstreetmap/iD/issues/4441
-[#4488]: https://github.com/openstreetmap/iD/issues/4488
-[#4490]: https://github.com/openstreetmap/iD/issues/4490
-[#4486]: https://github.com/openstreetmap/iD/issues/4486
-[#4491]: https://github.com/openstreetmap/iD/issues/4491
-[#4489]: https://github.com/openstreetmap/iD/issues/4489
-[#4485]: https://github.com/openstreetmap/iD/issues/4485
-[#4483]: https://github.com/openstreetmap/iD/issues/4483
-[#4480]: https://github.com/openstreetmap/iD/issues/4480
-[#4478]: https://github.com/openstreetmap/iD/issues/4478
-[#4476]: https://github.com/openstreetmap/iD/issues/4476
-[#4470]: https://github.com/openstreetmap/iD/issues/4470
-[#4469]: https://github.com/openstreetmap/iD/issues/4469
-[#4404]: https://github.com/openstreetmap/iD/issues/4404
-[#4373]: https://github.com/openstreetmap/iD/issues/4373
-[#4467]: https://github.com/openstreetmap/iD/issues/4467
-[#4466]: https://github.com/openstreetmap/iD/issues/4466
-[#4464]: https://github.com/openstreetmap/iD/issues/4464
-[#4462]: https://github.com/openstreetmap/iD/issues/4462
-[#4442]: https://github.com/openstreetmap/iD/issues/4442
-[#4461]: https://github.com/openstreetmap/iD/issues/4461
-[#4460]: https://github.com/openstreetmap/iD/issues/4460
-[#4458]: https://github.com/openstreetmap/iD/issues/4458
-[#4451]: https://github.com/openstreetmap/iD/issues/4451
-[#4449]: https://github.com/openstreetmap/iD/issues/4449
-[#4448]: https://github.com/openstreetmap/iD/issues/4448
-[#4444]: https://github.com/openstreetmap/iD/issues/4444
-[#4438]: https://github.com/openstreetmap/iD/issues/4438
-[#4436]: https://github.com/openstreetmap/iD/issues/4436
-[#4432]: https://github.com/openstreetmap/iD/issues/4432
-[#4430]: https://github.com/openstreetmap/iD/issues/4430
-[#4427]: https://github.com/openstreetmap/iD/issues/4427
-[#4423]: https://github.com/openstreetmap/iD/issues/4423
-[#3387]: https://github.com/openstreetmap/iD/issues/3387
-[@willemarcel]: https://github.com/willemarcel
-[@JamesKingdom]: https://github.com/JamesKingdom
-[@simonpoole]: https://github.com/simonpoole
-[@tyrasd]: https://github.com/tyrasd
-[@Nmargolis]: https://github.com/Nmargolis
-[@YuliyaVeklicheva]: https://github.com/YuliyaVeklicheva
-[@ToeBee]: https://github.com/ToeBee
-[@AndreasHae]: https://github.com/AndreasHae
-[@DzikowskiW]: https://github.com/DzikowskiW
-[@manfredbrandl]: https://github.com/manfredbrandl
-[@haroldb]: https://github.com/haroldb
-[@xmile1]: https://github.com/xmile1
-[@humanforklift]: https://github.com/humanforklift
+
 
 
 # 2.4.3
@@ -5881,23 +3887,19 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 * Include unicode characters in hashtag matching ([#4398], [#4419], thanks [@mojodna])
 * Allow common punctuation to split hashtags ([#4412], thanks [@mojodna])
 
-[#4419]: https://github.com/openstreetmap/iD/issues/4419
-[#4412]: https://github.com/openstreetmap/iD/issues/4412
-[#4398]: https://github.com/openstreetmap/iD/issues/4398
-[@mojodna]: https://github.com/mojodna
+
 
 #### :mortar_board: Walkthrough / Help
 
 * Make sure "Add Field" scrolls into view during "Area" chapter of walkthrough ([#4417])
 
-[#4417]: https://github.com/openstreetmap/iD/issues/4417
+
 
 #### :rocket: Presets
 
 * Refined playground presets terms for Spring Rider and Play Roundabout ([#4415], thanks, [@1ec5])
 
-[#4415]: https://github.com/openstreetmap/iD/issues/4415
-[@1ec5]: https://github.com/1ec5
+
 
 
 # 2.4.2
@@ -5913,15 +3915,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 * Allow universal fields to have default values (related: [#4323])
 * Display vintage and other metadata in the Background Panel for Esri World Imagery layer ([#4335], thanks [@jgravois])
 
-[#4384]: https://github.com/openstreetmap/iD/issues/4384
-[#4383]: https://github.com/openstreetmap/iD/issues/4383
-[#4350]: https://github.com/openstreetmap/iD/issues/4350
-[#4346]: https://github.com/openstreetmap/iD/issues/4346
-[#4335]: https://github.com/openstreetmap/iD/issues/4335
-[#4323]: https://github.com/openstreetmap/iD/issues/4323
-[#2904]: https://github.com/openstreetmap/iD/issues/2904
-[@iandees]: https://github.com/iandees
-[@jgravois]: https://github.com/jgravois
+
 
 #### :sparkles: Usability
 
@@ -5933,15 +3927,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 * Move "zoom to edit" button on top of map, allowing search when zoomed out ([#4279], [#3679], thanks [@leegenes])
 * Sort preset with higher priority in preset list when search matches name exactly ([#4325])
 
-[#4396]: https://github.com/openstreetmap/iD/issues/4396
-[#4358]: https://github.com/openstreetmap/iD/issues/4358
-[#4353]: https://github.com/openstreetmap/iD/issues/4353
-[#4325]: https://github.com/openstreetmap/iD/issues/4325
-[#4292]: https://github.com/openstreetmap/iD/issues/4292
-[#4279]: https://github.com/openstreetmap/iD/issues/4279
-[#3679]: https://github.com/openstreetmap/iD/issues/3679
-[@arka-nitd]: https://github.com/arka-nitd
-[@leegenes]: https://github.com/leegenes
+
 
 #### :bug: Bugfixes
 
@@ -5959,24 +3945,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 * Avoid requesting blank tiles from Esri World Imagery ([#4327], thanks [@jgravois])
 * Fix reflect actions to be invertable ([#4300], [#4328], thanks [@leegenes])
 
-[#4412]: https://github.com/openstreetmap/iD/issues/4412
-[#4402]: https://github.com/openstreetmap/iD/issues/4402
-[#4354]: https://github.com/openstreetmap/iD/issues/4354
-[#4349]: https://github.com/openstreetmap/iD/issues/4349
-[#4348]: https://github.com/openstreetmap/iD/issues/4348
-[#4328]: https://github.com/openstreetmap/iD/issues/4328
-[#4327]: https://github.com/openstreetmap/iD/issues/4327
-[#4304]: https://github.com/openstreetmap/iD/issues/4304
-[#4303]: https://github.com/openstreetmap/iD/issues/4303
-[#4300]: https://github.com/openstreetmap/iD/issues/4300
-[#4289]: https://github.com/openstreetmap/iD/issues/4289
-[#4282]: https://github.com/openstreetmap/iD/issues/4282
-[#4209]: https://github.com/openstreetmap/iD/issues/4209
-[#4023]: https://github.com/openstreetmap/iD/issues/4023
-[@jleh]: https://github.com/jleh
-[@pwelby]: https://github.com/pwelby
-[@jgravois]: https://github.com/jgravois
-[@leegenes]: https://github.com/leegenes
+
 
 #### :earth_asia: Localization
 
@@ -5985,13 +3954,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 * Remove `addr:unit` from Germany, Austria, Switzerland addresses fields ([#4301], thanks [@manfredbrandl])
 * Remove `addr:unit` from Brazil addresses field ([#4284], thanks [@willemarcel])
 
-[#4328]: https://github.com/openstreetmap/iD/issues/4328
-[#4314]: https://github.com/openstreetmap/iD/issues/4314
-[#4301]: https://github.com/openstreetmap/iD/issues/4301
-[#4284]: https://github.com/openstreetmap/iD/issues/4284
-[@Teiron]: https://github.com/Teiron
-[@manfredbrandl]: https://github.com/manfredbrandl
-[@willemarcel]: https://github.com/willemarcel
+
 
 #### :rocket: Presets
 
@@ -6020,41 +3983,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 * Allow Defibrillator preset to be placed on vertex geometry (e.g. along walls) ([#4290], [#4287] thanks [@JamesKingdom])
 * Add name field back to Wood preset ([#4200], thanks [@JamesKingdom])
 
-[#4410]: https://github.com/openstreetmap/iD/issues/4410
-[#4400]: https://github.com/openstreetmap/iD/issues/4400
-[#4388]: https://github.com/openstreetmap/iD/issues/4388
-[#4375]: https://github.com/openstreetmap/iD/issues/4375
-[#4374]: https://github.com/openstreetmap/iD/issues/4374
-[#4367]: https://github.com/openstreetmap/iD/issues/4367
-[#4366]: https://github.com/openstreetmap/iD/issues/4366
-[#4365]: https://github.com/openstreetmap/iD/issues/4365
-[#4363]: https://github.com/openstreetmap/iD/issues/4363
-[#4357]: https://github.com/openstreetmap/iD/issues/4357
-[#4352]: https://github.com/openstreetmap/iD/issues/4352
-[#4347]: https://github.com/openstreetmap/iD/issues/4347
-[#4337]: https://github.com/openstreetmap/iD/issues/4337
-[#4332]: https://github.com/openstreetmap/iD/issues/4332
-[#4331]: https://github.com/openstreetmap/iD/issues/4331
-[#4330]: https://github.com/openstreetmap/iD/issues/4330
-[#4329]: https://github.com/openstreetmap/iD/issues/4329
-[#4323]: https://github.com/openstreetmap/iD/issues/4323
-[#4319]: https://github.com/openstreetmap/iD/issues/4319
-[#4318]: https://github.com/openstreetmap/iD/issues/4318
-[#4309]: https://github.com/openstreetmap/iD/issues/4309
-[#4299]: https://github.com/openstreetmap/iD/issues/4299
-[#4298]: https://github.com/openstreetmap/iD/issues/4298
-[#4296]: https://github.com/openstreetmap/iD/issues/4296
-[#4290]: https://github.com/openstreetmap/iD/issues/4290
-[#4287]: https://github.com/openstreetmap/iD/issues/4287
-[#4275]: https://github.com/openstreetmap/iD/issues/4275
-[#4260]: https://github.com/openstreetmap/iD/issues/4260
-[#4200]: https://github.com/openstreetmap/iD/issues/4200
-[#3589]: https://github.com/openstreetmap/iD/issues/3589
-[@TheGreenToaster]: https://github.com/TheGreenToaster
-[@JamesKingdom]: https://github.com/JamesKingdom
-[@willemarcel]: https://github.com/willemarcel
-[@boothym]: https://github.com/boothym
-[@simonpoole]: https://github.com/simonpoole
+
 
 
 # 2.4.1
@@ -6064,7 +3993,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 
 * Write post-save count, not pre-save count to the changesets_count tag ([#4283])
 
-[#4283]: https://github.com/openstreetmap/iD/issues/4283
+
 
 
 # 2.4.0
@@ -6094,19 +4023,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
   * `uiField` can now be used anywhere, not just inside the preset editor
   * Rename `uiPreset` -> `uiPresetEditor` (consistent with raw tag editor, raw member editor, etc)
 
-[#4237]: https://github.com/openstreetmap/iD/issues/4237
-[#4235]: https://github.com/openstreetmap/iD/issues/4235
-[#4133]: https://github.com/openstreetmap/iD/issues/4133
-[#4223]: https://github.com/openstreetmap/iD/issues/4223
-[#4214]: https://github.com/openstreetmap/iD/issues/4214
-[#4210]: https://github.com/openstreetmap/iD/issues/4210
-[#4201]: https://github.com/openstreetmap/iD/issues/4201
-[#4200]: https://github.com/openstreetmap/iD/issues/4200
-[#3968]: https://github.com/openstreetmap/iD/issues/3968
-[#3914]: https://github.com/openstreetmap/iD/issues/3914
-[#2834]: https://github.com/openstreetmap/iD/issues/2834
-[@kepta]: https://github.com/kepta
-[@JamesKingdom]: https://github.com/JamesKingdom
+
 
 #### :sparkles: Usability
 
@@ -6118,12 +4035,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Render railway platform slightly different from sidewalk ([#4182])
 * Treat a few special tags as areas even in the absence of a proper `area=yes` tag. ([#4194])
 
-[#4230]: https://github.com/openstreetmap/iD/issues/4230
-[#4207]: https://github.com/openstreetmap/iD/issues/4207
-[#4194]: https://github.com/openstreetmap/iD/issues/4194
-[#4190]: https://github.com/openstreetmap/iD/issues/4190
-[#4182]: https://github.com/openstreetmap/iD/issues/4182
-[#4042]: https://github.com/openstreetmap/iD/issues/4042
+
 
 #### :bug: Bugfixes
 
@@ -6131,9 +4043,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Return to browse mode when zooming out beyond edit limit ([#4184])
 * Make sure bool url params actually contain value 'true' ([#4222])
 
-[#4232]: https://github.com/openstreetmap/iD/issues/4232
-[#4222]: https://github.com/openstreetmap/iD/issues/4222
-[#4184]: https://github.com/openstreetmap/iD/issues/4184
+
 
 #### :earth_asia: Localization
 
@@ -6142,8 +4052,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Fix RTL styling for info panel close buttons
 * Fix RTL styling for spin control and form buttons
 
-[#4248]: https://github.com/openstreetmap/iD/issues/4248
-[@Stenive]: https://github.com/Stenive
+
 
 #### :hourglass: Performance
 
@@ -6152,8 +4061,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
   * Schedule parsing as a low priority task
   * Schedule redraws during idle browser times
 
-[#4259]: https://github.com/openstreetmap/iD/issues/4259
-[@kepta]: https://github.com/kepta
+
 
 #### :rocket: Presets
 
@@ -6176,29 +4084,9 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Replace generic "Reference" field with more specific named fields ([#4180], thanks [@JamesKingdom])
 * Add preset for Telecom Manhole ([#4185], thanks [@JamesKingdom])
 
-[#4277]: https://github.com/openstreetmap/iD/issues/4277
-[#4260]: https://github.com/openstreetmap/iD/issues/4260
-[#4255]: https://github.com/openstreetmap/iD/issues/4255
-[#4256]: https://github.com/openstreetmap/iD/issues/4256
-[#4251]: https://github.com/openstreetmap/iD/issues/4251
-[#4250]: https://github.com/openstreetmap/iD/issues/4250
-[#4236]: https://github.com/openstreetmap/iD/issues/4236
-[#4226]: https://github.com/openstreetmap/iD/issues/4226
-[#4224]: https://github.com/openstreetmap/iD/issues/4224
-[#4219]: https://github.com/openstreetmap/iD/issues/4219
-[#4217]: https://github.com/openstreetmap/iD/issues/4217
-[#4215]: https://github.com/openstreetmap/iD/issues/4215
-[#4196]: https://github.com/openstreetmap/iD/issues/4196
-[#4192]: https://github.com/openstreetmap/iD/issues/4192
-[#4191]: https://github.com/openstreetmap/iD/issues/4191
-[#4185]: https://github.com/openstreetmap/iD/issues/4185
-[#4180]: https://github.com/openstreetmap/iD/issues/4180
 
-[@JamesKingdom]: https://github.com/JamesKingdom
-[@M1dgard]: https://github.com/M1dgard
-[@willemarcel]: https://github.com/willemarcel
-[@boothym]: https://github.com/boothym
-[@Stalfur]: https://github.com/Stalfur
+
+
 
 
 # 2.3.2
@@ -6209,10 +4097,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Display capture date on the attribution line at bottom of Mapillary viewer ([#4156])
 * Highlight detected objects and signs in Mapillary images ([#3772], [#4148], thanks [@kepta])
 
-[#4156]: https://github.com/openstreetmap/iD/issues/4156
-[#4148]: https://github.com/openstreetmap/iD/issues/4148
-[#3772]: https://github.com/openstreetmap/iD/issues/3772
-[@kepta]: https://github.com/kepta
+
 
 #### :sparkles: Usability
 
@@ -6223,10 +4108,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Render `railway=platform` like sidewalks and footpaths
 * Place pasted point at cursor (not offset) when pasting while dragging the map ([#4155])
 
-[#4167]: https://github.com/openstreetmap/iD/issues/4167
-[#4159]: https://github.com/openstreetmap/iD/issues/4159
-[#4157]: https://github.com/openstreetmap/iD/issues/4157
-[#4155]: https://github.com/openstreetmap/iD/issues/4155
+
 
 #### :bug: Bugfixes
 
@@ -6234,11 +4116,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Remember the chosen custom background when set by url ([#4162], [#4165], thanks [@pgiraud])
 * Fix: <kbd>⌘⇧B</kbd> / <kbd>Ctrl+Shift+B</kbd> should not also swap the background like <kbd>⌘B</kbd> / <kbd>Ctrl+B</kbd> ([#4153])
 
-[#4165]: https://github.com/openstreetmap/iD/issues/4165
-[#4162]: https://github.com/openstreetmap/iD/issues/4162
-[#4159]: https://github.com/openstreetmap/iD/issues/4159
-[#4153]: https://github.com/openstreetmap/iD/issues/4153
-[@pgiraud]: https://github.com/pgiraud
+
 
 #### :rocket: Presets
 
@@ -6249,12 +4127,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Change caption for content field from "Contents" to "Content" ([#4169])
 * Add presets for Windmill and Watermill ([#4168])
 
-[#4175]: https://github.com/openstreetmap/iD/issues/4175
-[#4172]: https://github.com/openstreetmap/iD/issues/4172
-[#4169]: https://github.com/openstreetmap/iD/issues/4169
-[#4168]: https://github.com/openstreetmap/iD/issues/4168
-[#4149]: https://github.com/openstreetmap/iD/issues/4149
-[@JamesKingdom]: https://github.com/JamesKingdom
+
 
 
 # 2.3.1
@@ -6269,8 +4142,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Don't lose the imagery offset when switching between "Custom" and another background imagery layer ([#3982])
 * After splitting a way, update all matching relation members (fix for broken u-turn relations) ([#4140])
 
-[#3982]: https://github.com/openstreetmap/iD/issues/3982
-[#4140]: https://github.com/openstreetmap/iD/issues/4140
+
 
 
 # 2.3.0
@@ -6290,12 +4162,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
   * <kbd>⌘⇧B</kbd> / <kbd>Ctrl+Shift+B</kbd> : Toggle Background Panel<br/>
   Show imagery age if available ([#2492]), and toggle tile debugging
 
-[#4121]: https://github.com/openstreetmap/iD/issues/4121
-[#3761]: https://github.com/openstreetmap/iD/issues/3761
-[#2515]: https://github.com/openstreetmap/iD/issues/2515
-[#2492]: https://github.com/openstreetmap/iD/issues/2492
-[#2273]: https://github.com/openstreetmap/iD/issues/2273
-[#2183]: https://github.com/openstreetmap/iD/issues/2183
+
 
 #### :sparkles: Usability
 
@@ -6304,9 +4171,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Adjust imagery attribution colors for better visibility ([#4047])
 * Show background imagery icons from [editor-layer-index](https://github.com/osmlab/editor-layer-index), upgrade Bing icon and others
 
-[#4117]: https://github.com/openstreetmap/iD/issues/4117
-[#4047]: https://github.com/openstreetmap/iD/issues/4047
-[#3887]: https://github.com/openstreetmap/iD/issues/3887
+
 
 #### :bug: Bugfixes
 
@@ -6314,26 +4179,21 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Don't break undo/redo when performing point-area merge ([#4113])
 * Fix wikidata clearing, failed lookups when feature no longer selected ([#3987], [#3684])
 
-[#4114]: https://github.com/openstreetmap/iD/issues/4114
-[#4113]: https://github.com/openstreetmap/iD/issues/4113
-[#3987]: https://github.com/openstreetmap/iD/issues/3987
-[#3684]: https://github.com/openstreetmap/iD/issues/3684
+
 
 #### :earth_asia: Localization
 
 * Support localization of more keyboard shortcuts ([#4081])
 * Support localization of background imagery names, descriptions, and attribution text ([#4034])
 
-[#4081]: https://github.com/openstreetmap/iD/issues/4081
-[#4034]: https://github.com/openstreetmap/iD/issues/4034
+
 
 #### :mortar_board: Walkthrough / Help
 
 * Add `walkthrough=true` url parameter to auto-start the walkthrough ([#4111])
 * Mention keyboard shortcuts <kbd>?</kbd> at the end of the walkthrough ([#4107])
 
-[#4111]: https://github.com/openstreetmap/iD/issues/4111
-[#4107]: https://github.com/openstreetmap/iD/issues/4107
+
 
 #### :rocket: Presets
 
@@ -6341,8 +4201,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Add presets for manholes and storm drains
 * Add preset for `amenity=scrapyard` ([#3387])
 
-[#4122]: https://github.com/openstreetmap/iD/issues/4122
-[#3387]: https://github.com/openstreetmap/iD/issues/3387
+
 
 
 # 2.2.2
@@ -6354,19 +4213,15 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * iD editor translation project on Transifex has moved to the [OpenStreetMap organization](https://www.transifex.com/openstreetmap/)
 * New Keyboard Shortcuts help screen, press <kbd>?</kbd> to view ([#3791], [#1481], thanks [@ajithranka] and [@kepta])
 
-[#4050]: https://github.com/openstreetmap/iD/issues/4050
-[#3791]: https://github.com/openstreetmap/iD/issues/3791
-[#1481]: https://github.com/openstreetmap/iD/issues/1481
 
-[@nickplesha]: https://github.com/nickplesha
-[@ajithranka]: https://github.com/ajithranka
-[@kepta]: https://github.com/kepta
+
+
 
 #### :sparkles: Usability
 
 * Don't omit tags (e.g. `address`, `name`) when copy/pasting ([#4067])
 
-[#4067]: https://github.com/openstreetmap/iD/issues/4067
+
 
 #### :bug: Bugfixes
 
@@ -6378,15 +4233,9 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Improved keyboard shortcut key detection ([#3572], thanks [@tyrasd])
 * Improved wiki documentation lookup for certain presets ([#4059])
 
-[#4099]: https://github.com/openstreetmap/iD/issues/4099
-[#4104]: https://github.com/openstreetmap/iD/issues/4104
-[#4081]: https://github.com/openstreetmap/iD/issues/4081
-[#4096]: https://github.com/openstreetmap/iD/issues/4096
-[#3973]: https://github.com/openstreetmap/iD/issues/3973
-[#3572]: https://github.com/openstreetmap/iD/issues/3572
-[#4059]: https://github.com/openstreetmap/iD/issues/4059
 
-[@tyrasd]: https://github.com/tyrasd
+
+
 
 #### :rocket: Presets
 
@@ -6397,12 +4246,9 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Adding "football" terms to soccer pitch ([#4052], thanks [@JamesKingdom])
 * Rename "Curb Ramp" to "Curb"
 
-[#4085]: https://github.com/openstreetmap/iD/issues/4085
-[#4068]: https://github.com/openstreetmap/iD/issues/4068
-[#4049]: https://github.com/openstreetmap/iD/issues/4049
-[#4052]: https://github.com/openstreetmap/iD/issues/4052
 
-[@JamesKingdom]: https://github.com/JamesKingdom
+
+
 
 
 # 2.2.1
@@ -6414,11 +4260,9 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Omit global search UI when no geocoder ([#4032], thanks [@mojodna])
 * Don't replace spaces with underscores in `opening_hours` field ([#4030])
 
-[#4036]: https://github.com/openstreetmap/iD/issues/4036
-[#4030]: https://github.com/openstreetmap/iD/issues/4030
-[#4032]: https://github.com/openstreetmap/iD/issues/4032
 
-[@mojodna]: https://github.com/mojodna
+
+
 
 
 # 2.2.0
@@ -6464,23 +4308,9 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Replace radial menu with a context menu ([#3671], [#3753], thanks [@kepta], [@rasagy], [@samanpwbb], [@slhh])
   * :warning: users may continue to use the radial menu by setting a flag in localStorage, but it is deprecated and will be removed eventually
 
-[#3933]: https://github.com/openstreetmap/iD/issues/3933
-[#3908]: https://github.com/openstreetmap/iD/issues/3908
-[#3947]: https://github.com/openstreetmap/iD/issues/3947
-[#3912]: https://github.com/openstreetmap/iD/issues/3912
-[#2087]: https://github.com/openstreetmap/iD/issues/2087
-[#3911]: https://github.com/openstreetmap/iD/issues/3911
-[#3905]: https://github.com/openstreetmap/iD/issues/3905
-[#2633]: https://github.com/openstreetmap/iD/issues/2633
-[#3898]: https://github.com/openstreetmap/iD/issues/3898
-[#1856]: https://github.com/openstreetmap/iD/issues/1856
-[#3671]: https://github.com/openstreetmap/iD/issues/3671
-[#3753]: https://github.com/openstreetmap/iD/issues/3753
 
-[@kepta]: https://github.com/kepta
-[@rasagy]: https://github.com/rasagy
-[@samanpwbb]: https://github.com/samanpwbb
-[@slhh]: https://github.com/slhh
+
+
 
 #### :sparkles: Usability
 * Swap position of increment/decrement buttons ([#4027], thanks [@willemarcel])
@@ -6502,29 +4332,9 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Add `utilNoAuto` to remove autocorrect/spellcheck features from inputs ([#3839])
 * Show flash messages on bottom bar when user performs key shortcuts ([#1734], [#3753])
 
-[#4027]: https://github.com/openstreetmap/iD/issues/4027
-[#3227]: https://github.com/openstreetmap/iD/issues/3227
-[#3530]: https://github.com/openstreetmap/iD/issues/3530
-[#3993]: https://github.com/openstreetmap/iD/issues/3993
-[#3536]: https://github.com/openstreetmap/iD/issues/3536
-[#3824]: https://github.com/openstreetmap/iD/issues/3824
-[#3739]: https://github.com/openstreetmap/iD/issues/3739
-[#3960]: https://github.com/openstreetmap/iD/issues/3960
-[#3956]: https://github.com/openstreetmap/iD/issues/3956
-[#2914]: https://github.com/openstreetmap/iD/issues/2914
-[#3448]: https://github.com/openstreetmap/iD/issues/3448
-[#3894]: https://github.com/openstreetmap/iD/issues/3894
-[#3700]: https://github.com/openstreetmap/iD/issues/3700
-[#3569]: https://github.com/openstreetmap/iD/issues/3569
-[#3060]: https://github.com/openstreetmap/iD/issues/3060
-[#3910]: https://github.com/openstreetmap/iD/issues/3910
-[#3029]: https://github.com/openstreetmap/iD/issues/3029
-[#3839]: https://github.com/openstreetmap/iD/issues/3839
-[#1734]: https://github.com/openstreetmap/iD/issues/1734
-[#3753]: https://github.com/openstreetmap/iD/issues/3753
 
-[@willemarcel]: https://github.com/willemarcel
-[@51114u9]: https://github.com/51114u9
+
+
 
 #### :bug: Bugfixes
 * Fix field reference buttons ([#4008])
@@ -6544,26 +4354,9 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Fix child-parent order of relations when uploading changeset to avoid server error ([#3871], [#3208], thanks [@mstn])
 * Fix gitignore from ignoring new images in `/dist/img` ([#3854], thanks [@MindFreeze])
 
-[#4008]: https://github.com/openstreetmap/iD/issues/4008
-[#3996]: https://github.com/openstreetmap/iD/issues/3996
-[#4006]: https://github.com/openstreetmap/iD/issues/4006
-[#2921]: https://github.com/openstreetmap/iD/issues/2921
-[#3991]: https://github.com/openstreetmap/iD/issues/3991
-[#3737]: https://github.com/openstreetmap/iD/issues/3737
-[#3965]: https://github.com/openstreetmap/iD/issues/3965
-[#3950]: https://github.com/openstreetmap/iD/issues/3950
-[#2024]: https://github.com/openstreetmap/iD/issues/2024
-[#3899]: https://github.com/openstreetmap/iD/issues/3899
-[#3844]: https://github.com/openstreetmap/iD/issues/3844
-[#3874]: https://github.com/openstreetmap/iD/issues/3874
-[#3851]: https://github.com/openstreetmap/iD/issues/3851
-[#3871]: https://github.com/openstreetmap/iD/issues/3871
-[#3208]: https://github.com/openstreetmap/iD/issues/3208
-[#3854]: https://github.com/openstreetmap/iD/issues/3854
 
-[@MindFreeze]: https://github.com/MindFreeze
-[@mstn]: https://github.com/mstn
-[@slibby]: https://github.com/slibby
+
+
 
 #### :earth_asia: Localization
 * Add Chinese (PRC) Address and Phone Number formats ([#4024], [#4025], thanks [@Stenive])
@@ -6572,23 +4365,15 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Support Arabic vowel signs, include Thaana and Hebrew in generic RTL fix ([#3923], thanks [@mapmeld])
 * Better detection of culture-specific locale in language list ([#3842])
 
-[#4024]: https://github.com/openstreetmap/iD/issues/4024
-[#4025]: https://github.com/openstreetmap/iD/issues/4025
-[#3995]: https://github.com/openstreetmap/iD/issues/3995
-[#3997]: https://github.com/openstreetmap/iD/issues/3997
-[#3923]: https://github.com/openstreetmap/iD/issues/3923
-[#3842]: https://github.com/openstreetmap/iD/issues/3842
 
-[@Stenive]: https://github.com/Stenive
-[@Andygol]: https://github.com/Andygol
-[@mapmeld]: https://github.com/mapmeld
+
+
 
 #### :hourglass: Performance
 * Taginfo performance improvements ([#3955], [#3975])
 * Only draw midpoints in select mode
 
-[#3955]: https://github.com/openstreetmap/iD/issues/3955
-[#3975]: https://github.com/openstreetmap/iD/issues/3975
+
 
 #### :mortar_board: Walkthrough / Help - major updates! ([#3921])
 * Add training for modifying geometry, moving nodes, reshaping ways ([#2381])
@@ -6601,14 +4386,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Walkthrough is now fully localizable, including addresses!
 * More gentle introduction to jargon
 
-[#3921]: https://github.com/openstreetmap/iD/issues/3921
-[#2381]: https://github.com/openstreetmap/iD/issues/2381
-[#3067]: https://github.com/openstreetmap/iD/issues/3067
-[#3068]: https://github.com/openstreetmap/iD/issues/3068
-[#3085]: https://github.com/openstreetmap/iD/issues/3085
-[#3680]: https://github.com/openstreetmap/iD/issues/3680
-[#3925]: https://github.com/openstreetmap/iD/issues/3925
-[#2386]: https://github.com/openstreetmap/iD/issues/2386
+
 
 #### :rocket: Presets
 * Adjust field ordering of highway preset fields, move surface and lanes up ([#4026], thanks [@willemarcel])
@@ -6641,28 +4419,9 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Add preset for landuse=railway ([#3853])
 * Add preset for landuse=harbour ([#3653])
 
-[#4026]: https://github.com/openstreetmap/iD/issues/4026
-[#3983]: https://github.com/openstreetmap/iD/issues/3983
-[#974-comment]: https://github.com/openstreetmap/iD/issues/974#issuecomment-296665907
-[#3629]: https://github.com/openstreetmap/iD/issues/3629
-[#3949]: https://github.com/openstreetmap/iD/issues/3949
-[#3962]: https://github.com/openstreetmap/iD/issues/3962
-[#3651]: https://github.com/openstreetmap/iD/issues/3651
-[#3833]: https://github.com/openstreetmap/iD/issues/3833
-[#3890]: https://github.com/openstreetmap/iD/issues/3890
-[#3900]: https://github.com/openstreetmap/iD/issues/3900
-[#3809]: https://github.com/openstreetmap/iD/issues/3809
-[#3439]: https://github.com/openstreetmap/iD/issues/3439
-[#3535]: https://github.com/openstreetmap/iD/issues/3535
-[#3864]: https://github.com/openstreetmap/iD/issues/3864
-[#3677]: https://github.com/openstreetmap/iD/issues/3677
-[#3630]: https://github.com/openstreetmap/iD/issues/3630
-[#3853]: https://github.com/openstreetmap/iD/issues/3853
-[#3653]: https://github.com/openstreetmap/iD/issues/3653
 
-[@willemarcel]: https://github.com/willemarcel
-[@ToastHawaii]: https://github.com/ToastHawaii
-[@JamesKingdom]: https://github.com/JamesKingdom
+
+
 
 
 # 2.1.3
@@ -6673,11 +4432,9 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Remove autocorrect/spellcheck features from inputs ([#3839])
 * Better detection of culture-specific locale in language list ([#3842])
 
-[#3858]: https://github.com/openstreetmap/iD/issues/3858
-[#3839]: https://github.com/openstreetmap/iD/issues/3839
-[#3842]: https://github.com/openstreetmap/iD/issues/3842
 
-[@tyrasd]: https://github.com/tyrasd
+
+
 
 #### :rocket: Presets
 * Adjust aeroway runway, taxiway, apron styles for visibility ([#3845])
@@ -6685,12 +4442,9 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Update UK/IE placeholders ([#3837], thanks [@boothym])
 * Add social_facility=nursing_home preset
 
-[#3845]: https://github.com/openstreetmap/iD/issues/3845
-[#3849]: https://github.com/openstreetmap/iD/issues/3849
-[#3837]: https://github.com/openstreetmap/iD/issues/3837
 
-[@willemarcel]: https://github.com/willemarcel
-[@boothym]: https://github.com/boothym
+
+
 
 
 # 2.1.2
@@ -6699,7 +4453,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 #### :bug: Bugfixes
 * Fix point dragging regression ([#3829])
 
-[#3829]: https://github.com/openstreetmap/iD/issues/3829
+
 
 
 # 2.1.1
@@ -6710,18 +4464,16 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Fix map centering for custom KML and GeoJSON layers ([#3826], thanks [@tyrasd])
 * Fix regression in GPX layer loading from URL ([#3820], thanks [@tyrasd])
 
-[#3824]: https://github.com/openstreetmap/iD/issues/3824
-[#3826]: https://github.com/openstreetmap/iD/issues/3826
-[#3820]: https://github.com/openstreetmap/iD/issues/3820
 
-[@tyrasd]: https://github.com/tyrasd
+
+
 
 #### :rocket: Presets
 * Add presets NoExit, Watch Shop, add Living Street to Road category ([#3821], thanks [@willemarcel])
 
-[#3821]: https://github.com/openstreetmap/iD/issues/3821
 
-[@willemarcel]: https://github.com/willemarcel
+
+
 
 
 # 2.1.0
@@ -6741,24 +4493,9 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Add Reflect Long / Reflect Short operations ([#3555], [#3375], thanks [@Psigio])
 * Improved address field customization, allow country-specific placeholders ([#3643], thanks [@Natsuyasumi])
 
-[#3811]: https://github.com/openstreetmap/iD/issues/3811
-[#3755]: https://github.com/openstreetmap/iD/issues/3755
-[#3764]: https://github.com/openstreetmap/iD/issues/3764
-[#3024]: https://github.com/openstreetmap/iD/issues/3024
-[#3756]: https://github.com/openstreetmap/iD/issues/3756
-[#3573]: https://github.com/openstreetmap/iD/issues/3573
-[#3255]: https://github.com/openstreetmap/iD/issues/3255
-[#3754]: https://github.com/openstreetmap/iD/issues/3754
-[#3659]: https://github.com/openstreetmap/iD/issues/3659
-[#3555]: https://github.com/openstreetmap/iD/issues/3555
-[#3375]: https://github.com/openstreetmap/iD/issues/3375
-[#3643]: https://github.com/openstreetmap/iD/issues/3643
 
-[@mertemin]: https://github.com/mertemin
-[@kepta]: https://github.com/kepta
-[@ajithranka]: https://github.com/ajithranka
-[@Psigio]: https://github.com/Psigio
-[@Natsuyasumi]: https://github.com/Natsuyasumi
+
+
 
 #### :sparkles: Usability
 * Warn if user creates an untagged relation ([#3812])
@@ -6771,15 +4508,9 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Use 'pt' wiki pages in 'pt-BR' iD localization ([#3776])
 * User must select nodes before dragging them ([#3739], thanks [@edpop])
 
-[#3812]: https://github.com/openstreetmap/iD/issues/3812
-[#3777]: https://github.com/openstreetmap/iD/issues/3777
-[#2378]: https://github.com/openstreetmap/iD/issues/2378
-[#3786]: https://github.com/openstreetmap/iD/issues/3786
-[#3775]: https://github.com/openstreetmap/iD/issues/3775
-[#3776]: https://github.com/openstreetmap/iD/issues/3776
-[#3739]: https://github.com/openstreetmap/iD/issues/3739
 
-[@edpop]: https://github.com/edpop
+
+
 
 #### :bug: Bugfixes
 * Improve tests for line joins in walkthrough ([#3695])
@@ -6798,31 +4529,14 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Allow double-clicking on midpoints to create vertex ([#3687], thanks [@edpop])
 * Don't jump cursor to end of line when editing housenumber ([#3650])
 
-[#3695]: https://github.com/openstreetmap/iD/issues/3695
-[#3788]: https://github.com/openstreetmap/iD/issues/3788
-[#3759]: https://github.com/openstreetmap/iD/issues/3759
-[#3715]: https://github.com/openstreetmap/iD/issues/3715
-[#3594]: https://github.com/openstreetmap/iD/issues/3594
-[#3800]: https://github.com/openstreetmap/iD/issues/3800
-[#3794]: https://github.com/openstreetmap/iD/issues/3794
-[#3750]: https://github.com/openstreetmap/iD/issues/3750
-[#3676]: https://github.com/openstreetmap/iD/issues/3676
-[#1296]: https://github.com/openstreetmap/iD/issues/1296
-[#3707]: https://github.com/openstreetmap/iD/issues/3707
-[#3683]: https://github.com/openstreetmap/iD/issues/3683
-[#3687]: https://github.com/openstreetmap/iD/issues/3687
-[#3650]: https://github.com/openstreetmap/iD/issues/3650
 
-[@tyrasd]: https://github.com/tyrasd
-[@Abbe98]: https://github.com/Abbe98
-[@slhh]: https://github.com/slhh
-[@miladkdz]: https://github.com/miladkdz
-[@edpop]: https://github.com/edpop
+
+
 
 #### :hourglass: Performance
 * Use the same ids for temporary nodes and ways created in draw modes ([#1369])
 
-[#1369]: https://github.com/openstreetmap/iD/issues/1369
+
 
 #### :rocket: Presets
 * Add Notary preset ([#3813], thanks [@Zverik])
@@ -6845,35 +4559,9 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Add Castle Type field to Castle preset ([#3685], thanks [@abdeldjalil09])
 * Add Taiwan phone format ([#3655], thanks [@Supaplextw])
 
-[#3813]: https://github.com/openstreetmap/iD/issues/3813
-[#3733]: https://github.com/openstreetmap/iD/issues/3733
-[#2843]: https://github.com/openstreetmap/iD/issues/2843
-[#3740]: https://github.com/openstreetmap/iD/issues/3740
-[#3735]: https://github.com/openstreetmap/iD/issues/3735
-[#3718]: https://github.com/openstreetmap/iD/issues/3718
-[#3658]: https://github.com/openstreetmap/iD/issues/3658
-[#3619]: https://github.com/openstreetmap/iD/issues/3619
-[#3719]: https://github.com/openstreetmap/iD/issues/3719
-[#3702]: https://github.com/openstreetmap/iD/issues/3702
-[#3663]: https://github.com/openstreetmap/iD/issues/3663
-[#3646]: https://github.com/openstreetmap/iD/issues/3646
-[#3730]: https://github.com/openstreetmap/iD/issues/3730
-[#3729]: https://github.com/openstreetmap/iD/issues/3729
-[#3714]: https://github.com/openstreetmap/iD/issues/3714
-[#3712]: https://github.com/openstreetmap/iD/issues/3712
-[#3708]: https://github.com/openstreetmap/iD/issues/3708
-[#3685]: https://github.com/openstreetmap/iD/issues/3685
-[#3655]: https://github.com/openstreetmap/iD/issues/3655
 
-[@Zverik]: https://github.com/Zverik
-[@ajithranka]: https://github.com/ajithranka
-[@boothym]: https://github.com/boothym
-[@M1dgard]: https://github.com/M1dgard
-[@mertemin]: https://github.com/mertemin
-[@iandees]: https://github.com/iandees
-[@Natsuyasumi]: https://github.com/Natsuyasumi
-[@wopfel]: https://github.com/wopfel
-[@abdeldjalil09]: https://github.com/abdeldjalil09
+
+
 
 
 # 2.0.2
@@ -6884,9 +4572,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Refocus map and selectedIDs on undo/redo ([#2204])
 * Display labels for vertices ([#2709])
 
-[#3489]: https://github.com/openstreetmap/iD/issues/3489
-[#2204]: https://github.com/openstreetmap/iD/issues/2204
-[#2709]: https://github.com/openstreetmap/iD/issues/2709
+
 
 #### :bug: Bugfixes
 * Update imageryBlacklists function to use blacklists from OSM API ([#3623])
@@ -6896,12 +4582,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Windows/Chrome bug: missing mouseup was getting users stuck and unable to select features ([#2151])
 * Fix map moving with middle mouse click ([#3612])
 
-[#3623]: https://github.com/openstreetmap/iD/issues/3623
-[#3640]: https://github.com/openstreetmap/iD/issues/3640
-[#3638]: https://github.com/openstreetmap/iD/issues/3638
-[#3636]: https://github.com/openstreetmap/iD/issues/3636
-[#2151]: https://github.com/openstreetmap/iD/issues/2151
-[#3612]: https://github.com/openstreetmap/iD/issues/3612
+
 
 #### :rocket: Presets
 * Add Waterfall Preset ([#3608])
@@ -6917,22 +4598,9 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Add highway=traffic_mirror preset ([#3568], thanks [@bkil])
 * Improvements to Mast/Tower presets ([#3561], thanks [@bkil])
 
-[#3608]: https://github.com/openstreetmap/iD/issues/3608
-[#3647]: https://github.com/openstreetmap/iD/issues/3647
-[#3642]: https://github.com/openstreetmap/iD/issues/3642
-[#3627]: https://github.com/openstreetmap/iD/issues/3627
-[#3599]: https://github.com/openstreetmap/iD/issues/3599
-[#3621]: https://github.com/openstreetmap/iD/issues/3621
-[#3605]: https://github.com/openstreetmap/iD/issues/3605
-[#3602]: https://github.com/openstreetmap/iD/issues/3602
-[#3579]: https://github.com/openstreetmap/iD/issues/3579
-[#3568]: https://github.com/openstreetmap/iD/issues/3568
-[#3568]: https://github.com/openstreetmap/iD/issues/3568
-[#3561]: https://github.com/openstreetmap/iD/issues/3561
 
-[@Natsuyasumi]: https://github.com/Natsuyasumi
-[@bkil]: https://github.com/bkil
-[@samely]: https://github.com/samely
+
+
 
 
 # 2.0.1
@@ -6942,10 +4610,9 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * When starting iD with an object selected, the map should focus on that object ([#3588], thanks [@tyrasd])
 * Fix for "Best" imagery not being automatically selected ([#3586])
 
-[#3588]: https://github.com/openstreetmap/iD/issues/3588
-[#3586]: https://github.com/openstreetmap/iD/issues/3586
 
-[@tyrasd]: https://github.com/tyrasd
+
+
 
 #### :hourglass: Performance
 * Adjust max Mapillary pages fetched per zoom, adjust min viewfield zoom
@@ -7849,3 +5516,2722 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Update `osm-auth` to 0.2.1
 * Fix the `note` functionality and textarea UI in presets
 * Fix walkthrough translation issues
+
+[@0xatulpatil]: https://github.com/0xatulpatil
+[@1ec5]: https://github.com/1ec5
+[@1ec5]: https://github.com/1ec5
+[@1ec5]: https://github.com/1ec5
+[@1ec5]: https://github.com/1ec5
+[@1ec5]: https://github.com/1ec5
+[@1ec5]: https://github.com/1ec5
+[@1ec5]: https://github.com/1ec5
+[@1ec5]: https://github.com/1ec5
+[@1ec5]: https://github.com/1ec5
+[@51114u9]: https://github.com/51114u9
+[@51114u9]: https://github.com/51114u9
+[@aaditya0000]: https://github.com/aaditya0000
+[@abalosc1]: https://github.com/abalosc1
+[@Abbe98]: https://github.com/Abbe98
+[@Abbe98]: https://github.com/Abbe98
+[@abdeldjalil09]: https://github.com/abdeldjalil09
+[@abdeldjalil09]: https://github.com/abdeldjalil09
+[@ajithranka]: https://github.com/ajithranka
+[@ajithranka]: https://github.com/ajithranka
+[@ajithranka]: https://github.com/ajithranka
+[@ajlomagno]: https://github.com/ajlomagno
+[@alanb43]: https://github.com/alanb43
+[@alphagamer7]: https://github.com/alphagamer7
+[@alphagamer7]: https://github.com/alphagamer7
+[@althio]: https://github.com/althio
+[@AndreasHae]: https://github.com/AndreasHae
+[@AndreasHae]: https://github.com/AndreasHae
+[@AndreasHae]: https://github.com/AndreasHae
+[@AndreasHae]: https://github.com/AndreasHae
+[@AndreasHae]: https://github.com/AndreasHae
+[@andrewharvey]: https://github.com/andrewharvey
+[@andrewpmk]: https://github.com/andrewpmk
+[@Andygol]: https://github.com/Andygol
+[@Andygol]: https://github.com/Andygol
+[@animesh-007]: https://github.com/animesh-007
+[@animesh-007]: https://github.com/animesh-007
+[@animesh-007]: https://github.com/animesh-007
+[@animesh-007]: https://github.com/animesh-007
+[@arch0345]: https://github.com/arch0345
+[@arka-nitd]: https://github.com/arka-nitd
+[@Asif-Sheriff]: https://github.com/Asif-Sheriff
+[@bagage]: https://github.com/bagage
+[@bencostamagna]: https://github.com/bencostamagna
+[@bencostamagna]: https://github.com/bencostamagna
+[@bencostamagna]: https://github.com/bencostamagna
+[@bencostamagna]: https://github.com/bencostamagna
+[@bgo-eiu]: https://github.com/bgo-eiu
+[@bhousel]: https://github.com/bhousel
+[@biswajit-k]: https://github.com/biswajit-k
+[@BjornRasmussen]: https://github.com/BjornRasmussen
+[@bjornstar]: https://github.com/bjornstar
+[@bkil]: https://github.com/bkil
+[@blackboxlogic]: https://github.com/blackboxlogic
+[@Bonkles]: https://github.com/Bonkles
+[@Bonkles]: https://github.com/Bonkles
+[@boothym]: https://github.com/boothym
+[@boothym]: https://github.com/boothym
+[@boothym]: https://github.com/boothym
+[@boothym]: https://github.com/boothym
+[@briandaviddavidson]: https://github.com/briandaviddavidson
+[@brianhatchl]: https://github.com/brianhatchl
+[@brokemyspoke]: https://github.com/brokemyspoke
+[@bryceco]: https://github.com/bryceco
+[@burrscurr]: https://github.com/burrscurr
+[@bvercelli99]: https://github.com/bvercelli99
+[@CarycaKatarzyna]: https://github.com/CarycaKatarzyna
+[@CarycaKatarzyna]: https://github.com/CarycaKatarzyna
+[@CarycaKatarzyna]: https://github.com/CarycaKatarzyna
+[@castriganoj]: https://github.com/castriganoj
+[@cbeddow]: https://github.com/cbeddow
+[@cbeddow]: https://github.com/cbeddow
+[@cbeddow]: https://github.com/cbeddow
+[@chadrockey]: https://github.com/chadrockey
+[@channel-s]: https://github.com/channel-s
+[@chrisklaiber]: https://github.com/chrisklaiber
+[@cicku]: https://github.com/cicku
+[@CloCkWeRX]: https://github.com/CloCkWeRX
+[@cmoffroad]: https://github.com/cmoffroad
+[@dakotabenjamin]: https://github.com/dakotabenjamin
+[@danielsjf]: https://github.com/danielsjf
+[@danielwu830]: https://github.com/danielwu830
+[@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
+[@demonshreder]: https://github.com/demonshreder
+[@Dimitar5555]: https://github.com/Dimitar5555
+[@draunger]: https://github.com/draunger
+[@DzikowskiW]: https://github.com/DzikowskiW
+[@DzikowskiW]: https://github.com/DzikowskiW
+[@edpop]: https://github.com/edpop
+[@edpop]: https://github.com/edpop
+[@enighter]: https://github.com/enighter
+[@ENT8R]: https://github.com/ENT8R
+[@Eric-Sparks]: https://github.com/Eric-Sparks
+[@evansiroky]: https://github.com/evansiroky
+[@ewnh]: https://github.com/ewnh
+[@faebebin]: https://github.com/faebebin
+[@fakeharahman]: https://github.com/fakeharahman
+[@ferdibiflator]: https://github.com/ferdibiflator
+[@ferdibiflator]: https://github.com/ferdibiflator
+[@ferdibiflator]: https://github.com/ferdibiflator
+[@ferdinand0101]: https://github.com/ferdinand0101
+[@FrikanRw]: https://github.com/FrikanRw
+[@fritruc]: https://github.com/fritruc
+[@fritruc]: https://github.com/fritruc
+[@furkanmutlu]: https://github.com/furkanmutlu
+[@furkanmutlu-tomtom]: https://github.com/furkanmutlu-tomtom
+[@gaoxm]: https://github.com/gaoxm
+[@gaoxm]: https://github.com/gaoxm
+[@gaoxm]: https://github.com/gaoxm
+[@geohacker]: https://github.com/geohacker
+[@grischard]: https://github.com/grischard
+[@grischard]: https://github.com/grischard
+[@grischard]: https://github.com/grischard
+[@guyarad]: https://github.com/guyarad
+[@guylamar2006]: https://github.com/guylamar2006
+[@guylamar2006]: https://github.com/guylamar2006
+[@hackily]: https://github.com/hackily
+[@haroldb]: https://github.com/haroldb
+[@hchho]: https://github.com/hchho
+[@henry4442]: https://github.com/henry4442
+[@hikemaniac]: https://github.com/hikemaniac
+[@hikemaniac]: https://github.com/hikemaniac
+[@hikemaniac]: https://github.com/hikemaniac
+[@hikemaniac]: https://github.com/hikemaniac
+[@hikemaniac]: https://github.com/hikemaniac
+[@hikemaniac]: https://github.com/hikemaniac
+[@hikemaniac]: https://github.com/hikemaniac
+[@hikemaniac]: https://github.com/hikemaniac
+[@hikemaniac]: https://github.com/hikemaniac
+[@hikemaniac]: https://github.com/hikemaniac
+[@hikemaniac]: https://github.com/hikemaniac
+[@hlfan]: https://github.com/hlfan
+[@hodigabi]: https://github.com/hodigabi
+[@humanforklift]: https://github.com/humanforklift
+[@huonw]: https://github.com/huonw
+[@huonw]: https://github.com/huonw
+[@huonw]: https://github.com/huonw
+[@iandees]: https://github.com/iandees
+[@iandees]: https://github.com/iandees
+[@irevenko]: https://github.com/irevenko
+[@iriman]: https://github.com/iriman
+[@iriman]: https://github.com/iriman
+[@JackNUMBER]: https://github.com/JackNUMBER
+[@jaller94]: https://github.com/jaller94
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@jay-manday]: https://github.com/jay-manday
+[@JeeZeh]: https://github.com/JeeZeh
+[@jgravois]: https://github.com/jgravois
+[@jgravois]: https://github.com/jgravois
+[@jgravois]: https://github.com/jgravois
+[@jgravois]: https://github.com/jgravois
+[@jgravois]: https://github.com/jgravois
+[@jgravois]: https://github.com/jgravois
+[@jgscherber]: https://github.com/jgscherber
+[@jgscherber]: https://github.com/jgscherber
+[@jguthrie100]: https://github.com/jguthrie100
+[@jguthrie100]: https://github.com/jguthrie100
+[@jguthrie100]: https://github.com/jguthrie100
+[@jguthrie100]: https://github.com/jguthrie100
+[@jguthrie100]: https://github.com/jguthrie100
+[@jguthrie100]: https://github.com/jguthrie100
+[@jharpster]: https://github.com/jharpster
+[@jharpster]: https://github.com/jharpster
+[@jleedev]: https://github.com/jleedev
+[@jleh]: https://github.com/jleh
+[@jonahadkins]: https://github.com/jonahadkins
+[@jonahadkins]: https://github.com/jonahadkins
+[@jtracey]: https://github.com/jtracey
+[@k-yle]: https://github.com/k-yle
+[@kamicut]: https://github.com/kamicut
+[@karmanya007]: https://github.com/karmanya007
+[@kepta]: https://github.com/kepta
+[@kepta]: https://github.com/kepta
+[@kepta]: https://github.com/kepta
+[@kepta]: https://github.com/kepta
+[@kepta]: https://github.com/kepta
+[@kepta]: https://github.com/kepta
+[@koaber]: https://github.com/koaber
+[@kratico]: https://github.com/kratico
+[@kratico]: https://github.com/kratico
+[@kratico]: https://github.com/kratico
+[@kratico]: https://github.com/kratico
+[@kreed]: https://github.com/kreed
+[@kymckay]: https://github.com/kymckay
+[@kymckay]: https://github.com/kymckay
+[@kymckay]: https://github.com/kymckay
+[@kymckay]: https://github.com/kymckay
+[@kymckay]: https://github.com/kymckay
+[@kymckay]: https://github.com/kymckay
+[@kymckay]: https://github.com/kymckay
+[@kymckay]: https://github.com/kymckay
+[@kymckay]: https://github.com/kymckay
+[@kymckay]: https://github.com/kymckay
+[@laigyu]: https://github.com/laigyu
+[@LaszloEr]: https://github.com/LaszloEr
+[@leegenes]: https://github.com/leegenes
+[@leegenes]: https://github.com/leegenes
+[@lefuturiste]: https://github.com/lefuturiste
+[@leighghunt]: https://github.com/leighghunt
+[@LorenMueller]: https://github.com/LorenMueller
+[@LorenMueller]: https://github.com/LorenMueller
+[@ltog]: https://github.com/ltog
+[@lucymk]: https://github.com/lucymk
+[@Lukas458]: https://github.com/Lukas458
+[@Lukas458]: https://github.com/Lukas458
+[@M1dgard]: https://github.com/M1dgard
+[@M1dgard]: https://github.com/M1dgard
+[@MaciejWWojcik]: https://github.com/MaciejWWojcik
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@mangerlahn]: https://github.com/mangerlahn
+[@mapmeld]: https://github.com/mapmeld
+[@mapmeld]: https://github.com/mapmeld
+[@marracci]: https://github.com/marracci
+[@matkoniecz]: https://github.com/matkoniecz
+[@matkoniecz]: https://github.com/matkoniecz
+[@matkoniecz]: https://github.com/matkoniecz
+[@mattiapezzotti]: https://github.com/mattiapezzotti
+[@maxgrossman]: https://github.com/maxgrossman
+[@maxgrossman]: https://github.com/maxgrossman
+[@maxgrossman]: https://github.com/maxgrossman
+[@maxgrossman]: https://github.com/maxgrossman
+[@mbrickn]: https://github.com/mbrickn
+[@mbrzakovic]: https://github.com/mbrzakovic
+[@mchlp]: https://github.com/mchlp
+[@mertemin]: https://github.com/mertemin
+[@mertemin]: https://github.com/mertemin
+[@michaelabon]: https://github.com/michaelabon
+[@mikelmaron]: https://github.com/mikelmaron
+[@mikenath223]: https://github.com/mikenath223
+[@mikenath223]: https://github.com/mikenath223
+[@mikini]: https://github.com/mikini
+[@miladkdz]: https://github.com/miladkdz
+[@MindFreeze]: https://github.com/MindFreeze
+[@MKuranowski]: https://github.com/MKuranowski
+[@mmd-osm]: https://github.com/mmd-osm
+[@mmd-osm]: https://github.com/mmd-osm
+[@MohamedAli00949]: https://github.com/MohamedAli00949
+[@mojodna]: https://github.com/mojodna
+[@mojodna]: https://github.com/mojodna
+[@morray]: https://github.com/morray
+[@moshen]: https://github.com/moshen
+[@mstn]: https://github.com/mstn
+[@mtmail]: https://github.com/mtmail
+[@n42k]: https://github.com/n42k
+[@nadyafebi]: https://github.com/nadyafebi
+[@Natsuyasumi]: https://github.com/Natsuyasumi
+[@Natsuyasumi]: https://github.com/Natsuyasumi
+[@Natsuyasumi]: https://github.com/Natsuyasumi
+[@NaVis0mple]: https://github.com/NaVis0mple
+[@Nekzuris]: https://github.com/Nekzuris
+[@nickplesha]: https://github.com/nickplesha
+[@nickplesha]: https://github.com/nickplesha
+[@nickplesha]: https://github.com/nickplesha
+[@Nimisha94]: https://github.com/Nimisha94
+[@nisargshh]: https://github.com/nisargshh
+[@nisargshh]: https://github.com/nisargshh
+[@nlehuby]: https://github.com/nlehuby
+[@nlehuby]: https://github.com/nlehuby
+[@nlehuby]: https://github.com/nlehuby
+[@nlehuby]: https://github.com/nlehuby
+[@Nmargolis]: https://github.com/Nmargolis
+[@nnodot]: https://github.com/nnodot
+[@nnodot]: https://github.com/nnodot
+[@noenandre]: https://github.com/noenandre
+[@nontech]: https://github.com/nontech
+[@NopMap]: https://github.com/NopMap
+[@nyurik]: https://github.com/nyurik
+[@obama]: https://github.com/obama
+[@obama]: https://github.com/obama
+[@octagonal]: https://github.com/octagonal
+[@ogbeche77]: https://github.com/ogbeche77
+[@ozcan-durak]: https://github.com/ozcan-durak
+[@paulklie]: https://github.com/paulklie
+[@peternewman]: https://github.com/peternewman
+[@peternewman]: https://github.com/peternewman
+[@peternewman]: https://github.com/peternewman
+[@pgiraud]: https://github.com/pgiraud
+[@planemad]: https://github.com/planemad
+[@programistka]: https://github.com/programistka
+[@Psigio]: https://github.com/Psigio
+[@Psigio]: https://github.com/Psigio
+[@Psigio]: https://github.com/Psigio
+[@pwelby]: https://github.com/pwelby
+[@quincylvania]: https://github.com/quincylvania
+[@quincylvania]: https://github.com/quincylvania
+[@quincylvania]: https://github.com/quincylvania
+[@quincylvania]: https://github.com/quincylvania
+[@quincylvania]: https://github.com/quincylvania
+[@quincylvania]: https://github.com/quincylvania
+[@quincylvania]: https://github.com/quincylvania
+[@quincylvania]: https://github.com/quincylvania
+[@quincylvania]: https://github.com/quincylvania
+[@ramith-kulal]: https://github.com/ramith-kulal
+[@rasagy]: https://github.com/rasagy
+[@Raubraupe]: https://github.com/Raubraupe
+[@rbuffat]: https://github.com/rbuffat
+[@renancleyson-dev]: https://github.com/renancleyson-dev
+[@rene78]: https://github.com/rene78
+[@Rewinteer]: https://github.com/Rewinteer
+[@ricloy]: https://github.com/ricloy
+[@rivermont]: https://github.com/rivermont
+[@rory]: https://github.com/rory
+[@rory]: https://github.com/rory
+[@rory]: https://github.com/rory
+[@RudyTheDev]: https://github.com/RudyTheDev
+[@RudyTheDev]: https://github.com/RudyTheDev
+[@RudyTheDev]: https://github.com/RudyTheDev
+[@RudyTheDev]: https://github.com/RudyTheDev
+[@s-Hale]: https://github.com/s-Hale
+[@samanpwbb]: https://github.com/samanpwbb
+[@samely]: https://github.com/samely
+[@samhoooo]: https://github.com/samhoooo
+[@scaidermern]: https://github.com/scaidermern
+[@scottdejonge]: https://github.com/scottdejonge
+[@SeanBarber]: https://github.com/SeanBarber
+[@SelfishSeahorse]: https://github.com/SelfishSeahorse
+[@sguinetti]: https://github.com/sguinetti
+[@shawnaparadee]: https://github.com/shawnaparadee
+[@simonbilskyrollins]: https://github.com/simonbilskyrollins
+[@simonbilskyrollins]: https://github.com/simonbilskyrollins
+[@simonpoole]: https://github.com/simonpoole
+[@simonpoole]: https://github.com/simonpoole
+[@slhh]: https://github.com/slhh
+[@slhh]: https://github.com/slhh
+[@slibby]: https://github.com/slibby
+[@soshial]: https://github.com/soshial
+[@Stalfur]: https://github.com/Stalfur
+[@SteevenBosse]: https://github.com/SteevenBosse
+[@Stenive]: https://github.com/Stenive
+[@Stenive]: https://github.com/Stenive
+[@Stormheg]: https://github.com/Stormheg
+[@stragu]: https://github.com/stragu
+[@stragu]: https://github.com/stragu
+[@sulfo]: https://github.com/sulfo
+[@sun-geo]: https://github.com/sun-geo
+[@Sushil642]: https://github.com/Sushil642
+[@TAQ2]: https://github.com/TAQ2
+[@tastrax]: https://github.com/tastrax
+[@tastrax]: https://github.com/tastrax
+[@Teiron]: https://github.com/Teiron
+[@teymour-aldridge]: https://github.com/teymour-aldridge
+[@TheAdventurer64]: https://github.com/TheAdventurer64
+[@thefifthisa]: https://github.com/thefifthisa
+[@TheGreenToaster]: https://github.com/TheGreenToaster
+[@thibaultmol]: https://github.com/thibaultmol
+[@thomas-hervey]: https://github.com/thomas-hervey
+[@thomas-hervey]: https://github.com/thomas-hervey
+[@thomas-hervey]: https://github.com/thomas-hervey
+[@thomas-hervey]: https://github.com/thomas-hervey
+[@thomas-hervey]: https://github.com/thomas-hervey
+[@thomas-hervey]: https://github.com/thomas-hervey
+[@til-schneider]: https://github.com/til-schneider
+[@ToastHawaii]: https://github.com/ToastHawaii
+[@ToastHawaii]: https://github.com/ToastHawaii
+[@ToastHawaii]: https://github.com/ToastHawaii
+[@ToastHawaii]: https://github.com/ToastHawaii
+[@ToeBee]: https://github.com/ToeBee
+[@tohaklim]: https://github.com/tohaklim
+[@tohaklim]: https://github.com/tohaklim
+[@tomhughes]: https://github.com/tomhughes
+[@tordans]: https://github.com/tordans
+[@tordans]: https://github.com/tordans
+[@tordans]: https://github.com/tordans
+[@tordans]: https://github.com/tordans
+[@tpetillon]: https://github.com/tpetillon
+[@tyrasd]: https://github.com/tyrasd
+[@tyrasd]: https://github.com/tyrasd
+[@tyrasd]: https://github.com/tyrasd
+[@tyrasd]: https://github.com/tyrasd
+[@tyrasd]: https://github.com/tyrasd
+[@tyrasd]: https://github.com/tyrasd
+[@tyrasd]: https://github.com/tyrasd
+[@tyrasd]: https://github.com/tyrasd
+[@tyrasd]: https://github.com/tyrasd
+[@tyrasd]: https://github.com/tyrasd
+[@tyrasd]: https://github.com/tyrasd
+[@umarpreet1]: https://github.com/umarpreet1
+[@umarpreet1]: https://github.com/umarpreet1
+[@vershwal]: https://github.com/vershwal
+[@vershwal]: https://github.com/vershwal
+[@vershwal]: https://github.com/vershwal
+[@vershwal]: https://github.com/vershwal
+[@vershwal]: https://github.com/vershwal
+[@vershwal]: https://github.com/vershwal
+[@vershwal]: https://github.com/vershwal
+[@vershwal]: https://github.com/vershwal
+[@Vonter]: https://github.com/Vonter
+[@Vonter]: https://github.com/Vonter
+[@waldyrious]: https://github.com/waldyrious
+[@wcedmisten]: https://github.com/wcedmisten
+[@westnordost]: https://github.com/westnordost
+[@willemarcel]: https://github.com/willemarcel
+[@willemarcel]: https://github.com/willemarcel
+[@willemarcel]: https://github.com/willemarcel
+[@willemarcel]: https://github.com/willemarcel
+[@willemarcel]: https://github.com/willemarcel
+[@willemarcel]: https://github.com/willemarcel
+[@willemarcel]: https://github.com/willemarcel
+[@willemarcel]: https://github.com/willemarcel
+[@willemarcel]: https://github.com/willemarcel
+[@willemarcel]: https://github.com/willemarcel
+[@willemarcel]: https://github.com/willemarcel
+[@willemarcel]: https://github.com/willemarcel
+[@willemarcel]: https://github.com/willemarcel
+[@winstonsung]: https://github.com/winstonsung/
+[@wonga00]: https://github.com/wonga00
+[@wopfel]: https://github.com/wopfel
+[@wvanderp]: https://github.com/wvanderp
+[@wvanderp]: https://github.com/wvanderp
+[@Xavier-J-Ortiz]: https://github.com/Xavier-J-Ortiz
+[@xmile1]: https://github.com/xmile1
+[@xmile1]: https://github.com/xmile1
+[@Yogurt4]: https://github.com/Yogurt4
+[@youssefelzedy]: https://github.com/youssefelzedy
+[@YuliyaVeklicheva]: https://github.com/YuliyaVeklicheva
+[@yvecai]: https://github.com/yvecai
+[@yyazdi13]: https://github.com/yyazdi13
+[@Zaczero]: https://github.com/Zaczero
+[@zbycz]: https://github.com/zbycz
+[@zengchu2]: https://github.com/zengchu2
+[@Zverik]: https://github.com/Zverik
+[#10003]: https://github.com/openstreetmap/iD/pull/10003
+[#10035]: https://github.com/openstreetmap/iD/pull/10035
+[#10054]: https://github.com/openstreetmap/iD/issues/10054
+[#10062]: https://github.com/openstreetmap/iD/pull/10062
+[#10066]: https://github.com/openstreetmap/iD/pull/10066
+[#10074]: https://github.com/openstreetmap/iD/issues/10074
+[#10123]: https://github.com/openstreetmap/iD/pull/10123
+[#10127]: https://github.com/openstreetmap/iD/issues/10127
+[#10128]: https://github.com/openstreetmap/iD/issues/10128
+[#10135]: https://github.com/openstreetmap/iD/issues/10135
+[#10140]: https://github.com/openstreetmap/iD/issues/10140
+[#10145]: https://github.com/openstreetmap/iD/issues/10145
+[#10153]: https://github.com/openstreetmap/iD/issues/10153
+[#10175]: https://github.com/openstreetmap/iD/pull/10175
+[#10181]: https://github.com/openstreetmap/iD/pull/10181
+[#10188]: https://github.com/openstreetmap/iD/issues/10188
+[#10255]: https://github.com/openstreetmap/iD/pull/10255
+[#10257]: https://github.com/openstreetmap/iD/pull/10257
+[#10260]: https://github.com/openstreetmap/iD/issues/10260
+[#10283]: https://github.com/openstreetmap/iD/pull/10283
+[#10291]: https://github.com/openstreetmap/iD/pull/10291
+[#10299]: https://github.com/openstreetmap/iD/issues/10299
+[#10302]: https://github.com/openstreetmap/iD/issues/10302
+[#10323]: https://github.com/openstreetmap/iD/issues/10323
+[#10341]: https://github.com/openstreetmap/iD/issues/10341
+[#10342]: https://github.com/openstreetmap/iD/issues/10342
+[#10369]: https://github.com/openstreetmap/iD/issues/10369
+[#10392]: https://github.com/openstreetmap/iD/issues/10392
+[#10394]: https://github.com/openstreetmap/iD/pull/10394
+[#10401]: https://github.com/openstreetmap/iD/issues/10401
+[#10442]: https://github.com/openstreetmap/iD/pull/10442
+[#10452]: https://github.com/openstreetmap/iD/pull/10452
+[#10459]: https://github.com/openstreetmap/iD/pull/10459
+[#10478]: https://github.com/openstreetmap/iD/pull/10478
+[#10483]: https://github.com/openstreetmap/iD/issues/10483
+[#10486]: https://github.com/openstreetmap/iD/issues/10486
+[#10488]: https://github.com/openstreetmap/iD/pull/10488
+[#10489]: https://github.com/openstreetmap/iD/pull/10489
+[#10495]: https://github.com/openstreetmap/iD/issues/10495
+[#10508]: https://github.com/openstreetmap/iD/pull/10508
+[#10564]: https://github.com/openstreetmap/iD/pull/10564
+[#10594]: https://github.com/openstreetmap/iD/pull/10594
+[#10618]: https://github.com/openstreetmap/iD/pull/10618
+[#10624]: https://github.com/openstreetmap/iD/issues/10624
+[#10634]: https://github.com/openstreetmap/iD/issues/10634
+[#10646]: https://github.com/openstreetmap/iD/pull/10646
+[#10648]: https://github.com/openstreetmap/iD/pull/10648
+[#10650]: https://github.com/openstreetmap/iD/issues/10650
+[#10651]: https://github.com/openstreetmap/iD/issues/10651
+[#10653]: https://github.com/openstreetmap/iD/issues/10653
+[#10683]: https://github.com/openstreetmap/iD/issues/10683
+[#10684]: https://github.com/openstreetmap/iD/pull/10684
+[#10716]: https://github.com/openstreetmap/iD/pull/10716
+[#10720]: https://github.com/openstreetmap/iD/issues/10720
+[#10722]: https://github.com/openstreetmap/iD/pull/10722
+[#10727]: https://github.com/openstreetmap/iD/issues/10727
+[#10731]: https://github.com/openstreetmap/iD/pull/10731
+[#10737]: https://github.com/openstreetmap/iD/pull/10737
+[#10738]: https://github.com/openstreetmap/iD/issues/10738
+[#10747]: https://github.com/openstreetmap/iD/issues/10747
+[#10748]: https://github.com/openstreetmap/iD/issues/10748
+[#10755]: https://github.com/openstreetmap/iD/issues/10755
+[#10763]: https://github.com/openstreetmap/iD/pull/10763
+[#10764]: https://github.com/openstreetmap/iD/issues/10764
+[#10766]: https://github.com/openstreetmap/iD/pull/10766
+[#10776]: https://github.com/openstreetmap/iD/issues/10776
+[#10778]: https://github.com/openstreetmap/iD/issues/10778
+[#10798]: https://github.com/openstreetmap/iD/pull/10798
+[#10801]: https://github.com/openstreetmap/iD/pull/10801
+[#10805]: https://github.com/openstreetmap/iD/pull/10805
+[#10807]: https://github.com/openstreetmap/iD/issues/10807
+[#10843]: https://github.com/openstreetmap/iD/pull/10843
+[#10849]: https://github.com/openstreetmap/iD/pull/10849
+[#10852]: https://github.com/openstreetmap/iD/issues/10852
+[#10885]: https://github.com/openstreetmap/iD/issues/10885
+[#10910]: https://github.com/openstreetmap/iD/pull/10910
+[#10916]: https://github.com/openstreetmap/iD/pull/10916
+[#10927]: https://github.com/openstreetmap/iD/issues/10927
+[#1141]: https://github.com/openstreetmap/iD/issues/1141
+[#1252]: https://github.com/openstreetmap/iD/issues/1252
+[#1264]: https://github.com/openstreetmap/iD/issues/1264
+[#1296]: https://github.com/openstreetmap/iD/issues/1296
+[#1369]: https://github.com/openstreetmap/iD/issues/1369
+[#1475]: https://github.com/openstreetmap/iD/issues/1475
+[#1481]: https://github.com/openstreetmap/iD/issues/1481
+[#1669]: https://github.com/openstreetmap/iD/issues/1669
+[#1734]: https://github.com/openstreetmap/iD/issues/1734
+[#1761]: https://github.com/openstreetmap/iD/issues/1761
+[#1856]: https://github.com/openstreetmap/iD/issues/1856
+[#1881]: https://github.com/openstreetmap/iD/issues/1881
+[#1979]: https://github.com/openstreetmap/iD/issues/1979
+[#1981]: https://github.com/openstreetmap/iD/issues/1981
+[#2004-comment]: https://github.com/openstreetmap/iD/pull/2004#issuecomment-407995998
+[#2024]: https://github.com/openstreetmap/iD/issues/2024
+[#2058]: https://github.com/openstreetmap/iD/issues/2058
+[#2087]: https://github.com/openstreetmap/iD/issues/2087
+[#2128]: https://github.com/openstreetmap/iD/issues/2128
+[#2151]: https://github.com/openstreetmap/iD/issues/2151
+[#2183]: https://github.com/openstreetmap/iD/issues/2183
+[#2204]: https://github.com/openstreetmap/iD/issues/2204
+[#2205]: https://github.com/openstreetmap/iD/issues/2205
+[#2211]: https://github.com/openstreetmap/iD/issues/2211
+[#2223]: https://github.com/openstreetmap/iD/issues/2223
+[#2248]: https://github.com/openstreetmap/iD/issues/2248
+[#2273]: https://github.com/openstreetmap/iD/issues/2273
+[#2283]: https://github.com/openstreetmap/iD/issues/2283
+[#2284]: https://github.com/openstreetmap/iD/issues/2284
+[#2300]: https://github.com/openstreetmap/iD/issues/2300
+[#2346]: https://github.com/openstreetmap/iD/issues/2346
+[#2378]: https://github.com/openstreetmap/iD/issues/2378
+[#2381]: https://github.com/openstreetmap/iD/issues/2381
+[#2386]: https://github.com/openstreetmap/iD/issues/2386
+[#2455]: https://github.com/openstreetmap/iD/issues/2455
+[#2457]: https://github.com/openstreetmap/iD/issues/2457
+[#2472]: https://github.com/openstreetmap/iD/issues/2472
+[#2492]: https://github.com/openstreetmap/iD/issues/2492
+[#2508]: https://github.com/openstreetmap/iD/issues/2508
+[#2515]: https://github.com/openstreetmap/iD/issues/2515
+[#2622]: https://github.com/openstreetmap/iD/issues/2622
+[#2629]: https://github.com/openstreetmap/iD/issues/2629
+[#2633]: https://github.com/openstreetmap/iD/issues/2633
+[#2677]: https://github.com/openstreetmap/iD/issues/2677
+[#2709]: https://github.com/openstreetmap/iD/issues/2709
+[#2743]: https://github.com/openstreetmap/iD/issues/2743
+[#2834]: https://github.com/openstreetmap/iD/issues/2834
+[#2843]: https://github.com/openstreetmap/iD/issues/2843
+[#2864]: https://github.com/openstreetmap/iD/issues/2864
+[#2896]: https://github.com/openstreetmap/iD/issues/2896
+[#2904]: https://github.com/openstreetmap/iD/issues/2904
+[#2914]: https://github.com/openstreetmap/iD/issues/2914
+[#2921]: https://github.com/openstreetmap/iD/issues/2921
+[#2945]: https://github.com/openstreetmap/iD/issues/2945
+[#2946]: https://github.com/openstreetmap/iD/issues/2946
+[#2946]: https://github.com/openstreetmap/iD/issues/2946
+[#2949]: https://github.com/openstreetmap/iD/issues/2949
+[#2962]: https://github.com/openstreetmap/iD/issues/2962
+[#3003]: https://github.com/openstreetmap/iD/issues/3003
+[#3024]: https://github.com/openstreetmap/iD/issues/3024
+[#3025]: https://github.com/openstreetmap/iD/issues/3025
+[#3029]: https://github.com/openstreetmap/iD/issues/3029
+[#3041]: https://github.com/openstreetmap/iD/issues/3041
+[#3056]: https://github.com/openstreetmap/iD/issues/3056
+[#3058]: https://github.com/openstreetmap/iD/issues/3058
+[#3060]: https://github.com/openstreetmap/iD/issues/3060
+[#3067]: https://github.com/openstreetmap/iD/issues/3067
+[#3068]: https://github.com/openstreetmap/iD/issues/3068
+[#3085]: https://github.com/openstreetmap/iD/issues/3085
+[#3154]: https://github.com/openstreetmap/iD/issues/3154
+[#3208]: https://github.com/openstreetmap/iD/issues/3208
+[#3227]: https://github.com/openstreetmap/iD/issues/3227
+[#3255]: https://github.com/openstreetmap/iD/issues/3255
+[#3372]: https://github.com/openstreetmap/iD/issues/3372
+[#3375]: https://github.com/openstreetmap/iD/issues/3375
+[#3387]: https://github.com/openstreetmap/iD/issues/3387
+[#3387]: https://github.com/openstreetmap/iD/issues/3387
+[#3439]: https://github.com/openstreetmap/iD/issues/3439
+[#3447]: https://github.com/openstreetmap/iD/issues/3447
+[#3448]: https://github.com/openstreetmap/iD/issues/3448
+[#3452]: https://github.com/openstreetmap/iD/issues/3452
+[#3487]: https://github.com/openstreetmap/iD/issues/3487
+[#3489]: https://github.com/openstreetmap/iD/issues/3489
+[#3508]: https://github.com/openstreetmap/iD/issues/3508
+[#3530]: https://github.com/openstreetmap/iD/issues/3530
+[#3535]: https://github.com/openstreetmap/iD/issues/3535
+[#3536]: https://github.com/openstreetmap/iD/issues/3536
+[#3544]: https://github.com/openstreetmap/iD/issues/3544
+[#3555]: https://github.com/openstreetmap/iD/issues/3555
+[#3561]: https://github.com/openstreetmap/iD/issues/3561
+[#3568]: https://github.com/openstreetmap/iD/issues/3568
+[#3568]: https://github.com/openstreetmap/iD/issues/3568
+[#3569]: https://github.com/openstreetmap/iD/issues/3569
+[#3571]: https://github.com/openstreetmap/iD/issues/3571
+[#3572]: https://github.com/openstreetmap/iD/issues/3572
+[#3573]: https://github.com/openstreetmap/iD/issues/3573
+[#3579]: https://github.com/openstreetmap/iD/issues/3579
+[#3586]: https://github.com/openstreetmap/iD/issues/3586
+[#3588]: https://github.com/openstreetmap/iD/issues/3588
+[#3589]: https://github.com/openstreetmap/iD/issues/3589
+[#3594]: https://github.com/openstreetmap/iD/issues/3594
+[#3595]: https://github.com/openstreetmap/iD/issues/3595
+[#3598]: https://github.com/openstreetmap/iD/issues/3598
+[#3599]: https://github.com/openstreetmap/iD/issues/3599
+[#3602]: https://github.com/openstreetmap/iD/issues/3602
+[#3605]: https://github.com/openstreetmap/iD/issues/3605
+[#3608]: https://github.com/openstreetmap/iD/issues/3608
+[#3612]: https://github.com/openstreetmap/iD/issues/3612
+[#3613]: https://github.com/openstreetmap/iD/issues/3613
+[#3619]: https://github.com/openstreetmap/iD/issues/3619
+[#3621]: https://github.com/openstreetmap/iD/issues/3621
+[#3623]: https://github.com/openstreetmap/iD/issues/3623
+[#3625]: https://github.com/openstreetmap/iD/issues/3625
+[#3627]: https://github.com/openstreetmap/iD/issues/3627
+[#3629]: https://github.com/openstreetmap/iD/issues/3629
+[#3630]: https://github.com/openstreetmap/iD/issues/3630
+[#3636]: https://github.com/openstreetmap/iD/issues/3636
+[#3636]: https://github.com/openstreetmap/iD/issues/3636
+[#3638]: https://github.com/openstreetmap/iD/issues/3638
+[#3640]: https://github.com/openstreetmap/iD/issues/3640
+[#3642]: https://github.com/openstreetmap/iD/issues/3642
+[#3643]: https://github.com/openstreetmap/iD/issues/3643
+[#3646]: https://github.com/openstreetmap/iD/issues/3646
+[#3647]: https://github.com/openstreetmap/iD/issues/3647
+[#3650]: https://github.com/openstreetmap/iD/issues/3650
+[#3651]: https://github.com/openstreetmap/iD/issues/3651
+[#3653]: https://github.com/openstreetmap/iD/issues/3653
+[#3655]: https://github.com/openstreetmap/iD/issues/3655
+[#3658]: https://github.com/openstreetmap/iD/issues/3658
+[#3659]: https://github.com/openstreetmap/iD/issues/3659
+[#3663]: https://github.com/openstreetmap/iD/issues/3663
+[#3671]: https://github.com/openstreetmap/iD/issues/3671
+[#3676]: https://github.com/openstreetmap/iD/issues/3676
+[#3677]: https://github.com/openstreetmap/iD/issues/3677
+[#3679]: https://github.com/openstreetmap/iD/issues/3679
+[#3680]: https://github.com/openstreetmap/iD/issues/3680
+[#3683]: https://github.com/openstreetmap/iD/issues/3683
+[#3684]: https://github.com/openstreetmap/iD/issues/3684
+[#3685]: https://github.com/openstreetmap/iD/issues/3685
+[#3687]: https://github.com/openstreetmap/iD/issues/3687
+[#3695]: https://github.com/openstreetmap/iD/issues/3695
+[#3700]: https://github.com/openstreetmap/iD/issues/3700
+[#3702]: https://github.com/openstreetmap/iD/issues/3702
+[#3707]: https://github.com/openstreetmap/iD/issues/3707
+[#3708]: https://github.com/openstreetmap/iD/issues/3708
+[#3712]: https://github.com/openstreetmap/iD/issues/3712
+[#3714]: https://github.com/openstreetmap/iD/issues/3714
+[#3715]: https://github.com/openstreetmap/iD/issues/3715
+[#3718]: https://github.com/openstreetmap/iD/issues/3718
+[#3719]: https://github.com/openstreetmap/iD/issues/3719
+[#3729]: https://github.com/openstreetmap/iD/issues/3729
+[#3730]: https://github.com/openstreetmap/iD/issues/3730
+[#3733]: https://github.com/openstreetmap/iD/issues/3733
+[#3735]: https://github.com/openstreetmap/iD/issues/3735
+[#3737]: https://github.com/openstreetmap/iD/issues/3737
+[#3739]: https://github.com/openstreetmap/iD/issues/3739
+[#3739]: https://github.com/openstreetmap/iD/issues/3739
+[#3740]: https://github.com/openstreetmap/iD/issues/3740
+[#3742]: https://github.com/openstreetmap/iD/issues/3742
+[#3750]: https://github.com/openstreetmap/iD/issues/3750
+[#3753]: https://github.com/openstreetmap/iD/issues/3753
+[#3753]: https://github.com/openstreetmap/iD/issues/3753
+[#3754]: https://github.com/openstreetmap/iD/issues/3754
+[#3755]: https://github.com/openstreetmap/iD/issues/3755
+[#3756]: https://github.com/openstreetmap/iD/issues/3756
+[#3759]: https://github.com/openstreetmap/iD/issues/3759
+[#3761]: https://github.com/openstreetmap/iD/issues/3761
+[#3764]: https://github.com/openstreetmap/iD/issues/3764
+[#3772]: https://github.com/openstreetmap/iD/issues/3772
+[#3774]: https://github.com/openstreetmap/iD/issues/3774
+[#3775]: https://github.com/openstreetmap/iD/issues/3775
+[#3776]: https://github.com/openstreetmap/iD/issues/3776
+[#3777]: https://github.com/openstreetmap/iD/issues/3777
+[#3786]: https://github.com/openstreetmap/iD/issues/3786
+[#3788]: https://github.com/openstreetmap/iD/issues/3788
+[#3791]: https://github.com/openstreetmap/iD/issues/3791
+[#3794]: https://github.com/openstreetmap/iD/issues/3794
+[#3795]: https://github.com/openstreetmap/iD/issues/3795
+[#3797]: https://github.com/openstreetmap/iD/issues/3797
+[#3800]: https://github.com/openstreetmap/iD/issues/3800
+[#3804]: https://github.com/openstreetmap/iD/issues/3804
+[#3809]: https://github.com/openstreetmap/iD/issues/3809
+[#3811]: https://github.com/openstreetmap/iD/issues/3811
+[#3812]: https://github.com/openstreetmap/iD/issues/3812
+[#3812]: https://github.com/openstreetmap/iD/issues/3812
+[#3813]: https://github.com/openstreetmap/iD/issues/3813
+[#3815]: https://github.com/openstreetmap/iD/issues/3815
+[#3815]: https://github.com/openstreetmap/iD/issues/3815
+[#3820]: https://github.com/openstreetmap/iD/issues/3820
+[#3821]: https://github.com/openstreetmap/iD/issues/3821
+[#3824]: https://github.com/openstreetmap/iD/issues/3824
+[#3824]: https://github.com/openstreetmap/iD/issues/3824
+[#3826]: https://github.com/openstreetmap/iD/issues/3826
+[#3829]: https://github.com/openstreetmap/iD/issues/3829
+[#3833]: https://github.com/openstreetmap/iD/issues/3833
+[#3837]: https://github.com/openstreetmap/iD/issues/3837
+[#3839]: https://github.com/openstreetmap/iD/issues/3839
+[#3839]: https://github.com/openstreetmap/iD/issues/3839
+[#3842]: https://github.com/openstreetmap/iD/issues/3842
+[#3842]: https://github.com/openstreetmap/iD/issues/3842
+[#3843]: https://github.com/openstreetmap/iD/issues/3843
+[#3844]: https://github.com/openstreetmap/iD/issues/3844
+[#3845]: https://github.com/openstreetmap/iD/issues/3845
+[#3849]: https://github.com/openstreetmap/iD/issues/3849
+[#3851]: https://github.com/openstreetmap/iD/issues/3851
+[#3853]: https://github.com/openstreetmap/iD/issues/3853
+[#3854]: https://github.com/openstreetmap/iD/issues/3854
+[#3858]: https://github.com/openstreetmap/iD/issues/3858
+[#3864]: https://github.com/openstreetmap/iD/issues/3864
+[#3871]: https://github.com/openstreetmap/iD/issues/3871
+[#3874]: https://github.com/openstreetmap/iD/issues/3874
+[#3887]: https://github.com/openstreetmap/iD/issues/3887
+[#3890]: https://github.com/openstreetmap/iD/issues/3890
+[#3894]: https://github.com/openstreetmap/iD/issues/3894
+[#3898]: https://github.com/openstreetmap/iD/issues/3898
+[#3899]: https://github.com/openstreetmap/iD/issues/3899
+[#3900]: https://github.com/openstreetmap/iD/issues/3900
+[#3905]: https://github.com/openstreetmap/iD/issues/3905
+[#3908]: https://github.com/openstreetmap/iD/issues/3908
+[#3910]: https://github.com/openstreetmap/iD/issues/3910
+[#3911]: https://github.com/openstreetmap/iD/issues/3911
+[#3912]: https://github.com/openstreetmap/iD/issues/3912
+[#3914]: https://github.com/openstreetmap/iD/issues/3914
+[#3921]: https://github.com/openstreetmap/iD/issues/3921
+[#3923]: https://github.com/openstreetmap/iD/issues/3923
+[#3924]: https://github.com/openstreetmap/iD/issues/3924
+[#3925]: https://github.com/openstreetmap/iD/issues/3925
+[#3933]: https://github.com/openstreetmap/iD/issues/3933
+[#3947]: https://github.com/openstreetmap/iD/issues/3947
+[#3949]: https://github.com/openstreetmap/iD/issues/3949
+[#3950]: https://github.com/openstreetmap/iD/issues/3950
+[#3955]: https://github.com/openstreetmap/iD/issues/3955
+[#3956]: https://github.com/openstreetmap/iD/issues/3956
+[#3960]: https://github.com/openstreetmap/iD/issues/3960
+[#3962]: https://github.com/openstreetmap/iD/issues/3962
+[#3965]: https://github.com/openstreetmap/iD/issues/3965
+[#3967]: https://github.com/openstreetmap/iD/issues/3967
+[#3968]: https://github.com/openstreetmap/iD/issues/3968
+[#3973]: https://github.com/openstreetmap/iD/issues/3973
+[#3975]: https://github.com/openstreetmap/iD/issues/3975
+[#3982]: https://github.com/openstreetmap/iD/issues/3982
+[#3983]: https://github.com/openstreetmap/iD/issues/3983
+[#3987]: https://github.com/openstreetmap/iD/issues/3987
+[#3991]: https://github.com/openstreetmap/iD/issues/3991
+[#3993]: https://github.com/openstreetmap/iD/issues/3993
+[#3995]: https://github.com/openstreetmap/iD/issues/3995
+[#3996]: https://github.com/openstreetmap/iD/issues/3996
+[#3997]: https://github.com/openstreetmap/iD/issues/3997
+[#4006]: https://github.com/openstreetmap/iD/issues/4006
+[#4008]: https://github.com/openstreetmap/iD/issues/4008
+[#4013]: https://github.com/openstreetmap/iD/issues/4013
+[#4018]: https://github.com/openstreetmap/iD/issues/4018
+[#4023]: https://github.com/openstreetmap/iD/issues/4023
+[#4024]: https://github.com/openstreetmap/iD/issues/4024
+[#4025]: https://github.com/openstreetmap/iD/issues/4025
+[#4026]: https://github.com/openstreetmap/iD/issues/4026
+[#4027]: https://github.com/openstreetmap/iD/issues/4027
+[#4030]: https://github.com/openstreetmap/iD/issues/4030
+[#4032]: https://github.com/openstreetmap/iD/issues/4032
+[#4034]: https://github.com/openstreetmap/iD/issues/4034
+[#4036]: https://github.com/openstreetmap/iD/issues/4036
+[#4042]: https://github.com/openstreetmap/iD/issues/4042
+[#4047]: https://github.com/openstreetmap/iD/issues/4047
+[#4049]: https://github.com/openstreetmap/iD/issues/4049
+[#4050]: https://github.com/openstreetmap/iD/issues/4050
+[#4052]: https://github.com/openstreetmap/iD/issues/4052
+[#4059]: https://github.com/openstreetmap/iD/issues/4059
+[#4067]: https://github.com/openstreetmap/iD/issues/4067
+[#4068]: https://github.com/openstreetmap/iD/issues/4068
+[#4081]: https://github.com/openstreetmap/iD/issues/4081
+[#4081]: https://github.com/openstreetmap/iD/issues/4081
+[#4085]: https://github.com/openstreetmap/iD/issues/4085
+[#4096]: https://github.com/openstreetmap/iD/issues/4096
+[#4099]: https://github.com/openstreetmap/iD/issues/4099
+[#4104]: https://github.com/openstreetmap/iD/issues/4104
+[#4107]: https://github.com/openstreetmap/iD/issues/4107
+[#4108]: https://github.com/openstreetmap/iD/issues/4108
+[#4111]: https://github.com/openstreetmap/iD/issues/4111
+[#4113]: https://github.com/openstreetmap/iD/issues/4113
+[#4114]: https://github.com/openstreetmap/iD/issues/4114
+[#4117]: https://github.com/openstreetmap/iD/issues/4117
+[#4121]: https://github.com/openstreetmap/iD/issues/4121
+[#4122]: https://github.com/openstreetmap/iD/issues/4122
+[#4133]: https://github.com/openstreetmap/iD/issues/4133
+[#4140]: https://github.com/openstreetmap/iD/issues/4140
+[#4145]: https://github.com/openstreetmap/iD/issues/4145
+[#4146]: https://github.com/openstreetmap/iD/issues/4146
+[#4148]: https://github.com/openstreetmap/iD/issues/4148
+[#4149]: https://github.com/openstreetmap/iD/issues/4149
+[#4153]: https://github.com/openstreetmap/iD/issues/4153
+[#4155]: https://github.com/openstreetmap/iD/issues/4155
+[#4156]: https://github.com/openstreetmap/iD/issues/4156
+[#4157]: https://github.com/openstreetmap/iD/issues/4157
+[#4159]: https://github.com/openstreetmap/iD/issues/4159
+[#4159]: https://github.com/openstreetmap/iD/issues/4159
+[#4162]: https://github.com/openstreetmap/iD/issues/4162
+[#4165]: https://github.com/openstreetmap/iD/issues/4165
+[#4167]: https://github.com/openstreetmap/iD/issues/4167
+[#4168]: https://github.com/openstreetmap/iD/issues/4168
+[#4169]: https://github.com/openstreetmap/iD/issues/4169
+[#4172]: https://github.com/openstreetmap/iD/issues/4172
+[#4175]: https://github.com/openstreetmap/iD/issues/4175
+[#4178]: https://github.com/openstreetmap/iD/issues/4178
+[#4180]: https://github.com/openstreetmap/iD/issues/4180
+[#4182]: https://github.com/openstreetmap/iD/issues/4182
+[#4184]: https://github.com/openstreetmap/iD/issues/4184
+[#4185]: https://github.com/openstreetmap/iD/issues/4185
+[#4190]: https://github.com/openstreetmap/iD/issues/4190
+[#4191]: https://github.com/openstreetmap/iD/issues/4191
+[#4192]: https://github.com/openstreetmap/iD/issues/4192
+[#4194]: https://github.com/openstreetmap/iD/issues/4194
+[#4196]: https://github.com/openstreetmap/iD/issues/4196
+[#4200]: https://github.com/openstreetmap/iD/issues/4200
+[#4200]: https://github.com/openstreetmap/iD/issues/4200
+[#4201]: https://github.com/openstreetmap/iD/issues/4201
+[#4207]: https://github.com/openstreetmap/iD/issues/4207
+[#4209]: https://github.com/openstreetmap/iD/issues/4209
+[#4210]: https://github.com/openstreetmap/iD/issues/4210
+[#4214]: https://github.com/openstreetmap/iD/issues/4214
+[#4215]: https://github.com/openstreetmap/iD/issues/4215
+[#4217]: https://github.com/openstreetmap/iD/issues/4217
+[#4219]: https://github.com/openstreetmap/iD/issues/4219
+[#4220]: https://github.com/openstreetmap/iD/issues/4220
+[#4222]: https://github.com/openstreetmap/iD/issues/4222
+[#4223]: https://github.com/openstreetmap/iD/issues/4223
+[#4224]: https://github.com/openstreetmap/iD/issues/4224
+[#4226]: https://github.com/openstreetmap/iD/issues/4226
+[#4230]: https://github.com/openstreetmap/iD/issues/4230
+[#4232]: https://github.com/openstreetmap/iD/issues/4232
+[#4233]: https://github.com/openstreetmap/iD/issues/4233
+[#4235]: https://github.com/openstreetmap/iD/issues/4235
+[#4236]: https://github.com/openstreetmap/iD/issues/4236
+[#4237]: https://github.com/openstreetmap/iD/issues/4237
+[#4245]: https://github.com/openstreetmap/iD/issues/4245
+[#4248]: https://github.com/openstreetmap/iD/issues/4248
+[#4250]: https://github.com/openstreetmap/iD/issues/4250
+[#4251]: https://github.com/openstreetmap/iD/issues/4251
+[#4255]: https://github.com/openstreetmap/iD/issues/4255
+[#4256]: https://github.com/openstreetmap/iD/issues/4256
+[#4259]: https://github.com/openstreetmap/iD/issues/4259
+[#4260]: https://github.com/openstreetmap/iD/issues/4260
+[#4260]: https://github.com/openstreetmap/iD/issues/4260
+[#4271]: https://github.com/openstreetmap/iD/issues/4271
+[#4275]: https://github.com/openstreetmap/iD/issues/4275
+[#4276]: https://github.com/openstreetmap/iD/issues/4276
+[#4277]: https://github.com/openstreetmap/iD/issues/4277
+[#4279]: https://github.com/openstreetmap/iD/issues/4279
+[#4282]: https://github.com/openstreetmap/iD/issues/4282
+[#4283]: https://github.com/openstreetmap/iD/issues/4283
+[#4284]: https://github.com/openstreetmap/iD/issues/4284
+[#4287]: https://github.com/openstreetmap/iD/issues/4287
+[#4288]: https://github.com/openstreetmap/iD/issues/4288
+[#4289]: https://github.com/openstreetmap/iD/issues/4289
+[#4290]: https://github.com/openstreetmap/iD/issues/4290
+[#4291]: https://github.com/openstreetmap/iD/issues/4291
+[#4292]: https://github.com/openstreetmap/iD/issues/4292
+[#4296]: https://github.com/openstreetmap/iD/issues/4296
+[#4297]: https://github.com/openstreetmap/iD/issues/4297
+[#4298]: https://github.com/openstreetmap/iD/issues/4298
+[#4299]: https://github.com/openstreetmap/iD/issues/4299
+[#4300]: https://github.com/openstreetmap/iD/issues/4300
+[#4301]: https://github.com/openstreetmap/iD/issues/4301
+[#4303]: https://github.com/openstreetmap/iD/issues/4303
+[#4304]: https://github.com/openstreetmap/iD/issues/4304
+[#4309]: https://github.com/openstreetmap/iD/issues/4309
+[#4314]: https://github.com/openstreetmap/iD/issues/4314
+[#4318]: https://github.com/openstreetmap/iD/issues/4318
+[#4319]: https://github.com/openstreetmap/iD/issues/4319
+[#4320]: https://github.com/openstreetmap/iD/issues/4320
+[#4322]: https://github.com/openstreetmap/iD/issues/4322
+[#4323]: https://github.com/openstreetmap/iD/issues/4323
+[#4323]: https://github.com/openstreetmap/iD/issues/4323
+[#4325]: https://github.com/openstreetmap/iD/issues/4325
+[#4327]: https://github.com/openstreetmap/iD/issues/4327
+[#4328]: https://github.com/openstreetmap/iD/issues/4328
+[#4328]: https://github.com/openstreetmap/iD/issues/4328
+[#4329]: https://github.com/openstreetmap/iD/issues/4329
+[#4330]: https://github.com/openstreetmap/iD/issues/4330
+[#4331]: https://github.com/openstreetmap/iD/issues/4331
+[#4332]: https://github.com/openstreetmap/iD/issues/4332
+[#4335]: https://github.com/openstreetmap/iD/issues/4335
+[#4337]: https://github.com/openstreetmap/iD/issues/4337
+[#4346]: https://github.com/openstreetmap/iD/issues/4346
+[#4347]: https://github.com/openstreetmap/iD/issues/4347
+[#4348]: https://github.com/openstreetmap/iD/issues/4348
+[#4349]: https://github.com/openstreetmap/iD/issues/4349
+[#4350]: https://github.com/openstreetmap/iD/issues/4350
+[#4351]: https://github.com/openstreetmap/iD/issues/4351
+[#4352]: https://github.com/openstreetmap/iD/issues/4352
+[#4353]: https://github.com/openstreetmap/iD/issues/4353
+[#4354]: https://github.com/openstreetmap/iD/issues/4354
+[#4355]: https://github.com/openstreetmap/iD/issues/4355
+[#4356]: https://github.com/openstreetmap/iD/issues/4356
+[#4357]: https://github.com/openstreetmap/iD/issues/4357
+[#4358]: https://github.com/openstreetmap/iD/issues/4358
+[#4363]: https://github.com/openstreetmap/iD/issues/4363
+[#4365]: https://github.com/openstreetmap/iD/issues/4365
+[#4366]: https://github.com/openstreetmap/iD/issues/4366
+[#4367]: https://github.com/openstreetmap/iD/issues/4367
+[#4373]: https://github.com/openstreetmap/iD/issues/4373
+[#4374]: https://github.com/openstreetmap/iD/issues/4374
+[#4375]: https://github.com/openstreetmap/iD/issues/4375
+[#4378]: https://github.com/openstreetmap/iD/issues/4378
+[#4382]: https://github.com/openstreetmap/iD/issues/4382
+[#4383]: https://github.com/openstreetmap/iD/issues/4383
+[#4384]: https://github.com/openstreetmap/iD/issues/4384
+[#4385]: https://github.com/openstreetmap/iD/issues/4385
+[#4388]: https://github.com/openstreetmap/iD/issues/4388
+[#4393]: https://github.com/openstreetmap/iD/issues/4393
+[#4396]: https://github.com/openstreetmap/iD/issues/4396
+[#4398]: https://github.com/openstreetmap/iD/issues/4398
+[#4400]: https://github.com/openstreetmap/iD/issues/4400
+[#4402]: https://github.com/openstreetmap/iD/issues/4402
+[#4404]: https://github.com/openstreetmap/iD/issues/4404
+[#4406]: https://github.com/openstreetmap/iD/issues/4406
+[#4407]: https://github.com/openstreetmap/iD/issues/4407
+[#4410]: https://github.com/openstreetmap/iD/issues/4410
+[#4412]: https://github.com/openstreetmap/iD/issues/4412
+[#4412]: https://github.com/openstreetmap/iD/issues/4412
+[#4415]: https://github.com/openstreetmap/iD/issues/4415
+[#4417]: https://github.com/openstreetmap/iD/issues/4417
+[#4419]: https://github.com/openstreetmap/iD/issues/4419
+[#4421]: https://github.com/openstreetmap/iD/issues/4421
+[#4423]: https://github.com/openstreetmap/iD/issues/4423
+[#4424]: https://github.com/openstreetmap/iD/issues/4424
+[#4427]: https://github.com/openstreetmap/iD/issues/4427
+[#4430]: https://github.com/openstreetmap/iD/issues/4430
+[#4432]: https://github.com/openstreetmap/iD/issues/4432
+[#4433]: https://github.com/openstreetmap/iD/issues/4433
+[#4436]: https://github.com/openstreetmap/iD/issues/4436
+[#4437]: https://github.com/openstreetmap/iD/issues/4437
+[#4438]: https://github.com/openstreetmap/iD/issues/4438
+[#4439]: https://github.com/openstreetmap/iD/issues/4439
+[#4440]: https://github.com/openstreetmap/iD/issues/4440
+[#4441]: https://github.com/openstreetmap/iD/issues/4441
+[#4442]: https://github.com/openstreetmap/iD/issues/4442
+[#4443]: https://github.com/openstreetmap/iD/issues/4443
+[#4444]: https://github.com/openstreetmap/iD/issues/4444
+[#4445]: https://github.com/openstreetmap/iD/issues/4445
+[#4447]: https://github.com/openstreetmap/iD/issues/4447
+[#4448]: https://github.com/openstreetmap/iD/issues/4448
+[#4449]: https://github.com/openstreetmap/iD/issues/4449
+[#4451]: https://github.com/openstreetmap/iD/issues/4451
+[#4455]: https://github.com/openstreetmap/iD/issues/4455
+[#4456]: https://github.com/openstreetmap/iD/issues/4456
+[#4458]: https://github.com/openstreetmap/iD/issues/4458
+[#4460]: https://github.com/openstreetmap/iD/issues/4460
+[#4461]: https://github.com/openstreetmap/iD/issues/4461
+[#4462]: https://github.com/openstreetmap/iD/issues/4462
+[#4464]: https://github.com/openstreetmap/iD/issues/4464
+[#4466]: https://github.com/openstreetmap/iD/issues/4466
+[#4467]: https://github.com/openstreetmap/iD/issues/4467
+[#4468]: https://github.com/openstreetmap/iD/issues/4468
+[#4469]: https://github.com/openstreetmap/iD/issues/4469
+[#4470]: https://github.com/openstreetmap/iD/issues/4470
+[#4471]: https://github.com/openstreetmap/iD/issues/4471
+[#4473]: https://github.com/openstreetmap/iD/issues/4473
+[#4474]: https://github.com/openstreetmap/iD/issues/4474
+[#4475]: https://github.com/openstreetmap/iD/issues/4475
+[#4476]: https://github.com/openstreetmap/iD/issues/4476
+[#4478]: https://github.com/openstreetmap/iD/issues/4478
+[#4479]: https://github.com/openstreetmap/iD/issues/4479
+[#4480]: https://github.com/openstreetmap/iD/issues/4480
+[#4482]: https://github.com/openstreetmap/iD/issues/4482
+[#4483]: https://github.com/openstreetmap/iD/issues/4483
+[#4484]: https://github.com/openstreetmap/iD/issues/4484
+[#4485]: https://github.com/openstreetmap/iD/issues/4485
+[#4486]: https://github.com/openstreetmap/iD/issues/4486
+[#4488]: https://github.com/openstreetmap/iD/issues/4488
+[#4489]: https://github.com/openstreetmap/iD/issues/4489
+[#4490]: https://github.com/openstreetmap/iD/issues/4490
+[#4491]: https://github.com/openstreetmap/iD/issues/4491
+[#4492]: https://github.com/openstreetmap/iD/issues/4492
+[#4493]: https://github.com/openstreetmap/iD/issues/4493
+[#4499]: https://github.com/openstreetmap/iD/issues/4499
+[#4500]: https://github.com/openstreetmap/iD/issues/4500
+[#4504]: https://github.com/openstreetmap/iD/issues/4504
+[#4505]: https://github.com/openstreetmap/iD/issues/4505
+[#4506]: https://github.com/openstreetmap/iD/issues/4506
+[#4507]: https://github.com/openstreetmap/iD/issues/4507
+[#4510]: https://github.com/openstreetmap/iD/issues/4510
+[#4512]: https://github.com/openstreetmap/iD/issues/4512
+[#4516]: https://github.com/openstreetmap/iD/issues/4516
+[#4517]: https://github.com/openstreetmap/iD/issues/4517
+[#4518]: https://github.com/openstreetmap/iD/issues/4518
+[#4522]: https://github.com/openstreetmap/iD/issues/4522
+[#4526]: https://github.com/openstreetmap/iD/issues/4526
+[#4527]: https://github.com/openstreetmap/iD/issues/4527
+[#4528]: https://github.com/openstreetmap/iD/issues/4528
+[#4530]: https://github.com/openstreetmap/iD/issues/4530
+[#4531]: https://github.com/openstreetmap/iD/issues/4531
+[#4533]: https://github.com/openstreetmap/iD/issues/4533
+[#4535]: https://github.com/openstreetmap/iD/issues/4535
+[#4536]: https://github.com/openstreetmap/iD/issues/4536
+[#4538]: https://github.com/openstreetmap/iD/issues/4538
+[#4539]: https://github.com/openstreetmap/iD/issues/4539
+[#4541]: https://github.com/openstreetmap/iD/issues/4541
+[#4545]: https://github.com/openstreetmap/iD/issues/4545
+[#4546]: https://github.com/openstreetmap/iD/issues/4546
+[#4548]: https://github.com/openstreetmap/iD/issues/4548
+[#4549]: https://github.com/openstreetmap/iD/issues/4549
+[#4553]: https://github.com/openstreetmap/iD/issues/4553
+[#4555]: https://github.com/openstreetmap/iD/issues/4555
+[#4558]: https://github.com/openstreetmap/iD/issues/4558
+[#4559]: https://github.com/openstreetmap/iD/issues/4559
+[#4561]: https://github.com/openstreetmap/iD/issues/4561
+[#4563]: https://github.com/openstreetmap/iD/issues/4563
+[#4566]: https://github.com/openstreetmap/iD/issues/4566
+[#4568]: https://github.com/openstreetmap/iD/issues/4568
+[#4569]: https://github.com/openstreetmap/iD/issues/4569
+[#4570]: https://github.com/openstreetmap/iD/issues/4570
+[#4571]: https://github.com/openstreetmap/iD/issues/4571
+[#4572]: https://github.com/openstreetmap/iD/issues/4572
+[#4573]: https://github.com/openstreetmap/iD/issues/4573
+[#4575]: https://github.com/openstreetmap/iD/issues/4575
+[#4578]: https://github.com/openstreetmap/iD/issues/4578
+[#4581]: https://github.com/openstreetmap/iD/issues/4581
+[#4584]: https://github.com/openstreetmap/iD/issues/4584
+[#4585]: https://github.com/openstreetmap/iD/issues/4585
+[#4586]: https://github.com/openstreetmap/iD/issues/4586
+[#4589]: https://github.com/openstreetmap/iD/issues/4589
+[#4590]: https://github.com/openstreetmap/iD/issues/4590
+[#4591]: https://github.com/openstreetmap/iD/issues/4591
+[#4594]: https://github.com/openstreetmap/iD/issues/4594
+[#4595]: https://github.com/openstreetmap/iD/issues/4595
+[#4596]: https://github.com/openstreetmap/iD/issues/4596
+[#4598]: https://github.com/openstreetmap/iD/issues/4598
+[#4599]: https://github.com/openstreetmap/iD/issues/4599
+[#4602]: https://github.com/openstreetmap/iD/issues/4602
+[#4602]: https://github.com/openstreetmap/iD/issues/4602
+[#4605]: https://github.com/openstreetmap/iD/issues/4605
+[#4609]: https://github.com/openstreetmap/iD/issues/4609
+[#4611]: https://github.com/openstreetmap/iD/issues/4611
+[#4612]: https://github.com/openstreetmap/iD/issues/4612
+[#4613]: https://github.com/openstreetmap/iD/issues/4613
+[#4617]: https://github.com/openstreetmap/iD/issues/4617
+[#4618]: https://github.com/openstreetmap/iD/issues/4618
+[#4620]: https://github.com/openstreetmap/iD/issues/4620
+[#4623]: https://github.com/openstreetmap/iD/issues/4623
+[#4624]: https://github.com/openstreetmap/iD/issues/4624
+[#4630]: https://github.com/openstreetmap/iD/issues/4630
+[#4634]: https://github.com/openstreetmap/iD/issues/4634
+[#4637]: https://github.com/openstreetmap/iD/issues/4637
+[#4638]: https://github.com/openstreetmap/iD/issues/4638
+[#4641]: https://github.com/openstreetmap/iD/issues/4641
+[#4643]: https://github.com/openstreetmap/iD/issues/4643
+[#4644]: https://github.com/openstreetmap/iD/issues/4644
+[#4646]: https://github.com/openstreetmap/iD/issues/4646
+[#4646]: https://github.com/openstreetmap/iD/issues/4646
+[#4647]: https://github.com/openstreetmap/iD/issues/4647
+[#4650]: https://github.com/openstreetmap/iD/issues/4650
+[#4651]: https://github.com/openstreetmap/iD/issues/4651
+[#4658]: https://github.com/openstreetmap/iD/issues/4658
+[#4661]: https://github.com/openstreetmap/iD/issues/4661
+[#4664]: https://github.com/openstreetmap/iD/issues/4664
+[#4666]: https://github.com/openstreetmap/iD/issues/4666
+[#4667]: https://github.com/openstreetmap/iD/issues/4667
+[#4671]: https://github.com/openstreetmap/iD/issues/4671
+[#4672]: https://github.com/openstreetmap/iD/issues/4672
+[#4674]: https://github.com/openstreetmap/iD/issues/4674
+[#4675]: https://github.com/openstreetmap/iD/issues/4675
+[#4678]: https://github.com/openstreetmap/iD/issues/4678
+[#4682]: https://github.com/openstreetmap/iD/issues/4682
+[#4684]: https://github.com/openstreetmap/iD/issues/4684
+[#4688]: https://github.com/openstreetmap/iD/issues/4688
+[#4694]: https://github.com/openstreetmap/iD/issues/4694
+[#4696]: https://github.com/openstreetmap/iD/issues/4696
+[#4697]: https://github.com/openstreetmap/iD/issues/4697
+[#4699]: https://github.com/openstreetmap/iD/issues/4699
+[#4700]: https://github.com/openstreetmap/iD/issues/4700
+[#4701]: https://github.com/openstreetmap/iD/issues/4701
+[#4702]: https://github.com/openstreetmap/iD/issues/4702
+[#4705]: https://github.com/openstreetmap/iD/issues/4705
+[#4706]: https://github.com/openstreetmap/iD/issues/4706
+[#4707]: https://github.com/openstreetmap/iD/issues/4707
+[#4708]: https://github.com/openstreetmap/iD/issues/4708
+[#4709]: https://github.com/openstreetmap/iD/issues/4709
+[#4715]: https://github.com/openstreetmap/iD/issues/4715
+[#4718]: https://github.com/openstreetmap/iD/issues/4718
+[#4720]: https://github.com/openstreetmap/iD/issues/4720
+[#4721]: https://github.com/openstreetmap/iD/issues/4721
+[#4722]: https://github.com/openstreetmap/iD/issues/4722
+[#4725]: https://github.com/openstreetmap/iD/issues/4725
+[#4727]: https://github.com/openstreetmap/iD/issues/4727
+[#4728]: https://github.com/openstreetmap/iD/issues/4728
+[#4733]: https://github.com/openstreetmap/iD/issues/4733
+[#4736]: https://github.com/openstreetmap/iD/issues/4736
+[#4737]: https://github.com/openstreetmap/iD/issues/4737
+[#4738]: https://github.com/openstreetmap/iD/issues/4738
+[#4739]: https://github.com/openstreetmap/iD/issues/4739
+[#4741]: https://github.com/openstreetmap/iD/issues/4741
+[#4748]: https://github.com/openstreetmap/iD/issues/4748
+[#4750]: https://github.com/openstreetmap/iD/issues/4750
+[#4751]: https://github.com/openstreetmap/iD/issues/4751
+[#4753]: https://github.com/openstreetmap/iD/issues/4753
+[#4754]: https://github.com/openstreetmap/iD/issues/4754
+[#4755]: https://github.com/openstreetmap/iD/issues/4755
+[#4756]: https://github.com/openstreetmap/iD/issues/4756
+[#4761]: https://github.com/openstreetmap/iD/issues/4761
+[#4763]: https://github.com/openstreetmap/iD/issues/4763
+[#4765]: https://github.com/openstreetmap/iD/issues/4765
+[#4766]: https://github.com/openstreetmap/iD/issues/4766
+[#4767]: https://github.com/openstreetmap/iD/issues/4767
+[#4768]: https://github.com/openstreetmap/iD/issues/4768
+[#4773]: https://github.com/openstreetmap/iD/issues/4773
+[#4774]: https://github.com/openstreetmap/iD/issues/4774
+[#4775]: https://github.com/openstreetmap/iD/issues/4775
+[#4777]: https://github.com/openstreetmap/iD/issues/4777
+[#4783]: https://github.com/openstreetmap/iD/issues/4783
+[#4784]: https://github.com/openstreetmap/iD/issues/4784
+[#4785]: https://github.com/openstreetmap/iD/issues/4785
+[#4795]: https://github.com/openstreetmap/iD/issues/4795
+[#4798]: https://github.com/openstreetmap/iD/issues/4798
+[#4802]: https://github.com/openstreetmap/iD/issues/4802
+[#4804]: https://github.com/openstreetmap/iD/issues/4804
+[#4805]: https://github.com/openstreetmap/iD/issues/4805
+[#4806]: https://github.com/openstreetmap/iD/issues/4806
+[#4808]: https://github.com/openstreetmap/iD/issues/4808
+[#4809]: https://github.com/openstreetmap/iD/issues/4809
+[#4814]: https://github.com/openstreetmap/iD/issues/4814
+[#4815]: https://github.com/openstreetmap/iD/issues/4815
+[#4819]: https://github.com/openstreetmap/iD/issues/4819
+[#4825]: https://github.com/openstreetmap/iD/issues/4825
+[#4826]: https://github.com/openstreetmap/iD/issues/4826
+[#4827]: https://github.com/openstreetmap/iD/issues/4827
+[#4831]: https://github.com/openstreetmap/iD/issues/4831
+[#4833]: https://github.com/openstreetmap/iD/issues/4833
+[#4839]: https://github.com/openstreetmap/iD/issues/4839
+[#4841]: https://github.com/openstreetmap/iD/issues/4841
+[#4845]: https://github.com/openstreetmap/iD/issues/4845
+[#4846]: https://github.com/openstreetmap/iD/issues/4846
+[#4849]: https://github.com/openstreetmap/iD/issues/4849
+[#4853]: https://github.com/openstreetmap/iD/issues/4853
+[#4855]: https://github.com/openstreetmap/iD/issues/4855
+[#4857]: https://github.com/openstreetmap/iD/issues/4857
+[#4857]: https://github.com/openstreetmap/iD/issues/4857
+[#4858]: https://github.com/openstreetmap/iD/issues/4858
+[#4860]: https://github.com/openstreetmap/iD/issues/4860
+[#4861]: https://github.com/openstreetmap/iD/issues/4861
+[#4862]: https://github.com/openstreetmap/iD/issues/4862
+[#4864]: https://github.com/openstreetmap/iD/issues/4864
+[#4865]: https://github.com/openstreetmap/iD/issues/4865
+[#4867]: https://github.com/openstreetmap/iD/issues/4867
+[#4868]: https://github.com/openstreetmap/iD/issues/4868
+[#4869]: https://github.com/openstreetmap/iD/issues/4869
+[#4870]: https://github.com/openstreetmap/iD/issues/4870
+[#4871]: https://github.com/openstreetmap/iD/issues/4871
+[#4872]: https://github.com/openstreetmap/iD/issues/4872
+[#4883]: https://github.com/openstreetmap/iD/issues/4883
+[#4887]: https://github.com/openstreetmap/iD/issues/4887
+[#4888]: https://github.com/openstreetmap/iD/issues/4888
+[#4889]: https://github.com/openstreetmap/iD/issues/4889
+[#4891]: https://github.com/openstreetmap/iD/issues/4891
+[#4892]: https://github.com/openstreetmap/iD/issues/4892
+[#4898]: https://github.com/openstreetmap/iD/issues/4898
+[#4899]: https://github.com/openstreetmap/iD/issues/4899
+[#4900]: https://github.com/openstreetmap/iD/issues/4900
+[#4904]: https://github.com/openstreetmap/iD/issues/4904
+[#4905]: https://github.com/openstreetmap/iD/issues/4905
+[#4906]: https://github.com/openstreetmap/iD/issues/4906
+[#4908]: https://github.com/openstreetmap/iD/issues/4908
+[#4912]: https://github.com/openstreetmap/iD/issues/4912
+[#4913]: https://github.com/openstreetmap/iD/issues/4913
+[#4917]: https://github.com/openstreetmap/iD/issues/4917
+[#4918]: https://github.com/openstreetmap/iD/issues/4918
+[#4919]: https://github.com/openstreetmap/iD/issues/4919
+[#4920]: https://github.com/openstreetmap/iD/issues/4920
+[#4921]: https://github.com/openstreetmap/iD/issues/4921
+[#4923]: https://github.com/openstreetmap/iD/issues/4923
+[#4925]: https://github.com/openstreetmap/iD/issues/4925
+[#4926]: https://github.com/openstreetmap/iD/issues/4926
+[#4928]: https://github.com/openstreetmap/iD/issues/4928
+[#4930]: https://github.com/openstreetmap/iD/issues/4930
+[#4931]: https://github.com/openstreetmap/iD/issues/4931
+[#4932]: https://github.com/openstreetmap/iD/issues/4932
+[#4933]: https://github.com/openstreetmap/iD/issues/4933
+[#4934]: https://github.com/openstreetmap/iD/issues/4934
+[#4935]: https://github.com/openstreetmap/iD/issues/4935
+[#4936]: https://github.com/openstreetmap/iD/issues/4936
+[#4937]: https://github.com/openstreetmap/iD/issues/4937
+[#4938]: https://github.com/openstreetmap/iD/issues/4938
+[#4939]: https://github.com/openstreetmap/iD/issues/4939
+[#4940]: https://github.com/openstreetmap/iD/issues/4940
+[#4942]: https://github.com/openstreetmap/iD/issues/4942
+[#4946]: https://github.com/openstreetmap/iD/issues/4946
+[#4949]: https://github.com/openstreetmap/iD/issues/4949
+[#4951]: https://github.com/openstreetmap/iD/issues/4951
+[#4952]: https://github.com/openstreetmap/iD/issues/4952
+[#4955]: https://github.com/openstreetmap/iD/issues/4955
+[#4956]: https://github.com/openstreetmap/iD/issues/4956
+[#4959]: https://github.com/openstreetmap/iD/issues/4959
+[#4961]: https://github.com/openstreetmap/iD/issues/4961
+[#4962]: https://github.com/openstreetmap/iD/issues/4962
+[#4963]: https://github.com/openstreetmap/iD/issues/4963
+[#4968]: https://github.com/openstreetmap/iD/issues/4968
+[#4969]: https://github.com/openstreetmap/iD/issues/4969
+[#4970]: https://github.com/openstreetmap/iD/issues/4970
+[#4973]: https://github.com/openstreetmap/iD/issues/4973
+[#4974]: https://github.com/openstreetmap/iD/issues/4974
+[#4975]: https://github.com/openstreetmap/iD/issues/4975
+[#4976]: https://github.com/openstreetmap/iD/issues/4976
+[#4977]: https://github.com/openstreetmap/iD/issues/4977
+[#4980]: https://github.com/openstreetmap/iD/issues/4980
+[#4982]: https://github.com/openstreetmap/iD/issues/4982
+[#4986]: https://github.com/openstreetmap/iD/issues/4986
+[#4987]: https://github.com/openstreetmap/iD/issues/4987
+[#4989]: https://github.com/openstreetmap/iD/issues/4989
+[#4990]: https://github.com/openstreetmap/iD/issues/4990
+[#4991]: https://github.com/openstreetmap/iD/issues/4991
+[#4993]: https://github.com/openstreetmap/iD/issues/4993
+[#4994]: https://github.com/openstreetmap/iD/issues/4994
+[#4997]: https://github.com/openstreetmap/iD/issues/4997
+[#4998]: https://github.com/openstreetmap/iD/issues/4998
+[#4999]: https://github.com/openstreetmap/iD/issues/4999
+[#5001]: https://github.com/openstreetmap/iD/issues/5001
+[#5004]: https://github.com/openstreetmap/iD/issues/5004
+[#5005]: https://github.com/openstreetmap/iD/issues/5005
+[#5006]: https://github.com/openstreetmap/iD/issues/5006
+[#5011]: https://github.com/openstreetmap/iD/issues/5011
+[#5018]: https://github.com/openstreetmap/iD/issues/5018
+[#5019]: https://github.com/openstreetmap/iD/issues/5019
+[#5020]: https://github.com/openstreetmap/iD/issues/5020
+[#5021]: https://github.com/openstreetmap/iD/issues/5021
+[#5022]: https://github.com/openstreetmap/iD/issues/5022
+[#5024]: https://github.com/openstreetmap/iD/issues/5024
+[#5025]: https://github.com/openstreetmap/iD/issues/5025
+[#5026]: https://github.com/openstreetmap/iD/issues/5026
+[#5027]: https://github.com/openstreetmap/iD/issues/5027
+[#5028]: https://github.com/openstreetmap/iD/issues/5028
+[#5029]: https://github.com/openstreetmap/iD/issues/5029
+[#5031]: https://github.com/openstreetmap/iD/issues/5031
+[#5034]: https://github.com/openstreetmap/iD/issues/5034
+[#5039]: https://github.com/openstreetmap/iD/issues/5039
+[#5040]: https://github.com/openstreetmap/iD/issues/5040
+[#5042]: https://github.com/openstreetmap/iD/issues/5042
+[#5043]: https://github.com/openstreetmap/iD/issues/5043
+[#5045]: https://github.com/openstreetmap/iD/issues/5045
+[#5050]: https://github.com/openstreetmap/iD/issues/5050
+[#5051]: https://github.com/openstreetmap/iD/issues/5051
+[#5054]: https://github.com/openstreetmap/iD/issues/5054
+[#5059]: https://github.com/openstreetmap/iD/issues/5059
+[#5068]: https://github.com/openstreetmap/iD/issues/5068
+[#5070]: https://github.com/openstreetmap/iD/issues/5070
+[#5072]: https://github.com/openstreetmap/iD/issues/5072
+[#5077]: https://github.com/openstreetmap/iD/issues/5077
+[#5084]: https://github.com/openstreetmap/iD/issues/5084
+[#5084]: https://github.com/openstreetmap/iD/issues/5084
+[#5085]: https://github.com/openstreetmap/iD/issues/5085
+[#5087]: https://github.com/openstreetmap/iD/issues/5087
+[#5088]: https://github.com/openstreetmap/iD/issues/5088
+[#5090]: https://github.com/openstreetmap/iD/issues/5090
+[#5092]: https://github.com/openstreetmap/iD/issues/5092
+[#5093]: https://github.com/openstreetmap/iD/issues/5093
+[#5095]: https://github.com/openstreetmap/iD/issues/5095
+[#5097]: https://github.com/openstreetmap/iD/issues/5097
+[#5099]: https://github.com/openstreetmap/iD/issues/5099
+[#5100]: https://github.com/openstreetmap/iD/issues/5100
+[#5101]: https://github.com/openstreetmap/iD/issues/5101
+[#5102]: https://github.com/openstreetmap/iD/issues/5102
+[#5103]: https://github.com/openstreetmap/iD/issues/5103
+[#5104]: https://github.com/openstreetmap/iD/issues/5104
+[#5107]: https://github.com/openstreetmap/iD/issues/5107
+[#5107-comment]: https://github.com/openstreetmap/iD/pull/5107#issuecomment-401617938
+[#5109]: https://github.com/openstreetmap/iD/issues/5109
+[#5113]: https://github.com/openstreetmap/iD/issues/5113
+[#5116]: https://github.com/openstreetmap/iD/issues/5116
+[#5118]: https://github.com/openstreetmap/iD/issues/5118
+[#5119]: https://github.com/openstreetmap/iD/issues/5119
+[#5120]: https://github.com/openstreetmap/iD/issues/5120
+[#5121]: https://github.com/openstreetmap/iD/issues/5121
+[#5123]: https://github.com/openstreetmap/iD/issues/5123
+[#5124]: https://github.com/openstreetmap/iD/issues/5124
+[#5125]: https://github.com/openstreetmap/iD/issues/5125
+[#5126]: https://github.com/openstreetmap/iD/issues/5126
+[#5127]: https://github.com/openstreetmap/iD/issues/5127
+[#5130]: https://github.com/openstreetmap/iD/issues/5130
+[#5131]: https://github.com/openstreetmap/iD/issues/5131
+[#5133]: https://github.com/openstreetmap/iD/issues/5133
+[#5136]: https://github.com/openstreetmap/iD/issues/5136
+[#5137]: https://github.com/openstreetmap/iD/issues/5137
+[#5138]: https://github.com/openstreetmap/iD/issues/5138
+[#5139]: https://github.com/openstreetmap/iD/issues/5139
+[#5142]: https://github.com/openstreetmap/iD/issues/5142
+[#5148]: https://github.com/openstreetmap/iD/issues/5148
+[#5157]: https://github.com/openstreetmap/iD/issues/5157
+[#5158]: https://github.com/openstreetmap/iD/issues/5158
+[#5159]: https://github.com/openstreetmap/iD/issues/5159
+[#5161]: https://github.com/openstreetmap/iD/issues/5161
+[#5162]: https://github.com/openstreetmap/iD/issues/5162
+[#5164]: https://github.com/openstreetmap/iD/issues/5164
+[#5167]: https://github.com/openstreetmap/iD/issues/5167
+[#5169]: https://github.com/openstreetmap/iD/issues/5169
+[#5174]: https://github.com/openstreetmap/iD/issues/5174
+[#5179]: https://github.com/openstreetmap/iD/issues/5179
+[#5184]: https://github.com/openstreetmap/iD/issues/5184
+[#5189]: https://github.com/openstreetmap/iD/issues/5189
+[#5190]: https://github.com/openstreetmap/iD/issues/5190
+[#5191]: https://github.com/openstreetmap/iD/issues/5191
+[#5193]: https://github.com/openstreetmap/iD/issues/5193
+[#5195]: https://github.com/openstreetmap/iD/issues/5195
+[#5198]: https://github.com/openstreetmap/iD/issues/5198
+[#5200]: https://github.com/openstreetmap/iD/issues/5200
+[#5201]: https://github.com/openstreetmap/iD/issues/5201
+[#5202]: https://github.com/openstreetmap/iD/issues/5202
+[#5204]: https://github.com/openstreetmap/iD/issues/5204
+[#5206]: https://github.com/openstreetmap/iD/issues/5206
+[#5207]: https://github.com/openstreetmap/iD/issues/5207
+[#5212]: https://github.com/openstreetmap/iD/issues/5212
+[#5216]: https://github.com/openstreetmap/iD/issues/5216
+[#5217]: https://github.com/openstreetmap/iD/issues/5217
+[#5222]: https://github.com/openstreetmap/iD/issues/5222
+[#5223]: https://github.com/openstreetmap/iD/issues/5223
+[#5226]: https://github.com/openstreetmap/iD/issues/5226
+[#5229]: https://github.com/openstreetmap/iD/issues/5229
+[#5231]: https://github.com/openstreetmap/iD/issues/5231
+[#5232]: https://github.com/openstreetmap/iD/issues/5232
+[#5233]: https://github.com/openstreetmap/iD/issues/5233
+[#5234]: https://github.com/openstreetmap/iD/issues/5234
+[#5235]: https://github.com/openstreetmap/iD/issues/5235
+[#5239]: https://github.com/openstreetmap/iD/issues/5239
+[#5243]: https://github.com/openstreetmap/iD/issues/5243
+[#5244]: https://github.com/openstreetmap/iD/issues/5244
+[#5245]: https://github.com/openstreetmap/iD/issues/5245
+[#5248]: https://github.com/openstreetmap/iD/issues/5248
+[#5250]: https://github.com/openstreetmap/iD/issues/5250
+[#5251]: https://github.com/openstreetmap/iD/issues/5251
+[#5253]: https://github.com/openstreetmap/iD/issues/5253
+[#5257]: https://github.com/openstreetmap/iD/issues/5257
+[#5259]: https://github.com/openstreetmap/iD/issues/5259
+[#5260]: https://github.com/openstreetmap/iD/issues/5260
+[#5261]: https://github.com/openstreetmap/iD/issues/5261
+[#5262]: https://github.com/openstreetmap/iD/issues/5262
+[#5264]: https://github.com/openstreetmap/iD/issues/5264
+[#5266]: https://github.com/openstreetmap/iD/issues/5266
+[#5267]: https://github.com/openstreetmap/iD/issues/5267
+[#5268]: https://github.com/openstreetmap/iD/issues/5268
+[#5269]: https://github.com/openstreetmap/iD/issues/5269
+[#5270]: https://github.com/openstreetmap/iD/issues/5270
+[#5272]: https://github.com/openstreetmap/iD/issues/5272
+[#5277]: https://github.com/openstreetmap/iD/issues/5277
+[#5280]: https://github.com/openstreetmap/iD/issues/5280
+[#5284]: https://github.com/openstreetmap/iD/issues/5284
+[#5286]: https://github.com/openstreetmap/iD/issues/5286
+[#5287]: https://github.com/openstreetmap/iD/issues/5287
+[#5288]: https://github.com/openstreetmap/iD/issues/5288
+[#5291]: https://github.com/openstreetmap/iD/issues/5291
+[#5292]: https://github.com/openstreetmap/iD/issues/5292
+[#5293]: https://github.com/openstreetmap/iD/issues/5293
+[#5295]: https://github.com/openstreetmap/iD/issues/5295
+[#5297]: https://github.com/openstreetmap/iD/issues/5297
+[#5300]: https://github.com/openstreetmap/iD/issues/5300
+[#5301]: https://github.com/openstreetmap/iD/issues/5301
+[#5302]: https://github.com/openstreetmap/iD/issues/5302
+[#5303]: https://github.com/openstreetmap/iD/issues/5303
+[#5304]: https://github.com/openstreetmap/iD/issues/5304
+[#5307]: https://github.com/openstreetmap/iD/issues/5307
+[#5309]: https://github.com/openstreetmap/iD/issues/5309
+[#5310]: https://github.com/openstreetmap/iD/issues/5310
+[#5315]: https://github.com/openstreetmap/iD/issues/5315
+[#5316]: https://github.com/openstreetmap/iD/issues/5316
+[#5325]: https://github.com/openstreetmap/iD/issues/5325
+[#5327]: https://github.com/openstreetmap/iD/issues/5327
+[#5328]: https://github.com/openstreetmap/iD/issues/5328
+[#5331]: https://github.com/openstreetmap/iD/issues/5331
+[#5333]: https://github.com/openstreetmap/iD/issues/5333
+[#5334]: https://github.com/openstreetmap/iD/issues/5334
+[#5337]: https://github.com/openstreetmap/iD/issues/5337
+[#5338]: https://github.com/openstreetmap/iD/issues/5338
+[#5339]: https://github.com/openstreetmap/iD/issues/5339
+[#5341]: https://github.com/openstreetmap/iD/issues/5341
+[#5344]: https://github.com/openstreetmap/iD/issues/5344
+[#5345]: https://github.com/openstreetmap/iD/issues/5345
+[#5346]: https://github.com/openstreetmap/iD/issues/5346
+[#5347]: https://github.com/openstreetmap/iD/issues/5347
+[#5348]: https://github.com/openstreetmap/iD/issues/5348
+[#5349]: https://github.com/openstreetmap/iD/issues/5349
+[#5350]: https://github.com/openstreetmap/iD/issues/5350
+[#5352]: https://github.com/openstreetmap/iD/issues/5352
+[#5353]: https://github.com/openstreetmap/iD/issues/5353
+[#5355]: https://github.com/openstreetmap/iD/issues/5355
+[#5356]: https://github.com/openstreetmap/iD/issues/5356
+[#5357]: https://github.com/openstreetmap/iD/issues/5357
+[#5358]: https://github.com/openstreetmap/iD/issues/5358
+[#5359]: https://github.com/openstreetmap/iD/issues/5359
+[#5360]: https://github.com/openstreetmap/iD/issues/5360
+[#5363]: https://github.com/openstreetmap/iD/issues/5363
+[#5365]: https://github.com/openstreetmap/iD/issues/5365
+[#5367]: https://github.com/openstreetmap/iD/issues/5367
+[#5368]: https://github.com/openstreetmap/iD/issues/5368
+[#5371]: https://github.com/openstreetmap/iD/issues/5371
+[#5372]: https://github.com/openstreetmap/iD/issues/5372
+[#5374]: https://github.com/openstreetmap/iD/issues/5374
+[#5375]: https://github.com/openstreetmap/iD/issues/5375
+[#5380]: https://github.com/openstreetmap/iD/issues/5380
+[#5381]: https://github.com/openstreetmap/iD/issues/5381
+[#5382]: https://github.com/openstreetmap/iD/issues/5382
+[#5384]: https://github.com/openstreetmap/iD/issues/5384
+[#5386]: https://github.com/openstreetmap/iD/issues/5386
+[#5387]: https://github.com/openstreetmap/iD/issues/5387
+[#5390]: https://github.com/openstreetmap/iD/issues/5390
+[#5392]: https://github.com/openstreetmap/iD/issues/5392
+[#5395]: https://github.com/openstreetmap/iD/issues/5395
+[#5396]: https://github.com/openstreetmap/iD/issues/5396
+[#5397]: https://github.com/openstreetmap/iD/issues/5397
+[#5399]: https://github.com/openstreetmap/iD/issues/5399
+[#5402]: https://github.com/openstreetmap/iD/issues/5402
+[#5403]: https://github.com/openstreetmap/iD/issues/5403
+[#5404]: https://github.com/openstreetmap/iD/issues/5404
+[#5405]: https://github.com/openstreetmap/iD/issues/5405
+[#5408]: https://github.com/openstreetmap/iD/issues/5408
+[#5409]: https://github.com/openstreetmap/iD/issues/5409
+[#5410]: https://github.com/openstreetmap/iD/issues/5410
+[#5413]: https://github.com/openstreetmap/iD/issues/5413
+[#5414]: https://github.com/openstreetmap/iD/issues/5414
+[#5416]: https://github.com/openstreetmap/iD/issues/5416
+[#5417]: https://github.com/openstreetmap/iD/issues/5417
+[#5418]: https://github.com/openstreetmap/iD/issues/5418
+[#5419]: https://github.com/openstreetmap/iD/issues/5419
+[#5420]: https://github.com/openstreetmap/iD/issues/5420
+[#5421]: https://github.com/openstreetmap/iD/issues/5421
+[#5422]: https://github.com/openstreetmap/iD/issues/5422
+[#5425]: https://github.com/openstreetmap/iD/issues/5425
+[#5429]: https://github.com/openstreetmap/iD/issues/5429
+[#5432]: https://github.com/openstreetmap/iD/issues/5432
+[#5433]: https://github.com/openstreetmap/iD/issues/5433
+[#5438]: https://github.com/openstreetmap/iD/issues/5438
+[#5439]: https://github.com/openstreetmap/iD/issues/5439
+[#5441]: https://github.com/openstreetmap/iD/issues/5441
+[#5442]: https://github.com/openstreetmap/iD/issues/5442
+[#5443]: https://github.com/openstreetmap/iD/issues/5443
+[#5447]: https://github.com/openstreetmap/iD/issues/5447
+[#5449]: https://github.com/openstreetmap/iD/issues/5449
+[#5450]: https://github.com/openstreetmap/iD/issues/5450
+[#5451]: https://github.com/openstreetmap/iD/issues/5451
+[#5453]: https://github.com/openstreetmap/iD/issues/5453
+[#5455]: https://github.com/openstreetmap/iD/issues/5455
+[#5458]: https://github.com/openstreetmap/iD/issues/5458
+[#5459]: https://github.com/openstreetmap/iD/issues/5459
+[#5460]: https://github.com/openstreetmap/iD/issues/5460
+[#5461]: https://github.com/openstreetmap/iD/issues/5461
+[#5467]: https://github.com/openstreetmap/iD/issues/5467
+[#5468]: https://github.com/openstreetmap/iD/issues/5468
+[#5469]: https://github.com/openstreetmap/iD/issues/5469
+[#5474]: https://github.com/openstreetmap/iD/issues/5474
+[#5476]: https://github.com/openstreetmap/iD/issues/5476
+[#5479]: https://github.com/openstreetmap/iD/issues/5479
+[#5483]: https://github.com/openstreetmap/iD/issues/5483
+[#5485]: https://github.com/openstreetmap/iD/issues/5485
+[#5486]: https://github.com/openstreetmap/iD/issues/5486
+[#5487]: https://github.com/openstreetmap/iD/issues/5487
+[#5489]: https://github.com/openstreetmap/iD/issues/5489
+[#5492]: https://github.com/openstreetmap/iD/issues/5492
+[#5494]: https://github.com/openstreetmap/iD/issues/5494
+[#5497]: https://github.com/openstreetmap/iD/issues/5497
+[#5499]: https://github.com/openstreetmap/iD/issues/5499
+[#5500]: https://github.com/openstreetmap/iD/issues/5500
+[#5502]: https://github.com/openstreetmap/iD/issues/5502
+[#5503]: https://github.com/openstreetmap/iD/issues/5503
+[#5505]: https://github.com/openstreetmap/iD/issues/5505
+[#5509]: https://github.com/openstreetmap/iD/issues/5509
+[#5510]: https://github.com/openstreetmap/iD/issues/5510
+[#5512]: https://github.com/openstreetmap/iD/issues/5512
+[#5514]: https://github.com/openstreetmap/iD/issues/5514
+[#5515]: https://github.com/openstreetmap/iD/issues/5515
+[#5518]: https://github.com/openstreetmap/iD/issues/5518
+[#5519]: https://github.com/openstreetmap/iD/issues/5519
+[#5522]: https://github.com/openstreetmap/iD/issues/5522
+[#5523]: https://github.com/openstreetmap/iD/issues/5523
+[#5524]: https://github.com/openstreetmap/iD/issues/5524
+[#5526]: https://github.com/openstreetmap/iD/issues/5526
+[#5527]: https://github.com/openstreetmap/iD/issues/5527
+[#5528]: https://github.com/openstreetmap/iD/issues/5528
+[#5529]: https://github.com/openstreetmap/iD/issues/5529
+[#5532]: https://github.com/openstreetmap/iD/issues/5532
+[#5534]: https://github.com/openstreetmap/iD/issues/5534
+[#5543]: https://github.com/openstreetmap/iD/issues/5543
+[#5544]: https://github.com/openstreetmap/iD/issues/5544
+[#5551]: https://github.com/openstreetmap/iD/issues/5551
+[#5552]: https://github.com/openstreetmap/iD/issues/5552
+[#5553]: https://github.com/openstreetmap/iD/issues/5553
+[#5555]: https://github.com/openstreetmap/iD/issues/5555
+[#5558]: https://github.com/openstreetmap/iD/issues/5558
+[#5560]: https://github.com/openstreetmap/iD/issues/5560
+[#5561]: https://github.com/openstreetmap/iD/issues/5561
+[#5562]: https://github.com/openstreetmap/iD/issues/5562
+[#5563]: https://github.com/openstreetmap/iD/issues/5563
+[#5565]: https://github.com/openstreetmap/iD/issues/5565
+[#5568]: https://github.com/openstreetmap/iD/issues/5568
+[#5573]: https://github.com/openstreetmap/iD/issues/5573
+[#5574]: https://github.com/openstreetmap/iD/issues/5574
+[#5575]: https://github.com/openstreetmap/iD/issues/5575
+[#5576]: https://github.com/openstreetmap/iD/issues/5576
+[#5580]: https://github.com/openstreetmap/iD/issues/5580
+[#5581]: https://github.com/openstreetmap/iD/issues/5581
+[#5582]: https://github.com/openstreetmap/iD/issues/5582
+[#5583]: https://github.com/openstreetmap/iD/issues/5583
+[#5584]: https://github.com/openstreetmap/iD/issues/5584
+[#5587]: https://github.com/openstreetmap/iD/issues/5587
+[#5589]: https://github.com/openstreetmap/iD/issues/5589
+[#5590]: https://github.com/openstreetmap/iD/issues/5590
+[#5591]: https://github.com/openstreetmap/iD/issues/5591
+[#5592]: https://github.com/openstreetmap/iD/issues/5592
+[#5594]: https://github.com/openstreetmap/iD/issues/5594
+[#5596]: https://github.com/openstreetmap/iD/issues/5596
+[#5601]: https://github.com/openstreetmap/iD/issues/5601
+[#5602]: https://github.com/openstreetmap/iD/issues/5602
+[#5604]: https://github.com/openstreetmap/iD/issues/5604
+[#5605]: https://github.com/openstreetmap/iD/issues/5605
+[#5606]: https://github.com/openstreetmap/iD/issues/5606
+[#5610]: https://github.com/openstreetmap/iD/issues/5610
+[#5611]: https://github.com/openstreetmap/iD/issues/5611
+[#5612]: https://github.com/openstreetmap/iD/issues/5612
+[#5612]: https://github.com/openstreetmap/iD/issues/5612
+[#5614]: https://github.com/openstreetmap/iD/issues/5614
+[#5617]: https://github.com/openstreetmap/iD/issues/5617
+[#5620]: https://github.com/openstreetmap/iD/issues/5620
+[#5622]: https://github.com/openstreetmap/iD/issues/5622
+[#5629]: https://github.com/openstreetmap/iD/issues/5629
+[#5632]: https://github.com/openstreetmap/iD/issues/5632
+[#5636]: https://github.com/openstreetmap/iD/issues/5636
+[#5638]: https://github.com/openstreetmap/iD/issues/5638
+[#5644]: https://github.com/openstreetmap/iD/issues/5644
+[#5647]: https://github.com/openstreetmap/iD/issues/5647
+[#5650]: https://github.com/openstreetmap/iD/issues/5650
+[#5651]: https://github.com/openstreetmap/iD/issues/5651
+[#5653]: https://github.com/openstreetmap/iD/issues/5653
+[#5663]: https://github.com/openstreetmap/iD/issues/5663
+[#5674]: https://github.com/openstreetmap/iD/issues/5674
+[#5682]: https://github.com/openstreetmap/iD/issues/5682
+[#5683]: https://github.com/openstreetmap/iD/issues/5683
+[#5687]: https://github.com/openstreetmap/iD/issues/5687
+[#5691]: https://github.com/openstreetmap/iD/issues/5691
+[#5692]: https://github.com/openstreetmap/iD/issues/5692
+[#5699]: https://github.com/openstreetmap/iD/issues/5699
+[#5705]: https://github.com/openstreetmap/iD/issues/5705
+[#5709]: https://github.com/openstreetmap/iD/issues/5709
+[#5710]: https://github.com/openstreetmap/iD/issues/5710
+[#5711]: https://github.com/openstreetmap/iD/issues/5711
+[#5712]: https://github.com/openstreetmap/iD/issues/5712
+[#5719]: https://github.com/openstreetmap/iD/issues/5719
+[#5724]: https://github.com/openstreetmap/iD/issues/5724
+[#5725]: https://github.com/openstreetmap/iD/issues/5725
+[#5728]: https://github.com/openstreetmap/iD/issues/5728
+[#5729]: https://github.com/openstreetmap/iD/issues/5729
+[#5730]: https://github.com/openstreetmap/iD/issues/5730
+[#5731]: https://github.com/openstreetmap/iD/issues/5731
+[#5737]: https://github.com/openstreetmap/iD/issues/5737
+[#5738]: https://github.com/openstreetmap/iD/issues/5738
+[#5739]: https://github.com/openstreetmap/iD/issues/5739
+[#5740]: https://github.com/openstreetmap/iD/issues/5740
+[#5743]: https://github.com/openstreetmap/iD/issues/5743
+[#5745]: https://github.com/openstreetmap/iD/issues/5745
+[#5746]: https://github.com/openstreetmap/iD/issues/5746
+[#5747]: https://github.com/openstreetmap/iD/issues/5747
+[#5749]: https://github.com/openstreetmap/iD/issues/5749
+[#5750]: https://github.com/openstreetmap/iD/issues/5750
+[#5751]: https://github.com/openstreetmap/iD/issues/5751
+[#5752]: https://github.com/openstreetmap/iD/issues/5752
+[#5753]: https://github.com/openstreetmap/iD/issues/5753
+[#5755]: https://github.com/openstreetmap/iD/issues/5755
+[#5756]: https://github.com/openstreetmap/iD/issues/5756
+[#5757]: https://github.com/openstreetmap/iD/issues/5757
+[#5758]: https://github.com/openstreetmap/iD/issues/5758
+[#5759]: https://github.com/openstreetmap/iD/issues/5759
+[#5760]: https://github.com/openstreetmap/iD/issues/5760
+[#5761]: https://github.com/openstreetmap/iD/issues/5761
+[#5763]: https://github.com/openstreetmap/iD/issues/5763
+[#5764]: https://github.com/openstreetmap/iD/issues/5764
+[#5765]: https://github.com/openstreetmap/iD/issues/5765
+[#5766]: https://github.com/openstreetmap/iD/issues/5766
+[#5769]: https://github.com/openstreetmap/iD/issues/5769
+[#5770]: https://github.com/openstreetmap/iD/issues/5770
+[#5771]: https://github.com/openstreetmap/iD/issues/5771
+[#5772]: https://github.com/openstreetmap/iD/issues/5772
+[#5811]: https://github.com/openstreetmap/iD/issues/5811
+[#5812]: https://github.com/openstreetmap/iD/issues/5812
+[#5813]: https://github.com/openstreetmap/iD/issues/5813
+[#5816]: https://github.com/openstreetmap/iD/issues/5816
+[#5817]: https://github.com/openstreetmap/iD/issues/5817
+[#5818]: https://github.com/openstreetmap/iD/issues/5818
+[#5822]: https://github.com/openstreetmap/iD/issues/5822
+[#5825]: https://github.com/openstreetmap/iD/issues/5825
+[#5826]: https://github.com/openstreetmap/iD/issues/5826
+[#5829]: https://github.com/openstreetmap/iD/issues/5829
+[#5830]: https://github.com/openstreetmap/iD/issues/5830
+[#5830]: https://github.com/openstreetmap/iD/issues/5830
+[#5830]: https://github.com/openstreetmap/iD/issues/5830
+[#5830]: https://github.com/openstreetmap/iD/issues/5830
+[#5831]: https://github.com/openstreetmap/iD/issues/5831
+[#5832]: https://github.com/openstreetmap/iD/issues/5832
+[#5833]: https://github.com/openstreetmap/iD/issues/5833
+[#5836]: https://github.com/openstreetmap/iD/issues/5836
+[#5837]: https://github.com/openstreetmap/iD/issues/5837
+[#5839]: https://github.com/openstreetmap/iD/issues/5839
+[#5840]: https://github.com/openstreetmap/iD/issues/5840
+[#5842]: https://github.com/openstreetmap/iD/issues/5842
+[#5843]: https://github.com/openstreetmap/iD/issues/5843
+[#5844]: https://github.com/openstreetmap/iD/issues/5844
+[#5845]: https://github.com/openstreetmap/iD/issues/5845
+[#5849]: https://github.com/openstreetmap/iD/issues/5849
+[#5850]: https://github.com/openstreetmap/iD/issues/5850
+[#5851]: https://github.com/openstreetmap/iD/issues/5851
+[#5852]: https://github.com/openstreetmap/iD/issues/5852
+[#5853]: https://github.com/openstreetmap/iD/issues/5853
+[#5854]: https://github.com/openstreetmap/iD/issues/5854
+[#5859]: https://github.com/openstreetmap/iD/issues/5859
+[#5860]: https://github.com/openstreetmap/iD/issues/5860
+[#5862]: https://github.com/openstreetmap/iD/issues/5862
+[#5870]: https://github.com/openstreetmap/iD/issues/5870
+[#5872]: https://github.com/openstreetmap/iD/issues/5872
+[#5875]: https://github.com/openstreetmap/iD/issues/5875
+[#5876]: https://github.com/openstreetmap/iD/issues/5876
+[#5877]: https://github.com/openstreetmap/iD/issues/5877
+[#5878]: https://github.com/openstreetmap/iD/issues/5878
+[#5880]: https://github.com/openstreetmap/iD/issues/5880
+[#5881]: https://github.com/openstreetmap/iD/issues/5881
+[#5884]: https://github.com/openstreetmap/iD/issues/5884
+[#5887]: https://github.com/openstreetmap/iD/issues/5887
+[#5888]: https://github.com/openstreetmap/iD/issues/5888
+[#5889]: https://github.com/openstreetmap/iD/issues/5889
+[#5890]: https://github.com/openstreetmap/iD/issues/5890
+[#5892]: https://github.com/openstreetmap/iD/issues/5892
+[#5894]: https://github.com/openstreetmap/iD/issues/5894
+[#5901]: https://github.com/openstreetmap/iD/issues/5901
+[#5903]: https://github.com/openstreetmap/iD/issues/5903
+[#5906]: https://github.com/openstreetmap/iD/issues/5906
+[#5913]: https://github.com/openstreetmap/iD/issues/5913
+[#5916]: https://github.com/openstreetmap/iD/issues/5916
+[#5917]: https://github.com/openstreetmap/iD/issues/5917
+[#5918]: https://github.com/openstreetmap/iD/issues/5918
+[#5920]: https://github.com/openstreetmap/iD/issues/5920
+[#5921]: https://github.com/openstreetmap/iD/issues/5921
+[#5922]: https://github.com/openstreetmap/iD/issues/5922
+[#5923]: https://github.com/openstreetmap/iD/issues/5923
+[#5924]: https://github.com/openstreetmap/iD/issues/5924
+[#5926]: https://github.com/openstreetmap/iD/issues/5926
+[#5927]: https://github.com/openstreetmap/iD/issues/5927
+[#5930]: https://github.com/openstreetmap/iD/issues/5930
+[#5933]: https://github.com/openstreetmap/iD/issues/5933
+[#5934]: https://github.com/openstreetmap/iD/issues/5934
+[#5935]: https://github.com/openstreetmap/iD/issues/5935
+[#5936]: https://github.com/openstreetmap/iD/issues/5936
+[#5938]: https://github.com/openstreetmap/iD/issues/5938
+[#5940]: https://github.com/openstreetmap/iD/issues/5940
+[#5941]: https://github.com/openstreetmap/iD/issues/5941
+[#5942]: https://github.com/openstreetmap/iD/issues/5942
+[#5943]: https://github.com/openstreetmap/iD/issues/5943
+[#5945]: https://github.com/openstreetmap/iD/issues/5945
+[#5947]: https://github.com/openstreetmap/iD/issues/5947
+[#5948]: https://github.com/openstreetmap/iD/issues/5948
+[#5950]: https://github.com/openstreetmap/iD/issues/5950
+[#5953]: https://github.com/openstreetmap/iD/issues/5953
+[#5956]: https://github.com/openstreetmap/iD/issues/5956
+[#5957]: https://github.com/openstreetmap/iD/issues/5957
+[#5958]: https://github.com/openstreetmap/iD/issues/5958
+[#5959]: https://github.com/openstreetmap/iD/issues/5959
+[#5967]: https://github.com/openstreetmap/iD/issues/5967
+[#5968]: https://github.com/openstreetmap/iD/issues/5968
+[#597]: https://github.com/openstreetmap/iD/issues/597
+[#5970]: https://github.com/openstreetmap/iD/issues/5970
+[#5972]: https://github.com/openstreetmap/iD/issues/5972
+[#5975]: https://github.com/openstreetmap/iD/issues/5975
+[#5979]: https://github.com/openstreetmap/iD/issues/5979
+[#5979]: https://github.com/openstreetmap/iD/issues/5979
+[#5993]: https://github.com/openstreetmap/iD/issues/5993
+[#5994]: https://github.com/openstreetmap/iD/issues/5994
+[#5995]: https://github.com/openstreetmap/iD/issues/5995
+[#5996]: https://github.com/openstreetmap/iD/issues/5996
+[#5998]: https://github.com/openstreetmap/iD/issues/5998
+[#5999]: https://github.com/openstreetmap/iD/issues/5999
+[#6013]: https://github.com/openstreetmap/iD/issues/6013
+[#6015]: https://github.com/openstreetmap/iD/issues/6015
+[#6020]: https://github.com/openstreetmap/iD/issues/6020
+[#6022]: https://github.com/openstreetmap/iD/issues/6022
+[#6028]: https://github.com/openstreetmap/iD/issues/6028
+[#6030]: https://github.com/openstreetmap/iD/issues/6030
+[#6032]: https://github.com/openstreetmap/iD/issues/6032
+[#6033]: https://github.com/openstreetmap/iD/issues/6033
+[#6034]: https://github.com/openstreetmap/iD/issues/6034
+[#6035]: https://github.com/openstreetmap/iD/issues/6035
+[#6036]: https://github.com/openstreetmap/iD/issues/6036
+[#6038]: https://github.com/openstreetmap/iD/issues/6038
+[#6042]: https://github.com/openstreetmap/iD/issues/6042
+[#6042]: https://github.com/openstreetmap/iD/issues/6042
+[#6047]: https://github.com/openstreetmap/iD/issues/6047
+[#6049]: https://github.com/openstreetmap/iD/issues/6049
+[#6054]: https://github.com/openstreetmap/iD/issues/6054
+[#6062]: https://github.com/openstreetmap/iD/issues/6062
+[#6065]: https://github.com/openstreetmap/iD/issues/6065
+[#6070]: https://github.com/openstreetmap/iD/issues/6070
+[#6075]: https://github.com/openstreetmap/iD/issues/6075
+[#6077]: https://github.com/openstreetmap/iD/issues/6077
+[#6078]: https://github.com/openstreetmap/iD/issues/6078
+[#6080]: https://github.com/openstreetmap/iD/issues/6080
+[#6082]: https://github.com/openstreetmap/iD/issues/6082
+[#6084]: https://github.com/openstreetmap/iD/issues/6084
+[#6085]: https://github.com/openstreetmap/iD/issues/6085
+[#6086]: https://github.com/openstreetmap/iD/issues/6086
+[#6088]: https://github.com/openstreetmap/iD/issues/6088
+[#6091]: https://github.com/openstreetmap/iD/issues/6091
+[#6100]: https://github.com/openstreetmap/iD/issues/6100
+[#6103]: https://github.com/openstreetmap/iD/issues/6103
+[#6104]: https://github.com/openstreetmap/iD/issues/6104
+[#6105]: https://github.com/openstreetmap/iD/issues/6105
+[#6114]: https://github.com/openstreetmap/iD/issues/6114
+[#6117]: https://github.com/openstreetmap/iD/issues/6117
+[#6123]: https://github.com/openstreetmap/iD/issues/6123
+[#6124]: https://github.com/openstreetmap/iD/issues/6124
+[#6135]: https://github.com/openstreetmap/iD/issues/6135
+[#6139]: https://github.com/openstreetmap/iD/issues/6139
+[#6140]: https://github.com/openstreetmap/iD/issues/6140
+[#6141]: https://github.com/openstreetmap/iD/issues/6141
+[#6142]: https://github.com/openstreetmap/iD/issues/6142
+[#6144]: https://github.com/openstreetmap/iD/issues/6144
+[#6149]: https://github.com/openstreetmap/iD/issues/6149
+[#6151]: https://github.com/openstreetmap/iD/issues/6151
+[#6152]: https://github.com/openstreetmap/iD/issues/6152
+[#6155]: https://github.com/openstreetmap/iD/issues/6155
+[#6161]: https://github.com/openstreetmap/iD/issues/6161
+[#6164]: https://github.com/openstreetmap/iD/issues/6164
+[#6165]: https://github.com/openstreetmap/iD/issues/6165
+[#6174]: https://github.com/openstreetmap/iD/issues/6174
+[#6185]: https://github.com/openstreetmap/iD/issues/6185
+[#6201]: https://github.com/openstreetmap/iD/issues/6201
+[#6202]: https://github.com/openstreetmap/iD/issues/6202
+[#6203]: https://github.com/openstreetmap/iD/issues/6203
+[#6207]: https://github.com/openstreetmap/iD/issues/6207
+[#6209]: https://github.com/openstreetmap/iD/issues/6209
+[#6214]: https://github.com/openstreetmap/iD/issues/6214
+[#6215]: https://github.com/openstreetmap/iD/issues/6215
+[#6216]: https://github.com/openstreetmap/iD/issues/6216
+[#6217]: https://github.com/openstreetmap/iD/issues/6217
+[#6220]: https://github.com/openstreetmap/iD/issues/6220
+[#6221]: https://github.com/openstreetmap/iD/issues/6221
+[#6222]: https://github.com/openstreetmap/iD/issues/6222
+[#6224]: https://github.com/openstreetmap/iD/issues/6224
+[#6229]: https://github.com/openstreetmap/iD/issues/6229
+[#6232]: https://github.com/openstreetmap/iD/issues/6232
+[#6233]: https://github.com/openstreetmap/iD/issues/6233
+[#6234]: https://github.com/openstreetmap/iD/issues/6234
+[#6235]: https://github.com/openstreetmap/iD/issues/6235
+[#6236]: https://github.com/openstreetmap/iD/issues/6236
+[#6237]: https://github.com/openstreetmap/iD/issues/6237
+[#6238]: https://github.com/openstreetmap/iD/issues/6238
+[#6241]: https://github.com/openstreetmap/iD/issues/6241
+[#6242]: https://github.com/openstreetmap/iD/issues/6242
+[#6244]: https://github.com/openstreetmap/iD/issues/6244
+[#6245]: https://github.com/openstreetmap/iD/issues/6245
+[#6249]: https://github.com/openstreetmap/iD/issues/6249
+[#6252]: https://github.com/openstreetmap/iD/issues/6252
+[#6259]: https://github.com/openstreetmap/iD/issues/6259
+[#6260]: https://github.com/openstreetmap/iD/issues/6260
+[#6265]: https://github.com/openstreetmap/iD/issues/6265
+[#6267]: https://github.com/openstreetmap/iD/issues/6267
+[#6269]: https://github.com/openstreetmap/iD/issues/6269
+[#6275]: https://github.com/openstreetmap/iD/issues/6275
+[#6279]: https://github.com/openstreetmap/iD/issues/6279
+[#6279]: https://github.com/openstreetmap/iD/issues/6279
+[#6284]: https://github.com/openstreetmap/iD/issues/6284
+[#6286]: https://github.com/openstreetmap/iD/issues/6286
+[#6287]: https://github.com/openstreetmap/iD/issues/6287
+[#6295]: https://github.com/openstreetmap/iD/issues/6295
+[#6296]: https://github.com/openstreetmap/iD/issues/6296
+[#6299]: https://github.com/openstreetmap/iD/issues/6299
+[#6301]: https://github.com/openstreetmap/iD/issues/6301
+[#6302]: https://github.com/openstreetmap/iD/issues/6302
+[#6306]: https://github.com/openstreetmap/iD/issues/6306
+[#6307]: https://github.com/openstreetmap/iD/issues/6307
+[#6309]: https://github.com/openstreetmap/iD/issues/6309
+[#6311]: https://github.com/openstreetmap/iD/issues/6311
+[#6313]: https://github.com/openstreetmap/iD/issues/6313
+[#6314]: https://github.com/openstreetmap/iD/issues/6314
+[#6315]: https://github.com/openstreetmap/iD/issues/6315
+[#6316]: https://github.com/openstreetmap/iD/issues/6316
+[#6317]: https://github.com/openstreetmap/iD/issues/6317
+[#6319]: https://github.com/openstreetmap/iD/issues/6319
+[#6321]: https://github.com/openstreetmap/iD/issues/6321
+[#6326]: https://github.com/openstreetmap/iD/issues/6326
+[#6328]: https://github.com/openstreetmap/iD/issues/6328
+[#6332]: https://github.com/openstreetmap/iD/issues/6332
+[#6332]: https://github.com/openstreetmap/iD/issues/6332
+[#6336]: https://github.com/openstreetmap/iD/issues/6336
+[#6337]: https://github.com/openstreetmap/iD/issues/6337
+[#6339]: https://github.com/openstreetmap/iD/issues/6339
+[#6340]: https://github.com/openstreetmap/iD/issues/6340
+[#6342]: https://github.com/openstreetmap/iD/issues/6342
+[#6344]: https://github.com/openstreetmap/iD/issues/6344
+[#6352]: https://github.com/openstreetmap/iD/issues/6352
+[#6355]: https://github.com/openstreetmap/iD/issues/6355
+[#6360]: https://github.com/openstreetmap/iD/issues/6360
+[#6361]: https://github.com/openstreetmap/iD/issues/6361
+[#6373]: https://github.com/openstreetmap/iD/issues/6373
+[#6376]: https://github.com/openstreetmap/iD/issues/6376
+[#6379]: https://github.com/openstreetmap/iD/issues/6379
+[#6381]: https://github.com/openstreetmap/iD/issues/6381
+[#6383]: https://github.com/openstreetmap/iD/issues/6383
+[#6384]: https://github.com/openstreetmap/iD/issues/6384
+[#6385]: https://github.com/openstreetmap/iD/issues/6385
+[#6386]: https://github.com/openstreetmap/iD/issues/6386
+[#6389]: https://github.com/openstreetmap/iD/issues/6389
+[#6393]: https://github.com/openstreetmap/iD/issues/6393
+[#6394]: https://github.com/openstreetmap/iD/issues/6394
+[#6397]: https://github.com/openstreetmap/iD/issues/6397
+[#6398]: https://github.com/openstreetmap/iD/issues/6398
+[#6403]: https://github.com/openstreetmap/iD/issues/6403
+[#6404]: https://github.com/openstreetmap/iD/issues/6404
+[#6405]: https://github.com/openstreetmap/iD/issues/6405
+[#6406]: https://github.com/openstreetmap/iD/issues/6406
+[#6407]: https://github.com/openstreetmap/iD/issues/6407
+[#6409]: https://github.com/openstreetmap/iD/issues/6409
+[#6410]: https://github.com/openstreetmap/iD/issues/6410
+[#6411]: https://github.com/openstreetmap/iD/issues/6411
+[#6411]: https://github.com/openstreetmap/iD/issues/6411
+[#6414]: https://github.com/openstreetmap/iD/issues/6414
+[#6416]: https://github.com/openstreetmap/iD/issues/6416
+[#6417]: https://github.com/openstreetmap/iD/issues/6417
+[#6418]: https://github.com/openstreetmap/iD/issues/6418
+[#6422]: https://github.com/openstreetmap/iD/issues/6422
+[#6426]: https://github.com/openstreetmap/iD/issues/6426
+[#6427]: https://github.com/openstreetmap/iD/issues/6427
+[#6440]: https://github.com/openstreetmap/iD/issues/6440
+[#6443]: https://github.com/openstreetmap/iD/issues/6443
+[#6444]: https://github.com/openstreetmap/iD/issues/6444
+[#6447]: https://github.com/openstreetmap/iD/issues/6447
+[#6455]: https://github.com/openstreetmap/iD/issues/6455
+[#6459]: https://github.com/openstreetmap/iD/issues/6459
+[#6462]: https://github.com/openstreetmap/iD/issues/6462
+[#6466]: https://github.com/openstreetmap/iD/issues/6466
+[#6469]: https://github.com/openstreetmap/iD/issues/6469
+[#6470]: https://github.com/openstreetmap/iD/issues/6470
+[#6472]: https://github.com/openstreetmap/iD/issues/6472
+[#6474]: https://github.com/openstreetmap/iD/issues/6474
+[#6477]: https://github.com/openstreetmap/iD/issues/6477
+[#6478]: https://github.com/openstreetmap/iD/issues/6478
+[#6479]: https://github.com/openstreetmap/iD/issues/6479
+[#6480]: https://github.com/openstreetmap/iD/issues/6480
+[#6489]: https://github.com/openstreetmap/iD/issues/6489
+[#6490]: https://github.com/openstreetmap/iD/issues/6490
+[#6491]: https://github.com/openstreetmap/iD/issues/6491
+[#6494]: https://github.com/openstreetmap/iD/issues/6494
+[#6496]: https://github.com/openstreetmap/iD/issues/6496
+[#6503]: https://github.com/openstreetmap/iD/issues/6503
+[#6504]: https://github.com/openstreetmap/iD/issues/6504
+[#6506]: https://github.com/openstreetmap/iD/issues/6506
+[#6508]: https://github.com/openstreetmap/iD/issues/6508
+[#6509]: https://github.com/openstreetmap/iD/issues/6509
+[#6510]: https://github.com/openstreetmap/iD/issues/6510
+[#6512]: https://github.com/openstreetmap/iD/issues/6512
+[#6513]: https://github.com/openstreetmap/iD/issues/6513
+[#6515]: https://github.com/openstreetmap/iD/issues/6515
+[#6515]: https://github.com/openstreetmap/iD/issues/6515
+[#6518]: https://github.com/openstreetmap/iD/issues/6518
+[#6522]: https://github.com/openstreetmap/iD/issues/6522
+[#6524]: https://github.com/openstreetmap/iD/issues/6524
+[#6525]: https://github.com/openstreetmap/iD/issues/6525
+[#6529]: https://github.com/openstreetmap/iD/issues/6529
+[#6530]: https://github.com/openstreetmap/iD/issues/6530
+[#6535]: https://github.com/openstreetmap/iD/issues/6535
+[#6537]: https://github.com/openstreetmap/iD/issues/6537
+[#6538]: https://github.com/openstreetmap/iD/issues/6538
+[#6542]: https://github.com/openstreetmap/iD/issues/6542
+[#6547]: https://github.com/openstreetmap/iD/issues/6547
+[#6548]: https://github.com/openstreetmap/iD/issues/6548
+[#6553]: https://github.com/openstreetmap/iD/issues/6553
+[#6555]: https://github.com/openstreetmap/iD/issues/6555
+[#6556]: https://github.com/openstreetmap/iD/issues/6556
+[#6564]: https://github.com/openstreetmap/iD/issues/6564
+[#6565]: https://github.com/openstreetmap/iD/issues/6565
+[#6566]: https://github.com/openstreetmap/iD/issues/6566
+[#6574]: https://github.com/openstreetmap/iD/issues/6574
+[#6575]: https://github.com/openstreetmap/iD/issues/6575
+[#6576]: https://github.com/openstreetmap/iD/issues/6576
+[#6577]: https://github.com/openstreetmap/iD/issues/6577
+[#6580]: https://github.com/openstreetmap/iD/issues/6580
+[#6581]: https://github.com/openstreetmap/iD/issues/6581
+[#6582]: https://github.com/openstreetmap/iD/issues/6582
+[#6584]: https://github.com/openstreetmap/iD/issues/6584
+[#6587]: https://github.com/openstreetmap/iD/issues/6587
+[#6588]: https://github.com/openstreetmap/iD/issues/6588
+[#6591]: https://github.com/openstreetmap/iD/issues/6591
+[#6594]: https://github.com/openstreetmap/iD/issues/6594
+[#6598]: https://github.com/openstreetmap/iD/issues/6598
+[#6599]: https://github.com/openstreetmap/iD/issues/6599
+[#6601]: https://github.com/openstreetmap/iD/issues/6601
+[#6608]: https://github.com/openstreetmap/iD/issues/6608
+[#6612]: https://github.com/openstreetmap/iD/issues/6612
+[#6615]: https://github.com/openstreetmap/iD/issues/6615
+[#6617]: https://github.com/openstreetmap/iD/issues/6617
+[#6626]: https://github.com/openstreetmap/iD/issues/6626
+[#6627]: https://github.com/openstreetmap/iD/issues/6627
+[#6628]: https://github.com/openstreetmap/iD/issues/6628
+[#6633]: https://github.com/openstreetmap/iD/issues/6633
+[#6634]: https://github.com/openstreetmap/iD/issues/6634
+[#6636]: https://github.com/openstreetmap/iD/issues/6636
+[#6642]: https://github.com/openstreetmap/iD/issues/6642
+[#6643]: https://github.com/openstreetmap/iD/issues/6643
+[#6644]: https://github.com/openstreetmap/iD/issues/6644
+[#6650]: https://github.com/openstreetmap/iD/issues/6650
+[#6650]: https://github.com/openstreetmap/iD/issues/6650
+[#6652]: https://github.com/openstreetmap/iD/issues/6652
+[#6674]: https://github.com/openstreetmap/iD/issues/6674
+[#6679]: https://github.com/openstreetmap/iD/issues/6679
+[#6682]: https://github.com/openstreetmap/iD/issues/6682
+[#6683]: https://github.com/openstreetmap/iD/issues/6683
+[#6685]: https://github.com/openstreetmap/iD/issues/6685
+[#6690]: https://github.com/openstreetmap/iD/issues/6690
+[#6696]: https://github.com/openstreetmap/iD/issues/6696
+[#6698]: https://github.com/openstreetmap/iD/issues/6698
+[#6701]: https://github.com/openstreetmap/iD/issues/6701
+[#6702]: https://github.com/openstreetmap/iD/issues/6702
+[#6703]: https://github.com/openstreetmap/iD/issues/6703
+[#6704]: https://github.com/openstreetmap/iD/issues/6704
+[#6705]: https://github.com/openstreetmap/iD/issues/6705
+[#6710]: https://github.com/openstreetmap/iD/issues/6710
+[#6712]: https://github.com/openstreetmap/iD/issues/6712
+[#6716]: https://github.com/openstreetmap/iD/issues/6716
+[#6718]: https://github.com/openstreetmap/iD/issues/6718
+[#6722]: https://github.com/openstreetmap/iD/issues/6722
+[#6725]: https://github.com/openstreetmap/iD/issues/6725
+[#6731]: https://github.com/openstreetmap/iD/issues/6731
+[#6734]: https://github.com/openstreetmap/iD/issues/6734
+[#6739]: https://github.com/openstreetmap/iD/issues/6739
+[#6742]: https://github.com/openstreetmap/iD/issues/6742
+[#6745]: https://github.com/openstreetmap/iD/issues/6745
+[#6748]: https://github.com/openstreetmap/iD/issues/6748
+[#6748]: https://github.com/openstreetmap/iD/issues/6748
+[#6752]: https://github.com/openstreetmap/iD/issues/6752
+[#6754]: https://github.com/openstreetmap/iD/issues/6754
+[#6755]: https://github.com/openstreetmap/iD/issues/6755
+[#6756]: https://github.com/openstreetmap/iD/issues/6756
+[#6758]: https://github.com/openstreetmap/iD/issues/6758
+[#6761]: https://github.com/openstreetmap/iD/issues/6761
+[#6762]: https://github.com/openstreetmap/iD/issues/6762
+[#6762]: https://github.com/openstreetmap/iD/issues/6762
+[#6764]: https://github.com/openstreetmap/iD/issues/6764
+[#6773]: https://github.com/openstreetmap/iD/issues/6773
+[#6775]: https://github.com/openstreetmap/iD/issues/6775
+[#6777]: https://github.com/openstreetmap/iD/issues/6777
+[#6779]: https://github.com/openstreetmap/iD/issues/6779
+[#6780]: https://github.com/openstreetmap/iD/issues/6780
+[#6786]: https://github.com/openstreetmap/iD/issues/6786
+[#6787]: https://github.com/openstreetmap/iD/issues/6787
+[#6790]: https://github.com/openstreetmap/iD/issues/6790
+[#6791]: https://github.com/openstreetmap/iD/issues/6791
+[#6792]: https://github.com/openstreetmap/iD/issues/6792
+[#6800]: https://github.com/openstreetmap/iD/issues/6800
+[#6801]: https://github.com/openstreetmap/iD/issues/6801
+[#6802]: https://github.com/openstreetmap/iD/issues/6802
+[#6804]: https://github.com/openstreetmap/iD/issues/6804
+[#6810]: https://github.com/openstreetmap/iD/issues/6810
+[#6811]: https://github.com/openstreetmap/iD/issues/6811
+[#6812]: https://github.com/openstreetmap/iD/issues/6812
+[#6814]: https://github.com/openstreetmap/iD/issues/6814
+[#6815]: https://github.com/openstreetmap/iD/issues/6815
+[#6816]: https://github.com/openstreetmap/iD/issues/6816
+[#6817]: https://github.com/openstreetmap/iD/issues/6817
+[#6820]: https://github.com/openstreetmap/iD/issues/6820
+[#6821]: https://github.com/openstreetmap/iD/issues/6821
+[#6825]: https://github.com/openstreetmap/iD/issues/6825
+[#6826]: https://github.com/openstreetmap/iD/issues/6826
+[#6827]: https://github.com/openstreetmap/iD/issues/6827
+[#6831]: https://github.com/openstreetmap/iD/issues/6831
+[#6833]: https://github.com/openstreetmap/iD/issues/6833
+[#6836]: https://github.com/openstreetmap/iD/issues/6836
+[#6839]: https://github.com/openstreetmap/iD/issues/6839
+[#6843]: https://github.com/openstreetmap/iD/issues/6843
+[#6847]: https://github.com/openstreetmap/iD/issues/6847
+[#6848]: https://github.com/openstreetmap/iD/issues/6848
+[#6849]: https://github.com/openstreetmap/iD/issues/6849
+[#6850]: https://github.com/openstreetmap/iD/issues/6850
+[#6851]: https://github.com/openstreetmap/iD/issues/6851
+[#6855]: https://github.com/openstreetmap/iD/issues/6855
+[#6857]: https://github.com/openstreetmap/iD/issues/6857
+[#6861]: https://github.com/openstreetmap/iD/issues/6861
+[#6863]: https://github.com/openstreetmap/iD/issues/6863
+[#6864]: https://github.com/openstreetmap/iD/issues/6864
+[#6865]: https://github.com/openstreetmap/iD/issues/6865
+[#6866]: https://github.com/openstreetmap/iD/issues/6866
+[#6874]: https://github.com/openstreetmap/iD/issues/6874
+[#6876]: https://github.com/openstreetmap/iD/issues/6876
+[#6878]: https://github.com/openstreetmap/iD/issues/6878
+[#6880]: https://github.com/openstreetmap/iD/issues/6880
+[#6882]: https://github.com/openstreetmap/iD/issues/6882
+[#6887]: https://github.com/openstreetmap/iD/issues/6887
+[#6901]: https://github.com/openstreetmap/iD/issues/6901
+[#6909]: https://github.com/openstreetmap/iD/issues/6909
+[#6911]: https://github.com/openstreetmap/iD/issues/6911
+[#6911]: https://github.com/openstreetmap/iD/issues/6911
+[#6912]: https://github.com/openstreetmap/iD/issues/6912
+[#6918]: https://github.com/openstreetmap/iD/issues/6918
+[#6919]: https://github.com/openstreetmap/iD/issues/6919
+[#6921]: https://github.com/openstreetmap/iD/issues/6921
+[#6921]: https://github.com/openstreetmap/iD/issues/6921
+[#6933]: https://github.com/openstreetmap/iD/issues/6933
+[#6935]: https://github.com/openstreetmap/iD/issues/6935
+[#6937]: https://github.com/openstreetmap/iD/issues/6937
+[#6940]: https://github.com/openstreetmap/iD/issues/6940
+[#6941]: https://github.com/openstreetmap/iD/issues/6941
+[#6949]: https://github.com/openstreetmap/iD/issues/6949
+[#6955]: https://github.com/openstreetmap/iD/issues/6955
+[#6962]: https://github.com/openstreetmap/iD/issues/6962
+[#6965]: https://github.com/openstreetmap/iD/issues/6965
+[#6970]: https://github.com/openstreetmap/iD/issues/6970
+[#6972]: https://github.com/openstreetmap/iD/issues/6972
+[#6977]: https://github.com/openstreetmap/iD/issues/6977
+[#6978]: https://github.com/openstreetmap/iD/issues/6978
+[#6979]: https://github.com/openstreetmap/iD/issues/6979
+[#6982]: https://github.com/openstreetmap/iD/issues/6982
+[#6984]: https://github.com/openstreetmap/iD/issues/6984
+[#6985]: https://github.com/openstreetmap/iD/issues/6985
+[#6992]: https://github.com/openstreetmap/iD/issues/6992
+[#6993]: https://github.com/openstreetmap/iD/issues/6993
+[#6994]: https://github.com/openstreetmap/iD/issues/6994
+[#6997]: https://github.com/openstreetmap/iD/issues/6997
+[#6998]: https://github.com/openstreetmap/iD/issues/6998
+[#7002]: https://github.com/openstreetmap/iD/issues/7002
+[#7010]: https://github.com/openstreetmap/iD/issues/7010
+[#7011]: https://github.com/openstreetmap/iD/issues/7011
+[#7013]: https://github.com/openstreetmap/iD/issues/7013
+[#7014]: https://github.com/openstreetmap/iD/issues/7014
+[#7015]: https://github.com/openstreetmap/iD/issues/7015
+[#7021]: https://github.com/openstreetmap/iD/issues/7021
+[#7024]: https://github.com/openstreetmap/iD/issues/7024
+[#7025]: https://github.com/openstreetmap/iD/issues/7025
+[#7028]: https://github.com/openstreetmap/iD/issues/7028
+[#7031]: https://github.com/openstreetmap/iD/issues/7031
+[#7033]: https://github.com/openstreetmap/iD/issues/7033
+[#7037]: https://github.com/openstreetmap/iD/issues/7037
+[#7039]: https://github.com/openstreetmap/iD/issues/7039
+[#7040]: https://github.com/openstreetmap/iD/issues/7040
+[#7044]: https://github.com/openstreetmap/iD/issues/7044
+[#7045]: https://github.com/openstreetmap/iD/issues/7045
+[#7048]: https://github.com/openstreetmap/iD/issues/7048
+[#7052]: https://github.com/openstreetmap/iD/issues/7052
+[#7053]: https://github.com/openstreetmap/iD/issues/7053
+[#7055]: https://github.com/openstreetmap/iD/issues/7055
+[#7057]: https://github.com/openstreetmap/iD/issues/7057
+[#7058]: https://github.com/openstreetmap/iD/issues/7058
+[#7059]: https://github.com/openstreetmap/iD/issues/7059
+[#7061]: https://github.com/openstreetmap/iD/issues/7061
+[#7062]: https://github.com/openstreetmap/iD/issues/7062
+[#7064]: https://github.com/openstreetmap/iD/issues/7064
+[#7066]: https://github.com/openstreetmap/iD/issues/7066
+[#7070]: https://github.com/openstreetmap/iD/issues/7070
+[#7075]: https://github.com/openstreetmap/iD/issues/7075
+[#7078]: https://github.com/openstreetmap/iD/issues/7078
+[#7079]: https://github.com/openstreetmap/iD/issues/7079
+[#7082]: https://github.com/openstreetmap/iD/issues/7082
+[#7083]: https://github.com/openstreetmap/iD/issues/7083
+[#7085]: https://github.com/openstreetmap/iD/issues/7085
+[#7086]: https://github.com/openstreetmap/iD/issues/7086
+[#7087]: https://github.com/openstreetmap/iD/issues/7087
+[#7091]: https://github.com/openstreetmap/iD/issues/7091
+[#7095]: https://github.com/openstreetmap/iD/issues/7095
+[#7097]: https://github.com/openstreetmap/iD/issues/7097
+[#7098]: https://github.com/openstreetmap/iD/issues/7098
+[#7099]: https://github.com/openstreetmap/iD/issues/7099
+[#7101]: https://github.com/openstreetmap/iD/issues/7101
+[#7104]: https://github.com/openstreetmap/iD/issues/7104
+[#7105]: https://github.com/openstreetmap/iD/issues/7105
+[#7112]: https://github.com/openstreetmap/iD/issues/7112
+[#7115]: https://github.com/openstreetmap/iD/issues/7115
+[#7118]: https://github.com/openstreetmap/iD/issues/7118
+[#7119]: https://github.com/openstreetmap/iD/issues/7119
+[#7126]: https://github.com/openstreetmap/iD/issues/7126
+[#7135]: https://github.com/openstreetmap/iD/issues/7135
+[#7137]: https://github.com/openstreetmap/iD/issues/7137
+[#7139]: https://github.com/openstreetmap/iD/issues/7139
+[#7143]: https://github.com/openstreetmap/iD/issues/7143
+[#7147]: https://github.com/openstreetmap/iD/issues/7147
+[#7152]: https://github.com/openstreetmap/iD/issues/7152
+[#7153]: https://github.com/openstreetmap/iD/issues/7153
+[#7156]: https://github.com/openstreetmap/iD/issues/7156
+[#7156]: https://github.com/openstreetmap/iD/issues/7156
+[#7159]: https://github.com/openstreetmap/iD/issues/7159
+[#7160]: https://github.com/openstreetmap/iD/issues/7160
+[#7164]: https://github.com/openstreetmap/iD/issues/7164
+[#7166]: https://github.com/openstreetmap/iD/issues/7166
+[#7169]: https://github.com/openstreetmap/iD/issues/7169
+[#7170]: https://github.com/openstreetmap/iD/issues/7170
+[#7171]: https://github.com/openstreetmap/iD/issues/7171
+[#7176]: https://github.com/openstreetmap/iD/issues/7176
+[#7177]: https://github.com/openstreetmap/iD/issues/7177
+[#7181]: https://github.com/openstreetmap/iD/issues/7181
+[#7182]: https://github.com/openstreetmap/iD/issues/7182
+[#7186]: https://github.com/openstreetmap/iD/issues/7186
+[#7186]: https://github.com/openstreetmap/iD/issues/7186
+[#7188]: https://github.com/openstreetmap/iD/issues/7188
+[#7192]: https://github.com/openstreetmap/iD/issues/7192
+[#7198]: https://github.com/openstreetmap/iD/issues/7198
+[#7201]: https://github.com/openstreetmap/iD/issues/7201
+[#7202]: https://github.com/openstreetmap/iD/issues/7202
+[#7203]: https://github.com/openstreetmap/iD/issues/7203
+[#7204]: https://github.com/openstreetmap/iD/issues/7204
+[#7208]: https://github.com/openstreetmap/iD/issues/7208
+[#7212]: https://github.com/openstreetmap/iD/issues/7212
+[#7214]: https://github.com/openstreetmap/iD/issues/7214
+[#7215]: https://github.com/openstreetmap/iD/issues/7215
+[#7216]: https://github.com/openstreetmap/iD/issues/7216
+[#7219]: https://github.com/openstreetmap/iD/issues/7219
+[#7220]: https://github.com/openstreetmap/iD/issues/7220
+[#7223]: https://github.com/openstreetmap/iD/issues/7223
+[#7225]: https://github.com/openstreetmap/iD/issues/7225
+[#7226]: https://github.com/openstreetmap/iD/issues/7226
+[#7227]: https://github.com/openstreetmap/iD/issues/7227
+[#7228]: https://github.com/openstreetmap/iD/issues/7228
+[#7229]: https://github.com/openstreetmap/iD/issues/7229
+[#7231]: https://github.com/openstreetmap/iD/issues/7231
+[#7232]: https://github.com/openstreetmap/iD/issues/7232
+[#7234]: https://github.com/openstreetmap/iD/issues/7234
+[#7236]: https://github.com/openstreetmap/iD/issues/7236
+[#7237]: https://github.com/openstreetmap/iD/issues/7237
+[#7247]: https://github.com/openstreetmap/iD/issues/7247
+[#7255]: https://github.com/openstreetmap/iD/issues/7255
+[#7259]: https://github.com/openstreetmap/iD/issues/7259
+[#7262]: https://github.com/openstreetmap/iD/issues/7262
+[#7265]: https://github.com/openstreetmap/iD/issues/7265
+[#7268]: https://github.com/openstreetmap/iD/issues/7268
+[#7270]: https://github.com/openstreetmap/iD/issues/7270
+[#7273]: https://github.com/openstreetmap/iD/issues/7273
+[#7274]: https://github.com/openstreetmap/iD/issues/7274
+[#7281]: https://github.com/openstreetmap/iD/issues/7281
+[#7282]: https://github.com/openstreetmap/iD/issues/7282
+[#7284]: https://github.com/openstreetmap/iD/issues/7284
+[#7285]: https://github.com/openstreetmap/iD/issues/7285
+[#7287]: https://github.com/openstreetmap/iD/issues/7287
+[#7289]: https://github.com/openstreetmap/iD/issues/7289
+[#7296]: https://github.com/openstreetmap/iD/issues/7296
+[#7297]: https://github.com/openstreetmap/iD/issues/7297
+[#7304]: https://github.com/openstreetmap/iD/issues/7304
+[#7306]: https://github.com/openstreetmap/iD/issues/7306
+[#7307]: https://github.com/openstreetmap/iD/issues/7307
+[#7309]: https://github.com/openstreetmap/iD/issues/7309
+[#7310]: https://github.com/openstreetmap/iD/issues/7310
+[#7313]: https://github.com/openstreetmap/iD/issues/7313
+[#7321]: https://github.com/openstreetmap/iD/issues/7321
+[#7323]: https://github.com/openstreetmap/iD/issues/7323
+[#7324]: https://github.com/openstreetmap/iD/issues/7324
+[#7326]: https://github.com/openstreetmap/iD/issues/7326
+[#7329]: https://github.com/openstreetmap/iD/issues/7329
+[#7330]: https://github.com/openstreetmap/iD/issues/7330
+[#7332]: https://github.com/openstreetmap/iD/issues/7332
+[#7333]: https://github.com/openstreetmap/iD/issues/7333
+[#7339]: https://github.com/openstreetmap/iD/issues/7339
+[#7342]: https://github.com/openstreetmap/iD/issues/7342
+[#7347]: https://github.com/openstreetmap/iD/issues/7347
+[#7349]: https://github.com/openstreetmap/iD/issues/7349
+[#7354]: https://github.com/openstreetmap/iD/issues/7354
+[#7355]: https://github.com/openstreetmap/iD/issues/7355
+[#7358]: https://github.com/openstreetmap/iD/issues/7358
+[#7363]: https://github.com/openstreetmap/iD/issues/7363
+[#7371]: https://github.com/openstreetmap/iD/issues/7371
+[#7379]: https://github.com/openstreetmap/iD/issues/7379
+[#7380]: https://github.com/openstreetmap/iD/issues/7380
+[#7381]: https://github.com/openstreetmap/iD/issues/7381
+[#7386]: https://github.com/openstreetmap/iD/issues/7386
+[#7390]: https://github.com/openstreetmap/iD/issues/7390
+[#7391]: https://github.com/openstreetmap/iD/issues/7391
+[#7392]: https://github.com/openstreetmap/iD/issues/7392
+[#7394]: https://github.com/openstreetmap/iD/issues/7394
+[#7395]: https://github.com/openstreetmap/iD/issues/7395
+[#7396]: https://github.com/openstreetmap/iD/issues/7396
+[#7400]: https://github.com/openstreetmap/iD/issues/7400
+[#7407]: https://github.com/openstreetmap/iD/issues/7407
+[#7408]: https://github.com/openstreetmap/iD/issues/7408
+[#7415]: https://github.com/openstreetmap/iD/issues/7415
+[#7419]: https://github.com/openstreetmap/iD/issues/7419
+[#7423]: https://github.com/openstreetmap/iD/issues/7423
+[#7427]: https://github.com/openstreetmap/iD/issues/7427
+[#7430]: https://github.com/openstreetmap/iD/issues/7430
+[#7432]: https://github.com/openstreetmap/iD/issues/7432
+[#7437]: https://github.com/openstreetmap/iD/issues/7437
+[#7440]: https://github.com/openstreetmap/iD/issues/7440
+[#7442]: https://github.com/openstreetmap/iD/issues/7442
+[#7444]: https://github.com/openstreetmap/iD/issues/7444
+[#7446]: https://github.com/openstreetmap/iD/issues/7446
+[#7447]: https://github.com/openstreetmap/iD/issues/7447
+[#7449]: https://github.com/openstreetmap/iD/issues/7449
+[#7452]: https://github.com/openstreetmap/iD/issues/7452
+[#7453]: https://github.com/openstreetmap/iD/issues/7453
+[#7455]: https://github.com/openstreetmap/iD/issues/7455
+[#7457]: https://github.com/openstreetmap/iD/issues/7457
+[#7458]: https://github.com/openstreetmap/iD/issues/7458
+[#7465]: https://github.com/openstreetmap/iD/issues/7465
+[#7466]: https://github.com/openstreetmap/iD/issues/7466
+[#7472]: https://github.com/openstreetmap/iD/issues/7472
+[#7475]: https://github.com/openstreetmap/iD/issues/7475
+[#7476]: https://github.com/openstreetmap/iD/issues/7476
+[#7477]: https://github.com/openstreetmap/iD/issues/7477
+[#7478]: https://github.com/openstreetmap/iD/issues/7478
+[#7479]: https://github.com/openstreetmap/iD/issues/7479
+[#7481]: https://github.com/openstreetmap/iD/issues/7481
+[#7482]: https://github.com/openstreetmap/iD/issues/7482
+[#7483]: https://github.com/openstreetmap/iD/issues/7483
+[#7486]: https://github.com/openstreetmap/iD/issues/7486
+[#7487]: https://github.com/openstreetmap/iD/issues/7487
+[#7488]: https://github.com/openstreetmap/iD/issues/7488
+[#7492]: https://github.com/openstreetmap/iD/issues/7492
+[#7493]: https://github.com/openstreetmap/iD/issues/7493
+[#7494]: https://github.com/openstreetmap/iD/issues/7494
+[#7499]: https://github.com/openstreetmap/iD/issues/7499
+[#7501]: https://github.com/openstreetmap/iD/issues/7501
+[#7503]: https://github.com/openstreetmap/iD/issues/7503
+[#7504]: https://github.com/openstreetmap/iD/issues/7504
+[#7507]: https://github.com/openstreetmap/iD/issues/7507
+[#7509]: https://github.com/openstreetmap/iD/issues/7509
+[#7510]: https://github.com/openstreetmap/iD/issues/7510
+[#7514]: https://github.com/openstreetmap/iD/issues/7514
+[#7515]: https://github.com/openstreetmap/iD/issues/7515
+[#7516]: https://github.com/openstreetmap/iD/issues/7516
+[#7518]: https://github.com/openstreetmap/iD/issues/7518
+[#7519]: https://github.com/openstreetmap/iD/issues/7519
+[#7521]: https://github.com/openstreetmap/iD/issues/7521
+[#7529]: https://github.com/openstreetmap/iD/issues/7529
+[#7531]: https://github.com/openstreetmap/iD/issues/7531
+[#7532]: https://github.com/openstreetmap/iD/issues/7532
+[#7534]: https://github.com/openstreetmap/iD/issues/7534
+[#7536]: https://github.com/openstreetmap/iD/issues/7536
+[#7536]: https://github.com/openstreetmap/iD/issues/7536
+[#7537]: https://github.com/openstreetmap/iD/issues/7537
+[#7538]: https://github.com/openstreetmap/iD/issues/7538
+[#7539]: https://github.com/openstreetmap/iD/issues/7539
+[#7541]: https://github.com/openstreetmap/iD/issues/7541
+[#7545]: https://github.com/openstreetmap/iD/issues/7545
+[#7548]: https://github.com/openstreetmap/iD/issues/7548
+[#7549]: https://github.com/openstreetmap/iD/issues/7549
+[#7551]: https://github.com/openstreetmap/iD/issues/7551
+[#7553]: https://github.com/openstreetmap/iD/issues/7553
+[#7555]: https://github.com/openstreetmap/iD/issues/7555
+[#7557]: https://github.com/openstreetmap/iD/issues/7557
+[#7560]: https://github.com/openstreetmap/iD/issues/7560
+[#7562]: https://github.com/openstreetmap/iD/issues/7562
+[#7568]: https://github.com/openstreetmap/iD/issues/7568
+[#7569]: https://github.com/openstreetmap/iD/issues/7569
+[#7570]: https://github.com/openstreetmap/iD/issues/7570
+[#7571]: https://github.com/openstreetmap/iD/issues/7571
+[#7572]: https://github.com/openstreetmap/iD/issues/7572
+[#7574]: https://github.com/openstreetmap/iD/issues/7574
+[#7575]: https://github.com/openstreetmap/iD/issues/7575
+[#7576]: https://github.com/openstreetmap/iD/issues/7576
+[#7577]: https://github.com/openstreetmap/iD/issues/7577
+[#7578]: https://github.com/openstreetmap/iD/issues/7578
+[#7579]: https://github.com/openstreetmap/iD/issues/7579
+[#7580]: https://github.com/openstreetmap/iD/issues/7580
+[#7581]: https://github.com/openstreetmap/iD/issues/7581
+[#7582]: https://github.com/openstreetmap/iD/issues/7582
+[#7584]: https://github.com/openstreetmap/iD/issues/7584
+[#7585]: https://github.com/openstreetmap/iD/issues/7585
+[#7588]: https://github.com/openstreetmap/iD/issues/7588
+[#7590]: https://github.com/openstreetmap/iD/issues/7590
+[#7596]: https://github.com/openstreetmap/iD/issues/7596
+[#7598]: https://github.com/openstreetmap/iD/issues/7598
+[#7600]: https://github.com/openstreetmap/iD/issues/7600
+[#7603]: https://github.com/openstreetmap/iD/issues/7603
+[#7606]: https://github.com/openstreetmap/iD/issues/7606
+[#7613]: https://github.com/openstreetmap/iD/issues/7613
+[#7614]: https://github.com/openstreetmap/iD/issues/7614
+[#7621]: https://github.com/openstreetmap/iD/issues/7621
+[#7622]: https://github.com/openstreetmap/iD/issues/7622
+[#7627]: https://github.com/openstreetmap/iD/issues/7627
+[#7628]: https://github.com/openstreetmap/iD/issues/7628
+[#7630]: https://github.com/openstreetmap/iD/issues/7630
+[#7632]: https://github.com/openstreetmap/iD/issues/7632
+[#7637]: https://github.com/openstreetmap/iD/issues/7637
+[#7640]: https://github.com/openstreetmap/iD/issues/7640
+[#7641]: https://github.com/openstreetmap/iD/issues/7641
+[#7642]: https://github.com/openstreetmap/iD/issues/7642
+[#7643]: https://github.com/openstreetmap/iD/issues/7643
+[#7652]: https://github.com/openstreetmap/iD/issues/7652
+[#7653]: https://github.com/openstreetmap/iD/issues/7653
+[#7656]: https://github.com/openstreetmap/iD/issues/7656
+[#7658]: https://github.com/openstreetmap/iD/issues/7658
+[#7659]: https://github.com/openstreetmap/iD/issues/7659
+[#7671]: https://github.com/openstreetmap/iD/issues/7671
+[#7675]: https://github.com/openstreetmap/iD/issues/7675
+[#7678]: https://github.com/openstreetmap/iD/issues/7678
+[#7680]: https://github.com/openstreetmap/iD/issues/7680
+[#7681]: https://github.com/openstreetmap/iD/issues/7681
+[#7682]: https://github.com/openstreetmap/iD/issues/7682
+[#7690]: https://github.com/openstreetmap/iD/issues/7690
+[#7691]: https://github.com/openstreetmap/iD/issues/7691
+[#7692]: https://github.com/openstreetmap/iD/issues/7692
+[#7699]: https://github.com/openstreetmap/iD/issues/7699
+[#7703]: https://github.com/openstreetmap/iD/issues/7703
+[#7709]: https://github.com/openstreetmap/iD/issues/7709
+[#7712]: https://github.com/openstreetmap/iD/issues/7712
+[#7714]: https://github.com/openstreetmap/iD/issues/7714
+[#7722]: https://github.com/openstreetmap/iD/issues/7722
+[#7725]: https://github.com/openstreetmap/iD/issues/7725
+[#7726]: https://github.com/openstreetmap/iD/issues/7726
+[#7726]: https://github.com/openstreetmap/iD/issues/7726
+[#7728]: https://github.com/openstreetmap/iD/issues/7728
+[#7729]: https://github.com/openstreetmap/iD/issues/7729
+[#7730]: https://github.com/openstreetmap/iD/issues/7730
+[#7730]: https://github.com/openstreetmap/iD/issues/7730
+[#7738]: https://github.com/openstreetmap/iD/issues/7738
+[#7745]: https://github.com/openstreetmap/iD/issues/7745
+[#7749]: https://github.com/openstreetmap/iD/issues/7749
+[#7752]: https://github.com/openstreetmap/iD/issues/7752
+[#7753]: https://github.com/openstreetmap/iD/issues/7753
+[#7762]: https://github.com/openstreetmap/iD/issues/7762
+[#7764]: https://github.com/openstreetmap/iD/issues/7764
+[#7770]: https://github.com/openstreetmap/iD/issues/7770
+[#7772]: https://github.com/openstreetmap/iD/issues/7772
+[#7775]: https://github.com/openstreetmap/iD/issues/7775
+[#7776]: https://github.com/openstreetmap/iD/issues/7776
+[#7777]: https://github.com/openstreetmap/iD/issues/7777
+[#7779]: https://github.com/openstreetmap/iD/issues/7779
+[#7783]: https://github.com/openstreetmap/iD/issues/7783
+[#7790]: https://github.com/openstreetmap/iD/issues/7790
+[#7795]: https://github.com/openstreetmap/iD/issues/7795
+[#7803]: https://github.com/openstreetmap/iD/issues/7803
+[#7811]: https://github.com/openstreetmap/iD/issues/7811
+[#7818]: https://github.com/openstreetmap/iD/issues/7818
+[#7820]: https://github.com/openstreetmap/iD/issues/7820
+[#7823]: https://github.com/openstreetmap/iD/issues/7823
+[#7824]: https://github.com/openstreetmap/iD/issues/7824
+[#7826]: https://github.com/openstreetmap/iD/issues/7826
+[#7827]: https://github.com/openstreetmap/iD/issues/7827
+[#7828]: https://github.com/openstreetmap/iD/issues/7828
+[#7829]: https://github.com/openstreetmap/iD/issues/7829
+[#7831]: https://github.com/openstreetmap/iD/issues/7831
+[#7832]: https://github.com/openstreetmap/iD/issues/7832
+[#7836]: https://github.com/openstreetmap/iD/issues/7836
+[#7840]: https://github.com/openstreetmap/iD/issues/7840
+[#7841]: https://github.com/openstreetmap/iD/issues/7841
+[#7842]: https://github.com/openstreetmap/iD/issues/7842
+[#7843]: https://github.com/openstreetmap/iD/issues/7843
+[#7845]: https://github.com/openstreetmap/iD/issues/7845
+[#7846]: https://github.com/openstreetmap/iD/issues/7846
+[#7847]: https://github.com/openstreetmap/iD/issues/7847
+[#7851]: https://github.com/openstreetmap/iD/issues/7851
+[#7852]: https://github.com/openstreetmap/iD/issues/7852
+[#7856]: https://github.com/openstreetmap/iD/issues/7856
+[#7857]: https://github.com/openstreetmap/iD/issues/7857
+[#7858]: https://github.com/openstreetmap/iD/issues/7858
+[#7859]: https://github.com/openstreetmap/iD/issues/7859
+[#7862]: https://github.com/openstreetmap/iD/issues/7862
+[#7865]: https://github.com/openstreetmap/iD/issues/7865
+[#7867]: https://github.com/openstreetmap/iD/issues/7867
+[#7867]: https://github.com/openstreetmap/iD/issues/7867
+[#7869]: https://github.com/openstreetmap/iD/issues/7869
+[#7871]: https://github.com/openstreetmap/iD/issues/7871
+[#7874]: https://github.com/openstreetmap/iD/issues/7874
+[#7875]: https://github.com/openstreetmap/iD/issues/7875
+[#7877]: https://github.com/openstreetmap/iD/issues/7877
+[#7878]: https://github.com/openstreetmap/iD/issues/7878
+[#7883]: https://github.com/openstreetmap/iD/issues/7883
+[#7885]: https://github.com/openstreetmap/iD/issues/7885
+[#7885]: https://github.com/openstreetmap/iD/issues/7885
+[#7886]: https://github.com/openstreetmap/iD/issues/7886
+[#7890]: https://github.com/openstreetmap/iD/issues/7890
+[#7892]: https://github.com/openstreetmap/iD/issues/7892
+[#7893]: https://github.com/openstreetmap/iD/issues/7893
+[#7894]: https://github.com/openstreetmap/iD/issues/7894
+[#7896]: https://github.com/openstreetmap/iD/issues/7896
+[#7897]: https://github.com/openstreetmap/iD/issues/7897
+[#7900]: https://github.com/openstreetmap/iD/issues/7900
+[#7902]: https://github.com/openstreetmap/iD/issues/7902
+[#7902]: https://github.com/openstreetmap/iD/issues/7902
+[#7904]: https://github.com/openstreetmap/iD/issues/7904
+[#7905]: https://github.com/openstreetmap/iD/issues/7905
+[#7908]: https://github.com/openstreetmap/iD/issues/7908
+[#7909]: https://github.com/openstreetmap/iD/issues/7909
+[#7912]: https://github.com/openstreetmap/iD/issues/7912
+[#7914]: https://github.com/openstreetmap/iD/issues/7914
+[#7915]: https://github.com/openstreetmap/iD/issues/7915
+[#7916]: https://github.com/openstreetmap/iD/issues/7916
+[#7918]: https://github.com/openstreetmap/iD/issues/7918
+[#7920]: https://github.com/openstreetmap/iD/issues/7920
+[#7925]: https://github.com/openstreetmap/iD/issues/7925
+[#7926]: https://github.com/openstreetmap/iD/issues/7926
+[#7932]: https://github.com/openstreetmap/iD/issues/7932
+[#7934]: https://github.com/openstreetmap/iD/issues/7934
+[#7935]: https://github.com/openstreetmap/iD/issues/7935
+[#7943]: https://github.com/openstreetmap/iD/issues/7943
+[#7944]: https://github.com/openstreetmap/iD/issues/7944
+[#7945]: https://github.com/openstreetmap/iD/issues/7945
+[#7947]: https://github.com/openstreetmap/iD/issues/7947
+[#7952]: https://github.com/openstreetmap/iD/issues/7952
+[#7958]: https://github.com/openstreetmap/iD/issues/7958
+[#7959]: https://github.com/openstreetmap/iD/issues/7959
+[#7960]: https://github.com/openstreetmap/iD/issues/7960
+[#7961]: https://github.com/openstreetmap/iD/issues/7961
+[#7962]: https://github.com/openstreetmap/iD/issues/7962
+[#7963]: https://github.com/openstreetmap/iD/issues/7963
+[#7963]: https://github.com/openstreetmap/iD/issues/7963
+[#7965]: https://github.com/openstreetmap/iD/issues/7965
+[#7968]: https://github.com/openstreetmap/iD/issues/7968
+[#7970]: https://github.com/openstreetmap/iD/issues/7970
+[#7972]: https://github.com/openstreetmap/iD/issues/7972
+[#7974]: https://github.com/openstreetmap/iD/issues/7974
+[#7976]: https://github.com/openstreetmap/iD/issues/7976
+[#7976]: https://github.com/openstreetmap/iD/issues/7976
+[#7977]: https://github.com/openstreetmap/iD/issues/7977
+[#7979]: https://github.com/openstreetmap/iD/issues/7979
+[#7980]: https://github.com/openstreetmap/iD/issues/7980
+[#7982]: https://github.com/openstreetmap/iD/issues/7982
+[#7985]: https://github.com/openstreetmap/iD/issues/7985
+[#7986]: https://github.com/openstreetmap/iD/issues/7986
+[#7987]: https://github.com/openstreetmap/iD/issues/7987
+[#7988]: https://github.com/openstreetmap/iD/issues/7988
+[#7990]: https://github.com/openstreetmap/iD/issues/7990
+[#7991]: https://github.com/openstreetmap/iD/issues/7991
+[#7992]: https://github.com/openstreetmap/iD/issues/7992
+[#7993]: https://github.com/openstreetmap/iD/issues/7993
+[#7994]: https://github.com/openstreetmap/iD/issues/7994
+[#7995]: https://github.com/openstreetmap/iD/issues/7995
+[#7996]: https://github.com/openstreetmap/iD/issues/7996
+[#7998]: https://github.com/openstreetmap/iD/issues/7998
+[#7998]: https://github.com/openstreetmap/iD/issues/7998
+[#7999]: https://github.com/openstreetmap/iD/issues/7999
+[#8000]: https://github.com/openstreetmap/iD/issues/8000
+[#8002]: https://github.com/openstreetmap/iD/issues/8002
+[#8003]: https://github.com/openstreetmap/iD/issues/8003
+[#8004]: https://github.com/openstreetmap/iD/issues/8004
+[#8007]: https://github.com/openstreetmap/iD/issues/8007
+[#8008]: https://github.com/openstreetmap/iD/issues/8008
+[#8009]: https://github.com/openstreetmap/iD/issues/8009
+[#8012]: https://github.com/openstreetmap/iD/issues/8012
+[#8013]: https://github.com/openstreetmap/iD/issues/8013
+[#8018]: https://github.com/openstreetmap/iD/issues/8018
+[#8019]: https://github.com/openstreetmap/iD/issues/8019
+[#8021]: https://github.com/openstreetmap/iD/issues/8021
+[#8023]: https://github.com/openstreetmap/iD/issues/8023
+[#8026]: https://github.com/openstreetmap/iD/issues/8026
+[#8030]: https://github.com/openstreetmap/iD/issues/8030
+[#8031]: https://github.com/openstreetmap/iD/issues/8031
+[#8034]: https://github.com/openstreetmap/iD/issues/8034
+[#8038]: https://github.com/openstreetmap/iD/issues/8038
+[#8039]: https://github.com/openstreetmap/iD/issues/8039
+[#8040]: https://github.com/openstreetmap/iD/issues/8040
+[#8042]: https://github.com/openstreetmap/iD/pull/8042
+[#8044]: https://github.com/openstreetmap/iD/issues/8044
+[#8045]: https://github.com/openstreetmap/iD/issues/8045
+[#8051]: https://github.com/openstreetmap/iD/issues/8051
+[#8054]: https://github.com/openstreetmap/iD/issues/8054
+[#8055]: https://github.com/openstreetmap/iD/issues/8055
+[#8056]: https://github.com/openstreetmap/iD/issues/8056
+[#8057]: https://github.com/openstreetmap/iD/issues/8057
+[#8061]: https://github.com/openstreetmap/iD/issues/8061
+[#8063]: https://github.com/openstreetmap/iD/issues/8063
+[#8065]: https://github.com/openstreetmap/iD/issues/8065
+[#8069]: https://github.com/openstreetmap/iD/issues/8069
+[#8072]: https://github.com/openstreetmap/iD/issues/8072
+[#8076]: https://github.com/openstreetmap/iD/issues/8076
+[#8078]: https://github.com/openstreetmap/iD/issues/8078
+[#8083]: https://github.com/openstreetmap/iD/issues/8083
+[#8089]: https://github.com/openstreetmap/iD/issues/8089
+[#8093]: https://github.com/openstreetmap/iD/issues/8093
+[#8096]: https://github.com/openstreetmap/iD/issues/8096
+[#8097]: https://github.com/openstreetmap/iD/issues/8097
+[#8105]: https://github.com/openstreetmap/iD/issues/8105
+[#8112]: https://github.com/openstreetmap/iD/issues/8112
+[#8122]: https://github.com/openstreetmap/iD/issues/8122
+[#8126]: https://github.com/openstreetmap/iD/issues/8126
+[#8128]: https://github.com/openstreetmap/iD/issues/8128
+[#8132]: https://github.com/openstreetmap/iD/issues/8132
+[#8133]: https://github.com/openstreetmap/iD/issues/8133
+[#8134]: https://github.com/openstreetmap/iD/issues/8134
+[#8137]: https://github.com/openstreetmap/iD/issues/8137
+[#8141]: https://github.com/openstreetmap/iD/issues/8141
+[#8150]: https://github.com/openstreetmap/iD/issues/8150
+[#8151]: https://github.com/openstreetmap/iD/issues/8151
+[#8155]: https://github.com/openstreetmap/iD/issues/8155
+[#8164]: https://github.com/openstreetmap/iD/issues/8164
+[#8165]: https://github.com/openstreetmap/iD/issues/8165
+[#8165]: https://github.com/openstreetmap/iD/issues/8165
+[#8187]: https://github.com/openstreetmap/iD/issues/8187
+[#8188]: https://github.com/openstreetmap/iD/issues/8188
+[#8225]: https://github.com/openstreetmap/iD/issues/8225
+[#8231]: https://github.com/openstreetmap/iD/issues/8231
+[#8233]: https://github.com/openstreetmap/iD/issues/8233
+[#8242]: https://github.com/openstreetmap/iD/issues/8242
+[#8246]: https://github.com/openstreetmap/iD/issues/8246
+[#8273]: https://github.com/openstreetmap/iD/issues/8273
+[#8276]: https://github.com/openstreetmap/iD/pull/8276
+[#8288]: https://github.com/openstreetmap/iD/issues/8288
+[#8380]: https://github.com/openstreetmap/iD/issues/8380
+[#839]: https://github.com/openstreetmap/iD/issues/839
+[#8415]: https://github.com/openstreetmap/iD/issues/8415
+[#8419]: https://github.com/openstreetmap/iD/issues/8419
+[#8434]: https://github.com/openstreetmap/iD/pull/8434
+[#8519]: https://github.com/openstreetmap/iD/issues/8519
+[#8603]: https://github.com/openstreetmap/iD/issues/8603
+[#8604]: https://github.com/openstreetmap/iD/issues/8604
+[#8612]: https://github.com/openstreetmap/iD/issues/8612
+[#8613]: https://github.com/openstreetmap/iD/issues/8613
+[#8615]: https://github.com/openstreetmap/iD/issues/8615
+[#8617]: https://github.com/openstreetmap/iD/issues/8617
+[#8632]: https://github.com/openstreetmap/iD/issues/8632
+[#8647]: https://github.com/openstreetmap/iD/issues/8647
+[#8676]: https://github.com/openstreetmap/iD/issues/8676
+[#8708]: https://github.com/openstreetmap/iD/issues/8708
+[#8727]: https://github.com/openstreetmap/iD/issues/8727
+[#8732]: https://github.com/openstreetmap/iD/issues/8732
+[#8743]: https://github.com/openstreetmap/iD/issues/8743
+[#8764]: https://github.com/openstreetmap/iD/pull/8764
+[#8769]: https://github.com/openstreetmap/iD/pull/8769
+[#8771]: https://github.com/openstreetmap/iD/issues/8771
+[#8774]: https://github.com/openstreetmap/iD/pull/8774
+[#8775]: https://github.com/openstreetmap/iD/pull/8775
+[#8781]: https://github.com/openstreetmap/iD/issues/8781
+[#8782]: https://github.com/openstreetmap/iD/pull/8782
+[#8792]: https://github.com/openstreetmap/iD/pull/8792
+[#8796]: https://github.com/openstreetmap/iD/issues/8796
+[#8799]: https://github.com/openstreetmap/iD/issues/8799
+[#8800]: https://github.com/openstreetmap/iD/pull/8800
+[#8805]: https://github.com/openstreetmap/iD/issues/8805
+[#8807]: https://github.com/openstreetmap/iD/issues/8807
+[#8811]: https://github.com/openstreetmap/iD/issues/8811
+[#8813]: https://github.com/openstreetmap/iD/issues/8813
+[#8817]: https://github.com/openstreetmap/iD/pull/8817
+[#8818]: https://github.com/openstreetmap/iD/issues/8818
+[#8825]: https://github.com/openstreetmap/iD/pull/8825
+[#8828]: https://github.com/openstreetmap/iD/pull/8828
+[#8831]: https://github.com/openstreetmap/iD/issues/8831
+[#8835]: https://github.com/openstreetmap/iD/pull/8835
+[#8836]: https://github.com/openstreetmap/iD/issues/8836
+[#8839]: https://github.com/openstreetmap/iD/pull/8839
+[#8844]: https://github.com/openstreetmap/iD/pull/8844
+[#8860]: https://github.com/openstreetmap/iD/pull/8860
+[#8869]: https://github.com/openstreetmap/iD/issues/8869
+[#8871]: https://github.com/openstreetmap/iD/issues/8871
+[#8876]: https://github.com/openstreetmap/iD/pull/8876
+[#8880]: https://github.com/openstreetmap/iD/pull/8880
+[#8881]: https://github.com/openstreetmap/iD/issues/8881
+[#8889]: https://github.com/openstreetmap/iD/pull/8889
+[#8905]: https://github.com/openstreetmap/iD/issues/8905
+[#8906]: https://github.com/openstreetmap/iD/pull/8906
+[#8911]: https://github.com/openstreetmap/iD/pull/8911
+[#8925]: https://github.com/openstreetmap/iD/issues/8925
+[#8927]: https://github.com/openstreetmap/iD/issues/8927
+[#8928]: https://github.com/openstreetmap/iD/pull/8928
+[#8930]: https://github.com/openstreetmap/iD/pull/8930
+[#8944]: https://github.com/openstreetmap/iD/issues/8944
+[#8945]: https://github.com/openstreetmap/iD/issues/8945
+[#8963]: https://github.com/openstreetmap/iD/issues/8963
+[#8975]: https://github.com/openstreetmap/iD/pull/8975
+[#8976]: https://github.com/openstreetmap/iD/issues/8976
+[#8985]: https://github.com/openstreetmap/iD/issues/8985
+[#8994]: https://github.com/openstreetmap/iD/issues/8994
+[#8997]: https://github.com/openstreetmap/iD/issues/8997
+[#9013]: https://github.com/openstreetmap/iD/issues/9013
+[#9018]: https://github.com/openstreetmap/iD/issues/9018
+[#9021]: https://github.com/openstreetmap/iD/pull/9021
+[#9054]: https://github.com/openstreetmap/iD/issues/9054
+[#9067]: https://github.com/openstreetmap/iD/issues/9067
+[#9074]: https://github.com/openstreetmap/iD/pull/9074
+[#9097]: https://github.com/openstreetmap/iD/pull/9097
+[#9102]: https://github.com/openstreetmap/iD/issues/9102
+[#9103]: https://github.com/openstreetmap/iD/issues/9103
+[#9104]: https://github.com/openstreetmap/iD/issues/9104
+[#9110]: https://github.com/openstreetmap/iD/issues/9110
+[#9118]: https://github.com/openstreetmap/iD/issues/9118
+[#9124]: https://github.com/openstreetmap/iD/pull/9124
+[#9133]: https://github.com/openstreetmap/iD/pull/9133
+[#9134]: https://github.com/openstreetmap/iD/pull/9134
+[#9139]: https://github.com/openstreetmap/iD/pull/9139
+[#9140]: https://github.com/openstreetmap/iD/pull/9140
+[#9141]: https://github.com/openstreetmap/iD/pull/9141
+[#9142]: https://github.com/openstreetmap/iD/pull/9142
+[#9143]: https://github.com/openstreetmap/iD/pull/9143
+[#9157]: https://github.com/openstreetmap/iD/issues/9157
+[#9163]: https://github.com/openstreetmap/iD/issues/9163
+[#9164]: https://github.com/openstreetmap/iD/issues/9164
+[#9169]: https://github.com/openstreetmap/iD/issues/9169
+[#9171]: https://github.com/openstreetmap/iD/pull/9171
+[#9172]: https://github.com/openstreetmap/iD/pull/9172
+[#9176]: https://github.com/openstreetmap/iD/pull/9176
+[#9208]: https://github.com/openstreetmap/iD/issues/9208
+[#9227]: https://github.com/openstreetmap/iD/issues/9227
+[#9233]: https://github.com/openstreetmap/iD/issues/9233
+[#9241]: https://github.com/openstreetmap/iD/pull/9241
+[#9242]: https://github.com/openstreetmap/iD/pull/9242
+[#9291]: https://github.com/openstreetmap/iD/pull/9291
+[#9293]: https://github.com/openstreetmap/iD/issues/9293
+[#9294]: https://github.com/openstreetmap/iD/issues/9294
+[#9298]: https://github.com/openstreetmap/iD/issues/9298
+[#9320]: https://github.com/openstreetmap/iD/pull/9320
+[#9325]: https://github.com/openstreetmap/iD/issues/9325
+[#9333]: https://github.com/openstreetmap/iD/pull/9333
+[#9337]: https://github.com/openstreetmap/iD/issues/9337
+[#9339]: https://github.com/openstreetmap/iD/issues/9339
+[#9341]: https://github.com/openstreetmap/iD/issues/9341
+[#9342]: https://github.com/openstreetmap/iD/issues/9342
+[#9344]: https://github.com/openstreetmap/iD/pull/9344
+[#9345]: https://github.com/openstreetmap/iD/issues/9345
+[#9347]: https://github.com/openstreetmap/iD/pull/9347
+[#9369]: https://github.com/openstreetmap/iD/issues/9369
+[#9372]: https://github.com/openstreetmap/iD/issues/9372
+[#9374]: https://github.com/openstreetmap/iD/issues/9374
+[#9375]: https://github.com/openstreetmap/iD/pull/9375
+[#9386]: https://github.com/openstreetmap/iD/issues/9386
+[#9390]: https://github.com/openstreetmap/iD/pull/9390
+[#9392]: https://github.com/openstreetmap/iD/pull/9392
+[#9397]: https://github.com/openstreetmap/iD/issues/9397
+[#9413]: https://github.com/openstreetmap/iD/pull/9413
+[#9422]: https://github.com/openstreetmap/iD/issues/9422
+[#9423]: https://github.com/openstreetmap/iD/pull/9423
+[#9424]: https://github.com/openstreetmap/iD/pull/9424
+[#9425]: https://github.com/openstreetmap/iD/issues/9425
+[#9433]: https://github.com/openstreetmap/iD/pull/9433
+[#9434]: https://github.com/openstreetmap/iD/pull/9434
+[#9439]: https://github.com/openstreetmap/iD/issues/9439
+[#9443]: https://github.com/openstreetmap/iD/pull/9443
+[#9446]: https://github.com/openstreetmap/iD/pull/9446
+[#9458]: https://github.com/openstreetmap/iD/pull/9458
+[#9471]: https://github.com/openstreetmap/iD/issues/9471
+[#9477]: https://github.com/openstreetmap/iD/issues/9477
+[#9482]: https://github.com/openstreetmap/iD/pull/9482
+[#9483]: https://github.com/openstreetmap/iD/pull/9483
+[#9492]: https://github.com/openstreetmap/iD/pull/9492
+[#9493]: https://github.com/openstreetmap/iD/pull/9493
+[#9501]: https://github.com/openstreetmap/iD/pull/9501
+[#9509]: https://github.com/openstreetmap/iD/pull/9509
+[#9520]: https://github.com/openstreetmap/iD/pull/9520
+[#9522]: https://github.com/openstreetmap/iD/issues/9522
+[#9524]: https://github.com/openstreetmap/iD/issues/9524
+[#9586]: https://github.com/openstreetmap/iD/pull/9586
+[#9587]: https://github.com/openstreetmap/iD/issues/9587
+[#9603]: https://github.com/openstreetmap/iD/pull/9603
+[#9634]: https://github.com/openstreetmap/iD/pull/9634
+[#9635]: https://github.com/openstreetmap/iD/pull/9635
+[#9636]: https://github.com/openstreetmap/iD/pull/9636
+[#9637]: https://github.com/openstreetmap/iD/pull/9637
+[#9638]: https://github.com/openstreetmap/iD/pull/9638
+[#9640]: https://github.com/openstreetmap/iD/issues/9640
+[#9650]: https://github.com/openstreetmap/iD/pull/9650
+[#9664]: https://github.com/openstreetmap/iD/pull/9664
+[#9667]: https://github.com/openstreetmap/iD/pull/9667
+[#9673]: https://github.com/openstreetmap/iD/pull/9673
+[#9710]: https://github.com/openstreetmap/iD/issues/9710
+[#9737]: https://github.com/openstreetmap/iD/pull/9737
+[#974-comment]: https://github.com/openstreetmap/iD/issues/974#issuecomment-296665907
+[#9752]: https://github.com/openstreetmap/iD/issues/9752
+[#9766]: https://github.com/openstreetmap/iD/pull/9766
+[#9786]: https://github.com/openstreetmap/iD/issues/9786
+[#9816]: https://github.com/openstreetmap/iD/issues/9816
+[#9817]: https://github.com/openstreetmap/iD/pull/9817
+[#9822]: https://github.com/openstreetmap/iD/issues/9822
+[#9846]: https://github.com/openstreetmap/iD/issues/9846
+[#9848]: https://github.com/openstreetmap/iD/issues/9848
+[#9876]: https://github.com/openstreetmap/iD/issues/9876
+[#9891]: https://github.com/openstreetmap/iD/pull/9891
+[#9898]: https://github.com/openstreetmap/iD/issues/9898
+[#9906]: https://github.com/openstreetmap/iD/pull/9906
+[#9933]: https://github.com/openstreetmap/iD/pull/9933
+[#9934]: https://github.com/openstreetmap/iD/pull/9934
+[#9941]: https://github.com/openstreetmap/iD/issues/9941
+[#9974]: https://github.com/openstreetmap/iD/pull/9974
+[#9983]: https://github.com/openstreetmap/iD/issues/9983
+[#9992]: https://github.com/openstreetmap/iD/issues/9992
+[#9993]: https://github.com/openstreetmap/iD/issues/9993
+[#9998]: https://github.com/openstreetmap/iD/pull/9998
+[#9999]: https://github.com/openstreetmap/iD/issues/9999
+[#pr8229]: https://github.com/openstreetmap/iD/pull/8229
+[#pr8238]: https://github.com/openstreetmap/iD/pull/8238
+[#pr8258]: https://github.com/openstreetmap/iD/pull/8258
+[#pr8264]: https://github.com/openstreetmap/iD/pull/8264
+[#pr8305]: https://github.com/openstreetmap/iD/pull/8305
+[#pr8305]: https://github.com/openstreetmap/iD/pull/8305
+[#pr8305]: https://github.com/openstreetmap/iD/pull/8305
+[#pr8310]: https://github.com/openstreetmap/iD/pull/8310
+[#pr8322]: https://github.com/openstreetmap/iD/pull/8322
+[#pr8341]: https://github.com/openstreetmap/iD/pull/8341
+[#pr8372]: https://github.com/openstreetmap/iD/pull/8372
+[#pr8442]: https://github.com/openstreetmap/iD/pull/8442
+[#pr8473]: https://github.com/openstreetmap/iD/pull/8473
+[#pr8577]: https://github.com/openstreetmap/iD/pull/8577
+[#pr8623]: https://github.com/openstreetmap/iD/pull/8623
+[#pr8625]: https://github.com/openstreetmap/iD/pull/8625
+[#pr8626]: https://github.com/openstreetmap/iD/pull/8626
+[#pr8627]: https://github.com/openstreetmap/iD/pull/8627
+[#pr8628]: https://github.com/openstreetmap/iD/pull/8628
+[#pr8636]: https://github.com/openstreetmap/iD/pull/8636
+[#pr8638]: https://github.com/openstreetmap/iD/pull/8638
+[#pr8642]: https://github.com/openstreetmap/iD/pull/8642
+[#pr8650]: https://github.com/openstreetmap/iD/pull/8650
+[#pr8663]: https://github.com/openstreetmap/iD/pull/8663
+[#pr8671]: https://github.com/openstreetmap/iD/pull/8671
+[#pr8675]: https://github.com/openstreetmap/iD/pull/8675
+[#pr8685]: https://github.com/openstreetmap/iD/pull/8685
+[#pr8701]: https://github.com/openstreetmap/iD/pull/8701
+[#pr8741]: https://github.com/openstreetmap/iD/pull/8741
+[#pr8746]: https://github.com/openstreetmap/iD/pull/8746
+[#pr8761]: https://github.com/openstreetmap/iD/pull/8761
+[#pr8762]: https://github.com/openstreetmap/iD/pull/8762
+[#pr8768]: https://github.com/openstreetmap/iD/pull/8768
+[#pr8773]: https://github.com/openstreetmap/iD/pull/8773
+[editor-layer-index/#680]: https://github.com/osmlab/editor-layer-index/pull/680
+[editor-layer-index/issues/#371]: https://github.com/osmlab/editor-layer-index/issues/371
+[editor-layer-index#391]: https://github.com/osmlab/editor-layer-index/pull/391
+[editor-layer-index#668]: https://github.com/osmlab/editor-layer-index/pull/668
+[id-tagging-schema#1076]: https://github.com/openstreetmap/id-tagging-schema/pull/1076
+[id-tagging-schema#1162]: https://github.com/openstreetmap/id-tagging-schema/issues/1162
+[id-tagging-schema#609]: https://github.com/openstreetmap/id-tagging-schema/issues/609
+[operations#951]: https://github.com/openstreetmap/operations/issues/951
+[schema-builder#38]: https://github.com/ideditor/schema-builder/pull/38
+[schema-builder#98]: https://github.com/ideditor/schema-builder/pull/98
+[via `scottdejonge/map-icons`]: https://github.com/bhousel/temaki/issues/2
