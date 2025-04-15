@@ -105,6 +105,8 @@ export function uiPopover(klass) {
             .on(_pointerPrefix + 'leave.popover', null)
             .on(_pointerPrefix + 'up.popover', null)
             .on(_pointerPrefix + 'down.popover', null)
+            .on('focus.popover', null)
+            .on('blur.popover', null)
             .on('click.popover', null)
             .attr('title', function() {
                 return this.getAttribute('data-original-title') || this.getAttribute('title');

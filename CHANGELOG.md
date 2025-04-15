@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* Fix removed tooltips from re-appearing when using keyboard navigation ([#9873])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -49,10 +50,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Suggest housenumber/housename values from surrounding areas ([#10946])
 #### :hammer: Development
 
+[#9873]: https://github.com/openstreetmap/iD/issues/9873
 [#10946]: https://github.com/openstreetmap/iD/issues/10946
 
 
 # v2.33.0
+##### 2025-04-09
 
 #### :sparkles: Usability & Accessibility
 * Allow searching for coordinates in localized number format in search box ([#10805])
@@ -89,6 +92,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10401]: https://github.com/openstreetmap/iD/issues/10401
 [#10805]: https://github.com/openstreetmap/iD/pull/10805
 [#10843]: https://github.com/openstreetmap/iD/pull/10843
+[#10849]: https://github.com/openstreetmap/iD/pull/10849
 [#10852]: https://github.com/openstreetmap/iD/issues/10852
 [#10885]: https://github.com/openstreetmap/iD/issues/10885
 [#10910]: https://github.com/openstreetmap/iD/pull/10910
