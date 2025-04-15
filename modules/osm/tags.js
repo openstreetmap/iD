@@ -63,9 +63,6 @@ export var osmAreaKeysExceptions = {
         wash: true,
         ventilation_shaft: true
     },
-    waterway: {
-        dam: true
-    },
     amenity: {
         bicycle_parking: true
     }
