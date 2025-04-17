@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # unreleased (v2.34.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Show full relation label as hover-text in _membership editor_, disambiguate relations with duplicate labels by appending the relation id ([#10942])
 #### :scissors: Operations
 #### :camera: Street-Level
 * Keep photo viewer open when disabling Panoramax overlay ([#10966])
@@ -56,6 +57,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#9873]: https://github.com/openstreetmap/iD/issues/9873
 [#10104]: https://github.com/openstreetmap/iD/issues/10104
+[#10942]: https://github.com/openstreetmap/iD/pull/10942
 [#10943]: https://github.com/openstreetmap/iD/pull/10943
 [#10946]: https://github.com/openstreetmap/iD/issues/10946
 [#10959]: https://github.com/openstreetmap/iD/issues/10959
