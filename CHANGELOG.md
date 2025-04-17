@@ -46,6 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show unchanged tags of a [deprecation rule](https://github.com/ideditor/schema-builder?tab=readme-ov-file#deprecations) explicitly in the validation warning ([#10104])
 #### :bug: Bugfixes
 * Fix removed tooltips from re-appearing when using keyboard navigation ([#9873])
+* Only consider feature with proper lifecycle tags in "past/futures" layer ([#10943])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -55,6 +56,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#9873]: https://github.com/openstreetmap/iD/issues/9873
 [#10104]: https://github.com/openstreetmap/iD/issues/10104
+[#10943]: https://github.com/openstreetmap/iD/pull/10943
 [#10946]: https://github.com/openstreetmap/iD/issues/10946
 [#10959]: https://github.com/openstreetmap/iD/issues/10959
 [#10966]: https://github.com/openstreetmap/iD/issues/10966
