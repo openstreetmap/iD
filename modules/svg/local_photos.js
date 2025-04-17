@@ -271,6 +271,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             try {
                 const exifData = await exifr.parse(file); // eslint-disable-line no-await-in-loop
                 const photo = {
+                    service: 'photo',
                     id: _idAutoinc++,
                     name: file.name,
                     getSrc: () => readFileAsDataURL(file),

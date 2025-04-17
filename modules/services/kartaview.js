@@ -100,6 +100,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
                 if (which === 'images') {
                     d = {
+                        service: 'photo',
                         loc: loc,
                         key: item.id,
                         ca: +item.heading,

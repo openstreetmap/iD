@@ -55,9 +55,10 @@ export function validationOutdatedTags() {
     }
     const nsiDiff = nsiResult ? utilTagDiff(oldTags, nsiResult.newTags) : [];
 
-    // Upgrade deprecated tags..
+    // Upgrade deprecated tags
+    let deprecatedTags;
     if (_dataDeprecated) {
-      const deprecatedTags = getDeprecatedTags(entity.tags, _dataDeprecated);
+      deprecatedTags = getDeprecatedTags(entity.tags, _dataDeprecated);
       if (entity.type === 'way' && entity.isClosed() &&
           entity.tags.traffic_calming === 'island' && !entity.tags.highway) {
         // https://github.com/openstreetmap/id-tagging-schema/issues/1162#issuecomment-2000356902
@@ -90,13 +91,23 @@ export function validationOutdatedTags() {
         }
       });
     }
-    const deprecationDiff = utilTagDiff(oldTags, newTags);
+    const deprecationDiff = utilTagDiff(oldTags, newTags).concat(
+      Object.keys(oldTags)
+        .filter(key => deprecatedTags?.some(deprecated => deprecated.replace?.[key] !== undefined))
+        .filter(key => newTags[key] === oldTags[key])
+        .map(key => ({
+          type: '~',
+          key,
+          oldVal: oldTags[key],
+          newVal: newTags[key],
+          display: '&nbsp; ' + key + '=' + oldTags[key]
+        })));
 
     let issues = [];
     issues.provisional = (_waitingForDeprecated || waitingForNsi);
 
     if (deprecationDiff.length) {
-      const isOnlyAddingTags = deprecationDiff.every(d => d.type === '+');
+      const isOnlyAddingTags = !deprecationDiff.some(d => d.type === '-');
       const prefix = isOnlyAddingTags ? 'incomplete.' : '';
 
       issues.push(new validationIssue({
@@ -244,8 +255,15 @@ export function validationOutdatedTags() {
         .attr('class', 'tagDiff-row')
         .append('td')
         .attr('class', d => {
-          let klass = d.type === '+' ? 'add' : 'remove';
-          return `tagDiff-cell tagDiff-cell-${klass}`;
+          const klass = 'tagDiff-cell';
+          switch (d.type) {
+            case '+':
+              return `${klass} tagDiff-cell-add`;
+            case '-':
+              return `${klass} tagDiff-cell-remove`;
+            default:
+              return `${klass} tagDiff-cell-unchanged`;
+          }
         })
         .html(d => d.display);
     }
