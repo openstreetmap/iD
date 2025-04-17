@@ -188,8 +188,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     }
 
     function editOff() {
-        const service = getService();
-        service.hideViewer(context);
         layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
     }
