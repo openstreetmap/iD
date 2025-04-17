@@ -140,6 +140,7 @@ function loadTileDataToCache(data, tile) {
             let isPano = sourceWidth % sourceHeight === 0;
 
             const d = {
+                service: 'photo',
                 loc: loc,
                 capture_time: feature.properties.capture_time,
                 id: feature.properties.id,

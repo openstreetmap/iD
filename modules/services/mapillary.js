@@ -105,6 +105,7 @@ function loadTileDataToCache(data, tile, which) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
             loc = feature.geometry.coordinates;
             d = {
+                service: 'photo',
                 loc: loc,
                 captured_at: feature.properties.captured_at,
                 ca: feature.properties.compass_angle,
@@ -147,6 +148,7 @@ function loadTileDataToCache(data, tile, which) {
             loc = feature.geometry.coordinates;
 
             d = {
+                service: 'photo',
                 loc: loc,
                 id: feature.properties.id,
                 first_seen_at: feature.properties.first_seen_at,
@@ -172,6 +174,7 @@ function loadTileDataToCache(data, tile, which) {
             loc = feature.geometry.coordinates;
 
             d = {
+                service: 'photo',
                 loc: loc,
                 id: feature.properties.id,
                 first_seen_at: feature.properties.first_seen_at,

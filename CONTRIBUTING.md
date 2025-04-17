@@ -39,19 +39,19 @@ When requesting a feature:
 We use GitHub labels to keep track of issues. Some guidelines:
 
 Green labels are for **action items**. Jump in and start working!
-* <sub>[![good-first-issue][good-first-issue]][good-first-issue_link]</sub> -
-Best for new contributors.  No experience necessary!
+* <sub>[![new-contributor-opportunity][new-contributor-opportunity]][new-contributor-opportunity_link]</sub> -
+Best for new contributors. Little experience necessary!
 * <sub>[![help-wanted][help-wanted]][help-wanted_link]</sub> -
 For more intermediate contributors, probably requires investigation or knowledge of iD code.
 * <sub>[![priority][priority]][priority_link]</sub> -
 Issues that have a big impact or matter most to _new mappers_.
 <br/>(There should probably be 10 or fewer "priority" items.)
 
-[good-first-issue]: http://labl.es/svg?text=good%20first%20issue&bgcolor=0e8a16
+[new-contributor-opportunity]: http://labl.es/svg?text=new%20contributor%20opportunity&bgcolor=0e8a16
 [help-wanted]: http://labl.es/svg?text=help%20wanted&bgcolor=0e8a16
 [priority]: http://labl.es/svg?text=priority&bgcolor=0e8a16
 
-[good-first-issue_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3A%22good%20first%20issue%22
+[new-contributor-opportunity_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3A%22new%20contributor%20opportunity%22
 [help-wanted_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3A%22help%20wanted%22
 [priority_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Apriority
 

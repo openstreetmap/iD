@@ -330,14 +330,10 @@ export function uiSectionRawMembershipEditor(context) {
             });
 
             // Dedupe identical names by appending relation id - see #2891
-            var dupeGroups = Object.values(utilArrayGroupBy(result, 'value'))
-                .filter(function(v) { return v.length > 1; });
-
-            dupeGroups.forEach(function(group) {
-                group.forEach(function(obj) {
-                    obj.value += ' ' + obj.relation.id;
-                });
-            });
+            Object.values(utilArrayGroupBy(result, 'value'))
+                .filter(v => v.length > 1)
+                .flat()
+                .forEach(obj => obj.value += ' ' + obj.relation.id);
         }
 
         result.forEach(function(obj) {
@@ -419,7 +415,7 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('class', 'member-entity-name')
             .classed('has-colour', d => d.relation.tags.colour && isColourValid(d.relation.tags.colour))
             .style('border-color', d => d.relation.tags.colour)
-            .html(function(d) {
+            .text(function(d) {
                 const matched = presetManager.match(d.relation, context.graph());
                 // hide the network from the name if there is NSI match
                 return utilDisplayName(d.relation, matched.suggestion);
@@ -452,6 +448,23 @@ export function uiSectionRawMembershipEditor(context) {
                 const graph = context.graph();
                 return d.relation.members.every(m => graph.hasEntity(m.id));
             });
+
+        const dupeLabels = new WeakSet(Object.values(
+            utilArrayGroupBy(items.selectAll('.label-text').nodes(), 'textContent'))
+            .filter(v => v.length > 1)
+            .flat());
+
+        items.select('.label-text').each(function() {
+            const label = d3_select(this);
+            const entityName = label.select('.member-entity-name');
+            if (dupeLabels.has(this)) {
+                // Dedupe identical names in hover text by appending relation id - see #2891, #10184
+                label.attr('title', d => `${entityName.text()} ${d.relation.id}`);
+            } else {
+                // set full label also as hover text: useful if a (long) label is cut off with an … ellipsis
+                label.attr('title', () => entityName.text());
+            }
+        });
 
         var wrapEnter = itemsEnter
             .append('div')

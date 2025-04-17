@@ -100,12 +100,13 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
                 if (which === 'images') {
                     d = {
+                        service: 'photo',
                         loc: loc,
                         key: item.id,
                         ca: +item.heading,
                         captured_at: (item.shot_date || item.date_added),
                         captured_by: item.username,
-                        imagePath: item.lth_name,
+                        imagePath: item.name,
                         sequence_id: item.sequence_id,
                         sequence_index: +item.sequence_index
                     };
@@ -444,7 +445,7 @@ export default {
             imageWrap
                 .append('img')
                 .attr('class', 'kartaview-image')
-                .attr('src', (apibase + '/' + d.imagePath).replace('https://kartaview.org/storage2/', 'https://storage2.openstreetcam.org/'))
+                .attr('src', (apibase + '/' + d.imagePath).replace(/^https:\/\/kartaview\.org\/storage(\d+)\//, 'https://storage$1.openstreetcam.org/'))
                 .style('transform', 'rotate(' + r + 'deg)');
 
             if (d.captured_by) {

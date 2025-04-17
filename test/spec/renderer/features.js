@@ -58,7 +58,7 @@ describe('iD.rendererFeatures', function() {
                 iD.osmNode({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
                 iD.osmNode({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
                 iD.osmNode({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
-                iD.osmNode({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
+                iD.osmNode({id: 'point_old_rail_station', tags: {'disused:railway': 'station'}, version: 1}),
                 iD.osmWay({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
                 iD.osmWay({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
                 iD.osmWay({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
@@ -80,7 +80,7 @@ describe('iD.rendererFeatures', function() {
             expect(stats.paths).to.eql(0);
             expect(stats.points).to.eql(5);
             expect(stats.power).to.eql(1);
-            expect(stats.rail).to.eql(2);
+            expect(stats.rail).to.eql(1);
             expect(stats.water).to.eql(1);
         });
     });
@@ -92,7 +92,7 @@ describe('iD.rendererFeatures', function() {
             iD.osmNode({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
             iD.osmNode({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
             iD.osmNode({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
-            iD.osmNode({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
+            iD.osmNode({id: 'point_old_rail_station', tags: {'disused:railway': 'station'}, version: 1}),
 
             // Traffic Roads
             iD.osmWay({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
@@ -472,12 +472,12 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
 
             doMatch('rail', [
-                'point_rail_station', 'point_old_rail_station',
-                'railway', 'rail_landuse', 'rail_disused'
+                'point_rail_station', 'railway', 'rail_landuse', 'rail_disused'
             ]);
 
             dontMatch('rail', [
                 'rail_streetcar', 'rail_trail',  // because rail also used as highway
+                'point_old_rail_station',
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'power_line',
                 'motorway_construction', 'fence'
