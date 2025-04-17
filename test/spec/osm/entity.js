@@ -168,6 +168,15 @@ describe('iD.osmEntity', function () {
             expect(a.mergeTags(b.tags).tags).to.eql({a: 'a;b'});
             expect(b.mergeTags(a.tags).tags).to.eql({a: 'b;a'});
         });
+
+        it('accepts override tags', function () {
+            const a = iD.osmEntity({tags: {a: 'a', c: '1'}});
+            const b = iD.osmEntity({tags: {b: 'b', c: '2'}});
+
+            const merged = a.mergeTags(b.tags, { c: '3' });
+
+            expect(merged.tags.c).to.eql('3');
+        });
     });
 
     describe('#osmId', function () {

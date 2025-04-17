@@ -323,4 +323,9 @@ export function osmShouldRenderDirection(vertexTags, wayTags) {
     return true;
 }
 
-export var summableTags = ['step_count', 'parking'];
+export var osmSummableTags = new Set([
+    'step_count',
+    'parking:both:capacity',
+    'parking:left:capacity',
+    'parking:left:capacity'
+]);
