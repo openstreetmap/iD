@@ -10,11 +10,10 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { osmLifecyclePrefixes, osmGetLifecyclePrefix, osmGetKeyWithoutLifecycle} from '../../osm/tags';
 import { uiCombobox } from '../combobox';
+import { presetManager } from '../../presets';
 
-// TODO: expanded by deafult if there already is a lifecycle (dunno)
-// TODO: check for universal fields (where?)
-// TODO: fix visual bugs lifecycle-extra -> access
 // TODO: fix checkbox not reporting value
+// TODO: fix lifecycle change on field tag change (preset.js setTag) (remove previous lifecycle if present)
 export function uiSectionLifecycleEditor(context) {
 
     var dispatch = d3_dispatch('change');
@@ -23,12 +22,12 @@ export function uiSectionLifecycleEditor(context) {
     var _mainKey = '', _extraTags;
     var _allFields = [], _allFieldsKeys = [];
     var _showBlank = false, _presets = [], _reference, _fieldsArr = [];
+    var presetsManager = presetManager;
 
     const _lifecyclePresets = Object.values(osmLifecyclePrefixes);
     const _ids = Object.keys(osmLifecyclePrefixes);
     const _visibleByDefault = _lifecyclePresets
-        .filter(obj => obj.visibleByDefault)
-        .map(obj => ({ value: obj.id }));
+        .filter(obj => obj.visibleByDefault);
 
     var section = uiSection('lifecycle-editor', context)
         .shouldDisplay(() => true)
@@ -78,12 +77,17 @@ export function uiSectionLifecycleEditor(context) {
 
         var fields = preset.fields(loc);
         var moreFields = preset.moreFields(loc);
+        var universalFields = presetsManager.universal();
 
         _allFields = utilArrayUnion(fields, moreFields);
+        _allFields = utilArrayUnion(_allFields, universalFields);
+
         _allFields.forEach(field => {
             if (!field.key) field.key = field.id;
         });
-        _allFields = _allFields.filter(field => field.key !== _mainKey);
+
+        // If we want to add more complicated fields, remove '!field.keys'
+        _allFields = _allFields.filter(field => !field.keys && field.key !== _mainKey);
         _allFieldsKeys = _allFields.map(field => field.key ?? field.id);
 
         _extraTags = getExtraTags();
@@ -182,12 +186,22 @@ export function uiSectionLifecycleEditor(context) {
     function extraLifecycleMenu(selection){
         const extraTags = _extraTags;
         const allFields = _allFields;
-        const allFieldsKeys = _allFieldsKeys;
 
         const extraTagKeys = Object.keys(extraTags);
 
-        const prefixCombobox = uiCombobox(context).data(_visibleByDefault);
-        const fieldKeyCombobox = uiCombobox(context).data(allFieldsKeys.map(field => ({ value: field })));
+        const prefixCombobox = uiCombobox(context).data(_visibleByDefault.map(field => ({
+            display: function(sel) {
+                sel.text(t('lifecycle.' + field.id));
+            },
+            value: field.id
+        })));
+
+        const fieldKeyCombobox = uiCombobox(context).data(allFields.map(field => ({
+            display: function(sel) {
+                sel.text(field.title());
+            },
+            value: field.key ?? field.id
+        })));
 
         addExtraTagList = selection.select('.member-list');
 
@@ -207,6 +221,7 @@ export function uiSectionLifecycleEditor(context) {
         let extraTagRowEnter = extraTagRows
             .enter()
             .append('li')
+            .attr('id', d => d)
             .attr('class', 'member-row form-field');
 
         let innerRowLabel = extraTagRowEnter
