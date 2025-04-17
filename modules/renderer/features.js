@@ -223,10 +223,12 @@ export function rendererFeatures(context) {
 
         const keys = Object.keys(tags);
 
-        for (let i = 0; i < keys.length; i++) {
-            const key = keys[i];
-            const s = key.split(':')[0];
-            if (osmLifecyclePrefixes[s] || osmLifecyclePrefixes[tags[key]]) return true;
+        for (const key of keys) {
+            if (osmLifecyclePrefixes[tags[key]]) return true; // legacy tagging, e.g. `highway=construction`
+            const parts = key.split(':');
+            if (parts.length === 1) continue;
+            const prefix = parts[0];
+            if (osmLifecyclePrefixes[prefix]) return true; // lifecycle tagging, e.g. `demolished:building=yes`
         }
         return false;
     });

@@ -35,7 +35,35 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# unreleased (v2.33.0-dev)
+# unreleased (v2.34.0-dev)
+
+#### :sparkles: Usability & Accessibility
+#### :scissors: Operations
+#### :camera: Street-Level
+* Keep photo viewer open when disabling Panoramax overlay ([#10966])
+* Don't de-select map feature when clicking on a street level photo ([#10959])
+#### :white_check_mark: Validation
+* Show unchanged tags of a [deprecation rule](https://github.com/ideditor/schema-builder?tab=readme-ov-file#deprecations) explicitly in the validation warning ([#10104])
+#### :bug: Bugfixes
+* Fix removed tooltips from re-appearing when using keyboard navigation ([#9873])
+* Only consider feature with proper lifecycle tags in "past/futures" layer ([#10943])
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* Suggest housenumber/housename values from surrounding areas ([#10946])
+#### :hammer: Development
+
+[#9873]: https://github.com/openstreetmap/iD/issues/9873
+[#10104]: https://github.com/openstreetmap/iD/issues/10104
+[#10943]: https://github.com/openstreetmap/iD/pull/10943
+[#10946]: https://github.com/openstreetmap/iD/issues/10946
+[#10959]: https://github.com/openstreetmap/iD/issues/10959
+[#10966]: https://github.com/openstreetmap/iD/issues/10966
+
+
+# v2.33.0
+##### 2025-04-09
 
 #### :sparkles: Usability & Accessibility
 * Allow searching for coordinates in localized number format in search box ([#10805])
@@ -60,13 +88,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 * Consider language scripts when determining the locale to use ([#10910], thanks [@k-yle])
 * Add phone format for Egypt ([#10916], thanks [@youssefelzedy])
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * Don't inherit fields which the current preset already has a dedicated field for
 * Take location into account when setting a presets default values from regional fields
 * Roads with `motorroad=yes` show implied access restrictions (`foot=no`, `bicycle=no`, `horse=no`) ([id-tagging-schema#609], [#9333])
-#### :hammer: Development
 
 [#9333]: https://github.com/openstreetmap/iD/pull/9333
 [#10299]: https://github.com/openstreetmap/iD/issues/10299
@@ -75,6 +100,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10401]: https://github.com/openstreetmap/iD/issues/10401
 [#10805]: https://github.com/openstreetmap/iD/pull/10805
 [#10843]: https://github.com/openstreetmap/iD/pull/10843
+[#10849]: https://github.com/openstreetmap/iD/pull/10849
 [#10852]: https://github.com/openstreetmap/iD/issues/10852
 [#10885]: https://github.com/openstreetmap/iD/issues/10885
 [#10910]: https://github.com/openstreetmap/iD/pull/10910

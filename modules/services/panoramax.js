@@ -178,6 +178,7 @@ function loadTileDataToCache(data, tile, zoom) {
             loc = feature.geometry.coordinates;
 
             d = {
+                service: 'photo',
                 loc: loc,
                 capture_time: feature.properties.ts,
                 capture_time_parsed: new Date(feature.properties.ts),

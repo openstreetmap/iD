@@ -120,6 +120,7 @@ function loadNextTilePage(which, url, tile) {
         bubble.lat || bubble.latitude
       ];
       const d = {
+        service: 'photo',
         loc: loc,
         key: bubbleId,
         imageUrl: bubble.imageUrl
