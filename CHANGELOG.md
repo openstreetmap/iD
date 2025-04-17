@@ -38,8 +38,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # unreleased (v2.34.0-dev)
 
 #### :sparkles: Usability & Accessibility
-* Show full relation label as hover-text in _membership editor_, disambiguate relations with duplicate labels by appending the relation id ([#10942])
+* Show full relation label as hover-text in _membership editor_, disambiguate relations with duplicate labels by appending the relation id ([#10492])
 #### :scissors: Operations
+* Preserve the sum of certain tags (`step_count`, `parking:*:capacity`) during _join_ operation ([#10492], thanks [@ChaitanyaKadu03])
+* Preserve total value of `parking:*:capacity` tags during _split_ operation by distributing it proportionally to the resulting ways ([#10492])
 #### :camera: Street-Level
 * Keep photo viewer open when disabling Panoramax overlay ([#10966])
 * Don't de-select map feature when clicking on a street level photo ([#10959])
@@ -57,11 +59,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#9873]: https://github.com/openstreetmap/iD/issues/9873
 [#10104]: https://github.com/openstreetmap/iD/issues/10104
+[#10492]: https://github.com/openstreetmap/iD/issues/10492
 [#10942]: https://github.com/openstreetmap/iD/pull/10942
 [#10943]: https://github.com/openstreetmap/iD/pull/10943
 [#10946]: https://github.com/openstreetmap/iD/issues/10946
 [#10959]: https://github.com/openstreetmap/iD/issues/10959
 [#10966]: https://github.com/openstreetmap/iD/issues/10966
+[@ChaitanyaKadu03]: https://github.com/ChaitanyaKadu03
 
 
 # v2.33.0
