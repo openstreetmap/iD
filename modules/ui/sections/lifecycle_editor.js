@@ -12,8 +12,7 @@ import { osmLifecyclePrefixes, osmGetLifecyclePrefix, osmGetKeyWithoutLifecycle}
 import { uiCombobox } from '../combobox';
 import { presetManager } from '../../presets';
 
-// TODO: fix checkbox not reporting value
-// TODO: fix lifecycle change on field tag change (preset.js setTag) (remove previous lifecycle if present)
+// TODO: fix checkbox not reporting value in extra fields
 export function uiSectionLifecycleEditor(context) {
 
     var dispatch = d3_dispatch('change');
@@ -26,6 +25,10 @@ export function uiSectionLifecycleEditor(context) {
 
     const _lifecyclePresets = Object.values(osmLifecyclePrefixes);
     const _ids = Object.keys(osmLifecyclePrefixes);
+
+    // Only some lifecycles are visible by default.
+    // This choise was made to narrow down the number of prefixes to the most used ones
+    // You can still use many hidden lifecycles and they will be rendered nonetheless (like razed or dismantled)
     const _visibleByDefault = _lifecyclePresets
         .filter(obj => obj.visibleByDefault);
 
@@ -67,6 +70,14 @@ export function uiSectionLifecycleEditor(context) {
         }
 
         const preset = _presets[0];
+
+        // Resets current Lifecycle if preset changed
+        if (_mainKey && _currentLifecycle && _currentLifecycle !== preset.lifecycle) {
+            _pendingChange = _pendingChange || {};
+            _pendingChange[_currentLifecycle + ':' + _mainKey] = undefined;
+            scheduleChange();
+        }
+
         _currentLifecycle = preset.lifecycle;
         _mainKey = _ids.includes(preset.id.split('/')[0]) ? preset.id.split('/')[1] : preset.id.split('/')[0];
 
@@ -112,6 +123,7 @@ export function uiSectionLifecycleEditor(context) {
         referenceMenu(referenceWrap);
     }
 
+    // Creates the radio button list
     function mainLifecycleMenu(mainLifecycleWrap){
         mainLifecycleWrap.selectAll('*').remove();
         const lifecycleToRender = getLifecycleToRender();
@@ -183,6 +195,7 @@ export function uiSectionLifecycleEditor(context) {
 
     }
 
+    // Creates the extra lifecycle fields
     function extraLifecycleMenu(selection){
         const extraTags = _extraTags;
         const allFields = _allFields;
@@ -398,6 +411,7 @@ export function uiSectionLifecycleEditor(context) {
         fieldKeyCombobox(inputKey);
     }
 
+    // Shows referenceMenu when reference button is clicked
     function referenceMenu(selection){
         _reference = _reference ?? uiTagReference(
             {
@@ -419,6 +433,7 @@ export function uiSectionLifecycleEditor(context) {
             .call(_reference.button);
     }
 
+    // The input menu for extra lifecycle is hidden until + button is clicked
     function hideNewExtraTag() {
         d3_select('.lifecycle-extra-new-key').property('value', '');
         d3_select('.lifecycle-extra-new-prefix').property('value', '');
@@ -428,6 +443,7 @@ export function uiSectionLifecycleEditor(context) {
         _showBlank = false;
     }
 
+    // Sometimes some lifecycle like "razed" are used and we don't want to hide them in the radio list
     function getLifecycleToRender(){
         const render = _lifecyclePresets.filter(tag => tag.visibleByDefault);
         const renderIds = new Set(render.map(tag => tag.id));
@@ -451,6 +467,7 @@ export function uiSectionLifecycleEditor(context) {
         return render;
     }
 
+    // Checks whether a button should be or shouldn't be rendered as selected
     function checkRadio() {
 
         var id = d3_select(this).attr('value');
@@ -466,6 +483,7 @@ export function uiSectionLifecycleEditor(context) {
         return null;
     }
 
+    // Checks all the tags in the entity and seeks for lifecycle prefixes in non-main keys
     function getExtraTags() {
         const tags = _tags;
         const mainKey = _mainKey;
@@ -494,6 +512,7 @@ export function uiSectionLifecycleEditor(context) {
         return tagsWithLifecycles;
     }
 
+    // Adds a new tag with a lifecycle that is not the main key
     function addExtraLifecycle() {
         let newKey =  d3_select('.lifecycle-extra-new-key').property('value').toLowerCase();
         const newLifecycle = d3_select('.lifecycle-extra-new-prefix').property('value').toLowerCase();
@@ -528,6 +547,7 @@ export function uiSectionLifecycleEditor(context) {
         scheduleChange();
     }
 
+    // Changes the main key lifecycle
     function changeLifecycle() {
         if (d3_select(this).attr('readonly')) return;
 
@@ -568,6 +588,7 @@ export function uiSectionLifecycleEditor(context) {
         scheduleChange();
     }
 
+    // Removes the lifecycle prefix from the main key
     function makeFunctional() {
         const oldLifecycle = _currentLifecycle;
         const tags = _tags;
@@ -586,6 +607,7 @@ export function uiSectionLifecycleEditor(context) {
         scheduleChange();
     }
 
+    // Changes the lifecycle of the specified extra field
     function changeExtraLifecycle() {
         if (d3_select(this).attr('readonly')) return;
 
@@ -617,6 +639,7 @@ export function uiSectionLifecycleEditor(context) {
         scheduleChange();
     }
 
+    // Removes the lifecycle prefix from the specified extra field
     function makeExtraFunctional() {
         const oldLifecycleTag = d3_select(this).attr('id');
         const key = osmGetKeyWithoutLifecycle(oldLifecycleTag);
@@ -639,6 +662,7 @@ export function uiSectionLifecycleEditor(context) {
         scheduleChange();
     }
 
+    // Removes the specified extra field alltogether
     function deleteExtraTag() {
         const oldLifecycleTag = d3_select(this).attr('id');
         const key = osmGetKeyWithoutLifecycle(oldLifecycleTag);
@@ -671,6 +695,7 @@ export function uiSectionLifecycleEditor(context) {
         }, 10);
     }
 
+    // Some fields comes with extra subkeys, given the mainKey we want to get all the subkeys (like addr: -> addr:housenumber, addr:city, etc ... )
     function getKeysByMainKey(mainKey) {
         const allFields = _allFields;
         const field = allFields.find(field => field.key === mainKey);
