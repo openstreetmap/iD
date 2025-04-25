@@ -116,7 +116,7 @@
     "name-suggestion-index": "~6.0",
     "netlify-cli": "^20.0.3",
     "npm-run-all": "^4.0.0",
-    "osm-community-index": "~5.9.1",
+    "osm-community-index": "~5.9.2",
     "postcss": "^8.5.3",
     "postcss-prefix-selector": "^2.1.1",
     "serve-handler": "^6.1.6",
