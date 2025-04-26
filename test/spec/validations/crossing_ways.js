@@ -373,6 +373,11 @@ describe('iD.validations.crossing_ways', function () {
         verifySingleCrossingIssue(validate(), null);
     });
 
+    it('flags road bridge crossing road on the same layer', function() {
+        createWaysWithOneCrossingPoint({ highway: 'residential', bridge: 'yes', layer: '1' }, { highway: 'tertiary', layer: '1' });
+        verifySingleCrossingIssue(validate(), {});
+    });
+
     it('flags road bridge crossing road bridge on the same layer', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential', bridge: 'yes' }, { highway: 'tertiary', bridge: 'yes' });
         verifySingleCrossingIssue(validate(), {});
@@ -381,6 +386,16 @@ describe('iD.validations.crossing_ways', function () {
     it('flags road bridge crossing aqueduct on the same layer', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential', bridge: 'yes' }, { waterway: 'canal', bridge: 'aqueduct' });
         verifySingleCrossingIssue(validate(), null);
+    });
+
+    it('flags road tunnel crossing road on the same layer', function() {
+        createWaysWithOneCrossingPoint({ highway: 'residential', tunnel: 'yes', layer: '-1' }, { highway: 'tertiary', layer: '-1' });
+        verifySingleCrossingIssue(validate(), {});
+    });
+
+    it('flags a crossing where only one feature is indoor', () => {
+        createWaysWithOneCrossingPoint({ highway: 'path' }, { highway: 'path', level: '1' });
+        verifySingleCrossingIssue(validate(), {});
     });
 
     it('flags road tunnel crossing waterway tunnel on the same layer', function() {
