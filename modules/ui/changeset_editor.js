@@ -74,10 +74,12 @@ export function uiChangesetEditor(context) {
                 osm.userChangesets(function (err, changesets) {
                     if (err) return;
 
+                    var deleted = (JSON.parse(localStorage.getItem('deletedChangesetComments') || '[]')).map(s => s.trim().toLowerCase());
                     var comments = changesets.map(function(changeset) {
                         var comment = changeset.tags.comment;
                         return comment ? { title: comment, value: comment } : null;
-                    }).filter(Boolean);
+                    }).filter(Boolean)
+                      .filter(c => !deleted.includes(c.value.trim().toLowerCase()));
 
                     commentField
                         .call(commentCombo

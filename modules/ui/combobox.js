@@ -390,10 +390,37 @@ export function uiCombobox(context, klass) {
                 })
                 .attr('title', function(d) { return d.title; })
                 .each(function(d) {
+                    var option = d3_select(this);
                     if (d.display) {
-                        d.display(d3_select(this));
+                        d.display(option);
                     } else {
-                        d3_select(this).text(d.value);
+                        option.text(d.value);
+                    }
+                    // Only for comment combobox: add cross button, floated right, minimal style
+                    if (klass === 'comment') {
+                        option.append('button')
+                            .attr('class', 'combobox-delete')
+                            .attr('title', 'Delete this comment')
+                            .style('float', 'right')
+                            .style('font-size', '16px')
+                            .style('cursor', 'pointer')
+                            .text('×')
+                            .on('mousedown', function(event) {
+                                event.stopPropagation();
+                                event.preventDefault();
+                            })
+                            .on('click', function(event, d) {
+                                event.stopPropagation();
+                                event.preventDefault();
+                                let deleted = JSON.parse(localStorage.getItem('deletedChangesetComments') || '[]');
+                                let valueNorm = d.value.trim().toLowerCase();
+                                if (!deleted.map(s => s.trim().toLowerCase()).includes(valueNorm)) {
+                                    deleted.push(d.value);
+                                    localStorage.setItem('deletedChangesetComments', JSON.stringify(deleted));
+                                }
+                                d3_select(this.parentNode).remove();
+                            });
+
                     }
                 })
                 .on('mouseenter', _mouseEnterHandler)
