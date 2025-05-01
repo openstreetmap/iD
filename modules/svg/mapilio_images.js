@@ -18,10 +18,9 @@ export function svgMapilioImages(projection, context, dispatch) {
 
     function init() {
         if (svgMapilioImages.initialized) return;
-        svgMapilioImages.enabled = true;
+        svgMapilioImages.enabled = false;
         svgMapilioImages.initialized = true;
     }
-
 
     function getService() {
         if (services.mapilio && !_mapilio) {
@@ -37,6 +36,79 @@ export function svgMapilioImages(projection, context, dispatch) {
         return _mapilio;
     }
 
+    /**
+     * Filters images
+     * @param {*} images
+     * @returns array of filtered images
+     */
+    async function filterImages(images) {
+        var fromDate = context.photos().fromDate();
+        var toDate = context.photos().toDate();
+        const username = context.photos().usernames();
+
+        const service = getService();
+
+        if (fromDate) {
+            images = images.filter(function(photo) {
+                return new Date(photo.capture_time).getTime() >= new Date(fromDate).getTime();
+            });
+        }
+        if (toDate) {
+            images = images.filter(function(photo) {
+                return new Date(photo.capture_time).getTime() <= new Date(toDate).getTime();
+            });
+        }
+        if (username && service) {
+            if (_activeUsernameFilter !== username) {
+                _activeUsernameFilter = username;
+
+                const tempIds = await service.getUserIds(username);
+
+                _activeIds = {};
+                tempIds.forEach(id => _activeIds[id] = true);
+            }
+            images = images.filter(img => _activeIds[img.account_id]);
+        }
+
+        return images;
+    }
+
+    /**
+     * Filters sequences
+     * @param {*} sequences
+     * @returns array of filtered sequences
+     */
+    async function filterSequences(sequences) {
+        var fromDate = context.photos().fromDate();
+        var toDate = context.photos().toDate();
+        const username = context.photos().usernames();
+
+        const service = getService();
+
+        if (fromDate) {
+            sequences = sequences.filter(function(sequence) {
+                return new Date(sequence.properties.capture_time).getTime() >= new Date(fromDate).getTime().toString();
+            });
+        }
+        if (toDate) {
+            sequences = sequences.filter(function(sequence) {
+                return new Date(sequence.properties.capture_time).getTime() <= new Date(toDate).getTime().toString();
+            });
+        }
+        if (username && service) {
+            if (_activeUsernameFilter !== username) {
+                _activeUsernameFilter = username;
+
+                const tempIds = await service.getUserIds(username);
+
+                _activeIds = {};
+                tempIds.forEach(id => _activeIds[id] = true);
+            }
+            sequences = sequences.filter(seq => _activeIds[seq.properties.account_id]);
+        }
+
+        return sequences;
+    }
 
     function showLayer() {
         const service = getService();
@@ -51,7 +123,6 @@ export function svgMapilioImages(projection, context, dispatch) {
             .style('opacity', 1)
             .on('end', function () { dispatch.call('change'); });
     }
-
 
     function hideLayer() {
         throttledRedraw.cancel();
@@ -111,79 +182,6 @@ export function svgMapilioImages(projection, context, dispatch) {
         if (service) service.setStyles(context, null);
     }
 
-    /**
-     * Filters images
-     * @param {*} images
-     * @returns array of filtered images
-     */
-    async function filterImages(images) {
-        var fromDate = context.photos().fromDate();
-        var toDate = context.photos().toDate();
-        const username = context.photos().usernames();
-
-        const service = getService();
-
-        if (fromDate) {
-            images = images.filter(function(photo) {
-                return new Date(photo.capture_time).getTime() >= new Date(fromDate).getTime();
-            });
-        }
-        if (toDate) {
-            images = images.filter(function(photo) {
-                return new Date(photo.capture_time).getTime() <= new Date(toDate).getTime();
-            });
-        }
-        if (username && service) {
-            if (_activeUsernameFilter !== username) {
-                _activeUsernameFilter = username;
-
-                const tempIds = await service.getUserIds(username);
-
-                _activeIds = {};
-                tempIds.forEach(id => _activeIds[id] = true);
-            }
-            images = images.filter(img => _activeIds[img.account_id]);
-        }
-
-        return images;
-    }
-
-    /**
-     * Filters sequences
-     * @param {*} sequences
-     * @returns array of filtered sequences
-     */
-    async function filterSequences(sequences) {
-        var fromDate = context.photos().fromDate();
-        var toDate = context.photos().toDate();
-        const username = context.photos().usernames();
-
-        const service = getService();
-
-        if (fromDate) {
-            sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.capture_time).getTime() >= new Date(fromDate).getTime();
-            });
-        }
-        if (toDate) {
-            sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.capture_time).getTime() <= new Date(toDate).getTime();
-            });
-        }
-        if (username && service) {
-            if (_activeUsernameFilter !== username) {
-                _activeUsernameFilter = username;
-
-                const tempIds = await service.getUserIds(username);
-                _activeIds = {};
-                tempIds.forEach(id => _activeIds[id] = true);
-            }
-            sequences = sequences.filter(seq => _activeIds[seq.properties.account_id]);
-        }
-
-        return sequences;
-    }
-
     async function update() {
         const zoom = ~~context.map().zoom();
         const showViewfields = (zoom >= viewFieldZoomLevel);
@@ -194,11 +192,14 @@ export function svgMapilioImages(projection, context, dispatch) {
 
         dispatch.call('photoDatesChanged', this, 'mapilio', [
             ...images.map(p => p.capture_time),
-            ...sequences.map(s => s.properties.capture_time)
+            ...sequences.map(s => s.properties.Date)
         ]);
 
         images = await filterImages(images);
         sequences = await filterSequences(sequences);
+
+        const activeImage = service.getActiveImage?.();
+        const activeImageId = activeImage ? activeImage.id : null;
 
         let traces = layer
             .selectAll('.sequences')
@@ -218,10 +219,10 @@ export function svgMapilioImages(projection, context, dispatch) {
             .selectAll('.markers')
             .selectAll('.viewfield-group')
             .data(images, function(d) { return d.id; });
+            // .classed('currentView', d => d.id === activeImageId);
 
         // exit
-        groups.exit()
-            .remove();
+        groups.exit().remove();
 
         // enter
         const groupsEnter = groups.enter()
@@ -235,9 +236,6 @@ export function svgMapilioImages(projection, context, dispatch) {
             .append('g')
             .attr('class', 'viewfield-scale');
 
-
-        const activeImage = service.getActiveImage?.();
-        const activeImageId = activeImage ? activeImage.id : null;
         // update
         const markers = groups
             .merge(groupsEnter)
@@ -261,14 +259,15 @@ export function svgMapilioImages(projection, context, dispatch) {
         const viewfields = markers.selectAll('.viewfield')
             .data(showViewfields ? [0] : []);
 
-        viewfields.exit()
-            .remove();
+        viewfields.exit().remove();
 
         viewfields.enter()
             .insert('path', 'circle')
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
+
+        service.setStyles(context, null);
 
         function viewfieldPath() {
             if (this.parentNode.__data__.isPano) {
@@ -297,7 +296,6 @@ export function svgMapilioImages(projection, context, dispatch) {
     //     layer.selectAll('.viewfield-group.currentView')
     //         .attr('transform', d => transform(d, d.id));
     // }
-
 
     function drawImages(selection) {
         const enabled = svgMapilioImages.enabled;
@@ -348,7 +346,6 @@ export function svgMapilioImages(projection, context, dispatch) {
             dispatch.call('photoDatesChanged', this, 'mapilio', []);
         }
     }
-
 
     drawImages.enabled = function(_) {
         if (!arguments.length) return svgMapilioImages.enabled;
