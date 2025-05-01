@@ -26,7 +26,6 @@ export function svgMapilioImages(projection, context, dispatch) {
         if (services.mapilio && !_mapilio) {
             _mapilio = services.mapilio;
             _mapilio.event
-                // .on('viewerChanged', viewerChanged)
                 .on('loadedImages', throttledRedraw)
                 .on('loadedLines', throttledRedraw);
         } else if (!services.mapilio && _mapilio) {
@@ -277,24 +276,6 @@ export function svgMapilioImages(projection, context, dispatch) {
         }
 
     }
-
-    // function viewerChanged() {
-    //     const service = getService();
-    //     if (!service) return;
-
-    //     const frame = service.photoFrame();
-    //     if (!frame) return;
-
-    //     // update viewfield rotation
-    //     _viewerYaw = frame.getYaw();
-
-    //     // avoid updating if the map is currently transformed
-    //     // e.g. during drags or easing.
-    //     if (context.map().isTransformed()) return;
-
-    //     layer.selectAll('.viewfield-group.currentView')
-    //         .attr('transform', d => transform(d, d.id));
-    // }
 
     function drawImages(selection) {
         const enabled = svgMapilioImages.enabled;
