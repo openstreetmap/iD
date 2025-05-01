@@ -13,8 +13,8 @@ export function svgMapilioImages(projection, context, dispatch) {
     let layer = d3_select(null);
     let _mapilio;
     let _viewerYaw = 0;
-    // let _activeUsernameFilter;
-    // let _activeIds;
+    let _activeUsernameFilter;
+    let _activeIds;
 
     function init() {
         if (svgMapilioImages.initialized) return;
@@ -116,12 +116,12 @@ export function svgMapilioImages(projection, context, dispatch) {
      * @param {*} images
      * @returns array of filtered images
      */
-    function filterImages(images) {
+    async function filterImages(images) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
-        // const username = context.photos().usernames();
+        const username = context.photos().usernames();
 
-        // const service = getService();
+        const service = getService();
 
         if (fromDate) {
             images = images.filter(function(photo) {
@@ -133,17 +133,17 @@ export function svgMapilioImages(projection, context, dispatch) {
                 return new Date(photo.capture_time).getTime() <= new Date(toDate).getTime();
             });
         }
-        // if (username && service) {
-        //     if (_activeUsernameFilter !== username) {
-        //         _activeUsernameFilter = username;
+        if (username && service) {
+            if (_activeUsernameFilter !== username) {
+                _activeUsernameFilter = username;
 
-        //         const tempIds = await service.getUserIds(username);
+                const tempIds = await service.getUserIds(username);
 
-        //         _activeIds = {};
-        //         tempIds.forEach(id => _activeIds[id] = true);
-        //     }
-        //     images = images.filter(img => _activeIds[img.account_id]);
-        // }
+                _activeIds = {};
+                tempIds.forEach(id => _activeIds[id] = true);
+            }
+            images = images.filter(img => _activeIds[img.account_id]);
+        }
 
         return images;
     }
@@ -153,12 +153,12 @@ export function svgMapilioImages(projection, context, dispatch) {
      * @param {*} sequences
      * @returns array of filtered sequences
      */
-    function filterSequences(sequences) {
+    async function filterSequences(sequences) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
-        // const username = context.photos().usernames();
+        const username = context.photos().usernames();
 
-        // const service = getService();
+        const service = getService();
 
         if (fromDate) {
             sequences = sequences.filter(function(sequence) {
@@ -170,21 +170,21 @@ export function svgMapilioImages(projection, context, dispatch) {
                 return new Date(sequence.properties.capture_time).getTime() <= new Date(toDate).getTime();
             });
         }
-        // if (username && service) {
-        //     if (_activeUsernameFilter !== username) {
-        //         _activeUsernameFilter = username;
+        if (username && service) {
+            if (_activeUsernameFilter !== username) {
+                _activeUsernameFilter = username;
 
-        //         const tempIds = await service.getUserIds(username);
-        //         _activeIds = {};
-        //         tempIds.forEach(id => _activeIds[id] = true);
-        //     }
-        //     sequences = sequences.filter(seq => _activeIds[seq.properties.account_id]);
-        // }
+                const tempIds = await service.getUserIds(username);
+                _activeIds = {};
+                tempIds.forEach(id => _activeIds[id] = true);
+            }
+            sequences = sequences.filter(seq => _activeIds[seq.properties.account_id]);
+        }
 
         return sequences;
     }
 
-    function update() {
+    async function update() {
         const zoom = ~~context.map().zoom();
         const showViewfields = (zoom >= viewFieldZoomLevel);
         const service = getService();
@@ -197,8 +197,8 @@ export function svgMapilioImages(projection, context, dispatch) {
             ...sequences.map(s => s.properties.capture_time)
         ]);
 
-        images = filterImages(images);
-        sequences = filterSequences(sequences);
+        images = await filterImages(images);
+        sequences = await filterSequences(sequences);
 
         let traces = layer
             .selectAll('.sequences')
