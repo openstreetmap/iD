@@ -8,7 +8,7 @@ import {svgPath, svgPointTransform} from './helpers';
 export function svgMapilioImages(projection, context, dispatch) {
     const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     const imageMinZoom = 16;
-    const lineMinZoom = 12;
+    const lineMinZoom = 10;
     const viewFieldZoomLevel = 18;
     let layer = d3_select(null);
     let _mapilio;
@@ -185,12 +185,12 @@ export function svgMapilioImages(projection, context, dispatch) {
     }
 
     function update() {
-        const z = ~~context.map().zoom();
-        const showViewfields = (z >= viewFieldZoomLevel);
+        const zoom = ~~context.map().zoom();
+        const showViewfields = (zoom >= viewFieldZoomLevel);
         const service = getService();
 
-        let sequences = (service ? service.sequences(projection) : []);
-        let images = (service ? service.images(projection) : []);
+        let sequences = (service ? service.sequences(projection, zoom) : []);
+        let images = (service && zoom >= imageMinZoom ? service.images(projection) : []);
 
         dispatch.call('photoDatesChanged', this, 'mapilio', [
             ...images.map(p => p.capture_time),
@@ -333,7 +333,7 @@ export function svgMapilioImages(projection, context, dispatch) {
                 } else if (zoom >= lineMinZoom) {
                     editOn();
                     update();
-                    service.loadLines(projection);
+                    service.loadLines(projection, zoom);
                 } else {
                     editOff();
                     dispatch.call('photoDatesChanged', this, 'mapilio', []);
