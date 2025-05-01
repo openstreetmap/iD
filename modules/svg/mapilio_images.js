@@ -7,15 +7,18 @@ import {svgPath, svgPointTransform} from './helpers';
 
 export function svgMapilioImages(projection, context, dispatch) {
     const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    const minZoom = 12;
+    const imageMinZoom = 16;
+    const lineMinZoom = 12;
+    const viewFieldZoomLevel = 18;
     let layer = d3_select(null);
     let _mapilio;
-    const viewFieldZoomLevel = 18;
-
+    let _viewerYaw = 0;
+    // let _activeUsernameFilter;
+    // let _activeIds;
 
     function init() {
         if (svgMapilioImages.initialized) return;
-        svgMapilioImages.enabled = false;
+        svgMapilioImages.enabled = true;
         svgMapilioImages.initialized = true;
     }
 
@@ -23,7 +26,10 @@ export function svgMapilioImages(projection, context, dispatch) {
     function getService() {
         if (services.mapilio && !_mapilio) {
             _mapilio = services.mapilio;
-            _mapilio.event.on('loadedImages', throttledRedraw);
+            _mapilio.event
+                // .on('viewerChanged', viewerChanged)
+                .on('loadedImages', throttledRedraw)
+                .on('loadedLines', throttledRedraw);
         } else if (!services.mapilio && _mapilio) {
             _mapilio = null;
         }
@@ -57,10 +63,15 @@ export function svgMapilioImages(projection, context, dispatch) {
             .on('end', editOff);
     }
 
-    function transform(d) {
+    function transform(d, selectedImageId) {
         let t = svgPointTransform(projection)(d);
-        if (d.heading) {
-            t += ' rotate(' + Math.floor(d.heading) + ',0,0)';
+        let rot = d.heading || 0;
+
+        if (d.id === selectedImageId) {
+            rot += _viewerYaw;
+        }
+        if (rot) {
+            t += ' rotate(' + Math.floor(rot) + ',0,0)';
         }
         return t;
     }
@@ -80,11 +91,9 @@ export function svgMapilioImages(projection, context, dispatch) {
         const service = getService();
         if (!service) return;
 
-        service
-            .ensureViewerLoaded(context, image.id)
-            .then(function() {
-                service
-                    .selectImage(context, image.id)
+        service.ensureViewerLoaded(context)
+            .then(() => {
+                service.selectImage(context, image.id)
                     .showViewer(context);
             });
 
@@ -102,67 +111,102 @@ export function svgMapilioImages(projection, context, dispatch) {
         if (service) service.setStyles(context, null);
     }
 
-
+    /**
+     * Filters images
+     * @param {*} images
+     * @returns array of filtered images
+     */
     function filterImages(images) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
+        // const username = context.photos().usernames();
+
+        // const service = getService();
 
         if (fromDate) {
-            var fromTimestamp = new Date(fromDate).getTime();
             images = images.filter(function(photo) {
-                return new Date(photo.capture_time).getTime() >= fromTimestamp;
+                return new Date(photo.capture_time).getTime() >= new Date(fromDate).getTime();
             });
         }
         if (toDate) {
-            var toTimestamp = new Date(toDate).getTime();
             images = images.filter(function(photo) {
-                return new Date(photo.capture_time).getTime() <= toTimestamp;
+                return new Date(photo.capture_time).getTime() <= new Date(toDate).getTime();
             });
         }
+        // if (username && service) {
+        //     if (_activeUsernameFilter !== username) {
+        //         _activeUsernameFilter = username;
+
+        //         const tempIds = await service.getUserIds(username);
+
+        //         _activeIds = {};
+        //         tempIds.forEach(id => _activeIds[id] = true);
+        //     }
+        //     images = images.filter(img => _activeIds[img.account_id]);
+        // }
 
         return images;
     }
 
+    /**
+     * Filters sequences
+     * @param {*} sequences
+     * @returns array of filtered sequences
+     */
     function filterSequences(sequences) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
+        // const username = context.photos().usernames();
+
+        // const service = getService();
 
         if (fromDate) {
-            var fromTimestamp = new Date(fromDate).getTime();
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.capture_time).getTime() >= fromTimestamp;
+                return new Date(sequence.properties.capture_time).getTime() >= new Date(fromDate).getTime();
             });
         }
         if (toDate) {
-            var toTimestamp = new Date(toDate).getTime();
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.capture_time).getTime() <= toTimestamp;
+                return new Date(sequence.properties.capture_time).getTime() <= new Date(toDate).getTime();
             });
         }
+        // if (username && service) {
+        //     if (_activeUsernameFilter !== username) {
+        //         _activeUsernameFilter = username;
+
+        //         const tempIds = await service.getUserIds(username);
+        //         _activeIds = {};
+        //         tempIds.forEach(id => _activeIds[id] = true);
+        //     }
+        //     sequences = sequences.filter(seq => _activeIds[seq.properties.account_id]);
+        // }
 
         return sequences;
     }
 
     function update() {
-
         const z = ~~context.map().zoom();
         const showViewfields = (z >= viewFieldZoomLevel);
-
         const service = getService();
+
         let sequences = (service ? service.sequences(projection) : []);
         let images = (service ? service.images(projection) : []);
 
-        dispatch.call('photoDatesChanged', this, 'mapilio', [...images.map(p => p.capture_time), ...sequences.map(s => s.properties.capture_time)]);
+        dispatch.call('photoDatesChanged', this, 'mapilio', [
+            ...images.map(p => p.capture_time),
+            ...sequences.map(s => s.properties.capture_time)
+        ]);
 
-        sequences = filterSequences(sequences);
         images = filterImages(images);
+        sequences = filterSequences(sequences);
 
-        let traces = layer.selectAll('.sequences').selectAll('.sequence')
+        let traces = layer
+            .selectAll('.sequences')
+            .selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.id; });
 
         // exit
-        traces.exit()
-            .remove();
+        traces.exit().remove();
 
         traces.enter()
             .append('path')
@@ -170,8 +214,9 @@ export function svgMapilioImages(projection, context, dispatch) {
             .merge(traces)
             .attr('d', svgPath(projection).geojson);
 
-
-        const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
+        const groups = layer
+            .selectAll('.markers')
+            .selectAll('.viewfield-group')
             .data(images, function(d) { return d.id; });
 
         // exit
@@ -190,13 +235,18 @@ export function svgMapilioImages(projection, context, dispatch) {
             .append('g')
             .attr('class', 'viewfield-scale');
 
+
+        const activeImage = service.getActiveImage?.();
+        const activeImageId = activeImage ? activeImage.id : null;
         // update
         const markers = groups
             .merge(groupsEnter)
-            .sort(function(a, b) {
-                return b.loc[1] - a.loc[1];  // sort Y
+            .sort((a, b) => {
+                if (a.id === activeImageId) return 1;
+                if (b.id === activeImageId) return -1;
+                return a.capture_time_parsed - b.capture_time_parsed;
             })
-            .attr('transform', transform)
+            .attr('transform', d => transform(d, activeImageId))
             .select('.viewfield-scale');
 
 
@@ -230,6 +280,24 @@ export function svgMapilioImages(projection, context, dispatch) {
 
     }
 
+    // function viewerChanged() {
+    //     const service = getService();
+    //     if (!service) return;
+
+    //     const frame = service.photoFrame();
+    //     if (!frame) return;
+
+    //     // update viewfield rotation
+    //     _viewerYaw = frame.getYaw();
+
+    //     // avoid updating if the map is currently transformed
+    //     // e.g. during drags or easing.
+    //     if (context.map().isTransformed()) return;
+
+    //     layer.selectAll('.viewfield-group.currentView')
+    //         .attr('transform', d => transform(d, d.id));
+    // }
+
 
     function drawImages(selection) {
         const enabled = svgMapilioImages.enabled;
@@ -238,8 +306,7 @@ export function svgMapilioImages(projection, context, dispatch) {
         layer = selection.selectAll('.layer-mapilio')
             .data(service ? [0] : []);
 
-        layer.exit()
-            .remove();
+        layer.exit().remove();
 
         const layerEnter = layer.enter()
             .append('g')
@@ -254,17 +321,27 @@ export function svgMapilioImages(projection, context, dispatch) {
             .append('g')
             .attr('class', 'markers');
 
-        layer = layerEnter
-            .merge(layer);
+        layer = layerEnter.merge(layer);
 
         if (enabled) {
-            if (service && ~~context.map().zoom() >= minZoom) {
-                editOn();
-                update();
-                service.loadImages(projection);
-                service.loadLines(projection);
+            let zoom = ~~context.map().zoom();
+            if (service) {
+                if (zoom >= imageMinZoom) {
+                    editOn();
+                    update();
+                    service.loadImages(projection);
+                } else if (zoom >= lineMinZoom) {
+                    editOn();
+                    update();
+                    service.loadLines(projection);
+                } else {
+                    editOff();
+                    dispatch.call('photoDatesChanged', this, 'mapilio', []);
+                    // Reset selected image and hide viewer when zoomed out
+                    // service.selectImage(context, null);
+                    service.hideViewer(context);
+                }
             } else {
-                dispatch.call('photoDatesChanged', this, 'mapilio', []);
                 editOff();
             }
         } else {
@@ -293,7 +370,7 @@ export function svgMapilioImages(projection, context, dispatch) {
     };
 
     drawImages.rendered = function(zoom) {
-      return zoom >= minZoom;
+      return zoom >= lineMinZoom;
     };
 
 
