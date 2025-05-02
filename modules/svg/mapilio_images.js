@@ -318,12 +318,15 @@ export function svgMapilioImages(projection, context, dispatch) {
                 } else {
                     editOff();
                     dispatch.call('photoDatesChanged', this, 'mapilio', []);
+                    service.selectImage(context,null)
+                    service.hideViewer(context)
                 }
             } else {
                 editOff();
             }
         } else {
             dispatch.call('photoDatesChanged', this, 'mapilio', []);
+            service.hideViewer(context)
         }
     }
 
@@ -333,6 +336,8 @@ export function svgMapilioImages(projection, context, dispatch) {
         if (svgMapilioImages.enabled) {
             showLayer();
             context.photos().on('change.mapilio_images', update);
+            service.selectImage(context,null)
+            service.hideViewer(context)
         } else {
             hideLayer();
             context.photos().on('change.mapilio_images', null);
