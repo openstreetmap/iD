@@ -318,26 +318,28 @@ export function svgMapilioImages(projection, context, dispatch) {
                 } else {
                     editOff();
                     dispatch.call('photoDatesChanged', this, 'mapilio', []);
-                    service.selectImage(context,null)
-                    service.hideViewer(context)
+                    service.selectImage(context, null);
+                    service.hideViewer(context);
                 }
             } else {
                 editOff();
             }
         } else {
             dispatch.call('photoDatesChanged', this, 'mapilio', []);
-            service.hideViewer(context)
+            service.hideViewer(context);
         }
     }
 
     drawImages.enabled = function(_) {
+        const service = getService();
+
         if (!arguments.length) return svgMapilioImages.enabled;
         svgMapilioImages.enabled = _;
         if (svgMapilioImages.enabled) {
             showLayer();
             context.photos().on('change.mapilio_images', update);
-            service.selectImage(context,null)
-            service.hideViewer(context)
+            service.selectImage(context, null);
+            service.hideViewer(context);
         } else {
             hideLayer();
             context.photos().on('change.mapilio_images', null);
