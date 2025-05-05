@@ -42,12 +42,13 @@ export function coreValidator(context) {
 
   const _errorOverrides = parseHashParam(context.initialHashParams.validationError);
   const _warningOverrides = parseHashParam(context.initialHashParams.validationWarning);
+  const _suggestionOverrides = parseHashParam(context.initialHashParams.validationSuggestion);
   const _disableOverrides = parseHashParam(context.initialHashParams.validationDisable);
 
   // `parseHashParam()`   (private)
   // Checks hash parameters for severity overrides
   // Arguments
-  //   `param` - a url hash parameter (`validationError`, `validationWarning`, or `validationDisable`)
+  //   `param` - a url hash parameter (`validationError`, `validationWarning`, `validationSuggestion`, or `validationDisable`)
   // Returns
   //   Array of Objects like { type: RegExp, subtype: RegExp }
   //
@@ -318,7 +319,7 @@ export function coreValidator(context) {
 
 
   // `getIssuesBySeverity()`
-  // Gets the issues then groups them by error/warning
+  // Gets the issues then groups them by error/warning/suggestion
   // (This just calls getIssues, then puts issues in groups)
   //
   // Arguments
@@ -327,13 +328,15 @@ export function coreValidator(context) {
   //   Object result like:
   //   {
   //     error:    Array of errors,
-  //     warning:  Array of warnings
+  //     warning:  Array of warnings,
+  //     suggestion:  Array of suggestions,
   //   }
   //
   validator.getIssuesBySeverity = (options) => {
     let groups = utilArrayGroupBy(validator.getIssues(options), 'severity');
     groups.error = groups.error || [];
     groups.warning = groups.warning || [];
+    groups.suggestion = groups.suggestion || [];
     return groups;
   };
 
@@ -639,6 +642,12 @@ export function coreValidator(context) {
         for (i = 0; i < _warningOverrides.length; i++) {
           if (_warningOverrides[i].type.test(type) && _warningOverrides[i].subtype.test(subtype)) {
             issue.severity = 'warning';
+            return true;
+          }
+        }
+        for (i = 0; i < _suggestionOverrides.length; i++) {
+          if (_suggestionOverrides[i].type.test(type) && _suggestionOverrides[i].subtype.test(subtype)) {
+            issue.severity = 'suggestion';
             return true;
           }
         }

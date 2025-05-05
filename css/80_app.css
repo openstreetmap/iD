@@ -3598,6 +3598,57 @@ button.autofix.action.active {
     color: #fff;
 }
 
+/* suggestion styles */
+.suggestions-list,
+.suggestions-list *,
+.issue-container.active .issue.severity-suggestion,
+.issue-container.active .issue.severity-suggestion * {
+    border-color: #2f7eff;
+}
+.suggestions-list .issue.severity-suggestion .issue-label,
+.issue.severity-suggestion .issue-fix-list,
+.suggestion-section {
+    background: #e1effe;
+}
+
+.issue-container.active .issue.severity-suggestion .issue-label {
+    background: #e1effe;
+}
+
+.issue.severity-suggestion .issue-icon {
+    color: #49f;
+}
+
+.issue.severity-suggestion .issue-fix-item button.actionable,
+.issue-container.active .issue.severity-suggestion .issue-info-button {
+    color: #0066cc;
+    fill: #0066cc;
+}
+.suggestions-list .issue.severity-suggestion .issue-label:active,
+.suggestions-list .issue.severity-suggestion .issue-label:focus,
+.issue.severity-suggestion .issue-fix-item button.actionable:active,
+.issue.severity-suggestion .issue-fix-item button.actionable:focus {
+    background: #abd5ff;
+}
+.issue.severity-suggestion .issue-fix-item button.actionable:active,
+.issue.severity-suggestion .issue-fix-item button.actionable:focus,
+.issue-container.active .issue.severity-suggestion .issue-info-button:active,
+.issue-container.active .issue.severity-suggestion .issue-info-button:focus {
+    color: #0066cc;
+    fill: #1f4d82;
+}
+@media (hover: hover) {
+    .suggestions-list .issue.severity-suggestion .issue-label:hover,
+    .issue.severity-warning .issue-fix-item button.actionable:hover {
+        background: #bdf;
+    }
+    .issue.severity-suggestion .issue-fix-item button.actionable:hover,
+    .issue-container.active .issue.severity-suggestion .issue-info-button:hover {
+        color: #1f4d82;
+        fill: #1f4d82;
+    }
+}
+
 /* warning styles */
 .warnings-list,
 .warnings-list *,

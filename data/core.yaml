@@ -613,6 +613,7 @@ en:
     download_changes: Download osmChange file
     errors: Errors
     warnings: Warnings
+    suggestions: Suggestions
     modified: Modified
     deleted: Deleted
     created: Created
@@ -1731,6 +1732,8 @@ en:
       list_title: "Errors"
     warnings:
       list_title: "Warnings"
+    suggestions:
+      list_title: "Suggestions"
     rules:
       title: Rules
     user_resolved_issues: Issues resolved by your edits
