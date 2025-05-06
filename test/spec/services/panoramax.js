@@ -190,10 +190,10 @@ describe('iD.servicePanoramax', function() {
 
     describe('#selectedImage', function() {
         it('sets and gets selected image', function() {
-            var d = { id: 'foo', sequence_id: '100'};
-            panoramax.cache().images = { forImageId: { foo: d }};
+            const photo = { id: 'foo', sequence_id: '100'};
+            panoramax.cache().images = { forImageId: { foo: photo }};
             panoramax.selectImage(context, 'foo');
-            expect(panoramax.getActiveImage().id).to.eql(d.id);
+            expect(panoramax.getActiveImage().id).to.eql(photo.id);
         });
     });
 });

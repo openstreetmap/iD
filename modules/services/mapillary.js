@@ -589,9 +589,9 @@ export default {
         });
 
         // imageChanged: called after the viewer has changed images and is ready.
-        function imageChanged(node) {
+        function imageChanged(photo) {
             this.resetTags();
-            const image = node.image;
+            const image = photo.image;
             this.setActiveImage(image);
             this.setStyles(context, null);
             const loc = [image.originalLngLat.lng, image.originalLngLat.lat];

@@ -1,4 +1,3 @@
-
 // Returns true if a and b have the same elements at the same indices.
 export function utilArrayIdentical(a, b) {
     // an array is always identical to itself

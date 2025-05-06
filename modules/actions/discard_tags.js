@@ -1,4 +1,3 @@
-
 export function actionDiscardTags(difference, discardTags) {
   discardTags = discardTags || {};
 

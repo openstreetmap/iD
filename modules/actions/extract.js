@@ -1,4 +1,3 @@
-
 import { geoPath as d3_geoPath } from 'd3-geo';
 
 import { osmNode } from '../osm/node';

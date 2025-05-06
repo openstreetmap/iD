@@ -57,6 +57,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Only consider feature with proper lifecycle tags in "past/futures" layer ([#10943])
 * Fix zoom level from resetting to the starting value when switching background imagery layer during the zoom transition
 * Fix invalid single-noded ways from being created by a _split_ operation under certain conditions when multiple nodes are selected ([#10997])
+* Properly highlight changed features when they are hovered in the upload dialog's list of changes ([#10030])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -67,6 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop support for Node 18
 
 [#9873]: https://github.com/openstreetmap/iD/issues/9873
+[#10030]: https://github.com/openstreetmap/iD/issues/10030
 [#10104]: https://github.com/openstreetmap/iD/issues/10104
 [#10492]: https://github.com/openstreetmap/iD/issues/10492
 [#10942]: https://github.com/openstreetmap/iD/pull/10942
