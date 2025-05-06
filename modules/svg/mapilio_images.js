@@ -13,8 +13,6 @@ export function svgMapilioImages(projection, context, dispatch) {
     let layer = d3_select(null);
     let _mapilio;
     let _viewerYaw = 0;
-    let _activeUsernameFilter;
-    let _activeIds;
 
     function init() {
         if (svgMapilioImages.initialized) return;
@@ -40,12 +38,9 @@ export function svgMapilioImages(projection, context, dispatch) {
      * @param {*} images
      * @returns array of filtered images
      */
-    async function filterImages(images) {
+    function filterImages(images) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
-        const username = context.photos().usernames();
-
-        const service = getService();
 
         if (fromDate) {
             images = images.filter(function(image) {
@@ -57,17 +52,6 @@ export function svgMapilioImages(projection, context, dispatch) {
                 return new Date(image.capture_time).getTime() <= new Date(toDate).getTime();
             });
         }
-        if (username && service) {
-            if (_activeUsernameFilter !== username) {
-                _activeUsernameFilter = username;
-
-                const tempIds = await service.getUserIds(username);
-
-                _activeIds = {};
-                tempIds.forEach(id => _activeIds[id] = true);
-            }
-            images = images.filter(img => _activeIds[img.account_id]);
-        }
 
         return images;
     }
@@ -77,12 +61,9 @@ export function svgMapilioImages(projection, context, dispatch) {
      * @param {*} sequences
      * @returns array of filtered sequences
      */
-    async function filterSequences(sequences) {
+    function filterSequences(sequences) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
-        const username = context.photos().usernames();
-
-        const service = getService();
 
         if (fromDate) {
             sequences = sequences.filter(function(sequence) {
@@ -93,17 +74,6 @@ export function svgMapilioImages(projection, context, dispatch) {
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.capture_time).getTime() <= new Date(toDate).getTime().toString();
             });
-        }
-        if (username && service) {
-            if (_activeUsernameFilter !== username) {
-                _activeUsernameFilter = username;
-
-                const tempIds = await service.getUserIds(username);
-
-                _activeIds = {};
-                tempIds.forEach(id => _activeIds[id] = true);
-            }
-            sequences = sequences.filter(seq => _activeIds[seq.properties.account_id]);
         }
 
         return sequences;
@@ -326,20 +296,15 @@ export function svgMapilioImages(projection, context, dispatch) {
             }
         } else {
             dispatch.call('photoDatesChanged', this, 'mapilio', []);
-            service.hideViewer(context);
         }
     }
 
     drawImages.enabled = function(_) {
-        const service = getService();
-
         if (!arguments.length) return svgMapilioImages.enabled;
         svgMapilioImages.enabled = _;
         if (svgMapilioImages.enabled) {
             showLayer();
             context.photos().on('change.mapilio_images', update);
-            service.selectImage(context, null);
-            service.hideViewer(context);
         } else {
             hideLayer();
             context.photos().on('change.mapilio_images', null);
