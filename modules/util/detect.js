@@ -1,4 +1,3 @@
-
 let _detected;
 
 export function utilDetect(refresh) {

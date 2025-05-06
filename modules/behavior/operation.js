@@ -1,5 +1,3 @@
-
-
 /* Creates a keybinding behavior for an operation */
 export function behaviorOperation(context) {
     var _operation;

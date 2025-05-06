@@ -1,4 +1,3 @@
-
 // https://github.com/openstreetmap/iD/issues/772
 // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
 let _storage;
