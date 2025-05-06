@@ -43,12 +43,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* Refresh numeric input fields after leaving focus with the value that is stored in the tag ([#11027])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 
 [#10970]: https://github.com/openstreetmap/iD/pull/10970
+[#11027]: https://github.com/openstreetmap/iD/pull/11027
 
 
 # v2.34.0
