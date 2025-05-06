@@ -9,7 +9,7 @@ export function utilObjectOmit(obj, omitKeys) {
 
 /**
  * @template T
- * @typedef {{ [key: string]: { [value: string]: T } }} TagDictionary<T>
+ * @typedef {{ [key: string]: T | { [value: string]: T } }} TagDictionary<T>
  */
 
 /**
@@ -23,8 +23,15 @@ export function utilObjectOmit(obj, omitKeys) {
 export function utilCheckTagDictionary(tags, tagDictionary) {
     for (const key in tags) {
         const value = tags[key];
-        if (tagDictionary[key] && value in tagDictionary[key]) {
-            return tagDictionary[key][value];
+        if (key in tagDictionary) {
+            if (
+                typeof tagDictionary[key] === 'object' &&
+                tagDictionary[key] !== null &&
+                value in tagDictionary[key]
+            ) {
+                return tagDictionary[key][value];
+            }
+            return tagDictionary[key];
         }
     }
     return undefined;

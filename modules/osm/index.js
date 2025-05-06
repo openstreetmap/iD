@@ -30,6 +30,7 @@ export {
     osmSetVertexTags,
     osmNodeGeometriesForTags,
     osmPavedTags,
+    osmImpliedLayer,
     osmIsInterestingTag,
     osmLifecyclePrefixes,
     osmRemoveLifecyclePrefix,

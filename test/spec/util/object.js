@@ -19,4 +19,15 @@ describe('iD.utilCheckTagDictionary', () => {
         expect(iD.utilCheckTagDictionary({}, dictionary)).toBeUndefined();
         expect(iD.utilCheckTagDictionary({ surface: 'paved' }, dictionary)).toBe(0);
     });
+
+    it('can search a standard tag-dictionary for key=*', () => {
+        expect(iD.utilCheckTagDictionary({}, iD.osmImpliedLayer)).toBeUndefined();
+        expect(iD.utilCheckTagDictionary({ bridge: 'yes' }, iD.osmImpliedLayer)).toBe(1);
+    });
+
+    it('works for falsy values in key=*', () => {
+        const dictionary = { bridge: 0 };
+        expect(iD.utilCheckTagDictionary({}, dictionary)).toBeUndefined();
+        expect(iD.utilCheckTagDictionary({ bridge: 'whatever' }, dictionary)).toBe(0);
+    });
 });

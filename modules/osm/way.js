@@ -3,7 +3,7 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 import { geoExtent, geoVecCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
-import { osmTagSuggestingArea, osmRightSideIsInsideTags, osmRemoveLifecyclePrefix, osmOneWayBiDirectionalTags, osmOneWayBackwardTags, osmOneWayForwardTags, osmOneWayTags } from './tags';
+import { osmTagSuggestingArea, osmRightSideIsInsideTags, osmRemoveLifecyclePrefix, osmOneWayBiDirectionalTags, osmOneWayBackwardTags, osmOneWayForwardTags, osmOneWayTags, osmImpliedLayer, osmAverageWidths as averageWidths } from './tags';
 import { utilArrayUniq, utilCheckTagDictionary } from '../util';
 
 /**
@@ -86,45 +86,12 @@ const prototype = {
             return Math.max(-10, Math.min(+(this.tags.layer), 10));
         }
 
-        // implied layer tag..
-        if (this.tags.covered === 'yes') return -1;
-        if (this.tags.location === 'overground') return 1;
-        if (this.tags.location === 'underground') return -1;
-        if (this.tags.location === 'underwater') return -10;
-
-        if (this.tags.power === 'line') return 10;
-        if (this.tags.power === 'minor_line') return 10;
-        if (this.tags.aerialway) return 10;
-        if (this.tags.bridge) return 1;
-        if (this.tags.cutting) return -1;
-        if (this.tags.tunnel) return -1;
-        if (this.tags.waterway) return -1;
-        if (this.tags.man_made === 'pipeline') return -10;
-        if (this.tags.boundary) return -10;
-        return 0;
+        return utilCheckTagDictionary(this.tags, osmImpliedLayer) ?? 0;
     },
 
 
     // the approximate width of the line based on its tags except its `width` tag
     impliedLineWidthMeters: function() {
-        var averageWidths = {
-            highway: { // width is for single lane
-                motorway: 5, motorway_link: 5, trunk: 4.5, trunk_link: 4.5,
-                primary: 4, secondary: 4, tertiary: 4,
-                primary_link: 4, secondary_link: 4, tertiary_link: 4,
-                unclassified: 4, road: 4, living_street: 4, bus_guideway: 4, busway: 4, pedestrian: 4,
-                residential: 3.5, service: 3.5, track: 3, cycleway: 2.5,
-                bridleway: 2, corridor: 2, steps: 2, path: 1.5, footway: 1.5, ladder: 0.5,
-            },
-            railway: { // width includes ties and rail bed, not just track gauge
-                rail: 2.5, light_rail: 2.5, tram: 2.5, subway: 2.5,
-                monorail: 2.5, funicular: 2.5, disused: 2.5, preserved: 2.5,
-                miniature: 1.5, narrow_gauge: 1.5
-            },
-            waterway: {
-                river: 50, canal: 25, stream: 5, tidal_channel: 5, fish_pass: 2.5, drain: 2.5, ditch: 1.5
-            }
-        };
         for (var key in averageWidths) {
             if (this.tags[key] && averageWidths[key][this.tags[key]]) {
                 var width = averageWidths[key][this.tags[key]];
