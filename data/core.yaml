@@ -1909,7 +1909,7 @@ en:
       noncanonical_brand:
         message: "{feature} may be matching one of known brands"
         message_incomplete: "{feature} may be matching one of known brands"
-        reference: " Some features, for example retail chains or post offices, are expected to have certain tags in common. This set of suggested tags is based on comparing the name and other existing tags to a database of major chains. If this is merely a coincidence, select “Tag as not the same.”"
+        reference: "Some features, for example retail chains or post offices, are expected to have certain tags in common. This set of suggested tags is based on comparing the name and other existing tags to a database of major chains. If this is merely a coincidence, select “Tag as not the same.”"
     point_as_area:
       message: '{feature} should be a point, not an area'
     point_as_line:
