@@ -2066,8 +2066,8 @@ en:
       tag_this_as_lower:
         title: Tag this as lower
       upgrade_tags:
-        title: Upgrade the tags
-        annotation: Upgraded old tags.
+        title: Change the tags
+        annotation: Changed old tags.
       use_different_layers:
         title: Use different layers
       use_different_layers_or_levels:
