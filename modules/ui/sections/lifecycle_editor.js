@@ -97,8 +97,9 @@ export function uiSectionLifecycleEditor(context) {
             if (!field.key) field.key = field.id;
         });
 
-        // If we want to add more complicated fields, remove '!field.keys'
-        _allFields = _allFields.filter(field => !field.keys && field.key !== _mainKey);
+        // If you want to add more complicated fields, remove '!field.keys'
+        // if you want to add check fields, remove field.type !== 'check' && field.type !== 'onewayCheck'
+        _allFields = _allFields.filter(field => !field.keys && field.type !== 'check' && field.type !== 'onewayCheck' && field.key !== _mainKey);
         _allFieldsKeys = _allFields.map(field => field.key ?? field.id);
 
         _extraTags = getExtraTags();
@@ -148,6 +149,7 @@ export function uiSectionLifecycleEditor(context) {
         radioOuterWrap
             .append('input')
             .attr('type', 'radio')
+            .attr('class', 'lifecycle-radio-functional')
             .attr('name', 'lifecycle-radio')
             .attr('value', 'functional')
             .attr('style', 'display:none')

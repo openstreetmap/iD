@@ -1,99 +1,126 @@
-describe('iD.uiSectionLifecycleEditor', () => {
-    var context, lifecycle, dispatchMock;
+import { select as d3_select } from 'd3-selection';
 
-    before(() => {
-        dispatchMock = vi.fn();
+describe('iD.uiSectionLifecycleEditor', function () {
+    let lifecycleEditor, element, context, entity, presets;
+
+    function render(tags, presets) {
+        lifecycleEditor = iD.uiSectionLifecycleEditor(context)
+            .entityIDs([entity.id])
+            .tags(tags)
+            .presets(presets)
+            .expandedByDefault(true);
+
+        element = d3_select('body')
+            .append('div')
+            .attr('class', 'ui-wrap')
+            .call(lifecycleEditor.render);
+    }
+
+    beforeEach(function () {
+        entity = iD.osmNode({id: 'n12345'});
+        presets = [
+            {
+                icon: 'iD-highway-secondary',
+                geometry: [
+                    'line'
+                ],
+                tags: {
+                    'highway': 'secondary'
+                },
+                fields : () =>
+                [
+                    {
+                        key: 'name',
+                        type: 'localized',
+                        universal: true,
+                        id: 'name',
+                        safeid: 'name',
+                        originalTerms: ''
+                    }
+                ],
+                moreFields : () =>
+                [
+                    {
+                        key: 'maxspeed',
+                        type: 'roadspeed',
+                        id: 'maxspeed',
+                        safeid: 'maxspeed',
+                        originalTerms: ''
+                    }
+                ],
+                id: 'highway/secondary',
+                safeid: 'highway_secondary',
+                originalTerms: '',
+                originalName: '',
+                originalAliases: '',
+                originalScore: 1,
+                originalReference: {},
+                originalFields: [
+                    '{highway/primary}'
+                ],
+                originalMoreFields: [
+                    '{highway/primary}'
+                ],
+                lifecycle: 'functional',
+                addTags: {
+                    highway: 'secondary'
+                },
+                removeTags: {
+                    highway: 'secondary'
+                }
+            }
+        ];
         context = iD.coreContext().assetPath('../dist/').init();
-        lifecycle = iD.uiSectionLifecycleEditor(context);
-        lifecycle.on('change', dispatchMock);
+        context.history().merge([entity]);
+        render({highway: 'residential'}, presets);
     });
 
-    it('should initialize correctly', () => {
-        expect(lifecycle).toBeDefined();
-        expect(typeof lifecycle.shouldDisplay).toBe('function');
-        expect(typeof lifecycle.label).toBe('function');
+    afterEach(function () {
+        d3_select('.ui-wrap').remove();
     });
 
-    it('should set and get entityIDs', () => {
-        lifecycle.entityIDs(['entity1']);
-        expect(lifecycle.entityIDs()).toEqual(['entity1']);
+    it('renders the lifecycle editor section', function () {
+        expect(element.select('.lifecycle-main').empty()).to.be.false;
+        expect(element.select('.lifecycle-extra').empty()).to.be.false;
     });
 
-    it('should set and get tags', () => {
-        const tags = { highway: 'construction' };
-        lifecycle.tags(tags);
-        expect(lifecycle.tags()).toEqual(tags);
+    it('displays the correct lifecycle options', function () {
+        const options = element.selectAll('.lifecycle-radio-row');
+        expect(options.nodes().length).to.be.greaterThan(0);
+        const functionOption = element.selectAll('.lifecycle-radio-functional');
+        expect(functionOption.nodes().some(option => option.value === 'functional')).to.be.true;
     });
 
-    it('should set and get presets', () => {
-        const presets = [{ tags: { highway: 'primary' } }];
-        lifecycle.presets(presets);
-        expect(lifecycle.presets()).toEqual(presets);
+    it('updates lifecycle and restores functional lifecycle', async () => {
+        const firstChange = new Promise(resolve => {
+            lifecycleEditor.on('change', (_, tags) => resolve(tags));
+        });
+
+        const radio = element.select('input[value=construction]').node();
+        radio.checked = true;
+        radio.dispatchEvent(new Event('change', { bubbles: true }));
+
+        const tags = await firstChange;
+        expect(tags).to.eql({ highway: 'construction', construction: 'residential', 'functional': undefined,
+         'functional:highway': undefined});
+
+        const secondChange = new Promise(resolve => {
+            lifecycleEditor.on('change', (_, tags) => resolve(tags));
+        });
+
+        const button = element.select('#make-functional.remove-icon').node();
+        button.dispatchEvent(new Event('click', { bubbles: true }));
+
+        const tags2 = await secondChange;
+        expect(tags2).to.eql({ highway: 'residential', 'functional': undefined,
+        'functional:highway': undefined});
     });
 
-    /*
-    it('should reset construction lifecycle on makeFunctional', () => {
-        const selection = d3.select(document.createElement('div'));
-        lifecycle.tags({ building: 'yes' });
-        lifecycle.presets([{ tags: { building: 'yes' }, getLifecycle: vi.fn(() => 'functional') }]);
-        lifecycle.disclosureContent(selection);
-
-        const radio = d3.select('input[value="construction"]');
-        radio.trigger('click');
-        radio.on('change')();
-        expect(dispatch.call).toHaveBeenCalled();
+    it('adds extra lifecycle tags when clicking the add button and removes it', () => {
+        iD.utilTriggerEvent(element.selectAll('.add-lifecycle'), 'mousedown', { button: 0 });
+        expect(element.selectAll('.lifecycle-extra-new-prefix').nodes().length).to.be.greaterThan(0);
+        iD.utilTriggerEvent(element.selectAll('.lifecycle-extra-delete'), 'mousedown', { button: 0 });
+        expect(element.selectAll('.extra-lifecycle-row').nodes().length).to.equal(0);
     });
 
-    it('should reset prefix lifecycle on makeFunctional', () => {
-        lifecycle.tags({ 'disused:highway' : 'residential'});
-        happen.click(lifecycle.makeFunctionalButton);
-        let tags =  { 'highway' : 'residential' };
-        expect(lifecycle.tags()).toEqual(tags);
-    });
-
-    it('should add construction=yes to tags when construction is selected', () => {
-        lifecycle.tags({ highway: 'residential' });
-        lifecycle.presets([{ tags: { highway: 'residential' } }]);
-
-        const input = d3.select(document.body).append('input')
-            .attr('type', 'radio')
-            .attr('value', 'construction');
-
-        input.on('change', lifecycle.changeLifecycle);
-        input.node().dispatchEvent(new Event('change'));
-
-        let tags = { 'highway' : 'residential', 'construction' : 'yes' };
-        expect(lifecycle.tags()).toEqual(tags);
-    });
-
-    test('should add lifecycle prefix to tag when other lifecycle is selected', () => {
-        lifecycle.tags({ highway: 'residential' });
-        lifecycle.presets([{ tags: { highway: 'residential' } }]);
-
-        const input = d3.select(document.body).append('input')
-            .attr('type', 'radio')
-            .attr('value', 'disused');
-
-        input.on('change', lifecycle.changeLifecycle);
-        input.node().dispatchEvent(new Event('change'));
-        let tags =  {'disused:highway' : 'residential'};
-        expect(lifecycle.tags()).toEqual(tags);
-    });
-
-    test('should handle lifecycle changes', () => {
-        lifecycle.on('change', dispatchMock);
-
-        const input = d3.select(document.body).append('input')
-            .attr('type', 'radio')
-            .attr('value', 'disused');
-
-        lifecycle.tags({ highway: 'road' });
-        lifecycle.presets([{ tags: { highway: 'road' } }]);
-
-        input.on('change', lifecycle.changeLifecycle);
-        input.node().dispatchEvent(new Event('change'));
-
-        expect(dispatchMock).toHaveBeenCalled();
-    });
-    */
 });
