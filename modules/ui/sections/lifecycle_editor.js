@@ -12,7 +12,6 @@ import { osmLifecyclePrefixes, osmGetLifecyclePrefix, osmGetKeyWithoutLifecycle}
 import { uiCombobox } from '../combobox';
 import { presetManager } from '../../presets';
 
-// TODO: fix checkbox not reporting value in extra fields
 export function uiSectionLifecycleEditor(context) {
 
     var dispatch = d3_dispatch('change');
@@ -99,7 +98,9 @@ export function uiSectionLifecycleEditor(context) {
 
         // If you want to add more complicated fields, remove '!field.keys'
         // if you want to add check fields, remove field.type !== 'check' && field.type !== 'onewayCheck'
-        _allFields = _allFields.filter(field => !field.keys && field.type !== 'check' && field.type !== 'onewayCheck' && field.key !== _mainKey);
+        //_allFields = _allFields.filter(field => !field.keys && field.type !== 'check' && field.type !== 'onewayCheck' && field.key !== _mainKey);
+        _allFields = _allFields.filter(field => !field.keys && field.key !== _mainKey);
+
         _allFieldsKeys = _allFields.map(field => field.key ?? field.id);
 
         _extraTags = getExtraTags();
@@ -198,7 +199,7 @@ export function uiSectionLifecycleEditor(context) {
     }
 
     // Creates the extra lifecycle fields
-    function extraLifecycleMenu(selection){
+    function extraLifecycleMenu(selection) {
         const extraTags = _extraTags;
         const allFields = _allFields;
 
@@ -232,7 +233,6 @@ export function uiSectionLifecycleEditor(context) {
 
         extraTagRows.exit().remove();
 
-        // ==== SHOW EXTRA TAGS ====
         let extraTagRowEnter = extraTagRows
             .enter()
             .append('li')
@@ -269,38 +269,35 @@ export function uiSectionLifecycleEditor(context) {
 
         prefixCombobox(alreadyExistingKeyInput);
 
-        extraTagRowEnter.merge(extraTagRows);
+        let extraTagRowUpdate = extraTagRowEnter.merge(extraTagRows);
 
-        const extraTagsWithoutLifecycle = extraTagKeys.map(a => osmGetKeyWithoutLifecycle(a));
+        extraTagRowUpdate.each(function(d) {
+            const field = allFields.find(obj => obj.key === osmGetKeyWithoutLifecycle(d) ||
+                (obj.keys && obj.keys.includes(osmGetKeyWithoutLifecycle(d))));
+            if (field) {
+                let tagsWithoutLifecycles = {};
+                const fieldUI = uiField(context, field, _entityIDs);
 
-        const myExtraFields = allFields.filter(field => extraTagsWithoutLifecycle.includes(field.key));
+                Object.entries(_tags).forEach(([key, value]) =>
+                    tagsWithoutLifecycles[osmGetKeyWithoutLifecycle(key)] = value
+                );
 
-        extraTagRowEnter
-            .each(function(d) {
-                const field = myExtraFields.find(obj => obj.key === osmGetKeyWithoutLifecycle(d) ||
-                    (obj.keys && obj.keys.includes(osmGetKeyWithoutLifecycle(d))));
-                if (field){
-                    let tagsWithoutLifecycles = {};
-                    const fieldUI = uiField(context, field, _entityIDs);
+                fieldUI.lifecycle = osmGetLifecyclePrefix(d);
+                fieldUI.tags(tagsWithoutLifecycles);
+                _fieldsArr.push(fieldUI);
 
-                    Object.entries(_tags).forEach(([key, value]) =>
-                        tagsWithoutLifecycles[osmGetKeyWithoutLifecycle(key)] = value
-                    );
+                d3_select(this).select('.field-label').call(fieldUI.render);
+            }
+        });
 
-                    fieldUI.lifecycle = osmGetLifecyclePrefix(d);
-                    fieldUI.tags(tagsWithoutLifecycles);
-                    _fieldsArr.push(fieldUI);
-                    d3_select(this).select('.field-label').call(fieldUI.render);
-                }
-            });
-
+        // The problem is that the check field has states, one state is undefined, but if the value is undefined it gets deleted from the tags!
+        // I forced undefined to be smth like '' then the next cycle hoping this doesn't break stuff.
         _fieldsArr.forEach(function(field) {
             field.on('change', function(t) {
                 t = Object.fromEntries(
-                        Object.entries(t)
-                            .filter(([, value]) => value !== undefined && value.trim() !== '')
-                            .map(([key, value]) => [`${field.lifecycle}:${key}`, value])
-                    );
+                    Object.entries(t)
+                        .map(([key, value]) => [`${field.lifecycle}:${key}`, value ?? ''])
+                );
                 dispatch.call('change', field, _entityIDs, t);
             });
         });

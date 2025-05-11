@@ -140,6 +140,10 @@ export function uiFieldCheck(field, context) {
                     t[field.key] = values[(values.indexOf(_value) + 1) % values.length];
                 }
 
+                if (values.indexOf(_value) === -1) {
+                    t[field.key] = 'yes';
+                }
+
                 // Don't cycle through `alternating` or `reversible` states - #4970
                 // (They are supported as translated strings, but should not toggle with clicks)
                 if (t[field.key] === 'reversible' || t[field.key] === 'alternating') {

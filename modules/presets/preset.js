@@ -315,11 +315,17 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       }
     });
 
+    entityTags.forEach(tag => {
+      if (ids.includes(tag)) {
+        lifecycle = tag;
+      }
+    });
+
     if (presetTags[0]) {
       presetPrefix = presetTags[0].split(':')[0] ?? null;
     }
 
-    if (presetPrefix && ids.includes(presetPrefix)) {
+    if (lifecycle === 'functional' && presetPrefix && ids.includes(presetPrefix)) {
       lifecycle = presetPrefix;
     } else {
       if ((entityTags.includes('construction') && presetID.indexOf('construction') !== -1) || entity.contruction === presetID) {
