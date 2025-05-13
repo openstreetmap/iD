@@ -1,4 +1,6 @@
 import { range as d3_range } from 'd3-array';
+import { clamp } from 'lodash-es';
+
 import { geoExtent, geoScaleToZoom } from '../geo';
 
 
@@ -10,11 +12,6 @@ export function utilTiler() {
     var _translate = [_size[0] / 2, _size[1] / 2];
     var _margin = 0;
     var _skipNullIsland = false;
-
-
-    function clamp(num, min, max) {
-        return Math.max(min, Math.min(num, max));
-    }
 
 
     function nearNullIsland(tile) {

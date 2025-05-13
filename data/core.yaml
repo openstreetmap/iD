@@ -713,7 +713,6 @@ en:
     features: Features
     title_count: "{title} ({count})"
     add_to_relation: Add to a relation
-    add_to_tag: Add a tag
     new_relation: New relation...
     choose_relation: Choose a parent relation
     role: Role
@@ -914,6 +913,9 @@ en:
     points:
       description: Points
       tooltip: "Points of Interest"
+    address_points:
+      description: Address Points
+      tooltip: "Addresses Mapped as Individual Points"
     traffic_roads:
       description: Traffic Roads
       tooltip: "Highways, Streets, etc."

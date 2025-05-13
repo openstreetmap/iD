@@ -35,7 +35,28 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# unreleased (v2.34.0-dev)
+# unreleased (v2.35.0-dev)
+
+#### :sparkles: Usability & Accessibility
+* Render housenumbers (or housenames) of address points or buildings as dedicated labels on the map ([#10970])
+* Simplify raw tag editor and make it easier to use with keyboard-only input ([#10889])
+#### :scissors: Operations
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+#### :bug: Bugfixes
+* Refresh numeric input fields after leaving focus with the value that is stored in the tag ([#11027])
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :hammer: Development
+
+[#10889]: https://github.com/openstreetmap/iD/pull/10889
+[#10970]: https://github.com/openstreetmap/iD/pull/10970
+[#11027]: https://github.com/openstreetmap/iD/pull/11027
+
+
+# v2.34.0
+##### 2025-05-12
 
 #### :sparkles: Usability & Accessibility
 * Show full relation label as hover-text in _membership editor_, disambiguate relations with duplicate labels by appending the relation id ([#10492])
@@ -58,8 +79,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix zoom level from resetting to the starting value when switching background imagery layer during the zoom transition
 * Fix invalid single-noded ways from being created by a _split_ operation under certain conditions when multiple nodes are selected ([#10997])
 * Properly highlight changed features when they are hovered in the upload dialog's list of changes ([#10030])
-#### :earth_asia: Localization
-#### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 * Change background imagery of walkthrough tutorial to Bing (the previous source is not available anymore)
 #### :rocket: Presets

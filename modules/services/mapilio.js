@@ -5,7 +5,7 @@ import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 
 import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } from '../util';
 import {geoExtent, geoScaleToZoom} from '../geo';

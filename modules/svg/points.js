@@ -1,29 +1,44 @@
 import deepEqual from 'fast-deep-equal';
+import { clamp } from 'lodash-es';
+
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { presetManager } from '../presets';
+import { textWidth, isAddressPoint } from './labels';
 
 export function svgPoints(projection, context) {
 
     function markerPath(selection, klass) {
         selection
             .attr('class', klass)
-            .attr('transform', 'translate(-8, -23)')
-            .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
+            .attr('transform', d => isAddressPoint(d.tags)
+                ? `translate(-${addressShieldWidth(d, selection)/2}, -8)`
+                : 'translate(-8, -23)')
+            .attr('d', d => {
+                if (!isAddressPoint(d.tags)) {
+                    return 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z';
+                }
+                const shieldWidth = addressShieldWidth(d, selection);
+                return `M ${shieldWidth},8 C ${shieldWidth},15 ${shieldWidth-2},16 ${shieldWidth-8},16 L 8,16 C 2,16 0,15 0,8 C 0,2 2,0 8,0 L ${shieldWidth-8},0 C ${shieldWidth-2},0 ${shieldWidth},2 ${shieldWidth},8 z`;
+            });
     }
 
     function sortY(a, b) {
         return b.loc[1] - a.loc[1];
     }
 
+    function addressShieldWidth(d, selection) {
+        const width = textWidth(d.tags['addr:housenumber'] || d.tags['addr:housename'] || '', 10, selection.node().parentElement);
+        return clamp(width, 10, 34) + 8;
+    };
 
     // Avoid exit/enter if we're just moving stuff around.
     // The node will get a new version but we only need to run the update selection.
     function fastEntityKey(d) {
-        var mode = context.mode();
-        var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
+        const mode = context.mode();
+        const isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
         return isMoving ? d.id : osmEntity.key(d);
     }
 
@@ -42,15 +57,16 @@ export function svgPoints(projection, context) {
                 id: node.id,
                 properties: {
                     target: true,
-                    entity: node
+                    entity: node,
+                    isAddr: isAddressPoint(node.tags)
                 },
                 geometry: node.asGeoJSON()
             });
         });
 
         var targets = selection.selectAll('.point.target')
-            .filter(function(d) { return filter(d.properties.entity); })
-            .data(data, function key(d) { return d.id; });
+            .filter(d => filter(d.properties.entity))
+            .data(data, d => fastEntityKey(d.properties.entity));
 
         // exit
         targets.exit()
@@ -59,12 +75,12 @@ export function svgPoints(projection, context) {
         // enter/update
         targets.enter()
             .append('rect')
-            .attr('x', -10)
-            .attr('y', -26)
-            .attr('width', 20)
-            .attr('height', 30)
-            .merge(targets)
+            .attr('x', d => d.properties.isAddr ? -addressShieldWidth(d.properties.entity, selection) / 2 : -10)
+            .attr('y', d => d.properties.isAddr ? -8 : -26)
+            .attr('width', d => d.properties.isAddr ? addressShieldWidth(d.properties.entity, selection) : 20)
+            .attr('height', d => d.properties.isAddr ? 16 : 30)
             .attr('class', function(d) { return 'node point target ' + fillClass + d.id; })
+            .merge(targets)
             .attr('transform', getTransform);
     }
 

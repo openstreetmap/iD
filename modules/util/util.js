@@ -191,6 +191,7 @@ export function utilDisplayName(entity, hideNetwork) {
     var name = entity.tags[localizedNameKey] || entity.tags.name || '';
 
     var tags = {
+        addr: entity.tags['addr:housenumber'] || entity.tags['addr:housename'],
         direction: entity.tags.direction,
         from: entity.tags.from,
         name,
@@ -209,6 +210,10 @@ export function utilDisplayName(entity, hideNetwork) {
     // Non-routes tend to be labeled in many places besides the relation lists, such as the map, where brevity is important.
     if (!entity.tags.route && name) {
         return name;
+    }
+    // unnamed buildings or address nodes: show housenumber/housename
+    if (tags.addr) {
+        return tags.addr;
     }
 
     var keyComponents = [];

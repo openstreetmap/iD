@@ -202,8 +202,8 @@ export function uiEntityEditor(context) {
                 context.overwrite(combinedAction, annotation);
             } else {
                 context.perform(combinedAction, annotation);
-                _coalesceChanges = !!onInput;
             }
+            _coalesceChanges = !!onInput;
         }
 
         // if leaving field (blur event), rerun validation
@@ -259,7 +259,6 @@ export function uiEntityEditor(context) {
                 context.overwrite(combinedAction, annotation);
             } else {
                 context.perform(combinedAction, annotation);
-                _coalesceChanges = false;
             }
         }
 

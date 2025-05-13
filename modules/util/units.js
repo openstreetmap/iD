@@ -1,3 +1,5 @@
+import { clamp } from 'lodash-es';
+
 import { t, localizer } from '../core/localizer';
 
 var OSM_PRECISION = 7;
@@ -100,10 +102,6 @@ export function displayArea(m2, isImperial) {
 function wrap(x, min, max) {
     var d = max - min;
     return ((x - min) % d + d) % d + min;
-}
-
-function clamp(x, min, max) {
-    return Math.max(min, Math.min(x, max));
 }
 
 function roundToDecimal (target, decimalPlace) {

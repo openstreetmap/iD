@@ -1,13 +1,37 @@
 import { merge } from 'lodash-es';
 
+const uninterestingKeys = new Set([
+    'attribution',
+    'created_by',
+    'import_uuid',
+    'geobase:datasetName',
+    'geobase:uuid',
+    'KSJ2:curve_id',
+    'KSJ2:lat',
+    'KSJ2:long',
+    'lat',
+    'latitude',
+    'lon',
+    'longitude',
+    'source',
+    'source_ref',
+    'odbl',
+    'odbl:note'
+]);
+const uninterestingKeyRegex = /^(source(_ref)?|tiger):/;
+
+/**
+ * Returns whether the given OSM tag key is potentially "interesting".
+ * For example, some tags are deemed not interesting because the respective tag is
+ * considered "discardable".
+ *
+ * @param {string} key the key to test
+ * @returns {boolean}
+ */
 export function osmIsInterestingTag(key) {
-    return key !== 'attribution' &&
-        key !== 'created_by' &&
-        key !== 'source' &&
-        key !== 'odbl' &&
-        key.indexOf('source:') !== 0 &&
-        key.indexOf('source_ref') !== 0 && // purposely exclude colon
-        key.indexOf('tiger:') !== 0;
+    if (uninterestingKeys.has(key)) return false;
+    if (uninterestingKeyRegex.test(key))  return false;
+    return true;
 }
 
 export const osmLifecyclePrefixes = {
@@ -296,7 +320,7 @@ export function isColourValid(value) {
 }
 
 // https://wiki.openstreetmap.org/wiki/Special:WhatLinksHere/Property:P44
-export var osmMutuallyExclusiveTagPairs = [
+export const osmMutuallyExclusiveTagPairs = [
     ['noname', 'name'],
     ['noref', 'ref'],
     ['nohousenumber', 'addr:housenumber'],

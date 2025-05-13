@@ -339,11 +339,9 @@ export function uiFieldAddress(field, context) {
         }
 
         _wrap.selectAll('input')
+            .on('input', change(true))
             .on('blur', change())
             .on('change', change());
-
-        _wrap.selectAll('input:not(.combobox-input)')
-            .on('input', change(true));
 
         if (_tags) updateTags(_tags);
     }

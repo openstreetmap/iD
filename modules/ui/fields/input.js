@@ -414,19 +414,33 @@ export function uiFieldText(field, context) {
             // don't override multiple values with blank string
             if (!val && getVals(_tags).size > 1) return;
 
-            var displayVal = val;
+            let displayVal = val;
             if (field.type === 'number' && val) {
-                var numbers = val.split(';');
-                numbers = numbers.map(function(v) {
+                const numbers = val.split(';').map(v => {
                     if (likelyRawNumberFormat.test(v)) {
                         // input number likely in "raw" format
-                        return v;
+                        return {
+                            v,
+                            num: parseFloat(v),
+                            fractionDigits: v.includes('.') ? v.split('.')[1].length : 0
+                        };
+                    } else {
+                        // try to parse in localized number format
+                        return {
+                            v,
+                            num: parseLocaleFloat(v),
+                            fractionDigits: countDecimalPlaces(v)
+                        };
                     }
-                    var num = parseLocaleFloat(v);
-                    const fractionDigits = countDecimalPlaces(v);
-                    return isFinite(num) ? clamped(num).toFixed(fractionDigits) : v;
                 });
-                val = numbers.join(';');
+                val = numbers.map(({num, v, fractionDigits}) => {
+                    if (!isFinite(num)) return v;
+                    return clamped(num).toFixed(fractionDigits);
+                }).join(';');
+                displayVal = numbers.map(({num, v, fractionDigits}) => {
+                    if (!isFinite(num)) return v;
+                    return formatFloat(clamped(num), fractionDigits);
+                }).join(';');
             }
             if (!onInput) utilGetSetValue(input, displayVal);
             t[field.key] = val || undefined;

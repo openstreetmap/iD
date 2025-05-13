@@ -80,12 +80,12 @@ export function coreHistory(context) {
     // internal _overwrite with eased time
     function _overwrite(args, t) {
         var previous = _stack[_index].graph;
+        var actionResult = _act(args, t);
         if (_index > 0) {
             _index--;
             _stack.pop();
         }
         _stack = _stack.slice(0, _index + 1);
-        var actionResult = _act(args, t);
         _stack.push(actionResult);
         _index++;
         return change(previous);
