@@ -140,7 +140,7 @@ export function uiFieldCheck(field, context) {
                     t[field.key] = values[(values.indexOf(_value) + 1) % values.length];
                 }
 
-                if (values.indexOf(_value) === -1) {
+                if (_value === '') {
                     t[field.key] = 'yes';
                 }
 

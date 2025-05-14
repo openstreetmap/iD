@@ -718,6 +718,7 @@ en:
     lifecycle : Lifecycle
     lifecycleReference: A lifecycle prefix is a tag prefix used to indicate the current state of an object. These prefixes help track changes in infrastructure over time.
     lifecycle_title: Select Lifecycle
+    add_extra_lifecycle: Add a new tag with lifecycle
     zoom_to:
       key: Z
       title: Zoom To Selection

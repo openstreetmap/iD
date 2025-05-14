@@ -315,12 +315,6 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       }
     });
 
-    entityTags.forEach(tag => {
-      if (ids.includes(tag)) {
-        lifecycle = tag;
-      }
-    });
-
     if (presetTags[0]) {
       presetPrefix = presetTags[0].split(':')[0] ?? null;
     }
@@ -328,14 +322,14 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     if (lifecycle === 'functional' && presetPrefix && ids.includes(presetPrefix)) {
       lifecycle = presetPrefix;
     } else {
-      if ((entityTags.includes('construction') && presetID.indexOf('construction') !== -1) || entity.contruction === presetID) {
+      if (entityTags.includes('construction') || entity.contruction === presetID) {
           lifecycle = 'construction';
       } else {
         entityTags.forEach(tag => {
           if (tag.includes(':')) {
             let prefix = osmGetLifecyclePrefix(tag);
             let base = osmGetKeyWithoutLifecycle(tag);
-            if (presetTags[0] && presetTags[0].includes(base) && ids.includes(prefix)) {
+            if (!presetTags[1] && presetTags[0] && presetTags[0].includes(base) && ids.includes(prefix)) {
               lifecycle = prefix;
             }
           }

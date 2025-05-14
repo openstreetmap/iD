@@ -6,6 +6,7 @@ import { utilArrayUnion, utilRebind } from '../../util';
 import { uiTagReference } from '../tag_reference';
 import { geoExtent } from '../../geo/extent';
 import { uiField } from '../field';
+import { uiTooltip } from '..';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { osmLifecyclePrefixes, osmGetLifecyclePrefix, osmGetKeyWithoutLifecycle} from '../../osm/tags';
@@ -304,6 +305,7 @@ export function uiSectionLifecycleEditor(context) {
 
         innerRowLabel.selectAll('.modified-icon').remove();
         innerRowLabel.selectAll('.remove-icon').remove();
+        innerRowLabel.selectAll('.reverser').remove();
 
         var buttonDiv = innerRowLabel
             .append('div')
@@ -380,6 +382,9 @@ export function uiSectionLifecycleEditor(context) {
 
         addLifecycleButton = addRowEnterNew
             .append('button')
+            .call(uiTooltip()
+                .title(() => t.append('inspector.add_extra_lifecycle'))
+                .placement('right'))
             .attr('class', 'add-lifecycle');
 
         extraLifecycleError = addExtraTagRowNew
@@ -593,13 +598,13 @@ export function uiSectionLifecycleEditor(context) {
         const tags = _tags;
         const mainKey = _mainKey;
         let mainValue = tags[oldLifecycle + ':' + mainKey] ?? tags[mainKey];
+        let constructionMainValue;
 
-        if (_ids.includes(mainValue)) mainValue = 'yes';
-
-        if (oldLifecycle === 'construction') mainValue = tags.construction;
+        if (oldLifecycle === 'construction') constructionMainValue = tags.construction;
 
         _pendingChange = _pendingChange ?? {};
-        _pendingChange[mainKey] =  mainValue ?? 'yes';
+        if (mainValue === 'construction') mainValue = undefined;
+        _pendingChange[mainKey] =  mainValue ?? constructionMainValue ?? 'yes';
         _pendingChange[oldLifecycle] = undefined;
         _pendingChange[oldLifecycle + ':' + mainKey] = undefined;
 
