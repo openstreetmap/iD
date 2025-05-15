@@ -319,7 +319,8 @@ export function uiFeatureList(context) {
 
             var label = enter
                 .append('div')
-                .attr('class', 'label');
+                .attr('class', 'label')
+                .attr('title', d => d.name);
 
             label
                 .each(function(d) {
