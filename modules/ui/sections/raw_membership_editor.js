@@ -20,6 +20,8 @@ import { uiSection } from '../section';
 import { uiTooltip } from '../tooltip';
 import { utilArrayGroupBy, utilArrayIntersection } from '../../util/array';
 import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } from '../../util';
+import { prefs } from '../../core';
+import { getLuma } from '../../util/util';
 
 
 export function uiSectionRawMembershipEditor(context) {
@@ -405,8 +407,8 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-type')
-            .text(function(d) {
-                var matched = presetManager.match(d.relation, context.graph());
+            .text(d => {
+                let matched = presetManager.match(d.relation, context.graph());
                 while (matched?.suggestion) {
                     // if is NSI preset: look for a parent preset
                     matched = matched.getParentPreset();
@@ -414,16 +416,38 @@ export function uiSectionRawMembershipEditor(context) {
                 return (matched && matched.name()) || t('inspector.relation');
             });
 
+        const showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
+        labelLink.each(function(d) {
+            if (!showThirdPartyIcons) return;
+            const matched = presetManager.match(d.relation, context.graph());
+            if (matched.suggestion) {
+                // if matching an NSI preset: append icon
+                d3_select(this)
+                    .append('img')
+                    .classed('member-entity-icon', true)
+                    .attr('src', matched.imageURL);
+            }
+        });
+
+        labelLink.each(function(d) {
+            const hasColor = d.relation.tags.colour && isColourValid(d.relation.tags.colour);
+            const hasRef = d.relation.tags.ref;
+            if (hasColor || hasRef) {
+                const color = isColourValid(d.relation.tags.colour) ? d.relation.tags.colour : '#555';
+                d3_select(this)
+                    .append('span')
+                    .classed('member-entity-ref-color', true)
+                    .style('border-color', color)
+                    .style('background-color', color)
+                    .style('color', getLuma(color) > 165 ? '#000' : '#fff')
+                    .text(d.relation.tags.ref || '&nbsp;');
+            }
+        });
+
         labelLink
             .append('span')
             .attr('class', 'member-entity-name')
-            .classed('has-colour', d => d.relation.tags.colour && isColourValid(d.relation.tags.colour))
-            .style('border-color', d => d.relation.tags.colour)
-            .text(function(d) {
-                const matched = presetManager.match(d.relation, context.graph());
-                // hide the network from the name if there is NSI match
-                return utilDisplayName(d.relation, matched.suggestion);
-            });
+            .text(d => utilDisplayName(d.relation, { hideRef: true }));
 
         labelEnter
             .append('button')

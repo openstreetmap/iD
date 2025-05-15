@@ -1,4 +1,6 @@
+import { color as d3_color } from 'd3';
 import { remove as removeDiacritics } from 'diacritics';
+
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
 import { t, localizer } from '../core/localizer';
@@ -183,10 +185,14 @@ export function utilGetAllNodes(ids, graph) {
 }
 
 /**
- * @param {boolean} hideNetwork If true, the `network` tag will not be used in the name to prevent
- *                              it being shown twice (see PR #8707#discussion_r712658175)
+ * @param {iD.OsmEntity} entity the entity to generate a display name for
+ * @param {object} flags a set of flags to tweak the display name output:
+ *             - hideNetwork: If true, the `network` tag will not be used
+ *                            in the name to prevent it being shown twice
+ *                            (see PR #8707#discussion_r712658175)
+ *             - hideRef: If true, the `ref` tag will not be output.
  */
-export function utilDisplayName(entity, hideNetwork) {
+export function utilDisplayName(entity, flags) {
     var localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
     var name = entity.tags[localizedNameKey] || entity.tags.name || '';
 
@@ -195,8 +201,8 @@ export function utilDisplayName(entity, hideNetwork) {
         direction: entity.tags.direction,
         from: entity.tags.from,
         name,
-        network: hideNetwork ? undefined : (entity.tags.cycle_network || entity.tags.network),
-        ref: entity.tags.ref,
+        network: flags?.hideNetwork ? undefined : (entity.tags.cycle_network || entity.tags.network),
+        ref: flags?.hideRef ? undefined : entity.tags.ref,
         to: entity.tags.to,
         via: entity.tags.via
     };
@@ -645,4 +651,10 @@ export function utilCleanOsmString(val, maxChars) {
 
     // trim to the number of allowed characters
     return utilUnicodeCharsTruncated(val, maxChars);
-  }
+}
+
+// https://stackoverflow.com/a/70360753/1627467
+export function getLuma(color) {
+    const {r, g, b} = d3_color(color);
+    return 0.2999 * r + 0.587 * g + 0.114 * b;
+}

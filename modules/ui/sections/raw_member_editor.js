@@ -17,6 +17,8 @@ import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
 import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto, utilUniqueDomId } from '../../util';
+import { prefs } from '../../core';
+import { getLuma } from '../../util/util';
 
 
 export function uiSectionRawMemberEditor(context) {
@@ -200,12 +202,38 @@ export function uiSectionRawMemberEditor(context) {
                             return (matched && matched.name()) || utilDisplayType(d.member.id);
                         });
 
+                    const showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
+                    labelLink.each(function(d) {
+                        if (!showThirdPartyIcons) return;
+                        const matched = presetManager.match(d.relation, context.graph());
+                        if (matched.suggestion) {
+                            // if matching an NSI preset: append icon
+                            d3_select(this)
+                                .append('img')
+                                .classed('member-entity-icon', true)
+                                .attr('src', matched.imageURL);
+                        }
+                    });
+
+                    labelLink.each(function(d) {
+                        const hasColor = d.relation.tags.colour && isColourValid(d.relation.tags.colour);
+                        const hasRef = d.relation.tags.ref;
+                        if (hasColor || hasRef) {
+                            const color = isColourValid(d.relation.tags.colour) ? d.relation.tags.colour : '#555';
+                            d3_select(this)
+                                .append('span')
+                                .classed('member-entity-ref-color', true)
+                                .style('border-color', color)
+                                .style('background-color', color)
+                                .style('color', getLuma(color) > 165 ? '#000' : '#fff')
+                                .text(d.relation.tags.ref || '&nbsp;');
+                        }
+                    });
+
                     labelLink
                         .append('span')
                         .attr('class', 'member-entity-name')
-                        .classed('has-colour', d => d.member.type === 'relation' && d.member.tags.colour && isColourValid(d.member.tags.colour))
-                        .style('border-color', d => d.member.type === 'relation' && d.member.tags.colour)
-                        .text(function(d) { return utilDisplayName(d.member); });
+                        .text(function(d) { return utilDisplayName(d.member, { hideRef: true }); });
 
                     label
                         .append('button')

@@ -308,6 +308,7 @@ export const allowUpperCaseTagValues = /network|taxon|genus|species|brand|grape_
 
 // Returns whether a `colour` tag value looks like a valid color we can display
 export function isColourValid(value) {
+    if (!value) return false;
     if (!value.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
         // OSM only supports hex or named colors
         return false;

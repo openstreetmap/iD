@@ -22,6 +22,7 @@ import {
     utilHighlightEntities,
     utilNoAuto
 } from '../util';
+import { getLuma } from '../util/util';
 
 
 export function uiFeatureList(context) {
@@ -178,10 +179,9 @@ export function uiFeatureList(context) {
                 var entity = allEntities[id];
                 if (!entity) continue;
 
-                var name = utilDisplayName(entity) || '';
-                if (name.toLowerCase().indexOf(q) < 0) continue;
-
                 var matched = presetManager.match(entity, graph);
+                var name = utilDisplayName(entity, { hideNetwork: matched.suggestion }) || '';
+                if (name.toLowerCase().indexOf(q) < 0) continue;
                 var type = (matched && matched.name()) || utilDisplayType(entity.id);
                 var extent = entity.extent(graph);
                 var distance = extent ? geoSphericalDistance(visibleCenter, extent.center()) : 0;
@@ -333,12 +333,26 @@ export function uiFeatureList(context) {
                 .attr('class', 'entity-type')
                 .text(function(d) { return d.type; });
 
+            label.each(function(d) {
+                if (d.entity?.type !== 'relation') return;
+                const hasColor = d.entity.tags.colour && isColourValid(d.entity.tags.colour);
+                const hasRef = d.entity.tags.ref;
+                if (hasColor || hasRef) {
+                    const color = isColourValid(d.entity.tags.colour) ? d.entity.tags.colour : '#555';
+                    d3_select(this)
+                        .append('span')
+                        .classed('member-entity-ref-color', true)
+                        .style('border-color', color)
+                        .style('background-color', color)
+                        .style('color', getLuma(color) > 165 ? '#000' : '#fff')
+                        .text(d.entity.tags.ref || '&nbsp;');
+                }
+            });
+
             label
                 .append('span')
                 .attr('class', 'entity-name')
-                .classed('has-colour', d => d.entity && d.entity.type === 'relation' && d.entity.tags.colour && isColourValid(d.entity.tags.colour))
-                .style('border-color', d => d.entity && d.entity.type === 'relation' && d.entity.tags.colour)
-                .text(function(d) { return d.name; });
+                .text(d => d.name);
 
             enter
                 .style('opacity', 0)

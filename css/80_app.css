@@ -2871,21 +2871,35 @@ img.tag-reference-wiki-image {
     font-weight: normal;
     padding-left: 10px;
 }
-.section-raw-member-editor .member-row .member-entity-name.has-colour::before,
-.section-raw-membership-editor .member-row .member-entity-name.has-colour::before,
-.feature-list .entity-name.has-colour::before,
+
 .combobox-parent-relation .has-colour::before {
     display: inline-block;
     content: '';
-    margin-left: -5px;
+    margin-left: 2px;
     margin-right: 5px;
     border-style: solid;
     border-width: 4px;
     border-radius: 4px;
     border-color: inherit;
 }
-.combobox-parent-relation .has-colour::before  {
-    margin-left: 2px;
+.section-raw-membership-editor .member-row img.member-entity-icon,
+.section-raw-member-editor .member-row img.member-entity-icon {
+    display: inline-block;
+    width: auto;
+    height: 18px;
+    margin-left: 5px;
+    margin-bottom: -4.5px;
+}
+.section-raw-membership-editor .member-row span.member-entity-ref-color,
+.section-raw-member-editor .member-row span.member-entity-ref-color,
+.feature-list .feature-list-item span.member-entity-ref-color {
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: -5px;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 10px;
+    line-height: 10px;
 }
 
 .ideditor[dir='rtl'] .section-raw-member-editor .member-row .member-entity-name,
