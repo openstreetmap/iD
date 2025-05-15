@@ -193,6 +193,10 @@ export function uiSectionRawMemberEditor(context) {
                         .attr('class', 'member-entity-type')
                         .text(function(d) {
                             var matched = presetManager.match(d.member, context.graph());
+                            while (matched?.suggestion) {
+                                // if is NSI preset: look for a parent preset
+                                matched = matched.getParentPreset();
+                            }
                             return (matched && matched.name()) || utilDisplayType(d.member.id);
                         });
 
