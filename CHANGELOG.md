@@ -62,7 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 ##### 2025-05-12
 
 #### :sparkles: Usability & Accessibility
-* Show full relation label as hover-text in _membership editor_, disambiguate relations with duplicate labels by appending the relation id ([#10492])
+* Show full relation label as hover-text in _membership editor_, disambiguate relations with duplicate labels by appending the relation id ([#10942])
 * More consistently round non-integer initial zoom when zooming in/out when using the zoom buttons or `+`/`-` keyboard shortcuts
 * Render map _points_ over _vertices_ ([#11006])
 #### :scissors: Operations
