@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Simplify raw tag editor and make it easier to use with keyboard-only input ([#10889])
 #### :scissors: Operations
 #### :camera: Street-Level
+* Fix Mapilio photo markers from showing up on low zoom levels ([#11014], thanks [@keiffer213] and [@haipq07])
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Refresh numeric input fields after leaving focus with the value that is stored in the tag ([#11027])
@@ -52,7 +53,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#10889]: https://github.com/openstreetmap/iD/pull/10889
 [#10970]: https://github.com/openstreetmap/iD/pull/10970
+[#11014]: https://github.com/openstreetmap/iD/pull/11014
 [#11027]: https://github.com/openstreetmap/iD/pull/11027
+[@keiffer213]: https://github.com/keiffer213
+[@haipq07]: https://github.com/haipq07
 
 
 # v2.34.0
@@ -99,11 +103,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10997]: https://github.com/openstreetmap/iD/issues/10997
 [#11006]: https://github.com/openstreetmap/iD/issues/11006
 [#11011]: https://github.com/openstreetmap/iD/issues/11011
-[#11014]: https://github.com/openstreetmap/iD/pull/11014
 [@ChaitanyaKadu03]: https://github.com/ChaitanyaKadu03
-[@keiffer213]: https://github.com/keiffer213
-[@haipq07]: https://github.com/haipq07
-
 
 
 # v2.33.0
