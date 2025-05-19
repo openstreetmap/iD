@@ -284,12 +284,10 @@ export function svgMapilioImages(projection, context, dispatch) {
                     update();
                     service.loadImages(projection);
                     service.loadLines(projection, zoom);
-                    service.hideViewer(context);
                 } else {
                     editOff();
                     dispatch.call('photoDatesChanged', this, 'mapilio', []);
                     service.selectImage(context, null);
-                    service.hideViewer(context);
                 }
             } else {
                 editOff();
