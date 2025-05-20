@@ -433,13 +433,16 @@ export function uiSectionRawMembershipEditor(context) {
             const relColors = getRelationColor(d.relation.tags, '#555');
             const hasRef = d.relation.tags.ref;
             if (relColors.isValid || hasRef) {
-                d3_select(this)
-                    .append('span')
-                    .classed('member-entity-ref-color', true)
-                    .style('border-color', relColors.color)
-                    .style('background-color', relColors.color)
-                    .style('color', relColors.textColor)
-                    .text(d.relation.tags.ref || '');
+                const refs = (d.relation.tags.ref || '').split(';');
+                for (const ref of refs) {
+                    d3_select(this)
+                        .append('span')
+                        .classed('member-entity-ref-color', true)
+                        .style('border-color', relColors.color)
+                        .style('background-color', relColors.color)
+                        .style('color', relColors.textColor)
+                        .text(ref);
+                }
             }
         });
 
