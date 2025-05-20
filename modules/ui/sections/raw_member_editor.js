@@ -11,7 +11,7 @@ import { actionMoveMember } from '../../actions/move_member';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { osmEntity } from '../../osm';
-import { isColourValid } from '../../osm/tags';
+import { getRelationColor, isColorValid } from '../../osm/tags';
 import { svgIcon } from '../../svg/icon';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
@@ -216,17 +216,16 @@ export function uiSectionRawMemberEditor(context) {
                     });
 
                     labelLink.each(function(d) {
-                        const hasColor = d.relation.tags.colour && isColourValid(d.relation.tags.colour);
+                        const relColors = getRelationColor(d.relation.tags, '#555');
                         const hasRef = d.relation.tags.ref;
-                        if (hasColor || hasRef) {
-                            const color = isColourValid(d.relation.tags.colour) ? d.relation.tags.colour : '#555';
+                        if (relColors.isValid || hasRef) {
                             d3_select(this)
                                 .append('span')
                                 .classed('member-entity-ref-color', true)
-                                .style('border-color', color)
-                                .style('background-color', color)
-                                .style('color', getLuma(color) > 165 ? '#000' : '#fff')
-                                .text(d.relation.tags.ref || '&nbsp;');
+                                .style('border-color', relColors.color)
+                                .style('background-color', relColors.color)
+                                .style('color', relColors.textColor)
+                                .text(d.relation.tags.ref || '');
                         }
                     });
 

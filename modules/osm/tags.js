@@ -1,4 +1,5 @@
 import { merge } from 'lodash-es';
+import { getLuma } from '../util/util';
 
 const uninterestingKeys = new Set([
     'attribution',
@@ -307,7 +308,7 @@ export var osmFlowingWaterwayTagValues = {
 export const allowUpperCaseTagValues = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer|country|target|brewery|cai_scale|traffic_sign/;
 
 // Returns whether a `colour` tag value looks like a valid color we can display
-export function isColourValid(value) {
+export function isColorValid(value) {
     if (!value) return false;
     if (!value.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
         // OSM only supports hex or named colors
@@ -318,6 +319,22 @@ export function isColourValid(value) {
         return false;
     }
     return true;
+}
+
+export function getRelationColor(tags, fallback) {
+    let color, textColor;
+    if (tags['ref:colour'])       color = tags['ref:colour'];
+    else if (tags.colour)         color = tags.colour;
+    const isValid = isColorValid(color);
+    if (!isValid)                 color = fallback;
+    if (tags['ref:colour_tx'])    textColor = tags['ref:colour_tx'];
+    if (!isColorValid(textColor)) textColor = getLuma(color) > 165 ? '#000' : '#fff';
+
+    return {
+        isValid,
+        color,
+        textColor
+    };
 }
 
 // https://wiki.openstreetmap.org/wiki/Special:WhatLinksHere/Property:P44

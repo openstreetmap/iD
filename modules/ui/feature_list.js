@@ -11,7 +11,7 @@ import { geoSphericalDistance } from '../geo/geo';
 import { geoExtent } from '../geo';
 import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm/entity';
-import { isColourValid } from '../osm/tags';
+import { isColorValid } from '../osm/tags';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
@@ -335,10 +335,10 @@ export function uiFeatureList(context) {
 
             label.each(function(d) {
                 if (d.entity?.type !== 'relation') return;
-                const hasColor = d.entity.tags.colour && isColourValid(d.entity.tags.colour);
+                const hasColor = d.entity.tags.colour && isColorValid(d.entity.tags.colour);
                 const hasRef = d.entity.tags.ref;
                 if (hasColor || hasRef) {
-                    const color = isColourValid(d.entity.tags.colour) ? d.entity.tags.colour : '#555';
+                    const color = isColorValid(d.entity.tags.colour) ? d.entity.tags.colour : '#555';
                     d3_select(this)
                         .append('span')
                         .classed('member-entity-ref-color', true)
