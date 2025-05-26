@@ -307,21 +307,26 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     const presetTags = Object.keys(_this.tags);
     const presetID = _this.id;
     const ids = Object.keys(osmLifecyclePrefixes);
-    let presetPrefix;
 
+    // checks if the presetID itself contains the lifecycle tag
+    presetTags.forEach(tag => {
+      if (tag.includes(':')) {
+        let prefix = osmGetLifecyclePrefix(tag);
+        if (ids.includes(prefix)) {
+          lifecycle = prefix;
+        }
+      }
+    });
+
+    // checks the entity for simple <lifecycle> = *
     entityValues.forEach(tag => {
       if (ids.includes(tag) && tag !== 'construction') {
         lifecycle = tag;
       }
     });
 
-    if (presetTags[0]) {
-      presetPrefix = presetTags[0].split(':')[0] ?? null;
-    }
-
-    if (lifecycle === 'functional' && presetPrefix && ids.includes(presetPrefix)) {
-      lifecycle = presetPrefix;
-    } else {
+    // checks the entity for construction lifecycle or preset prefix lifecycle
+    if (lifecycle === 'functional') {
       if (entityTags.includes('construction') || entity.contruction === presetID) {
           lifecycle = 'construction';
       } else {
@@ -329,7 +334,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
           if (tag.includes(':')) {
             let prefix = osmGetLifecyclePrefix(tag);
             let base = osmGetKeyWithoutLifecycle(tag);
-            if (!presetTags[1] && presetTags[0] && presetTags[0].includes(base) && ids.includes(prefix)) {
+            if (presetTags.includes(base) && ids.includes(prefix)) {
               lifecycle = prefix;
             }
           }
