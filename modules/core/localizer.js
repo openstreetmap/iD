@@ -6,6 +6,19 @@ import { utilStringQs } from '../util';
 import { utilArrayUniq } from '../util/array';
 import { presetsCdnUrl } from '../../config/id.js';
 
+const rematchCodes = {
+    // below is not needed, because it can be solved by split('-')[0].toLowerCase()
+    // 'ar-AA': 'ar',
+    // 'pt-BR': 'pt',
+    // 'pt': 'pt-PT',
+
+
+    'zh-CN': ['zh-Hans','zh'],
+    'zh-TW': ['zh-Hant','zh'],
+    'zh-HK': ['zh-Hant','zh'],
+    'ko-Hani': ['ko-Hani'],
+};
+
 let _mainLocalizer = coreLocalizer(); // singleton
 let _t = _mainLocalizer.t;
 
@@ -48,6 +61,7 @@ export function coreLocalizer() {
     // `_localeCodes` must contain `_localeCode` first, optionally followed by fallbacks
     let _localeCodes = ['en-US', 'en'];
     let _languageCode = 'en';
+    let _languageCodes= [];
     let _textDirection = 'ltr';
     let _usesMetric = false;
     let _languageNames = {};
@@ -57,6 +71,7 @@ export function coreLocalizer() {
     localizer.localeCode = () => _localeCode;
     localizer.localeCodes = () => _localeCodes;
     localizer.languageCode = () => _languageCode;
+    localizer.languageCodes = () => _languageCodes;
     localizer.textDirection = () => _textDirection;
     localizer.usesMetric = () => _usesMetric;
     localizer.languageNames = () => _languageNames;
@@ -169,6 +184,20 @@ export function coreLocalizer() {
 
     function updateForCurrentLocale() {
         if (!_localeCode) return;
+
+        for (let localeCode of _localeCodes) {
+            if (localeCode in rematchCodes) {
+                let languageCodeList = rematchCodes[localeCode];
+                for (let code of languageCodeList) {
+                    _languageCodes.push(code);
+                }
+            } else {
+                localeCode = localeCode.split('-')[0].toLowerCase();
+                _languageCodes.push(localeCode);
+            }
+        }
+
+        _languageCodes.push("en")
 
         _languageCode = _localeCode.split('-')[0];
 

@@ -187,8 +187,14 @@ export function utilGetAllNodes(ids, graph) {
  *                              it being shown twice (see PR #8707#discussion_r712658175)
  */
 export function utilDisplayName(entity, hideNetwork) {
-    var localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
-    var name = entity.tags[localizedNameKey] || entity.tags.name || '';
+    let languageCodes=localizer.languageCodes()
+    let name = languageCodes
+        .map(code => entity.tags['name:' + code])
+        .find(value => value !== undefined);
+
+    if (!name) {
+        name = entity.tags.name || '';
+    }
 
     var tags = {
         addr: entity.tags['addr:housenumber'] || entity.tags['addr:housename'],
