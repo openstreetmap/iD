@@ -7,12 +7,6 @@ import { utilArrayUniq } from '../util/array';
 import { presetsCdnUrl } from '../../config/id.js';
 
 const rematchCodes = {
-    // below is not needed, because it can be solved by split('-')[0].toLowerCase()
-    // 'ar-AA': 'ar',
-    // 'pt-BR': 'pt',
-    // 'pt': 'pt-PT',
-
-
     'zh-CN': ['zh-Hans','zh'],
     'zh-TW': ['zh-Hant','zh'],
     'zh-HK': ['zh-Hant','zh'],
