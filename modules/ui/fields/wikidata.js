@@ -60,6 +60,7 @@ export function uiFieldWikidata(field, context) {
         searchRowEnter
             .append('input')
             .attr('type', 'text')
+            .attr('dir', 'auto')
             .attr('id', field.domId)
             .style('flex', '1')
             .call(utilNoAuto)
@@ -113,6 +114,7 @@ export function uiFieldWikidata(field, context) {
         enter
             .append('input')
             .attr('type', 'text')
+            .attr('dir', 'auto')
             .call(utilNoAuto)
             .classed('disabled', 'true')
             .attr('readonly', 'true');

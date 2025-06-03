@@ -135,6 +135,7 @@ export function uiSectionRawTagEditor(id, context) {
             .call(utilNoAuto)
             .attr('placeholder', t('inspector.key_value'))
             .attr('spellcheck', 'false')
+            .style('direction', 'ltr')
             .merge(textarea);
 
         textarea
@@ -190,6 +191,7 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('class', 'value-wrap')
             .append('input')
             .property('type', 'text')
+            .attr('dir', 'auto')
             .attr('class', 'value')
             .call(utilNoAuto)
             .on('focus', interacted)

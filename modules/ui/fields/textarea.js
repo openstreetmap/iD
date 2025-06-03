@@ -33,6 +33,7 @@ export function uiFieldTextarea(field, context) {
 
         input = input.enter()
             .append('textarea')
+            .attr('dir', 'auto')
             .attr('id', field.domId)
             .call(utilNoAuto)
             .on('input', change(true))
