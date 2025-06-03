@@ -17,7 +17,7 @@ import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
 import { uiTooltip } from '../tooltip';
 import { utilArrayGroupBy, utilArrayIntersection } from '../../util/array';
-import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } from '../../util';
+import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId, utilQsString } from '../../util';
 import { prefs } from '../../core';
 import { idMatch } from '../feature_list';
 
@@ -408,18 +408,15 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-type')
-            .text(d => {
-                let matched = presetManager.match(d.relation, context.graph());
-                while (matched?.suggestion) {
-                    // if is NSI preset: look for a parent preset
-                    matched = matched.getParentPreset();
-                }
-                return (matched && matched.name()) || t('inspector.relation');
+            .text(function(d) {
+                var matched = presetManager.match(d.relation, context.graph());
+                return (matched && matched.name()) || t.html('inspector.relation');
             });
 
         const showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
         labelLink.each(function(d) {
             if (!showThirdPartyIcons) return;
+            const tags = d.relation.tags;
             const matched = presetManager.match(d.relation, context.graph());
             if (matched.suggestion) {
                 // if matching an NSI preset: append icon
@@ -427,6 +424,17 @@ export function uiSectionRawMembershipEditor(context) {
                     .append('img')
                     .classed('member-entity-icon', true)
                     .attr('src', matched.imageURL);
+            } else if (tags.type === 'route' && (true || tags.route === 'hiking' || tags.route === 'foot')) {
+                const networkType = ({
+                    iwn: 'INT',
+                    nwn: 'NAT',
+                    rwm: 'REG',
+                    lwn: 'LOC'
+                })[tags.network] || 'LOC';
+                d3_select(this)
+                    .append('img')
+                    .classed('member-entity-icon', true)
+                    .attr('src', `https://hiking.waymarkedtrails.org/api/v1/symbols/from_tags/${networkType}?${utilQsString(tags)}`);
             }
         });
 
@@ -450,7 +458,13 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-name')
-            .text(d => utilDisplayName(d.relation, { hideRef: true }));
+            .classed('has-colour', d => d.relation.tags.colour && isColourValid(d.relation.tags.colour))
+            .style('border-color', d => d.relation.tags.colour)
+            .text(function(d) {
+                const matched = presetManager.match(d.relation, context.graph());
+                // hide the network from the name if there is NSI match
+                return utilDisplayName(d.relation, matched.suggestion);
+            });
 
         labelEnter
             .append('button')
