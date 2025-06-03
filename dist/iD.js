@@ -14517,7 +14517,7 @@
     "package.json"() {
       package_default = {
         name: "iD",
-        version: "2.34.0",
+        version: "2.34.1",
         description: "A friendly editor for OpenStreetMap",
         main: "dist/iD.min.js",
         repository: "github:openstreetmap/iD",
@@ -76230,10 +76230,16 @@ this.ifd0Offset: ${this.ifd0Offset}, file.byteLength: ${e3.byteLength}`), e3.tif
         });
         val = numbers2.join(";");
         shouldUpdate = (inputValue, setValue) => {
-          const inputNums = inputValue.split(";").map(
-            (setVal) => likelyRawNumberFormat.test(setVal) ? parseFloat(setVal) : parseLocaleFloat(setVal)
-          );
-          const setNums = setValue.split(";").map(parseLocaleFloat);
+          const inputNums = inputValue.split(";").map((val2) => {
+            const parsedNum = likelyRawNumberFormat.test(val2) ? parseFloat(val2) : parseLocaleFloat(val2);
+            if (!isFinite(parsedNum)) return val2;
+            return parsedNum;
+          });
+          const setNums = setValue.split(";").map((val2) => {
+            const parsedNum = parseLocaleFloat(val2);
+            if (!isFinite(parsedNum)) return val2;
+            return parsedNum;
+          });
           return !isEqual_default(inputNums, setNums);
         };
       }

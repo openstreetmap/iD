@@ -35,6 +35,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# v2.34.1
+##### 2025-06-03
+
+#### :bug: Bugfixes
+* Fix a bug which can cause non-numeric values in tags of numeric input fields to not be displayed and potentially inadvertently cleared ([#11076])
+
+[#11076]: https://github.com/openstreetmap/iD/issues/11076
+
+
 # v2.34.0
 ##### 2025-05-12
 
