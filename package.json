@@ -49,7 +49,7 @@
     "@mapbox/vector-tile": "^2.0.3",
     "@rapideditor/country-coder": "~5.4.0",
     "@rapideditor/location-conflation": "~1.5.0",
-    "@tmcw/togeojson": "^7.1.1",
+    "@tmcw/togeojson": "^7.1.2",
     "@turf/bbox": "^7.2.0",
     "@turf/bbox-clip": "^7.2.0",
     "abortcontroller-polyfill": "^1.7.8",
