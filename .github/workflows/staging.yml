@@ -32,9 +32,9 @@ jobs:
       - run: npm run dist
         working-directory: './id-tagging-schema'
       - run: mkdir dist/id-tagging-schema && mv id-tagging-schema/dist dist/id-tagging-schema/dist
-      # build iD using freshest version of presets and ELI
+      # build iD using freshest version of presets, ELI and NSI
       - run: npm clean-install
-      - run: npm install editor-layer-index
+      - run: npm install editor-layer-index name-suggestion-index
       - run: mkdir dist/data
       - run: npm run imagery
       - run: npm run all
