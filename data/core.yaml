@@ -2067,7 +2067,7 @@ en:
         title: Tag this as lower
       upgrade_tags:
         title: Change the tags
-        annotation: Changed old tags.
+        annotation: Accepted the suggested updates
       use_different_layers:
         title: Use different layers
       use_different_layers_or_levels:
