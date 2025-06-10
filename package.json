@@ -68,7 +68,7 @@
     "pbf": "^4.0.1",
     "polygon-clipping": "~0.15.7",
     "rbush": "4.0.1",
-    "vitest": "^3.2.1",
+    "vitest": "^3.2.3",
     "whatwg-fetch": "^3.6.20",
     "which-polygon": "2.2.1"
   },
