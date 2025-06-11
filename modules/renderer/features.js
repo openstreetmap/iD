@@ -210,6 +210,10 @@ export function rendererFeatures(context) {
         return tags['piste:type'];
     });
 
+    defineRule('climbing', function isClimbing(tags){
+        return tags['climbing'];
+    });
+
     defineRule('aerialways', function isAerialways(tags) {
         return !!tags?.aerialway &&
             tags.aerialway !== 'yes' &&

@@ -113,6 +113,40 @@ path.line.casing.tag-piste {
     stroke: #444;
 }
 
+/* climbing routes */
+path.line.shadow.tag-climbing-route {
+    stroke-width: 16;
+}
+.low-zoom path.line.shadow.tag-climbing-route {
+    stroke-width: 12;
+}
+
+path.line.stroke.tag-climbing-route {
+    stroke: #b22;
+    stroke-linecap: round;
+    stroke-dasharray: 2, 10;
+    stroke-width: 2;
+}
+.low-zoom path.line.stroke.climbing-route {
+    stroke-linecap: round;
+    stroke-dasharray: 3, 3;
+    stroke-width: 2;
+}
+
+path.line.casing.tag-climbing-route {
+    stroke: #988;
+    stroke-linecap: round;
+    stroke-dasharray: none;
+    stroke-width: 3;
+}
+.low-zoom path.line.casing.tag-climbing-route {
+    stroke-width: 1;
+}
+
+.preset-icon .icon.tag-climbing-route {
+    color: #988;
+    fill: #dca;
+}
 
 /* Attractions */
 path.line.stroke.tag-attraction-summer_toboggan {
