@@ -194,7 +194,29 @@ export function uiSectionRawTagEditor(id, context) {
             .call(utilNoAuto)
             .on('focus', interacted)
             .on('blur', valueChange)
-            .on('change', valueChange);
+            .on('change', valueChange)
+            .on('paste', function(event, d) {
+                const key = d.key || '';
+                const valueInput = this;
+                // Only  for contact:* keys
+                if (/^contact:/i.test(key)) {
+                    setTimeout(() => {
+                        let pasted = valueInput.value.trim();
+                        try {
+                            pasted = pasted.replace(/[?#].*$/, '');
+                            pasted = pasted.replace(/\/+$/, '');
+                            const match = pasted.match(/([^\/]+)$/);
+                            if (match) {
+                                valueInput.value = match[1];
+                                valueInput.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+                        } catch {
+                            //console.log('Error processing pasted value:', e);
+                            valueInput.value = pasted; 
+                        }
+                    }, 0);
+                }
+            });
 
         innerWrap
             .append('button')
