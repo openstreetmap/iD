@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render housenumbers (or housenames) of address points or buildings as dedicated labels on the map ([#10970])
 * Simplify raw tag editor and make it easier to use with keyboard-only input ([#10889])
 * Show info message when a keyboard shortcut of an _operation_ is pressed, but the operation is not _available_ for the selected features ([#9896])
+* Handle `key=left|right|both` in the `directionalCombo` UI to enable support for `sidewalk=left|right|both` [in the future](#id-tagging-schema/pull/1507) ([#10935], thanks [@tordans], [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 * Fix Mapilio photo markers from showing up on low zoom levels ([#11014], thanks [@keiffer213] and [@haipq07])
@@ -62,6 +63,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11027]: https://github.com/openstreetmap/iD/pull/11027
 [#11054]: https://github.com/openstreetmap/iD/issues/1104
 [#11068]: https://github.com/openstreetmap/iD/issues/11068
+[#10935]: https://github.com/openstreetmap/iD/issues/10935
+[#id-tagging-schema/pull/1507]: https://github.com/openstreetmap/id-tagging-schema/pull/1507
 [@keiffer213]: https://github.com/keiffer213
 [@haipq07]: https://github.com/haipq07
 
