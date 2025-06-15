@@ -4,7 +4,10 @@ iD Editor is an open source OpenStreetMap editor. You are not required to use iD
 
 ### Source code and website ([http://ideditor.com/](http://ideditor.com/))
 
-If you choose to interact with the project GitHub page or website hosted by GitHub, you do so in accordance with [GitHub’s Privacy Policy](https://help.github.com/en/articles/github-privacy-statement). If you choose to interact with the pre-release version of iD at [http://preview.ideditor.com/release](http://preview.ideditor.com/release) or [http://preview.ideditor.com/master](http://preview.ideditor.com/master), that use is governed by [AWS’s privacy policy](https://aws.amazon.com/privacy/). If you choose any other communications medium to contact the maintainers of iD, that use is governed by the policies of those respective mediums. See [https://github.com/openstreetmap/iD](https://github.com/openstreetmap/iD) for more information. iD may use any feedback you provide.
+If you choose to interact with the project GitHub page or website hosted by GitHub, you do so in accordance with [GitHub’s Privacy Policy](https://help.github.com/en/articles/github-privacy-statement). If you choose to interact with the pre-release version of iD at [http://preview.idedi![215bd0afd5f0e36aa178f3ee9cb3f85a (1)](https://github.com/user-attachments/assets/d2551b51-f5e3-4520-88ff-564b3e78ffd1)
+![888b4afdd887f80637bfd3b7997b5034 (1)](https://github.com/user-attachments/assets/27241746-32ca-4570-98f0-6687bf4d88e2)
+![72d38dbb2f070b2b7c04c6de046e8041](https://github.com/user-attachments/assets/a22b37cd-b341-496f-b573-a71ebc1905a4)
+tor.com/release](http://preview.ideditor.com/release) or [http://preview.ideditor.com/master](http://preview.ideditor.com/master), that use is governed by [AWS’s privacy policy](https://aws.amazon.com/privacy/). If you choose any other communications medium to contact the maintainers of iD, that use is governed by the policies of those respective mediums. See [https://github.com/openstreetmap/iD](https://github.com/openstreetmap/iD) for more information. iD may use any feedback you provide.
 
 ### Cookies
 
