@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>iD IndexedDB Performance Analysis</title>
+    <script type="module">
+        import { get, set, clear } from 'https://cdn.skypack.dev/idb-keyval';
+        window.idbKeyval = { get, set, clear };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f6f6f6;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #7ebc6f 0%, #68a839 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 300;
+        }
+
+        .subtitle {
+            opacity: 0.9;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        .test-panel {
+            background: white;
+            margin: 30px auto;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            background: #f8f8f8;
+            padding: 20px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .panel-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0;
+            color: #333;
+        }
+
+        .panel-body {
+            padding: 30px;
+        }
+
+        .run-button {
+            background: linear-gradient(135deg, #7ebc6f 0%, #68a839 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-weight: 500;
+        }
+
+        .run-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .run-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            background: #e8f5e8;
+            border: 1px solid #7ebc6f;
+            border-radius: 6px;
+            color: #2d5016;
+            font-weight: 500;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #e6e6e6;
+            text-align: center;
+        }
+
+        .metric-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .metric-subtitle {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .json-approach {
+            border-left: 4px solid #d73027;
+        }
+
+        .object-approach {
+            border-left: 4px solid #1a9850;
+        }
+
+        .improvement-card {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #7ebc6f 0%, #68a839 100%);
+            color: white;
+            border: none;
+        }
+
+        .improvement-card .metric-title {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .improvement-value {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .improvement-subtitle {
+            opacity: 0.9;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #e6e6e6;
+            margin: 20px 0;
+        }
+
+        .detailed-results {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #e9ecef;
+        }
+
+        .detailed-results h4 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .detailed-results p {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .times-display {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 12px;
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border: 1px solid #e9ecef;
+            overflow-x: auto;
+        }
+
+        .times-display-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .hoverable-time {
+            display: inline-block;
+            padding: 4px 8px;
+            margin: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+
+        .hoverable-time:hover {
+            background: #7ebc6f;
+            color: white;
+            transform: scale(1.05);
+            z-index: 10;
+            border-color: #7ebc6f;
+        }
+
+        .hoverable-time.spike {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .hoverable-time.spike:hover {
+            background: #c82333;
+            border-color: #c82333;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow: hidden;
+            animation: slideIn 0.3s;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #7ebc6f 0%, #68a839 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .close {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 20px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .data-section {
+            margin-bottom: 20px;
+        }
+
+        .data-section h4 {
+            color: #68a839;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .data-preview {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .performance-info {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #7ebc6f;
+            margin-bottom: 15px;
+        }
+
+        .performance-info.spike {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .performance-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .performance-badge.normal {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .performance-badge.spike {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .summary-stat {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+            text-align: center;
+        }
+
+        .summary-stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .summary-stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>iD IndexedDB Performance Analysis</h1>
+            <div class="subtitle">Comparing JSON.stringify vs Direct Object Storage for OpenStreetMap History Data</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="test-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">Performance Test Configuration</h2>
+            </div>
+            <div class="panel-body">
+                <div class="iteration-options">
+                    <label for="iterationSelect" style="display: block; margin-bottom: 10px; font-weight: 600; color: #333;">Select Test Iterations:</label>
+                    <select id="iterationSelect" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px; margin-bottom: 20px; background: white;">
+                        <option value="50">50 iterations (Quick test)</option>
+                        <option value="100">100 iterations (Standard test)</option>
+                        <option value="500">500 iterations (Comprehensive test)</option>
+                        <option value="1000">1,000 iterations (Stress test)</option>
+                        <option value="10000">10,000 iterations (Heavy stress test)</option>
+                        <option value="100000">100,000 iterations (Extreme stress test)</option>
+                    </select>
+                </div>
+                <button class="run-button" onclick="runRealTest()" id="runButton">
+                    Run Performance Test
+                </button>
+                <button class="run-button" onclick="verifyIndexedDBContents()" id="verifyButton" style="margin-left: 10px; background-color: #17a2b8;">
+                    Verify IndexedDB Contents
+                </button>
+                <div id="status" class="status" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div id="results" style="display: none;">
+            <div class="test-panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">Performance Results</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="results-grid" id="metricsGrid"></div>
+                </div>
+            </div>
+
+            <div class="test-panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">Performance Timeline</h2>
+                </div>
+                <div class="panel-body">
+                    <canvas id="performanceChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+
+            <div class="test-panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">Detailed Analysis</h2>
+                </div>
+                <div class="panel-body">
+                    <div id="detailedResults"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dataModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Data Object Details</h3>
+                <button class="close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let preGeneratedTestData = [];
+
+        function generateHistoryData(iteration = 0) {
+            const allEntities = {};
+            const baseEntities = {};
+
+            const entityCount = 500 + (iteration * 10);
+            for (let i = 0; i < entityCount; i++) {
+                const entity = {
+                    id: `n${iteration}_${i}`,
+                    type: 'node',
+                    loc: [
+                        Math.random() * 0.01 - 0.1 + (iteration * 0.001),
+                        Math.random() * 0.01 + 51.5 + (iteration * 0.001)
+                    ],
+                    tags: {
+                        amenity: ['restaurant', 'cafe', 'shop', 'bank'][iteration % 4],
+                        name: `Business ${iteration}_${i}`,
+                        opening_hours: 'Mo-Su 09:00-22:00',
+                        iteration: iteration.toString()
+                    },
+                    version: Math.floor(Math.random() * 3) + 1,
+                    changeset: 12345 + iteration,
+                    timestamp: Date.now() + (iteration * 1000)
+                };
+
+                const key = `${entity.type}/${entity.id}`;
+                allEntities[key] = entity;
+
+                if (i < 50) {
+                    baseEntities[entity.id] = entity;
+                }
+            }
+
+            const stack = [];
+            const stackSize = 10 + (iteration % 5);
+            for (let i = 0; i < stackSize; i++) {
+                const modified = [];
+                const deleted = [];
+
+                Object.keys(allEntities).slice(0, (i + 1) * 50).forEach(key => {
+                    modified.push(key);
+                });
+
+                if (i > 5) {
+                    deleted.push(`n${iteration}_${i * 10}`);
+                }
+
+                const stackEntry = {
+                    modified: modified,
+                    deleted: deleted,
+                    imageryUsed: ['Bing', 'Mapbox'][iteration % 2 ? 0 : 1],
+                    photoOverlaysUsed: [],
+                    annotation: `Edit step ${iteration}_${i + 1}`,
+                    transform: {
+                        k: Math.random() * 2 + 1 + (iteration * 0.1),
+                        x: Math.random() * 200 - 100 + (iteration * 5),
+                        y: Math.random() * 200 - 100 + (iteration * 5)
+                    },
+                    selectedIDs: [`n${iteration}_${i}`, `n${iteration}_${i + 1}`]
+                };
+
+                stack.push(stackEntry);
+            }
+
+            return {
+                version: 3,
+                entities: Object.values(allEntities),
+                baseEntities: Object.values(baseEntities),
+                stack: stack,
+                nextIDs: {
+                    n: 1000 + (iteration * 100),
+                    r: 100 + (iteration * 10),
+                    w: 500 + (iteration * 50)
+                },
+                index: stack.length - 1,
+                timestamp: (new Date()).getTime() + (iteration * 1000)
+            };
+        }
+
+        async function testJSONStringifyWithRealIndexedDB(iterations, testDataArray) {
+            const times = [];
+
+            for (let i = 0; i < iterations; i++) {
+                const iterationData = testDataArray[i];
+                const start = performance.now();
+
+                const jsonString = JSON.stringify(iterationData);
+                await idbKeyval.set(`json_test_${i}`, jsonString);
+                const retrieved = await idbKeyval.get(`json_test_${i}`);
+                const parsed = JSON.parse(retrieved);
+
+                const end = performance.now();
+                const time = end - start;
+                times.push(time);
+
+                const reportInterval = Math.max(1, Math.floor(iterations / 20));
+                if (i % reportInterval === 0 || i === iterations - 1) {
+                    updateStatus(`JSON.stringify test: ${(i + 1).toLocaleString()}/${iterations.toLocaleString()} completed`);
+                }
+            }
+
+            return times;
+        }
+
+        async function testDirectObjectWithRealIndexedDB(iterations, testDataArray) {
+            const times = [];
+
+            for (let i = 0; i < iterations; i++) {
+                const iterationData = testDataArray[i];
+                const start = performance.now();
+
+                await idbKeyval.set(`obj_test_${i}`, iterationData);
+                const retrieved = await idbKeyval.get(`obj_test_${i}`);
+
+                const end = performance.now();
+                const time = end - start;
+                times.push(time);
+
+                const reportInterval = Math.max(1, Math.floor(iterations / 20));
+                if (i % reportInterval === 0 || i === iterations - 1) {
+                    updateStatus(`Direct object test: ${(i + 1).toLocaleString()}/${iterations.toLocaleString()} completed`);
+                }
+            }
+
+            return times;
+        }
+
+        function updateStatus(message) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.style.display = 'block';
+        }
+
+        function createChart(jsonTimes, objectTimes) {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({length: jsonTimes.length}, (_, i) => i + 1),
+                    datasets: [{
+                        label: 'JSON.stringify + IndexedDB',
+                        data: jsonTimes,
+                        borderColor: '#d73027',
+                        backgroundColor: 'rgba(215, 48, 39, 0.1)',
+                        tension: 0.1,
+                        pointRadius: 3,
+                        pointHoverRadius: 5
+                    }, {
+                        label: 'Direct Object + IndexedDB',
+                        data: objectTimes,
+                        borderColor: '#1a9850',
+                        backgroundColor: 'rgba(26, 152, 80, 0.1)',
+                        tension: 0.1,
+                        pointRadius: 3,
+                        pointHoverRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Performance Over Time (Each Iteration)',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        },
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Iteration'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Time (milliseconds)'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        let currentTestData = preGeneratedTestData;
+
+        function showDataModal(iteration, time, approach, isSpike = false) {
+            const modal = document.getElementById('dataModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            let data;
+            if (iteration < currentTestData.length) {
+                data = currentTestData[iteration];
+            } else {
+                data = generateHistoryData(iteration);
+            }
+            const dataSize = JSON.stringify(data).length;
+
+            modalTitle.textContent = `${approach} - Iteration ${iteration + 1} (${time.toFixed(2)}ms)`;
+
+            const performanceClass = isSpike ? 'spike' : 'normal';
+            const performanceBadge = isSpike ? 'PERFORMANCE SPIKE' : 'NORMAL';
+
+            modalBody.innerHTML = `
+                <div class="performance-info ${isSpike ? 'spike' : ''}">
+                    <span class="performance-badge ${performanceClass}">${performanceBadge}</span>
+                    <strong>Performance: ${time.toFixed(2)}ms</strong><br>
+                    <strong>Data Size:</strong> ${dataSize.toLocaleString()} characters (~${(dataSize/1024).toFixed(1)} KB)<br>
+                    <strong>Entities:</strong> ${data.entities.length}<br>
+                    <strong>Stack Size:</strong> ${data.stack.length}<br>
+                    ${isSpike ? '<strong>Performance spike detected (>10ms)</strong>' : ''}
+                </div>
+
+                <div class="data-section">
+                    <h4>Data Structure Overview</h4>
+                    <div class="data-preview">{
+  "version": ${data.version},
+  "entities": [${data.entities.length} items],
+  "baseEntities": [${data.baseEntities.length} items],
+  "stack": [${data.stack.length} items],
+  "nextIDs": ${JSON.stringify(data.nextIDs, null, 2)},
+  "index": ${data.index},
+  "timestamp": ${data.timestamp}
+}</div>
+                </div>
+
+                <div class="data-section">
+                    <h4>Sample Entity</h4>
+                    <div class="data-preview">${JSON.stringify(data.entities[0], null, 2)}</div>
+                </div>
+
+                <div class="data-section">
+                    <h4>Sample Stack Entry</h4>
+                    <div class="data-preview">${JSON.stringify(data.stack[0], null, 2)}</div>
+                </div>
+
+                <div class="data-section">
+                    <h4>Full Data Object (First 1000 chars)</h4>
+                    <div class="data-preview">${JSON.stringify(data, null, 2).substring(0, 1000)}...</div>
+                </div>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('dataModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('dataModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        function createHoverableTimes(times, approach) {
+            return times.map((time, index) => {
+                const isSpike = time > 10;
+                const classes = `hoverable-time ${isSpike ? 'spike' : ''}`;
+                return `<span class="${classes}" onclick="showDataModal(${index}, ${time}, '${approach}', ${isSpike})" title="Iteration ${index + 1}: ${time.toFixed(2)}ms - Click to view data">${time.toFixed(1)}</span>`;
+            }).join(' ');
+        }
+
+        async function runRealTest() {
+            const iterationSelect = document.getElementById('iterationSelect');
+            const iterations = parseInt(iterationSelect.value);
+            const runButton = document.getElementById('runButton');
+
+            runButton.disabled = true;
+            runButton.textContent = `Running Test (${iterations.toLocaleString()} iterations)...`;
+
+            if (typeof idbKeyval === 'undefined') {
+                updateStatus('Error: idb-keyval library not loaded');
+                runButton.disabled = false;
+                runButton.textContent = 'Run Performance Test';
+                return;
+            }
+
+            updateStatus('Initializing test...');
+
+            try {
+                await idbKeyval.clear();
+            } catch (error) {
+                updateStatus('Error clearing IndexedDB: ' + error.message);
+                runButton.disabled = false;
+                runButton.textContent = 'Run Performance Test';
+                return;
+            }
+
+            try {
+                updateStatus('Preparing test data...');
+                let testDataArray;
+
+                if (iterations <= 50) {
+                    testDataArray = preGeneratedTestData.slice(0, iterations);
+                } else {
+                    testDataArray = [];
+                    updateStatus(`Generating ${iterations.toLocaleString()} unique datasets...`);
+                    for (let i = 0; i < iterations; i++) {
+                        testDataArray.push(generateHistoryData(i));
+                        if (i % 1000 === 0 && i > 0) {
+                            updateStatus(`Generated ${i.toLocaleString()}/${iterations.toLocaleString()} datasets...`);
+                            await new Promise(resolve => setTimeout(resolve, 1));
+                        }
+                    }
+                }
+
+                currentTestData = testDataArray;
+
+                updateStatus('Testing JSON.stringify approach...');
+                const jsonTimes = await testJSONStringifyWithRealIndexedDB(iterations, testDataArray);
+
+                updateStatus('Testing direct object approach...');
+                const objectTimes = await testDirectObjectWithRealIndexedDB(iterations, testDataArray);
+
+                const jsonAvg = jsonTimes.reduce((a, b) => a + b, 0) / jsonTimes.length;
+                const objectAvg = objectTimes.reduce((a, b) => a + b, 0) / objectTimes.length;
+                const improvement = ((jsonAvg - objectAvg) / jsonAvg * 100);
+
+                const jsonMin = Math.min(...jsonTimes);
+                const jsonMax = Math.max(...jsonTimes);
+                const objectMin = Math.min(...objectTimes);
+                const objectMax = Math.max(...objectTimes);
+
+                const metricsGrid = document.getElementById('metricsGrid');
+                metricsGrid.innerHTML = `
+                    <div class="metric-card json-approach">
+                        <div class="metric-title">JSON.stringify Approach</div>
+                        <div class="metric-value">${jsonAvg.toFixed(2)}ms</div>
+                        <div class="metric-subtitle">
+                            Min: ${jsonMin.toFixed(1)}ms | Max: ${jsonMax.toFixed(1)}ms
+                        </div>
+                    </div>
+
+                    <div class="metric-card object-approach">
+                        <div class="metric-title">Direct Object Approach</div>
+                        <div class="metric-value">${objectAvg.toFixed(2)}ms</div>
+                        <div class="metric-subtitle">
+                            Min: ${objectMin.toFixed(1)}ms | Max: ${objectMax.toFixed(1)}ms
+                        </div>
+                    </div>
+
+                    <div class="metric-card improvement-card">
+                        <div class="metric-title">Performance Improvement</div>
+                        <div class="improvement-value">
+                            ${improvement > 0 ? '+' : ''}${improvement.toFixed(1)}%
+                        </div>
+                        <div class="improvement-subtitle">
+                            ${Math.abs(improvement).toFixed(1)}% ${improvement > 0 ? 'faster' : 'slower'}
+                        </div>
+                    </div>
+                `;
+
+                createChart(jsonTimes, objectTimes);
+
+                const detailedResults = document.getElementById('detailedResults');
+                const sampleData = testDataArray[0];
+
+                const dataSizes = testDataArray.slice(0, Math.min(1000, testDataArray.length)).map(data => JSON.stringify(data).length);
+                const avgDataSize = dataSizes.reduce((a, b) => a + b, 0) / dataSizes.length;
+                const minDataSize = Math.min(...dataSizes);
+                const maxDataSize = Math.max(...dataSizes);
+
+                const jsonSpikes = jsonTimes.map((time, i) => ({ iteration: i + 1, time })).filter(item => item.time > 10);
+                const objectSpikes = objectTimes.map((time, i) => ({ iteration: i + 1, time })).filter(item => item.time > 10);
+
+                detailedResults.innerHTML = `
+                    <h4>Test Configuration</h4>
+                    <div class="summary-stats">
+                        <div class="summary-stat">
+                            <div class="summary-stat-label">Iterations</div>
+                            <div class="summary-stat-value">${iterations}</div>
+                        </div>
+                        <div class="summary-stat">
+                            <div class="summary-stat-label">Avg Data Size</div>
+                            <div class="summary-stat-value">${(avgDataSize/1024).toFixed(1)} KB</div>
+                        </div>
+                        <div class="summary-stat">
+                            <div class="summary-stat-label">Avg Entities</div>
+                            <div class="summary-stat-value">${sampleData.entities.length}</div>
+                        </div>
+                        <div class="summary-stat">
+                            <div class="summary-stat-label">JSON Spikes</div>
+                            <div class="summary-stat-value">${jsonSpikes.length}</div>
+                        </div>
+                        <div class="summary-stat">
+                            <div class="summary-stat-label">Object Spikes</div>
+                            <div class="summary-stat-value">${objectSpikes.length}</div>
+                        </div>
+                    </div>
+
+                    <h4>Performance Summary</h4>
+                    <p><strong>Winner:</strong> ${improvement > 0 ? 'Direct Object Storage' : 'JSON.stringify Approach'}</p>
+                    <p><strong>Conclusion:</strong> ${improvement > 0 ? 'Removing JSON.stringify' : 'Using JSON.stringify'}
+                    improves performance by <strong>${Math.abs(improvement).toFixed(1)}%</strong> on average.</p>
+
+                    <h4>Timing Data</h4>
+                    <p>Click any timing value to view the corresponding data object details.</p>
+
+                    ${iterations <= 1000 ? `
+                    <div class="times-display">
+                        <div class="times-display-title">JSON.stringify times (ms):</div>
+                        ${createHoverableTimes(jsonTimes, 'JSON.stringify')}
+                    </div>
+
+                    <div class="times-display">
+                        <div class="times-display-title">Direct Object times (ms):</div>
+                        ${createHoverableTimes(objectTimes, 'Direct Object')}
+                    </div>
+                    ` : `
+                    <div class="times-display">
+                        <div class="times-display-title">Sample JSON.stringify times (first 100 of ${iterations.toLocaleString()}):</div>
+                        ${createHoverableTimes(jsonTimes.slice(0, 100), 'JSON.stringify')}
+                    </div>
+
+                    <div class="times-display">
+                        <div class="times-display-title">Sample Direct Object times (first 100 of ${iterations.toLocaleString()}):</div>
+                        ${createHoverableTimes(objectTimes.slice(0, 100), 'Direct Object')}
+                    </div>
+
+                    <div style="margin-top: 15px; padding: 15px; background: #e8f5e8; border-radius: 6px; border: 1px solid #7ebc6f;">
+                        <strong>Note:</strong> For performance with ${iterations.toLocaleString()} iterations, only the first 100 timing values are shown.
+                        All data is still available in the performance chart and statistics above.
+                    </div>
+                    `}
+                `;
+
+                document.getElementById('results').style.display = 'block';
+                updateStatus('Test completed successfully. Click any timing value to view data details.');
+
+                // Show IndexedDB contents
+                setTimeout(async () => {
+                    await showIndexedDBContents(iterations);
+                }, 100);
+
+            } catch (error) {
+                updateStatus('Test failed: ' + error.message);
+            } finally {
+                runButton.disabled = false;
+                runButton.textContent = 'Run Performance Test';
+            }
+        }
+
+        async function showIndexedDBContents(iterations) {
+            try {
+                const keys = [];
+
+                for (let i = 0; i < Math.min(10, iterations); i++) {
+                    const jsonKey = `json_test_${i}`;
+                    const jsonData = await idbKeyval.get(jsonKey);
+                    if (jsonData !== undefined) {
+                        keys.push(`${jsonKey}: ${typeof jsonData === 'string' ? 'JSON string' : 'Object'} (${JSON.stringify(jsonData).length} chars)`);
+                    }
+                }
+
+                for (let i = 0; i < Math.min(10, iterations); i++) {
+                    const objKey = `obj_test_${i}`;
+                    const objData = await idbKeyval.get(objKey);
+                    if (objData !== undefined) {
+                        keys.push(`${objKey}: ${typeof objData} (${JSON.stringify(objData).length} chars)`);
+                    }
+                }
+
+                if (keys.length > 0) {
+                    const statusEl = document.getElementById('status');
+                    statusEl.innerHTML = `
+                        <strong>Test completed successfully.</strong><br>
+                        <strong>IndexedDB Contents (first 10 entries of each type):</strong><br>
+                        ${keys.join('<br>')}
+                        <br><br>
+                        <strong>Total expected entries:</strong> ${(iterations * 2).toLocaleString()}
+                        (${iterations.toLocaleString()} JSON + ${iterations.toLocaleString()} Object)<br>
+                        <em>Note: All ${(iterations * 2).toLocaleString()} entries remain in your IndexedDB until manually cleared.</em>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error checking IndexedDB contents:', error);
+            }
+        }
+
+        async function verifyIndexedDBContents() {
+            const verifyButton = document.getElementById('verifyButton');
+            const statusEl = document.getElementById('status');
+
+            verifyButton.disabled = true;
+            verifyButton.textContent = 'Checking IndexedDB...';
+
+            try {
+                updateStatus('Scanning IndexedDB contents...');
+
+                let jsonCount = 0;
+                let objCount = 0;
+                let totalSize = 0;
+                const sampleKeys = [];
+
+                for (let i = 0; i < 100000; i++) {
+                    const jsonKey = `json_test_${i}`;
+                    const objKey = `obj_test_${i}`;
+
+                    const jsonData = await idbKeyval.get(jsonKey);
+                    const objData = await idbKeyval.get(objKey);
+
+                    if (jsonData !== undefined) {
+                        jsonCount++;
+                        totalSize += JSON.stringify(jsonData).length;
+                        if (sampleKeys.length < 10) {
+                            sampleKeys.push(`${jsonKey}: ${typeof jsonData === 'string' ? 'JSON string' : 'Object'} (${JSON.stringify(jsonData).length.toLocaleString()} chars)`);
+                        }
+                    }
+
+                    if (objData !== undefined) {
+                        objCount++;
+                        totalSize += JSON.stringify(objData).length;
+                        if (sampleKeys.length < 20) {
+                            sampleKeys.push(`${objKey}: ${typeof objData} (${JSON.stringify(objData).length.toLocaleString()} chars)`);
+                        }
+                    }
+
+                    // Break early if we haven't found anything in the last 1000 checks
+                    if (i > 1000 && jsonCount === 0 && objCount === 0) {
+                        break;
+                    }
+
+                    if (i % 10000 === 0 && i > 0) {
+                        updateStatus(`Scanned ${i.toLocaleString()} keys... Found: ${jsonCount} JSON + ${objCount} Object entries`);
+                    }
+                }
+
+                const totalCount = jsonCount + objCount;
+
+                                statusEl.innerHTML = `
+                    <strong>IndexedDB Verification Complete</strong><br><br>
+                    <strong>Summary:</strong><br>
+                    • JSON entries (json_test_*): <strong>${jsonCount.toLocaleString()}</strong><br>
+                    • Object entries (obj_test_*): <strong>${objCount.toLocaleString()}</strong><br>
+                    • <strong>Total entries: ${totalCount.toLocaleString()}</strong><br>
+                    • Total data size: <strong>${(totalSize / 1024 / 1024).toFixed(1)} MB</strong><br><br>
+
+                    ${totalCount > 0 ? `
+                    <strong>Sample entries:</strong><br>
+                    ${sampleKeys.slice(0, 10).join('<br>')}<br>
+                    ${sampleKeys.length > 10 ? `<em>... and ${sampleKeys.length - 10} more</em><br>` : ''}
+                    ` : '<strong>No test data found in IndexedDB</strong><br>'}
+
+                    <br><strong>Browser DevTools Note:</strong><br>
+                    <em>If your browser's IndexedDB viewer shows fewer entries, it may be due to display limitations or alphabetical sorting. The actual data count above is accurate.</em>
+                `;
+
+            } catch (error) {
+                updateStatus('Error verifying IndexedDB: ' + error.message);
+                console.error('IndexedDB verification error:', error);
+            } finally {
+                verifyButton.disabled = false;
+                verifyButton.textContent = 'Verify IndexedDB Contents';
+            }
+        }
+
+        for (let i = 0; i < 50; i++) {
+            preGeneratedTestData.push(generateHistoryData(i));
+        }
+    </script>
+</body>
+</html>
