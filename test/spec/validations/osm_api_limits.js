@@ -2,7 +2,10 @@ describe('iD.validations.osm_api_limits', function () {
     var context;
 
     beforeEach(function() {
-        iD.services.osm = { maxWayNodes: function() { return 10; } };
+        iD.services.osm = {
+            maxWayNodes: function() { return 10; },
+            on: () => {} // mock event listener
+        };
         context = iD.coreContext().assetPath('../dist/').init();
         context.surface = () => d3.select('#nop'); // mock with NOP
     });

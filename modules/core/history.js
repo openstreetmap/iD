@@ -362,6 +362,7 @@ export function coreHistory(context) {
                 _tree = coreTree(_stack[0].graph);
                 _checkpoints = {};
             }
+            _pausedGraph = null;
             dispatch.call('reset');
             dispatch.call('change');
             return history;
