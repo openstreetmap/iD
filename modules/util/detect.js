@@ -113,5 +113,6 @@ export function utilDetect(refresh) {
 
   _detected.host = origin + loc.pathname;
 
+
   return _detected;
 }
