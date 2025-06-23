@@ -123,7 +123,7 @@
     "serve-handler": "^6.1.6",
     "shelljs": "^0.10.0",
     "shx": "^0.4.0",
-    "sinon": "^20.0.0",
+    "sinon": "^21.0.0",
     "sinon-chai": "^4.0.0",
     "smash": "0.0",
     "svg-sprite": "2.0.4",
