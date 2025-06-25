@@ -192,7 +192,6 @@ translated to one or more languages.
 | 🟠 | Locator overlay | This layer shows feature labels in their local languages | [#7737](https://github.com/openstreetmap/iD/issues/7737) |
 | ✅ | OSM community index | | |
 | ✅ | iD validation issues | | |
-| ✅ | KeepRight issues | | |
 | ✅ | Osmose issues | Translated strings are [provided by Osmose](https://www.transifex.com/openstreetmap-france/osmose/) itself, not iD | |
 
 ### Language Coverage
