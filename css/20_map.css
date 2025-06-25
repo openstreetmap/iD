@@ -36,8 +36,7 @@
 
 /* No interactivity except what we specifically allow */
 .data-layer.osm *,
-.data-layer.notes *,
-.data-layer.keepRight * {
+.data-layer.notes * {
     pointer-events: none;
 }
 

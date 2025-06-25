@@ -27,7 +27,6 @@ var readOnlyTags = [
     /^warnings:/,
     /^resolved:/,
     /^closed:note$/,
-    /^closed:keepright$/,
     /^closed:osmose:/
 ];
 
@@ -146,12 +145,6 @@ export function uiCommit(context) {
         var itemType;
         if (osmClosed.length) {
             tags['closed:note'] = context.cleanTagValue(osmClosed.join(';'));
-        }
-        if (services.keepRight) {
-            var krClosed = services.keepRight.getClosedIDs();
-            if (krClosed.length) {
-                tags['closed:keepright'] = context.cleanTagValue(krClosed.join(';'));
-            }
         }
         if (services.osmose) {
             var osmoseClosed = services.osmose.getClosedCounts();
