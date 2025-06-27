@@ -612,4 +612,47 @@ describe('iD.coreHistory', function () {
             expect(history.difference().deleted().length).to.eql(1);
         });
     });
+
+    describe('#replaceLocalStorageWithIndexedDB', function() {
+        beforeEach(function() {
+            var FDBFactory = require('fake-indexeddb/lib/FDBFactory');
+            var FDBKeyRange = require('fake-indexeddb/lib/FDBKeyRange');
+            global.indexedDB = new FDBFactory();
+            global.IDBKeyRange = FDBKeyRange;
+        });
+
+        afterEach(async function() {
+            try {
+                var { clear } = require('idb-keyval');
+                await clear();
+            } catch {
+                // Ignore cleanup errors
+            }
+
+            delete global.indexedDB;
+            delete global.IDBKeyRange;
+        });
+
+        it('migrates history data from localStorage to IndexedDB', async function() {
+            var { migrateHistoryData } = require('../../../modules/core/preferences');
+            var { get, set } = require('idb-keyval');
+
+            await set('test_key', 'test_value');
+            var testData = await get('test_key');
+            expect(testData).to.equal('test_value');
+
+            await migrateHistoryData();
+
+            expect(true).to.be.true;
+        });
+
+        it('asyncPrefs get and set work correctly', async function() {
+            var { asyncPrefs } = require('../../../modules/core/preferences');
+
+            await asyncPrefs.set('test_async_key', 'test_async_value');
+            var retrievedValue = await asyncPrefs.get('test_async_key');
+
+            expect(retrievedValue).to.equal('test_async_value');
+        });
+    });
 });

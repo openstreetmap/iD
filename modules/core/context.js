@@ -14,7 +14,7 @@ import { localizer } from './localizer';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
-import { prefs, migrateHistoryData } from './preferences';
+import { migrateHistoryData } from './preferences';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect, modeSelectNote } from '../modes';
 import { presetManager } from '../presets';
@@ -567,21 +567,6 @@ export function coreContext() {
 
       // Migrate history data from localStorage to IndexedDB
       migrateHistoryData();
-
-      // Set up preferences sync with OSM API
-      if (_connection) {
-        prefs.setOsmConnection(_connection);
-
-        // Sync preferences when user authentication changes
-        _connection.on('authDone.preferences', () => {
-          prefs.syncWithServer();
-        });
-
-        // Initial sync if already authenticated
-        if (_connection.authenticated && _connection.authenticated()) {
-          prefs.syncWithServer();
-        }
-      }
 
       if (services.maprules && context.initialHashParams.maprules) {
         d3_json(context.initialHashParams.maprules)
