@@ -375,26 +375,25 @@ export function svgLabels(projection, context) {
                 ltr: [15, y, 'start'],
                 rtl: [-15, y, 'end']
             };
-            const isAddr = style.isAddr;
+            const isAddrMarker = style.isAddr && style.geometry !== 'vertex';
 
             var textDirection = localizer.textDirection();
 
             var coord = projection(entity.loc);
             var textPadding = 2;
             var offset = pointOffsets[textDirection];
-            if (isAddr) offset = [0, 1, 'middle'];
+            if (isAddrMarker) offset = [0, 1, 'middle'];
             var p = {
                 height: height,
                 width: width,
                 x: coord[0] + offset[0],
                 y: coord[1] + offset[1],
-                textAnchor: offset[2],
-                isAddr
+                textAnchor: offset[2]
             };
 
             // insert a collision box for the text label..
             let bbox;
-            if (isAddr) {
+            if (isAddrMarker) {
                 bbox = {
                     minX: p.x - (width / 2) - textPadding,
                     minY: p.y - (height / 2) - textPadding,

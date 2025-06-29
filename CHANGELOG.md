@@ -41,16 +41,19 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render housenumbers (or housenames) of address points or buildings as dedicated labels on the map ([#10970])
 * Simplify raw tag editor and make it easier to use with keyboard-only input ([#10889])
 * Show info message when a keyboard shortcut of an _operation_ is pressed, but the operation is not _available_ for the selected features ([#9896])
-* Handle `key=left|right|both` in the `directionalCombo` UI to enable support for `sidewalk=left|right|both` [in the future](#id-tagging-schema/pull/1507) ([#10935], thanks [@tordans], [@k-yle])
+* Handle `<key>=left|right|both` in the `directionalCombo` UI to enable support for `sidewalk=left|right|both` [in the future](#id-tagging-schema/pull/1507) ([#10935], thanks [@tordans], [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 * Fix Mapilio photo markers from showing up on low zoom levels ([#11014], thanks [@keiffer213] and [@haipq07])
 * Fix wrong 360° panorama from being displayed when navigating quickly between photos ([#11054])
 #### :white_check_mark: Validation
+* Hide _KeepRight_ quality assurance overlay, as the service is currently not providing up to date reports of OSM data ([#11098])
 #### :bug: Bugfixes
 * Refresh numeric input fields after leaving focus with the value that is stored in the tag ([#11027])
 * Fix oneway field falsely showing "Assumed to be Yes" if cycled through all options back to the default state
 * Fix false positives in "unreachable oneway" validation when `oneway=-1` tag is present ([#11068])
+* Fix color of oneway arrows on roads that also have a railway tag ([#11080])
+* Allow squaring operation to be performed on all vertices of a closed way ([#11088])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -61,8 +64,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10970]: https://github.com/openstreetmap/iD/pull/10970
 [#11014]: https://github.com/openstreetmap/iD/pull/11014
 [#11027]: https://github.com/openstreetmap/iD/pull/11027
-[#11054]: https://github.com/openstreetmap/iD/issues/1104
+[#11054]: https://github.com/openstreetmap/iD/issues/11054
 [#11068]: https://github.com/openstreetmap/iD/issues/11068
+[#11080]: https://github.com/openstreetmap/iD/issues/11080
+[#11088]: https://github.com/openstreetmap/iD/issues/11088
+[#11098]: https://github.com/openstreetmap/iD/issues/11098
 [#10935]: https://github.com/openstreetmap/iD/issues/10935
 [#id-tagging-schema/pull/1507]: https://github.com/openstreetmap/id-tagging-schema/pull/1507
 [@keiffer213]: https://github.com/keiffer213
