@@ -2,6 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
 import { osmEntity, osmIsInterestingTag, osmLifecyclePrefixes } from '../osm';
+import { osmLanduseAmenityTagValues } from '../osm/tags.js';
 import { utilRebind } from '../util/rebind';
 import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
 
@@ -153,7 +154,7 @@ export function rendererFeatures(context) {
             !!tags.landuse ||
             !!tags.natural ||
             !!tags.leisure ||
-            !!tags.amenity
+            (tags.amenity && osmLanduseAmenityTagValues[tags.amenity])
         ) &&
             !_rules.buildings.filter(tags) &&
             !_rules.building_parts.filter(tags) &&
