@@ -108,7 +108,7 @@ export function uiFieldText(field, context) {
         if (field.type === 'tel') {
             updatePhonePlaceholder();
 
-        } else if (field.type === 'number') {
+        } else if (field.type === 'number' || field.type === 'integer') {
             var rtl = (localizer.textDirection() === 'rtl');
 
             input.attr('type', 'text');
@@ -415,7 +415,7 @@ export function uiFieldText(field, context) {
             if (!val && getVals(_tags).size > 1) return;
 
             let displayVal = val;
-            if (field.type === 'number' && val) {
+            if ((field.type === 'number' || field.type === 'integer') && val) {
                 const numbers = val.split(';').map(v => {
                     if (likelyRawNumberFormat.test(v)) {
                         // input number likely in "raw" format
@@ -480,7 +480,7 @@ export function uiFieldText(field, context) {
         var val = vals.size === 1 ? [...vals][0] ?? '' : '';
         var shouldUpdate;
 
-        if (field.type === 'number' && val) {
+        if ((field.type === 'number' || field.type === 'integer') && val) {
             var numbers = val.split(';');
             var oriNumbers = utilGetSetValue(input).split(';');
             if (numbers.length !== oriNumbers.length) shouldUpdate = true;
@@ -522,7 +522,7 @@ export function uiFieldText(field, context) {
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
             .classed('mixed', isMixed);
 
-        if (field.type === 'number') {
+        if (field.type === 'number' || field.type === 'integer') {
             const buttons = wrap.selectAll('.increment, .decrement');
             if (isMixed) {
                 buttons.attr('disabled', 'disabled').classed('disabled', true);
