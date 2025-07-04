@@ -10,11 +10,11 @@ describe('iD.osmEntity', function () {
 
     if (iD.debug) {
         it('is frozen', function () {
-            expect(Object.isFrozen(iD.osmEntity())).to.be.true;
+            expect(Object.isFrozen(iD.osmEntity({type: 'node'}))).to.be.true;
         });
 
         it('freezes tags', function () {
-            expect(Object.isFrozen(iD.osmEntity().tags)).to.be.true;
+            expect(Object.isFrozen(iD.osmEntity({type: 'node'}).tags)).to.be.true;
         });
     }
 
@@ -85,7 +85,7 @@ describe('iD.osmEntity', function () {
 
     describe('#update', function () {
         it('returns a new Entity', function () {
-            var a = iD.osmEntity();
+            var a = iD.osmEntity({type: 'node'});
             var b = a.update({});
             expect(b instanceof iD.osmEntity).to.be.true;
             expect(a).not.to.equal(b);
@@ -93,7 +93,7 @@ describe('iD.osmEntity', function () {
 
         it('updates the specified attributes', function () {
             var tags = {foo: 'bar'};
-            var e = iD.osmEntity().update({tags: tags});
+            var e = iD.osmEntity({type: 'node'}).update({tags: tags});
             expect(e.tags).to.equal(tags);
         });
 
@@ -104,66 +104,66 @@ describe('iD.osmEntity', function () {
 
         it('doesn\'t modify the input', function () {
             var attrs = {tags: {foo: 'bar'}};
-            iD.osmEntity().update(attrs);
+            iD.osmEntity({type: 'node'}).update(attrs);
             expect(attrs).to.eql({tags: {foo: 'bar'}});
         });
 
         it('doesn\'t copy prototype properties', function () {
-            expect(iD.osmEntity().update({})).not.to.have.ownProperty('update');
+            expect(iD.osmEntity({type: 'node'}).update({})).not.to.have.ownProperty('update');
         });
 
         it('sets v to 1 if previously undefined', function() {
-            expect(iD.osmEntity().update({}).v).to.equal(1);
+            expect(iD.osmEntity({type: 'node'}).update({}).v).to.equal(1);
         });
 
         it('increments v', function() {
-            expect(iD.osmEntity({v: 1}).update({}).v).to.equal(2);
+            expect(iD.osmEntity({type: 'node',v: 1}).update({}).v).to.equal(2);
         });
     });
 
     describe('#mergeTags', function () {
         it('returns self if unchanged', function () {
-            var a = iD.osmEntity({tags: {a: 'a'}});
+            var a = iD.osmEntity({type: 'node',tags: {a: 'a'}});
             var b = a.mergeTags({a: 'a'});
             expect(a).to.equal(b);
         });
 
         it('returns a new Entity if changed', function () {
-            var a = iD.osmEntity({tags: {a: 'a'}});
+            var a = iD.osmEntity({type: 'node',tags: {a: 'a'}});
             var b = a.mergeTags({a: 'b'});
             expect(b instanceof iD.osmEntity).to.be.true;
             expect(a).not.to.equal(b);
         });
 
         it('merges tags', function () {
-            var a = iD.osmEntity({tags: {a: 'a'}});
+            var a = iD.osmEntity({type: 'node',tags: {a: 'a'}});
             var b = a.mergeTags({b: 'b'});
             expect(b.tags).to.eql({a: 'a', b: 'b'});
         });
 
         it('combines non-conflicting tags', function () {
-            var a = iD.osmEntity({tags: {a: 'a'}});
+            var a = iD.osmEntity({type: 'node',tags: {a: 'a'}});
             var b = a.mergeTags({a: 'a'});
             expect(b.tags).to.eql({a: 'a'});
         });
 
         it('combines conflicting tags with semicolons', function () {
-            var a = iD.osmEntity({tags: {a: 'a'}});
+            var a = iD.osmEntity({type: 'node',tags: {a: 'a'}});
             var b = a.mergeTags({a: 'b'});
             expect(b.tags).to.eql({a: 'a;b'});
         });
 
         it('combines combined tags', function () {
-            var a = iD.osmEntity({tags: {a: 'a;b'}});
-            var b = iD.osmEntity({tags: {a: 'b'}});
+            var a = iD.osmEntity({type: 'node',tags: {a: 'a;b'}});
+            var b = iD.osmEntity({type: 'node',tags: {a: 'b'}});
 
             expect(a.mergeTags(b.tags).tags).to.eql({a: 'a;b'});
             expect(b.mergeTags(a.tags).tags).to.eql({a: 'b;a'});
         });
 
         it('combines combined tags with whitespace', function () {
-            var a = iD.osmEntity({tags: {a: 'a; b'}});
-            var b = iD.osmEntity({tags: {a: 'b'}});
+            var a = iD.osmEntity({type: 'node',tags: {a: 'a; b'}});
+            var b = iD.osmEntity({type: 'node',tags: {a: 'b'}});
 
             expect(a.mergeTags(b.tags).tags).to.eql({a: 'a;b'});
             expect(b.mergeTags(a.tags).tags).to.eql({a: 'b;a'});
@@ -237,25 +237,27 @@ describe('iD.osmEntity', function () {
 
     describe('#hasInterestingTags', function () {
         it('returns false if the entity has no tags', function () {
-            expect(iD.osmEntity().hasInterestingTags()).to.equal(false);
+            expect(iD.osmEntity({ type: 'node' }).hasInterestingTags()).to.equal(false);
         });
 
         it('returns true if the entity has tags other than \'attribution\', \'created_by\', \'source\', \'odbl\' and tiger tags', function () {
-            expect(iD.osmEntity({tags: {foo: 'bar'}}).hasInterestingTags()).to.equal(true);
+            expect(iD.osmEntity({type: 'node',tags: {foo: 'bar'}}).hasInterestingTags()).to.equal(true);
         });
 
         it('return false if the entity has only uninteresting tags', function () {
-            expect(iD.osmEntity({tags: {source: 'Bing'}}).hasInterestingTags()).to.equal(false);
+            expect(iD.osmEntity({type: 'node',tags: {source: 'Bing'}}).hasInterestingTags()).to.equal(false);
         });
 
         it('return false if the entity has only tiger tags', function () {
-            expect(iD.osmEntity({tags: {'tiger:source': 'blah', 'tiger:foo': 'bar'}}).hasInterestingTags()).to.equal(false);
+            expect(iD.osmEntity({type: 'node',tags: {'tiger:source': 'blah', 'tiger:foo': 'bar'}}).hasInterestingTags()).to.equal(false);
         });
     });
 
     describe('#isDegenerate', function () {
         it('returns true', function () {
-            expect(iD.osmEntity().isDegenerate()).to.be.true;
+            expect(iD.osmEntity({ type: 'node' }).isDegenerate()).to.be.true;
+            expect(iD.osmEntity({ type: 'way' }).isDegenerate()).to.be.true;
+            expect(iD.osmEntity({ type: 'relation' }).isDegenerate()).to.be.true;
         });
     });
 
