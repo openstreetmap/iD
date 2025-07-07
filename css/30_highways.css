@@ -651,7 +651,7 @@ path.line.stroke.tag-highway-via_ferrata {
 }
 
 path.line.casing.tag-highway-via_ferrata {
-    stroke: #b22;
+    stroke: #6f1f1f;
     stroke-linecap: round;
     stroke-dasharray: 1, 9;
 }

@@ -115,7 +115,7 @@ path.line.casing.tag-piste {
 
 /* climbing routes */
 path.line.stroke.tag-climbing-route {
-    stroke: #b22;
+    stroke: #6f1f1f;
     stroke-linecap: round;
     stroke-dasharray: 0, 7;
     stroke-width: 3;
