@@ -213,7 +213,7 @@ switch to the development database.
 Translations are managed using the
 [Transifex](https://app.transifex.com/openstreetmap/id-editor/) platform. After
 signing up, you can go to [iD's project
-page](https://app.transifex.com/openstreetmap/id-editor/), select a language and
+page](https://app.transifex.com/openstreetmap/id-editor/) and
 click **Translate** to start translating. Translations are divided into
 separate resources:
 
