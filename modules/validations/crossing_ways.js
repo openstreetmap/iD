@@ -4,6 +4,7 @@ import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionSplit } from '../actions/split';
+import { operationDelete } from '../operations/delete';
 import { modeSelect } from '../modes/select';
 import { geoAngle, geoExtent, geoLatToMeters, geoLonToMeters, geoLineIntersection,
     geoSphericalClosestNode, geoSphericalDistance, geoVecAngle, geoVecLength, geoMetersToLat, geoMetersToLon } from '../geo';
@@ -74,6 +75,8 @@ export function validationCrossingWays(context) {
         if (hasTag(tags, 'railway') && osmRailwayTrackTagValues[tags.railway]) return 'railway';
         if (hasTag(tags, 'waterway') && osmFlowingWaterwayTagValues[tags.waterway]) return 'waterway';
 
+        if (hasTag(tags, 'power') && tags.power === 'line') return 'power';
+
         return null;
     }
 
@@ -113,6 +116,7 @@ export function validationCrossingWays(context) {
         if (featureType1 === 'waterway' && featureType2 === 'highway' && tags2.man_made === 'pier') return true;
         if (featureType2 === 'waterway' && featureType1 === 'highway' && tags1.man_made === 'pier') return true;
 
+        if (featureType1 === 'power' && featureType2 === 'power') return true;
         if (featureType1 === 'building' || featureType2 === 'building' ||
             taggedAsIndoor(tags1) || taggedAsIndoor(tags2)) {
             // for building crossings, different layers are enough
@@ -253,15 +257,15 @@ export function validationCrossingWays(context) {
         // declare vars ahead of time to reduce garbage collection
         var i, j;
         var extent;
-        var n1, n2, nA, nB, nAId, nBId;
+        var nA, nB, nAId, nBId, intersectingNode;
         var segment1, segment2;
         var oneOnly;
         var segmentInfos, segment2Info, way2, taggedFeature2, way2FeatureType;
         var way1Nodes = graph.childNodes(way1);
         var comparedWays = {};
         for (i = 0; i < way1Nodes.length - 1; i++) {
-            n1 = way1Nodes[i];
-            n2 = way1Nodes[i + 1];
+            let n1 = way1Nodes[i];
+            let n2 = way1Nodes[i + 1];
             extent = geoExtent([
                 [
                     Math.min(n1.loc[0], n2.loc[0]),
@@ -305,10 +309,18 @@ export function validationCrossingWays(context) {
 
                 nAId = segment2Info.nodes[0];
                 nBId = segment2Info.nodes[1];
-                if (nAId === n1.id || nAId === n2.id ||
-                    nBId === n1.id || nBId === n2.id) {
-                    // n1 or n2 is a connection node; skip
-                    continue;
+                intersectingNode = null;
+                const hasConnectionNode = (nAId === n1.id || nAId === n2.id || nBId === n1.id || nBId === n2.id);
+                if (way1FeatureType === 'power' || way2FeatureType === 'power') {
+                    if (!hasConnectionNode) {
+                        continue;
+                    } else {
+                        intersectingNode = [nAId, nBId].find(id => id === n1.id || id === n2.id);
+                    }
+                } else {
+                    if (hasConnectionNode) {
+                        continue;
+                    }
                 }
                 nA = graph.hasEntity(nAId);
                 if (!nA) continue;
@@ -332,7 +344,8 @@ export function validationCrossingWays(context) {
                                 edge: [nA.id, nB.id]
                             }
                         ],
-                        crossPoint: point
+                        crossPoint: point,
+                        crossNode: intersectingNode
                     });
                     if (oneOnly) {
                         checkedSingleCrossingWays[way2.id] = true;
@@ -419,6 +432,7 @@ export function validationCrossingWays(context) {
                                 allowsTunnel(featureType2) && hasTag(entities[1].tags, 'tunnel');
         var isCrossingBridges = allowsBridge(featureType1) && hasTag(entities[0].tags, 'bridge') &&
                                 allowsBridge(featureType2) && hasTag(entities[1].tags, 'bridge');
+        var isCrossingPower = hasTag(entities[0].tags, 'power') || hasTag(entities[1].tags, 'power');
 
         var subtype = [featureType1, featureType2].sort().join('-');
 
@@ -430,6 +444,8 @@ export function validationCrossingWays(context) {
             crossingTypeID = 'tunnel-tunnel';
         } else if (isCrossingBridges) {
             crossingTypeID = 'bridge-bridge';
+        } else if (isCrossingPower) {
+            crossingTypeID = 'power-other';
         }
         if (connectionTags && (isCrossingIndoors || isCrossingTunnels || isCrossingBridges)) {
             crossingTypeID += '_connectable';
@@ -458,6 +474,7 @@ export function validationCrossingWays(context) {
             data: {
                 edges: edges,
                 featureTypes: featureTypes,
+                crossingNode: crossing.crossNode,
                 connectionTags: connectionTags
             },
             hash: uniqueID,
@@ -484,6 +501,18 @@ export function validationCrossingWays(context) {
                     fixes.push(new validationIssueFix({
                         icon: 'iD-icon-layers',
                         title: t.append('issues.fix.use_different_levels.title')
+                    }));
+                } else if (isCrossingPower) {
+                    fixes.push(new validationIssueFix({
+                        icon: 'iD-operation-delete',
+                        title: t.append('issues.fix.delete_connecting_node.title'),
+                        entityIds: [this.data.crossingNode],
+                        onClick: function(context) {
+                            var operation = operationDelete(context, [this.issue.data.crossingNode]);
+                            if (!operation.disabled()) {
+                                operation();
+                            }
+                        }
                     }));
                 } else if (isCrossingTunnels ||
                     isCrossingBridges ||

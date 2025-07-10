@@ -1832,6 +1832,8 @@ en:
         reference: "Crossing indoor features should use different levels."
       indoor-indoor_connectable:
         reference: "Crossing indoor features should be connected or use different levels."
+      power-other:
+        reference: "Power lines should not be connected to other features."
     disconnected_way:
       title: Disconnected Ways
       tip: "Find unroutable roads, paths, and ferry routes"
@@ -2007,6 +2009,8 @@ en:
         annotation: Converted an area to a line.
       delete_feature:
         title: Delete this feature
+      delete_connecting_node:
+        title: Delete the connecting node
       extract_point:
         title: Extract this point
       ignore_issue:
