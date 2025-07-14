@@ -35,6 +35,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+
+# v2.35.1
+##### 2025-07-14
+
+* Fix rendering of line labels that were sometimes cut off at the ends, regression introduced in v2.35.0 ([#11123])
+
+[#11123]: https://github.com/openstreetmap/iD/issues/11123
+
+
 # v2.35.0
 ##### 2025-07-14
 

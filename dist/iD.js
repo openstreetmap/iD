@@ -58320,6 +58320,7 @@ Please report this to https://github.com/markedjs/marked.`, e3) {
     }
     const elem = document.createElementNS("http://www.w3.org/2000/svg", "text");
     elem.style.fontSize = `${size}px`;
+    elem.style.fontWeight = "bold";
     elem.textContent = text;
     container.appendChild(elem);
     c2[text] = elem.getComputedTextLength();
