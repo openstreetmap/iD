@@ -243,6 +243,10 @@ export function uiSectionRawTagEditor(id, context) {
 
         items.selectAll('input.key')
             .attr('title', function(d) { return d.key; })
+	    .attr('placeholder', function(d) {
+                // Show placeholder only for the blank row
+                return d.key === '' ? 'Add key' : null;
+            })
             .attr('readonly', function(d) {
                 return isReadOnly(d) || null;
             })
