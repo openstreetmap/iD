@@ -62,26 +62,60 @@ export function validationMissingTag(context) {
         }
 
         // flag an unknown road even if it's a member of a relation
-        if (!subtype && isUnknownRoad(entity)) {
-            subtype = 'highway_classification';
+        if (!subtype) {
+            if (isUnknownRoad(entity)) {
+                subtype = 'highway_classification';
+            }
         }
 
         if (!subtype) return [];
 
-        var messageID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag.' + subtype;
-        var referenceID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag';
-
         // can always delete if the user created it in the first place..
-        var canDelete = (entity.version === undefined || entity.v !== undefined);
-        var severity = (canDelete && subtype !== 'highway_classification') ? 'error' : 'warning';
+        var userCreatedEntity = (entity.version === undefined || entity.v !== undefined);
+
+        // If tags are missing, display a warning with a dynamic fix offering to select a
+        // (new) preset.
+        let messageID = `issues.missing_tag.${subtype}.message`;
+        let referenceID = 'issues.missing_tag.reference';
+        let mainFixLabel = 'issues.fix.select_preset.title';
+        let mainFixAction = function(context) {
+            context.ui().sidebar.showPresetList();
+        };
+        let mainFixIcon = 'iD-icon-search';
+        let severity = 'warning';
+        // Whether the warning should contain a fix that will (attempt) to delete
+        // the entity with missing tags.
+        let offerDeletionFix = true;
+
+        switch (subtype) {
+            // An entity lacks tags to make it relevant, for example:
+            // - no tags at all (and not a way in a relation or a node in a way)
+            // - a node without tags that is not part of a way)
+            // - a relation without a type=... tag
+            case 'any':
+            case 'descriptive':
+            case 'relation_type':
+                if (userCreatedEntity) {
+                    severity = 'error';
+                }
+                break;
+            // A way tagged as highway=road (a more precise highway value should be
+            // used).
+            case 'highway_classification':
+                messageID = 'issues.unknown_road.message';
+                referenceID = 'issues.unknown_road.reference';
+                mainFixLabel = 'issues.fix.select_road_type.title';
+                break;
+        }
 
         return [new validationIssue({
             type: type,
             subtype: subtype,
             severity: severity,
+            // depends on messageID, t (localizer)
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t.append('issues.' + messageID + '.message', {
+                return entity ? t.append(messageID, {
                     feature: utilDisplayLabel(entity, context.graph())
                 }) : '';
             },
@@ -91,40 +125,36 @@ export function validationMissingTag(context) {
 
                 var fixes = [];
 
-                var selectFixType = subtype === 'highway_classification' ? 'select_road_type' : 'select_preset';
-
                 fixes.push(new validationIssueFix({
-                    icon: 'iD-icon-search',
-                    title: t.append('issues.fix.' + selectFixType + '.title'),
-                    onClick: function(context) {
-                        context.ui().sidebar.showPresetList();
-                    }
+                    icon: mainFixIcon,
+                    title: t.append(mainFixLabel),
+                    onClick: mainFixAction
                 }));
 
-                var deleteOnClick;
+                if (offerDeletionFix) {
+                    var deleteOnClick;
+                    var id = this.entityIds[0];
+                    var operation = operationDelete(context, [id]);
+                    var disabledReasonID = operation.disabled();
+                    if (!disabledReasonID) {
+                        deleteOnClick = function(context) {
+                            var id = this.issue.entityIds[0];
+                            var operation = operationDelete(context, [id]);
+                            if (!operation.disabled()) {
+                                operation();
+                            }
+                        };
+                    }
 
-                var id = this.entityIds[0];
-                var operation = operationDelete(context, [id]);
-                var disabledReasonID = operation.disabled();
-                if (!disabledReasonID) {
-                    deleteOnClick = function(context) {
-                        var id = this.issue.entityIds[0];
-                        var operation = operationDelete(context, [id]);
-                        if (!operation.disabled()) {
-                            operation();
-                        }
-                    };
+                    fixes.push(
+                        new validationIssueFix({
+                            icon: 'iD-operation-delete',
+                            title: t.append('issues.fix.delete_feature.title'),
+                            disabledReason: disabledReasonID ? t('operations.delete.' + disabledReasonID + '.single') : undefined,
+                            onClick: deleteOnClick
+                        })
+                    );
                 }
-
-                fixes.push(
-                    new validationIssueFix({
-                        icon: 'iD-operation-delete',
-                        title: t.append('issues.fix.delete_feature.title'),
-                        disabledReason: disabledReasonID ? t('operations.delete.' + disabledReasonID + '.single') : undefined,
-                        onClick: deleteOnClick
-                    })
-                );
-
                 return fixes;
             }
         })];
@@ -135,7 +165,7 @@ export function validationMissingTag(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .call(t.append('issues.' + referenceID + '.reference'));
+                .call(t.append(referenceID));
         }
     };
 
