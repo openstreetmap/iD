@@ -1,3 +1,4 @@
+import { actionChangeTags } from '../actions/change_tags';
 import { operationDelete } from '../operations/delete';
 import { osmIsInterestingTag } from '../osm/tags';
 import { t } from '../core/localizer';
@@ -34,6 +35,19 @@ export function validationMissingTag(context) {
         return entity.type === 'way' && entity.tags.highway === 'road';
     }
 
+    // There was a highway=<road_type> tag that was changed to highway=construction without
+    // adding a construction=<road_type> tag.
+    function hadRoadTypeChangedToConstruction(context, entity) {
+        let origGraph = context.history().base();
+        if (!origGraph.hasEntity(entity.id)) {
+            return false;
+        }
+        const origTags = origGraph.entity(entity.id).tags;
+        const wasKnownType = 'highway' in origTags && origTags.highway !== 'road' && origTags.highway !== 'construction';
+        const isUnknownType = entity.tags.highway === 'construction' && !('construction' in entity.tags);
+        return entity.type === 'way' && wasKnownType && isUnknownType;
+    }
+
     function isUntypedRelation(entity) {
         return entity.type === 'relation' && !entity.tags.type;
     }
@@ -65,6 +79,8 @@ export function validationMissingTag(context) {
         if (!subtype) {
             if (isUnknownRoad(entity)) {
                 subtype = 'highway_classification';
+            } else if (hadRoadTypeChangedToConstruction(context, entity)) {
+                subtype = 'highway_classification_construction';
             }
         }
 
@@ -106,13 +122,32 @@ export function validationMissingTag(context) {
                 referenceID = 'issues.unknown_road.reference';
                 mainFixLabel = 'issues.fix.select_road_type.title';
                 break;
+            // A way had a highway!=road tag, but it was changed to highway=construction
+            // without a a construction=... tag.
+            case 'highway_classification_construction':
+                messageID = 'issues.unknown_road.message';
+                referenceID = 'issues.unknown_road.reference';
+                mainFixLabel = 'issues.fix.restore_road_type.title';
+                mainFixIcon = 'iD-icon-undo';
+                offerDeletionFix = false;
+                mainFixAction = function(context) {
+                    // We checked in hadRoadTypeChangedToConstruction() that a highway tag
+                    // did exist before the edit and can thus just collect it here.
+                    const origRoadType = context.history().base().entity(entity.id).tags.highway;
+                    let newTags = Object.assign({}, entity.tags);   // shallow copy
+                    newTags.construction = origRoadType;
+                    context.perform(
+                        actionChangeTags(entity.id, newTags),
+                        t('operations.change_tags.annotation')
+                    );
+                };
+                break;
         }
 
         return [new validationIssue({
             type: type,
             subtype: subtype,
             severity: severity,
-            // depends on messageID, t (localizer)
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append(messageID, {

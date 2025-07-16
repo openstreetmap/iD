@@ -122,4 +122,18 @@ describe('iD.validations.missing_tag', function () {
         expect(issue.entityIds[0]).to.eql('w-1');
     });
 
+    it('ignores highway=construction with construction key', function() {
+        createWay({ highway: 'construction', construction: 'primary' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    // Arguably, this should be a warning in the future, but for now, just updated ways are flagged.
+    it('ignores newly created highway=construction without construction key', function() {
+        createWay({ highway: 'construction' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    // TODO: Add test that updates an existing road and creates a warning
 });
