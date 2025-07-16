@@ -47,7 +47,7 @@ export function modeMove(context, entityIDs, baseGraph) {
 
     var _prevGraph;
     var _cache;
-    var _prevMouse;
+    var _prevMouseCoords;
     var _nudgeInterval;
 
     // use pointer events on supported platforms; fallback to mouse events
@@ -60,15 +60,17 @@ export function modeMove(context, entityIDs, baseGraph) {
         let fn;
         if (_prevGraph !== context.graph()) {
             _cache = {};
-            _prevMouse = context.map().mouse();
+            _prevMouseCoords = context.map().mouseCoordinates();
             fn = context.perform;
         } else {
-            fn = context.overwrite;
+            fn = context.replace;
         }
 
-        const currMouse = context.map().mouse();
-        const delta = geoVecSubtract(geoVecSubtract(currMouse, _prevMouse), nudge);
-        _prevMouse = currMouse;
+        const currMouseCoords = context.map().mouseCoordinates();
+        const currMouse = context.projection(currMouseCoords);
+        const prevMouse = context.projection(_prevMouseCoords);
+        const delta = geoVecSubtract(geoVecSubtract(currMouse, prevMouse), nudge);
+        _prevMouseCoords = currMouseCoords;
 
         fn(actionMove(entityIDs, delta, context.projection, _cache));
         _prevGraph = context.graph();
@@ -129,7 +131,7 @@ export function modeMove(context, entityIDs, baseGraph) {
 
 
     mode.enter = function() {
-        _prevMouse = context.map().mouse();
+        _prevMouseCoords = context.map().mouseCoordinates();
         _prevGraph = null;
         _cache = {};
 

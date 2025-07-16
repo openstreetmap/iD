@@ -15361,7 +15361,7 @@
     "package.json"() {
       package_default = {
         name: "iD",
-        version: "2.35.0",
+        version: "2.35.2",
         description: "A friendly editor for OpenStreetMap",
         main: "dist/iD.min.js",
         repository: "github:openstreetmap/iD",
@@ -31708,12 +31708,12 @@
     }
     function _overwrite(args, t2) {
       var previous = _stack[_index].graph;
-      var actionResult = _act(args, t2);
       if (_index > 0) {
         _index--;
         _stack.pop();
       }
       _stack = _stack.slice(0, _index + 1);
+      var actionResult = _act(args, t2);
       _stack.push(actionResult);
       _index++;
       return change(previous);
@@ -58266,19 +58266,26 @@ Please report this to https://github.com/markedjs/marked.`, e3) {
       var drawLayer = selection2.selectAll(".layer-osm.labels");
       var layers = drawLayer.selectAll(".labels-group.halo, .labels-group.label");
       layers.selectAll(".nolabel").classed("nolabel", false);
-      var mouse = context.map().mouse();
-      var ids = [];
-      var pad3, bbox2;
-      if (mouse && context.mode().id !== "browse" && context.mode().id !== "select") {
-        pad3 = 20;
+      const graph = context.graph();
+      const mouse = context.map().mouse();
+      let bbox2;
+      let hideIds = [];
+      if (mouse && context.mode().id !== "browse") {
+        const pad3 = 20;
         bbox2 = { minX: mouse[0] - pad3, minY: mouse[1] - pad3, maxX: mouse[0] + pad3, maxY: mouse[1] + pad3 };
-        var nearMouse = _rdrawn.search(bbox2).map(function(entity) {
-          return entity.id;
-        });
-        ids.push.apply(ids, nearMouse);
+        const nearMouse = _rdrawn.search(bbox2).map((entity) => entity.id).filter((id2) => context.mode().id !== "select" || // in select mode: hide labels of currently selected line(s)
+        // to still allow accessing midpoints
+        // https://github.com/openstreetmap/iD/issues/11220
+        context.mode().selectedIDs().includes(id2) && graph.hasEntity(id2).geometry(graph) === "line");
+        hideIds.push.apply(hideIds, nearMouse);
+        hideIds = utilArrayUniq(hideIds);
       }
-      ids = utilArrayDifference(ids, ((_b2 = (_a4 = context.mode()) == null ? void 0 : _a4.selectedIDs) == null ? void 0 : _b2.call(_a4)) || []);
-      layers.selectAll(utilEntitySelector(ids)).classed("nolabel", true);
+      const selected = (((_b2 = (_a4 = context.mode()) == null ? void 0 : _a4.selectedIDs) == null ? void 0 : _b2.call(_a4)) || []).filter((id2) => {
+        var _a5;
+        return ((_a5 = graph.hasEntity(id2)) == null ? void 0 : _a5.geometry(graph)) !== "line";
+      });
+      hideIds = utilArrayDifference(hideIds, selected);
+      layers.selectAll(utilEntitySelector(hideIds)).classed("nolabel", true);
       var debug2 = selection2.selectAll(".labels-group.debug");
       var gj = [];
       if (context.getDebug("collision")) {
@@ -74692,7 +74699,7 @@ this.ifd0Offset: ${this.ifd0Offset}, file.byteLength: ${e3.byteLength}`), e3.tif
         };
         var annotation = _t("operations.change_tags.annotation");
         if (_coalesceChanges) {
-          context.overwrite(combinedAction, annotation);
+          context.replace(combinedAction, annotation);
         } else {
           context.perform(combinedAction, annotation);
         }
@@ -74735,7 +74742,7 @@ this.ifd0Offset: ${this.ifd0Offset}, file.byteLength: ${e3.byteLength}`), e3.tif
         };
         var annotation = _t("operations.change_tags.annotation");
         if (_coalesceChanges) {
-          context.overwrite(combinedAction, annotation);
+          context.replace(combinedAction, annotation);
         } else {
           context.perform(combinedAction, annotation);
         }
@@ -82265,7 +82272,7 @@ this.ifd0Offset: ${this.ifd0Offset}, file.byteLength: ${e3.byteLength}`), e3.tif
           return actionChangeTags(entityID, currTags);
         }).filter(Boolean);
         if (!actions.length) return;
-        context.overwrite(
+        context.replace(
           function actionUpdateWikipediaTags(graph) {
             actions.forEach(function(action) {
               graph = action(graph);
@@ -82495,7 +82502,7 @@ this.ifd0Offset: ${this.ifd0Offset}, file.byteLength: ${e3.byteLength}`), e3.tif
           return null;
         }).filter(Boolean);
         if (!actions.length) return;
-        context.overwrite(
+        context.replace(
           function actionUpdateWikidataTags(graph) {
             actions.forEach(function(action) {
               graph = action(graph);
@@ -84427,7 +84434,7 @@ this.ifd0Offset: ${this.ifd0Offset}, file.byteLength: ${e3.byteLength}`), e3.tif
     var annotation = entityIDs.length === 1 ? _t("operations.move.annotation." + context.graph().geometry(entityIDs[0])) : _t("operations.move.annotation.feature", { n: entityIDs.length });
     var _prevGraph;
     var _cache5;
-    var _prevMouse;
+    var _prevMouseCoords;
     var _nudgeInterval;
     var _pointerPrefix = "PointerEvent" in window ? "pointer" : "mouse";
     function doMove(nudge) {
@@ -84435,14 +84442,16 @@ this.ifd0Offset: ${this.ifd0Offset}, file.byteLength: ${e3.byteLength}`), e3.tif
       let fn;
       if (_prevGraph !== context.graph()) {
         _cache5 = {};
-        _prevMouse = context.map().mouse();
+        _prevMouseCoords = context.map().mouseCoordinates();
         fn = context.perform;
       } else {
-        fn = context.overwrite;
+        fn = context.replace;
       }
-      const currMouse = context.map().mouse();
-      const delta = geoVecSubtract(geoVecSubtract(currMouse, _prevMouse), nudge);
-      _prevMouse = currMouse;
+      const currMouseCoords = context.map().mouseCoordinates();
+      const currMouse = context.projection(currMouseCoords);
+      const prevMouse = context.projection(_prevMouseCoords);
+      const delta = geoVecSubtract(geoVecSubtract(currMouse, prevMouse), nudge);
+      _prevMouseCoords = currMouseCoords;
       fn(actionMove(entityIDs, delta, context.projection, _cache5));
       _prevGraph = context.graph();
     }
@@ -84488,7 +84497,7 @@ this.ifd0Offset: ${this.ifd0Offset}, file.byteLength: ${e3.byteLength}`), e3.tif
       context.enter(modeBrowse(context));
     }
     mode.enter = function() {
-      _prevMouse = context.map().mouse();
+      _prevMouseCoords = context.map().mouseCoordinates();
       _prevGraph = null;
       _cache5 = {};
       context.features().forceVisible(entityIDs);
