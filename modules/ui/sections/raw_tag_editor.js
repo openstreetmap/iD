@@ -158,7 +158,7 @@ export function uiSectionRawTagEditor(id, context) {
 
         // Tag list items
         var items = list.selectAll('.tag-row')
-            .data(rowData, function(d) { return d.key; });
+            .data(rowData, d => d.key);
 
         items.exit()
             .each(unbind)
@@ -248,7 +248,7 @@ export function uiSectionRawTagEditor(id, context) {
             })
             .call(utilGetSetValue,
                 d => d.key,
-                (_, newKey) => _pendingChange === null || isEmpty(_pendingChange) || _pendingChange[newKey] // if there are pending changes: skip untouched keys
+                (_, newKey) => _pendingChange === null || isEmpty(_pendingChange) || _pendingChange[newKey] // if there are pending changes: skip untouched tags
             );
 
         items.selectAll('input.value')
@@ -264,15 +264,13 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('readonly', function(d) {
                 return isReadOnly(d) || null;
             })
-            .call(utilGetSetValue,
-                d => {
-                    if (_pendingChange !== null && !isEmpty(_pendingChange) && !_pendingChange[d.value]) {
-                        // if there are pending changes: skip untouched values
-                        return null;
-                    }
-                    return typeof d.value === 'string' ? d.value : '';
-                }, (_, newValue) => newValue !== null
-            );
+            .call(utilGetSetValue, d => {
+                if (_pendingChange !== null && !isEmpty(_pendingChange) && !_pendingChange[d.key]) {
+                    // if there are pending changes: skip untouched tags
+                    return null;
+                }
+                return typeof d.value === 'string' ? d.value : '';
+            });
 
         items.selectAll('button.remove')
             .classed('disabled', d => d.key === '')  // disabled for blank tag line
@@ -472,7 +470,8 @@ export function uiSectionRawTagEditor(id, context) {
     }
 
     function keyChange(d3_event, d) {
-        if (d3_select(this).attr('readonly')) return;
+        const input = d3_select(this);
+        if (input.attr('readonly')) return;
 
         var kOld = d.key;
 
@@ -485,6 +484,10 @@ export function uiSectionRawTagEditor(id, context) {
         if (isReadOnly({ key: kNew })) {
             this.value = kOld;
             return;
+        }
+
+        if (kNew !== this.value) {
+            utilGetSetValue(input, kNew);
         }
 
         if (kNew &&
@@ -542,7 +545,12 @@ export function uiSectionRawTagEditor(id, context) {
 
         _pendingChange = _pendingChange || {};
 
-        _pendingChange[d.key] = context.cleanTagValue(this.value);
+        const vNew = context.cleanTagValue(this.value);
+        if (vNew !== this.value) {
+            utilGetSetValue(d3_select(this), vNew);
+        }
+
+        _pendingChange[d.key] = vNew;
         scheduleChange();
     }
 

@@ -522,7 +522,6 @@ export function coreContext() {
       context.perform = withDebouncedSave(_history.perform);
       context.replace = withDebouncedSave(_history.replace);
       context.pop = withDebouncedSave(_history.pop);
-      context.overwrite = withDebouncedSave(_history.overwrite);
       context.undo = withDebouncedSave(_history.undo);
       context.redo = withDebouncedSave(_history.redo);
 
