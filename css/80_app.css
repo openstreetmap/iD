@@ -4382,8 +4382,8 @@ img.tile {
     transition: opacity 1ms linear;
 }
 
-.layer-background img.tile,
-.map-in-map-background img.tile {
+.layer-background,
+.map-in-map-background {
     filter: url(#alpha-slope5);
 }
 
