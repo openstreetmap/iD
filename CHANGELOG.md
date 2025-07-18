@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # unreleased (v2.36.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* The flip operation now works on nodes with no `direction` tag, to support quickly adding `direction` to features like traffic signs ([#9317], thanks [@k-yle])
 * Show "add new key" placeholder text for blank row in raw tag editor ([#11211], thanks [@bhavyaKhatri2703])
 #### :scissors: Operations
 #### :camera: Street-Level
@@ -47,13 +48,30 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Immediately update raw tag key/value inputs when spaces have been trimmed ([#11206])
 #### :earth_asia: Localization
 #### :hourglass: Performance
+#### :rocket: Presets
+* Support more complex logic to define preset fields that are conditionally hidden ([#9511], thanks [@k-yle])
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 
+[#9317]: https://github.com/openstreetmap/iD/issues/9317
+[#9511]: https://github.com/openstreetmap/iD/pull/9511
 [#9754]: https://github.com/openstreetmap/iD/issues/9754
 [#11206]: https://github.com/openstreetmap/iD/issues/11206
 [#11211]: https://github.com/openstreetmap/iD/issues/11211
 [@bhavyaKhatri2703]: https://github.com/bhavyaKhatri2703
+
+
+# v2.35.2
+##### 2025-07-18
+
+#### :bug: Bugfixes
+* Restore behavior of _reflect_ and _circularize_ operations, as well as fixing minor glitches in some other actions with transitions ([#11213])
+* Fix glitch while dragging the map during a _move_ operation ([#11217])
+* Show midpoints of selected ways when mouse is nearby ([#11220])
+
+[#11213]: https://github.com/openstreetmap/iD/issues/11213
+[#11217]: https://github.com/openstreetmap/iD/issues/11217
+[#11220]: https://github.com/openstreetmap/iD/issues/11220
 
 
 # v2.35.1

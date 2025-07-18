@@ -11,7 +11,7 @@ import {
 import { presetManager } from '../presets';
 import { osmEntity, osmIsInterestingTag } from '../osm';
 import { utilDetect } from '../util/detect';
-import { utilArrayDifference, utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
+import { utilArrayDifference, utilArrayUniq, utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
 
 
 
@@ -692,20 +692,33 @@ export function svgLabels(projection, context) {
         layers.selectAll('.nolabel')
             .classed('nolabel', false);
 
-        var mouse = context.map().mouse();
-        var ids = [];
-        var pad, bbox;
+        const graph = context.graph();
+        const mouse = context.map().mouse();
+        let bbox;
+        let hideIds = [];
 
         // hide labels near the mouse
-        if (mouse && context.mode().id !== 'browse' && context.mode().id !== 'select') {
-            pad = 20;
+        if (mouse && context.mode().id !== 'browse') {
+            const pad = 20;
             bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad };
-            var nearMouse = _rdrawn.search(bbox).map(function(entity) { return entity.id; });
-            ids.push.apply(ids, nearMouse);
+            const nearMouse = _rdrawn.search(bbox)
+                .map(entity => entity.id)
+                .filter(id =>
+                    context.mode().id !== 'select' ||
+                    // in select mode: hide labels of currently selected line(s)
+                    // to still allow accessing midpoints
+                    // https://github.com/openstreetmap/iD/issues/11220
+                    context.mode().selectedIDs().includes(id) && graph.hasEntity(id).geometry(graph) === 'line');
+            hideIds.push.apply(hideIds, nearMouse);
+            hideIds = utilArrayUniq(hideIds);
         }
-        ids = utilArrayDifference(ids, context.mode()?.selectedIDs?.() || []);
 
-        layers.selectAll(utilEntitySelector(ids))
+        // don't hide label of currently selected entity while in e.g. drag mode
+        const selected = (context.mode()?.selectedIDs?.() || [])
+            .filter(id => graph.hasEntity(id)?.geometry(graph) !== 'line');
+        hideIds = utilArrayDifference(hideIds, selected);
+
+        layers.selectAll(utilEntitySelector(hideIds))
             .classed('nolabel', true);
 
 

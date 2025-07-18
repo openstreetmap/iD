@@ -246,7 +246,7 @@ export function uiFieldWikipedia(field, context) {
       if (!actions.length) return;
 
       // Coalesce the update of wikidata tag into the previous tag change
-      context.overwrite(
+      context.replace(
         function actionUpdateWikidataTags(graph) {
           actions.forEach(function(action) {
             graph = action(graph);
