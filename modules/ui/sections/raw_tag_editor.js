@@ -245,7 +245,7 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('title', function(d) { return d.key; })
 	    .attr('placeholder', function(d) {
                 // Show placeholder only for the blank row
-                return d.key === '' ? 'Add key' : null;
+                return d.key === '' ? t('inspector.add_tag') : null;
             })
             .attr('readonly', function(d) {
                 return isReadOnly(d) || null;

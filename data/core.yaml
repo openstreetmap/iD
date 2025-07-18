@@ -715,6 +715,7 @@ en:
     features: Features
     title_count: "{title} ({count})"
     add_to_relation: Add to a relation
+    add_tag: Add new tag
     new_relation: New relation...
     choose_relation: Choose a parent relation
     role: Role
