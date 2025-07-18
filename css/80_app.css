@@ -2954,6 +2954,10 @@ img.tag-reference-wiki-image {
 .add-tag {
     border-radius: 0 0 4px 4px;
 }
+.add-tag input.key {
+    border-bottom-left-radius: 4px;
+    font-weight: normal;
+}
 .add-relation {
     margin-top: 10px;
     border-radius: 4px;
