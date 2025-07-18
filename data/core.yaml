@@ -1828,12 +1828,14 @@ en:
         reference: "Crossing bridges should use different layers."
       bridge-bridge_connectable:
         reference: "Crossing bridges should be connected or use different layers."
+      building-power_connectable:
+        reference: "Power line that enters into a building should be connected using a power terminal."
       indoor-indoor:
         reference: "Crossing indoor features should use different levels."
       indoor-indoor_connectable:
         reference: "Crossing indoor features should be connected or use different levels."
       power-other:
-        reference: "Power lines should not be connected to other features."
+        reference: "Only connect power lines to features that are physically connected in the real world."
     disconnected_way:
       title: Disconnected Ways
       tip: "Find unroutable roads, paths, and ferry routes"
@@ -2000,6 +2002,8 @@ en:
         title: Connect using a crossing
       connect_using_ford:
         title: Connect using a ford
+      connect_using_power_terminal:
+        title: Connect using a power terminal
       continue_from_start:
         title: Continue drawing from start
       continue_from_end:
@@ -2009,8 +2013,8 @@ en:
         annotation: Converted an area to a line.
       delete_feature:
         title: Delete this feature
-      delete_connecting_node:
-        title: Delete the connecting node
+      disconnect_feature:
+        title: Disconnect the feature
       extract_point:
         title: Extract this point
       ignore_issue:

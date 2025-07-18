@@ -4,16 +4,15 @@ import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionSplit } from '../actions/split';
-import { operationDelete } from '../operations/delete';
+import { operationDisconnect } from '../operations/disconnect';
 import { modeSelect } from '../modes/select';
 import { geoAngle, geoExtent, geoLatToMeters, geoLonToMeters, geoLineIntersection,
     geoSphericalClosestNode, geoSphericalDistance, geoVecAngle, geoVecLength, geoMetersToLat, geoMetersToLon } from '../geo';
 import { osmNode } from '../osm/node';
-import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmRoutableAerowayTags, osmRoutableHighwayTagValues } from '../osm/tags';
+import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmPowerTagValues, osmRoutableAerowayTags, osmRoutableHighwayTagValues } from '../osm/tags';
 import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
-
 
 export function validationCrossingWays(context) {
     var type = 'crossing_ways';
@@ -75,7 +74,7 @@ export function validationCrossingWays(context) {
         if (hasTag(tags, 'railway') && osmRailwayTrackTagValues[tags.railway]) return 'railway';
         if (hasTag(tags, 'waterway') && osmFlowingWaterwayTagValues[tags.waterway]) return 'waterway';
 
-        if (hasTag(tags, 'power') && tags.power === 'line') return 'power';
+        if (hasTag(tags, 'power') && osmPowerTagValues[tags.power]) return 'power';
 
         return null;
     }
@@ -160,6 +159,10 @@ export function validationCrossingWays(context) {
 
         if (featureTypes === 'aeroway-railway') {
             return { aeroway: 'aircraft_crossing', railway: 'level_crossing' };
+        }
+
+        if (featureTypes === 'building-power') {
+            return { power: 'terminal' };
         }
 
         if (featureTypes === 'aeroway-waterway') return null;
@@ -316,6 +319,10 @@ export function validationCrossingWays(context) {
                         continue;
                     } else {
                         intersectingNode = [nAId, nBId].find(id => id === n1.id || id === n2.id);
+                        let intersectingNodeEntity = graph.entity(intersectingNode);
+                        if (intersectingNodeEntity.tags.power === 'terminal') {
+                            continue;
+                        }
                     }
                 } else {
                     if (hasConnectionNode) {
@@ -444,10 +451,10 @@ export function validationCrossingWays(context) {
             crossingTypeID = 'tunnel-tunnel';
         } else if (isCrossingBridges) {
             crossingTypeID = 'bridge-bridge';
-        } else if (isCrossingPower) {
+        } else if (isCrossingPower && subtype !== 'building-power') {
             crossingTypeID = 'power-other';
         }
-        if (connectionTags && (isCrossingIndoors || isCrossingTunnels || isCrossingBridges)) {
+        if (connectionTags && (isCrossingIndoors || isCrossingTunnels || isCrossingBridges || isCrossingPower)) {
             crossingTypeID += '_connectable';
         }
 
@@ -505,10 +512,14 @@ export function validationCrossingWays(context) {
                 } else if (isCrossingPower) {
                     fixes.push(new validationIssueFix({
                         icon: 'iD-operation-delete',
-                        title: t.append('issues.fix.delete_connecting_node.title'),
+                        title: t.append('issues.fix.disconnect_feature.title'),
                         entityIds: [this.data.crossingNode],
                         onClick: function(context) {
-                            var operation = operationDelete(context, [this.issue.data.crossingNode]);
+                            var graph = context.graph();
+                            var entity1 = graph.entity(this.issue.entityIds[0]);
+                            var entity2 = graph.entity(this.issue.entityIds[1]);
+                            var powerEntity = hasTag(entity1.tags, 'power') ? entity1 : hasTag(entity2.tags, 'power') ? entity2 : null;
+                            var operation = operationDisconnect(context, [this.issue.data.crossingNode, powerEntity.id]);
                             if (!operation.disabled()) {
                                 operation();
                             }
@@ -777,6 +788,10 @@ export function validationCrossingWays(context) {
         if (connectionTags.ford) {
             fixTitleID = 'connect_using_ford';
             fixIcon = 'roentgen-ford';
+        }
+        if (connectionTags.power) {
+            fixTitleID = 'connect_using_power_terminal';
+            fixIcon = 'temaki-power';
         }
 
         const fix = new validationIssueFix({
