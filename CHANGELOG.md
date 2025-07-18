@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # unreleased (v2.36.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Show "add new key" placeholder text for blank row in raw tag editor ([#11211], thanks [@bhavyaKhatri2703])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -51,6 +52,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#9754]: https://github.com/openstreetmap/iD/issues/9754
 [#11206]: https://github.com/openstreetmap/iD/issues/11206
+[#11211]: https://github.com/openstreetmap/iD/issues/11211
+[@bhavyaKhatri2703]: https://github.com/bhavyaKhatri2703
 
 
 # v2.35.1
