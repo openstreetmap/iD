@@ -36,6 +36,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
+# v2.35.3
+##### 2025-07-19
+
+* Fix glitchy behavior of _move_ operation for ways that are touching/intersecting other ways ([#11225])
+
+[#11225]: https://github.com/openstreetmap/iD/issues/11225
+
+
 # v2.35.2
 ##### 2025-07-18
 

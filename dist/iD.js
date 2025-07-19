@@ -15361,7 +15361,7 @@
     "package.json"() {
       package_default = {
         name: "iD",
-        version: "2.35.2",
+        version: "2.35.3",
         description: "A friendly editor for OpenStreetMap",
         main: "dist/iD.min.js",
         repository: "github:openstreetmap/iD",
@@ -84434,7 +84434,7 @@ this.ifd0Offset: ${this.ifd0Offset}, file.byteLength: ${e3.byteLength}`), e3.tif
     var annotation = entityIDs.length === 1 ? _t("operations.move.annotation." + context.graph().geometry(entityIDs[0])) : _t("operations.move.annotation.feature", { n: entityIDs.length });
     var _prevGraph;
     var _cache5;
-    var _prevMouseCoords;
+    var _origMouseCoords;
     var _nudgeInterval;
     var _pointerPrefix = "PointerEvent" in window ? "pointer" : "mouse";
     function doMove(nudge) {
@@ -84442,16 +84442,18 @@ this.ifd0Offset: ${this.ifd0Offset}, file.byteLength: ${e3.byteLength}`), e3.tif
       let fn;
       if (_prevGraph !== context.graph()) {
         _cache5 = {};
-        _prevMouseCoords = context.map().mouseCoordinates();
+        _origMouseCoords = context.map().mouseCoordinates();
         fn = context.perform;
       } else {
-        fn = context.replace;
+        fn = (action) => {
+          context.pop();
+          context.perform(action);
+        };
       }
       const currMouseCoords = context.map().mouseCoordinates();
       const currMouse = context.projection(currMouseCoords);
-      const prevMouse = context.projection(_prevMouseCoords);
-      const delta = geoVecSubtract(geoVecSubtract(currMouse, prevMouse), nudge);
-      _prevMouseCoords = currMouseCoords;
+      const origMouse = context.projection(_origMouseCoords);
+      const delta = geoVecSubtract(geoVecSubtract(currMouse, origMouse), nudge);
       fn(actionMove(entityIDs, delta, context.projection, _cache5));
       _prevGraph = context.graph();
     }
@@ -84497,7 +84499,7 @@ this.ifd0Offset: ${this.ifd0Offset}, file.byteLength: ${e3.byteLength}`), e3.tif
       context.enter(modeBrowse(context));
     }
     mode.enter = function() {
-      _prevMouseCoords = context.map().mouseCoordinates();
+      _origMouseCoords = context.map().mouseCoordinates();
       _prevGraph = null;
       _cache5 = {};
       context.features().forceVisible(entityIDs);
