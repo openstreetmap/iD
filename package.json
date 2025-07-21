@@ -47,7 +47,7 @@
     "@mapbox/geojson-area": "^0.2.2",
     "@mapbox/sexagesimal": "1.2.0",
     "@mapbox/vector-tile": "^2.0.4",
-    "@rapideditor/country-coder": "~5.4.0",
+    "@rapideditor/country-coder": "~5.5.1",
     "@rapideditor/location-conflation": "~1.5.0",
     "@tmcw/togeojson": "^7.1.2",
     "@turf/bbox": "^7.2.0",
