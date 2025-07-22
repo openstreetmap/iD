@@ -110,13 +110,15 @@ async function performSync() {
   try {
     const serverPrefs = await getServerPreferences();
 
+    // Flush all local preference keys before inserting server preferences
+    Object.keys(_storage).forEach((key) => {
+      _storage.removeItem(key);
+    });
+
     Object.entries(serverPrefs).forEach(([key, value]) => {
-      const localValue = _storage.getItem(key);
-      if (localValue === null) {
-        _storage.setItem(key, value);
-        if (_listeners[key]) {
-          _listeners[key].forEach(handler => handler(value));
-        }
+      _storage.setItem(key, value);
+      if (_listeners[key]) {
+        _listeners[key].forEach(handler => handler(value));
       }
     });
 
