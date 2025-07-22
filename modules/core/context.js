@@ -14,7 +14,7 @@ import { localizer } from './localizer';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
-import { prefs, migrateHistoryData } from './preferences';
+import { prefs } from './preferences';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect, modeSelectNote } from '../modes';
 import { presetManager } from '../presets';
@@ -563,9 +563,6 @@ export function coreContext() {
       _map.init();
       _validator.init();
       _features.init();
-
-      // Migrate history data from localStorage to IndexedDB
-      migrateHistoryData();
 
       // Set up preferences sync with OSM API
       if (_connection) {
