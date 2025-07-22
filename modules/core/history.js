@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { easeLinear as d3_easeLinear } from 'd3-ease';
 import { select as d3_select } from 'd3-selection';
 
-import { asyncPrefs, prefs } from './preferences';
+import { prefs } from './preferences';
 import { coreDifference } from './difference';
 import { coreGraph } from './graph';
 import { coreTree } from './tree';
@@ -18,8 +18,8 @@ export function coreHistory(context) {
     var dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone', 'storage_error');
     var lock = utilSessionMutex('lock');
 
-    // We'll check IndexedDB directly for saved history
-    var _hasUnresolvedRestorableChanges = false;
+    // restorable if iD not open in another window/tab and a saved history exists in localStorage
+    var _hasUnresolvedRestorableChanges = lock.lock() && !!prefs(getKey('saved_history'));
 
     var duration = 150;
     var _imageryUsed = [];
@@ -355,7 +355,6 @@ export function coreHistory(context) {
                 _tree = coreTree(_stack[0].graph);
                 _checkpoints = {};
             }
-            _pausedGraph = null;
             dispatch.call('reset');
             dispatch.call('change');
             return history;
@@ -498,7 +497,7 @@ export function coreHistory(context) {
                 return x;
             });
 
-            return {
+            return JSON.stringify({
                 version: 3,
                 entities: Object.values(allEntities),
                 baseEntities: Object.values(baseEntities),
@@ -507,7 +506,7 @@ export function coreHistory(context) {
                 index: _index,
                 // note the time the changes were saved
                 timestamp: (new Date()).getTime()
-            };
+            });
         },
 
 
@@ -653,22 +652,20 @@ export function coreHistory(context) {
             if (lock.locked() &&
                 // don't overwrite existing, unresolved changes
                 !_hasUnresolvedRestorableChanges) {
+                const success = prefs(getKey('saved_history'), history.toJSON() || null);
 
-                const historyData = history.toJSON();
-                asyncPrefs.set(getKey('saved_history'), historyData || null)
-                    .catch(() => dispatch.call('storage_error'));
+                if (!success) dispatch.call('storage_error');
             }
             return history;
         },
 
 
-        // delete the history version saved in IndexedDB
+        // delete the history version saved in localStorage
         clearSaved: function() {
             context.debouncedSave.cancel();
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
-
-                asyncPrefs.set(getKey('saved_history'), null);
+                prefs(getKey('saved_history'), null);
 
                 // clear the changeset metadata associated with the saved history
                 prefs('comment', null);
@@ -680,24 +677,20 @@ export function coreHistory(context) {
 
 
         savedHistoryJSON: function() {
-            return asyncPrefs.get(getKey('saved_history'));
+            return prefs(getKey('saved_history'));
         },
 
 
         hasRestorableChanges: function() {
-            if (lock.locked() && !_hasUnresolvedRestorableChanges) {
-                asyncPrefs.get(getKey('saved_history')).then(savedHistory => {
-                    _hasUnresolvedRestorableChanges = !!savedHistory;
-                });
-            }
             return _hasUnresolvedRestorableChanges;
         },
 
 
-        restore: async function() {
+        // load history from a version stored in localStorage
+        restore: function() {
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
-                var json = await this.savedHistoryJSON();
+                var json = this.savedHistoryJSON();
                 if (json) history.fromJSON(json, true);
             }
         },
