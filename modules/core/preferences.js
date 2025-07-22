@@ -1,8 +1,5 @@
 // https://github.com/openstreetmap/iD/issues/772
 // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
-import { get, set } from 'idb-keyval';
-
-/** @type {Storage} */
 let _storage;
 try { _storage = localStorage; } catch {}  // eslint-disable-line no-empty
 _storage = _storage || (() => {
@@ -193,63 +190,3 @@ corePreferences.setOsmConnection = setOsmConnection;
 corePreferences.syncWithServer = syncWithServer;
 
 export { corePreferences as prefs };
-
-export const asyncPrefs = {
-  async get(key) {
-    let value = await get(key);
-
-    if (value === undefined) {
-      const localValue = corePreferences(key);
-      if (localValue !== null) {
-        try {
-          value = JSON.parse(localValue);
-        } catch {
-          value = localValue;
-        }
-
-        await set(key, value);
-        corePreferences(key, null);
-      }
-    }
-
-    return value;
-  },
-
-  async set(key, value) {
-    await set(key, value);
-    syncPreferenceToServer(key, JSON.stringify(value));
-  }
-};
-
-export async function migrateHistoryData() {
-  const historyKeyPattern = /^iD_.*_saved_history$/;
-  const keysToMigrate = [];
-
-  for (let i = 0; i < _storage.length; i++) {
-    const key = _storage.key(i);
-    if (key && historyKeyPattern.test(key)) {
-      keysToMigrate.push(key);
-    }
-  }
-
-  if (keysToMigrate.length === 0) {
-    return;
-  }
-
-  const migrationPromises = keysToMigrate.map(async (key) => {
-    const value = _storage.getItem(key);
-    if (value !== null) {
-      let parsedValue;
-      try {
-        parsedValue = JSON.parse(value);
-      } catch {
-        parsedValue = value;
-      }
-
-      await set(key, parsedValue);
-      _storage.removeItem(key);
-    }
-  });
-
-  await Promise.all(migrationPromises);
-}
