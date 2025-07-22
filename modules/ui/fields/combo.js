@@ -208,7 +208,9 @@ export function uiFieldCombo(field, context) {
             _comboData = _comboData.filter(filter);
         }
 
-        _comboData = objectDifference(_comboData, _multiData);
+        if (!field.allowDuplicates) {
+            _comboData = objectDifference(_comboData, _multiData);
+        }
         _combobox.data(_comboData);
 
         // hide the caret if there are no suggestions
@@ -295,7 +297,9 @@ export function uiFieldCombo(field, context) {
 
             _comboData = _comboData.filter(queryFilter);
 
-            _comboData = objectDifference(_comboData, _multiData);
+            if (!field.allowDuplicates) {
+                _comboData = objectDifference(_comboData, _multiData);
+            }
             if (callback) callback(_comboData, hasStaticValues());
         });
     }
@@ -390,7 +394,10 @@ export function uiFieldCombo(field, context) {
             } else if (_isSemi) {
                 var arr = _multiData.map(function(d) { return d.key; });
                 arr = arr.concat(vals);
-                t[field.key] = context.cleanTagValue(utilArrayUniq(arr).filter(Boolean).join(';'));
+                if (!field.allowDuplicates) {
+                    arr = utilArrayUniq(arr);
+                }
+                t[field.key] = context.cleanTagValue(arr.filter(Boolean).join(';'));
             }
 
             window.setTimeout(function() { _input.node().focus(); }, 10);
@@ -416,11 +423,15 @@ export function uiFieldCombo(field, context) {
         if (_isMulti) {
             t[d.key] = undefined;
         } else if (_isSemi) {
-            var arr = _multiData.map(function(md) {
-                return md.key === d.key ? null : md.key;
-            }).filter(Boolean);
+            let arr = _multiData.map(item => item.key);
 
-            arr = utilArrayUniq(arr);
+            // delete the value using the index, since a value
+            // may exist multiple times in the array.
+            arr.splice(d.index, 1);
+
+            if (!field.allowDuplicates) {
+                arr = utilArrayUniq(arr);
+            }
             t[field.key] = arr.length ? arr.join(';') : undefined;
 
             _lengthIndicator.update(t[field.key]);
@@ -626,7 +637,7 @@ export function uiFieldCombo(field, context) {
                 if (Array.isArray(tags[field.key])) {
 
                     tags[field.key].forEach(function(tagVal) {
-                        var thisVals = utilArrayUniq((tagVal || '').split(';')).filter(Boolean);
+                        var thisVals = (tagVal || '').split(';').filter(Boolean);
                         allValues = allValues.concat(thisVals);
                         if (!commonValues) {
                             commonValues = thisVals;
@@ -634,11 +645,16 @@ export function uiFieldCombo(field, context) {
                             commonValues = commonValues.filter(value => thisVals.includes(value));
                         }
                     });
-                    allValues = utilArrayUniq(allValues).filter(Boolean);
+                    allValues = allValues.filter(Boolean);
 
                 } else {
-                    allValues =  utilArrayUniq((tags[field.key] || '').split(';')).filter(Boolean);
+                    allValues =  (tags[field.key] || '').split(';').filter(Boolean);
                     commonValues = allValues;
+                }
+
+                if (!field.allowDuplicates) {
+                    commonValues = utilArrayUniq(commonValues);
+                    allValues = utilArrayUniq(allValues);
                 }
 
                 _multiData = allValues.map(function(v) {
@@ -673,7 +689,7 @@ export function uiFieldCombo(field, context) {
 
             // Render chips
             var chips = _container.selectAll('.chip')
-                .data(_multiData);
+                .data(_multiData.map((item, index) => ({ ...item, index })));
 
             chips.exit()
                 .remove();

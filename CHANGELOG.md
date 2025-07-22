@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 * The flip operation now works on nodes with no `direction` tag, to support quickly adding `direction` to features like traffic signs ([#9317], thanks [@k-yle])
 * Show "add new key" placeholder text for blank row in raw tag editor ([#11211], thanks [@bhavyaKhatri2703])
+* Consider other name-like tags for labelling features, such as `lock_name` ([#9588], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -47,6 +48,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix flickering of imagery metadata information in background panel ([#9754])
 * Immediately update raw tag key/value inputs when spaces have been trimmed ([#11206])
+* Fix duplicate values deleted when editing `destination:*` tags ([#10639], thanks [@k-yle])
+* Fix the relation role dropdown not opening on click ([#10645], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :rocket: Presets
@@ -56,7 +59,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#9317]: https://github.com/openstreetmap/iD/issues/9317
 [#9511]: https://github.com/openstreetmap/iD/pull/9511
+[#9588]: https://github.com/openstreetmap/iD/pull/9588
 [#9754]: https://github.com/openstreetmap/iD/issues/9754
+[#10639]: https://github.com/openstreetmap/iD/pull/10639
+[#10645]: https://github.com/openstreetmap/iD/pull/10645
 [#11020]: https://github.com/openstreetmap/iD/pull/11020
 [#11206]: https://github.com/openstreetmap/iD/issues/11206
 [#11211]: https://github.com/openstreetmap/iD/issues/11211
@@ -286,6 +292,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9636]: https://github.com/openstreetmap/iD/pull/9636
 [#10003]: https://github.com/openstreetmap/iD/pull/10003
 [#10618]: https://github.com/openstreetmap/iD/pull/10618
+[#10645]: https://github.com/openstreetmap/iD/pull/10645
 [#10646]: https://github.com/openstreetmap/iD/pull/10646
 [#10648]: https://github.com/openstreetmap/iD/pull/10648
 [#10720]: https://github.com/openstreetmap/iD/issues/10720
