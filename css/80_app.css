@@ -2954,6 +2954,20 @@ img.tag-reference-wiki-image {
 .add-tag {
     border-radius: 0 0 4px 4px;
 }
+.add-tag button {
+    visibility: hidden;
+}
+.add-tag input.key {
+    border-bottom-left-radius: 4px;
+    font-weight: normal;
+}
+.add-tag input.value {
+    border-bottom-right-radius: 4px;
+}
+.tag-row:has(+ .add-tag) button:last-child {
+    border-bottom-right-radius: 4px;
+}
+
 .add-relation {
     margin-top: 10px;
     border-radius: 4px;
@@ -4382,8 +4396,8 @@ img.tile {
     transition: opacity 1ms linear;
 }
 
-.layer-background img.tile,
-.map-in-map-background img.tile {
+.layer-background,
+.map-in-map-background {
     filter: url(#alpha-slope5);
 }
 

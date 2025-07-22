@@ -11,16 +11,15 @@ import {
 import { presetManager } from '../presets';
 import { osmEntity, osmIsInterestingTag } from '../osm';
 import { utilDetect } from '../util/detect';
-import { utilArrayDifference, utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
+import { utilArrayDifference, utilArrayUniq, utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
 
 
 
 export function svgLabels(projection, context) {
     var path = d3_geoPath(projection);
     var detected = utilDetect();
-    var baselineHack = (detected.ie ||
-        detected.browser.toLowerCase() === 'edge' ||
-        (detected.browser.toLowerCase() === 'firefox' && detected.version >= 70));
+    var baselineHack = detected.browser.toLowerCase() === 'safari';
+
     var _rdrawn = new RBush();
     var _rskipped = new RBush();
     var _entitybboxes = {};
@@ -375,26 +374,25 @@ export function svgLabels(projection, context) {
                 ltr: [15, y, 'start'],
                 rtl: [-15, y, 'end']
             };
-            const isAddr = style.isAddr;
+            const isAddrMarker = style.isAddr && style.geometry !== 'vertex';
 
             var textDirection = localizer.textDirection();
 
             var coord = projection(entity.loc);
             var textPadding = 2;
             var offset = pointOffsets[textDirection];
-            if (isAddr) offset = [0, 1, 'middle'];
+            if (isAddrMarker) offset = [0, 1, 'middle'];
             var p = {
                 height: height,
                 width: width,
                 x: coord[0] + offset[0],
                 y: coord[1] + offset[1],
-                textAnchor: offset[2],
-                isAddr
+                textAnchor: offset[2]
             };
 
             // insert a collision box for the text label..
             let bbox;
-            if (isAddr) {
+            if (isAddrMarker) {
                 bbox = {
                     minX: p.x - (width / 2) - textPadding,
                     minY: p.y - (height / 2) - textPadding,
@@ -694,20 +692,33 @@ export function svgLabels(projection, context) {
         layers.selectAll('.nolabel')
             .classed('nolabel', false);
 
-        var mouse = context.map().mouse();
-        var ids = [];
-        var pad, bbox;
+        const graph = context.graph();
+        const mouse = context.map().mouse();
+        let bbox;
+        let hideIds = [];
 
         // hide labels near the mouse
-        if (mouse && context.mode().id !== 'browse' && context.mode().id !== 'select') {
-            pad = 20;
+        if (mouse && context.mode().id !== 'browse') {
+            const pad = 20;
             bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad };
-            var nearMouse = _rdrawn.search(bbox).map(function(entity) { return entity.id; });
-            ids.push.apply(ids, nearMouse);
+            const nearMouse = _rdrawn.search(bbox)
+                .map(entity => entity.id)
+                .filter(id =>
+                    context.mode().id !== 'select' ||
+                    // in select mode: hide labels of currently selected line(s)
+                    // to still allow accessing midpoints
+                    // https://github.com/openstreetmap/iD/issues/11220
+                    context.mode().selectedIDs().includes(id) && graph.hasEntity(id).geometry(graph) === 'line');
+            hideIds.push.apply(hideIds, nearMouse);
+            hideIds = utilArrayUniq(hideIds);
         }
-        ids = utilArrayDifference(ids, context.mode()?.selectedIDs?.() || []);
 
-        layers.selectAll(utilEntitySelector(ids))
+        // don't hide label of currently selected entity while in e.g. drag mode
+        const selected = (context.mode()?.selectedIDs?.() || [])
+            .filter(id => graph.hasEntity(id)?.geometry(graph) !== 'line');
+        hideIds = utilArrayDifference(hideIds, selected);
+
+        layers.selectAll(utilEntitySelector(hideIds))
             .classed('nolabel', true);
 
 
@@ -774,6 +785,7 @@ export function textWidth(text, size, container) {
     }
     const elem = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     elem.style.fontSize = `${size}px`;
+    elem.style.fontWeight = 'bold';
     elem.textContent = text;
     container.appendChild(elem);
     c[text] = elem.getComputedTextLength();
@@ -783,6 +795,7 @@ export function textWidth(text, size, container) {
 
 
 const nonPrimaryKeys = new Set([
+    'building:flats',
     'check_date',
     'fixme',
     'layer',
@@ -790,7 +803,7 @@ const nonPrimaryKeys = new Set([
     'level:ref',
     'note'
 ]);
-const nonPrimaryKeysRegex = /^(ref|survey|note):/;
+const nonPrimaryKeysRegex = /^(ref|survey|note|([^:]+:|old_|alt_)addr):/;
 export function isAddressPoint(tags) {
     const keys = Object.keys(tags).filter(key =>
         osmIsInterestingTag(key) &&

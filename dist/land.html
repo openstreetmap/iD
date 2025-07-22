@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
-  <body>
-    <script>
-      opener.authComplete(window.location.href);
-      window.close();
-    </script>
-  </body>
+    <head></head>
+    <body>
+        <script>
+            if (new URLSearchParams(location.search).has('code')) {
+                new BroadcastChannel('osm-api-auth-complete').postMessage(location.href);
+                window.close();
+            }
+        </script>
+    </body>
 </html>

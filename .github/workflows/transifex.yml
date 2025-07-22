@@ -1,6 +1,6 @@
 # This workflow will push the iD source strings to transifex
 # - requires TX_TOKEN secret to be set on GitHub
-# - you can generate a token at https://www.transifex.com/user/settings/api/
+# - you can generate a token at https://app.transifex.com/user/settings/api/
 # - job does not run if no token provided
 
 name: transifex
