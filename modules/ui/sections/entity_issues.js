@@ -6,6 +6,7 @@ import { utilArrayIdentical } from '../../util/array';
 import { t } from '../../core/localizer';
 import { utilHighlightEntities } from '../../util';
 import { uiSection } from '../section';
+import { validationIssue } from '../../core/validation';
 
 
 export function uiSectionEntityIssues(context) {
@@ -104,9 +105,8 @@ export function uiSectionEntityIssues(context) {
 
         textEnter
             .each(function(d) {
-                var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
                 d3_select(this)
-                    .call(svgIcon(iconName, 'issue-icon'));
+                    .call(svgIcon(validationIssue.ICONS[d.severity], 'issue-icon'));
             });
 
         textEnter

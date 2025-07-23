@@ -1,9 +1,10 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
-import { osmEntity, osmIsInterestingTag, osmLifecyclePrefixes } from '../osm';
+import { osmEntity, osmLifecyclePrefixes } from '../osm';
 import { utilRebind } from '../util/rebind';
 import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
+import { isAddressPoint } from '../svg/labels';
 
 
 export function rendererFeatures(context) {
@@ -101,19 +102,13 @@ export function rendererFeatures(context) {
         };
     }
 
-    function isAddressPoint(tags, geometry) {
-        const keys = Object.keys(tags);
-        return geometry === 'point' &&
-            keys.length > 0 &&
-            keys.every(key =>
-                key.startsWith('addr:') || !osmIsInterestingTag(key)
-            );
-    }
-    defineRule('address_points', isAddressPoint, 100);
+    defineRule('address_points', (tags, geometry) =>
+        geometry === 'point' && isAddressPoint(tags),
+        100);
 
-    defineRule('points', function isPoint(tags, geometry) {
-        return geometry === 'point' && !isAddressPoint(tags, geometry);
-    }, 200);
+    defineRule('points', (tags, geometry) =>
+        geometry === 'point' && !isAddressPoint(tags, geometry),
+        200);
 
     defineRule('traffic_roads', function isTrafficRoad(tags) {
         return traffic_roads[tags.highway];
