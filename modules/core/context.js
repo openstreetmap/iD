@@ -293,7 +293,7 @@ export function coreContext() {
 
   // Debounce save, since it's a synchronous localStorage write,
   // and history changes can happen frequently (e.g. when dragging).
-  context.debouncedSave = _debounce(context.save, 350);
+  context.debouncedSave = _debounce(context.save, 100);
 
   function withDebouncedSave(fn) {
     return function() {
