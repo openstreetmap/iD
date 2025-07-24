@@ -1829,7 +1829,7 @@ en:
       bridge-bridge_connectable:
         reference: "Crossing bridges should be connected or use different layers."
       building-power_connectable:
-        reference: "Power line that enters into a building should be connected using a power terminal."
+        reference: "Use a power terminal to explicitly indicate that the power line enters the building at this location."
       indoor-indoor:
         reference: "Crossing indoor features should use different levels."
       indoor-indoor_connectable:
