@@ -4,7 +4,7 @@ import { t } from '../../core/localizer';
 export function validationIssue(attrs) {
     this.type = attrs.type;                // required - name of rule that created the issue (e.g. 'missing_tag')
     this.subtype = attrs.subtype;          // optional - category of the issue within the type (e.g. 'relation_type' under 'missing_tag')
-    this.severity = attrs.severity;        // required - 'warning' or 'error'
+    this.severity = attrs.severity;        // required - 'suggestion' or 'warning' or 'error'
     this.message = attrs.message;          // required - function returning localized string
     this.reference = attrs.reference;      // optional - function(selection) to render reference information
     this.entityIds = attrs.entityIds;      // optional - array of IDs of entities involved in the issue
@@ -12,6 +12,7 @@ export function validationIssue(attrs) {
     this.data = attrs.data;                // optional - object containing extra data for the fixes
     this.dynamicFixes = attrs.dynamicFixes;// optional - function(context) returning fixes
     this.hash = attrs.hash;                // optional - string to further differentiate the issue
+    this.extent = attrs.extent;            // optional - a method that returns the geometric extent of the issue, if absent, it will be calculated from the given entityIds
 
     this.id = generateID.apply(this);      // generated - see below
     this.key = generateKey.apply(this);    // generated - see below (call after generating this.id)
@@ -46,8 +47,7 @@ export function validationIssue(attrs) {
         return this.id + ':' + Date.now().toString();  // include time of creation
     }
 
-
-    this.extent = function(resolver) {
+    this.extent = this.extent || function(resolver) {
         if (this.loc) {
             return geoExtent(this.loc);
         }
@@ -63,7 +63,7 @@ export function validationIssue(attrs) {
         var fixes = this.dynamicFixes ? this.dynamicFixes(context) : [];
         var issue = this;
 
-        if (issue.severity === 'warning') {
+        if (issue.severity === 'warning' || issue.severity === 'suggestion') {
             // allow ignoring any issue that's not an error
             fixes.push(new validationIssueFix({
                 title: t.append('issues.fix.ignore_issue.title'),
@@ -87,6 +87,12 @@ export function validationIssue(attrs) {
     };
 
 }
+
+validationIssue.ICONS = {
+    suggestion: '#iD-icon-info',
+    warning: '#iD-icon-alert',
+    error: '#iD-icon-error'
+};
 
 
 export function validationIssueFix(attrs) {

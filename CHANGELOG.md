@@ -35,28 +35,95 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# unreleased (v2.35.0-dev)
+# unreleased (v2.36.0-dev)
+
+#### :sparkles: Usability & Accessibility
+* The flip operation now works on nodes with no `direction` tag, to support quickly adding `direction` to features like traffic signs ([#9317], thanks [@k-yle])
+* Show "add new key" placeholder text for blank row in raw tag editor ([#11211], thanks [@bhavyaKhatri2703])
+* Consider other name-like tags for labelling features, such as `lock_name` ([#9588], thanks [@k-yle])
+* Always take reduced map size due to open side panels into account when zooming to selected entities
+* Limit landuse tags that are considered for "Landuse" area features ([#11184], thanks [@youssefelzedy])
+#### :scissors: Operations
+#### :camera: Street-Level
+* Fix bug where "tag photo id on selected map feature" is sometimes not working on the first opened photo ([#11021])
+#### :white_check_mark: Validation
+* Create a new warning tier for low-severity suggestions ([#11020], thanks [@k-yle])
+* Zoom to correct location when clicking on the _relation member has no role_ issue ([#11247])
+#### :bug: Bugfixes
+* Fix flickering of imagery metadata information in background panel ([#9754])
+* Immediately update raw tag key/value inputs when spaces have been trimmed ([#11206])
+* Fix duplicate values deleted when editing `destination:*` tags ([#10639], thanks [@k-yle])
+* Fix the relation role dropdown not opening on click ([#10645], thanks [@k-yle])
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :rocket: Presets
+* Support more complex logic to define preset fields that are conditionally hidden ([#9511], thanks [@k-yle])
+#### :mortar_board: Walkthrough / Help
+#### :hammer: Development
+
+[#9317]: https://github.com/openstreetmap/iD/issues/9317
+[#9511]: https://github.com/openstreetmap/iD/pull/9511
+[#9588]: https://github.com/openstreetmap/iD/pull/9588
+[#9754]: https://github.com/openstreetmap/iD/issues/9754
+[#10639]: https://github.com/openstreetmap/iD/pull/10639
+[#10645]: https://github.com/openstreetmap/iD/pull/10645
+[#11020]: https://github.com/openstreetmap/iD/pull/11020
+[#11021]: https://github.com/openstreetmap/iD/issues/11021
+[#11184]: https://github.com/openstreetmap/iD/pull/11184
+[#11206]: https://github.com/openstreetmap/iD/issues/11206
+[#11211]: https://github.com/openstreetmap/iD/issues/11211
+[#11247]: https://github.com/openstreetmap/iD/issues/11247
+[@bhavyaKhatri2703]: https://github.com/bhavyaKhatri2703
+
+
+# v2.35.3
+##### 2025-07-19
+
+* Fix glitchy behavior of _move_ operation for ways that are touching/intersecting other ways ([#11225])
+
+[#11225]: https://github.com/openstreetmap/iD/issues/11225
+
+
+# v2.35.2
+##### 2025-07-18
+
+#### :bug: Bugfixes
+* Restore behavior of _reflect_ and _circularize_ operations, as well as fixing minor glitches in some other actions with transitions ([#11213])
+* Fix glitch while dragging the map during a _move_ operation ([#11217])
+* Show midpoints of selected ways when mouse is nearby ([#11220])
+
+[#11213]: https://github.com/openstreetmap/iD/issues/11213
+[#11217]: https://github.com/openstreetmap/iD/issues/11217
+[#11220]: https://github.com/openstreetmap/iD/issues/11220
+
+
+# v2.35.1
+##### 2025-07-14
+
+* Fix rendering of line labels that were sometimes cut off at the ends, regression introduced in v2.35.0 ([#11123])
+
+[#11123]: https://github.com/openstreetmap/iD/issues/11123
+
+
+# v2.35.0
+##### 2025-07-14
 
 #### :sparkles: Usability & Accessibility
 * Render housenumbers (or housenames) of address points or buildings as dedicated labels on the map ([#10970])
 * Simplify raw tag editor and make it easier to use with keyboard-only input ([#10889])
 * Show info message when a keyboard shortcut of an _operation_ is pressed, but the operation is not _available_ for the selected features ([#9896])
-#### :scissors: Operations
 #### :camera: Street-Level
 * Fix Mapilio photo markers from showing up on low zoom levels ([#11014], thanks [@keiffer213] and [@haipq07])
 * Fix wrong 360° panorama from being displayed when navigating quickly between photos ([#11054])
-#### :white_check_mark: Validation
-* Hide _KeepRight_ quality assurance overlay, as the service is currently not providing up to date reports of OSM data ([#11098])
 #### :bug: Bugfixes
 * Refresh numeric input fields after leaving focus with the value that is stored in the tag ([#11027])
 * Fix oneway field falsely showing "Assumed to be Yes" if cycled through all options back to the default state
 * Fix false positives in "unreachable oneway" validation when `oneway=-1` tag is present ([#11068])
 * Fix color of oneway arrows on roads that also have a railway tag ([#11080])
 * Allow squaring operation to be performed on all vertices of a closed way ([#11088])
-#### :earth_asia: Localization
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
+* Fix crash when radio field with cross-referenced strings/options is rendered ([#11187])
 #### :hammer: Development
+* Update `osm-auth` to version 3 to make logging in possible again for standalone deployments of iD
 
 [#9896]: https://github.com/openstreetmap/iD/issues/9896
 [#10889]: https://github.com/openstreetmap/iD/pull/10889
@@ -68,6 +135,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11080]: https://github.com/openstreetmap/iD/issues/11080
 [#11088]: https://github.com/openstreetmap/iD/issues/11088
 [#11098]: https://github.com/openstreetmap/iD/issues/11098
+[#11187]: https://github.com/openstreetmap/iD/issues/11187
 [@keiffer213]: https://github.com/keiffer213
 [@haipq07]: https://github.com/haipq07
 
@@ -231,6 +299,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9636]: https://github.com/openstreetmap/iD/pull/9636
 [#10003]: https://github.com/openstreetmap/iD/pull/10003
 [#10618]: https://github.com/openstreetmap/iD/pull/10618
+[#10645]: https://github.com/openstreetmap/iD/pull/10645
 [#10646]: https://github.com/openstreetmap/iD/pull/10646
 [#10648]: https://github.com/openstreetmap/iD/pull/10648
 [#10720]: https://github.com/openstreetmap/iD/issues/10720
@@ -6432,7 +6501,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 #### :tada: New Features
 
 * Update to Mapillary API v3, use traffic signs from Mapillary sprites ([#4050], thanks [@nickplesha])
-* iD editor translation project on Transifex has moved to the [OpenStreetMap organization](https://www.transifex.com/openstreetmap/)
+* iD editor translation project on Transifex has moved to the [OpenStreetMap organization](https://app.transifex.com/openstreetmap/)
 * New Keyboard Shortcuts help screen, press <kbd>?</kbd> to view ([#3791], [#1481], thanks [@ajithranka] and [@kepta])
 
 [#4050]: https://github.com/openstreetmap/iD/issues/4050

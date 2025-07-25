@@ -21,7 +21,7 @@ if (process.env.transifex_password) {
   transifexApi.setup({ auth: process.env.transifex_password });
 } else {
   // Credentials can be stored in transifex.auth as a json object. This file is gitignored.
-  // You must use an API token for authentication: You can generate one at https://www.transifex.com/user/settings/api/.
+  // You must use an API token for authentication: You can generate one at https://app.transifex.com/user/settings/api/.
   // {
   //   "password": "<api_key>"
   // }

@@ -170,7 +170,7 @@ export function uiPresetList(context) {
             return collection;
         }, []);
 
-        var items = list.selectAll('.preset-list-item')
+        var items = list.selectChildren('.preset-list-item')
             .data(collection, function(d) { return d.preset.id; });
 
         items.order();

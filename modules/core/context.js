@@ -443,6 +443,7 @@ export function coreContext() {
 
   /* Assets */
   let _assetPath = '';
+  /** @type {GetSet<iD.Context, string>} */
   context.assetPath = function(val) {
     if (!arguments.length) return _assetPath;
     _assetPath = val;
@@ -501,7 +502,7 @@ export function coreContext() {
   context.curtainProjection = geoRawMercator();
 
 
-  /* Init */
+  /** @returns {iD.Context} */
   context.init = () => {
 
     instantiateInternal();
@@ -522,7 +523,6 @@ export function coreContext() {
       context.perform = withDebouncedSave(_history.perform);
       context.replace = withDebouncedSave(_history.replace);
       context.pop = withDebouncedSave(_history.pop);
-      context.overwrite = withDebouncedSave(_history.overwrite);
       context.undo = withDebouncedSave(_history.undo);
       context.redo = withDebouncedSave(_history.redo);
 
