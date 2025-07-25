@@ -303,19 +303,24 @@ export var osmFlowingWaterwayTagValues = {
     canal: true, ditch: true, drain: true, fish_pass: true, flowline: true, river: true, stream: true, tidal_channel: true
 };
 
-// Amenity values that represent actual land use (areas)
-export var osmLanduseAmenityTagValues = {
-    'parking': true,
-    'grave_yard': true,
-    'marketplace': true,
-    'university': true,
-    'school': true,
-    'hospital': true,
-    'prison': true,
-    'college': true,
-    'place_of_worship': true,
-    'motorcycle_parking': true,
-    'bicycle_parking': true
+// Tag values that represent actual land use (areas)
+export var osmLanduseTags = {
+    'amenity': {
+        'bicycle_parking': true,
+        'college': true,
+        'grave_yard': true,
+        'hospital': true,
+        'marketplace': true,
+        'motorcycle_parking': true,
+        'parking': true,
+        'place_of_worship': true,
+        'prison': true,
+        'school': true,
+        'university': true
+    },
+    'landuse': true,
+    'leisure': true,
+    'natural': true
 };
 
 // Tags which values should be considered case sensitive when offering tag suggestions
