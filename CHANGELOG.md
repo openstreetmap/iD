@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show "add new key" placeholder text for blank row in raw tag editor ([#11211], thanks [@bhavyaKhatri2703])
 * Consider other name-like tags for labelling features, such as `lock_name` ([#9588], thanks [@k-yle])
 * Always take reduced map size due to open side panels into account when zooming to selected entities
+* Limit landuse tags that are considered for "Landuse" area features ([#11184], thanks [@youssefelzedy])
 #### :scissors: Operations
 #### :camera: Street-Level
 * Fix bug where "tag photo id on selected map feature" is sometimes not working on the first opened photo ([#11021])
@@ -68,6 +69,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10645]: https://github.com/openstreetmap/iD/pull/10645
 [#11020]: https://github.com/openstreetmap/iD/pull/11020
 [#11021]: https://github.com/openstreetmap/iD/issues/11021
+[#11184]: https://github.com/openstreetmap/iD/pull/11184
 [#11206]: https://github.com/openstreetmap/iD/issues/11206
 [#11211]: https://github.com/openstreetmap/iD/issues/11211
 [#11247]: https://github.com/openstreetmap/iD/issues/11247
