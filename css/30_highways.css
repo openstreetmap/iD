@@ -646,14 +646,15 @@ path.line.stroke.tag-highway-ladder,
     stroke: #fff;
 }
 
-path.line.stroke.tag-highway-via_ferrata {
-    stroke-opacity: 0;
+path.line.casing.tag-highway-via_ferrata {
+    stroke: none;
 }
 
-path.line.casing.tag-highway-via_ferrata {
+path.line.stroke.tag-highway-via_ferrata {
+    stroke-width: 5;
     stroke: #6f1f1f;
     stroke-linecap: round;
-    stroke-dasharray: 1, 9;
+    stroke-dasharray: 0, 9;
 }
 
 /* crossings */
