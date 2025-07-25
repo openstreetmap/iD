@@ -59,6 +59,7 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   _Example:_ `source=Bing%3BMapillary`
 * __`validationDisable`__ - The issues identified by these types/subtypes will be disabled (i.e. Issues will not be shown at all). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
   _Example:_ `validationDisable=crossing_ways/highway*,crossing_ways/tunnel*`
+* __`validationSuggestion`__ - The issues identified by these types/subtypes will be treated as suggestions (i.e. Issues will only be surfaced to the user while inspecting the feature, not during changeset upload). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
 * __`validationWarning`__ - The issues identified by these types/subtypes will be treated as warnings (i.e. Issues will be surfaced to the user but not block changeset upload). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
   _Example:_ `validationWarning=crossing_ways/highway*,crossing_ways/tunnel*`
 * __`validationError`__ - The issues identified by these types/subtypes will be treated as errors (i.e. Issues will be surfaced to the user but will block changeset upload). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>

@@ -104,7 +104,8 @@ export function uiPhotoviewer(context) {
             }
 
             function renderAddPhotoIdButton(service, shouldDisplay) {
-                const button = selection.selectAll('.set-photo-from-viewer').data(shouldDisplay ? [0] : []);
+                const button = selection.selectAll('.set-photo-from-viewer')
+                    .data(shouldDisplay ? [0] : []);
 
                 button.exit()
                     .remove();
@@ -118,9 +119,12 @@ export function uiPhotoviewer(context) {
                         .placement('right')
                     );
 
-                buttonEnter.select('.tooltip')
+                buttonEnter
+                    .select('.tooltip')
                     .classed('dark', true)
-                    .style('width', '300px')
+                    .style('width', '300px');
+
+                buttonEnter
                     .merge(button)
                     .on('click', function (e) {
                         e.preventDefault();

@@ -10,6 +10,7 @@ import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { utilHighlightEntities } from '../../util';
 import { uiSection } from '../section';
+import { validationIssue } from '../../core/validation';
 
 export function uiSectionValidationIssues(id, severity, context) {
 
@@ -105,9 +106,8 @@ export function uiSectionValidationIssues(id, severity, context) {
             .append('span')
             .attr('class', 'issue-icon')
             .each(function(d) {
-                var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
                 d3_select(this)
-                    .call(svgIcon(iconName));
+                    .call(svgIcon(validationIssue.ICONS[d.severity]));
             });
 
         textEnter

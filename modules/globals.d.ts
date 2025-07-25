@@ -10,6 +10,15 @@ declare global {
 
   declare type Tags = { [key: string]: string };
 
+  /**
+   * A class method that acts as both a getter and a
+   * setter, depending on the number of arguments.
+   */
+  declare type GetSet<This, T> = {
+    (value: T): This;
+    (): T;
+  }
+
   declare namespace iD {
     export type Context = ReturnType<typeof iD.coreContext>;
 

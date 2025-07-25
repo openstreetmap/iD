@@ -347,15 +347,21 @@ export function uiField(context, presetField, entityIDs, options) {
             if (!entityIDs.every(function(entityID) {
                 var entity = context.graph().entity(entityID);
                 if (prerequisiteTag.key) {
-                    var value = entity.tags[prerequisiteTag.key];
-                    if (!value) return false;
+                    var value = entity.tags[prerequisiteTag.key] || '';
 
+                    if (prerequisiteTag.valuesNot) {
+                        return !prerequisiteTag.valuesNot.includes(value);
+                    }
                     if (prerequisiteTag.valueNot) {
                         return prerequisiteTag.valueNot !== value;
+                    }
+                    if (prerequisiteTag.values) {
+                        return prerequisiteTag.values.includes(value);
                     }
                     if (prerequisiteTag.value) {
                         return prerequisiteTag.value === value;
                     }
+                    if (!value) return false;
                 } else if (prerequisiteTag.keyNot) {
                     if (entity.tags[prerequisiteTag.keyNot]) return false;
                 }
