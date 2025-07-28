@@ -120,7 +120,13 @@ const prototype = {
 
             var nodeIds = {};
             resolver.parentWays(this)
-                .filter(way => osmShouldRenderDirection(this.tags, way.tags))
+                .filter(way => {
+                    // check for outbound one-way ways from stop signs
+                    const isOutbound = way.tags.oneway === 'yes' && way.nodes[0] === this.id;
+                    const isStopSign = this.tags.highway === 'stop';
+                    if (isOutbound && isStopSign) return false;
+                    return osmShouldRenderDirection(this.tags, way.tags);
+                })
                 .forEach(function(parent) {
                     var nodes = parent.nodes;
                     for (i = 0; i < nodes.length; i++) {
