@@ -1493,6 +1493,10 @@ a.hide-toggle {
     border-radius: 0 0 4px 4px;
 }
 
+.form-field-input-wrap > input.numeric {
+    text-align: right;
+}
+
 /* Buttons inside fields */
 .form-field-button {
     flex: 0 0 auto;
@@ -2359,14 +2363,14 @@ input.date-selector {
 
 /* Field - Combobox
 ------------------------------------------------------- */
+/* leave room for the caret */
 .ideditor[dir='ltr'] textarea.combobox-input,
 .ideditor[dir='ltr'] input.combobox-input {
-    /* leave room for the caret */
-    padding-right: 20px;
+    padding-right: 25px;
 }
 .ideditor[dir='rtl'] textarea.combobox-input,
 .ideditor[dir='rtl'] input.combobox-input {
-    padding-left: 20px;
+    padding-left: 25px;
 }
 
 div.combobox {

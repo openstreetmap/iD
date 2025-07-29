@@ -111,7 +111,9 @@ export function uiFieldText(field, context) {
         } else if (field.type === 'number') {
             var rtl = (localizer.textDirection() === 'rtl');
 
-            input.attr('type', 'text');
+            input
+                .attr('type', 'text')
+                .classed('numeric', true);
 
             var inc = field.increment;
 
@@ -221,7 +223,9 @@ export function uiFieldText(field, context) {
 
             updateColourPreview();
         } else if (field.type === 'date') {
-            input.attr('type', 'text');
+            input
+                .attr('type', 'text')
+                .classed('numeric', true);
 
             updateDateField();
         }

@@ -51,7 +51,8 @@ export function uiFieldRoadheight(field, context) {
         primaryInput = primaryInput.enter()
             .append('input')
             .attr('type', 'text')
-            .attr('class', 'roadheight-number')
+            .classed('roadheight-number', true)
+            .classed('numeric', true)
             .attr('id', field.domId)
             .call(utilNoAuto)
             .merge(primaryInput);
