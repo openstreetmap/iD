@@ -11,14 +11,13 @@ import { actionMoveMember } from '../../actions/move_member';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { osmEntity } from '../../osm';
-import { getRelationColor, isColorValid } from '../../osm/tags';
+import { getRelationColor } from '../../osm/tags';
 import { svgIcon } from '../../svg/icon';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
 import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto, utilUniqueDomId } from '../../util';
 import { prefs } from '../../core';
-import { getLuma } from '../../util/util';
 
 
 export function uiSectionRawMemberEditor(context) {
@@ -205,7 +204,7 @@ export function uiSectionRawMemberEditor(context) {
                     const showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
                     labelLink.each(function(d) {
                         if (!showThirdPartyIcons) return;
-                        const matched = presetManager.match(d.relation, context.graph());
+                        const matched = presetManager.match(d, context.graph());
                         if (matched.suggestion) {
                             // if matching an NSI preset: append icon
                             d3_select(this)
@@ -216,10 +215,11 @@ export function uiSectionRawMemberEditor(context) {
                     });
 
                     labelLink.each(function(d) {
-                        const relColors = getRelationColor(d.relation.tags, '#555');
-                        const hasRef = d.relation.tags.ref;
+                        if (d.type !== 'relation') return;
+                        const relColors = getRelationColor(d.member.tags, '#555');
+                        const hasRef = d.member.tags.ref;
                         if (relColors.isValid || hasRef) {
-                            const refs = (d.relation.tags.ref || '').split(';');
+                            const refs = (d.member.tags.ref || '').split(';');
                             for (const ref of refs) {
                                 d3_select(this)
                                     .append('span')

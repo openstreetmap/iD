@@ -21,7 +21,6 @@ import { uiTooltip } from '../tooltip';
 import { utilArrayGroupBy, utilArrayIntersection } from '../../util/array';
 import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } from '../../util';
 import { prefs } from '../../core';
-import { getLuma } from '../../util/util';
 
 
 export function uiSectionRawMembershipEditor(context) {

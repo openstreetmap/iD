@@ -11,7 +11,7 @@ import { geoSphericalDistance } from '../geo/geo';
 import { geoExtent } from '../geo';
 import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm/entity';
-import { isColorValid } from '../osm/tags';
+import { getRelationColor } from '../osm/tags';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
@@ -22,7 +22,6 @@ import {
     utilHighlightEntities,
     utilNoAuto
 } from '../util';
-import { getLuma } from '../util/util';
 
 
 export function uiFeatureList(context) {
@@ -335,17 +334,20 @@ export function uiFeatureList(context) {
 
             label.each(function(d) {
                 if (d.entity?.type !== 'relation') return;
-                const hasColor = d.entity.tags.colour && isColorValid(d.entity.tags.colour);
+
                 const hasRef = d.entity.tags.ref;
-                if (hasColor || hasRef) {
-                    const color = isColorValid(d.entity.tags.colour) ? d.entity.tags.colour : '#555';
-                    d3_select(this)
-                        .append('span')
-                        .classed('member-entity-ref-color', true)
-                        .style('border-color', color)
-                        .style('background-color', color)
-                        .style('color', getLuma(color) > 165 ? '#000' : '#fff')
-                        .text(d.entity.tags.ref || '&nbsp;');
+                const relColors = getRelationColor(d.relation.tags, '#555');
+                if (relColors.isValid || hasRef) {
+                    const refs = (d.relation.tags.ref || '').split(';');
+                    for (const ref of refs) {
+                        d3_select(this)
+                            .append('span')
+                            .classed('member-entity-ref-color', true)
+                            .style('border-color', relColors.color)
+                            .style('background-color', relColors.color)
+                            .style('color', relColors.textColor)
+                            .text(ref);
+                    }
                 }
             });
 
