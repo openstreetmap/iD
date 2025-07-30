@@ -1016,7 +1016,7 @@ export default {
                 var regexString = elements[i].getAttribute('regex');  // needs unencode?
                 if (regexString) {
                     try {
-                        var regex = new RegExp(regexString);
+                        var regex = new RegExp(regexString, 'i');
                         regexes.push(regex);
                     } catch {
                         /* noop */

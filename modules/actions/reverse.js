@@ -1,3 +1,5 @@
+import { presetManager } from '../presets';
+
 /*
 Order the nodes of a way in reverse order and reverse any direction dependent tags
 other than `oneway`. (We assume that correcting a backwards oneway is the primary
@@ -144,6 +146,29 @@ export function actionReverse(entityID, options) {
         return valueReplacements[value] || value;
     }
 
+    /** @returns {false | string} - returns false or the name of the direction key */
+    function supportsDirectionField(node, graph) {
+        const preset = presetManager.match(node, graph);
+        const loc = node.extent(graph).center();
+        const geometry = node.geometry(graph);
+
+        const fields = [...preset.fields(loc), ...preset.moreFields(loc)];
+
+        const maybeDirectionField = fields.find(field => {
+            const isDirectionField = field.key && (field.key === 'direction' || field.key.endsWith(':direction'));
+            // some direction fields are for angles, so ensure that the
+            // direction field on this preset is not a numeric field.
+            const isRelativeDirection = field.type === 'combo';
+
+            // the field's geometry might be restricted to a subset of the preset's geometry
+            const isGeometryValid = !field.geometry || field.geometry.includes(geometry);
+
+            return isDirectionField && isRelativeDirection && isGeometryValid;
+        });
+
+        return maybeDirectionField?.key || false;
+    }
+
 
     // Reverse the direction of tags attached to the nodes - #3076
     function reverseNodeTags(graph, nodeIDs) {
@@ -151,10 +176,26 @@ export function actionReverse(entityID, options) {
             var node = graph.hasEntity(nodeIDs[i]);
             if (!node || !Object.keys(node.tags).length) continue;
 
+            let anyChanges = false;
             var tags = {};
             for (var key in node.tags) {
-                tags[reverseKey(key)] = reverseValue(key, node.tags[key], node.id === entityID, node.tags);
+                const value = node.tags[key];
+
+                const newKey = reverseKey(key);
+                const newValue = reverseValue(key, value, node.id === entityID, node.tags);
+                tags[newKey] = newValue;
+                if (key !== newKey || value !== newValue) {
+                    anyChanges = true;
+                }
             }
+
+            // for features whose presets have a direction field,
+            // the first flip just adds the direction tag.
+            const directionKey = supportsDirectionField(node, graph);
+            if (node.id === entityID && !anyChanges && directionKey) {
+                tags[directionKey] = 'forward';
+            }
+
             graph = graph.replace(node.update({tags: tags}));
         }
         return graph;
@@ -204,6 +245,13 @@ export function actionReverse(entityID, options) {
                 return false;
             }
         }
+
+
+        // exception for features whose presets have a direction
+        // field - they're flipable even if they don't have a
+        // direction tag.
+        if (supportsDirectionField(entity, graph)) return false;
+
         return 'nondirectional_node';
     };
 

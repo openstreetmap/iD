@@ -4,10 +4,10 @@ import { t } from '../../core/localizer';
 
 
 export function uiPanelBackground(context) {
-    var background = context.background();
-    var _currSourceName = null;
-    var _metadata = {};
-    var _metadataKeys = [
+    const background = context.background();
+    let _currSource = null;
+    let _metadata = {};
+    const _metadataKeys = [
         'zoom', 'vintage', 'source', 'description', 'resolution', 'accuracy'
     ];
 
@@ -17,11 +17,8 @@ export function uiPanelBackground(context) {
         var source = background.baseLayerSource();
         if (!source) return;
 
-        var isDG = (source.id.match(/^DigitalGlobe/i) !== null);
-
-        var sourceLabel = source.label();
-        if (_currSourceName !== sourceLabel) {
-            _currSourceName = sourceLabel;
+        if (_currSource?.id !== source.id) {
+            _currSource = source;
             _metadata = {};
         }
 
@@ -33,12 +30,9 @@ export function uiPanelBackground(context) {
 
         list
             .append('li')
-            .call(_currSourceName);
+            .call(_currSource.label());
 
         _metadataKeys.forEach(function(k) {
-            // DigitalGlobe vintage is available in raster layers for now.
-            if (isDG && k === 'vintage') return;
-
             list
                 .append('li')
                 .attr('class', 'background-info-list-' + k)
@@ -63,34 +57,6 @@ export function uiPanelBackground(context) {
                 context.setDebug('tile', !context.getDebug('tile'));
                 selection.call(redraw);
             });
-
-        if (isDG) {
-            var key = source.id + '-vintage';
-            var sourceVintage = context.background().findSource(key);
-            var showsVintage = context.background().showsLayer(sourceVintage);
-            var toggleVintage = showsVintage ? 'hide_vintage' : 'show_vintage';
-            selection
-                .append('a')
-                .call(t.append('info_panels.background.' + toggleVintage))
-                .attr('href', '#')
-                .attr('class', 'button button-toggle-vintage')
-                .on('click', function(d3_event) {
-                    d3_event.preventDefault();
-                    context.background().toggleOverlayLayer(sourceVintage);
-                    selection.call(redraw);
-                });
-        }
-
-        // disable if necessary
-        ['DigitalGlobe-Premium', 'DigitalGlobe-Standard'].forEach(function(layerId) {
-            if (source.id !== layerId) {
-                var key = layerId + '-vintage';
-                var sourceVintage = context.background().findSource(key);
-                if (context.background().showsLayer(sourceVintage)) {
-                    context.background().toggleOverlayLayer(sourceVintage);
-                }
-            }
-        });
     }
 
 
@@ -100,7 +66,7 @@ export function uiPanelBackground(context) {
         var tile = context.container().select('.layer-background img.tile-center');   // tile near viewport center
         if (tile.empty()) return;
 
-        var sourceName = _currSourceName;
+        var sourceId = _currSource.id;
         var d = tile.datum();
         var zoom = (d && d.length >= 3 && d[2]) || Math.floor(context.map().zoom());
         var center = context.map().center();
@@ -115,7 +81,7 @@ export function uiPanelBackground(context) {
         if (!d || !d.length >= 3) return;
 
         background.baseLayerSource().getMetadata(center, d, function(err, result) {
-            if (err || _currSourceName !== sourceName) return;
+            if (err || _currSource.id !== sourceId) return;
 
             // update vintage
             var vintage = result.vintage;

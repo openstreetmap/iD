@@ -1,5 +1,6 @@
 import deepEqual from 'fast-deep-equal';
 import { clamp } from 'lodash-es';
+import { select as d3_select } from 'd3';
 
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
@@ -20,8 +21,8 @@ export function svgPoints(projection, context) {
                 if (!isAddressPoint(d.tags)) {
                     return 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z';
                 }
-                const shieldWidth = addressShieldWidth(d, selection);
-                return `M ${shieldWidth},8 C ${shieldWidth},15 ${shieldWidth-2},16 ${shieldWidth-8},16 L 8,16 C 2,16 0,15 0,8 C 0,2 2,0 8,0 L ${shieldWidth-8},0 C ${shieldWidth-2},0 ${shieldWidth},2 ${shieldWidth},8 z`;
+                const w = addressShieldWidth(d, selection);
+                return `M ${w-3.5} 0 a 3.5 3.5 0 0 0 3.5 3.5 l 0 9 a 3.5 3.5 0 0 0 -3.5 3.5 l -${w-7} 0 a 3.5 3.5 0 0 0 -3.5 -3.5 l 0 -9 a 3.5 3.5 0 0 0 3.5 -3.5 z`;
             });
     }
 
@@ -121,13 +122,16 @@ export function svgPoints(projection, context) {
             .append('path')
             .call(markerPath, 'shadow');
 
-        enter
+        enter.each(function(d) {
+            if (isAddressPoint(d.tags)) return;
+            d3_select(this)
             .append('ellipse')
             .attr('cx', 0.5)
             .attr('cy', 1)
             .attr('rx', 6.5)
             .attr('ry', 3)
             .attr('class', 'stroke');
+        });
 
         enter
             .append('path')

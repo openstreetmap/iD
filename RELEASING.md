@@ -1,7 +1,7 @@
 ## Release Checklist
 
 ### Prerelease (several days prior)
-- [Notify translators](https://www.transifex.com/projects/p/id-editor/announcements/) of the impending release
+- [Notify translators](https://app.transifex.com/openstreetmap/communication/?q=project%3Aid-editor) of the impending release
 - Notify TomH
 
 ### Prep
@@ -13,7 +13,7 @@ on the iD project, and then create this file with contents like
   { "user":"api", "password": "<your-transifex-api-key>" }
   ````
 
-  where you insert your personal [transifex api token](https://www.transifex.com/user/settings/api/). This file is not version-controlled and will not be checked in.
+  where you insert your personal [transifex api token](https://app.transifex.com/user/settings/api/). This file is not version-controlled and will not be checked in.
 
 ### Update `iD`
 

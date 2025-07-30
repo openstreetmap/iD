@@ -9,6 +9,7 @@ const dispatch = d3_dispatch('viewerChanged');
 
 let _currScenes = [];
 let _pannellumViewer;
+let _activeSceneKey;
 
 export default {
 
@@ -29,7 +30,8 @@ export default {
       'default': { firstScene: '' },
       scenes: {},
       minHfov: 20,
-      disableKeyboardCtrl: true
+      disableKeyboardCtrl: true,
+      sceneFadeDuration: 0
     };
 
     _pannellumViewer = window.pannellum.viewer('ideditor-pannellum-viewer', options);
@@ -96,7 +98,7 @@ export default {
    * Shows the photo frame if hidden
    * @param {*} context the HTML wrap of the frame
    */
-  showPhotoFrame: function (context) {
+  showPhotoFrame: function(context) {
     const isHidden = context.selectAll('.photo-frame.pannellum-frame.hide').size();
 
     if (isHidden) {
@@ -116,22 +118,22 @@ export default {
    * Hides the photo frame if shown
    * @param {*} context the HTML wrap of the frame
    */
-  hidePhotoFrame: function (viewerContext) {
+  hidePhotoFrame: function(viewerContext) {
     viewerContext
       .select('photo-frame.pannellum-frame')
       .classed('hide', false);
 
     return this;
-    },
+  },
 
   /**
    * Renders an image inside the frame
    * @param {*} data the image data, it should contain an image_path attribute, a link to the actual image.
    * @param {boolean} keepOrientation if true, HFOV, pitch and yaw will be kept between images
    */
-  selectPhoto: function (data, keepOrientation) {
-    const {key} = data;
-    if ( !(key in _currScenes) ) {
+  selectPhoto: function(data, keepOrientation) {
+    const key = _activeSceneKey = data.image_path;
+    if (!_currScenes.includes(key)) {
       let newSceneOptions = {
         showFullscreenCtrl: false,
         autoLoad: false,
@@ -156,8 +158,25 @@ export default {
       pitch = this.getPitch();
       hfov = this.getHfov();
     }
-    _pannellumViewer.loadScene(key, pitch, yaw, hfov);
-    dispatch.call('viewerChanged');
+    if (_pannellumViewer.isLoaded() !== false) {
+      _pannellumViewer.loadScene(key, pitch, yaw, hfov);
+      dispatch.call('viewerChanged');
+    } else {
+      // pannellum is currently loading another scene: wait for it to finish
+      // loading the previous panorama first
+      const retry = setInterval(() => {
+        if (_pannellumViewer.isLoaded() === false) {
+          // still not done: wait a bit longer
+          return;
+        }
+        if (_activeSceneKey === key) {
+          // only load scene if no other photo has been selected in the meantime
+          _pannellumViewer.loadScene(key, pitch, yaw, hfov);
+          dispatch.call('viewerChanged');
+        }
+        clearInterval(retry);
+      }, 100);
+    }
 
     if (_currScenes.length > 3) {
       const old_key = _currScenes.shift();

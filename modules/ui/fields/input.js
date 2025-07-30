@@ -91,6 +91,7 @@ export function uiFieldText(field, context) {
         input = input.enter()
             .append('input')
             .attr('type', field.type === 'identifier' ? 'text' : field.type)
+            .attr('dir', 'auto')
             .attr('id', field.domId)
             .classed(field.type, true)
             .call(utilNoAuto)
@@ -501,12 +502,18 @@ export function uiFieldText(field, context) {
             // by pressing the +/- buttons or using the raw tag editor), we
             // can and should update the content of the input element.
             shouldUpdate = (inputValue, setValue) => {
-                const inputNums = inputValue.split(';').map(setVal =>
-                    likelyRawNumberFormat.test(setVal)
-                        ? parseFloat(setVal)
-                        : parseLocaleFloat(setVal)
-                );
-                const setNums = setValue.split(';').map(parseLocaleFloat);
+                const inputNums = inputValue.split(';').map(val => {
+                    const parsedNum = likelyRawNumberFormat.test(val)
+                        ? parseFloat(val)
+                        : parseLocaleFloat(val);
+                    if (!isFinite(parsedNum)) return val; // keep unparsable values as-is
+                    return parsedNum;
+                });
+                const setNums = setValue.split(';').map(val => {
+                    const parsedNum = parseLocaleFloat(val);
+                    if (!isFinite(parsedNum)) return val; // keep unparsable values as-is
+                    return parsedNum;
+                });
                 return !isEqual(inputNums, setNums);
             };
         }

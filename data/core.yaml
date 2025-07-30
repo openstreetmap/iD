@@ -613,6 +613,7 @@ en:
     download_changes: Download osmChange file
     errors: Errors
     warnings: Warnings
+    suggestions: Suggestions
     modified: Modified
     deleted: Deleted
     created: Created
@@ -704,6 +705,7 @@ en:
       title: Zoom To Selection
       no_selection: Nothing to zoom to.
     show_more: Show More
+    last_modified: Last modified {timeago} by {user}
     view_on_osm: View on openstreetmap.org
     view_on_osmose: View on osmose.openstreetmap.fr
     view_on_keepRight: View on keepright.at
@@ -715,6 +717,7 @@ en:
     features: Features
     title_count: "{title} ({count})"
     add_to_relation: Add to a relation
+    add_tag: Add new tag
     new_relation: New relation...
     choose_relation: Choose a parent relation
     role: Role
@@ -764,6 +767,8 @@ en:
     add_fields: "Add field:"
     lock:
       suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "Tags" section.'
+    display_name_addr: "{housenumber} {streetOrPlace}"
+    display_name_addr_with_unit: "{unit}, {housenumber} {streetOrPlace}"
     display_name:
       direction: "{direction}"
       network: "{network}"
@@ -1730,6 +1735,8 @@ en:
       list_title: "Errors"
     warnings:
       list_title: "Warnings"
+    suggestions:
+      list_title: "Suggestions"
     rules:
       title: Rules
     user_resolved_issues: Issues resolved by your edits

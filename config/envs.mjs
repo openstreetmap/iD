@@ -2,7 +2,7 @@
 
 import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({ quiet: true });
 const envs = {
   ENV__ID_PRESETS_CDN_URL: JSON.stringify(process.env.ID_PRESETS_CDN_URL || null),
   ENV__ID_OCI_CDN_URL: JSON.stringify(process.env.ID_OCI_CDN_URL || null),
