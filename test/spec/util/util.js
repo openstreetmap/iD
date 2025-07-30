@@ -341,13 +341,16 @@ describe('iD.util', function() {
             expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '31', 'addr:street': 'Princes Street' } })).to.eql('31 Princes Street');
         });
         it('uses the street address as a last resort', () => {
-            expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '1', 'addr:place': 'Princes Street' } })).to.eql('1 Motutapu Island');
+            expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '1', 'addr:place': 'Motutapu Island' } })).to.eql('1 Motutapu Island');
         });
         it('uses addr:unit if present', () => {
             expect(iD.utilDisplayName({ tags: { 'addr:unit': 'Flat 1', 'addr:housenumber': '30', 'addr:street': 'Madden Street' } })).to.eql('Flat 1, 30 Madden Street');
         });
         it('uses just addr:housenumber if it is the only addr: tag present', () => {
             expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '32' } })).to.eql('32');
+        });
+        it('uses only the housenumber for map labels', () => {
+            expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '31', 'addr:street': 'Princes Street' } }, undefined, true)).to.eql('31');
         });
     });
 
