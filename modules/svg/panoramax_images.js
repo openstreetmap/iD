@@ -52,7 +52,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         const service = getService();
 
         if (!showsPano || !showsFlat) {
-            images = images.filter(function(image) {
+            images = images.filter(image => {
                 if (image.isPano) return showsPano;
                 return showsFlat;
             });
@@ -103,9 +103,9 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         const service = getService();
 
         if (!showsPano || !showsFlat) {
-            sequences = sequences.filter(function(sequence) {
-                    if (sequence.properties.type === 'equirectangular') return showsPano;
-                    return showsFlat;
+            sequences = sequences.filter(sequence => {
+                if (sequence.properties.type === 'equirectangular') return showsPano;
+                return showsFlat;
             });
         }
         if (fromDate && !skipDateFilter) {

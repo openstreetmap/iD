@@ -109,7 +109,8 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         captured_by: item.username,
                         imagePath: item.name,
                         sequence_id: item.sequence_id,
-                        sequence_index: +item.sequence_index
+                        sequence_index: +item.sequence_index,
+                        isPano: item.projection === 'SPHERE'
                     };
 
                     // cache sequence info
@@ -224,9 +225,10 @@ export default {
                         type: 'LineString',
                         coordinates: images.map(function (d) { return d.loc; }).filter(Boolean),
                         properties: {
-                            captured_at: images[0] ? images[0].captured_at: null,
-                            captured_by: images[0] ? images[0].captured_by: null,
-                            key: sequenceKey
+                            captured_at: images[0] ? images[0].captured_at : null,
+                            captured_by: images[0] ? images[0].captured_by : null,
+                            key: sequenceKey,
+                            isPano: images[0]?.isPano
                         }
                     });
                 }

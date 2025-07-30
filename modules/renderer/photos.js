@@ -168,16 +168,23 @@ export function rendererPhotos(context) {
      * @returns If the Date Slider filter should be drawn
      */
     photos.shouldFilterDateBySlider = function(){
-        return showsLayer('mapillary') || showsLayer('kartaview') || showsLayer('mapilio')
-        || showsLayer('streetside') || showsLayer('vegbilder') || showsLayer('panoramax');
+        return showsLayer('mapillary')
+            || showsLayer('kartaview')
+            || showsLayer('mapilio')
+            || showsLayer('streetside')
+            || showsLayer('vegbilder')
+            || showsLayer('panoramax');
     };
 
     /**
      * @returns If the Photo Type filter should be drawn
      */
     photos.shouldFilterByPhotoType = function() {
-        return showsLayer('mapillary') ||
-            (showsLayer('streetside') && showsLayer('kartaview')) || showsLayer('vegbilder') || showsLayer('panoramax');
+        return showsLayer('mapillary')
+            || showsLayer('kartaview')
+            || showsLayer('streetside')
+            || showsLayer('vegbilder')
+            || showsLayer('panoramax');
     };
 
     /**

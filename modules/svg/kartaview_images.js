@@ -106,10 +106,18 @@ export function svgKartaviewImages(projection, context, dispatch) {
 
 
     function filterImages(images, skipDateFilter = false) {
-        var fromDate = context.photos().fromDate();
-        var toDate = context.photos().toDate();
-        var usernames = context.photos().usernames();
+        const showsPano = context.photos().showsPanoramic();
+        const showsFlat = context.photos().showsFlat();
+        const fromDate = context.photos().fromDate();
+        const toDate = context.photos().toDate();
+        const usernames = context.photos().usernames();
 
+        if (!showsPano || !showsFlat) {
+            images = images.filter(image => {
+                if (image.isPano) return showsPano;
+                return showsFlat;
+            });
+        }
         if (fromDate && !skipDateFilter) {
             var fromTimestamp = new Date(fromDate).getTime();
             images = images.filter(function(item) {
@@ -132,10 +140,18 @@ export function svgKartaviewImages(projection, context, dispatch) {
     }
 
     function filterSequences(sequences, skipDateFilter = false) {
-        var fromDate = context.photos().fromDate();
-        var toDate = context.photos().toDate();
-        var usernames = context.photos().usernames();
+        const showsPano = context.photos().showsPanoramic();
+        const showsFlat = context.photos().showsFlat();
+        const fromDate = context.photos().fromDate();
+        const toDate = context.photos().toDate();
+        const usernames = context.photos().usernames();
 
+        if (!showsPano || !showsFlat) {
+            sequences = sequences.filter(sequence => {
+                if (sequence.properties.isPano) return showsPano;
+                return showsFlat;
+            });
+        }
         if (fromDate && !skipDateFilter) {
             var fromTimestamp = new Date(fromDate).getTime();
             sequences = sequences.filter(function(sequence) {
