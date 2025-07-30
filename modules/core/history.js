@@ -148,7 +148,8 @@ export function coreHistory(context) {
 
             if (transitionable) {
                 var origArguments = arguments;
-                d3_select(document)
+                return new Promise(resolve => {
+                  d3_select(document)
                     .transition('history.perform')
                     .duration(duration)
                     .ease(d3_easeLinear)
@@ -158,11 +159,12 @@ export function coreHistory(context) {
                         };
                     })
                     .on('start', function() {
-                        _perform([action0], 0);
+                        resolve(_perform([action0], 0));
                     })
                     .on('end interrupt', function() {
-                        _overwrite(origArguments, 1);
+                        resolve(_overwrite(origArguments, 1));
                     });
+                });
 
             } else {
                 return _perform(arguments);

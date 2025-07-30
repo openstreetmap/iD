@@ -74,7 +74,7 @@ describe('iD.coreHistory', function () {
             var action1 = function() { return iD.coreGraph(); };
             action1.transitionable = true;
             history.on('change', spy);
-            history.perform(action1);
+            await history.perform(action1);
             await setTimeout(300);
             expect(spy.callCount).to.be.above(2);
         });
