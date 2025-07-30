@@ -336,9 +336,9 @@ export function uiFeatureList(context) {
                 if (d.entity?.type !== 'relation') return;
 
                 const hasRef = d.entity.tags.ref;
-                const relColors = getRelationColor(d.relation.tags, '#555');
+                const relColors = getRelationColor(d.entity.tags, '#555');
                 if (relColors.isValid || hasRef) {
-                    const refs = (d.relation.tags.ref || '').split(';');
+                    const refs = (d.entity.tags.ref || '').split(';');
                     for (const ref of refs) {
                         d3_select(this)
                             .append('span')
