@@ -20,11 +20,7 @@ export function uiSectionMapFeatures(context) {
             .append('div')
             .attr('class', 'layer-feature-list-container');
 
-        containerEnter
-            .append('ul')
-            .attr('class', 'layer-list layer-feature-list');
-
-        var footer = containerEnter
+                var footer = containerEnter
             .append('div')
             .attr('class', 'feature-list-links section-footer');
 
@@ -49,6 +45,12 @@ export function uiSectionMapFeatures(context) {
                 d3_event.preventDefault();
                 context.features().enableAll();
             });
+
+        containerEnter
+            .append('ul')
+            .attr('class', 'layer-list layer-feature-list');
+
+
 
         // Update
         container = container
