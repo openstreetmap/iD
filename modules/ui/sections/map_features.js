@@ -20,31 +20,33 @@ export function uiSectionMapFeatures(context) {
             .append('div')
             .attr('class', 'layer-feature-list-container');
 
-                var footer = containerEnter
-            .append('div')
-            .attr('class', 'feature-list-links section-footer');
 
-        footer
-            .append('a')
-            .attr('class', 'feature-list-link')
-            .attr('role', 'button')
-            .attr('href', '#')
-            .call(t.append('issues.disable_all'))
-            .on('click', function(d3_event) {
-                d3_event.preventDefault();
-                context.features().disableAll();
-            });
+var footer = containerEnter
+    .append('div')
+    .attr('class', 'feature-list-links section-footer')
+    .style('margin-top', '-25px');
 
-        footer
-            .append('a')
-            .attr('class', 'feature-list-link')
-            .attr('role', 'button')
-            .attr('href', '#')
-            .call(t.append('issues.enable_all'))
-            .on('click', function(d3_event) {
-                d3_event.preventDefault();
-                context.features().enableAll();
-            });
+footer
+    .append('a')
+    .attr('class', 'feature-list-link')
+    .attr('role', 'button')
+    .attr('href', '#')
+    .call(t.append('issues.disable_all'))
+    .on('click', function(d3_event) {
+        d3_event.preventDefault();
+        context.features().disableAll();
+    });
+
+footer
+    .append('a')
+    .attr('class', 'feature-list-link')
+    .attr('role', 'button')
+    .attr('href', '#')
+    .call(t.append('issues.enable_all'))
+    .on('click', function(d3_event) {
+        d3_event.preventDefault();
+        context.features().enableAll();
+    });
 
         containerEnter
             .append('ul')
