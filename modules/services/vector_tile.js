@@ -95,6 +95,8 @@ function vtToGeoJSON(data, tile, mergeCache) {
 function loadTile(source, tile) {
     if (source.loaded[tile.id] || source.inflight[tile.id]) return;
 
+    var bbox = tile.extent.bbox();
+
     var url = source.template
         .replace('{x}', tile.xyz[0])
         .replace('{y}', tile.xyz[1])
@@ -104,7 +106,8 @@ function loadTile(source, tile) {
         .replace(/\{switch:([^}]+)\}/, function(s, r) {
             var subdomains = r.split(',');
             return subdomains[(tile.xyz[0] + tile.xyz[1]) % subdomains.length];
-        });
+        })
+        .replace('{bbox}', `${bbox.minX},${bbox.minY},${bbox.maxX},${bbox.maxY}`);
 
 
     var controller = new AbortController();

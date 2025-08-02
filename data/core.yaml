@@ -1011,7 +1011,7 @@ en:
         label: "Browse files"
       or: "Or"
       url:
-        instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
+        instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {bbox}, {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
         placeholder: Enter a url
   preferences:
     title: Preferences
