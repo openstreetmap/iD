@@ -86,7 +86,8 @@ export function actionExtract(entityID, projection) {
                 // don't transfer building-related tags
                 if (buildingKeysToRetain.indexOf(key) !== -1 ||
                     key.match(/^building:.{1,}/) ||
-                    key.match(/^roof:.{1,}/)) continue;
+                    key.match(/^roof:.{1,}/) ||
+                    key.match(/^ref:.{1,}/)) continue;
             }
             // leave `indoor` tag on the area
             if (isIndoorArea && key === 'indoor') {
