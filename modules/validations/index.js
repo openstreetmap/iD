@@ -16,3 +16,4 @@ export { validationOutdatedTags } from './outdated_tags';
 export { validationPrivateData } from './private_data';
 export { validationSuspiciousName } from './suspicious_name';
 export { validationUnsquareWay } from './unsquare_way';
+export {validationDashes} from './invalid_dashes'
