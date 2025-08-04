@@ -12,9 +12,13 @@ export function utilCleanTags(tags) {
 
 
     function cleanValue(k, v) {
-        function keepSpaces(k) {
-            return /_hours|_times|:conditional$/.test(k);
+
+        // Compact list: no space after semicolon
+        function isCommaSeparated(k) {
+             return /^(cuisine|beauty|payment:cash|payment:credit_cards|leading|trailing|both)$/.test(k);
         }
+
+
 
         function skip(k) {
             return /^(description|note|fixme|inscription)$/.test(k);
@@ -25,7 +29,7 @@ export function utilCleanTags(tags) {
         var cleaned = v
             .split(';')
             .map(function(s) { return s.trim(); })
-            .join(keepSpaces(k) ? '; ' : ';');
+            .join(isCommaSeparated(k) ? ';' : '; ');
 
         // The code below is not intended to validate websites and emails.
         // It is only intended to prevent obvious copy-paste errors. (#2323)
