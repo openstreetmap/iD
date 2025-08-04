@@ -15,7 +15,7 @@ export function utilCleanTags(tags) {
 
         // Compact list: no space after semicolon
         function isCommaSeparated(k) {
-             return /^(cuisine|beauty|payment:cash|payment:credit_cards|leading|trailing|both)$/.test(k);
+             return /^(cuisine|beauty|payment:cash|payment:credit_cards)$/.test(k);
         }
 
 
