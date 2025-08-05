@@ -410,7 +410,28 @@ export function uiFieldText(field, context) {
         return function() {
             var t = {};
             var val = utilGetSetValue(input);
-            if (!onInput) val = context.cleanTagValue(val);
+
+            // Only apply cleanTagValue to fields that need it (comma-separated fields)
+            // Free-text fields like 'text', 'textarea', 'localized' should preserve spaces
+            const shouldCleanValue = field.type === 'number' ||
+                                   field.type === 'combo' ||
+                                   field.type === 'multiCombo' ||
+                                   field.type === 'semiCombo' ||
+                                   field.type === 'manyCombo' ||
+                                   field.type === 'networkCombo' ||
+                                   field.type === 'typeCombo' ||
+                                   field.type === 'directionalCombo' ||
+                                   field.type === 'cycleway' ||
+                                   field.type === 'identifier' ||
+                                   field.type === 'url' ||
+                                   field.type === 'colour' ||
+                                   field.type === 'date' ||
+                                   field.type === 'tel' ||
+                                   field.type === 'email';
+
+            if (!onInput && shouldCleanValue) {
+                val = context.cleanTagValue(val);
+            }
 
             // don't override multiple values with blank string
             if (!val && getVals(_tags).size > 1) return;

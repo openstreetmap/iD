@@ -47,7 +47,8 @@ export function uiFieldTextarea(field, context) {
             return function() {
 
                 var val = utilGetSetValue(input);
-                if (!onInput) val = context.cleanTagValue(val);
+                // Don't apply cleanTagValue to textarea fields - they should preserve spaces
+                // if (!onInput) val = context.cleanTagValue(val);
 
                 // don't override multiple values with blank string
                 if (!val && Array.isArray(_tags[field.key])) return;
