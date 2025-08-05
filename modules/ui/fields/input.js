@@ -410,12 +410,10 @@ export function uiFieldText(field, context) {
         return function() {
             var t = {};
             var val = utilGetSetValue(input);
-
-            // Only apply cleanTagValue to fields that need it (comma-separated fields)
-            // Free-text fields like 'text', 'textarea', 'localized' should preserve spaces
-            const shouldCleanValue = field.type === 'number' ||
-                                   field.type === 'combo' ||
-                                   field.type === 'multiCombo' ||
+            
+            const shouldCleanValue = field.type === 'number' || 
+                                   field.type === 'combo' || 
+                                   field.type === 'multiCombo' || 
                                    field.type === 'semiCombo' ||
                                    field.type === 'manyCombo' ||
                                    field.type === 'networkCombo' ||
@@ -428,26 +426,23 @@ export function uiFieldText(field, context) {
                                    field.type === 'date' ||
                                    field.type === 'tel' ||
                                    field.type === 'email';
-
+            
             if (!onInput && shouldCleanValue) {
                 val = context.cleanTagValue(val);
             }
 
-            // don't override multiple values with blank string
             if (!val && getVals(_tags).size > 1) return;
 
             let displayVal = val;
             if (field.type === 'number' && val) {
                 const numbers = val.split(';').map(v => {
                     if (likelyRawNumberFormat.test(v)) {
-                        // input number likely in "raw" format
                         return {
                             v,
                             num: parseFloat(v),
                             fractionDigits: v.includes('.') ? v.split('.')[1].length : 0
                         };
                     } else {
-                        // try to parse in localized number format
                         return {
                             v,
                             num: parseLocaleFloat(v),
@@ -467,16 +462,12 @@ export function uiFieldText(field, context) {
             if (!onInput) utilGetSetValue(input, displayVal);
             t[field.key] = val || undefined;
             if (field.keys) {
-                // for multi-key fields with: handle alternative tag keys gracefully
-                // https://github.com/openstreetmap/id-tagging-schema/issues/905
                 dispatch.call('change', this, tags => {
                     if (field.keys.some(key => tags[key])) {
-                        // use exiting key(s)
                         field.keys.filter(key => tags[key]).forEach(key => {
                             tags[key] = val || undefined;
                         });
                     } else {
-                        // fall back to default key if none of the `keys` is preset
                         tags[field.key] = val || undefined;
                     }
                     return tags;

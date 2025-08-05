@@ -255,10 +255,7 @@ export function uiFieldLocalized(field, context) {
                 }
 
                 var val = utilGetSetValue(d3_select(this));
-                // Don't apply cleanTagValue to localized fields - they should preserve spaces
-                // if (!onInput) val = context.cleanTagValue(val);
 
-                // don't override multiple values with blank string
                 if (!val && Array.isArray(_tags[field.key])) return;
 
                 var t = {};
@@ -309,11 +306,8 @@ export function uiFieldLocalized(field, context) {
 
     function changeValue(d3_event, d) {
         if (!d.lang) return;
-        // Don't apply cleanTagValue to localized fields - they should preserve spaces
         var value = utilGetSetValue(d3_select(this)) || undefined;
-        // var value = context.cleanTagValue(utilGetSetValue(d3_select(this))) || undefined;
 
-        // don't override multiple values with blank string
         if (!value && Array.isArray(d.value)) return;
 
         var t = {};
