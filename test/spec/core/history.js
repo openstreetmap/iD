@@ -589,16 +589,24 @@ describe('iD.coreHistory', function () {
         });
 
         it('migrates history data from localStorage to IndexedDB', async function() {
-            var { migrateHistoryData } = require('../../../modules/core/preferences');
+            var { migrateHistoryData, prefs } = require('../../../modules/core/preferences');
             var { get, set } = require('idb-keyval');
 
-            await set('test_key', 'test_value');
-            var testData = await get('test_key');
-            expect(testData).to.equal('test_value');
+            var testHistoryKey = 'iD_http://localhost:8080_saved_history';
+            var testHistoryData = {
+                version: 3,
+                entities: [],
+                stack: [{}],
+                index: 0,
+                timestamp: Date.now()
+            };
 
+            prefs(testHistoryKey, JSON.stringify(testHistoryData));
             await migrateHistoryData();
 
-            expect(true).to.be.true;
+            var migratedData = await get(testHistoryKey);
+            expect(migratedData).to.deep.equal(testHistoryData);
+            expect(prefs(testHistoryKey)).to.be.null;
         });
 
         it('asyncPrefs get and set work correctly', async function() {
@@ -606,7 +614,6 @@ describe('iD.coreHistory', function () {
 
             await asyncPrefs.set('test_async_key', 'test_async_value');
             var retrievedValue = await asyncPrefs.get('test_async_key');
-
             expect(retrievedValue).to.equal('test_async_value');
         });
     });
