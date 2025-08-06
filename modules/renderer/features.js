@@ -1,7 +1,8 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
-import { osmEntity, osmLifecyclePrefixes } from '../osm';
+import { osmEntity } from '../osm';
+import { osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
 import { utilRebind } from '../util/rebind';
 import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
 import { isAddressPoint } from '../svg/labels';
@@ -144,12 +145,15 @@ export function rendererFeatures(context) {
     });
 
     defineRule('landuse', function isLanduse(tags, geometry) {
-        return geometry === 'area' && (
-            !!tags.landuse ||
-            !!tags.natural ||
-            !!tags.leisure ||
-            !!tags.amenity
-        ) &&
+        if (geometry !== 'area') return false;
+        let hasLanduseTag = false;
+        for (const key in osmLanduseTags) {
+            if (osmLanduseTags[key] === true && tags[key] ||
+                osmLanduseTags[key][tags[key]] === true) {
+                hasLanduseTag = true;
+            }
+        }
+        return hasLanduseTag &&
             !_rules.buildings.filter(tags) &&
             !_rules.building_parts.filter(tags) &&
             !_rules.indoor.filter(tags) &&

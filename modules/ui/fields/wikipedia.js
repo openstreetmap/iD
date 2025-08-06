@@ -113,6 +113,7 @@ export function uiFieldWikipedia(field, context) {
     _titleInput = _titleInput.enter()
       .append('input')
       .attr('type', 'text')
+      .attr('dir', 'auto')
       .attr('class', 'wiki-title')
       .attr('id', field.domId)
       .call(utilNoAuto)

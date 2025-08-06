@@ -12,6 +12,7 @@ export function validationIssue(attrs) {
     this.data = attrs.data;                // optional - object containing extra data for the fixes
     this.dynamicFixes = attrs.dynamicFixes;// optional - function(context) returning fixes
     this.hash = attrs.hash;                // optional - string to further differentiate the issue
+    this.extent = attrs.extent;            // optional - a method that returns the geometric extent of the issue, if absent, it will be calculated from the given entityIds
 
     this.id = generateID.apply(this);      // generated - see below
     this.key = generateKey.apply(this);    // generated - see below (call after generating this.id)
@@ -46,8 +47,7 @@ export function validationIssue(attrs) {
         return this.id + ':' + Date.now().toString();  // include time of creation
     }
 
-
-    this.extent = function(resolver) {
+    this.extent = this.extent || function(resolver) {
         if (this.loc) {
             return geoExtent(this.loc);
         }

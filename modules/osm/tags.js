@@ -303,6 +303,26 @@ export var osmFlowingWaterwayTagValues = {
     canal: true, ditch: true, drain: true, fish_pass: true, flowline: true, river: true, stream: true, tidal_channel: true
 };
 
+// Tag values that represent actual land use (areas)
+export var osmLanduseTags = {
+    'amenity': {
+        'bicycle_parking': true,
+        'college': true,
+        'grave_yard': true,
+        'hospital': true,
+        'marketplace': true,
+        'motorcycle_parking': true,
+        'parking': true,
+        'place_of_worship': true,
+        'prison': true,
+        'school': true,
+        'university': true
+    },
+    'landuse': true,
+    'leisure': true,
+    'natural': true
+};
+
 // Tags which values should be considered case sensitive when offering tag suggestions
 export const allowUpperCaseTagValues = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer|country|target|brewery|cai_scale|traffic_sign/;
 

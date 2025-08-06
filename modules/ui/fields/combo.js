@@ -505,6 +505,7 @@ export function uiFieldCombo(field, context) {
         _input = _input.enter()
             .append('input')
             .attr('type', 'text')
+            .attr('dir', 'auto')
             .attr('id', field.domId)
             .call(utilNoAuto)
             .call(initCombo, _container)

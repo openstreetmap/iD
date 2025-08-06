@@ -38,13 +38,20 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # unreleased (v2.36.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* use `addr:` tags to label features with no name ([#8440], thanks [@k-yle])
 * The flip operation now works on nodes with no `direction` tag, to support quickly adding `direction` to features like traffic signs ([#9317], thanks [@k-yle])
 * Show "add new key" placeholder text for blank row in raw tag editor ([#11211], thanks [@bhavyaKhatri2703])
 * Consider other name-like tags for labelling features, such as `lock_name` ([#9588], thanks [@k-yle])
+* Always take reduced map size due to open side panels into account when zooming to selected entities
+* Limit landuse tags that are considered for "Landuse" area features ([#11184], thanks [@youssefelzedy])
+* When a feature is selected, show when and who last modified it ([#7629], thanks [@k-yle])
+* Render climbing routes and via ferrata ways as dotted lines ([#11133], thanks [@harahu])
 #### :scissors: Operations
 #### :camera: Street-Level
+* Fix bug where "tag photo id on selected map feature" is sometimes not working on the first opened photo ([#11021])
 #### :white_check_mark: Validation
 * Create a new warning tier for low-severity suggestions ([#11020], thanks [@k-yle])
+* Zoom to correct location when clicking on the _relation member has no role_ issue ([#11247])
 #### :bug: Bugfixes
 * Fix flickering of imagery metadata information in background panel ([#9754])
 * Immediately update raw tag key/value inputs when spaces have been trimmed ([#11206])
@@ -56,7 +63,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Support more complex logic to define preset fields that are conditionally hidden ([#9511], thanks [@k-yle])
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
+* Add signatures audit to CI build pipeline and pin github action's versions ([#11103], thanks [@Harvester57])
 
+[#7629]: https://github.com/openstreetmap/iD/pull/7629
+[#8440]: https://github.com/openstreetmap/iD/pull/8440
 [#9317]: https://github.com/openstreetmap/iD/issues/9317
 [#9511]: https://github.com/openstreetmap/iD/pull/9511
 [#9588]: https://github.com/openstreetmap/iD/pull/9588
@@ -64,9 +74,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10639]: https://github.com/openstreetmap/iD/pull/10639
 [#10645]: https://github.com/openstreetmap/iD/pull/10645
 [#11020]: https://github.com/openstreetmap/iD/pull/11020
+[#11021]: https://github.com/openstreetmap/iD/issues/11021
+[#11133]: https://github.com/openstreetmap/iD/issues/11133
+[#11184]: https://github.com/openstreetmap/iD/pull/11184
 [#11206]: https://github.com/openstreetmap/iD/issues/11206
 [#11211]: https://github.com/openstreetmap/iD/issues/11211
+[#11247]: https://github.com/openstreetmap/iD/issues/11247
 [@bhavyaKhatri2703]: https://github.com/bhavyaKhatri2703
+[@harahu]: https://github.com/harahu
+[@Harvester57]: https://github.com/Harvester57
 
 
 # v2.35.3

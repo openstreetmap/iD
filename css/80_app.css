@@ -243,6 +243,12 @@ textarea.mixed::placeholder {
     font-style: italic;
 }
 
+.ideditor[dir='rtl'] input:placeholder-shown[dir="auto"] {
+    /* hard-set rtl for placeholder texts in rtl locales, see
+       https://github.com/openstreetmap/iD/pull/11091#issuecomment-2936953197 */
+    direction: rtl;
+}
+
 /* keytraps need to be invisible yet not be display:none or visibility:hidden */
 .keytrap {
     width: 0;
@@ -4453,7 +4459,7 @@ img.tile {
     transition: opacity 1ms linear;
 }
 
-.layer-background,
+.layer-background .layer,
 .map-in-map-background {
     filter: url(#alpha-slope5);
 }

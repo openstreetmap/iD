@@ -273,13 +273,9 @@ export function coreValidator(context) {
     // because that is the graph that the calling code will be using.
     const graph = context.graph();
     let selectID;
-    let focusCenter;
 
     // Try to focus the map at the center of the issue..
-    const issueExtent = issue.extent(graph);
-    if (issueExtent) {
-      focusCenter = issueExtent.center();
-    }
+    let issueExtent = issue.extent(graph);
 
     // Try to select the first entity in the issue..
     if (issue.entityIds && issue.entityIds.length) {
@@ -299,15 +295,13 @@ export function coreValidator(context) {
         }
 
         if (nodeID) {
-          focusCenter = graph.entity(nodeID).loc;
+          issueExtent = graph.entity(nodeID).extent(graph);
         }
       }
     }
 
-    if (focusCenter) {  // Adjust the view
-      const setZoom = Math.max(context.map().zoom(), 19);
-      context.map().unobscuredCenterZoomEase(focusCenter, setZoom);
-    }
+    // Adjust the view
+    context.map().zoomToEase(issueExtent);
 
     if (selectID) {  // Enter select mode
       window.setTimeout(() => {

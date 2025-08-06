@@ -93,13 +93,11 @@ export function uiSectionEntityIssues(context) {
             .append('button')
             .attr('class', 'issue-text')
             .on('click', function(d3_event, d) {
-
                 makeActiveIssue(d.id); // expand only the clicked item
 
-                var extent = d.extent(context.graph());
+                const extent = d.extent(context.graph());
                 if (extent) {
-                    var setZoom = Math.max(context.map().zoom(), 19);
-                    context.map().unobscuredCenterZoomEase(extent.center(), setZoom);
+                    context.map().zoomToEase(extent);
                 }
             });
 

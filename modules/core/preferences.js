@@ -54,29 +54,17 @@ corePreferences.onChange = function(k, handler) {
 export { corePreferences as prefs };
 
 export const asyncPrefs = {
-  async get(key) {
-    let value = await get(key);
-
-    if (value === undefined) {
-      const localValue = corePreferences(key);
-      if (localValue !== null) {
-        try {
-          value = JSON.parse(localValue);
-        } catch {
-          value = localValue;
-        }
-
-        await set(key, value);
-        corePreferences(key, null);
-      }
+  /** @param {string} key */
+  get(key) {
+    if (corePreferences(key)) {
+      const parsed = JSON.parse(corePreferences(key));
+      corePreferences(key, null);
+      return parsed;
     }
 
-    return value;
+    return get(key);
   },
-
-  async set(key, value) {
-    await set(key, value);
-  }
+  set,
 };
 
 export async function migrateHistoryData() {

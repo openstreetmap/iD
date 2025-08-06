@@ -36,18 +36,19 @@ export function svgMapilioImages(projection, context, dispatch) {
     /**
      * Filters images
      * @param {*} images
+     * @param {Boolean} skipDateFilter if true, the set date filters will be ignored
      * @returns array of filtered images
      */
-    function filterImages(images) {
+    function filterImages(images, skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
 
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             images = images.filter(function(image) {
                 return new Date(image.capture_time).getTime() >= new Date(fromDate).getTime();
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             images = images.filter(function(image) {
                 return new Date(image.capture_time).getTime() <= new Date(toDate).getTime();
             });
@@ -59,18 +60,19 @@ export function svgMapilioImages(projection, context, dispatch) {
     /**
      * Filters sequences
      * @param {*} sequences
+     * @param {Boolean} skipDateFilter if true, the set date filters will be ignored
      * @returns array of filtered sequences
      */
-    function filterSequences(sequences) {
+    function filterSequences(sequences, skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
 
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.capture_time).getTime() >= new Date(fromDate).getTime().toString();
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.capture_time).getTime() <= new Date(toDate).getTime().toString();
             });
@@ -160,8 +162,8 @@ export function svgMapilioImages(projection, context, dispatch) {
         let images = (service && zoom >= imageMinZoom ? service.images(projection) : []);
 
         dispatch.call('photoDatesChanged', this, 'mapilio', [
-            ...images.map(p => p.capture_time),
-            ...sequences.map(s => s.properties.capture_time)
+            ...filterImages(images, true).map(p => p.capture_time),
+            ...filterSequences(sequences, true).map(s => s.properties.capture_time)
         ]);
 
         images = await filterImages(images);

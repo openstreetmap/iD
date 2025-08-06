@@ -172,6 +172,7 @@ export function uiFieldLocalized(field, context) {
         input = input.enter()
             .append('input')
             .attr('type', 'text')
+            .attr('dir', 'auto')
             .attr('id', field.domId)
             .attr('class', 'localized-main')
             .call(utilNoAuto)
@@ -426,6 +427,7 @@ export function uiFieldLocalized(field, context) {
                 wrap
                     .append('input')
                     .attr('type', 'text')
+                    .attr('dir', 'auto')
                     .attr('class', 'localized-value')
                     .on('blur', changeValue)
                     .on('change', changeValue);

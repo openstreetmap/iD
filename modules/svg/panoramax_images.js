@@ -39,9 +39,10 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     /**
      * Filters the images given the filters on the right panel
      * @param {*} images
+     * @param {Boolean} skipDateFilter if true, the set date filters will be ignored
      * @returns array of filtered images
      */
-    async function filterImages(images) {
+    async function filterImages(images, skipDateFilter = false) {
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
@@ -56,12 +57,12 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                 return showsFlat;
             });
         }
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             images = images.filter(function(image) {
                 return new Date(image.capture_time).getTime() >= new Date(fromDate).getTime();
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             images = images.filter(function(image) {
                 return new Date(image.capture_time).getTime() <= new Date(toDate).getTime();
             });
@@ -89,9 +90,10 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     /**
      * Filters the sequences given the filters on the right panel
      * @param {*} sequences
+     * @param {Boolean} skipDateFilter if true, the set date filters will be ignored
      * @returns array of filtered sequences
      */
-    async function filterSequences(sequences) {
+    async function filterSequences(sequences, skipDateFilter = false) {
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
@@ -106,12 +108,12 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                     return showsFlat;
             });
         }
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.date).getTime() >= new Date(fromDate).getTime().toString();
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.date).getTime() <= new Date(toDate).getTime().toString();
             });
@@ -231,7 +233,9 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         const service = getService();
         let sequences = (service ? service.sequences(projection, zoom) : []);
         let images = (service && zoom >= imageMinZoom ? service.images(projection) : []);
-        dispatch.call('photoDatesChanged', this, 'panoramax', [...images.map(p => p.capture_time), ...sequences.map(s => s.properties.date)]);
+        dispatch.call('photoDatesChanged', this, 'panoramax', [
+            ...(await filterImages(images, true)).map(p => p.capture_time),
+            ...(await filterSequences(sequences, true)).map(s => s.properties.date)]);
 
         images = await filterImages(images);
         sequences = await filterSequences(sequences, service);

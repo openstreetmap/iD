@@ -18,8 +18,8 @@ export function coreHistory(context) {
     var dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone', 'storage_error');
     var lock = utilSessionMutex('lock');
 
-    // We'll check IndexedDB directly for saved history
-    var _hasUnresolvedRestorableChanges = false;
+    // restorable if iD not open in another window/tab and a saved history exists in localStorage
+    var _hasUnresolvedRestorableChanges = lock.lock() && !!prefs(getKey('has_saved_history'));
 
     var duration = 150;
     var _imageryUsed = [];
@@ -655,8 +655,10 @@ export function coreHistory(context) {
                 !_hasUnresolvedRestorableChanges) {
 
                 const historyData = history.toJSON();
-                asyncPrefs.set(getKey('saved_history'), historyData || null)
-                    .catch(() => dispatch.call('storage_error'));
+                if (historyData) {
+                    asyncPrefs.set(getKey('saved_history'), historyData);
+                    prefs(getKey('has_saved_history'), true);
+                }
             }
             return history;
         },
@@ -668,7 +670,8 @@ export function coreHistory(context) {
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
 
-                asyncPrefs.set(getKey('saved_history'), null);
+                asyncPrefs.set(getKey('saved_history'), undefined);
+                prefs(getKey('has_saved_history'), null);
 
                 // clear the changeset metadata associated with the saved history
                 prefs('comment', null);
@@ -685,11 +688,6 @@ export function coreHistory(context) {
 
 
         hasRestorableChanges: function() {
-            if (lock.locked() && !_hasUnresolvedRestorableChanges) {
-                asyncPrefs.get(getKey('saved_history')).then(savedHistory => {
-                    _hasUnresolvedRestorableChanges = !!savedHistory;
-                });
-            }
             return _hasUnresolvedRestorableChanges;
         },
 
