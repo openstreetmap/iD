@@ -148,19 +148,19 @@ export function svgVegbilder(projection, context, dispatch) {
       .attr('transform', (d) => transform(d, d));
   }
 
-  function filterImages(images) {
+  function filterImages(images, skipDateFilter) {
     const photoContext = context.photos();
     const fromDateString = photoContext.fromDate();
     const toDateString = photoContext.toDate();
     const showsFlat = photoContext.showsFlat();
     const showsPano = photoContext.showsPanoramic();
 
-    if (fromDateString) {
+    if (fromDateString && !skipDateFilter) {
       const fromDate = new Date(fromDateString);
       images = images.filter(image => image.captured_at.getTime() >= fromDate.getTime());
     }
 
-    if (toDateString) {
+    if (toDateString && !skipDateFilter) {
       const toDate = new Date(toDateString);
       images = images.filter(image => image.captured_at.getTime() <= toDate.getTime());
     }
@@ -176,19 +176,19 @@ export function svgVegbilder(projection, context, dispatch) {
     return images;
   }
 
-  function filterSequences(sequences) {
+  function filterSequences(sequences, skipDateFilter) {
     const photoContext = context.photos();
     const fromDateString = photoContext.fromDate();
     const toDateString = photoContext.toDate();
     const showsFlat = photoContext.showsFlat();
     const showsPano = photoContext.showsPanoramic();
 
-    if (fromDateString) {
+    if (fromDateString && !skipDateFilter) {
       const fromDate = new Date(fromDateString);
       sequences = sequences.filter(({images}) => images[0].captured_at.getTime() >= fromDate.getTime());
     }
 
-    if (toDateString) {
+    if (toDateString && !skipDateFilter) {
       const toDate = new Date(toDateString);
       sequences = sequences.filter(({images}) => images[images.length - 1].captured_at.getTime() <= toDate.getTime());
     }
@@ -224,7 +224,9 @@ export function svgVegbilder(projection, context, dispatch) {
       sequences = service.sequences(projection);
       images = showMarkers ? service.images(projection) : [];
 
-      dispatch.call('photoDatesChanged', this, 'vegbilder', images.map(p => p.captured_at));
+      dispatch.call('photoDatesChanged', this, 'vegbilder', [
+        ...filterImages(images, true).map(p => p.captured_at),
+        ...filterSequences(sequences, true).map(s => s.images[0].captured_at)]);
 
       images = filterImages(images);
       sequences = filterSequences(sequences);
@@ -345,8 +347,11 @@ export function svgVegbilder(projection, context, dispatch) {
         update();
         service.loadImages(context);
       } else {
+        dispatch.call('photoDatesChanged', this, 'vegbilder', []);
         editOff();
       }
+    } else {
+      dispatch.call('photoDatesChanged', this, 'vegbilder', []);
     }
   }
 

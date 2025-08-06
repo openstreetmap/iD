@@ -243,6 +243,12 @@ textarea.mixed::placeholder {
     font-style: italic;
 }
 
+.ideditor[dir='rtl'] input:placeholder-shown[dir="auto"] {
+    /* hard-set rtl for placeholder texts in rtl locales, see
+       https://github.com/openstreetmap/iD/pull/11091#issuecomment-2936953197 */
+    direction: rtl;
+}
+
 /* keytraps need to be invisible yet not be display:none or visibility:hidden */
 .keytrap {
     width: 0;
@@ -2866,6 +2872,10 @@ img.tag-reference-wiki-image {
     margin: 0;
     padding-bottom: 10px;
 }
+/* only the raw-member-editor is reorederable, not the raw-membership-editor */
+.section-raw-member-editor .member-row .label-text { cursor: grab; }
+.section-raw-member-editor .member-row .label-text:active { cursor: grabbing; }
+
 .section-raw-member-editor .member-row .member-entity-name,
 .section-raw-membership-editor .member-row .member-entity-name {
     font-weight: normal;
@@ -2954,6 +2964,22 @@ img.tag-reference-wiki-image {
 .add-tag {
     border-radius: 0 0 4px 4px;
 }
+.add-tag button {
+    visibility: hidden;
+}
+.add-tag input.key {
+    border-bottom-left-radius: 4px;
+}
+.add-tag input.key::placeholder {
+    font-weight: normal;
+}
+.add-tag input.value {
+    border-bottom-right-radius: 4px;
+}
+.tag-row:has(+ .add-tag) button:last-child {
+    border-bottom-right-radius: 4px;
+}
+
 .add-relation {
     margin-top: 10px;
     border-radius: 4px;
@@ -3582,6 +3608,57 @@ button.autofix.action.active {
 }
 .autofix-all-link-icon svg use {
     color: #fff;
+}
+
+/* suggestion styles */
+.suggestions-list,
+.suggestions-list *,
+.issue-container.active .issue.severity-suggestion,
+.issue-container.active .issue.severity-suggestion * {
+    border-color: #2f7eff;
+}
+.suggestions-list .issue.severity-suggestion .issue-label,
+.issue.severity-suggestion .issue-fix-list,
+.suggestion-section {
+    background: #e1effe;
+}
+
+.issue-container.active .issue.severity-suggestion .issue-label {
+    background: #e1effe;
+}
+
+.issue.severity-suggestion .issue-icon {
+    color: #49f;
+}
+
+.issue.severity-suggestion .issue-fix-item button.actionable,
+.issue-container.active .issue.severity-suggestion .issue-info-button {
+    color: #0066cc;
+    fill: #0066cc;
+}
+.suggestions-list .issue.severity-suggestion .issue-label:active,
+.suggestions-list .issue.severity-suggestion .issue-label:focus,
+.issue.severity-suggestion .issue-fix-item button.actionable:active,
+.issue.severity-suggestion .issue-fix-item button.actionable:focus {
+    background: #abd5ff;
+}
+.issue.severity-suggestion .issue-fix-item button.actionable:active,
+.issue.severity-suggestion .issue-fix-item button.actionable:focus,
+.issue-container.active .issue.severity-suggestion .issue-info-button:active,
+.issue-container.active .issue.severity-suggestion .issue-info-button:focus {
+    color: #0066cc;
+    fill: #1f4d82;
+}
+@media (hover: hover) {
+    .suggestions-list .issue.severity-suggestion .issue-label:hover,
+    .issue.severity-warning .issue-fix-item button.actionable:hover {
+        background: #bdf;
+    }
+    .issue.severity-suggestion .issue-fix-item button.actionable:hover,
+    .issue-container.active .issue.severity-suggestion .issue-info-button:hover {
+        color: #1f4d82;
+        fill: #1f4d82;
+    }
 }
 
 /* warning styles */
@@ -4382,8 +4459,8 @@ img.tile {
     transition: opacity 1ms linear;
 }
 
-.layer-background img.tile,
-.map-in-map-background img.tile {
+.layer-background .layer,
+.map-in-map-background {
     filter: url(#alpha-slope5);
 }
 

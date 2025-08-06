@@ -157,18 +157,18 @@ export function svgStreetside(projection, context, dispatch) {
     }
 
 
-    function filterBubbles(bubbles) {
+    function filterBubbles(bubbles, skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
         var usernames = context.photos().usernames();
 
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             var fromTimestamp = new Date(fromDate).getTime();
             bubbles = bubbles.filter(function(bubble) {
                 return new Date(bubble.captured_at).getTime() >= fromTimestamp;
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             var toTimestamp = new Date(toDate).getTime();
             bubbles = bubbles.filter(function(bubble) {
                 return new Date(bubble.captured_at).getTime() <= toTimestamp;
@@ -183,18 +183,18 @@ export function svgStreetside(projection, context, dispatch) {
         return bubbles;
     }
 
-    function filterSequences(sequences) {
+    function filterSequences(sequences, skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
         var usernames = context.photos().usernames();
 
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             var fromTimestamp = new Date(fromDate).getTime();
             sequences = sequences.filter(function(sequences) {
                 return new Date(sequences.properties.captured_at).getTime() >= fromTimestamp;
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             var toTimestamp = new Date(toDate).getTime();
             sequences = sequences.filter(function(sequences) {
                 return new Date(sequences.properties.captured_at).getTime() <= toTimestamp;
@@ -233,7 +233,9 @@ export function svgStreetside(projection, context, dispatch) {
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
 
-        dispatch.call('photoDatesChanged', this, 'streetside', [...bubbles.map(p => p.captured_at), ...sequences.map(t => t.properties.vintageStart)]);
+        dispatch.call('photoDatesChanged', this, 'streetside', [
+            ...filterBubbles(bubbles, true).map(p => p.captured_at),
+            ...filterSequences(sequences, true).map(t => t.properties.vintageStart)]);
 
         // exit
         traces.exit()

@@ -113,6 +113,13 @@ path.line.casing.tag-piste {
     stroke: #444;
 }
 
+/* climbing routes */
+path.line.stroke.tag-climbing-route {
+    stroke: #6f1f1f;
+    stroke-linecap: round;
+    stroke-dasharray: 0, 7;
+    stroke-width: 3;
+}
 
 /* Attractions */
 path.line.stroke.tag-attraction-summer_toboggan {

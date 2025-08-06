@@ -185,13 +185,15 @@ export function utilGetAllNodes(ids, graph) {
 /**
  * @param {boolean} hideNetwork If true, the `network` tag will not be used in the name to prevent
  *                              it being shown twice (see PR #8707#discussion_r712658175)
+ *
+ * @param {boolean} isMapLabel If true, this name is for a label on the map. If falsy, it's for a
+ *                             label elsewhere in the UI.
  */
-export function utilDisplayName(entity, hideNetwork) {
+export function utilDisplayName(entity, hideNetwork, isMapLabel) {
     var localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
     var name = entity.tags[localizedNameKey] || entity.tags.name || '';
 
     var tags = {
-        addr: entity.tags['addr:housenumber'] || entity.tags['addr:housename'],
         direction: entity.tags.direction,
         from: entity.tags.from,
         name,
@@ -210,10 +212,6 @@ export function utilDisplayName(entity, hideNetwork) {
     // Non-routes tend to be labeled in many places besides the relation lists, such as the map, where brevity is important.
     if (!entity.tags.route && name) {
         return name;
-    }
-    // unnamed buildings or address nodes: show housenumber/housename
-    if (tags.addr) {
-        return tags.addr;
     }
 
     var keyComponents = [];
@@ -242,15 +240,63 @@ export function utilDisplayName(entity, hideNetwork) {
     }
 
     if (keyComponents.length) {
-        name = t('inspector.display_name.' + keyComponents.join('_'), tags);
+        return t('inspector.display_name.' + keyComponents.join('_'), tags);
     }
 
-    return name;
+    const alternativeNameKeys = [
+        'addr:housename',
+        'alt_name',
+        'official_name',
+        'loc_name',
+        'loc_ref',
+        'unsigned_ref',
+        'seamark:name',
+        'sector:name',
+        'lock_name'
+    ];
+
+    if (entity.tags.highway === 'milestone' || entity.tags.railway === 'milestone') {
+        // distance & railway:position are only valid as names when used on a milestone
+        alternativeNameKeys.push('distance', 'railway:position');
+    }
+
+    // if there's still no name found, try some other name-like tags
+    for (const key of alternativeNameKeys) {
+        if (key in entity.tags) {
+            return entity.tags[key];
+        }
+    }
+
+    // as a last resort, use the street address as a name.
+    const unit = entity.tags['addr:unit'];
+    const housenumber = entity.tags['addr:housenumber'];
+    const streetOrPlace = entity.tags['addr:street'] || entity.tags['addr:place'];
+
+    if (!isMapLabel && unit && housenumber && streetOrPlace) {
+        return t('inspector.display_name_addr_with_unit', {
+            unit,
+            housenumber,
+            streetOrPlace,
+        });
+    }
+
+    if (!isMapLabel && housenumber && streetOrPlace) {
+        return t('inspector.display_name_addr', {
+            housenumber,
+            streetOrPlace,
+        });
+    }
+
+    // the housenumber can always be used, regardless of isMapLabel
+    if (housenumber) return housenumber;
+
+    // no match found
+    return '';
 }
 
 
 export function utilDisplayNameForPath(entity) {
-    var name = utilDisplayName(entity);
+    var name = utilDisplayName(entity, undefined, true);
     var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
     var isNewChromium = Number(utilDetect().version.split('.')[0]) >= 96.0;
 

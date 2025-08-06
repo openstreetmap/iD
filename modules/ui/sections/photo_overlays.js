@@ -257,7 +257,7 @@ export function uiSectionPhotoOverlays(context) {
             .attr('min', 0)
             .attr('max', 1)
             .attr('step', 0.001)
-            .attr('list', 'photo-overlay-data-range')
+            .attr('list', 'photo-overlay-date-range')
             .attr('value', () => dateSliderValue('from'))
             .classed('list-option-date-slider', true)
             .classed('from-date', true)
@@ -278,7 +278,7 @@ export function uiSectionPhotoOverlays(context) {
             .attr('min', 0)
             .attr('max', 1)
             .attr('step', 0.001)
-            .attr('list', 'photo-overlay-data-range-inverted')
+            .attr('list', 'photo-overlay-date-range-inverted')
             .attr('value', () => 1 - dateSliderValue('to'))
             .classed('list-option-date-slider', true)
             .classed('to-date', true)
@@ -299,10 +299,10 @@ export function uiSectionPhotoOverlays(context) {
 
         sliderWrap.append('datalist')
             .attr('class', 'date-slider-values')
-            .attr('id', 'photo-overlay-data-range');
+            .attr('id', 'photo-overlay-date-range');
         sliderWrap.append('datalist')
             .attr('class', 'date-slider-values')
-            .attr('id', 'photo-overlay-data-range-inverted');
+            .attr('id', 'photo-overlay-date-range-inverted');
 
         const dateTicks = new Set();
         for (const dates of Object.values(photoDates)) {
@@ -310,7 +310,7 @@ export function uiSectionPhotoOverlays(context) {
                 dateTicks.add(Math.round(1000 * Math.pow((now - date) / (10 * 365.25 * 86400 * 1000), 1/1.45)) / 1000);
             });
         }
-        const ticks = selection.select('datalist#photo-overlay-data-range').selectAll('option')
+        const ticks = selection.select('datalist#photo-overlay-date-range').selectAll('option')
             .data([...dateTicks].concat([1, 0]));
         ticks.exit()
             .remove();
@@ -318,7 +318,7 @@ export function uiSectionPhotoOverlays(context) {
             .append('option')
             .merge(ticks)
             .attr('value', d => d);
-        const ticksInverted = selection.select('datalist#photo-overlay-data-range-inverted').selectAll('option')
+        const ticksInverted = selection.select('datalist#photo-overlay-date-range-inverted').selectAll('option')
             .data([...dateTicks].concat([1, 0]));
             ticksInverted.exit()
             .remove();

@@ -13,6 +13,9 @@ export function uiCommitWarnings(context) {
             .getIssuesBySeverity({ what: 'edited', where: 'all', includeDisabledRules: true });
 
         for (var severity in issuesBySeverity) {
+            // don't show suggestions on the changeset page
+            if (severity === 'suggestion') continue;
+
             var issues = issuesBySeverity[severity];
 
             if (severity !== 'error') {      // exclude 'fixme' and similar - #8603
@@ -34,7 +37,7 @@ export function uiCommitWarnings(context) {
 
             containerEnter
                 .append('h3')
-                .call(severity === 'warning' ? t.append('commit.warnings') : t.append('commit.errors'));
+                .call(t.append(`commit.${severity}s`));
 
             containerEnter
                 .append('ul')

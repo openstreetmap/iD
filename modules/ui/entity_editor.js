@@ -199,7 +199,7 @@ export function uiEntityEditor(context) {
             var annotation = t('operations.change_tags.annotation');
 
             if (_coalesceChanges) {
-                context.overwrite(combinedAction, annotation);
+                context.replace(combinedAction, annotation);
             } else {
                 context.perform(combinedAction, annotation);
             }
@@ -256,7 +256,7 @@ export function uiEntityEditor(context) {
             var annotation = t('operations.change_tags.annotation');
 
             if (_coalesceChanges) {
-                context.overwrite(combinedAction, annotation);
+                context.replace(combinedAction, annotation);
             } else {
                 context.perform(combinedAction, annotation);
             }

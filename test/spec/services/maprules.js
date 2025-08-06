@@ -440,13 +440,13 @@ describe('maprules', function() {
                     }
                 ];
                 entities = [
-                    iD.osmEntity({ type: 'node', tags: { amenity: 'marketplace' }}),
+                    iD.osmNode({ tags: { amenity: 'marketplace' }}),
                     iD.osmWay({ tags: { building: 'house', amenity: 'clinic' }, nodes: [ 'a', 'b', 'c', 'a' ]}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 6 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 9 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 5 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 10 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 6 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 9 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 5 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 10 }}),
                     iD.osmWay({ tags: { amenity: 'clinic', emergency: 'definitely' }, nodes: [ 'd', 'e', 'f', 'd' ]}),
                     iD.osmWay({ tags: { highway: 'residential', structure: 'bridge' }}),
                 ];
@@ -535,13 +535,13 @@ describe('maprules', function() {
                     }
                 ];
                 entities = [
-                    iD.osmEntity({ type: 'node', tags: { amenity: 'marketplace' }}),
+                    iD.osmNode({ tags: { amenity: 'marketplace' }}),
                     iD.osmWay({ tags: { building: 'house', amenity: 'clinic' }, nodes: [ 'a', 'b', 'c', 'a' ]}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 6 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 9 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 5 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 10 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 6 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 9 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 5 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 10 }}),
                     iD.osmWay({ tags: { amenity: 'clinic', emergency: 'definitely' }, nodes: [ 'd', 'e', 'f', 'd' ]}),
                     iD.osmWay({ tags: { highway: 'residential', structure: 'bridge' }}),
                 ];

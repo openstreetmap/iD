@@ -727,7 +727,7 @@ describe('iD.serviceOsm', function () {
 
                 await promisify(connection.status).call(connection);
                 var blocklists = connection.imageryBlocklists();
-                expect(blocklists).to.deep.equal([new RegExp('\.foo\.com'), new RegExp('\.bar\.org')]);
+                expect(blocklists).to.deep.equal([new RegExp('\.foo\.com', 'i'), new RegExp('\.bar\.org', 'i')]);
             });
         });
 

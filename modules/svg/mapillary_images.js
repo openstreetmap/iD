@@ -108,7 +108,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
     }
 
 
-    function filterImages(images) {
+    function filterImages(images, skipDateFilter = false) {
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
@@ -120,12 +120,12 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 return showsFlat;
             });
         }
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             images = images.filter(function(image) {
                 return new Date(image.captured_at).getTime() >= new Date(fromDate).getTime();
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             images = images.filter(function(image) {
                 return new Date(image.captured_at).getTime() <= new Date(toDate).getTime();
             });
@@ -134,7 +134,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         return images;
     }
 
-    function filterSequences(sequences) {
+    function filterSequences(sequences, skipDateFilter = false) {
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
@@ -149,12 +149,12 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 return false;
             });
         }
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.captured_at).getTime() >= new Date(fromDate).getTime().toString();
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.captured_at).getTime() <= new Date(toDate).getTime().toString();
             });
@@ -180,7 +180,9 @@ export function svgMapillaryImages(projection, context, dispatch) {
         //    "is_pano":false,
         //    "sequence_id":"zcyumxorbza3dq3twjybam"
         //    }
-        dispatch.call('photoDatesChanged', this, 'mapillary', [...images.map(p => p.captured_at), ...sequences.map(s => s.properties.captured_at)]);
+        dispatch.call('photoDatesChanged', this, 'mapillary', [
+            ...filterImages(images, true).map(p => p.captured_at),
+            ...filterSequences(sequences, true).map(s => s.properties.captured_at)]);
 
         images = filterImages(images);
         sequences = filterSequences(sequences, service);

@@ -141,6 +141,9 @@ describe('iD.rendererFeatures', function() {
             iD.osmWay({id: 'downhill_piste', tags: {'piste:type': 'downhill'}, version: 1}),
             iD.osmWay({id: 'piste_track_combo', tags: {'piste:type': 'alpine', highway: 'track'}, version: 1}),
 
+            // Climbing routes
+            iD.osmWay({id: 'climbing_route', tags: {'climbing': 'route'}, version: 1}),
+
             // Aerialways
             iD.osmWay({id: 'gondola', tags: {aerialway: 'gondola'}, version: 1}),
             iD.osmWay({id: 'zip_line', tags: {aerialway: 'zip_line'}, version: 1}),

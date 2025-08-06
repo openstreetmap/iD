@@ -73,7 +73,7 @@ export function validationUnsquareWay(context) {
         return [new validationIssue({
             type: type,
             subtype: 'building',
-            severity: 'warning',
+            severity: 'suggestion',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.unsquare_way.message', {
