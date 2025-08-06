@@ -6,6 +6,12 @@ import 'happen';
 import fetchMock from 'fetch-mock';
 import envs from '../config/envs.mjs';
 
+// Setup global IndexedDB mock for all tests
+const FDBFactory = require('fake-indexeddb/lib/FDBFactory');
+const FDBKeyRange = require('fake-indexeddb/lib/FDBKeyRange');
+global.indexedDB = new FDBFactory();
+global.IDBKeyRange = FDBKeyRange;
+
 chai.use(sinonChai);
 
 declare var global: typeof globalThis;
