@@ -2413,6 +2413,7 @@ en:
         osm_data: "Toggle OpenStreetMap data"
         minimap: "Toggle minimap"
         highlight_edits: "Highlight unsaved edits"
+        overlays: "Toggle all overlays"
       selecting:
         title: "Selecting features"
         select_one: "Select a single feature"
