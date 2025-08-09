@@ -1257,6 +1257,14 @@ a.hide-toggle {
     font-style: italic;
 }
 
+button.preset-reset .label.flash-bg {
+    animation: flash-bg 750ms;
+}
+@keyframes flash-bg {
+    0% { background-color: #fff; }
+    100% { background-color: #f6f6f6; }
+}
+
 .preset-list-button .label-inner {
     width: 100%;
     line-height: 1.35em;
