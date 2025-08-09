@@ -622,6 +622,9 @@ button.bar-button.dragging.removing {
     cursor: url(img/cursor-select-remove.png), pointer;
 }
 
+button.save {
+    background-image: linear-gradient(0, var(--accent-color), var(--accent-color));
+}
 button.save .count {
     display: inline-block;
     min-width: 32px;
