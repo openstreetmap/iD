@@ -149,8 +149,7 @@ export function uiFieldRadio(field, context) {
         // Layer
         if (layer && showLayer) {
             if (!layerField) {
-                layerField = uiField(context, layer, _entityIDs, { wrap: false })
-                    .on('change', changeLayer);
+                layerField = uiField(context, layer, _entityIDs, { wrap: false });
             }
             layerField.tags(tags);
             field.keys = utilArrayUnion(field.keys, ['layer']);
@@ -222,13 +221,6 @@ export function uiFieldRadio(field, context) {
         dispatch.call('change', this, t, onInput);
     }
 
-
-    function changeLayer(t, onInput) {
-        if (t.layer === '0') {
-            t.layer = undefined;
-        }
-        dispatch.call('change', this, t, onInput);
-    }
 
 
     function changeRadio() {
