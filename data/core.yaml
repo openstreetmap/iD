@@ -710,6 +710,7 @@ en:
     view_on_osm: View on openstreetmap.org
     view_on_osmose: View on osmose.openstreetmap.fr
     view_on_keepRight: View on keepright.at
+    view_on_maproulette: View on maproulette.org
     feature_type: Feature Type
     fields: Fields
     tags: Tags
@@ -875,6 +876,28 @@ en:
         tooltip: "Drag and drop a data file onto the page, or click the button to setup"
         title: Custom Map Data
         zoom: Zoom to data
+      maproulette:
+        title: MapRoulette Tasks
+        tooltip: Tasks from maproulette.org. You can also enter a comma-separated list of challenge IDs to filter.
+        id_placeholder: Challenge IDs (comma-separated)
+        id_title: Challenge Id / Task Id
+        fixed: I fixed it!
+        cantComplete: Can't complete
+        alreadyFixed: Already fixed
+        notAnIssue: Not an issue
+        comment: Comment for MapRoulette
+        inputPlaceholder: Optional comment (max 1000 chars)
+        cancel: Cancel
+        submit: Submit
+        nearbyTask:
+          title: Go to next nearby task after submit
+        loading_task_details: Loading task details…
+        detail_title: Details
+        instruction_title: Instructions
+        error_loading_task_details: Error loading task details
+        login: You must log in to change MapRoulette challenge.
+        loginMaproulette: You must log in to MapRoulette to edit this task.
+
     history_panel:
       title: Show History Panel
       tooltip: Show version details for the selection.

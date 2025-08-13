@@ -10,6 +10,7 @@ import { utilArrayIdentical } from '../util/array';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { t } from '../core/localizer';
 import { prefs } from '../core/preferences';
+import { services } from '../services';
 
 
 export function behaviorHash(context) {
@@ -42,6 +43,18 @@ export function behaviorHash(context) {
         newParams.map = zoom.toFixed(2) +
             '/' + center[1].toFixed(precision) +
             '/' + center[0].toFixed(precision);
+
+        // MapRoulette: write maproulette param if layer is enabled
+        try {
+            const mrLayer = context.layers().layer('maproulette');
+            if (mrLayer && mrLayer.enabled()) {
+                const ids = (services.maproulette && typeof services.maproulette.challengeIDs === 'function')
+                    ? services.maproulette.challengeIDs() : '';
+                newParams.maproulette = ids || 'true';
+            } else {
+                delete oldParams.maproulette;
+            }
+        } catch { /* noop */ }
 
         return Object.assign(oldParams, newParams);
     }
@@ -174,6 +187,22 @@ export function behaviorHash(context) {
                 return;
             }
         }
+
+        // MapRoulette: read maproulette param to enable layer and set challenge IDs
+        try {
+            if (q.maproulette !== undefined) {
+                const mrLayer = context.layers().layer('maproulette');
+                if (mrLayer) mrLayer.enabled(true);
+                if (services.maproulette && typeof services.maproulette.challengeIDs === 'function') {
+                    const val = q.maproulette;
+                    if (val && val !== 'true') {
+                        services.maproulette.challengeIDs(val);
+                    } else {
+                        services.maproulette.challengeIDs('');
+                    }
+                }
+            }
+        } catch { /* noop */ }
     }
 
     function behavior() {

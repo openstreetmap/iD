@@ -13,6 +13,7 @@ import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
 import { uiKeepRightEditor } from '../ui/keepRight_editor';
+import { uiMapRouletteEditor } from '../ui/maproulette_editor';
 import { uiOsmoseEditor } from '../ui/osmose_editor';
 import { utilKeybinding } from '../util';
 
@@ -42,6 +43,16 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
             errorEditor = uiOsmoseEditor(context)
             .on('change', function() {
                 context.map().pan([0,0]);  // trigger a redraw
+                var error = checkSelectedID();
+                if (!error) return;
+                context.ui().sidebar
+                    .show(errorEditor.error(error));
+            });
+            break;
+        case 'maproulette':
+            errorEditor = uiMapRouletteEditor(context)
+            .on('change', function() {
+                context.map().pan([0,0]);
                 var error = checkSelectedID();
                 if (!error) return;
                 context.ui().sidebar

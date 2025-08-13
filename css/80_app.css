@@ -865,6 +865,7 @@ a.hide-toggle {
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
+    padding-bottom: 2.5em; /* height of .footer */
 }
 
 .panewrap {
@@ -3050,6 +3051,7 @@ img.tag-reference-wiki-image {
     flex: 1 1 100%;
     font-size: 14px;
     font-weight: bold;
+    line-height: 19px;
     border-radius: 0 5px 5px 0;
 }
 .ideditor[dir='rtl'] .note-header-label,
@@ -3125,6 +3127,9 @@ img.tag-reference-wiki-image {
     padding-top: 20px;
 }
 
+.qa-details-header+.qa-details-container {
+    margin-top: 8px;
+}
 .qa-details-container {
     background: #ececec;
     padding: 10px;
@@ -3133,6 +3138,30 @@ img.tag-reference-wiki-image {
     border: 1px solid #ccc;
     display: flex;
     flex-direction: column;
+}
+.qa-details-container h1,
+.qa-details-container h2,
+.qa-details-container h3 {
+    font-size: 18px;
+}
+.qa-details-container ul,
+.qa-details-container ol {
+    margin-left: 20px;
+}
+.qa-details-container li {
+    list-style: auto;
+}
+.qa-details-container ul li {
+    list-style: disc;
+}
+
+/* Rapid parity: details header layout */
+.qa-details-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0 10px;
 }
 .qa-details-description-text::first-letter {
     text-transform: capitalize;
@@ -3148,6 +3177,40 @@ img.tag-reference-wiki-image {
 }
 .qa-details-subsection:empty {
     display: none;
+}
+
+/* Rapid parity: details header layout */
+.qa-details-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0 10px;
+}
+.qa-details-header h4 {
+    margin: 0;
+}
+
+/* Rapid parity: header spacing and icon scale */
+.qa-header {
+    margin-bottom: 10px;
+}
+.qa-header-icon .qaItem {
+    transform: scale(1.8);
+    transform-origin: center center;
+}
+
+/* MapRoulette: align checkbox section styling with Rapid */
+.checkbox-section.modal-section {
+    border-bottom: 0;           /* Rapid has no divider line under the checkbox */
+    padding-top: 10px;
+    padding-bottom: 0;
+}
+.checkbox-section.modal-section input[type="checkbox"] {
+    vertical-align: middle;
+}
+.checkbox-section.modal-section label {
+    margin-left: 6px;
 }
 
 .note-save .new-comment-input,

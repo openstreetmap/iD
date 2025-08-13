@@ -6,6 +6,8 @@ import {
 import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
+import { services } from '../../services';
+import { utilStringQs, utilQsString } from '../../util';
 import { svgIcon } from '../../svg/icon';
 import { geoExtent } from '../../geo';
 import { modeBrowse } from '../../modes/browse';
@@ -59,6 +61,9 @@ export function uiSectionDataLayers(context) {
 
             if (!enabled && (which === 'osm' || which === 'notes')) {
                 context.enter(modeBrowse(context));
+            }
+            if (which === 'maproulette') {
+                updateMapRouletteHash();
             }
         }
     }
@@ -128,7 +133,7 @@ export function uiSectionDataLayers(context) {
     }
 
     function drawQAItems(selection) {
-        var qaKeys = ['osmose'];
+        var qaKeys = ['maproulette', 'osmose'];
         var qaLayers = layers.all().filter(function(obj) { return qaKeys.indexOf(obj.id) !== -1; });
 
         var ul = selection
@@ -169,6 +174,25 @@ export function uiSectionDataLayers(context) {
             .append('span')
             .each(function(d) { t.append('map_data.layers.' + d.id + '.title')(d3_select(this)); });
 
+        // MapRoulette challenge IDs input
+        labelEnter
+            .filter(function(d) { return d.id === 'maproulette'; })
+            .append('input')
+            .attr('type', 'text')
+            .attr('class', 'challenge-ids')
+            .attr('placeholder', t('map_data.layers.maproulette.id_placeholder'))
+            .on('change', function(d3_event) {
+                if (services.maproulette) {
+                    services.maproulette.challengeIDs(d3_event.target.value);
+                }
+                // Ensure layer is enabled when user provides challenge IDs
+                const mrLayer = layers.layer('maproulette');
+                if (mrLayer && !mrLayer.enabled()) {
+                    setLayer('maproulette', true);
+                }
+                updateMapRouletteHash();
+            });
+
 
         // Update
         li
@@ -176,6 +200,21 @@ export function uiSectionDataLayers(context) {
             .classed('active', function (d) { return d.layer.enabled(); })
             .selectAll('input')
             .property('checked', function (d) { return d.layer.enabled(); });
+    }
+
+    function updateMapRouletteHash() {
+        try {
+            const hash = utilStringQs(window.location.hash);
+            const mrLayer = layers.layer('maproulette');
+            if (mrLayer && mrLayer.enabled()) {
+                const ids = (services.maproulette && typeof services.maproulette.challengeIDs === 'function')
+                    ? services.maproulette.challengeIDs() : '';
+                hash.maproulette = ids || 'true';
+            } else {
+                delete hash.maproulette;
+            }
+            window.history.replaceState(null, '', '#' + utilQsString(hash, true));
+        } catch { /* noop */ }
     }
 
     // Beta feature - sample vector layers to support Detroit Mapping Challenge

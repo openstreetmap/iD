@@ -6,6 +6,7 @@ import { svgLocalPhotos} from './local_photos';
 import { svgDebug } from './debug';
 import { svgGeolocate } from './geolocate';
 import { svgKeepRight } from './keepRight';
+import { svgMapRoulette } from './maproulette';
 import { svgOsmose } from './osmose';
 import { svgStreetside } from './streetside';
 import { svgVegbilder} from './vegbilder';
@@ -31,6 +32,7 @@ export function svgLayers(projection, context) {
         { id: 'notes', layer: svgNotes(projection, context, dispatch) },
         { id: 'data', layer: svgData(projection, context, dispatch) },
         { id: 'keepRight', layer: svgKeepRight(projection, context, dispatch) },
+        { id: 'maproulette', layer: svgMapRoulette(projection, context, dispatch) },
         { id: 'osmose', layer: svgOsmose(projection, context, dispatch) },
         { id: 'streetside', layer: svgStreetside(projection, context, dispatch)},
         { id: 'mapillary', layer: svgMapillaryImages(projection, context, dispatch) },
