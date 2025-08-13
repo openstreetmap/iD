@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import 'happen';
 import fetchMock from 'fetch-mock';
-import envs from '../config/envs.mjs';
+import envs from '../config/envs.js';
 
 chai.use(sinonChai);
 
