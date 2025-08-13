@@ -16,6 +16,7 @@ const context = await esbuild.context({
   metafile: true,
   outfile: 'dist/iD.js',
   target: browserslistToEsbuild(),
+  loader: { '.DS_Store' : 'empty' },
 });
 
 if (args.watch) {
