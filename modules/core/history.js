@@ -148,8 +148,22 @@ export function coreHistory(context) {
 
             if (transitionable) {
                 var origArguments = arguments;
+
+                // Fallback if d3-transition is not available in this environment
+                var selection = d3_select(document);
+                if (typeof selection.transition !== 'function') {
+                    return new Promise(function(resolve) {
+                        // Start
+                        resolve(_perform([action0], 0));
+                        // Mid-tween
+                        setTimeout(function() { _overwrite([action0], 0.5); }, duration / 2);
+                        // End
+                        setTimeout(function() { _overwrite(origArguments, 1); }, duration);
+                    });
+                }
+
                 return new Promise(resolve => {
-                  d3_select(document)
+                  selection
                     .transition('history.perform')
                     .duration(duration)
                     .ease(d3_easeLinear)
