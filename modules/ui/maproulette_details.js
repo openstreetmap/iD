@@ -2,6 +2,7 @@ import { select as d3_select } from 'd3-selection';
 import { marked } from 'marked';
 
 import { utilHighlightEntities } from '../util';
+import { modeSelect } from '../modes';
 import { t } from '../core/localizer';
 import { services } from '../services';
 
@@ -280,21 +281,40 @@ export function uiMapRouletteDetails(context) {
                             .attr('target', '_blank');
                     }
 
+                    // Transform ids like "way/123"|"node/123"|"relation/123" -> "w123"|"n123"|"r123"
+                    const transformId = (id) => {
+                        if (!id) return id;
+                        return id.replace(/^(way|node|relation)\//, (match) => {
+                            switch (match) {
+                                case 'way/': return 'w';
+                                case 'node/': return 'n';
+                                case 'relation/': return 'r';
+                                default: return match;
+                            }
+                        });
+                    };
+
                     // Attach hover and click event listeners
                     selection
                         .selectAll('.highlight-link')
                         .on('mouseover', function () {
-                            const osmId = d3_select(this).attr('data-osm-id');
+                            const osmId = transformId(d3_select(this).attr('data-osm-id'));
                             utilHighlightEntities([osmId], true, context);
                         })
                         .on('mouseout', function () {
-                            const osmId = d3_select(this).attr('data-osm-id');
+                            const osmId = transformId(d3_select(this).attr('data-osm-id'));
                             utilHighlightEntities([osmId], false, context);
                         })
                         .on('click', function (d3_event) {
                             d3_event.preventDefault();
-                            const osmId = d3_select(this).attr('data-osm-id');
+                            const osmId = transformId(d3_select(this).attr('data-osm-id'));
                             utilHighlightEntities([osmId], false, context);
+                            if (context.hasEntity && context.hasEntity(osmId)) {
+                                if (typeof context.zoomToEntities === 'function') {
+                                    context.zoomToEntities([osmId], true);
+                                }
+                                context.enter(modeSelect(context, [osmId]));
+                            }
                         });
                 })
                 .catch(() => {
