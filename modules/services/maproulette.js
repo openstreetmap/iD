@@ -167,7 +167,7 @@ export default {
 
                     dispatch.call('loaded');
 
-                    // Queue challenge detail fetches to align with Rapid behavior
+                    // Queue challenge detail fetches
                     unseenChallenges.forEach((chID) => {
                         const urlC = `${_mrUrlRoot}/challenge/${chID}`;
                         const cController = new AbortController();

@@ -213,7 +213,7 @@ export function svgMapRoulette(projection, context, dispatch) {
         if (_layerEnabled) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
-                // Load at start and on every draw to keep tiles streaming like Rapid
+                // Load at start and on every draw
                 service.loadIssues(projection);
                 updateMarkers();
             } else {

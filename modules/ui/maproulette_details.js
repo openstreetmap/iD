@@ -47,7 +47,7 @@ export function uiMapRouletteDetails(context) {
         if (!text) return '';
         const tagRegex = /\{\{([\w:]+)\}\}/g;
 
-        // Build a map of all properties similar to Rapid's implementation
+        // Build a map of all properties
         function buildAllProperties(obj) {
             const all = new Map();
             if (!obj) return all;
@@ -102,7 +102,7 @@ export function uiMapRouletteDetails(context) {
                 const val = allProps.get(propertyName);
                 return val !== undefined && val !== null ? String(val) : '';
             }
-            // Keep mustache tag visible if not replaced (Rapid behavior)
+            // Keep mustache tag visible if not replaced
             return match;
         });
     }
@@ -210,7 +210,7 @@ export function uiMapRouletteDetails(context) {
                         t('map_data.layers.maproulette.title');
                     headerLabel.text(headerText);
 
-                    // 2) header with IDs (match Rapid structure)
+                    // 2) header with IDs
                     if (task.id) {
                         const titleSection = selection
                             .append('header')
