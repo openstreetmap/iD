@@ -1,4 +1,5 @@
 .ideditor {
+    color-scheme: light;
     --bg-color: #fff; /* ~Bootstrap .bg-body */
     --bg-color-2: #f6f6f6; /* ~Bootstrap .bg-body-tertiary */
     --bg-color-3: #ececec; /* ~Bootstrap .bg-body-secondary */
@@ -62,6 +63,7 @@
 
 @media (prefers-color-scheme: dark) {
     .ideditor {
+        color-scheme: dark;
         --bg-color: #212529;
         --bg-color-2: #2b3035;
         --bg-color-3: #343a40;
