@@ -1,0 +1,7 @@
+---
+description: General rules
+globs:
+alwaysApply: true
+---
+
+Read [`.github/instructions/javascript.md`](../../.github/instructions/javascript.md)
