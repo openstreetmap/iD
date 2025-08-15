@@ -1,12 +1,16 @@
+import * as countryCoder from '@rapideditor/country-coder';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import * as countryCoder from '@rapideditor/country-coder';
 
+import { localizer, t } from '../../core/localizer';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind,
+    utilTotalExtent,
+} from '../../util';
 import { uiCombobox } from '../combobox';
-import { t, localizer } from '../../core/localizer';
-import { utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
 import { likelyRawNumberFormat } from './input';
-
 
 export function uiFieldRoadheight(field, context) {
     var dispatch = d3_dispatch('change');
@@ -31,24 +35,24 @@ export function uiFieldRoadheight(field, context) {
         },
     ];
 
-    var unitCombo = uiCombobox(context, 'roadheight-unit')
-        .data(primaryUnits);
+    var unitCombo = uiCombobox(context, 'roadheight-unit').data(primaryUnits);
 
     function roadheight(selection) {
+        var wrap = selection.selectAll('.form-field-input-wrap').data([0]);
 
-        var wrap = selection.selectAll('.form-field-input-wrap')
-            .data([0]);
-
-        wrap = wrap.enter()
+        wrap = wrap
+            .enter()
             .append('div')
-            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
+            .attr(
+                'class',
+                'form-field-input-wrap form-field-input-' + field.type,
+            )
             .merge(wrap);
 
+        primaryInput = wrap.selectAll('input.roadheight-number').data([0]);
 
-        primaryInput = wrap.selectAll('input.roadheight-number')
-            .data([0]);
-
-        primaryInput = primaryInput.enter()
+        primaryInput = primaryInput
+            .enter()
             .append('input')
             .attr('type', 'text')
             .attr('class', 'roadheight-number')
@@ -56,44 +60,42 @@ export function uiFieldRoadheight(field, context) {
             .call(utilNoAuto)
             .merge(primaryInput);
 
-        primaryInput
-            .on('change', change)
-            .on('blur', change);
+        primaryInput.on('change', change).on('blur', change);
 
         var loc = combinedEntityExtent().center();
         _isImperial = countryCoder.roadHeightUnit(loc) === 'ft';
 
-        primaryUnitInput = wrap.selectAll('input.roadheight-unit')
-            .data([0]);
+        primaryUnitInput = wrap.selectAll('input.roadheight-unit').data([0]);
 
-        primaryUnitInput = primaryUnitInput.enter()
+        primaryUnitInput = primaryUnitInput
+            .enter()
             .append('input')
             .attr('type', 'text')
             .attr('class', 'roadheight-unit')
             .call(unitCombo)
             .merge(primaryUnitInput);
 
-        primaryUnitInput
-            .on('blur', changeUnits)
-            .on('change', changeUnits);
+        primaryUnitInput.on('blur', changeUnits).on('change', changeUnits);
 
-        secondaryInput = wrap.selectAll('input.roadheight-secondary-number')
+        secondaryInput = wrap
+            .selectAll('input.roadheight-secondary-number')
             .data([0]);
 
-        secondaryInput = secondaryInput.enter()
+        secondaryInput = secondaryInput
+            .enter()
             .append('input')
             .attr('type', 'text')
             .attr('class', 'roadheight-secondary-number')
             .call(utilNoAuto)
             .merge(secondaryInput);
 
-        secondaryInput
-            .on('change', change)
-            .on('blur', change);
+        secondaryInput.on('change', change).on('blur', change);
 
-        secondaryUnitInput = wrap.selectAll('input.roadheight-secondary-unit')
+        secondaryUnitInput = wrap
+            .selectAll('input.roadheight-secondary-unit')
             .data([0]);
-        secondaryUnitInput = secondaryUnitInput.enter()
+        secondaryUnitInput = secondaryUnitInput
+            .enter()
             .append('input')
             .attr('type', 'text')
             .call(utilNoAuto)
@@ -101,7 +103,6 @@ export function uiFieldRoadheight(field, context) {
             .classed('roadheight-secondary-unit', true)
             .attr('readonly', 'readonly')
             .merge(secondaryUnitInput);
-
 
         function changeUnits() {
             var primaryUnit = utilGetSetValue(primaryUnitInput);
@@ -116,11 +117,9 @@ export function uiFieldRoadheight(field, context) {
         }
     }
 
-
     function setUnitSuggestions() {
         utilGetSetValue(primaryUnitInput, _isImperial ? 'ft' : 'm');
     }
-
 
     function change() {
         var tag = {};
@@ -128,7 +127,8 @@ export function uiFieldRoadheight(field, context) {
         var secondaryValue = utilGetSetValue(secondaryInput).trim();
 
         // don't override multiple values with blank string
-        if (!primaryValue && !secondaryValue && Array.isArray(_tags[field.key])) return;
+        if (!primaryValue && !secondaryValue && Array.isArray(_tags[field.key]))
+            return;
 
         if (!primaryValue && !secondaryValue) {
             tag[field.key] = undefined;
@@ -142,24 +142,29 @@ export function uiFieldRoadheight(field, context) {
                 : parseLocaleFloat(secondaryValue);
             if (isNaN(rawSecondaryValue)) rawSecondaryValue = secondaryValue;
 
-            if (isNaN(rawPrimaryValue) || isNaN(rawSecondaryValue) || !_isImperial) {
+            if (
+                isNaN(rawPrimaryValue) ||
+                isNaN(rawSecondaryValue) ||
+                !_isImperial
+            ) {
                 tag[field.key] = context.cleanTagValue(rawPrimaryValue);
             } else {
                 if (rawPrimaryValue !== '') {
-                    rawPrimaryValue = rawPrimaryValue + '\'';
+                    rawPrimaryValue = rawPrimaryValue + "'";
                 }
                 if (rawSecondaryValue !== '') {
                     rawSecondaryValue = rawSecondaryValue + '"';
                 }
-                tag[field.key] = context.cleanTagValue(rawPrimaryValue + rawSecondaryValue);
+                tag[field.key] = context.cleanTagValue(
+                    rawPrimaryValue + rawSecondaryValue,
+                );
             }
         }
 
         dispatch.call('change', this, tag);
     }
 
-
-    roadheight.tags = function(tags) {
+    roadheight.tags = function (tags) {
         _tags = tags;
 
         var primaryValue = tags[field.key];
@@ -167,7 +172,11 @@ export function uiFieldRoadheight(field, context) {
         var isMixed = Array.isArray(primaryValue);
 
         if (!isMixed) {
-            if (primaryValue && (primaryValue.indexOf('\'') >= 0 || primaryValue.indexOf('"') >= 0)) {
+            if (
+                primaryValue &&
+                (primaryValue.indexOf("'") >= 0 ||
+                    primaryValue.indexOf('"') >= 0)
+            ) {
                 secondaryValue = primaryValue.match(/(-?[\d.]+)"/);
                 if (secondaryValue !== null) {
                     secondaryValue = formatFloat(parseFloat(secondaryValue[1]));
@@ -194,33 +203,57 @@ export function uiFieldRoadheight(field, context) {
         // If feet are specified but inches are omitted, assume zero inches.
         var inchesPlaceholder = formatFloat(0);
 
-        utilGetSetValue(primaryInput, typeof primaryValue === 'string' ? primaryValue : '')
-            .attr('title', isMixed ? primaryValue.filter(Boolean).join('\n') : null)
-            .attr('placeholder', isMixed ? t('inspector.multiple_values') : t('inspector.unknown'))
+        utilGetSetValue(
+            primaryInput,
+            typeof primaryValue === 'string' ? primaryValue : '',
+        )
+            .attr(
+                'title',
+                isMixed ? primaryValue.filter(Boolean).join('\n') : null,
+            )
+            .attr(
+                'placeholder',
+                isMixed
+                    ? t('inspector.multiple_values')
+                    : t('inspector.unknown'),
+            )
             .classed('mixed', isMixed);
-        utilGetSetValue(secondaryInput, typeof secondaryValue === 'string' ? secondaryValue : '')
-            .attr('placeholder', isMixed ? t('inspector.multiple_values') : (_isImperial ? inchesPlaceholder : null))
+        utilGetSetValue(
+            secondaryInput,
+            typeof secondaryValue === 'string' ? secondaryValue : '',
+        )
+            .attr(
+                'placeholder',
+                isMixed
+                    ? t('inspector.multiple_values')
+                    : _isImperial
+                      ? inchesPlaceholder
+                      : null,
+            )
             .classed('mixed', isMixed)
             .classed('disabled', !_isImperial)
             .attr('readonly', _isImperial ? null : 'readonly');
-        secondaryUnitInput.attr('value', _isImperial ? t('inspector.roadheight.inch') : null);
+        secondaryUnitInput.attr(
+            'value',
+            _isImperial ? t('inspector.roadheight.inch') : null,
+        );
     };
 
-
-    roadheight.focus = function() {
+    roadheight.focus = function () {
         primaryInput.node().focus();
     };
 
-
-    roadheight.entityIDs = function(val) {
+    roadheight.entityIDs = function (val) {
         _entityIDs = val;
     };
 
-
     function combinedEntityExtent() {
-        return _entityIDs && _entityIDs.length && utilTotalExtent(_entityIDs, context.graph());
+        return (
+            _entityIDs &&
+            _entityIDs.length &&
+            utilTotalExtent(_entityIDs, context.graph())
+        );
     }
-
 
     return utilRebind(roadheight, dispatch, 'on');
 }

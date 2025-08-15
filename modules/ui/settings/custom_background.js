@@ -1,11 +1,10 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { marked } from 'marked';
 
-import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
-import { uiConfirm } from '../confirm';
+import { prefs } from '../../core/preferences';
 import { utilNoAuto, utilRebind } from '../../util';
-
+import { uiConfirm } from '../confirm';
 
 export function uiSettingsCustomBackground() {
     var dispatch = d3_dispatch('change');
@@ -13,22 +12,21 @@ export function uiSettingsCustomBackground() {
     function render(selection) {
         // keep separate copies of original and current settings
         var _origSettings = {
-            template: prefs('background-custom-template')
+            template: prefs('background-custom-template'),
         };
         var _currSettings = {
-            template: prefs('background-custom-template')
+            template: prefs('background-custom-template'),
         };
 
         var example = 'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png';
         var modal = uiConfirm(selection).okButton();
 
-        modal
-            .classed('settings-modal settings-custom-background', true);
+        modal.classed('settings-modal settings-custom-background', true);
 
-        modal.select('.modal-section.header')
+        modal
+            .select('.modal-section.header')
             .append('h3')
             .call(t.append('settings.custom_background.header'));
-
 
         var textSection = modal.select('.modal-section.message-text');
 
@@ -59,10 +57,12 @@ export function uiSettingsCustomBackground() {
         textSection
             .append('textarea')
             .attr('class', 'field-template')
-            .attr('placeholder', t('settings.custom_background.template.placeholder'))
+            .attr(
+                'placeholder',
+                t('settings.custom_background.template.placeholder'),
+            )
             .call(utilNoAuto)
             .property('value', _currSettings.template);
-
 
         // insert a cancel button
         var buttonSection = modal.select('.modal-section.buttons');
@@ -72,23 +72,22 @@ export function uiSettingsCustomBackground() {
             .attr('class', 'button cancel-button secondary-action')
             .call(t.append('confirm.cancel'));
 
+        buttonSection.select('.cancel-button').on('click.cancel', clickCancel);
 
-        buttonSection.select('.cancel-button')
-            .on('click.cancel', clickCancel);
-
-        buttonSection.select('.ok-button')
+        buttonSection
+            .select('.ok-button')
             .attr('disabled', isSaveDisabled)
             .on('click.save', clickSave);
-
 
         function isSaveDisabled() {
             return null;
         }
 
-
         // restore the original template
         function clickCancel() {
-            textSection.select('.field-template').property('value', _origSettings.template);
+            textSection
+                .select('.field-template')
+                .property('value', _origSettings.template);
             prefs('background-custom-template', _origSettings.template);
             this.blur();
             modal.close();
@@ -96,7 +95,9 @@ export function uiSettingsCustomBackground() {
 
         // accept the current template
         function clickSave() {
-            _currSettings.template = textSection.select('.field-template').property('value');
+            _currSettings.template = textSection
+                .select('.field-template')
+                .property('value');
             prefs('background-custom-template', _currSettings.template);
             this.blur();
             modal.close();

@@ -1,6 +1,5 @@
-import { actionConnect } from './connect';
 import { geoVecAdd, geoVecScale } from '../geo';
-
+import { actionConnect } from './connect';
 
 // `actionMergeNodes` is just a combination of:
 //
@@ -8,19 +7,18 @@ import { geoVecAdd, geoVecScale } from '../geo';
 // 2. `actionConnect` them
 
 export function actionMergeNodes(nodeIDs, loc) {
-
     // If there is a single "interesting" node, use that as the location.
     // Otherwise return the average location of all the nodes.
     function chooseLoc(graph) {
         if (!nodeIDs.length) return null;
-        var sum = [0,0];
+        var sum = [0, 0];
         var interestingCount = 0;
         var interestingLoc;
 
         for (var i = 0; i < nodeIDs.length; i++) {
             var node = graph.entity(nodeIDs[i]);
             if (node.hasInterestingTags()) {
-                interestingLoc = (++interestingCount === 1) ? node.loc : null;
+                interestingLoc = ++interestingCount === 1 ? node.loc : null;
             }
             sum = geoVecAdd(sum, node.loc);
         }
@@ -28,8 +26,7 @@ export function actionMergeNodes(nodeIDs, loc) {
         return interestingLoc || geoVecScale(sum, 1 / nodeIDs.length);
     }
 
-
-    var action = function(graph) {
+    var action = function (graph) {
         if (nodeIDs.length < 2) return graph;
         var toLoc = loc;
         if (!toLoc) {
@@ -46,8 +43,7 @@ export function actionMergeNodes(nodeIDs, loc) {
         return actionConnect(nodeIDs)(graph);
     };
 
-
-    action.disabled = function(graph) {
+    action.disabled = function (graph) {
         if (nodeIDs.length < 2) return 'not_eligible';
 
         for (var i = 0; i < nodeIDs.length; i++) {

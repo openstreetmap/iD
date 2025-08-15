@@ -1,7 +1,12 @@
 describe('iD.geoExtent', function () {
     describe('constructor', function () {
         it('defaults to infinitely empty extent', function () {
-            expect(iD.geoExtent().equals([[Infinity, Infinity], [-Infinity, -Infinity]])).to.be.ok;
+            expect(
+                iD.geoExtent().equals([
+                    [Infinity, Infinity],
+                    [-Infinity, -Infinity],
+                ]),
+            ).to.be.ok;
         });
 
         it('constructs via a point', function () {
@@ -63,32 +68,43 @@ describe('iD.geoExtent', function () {
 
     describe('#rectangle', function () {
         it('returns the extent as a rectangle', function () {
-            expect(iD.geoExtent([0, 0], [5, 10]).rectangle()).to.eql([0, 0, 5, 10]);
+            expect(iD.geoExtent([0, 0], [5, 10]).rectangle()).to.eql([
+                0, 0, 5, 10,
+            ]);
         });
     });
 
     describe('#polygon', function () {
         it('returns the extent as a polygon', function () {
-            expect(iD.geoExtent([0, 0], [5, 10]).polygon())
-                .to.eql([[0, 0], [0, 10], [5, 10], [5, 0], [0, 0]]);
+            expect(iD.geoExtent([0, 0], [5, 10]).polygon()).to.eql([
+                [0, 0],
+                [0, 10],
+                [5, 10],
+                [5, 0],
+                [0, 0],
+            ]);
         });
     });
 
     describe('#area', function () {
         it('returns the area', function () {
-           expect(iD.geoExtent([0, 0], [5, 10]).area()).to.eql(50);
+            expect(iD.geoExtent([0, 0], [5, 10]).area()).to.eql(50);
         });
     });
 
     describe('#padByMeters', function () {
         it('does not change centerpoint of an extent', function () {
-           var min = [0, 0], max = [5, 10];
-           expect(iD.geoExtent(min, max).padByMeters(100).center()).to.eql([2.5, 5]);
+            var min = [0, 0],
+                max = [5, 10];
+            expect(iD.geoExtent(min, max).padByMeters(100).center()).to.eql([
+                2.5, 5,
+            ]);
         });
 
         it('does not affect the extent with a pad of zero', function () {
-           var min = [0, 0], max = [5, 10];
-           expect(iD.geoExtent(min, max).padByMeters(0)[0]).to.eql([0, 0]);
+            var min = [0, 0],
+                max = [5, 10];
+            expect(iD.geoExtent(min, max).padByMeters(0)[0]).to.eql([0, 0]);
         });
     });
 
@@ -96,29 +112,88 @@ describe('iD.geoExtent', function () {
         it('does not modify self', function () {
             var extent = iD.geoExtent([0, 0], [0, 0]);
             extent.extend([1, 1]);
-            expect(extent.equals([[0, 0], [0, 0]])).to.be.ok;
+            expect(
+                extent.equals([
+                    [0, 0],
+                    [0, 0],
+                ]),
+            ).to.be.ok;
         });
 
         it('returns the minimal extent containing self and the given point', function () {
-            expect(iD.geoExtent().extend([0, 0]).equals([[0, 0], [0, 0]])).to.be.ok;
-            expect(iD.geoExtent([0, 0], [0, 0]).extend([5, 10]).equals([[0, 0], [5, 10]])).to.be.ok;
+            expect(
+                iD
+                    .geoExtent()
+                    .extend([0, 0])
+                    .equals([
+                        [0, 0],
+                        [0, 0],
+                    ]),
+            ).to.be.ok;
+            expect(
+                iD
+                    .geoExtent([0, 0], [0, 0])
+                    .extend([5, 10])
+                    .equals([
+                        [0, 0],
+                        [5, 10],
+                    ]),
+            ).to.be.ok;
         });
 
         it('returns the minimal extent containing self and the given extent', function () {
-            expect(iD.geoExtent().extend([[0, 0], [5, 10]]).equals([[0, 0], [5, 10]])).to.be.ok;
-            expect(iD.geoExtent([0, 0], [0, 0]).extend([[4, -1], [5, 10]]).equals([[0, -1], [5, 10]])).to.be.ok;
+            expect(
+                iD
+                    .geoExtent()
+                    .extend([
+                        [0, 0],
+                        [5, 10],
+                    ])
+                    .equals([
+                        [0, 0],
+                        [5, 10],
+                    ]),
+            ).to.be.ok;
+            expect(
+                iD
+                    .geoExtent([0, 0], [0, 0])
+                    .extend([
+                        [4, -1],
+                        [5, 10],
+                    ])
+                    .equals([
+                        [0, -1],
+                        [5, 10],
+                    ]),
+            ).to.be.ok;
         });
     });
 
     describe('#_extend', function () {
         it('extends self to the minimal extent containing self and the given extent', function () {
             var e = iD.geoExtent();
-            e._extend([[0, 0], [5, 10]]);
-            expect(e.equals([[0, 0], [5, 10]])).to.be.ok;
+            e._extend([
+                [0, 0],
+                [5, 10],
+            ]);
+            expect(
+                e.equals([
+                    [0, 0],
+                    [5, 10],
+                ]),
+            ).to.be.ok;
 
             e = iD.geoExtent([0, 0], [0, 0]);
-            e._extend([[4, -1], [5, 10]]);
-            expect(e.equals([[0, -1], [5, 10]])).to.be.ok;
+            e._extend([
+                [4, -1],
+                [5, 10],
+            ]);
+            expect(
+                e.equals([
+                    [0, -1],
+                    [5, 10],
+                ]),
+            ).to.be.ok;
         });
     });
 
@@ -136,18 +211,53 @@ describe('iD.geoExtent', function () {
         });
 
         it('returns true for an extent contained by self', function () {
-            expect(iD.geoExtent([0, 0], [5, 5]).contains([[1, 1], [2, 2]])).to.be.true;
-            expect(iD.geoExtent([1, 1], [2, 2]).contains([[0, 0], [5, 5]])).to.be.false;
+            expect(
+                iD.geoExtent([0, 0], [5, 5]).contains([
+                    [1, 1],
+                    [2, 2],
+                ]),
+            ).to.be.true;
+            expect(
+                iD.geoExtent([1, 1], [2, 2]).contains([
+                    [0, 0],
+                    [5, 5],
+                ]),
+            ).to.be.false;
         });
 
         it('returns false for an extent partially contained by self', function () {
-            expect(iD.geoExtent([0, 0], [5, 5]).contains([[1, 1], [6, 6]])).to.be.false;
-            expect(iD.geoExtent([1, 1], [6, 6]).contains([[0, 0], [5, 5]])).to.be.false;
+            expect(
+                iD.geoExtent([0, 0], [5, 5]).contains([
+                    [1, 1],
+                    [6, 6],
+                ]),
+            ).to.be.false;
+            expect(
+                iD.geoExtent([1, 1], [6, 6]).contains([
+                    [0, 0],
+                    [5, 5],
+                ]),
+            ).to.be.false;
         });
 
         it('returns false for an extent not intersected by self', function () {
-            expect(iD.geoExtent([0, 0], [5, 5]).contains([[6, 6], [7, 7]])).to.be.false;
-            expect(iD.geoExtent([[6, 6], [7, 7]]).contains([[0, 0], [5, 5]])).to.be.false;
+            expect(
+                iD.geoExtent([0, 0], [5, 5]).contains([
+                    [6, 6],
+                    [7, 7],
+                ]),
+            ).to.be.false;
+            expect(
+                iD
+                    .geoExtent([
+                        [6, 6],
+                        [7, 7],
+                    ])
+                    .contains([
+                        [0, 0],
+                        [5, 5],
+                    ]),
+            ).to.be.false;
         });
     });
 
@@ -165,18 +275,53 @@ describe('iD.geoExtent', function () {
         });
 
         it('returns true for an extent contained by self', function () {
-            expect(iD.geoExtent([0, 0], [5, 5]).intersects([[1, 1], [2, 2]])).to.be.true;
-            expect(iD.geoExtent([1, 1], [2, 2]).intersects([[0, 0], [5, 5]])).to.be.true;
+            expect(
+                iD.geoExtent([0, 0], [5, 5]).intersects([
+                    [1, 1],
+                    [2, 2],
+                ]),
+            ).to.be.true;
+            expect(
+                iD.geoExtent([1, 1], [2, 2]).intersects([
+                    [0, 0],
+                    [5, 5],
+                ]),
+            ).to.be.true;
         });
 
         it('returns true for an extent partially contained by self', function () {
-            expect(iD.geoExtent([0, 0], [5, 5]).intersects([[1, 1], [6, 6]])).to.be.true;
-            expect(iD.geoExtent([1, 1], [6, 6]).intersects([[0, 0], [5, 5]])).to.be.true;
+            expect(
+                iD.geoExtent([0, 0], [5, 5]).intersects([
+                    [1, 1],
+                    [6, 6],
+                ]),
+            ).to.be.true;
+            expect(
+                iD.geoExtent([1, 1], [6, 6]).intersects([
+                    [0, 0],
+                    [5, 5],
+                ]),
+            ).to.be.true;
         });
 
         it('returns false for an extent not intersected by self', function () {
-            expect(iD.geoExtent([0, 0], [5, 5]).intersects([[6, 6], [7, 7]])).to.be.false;
-            expect(iD.geoExtent([[6, 6], [7, 7]]).intersects([[0, 0], [5, 5]])).to.be.false;
+            expect(
+                iD.geoExtent([0, 0], [5, 5]).intersects([
+                    [6, 6],
+                    [7, 7],
+                ]),
+            ).to.be.false;
+            expect(
+                iD
+                    .geoExtent([
+                        [6, 6],
+                        [7, 7],
+                    ])
+                    .intersects([
+                        [0, 0],
+                        [5, 5],
+                    ]),
+            ).to.be.false;
         });
     });
 
@@ -244,18 +389,36 @@ describe('iD.geoExtent', function () {
             expect(a.percentContainedIn(b)).to.eql(0.25);
             expect(b.percentContainedIn(a)).to.eql(0.5);
         });
-
     });
 
     describe('#split', function () {
         it('splits into four parts', function () {
             var splits = iD.geoExtent([0, 10], [5, 20]).split();
             expect(splits).to.have.length(4);
-            expect(splits[0].equals([[0, 10], [2.5, 15]])).to.be.ok;
-            expect(splits[1].equals([[2.5, 10], [5, 15]])).to.be.ok;
-            expect(splits[2].equals([[2.5, 15], [5, 20]])).to.be.ok;
-            expect(splits[3].equals([[0, 15], [2.5, 20]])).to.be.ok;
+            expect(
+                splits[0].equals([
+                    [0, 10],
+                    [2.5, 15],
+                ]),
+            ).to.be.ok;
+            expect(
+                splits[1].equals([
+                    [2.5, 10],
+                    [5, 15],
+                ]),
+            ).to.be.ok;
+            expect(
+                splits[2].equals([
+                    [2.5, 15],
+                    [5, 20],
+                ]),
+            ).to.be.ok;
+            expect(
+                splits[3].equals([
+                    [0, 15],
+                    [2.5, 20],
+                ]),
+            ).to.be.ok;
         });
     });
-
 });

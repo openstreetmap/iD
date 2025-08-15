@@ -1,22 +1,22 @@
-import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
-import { svgPointTransform } from './helpers';
-import { services } from '../services';
+import _throttle from 'lodash-es/throttle';
 import { t } from '../core/localizer';
+import { services } from '../services';
+import { svgPointTransform } from './helpers';
 
 export function svgMapillaryMapFeatures(projection, context, dispatch) {
-    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    const throttledRedraw = _throttle(function () {
+        dispatch.call('change');
+    }, 1000);
     const minZoom = 12;
     let layer = d3_select(null);
     let _mapillary;
 
-
     function init() {
-        if (svgMapillaryMapFeatures.initialized) return;  // run once
+        if (svgMapillaryMapFeatures.initialized) return; // run once
         svgMapillaryMapFeatures.enabled = false;
         svgMapillaryMapFeatures.initialized = true;
     }
-
 
     function getService() {
         if (services.mapillary && !_mapillary) {
@@ -28,7 +28,6 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         return _mapillary;
     }
 
-
     function showLayer() {
         const service = getService();
         if (!service) return;
@@ -37,23 +36,19 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         editOn();
     }
 
-
     function hideLayer() {
         throttledRedraw.cancel();
         editOff();
     }
 
-
     function editOn() {
         layer.style('display', 'block');
     }
-
 
     function editOff() {
         layer.selectAll('.icon-map-feature').remove();
         layer.style('display', 'none');
     }
-
 
     function click(d3_event, d) {
         const service = getService();
@@ -61,9 +56,10 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
         context.map().centerEase(d.loc);
 
-        const selectedImageId = service.getActiveImage() && service.getActiveImage().id;
+        const selectedImageId =
+            service.getActiveImage() && service.getActiveImage().id;
 
-        service.getDetections(d.id).then(detections => {
+        service.getDetections(d.id).then((detections) => {
             if (detections.length) {
                 const imageId = detections[0].image.id;
                 if (imageId === selectedImageId) {
@@ -71,64 +67,68 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
                         .highlightDetection(detections[0])
                         .selectImage(context, imageId);
                 } else {
-                    service.ensureViewerLoaded(context)
-                        .then(function() {
-                            service
-                                .highlightDetection(detections[0])
-                                .selectImage(context, imageId)
-                                .showViewer(context);
-                        });
+                    service.ensureViewerLoaded(context).then(function () {
+                        service
+                            .highlightDetection(detections[0])
+                            .selectImage(context, imageId)
+                            .showViewer(context);
+                    });
                 }
             }
         });
     }
-
 
     function filterData(detectedFeatures) {
         const fromDate = context.photos().fromDate();
         const toDate = context.photos().toDate();
 
         if (fromDate) {
-            detectedFeatures = detectedFeatures.filter(function(feature) {
-                return new Date(feature.last_seen_at).getTime() >= new Date(fromDate).getTime();
+            detectedFeatures = detectedFeatures.filter(function (feature) {
+                return (
+                    new Date(feature.last_seen_at).getTime() >=
+                    new Date(fromDate).getTime()
+                );
             });
         }
         if (toDate) {
-            detectedFeatures = detectedFeatures.filter(function(feature) {
-                return new Date(feature.first_seen_at).getTime() <= new Date(toDate).getTime();
+            detectedFeatures = detectedFeatures.filter(function (feature) {
+                return (
+                    new Date(feature.first_seen_at).getTime() <=
+                    new Date(toDate).getTime()
+                );
             });
         }
 
         return detectedFeatures;
     }
 
-
     function update() {
         const service = getService();
-        let data = (service ? service.mapFeatures(projection) : []);
+        let data = service ? service.mapFeatures(projection) : [];
         data = filterData(data);
 
         const transform = svgPointTransform(projection);
 
-        const mapFeatures = layer.selectAll('.icon-map-feature')
-            .data(data, function(d) { return d.id; });
+        const mapFeatures = layer
+            .selectAll('.icon-map-feature')
+            .data(data, function (d) {
+                return d.id;
+            });
 
         // exit
-        mapFeatures.exit()
-            .remove();
+        mapFeatures.exit().remove();
 
         // enter
-        const enter = mapFeatures.enter()
+        const enter = mapFeatures
+            .enter()
             .append('g')
             .attr('class', 'icon-map-feature icon-detected')
             .on('click', click);
 
-        enter
-            .append('title')
-            .text(function(d) {
-                var id = d.value.replace(/--/g, '.').replace(/-/g, '_');
-                return t('mapillary_map_features.' + id);
-            });
+        enter.append('title').text(function (d) {
+            var id = d.value.replace(/--/g, '.').replace(/-/g, '_');
+            return t('mapillary_map_features.' + id);
+        });
 
         enter
             .append('use')
@@ -136,7 +136,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
             .attr('height', '24px')
             .attr('x', '-12px')
             .attr('y', '-12px')
-            .attr('xlink:href', function(d) {
+            .attr('xlink:href', function (d) {
                 if (d.value === 'object--billboard') {
                     // no billboard icon right now, so use the advertisement icon
                     return '#object--sign--advertisement';
@@ -152,25 +152,26 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
             .attr('y', '-12px');
 
         // update
-        mapFeatures
-            .merge(enter)
-            .attr('transform', transform);
+        mapFeatures.merge(enter).attr('transform', transform);
     }
-
 
     function drawMapFeatures(selection) {
         const enabled = svgMapillaryMapFeatures.enabled;
         const service = getService();
 
-        layer = selection.selectAll('.layer-mapillary-map-features')
+        layer = selection
+            .selectAll('.layer-mapillary-map-features')
             .data(service ? [0] : []);
 
-        layer.exit()
-            .remove();
+        layer.exit().remove();
 
-        layer = layer.enter()
+        layer = layer
+            .enter()
             .append('g')
-            .attr('class', 'layer-mapillary-map-features layer-mapillary-detections')
+            .attr(
+                'class',
+                'layer-mapillary-map-features layer-mapillary-detections',
+            )
             .style('display', enabled ? 'block' : 'none')
             .merge(layer);
 
@@ -188,8 +189,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         }
     }
 
-
-    drawMapFeatures.enabled = function(_) {
+    drawMapFeatures.enabled = function (_) {
         if (!arguments.length) return svgMapillaryMapFeatures.enabled;
         svgMapillaryMapFeatures.enabled = _;
         if (svgMapillaryMapFeatures.enabled) {
@@ -203,15 +203,13 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         return this;
     };
 
-
-    drawMapFeatures.supported = function() {
+    drawMapFeatures.supported = function () {
         return !!getService();
     };
 
-    drawMapFeatures.rendered = function(zoom) {
-      return zoom >= minZoom;
+    drawMapFeatures.rendered = function (zoom) {
+        return zoom >= minZoom;
     };
-
 
     init();
     return drawMapFeatures;

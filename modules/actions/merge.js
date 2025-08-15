@@ -1,28 +1,29 @@
 import { osmTagSuggestingArea } from '../osm/tags';
 import { utilArrayGroupBy, utilArrayUniq, utilCompareIDs } from '../util';
 
-
 export function actionMerge(ids) {
-
     function groupEntitiesByGeometry(graph) {
-        var entities = ids.map(function(id) { return graph.entity(id); });
+        var entities = ids.map(function (id) {
+            return graph.entity(id);
+        });
         return Object.assign(
             { point: [], area: [], line: [], relation: [] },
-            utilArrayGroupBy(entities, function(entity) { return entity.geometry(graph); })
+            utilArrayGroupBy(entities, function (entity) {
+                return entity.geometry(graph);
+            }),
         );
     }
 
-
-    var action = function(graph) {
+    var action = function (graph) {
         var geometries = groupEntitiesByGeometry(graph);
         var target = geometries.area[0] || geometries.line[0];
         var points = geometries.point;
 
-        points.forEach(function(point) {
+        points.forEach(function (point) {
             target = target.mergeTags(point.tags);
             graph = graph.replace(target);
 
-            graph.parentRelations(point).forEach(function(parent) {
+            graph.parentRelations(point).forEach(function (parent) {
                 graph = graph.replace(parent.replaceMember(point, target));
             });
 
@@ -35,13 +36,17 @@ export function actionMerge(ids) {
 
                 var inserted = false;
 
-                var canBeReplaced = function(node) {
-                    return !(graph.parentWays(node).length > 1 ||
-                        graph.parentRelations(node).length);
+                var canBeReplaced = function (node) {
+                    return !(
+                        graph.parentWays(node).length > 1 ||
+                        graph.parentRelations(node).length
+                    );
                 };
 
-                var replaceNode = function(node) {
-                    graph = graph.replace(point.update({ tags: node.tags, loc: node.loc }));
+                var replaceNode = function (node) {
+                    graph = graph.replace(
+                        point.update({ tags: node.tags, loc: node.loc }),
+                    );
                     target = target.replaceNode(node.id, point.id);
                     graph = graph.replace(target);
                     removeNode = node;
@@ -65,8 +70,7 @@ export function actionMerge(ids) {
                     // uninteresting child node instead.
                     for (i = 0; i < nodes.length; i++) {
                         node = nodes[i];
-                        if (canBeReplaced(node) &&
-                            !node.hasInterestingTags()) {
+                        if (canBeReplaced(node) && !node.hasInterestingTags()) {
                             replaceNode(node);
                             break;
                         }
@@ -77,8 +81,10 @@ export function actionMerge(ids) {
                         // but more recent child node.
                         for (i = 0; i < nodes.length; i++) {
                             node = nodes[i];
-                            if (canBeReplaced(node) &&
-                                utilCompareIDs(point.id, node.id) < 0) {
+                            if (
+                                canBeReplaced(node) &&
+                                utilCompareIDs(point.id, node.id) < 0
+                            ) {
                                 replaceNode(node);
                                 break;
                             }
@@ -106,16 +112,16 @@ export function actionMerge(ids) {
         return graph;
     };
 
-
-    action.disabled = function(graph) {
+    action.disabled = function (graph) {
         var geometries = groupEntitiesByGeometry(graph);
-        if (geometries.point.length === 0 ||
-            (geometries.area.length + geometries.line.length) !== 1 ||
-            geometries.relation.length !== 0) {
+        if (
+            geometries.point.length === 0 ||
+            geometries.area.length + geometries.line.length !== 1 ||
+            geometries.relation.length !== 0
+        ) {
             return 'not_eligible';
         }
     };
-
 
     return action;
 }

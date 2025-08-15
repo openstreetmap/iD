@@ -1,16 +1,15 @@
 describe('iD.presetIndex', function () {
     var _savedPresets, _savedAreaKeys;
 
-    before(function() {
+    before(function () {
         _savedPresets = iD.fileFetcher.cache().preset_presets;
         _savedAreaKeys = iD.osmAreaKeys;
     });
 
-    after(function() {
+    after(function () {
         iD.fileFetcher.cache().preset_presets = _savedPresets;
         iD.osmSetAreaKeys(_savedAreaKeys);
     });
-
 
     describe('#init', function () {
         it('has a fallback point preset', function () {
@@ -28,7 +27,11 @@ describe('iD.presetIndex', function () {
         });
         it('has a fallback area preset', function () {
             var node = iD.osmNode({ id: 'n' });
-            var way = iD.osmWay({ id: 'w', nodes: ['n'], tags: { area: 'yes' }});
+            var way = iD.osmWay({
+                id: 'w',
+                nodes: ['n'],
+                tags: { area: 'yes' },
+            });
             var graph = iD.coreGraph([node, way]);
             var presets = iD.presetIndex();
             expect(presets.match(way, graph).id).to.eql('area');
@@ -41,11 +44,13 @@ describe('iD.presetIndex', function () {
         });
     });
 
-
     describe('#match', function () {
         var testPresets = {
-            residential: { tags: { highway: 'residential' }, geometry: ['line'] },
-            park: { tags: { leisure: 'park' }, geometry: ['point', 'area'] }
+            residential: {
+                tags: { highway: 'residential' },
+                geometry: ['line'],
+            },
+            park: { tags: { leisure: 'park' }, geometry: ['point', 'area'] },
         };
 
         it('returns a collection containing presets matching a geometry and tags', async () => {
@@ -73,7 +78,10 @@ describe('iD.presetIndex', function () {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             var point = iD.osmNode({ tags: { leisure: 'park' } });
-            var line = iD.osmWay({ nodes: [point.id], tags: { 'highway': 'residential' } });
+            var line = iD.osmWay({
+                nodes: [point.id],
+                tags: { highway: 'residential' },
+            });
             var graph = iD.coreGraph([point, line]);
 
             await presets.ensureLoaded();
@@ -84,7 +92,10 @@ describe('iD.presetIndex', function () {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             var point = iD.osmNode({ tags: { leisure: 'park' } });
-            var line = iD.osmWay({ nodes: [point.id], tags: { 'addr:interpolation': 'even' } });
+            var line = iD.osmWay({
+                nodes: [point.id],
+                tags: { 'addr:interpolation': 'even' },
+            });
             var graph = iD.coreGraph([point, line]);
 
             await presets.ensureLoaded();
@@ -92,16 +103,34 @@ describe('iD.presetIndex', function () {
         });
     });
 
-
     describe('#areaKeys', function () {
         var testPresets = {
-            'amenity/fuel/shell': { tags: { 'amenity': 'fuel' }, geometry: ['point', 'area'], suggestion: true },
-            'highway/foo': { tags: { 'highway': 'foo' }, geometry: ['area'] },
-            'leisure/track': { tags: { 'leisure': 'track' }, geometry: ['line', 'area'] },
-            'natural': { tags: { 'natural': '*' }, geometry: ['point', 'vertex', 'area'] },
-            'natural/peak': { tags: { 'natural': 'peak' }, geometry: ['point', 'vertex'] },
-            'natural/tree_row': { tags: { 'natural': 'tree_row' }, geometry: ['line'] },
-            'natural/wood': { tags: { 'natural': 'wood' }, geometry: ['point', 'area'] }
+            'amenity/fuel/shell': {
+                tags: { amenity: 'fuel' },
+                geometry: ['point', 'area'],
+                suggestion: true,
+            },
+            'highway/foo': { tags: { highway: 'foo' }, geometry: ['area'] },
+            'leisure/track': {
+                tags: { leisure: 'track' },
+                geometry: ['line', 'area'],
+            },
+            natural: {
+                tags: { natural: '*' },
+                geometry: ['point', 'vertex', 'area'],
+            },
+            'natural/peak': {
+                tags: { natural: 'peak' },
+                geometry: ['point', 'vertex'],
+            },
+            'natural/tree_row': {
+                tags: { natural: 'tree_row' },
+                geometry: ['line'],
+            },
+            'natural/wood': {
+                tags: { natural: 'wood' },
+                geometry: ['point', 'area'],
+            },
         };
 
         it('includes keys for presets with area geometry', async () => {
@@ -117,7 +146,6 @@ describe('iD.presetIndex', function () {
             await presets.ensureLoaded();
             expect(presets.areaKeys().natural).to.include.keys('tree_row');
             expect(presets.areaKeys().natural.tree_row).to.be.true;
-
         });
 
         it('discards key-values for presets with both area and line geometry', async () => {
@@ -134,14 +162,14 @@ describe('iD.presetIndex', function () {
             expect(presets.areaKeys().natural).not.to.include.keys('peak');
         });
 
-        it('does not discard generic \'*\' key-values', async () => {
+        it("does not discard generic '*' key-values", async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
             expect(presets.areaKeys().natural).not.to.include.keys('natural');
         });
 
-        it('ignores keys like \'highway\' that are assumed to be lines', async () => {
+        it("ignores keys like 'highway' that are assumed to be lines", async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
@@ -156,12 +184,14 @@ describe('iD.presetIndex', function () {
         });
     });
 
-
     describe('#addablePresetIDs', function () {
         var testPresets = {
-            residential: { tags: { highway: 'residential' }, geometry: ['line'] },
+            residential: {
+                tags: { highway: 'residential' },
+                geometry: ['line'],
+            },
             park: { tags: { leisure: 'park' }, geometry: ['point', 'area'] },
-            bench: { tags: { amenity: 'bench' }, geometry: ['point', 'line'] }
+            bench: { tags: { amenity: 'bench' }, geometry: ['point', 'line'] },
         };
 
         it('addablePresetIDs is initially null', async () => {
@@ -179,7 +209,7 @@ describe('iD.presetIndex', function () {
             expect(presets.item('residential').addable()).to.be.true;
             expect(presets.item('park').addable()).to.be.true;
 
-            var ids = new Set(['residential']);   // can only add preset with this ID
+            var ids = new Set(['residential']); // can only add preset with this ID
             presets.addablePresetIDs(ids);
 
             expect(presets.item('residential').addable()).to.be.true;
@@ -203,7 +233,7 @@ describe('iD.presetIndex', function () {
             expect(presets.item('residential').addable()).to.be.true;
             expect(presets.item('park').addable()).to.be.true;
 
-            var ids = new Set([null, undefined, '', 'garbage', 'residential']);   // can only add preset with these IDs
+            var ids = new Set([null, undefined, '', 'garbage', 'residential']); // can only add preset with these IDs
             presets.addablePresetIDs(ids);
 
             expect(presets.item(null)).to.eql(undefined);
@@ -227,7 +257,7 @@ describe('iD.presetIndex', function () {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
-            var ids = new Set(['bench', 'residential']);   // can only add presets with these IDs
+            var ids = new Set(['bench', 'residential']); // can only add presets with these IDs
             presets.addablePresetIDs(ids);
 
             var areaDefaults = presets.defaults('area', 10).collection;
@@ -244,28 +274,34 @@ describe('iD.presetIndex', function () {
         });
     });
 
-
     describe.skip('#build', function () {
         it('builds presets from provided', function () {
-            var surfShop = iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
+            var surfShop = iD.osmNode({
+                tags: { amenity: 'shop', 'shop:type': 'surf' },
+            });
             var graph = iD.coreGraph([surfShop]);
             var presets = iD.presetIndex();
             var presetData = {
                 presets: {
                     'amenity/shop/surf': {
                         tags: { amenity: 'shop', 'shop:type': 'surf' },
-                        geometry: ['point', 'area']
-                    }
-                }
+                        geometry: ['point', 'area'],
+                    },
+                },
             };
 
             expect(presets.match(surfShop, graph)).to.eql(undefined); // no surfshop preset yet...
             presets.build(presetData, true);
-            expect(presets.match(surfShop, graph).addTags).to.eql({ amenity: 'shop', 'shop:type': 'surf' });
+            expect(presets.match(surfShop, graph).addTags).to.eql({
+                amenity: 'shop',
+                'shop:type': 'surf',
+            });
         });
 
-        it('configures presets\' initial visibility', function () {
-            var surfShop = iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
+        it("configures presets' initial visibility", function () {
+            var surfShop = iD.osmNode({
+                tags: { amenity: 'shop', 'shop:type': 'surf' },
+            });
             var firstStreetJetty = iD.osmNode({ tags: { man_made: 'jetty' } });
             var entities = [surfShop, firstStreetJetty];
             var graph = iD.coreGraph(entities);
@@ -274,13 +310,13 @@ describe('iD.presetIndex', function () {
                 presets: {
                     'amenity/shop/surf': {
                         tags: { amenity: 'shop', 'shop:type': 'surf' },
-                        geometry: ['point', 'area']
+                        geometry: ['point', 'area'],
                     },
                     'man_made/jetty': {
                         tags: { man_made: 'jetty' },
-                        geometry: ['point']
-                    }
-                }
+                        geometry: ['point'],
+                    },
+                },
             };
 
             presets.build(presetData, false);
@@ -291,34 +327,39 @@ describe('iD.presetIndex', function () {
         });
     });
 
-
     describe('expected matches', function () {
         var testPresets = {
-            building: { name: 'Building', tags: { building: 'yes' }, geometry: ['area'] },
+            building: {
+                name: 'Building',
+                tags: { building: 'yes' },
+                geometry: ['area'],
+            },
             'type/multipolygon': {
                 name: 'Multipolygon',
                 geometry: ['area', 'relation'],
-                tags: { 'type': 'multipolygon' },
+                tags: { type: 'multipolygon' },
                 searchable: false,
-                matchScore: 0.1
+                matchScore: 0.1,
             },
             address: {
                 name: 'Address',
                 geometry: ['point', 'vertex', 'area'],
                 tags: { 'addr:*': '*' },
-                matchScore: 0.15
+                matchScore: 0.15,
             },
             'highway/pedestrian_area': {
                 name: 'Pedestrian Area',
                 geometry: ['area'],
-                tags: { highway: 'pedestrian', area: 'yes' }
-            }
+                tags: { highway: 'pedestrian', area: 'yes' },
+            },
         };
 
         it('prefers building to multipolygon', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var relation = iD.osmRelation({ tags: { type: 'multipolygon', building: 'yes' } });
+            var relation = iD.osmRelation({
+                tags: { type: 'multipolygon', building: 'yes' },
+            });
             var graph = iD.coreGraph([relation]);
             await presets.ensureLoaded();
             var match = presets.match(relation, graph);
@@ -328,7 +369,13 @@ describe('iD.presetIndex', function () {
         it('prefers building to address', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var way = iD.osmWay({ tags: { area: 'yes', building: 'yes', 'addr:housenumber': '1234' } });
+            var way = iD.osmWay({
+                tags: {
+                    area: 'yes',
+                    building: 'yes',
+                    'addr:housenumber': '1234',
+                },
+            });
             var graph = iD.coreGraph([way]);
             await presets.ensureLoaded();
             var match = presets.match(way, graph);
@@ -338,7 +385,9 @@ describe('iD.presetIndex', function () {
         it('prefers pedestrian to area', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var way = iD.osmWay({ tags: { area: 'yes', highway: 'pedestrian' } });
+            var way = iD.osmWay({
+                tags: { area: 'yes', highway: 'pedestrian' },
+            });
             var graph = iD.coreGraph([way]);
             await presets.ensureLoaded();
             var match = presets.match(way, graph);
@@ -346,27 +395,26 @@ describe('iD.presetIndex', function () {
         });
     });
 
-
     describe.skip('#fromExternal', function () {
         var _server;
         var presetData = {
             presets: {
                 '8bc64d6d': {
-                    'name': 'Surf Shop',
-                    'geometry': ['area', 'point'],
-                    'fields': ['2161a712'],
-                    'tags': { 'amenity': 'shop', 'shop:type': 'surf' },
-                    'matchScore': 0.99
-                }
+                    name: 'Surf Shop',
+                    geometry: ['area', 'point'],
+                    fields: ['2161a712'],
+                    tags: { amenity: 'shop', 'shop:type': 'surf' },
+                    matchScore: 0.99,
+                },
             },
-            'fields': {
+            fields: {
                 '2161a712': {
-                    'key': 'building',
-                    'label': 'Building',
-                    'overrideLabel': 'Building',
-                    'type': 'text'
-                }
-            }
+                    key: 'building',
+                    label: 'Building',
+                    overrideLabel: 'Building',
+                    type: 'text',
+                },
+            },
         };
 
         beforeEach(function () {
@@ -378,7 +426,9 @@ describe('iD.presetIndex', function () {
         });
 
         it('builds presets w/external sources set to addable', function () {
-            var surfShop = iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
+            var surfShop = iD.osmNode({
+                tags: { amenity: 'shop', 'shop:type': 'surf' },
+            });
             var graph = iD.coreGraph([surfShop]);
             var url = 'https://fakemaprules.io/fake.json';
 
@@ -390,20 +440,27 @@ describe('iD.presetIndex', function () {
 
             // add the validations query param...
             iD.presetIndex().fromExternal(url, function (externalPresets) {
-                expect(externalPresets.match(surfShop, graph).id).to.eql('8bc64d6d');
+                expect(externalPresets.match(surfShop, graph).id).to.eql(
+                    '8bc64d6d',
+                );
             });
 
-            _server.respondWith('GET', /fake\.json/,
-                [200, { 'Content-Type': 'application/json' }, JSON.stringify(presetData)]
-            );
+            _server.respondWith('GET', /fake\.json/, [
+                200,
+                { 'Content-Type': 'application/json' },
+                JSON.stringify(presetData),
+            ]);
             _server.respond();
         });
 
         it('makes only the external presets initially addable', function () {
             var url = 'https://fakemaprules.io/fake.json';
 
-            iD.presetIndex().fromExternal(url, function(externalPresets) {
-                var external = externalPresets.collection.reduce(function(presets, preset) {
+            iD.presetIndex().fromExternal(url, function (externalPresets) {
+                var external = externalPresets.collection.reduce(function (
+                    presets,
+                    preset,
+                ) {
                     if (!preset.hasOwnProperty('members') && preset.addable()) {
                         presets.push(preset.id);
                     }
@@ -413,16 +470,17 @@ describe('iD.presetIndex', function () {
                 var morePresetKeys = Object.keys(presetData.presets);
                 expect(morePresetKeys.length).to.eql(external.length);
 
-                morePresetKeys.forEach(function(presetID) {
+                morePresetKeys.forEach(function (presetID) {
                     expect(external.indexOf(presetID)).to.be.at.least(0);
                 });
             });
 
-            _server.respondWith('GET', /fake\.json/,
-                [200, { 'Content-Type': 'application/json' }, JSON.stringify(presetData)]
-            );
+            _server.respondWith('GET', /fake\.json/, [
+                200,
+                { 'Content-Type': 'application/json' },
+                JSON.stringify(presetData),
+            ]);
             _server.respond();
         });
     });
-
 });

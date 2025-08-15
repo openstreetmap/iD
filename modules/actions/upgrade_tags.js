@@ -1,8 +1,7 @@
 export function actionUpgradeTags(entityId, oldTags, replaceTags) {
-
-    return function(graph) {
+    return function (graph) {
         var entity = graph.entity(entityId);
-        var tags = Object.assign({}, entity.tags);  // shallow copy
+        var tags = Object.assign({}, entity.tags); // shallow copy
         var transferValue;
         var semiIndex;
 
@@ -13,10 +12,10 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
                 // note the value since we might need to transfer it
                 transferValue = tags[oldTagKey];
                 delete tags[oldTagKey];
-            // exact match
+                // exact match
             } else if (oldTags[oldTagKey] === tags[oldTagKey]) {
                 delete tags[oldTagKey];
-            // match is within semicolon-delimited values
+                // match is within semicolon-delimited values
             } else {
                 var vals = tags[oldTagKey].split(';').filter(Boolean);
                 var oldIndex = vals.indexOf(oldTags[oldTagKey]);
@@ -47,9 +46,15 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
                 } else if (replaceValue === '$1') {
                     tags[replaceKey] = transferValue;
                 } else {
-                    if (tags[replaceKey] && oldTags[replaceKey] && semiIndex !== undefined) {
+                    if (
+                        tags[replaceKey] &&
+                        oldTags[replaceKey] &&
+                        semiIndex !== undefined
+                    ) {
                         // don't override preexisting values
-                        var existingVals = tags[replaceKey].split(';').filter(Boolean);
+                        var existingVals = tags[replaceKey]
+                            .split(';')
+                            .filter(Boolean);
                         if (existingVals.indexOf(replaceValue) === -1) {
                             existingVals.splice(semiIndex, 0, replaceValue);
                             tags[replaceKey] = existingVals.join(';');

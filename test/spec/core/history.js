@@ -2,9 +2,11 @@ import { setTimeout } from 'node:timers/promises';
 
 describe('iD.coreHistory', function () {
     var context, history, spy;
-    var actionNoop = function(g) { return g; };
+    var actionNoop = function (g) {
+        return g;
+    };
     var actionAddNode = function (nodeID) {
-        return function(g) {
+        return function (g) {
             return g.replace(iD.osmNode({ id: nodeID }));
         };
     };
@@ -25,13 +27,13 @@ describe('iD.coreHistory', function () {
 
     describe('#merge', function () {
         it('merges the entities into all graph versions', function () {
-            var n = iD.osmNode({id: 'n'});
+            var n = iD.osmNode({ id: 'n' });
             history.merge([n]);
             expect(history.graph().entity('n')).to.equal(n);
         });
 
         it('emits a merge event with the new entities', function () {
-            var n = iD.osmNode({id: 'n'});
+            var n = iD.osmNode({ id: 'n' });
             history.on('merge', spy);
             history.merge([n]);
             expect(spy).to.have.been.calledWith([n]);
@@ -45,7 +47,9 @@ describe('iD.coreHistory', function () {
 
         it('updates the graph', function () {
             var node = iD.osmNode();
-            history.perform(function (graph) { return graph.replace(node); });
+            history.perform(function (graph) {
+                return graph.replace(node);
+            });
             expect(history.graph().entity(node.id)).to.equal(node);
         });
 
@@ -71,7 +75,9 @@ describe('iD.coreHistory', function () {
         });
 
         it('performs transitionable actions in a transition', async () => {
-            var action1 = function() { return iD.coreGraph(); };
+            var action1 = function () {
+                return iD.coreGraph();
+            };
             action1.transitionable = true;
             history.on('change', spy);
             await history.perform(action1);
@@ -87,7 +93,9 @@ describe('iD.coreHistory', function () {
 
         it('updates the graph', function () {
             var node = iD.osmNode();
-            history.replace(function (graph) { return graph.replace(node); });
+            history.replace(function (graph) {
+                return graph.replace(node);
+            });
             expect(history.graph().entity(node.id)).to.equal(node);
         });
 
@@ -228,8 +236,8 @@ describe('iD.coreHistory', function () {
         });
     });
 
-    describe('#pauseChangeDispatch / #resumeChangeDispatch', function() {
-        it('prevents change events from getting dispatched', function() {
+    describe('#pauseChangeDispatch / #resumeChangeDispatch', function () {
+        it('prevents change events from getting dispatched', function () {
             history.perform(actionNoop, 'base');
             history.on('change', spy);
 
@@ -250,7 +258,7 @@ describe('iD.coreHistory', function () {
             expect(spy).to.have.been.calledOnceWith(diff);
         });
 
-        it('does nothing if resume called before pause', function() {
+        it('does nothing if resume called before pause', function () {
             history.perform(actionNoop, 'base');
             history.on('change', spy);
 
@@ -258,7 +266,7 @@ describe('iD.coreHistory', function () {
             expect(spy).to.have.not.been.called;
         });
 
-        it('uses earliest difference if pause called multiple times', function() {
+        it('uses earliest difference if pause called multiple times', function () {
             history.perform(actionNoop, 'base');
             history.on('change', spy);
 
@@ -277,34 +285,42 @@ describe('iD.coreHistory', function () {
     describe('#changes', function () {
         it('includes created entities', function () {
             var node = iD.osmNode();
-            history.perform(function (graph) { return graph.replace(node); });
+            history.perform(function (graph) {
+                return graph.replace(node);
+            });
             expect(history.changes().created).to.eql([node]);
         });
 
         it('includes modified entities', function () {
-            var node1 = iD.osmNode({id: 'n1'});
+            var node1 = iD.osmNode({ id: 'n1' });
             var node2 = node1.update({ tags: { yes: 'no' } });
             history.merge([node1]);
-            history.perform(function (graph) { return graph.replace(node2); });
+            history.perform(function (graph) {
+                return graph.replace(node2);
+            });
             expect(history.changes().modified).to.eql([node2]);
         });
 
         it('includes deleted entities', function () {
-            var node = iD.osmNode({id: 'n1'});
+            var node = iD.osmNode({ id: 'n1' });
             history.merge([node]);
-            history.perform(function (graph) { return graph.remove(node); });
+            history.perform(function (graph) {
+                return graph.remove(node);
+            });
             expect(history.changes().deleted).to.eql([node]);
         });
     });
 
-    describe('#hasChanges', function() {
-        it('is true when any of change\'s values are nonempty', function() {
+    describe('#hasChanges', function () {
+        it("is true when any of change's values are nonempty", function () {
             var node = iD.osmNode();
-            history.perform(function (graph) { return graph.replace(node); });
+            history.perform(function (graph) {
+                return graph.replace(node);
+            });
             expect(history.hasChanges()).to.eql(true);
         });
 
-        it('is false when all of change\'s values are empty', function() {
+        it("is false when all of change's values are empty", function () {
             expect(history.hasChanges()).to.eql(false);
         });
     });
@@ -356,28 +372,30 @@ describe('iD.coreHistory', function () {
         });
     });
 
-    describe('#toJSON', function() {
-        it('doesn\'t generate unsaveable changes', function() {
+    describe('#toJSON', function () {
+        it("doesn't generate unsaveable changes", function () {
             history.perform(actionAddNode('n-1'));
             history.perform(iD.actionDeleteNode('n-1'));
             expect(history.toJSON()).to.be.not.ok;
         });
 
-        it('generates v3 JSON', function() {
-            var node_1 = iD.osmNode({id: 'n-1'});
-            var node1 = iD.osmNode({id: 'n1'});
-            var node2 = iD.osmNode({id: 'n2'});
-            var node3 = iD.osmNode({id: 'n3'});
+        it('generates v3 JSON', function () {
+            var node_1 = iD.osmNode({ id: 'n-1' });
+            var node1 = iD.osmNode({ id: 'n1' });
+            var node2 = iD.osmNode({ id: 'n2' });
+            var node3 = iD.osmNode({ id: 'n3' });
             history.merge([node1, node2, node3]);
-            history.perform(iD.actionAddEntity(node_1));           // addition
-            history.perform(iD.actionChangeTags('n2', {k: 'v'}));  // modification
-            history.perform(iD.actionDeleteNode('n3'));            // deletion
+            history.perform(iD.actionAddEntity(node_1)); // addition
+            history.perform(iD.actionChangeTags('n2', { k: 'v' })); // modification
+            history.perform(iD.actionDeleteNode('n3')); // deletion
 
             var json = JSON.parse(history.toJSON());
             var node_1_json = JSON.parse(JSON.stringify(node_1));
             var node1_json = JSON.parse(JSON.stringify(node1));
             var node2_json = JSON.parse(JSON.stringify(node2));
-            var node2_upd_json = JSON.parse(JSON.stringify(node2.update({tags: {k: 'v'}})));
+            var node2_upd_json = JSON.parse(
+                JSON.stringify(node2.update({ tags: { k: 'v' } })),
+            );
             var node3_json = JSON.parse(JSON.stringify(node3));
 
             expect(json.version).to.eql(3);
@@ -393,181 +411,261 @@ describe('iD.coreHistory', function () {
         });
     });
 
-    describe('#fromJSON', function() {
-        it('restores from v1 JSON (creation)', function() {
+    describe('#fromJSON', function () {
+        it('restores from v1 JSON (creation)', function () {
             var json = {
-                'stack': [
-                    {'entities': {}},
-                    {'entities': {'n-1': {'loc': [1, 2], 'id': 'n-1'}}, 'imageryUsed': ['Bing'], 'annotation': 'Added a point.'}
+                stack: [
+                    { entities: {} },
+                    {
+                        entities: { 'n-1': { loc: [1, 2], id: 'n-1' } },
+                        imageryUsed: ['Bing'],
+                        annotation: 'Added a point.',
+                    },
                 ],
-                'nextIDs': {'node': -2, 'way': -1, 'relation': -1},
-                'index': 1
+                nextIDs: { node: -2, way: -1, relation: -1 },
+                index: 1,
             };
             history.fromJSON(JSON.stringify(json));
-            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
+            expect(history.graph().entity('n-1')).to.eql(
+                iD.osmNode({ id: 'n-1', loc: [1, 2] }),
+            );
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(iD.osmEntity.id.next).to.eql({
+                node: -2,
+                way: -1,
+                relation: -1,
+            });
         });
 
-        it('restores from v1 JSON (modification)', function() {
+        it('restores from v1 JSON (modification)', function () {
             var json = {
-                'stack': [
-                    {'entities': {}},
-                    {'entities': {'n-1': {'loc': [1, 2], 'id': 'n-1'}}, 'imageryUsed': ['Bing'], 'annotation': 'Added a point.'},
-                    {'entities': {'n-1': {'loc': [2, 3], 'id': 'n-1', 'v': 1}}, 'imageryUsed': ['Bing'], 'annotation': 'Moved a point.'}
+                stack: [
+                    { entities: {} },
+                    {
+                        entities: { 'n-1': { loc: [1, 2], id: 'n-1' } },
+                        imageryUsed: ['Bing'],
+                        annotation: 'Added a point.',
+                    },
+                    {
+                        entities: { 'n-1': { loc: [2, 3], id: 'n-1', v: 1 } },
+                        imageryUsed: ['Bing'],
+                        annotation: 'Moved a point.',
+                    },
                 ],
-                'nextIDs': {'node': -2, 'way': -1, 'relation': -1},
-                'index': 2
+                nextIDs: { node: -2, way: -1, relation: -1 },
+                index: 2,
             };
             history.fromJSON(JSON.stringify(json));
-            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [2, 3], v: 1}));
+            expect(history.graph().entity('n-1')).to.eql(
+                iD.osmNode({ id: 'n-1', loc: [2, 3], v: 1 }),
+            );
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(iD.osmEntity.id.next).to.eql({
+                node: -2,
+                way: -1,
+                relation: -1,
+            });
         });
 
-        it('restores from v1 JSON (deletion)', function() {
+        it('restores from v1 JSON (deletion)', function () {
             var json = {
-                'stack': [
-                    {'entities': {}},
-                    {'entities': {'n1': 'undefined'}, 'imageryUsed': ['Bing'], 'annotation': 'Deleted a point.'}
+                stack: [
+                    { entities: {} },
+                    {
+                        entities: { n1: 'undefined' },
+                        imageryUsed: ['Bing'],
+                        annotation: 'Deleted a point.',
+                    },
                 ],
-                'nextIDs': {'node': -1, 'way': -2, 'relation': -3},
-                'index': 1
+                nextIDs: { node: -1, way: -2, relation: -3 },
+                index: 1,
             };
             history.fromJSON(JSON.stringify(json));
-            history.merge([iD.osmNode({id: 'n1'})]);
+            history.merge([iD.osmNode({ id: 'n1' })]);
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -1, way: -2, relation: -3});
+            expect(iD.osmEntity.id.next).to.eql({
+                node: -1,
+                way: -2,
+                relation: -3,
+            });
         });
 
-        it('restores from v2 JSON (creation)', function() {
+        it('restores from v2 JSON (creation)', function () {
             var json = {
-                'version': 2,
-                'entities': [
-                    {'loc': [1, 2], 'id': 'n-1'}
-                ],
-                'stack': [
+                version: 2,
+                entities: [{ loc: [1, 2], id: 'n-1' }],
+                stack: [
                     {},
-                    {'modified': ['n-1v0'], 'imageryUsed': ['Bing'], 'annotation': 'Added a point.'}
+                    {
+                        modified: ['n-1v0'],
+                        imageryUsed: ['Bing'],
+                        annotation: 'Added a point.',
+                    },
                 ],
-                'nextIDs': {'node': -2, 'way': -1, 'relation': -1},
-                'index': 1
+                nextIDs: { node: -2, way: -1, relation: -1 },
+                index: 1,
             };
             history.fromJSON(JSON.stringify(json));
-            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
+            expect(history.graph().entity('n-1')).to.eql(
+                iD.osmNode({ id: 'n-1', loc: [1, 2] }),
+            );
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(iD.osmEntity.id.next).to.eql({
+                node: -2,
+                way: -1,
+                relation: -1,
+            });
             expect(history.difference().created().length).to.eql(1);
         });
 
-        it('restores from v2 JSON (modification)', function() {
+        it('restores from v2 JSON (modification)', function () {
             var json = {
-                'version': 2,
-                'entities': [
-                    {'loc': [2, 3], 'id': 'n1', 'v': 1}
-                ],
-                'stack': [
+                version: 2,
+                entities: [{ loc: [2, 3], id: 'n1', v: 1 }],
+                stack: [
                     {},
-                    {'modified': ['n1v1'], 'imageryUsed': ['Bing'], 'annotation': 'Moved a point.'}
+                    {
+                        modified: ['n1v1'],
+                        imageryUsed: ['Bing'],
+                        annotation: 'Moved a point.',
+                    },
                 ],
-                'nextIDs': {'node': -2, 'way': -1, 'relation': -1},
-                'index': 1
+                nextIDs: { node: -2, way: -1, relation: -1 },
+                index: 1,
             };
             history.fromJSON(JSON.stringify(json));
-            history.merge([iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
-            expect(history.graph().entity('n1')).to.eql(iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
+            history.merge([iD.osmNode({ id: 'n1' })]); // Shouldn't be necessary; flaw in v2 format (see #2135)
+            expect(history.graph().entity('n1')).to.eql(
+                iD.osmNode({ id: 'n1', loc: [2, 3], v: 1 }),
+            );
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(iD.osmEntity.id.next).to.eql({
+                node: -2,
+                way: -1,
+                relation: -1,
+            });
             expect(history.difference().modified().length).to.eql(1);
         });
 
-        it('restores from v2 JSON (deletion)', function() {
+        it('restores from v2 JSON (deletion)', function () {
             var json = {
-                'version': 2,
-                'entities': [],
-                'stack': [
+                version: 2,
+                entities: [],
+                stack: [
                     {},
-                    {'deleted': ['n1'], 'imageryUsed': ['Bing'], 'annotation': 'Deleted a point.'}
+                    {
+                        deleted: ['n1'],
+                        imageryUsed: ['Bing'],
+                        annotation: 'Deleted a point.',
+                    },
                 ],
-                'nextIDs': {'node': -1, 'way': -2, 'relation': -3},
-                'index': 1
+                nextIDs: { node: -1, way: -2, relation: -3 },
+                index: 1,
             };
             history.fromJSON(JSON.stringify(json));
-            history.merge([iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
+            history.merge([iD.osmNode({ id: 'n1' })]); // Shouldn't be necessary; flaw in v2 format (see #2135)
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -1, way: -2, relation: -3});
+            expect(iD.osmEntity.id.next).to.eql({
+                node: -1,
+                way: -2,
+                relation: -3,
+            });
             expect(history.difference().deleted().length).to.eql(1);
         });
 
-        it('restores from v3 JSON (creation)', function() {
+        it('restores from v3 JSON (creation)', function () {
             var json = {
-                'version': 3,
-                'entities': [
-                    {'loc': [1, 2], 'id': 'n-1'}
-                ],
-                'baseEntities': [],
-                'stack': [
+                version: 3,
+                entities: [{ loc: [1, 2], id: 'n-1' }],
+                baseEntities: [],
+                stack: [
                     {},
-                    {'modified': ['n-1v0'], 'imageryUsed': ['Bing'], 'annotation': 'Added a point.'}
+                    {
+                        modified: ['n-1v0'],
+                        imageryUsed: ['Bing'],
+                        annotation: 'Added a point.',
+                    },
                 ],
-                'nextIDs': {'node': -2, 'way': -1, 'relation': -1},
-                'index': 1
+                nextIDs: { node: -2, way: -1, relation: -1 },
+                index: 1,
             };
             history.fromJSON(JSON.stringify(json));
-            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
+            expect(history.graph().entity('n-1')).to.eql(
+                iD.osmNode({ id: 'n-1', loc: [1, 2] }),
+            );
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(iD.osmEntity.id.next).to.eql({
+                node: -2,
+                way: -1,
+                relation: -1,
+            });
             expect(history.difference().created().length).to.eql(1);
         });
 
-        it('restores from v3 JSON (modification)', function() {
+        it('restores from v3 JSON (modification)', function () {
             var json = {
-                'version': 3,
-                'entities': [
-                    {'loc': [2, 3], 'id': 'n1', 'v': 1}
-                ],
-                'baseEntities': [{'loc': [1, 2], 'id': 'n1'}],
-                'stack': [
+                version: 3,
+                entities: [{ loc: [2, 3], id: 'n1', v: 1 }],
+                baseEntities: [{ loc: [1, 2], id: 'n1' }],
+                stack: [
                     {},
-                    {'modified': ['n1v1'], 'imageryUsed': ['Bing'], 'annotation': 'Moved a point.'}
+                    {
+                        modified: ['n1v1'],
+                        imageryUsed: ['Bing'],
+                        annotation: 'Moved a point.',
+                    },
                 ],
-                'nextIDs': {'node': -2, 'way': -1, 'relation': -1},
-                'index': 1
+                nextIDs: { node: -2, way: -1, relation: -1 },
+                index: 1,
             };
             history.fromJSON(JSON.stringify(json));
-            expect(history.graph().entity('n1')).to.eql(iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
+            expect(history.graph().entity('n1')).to.eql(
+                iD.osmNode({ id: 'n1', loc: [2, 3], v: 1 }),
+            );
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(iD.osmEntity.id.next).to.eql({
+                node: -2,
+                way: -1,
+                relation: -1,
+            });
             expect(history.difference().modified().length).to.eql(1);
         });
 
-        it('restores from v3 JSON (deletion)', function() {
+        it('restores from v3 JSON (deletion)', function () {
             var json = {
-                'version': 3,
-                'entities': [],
-                'baseEntities': [{'loc': [1, 2], 'id': 'n1'}],
-                'stack': [
+                version: 3,
+                entities: [],
+                baseEntities: [{ loc: [1, 2], id: 'n1' }],
+                stack: [
                     {},
-                    {'deleted': ['n1'], 'imageryUsed': ['Bing'], 'annotation': 'Deleted a point.'}
+                    {
+                        deleted: ['n1'],
+                        imageryUsed: ['Bing'],
+                        annotation: 'Deleted a point.',
+                    },
                 ],
-                'nextIDs': {'node': -1, 'way': -2, 'relation': -3},
-                'index': 1
+                nextIDs: { node: -1, way: -2, relation: -3 },
+                index: 1,
             };
             history.fromJSON(JSON.stringify(json));
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -1, way: -2, relation: -3});
+            expect(iD.osmEntity.id.next).to.eql({
+                node: -1,
+                way: -2,
+                relation: -3,
+            });
             expect(history.difference().deleted().length).to.eql(1);
         });
     });

@@ -5,15 +5,23 @@ import RBush from 'rbush';
 import { localizer } from '../core/localizer';
 
 import {
-    geoExtent, geoPolygonIntersectsPolygon, geoPathLength,
-    geoScaleToZoom, geoVecInterp, geoVecLength
+    geoExtent,
+    geoPathLength,
+    geoPolygonIntersectsPolygon,
+    geoScaleToZoom,
+    geoVecInterp,
+    geoVecLength,
 } from '../geo';
-import { presetManager } from '../presets';
 import { osmEntity, osmIsInterestingTag } from '../osm';
+import { presetManager } from '../presets';
+import {
+    utilArrayDifference,
+    utilArrayUniq,
+    utilDisplayName,
+    utilDisplayNameForPath,
+    utilEntitySelector,
+} from '../util';
 import { utilDetect } from '../util/detect';
-import { utilArrayDifference, utilArrayUniq, utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
-
-
 
 export function svgLabels(projection, context) {
     var path = d3_geoPath(projection);
@@ -72,157 +80,180 @@ export function svgLabels(projection, context) {
         ['area', 'name', '*', 12],
         ['point', 'name', '*', 10],
         ['point', 'addr:housenumber', '*', 10],
-        ['point', 'addr:housename', '*', 10]
+        ['point', 'addr:housename', '*', 10],
     ];
-
 
     function shouldSkipIcon(preset) {
         var noIcons = ['building', 'landuse', 'natural'];
-        return noIcons.some(function(s) {
+        return noIcons.some(function (s) {
             return preset.id.indexOf(s) >= 0;
         });
     }
 
-
     function drawLinePaths(selection, labels, filter, classes) {
-        var paths = selection.selectAll('path:not(.debug)')
-            .filter(d => filter(d.entity))
-            .data(labels, d => osmEntity.key(d.entity));
+        var paths = selection
+            .selectAll('path:not(.debug)')
+            .filter((d) => filter(d.entity))
+            .data(labels, (d) => osmEntity.key(d.entity));
 
         // exit
-        paths.exit()
-            .remove();
+        paths.exit().remove();
 
         // enter/update
-        paths.enter()
+        paths
+            .enter()
             .append('path')
-            .style('stroke-width', d => d.position['font-size'])
-            .attr('id', d => 'ideditor-labelpath-' + d.entity.id)
+            .style('stroke-width', (d) => d.position['font-size'])
+            .attr('id', (d) => 'ideditor-labelpath-' + d.entity.id)
             .attr('class', classes)
             .merge(paths)
-            .attr('d', d => d.position.lineString);
+            .attr('d', (d) => d.position.lineString);
     }
 
-
     function drawLineLabels(selection, labels, filter, classes) {
-        var texts = selection.selectAll('text.' + classes)
-            .filter(d => filter(d.entity))
-            .data(labels, d => osmEntity.key(d.entity));
+        var texts = selection
+            .selectAll('text.' + classes)
+            .filter((d) => filter(d.entity))
+            .data(labels, (d) => osmEntity.key(d.entity));
 
         // exit
-        texts.exit()
-            .remove();
+        texts.exit().remove();
 
         // enter
-        texts.enter()
+        texts
+            .enter()
             .append('text')
-            .attr('class', d => classes + ' ' + d.position.classes + ' ' + d.entity.id)
+            .attr(
+                'class',
+                (d) => classes + ' ' + d.position.classes + ' ' + d.entity.id,
+            )
             .attr('dy', baselineHack ? '0.35em' : null)
             .append('textPath')
             .attr('class', 'textpath');
 
         // update
-        selection.selectAll('text.' + classes).selectAll('.textpath')
-            .filter(d => filter(d.entity))
-            .data(labels, d => osmEntity.key(d.entity))
+        selection
+            .selectAll('text.' + classes)
+            .selectAll('.textpath')
+            .filter((d) => filter(d.entity))
+            .data(labels, (d) => osmEntity.key(d.entity))
             .attr('startOffset', '50%')
-            .attr('xlink:href', function(d) { return '#ideditor-labelpath-' + d.entity.id; })
-            .text(d => d.name);
+            .attr('xlink:href', function (d) {
+                return '#ideditor-labelpath-' + d.entity.id;
+            })
+            .text((d) => d.name);
     }
-
 
     function drawPointLabels(selection, labels, filter, classes) {
         if (classes.includes('pointlabel-halo')) {
-            labels = labels.filter(d => !d.position.isAddr);
+            labels = labels.filter((d) => !d.position.isAddr);
         }
-        var texts = selection.selectAll('text.' + classes)
-            .filter(d => filter(d.entity))
-            .data(labels, d => osmEntity.key(d.entity));
+        var texts = selection
+            .selectAll('text.' + classes)
+            .filter((d) => filter(d.entity))
+            .data(labels, (d) => osmEntity.key(d.entity));
 
         // exit
-        texts.exit()
-            .remove();
+        texts.exit().remove();
 
         // enter/update
-        texts.enter()
+        texts
+            .enter()
             .append('text')
-            .attr('class', d => classes + ' ' + d.position.classes + ' ' + d.entity.id)
-            .style('text-anchor', d => d.position.textAnchor)
-            .text(d => d.name)
+            .attr(
+                'class',
+                (d) => classes + ' ' + d.position.classes + ' ' + d.entity.id,
+            )
+            .style('text-anchor', (d) => d.position.textAnchor)
+            .text((d) => d.name)
             .merge(texts)
-            .attr('x', d => d.position.x)
-            .attr('y', d => d.position.y);
+            .attr('x', (d) => d.position.x)
+            .attr('y', (d) => d.position.y);
     }
-
 
     function drawAreaLabels(selection, labels, filter, classes) {
         labels = labels.filter(hasText);
         drawPointLabels(selection, labels, filter, classes);
 
         function hasText(d) {
-            return d.position.hasOwnProperty('x') && d.position.hasOwnProperty('y');
+            return (
+                d.position.hasOwnProperty('x') && d.position.hasOwnProperty('y')
+            );
         }
     }
 
-
     function drawAreaIcons(selection, labels, filter, classes) {
-        var icons = selection.selectAll('use.' + classes)
-            .filter(d => filter(d.entity))
-            .data(labels, d => osmEntity.key(d.entity));
+        var icons = selection
+            .selectAll('use.' + classes)
+            .filter((d) => filter(d.entity))
+            .data(labels, (d) => osmEntity.key(d.entity));
 
         // exit
-        icons.exit()
-            .remove();
+        icons.exit().remove();
 
         // enter/update
-        icons.enter()
+        icons
+            .enter()
             .append('use')
             .attr('class', 'icon ' + classes)
             .attr('width', '17px')
             .attr('height', '17px')
             .merge(icons)
-            .attr('transform', d => d.position.transform)
-            .attr('xlink:href', function(d) {
+            .attr('transform', (d) => d.position.transform)
+            .attr('xlink:href', function (d) {
                 var preset = presetManager.match(d.entity, context.graph());
                 var picon = preset && preset.icon;
                 return picon ? '#' + picon : '';
             });
     }
 
-
     function drawCollisionBoxes(selection, rtree, which) {
-        var classes = 'debug ' + which + ' ' + (which === 'debug-skipped' ? 'orange' : 'yellow');
+        var classes =
+            'debug ' +
+            which +
+            ' ' +
+            (which === 'debug-skipped' ? 'orange' : 'yellow');
 
         var gj = [];
         if (context.getDebug('collision')) {
-            gj = rtree.all().map(function(d) {
-                return { type: 'Polygon', coordinates: [[
-                    [d.minX, d.minY],
-                    [d.maxX, d.minY],
-                    [d.maxX, d.maxY],
-                    [d.minX, d.maxY],
-                    [d.minX, d.minY]
-                ]]};
+            gj = rtree.all().map(function (d) {
+                return {
+                    type: 'Polygon',
+                    coordinates: [
+                        [
+                            [d.minX, d.minY],
+                            [d.maxX, d.minY],
+                            [d.maxX, d.maxY],
+                            [d.minX, d.maxY],
+                            [d.minX, d.minY],
+                        ],
+                    ],
+                };
             });
         }
 
-        var boxes = selection.selectAll('.' + which)
-            .data(gj);
+        var boxes = selection.selectAll('.' + which).data(gj);
 
         // exit
-        boxes.exit()
-            .remove();
+        boxes.exit().remove();
 
         // enter/update
-        boxes.enter()
+        boxes
+            .enter()
             .append('path')
             .attr('class', classes)
             .merge(boxes)
             .attr('d', d3_geoPath());
     }
 
-
-    function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
+    function drawLabels(
+        selection,
+        graph,
+        entities,
+        filter,
+        dimensions,
+        fullRedraw,
+    ) {
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = geoScaleToZoom(projection.scale());
 
@@ -238,7 +269,6 @@ export function svgLabels(projection, context) {
             _rdrawn.clear();
             _rskipped.clear();
             _entitybboxes = {};
-
         } else {
             for (i = 0; i < entities.length; i++) {
                 entity = entities[i];
@@ -259,7 +289,10 @@ export function svgLabels(projection, context) {
             geometry = entity.geometry(graph);
 
             // Insert collision boxes around interesting points/vertices
-            if (geometry === 'point' || (geometry === 'vertex' && isInterestingVertex(entity))) {
+            if (
+                geometry === 'point' ||
+                (geometry === 'vertex' && isInterestingVertex(entity))
+            ) {
                 const isAddr = isAddressPoint(entity.tags);
                 var hasDirections = entity.directions(graph, projection).length;
                 var markerPadding = 0;
@@ -272,7 +305,7 @@ export function svgLabels(projection, context) {
                     renderNodeAs[entity.id] = { geometry: 'vertex', isAddr };
                 } else {
                     renderNodeAs[entity.id] = { geometry: 'point', isAddr };
-                    markerPadding = 20;   // extra y for marker height
+                    markerPadding = 20; // extra y for marker height
                 }
 
                 if (isAddr) {
@@ -284,7 +317,7 @@ export function svgLabels(projection, context) {
                         minX: coord[0] - nodePadding,
                         minY: coord[1] - nodePadding - markerPadding,
                         maxX: coord[0] + nodePadding,
-                        maxY: coord[1] + nodePadding
+                        maxY: coord[1] + nodePadding,
                     };
                     doInsert(bbox, entity.id + 'P');
                 }
@@ -296,7 +329,8 @@ export function svgLabels(projection, context) {
             }
 
             // Determine which entities are label-able
-            var preset = geometry === 'area' && presetManager.match(entity, graph);
+            var preset =
+                geometry === 'area' && presetManager.match(entity, graph);
             var icon = preset && !shouldSkipIcon(preset) && preset.icon;
 
             if (!icon && !utilDisplayName(entity, undefined, true)) continue;
@@ -307,7 +341,11 @@ export function svgLabels(projection, context) {
                 var matchVal = labelStack[k][2];
                 var hasVal = entity.tags[matchKey];
 
-                if ((matchGeom === '*' || geometry === matchGeom) && hasVal && (matchVal === '*' || matchVal === hasVal)) {
+                if (
+                    (matchGeom === '*' || geometry === matchGeom) &&
+                    hasVal &&
+                    (matchVal === '*' || matchVal === hasVal)
+                ) {
                     labelable[k].push(entity);
                     break;
                 }
@@ -317,7 +355,7 @@ export function svgLabels(projection, context) {
         var labelled = {
             point: [],
             line: [],
-            area: []
+            area: [],
         };
 
         // Try and find a valid label for labellable entities
@@ -328,10 +366,17 @@ export function svgLabels(projection, context) {
                 entity = labelable[k][i];
                 geometry = entity.geometry(graph);
 
-                let name = geometry === 'line'
-                    ? utilDisplayNameForPath(entity)
-                    : utilDisplayName(entity, undefined, true);
-                var width = name && textWidth(name, fontSize, selection.select('g.layer-osm.labels').node());
+                let name =
+                    geometry === 'line'
+                        ? utilDisplayNameForPath(entity)
+                        : utilDisplayName(entity, undefined, true);
+                var width =
+                    name &&
+                    textWidth(
+                        name,
+                        fontSize,
+                        selection.select('g.layer-osm.labels').node(),
+                    );
                 var p = null;
 
                 if (geometry === 'point' || geometry === 'vertex') {
@@ -342,48 +387,53 @@ export function svgLabels(projection, context) {
                     if (renderAs.geometry === 'vertex' && zoom < 17) continue;
                     while (renderAs.isAddr && width > 36) {
                         name = `${name.substring(0, name.replace(/…$/, '').length - 1)}…`;
-                        width = textWidth(name, fontSize, selection.select('g.layer-osm.labels').node());
+                        width = textWidth(
+                            name,
+                            fontSize,
+                            selection.select('g.layer-osm.labels').node(),
+                        );
                     }
 
                     p = getPointLabel(entity, width, fontSize, renderAs);
                 } else if (geometry === 'line') {
                     p = getLineLabel(entity, width, fontSize);
-
                 } else if (geometry === 'area') {
                     p = getAreaLabel(entity, width, fontSize);
                 }
 
                 if (p) {
-                    if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
+                    if (geometry === 'vertex') {
+                        geometry = 'point';
+                    } // treat vertex like point
                     p.classes = geometry + ' tag-' + labelStack[k][1];
                     labelled[geometry].push({
                         entity,
                         name,
-                        position: p
+                        position: p,
                     });
                 }
             }
         }
 
-
         function isInterestingVertex(entity) {
             var selectedIDs = context.selectedIDs();
 
-            return entity.hasInterestingTags() ||
+            return (
+                entity.hasInterestingTags() ||
                 entity.isEndpoint(graph) ||
                 entity.isConnected(graph) ||
                 selectedIDs.indexOf(entity.id) !== -1 ||
-                graph.parentWays(entity).some(function(parent) {
+                graph.parentWays(entity).some(function (parent) {
                     return selectedIDs.indexOf(parent.id) !== -1;
-                });
+                })
+            );
         }
 
-
         function getPointLabel(entity, width, height, style) {
-            var y = (style.geometry === 'point' ? -12 : 0);
+            var y = style.geometry === 'point' ? -12 : 0;
             var pointOffsets = {
                 ltr: [15, y, 'start'],
-                rtl: [-15, y, 'end']
+                rtl: [-15, y, 'end'],
             };
             const isAddrMarker = style.isAddr && style.geometry !== 'vertex';
 
@@ -398,31 +448,31 @@ export function svgLabels(projection, context) {
                 width: width,
                 x: coord[0] + offset[0],
                 y: coord[1] + offset[1],
-                textAnchor: offset[2]
+                textAnchor: offset[2],
             };
 
             // insert a collision box for the text label..
             let bbox;
             if (isAddrMarker) {
                 bbox = {
-                    minX: p.x - (width / 2) - textPadding,
-                    minY: p.y - (height / 2) - textPadding,
-                    maxX: p.x + (width / 2) + textPadding,
-                    maxY: p.y + (height / 2) + textPadding
+                    minX: p.x - width / 2 - textPadding,
+                    minY: p.y - height / 2 - textPadding,
+                    maxX: p.x + width / 2 + textPadding,
+                    maxY: p.y + height / 2 + textPadding,
                 };
             } else if (textDirection === 'rtl') {
                 bbox = {
                     minX: p.x - width - textPadding,
-                    minY: p.y - (height / 2) - textPadding,
+                    minY: p.y - height / 2 - textPadding,
                     maxX: p.x + textPadding,
-                    maxY: p.y + (height / 2) + textPadding
+                    maxY: p.y + height / 2 + textPadding,
                 };
             } else {
                 bbox = {
                     minX: p.x - textPadding,
-                    minY: p.y - (height / 2) - textPadding,
+                    minY: p.y - height / 2 - textPadding,
                     maxX: p.x + width + textPadding,
-                    maxY: p.y + (height / 2) + textPadding
+                    maxY: p.y + height / 2 + textPadding,
                 };
             }
 
@@ -431,23 +481,25 @@ export function svgLabels(projection, context) {
             }
         }
 
-
         function getLineLabel(entity, width, height) {
             var viewport = geoExtent(context.projection.clipExtent()).polygon();
-            var points = graph.childNodes(entity)
-                .map(function(node) { return projection(node.loc); });
+            var points = graph.childNodes(entity).map(function (node) {
+                return projection(node.loc);
+            });
             var length = geoPathLength(points);
 
             if (length < width + 20) return;
 
             // % along the line to attempt to place the label
-            var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70,
-                               25, 75, 20, 80, 15, 95, 10, 90, 5, 95];
+            var lineOffsets = [
+                50, 45, 55, 40, 60, 35, 65, 30, 70, 25, 75, 20, 80, 15, 95, 10,
+                90, 5, 95,
+            ];
             var padding = 3;
 
             for (var i = 0; i < lineOffsets.length; i++) {
                 var offset = lineOffsets[i];
-                var middle = offset / 100 * length;
+                var middle = (offset / 100) * length;
                 var start = middle - width / 2;
 
                 if (start < 0 || start + width > length) continue;
@@ -471,7 +523,10 @@ export function svgLabels(projection, context) {
                     var b = sub[j + 1];
 
                     // split up the text into small collision boxes
-                    var num = Math.max(1, Math.floor(geoVecLength(a, b) / boxsize / 2));
+                    var num = Math.max(
+                        1,
+                        Math.floor(geoVecLength(a, b) / boxsize / 2),
+                    );
 
                     for (var box = 0; box < num; box++) {
                         var p = geoVecInterp(a, b, box / num);
@@ -484,23 +539,28 @@ export function svgLabels(projection, context) {
                             minX: Math.min(x0, x1),
                             minY: Math.min(y0, y1),
                             maxX: Math.max(x0, x1),
-                            maxY: Math.max(y0, y1)
+                            maxY: Math.max(y0, y1),
                         });
                     }
                 }
 
-                if (tryInsert(bboxes, entity.id, false)) {   // accept this one
+                if (tryInsert(bboxes, entity.id, false)) {
+                    // accept this one
                     return {
                         'font-size': height + 2,
                         lineString: lineString(sub),
-                        startOffset: offset + '%'
+                        startOffset: offset + '%',
                     };
                 }
             }
 
             function reverse(p) {
                 var angle = Math.atan2(p[1][1] - p[0][1], p[1][0] - p[0][0]);
-                return !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > -Math.PI/2);
+                return !(
+                    p[0][0] < p[p.length - 1][0] &&
+                    angle < Math.PI / 2 &&
+                    angle > -Math.PI / 2
+                );
             }
 
             function lineString(points) {
@@ -520,7 +580,7 @@ export function svgLabels(projection, context) {
                         portion = (from - sofar) / current;
                         start = [
                             a[0] + portion * (b[0] - a[0]),
-                            a[1] + portion * (b[1] - a[1])
+                            a[1] + portion * (b[1] - a[1]),
                         ];
                         i0 = i + 1;
                     }
@@ -528,7 +588,7 @@ export function svgLabels(projection, context) {
                         portion = (to - sofar) / current;
                         end = [
                             a[0] + portion * (b[0] - a[0]),
-                            a[1] + portion * (b[1] - a[1])
+                            a[1] + portion * (b[1] - a[1]),
                         ];
                         i1 = i + 1;
                     }
@@ -541,7 +601,6 @@ export function svgLabels(projection, context) {
                 return result;
             }
         }
-
 
         function getAreaLabel(entity, width, height) {
             var centroid = path.centroid(entity.asGeoJSON(graph));
@@ -556,26 +615,27 @@ export function svgLabels(projection, context) {
             var padding = 2;
             var p = {};
 
-            if (picon && !shouldSkipIcon(preset)) {  // icon and label..
+            if (picon && !shouldSkipIcon(preset)) {
+                // icon and label..
                 if (addIcon()) {
                     addLabel(iconSize + padding);
                     return p;
                 }
-            } else {   // label only..
+            } else {
+                // label only..
                 if (addLabel(0)) {
                     return p;
                 }
             }
 
-
             function addIcon() {
-                var iconX = centroid[0] - (iconSize / 2);
-                var iconY = centroid[1] - (iconSize / 2);
+                var iconX = centroid[0] - iconSize / 2;
+                var iconY = centroid[1] - iconSize / 2;
                 var bbox = {
                     minX: iconX,
                     minY: iconY,
                     maxX: iconX + iconSize,
-                    maxY: iconY + iconSize
+                    maxY: iconY + iconSize,
                 };
 
                 if (tryInsert([bbox], entity.id + 'I', true)) {
@@ -590,10 +650,10 @@ export function svgLabels(projection, context) {
                     var labelX = centroid[0];
                     var labelY = centroid[1] + yOffset;
                     var bbox = {
-                        minX: labelX - (width / 2) - padding,
-                        minY: labelY - (height / 2) - padding,
-                        maxX: labelX + (width / 2) + padding,
-                        maxY: labelY + (height / 2) + padding
+                        minX: labelX - width / 2 - padding,
+                        minY: labelY - height / 2 - padding,
+                        maxX: labelX + width / 2 + padding,
+                        maxY: labelY + height / 2 + padding,
                     };
 
                     if (tryInsert([bbox], entity.id, true)) {
@@ -607,7 +667,6 @@ export function svgLabels(projection, context) {
                 return false;
             }
         }
-
 
         // force insert a singular bounding box
         // singular box only, no array, id better be unique
@@ -638,7 +697,12 @@ export function svgLabels(projection, context) {
                 bbox.id = id;
 
                 // Check that label is visible
-                if (bbox.minX < 0 || bbox.minY < 0 || bbox.maxX > dimensions[0] || bbox.maxY > dimensions[1]) {
+                if (
+                    bbox.minX < 0 ||
+                    bbox.minY < 0 ||
+                    bbox.maxX > dimensions[0] ||
+                    bbox.maxY > dimensions[1]
+                ) {
                     skipped = true;
                     break;
                 }
@@ -661,13 +725,15 @@ export function svgLabels(projection, context) {
             return !skipped;
         }
 
-
         var layer = selection.selectAll('.layer-osm.labels');
-        layer.selectAll('.labels-group')
+        layer
+            .selectAll('.labels-group')
             .data(['halo', 'label', 'debug'])
             .enter()
             .append('g')
-            .attr('class', function(d) { return 'labels-group ' + d; });
+            .attr('class', function (d) {
+                return 'labels-group ' + d;
+            });
 
         var halo = layer.selectAll('.labels-group.halo');
         var label = layer.selectAll('.labels-group.label');
@@ -695,13 +761,13 @@ export function svgLabels(projection, context) {
         layer.call(filterLabels);
     }
 
-
     function filterLabels(selection) {
         var drawLayer = selection.selectAll('.layer-osm.labels');
-        var layers = drawLayer.selectAll('.labels-group.halo, .labels-group.label');
+        var layers = drawLayer.selectAll(
+            '.labels-group.halo, .labels-group.label',
+        );
 
-        layers.selectAll('.nolabel')
-            .classed('nolabel', false);
+        layers.selectAll('.nolabel').classed('nolabel', false);
 
         const graph = context.graph();
         const mouse = context.map().mouse();
@@ -711,50 +777,62 @@ export function svgLabels(projection, context) {
         // hide labels near the mouse
         if (mouse && context.mode().id !== 'browse') {
             const pad = 20;
-            bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad };
-            const nearMouse = _rdrawn.search(bbox)
-                .map(entity => entity.id)
-                .filter(id =>
-                    context.mode().id !== 'select' ||
-                    // in select mode: hide labels of currently selected line(s)
-                    // to still allow accessing midpoints
-                    // https://github.com/openstreetmap/iD/issues/11220
-                    context.mode().selectedIDs().includes(id) && graph.hasEntity(id).geometry(graph) === 'line');
+            bbox = {
+                minX: mouse[0] - pad,
+                minY: mouse[1] - pad,
+                maxX: mouse[0] + pad,
+                maxY: mouse[1] + pad,
+            };
+            const nearMouse = _rdrawn
+                .search(bbox)
+                .map((entity) => entity.id)
+                .filter(
+                    (id) =>
+                        context.mode().id !== 'select' ||
+                        // in select mode: hide labels of currently selected line(s)
+                        // to still allow accessing midpoints
+                        // https://github.com/openstreetmap/iD/issues/11220
+                        (context.mode().selectedIDs().includes(id) &&
+                            graph.hasEntity(id).geometry(graph) === 'line'),
+                );
             hideIds.push.apply(hideIds, nearMouse);
             hideIds = utilArrayUniq(hideIds);
         }
 
         // don't hide label of currently selected entity while in e.g. drag mode
-        const selected = (context.mode()?.selectedIDs?.() || [])
-            .filter(id => graph.hasEntity(id)?.geometry(graph) !== 'line');
+        const selected = (context.mode()?.selectedIDs?.() || []).filter(
+            (id) => graph.hasEntity(id)?.geometry(graph) !== 'line',
+        );
         hideIds = utilArrayDifference(hideIds, selected);
 
-        layers.selectAll(utilEntitySelector(hideIds))
-            .classed('nolabel', true);
-
+        layers.selectAll(utilEntitySelector(hideIds)).classed('nolabel', true);
 
         // draw the mouse bbox if debugging is on..
         var debug = selection.selectAll('.labels-group.debug');
         var gj = [];
         if (context.getDebug('collision')) {
-            gj = bbox ? [{
-                type: 'Polygon',
-                coordinates: [[
-                    [bbox.minX, bbox.minY],
-                    [bbox.maxX, bbox.minY],
-                    [bbox.maxX, bbox.maxY],
-                    [bbox.minX, bbox.maxY],
-                    [bbox.minX, bbox.minY]
-                ]]
-            }] : [];
+            gj = bbox
+                ? [
+                      {
+                          type: 'Polygon',
+                          coordinates: [
+                              [
+                                  [bbox.minX, bbox.minY],
+                                  [bbox.maxX, bbox.minY],
+                                  [bbox.maxX, bbox.maxY],
+                                  [bbox.minX, bbox.maxY],
+                                  [bbox.minX, bbox.minY],
+                              ],
+                          ],
+                      },
+                  ]
+                : [];
         }
 
-        var box = debug.selectAll('.debug-mouse')
-            .data(gj);
+        var box = debug.selectAll('.debug-mouse').data(gj);
 
         // exit
-        box.exit()
-            .remove();
+        box.exit().remove();
 
         // enter/update
         box.enter()
@@ -764,27 +842,24 @@ export function svgLabels(projection, context) {
             .attr('d', d3_geoPath());
     }
 
-
     var throttleFilterLabels = _throttle(filterLabels, 100);
 
-
-    drawLabels.observe = function(selection) {
-        var listener = function() { throttleFilterLabels(selection); };
+    drawLabels.observe = function (selection) {
+        var listener = function () {
+            throttleFilterLabels(selection);
+        };
         selection.on('mousemove.hidelabels', listener);
         context.on('enter.hidelabels', listener);
     };
 
-
-    drawLabels.off = function(selection) {
+    drawLabels.off = function (selection) {
         throttleFilterLabels.cancel();
         selection.on('mousemove.hidelabels', null);
         context.on('enter.hidelabels', null);
     };
 
-
     return drawLabels;
 }
-
 
 const _textWidthCache = {};
 export function textWidth(text, size, container) {
@@ -804,7 +879,6 @@ export function textWidth(text, size, container) {
     return c[text];
 }
 
-
 const nonPrimaryKeys = new Set([
     'building:flats',
     'check_date',
@@ -812,16 +886,15 @@ const nonPrimaryKeys = new Set([
     'layer',
     'level',
     'level:ref',
-    'note'
+    'note',
 ]);
 const nonPrimaryKeysRegex = /^(ref|survey|note|([^:]+:|old_|alt_)addr):/;
 export function isAddressPoint(tags) {
-    const keys = Object.keys(tags).filter(key =>
-        osmIsInterestingTag(key) &&
-        !nonPrimaryKeys.has(key) &&
-        !nonPrimaryKeysRegex.test(key)
+    const keys = Object.keys(tags).filter(
+        (key) =>
+            osmIsInterestingTag(key) &&
+            !nonPrimaryKeys.has(key) &&
+            !nonPrimaryKeysRegex.test(key),
     );
-    return keys.length > 0 && keys.every(key =>
-        key.startsWith('addr:')
-    );
+    return keys.length > 0 && keys.every((key) => key.startsWith('addr:'));
 }

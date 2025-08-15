@@ -1,9 +1,9 @@
 export { coreContext } from './context';
-export { coreFileFetcher, fileFetcher } from './file_fetcher';
 export { coreDifference } from './difference';
+export { coreFileFetcher, fileFetcher } from './file_fetcher';
 export { coreGraph } from './graph';
 export { coreHistory } from './history';
-export { coreLocalizer, t, localizer } from './localizer';
+export { coreLocalizer, localizer, t } from './localizer';
 export { LocationManager, locationManager } from './LocationManager';
 export { prefs } from './preferences';
 export { coreTree } from './tree';

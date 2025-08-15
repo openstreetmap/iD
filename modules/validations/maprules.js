@@ -1,6 +1,5 @@
 import { services } from '../services';
 
-
 export function validationMaprules() {
     var type = 'maprules';
 
@@ -17,7 +16,6 @@ export function validationMaprules() {
 
         return issues;
     };
-
 
     validation.type = type;
 

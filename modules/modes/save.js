@@ -1,76 +1,76 @@
 import { select as d3_select } from 'd3-selection';
 import { t } from '../core/localizer';
 
-import { modeBrowse } from './browse';
 import { services } from '../services';
-import { uiConflicts } from '../ui/conflicts';
-import { uiConfirm } from '../ui/confirm';
 import { uiCommit } from '../ui/commit';
+import { uiConfirm } from '../ui/confirm';
+import { uiConflicts } from '../ui/conflicts';
 import { uiSuccess } from '../ui/success';
 import { utilKeybinding } from '../util';
-
+import { modeBrowse } from './browse';
 
 export function modeSave(context) {
     var mode = { id: 'save' };
     var keybinding = utilKeybinding('modeSave');
 
-    var commit = uiCommit(context)
-        .on('cancel', cancel);
+    var commit = uiCommit(context).on('cancel', cancel);
     var _conflictsUi; // uiConflicts
 
     var _location;
     var _success;
 
-    var uploader = context.uploader()
-        .on('saveStarted.modeSave', function() {
+    var uploader = context
+        .uploader()
+        .on('saveStarted.modeSave', function () {
             keybindingOff();
         })
         // fire off some async work that we want to be ready later
         .on('willAttemptUpload.modeSave', prepareForSuccess)
         .on('progressChanged.modeSave', showProgress)
-        .on('resultNoChanges.modeSave', function() {
+        .on('resultNoChanges.modeSave', function () {
             cancel();
         })
         .on('resultErrors.modeSave', showErrors)
         .on('resultConflicts.modeSave', showConflicts)
         .on('resultSuccess.modeSave', showSuccess);
 
-
     function cancel() {
         context.enter(modeBrowse(context));
     }
 
-
     function showProgress(num, total) {
         var modal = context.container().select('.loading-modal .modal-section');
-        var progress = modal.selectAll('.progress')
-            .data([0]);
+        var progress = modal.selectAll('.progress').data([0]);
 
         // enter/update
-        progress.enter()
+        progress
+            .enter()
             .append('div')
             .attr('class', 'progress')
             .merge(progress)
             .text(t('save.conflict_progress', { num: num, total: total }));
     }
 
-
     function showConflicts(changeset, conflicts, origChanges) {
-
-        var selection = context.container()
+        var selection = context
+            .container()
             .select('.sidebar')
             .append('div')
-            .attr('class','sidebar-component');
+            .attr('class', 'sidebar-component');
 
-        context.container().selectAll('.main-content')
+        context
+            .container()
+            .selectAll('.main-content')
             .classed('active', true)
             .classed('inactive', false);
 
         _conflictsUi = uiConflicts(context)
             .conflictList(conflicts)
             .origChanges(origChanges)
-            .on('cancel', function() {
-                context.container().selectAll('.main-content')
+            .on('cancel', function () {
+                context
+                    .container()
+                    .selectAll('.main-content')
                     .classed('active', false)
                     .classed('inactive', true);
                 selection.remove();
@@ -78,8 +78,10 @@ export function modeSave(context) {
 
                 uploader.cancelConflictResolution();
             })
-            .on('save', function() {
-                context.container().selectAll('.main-content')
+            .on('save', function () {
+                context
+                    .container()
+                    .selectAll('.main-content')
                     .classed('active', false)
                     .classed('inactive', true);
                 selection.remove();
@@ -89,7 +91,6 @@ export function modeSave(context) {
 
         selection.call(_conflictsUi);
     }
-
 
     function showErrors(errors) {
         keybindingOn();
@@ -104,16 +105,13 @@ export function modeSave(context) {
         selection.okButton();
     }
 
-
     function addErrors(selection, data) {
-        var message = selection
-            .select('.modal-section.message-text');
+        var message = selection.select('.modal-section.message-text');
 
-        var items = message
-            .selectAll('.error-container')
-            .data(data);
+        var items = message.selectAll('.error-container').data(data);
 
-        var enter = items.enter()
+        var enter = items
+            .enter()
             .append('div')
             .attr('class', 'error-container');
 
@@ -122,8 +120,10 @@ export function modeSave(context) {
             .attr('class', 'error-description')
             .attr('href', '#')
             .classed('hide-toggle', true)
-            .text(function(d) { return d.msg || t('save.unknown_error_details'); })
-            .on('click', function(d3_event) {
+            .text(function (d) {
+                return d.msg || t('save.unknown_error_details');
+            })
+            .on('click', function (d3_event) {
                 d3_event.preventDefault();
 
                 var error = d3_select(this);
@@ -143,16 +143,18 @@ export function modeSave(context) {
             .append('ul')
             .attr('class', 'error-detail-list')
             .selectAll('li')
-            .data(function(d) { return d.details || []; })
+            .data(function (d) {
+                return d.details || [];
+            })
             .enter()
             .append('li')
             .attr('class', 'error-detail-item')
-            .text(function(d) { return d; });
+            .text(function (d) {
+                return d;
+            });
 
-        items.exit()
-            .remove();
+        items.exit().remove();
     }
-
 
     function showSuccess(changeset) {
         commit.reset();
@@ -160,23 +162,20 @@ export function modeSave(context) {
         var ui = _success
             .changeset(changeset)
             .location(_location)
-            .on('cancel', function() { context.ui().sidebar.hide(); });
+            .on('cancel', function () {
+                context.ui().sidebar.hide();
+            });
 
         context.enter(modeBrowse(context).sidebar(ui));
     }
 
-
     function keybindingOn() {
-        d3_select(document)
-            .call(keybinding.on('⎋', cancel, true));
+        d3_select(document).call(keybinding.on('⎋', cancel, true));
     }
-
 
     function keybindingOff() {
-        d3_select(document)
-            .call(keybinding.unbind);
+        d3_select(document).call(keybinding.unbind);
     }
-
 
     // Reverse geocode current map location so we can display a message on
     // the success screen like "Thank you for editing around place, region."
@@ -185,27 +184,34 @@ export function modeSave(context) {
         _location = null;
         if (!services.geocoder) return;
 
-        services.geocoder.reverse(context.map().center(), function(err, result) {
-            if (err || !result || !result.address) return;
+        services.geocoder.reverse(
+            context.map().center(),
+            function (err, result) {
+                if (err || !result || !result.address) return;
 
-            var addr = result.address;
-            var place = (addr && (addr.town || addr.city || addr.county)) || '';
-            var region = (addr && (addr.state || addr.country)) || '';
-            var separator = (place && region) ? t('success.thank_you_where.separator') : '';
+                var addr = result.address;
+                var place =
+                    (addr && (addr.town || addr.city || addr.county)) || '';
+                var region = (addr && (addr.state || addr.country)) || '';
+                var separator =
+                    place && region
+                        ? t('success.thank_you_where.separator')
+                        : '';
 
-            _location = t('success.thank_you_where.format',
-                { place: place, separator: separator, region: region }
-            );
-        });
+                _location = t('success.thank_you_where.format', {
+                    place: place,
+                    separator: separator,
+                    region: region,
+                });
+            },
+        );
     }
 
-
-    mode.selectedIDs = function() {
+    mode.selectedIDs = function () {
         return _conflictsUi ? _conflictsUi.shownEntityIds() : [];
     };
 
-
-    mode.enter = function() {
+    mode.enter = function () {
         // Show sidebar
         context.ui().sidebar.expand();
 
@@ -215,7 +221,9 @@ export function modeSave(context) {
 
         keybindingOn();
 
-        context.container().selectAll('.main-content')
+        context
+            .container()
+            .selectAll('.main-content')
             .classed('active', false)
             .classed('inactive', true);
 
@@ -228,7 +236,7 @@ export function modeSave(context) {
         if (osm.authenticated()) {
             done();
         } else {
-            osm.authenticate(function(err) {
+            osm.authenticate(function (err) {
                 if (err) {
                     cancel();
                 } else {
@@ -238,12 +246,12 @@ export function modeSave(context) {
         }
     };
 
-
-    mode.exit = function() {
-
+    mode.exit = function () {
         keybindingOff();
 
-        context.container().selectAll('.main-content')
+        context
+            .container()
+            .selectAll('.main-content')
             .classed('active', true)
             .classed('inactive', false);
 

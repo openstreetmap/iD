@@ -1,27 +1,26 @@
 import { select as d3_select } from 'd3-selection';
 
+import { localizer, t } from '../core/localizer';
 import { prefs } from '../core/preferences';
-import { t, localizer } from '../core/localizer';
-import { svgIcon } from '../svg/icon';
 import { services } from '../services';
-
+import { svgIcon } from '../svg/icon';
 
 export function uiNoteComments() {
     var _note;
 
-
     function noteComments(selection) {
         if (_note.isNew()) return; // don't draw .comments-container
 
-        var comments = selection.selectAll('.comments-container')
-            .data([0]);
+        var comments = selection.selectAll('.comments-container').data([0]);
 
-        comments = comments.enter()
+        comments = comments
+            .enter()
             .append('div')
             .attr('class', 'comments-container')
             .merge(comments);
 
-        var commentEnter = comments.selectAll('.comment')
+        var commentEnter = comments
+            .selectAll('.comment')
             .data(_note.comments)
             .enter()
             .append('div')
@@ -29,7 +28,9 @@ export function uiNoteComments() {
 
         commentEnter
             .append('div')
-            .attr('class', function(d) { return 'comment-avatar user-' + d.uid; })
+            .attr('class', function (d) {
+                return 'comment-avatar user-' + d.uid;
+            })
             .call(svgIcon('#iD-icon-avatar', 'comment-avatar-icon'));
 
         var mainEnter = commentEnter
@@ -43,7 +44,7 @@ export function uiNoteComments() {
         metadataEnter
             .append('div')
             .attr('class', 'comment-author')
-            .each(function(d) {
+            .each(function (d) {
                 var selection = d3_select(this);
                 var osm = services.osm;
                 if (osm && d.user) {
@@ -63,38 +64,42 @@ export function uiNoteComments() {
         metadataEnter
             .append('div')
             .attr('class', 'comment-date')
-            .html(function(d) {
-                return t.html('note.status.' + d.action, { when: localeDateString(d.date) });
+            .html(function (d) {
+                return t.html('note.status.' + d.action, {
+                    when: localeDateString(d.date),
+                });
             });
 
         mainEnter
             .append('div')
             .attr('class', 'comment-text')
-            .html(function(d) { return d.html; })
+            .html(function (d) {
+                return d.html;
+            })
             .selectAll('a')
-                .attr('rel', 'noopener nofollow')
-                .attr('target', '_blank');
+            .attr('rel', 'noopener nofollow')
+            .attr('target', '_blank');
 
-        comments
-            .call(replaceAvatars);
+        comments.call(replaceAvatars);
     }
 
-
     function replaceAvatars(selection) {
-        var showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
+        var showThirdPartyIcons =
+            prefs('preferences.privacy.thirdpartyicons') || 'true';
         var osm = services.osm;
         if (showThirdPartyIcons !== 'true' || !osm) return;
 
-        var uids = {};  // gather uids in the comment thread
-        _note.comments.forEach(function(d) {
+        var uids = {}; // gather uids in the comment thread
+        _note.comments.forEach(function (d) {
             if (d.uid) uids[d.uid] = true;
         });
 
-        Object.keys(uids).forEach(function(uid) {
-            osm.loadUser(uid, function(err, user) {
+        Object.keys(uids).forEach(function (uid) {
+            osm.loadUser(uid, function (err, user) {
                 if (!user || !user.image_url) return;
 
-                selection.selectAll('.comment-avatar.user-' + uid)
+                selection
+                    .selectAll('.comment-avatar.user-' + uid)
                     .html('')
                     .append('img')
                     .attr('class', 'icon comment-avatar-icon')
@@ -103,7 +108,6 @@ export function uiNoteComments() {
             });
         });
     }
-
 
     function localeDateString(s) {
         if (!s) return null;
@@ -114,13 +118,11 @@ export function uiNoteComments() {
         return d.toLocaleDateString(localizer.localeCode(), options);
     }
 
-
-    noteComments.note = function(val) {
+    noteComments.note = function (val) {
         if (!arguments.length) return _note;
         _note = val;
         return noteComments;
     };
-
 
     return noteComments;
 }

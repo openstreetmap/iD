@@ -7,7 +7,6 @@ import { uiCmd } from '../ui/cmd';
 
 // see also `operationPaste`
 export function behaviorPaste(context) {
-
     function doPaste(d3_event) {
         // prevent paste during low zoom selection
         if (!context.map().withinEditableZoom()) return;
@@ -37,7 +36,9 @@ export function behaviorPaste(context) {
 
         var copies = action.copies();
         var originals = new Set();
-        Object.values(copies).forEach(function(entity) { originals.add(entity.id); });
+        Object.values(copies).forEach(function (entity) {
+            originals.add(entity.id);
+        });
 
         for (var id in copies) {
             var oldEntity = oldGraph.entity(id);
@@ -47,7 +48,7 @@ export function behaviorPaste(context) {
 
             // Exclude child nodes from newIDs if their parent way was also copied.
             var parents = context.graph().parentWays(newEntity);
-            var parentCopied = parents.some(function(parent) {
+            var parentCopied = parents.some(function (parent) {
                 return originals.has(parent.id);
             });
 
@@ -57,25 +58,27 @@ export function behaviorPaste(context) {
         }
 
         // Put pasted objects where mouse pointer is..
-        var copyPoint = (context.copyLonLat() && projection(context.copyLonLat())) || projection(extent.center());
+        var copyPoint =
+            (context.copyLonLat() && projection(context.copyLonLat())) ||
+            projection(extent.center());
         var delta = geoVecSubtract(mouse, copyPoint);
 
         context.perform(actionMove(newIDs, delta, projection));
-        context.enter(modeMove(context, newIDs, baseGraph)
-            .annotation(operationPaste(context).annotation()));
+        context.enter(
+            modeMove(context, newIDs, baseGraph).annotation(
+                operationPaste(context).annotation(),
+            ),
+        );
     }
-
 
     function behavior() {
         context.keybinding().on(uiCmd('⌘V'), doPaste);
         return behavior;
     }
 
-
-    behavior.off = function() {
+    behavior.off = function () {
         context.keybinding().off(uiCmd('⌘V'));
     };
-
 
     return behavior;
 }

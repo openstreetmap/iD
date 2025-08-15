@@ -1,17 +1,19 @@
 ## Release Checklist
 
 ### Prerelease (several days prior)
+
 - [Notify translators](https://app.transifex.com/openstreetmap/communication/?q=project%3Aid-editor) of the impending release
 - Notify TomH
 
 ### Prep
-- If you don't have a `transifex.auth` file in the root of your iD checkout,
-you'll need to create a Transifex account, ask @tyr_asd or @bhousel for admin rights
-on the iD project, and then create this file with contents like
 
-  ````json
-  { "user":"api", "password": "<your-transifex-api-key>" }
-  ````
+- If you don't have a `transifex.auth` file in the root of your iD checkout,
+  you'll need to create a Transifex account, ask @tyr_asd or @bhousel for admin rights
+  on the iD project, and then create this file with contents like
+
+  ```json
+  { "user": "api", "password": "<your-transifex-api-key>" }
+  ```
 
   where you insert your personal [transifex api token](https://app.transifex.com/user/settings/api/). This file is not version-controlled and will not be checked in.
 
@@ -39,6 +41,7 @@ $  git push origin develop
 ```
 
 #### Update and tag `release` branch
+
 ```bash
 $  git checkout release
 $  git reset --hard develop
@@ -48,6 +51,7 @@ $  git commit -m 'Check in build'
 $  git tag vA.B.C
 $  git push origin -f release vA.B.C
 ```
+
 - Open https://github.com/openstreetmap/iD/tags
 - Click `•••` –> `Create Release`, paste version(vA.B.C) to `Release title` and link to [`CHANGELOG.md`](https://github.com/openstreetmap/iD/blob/release/CHANGELOG.md) in `Describe this release`
 
@@ -68,6 +72,7 @@ $  git push origin develop
 ### Update `openstreetmap-website`
 
 #### Setup remotes (first time only)
+
 ```bash
 $  git remote add osmlab git@github.com:osmlab/openstreetmap-website.git
 $  git remote add openstreetmap git@github.com:openstreetmap/openstreetmap-website.git

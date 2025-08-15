@@ -6,13 +6,13 @@ var _popoverID = 0;
 export function uiPopover(klass) {
     var _id = _popoverID++;
     var _anchorSelection = d3_select(null);
-    var popover = function(selection) {
+    var popover = function (selection) {
         _anchorSelection = selection;
         selection.each(setup);
     };
     var _animation = utilFunctor(false);
     var _placement = utilFunctor('top'); // top, bottom, left, right
-    var _alignment = utilFunctor('center');  // leading, center, trailing
+    var _alignment = utilFunctor('center'); // leading, center, trailing
     var _scrollContainer = utilFunctor(d3_select(null));
     var _content;
     var _displayType = utilFunctor('');
@@ -21,7 +21,7 @@ export function uiPopover(klass) {
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
-    popover.displayType = function(val) {
+    popover.displayType = function (val) {
         if (arguments.length) {
             _displayType = utilFunctor(val);
             return popover;
@@ -30,7 +30,7 @@ export function uiPopover(klass) {
         }
     };
 
-    popover.hasArrow = function(val) {
+    popover.hasArrow = function (val) {
         if (arguments.length) {
             _hasArrow = utilFunctor(val);
             return popover;
@@ -39,7 +39,7 @@ export function uiPopover(klass) {
         }
     };
 
-    popover.placement = function(val) {
+    popover.placement = function (val) {
         if (arguments.length) {
             _placement = utilFunctor(val);
             return popover;
@@ -48,7 +48,7 @@ export function uiPopover(klass) {
         }
     };
 
-    popover.alignment = function(val) {
+    popover.alignment = function (val) {
         if (arguments.length) {
             _alignment = utilFunctor(val);
             return popover;
@@ -57,7 +57,7 @@ export function uiPopover(klass) {
         }
     };
 
-    popover.scrollContainer = function(val) {
+    popover.scrollContainer = function (val) {
         if (arguments.length) {
             _scrollContainer = utilFunctor(val);
             return popover;
@@ -66,7 +66,7 @@ export function uiPopover(klass) {
         }
     };
 
-    popover.content = function(val) {
+    popover.content = function (val) {
         if (arguments.length) {
             _content = val;
             return popover;
@@ -75,28 +75,28 @@ export function uiPopover(klass) {
         }
     };
 
-    popover.isShown = function() {
+    popover.isShown = function () {
         var popoverSelection = _anchorSelection.select('.popover-' + _id);
         return !popoverSelection.empty() && popoverSelection.classed('in');
     };
 
-    popover.show = function() {
+    popover.show = function () {
         _anchorSelection.each(show);
     };
 
-    popover.updateContent = function() {
+    popover.updateContent = function () {
         _anchorSelection.each(updateContent);
     };
 
-    popover.hide = function() {
+    popover.hide = function () {
         _anchorSelection.each(hide);
     };
 
-    popover.toggle = function() {
+    popover.toggle = function () {
         _anchorSelection.each(toggle);
     };
 
-    popover.destroy = function(selection, selector) {
+    popover.destroy = function (selection, selector) {
         // by default, just destroy the current popover
         selector = selector || '.popover-' + _id;
 
@@ -108,41 +108,40 @@ export function uiPopover(klass) {
             .on('focus.popover', null)
             .on('blur.popover', null)
             .on('click.popover', null)
-            .attr('title', function() {
-                return this.getAttribute('data-original-title') || this.getAttribute('title');
+            .attr('title', function () {
+                return (
+                    this.getAttribute('data-original-title') ||
+                    this.getAttribute('title')
+                );
             })
             .attr('data-original-title', null)
             .selectAll(selector)
             .remove();
     };
 
-
-    popover.destroyAny = function(selection) {
+    popover.destroyAny = function (selection) {
         selection.call(popover.destroy, '.popover');
     };
 
     function setup() {
         var anchor = d3_select(this);
         var animate = _animation.apply(this, arguments);
-        var popoverSelection = anchor.selectAll('.popover-' + _id)
-            .data([0]);
+        var popoverSelection = anchor.selectAll('.popover-' + _id).data([0]);
 
-
-        var enter = popoverSelection.enter()
+        var enter = popoverSelection
+            .enter()
             .append('div')
-            .attr('class', 'popover popover-' + _id + ' ' + (klass ? klass : ''))
+            .attr(
+                'class',
+                'popover popover-' + _id + ' ' + (klass ? klass : ''),
+            )
             .classed('arrowed', _hasArrow.apply(this, arguments));
 
-        enter
-            .append('div')
-            .attr('class', 'popover-arrow');
+        enter.append('div').attr('class', 'popover-arrow');
 
-        enter
-            .append('div')
-            .attr('class', 'popover-inner');
+        enter.append('div').attr('class', 'popover-inner');
 
-        popoverSelection = enter
-            .merge(popoverSelection);
+        popoverSelection = enter.merge(popoverSelection);
 
         if (animate) {
             popoverSelection.classed('fade', true);
@@ -152,46 +151,47 @@ export function uiPopover(klass) {
 
         if (display === 'hover') {
             var _lastNonMouseEnterTime;
-            anchor.on(_pointerPrefix + 'enter.popover', function(d3_event) {
-
-                if (d3_event.pointerType) {
-                    if (d3_event.pointerType !== 'mouse') {
-                        _lastNonMouseEnterTime = d3_event.timeStamp;
-                        // only allow hover behavior for mouse input
-                        return;
-                    } else if (_lastNonMouseEnterTime &&
-                        d3_event.timeStamp - _lastNonMouseEnterTime < 1500) {
-                        // HACK: iOS 13.4 sends an erroneous `mouse` type pointerenter
-                        // event for non-mouse interactions right after sending
-                        // the correct type pointerenter event. Workaround by discarding
-                        // any mouse event that occurs immediately after a non-mouse event.
-                        return;
+            anchor
+                .on(_pointerPrefix + 'enter.popover', function (d3_event) {
+                    if (d3_event.pointerType) {
+                        if (d3_event.pointerType !== 'mouse') {
+                            _lastNonMouseEnterTime = d3_event.timeStamp;
+                            // only allow hover behavior for mouse input
+                            return;
+                        } else if (
+                            _lastNonMouseEnterTime &&
+                            d3_event.timeStamp - _lastNonMouseEnterTime < 1500
+                        ) {
+                            // HACK: iOS 13.4 sends an erroneous `mouse` type pointerenter
+                            // event for non-mouse interactions right after sending
+                            // the correct type pointerenter event. Workaround by discarding
+                            // any mouse event that occurs immediately after a non-mouse event.
+                            return;
+                        }
                     }
-                }
 
-                // don't show if buttons are pressed, e.g. during click and drag of map
-                if (d3_event.buttons !== 0) return;
+                    // don't show if buttons are pressed, e.g. during click and drag of map
+                    if (d3_event.buttons !== 0) return;
 
-                show.apply(this, arguments);
-            })
-            .on(_pointerPrefix + 'leave.popover', function() {
-                hide.apply(this, arguments);
-            })
-            // show on focus too for better keyboard navigation support
-            .on('focus.popover', function() {
-                show.apply(this, arguments);
-            })
-            .on('blur.popover', function() {
-                hide.apply(this, arguments);
-            });
-
+                    show.apply(this, arguments);
+                })
+                .on(_pointerPrefix + 'leave.popover', function () {
+                    hide.apply(this, arguments);
+                })
+                // show on focus too for better keyboard navigation support
+                .on('focus.popover', function () {
+                    show.apply(this, arguments);
+                })
+                .on('blur.popover', function () {
+                    hide.apply(this, arguments);
+                });
         } else if (display === 'clickFocus') {
             anchor
-                .on(_pointerPrefix + 'down.popover', function(d3_event) {
+                .on(_pointerPrefix + 'down.popover', function (d3_event) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
                 })
-                .on(_pointerPrefix + 'up.popover', function(d3_event) {
+                .on(_pointerPrefix + 'up.popover', function (d3_event) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
                 })
@@ -200,14 +200,13 @@ export function uiPopover(klass) {
             popoverSelection
                 // This attribute lets the popover take focus
                 .attr('tabindex', 0)
-                .on('blur.popover', function() {
-                    anchor.each(function() {
+                .on('blur.popover', function () {
+                    anchor.each(function () {
                         hide.apply(this, arguments);
                     });
                 });
         }
     }
-
 
     function show() {
         var anchor = d3_select(this);
@@ -235,7 +234,8 @@ export function uiPopover(klass) {
         var anchor = d3_select(this);
 
         if (_content) {
-            anchor.selectAll('.popover-' + _id + ' > .popover-inner')
+            anchor
+                .selectAll('.popover-' + _id + ' > .popover-inner')
                 .call(_content.apply(this, arguments));
         }
 
@@ -246,14 +246,16 @@ export function uiPopover(klass) {
         updatePosition.apply(this, arguments);
     }
 
-
     function updatePosition() {
-
         var anchor = d3_select(this);
         var popoverSelection = anchor.selectAll('.popover-' + _id);
 
-        var scrollContainer = _scrollContainer && _scrollContainer.apply(this, arguments);
-        var scrollNode = scrollContainer && !scrollContainer.empty() && scrollContainer.node();
+        var scrollContainer =
+            _scrollContainer && _scrollContainer.apply(this, arguments);
+        var scrollNode =
+            scrollContainer &&
+            !scrollContainer.empty() &&
+            scrollContainer.node();
         var scrollLeft = scrollNode ? scrollNode.scrollLeft : 0;
         var scrollTop = scrollNode ? scrollNode.scrollTop : 0;
 
@@ -278,35 +280,41 @@ export function uiPopover(klass) {
 
         switch (placement) {
             case 'top':
-            position = {
-                x: anchorFrame.x + (anchorFrame.w - popoverFrame.w) * alignFactor,
-                y: anchorFrame.y - popoverFrame.h
-            };
-            break;
+                position = {
+                    x:
+                        anchorFrame.x +
+                        (anchorFrame.w - popoverFrame.w) * alignFactor,
+                    y: anchorFrame.y - popoverFrame.h,
+                };
+                break;
             case 'bottom':
-            position = {
-                x: anchorFrame.x + (anchorFrame.w - popoverFrame.w) * alignFactor,
-                y: anchorFrame.y + anchorFrame.h
-            };
-            break;
+                position = {
+                    x:
+                        anchorFrame.x +
+                        (anchorFrame.w - popoverFrame.w) * alignFactor,
+                    y: anchorFrame.y + anchorFrame.h,
+                };
+                break;
             case 'left':
-            position = {
-                x: anchorFrame.x - popoverFrame.w,
-                y: anchorFrame.y + (anchorFrame.h - popoverFrame.h) * alignFactor
-            };
-            break;
+                position = {
+                    x: anchorFrame.x - popoverFrame.w,
+                    y:
+                        anchorFrame.y +
+                        (anchorFrame.h - popoverFrame.h) * alignFactor,
+                };
+                break;
             case 'right':
-            position = {
-                x: anchorFrame.x + anchorFrame.w,
-                y: anchorFrame.y + (anchorFrame.h - popoverFrame.h) * alignFactor
-            };
-            break;
+                position = {
+                    x: anchorFrame.x + anchorFrame.w,
+                    y:
+                        anchorFrame.y +
+                        (anchorFrame.h - popoverFrame.h) * alignFactor,
+                };
+                break;
         }
 
         if (position) {
-
             if (scrollNode && (placement === 'top' || placement === 'bottom')) {
-
                 var initialPosX = position.x;
 
                 if (position.x + popoverFrame.w > scrollNode.offsetWidth - 10) {
@@ -315,13 +323,23 @@ export function uiPopover(klass) {
                     position.x = 10;
                 }
 
-                var arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
+                var arrow = anchor.selectAll(
+                    '.popover-' + _id + ' > .popover-arrow',
+                );
                 // keep the arrow centered on the button, or as close as possible
-                var arrowPosX = Math.min(Math.max(popoverFrame.w / 2 - (position.x - initialPosX), 10), popoverFrame.w - 10);
+                var arrowPosX = Math.min(
+                    Math.max(
+                        popoverFrame.w / 2 - (position.x - initialPosX),
+                        10,
+                    ),
+                    popoverFrame.w - 10,
+                );
                 arrow.style('left', ~~arrowPosX + 'px');
             }
 
-            popoverSelection.style('left', ~~position.x + 'px').style('top', ~~position.y + 'px');
+            popoverSelection
+                .style('left', ~~position.x + 'px')
+                .style('top', ~~position.y + 'px');
         } else {
             popoverSelection.style('left', null).style('top', null);
         }
@@ -333,19 +351,18 @@ export function uiPopover(klass) {
                     x: node.offsetLeft - scrollLeft,
                     y: node.offsetTop - scrollTop,
                     w: node.offsetWidth,
-                    h: node.offsetHeight
+                    h: node.offsetHeight,
                 };
             } else {
                 return {
                     x: 0,
                     y: 0,
                     w: node.offsetWidth,
-                    h: node.offsetHeight
+                    h: node.offsetHeight,
                 };
             }
         }
     }
-
 
     function hide() {
         var anchor = d3_select(this);
@@ -355,15 +372,17 @@ export function uiPopover(klass) {
         anchor.selectAll('.popover-' + _id).classed('in', false);
     }
 
-
     function toggle() {
-        if (d3_select(this).select('.popover-' + _id).classed('in')) {
+        if (
+            d3_select(this)
+                .select('.popover-' + _id)
+                .classed('in')
+        ) {
             hide.apply(this, arguments);
         } else {
             show.apply(this, arguments);
         }
     }
-
 
     return popover;
 }

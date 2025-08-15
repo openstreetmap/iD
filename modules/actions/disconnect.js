@@ -1,6 +1,5 @@
 import { osmNode } from '../osm/node';
 
-
 // Disconnect the ways at the given node.
 //
 // Optionally, disconnect only the given ways.
@@ -19,37 +18,47 @@ export function actionDisconnect(nodeId, newNodeId) {
     var wayIds;
 
     var disconnectableRelationTypes = {
-        'associatedStreet': true,
-        'enforcement': true,
-        'site': true,
+        associatedStreet: true,
+        enforcement: true,
+        site: true,
     };
 
-    var action = function(graph) {
+    var action = function (graph) {
         var node = graph.entity(nodeId);
         var connections = action.connections(graph);
 
-        connections.forEach(function(connection) {
+        connections.forEach(function (connection) {
             var way = graph.entity(connection.wayID);
-            var newNode = osmNode({id: newNodeId, loc: node.loc, tags: node.tags});
+            var newNode = osmNode({
+                id: newNodeId,
+                loc: node.loc,
+                tags: node.tags,
+            });
 
             graph = graph.replace(newNode);
             if (connection.index === 0 && way.isArea()) {
                 // replace shared node with shared node..
-                graph = graph.replace(way.replaceNode(way.nodes[0], newNode.id));
-            } else if (way.isClosed() && connection.index === way.nodes.length - 1) {
+                graph = graph.replace(
+                    way.replaceNode(way.nodes[0], newNode.id),
+                );
+            } else if (
+                way.isClosed() &&
+                connection.index === way.nodes.length - 1
+            ) {
                 // replace closing node with new new node..
                 graph = graph.replace(way.unclose().addNode(newNode.id));
             } else {
                 // replace shared node with multiple new nodes..
-                graph = graph.replace(way.updateNode(newNode.id, connection.index));
+                graph = graph.replace(
+                    way.updateNode(newNode.id, connection.index),
+                );
             }
         });
 
         return graph;
     };
 
-
-    action.connections = function(graph) {
+    action.connections = function (graph) {
         var candidates = [];
         var keeping = false;
         var parentWays = graph.parentWays(graph.entity(nodeId));
@@ -60,17 +69,19 @@ export function actionDisconnect(nodeId, newNodeId) {
                 keeping = true;
                 continue;
             }
-            if (way.isArea() && (way.nodes[0] === nodeId)) {
+            if (way.isArea() && way.nodes[0] === nodeId) {
                 candidates.push({ wayID: way.id, index: 0 });
             } else {
                 for (var j = 0; j < way.nodes.length; j++) {
                     waynode = way.nodes[j];
                     if (waynode === nodeId) {
-                        if (way.isClosed() &&
+                        if (
+                            way.isClosed() &&
                             parentWays.length > 1 &&
                             wayIds &&
                             wayIds.indexOf(way.id) !== -1 &&
-                            j === way.nodes.length - 1) {
+                            j === way.nodes.length - 1
+                        ) {
                             continue;
                         }
                         candidates.push({ wayID: way.id, index: j });
@@ -82,8 +93,7 @@ export function actionDisconnect(nodeId, newNodeId) {
         return keeping ? candidates : candidates.slice(1);
     };
 
-
-    action.disabled = function(graph) {
+    action.disabled = function (graph) {
         var connections = action.connections(graph);
         if (connections.length === 0) return 'not_connected';
 
@@ -91,36 +101,40 @@ export function actionDisconnect(nodeId, newNodeId) {
         var seenRelationIds = {};
         var sharedRelation;
 
-        parentWays.forEach(function(way) {
+        parentWays.forEach(function (way) {
             var relations = graph.parentRelations(way);
             relations
-            .filter(relation => !disconnectableRelationTypes[relation.tags.type])
-            .forEach(function(relation) {
-                if (relation.id in seenRelationIds) {
-                    if (wayIds) {
-                        if (wayIds.indexOf(way.id) !== -1 ||
-                            wayIds.indexOf(seenRelationIds[relation.id]) !== -1) {
+                .filter(
+                    (relation) =>
+                        !disconnectableRelationTypes[relation.tags.type],
+                )
+                .forEach(function (relation) {
+                    if (relation.id in seenRelationIds) {
+                        if (wayIds) {
+                            if (
+                                wayIds.indexOf(way.id) !== -1 ||
+                                wayIds.indexOf(seenRelationIds[relation.id]) !==
+                                    -1
+                            ) {
+                                sharedRelation = relation;
+                            }
+                        } else {
                             sharedRelation = relation;
                         }
                     } else {
-                        sharedRelation = relation;
+                        seenRelationIds[relation.id] = way.id;
                     }
-                } else {
-                    seenRelationIds[relation.id] = way.id;
-                }
-            });
+                });
         });
 
         if (sharedRelation) return 'relation';
     };
 
-
-    action.limitWays = function(val) {
+    action.limitWays = function (val) {
         if (!arguments.length) return wayIds;
         wayIds = val;
         return action;
     };
-
 
     return action;
 }

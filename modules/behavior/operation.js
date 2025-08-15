@@ -16,22 +16,29 @@ export function behaviorOperation(context) {
         d3_event.preventDefault();
 
         if (!_operation.available()) {
-            context.ui().flash
-                .duration(4000)
+            context
+                .ui()
+                .flash.duration(4000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation disabled')
-                .label(t.append('operations._unavailable', {
-                    operation: t(`operations.${_operation.id}.title`) || _operation.id
-                }))();
+                .label(
+                    t.append('operations._unavailable', {
+                        operation:
+                            t(`operations.${_operation.id}.title`) ||
+                            _operation.id,
+                    }),
+                )();
         } else if (_operation.disabled()) {
-            context.ui().flash
-                .duration(4000)
+            context
+                .ui()
+                .flash.duration(4000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation disabled')
                 .label(_operation.tooltip())();
         } else {
-            context.ui().flash
-                .duration(2000)
+            context
+                .ui()
+                .flash.duration(2000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation')
                 .label(_operation.annotation() || _operation.title)();
@@ -41,7 +48,6 @@ export function behaviorOperation(context) {
         }
     }
 
-
     function behavior() {
         if (_operation && _operation.available()) {
             behavior.on();
@@ -50,25 +56,19 @@ export function behaviorOperation(context) {
         return behavior;
     }
 
-
-    behavior.on = function() {
-        context.keybinding()
-            .on(_operation.keys, keypress);
+    behavior.on = function () {
+        context.keybinding().on(_operation.keys, keypress);
     };
 
-
-    behavior.off = function() {
-        context.keybinding()
-            .off(_operation.keys);
+    behavior.off = function () {
+        context.keybinding().off(_operation.keys);
     };
-
 
     behavior.which = function (_) {
         if (!arguments.length) return _operation;
         _operation = _;
         return behavior;
     };
-
 
     return behavior;
 }

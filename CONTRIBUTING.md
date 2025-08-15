@@ -7,7 +7,6 @@ Everyone involved in the iD project is subject to the [Code of Conduct](CODE_OF_
 Please take a moment to read it before proceeding, it's short and simple. We want
 everyone to feel comfortable contributing to iD.
 
-
 ## Submitting Issues
 
 We'd love to hear your feedback about iD. Please [search existing issues](https://github.com/search?l=&q=repo%3Aopenstreetmap%2FiD&type=Issues)
@@ -15,42 +14,41 @@ before [opening a new one](https://github.com/openstreetmap/iD/issues/new/choose
 
 When reporting a bug:
 
-* Write specifically what browser (type and version, like "Firefox 49.0"), OS,
-and browser extensions you have installed
-* Write steps to replicate the error: when did it happen? What did you expect to happen?
-What happened instead?
-* We love screenshots. If you can take a picture of the issue, that is extra helpful.
-You can drag the image or video file onto the GitHub issue and it will be included with your bug report.
-* Please keep bug reports professional and straightforward: trust us, we share your dismay at software breaking.
-* If you can, enable web developer extensions and report the
-JavaScript error message.
-* When in doubt, over-describe the bug and how you discovered it.
+- Write specifically what browser (type and version, like "Firefox 49.0"), OS,
+  and browser extensions you have installed
+- Write steps to replicate the error: when did it happen? What did you expect to happen?
+  What happened instead?
+- We love screenshots. If you can take a picture of the issue, that is extra helpful.
+  You can drag the image or video file onto the GitHub issue and it will be included with your bug report.
+- Please keep bug reports professional and straightforward: trust us, we share your dismay at software breaking.
+- If you can, enable web developer extensions and report the
+  JavaScript error message.
+- When in doubt, over-describe the bug and how you discovered it.
 
 When requesting a feature:
 
-* Provide a link if the feature is available in some other software.
+- Provide a link if the feature is available in some other software.
   We care about prior art.
-* Understand that iD is focused on simplicity and doesn't aim to be
+- Understand that iD is focused on simplicity and doesn't aim to be
   as complete as JOSM or other editors.
-
 
 ### Issue Labels
 
 We use GitHub labels to keep track of issues. Some guidelines:
 
 Green labels are for **action items**. Jump in and start working!
-* <sub>[![new-contributor-opportunity][new-contributor-opportunity]][new-contributor-opportunity_link]</sub> -
-Best for new contributors. Little experience necessary!
-* <sub>[![help-wanted][help-wanted]][help-wanted_link]</sub> -
-For more intermediate contributors, probably requires investigation or knowledge of iD code.
-* <sub>[![priority][priority]][priority_link]</sub> -
-Issues that have a big impact or matter most to _new mappers_.
-<br/>(There should probably be 10 or fewer "priority" items.)
+
+- <sub>[![new-contributor-opportunity][new-contributor-opportunity]][new-contributor-opportunity_link]</sub> -
+  Best for new contributors. Little experience necessary!
+- <sub>[![help-wanted][help-wanted]][help-wanted_link]</sub> -
+  For more intermediate contributors, probably requires investigation or knowledge of iD code.
+- <sub>[![priority][priority]][priority_link]</sub> -
+  Issues that have a big impact or matter most to _new mappers_.
+  <br/>(There should probably be 10 or fewer "priority" items.)
 
 [new-contributor-opportunity]: http://labl.es/svg?text=new%20contributor%20opportunity&bgcolor=0e8a16
 [help-wanted]: http://labl.es/svg?text=help%20wanted&bgcolor=0e8a16
 [priority]: http://labl.es/svg?text=priority&bgcolor=0e8a16
-
 [new-contributor-opportunity_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3A%22new%20contributor%20opportunity%22
 [help-wanted_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3A%22help%20wanted%22
 [priority_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Apriority
@@ -58,43 +56,40 @@ Issues that have a big impact or matter most to _new mappers_.
 Red labels are for **bugs**. These are things that we want fixed, but might be a bit more
 complicated than the green action items.
 
-* <sub>[![bug][bug]][bug_link]
-[![bug-release-blocker][bug-release-blocker]][bug-release-blocker_link]
-[![bug-browser-specific][bug-browser-specific]][bug-browser-specific_link]</sub>
+- <sub>[![bug][bug]][bug_link]
+  [![bug-release-blocker][bug-release-blocker]][bug-release-blocker_link]
+  [![bug-browser-specific][bug-browser-specific]][bug-browser-specific_link]</sub>
 
 [bug]: http://labl.es/svg?text=bug&bgcolor=d93f0b
 [bug-release-blocker]: http://labl.es/svg?text=bug-release-blocker&bgcolor=d93f0b
 [bug-browser-specific]: http://labl.es/svg?text=bug-browser-specific&bgcolor=d93f0b
-
 [bug_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Abug
 [bug-release-blocker_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Abug-release-blocker
 [bug-browser-specific_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Abug-browser-specific
 
 Purple labels are for **non-action items**. These might be a question or feature request
-that needs some discussion about whether it belongs in iD.  Discuss before working on these.
+that needs some discussion about whether it belongs in iD. Discuss before working on these.
 
-* <sub>[![considering][considering]][considering_link]
-[![question][question]][question_link]</sub>
+- <sub>[![considering][considering]][considering_link]
+  [![question][question]][question_link]</sub>
 
 [considering]: http://labl.es/svg?text=considering&bgcolor=cc33cc
 [question]: http://labl.es/svg?text=question&bgcolor=cc33cc
-
 [considering_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aconsidering
 [question_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aquestion
 
 Yellow labels are for **chores**. These are the things like code cleanup, upgrades, tests,
 documentation, repository gardening, and other stuff that makes developers happy.
 
-* <sub>[![chore][chore]][chore_link]
-[![chore-dependency][chore-dependency]][chore-dependency_link]
-[![chore-documentation][chore-documentation]][chore-documentation_link]
-[![chore-dependabot][chore-dependabot]][chore-dependabot_link]</sub>
+- <sub>[![chore][chore]][chore_link]
+  [![chore-dependency][chore-dependency]][chore-dependency_link]
+  [![chore-documentation][chore-documentation]][chore-documentation_link]
+  [![chore-dependabot][chore-dependabot]][chore-dependabot_link]</sub>
 
 [chore]: http://labl.es/svg?text=chore&bgcolor=fef2c0
 [chore-dependency]: http://labl.es/svg?text=chore-dependency&bgcolor=fef2c0
 [chore-documentation]: http://labl.es/svg?text=chore-documentation&bgcolor=fef2c0
 [chore-dependabot]: http://labl.es/svg?text=chore-dependabot&bgcolor=fef2c0
-
 [chore_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore
 [chore-dependency_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-dependency
 [chore-documentation_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-documentation
@@ -102,18 +97,17 @@ documentation, repository gardening, and other stuff that makes developers happy
 
 Light blue labels are for **components**, the specific parts of iD that concern the issue.
 
-* <sub>[![core][core]][core_link]
-[![operation][operation]][operation_link]
-[![preset][preset]][preset_link]
-[![streetlevel][streetlevel]][streetlevel_link]
-[![validation][validation]][validation_link]</sub>
+- <sub>[![core][core]][core_link]
+  [![operation][operation]][operation_link]
+  [![preset][preset]][preset_link]
+  [![streetlevel][streetlevel]][streetlevel_link]
+  [![validation][validation]][validation_link]</sub>
 
 [core]: http://labl.es/svg?text=core&bgcolor=c5def5
 [operation]: http://labl.es/svg?text=operation&bgcolor=c5def5
 [preset]: http://labl.es/svg?text=preset&bgcolor=c5def5
 [streetlevel]: http://labl.es/svg?text=streetlevel&bgcolor=c5def5
 [validation]: http://labl.es/svg?text=validation&bgcolor=c5def5
-
 [core_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Acore
 [operation_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%operation
 [preset_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Apreset
@@ -122,40 +116,37 @@ Light blue labels are for **components**, the specific parts of iD that concern 
 
 Dark teal labels are for **categories**, the high-level concepts that the issue falls under.
 
-* <sub>[![accessibility][accessibility]][accessibility_link]
-[![compatibility][compatibility]][compatibility_link]
-[![localization][localization]][localization_link]
-[![performance][performance]][performance_link]
-[![usability][usability]][usability_link]</sub>
+- <sub>[![accessibility][accessibility]][accessibility_link]
+  [![compatibility][compatibility]][compatibility_link]
+  [![localization][localization]][localization_link]
+  [![performance][performance]][performance_link]
+  [![usability][usability]][usability_link]</sub>
 
 [accessibility]: http://labl.es/svg?text=accessibility&bgcolor=007f99
 [compatibility]: http://labl.es/svg?text=compatibility&bgcolor=007f99
 [localization]: http://labl.es/svg?text=localization&bgcolor=007f99
 [performance]: http://labl.es/svg?text=performance&bgcolor=007f99
 [usability]: http://labl.es/svg?text=usability&bgcolor=007f99
-
 [accessibility_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aaccessibility
 [compatibility_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Acompatibility
 [localization_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Alocalization
 [performance_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aperformance
 [usability_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Ausability
 
-
 Dark grey labels are for **waitfor items**. We won't work on these now, but we'll keep the issues
 open while we wait for something to happen.
 
-* <sub>[![waitfor][waitfor]][waitfor_link]
-[![waitfor-consensus][waitfor-consensus]][waitfor-consensus_link]
-[![waitfor-icon][waitfor-icon]][waitfor-icon_link]
-[![waitfor-info][waitfor-info]][waitfor-info_link]
-[![waitfor-upstream][waitfor-upstream]][waitfor-upstream_link]</sub>
+- <sub>[![waitfor][waitfor]][waitfor_link]
+  [![waitfor-consensus][waitfor-consensus]][waitfor-consensus_link]
+  [![waitfor-icon][waitfor-icon]][waitfor-icon_link]
+  [![waitfor-info][waitfor-info]][waitfor-info_link]
+  [![waitfor-upstream][waitfor-upstream]][waitfor-upstream_link]</sub>
 
 [waitfor]: http://labl.es/svg?text=waitfor&bgcolor=444
 [waitfor-consensus]: http://labl.es/svg?text=waitfor-consensus&bgcolor=444
 [waitfor-icon]: http://labl.es/svg?text=waitfor-icon&bgcolor=444
 [waitfor-info]: http://labl.es/svg?text=waitfor-info&bgcolor=444
 [waitfor-upstream]: http://labl.es/svg?text=waitfor-upstream&bgcolor=444
-
 [waitfor_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor
 [waitfor-consensus_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-consensus
 [waitfor-icon_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-icon
@@ -165,31 +156,28 @@ open while we wait for something to happen.
 Light grey labels are for **wontfix items**. We've decided these doesn't belong in
 iD at this time. Don't feel bad, sometimes we change our minds later and revisit them!
 
-* <sub>[![wontfix][wontfix]][wontfix_link]
-[![wontfix-confusing][wontfix-confusing]][wontfix-confusing_link]
-[![wontfix-low-impact][wontfix-low-impact]][wontfix-low-impact_link]</sub>
+- <sub>[![wontfix][wontfix]][wontfix_link]
+  [![wontfix-confusing][wontfix-confusing]][wontfix-confusing_link]
+  [![wontfix-low-impact][wontfix-low-impact]][wontfix-low-impact_link]</sub>
 
 [wontfix]: http://labl.es/svg?text=wontfix&bgcolor=eee
 [wontfix-confusing]: http://labl.es/svg?text=wontfix-confusing&bgcolor=eee
 [wontfix-low-impact]: http://labl.es/svg?text=wontfix-low-impact&bgcolor=eee
-
 [wontfix_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix
 [wontfix-confusing_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-confusing
 [wontfix-low-impact_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-low-impact
 
 Special:
 
-* <sub>[![bluesky][bluesky]][bluesky_link]</sub> -
-Bluesky issues are extra challenging. They might require weeks of development or not even be possible.
-* <sub>[![wip][wip]][wip_link]</sub> -
-Work in Progress.  Don't start work on these, somebody else already did!
+- <sub>[![bluesky][bluesky]][bluesky_link]</sub> -
+  Bluesky issues are extra challenging. They might require weeks of development or not even be possible.
+- <sub>[![wip][wip]][wip_link]</sub> -
+  Work in Progress. Don't start work on these, somebody else already did!
 
 [bluesky]: http://labl.es/svg?text=bluesky&bgcolor=1d76db
 [wip]: http://labl.es/svg?text=wip&bgcolor=fbca04
-
 [bluesky_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Abluesky
 [wip_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awip
-
 
 ## Testing
 
@@ -207,7 +195,6 @@ of iD, it's risky to do so. Your edits could be lost or garbled at any time. Pre
 the ![live](http://labl.es/svg?text=live&bgcolor=d32232) button in the bottom bar to
 switch to the development database.
 
-
 ## Translating
 
 Translations are managed using the
@@ -217,9 +204,9 @@ page](https://app.transifex.com/openstreetmap/id-editor/) and
 click **Translate** to start translating. Translations are divided into
 separate resources:
 
-* *core* - contains text for the main interface of iD
-* *presets* - contains the text for labeling feature presets
-* *imagery* - contains text for imagery names and descriptions
+- _core_ - contains text for the main interface of iD
+- _presets_ - contains the text for labeling feature presets
+- _imagery_ - contains text for imagery names and descriptions
 
 The words in brackets, for example `{name}`, should not be translated into a
 new language: it's replaced with a place name when iD presents the text. So a
@@ -257,16 +244,16 @@ The "key" field indicates that this is the "Type" label for the
 translate it as you would translate "type" in "type of aeroway".
 
 These are separate translations for uniformity reasons and because some languages
- may translate "type" differently in "type of aeroway" and "type of amenity", for
- example.
+may translate "type" differently in "type of aeroway" and "type of amenity", for
+example.
 
 **Why can't I find the Osmose QA layer translations?** The Osmose QA strings are
- pulled in from the external Osmose API. You can contribute to the
- [Osmose Transifex project](https://app.transifex.com/openstreetmap-france/osmose/)
- and the results will be seen in iD once deployed.
+pulled in from the external Osmose API. You can contribute to the
+[Osmose Transifex project](https://app.transifex.com/openstreetmap-france/osmose/)
+and the results will be seen in iD once deployed.
 
 Note that if you want to add/update English translations in Osmose then you will
- need to head on over to the [Osmose backend source code](https://github.com/osm-fr/osmose-backend).
+need to head on over to the [Osmose backend source code](https://github.com/osm-fr/osmose-backend).
 
 ### Translations in Code
 
@@ -284,7 +271,6 @@ Transifex, will automatically detect the changes.
 
 `npm run translations` can be used to pull the latest translations from Transifex.
 
-
 ## Contributing Documentation
 
 Documentation is maintained as a series of [Markdown](http://daringfireball.net/projects/markdown/)
@@ -301,12 +287,10 @@ of documentation, simply add to [/data/core.yaml](/data/core.yaml) in the
 same format as the rest, include your new corresponding `docKey` in
 [/modules/ui/help.js](/modules/ui/help.js) and call `npm run build`.
 
-
 ## Editing Presets or Tagging
 
 iD's knowledge of OpenStreetMap tags is mostly handled by the [iD Tagging Schema](https://github.com/openstreetmap/id-tagging-schema)
 project, which has its own opportunities to contribute.
-
 
 ## Contributing Code
 
@@ -319,6 +303,7 @@ instead of surprising us with a pull request.
 iD code was initially written with ES5 syntax, however we do now develop using ES6 syntax.
 
 We mostly follow the Airbnb style guide for JavaScript:
+
 - [Modern ES6](https://github.com/airbnb/javascript)
 - [Legacy ES5](https://github.com/airbnb/javascript/tree/es5-deprecated/es5)
 
@@ -328,7 +313,6 @@ Always spaces, never tabs.
 
 JavaScript code should pass through [ESLint](http://eslint.org/) with no warnings.
 
-
 ### HTML
 
 There isn't much HTML in iD, but what there is is similar to JavaScript: 4 spaces
@@ -336,10 +320,9 @@ always, indented by the level of the tree:
 
 ```html
 <div>
-    <div></div>
+  <div></div>
 </div>
 ```
-
 
 ### CSS
 
@@ -347,13 +330,12 @@ Just like HTML and JavaScript, 4 space soft tabs always.
 
 ```css
 .menu-tooltip {
-    background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.8);
 }
 ```
 
 We write vanilla CSS with no preprocessing step. Since iD targets modern browsers,
 (Chrome, Firefox, Safari, Opera, and Edge) feel free to use newer features wisely.
-
 
 ### Tests
 
@@ -369,13 +351,11 @@ Note that in order to run the tests, Chrome needs to be installed on the system.
 
 Follow the steps in the [how to get started guide](https://github.com/openstreetmap/iD/wiki/How-to-get-started#build-and-test-instructions) on how to build and run iD.
 
-
 ### Licensing
 
 iD is available under the [ISC License](https://opensource.org/licenses/ISC).
 Some of the libraries it uses are under different licenses. If you're contributing
 to iD, you're contributing ISC Licensed code.
-
 
 ## Submitting Changes
 
@@ -386,12 +366,11 @@ In your local copy, make a branch for this change using a descriptive branch nam
 Make your changes to source files under `modules/`.
 The `iD.js` and `iD.min.js` files in this project are autogenerated - don't edit them.
 
-1. Try your change locally.  Run `npm start` and visit `http://127.0.0.1:8080` in a browser.
+1. Try your change locally. Run `npm start` and visit `http://127.0.0.1:8080` in a browser.
 2. Run lint and tests with `npm test`.
 3. If you feel like it, append a line describing your changes to the project's [changelog](https://github.com/openstreetmap/iD/blob/develop/CHANGELOG.md).
 4. Commit your changes with an informative commit message.
 5. [Submit a pull request](https://help.github.com/articles/using-pull-requests) to the `openstreetmap/iD` project.
-
 
 ## Using GitHub and git
 
@@ -418,7 +397,7 @@ Additionally here is a step-by-step workflow example for beginners:
 
 8. Push Changes to your GitHub account `git push origin <working-branch-name>`. The next push also works without the branch name: `git push origin`.
 
-9.  Go to GitHub for your fork of iD at https://github.com/{{yourgithubaccount}}/iD. GitHub will already know about your recently pushed branch, and ask if you want to create a Pull Request for it.
+9. Go to GitHub for your fork of iD at https://github.com/{{yourgithubaccount}}/iD. GitHub will already know about your recently pushed branch, and ask if you want to create a Pull Request for it.
 
 10. Your Pull Request will be seen by the maintainers of iD. They can merge it or ask for changes. You can update your Pull Request with Steps 7 and 8, Step 9 is required only once per Pull Request.
 
@@ -438,7 +417,6 @@ If you did not use your copy of iD for some while, other Pull Request gets merge
 Then change to the `develop` branch and get everything from upstream (the main repository)
 
 `git checkout develop ; git fetch --all && git reset --hard upstream/develop`
-
 
 ## Submitting directly in the Browser
 

@@ -1,62 +1,67 @@
 describe('iD.validations.mismatched_geometry', function () {
     var context, _savedAreaKeys;
 
-    beforeEach(function() {
+    beforeEach(function () {
         _savedAreaKeys = iD.osmAreaKeys;
         context = iD.coreContext().init();
         iD.fileFetcher.cache().preset_presets = {
-            'Line': { geometry: ['line'], fallback: true, tags: {} },
-            'Area': { geometry: ['area'], fallback: true, tags: { area: 'yes' } },
-            'Building': { geometry: ['area'], tags: { building: '*' } },
+            Line: { geometry: ['line'], fallback: true, tags: {} },
+            Area: { geometry: ['area'], fallback: true, tags: { area: 'yes' } },
+            Building: { geometry: ['area'], tags: { building: '*' } },
             library: {
                 tags: { amenity: 'library' },
                 geometry: ['point', 'vertex', 'line', 'area'],
-                locationSet: { include: ['NU'] }
+                locationSet: { include: ['NU'] },
             },
             generic_amenity: {
                 tags: { amenity: '*' },
-                geometry: ['point', 'vertex', 'line', 'area']
+                geometry: ['point', 'vertex', 'line', 'area'],
             },
         };
     });
 
-    afterEach(function() {
+    afterEach(function () {
         iD.osmSetAreaKeys(_savedAreaKeys);
     });
 
-
     function createPoint(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4], tags: tags});
-        context.perform(
-            iD.actionAddEntity(n1)
-        );
+        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4], tags: tags });
+        context.perform(iD.actionAddEntity(n1));
     }
 
     function createOpenWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3'], tags: tags});
+        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
+        var w = iD.osmWay({
+            id: 'w-1',
+            nodes: ['n-1', 'n-2', 'n-3'],
+            tags: tags,
+        });
 
         context.perform(
             iD.actionAddEntity(n1),
             iD.actionAddEntity(n2),
             iD.actionAddEntity(n3),
-            iD.actionAddEntity(w)
+            iD.actionAddEntity(w),
         );
     }
 
     function createClosedWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3', 'n-1'], tags: tags});
+        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
+        var w = iD.osmWay({
+            id: 'w-1',
+            nodes: ['n-1', 'n-2', 'n-3', 'n-1'],
+            tags: tags,
+        });
 
         context.perform(
             iD.actionAddEntity(n1),
             iD.actionAddEntity(n2),
             iD.actionAddEntity(n3),
-            iD.actionAddEntity(w)
+            iD.actionAddEntity(w),
         );
     }
 
@@ -65,37 +70,36 @@ describe('iD.validations.mismatched_geometry', function () {
         var changes = context.history().changes();
         var entities = changes.modified.concat(changes.created);
         var issues = [];
-        entities.forEach(function(entity) {
+        entities.forEach(function (entity) {
             issues = issues.concat(validator(entity, context.graph()));
         });
         return issues;
     }
 
-
-    it('has no errors on init', function() {
+    it('has no errors on init', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('ignores points', function() {
+    it('ignores points', function () {
         createPoint({ building: 'yes' });
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('ignores open way without area tag', function() {
+    it('ignores open way without area tag', function () {
         createOpenWay({});
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('ignores closed way with area tag', function() {
+    it('ignores closed way with area tag', function () {
         createClosedWay({ building: 'yes' });
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('ignores open way with tag that allows both lines and areas', function() {
+    it('ignores open way with tag that allows both lines and areas', function () {
         createOpenWay({ man_made: 'yes' });
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
@@ -115,7 +119,7 @@ describe('iD.validations.mismatched_geometry', function () {
         expect(issue.entityIds[0]).to.eql('w-1');
     });
 
-    it('flags open way with both area and line tags', function() {
+    it('flags open way with both area and line tags', function () {
         createOpenWay({ area: 'yes', barrier: 'fence' });
         var issues = validate();
         expect(issues).to.have.lengthOf(1);

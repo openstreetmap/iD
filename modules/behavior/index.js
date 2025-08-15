@@ -1,8 +1,8 @@
 export { behaviorAddWay } from './add_way';
 export { behaviorBreathe } from './breathe';
 export { behaviorDrag } from './drag';
-export { behaviorDrawWay } from './draw_way';
 export { behaviorDraw } from './draw';
+export { behaviorDrawWay } from './draw_way';
 export { behaviorEdit } from './edit';
 export { behaviorHash } from './hash';
 export { behaviorHover } from './hover';

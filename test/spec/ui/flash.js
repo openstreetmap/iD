@@ -3,9 +3,13 @@ import { setTimeout } from 'node:timers/promises';
 describe('iD.uiFlash', function () {
     var context;
 
-    beforeEach(function() {
+    beforeEach(function () {
         var container = d3.select('body');
-        context = iD.coreContext().assetPath('../dist/').init().container(container);
+        context = iD
+            .coreContext()
+            .assetPath('../dist/')
+            .init()
+            .container(container);
         container
             .append('div')
             .attr('class', 'flash-wrap')
@@ -13,9 +17,8 @@ describe('iD.uiFlash', function () {
             .attr('class', 'main-footer-wrap');
     });
 
-    afterEach(function() {
-        d3.select('.flash-wrap')
-            .remove();
+    afterEach(function () {
+        d3.select('.flash-wrap').remove();
     });
 
     it('flash is shown and goes away', async () => {
@@ -29,5 +32,4 @@ describe('iD.uiFlash', function () {
         expect(flashWrap.classed('footer-hide')).to.be.ok;
         expect(footerWrap.classed('footer-show')).to.be.ok;
     });
-
 });

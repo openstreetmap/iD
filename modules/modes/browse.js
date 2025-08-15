@@ -15,22 +15,20 @@ export function modeBrowse(context) {
         button: 'browse',
         id: 'browse',
         title: t.append('modes.browse.title'),
-        description: t.append('modes.browse.description')
+        description: t.append('modes.browse.description'),
     };
     var sidebar;
 
     var _selectBehavior;
     var _behaviors = [];
 
-
-    mode.selectBehavior = function(val) {
+    mode.selectBehavior = function (val) {
         if (!arguments.length) return _selectBehavior;
         _selectBehavior = val;
         return mode;
     };
 
-
-    mode.enter = function() {
+    mode.enter = function () {
         if (!_behaviors.length) {
             if (!_selectBehavior) _selectBehavior = behaviorSelect(context);
             _behaviors = [
@@ -39,7 +37,7 @@ export function modeBrowse(context) {
                 _selectBehavior,
                 behaviorLasso(context),
                 modeDragNode(context).behavior,
-                modeDragNote(context).behavior
+                modeDragNote(context).behavior,
             ];
         }
         _behaviors.forEach(context.install);
@@ -56,8 +54,7 @@ export function modeBrowse(context) {
         }
     };
 
-
-    mode.exit = function() {
+    mode.exit = function () {
         context.ui().sidebar.hover.cancel();
         _behaviors.forEach(context.uninstall);
 
@@ -66,18 +63,15 @@ export function modeBrowse(context) {
         }
     };
 
-
-    mode.sidebar = function(_) {
+    mode.sidebar = function (_) {
         if (!arguments.length) return sidebar;
         sidebar = _;
         return mode;
     };
 
-
-    mode.operations = function() {
+    mode.operations = function () {
         return [operationPaste(context)];
     };
-
 
     return mode;
 }

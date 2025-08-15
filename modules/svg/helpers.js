@@ -1,11 +1,10 @@
 import {
     geoIdentity as d3_geoIdentity,
     geoPath as d3_geoPath,
-    geoStream as d3_geoStream
+    geoStream as d3_geoStream,
 } from 'd3-geo';
 
 import { geoVecAdd, geoVecAngle, geoVecLength } from '../geo';
-
 
 // Touch targets control which other vertices we can drag a vertex onto.
 //
@@ -31,33 +30,38 @@ export function svgPassiveVertex(node, graph, activeID) {
     for (i = 0; i < parents.length; i++) {
         nodes = parents[i].nodes;
         isClosed = parents[i].isClosed();
-        for (j = 0; j < nodes.length; j++) {   // find this vertex, look nearby
+        for (j = 0; j < nodes.length; j++) {
+            // find this vertex, look nearby
             if (nodes[j] === node.id) {
                 ix1 = j - 2;
                 ix2 = j - 1;
                 ix3 = j + 1;
                 ix4 = j + 2;
 
-                if (isClosed) {  // wraparound if needed
+                if (isClosed) {
+                    // wraparound if needed
                     max = nodes.length - 1;
-                    if (ix1 < 0)   ix1 = max + ix1;
-                    if (ix2 < 0)   ix2 = max + ix2;
+                    if (ix1 < 0) ix1 = max + ix1;
+                    if (ix2 < 0) ix2 = max + ix2;
                     if (ix3 > max) ix3 = ix3 - max;
                     if (ix4 > max) ix4 = ix4 - max;
                 }
 
-                if (nodes[ix1] === activeID) return 0;        // no - prevent self intersect
-                else if (nodes[ix2] === activeID) return 2;   // ok - adjacent
-                else if (nodes[ix3] === activeID) return 2;   // ok - adjacent
-                else if (nodes[ix4] === activeID) return 0;   // no - prevent self intersect
-                else if (isClosed && nodes.indexOf(activeID) !== -1) return 0;  // no - prevent self intersect
+                if (nodes[ix1] === activeID)
+                    return 0; // no - prevent self intersect
+                else if (nodes[ix2] === activeID)
+                    return 2; // ok - adjacent
+                else if (nodes[ix3] === activeID)
+                    return 2; // ok - adjacent
+                else if (nodes[ix4] === activeID)
+                    return 0; // no - prevent self intersect
+                else if (isClosed && nodes.indexOf(activeID) !== -1) return 0; // no - prevent self intersect
             }
         }
     }
 
-    return 1;   // ok
+    return 1; // ok
 }
-
 
 /**
  *
@@ -67,83 +71,119 @@ export function svgPassiveVertex(node, graph, activeID) {
  * @param {Function<Boolean>} [shouldReverse]
  * @param {Function<Boolean>} [bothDirections]
  */
-export function svgMarkerSegments(projection, graph, dt, shouldReverse = () => false, bothDirections = () => false) {
+export function svgMarkerSegments(
+    projection,
+    graph,
+    dt,
+    shouldReverse = () => false,
+    bothDirections = () => false,
+) {
     /**
      * @param {iD.OsmWay} entity
      * @returns {[{id: String, d: String}]} list of svg path segments corres
      */
-    return function(entity) {
+    return function (entity) {
         let i = 0;
         let offset = dt / 2;
         const segments = [];
 
         const clip = paddedClipExtent(projection);
 
-        const coordinates = graph.childNodes(entity).map(function(n) { return n.loc; });
+        const coordinates = graph.childNodes(entity).map(function (n) {
+            return n.loc;
+        });
         let a, b;
 
         const _shouldReverse = shouldReverse(entity);
         const _bothDirections = bothDirections(entity);
 
-        d3_geoStream({
-            type: 'LineString',
-            coordinates: coordinates
-        }, projection.stream(clip({
-            lineStart: function() {},
-            lineEnd: function() { a = null; },
-            point: function(x, y) {
-                b = [x, y];
+        d3_geoStream(
+            {
+                type: 'LineString',
+                coordinates: coordinates,
+            },
+            projection.stream(
+                clip({
+                    lineStart: function () {},
+                    lineEnd: function () {
+                        a = null;
+                    },
+                    point: function (x, y) {
+                        b = [x, y];
 
-                if (a) {
-                    let span = geoVecLength(a, b) - offset;
+                        if (a) {
+                            let span = geoVecLength(a, b) - offset;
 
-                    if (span >= 0) {
-                        const heading = geoVecAngle(a, b);
-                        const dx = dt * Math.cos(heading);
-                        const dy = dt * Math.sin(heading);
-                        let p = [
-                            a[0] + offset * Math.cos(heading),
-                            a[1] + offset * Math.sin(heading)
-                        ];
+                            if (span >= 0) {
+                                const heading = geoVecAngle(a, b);
+                                const dx = dt * Math.cos(heading);
+                                const dy = dt * Math.sin(heading);
+                                let p = [
+                                    a[0] + offset * Math.cos(heading),
+                                    a[1] + offset * Math.sin(heading),
+                                ];
 
-                        // gather coordinates
-                        const coord = [a, p];
-                        for (span -= dt; span >= 0; span -= dt) {
-                            p = geoVecAdd(p, [dx, dy]);
-                            coord.push(p);
-                        }
-                        coord.push(b);
+                                // gather coordinates
+                                const coord = [a, p];
+                                for (span -= dt; span >= 0; span -= dt) {
+                                    p = geoVecAdd(p, [dx, dy]);
+                                    coord.push(p);
+                                }
+                                coord.push(b);
 
-                        // generate svg paths
-                        let segment = '';
+                                // generate svg paths
+                                let segment = '';
 
-                        if (!_shouldReverse || _bothDirections) {
-                            for (let j = 0; j < coord.length; j++) {
-                                segment += (j === 0 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
+                                if (!_shouldReverse || _bothDirections) {
+                                    for (let j = 0; j < coord.length; j++) {
+                                        segment +=
+                                            (j === 0 ? 'M' : 'L') +
+                                            coord[j][0] +
+                                            ',' +
+                                            coord[j][1];
+                                    }
+                                    segments.push({
+                                        id: entity.id,
+                                        index: i++,
+                                        d: segment,
+                                    });
+                                }
+
+                                if (_shouldReverse || _bothDirections) {
+                                    segment = '';
+                                    for (
+                                        let j = coord.length - 1;
+                                        j >= 0;
+                                        j--
+                                    ) {
+                                        segment +=
+                                            (j === coord.length - 1
+                                                ? 'M'
+                                                : 'L') +
+                                            coord[j][0] +
+                                            ',' +
+                                            coord[j][1];
+                                    }
+                                    segments.push({
+                                        id: entity.id,
+                                        index: i++,
+                                        d: segment,
+                                    });
+                                }
                             }
-                            segments.push({ id: entity.id, index: i++, d: segment });
+
+                            offset = -span;
                         }
 
-                        if (_shouldReverse || _bothDirections) {
-                            segment = '';
-                            for (let j = coord.length - 1; j >= 0; j--) {
-                                segment += (j === coord.length - 1 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
-                            }
-                            segments.push({ id: entity.id, index: i++, d: segment });
-                        }
-                    }
-
-                    offset = -span;
-                }
-
-                a = b;
-            }
-        })));
+                        a = b;
+                    },
+                }),
+            ),
+        );
 
         return segments;
     };
 }
-
 
 /**
  * @param {iD.Projection} projection
@@ -154,23 +194,26 @@ export function svgPath(projection, graph, isArea) {
     const cache = {};
     const project = projection.stream;
     const clip = paddedClipExtent(projection, isArea);
-    const path = d3_geoPath()
-        .projection({stream: function(output) { return project(clip(output)); }});
+    const path = d3_geoPath().projection({
+        stream: function (output) {
+            return project(clip(output));
+        },
+    });
 
-    const svgpath = function(entity) {
+    const svgpath = function (entity) {
         if (entity.id in cache) {
             return cache[entity.id];
         } else {
-            return cache[entity.id] = path(entity.asGeoJSON(graph));
+            return (cache[entity.id] = path(entity.asGeoJSON(graph)));
         }
     };
 
-    svgpath.geojson = function(d) {
+    svgpath.geojson = function (d) {
         if (d.__featurehash__ !== undefined) {
             if (d.__featurehash__ in cache) {
                 return cache[d.__featurehash__];
             } else {
-                return cache[d.__featurehash__] = path(d);
+                return (cache[d.__featurehash__] = path(d));
             }
         } else {
             return path(d);
@@ -180,36 +223,36 @@ export function svgPath(projection, graph, isArea) {
     return svgpath;
 }
 
-
 export function svgPointTransform(projection) {
-    var svgpoint = function(entity) {
+    var svgpoint = function (entity) {
         // http://jsperf.com/short-array-join
         var pt = projection(entity.loc);
         return 'translate(' + pt[0] + ',' + pt[1] + ')';
     };
 
-    svgpoint.geojson = function(d) {
+    svgpoint.geojson = function (d) {
         return svgpoint(d.properties.entity);
     };
 
     return svgpoint;
 }
 
-
 export function svgRelationMemberTags(graph) {
-    return function(entity) {
+    return function (entity) {
         var tags = entity.tags;
         var shouldCopyMultipolygonTags = !entity.hasInterestingTags();
-        graph.parentRelations(entity).forEach(function(relation) {
+        graph.parentRelations(entity).forEach(function (relation) {
             var type = relation.tags.type;
-            if ((type === 'multipolygon' && shouldCopyMultipolygonTags) || type === 'boundary') {
+            if (
+                (type === 'multipolygon' && shouldCopyMultipolygonTags) ||
+                type === 'boundary'
+            ) {
                 tags = Object.assign({}, relation.tags, tags);
             }
         });
         return tags;
     };
 }
-
 
 export function svgSegmentWay(way, graph, activeID) {
     // When there is no activeID, we can memoize this expensive computation
@@ -220,7 +263,7 @@ export function svgSegmentWay(way, graph, activeID) {
     }
 
     function getWaySegments() {
-        var isActiveWay = (way.nodes.indexOf(activeID) !== -1);
+        var isActiveWay = way.nodes.indexOf(activeID) !== -1;
         var features = { passive: [], active: [] };
         var start = {};
         var end = {};
@@ -234,9 +277,14 @@ export function svgSegmentWay(way, graph, activeID) {
             if (start.type !== undefined) {
                 if (start.node.id === activeID || end.node.id === activeID) {
                     // push nothing
-                } else if (isActiveWay && (start.type === 2 || end.type === 2)) {   // one adjacent vertex
+                } else if (
+                    isActiveWay &&
+                    (start.type === 2 || end.type === 2)
+                ) {
+                    // one adjacent vertex
                     pushActive(start, end, i);
-                } else if (start.type === 0 && end.type === 0) {   // both active vertices
+                } else if (start.type === 0 && end.type === 0) {
+                    // both active vertices
                     pushActive(start, end, i);
                 } else {
                     pushPassive(start, end, i);
@@ -257,12 +305,12 @@ export function svgSegmentWay(way, graph, activeID) {
                     target: true,
                     entity: way,
                     nodes: [start.node, end.node],
-                    index: index
+                    index: index,
                 },
                 geometry: {
                     type: 'LineString',
-                    coordinates: [start.node.loc, end.node.loc]
-                }
+                    coordinates: [start.node.loc, end.node.loc],
+                },
             });
         }
 
@@ -274,17 +322,16 @@ export function svgSegmentWay(way, graph, activeID) {
                     target: true,
                     entity: way,
                     nodes: [start.node, end.node],
-                    index: index
+                    index: index,
                 },
                 geometry: {
                     type: 'LineString',
-                    coordinates: [start.node.loc, end.node.loc]
-                }
+                    coordinates: [start.node.loc, end.node.loc],
+                },
             });
         }
     }
 }
-
 
 /**
  * Returns a d3 projection stream that clips the given geometries to an
@@ -306,7 +353,7 @@ function paddedClipExtent(projection, isArea = false) {
     var viewport = projection.clipExtent();
     var paddedExtent = [
         [viewport[0][0] - padding, viewport[0][1] - padding],
-        [viewport[1][0] + padding, viewport[1][1] + padding]
+        [viewport[1][0] + padding, viewport[1][1] + padding],
     ];
     return d3_geoIdentity().clipExtent(paddedExtent).stream;
 }

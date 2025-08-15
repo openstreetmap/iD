@@ -1,10 +1,9 @@
-import { uiCmd } from './cmd';
 import { utilDetect } from '../util/detect';
+import { uiCmd } from './cmd';
 
 export function uiFullScreen(context) {
     var element = context.container().node();
     // var button = d3_select(null);
-
 
     function getFullScreenFn() {
         if (element.requestFullscreen) {
@@ -18,7 +17,6 @@ export function uiFullScreen(context) {
         }
     }
 
-
     function getExitFullScreenFn() {
         if (document.exitFullscreen) {
             return document.exitFullscreen;
@@ -31,19 +29,18 @@ export function uiFullScreen(context) {
         }
     }
 
-
     function isFullScreen() {
-        return document.fullscreenElement ||
+        return (
+            document.fullscreenElement ||
             document.mozFullScreenElement ||
             document.webkitFullscreenElement ||
-            document.msFullscreenElement;
+            document.msFullscreenElement
+        );
     }
-
 
     function isSupported() {
         return !!getFullScreenFn();
     }
-
 
     function fullScreen(d3_event) {
         d3_event.preventDefault();
@@ -56,8 +53,8 @@ export function uiFullScreen(context) {
         }
     }
 
-
-    return function() { // selection) {
+    return function () {
+        // selection) {
         if (!isSupported()) return;
 
         // button = selection.append('button')
@@ -69,7 +66,7 @@ export function uiFullScreen(context) {
         //     .attr('class', 'icon full-screen');
 
         var detected = utilDetect();
-        var keys = (detected.os === 'mac' ? [uiCmd('⌃⌘F'), 'f11'] : ['f11']);
+        var keys = detected.os === 'mac' ? [uiCmd('⌃⌘F'), 'f11'] : ['f11'];
         context.keybinding().on(keys, fullScreen);
     };
 }

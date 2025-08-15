@@ -1,11 +1,8 @@
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { t } from '../core/localizer';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
-
 
 // Pass `what` object of the form:
 // {
@@ -26,16 +23,13 @@ export function uiTagReference(what) {
     var _loaded;
     var _showing;
 
-
     function load() {
         if (!wikibase) return;
 
-        _button
-            .classed('tag-reference-loading', true);
+        _button.classed('tag-reference-loading', true);
 
         wikibase.getDocs(what, gotDocs);
     }
-
 
     function gotDocs(err, docs) {
         _body.html('');
@@ -55,8 +49,13 @@ export function uiTagReference(what) {
                 .attr('class', 'tag-reference-wiki-image')
                 .attr('alt', docs.title)
                 .attr('src', docs.imageURL)
-                .on('load', function() { done(); })
-                .on('error', function() { d3_select(this).remove(); done(); });
+                .on('load', function () {
+                    done();
+                })
+                .on('error', function () {
+                    d3_select(this).remove();
+                    done();
+                });
         } else {
             done();
         }
@@ -71,8 +70,9 @@ export function uiTagReference(what) {
                 .attr('lang', docs.descriptionLocaleCode || 'und')
                 .call(docs.description);
         } else {
-            tagReferenceDescription = tagReferenceDescription
-                .call(t.append('inspector.no_documentation_key'));
+            tagReferenceDescription = tagReferenceDescription.call(
+                t.append('inspector.no_documentation_key'),
+            );
         }
         tagReferenceDescription
             .append('a')
@@ -84,13 +84,13 @@ export function uiTagReference(what) {
 
         if (docs.wiki) {
             _body
-              .append('a')
-              .attr('class', 'tag-reference-link')
-              .attr('target', '_blank')
-              .attr('href', docs.wiki.url)
-              .call(svgIcon('#iD-icon-out-link', 'inline'))
-              .append('span')
-              .call(t.append(docs.wiki.text));
+                .append('a')
+                .attr('class', 'tag-reference-link')
+                .attr('target', '_blank')
+                .attr('href', docs.wiki.url)
+                .call(svgIcon('#iD-icon-out-link', 'inline'))
+                .append('span')
+                .call(t.append(docs.wiki.text));
         }
 
         // Add link to info about "good changeset comments" - #2923
@@ -106,12 +106,10 @@ export function uiTagReference(what) {
         }
     }
 
-
     function done() {
         _loaded = true;
 
-        _button
-            .classed('tag-reference-loading', false);
+        _button.classed('tag-reference-loading', false);
 
         _body
             .classed('expanded', true)
@@ -122,14 +120,13 @@ export function uiTagReference(what) {
 
         _showing = true;
 
-        _button.selectAll('svg.icon use').each(function() {
+        _button.selectAll('svg.icon use').each(function () {
             var iconUse = d3_select(this);
             if (iconUse.attr('href') === '#iD-icon-info') {
                 iconUse.attr('href', '#iD-icon-info-filled');
             }
         });
     }
-
 
     function hide() {
         _body
@@ -143,52 +140,51 @@ export function uiTagReference(what) {
 
         _showing = false;
 
-        _button.selectAll('svg.icon use').each(function() {
+        _button.selectAll('svg.icon use').each(function () {
             var iconUse = d3_select(this);
             if (iconUse.attr('href') === '#iD-icon-info-filled') {
                 iconUse.attr('href', '#iD-icon-info');
             }
         });
-
     }
 
+    tagReference.button = function (selection, klass, iconName) {
+        _button = selection.selectAll('.tag-reference-button').data([0]);
 
-    tagReference.button = function(selection, klass, iconName) {
-        _button = selection.selectAll('.tag-reference-button')
-            .data([0]);
-
-        _button = _button.enter()
+        _button = _button
+            .enter()
             .append('button')
             .attr('class', 'tag-reference-button ' + (klass || ''))
             .attr('title', t('icons.information'))
             .call(svgIcon('#iD-icon-' + (iconName || 'inspect')))
             .merge(_button);
 
-        _button
-            .on('click', function (d3_event) {
-                d3_event.stopPropagation();
-                d3_event.preventDefault();
-                this.blur();    // avoid keeping focus on the button - #4641
-                if (_showing) {
-                    hide();
-                } else if (_loaded) {
-                    done();
-                } else {
-                    load();
-                }
-            });
+        _button.on('click', function (d3_event) {
+            d3_event.stopPropagation();
+            d3_event.preventDefault();
+            this.blur(); // avoid keeping focus on the button - #4641
+            if (_showing) {
+                hide();
+            } else if (_loaded) {
+                done();
+            } else {
+                load();
+            }
+        });
     };
 
+    tagReference.body = function (selection) {
+        var itemID = what.qid || what.key + '-' + (what.value || '');
+        _body = selection
+            .selectAll('.tag-reference-body')
+            .data([itemID], function (d) {
+                return d;
+            });
 
-    tagReference.body = function(selection) {
-        var itemID = what.qid || (what.key + '-' + (what.value || ''));
-        _body = selection.selectAll('.tag-reference-body')
-            .data([itemID], function(d) { return d; });
+        _body.exit().remove();
 
-        _body.exit()
-            .remove();
-
-        _body = _body.enter()
+        _body = _body
+            .enter()
             .append('div')
             .attr('class', 'tag-reference-body')
             .style('max-height', '0')
@@ -200,13 +196,11 @@ export function uiTagReference(what) {
         }
     };
 
-
-    tagReference.showing = function(val) {
+    tagReference.showing = function (val) {
         if (!arguments.length) return _showing;
         _showing = val;
         return tagReference;
     };
-
 
     return tagReference;
 }

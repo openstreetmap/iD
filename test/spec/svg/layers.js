@@ -1,15 +1,20 @@
 describe('iD.svgLayers', function () {
     var context, container;
-    var projection = d3.geoProjection(function(x, y) { return [x, -y]; })
+    var projection = d3
+        .geoProjection(function (x, y) {
+            return [x, -y];
+        })
         .translate([0, 0])
         .scale(iD.geoZoomToScale(17))
-        .clipExtent([[0, 0], [Infinity, Infinity]]);
+        .clipExtent([
+            [0, 0],
+            [Infinity, Infinity],
+        ]);
 
     beforeEach(function () {
         context = iD.coreContext().assetPath('../dist/').init();
         container = d3.select(document.createElement('div'));
     });
-
 
     it('creates a surface', function () {
         container.call(iD.svgLayers(projection, context));
@@ -35,7 +40,8 @@ describe('iD.svgLayers', function () {
         expect(d3.select(nodes[5]).classed('streetside')).to.be.true;
         expect(d3.select(nodes[6]).classed('mapillary')).to.be.true;
         expect(d3.select(nodes[7]).classed('mapillary-position')).to.be.true;
-        expect(d3.select(nodes[8]).classed('mapillary-map-features')).to.be.true;
+        expect(d3.select(nodes[8]).classed('mapillary-map-features')).to.be
+            .true;
         expect(d3.select(nodes[9]).classed('mapillary-signs')).to.be.true;
         expect(d3.select(nodes[10]).classed('kartaview')).to.be.true;
         expect(d3.select(nodes[11]).classed('mapilio')).to.be.true;
@@ -46,5 +52,4 @@ describe('iD.svgLayers', function () {
         expect(d3.select(nodes[16]).classed('geolocate')).to.be.true;
         expect(d3.select(nodes[17]).classed('touch')).to.be.true;
     });
-
 });

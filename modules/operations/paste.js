@@ -1,18 +1,16 @@
 import { actionCopyEntities } from '../actions/copy_entities';
 import { actionMove } from '../actions/move';
-import { modeSelect } from '../modes/select';
-import { geoExtent, geoVecSubtract } from '../geo';
 import { t } from '../core/localizer';
+import { geoExtent, geoVecSubtract } from '../geo';
+import { modeSelect } from '../modes/select';
 import { uiCmd } from '../ui/cmd';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 
 // see also `behaviorPaste`
 export function operationPaste(context) {
-
     var _pastePoint;
 
-    var operation = function() {
-
+    var operation = function () {
         if (!_pastePoint) return;
 
         var oldIDs = context.copyIDs();
@@ -28,7 +26,9 @@ export function operationPaste(context) {
 
         var copies = action.copies();
         var originals = new Set();
-        Object.values(copies).forEach(function(entity) { originals.add(entity.id); });
+        Object.values(copies).forEach(function (entity) {
+            originals.add(entity.id);
+        });
 
         for (var id in copies) {
             var oldEntity = oldGraph.entity(id);
@@ -38,7 +38,7 @@ export function operationPaste(context) {
 
             // Exclude child nodes from newIDs if their parent way was also copied.
             var parents = context.graph().parentWays(newEntity);
-            var parentCopied = parents.some(function(parent) {
+            var parentCopied = parents.some(function (parent) {
                 return originals.has(parent.id);
             });
 
@@ -49,38 +49,45 @@ export function operationPaste(context) {
 
         // Use the location of the copy operation to offset the paste location,
         // or else use the center of the pasted extent
-        var copyPoint = (context.copyLonLat() && projection(context.copyLonLat())) ||
+        var copyPoint =
+            (context.copyLonLat() && projection(context.copyLonLat())) ||
             projection(extent.center());
         var delta = geoVecSubtract(_pastePoint, copyPoint);
 
         // Move the pasted objects to be anchored at the paste location
-        context.replace(actionMove(newIDs, delta, projection), operation.annotation());
+        context.replace(
+            actionMove(newIDs, delta, projection),
+            operation.annotation(),
+        );
         context.enter(modeSelect(context, newIDs));
     };
 
-    operation.point = function(val) {
+    operation.point = function (val) {
         _pastePoint = val;
         return operation;
     };
 
-    operation.available = function() {
+    operation.available = function () {
         return context.mode().id === 'browse';
     };
 
-    operation.disabled = function() {
+    operation.disabled = function () {
         return !context.copyIDs().length;
     };
 
-    operation.tooltip = function() {
+    operation.tooltip = function () {
         var oldGraph = context.copyGraph();
         var ids = context.copyIDs();
         if (!ids.length) {
             return t.append('operations.paste.nothing_copied');
         }
-        return t.append('operations.paste.description', { feature: utilDisplayLabel(oldGraph.entity(ids[0]), oldGraph), n: ids.length });
+        return t.append('operations.paste.description', {
+            feature: utilDisplayLabel(oldGraph.entity(ids[0]), oldGraph),
+            n: ids.length,
+        });
     };
 
-    operation.annotation = function() {
+    operation.annotation = function () {
         var ids = context.copyIDs();
         return t('operations.paste.annotation', { n: ids.length });
     };

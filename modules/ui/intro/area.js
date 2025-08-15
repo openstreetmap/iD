@@ -1,16 +1,13 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import {
-    interpolateNumber as d3_interpolateNumber
-} from 'd3-interpolate';
+import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 
-import { presetManager } from '../../presets';
 import { t } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
+import { presetManager } from '../../presets';
 import { utilRebind } from '../../util/rebind';
 import { helpHtml, icon, pad, transitionTime } from './helper';
-
 
 export function uiIntroArea(context, reveal) {
     var dispatch = d3_dispatch('done');
@@ -21,22 +18,18 @@ export function uiIntroArea(context, reveal) {
     var timeouts = [];
     var _areaID;
 
-
     var chapter = {
-        title: 'intro.areas.title'
+        title: 'intro.areas.title',
     };
-
 
     function timeout(f, t) {
         timeouts.push(window.setTimeout(f, t));
     }
 
-
     function eventCancel(d3_event) {
         d3_event.stopPropagation();
         d3_event.preventDefault();
     }
-
 
     function revealPlayground(center, text, options) {
         var padding = 180 * Math.pow(2, context.map().zoom() - 19.5);
@@ -44,27 +37,31 @@ export function uiIntroArea(context, reveal) {
         reveal(box, text, options);
     }
 
-
     function addArea() {
         context.enter(modeBrowse(context));
         context.history().reset('initial');
         _areaID = null;
 
         var msec = transitionTime(playground, context.map().center());
-        if (msec) { reveal(null, null, { duration: 0 }); }
+        if (msec) {
+            reveal(null, null, { duration: 0 });
+        }
         context.map().centerZoomEase(playground, 19, msec);
 
-        timeout(function() {
-            var tooltip = reveal('button.add-area',
-                helpHtml('intro.areas.add_playground'));
+        timeout(function () {
+            var tooltip = reveal(
+                'button.add-area',
+                helpHtml('intro.areas.add_playground'),
+            );
 
-            tooltip.selectAll('.popover-inner')
+            tooltip
+                .selectAll('.popover-inner')
                 .insert('svg', 'span')
                 .attr('class', 'tooltip-illustration')
                 .append('use')
                 .attr('xlink:href', '#iD-graphic-areas');
 
-            context.on('enter.intro', function(mode) {
+            context.on('enter.intro', function (mode) {
                 if (mode.id !== 'add-area') return;
                 continueTo(startPlayground);
             });
@@ -76,7 +73,6 @@ export function uiIntroArea(context, reveal) {
         }
     }
 
-
     function startPlayground() {
         if (context.mode().id !== 'add-area') {
             return chapter.restart();
@@ -85,26 +81,28 @@ export function uiIntroArea(context, reveal) {
         _areaID = null;
         context.map().zoomEase(19.5, 500);
 
-        timeout(function() {
-            var textId = context.lastPointerType() === 'mouse' ? 'starting_node_click' : 'starting_node_tap';
-            var startDrawString = helpHtml('intro.areas.start_playground') + helpHtml('intro.areas.' + textId);
-            revealPlayground(playground,
-                startDrawString, { duration: 250 }
-            );
+        timeout(function () {
+            var textId =
+                context.lastPointerType() === 'mouse'
+                    ? 'starting_node_click'
+                    : 'starting_node_tap';
+            var startDrawString =
+                helpHtml('intro.areas.start_playground') +
+                helpHtml('intro.areas.' + textId);
+            revealPlayground(playground, startDrawString, { duration: 250 });
 
-            timeout(function() {
-                context.map().on('move.intro drawn.intro', function() {
-                    revealPlayground(playground,
-                        startDrawString, { duration: 0 }
-                    );
+            timeout(function () {
+                context.map().on('move.intro drawn.intro', function () {
+                    revealPlayground(playground, startDrawString, {
+                        duration: 0,
+                    });
                 });
-                context.on('enter.intro', function(mode) {
+                context.on('enter.intro', function (mode) {
                     if (mode.id !== 'draw-area') return chapter.restart();
                     continueTo(continuePlayground);
                 });
-            }, 250);  // after reveal
-
-        }, 550);  // after easing
+            }, 250); // after reveal
+        }, 550); // after easing
 
         function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
@@ -113,28 +111,29 @@ export function uiIntroArea(context, reveal) {
         }
     }
 
-
     function continuePlayground() {
         if (context.mode().id !== 'draw-area') {
             return chapter.restart();
         }
 
         _areaID = null;
-        revealPlayground(playground,
+        revealPlayground(
+            playground,
             helpHtml('intro.areas.continue_playground'),
-            { duration: 250 }
+            { duration: 250 },
         );
 
-        timeout(function() {
-            context.map().on('move.intro drawn.intro', function() {
-                revealPlayground(playground,
+        timeout(function () {
+            context.map().on('move.intro drawn.intro', function () {
+                revealPlayground(
+                    playground,
                     helpHtml('intro.areas.continue_playground'),
-                    { duration: 0 }
+                    { duration: 0 },
                 );
             });
-        }, 250);  // after reveal
+        }, 250); // after reveal
 
-        context.on('enter.intro', function(mode) {
+        context.on('enter.intro', function (mode) {
             if (mode.id === 'draw-area') {
                 var entity = context.hasEntity(context.selectedIDs()[0]);
                 if (entity && entity.nodes.length >= 6) {
@@ -157,7 +156,6 @@ export function uiIntroArea(context, reveal) {
         }
     }
 
-
     function finishPlayground() {
         if (context.mode().id !== 'draw-area') {
             return chapter.restart();
@@ -165,21 +163,20 @@ export function uiIntroArea(context, reveal) {
 
         _areaID = null;
 
-        var finishString = helpHtml('intro.areas.finish_area_' + (context.lastPointerType() === 'mouse' ? 'click' : 'tap')) +
-            helpHtml('intro.areas.finish_playground');
-        revealPlayground(playground,
-            finishString, { duration: 250 }
-        );
+        var finishString =
+            helpHtml(
+                'intro.areas.finish_area_' +
+                    (context.lastPointerType() === 'mouse' ? 'click' : 'tap'),
+            ) + helpHtml('intro.areas.finish_playground');
+        revealPlayground(playground, finishString, { duration: 250 });
 
-        timeout(function() {
-            context.map().on('move.intro drawn.intro', function() {
-                revealPlayground(playground,
-                    finishString, { duration: 0 }
-                );
+        timeout(function () {
+            context.map().on('move.intro drawn.intro', function () {
+                revealPlayground(playground, finishString, { duration: 0 });
             });
-        }, 250);  // after reveal
+        }, 250); // after reveal
 
-        context.on('enter.intro', function(mode) {
+        context.on('enter.intro', function (mode) {
             if (mode.id === 'draw-area') {
                 return;
             } else if (mode.id === 'select') {
@@ -197,33 +194,47 @@ export function uiIntroArea(context, reveal) {
         }
     }
 
-
     function searchPresets() {
         if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
         var ids = context.selectedIDs();
-        if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
+        if (
+            context.mode().id !== 'select' ||
+            !ids.length ||
+            ids[0] !== _areaID
+        ) {
             context.enter(modeSelect(context, [_areaID]));
         }
 
         // disallow scrolling
-        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context
+            .container()
+            .select('.inspector-wrap')
+            .on('wheel.intro', eventCancel);
 
-        timeout(function() {
+        timeout(function () {
             // reset pane, in case user somehow happened to change it..
-            context.container().select('.inspector-wrap .panewrap').style('right', '-100%');
+            context
+                .container()
+                .select('.inspector-wrap .panewrap')
+                .style('right', '-100%');
 
-            context.container().select('.preset-search-input')
+            context
+                .container()
+                .select('.preset-search-input')
                 .on('keydown.intro', null)
                 .on('keyup.intro', checkPresetSearch);
 
-            reveal('.preset-search-input',
-                helpHtml('intro.areas.search_playground', { preset: playgroundPreset.name() })
+            reveal(
+                '.preset-search-input',
+                helpHtml('intro.areas.search_playground', {
+                    preset: playgroundPreset.name(),
+                }),
             );
-        }, 400);  // after preset list pane visible..
+        }, 400); // after preset list pane visible..
 
-        context.on('enter.intro', function(mode) {
+        context.on('enter.intro', function (mode) {
             if (!_areaID || !context.hasEntity(_areaID)) {
                 return continueTo(addArea);
             }
@@ -234,16 +245,27 @@ export function uiIntroArea(context, reveal) {
                 context.enter(modeSelect(context, [_areaID]));
 
                 // reset pane, in case user somehow happened to change it..
-                context.container().select('.inspector-wrap .panewrap').style('right', '-100%');
+                context
+                    .container()
+                    .select('.inspector-wrap .panewrap')
+                    .style('right', '-100%');
                 // disallow scrolling
-                context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+                context
+                    .container()
+                    .select('.inspector-wrap')
+                    .on('wheel.intro', eventCancel);
 
-                context.container().select('.preset-search-input')
+                context
+                    .container()
+                    .select('.preset-search-input')
                     .on('keydown.intro', null)
                     .on('keyup.intro', checkPresetSearch);
 
-                reveal('.preset-search-input',
-                    helpHtml('intro.areas.search_playground', { preset: playgroundPreset.name() })
+                reveal(
+                    '.preset-search-input',
+                    helpHtml('intro.areas.search_playground', {
+                        preset: playgroundPreset.name(),
+                    }),
                 );
 
                 context.history().on('change.intro', null);
@@ -251,40 +273,56 @@ export function uiIntroArea(context, reveal) {
         });
 
         function checkPresetSearch() {
-            var first = context.container().select('.preset-list-item:first-child');
+            var first = context
+                .container()
+                .select('.preset-list-item:first-child');
 
             if (first.classed('preset-leisure-playground')) {
-                reveal(first.select('.preset-list-button').node(),
-                    helpHtml('intro.areas.choose_playground', { preset: playgroundPreset.name() }),
-                    { duration: 300 }
+                reveal(
+                    first.select('.preset-list-button').node(),
+                    helpHtml('intro.areas.choose_playground', {
+                        preset: playgroundPreset.name(),
+                    }),
+                    { duration: 300 },
                 );
 
-                context.container().select('.preset-search-input')
+                context
+                    .container()
+                    .select('.preset-search-input')
                     .on('keydown.intro', eventCancel, true)
                     .on('keyup.intro', null);
 
-                context.history().on('change.intro', function() {
+                context.history().on('change.intro', function () {
                     continueTo(clickAddField);
                 });
             }
         }
 
         function continueTo(nextStep) {
-            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context
+                .container()
+                .select('.inspector-wrap')
+                .on('wheel.intro', null);
             context.on('enter.intro', null);
             context.history().on('change.intro', null);
-            context.container().select('.preset-search-input').on('keydown.intro keyup.intro', null);
+            context
+                .container()
+                .select('.preset-search-input')
+                .on('keydown.intro keyup.intro', null);
             nextStep();
         }
     }
-
 
     function clickAddField() {
         if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
         var ids = context.selectedIDs();
-        if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
+        if (
+            context.mode().id !== 'select' ||
+            !ids.length ||
+            ids[0] !== _areaID
+        ) {
             return searchPresets();
         }
 
@@ -293,11 +331,17 @@ export function uiIntroArea(context, reveal) {
         }
 
         // disallow scrolling
-        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context
+            .container()
+            .select('.inspector-wrap')
+            .on('wheel.intro', eventCancel);
 
-        timeout(function() {
+        timeout(function () {
             // reset pane, in case user somehow happened to change it..
-            context.container().select('.inspector-wrap .panewrap').style('right', '0%');
+            context
+                .container()
+                .select('.inspector-wrap .panewrap')
+                .style('right', '0%');
 
             // It's possible for the user to add a description in a previous step..
             // If they did this already, just continue to next step.
@@ -307,67 +351,88 @@ export function uiIntroArea(context, reveal) {
             }
 
             // scroll "Add field" into view
-            var box = context.container().select('.more-fields').node().getBoundingClientRect();
+            var box = context
+                .container()
+                .select('.more-fields')
+                .node()
+                .getBoundingClientRect();
             if (box.top > 300) {
-                var pane = context.container().select('.entity-editor-pane .inspector-body');
+                var pane = context
+                    .container()
+                    .select('.entity-editor-pane .inspector-body');
                 var start = pane.node().scrollTop;
                 var end = start + (box.top - 300);
 
-                pane
-                    .transition()
+                pane.transition()
                     .duration(250)
-                    .tween('scroll.inspector', function() {
+                    .tween('scroll.inspector', function () {
                         var node = this;
                         var i = d3_interpolateNumber(start, end);
-                        return function(t) {
+                        return function (t) {
                             node.scrollTop = i(t);
                         };
                     });
             }
 
-            timeout(function() {
-                reveal('.more-fields .combobox-input',
+            timeout(function () {
+                reveal(
+                    '.more-fields .combobox-input',
                     helpHtml('intro.areas.add_field', {
                         name: nameField.title(),
-                        description: descriptionField.title()
+                        description: descriptionField.title(),
                     }),
-                    { duration: 300 }
+                    { duration: 300 },
                 );
 
-                context.container().select('.more-fields .combobox-input')
-                    .on('click.intro', function() {
+                context
+                    .container()
+                    .select('.more-fields .combobox-input')
+                    .on('click.intro', function () {
                         // Watch for the combobox to appear...
                         var watcher;
-                        watcher = window.setInterval(function() {
-                            if (!context.container().select('div.combobox').empty()) {
+                        watcher = window.setInterval(function () {
+                            if (
+                                !context
+                                    .container()
+                                    .select('div.combobox')
+                                    .empty()
+                            ) {
                                 window.clearInterval(watcher);
                                 continueTo(chooseDescriptionField);
                             }
                         }, 300);
                     });
-            }, 300);  // after "Add Field" visible
+            }, 300); // after "Add Field" visible
+        }, 400); // after editor pane visible
 
-        }, 400);  // after editor pane visible
-
-        context.on('exit.intro', function() {
+        context.on('exit.intro', function () {
             return continueTo(searchPresets);
         });
 
         function continueTo(nextStep) {
-            context.container().select('.inspector-wrap').on('wheel.intro', null);
-            context.container().select('.more-fields .combobox-input').on('click.intro', null);
+            context
+                .container()
+                .select('.inspector-wrap')
+                .on('wheel.intro', null);
+            context
+                .container()
+                .select('.more-fields .combobox-input')
+                .on('click.intro', null);
             context.on('exit.intro', null);
             nextStep();
         }
     }
-
 
     function chooseDescriptionField() {
         if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
         var ids = context.selectedIDs();
-        if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
+        if (
+            context.mode().id !== 'select' ||
+            !ids.length ||
+            ids[0] !== _areaID
+        ) {
             return searchPresets();
         }
 
@@ -381,25 +446,33 @@ export function uiIntroArea(context, reveal) {
         }
         // Watch for the combobox to go away..
         var watcher;
-        watcher = window.setInterval(function() {
+        watcher = window.setInterval(function () {
             if (context.container().select('div.combobox').empty()) {
                 window.clearInterval(watcher);
-                timeout(function() {
-                    if (context.container().select('.form-field-description').empty()) {
+                timeout(function () {
+                    if (
+                        context
+                            .container()
+                            .select('.form-field-description')
+                            .empty()
+                    ) {
                         continueTo(retryChooseDescription);
                     } else {
                         continueTo(describePlayground);
                     }
-                }, 300);  // after description field added.
+                }, 300); // after description field added.
             }
         }, 300);
 
-        reveal('div.combobox',
-            helpHtml('intro.areas.choose_field', { field: descriptionField.title() }),
-            { duration: 300 }
+        reveal(
+            'div.combobox',
+            helpHtml('intro.areas.choose_field', {
+                field: descriptionField.title(),
+            }),
+            { duration: 300 },
         );
 
-        context.on('exit.intro', function() {
+        context.on('exit.intro', function () {
             return continueTo(searchPresets);
         });
 
@@ -410,30 +483,39 @@ export function uiIntroArea(context, reveal) {
         }
     }
 
-
     function describePlayground() {
         if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
         var ids = context.selectedIDs();
-        if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
+        if (
+            context.mode().id !== 'select' ||
+            !ids.length ||
+            ids[0] !== _areaID
+        ) {
             return searchPresets();
         }
 
         // reset pane, in case user happened to change it..
-        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
+        context
+            .container()
+            .select('.inspector-wrap .panewrap')
+            .style('right', '0%');
 
         if (context.container().select('.form-field-description').empty()) {
             return continueTo(retryChooseDescription);
         }
 
-        context.on('exit.intro', function() {
+        context.on('exit.intro', function () {
             continueTo(play);
         });
 
-        reveal('.entity-editor-pane',
-            helpHtml('intro.areas.describe_playground', { button: { html: icon('#iD-icon-close', 'inline') } }),
-            { duration: 300 }
+        reveal(
+            '.entity-editor-pane',
+            helpHtml('intro.areas.describe_playground', {
+                button: { html: icon('#iD-icon-close', 'inline') },
+            }),
+            { duration: 300 },
         );
 
         function continueTo(nextStep) {
@@ -442,26 +524,39 @@ export function uiIntroArea(context, reveal) {
         }
     }
 
-
     function retryChooseDescription() {
         if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
         var ids = context.selectedIDs();
-        if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
+        if (
+            context.mode().id !== 'select' ||
+            !ids.length ||
+            ids[0] !== _areaID
+        ) {
             return searchPresets();
         }
 
         // reset pane, in case user happened to change it..
-        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
+        context
+            .container()
+            .select('.inspector-wrap .panewrap')
+            .style('right', '0%');
 
-        reveal('.entity-editor-pane',
-            helpHtml('intro.areas.retry_add_field', { field: descriptionField.title() }), {
-            buttonText: t.html('intro.ok'),
-            buttonCallback: function() { continueTo(clickAddField); }
-        });
+        reveal(
+            '.entity-editor-pane',
+            helpHtml('intro.areas.retry_add_field', {
+                field: descriptionField.title(),
+            }),
+            {
+                buttonText: t.html('intro.ok'),
+                buttonCallback: function () {
+                    continueTo(clickAddField);
+                },
+            },
+        );
 
-        context.on('exit.intro', function() {
+        context.on('exit.intro', function () {
             return continueTo(searchPresets);
         });
 
@@ -471,40 +566,45 @@ export function uiIntroArea(context, reveal) {
         }
     }
 
-
     function play() {
         dispatch.call('done');
-        reveal('.ideditor',
-            helpHtml('intro.areas.play', { next: t('intro.lines.title') }), {
+        reveal(
+            '.ideditor',
+            helpHtml('intro.areas.play', { next: t('intro.lines.title') }),
+            {
                 tooltipBox: '.intro-nav-wrap .chapter-line',
                 buttonText: t.html('intro.ok'),
-                buttonCallback: function() { reveal('.ideditor'); }
-            }
+                buttonCallback: function () {
+                    reveal('.ideditor');
+                },
+            },
         );
     }
 
-
-    chapter.enter = function() {
+    chapter.enter = function () {
         addArea();
     };
 
-
-    chapter.exit = function() {
+    chapter.exit = function () {
         timeouts.forEach(window.clearTimeout);
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
         context.container().select('.inspector-wrap').on('wheel.intro', null);
-        context.container().select('.preset-search-input').on('keydown.intro keyup.intro', null);
-        context.container().select('.more-fields .combobox-input').on('click.intro', null);
+        context
+            .container()
+            .select('.preset-search-input')
+            .on('keydown.intro keyup.intro', null);
+        context
+            .container()
+            .select('.more-fields .combobox-input')
+            .on('click.intro', null);
     };
 
-
-    chapter.restart = function() {
+    chapter.restart = function () {
         chapter.exit();
         chapter.enter();
     };
-
 
     return utilRebind(chapter, dispatch, 'on');
 }

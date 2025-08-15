@@ -38,6 +38,6 @@ If you believe that we hold information that would allow us to correct, amend, o
 
 ### Changelog
 
-* _2020-Dec-02_ - Add information about the JSDelivr CDN integration.
-* _2020-Apr-07_ - Update the iD GitHub repository file links to point to the `release` branch instead of the `master` branch.
-* _2019-Dec-17_ - Initial version.
+- _2020-Dec-02_ - Add information about the JSDelivr CDN integration.
+- _2020-Apr-07_ - Update the iD GitHub repository file links to point to the `release` branch instead of the `master` branch.
+- _2019-Dec-17_ - Initial version.

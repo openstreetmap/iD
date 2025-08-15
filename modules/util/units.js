@@ -1,6 +1,6 @@
 import { clamp } from 'lodash-es';
 
-import { t, localizer } from '../core/localizer';
+import { localizer, t } from '../core/localizer';
 
 var OSM_PRECISION = 7;
 
@@ -32,8 +32,8 @@ export function displayLength(m, isImperial) {
 
     return t('units.' + unit, {
         quantity: d.toLocaleString(localizer.localeCode(), {
-            maximumSignificantDigits: 4
-        })
+            maximumSignificantDigits: 4,
+        }),
     });
 }
 
@@ -51,7 +51,8 @@ export function displayArea(m2, isImperial) {
     var unit2 = '';
 
     if (isImperial) {
-        if (d >= 6969600) { // > 0.25mi² show mi²
+        if (d >= 6969600) {
+            // > 0.25mi² show mi²
             d1 = d / 27878400;
             unit1 = 'square_miles';
         } else {
@@ -59,13 +60,14 @@ export function displayArea(m2, isImperial) {
             unit1 = 'square_feet';
         }
 
-        if (d > 4356 && d < 43560000) { // 0.1 - 1000 acres
+        if (d > 4356 && d < 43560000) {
+            // 0.1 - 1000 acres
             d2 = d / 43560;
             unit2 = 'acres';
         }
-
     } else {
-        if (d >= 250000) { // > 0.25km² show km²
+        if (d >= 250000) {
+            // > 0.25km² show km²
             d1 = d / 1000000;
             unit1 = 'square_kilometers';
         } else {
@@ -73,7 +75,8 @@ export function displayArea(m2, isImperial) {
             unit1 = 'square_meters';
         }
 
-        if (d > 1000 && d < 10000000) { // 0.1 - 1000 hectares
+        if (d > 1000 && d < 10000000) {
+            // 0.1 - 1000 hectares
             d2 = d / 10000;
             unit2 = 'hectares';
         }
@@ -81,8 +84,8 @@ export function displayArea(m2, isImperial) {
 
     area = t('units.' + unit1, {
         quantity: d1.toLocaleString(locale, {
-            maximumSignificantDigits: 4
-        })
+            maximumSignificantDigits: 4,
+        }),
     });
 
     if (d2) {
@@ -90,9 +93,9 @@ export function displayArea(m2, isImperial) {
             area1: area,
             area2: t('units.' + unit2, {
                 quantity: d2.toLocaleString(locale, {
-                    maximumSignificantDigits: 2
-                })
-            })
+                    maximumSignificantDigits: 2,
+                }),
+            }),
         });
     } else {
         return area;
@@ -101,14 +104,14 @@ export function displayArea(m2, isImperial) {
 
 function wrap(x, min, max) {
     var d = max - min;
-    return ((x - min) % d + d) % d + min;
+    return ((((x - min) % d) + d) % d) + min;
 }
 
-function roundToDecimal (target, decimalPlace) {
+function roundToDecimal(target, decimalPlace) {
     target = Number(target);
     decimalPlace = Number(decimalPlace);
     const factor = Math.pow(10, decimalPlace);
-    return Math.round(target * factor) /  factor;
+    return Math.round(target * factor) / factor;
 }
 
 function displayCoordinate(deg, pos, neg) {
@@ -119,7 +122,6 @@ function displayCoordinate(deg, pos, neg) {
     var min = (Math.abs(deg) - degreesFloor) * 60;
     var minFloor = Math.floor(min);
     var sec = (min - minFloor) * 60;
-
 
     // if you input 45°,90°0'0.5" , sec should be 0.5 instead 0.499999…
     // in order to mitigate precision errors after calculating, round two time
@@ -138,23 +140,25 @@ function displayCoordinate(deg, pos, neg) {
     }
     displayCoordinate =
         t('units.arcdegrees', {
-            quantity: degreesFloor.toLocaleString(locale)
+            quantity: degreesFloor.toLocaleString(locale),
         }) +
-        (minFloor !== 0 || secRounded !== 0 ?
-            t('units.arcminutes', {
-                quantity: minFloor.toLocaleString(locale)
-            }) : '') +
-        (secRounded !== 0 ?
-            t('units.arcseconds', {
-                quantity: secRounded.toLocaleString(locale)
-            }) : '' );
+        (minFloor !== 0 || secRounded !== 0
+            ? t('units.arcminutes', {
+                  quantity: minFloor.toLocaleString(locale),
+              })
+            : '') +
+        (secRounded !== 0
+            ? t('units.arcseconds', {
+                  quantity: secRounded.toLocaleString(locale),
+              })
+            : '');
 
     if (deg === 0) {
         return displayCoordinate;
     } else {
         return t('units.coordinate', {
             coordinate: displayCoordinate,
-            direction: t('units.' + (deg > 0 ? pos : neg))
+            direction: t('units.' + (deg > 0 ? pos : neg)),
         });
     }
 }
@@ -167,7 +171,7 @@ function displayCoordinate(deg, pos, neg) {
 export function dmsCoordinatePair(coord) {
     return t('units.coordinate_pair', {
         latitude: displayCoordinate(clamp(coord[1], -90, 90), 'north', 'south'),
-        longitude: displayCoordinate(wrap(coord[0], -180, 180), 'east', 'west')
+        longitude: displayCoordinate(wrap(coord[0], -180, 180), 'east', 'west'),
     });
 }
 
@@ -180,7 +184,7 @@ export function dmsCoordinatePair(coord) {
 export function decimalCoordinatePair(coord) {
     return t('units.coordinate_pair', {
         latitude: clamp(coord[1], -90, 90).toFixed(OSM_PRECISION),
-        longitude: wrap(coord[0], -180, 180).toFixed(OSM_PRECISION)
+        longitude: wrap(coord[0], -180, 180).toFixed(OSM_PRECISION),
     });
 }
 
@@ -190,55 +194,60 @@ export function dmsMatcher(q, _localeCode = undefined) {
     const matchers = [
         // D M SS , D M SS  ex: 35 11 10.1 , 136 49 53.8
         {
-            condition: /^\s*(-?)\s*(\d+)\s+(\d+)\s+(\d+\.?\d*)\s*\,\s*(-?)\s*(\d+)\s+(\d+)\s+(\d+\.?\d*)\s*$/,
-            parser: function(q) {
+            condition:
+                /^\s*(-?)\s*(\d+)\s+(\d+)\s+(\d+\.?\d*)\s*\,\s*(-?)\s*(\d+)\s+(\d+)\s+(\d+\.?\d*)\s*$/,
+            parser: function (q) {
                 const match = this.condition.exec(q);
-                const lat = (+match[2]) + (+match[3]) / 60 + (+match[4]) / 3600;
-                const lng = (+match[6]) + (+match[7]) / 60 + (+match[8]) / 3600;
+                const lat = +match[2] + +match[3] / 60 + +match[4] / 3600;
+                const lng = +match[6] + +match[7] / 60 + +match[8] / 3600;
                 const isNegLat = match[1] === '-' ? -lat : lat;
                 const isNegLng = match[5] === '-' ? -lng : lng;
                 return [isNegLat, isNegLng];
-            }
+            },
         },
         // D MM , D MM ex: 35 11.1683 , 136 49.8966
         {
-            condition: /^\s*(-?)\s*(\d+)\s+(\d+\.?\d*)\s*\,\s*(-?)\s*(\d+)\s+(\d+\.?\d*)\s*$/,
-            parser: function(q) {
+            condition:
+                /^\s*(-?)\s*(\d+)\s+(\d+\.?\d*)\s*\,\s*(-?)\s*(\d+)\s+(\d+\.?\d*)\s*$/,
+            parser: function (q) {
                 const match = this.condition.exec(q);
-                const lat = +match[2] + (+match[3]) / 60;
-                const lng = +match[5] + (+match[6]) / 60;
+                const lat = +match[2] + +match[3] / 60;
+                const lng = +match[5] + +match[6] / 60;
                 const isNegLat = match[1] === '-' ? -lat : lat;
                 const isNegLng = match[4] === '-' ? -lng : lng;
                 return [isNegLat, isNegLng];
-            }
+            },
         },
         // D/D ex: 46.112785/72.921033
         {
             condition: /^\s*(-?\d+\.?\d*)\s*\/\s*(-?\d+\.?\d*)\s*$/,
-            parser: function(q) {
+            parser: function (q) {
                 const match = this.condition.exec(q);
                 return [+match[1], +match[2]];
-            }
+            },
         },
         // zoom/x/y ex: 2/1.23/34.44
         {
-            condition: /^\s*(\d+\.?\d*)\s*\/\s*(-?\d+\.?\d*)\s*\/\s*(-?\d+\.?\d*)\s*$/,
-            parser: function(q) {
+            condition:
+                /^\s*(\d+\.?\d*)\s*\/\s*(-?\d+\.?\d*)\s*\/\s*(-?\d+\.?\d*)\s*$/,
+            parser: function (q) {
                 const match = this.condition.exec(q);
                 const lat = +match[2];
                 const lng = +match[3];
                 const zoom = +match[1];
                 return [lat, lng, zoom];
-            }
+            },
         },
         // x/y , x, y , x y  where x and y are localized floats, e.g. in German locale: 49,4109399, 8,7147086
         {
-            condition: { test: q => !!localizedNumberCoordsParser(q) },
-            parser: localizedNumberCoordsParser
-        }
+            condition: { test: (q) => !!localizedNumberCoordsParser(q) },
+            parser: localizedNumberCoordsParser,
+        },
     ];
     function localizedNumberCoordsParser(q) {
-        const parseLocaleFloat = localizer.floatParser(_localeCode || localizer.localeCode());
+        const parseLocaleFloat = localizer.floatParser(
+            _localeCode || localizer.localeCode(),
+        );
         let parts = q.split(/,?\s+|\s*[\/\\]\s*/);
         if (parts.length !== 2) return false;
         const lat = parseLocaleFloat(parts[0]);
@@ -247,7 +256,7 @@ export function dmsMatcher(q, _localeCode = undefined) {
         return [lat, lng];
     }
     for (const matcher of matchers) {
-        if (matcher.condition.test(q)){
+        if (matcher.condition.test(q)) {
             return matcher.parser(q);
         }
     }

@@ -1,11 +1,12 @@
-import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
-import { svgPath, svgPointTransform } from './helpers';
+import _throttle from 'lodash-es/throttle';
 import { services } from '../services';
-
+import { svgPath, svgPointTransform } from './helpers';
 
 export function svgStreetside(projection, context, dispatch) {
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    var throttledRedraw = _throttle(function () {
+        dispatch.call('change');
+    }, 1000);
     var minZoom = 14;
     var minMarkerZoom = 16;
     var minViewfieldZoom = 18;
@@ -18,7 +19,7 @@ export function svgStreetside(projection, context, dispatch) {
      * init().
      */
     function init() {
-        if (svgStreetside.initialized) return;  // run once
+        if (svgStreetside.initialized) return; // run once
         svgStreetside.enabled = false;
         svgStreetside.initialized = true;
     }
@@ -53,7 +54,9 @@ export function svgStreetside(projection, context, dispatch) {
             .transition()
             .duration(250)
             .style('opacity', 1)
-            .on('end', function () { dispatch.call('change'); });
+            .on('end', function () {
+                dispatch.call('change');
+            });
     }
 
     /**
@@ -62,11 +65,7 @@ export function svgStreetside(projection, context, dispatch) {
     function hideLayer() {
         throttledRedraw.cancel();
 
-        layer
-            .transition()
-            .duration(250)
-            .style('opacity', 0)
-            .on('end', editOff);
+        layer.transition().duration(250).style('opacity', 0).on('end', editOff);
     }
 
     /**
@@ -93,18 +92,16 @@ export function svgStreetside(projection, context, dispatch) {
 
         // try to preserve the viewer rotation when staying on the same sequence
         if (d.sequenceKey !== _selectedSequence) {
-            _viewerYaw = 0;  // reset
+            _viewerYaw = 0; // reset
         }
         _selectedSequence = d.sequenceKey;
 
-        service
-            .ensureViewerLoaded(context)
-            .then(function() {
-                service
-                    .selectImage(context, d.key)
-                    .yaw(_viewerYaw)
-                    .showViewer(context);
-            });
+        service.ensureViewerLoaded(context).then(function () {
+            service
+                .selectImage(context, d.key)
+                .yaw(_viewerYaw)
+                .showViewer(context);
+        });
 
         context.map().centerEase(d.loc);
     }
@@ -137,7 +134,6 @@ export function svgStreetside(projection, context, dispatch) {
         return t;
     }
 
-
     function viewerChanged() {
         var service = getService();
         if (!service) return;
@@ -152,10 +148,10 @@ export function svgStreetside(projection, context, dispatch) {
         // e.g. during drags or easing.
         if (context.map().isTransformed()) return;
 
-        layer.selectAll('.viewfield-group.currentView')
+        layer
+            .selectAll('.viewfield-group.currentView')
             .attr('transform', transform);
     }
-
 
     function filterBubbles(bubbles, skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
@@ -164,18 +160,18 @@ export function svgStreetside(projection, context, dispatch) {
 
         if (fromDate && !skipDateFilter) {
             var fromTimestamp = new Date(fromDate).getTime();
-            bubbles = bubbles.filter(function(bubble) {
+            bubbles = bubbles.filter(function (bubble) {
                 return new Date(bubble.captured_at).getTime() >= fromTimestamp;
             });
         }
         if (toDate && !skipDateFilter) {
             var toTimestamp = new Date(toDate).getTime();
-            bubbles = bubbles.filter(function(bubble) {
+            bubbles = bubbles.filter(function (bubble) {
                 return new Date(bubble.captured_at).getTime() <= toTimestamp;
             });
         }
         if (usernames) {
-            bubbles = bubbles.filter(function(bubble) {
+            bubbles = bubbles.filter(function (bubble) {
                 return usernames.indexOf(bubble.captured_by) !== -1;
             });
         }
@@ -190,19 +186,27 @@ export function svgStreetside(projection, context, dispatch) {
 
         if (fromDate && !skipDateFilter) {
             var fromTimestamp = new Date(fromDate).getTime();
-            sequences = sequences.filter(function(sequences) {
-                return new Date(sequences.properties.captured_at).getTime() >= fromTimestamp;
+            sequences = sequences.filter(function (sequences) {
+                return (
+                    new Date(sequences.properties.captured_at).getTime() >=
+                    fromTimestamp
+                );
             });
         }
         if (toDate && !skipDateFilter) {
             var toTimestamp = new Date(toDate).getTime();
-            sequences = sequences.filter(function(sequences) {
-                return new Date(sequences.properties.captured_at).getTime() <= toTimestamp;
+            sequences = sequences.filter(function (sequences) {
+                return (
+                    new Date(sequences.properties.captured_at).getTime() <=
+                    toTimestamp
+                );
             });
         }
         if (usernames) {
-            sequences = sequences.filter(function(sequences) {
-                return usernames.indexOf(sequences.properties.captured_by) !== -1;
+            sequences = sequences.filter(function (sequences) {
+                return (
+                    usernames.indexOf(sequences.properties.captured_by) !== -1
+                );
             });
         }
 
@@ -216,74 +220,82 @@ export function svgStreetside(projection, context, dispatch) {
         var viewer = context.container().select('.photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
         var z = ~~context.map().zoom();
-        var showMarkers = (z >= minMarkerZoom);
-        var showViewfields = (z >= minViewfieldZoom);
+        var showMarkers = z >= minMarkerZoom;
+        var showViewfields = z >= minViewfieldZoom;
         var service = getService();
 
         var sequences = [];
         var bubbles = [];
 
         if (context.photos().showsPanoramic()) {
-            sequences = (service ? service.sequences(projection) : []);
-            bubbles = (service && showMarkers ? service.bubbles(projection) : []);
+            sequences = service ? service.sequences(projection) : [];
+            bubbles = service && showMarkers ? service.bubbles(projection) : [];
             sequences = filterSequences(sequences);
             bubbles = filterBubbles(bubbles);
         }
 
-        var traces = layer.selectAll('.sequences').selectAll('.sequence')
-            .data(sequences, function(d) { return d.properties.key; });
+        var traces = layer
+            .selectAll('.sequences')
+            .selectAll('.sequence')
+            .data(sequences, function (d) {
+                return d.properties.key;
+            });
 
         dispatch.call('photoDatesChanged', this, 'streetside', [
-            ...filterBubbles(bubbles, true).map(p => p.captured_at),
-            ...filterSequences(sequences, true).map(t => t.properties.vintageStart)]);
+            ...filterBubbles(bubbles, true).map((p) => p.captured_at),
+            ...filterSequences(sequences, true).map(
+                (t) => t.properties.vintageStart,
+            ),
+        ]);
 
         // exit
-        traces.exit()
-            .remove();
+        traces.exit().remove();
 
         // enter/update
-        traces = traces.enter()
+        traces = traces
+            .enter()
             .append('path')
             .attr('class', 'sequence')
             .merge(traces)
             .attr('d', svgPath(projection).geojson);
 
-
-        var groups = layer.selectAll('.markers').selectAll('.viewfield-group')
-            .data(bubbles, function(d) {
+        var groups = layer
+            .selectAll('.markers')
+            .selectAll('.viewfield-group')
+            .data(bubbles, function (d) {
                 // force reenter once bubbles are attached to a sequence
                 return d.key + (d.sequenceKey ? 'v1' : 'v0');
             });
 
         // exit
-        groups.exit()
-            .remove();
+        groups.exit().remove();
 
         // enter
-        var groupsEnter = groups.enter()
+        var groupsEnter = groups
+            .enter()
             .append('g')
             .attr('class', 'viewfield-group')
             .on('mouseenter', mouseover)
             .on('mouseleave', mouseout)
             .on('click', click);
 
-        groupsEnter
-            .append('g')
-            .attr('class', 'viewfield-scale');
+        groupsEnter.append('g').attr('class', 'viewfield-scale');
 
         // update
         var markers = groups
             .merge(groupsEnter)
-            .sort(function(a, b) {
-                return (a === selected) ? 1
-                    : (b === selected) ? -1
-                    : b.loc[1] - a.loc[1];
+            .sort(function (a, b) {
+                return a === selected
+                    ? 1
+                    : b === selected
+                      ? -1
+                      : b.loc[1] - a.loc[1];
             })
             .attr('transform', transform)
             .select('.viewfield-scale');
 
-
-        markers.selectAll('circle')
+        markers
+            .selectAll('circle')
             .data([0])
             .enter()
             .append('circle')
@@ -291,15 +303,16 @@ export function svgStreetside(projection, context, dispatch) {
             .attr('dy', '0')
             .attr('r', '6');
 
-        var viewfields = markers.selectAll('.viewfield')
+        var viewfields = markers
+            .selectAll('.viewfield')
             .data(showViewfields ? [0] : []);
 
-        viewfields.exit()
-            .remove();
+        viewfields.exit().remove();
 
         // viewfields may or may not be drawn...
         // but if they are, draw below the circles
-        viewfields.enter()
+        viewfields
+            .enter()
             .insert('path', 'circle')
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
@@ -313,7 +326,6 @@ export function svgStreetside(projection, context, dispatch) {
                 return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
             }
         }
-
     }
 
     /**
@@ -325,27 +337,23 @@ export function svgStreetside(projection, context, dispatch) {
         var enabled = svgStreetside.enabled;
         var service = getService();
 
-        layer = selection.selectAll('.layer-streetside-images')
+        layer = selection
+            .selectAll('.layer-streetside-images')
             .data(service ? [0] : []);
 
-        layer.exit()
-            .remove();
+        layer.exit().remove();
 
-        var layerEnter = layer.enter()
+        var layerEnter = layer
+            .enter()
             .append('g')
             .attr('class', 'layer-streetside-images')
             .style('display', enabled ? 'block' : 'none');
 
-        layerEnter
-            .append('g')
-            .attr('class', 'sequences');
+        layerEnter.append('g').attr('class', 'sequences');
 
-        layerEnter
-            .append('g')
-            .attr('class', 'markers');
+        layerEnter.append('g').attr('class', 'markers');
 
-        layer = layerEnter
-            .merge(layer);
+        layer = layerEnter.merge(layer);
 
         if (enabled) {
             if (service && ~~context.map().zoom() >= minZoom) {
@@ -361,11 +369,10 @@ export function svgStreetside(projection, context, dispatch) {
         }
     }
 
-
     /**
      * drawImages.enabled().
      */
-    drawImages.enabled = function(_) {
+    drawImages.enabled = function (_) {
         if (!arguments.length) return svgStreetside.enabled;
         svgStreetside.enabled = _;
         if (svgStreetside.enabled) {
@@ -382,12 +389,12 @@ export function svgStreetside(projection, context, dispatch) {
     /**
      * drawImages.supported().
      */
-    drawImages.supported = function() {
+    drawImages.supported = function () {
         return !!getService();
     };
 
-    drawImages.rendered = function(zoom) {
-      return zoom >= minZoom;
+    drawImages.rendered = function (zoom) {
+        return zoom >= minZoom;
     };
 
     init();

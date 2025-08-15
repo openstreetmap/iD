@@ -8,7 +8,7 @@
   {
     "countryCodes": ["au"],
     "format": [
-      ["unit","housenumber", "street"],
+      ["unit", "housenumber", "street"],
       ["suburb", "state", "postcode"]
     ]
   },
@@ -47,8 +47,18 @@
   },
   {
     "countryCodes": [
-      "ad", "ba", "be", "dk", "es", "gr", "hr",
-      "it", "pt", "se", "sm", "va"
+      "ad",
+      "ba",
+      "be",
+      "dk",
+      "es",
+      "gr",
+      "hr",
+      "it",
+      "pt",
+      "se",
+      "sm",
+      "va"
     ],
     "format": [
       ["street+place", "housenumber", "unit"],
@@ -56,9 +66,7 @@
     ]
   },
   {
-    "countryCodes": [
-        "fi", "is", "li", "nl", "no"
-    ],
+    "countryCodes": ["fi", "is", "li", "nl", "no"],
     "format": [
       ["street", "housenumber", "unit"],
       ["postcode", "city"]
@@ -80,11 +88,7 @@
   },
   {
     "countryCodes": ["nz"],
-    "format": [
-      ["housenumber", "street"],
-      ["suburb"],
-      ["city", "postcode"]
-    ]
+    "format": [["housenumber", "street"], ["suburb"], ["city", "postcode"]]
   },
   {
     "countryCodes": ["br"],
@@ -165,10 +169,7 @@
   },
   {
     "countryCodes": ["ua"],
-    "format": [
-      ["housenumber", "postcode"],
-      ["street+place"]
-    ]
+    "format": [["housenumber", "postcode"], ["street+place"]]
   },
   {
     "countryCodes": ["cn"],
@@ -243,11 +244,7 @@
   },
   {
     "countryCodes": ["in"],
-    "format": [
-      ["housenumber", "street"],
-      ["city", "postcode"],
-      ["district"]
-    ]
+    "format": [["housenumber", "street"], ["city", "postcode"], ["district"]]
   },
   {
     "countryCodes": ["ru"],
@@ -267,8 +264,8 @@
     "countryCodes": ["ph"],
     "format": [
       ["unit", "housename", "housenumber", "street"],
-	  ["neighbourhood", "district", "city"],
-	  ["postcode", "province"]
+      ["neighbourhood", "district", "city"],
+      ["postcode", "province"]
     ]
   },
   {

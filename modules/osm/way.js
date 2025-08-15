@@ -1,10 +1,18 @@
 import { geoArea as d3_geoArea } from 'd3-geo';
 
 import { geoExtent, geoVecCross } from '../geo';
+import { utilArrayUniq, utilCheckTagDictionary } from '../util';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
-import { osmTagSuggestingArea, osmRightSideIsInsideTags, osmRemoveLifecyclePrefix, osmOneWayBiDirectionalTags, osmOneWayBackwardTags, osmOneWayForwardTags, osmOneWayTags } from './tags';
-import { utilArrayUniq, utilCheckTagDictionary } from '../util';
+import {
+    osmOneWayBackwardTags,
+    osmOneWayBiDirectionalTags,
+    osmOneWayForwardTags,
+    osmOneWayTags,
+    osmRemoveLifecyclePrefix,
+    osmRightSideIsInsideTags,
+    osmTagSuggestingArea,
+} from './tags';
 
 /**
  * @typedef {typeof prototype & iD.AbstractEntity} OsmWay
@@ -12,29 +20,26 @@ import { utilArrayUniq, utilCheckTagDictionary } from '../util';
  */
 export function osmWay() {
     if (!(this instanceof osmWay)) {
-        return (new osmWay()).initialize(arguments);
+        return new osmWay().initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
 }
 
-
 osmEntity.way = osmWay;
 
 osmWay.prototype = Object.create(osmEntity.prototype);
-
 
 const prototype = {
     type: 'way',
     nodes: [],
 
-
-    copy: function(resolver, copies) {
+    copy: function (resolver, copies) {
         if (copies[this.id]) return copies[this.id];
 
         var copy = osmEntity.prototype.copy.call(this, resolver, copies);
 
-        var nodes = this.nodes.map(function(id) {
+        var nodes = this.nodes.map(function (id) {
             return resolver.entity(id).copy(resolver, copies).id;
         });
 
@@ -44,9 +49,8 @@ const prototype = {
         return copy;
     },
 
-
-    extent: function(resolver) {
-        return resolver.transient(this, 'extent', function() {
+    extent: function (resolver) {
+        return resolver.transient(this, 'extent', function () {
             var extent = geoExtent();
             for (var i = 0; i < this.nodes.length; i++) {
                 var node = resolver.hasEntity(this.nodes[i]);
@@ -58,32 +62,27 @@ const prototype = {
         });
     },
 
-
-    first: function() {
+    first: function () {
         return this.nodes[0];
     },
 
-
-    last: function() {
+    last: function () {
         return this.nodes[this.nodes.length - 1];
     },
 
-
-    contains: function(node) {
+    contains: function (node) {
         return this.nodes.indexOf(node) >= 0;
     },
 
-
-    affix: function(node) {
+    affix: function (node) {
         if (this.nodes[0] === node) return 'prefix';
         if (this.nodes[this.nodes.length - 1] === node) return 'suffix';
     },
 
-
-    layer: function() {
+    layer: function () {
         // explicit layer tag, clamp between -10, 10..
         if (isFinite(this.tags.layer)) {
-            return Math.max(-10, Math.min(+(this.tags.layer), 10));
+            return Math.max(-10, Math.min(+this.tags.layer, 10));
         }
 
         // implied layer tag..
@@ -104,32 +103,67 @@ const prototype = {
         return 0;
     },
 
-
     // the approximate width of the line based on its tags except its `width` tag
-    impliedLineWidthMeters: function() {
+    impliedLineWidthMeters: function () {
         var averageWidths = {
-            highway: { // width is for single lane
-                motorway: 5, motorway_link: 5, trunk: 4.5, trunk_link: 4.5,
-                primary: 4, secondary: 4, tertiary: 4,
-                primary_link: 4, secondary_link: 4, tertiary_link: 4,
-                unclassified: 4, road: 4, living_street: 4, bus_guideway: 4, busway: 4, pedestrian: 4,
-                residential: 3.5, service: 3.5, track: 3, cycleway: 2.5,
-                bridleway: 2, corridor: 2, steps: 2, path: 1.5, footway: 1.5, ladder: 0.5,
+            highway: {
+                // width is for single lane
+                motorway: 5,
+                motorway_link: 5,
+                trunk: 4.5,
+                trunk_link: 4.5,
+                primary: 4,
+                secondary: 4,
+                tertiary: 4,
+                primary_link: 4,
+                secondary_link: 4,
+                tertiary_link: 4,
+                unclassified: 4,
+                road: 4,
+                living_street: 4,
+                bus_guideway: 4,
+                busway: 4,
+                pedestrian: 4,
+                residential: 3.5,
+                service: 3.5,
+                track: 3,
+                cycleway: 2.5,
+                bridleway: 2,
+                corridor: 2,
+                steps: 2,
+                path: 1.5,
+                footway: 1.5,
+                ladder: 0.5,
             },
-            railway: { // width includes ties and rail bed, not just track gauge
-                rail: 2.5, light_rail: 2.5, tram: 2.5, subway: 2.5,
-                monorail: 2.5, funicular: 2.5, disused: 2.5, preserved: 2.5,
-                miniature: 1.5, narrow_gauge: 1.5
+            railway: {
+                // width includes ties and rail bed, not just track gauge
+                rail: 2.5,
+                light_rail: 2.5,
+                tram: 2.5,
+                subway: 2.5,
+                monorail: 2.5,
+                funicular: 2.5,
+                disused: 2.5,
+                preserved: 2.5,
+                miniature: 1.5,
+                narrow_gauge: 1.5,
             },
             waterway: {
-                river: 50, canal: 25, stream: 5, tidal_channel: 5, fish_pass: 2.5, drain: 2.5, ditch: 1.5
-            }
+                river: 50,
+                canal: 25,
+                stream: 5,
+                tidal_channel: 5,
+                fish_pass: 2.5,
+                drain: 2.5,
+                ditch: 1.5,
+            },
         };
         for (var key in averageWidths) {
             if (this.tags[key] && averageWidths[key][this.tags[key]]) {
                 var width = averageWidths[key][this.tags[key]];
                 if (key === 'highway') {
-                    var laneCount = this.tags.lanes && parseInt(this.tags.lanes, 10);
+                    var laneCount =
+                        this.tags.lanes && parseInt(this.tags.lanes, 10);
                     if (!laneCount) laneCount = this.isOneWay() ? 1 : 2;
 
                     return width * laneCount;
@@ -139,7 +173,6 @@ const prototype = {
         }
         return null;
     },
-
 
     /** @returns {boolean} for example, if `oneway=yes` */
     isOneWayForwards() {
@@ -172,11 +205,14 @@ const prototype = {
     // Some identifier for tag that implies that this way is "sided",
     // i.e. the right side is the 'inside' (e.g. the right side of a
     // natural=cliff is lower).
-    sidednessIdentifier: function() {
+    sidednessIdentifier: function () {
         for (const realKey in this.tags) {
             const value = this.tags[realKey];
             const key = osmRemoveLifecyclePrefix(realKey);
-            if (key in osmRightSideIsInsideTags && (value in osmRightSideIsInsideTags[key])) {
+            if (
+                key in osmRightSideIsInsideTags &&
+                value in osmRightSideIsInsideTags[key]
+            ) {
                 if (osmRightSideIsInsideTags[key][value] === true) {
                     return key;
                 } else {
@@ -192,7 +228,7 @@ const prototype = {
         return null;
     },
 
-    isSided: function() {
+    isSided: function () {
         if (this.tags.two_sided === 'yes') {
             return false;
         }
@@ -200,31 +236,31 @@ const prototype = {
         return this.sidednessIdentifier() !== null;
     },
 
-    lanes: function() {
+    lanes: function () {
         return osmLanes(this);
     },
 
-
-    isClosed: function() {
+    isClosed: function () {
         return this.nodes.length > 1 && this.first() === this.last();
     },
 
-
-    isConvex: function(resolver) {
+    isConvex: function (resolver) {
         if (!this.isClosed() || this.isDegenerate()) return null;
 
         var nodes = utilArrayUniq(resolver.childNodes(this));
-        var coords = nodes.map(function(n) { return n.loc; });
+        var coords = nodes.map(function (n) {
+            return n.loc;
+        });
         var curr = 0;
         var prev = 0;
 
         for (var i = 0; i < coords.length; i++) {
-            var o = coords[(i+1) % coords.length];
+            var o = coords[(i + 1) % coords.length];
             var a = coords[i];
-            var b = coords[(i+2) % coords.length];
+            var b = coords[(i + 2) % coords.length];
             var res = geoVecCross(a, b, o);
 
-            curr = (res > 0) ? 1 : (res < 0) ? -1 : 0;
+            curr = res > 0 ? 1 : res < 0 ? -1 : 0;
             if (curr === 0) {
                 continue;
             } else if (prev && curr !== prev) {
@@ -236,23 +272,21 @@ const prototype = {
     },
 
     // returns an object with the tag that implies this is an area, if any
-    tagSuggestingArea: function() {
+    tagSuggestingArea: function () {
         return osmTagSuggestingArea(this.tags);
     },
 
-    isArea: function() {
+    isArea: function () {
         if (this.tags.area === 'yes') return true;
         if (!this.isClosed() || this.tags.area === 'no') return false;
         return this.tagSuggestingArea() !== null;
     },
 
-
-    isDegenerate: function() {
-        return (new Set(this.nodes).size < (this.isClosed() ? 3 : 2));
+    isDegenerate: function () {
+        return new Set(this.nodes).size < (this.isClosed() ? 3 : 2);
     },
 
-
-    areAdjacent: function(n1, n2) {
+    areAdjacent: function (n1, n2) {
         for (var i = 0; i < this.nodes.length; i++) {
             if (this.nodes[i] === n1) {
                 if (this.nodes[i - 1] === n2) return true;
@@ -262,33 +296,34 @@ const prototype = {
         return false;
     },
 
-
-    geometry: function(graph) {
-        return graph.transient(this, 'geometry', function() {
+    geometry: function (graph) {
+        return graph.transient(this, 'geometry', function () {
             return this.isArea() ? 'area' : 'line';
         });
     },
 
-
     // returns an array of objects representing the segments between the nodes in this way
-    segments: function(graph) {
-
+    segments: function (graph) {
         function segmentExtent(graph) {
             var n1 = graph.hasEntity(this.nodes[0]);
             var n2 = graph.hasEntity(this.nodes[1]);
-            return n1 && n2 && geoExtent([
-                [
-                    Math.min(n1.loc[0], n2.loc[0]),
-                    Math.min(n1.loc[1], n2.loc[1])
-                ],
-                [
-                    Math.max(n1.loc[0], n2.loc[0]),
-                    Math.max(n1.loc[1], n2.loc[1])
-                ]
-            ]);
+            return (
+                n1 &&
+                n2 &&
+                geoExtent([
+                    [
+                        Math.min(n1.loc[0], n2.loc[0]),
+                        Math.min(n1.loc[1], n2.loc[1]),
+                    ],
+                    [
+                        Math.max(n1.loc[0], n2.loc[0]),
+                        Math.max(n1.loc[1], n2.loc[1]),
+                    ],
+                ])
+            );
         }
 
-        return graph.transient(this, 'segments', function() {
+        return graph.transient(this, 'segments', function () {
             var segments = [];
             for (var i = 0; i < this.nodes.length - 1; i++) {
                 segments.push({
@@ -296,16 +331,15 @@ const prototype = {
                     wayId: this.id,
                     index: i,
                     nodes: [this.nodes[i], this.nodes[i + 1]],
-                    extent: segmentExtent
+                    extent: segmentExtent,
                 });
             }
             return segments;
         });
     },
 
-
     // If this way is not closed, append the beginning node to the end of the nodelist to close it.
-    close: function() {
+    close: function () {
         if (this.isClosed() || !this.nodes.length) return this;
 
         var nodes = this.nodes.slice();
@@ -314,9 +348,8 @@ const prototype = {
         return this.update({ nodes: nodes });
     },
 
-
     // If this way is closed, remove any connector nodes from the end of the nodelist to unclose it.
-    unclose: function() {
+    unclose: function () {
         if (!this.isClosed()) return this;
 
         var nodes = this.nodes.slice();
@@ -333,13 +366,12 @@ const prototype = {
         return this.update({ nodes: nodes });
     },
 
-
     // Adds a node (id) in front of the node which is currently at position index.
     // If index is undefined, the node will be added to the end of the way for linear ways,
     //   or just before the final connecting node for circular ways.
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is always preserved when adding a node.
-    addNode: function(id, index) {
+    addNode: function (id, index) {
         var nodes = this.nodes.slice();
         var isClosed = this.isClosed();
         var max = isClosed ? nodes.length - 1 : nodes.length;
@@ -359,7 +391,11 @@ const prototype = {
 
             // leading connectors..
             var i = 1;
-            while (i < nodes.length && nodes.length > 2 && nodes[i] === connector) {
+            while (
+                i < nodes.length &&
+                nodes.length > 2 &&
+                nodes[i] === connector
+            ) {
                 nodes.splice(i, 1);
                 if (index > i) index--;
             }
@@ -377,18 +413,20 @@ const prototype = {
         nodes = nodes.filter(noRepeatNodes);
 
         // If the way was closed before, append a connector node to keep it closed..
-        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
+        if (
+            isClosed &&
+            (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])
+        ) {
             nodes.push(nodes[0]);
         }
 
         return this.update({ nodes: nodes });
     },
 
-
     // Replaces the node which is currently at position index with the given node (id).
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is preserved when updating a node.
-    updateNode: function(id, index) {
+    updateNode: function (id, index) {
         var nodes = this.nodes.slice();
         var isClosed = this.isClosed();
         var max = nodes.length - 1;
@@ -404,7 +442,11 @@ const prototype = {
 
             // leading connectors..
             var i = 1;
-            while (i < nodes.length && nodes.length > 2 && nodes[i] === connector) {
+            while (
+                i < nodes.length &&
+                nodes.length > 2 &&
+                nodes[i] === connector
+            ) {
                 nodes.splice(i, 1);
                 if (index > i) index--;
             }
@@ -413,7 +455,7 @@ const prototype = {
             i = nodes.length - 1;
             while (i > 0 && nodes.length > 1 && nodes[i] === connector) {
                 nodes.splice(i, 1);
-                if (index === i) index = 0;  // update leading connector instead
+                if (index === i) index = 0; // update leading connector instead
                 i = nodes.length - 1;
             }
         }
@@ -422,18 +464,20 @@ const prototype = {
         nodes = nodes.filter(noRepeatNodes);
 
         // If the way was closed before, append a connector node to keep it closed..
-        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
+        if (
+            isClosed &&
+            (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])
+        ) {
             nodes.push(nodes[0]);
         }
 
-        return this.update({nodes: nodes});
+        return this.update({ nodes: nodes });
     },
-
 
     // Replaces each occurrence of node id needle with replacement.
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is preserved.
-    replaceNode: function(needleID, replacementID) {
+    replaceNode: function (needleID, replacementID) {
         var nodes = this.nodes.slice();
         var isClosed = this.isClosed();
 
@@ -446,46 +490,52 @@ const prototype = {
         nodes = nodes.filter(noRepeatNodes);
 
         // If the way was closed before, append a connector node to keep it closed..
-        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
+        if (
+            isClosed &&
+            (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])
+        ) {
             nodes.push(nodes[0]);
         }
 
-        return this.update({nodes: nodes});
+        return this.update({ nodes: nodes });
     },
-
 
     // Removes each occurrence of node id.
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is preserved.
-    removeNode: function(id) {
+    removeNode: function (id) {
         var nodes = this.nodes.slice();
         var isClosed = this.isClosed();
 
         nodes = nodes
-            .filter(function(node) { return node !== id; })
+            .filter(function (node) {
+                return node !== id;
+            })
             .filter(noRepeatNodes);
 
         // If the way was closed before, append a connector node to keep it closed..
-        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
+        if (
+            isClosed &&
+            (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])
+        ) {
             nodes.push(nodes[0]);
         }
 
-        return this.update({nodes: nodes});
+        return this.update({ nodes: nodes });
     },
 
-
-    asJXON: function(changeset_id) {
+    asJXON: function (changeset_id) {
         var r = {
             way: {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
-                nd: this.nodes.map(function(id) {
+                nd: this.nodes.map(function (id) {
                     return { keyAttributes: { ref: osmEntity.id.toOSM(id) } };
                 }, this),
-                tag: Object.keys(this.tags).map(function(k) {
+                tag: Object.keys(this.tags).map(function (k) {
                     return { keyAttributes: { k: k, v: this.tags[k] } };
-                }, this)
-            }
+                }, this),
+            },
         };
         if (changeset_id) {
             r.way['@changeset'] = changeset_id;
@@ -493,34 +543,37 @@ const prototype = {
         return r;
     },
 
-
-    asGeoJSON: function(resolver) {
-        return resolver.transient(this, 'GeoJSON', function() {
-            var coordinates = resolver.childNodes(this)
-                .map(function(n) { return n.loc; });
+    asGeoJSON: function (resolver) {
+        return resolver.transient(this, 'GeoJSON', function () {
+            var coordinates = resolver.childNodes(this).map(function (n) {
+                return n.loc;
+            });
 
             if (this.isArea() && this.isClosed()) {
                 return {
                     type: 'Polygon',
-                    coordinates: [coordinates]
+                    coordinates: [coordinates],
                 };
             } else {
                 return {
                     type: 'LineString',
-                    coordinates: coordinates
+                    coordinates: coordinates,
                 };
             }
         });
     },
 
-
-    area: function(resolver) {
-        return resolver.transient(this, 'area', function() {
+    area: function (resolver) {
+        return resolver.transient(this, 'area', function () {
             var nodes = resolver.childNodes(this);
 
             var json = {
                 type: 'Polygon',
-                coordinates: [ nodes.map(function(n) { return n.loc; }) ]
+                coordinates: [
+                    nodes.map(function (n) {
+                        return n.loc;
+                    }),
+                ],
             };
 
             if (!this.isClosed() && nodes.length) {
@@ -538,10 +591,9 @@ const prototype = {
 
             return isNaN(area) ? 0 : area;
         });
-    }
+    },
 };
 Object.assign(osmWay.prototype, prototype);
-
 
 // Filter function to eliminate consecutive duplicates.
 function noRepeatNodes(node, i, arr) {

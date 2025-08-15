@@ -10,12 +10,12 @@ export * from './renderer/index';
 export * from './services/index';
 export * from './svg/index';
 export * from './ui/fields/index';
+export * from './ui/index';
 export * from './ui/intro/index';
 export * from './ui/panels/index';
 export * from './ui/panes/index';
 export * from './ui/sections/index';
 export * from './ui/settings/index';
-export * from './ui/index';
 export * from './util/index';
 export * from './validations/index';
 
@@ -24,17 +24,19 @@ export * from './validations/index';
 export let debug = false;
 
 /** @param {boolean} newValue */
-export const setDebug = (newValue) => { debug = newValue; };
+export const setDebug = (newValue) => {
+    debug = newValue;
+};
 
 // Reexport just what our tests use, see #4379
 import * as D3 from 'd3';
 export let d3 = {
-  dispatch:  D3.dispatch,
-  geoMercator: D3.geoMercator,
-  geoProjection: D3.geoProjection,
-  polygonArea: D3.polygonArea,
-  polygonCentroid: D3.polygonCentroid,
-  select: D3.select,
-  selectAll: D3.selectAll,
-  timerFlush: D3.timerFlush
+    dispatch: D3.dispatch,
+    geoMercator: D3.geoMercator,
+    geoProjection: D3.geoProjection,
+    polygonArea: D3.polygonArea,
+    polygonCentroid: D3.polygonCentroid,
+    select: D3.select,
+    selectAll: D3.selectAll,
+    timerFlush: D3.timerFlush,
 };

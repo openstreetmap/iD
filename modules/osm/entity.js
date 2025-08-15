@@ -1,8 +1,7 @@
 import { debug } from '../index';
-import { osmIsInterestingTag } from './tags';
 import { utilArrayUnion } from '../util/array';
 import { utilUnicodeCharsTruncated } from '../util/util';
-
+import { osmIsInterestingTag } from './tags';
 
 export function osmEntity(attrs) {
     // For prototypal inheritance.
@@ -16,26 +15,25 @@ export function osmEntity(attrs) {
     }
 
     // Initialize a generic Entity (used only in tests).
-    return (new osmEntity()).initialize(arguments);
+    return new osmEntity().initialize(arguments);
 }
 
-
-osmEntity.id = function(type) {
+osmEntity.id = function (type) {
     return osmEntity.id.fromOSM(type, osmEntity.id.next[type]--);
 };
 
-
 osmEntity.id.next = {
-    changeset: -1, node: -1, way: -1, relation: -1
+    changeset: -1,
+    node: -1,
+    way: -1,
+    relation: -1,
 };
 
-
-osmEntity.id.fromOSM = function(type, id) {
+osmEntity.id.fromOSM = function (type, id) {
     return type[0] + id;
 };
 
-
-osmEntity.id.toOSM = function(id) {
+osmEntity.id.toOSM = function (id) {
     var match = id.match(/^[cnwr](-?\d+)$/);
     if (match) {
         return match[1];
@@ -43,27 +41,23 @@ osmEntity.id.toOSM = function(id) {
     return '';
 };
 
-
-osmEntity.id.type = function(id) {
-    return { 'c': 'changeset', 'n': 'node', 'w': 'way', 'r': 'relation' }[id[0]];
+osmEntity.id.type = function (id) {
+    return { c: 'changeset', n: 'node', w: 'way', r: 'relation' }[id[0]];
 };
 
-
 // A function suitable for use as the second argument to d3.selection#data().
-osmEntity.key = function(entity) {
+osmEntity.key = function (entity) {
     return entity.id + 'v' + (entity.v || 0);
 };
 
-
 osmEntity.prototype = {
-
     /** @type {Tags} */
     tags: {},
 
     /** @type {String} */
     id: undefined,
 
-    initialize: function(sources) {
+    initialize: function (sources) {
         for (var i = 0; i < sources.length; ++i) {
             var source = sources[i];
             for (var prop in source) {
@@ -96,32 +90,31 @@ osmEntity.prototype = {
         return this;
     },
 
-
-    copy: function(resolver, copies) {
+    copy: function (resolver, copies) {
         if (copies[this.id]) return copies[this.id];
 
-        var copy = osmEntity(this, { id: undefined, user: undefined, version: undefined });
+        var copy = osmEntity(this, {
+            id: undefined,
+            user: undefined,
+            version: undefined,
+        });
         copies[this.id] = copy;
 
         return copy;
     },
 
-
-    osmId: function() {
+    osmId: function () {
         return osmEntity.id.toOSM(this.id);
     },
 
-
-    isNew: function() {
+    isNew: function () {
         var osmId = osmEntity.id.toOSM(this.id);
         return osmId.length === 0 || osmId[0] === '-';
     },
 
-
-    update: function(attrs) {
+    update: function (attrs) {
         return osmEntity(this, attrs, { v: 1 + (this.v || 0) });
     },
-
 
     /**
      *
@@ -129,8 +122,8 @@ osmEntity.prototype = {
      * @param {Tags} setTags (optional) a set of tags to overwrite in this entity's tags
      * @returns {iD.OsmEntity}
      */
-    mergeTags: function(tags, setTags = {}) {
-        const merged = Object.assign({}, this.tags);   // shallow copy
+    mergeTags: function (tags, setTags = {}) {
+        const merged = Object.assign({}, this.tags); // shallow copy
         let changed = false;
 
         for (const k in tags) {
@@ -143,8 +136,10 @@ osmEntity.prototype = {
             } else if (t1 !== t2) {
                 changed = true;
                 merged[k] = utilUnicodeCharsTruncated(
-                    utilArrayUnion(t1.split(/;\s*/), t2.split(/;\s*/)).join(';'),
-                    255 // avoid exceeding character limit; see also context.maxCharsForTagValue()
+                    utilArrayUnion(t1.split(/;\s*/), t2.split(/;\s*/)).join(
+                        ';',
+                    ),
+                    255, // avoid exceeding character limit; see also context.maxCharsForTagValue()
                 );
             }
         }
@@ -158,25 +153,25 @@ osmEntity.prototype = {
         return changed ? this.update({ tags: merged }) : this;
     },
 
-
-    intersects: function(extent, resolver) {
+    intersects: function (extent, resolver) {
         return this.extent(resolver).intersects(extent);
     },
 
-
-    hasNonGeometryTags: function() {
-        return Object.keys(this.tags).some(function(k) { return k !== 'area'; });
+    hasNonGeometryTags: function () {
+        return Object.keys(this.tags).some(function (k) {
+            return k !== 'area';
+        });
     },
 
-    hasParentRelations: function(resolver) {
+    hasParentRelations: function (resolver) {
         return resolver.parentRelations(this).length > 0;
     },
 
-    hasInterestingTags: function() {
+    hasInterestingTags: function () {
         return Object.keys(this.tags).some(osmIsInterestingTag);
     },
 
-    isDegenerate: function() {
+    isDegenerate: function () {
         return true;
     },
 };

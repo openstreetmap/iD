@@ -2,7 +2,9 @@ describe('iD.svgOsm', function () {
     var container;
 
     beforeEach(function () {
-        container = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'));
+        container = d3.select(
+            document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
+        );
     });
 
     it('creates default osm layers', function () {
@@ -25,5 +27,4 @@ describe('iD.svgOsm', function () {
         expect(d3.select(layers[2]).classed('points')).to.be.true;
         expect(d3.select(layers[3]).classed('turns')).to.be.true;
     });
-
 });

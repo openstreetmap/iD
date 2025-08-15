@@ -5,7 +5,6 @@ import { uiEntityEditor } from './entity_editor';
 import { uiPresetList } from './preset_list';
 import { uiViewOnOSM } from './view_on_osm';
 
-
 export function uiInspector(context) {
     var presetList = uiPresetList(context);
     var entityEditor = uiEntityEditor(context);
@@ -16,13 +15,12 @@ export function uiInspector(context) {
     var _entityIDs;
     var _newFeature = false;
 
-
     function inspector(selection) {
         presetList
             .entityIDs(_entityIDs)
             .autofocus(_newFeature)
             .on('choose', inspector.setPreset)
-            .on('cancel', function() {
+            .on('cancel', function () {
                 inspector.setPreset();
             });
 
@@ -31,20 +29,13 @@ export function uiInspector(context) {
             .entityIDs(_entityIDs)
             .on('choose', inspector.showList);
 
-        wrap = selection.selectAll('.panewrap')
-            .data([0]);
+        wrap = selection.selectAll('.panewrap').data([0]);
 
-        var enter = wrap.enter()
-            .append('div')
-            .attr('class', 'panewrap');
+        var enter = wrap.enter().append('div').attr('class', 'panewrap');
 
-        enter
-            .append('div')
-            .attr('class', 'preset-list-pane pane');
+        enter.append('div').attr('class', 'preset-list-pane pane');
 
-        enter
-            .append('div')
-            .attr('class', 'entity-editor-pane pane');
+        enter.append('div').attr('class', 'entity-editor-pane pane');
 
         wrap = wrap.merge(enter);
         presetPane = wrap.selectAll('.preset-list-pane');
@@ -74,10 +65,15 @@ export function uiInspector(context) {
             if (context.graph().parentRelations(entity).length) return false;
 
             // show vertex issues if there are any
-            if (context.validator().getEntityIssues(entityID).length) return false;
+            if (context.validator().getEntityIssues(entityID).length)
+                return false;
 
             // show turn restriction editor for junction vertices
-            if (entity.type === 'node' && entity.isHighwayIntersection(context.graph())) return false;
+            if (
+                entity.type === 'node' &&
+                entity.isHighwayIntersection(context.graph())
+            )
+                return false;
 
             // otherwise show preset list for uninteresting vertices
             return true;
@@ -86,35 +82,33 @@ export function uiInspector(context) {
         if (shouldDefaultToPresetList()) {
             wrap.style('right', '-100%');
             editorPane.classed('hide', true);
-            presetPane.classed('hide', false)
-                .call(presetList);
+            presetPane.classed('hide', false).call(presetList);
         } else {
             wrap.style('right', '0%');
             presetPane.classed('hide', true);
-            editorPane.classed('hide', false)
-                .call(entityEditor);
+            editorPane.classed('hide', false).call(entityEditor);
         }
 
-        var footer = selection.selectAll('.footer')
-            .data([0]);
+        var footer = selection.selectAll('.footer').data([0]);
 
-        footer = footer.enter()
+        footer = footer
+            .enter()
             .append('div')
             .attr('class', 'footer')
             .merge(footer);
 
-        footer
-            .call(uiViewOnOSM(context)
-                .what(context.hasEntity(_entityIDs.length === 1 && _entityIDs[0]))
-            );
+        footer.call(
+            uiViewOnOSM(context).what(
+                context.hasEntity(_entityIDs.length === 1 && _entityIDs[0]),
+            ),
+        );
     }
 
-    inspector.showList = function(presets) {
-
+    inspector.showList = function (presets) {
         presetPane.classed('hide', false);
 
         wrap.transition()
-            .styleTween('right', function() {
+            .styleTween('right', function () {
                 return d3_interpolate('0%', '-100%');
             })
             .on('end', function () {
@@ -125,21 +119,17 @@ export function uiInspector(context) {
             presetList.presets(presets);
         }
 
-        presetPane
-            .call(presetList.autofocus(true));
+        presetPane.call(presetList.autofocus(true));
     };
 
-    inspector.setPreset = function(preset) {
-
+    inspector.setPreset = function (preset) {
         // upon setting multipolygon, go to the area preset list instead of the editor
         if (preset && preset.id === 'type/multipolygon') {
-            presetPane
-                .call(presetList.autofocus(true));
-
+            presetPane.call(presetList.autofocus(true));
         } else {
             editorPane.classed('hide', false);
             wrap.transition()
-                .styleTween('right', function() {
+                .styleTween('right', function () {
                     return d3_interpolate('-100%', '0%');
                 })
                 .on('end', function () {
@@ -149,13 +139,11 @@ export function uiInspector(context) {
             if (preset) {
                 entityEditor.presets([preset]);
             }
-            editorPane
-                .call(entityEditor);
+            editorPane.call(entityEditor);
         }
-
     };
 
-    inspector.state = function(val) {
+    inspector.state = function (val) {
         if (!arguments.length) return _state;
         _state = val;
         entityEditor.state(_state);
@@ -166,20 +154,17 @@ export function uiInspector(context) {
         return inspector;
     };
 
-
-    inspector.entityIDs = function(val) {
+    inspector.entityIDs = function (val) {
         if (!arguments.length) return _entityIDs;
         _entityIDs = val;
         return inspector;
     };
 
-
-    inspector.newFeature = function(val) {
+    inspector.newFeature = function (val) {
         if (!arguments.length) return _newFeature;
         _newFeature = val;
         return inspector;
     };
-
 
     return inspector;
 }

@@ -1,6 +1,6 @@
+import { fakeServer } from 'nise';
 import { setTimeout } from 'node:timers/promises';
 import { promisify } from 'node:util';
-import { fakeServer } from 'nise';
 
 describe('iD.serviceOsm', function () {
     var context, connection, spy;
@@ -10,7 +10,7 @@ describe('iD.serviceOsm', function () {
         connection.switch({
             url: 'https://www.openstreetmap.org',
             client_id: '0tmNTmd0Jo1dQp4AUmMBLtGiD9YpMuXzHefitcuVStc',
-            access_token: 'foo'  // preauth
+            access_token: 'foo', // preauth
         });
     }
 
@@ -18,16 +18,16 @@ describe('iD.serviceOsm', function () {
         connection.logout();
     }
 
-    before(function() {
+    before(function () {
         iD.services.osm = iD.serviceOsm;
     });
 
-    after(function() {
+    after(function () {
         delete iD.services.osm;
     });
 
     beforeEach(function () {
-        serverXHR = fakeServer.create();      // authenticated calls use XHR via osm-auth
+        serverXHR = fakeServer.create(); // authenticated calls use XHR via osm-auth
         context = iD.coreContext().assetPath('../dist/').init();
         connection = context.connection();
         connection.switch({ url: 'https://www.openstreetmap.org' });
@@ -35,19 +35,17 @@ describe('iD.serviceOsm', function () {
         spy = sinon.spy();
     });
 
-    afterEach(function() {
+    afterEach(function () {
         fetchMock.reset();
         serverXHR.restore();
     });
-
 
     it('is instantiated', function () {
         expect(connection).to.be.ok;
     });
 
-
-    describe('#getConnectionId', function() {
-        it('changes the connection id every time connection is reset', function() {
+    describe('#getConnectionId', function () {
+        it('changes the connection id every time connection is reset', function () {
             var cid1 = connection.getConnectionId();
             connection.reset();
             var cid2 = connection.getConnectionId();
@@ -62,78 +60,100 @@ describe('iD.serviceOsm', function () {
         });
     });
 
-    describe('#changesetURL', function() {
-        it('provides a changeset url', function() {
-            expect(connection.changesetURL(2)).to.eql('https://www.openstreetmap.org/changeset/2');
+    describe('#changesetURL', function () {
+        it('provides a changeset url', function () {
+            expect(connection.changesetURL(2)).to.eql(
+                'https://www.openstreetmap.org/changeset/2',
+            );
         });
 
-        it('allows secure connections', function() {
+        it('allows secure connections', function () {
             connection.switch({ url: 'https://www.openstreetmap.org' });
-            expect(connection.changesetURL(2)).to.eql('https://www.openstreetmap.org/changeset/2');
+            expect(connection.changesetURL(2)).to.eql(
+                'https://www.openstreetmap.org/changeset/2',
+            );
         });
     });
 
-    describe('#changesetsURL', function() {
-        it('provides a local changesets url', function() {
+    describe('#changesetsURL', function () {
+        it('provides a local changesets url', function () {
             var center = [-74.65, 40.65];
             var zoom = 17;
-            expect(connection.changesetsURL(center, zoom)).to.eql('https://www.openstreetmap.org/history#map=17/40.65000/-74.65000');
+            expect(connection.changesetsURL(center, zoom)).to.eql(
+                'https://www.openstreetmap.org/history#map=17/40.65000/-74.65000',
+            );
         });
     });
 
-    describe('#entityURL', function() {
-        it('provides an entity url for a node', function() {
-            var e = iD.osmNode({id: 'n1'});
-            expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/node/1');
+    describe('#entityURL', function () {
+        it('provides an entity url for a node', function () {
+            var e = iD.osmNode({ id: 'n1' });
+            expect(connection.entityURL(e)).to.eql(
+                'https://www.openstreetmap.org/node/1',
+            );
         });
 
-        it('provides an entity url for a way', function() {
-            var e = iD.osmWay({id: 'w1'});
-            expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/way/1');
+        it('provides an entity url for a way', function () {
+            var e = iD.osmWay({ id: 'w1' });
+            expect(connection.entityURL(e)).to.eql(
+                'https://www.openstreetmap.org/way/1',
+            );
         });
 
-        it('provides an entity url for a relation', function() {
-            var e = iD.osmRelation({id: 'r1'});
-            expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/relation/1');
-        });
-    });
-
-    describe('#historyURL', function() {
-        it('provides a history url for a node', function() {
-            var e = iD.osmNode({id: 'n1'});
-            expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/node/1/history');
-        });
-
-        it('provides a history url for a way', function() {
-            var e = iD.osmWay({id: 'w1'});
-            expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/way/1/history');
-        });
-
-        it('provides a history url for a relation', function() {
-            var e = iD.osmRelation({id: 'r1'});
-            expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/relation/1/history');
+        it('provides an entity url for a relation', function () {
+            var e = iD.osmRelation({ id: 'r1' });
+            expect(connection.entityURL(e)).to.eql(
+                'https://www.openstreetmap.org/relation/1',
+            );
         });
     });
 
-    describe('#userURL', function() {
-        it('provides a user url', function() {
-            expect(connection.userURL('bob')).to.eql('https://www.openstreetmap.org/user/bob');
+    describe('#historyURL', function () {
+        it('provides a history url for a node', function () {
+            var e = iD.osmNode({ id: 'n1' });
+            expect(connection.historyURL(e)).to.eql(
+                'https://www.openstreetmap.org/node/1/history',
+            );
+        });
+
+        it('provides a history url for a way', function () {
+            var e = iD.osmWay({ id: 'w1' });
+            expect(connection.historyURL(e)).to.eql(
+                'https://www.openstreetmap.org/way/1/history',
+            );
+        });
+
+        it('provides a history url for a relation', function () {
+            var e = iD.osmRelation({ id: 'r1' });
+            expect(connection.historyURL(e)).to.eql(
+                'https://www.openstreetmap.org/relation/1/history',
+            );
         });
     });
 
-    describe('#reset', function() {
-        it('resets the connection', function() {
+    describe('#userURL', function () {
+        it('provides a user url', function () {
+            expect(connection.userURL('bob')).to.eql(
+                'https://www.openstreetmap.org/user/bob',
+            );
+        });
+    });
+
+    describe('#reset', function () {
+        it('resets the connection', function () {
             expect(connection.reset()).to.eql(connection);
         });
     });
 
-    describe('#switch', function() {
-        it('changes the URL', function() {
+    describe('#switch', function () {
+        it('changes the URL', function () {
             connection.switch({ url: 'https://example.com' });
-            expect(connection.changesetURL(1)).to.equal('https://example.com/changeset/1');
+            expect(connection.changesetURL(1)).to.equal(
+                'https://example.com/changeset/1',
+            );
         });
 
-        it('emits a change event', function() {
+        it('emits a change event', function () {
             connection.on('change', spy);
             connection.switch({ url: 'https://example.com' });
             expect(spy).to.have.been.calledOnce;
@@ -157,10 +177,13 @@ describe('iD.serviceOsm', function () {
             fetchMock.mock('https://www.openstreetmap.org' + path, {
                 body: response,
                 status: 200,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
             });
 
-            const payload = await promisify(connection.loadFromAPI).call(connection, path);
+            const payload = await promisify(connection.loadFromAPI).call(
+                connection,
+                path,
+            );
             expect(typeof payload).to.eql('object');
         });
 
@@ -168,14 +191,19 @@ describe('iD.serviceOsm', function () {
             fetchMock.mock(`https://www.openstreetmap.org${path}?bbox=`, {
                 body: 'Bandwidth Limit Exceeded',
                 status: 509,
-                headers: { 'Content-Type': 'text/plain' }
+                headers: { 'Content-Type': 'text/plain' },
             });
 
             logout();
             connection.on('change', spy);
-            const promise = promisify(connection.loadTile).call(connection, { id: '0', extent: { toParam: () => '', bbox: () => ({}) } });
+            const promise = promisify(connection.loadTile).call(connection, {
+                id: '0',
+                extent: { toParam: () => '', bbox: () => ({}) },
+            });
 
-            await expect(promise).rejects.toThrow(expect.objectContaining({ status: 509 }));
+            await expect(promise).rejects.toThrow(
+                expect.objectContaining({ status: 509 }),
+            );
 
             expect(spy).to.have.been.calledOnce;
         });
@@ -184,14 +212,19 @@ describe('iD.serviceOsm', function () {
             fetchMock.mock(`https://www.openstreetmap.org${path}?bbox=`, {
                 body: '429 Too Many Requests',
                 status: 429,
-                headers: { 'Content-Type': 'text/plain' }
+                headers: { 'Content-Type': 'text/plain' },
             });
 
             logout();
             connection.on('change', spy);
-            const promise = promisify(connection.loadTile).call(connection, { id: '0', extent: { toParam: () => '', bbox: () => ({}) } });
+            const promise = promisify(connection.loadTile).call(connection, {
+                id: '0',
+                extent: { toParam: () => '', bbox: () => ({}) },
+            });
 
-            await expect(promise).rejects.toThrow(expect.objectContaining({ status: 429 }));
+            await expect(promise).rejects.toThrow(
+                expect.objectContaining({ status: 429 }),
+            );
             expect(spy).to.have.been.calledOnce;
         });
 
@@ -199,23 +232,24 @@ describe('iD.serviceOsm', function () {
             fetchMock.mock('https://api.openstreetmap.org' + path, {
                 body: response,
                 status: 200,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
             });
 
             connection.switch({
                 url: 'https://www.openstreetmap.org',
-                apiUrl: 'https://api.openstreetmap.org'
+                apiUrl: 'https://api.openstreetmap.org',
             });
 
             await promisify(connection.loadFromAPI).call(connection, path);
 
             expect(fetchMock.calls().length).to.eql(1);
-            expect(fetchMock.calls()[0][0]).to.eql('https://api.openstreetmap.org' + path);
+            expect(fetchMock.calls()[0][0]).to.eql(
+                'https://api.openstreetmap.org' + path,
+            );
         });
     });
 
-
-    describe('#loadTiles', function() {
+    describe('#loadTiles', function () {
         var tileResponse =
             '{' +
             '    "version":"0.6",' +
@@ -225,19 +259,19 @@ describe('iD.serviceOsm', function () {
             '    ]' +
             '}';
 
-        beforeEach(function() {
+        beforeEach(function () {
             var dimensions = [64, 64];
             context.projection
                 .scale(iD.geoZoomToScale(20))
-                .translate([55212042.434589595, 33248879.510193843])  // -74.0444216, 40.6694299
-                .clipExtent([[0,0], dimensions]);
+                .translate([55212042.434589595, 33248879.510193843]) // -74.0444216, 40.6694299
+                .clipExtent([[0, 0], dimensions]);
         });
 
         it('calls callback when data tiles are loaded', async () => {
             fetchMock.mock(/map.json\?bbox/, {
                 body: tileResponse,
                 status: 200,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
             });
 
             var spy = sinon.spy();
@@ -251,7 +285,7 @@ describe('iD.serviceOsm', function () {
             fetchMock.mock(/map.json\?bbox/, {
                 body: tileResponse,
                 status: 200,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
             });
 
             // resetting the cache
@@ -262,13 +296,15 @@ describe('iD.serviceOsm', function () {
             caches.tile.seen = {};
             caches.tile.rtree.clear();
 
-            expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.false;
+            expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be
+                .false;
 
             connection.loadTiles(context.projection);
 
             await setTimeout(500);
             expect(fetchMock.called()).to.be.true;
-            expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.true;
+            expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be
+                .true;
         });
     });
 
@@ -291,51 +327,79 @@ describe('iD.serviceOsm', function () {
             '}';
 
         it('loads a node', async () => {
-            fetchMock.mock('https://www.openstreetmap.org/api/0.6/node/1.json', {
-                body: nodeResponse,
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            fetchMock.mock(
+                'https://www.openstreetmap.org/api/0.6/node/1.json',
+                {
+                    body: nodeResponse,
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json' },
+                },
+            );
 
             var id = 'n1';
-            const result = await promisify(connection.loadEntity).call(connection, id);
+            const result = await promisify(connection.loadEntity).call(
+                connection,
+                id,
+            );
 
-            var entity = result.data.find(function(e) { return e.id === id; });
+            var entity = result.data.find(function (e) {
+                return e.id === id;
+            });
             expect(entity).to.be.an.instanceOf(iD.osmNode);
         });
 
         it('loads a way', async () => {
-            fetchMock.mock('https://www.openstreetmap.org/api/0.6/way/1/full.json', {
-                body: wayResponse,
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            fetchMock.mock(
+                'https://www.openstreetmap.org/api/0.6/way/1/full.json',
+                {
+                    body: wayResponse,
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json' },
+                },
+            );
 
             var id = 'w1';
-            const result = await promisify(connection.loadEntity).call(connection, id);
+            const result = await promisify(connection.loadEntity).call(
+                connection,
+                id,
+            );
 
-            var entity = result.data.find(function(e) { return e.id === id; });
+            var entity = result.data.find(function (e) {
+                return e.id === id;
+            });
             expect(entity).to.be.an.instanceOf(iD.osmWay);
         });
 
         it('does not ignore repeat requests', async () => {
-            fetchMock.mock('https://www.openstreetmap.org/api/0.6/node/1.json', {
-                body: wayResponse,
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            fetchMock.mock(
+                'https://www.openstreetmap.org/api/0.6/node/1.json',
+                {
+                    body: wayResponse,
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json' },
+                },
+            );
 
             var id = 'n1';
-            const result1 = await promisify(connection.loadEntity).call(connection, id);
-            var entity1 = result1.data.find(function(e1) { return e1.id === id; });
+            const result1 = await promisify(connection.loadEntity).call(
+                connection,
+                id,
+            );
+            var entity1 = result1.data.find(function (e1) {
+                return e1.id === id;
+            });
             expect(entity1).to.be.an.instanceOf(iD.osmNode);
 
-            const result2 = await promisify(connection.loadEntity).call(connection, id);
-            var entity2 = result2.data.find(function(e2) { return e2.id === id; });
+            const result2 = await promisify(connection.loadEntity).call(
+                connection,
+                id,
+            );
+            var entity2 = result2.data.find(function (e2) {
+                return e2.id === id;
+            });
             expect(entity2).to.be.an.instanceOf(iD.osmNode);
         });
     });
-
 
     describe('#loadEntityVersion', function () {
         var nodeResponse =
@@ -355,53 +419,85 @@ describe('iD.serviceOsm', function () {
             '}';
 
         it('loads a node', async () => {
-            fetchMock.mock('https://www.openstreetmap.org/api/0.6/node/1/1.json', {
-                body: nodeResponse,
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            fetchMock.mock(
+                'https://www.openstreetmap.org/api/0.6/node/1/1.json',
+                {
+                    body: nodeResponse,
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json' },
+                },
+            );
 
             var id = 'n1';
-            const result = await promisify(connection.loadEntityVersion).call(connection, id, 1);
+            const result = await promisify(connection.loadEntityVersion).call(
+                connection,
+                id,
+                1,
+            );
 
-            var entity = result.data.find(function(e) { return e.id === id; });
+            var entity = result.data.find(function (e) {
+                return e.id === id;
+            });
             expect(entity).to.be.an.instanceOf(iD.osmNode);
         });
 
         it('loads a way', async () => {
-            fetchMock.mock('https://www.openstreetmap.org/api/0.6/way/1/1.json', {
-                body: wayResponse,
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            fetchMock.mock(
+                'https://www.openstreetmap.org/api/0.6/way/1/1.json',
+                {
+                    body: wayResponse,
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json' },
+                },
+            );
 
             var id = 'w1';
-            const result = await promisify(connection.loadEntityVersion).call(connection, id, 1);
+            const result = await promisify(connection.loadEntityVersion).call(
+                connection,
+                id,
+                1,
+            );
 
-            var entity = result.data.find(function(e) { return e.id === id; });
+            var entity = result.data.find(function (e) {
+                return e.id === id;
+            });
             expect(entity).to.be.an.instanceOf(iD.osmWay);
         });
 
         it('does not ignore repeat requests', async () => {
-            fetchMock.mock('https://www.openstreetmap.org/api/0.6/node/1/1.json', {
-                body: nodeResponse,
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            fetchMock.mock(
+                'https://www.openstreetmap.org/api/0.6/node/1/1.json',
+                {
+                    body: nodeResponse,
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json' },
+                },
+            );
 
             var id = 'n1';
-            const result1 = await promisify(connection.loadEntityVersion).call(connection, id, 1);
+            const result1 = await promisify(connection.loadEntityVersion).call(
+                connection,
+                id,
+                1,
+            );
 
-            var entity1 = result1.data.find(function(e1) { return e1.id === id; });
+            var entity1 = result1.data.find(function (e1) {
+                return e1.id === id;
+            });
             expect(entity1).to.be.an.instanceOf(iD.osmNode);
 
-            const result2 = await promisify(connection.loadEntityVersion).call(connection, id, 1);
+            const result2 = await promisify(connection.loadEntityVersion).call(
+                connection,
+                id,
+                1,
+            );
 
-            var entity2 = result2.data.find(function(e2) { return e2.id === id; });
+            var entity2 = result2.data.find(function (e2) {
+                return e2.id === id;
+            });
             expect(entity2).to.be.an.instanceOf(iD.osmNode);
         });
     });
-
 
     describe('#loadMultiple', function () {
         it.todo('loads nodes');
@@ -409,24 +505,23 @@ describe('iD.serviceOsm', function () {
         it.todo('does not ignore repeat requests');
     });
 
-
-    describe('#userChangesets', function() {
+    describe('#userChangesets', function () {
         var userDetailsFn;
 
-        beforeEach(function() {
+        beforeEach(function () {
             userDetailsFn = connection.userDetails;
             connection.userDetails = function (callback) {
                 callback(undefined, { id: 1, displayName: 'Steve' });
             };
         });
 
-        afterEach(function() {
+        afterEach(function () {
             connection.userDetails = userDetailsFn;
         });
 
-
         it('loads user changesets', async () => {
-            var changesetsXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+            var changesetsXML =
+                '<?xml version="1.0" encoding="UTF-8"?>' +
                 '<osm>' +
                 '<changeset id="36777543" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
                 '  <tag k="comment" v="Caprice Court has been extended"/>' +
@@ -436,23 +531,31 @@ describe('iD.serviceOsm', function () {
 
             login();
 
-            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets\\?user=1',
-                [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
+            serverXHR.respondWith(
+                'GET',
+                'https://www.openstreetmap.org/api/0.6/changesets\\?user=1',
+                [200, { 'Content-Type': 'text/xml' }, changesetsXML],
+            );
             serverXHR.respond();
 
-            const changesets = await promisify(connection.userChangesets).call(connection);
+            const changesets = await promisify(connection.userChangesets).call(
+                connection,
+            );
 
-            expect(changesets).to.deep.equal([{
-                tags: {
-                    comment: 'Caprice Court has been extended',
-                    created_by: 'iD 2.0.0'
-                }
-            }]);
+            expect(changesets).to.deep.equal([
+                {
+                    tags: {
+                        comment: 'Caprice Court has been extended',
+                        created_by: 'iD 2.0.0',
+                    },
+                },
+            ]);
             connection.logout();
         });
 
         it('excludes changesets without comment tag', async () => {
-            var changesetsXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+            var changesetsXML =
+                '<?xml version="1.0" encoding="UTF-8"?>' +
                 '<osm>' +
                 '<changeset id="36777543" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
                 '  <tag k="comment" v="Caprice Court has been extended"/>' +
@@ -465,23 +568,31 @@ describe('iD.serviceOsm', function () {
 
             login();
 
-            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets\\?user=1',
-                [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
+            serverXHR.respondWith(
+                'GET',
+                'https://www.openstreetmap.org/api/0.6/changesets\\?user=1',
+                [200, { 'Content-Type': 'text/xml' }, changesetsXML],
+            );
             serverXHR.respond();
 
-            const changesets = await promisify(connection.userChangesets).call(connection);
+            const changesets = await promisify(connection.userChangesets).call(
+                connection,
+            );
 
-            expect(changesets).to.deep.equal([{
-                tags: {
-                    comment: 'Caprice Court has been extended',
-                    created_by: 'iD 2.0.0'
-                }
-            }]);
+            expect(changesets).to.deep.equal([
+                {
+                    tags: {
+                        comment: 'Caprice Court has been extended',
+                        created_by: 'iD 2.0.0',
+                    },
+                },
+            ]);
             connection.logout();
         });
 
         it('excludes changesets with empty comment', async () => {
-            var changesetsXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+            var changesetsXML =
+                '<?xml version="1.0" encoding="UTF-8"?>' +
                 '<osm>' +
                 '<changeset id="36777543" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
                 '  <tag k="comment" v="Caprice Court has been extended"/>' +
@@ -495,67 +606,92 @@ describe('iD.serviceOsm', function () {
 
             login();
 
-            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets\\?user=1',
-                [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
+            serverXHR.respondWith(
+                'GET',
+                'https://www.openstreetmap.org/api/0.6/changesets\\?user=1',
+                [200, { 'Content-Type': 'text/xml' }, changesetsXML],
+            );
             serverXHR.respond();
 
             const changesets = await promisify(connection.userChangesets)();
 
-            expect(changesets).to.deep.equal([{
-                tags: {
-                    comment: 'Caprice Court has been extended',
-                    created_by: 'iD 2.0.0'
-                }
-            }]);
+            expect(changesets).to.deep.equal([
+                {
+                    tags: {
+                        comment: 'Caprice Court has been extended',
+                        created_by: 'iD 2.0.0',
+                    },
+                },
+            ]);
             connection.logout();
         });
     });
 
-    describe('#caches', function() {
+    describe('#caches', function () {
         it('loads reset caches', function () {
             var caches = connection.caches();
-            expect(caches.tile).to.have.all.keys(['toLoad','loaded','inflight','seen','rtree']);
-            expect(caches.note).to.have.all.keys(['toLoad','loaded','inflight','inflightPost','note','closed','rtree']);
-            expect(caches.user).to.have.all.keys(['toLoad','user']);
+            expect(caches.tile).to.have.all.keys([
+                'toLoad',
+                'loaded',
+                'inflight',
+                'seen',
+                'rtree',
+            ]);
+            expect(caches.note).to.have.all.keys([
+                'toLoad',
+                'loaded',
+                'inflight',
+                'inflightPost',
+                'note',
+                'closed',
+                'rtree',
+            ]);
+            expect(caches.user).to.have.all.keys(['toLoad', 'user']);
         });
 
-        describe('sets/gets caches', function() {
+        describe('sets/gets caches', function () {
             it('sets/gets a tile', function () {
                 var obj = {
-                    tile: { loaded: { '1,2,16': true, '3,4,16': true } }
+                    tile: { loaded: { '1,2,16': true, '3,4,16': true } },
                 };
                 connection.caches(obj);
                 expect(connection.caches().tile.loaded['1,2,16']).to.eql(true);
-                expect(Object.keys(connection.caches().tile.loaded).length).to.eql(2);
+                expect(
+                    Object.keys(connection.caches().tile.loaded).length,
+                ).to.eql(2);
             });
 
             it('sets/gets a note', function () {
                 var note = iD.osmNote({ id: 1, loc: [0, 0] });
                 var note2 = iD.osmNote({ id: 2, loc: [0, 0] });
                 var obj = {
-                    note: { note: { 1: note, 2: note2 } }
+                    note: { note: { 1: note, 2: note2 } },
                 };
                 connection.caches(obj);
                 expect(connection.caches().note.note[note.id]).to.eql(note);
-                expect(Object.keys(connection.caches().note.note).length).to.eql(2);
+                expect(
+                    Object.keys(connection.caches().note.note).length,
+                ).to.eql(2);
             });
 
             it('sets/gets a user', function () {
                 var user = { id: 1, display_name: 'Name' };
                 var user2 = { id: 2, display_name: 'Name' };
                 var obj = {
-                    user: { user: { 1: user, 2: user2 } }
+                    user: { user: { 1: user, 2: user2 } },
                 };
                 connection.caches(obj);
                 expect(connection.caches().user.user[user.id]).to.eql(user);
-                expect(Object.keys(connection.caches().user.user).length).to.eql(2);
+                expect(
+                    Object.keys(connection.caches().user.user).length,
+                ).to.eql(2);
             });
         });
-
     });
 
-    describe('#loadNotes', function() {
-        var notesXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+    describe('#loadNotes', function () {
+        var notesXML =
+            '<?xml version="1.0" encoding="UTF-8"?>' +
             '<osm>' +
             '<note lon="10" lat="0">' +
             '  <id>1</id>' +
@@ -578,19 +714,19 @@ describe('iD.serviceOsm', function () {
             '</note>' +
             '</osm>';
 
-        beforeEach(function() {
+        beforeEach(function () {
             var dimensions = [64, 64];
             context.projection
                 .scale(iD.geoZoomToScale(14))
-                .translate([-116508, 0])  // 10,0
-                .clipExtent([[0,0], dimensions]);
+                .translate([-116508, 0]) // 10,0
+                .clipExtent([[0, 0], dimensions]);
         });
 
         it('fires loadedNotes when notes are loaded', async () => {
             fetchMock.mock(/notes\?/, {
                 body: notesXML,
                 status: 200,
-                headers: { 'Content-Type': 'text/xml' }
+                headers: { 'Content-Type': 'text/xml' },
             });
 
             connection.on('loadedNotes', spy);
@@ -601,39 +737,55 @@ describe('iD.serviceOsm', function () {
         });
     });
 
-
-    describe('#notes', function() {
-        beforeEach(function() {
+    describe('#notes', function () {
+        beforeEach(function () {
             var dimensions = [64, 64];
             context.projection
                 .scale(iD.geoZoomToScale(14))
-                .translate([-116508, 0])  // 10,0
-                .clipExtent([[0,0], dimensions]);
+                .translate([-116508, 0]) // 10,0
+                .clipExtent([[0, 0], dimensions]);
         });
 
-        it('returns notes in the visible map area', function() {
+        it('returns notes in the visible map area', function () {
             var notes = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0] } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0] } },
-                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1] } }
+                {
+                    minX: 10,
+                    minY: 0,
+                    maxX: 10,
+                    maxY: 0,
+                    data: { key: '0', loc: [10, 0] },
+                },
+                {
+                    minX: 10,
+                    minY: 0,
+                    maxX: 10,
+                    maxY: 0,
+                    data: { key: '1', loc: [10, 0] },
+                },
+                {
+                    minX: 10,
+                    minY: 1,
+                    maxX: 10,
+                    maxY: 1,
+                    data: { key: '2', loc: [10, 1] },
+                },
             ];
 
             connection.caches('get').note.rtree.load(notes);
             var res = connection.notes(context.projection);
 
             expect(res).to.deep.eql([
-                { key: '0', loc: [10,0] },
-                { key: '1', loc: [10,0] }
+                { key: '0', loc: [10, 0] },
+                { key: '1', loc: [10, 0] },
             ]);
         });
     });
 
-
-    describe('#getNote', function() {
+    describe('#getNote', function () {
         it('returns a note', function () {
-            var note = iD.osmNote({ id: 1, loc: [0, 0], });
+            var note = iD.osmNote({ id: 1, loc: [0, 0] });
             var obj = {
-                note: { note: { 1: note } }
+                note: { note: { 1: note } },
             };
             connection.caches(obj);
             var result = connection.getNote(1);
@@ -641,9 +793,9 @@ describe('iD.serviceOsm', function () {
         });
     });
 
-    describe('#removeNote', function() {
-        it('removes a note that is new', function() {
-            var note = iD.osmNote({ id: -1, loc: [0, 0], });
+    describe('#removeNote', function () {
+        it('removes a note that is new', function () {
+            var note = iD.osmNote({ id: -1, loc: [0, 0] });
             connection.replaceNote(note);
             connection.removeNote(note);
             var result = connection.getNote(-1);
@@ -651,35 +803,43 @@ describe('iD.serviceOsm', function () {
         });
     });
 
-
-    describe('#replaceNote', function() {
+    describe('#replaceNote', function () {
         it('returns a new note', function () {
-            var note = iD.osmNote({ id: 2, loc: [0, 0], });
+            var note = iD.osmNote({ id: 2, loc: [0, 0] });
             var result = connection.replaceNote(note);
             expect(result.id).to.eql(2);
             expect(connection.caches().note.note[2]).to.eql(note);
             var rtree = connection.caches().note.rtree;
-            var result_rtree = rtree.search({ 'minX': -1, 'minY': -1, 'maxX': 1, 'maxY': 1 });
+            var result_rtree = rtree.search({
+                minX: -1,
+                minY: -1,
+                maxX: 1,
+                maxY: 1,
+            });
             expect(result_rtree.length).to.eql(1);
             expect(result_rtree[0].data).to.eql(note);
         });
 
         it('replaces a note', function () {
-            var note = iD.osmNote({ id: 2, loc: [0, 0], });
+            var note = iD.osmNote({ id: 2, loc: [0, 0] });
             connection.replaceNote(note);
             note.status = 'closed';
             var result = connection.replaceNote(note);
             expect(result.status).to.eql('closed');
 
             var rtree = connection.caches().note.rtree;
-            var result_rtree = rtree.search({ 'minX': -1, 'minY': -1, 'maxX': 1, 'maxY': 1 });
+            var result_rtree = rtree.search({
+                minX: -1,
+                minY: -1,
+                maxX: 1,
+                maxY: 1,
+            });
             expect(result_rtree.length).to.eql(1);
             expect(result_rtree[0].data.status).to.eql('closed');
         });
     });
 
-
-    describe('API capabilities', function() {
+    describe('API capabilities', function () {
         var capabilitiesXML = `<?xml version="1.0" encoding="UTF-8"?>
         <osm version="0.6" generator="OpenStreetMap server" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
             <api>
@@ -700,36 +860,46 @@ describe('iD.serviceOsm', function () {
             </policy>
         </osm>`;
 
-        describe('#status', function() {
+        describe('#status', function () {
             it('gets API status', async () => {
-                fetchMock.mock('https://www.openstreetmap.org/api/capabilities', {
-                    body: capabilitiesXML,
-                    status: 200,
-                    headers: { 'Content-Type': 'text/xml' }
-                }, {
-                    overwriteRoutes: true
-                });
+                fetchMock.mock(
+                    'https://www.openstreetmap.org/api/capabilities',
+                    {
+                        body: capabilitiesXML,
+                        status: 200,
+                        headers: { 'Content-Type': 'text/xml' },
+                    },
+                    {
+                        overwriteRoutes: true,
+                    },
+                );
 
                 const val = await promisify(connection.status).call(connection);
                 expect(val).to.eql('online');
             });
         });
 
-        describe('#imageryBlocklists', function() {
+        describe('#imageryBlocklists', function () {
             it('updates imagery blocklists', async () => {
-                fetchMock.mock('https://www.openstreetmap.org/api/capabilities', {
-                    body: capabilitiesXML,
-                    status: 200,
-                    headers: { 'Content-Type': 'text/xml' }
-                }, {
-                    overwriteRoutes: true
-                });
+                fetchMock.mock(
+                    'https://www.openstreetmap.org/api/capabilities',
+                    {
+                        body: capabilitiesXML,
+                        status: 200,
+                        headers: { 'Content-Type': 'text/xml' },
+                    },
+                    {
+                        overwriteRoutes: true,
+                    },
+                );
 
                 await promisify(connection.status).call(connection);
                 var blocklists = connection.imageryBlocklists();
-                expect(blocklists).to.deep.equal([new RegExp('\.foo\.com', 'i'), new RegExp('\.bar\.org', 'i')]);
+                expect(blocklists).to.deep.equal([
+                    new RegExp('\.foo\.com', 'i'),
+                    new RegExp('\.bar\.org', 'i'),
+                ]);
             });
         });
-
     });
 });

@@ -5,12 +5,10 @@ import { json as d3_json } from 'd3-fetch';
 import { localizer } from '../core/localizer';
 import { utilQsString } from '../util';
 
-
 var apibase = 'https://wiki.openstreetmap.org/w/api.php';
 var _inflight = {};
 var _wikibaseCache = {};
 var _localeIDs = { en: false };
-
 
 var debouncedRequest = _debounce(request, 500, { leading: false });
 
@@ -20,32 +18,30 @@ function request(url, callback) {
     _inflight[url] = controller;
 
     d3_json(url, { signal: controller.signal })
-        .then(function(result) {
+        .then(function (result) {
             delete _inflight[url];
             if (callback) callback(null, result);
         })
-        .catch(function(err) {
+        .catch(function (err) {
             delete _inflight[url];
             if (err.name === 'AbortError') return;
             if (callback) callback(err.message);
         });
 }
 
-
 export default {
-
-    init: function() {
+    init: function () {
         _inflight = {};
         _wikibaseCache = {};
         _localeIDs = {};
     },
 
-
-    reset: function() {
-        Object.values(_inflight).forEach(function(controller) { controller.abort(); });
+    reset: function () {
+        Object.values(_inflight).forEach(function (controller) {
+            controller.abort();
+        });
         _inflight = {};
     },
-
 
     /**
      * Get the best value for the property, or undefined if not found
@@ -53,18 +49,21 @@ export default {
      * @param property string e.g. 'P4' for image
      * @param langCode string e.g. 'fr' for French
      */
-    claimToValue: function(entity, property, langCode) {
+    claimToValue: function (entity, property, langCode) {
         if (!entity.claims[property]) return undefined;
         var locale = _localeIDs[langCode];
         var preferredPick, localePick;
 
-        entity.claims[property].forEach(function(stmt) {
+        entity.claims[property].forEach(function (stmt) {
             // If exists, use value limited to the needed language (has a qualifier P26 = locale)
             // Or if not found, use the first value with the "preferred" rank
             if (!preferredPick && stmt.rank === 'preferred') {
                 preferredPick = stmt;
             }
-            if (locale && stmt.qualifiers && stmt.qualifiers.P26 &&
+            if (
+                locale &&
+                stmt.qualifiers &&
+                stmt.qualifiers.P26 &&
                 stmt.qualifiers.P26[0].datavalue.value.id === locale
             ) {
                 localePick = stmt;
@@ -74,31 +73,31 @@ export default {
         var result = localePick || preferredPick;
         if (result) {
             var datavalue = result.mainsnak.datavalue;
-            return datavalue.type === 'wikibase-entityid' ? datavalue.value.id : datavalue.value;
+            return datavalue.type === 'wikibase-entityid'
+                ? datavalue.value.id
+                : datavalue.value;
         } else {
             return undefined;
         }
     },
-
 
     /**
      * Convert monolingual property into a key-value object (language -> value)
      * @param entity object from wikibase
      * @param property string e.g. 'P31' for monolingual wiki page title
      */
-    monolingualClaimToValueObj: function(entity, property) {
+    monolingualClaimToValueObj: function (entity, property) {
         if (!entity || !entity.claims[property]) return undefined;
 
-        return entity.claims[property].reduce(function(acc, obj) {
+        return entity.claims[property].reduce(function (acc, obj) {
             var value = obj.mainsnak.datavalue.value;
             acc[value.language] = value.text;
             return acc;
         }, {});
     },
 
-
-    toSitelink: function(key, value) {
-        var result = value ? ('Tag:' + key + '=' + value) : 'Key:' + key;
+    toSitelink: function (key, value) {
+        var result = value ? 'Tag:' + key + '=' + value : 'Key:' + key;
         return result.replace(/_/g, ' ').trim();
     },
 
@@ -110,30 +109,32 @@ export default {
     linkifyWikiText(unsafeText) {
         /** @param {import('d3').Selection} selection */
         return (selection) => {
-            const segments = unsafeText.split(/(key|tag):([\w-]+)(=([\w-]+))?/g);
+            const segments = unsafeText.split(
+                /(key|tag):([\w-]+)(=([\w-]+))?/g,
+            );
 
             for (let i = 0; i < segments.length; i += 5) {
                 const [plainText, , key, , value] = segments.slice(i);
 
                 if (plainText) {
-                    selection
-                        .append('span')
-                        .text(plainText);
+                    selection.append('span').text(plainText);
                 }
 
                 if (key) {
                     selection
                         .append('a')
-                        .attr('href', `https://wiki.openstreetmap.org/wiki/${this.toSitelink(key, value)}`)
+                        .attr(
+                            'href',
+                            `https://wiki.openstreetmap.org/wiki/${this.toSitelink(key, value)}`,
+                        )
                         .attr('target', '_blank')
                         .attr('rel', 'noreferrer')
                         .append('code')
-                            .text(`${key}=${value || '*'}`);
+                        .text(`${key}=${value || '*'}`);
                 }
             }
         };
     },
-
 
     //
     // Pass params object of the form:
@@ -143,23 +144,31 @@ export default {
     //   langCode: 'string'
     // }
     //
-    getEntity: function(params, callback) {
+    getEntity: function (params, callback) {
         var doRequest = params.debounce ? debouncedRequest : request;
         var that = this;
         var titles = [];
         var result = {};
-        var rtypeSitelink = (params.key === 'type' && params.value) ? ('Relation:' + params.value).replace(/_/g, ' ').trim() : false;
+        var rtypeSitelink =
+            params.key === 'type' && params.value
+                ? ('Relation:' + params.value).replace(/_/g, ' ').trim()
+                : false;
         var keySitelink = params.key ? this.toSitelink(params.key) : false;
-        var tagSitelink = (params.key && params.value) ? this.toSitelink(params.key, params.value) : false;
+        var tagSitelink =
+            params.key && params.value
+                ? this.toSitelink(params.key, params.value)
+                : false;
         const localeSitelinks = [];
 
         if (params.langCodes) {
-            params.langCodes.forEach(function(langCode) {
+            params.langCodes.forEach(function (langCode) {
                 if (_localeIDs[langCode] === undefined) {
                     // If this is the first time we are asking about this locale,
                     // fetch corresponding entity (if it exists), and cache it.
                     // If there is no such entry, cache `false` value to avoid re-requesting it.
-                    let localeSitelink = ('Locale:' + langCode).replace(/_/g, ' ').trim();
+                    let localeSitelink = ('Locale:' + langCode)
+                        .replace(/_/g, ' ')
+                        .trim();
                     titles.push(localeSitelink);
 
                     // initialize with false, such that if locale ID is not found in first request,
@@ -217,15 +226,20 @@ export default {
         };
 
         var url = apibase + '?' + utilQsString(obj);
-        doRequest(url, function(err, d) {
+        doRequest(url, function (err, d) {
             if (err) {
                 callback(err);
             } else if (!d.success || d.error) {
-                callback(d.error.messages.map(function(v) { return v.html['*']; }).join('<br>'));
+                callback(
+                    d.error.messages
+                        .map(function (v) {
+                            return v.html['*'];
+                        })
+                        .join('<br>'),
+                );
             } else {
-                Object.values(d.entities).forEach(function(res) {
+                Object.values(d.entities).forEach(function (res) {
                     if (res.missing !== '') {
-
                         var title = res.sitelinks.wiki.title;
                         if (title === rtypeSitelink) {
                             _wikibaseCache[rtypeSitelink] = res;
@@ -237,10 +251,12 @@ export default {
                             _wikibaseCache[tagSitelink] = res;
                             result.tag = res;
                         } else if (localeSitelinks.includes(title)) {
-                            const langCode = title.replace(/ /g, '_').replace(/^Locale:/, '');
+                            const langCode = title
+                                .replace(/ /g, '_')
+                                .replace(/^Locale:/, '');
                             that.addLocale(langCode, res.id);
                         } else {
-                            console.log('Unexpected title ' + title);  // eslint-disable-line no-console
+                            console.log('Unexpected title ' + title); // eslint-disable-line no-console
                         }
                     }
                 });
@@ -249,7 +265,6 @@ export default {
             }
         });
     },
-
 
     //
     // Pass params object of the form:
@@ -267,14 +282,14 @@ export default {
     //   wiki:         { title: 'string', text: 'string', url: 'string' }
     // }
     //
-    getDocs: function(params, callback) {
+    getDocs: function (params, callback) {
         var that = this;
-        var langCodes = localizer.localeCodes().map(function(code) {
+        var langCodes = localizer.localeCodes().map(function (code) {
             return code.toLowerCase();
         });
         params.langCodes = langCodes;
 
-        this.getEntity(params, function(err, data) {
+        this.getEntity(params, function (err, data) {
             if (err) {
                 callback(err);
                 return;
@@ -290,19 +305,23 @@ export default {
             var description;
             for (i in langCodes) {
                 let code = langCodes[i];
-                if (entity.descriptions[code] && entity.descriptions[code].language === code) {
+                if (
+                    entity.descriptions[code] &&
+                    entity.descriptions[code].language === code
+                ) {
                     description = entity.descriptions[code];
                     break;
                 }
             }
-            if (!description && Object.values(entity.descriptions).length) description = Object.values(entity.descriptions)[0];
+            if (!description && Object.values(entity.descriptions).length)
+                description = Object.values(entity.descriptions)[0];
 
             // prepare result
             var result = {
                 title: entity.title,
                 description: that.linkifyWikiText(description?.value || ''),
                 descriptionLocaleCode: description ? description.language : '',
-                editURL: 'https://wiki.openstreetmap.org/wiki/' + entity.title
+                editURL: 'https://wiki.openstreetmap.org/wiki/' + entity.title,
             };
 
             // add image
@@ -314,14 +333,18 @@ export default {
                 } else {
                     image = that.claimToValue(entity, 'P28', langCodes[0]);
                     if (image) {
-                        imageroot = 'https://wiki.openstreetmap.org/w/index.php';
+                        imageroot =
+                            'https://wiki.openstreetmap.org/w/index.php';
                     }
                 }
                 if (imageroot && image) {
-                    result.imageURL = imageroot + '?' + utilQsString({
-                        title: 'Special:Redirect/file/' + image,
-                        width: 400
-                    });
+                    result.imageURL =
+                        imageroot +
+                        '?' +
+                        utilQsString({
+                            title: 'Special:Redirect/file/' + image,
+                            width: 400,
+                        });
                 }
             }
 
@@ -337,7 +360,11 @@ export default {
                 var wiki = wikis[i];
                 for (var j in langCodes) {
                     var code = langCodes[j];
-                    var referenceId = (langCodes[0].split('-')[0] !== 'en' && code.split('-')[0] === 'en') ? 'inspector.wiki_en_reference' : 'inspector.wiki_reference';
+                    var referenceId =
+                        langCodes[0].split('-')[0] !== 'en' &&
+                        code.split('-')[0] === 'en'
+                            ? 'inspector.wiki_en_reference'
+                            : 'inspector.wiki_reference';
                     var info = getWikiInfo(wiki, code, referenceId);
                     if (info) {
                         result.wiki = info;
@@ -349,31 +376,29 @@ export default {
 
             callback(null, result);
 
-
             // Helper method to get wiki info if a given language exists
             function getWikiInfo(wiki, langCode, tKey) {
                 if (wiki && wiki[langCode]) {
                     return {
                         title: wiki[langCode],
                         text: tKey,
-                        url: 'https://wiki.openstreetmap.org/wiki/' + wiki[langCode]
+                        url:
+                            'https://wiki.openstreetmap.org/wiki/' +
+                            wiki[langCode],
                     };
                 }
             }
         });
     },
 
-
-    addLocale: function(langCode, qid) {
+    addLocale: function (langCode, qid) {
         // Makes it easier to unit test
         _localeIDs[langCode] = qid;
     },
 
-
-    apibase: function(val) {
+    apibase: function (val) {
         if (!arguments.length) return apibase;
         apibase = val;
         return this;
-    }
-
+    },
 };

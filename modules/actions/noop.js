@@ -1,5 +1,5 @@
 export function actionNoop() {
-    return function(graph) {
+    return function (graph) {
         return graph;
     };
 }

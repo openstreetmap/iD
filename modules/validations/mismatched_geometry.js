@@ -2,18 +2,17 @@ import deepEqual from 'fast-deep-equal';
 
 import { actionAddVertex } from '../actions/add_vertex';
 import { actionChangeTags } from '../actions/change_tags';
-import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionExtract } from '../actions/extract';
+import { actionMergeNodes } from '../actions/merge_nodes';
+import { t } from '../core/localizer';
+import { validationIssue, validationIssueFix } from '../core/validation';
+import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 import { modeSelect } from '../modes/select';
 import { osmJoinWays } from '../osm/multipolygon';
 import { osmNodeGeometriesForTags, osmTagSuggestingArea } from '../osm/tags';
 import { presetManager } from '../presets';
-import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
-import { t } from '../core/localizer';
 import { utilTagText } from '../util';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
-import { validationIssue, validationIssueFix } from '../core/validation';
-
 
 export function validationMismatchedGeometry() {
     var type = 'mismatched_geometry';
@@ -34,7 +33,11 @@ export function validationMismatchedGeometry() {
             return null;
         }
 
-        if (asLine.isFallback() && asArea.isFallback() && !deepEqual(tagSuggestingArea, { area: 'yes' })) {
+        if (
+            asLine.isFallback() &&
+            asArea.isFallback() &&
+            !deepEqual(tagSuggestingArea, { area: 'yes' })
+        ) {
             // if the entity matches the fallback preset, regardless of the
             // geometry, then changing the geometry will not help.
             return null;
@@ -43,51 +46,56 @@ export function validationMismatchedGeometry() {
         return tagSuggestingArea;
     }
 
-
     function makeConnectEndpointsFixOnClick(way, graph) {
         // must have at least three nodes to close this automatically
         if (way.nodes.length < 3) return null;
 
-        var nodes = graph.childNodes(way), testNodes;
-        var firstToLastDistanceMeters = geoSphericalDistance(nodes[0].loc, nodes[nodes.length-1].loc);
+        var nodes = graph.childNodes(way),
+            testNodes;
+        var firstToLastDistanceMeters = geoSphericalDistance(
+            nodes[0].loc,
+            nodes[nodes.length - 1].loc,
+        );
 
         // if the distance is very small, attempt to merge the endpoints
         if (firstToLastDistanceMeters < 0.75) {
-            testNodes = nodes.slice();   // shallow copy
+            testNodes = nodes.slice(); // shallow copy
             testNodes.pop();
             testNodes.push(testNodes[0]);
             // make sure this will not create a self-intersection
             if (!geoHasSelfIntersections(testNodes, testNodes[0].id)) {
-                return function(context) {
+                return function (context) {
                     var way = context.entity(this.issue.entityIds[0]);
                     context.perform(
-                        actionMergeNodes([way.nodes[0], way.nodes[way.nodes.length-1]], nodes[0].loc),
-                        t('issues.fix.connect_endpoints.annotation')
+                        actionMergeNodes(
+                            [way.nodes[0], way.nodes[way.nodes.length - 1]],
+                            nodes[0].loc,
+                        ),
+                        t('issues.fix.connect_endpoints.annotation'),
                     );
                 };
             }
         }
 
         // if the points were not merged, attempt to close the way
-        testNodes = nodes.slice();   // shallow copy
+        testNodes = nodes.slice(); // shallow copy
         testNodes.push(testNodes[0]);
         // make sure this will not create a self-intersection
         if (!geoHasSelfIntersections(testNodes, testNodes[0].id)) {
-            return function(context) {
+            return function (context) {
                 var wayId = this.issue.entityIds[0];
                 var way = context.entity(wayId);
                 var nodeId = way.nodes[0];
                 var index = way.nodes.length;
                 context.perform(
                     actionAddVertex(wayId, nodeId, index),
-                    t('issues.fix.connect_endpoints.annotation')
+                    t('issues.fix.connect_endpoints.annotation'),
                 );
             };
         }
     }
 
     function lineTaggedAsAreaIssue(entity) {
-
         var tagSuggestingArea = tagSuggestingLineIsArea(entity);
         if (!tagSuggestingArea) return null;
 
@@ -110,55 +118,69 @@ export function validationMismatchedGeometry() {
             type: type,
             subtype: 'area_as_line',
             severity: 'warning',
-            message: function(context) {
+            message: function (context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t.append('issues.tag_suggests_area.message', {
-                    feature: utilDisplayLabel(entity, 'area', true /* verbose */),
-                    tag: utilTagText({ tags: tagSuggestingArea })
-                }) : '';
+                return entity
+                    ? t.append('issues.tag_suggests_area.message', {
+                          feature: utilDisplayLabel(
+                              entity,
+                              'area',
+                              true /* verbose */,
+                          ),
+                          tag: utilTagText({ tags: tagSuggestingArea }),
+                      })
+                    : '';
             },
             reference: showReference,
             entityIds: [entity.id],
             hash: JSON.stringify(tagSuggestingArea),
-            dynamicFixes: function(context) {
-
+            dynamicFixes: function (context) {
                 var fixes = [];
 
                 var entity = context.entity(this.entityIds[0]);
-                var connectEndsOnClick = makeConnectEndpointsFixOnClick(entity, context.graph());
+                var connectEndsOnClick = makeConnectEndpointsFixOnClick(
+                    entity,
+                    context.graph(),
+                );
 
                 if (!validAsLine) {
                     // only suggest to "connect the ends" if the feature is not also valid as a line
-                    fixes.push(new validationIssueFix({
-                        title: t.append('issues.fix.connect_endpoints.title'),
-                        onClick: connectEndsOnClick
-                    }));
+                    fixes.push(
+                        new validationIssueFix({
+                            title: t.append(
+                                'issues.fix.connect_endpoints.title',
+                            ),
+                            onClick: connectEndsOnClick,
+                        }),
+                    );
                 }
 
-                fixes.push(new validationIssueFix({
-                    icon: 'iD-operation-delete',
-                    title: t.append('issues.fix.remove_tag.title'),
-                    onClick: function(context) {
-                        var entityId = this.issue.entityIds[0];
-                        var entity = context.entity(entityId);
-                        var tags = Object.assign({}, entity.tags);  // shallow copy
-                        for (var key in tagSuggestingArea) {
-                            delete tags[key];
-                        }
-                        context.perform(
-                            actionChangeTags(entityId, tags),
-                            t('issues.fix.remove_tag.annotation')
-                        );
-                    }
-                }));
+                fixes.push(
+                    new validationIssueFix({
+                        icon: 'iD-operation-delete',
+                        title: t.append('issues.fix.remove_tag.title'),
+                        onClick: function (context) {
+                            var entityId = this.issue.entityIds[0];
+                            var entity = context.entity(entityId);
+                            var tags = Object.assign({}, entity.tags); // shallow copy
+                            for (var key in tagSuggestingArea) {
+                                delete tags[key];
+                            }
+                            context.perform(
+                                actionChangeTags(entityId, tags),
+                                t('issues.fix.remove_tag.annotation'),
+                            );
+                        },
+                    }),
+                );
 
                 return fixes;
-            }
+            },
         });
 
-
         function showReference(selection) {
-            selection.selectAll('.issue-reference')
+            selection
+                .selectAll('.issue-reference')
                 .data([0])
                 .enter()
                 .append('div')
@@ -180,43 +202,62 @@ export function validationMismatchedGeometry() {
         var geometry = entity.geometry(graph);
         var allowedGeometries = osmNodeGeometriesForTags(entity.tags);
 
-        if (geometry === 'point' && !allowedGeometries.point && allowedGeometries.vertex) {
-
+        if (
+            geometry === 'point' &&
+            !allowedGeometries.point &&
+            allowedGeometries.vertex
+        ) {
             return new validationIssue({
                 type: type,
                 subtype: 'vertex_as_point',
                 severity: 'warning',
-                message: function(context) {
+                message: function (context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t.append('issues.vertex_as_point.message', {
-                        feature: utilDisplayLabel(entity, 'vertex', true /* verbose */)
-                    }) : '';
+                    return entity
+                        ? t.append('issues.vertex_as_point.message', {
+                              feature: utilDisplayLabel(
+                                  entity,
+                                  'vertex',
+                                  true /* verbose */,
+                              ),
+                          })
+                        : '';
                 },
                 reference: function showReference(selection) {
-                    selection.selectAll('.issue-reference')
+                    selection
+                        .selectAll('.issue-reference')
                         .data([0])
                         .enter()
                         .append('div')
                         .attr('class', 'issue-reference')
                         .call(t.append('issues.vertex_as_point.reference'));
                 },
-                entityIds: [entity.id]
+                entityIds: [entity.id],
             });
-
-        } else if (geometry === 'vertex' && !allowedGeometries.vertex && allowedGeometries.point) {
-
+        } else if (
+            geometry === 'vertex' &&
+            !allowedGeometries.vertex &&
+            allowedGeometries.point
+        ) {
             return new validationIssue({
                 type: type,
                 subtype: 'point_as_vertex',
                 severity: 'warning',
-                message: function(context) {
+                message: function (context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t.append('issues.point_as_vertex.message', {
-                        feature: utilDisplayLabel(entity, 'point', true /* verbose */)
-                    }) : '';
+                    return entity
+                        ? t.append('issues.point_as_vertex.message', {
+                              feature: utilDisplayLabel(
+                                  entity,
+                                  'point',
+                                  true /* verbose */,
+                              ),
+                          })
+                        : '';
                 },
                 reference: function showReference(selection) {
-                    selection.selectAll('.issue-reference')
+                    selection
+                        .selectAll('.issue-reference')
                         .data([0])
                         .enter()
                         .append('div')
@@ -224,13 +265,12 @@ export function validationMismatchedGeometry() {
                         .call(t.append('issues.point_as_vertex.reference'));
                 },
                 entityIds: [entity.id],
-                dynamicFixes: extractPointDynamicFixes
+                dynamicFixes: extractPointDynamicFixes,
             });
         }
 
         return null;
     }
-
 
     function otherMismatchIssue(entity, graph) {
         // ignore boring features
@@ -239,26 +279,32 @@ export function validationMismatchedGeometry() {
         if (entity.type !== 'node' && entity.type !== 'way') return null;
 
         // address lines are special so just ignore them
-        if (entity.type === 'node' && entity.isOnAddressLine(graph)) return null;
+        if (entity.type === 'node' && entity.isOnAddressLine(graph))
+            return null;
 
         var sourceGeom = entity.geometry(graph);
 
-        var targetGeoms = entity.type === 'way' ? ['point', 'vertex'] : ['line', 'area'];
+        var targetGeoms =
+            entity.type === 'way' ? ['point', 'vertex'] : ['line', 'area'];
 
         if (sourceGeom === 'area') targetGeoms.unshift('line');
 
         var asSource = presetManager.match(entity, graph);
 
-        var targetGeom = targetGeoms.find(nodeGeom => {
+        var targetGeom = targetGeoms.find((nodeGeom) => {
             const asTarget = presetManager.matchTags(
                 entity.tags,
                 nodeGeom,
                 entity.extent(graph).center(),
             );
-            if (!asSource || !asTarget ||
+            if (
+                !asSource ||
+                !asTarget ||
                 asSource === asTarget ||
                 // sometimes there are two presets with the same tags for different geometries
-                deepEqual(asSource.tags, asTarget.tags)) return false;
+                deepEqual(asSource.tags, asTarget.tags)
+            )
+                return false;
 
             if (asTarget.isFallback()) return false;
 
@@ -284,7 +330,6 @@ export function validationMismatchedGeometry() {
         var dynamicFixes;
         if (targetGeom === 'point') {
             dynamicFixes = extractPointDynamicFixes;
-
         } else if (sourceGeom === 'area' && targetGeom === 'line') {
             dynamicFixes = lineToAreaDynamicFixes;
         }
@@ -293,14 +338,21 @@ export function validationMismatchedGeometry() {
             type: type,
             subtype: subtype,
             severity: 'warning',
-            message: function(context) {
+            message: function (context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t.append('issues.' + referenceId + '.message', {
-                    feature: utilDisplayLabel(entity, targetGeom, true /* verbose */)
-                }) : '';
+                return entity
+                    ? t.append('issues.' + referenceId + '.message', {
+                          feature: utilDisplayLabel(
+                              entity,
+                              targetGeom,
+                              true /* verbose */,
+                          ),
+                      })
+                    : '';
             },
             reference: function showReference(selection) {
-                selection.selectAll('.issue-reference')
+                selection
+                    .selectAll('.issue-reference')
                     .data([0])
                     .enter()
                     .append('div')
@@ -308,30 +360,29 @@ export function validationMismatchedGeometry() {
                     .call(t.append('issues.mismatched_geometry.reference'));
             },
             entityIds: [entity.id],
-            dynamicFixes: dynamicFixes
+            dynamicFixes: dynamicFixes,
         });
     }
 
     function lineToAreaDynamicFixes(context) {
-
         var convertOnClick;
 
         var entityId = this.entityIds[0];
         var entity = context.entity(entityId);
-        var tags = Object.assign({}, entity.tags);  // shallow copy
+        var tags = Object.assign({}, entity.tags); // shallow copy
         delete tags.area;
         if (!osmTagSuggestingArea(tags)) {
             // if removing the area tag would make this a line, offer that as a quick fix
-            convertOnClick = function(context) {
+            convertOnClick = function (context) {
                 var entityId = this.issue.entityIds[0];
                 var entity = context.entity(entityId);
-                var tags = Object.assign({}, entity.tags);  // shallow copy
+                var tags = Object.assign({}, entity.tags); // shallow copy
                 if (tags.area) {
                     delete tags.area;
                 }
                 context.perform(
                     actionChangeTags(entityId, tags),
-                    t('issues.fix.convert_to_line.annotation')
+                    t('issues.fix.convert_to_line.annotation'),
                 );
             };
         }
@@ -340,27 +391,27 @@ export function validationMismatchedGeometry() {
             new validationIssueFix({
                 icon: 'iD-icon-line',
                 title: t.append('issues.fix.convert_to_line.title'),
-                onClick: convertOnClick
-            })
+                onClick: convertOnClick,
+            }),
         ];
     }
 
     function extractPointDynamicFixes(context) {
-
         var entityId = this.entityIds[0];
 
         var extractOnClick = null;
         if (!context.hasHiddenConnections(entityId)) {
-
-            extractOnClick = function(context) {
+            extractOnClick = function (context) {
                 var entityId = this.issue.entityIds[0];
                 var action = actionExtract(entityId, context.projection);
                 context.perform(
                     action,
-                    t('operations.extract.annotation', { n: 1 })
+                    t('operations.extract.annotation', { n: 1 }),
                 );
                 // re-enter mode to trigger updates
-                context.enter(modeSelect(context, [action.getExtractedNodeID()]));
+                context.enter(
+                    modeSelect(context, [action.getExtractedNodeID()]),
+                );
             };
         }
 
@@ -368,18 +419,20 @@ export function validationMismatchedGeometry() {
             new validationIssueFix({
                 icon: 'iD-operation-extract',
                 title: t.append('issues.fix.extract_point.title'),
-                onClick: extractOnClick
-            })
+                onClick: extractOnClick,
+            }),
         ];
     }
 
     function unclosedMultipolygonPartIssues(entity, graph) {
-
-        if (entity.type !== 'relation' ||
+        if (
+            entity.type !== 'relation' ||
             !entity.isMultipolygon() ||
             entity.isDegenerate() ||
             // cannot determine issues for incompletely-downloaded relations
-            !entity.isComplete(graph)) return [];
+            !entity.isComplete(graph)
+        )
+            return [];
 
         var sequences = osmJoinWays(entity.members, graph);
 
@@ -400,18 +453,29 @@ export function validationMismatchedGeometry() {
                 type: type,
                 subtype: 'unclosed_multipolygon_part',
                 severity: 'warning',
-                message: function(context) {
+                message: function (context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t.append('issues.unclosed_multipolygon_part.message', {
-                        feature: utilDisplayLabel(entity, context.graph(), true /* verbose */)
-                    }) : '';
+                    return entity
+                        ? t.append(
+                              'issues.unclosed_multipolygon_part.message',
+                              {
+                                  feature: utilDisplayLabel(
+                                      entity,
+                                      context.graph(),
+                                      true /* verbose */,
+                                  ),
+                              },
+                          )
+                        : '';
                 },
                 reference: showReference,
                 loc: sequence.nodes[0].loc,
                 entityIds: [entity.id],
-                hash: sequence.map(function(way) {
-                    return way.id;
-                }).join()
+                hash: sequence
+                    .map(function (way) {
+                        return way.id;
+                    })
+                    .join(),
             });
             issues.push(issue);
         }
@@ -419,7 +483,8 @@ export function validationMismatchedGeometry() {
         return issues;
 
         function showReference(selection) {
-            selection.selectAll('.issue-reference')
+            selection
+                .selectAll('.issue-reference')
                 .data([0])
                 .enter()
                 .append('div')

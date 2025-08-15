@@ -1,13 +1,11 @@
-import { t } from '../core/localizer';
 import { actionReverse } from '../actions/reverse';
 import { behaviorOperation } from '../behavior/operation';
-
+import { t } from '../core/localizer';
 
 export function operationReverse(context, selectedIDs) {
-
-    var operation = function() {
+    var operation = function () {
         context.perform(function combinedReverseAction(graph) {
-            actions().forEach(function(action) {
+            actions().forEach(function (action) {
                 graph = action(graph);
             });
             return graph;
@@ -16,28 +14,34 @@ export function operationReverse(context, selectedIDs) {
     };
 
     function actions(situation) {
-        return selectedIDs.map(function(entityID) {
-            var entity = context.hasEntity(entityID);
-            if (!entity) return null;
+        return selectedIDs
+            .map(function (entityID) {
+                var entity = context.hasEntity(entityID);
+                if (!entity) return null;
 
-            if (situation === 'toolbar') {
-                if (entity.type === 'way' &&
-                    (!entity.isOneWay() && !entity.isSided())) return null;
-            }
+                if (situation === 'toolbar') {
+                    if (
+                        entity.type === 'way' &&
+                        !entity.isOneWay() &&
+                        !entity.isSided()
+                    )
+                        return null;
+                }
 
-            var geometry = entity.geometry(context.graph());
-            if (entity.type !== 'node' && geometry !== 'line') return null;
+                var geometry = entity.geometry(context.graph());
+                if (entity.type !== 'node' && geometry !== 'line') return null;
 
-            var action = actionReverse(entityID);
-            if (action.disabled(context.graph())) return null;
+                var action = actionReverse(entityID);
+                if (action.disabled(context.graph())) return null;
 
-            return action;
-        }).filter(Boolean);
+                return action;
+            })
+            .filter(Boolean);
     }
 
     function reverseTypeID() {
         var acts = actions();
-        var nodeActionCount = acts.filter(function(act) {
+        var nodeActionCount = acts.filter(function (act) {
             var entity = context.hasEntity(act.entityID());
             return entity && entity.type === 'node';
         }).length;
@@ -46,27 +50,24 @@ export function operationReverse(context, selectedIDs) {
         return 'feature';
     }
 
-
-    operation.available = function(situation) {
+    operation.available = function (situation) {
         return actions(situation).length > 0;
     };
 
-
-    operation.disabled = function() {
+    operation.disabled = function () {
         return false;
     };
 
-
-    operation.tooltip = function() {
+    operation.tooltip = function () {
         return t.append('operations.reverse.description.' + reverseTypeID());
     };
 
-
-    operation.annotation = function() {
+    operation.annotation = function () {
         var acts = actions();
-        return t('operations.reverse.annotation.' + reverseTypeID(), { n: acts.length });
+        return t('operations.reverse.annotation.' + reverseTypeID(), {
+            n: acts.length,
+        });
     };
-
 
     operation.id = 'reverse';
     operation.keys = [t('operations.reverse.key')];

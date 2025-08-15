@@ -2,7 +2,9 @@ import { utilDetect } from './detect';
 
 const preferredLanguage = utilDetect().browserLocales[0];
 
-function timeSince(date: Date): [value: number, unit: Intl.RelativeTimeFormatUnit] {
+function timeSince(
+    date: Date,
+): [value: number, unit: Intl.RelativeTimeFormatUnit] {
     const seconds = Math.floor((+new Date() - +date) / 1000);
     const s = (n: number) => Math.floor(seconds / n);
 
@@ -19,12 +21,18 @@ function timeSince(date: Date): [value: number, unit: Intl.RelativeTimeFormatUni
  * Otherwise fallback to the current date
  */
 export function getRelativeDate(date: Date) {
-    if (typeof Intl === 'undefined' || typeof Intl.RelativeTimeFormat === 'undefined') {
+    if (
+        typeof Intl === 'undefined' ||
+        typeof Intl.RelativeTimeFormat === 'undefined'
+    ) {
         return `on ${date.toLocaleDateString(preferredLanguage)}`;
     }
 
     const [number, units] = timeSince(date);
     if (!Number.isFinite(number)) return '-';
 
-    return new Intl.RelativeTimeFormat(preferredLanguage).format(-number, units);
+    return new Intl.RelativeTimeFormat(preferredLanguage).format(
+        -number,
+        units,
+    );
 }

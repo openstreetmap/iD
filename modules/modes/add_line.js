@@ -3,9 +3,8 @@ import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionAddVertex } from '../actions/add_vertex';
 
 import { behaviorAddWay } from '../behavior/add_way';
-import { modeDrawLine } from './draw_line';
 import { osmNode, osmWay } from '../osm';
-
+import { modeDrawLine } from './draw_line';
 
 export function modeAddLine(context, mode) {
     mode.id = 'add-line';
@@ -17,10 +16,10 @@ export function modeAddLine(context, mode) {
 
     function defaultTags(loc) {
         var defaultTags = {};
-        if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'line', false, loc);
+        if (mode.preset)
+            defaultTags = mode.preset.setTags(defaultTags, 'line', false, loc);
         return defaultTags;
     }
-
 
     function start(loc) {
         var startGraph = context.graph();
@@ -30,12 +29,11 @@ export function modeAddLine(context, mode) {
         context.perform(
             actionAddEntity(node),
             actionAddEntity(way),
-            actionAddVertex(way.id, node.id)
+            actionAddVertex(way.id, node.id),
         );
 
         context.enter(modeDrawLine(context, way.id, startGraph, mode.button));
     }
-
 
     function startFromWay(loc, edge) {
         var startGraph = context.graph();
@@ -46,32 +44,26 @@ export function modeAddLine(context, mode) {
             actionAddEntity(node),
             actionAddEntity(way),
             actionAddVertex(way.id, node.id),
-            actionAddMidpoint({ loc: loc, edge: edge }, node)
+            actionAddMidpoint({ loc: loc, edge: edge }, node),
         );
 
         context.enter(modeDrawLine(context, way.id, startGraph, mode.button));
     }
-
 
     function startFromNode(node) {
         var startGraph = context.graph();
         var way = osmWay({ tags: defaultTags(node.loc) });
 
-        context.perform(
-            actionAddEntity(way),
-            actionAddVertex(way.id, node.id)
-        );
+        context.perform(actionAddEntity(way), actionAddVertex(way.id, node.id));
 
         context.enter(modeDrawLine(context, way.id, startGraph, mode.button));
     }
 
-
-    mode.enter = function() {
+    mode.enter = function () {
         context.install(behavior);
     };
 
-
-    mode.exit = function() {
+    mode.exit = function () {
         context.uninstall(behavior);
     };
 

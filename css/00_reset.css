@@ -3,47 +3,128 @@
    License: none (public domain)
 */
 
-div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
-ol, ul {
-	list-style: none;
+ol,
+ul {
+  list-style: none;
 }
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
-a { text-decoration: none;}
+a {
+  text-decoration: none;
+}
 /*
  * 1. Corrects font family not being inherited in all browsers.
  * 2. Corrects font size not being inherited in all browsers.
@@ -54,10 +135,10 @@ button,
 input,
 select,
 textarea {
-    font-family: inherit; /* 1 */
-    font-size: 100%; /* 2 */
-    margin: 0; /* 3 */
-    padding: 0;
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 2 */
+  margin: 0; /* 3 */
+  padding: 0;
 }
 
 /*
@@ -67,17 +148,17 @@ textarea {
 
 button,
 input {
-    line-height: inherit;
-	letter-spacing: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
 }
 
 /* Hide default number spinner controls */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-	display: none;
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  display: none;
 }
-input[type=number] {
-    -moz-appearance: textfield;
+input[type='number'] {
+  -moz-appearance: textfield;
 }
 
 /*
@@ -87,11 +168,11 @@ input[type=number] {
  */
 
 button,
-input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-    -webkit-appearance: button; /* 1 */
-    cursor: pointer; /* 2 */
+input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+  -webkit-appearance: button; /* 1 */
+  cursor: pointer; /* 2 */
 }
 
 /*
@@ -100,7 +181,7 @@ input[type="submit"] {
 
 button[disabled],
 input[disabled] {
-    cursor: default;
+  cursor: default;
 }
 
 /*
@@ -108,10 +189,10 @@ input[disabled] {
  * 2. Removes excess padding in IE 8/9.
  */
 
-input[type="checkbox"],
-input[type="radio"] {
-    box-sizing: border-box; /* 1 */
-    padding: 0; /* 2 */
+input[type='checkbox'],
+input[type='radio'] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
 }
 
 /*
@@ -120,9 +201,9 @@ input[type="radio"] {
  *    (include `-moz` to future-proof).
  */
 
-input[type="search"] {
-    -webkit-appearance: none; /* 1 */
-    box-sizing: border-box;
+input[type='search'] {
+  -webkit-appearance: none; /* 1 */
+  box-sizing: border-box;
 }
 
 /*
@@ -130,9 +211,9 @@ input[type="search"] {
  * on OS X.
  */
 
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-    -webkit-appearance: none;
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration {
+  -webkit-appearance: none;
 }
 
 /*
@@ -141,8 +222,8 @@ input[type="search"]::-webkit-search-decoration {
 
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-    border: 0;
-    padding: 0;
+  border: 0;
+  padding: 0;
 }
 
 /*
@@ -151,10 +232,10 @@ input::-moz-focus-inner {
 */
 .cf:before,
 .cf:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+  content: ' '; /* 1 */
+  display: table; /* 2 */
 }
 
 .cf:after {
-    clear: both;
+  clear: both;
 }

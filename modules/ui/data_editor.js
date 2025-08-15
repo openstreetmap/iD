@@ -5,7 +5,6 @@ import { svgIcon } from '../svg/icon';
 import { uiDataHeader } from './data_header';
 import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
 
-
 export function uiDataEditor(context) {
     var dataHeader = uiDataHeader();
     var rawTagEditor = uiSectionRawTagEditor('custom-data-tag-editor', context)
@@ -13,13 +12,11 @@ export function uiDataEditor(context) {
         .readOnlyTags([/./]);
     var _datum;
 
-
     function dataEditor(selection) {
+        var header = selection.selectAll('.header').data([0]);
 
-        var header = selection.selectAll('.header')
-            .data([0]);
-
-        var headerEnter = header.enter()
+        var headerEnter = header
+            .enter()
             .append('div')
             .attr('class', 'header fillL');
 
@@ -27,59 +24,49 @@ export function uiDataEditor(context) {
             .append('button')
             .attr('class', 'close')
             .attr('title', t('icons.close'))
-            .on('click', function() {
+            .on('click', function () {
                 context.enter(modeBrowse(context));
             })
             .call(svgIcon('#iD-icon-close'));
 
-        headerEnter
-            .append('h2')
-            .call(t.append('map_data.title'));
+        headerEnter.append('h2').call(t.append('map_data.title'));
 
+        var body = selection.selectAll('.body').data([0]);
 
-        var body = selection.selectAll('.body')
-            .data([0]);
+        body = body.enter().append('div').attr('class', 'body').merge(body);
 
-        body = body.enter()
-            .append('div')
-            .attr('class', 'body')
-            .merge(body);
-
-        var editor = body.selectAll('.data-editor')
-            .data([0]);
+        var editor = body.selectAll('.data-editor').data([0]);
 
         // enter/update
-        editor.enter()
+        editor
+            .enter()
             .append('div')
             .attr('class', 'modal-section data-editor')
             .merge(editor)
             .call(dataHeader.datum(_datum));
 
-        var rte = body.selectAll('.raw-tag-editor')
-            .data([0]);
+        var rte = body.selectAll('.raw-tag-editor').data([0]);
 
         // enter/update
         rte.enter()
             .append('div')
             .attr('class', 'raw-tag-editor data-editor')
             .merge(rte)
-            .call(rawTagEditor
-                .tags((_datum && _datum.properties) || {})
-                .state('hover')
-                .render
+            .call(
+                rawTagEditor
+                    .tags((_datum && _datum.properties) || {})
+                    .state('hover').render,
             )
             .selectAll('textarea.tag-text')
             .attr('readonly', true)
             .classed('readonly', true);
     }
 
-
-    dataEditor.datum = function(val) {
+    dataEditor.datum = function (val) {
         if (!arguments.length) return _datum;
         _datum = val;
         return this;
     };
-
 
     return dataEditor;
 }

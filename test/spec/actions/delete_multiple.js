@@ -1,20 +1,20 @@
 describe('iD.actionDeleteMultiple', function () {
     it('deletes multiple entities of heterogeneous types', function () {
-        var n      = iD.osmNode(),
-            w      = iD.osmWay(),
-            r      = iD.osmRelation(),
+        var n = iD.osmNode(),
+            w = iD.osmWay(),
+            r = iD.osmRelation(),
             action = iD.actionDeleteMultiple([n.id, w.id, r.id]),
-            graph  = action(iD.coreGraph([n, w, r]));
+            graph = action(iD.coreGraph([n, w, r]));
         expect(graph.hasEntity(n.id)).to.be.undefined;
         expect(graph.hasEntity(w.id)).to.be.undefined;
         expect(graph.hasEntity(r.id)).to.be.undefined;
     });
 
     it('deletes a way and one of its nodes', function () {
-        var n      = iD.osmNode(),
-            w      = iD.osmWay({nodes: [n.id]}),
+        var n = iD.osmNode(),
+            w = iD.osmWay({ nodes: [n.id] }),
             action = iD.actionDeleteMultiple([w.id, n.id]),
-            graph  = action(iD.coreGraph([n, w]));
+            graph = action(iD.coreGraph([n, w]));
         expect(graph.hasEntity(w.id)).to.be.undefined;
         expect(graph.hasEntity(n.id)).to.be.undefined;
     });

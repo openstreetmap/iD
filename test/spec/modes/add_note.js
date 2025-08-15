@@ -1,22 +1,27 @@
-describe.skip('iD.modeAddNote', function() {
+describe.skip('iD.modeAddNote', function () {
     var context;
 
-    before(function() {
-        window.location.hash = '#background=none';  // Try not to load imagery
+    before(function () {
+        window.location.hash = '#background=none'; // Try not to load imagery
         iD.services.osm = iD.serviceOsm;
     });
 
-    after(function() {
+    after(function () {
         delete iD.services.osm;
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
         var container = d3.select(document.createElement('div'));
-        context = iD.coreContext().assetPath('../dist/').container(container).init();
+        context = iD
+            .coreContext()
+            .assetPath('../dist/')
+            .container(container)
+            .init();
 
         context.loadTiles = function () {};
 
-        container.call(context.map())
+        container
+            .call(context.map())
             .append('div')
             .attr('class', 'inspector-wrap');
 
@@ -33,7 +38,6 @@ describe.skip('iD.modeAddNote', function() {
         //         loc: [-77.02271, 38.90085],
         //         status: 'open'
         //     });
-
         //     context.on('enter.addNoteTest', function(mode) {
         //         if (mode.id === 'select-note') {
         //             expect(iD.services.osm.caches().note.note[-1]).to.eql(note);
@@ -43,11 +47,9 @@ describe.skip('iD.modeAddNote', function() {
         //             done();
         //         }
         //     });
-
         //     happen.mousedown(context.surface().node(), {});
         //     happen.mouseup(window, {});
         // });
-
         // this won't work because draw behavior can only snap to entities, not notes
         // it('selects an existing note rather than adding a new one', function() {
         //     happen.mousedown(context.surface().node(), {});

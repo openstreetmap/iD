@@ -1,22 +1,24 @@
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.behaviorHash', function () {
-
     var hash, context;
 
     beforeEach(function () {
-        window.location.hash = '#background=none';   // Try not to load imagery
+        window.location.hash = '#background=none'; // Try not to load imagery
         var container = d3.select(document.createElement('div'));
-        context = iD.coreContext().assetPath('../dist/').init().container(container);
+        context = iD
+            .coreContext()
+            .assetPath('../dist/')
+            .init()
+            .container(container);
         container.call(context.map());
         hash = iD.behaviorHash(context);
     });
 
     afterEach(function () {
         hash.off();
-        window.location.hash = '#background=none';   // Try not to load imagery
+        window.location.hash = '#background=none'; // Try not to load imagery
     });
-
 
     it('sets hadLocation if window.location.hash is present', function () {
         window.location.hash = '#background=none&map=20.00/38.87952/-77.02405';
@@ -35,7 +37,9 @@ describe('iD.behaviorHash', function () {
     it('centerZooms map at requested coordinates on hash change', async () => {
         hash();
         window.location.hash = '#background=none&map=20.00/38.87952/-77.02405';
-        await new Promise(cb => { d3.select(window).on('hashchange', cb); });
+        await new Promise((cb) => {
+            d3.select(window).on('hashchange', cb);
+        });
         expect(context.map().center()[0]).to.be.closeTo(-77.02405, 0.1);
         expect(context.map().center()[1]).to.be.closeTo(38.87952, 0.1);
         expect(context.map().zoom()).to.equal(20.0);
@@ -81,7 +85,11 @@ describe('iD.behaviorHash', function () {
     it('accepts default changeset comment as hash parameter', function () {
         window.location.hash = '#comment=foo+bar%20%2B1';
         var container = d3.select(document.createElement('div'));
-        context = iD.coreContext().assetPath('../dist/').init().container(container);
+        context = iD
+            .coreContext()
+            .assetPath('../dist/')
+            .init()
+            .container(container);
         iD.behaviorHash(context);
         expect(context.defaultChangesetComment()).to.eql('foo bar +1');
         hash.off();

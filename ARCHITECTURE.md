@@ -22,32 +22,31 @@ generates SVG paths for lines and areas; and
 [d3.zoom](https://d3js.org/d3-zoom),
 which implements map panning and zooming.
 
-
 ### Core Module
 
-The iD *core* module implements the basic datastructures needed to support
+The iD _core_ module implements the basic datastructures needed to support
 browser-based editing:
 
-* `iD.coreContext` - container for all iD "global" objects and bootstrap code
-* `iD.coreGraph` - graph of objects and their relationships to one another
-* `iD.coreHistory` - undo/redo history for changes made during editing
-* `iD.coreDifference` - efficiently determine the difference between two graphs
-* `iD.coreTree` - performs fast spatial indexing of the loaded objects
+- `iD.coreContext` - container for all iD "global" objects and bootstrap code
+- `iD.coreGraph` - graph of objects and their relationships to one another
+- `iD.coreHistory` - undo/redo history for changes made during editing
+- `iD.coreDifference` - efficiently determine the difference between two graphs
+- `iD.coreTree` - performs fast spatial indexing of the loaded objects
 
 ### OSM Module
 
-The iD *osm* module includes classes which represent the basic OpenStreetMap
+The iD _osm_ module includes classes which represent the basic OpenStreetMap
 objects: nodes, ways, and relations.
 
-* `iD.osmNode` - a _node_ is a point type, having a single geographic coordinate
-* `iD.osmWay` - a _way_ is an ordered list of nodes
-* `iD.osmRelation` - a _relation_ groups together nodes, ways, and other relations to provide
+- `iD.osmNode` - a _node_ is a point type, having a single geographic coordinate
+- `iD.osmWay` - a _way_ is an ordered list of nodes
+- `iD.osmRelation` - a _relation_ groups together nodes, ways, and other relations to provide
   free-form higher-level structures.
 
 Each of these three types has _tags_: an associative array of key-value pairs which
 describe the object.
 
-* `iD.osmEntity` - common base class for `iD.osmNode`, `iD.osmWay`, `iD.osmRelation`
+- `iD.osmEntity` - common base class for `iD.osmNode`, `iD.osmWay`, `iD.osmRelation`
 
 These three classes inherit from a common base, `iD.osmEntity`.
 This is the only use of classical inheritance in iD, but it's justified
@@ -69,7 +68,7 @@ and other entities into different datastructures, iD internally uses fully-uniqu
 type. For example, a way with OSM `id` `123456` is represented as `w123456`
 within iD.
 
-iD entities are *immutable*: once constructed, an `Entity` object cannot
+iD entities are _immutable_: once constructed, an `Entity` object cannot
 change. Tags cannot be updated; nodes cannot be added or removed from ways,
 and so on. Immutability makes it easier to reason about the behavior of an
 entity: if your code has a reference to one, it is safe to store it and use it
@@ -93,10 +92,9 @@ many members.
 
 The osm module also includes code related to special kinds of objects in OpenStreetMap.
 
-* `iD.osmIntersection` - code for working with turn restrictions
-* `iD.osmLanes` - code for working with traffic and turn lanes
-* `iD.osmMultipolygon` - code for working with multipolygon relations
-
+- `iD.osmIntersection` - code for working with turn restrictions
+- `iD.osmLanes` - code for working with traffic and turn lanes
+- `iD.osmMultipolygon` - code for working with multipolygon relations
 
 ### Editing OSM
 
@@ -133,7 +131,8 @@ Finally, we have the auxiliary classes `iD.coreDifference` and `iD.coreTree`.
 set of entities that were created, modified, or deleted, and need to be redrawn.
 
 ```js
-var a = iD.coreGraph(), b = iD.coreGraph();
+var a = iD.coreGraph(),
+  b = iD.coreGraph();
 // (fill a & b with data)
 var difference = iD.coreDifference(a, b);
 
@@ -153,8 +152,7 @@ var graph = iD.coreGraph();
 var tree = iD.coreTree(graph);
 
 // quickly pull all features that intersect with an extent
-var features = tree.intersects(
-    iD.geoExtent([0, 0], [2, 2]), tree.graph());
+var features = tree.intersects(iD.geoExtent([0, 0], [2, 2]), tree.graph());
 ```
 
 ### Actions Module
@@ -288,10 +286,10 @@ For rendering entities on screen, we found it convenient to adopt a geometric
 vocabulary that provides a slightly higher-level representation than the basic
 entity types of the OSM data model:
 
-* A _point_ is a node that is not a member of any way.
-* A _vertex_ is a node that is a member of one or more ways.
-* A _line_ is a way that is not an area.
-* An _area_ is a way that is circular and has certain tags, or a series of one
+- A _point_ is a node that is not a member of any way.
+- A _vertex_ is a node that is a member of one or more ways.
+- A _line_ is a way that is not an area.
+- An _area_ is a way that is circular and has certain tags, or a series of one
   or more ways grouped in a multipolygon relation.
 
 For each of these geometric types, `iD.svg` has a corresponding module:
@@ -317,14 +315,14 @@ one corresponding to their geometry type (`point`, `line`, or `area`).
 The `iD.svg` module has a few other submodules that don't have a one-to-one
 correspondence with entities:
 
-* `iD.svgMidpoints` - draws the small "virtual node" at the midpoint between
+- `iD.svgMidpoints` - draws the small "virtual node" at the midpoint between
   two vertices.
-* `iD.svgLabels` - draws textual labels
-* `iD.svgLayers` - sets up a number of layers that ensure that map elements
+- `iD.svgLabels` - draws textual labels
+- `iD.svgLayers` - sets up a number of layers that ensure that map elements
   appear in an appropriate z-order.
-* `iD.svgOsm` - sets up the OSM-specific data layers
-* `iD.svgData` - draws any other overlaid vector data (gpx, kml, geojson, mvt, pbf)
-* `iD.svgDebug` - draws debugging information
+- `iD.svgOsm` - sets up the OSM-specific data layers
+- `iD.svgData` - draws any other overlaid vector data (gpx, kml, geojson, mvt, pbf)
+- `iD.svgDebug` - draws debugging information
 
 ### Other UI
 
@@ -345,13 +343,9 @@ Drawing is then accomplished with
 [d3.selection#call](https://github.com/d3/d3-selection/blob/main/README.md#selection_call):
 
 ```js
-    footer = footer.enter()
-        .append('div')
-        .attr('class', 'footer')
-        .merge(footer);
+footer = footer.enter().append('div').attr('class', 'footer').merge(footer);
 
-    footer
-        .call(uiViewOnOSM(context).what(entity));
+footer.call(uiViewOnOSM(context).what(entity));
 ```
 
 Some components are reconfigurable, and some provide functionality beyond
@@ -393,14 +387,14 @@ Each `validationIssue` takes its rule's `type` and may include a `subtype` that 
 
 A way ends close to another way, indicating they should likely be connected. The current distance threshold is 5 meters.
 
-* `highway-highway`: both the ways are roads or paths; no issue is flagged if the endpoint is an entrance or is tagged `noexit=yes`
+- `highway-highway`: both the ways are roads or paths; no issue is flagged if the endpoint is an entrance or is tagged `noexit=yes`
 
 ##### `close_nodes`
 
 Two nodes have a very small distance between them. The threshold distance is smaller for features expected to be mapped at higher levels of detail (e.g. paths, rooms).
 
-* `detached`: the nodes are not part of any ways; close points with differing z-axis tags like `layer` and `level` are not flagged
-* `vertices`: the nodes are adjacent members of a way
+- `detached`: the nodes are not part of any ways; close points with differing z-axis tags like `layer` and `level` are not flagged
+- `vertices`: the nodes are adjacent members of a way
 
 ##### `crossing_ways`
 
@@ -408,35 +402,35 @@ Two ways cross without a junction node or enough information to clarify how they
 
 Building crossings are flagged per-feature. Other subtypes are flagged per-crossing.
 
-* `building-building`
-* `building-highway`
-* `building-railway`
-* `building-waterway`
-* `highway-highway`
-* `highway-railway`
-* `highway-waterway`
-* `railway-railway`
-* `railway-waterway`
-* `waterway-waterway`
+- `building-building`
+- `building-highway`
+- `building-railway`
+- `building-waterway`
+- `highway-highway`
+- `highway-railway`
+- `highway-waterway`
+- `railway-railway`
+- `railway-waterway`
+- `waterway-waterway`
 
 ##### `disconnected_way`
 
 One or more interconnected, routable feature are not connected to the rest of the routable network (i.e. they form a routing island). A way is considered connected to the network if any of its nodes are on an unloaded tile, meaning large routing islands may not always be detected.
 
-* `highway`: the feature is a road, path, ferry route, or elevator; entrances are also considered network connections
+- `highway`: the feature is a road, path, ferry route, or elevator; entrances are also considered network connections
 
 ##### `help_request`
 
 Someone has indicated a feature needs further attention.
 
-* `fixme_tag`: a feature has a `fixme` tag that existed before the user's current edits; deleting the `fixme` tag marks the issue as resolved regardless of the user's other edits
+- `fixme_tag`: a feature has a `fixme` tag that existed before the user's current edits; deleting the `fixme` tag marks the issue as resolved regardless of the user's other edits
 
 ##### `impossible_oneway`
 
 A one-way line does not have a valid connection at its first or last node.
 
-* `highway`: a one-way road or path does not start or end at another highway or an entrance
-* `waterway`: multiple streams, etc., start or end at the same node that's not a spring, drain, or water body
+- `highway`: a one-way road or path does not start or end at another highway or an entrance
+- `waterway`: multiple streams, etc., start or end at the same node that's not a spring, drain, or water body
 
 ##### `incompatible_source`
 
@@ -446,7 +440,7 @@ The `source` tag of a feature references a data source known to have a license i
 
 A tag of a feature has an unexpected syntax.
 
-* `email`: the `email` tag does not look like "user@example.com"
+- `email`: the `email` tag does not look like "user@example.com"
 
 ##### `maprules`
 
@@ -456,19 +450,19 @@ An issue with the active [MapRules](https://github.com/radiant-maxar/maprules) v
 
 A feature's tags indicate it should have a different geometry than it currently does.
 
-* `area_as_line`: an unclosed way has tags implying it should be a closed area (e.g. `area=yes` or `building=yes`)
-* `area_as_point`
-* `area_as_vertex`
-* `line_as_area`
-* `line_as_point`
-* `line_as_vertex`: a detached node has tags implying it should be a line (e.g. `highway=motorway`)
-* `point_as_area`
-* `point_as_line`
-* `point_as_vertex`: a vertex node has tags implying it should be detached from ways (e.g. `amenity=cafe`)
-* `vertex_as_area`
-* `vertex_as_line`
-* `vertex_as_point`: a detached node has tags implying it should be attached to a way (e.g. `highway=stop`)
-* `unclosed_multipolygon_part`: a relation is tagged as a multipolygon but not all of its member ways form closed rings
+- `area_as_line`: an unclosed way has tags implying it should be a closed area (e.g. `area=yes` or `building=yes`)
+- `area_as_point`
+- `area_as_vertex`
+- `line_as_area`
+- `line_as_point`
+- `line_as_vertex`: a detached node has tags implying it should be a line (e.g. `highway=motorway`)
+- `point_as_area`
+- `point_as_line`
+- `point_as_vertex`: a vertex node has tags implying it should be detached from ways (e.g. `amenity=cafe`)
+- `vertex_as_area`
+- `vertex_as_line`
+- `vertex_as_point`: a detached node has tags implying it should be attached to a way (e.g. `highway=stop`)
+- `unclosed_multipolygon_part`: a relation is tagged as a multipolygon but not all of its member ways form closed rings
 
 ##### `missing_role`
 
@@ -478,10 +472,10 @@ A relation membership does not have a set `role`.
 
 A feature does not have enough tags to define what it is.
 
-* `any`: there are zero tags
-* `descriptive`: there are `area`, `name`, `type=multipolygon`, and/or meta tags (e.g. `source`), but no defining tags
-* `relation_type`: the OSM entity type is `relation` but there is no `type` tag
-* `highway_classification`: the OSM entity type is `way` and the feature is tagged as `highway=road`
+- `any`: there are zero tags
+- `descriptive`: there are `area`, `name`, `type=multipolygon`, and/or meta tags (e.g. `source`), but no defining tags
+- `relation_type`: the OSM entity type is `relation` but there is no `type` tag
+- `highway_classification`: the OSM entity type is `way` and the feature is tagged as `highway=road`
 
 ##### `osm_api_limits`
 
@@ -491,10 +485,10 @@ A feature does not conform to the limits and rules imposed by the OSM API, such 
 
 A feature has nonstandard tags.
 
-* `deprecated_tags`: the feature has tags that should be replaced or removed, as specified in `deprecated.json` or the `replacement` property of a preset
-* `incomplete_tags`: the feature has tags that indicate it should also have some other tags
-* `noncanonical_brand`: the feature indicates it should match a name-suggestion-index entry but does not have all of the given tags
-* `old_multipolygon`: the feature is a multipolygon relation with its defining tags set on its outer member way
+- `deprecated_tags`: the feature has tags that should be replaced or removed, as specified in `deprecated.json` or the `replacement` property of a preset
+- `incomplete_tags`: the feature has tags that indicate it should also have some other tags
+- `noncanonical_brand`: the feature indicates it should match a name-suggestion-index entry but does not have all of the given tags
+- `old_multipolygon`: the feature is a multipolygon relation with its defining tags set on its outer member way
 
 ##### `private_data`
 
@@ -504,14 +498,14 @@ An email address, phone number, or fax number is present on a residential featur
 
 There's indication that a `name` tag doesn't contain the actual name of the feature. Multilingual names like `name:de` are also checked.
 
-* `generic_name`: a name matches the raw key or value of the feature's defining tags (e.g. `amenity`, `cafe`) or it matches something the name-suggestion-index discards as generic when checking the most common place names in OpenStreetMap
-* `not_name`: a name tag matches a value under the `not:name` tag
+- `generic_name`: a name matches the raw key or value of the feature's defining tags (e.g. `amenity`, `cafe`) or it matches something the name-suggestion-index discards as generic when checking the most common place names in OpenStreetMap
+- `not_name`: a name tag matches a value under the `not:name` tag
 
 ##### `unsquare_way`
 
 A way has corners close to, but not quite 90°. The user can vary the "close to" degree threshold between 0° and 20°. The default is 5°. Only buildings are currently flagged.
 
-* `building`: the feature has a `building` tag
+- `building`: the feature has a `building` tag
 
 #### Issue Changeset Tags
 

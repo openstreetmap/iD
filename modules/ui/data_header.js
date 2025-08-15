@@ -1,22 +1,20 @@
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 
-
 export function uiDataHeader() {
     var _datum;
 
-
     function dataHeader(selection) {
-        var header = selection.selectAll('.data-header')
-            .data(
-                (_datum ? [_datum] : []),
-                function(d) { return d.__featurehash__; }
-            );
+        var header = selection
+            .selectAll('.data-header')
+            .data(_datum ? [_datum] : [], function (d) {
+                return d.__featurehash__;
+            });
 
-        header.exit()
-            .remove();
+        header.exit().remove();
 
-        var headerEnter = header.enter()
+        var headerEnter = header
+            .enter()
             .append('div')
             .attr('class', 'data-header');
 
@@ -35,13 +33,11 @@ export function uiDataHeader() {
             .call(t.append('map_data.layers.custom.title'));
     }
 
-
-    dataHeader.datum = function(val) {
+    dataHeader.datum = function (val) {
         if (!arguments.length) return _datum;
         _datum = val;
         return this;
     };
-
 
     return dataHeader;
 }

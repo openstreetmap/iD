@@ -7,7 +7,6 @@ import { uiSectionMapStyleOptions } from '../sections/map_style_options';
 import { uiSectionPhotoOverlays } from '../sections/photo_overlays';
 
 export function uiPaneMapData(context) {
-
     var mapDataPane = uiPane('map-data', context)
         .key(t('map_data.key'))
         .label(t.append('map_data.title'))
@@ -17,7 +16,7 @@ export function uiPaneMapData(context) {
             uiSectionDataLayers(context),
             uiSectionPhotoOverlays(context),
             uiSectionMapStyleOptions(context),
-            uiSectionMapFeatures(context)
+            uiSectionMapFeatures(context),
         ]);
 
     return mapDataPane;

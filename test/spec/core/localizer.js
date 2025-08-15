@@ -1,9 +1,14 @@
-describe('iD.coreLocalizer', function() {
-    describe('#localized-text', function() {
-        it('appends localized text to the DOM', function() {
+describe('iD.coreLocalizer', function () {
+    describe('#localized-text', function () {
+        it('appends localized text to the DOM', function () {
             var selection = d3.select(document.createElement('div'));
-            selection.call(iD.localizer.t.append('icons.download' /* <- just any random string */));
-            expect(selection.selectChild().classed('localized-text')).to.be.true;
+            selection.call(
+                iD.localizer.t.append(
+                    'icons.download' /* <- just any random string */,
+                ),
+            );
+            expect(selection.selectChild().classed('localized-text')).to.be
+                .true;
         });
     });
     describe('#floatFormatter', function () {
@@ -113,10 +118,12 @@ describe('iD.coreLocalizer', function() {
         ])('resolves %s to %s', (requested, matching) => {
             const localiser = iD.coreLocalizer();
             localiser.preferredLocaleCodes(requested);
-            expect(localiser.localesToUseFrom(SUPPORTED_LANGS)).toStrictEqual(matching);
+            expect(localiser.localesToUseFrom(SUPPORTED_LANGS)).toStrictEqual(
+                matching,
+            );
         });
 
-        after(function() {
+        after(function () {
             iD.coreLocalizer().preferredLocaleCodes([]);
         });
     });

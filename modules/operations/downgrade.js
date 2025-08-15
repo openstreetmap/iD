@@ -1,9 +1,9 @@
 import { actionChangeTags } from '../actions/change_tags';
 import { behaviorOperation } from '../behavior/operation';
-import { modeSelect } from '../modes/select';
 import { t } from '../core/localizer';
-import { uiCmd } from '../ui/cmd';
+import { modeSelect } from '../modes/select';
 import { presetManager } from '../presets';
+import { uiCmd } from '../ui/cmd';
 
 export function operationDowngrade(context, selectedIDs) {
     var _affectedFeatureCount = 0;
@@ -40,19 +40,21 @@ export function operationDowngrade(context, selectedIDs) {
 
         if (!preset || preset.isFallback()) return null;
 
-        if (entity.type === 'node' &&
+        if (
+            entity.type === 'node' &&
             preset.id !== 'address' &&
-            Object.keys(entity.tags).some(function(key) {
+            Object.keys(entity.tags).some(function (key) {
                 return key.match(/^addr:.{1,}/);
-            })) {
-
+            })
+        ) {
             return 'address';
         }
         var geometry = entity.geometry(graph);
-        if (geometry === 'area' &&
+        if (
+            geometry === 'area' &&
             entity.tags.building &&
-            !preset.tags.building) {
-
+            !preset.tags.building
+        ) {
             return 'building';
         }
         if (geometry === 'vertex' && Object.keys(entity.tags).length) {
@@ -62,28 +64,46 @@ export function operationDowngrade(context, selectedIDs) {
         return null;
     }
 
-    var buildingKeysToKeep = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin', 'source', 'type', 'wheelchair'];
+    var buildingKeysToKeep = [
+        'architect',
+        'building',
+        'height',
+        'layer',
+        'nycdoitt:bin',
+        'source',
+        'type',
+        'wheelchair',
+    ];
     var addressKeysToKeep = ['source'];
 
     var operation = function () {
-        context.perform(function(graph) {
-
+        context.perform(function (graph) {
             for (var i in selectedIDs) {
                 var entityID = selectedIDs[i];
                 var type = downgradeTypeForEntityID(entityID);
                 if (!type) continue;
 
-                var tags = Object.assign({}, graph.entity(entityID).tags);  // shallow copy
+                var tags = Object.assign({}, graph.entity(entityID).tags); // shallow copy
                 for (var key in tags) {
-                    if (type === 'address' && addressKeysToKeep.indexOf(key) !== -1) continue;
+                    if (
+                        type === 'address' &&
+                        addressKeysToKeep.indexOf(key) !== -1
+                    )
+                        continue;
                     if (type === 'building') {
-                        if (buildingKeysToKeep.indexOf(key) !== -1 ||
+                        if (
+                            buildingKeysToKeep.indexOf(key) !== -1 ||
                             key.match(/^building:.{1,}/) ||
-                            key.match(/^roof:.{1,}/)) continue;
+                            key.match(/^roof:.{1,}/)
+                        )
+                            continue;
                     }
                     if (type !== 'generic') {
-                        if (key.match(/^addr:.{1,}/) ||
-                            key.match(/^source:.{1,}/)) continue;
+                        if (
+                            key.match(/^addr:.{1,}/) ||
+                            key.match(/^source:.{1,}/)
+                        )
+                            continue;
                     }
                     delete tags[key];
                 }
@@ -98,11 +118,9 @@ export function operationDowngrade(context, selectedIDs) {
         context.enter(modeSelect(context, selectedIDs));
     };
 
-
     operation.available = function () {
         return _downgradeType;
     };
-
 
     operation.disabled = function () {
         if (selectedIDs.some(hasWikidataTag)) {
@@ -112,18 +130,18 @@ export function operationDowngrade(context, selectedIDs) {
 
         function hasWikidataTag(id) {
             var entity = context.entity(id);
-            return entity.tags.wikidata && entity.tags.wikidata.trim().length > 0;
+            return (
+                entity.tags.wikidata && entity.tags.wikidata.trim().length > 0
+            );
         }
     };
 
-
     operation.tooltip = function () {
         var disable = operation.disabled();
-        return disable ?
-            t.append('operations.downgrade.' + disable + '.' + _multi) :
-            t.append('operations.downgrade.description.' + _downgradeType);
+        return disable
+            ? t.append('operations.downgrade.' + disable + '.' + _multi)
+            : t.append('operations.downgrade.description.' + _downgradeType);
     };
-
 
     operation.annotation = function () {
         var suffix;
@@ -132,15 +150,15 @@ export function operationDowngrade(context, selectedIDs) {
         } else {
             suffix = _downgradeType;
         }
-        return t('operations.downgrade.annotation.' + suffix, { n: _affectedFeatureCount});
+        return t('operations.downgrade.annotation.' + suffix, {
+            n: _affectedFeatureCount,
+        });
     };
-
 
     operation.id = 'downgrade';
     operation.keys = [uiCmd('⌫')];
     operation.title = t.append('operations.downgrade.title');
     operation.behavior = behaviorOperation(context).which(operation);
-
 
     return operation;
 }

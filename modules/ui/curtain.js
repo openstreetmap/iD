@@ -1,16 +1,12 @@
 import { easeLinear as d3_easeLinear } from 'd3-ease';
 
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { localizer } from '../core/localizer';
 import { uiToggle } from './toggle';
 
-
 // Tooltips and svg mask used to highlight certain features
 export function uiCurtain(containerNode) {
-
     var surface = d3_select(null),
         tooltip = d3_select(null),
         darkness = d3_select(null);
@@ -22,26 +18,21 @@ export function uiCurtain(containerNode) {
             .style('top', 0)
             .style('left', 0);
 
-        darkness = surface.append('path')
+        darkness = surface
+            .append('path')
             .attr('x', 0)
             .attr('y', 0)
             .attr('class', 'curtain-darkness');
 
         d3_select(window).on('resize.curtain', resize);
 
-        tooltip = selection.append('div')
-            .attr('class', 'tooltip');
+        tooltip = selection.append('div').attr('class', 'tooltip');
 
-        tooltip
-            .append('div')
-            .attr('class', 'popover-arrow');
+        tooltip.append('div').attr('class', 'popover-arrow');
 
-        tooltip
-            .append('div')
-            .attr('class', 'popover-inner');
+        tooltip.append('div').attr('class', 'popover-inner');
 
         resize();
-
 
         function resize() {
             surface
@@ -50,7 +41,6 @@ export function uiCurtain(containerNode) {
             curtain.cut(darkness.datum());
         }
     }
-
 
     /**
      * Reveal cuts the curtain to highlight the given box,
@@ -66,7 +56,7 @@ export function uiCurtain(containerNode) {
      * @param  {function}  [options.padding]         extra margin in px to put around bbox
      * @param  {String|ClientRect} [options.tooltipBox]  box for tooltip position, if different from box for the curtain
      */
-    curtain.reveal = function(box, html, options) {
+    curtain.reveal = function (box, html, options) {
         options = options || {};
 
         if (typeof box === 'string') {
@@ -103,38 +93,49 @@ export function uiCurtain(containerNode) {
         }
 
         if (tooltipBox && html) {
-
             if (html.indexOf('**') !== -1) {
                 if (html.indexOf('<span') === 0) {
-                    html = html.replace(/^(<span.*?>)(.+?)(\*\*)/, '$1<span>$2</span>$3');
+                    html = html.replace(
+                        /^(<span.*?>)(.+?)(\*\*)/,
+                        '$1<span>$2</span>$3',
+                    );
                 } else {
                     html = html.replace(/^(.+?)(\*\*)/, '<span>$1</span>$2');
                 }
                 // pseudo markdown bold text for the instruction section..
-                html = html.replace(/\*\*(.*?)\*\*/g, '<span class="instruction">$1</span>');
+                html = html.replace(
+                    /\*\*(.*?)\*\*/g,
+                    '<span class="instruction">$1</span>',
+                );
             }
 
-            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');   // emphasis
-            html = html.replace(/\{br\}/g, '<br/><br/>');       // linebreak
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>'); // emphasis
+            html = html.replace(/\{br\}/g, '<br/><br/>'); // linebreak
 
             if (options.buttonText && options.buttonCallback) {
-                html += '<div class="button-section">' +
-                    '<button href="#" class="button action">' + options.buttonText + '</button></div>';
+                html +=
+                    '<div class="button-section">' +
+                    '<button href="#" class="button action">' +
+                    options.buttonText +
+                    '</button></div>';
             }
 
-            var classes = 'curtain-tooltip popover tooltip arrowed in ' + (options.tooltipClass || '');
+            var classes =
+                'curtain-tooltip popover tooltip arrowed in ' +
+                (options.tooltipClass || '');
             tooltip
                 .classed(classes, true)
                 .selectAll('.popover-inner')
                 .html(html);
 
             if (options.buttonText && options.buttonCallback) {
-                var button = tooltip.selectAll('.button-section .button.action');
-                button
-                    .on('click', function(d3_event) {
-                        d3_event.preventDefault();
-                        options.buttonCallback();
-                    });
+                var button = tooltip.selectAll(
+                    '.button-section .button.action',
+                );
+                button.on('click', function (d3_event) {
+                    d3_event.preventDefault();
+                    options.buttonCallback();
+                });
             }
 
             var tip = copyBox(tooltip.node().getBoundingClientRect()),
@@ -142,8 +143,8 @@ export function uiCurtain(containerNode) {
                 h = containerNode.clientHeight,
                 tooltipWidth = 200,
                 tooltipArrow = 5,
-                side, pos;
-
+                side,
+                pos;
 
             // hack: this will have bottom placement,
             // so need to reserve extra space for the tooltip illustration.
@@ -153,51 +154,71 @@ export function uiCurtain(containerNode) {
 
             // trim box dimensions to just the portion that fits in the container..
             if (tooltipBox.top + tooltipBox.height > h) {
-                tooltipBox.height -= (tooltipBox.top + tooltipBox.height - h);
+                tooltipBox.height -= tooltipBox.top + tooltipBox.height - h;
             }
             if (tooltipBox.left + tooltipBox.width > w) {
-                tooltipBox.width -= (tooltipBox.left + tooltipBox.width - w);
+                tooltipBox.width -= tooltipBox.left + tooltipBox.width - w;
             }
 
             // determine tooltip placement..
-            const onLeftOrRightEdge = tooltipBox.left + tooltipBox.width / 2 > w - 100 || tooltipBox.left + tooltipBox.width / 2 < 100;
-            if (tooltipBox.top + tooltipBox.height < 100 && !onLeftOrRightEdge) {
+            const onLeftOrRightEdge =
+                tooltipBox.left + tooltipBox.width / 2 > w - 100 ||
+                tooltipBox.left + tooltipBox.width / 2 < 100;
+            if (
+                tooltipBox.top + tooltipBox.height < 100 &&
+                !onLeftOrRightEdge
+            ) {
                 // tooltip below box..
                 side = 'bottom';
                 pos = [
                     tooltipBox.left + tooltipBox.width / 2 - tip.width / 2,
-                    tooltipBox.top + tooltipBox.height
+                    tooltipBox.top + tooltipBox.height,
                 ];
-
             } else if (tooltipBox.top > h - 140 && !onLeftOrRightEdge) {
                 // tooltip above box..
                 side = 'top';
                 pos = [
                     tooltipBox.left + tooltipBox.width / 2 - tip.width / 2,
-                    tooltipBox.top - tip.height
+                    tooltipBox.top - tip.height,
                 ];
-
             } else {
                 // tooltip to the side of the tooltipBox..
-                var tipY = tooltipBox.top + tooltipBox.height / 2 - tip.height / 2;
+                var tipY =
+                    tooltipBox.top + tooltipBox.height / 2 - tip.height / 2;
 
                 if (localizer.textDirection() === 'rtl') {
                     if (tooltipBox.left - tooltipWidth - tooltipArrow < 70) {
                         side = 'right';
-                        pos = [tooltipBox.left + tooltipBox.width + tooltipArrow, tipY];
-
+                        pos = [
+                            tooltipBox.left + tooltipBox.width + tooltipArrow,
+                            tipY,
+                        ];
                     } else {
                         side = 'left';
-                        pos = [tooltipBox.left - tooltipWidth - tooltipArrow, tipY];
+                        pos = [
+                            tooltipBox.left - tooltipWidth - tooltipArrow,
+                            tipY,
+                        ];
                     }
-
                 } else {
-                    if (tooltipBox.left + tooltipBox.width + tooltipArrow + tooltipWidth > w - 70) {
+                    if (
+                        tooltipBox.left +
+                            tooltipBox.width +
+                            tooltipArrow +
+                            tooltipWidth >
+                        w - 70
+                    ) {
                         side = 'left';
-                        pos = [tooltipBox.left - tooltipWidth - tooltipArrow, tipY];
+                        pos = [
+                            tooltipBox.left - tooltipWidth - tooltipArrow,
+                            tipY,
+                        ];
                     } else {
                         side = 'right';
-                        pos = [tooltipBox.left + tooltipBox.width + tooltipArrow, tipY];
+                        pos = [
+                            tooltipBox.left + tooltipBox.width + tooltipArrow,
+                            tipY,
+                        ];
                     }
                 }
             }
@@ -211,7 +232,6 @@ export function uiCurtain(containerNode) {
                 .style('left', pos[0] + 'px')
                 .attr('class', classes + ' ' + side);
 
-
             // shift popover-inner if it is very close to the top or bottom edge
             // (doesn't affect the placement of the popover-arrow)
             var shiftY = 0;
@@ -222,13 +242,9 @@ export function uiCurtain(containerNode) {
                     shiftY = h - pos[1] - tip.height - 100;
                 }
             }
-            tooltip.selectAll('.popover-inner')
-                .style('top', shiftY + 'px');
-
+            tooltip.selectAll('.popover-inner').style('top', shiftY + 'px');
         } else {
-            tooltip
-                .classed('in', false)
-                .call(uiToggle(false));
+            tooltip.classed('in', false).call(uiToggle(false));
         }
 
         curtain.cut(box, options.duration);
@@ -236,10 +252,8 @@ export function uiCurtain(containerNode) {
         return tooltip;
     };
 
-
-    curtain.cut = function(datum, duration) {
-        darkness.datum(datum)
-            .interrupt();
+    curtain.cut = function (datum, duration) {
+        darkness.datum(datum).interrupt();
 
         var selection;
         if (duration === 0) {
@@ -251,31 +265,49 @@ export function uiCurtain(containerNode) {
                 .ease(d3_easeLinear);
         }
 
-        selection
-            .attr('d', function(d) {
-                var containerWidth = containerNode.clientWidth;
-                var containerHeight = containerNode.clientHeight;
-                var string = 'M 0,0 L 0,' + containerHeight + ' L ' +
-                    containerWidth + ',' + containerHeight + 'L' +
-                    containerWidth + ',0 Z';
+        selection.attr('d', function (d) {
+            var containerWidth = containerNode.clientWidth;
+            var containerHeight = containerNode.clientHeight;
+            var string =
+                'M 0,0 L 0,' +
+                containerHeight +
+                ' L ' +
+                containerWidth +
+                ',' +
+                containerHeight +
+                'L' +
+                containerWidth +
+                ',0 Z';
 
-                if (!d) return string;
-                return string + 'M' +
-                    d.left + ',' + d.top + 'L' +
-                    d.left + ',' + (d.top + d.height) + 'L' +
-                    (d.left + d.width) + ',' + (d.top + d.height) + 'L' +
-                    (d.left + d.width) + ',' + (d.top) + 'Z';
-
-            });
+            if (!d) return string;
+            return (
+                string +
+                'M' +
+                d.left +
+                ',' +
+                d.top +
+                'L' +
+                d.left +
+                ',' +
+                (d.top + d.height) +
+                'L' +
+                (d.left + d.width) +
+                ',' +
+                (d.top + d.height) +
+                'L' +
+                (d.left + d.width) +
+                ',' +
+                d.top +
+                'Z'
+            );
+        });
     };
 
-
-    curtain.remove = function() {
+    curtain.remove = function () {
         surface.remove();
         tooltip.remove();
         d3_select(window).on('resize.curtain', null);
     };
-
 
     // ClientRects are immutable, so copy them to an object,
     // in case we need to trim the height/width.
@@ -286,10 +318,9 @@ export function uiCurtain(containerNode) {
             bottom: src.bottom,
             left: src.left,
             width: src.width,
-            height: src.height
+            height: src.height,
         };
     }
-
 
     return curtain;
 }

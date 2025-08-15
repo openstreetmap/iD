@@ -3,17 +3,20 @@ import { select as d3_select } from 'd3-selection';
 
 import { utilArrayUniq } from '../util';
 
-
 /*
     A standalone SVG element that contains only a `defs` sub-element. To be
     used once globally, since defs IDs must be unique within a document.
 */
 export function svgDefs(context) {
-
     var _defsSelection = d3_select(null);
 
     var _spritesheetIds = [
-        'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'roentgen-sprite', 'community-sprite'
+        'iD-sprite',
+        'maki-sprite',
+        'temaki-sprite',
+        'fa-sprite',
+        'roentgen-sprite',
+        'community-sprite',
     ];
 
     function drawDefs(selection) {
@@ -50,7 +53,6 @@ export function svgDefs(context) {
         addOnewayMarker('white', '#fff'); // for dark lines (bridges under construction, railways, etc.)
         addOnewayMarker('gray', '#eee'); // for railway lines
 
-
         function addSidedMarker(name, color, offset) {
             _defsSelection
                 .append('marker')
@@ -63,7 +65,10 @@ export function svgDefs(context) {
                 .attr('markerUnits', 'strokeWidth')
                 .attr('orient', 'auto')
                 .append('path')
-                .attr('class', 'sided-marker-path sided-marker-' + name + '-path')
+                .attr(
+                    'class',
+                    'sided-marker-path sided-marker-' + name + '-path',
+                )
                 .attr('d', 'M 0,0 L 1,1 L 2,0 z')
                 .attr('stroke', 'none')
                 .attr('fill', color);
@@ -117,7 +122,8 @@ export function svgDefs(context) {
             .attr('stroke-opacity', '0.75');
 
         // add patterns
-        var patterns = _defsSelection.selectAll('pattern')
+        var patterns = _defsSelection
+            .selectAll('pattern')
             .data([
                 // pattern name, pattern image name
                 ['beach', 'dots'],
@@ -148,11 +154,13 @@ export function svgDefs(context) {
                 ['wetland_marsh', 'wetland_marsh'],
                 ['wetland_swamp', 'wetland_swamp'],
                 ['wetland_bog', 'wetland_bog'],
-                ['wetland_reedbed', 'wetland_reedbed']
+                ['wetland_reedbed', 'wetland_reedbed'],
             ])
             .enter()
             .append('pattern')
-            .attr('id', function (d) { return 'ideditor-pattern-' + d[0]; })
+            .attr('id', function (d) {
+                return 'ideditor-pattern-' + d[0];
+            })
             .attr('width', 32)
             .attr('height', 32)
             .attr('patternUnits', 'userSpaceOnUse');
@@ -163,7 +171,9 @@ export function svgDefs(context) {
             .attr('y', 0)
             .attr('width', 32)
             .attr('height', 32)
-            .attr('class', function (d) { return 'pattern-color-' + d[0]; });
+            .attr('class', function (d) {
+                return 'pattern-color-' + d[0];
+            });
 
         patterns
             .append('image')
@@ -176,23 +186,31 @@ export function svgDefs(context) {
             });
 
         // add clip paths
-        _defsSelection.selectAll('clipPath')
+        _defsSelection
+            .selectAll('clipPath')
             .data([12, 18, 20, 32, 45])
             .enter()
             .append('clipPath')
-            .attr('id', function (d) { return 'ideditor-clip-square-' + d; })
+            .attr('id', function (d) {
+                return 'ideditor-clip-square-' + d;
+            })
             .append('rect')
             .attr('x', 0)
             .attr('y', 0)
-            .attr('width', function (d) { return d; })
-            .attr('height', function (d) { return d; });
+            .attr('width', function (d) {
+                return d;
+            })
+            .attr('height', function (d) {
+                return d;
+            });
 
         // add svg filters
-        const filters = _defsSelection.selectAll('filter')
+        const filters = _defsSelection
+            .selectAll('filter')
             .data(['alpha-slope5'])
             .enter()
             .append('filter')
-            .attr('id', d => d);
+            .attr('id', (d) => d);
         // Alters the alpha channel such that everything but
         // (almost) transparent pixels are rendered fully opaque:
         // This is used in a workaround for how chrome is rendering
@@ -201,14 +219,13 @@ export function svgDefs(context) {
         // tiles cannot "add up" to a fully opaque background layer.
         // See https://github.com/openstreetmap/iD/issues/10747
         // and https://github.com/openstreetmap/iD/pull/10594
-        const alphaSlope5 = filters.filter('#alpha-slope5')
+        const alphaSlope5 = filters
+            .filter('#alpha-slope5')
             .append('feComponentTransfer');
         alphaSlope5.append('feFuncR').attr('type', 'identity');
         alphaSlope5.append('feFuncG').attr('type', 'identity');
         alphaSlope5.append('feFuncB').attr('type', 'identity');
-        alphaSlope5.append('feFuncA')
-            .attr('type', 'linear')
-            .attr('slope', 5);
+        alphaSlope5.append('feFuncA').attr('type', 'linear').attr('slope', 5);
 
         // add symbol spritesheets
         addSprites(_spritesheetIds, true);
@@ -224,29 +241,33 @@ export function svgDefs(context) {
         spritesheets
             .enter()
             .append('g')
-            .attr('class', function(d) { return 'spritesheet spritesheet-' + d; })
-            .each(function(d) {
+            .attr('class', function (d) {
+                return 'spritesheet spritesheet-' + d;
+            })
+            .each(function (d) {
                 var url = context.imagePath(d + '.svg');
                 var node = d3_select(this).node();
 
                 d3_svg(url)
-                    .then(function(svg) {
+                    .then(function (svg) {
                         node.appendChild(
-                            d3_select(svg.documentElement).attr('id', 'ideditor-' + d).node()
+                            d3_select(svg.documentElement)
+                                .attr('id', 'ideditor-' + d)
+                                .node(),
                         );
-                        if (overrideColors && d !== 'iD-sprite') {   // allow icon colors to be overridden..
-                            d3_select(node).selectAll('path')
+                        if (overrideColors && d !== 'iD-sprite') {
+                            // allow icon colors to be overridden..
+                            d3_select(node)
+                                .selectAll('path')
                                 .attr('fill', 'currentColor');
                         }
                     })
-                    .catch(function() {
+                    .catch(function () {
                         /* ignore */
                     });
             });
 
-        spritesheets
-            .exit()
-            .remove();
+        spritesheets.exit().remove();
     }
 
     drawDefs.addSprites = addSprites;

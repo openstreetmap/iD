@@ -19,7 +19,7 @@ export function utilRebind(target, source, ...args) {
 // If passed with no arguments, gets the value.
 // If passed with arguments, sets the value and returns the target.
 function d3_rebind(target, source, method) {
-    return function() {
+    return function () {
         var value = method.apply(source, arguments);
         return value === source ? target : value;
     };

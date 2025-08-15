@@ -1,22 +1,21 @@
-import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
-import { svgPointTransform } from './helpers';
+import _throttle from 'lodash-es/throttle';
 import { services } from '../services';
-
+import { svgPointTransform } from './helpers';
 
 export function svgMapillarySigns(projection, context, dispatch) {
-    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    const throttledRedraw = _throttle(function () {
+        dispatch.call('change');
+    }, 1000);
     const minZoom = 12;
     let layer = d3_select(null);
     let _mapillary;
 
-
     function init() {
-        if (svgMapillarySigns.initialized) return;  // run once
+        if (svgMapillarySigns.initialized) return; // run once
         svgMapillarySigns.enabled = false;
         svgMapillarySigns.initialized = true;
     }
-
 
     function getService() {
         if (services.mapillary && !_mapillary) {
@@ -28,7 +27,6 @@ export function svgMapillarySigns(projection, context, dispatch) {
         return _mapillary;
     }
 
-
     function showLayer() {
         const service = getService();
         if (!service) return;
@@ -37,23 +35,19 @@ export function svgMapillarySigns(projection, context, dispatch) {
         editOn();
     }
 
-
     function hideLayer() {
         throttledRedraw.cancel();
         editOff();
     }
 
-
     function editOn() {
         layer.style('display', 'block');
     }
-
 
     function editOff() {
         layer.selectAll('.icon-sign').remove();
         layer.style('display', 'none');
     }
-
 
     function click(d3_event, d) {
         const service = getService();
@@ -61,9 +55,10 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         context.map().centerEase(d.loc);
 
-        const selectedImageId = service.getActiveImage() && service.getActiveImage().id;
+        const selectedImageId =
+            service.getActiveImage() && service.getActiveImage().id;
 
-        service.getDetections(d.id).then(detections => {
+        service.getDetections(d.id).then((detections) => {
             if (detections.length) {
                 const imageId = detections[0].image.id;
                 if (imageId === selectedImageId) {
@@ -71,18 +66,16 @@ export function svgMapillarySigns(projection, context, dispatch) {
                         .highlightDetection(detections[0])
                         .selectImage(context, imageId);
                 } else {
-                    service.ensureViewerLoaded(context)
-                        .then(function() {
-                            service
-                                .highlightDetection(detections[0])
-                                .selectImage(context, imageId)
-                                .showViewer(context);
-                        });
+                    service.ensureViewerLoaded(context).then(function () {
+                        service
+                            .highlightDetection(detections[0])
+                            .selectImage(context, imageId)
+                            .showViewer(context);
+                    });
                 }
             }
         });
     }
-
 
     function filterData(detectedFeatures) {
         var fromDate = context.photos().fromDate();
@@ -90,13 +83,15 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         if (fromDate) {
             var fromTimestamp = new Date(fromDate).getTime();
-            detectedFeatures = detectedFeatures.filter(function(feature) {
-                return new Date(feature.last_seen_at).getTime() >= fromTimestamp;
+            detectedFeatures = detectedFeatures.filter(function (feature) {
+                return (
+                    new Date(feature.last_seen_at).getTime() >= fromTimestamp
+                );
             });
         }
         if (toDate) {
             var toTimestamp = new Date(toDate).getTime();
-            detectedFeatures = detectedFeatures.filter(function(feature) {
+            detectedFeatures = detectedFeatures.filter(function (feature) {
                 return new Date(feature.first_seen_at).getTime() <= toTimestamp;
             });
         }
@@ -104,23 +99,23 @@ export function svgMapillarySigns(projection, context, dispatch) {
         return detectedFeatures;
     }
 
-
     function update() {
         const service = getService();
-        let data = (service ? service.signs(projection) : []);
+        let data = service ? service.signs(projection) : [];
         data = filterData(data);
 
         const transform = svgPointTransform(projection);
 
-        const signs = layer.selectAll('.icon-sign')
-            .data(data, function(d) { return d.id; });
+        const signs = layer.selectAll('.icon-sign').data(data, function (d) {
+            return d.id;
+        });
 
         // exit
-        signs.exit()
-            .remove();
+        signs.exit().remove();
 
         // enter
-        const enter = signs.enter()
+        const enter = signs
+            .enter()
             .append('g')
             .attr('class', 'icon-sign icon-detected')
             .on('click', click);
@@ -131,7 +126,9 @@ export function svgMapillarySigns(projection, context, dispatch) {
             .attr('height', '24px')
             .attr('x', '-12px')
             .attr('y', '-12px')
-            .attr('xlink:href', function(d) { return '#' + d.value; });
+            .attr('xlink:href', function (d) {
+                return '#' + d.value;
+            });
 
         enter
             .append('rect')
@@ -141,23 +138,21 @@ export function svgMapillarySigns(projection, context, dispatch) {
             .attr('y', '-12px');
 
         // update
-        signs
-            .merge(enter)
-            .attr('transform', transform);
+        signs.merge(enter).attr('transform', transform);
     }
-
 
     function drawSigns(selection) {
         const enabled = svgMapillarySigns.enabled;
         const service = getService();
 
-        layer = selection.selectAll('.layer-mapillary-signs')
+        layer = selection
+            .selectAll('.layer-mapillary-signs')
             .data(service ? [0] : []);
 
-        layer.exit()
-            .remove();
+        layer.exit().remove();
 
-        layer = layer.enter()
+        layer = layer
+            .enter()
             .append('g')
             .attr('class', 'layer-mapillary-signs layer-mapillary-detections')
             .style('display', enabled ? 'block' : 'none')
@@ -177,8 +172,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
         }
     }
 
-
-    drawSigns.enabled = function(_) {
+    drawSigns.enabled = function (_) {
         if (!arguments.length) return svgMapillarySigns.enabled;
         svgMapillarySigns.enabled = _;
         if (svgMapillarySigns.enabled) {
@@ -192,15 +186,13 @@ export function svgMapillarySigns(projection, context, dispatch) {
         return this;
     };
 
-
-    drawSigns.supported = function() {
+    drawSigns.supported = function () {
         return !!getService();
     };
 
-    drawSigns.rendered = function(zoom) {
-      return zoom >= minZoom;
+    drawSigns.rendered = function (zoom) {
+        return zoom >= minZoom;
     };
-
 
     init();
     return drawSigns;

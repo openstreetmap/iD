@@ -1,35 +1,34 @@
 import { setTimeout } from 'node:timers/promises';
 
-describe('iD.serviceStreetside', function() {
+describe('iD.serviceStreetside', function () {
     var dimensions = [64, 64];
     var context, streetside;
 
-    before(function() {
+    before(function () {
         iD.services.streetside = iD.serviceStreetside;
     });
 
-    after(function() {
+    after(function () {
         delete iD.services.streetside;
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
         context = iD.coreContext().assetPath('../dist/').init();
         context.projection
             .scale(iD.geoZoomToScale(14))
-            .translate([-116508, 0])  // 10,0
-            .clipExtent([[0,0], dimensions]);
+            .translate([-116508, 0]) // 10,0
+            .clipExtent([[0, 0], dimensions]);
 
         streetside = iD.services.streetside;
         streetside.reset();
     });
 
-    afterEach(function() {
+    afterEach(function () {
         window.JSONP_FIX = undefined;
     });
 
-
-    describe('#init', function() {
-        it('Initializes cache one time', function() {
+    describe('#init', function () {
+        it('Initializes cache one time', function () {
             var cache = streetside.cache();
             expect(cache).to.have.property('bubbles');
             expect(cache).to.have.property('sequences');
@@ -40,38 +39,40 @@ describe('iD.serviceStreetside', function() {
         });
     });
 
-    describe('#reset', function() {
-        it('resets cache', function() {
+    describe('#reset', function () {
+        it('resets cache', function () {
             streetside.cache().foo = 'bar';
             streetside.reset();
             expect(streetside.cache()).to.not.have.property('foo');
         });
     });
 
-    describe('#loadBubbles', function() {
+    describe('#loadBubbles', function () {
         it('fires loadedImages when bubbles are loaded', async () => {
             // adjust projection so that only one tile is fetched
             // (JSONP hack will return the same data for every fetch)
             context.projection
                 .scale(iD.geoZoomToScale(18))
-                .translate([-1863988.9381333336, 762.8270222954452])  // 10.002,0.002
-                .clipExtent([[0,0], dimensions]);
+                .translate([-1863988.9381333336, 762.8270222954452]) // 10.002,0.002
+                .clipExtent([[0, 0], dimensions]);
 
             var spy = sinon.spy();
             streetside.on('loadedImages', spy);
 
             var mockData = {
-                resourceSets: [{
-                    resources: []
-                }]
+                resourceSets: [
+                    {
+                        resources: [],
+                    },
+                ],
             };
 
             fetchMock.mock(/MetaData\/Streetside/, {
                 body: JSON.stringify(mockData),
-                status: 200
+                status: 200,
             });
 
-            streetside.loadBubbles(context.projection, 0);  // 0 = don't fetch margin tiles
+            streetside.loadBubbles(context.projection, 0); // 0 = don't fetch margin tiles
 
             await setTimeout(200);
             expect(spy).to.have.been.calledOnce;
@@ -81,55 +82,198 @@ describe('iD.serviceStreetside', function() {
             context.projection
                 .scale(iD.geoZoomToScale(18))
                 .translate([0, 0])
-                .clipExtent([[0,0], dimensions]);
+                .clipExtent([[0, 0], dimensions]);
 
             var spy = sinon.spy();
             streetside.on('loadedImages', spy);
 
             var mockData = {
-                resourceSets: [{
-                    resources: [{}]
-                }]
+                resourceSets: [
+                    {
+                        resources: [{}],
+                    },
+                ],
             };
 
             fetchMock.mock(/MetaData\/Streetside/, {
                 body: JSON.stringify(mockData),
-                status: 200
+                status: 200,
             });
 
-            streetside.loadBubbles(context.projection, 0);  // 0 = don't fetch margin tiles
+            streetside.loadBubbles(context.projection, 0); // 0 = don't fetch margin tiles
 
             await setTimeout(200);
             expect(spy).to.have.been.not.called;
         });
     });
 
-
-    describe('#bubbles', function() {
-        it('returns bubbles in the visible map area', function() {
+    describe('#bubbles', function () {
+        it('returns bubbles in the visible map area', function () {
             var features = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 1, loc: [10, 0], ca: 90, pr: undefined, ne: 2, pano: true, sequenceKey: 1 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 2, loc: [10, 0], ca: 90, pr: 1, ne: 3, pano: true, sequenceKey: 1 } },
-                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: 3, loc: [10, 1], ca: 90, pr: 2, ne: undefined, pano: true, sequenceKey: 1 } }
+                {
+                    minX: 10,
+                    minY: 0,
+                    maxX: 10,
+                    maxY: 0,
+                    data: {
+                        key: 1,
+                        loc: [10, 0],
+                        ca: 90,
+                        pr: undefined,
+                        ne: 2,
+                        pano: true,
+                        sequenceKey: 1,
+                    },
+                },
+                {
+                    minX: 10,
+                    minY: 0,
+                    maxX: 10,
+                    maxY: 0,
+                    data: {
+                        key: 2,
+                        loc: [10, 0],
+                        ca: 90,
+                        pr: 1,
+                        ne: 3,
+                        pano: true,
+                        sequenceKey: 1,
+                    },
+                },
+                {
+                    minX: 10,
+                    minY: 1,
+                    maxX: 10,
+                    maxY: 1,
+                    data: {
+                        key: 3,
+                        loc: [10, 1],
+                        ca: 90,
+                        pr: 2,
+                        ne: undefined,
+                        pano: true,
+                        sequenceKey: 1,
+                    },
+                },
             ];
 
             streetside.cache().bubbles.rtree.load(features);
             var res = streetside.bubbles(context.projection);
 
             expect(res).to.deep.eql([
-                { key: 1, loc: [10, 0], ca: 90, pr: undefined, ne: 2, pano: true, sequenceKey: 1 },
-                { key: 2, loc: [10, 0], ca: 90, pr: 1, ne: 3, pano: true, sequenceKey: 1 }
+                {
+                    key: 1,
+                    loc: [10, 0],
+                    ca: 90,
+                    pr: undefined,
+                    ne: 2,
+                    pano: true,
+                    sequenceKey: 1,
+                },
+                {
+                    key: 2,
+                    loc: [10, 0],
+                    ca: 90,
+                    pr: 1,
+                    ne: 3,
+                    pano: true,
+                    sequenceKey: 1,
+                },
             ]);
         });
 
-        it('limits results no more than 5 stacked bubbles in one spot', function() {
+        it('limits results no more than 5 stacked bubbles in one spot', function () {
             var features = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 1, loc: [10, 0], ca: 90, pr: undefined, ne: 2, pano: true, sequence_id: 1 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 2, loc: [10, 0], ca: 90, pr: 1, ne: 3, pano: true, sequence_id: 1 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 3, loc: [10, 0], ca: 90, pr: 2, ne: 4, pano: true, sequence_id: 1 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 4, loc: [10, 0], ca: 90, pr: 3, ne: 5, pano: true, sequence_id: 1 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 5, loc: [10, 0], ca: 90, pr: 4, ne: 6, pano: true, sequence_id: 1 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 6, loc: [10, 0], ca: 90, pr: 5, ne: undefined, pano: true, sequence_id: 1 } }
+                {
+                    minX: 10,
+                    minY: 0,
+                    maxX: 10,
+                    maxY: 0,
+                    data: {
+                        key: 1,
+                        loc: [10, 0],
+                        ca: 90,
+                        pr: undefined,
+                        ne: 2,
+                        pano: true,
+                        sequence_id: 1,
+                    },
+                },
+                {
+                    minX: 10,
+                    minY: 0,
+                    maxX: 10,
+                    maxY: 0,
+                    data: {
+                        key: 2,
+                        loc: [10, 0],
+                        ca: 90,
+                        pr: 1,
+                        ne: 3,
+                        pano: true,
+                        sequence_id: 1,
+                    },
+                },
+                {
+                    minX: 10,
+                    minY: 0,
+                    maxX: 10,
+                    maxY: 0,
+                    data: {
+                        key: 3,
+                        loc: [10, 0],
+                        ca: 90,
+                        pr: 2,
+                        ne: 4,
+                        pano: true,
+                        sequence_id: 1,
+                    },
+                },
+                {
+                    minX: 10,
+                    minY: 0,
+                    maxX: 10,
+                    maxY: 0,
+                    data: {
+                        key: 4,
+                        loc: [10, 0],
+                        ca: 90,
+                        pr: 3,
+                        ne: 5,
+                        pano: true,
+                        sequence_id: 1,
+                    },
+                },
+                {
+                    minX: 10,
+                    minY: 0,
+                    maxX: 10,
+                    maxY: 0,
+                    data: {
+                        key: 5,
+                        loc: [10, 0],
+                        ca: 90,
+                        pr: 4,
+                        ne: 6,
+                        pano: true,
+                        sequence_id: 1,
+                    },
+                },
+                {
+                    minX: 10,
+                    minY: 0,
+                    maxX: 10,
+                    maxY: 0,
+                    data: {
+                        key: 6,
+                        loc: [10, 0],
+                        ca: 90,
+                        pr: 5,
+                        ne: undefined,
+                        pano: true,
+                        sequence_id: 1,
+                    },
+                },
             ];
 
             streetside.cache().bubbles.rtree.load(features);
@@ -138,25 +282,70 @@ describe('iD.serviceStreetside', function() {
         });
     });
 
-
-    describe('#sequences', function() {
-        it('returns sequence linestrings in the visible map area', function() {
+    describe('#sequences', function () {
+        it('returns sequence linestrings in the visible map area', function () {
             var features = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 1, loc: [10, 0], ca: 90, pr: undefined, ne: 2, pano: true, sequenceKey: 1 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 2, loc: [10, 0], ca: 90, pr: 1, ne: 3, pano: true, sequenceKey: 1 } },
-                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: 3, loc: [10, 1], ca: 90, pr: 2, ne: undefined, pano: true, sequenceKey: 1 } }
+                {
+                    minX: 10,
+                    minY: 0,
+                    maxX: 10,
+                    maxY: 0,
+                    data: {
+                        key: 1,
+                        loc: [10, 0],
+                        ca: 90,
+                        pr: undefined,
+                        ne: 2,
+                        pano: true,
+                        sequenceKey: 1,
+                    },
+                },
+                {
+                    minX: 10,
+                    minY: 0,
+                    maxX: 10,
+                    maxY: 0,
+                    data: {
+                        key: 2,
+                        loc: [10, 0],
+                        ca: 90,
+                        pr: 1,
+                        ne: 3,
+                        pano: true,
+                        sequenceKey: 1,
+                    },
+                },
+                {
+                    minX: 10,
+                    minY: 1,
+                    maxX: 10,
+                    maxY: 1,
+                    data: {
+                        key: 3,
+                        loc: [10, 1],
+                        ca: 90,
+                        pr: 2,
+                        ne: undefined,
+                        pano: true,
+                        sequenceKey: 1,
+                    },
+                },
             ];
 
             streetside.cache().bubbles.rtree.load(features);
 
             var seq = {
                 key: 1,
-                bubbles: features.map(function(f) { return f.data; }),
+                bubbles: features.map(function (f) {
+                    return f.data;
+                }),
                 geojson: {
                     type: 'LineString',
                     properties: { key: 1 },
-                    coordinates: features.map(function(f) { return f.data.loc; }),
-                }
+                    coordinates: features.map(function (f) {
+                        return f.data.loc;
+                    }),
+                },
             };
 
             streetside.cache().sequences[1] = seq;
@@ -165,5 +354,4 @@ describe('iD.serviceStreetside', function() {
             expect(res).to.deep.eql([seq.geojson]);
         });
     });
-
 });

@@ -2,7 +2,7 @@ name: Build and Deploy Staging Instance
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
 
 permissions:
   contents: read

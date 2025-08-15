@@ -1,7 +1,6 @@
 import { actionReverse } from '../actions/reverse';
 import { osmWay } from './way';
 
-
 // Join `toJoin` array into sequences of connecting ways.
 
 // Segments which share identical start/end nodes will, as much as possible,
@@ -35,11 +34,11 @@ export function osmJoinWays(toJoin, graph) {
     function reverse(item) {
         var action = actionReverse(item.id, { reverseOneway: true });
         sequences.actions.push(action);
-        return (item instanceof osmWay) ? action(graph).entity(item.id) : item;
+        return item instanceof osmWay ? action(graph).entity(item.id) : item;
     }
 
     // make a copy containing only the items to join
-    toJoin = toJoin.filter(function(member) {
+    toJoin = toJoin.filter(function (member) {
         return member.type === 'way' && graph.hasEntity(member.id);
     });
 
@@ -81,7 +80,11 @@ export function osmJoinWays(toJoin, graph) {
                 // order does not matter - but for routes, it does. (see #4589)
                 // If we started this sequence backwards (i.e. next member way attaches to
                 // the start node and not the end node), reverse the initial way before continuing.
-                if (joinAsMembers && currWays.length === 1 && nodes[0] !== end && nodes[nodes.length - 1] !== end &&
+                if (
+                    joinAsMembers &&
+                    currWays.length === 1 &&
+                    nodes[0] !== end &&
+                    nodes[nodes.length - 1] !== end &&
                     (nodes[nodes.length - 1] === start || nodes[0] === start)
                 ) {
                     currWays[0] = reverse(currWays[0]);
@@ -91,20 +94,20 @@ export function osmJoinWays(toJoin, graph) {
                 }
 
                 if (nodes[0] === end) {
-                    fn = currNodes.push;               // join to end
+                    fn = currNodes.push; // join to end
                     nodes = nodes.slice(1);
                     break;
                 } else if (nodes[nodes.length - 1] === end) {
-                    fn = currNodes.push;               // join to end
+                    fn = currNodes.push; // join to end
                     nodes = nodes.slice(0, -1).reverse();
                     item = reverse(item);
                     break;
                 } else if (nodes[nodes.length - 1] === start) {
-                    fn = currNodes.unshift;            // join to beginning
+                    fn = currNodes.unshift; // join to beginning
                     nodes = nodes.slice(0, -1);
                     break;
                 } else if (nodes[0] === start) {
-                    fn = currNodes.unshift;            // join to beginning
+                    fn = currNodes.unshift; // join to beginning
                     nodes = nodes.slice(1).reverse();
                     item = reverse(item);
                     break;
@@ -113,7 +116,8 @@ export function osmJoinWays(toJoin, graph) {
                 }
             }
 
-            if (!nodes) {     // couldn't find a joinable way/member
+            if (!nodes) {
+                // couldn't find a joinable way/member
                 break;
             }
 

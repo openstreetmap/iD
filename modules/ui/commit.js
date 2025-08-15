@@ -2,19 +2,18 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
+import { localizer, t } from '../core/localizer';
 import { prefs } from '../core/preferences';
-import { t, localizer } from '../core/localizer';
 import { osmChangeset } from '../osm';
-import { svgIcon } from '../svg/icon';
 import { services } from '../services';
-import { uiTooltip } from './tooltip';
-import { uiChangesetEditor } from './changeset_editor';
-import { uiSectionChanges } from './sections/changes';
-import { uiCommitWarnings } from './commit_warnings';
-import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
+import { svgIcon } from '../svg/icon';
 import { utilArrayGroupBy, utilRebind, utilUniqueDomId } from '../util';
 import { utilDetect } from '../util/detect';
-
+import { uiChangesetEditor } from './changeset_editor';
+import { uiCommitWarnings } from './commit_warnings';
+import { uiSectionChanges } from './sections/changes';
+import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
+import { uiTooltip } from './tooltip';
 
 var readOnlyTags = [
     /^changesets_count$/,
@@ -27,27 +26,25 @@ var readOnlyTags = [
     /^resolved:/,
     /^closed:note$/,
     /^closed:keepright$/,
-    /^closed:osmose:/
+    /^closed:osmose:/,
 ];
 
 // treat most punctuation (except -, _, +, &) as hashtag delimiters - #4398
 // from https://stackoverflow.com/a/25575009
-var hashtagRegex = /([#＃][^\u2000-\u206F\u2E00-\u2E7F\s\\'!"#$%()*,.\/:;<=>?@\[\]^`{|}~]+)/g;
-
+var hashtagRegex =
+    /([#＃][^\u2000-\u206F\u2E00-\u2E7F\s\\'!"#$%()*,.\/:;<=>?@\[\]^`{|}~]+)/g;
 
 export function uiCommit(context) {
     var dispatch = d3_dispatch('cancel');
     var _userDetails;
     var _selection;
 
-    var changesetEditor = uiChangesetEditor(context)
-        .on('change', changeTags);
+    var changesetEditor = uiChangesetEditor(context).on('change', changeTags);
     var rawTagEditor = uiSectionRawTagEditor('changeset-tag-editor', context)
         .on('change', changeTags)
         .readOnlyTags(readOnlyTags);
     var commitChanges = uiSectionChanges(context);
     var commitWarnings = uiCommitWarnings(context);
-
 
     function commit(selection) {
         _selection = selection;
@@ -61,11 +58,10 @@ export function uiCommit(context) {
     }
 
     function initChangeset() {
-
         // expire stored comment, hashtags, source after cutoff datetime - #3947 #4899
         var commentDate = +prefs('commentDate') || 0;
         var currDate = Date.now();
-        var cutoff = 2 * 86400 * 1000;   // 2 days
+        var cutoff = 2 * 86400 * 1000; // 2 days
         if (commentDate > currDate || currDate - commentDate > cutoff) {
             prefs('comment', null);
             prefs('hashtags', null);
@@ -91,7 +87,7 @@ export function uiCommit(context) {
             comment: prefs('comment') || '',
             created_by: context.cleanTagValue('iD ' + context.version),
             host: context.cleanTagValue(detected.host),
-            locale: context.cleanTagValue(localizer.localeCode())
+            locale: context.cleanTagValue(localizer.localeCode()),
         };
 
         // call findHashtags initially - this will remove stored
@@ -117,13 +113,15 @@ export function uiCommit(context) {
             }
 
             // add the photo overlays used during editing as sources
-            photoOverlaysUsed.forEach(function(photoOverlay) {
+            photoOverlaysUsed.forEach(function (photoOverlay) {
                 if (sources.indexOf(photoOverlay) === -1) {
                     sources.push(photoOverlay);
                 }
             });
 
-            tags.source = context.cleanTagValue(sources.filter(Boolean).join(';'));
+            tags.source = context.cleanTagValue(
+                sources.filter(Boolean).join(';'),
+            );
         }
 
         context.changeset = new osmChangeset({ tags: tags });
@@ -132,14 +130,15 @@ export function uiCommit(context) {
     // Calculates read-only metadata tags based on the user's editing session and applies
     // them to the changeset.
     function loadDerivedChangesetTags() {
-
         var osm = context.connection();
         if (!osm) return;
 
-        var tags = Object.assign({}, context.changeset.tags);   // shallow copy
+        var tags = Object.assign({}, context.changeset.tags); // shallow copy
 
         // assign tags for imagery used
-        var imageryUsed = context.cleanTagValue(context.history().imageryUsed().join(';'));
+        var imageryUsed = context.cleanTagValue(
+            context.history().imageryUsed().join(';'),
+        );
         tags.imagery_used = imageryUsed || 'None';
 
         // assign tags for closed issues and notes
@@ -151,13 +150,17 @@ export function uiCommit(context) {
         if (services.keepRight) {
             var krClosed = services.keepRight.getClosedIDs();
             if (krClosed.length) {
-                tags['closed:keepright'] = context.cleanTagValue(krClosed.join(';'));
+                tags['closed:keepright'] = context.cleanTagValue(
+                    krClosed.join(';'),
+                );
             }
         }
         if (services.osmose) {
             var osmoseClosed = services.osmose.getClosedCounts();
             for (itemType in osmoseClosed) {
-                tags['closed:osmose:' + itemType] = context.cleanTagValue(osmoseClosed[itemType].toString());
+                tags['closed:osmose:' + itemType] = context.cleanTagValue(
+                    osmoseClosed[itemType].toString(),
+                );
             }
         }
 
@@ -173,22 +176,37 @@ export function uiCommit(context) {
             for (var issueType in issuesByType) {
                 var issuesOfType = issuesByType[issueType];
                 if (issuesOfType[0].subtype) {
-                    var issuesBySubtype = utilArrayGroupBy(issuesOfType, 'subtype');
+                    var issuesBySubtype = utilArrayGroupBy(
+                        issuesOfType,
+                        'subtype',
+                    );
                     for (var issueSubtype in issuesBySubtype) {
                         var issuesOfSubtype = issuesBySubtype[issueSubtype];
-                        tags[prefix + ':' + issueType + ':' + issueSubtype] = context.cleanTagValue(issuesOfSubtype.length.toString());
+                        tags[prefix + ':' + issueType + ':' + issueSubtype] =
+                            context.cleanTagValue(
+                                issuesOfSubtype.length.toString(),
+                            );
                     }
                 } else {
-                    tags[prefix + ':' + issueType] = context.cleanTagValue(issuesOfType.length.toString());
+                    tags[prefix + ':' + issueType] = context.cleanTagValue(
+                        issuesOfType.length.toString(),
+                    );
                 }
             }
         }
 
         // add counts of warnings generated by the user's edits
-        var warnings = context.validator()
-            .getIssuesBySeverity({ what: 'edited', where: 'all', includeIgnored: true, includeDisabledRules: true })
-            .warning
-            .filter(function(issue) { return issue.type !== 'help_request'; });    // exclude 'fixme' and similar - #8603
+        var warnings = context
+            .validator()
+            .getIssuesBySeverity({
+                what: 'edited',
+                where: 'all',
+                includeIgnored: true,
+                includeDisabledRules: true,
+            })
+            .warning.filter(function (issue) {
+                return issue.type !== 'help_request';
+            }); // exclude 'fixme' and similar - #8603
 
         addIssueCounts(warnings, 'warnings');
 
@@ -200,77 +218,67 @@ export function uiCommit(context) {
     }
 
     function render(selection) {
-
         var osm = context.connection();
         if (!osm) return;
 
-        var header = selection.selectAll('.header')
-            .data([0]);
+        var header = selection.selectAll('.header').data([0]);
 
-        var headerTitle = header.enter()
+        var headerTitle = header
+            .enter()
             .append('div')
             .attr('class', 'header fillL');
 
-        headerTitle
-            .append('div')
-            .append('h2')
-            .call(t.append('commit.title'));
+        headerTitle.append('div').append('h2').call(t.append('commit.title'));
 
         headerTitle
             .append('button')
             .attr('class', 'close')
             .attr('title', t('icons.close'))
-            .on('click', function() {
+            .on('click', function () {
                 dispatch.call('cancel', this);
             })
             .call(svgIcon('#iD-icon-close'));
 
-        var body = selection.selectAll('.body')
-            .data([0]);
+        var body = selection.selectAll('.body').data([0]);
 
-        body = body.enter()
-            .append('div')
-            .attr('class', 'body')
-            .merge(body);
-
+        body = body.enter().append('div').attr('class', 'body').merge(body);
 
         // Changeset Section
-        var changesetSection = body.selectAll('.changeset-editor')
-            .data([0]);
+        var changesetSection = body.selectAll('.changeset-editor').data([0]);
 
-        changesetSection = changesetSection.enter()
+        changesetSection = changesetSection
+            .enter()
             .append('div')
             .attr('class', 'modal-section changeset-editor')
             .merge(changesetSection);
 
-        changesetSection
-            .call(changesetEditor
+        changesetSection.call(
+            changesetEditor
                 .changesetID(context.changeset.id)
-                .tags(context.changeset.tags)
-            );
-
+                .tags(context.changeset.tags),
+        );
 
         // Warnings
         body.call(commitWarnings);
 
-
         // Upload Explanation
-        var saveSection = body.selectAll('.save-section')
-            .data([0]);
+        var saveSection = body.selectAll('.save-section').data([0]);
 
-        saveSection = saveSection.enter()
+        saveSection = saveSection
+            .enter()
             .append('div')
-            .attr('class','modal-section save-section fillL')
+            .attr('class', 'modal-section save-section fillL')
             .merge(saveSection);
 
-        var prose = saveSection.selectAll('.commit-info')
-            .data([0]);
+        var prose = saveSection.selectAll('.commit-info').data([0]);
 
-        if (prose.enter().size()) {   // first time, make sure to update user details in prose
+        if (prose.enter().size()) {
+            // first time, make sure to update user details in prose
             _userDetails = null;
         }
 
-        prose = prose.enter()
+        prose = prose
+            .enter()
             .append('p')
             .attr('class', 'commit-info')
             .call(t.append('commit.upload_explanation'))
@@ -278,10 +286,10 @@ export function uiCommit(context) {
 
         // always check if this has changed, but only update prose.html()
         // if needed, because it can trigger a style recalculation
-        osm.userDetails(function(err, user) {
+        osm.userDetails(function (err, user) {
             if (err) return;
 
-            if (_userDetails === user) return;  // no change
+            if (_userDetails === user) return; // no change
             _userDetails = user;
 
             var userLink = d3_select(document.createElement('div'));
@@ -300,17 +308,19 @@ export function uiCommit(context) {
                 .attr('href', osm.userURL(user.display_name))
                 .attr('target', '_blank');
 
-            prose
-                .html(t.html('commit.upload_explanation_with_user', { user: { html: userLink.html() } }));
+            prose.html(
+                t.html('commit.upload_explanation_with_user', {
+                    user: { html: userLink.html() },
+                }),
+            );
         });
 
-
         // Request Review
-        var requestReview = saveSection.selectAll('.request-review')
-            .data([0]);
+        var requestReview = saveSection.selectAll('.request-review').data([0]);
 
         // Enter
-        var requestReviewEnter = requestReview.enter()
+        var requestReviewEnter = requestReview
+            .enter()
             .append('div')
             .attr('class', 'request-review');
 
@@ -321,10 +331,11 @@ export function uiCommit(context) {
             .attr('for', requestReviewDomId);
 
         if (!labelEnter.empty()) {
-            labelEnter
-                .call(uiTooltip()
+            labelEnter.call(
+                uiTooltip()
                     .title(() => t.append('commit.request_review_info'))
-                    .placement('top'));
+                    .placement('top'),
+            );
         }
 
         labelEnter
@@ -332,25 +343,22 @@ export function uiCommit(context) {
             .attr('type', 'checkbox')
             .attr('id', requestReviewDomId);
 
-        labelEnter
-            .append('span')
-            .call(t.append('commit.request_review'));
+        labelEnter.append('span').call(t.append('commit.request_review'));
 
         // Update
-        requestReview = requestReview
-            .merge(requestReviewEnter);
+        requestReview = requestReview.merge(requestReviewEnter);
 
-        var requestReviewInput = requestReview.selectAll('input')
+        var requestReviewInput = requestReview
+            .selectAll('input')
             .property('checked', isReviewRequested(context.changeset.tags))
             .on('change', toggleRequestReview);
 
-
         // Buttons
-        var buttonSection = saveSection.selectAll('.buttons')
-            .data([0]);
+        var buttonSection = saveSection.selectAll('.buttons').data([0]);
 
         // enter
-        var buttonEnter = buttonSection.enter()
+        var buttonEnter = buttonSection
+            .enter()
             .append('div')
             .attr('class', 'buttons fillL');
 
@@ -365,26 +373,28 @@ export function uiCommit(context) {
             .append('button')
             .attr('class', 'action button save-button');
 
-        uploadButton.append('span')
+        uploadButton
+            .append('span')
             .attr('class', 'label')
             .call(t.append('commit.save'));
 
         var uploadBlockerTooltipText = getUploadBlockerMessage();
 
         // update
-        buttonSection = buttonSection
-            .merge(buttonEnter);
+        buttonSection = buttonSection.merge(buttonEnter);
 
-        buttonSection.selectAll('.cancel-button')
-            .on('click.cancel', function() {
+        buttonSection
+            .selectAll('.cancel-button')
+            .on('click.cancel', function () {
                 dispatch.call('cancel', this);
             });
 
-        buttonSection.selectAll('.save-button')
+        buttonSection
+            .selectAll('.save-button')
             .classed('disabled', uploadBlockerTooltipText !== null)
-            .on('click.save', function() {
+            .on('click.save', function () {
                 if (!d3_select(this).classed('disabled')) {
-                    this.blur();    // avoid keeping focus on the button - #4641
+                    this.blur(); // avoid keeping focus on the button - #4641
 
                     for (var key in context.changeset.tags) {
                         // remove any empty keys before upload
@@ -399,31 +409,34 @@ export function uiCommit(context) {
         uiTooltip().destroyAny(buttonSection.selectAll('.save-button'));
 
         if (uploadBlockerTooltipText) {
-            buttonSection.selectAll('.save-button')
-                .call(uiTooltip()
+            buttonSection.selectAll('.save-button').call(
+                uiTooltip()
                     .title(() => uploadBlockerTooltipText)
-                    .placement('top'));
+                    .placement('top'),
+            );
         }
 
         // Raw Tag Editor
-        var tagSection = body.selectAll('.tag-section.raw-tag-editor')
+        var tagSection = body
+            .selectAll('.tag-section.raw-tag-editor')
             .data([0]);
 
-        tagSection = tagSection.enter()
+        tagSection = tagSection
+            .enter()
             .append('div')
             .attr('class', 'modal-section tag-section raw-tag-editor')
             .merge(tagSection);
 
-        tagSection
-            .call(rawTagEditor
-                .tags(Object.assign({}, context.changeset.tags))   // shallow copy
-                .render
-            );
+        tagSection.call(
+            rawTagEditor.tags(Object.assign({}, context.changeset.tags)).render, // shallow copy
+        );
 
-        var changesSection = body.selectAll('.commit-changes-section')
+        var changesSection = body
+            .selectAll('.commit-changes-section')
             .data([0]);
 
-        changesSection = changesSection.enter()
+        changesSection = changesSection
+            .enter()
             .append('div')
             .attr('class', 'modal-section commit-changes-section')
             .merge(changesSection);
@@ -431,35 +444,37 @@ export function uiCommit(context) {
         // Change summary
         changesSection.call(commitChanges.render);
 
-
         function toggleRequestReview() {
             var rr = requestReviewInput.property('checked');
-            updateChangeset({ review_requested: (rr ? 'yes' : undefined) });
+            updateChangeset({ review_requested: rr ? 'yes' : undefined });
 
-            tagSection
-                .call(rawTagEditor
-                    .tags(Object.assign({}, context.changeset.tags))   // shallow copy
-                    .render
-                );
+            tagSection.call(
+                rawTagEditor.tags(Object.assign({}, context.changeset.tags)) // shallow copy
+                    .render,
+            );
         }
     }
 
-
     function getUploadBlockerMessage() {
-        var errors = context.validator()
+        var errors = context
+            .validator()
             .getIssuesBySeverity({ what: 'edited', where: 'all' }).error;
 
         if (errors.length) {
-            return t.append('commit.outstanding_errors_message', { count: errors.length });
+            return t.append('commit.outstanding_errors_message', {
+                count: errors.length,
+            });
         } else {
-            var hasChangesetComment = context.changeset && context.changeset.tags.comment && context.changeset.tags.comment.trim().length;
+            var hasChangesetComment =
+                context.changeset &&
+                context.changeset.tags.comment &&
+                context.changeset.tags.comment.trim().length;
             if (!hasChangesetComment) {
                 return t.append('commit.comment_needed_message');
             }
         }
         return null;
     }
-
 
     function changeTags(_, changed, onInput) {
         if (changed.hasOwnProperty('comment')) {
@@ -485,7 +500,6 @@ export function uiCommit(context) {
         }
     }
 
-
     function findHashtags(tags, commentOnly) {
         var detectedHashtags = commentHashtags();
 
@@ -498,7 +512,7 @@ export function uiCommit(context) {
         }
 
         var allLowerCase = new Set();
-        return detectedHashtags.filter(function(hashtag) {
+        return detectedHashtags.filter(function (hashtag) {
             // Compare tags as lowercase strings, but keep original case tags
             var lowerCase = hashtag.toLowerCase();
             if (!allLowerCase.has(lowerCase)) {
@@ -511,7 +525,7 @@ export function uiCommit(context) {
         // Extract hashtags from `comment`
         function commentHashtags() {
             var matches = (tags.comment || '')
-                .replace(/http\S*/g, '')  // drop anything that looks like a URL - #4289
+                .replace(/http\S*/g, '') // drop anything that looks like a URL - #4289
                 .match(hashtagRegex);
 
             return matches || [];
@@ -522,15 +536,17 @@ export function uiCommit(context) {
             var matches = (tags.hashtags || '')
                 .split(/[,;\s]+/)
                 .map(function (s) {
-                    if (s[0] !== '#') { s = '#' + s; }    // prepend '#'
+                    if (s[0] !== '#') {
+                        s = '#' + s;
+                    } // prepend '#'
                     var matched = s.match(hashtagRegex);
                     return matched && matched[0];
-                }).filter(Boolean);                       // exclude falsy
+                })
+                .filter(Boolean); // exclude falsy
 
             return matches || [];
         }
     }
-
 
     function isReviewRequested(tags) {
         var rr = tags.review_requested;
@@ -539,11 +555,10 @@ export function uiCommit(context) {
         return !(rr === '' || rr === 'no');
     }
 
-
     function updateChangeset(changed, onInput) {
-        var tags = Object.assign({}, context.changeset.tags);   // shallow copy
+        var tags = Object.assign({}, context.changeset.tags); // shallow copy
 
-        Object.keys(changed).forEach(function(k) {
+        Object.keys(changed).forEach(function (k) {
             var v = changed[k];
             k = context.cleanTagKey(k);
             if (readOnlyTags.indexOf(k) !== -1) return;
@@ -559,7 +574,8 @@ export function uiCommit(context) {
 
         if (!onInput) {
             // when changing the comment, override hashtags with any found in comment.
-            var commentOnly = changed.hasOwnProperty('comment') && (changed.comment !== '');
+            var commentOnly =
+                changed.hasOwnProperty('comment') && changed.comment !== '';
             var arr = findHashtags(tags, commentOnly);
             if (arr.length) {
                 tags.hashtags = context.cleanTagValue(arr.join(';'));
@@ -572,7 +588,8 @@ export function uiCommit(context) {
 
         // always update userdetails, just in case user reauthenticates as someone else
         if (_userDetails && _userDetails.changesets_count !== undefined) {
-            var changesetsCount = parseInt(_userDetails.changesets_count, 10) + 1;  // #4283
+            var changesetsCount =
+                parseInt(_userDetails.changesets_count, 10) + 1; // #4283
             tags.changesets_count = String(changesetsCount);
 
             // first 100 edits - new user
@@ -602,11 +619,9 @@ export function uiCommit(context) {
         }
     }
 
-
-    commit.reset = function() {
+    commit.reset = function () {
         context.changeset = null;
     };
-
 
     return utilRebind(commit, dispatch, 'on');
 }

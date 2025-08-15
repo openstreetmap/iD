@@ -1,13 +1,11 @@
-import { actionDeleteNode } from './delete_node';
 import { geoVecDot, geoVecInterp, geoVecLength } from '../geo';
 import { utilArrayDifference } from '../util';
-
+import { actionDeleteNode } from './delete_node';
 
 /*
  * Based on https://github.com/openstreetmap/potlatch2/net/systemeD/potlatch2/tools/Straighten.as
  */
 export function actionStraightenWay(selectedIDs, projection) {
-
     function positionAlongWay(a, o, b) {
         return geoVecDot(a, b, o) / geoVecDot(b, b, o);
     }
@@ -18,10 +16,10 @@ export function actionStraightenWay(selectedIDs, projection) {
         var startNodes = [];
         var endNodes = [];
         var remainingWays = [];
-        var selectedWays = selectedIDs.filter(function(w) {
+        var selectedWays = selectedIDs.filter(function (w) {
             return graph.entity(w).type === 'way';
         });
-        var selectedNodes = selectedIDs.filter(function(n) {
+        var selectedNodes = selectedIDs.filter(function (n) {
             return graph.entity(n).type === 'node';
         });
 
@@ -30,29 +28,30 @@ export function actionStraightenWay(selectedIDs, projection) {
             nodes = way.nodes.slice(0);
             remainingWays.push(nodes);
             startNodes.push(nodes[0]);
-            endNodes.push(nodes[nodes.length-1]);
+            endNodes.push(nodes[nodes.length - 1]);
         }
 
         // Remove duplicate end/startNodes (duplicate nodes cannot be at the line end,
         //   and need to be removed so currNode difference calculation below works)
         // i.e. ["n-1", "n-1", "n-2"] => ["n-2"]
-        startNodes = startNodes.filter(function(n) {
+        startNodes = startNodes.filter(function (n) {
             return startNodes.indexOf(n) === startNodes.lastIndexOf(n);
         });
-        endNodes = endNodes.filter(function(n) {
+        endNodes = endNodes.filter(function (n) {
             return endNodes.indexOf(n) === endNodes.lastIndexOf(n);
         });
 
         // Choose the initial endpoint to start from
-        var currNode = utilArrayDifference(startNodes, endNodes)
-            .concat(utilArrayDifference(endNodes, startNodes))[0];
+        var currNode = utilArrayDifference(startNodes, endNodes).concat(
+            utilArrayDifference(endNodes, startNodes),
+        )[0];
         var nextWay = [];
         nodes = [];
 
         // Create nested function outside of loop to avoid "function in loop" lint error
-        var getNextWay = function(currNode, remainingWays) {
-            return remainingWays.filter(function(way) {
-                return way[0] === currNode || way[way.length-1] === currNode;
+        var getNextWay = function (currNode, remainingWays) {
+            return remainingWays.filter(function (way) {
+                return way[0] === currNode || way[way.length - 1] === currNode;
             })[0];
         };
 
@@ -65,7 +64,7 @@ export function actionStraightenWay(selectedIDs, projection) {
                 nextWay.reverse();
             }
             nodes = nodes.concat(nextWay);
-            currNode = nodes[nodes.length-1];
+            currNode = nodes[nodes.length - 1];
         }
 
         // If user selected 2 nodes to straighten between, then slice nodes array to those nodes
@@ -74,32 +73,39 @@ export function actionStraightenWay(selectedIDs, projection) {
             var endNodeIdx = nodes.indexOf(selectedNodes[1]);
             var sortedStartEnd = [startNodeIdx, endNodeIdx];
 
-            sortedStartEnd.sort(function(a, b) { return a - b; });
-            nodes = nodes.slice(sortedStartEnd[0], sortedStartEnd[1]+1);
+            sortedStartEnd.sort(function (a, b) {
+                return a - b;
+            });
+            nodes = nodes.slice(sortedStartEnd[0], sortedStartEnd[1] + 1);
         }
 
-        return nodes.map(function(n) { return graph.entity(n); });
+        return nodes.map(function (n) {
+            return graph.entity(n);
+        });
     }
 
     function shouldKeepNode(node, graph) {
-        return graph.parentWays(node).length > 1 ||
+        return (
+            graph.parentWays(node).length > 1 ||
             graph.parentRelations(node).length ||
-            node.hasInterestingTags();
+            node.hasInterestingTags()
+        );
     }
 
-
-    var action = function(graph, t) {
+    var action = function (graph, t) {
         if (t === null || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
         var nodes = allNodes(graph);
-        var points = nodes.map(function(n) { return projection(n.loc); });
+        var points = nodes.map(function (n) {
+            return projection(n.loc);
+        });
         var startPoint = points[0];
-        var endPoint = points[points.length-1];
+        var endPoint = points[points.length - 1];
         var toDelete = [];
         var i;
 
-        for (i = 1; i < points.length-1; i++) {
+        for (i = 1; i < points.length - 1; i++) {
             var node = nodes[i];
             var point = points[i];
 
@@ -107,8 +113,9 @@ export function actionStraightenWay(selectedIDs, projection) {
                 var u = positionAlongWay(point, startPoint, endPoint);
                 var p = geoVecInterp(startPoint, endPoint, u);
                 var loc2 = projection.invert(p);
-                graph = graph.replace(node.move(geoVecInterp(node.loc, loc2, t)));
-
+                graph = graph.replace(
+                    node.move(geoVecInterp(node.loc, loc2, t)),
+                );
             } else {
                 // safe to delete
                 if (toDelete.indexOf(node) === -1) {
@@ -124,13 +131,14 @@ export function actionStraightenWay(selectedIDs, projection) {
         return graph;
     };
 
-
-    action.disabled = function(graph) {
+    action.disabled = function (graph) {
         // check way isn't too bendy
         var nodes = allNodes(graph);
-        var points = nodes.map(function(n) { return projection(n.loc); });
+        var points = nodes.map(function (n) {
+            return projection(n.loc);
+        });
         var startPoint = points[0];
-        var endPoint = points[points.length-1];
+        var endPoint = points[points.length - 1];
         var threshold = 0.2 * geoVecLength(startPoint, endPoint);
         var i;
 
@@ -154,19 +162,22 @@ export function actionStraightenWay(selectedIDs, projection) {
             }
         }
 
-        var keepingAllNodes = nodes.every(function(node, i) {
-            return i === 0 || i === nodes.length - 1 || shouldKeepNode(node, graph);
+        var keepingAllNodes = nodes.every(function (node, i) {
+            return (
+                i === 0 || i === nodes.length - 1 || shouldKeepNode(node, graph)
+            );
         });
 
-        if (maxDistance < 0.0001 &&
+        if (
+            maxDistance < 0.0001 &&
             // Allow straightening even if already straight in order to remove extraneous nodes
-            keepingAllNodes) {
+            keepingAllNodes
+        ) {
             return 'straight_enough';
         }
     };
 
     action.transitionable = true;
-
 
     return action;
 }

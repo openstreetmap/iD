@@ -6,9 +6,14 @@ import RBush from 'rbush';
 
 import { localizer } from '../core/localizer';
 import { geoExtent, geoScaleToZoom } from '../geo';
-import { utilQsString, utilRebind, utilSetTransform, utilStringQs, utilTiler } from '../util';
+import {
+    utilQsString,
+    utilRebind,
+    utilSetTransform,
+    utilStringQs,
+    utilTiler,
+} from '../util';
 import { services } from './';
-
 
 var apibase = 'https://kartaview.org';
 var maxResults = 1000;
@@ -16,28 +21,31 @@ var tileZoom = 14;
 var tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
 var dispatch = d3_dispatch('loadedImages');
 var imgZoom = d3_zoom()
-    .extent([[0, 0], [320, 240]])
-    .translateExtent([[0, 0], [320, 240]])
+    .extent([
+        [0, 0],
+        [320, 240],
+    ])
+    .translateExtent([
+        [0, 0],
+        [320, 240],
+    ])
     .scaleExtent([1, 15]);
 var _oscCache;
 var _oscSelectedImage;
 var _loadViewerPromise;
 
-
 function abortRequest(controller) {
     controller.abort();
 }
 
-
 function maxPageAtZoom(z) {
-    if (z < 15)   return 2;
+    if (z < 15) return 2;
     if (z === 15) return 5;
     if (z === 16) return 10;
     if (z === 17) return 20;
     if (z === 18) return 40;
-    if (z > 18)   return 80;
+    if (z > 18) return 80;
 }
-
 
 function loadTiles(which, url, projection) {
     var currZoom = Math.floor(geoScaleToZoom(projection.scale()));
@@ -45,32 +53,36 @@ function loadTiles(which, url, projection) {
 
     // abort inflight requests that are no longer needed
     var cache = _oscCache[which];
-    Object.keys(cache.inflight).forEach(function(k) {
-        var wanted = tiles.find(function(tile) { return k.indexOf(tile.id + ',') === 0; });
+    Object.keys(cache.inflight).forEach(function (k) {
+        var wanted = tiles.find(function (tile) {
+            return k.indexOf(tile.id + ',') === 0;
+        });
         if (!wanted) {
             abortRequest(cache.inflight[k]);
             delete cache.inflight[k];
         }
     });
 
-    tiles.forEach(function(tile) {
+    tiles.forEach(function (tile) {
         loadNextTilePage(which, currZoom, url, tile);
     });
 }
-
 
 function loadNextTilePage(which, currZoom, url, tile) {
     var cache = _oscCache[which];
     var bbox = tile.extent.bbox();
     var maxPages = maxPageAtZoom(currZoom);
     var nextPage = cache.nextPage[tile.id] || 1;
-    var params = utilQsString({
-        ipp: maxResults,
-        page: nextPage,
-        // client_id: clientId,
-        bbTopLeft: [bbox.maxY, bbox.minX].join(','),
-        bbBottomRight: [bbox.minY, bbox.maxX].join(',')
-    }, true);
+    var params = utilQsString(
+        {
+            ipp: maxResults,
+            page: nextPage,
+            // client_id: clientId,
+            bbTopLeft: [bbox.maxY, bbox.minX].join(','),
+            bbBottomRight: [bbox.minY, bbox.maxX].join(','),
+        },
+        true,
+    );
 
     if (nextPage > maxPages) return;
 
@@ -84,18 +96,22 @@ function loadNextTilePage(which, currZoom, url, tile) {
         method: 'POST',
         signal: controller.signal,
         body: params,
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     };
 
     d3_json(url, options)
-        .then(function(data) {
+        .then(function (data) {
             cache.loaded[id] = true;
             delete cache.inflight[id];
-            if (!data || !data.currentPageItems || !data.currentPageItems.length) {
+            if (
+                !data ||
+                !data.currentPageItems ||
+                !data.currentPageItems.length
+            ) {
                 throw new Error('No Data');
             }
 
-            var features = data.currentPageItems.map(function(item) {
+            var features = data.currentPageItems.map(function (item) {
                 var loc = [+item.lng, +item.lat];
                 var d;
 
@@ -105,11 +121,11 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         loc: loc,
                         key: item.id,
                         ca: +item.heading,
-                        captured_at: (item.shot_date || item.date_added),
+                        captured_at: item.shot_date || item.date_added,
                         captured_by: item.username,
                         imagePath: item.name,
                         sequence_id: item.sequence_id,
-                        sequence_index: +item.sequence_index
+                        sequence_index: +item.sequence_index,
                     };
 
                     // cache sequence info
@@ -119,63 +135,67 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         _oscCache.sequences[d.sequence_id] = seq;
                     }
                     seq.images[d.sequence_index] = d;
-                    _oscCache.images.forImageKey[d.key] = d;     // cache imageKey -> image
+                    _oscCache.images.forImageKey[d.key] = d; // cache imageKey -> image
                 }
 
                 return {
-                    minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
+                    minX: loc[0],
+                    minY: loc[1],
+                    maxX: loc[0],
+                    maxY: loc[1],
+                    data: d,
                 };
             });
 
             cache.rtree.load(features);
 
-            if (data.currentPageItems.length === maxResults) {  // more pages to load
+            if (data.currentPageItems.length === maxResults) {
+                // more pages to load
                 cache.nextPage[tile.id] = nextPage + 1;
                 loadNextTilePage(which, currZoom, url, tile);
             } else {
-                cache.nextPage[tile.id] = Infinity;     // no more pages to load
+                cache.nextPage[tile.id] = Infinity; // no more pages to load
             }
 
             if (which === 'images') {
                 dispatch.call('loadedImages');
             }
         })
-        .catch(function() {
+        .catch(function () {
             cache.loaded[id] = true;
             delete cache.inflight[id];
         });
 }
 
-
 // partition viewport into higher zoom tiles
 function partitionViewport(projection) {
     var z = geoScaleToZoom(projection.scale());
-    var z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
+    var z2 = Math.ceil(z * 2) / 2 + 2.5; // round to next 0.5 and add 2.5
     var tiler = utilTiler().zoomExtent([z2, z2]);
 
-    return tiler.getTiles(projection)
-        .map(function(tile) { return tile.extent; });
+    return tiler.getTiles(projection).map(function (tile) {
+        return tile.extent;
+    });
 }
-
 
 // no more than `limit` results per partition.
 function searchLimited(limit, projection, rtree) {
     limit = limit || 5;
 
-    return partitionViewport(projection)
-        .reduce(function(result, extent) {
-            var found = rtree.search(extent.bbox())
-                .slice(0, limit)
-                .map(function(d) { return d.data; });
+    return partitionViewport(projection).reduce(function (result, extent) {
+        var found = rtree
+            .search(extent.bbox())
+            .slice(0, limit)
+            .map(function (d) {
+                return d.data;
+            });
 
-            return (found.length ? result.concat(found) : result);
-        }, []);
+        return found.length ? result.concat(found) : result;
+    }, []);
 }
 
-
 export default {
-
-    init: function() {
+    init: function () {
         if (!_oscCache) {
             this.reset();
         }
@@ -183,89 +203,98 @@ export default {
         this.event = utilRebind(this, dispatch, 'on');
     },
 
-    reset: function() {
+    reset: function () {
         if (_oscCache) {
             Object.values(_oscCache.images.inflight).forEach(abortRequest);
         }
 
         _oscCache = {
-            images: { inflight: {}, loaded: {}, nextPage: {}, rtree: new RBush(), forImageKey: {} },
-            sequences: {}
+            images: {
+                inflight: {},
+                loaded: {},
+                nextPage: {},
+                rtree: new RBush(),
+                forImageKey: {},
+            },
+            sequences: {},
         };
     },
 
-
-    images: function(projection) {
+    images: function (projection) {
         var limit = 5;
         return searchLimited(limit, projection, _oscCache.images.rtree);
     },
 
-
-    sequences: function(projection) {
+    sequences: function (projection) {
         var viewport = projection.clipExtent();
         var min = [viewport[0][0], viewport[1][1]];
         var max = [viewport[1][0], viewport[0][1]];
-        var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
+        var bbox = geoExtent(
+            projection.invert(min),
+            projection.invert(max),
+        ).bbox();
         var sequenceKeys = {};
 
         // all sequences for images in viewport
-        _oscCache.images.rtree.search(bbox)
-            .forEach(function(d) { sequenceKeys[d.data.sequence_id] = true; });
+        _oscCache.images.rtree.search(bbox).forEach(function (d) {
+            sequenceKeys[d.data.sequence_id] = true;
+        });
 
         // make linestrings from those sequences
         var lineStrings = [];
-        Object.keys(sequenceKeys)
-            .forEach(function(sequenceKey) {
-                var seq = _oscCache.sequences[sequenceKey];
-                var images = seq && seq.images;
+        Object.keys(sequenceKeys).forEach(function (sequenceKey) {
+            var seq = _oscCache.sequences[sequenceKey];
+            var images = seq && seq.images;
 
-                if (images) {
-                    lineStrings.push({
-                        type: 'LineString',
-                        coordinates: images.map(function (d) { return d.loc; }).filter(Boolean),
-                        properties: {
-                            captured_at: images[0] ? images[0].captured_at: null,
-                            captured_by: images[0] ? images[0].captured_by: null,
-                            key: sequenceKey
-                        }
-                    });
-                }
-            });
+            if (images) {
+                lineStrings.push({
+                    type: 'LineString',
+                    coordinates: images
+                        .map(function (d) {
+                            return d.loc;
+                        })
+                        .filter(Boolean),
+                    properties: {
+                        captured_at: images[0] ? images[0].captured_at : null,
+                        captured_by: images[0] ? images[0].captured_by : null,
+                        key: sequenceKey,
+                    },
+                });
+            }
+        });
         return lineStrings;
     },
 
-
-    cachedImage: function(imageKey) {
+    cachedImage: function (imageKey) {
         return _oscCache.images.forImageKey[imageKey];
     },
 
-
-    loadImages: function(projection) {
+    loadImages: function (projection) {
         var url = apibase + '/1.0/list/nearby-photos/';
         loadTiles('images', url, projection);
     },
 
-
-    ensureViewerLoaded: function(context) {
-
+    ensureViewerLoaded: function (context) {
         if (_loadViewerPromise) return _loadViewerPromise;
 
         // add kartaview-wrapper
-        var wrap = context.container().select('.photoviewer').selectAll('.kartaview-wrapper')
+        var wrap = context
+            .container()
+            .select('.photoviewer')
+            .selectAll('.kartaview-wrapper')
             .data([0]);
 
         var that = this;
 
-        var wrapEnter = wrap.enter()
+        var wrapEnter = wrap
+            .enter()
             .append('div')
             .attr('class', 'photo-wrapper kartaview-wrapper')
             .classed('hide', true)
             .call(imgZoom.on('zoom', zoomPan))
             .on('dblclick.zoom', null);
 
-        wrapEnter
-            .append('div')
-            .attr('class', 'photo-attribution fillD');
+        wrapEnter.append('div').attr('class', 'photo-attribution fillD');
 
         var controlsEnter = wrapEnter
             .append('div')
@@ -273,10 +302,7 @@ export default {
             .append('div')
             .attr('class', 'photo-controls');
 
-        controlsEnter
-            .append('button')
-            .on('click.back', step(-1))
-            .text('◄');
+        controlsEnter.append('button').on('click.back', step(-1)).text('◄');
 
         controlsEnter
             .append('button')
@@ -288,33 +314,27 @@ export default {
             .on('click.rotate-cw', rotate(90))
             .text('⤾');
 
-        controlsEnter
-            .append('button')
-            .on('click.forward', step(1))
-            .text('►');
+        controlsEnter.append('button').on('click.forward', step(1)).text('►');
 
-        wrapEnter
-            .append('div')
-            .attr('class', 'kartaview-image-wrap');
-
+        wrapEnter.append('div').attr('class', 'kartaview-image-wrap');
 
         // Register viewer resize handler
-        context.ui().photoviewer.on('resize.kartaview', function(dimensions) {
+        context.ui().photoviewer.on('resize.kartaview', function (dimensions) {
             imgZoom
                 .extent([[0, 0], dimensions])
                 .translateExtent([[0, 0], dimensions]);
         });
 
-
         function zoomPan(d3_event) {
             var t = d3_event.transform;
-            context.container().select('.photoviewer .kartaview-image-wrap')
+            context
+                .container()
+                .select('.photoviewer .kartaview-image-wrap')
                 .call(utilSetTransform, t.x, t.y, t.k);
         }
 
-
         function rotate(deg) {
-            return function() {
+            return function () {
                 if (!_oscSelectedImage) return;
                 var sequenceKey = _oscSelectedImage.sequence_id;
                 var sequence = _oscCache.sequences[sequenceKey];
@@ -327,10 +347,11 @@ export default {
                 if (r < -180) r += 360;
                 sequence.rotation = r;
 
-                var wrap = context.container().select('.photoviewer .kartaview-wrapper');
+                var wrap = context
+                    .container()
+                    .select('.photoviewer .kartaview-wrapper');
 
-                wrap
-                    .transition()
+                wrap.transition()
                     .duration(100)
                     .call(imgZoom.transform, d3_zoomIdentity);
 
@@ -342,7 +363,7 @@ export default {
         }
 
         function step(stepBy) {
-            return function() {
+            return function () {
                 if (!_oscSelectedImage) return;
                 var sequenceKey = _oscSelectedImage.sequence_id;
                 var sequence = _oscCache.sequences[sequenceKey];
@@ -354,8 +375,7 @@ export default {
 
                 context.map().centerEase(nextImage.loc);
 
-                that
-                    .selectImage(context, nextImage.key);
+                that.selectImage(context, nextImage.key);
             };
         }
 
@@ -365,10 +385,11 @@ export default {
         return _loadViewerPromise;
     },
 
-
-    showViewer: function(context) {
+    showViewer: function (context) {
         const wrap = context.container().select('.photoviewer');
-        const isHidden = wrap.selectAll('.photo-wrapper.kartaview-wrapper.hide').size();
+        const isHidden = wrap
+            .selectAll('.photo-wrapper.kartaview-wrapper.hide')
+            .size();
 
         if (isHidden) {
             for (const service of Object.values(services)) {
@@ -385,8 +406,7 @@ export default {
         return this;
     },
 
-
-    hideViewer: function(context) {
+    hideViewer: function (context) {
         _oscSelectedImage = null;
 
         this.updateUrlImage(null);
@@ -399,15 +419,15 @@ export default {
             .selectAll('.photo-wrapper')
             .classed('hide', true);
 
-        context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
+        context
+            .container()
+            .selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('currentView', false);
 
         return this.setStyles(context, null, true);
     },
 
-
-    selectImage: function(context, imageKey) {
-
+    selectImage: function (context, imageKey) {
         var d = this.cachedImage(imageKey);
 
         _oscSelectedImage = d;
@@ -419,23 +439,24 @@ export default {
 
         this.setStyles(context, null, true);
 
-        context.container().selectAll('.icon-sign')
+        context
+            .container()
+            .selectAll('.icon-sign')
             .classed('currentView', false);
 
         if (!d) return this;
 
-        var wrap = context.container().select('.photoviewer .kartaview-wrapper');
+        var wrap = context
+            .container()
+            .select('.photoviewer .kartaview-wrapper');
         var imageWrap = wrap.selectAll('.kartaview-image-wrap');
         var attribution = wrap.selectAll('.photo-attribution').text('');
 
-        wrap
-            .transition()
+        wrap.transition()
             .duration(100)
             .call(imgZoom.transform, d3_zoomIdentity);
 
-        imageWrap
-            .selectAll('.kartaview-image')
-            .remove();
+        imageWrap.selectAll('.kartaview-image').remove();
 
         if (d) {
             var sequence = _oscCache.sequences[d.sequence_id];
@@ -444,7 +465,13 @@ export default {
             imageWrap
                 .append('img')
                 .attr('class', 'kartaview-image')
-                .attr('src', (apibase + '/' + d.imagePath).replace(/^https:\/\/kartaview\.org\/storage(\d+)\//, 'https://storage$1.openstreetcam.org/'))
+                .attr(
+                    'src',
+                    (apibase + '/' + d.imagePath).replace(
+                        /^https:\/\/kartaview\.org\/storage(\d+)\//,
+                        'https://storage$1.openstreetcam.org/',
+                    ),
+                )
                 .style('transform', 'rotate(' + r + 'deg)');
 
             if (d.captured_by) {
@@ -452,12 +479,14 @@ export default {
                     .append('a')
                     .attr('class', 'captured_by')
                     .attr('target', '_blank')
-                    .attr('href', 'https://kartaview.org/user/' + encodeURIComponent(d.captured_by))
+                    .attr(
+                        'href',
+                        'https://kartaview.org/user/' +
+                            encodeURIComponent(d.captured_by),
+                    )
                     .text('@' + d.captured_by);
 
-                attribution
-                    .append('span')
-                    .text('|');
+                attribution.append('span').text('|');
             }
 
             if (d.captured_at) {
@@ -466,21 +495,24 @@ export default {
                     .attr('class', 'captured_at')
                     .text(localeDateString(d.captured_at));
 
-                attribution
-                    .append('span')
-                    .text('|');
+                attribution.append('span').text('|');
             }
 
             attribution
                 .append('a')
                 .attr('class', 'image-link')
                 .attr('target', '_blank')
-                .attr('href', 'https://kartaview.org/details/' + d.sequence_id + '/' + d.sequence_index)
+                .attr(
+                    'href',
+                    'https://kartaview.org/details/' +
+                        d.sequence_id +
+                        '/' +
+                        d.sequence_index,
+                )
                 .text('kartaview.org');
         }
 
         return this;
-
 
         function localeDateString(s) {
             if (!s) return null;
@@ -491,28 +523,30 @@ export default {
         }
     },
 
-
-    getSelectedImage: function() {
+    getSelectedImage: function () {
         return _oscSelectedImage;
     },
 
-
-    getSequenceKeyForImage: function(d) {
+    getSequenceKeyForImage: function (d) {
         return d && d.sequence_id;
     },
-
 
     // Updates the currently highlighted sequence and selected bubble.
     // Reset is only necessary when interacting with the viewport because
     // this implicitly changes the currently selected bubble/sequence
-    setStyles: function(context, hovered, reset) {
-        if (reset) {  // reset all layers
-            context.container().selectAll('.viewfield-group')
+    setStyles: function (context, hovered, reset) {
+        if (reset) {
+            // reset all layers
+            context
+                .container()
+                .selectAll('.viewfield-group')
                 .classed('highlighted', false)
                 .classed('hovered', false)
                 .classed('currentView', false);
 
-            context.container().selectAll('.sequence')
+            context
+                .container()
+                .selectAll('.sequence')
                 .classed('highlighted', false)
                 .classed('currentView', false);
         }
@@ -526,17 +560,36 @@ export default {
         var selectedSequenceId = this.getSequenceKeyForImage(selected);
 
         // highlight sibling viewfields on either the selected or the hovered sequences
-        context.container().selectAll('.layer-kartaview .viewfield-group')
-            .classed('highlighted', function(d) { return d.sequence_id === selectedSequenceId || d.id === hoveredImageId; })
-            .classed('hovered', function(d) { return d.key === hoveredImageId; })
-            .classed('currentView', function(d) { return d.key === selectedImageId; });
+        context
+            .container()
+            .selectAll('.layer-kartaview .viewfield-group')
+            .classed('highlighted', function (d) {
+                return (
+                    d.sequence_id === selectedSequenceId ||
+                    d.id === hoveredImageId
+                );
+            })
+            .classed('hovered', function (d) {
+                return d.key === hoveredImageId;
+            })
+            .classed('currentView', function (d) {
+                return d.key === selectedImageId;
+            });
 
-        context.container().selectAll('.layer-kartaview .sequence')
-            .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceId; })
-            .classed('currentView', function(d) { return d.properties.key === selectedSequenceId; });
+        context
+            .container()
+            .selectAll('.layer-kartaview .sequence')
+            .classed('highlighted', function (d) {
+                return d.properties.key === hoveredSequenceId;
+            })
+            .classed('currentView', function (d) {
+                return d.properties.key === selectedSequenceId;
+            });
 
         // update viewfields if needed
-        context.container().selectAll('.layer-kartaview .viewfield-group .viewfield')
+        context
+            .container()
+            .selectAll('.layer-kartaview .viewfield-group .viewfield')
             .attr('d', viewfieldPath);
 
         function viewfieldPath() {
@@ -551,8 +604,7 @@ export default {
         return this;
     },
 
-
-    updateUrlImage: function(imageKey) {
+    updateUrlImage: function (imageKey) {
         const hash = utilStringQs(window.location.hash);
         if (imageKey) {
             hash.photo = 'kartaview/' + imageKey;
@@ -562,9 +614,7 @@ export default {
         window.history.replaceState(null, '', '#' + utilQsString(hash, true));
     },
 
-
-    cache: function() {
+    cache: function () {
         return _oscCache;
-    }
-
+    },
 };

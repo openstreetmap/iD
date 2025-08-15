@@ -1,25 +1,24 @@
 import _throttle from 'lodash-es/throttle';
 
 import { select as d3_select } from 'd3-selection';
-import { svgPath, svgPointTransform } from './helpers';
 import { services } from '../services';
-
+import { svgPath, svgPointTransform } from './helpers';
 
 export function svgMapillaryImages(projection, context, dispatch) {
-    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    const throttledRedraw = _throttle(function () {
+        dispatch.call('change');
+    }, 1000);
     const minZoom = 12;
     const minMarkerZoom = 16;
     const minViewfieldZoom = 18;
     let layer = d3_select(null);
     let _mapillary;
 
-
     function init() {
-        if (svgMapillaryImages.initialized) return;  // run once
+        if (svgMapillaryImages.initialized) return; // run once
         svgMapillaryImages.enabled = false;
         svgMapillaryImages.initialized = true;
     }
-
 
     function getService() {
         if (services.mapillary && !_mapillary) {
@@ -32,7 +31,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
         return _mapillary;
     }
 
-
     function showLayer() {
         const service = getService();
         if (!service) return;
@@ -44,47 +42,36 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .transition()
             .duration(250)
             .style('opacity', 1)
-            .on('end', function () { dispatch.call('change'); });
+            .on('end', function () {
+                dispatch.call('change');
+            });
     }
-
 
     function hideLayer() {
         throttledRedraw.cancel();
 
-        layer
-            .transition()
-            .duration(250)
-            .style('opacity', 0)
-            .on('end', editOff);
+        layer.transition().duration(250).style('opacity', 0).on('end', editOff);
     }
-
 
     function editOn() {
         layer.style('display', 'block');
     }
-
 
     function editOff() {
         layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
     }
 
-
     function click(d3_event, image) {
         const service = getService();
         if (!service) return;
 
-        service
-            .ensureViewerLoaded(context)
-            .then(function() {
-                service
-                    .selectImage(context, image.id)
-                    .showViewer(context);
-            });
+        service.ensureViewerLoaded(context).then(function () {
+            service.selectImage(context, image.id).showViewer(context);
+        });
 
         context.map().centerEase(image.loc);
     }
-
 
     function mouseover(d3_event, image) {
         const service = getService();
@@ -92,12 +79,10 @@ export function svgMapillaryImages(projection, context, dispatch) {
         if (service) service.setStyles(context, image);
     }
 
-
     function mouseout() {
         const service = getService();
         if (service) service.setStyles(context, null);
     }
-
 
     function transform(d) {
         let t = svgPointTransform(projection)(d);
@@ -107,7 +92,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
         return t;
     }
 
-
     function filterImages(images, skipDateFilter = false) {
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
@@ -115,19 +99,25 @@ export function svgMapillaryImages(projection, context, dispatch) {
         const toDate = context.photos().toDate();
 
         if (!showsPano || !showsFlat) {
-            images = images.filter(function(image) {
+            images = images.filter(function (image) {
                 if (image.is_pano) return showsPano;
                 return showsFlat;
             });
         }
         if (fromDate && !skipDateFilter) {
-            images = images.filter(function(image) {
-                return new Date(image.captured_at).getTime() >= new Date(fromDate).getTime();
+            images = images.filter(function (image) {
+                return (
+                    new Date(image.captured_at).getTime() >=
+                    new Date(fromDate).getTime()
+                );
             });
         }
         if (toDate && !skipDateFilter) {
-            images = images.filter(function(image) {
-                return new Date(image.captured_at).getTime() <= new Date(toDate).getTime();
+            images = images.filter(function (image) {
+                return (
+                    new Date(image.captured_at).getTime() <=
+                    new Date(toDate).getTime()
+                );
             });
         }
 
@@ -141,7 +131,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         const toDate = context.photos().toDate();
 
         if (!showsPano || !showsFlat) {
-            sequences = sequences.filter(function(sequence) {
+            sequences = sequences.filter(function (sequence) {
                 if (sequence.properties.hasOwnProperty('is_pano')) {
                     if (sequence.properties.is_pano) return showsPano;
                     return showsFlat;
@@ -150,13 +140,19 @@ export function svgMapillaryImages(projection, context, dispatch) {
             });
         }
         if (fromDate && !skipDateFilter) {
-            sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.captured_at).getTime() >= new Date(fromDate).getTime().toString();
+            sequences = sequences.filter(function (sequence) {
+                return (
+                    new Date(sequence.properties.captured_at).getTime() >=
+                    new Date(fromDate).getTime().toString()
+                );
             });
         }
         if (toDate && !skipDateFilter) {
-            sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.captured_at).getTime() <= new Date(toDate).getTime().toString();
+            sequences = sequences.filter(function (sequence) {
+                return (
+                    new Date(sequence.properties.captured_at).getTime() <=
+                    new Date(toDate).getTime().toString()
+                );
             });
         }
 
@@ -165,12 +161,12 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
     function update() {
         const z = ~~context.map().zoom();
-        const showMarkers = (z >= minMarkerZoom);
-        const showViewfields = (z >= minViewfieldZoom);
+        const showMarkers = z >= minMarkerZoom;
+        const showViewfields = z >= minViewfieldZoom;
 
         const service = getService();
-        let sequences = (service ? service.sequences(projection) : []);
-        let images = (service && showMarkers ? service.images(projection) : []);
+        let sequences = service ? service.sequences(projection) : [];
+        let images = service && showMarkers ? service.images(projection) : [];
         // images[0]
         // {
         //    "loc":[13.235349655151367,52.50694232952122],
@@ -181,59 +177,67 @@ export function svgMapillaryImages(projection, context, dispatch) {
         //    "sequence_id":"zcyumxorbza3dq3twjybam"
         //    }
         dispatch.call('photoDatesChanged', this, 'mapillary', [
-            ...filterImages(images, true).map(p => p.captured_at),
-            ...filterSequences(sequences, true).map(s => s.properties.captured_at)]);
+            ...filterImages(images, true).map((p) => p.captured_at),
+            ...filterSequences(sequences, true).map(
+                (s) => s.properties.captured_at,
+            ),
+        ]);
 
         images = filterImages(images);
         sequences = filterSequences(sequences, service);
 
         service.filterViewer(context);
 
-        let traces = layer.selectAll('.sequences').selectAll('.sequence')
-            .data(sequences, function(d) { return d.properties.id; });
+        let traces = layer
+            .selectAll('.sequences')
+            .selectAll('.sequence')
+            .data(sequences, function (d) {
+                return d.properties.id;
+            });
 
         // exit
-        traces.exit()
-            .remove();
+        traces.exit().remove();
 
         // enter/update
-        traces = traces.enter()
+        traces = traces
+            .enter()
             .append('path')
             .attr('class', 'sequence')
             .merge(traces)
             .attr('d', svgPath(projection).geojson);
 
-
-        const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
-            .data(images, function(d) { return d.id; });
+        const groups = layer
+            .selectAll('.markers')
+            .selectAll('.viewfield-group')
+            .data(images, function (d) {
+                return d.id;
+            });
 
         // exit
-        groups.exit()
-            .remove();
+        groups.exit().remove();
 
         // enter
-        const groupsEnter = groups.enter()
+        const groupsEnter = groups
+            .enter()
             .append('g')
             .attr('class', 'viewfield-group')
             .on('mouseenter', mouseover)
             .on('mouseleave', mouseout)
             .on('click', click);
 
-        groupsEnter
-            .append('g')
-            .attr('class', 'viewfield-scale');
+        groupsEnter.append('g').attr('class', 'viewfield-scale');
 
         // update
         const markers = groups
             .merge(groupsEnter)
-            .sort(function(a, b) {
-                return b.loc[1] - a.loc[1];  // sort Y
+            .sort(function (a, b) {
+                return b.loc[1] - a.loc[1]; // sort Y
             })
             .attr('transform', transform)
             .select('.viewfield-scale');
 
-
-        markers.selectAll('circle')
+        markers
+            .selectAll('circle')
             .data([0])
             .enter()
             .append('circle')
@@ -241,16 +245,19 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .attr('dy', '0')
             .attr('r', '6');
 
-        const viewfields = markers.selectAll('.viewfield')
+        const viewfields = markers
+            .selectAll('.viewfield')
             .data(showViewfields ? [0] : []);
 
-        viewfields.exit()
-            .remove();
+        viewfields.exit().remove();
 
-        viewfields.enter()               // viewfields may or may not be drawn...
-            .insert('path', 'circle')    // but if they are, draw below the circles
+        viewfields
+            .enter() // viewfields may or may not be drawn...
+            .insert('path', 'circle') // but if they are, draw below the circles
             .attr('class', 'viewfield')
-            .classed('pano', function() { return this.parentNode.__data__.is_pano; })
+            .classed('pano', function () {
+                return this.parentNode.__data__.is_pano;
+            })
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
 
@@ -263,32 +270,27 @@ export function svgMapillaryImages(projection, context, dispatch) {
         }
     }
 
-
     function drawImages(selection) {
         const enabled = svgMapillaryImages.enabled;
         const service = getService();
 
-        layer = selection.selectAll('.layer-mapillary')
+        layer = selection
+            .selectAll('.layer-mapillary')
             .data(service ? [0] : []);
 
-        layer.exit()
-            .remove();
+        layer.exit().remove();
 
-        const layerEnter = layer.enter()
+        const layerEnter = layer
+            .enter()
             .append('g')
             .attr('class', 'layer-mapillary')
             .style('display', enabled ? 'block' : 'none');
 
-        layerEnter
-            .append('g')
-            .attr('class', 'sequences');
+        layerEnter.append('g').attr('class', 'sequences');
 
-        layerEnter
-            .append('g')
-            .attr('class', 'markers');
+        layerEnter.append('g').attr('class', 'markers');
 
-        layer = layerEnter
-            .merge(layer);
+        layer = layerEnter.merge(layer);
 
         if (enabled) {
             if (service && ~~context.map().zoom() >= minZoom) {
@@ -304,8 +306,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         }
     }
 
-
-    drawImages.enabled = function(_) {
+    drawImages.enabled = function (_) {
         if (!arguments.length) return svgMapillaryImages.enabled;
         svgMapillaryImages.enabled = _;
         if (svgMapillaryImages.enabled) {
@@ -319,15 +320,13 @@ export function svgMapillaryImages(projection, context, dispatch) {
         return this;
     };
 
-
-    drawImages.supported = function() {
+    drawImages.supported = function () {
         return !!getService();
     };
 
-    drawImages.rendered = function(zoom) {
-      return zoom >= minZoom;
+    drawImages.rendered = function (zoom) {
+        return zoom >= minZoom;
     };
-
 
     init();
     return drawImages;

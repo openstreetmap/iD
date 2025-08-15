@@ -4,10 +4,14 @@ describe('iD.svgData', function () {
     var context;
     var surface;
     var dispatch = d3.dispatch('change');
-    var projection = iD.geoRawMercator()
+    var projection = iD
+        .geoRawMercator()
         .translate([6934098.868981334, 4092682.5519805425])
         .scale(iD.geoZoomToScale(17))
-        .clipExtent([[0, 0], [1000, 1000]]);
+        .clipExtent([
+            [0, 0],
+            [1000, 1000],
+        ]);
 
     var geojson =
         '{' +
@@ -93,7 +97,6 @@ describe('iD.svgData', function () {
         surface = context.surface();
     });
 
-
     it('creates layer-mapdata', function () {
         var render = iD.svgData(projection, context, dispatch).geojson(gj);
         surface.call(render);
@@ -115,9 +118,9 @@ describe('iD.svgData', function () {
         expect(path.attr('d')).to.match(/^M.*z$/);
     });
 
-    describe('#fileList', function() {
+    describe('#fileList', function () {
         it('handles gpx files', async () => {
-            var files = [ makeFile(gpx, 'test.gpx', 'application/gpx+xml') ];
+            var files = [makeFile(gpx, 'test.gpx', 'application/gpx+xml')];
             var render = iD.svgData(projection, context, dispatch);
             var spy = sinon.spy();
             dispatch.on('change', spy);
@@ -136,7 +139,13 @@ describe('iD.svgData', function () {
         });
 
         it('handles kml files', async () => {
-            var files = [ makeFile(kml, 'test.kml', 'application/vnd.google-earth.kml+xml') ];
+            var files = [
+                makeFile(
+                    kml,
+                    'test.kml',
+                    'application/vnd.google-earth.kml+xml',
+                ),
+            ];
             var render = iD.svgData(projection, context, dispatch);
             var spy = sinon.spy();
             dispatch.on('change', spy);
@@ -155,7 +164,9 @@ describe('iD.svgData', function () {
         });
 
         it('handles geojson files', async () => {
-            var files = [ makeFile(geojson, 'test.geojson', 'application/vnd.geo+json') ];
+            var files = [
+                makeFile(geojson, 'test.geojson', 'application/vnd.geo+json'),
+            ];
             var render = iD.svgData(projection, context, dispatch);
             var spy = sinon.spy();
             dispatch.on('change', spy);
@@ -171,16 +182,25 @@ describe('iD.svgData', function () {
             path = surface.selectAll('path.stroke');
             expect(path.nodes().length).to.eql(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
-            expect(render.geojson().features[0].properties.osm_id).to.be.a('string');
-            expect(render.geojson().features[0].properties.flag).to.be.a('string');
-            expect(render.geojson().features[0].properties.list).to.be.a('string');
-            expect(render.geojson().features[0].properties.null).to.be.a('string');
-            expect(render.geojson().features[0].properties.object).to.be.a('string');
+            expect(render.geojson().features[0].properties.osm_id).to.be.a(
+                'string',
+            );
+            expect(render.geojson().features[0].properties.flag).to.be.a(
+                'string',
+            );
+            expect(render.geojson().features[0].properties.list).to.be.a(
+                'string',
+            );
+            expect(render.geojson().features[0].properties.null).to.be.a(
+                'string',
+            );
+            expect(render.geojson().features[0].properties.object).to.be.a(
+                'string',
+            );
         });
     });
 
-
-    describe('#showLabels', function() {
+    describe('#showLabels', function () {
         it('shows labels by default', function () {
             var render = iD.svgData(projection, context, dispatch).geojson(gj);
             surface.call(render);
@@ -194,14 +214,15 @@ describe('iD.svgData', function () {
             expect(halo.text()).to.eql('New Jersey');
         });
 
-
         it('hides labels with showLabels(false)', function () {
-            var render = iD.svgData(projection, context, dispatch).geojson(gj).showLabels(false);
+            var render = iD
+                .svgData(projection, context, dispatch)
+                .geojson(gj)
+                .showLabels(false);
             surface.call(render);
 
             expect(surface.selectAll('text.label').empty()).to.be.ok;
             expect(surface.selectAll('text.label-halo').empty()).to.be.ok;
         });
     });
-
 });

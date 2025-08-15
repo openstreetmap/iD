@@ -1,75 +1,83 @@
 import _debounce from 'lodash-es/debounce';
 
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
-import { t, localizer } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiCmd } from '../cmd';
 import { uiTooltip } from '../tooltip';
 
-
 export function uiToolUndoRedo(context) {
-
     var tool = {
         id: 'undo_redo',
-        label: t.append('toolbar.undo_redo')
+        label: t.append('toolbar.undo_redo'),
     };
 
-    var commands = [{
-        id: 'undo',
-        cmd: uiCmd('⌘Z'),
-        action: function() {
-            context.undo();
+    var commands = [
+        {
+            id: 'undo',
+            cmd: uiCmd('⌘Z'),
+            action: function () {
+                context.undo();
+            },
+            annotation: function () {
+                return context.history().undoAnnotation();
+            },
+            icon:
+                'iD-icon-' +
+                (localizer.textDirection() === 'rtl' ? 'redo' : 'undo'),
         },
-        annotation: function() {
-            return context.history().undoAnnotation();
+        {
+            id: 'redo',
+            cmd: uiCmd('⌘⇧Z'),
+            action: function () {
+                context.redo();
+            },
+            annotation: function () {
+                return context.history().redoAnnotation();
+            },
+            icon:
+                'iD-icon-' +
+                (localizer.textDirection() === 'rtl' ? 'undo' : 'redo'),
         },
-        icon: 'iD-icon-' + (localizer.textDirection() === 'rtl' ? 'redo' : 'undo')
-    }, {
-        id: 'redo',
-        cmd: uiCmd('⌘⇧Z'),
-        action: function() {
-            context.redo();
-        },
-        annotation: function() {
-            return context.history().redoAnnotation();
-        },
-        icon: 'iD-icon-' + (localizer.textDirection() === 'rtl' ? 'undo' : 'redo')
-    }];
-
+    ];
 
     function editable() {
-        return context.mode() && context.mode().id !== 'save' && context.map().editableDataEnabled(true /* ignore min zoom */);
+        return (
+            context.mode() &&
+            context.mode().id !== 'save' &&
+            context.map().editableDataEnabled(true /* ignore min zoom */)
+        );
     }
 
-
-    tool.render = function(selection) {
+    tool.render = function (selection) {
         var tooltipBehavior = uiTooltip()
             .placement('bottom')
             .title(function (d) {
-                return d.annotation() ?
-                    t.append(d.id + '.tooltip', { action: d.annotation() }) :
-                    t.append(d.id + '.nothing');
+                return d.annotation()
+                    ? t.append(d.id + '.tooltip', { action: d.annotation() })
+                    : t.append(d.id + '.nothing');
             })
-            .keys(function(d) {
+            .keys(function (d) {
                 return [d.cmd];
             })
             .scrollContainer(context.container().select('.top-toolbar'));
 
         var lastPointerUpType;
 
-        var buttons = selection.selectAll('button')
+        var buttons = selection
+            .selectAll('button')
             .data(commands)
             .enter()
             .append('button')
-            .attr('class', function(d) { return 'disabled ' + d.id + '-button bar-button'; })
-            .on('pointerup', function(d3_event) {
+            .attr('class', function (d) {
+                return 'disabled ' + d.id + '-button bar-button';
+            })
+            .on('pointerup', function (d3_event) {
                 // `pointerup` is always called before `click`
                 lastPointerUpType = d3_event.pointerType;
             })
-            .on('click', function(d3_event, d) {
+            .on('click', function (d3_event, d) {
                 d3_event.preventDefault();
 
                 var annotation = d.annotation();
@@ -78,17 +86,19 @@ export function uiToolUndoRedo(context) {
                     d.action();
                 }
 
-                if (editable() && (
-                    lastPointerUpType === 'touch' ||
-                    lastPointerUpType === 'pen')
+                if (
+                    editable() &&
+                    (lastPointerUpType === 'touch' ||
+                        lastPointerUpType === 'pen')
                 ) {
                     // there are no tooltips for touch interactions so flash feedback instead
 
-                    var label = annotation ?
-                        t.append(d.id + '.tooltip', { action: annotation }) :
-                        t.append(d.id + '.nothing');
-                    context.ui().flash
-                        .duration(2000)
+                    var label = annotation
+                        ? t.append(d.id + '.tooltip', { action: annotation })
+                        : t.append(d.id + '.nothing');
+                    context
+                        .ui()
+                        .flash.duration(2000)
                         .iconName('#' + d.icon)
                         .iconClass(annotation ? '' : 'disabled')
                         .label(label)();
@@ -97,43 +107,43 @@ export function uiToolUndoRedo(context) {
             })
             .call(tooltipBehavior);
 
-        buttons.each(function(d) {
-            d3_select(this)
-                .call(svgIcon('#' + d.icon));
+        buttons.each(function (d) {
+            d3_select(this).call(svgIcon('#' + d.icon));
         });
 
-        context.keybinding()
-            .on(commands[0].cmd, function(d3_event) {
+        context
+            .keybinding()
+            .on(commands[0].cmd, function (d3_event) {
                 d3_event.preventDefault();
                 if (editable()) commands[0].action();
             })
-            .on(commands[1].cmd, function(d3_event) {
+            .on(commands[1].cmd, function (d3_event) {
                 d3_event.preventDefault();
                 if (editable()) commands[1].action();
             });
 
+        var debouncedUpdate = _debounce(update, 500, {
+            leading: true,
+            trailing: true,
+        });
 
-        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
-
-        context.map()
+        context
+            .map()
             .on('move.undo_redo', debouncedUpdate)
             .on('drawn.undo_redo', debouncedUpdate);
 
-        context.history()
-            .on('change.undo_redo', function(difference) {
-                if (difference) update();
-            });
+        context.history().on('change.undo_redo', function (difference) {
+            if (difference) update();
+        });
 
-        context
-            .on('enter.undo_redo', update);
-
+        context.on('enter.undo_redo', update);
 
         function update() {
             buttons
-                .classed('disabled', function(d) {
+                .classed('disabled', function (d) {
                     return !editable() || !d.annotation();
                 })
-                .each(function() {
+                .each(function () {
                     var selection = d3_select(this);
                     if (!selection.select('.tooltip.in').empty()) {
                         selection.call(tooltipBehavior.updateContent);
@@ -142,20 +152,14 @@ export function uiToolUndoRedo(context) {
         }
     };
 
-    tool.uninstall = function() {
-        context.keybinding()
-            .off(commands[0].cmd)
-            .off(commands[1].cmd);
+    tool.uninstall = function () {
+        context.keybinding().off(commands[0].cmd).off(commands[1].cmd);
 
-        context.map()
-            .on('move.undo_redo', null)
-            .on('drawn.undo_redo', null);
+        context.map().on('move.undo_redo', null).on('drawn.undo_redo', null);
 
-        context.history()
-            .on('change.undo_redo', null);
+        context.history().on('change.undo_redo', null);
 
-        context
-            .on('enter.undo_redo', null);
+        context.on('enter.undo_redo', null);
     };
 
     return tool;

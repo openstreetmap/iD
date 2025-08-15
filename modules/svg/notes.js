@@ -1,35 +1,39 @@
 import _throttle from 'lodash-es/throttle';
 
-import { select as d3_select } from 'd3-selection';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
 
 import { modeBrowse } from '../modes/browse';
-import { svgPointTransform } from './helpers';
 import { services } from '../services';
 import { utilStringQs } from '../util';
+import { svgPointTransform } from './helpers';
 
 var hash = utilStringQs(window.location.hash);
 
 var _notesEnabled = !!hash.notes;
 var _osmService;
 
-
 export function svgNotes(projection, context, dispatch) {
-    if (!dispatch) { dispatch = d3_dispatch('change'); }
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    if (!dispatch) {
+        dispatch = d3_dispatch('change');
+    }
+    var throttledRedraw = _throttle(function () {
+        dispatch.call('change');
+    }, 1000);
     var minZoom = 12;
     var touchLayer = d3_select(null);
     var drawLayer = d3_select(null);
     var _notesVisible = false;
 
-
     function markerPath(selection, klass) {
         selection
             .attr('class', klass)
             .attr('transform', 'translate(-8, -22)')
-            .attr('d', 'm17.5,0l-15,0c-1.37,0 -2.5,1.12 -2.5,2.5l0,11.25c0,1.37 1.12,2.5 2.5,2.5l3.75,0l0,3.28c0,0.38 0.43,0.6 0.75,0.37l4.87,-3.65l5.62,0c1.37,0 2.5,-1.12 2.5,-2.5l0,-11.25c0,-1.37 -1.12,-2.5 -2.5,-2.5z');
+            .attr(
+                'd',
+                'm17.5,0l-15,0c-1.37,0 -2.5,1.12 -2.5,2.5l0,11.25c0,1.37 1.12,2.5 2.5,2.5l3.75,0l0,3.28c0,0.38 0.43,0.6 0.75,0.37l4.87,-3.65l5.62,0c1.37,0 2.5,-1.12 2.5,-2.5l0,-11.25c0,-1.37 -1.12,-2.5 -2.5,-2.5z',
+            );
     }
-
 
     // Loosely-coupled osm service for fetching notes.
     function getService() {
@@ -43,30 +47,23 @@ export function svgNotes(projection, context, dispatch) {
         return _osmService;
     }
 
-
     // Show the notes
     function editOn() {
         if (!_notesVisible) {
             _notesVisible = true;
-            drawLayer
-                .style('display', 'block');
+            drawLayer.style('display', 'block');
         }
     }
-
 
     // Immediately remove the notes and their touch targets
     function editOff() {
         if (_notesVisible) {
             _notesVisible = false;
-            drawLayer
-                .style('display', 'none');
-            drawLayer.selectAll('.note')
-                .remove();
-            touchLayer.selectAll('.note')
-                .remove();
+            drawLayer.style('display', 'none');
+            drawLayer.selectAll('.note').remove();
+            touchLayer.selectAll('.note').remove();
         }
     }
-
 
     // Enable the layer.  This shows the notes and transitions them to visible.
     function layerOn() {
@@ -82,13 +79,11 @@ export function svgNotes(projection, context, dispatch) {
             });
     }
 
-
     // Disable the layer.  This transitions the layer invisible and then hides the notes.
     function layerOff() {
         throttledRedraw.cancel();
         drawLayer.interrupt();
-        touchLayer.selectAll('.note')
-            .remove();
+        touchLayer.selectAll('.note').remove();
 
         drawLayer
             .transition()
@@ -100,29 +95,33 @@ export function svgNotes(projection, context, dispatch) {
             });
     }
 
-
     // Update the note markers
     function updateMarkers() {
         if (!_notesVisible || !_notesEnabled) return;
 
         var service = getService();
         var selectedID = context.selectedNoteID();
-        var data = (service ? service.notes(projection) : []);
+        var data = service ? service.notes(projection) : [];
         var getTransform = svgPointTransform(projection);
 
         // Draw markers..
-        var notes = drawLayer.selectAll('.note')
-            .data(data, function(d) { return d.status + d.id; });
+        var notes = drawLayer.selectAll('.note').data(data, function (d) {
+            return d.status + d.id;
+        });
 
         // exit
-        notes.exit()
-            .remove();
+        notes.exit().remove();
 
         // enter
-        var notesEnter = notes.enter()
+        var notesEnter = notes
+            .enter()
             .append('g')
-            .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; })
-            .classed('new', function(d) { return d.id < 0; });
+            .attr('class', function (d) {
+                return 'note note-' + d.id + ' ' + d.status;
+            })
+            .classed('new', function (d) {
+                return d.id < 0;
+            });
 
         notesEnter
             .append('ellipse')
@@ -132,9 +131,7 @@ export function svgNotes(projection, context, dispatch) {
             .attr('ry', 3)
             .attr('class', 'stroke');
 
-        notesEnter
-            .append('path')
-            .call(markerPath, 'shadow');
+        notesEnter.append('path').call(markerPath, 'shadow');
 
         notesEnter
             .append('use')
@@ -145,8 +142,11 @@ export function svgNotes(projection, context, dispatch) {
             .attr('y', '-22px')
             .attr('xlink:href', '#iD-icon-note');
 
-        notesEnter.selectAll('.icon-annotation')
-            .data(function(d) { return [d]; })
+        notesEnter
+            .selectAll('.icon-annotation')
+            .data(function (d) {
+                return [d];
+            })
             .enter()
             .append('use')
             .attr('class', 'icon-annotation')
@@ -154,7 +154,7 @@ export function svgNotes(projection, context, dispatch) {
             .attr('height', '10px')
             .attr('x', '-3px')
             .attr('y', '-19px')
-            .attr('xlink:href', function(d) {
+            .attr('xlink:href', function (d) {
                 if (d.id < 0) return '#iD-icon-plus';
                 if (d.status === 'open') return '#iD-icon-close';
                 return '#iD-icon-apply';
@@ -164,27 +164,27 @@ export function svgNotes(projection, context, dispatch) {
         notes
             .merge(notesEnter)
             .sort(sortY)
-            .classed('selected', function(d) {
+            .classed('selected', function (d) {
                 var mode = context.mode();
-                var isMoving = mode && mode.id === 'drag-note';  // no shadows when dragging
+                var isMoving = mode && mode.id === 'drag-note'; // no shadows when dragging
                 return !isMoving && d.id === selectedID;
             })
             .attr('transform', getTransform);
-
 
         // Draw targets..
         if (touchLayer.empty()) return;
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
 
-        var targets = touchLayer.selectAll('.note')
-            .data(data, function(d) { return d.id; });
+        var targets = touchLayer.selectAll('.note').data(data, function (d) {
+            return d.id;
+        });
 
         // exit
-        targets.exit()
-            .remove();
+        targets.exit().remove();
 
         // enter/update
-        targets.enter()
+        targets
+            .enter()
             .append('rect')
             .attr('width', '20px')
             .attr('height', '20px')
@@ -192,12 +192,11 @@ export function svgNotes(projection, context, dispatch) {
             .attr('y', '-22px')
             .merge(targets)
             .sort(sortY)
-            .attr('class', function(d) {
-                var newClass = (d.id < 0 ? 'new' : '');
+            .attr('class', function (d) {
+                var newClass = d.id < 0 ? 'new' : '';
                 return 'note target note-' + d.id + ' ' + fillClass + newClass;
             })
             .attr('transform', getTransform);
-
 
         function sortY(a, b) {
             if (a.id === selectedID) return 1;
@@ -206,23 +205,25 @@ export function svgNotes(projection, context, dispatch) {
         }
     }
 
-
     // Draw the notes layer and schedule loading notes and updating markers.
     function drawNotes(selection) {
         var service = getService();
 
         var surface = context.surface();
         if (surface && !surface.empty()) {
-            touchLayer = surface.selectAll('.data-layer.touch .layer-touch.markers');
+            touchLayer = surface.selectAll(
+                '.data-layer.touch .layer-touch.markers',
+            );
         }
 
-        drawLayer = selection.selectAll('.layer-notes')
+        drawLayer = selection
+            .selectAll('.layer-notes')
             .data(service ? [0] : []);
 
-        drawLayer.exit()
-            .remove();
+        drawLayer.exit().remove();
 
-        drawLayer = drawLayer.enter()
+        drawLayer = drawLayer
+            .enter()
             .append('g')
             .attr('class', 'layer-notes')
             .style('display', _notesEnabled ? 'block' : 'none')
@@ -239,9 +240,8 @@ export function svgNotes(projection, context, dispatch) {
         }
     }
 
-
     // Toggles the layer on and off
-    drawNotes.enabled = function(val) {
+    drawNotes.enabled = function (val) {
         if (!arguments.length) return _notesEnabled;
 
         _notesEnabled = val;
@@ -257,7 +257,6 @@ export function svgNotes(projection, context, dispatch) {
         dispatch.call('change');
         return this;
     };
-
 
     return drawNotes;
 }

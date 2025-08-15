@@ -1,24 +1,20 @@
-export * from './check';
-export * from './combo';
-export * from './input';
 export * from './access';
 export * from './address';
+export * from './check';
+export * from './combo';
 export * from './directional_combo';
+export * from './input';
 export * from './lanes';
 export * from './localized';
-export * from './roadheight';
-export * from './roadspeed';
 export * from './radio';
 export * from './restrictions';
+export * from './roadheight';
+export * from './roadspeed';
 export * from './textarea';
 export * from './wikidata';
 export * from './wikipedia';
 
-import {
-    uiFieldCheck,
-    uiFieldDefaultCheck,
-    uiFieldOnewayCheck
-} from './check';
+import { uiFieldCheck, uiFieldDefaultCheck, uiFieldOnewayCheck } from './check';
 
 import {
     uiFieldCombo,
@@ -26,7 +22,7 @@ import {
     uiFieldMultiCombo,
     uiFieldNetworkCombo,
     uiFieldSemiCombo,
-    uiFieldTypeCombo
+    uiFieldTypeCombo,
 } from './combo';
 
 import {
@@ -37,22 +33,19 @@ import {
     uiFieldSchedule,
     uiFieldTel,
     uiFieldText,
-    uiFieldUrl
+    uiFieldUrl,
 } from './input';
 
-import {
-    uiFieldRadio,
-    uiFieldStructureRadio
-} from './radio';
+import { uiFieldRadio, uiFieldStructureRadio } from './radio';
 
 import { uiFieldAccess } from './access';
 import { uiFieldAddress } from './address';
 import { uiFieldDirectionalCombo } from './directional_combo';
 import { uiFieldLanes } from './lanes';
 import { uiFieldLocalized } from './localized';
+import { uiFieldRestrictions } from './restrictions';
 import { uiFieldRoadheight } from './roadheight';
 import { uiFieldRoadspeed } from './roadspeed';
-import { uiFieldRestrictions } from './restrictions';
 import { uiFieldTextarea } from './textarea';
 import { uiFieldWikidata } from './wikidata';
 import { uiFieldWikipedia } from './wikipedia';
@@ -89,5 +82,5 @@ export var uiFields = {
     typeCombo: uiFieldTypeCombo,
     url: uiFieldUrl,
     wikidata: uiFieldWikidata,
-    wikipedia: uiFieldWikipedia
+    wikipedia: uiFieldWikipedia,
 };

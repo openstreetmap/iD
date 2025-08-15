@@ -9,10 +9,15 @@ describe('iD.uiFieldCombo', () => {
         });
 
         it('filters out duplicates by default', () => {
-            const field = iD.presetField('a', { key: 'destination:symbol', type: 'semiCombo' });
+            const field = iD.presetField('a', {
+                key: 'destination:symbol',
+                type: 'semiCombo',
+            });
             const instance = iD.uiFieldCombo(field, context);
             selection.call(instance);
-            instance.tags({ 'destination:symbol': 'none;none;Jurong East;none;Māngere' });
+            instance.tags({
+                'destination:symbol': 'none;none;Jurong East;none;Māngere',
+            });
 
             expect(selection.selectAll('li.raw-value').nodes()).toHaveLength(3); // not 5
         });
@@ -21,7 +26,7 @@ describe('iD.uiFieldCombo', () => {
             const field = iD.presetField('a', {
                 key: 'destination:symbol',
                 type: 'semiCombo',
-                allowDuplicates: true
+                allowDuplicates: true,
             });
 
             const onChange = vi.fn();
@@ -29,19 +34,23 @@ describe('iD.uiFieldCombo', () => {
             const instance = iD.uiFieldCombo(field, context);
             selection.call(instance);
 
-            let tags = { 'destination:symbol': 'none;none;Jurong East;none;Māngere' };
+            let tags = {
+                'destination:symbol': 'none;none;Jurong East;none;Māngere',
+            };
             instance.tags(tags);
             instance.on('change', onChange);
 
             expect(selection.selectAll('li.raw-value').nodes()).toHaveLength(5);
 
             // click the remove button from the 4th value
-            selection.select('li.raw-value:nth-child(4) a.remove').dispatch('click');
+            selection
+                .select('li.raw-value:nth-child(4) a.remove')
+                .dispatch('click');
 
             expect(onChange).toHaveBeenCalledTimes(1);
             expect(onChange).toHaveBeenCalledWith({
                 // the `none` value at the correct index was deleted
-                'destination:symbol': 'none;none;Jurong East;Māngere'
+                'destination:symbol': 'none;none;Jurong East;Māngere',
             });
         });
     });

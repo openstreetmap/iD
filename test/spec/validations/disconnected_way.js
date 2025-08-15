@@ -1,7 +1,7 @@
-describe('iD.validations.disconnected_way', function() {
+describe('iD.validations.disconnected_way', function () {
     var context;
 
-    beforeEach(function() {
+    beforeEach(function () {
         context = iD.coreContext().assetPath('../dist/').init();
     });
 
@@ -13,7 +13,7 @@ describe('iD.validations.disconnected_way', function() {
         context.perform(
             iD.actionAddEntity(n1),
             iD.actionAddEntity(n2),
-            iD.actionAddEntity(w)
+            iD.actionAddEntity(w),
         );
     }
 
@@ -29,7 +29,7 @@ describe('iD.validations.disconnected_way', function() {
             iD.actionAddEntity(n2),
             iD.actionAddEntity(n3),
             iD.actionAddEntity(w),
-            iD.actionAddEntity(w2)
+            iD.actionAddEntity(w2),
         );
     }
 
@@ -38,19 +38,19 @@ describe('iD.validations.disconnected_way', function() {
         var changes = context.history().changes();
         var entities = changes.modified.concat(changes.created);
         var issues = [];
-        entities.forEach(function(entity) {
+        entities.forEach(function (entity) {
             issues = issues.concat(validator(entity, context.graph()));
         });
         return issues;
     }
 
-    it('has no errors on init', function() {
+    it('has no errors on init', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('flags disconnected highway', function() {
-        createWay({ 'highway': 'unclassified' });
+    it('flags disconnected highway', function () {
+        createWay({ highway: 'unclassified' });
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
@@ -61,8 +61,11 @@ describe('iD.validations.disconnected_way', function() {
         expect(issue.entityIds[0]).to.eql('w-1');
     });
 
-    it('flags highway connected only to service area', function() {
-        createConnectingWays({ 'highway': 'unclassified' }, { 'highway': 'services' });
+    it('flags highway connected only to service area', function () {
+        createConnectingWays(
+            { highway: 'unclassified' },
+            { highway: 'services' },
+        );
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
@@ -73,12 +76,19 @@ describe('iD.validations.disconnected_way', function() {
         expect(issue.entityIds[0]).to.eql('w-1');
     });
 
-    it('ignores highway with connected entrance vertex', function() {
-
-        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
+    it('ignores highway with connected entrance vertex', function () {
+        var n1 = iD.osmNode({
+            id: 'n-1',
+            loc: [4, 4],
+            tags: { entrance: 'yes' },
+        });
         var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
         var n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
-        var w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'unclassified' } });
+        var w = iD.osmWay({
+            id: 'w-1',
+            nodes: ['n-1', 'n-2'],
+            tags: { highway: 'unclassified' },
+        });
         var w2 = iD.osmWay({ id: 'w-2', nodes: ['n-1', 'n-3'] });
 
         context.perform(
@@ -86,7 +96,7 @@ describe('iD.validations.disconnected_way', function() {
             iD.actionAddEntity(n2),
             iD.actionAddEntity(n3),
             iD.actionAddEntity(w),
-            iD.actionAddEntity(w2)
+            iD.actionAddEntity(w2),
         );
 
         var issues = validate();

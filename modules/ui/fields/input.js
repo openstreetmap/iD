@@ -1,20 +1,27 @@
+import * as countryCoder from '@rapideditor/country-coder';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import _debounce from 'lodash-es/debounce';
-import * as countryCoder from '@rapideditor/country-coder';
 
-import { presetManager } from '../../presets';
+import { isEqual } from 'lodash-es';
+import { uiLengthIndicator } from '..';
 import { fileFetcher } from '../../core/file_fetcher';
-import { t, localizer } from '../../core/localizer';
-import { utilDetect, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
-import { svgIcon } from '../../svg/icon';
+import { localizer, t } from '../../core/localizer';
 import { cardinal } from '../../osm/node';
 import { isColourValid } from '../../osm/tags';
-import { uiLengthIndicator } from '..';
+import { presetManager } from '../../presets';
+import { svgIcon } from '../../svg/icon';
+import {
+    utilDetect,
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind,
+    utilTotalExtent,
+} from '../../util';
 import { uiTooltip } from '../tooltip';
-import { isEqual } from 'lodash-es';
 
 export {
+    likelyRawNumberFormat,
     uiFieldText as uiFieldColour,
     uiFieldText as uiFieldEmail,
     uiFieldText as uiFieldIdentifier,
@@ -22,10 +29,10 @@ export {
     uiFieldText as uiFieldSchedule,
     uiFieldText as uiFieldTel,
     uiFieldText as uiFieldUrl,
-    likelyRawNumberFormat
 };
 
-const likelyRawNumberFormat = /^-?(0\.\d*|\d*\.\d{0,2}(\d{4,})?|\d{4,}\.\d{3})$/;
+const likelyRawNumberFormat =
+    /^-?(0\.\d*|\d*\.\d{0,2}(\d{4,})?|\d{4,}\.\d{3})$/;
 const yoHoursURLFormat = 'https://projets.pavie.info/yohours/?oh={value}';
 
 export function uiFieldText(field, context) {
@@ -37,26 +44,36 @@ export function uiFieldText(field, context) {
     var _entityIDs = [];
     var _tags;
     var _phoneFormats = {};
-    const isDirectionField = field.key.split(':').some(keyPart => keyPart === 'direction');
+    const isDirectionField = field.key
+        .split(':')
+        .some((keyPart) => keyPart === 'direction');
     const formatFloat = localizer.floatFormatter(localizer.languageCode());
     const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
-    const countDecimalPlaces = localizer.decimalPlaceCounter(localizer.languageCode());
+    const countDecimalPlaces = localizer.decimalPlaceCounter(
+        localizer.languageCode(),
+    );
 
     if (field.type === 'tel') {
-        fileFetcher.get('phone_formats')
-            .then(function(d) {
+        fileFetcher
+            .get('phone_formats')
+            .then(function (d) {
                 _phoneFormats = d;
                 updatePhonePlaceholder();
             })
-            .catch(function() { /* ignore */ });
+            .catch(function () {
+                /* ignore */
+            });
     }
-
 
     function calcLocked() {
         // Protect certain fields that have a companion `*:wikidata` value
-        var isLocked = (field.id === 'brand' || field.id === 'network' || field.id === 'operator' || field.id === 'flag') &&
+        var isLocked =
+            (field.id === 'brand' ||
+                field.id === 'network' ||
+                field.id === 'operator' ||
+                field.id === 'flag') &&
             _entityIDs.length &&
-            _entityIDs.some(function(entityID) {
+            _entityIDs.some(function (entityID) {
                 var entity = context.graph().hasEntity(entityID);
                 if (!entity) return false;
 
@@ -67,30 +84,36 @@ export function uiFieldText(field, context) {
                 var isSuggestion = preset && preset.suggestion;
 
                 // Lock the field if there is a value and a companion `*:wikidata` value
-                var which = field.id;   // 'brand', 'network', 'operator', 'flag'
-                return isSuggestion && !!entity.tags[which] && !!entity.tags[which + ':wikidata'];
+                var which = field.id; // 'brand', 'network', 'operator', 'flag'
+                return (
+                    isSuggestion &&
+                    !!entity.tags[which] &&
+                    !!entity.tags[which + ':wikidata']
+                );
             });
 
         field.locked(isLocked);
     }
 
-
     function i(selection) {
         calcLocked();
         var isLocked = field.locked();
 
-        wrap = selection.selectAll('.form-field-input-wrap')
-            .data([0]);
+        wrap = selection.selectAll('.form-field-input-wrap').data([0]);
 
-        wrap = wrap.enter()
+        wrap = wrap
+            .enter()
             .append('div')
-            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
+            .attr(
+                'class',
+                'form-field-input-wrap form-field-input-' + field.type,
+            )
             .merge(wrap);
 
-        input = wrap.selectAll('input')
-            .data([0]);
+        input = wrap.selectAll('input').data([0]);
 
-        input = input.enter()
+        input = input
+            .enter()
             .append('input')
             .attr('type', field.type === 'identifier' ? 'text' : field.type)
             .attr('dir', 'auto')
@@ -110,29 +133,30 @@ export function uiFieldText(field, context) {
 
         if (field.type === 'tel') {
             updatePhonePlaceholder();
-
         } else if (field.type === 'number') {
-            var rtl = (localizer.textDirection() === 'rtl');
+            var rtl = localizer.textDirection() === 'rtl';
 
             input.attr('type', 'text');
 
             var inc = field.increment;
 
-            var buttons = wrap.selectAll('.increment, .decrement')
+            var buttons = wrap
+                .selectAll('.increment, .decrement')
                 .data(rtl ? [inc, -inc] : [-inc, inc]);
 
-            buttons.enter()
+            buttons
+                .enter()
                 .append('button')
-                .attr('class', function(d) {
-                    var which = (d > 0 ? 'increment' : 'decrement');
+                .attr('class', function (d) {
+                    var which = d > 0 ? 'increment' : 'decrement';
                     return 'form-field-button ' + which;
                 })
-                .attr('title', function(d) {
-                    var which = (d > 0 ? 'increment' : 'decrement');
+                .attr('title', function (d) {
+                    var which = d > 0 ? 'increment' : 'decrement';
                     return t(`inspector.${which}`);
                 })
                 .merge(buttons)
-                .on('click', function(d3_event, d) {
+                .on('click', function (d3_event, d) {
                     d3_event.preventDefault();
 
                     // do nothing if this is a multi-selection with mixed values
@@ -141,10 +165,12 @@ export function uiFieldText(field, context) {
 
                     var raw_vals = input.node().value || '0';
                     var vals = raw_vals.split(';');
-                    vals = vals.map(function(v) {
+                    vals = vals.map(function (v) {
                         v = v.trim();
                         const isRawNumber = likelyRawNumberFormat.test(v);
-                        var num = isRawNumber ? parseFloat(v) : parseLocaleFloat(v);
+                        var num = isRawNumber
+                            ? parseFloat(v)
+                            : parseLocaleFloat(v);
                         if (isDirectionField) {
                             const compassDir = cardinal[v.toLowerCase()];
                             if (compassDir !== undefined) {
@@ -164,25 +190,35 @@ export function uiFieldText(field, context) {
                             num = ((num % 360) + 360) % 360;
                         }
                         // make sure no extra decimals are introduced
-                        return formatFloat(clamped(num), isRawNumber
-                            ? (v.includes('.') ? v.split('.')[1].length : 0)
-                            : countDecimalPlaces(v));
+                        return formatFloat(
+                            clamped(num),
+                            isRawNumber
+                                ? v.includes('.')
+                                    ? v.split('.')[1].length
+                                    : 0
+                                : countDecimalPlaces(v),
+                        );
                     });
                     input.node().value = vals.join(';');
                     change()();
                 });
-        } else if (field.type === 'identifier' && field.urlFormat && field.pattern) {
-
+        } else if (
+            field.type === 'identifier' &&
+            field.urlFormat &&
+            field.pattern
+        ) {
             input.attr('type', 'text');
-            outlinkButton = wrap.selectAll('.foreign-id-permalink')
-                .data([0]);
+            outlinkButton = wrap.selectAll('.foreign-id-permalink').data([0]);
 
-            outlinkButton = outlinkButton.enter()
+            outlinkButton = outlinkButton
+                .enter()
                 .append('button')
                 .call(svgIcon('#iD-icon-out-link'))
                 .attr('class', 'form-field-button foreign-id-permalink')
-                .attr('title', function() {
-                    var domainResults = /^https?:\/\/(.{1,}?)\//.exec(field.urlFormat);
+                .attr('title', function () {
+                    var domainResults = /^https?:\/\/(.{1,}?)\//.exec(
+                        field.urlFormat,
+                    );
                     if (domainResults.length >= 2 && domainResults[1]) {
                         var domain = domainResults[1];
                         return t('icons.view_on', { domain: domain });
@@ -191,48 +227,53 @@ export function uiFieldText(field, context) {
                 })
                 .merge(outlinkButton);
             outlinkButton
-                .on('click', function(d3_event) {
+                .on('click', function (d3_event) {
                     d3_event.preventDefault();
                     var value = validIdentifierValueForLink();
                     if (value) {
-                        var url = field.urlFormat.replace(/{value}/, encodeURIComponent(value));
+                        var url = field.urlFormat.replace(
+                            /{value}/,
+                            encodeURIComponent(value),
+                        );
                         window.open(url, '_blank');
                     }
                 })
                 .classed('disabled', () => !validIdentifierValueForLink())
                 .merge(outlinkButton);
         } else if (field.type === 'schedule') {
-
             input.attr('type', 'text');
 
-            outlinkButton = wrap.selectAll('.foreign-id-permalink')
-                .data([0]);
+            outlinkButton = wrap.selectAll('.foreign-id-permalink').data([0]);
 
-            outlinkButton.enter()
+            outlinkButton
+                .enter()
                 .append('button')
                 .call(svgIcon('#iD-icon-out-link'))
                 .attr('class', 'form-field-button foreign-id-permalink')
                 .attr('title', () => t('icons.edit_in', { tool: 'YoHours' }))
-                .on('click', function(d3_event) {
+                .on('click', function (d3_event) {
                     d3_event.preventDefault();
 
                     var value = validIdentifierValueForLink();
-                    var url = yoHoursURLFormat.replace(/{value}/, encodeURIComponent(value || ''));
+                    var url = yoHoursURLFormat.replace(
+                        /{value}/,
+                        encodeURIComponent(value || ''),
+                    );
                     window.open(url, '_blank');
                 })
                 .merge(outlinkButton);
         } else if (field.type === 'url') {
             input.attr('type', 'text');
 
-            outlinkButton = wrap.selectAll('.foreign-id-permalink')
-                .data([0]);
+            outlinkButton = wrap.selectAll('.foreign-id-permalink').data([0]);
 
-            outlinkButton.enter()
+            outlinkButton
+                .enter()
                 .append('button')
                 .call(svgIcon('#iD-icon-out-link'))
                 .attr('class', 'form-field-button foreign-id-permalink')
                 .attr('title', () => t('icons.visit_website'))
-                .on('click', function(d3_event) {
+                .on('click', function (d3_event) {
                     d3_event.preventDefault();
 
                     const value = validIdentifierValueForLink();
@@ -250,10 +291,8 @@ export function uiFieldText(field, context) {
         }
     }
 
-
     function updateColourPreview() {
-        wrap.selectAll('.colour-preview')
-            .remove();
+        wrap.selectAll('.colour-preview').remove();
 
         const colour = utilGetSetValue(input);
 
@@ -263,42 +302,41 @@ export function uiFieldText(field, context) {
             return;
         }
 
-        var colourSelector = wrap.selectAll('.colour-selector')
-            .data([0]);
+        var colourSelector = wrap.selectAll('.colour-selector').data([0]);
 
         colourSelector
             .enter()
             .append('input')
             .attr('type', 'color')
             .attr('class', 'colour-selector')
-            .on('input', _debounce(function(d3_event) {
-                d3_event.preventDefault();
-                var colour = this.value;
-                if (!isColourValid(colour)) return;
-                utilGetSetValue(input, this.value);
-                change()();
-                updateColourPreview();
-            }, 100));
-        wrap.selectAll('input.colour-selector')
-            .attr('value', colour);
+            .on(
+                'input',
+                _debounce(function (d3_event) {
+                    d3_event.preventDefault();
+                    var colour = this.value;
+                    if (!isColourValid(colour)) return;
+                    utilGetSetValue(input, this.value);
+                    change()();
+                    updateColourPreview();
+                }, 100),
+            );
+        wrap.selectAll('input.colour-selector').attr('value', colour);
 
-        var chooserButton = wrap.selectAll('.colour-preview')
-            .data([colour]);
+        var chooserButton = wrap.selectAll('.colour-preview').data([colour]);
         chooserButton = chooserButton
             .enter()
             .append('div')
             .attr('class', 'form-field-button colour-preview')
             .append('div')
-            .style('background-color', d => d)
+            .style('background-color', (d) => d)
             .attr('class', 'colour-box');
         if (colour === '') {
-            chooserButton = chooserButton
-                .call(svgIcon('#iD-icon-edit'));
+            chooserButton = chooserButton.call(svgIcon('#iD-icon-edit'));
         }
-        chooserButton
-            .on('click', () => wrap.select('.colour-selector').node().showPicker());
+        chooserButton.on('click', () =>
+            wrap.select('.colour-selector').node().showPicker(),
+        );
     }
-
 
     function updateDateField() {
         function isDateValid(date) {
@@ -308,8 +346,13 @@ export function uiFieldText(field, context) {
         const date = utilGetSetValue(input);
 
         const now = new Date();
-        const today = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().split('T')[0];
-        if ((field.key === 'check_date' || field.key === 'survey:date') && date !== today) {
+        const today = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+            .toISOString()
+            .split('T')[0];
+        if (
+            (field.key === 'check_date' || field.key === 'survey:date') &&
+            date !== today
+        ) {
             wrap.selectAll('.date-set-today')
                 .data([0])
                 .enter()
@@ -336,38 +379,38 @@ export function uiFieldText(field, context) {
             // opening of the calendar pick is not yet supported in safari <= 16
             // https://caniuse.com/mdn-api_htmlinputelement_showpicker_date_input
 
-            var dateSelector = wrap.selectAll('.date-selector')
-                .data([0]);
+            var dateSelector = wrap.selectAll('.date-selector').data([0]);
 
             dateSelector
                 .enter()
                 .append('input')
                 .attr('type', 'date')
                 .attr('class', 'date-selector')
-                .on('input', _debounce(function(d3_event) {
-                    d3_event.preventDefault();
-                    var date = this.value;
-                    if (!isDateValid(date)) return;
-                    utilGetSetValue(input, this.value);
-                    change()();
-                    updateDateField();
-                }, 100));
-            wrap.selectAll('input.date-selector')
-                .attr('value', date);
+                .on(
+                    'input',
+                    _debounce(function (d3_event) {
+                        d3_event.preventDefault();
+                        var date = this.value;
+                        if (!isDateValid(date)) return;
+                        utilGetSetValue(input, this.value);
+                        change()();
+                        updateDateField();
+                    }, 100),
+                );
+            wrap.selectAll('input.date-selector').attr('value', date);
 
-            var calendarButton = wrap.selectAll('.date-calendar')
-                .data([date]);
+            var calendarButton = wrap.selectAll('.date-calendar').data([date]);
             calendarButton = calendarButton
                 .enter()
                 .append('button')
                 .attr('class', 'form-field-button date-calendar')
                 .call(svgIcon('#fas-calendar-days'));
 
-            calendarButton
-                .on('click', () => wrap.select('.date-selector').node().showPicker());
+            calendarButton.on('click', () =>
+                wrap.select('.date-selector').node().showPicker(),
+            );
         }
     }
-
 
     function updatePhonePlaceholder() {
         if (input.empty() || !Object.keys(_phoneFormats).length) return;
@@ -378,13 +421,12 @@ export function uiFieldText(field, context) {
         if (format) input.attr('placeholder', format);
     }
 
-
     function validIdentifierValueForLink() {
         const value = utilGetSetValue(input).trim();
 
         if (field.type === 'url' && value) {
             try {
-                return (new URL(value)).href;
+                return new URL(value).href;
             } catch {
                 return null;
             }
@@ -398,7 +440,6 @@ export function uiFieldText(field, context) {
         return null;
     }
 
-
     // clamp number to min/max
     function clamped(num) {
         if (field.minValue !== undefined) {
@@ -410,29 +451,35 @@ export function uiFieldText(field, context) {
         return num;
     }
 
-
     // returns all values of a (potential) multiselection and/or multi-key field
     function getVals(tags) {
         if (field.keys) {
             const multiSelection = context.selectedIDs();
-            tags = multiSelection.length > 1
-                ? context.selectedIDs()
-                    .map(id => context.graph().entity(id))
-                    .map(entity => entity.tags)
-                : [tags];
-            return tags.map(tags => new Set(field.keys
-                    .reduce((acc, key) => acc.concat(tags[key]), [])
-                    .filter(Boolean)))
-                .map(vals => vals.size === 0 ? new Set([undefined]) : vals)
+            tags =
+                multiSelection.length > 1
+                    ? context
+                          .selectedIDs()
+                          .map((id) => context.graph().entity(id))
+                          .map((entity) => entity.tags)
+                    : [tags];
+            return tags
+                .map(
+                    (tags) =>
+                        new Set(
+                            field.keys
+                                .reduce((acc, key) => acc.concat(tags[key]), [])
+                                .filter(Boolean),
+                        ),
+                )
+                .map((vals) => (vals.size === 0 ? new Set([undefined]) : vals))
                 .reduce((a, b) => new Set([...a, ...b]));
         } else {
             return new Set([].concat(tags[field.key]));
         }
     }
 
-
     function change(onInput) {
-        return function() {
+        return function () {
             var t = {};
             var val = utilGetSetValue(input);
             if (!onInput) val = context.cleanTagValue(val);
@@ -442,79 +489,93 @@ export function uiFieldText(field, context) {
 
             let displayVal = val;
             if (field.type === 'number' && val) {
-                const numbers = val.split(';').map(v => {
+                const numbers = val.split(';').map((v) => {
                     if (likelyRawNumberFormat.test(v)) {
                         // input number likely in "raw" format
                         return {
                             v,
                             num: parseFloat(v),
-                            fractionDigits: v.includes('.') ? v.split('.')[1].length : 0
+                            fractionDigits: v.includes('.')
+                                ? v.split('.')[1].length
+                                : 0,
                         };
                     } else {
                         // try to parse in localized number format
                         return {
                             v,
                             num: parseLocaleFloat(v),
-                            fractionDigits: countDecimalPlaces(v)
+                            fractionDigits: countDecimalPlaces(v),
                         };
                     }
                 });
-                val = numbers.map(({num, v, fractionDigits}) => {
-                    if (!isFinite(num)) return v;
-                    return clamped(num).toFixed(fractionDigits);
-                }).join(';');
-                displayVal = numbers.map(({num, v, fractionDigits}) => {
-                    if (!isFinite(num)) return v;
-                    return formatFloat(clamped(num), fractionDigits);
-                }).join(';');
+                val = numbers
+                    .map(({ num, v, fractionDigits }) => {
+                        if (!isFinite(num)) return v;
+                        return clamped(num).toFixed(fractionDigits);
+                    })
+                    .join(';');
+                displayVal = numbers
+                    .map(({ num, v, fractionDigits }) => {
+                        if (!isFinite(num)) return v;
+                        return formatFloat(clamped(num), fractionDigits);
+                    })
+                    .join(';');
             }
             if (!onInput) utilGetSetValue(input, displayVal);
             t[field.key] = val || undefined;
             if (field.keys) {
                 // for multi-key fields with: handle alternative tag keys gracefully
                 // https://github.com/openstreetmap/id-tagging-schema/issues/905
-                dispatch.call('change', this, tags => {
-                    if (field.keys.some(key => tags[key])) {
-                        // use exiting key(s)
-                        field.keys.filter(key => tags[key]).forEach(key => {
-                            tags[key] = val || undefined;
-                        });
-                    } else {
-                        // fall back to default key if none of the `keys` is preset
-                        tags[field.key] = val || undefined;
-                    }
-                    return tags;
-                }, onInput);
+                dispatch.call(
+                    'change',
+                    this,
+                    (tags) => {
+                        if (field.keys.some((key) => tags[key])) {
+                            // use exiting key(s)
+                            field.keys
+                                .filter((key) => tags[key])
+                                .forEach((key) => {
+                                    tags[key] = val || undefined;
+                                });
+                        } else {
+                            // fall back to default key if none of the `keys` is preset
+                            tags[field.key] = val || undefined;
+                        }
+                        return tags;
+                    },
+                    onInput,
+                );
             } else {
                 dispatch.call('change', this, t, onInput);
             }
         };
     }
 
-
-    i.entityIDs = function(val) {
+    i.entityIDs = function (val) {
         if (!arguments.length) return _entityIDs;
         _entityIDs = val;
         return i;
     };
 
-    i.tags = function(tags) {
+    i.tags = function (tags) {
         _tags = tags;
 
         const vals = getVals(tags);
         const isMixed = vals.size > 1;
-        var val = vals.size === 1 ? [...vals][0] ?? '' : '';
+        var val = vals.size === 1 ? ([...vals][0] ?? '') : '';
         var shouldUpdate;
 
         if (field.type === 'number' && val) {
             var numbers = val.split(';');
             var oriNumbers = utilGetSetValue(input).split(';');
             if (numbers.length !== oriNumbers.length) shouldUpdate = true;
-            numbers = numbers.map(function(v) {
+            numbers = numbers.map(function (v) {
                 v = v.trim();
                 var num = Number(v);
                 if (!isFinite(num) || v === '') return v;
-                const fractionDigits = v.includes('.') ? v.split('.')[1].length : 0;
+                const fractionDigits = v.includes('.')
+                    ? v.split('.')[1].length
+                    : 0;
                 return formatFloat(num, fractionDigits);
             });
             val = numbers.join(';');
@@ -527,14 +588,14 @@ export function uiFieldText(field, context) {
             // by pressing the +/- buttons or using the raw tag editor), we
             // can and should update the content of the input element.
             shouldUpdate = (inputValue, setValue) => {
-                const inputNums = inputValue.split(';').map(val => {
+                const inputNums = inputValue.split(';').map((val) => {
                     const parsedNum = likelyRawNumberFormat.test(val)
                         ? parseFloat(val)
                         : parseLocaleFloat(val);
                     if (!isFinite(parsedNum)) return val; // keep unparsable values as-is
                     return parsedNum;
                 });
-                const setNums = setValue.split(';').map(val => {
+                const setNums = setValue.split(';').map((val) => {
                     const parsedNum = parseLocaleFloat(val);
                     if (!isFinite(parsedNum)) return val; // keep unparsable values as-is
                     return parsedNum;
@@ -545,7 +606,12 @@ export function uiFieldText(field, context) {
 
         utilGetSetValue(input, val, shouldUpdate)
             .attr('title', isMixed ? [...vals].join('\n') : undefined)
-            .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
+            .attr(
+                'placeholder',
+                isMixed
+                    ? t('inspector.multiple_values')
+                    : field.placeholder() || t('inspector.unknown'),
+            )
             .classed('mixed', isMixed);
 
         if (field.type === 'number') {
@@ -554,11 +620,17 @@ export function uiFieldText(field, context) {
                 buttons.attr('disabled', 'disabled').classed('disabled', true);
             } else {
                 var raw_vals = tags[field.key] || '0';
-                const canIncDec = raw_vals.split(';').some((val) =>
-                    isFinite(Number(val))
-                    || (isDirectionField && (val.trim().toLowerCase() in cardinal))
-                );
-                buttons.attr('disabled', canIncDec ? null : 'disabled').classed('disabled', !canIncDec);
+                const canIncDec = raw_vals
+                    .split(';')
+                    .some(
+                        (val) =>
+                            isFinite(Number(val)) ||
+                            (isDirectionField &&
+                                val.trim().toLowerCase() in cardinal),
+                    );
+                buttons
+                    .attr('disabled', canIncDec ? null : 'disabled')
+                    .classed('disabled', !canIncDec);
             }
         }
 
@@ -569,7 +641,8 @@ export function uiFieldText(field, context) {
         if (field.type === 'date') updateDateField();
 
         if (outlinkButton && !outlinkButton.empty()) {
-            var disabled = !validIdentifierValueForLink() && field.type !== 'schedule';
+            var disabled =
+                !validIdentifierValueForLink() && field.type !== 'schedule';
             outlinkButton.classed('disabled', disabled);
         }
 
@@ -578,14 +651,17 @@ export function uiFieldText(field, context) {
         }
     };
 
-
-    i.focus = function() {
+    i.focus = function () {
         var node = input.node();
         if (node) node.focus();
     };
 
     function combinedEntityExtent() {
-        return _entityIDs && _entityIDs.length && utilTotalExtent(_entityIDs, context.graph());
+        return (
+            _entityIDs &&
+            _entityIDs.length &&
+            utilTotalExtent(_entityIDs, context.graph())
+        );
     }
 
     return utilRebind(i, dispatch, 'on');

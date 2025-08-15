@@ -1,6 +1,5 @@
-import { t, localizer } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
-
 
 export function uiPanelHistory(context) {
     var osm;
@@ -8,14 +7,17 @@ export function uiPanelHistory(context) {
     function displayTimestamp(timestamp) {
         if (!timestamp) return t('info_panels.history.unknown');
         var options = {
-            day: 'numeric', month: 'short', year: 'numeric',
-            hour: 'numeric', minute: 'numeric', second: 'numeric'
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
         };
         var d = new Date(timestamp);
         if (isNaN(d.getTime())) return t('info_panels.history.unknown');
         return d.toLocaleString(localizer.localeCode(), options);
     }
-
 
     function displayUser(selection, userName) {
         if (!userName) {
@@ -25,14 +27,9 @@ export function uiPanelHistory(context) {
             return;
         }
 
-        selection
-            .append('span')
-            .attr('class', 'user-name')
-            .text(userName);
+        selection.append('span').attr('class', 'user-name').text(userName);
 
-        var links = selection
-            .append('div')
-            .attr('class', 'links');
+        var links = selection.append('div').attr('class', 'links');
 
         if (osm) {
             links
@@ -52,7 +49,6 @@ export function uiPanelHistory(context) {
             .text('HDYC');
     }
 
-
     function displayChangeset(selection, changeset) {
         if (!changeset) {
             selection
@@ -61,14 +57,9 @@ export function uiPanelHistory(context) {
             return;
         }
 
-        selection
-            .append('span')
-            .attr('class', 'changeset-id')
-            .text(changeset);
+        selection.append('span').attr('class', 'changeset-id').text(changeset);
 
-        var links = selection
-            .append('div')
-            .attr('class', 'links');
+        var links = selection.append('div').attr('class', 'links');
 
         if (osm) {
             links
@@ -89,22 +80,27 @@ export function uiPanelHistory(context) {
         links
             .append('a')
             .attr('class', 'changeset-achavi-link')
-            .attr('href', 'https://overpass-api.de/achavi/?changeset=' + changeset)
+            .attr(
+                'href',
+                'https://overpass-api.de/achavi/?changeset=' + changeset,
+            )
             .attr('target', '_blank')
             .text('Achavi');
     }
-
 
     function redraw(selection) {
         var selectedNoteID = context.selectedNoteID();
         osm = context.connection();
         var selected, note, entity;
-        if (selectedNoteID && osm) {       // selected 1 note
-            selected = [ t.html('note.note') + ' ' + selectedNoteID ];
+        if (selectedNoteID && osm) {
+            // selected 1 note
+            selected = [t.html('note.note') + ' ' + selectedNoteID];
             note = osm.getNote(selectedNoteID);
-        } else {                           // selected 1..n entities
-            selected = context.selectedIDs()
-                .filter(function(e) { return context.hasEntity(e); });
+        } else {
+            // selected 1..n entities
+            selected = context.selectedIDs().filter(function (e) {
+                return context.hasEntity(e);
+            });
             if (selected.length) {
                 entity = context.entity(selected[0]);
             }
@@ -135,7 +131,6 @@ export function uiPanelHistory(context) {
         }
     }
 
-
     function redrawNote(selection, note) {
         if (!note || note.isNew()) {
             selection
@@ -144,25 +139,31 @@ export function uiPanelHistory(context) {
             return;
         }
 
-        var list = selection
-            .append('ul');
+        var list = selection.append('ul');
 
-        list
-            .append('li')
-            .call(t.append('info_panels.history.note_comments', { suffix: ':' }))
+        list.append('li')
+            .call(
+                t.append('info_panels.history.note_comments', { suffix: ':' }),
+            )
             .append('span')
             .text(note.comments.length);
 
         if (note.comments.length) {
-            list
-                .append('li')
-                .call(t.append('info_panels.history.note_created_date', { suffix: ':' }))
+            list.append('li')
+                .call(
+                    t.append('info_panels.history.note_created_date', {
+                        suffix: ':',
+                    }),
+                )
                 .append('span')
                 .text(displayTimestamp(note.comments[0].date));
 
-            list
-                .append('li')
-                .call(t.append('info_panels.history.note_created_user', { suffix: ':' }))
+            list.append('li')
+                .call(
+                    t.append('info_panels.history.note_created_user', {
+                        suffix: ':',
+                    }),
+                )
                 .call(displayUser, note.comments[0].user);
         }
 
@@ -178,7 +179,6 @@ export function uiPanelHistory(context) {
         }
     }
 
-
     function redrawEntity(selection, entity) {
         if (!entity || entity.isNew()) {
             selection
@@ -187,9 +187,7 @@ export function uiPanelHistory(context) {
             return;
         }
 
-        var links = selection
-            .append('div')
-            .attr('class', 'links');
+        var links = selection.append('div').attr('class', 'links');
 
         if (osm) {
             links
@@ -202,53 +200,51 @@ export function uiPanelHistory(context) {
         links
             .append('a')
             .attr('class', 'pewu-history-viewer-link')
-            .attr('href', 'https://pewu.github.io/osm-history/#/' + entity.type + '/' + entity.osmId())
+            .attr(
+                'href',
+                'https://pewu.github.io/osm-history/#/' +
+                    entity.type +
+                    '/' +
+                    entity.osmId(),
+            )
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .text('PeWu');
 
-        var list = selection
-            .append('ul');
+        var list = selection.append('ul');
 
-        list
-            .append('li')
+        list.append('li')
             .call(t.append('info_panels.history.version', { suffix: ':' }))
             .append('span')
             .text(entity.version);
 
-        list
-            .append('li')
+        list.append('li')
             .call(t.append('info_panels.history.last_edit', { suffix: ':' }))
             .append('span')
             .text(displayTimestamp(entity.timestamp));
 
-        list
-            .append('li')
+        list.append('li')
             .call(t.append('info_panels.history.edited_by', { suffix: ':' }))
             .call(displayUser, entity.user);
 
-        list
-            .append('li')
+        list.append('li')
             .call(t.append('info_panels.history.changeset', { suffix: ':' }))
             .call(displayChangeset, entity.changeset);
     }
 
-
-    var panel = function(selection) {
+    var panel = function (selection) {
         selection.call(redraw);
 
-        context.map()
-            .on('drawn.info-history', function() {
-                selection.call(redraw);
-            });
+        context.map().on('drawn.info-history', function () {
+            selection.call(redraw);
+        });
 
-        context
-            .on('enter.info-history', function() {
-                selection.call(redraw);
-            });
+        context.on('enter.info-history', function () {
+            selection.call(redraw);
+        });
     };
 
-    panel.off = function() {
+    panel.off = function () {
         context.map().on('drawn.info-history', null);
         context.on('enter.info-history', null);
     };
@@ -256,7 +252,6 @@ export function uiPanelHistory(context) {
     panel.id = 'history';
     panel.label = t.append('info_panels.history.title');
     panel.key = t('info_panels.history.key');
-
 
     return panel;
 }

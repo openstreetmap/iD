@@ -1,24 +1,24 @@
-describe('iD.utilSessionMutex', function() {
+describe('iD.utilSessionMutex', function () {
     var a, b;
 
-    afterEach(function() {
+    afterEach(function () {
         if (a) a.unlock();
         if (b) b.unlock();
     });
 
-    describe('#lock', function() {
-        it('returns true when it gets a lock', function() {
+    describe('#lock', function () {
+        it('returns true when it gets a lock', function () {
             a = iD.utilSessionMutex('name');
             expect(a.lock()).to.equal(true);
         });
 
-        it('returns true when already locked', function() {
+        it('returns true when already locked', function () {
             a = iD.utilSessionMutex('name');
             a.lock();
             expect(a.lock()).to.equal(true);
         });
 
-        it('returns false when the lock is held by another session', function() {
+        it('returns false when the lock is held by another session', function () {
             a = iD.utilSessionMutex('name');
             a.lock();
 
@@ -27,19 +27,19 @@ describe('iD.utilSessionMutex', function() {
         });
     });
 
-    describe('#locked', function() {
-        it('returns false by default', function() {
+    describe('#locked', function () {
+        it('returns false by default', function () {
             a = iD.utilSessionMutex('name');
             expect(a.locked()).to.equal(false);
         });
 
-        it('returns true when locked', function() {
+        it('returns true when locked', function () {
             a = iD.utilSessionMutex('name');
             a.lock();
             expect(a.locked()).to.equal(true);
         });
 
-        it('returns false when unlocked', function() {
+        it('returns false when unlocked', function () {
             a = iD.utilSessionMutex('name');
             a.lock();
             a.unlock();
@@ -47,8 +47,8 @@ describe('iD.utilSessionMutex', function() {
         });
     });
 
-    describe('#unlock', function() {
-        it('unlocks the mutex', function() {
+    describe('#unlock', function () {
+        it('unlocks the mutex', function () {
             a = iD.utilSessionMutex('name');
             a.lock();
             a.unlock();
@@ -57,7 +57,7 @@ describe('iD.utilSessionMutex', function() {
             expect(b.lock()).to.equal(true);
         });
 
-        it('does nothing when the lock is held by another session', function() {
+        it('does nothing when the lock is held by another session', function () {
             a = iD.utilSessionMutex('name');
             a.lock();
 
@@ -67,14 +67,14 @@ describe('iD.utilSessionMutex', function() {
             expect(a.locked()).to.equal(true);
         });
 
-        it('does nothing when not locked', function() {
+        it('does nothing when not locked', function () {
             a = iD.utilSessionMutex('name');
             a.unlock();
             expect(a.locked()).to.equal(false);
         });
     });
 
-    it('namespaces locks', function() {
+    it('namespaces locks', function () {
         a = iD.utilSessionMutex('a');
         a.lock();
 
@@ -83,7 +83,7 @@ describe('iD.utilSessionMutex', function() {
         expect(b.lock()).to.equal(true);
     });
 
-    it('automatically unlocks when a session crashes', function() {
+    it('automatically unlocks when a session crashes', function () {
         // Tested manually.
     });
 });

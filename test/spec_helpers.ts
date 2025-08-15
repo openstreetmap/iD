@@ -1,9 +1,9 @@
-import { beforeEach, afterEach, it } from 'vitest';
 import 'chai';
+import fetchMock from 'fetch-mock';
+import 'happen';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
-import 'happen';
-import fetchMock from 'fetch-mock';
+import { afterEach, beforeEach } from 'vitest';
 import envs from '../config/envs.js';
 
 chai.use(sinonChai);
@@ -18,20 +18,20 @@ global.VITEST = true;
 
 // create global variables for this data, to match what the esbuild config does
 for (const [key, value] of Object.entries(envs)) {
-  Reflect.set(global, key, JSON.parse(value));
+    Reflect.set(global, key, JSON.parse(value));
 }
 
 // the 'happen' library explicitly references `window` when creating an event,
 // but we need to use jsdom's window, so we have to patch initEvent.
 const { initMouseEvent } = MouseEvent.prototype;
 MouseEvent.prototype.initMouseEvent = function (...args) {
-  args[3] = jsdom.window;
-  return initMouseEvent.apply(this, args);
+    args[3] = jsdom.window;
+    return initMouseEvent.apply(this, args);
 };
 const { initUIEvent } = UIEvent.prototype;
 UIEvent.prototype.initUIEvent = function (...args) {
-  args[3] = jsdom.window;
-  return initUIEvent.apply(this, args);
+    args[3] = jsdom.window;
+    return initUIEvent.apply(this, args);
 };
 
 // must be imported after global envs are defined
@@ -41,7 +41,9 @@ iD.setDebug(true);
 
 // @ts-expect-error
 // Disable things that use the network
-for (var k in iD.services) { delete iD.services[k]; }
+for (var k in iD.services) {
+    delete iD.services[k];
+}
 
 // Try not to load imagery
 window.location.hash = '#background=none';
@@ -57,67 +59,74 @@ cached.locales_index_tagging = { en: { rtl: false, pct: 1 } };
 
 // Use fake data for the 'tagging' scope
 cached.locale_tagging_en = {
-  en: {
-    presets: {
-      fields: {
-        restrictions: {
-          label: 'Turn Restrictions'
+    en: {
+        presets: {
+            fields: {
+                restrictions: {
+                    label: 'Turn Restrictions',
+                },
+                access: {
+                    label: 'Allowed Access',
+                    placeholder: 'Not Specified',
+                    types: {
+                        access: 'All',
+                        foot: 'Foot',
+                        motor_vehicle: 'Motor Vehicles',
+                        bicycle: 'Bicycles',
+                        horse: 'Horses',
+                    },
+                    options: {
+                        yes: {
+                            title: 'Allowed',
+                            description:
+                                'Access allowed by law; a right of way',
+                        },
+                        no: {
+                            title: 'Prohibited',
+                            description:
+                                'Access not allowed to the general public',
+                        },
+                        permissive: {
+                            title: 'Permissive',
+                            description:
+                                'Access allowed until such time as the owner revokes the permission',
+                        },
+                        private: {
+                            title: 'Private',
+                            description:
+                                'Access allowed only with permission of the owner on an individual basis',
+                        },
+                        designated: {
+                            title: 'Designated',
+                            description:
+                                'Access allowed according to signs or specific local laws',
+                        },
+                        destination: {
+                            title: 'Destination',
+                            description:
+                                'Access allowed only to reach a destination',
+                        },
+                        dismount: {
+                            title: 'Dismount',
+                            description:
+                                'Access allowed but rider must dismount',
+                        },
+                        permit: {
+                            title: 'Permit',
+                            description:
+                                'Access allowed only with a valid permit or license',
+                        },
+                    },
+                },
+            },
         },
-        access: {
-          label: 'Allowed Access',
-          placeholder: 'Not Specified',
-          types: {
-            access: 'All',
-            foot: 'Foot',
-            motor_vehicle: 'Motor Vehicles',
-            bicycle: 'Bicycles',
-            horse: 'Horses'
-          },
-          options: {
-            yes: {
-              title: 'Allowed',
-              description: 'Access allowed by law; a right of way'
-            },
-            no: {
-              title: 'Prohibited',
-              description: 'Access not allowed to the general public'
-            },
-            permissive: {
-              title: 'Permissive',
-              description: 'Access allowed until such time as the owner revokes the permission'
-            },
-            private: {
-              title: 'Private',
-              description: 'Access allowed only with permission of the owner on an individual basis'
-            },
-            designated: {
-              title: 'Designated',
-              description: 'Access allowed according to signs or specific local laws'
-            },
-            destination: {
-              title: 'Destination',
-              description: 'Access allowed only to reach a destination'
-            },
-            dismount: {
-              title: 'Dismount',
-              description: 'Access allowed but rider must dismount'
-            },
-            permit: {
-              title: 'Permit',
-              description: 'Access allowed only with a valid permit or license'
-            }
-          }
-        }
-      }
-    }
-  }
+    },
 };
 
 // Load the actual data from `dist/locales/` for the 'general' scope
 iD.localizer.loadLocale('en', 'general', 'locales');
 // Load the fake data seeded above for the 'tagging' scope
 iD.localizer.loadLocale('en', 'tagging');
-
 
 // Initializing `coreContext` initializes `_background`, which tries loading:
 cached.imagery = [];
@@ -135,7 +144,7 @@ cached.discarded = {};
 window.d3 = iD.d3; // Remove this if we can avoid exporting all of d3.js
 
 // @ts-expect-error
-delete window.PointerEvent;  // force the browser to use mouse events
+delete window.PointerEvent; // force the browser to use mouse events
 
 // some sticky fallbacks
 const capabilities = `<?xml version="1.0" encoding="UTF-8"?>
@@ -159,8 +168,16 @@ const capabilities = `<?xml version="1.0" encoding="UTF-8"?>
   </policy>
 </osm>`;
 
-fetchMock.sticky('https://www.openstreetmap.org/api/capabilities', capabilities, {sticky: true});
-fetchMock.sticky('http://www.openstreetmap.org/api/capabilities', capabilities, {sticky: true});
+fetchMock.sticky(
+    'https://www.openstreetmap.org/api/capabilities',
+    capabilities,
+    { sticky: true },
+);
+fetchMock.sticky(
+    'http://www.openstreetmap.org/api/capabilities',
+    capabilities,
+    { sticky: true },
+);
 
 const vegbilderOwsCapabilities = `<?xml version="1.0" encoding="UTF-8"?>
 <wfs:WFS_Capabilities version="2.0.0"
@@ -198,16 +215,20 @@ const vegbilderOwsCapabilities = `<?xml version="1.0" encoding="UTF-8"?>
 <fes:Filter_Capabilities/>
 </wfs:WFS_Capabilities>`;
 
-fetchMock.sticky({
-          url: 'https://www.vegvesen.no/kart/ogc/vegbilder_1_0/ows',
-            query: {
-              service: 'WFS',
-              request: 'GetCapabilities'
-            }
-          }, vegbilderOwsCapabilities, {sticky: true});
+fetchMock.sticky(
+    {
+        url: 'https://www.vegvesen.no/kart/ogc/vegbilder_1_0/ows',
+        query: {
+            service: 'WFS',
+            request: 'GetCapabilities',
+        },
+    },
+    vegbilderOwsCapabilities,
+    { sticky: true },
+);
 fetchMock.config.fallbackToNetwork = true;
 fetchMock.config.overwriteRoutes = false;
 
 beforeAll(async () => {
-  await iD.coreLocalizer().ensureLoaded();
+    await iD.coreLocalizer().ensureLoaded();
 });

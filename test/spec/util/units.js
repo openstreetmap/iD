@@ -1,24 +1,24 @@
-describe('iD.units', function() {
-    describe('dmsMatcher', function() {
-        it('parses D M SS format', function() {
+describe('iD.units', function () {
+    describe('dmsMatcher', function () {
+        it('parses D M SS format', function () {
             var result = iD.dmsMatcher('35 11 10.1 , 136 49 53.8');
-            expect(result[0]).to.be.closeTo( 35.18614, 0.00001);
+            expect(result[0]).to.be.closeTo(35.18614, 0.00001);
             expect(result[1]).to.be.closeTo(136.83161, 0.00001);
         });
-        it('parses D M SS format, with negative value', function() {
+        it('parses D M SS format, with negative value', function () {
             var result = iD.dmsMatcher('-35 11 10.1 , -136 49 53.8');
-            expect(result[0]).to.be.closeTo( -35.18614, 0.00001);
+            expect(result[0]).to.be.closeTo(-35.18614, 0.00001);
             expect(result[1]).to.be.closeTo(-136.83161, 0.00001);
         });
 
-        it('parses D MM format', function() {
+        it('parses D MM format', function () {
             var result = iD.dmsMatcher('35 11.1683 , 136 49.8966');
-            expect(result[0]).to.be.closeTo( 35.18614, 0.00001);
+            expect(result[0]).to.be.closeTo(35.18614, 0.00001);
             expect(result[1]).to.be.closeTo(136.83161, 0.00001);
         });
-        it('parses D MM format, with negative value', function() {
+        it('parses D MM format, with negative value', function () {
             var result = iD.dmsMatcher('-35 11.1683 , -136 49.8966');
-            expect(result[0]).to.be.closeTo( -35.18614, 0.00001);
+            expect(result[0]).to.be.closeTo(-35.18614, 0.00001);
             expect(result[1]).to.be.closeTo(-136.83161, 0.00001);
         });
         it('parses z/x/y coordinate', () => {
@@ -35,18 +35,18 @@ describe('iD.units', function() {
         it('parses coordinate with localized numbers', () => {
             var result = iD.dmsMatcher('49,4109399, 8,7147086', 'de');
             expect(result[0]).to.be.closeTo(49.4109399, 0.00001);
-            expect(result[1]).to.be.closeTo( 8.7147086, 0.00001);
+            expect(result[1]).to.be.closeTo(8.7147086, 0.00001);
         });
 
-        it('handles invalid input', function() {
+        it('handles invalid input', function () {
             var result = iD.dmsMatcher('!@#$');
             expect(result).to.be.null;
         });
     });
 
-    describe('dmsCoordinatePair', function() {
+    describe('dmsCoordinatePair', function () {
         it('formats coordinate pair', function () {
-            var result = iD.dmsCoordinatePair([90 + 0.5/3600, 45]);
+            var result = iD.dmsCoordinatePair([90 + 0.5 / 3600, 45]);
             expect(result).to.be.eql('45°N, 90°0′1″E');
         });
         it('formats 0°', function () {
@@ -68,4 +68,3 @@ describe('iD.units', function() {
         });
     });
 });
-

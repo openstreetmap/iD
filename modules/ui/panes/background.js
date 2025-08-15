@@ -7,7 +7,6 @@ import { uiSectionBackgroundOffset } from '../sections/background_offset';
 import { uiSectionOverlayList } from '../sections/overlay_list';
 
 export function uiPaneBackground(context) {
-
     var backgroundPane = uiPane('background', context)
         .key(t('background.key'))
         .label(t.append('background.title'))
@@ -17,7 +16,7 @@ export function uiPaneBackground(context) {
             uiSectionBackgroundList(context),
             uiSectionOverlayList(context),
             uiSectionBackgroundDisplayOptions(context),
-            uiSectionBackgroundOffset(context)
+            uiSectionBackgroundOffset(context),
         ]);
 
     return backgroundPane;

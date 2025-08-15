@@ -1,24 +1,23 @@
-import { prefs } from '../core/preferences';
 import { t } from '../core/localizer';
+import { prefs } from '../core/preferences';
 import { svgIcon } from '../svg/icon';
 import { uiTooltip } from './tooltip';
-
 
 // these are module variables so they are preserved through a ui.restart()
 var sawVersion = null;
 var isNewVersion = false;
 var isNewUser = false;
 
-
 export function uiVersion(context) {
-
     var currVersion = context.version;
     var matchedVersion = currVersion.match(/\d+\.\d+\.\d+.*/);
 
     if (sawVersion === null && matchedVersion !== null) {
         if (prefs('sawVersion')) {
             isNewUser = false;
-            isNewVersion = prefs('sawVersion') !== currVersion && currVersion.indexOf('-') === -1;
+            isNewVersion =
+                prefs('sawVersion') !== currVersion &&
+                currVersion.indexOf('-') === -1;
         } else {
             isNewUser = true;
             isNewVersion = true;
@@ -27,7 +26,7 @@ export function uiVersion(context) {
         sawVersion = currVersion;
     }
 
-    return function(selection) {
+    return function (selection) {
         selection
             .append('a')
             .attr('target', '_blank')
@@ -40,12 +39,22 @@ export function uiVersion(context) {
                 .append('a')
                 .attr('class', 'badge')
                 .attr('target', '_blank')
-                .attr('href', `https://github.com/openstreetmap/iD/releases/tag/v${currVersion}`)
+                .attr(
+                    'href',
+                    `https://github.com/openstreetmap/iD/releases/tag/v${currVersion}`,
+                )
                 .call(svgIcon('#maki-gift'))
-                .call(uiTooltip()
-                    .title(() => t.append('version.whats_new', { version: currVersion }))
-                    .placement('top')
-                    .scrollContainer(context.container().select('.main-footer-wrap'))
+                .call(
+                    uiTooltip()
+                        .title(() =>
+                            t.append('version.whats_new', {
+                                version: currVersion,
+                            }),
+                        )
+                        .placement('top')
+                        .scrollContainer(
+                            context.container().select('.main-footer-wrap'),
+                        ),
                 );
         }
     };

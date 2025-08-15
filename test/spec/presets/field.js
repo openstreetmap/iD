@@ -1,9 +1,9 @@
-describe('iD.presetField', function() {
-    describe('#references', function() {
-        it('references label and terms of another field', function() {
+describe('iD.presetField', function () {
+    describe('#references', function () {
+        it('references label and terms of another field', function () {
             var allFields = {};
             var other = iD.presetField('other', {}, allFields);
-            var field = iD.presetField('test', {label: '{other}'}, allFields);
+            var field = iD.presetField('test', { label: '{other}' }, allFields);
             allFields.other = other;
             allFields.preset = field;
 
@@ -23,10 +23,14 @@ describe('iD.presetField', function() {
             expect(field.t).not.to.have.been.called;
         });
 
-        it('references placeholder of another field', function() {
+        it('references placeholder of another field', function () {
             var allFields = {};
             var other = iD.presetField('other', {}, allFields);
-            var field = iD.presetField('test', {placeholder: '{other}'}, allFields);
+            var field = iD.presetField(
+                'test',
+                { placeholder: '{other}' },
+                allFields,
+            );
             allFields.other = other;
             allFields.preset = field;
 
@@ -39,10 +43,14 @@ describe('iD.presetField', function() {
             expect(field.t).not.to.have.been.called;
         });
 
-        it('references string options of another field', function() {
+        it('references string options of another field', function () {
             var allFields = {};
             var other = iD.presetField('other', {}, allFields);
-            var field = iD.presetField('test', {stringsCrossReference: '{other}', options: ['v'], key: 'k'}, allFields);
+            var field = iD.presetField(
+                'test',
+                { stringsCrossReference: '{other}', options: ['v'], key: 'k' },
+                allFields,
+            );
             allFields.other = other;
             allFields.preset = field;
 
@@ -53,8 +61,12 @@ describe('iD.presetField', function() {
 
             var context = iD.coreContext().assetPath('../dist/').init();
             var uiField = iD.uiFieldCombo(field, context);
-            uiField(d3.select(document.createElement('div')).classed('form-field-input-wrap', true));
-            uiField.tags({k: 'v'});
+            uiField(
+                d3
+                    .select(document.createElement('div'))
+                    .classed('form-field-input-wrap', true),
+            );
+            uiField.tags({ k: 'v' });
             expect(field.t.append).not.to.have.been.called;
             expect(other.t.append).to.have.been.called;
         });

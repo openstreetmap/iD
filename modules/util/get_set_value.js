@@ -22,9 +22,11 @@ export function utilGetSetValue(selection, value, shouldUpdate) {
             }
         }
 
-        return (value === null || value === undefined)
-            ? valueNull : (typeof value === 'function'
-            ? valueFunction : valueConstant);
+        return value === null || value === undefined
+            ? valueNull
+            : typeof value === 'function'
+              ? valueFunction
+              : valueConstant;
     }
 
     if (arguments.length === 1) {

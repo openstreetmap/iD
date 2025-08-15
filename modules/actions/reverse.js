@@ -30,7 +30,7 @@ export function actionReverse(entityID, options) {
         [/:right:/, ':left:'],
         [/:left:/, ':right:'],
         [/:forward:/, ':backward:'],
-        [/:backward:/, ':forward:']
+        [/:backward:/, ':forward:'],
     ];
     var valueReplacements = {
         left: 'right',
@@ -46,33 +46,37 @@ export function actionReverse(entityID, options) {
     // way direction and thus should not be reversed.
     const keysToKeepUnchanged = [
         // https://github.com/openstreetmap/iD/issues/10736
-        /^red_turn:(right|left):?/
+        /^red_turn:(right|left):?/,
     ];
     // If a key matches the key regex and any of the provided context
     // tag sets, it will not be reversed.
-    const keyValuesToKeepUnchanged = [{
-            keyRegex: /^.*(_|:)?(description|name|note|website|ref|source|comment|watch|attribution)(_|:)?/,
-            prerequisiteTags: [{}]
-        }, {
+    const keyValuesToKeepUnchanged = [
+        {
+            keyRegex:
+                /^.*(_|:)?(description|name|note|website|ref|source|comment|watch|attribution)(_|:)?/,
+            prerequisiteTags: [{}],
+        },
+        {
             // Turn lanes are left/right to key (not way) direction - #5674
             keyRegex: /^turn:lanes:?/,
-            prerequisiteTags: [{}]
-        }, {
+            prerequisiteTags: [{}],
+        },
+        {
             // https://github.com/openstreetmap/iD/issues/10128
             keyRegex: /^side$/,
-            prerequisiteTags: [{highway: 'cyclist_waiting_aid'}]
-        }
+            prerequisiteTags: [{ highway: 'cyclist_waiting_aid' }],
+        },
     ];
     var roleReplacements = {
         forward: 'backward',
         backward: 'forward',
         forwards: 'backward',
-        backwards: 'forward'
+        backwards: 'forward',
     };
     var onewayReplacements = {
         yes: '-1',
-        '1': '-1',
-        '-1': 'yes'
+        1: '-1',
+        '-1': 'yes',
     };
 
     var compassReplacements = {
@@ -91,12 +95,11 @@ export function actionReverse(entityID, options) {
         W: 'E',
         WNW: 'ESE',
         NW: 'SE',
-        NNW: 'SSE'
+        NNW: 'SSE',
     };
 
-
     function reverseKey(key) {
-        if (keysToKeepUnchanged.some(keyRegex => keyRegex.test(key))) {
+        if (keysToKeepUnchanged.some((keyRegex) => keyRegex.test(key))) {
             return key;
         }
         for (var i = 0; i < keyReplacements.length; ++i) {
@@ -108,40 +111,46 @@ export function actionReverse(entityID, options) {
         return key;
     }
 
-
     function reverseValue(key, value, includeAbsolute, allTags) {
         for (let { keyRegex, prerequisiteTags } of keyValuesToKeepUnchanged) {
-            if (keyRegex.test(key) && prerequisiteTags.some(expectedTags =>
-                Object.entries(expectedTags).every(([k, v]) => {
-                    return allTags[k] && (v === '*' || allTags[k] === v);
-                })
-            )) {
+            if (
+                keyRegex.test(key) &&
+                prerequisiteTags.some((expectedTags) =>
+                    Object.entries(expectedTags).every(([k, v]) => {
+                        return allTags[k] && (v === '*' || allTags[k] === v);
+                    }),
+                )
+            ) {
                 return value;
             }
         }
 
         if (key === 'incline' && numeric.test(value)) {
-            return value.replace(numeric, function(_, sign) { return sign === '-' ? '' : '-'; });
-
+            return value.replace(numeric, function (_, sign) {
+                return sign === '-' ? '' : '-';
+            });
         } else if (options && options.reverseOneway && key === 'oneway') {
             return onewayReplacements[value] || value;
-
         } else if (includeAbsolute && directionKey.test(key)) {
-            return value.split(';').map(value => {
-                if (compassReplacements[value]) return compassReplacements[value];
+            return value
+                .split(';')
+                .map((value) => {
+                    if (compassReplacements[value])
+                        return compassReplacements[value];
 
-                var degrees = Number(value);
-                if (isFinite(degrees)) {
-                    if (degrees < 180) {
-                        degrees += 180;
+                    var degrees = Number(value);
+                    if (isFinite(degrees)) {
+                        if (degrees < 180) {
+                            degrees += 180;
+                        } else {
+                            degrees -= 180;
+                        }
+                        return degrees.toString();
                     } else {
-                        degrees -= 180;
+                        return valueReplacements[value] || value;
                     }
-                    return degrees.toString();
-                } else {
-                    return valueReplacements[value] || value;
-                }
-            }).join(';');
+                })
+                .join(';');
         }
         return valueReplacements[value] || value;
     }
@@ -154,21 +163,23 @@ export function actionReverse(entityID, options) {
 
         const fields = [...preset.fields(loc), ...preset.moreFields(loc)];
 
-        const maybeDirectionField = fields.find(field => {
-            const isDirectionField = field.key && (field.key === 'direction' || field.key.endsWith(':direction'));
+        const maybeDirectionField = fields.find((field) => {
+            const isDirectionField =
+                field.key &&
+                (field.key === 'direction' || field.key.endsWith(':direction'));
             // some direction fields are for angles, so ensure that the
             // direction field on this preset is not a numeric field.
             const isRelativeDirection = field.type === 'combo';
 
             // the field's geometry might be restricted to a subset of the preset's geometry
-            const isGeometryValid = !field.geometry || field.geometry.includes(geometry);
+            const isGeometryValid =
+                !field.geometry || field.geometry.includes(geometry);
 
             return isDirectionField && isRelativeDirection && isGeometryValid;
         });
 
         return maybeDirectionField?.key || false;
     }
-
 
     // Reverse the direction of tags attached to the nodes - #3076
     function reverseNodeTags(graph, nodeIDs) {
@@ -182,7 +193,12 @@ export function actionReverse(entityID, options) {
                 const value = node.tags[key];
 
                 const newKey = reverseKey(key);
-                const newValue = reverseValue(key, value, node.id === entityID, node.tags);
+                const newValue = reverseValue(
+                    key,
+                    value,
+                    node.id === entityID,
+                    node.tags,
+                );
                 tags[newKey] = newValue;
                 if (key !== newKey || value !== newValue) {
                     anyChanges = true;
@@ -196,11 +212,10 @@ export function actionReverse(entityID, options) {
                 tags[directionKey] = 'forward';
             }
 
-            graph = graph.replace(node.update({tags: tags}));
+            graph = graph.replace(node.update({ tags: tags }));
         }
         return graph;
     }
-
 
     function reverseWay(graph, way) {
         var nodes = way.nodes.slice().reverse();
@@ -208,13 +223,21 @@ export function actionReverse(entityID, options) {
         var role;
 
         for (var key in way.tags) {
-            tags[reverseKey(key)] = reverseValue(key, way.tags[key], false, way.tags);
+            tags[reverseKey(key)] = reverseValue(
+                key,
+                way.tags[key],
+                false,
+                way.tags,
+            );
         }
 
-        graph.parentRelations(way).forEach(function(relation) {
-            relation.members.forEach(function(member, index) {
-                if (member.id === way.id && (role = roleReplacements[member.role])) {
-                    relation = relation.updateMember({role: role}, index);
+        graph.parentRelations(way).forEach(function (relation) {
+            relation.members.forEach(function (member, index) {
+                if (
+                    member.id === way.id &&
+                    (role = roleReplacements[member.role])
+                ) {
+                    relation = relation.updateMember({ role: role }, index);
                     graph = graph.replace(relation);
                 }
             });
@@ -222,12 +245,12 @@ export function actionReverse(entityID, options) {
 
         // Reverse any associated directions on nodes on the way and then replace
         // the way itself with the reversed node ids and updated way tags
-        return reverseNodeTags(graph, nodes)
-            .replace(way.update({nodes: nodes, tags: tags}));
+        return reverseNodeTags(graph, nodes).replace(
+            way.update({ nodes: nodes, tags: tags }),
+        );
     }
 
-
-    var action = function(graph) {
+    var action = function (graph) {
         var entity = graph.entity(entityID);
         if (entity.type === 'way') {
             return reverseWay(graph, entity);
@@ -235,17 +258,19 @@ export function actionReverse(entityID, options) {
         return reverseNodeTags(graph, [entityID]);
     };
 
-    action.disabled = function(graph) {
+    action.disabled = function (graph) {
         var entity = graph.hasEntity(entityID);
         if (!entity || entity.type === 'way') return false;
 
         for (var key in entity.tags) {
             var value = entity.tags[key];
-            if (reverseKey(key) !== key || reverseValue(key, value, true, entity.tags) !== value) {
+            if (
+                reverseKey(key) !== key ||
+                reverseValue(key, value, true, entity.tags) !== value
+            ) {
                 return false;
             }
         }
-
 
         // exception for features whose presets have a direction
         // field - they're flipable even if they don't have a
@@ -255,7 +280,7 @@ export function actionReverse(entityID, options) {
         return 'nondirectional_node';
     };
 
-    action.entityID = function() {
+    action.entityID = function () {
         return entityID;
     };
 

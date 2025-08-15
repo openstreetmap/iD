@@ -1,19 +1,19 @@
 import { remove as removeDiacritics } from 'diacritics';
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
-import { t, localizer } from '../core/localizer';
+import { localizer, t } from '../core/localizer';
+import { geoExtent } from '../geo/extent';
 import { utilArrayUnion } from './array';
 import { utilDetect } from './detect';
-import { geoExtent } from '../geo/extent';
-
 
 export function utilTagText(entity) {
     var obj = (entity && entity.tags) || {};
     return Object.keys(obj)
-        .map(function(k) { return k + '=' + obj[k]; })
+        .map(function (k) {
+            return k + '=' + obj[k];
+        })
         .join(', ');
 }
-
 
 export function utilTotalExtent(array, graph) {
     var extent = geoExtent();
@@ -36,38 +36,45 @@ export function utilTotalExtent(array, graph) {
 export function utilTagDiff(oldTags, newTags) {
     /** @type {TagDiff[]} */
     var tagDiff = [];
-    var keys = utilArrayUnion(Object.keys(oldTags), Object.keys(newTags)).sort();
-    keys.forEach(function(k) {
+    var keys = utilArrayUnion(
+        Object.keys(oldTags),
+        Object.keys(newTags),
+    ).sort();
+    keys.forEach(function (k) {
         var oldVal = oldTags[k];
         var newVal = newTags[k];
 
-        if ((oldVal || oldVal === '') && (newVal === undefined || newVal !== oldVal)) {
+        if (
+            (oldVal || oldVal === '') &&
+            (newVal === undefined || newVal !== oldVal)
+        ) {
             tagDiff.push({
                 type: '-',
                 key: k,
                 oldVal: oldVal,
                 newVal: newVal,
-                display: '- ' + k + '=' + oldVal
+                display: '- ' + k + '=' + oldVal,
             });
         }
-        if ((newVal || newVal === '') && (oldVal === undefined || newVal !== oldVal)) {
+        if (
+            (newVal || newVal === '') &&
+            (oldVal === undefined || newVal !== oldVal)
+        ) {
             tagDiff.push({
                 type: '+',
                 key: k,
                 oldVal: oldVal,
                 newVal: newVal,
-                display: '+ ' + k + '=' + newVal
+                display: '+ ' + k + '=' + newVal,
             });
         }
     });
     return tagDiff;
 }
 
-
 export function utilEntitySelector(ids) {
     return ids.length ? '.' + ids.join(',.') : 'nothing';
 }
-
 
 // returns an selector to select entity ids for:
 //  - entityIDs passed in
@@ -82,11 +89,14 @@ export function utilEntityOrMemberSelector(ids, graph) {
         if (!entity || entity.type !== 'relation') return;
 
         entity.members
-            .map(function(member) { return member.id; })
-            .forEach(function(id) { seen.add(id); });
+            .map(function (member) {
+                return member.id;
+            })
+            .forEach(function (id) {
+                seen.add(id);
+            });
     }
 }
-
 
 // returns an selector to select entity ids for:
 //  - entityIDs passed in
@@ -94,7 +104,6 @@ export function utilEntityOrMemberSelector(ids, graph) {
 export function utilEntityOrDeepMemberSelector(ids, graph) {
     return utilEntitySelector(utilEntityAndDeepMemberIDs(ids, graph));
 }
-
 
 // returns an selector to select entity ids for:
 //  - entityIDs passed in
@@ -112,8 +121,10 @@ export function utilEntityAndDeepMemberIDs(ids, graph) {
         if (!entity || entity.type !== 'relation') return;
 
         entity.members
-            .map(function(member) { return member.id; })
-            .forEach(collectDeepDescendants);   // recurse
+            .map(function (member) {
+                return member.id;
+            })
+            .forEach(collectDeepDescendants); // recurse
     }
 }
 
@@ -138,19 +149,20 @@ export function utilDeepMemberSelector(ids, graph, skipMultipolgonMembers) {
         if (!entity || entity.type !== 'relation') return;
         if (skipMultipolgonMembers && entity.isMultipolygon()) return;
         entity.members
-            .map(function(member) { return member.id; })
-            .forEach(collectDeepDescendants);   // recurse
+            .map(function (member) {
+                return member.id;
+            })
+            .forEach(collectDeepDescendants); // recurse
     }
 }
 
-
 // Adds or removes highlight styling for the specified entities
 export function utilHighlightEntities(ids, highlighted, context) {
-    context.surface()
+    context
+        .surface()
         .selectAll(utilEntityOrDeepMemberSelector(ids, context.graph()))
         .classed('highlighted', highlighted);
 }
-
 
 // returns an Array that is the union of:
 //  - nodes for any nodeIDs passed in
@@ -176,8 +188,10 @@ export function utilGetAllNodes(ids, graph) {
             entity.nodes.forEach(collectNodes);
         } else {
             entity.members
-                .map(function(member) { return member.id; })
-                .forEach(collectNodes);   // recurse
+                .map(function (member) {
+                    return member.id;
+                })
+                .forEach(collectNodes); // recurse
         }
     }
 }
@@ -197,15 +211,21 @@ export function utilDisplayName(entity, hideNetwork, isMapLabel) {
         direction: entity.tags.direction,
         from: entity.tags.from,
         name,
-        network: hideNetwork ? undefined : (entity.tags.cycle_network || entity.tags.network),
+        network: hideNetwork
+            ? undefined
+            : entity.tags.cycle_network || entity.tags.network,
         ref: entity.tags.ref,
         to: entity.tags.to,
-        via: entity.tags.via
+        via: entity.tags.via,
     };
 
     // A right or left-right arrow likely indicates a formulaic “name” as specified by the Public Transport v2 schema.
     // This name format already contains enough details to disambiguate the feature; avoid duplicating these details.
-    if (entity.tags.route && entity.tags.name && entity.tags.name.match(/[→⇒↔⇔]|[-=]>/)) {
+    if (
+        entity.tags.route &&
+        entity.tags.name &&
+        entity.tags.name.match(/[→⇒↔⇔]|[-=]>/)
+    ) {
         return entity.tags.name;
     }
 
@@ -252,10 +272,13 @@ export function utilDisplayName(entity, hideNetwork, isMapLabel) {
         'unsigned_ref',
         'seamark:name',
         'sector:name',
-        'lock_name'
+        'lock_name',
     ];
 
-    if (entity.tags.highway === 'milestone' || entity.tags.railway === 'milestone') {
+    if (
+        entity.tags.highway === 'milestone' ||
+        entity.tags.railway === 'milestone'
+    ) {
         // distance & railway:position are only valid as names when used on a milestone
         alternativeNameKeys.push('distance', 'railway:position');
     }
@@ -270,7 +293,8 @@ export function utilDisplayName(entity, hideNetwork, isMapLabel) {
     // as a last resort, use the street address as a name.
     const unit = entity.tags['addr:unit'];
     const housenumber = entity.tags['addr:housenumber'];
-    const streetOrPlace = entity.tags['addr:street'] || entity.tags['addr:place'];
+    const streetOrPlace =
+        entity.tags['addr:street'] || entity.tags['addr:place'];
 
     if (!isMapLabel && unit && housenumber && streetOrPlace) {
         return t('inspector.display_name_addr_with_unit', {
@@ -294,7 +318,6 @@ export function utilDisplayName(entity, hideNetwork, isMapLabel) {
     return '';
 }
 
-
 export function utilDisplayNameForPath(entity) {
     var name = utilDisplayName(entity, undefined, true);
     var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
@@ -307,24 +330,21 @@ export function utilDisplayNameForPath(entity) {
     return name;
 }
 
-
 export function utilDisplayType(id) {
     return {
         n: t('inspector.node'),
         w: t('inspector.way'),
-        r: t('inspector.relation')
+        r: t('inspector.relation'),
     }[id.charAt(0)];
 }
-
 
 export function utilEntityRoot(entityType) {
     return {
         node: 'n',
         way: 'w',
-        relation: 'r'
+        relation: 'r',
     }[entityType];
 }
-
 
 // Returns a single object containing the tags of all the given entities.
 // Example:
@@ -345,29 +365,29 @@ export function utilEntityRoot(entityType) {
 //   width: [ '3', undefined ]
 // }
 export function utilCombinedTags(entityIDs, graph) {
-
     var tags = {};
     var tagCounts = {};
     var allKeys = new Set();
     var allTags = [];
 
-    var entities = entityIDs.map(function(entityID) {
-        return graph.hasEntity(entityID);
-    }).filter(Boolean);
+    var entities = entityIDs
+        .map(function (entityID) {
+            return graph.hasEntity(entityID);
+        })
+        .filter(Boolean);
 
     // gather the aggregate keys
-    entities.forEach(function(entity) {
+    entities.forEach(function (entity) {
         var keys = Object.keys(entity.tags).filter(Boolean);
-        keys.forEach(function(key) {
+        keys.forEach(function (key) {
             allKeys.add(key);
         });
     });
 
-    entities.forEach(function(entity) {
+    entities.forEach(function (entity) {
         allTags.push(entity.tags);
 
-        allKeys.forEach(function(key) {
-
+        allKeys.forEach(function (key) {
             var value = entity.tags[key]; // purposely allow `undefined`
 
             if (!tags.hasOwnProperty(key)) {
@@ -379,7 +399,8 @@ export function utilCombinedTags(entityIDs, graph) {
                         // first alternate value, replace single value with array
                         tags[key] = [tags[key], value];
                     }
-                } else { // type is array
+                } else {
+                    // type is array
                     if (tags[key].indexOf(value) === -1) {
                         // subsequent alternate value, add to array
                         tags[key].push(value);
@@ -397,7 +418,7 @@ export function utilCombinedTags(entityIDs, graph) {
         if (!Array.isArray(tags[key])) continue;
 
         // sort values by frequency then alphabetically
-        tags[key] = tags[key].sort(function(val1, val2) {
+        tags[key] = tags[key].sort(function (val1, val2) {
             var key = key; // capture
             var count2 = tagCounts[key + '=' + val2];
             var count1 = tagCounts[key + '=' + val1];
@@ -411,16 +432,17 @@ export function utilCombinedTags(entityIDs, graph) {
         });
     }
 
-    tags = Object.defineProperty(tags, Symbol.for('allTags'), { enumerable: false, value: allTags });
+    tags = Object.defineProperty(tags, Symbol.for('allTags'), {
+        enumerable: false,
+        value: allTags,
+    });
     return tags;
 }
-
 
 export function utilStringQs(str) {
     str = str.replace(/^[#?]{0,2}/, ''); // advance past any leading '?' or '#' characters
     return Object.fromEntries(new URLSearchParams(str));
 }
-
 
 export function utilQsString(obj, softEncode) {
     let str = new URLSearchParams(obj).toString();
@@ -433,7 +455,6 @@ export function utilQsString(obj, softEncode) {
     }
     return str;
 }
-
 
 export function utilPrefixDOMProperty(property) {
     var prefixes = ['webkit', 'ms', 'moz', 'o'];
@@ -454,7 +475,6 @@ export function utilPrefixDOMProperty(property) {
     return false;
 }
 
-
 export function utilPrefixCSSProperty(property) {
     var prefixes = ['webkit', 'ms', 'Moz', 'O'];
     var i = -1;
@@ -467,22 +487,26 @@ export function utilPrefixCSSProperty(property) {
 
     while (++i < n) {
         if (prefixes[i] + property in s) {
-            return '-' + prefixes[i].toLowerCase() + property.replace(/([A-Z])/g, '-$1').toLowerCase();
+            return (
+                '-' +
+                prefixes[i].toLowerCase() +
+                property.replace(/([A-Z])/g, '-$1').toLowerCase()
+            );
         }
     }
 
     return false;
 }
 
-
 var transformProperty;
 export function utilSetTransform(el, x, y, scale) {
-    var prop = transformProperty = transformProperty || utilPrefixCSSProperty('Transform');
-    var translate = utilDetect().opera ? 'translate('   + x + 'px,' + y + 'px)'
+    var prop = (transformProperty =
+        transformProperty || utilPrefixCSSProperty('Transform'));
+    var translate = utilDetect().opera
+        ? 'translate(' + x + 'px,' + y + 'px)'
         : 'translate3d(' + x + 'px,' + y + 'px,0)';
     return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));
 }
-
 
 // Calculates Levenshtein distance between two strings
 // see:  https://en.wikipedia.org/wiki/Levenshtein_distance
@@ -494,22 +518,29 @@ export function utilEditDistance(a, b) {
     if (b.length === 0) return a.length;
     var matrix = [];
     var i, j;
-    for (i = 0; i <= b.length; i++) { matrix[i] = [i]; }
-    for (j = 0; j <= a.length; j++) { matrix[0][j] = j; }
+    for (i = 0; i <= b.length; i++) {
+        matrix[i] = [i];
+    }
+    for (j = 0; j <= a.length; j++) {
+        matrix[0][j] = j;
+    }
     for (i = 1; i <= b.length; i++) {
         for (j = 1; j <= a.length; j++) {
-            if (b.charAt(i-1) === a.charAt(j-1)) {
-                matrix[i][j] = matrix[i-1][j-1];
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
             } else {
-                matrix[i][j] = Math.min(matrix[i-1][j-1] + 1, // substitution
-                    Math.min(matrix[i][j-1] + 1, // insertion
-                    matrix[i-1][j] + 1)); // deletion
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j - 1] + 1, // substitution
+                    Math.min(
+                        matrix[i][j - 1] + 1, // insertion
+                        matrix[i - 1][j] + 1,
+                    ),
+                ); // deletion
             }
         }
     }
     return matrix[b.length][a.length];
 }
-
 
 // a d3.mouse-alike which
 // 1. Only works on HTML elements, not SVG
@@ -520,21 +551,20 @@ export function utilFastMouse(container) {
     var rectTop = rect.top;
     var clientLeft = +container.clientLeft;
     var clientTop = +container.clientTop;
-    return function(e) {
+    return function (e) {
         return [
             e.clientX - rectLeft - clientLeft,
-            e.clientY - rectTop - clientTop
+            e.clientY - rectTop - clientTop,
         ];
     };
 }
-
 
 export function utilAsyncMap(inputs, func, callback) {
     var remaining = inputs.length;
     var results = [];
     var errors = [];
 
-    inputs.forEach(function(d, i) {
+    inputs.forEach(function (d, i) {
         func(d, function done(err, data) {
             errors[i] = err;
             results[i] = data;
@@ -544,15 +574,13 @@ export function utilAsyncMap(inputs, func, callback) {
     });
 }
 
-
 // wraps an index to an interval [0..length-1]
 export function utilWrap(index, length) {
     if (index < 0) {
-        index += Math.ceil(-index/length)*length;
+        index += Math.ceil(-index / length) * length;
     }
     return index % length;
 }
-
 
 /**
  * a replacement for functor
@@ -562,27 +590,29 @@ export function utilWrap(index, length) {
  */
 export function utilFunctor(value) {
     if (typeof value === 'function') return value;
-    return function() {
+    return function () {
         return value;
     };
 }
 
-
 export function utilNoAuto(selection) {
-    var isText = (selection.size() && selection.node().tagName.toLowerCase() === 'textarea');
+    var isText =
+        selection.size() &&
+        selection.node().tagName.toLowerCase() === 'textarea';
 
-    return selection
-        // assign 'new-password' even for non-password fields to prevent browsers (Chrome) ignoring 'off'
-        .attr('autocomplete', 'new-password')
-        .attr('autocorrect', 'off')
-        .attr('autocapitalize', 'off')
-        .attr('data-1p-ignore', 'true')  // 1Password
-        .attr('data-bwignore', 'true')   // Bitwarden
-        .attr('data-form-type', 'other') // Dashlane
-        .attr('data-lpignore', 'true')   // LastPass
-        .attr('spellcheck', isText ? 'true' : 'false');
+    return (
+        selection
+            // assign 'new-password' even for non-password fields to prevent browsers (Chrome) ignoring 'off'
+            .attr('autocomplete', 'new-password')
+            .attr('autocorrect', 'off')
+            .attr('autocapitalize', 'off')
+            .attr('data-1p-ignore', 'true') // 1Password
+            .attr('data-bwignore', 'true') // Bitwarden
+            .attr('data-form-type', 'other') // Dashlane
+            .attr('data-lpignore', 'true') // LastPass
+            .attr('spellcheck', isText ? 'true' : 'false')
+    );
 }
-
 
 // https://stackoverflow.com/questions/194846/is-there-any-kind-of-hash-code-function-in-javascript
 // https://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
@@ -593,7 +623,7 @@ export function utilHashcode(str) {
     }
     for (var i = 0; i < str.length; i++) {
         var char = str.charCodeAt(i);
-        hash = ((hash << 5) - hash) + char;
+        hash = (hash << 5) - hash + char;
         hash = hash & hash; // Convert to 32bit integer
     }
     return hash;
@@ -609,7 +639,12 @@ export function utilSafeClassName(str) {
 // used previously or that's present elsewhere in the document. Useful for preventing
 // browser-provided autofills or when embedding iD on pages with unknown elements.
 export function utilUniqueDomId(val) {
-    return 'ideditor-' + utilSafeClassName(val.toString()) + '-' + new Date().getTime().toString();
+    return (
+        'ideditor-' +
+        utilSafeClassName(val.toString()) +
+        '-' +
+        new Date().getTime().toString()
+    );
 }
 
 // Returns the length of `str` in unicode characters. This can be less than
@@ -678,9 +713,9 @@ export function utilOldestID(ids) {
 export function utilCleanOsmString(val, maxChars) {
     // be lenient with input
     if (val === undefined || val === null) {
-      val = '';
+        val = '';
     } else {
-      val = val.toString();
+        val = val.toString();
     }
 
     // remove whitespace
@@ -691,4 +726,4 @@ export function utilCleanOsmString(val, maxChars) {
 
     // trim to the number of allowed characters
     return utilUnicodeCharsTruncated(val, maxChars);
-  }
+}

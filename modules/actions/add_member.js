@@ -1,9 +1,7 @@
 import { osmJoinWays } from '../osm/multipolygon';
 import { utilArrayGroupBy, utilObjectOmit } from '../util';
 
-
 export function actionAddMember(relationId, member, memberIndex) {
-
     return function action(graph) {
         var relation = graph.entity(relationId);
 
@@ -26,7 +24,6 @@ export function actionAddMember(relationId, member, memberIndex) {
 
         return graph;
     };
-
 
     // Add a way member into the relation "wherever it makes sense".
     function addWayMember(relation, graph) {
@@ -74,8 +71,11 @@ export function actionAddMember(relationId, member, memberIndex) {
 
                 // reorder `members` if necessary
                 if (k > 0) {
-                    if (j+k >= members.length || item.index !== members[j+k].index) {
-                        moveMember(members, item.index, j+k);
+                    if (
+                        j + k >= members.length ||
+                        item.index !== members[j + k].index
+                    ) {
+                        moveMember(members, item.index, j + k);
                     }
                 }
 
@@ -95,10 +95,13 @@ export function actionAddMember(relationId, member, memberIndex) {
         // Put stops and platforms first, then nodes, ways, relations
         // This is recommended for Public Transport v2 routes:
         // see https://wiki.openstreetmap.org/wiki/Public_transport#Service_routes
-        var newMembers = PTv2members.concat( (groups.node || []), wayMembers, (groups.relation || []) );
+        var newMembers = PTv2members.concat(
+            groups.node || [],
+            wayMembers,
+            groups.relation || [],
+        );
 
         return graph.replace(relation.update({ members: newMembers }));
-
 
         // `moveMember()` changes the `members` array in place by splicing
         // the item with `.index = findIndex` to where it belongs,
@@ -130,23 +133,21 @@ export function actionAddMember(relationId, member, memberIndex) {
                 }
             }
 
-            var item = Object.assign({}, arr[i]);   // shallow copy
+            var item = Object.assign({}, arr[i]); // shallow copy
             arr[i].index = -1; // mark previous entry as dead
             delete item.index; // inserted items must never be moved again
             arr.splice(toIndex, 0, item);
         }
-
 
         // This is the same as `Relation.indexedMembers`,
         // Except we don't want to index all the members, only the ways
         function withIndex(arr) {
             var result = new Array(arr.length);
             for (var i = 0; i < arr.length; i++) {
-                result[i] = Object.assign({}, arr[i]);   // shallow copy
+                result[i] = Object.assign({}, arr[i]); // shallow copy
                 result[i].index = i;
             }
             return result;
         }
     }
-
 }

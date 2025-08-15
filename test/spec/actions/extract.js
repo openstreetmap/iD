@@ -1,5 +1,5 @@
 describe('iD.actionExtract', function () {
-    var tags = { 'name': 'test' };
+    var tags = { name: 'test' };
 
     function createTargetNode(id, lonlat) {
         return iD.osmNode({ id: id, loc: lonlat, tags: tags });
@@ -16,7 +16,7 @@ describe('iD.actionExtract', function () {
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [2, 0] }),
                 iD.osmNode({ id: 'd', loc: [3, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd'] })
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd'] }),
             ]);
         });
 
@@ -161,7 +161,6 @@ describe('iD.actionExtract', function () {
         });
     });
 
-
     describe('closed way', function () {
         var graph;
         beforeEach(function () {
@@ -175,7 +174,7 @@ describe('iD.actionExtract', function () {
                 iD.osmNode({ id: 'b', loc: [1, 0] }),
                 iD.osmNode({ id: 'c', loc: [1, 1] }),
                 iD.osmNode({ id: 'd', loc: [0, 1] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a'] })
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a'] }),
             ]);
         });
 
@@ -327,7 +326,6 @@ describe('iD.actionExtract', function () {
         });
     });
 
-
     describe('intersecting linear ways', function () {
         var graph;
         beforeEach(function () {
@@ -348,7 +346,7 @@ describe('iD.actionExtract', function () {
                 iD.osmNode({ id: 'e', loc: [2, 1] }),
                 iD.osmNode({ id: 'f', loc: [2, 2] }),
                 iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd'] }),
-                iD.osmWay({ id: '=', nodes: ['c', 'e', 'f'] })
+                iD.osmWay({ id: '=', nodes: ['c', 'e', 'f'] }),
             ]);
         });
 
@@ -404,7 +402,9 @@ describe('iD.actionExtract', function () {
             // Act
             var assertionGraph = iD.actionExtract('c')(graph);
             // Confirm both ways have the same replacement node
-            expect(assertionGraph.entity('-').nodes[2]).to.eql(assertionGraph.entity('=').nodes[0]);
+            expect(assertionGraph.entity('-').nodes[2]).to.eql(
+                assertionGraph.entity('=').nodes[0],
+            );
         });
 
         it('does replace target node', function () {
@@ -436,7 +436,6 @@ describe('iD.actionExtract', function () {
         });
     });
 
-
     describe('intersecting closed way', function () {
         var graph;
         beforeEach(function () {
@@ -458,7 +457,7 @@ describe('iD.actionExtract', function () {
                 iD.osmNode({ id: 'f', loc: [2, 2] }),
                 iD.osmNode({ id: 'g', loc: [1, 2] }),
                 iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a'] }),
-                iD.osmWay({ id: '=', nodes: ['c', 'e', 'f', 'g', 'c'] })
+                iD.osmWay({ id: '=', nodes: ['c', 'e', 'f', 'g', 'c'] }),
             ]);
         });
 
@@ -520,7 +519,9 @@ describe('iD.actionExtract', function () {
             // Act
             var assertionGraph = iD.actionExtract('c')(graph);
             // Confirm both ways have the same replacement node
-            expect(assertionGraph.entity('-').nodes[2]).to.eql(assertionGraph.entity('=').nodes[0]);
+            expect(assertionGraph.entity('-').nodes[2]).to.eql(
+                assertionGraph.entity('=').nodes[0],
+            );
         });
 
         it('does replace target node', function () {
@@ -553,7 +554,6 @@ describe('iD.actionExtract', function () {
         });
     });
 
-
     describe('with relation', function () {
         var graph;
 
@@ -569,13 +569,15 @@ describe('iD.actionExtract', function () {
                 iD.osmNode({ id: 'b', loc: [1, 0], tags: tags }),
                 iD.osmNode({ id: 'c', loc: [2, 0] }),
                 iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
-                iD.osmRelation({id: 'r', tags: {type: 'route', route: 'foot'},
+                iD.osmRelation({
+                    id: 'r',
+                    tags: { type: 'route', route: 'foot' },
                     members: [
                         { id: 'a', type: 'node', role: 'point' },
                         { id: 'b', type: 'node', role: 'point' },
-                        { id: 'c', type: 'node', role: 'point' }
-                    ]
-                })
+                        { id: 'c', type: 'node', role: 'point' },
+                    ],
+                }),
             ]);
         });
 
@@ -624,8 +626,12 @@ describe('iD.actionExtract', function () {
             var targetMember = targetRelation.memberById(newNodeId);
 
             // Confirm membership is the same as original (except for the new id)
-            expect(targetMember).to.eql({ id: newNodeId, index: 1, type: 'node', role: 'point' });
+            expect(targetMember).to.eql({
+                id: newNodeId,
+                index: 1,
+                type: 'node',
+                role: 'point',
+            });
         });
-
     });
 });

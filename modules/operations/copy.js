@@ -1,20 +1,21 @@
-import { t } from '../core/localizer';
 import { behaviorOperation } from '../behavior/operation';
+import { t } from '../core/localizer';
 import { uiCmd } from '../ui/cmd';
 import { utilArrayGroupBy, utilTotalExtent } from '../util';
 
 export function operationCopy(context, selectedIDs) {
-
     function getFilteredIdsToCopy() {
-        return selectedIDs.filter(function(selectedID) {
+        return selectedIDs.filter(function (selectedID) {
             var entity = context.graph().hasEntity(selectedID);
             // don't copy untagged vertices separately from ways
-            return entity.hasInterestingTags() || entity.geometry(context.graph()) !== 'vertex';
+            return (
+                entity.hasInterestingTags() ||
+                entity.geometry(context.graph()) !== 'vertex'
+            );
         });
     }
 
-    var operation = function() {
-
+    var operation = function () {
         var graph = context.graph();
         var selected = groupEntities(getFilteredIdsToCopy(), graph);
         var canCopy = [];
@@ -44,25 +45,26 @@ export function operationCopy(context, selectedIDs) {
         }
 
         context.copyIDs(canCopy);
-        if (_point &&
-            (canCopy.length !== 1 || graph.entity(canCopy[0]).type !== 'node')) {
+        if (
+            _point &&
+            (canCopy.length !== 1 || graph.entity(canCopy[0]).type !== 'node')
+        ) {
             // store the anchor coordinates if copying more than a single node
             context.copyLonLat(context.projection.invert(_point));
         } else {
             context.copyLonLat(null);
         }
-
     };
 
-
     function groupEntities(ids, graph) {
-        var entities = ids.map(function (id) { return graph.entity(id); });
+        var entities = ids.map(function (id) {
+            return graph.entity(id);
+        });
         return Object.assign(
             { relation: [], way: [], node: [] },
-            utilArrayGroupBy(entities, 'type')
+            utilArrayGroupBy(entities, 'type'),
         );
     }
-
 
     function getDescendants(id, graph, descendants) {
         var entity = graph.entity(id);
@@ -71,7 +73,9 @@ export function operationCopy(context, selectedIDs) {
         descendants = descendants || {};
 
         if (entity.type === 'relation') {
-            children = entity.members.map(function(m) { return m.id; });
+            children = entity.members.map(function (m) {
+                return m.id;
+            });
         } else if (entity.type === 'way') {
             children = entity.nodes;
         } else {
@@ -88,13 +92,11 @@ export function operationCopy(context, selectedIDs) {
         return descendants;
     }
 
-
-    operation.available = function() {
+    operation.available = function () {
         return getFilteredIdsToCopy().length > 0;
     };
 
-
-    operation.disabled = function() {
+    operation.disabled = function () {
         var extent = utilTotalExtent(getFilteredIdsToCopy(), context.graph());
         if (extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
@@ -102,33 +104,30 @@ export function operationCopy(context, selectedIDs) {
         return false;
     };
 
-
-    operation.availableForKeypress = function() {
+    operation.availableForKeypress = function () {
         const selection = window.getSelection?.();
         // if the user has text selected then let them copy that, not the selected feature
         return !selection?.toString();
     };
 
-
-    operation.tooltip = function() {
+    operation.tooltip = function () {
         var disable = operation.disabled();
-        return disable ?
-            t.append('operations.copy.' + disable, { n: selectedIDs.length }) :
-            t.append('operations.copy.description', { n: selectedIDs.length });
+        return disable
+            ? t.append('operations.copy.' + disable, { n: selectedIDs.length })
+            : t.append('operations.copy.description', {
+                  n: selectedIDs.length,
+              });
     };
 
-
-    operation.annotation = function() {
+    operation.annotation = function () {
         return t('operations.copy.annotation', { n: selectedIDs.length });
     };
 
-
     var _point;
-    operation.point = function(val) {
+    operation.point = function (val) {
         _point = val;
         return operation;
     };
-
 
     operation.id = 'copy';
     operation.keys = [uiCmd('⌘C')];

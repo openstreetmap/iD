@@ -1,93 +1,96 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { t } from '../../core/localizer';
-import { helpHtml } from './helper';
-import { uiModal } from '../modal';
 import { utilRebind } from '../../util/rebind';
-
+import { uiModal } from '../modal';
+import { helpHtml } from './helper';
 
 export function uiIntroStartEditing(context, reveal) {
     var dispatch = d3_dispatch('done', 'startEditing');
     var modalSelection = d3_select(null);
 
-
     var chapter = {
-        title: 'intro.startediting.title'
+        title: 'intro.startediting.title',
     };
 
     function showHelp() {
-        reveal('.map-control.help-control',
-            helpHtml('intro.startediting.help'), {
+        reveal(
+            '.map-control.help-control',
+            helpHtml('intro.startediting.help'),
+            {
                 buttonText: t.html('intro.ok'),
-                buttonCallback: function() { shortcuts(); }
-            }
+                buttonCallback: function () {
+                    shortcuts();
+                },
+            },
         );
     }
 
     function shortcuts() {
-        reveal('.map-control.help-control',
-            helpHtml('intro.startediting.shortcuts'), {
+        reveal(
+            '.map-control.help-control',
+            helpHtml('intro.startediting.shortcuts'),
+            {
                 buttonText: t.html('intro.ok'),
-                buttonCallback: function() { showSave(); }
-            }
+                buttonCallback: function () {
+                    showSave();
+                },
+            },
         );
     }
 
     function showSave() {
-        context.container().selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
-        reveal('.top-toolbar button.save',
-            helpHtml('intro.startediting.save'), {
+        context.container().selectAll('.shaded').remove(); // in case user opened keyboard shortcuts
+        reveal(
+            '.top-toolbar button.save',
+            helpHtml('intro.startediting.save'),
+            {
                 buttonText: t.html('intro.ok'),
-                buttonCallback: function() { showStart(); }
-            }
+                buttonCallback: function () {
+                    showStart();
+                },
+            },
         );
     }
 
     function showStart() {
-        context.container().selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
+        context.container().selectAll('.shaded').remove(); // in case user opened keyboard shortcuts
 
         modalSelection = uiModal(context.container());
 
-        modalSelection.select('.modal')
-            .attr('class', 'modal-splash modal');
+        modalSelection.select('.modal').attr('class', 'modal-splash modal');
 
         modalSelection.selectAll('.close').remove();
 
-        var startbutton = modalSelection.select('.content')
+        var startbutton = modalSelection
+            .select('.content')
             .attr('class', 'fillL')
             .append('button')
-                .attr('class', 'modal-section huge-modal-button')
-                .on('click', function() {
-                    modalSelection.remove();
-                });
+            .attr('class', 'modal-section huge-modal-button')
+            .on('click', function () {
+                modalSelection.remove();
+            });
 
-            startbutton
-                .append('svg')
-                .attr('class', 'illustration')
-                .append('use')
-                .attr('xlink:href', '#iD-logo-walkthrough');
+        startbutton
+            .append('svg')
+            .attr('class', 'illustration')
+            .append('use')
+            .attr('xlink:href', '#iD-logo-walkthrough');
 
-            startbutton
-                .append('h2')
-                .call(t.append('intro.startediting.start'));
+        startbutton.append('h2').call(t.append('intro.startediting.start'));
 
         dispatch.call('startEditing');
     }
 
-
-    chapter.enter = function() {
+    chapter.enter = function () {
         showHelp();
     };
 
-
-    chapter.exit = function() {
+    chapter.exit = function () {
         modalSelection.remove();
-        context.container().selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
+        context.container().selectAll('.shaded').remove(); // in case user opened keyboard shortcuts
     };
-
 
     return utilRebind(chapter, dispatch, 'on');
 }

@@ -1,12 +1,12 @@
-describe('uiCombobox', function() {
+describe('uiCombobox', function () {
     var body, context, container, content, input, combobox;
 
     var data = [
-        {title: 'foobar', value: 'foobar'},
-        {title: 'foo', value: 'foo'},
-        {title: 'bar', value: 'bar'},
-        {title: 'Baz', value: 'Baz'},
-        {title: 'test', value: 'test'}
+        { title: 'foobar', value: 'foobar' },
+        { title: 'foo', value: 'foo' },
+        { title: 'bar', value: 'bar' },
+        { title: 'Baz', value: 'Baz' },
+        { title: 'test', value: 'test' },
     ];
 
     function simulateKeypress(key) {
@@ -38,21 +38,29 @@ describe('uiCombobox', function() {
                 break;
 
             case '⌫':
-                value = value.substring(0, start - (start === finish ? 1 : 0)) +
+                value =
+                    value.substring(0, start - (start === finish ? 1 : 0)) +
                     value.substring(finish, value.length);
                 input.property('value', value);
                 input.node().dispatchEvent(new MouseEvent('input'));
                 break;
 
             case '⌦':
-                value = value.substring(0, start) +
-                    value.substring(finish + (start === finish ? 1 : 0), value.length);
+                value =
+                    value.substring(0, start) +
+                    value.substring(
+                        finish + (start === finish ? 1 : 0),
+                        value.length,
+                    );
                 input.property('value', value);
                 input.node().dispatchEvent(new MouseEvent('input'));
                 break;
 
             default:
-                value = value.substring(0, start) + key + value.substring(finish, value.length);
+                value =
+                    value.substring(0, start) +
+                    key +
+                    value.substring(finish, value.length);
                 input.property('value', value);
                 input.node().dispatchEvent(new MouseEvent('input'));
         }
@@ -60,16 +68,20 @@ describe('uiCombobox', function() {
         input.node().dispatchEvent(new KeyboardEvent('keyup', { keyCode }));
     }
 
-    beforeEach(function() {
+    beforeEach(function () {
         body = d3.select('body');
         container = body.append('div').attr('class', 'ideditor');
-        context = iD.coreContext().assetPath('../dist/').init().container(container);
+        context = iD
+            .coreContext()
+            .assetPath('../dist/')
+            .init()
+            .container(container);
         content = container.append('div');
         input = content.append('input');
         combobox = iD.uiCombobox(context);
     });
 
-    afterEach(function() {
+    afterEach(function () {
         body.selectAll('.combobox').remove();
         content.remove();
         container.remove();
@@ -79,29 +91,35 @@ describe('uiCombobox', function() {
         input.node().focus();
     }
 
-    it('adds the combobox-input class', function() {
+    it('adds the combobox-input class', function () {
         input.call(combobox);
         expect(input.classed('combobox-input')).to.be.true;
     });
 
-    it('adds combobox under container', function() {
+    it('adds combobox under container', function () {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('↓');
         expect(d3.selectAll('.ideditor > div.combobox').size()).to.equal(1);
     });
 
-    it('filters entries to those matching the value', function() {
+    it('filters entries to those matching the value', function () {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
         expect(body.selectAll('.combobox-option').size()).to.equal(3);
-        expect(body.selectAll('.combobox-option').nodes()[0].text).to.equal('foobar');
-        expect(body.selectAll('.combobox-option').nodes()[1].text).to.equal('bar');
-        expect(body.selectAll('.combobox-option').nodes()[2].text).to.equal('Baz');
+        expect(body.selectAll('.combobox-option').nodes()[0].text).to.equal(
+            'foobar',
+        );
+        expect(body.selectAll('.combobox-option').nodes()[1].text).to.equal(
+            'bar',
+        );
+        expect(body.selectAll('.combobox-option').nodes()[2].text).to.equal(
+            'Baz',
+        );
     });
 
-    it('shows all entries when activating the combo', function() {
+    it('shows all entries when activating the combo', function () {
         input.property('value', 'foobar').call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('↓');
@@ -109,28 +127,32 @@ describe('uiCombobox', function() {
         expect(body.selectAll('.combobox-option').text()).to.equal('foobar');
     });
 
-    it('selects the first option that matches the input', function() {
+    it('selects the first option that matches the input', function () {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(1);
-        expect(body.selectAll('.combobox-option.selected').text()).to.equal('bar');
+        expect(body.selectAll('.combobox-option.selected').text()).to.equal(
+            'bar',
+        );
     });
 
-    it('prefers an option that exactly matches the input over the first option', function() {
+    it('prefers an option that exactly matches the input over the first option', function () {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('f');
         simulateKeypress('o');
         simulateKeypress('o');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(1);
-        expect(body.selectAll('.combobox-option.selected').text()).to.equal('foo');  // skip foobar
+        expect(body.selectAll('.combobox-option.selected').text()).to.equal(
+            'foo',
+        ); // skip foobar
     });
 
-    it('does not autocomplete numeric options', function() {
+    it('does not autocomplete numeric options', function () {
         var numeric = [
-            {title: '100', value: '100'},
-            {title: '110', value: '110'}
+            { title: '100', value: '100' },
+            { title: '110', value: '110' },
         ];
         input.call(combobox.data(numeric));
         focusTypeahead(input);
@@ -139,7 +161,7 @@ describe('uiCombobox', function() {
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
     });
 
-    it('does not autocomplete if canAutocomplete(false)', function() {
+    it('does not autocomplete if canAutocomplete(false)', function () {
         input.call(combobox.data(data).canAutocomplete(false));
         focusTypeahead(input);
         simulateKeypress('b');
@@ -147,7 +169,7 @@ describe('uiCombobox', function() {
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
     });
 
-    it('selects the completed portion of the value', function() {
+    it('selects the completed portion of the value', function () {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
@@ -156,7 +178,7 @@ describe('uiCombobox', function() {
         expect(input.property('selectionEnd')).to.equal(3);
     });
 
-    it('does not preserve the case of the input portion of the value by default', function() {
+    it('does not preserve the case of the input portion of the value by default', function () {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('B');
@@ -165,7 +187,7 @@ describe('uiCombobox', function() {
         expect(input.property('selectionEnd')).to.equal(3);
     });
 
-    it('does preserve the case of the input portion of the value with caseSensitive option', function() {
+    it('does preserve the case of the input portion of the value with caseSensitive option', function () {
         combobox.caseSensitive(true);
         input.call(combobox.data(data));
         focusTypeahead(input);
@@ -175,22 +197,26 @@ describe('uiCombobox', function() {
         expect(input.property('selectionEnd')).to.equal(3);
     });
 
-    it('does not select when value is empty', function() {
+    it('does not select when value is empty', function () {
         input.call(combobox.data(data));
         focusTypeahead(input);
         input.node().dispatchEvent(new MouseEvent('input'));
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
     });
 
-    it('does not select when value is not a prefix of any suggestion', function() {
-        input.call(combobox.fetcher(function(_, cb) { cb(data); }));
+    it('does not select when value is not a prefix of any suggestion', function () {
+        input.call(
+            combobox.fetcher(function (_, cb) {
+                cb(data);
+            }),
+        );
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('i');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
     });
 
-    it('does not select or autocomplete after ⌫', function() {
+    it('does not select or autocomplete after ⌫', function () {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
@@ -199,7 +225,7 @@ describe('uiCombobox', function() {
         expect(input.property('value')).to.equal('b');
     });
 
-    it('does not select or autocomplete after ⌦', function() {
+    it('does not select or autocomplete after ⌦', function () {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('f');
@@ -211,47 +237,57 @@ describe('uiCombobox', function() {
         expect(input.property('value')).to.equal('b');
     });
 
-    it('selects and autocompletes the next/prev suggestion on ↓/↑', function() {
+    it('selects and autocompletes the next/prev suggestion on ↓/↑', function () {
         input.call(combobox.data(data));
         focusTypeahead(input);
 
         simulateKeypress('↓');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(1);
-        expect(body.selectAll('.combobox-option.selected').text()).to.equal('foobar');
+        expect(body.selectAll('.combobox-option.selected').text()).to.equal(
+            'foobar',
+        );
         expect(input.property('value')).to.equal('foobar');
 
         simulateKeypress('↓');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(1);
-        expect(body.selectAll('.combobox-option.selected').text()).to.equal('foo');
+        expect(body.selectAll('.combobox-option.selected').text()).to.equal(
+            'foo',
+        );
         expect(input.property('value')).to.equal('foo');
 
         simulateKeypress('↑');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(1);
-        expect(body.selectAll('.combobox-option.selected').text()).to.equal('foobar');
+        expect(body.selectAll('.combobox-option.selected').text()).to.equal(
+            'foobar',
+        );
         expect(input.property('value')).to.equal('foobar');
     });
 
     it('emits accepted event with selected datum on ⇥', async () => {
-        const d = new Promise(cb => { combobox.on('accept', cb); });
+        const d = new Promise((cb) => {
+            combobox.on('accept', cb);
+        });
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('⇥');
-        expect(await d).to.eql({title: 'bar', value: 'bar'});
+        expect(await d).to.eql({ title: 'bar', value: 'bar' });
         combobox.on('accept', null);
     });
 
     it('emits accepted event with selected datum on ↩', async () => {
-        const d = new Promise(cb => { combobox.on('accept', cb); });
+        const d = new Promise((cb) => {
+            combobox.on('accept', cb);
+        });
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('↩');
-        expect(await d).to.eql({title: 'bar', value: 'bar'});
+        expect(await d).to.eql({ title: 'bar', value: 'bar' });
         combobox.on('accept', null);
     });
 
-    it('emits cancel event on ⎋', function() {
+    it('emits cancel event on ⎋', function () {
         var spy = sinon.spy();
         combobox.on('cancel', spy);
 
@@ -262,7 +298,7 @@ describe('uiCombobox', function() {
         expect(spy).to.have.been.calledOnce;
     });
 
-    it('hides on ↩', function() {
+    it('hides on ↩', function () {
         input.call(combobox.data(data));
         input.node().focus();
         simulateKeypress('↩');

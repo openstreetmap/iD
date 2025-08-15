@@ -3,11 +3,10 @@ import { geoPath as d3_geoPath } from 'd3-geo';
 import { osmNode } from '../osm/node';
 
 export function actionExtract(entityID, projection) {
-
     var extractedNodeID;
 
     /** @param {boolean} shiftKeyPressed */
-    var action = function(graph, shiftKeyPressed) {
+    var action = function (graph, shiftKeyPressed) {
         var entity = graph.entity(entityID);
 
         if (entity.type === 'node') {
@@ -19,7 +18,6 @@ export function actionExtract(entityID, projection) {
 
     /** @param {boolean} shiftKeyPressed */
     function extractFromNode(node, graph, shiftKeyPressed) {
-
         extractedNodeID = node.id;
 
         // Create a new node to replace the one we will detach
@@ -27,32 +25,48 @@ export function actionExtract(entityID, projection) {
         graph = graph.replace(replacement);
 
         // Process each way in turn, updating the graph as we go
-        graph = graph.parentWays(node)
-            .reduce(function(accGraph, parentWay) {
-                return accGraph.replace(parentWay.replaceNode(entityID, replacement.id));
-            }, graph);
+        graph = graph.parentWays(node).reduce(function (accGraph, parentWay) {
+            return accGraph.replace(
+                parentWay.replaceNode(entityID, replacement.id),
+            );
+        }, graph);
 
         if (!shiftKeyPressed) return graph;
 
         // Process any relations too
         // but only if the user holds down the shift key while triggering the operation.
-        return graph.parentRelations(node)
-            .reduce(function(accGraph, parentRel) {
-                return accGraph.replace(parentRel.replaceMember(node, replacement));
-            }, graph);
+        return graph.parentRelations(node).reduce(function (
+            accGraph,
+            parentRel,
+        ) {
+            return accGraph.replace(parentRel.replaceMember(node, replacement));
+        }, graph);
     }
 
     function extractFromWayOrRelation(entity, graph) {
-
         var fromGeometry = entity.geometry(graph);
 
         var keysToCopyAndRetain = ['source', 'wheelchair'];
         var keysToRetain = ['area'];
-        var buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin', 'ref:GB:uprn', 'ref:linz:building_id'];
+        var buildingKeysToRetain = [
+            'architect',
+            'building',
+            'height',
+            'layer',
+            'nycdoitt:bin',
+            'ref:GB:uprn',
+            'ref:linz:building_id',
+        ];
 
-        var extractedLoc = d3_geoPath(projection).centroid(entity.asGeoJSON(graph));
+        var extractedLoc = d3_geoPath(projection).centroid(
+            entity.asGeoJSON(graph),
+        );
         extractedLoc = extractedLoc && projection.invert(extractedLoc);
-        if (!extractedLoc  || !isFinite(extractedLoc[0]) || !isFinite(extractedLoc[1])) {
+        if (
+            !extractedLoc ||
+            !isFinite(extractedLoc[0]) ||
+            !isFinite(extractedLoc[1])
+        ) {
             extractedLoc = entity.extent(graph).center();
         }
 
@@ -61,20 +75,23 @@ export function actionExtract(entityID, projection) {
             corridor: true,
             elevator: true,
             level: true,
-            room: true
+            room: true,
         };
 
-        var isBuilding = (entity.tags.building && entity.tags.building !== 'no') ||
-            (entity.tags['building:part'] && entity.tags['building:part'] !== 'no');
+        var isBuilding =
+            (entity.tags.building && entity.tags.building !== 'no') ||
+            (entity.tags['building:part'] &&
+                entity.tags['building:part'] !== 'no');
 
-        var isIndoorArea = fromGeometry === 'area' && entity.tags.indoor && indoorAreaValues[entity.tags.indoor];
+        var isIndoorArea =
+            fromGeometry === 'area' &&
+            entity.tags.indoor &&
+            indoorAreaValues[entity.tags.indoor];
 
-        var entityTags = Object.assign({}, entity.tags);  // shallow copy
+        var entityTags = Object.assign({}, entity.tags); // shallow copy
         var pointTags = {};
         for (var key in entityTags) {
-
-            if (entity.type === 'relation' &&
-                key === 'type') {
+            if (entity.type === 'relation' && key === 'type') {
                 continue;
             }
 
@@ -84,9 +101,12 @@ export function actionExtract(entityID, projection) {
 
             if (isBuilding) {
                 // don't transfer building-related tags
-                if (buildingKeysToRetain.indexOf(key) !== -1 ||
+                if (
+                    buildingKeysToRetain.indexOf(key) !== -1 ||
                     key.match(/^building:.{1,}/) ||
-                    key.match(/^roof:.{1,}/)) continue;
+                    key.match(/^roof:.{1,}/)
+                )
+                    continue;
             }
             // leave `indoor` tag on the area
             if (isIndoorArea && key === 'indoor') {
@@ -97,8 +117,10 @@ export function actionExtract(entityID, projection) {
             pointTags[key] = entityTags[key];
 
             // leave addresses and some other tags so they're on both features
-            if (keysToCopyAndRetain.indexOf(key) !== -1 ||
-                key.match(/^addr:.{1,}/)) {
+            if (
+                keysToCopyAndRetain.indexOf(key) !== -1 ||
+                key.match(/^addr:.{1,}/)
+            ) {
                 continue;
             } else if (isIndoorArea && key === 'level') {
                 // leave `level` on both features
@@ -119,10 +141,10 @@ export function actionExtract(entityID, projection) {
 
         extractedNodeID = replacement.id;
 
-        return graph.replace(entity.update({tags: entityTags}));
+        return graph.replace(entity.update({ tags: entityTags }));
     }
 
-    action.getExtractedNodeID = function() {
+    action.getExtractedNodeID = function () {
         return extractedNodeID;
     };
 

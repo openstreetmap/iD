@@ -1,7 +1,11 @@
+import {
+    geoAngle,
+    geoLineIntersection,
+    geoVecInterp,
+    geoVecLength,
+} from '../geo';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
-import { geoAngle, geoLineIntersection, geoVecInterp, geoVecLength } from '../geo';
-
 
 export function svgMidpoints(projection, context) {
     var targetRadius = 8;
@@ -10,45 +14,56 @@ export function svgMidpoints(projection, context) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var getTransform = svgPointTransform(projection).geojson;
 
-        var data = entities.map(function(midpoint) {
+        var data = entities.map(function (midpoint) {
             return {
                 type: 'Feature',
                 id: midpoint.id,
                 properties: {
                     target: true,
-                    entity: midpoint
+                    entity: midpoint,
                 },
                 geometry: {
                     type: 'Point',
-                    coordinates: midpoint.loc
-                }
+                    coordinates: midpoint.loc,
+                },
             };
         });
 
-        var targets = selection.selectAll('.midpoint.target')
-            .filter(function(d) { return filter(d.properties.entity); })
-            .data(data, function key(d) { return d.id; });
+        var targets = selection
+            .selectAll('.midpoint.target')
+            .filter(function (d) {
+                return filter(d.properties.entity);
+            })
+            .data(data, function key(d) {
+                return d.id;
+            });
 
         // exit
-        targets.exit()
-            .remove();
+        targets.exit().remove();
 
         // enter/update
-        targets.enter()
+        targets
+            .enter()
             .append('circle')
             .attr('r', targetRadius)
             .merge(targets)
-            .attr('class', function(d) { return 'node midpoint target ' + fillClass + d.id; })
+            .attr('class', function (d) {
+                return 'node midpoint target ' + fillClass + d.id;
+            })
             .attr('transform', getTransform);
     }
 
-
     function drawMidpoints(selection, graph, entities, filter, extent) {
-        var drawLayer = selection.selectAll('.layer-osm.points .points-group.midpoints');
+        var drawLayer = selection.selectAll(
+            '.layer-osm.points .points-group.midpoints',
+        );
         var touchLayer = selection.selectAll('.layer-touch.points');
 
         var mode = context.mode();
-        if ((mode && mode.id !== 'select') || !context.map().withinEditableZoom()) {
+        if (
+            (mode && mode.id !== 'select') ||
+            !context.map().withinEditableZoom()
+        ) {
             drawLayer.selectAll('.midpoint').remove();
             touchLayer.selectAll('.midpoint.target').remove();
             return;
@@ -72,7 +87,9 @@ export function svgMidpoints(projection, context) {
 
                 if (midpoints[id]) {
                     midpoints[id].parents.push(entity);
-                } else if (geoVecLength(projection(a.loc), projection(b.loc)) > 40) {
+                } else if (
+                    geoVecLength(projection(a.loc), projection(b.loc)) > 40
+                ) {
                     var point = geoVecInterp(a.loc, b.loc, 0.5);
                     var loc = null;
 
@@ -80,10 +97,21 @@ export function svgMidpoints(projection, context) {
                         loc = point;
                     } else {
                         for (var k = 0; k < 4; k++) {
-                            point = geoLineIntersection([a.loc, b.loc], [poly[k], poly[k + 1]]);
-                            if (point &&
-                                geoVecLength(projection(a.loc), projection(point)) > 20 &&
-                                geoVecLength(projection(b.loc), projection(point)) > 20) {
+                            point = geoLineIntersection(
+                                [a.loc, b.loc],
+                                [poly[k], poly[k + 1]],
+                            );
+                            if (
+                                point &&
+                                geoVecLength(
+                                    projection(a.loc),
+                                    projection(point),
+                                ) > 20 &&
+                                geoVecLength(
+                                    projection(b.loc),
+                                    projection(point),
+                                ) > 20
+                            ) {
                                 loc = point;
                                 break;
                             }
@@ -96,13 +124,12 @@ export function svgMidpoints(projection, context) {
                             id: id,
                             loc: loc,
                             edge: [a.id, b.id],
-                            parents: [entity]
+                            parents: [entity],
                         };
                     }
                 }
             }
         }
-
 
         function midpointFilter(d) {
             if (midpoints[d.id]) return true;
@@ -116,15 +143,17 @@ export function svgMidpoints(projection, context) {
             return false;
         }
 
-
-        var groups = drawLayer.selectAll('.midpoint')
+        var groups = drawLayer
+            .selectAll('.midpoint')
             .filter(midpointFilter)
-            .data(Object.values(midpoints), function(d) { return d.id; });
+            .data(Object.values(midpoints), function (d) {
+                return d.id;
+            });
 
-        groups.exit()
-            .remove();
+        groups.exit().remove();
 
-        var enter = groups.enter()
+        var enter = groups
+            .enter()
             .insert('g', ':first-child')
             .attr('class', 'midpoint');
 
@@ -140,25 +169,30 @@ export function svgMidpoints(projection, context) {
 
         groups = groups
             .merge(enter)
-            .attr('transform', function(d) {
+            .attr('transform', function (d) {
                 var translate = svgPointTransform(projection);
                 var a = graph.entity(d.edge[0]);
                 var b = graph.entity(d.edge[1]);
                 var angle = geoAngle(a, b, projection) * (180 / Math.PI);
                 return translate(d) + ' rotate(' + angle + ')';
             })
-            .call(svgTagClasses().tags(
-                function(d) { return d.parents[0].tags; }
-            ));
+            .call(
+                svgTagClasses().tags(function (d) {
+                    return d.parents[0].tags;
+                }),
+            );
 
         // Propagate data bindings.
         groups.select('polygon.shadow');
         groups.select('polygon.fill');
 
-
         // Draw touch targets..
-        touchLayer
-            .call(drawTargets, graph, Object.values(midpoints), midpointFilter);
+        touchLayer.call(
+            drawTargets,
+            graph,
+            Object.values(midpoints),
+            midpointFilter,
+        );
     }
 
     return drawMidpoints;

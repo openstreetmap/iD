@@ -1,10 +1,9 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
-import { uiConfirm } from '../confirm';
+import { prefs } from '../../core/preferences';
 import { utilNoAuto, utilRebind } from '../../util';
-
+import { uiConfirm } from '../confirm';
 
 export function uiSettingsCustomData(context) {
     var dispatch = d3_dispatch('change');
@@ -15,7 +14,7 @@ export function uiSettingsCustomData(context) {
         // keep separate copies of original and current settings
         var _origSettings = {
             fileList: (dataLayer && dataLayer.fileList()) || null,
-            url: prefs('settings-custom-data-url')
+            url: prefs('settings-custom-data-url'),
         };
         var _currSettings = {
             fileList: (dataLayer && dataLayer.fileList()) || null,
@@ -25,13 +24,12 @@ export function uiSettingsCustomData(context) {
         // var example = 'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png';
         var modal = uiConfirm(selection).okButton();
 
-        modal
-            .classed('settings-modal settings-custom-data', true);
+        modal.classed('settings-modal settings-custom-data', true);
 
-        modal.select('.modal-section.header')
+        modal
+            .select('.modal-section.header')
             .append('h3')
             .call(t.append('settings.custom_data.header'));
-
 
         var textSection = modal.select('.modal-section.message-text');
 
@@ -44,9 +42,12 @@ export function uiSettingsCustomData(context) {
             .append('input')
             .attr('class', 'field-file')
             .attr('type', 'file')
-            .attr('accept', '.gpx,.kml,.geojson,.json,application/gpx+xml,application/vnd.google-earth.kml+xml,application/geo+json,application/json')
+            .attr(
+                'accept',
+                '.gpx,.kml,.geojson,.json,application/gpx+xml,application/vnd.google-earth.kml+xml,application/geo+json,application/json',
+            )
             .property('files', _currSettings.fileList)
-            .on('change', function(d3_event) {
+            .on('change', function (d3_event) {
                 var files = d3_event.target.files;
                 if (files && files.length) {
                     _currSettings.url = '';
@@ -57,9 +58,7 @@ export function uiSettingsCustomData(context) {
                 }
             });
 
-        textSection
-            .append('h4')
-            .call(t.append('settings.custom_data.or'));
+        textSection.append('h4').call(t.append('settings.custom_data.or'));
 
         textSection
             .append('pre')
@@ -73,7 +72,6 @@ export function uiSettingsCustomData(context) {
             .call(utilNoAuto)
             .property('value', _currSettings.url);
 
-
         // insert a cancel button
         var buttonSection = modal.select('.modal-section.buttons');
 
@@ -82,23 +80,22 @@ export function uiSettingsCustomData(context) {
             .attr('class', 'button cancel-button secondary-action')
             .call(t.append('confirm.cancel'));
 
+        buttonSection.select('.cancel-button').on('click.cancel', clickCancel);
 
-        buttonSection.select('.cancel-button')
-            .on('click.cancel', clickCancel);
-
-        buttonSection.select('.ok-button')
+        buttonSection
+            .select('.ok-button')
             .attr('disabled', isSaveDisabled)
             .on('click.save', clickSave);
-
 
         function isSaveDisabled() {
             return null;
         }
 
-
         // restore the original url
         function clickCancel() {
-            textSection.select('.field-url').property('value', _origSettings.url);
+            textSection
+                .select('.field-url')
+                .property('value', _origSettings.url);
             prefs('settings-custom-data-url', _origSettings.url);
             this.blur();
             modal.close();
@@ -106,11 +103,18 @@ export function uiSettingsCustomData(context) {
 
         // accept the current url
         function clickSave() {
-            _currSettings.url = textSection.select('.field-url').property('value').trim();
+            _currSettings.url = textSection
+                .select('.field-url')
+                .property('value')
+                .trim();
 
             // one or the other but not both
-            if (_currSettings.url) { _currSettings.fileList = null; }
-            if (_currSettings.fileList) { _currSettings.url = ''; }
+            if (_currSettings.url) {
+                _currSettings.fileList = null;
+            }
+            if (_currSettings.fileList) {
+                _currSettings.url = '';
+            }
 
             prefs('settings-custom-data-url', _currSettings.url);
             this.blur();

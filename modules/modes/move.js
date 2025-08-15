@@ -1,34 +1,32 @@
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { t } from '../core/localizer';
 
 import { actionMove } from '../actions/move';
 import { actionNoop } from '../actions/noop';
 import { behaviorEdit } from '../behavior/edit';
-import { geoVecLength, geoVecSubtract } from '../geo/vector';
 import { geoViewportEdge } from '../geo/geom';
-import { modeBrowse } from './browse';
-import { modeSelect } from './select';
+import { geoVecLength, geoVecSubtract } from '../geo/vector';
 import { utilKeybinding } from '../util';
 import { utilFastMouse } from '../util/util';
-
+import { modeBrowse } from './browse';
+import { modeSelect } from './select';
 
 import { operationCircularize } from '../operations/circularize';
 import { operationDelete } from '../operations/delete';
 import { operationOrthogonalize } from '../operations/orthogonalize';
-import { operationReflectLong, operationReflectShort } from '../operations/reflect';
+import {
+    operationReflectLong,
+    operationReflectShort,
+} from '../operations/reflect';
 import { operationRotate } from '../operations/rotate';
 
-
 export function modeMove(context, entityIDs, baseGraph) {
-
     var _tolerancePx = 4; // see also behaviorDrag, behaviorSelect, modeRotate
 
     var mode = {
         id: 'move',
-        button: 'browse'
+        button: 'browse',
     };
 
     var keybinding = utilKeybinding('move');
@@ -39,11 +37,15 @@ export function modeMove(context, entityIDs, baseGraph) {
         operationOrthogonalize(context, entityIDs).behavior,
         operationReflectLong(context, entityIDs).behavior,
         operationReflectShort(context, entityIDs).behavior,
-        operationRotate(context, entityIDs).behavior
+        operationRotate(context, entityIDs).behavior,
     ];
-    var annotation = entityIDs.length === 1 ?
-        t('operations.move.annotation.' + context.graph().geometry(entityIDs[0])) :
-        t('operations.move.annotation.feature', { n: entityIDs.length });
+    var annotation =
+        entityIDs.length === 1
+            ? t(
+                  'operations.move.annotation.' +
+                      context.graph().geometry(entityIDs[0]),
+              )
+            : t('operations.move.annotation.feature', { n: entityIDs.length });
 
     var _prevGraph;
     var _cache;
@@ -52,7 +54,6 @@ export function modeMove(context, entityIDs, baseGraph) {
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
-
 
     function doMove(nudge) {
         nudge = nudge || [0, 0];
@@ -63,7 +64,7 @@ export function modeMove(context, entityIDs, baseGraph) {
             _origMouseCoords = context.map().mouseCoordinates();
             fn = context.perform;
         } else {
-            fn = action => {
+            fn = (action) => {
                 context.pop();
                 context.perform(action);
             };
@@ -72,21 +73,22 @@ export function modeMove(context, entityIDs, baseGraph) {
         const currMouseCoords = context.map().mouseCoordinates();
         const currMouse = context.projection(currMouseCoords);
         const origMouse = context.projection(_origMouseCoords);
-        const delta = geoVecSubtract(geoVecSubtract(currMouse, origMouse), nudge);
+        const delta = geoVecSubtract(
+            geoVecSubtract(currMouse, origMouse),
+            nudge,
+        );
 
         fn(actionMove(entityIDs, delta, context.projection, _cache));
         _prevGraph = context.graph();
     }
 
-
     function startNudge(nudge) {
         if (_nudgeInterval) window.clearInterval(_nudgeInterval);
-        _nudgeInterval = window.setInterval(function() {
+        _nudgeInterval = window.setInterval(function () {
             context.map().pan(nudge);
             doMove(nudge);
         }, 50);
     }
-
 
     function stopNudge() {
         if (_nudgeInterval) {
@@ -95,17 +97,18 @@ export function modeMove(context, entityIDs, baseGraph) {
         }
     }
 
-
     function move() {
         doMove();
-        var nudge = geoViewportEdge(context.map().mouse(), context.map().dimensions());
+        var nudge = geoViewportEdge(
+            context.map().mouse(),
+            context.map().dimensions(),
+        );
         if (nudge) {
             startNudge(nudge);
         } else {
             stopNudge();
         }
     }
-
 
     function finish(d3_event) {
         d3_event.stopPropagation();
@@ -114,25 +117,22 @@ export function modeMove(context, entityIDs, baseGraph) {
         stopNudge();
     }
 
-
     function cancel() {
         if (baseGraph) {
-            while (context.graph() !== baseGraph) context.pop();  // reset to baseGraph
+            while (context.graph() !== baseGraph) context.pop(); // reset to baseGraph
             context.enter(modeBrowse(context));
         } else {
-            if (_prevGraph) context.pop();   // remove the move
+            if (_prevGraph) context.pop(); // remove the move
             context.enter(modeSelect(context, entityIDs));
         }
         stopNudge();
     }
 
-
     function undone() {
         context.enter(modeBrowse(context));
     }
 
-
-    mode.enter = function() {
+    mode.enter = function () {
         _origMouseCoords = context.map().mouseCoordinates();
         _prevGraph = null;
         _cache = {};
@@ -143,73 +143,70 @@ export function modeMove(context, entityIDs, baseGraph) {
 
         var downEvent;
 
-        context.surface()
-            .on(_pointerPrefix + 'down.modeMove', function(d3_event) {
+        context
+            .surface()
+            .on(_pointerPrefix + 'down.modeMove', function (d3_event) {
                 downEvent = d3_event;
             });
 
         d3_select(window)
             .on(_pointerPrefix + 'move.modeMove', move, true)
-            .on(_pointerPrefix + 'up.modeMove', function(d3_event) {
-                if (!downEvent) return;
-                var mapNode = context.container().select('.main-map').node();
-                var pointGetter = utilFastMouse(mapNode);
-                var p1 = pointGetter(downEvent);
-                var p2 = pointGetter(d3_event);
-                var dist = geoVecLength(p1, p2);
+            .on(
+                _pointerPrefix + 'up.modeMove',
+                function (d3_event) {
+                    if (!downEvent) return;
+                    var mapNode = context
+                        .container()
+                        .select('.main-map')
+                        .node();
+                    var pointGetter = utilFastMouse(mapNode);
+                    var p1 = pointGetter(downEvent);
+                    var p2 = pointGetter(d3_event);
+                    var dist = geoVecLength(p1, p2);
 
-                if (dist <= _tolerancePx) finish(d3_event);
-                downEvent = null;
-            }, true);
+                    if (dist <= _tolerancePx) finish(d3_event);
+                    downEvent = null;
+                },
+                true,
+            );
 
-        context.history()
-            .on('undone.modeMove', undone);
+        context.history().on('undone.modeMove', undone);
 
-        keybinding
-            .on('⎋', cancel)
-            .on('↩', finish);
+        keybinding.on('⎋', cancel).on('↩', finish);
 
-        d3_select(document)
-            .call(keybinding);
+        d3_select(document).call(keybinding);
     };
 
-
-    mode.exit = function() {
+    mode.exit = function () {
         stopNudge();
 
-        behaviors.forEach(function(behavior) {
+        behaviors.forEach(function (behavior) {
             context.uninstall(behavior);
         });
 
-        context.surface()
-            .on(_pointerPrefix + 'down.modeMove', null);
+        context.surface().on(_pointerPrefix + 'down.modeMove', null);
 
         d3_select(window)
             .on(_pointerPrefix + 'move.modeMove', null, true)
             .on(_pointerPrefix + 'up.modeMove', null, true);
 
-        context.history()
-            .on('undone.modeMove', null);
+        context.history().on('undone.modeMove', null);
 
-        d3_select(document)
-            .call(keybinding.unbind);
+        d3_select(document).call(keybinding.unbind);
 
         context.features().forceVisible([]);
     };
 
-
-    mode.selectedIDs = function() {
+    mode.selectedIDs = function () {
         if (!arguments.length) return entityIDs;
         // no assign
         return mode;
     };
 
-
-    mode.annotation = function(_annotation) {
+    mode.annotation = function (_annotation) {
         annotation = _annotation;
         return mode;
     };
-
 
     return mode;
 }

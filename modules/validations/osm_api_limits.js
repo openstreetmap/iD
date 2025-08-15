@@ -13,24 +13,34 @@ export function validationOsmApiLimits(context) {
 
         if (entity.type === 'way') {
             if (entity.nodes.length > maxWayNodes) {
-                issues.push(new validationIssue({
-                    type: type,
-                    subtype: 'exceededMaxWayNodes',
-                    severity: 'error',
-                    message: function() {
-                        return t.html('issues.osm_api_limits.max_way_nodes.message');
-                    },
-                    reference: function(selection) {
-                        selection.selectAll('.issue-reference')
-                            .data([0])
-                            .enter()
-                            .append('div')
-                            .attr('class', 'issue-reference')
-                            .html(t.html('issues.osm_api_limits.max_way_nodes.reference', { maxWayNodes }));
-                    },
-                    entityIds: [entity.id],
-                    dynamicFixes: splitWayIntoSmallChunks
-                }));
+                issues.push(
+                    new validationIssue({
+                        type: type,
+                        subtype: 'exceededMaxWayNodes',
+                        severity: 'error',
+                        message: function () {
+                            return t.html(
+                                'issues.osm_api_limits.max_way_nodes.message',
+                            );
+                        },
+                        reference: function (selection) {
+                            selection
+                                .selectAll('.issue-reference')
+                                .data([0])
+                                .enter()
+                                .append('div')
+                                .attr('class', 'issue-reference')
+                                .html(
+                                    t.html(
+                                        'issues.osm_api_limits.max_way_nodes.reference',
+                                        { maxWayNodes },
+                                    ),
+                                );
+                        },
+                        entityIds: [entity.id],
+                        dynamicFixes: splitWayIntoSmallChunks,
+                    }),
+                );
             }
         }
 
@@ -42,29 +52,35 @@ export function validationOsmApiLimits(context) {
             icon: 'iD-operation-split',
             title: t.html('issues.fix.split_way.title'),
             entityIds: this.entityIds,
-            onClick: function(context) {
+            onClick: function (context) {
                 const maxWayNodes = context.connection().maxWayNodes();
                 const g = context.graph();
 
                 const entityId = this.entityIds[0];
                 const entity = context.graph().entities[entityId];
-                const numberOfParts = Math.ceil(entity.nodes.length / maxWayNodes);
+                const numberOfParts = Math.ceil(
+                    entity.nodes.length / maxWayNodes,
+                );
                 let splitVertices;
 
                 if (numberOfParts === 2) {
                     // simple case: try to split at the an intersection vertex
                     const splitIntersections = entity.nodes
-                        .map(nid => g.entity(nid))
-                        .filter(n => g.parentWays(n).length > 1)
-                        .map(n => n.id)
-                        .filter(nid => {
+                        .map((nid) => g.entity(nid))
+                        .filter((n) => g.parentWays(n).length > 1)
+                        .map((n) => n.id)
+                        .filter((nid) => {
                             const splitIndex = entity.nodes.indexOf(nid);
-                            return splitIndex < maxWayNodes &&
-                                entity.nodes.length - splitIndex < maxWayNodes;
+                            return (
+                                splitIndex < maxWayNodes &&
+                                entity.nodes.length - splitIndex < maxWayNodes
+                            );
                         });
                     if (splitIntersections.length > 0) {
                         splitVertices = [
-                            splitIntersections[Math.floor(splitIntersections.length / 2)]
+                            splitIntersections[
+                                Math.floor(splitIntersections.length / 2)
+                            ],
                         ];
                     }
                 }
@@ -72,8 +88,15 @@ export function validationOsmApiLimits(context) {
                 if (splitVertices === undefined) {
                     // general case: either more than one split is needed or no possible
                     // intersection split point was found -> just split at regular intervals
-                    splitVertices = [...Array(numberOfParts - 1)].map((_, i) =>
-                        entity.nodes[Math.floor(entity.nodes.length * (i + 1) / numberOfParts)]);
+                    splitVertices = [...Array(numberOfParts - 1)].map(
+                        (_, i) =>
+                            entity.nodes[
+                                Math.floor(
+                                    (entity.nodes.length * (i + 1)) /
+                                        numberOfParts,
+                                )
+                            ],
+                    );
                 }
 
                 if (entity.isClosed()) {
@@ -81,16 +104,18 @@ export function validationOsmApiLimits(context) {
                     splitVertices.push(entity.nodes[0]);
                 }
 
-                const operation = operationSplit(context, splitVertices.concat(entityId));
+                const operation = operationSplit(
+                    context,
+                    splitVertices.concat(entityId),
+                );
                 if (!operation.disabled()) {
                     operation();
                 }
-            }
+            },
         });
 
         return [fix];
     }
-
 
     validation.type = type;
 

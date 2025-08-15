@@ -1,18 +1,22 @@
-describe('iD.behaviorHover', function() {
+describe('iD.behaviorHover', function () {
     var _container;
     var _context;
     var _graph;
 
-    beforeEach(function() {
+    beforeEach(function () {
         _container = d3.select('body').append('div');
         _context = {
-            hover: function() {},
-            mode: function() { return { id: 'browse' }; },
-            hasEntity: function(d) { return _graph && _graph.hasEntity(d); }
+            hover: function () {},
+            mode: function () {
+                return { id: 'browse' };
+            },
+            hasEntity: function (d) {
+                return _graph && _graph.hasEntity(d);
+            },
         };
     });
 
-    afterEach(function() {
+    afterEach(function () {
         _container.remove();
         _graph = null;
     });
@@ -32,13 +36,18 @@ describe('iD.behaviorHover', function() {
 
     describe('mouseover and mouseout', function () {
         it('adds the .hover class to all elements to which the same datum is bound', function () {
-            var a = iD.osmNode({id: 'a'});
-            var b = iD.osmNode({id: 'b'});
+            var a = iD.osmNode({ id: 'a' });
+            var b = iD.osmNode({ id: 'b' });
             _graph = iD.coreGraph([a, b]);
 
-            _container.selectAll('span')
+            _container
+                .selectAll('span')
                 .data([a, b, a, b])
-                .enter().append('span').attr('class', function(d) { return d.id; });
+                .enter()
+                .append('span')
+                .attr('class', function (d) {
+                    return d.id;
+                });
 
             _container.call(iD.behaviorHover(_context));
             iD.utilTriggerEvent(_container.select('.a'), 'mouseover');
@@ -50,14 +59,19 @@ describe('iD.behaviorHover', function() {
             expect(_container.selectAll('.hover').size()).to.eql(0);
         });
 
-        it('adds the .hover class to all members of a relation', function() {
-            var a = iD.osmRelation({id: 'a', members: [{id: 'b'}]});
-            var b = iD.osmNode({id: 'b'});
+        it('adds the .hover class to all members of a relation', function () {
+            var a = iD.osmRelation({ id: 'a', members: [{ id: 'b' }] });
+            var b = iD.osmNode({ id: 'b' });
             _graph = iD.coreGraph([a, b]);
 
-            _container.selectAll('span')
+            _container
+                .selectAll('span')
                 .data([a, b])
-                .enter().append('span').attr('class', function(d) { return d.id; });
+                .enter()
+                .append('span')
+                .attr('class', function (d) {
+                    return d.id;
+                });
 
             _container.call(iD.behaviorHover(_context));
             iD.utilTriggerEvent(_container.selectAll('.a'), 'mouseover');

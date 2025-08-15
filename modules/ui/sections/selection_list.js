@@ -1,34 +1,35 @@
 import { select as d3_select } from 'd3-selection';
 
-import { presetManager } from '../../presets';
+import { t } from '../../core/localizer';
 import { modeSelect } from '../../modes/select';
 import { osmEntity } from '../../osm';
+import { presetManager } from '../../presets';
 import { svgIcon } from '../../svg/icon';
-import { uiSection } from '../section';
-import { t } from '../../core/localizer';
 import { utilDisplayName, utilHighlightEntities } from '../../util';
+import { uiSection } from '../section';
 
 export function uiSectionSelectionList(context) {
-
     var _selectedIDs = [];
 
     var section = uiSection('selected-features', context)
-        .shouldDisplay(function() {
+        .shouldDisplay(function () {
             return _selectedIDs.length > 1;
         })
-        .label(function() {
-            return t.append('inspector.title_count', { title: t('inspector.features'), count: _selectedIDs.length });
+        .label(function () {
+            return t.append('inspector.title_count', {
+                title: t('inspector.features'),
+                count: _selectedIDs.length,
+            });
         })
         .disclosureContent(renderDisclosureContent);
 
-    context.history()
-        .on('change.selectionList', function(difference) {
-            if (difference) {
-                section.reRender();
-            }
-        });
+    context.history().on('change.selectionList', function (difference) {
+        if (difference) {
+            section.reRender();
+        }
+    });
 
-    section.entityIDs = function(val) {
+    section.entityIDs = function (val) {
         if (!arguments.length) return _selectedIDs;
         _selectedIDs = val;
         return section;
@@ -48,35 +49,37 @@ export function uiSectionSelectionList(context) {
     }
 
     function renderDisclosureContent(selection) {
+        var list = selection.selectAll('.feature-list').data([0]);
 
-        var list = selection.selectAll('.feature-list')
-            .data([0]);
-
-        list = list.enter()
+        list = list
+            .enter()
             .append('ul')
             .attr('class', 'feature-list')
             .merge(list);
 
         var entities = _selectedIDs
-            .map(function(id) { return context.hasEntity(id); })
+            .map(function (id) {
+                return context.hasEntity(id);
+            })
             .filter(Boolean);
 
-        var items = list.selectAll('.feature-list-item')
+        var items = list
+            .selectAll('.feature-list-item')
             .data(entities, osmEntity.key);
 
-        items.exit()
-            .remove();
+        items.exit().remove();
 
         // Enter
-        var enter = items.enter()
+        var enter = items
+            .enter()
             .append('li')
             .attr('class', 'feature-list-item')
-            .each(function(d) {
+            .each(function (d) {
                 d3_select(this)
-                    .on('mouseover', function() {
+                    .on('mouseover', function () {
                         utilHighlightEntities([d.id], true, context);
                     })
-                    .on('mouseout', function() {
+                    .on('mouseout', function () {
                         utilHighlightEntities([d.id], false, context);
                     });
             });
@@ -91,13 +94,9 @@ export function uiSectionSelectionList(context) {
             .attr('class', 'entity-geom-icon')
             .call(svgIcon('', 'pre-text'));
 
-        label
-            .append('span')
-            .attr('class', 'entity-type');
+        label.append('span').attr('class', 'entity-type');
 
-        label
-            .append('span')
-            .attr('class', 'entity-name');
+        label.append('span').attr('class', 'entity-name');
 
         enter
             .append('button')
@@ -109,21 +108,20 @@ export function uiSectionSelectionList(context) {
         // Update
         items = items.merge(enter);
 
-        items.selectAll('.entity-geom-icon use')
-            .attr('href', function() {
-                var entity = this.parentNode.parentNode.__data__;
-                return '#iD-icon-' + entity.geometry(context.graph());
-            });
+        items.selectAll('.entity-geom-icon use').attr('href', function () {
+            var entity = this.parentNode.parentNode.__data__;
+            return '#iD-icon-' + entity.geometry(context.graph());
+        });
 
-        items.selectAll('.entity-type')
-            .text(function(entity) { return presetManager.match(entity, context.graph()).name(); });
+        items.selectAll('.entity-type').text(function (entity) {
+            return presetManager.match(entity, context.graph()).name();
+        });
 
-        items.selectAll('.entity-name')
-            .text(function(d) {
-                // fetch latest entity
-                var entity = context.entity(d.id);
-                return utilDisplayName(entity);
-            });
+        items.selectAll('.entity-name').text(function (d) {
+            // fetch latest entity
+            var entity = context.entity(d.id);
+            return utilDisplayName(entity);
+        });
     }
 
     return section;

@@ -13,12 +13,18 @@ export function utilSessionMutex(name) {
 
         var expires = new Date();
         expires.setSeconds(expires.getSeconds() + 5);
-        document.cookie = name + '=1; expires=' + expires.toUTCString() + '; sameSite=strict';
+        document.cookie =
+            name + '=1; expires=' + expires.toUTCString() + '; sameSite=strict';
     }
 
     mutex.lock = function () {
         if (intervalID) return true;
-        var cookie = document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + name + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1');
+        var cookie = document.cookie.replace(
+            new RegExp(
+                '(?:(?:^|.*;)\\s*' + name + '\\s*\\=\\s*([^;]*).*$)|^.*$',
+            ),
+            '$1',
+        );
         if (cookie) return false;
         renew();
         intervalID = window.setInterval(renew, 4000);
@@ -27,7 +33,8 @@ export function utilSessionMutex(name) {
 
     mutex.unlock = function () {
         if (!intervalID) return;
-        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; sameSite=strict';
+        document.cookie =
+            name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; sameSite=strict';
         clearInterval(intervalID);
         intervalID = null;
     };

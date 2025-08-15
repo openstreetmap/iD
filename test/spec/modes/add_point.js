@@ -1,12 +1,17 @@
-describe.skip('iD.modeAddPoint', function() {
+describe.skip('iD.modeAddPoint', function () {
     var context;
 
-    beforeEach(function() {
+    beforeEach(function () {
         var container = d3.select(document.createElement('div'));
-        context = iD.coreContext().assetPath('../dist/').container(container).init();
+        context = iD
+            .coreContext()
+            .assetPath('../dist/')
+            .container(container)
+            .init();
         context.loadTiles = function () {};
 
-        container.call(context.map())
+        container
+            .call(context.map())
             .append('div')
             .attr('class', 'inspector-wrap');
 
@@ -15,7 +20,7 @@ describe.skip('iD.modeAddPoint', function() {
     });
 
     describe('clicking the map', function () {
-        it('adds a point', function() {
+        it('adds a point', function () {
             happen.mousedown(context.surface().node(), {});
             happen.mouseup(window, {});
             expect(context.history().changes().created).to.have.length(1);
@@ -23,11 +28,13 @@ describe.skip('iD.modeAddPoint', function() {
             d3.select('window').on('click.draw-block', null);
         });
 
-        it('selects an existing point rather than adding a new one', function() {
+        it('selects an existing point rather than adding a new one', function () {
             happen.mousedown(context.surface().node(), {});
             happen.mouseup(window, {});
             expect(context.mode().id).to.equal('select');
-            expect(context.mode().selectedIDs()).to.eql([context.history().changes().created[0].id]);
+            expect(context.mode().selectedIDs()).to.eql([
+                context.history().changes().created[0].id,
+            ]);
             context.mode().exit();
         });
     });

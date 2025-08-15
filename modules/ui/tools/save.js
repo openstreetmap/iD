@@ -6,12 +6,10 @@ import { svgIcon } from '../../svg';
 import { uiCmd } from '../cmd';
 import { uiTooltip } from '../tooltip';
 
-
 export function uiToolSave(context) {
-
     var tool = {
         id: 'save',
-        label: t.append('save.title')
+        label: t.append('save.title'),
     };
 
     var button = null;
@@ -42,10 +40,10 @@ export function uiToolSave(context) {
             return null;
         } else if (numChanges <= 50) {
             step = numChanges / 50;
-            return d3_interpolateRgb('#fff0', '#ff08')(step);  // transparent -> yellow
+            return d3_interpolateRgb('#fff0', '#ff08')(step); // transparent -> yellow
         } else {
             step = Math.min((numChanges - 50) / 50, 1.0);
-            return d3_interpolateRgb('#ff08', '#f008')(step);  // yellow -> red
+            return d3_interpolateRgb('#ff08', '#f008')(step); // yellow -> red
         }
     }
 
@@ -57,7 +55,9 @@ export function uiToolSave(context) {
 
         if (tooltipBehavior) {
             tooltipBehavior
-                .title(() => t.append(_numChanges > 0 ? 'save.help' : 'save.no_changes'))
+                .title(() =>
+                    t.append(_numChanges > 0 ? 'save.help' : 'save.no_changes'),
+                )
                 .keys([key]);
         }
 
@@ -66,13 +66,11 @@ export function uiToolSave(context) {
                 .classed('disabled', isDisabled())
                 .style('--accent-color', bgColor(_numChanges));
 
-            button.select('span.count')
-                .text(_numChanges);
+            button.select('span.count').text(_numChanges);
         }
     }
 
-
-    tool.render = function(selection) {
+    tool.render = function (selection) {
         tooltipBehavior = uiTooltip()
             .placement('bottom')
             .title(() => t.append('save.no_changes'))
@@ -84,19 +82,21 @@ export function uiToolSave(context) {
         button = selection
             .append('button')
             .attr('class', 'save disabled bar-button')
-            .on('pointerup', function(d3_event) {
+            .on('pointerup', function (d3_event) {
                 lastPointerUpType = d3_event.pointerType;
             })
-            .on('click', function(d3_event) {
+            .on('click', function (d3_event) {
                 save(d3_event);
 
-                if (_numChanges === 0 && (
-                    lastPointerUpType === 'touch' ||
-                    lastPointerUpType === 'pen')
+                if (
+                    _numChanges === 0 &&
+                    (lastPointerUpType === 'touch' ||
+                        lastPointerUpType === 'pen')
                 ) {
                     // there are no tooltips for touch interactions so flash feedback instead
-                    context.ui().flash
-                        .duration(2000)
+                    context
+                        .ui()
+                        .flash.duration(2000)
                         .iconName('#iD-icon-save')
                         .iconClass('disabled')
                         .label(t.append('save.no_changes'))();
@@ -105,8 +105,7 @@ export function uiToolSave(context) {
             })
             .call(tooltipBehavior);
 
-        button
-            .call(svgIcon('#iD-icon-save'));
+        button.call(svgIcon('#iD-icon-save'));
 
         button
             .append('span')
@@ -116,37 +115,27 @@ export function uiToolSave(context) {
 
         updateCount();
 
+        context.keybinding().on(key, save, true);
 
-        context.keybinding()
-            .on(key, save, true);
+        context.history().on('change.save', updateCount);
 
+        context.on('enter.save', function () {
+            if (button) {
+                button.classed('disabled', isDisabled());
 
-        context.history()
-            .on('change.save', updateCount);
-
-        context
-            .on('enter.save', function() {
-                if (button) {
-                    button
-                        .classed('disabled', isDisabled());
-
-                    if (isSaving()) {
-                        button.call(tooltipBehavior.hide);
-                    }
+                if (isSaving()) {
+                    button.call(tooltipBehavior.hide);
                 }
-            });
+            }
+        });
     };
 
+    tool.uninstall = function () {
+        context.keybinding().off(key, true);
 
-    tool.uninstall = function() {
-        context.keybinding()
-            .off(key, true);
+        context.history().on('change.save', null);
 
-        context.history()
-            .on('change.save', null);
-
-        context
-            .on('enter.save', null);
+        context.on('enter.save', null);
 
         button = null;
         tooltipBehavior = null;

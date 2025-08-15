@@ -19,12 +19,12 @@ jobs:
     environment: workflows
 
     steps:
-    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-    - name: Install Transifex client
-      run: |
-        curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
-    - name: Push source strings to Transifex
-      env:
-        TX_TOKEN: ${{secrets.TX_TOKEN}}
-      if: env.TX_TOKEN != null
-      run: ./tx push --source --use-git-timestamps --skip id-editor.core
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - name: Install Transifex client
+        run: |
+          curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+      - name: Push source strings to Transifex
+        env:
+          TX_TOKEN: ${{secrets.TX_TOKEN}}
+        if: env.TX_TOKEN != null
+        run: ./tx push --source --use-git-timestamps --skip id-editor.core

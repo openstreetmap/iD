@@ -5,17 +5,32 @@ import { json as d3_json, xml as d3_xml } from 'd3-fetch';
 import { osmAuth } from 'osm-auth';
 import RBush from 'rbush';
 
-import { JXON } from '../util/jxon';
+import { localizer } from '../core/localizer.js';
 import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
 import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
-import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilObjectOmit, utilRebind, utilTiler, utilQsString } from '../util';
-import { localizer } from '../core/localizer.js';
+import {
+    utilArrayChunk,
+    utilArrayGroupBy,
+    utilArrayUniq,
+    utilObjectOmit,
+    utilQsString,
+    utilRebind,
+    utilTiler,
+} from '../util';
+import { JXON } from '../util/jxon';
 
 import { osmApiConnections } from '../../config/id.js';
 
-
 var tiler = utilTiler();
-var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
+var dispatch = d3_dispatch(
+    'apiStatusChange',
+    'authLoading',
+    'authDone',
+    'change',
+    'loading',
+    'loaded',
+    'loadedNotes',
+);
 
 var urlroot = osmApiConnections[0].url;
 var apiUrlroot = osmApiConnections[0].apiUrl || urlroot;
@@ -27,14 +42,30 @@ var oauth = osmAuth({
     scope: 'read_prefs write_prefs write_api read_gpx write_notes',
     redirect_uri: redirectPath + 'land.html',
     loading: authLoading,
-    done: authDone
+    done: authDone,
 });
 var _apiConnections = osmApiConnections;
 
 // hardcode default block of Google Maps
-var _imageryBlocklists = [/.*\.google(apis)?\..*\/(vt|kh)[\?\/].*([xyz]=.*){3}.*/];
-var _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: new RBush() };
-var _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: new RBush() };
+var _imageryBlocklists = [
+    /.*\.google(apis)?\..*\/(vt|kh)[\?\/].*([xyz]=.*){3}.*/,
+];
+var _tileCache = {
+    toLoad: {},
+    loaded: {},
+    inflight: {},
+    seen: {},
+    rtree: new RBush(),
+};
+var _noteCache = {
+    toLoad: {},
+    loaded: {},
+    inflight: {},
+    inflightPost: {},
+    note: {},
+    closed: {},
+    rtree: new RBush(),
+};
 var _userCache = { toLoad: {}, user: {} };
 var _cachedApiStatus;
 var _changeset = {};
@@ -51,16 +82,13 @@ var _off;
 // set a default but also load this from the API status
 var _maxWayNodes = 2000;
 
-
 function authLoading() {
     dispatch.call('authLoading');
 }
 
-
 function authDone() {
     dispatch.call('authDone');
 }
-
 
 function abortRequest(controllerOrXHR) {
     if (controllerOrXHR) {
@@ -68,29 +96,30 @@ function abortRequest(controllerOrXHR) {
     }
 }
 
-
 function hasInflightRequests(cache) {
     return Object.keys(cache.inflight).length;
 }
 
-
 function abortUnwantedRequests(cache, visibleTiles) {
-    Object.keys(cache.inflight).forEach(function(k) {
+    Object.keys(cache.inflight).forEach(function (k) {
         if (cache.toLoad[k]) return;
-        if (visibleTiles.find(function(tile) { return k === tile.id; })) return;
+        if (
+            visibleTiles.find(function (tile) {
+                return k === tile.id;
+            })
+        )
+            return;
 
         abortRequest(cache.inflight[k]);
         delete cache.inflight[k];
     });
 }
 
-
 function getLoc(attrs) {
     var lon = attrs.lon && attrs.lon.value;
     var lat = attrs.lat && attrs.lat.value;
     return [Number(lon), Number(lat)];
 }
-
 
 function getNodes(obj) {
     var elems = obj.getElementsByTagName('nd');
@@ -121,7 +150,6 @@ function getTags(obj) {
     return tags;
 }
 
-
 function getMembers(obj) {
     var elems = obj.getElementsByTagName('member');
     var members = new Array(elems.length);
@@ -130,7 +158,7 @@ function getMembers(obj) {
         members[i] = {
             id: attrs.type.value[0] + attrs.ref.value,
             type: attrs.type.value,
-            role: attrs.role.value
+            role: attrs.role.value,
         };
     }
     return members;
@@ -144,16 +172,15 @@ function getMembersJSON(obj) {
         members[i] = {
             id: attrs.type[0] + attrs.ref,
             type: attrs.type,
-            role: attrs.role
+            role: attrs.role,
         };
     }
     return members;
 }
 
 function getVisible(attrs) {
-    return (!attrs.visible || attrs.visible.value !== 'false');
+    return !attrs.visible || attrs.visible.value !== 'false';
 }
-
 
 function parseComments(comments) {
     var parsedComments = [];
@@ -187,23 +214,20 @@ function parseComments(comments) {
     return parsedComments;
 }
 
-
 function encodeNoteRtree(note) {
     return {
         minX: note.loc[0],
         minY: note.loc[1],
         maxX: note.loc[0],
         maxY: note.loc[1],
-        data: note
+        data: note,
     };
 }
 
-
 var jsonparsers = {
-
     node: function nodeData(obj, uid) {
         return new osmNode({
-            id:  uid,
+            id: uid,
             visible: typeof obj.visible === 'boolean' ? obj.visible : true,
             version: obj.version && obj.version.toString(),
             changeset: obj.changeset && obj.changeset.toString(),
@@ -211,13 +235,13 @@ var jsonparsers = {
             user: obj.user,
             uid: obj.uid && obj.uid.toString(),
             loc: [Number(obj.lon), Number(obj.lat)],
-            tags: obj.tags
+            tags: obj.tags,
         });
     },
 
     way: function wayData(obj, uid) {
         return new osmWay({
-            id:  uid,
+            id: uid,
             visible: typeof obj.visible === 'boolean' ? obj.visible : true,
             version: obj.version && obj.version.toString(),
             changeset: obj.changeset && obj.changeset.toString(),
@@ -225,13 +249,13 @@ var jsonparsers = {
             user: obj.user,
             uid: obj.uid && obj.uid.toString(),
             tags: obj.tags,
-            nodes: getNodesJSON(obj)
+            nodes: getNodesJSON(obj),
         });
     },
 
     relation: function relationData(obj, uid) {
         return new osmRelation({
-            id:  uid,
+            id: uid,
             visible: typeof obj.visible === 'boolean' ? obj.visible : true,
             version: obj.version && obj.version.toString(),
             changeset: obj.changeset && obj.changeset.toString(),
@@ -239,7 +263,7 @@ var jsonparsers = {
             user: obj.user,
             uid: obj.uid && obj.uid.toString(),
             tags: obj.tags,
-            members: getMembersJSON(obj)
+            members: getMembersJSON(obj),
         });
     },
 
@@ -249,15 +273,24 @@ var jsonparsers = {
             display_name: obj.display_name,
             account_created: obj.account_created,
             image_url: obj.img && obj.img.href,
-            changesets_count: obj.changesets && obj.changesets.count && obj.changesets.count.toString() || '0',
-            active_blocks: obj.blocks && obj.blocks.received && obj.blocks.received.active && obj.blocks.received.active.toString() || '0'
+            changesets_count:
+                (obj.changesets &&
+                    obj.changesets.count &&
+                    obj.changesets.count.toString()) ||
+                '0',
+            active_blocks:
+                (obj.blocks &&
+                    obj.blocks.received &&
+                    obj.blocks.received.active &&
+                    obj.blocks.received.active.toString()) ||
+                '0',
         };
-    }
+    },
 };
 
 function parseJSON(payload, callback, options) {
     options = Object.assign({ skipSeen: true }, options);
-    if (!payload)  {
+    if (!payload) {
         return callback({ message: 'No JSON', status: -1 });
     }
 
@@ -268,7 +301,7 @@ function parseJSON(payload, callback, options) {
 
     var children = json.elements;
 
-    var handle = window.requestIdleCallback(function() {
+    var handle = window.requestIdleCallback(function () {
         _deferred.delete(handle);
         var results = [];
         var result;
@@ -288,7 +321,7 @@ function parseJSON(payload, callback, options) {
 
         uid = osmEntity.id.fromOSM(child.type, child.id);
         if (options.skipSeen) {
-            if (_tileCache.seen[uid]) return null;  // avoid reparsing a "seen" entity
+            if (_tileCache.seen[uid]) return null; // avoid reparsing a "seen" entity
             _tileCache.seen[uid] = true;
         }
 
@@ -298,18 +331,19 @@ function parseJSON(payload, callback, options) {
 
 function parseUserJSON(payload, callback, options) {
     options = Object.assign({ skipSeen: true }, options);
-    if (!payload)  {
+    if (!payload) {
         return callback({ message: 'No JSON', status: -1 });
     }
 
     var json = payload;
     if (typeof json !== 'object') json = JSON.parse(payload);
 
-    if (!json.users && !json.user) return callback({ message: 'No JSON', status: -1 });
+    if (!json.users && !json.user)
+        return callback({ message: 'No JSON', status: -1 });
 
     var objs = json.users || [json];
 
-    var handle = window.requestIdleCallback(function() {
+    var handle = window.requestIdleCallback(function () {
         _deferred.delete(handle);
         var results = [];
         var result;
@@ -346,7 +380,7 @@ var parsers = {
             user: attrs.user && attrs.user.value,
             uid: attrs.uid && attrs.uid.value,
             loc: getLoc(attrs),
-            tags: getTags(obj)
+            tags: getTags(obj),
         });
     },
 
@@ -376,7 +410,7 @@ var parsers = {
             user: attrs.user && attrs.user.value,
             uid: attrs.uid && attrs.uid.value,
             tags: getTags(obj),
-            members: getMembers(obj)
+            members: getMembers(obj),
         });
     },
 
@@ -431,9 +465,10 @@ var parsers = {
         var user = {
             id: uid,
             display_name: attrs.display_name && attrs.display_name.value,
-            account_created: attrs.account_created && attrs.account_created.value,
+            account_created:
+                attrs.account_created && attrs.account_created.value,
             changesets_count: '0',
-            active_blocks: '0'
+            active_blocks: '0',
         };
 
         var img = obj.getElementsByTagName('img');
@@ -442,7 +477,11 @@ var parsers = {
         }
 
         var changesets = obj.getElementsByTagName('changesets');
-        if (changesets && changesets[0] && changesets[0].getAttribute('count')) {
+        if (
+            changesets &&
+            changesets[0] &&
+            changesets[0].getAttribute('count')
+        ) {
             user.changesets_count = changesets[0].getAttribute('count');
         }
 
@@ -457,9 +496,8 @@ var parsers = {
         _userCache.user[uid] = user;
         delete _userCache.toLoad[uid];
         return user;
-    }
+    },
 };
-
 
 function parseXML(xml, callback, options) {
     options = Object.assign({ skipSeen: true }, options);
@@ -470,7 +508,7 @@ function parseXML(xml, callback, options) {
     var root = xml.childNodes[0];
     var children = root.childNodes;
 
-    var handle = window.requestIdleCallback(function() {
+    var handle = window.requestIdleCallback(function () {
         _deferred.delete(handle);
         var results = [];
         var result;
@@ -481,7 +519,6 @@ function parseXML(xml, callback, options) {
         callback(null, results);
     });
     _deferred.add(handle);
-
 
     function parseChild(child) {
         var parser = parsers[child.nodeName];
@@ -494,14 +531,15 @@ function parseXML(xml, callback, options) {
                 delete _userCache.toLoad[uid];
                 return null;
             }
-
         } else if (child.nodeName === 'note') {
             uid = child.getElementsByTagName('id')[0].textContent;
-
         } else {
-            uid = osmEntity.id.fromOSM(child.nodeName, child.attributes.id.value);
+            uid = osmEntity.id.fromOSM(
+                child.nodeName,
+                child.attributes.id.value,
+            );
             if (options.skipSeen) {
-                if (_tileCache.seen[uid]) return null;  // avoid reparsing a "seen" entity
+                if (_tileCache.seen[uid]) return null; // avoid reparsing a "seen" entity
                 _tileCache.seen[uid] = true;
             }
         }
@@ -510,41 +548,39 @@ function parseXML(xml, callback, options) {
     }
 }
 
-
 // replace or remove note from rtree
 function updateRtree(item, replace) {
-    _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
+    _noteCache.rtree.remove(item, function isEql(a, b) {
+        return a.data.id === b.data.id;
+    });
 
     if (replace) {
         _noteCache.rtree.insert(item);
     }
 }
 
-
 function wrapcb(thisArg, callback, cid) {
-    return function(err, result) {
+    return function (err, result) {
         if (err) {
             return callback.call(thisArg, err);
-
         } else if (thisArg.getConnectionId() !== cid) {
-            return callback.call(thisArg, { message: 'Connection Switched', status: -1 });
-
+            return callback.call(thisArg, {
+                message: 'Connection Switched',
+                status: -1,
+            });
         } else {
             return callback.call(thisArg, err, result);
         }
     };
 }
 
-
 export default {
-
-    init: function() {
+    init: function () {
         utilRebind(this, dispatch, 'on');
     },
 
-
-    reset: function() {
-        Array.from(_deferred).forEach(function(handle) {
+    reset: function () {
+        Array.from(_deferred).forEach(function (handle) {
             window.cancelIdleCallback(handle);
             _deferred.delete(handle);
         });
@@ -559,8 +595,22 @@ export default {
         Object.values(_noteCache.inflightPost).forEach(abortRequest);
         if (_changeset.inflight) abortRequest(_changeset.inflight);
 
-        _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: new RBush() };
-        _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: new RBush() };
+        _tileCache = {
+            toLoad: {},
+            loaded: {},
+            inflight: {},
+            seen: {},
+            rtree: new RBush(),
+        };
+        _noteCache = {
+            toLoad: {},
+            loaded: {},
+            inflight: {},
+            inflightPost: {},
+            note: {},
+            closed: {},
+            rtree: new RBush(),
+        };
         _userCache = { toLoad: {}, user: {} };
         _cachedApiStatus = undefined;
         _changeset = {};
@@ -568,76 +618,77 @@ export default {
         return this;
     },
 
-
-    getConnectionId: function() {
+    getConnectionId: function () {
         return _connectionID;
     },
 
-
-    getUrlRoot: function() {
+    getUrlRoot: function () {
         return urlroot;
     },
 
-
-    getApiUrlRoot: function() {
+    getApiUrlRoot: function () {
         return apiUrlroot;
     },
 
-
-    changesetURL: function(changesetID) {
+    changesetURL: function (changesetID) {
         return urlroot + '/changeset/' + changesetID;
     },
 
-
-    changesetsURL: function(center, zoom) {
+    changesetsURL: function (center, zoom) {
         var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
-        return urlroot + '/history#map=' +
-            Math.floor(zoom) + '/' +
-            center[1].toFixed(precision) + '/' +
-            center[0].toFixed(precision);
+        return (
+            urlroot +
+            '/history#map=' +
+            Math.floor(zoom) +
+            '/' +
+            center[1].toFixed(precision) +
+            '/' +
+            center[0].toFixed(precision)
+        );
     },
 
-
-    entityURL: function(entity) {
+    entityURL: function (entity) {
         return urlroot + '/' + entity.type + '/' + entity.osmId();
     },
 
-
-    historyURL: function(entity) {
+    historyURL: function (entity) {
         return urlroot + '/' + entity.type + '/' + entity.osmId() + '/history';
     },
 
-
-    userURL: function(username) {
+    userURL: function (username) {
         return urlroot + '/user/' + encodeURIComponent(username);
     },
 
-
-    noteURL: function(note) {
+    noteURL: function (note) {
         return urlroot + '/note/' + note.id;
     },
 
-
-    noteReportURL: function(note) {
-        return urlroot + '/reports/new?reportable_type=Note&reportable_id=' + note.id;
+    noteReportURL: function (note) {
+        return (
+            urlroot +
+            '/reports/new?reportable_type=Note&reportable_id=' +
+            note.id
+        );
     },
-
 
     // Generic method to load data from the OSM API
     // Can handle either auth or unauth calls.
-    loadFromAPI: function(path, callback, options) {
+    loadFromAPI: function (path, callback, options) {
         options = Object.assign({ skipSeen: true }, options);
         var that = this;
         var cid = _connectionID;
 
         function done(err, payload) {
             if (that.getConnectionId() !== cid) {
-                if (callback) callback({ message: 'Connection Switched', status: -1 });
+                if (callback)
+                    callback({ message: 'Connection Switched', status: -1 });
                 return;
             }
 
-            if ((err && _cachedApiStatus === 'online') ||
-                (!err && _cachedApiStatus !== 'online')) {
+            if (
+                (err && _cachedApiStatus === 'online') ||
+                (!err && _cachedApiStatus !== 'online')
+            ) {
                 // If the response's error state doesn't match the status,
                 // it's likely we lost or gained the connection so reload the status
                 that.reloadApiStatus();
@@ -659,10 +710,13 @@ export default {
         }
 
         if (this.authenticated()) {
-            return oauth.xhr({
-                method: 'GET',
-                path
-            }, done);
+            return oauth.xhr(
+                {
+                    method: 'GET',
+                    path,
+                },
+                done,
+            );
         } else {
             var url = apiUrlroot + path;
             var controller = new AbortController();
@@ -674,10 +728,10 @@ export default {
             }
 
             fn(url, { signal: controller.signal })
-                .then(function(data) {
+                .then(function (data) {
                     done(null, data);
                 })
-                .catch(function(err) {
+                .catch(function (err) {
                     if (err.name === 'AbortError') return;
                     // d3-fetch includes status in the error message,
                     // but we can't access the response itself
@@ -693,129 +747,135 @@ export default {
         }
     },
 
-
     // Load a single entity by id (ways and relations use the `/full` call to include
     // nodes and members). Parent relations are not included, see `loadEntityRelations`.
     // GET /api/0.6/node/#id
     // GET /api/0.6/[way|relation]/#id/full
-    loadEntity: function(id, callback) {
+    loadEntity: function (id, callback) {
         var type = osmEntity.id.type(id);
         var osmID = osmEntity.id.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
-            '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : '') + '.json',
-            function(err, entities) {
+            '/api/0.6/' +
+                type +
+                '/' +
+                osmID +
+                (type !== 'node' ? '/full' : '') +
+                '.json',
+            function (err, entities) {
                 if (callback) callback(err, { data: entities });
             },
-            options
+            options,
         );
     },
 
     // Load a single note by id , XML format
     // GET /api/0.6/notes/#id
-    loadEntityNote: function(id, callback) {
+    loadEntityNote: function (id, callback) {
         var options = { skipSeen: false };
         this.loadFromAPI(
-            '/api/0.6/notes/' + id ,
-            function(err, entities) {
+            '/api/0.6/notes/' + id,
+            function (err, entities) {
                 if (callback) callback(err, { data: entities });
             },
-            options
+            options,
         );
     },
 
-
     // Load a single entity with a specific version
     // GET /api/0.6/[node|way|relation]/#id/#version
-    loadEntityVersion: function(id, version, callback) {
+    loadEntityVersion: function (id, version, callback) {
         var type = osmEntity.id.type(id);
         var osmID = osmEntity.id.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + '/' + version + '.json',
-            function(err, entities) {
+            function (err, entities) {
                 if (callback) callback(err, { data: entities });
             },
-            options
+            options,
         );
     },
 
-
     // Load the relations of a single entity with the given.
     // GET /api/0.6/[node|way|relation]/#id/relations
-    loadEntityRelations: function(id, callback) {
+    loadEntityRelations: function (id, callback) {
         var type = osmEntity.id.type(id);
         var osmID = osmEntity.id.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + '/relations.json',
-            function(err, entities) {
+            function (err, entities) {
                 if (callback) callback(err, { data: entities });
             },
-            options
+            options,
         );
     },
-
 
     // Load multiple entities in chunks
     // (note: callback may be called multiple times)
     // Unlike `loadEntity`, child nodes and members are not fetched
     // GET /api/0.6/[nodes|ways|relations]?#parameters
-    loadMultiple: function(ids, callback) {
+    loadMultiple: function (ids, callback) {
         var that = this;
         var groups = utilArrayGroupBy(utilArrayUniq(ids), osmEntity.id.type);
 
-        Object.keys(groups).forEach(function(k) {
-            var type = k + 's';   // nodes, ways, relations
-            var osmIDs = groups[k].map(function(id) { return osmEntity.id.toOSM(id); });
+        Object.keys(groups).forEach(function (k) {
+            var type = k + 's'; // nodes, ways, relations
+            var osmIDs = groups[k].map(function (id) {
+                return osmEntity.id.toOSM(id);
+            });
             var options = { skipSeen: false };
 
-            utilArrayChunk(osmIDs, 150).forEach(function(arr) {
+            utilArrayChunk(osmIDs, 150).forEach(function (arr) {
                 that.loadFromAPI(
                     '/api/0.6/' + type + '.json?' + type + '=' + arr.join(),
-                    function(err, entities) {
+                    function (err, entities) {
                         if (callback) callback(err, { data: entities });
                     },
-                    options
+                    options,
                 );
             });
         });
     },
 
-
     // Create, upload, and close a changeset
     // PUT /api/0.6/changeset/create
     // POST /api/0.6/changeset/#id/upload
     // PUT /api/0.6/changeset/#id/close
-    putChangeset: function(changeset, changes, callback) {
+    putChangeset: function (changeset, changes, callback) {
         var cid = _connectionID;
 
         if (_changeset.inflight) {
-            return callback({ message: 'Changeset already inflight', status: -2 }, changeset);
-
-        } else if (_changeset.open) {   // reuse existing open changeset..
+            return callback(
+                { message: 'Changeset already inflight', status: -2 },
+                changeset,
+            );
+        } else if (_changeset.open) {
+            // reuse existing open changeset..
             return createdChangeset.call(this, null, _changeset.open);
-
-        } else {   // Open a new changeset..
+        } else {
+            // Open a new changeset..
             var options = {
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 headers: { 'Content-Type': 'text/xml' },
-                content: JXON.stringify(changeset.asJXON())
+                content: JXON.stringify(changeset.asJXON()),
             };
             _changeset.inflight = oauth.xhr(
                 options,
-                wrapcb(this, createdChangeset, cid)
+                wrapcb(this, createdChangeset, cid),
             );
         }
 
-
         function createdChangeset(err, changesetID) {
             _changeset.inflight = null;
-            if (err) { return callback(err, changeset); }
+            if (err) {
+                return callback(err, changeset);
+            }
 
             _changeset.open = changesetID;
             changeset = changeset.update({ id: changesetID });
@@ -825,14 +885,13 @@ export default {
                 method: 'POST',
                 path: '/api/0.6/changeset/' + changesetID + '/upload',
                 headers: { 'Content-Type': 'text/xml' },
-                content: JXON.stringify(changeset.osmChangeJXON(changes))
+                content: JXON.stringify(changeset.osmChangeJXON(changes)),
             };
             _changeset.inflight = oauth.xhr(
                 options,
-                wrapcb(this, uploadedChangeset, cid)
+                wrapcb(this, uploadedChangeset, cid),
             );
         }
-
 
         function uploadedChangeset(err) {
             _changeset.inflight = null;
@@ -840,18 +899,25 @@ export default {
 
             // Upload was successful, safe to call the callback.
             // Add delay to allow for postgres replication #1646 #2678
-            window.setTimeout(function() { callback(null, changeset); }, 2500);
+            window.setTimeout(function () {
+                callback(null, changeset);
+            }, 2500);
             _changeset.open = null;
 
             // At this point, we don't really care if the connection was switched..
             // Only try to close the changeset if we're still talking to the same server.
             if (this.getConnectionId() === cid) {
                 // Still attempt to close changeset, but ignore response because #2667
-                oauth.xhr({
-                    method: 'PUT',
-                    path: '/api/0.6/changeset/' + changeset.id + '/close',
-                    headers: { 'Content-Type': 'text/xml' }
-                }, function() { return true; });
+                oauth.xhr(
+                    {
+                        method: 'PUT',
+                        path: '/api/0.6/changeset/' + changeset.id + '/close',
+                        headers: { 'Content-Type': 'text/xml' },
+                    },
+                    function () {
+                        return true;
+                    },
+                );
             }
         }
     },
@@ -859,22 +925,24 @@ export default {
     /** updates the tags on an existing unclosed changeset */
     // PUT /api/0.6/changeset/#id
     updateChangesetTags: (changeset) => {
-        return oauth.fetch(`${oauth.options().apiUrl}/api/0.6/changeset/${changeset.id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'text/xml' },
-            body: JXON.stringify(changeset.asJXON())
-        });
+        return oauth.fetch(
+            `${oauth.options().apiUrl}/api/0.6/changeset/${changeset.id}`,
+            {
+                method: 'PUT',
+                headers: { 'Content-Type': 'text/xml' },
+                body: JXON.stringify(changeset.asJXON()),
+            },
+        );
     },
-
 
     // Load multiple users in chunks
     // (note: callback may be called multiple times)
     // GET /api/0.6/users?users=#id1,#id2,...,#idn
-    loadUsers: function(uids, callback) {
+    loadUsers: function (uids, callback) {
         var toLoad = [];
         var cached = [];
 
-        utilArrayUniq(uids).forEach(function(uid) {
+        utilArrayUniq(uids).forEach(function (uid) {
             if (_userCache.user[uid]) {
                 delete _userCache.toLoad[uid];
                 cached.push(_userCache.user[uid]);
@@ -885,123 +953,157 @@ export default {
 
         if (cached.length || !this.authenticated()) {
             callback(undefined, cached);
-            if (!this.authenticated()) return;  // require auth
+            if (!this.authenticated()) return; // require auth
         }
 
-        utilArrayChunk(toLoad, 150).forEach(function(arr) {
-            oauth.xhr({
-                method: 'GET',
-                path: '/api/0.6/users.json?users=' + arr.join()
-            }, wrapcb(this, done, _connectionID));
-        }.bind(this));
+        utilArrayChunk(toLoad, 150).forEach(
+            function (arr) {
+                oauth.xhr(
+                    {
+                        method: 'GET',
+                        path: '/api/0.6/users.json?users=' + arr.join(),
+                    },
+                    wrapcb(this, done, _connectionID),
+                );
+            }.bind(this),
+        );
 
         function done(err, payload) {
             if (err) return callback(err);
 
             var options = { skipSeen: true };
-            return parseUserJSON(payload, function(err, results) {
-                if (err) return callback(err);
-                return callback(undefined, results);
-            }, options);
+            return parseUserJSON(
+                payload,
+                function (err, results) {
+                    if (err) return callback(err);
+                    return callback(undefined, results);
+                },
+                options,
+            );
         }
     },
 
-
     // Load a given user by id
     // GET /api/0.6/user/#id
-    loadUser: function(uid, callback) {
-        if (_userCache.user[uid] || !this.authenticated()) {   // require auth
+    loadUser: function (uid, callback) {
+        if (_userCache.user[uid] || !this.authenticated()) {
+            // require auth
             delete _userCache.toLoad[uid];
             return callback(undefined, _userCache.user[uid]);
         }
 
-        oauth.xhr({
-            method: 'GET',
-            path: '/api/0.6/user/' + uid + '.json'
-        }, wrapcb(this, done, _connectionID));
+        oauth.xhr(
+            {
+                method: 'GET',
+                path: '/api/0.6/user/' + uid + '.json',
+            },
+            wrapcb(this, done, _connectionID),
+        );
 
         function done(err, payload) {
             if (err) return callback(err);
 
             var options = { skipSeen: true };
-            return parseUserJSON(payload, function(err, results) {
-                if (err) return callback(err);
-                return callback(undefined, results[0]);
-            }, options);
+            return parseUserJSON(
+                payload,
+                function (err, results) {
+                    if (err) return callback(err);
+                    return callback(undefined, results[0]);
+                },
+                options,
+            );
         }
     },
 
-
     // Load the details of the logged-in user
     // GET /api/0.6/user/details
-    userDetails: function(callback) {
-        if (_userDetails) {    // retrieve cached
+    userDetails: function (callback) {
+        if (_userDetails) {
+            // retrieve cached
             return callback(undefined, _userDetails);
         }
 
-        oauth.xhr({
-            method: 'GET',
-            path: '/api/0.6/user/details.json'
-        }, wrapcb(this, done, _connectionID));
+        oauth.xhr(
+            {
+                method: 'GET',
+                path: '/api/0.6/user/details.json',
+            },
+            wrapcb(this, done, _connectionID),
+        );
 
         function done(err, payload) {
             if (err) return callback(err);
 
             var options = { skipSeen: false };
-            return parseUserJSON(payload, function(err, results) {
-                if (err) return callback(err);
-                _userDetails = results[0];
-                return callback(undefined, _userDetails);
-            }, options);
+            return parseUserJSON(
+                payload,
+                function (err, results) {
+                    if (err) return callback(err);
+                    _userDetails = results[0];
+                    return callback(undefined, _userDetails);
+                },
+                options,
+            );
         }
     },
-
 
     // Load previous changesets for the logged in user
     // GET /api/0.6/changesets?user=#id
-    userChangesets: function(callback) {
-        if (_userChangesets) {    // retrieve cached
+    userChangesets: function (callback) {
+        if (_userChangesets) {
+            // retrieve cached
             return callback(undefined, _userChangesets);
         }
 
-        this.userDetails(
-            wrapcb(this, gotDetails, _connectionID)
-        );
-
+        this.userDetails(wrapcb(this, gotDetails, _connectionID));
 
         function gotDetails(err, user) {
-            if (err) { return callback(err); }
+            if (err) {
+                return callback(err);
+            }
 
-            oauth.xhr({
-                method: 'GET',
-                path: '/api/0.6/changesets?user=' + user.id
-            }, wrapcb(this, done, _connectionID));
+            oauth.xhr(
+                {
+                    method: 'GET',
+                    path: '/api/0.6/changesets?user=' + user.id,
+                },
+                wrapcb(this, done, _connectionID),
+            );
         }
 
         function done(err, xml) {
-            if (err) { return callback(err); }
+            if (err) {
+                return callback(err);
+            }
 
-            _userChangesets = Array.prototype.map.call(
-                xml.getElementsByTagName('changeset'),
-                function (changeset) { return { tags: getTags(changeset) }; }
-            ).filter(function (changeset) {
-                var comment = changeset.tags.comment;
-                return comment && comment !== '';
-            });
+            _userChangesets = Array.prototype.map
+                .call(
+                    xml.getElementsByTagName('changeset'),
+                    function (changeset) {
+                        return { tags: getTags(changeset) };
+                    },
+                )
+                .filter(function (changeset) {
+                    var comment = changeset.tags.comment;
+                    return comment && comment !== '';
+                });
 
             return callback(undefined, _userChangesets);
         }
     },
 
-
     // Fetch the status of the OSM API
     // GET /api/capabilities
-    status: function(callback) {
+    status: function (callback) {
         var url = apiUrlroot + '/api/capabilities';
         var errback = wrapcb(this, done, _connectionID);
         d3_xml(url)
-            .then(function(data) { errback(null, data); })
-            .catch(function(err) { errback(err.message); });
+            .then(function (data) {
+                errback(null, data);
+            })
+            .catch(function (err) {
+                errback(err.message);
+            });
 
         function done(err, xml) {
             if (err) {
@@ -1013,7 +1115,7 @@ export default {
             var elements = xml.getElementsByTagName('blacklist');
             var regexes = [];
             for (var i = 0; i < elements.length; i++) {
-                var regexString = elements[i].getAttribute('regex');  // needs unencode?
+                var regexString = elements[i].getAttribute('regex'); // needs unencode?
                 if (regexString) {
                     try {
                         var regex = new RegExp(regexString, 'i');
@@ -1031,8 +1133,11 @@ export default {
                 return callback(_rateLimitError, 'rateLimited');
             } else {
                 var waynodes = xml.getElementsByTagName('waynodes');
-                var maxWayNodes = waynodes.length && parseInt(waynodes[0].getAttribute('maximum'), 10);
-                if (maxWayNodes && isFinite(maxWayNodes)) _maxWayNodes = maxWayNodes;
+                var maxWayNodes =
+                    waynodes.length &&
+                    parseInt(waynodes[0].getAttribute('maximum'), 10);
+                if (maxWayNodes && isFinite(maxWayNodes))
+                    _maxWayNodes = maxWayNodes;
 
                 var apiStatus = xml.getElementsByTagName('status');
                 var val = apiStatus[0].getAttribute('api');
@@ -1043,12 +1148,12 @@ export default {
 
     // Calls `status` and dispatches an `apiStatusChange` event if the returned
     // status differs from the cached status.
-    reloadApiStatus: function() {
+    reloadApiStatus: function () {
         // throttle to avoid unnecessary API calls
         if (!this.throttledReloadApiStatus) {
             var that = this;
-            this.throttledReloadApiStatus = _throttle(function() {
-                that.status(function(err, status) {
+            this.throttledReloadApiStatus = _throttle(function () {
+                that.status(function (err, status) {
                     if (status !== _cachedApiStatus) {
                         _cachedApiStatus = status;
                         dispatch.call('apiStatusChange', that, err, status);
@@ -1059,20 +1164,20 @@ export default {
         this.throttledReloadApiStatus();
     },
 
-
     // Returns the maximum number of nodes a single way can have
-    maxWayNodes: function() {
+    maxWayNodes: function () {
         return _maxWayNodes;
     },
 
-
     // Load data (entities) from the API in tiles
     // GET /api/0.6/map?bbox=
-    loadTiles: function(projection, callback) {
+    loadTiles: function (projection, callback) {
         if (_off) return;
 
         // determine the needed tiles to cover the view
-        var tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
+        var tiles = tiler
+            .zoomExtent([_tileZoom, _tileZoom])
+            .getTiles(projection);
 
         // abort inflight requests that are no longer needed
         var hadRequests = hasInflightRequests(_tileCache);
@@ -1084,24 +1189,23 @@ export default {
                 dispatch.call('change');
                 this.reloadApiStatus();
             }
-            dispatch.call('loaded');    // stop the spinner
+            dispatch.call('loaded'); // stop the spinner
         }
 
         // issue new requests..
-        tiles.forEach(function(tile) {
+        tiles.forEach(function (tile) {
             this.loadTile(tile, callback);
         }, this);
     },
 
-
     // Load a single data tile
     // GET /api/0.6/map?bbox=
-    loadTile: function(tile, callback) {
+    loadTile: function (tile, callback) {
         if (_off) return;
         if (_tileCache.loaded[tile.id] || _tileCache.inflight[tile.id]) return;
 
         if (!hasInflightRequests(_tileCache)) {
-            dispatch.call('loading');   // start the spinner
+            dispatch.call('loading'); // start the spinner
         }
 
         var path = '/api/0.6/map.json?bbox=';
@@ -1110,7 +1214,7 @@ export default {
         _tileCache.inflight[tile.id] = this.loadFromAPI(
             path + tile.extent.toParam(),
             tileCallback.bind(this),
-            options
+            options,
         );
 
         function tileCallback(err, parsed) {
@@ -1124,7 +1228,10 @@ export default {
             } else {
                 // map tile loading error: e.g. network connection error,
                 // 509 Bandwidth Limit Exceeded, 429 Too Many Requests
-                if (!_rateLimitError && err.status === 509 || err.status === 429) {
+                if (
+                    (!_rateLimitError && err.status === 509) ||
+                    err.status === 429
+                ) {
                     // show "API rate limiting" warning
                     _rateLimitError = err;
                     dispatch.call('change');
@@ -1146,20 +1253,18 @@ export default {
                     dispatch.call('change');
                     this.reloadApiStatus();
                 }
-                dispatch.call('loaded');     // stop the spinner
+                dispatch.call('loaded'); // stop the spinner
             }
         }
     },
 
-
-    isDataLoaded: function(loc) {
+    isDataLoaded: function (loc) {
         var bbox = { minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1] };
         return _tileCache.rtree.collides(bbox);
     },
 
-
     // load the tile that covers the given `loc`
-    loadTileAtLoc: function(loc, callback) {
+    loadTileAtLoc: function (loc, callback) {
         // Back off if the toLoad queue is filling up.. re #6417
         // (Currently `loadTileAtLoc` requests are considered low priority - used by operations to
         // let users safely edit geometries which extend to unloaded tiles.  We can drop some.)
@@ -1167,46 +1272,64 @@ export default {
 
         var k = geoZoomToScale(_tileZoom + 1);
         var offset = geoRawMercator().scale(k)(loc);
-        var projection = geoRawMercator().transform({ k: k, x: -offset[0], y: -offset[1] });
-        var tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
+        var projection = geoRawMercator().transform({
+            k: k,
+            x: -offset[0],
+            y: -offset[1],
+        });
+        var tiles = tiler
+            .zoomExtent([_tileZoom, _tileZoom])
+            .getTiles(projection);
 
-        tiles.forEach(function(tile) {
-            if (_tileCache.toLoad[tile.id] || _tileCache.loaded[tile.id] || _tileCache.inflight[tile.id]) return;
+        tiles.forEach(function (tile) {
+            if (
+                _tileCache.toLoad[tile.id] ||
+                _tileCache.loaded[tile.id] ||
+                _tileCache.inflight[tile.id]
+            )
+                return;
 
             _tileCache.toLoad[tile.id] = true;
             this.loadTile(tile, callback);
         }, this);
     },
 
-
     // Load notes from the API in tiles
     // GET /api/0.6/notes?bbox=
-    loadNotes: function(projection, noteOptions) {
+    loadNotes: function (projection, noteOptions) {
         noteOptions = Object.assign({ limit: 10000, closed: 7 }, noteOptions);
         if (_off) return;
 
         var that = this;
-        var path = '/api/0.6/notes?limit=' + noteOptions.limit + '&closed=' + noteOptions.closed + '&bbox=';
-        var throttleLoadUsers = _throttle(function() {
+        var path =
+            '/api/0.6/notes?limit=' +
+            noteOptions.limit +
+            '&closed=' +
+            noteOptions.closed +
+            '&bbox=';
+        var throttleLoadUsers = _throttle(function () {
             var uids = Object.keys(_userCache.toLoad);
             if (!uids.length) return;
-            that.loadUsers(uids, function() {});  // eagerly load user details
+            that.loadUsers(uids, function () {}); // eagerly load user details
         }, 750);
 
         // determine the needed tiles to cover the view
-        var tiles = tiler.zoomExtent([_noteZoom, _noteZoom]).getTiles(projection);
+        var tiles = tiler
+            .zoomExtent([_noteZoom, _noteZoom])
+            .getTiles(projection);
 
         // abort inflight requests that are no longer needed
         abortUnwantedRequests(_noteCache, tiles);
 
         // issue new requests..
-        tiles.forEach(function(tile) {
-            if (_noteCache.loaded[tile.id] || _noteCache.inflight[tile.id]) return;
+        tiles.forEach(function (tile) {
+            if (_noteCache.loaded[tile.id] || _noteCache.inflight[tile.id])
+                return;
 
             var options = { skipSeen: false };
             _noteCache.inflight[tile.id] = that.loadFromAPI(
                 path + tile.extent.toParam(),
-                function(err) {
+                function (err) {
                     delete _noteCache.inflight[tile.id];
                     if (!err) {
                         _noteCache.loaded[tile.id] = true;
@@ -1214,64 +1337,80 @@ export default {
                     throttleLoadUsers();
                     dispatch.call('loadedNotes');
                 },
-                options
+                options,
             );
         });
     },
 
-
     // Create a note
     // POST /api/0.6/notes?params
-    postNoteCreate: function(note, callback) {
+    postNoteCreate: function (note, callback) {
         if (!this.authenticated()) {
             return callback({ message: 'Not Authenticated', status: -3 }, note);
         }
         if (_noteCache.inflightPost[note.id]) {
-            return callback({ message: 'Note update already inflight', status: -2 }, note);
+            return callback(
+                { message: 'Note update already inflight', status: -2 },
+                note,
+            );
         }
 
         if (!note.loc[0] || !note.loc[1] || !note.newComment) return; // location & description required
 
         var comment = note.newComment;
-        if (note.newCategory && note.newCategory !== 'None') { comment += ' #' + note.newCategory; }
+        if (note.newCategory && note.newCategory !== 'None') {
+            comment += ' #' + note.newCategory;
+        }
 
-        var path = '/api/0.6/notes?' + utilQsString({ lon: note.loc[0], lat: note.loc[1], text: comment });
+        var path =
+            '/api/0.6/notes?' +
+            utilQsString({ lon: note.loc[0], lat: note.loc[1], text: comment });
 
-        _noteCache.inflightPost[note.id] = oauth.xhr({
-            method: 'POST',
-            path: path
-        }, wrapcb(this, done, _connectionID));
-
+        _noteCache.inflightPost[note.id] = oauth.xhr(
+            {
+                method: 'POST',
+                path: path,
+            },
+            wrapcb(this, done, _connectionID),
+        );
 
         function done(err, xml) {
             delete _noteCache.inflightPost[note.id];
-            if (err) { return callback(err); }
+            if (err) {
+                return callback(err);
+            }
 
             // we get the updated note back, remove from caches and reparse..
             this.removeNote(note);
 
             var options = { skipSeen: false };
-            return parseXML(xml, function(err, results) {
-                if (err) {
-                    return callback(err);
-                } else {
-                    return callback(undefined, results[0]);
-                }
-            }, options);
+            return parseXML(
+                xml,
+                function (err, results) {
+                    if (err) {
+                        return callback(err);
+                    } else {
+                        return callback(undefined, results[0]);
+                    }
+                },
+                options,
+            );
         }
     },
-
 
     // Update a note
     // POST /api/0.6/notes/#id/comment?text=comment
     // POST /api/0.6/notes/#id/close?text=comment
     // POST /api/0.6/notes/#id/reopen?text=comment
-    postNoteUpdate: function(note, newStatus, callback) {
+    postNoteUpdate: function (note, newStatus, callback) {
         if (!this.authenticated()) {
             return callback({ message: 'Not Authenticated', status: -3 }, note);
         }
         if (_noteCache.inflightPost[note.id]) {
-            return callback({ message: 'Note update already inflight', status: -2 }, note);
+            return callback(
+                { message: 'Note update already inflight', status: -2 },
+                note,
+            );
         }
 
         var action;
@@ -1289,15 +1428,19 @@ export default {
             path += '?' + utilQsString({ text: note.newComment });
         }
 
-        _noteCache.inflightPost[note.id] = oauth.xhr({
-            method: 'POST',
-            path: path
-        }, wrapcb(this, done, _connectionID));
-
+        _noteCache.inflightPost[note.id] = oauth.xhr(
+            {
+                method: 'POST',
+                path: path,
+            },
+            wrapcb(this, done, _connectionID),
+        );
 
         function done(err, xml) {
             delete _noteCache.inflightPost[note.id];
-            if (err) { return callback(err); }
+            if (err) {
+                return callback(err);
+            }
 
             // we get the updated note back, remove from caches and reparse..
             this.removeNote(note);
@@ -1310,74 +1453,73 @@ export default {
             }
 
             var options = { skipSeen: false };
-            return parseXML(xml, function(err, results) {
-                if (err) {
-                    return callback(err);
-                } else {
-                    return callback(undefined, results[0]);
-                }
-            }, options);
+            return parseXML(
+                xml,
+                function (err, results) {
+                    if (err) {
+                        return callback(err);
+                    } else {
+                        return callback(undefined, results[0]);
+                    }
+                },
+                options,
+            );
         }
     },
 
-
     /* connection options for source switcher (optional) */
-    apiConnections: function(val) {
+    apiConnections: function (val) {
         if (!arguments.length) return _apiConnections;
         _apiConnections = val;
         return this;
     },
 
-
-    switch: function(newOptions) {
+    switch: function (newOptions) {
         urlroot = newOptions.url;
         apiUrlroot = newOptions.apiUrl || urlroot;
         if (newOptions.url && !newOptions.apiUrl) {
             newOptions = {
                 ...newOptions,
-                apiUrl: newOptions.url
+                apiUrl: newOptions.url,
             };
         }
 
         // Copy the existing options, but omit 'access_token'.
         // (if we did preauth, access_token won't work on a different server)
         const oldOptions = utilObjectOmit(oauth.options(), 'access_token');
-        oauth.options({...oldOptions, ...newOptions});
+        oauth.options({ ...oldOptions, ...newOptions });
 
         this.reset();
-        this.userChangesets(function() {});  // eagerly load user details/changesets
+        this.userChangesets(function () {}); // eagerly load user details/changesets
         dispatch.call('change');
         return this;
     },
 
-
-    toggle: function(val) {
+    toggle: function (val) {
         _off = !val;
         return this;
     },
 
-
-    isChangesetInflight: function() {
+    isChangesetInflight: function () {
         return !!_changeset.inflight;
     },
-
 
     // get/set cached data
     // This is used to save/restore the state when entering/exiting the walkthrough
     // Also used for testing purposes.
-    caches: function(obj) {
+    caches: function (obj) {
         function cloneCache(source) {
             var target = {};
-            Object.keys(source).forEach(function(k) {
+            Object.keys(source).forEach(function (k) {
                 if (k === 'rtree') {
-                    target.rtree = new RBush().fromJSON(source.rtree.toJSON());  // clone rbush
+                    target.rtree = new RBush().fromJSON(source.rtree.toJSON()); // clone rbush
                 } else if (k === 'note') {
                     target.note = {};
-                    Object.keys(source.note).forEach(function(id) {
-                        target.note[id] = osmNote(source.note[id]);   // copy notes
+                    Object.keys(source.note).forEach(function (id) {
+                        target.note[id] = osmNote(source.note[id]); // copy notes
                     });
                 } else {
-                    target[k] = JSON.parse(JSON.stringify(source[k]));   // clone deep
+                    target[k] = JSON.parse(JSON.stringify(source[k])); // clone deep
                 }
             });
             return target;
@@ -1387,7 +1529,7 @@ export default {
             return {
                 tile: cloneCache(_tileCache),
                 note: cloneCache(_noteCache),
-                user: cloneCache(_userCache)
+                user: cloneCache(_userCache),
             };
         }
 
@@ -1396,7 +1538,7 @@ export default {
             return {
                 tile: _tileCache,
                 note: _noteCache,
-                user: _userCache
+                user: _userCache,
             };
         }
 
@@ -1416,8 +1558,7 @@ export default {
         return this;
     },
 
-
-    logout: function() {
+    logout: function () {
         _userChangesets = undefined;
         _userDetails = undefined;
         oauth.logout();
@@ -1425,14 +1566,12 @@ export default {
         return this;
     },
 
-
-    authenticated: function() {
+    authenticated: function () {
         return oauth.authenticated();
     },
 
-
     /** @param {import('osm-auth').LoginOptions} options */
-    authenticate: function(callback, options) {
+    authenticate: function (callback, options) {
         var that = this;
         var cid = _connectionID;
         _userChangesets = undefined;
@@ -1444,13 +1583,14 @@ export default {
                 return;
             }
             if (that.getConnectionId() !== cid) {
-                if (callback) callback({ message: 'Connection Switched', status: -1 });
+                if (callback)
+                    callback({ message: 'Connection Switched', status: -1 });
                 return;
             }
             _rateLimitError = undefined;
             dispatch.call('change');
             if (callback) callback(err, res);
-            that.userChangesets(function() {});  // eagerly load user details/changesets
+            that.userChangesets(function () {}); // eagerly load user details/changesets
         }
 
         // ensure the locale is correctly set before opening the popup
@@ -1462,60 +1602,56 @@ export default {
         oauth.authenticate(done, options);
     },
 
-
-    imageryBlocklists: function() {
+    imageryBlocklists: function () {
         return _imageryBlocklists;
     },
 
-
-    tileZoom: function(val) {
+    tileZoom: function (val) {
         if (!arguments.length) return _tileZoom;
         _tileZoom = val;
         return this;
     },
 
-
     // get all cached notes covering the viewport
-    notes: function(projection) {
+    notes: function (projection) {
         var viewport = projection.clipExtent();
         var min = [viewport[0][0], viewport[1][1]];
         var max = [viewport[1][0], viewport[0][1]];
-        var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
+        var bbox = geoExtent(
+            projection.invert(min),
+            projection.invert(max),
+        ).bbox();
 
-        return _noteCache.rtree.search(bbox)
-            .map(function(d) { return d.data; });
+        return _noteCache.rtree.search(bbox).map(function (d) {
+            return d.data;
+        });
     },
 
-
     // get a single note from the cache
-    getNote: function(id) {
+    getNote: function (id) {
         return _noteCache.note[id];
     },
 
-
     // remove a single note from the cache
-    removeNote: function(note) {
+    removeNote: function (note) {
         if (!(note instanceof osmNote) || !note.id) return;
 
         delete _noteCache.note[note.id];
-        updateRtree(encodeNoteRtree(note), false);  // false = remove
+        updateRtree(encodeNoteRtree(note), false); // false = remove
     },
 
-
     // replace a single note in the cache
-    replaceNote: function(note) {
+    replaceNote: function (note) {
         if (!(note instanceof osmNote) || !note.id) return;
 
         _noteCache.note[note.id] = note;
-        updateRtree(encodeNoteRtree(note), true);  // true = replace
+        updateRtree(encodeNoteRtree(note), true); // true = replace
         return note;
     },
 
-
     // Get an array of note IDs closed during this session.
     // Used to populate `closed:note` changeset tag
-    getClosedIDs: function() {
+    getClosedIDs: function () {
         return Object.keys(_noteCache.closed).sort();
-    }
-
+    },
 };

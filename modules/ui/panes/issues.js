@@ -7,7 +7,6 @@ import { uiSectionValidationRules } from '../sections/validation_rules';
 import { uiSectionValidationStatus } from '../sections/validation_status';
 
 export function uiPaneIssues(context) {
-
     var issuesPane = uiPane('issues', context)
         .key(t('issues.key'))
         .label(t.append('issues.title'))
@@ -18,8 +17,12 @@ export function uiPaneIssues(context) {
             uiSectionValidationStatus(context),
             uiSectionValidationIssues('issues-errors', 'error', context),
             uiSectionValidationIssues('issues-warnings', 'warning', context),
-            uiSectionValidationIssues('issues-suggestions', 'suggestion', context),
-            uiSectionValidationRules(context)
+            uiSectionValidationIssues(
+                'issues-suggestions',
+                'suggestion',
+                context,
+            ),
+            uiSectionValidationRules(context),
         ]);
 
     return issuesPane;

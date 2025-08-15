@@ -1,16 +1,14 @@
 import { select as d3_select } from 'd3-selection';
 
-import { svgPointTransform } from './helpers';
 import { geoMetersToLat } from '../geo';
-
+import { svgPointTransform } from './helpers';
 
 export function svgGeolocate(projection) {
     var layer = d3_select(null);
     var _position;
 
-
     function init() {
-        if (svgGeolocate.initialized) return;  // run once
+        if (svgGeolocate.initialized) return; // run once
         svgGeolocate.enabled = false;
         svgGeolocate.initialized = true;
     }
@@ -19,12 +17,8 @@ export function svgGeolocate(projection) {
         layer.style('display', 'block');
     }
 
-
     function hideLayer() {
-        layer
-            .transition()
-            .duration(250)
-            .style('opacity', 0);
+        layer.transition().duration(250).style('opacity', 0);
     }
 
     function layerOn() {
@@ -33,7 +27,6 @@ export function svgGeolocate(projection) {
             .transition()
             .duration(250)
             .style('opacity', 1);
-
     }
 
     function layerOff() {
@@ -44,26 +37,31 @@ export function svgGeolocate(projection) {
         return svgPointTransform(projection)(d);
     }
 
-    function accuracy(accuracy, loc) { // converts accuracy to pixels...
+    function accuracy(accuracy, loc) {
+        // converts accuracy to pixels...
         var degreesRadius = geoMetersToLat(accuracy),
             tangentLoc = [loc[0], loc[1] + degreesRadius],
             projectedTangent = projection(tangentLoc),
             projectedLoc = projection([loc[0], loc[1]]);
 
         // southern most point will have higher pixel value...
-       return Math.round(projectedLoc[1] - projectedTangent[1]).toString();
+        return Math.round(projectedLoc[1] - projectedTangent[1]).toString();
     }
 
     function update() {
-        var geolocation = { loc: [_position.coords.longitude, _position.coords.latitude] };
+        var geolocation = {
+            loc: [_position.coords.longitude, _position.coords.latitude],
+        };
 
-        var groups = layer.selectAll('.geolocations').selectAll('.geolocation')
+        var groups = layer
+            .selectAll('.geolocations')
+            .selectAll('.geolocation')
             .data([geolocation]);
 
-        groups.exit()
-            .remove();
+        groups.exit().remove();
 
-        var pointsEnter = groups.enter()
+        var pointsEnter = groups
+            .enter()
             .append('g')
             .attr('class', 'geolocation');
 
@@ -85,32 +83,29 @@ export function svgGeolocate(projection) {
             .attr('stroke-width', '1.5')
             .attr('r', '6');
 
-        groups.merge(pointsEnter)
-            .attr('transform', transform);
+        groups.merge(pointsEnter).attr('transform', transform);
 
-        layer.select('.geolocate-radius').attr('r', accuracy(_position.coords.accuracy, geolocation.loc));
+        layer
+            .select('.geolocate-radius')
+            .attr('r', accuracy(_position.coords.accuracy, geolocation.loc));
     }
 
     function drawLocation(selection) {
         var enabled = svgGeolocate.enabled;
 
-        layer = selection.selectAll('.layer-geolocate')
-            .data([0]);
+        layer = selection.selectAll('.layer-geolocate').data([0]);
 
-        layer.exit()
-            .remove();
+        layer.exit().remove();
 
-        var layerEnter = layer.enter()
+        var layerEnter = layer
+            .enter()
             .append('g')
             .attr('class', 'layer-geolocate')
             .style('display', enabled ? 'block' : 'none');
 
-        layerEnter
-            .append('g')
-            .attr('class', 'geolocations');
+        layerEnter.append('g').attr('class', 'geolocations');
 
-        layer = layerEnter
-            .merge(layer);
+        layer = layerEnter.merge(layer);
 
         if (enabled) {
             update();

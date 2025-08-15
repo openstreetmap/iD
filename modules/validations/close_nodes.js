@@ -1,17 +1,21 @@
 import { actionMergeNodes } from '../actions/merge_nodes';
-import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { t } from '../core/localizer';
 import { validationIssue, validationIssueFix } from '../core/validation';
-import { osmPathHighwayTagValues } from '../osm/tags';
-import { geoMetersToLat, geoMetersToLon, geoSphericalDistance } from '../geo/geo';
 import { geoExtent } from '../geo/extent';
+import {
+    geoMetersToLat,
+    geoMetersToLon,
+    geoSphericalDistance,
+} from '../geo/geo';
+import { osmPathHighwayTagValues } from '../osm/tags';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 
 export function validationCloseNodes(context) {
     var type = 'close_nodes';
 
     var pointThresholdMeters = 0.2;
 
-    var validation = function(entity, graph) {
+    var validation = function (entity, graph) {
         if (entity.type === 'node') {
             return getIssuesForNode(entity);
         } else if (entity.type === 'way') {
@@ -29,11 +33,15 @@ export function validationCloseNodes(context) {
         }
 
         function wayTypeFor(way) {
-
-            if (way.tags.boundary && way.tags.boundary !== 'no') return 'boundary';
+            if (way.tags.boundary && way.tags.boundary !== 'no')
+                return 'boundary';
             if (way.tags.indoor && way.tags.indoor !== 'no') return 'indoor';
-            if ((way.tags.building && way.tags.building !== 'no') ||
-                (way.tags['building:part'] && way.tags['building:part'] !== 'no')) return 'building';
+            if (
+                (way.tags.building && way.tags.building !== 'no') ||
+                (way.tags['building:part'] &&
+                    way.tags['building:part'] !== 'no')
+            )
+                return 'building';
             if (osmPathHighwayTagValues[way.tags.highway]) return 'path';
 
             var parentRelations = graph.parentRelations(way);
@@ -43,9 +51,15 @@ export function validationCloseNodes(context) {
                 if (relation.tags.type === 'boundary') return 'boundary';
 
                 if (relation.isMultipolygon()) {
-                    if (relation.tags.indoor && relation.tags.indoor !== 'no') return 'indoor';
-                    if ((relation.tags.building && relation.tags.building !== 'no') ||
-                        (relation.tags['building:part'] && relation.tags['building:part'] !== 'no')) return 'building';
+                    if (relation.tags.indoor && relation.tags.indoor !== 'no')
+                        return 'indoor';
+                    if (
+                        (relation.tags.building &&
+                            relation.tags.building !== 'no') ||
+                        (relation.tags['building:part'] &&
+                            relation.tags['building:part'] !== 'no')
+                    )
+                        return 'building';
                 }
             }
 
@@ -53,13 +67,18 @@ export function validationCloseNodes(context) {
         }
 
         function shouldCheckWay(way) {
-
             // don't flag issues where merging would create degenerate ways
-            if (way.nodes.length <= 2 ||
-                (way.isClosed() && way.nodes.length <= 4)) return false;
+            if (
+                way.nodes.length <= 2 ||
+                (way.isClosed() && way.nodes.length <= 4)
+            )
+                return false;
 
             var bbox = way.extent(graph).bbox();
-            var hypotenuseMeters = geoSphericalDistance([bbox.minX, bbox.minY], [bbox.maxX, bbox.maxY]);
+            var hypotenuseMeters = geoSphericalDistance(
+                [bbox.minX, bbox.minY],
+                [bbox.maxX, bbox.maxY],
+            );
             // don't flag close nodes in very small ways
             if (hypotenuseMeters < 1.5) return false;
 
@@ -73,7 +92,7 @@ export function validationCloseNodes(context) {
                 nodes = graph.childNodes(way);
             for (var i = 0; i < nodes.length - 1; i++) {
                 var node1 = nodes[i];
-                var node2 = nodes[i+1];
+                var node2 = nodes[i + 1];
 
                 var issue = getWayIssueIfAny(node1, node2, way);
                 if (issue) issues.push(issue);
@@ -97,13 +116,21 @@ export function validationCloseNodes(context) {
                 var lastIndex = parentWay.nodes.length - 1;
                 for (var j = 0; j < parentWay.nodes.length; j++) {
                     if (j !== 0) {
-                        if (parentWay.nodes[j-1] === node.id) {
-                            checkForCloseness(node, graph.entity(parentWay.nodes[j]), parentWay);
+                        if (parentWay.nodes[j - 1] === node.id) {
+                            checkForCloseness(
+                                node,
+                                graph.entity(parentWay.nodes[j]),
+                                parentWay,
+                            );
                         }
                     }
                     if (j !== lastIndex) {
-                        if (parentWay.nodes[j+1] === node.id) {
-                            checkForCloseness(graph.entity(parentWay.nodes[j]), node, parentWay);
+                        if (parentWay.nodes[j + 1] === node.id) {
+                            checkForCloseness(
+                                graph.entity(parentWay.nodes[j]),
+                                node,
+                                parentWay,
+                            );
                         }
                     }
                 }
@@ -126,7 +153,6 @@ export function validationCloseNodes(context) {
         }
 
         function getIssuesForDetachedPoint(node) {
-
             var issues = [];
 
             var lon = node.loc[0];
@@ -135,25 +161,51 @@ export function validationCloseNodes(context) {
             var lat_range = geoMetersToLat(pointThresholdMeters) / 2;
             var queryExtent = geoExtent([
                 [lon - lon_range, lat - lat_range],
-                [lon + lon_range, lat + lat_range]
+                [lon + lon_range, lat + lat_range],
             ]);
 
-            var intersected = context.history().tree().intersects(queryExtent, graph);
+            var intersected = context
+                .history()
+                .tree()
+                .intersects(queryExtent, graph);
             for (var j = 0; j < intersected.length; j++) {
                 var nearby = intersected[j];
 
                 if (nearby.id === node.id) continue;
-                if (nearby.type !== 'node' || nearby.geometry(graph) !== 'point') continue;
+                if (
+                    nearby.type !== 'node' ||
+                    nearby.geometry(graph) !== 'point'
+                )
+                    continue;
 
-                if (nearby.loc === node.loc ||
-                    geoSphericalDistance(node.loc, nearby.loc) < pointThresholdMeters) {
-
+                if (
+                    nearby.loc === node.loc ||
+                    geoSphericalDistance(node.loc, nearby.loc) <
+                        pointThresholdMeters
+                ) {
                     // ignore stolperstein (https://wiki.openstreetmap.org/wiki/DE:Stolpersteine)
-                    if ('memorial:type' in node.tags && 'memorial:type' in nearby.tags && node.tags['memorial:type']==='stolperstein' && nearby.tags['memorial:type']==='stolperstein') continue;
-                    if ('memorial' in node.tags && 'memorial' in nearby.tags && node.tags.memorial==='stolperstein' && nearby.tags.memorial === 'stolperstein') continue;
+                    if (
+                        'memorial:type' in node.tags &&
+                        'memorial:type' in nearby.tags &&
+                        node.tags['memorial:type'] === 'stolperstein' &&
+                        nearby.tags['memorial:type'] === 'stolperstein'
+                    )
+                        continue;
+                    if (
+                        'memorial' in node.tags &&
+                        'memorial' in nearby.tags &&
+                        node.tags.memorial === 'stolperstein' &&
+                        nearby.tags.memorial === 'stolperstein'
+                    )
+                        continue;
 
                     // allow very close points if tags indicate the z-axis might vary
-                    var zAxisKeys = { layer: true, level: true, 'addr:housenumber': true, 'addr:unit': true };
+                    var zAxisKeys = {
+                        layer: true,
+                        level: true,
+                        'addr:housenumber': true,
+                        'addr:unit': true,
+                    };
                     var zAxisDifferentiates = false;
                     for (var key in zAxisKeys) {
                         var nodeValue = node.tags[key] || '0';
@@ -165,33 +217,54 @@ export function validationCloseNodes(context) {
                     }
                     if (zAxisDifferentiates) continue;
 
-                    issues.push(new validationIssue({
-                        type: type,
-                        subtype: 'detached',
-                        severity: 'warning',
-                        message: function(context) {
-                            var entity = context.hasEntity(this.entityIds[0]),
-                                entity2 = context.hasEntity(this.entityIds[1]);
-                            return (entity && entity2) ? t.append('issues.close_nodes.detached.message', {
-                                feature: utilDisplayLabel(entity, context.graph()),
-                                feature2: utilDisplayLabel(entity2, context.graph())
-                            }) : '';
-                        },
-                        reference: showReference,
-                        entityIds: [node.id, nearby.id],
-                        dynamicFixes: function() {
-                            return [
-                                new validationIssueFix({
-                                    icon: 'iD-operation-disconnect',
-                                    title: t.append('issues.fix.move_points_apart.title')
-                                }),
-                                new validationIssueFix({
-                                    icon: 'iD-icon-layers',
-                                    title: t.append('issues.fix.use_different_layers_or_levels.title')
-                                })
-                            ];
-                        }
-                    }));
+                    issues.push(
+                        new validationIssue({
+                            type: type,
+                            subtype: 'detached',
+                            severity: 'warning',
+                            message: function (context) {
+                                var entity = context.hasEntity(
+                                        this.entityIds[0],
+                                    ),
+                                    entity2 = context.hasEntity(
+                                        this.entityIds[1],
+                                    );
+                                return entity && entity2
+                                    ? t.append(
+                                          'issues.close_nodes.detached.message',
+                                          {
+                                              feature: utilDisplayLabel(
+                                                  entity,
+                                                  context.graph(),
+                                              ),
+                                              feature2: utilDisplayLabel(
+                                                  entity2,
+                                                  context.graph(),
+                                              ),
+                                          },
+                                      )
+                                    : '';
+                            },
+                            reference: showReference,
+                            entityIds: [node.id, nearby.id],
+                            dynamicFixes: function () {
+                                return [
+                                    new validationIssueFix({
+                                        icon: 'iD-operation-disconnect',
+                                        title: t.append(
+                                            'issues.fix.move_points_apart.title',
+                                        ),
+                                    }),
+                                    new validationIssueFix({
+                                        icon: 'iD-icon-layers',
+                                        title: t.append(
+                                            'issues.fix.use_different_layers_or_levels.title',
+                                        ),
+                                    }),
+                                ];
+                            },
+                        }),
+                    );
                 }
             }
 
@@ -199,7 +272,8 @@ export function validationCloseNodes(context) {
 
             function showReference(selection) {
                 var referenceText = t('issues.close_nodes.detached.reference');
-                selection.selectAll('.issue-reference')
+                selection
+                    .selectAll('.issue-reference')
                     .data([0])
                     .enter()
                     .append('div')
@@ -209,8 +283,10 @@ export function validationCloseNodes(context) {
         }
 
         function getWayIssueIfAny(node1, node2, way) {
-            if (node1.id === node2.id ||
-                (node1.hasInterestingTags() && node2.hasInterestingTags())) {
+            if (
+                node1.id === node2.id ||
+                (node1.hasInterestingTags() && node2.hasInterestingTags())
+            ) {
                 return null;
             }
 
@@ -218,11 +294,11 @@ export function validationCloseNodes(context) {
                 var parentWays1 = graph.parentWays(node1);
                 var parentWays2 = new Set(graph.parentWays(node2));
 
-                var sharedWays = parentWays1.filter(function(parentWay) {
+                var sharedWays = parentWays1.filter(function (parentWay) {
                     return parentWays2.has(parentWay);
                 });
 
-                var thresholds = sharedWays.map(function(parentWay) {
+                var thresholds = sharedWays.map(function (parentWay) {
                     return thresholdMetersForWay(parentWay);
                 });
 
@@ -235,35 +311,50 @@ export function validationCloseNodes(context) {
                 type: type,
                 subtype: 'vertices',
                 severity: 'warning',
-                message: function(context) {
+                message: function (context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t.append('issues.close_nodes.message', { way: utilDisplayLabel(entity, context.graph()) }) : '';
+                    return entity
+                        ? t.append('issues.close_nodes.message', {
+                              way: utilDisplayLabel(entity, context.graph()),
+                          })
+                        : '';
                 },
                 reference: showReference,
                 entityIds: [way.id, node1.id, node2.id],
                 loc: node1.loc,
-                dynamicFixes: function() {
+                dynamicFixes: function () {
                     return [
                         new validationIssueFix({
                             icon: 'iD-icon-plus',
                             title: t.append('issues.fix.merge_points.title'),
-                            onClick: function(context) {
+                            onClick: function (context) {
                                 var entityIds = this.issue.entityIds;
-                                var action = actionMergeNodes([entityIds[1], entityIds[2]]);
-                                context.perform(action, t('issues.fix.merge_close_vertices.annotation'));
-                            }
+                                var action = actionMergeNodes([
+                                    entityIds[1],
+                                    entityIds[2],
+                                ]);
+                                context.perform(
+                                    action,
+                                    t(
+                                        'issues.fix.merge_close_vertices.annotation',
+                                    ),
+                                );
+                            },
                         }),
                         new validationIssueFix({
                             icon: 'iD-operation-disconnect',
-                            title: t.append('issues.fix.move_points_apart.title')
-                        })
+                            title: t.append(
+                                'issues.fix.move_points_apart.title',
+                            ),
+                        }),
                     ];
-                }
+                },
             });
 
             function showReference(selection) {
                 var referenceText = t('issues.close_nodes.reference');
-                selection.selectAll('.issue-reference')
+                selection
+                    .selectAll('.issue-reference')
                     .data([0])
                     .enter()
                     .append('div')
@@ -271,9 +362,7 @@ export function validationCloseNodes(context) {
                     .html(referenceText);
             }
         }
-
     };
-
 
     validation.type = type;
 

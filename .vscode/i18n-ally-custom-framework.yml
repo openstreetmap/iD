@@ -11,7 +11,7 @@ usageMatchRegex:
   - "[^\\w\\d]t\\.html\\(['\"`]({key})['\"`]" # matches t.html("{key}"
   - "[^\\w\\d]t\\(['\"`]({key})['\"`]" # matches t.html("{key}"
 
-scopeRangeRegex: "(en)"
+scopeRangeRegex: '(en)'
 
 refactorTemplates:
 

@@ -1,9 +1,8 @@
-import { t, localizer } from '../core/localizer';
-import { uiTooltip } from './tooltip';
+import { localizer, t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
+import { uiTooltip } from './tooltip';
 
 export function uiZoomToSelection(context) {
-
     function isDisabled() {
         var mode = context.mode();
         return !mode || !mode.zoomToSelected;
@@ -19,9 +18,13 @@ export function uiZoomToSelection(context) {
         d3_event.preventDefault();
 
         if (isDisabled()) {
-            if (_lastPointerUpType === 'touch' || _lastPointerUpType === 'pen') {
-                context.ui().flash
-                    .duration(2000)
+            if (
+                _lastPointerUpType === 'touch' ||
+                _lastPointerUpType === 'pen'
+            ) {
+                context
+                    .ui()
+                    .flash.duration(2000)
                     .iconName('#iD-icon-framed-dot')
                     .iconClass('disabled')
                     .label(t.append('inspector.zoom_to.no_selection'))();
@@ -36,11 +39,10 @@ export function uiZoomToSelection(context) {
         _lastPointerUpType = null;
     }
 
-    return function(selection) {
-
+    return function (selection) {
         var tooltipBehavior = uiTooltip()
-            .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-            .title(function() {
+            .placement(localizer.textDirection() === 'rtl' ? 'right' : 'left')
+            .title(function () {
                 if (isDisabled()) {
                     return t.append('inspector.zoom_to.no_selection');
                 }

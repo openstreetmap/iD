@@ -1,20 +1,22 @@
 import { select as d3_select } from 'd3-selection';
 
-import { t, localizer } from '../core/localizer';
-import { uiTooltip } from './tooltip';
+import { localizer, t } from '../core/localizer';
 import { geoExtent } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
 import { uiLoading } from './loading';
+import { uiTooltip } from './tooltip';
 
 export function uiGeolocate(context) {
     var _geolocationOptions = {
         // prioritize speed and power usage over precision
         enableHighAccuracy: false,
         // don't hang indefinitely getting the location
-        timeout: 6000 // 6sec
+        timeout: 6000, // 6sec
     };
-    var _locating = uiLoading(context).message(t.html('geolocate.locating')).blocking(true);
+    var _locating = uiLoading(context)
+        .message(t.html('geolocate.locating'))
+        .blocking(true);
     var _layer = context.layers().layer('geolocate');
     var _position;
     var _extent;
@@ -24,14 +26,17 @@ export function uiGeolocate(context) {
     function click() {
         if (context.inIntro()) return;
         if (!_layer.enabled() && !_locating.isShown()) {
-
             // This timeout ensures that we still call finish() even if
             // the user declines to share their location in Firefox
-            _timeoutID = setTimeout(error, 10000 /* 10sec */ );
+            _timeoutID = setTimeout(error, 10000 /* 10sec */);
 
             context.container().call(_locating);
             // get the latest position even if we already have one
-            navigator.geolocation.getCurrentPosition(success, error, _geolocationOptions);
+            navigator.geolocation.getCurrentPosition(
+                success,
+                error,
+                _geolocationOptions,
+            );
         } else {
             _locating.close();
             _layer.enabled(null, false);
@@ -45,13 +50,18 @@ export function uiGeolocate(context) {
         var map = context.map();
         _layer.enabled(_position, true);
         updateButtonState();
-        map.centerZoomEase(_extent.center(), Math.min(20, map.extentZoom(_extent)));
+        map.centerZoomEase(
+            _extent.center(),
+            Math.min(20, map.extentZoom(_extent)),
+        );
     }
 
     function success(geolocation) {
         _position = geolocation;
         var coords = _position.coords;
-        _extent = geoExtent([coords.longitude, coords.latitude]).padByMeters(coords.accuracy);
+        _extent = geoExtent([coords.longitude, coords.latitude]).padByMeters(
+            coords.accuracy,
+        );
         zoomTo();
         finish();
     }
@@ -61,8 +71,9 @@ export function uiGeolocate(context) {
             // use the position from a previous call if we have one
             zoomTo();
         } else {
-            context.ui().flash
-                .label(t.append('geolocate.location_unavailable'))
+            context
+                .ui()
+                .flash.label(t.append('geolocate.location_unavailable'))
                 .iconName('#iD-icon-geolocate')();
         }
 
@@ -70,8 +81,10 @@ export function uiGeolocate(context) {
     }
 
     function finish() {
-        _locating.close();  // unblock ui
-        if (_timeoutID) { clearTimeout(_timeoutID); }
+        _locating.close(); // unblock ui
+        if (_timeoutID) {
+            clearTimeout(_timeoutID);
+        }
         _timeoutID = undefined;
     }
 
@@ -80,17 +93,21 @@ export function uiGeolocate(context) {
         _button.attr('aria-pressed', _layer.enabled());
     }
 
-    return function(selection) {
-        if (!navigator.geolocation || !navigator.geolocation.getCurrentPosition) return;
+    return function (selection) {
+        if (!navigator.geolocation || !navigator.geolocation.getCurrentPosition)
+            return;
 
         _button = selection
             .append('button')
             .on('click', click)
             .attr('aria-pressed', false)
             .call(svgIcon('#iD-icon-geolocate', 'light'))
-            .call(uiTooltip()
-                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-                .title(() => t.append('geolocate.title'))
+            .call(
+                uiTooltip()
+                    .placement(
+                        localizer.textDirection() === 'rtl' ? 'right' : 'left',
+                    )
+                    .title(() => t.append('geolocate.title')),
             );
     };
 }

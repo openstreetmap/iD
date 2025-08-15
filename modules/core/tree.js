@@ -2,7 +2,6 @@ import RBush from 'rbush';
 
 import { coreDifference } from './difference';
 
-
 export function coreTree(head) {
     // tree for entities
     var _rtree = new RBush();
@@ -15,14 +14,12 @@ export function coreTree(head) {
 
     var tree = {};
 
-
     function entityBBox(entity) {
         var bbox = entity.extent(head).bbox();
         bbox.id = entity.id;
         _bboxes[entity.id] = bbox;
         return bbox;
     }
-
 
     function segmentBBox(segment) {
         var extent = segment.extent(head);
@@ -35,13 +32,12 @@ export function coreTree(head) {
         return bbox;
     }
 
-
     function removeEntity(entity) {
         _rtree.remove(_bboxes[entity.id]);
         delete _bboxes[entity.id];
 
         if (_segmentsByWayId[entity.id]) {
-            _segmentsByWayId[entity.id].forEach(function(segment) {
+            _segmentsByWayId[entity.id].forEach(function (segment) {
                 _segmentsRTree.remove(_segmentsBBoxes[segment.id]);
                 delete _segmentsBBoxes[segment.id];
             });
@@ -49,12 +45,11 @@ export function coreTree(head) {
         }
     }
 
-
     function loadEntities(entities) {
         _rtree.load(entities.map(entityBBox));
 
         var segments = [];
-        entities.forEach(function(entity) {
+        entities.forEach(function (entity) {
             if (entity.segments) {
                 var entitySegments = entity.segments(head);
                 // cache these to make them easy to remove later
@@ -62,12 +57,12 @@ export function coreTree(head) {
                 segments = segments.concat(entitySegments);
             }
         });
-        if (segments.length) _segmentsRTree.load(segments.map(segmentBBox).filter(Boolean));
+        if (segments.length)
+            _segmentsRTree.load(segments.map(segmentBBox).filter(Boolean));
     }
 
-
     function updateParents(entity, insertions, memo) {
-        head.parentWays(entity).forEach(function(way) {
+        head.parentWays(entity).forEach(function (way) {
             if (_bboxes[way.id]) {
                 removeEntity(way);
                 insertions[way.id] = way;
@@ -75,7 +70,7 @@ export function coreTree(head) {
             updateParents(way, insertions, memo);
         });
 
-        head.parentRelations(entity).forEach(function(relation) {
+        head.parentRelations(entity).forEach(function (relation) {
             if (memo[relation.id]) return;
             memo[relation.id] = true;
             if (_bboxes[relation.id]) {
@@ -86,8 +81,7 @@ export function coreTree(head) {
         });
     }
 
-
-    tree.rebase = function(entities, force) {
+    tree.rebase = function (entities, force) {
         var insertions = {};
 
         for (var i = 0; i < entities.length; i++) {
@@ -111,7 +105,6 @@ export function coreTree(head) {
         return tree;
     };
 
-
     function updateToGraph(graph) {
         if (graph === head) return;
 
@@ -125,13 +118,13 @@ export function coreTree(head) {
         var insertions = {};
 
         if (changed.deletion) {
-            diff.deleted().forEach(function(entity) {
+            diff.deleted().forEach(function (entity) {
                 removeEntity(entity);
             });
         }
 
         if (changed.geometry) {
-            diff.modified().forEach(function(entity) {
+            diff.modified().forEach(function (entity) {
                 removeEntity(entity);
                 insertions[entity.id] = entity;
                 updateParents(entity, insertions, {});
@@ -139,7 +132,7 @@ export function coreTree(head) {
         }
 
         if (changed.addition) {
-            diff.created().forEach(function(entity) {
+            diff.created().forEach(function (entity) {
                 insertions[entity.id] = entity;
             });
         }
@@ -148,19 +141,20 @@ export function coreTree(head) {
     }
 
     // returns an array of entities with bounding boxes overlapping `extent` for the given `graph`
-    tree.intersects = function(extent, graph) {
+    tree.intersects = function (extent, graph) {
         updateToGraph(graph);
-        return _rtree.search(extent.bbox())
-            .map(function(bbox) { return graph.entity(bbox.id); });
+        return _rtree.search(extent.bbox()).map(function (bbox) {
+            return graph.entity(bbox.id);
+        });
     };
 
     // returns an array of segment objects with bounding boxes overlapping `extent` for the given `graph`
-    tree.waySegments = function(extent, graph) {
+    tree.waySegments = function (extent, graph) {
         updateToGraph(graph);
-        return _segmentsRTree.search(extent.bbox())
-            .map(function(bbox) { return bbox.segment; });
+        return _segmentsRTree.search(extent.bbox()).map(function (bbox) {
+            return bbox.segment;
+        });
     };
-
 
     return tree;
 }

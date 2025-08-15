@@ -11,9 +11,8 @@ export function utilGetDimensions(selection, force) {
     }
     var node = selection.node(),
         cached = selection.property('__dimensions__');
-    return (!cached || force) ? refresh(selection, node) : cached;
+    return !cached || force ? refresh(selection, node) : cached;
 }
-
 
 export function utilSetDimensions(selection, dimensions) {
     if (!selection || selection.empty()) {

@@ -4,11 +4,14 @@ import { setTimeout } from 'node:timers/promises';
 describe('iD.validations.outdated_tags', function () {
     var context;
 
-    before(function() {
+    before(function () {
         iD.fileFetcher.cache().deprecated = [
-          { old: { building: 'roof' }, replace: { building: 'roof', layer: '1' } },
-          { old: { highway: 'no' } },
-          { old: { highway: 'ford' }, replace: { ford: '*' } }
+            {
+                old: { building: 'roof' },
+                replace: { building: 'roof', layer: '1' },
+            },
+            { old: { highway: 'no' } },
+            { old: { highway: 'ford' }, replace: { ford: '*' } },
         ];
         iD.services.nsi = {
             status: () => 'ok',
@@ -16,51 +19,62 @@ describe('iD.validations.outdated_tags', function () {
                 // mock implementation of NSI: All it does it suggest
                 // adding `brand:wikidata` if there's a matching `brand`.
                 const NSI = { 'Fish Bowl': 'Q110785465' };
-                if (tags.brand && NSI[tags.brand] && tags['brand:wikidata'] !== NSI[tags.brand]) {
+                if (
+                    tags.brand &&
+                    NSI[tags.brand] &&
+                    tags['brand:wikidata'] !== NSI[tags.brand]
+                ) {
                     return {
                         matched: {},
-                        newTags: { ...tags, 'brand:wikidata': NSI[tags.brand] }
+                        newTags: { ...tags, 'brand:wikidata': NSI[tags.brand] },
                     };
                 }
             },
         };
     });
 
-    after(function() {
+    after(function () {
         iD.fileFetcher.cache().deprecated = [];
         delete iD.services.nsi;
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
         context = iD.coreContext().init();
     });
 
-
     function createWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags});
+        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags });
 
         context.perform(
             iD.actionAddEntity(n1),
             iD.actionAddEntity(n2),
-            iD.actionAddEntity(w)
+            iD.actionAddEntity(w),
         );
     }
 
     function createRelation(wayTags, relationTags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3', 'n-1'], tags: wayTags});
-        var r = iD.osmRelation({id: 'r-1', members: [{id: 'w-1'}], tags: relationTags});
+        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
+        var w = iD.osmWay({
+            id: 'w-1',
+            nodes: ['n-1', 'n-2', 'n-3', 'n-1'],
+            tags: wayTags,
+        });
+        var r = iD.osmRelation({
+            id: 'r-1',
+            members: [{ id: 'w-1' }],
+            tags: relationTags,
+        });
 
         context.perform(
             iD.actionAddEntity(n1),
             iD.actionAddEntity(n2),
             iD.actionAddEntity(n3),
             iD.actionAddEntity(w),
-            iD.actionAddEntity(r)
+            iD.actionAddEntity(r),
         );
     }
 
@@ -68,7 +82,7 @@ describe('iD.validations.outdated_tags', function () {
         var changes = context.history().changes();
         var entities = changes.modified.concat(changes.created);
         var issues = [];
-        entities.forEach(function(entity) {
+        entities.forEach(function (entity) {
             issues = issues.concat(validator(entity, context.graph()));
         });
         return issues;
@@ -82,7 +96,7 @@ describe('iD.validations.outdated_tags', function () {
     });
 
     it('has no errors on good tags', async () => {
-        createWay({'highway': 'unclassified'});
+        createWay({ highway: 'unclassified' });
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
@@ -90,7 +104,7 @@ describe('iD.validations.outdated_tags', function () {
     });
 
     it('flags deprecated tag with replacement', async () => {
-        createWay({'highway': 'ford'});
+        createWay({ highway: 'ford' });
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
@@ -104,7 +118,7 @@ describe('iD.validations.outdated_tags', function () {
     });
 
     it('flags deprecated tag with no replacement', async () => {
-        createWay({'highway': 'no'});
+        createWay({ highway: 'no' });
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
@@ -157,7 +171,11 @@ describe('iD.validations.outdated_tags', function () {
     });
 
     it('generates 2 separate issues for deprecated tags and NSI suggestions', async () => {
-        createWay({ highway: 'ford', amenity: 'fast_food', brand: 'Fish Bowl' });
+        createWay({
+            highway: 'ford',
+            amenity: 'fast_food',
+            brand: 'Fish Bowl',
+        });
         const validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         const issues = validate(validator);
@@ -182,7 +200,7 @@ describe('iD.validations.outdated_tags', function () {
             amenity: 'fast_food',
             brand: 'Fish Bowl',
             // brand:wikidata not added yet
-            ford: 'yes' // tag upgraded
+            ford: 'yes', // tag upgraded
         });
 
         // click on "Upgrade Tags" (to fix the NSI suggestion)
@@ -191,7 +209,7 @@ describe('iD.validations.outdated_tags', function () {
             amenity: 'fast_food',
             brand: 'Fish Bowl',
             'brand:wikidata': 'Q110785465', // added
-            ford: 'yes' // tag already added
+            ford: 'yes', // tag already added
         });
     });
 
@@ -205,12 +223,22 @@ describe('iD.validations.outdated_tags', function () {
         issues[0].reference(selection);
         const tagReference = selection.selectAll('table .tagDiff-row').data();
         expect(tagReference).toHaveLength(2);
-        expect(tagReference.some(ref => ref.type === '+' && ref.key === 'layer')).toBeTruthy();
-        expect(tagReference.some(ref => ref.type === '~' && ref.key === 'building')).toBeTruthy();
+        expect(
+            tagReference.some((ref) => ref.type === '+' && ref.key === 'layer'),
+        ).toBeTruthy();
+        expect(
+            tagReference.some(
+                (ref) => ref.type === '~' && ref.key === 'building',
+            ),
+        ).toBeTruthy();
     });
 
     it('generates 2 separate issues for incomplete tags and NSI suggestions', async () => {
-        createWay({ building: 'roof', amenity: 'fast_food', brand: 'Fish Bowl' });
+        createWay({
+            building: 'roof',
+            amenity: 'fast_food',
+            brand: 'Fish Bowl',
+        });
         const validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         const issues = validate(validator);

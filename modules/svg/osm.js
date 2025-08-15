@@ -1,21 +1,26 @@
 export function svgOsm(projection, context, dispatch) {
     var enabled = true;
 
-
     function drawOsm(selection) {
-        selection.selectAll('.layer-osm')
+        selection
+            .selectAll('.layer-osm')
             .data(['covered', 'areas', 'lines', 'points', 'labels'])
             .enter()
             .append('g')
-            .attr('class', function(d) { return 'layer-osm ' + d; });
+            .attr('class', function (d) {
+                return 'layer-osm ' + d;
+            });
 
-        selection.selectAll('.layer-osm.points').selectAll('.points-group')
+        selection
+            .selectAll('.layer-osm.points')
+            .selectAll('.points-group')
             .data(['vertices', 'midpoints', 'points', 'turns'])
             .enter()
             .append('g')
-            .attr('class', function(d) { return 'points-group ' + d; });
+            .attr('class', function (d) {
+                return 'points-group ' + d;
+            });
     }
-
 
     function showLayer() {
         var layer = context.surface().selectAll('.data-layer.osm');
@@ -32,7 +37,6 @@ export function svgOsm(projection, context, dispatch) {
             });
     }
 
-
     function hideLayer() {
         var layer = context.surface().selectAll('.data-layer.osm');
         layer.interrupt();
@@ -47,8 +51,7 @@ export function svgOsm(projection, context, dispatch) {
             });
     }
 
-
-    drawOsm.enabled = function(val) {
+    drawOsm.enabled = function (val) {
         if (!arguments.length) return enabled;
         enabled = val;
 
@@ -61,7 +64,6 @@ export function svgOsm(projection, context, dispatch) {
         dispatch.call('change');
         return this;
     };
-
 
     return drawOsm;
 }

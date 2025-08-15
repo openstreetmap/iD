@@ -1,13 +1,11 @@
-import { utilFunctor } from '../util/util';
 import { t } from '../core/localizer';
+import { utilFunctor } from '../util/util';
 import { uiPopover } from './popover';
 
 export function uiTooltip(klass) {
+    var tooltip = uiPopover((klass || '') + ' tooltip').displayType('hover');
 
-    var tooltip = uiPopover((klass || '') + ' tooltip')
-        .displayType('hover');
-
-    var _title = function() {
+    var _title = function () {
         var title = this.getAttribute('data-original-title');
         if (title) {
             return title;
@@ -22,42 +20,43 @@ export function uiTooltip(klass) {
     var _heading = utilFunctor(null);
     var _keys = utilFunctor(null);
 
-    tooltip.title = function(val) {
+    tooltip.title = function (val) {
         if (!arguments.length) return _title;
         _title = utilFunctor(val);
         return tooltip;
     };
 
-    tooltip.heading = function(val) {
+    tooltip.heading = function (val) {
         if (!arguments.length) return _heading;
         _heading = utilFunctor(val);
         return tooltip;
     };
 
-    tooltip.keys = function(val) {
+    tooltip.keys = function (val) {
         if (!arguments.length) return _keys;
         _keys = utilFunctor(val);
         return tooltip;
     };
 
-    tooltip.content(function() {
+    tooltip.content(function () {
         var heading = _heading.apply(this, arguments);
         var text = _title.apply(this, arguments);
         var keys = _keys.apply(this, arguments);
 
-        var headingCallback = typeof heading === 'function' ? heading : s => s.text(heading);
-        var textCallback = typeof text === 'function' ? text : s => s.text(text);
+        var headingCallback =
+            typeof heading === 'function' ? heading : (s) => s.text(heading);
+        var textCallback =
+            typeof text === 'function' ? text : (s) => s.text(text);
 
-        return function(selection) {
-
+        return function (selection) {
             var headingSelect = selection
                 .selectAll('.tooltip-heading')
-                .data(heading ? [heading] :[]);
+                .data(heading ? [heading] : []);
 
-            headingSelect.exit()
-                .remove();
+            headingSelect.exit().remove();
 
-            headingSelect.enter()
+            headingSelect
+                .enter()
                 .append('div')
                 .attr('class', 'tooltip-heading')
                 .merge(headingSelect)
@@ -66,12 +65,12 @@ export function uiTooltip(klass) {
 
             var textSelect = selection
                 .selectAll('.tooltip-text')
-                .data(text ? [text] :[]);
+                .data(text ? [text] : []);
 
-            textSelect.exit()
-                .remove();
+            textSelect.exit().remove();
 
-            textSelect.enter()
+            textSelect
+                .enter()
                 .append('div')
                 .attr('class', 'tooltip-text')
                 .merge(textSelect)
@@ -82,25 +81,24 @@ export function uiTooltip(klass) {
                 .selectAll('.keyhint-wrap')
                 .data(keys && keys.length ? [0] : []);
 
-            keyhintWrap.exit()
-                .remove();
+            keyhintWrap.exit().remove();
 
-            var keyhintWrapEnter = keyhintWrap.enter()
+            var keyhintWrapEnter = keyhintWrap
+                .enter()
                 .append('div')
                 .attr('class', 'keyhint-wrap');
 
-            keyhintWrapEnter
-                .append('span')
-                .call(t.append('tooltip_keyhint'));
+            keyhintWrapEnter.append('span').call(t.append('tooltip_keyhint'));
 
             keyhintWrap = keyhintWrapEnter.merge(keyhintWrap);
 
-            keyhintWrap.selectAll('kbd.shortcut')
+            keyhintWrap
+                .selectAll('kbd.shortcut')
                 .data(keys && keys.length ? keys : [])
                 .enter()
                 .append('kbd')
                 .attr('class', 'shortcut')
-                .text(function(d) {
+                .text(function (d) {
                     return d;
                 });
         };

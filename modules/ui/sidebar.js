@@ -1,22 +1,19 @@
 import _throttle from 'lodash-es/throttle';
 
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
-import { utilArrayIdentical } from '../util/array';
-import { utilFastMouse } from '../util';
+import { localizer } from '../core/localizer';
 import { osmEntity, osmNote, QAItem } from '../osm';
 import { services } from '../services';
+import { utilFastMouse } from '../util';
+import { utilArrayIdentical } from '../util/array';
 import { uiDataEditor } from './data_editor';
 import { uiFeatureList } from './feature_list';
 import { uiInspector } from './inspector';
 import { uiKeepRightEditor } from './keepRight_editor';
-import { uiOsmoseEditor } from './osmose_editor';
 import { uiNoteEditor } from './note_editor';
-import { localizer } from '../core/localizer';
-
+import { uiOsmoseEditor } from './osmose_editor';
 
 export function uiSidebar(context) {
     var inspector = uiInspector(context);
@@ -31,7 +28,6 @@ export function uiSidebar(context) {
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
-
 
     function sidebar(selection) {
         var container = context.container();
@@ -71,22 +67,29 @@ export function uiSidebar(context) {
             containerWidth = container.node().getBoundingClientRect().width;
             var widthPct = (sidebarWidth / containerWidth) * 100;
             selection
-                .style('width', widthPct + '%')    // lock in current width
-                .style('max-width', '85%');        // but allow larger widths
+                .style('width', widthPct + '%') // lock in current width
+                .style('max-width', '85%'); // but allow larger widths
 
             resizer.classed('dragging', true);
 
             d3_select(window)
-                .on('touchmove.sidebar-resizer', function(d3_event) {
-                    // disable page scrolling while resizing on touch input
-                    d3_event.preventDefault();
-                }, { passive: false })
+                .on(
+                    'touchmove.sidebar-resizer',
+                    function (d3_event) {
+                        // disable page scrolling while resizing on touch input
+                        d3_event.preventDefault();
+                    },
+                    { passive: false },
+                )
                 .on(_pointerPrefix + 'move.sidebar-resizer', pointermove)
-                .on(_pointerPrefix + 'up.sidebar-resizer pointercancel.sidebar-resizer', pointerup);
+                .on(
+                    _pointerPrefix +
+                        'up.sidebar-resizer pointercancel.sidebar-resizer',
+                    pointerup,
+                );
         }
 
         function pointermove(d3_event) {
-
             if (downPointerId !== (d3_event.pointerId || 'mouse')) return;
 
             d3_event.preventDefault();
@@ -95,7 +98,7 @@ export function uiSidebar(context) {
 
             lastClientX = d3_event.clientX;
 
-            var isRTL = (localizer.textDirection() === 'rtl');
+            var isRTL = localizer.textDirection() === 'rtl';
             var scaleX = isRTL ? 0 : 1;
             var xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
 
@@ -115,7 +118,6 @@ export function uiSidebar(context) {
 
                     context.ui().onResize([(sidebarWidth - dx) * scaleX, 0]);
                 }
-
             } else {
                 var widthPct = (sidebarWidth / containerWidth) * 100;
                 selection
@@ -140,7 +142,11 @@ export function uiSidebar(context) {
             d3_select(window)
                 .on('touchmove.sidebar-resizer', null)
                 .on(_pointerPrefix + 'move.sidebar-resizer', null)
-                .on(_pointerPrefix + 'up.sidebar-resizer pointercancel.sidebar-resizer', null);
+                .on(
+                    _pointerPrefix +
+                        'up.sidebar-resizer pointercancel.sidebar-resizer',
+                    null,
+                );
         }
 
         var featureListWrap = selection
@@ -152,13 +158,16 @@ export function uiSidebar(context) {
             .append('div')
             .attr('class', 'inspector-hidden inspector-wrap');
 
-        var hoverModeSelect = function(targets) {
-            context.container().selectAll('.feature-list-item button').classed('hover', false);
+        var hoverModeSelect = function (targets) {
+            context
+                .container()
+                .selectAll('.feature-list-item button')
+                .classed('hover', false);
 
-            if (context.selectedIDs().length > 1 &&
-                targets && targets.length) {
-
-                var elements = context.container().selectAll('.feature-list-item button')
+            if (context.selectedIDs().length > 1 && targets && targets.length) {
+                var elements = context
+                    .container()
+                    .selectAll('.feature-list-item button')
                     .filter(function (node) {
                         return targets.indexOf(node) !== -1;
                     });
@@ -173,29 +182,28 @@ export function uiSidebar(context) {
 
         function hover(targets) {
             var datum = targets && targets.length && targets[0];
-            if (datum && datum.__featurehash__) {   // hovering on data
+            if (datum && datum.__featurehash__) {
+                // hovering on data
                 _wasData = true;
-                sidebar
-                    .show(dataEditor.datum(datum));
+                sidebar.show(dataEditor.datum(datum));
 
-                selection.selectAll('.sidebar-component')
+                selection
+                    .selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
-
             } else if (datum instanceof osmNote) {
                 if (context.mode().id === 'drag-note') return;
                 _wasNote = true;
 
                 var osm = services.osm;
                 if (osm) {
-                    datum = osm.getNote(datum.id);   // marker may contain stale data - get latest
+                    datum = osm.getNote(datum.id); // marker may contain stale data - get latest
                 }
 
-                sidebar
-                    .show(noteEditor.note(datum));
+                sidebar.show(noteEditor.note(datum));
 
-                selection.selectAll('.sidebar-component')
+                selection
+                    .selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
-
             } else if (datum instanceof QAItem) {
                 _wasQaItem = true;
 
@@ -213,68 +221,68 @@ export function uiSidebar(context) {
                     errEditor = osmoseEditor;
                 }
 
-                context.container().selectAll('.qaItem.' + datum.service)
-                    .classed('hover', function(d) { return d.id === datum.id; });
+                context
+                    .container()
+                    .selectAll('.qaItem.' + datum.service)
+                    .classed('hover', function (d) {
+                        return d.id === datum.id;
+                    });
 
-                sidebar
-                    .show(errEditor.error(datum));
+                sidebar.show(errEditor.error(datum));
 
-                selection.selectAll('.sidebar-component')
+                selection
+                    .selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
-
-            } else if (!_current && (datum instanceof osmEntity)) {
-                featureListWrap
-                    .classed('inspector-hidden', true);
+            } else if (!_current && datum instanceof osmEntity) {
+                featureListWrap.classed('inspector-hidden', true);
 
                 inspectorWrap
                     .classed('inspector-hidden', false)
                     .classed('inspector-hover', true);
 
-                if (!inspector.entityIDs() || !utilArrayIdentical(inspector.entityIDs(), [datum.id]) || inspector.state() !== 'hover') {
+                if (
+                    !inspector.entityIDs() ||
+                    !utilArrayIdentical(inspector.entityIDs(), [datum.id]) ||
+                    inspector.state() !== 'hover'
+                ) {
                     inspector
                         .state('hover')
                         .entityIDs([datum.id])
                         .newFeature(false);
 
-                    inspectorWrap
-                        .call(inspector);
+                    inspectorWrap.call(inspector);
                 }
-
             } else if (!_current) {
-                featureListWrap
-                    .classed('inspector-hidden', false);
-                inspectorWrap
-                    .classed('inspector-hidden', true);
-                inspector
-                    .state('hide');
-
+                featureListWrap.classed('inspector-hidden', false);
+                inspectorWrap.classed('inspector-hidden', true);
+                inspector.state('hide');
             } else if (_wasData || _wasNote || _wasQaItem) {
                 _wasNote = false;
                 _wasData = false;
                 _wasQaItem = false;
                 context.container().selectAll('.note').classed('hover', false);
-                context.container().selectAll('.qaItem').classed('hover', false);
+                context
+                    .container()
+                    .selectAll('.qaItem')
+                    .classed('hover', false);
                 sidebar.hide();
             }
         }
 
         sidebar.hover = _throttle(hover, 200);
 
-
-        sidebar.intersects = function(extent) {
+        sidebar.intersects = function (extent) {
             var rect = selection.node().getBoundingClientRect();
             return extent.intersects([
                 context.projection.invert([0, rect.height]),
-                context.projection.invert([rect.width, 0])
+                context.projection.invert([rect.width, 0]),
             ]);
         };
 
-
-        sidebar.select = function(ids, newFeature) {
+        sidebar.select = function (ids, newFeature) {
             sidebar.hide();
 
             if (ids && ids.length) {
-
                 var entity = ids.length === 1 && context.entity(ids[0]);
                 if (entity && newFeature && selection.classed('collapsed')) {
                     // uncollapse the sidebar
@@ -282,8 +290,7 @@ export function uiSidebar(context) {
                     sidebar.expand(sidebar.intersects(extent));
                 }
 
-                featureListWrap
-                    .classed('inspector-hidden', true);
+                featureListWrap.classed('inspector-hidden', true);
 
                 inspectorWrap
                     .classed('inspector-hidden', false)
@@ -291,31 +298,21 @@ export function uiSidebar(context) {
 
                 // reload the UI even if the ids are the same since the entities
                 // themselves may have changed
-                inspector
-                    .state('select')
-                    .entityIDs(ids)
-                    .newFeature(newFeature);
+                inspector.state('select').entityIDs(ids).newFeature(newFeature);
 
-                inspectorWrap
-                    .call(inspector);
-
+                inspectorWrap.call(inspector);
             } else {
-                inspector
-                    .state('hide');
+                inspector.state('hide');
             }
         };
 
-
-        sidebar.showPresetList = function() {
+        sidebar.showPresetList = function () {
             inspector.showList();
         };
 
-
-        sidebar.show = function(component, element) {
-            featureListWrap
-                .classed('inspector-hidden', true);
-            inspectorWrap
-                .classed('inspector-hidden', true);
+        sidebar.show = function (component, element) {
+            featureListWrap.classed('inspector-hidden', true);
+            inspectorWrap.classed('inspector-hidden', true);
 
             if (_current) _current.remove();
             _current = selection
@@ -324,40 +321,33 @@ export function uiSidebar(context) {
                 .call(component, element);
         };
 
-
-        sidebar.hide = function() {
-            featureListWrap
-                .classed('inspector-hidden', false);
-            inspectorWrap
-                .classed('inspector-hidden', true);
+        sidebar.hide = function () {
+            featureListWrap.classed('inspector-hidden', false);
+            inspectorWrap.classed('inspector-hidden', true);
 
             if (_current) _current.remove();
             _current = null;
         };
 
-
-        sidebar.expand = function(moveMap) {
+        sidebar.expand = function (moveMap) {
             if (selection.classed('collapsed')) {
                 sidebar.toggle(moveMap);
             }
         };
 
-
-        sidebar.collapse = function(moveMap) {
+        sidebar.collapse = function (moveMap) {
             if (!selection.classed('collapsed')) {
                 sidebar.toggle(moveMap);
             }
         };
 
-
-        sidebar.toggle = function(moveMap) {
-
+        sidebar.toggle = function (moveMap) {
             // Don't allow sidebar to toggle when the user is in the walkthrough.
             if (context.inIntro()) return;
 
             var isCollapsed = selection.classed('collapsed');
             var isCollapsing = !isCollapsed;
-            var isRTL = (localizer.textDirection() === 'rtl');
+            var isRTL = localizer.textDirection() === 'rtl';
             var scaleX = isRTL ? 0 : 1;
             var xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
 
@@ -383,15 +373,17 @@ export function uiSidebar(context) {
             selection
                 .transition()
                 .style(xMarginProperty, endMargin + 'px')
-                .tween('panner', function() {
+                .tween('panner', function () {
                     var i = d3_interpolateNumber(startMargin, endMargin);
-                    return function(t) {
+                    return function (t) {
                         var dx = lastMargin - Math.round(i(t));
                         lastMargin = lastMargin - dx;
-                        context.ui().onResize(moveMap ? undefined : [dx * scaleX, 0]);
+                        context
+                            .ui()
+                            .onResize(moveMap ? undefined : [dx * scaleX, 0]);
                     };
                 })
-                .on('end', function() {
+                .on('end', function () {
                     if (isCollapsing) {
                         // hide the sidebar's content after it transitions offscreen
                         selection.classed('collapsed', isCollapsing);
@@ -399,7 +391,9 @@ export function uiSidebar(context) {
 
                     // switch back from px to %
                     if (!isCollapsing) {
-                        var containerWidth = container.node().getBoundingClientRect().width;
+                        var containerWidth = container
+                            .node()
+                            .getBoundingClientRect().width;
                         var widthPct = (sidebarWidth / containerWidth) * 100;
                         selection
                             .style(xMarginProperty, null)
@@ -409,7 +403,7 @@ export function uiSidebar(context) {
         };
 
         // toggle the sidebar collapse when double-clicking the resizer
-        resizer.on('dblclick', function(d3_event) {
+        resizer.on('dblclick', function (d3_event) {
             d3_event.preventDefault();
             if (d3_event.sourceEvent) {
                 d3_event.sourceEvent.preventDefault();
@@ -418,23 +412,23 @@ export function uiSidebar(context) {
         });
 
         // ensure hover sidebar is closed when zooming out beyond editable zoom
-        context.map().on('crossEditableZoom.sidebar', function(within) {
+        context.map().on('crossEditableZoom.sidebar', function (within) {
             if (!within && !selection.select('.inspector-hover').empty()) {
                 hover([]);
             }
         });
     }
 
-    sidebar.showPresetList = function() {};
-    sidebar.hover = function() {};
-    sidebar.hover.cancel = function() {};
-    sidebar.intersects = function() {};
-    sidebar.select = function() {};
-    sidebar.show = function() {};
-    sidebar.hide = function() {};
-    sidebar.expand = function() {};
-    sidebar.collapse = function() {};
-    sidebar.toggle = function() {};
+    sidebar.showPresetList = function () {};
+    sidebar.hover = function () {};
+    sidebar.hover.cancel = function () {};
+    sidebar.intersects = function () {};
+    sidebar.select = function () {};
+    sidebar.show = function () {};
+    sidebar.hide = function () {};
+    sidebar.expand = function () {};
+    sidebar.collapse = function () {};
+    sidebar.toggle = function () {};
 
     return sidebar;
 }
