@@ -1,5 +1,6 @@
 import js from '@eslint/js';
 import globals from 'globals';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default [
   js.configs.recommended,
@@ -135,5 +136,7 @@ export default [
       }
     }
   }
+  ,
+  // Put this last to turn off ESLint rules that would conflict with Prettier
+  eslintConfigPrettier
 ];
-

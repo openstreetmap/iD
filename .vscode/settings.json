@@ -1,5 +1,16 @@
 {
     "i18n-ally.readonly": true,
     "i18n-ally.localesPaths": ["data"],
-    "i18n-ally.pathMatcher": "core.yaml"
+    "i18n-ally.pathMatcher": "core.yaml",
+
+    // Prettier: default formatter and format only modified lines on save
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
+
+    // Disable built-in organize imports on save; rely on Prettier plugin
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "never",
+        "source.fixAll.eslint": "explicit"
+    }
 }
