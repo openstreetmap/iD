@@ -1,7 +1,9 @@
 import { t } from '../core/localizer';
+import { operationDelete } from '../operations';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
-import { validationIssue } from '../core/validation';
-export function validationDashes() {
+import { validationIssue,validationIssueFix } from '../core/validation';
+import { actionChangeTags } from '../actions';
+export function validationDashes(context) {
     var type = 'invalid_dashes';
 
     var validation = function (entity) {
@@ -14,9 +16,33 @@ export function validationDashes() {
                 .attr('class', 'issue-reference')
                 .call(t.append('issues.invalid_dashes.reference'));
         }
-    
+    const DASH_SENSITIVE_KEYS = new Set([
+  'opening_hours',
+  'service_times',
+  'collection_times',
+  'delivery_hours'
+]);
+
+function isDashSensitiveKey(key) {
+  return DASH_SENSITIVE_KEYS.has(key) || key.endsWith(':conditional');
+}
+
     // Regex for all non-standard dashes and similar characters
+//  ~        → Tilde, sometimes mistaken for a dash
+//  \u2010   → Hyphen (‐)
+//  \u2011   → Non-breaking hyphen
+//  \u2012   → Figure dash (‒)
+//  \u2013   → En dash (–)
+//  \uFE58   → Small em dash (﹘)
+//  \u06D4   → Arabic full stop (۔)
+//  \u2043   → Hyphen bullet (⁃)
+//  \u02D7   → Modifier letter minus sign (˗)
+//  \u2212   → Mathematical minus sign (−)
+//  \u2796   → Heavy minus sign (➖)
+//  \u2CBA   → Coptic capital letter sampi (Ⲻ),
+
 var invalidDashRegex = /[~\u2010\u2011\u2012\u2013\uFE58\u06D4\u2043\u02D7\u2212\u2796\u2CBA]/;
+
 
         function containsInvalidDash(text) {
             return invalidDashRegex.test(text);
@@ -26,7 +52,7 @@ var invalidDashRegex = /[~\u2010\u2011\u2012\u2013\uFE58\u06D4\u2043\u02D7\u2212
 
             Object.entries(entity.tags).forEach(([key, value]) => {
                 if (typeof value !== 'string') return;
-
+                if (!isDashSensitiveKey(key)) return;
                 if (containsInvalidDash(value)) {
                     badTags.push({ key, value });
                 }
@@ -45,6 +71,70 @@ var invalidDashRegex = /[~\u2010\u2011\u2012\u2013\uFE58\u06D4\u2043\u02D7\u2212
                     },
                     reference:showReferenceDash,
                     entityIds: [entity.id],
+                      dynamicFixes: function(context) {
+
+                var fixes = [];
+                var deleteOnClick;
+
+                var id = this.entityIds[0];
+                var operation = operationDelete(context, [id]);
+                var disabledReasonID = operation.disabled();
+                if (!disabledReasonID) {
+                    deleteOnClick = function(context) {
+
+                        var id = this.issue.entityIds[0];
+                        var operation = operationDelete(context, [id]);
+                        if (!operation.disabled()) {
+                            operation();
+                        }
+                    };
+                }
+fixes.push(
+    new validationIssueFix({
+        icon: 'iD-icon-wrench',
+        title: t.append('issues.fix.replace_dashes.title'),
+        onClick: function(context) {
+
+            var id = this.issue.entityIds[0];
+            var entity = context.hasEntity(id);
+            if (!entity) return;
+
+                            const tags = { ...entity.tags };
+                            let changed = false;
+
+                            badTags.forEach(({ key, value }) => {
+                                if (invalidDashRegex.test(value)) {
+                                    tags[key] = value.replace(invalidDashRegex, '-');
+                                    changed = true;
+                                }
+                            });
+
+
+            if (changed) {
+               context.perform(
+              actionChangeTags(id, tags),
+
+              t('issues.fix.replace_dashes.annotation')
+
+            );
+
+                         }
+        }
+    })
+);
+
+
+                fixes.push(
+                    new validationIssueFix({
+                        icon: 'iD-operation-delete',
+                        title: t.append('issues.fix.delete_feature.title'),
+                        disabledReason: disabledReasonID ? t('operations.delete.' + disabledReasonID + '.single') : undefined,
+                        onClick: deleteOnClick
+                    })
+                );
+
+                return fixes;
+            },
                     hash: badTags.map(d => `${d.key}=${d.value}`).join('|'),
                     data: badTags.length > 1 ? '_multi' : ''
                 }));
