@@ -3,11 +3,11 @@ import { operationDelete } from '../operations';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue,validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions';
-export function validationDashes(context) {
+export function validationDashes() {
     var type = 'invalid_dashes';
 
     var validation = function (entity) {
-        var issues = []
+        var issues = [];
         function showReferenceDash(selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
@@ -138,11 +138,11 @@ fixes.push(
                     hash: badTags.map(d => `${d.key}=${d.value}`).join('|'),
                     data: badTags.length > 1 ? '_multi' : ''
                 }));
-            } 
+            }
         }
         return issues;
-        
-    }
+
+    };
     validation.type = type;
     return validation;
 
