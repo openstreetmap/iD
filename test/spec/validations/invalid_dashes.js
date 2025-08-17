@@ -44,7 +44,7 @@ describe('iD.validations.dashes', function () {
     });
 
     it('flags invalid dash in dash-sensitive keys', function() {
-        createWay({ opening_hours: 'Mo–Fr 10:00-18:00' }); // EN dash 
+        createWay({ opening_hours: 'Mo–Fr 10:00-18:00' }); // EN dash
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
 

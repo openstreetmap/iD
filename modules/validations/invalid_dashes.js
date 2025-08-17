@@ -23,7 +23,7 @@ function isDashSensitiveKey(key) {
   return DASH_SENSITIVE_KEYS.has(key) || key.endsWith(':conditional');
 }
 
-    // Regex for all non-standard dashes and similar characters
+// Regex for all non-standard dashes and similar characters
 //  ~        → Tilde, sometimes mistaken for a dash
 //  \u2010   → Hyphen (‐)
 //  \u2011   → Non-breaking hyphen
@@ -36,8 +36,9 @@ function isDashSensitiveKey(key) {
 //  \u2212   → Mathematical minus sign (−)
 //  \u2796   → Heavy minus sign (➖)
 //  \u2CBA   → Coptic capital letter sampi (Ⲻ),
+//  \u2014   → EM DASH (—)
 
-var invalidDashRegex = /[~\u2010\u2011\u2012\u2013\uFE58\u06D4\u2043\u02D7\u2212\u2796\u2CBA]/;
+var invalidDashRegex = /[~\u2010\u2011\u2012\u2013\uFE58\u06D4\u2043\u02D7\u2212\u2796\u2CBA\u2014]/;
 
 
         function containsInvalidDash(text) {
