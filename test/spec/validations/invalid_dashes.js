@@ -73,8 +73,10 @@ describe('iD.validations.dashes', function () {
         expect(issue.data).to.eql('_multi');  // multiple bad tags
     });
 
-   it('offers a fix to replace invalid dashes', function() {
-    createWay({ collection_times: '12–14' }); // EN dash
+   it('replaces invalid dashes only outside comments ', function() {
+    // en dash before Fr (invalid, should be fixed)
+    // em dash inside quotes (valid, should stay as it is)
+    createWay({ opening_hours: 'Mo–Fr 08:00-18:00 "holiday — closed"' }); 
     var issues = validate();
     expect(issues).to.have.lengthOf(1);
 
@@ -88,7 +90,7 @@ describe('iD.validations.dashes', function () {
     replaceFix.onClick.call({ issue: issues[0] }, context);
 
     var entity = context.hasEntity('w-1');
-    expect(entity.tags.collection_times).to.eql('12-14');
+    expect(entity.tags.opening_hours).to.eql('Mo-Fr 08:00-18:00 "holiday — closed"');
 });
 
 

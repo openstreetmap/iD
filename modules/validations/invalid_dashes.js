@@ -18,7 +18,6 @@ export function validationDashes() {
                 .call(t.append('issues.invalid_dashes.reference'));
         }
 
-
 function isDashSensitiveKey(key) {
   return DASH_SENSITIVE_KEYS.has(key) || key.endsWith(':conditional');
 }
@@ -39,18 +38,35 @@ function isDashSensitiveKey(key) {
 //  \u2014   → EM DASH (—)
 
 var invalidDashRegex = /[~\u2010\u2011\u2012\u2013\uFE58\u06D4\u2043\u02D7\u2212\u2796\u2CBA\u2014]/;
+        function replaceInvalidDashesOutsideComments(text) {
+            let result = '';
+            //finds the comments in tag values  
+            let regex = /"[^"]*"|[^"]+/g; 
+            let match;
 
+            while ((match = regex.exec(text)) !== null) {
+                if (match[0].startsWith('"')) {
+                    result += match[0];
+                } else {
+                    // replace invalid dashes outside quotes
+                    result += match[0].replace(invalidDashRegex, '-');
+                }
+            }
 
-        function containsInvalidDash(text) {
-            return invalidDashRegex.test(text);
+            return result;
         }
+
+       function containsInvalidDashOutsideComments(text) {
+          
+           return text !== replaceInvalidDashesOutsideComments(text);
+        } 
         if (entity.tags) {
             var badTags = [];
 
             Object.entries(entity.tags).forEach(([key, value]) => {
                 if (typeof value !== 'string') return;
                 if (!isDashSensitiveKey(key)) return;
-                if (containsInvalidDash(value)) {
+                if (containsInvalidDashOutsideComments(value)) {
                     badTags.push({ key, value });
                 }
             });
@@ -99,11 +115,12 @@ var invalidDashRegex = /[~\u2010\u2011\u2012\u2013\uFE58\u06D4\u2043\u02D7\u2212
                                     let changed = false;
 
                                     badTags.forEach(({ key, value }) => {
-                                        if (invalidDashRegex.test(value)) {
-                                            tags[key] = value.replace(invalidDashRegex, '-');
+                                         let newValue = replaceInvalidDashesOutsideComments(value);
+                                            if (newValue !== value) {
+                                            tags[key] = newValue;
                                             changed = true;
-                                        }
-                                    });
+                                            }
+                                        });
 
                                     if (changed) {
                                     context.perform(
