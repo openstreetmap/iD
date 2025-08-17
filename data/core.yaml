@@ -2007,8 +2007,8 @@ en:
       connect_feature:
         title: Connect this feature
       replace_dashes:
-      title: Replace all non-standard dashes
-      annotation: Replaced non-standard dashes in tag values 
+        title: Replace all non-standard dashes
+        annotation: Replaced non-standard dashes in tag values 
       connect_features:
         title: Connect the features
       connect_using_crossing:
