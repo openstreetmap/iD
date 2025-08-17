@@ -3,6 +3,7 @@ import { operationDelete } from '../operations';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue,validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions';
+import { DASH_SENSITIVE_KEYS } from '../osm/tags';
 export function validationDashes() {
     var type = 'invalid_dashes';
 
@@ -16,12 +17,7 @@ export function validationDashes() {
                 .attr('class', 'issue-reference')
                 .call(t.append('issues.invalid_dashes.reference'));
         }
-    const DASH_SENSITIVE_KEYS = new Set([
-  'opening_hours',
-  'service_times',
-  'collection_times',
-  'delivery_hours'
-]);
+  
 
 function isDashSensitiveKey(key) {
   return DASH_SENSITIVE_KEYS.has(key) || key.endsWith(':conditional');

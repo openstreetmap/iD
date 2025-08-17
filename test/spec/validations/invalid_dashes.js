@@ -36,15 +36,15 @@ describe('iD.validations.dashes', function () {
     });
 
     it('ignores non dash-sensitive tags', function() {
-        //Here en dash is used in the name but because it is not a dash-sensitive tag ,
+        //Here EN dash is used in the "name" tag but because it is not a dash-sensitive tag ,
         // it should be ignored
-        createWay({ name: 'Main–Street' });//EN DASH
+        createWay({ name: 'Main–Street' });//EN dash
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
 
     it('flags invalid dash in dash-sensitive keys', function() {
-        createWay({ opening_hours: 'Mo–Fr 10:00-18:00' }); // EN DASH
+        createWay({ opening_hours: 'Mo–Fr 10:00-18:00' }); // EN dash 
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
 
