@@ -17,7 +17,7 @@ export function validationDashes() {
                 .attr('class', 'issue-reference')
                 .call(t.append('issues.invalid_dashes.reference'));
         }
-  
+
 
 function isDashSensitiveKey(key) {
   return DASH_SENSITIVE_KEYS.has(key) || key.endsWith(':conditional');
@@ -68,70 +68,67 @@ var invalidDashRegex = /[~\u2010\u2011\u2012\u2013\uFE58\u06D4\u2043\u02D7\u2212
                     },
                     reference:showReferenceDash,
                     entityIds: [entity.id],
-                      dynamicFixes: function(context) {
+                    dynamicFixes: function(context) {
 
-                var fixes = [];
-                var deleteOnClick;
-
-                var id = this.entityIds[0];
-                var operation = operationDelete(context, [id]);
-                var disabledReasonID = operation.disabled();
-                if (!disabledReasonID) {
-                    deleteOnClick = function(context) {
-
-                        var id = this.issue.entityIds[0];
+                        var fixes = [];
+                        var deleteOnClick;
+                        var id = this.entityIds[0];
                         var operation = operationDelete(context, [id]);
-                        if (!operation.disabled()) {
-                            operation();
-                        }
-                    };
-                }
-fixes.push(
-    new validationIssueFix({
-        icon: 'iD-icon-wrench',
-        title: t.append('issues.fix.replace_dashes.title'),
-        onClick: function(context) {
+                        var disabledReasonID = operation.disabled();
+                        if (!disabledReasonID) {
+                            deleteOnClick = function(context) {
 
-            var id = this.issue.entityIds[0];
-            var entity = context.hasEntity(id);
-            if (!entity) return;
-
-                            const tags = { ...entity.tags };
-                            let changed = false;
-
-                            badTags.forEach(({ key, value }) => {
-                                if (invalidDashRegex.test(value)) {
-                                    tags[key] = value.replace(invalidDashRegex, '-');
-                                    changed = true;
+                                var id = this.issue.entityIds[0];
+                                var operation = operationDelete(context, [id]);
+                                if (!operation.disabled()) {
+                                    operation();
                                 }
-                            });
+                            };
+                        }
+                        fixes.push(
+                            new validationIssueFix({
+                                icon: 'iD-icon-wrench',
+                                title: t.append('issues.fix.replace_dashes.title'),
+                                onClick: function(context) {
+
+                                    var id = this.issue.entityIds[0];
+                                    var entity = context.hasEntity(id);
+                                    if (!entity) return;
+
+                                    const tags = { ...entity.tags };
+                                    let changed = false;
+
+                                    badTags.forEach(({ key, value }) => {
+                                        if (invalidDashRegex.test(value)) {
+                                            tags[key] = value.replace(invalidDashRegex, '-');
+                                            changed = true;
+                                        }
+                                    });
+
+                                    if (changed) {
+                                    context.perform(
+                                    actionChangeTags(id, tags),
+                                    t('issues.fix.replace_dashes.annotation')
+
+                                    );
+
+                                    }
+                                }
+                            })
+                        );
 
 
-            if (changed) {
-               context.perform(
-              actionChangeTags(id, tags),
+                        fixes.push(
+                            new validationIssueFix({
+                                icon: 'iD-operation-delete',
+                                title: t.append('issues.fix.delete_feature.title'),
+                                disabledReason: disabledReasonID ? t('operations.delete.' + disabledReasonID + '.single') : undefined,
+                                onClick: deleteOnClick
+                            })
+                        );
 
-              t('issues.fix.replace_dashes.annotation')
-
-            );
-
-                         }
-        }
-    })
-);
-
-
-                fixes.push(
-                    new validationIssueFix({
-                        icon: 'iD-operation-delete',
-                        title: t.append('issues.fix.delete_feature.title'),
-                        disabledReason: disabledReasonID ? t('operations.delete.' + disabledReasonID + '.single') : undefined,
-                        onClick: deleteOnClick
-                    })
-                );
-
-                return fixes;
-            },
+                    return fixes;
+                    },
                     hash: badTags.map(d => `${d.key}=${d.value}`).join('|'),
                     data: badTags.length > 1 ? '_multi' : ''
                 }));
