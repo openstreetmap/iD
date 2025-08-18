@@ -5,7 +5,7 @@ export default defineConfig({
     css: true,
     environment: 'jsdom',
     globals: true,
-    include: ['test/spec/**/*'],
+    include: ['test/spec/**/*.{js,ts}'],
     setupFiles: ['./test/spec_helpers.ts'],
   },
 });
