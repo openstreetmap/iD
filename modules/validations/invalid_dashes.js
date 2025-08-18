@@ -1,26 +1,26 @@
-import { t } from "../core/localizer";
-import { operationDelete } from "../operations";
-import { utilDisplayLabel } from "../util/utilDisplayLabel";
-import { validationIssue, validationIssueFix } from "../core/validation";
-import { actionChangeTags } from "../actions";
-import { DASH_SENSITIVE_KEYS } from "../osm/tags";
+import { t } from '../core/localizer';
+import { operationDelete } from '../operations';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
+import { validationIssue, validationIssueFix } from '../core/validation';
+import { actionChangeTags } from '../actions';
+import { DASH_SENSITIVE_KEYS } from '../osm/tags';
 export function validationDashes() {
-    var type = "invalid_dashes";
+    var type = 'invalid_dashes';
 
     var validation = function (entity) {
         var issues = [];
         function showReferenceDash(selection) {
             selection
-                .selectAll(".issue-reference")
+                .selectAll('.issue-reference')
                 .data([0])
                 .enter()
-                .append("div")
-                .attr("class", "issue-reference")
-                .call(t.append("issues.invalid_dashes.reference"));
+                .append('div')
+                .attr('class', 'issue-reference')
+                .call(t.append('issues.invalid_dashes.reference'));
         }
 
         function isDashSensitiveKey(key) {
-            return DASH_SENSITIVE_KEYS.has(key) || key.endsWith(":conditional");
+            return DASH_SENSITIVE_KEYS.has(key) || key.endsWith(':conditional');
         }
 
         // Regex for all non-standard dashes and similar characters
@@ -39,22 +39,21 @@ export function validationDashes() {
         //  \u2014   → EM DASH (—)
 
         var invalidDashRegex =
-            /[~\u2010\u2011\u2012\u2013\uFE58\u06D4\u2043\u02D7\u2212\u2796\u2CBA\u2014]/;
+            /[~\u2010\u2011\u2012\u2013\uFE58\u06D4\u2043\u02D7\u2212\u2796\u2CBA\u2014]/g;
         function replaceInvalidDashesOutsideComments(text) {
-            let result = "";
-            //finds the comments in tag values
-            let regex = /"[^"]*"|[^"]+/g;
-            let match;
-
-            while ((match = regex.exec(text)) !== null) {
-                if (match[0].startsWith('"')) {
-                    result += match[0];
+            let result = '';
+            let insideQuotes = false;
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                if (char === '"') {
+                    insideQuotes = !insideQuotes;
+                    result += char;
+                } else if (!insideQuotes && invalidDashRegex.test(char)) {
+                    result += '-';
                 } else {
-                    // replace invalid dashes outside quotes
-                    result += match[0].replace(invalidDashRegex, "-");
+                    result += char;
                 }
             }
-
             return result;
         }
 
@@ -65,7 +64,7 @@ export function validationDashes() {
             var badTags = [];
 
             Object.entries(entity.tags).forEach(([key, value]) => {
-                if (typeof value !== "string") return;
+                if (typeof value !== 'string') return;
                 if (!isDashSensitiveKey(key)) return;
                 if (containsInvalidDashOutsideComments(value)) {
                     badTags.push({ key, value });
@@ -76,8 +75,8 @@ export function validationDashes() {
                 issues.push(
                     new validationIssue({
                         type: type,
-                        subtype: "nonstandard_dash",
-                        severity: "error",
+                        subtype: 'nonstandard_dash',
+                        severity: 'error',
                         message: function (context) {
                             var entity = context.hasEntity(this.entityIds[0]);
                             return entity
@@ -90,7 +89,7 @@ export function validationDashes() {
                                           ),
                                       }
                                   )
-                                : "";
+                                : '';
                         },
                         reference: showReferenceDash,
                         entityIds: [entity.id],
@@ -113,9 +112,9 @@ export function validationDashes() {
                             }
                             fixes.push(
                                 new validationIssueFix({
-                                    icon: "iD-icon-wrench",
+                                    icon: 'iD-icon-wrench',
                                     title: t.append(
-                                        "issues.fix.replace_dashes.title"
+                                        'issues.fix.replace_dashes.title'
                                     ),
                                     onClick: function (context) {
                                         var id = this.issue.entityIds[0];
@@ -140,7 +139,7 @@ export function validationDashes() {
                                             context.perform(
                                                 actionChangeTags(id, tags),
                                                 t(
-                                                    "issues.fix.replace_dashes.annotation"
+                                                    'issues.fix.replace_dashes.annotation'
                                                 )
                                             );
                                         }
@@ -150,15 +149,15 @@ export function validationDashes() {
 
                             fixes.push(
                                 new validationIssueFix({
-                                    icon: "iD-operation-delete",
+                                    icon: 'iD-operation-delete',
                                     title: t.append(
-                                        "issues.fix.delete_feature.title"
+                                        'issues.fix.delete_feature.title'
                                     ),
                                     disabledReason: disabledReasonID
                                         ? t(
-                                              "operations.delete." +
+                                              'operations.delete.' +
                                                   disabledReasonID +
-                                                  ".single"
+                                                  '.single'
                                           )
                                         : undefined,
                                     onClick: deleteOnClick,
@@ -169,8 +168,8 @@ export function validationDashes() {
                         },
                         hash: badTags
                             .map((d) => `${d.key}=${d.value}`)
-                            .join("|"),
-                        data: badTags.length > 1 ? "_multi" : "",
+                            .join('|'),
+                        data: badTags.length > 1 ? '_multi' : '',
                     })
                 );
             }
