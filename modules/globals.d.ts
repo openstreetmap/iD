@@ -1,4 +1,5 @@
 import type FetchMock from 'fetch-mock';
+import type { afterEach, beforeEach } from 'vitest';
 
 declare global {
   declare var iD: typeof import('.');

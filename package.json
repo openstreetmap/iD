@@ -40,7 +40,8 @@
     "start:single-build": "run-p build:js start:server",
     "start:watch": "run-p build:js:watch start:server",
     "start:server": "node scripts/server.js",
-    "test": "npm-run-all -s lint build test:spec",
+    "test": "npm-run-all -s lint build test:*",
+    "test:typecheck": "tsc",
     "test:spec": "vitest --no-isolate",
     "translations": "node scripts/update_locales.js"
   },
@@ -128,6 +129,8 @@
     "sinon-chai": "^4.0.0",
     "smash": "0.0",
     "svg-sprite": "2.0.4",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.40.0",
     "vparse": "~1.1.0"
   },
   "engines": {

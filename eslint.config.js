@@ -1,10 +1,16 @@
+// @ts-check
 import js from '@eslint/js';
 import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
-export default [
+export default tseslint.config(
   js.configs.recommended,
+
+  // TS rules should only apply to TS files
+  tseslint.configs.recommended.map(block => block.rules ? { ...block, files: ['**/*.ts'] } : block),
+
   {
-    files: ['**/*.js', '**/*.mjs'],
+    files: ['**/*.{js,ts}'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
@@ -13,6 +19,10 @@ export default [
       }
     },
     rules: {
+       '@typescript-eslint/ban-ts-comment': 'off',
+       '@typescript-eslint/consistent-type-imports': ['error', { disallowTypeAnnotations: false }],
+       '@typescript-eslint/no-explicit-any': 'off',
+
        'accessor-pairs': 'error',
        'array-callback-return': 'warn',
        'arrow-spacing': 'warn',
@@ -74,7 +84,6 @@ export default [
        'no-template-curly-in-string': 'warn',
        'no-throw-literal': 'error',
        'no-trailing-spaces': 'warn',
-       'no-undef': 'error',
        'no-undef-init': 'warn',
        'no-unexpected-multiline': 'error',
        'no-unneeded-ternary': 'error',
@@ -82,7 +91,6 @@ export default [
        'no-unreachable': 'warn',
        'no-unreachable-loop': 'warn',
        'no-unused-expressions': 'error',
-       'no-unused-vars': 'warn',
        'no-use-before-define': ['off', 'nofunc'],
        'no-useless-backreference': 'warn',
        'no-useless-call': 'warn',
@@ -91,10 +99,14 @@ export default [
        'no-useless-constructor': 'warn',
        'no-useless-escape': 'off',
        'no-useless-rename': 'warn',
+       'no-var': 'off',
        'no-void': 'error',
        'no-warning-comments': 'warn',
        'no-whitespace-before-property': 'warn',
        'no-with': 'error',
+       'prefer-const': 'off',
+       'prefer-spread': 'off',
+       'prefer-rest-params': 'off',
        'quotes': ['error', 'single'],
        'radix': ['error', 'always'],
        'require-atomic-updates': 'error',
@@ -106,7 +118,14 @@ export default [
     }
   },
   {
-    files: ['test/**/*.js', 'test/**/*.mjs'],
+    // extra rules for JS files only, where TS is not available:
+    files: ['**/*.js'],
+    rules: {
+      'no-undef': 'error',
+    }
+  },
+  {
+    files: ['test/**/*.{js,ts}'],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -124,16 +143,17 @@ export default [
       }
     },
     rules: {
+      'no-unused-vars': 'warn',
       'no-unused-expressions': 'off'
     }
   },
   {
-    files: ['scripts/**/*.js', 'scripts/**/*.mjs', 'config/**/*.js', 'config/**/*.mjs'],
+    files: ['{config,scripts}/**/*.{js,ts}'],
     languageOptions: {
       globals: {
         ...globals.node,
       }
     }
   }
-];
+);
 

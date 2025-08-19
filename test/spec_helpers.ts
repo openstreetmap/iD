@@ -1,14 +1,15 @@
-import { beforeEach, afterEach, it } from 'vitest';
-import 'chai';
+import { beforeAll, beforeEach, afterEach } from 'vitest';
+import { use } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import 'happen';
 import fetchMock from 'fetch-mock';
 import envs from '../config/envs.js';
 
-chai.use(sinonChai);
+use(sinonChai);
 
 declare var global: typeof globalThis;
+declare var jsdom: typeof globalThis;
 
 global.before = beforeEach;
 global.after = afterEach;
