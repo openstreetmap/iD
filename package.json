@@ -92,7 +92,7 @@
     "@types/sinon": "^17.0.4",
     "@types/sinon-chai": "^4.0.0",
     "autoprefixer": "^10.4.21",
-    "browserslist": "^4.25.2",
+    "browserslist": "^4.25.3",
     "browserslist-to-esbuild": "^2.1.1",
     "chai": "^5.3.1",
     "chalk": "^4.1.2",
