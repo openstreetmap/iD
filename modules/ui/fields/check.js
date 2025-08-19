@@ -17,7 +17,7 @@ export { uiFieldCheck as uiFieldOnewayCheck };
 
 export function uiFieldCheck(field, context) {
     var dispatch = d3_dispatch('change');
-    var options = field.options;
+    var options = field.options();
     var values = [];
     var texts = [];
 
@@ -34,9 +34,6 @@ export function uiFieldCheck(field, context) {
 
 
     var stringsField = field.resolveReference('stringsCrossReference');
-    if (!options && stringsField.options) {
-        options = stringsField.options;
-    }
 
     if (options) {
         for (var i in options) {

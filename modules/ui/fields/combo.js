@@ -174,14 +174,8 @@ export function uiFieldCombo(field, context) {
 
     function getOptions(allOptions) {
         var stringsField = field.resolveReference('stringsCrossReference');
-        if (!(field.options || stringsField.options)) return [];
+        const options = field.options(allOptions);
 
-        let options;
-        if (allOptions !== true) {
-            options = field.options || stringsField.options;
-        } else {
-            options = [].concat(field.options, stringsField.options).filter(Boolean);
-        }
         const result = options.map(function(v) {
             const labelId = getLabelId(stringsField, v);
             return {
@@ -272,7 +266,7 @@ export function uiFieldCombo(field, context) {
                     d.value.toLowerCase().indexOf(_countryCode + ':') === 0);
             }
 
-            const additionalOptions = (field.options || stringsField.options || [])
+            const additionalOptions = (field.options() || stringsField.options() || [])
                 .filter(v => !data.some(dv => dv.value === (_isMulti ? field.key + v : v)))
                 .map(v => ({ value: v }));
 

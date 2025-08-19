@@ -1,13 +1,17 @@
 import { localizer, t } from '../core/localizer';
-import { utilSafeClassName } from '../util/util';
+import { utilResolveReference, utilSafeClassName } from '../util/util';
 
 
 //
 // `presetField` decorates a given `field` Object
 // with some extra methods for searching and matching geometry
 //
-export function presetField(fieldID, field, allFields) {
+export function presetField(fieldID, field, allFields, allPresets) {
   allFields = allFields || {};
+  allPresets = allPresets || {};
+
+  const references = { fields: allFields, presets: allPresets };
+
   let _this = Object.assign({}, field);   // shallow copy
 
   _this.id = fieldID;
@@ -52,6 +56,25 @@ export function presetField(fieldID, field, allFields) {
     .toLowerCase().trim().split(/\s*,+\s*/);
 
   _this.increment = _this.type === 'number' ? (_this.increment || 1) : undefined;
+
+  /** @param {boolean} [allOptions] - see https://github.com/openstreetmap/id/commit/a35653 */
+  _this.options = (allOptions) => {
+    const referencedField = _this.resolveReference('stringsCrossReference');
+    let options = field.options || [];
+    if (referencedField !== _this) {
+      if (allOptions) {
+        options.push(...referencedField.options());
+      } else {
+        options = referencedField.options();
+      }
+    }
+
+    return options.map(option => {
+      const reference = utilResolveReference(option, references);
+      if (reference) return reference.label;
+      return option;
+    });
+  };
 
   return _this;
 }

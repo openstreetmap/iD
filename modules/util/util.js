@@ -692,3 +692,26 @@ export function utilCleanOsmString(val, maxChars) {
     // trim to the number of allowed characters
     return utilUnicodeCharsTruncated(val, maxChars);
   }
+
+/**
+ * For cross-referenced strings from id-tagging-schema:
+ * If the `string` contains an expression like `{group/x/y/z}`, it will
+ * return `allItems['group']['x/y/z']`
+ * @template T
+ * @param {string} path
+ * @param {{ [group: string]: { [key: string]: T } } | undefined} allItems
+ * @returns {T | undefined}
+ */
+export function utilResolveReference(path, allItems) {
+    const match = path.match(/^\{(.*)\}$/);
+    if (match) {
+        const [group, ...remainder] = match[1].split('/');
+        const value = allItems?.[group]?.[remainder.join('/')];
+
+        if (value) {
+            return value;
+        }
+        console.error(`Unable to resolve referenced field: ${match[1]}`);  // eslint-disable-line no-console
+    }
+    return undefined;
+}

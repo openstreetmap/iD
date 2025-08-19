@@ -374,4 +374,22 @@ describe('iD.util', function() {
             expect(iD.utilOldestID(['z', 'a', 'A', 'Z'])).to.eql('z');
         });
     });
+
+    describe('utilResolveReference', () => {
+        const allItems = {
+            group1: { 'a/b': 1 },
+            group2: { 'x': 2 },
+        };
+        it.each`
+            path                   | result
+            ${'{group1/a/b}'}      | ${1}
+            ${'{group2/x}'}        | ${2}
+            ${'{group2/invalid}'}  | ${undefined}
+            ${'{invalid/invalid}'} | ${undefined}
+            ${'{}'}                | ${undefined}
+            ${''}                  | ${undefined}
+        `('resolves $path to $result', ({ path, result }) => {
+            expect(iD.utilResolveReference(path, allItems)).toBe(result);
+        });
+    });
 });

@@ -17,7 +17,7 @@ export function uiFieldRadio(field, context) {
     var labels = d3_select(null);
     var radios = d3_select(null);
     var strings = field.resolveReference('stringsCrossReference');
-    var radioData = (field.options || strings.options || field.keys).slice();  // shallow copy
+    var radioData = (field.options() || strings.options() || field.keys).slice();  // shallow copy
     var typeField;
     var layerField;
     var _oldType = {};
@@ -279,7 +279,7 @@ export function uiFieldRadio(field, context) {
 
         radios.property('checked', function(d) {
             return isOptionChecked(d) &&
-                (field.key || field.options.filter(isOptionChecked).length === 1);
+                (field.key || field.options().filter(isOptionChecked).length === 1);
         });
 
         labels
