@@ -331,6 +331,14 @@ export function coreLocalizer() {
                 locale: locale
             };
           }
+          if (Array.isArray(result)) {
+            // found an array of localized strings!
+            // for example: `terms` or `aliases` from id-tagging-schema
+            return {
+                text: result,
+                locale: locale
+            };
+          }
         }
         // no localized string found...
 

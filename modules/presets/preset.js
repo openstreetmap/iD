@@ -27,11 +27,11 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.safeid = utilSafeClassName(presetID);  // for use in css classes, selectors, element ids
 
-  _this.originalTerms = (_this.terms || []).join();
+  _this.originalTerms = _this.terms;
 
   _this.originalName = _this.name || '';
 
-  _this.originalAliases = (_this.aliases || []).join('\n');
+  _this.originalAliases = _this.aliases || [];
 
   _this.originalScore = _this.matchScore || 1;
 
@@ -142,16 +142,12 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.aliases = () => {
     return resolveReference('originalName')
-      .t('aliases', { 'default': _this.originalAliases })
-      .trim()
-      .split(/\s*[\r\n]+\s*/)
-      .filter(Boolean);
+      .t('aliases', { 'default': _this.originalAliases });
   };
 
   _this.terms = () => {
     return resolveReference('originalName')
-      .t('terms', { 'default': _this.originalTerms })
-      .toLowerCase().trim().split(/\s*,+\s*/);
+      .t('terms', { 'default': _this.originalTerms });
   };
 
   _this.searchName = () => {
