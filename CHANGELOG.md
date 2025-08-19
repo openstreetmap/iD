@@ -59,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix duplicate values deleted when editing `destination:*` tags ([#10639], thanks [@k-yle])
 * Fix the relation role dropdown not opening on click ([#10645], thanks [@k-yle])
 #### :earth_asia: Localization
+* Add Korean phone number formats ([#11319], thanks [@aaei924])
 #### :hourglass: Performance
 #### :rocket: Presets
 * Support more complex logic to define preset fields that are conditionally hidden ([#9511], thanks [@k-yle])
@@ -82,9 +83,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11206]: https://github.com/openstreetmap/iD/issues/11206
 [#11211]: https://github.com/openstreetmap/iD/issues/11211
 [#11247]: https://github.com/openstreetmap/iD/issues/11247
+[#11319]: https://github.com/openstreetmap/iD/pull/11319
 [@bhavyaKhatri2703]: https://github.com/bhavyaKhatri2703
 [@harahu]: https://github.com/harahu
 [@Harvester57]: https://github.com/Harvester57
+[@aaei924]: https://github.com/aaei924
 
 
 # v2.35.3
