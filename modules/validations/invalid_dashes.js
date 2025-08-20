@@ -3,7 +3,7 @@ import { operationDelete } from '../operations';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions';
-import { DASH_SENSITIVE_KEYS } from '../osm/tags';
+import { isDashSensitiveKey } from '../osm/tags';
 export function validationDashes() {
     var type = 'invalid_dashes';
 
@@ -17,10 +17,6 @@ export function validationDashes() {
                 .append('div')
                 .attr('class', 'issue-reference')
                 .call(t.append('issues.invalid_dashes.reference'));
-        }
-
-        function isDashSensitiveKey(key) {
-            return DASH_SENSITIVE_KEYS.has(key) || key.endsWith(':conditional');
         }
 
         // Regex for all non-standard dashes and similar characters

@@ -373,9 +373,14 @@ export var osmSummableTags = new Set([
     'parking:left:capacity',
     'parking:left:capacity'
 ]);
-export  const DASH_SENSITIVE_KEYS = new Set([
+export  const dashSensitiveKeys  = new Set([
   'opening_hours',
   'service_times',
   'collection_times',
   'delivery_hours'
 ]);
+
+export function isDashSensitiveKey(key) {
+    return dashSensitiveKeys.has(key) || key.endsWith(':conditional');
+}
+
