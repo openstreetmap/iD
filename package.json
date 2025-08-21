@@ -75,6 +75,7 @@
     "which-polygon": "2.2.1"
   },
   "devDependencies": {
+    "@actions/github-script": "github:actions/github-script",
     "@fortawesome/fontawesome-svg-core": "~7.0.0",
     "@fortawesome/free-brands-svg-icons": "^7.0.0",
     "@fortawesome/free-regular-svg-icons": "^7.0.0",

@@ -1,0 +1,50 @@
+name: Deploy PR Preview
+
+on:
+  workflow_run:
+    workflows: [build]
+    types:
+      - completed
+
+permissions:
+  contents: read
+  actions: write
+  deployments: write
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    if: ${{github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'}}
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '24'
+
+      - name: Download all artifacts (dist folder and pr_metadata)
+        uses: dawidd6/action-download-artifact@ac66b43f0e6a346234dd65d4d0c8fbb31cb316e5 # v11
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          run_id: ${{github.event.workflow_run.id}}
+          allow_forks: true
+
+      - name: Read pr_metadata
+        id: pr_metadata
+        run: cat pr_metadata/pr_metadata.ini >> $GITHUB_OUTPUT
+
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{secrets.NETLIFY_AUTH_TOKEN}}
+          NETLIFY_SITE_ID: ${{secrets.NETLIFY_SITE_ID}}
+        run: npx netlify deploy --no-build --dir=. --alias=pr-${{steps.pr_metadata.outputs.pr}}
+
+      - name: Run afterDeploy script
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const { afterDeploy } = await import('${{github.workspace}}/scripts/pr_preview.js');
+            await afterDeploy({ core, github, context })(
+              '${{steps.pr_metadata.outputs.pr}}',
+              '${{steps.pr_metadata.outputs.ref}}',
+            );

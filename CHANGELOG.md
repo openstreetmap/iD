@@ -69,6 +69,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Add signatures audit to CI build pipeline and pin github action's versions ([#11103], thanks [@Harvester57])
+* Configure preview deployments for Pull Requests ([#11332], thanks [@k-yle])
 
 [#7629]: https://github.com/openstreetmap/iD/pull/7629
 [#8440]: https://github.com/openstreetmap/iD/pull/8440
@@ -88,6 +89,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11211]: https://github.com/openstreetmap/iD/issues/11211
 [#11247]: https://github.com/openstreetmap/iD/issues/11247
 [#11319]: https://github.com/openstreetmap/iD/pull/11319
+[#11332]: https://github.com/openstreetmap/iD/pull/11332
 [#11333]: https://github.com/openstreetmap/iD/pull/11333
 [#11335]: https://github.com/openstreetmap/iD/issues/11335
 [@bhavyaKhatri2703]: https://github.com/bhavyaKhatri2703
