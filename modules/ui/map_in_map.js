@@ -13,7 +13,8 @@ import { utilSetTransform } from '../util';
 export function uiMapInMap(context) {
 
     function mapInMap(selection) {
-        var backgroundLayer = rendererTileLayer(context);
+        var backgroundLayer = rendererTileLayer(context)
+            .underzoom(2);
         var overlayLayers = {};
         var projection = geoRawMercator();
         var dataLayer = svgData(projection, context).showLabels(false);

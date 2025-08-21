@@ -243,6 +243,12 @@ textarea.mixed::placeholder {
     font-style: italic;
 }
 
+.ideditor[dir='rtl'] input:placeholder-shown[dir="auto"] {
+    /* hard-set rtl for placeholder texts in rtl locales, see
+       https://github.com/openstreetmap/iD/pull/11091#issuecomment-2936953197 */
+    direction: rtl;
+}
+
 /* keytraps need to be invisible yet not be display:none or visibility:hidden */
 .keytrap {
     width: 0;
@@ -358,6 +364,9 @@ button.disabled {
     background-color: rgba(255,255,255,.25);
     color: rgba(0,0,0,.4);
     cursor: not-allowed;
+}
+button.disabled .icon {
+    fill: rgba(0,0,0,.4);
 }
 
 .joined > * {
@@ -613,6 +622,9 @@ button.bar-button.dragging.removing {
     cursor: url(img/cursor-select-remove.png), pointer;
 }
 
+button.save {
+    background-image: linear-gradient(0, var(--accent-color), var(--accent-color));
+}
 button.save .count {
     display: inline-block;
     min-width: 32px;
@@ -1243,6 +1255,14 @@ a.hide-toggle {
 
 .preset-list-item.mixed-types .label {
     font-style: italic;
+}
+
+button.preset-reset .label.flash-bg {
+    animation: flash-bg 750ms;
+}
+@keyframes flash-bg {
+    0% { background-color: #fff; }
+    100% { background-color: #f6f6f6; }
 }
 
 .preset-list-button .label-inner {
@@ -2342,15 +2362,15 @@ input.date-selector {
 
 /* Field - Changeset Comment
 ------------------------------------------------------- */
-.form-field-comment:not(.present) #preset-input-comment {
-    border-color: rgb(230, 100, 100);
+.form-field-comment:not(.present) textarea {
+    border-color: rgb(160, 160, 160);
 }
 .form-field-comment:not(.present) .field-label {
-    border-color: rgb(230, 100, 100);
-    background: rgba(230, 100, 100, 0.2);
+    border-color: rgb(160, 160, 160);
+    background-color: rgba(160, 160, 160, 0.2);
 }
 .form-field-comment:not(.present) button {
-    border-color: rgb(230, 100, 100);
+    border-color: rgb(160, 160, 160);
 }
 
 
@@ -2863,6 +2883,10 @@ img.tag-reference-wiki-image {
     margin: 0;
     padding-bottom: 10px;
 }
+/* only the raw-member-editor is reorederable, not the raw-membership-editor */
+.section-raw-member-editor .member-row .label-text { cursor: grab; }
+.section-raw-member-editor .member-row .label-text:active { cursor: grabbing; }
+
 .section-raw-member-editor .member-row .member-entity-name,
 .section-raw-membership-editor .member-row .member-entity-name {
     font-weight: normal;
@@ -2951,6 +2975,22 @@ img.tag-reference-wiki-image {
 .add-tag {
     border-radius: 0 0 4px 4px;
 }
+.add-tag button {
+    visibility: hidden;
+}
+.add-tag input.key {
+    border-bottom-left-radius: 4px;
+}
+.add-tag input.key::placeholder {
+    font-weight: normal;
+}
+.add-tag input.value {
+    border-bottom-right-radius: 4px;
+}
+.tag-row:has(+ .add-tag) button:last-child {
+    border-bottom-right-radius: 4px;
+}
+
 .add-relation {
     margin-top: 10px;
     border-radius: 4px;
@@ -3069,6 +3109,7 @@ img.tag-reference-wiki-image {
 .comment-date {
     color: #aaa;
 }
+.inspector-hover .comment-text,
 .comment-text {
     color: #333;
     margin-top: 10px;
@@ -3578,6 +3619,57 @@ button.autofix.action.active {
 }
 .autofix-all-link-icon svg use {
     color: #fff;
+}
+
+/* suggestion styles */
+.suggestions-list,
+.suggestions-list *,
+.issue-container.active .issue.severity-suggestion,
+.issue-container.active .issue.severity-suggestion * {
+    border-color: #2f7eff;
+}
+.suggestions-list .issue.severity-suggestion .issue-label,
+.issue.severity-suggestion .issue-fix-list,
+.suggestion-section {
+    background: #e1effe;
+}
+
+.issue-container.active .issue.severity-suggestion .issue-label {
+    background: #e1effe;
+}
+
+.issue.severity-suggestion .issue-icon {
+    color: #49f;
+}
+
+.issue.severity-suggestion .issue-fix-item button.actionable,
+.issue-container.active .issue.severity-suggestion .issue-info-button {
+    color: #0066cc;
+    fill: #0066cc;
+}
+.suggestions-list .issue.severity-suggestion .issue-label:active,
+.suggestions-list .issue.severity-suggestion .issue-label:focus,
+.issue.severity-suggestion .issue-fix-item button.actionable:active,
+.issue.severity-suggestion .issue-fix-item button.actionable:focus {
+    background: #abd5ff;
+}
+.issue.severity-suggestion .issue-fix-item button.actionable:active,
+.issue.severity-suggestion .issue-fix-item button.actionable:focus,
+.issue-container.active .issue.severity-suggestion .issue-info-button:active,
+.issue-container.active .issue.severity-suggestion .issue-info-button:focus {
+    color: #0066cc;
+    fill: #1f4d82;
+}
+@media (hover: hover) {
+    .suggestions-list .issue.severity-suggestion .issue-label:hover,
+    .issue.severity-warning .issue-fix-item button.actionable:hover {
+        background: #bdf;
+    }
+    .issue.severity-suggestion .issue-fix-item button.actionable:hover,
+    .issue-container.active .issue.severity-suggestion .issue-info-button:hover {
+        color: #1f4d82;
+        fill: #1f4d82;
+    }
 }
 
 /* warning styles */
@@ -4178,11 +4270,13 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .help-pane .nav {
     position: relative;
     padding-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .help-pane .nav a {
-    float: left;
-    width: 50%;
+    flex: 0 0 50%;
     text-align: center;
 }
 
@@ -4196,7 +4290,7 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 }
 
 .help-pane .nav a:only-child {
-    width: 100%;
+    flex: 0 0 100%;
     border-radius: 4px;
 }
 
@@ -4232,10 +4326,10 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     border: 1px solid #ccc;
 }
 
-/* scrollbars only when necessary*/
+/* no scrollbars */
 .inspector-hover div {
     overflow-x: visible;
-    overflow-y: auto;
+    overflow-y: visible;
 }
 
 /* hide and remove from layout */
@@ -4247,7 +4341,8 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .inspector-hover .form-field-input-radio label,
 .inspector-hover .form-field-input-radio label span,
 .inspector-hover .form-field-input-radio label.remove .icon,
-.inspector-hover .add-row,
+.inspector-hover .tag-row button,
+.inspector-hover .tag-row.add-tag,
 .inspector-hover .section-entity-issues .issue-container .issue-fix-list,
 .inspector-hover .section-entity-issues .issue-container .issue-info-button {
     display: none;
@@ -4261,9 +4356,8 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-fields,
 .inspector-hover .field-label button,
-.inspector-hover .tag-row button,
 .inspector-hover .footer * {
-    opacity: 0;
+    visibility: hidden;
 }
 
 /* Unstyle the active entity issue on hover */
@@ -4362,10 +4456,29 @@ img.tile {
     -webkit-user-drag: none;
 
     opacity: 1;
-    transition: opacity 120ms linear;
+    transition: opacity 250ms linear;
+
+    /* prevent brief flickering of "broken image" on tile loading errors, see https://zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement/ */
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-img.tile-removing {
+.layer-overlay .img.tile,
+.map-in-map-overlay .img.tile {
+    /* dummy transition such that the `ontransitionend` event can be triggered, see https://github.com/openstreetmap/iD/pull/10785 */
+    transition: opacity 1ms linear;
+}
+
+.layer-background .layer,
+.map-in-map-background {
+    filter: url(#alpha-slope5);
+}
+
+.layer-background img.tile-removing,
+.layer-overlay img.tile-removing,
+.map-in-map-background img.tile-removing,
+.map-in-map-overlay img.tile-removing {
     opacity: 0;
     z-index: 1;
 }
@@ -4424,6 +4537,15 @@ img.tile-debug {
     bottom: 0;
 }
 
+.layer-background {
+    z-index: 1;
+}
+.layer-overlay {
+    z-index: 2;
+}
+.layer-data {
+    z-index: 3;
+}
 
 /* Map-In-Map
 ------------------------------------------------------- */
@@ -5765,6 +5887,7 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     border: solid transparent;
     border-width: 3px 3px 3px 4px;
     border-radius: 6px;
+    cursor: auto;
 }
 ::-webkit-scrollbar-track:active {
     background-color: rgba(0,0,0,.05);

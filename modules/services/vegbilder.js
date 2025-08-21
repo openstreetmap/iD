@@ -8,6 +8,7 @@ import { utilQsString, utilTiler, utilRebind, utilArrayUnion, utilStringQs} from
 import {geoExtent, geoScaleToZoom, geoVecAngle, geoVecEqual} from '../geo';
 import pannellumPhotoFrame from './pannellum_photo';
 import planePhotoFrame from './plane_photo';
+import { services } from './';
 
 
 const owsEndpoint = 'https://www.vegvesen.no/kart/ogc/vegbilder_1_0/ows?';
@@ -142,6 +143,7 @@ async function loadTile(cache, typename, tile) {
     const lane_number = parseInt(lane_code.match(/^[0-9]+/)[0], 10);
     const direction = lane_number % 2 === 0 ? directionEnum.backward : directionEnum.forward;
     const data = {
+      service: 'photo',
       loc,
       key,
       ca,
@@ -485,24 +487,25 @@ export default {
     _currentFrame = d.is_sphere? _pannellumFrame : _planeFrame;
 
     _currentFrame
-      .selectPhoto(d, keepOrientation)
-      .showPhotoFrame(wrap);
+      .showPhotoFrame(wrap)
+      .selectPhoto(d, keepOrientation);
 
     return this;
   },
 
   showViewer: function (context) {
-    const viewer = context.container().select('.photoviewer')
-      .classed('hide', false);
-
+    const viewer = context.container().select('.photoviewer');
     const isHidden = viewer.selectAll('.photo-wrapper.vegbilder-wrapper.hide').size();
 
     if (isHidden) {
+      for (const service of Object.values(services)) {
+        if (service === this) continue;
+        if (typeof service.hideViewer === 'function') {
+          service.hideViewer(context);
+        }
+      }
       viewer
-        .selectAll('.photo-wrapper:not(.vegbilder-wrapper)')
-        .classed('hide', true);
-
-      viewer
+        .classed('hide', false)
         .selectAll('.photo-wrapper.vegbilder-wrapper')
         .classed('hide', false);
     }
@@ -583,15 +586,13 @@ export default {
   },
 
   updateUrlImage: function (key) {
-    if (!window.mocha) {
-      const hash = utilStringQs(window.location.hash);
-      if (key) {
-        hash.photo = 'vegbilder/' + key;
-      } else {
-        delete hash.photo;
-      }
-      window.location.replace('#' + utilQsString(hash, true));
+    const hash = utilStringQs(window.location.hash);
+    if (key) {
+      hash.photo = 'vegbilder/' + key;
+    } else {
+      delete hash.photo;
     }
+    window.history.replaceState(null, '', '#' + utilQsString(hash, true));
   },
 
   validHere: function(extent) {

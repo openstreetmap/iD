@@ -34,6 +34,12 @@ export function validationMismatchedGeometry() {
             return null;
         }
 
+        if (asLine.isFallback() && asArea.isFallback() && !deepEqual(tagSuggestingArea, { area: 'yes' })) {
+            // if the entity matches the fallback preset, regardless of the
+            // geometry, then changing the geometry will not help.
+            return null;
+        }
+
         return tagSuggestingArea;
     }
 

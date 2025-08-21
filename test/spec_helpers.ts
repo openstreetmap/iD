@@ -1,12 +1,15 @@
-import { beforeEach, afterEach, it } from 'vitest';
-import 'chai';
+import { beforeAll, beforeEach, afterEach } from 'vitest';
+import { use } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import 'happen';
 import fetchMock from 'fetch-mock';
-import envs from '../config/envs.mjs';
+import envs from '../config/envs.js';
 
-chai.use(sinonChai);
+use(sinonChai);
+
+declare var global: typeof globalThis;
+declare var jsdom: typeof globalThis;
 
 global.before = beforeEach;
 global.after = afterEach;
@@ -19,20 +22,18 @@ for (const [key, value] of Object.entries(envs)) {
   Reflect.set(global, key, JSON.parse(value));
 }
 
-// vitest has deprecated the done() callback, so we overwrite the `it` function
-const _it = it;
-Reflect.set(
-  global,
-  'it',
-  Object.assign(
-    (msg: string, fn: (done?: () => void) => void | Promise<void>) => {
-      _it(msg, () =>
-        fn.length ? () => new Promise<void>((resolve) => fn(resolve)) : fn(),
-      );
-    },
-    { todo: _it.todo, skip: _it.skip },
-  ),
-);
+// the 'happen' library explicitly references `window` when creating an event,
+// but we need to use jsdom's window, so we have to patch initEvent.
+const { initMouseEvent } = MouseEvent.prototype;
+MouseEvent.prototype.initMouseEvent = function (...args) {
+  args[3] = jsdom.window;
+  return initMouseEvent.apply(this, args);
+};
+const { initUIEvent } = UIEvent.prototype;
+UIEvent.prototype.initUIEvent = function (...args) {
+  args[3] = jsdom.window;
+  return initUIEvent.apply(this, args);
+};
 
 // must be imported after global envs are defined
 await import('../modules/id.js');

@@ -57,6 +57,7 @@ export function uiChangesetEditor(context) {
 
         if (initial) {
             var commentField = selection.select('.form-field-comment textarea');
+            const sourceField = _fieldsArr.find(field => field.id === 'source');
             var commentNode = commentField.node();
 
             if (commentNode) {
@@ -82,13 +83,23 @@ export function uiChangesetEditor(context) {
                         .call(commentCombo
                             .data(utilArrayUniqBy(comments, 'title'))
                         );
+
+                    // add extra dropdown options to the `source` field
+                    // based on the values used in recent changesets.
+                    const recentSources = changesets
+                        .flatMap((changeset) => changeset.tags.source?.split(';'))
+                        .filter(value => !sourceField.options.includes(value))
+                        .filter(Boolean)
+                        .map(title => ({ title, value: title, klass: 'raw-option' }));
+
+                    sourceField.impl.setCustomOptions(utilArrayUniqBy(recentSources, 'title'));
                 });
             }
         }
 
         // Show warning(s) if comment mentions Google or comment length exceeds 255 chars
         const warnings = [];
-        if (_tags.comment.match(/google/i)) {
+        if (_tags.comment?.match(/google/i)) {
             warnings.push({
                 id: 'contains "google"',
                 msg: t.append('commit.google_warning'),

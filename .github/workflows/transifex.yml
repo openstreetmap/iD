@@ -1,6 +1,6 @@
 # This workflow will push the iD source strings to transifex
 # - requires TX_TOKEN secret to be set on GitHub
-# - you can generate a token at https://www.transifex.com/user/settings/api/
+# - you can generate a token at https://app.transifex.com/user/settings/api/
 # - job does not run if no token provided
 
 name: transifex
@@ -19,7 +19,7 @@ jobs:
     environment: workflows
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
     - name: Install Transifex client
       run: |
         curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash

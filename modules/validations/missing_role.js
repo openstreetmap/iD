@@ -42,15 +42,18 @@ export function validationMissingRole() {
             type: type,
             severity: 'warning',
             message: function(context) {
-                var member = context.hasEntity(this.entityIds[1]),
-                    relation = context.hasEntity(this.entityIds[0]);
+                const member = context.hasEntity(this.entityIds[0]),
+                    relation = context.hasEntity(this.entityIds[1]);
                 return (member && relation) ? t.append('issues.missing_role.message', {
                     member: utilDisplayLabel(member, context.graph()),
                     relation: utilDisplayLabel(relation, context.graph())
                 }) : '';
             },
             reference: showReference,
-            entityIds: [relation.id, way.id],
+            entityIds: [way.id, relation.id],
+            extent: function(graph) {
+                return graph.entity(this.entityIds[0]).extent(graph);
+            },
             data: {
                 member: member
             },
@@ -64,7 +67,7 @@ export function validationMissingRole() {
                         title: t.append('issues.fix.remove_from_relation.title'),
                         onClick: function(context) {
                             context.perform(
-                                actionDeleteMember(this.issue.entityIds[0], this.issue.data.member.index),
+                                actionDeleteMember(this.issue.entityIds[1], this.issue.data.member.index),
                                 t('operations.delete_member.annotation', {
                                     n: 1
                                 })
@@ -92,9 +95,9 @@ export function validationMissingRole() {
             title: t.append('issues.fix.set_as_' + role + '.title'),
             onClick: function(context) {
                 var oldMember = this.issue.data.member;
-                var member = { id: this.issue.entityIds[1], type: oldMember.type, role: role };
+                var member = { id: this.issue.entityIds[0], type: oldMember.type, role: role };
                 context.perform(
-                    actionChangeMember(this.issue.entityIds[0], member, oldMember.index),
+                    actionChangeMember(this.issue.entityIds[1], member, oldMember.index),
                     t('operations.change_role.annotation', {
                         n: 1
                     })

@@ -134,10 +134,6 @@
       ["quarter", "neighbourhood"],
       ["block_number", "housenumber"]
     ],
-    "dropdowns": [
-      "postcode", "province", "county", "city", "suburb",
-      "quarter", "neighbourhood", "block_number"
-    ],
     "widths": {
       "postcode": 0.3,
       "province": 0.35,
@@ -153,7 +149,8 @@
   {
     "countryCodes": ["kr"],
     "format": [
-      ["province", "city", "district"],
+      ["province", "city"],
+      ["district", "town", "subdistrict"],
       ["street", "housenumber", "unit"],
       ["postcode"]
     ]
@@ -192,10 +189,12 @@
   {
     "countryCodes": ["bo"],
     "format": [
+      ["housename"],
       ["street", "housenumber"],
       ["neighbourhood", "city"]
     ],
     "widths": {
+      "housename": 1,
       "street": 0.7,
       "housenumber": 0.3,
       "neighbourhood": 0.5,
@@ -208,9 +207,6 @@
       ["street", "housenumber"],
       ["neighbourhood"],
       ["city", "state", "postcode"]
-    ],
-    "dropdowns": [
-      "street", "neighbourhood", "city", "state", "postcode"
     ],
     "widths": {
       "street": 0.7,
@@ -234,9 +230,6 @@
       ["street", "housenumber"],
       ["housename", "subdistrict"],
       ["district", "city", "postcode"]
-    ],
-    "dropdowns": [
-      "street", "city", "subdistrict", "district", "postcode"
     ],
     "widths": {
       "street": 0.7,

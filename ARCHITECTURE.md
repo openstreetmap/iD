@@ -11,15 +11,15 @@ rendering the map data as well as many sorts of general DOM manipulation tasks
 for which jQuery would often be used.
 
 Notable features of d3 that are used by iD include
-[d3.fetch](https://github.com/d3/d3/blob/main/API.md#fetches-d3-fetch), which is
+[d3.fetch](https://d3js.org/d3-fetch), which is
 used to make the API requests to download data from openstreetmap.org and save changes;
-[d3.dispatch](https://github.com/d3/d3/blob/main/API.md#dispatches-d3-dispatch),
+[d3.dispatch](https://d3js.org/d3-dispatch),
 which provides a callback-based [Observer
 pattern](https://en.wikipedia.org/wiki/Observer_pattern) between different
 parts of iD;
-[d3.geoPath](https://github.com/d3/d3/blob/main/API.md#paths), which
+[d3.geoPath](https://d3js.org/d3-geo/path#geoPath), which
 generates SVG paths for lines and areas; and
-[d3.zoom](https://github.com/d3/d3/blob/main/API.md#zooming-d3-zoom),
+[d3.zoom](https://d3js.org/d3-zoom),
 which implements map panning and zooming.
 
 
@@ -86,7 +86,7 @@ different `loc` coordinate. More generically, `iD.osmEntity#update` returns
 a new entity of the same type and `id` as the original but with specified properties
 such as `nodes`, `tags`, or `members` replaced.
 
-![](https://farm9.staticflickr.com/8087/8508309757_ccf5b6f09b_o.png)
+![](docs/img/graph-history.png)
 
 Entities are related to one another: ways have many nodes and relations have
 many members.
@@ -233,7 +233,7 @@ of duplicating the code to implement this behavior in all these modes, we
 extract it to `iD.behaviorHover`.
 
 _Behaviors_ take their inspiration from [d3's
-behaviors](https://github.com/d3/d3/blob/main/API.md). Like d3's `zoom`
+behaviors](https://d3js.org/api). Like d3's `zoom`
 and `drag`, each iD behavior is a function that takes as input a d3 selection
 (assumed to consist of a single element) and installs the DOM event bindings
 necessary to implement the behavior. The `Hover` behavior, for example,
@@ -482,6 +482,10 @@ A feature does not have enough tags to define what it is.
 * `descriptive`: there are `area`, `name`, `type=multipolygon`, and/or meta tags (e.g. `source`), but no defining tags
 * `relation_type`: the OSM entity type is `relation` but there is no `type` tag
 * `highway_classification`: the OSM entity type is `way` and the feature is tagged as `highway=road`
+
+##### `osm_api_limits`
+
+A feature does not conform to the limits and rules imposed by the OSM API, such as a way with too many nodes for example.
 
 ##### `outdated_tags`
 

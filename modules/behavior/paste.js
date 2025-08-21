@@ -2,6 +2,7 @@ import { actionCopyEntities } from '../actions/copy_entities';
 import { actionMove } from '../actions/move';
 import { geoExtent, geoPointInPolygon, geoVecSubtract } from '../geo';
 import { modeMove } from '../modes/move';
+import { operationPaste } from '../operations';
 import { uiCmd } from '../ui/cmd';
 
 // see also `operationPaste`
@@ -10,6 +11,10 @@ export function behaviorPaste(context) {
     function doPaste(d3_event) {
         // prevent paste during low zoom selection
         if (!context.map().withinEditableZoom()) return;
+
+        // prevent paste if the pasted object would be invisible (see #10000)
+        const isOsmLayerEnabled = context.layers().layer('osm').enabled();
+        if (!isOsmLayerEnabled) return;
 
         d3_event.preventDefault();
 
@@ -56,7 +61,8 @@ export function behaviorPaste(context) {
         var delta = geoVecSubtract(mouse, copyPoint);
 
         context.perform(actionMove(newIDs, delta, projection));
-        context.enter(modeMove(context, newIDs, baseGraph));
+        context.enter(modeMove(context, newIDs, baseGraph)
+            .annotation(operationPaste(context).annotation()));
     }
 
 

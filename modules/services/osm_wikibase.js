@@ -102,6 +102,38 @@ export default {
         return result.replace(/_/g, ' ').trim();
     },
 
+    /**
+     * Converts text like `tag:...=...` into clickable links
+     *
+     * @param {string} unsafeText - unsanitized text
+     */
+    linkifyWikiText(unsafeText) {
+        /** @param {import('d3').Selection} selection */
+        return (selection) => {
+            const segments = unsafeText.split(/(key|tag):([\w-]+)(=([\w-]+))?/g);
+
+            for (let i = 0; i < segments.length; i += 5) {
+                const [plainText, , key, , value] = segments.slice(i);
+
+                if (plainText) {
+                    selection
+                        .append('span')
+                        .text(plainText);
+                }
+
+                if (key) {
+                    selection
+                        .append('a')
+                        .attr('href', `https://wiki.openstreetmap.org/wiki/${this.toSitelink(key, value)}`)
+                        .attr('target', '_blank')
+                        .attr('rel', 'noreferrer')
+                        .append('code')
+                            .text(`${key}=${value || '*'}`);
+                }
+            }
+        };
+    },
+
 
     //
     // Pass params object of the form:
@@ -119,7 +151,7 @@ export default {
         var rtypeSitelink = (params.key === 'type' && params.value) ? ('Relation:' + params.value).replace(/_/g, ' ').trim() : false;
         var keySitelink = params.key ? this.toSitelink(params.key) : false;
         var tagSitelink = (params.key && params.value) ? this.toSitelink(params.key, params.value) : false;
-        var localeSitelink;
+        const localeSitelinks = [];
 
         if (params.langCodes) {
             params.langCodes.forEach(function(langCode) {
@@ -127,8 +159,12 @@ export default {
                     // If this is the first time we are asking about this locale,
                     // fetch corresponding entity (if it exists), and cache it.
                     // If there is no such entry, cache `false` value to avoid re-requesting it.
-                    localeSitelink = ('Locale:' + langCode).replace(/_/g, ' ').trim();
+                    let localeSitelink = ('Locale:' + langCode).replace(/_/g, ' ').trim();
                     titles.push(localeSitelink);
+
+                    // initialize with false, such that if locale ID is not found in first request,
+                    // it will not be retried in further queries
+                    that.addLocale(langCode, false);
                 }
             });
         }
@@ -187,7 +223,6 @@ export default {
             } else if (!d.success || d.error) {
                 callback(d.error.messages.map(function(v) { return v.html['*']; }).join('<br>'));
             } else {
-                var localeID = false;
                 Object.values(d.entities).forEach(function(res) {
                     if (res.missing !== '') {
 
@@ -201,18 +236,14 @@ export default {
                         } else if (title === tagSitelink) {
                             _wikibaseCache[tagSitelink] = res;
                             result.tag = res;
-                        } else if (title === localeSitelink) {
-                            localeID = res.id;
+                        } else if (localeSitelinks.includes(title)) {
+                            const langCode = title.replace(/ /g, '_').replace(/^Locale:/, '');
+                            that.addLocale(langCode, res.id);
                         } else {
                             console.log('Unexpected title ' + title);  // eslint-disable-line no-console
                         }
                     }
                 });
-
-                if (localeSitelink) {
-                    // If locale ID is not found, store false to prevent repeated queries
-                    that.addLocale(params.langCodes[0], localeID);
-                }
 
                 callback(null, result);
             }
@@ -269,7 +300,7 @@ export default {
             // prepare result
             var result = {
                 title: entity.title,
-                description: description ? description.value : '',
+                description: that.linkifyWikiText(description?.value || ''),
                 descriptionLocaleCode: description ? description.language : '',
                 editURL: 'https://wiki.openstreetmap.org/wiki/' + entity.title
             };

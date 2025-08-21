@@ -6,6 +6,7 @@ import { localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
 import { utilRebind } from '../util/rebind';
 import { utilHighlightEntities } from '../util/util';
+import { utilGetDimensions } from '../util/dimensions';
 import { svgIcon } from '../svg/icon';
 
 
@@ -226,6 +227,9 @@ export function uiEditMenu(context) {
         }
 
         var origin = geoVecAdd(anchorLoc, offset);
+        // repositioning the menu to account for the top menu height
+        var _verticalOffset = parseFloat(utilGetDimensions(d3_select('.top-toolbar-wrap'))[1]);
+        origin[1] -= _verticalOffset;
 
         _menu
             .style('left', origin[0] + 'px')

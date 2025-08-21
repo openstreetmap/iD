@@ -15,11 +15,10 @@ export function rendererTileLayer(context) {
     var _tileOrigin;
     var _zoom;
     var _source;
-
+    var _underzoom = 0;
 
     function tileSizeAtZoom(d, z) {
-        var EPSILON = 0.002;    // close seams
-        return ((d.tileSize * Math.pow(2, z - d[2])) / d.tileSize) + EPSILON;
+        return (d.tileSize * Math.pow(2, z - d[2])) / d.tileSize;
     }
 
 
@@ -59,6 +58,7 @@ export function rendererTileLayer(context) {
     function addSource(d) {
         d.url = _source.url(d);
         d.tileSize = _tileSize;
+        d.source = _source;
         return d;
     }
 
@@ -77,18 +77,17 @@ export function rendererTileLayer(context) {
             pixelOffset = [0, 0];
         }
 
-        var translate = [
-            _projection.translate()[0] + pixelOffset[0],
-            _projection.translate()[1] + pixelOffset[1]
-        ];
 
         tiler
             .scale(_projection.scale() * 2 * Math.PI)
-            .translate(translate);
+            .translate([
+                _projection.translate()[0] + pixelOffset[0],
+                _projection.translate()[1] + pixelOffset[1]
+            ]);
 
         _tileOrigin = [
-            _projection.scale() * Math.PI - translate[0],
-            _projection.scale() * Math.PI - translate[1]
+            _projection.scale() * Math.PI - _projection.translate()[0],
+            _projection.scale() * Math.PI - _projection.translate()[1]
         ];
 
         render(selection);
@@ -97,13 +96,13 @@ export function rendererTileLayer(context) {
 
     // Derive the tiles onscreen, remove those offscreen and position them.
     // Important that this part not depend on `_projection` because it's
-    // rentered when tiles load/error (see #644).
+    // rendered when tiles load/error (see #644).
     function render(selection) {
         if (!_source) return;
         var requests = [];
         var showDebug = context.getDebug('tile') && !_source.overlay;
 
-        if (_source.validZoom(_zoom)) {
+        if (_source.validZoom(_zoom, _underzoom)) {
             tiler.skipNullIsland(!!_source.overlay);
 
             tiler().forEach(function(d) {
@@ -143,9 +142,9 @@ export function rendererTileLayer(context) {
             var ts = d.tileSize * Math.pow(2, _zoom - d[2]);
             var scale = tileSizeAtZoom(d, _zoom);
             return 'translate(' +
-                ((d[0] * ts) * _tileSize / d.tileSize - _tileOrigin[0]
+                ((d[0] * ts + d.source.offset()[0] * Math.pow(2, _zoom)) * _tileSize / d.tileSize - _tileOrigin[0]
             ) + 'px,' +
-                ((d[1] * ts) * _tileSize / d.tileSize - _tileOrigin[1]
+                ((d[1] * ts + d.source.offset()[1] * Math.pow(2, _zoom)) * _tileSize / d.tileSize - _tileOrigin[1]
             ) + 'px) ' +
                 'scale(' + scale * _tileSize / d.tileSize + ',' + scale * _tileSize / d.tileSize + ')';
         }
@@ -188,13 +187,11 @@ export function rendererTileLayer(context) {
             .style(transformProp, imageTransform)
             .classed('tile-removing', true)
             .classed('tile-center', false)
-            .each(function() {
-                var tile = d3_select(this);
-                window.setTimeout(function() {
-                    if (tile.classed('tile-removing')) {
-                        tile.remove();
-                    }
-                }, 120);
+            .on('transitionend', function() {
+                const tile = d3_select(this);
+                if (tile.classed('tile-removing')) {
+                    tile.remove();
+                }
             });
 
         image.enter()
@@ -211,7 +208,8 @@ export function rendererTileLayer(context) {
             .style(transformProp, imageTransform)
             .classed('tile-debug', showDebug)
             .classed('tile-removing', false)
-            .classed('tile-center', function(d) { return d === nearCenter; });
+            .classed('tile-center', function(d) { return d === nearCenter; })
+            .sort((a, b) => a[2] - b[2]);
 
 
 
@@ -284,6 +282,13 @@ export function rendererTileLayer(context) {
         _tileSize = _source.tileSize;
         _cache = {};
         tiler.tileSize(_source.tileSize).zoomExtent(_source.zoomExtent);
+        return background;
+    };
+
+
+    background.underzoom = function(amount) {
+        if (!arguments.length) return _underzoom;
+        _underzoom = amount;
         return background;
     };
 

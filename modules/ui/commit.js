@@ -32,7 +32,7 @@ var readOnlyTags = [
 
 // treat most punctuation (except -, _, +, &) as hashtag delimiters - #4398
 // from https://stackoverflow.com/a/25575009
-var hashtagRegex = /(#[^\u2000-\u206F\u2E00-\u2E7F\s\\'!"#$%()*,.\/:;<=>?@\[\]^`{|}~]+)/g;
+var hashtagRegex = /([#＃][^\u2000-\u206F\u2E00-\u2E7F\s\\'!"#$%()*,.\/:;<=>?@\[\]^`{|}~]+)/g;
 
 
 export function uiCommit(context) {
@@ -123,7 +123,7 @@ export function uiCommit(context) {
                 }
             });
 
-            tags.source = context.cleanTagValue(sources.join(';'));
+            tags.source = context.cleanTagValue(sources.filter(Boolean).join(';'));
         }
 
         context.changeset = new osmChangeset({ tags: tags });
@@ -463,9 +463,6 @@ export function uiCommit(context) {
 
     function changeTags(_, changed, onInput) {
         if (changed.hasOwnProperty('comment')) {
-            if (changed.comment === undefined) {
-                changed.comment = '';
-            }
             if (!onInput) {
                 prefs('comment', changed.comment);
                 prefs('commentDate', Date.now());

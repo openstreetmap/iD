@@ -39,19 +39,19 @@ When requesting a feature:
 We use GitHub labels to keep track of issues. Some guidelines:
 
 Green labels are for **action items**. Jump in and start working!
-* <sub>[![good-first-issue][good-first-issue]][good-first-issue_link]</sub> -
-Best for new contributors.  No experience necessary!
+* <sub>[![new-contributor-opportunity][new-contributor-opportunity]][new-contributor-opportunity_link]</sub> -
+Best for new contributors. Little experience necessary!
 * <sub>[![help-wanted][help-wanted]][help-wanted_link]</sub> -
 For more intermediate contributors, probably requires investigation or knowledge of iD code.
 * <sub>[![priority][priority]][priority_link]</sub> -
 Issues that have a big impact or matter most to _new mappers_.
 <br/>(There should probably be 10 or fewer "priority" items.)
 
-[good-first-issue]: http://labl.es/svg?text=good%20first%20issue&bgcolor=0e8a16
+[new-contributor-opportunity]: http://labl.es/svg?text=new%20contributor%20opportunity&bgcolor=0e8a16
 [help-wanted]: http://labl.es/svg?text=help%20wanted&bgcolor=0e8a16
 [priority]: http://labl.es/svg?text=priority&bgcolor=0e8a16
 
-[good-first-issue_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3A%22good%20first%20issue%22
+[new-contributor-opportunity_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3A%22new%20contributor%20opportunity%22
 [help-wanted_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3A%22help%20wanted%22
 [priority_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Apriority
 
@@ -211,9 +211,9 @@ switch to the development database.
 ## Translating
 
 Translations are managed using the
-[Transifex](https://www.transifex.com/openstreetmap/id-editor/) platform. After
+[Transifex](https://app.transifex.com/openstreetmap/id-editor/) platform. After
 signing up, you can go to [iD's project
-page](https://www.transifex.com/openstreetmap/id-editor/), select a language and
+page](https://app.transifex.com/openstreetmap/id-editor/) and
 click **Translate** to start translating. Translations are divided into
 separate resources:
 
@@ -235,11 +235,11 @@ For more information on translating the presets [please see this id-tagging-sche
 You can check your translations on the [development preview site](https://ideditor.netlify.app),
 which is updated every time we change the `develop` branch.
 
-[iD translation project on Transifex](https://www.transifex.com/openstreetmap/id-editor/)
+[iD translation project on Transifex](https://app.transifex.com/openstreetmap/id-editor/)
 
 To get notifications when translation source files change, click **Watch
 project** button near the bottom of the project page. You can edit your
-[notification settings](https://www.transifex.com/user/settings/notices/) if you're
+[notification settings](https://app.transifex.com/user/settings/notices/) if you're
 getting too many notifications.
 
 Translations are licensed under
@@ -262,7 +262,7 @@ These are separate translations for uniformity reasons and because some language
 
 **Why can't I find the Osmose QA layer translations?** The Osmose QA strings are
  pulled in from the external Osmose API. You can contribute to the
- [Osmose Transifex project](https://explore.transifex.com/openstreetmap-france/osmose/)
+ [Osmose Transifex project](https://app.transifex.com/openstreetmap-france/osmose/)
  and the results will be seen in iD once deployed.
 
 Note that if you want to add/update English translations in Osmose then you will
@@ -277,11 +277,10 @@ only display them in the interface through the `t()` function.
 Then, add the new string to `data/core.yaml`. The translation system, Transifex,
 will automatically detect the change.
 
-If you are updating an existing string, update it in `data/core.yaml` and run
-`npm run build` to generate the `en.json` file automatically, then commit both
-modified files.
-
-Use `npm run build` to build the translations with the local changes.
+If you are adding or updating an existing string, update it in `data/core.yaml`
+and run `npm run build` to generate the `en.min.json` file automatically. Only
+commit the `data/core.yaml` file in your pull request. The translation system,
+Transifex, will automatically detect the changes.
 
 `npm run translations` can be used to pull the latest translations from Transifex.
 

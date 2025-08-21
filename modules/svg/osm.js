@@ -10,7 +10,7 @@ export function svgOsm(projection, context, dispatch) {
             .attr('class', function(d) { return 'layer-osm ' + d; });
 
         selection.selectAll('.layer-osm.points').selectAll('.points-group')
-            .data(['points', 'midpoints', 'vertices', 'turns'])
+            .data(['vertices', 'midpoints', 'points', 'turns'])
             .enter()
             .append('g')
             .attr('class', function(d) { return 'points-group ' + d; });

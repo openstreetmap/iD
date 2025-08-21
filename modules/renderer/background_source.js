@@ -1,6 +1,6 @@
 import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
 import { json as d3_json } from 'd3-fetch';
-import { escape } from 'lodash';
+import { escape } from 'lodash-es';
 
 import { t, localizer } from '../core/localizer';
 import { geoExtent, geoSphericalDistance } from '../geo';
@@ -230,8 +230,9 @@ export function rendererBackgroundSource(data) {
     };
 
 
-    source.validZoom = function(z) {
-        return source.zoomExtent[0] <= z &&
+    source.validZoom = function(z, underzoom) {
+        if (underzoom === undefined) underzoom = 0;
+        return source.zoomExtent[0] - underzoom <= z &&
             (source.overzoom || source.zoomExtent[1] > z);
     };
 

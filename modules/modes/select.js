@@ -192,7 +192,6 @@ export function modeSelect(context, selectedIDs) {
     };
 
     function loadOperations() {
-
         _operations.forEach(function(operation) {
             if (operation.behavior) {
                 context.uninstall(operation.behavior);
@@ -200,29 +199,39 @@ export function modeSelect(context, selectedIDs) {
         });
 
         _operations = Object.values(Operations)
-            .map(function(o) { return o(context, selectedIDs); })
-            .filter(function(o) { return o.id !== 'delete' && o.id !== 'downgrade' && o.id !== 'copy'; })
+            .map(o => o(context, selectedIDs))
+            .filter(o => o.id !== 'delete' && o.id !== 'downgrade' && o.id !== 'copy')
             .concat([
                 // group copy/downgrade/delete operation together at the end of the list
                 Operations.operationCopy(context, selectedIDs),
                 Operations.operationDowngrade(context, selectedIDs),
                 Operations.operationDelete(context, selectedIDs)
-            ]).filter(function(operation) {
-                return operation.available();
+            ]);
+
+        _operations
+            .filter(operation => operation.available())
+            .forEach(operation => {
+                if (operation.behavior) {
+                    context.install(operation.behavior);
+                }
             });
 
-        _operations.forEach(function(operation) {
-            if (operation.behavior) {
-                context.install(operation.behavior);
-            }
-        });
+        // unavailable operations: still install keybindings
+        // to show information message about the unavailability of the operation
+        _operations
+            .filter(operation => !operation.available())
+            .forEach(operation => {
+                if (operation.behavior) {
+                    operation.behavior.on();
+                }
+            });
 
         // remove any displayed menu
         context.ui().closeEditMenu();
     }
 
     mode.operations = function() {
-        return _operations;
+        return _operations.filter(operation => operation.available());
     };
 
 
@@ -638,7 +647,7 @@ export function modeSelect(context, selectedIDs) {
 
         _focusedVertexIds = null;
 
-        _operations.forEach(function(operation) {
+        _operations.forEach(operation => {
             if (operation.behavior) {
                 context.uninstall(operation.behavior);
             }

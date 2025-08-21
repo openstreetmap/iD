@@ -109,7 +109,7 @@ export function behaviorHash(context) {
 
             // Update the URL hash without affecting the browser navigation stack,
             // though unavoidably creating a browser history entry
-            window.history.replaceState(null, computedTitle(false /* includeChangeCount */), latestHash);
+            window.history.replaceState(null, '', latestHash);
 
             // set the title we want displayed for the browser tab/window
             updateTitle(true /* includeChangeCount */);
@@ -196,7 +196,7 @@ export function behaviorHash(context) {
             const selectIds = q.id.split(',');
             if (selectIds.length === 1 && selectIds[0].startsWith('note/')) {
                 const noteId = selectIds[0].split('/')[1];
-                context.zoomToNote(noteId, !q.map);
+                context.moveToNote(noteId, !q.map);
             } else {
                 context.zoomToEntities(
                     // convert ids to short form id: node/123 -> n123
