@@ -47,6 +47,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * When a feature is selected, show when and who last modified it ([#7629], thanks [@k-yle])
 * Render climbing routes and via ferrata ways as dotted lines ([#11133], thanks [@harahu])
 #### :scissors: Operations
+* When using the extract operation, keep `ref:GB:uprn` and `ref:linz:building_id` attached to the building ([#11281], thanks [@youssefelzedy])
 #### :camera: Street-Level
 * Fix bug where "tag photo id on selected map feature" is sometimes not working on the first opened photo ([#11021])
 #### :white_check_mark: Validation
@@ -58,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Immediately update raw tag key/value inputs when spaces have been trimmed ([#11206])
 * Fix duplicate values deleted when editing `destination:*` tags ([#10639], thanks [@k-yle])
 * Fix the relation role dropdown not opening on click ([#10645], thanks [@k-yle])
+* Don't delete spaces after semicolons in freetext tags like `note:*` ([3a661d])
 * Allow uppercase character in tag `type=associatedStreet` ([#9639])
 * Fix lasso tool selecting nodes of hidden objects that have been recently hidden ([#11335])
 #### :earth_asia: Localization
@@ -66,6 +68,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 * Support more complex logic to define preset fields that are conditionally hidden ([#9511], thanks [@k-yle])
 * Allow tags to be configured as discardable, not just keys ([#11333], thanks [@k-yle])
+* Explicitly add the `layer=0` tag when changing layers ([#11300], thanks [@Waqibsk])
+* Add button next to schedule fields to link to YoHours ([#9678], thanks [@1ec5])
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Add signatures audit to CI build pipeline and pin github action's versions ([#11103], thanks [@Harvester57])
@@ -76,6 +80,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9511]: https://github.com/openstreetmap/iD/pull/9511
 [#9588]: https://github.com/openstreetmap/iD/pull/9588
 [#9639]: https://github.com/openstreetmap/iD/pull/9639
+[#9678]: https://github.com/openstreetmap/iD/pull/9678
 [#9754]: https://github.com/openstreetmap/iD/issues/9754
 [#10639]: https://github.com/openstreetmap/iD/pull/10639
 [#10645]: https://github.com/openstreetmap/iD/pull/10645
@@ -87,12 +92,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11206]: https://github.com/openstreetmap/iD/issues/11206
 [#11211]: https://github.com/openstreetmap/iD/issues/11211
 [#11247]: https://github.com/openstreetmap/iD/issues/11247
+[3a661d]: https://github.com/openstreetmap/iD/commit/3a661d
+[#11281]: https://github.com/openstreetmap/iD/issues/11281
+[#11300]: https://github.com/openstreetmap/iD/issues/11300
 [#11319]: https://github.com/openstreetmap/iD/pull/11319
 [#11333]: https://github.com/openstreetmap/iD/pull/11333
 [#11335]: https://github.com/openstreetmap/iD/issues/11335
 [@bhavyaKhatri2703]: https://github.com/bhavyaKhatri2703
 [@harahu]: https://github.com/harahu
 [@Harvester57]: https://github.com/Harvester57
+[@Waqibsk]: https://github.com/Waqibsk
 [@aaei924]: https://github.com/aaei924
 
 
