@@ -58,8 +58,8 @@ export default tseslint.config(
        'no-implied-eval': 'error',
        'no-invalid-this': 'off',
        'no-iterator': 'error',
-       'no-labels': 'error',
        'no-label-var': 'error',
+       'no-labels': 'error',
        'no-lone-blocks': 'error',
        'no-loop-func': 'error',
        'no-loss-of-precision': 'error',
@@ -86,8 +86,8 @@ export default tseslint.config(
        'no-trailing-spaces': 'warn',
        'no-undef-init': 'warn',
        'no-unexpected-multiline': 'error',
-       'no-unneeded-ternary': 'error',
        'no-unmodified-loop-condition': 'error',
+       'no-unneeded-ternary': 'error',
        'no-unreachable': 'warn',
        'no-unreachable-loop': 'warn',
        'no-unused-expressions': 'error',
@@ -105,8 +105,8 @@ export default tseslint.config(
        'no-whitespace-before-property': 'warn',
        'no-with': 'error',
        'prefer-const': 'off',
-       'prefer-spread': 'off',
        'prefer-rest-params': 'off',
+       'prefer-spread': 'off',
        'quotes': ['error', 'single'],
        'radix': ['error', 'always'],
        'require-atomic-updates': 'error',
@@ -153,6 +153,12 @@ export default tseslint.config(
       globals: {
         ...globals.node,
       }
+    }
+  },
+  {
+    files: ['eslint.config.js'],
+    rules: {
+      'sort-keys': ['error', 'asc', { minKeys: 20 }]
     }
   }
 );
