@@ -408,7 +408,6 @@ export function validationCrossingWays(context) {
             crossingTypeID += '_connectable';
         }
 
-        // Differentiate based on the loc rounded to 4 digits, since two ways can cross multiple times.
         var uniqueID = crossing.crossPoint[0].toFixed(4) + ',' + crossing.crossPoint[1].toFixed(4);
 
         return new validationIssue({
@@ -419,10 +418,52 @@ export function validationCrossingWays(context) {
                 var graph = context.graph();
                 var entity1 = graph.hasEntity(this.entityIds[0]),
                     entity2 = graph.hasEntity(this.entityIds[1]);
-                return (entity1 && entity2) ? t.append('issues.crossing_ways.message', {
-                    feature: utilDisplayLabel(entity1, graph, featureType1 === 'building'),
-                    feature2: utilDisplayLabel(entity2, graph, featureType2 === 'building')
-                }) : '';
+               return entity1 && entity2
+                   ? function (selection) {
+                         selection.html(
+                             t('issues.crossing_ways.message', {
+                                 feature:
+                                     '<span class="feature-link feature1"></span>',
+                                 feature2:
+                                     '<span class="feature-link feature2"></span>',
+                             })
+                         );
+
+                         selection
+                             .select('.feature1')
+                             .text(
+                                 utilDisplayLabel(
+                                     entity1,
+                                     graph,
+                                     featureType1 === 'building'
+                                 )
+                             )
+                             .style('cursor', 'pointer')
+                             .style('text-decoration', 'underline')
+                             .on('click', () =>
+                                 context.enter(
+                                     modeSelect(context, [entity1.id])
+                                 )
+                             );
+
+                         selection
+                             .select('.feature2')
+                             .text(
+                                 utilDisplayLabel(
+                                     entity2,
+                                     graph,
+                                     featureType2 === 'building'
+                                 )
+                             )
+                             .style('cursor', 'pointer')
+                             .style('text-decoration', 'underline')
+                             .on('click', () =>
+                                 context.enter(
+                                     modeSelect(context, [entity2.id])
+                                 )
+                             );
+                     }
+                   : '';
             },
             reference: showReference,
             entityIds: entities.map(function(entity) {
@@ -511,6 +552,7 @@ export function validationCrossingWays(context) {
                 .append('div')
                 .attr('class', 'issue-reference')
                 .call(t.append('issues.crossing_ways.' + crossingTypeID + '.reference'));
+
         }
     }
 
