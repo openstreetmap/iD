@@ -254,7 +254,10 @@ function writeFaIcons(faIcons) {
     const name = key.substring(4);
     const def = fontawesome.findIconDefinition({ prefix: prefix, iconName: name });
     try {
-      fs.writeFileSync(`svg/fontawesome/${key}.svg`, fontawesome.icon(def).html.toString());
+      const svg = fontawesome.icon(def, {
+        attributes: { xmlns: 'http://www.w3.org/2000/svg' },
+      }).html.toString();
+      fs.writeFileSync(`svg/fontawesome/${key}.svg`, svg);
     } catch (error) {
       console.error(`Error: No FontAwesome icon for ${key}`);
       throw (error);
