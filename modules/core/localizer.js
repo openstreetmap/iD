@@ -254,7 +254,7 @@ export function coreLocalizer() {
     * @param  {string}   origStringId  string identifier
     * @param  {object?}  replacements  token replacements and default string
     * @param  {string?}  locale        locale to use (defaults to currentLocale)
-    * @return {string?}  localized string
+    * @return {{locale: string, texts: [string|function]}} a list of localized strings and replacement parts
     */
     localizer.tInfo = function(origStringId, replacements, locale) {
         let stringId = origStringId.trim();
@@ -270,67 +270,86 @@ export function coreLocalizer() {
         locale = locale || _localeCode;
 
         let path = stringId
-          .split('.')
-          .map(s => s.replace(/<TX_DOT>/g, '.'))
-          .reverse();
+            .split('.')
+            .map(s => s.replace(/<TX_DOT>/g, '.'))
+            .reverse();
 
         let stringsKey = locale;
         // US English is the default
         if (stringsKey.toLowerCase() === 'en-us') stringsKey = 'en';
-        let result = _localeStrings && _localeStrings[scopeId] && _localeStrings[scopeId][stringsKey];
+        let localeString = _localeStrings && _localeStrings[scopeId] && _localeStrings[scopeId][stringsKey];
 
-        while (result !== undefined && path.length) {
-          result = result[path.pop()];
+        while (localeString !== undefined && path.length) {
+            localeString = localeString[path.pop()];
         }
 
-        if (result !== undefined) {
-          if (replacements) {
-            if (typeof result === 'object' && Object.keys(result).length) {
-                // If plural forms are provided, dig one level deeper based on the
-                // first numeric token replacement provided.
-                const number = Object.values(replacements).find(function(value) {
-                  return typeof value === 'number';
+        if (localeString !== undefined) {
+            if (replacements) {
+              if (typeof localeString === 'object' && Object.keys(localeString).length) {
+                  // If plural forms are provided, dig one level deeper based on the
+                  // first numeric token replacement provided.
+                  const number = Object.values(replacements).find(function(value) {
+                    return typeof value === 'number';
+                  });
+                  if (number !== undefined) {
+                    const rule = pluralRule(number, locale);
+                    if (localeString[rule]) {
+                      localeString = localeString[rule];
+                    } else {
+                      // We're pretty sure this should be a plural but no string
+                      // could be found for the given rule. Just pick the first
+                      // string and hope it makes sense.
+                      localeString = Object.values(localeString)[0];
+                    }
+                  }
+              }
+              if (typeof localeString === 'string') {
+                let parts = [localeString];
+                for (let key in replacements) {
+                  const token = `{${key}}`;
+                  const regex = new RegExp(token, 'g');
+                  parts = parts.flatMap(part => {
+                    if (typeof part === 'object') return part;
+                    return part
+                      .split(regex)
+                      .flatMap(p => [{key}, p])
+                      .slice(1);
+                  });
+                }
+
+                const result = parts.map(part => {
+                  if (typeof part === 'object') {
+                    const value = replacements[part.key];
+
+                    if (typeof value === 'number') {
+                      if (value.toLocaleString) {
+                        // format numbers for the locale
+                        return value.toLocaleString(locale, {
+                          style: 'decimal',
+                          useGrouping: true,
+                          minimumFractionDigits: 0
+                        });
+                      } else {
+                        return value.toString();
+                      }
+                    }
+
+                    return value;
+                  }
+
+                  return part;
                 });
-                if (number !== undefined) {
-                  const rule = pluralRule(number, locale);
-                  if (result[rule]) {
-                    result = result[rule];
-                  } else {
-                    // We're pretty sure this should be a plural but no string
-                    // could be found for the given rule. Just pick the first
-                    // string and hope it makes sense.
-                    result = Object.values(result)[0];
-                  }
-                }
-            }
-            if (typeof result === 'string') {
-              for (let key in replacements) {
-                let value = replacements[key];
-                if (typeof value === 'number') {
-                  if (value.toLocaleString) {
-                    // format numbers for the locale
-                    value = value.toLocaleString(locale, {
-                      style: 'decimal',
-                      useGrouping: true,
-                      minimumFractionDigits: 0
-                    });
-                  } else {
-                    value = value.toString();
-                  }
-                }
-                const token = `{${key}}`;
-                const regex = new RegExp(token, 'g');
-                result = result.replace(regex, value);
+
+                return {
+                  texts: result,
+                  locale
+                };
               }
             }
-          }
-          if (typeof result === 'string') {
-            // found a localized string!
             return {
-                text: result,
-                locale: locale
+                texts: [localeString],
+                locale
             };
-          }
         }
         // no localized string found...
 
@@ -345,7 +364,7 @@ export function coreLocalizer() {
         if (replacements && 'default' in replacements) {
           // Fallback to a default value if one is specified in `replacements`
           return {
-              text: replacements.default,
+              texts: [replacements.default],
               locale: null
           };
         }
@@ -354,7 +373,7 @@ export function coreLocalizer() {
         if (typeof console !== 'undefined') console.error(missing);  // eslint-disable-line
 
         return {
-            text: missing,
+            texts: [missing],
             locale: 'en'
         };
     };
@@ -365,7 +384,7 @@ export function coreLocalizer() {
 
     // Returns only the localized text, discarding the locale info
     localizer.t = function(stringId, replacements, locale) {
-        return localizer.tInfo(stringId, replacements, locale).text;
+        return localizer.tInfo(stringId, replacements, locale).texts.join('');
     };
 
     // Returns the localized text wrapped in an HTML element encoding the locale info
@@ -387,8 +406,9 @@ export function coreLocalizer() {
 
       const info = localizer.tInfo(stringId, replacements, locale);
       // text may be empty or undefined if `replacements.default` is
-      if (info.text) {
-        return `<span class="localized-text" lang="${info.locale || 'und'}">${info.text}</span>`;
+      const text = info.texts.join('');
+      if (text) {
+        return `<span class="localized-text" lang="${info.locale || 'und'}">${text}</span>`;
       } else {
         return '';
       }
@@ -398,12 +418,22 @@ export function coreLocalizer() {
     localizer.t.append = function(stringId, replacements, locale) {
       const ret = function(selection) {
         const info = localizer.tInfo(stringId, replacements, locale);
-        return selection.append('span')
-            .attr('class', 'localized-text')
-            .attr('lang', info.locale || 'und')
-            .text((replacements && replacements.prefix || '')
-                + info.text
-                + (replacements &&replacements.suffix || ''));
+        const texts = [
+          replacements?.prefix,
+          ...info.texts,
+          replacements?.suffix
+        ].filter(Boolean);
+
+        texts.forEach(text => {
+          if (typeof text === 'string') {
+            selection.append('span')
+              .attr('class', 'localized-text')
+              .attr('lang', info.locale || 'und')
+              .text(text);
+          } else {
+            selection.call(text);
+          }
+        });
       };
       ret.stringId = stringId;
       return ret;
@@ -413,14 +443,14 @@ export function coreLocalizer() {
     localizer.t.addOrUpdate = function(stringId, replacements, locale) {
       const ret = function(selection) {
         const info = localizer.tInfo(stringId, replacements, locale);
-        const span = selection.selectAll('span.localized-text').data([info]);
+        const span = selection.selectAll('span.localized-text').data([stringId]);
         const enter = span.enter()
             .append('span')
             .classed('localized-text', true);
         span.merge(enter)
             .attr('lang', info.locale || 'und')
             .text((replacements && replacements.prefix || '')
-                + info.text
+                + info.texts.join('')
                 + (replacements &&replacements.suffix || ''));
       };
       ret.stringId = stringId;
