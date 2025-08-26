@@ -130,7 +130,7 @@
     "smash": "0.0",
     "svg-sprite": "2.0.4",
     "typescript": "^5.9.2",
-    "typescript-eslint": "^8.40.0",
+    "typescript-eslint": "^8.41.0",
     "vparse": "~1.1.0"
   },
   "engines": {
