@@ -1,21 +1,16 @@
-import { beforeEach, afterEach, it } from 'vitest';
-import 'chai';
+import { beforeAll, beforeEach, afterEach } from 'vitest';
+import { use } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import 'happen';
 import fetchMock from 'fetch-mock';
-import envs from '../config/envs.mjs';
+import envs from '../config/envs.js';
+import 'fake-indexeddb/auto';
 
-// Setup global IndexedDB mock for all tests
-const FDBFactory = require('fake-indexeddb/lib/FDBFactory');
-const FDBKeyRange = require('fake-indexeddb/lib/FDBKeyRange');
-global.indexedDB = new FDBFactory();
-global.IDBKeyRange = FDBKeyRange;
+use(sinonChai);
 
-chai.use(sinonChai);
-
-declare var global: typeof globalThis;
-
+declare var global: typeof globalThis & { asyncPrefs: typeof import('../modules/core/preferences').asyncPrefs };
+declare var jsdom: typeof globalThis;
 global.before = beforeEach;
 global.after = afterEach;
 global.fetchMock = fetchMock;
@@ -44,6 +39,10 @@ UIEvent.prototype.initUIEvent = function (...args) {
 await import('../modules/id.js');
 const iD = global.iD;
 iD.setDebug(true);
+
+// Make asyncPrefs available globally for tests
+const { asyncPrefs } = await import('../modules/core/preferences');
+global.asyncPrefs = asyncPrefs;
 
 // @ts-expect-error
 // Disable things that use the network

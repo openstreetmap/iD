@@ -56,46 +56,7 @@ export { corePreferences as prefs };
 export const asyncPrefs = {
   /** @param {string} key */
   get(key) {
-    if (corePreferences(key)) {
-      const parsed = JSON.parse(corePreferences(key));
-      corePreferences(key, null);
-      return parsed;
-    }
-
     return get(key);
   },
   set,
 };
-
-export async function migrateHistoryData() {
-  const historyKeyPattern = /^iD_.*_saved_history$/;
-  const keysToMigrate = [];
-
-  for (let i = 0; i < _storage.length; i++) {
-    const key = _storage.key(i);
-    if (key && historyKeyPattern.test(key)) {
-      keysToMigrate.push(key);
-    }
-  }
-
-  if (keysToMigrate.length === 0) {
-    return;
-  }
-
-  const migrationPromises = keysToMigrate.map(async (key) => {
-    const value = _storage.getItem(key);
-    if (value !== null) {
-      let parsedValue;
-      try {
-        parsedValue = JSON.parse(value);
-      } catch {
-        parsedValue = value;
-      }
-
-      await set(key, parsedValue);
-      _storage.removeItem(key);
-    }
-  });
-
-  await Promise.all(migrationPromises);
-}

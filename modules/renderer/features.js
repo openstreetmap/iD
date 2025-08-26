@@ -395,6 +395,16 @@ export function rendererFeatures(context) {
 
     features.clearEntity = function(entity) {
         delete _cache[osmEntity.key(entity)];
+        for (const key in _cache) {
+            if (_cache[key].parents) {
+                for (const parent of _cache[key].parents) {
+                    if (parent.id === entity.id) {
+                        delete _cache[key];
+                        break;
+                    }
+                }
+            }
+        }
     };
 
 
@@ -469,13 +479,13 @@ export function rendererFeatures(context) {
     features.getParents = function(entity, resolver, geometry) {
         if (geometry === 'point') return [];
 
-        var ent = osmEntity.key(entity);
+        const ent = osmEntity.key(entity);
         if (!_cache[ent]) {
             _cache[ent] = {};
         }
 
         if (!_cache[ent].parents) {
-            var parents = [];
+            let parents;
             if (geometry === 'vertex') {
                 parents = resolver.parentWays(entity);
             } else {   // 'line', 'area', 'relation'
@@ -483,6 +493,7 @@ export function rendererFeatures(context) {
             }
             _cache[ent].parents = parents;
         }
+
         return _cache[ent].parents;
     };
 

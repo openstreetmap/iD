@@ -92,7 +92,11 @@ export function uiFieldCombo(field, context) {
         }
 
         if (!field.caseSensitive) {
-            dval = dval.toLowerCase();
+            if (!(field.key === 'type' && dval === 'associatedStreet')) {
+                // don't lowercase "type=associatedStreet" tag
+                // https://github.com/openstreetmap/iD/issues/9639
+                dval = dval.toLowerCase();
+            }
         }
 
         return dval;

@@ -265,7 +265,7 @@ export function uiSectionRawTagEditor(id, context) {
                 return Array.isArray(d.value);
             })
             .attr('placeholder', function(d) {
-                return typeof d.value === 'string' ? null : t('inspector.multiple_values');
+                return Array.isArray(d.value) ? t('inspector.multiple_values') : null;
             })
             .attr('readonly', function(d) {
                 return isReadOnly(d) || null;
@@ -275,7 +275,7 @@ export function uiSectionRawTagEditor(id, context) {
                     // if there are pending changes: skip untouched tags
                     return null;
                 }
-                return typeof d.value === 'string' ? d.value : '';
+                return Array.isArray(d.value) ? '' : d.value;
             });
 
         items.selectAll('button.remove')
@@ -335,7 +335,7 @@ export function uiSectionRawTagEditor(id, context) {
             .filter(function(row) { return row.key && row.key.trim() !== ''; })
             .map(function(row) {
                 var rawVal = row.value;
-                if (typeof rawVal !== 'string') rawVal = '*';
+                if (Array.isArray(rawVal)) rawVal = '*';
                 var val = rawVal ? stringify(rawVal) : '';
                 return stringify(row.key) + '=' + val;
             })
@@ -367,7 +367,7 @@ export function uiSectionRawTagEditor(id, context) {
             if (isReadOnly({ key: change.key })) return;
 
             // skip unchanged multiselection placeholders
-            if (change.newVal === '*' && typeof change.oldVal !== 'string') return;
+            if (change.newVal === '*' && Array.isArray(change.oldVal)) return;
 
             if (change.type === '-') {
                 _pendingChange[change.key] = undefined;
@@ -544,7 +544,7 @@ export function uiSectionRawTagEditor(id, context) {
         if (isReadOnly(d)) return;
 
         // exit if this is a multiselection and no value was entered
-        if (typeof d.value !== 'string' && !this.value) return;
+        if (Array.isArray(d.value) && !this.value) return;
 
         // exit if we are currently about to delete this row anyway - #6366
         if (_pendingChange && _pendingChange.hasOwnProperty(d.key) && _pendingChange[d.key] === undefined) return;

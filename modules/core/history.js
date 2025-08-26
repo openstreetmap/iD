@@ -148,7 +148,8 @@ export function coreHistory(context) {
 
             if (transitionable) {
                 var origArguments = arguments;
-                d3_select(document)
+                return new Promise(resolve => {
+                  d3_select(document)
                     .transition('history.perform')
                     .duration(duration)
                     .ease(d3_easeLinear)
@@ -158,11 +159,12 @@ export function coreHistory(context) {
                         };
                     })
                     .on('start', function() {
-                        _perform([action0], 0);
+                        resolve(_perform([action0], 0));
                     })
                     .on('end interrupt', function() {
-                        _overwrite(origArguments, 1);
+                        resolve(_overwrite(origArguments, 1));
                     });
+                });
 
             } else {
                 return _perform(arguments);
@@ -656,8 +658,9 @@ export function coreHistory(context) {
 
                 const historyData = history.toJSON();
                 if (historyData) {
-                    asyncPrefs.set(getKey('saved_history'), historyData);
-                    prefs(getKey('has_saved_history'), true);
+                    asyncPrefs.set(getKey('saved_history'), historyData)
+                        .then(() => prefs(getKey('has_saved_history'), true))
+                        .catch(() => { /* ignore */ });
                 }
             }
             return history;
@@ -670,8 +673,9 @@ export function coreHistory(context) {
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
 
-                asyncPrefs.set(getKey('saved_history'), undefined);
-                prefs(getKey('has_saved_history'), null);
+                asyncPrefs.set(getKey('saved_history'), undefined)
+                    .then(() => prefs(getKey('has_saved_history'), null))
+                    .catch(() => { /* ignore */ });
 
                 // clear the changeset metadata associated with the saved history
                 prefs('comment', null);
@@ -700,11 +704,25 @@ export function coreHistory(context) {
             }
         },
 
+        migrateHistoryData: async function() {
+            const key = getKey('saved_history');
+            const value = prefs(key);
+            
+            if (value !== null) {
+              let parsedValue;
+              try {
+                parsedValue = JSON.parse(value);
+              } catch {
+                parsedValue = value;
+              }
+              
+              await asyncPrefs.set(key, parsedValue);
+              prefs(key, null);
+            }
+        },
 
-        _getKey: getKey
-
+        _getKey: getKey,
     };
-
 
     history.reset();
 

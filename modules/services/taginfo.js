@@ -87,10 +87,12 @@ function filterMultikeys(prefix) {
 }
 
 
-function filterValues(allowUpperCase) {
+function filterValues(allowUpperCase, key) {
     return function(d) {
         if (d.value.match(/[;,]/) !== null) return false;  // exclude some punctuation
-        if (!allowUpperCase && d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
+        if (!allowUpperCase &&
+            !(key === 'type' && d.value === 'associatedStreet') &&
+            d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
         return d.count > 100 || d.in_wiki; // exclude rare undocumented tags
     };
 }
@@ -314,7 +316,7 @@ export default {
                 // This is not an exhaustive list (e.g. `name` also has uppercase values)
                 // but these are the fields where taginfo value lookup is most useful.
                 var allowUpperCase = allowUpperCaseTagValues.test(params.key);
-                var f = filterValues(allowUpperCase);
+                var f = filterValues(allowUpperCase, params.key);
 
                 var result = d.data.filter(f).map(valKeyDescription);
                 _taginfoCache[url] = result;

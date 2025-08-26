@@ -1,4 +1,5 @@
 import { setTimeout } from 'node:timers/promises';
+import { clear, get } from 'idb-keyval';
 
 describe('iD.coreHistory', function () {
     var context, history, spy;
@@ -74,7 +75,7 @@ describe('iD.coreHistory', function () {
             var action1 = function() { return iD.coreGraph(); };
             action1.transitionable = true;
             history.on('change', spy);
-            history.perform(action1);
+            await history.perform(action1);
             await setTimeout(300);
             expect(spy.callCount).to.be.above(2);
         });
@@ -569,30 +570,22 @@ describe('iD.coreHistory', function () {
     });
 
     describe('#replaceLocalStorageWithIndexedDB', function() {
-        beforeEach(function() {
-            var FDBFactory = require('fake-indexeddb/lib/FDBFactory');
-            var FDBKeyRange = require('fake-indexeddb/lib/FDBKeyRange');
-            global.indexedDB = new FDBFactory();
-            global.IDBKeyRange = FDBKeyRange;
-        });
-
         afterEach(async function() {
             try {
-                var { clear } = require('idb-keyval');
                 await clear();
             } catch {
                 // Ignore cleanup errors
             }
+        });
 
-            delete global.indexedDB;
-            delete global.IDBKeyRange;
+        it('asyncPrefs get and set work correctly', async function() {
+            await asyncPrefs.set('test_async_key', 'test_async_value');
+            var retrievedData = await asyncPrefs.get('test_async_key');
+            expect(retrievedData).to.equal('test_async_value');
         });
 
         it('migrates history data from localStorage to IndexedDB', async function() {
-            var { migrateHistoryData, prefs } = require('../../../modules/core/preferences');
-            var { get, set } = require('idb-keyval');
-
-            var testHistoryKey = 'iD_http://localhost:8080_saved_history';
+            var testHistoryKey = history._getKey('saved_history');
             var testHistoryData = {
                 version: 3,
                 entities: [],
@@ -601,20 +594,12 @@ describe('iD.coreHistory', function () {
                 timestamp: Date.now()
             };
 
-            prefs(testHistoryKey, JSON.stringify(testHistoryData));
-            await migrateHistoryData();
+            iD.prefs(testHistoryKey, JSON.stringify(testHistoryData));
+            await history.migrateHistoryData();
 
-            var migratedData = await get(testHistoryKey);
+            var migratedData = await asyncPrefs.get(testHistoryKey);
             expect(migratedData).to.deep.equal(testHistoryData);
-            expect(prefs(testHistoryKey)).to.be.null;
-        });
-
-        it('asyncPrefs get and set work correctly', async function() {
-            var { asyncPrefs } = require('../../../modules/core/preferences');
-
-            await asyncPrefs.set('test_async_key', 'test_async_value');
-            var retrievedValue = await asyncPrefs.get('test_async_key');
-            expect(retrievedValue).to.equal('test_async_value');
+            expect(iD.prefs(testHistoryKey)).to.be.null;
         });
     });
 });

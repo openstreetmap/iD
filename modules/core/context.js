@@ -14,7 +14,6 @@ import { localizer } from './localizer';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
-import { migrateHistoryData } from './preferences';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect, modeSelectNote } from '../modes';
 import { presetManager } from '../presets';
@@ -566,7 +565,7 @@ export function coreContext() {
       _features.init();
 
       // Migrate history data from localStorage to IndexedDB
-      migrateHistoryData();
+      _history.migrateHistoryData();
 
       if (services.maprules && context.initialHashParams.maprules) {
         d3_json(context.initialHashParams.maprules)

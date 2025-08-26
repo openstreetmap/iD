@@ -622,6 +622,9 @@ button.bar-button.dragging.removing {
     cursor: url(img/cursor-select-remove.png), pointer;
 }
 
+button.save {
+    background-image: linear-gradient(0, var(--accent-color), var(--accent-color));
+}
 button.save .count {
     display: inline-block;
     min-width: 32px;
@@ -1252,6 +1255,14 @@ a.hide-toggle {
 
 .preset-list-item.mixed-types .label {
     font-style: italic;
+}
+
+button.preset-reset .label.flash-bg {
+    animation: flash-bg 750ms;
+}
+@keyframes flash-bg {
+    0% { background-color: #fff; }
+    100% { background-color: #f6f6f6; }
 }
 
 .preset-list-button .label-inner {

@@ -47,42 +47,64 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * When a feature is selected, show when and who last modified it ([#7629], thanks [@k-yle])
 * Render climbing routes and via ferrata ways as dotted lines ([#11133], thanks [@harahu])
 #### :scissors: Operations
+* When using the extract operation, keep `ref:GB:uprn` and `ref:linz:building_id` attached to the building ([#11281], thanks [@youssefelzedy])
 #### :camera: Street-Level
 * Fix bug where "tag photo id on selected map feature" is sometimes not working on the first opened photo ([#11021])
 #### :white_check_mark: Validation
 * Create a new warning tier for low-severity suggestions ([#11020], thanks [@k-yle])
 * Zoom to correct location when clicking on the _relation member has no role_ issue ([#11247])
+* Hide _KeepRight_ quality assurance overlay, as the service is currently not providing up to date reports of OSM data ([#11098])
 #### :bug: Bugfixes
 * Fix flickering of imagery metadata information in background panel ([#9754])
 * Immediately update raw tag key/value inputs when spaces have been trimmed ([#11206])
 * Fix duplicate values deleted when editing `destination:*` tags ([#10639], thanks [@k-yle])
 * Fix the relation role dropdown not opening on click ([#10645], thanks [@k-yle])
+* Don't delete spaces after semicolons in freetext tags like `note:*` ([3a661d])
+* Allow uppercase character in tag `type=associatedStreet` ([#9639])
+* Fix lasso tool selecting nodes of hidden objects that have been recently hidden ([#11335])
 #### :earth_asia: Localization
+* Add Korean phone number formats ([#11319], thanks [@aaei924])
 #### :hourglass: Performance
 #### :rocket: Presets
 * Support more complex logic to define preset fields that are conditionally hidden ([#9511], thanks [@k-yle])
+* Allow tags to be configured as discardable, not just keys ([#11333], thanks [@k-yle])
+* Explicitly add the `layer=0` tag when changing layers ([#11300], thanks [@Waqibsk])
+* Add button next to schedule fields to link to YoHours ([#9678], thanks [@1ec5])
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Add signatures audit to CI build pipeline and pin github action's versions ([#11103], thanks [@Harvester57])
+* Configure preview deployments for Pull Requests ([#11332], thanks [@k-yle])
 
 [#7629]: https://github.com/openstreetmap/iD/pull/7629
 [#8440]: https://github.com/openstreetmap/iD/pull/8440
 [#9317]: https://github.com/openstreetmap/iD/issues/9317
 [#9511]: https://github.com/openstreetmap/iD/pull/9511
 [#9588]: https://github.com/openstreetmap/iD/pull/9588
+[#9639]: https://github.com/openstreetmap/iD/pull/9639
+[#9678]: https://github.com/openstreetmap/iD/pull/9678
 [#9754]: https://github.com/openstreetmap/iD/issues/9754
 [#10639]: https://github.com/openstreetmap/iD/pull/10639
 [#10645]: https://github.com/openstreetmap/iD/pull/10645
 [#11020]: https://github.com/openstreetmap/iD/pull/11020
 [#11021]: https://github.com/openstreetmap/iD/issues/11021
+[#11098]: https://github.com/openstreetmap/iD/issues/11098
 [#11133]: https://github.com/openstreetmap/iD/issues/11133
 [#11184]: https://github.com/openstreetmap/iD/pull/11184
 [#11206]: https://github.com/openstreetmap/iD/issues/11206
 [#11211]: https://github.com/openstreetmap/iD/issues/11211
 [#11247]: https://github.com/openstreetmap/iD/issues/11247
+[3a661d]: https://github.com/openstreetmap/iD/commit/3a661d
+[#11281]: https://github.com/openstreetmap/iD/issues/11281
+[#11300]: https://github.com/openstreetmap/iD/issues/11300
+[#11319]: https://github.com/openstreetmap/iD/pull/11319
+[#11332]: https://github.com/openstreetmap/iD/pull/11332
+[#11333]: https://github.com/openstreetmap/iD/pull/11333
+[#11335]: https://github.com/openstreetmap/iD/issues/11335
 [@bhavyaKhatri2703]: https://github.com/bhavyaKhatri2703
 [@harahu]: https://github.com/harahu
 [@Harvester57]: https://github.com/Harvester57
+[@Waqibsk]: https://github.com/Waqibsk
+[@aaei924]: https://github.com/aaei924
 
 
 # v2.35.3
@@ -143,7 +165,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11068]: https://github.com/openstreetmap/iD/issues/11068
 [#11080]: https://github.com/openstreetmap/iD/issues/11080
 [#11088]: https://github.com/openstreetmap/iD/issues/11088
-[#11098]: https://github.com/openstreetmap/iD/issues/11098
 [#11187]: https://github.com/openstreetmap/iD/issues/11187
 [@keiffer213]: https://github.com/keiffer213
 [@haipq07]: https://github.com/haipq07
