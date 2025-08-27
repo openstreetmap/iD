@@ -1873,12 +1873,12 @@ en:
         message: '{feature} has an invalid email address'
         message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
-    invalid_dashes:
-      title: Invalid Dashes
-      tip: Replace the invalid dashes with standard ASCII hyphen-minus (-)
-      message: '{feature} contains non-standard dash characters'
-      message_multi: '{feature} contains multiple tag values with non-standard dashes'
-      reference: 'Only the ASCII hyphen-minus "-" (U+002D) should be used in tag values. Avoid en dashes (–), em dashes (—), minus signs (−), and similar characters.'
+    invalid_time_range:
+      title: Invalid time range syntax 
+      tip: Fix the invalid time range syntax 
+      message: '{feature} contains invalid time range  '
+      message_multi: '{feature} contains multiple tag values with invalid time ranges ' 
+      reference: 'Schedule tags must follow the standard opening_hours format, e.g. `Mo-Fr 09:00-18:00`, `Sa 10:00-14:00`, or `24/7`'
  
     line_as_area:
       message: '{feature} should be a line, not an area'
@@ -2006,9 +2006,9 @@ en:
         annotation: Connected the endpoints of a way.
       connect_feature:
         title: Connect this feature
-      replace_dashes:
-        title: Replace all non-standard dashes
-        annotation: Replaced non-standard dashes in tag values 
+      fix_time_range:
+        title: Fix all invalid time range syntax 
+        annotation: Fixed invalid time range syntax in tag values 
       connect_features:
         title: Connect the features
       connect_using_crossing:
