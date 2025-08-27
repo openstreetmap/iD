@@ -649,12 +649,9 @@ export function coreHistory(context) {
                 // don't overwrite existing, unresolved changes
                 !_hasUnresolvedRestorableChanges) {
 
-                const historyData = history.toJSON();
-                if (historyData) {
-                    asyncPrefs.set('saved_history', historyData)
-                        .then(() => prefs('has_saved_history', true))
-                        .catch(() => { /* ignore */ });
-                }
+                asyncPrefs.set('saved_history', history.toJSON() || null)
+                    .then(() => prefs('has_saved_history', true))
+                    .catch(() => dispatch.call('storage_error'));
             }
             return history;
         },
@@ -666,9 +663,8 @@ export function coreHistory(context) {
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
 
-                asyncPrefs.set('saved_history', undefined)
-                    .then(() => prefs('has_saved_history', null))
-                    .catch(() => { /* ignore */ });
+                asyncPrefs.del('saved_history')
+                    .then(() => prefs('has_saved_history', null));
 
                 // clear the changeset metadata associated with the saved history
                 prefs('comment', null);
@@ -676,11 +672,6 @@ export function coreHistory(context) {
                 prefs('source', null);
             }
             return history;
-        },
-
-
-        savedHistoryJSON: function() {
-            return asyncPrefs.get('saved_history');
         },
 
 
@@ -692,10 +683,11 @@ export function coreHistory(context) {
         restore: async function() {
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
-                var json = await this.savedHistoryJSON();
+                var json = await asyncPrefs.get('saved_history');
                 if (json) history.fromJSON(json, true);
             }
         },
+
 
         migrateHistoryData: async function() {
             const value = JSON.parse(prefs(this._getLegacyKey('saved_history')));
@@ -705,6 +697,7 @@ export function coreHistory(context) {
                 prefs(this._getLegacyKey('saved_history'), null);
             }
         },
+
 
         // (legacy, was used for local-storage based history)
         // iD uses namespaced keys so multiple installations do not conflict

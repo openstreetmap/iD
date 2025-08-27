@@ -1,5 +1,5 @@
 // https://github.com/openstreetmap/iD/issues/772
-import { get, set } from 'idb-keyval';
+import { get, set, del } from 'idb-keyval';
 
 /** @type {Storage} */
 let _storage;
@@ -54,9 +54,7 @@ corePreferences.onChange = function(k, handler) {
 export { corePreferences as prefs };
 
 export const asyncPrefs = {
-  /** @param {string} key */
-  get(key) {
-    return get(key);
-  },
+  get,
   set,
+  del
 };
