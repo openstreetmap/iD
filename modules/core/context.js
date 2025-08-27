@@ -14,6 +14,7 @@ import { localizer } from './localizer';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
+import { prefs } from './preferences';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect, modeSelectNote } from '../modes';
 import { presetManager } from '../presets';
@@ -99,9 +100,18 @@ export function coreContext() {
   context.uploader = () => _uploader;
 
   /* Connection */
+  let _preAuthCalled = false; 
+  
   context.preauth = (options) => {
+    _preAuthCalled = true; 
+    
     if (_connection) {
       _connection.switch(options);
+      
+      // handle userPreferences provided via preauth 
+      if (options && options.userPreferences) {
+        prefs.setInitialPreferences(options.userPreferences);
+      }
     }
     return context;
   };
@@ -563,6 +573,24 @@ export function coreContext() {
       _map.init();
       _validator.init();
       _features.init();
+
+      // Set up authentication listener after services are initialized
+      if (services.osm) {
+        
+        services.osm.on('authDone', function() {
+          
+          // Small delay to allow OAuth state to be updated
+          setTimeout(function() {
+            if (!_preAuthCalled && services.osm.authenticated()) {
+              prefs.loadPreferencesFromServer();
+            }
+          }, 100);
+        });
+
+        if (!_preAuthCalled && services.osm.authenticated()) {
+          prefs.loadPreferencesFromServer();
+        }
+      }
 
       if (services.maprules && context.initialHashParams.maprules) {
         d3_json(context.initialHashParams.maprules)
