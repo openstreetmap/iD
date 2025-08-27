@@ -691,4 +691,21 @@ export function utilCleanOsmString(val, maxChars) {
 
     // trim to the number of allowed characters
     return utilUnicodeCharsTruncated(val, maxChars);
-  }
+}
+
+/** @param {XMLHttpRequestBodyInit} input */
+export function utilGzip(input) {
+    // check if compression is supported natively
+    if (!globalThis.CompressionStream) return undefined;
+
+    try {
+        const stream = new Response(input).body.pipeThrough(
+            new CompressionStream('gzip')
+        );
+        return new Response(stream).blob();
+     } catch {
+        // if an error is thrown, it means the browser supports
+        // CompressionStream but not the specific algorithm.
+        return undefined;
+    }
+}

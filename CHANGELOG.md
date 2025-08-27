@@ -65,6 +65,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 * Add Korean phone number formats ([#11319], thanks [@aaei924])
 #### :hourglass: Performance
+* Compress changesets before uploading, to slightly reduce bandwidth ([#11353], thank [@k-yle])
 #### :rocket: Presets
 * Support more complex logic to define preset fields that are conditionally hidden ([#9511], thanks [@k-yle])
 * Allow tags to be configured as discardable, not just keys ([#11333], thanks [@k-yle])
@@ -100,6 +101,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11332]: https://github.com/openstreetmap/iD/pull/11332
 [#11333]: https://github.com/openstreetmap/iD/pull/11333
 [#11335]: https://github.com/openstreetmap/iD/issues/11335
+[#11353]: https://github.com/openstreetmap/iD/pull/11353
 [@bhavyaKhatri2703]: https://github.com/bhavyaKhatri2703
 [@harahu]: https://github.com/harahu
 [@Harvester57]: https://github.com/Harvester57

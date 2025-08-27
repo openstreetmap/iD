@@ -10,7 +10,7 @@ import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
 import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
 import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilObjectOmit, utilRebind, utilTiler, utilQsString } from '../util';
 import { localizer } from '../core/localizer.js';
-
+import { utilGzip } from '../util/util';
 import { osmApiConnections } from '../../config/id.js';
 
 
@@ -813,7 +813,7 @@ export default {
         }
 
 
-        function createdChangeset(err, changesetID) {
+        async function createdChangeset(err, changesetID) {
             _changeset.inflight = null;
             if (err) { return callback(err, changeset); }
 
@@ -821,11 +821,17 @@ export default {
             changeset = changeset.update({ id: changesetID });
 
             // Upload the changeset..
+            const xml = JXON.stringify(changeset.osmChangeJXON(changes));
+            const compressed = await utilGzip(xml);
+
+            const headers = { 'Content-Type': 'text/xml' };
+            if (compressed) headers['Content-Encoding'] = 'gzip';
+
             var options = {
                 method: 'POST',
                 path: '/api/0.6/changeset/' + changesetID + '/upload',
-                headers: { 'Content-Type': 'text/xml' },
-                content: JXON.stringify(changeset.osmChangeJXON(changes))
+                headers,
+                content: compressed || xml,
             };
             _changeset.inflight = oauth.xhr(
                 options,
