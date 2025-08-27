@@ -1,5 +1,6 @@
 import { setTimeout } from 'node:timers/promises';
-import { clear, get } from 'idb-keyval';
+import { clear } from 'idb-keyval';
+import { asyncPrefs } from '../../../modules/core/preferences';
 
 describe('iD.coreHistory', function () {
     var context, history, spy;
@@ -14,8 +15,6 @@ describe('iD.coreHistory', function () {
         context = iD.coreContext().assetPath('../dist/').init();
         history = context.history();
         spy = sinon.spy();
-        // clear lock
-        iD.prefs(history._getKey('lock'), null);
     });
 
     describe('#graph', function () {
@@ -585,7 +584,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('migrates history data from localStorage to IndexedDB', async function() {
-            var testHistoryKey = history._getKey('saved_history');
+            var oldKey = history._getLegacyKey('saved_history');
             var testHistoryData = {
                 version: 3,
                 entities: [],
@@ -594,12 +593,12 @@ describe('iD.coreHistory', function () {
                 timestamp: Date.now()
             };
 
-            iD.prefs(testHistoryKey, JSON.stringify(testHistoryData));
+            iD.prefs(oldKey, JSON.stringify(testHistoryData));
             await history.migrateHistoryData();
 
-            var migratedData = await asyncPrefs.get(testHistoryKey);
+            var migratedData = await asyncPrefs.get('saved_history');
             expect(migratedData).to.deep.equal(testHistoryData);
-            expect(iD.prefs(testHistoryKey)).to.be.null;
+            expect(iD.prefs(oldKey)).to.be.null;
         });
     });
 });

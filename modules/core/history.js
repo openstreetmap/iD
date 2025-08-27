@@ -19,7 +19,7 @@ export function coreHistory(context) {
     var lock = utilSessionMutex('lock');
 
     // restorable if iD not open in another window/tab and a saved history exists in localStorage
-    var _hasUnresolvedRestorableChanges = lock.lock() && !!prefs(getKey('has_saved_history'));
+    var _hasUnresolvedRestorableChanges = lock.lock() && !!prefs('has_saved_history');
 
     var duration = 150;
     var _imageryUsed = [];
@@ -99,12 +99,6 @@ export function coreHistory(context) {
             dispatch.call('change', this, difference);
         }
         return difference;
-    }
-
-
-    // iD uses namespaced keys so multiple installations do not conflict
-    function getKey(n) {
-        return 'iD_' + window.location.origin + '_' + n;
     }
 
 
@@ -658,8 +652,8 @@ export function coreHistory(context) {
 
                 const historyData = history.toJSON();
                 if (historyData) {
-                    asyncPrefs.set(getKey('saved_history'), historyData)
-                        .then(() => prefs(getKey('has_saved_history'), true))
+                    asyncPrefs.set('saved_history', historyData)
+                        .then(() => prefs('has_saved_history', true))
                         .catch(() => { /* ignore */ });
                 }
             }
@@ -673,8 +667,8 @@ export function coreHistory(context) {
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
 
-                asyncPrefs.set(getKey('saved_history'), undefined)
-                    .then(() => prefs(getKey('has_saved_history'), null))
+                asyncPrefs.set('saved_history', undefined)
+                    .then(() => prefs('has_saved_history', null))
                     .catch(() => { /* ignore */ });
 
                 // clear the changeset metadata associated with the saved history
@@ -687,7 +681,7 @@ export function coreHistory(context) {
 
 
         savedHistoryJSON: function() {
-            return asyncPrefs.get(getKey('saved_history'));
+            return asyncPrefs.get('saved_history');
         },
 
 
@@ -705,23 +699,17 @@ export function coreHistory(context) {
         },
 
         migrateHistoryData: async function() {
-            const key = getKey('saved_history');
-            const value = prefs(key);
-            
+            const value = JSON.parse(prefs(this._getLegacyKey('saved_history')));
+
             if (value !== null) {
-              let parsedValue;
-              try {
-                parsedValue = JSON.parse(value);
-              } catch {
-                parsedValue = value;
-              }
-              
-              await asyncPrefs.set(key, parsedValue);
-              prefs(key, null);
+                await asyncPrefs.set('saved_history', value);
+                prefs(this._getLegacyKey('saved_history'), null);
             }
         },
 
-        _getKey: getKey,
+        // (legacy, was used for local-storage based history)
+        // iD uses namespaced keys so multiple installations do not conflict
+        _getLegacyKey: n => 'iD_' + window.location.origin + '_' + n,
     };
 
     history.reset();
