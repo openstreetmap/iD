@@ -507,8 +507,7 @@ export function coreHistory(context) {
         },
 
 
-        fromJSON: function(json, loadChildNodes) {
-            var h = JSON.parse(json);
+        fromJSON: function(h, loadChildNodes) {
             var loadComplete = true;
 
             osmEntity.id.next = h.nextIDs;

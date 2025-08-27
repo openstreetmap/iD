@@ -399,7 +399,7 @@ describe('iD.coreHistory', function () {
                 'nextIDs': {'node': -2, 'way': -1, 'relation': -1},
                 'index': 1
             };
-            history.fromJSON(JSON.stringify(json));
+            history.fromJSON(json);
             expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
@@ -416,7 +416,7 @@ describe('iD.coreHistory', function () {
                 'nextIDs': {'node': -2, 'way': -1, 'relation': -1},
                 'index': 2
             };
-            history.fromJSON(JSON.stringify(json));
+            history.fromJSON(json);
             expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
@@ -432,7 +432,7 @@ describe('iD.coreHistory', function () {
                 'nextIDs': {'node': -1, 'way': -2, 'relation': -3},
                 'index': 1
             };
-            history.fromJSON(JSON.stringify(json));
+            history.fromJSON(json);
             history.merge([iD.osmNode({id: 'n1'})]);
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
@@ -453,7 +453,7 @@ describe('iD.coreHistory', function () {
                 'nextIDs': {'node': -2, 'way': -1, 'relation': -1},
                 'index': 1
             };
-            history.fromJSON(JSON.stringify(json));
+            history.fromJSON(json);
             expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
@@ -474,7 +474,7 @@ describe('iD.coreHistory', function () {
                 'nextIDs': {'node': -2, 'way': -1, 'relation': -1},
                 'index': 1
             };
-            history.fromJSON(JSON.stringify(json));
+            history.fromJSON(json);
             history.merge([iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
             expect(history.graph().entity('n1')).to.eql(iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql('Moved a point.');
@@ -494,7 +494,7 @@ describe('iD.coreHistory', function () {
                 'nextIDs': {'node': -1, 'way': -2, 'relation': -3},
                 'index': 1
             };
-            history.fromJSON(JSON.stringify(json));
+            history.fromJSON(json);
             history.merge([iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
@@ -517,7 +517,7 @@ describe('iD.coreHistory', function () {
                 'nextIDs': {'node': -2, 'way': -1, 'relation': -1},
                 'index': 1
             };
-            history.fromJSON(JSON.stringify(json));
+            history.fromJSON(json);
             expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
@@ -539,7 +539,7 @@ describe('iD.coreHistory', function () {
                 'nextIDs': {'node': -2, 'way': -1, 'relation': -1},
                 'index': 1
             };
-            history.fromJSON(JSON.stringify(json));
+            history.fromJSON(json);
             expect(history.graph().entity('n1')).to.eql(iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
@@ -559,7 +559,7 @@ describe('iD.coreHistory', function () {
                 'nextIDs': {'node': -1, 'way': -2, 'relation': -3},
                 'index': 1
             };
-            history.fromJSON(JSON.stringify(json));
+            history.fromJSON(json);
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
