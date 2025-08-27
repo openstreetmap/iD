@@ -1,5 +1,6 @@
 // https://github.com/openstreetmap/iD/issues/772
 // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
+import { services } from '../services';
 let _storage;
 try { _storage = localStorage; } catch {}  // eslint-disable-line no-empty
 _storage = _storage || (() => {
@@ -12,142 +13,83 @@ _storage = _storage || (() => {
 })();
 
 const _listeners = {};
-let _osmConnection = null;
-let _syncPromise = null;
-let _pendingSync = new Map();
+let _isInitializing = false;
 
-function setOsmConnection(connection) {
-  _osmConnection = connection;
-}
-
-async function syncPreferenceToServer(key, value) {
-  if (!_osmConnection) {
-    _pendingSync.set(key, value);
-    return;
-  }
-
-  try {
-    if (value === null || value === undefined) {
-      await deleteServerPreference(key);
-    } else {
-      await putServerPreference(key, String(value));
-    }
-  } catch {
-    _pendingSync.set(key, value);
-  }
-}
-
-function putServerPreference(key, value) {
-  return new Promise((resolve, reject) => {
-    if (!_osmConnection?.oauth) {
-      reject(new Error('No OSM connection available'));
-      return;
-    }
-
-    _osmConnection.oauth.xhr({
-      method: 'PUT',
-      path: `/api/0.6/user/preferences/${encodeURIComponent(key)}`,
-      options: { header: { 'Content-Type': 'text/plain' } },
-      content: value
-    }, (err) => {
-      if (err) reject(err);
-      else resolve();
-    });
-  });
-}
-
-function deleteServerPreference(key) {
-  return new Promise((resolve, reject) => {
-    if (!_osmConnection?.oauth) {
-      reject(new Error('No OSM connection available'));
-      return;
-    }
-
-    _osmConnection.oauth.xhr({
-      method: 'DELETE',
-      path: `/api/0.6/user/preferences/${encodeURIComponent(key)}`
-    }, (err) => {
-      if (err) reject(err);
-      else resolve();
-    });
-  });
-}
-
-function getServerPreferences() {
-  return new Promise((resolve) => {
-    if (!_osmConnection?.oauth) {
-      resolve({});
-      return;
-    }
-
-    _osmConnection.oauth.xhr({
-      method: 'GET',
-      path: '/api/0.6/user/preferences.json'
-    }, (err, result) => {
-      if (err) {
-        resolve({});
-        return;
-      }
-
-      try {
-        const preferences = {};
-        if (result && result.preferences) {
-          Object.entries(result.preferences).forEach(([key, value]) => {
-            preferences[key] = value;
-          });
-        }
-        resolve(preferences);
-      } catch {
-        resolve({});
-      }
-    });
-  });
-}
-
-async function performSync() {
-  if (!_osmConnection) return;
-
-  try {
-    const serverPrefs = await getServerPreferences();
-
-    // Flush all local preference keys before inserting server preferences
-    Object.keys(_storage).forEach((key) => {
-      _storage.removeItem(key);
-    });
-
-    Object.entries(serverPrefs).forEach(([key, value]) => {
+function setInitialPreferences(preferences) {
+  if (!preferences || typeof preferences !== 'object') return;
+  
+  _isInitializing = true;
+  
+  // don't sync to server during initial load
+  Object.entries(preferences).forEach(([key, value]) => {
+    try {
       _storage.setItem(key, value);
       if (_listeners[key]) {
         _listeners[key].forEach(handler => handler(value));
       }
-    });
-
-    if (_pendingSync.size > 0) {
-      const syncPromises = Array.from(_pendingSync.entries()).map(([key, value]) =>
-        syncPreferenceToServer(key, value).then(() => ({ key, success: true }))
-          .catch(() => ({ key, success: false }))
-      );
-
-      const results = await Promise.allSettled(syncPromises);
-      results.forEach((result) => {
-        if (result.status === 'fulfilled' && result.value.success) {
-          _pendingSync.delete(result.value.key);
-        }
-      });
+    } catch {
+      // ignore
     }
-  } catch {
-    // Sync failed, will retry later
-  }
+  });
+  
+  _isInitializing = false;
 }
 
-function syncWithServer() {
-  if (_syncPromise) return _syncPromise;
+// Load preferences from server for development mode (when no preauth data is provided)
+function loadPreferencesFromServer() {
+  if (!services.osm || !services.osm.authenticated()) {
+    return;
+  }
 
-  _syncPromise = performSync().finally(() => {
-    _syncPromise = null;
+  services.osm.getPreferences(function(err, serverPreferences) {
+    if (err) {
+      console.error('iD: Failed to load preferences from server:', err);
+      return;
+    }
+
+    // Clear localStorage and replace with server preferences
+    _isInitializing = true;
+    
+    // Clear all existing preferences from localStorage
+    for (let i = _storage.length - 1; i >= 0; i--) {
+      _storage.removeItem(_storage.key(i));
+    }
+    
+    // Set server preferences in localStorage
+    Object.entries(serverPreferences).forEach(([key, value]) => {
+      try {
+        _storage.setItem(key, value);
+        if (_listeners[key]) {
+          _listeners[key].forEach(handler => handler(value));
+        }
+      } catch {
+        // ignore
+      }
+    });
+    
+    _isInitializing = false;
   });
+}
 
-  return _syncPromise;
+function syncPreferenceToServer(key, value) {
+  if (!services.osm || !services.osm.authenticated()) {
+    // user not authenticated, skip sync
+    return;
+  }
+
+  if (value === null) {
+    services.osm.deletePreference(key, function(err) {
+      if (err) {
+        console.error('Failed to delete preference on server:', key, err);
+      }
+    });
+  } else {
+    services.osm.putPreference(key, String(value), function(err) {
+      if (err) {
+        console.error('Failed to update preference on server:', key, err);
+      }
+    });
+  }
 }
 
 //
@@ -169,7 +111,10 @@ function corePreferences(k, v) {
       _listeners[k].forEach(handler => handler(v));
     }
 
-    syncPreferenceToServer(k, v);
+    // sync to server if not initializing and user is actually changing preferences
+    if (!_isInitializing && v !== undefined) {
+      syncPreferenceToServer(k, v);
+    }
 
     return true;
   } catch {
@@ -188,7 +133,7 @@ corePreferences.onChange = function(k, handler) {
   _listeners[k].push(handler);
 };
 
-corePreferences.setOsmConnection = setOsmConnection;
-corePreferences.syncWithServer = syncWithServer;
+corePreferences.setInitialPreferences = setInitialPreferences;
+corePreferences.loadPreferencesFromServer = loadPreferencesFromServer;
 
 export { corePreferences as prefs };

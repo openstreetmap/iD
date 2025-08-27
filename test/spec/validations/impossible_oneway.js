@@ -2,11 +2,8 @@ describe('iD.validations.impossible_oneway', function() {
     let context;
 
     beforeEach(function() {
-        iD.services.osm = {
-            isDataLoaded: () => true,
-            on: () => {} // mock event listener
-        };
         context = iD.coreContext().assetPath('../dist/').init();
+        iD.services.osm = { isDataLoaded: () => true };
     });
 
     function validate() {

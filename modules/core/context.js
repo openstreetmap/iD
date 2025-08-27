@@ -100,9 +100,18 @@ export function coreContext() {
   context.uploader = () => _uploader;
 
   /* Connection */
+  let _preAuthCalled = false; 
+  
   context.preauth = (options) => {
+    _preAuthCalled = true; 
+    
     if (_connection) {
       _connection.switch(options);
+      
+      // handle userPreferences provided via preauth 
+      if (options && options.userPreferences) {
+        prefs.setInitialPreferences(options.userPreferences);
+      }
     }
     return context;
   };
@@ -564,18 +573,21 @@ export function coreContext() {
       _validator.init();
       _features.init();
 
-      // Set up preferences sync with OSM API
-      if (_connection) {
-        prefs.setOsmConnection(_connection);
-
-        // Sync preferences when user authentication changes
-        _connection.on('authDone.preferences', () => {
-          prefs.syncWithServer();
+      // Set up authentication listener after services are initialized
+      if (services.osm) {
+        
+        services.osm.on('authDone', function() {
+          
+          // Small delay to allow OAuth state to be updated
+          setTimeout(function() {
+            if (!_preAuthCalled && services.osm.authenticated()) {
+              prefs.loadPreferencesFromServer();
+            }
+          }, 100);
         });
 
-        // Initial sync if already authenticated
-        if (_connection.authenticated && _connection.authenticated()) {
-          prefs.syncWithServer();
+        if (!_preAuthCalled && services.osm.authenticated()) {
+          prefs.loadPreferencesFromServer();
         }
       }
 

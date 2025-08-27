@@ -1516,6 +1516,72 @@ export default {
     // Used to populate `closed:note` changeset tag
     getClosedIDs: function() {
         return Object.keys(_noteCache.closed).sort();
+    },
+
+
+    // User preference API methods
+    putPreference: function(key, value, callback) {
+        if (!this.authenticated()) {
+            if (callback) callback(new Error('Not authenticated'));
+            return;
+        }
+
+        oauth.xhr({
+            method: 'PUT',
+            path: `/api/0.6/user/preferences/iD-${encodeURIComponent(key)}`,
+            options: { header: { 'Content-Type': 'text/plain' } },
+            content: String(value)
+        }, function(err) {
+            if (callback) callback(err);
+        });
+    },
+
+    deletePreference: function(key, callback) {
+        if (!this.authenticated()) {
+            if (callback) callback(new Error('Not authenticated'));
+            return;
+        }
+
+        oauth.xhr({
+            method: 'DELETE',
+            path: `/api/0.6/user/preferences/iD-${encodeURIComponent(key)}`
+        }, function(err) {
+            if (callback) callback(err);
+        });
+    },
+
+    // Get all user preferences from server (for development mode only)
+    getPreferences: function(callback) {
+        if (!this.authenticated()) {
+            if (callback) callback(new Error('Not authenticated'));
+            return;
+        }
+
+        oauth.xhr({
+            method: 'GET',
+            path: '/api/0.6/user/preferences'
+        }, function(err, response) {
+            if (err) {
+                if (callback) callback(err);
+                return;
+            }
+
+            // Parse XML response to extract preferences
+            var preferences = {};
+            if (response && response.getElementsByTagName) {
+                var prefElements = response.getElementsByTagName('preference');
+                for (var i = 0; i < prefElements.length; i++) {
+                    var pref = prefElements[i];
+                    var key = pref.getAttribute('k');
+                    var value = pref.getAttribute('v');
+                    if (key.startsWith('iD-')) {
+                        preferences[key.substring(3)] = value || '';
+                    }
+                }
+            }
+            
+            if (callback) callback(null, preferences);
+        });
     }
 
 };
