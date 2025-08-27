@@ -570,11 +570,7 @@ describe('iD.coreHistory', function () {
 
     describe('#replaceLocalStorageWithIndexedDB', function() {
         afterEach(async function() {
-            try {
-                await clear();
-            } catch {
-                // Ignore cleanup errors
-            }
+            await clear();
         });
 
         it('asyncPrefs get and set work correctly', async function() {

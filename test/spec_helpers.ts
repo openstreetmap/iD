@@ -4,13 +4,14 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import 'happen';
 import fetchMock from 'fetch-mock';
-import envs from '../config/envs.js';
 import 'fake-indexeddb/auto';
+import envs from '../config/envs.js';
 
 use(sinonChai);
 
-declare var global: typeof globalThis & { asyncPrefs: typeof import('../modules/core/preferences').asyncPrefs };
+declare var global: typeof globalThis;
 declare var jsdom: typeof globalThis;
+
 global.before = beforeEach;
 global.after = afterEach;
 global.fetchMock = fetchMock;
@@ -39,10 +40,6 @@ UIEvent.prototype.initUIEvent = function (...args) {
 await import('../modules/id.js');
 const iD = global.iD;
 iD.setDebug(true);
-
-// Make asyncPrefs available globally for tests
-const { asyncPrefs } = await import('../modules/core/preferences');
-global.asyncPrefs = asyncPrefs;
 
 // @ts-expect-error
 // Disable things that use the network
