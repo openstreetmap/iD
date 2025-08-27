@@ -35,7 +35,24 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# unreleased (v2.36.0-dev)
+# unreleased (v2.37.0-dev)
+
+#### :sparkles: Usability & Accessibility
+#### :scissors: Operations
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+#### :bug: Bugfixes
+#### :earth_asia: Localization
+#### :hourglass: Performance
+* Compress changesets before uploading, to slightly reduce bandwidth ([#11353], thank [@k-yle])
+#### :mortar_board: Walkthrough / Help
+#### :hammer: Development
+
+[#11353]: https://github.com/openstreetmap/iD/pull/11353
+
+
+# v2.36.0
+##### 2025-08-27
 
 #### :sparkles: Usability & Accessibility
 * use `addr:` tags to label features with no name ([#8440], thanks [@k-yle])
@@ -64,14 +81,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix lasso tool selecting nodes of hidden objects that have been recently hidden ([#11335])
 #### :earth_asia: Localization
 * Add Korean phone number formats ([#11319], thanks [@aaei924])
-#### :hourglass: Performance
-* Compress changesets before uploading, to slightly reduce bandwidth ([#11353], thank [@k-yle])
 #### :rocket: Presets
 * Support more complex logic to define preset fields that are conditionally hidden ([#9511], thanks [@k-yle])
 * Allow tags to be configured as discardable, not just keys ([#11333], thanks [@k-yle])
 * Explicitly add the `layer=0` tag when changing layers ([#11300], thanks [@Waqibsk])
 * Add button next to schedule fields to link to YoHours ([#9678], thanks [@1ec5])
-#### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Add signatures audit to CI build pipeline and pin github action's versions ([#11103], thanks [@Harvester57])
 * Configure preview deployments for Pull Requests ([#11332], thanks [@k-yle])
@@ -89,19 +103,19 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11020]: https://github.com/openstreetmap/iD/pull/11020
 [#11021]: https://github.com/openstreetmap/iD/issues/11021
 [#11098]: https://github.com/openstreetmap/iD/issues/11098
+[#11103]: https://github.com/openstreetmap/iD/pull/11103
 [#11133]: https://github.com/openstreetmap/iD/issues/11133
 [#11184]: https://github.com/openstreetmap/iD/pull/11184
 [#11206]: https://github.com/openstreetmap/iD/issues/11206
 [#11211]: https://github.com/openstreetmap/iD/issues/11211
 [#11247]: https://github.com/openstreetmap/iD/issues/11247
-[3a661d]: https://github.com/openstreetmap/iD/commit/3a661d
 [#11281]: https://github.com/openstreetmap/iD/issues/11281
 [#11300]: https://github.com/openstreetmap/iD/issues/11300
 [#11319]: https://github.com/openstreetmap/iD/pull/11319
 [#11332]: https://github.com/openstreetmap/iD/pull/11332
 [#11333]: https://github.com/openstreetmap/iD/pull/11333
 [#11335]: https://github.com/openstreetmap/iD/issues/11335
-[#11353]: https://github.com/openstreetmap/iD/pull/11353
+[3a661d]: https://github.com/openstreetmap/iD/commit/3a661d
 [@bhavyaKhatri2703]: https://github.com/bhavyaKhatri2703
 [@harahu]: https://github.com/harahu
 [@Harvester57]: https://github.com/Harvester57

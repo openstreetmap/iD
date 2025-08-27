@@ -1,6 +1,6 @@
 {
   "name": "iD",
-  "version": "2.36.0-dev",
+  "version": "2.37.0-dev",
   "description": "A friendly editor for OpenStreetMap",
   "main": "dist/iD.min.js",
   "repository": "github:openstreetmap/iD",
@@ -116,7 +116,7 @@
     "mapillary-js": "4.1.2",
     "minimist": "^1.2.8",
     "name-suggestion-index": "~6.0",
-    "netlify-cli": "^23.3.1",
+    "netlify-cli": "^23.4.0",
     "nise": "^6.1.1",
     "npm-run-all": "^4.0.0",
     "osm-community-index": "5.9.3",
@@ -130,7 +130,7 @@
     "smash": "0.0",
     "svg-sprite": "2.0.4",
     "typescript": "^5.9.2",
-    "typescript-eslint": "^8.40.0",
+    "typescript-eslint": "^8.41.0",
     "vparse": "~1.1.0"
   },
   "engines": {
