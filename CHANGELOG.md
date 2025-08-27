@@ -58,7 +58,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * use `addr:` tags to label features with no name ([#8440], thanks [@k-yle])
 * The flip operation now works on nodes with no `direction` tag, to support quickly adding `direction` to features like traffic signs ([#9317], thanks [@k-yle])
 * Show "add new key" placeholder text for blank row in raw tag editor ([#11211], thanks [@bhavyaKhatri2703])
-* Consider other name-like tags for labelling features, such as `lock_name` ([#9588], thanks [@k-yle])
+* Consider other name-like tags for labelling features, such as `loc_name` ([#9588], thanks [@k-yle])
 * Always take reduced map size due to open side panels into account when zooming to selected entities
 * Limit landuse tags that are considered for "Landuse" area features ([#11184], thanks [@youssefelzedy])
 * When a feature is selected, show when and who last modified it ([#7629], thanks [@k-yle])
