@@ -420,43 +420,65 @@ export function validationCrossingWays(context) {
                 var graph = context.graph();
                 var entity1 = graph.hasEntity(this.entityIds[0]),
                     entity2 = graph.hasEntity(this.entityIds[1]);
-                return entity1 && entity2
-                    ? t.append('issues.crossing_ways.message', {
-                          feature: (selection) => {
-                              selection
-                                  .append('a')
-                                  .classed('feature-link', true)
-                                  .text(
-                                      utilDisplayLabel(
-                                          entity1,
-                                          graph,
-                                          featureType1 === 'building'
-                                      )
-                                  )
-                                  .on('click', () =>
-                                      context.enter(
-                                          modeSelect(context, [entity1.id])
-                                      )
-                                  );
-                          },
-                          feature2: (selection) =>
-                              selection
-                                  .append('a')
-                                  .classed('feature-link', true)
-                                  .text(
-                                      utilDisplayLabel(
-                                          entity2,
-                                          graph,
-                                          featureType2 === 'building'
-                                      )
-                                  )
-                                  .on('click', () =>
-                                      context.enter(
-                                          modeSelect(context, [entity2.id])
-                                      )
-                                  ),
-                      })
-                    : '';
+     return entity1 && entity2
+         ? t.append('issues.crossing_ways.message', {
+               feature: (selection) => {
+                   if (context.selectedIDs().includes(entity1.id)) {
+                       selection
+                           .append('span')
+                           .text(
+                               utilDisplayLabel(
+                                   entity1,
+                                   graph,
+                                   featureType1 === 'building'
+                               )
+                           );
+                   } else {
+                       selection
+                           .append('a')
+                           .classed('feature-link', true)
+                           .text(
+                               utilDisplayLabel(
+                                   entity1,
+                                   graph,
+                                   featureType1 === 'building'
+                               )
+                           )
+                           .on('click', () => {
+                               context.enter(modeSelect(context, [entity1.id]));
+                           });
+                   }
+               },
+               feature2: (selection) => {
+                   if (context.selectedIDs().includes(entity2.id)) {
+                       selection
+                           .append('span')
+                           .text(
+                               utilDisplayLabel(
+                                   entity2,
+                                   graph,
+                                   featureType2 === 'building'
+                               )
+                           );
+                   } else {
+                       selection
+                           .append('a')
+                           .classed('feature-link', true)
+                           .text(
+                               utilDisplayLabel(
+                                   entity2,
+                                   graph,
+                                   featureType2 === 'building'
+                               )
+                           )
+                           .on('click', () => {
+                               context.enter(modeSelect(context, [entity2.id]));
+                           });
+                   }
+               },
+           })
+         : '';
+
             },
             reference: showReference,
             entityIds: entities.map(function(entity) {
