@@ -540,7 +540,7 @@ function _upgradeTags(tags, loc) {
     if (hits[0].match !== 'primary' && hits[0].match !== 'alternate') break;  // a generic match, stop looking
 
     const searchName = tuple.n.toLowerCase().replace(/[^a-z0-9]/g, '');
-    if(searchName.length < 3) continue;  // skip too-short names
+    if (searchName.length < 3) continue;  // skip too-short names
 
     // A match may contain multiple results, the first one is likely the best one for this location
     // e.g. `['pfk-a54c14', 'kfc-1ff19c', 'kfc-658eea']`
