@@ -367,6 +367,29 @@ export function osmShouldRenderDirection(vertexTags, wayTags) {
     return true;
 }
 
+/**
+ * Checks if a way has partial oneway tags that invalidate strict one-way behavior.
+ * @param {Object} way The way to check.
+ * @returns {boolean} True if the way has partial oneway tags, false otherwise.
+ */
+
+export function hasPartialOneway(way) {
+    // iterate over all tags in the way
+    for (const key in way.tags) {
+        if (key.startsWith('oneway:')) {
+            const value = way.tags[key].toLowerCase();
+
+            // Functionally two way traffic
+            if (value === 'no') return true;
+            // Reverse one-way
+            if (value === '-1' && way.isOneWayForwards()) return true;
+            // Backward one-way
+            if (value === 'yes' && way.isOneWayBackwards()) return true;
+        }
+    }
+    return false;
+}
+
 export var osmSummableTags = new Set([
     'step_count',
     'parking:both:capacity',

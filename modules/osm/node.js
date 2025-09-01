@@ -1,7 +1,7 @@
 import { osmEntity } from './entity';
 import { geoAngle, geoExtent } from '../geo';
 import { utilArrayUniq } from '../util';
-import { osmShouldRenderDirection } from './tags';
+import { osmShouldRenderDirection, hasPartialOneway } from './tags';
 
 export const cardinal = {
     north: 0,               n: 0,
@@ -125,6 +125,22 @@ const prototype = {
                     var nodes = parent.nodes;
                     for (i = 0; i < nodes.length; i++) {
                         if (nodes[i] === this.id) {  // match current entity
+                            const isStopOrSignal = (this.tags.highway === 'stop' && this.tags.stop === 'all') || this.tags.highway === 'traffic_signals';
+                            // handle outbound one-way ways
+                            if (isStopOrSignal && parent.isOneWay() && !hasPartialOneway(parent)) {
+                                // forward one-way, inbound is from previous node
+                                if (parent.isOneWayForwards() && i > 0) {
+                                    nodeIds[nodes[i - 1]] = true;
+                                }
+                                // backward one-way, inbound is from next node
+                                if (parent.isOneWayBackwards() && i < nodes.length - 1) {
+                                    nodeIds[nodes[i + 1]] = true;
+                                }
+                                // ignore outbound
+                                continue;
+                            }
+
+                            // default rendering logic for all nodes
                             if (lookForward && i > 0) {
                                 nodeIds[nodes[i - 1]] = true;  // look back to prev node
                             }
