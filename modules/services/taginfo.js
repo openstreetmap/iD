@@ -11,6 +11,10 @@ import { taginfoApiUrl } from '../../config/id.js';
 var apibase = taginfoApiUrl;
 var _inflight = {};
 var _popularKeys = {};
+// manually exclude some additional keys – #5377, #7485, #10287
+// these will be returned by keys(), but taginfo will not be queried for values() requests
+var _extraExcludedKeys = /^(postal_code|via|((int_|loc_|nat_|official_|old_|ref_|reg_|short_|full_|sorting_|alt_|artist_|long_|bridge:|tunnel:)?name(:left|:right)?(:[a-z]+)?))$/;
+
 var _taginfoCache = {};
 
 var tag_sorts = {
@@ -195,20 +199,7 @@ export default {
     init: function() {
         _inflight = {};
         _taginfoCache = {};
-        _popularKeys = [
-            /^postal_code$/,       // Matches "postal_code"
-            /^full_name$/,         // Matches "full_name"
-            /^loc_name$/,          // Matches "loc_name"
-            /^reg_name$/,          // Matches "reg_name"
-            /^short_name$/,        // Matches "short_name"
-            /^sorting_name$/,      // Matches "sorting_name"
-            /^artist_name$/,       // Matches "artist_name"
-            /^nat_name$/,          // Matches "nat_name"
-            /^long_name$/,         // Matches "long_name"
-            /^via$/,               // Matches "via"
-            /^bridge:name$/,       // Matches "bridge:name"
-            /^name:..$/            // Matches "name:xx" (where xx is exactly two characters)
-        ];
+        _popularKeys = [];
 
         // Fetch popular keys.  We'll exclude these from `values`
         // lookups because they stress taginfo, and they aren't likely
@@ -291,7 +282,7 @@ export default {
     values: function(params, callback) {
         // Exclude popular keys from values lookups.. see #3955
         var key = params.key;
-        if (key && _popularKeys.some(regex => regex.test(key))) {
+        if (key && _popularKeys[key] === true || _extraExcludedKeys.test(key)) {
             callback(null, []);
             return;
         }

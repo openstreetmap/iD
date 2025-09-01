@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # unreleased (v2.37.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Don't suggest values from Taginfo for `name:xx` tags ([#10287], thanks [@draunger])
 #### :scissors: Operations
 #### :camera: Street-Level
 * Always hide sequence lines when their photos are hidden by the date filter ([#11365])
@@ -55,6 +56,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 [#8400]: https://github.com/openstreetmap/iD/issues/8400
+[#10287]: https://github.com/openstreetmap/iD/issues/10287
 [#11141]: https://github.com/openstreetmap/iD/pull/11141
 [#11334]: https://github.com/openstreetmap/iD/pull/11334
 [#11353]: https://github.com/openstreetmap/iD/pull/11353
