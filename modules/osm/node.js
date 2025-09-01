@@ -93,7 +93,7 @@ const prototype = {
             // generic side tag
 
             // unfortunately, the proposal for highway=cylist_waiting_aid used
-            // an ambiguous defintion for `side`, which basically makes the tag
+            // an ambiguous definition for `side`, which basically makes the tag
             // useless in the situation where the parent way (the cycleway) is
             // bidirectional. It's impossible for software to determine which
             // direction the mapper is referring to…
