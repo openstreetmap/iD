@@ -1,3 +1,5 @@
+import { select as d3_select } from 'd3-selection';
+
 import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';

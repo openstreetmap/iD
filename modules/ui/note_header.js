@@ -57,7 +57,7 @@ export function uiNoteHeader() {
                 if (_note.isNew()) {
                     selection.call(t.append('note.new'));
                 } else {
-                    selection.call(t.append('note.note'))
+                    selection.call(t.append('note.note'));
                     selection
                         .append('span')
                         .text(` ${d.id} `);
