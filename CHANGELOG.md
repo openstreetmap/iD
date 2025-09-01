@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # unreleased (v2.37.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Render the `side` tag of vertices (such as traffic signs) in form of small triangles pointing to the respective side of the way ([#10303], thanks [@k-yle])
 * Don't suggest values from Taginfo for `name:xx` tags ([#10287], thanks [@draunger])
 #### :scissors: Operations
 #### :camera: Street-Level
