@@ -109,7 +109,9 @@ export function uiFieldWikidata(field, context) {
         enter
             .append('div')
             .attr('class', 'label')
-            .html(function(d) { return t.html('wikidata.' + d); });
+            .each(function(d) {
+                d3_select(this).call(t.addOrUpdate('wikidata.' + d));
+            });
 
         enter
             .append('input')
