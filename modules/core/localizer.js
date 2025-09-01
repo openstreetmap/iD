@@ -452,7 +452,9 @@ export function coreLocalizer() {
           replacements?.suffix
         ].filter(Boolean);
 
-        const span = selection.selectAll('span.localized-text').data(texts.map((_, i) => i), d => stringId + d);
+        const span = selection.selectAll('span.localized-text')
+          .data(texts.map((_, i) => i), d => stringId + d);
+        span.exit().remove();
         const enter = span.enter()
           .append('span')
           .classed('localized-text', true);
