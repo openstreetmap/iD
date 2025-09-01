@@ -2341,11 +2341,8 @@ input.date-selector {
     user-select: none;
 }
 
-.restriction-help span {
-    margin: 2px;
-}
-
 .restriction-help .qualifier {
+    margin: 2px;
     color: #666;
     font-weight: bold;
 }

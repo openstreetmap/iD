@@ -416,7 +416,7 @@ export function coreLocalizer() {
     };
 
     // Adds localized text wrapped as an HTML span element with locale info to the DOM
-    localizer.t.append = function(stringId, replacements, locale) {
+    localizer.t.append = function(stringId, replacements, locale, trim) {
       const ret = function(selection) {
         const info = localizer.tInfo(stringId, replacements, locale);
         const texts = [
@@ -430,7 +430,7 @@ export function coreLocalizer() {
             selection.append('span')
               .attr('class', 'localized-text')
               .attr('lang', info.locale || 'und')
-              .text(text);
+              .text(replacements?._trim ? text.trim() : text);
           } else {
             selection.each(function(d) {
               d3_select(this).call(text, d);
@@ -462,7 +462,7 @@ export function coreLocalizer() {
             selection.append('span')
               .attr('class', 'localized-text')
               .attr('lang', info.locale || 'und')
-              .text(text);
+              .text(replacements?._trim ? text.trim() : text);
           } else {
             selection.each(function(d) {
               d3_select(this).call(text, d);
