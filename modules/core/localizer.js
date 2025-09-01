@@ -433,8 +433,7 @@ export function coreLocalizer() {
               .text(text);
           } else {
             selection.each(function(d) {
-              d3_select(this);
-              selection.call(text, d);
+              d3_select(this).call(text, d);
             });
           }
         });
@@ -447,15 +446,29 @@ export function coreLocalizer() {
     localizer.t.addOrUpdate = function(stringId, replacements, locale) {
       const ret = function(selection) {
         const info = localizer.tInfo(stringId, replacements, locale);
-        const span = selection.selectAll('span.localized-text').data([stringId]);
+        const texts = [
+          replacements?.prefix,
+          ...info.texts,
+          replacements?.suffix
+        ].filter(Boolean);
+
+        const span = selection.selectAll('span.localized-text').data(texts.map((_, i) => i), d => stringId + d);
         const enter = span.enter()
-            .append('span')
-            .classed('localized-text', true);
-        span.merge(enter)
-            .attr('lang', info.locale || 'und')
-            .text((replacements && replacements.prefix || '')
-                + info.texts.join('')
-                + (replacements &&replacements.suffix || ''));
+          .append('span')
+          .classed('localized-text', true);
+        span.merge(enter).each(function(d) {
+          const text = texts[d];
+          if (typeof text === 'string') {
+            selection.append('span')
+              .attr('class', 'localized-text')
+              .attr('lang', info.locale || 'und')
+              .text(text);
+          } else {
+            selection.each(function(d) {
+              d3_select(this).call(text, d);
+            });
+          }
+        });
       };
       ret.stringId = stringId;
       return ret;
