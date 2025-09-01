@@ -284,24 +284,24 @@ export function uiCommit(context) {
             if (_userDetails === user) return;  // no change
             _userDetails = user;
 
-            var userLink = d3_select(document.createElement('div'));
+            const userLink = selection => {
+                if (user.image_url) {
+                    selection
+                        .append('img')
+                        .attr('src', user.image_url)
+                        .attr('class', 'icon pre-text user-icon');
+                }
 
-            if (user.image_url) {
-                userLink
-                    .append('img')
-                    .attr('src', user.image_url)
-                    .attr('class', 'icon pre-text user-icon');
-            }
-
-            userLink
-                .append('a')
-                .attr('class', 'user-info')
-                .text(user.display_name)
-                .attr('href', osm.userURL(user.display_name))
-                .attr('target', '_blank');
+                selection
+                    .append('a')
+                    .attr('class', 'user-info')
+                    .text(user.display_name)
+                    .attr('href', osm.userURL(user.display_name))
+                    .attr('target', '_blank');
+            };
 
             prose
-                .html(t.html('commit.upload_explanation_with_user', { user: { html: userLink.html() } }));
+                .call(t.addOrUpdate('commit.upload_explanation_with_user', { user: userLink }));
         });
 
 

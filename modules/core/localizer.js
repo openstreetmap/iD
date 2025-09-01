@@ -1,3 +1,4 @@
+import { select as d3_select } from 'd3-selection';
 import { escape } from 'lodash-es';
 
 import { fileFetcher } from './file_fetcher';
@@ -431,7 +432,10 @@ export function coreLocalizer() {
               .attr('lang', info.locale || 'und')
               .text(text);
           } else {
-            selection.call(text);
+            selection.each(function(d) {
+              d3_select(this);
+              selection.call(text, d);
+            });
           }
         });
       };

@@ -22,7 +22,6 @@ export function presetField(fieldID, field, allFields) {
   };
 
   _this.t = (scope, options) => t(`_tagging.presets.fields.${fieldID}.${scope}`, options);
-  _this.t.html = (scope, options) => t.html(`_tagging.presets.fields.${fieldID}.${scope}`, options);
   _this.t.append = (scope, options) => t.append(`_tagging.presets.fields.${fieldID}.${scope}`, options);
   _this.hasTextForStringId = (scope) => localizer.hasTextForStringId(`_tagging.presets.fields.${fieldID}.${scope}`);
 
