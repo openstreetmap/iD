@@ -78,7 +78,9 @@ export function uiShortcuts(context) {
 
         tabsEnter
             .append('span')
-            .html(function (d) { return t.html(d.text); });
+            .each(function (d) {
+                d3_select(this).call(t.addOrUpdate(d.text));
+            });
 
         // Update
         wrapper.selectAll('.tab')
@@ -121,7 +123,9 @@ export function uiShortcuts(context) {
             .append('td')
             .attr('class', 'shortcut-section')
             .append('h3')
-            .html(function (d) { return t.html(d.text); });
+            .each(function (d) {
+                d3_select(this).call(t.addOrUpdate(d.text));
+            });
 
 
         var shortcutRows = rowsEnter
@@ -205,9 +209,15 @@ export function uiShortcuts(context) {
                 }
 
                 if (i < nodes.length - 1) {
-                    selection
-                        .append('span')
-                        .html(d.separator || '\u00a0' + t.html('shortcuts.or') + '\u00a0');
+                    if (d.separator) {
+                        selection
+                            .append('span')
+                            .text(d.separator);
+                    } else {
+                        selection.append('span').text('\u00a0');
+                        selection.append('span').call(t.append('shortcuts.or'));
+                        selection.append('span').text('\u00a0');
+                    }
                 } else if (i === nodes.length - 1 && d.suffix) {
                     selection
                         .append('span')
@@ -228,14 +238,22 @@ export function uiShortcuts(context) {
                 selection
                     .append('span')
                     .attr('class', 'gesture')
-                    .html(function (d) { return t.html(d.gesture); });
+                    .each(function (d) {
+                        d3_select(this).call(t.addOrUpdate(d.gesture));
+                    });
             });
 
 
         shortcutRows
             .append('td')
             .attr('class', 'shortcut-desc')
-            .html(function (d) { return d.text ? t.html(d.text) : '\u00a0'; });
+            .each(function (d) {
+                if (d.text) {
+                    d3_select(this).call(t.addOrUpdate(d.text));
+                } else {
+                    d3_select(this).text('\u00a0');
+                }
+            });
 
 
         // Update
