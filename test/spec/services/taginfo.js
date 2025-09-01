@@ -237,7 +237,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var keysToTest = [
+            const keysToTest = [
                 'postal_code',
                 'name:en',
                 'bridge:name',
@@ -246,14 +246,14 @@ describe('iD.serviceTaginfo', function() {
                 'int_name:left:en'
             ];
 
-            for (const key of keysToTest) {
+            await Promise.all(keysToTest.map(async key => {
                 var callback = sinon.spy();
 
                 taginfo.values({ key, query: 'xxx' }, callback);
 
                 await setTimeout(50);
                 expect(callback).to.have.been.calledWith(null, []);
-            }
+            }));
         });
 
         it('includes unpopular values with a wiki page', async () => {
