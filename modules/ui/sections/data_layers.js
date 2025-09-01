@@ -116,7 +116,9 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .html(function(d) { return t.html('map_data.layers.' + d.id + '.title'); });
+            .each(function(d) {
+                d3_select(this).call(t.append('map_data.layers.' + d.id + '.title'));
+            });
 
 
         // Update

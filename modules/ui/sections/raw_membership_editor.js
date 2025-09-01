@@ -407,7 +407,7 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('class', 'member-entity-type')
             .text(function(d) {
                 var matched = presetManager.match(d.relation, context.graph());
-                return (matched && matched.name()) || t.html('inspector.relation');
+                return (matched && matched.name()) || t('inspector.relation');
             });
 
         labelLink

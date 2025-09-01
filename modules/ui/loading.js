@@ -21,9 +21,15 @@ export function uiLoading(context) {
       .attr('class', 'loader')
       .attr('src', context.imagePath('loader-white.gif'));
 
-    loadertext
-      .append('h3')
-      .call(_message);
+    if (typeof message === 'string') {
+      loadertext
+        .append('h3')
+        .text(_message);
+    } else {
+      loadertext
+        .append('h3')
+        .call(_message);
+    }
 
     _modalSelection.select('button.close')
       .attr('class', 'hide');

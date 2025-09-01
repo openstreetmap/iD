@@ -57,7 +57,9 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('class', function(d) { return 'display-control display-control-' + d; });
 
         slidersEnter
-            .html(function(d) { return t.html('background.' + d); })
+            .each(function(d) {
+                d3_select(this).call(t.append('background.' + d));
+            })
             .append('span')
             .attr('class', function(d) { return 'display-option-value display-option-value-' + d; });
 

@@ -266,8 +266,7 @@ export function uiPaneHelp(context) {
         }, '');
 
         return {
-            title: selection => selection.text('').call(
-                t.append(helpkey + '.title')),
+            title: t.addOrUpdate(helpkey + '.title'),
             _title: t(helpkey + '.title'),
             content: marked(text.trim())
                 // use keyboard key styling for shortcuts

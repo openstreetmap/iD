@@ -95,7 +95,9 @@ export function uiSectionMapFeatures(context) {
 
         label
             .append('span')
-            .html(function(d) { return t.html(name + '.' + d + '.description'); });
+            .each(function(d) {
+                d3_select(this).call(t.append(name + '.' + d + '.description'));
+            });
 
         // Update
         items = items

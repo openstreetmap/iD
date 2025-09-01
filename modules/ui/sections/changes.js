@@ -71,7 +71,10 @@ export function uiSectionChanges(context) {
         buttons
             .append('span')
             .attr('class', 'change-type')
-            .html(function(d) { return t.html('commit.' + d.changeType) + ' '; });
+            .each(function(d) {
+                d3_select(this).call(
+                    t.append('commit.' + d.changeType, { suffix: ' ' }));
+                });
 
         buttons
             .append('strong')
