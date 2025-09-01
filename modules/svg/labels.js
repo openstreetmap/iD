@@ -11,16 +11,15 @@ import {
 import { presetManager } from '../presets';
 import { osmEntity, osmIsInterestingTag } from '../osm';
 import { utilDetect } from '../util/detect';
-import { utilArrayDifference, utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
+import { utilArrayDifference, utilArrayUniq, utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
 
 
 
 export function svgLabels(projection, context) {
     var path = d3_geoPath(projection);
     var detected = utilDetect();
-    var baselineHack = (detected.ie ||
-        detected.browser.toLowerCase() === 'edge' ||
-        (detected.browser.toLowerCase() === 'firefox' && detected.version >= 70));
+    var baselineHack = detected.browser.toLowerCase() === 'safari';
+
     var _rdrawn = new RBush();
     var _rskipped = new RBush();
     var _entitybboxes = {};
@@ -56,6 +55,16 @@ export function svgLabels(projection, context) {
         ['point', 'shop', '*', 10],
         ['point', 'tourism', '*', 10],
         ['point', 'camp_site', '*', 10],
+        ['*', 'alt_name', '*', 12],
+        ['*', 'official_name', '*', 12],
+        ['*', 'loc_name', '*', 12],
+        ['*', 'loc_ref', '*', 12],
+        ['*', 'unsigned_ref', '*', 12],
+        ['*', 'seamark:name', '*', 12],
+        ['*', 'sector:name', '*', 12],
+        ['*', 'lock_name', '*', 12],
+        ['*', 'distance', '*', 12],
+        ['*', 'railway:position', '*', 12],
         ['line', 'ref', '*', 12],
         ['area', 'ref', '*', 12],
         ['point', 'ref', '*', 10],
@@ -290,7 +299,7 @@ export function svgLabels(projection, context) {
             var preset = geometry === 'area' && presetManager.match(entity, graph);
             var icon = preset && !shouldSkipIcon(preset) && preset.icon;
 
-            if (!icon && !utilDisplayName(entity)) continue;
+            if (!icon && !utilDisplayName(entity, undefined, true)) continue;
 
             for (k = 0; k < labelStack.length; k++) {
                 var matchGeom = labelStack[k][0];
@@ -298,7 +307,7 @@ export function svgLabels(projection, context) {
                 var matchVal = labelStack[k][2];
                 var hasVal = entity.tags[matchKey];
 
-                if (geometry === matchGeom && hasVal && (matchVal === '*' || matchVal === hasVal)) {
+                if ((matchGeom === '*' || geometry === matchGeom) && hasVal && (matchVal === '*' || matchVal === hasVal)) {
                     labelable[k].push(entity);
                     break;
                 }
@@ -319,8 +328,9 @@ export function svgLabels(projection, context) {
                 entity = labelable[k][i];
                 geometry = entity.geometry(graph);
 
-                var getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName;
-                var name = getName(entity);
+                let name = geometry === 'line'
+                    ? utilDisplayNameForPath(entity)
+                    : utilDisplayName(entity, undefined, true);
                 var width = name && textWidth(name, fontSize, selection.select('g.layer-osm.labels').node());
                 var p = null;
 
@@ -693,20 +703,33 @@ export function svgLabels(projection, context) {
         layers.selectAll('.nolabel')
             .classed('nolabel', false);
 
-        var mouse = context.map().mouse();
-        var ids = [];
-        var pad, bbox;
+        const graph = context.graph();
+        const mouse = context.map().mouse();
+        let bbox;
+        let hideIds = [];
 
         // hide labels near the mouse
-        if (mouse && context.mode().id !== 'browse' && context.mode().id !== 'select') {
-            pad = 20;
+        if (mouse && context.mode().id !== 'browse') {
+            const pad = 20;
             bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad };
-            var nearMouse = _rdrawn.search(bbox).map(function(entity) { return entity.id; });
-            ids.push.apply(ids, nearMouse);
+            const nearMouse = _rdrawn.search(bbox)
+                .map(entity => entity.id)
+                .filter(id =>
+                    context.mode().id !== 'select' ||
+                    // in select mode: hide labels of currently selected line(s)
+                    // to still allow accessing midpoints
+                    // https://github.com/openstreetmap/iD/issues/11220
+                    context.mode().selectedIDs().includes(id) && graph.hasEntity(id).geometry(graph) === 'line');
+            hideIds.push.apply(hideIds, nearMouse);
+            hideIds = utilArrayUniq(hideIds);
         }
-        ids = utilArrayDifference(ids, context.mode()?.selectedIDs?.() || []);
 
-        layers.selectAll(utilEntitySelector(ids))
+        // don't hide label of currently selected entity while in e.g. drag mode
+        const selected = (context.mode()?.selectedIDs?.() || [])
+            .filter(id => graph.hasEntity(id)?.geometry(graph) !== 'line');
+        hideIds = utilArrayDifference(hideIds, selected);
+
+        layers.selectAll(utilEntitySelector(hideIds))
             .classed('nolabel', true);
 
 
@@ -773,6 +796,7 @@ export function textWidth(text, size, container) {
     }
     const elem = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     elem.style.fontSize = `${size}px`;
+    elem.style.fontWeight = 'bold';
     elem.textContent = text;
     container.appendChild(elem);
     c[text] = elem.getComputedTextLength();
@@ -782,6 +806,7 @@ export function textWidth(text, size, container) {
 
 
 const nonPrimaryKeys = new Set([
+    'building:flats',
     'check_date',
     'fixme',
     'layer',
@@ -789,7 +814,7 @@ const nonPrimaryKeys = new Set([
     'level:ref',
     'note'
 ]);
-const nonPrimaryKeysRegex = /^(ref|survey|note):/;
+const nonPrimaryKeysRegex = /^(ref|survey|note|([^:]+:|old_|alt_)addr):/;
 export function isAddressPoint(tags) {
     const keys = Object.keys(tags).filter(key =>
         osmIsInterestingTag(key) &&

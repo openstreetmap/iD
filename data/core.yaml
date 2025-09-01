@@ -8,6 +8,7 @@ en:
     copy: copy
     view_on: view on {domain}
     visit_website: visit website
+    edit_in: edit in {tool}
     favorite: favorite
     list: list
     text: text
@@ -613,6 +614,7 @@ en:
     download_changes: Download osmChange file
     errors: Errors
     warnings: Warnings
+    suggestions: Suggestions
     modified: Modified
     deleted: Deleted
     created: Created
@@ -621,8 +623,10 @@ en:
     about_changeset_comments: About changeset comments
     about_changeset_comments_link: //wiki.openstreetmap.org/wiki/Good_changeset_comments
     changeset_comment_length_warning: "Changeset comments can have a maximum of {maxChars} characters."
-    google_warning: "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden."
-    google_warning_link: https://www.openstreetmap.org/copyright
+    changeset_incompatible_source:
+      comment: 'You mentioned "{value}" in this changeset comment.'
+      source: 'You mentioned "{value}" as a source of this changeset.'
+      link: https://www.openstreetmap.org/copyright
   contributors:
     list: "Edits by {users}"
     truncated_list:
@@ -704,6 +708,7 @@ en:
       title: Zoom To Selection
       no_selection: Nothing to zoom to.
     show_more: Show More
+    last_modified: Last modified {timeago} by {user}
     view_on_osm: View on openstreetmap.org
     view_on_osmose: View on osmose.openstreetmap.fr
     view_on_keepRight: View on keepright.at
@@ -715,6 +720,7 @@ en:
     features: Features
     title_count: "{title} ({count})"
     add_to_relation: Add to a relation
+    add_tag: Add new tag
     new_relation: New relation...
     choose_relation: Choose a parent relation
     role: Role
@@ -764,6 +770,8 @@ en:
     add_fields: "Add field:"
     lock:
       suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "Tags" section.'
+    display_name_addr: "{housenumber} {streetOrPlace}"
+    display_name_addr_with_unit: "{unit}, {housenumber} {streetOrPlace}"
     display_name:
       direction: "{direction}"
       network: "{network}"
@@ -1730,6 +1738,8 @@ en:
       list_title: "Errors"
     warnings:
       list_title: "Warnings"
+    suggestions:
+      list_title: "Suggestions"
     rules:
       title: Rules
     user_resolved_issues: Issues resolved by your edits

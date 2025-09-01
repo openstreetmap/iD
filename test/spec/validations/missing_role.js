@@ -81,8 +81,8 @@ describe('iD.validations.missing_role', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('missing_role');
         expect(issue.entityIds).to.have.lengthOf(2);
-        expect(issue.entityIds[0]).to.eql('r-1');
-        expect(issue.entityIds[1]).to.eql('w-1');
+        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[1]).to.eql('r-1');
     });
 
     it('flags way with whitespace string role in multipolygon', function() {
@@ -93,8 +93,8 @@ describe('iD.validations.missing_role', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('missing_role');
         expect(issue.entityIds).to.have.lengthOf(2);
-        expect(issue.entityIds[0]).to.eql('r-1');
-        expect(issue.entityIds[1]).to.eql('w-1');
+        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[1]).to.eql('r-1');
     });
 
 });

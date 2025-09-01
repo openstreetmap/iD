@@ -18,20 +18,14 @@ describe('iD.uiFlash', function () {
             .remove();
     });
 
-    it('flash is shown', function() {
-        iD.uiFlash(context).duration(200)();
+    it('flash is shown and goes away', async () => {
+        iD.uiFlash(context).duration(0)();
         var flashWrap = d3.selectAll('.flash-wrap');
         var footerWrap = d3.selectAll('.main-footer-wrap');
         expect(flashWrap.classed('footer-show')).to.be.ok;
         expect(footerWrap.classed('footer-hide')).to.be.ok;
-    });
-
-    it('flash goes away', async () => {
-        iD.uiFlash(context).duration(200)();
-        await setTimeout(225);
         d3.timerFlush();
-        var flashWrap = d3.selectAll('.flash-wrap');
-        var footerWrap = d3.selectAll('.main-footer-wrap');
+        await setTimeout(200);
         expect(flashWrap.classed('footer-hide')).to.be.ok;
         expect(footerWrap.classed('footer-show')).to.be.ok;
     });

@@ -353,6 +353,7 @@ export function uiPresetIcon() {
   const routeSegments = {
     bicycle: ['highway/cycleway', 'highway/cycleway', 'highway/cycleway'],
     bus: ['highway/unclassified', 'highway/secondary', 'highway/primary'],
+    climbing: ['climbing/route', 'climbing/route', 'climbing/route'],
     trolleybus: ['highway/unclassified', 'highway/secondary', 'highway/primary'],
     detour: ['highway/tertiary', 'highway/residential', 'highway/unclassified'],
     ferry: ['route/ferry', 'route/ferry', 'route/ferry'],

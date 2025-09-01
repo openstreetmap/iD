@@ -24,7 +24,6 @@ Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bh
 * [OpenStreetMap US Slack](https://slack.openstreetmap.us/) (`#id` channel)
 * [OpenStreetMap Discord](https://discord.com/invite/openstreetmap) (`#id-and-rapid` channel)
 * [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC) (`irc.oftc.net`, in `#osm-dev`)
-* [OpenStreetMap `dev` mailing list](https://wiki.openstreetmap.org/wiki/Mailing_lists)
 
 ## Installation
 

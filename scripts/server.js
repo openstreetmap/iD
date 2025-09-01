@@ -1,9 +1,9 @@
-const http = require('http');
-const chalk = require('chalk');
-const gaze = require('gaze');
-const serve = require('serve-handler');
+import http from 'node:http';
+import chalk from 'chalk';
+import gaze from 'gaze';
+import serve from 'serve-handler';
+import { buildCSS } from './build_css.js';
 
-const buildCSS = require('./build_css.js');
 const port = 8080;
 
 gaze(['css/**/*.css'], (err, watcher) => {

@@ -1,14 +1,24 @@
-import type { FetchMockStatic } from 'fetch-mock';
+import type FetchMock from 'fetch-mock';
+import type { afterEach, beforeEach } from 'vitest';
 
 declare global {
   declare var iD: typeof import('.');
   declare var d3: typeof import('d3');
-  declare var fetchMock: FetchMockStatic;
+  declare var fetchMock: FetchMock.FetchMockStatic;
   declare var before: typeof beforeEach;
   declare var after: typeof afterEach;
   declare var VITEST: true;
 
   declare type Tags = { [key: string]: string };
+
+  /**
+   * A class method that acts as both a getter and a
+   * setter, depending on the number of arguments.
+   */
+  declare type GetSet<This, T> = {
+    (value: T): This;
+    (): T;
+  }
 
   declare namespace iD {
     export type Context = ReturnType<typeof iD.coreContext>;

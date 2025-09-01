@@ -8,6 +8,7 @@ import { uiCombobox} from './combobox';
 import { uiField } from './field';
 import { uiFormFields } from './form_fields';
 import { utilArrayUniqBy, utilCleanOsmString, utilRebind, utilTriggerEvent, utilUnicodeCharsCount } from '../util';
+import { getIncompatibleSources } from '../validations/incompatible_source';
 
 
 export function uiChangesetEditor(context) {
@@ -97,58 +98,73 @@ export function uiChangesetEditor(context) {
             }
         }
 
-        // Show warning(s) if comment mentions Google or comment length exceeds 255 chars
-        const warnings = [];
-        if (_tags.comment?.match(/google/i)) {
-            warnings.push({
-                id: 'contains "google"',
-                msg: t.append('commit.google_warning'),
-                link: t('commit.google_warning_link')
+        function findIncompatibleSources(str, which) {
+            const incompatibleSources = getIncompatibleSources(str);
+            if (!incompatibleSources) return false;
+            return incompatibleSources.map(rule => {
+                const value = rule.regex.exec(str)[1];
+                return {
+                    id: `incompatible_source.${which}.${rule.id}`,
+                    msg: selection => {
+                        selection.call(t.append(`commit.changeset_incompatible_source.${which}`, { value }));
+                        selection.append('br');
+                        selection
+                            .append('a')
+                            .attr('href', t('commit.changeset_incompatible_source.link'))
+                            .call(t.append(`issues.incompatible_source.reference.${rule.id}`));
+                    }
+                };
             });
         }
+
+        function renderWarnings(warnings, selection, klass) {
+            const entries = selection.selectAll(`.${klass}`)
+                .data(warnings, d => d.id);
+
+            entries.exit()
+                .transition()
+                .duration(200)
+                .style('opacity', 0)
+                .remove();
+
+            const enter = entries.enter()
+                .append('div')
+                .classed('field-warning', true)
+                .classed(klass, true)
+                .style('opacity', 0);
+
+            enter
+                .call(svgIcon('#iD-icon-alert', 'inline'))
+                .append('span');
+
+            enter
+                .transition()
+                .duration(200)
+                .style('opacity', 1);
+
+            entries.merge(enter).selectAll('div > span')
+                .text('')
+                .each(function(d) {
+                    d3_select(this).call(d.msg);
+                });
+        }
+
+        // Show warning(s) if comment mentions an invalid source
+        const commentWarnings = findIncompatibleSources(_tags.comment, 'comment');
+        // also show warning when comment length exceeds 255 chars
         const maxChars = context.maxCharsForTagValue();
         const strLen = utilUnicodeCharsCount(utilCleanOsmString(_tags.comment, Number.POSITIVE_INFINITY));
         if (strLen > maxChars || !true) {
-            warnings.push({
+            commentWarnings.push({
                 id: 'message too long',
                 msg: t.append('commit.changeset_comment_length_warning', { maxChars: maxChars }),
             });
         }
+        renderWarnings(commentWarnings, selection.select('.form-field-comment'), 'comment-warning');
 
-        var commentWarning = selection.select('.form-field-comment').selectAll('.comment-warning')
-            .data(warnings, d => d.id);
-
-        commentWarning.exit()
-            .transition()
-            .duration(200)
-            .style('opacity', 0)
-            .remove();
-
-        var commentEnter = commentWarning.enter()
-            .insert('div', '.comment-warning')
-            .attr('class', 'comment-warning field-warning')
-            .style('opacity', 0);
-
-        commentEnter
-            .call(svgIcon('#iD-icon-alert', 'inline'))
-            .append('span');
-
-        commentEnter
-            .transition()
-            .duration(200)
-            .style('opacity', 1);
-
-        commentWarning.merge(commentEnter).selectAll('div > span')
-            .text('')
-            .each(function(d) {
-                let selection = d3_select(this);
-                if (d.link) {
-                    selection = selection.append('a')
-                        .attr('target', '_blank')
-                        .attr('href', d.link);
-                }
-                selection.call(d.msg);
-            });
+        // Show warning(s) if sources contain an invalid source
+        const sourceWarnings = findIncompatibleSources(_tags.source, 'source');
+        renderWarnings(sourceWarnings, selection.select('.form-field-source'), 'source-warning');
     }
 
 

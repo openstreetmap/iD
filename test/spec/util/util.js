@@ -300,6 +300,21 @@ describe('iD.util', function() {
             // BART Yellow Line: Antioch => Pittsburg/Bay Point => SFO Airport => Millbrae
             expect(iD.utilDisplayName({tags: {network: 'BART', ref: 'Yellow', from: 'Antioch', to: 'Millbrae', via: 'Pittsburg/Bay Point;San Francisco International Airport', route: 'subway'}})).to.eql('BART Yellow from Antioch to Millbrae via Pittsburg/Bay Point;San Francisco International Airport');
         });
+        it('can use alternative name tags', () => {
+            expect(iD.utilDisplayName({ tags: { loc_ref: 'A' } })).to.eql('A');
+            expect(iD.utilDisplayName({ tags: { 'seamark:name': 'Bean Rock' } })).to.eql('Bean Rock');
+
+            expect(iD.utilDisplayName({ tags: { highway: 'milestone', distance: '12' } })).to.eql('12');
+            expect(iD.utilDisplayName({ tags: { distance: '12' } })).to.eql(''); // `distance` is not used as a name on other features
+
+            expect(iD.utilDisplayName({ tags: { railway: 'milestone', 'railway:position': '12' } })).to.eql('12');
+            expect(iD.utilDisplayName({ tags: { 'railway:position': '12' } })).to.eql(''); // `railway:position` is not used as a name on other features
+        });
+        it('prefers standard tags over alternative names', () => {
+            expect(iD.utilDisplayName({ tags: { name: '1', official_name: '2' } })).to.eql('1');
+            expect(iD.utilDisplayName({ tags: { ref: '1', loc_ref: '2' } })).to.eql('1');
+            expect(iD.utilDisplayName({ tags: { ref: '1', network: 'AT', loc_ref: '2' } })).to.eql('AT 1');
+        });
         it('distinguishes named features by name', function() {
             expect(iD.utilDisplayName({tags: { name: 'Ohio Turnpike', route: 'road' }})).to.eql('Ohio Turnpike');
             expect(iD.utilDisplayName({tags: { name: 'Lynfield Express', ref: '25L', route: 'bus' }})).to.eql('25L: Lynfield Express');
@@ -318,6 +333,24 @@ describe('iD.util', function() {
         it('distinguishes named features by waypoints', function() {
             expect(iD.utilDisplayName({tags: { name: 'Kings Island Express', network: 'SORTA', ref: '71X', from: 'Sycamore & Court', to: 'Fields Ertel & Royal Point', route: 'bus' }})).to.eql('SORTA 71X: Kings Island Express from Sycamore & Court to Fields Ertel & Royal Point');
             expect(iD.utilDisplayName({tags: { name: 'Local', network: 'Caltrain', from: 'San Francisco', to: 'Tamien', via: 'College Park', route: 'train' }})).to.eql('Caltrain Local from San Francisco to Tamien via College Park');
+        });
+        it('uses addr:housename', () => {
+            expect(iD.utilDisplayName({ tags: { 'addr:housename': 'Siglap House' } })).to.eql('Siglap House');
+        });
+        it('uses the street address as a last resort', () => {
+            expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '31', 'addr:street': 'Princes Street' } })).to.eql('31 Princes Street');
+        });
+        it('uses the street address as a last resort', () => {
+            expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '1', 'addr:place': 'Motutapu Island' } })).to.eql('1 Motutapu Island');
+        });
+        it('uses addr:unit if present', () => {
+            expect(iD.utilDisplayName({ tags: { 'addr:unit': 'Flat 1', 'addr:housenumber': '30', 'addr:street': 'Madden Street' } })).to.eql('Flat 1, 30 Madden Street');
+        });
+        it('uses just addr:housenumber if it is the only addr: tag present', () => {
+            expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '32' } })).to.eql('32');
+        });
+        it('uses only the housenumber for map labels', () => {
+            expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '31', 'addr:street': 'Princes Street' } }, undefined, true)).to.eql('31');
         });
     });
 

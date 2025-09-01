@@ -1,7 +1,7 @@
 import esbuild from 'esbuild';
 import fs from 'node:fs';
 import parse from 'minimist';
-import envs from './envs.mjs';
+import envs from './envs.js';
 import browserslistToEsbuild from 'browserslist-to-esbuild';
 
 let args = parse(process.argv.slice(2), {boolean: true});
@@ -16,6 +16,7 @@ const context = await esbuild.context({
   metafile: true,
   outfile: 'dist/iD.js',
   target: browserslistToEsbuild(),
+  loader: { '.DS_Store' : 'empty' },
 });
 
 if (args.watch) {

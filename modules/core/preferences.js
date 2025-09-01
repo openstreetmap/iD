@@ -1,5 +1,7 @@
 // https://github.com/openstreetmap/iD/issues/772
-// http://mathiasbynens.be/notes/localstorage-pattern#comment-9
+import { get, set, del } from 'idb-keyval';
+
+/** @type {Storage} */
 let _storage;
 try { _storage = localStorage; } catch {}  // eslint-disable-line no-empty
 _storage = _storage || (() => {
@@ -27,9 +29,11 @@ function corePreferences(k, v) {
     if (v === undefined) return _storage.getItem(k);
     else if (v === null) _storage.removeItem(k);
     else _storage.setItem(k, v);
+
     if (_listeners[k]) {
       _listeners[k].forEach(handler => handler(v));
     }
+
     return true;
   } catch {
     /* eslint-disable no-console */
@@ -41,10 +45,16 @@ function corePreferences(k, v) {
   }
 }
 
-// adds an event listener which is triggered whenever
+// adds an event listener which is triggered whenever a preference changes
 corePreferences.onChange = function(k, handler) {
   _listeners[k] = _listeners[k] || [];
   _listeners[k].push(handler);
 };
 
 export { corePreferences as prefs };
+
+export const asyncPrefs = {
+  get,
+  set,
+  del
+};
