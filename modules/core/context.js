@@ -292,7 +292,7 @@ export function coreContext() {
 
   // Debounce save, since it's a synchronous localStorage write,
   // and history changes can happen frequently (e.g. when dragging).
-  context.debouncedSave = _debounce(context.save, 350);
+  context.debouncedSave = _debounce(context.save, 100);
 
   function withDebouncedSave(fn) {
     return function() {
@@ -563,6 +563,9 @@ export function coreContext() {
       _map.init();
       _validator.init();
       _features.init();
+
+      // Migrate history data from localStorage to IndexedDB
+      _history.migrateHistoryData();
 
       if (services.maprules && context.initialHashParams.maprules) {
         d3_json(context.initialHashParams.maprules)

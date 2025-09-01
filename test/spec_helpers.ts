@@ -4,6 +4,7 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import 'happen';
 import fetchMock from 'fetch-mock';
+import 'fake-indexeddb/auto';
 import envs from '../config/envs.js';
 
 use(sinonChai);

@@ -216,19 +216,44 @@ describe('iD.serviceTaginfo', function() {
             );
         });
 
-        it('does not get values for extremely unpopular keys', async () => {
+        it('does not get values for extremely popular keys', async () => {
             fetchMock.mock(/\/key\/values/, {
-                body: '{"data":[{"value":"Rue Pasteur","description":"", "count":3},' +
-                    '{"value":"Via Trieste","description":"", "count":1}]}',
+                body: '{"data":[{"value":"main street","description":"", "count":1000}]}',
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
 
             var callback = sinon.spy();
-            taginfo.values({ key: 'name', query: 'ste' }, callback);
+            taginfo.values({ key: 'name', query: 'str' }, callback);
 
             await setTimeout(50);
             expect(callback).to.have.been.calledWith(null, []);
+        });
+
+        it('does not get values for hardcoded excluded keys', async () => {
+            fetchMock.mock(/\/key\/values/,  {
+                body: '{"data":[{"value":"xxx","description":"", "count":1000}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const keysToTest = [
+                'postal_code',
+                'name:en',
+                'bridge:name',
+                'bridge:name:en',
+                'int_name:left',
+                'int_name:left:en'
+            ];
+
+            await Promise.all(keysToTest.map(async key => {
+                var callback = sinon.spy();
+
+                taginfo.values({ key, query: 'xxx' }, callback);
+
+                await setTimeout(50);
+                expect(callback).to.have.been.calledWith(null, []);
+            }));
         });
 
         it('includes unpopular values with a wiki page', async () => {

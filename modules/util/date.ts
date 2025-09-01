@@ -1,6 +1,4 @@
-import { utilDetect } from './detect';
-
-const preferredLanguage = utilDetect().browserLocales[0];
+import { localizer } from '../core/localizer';
 
 function timeSince(date: Date): [value: number, unit: Intl.RelativeTimeFormatUnit] {
     const seconds = Math.floor((+new Date() - +date) / 1000);
@@ -19,6 +17,8 @@ function timeSince(date: Date): [value: number, unit: Intl.RelativeTimeFormatUni
  * Otherwise fallback to the current date
  */
 export function getRelativeDate(date: Date) {
+    const preferredLanguage = localizer.localeCode();
+
     if (typeof Intl === 'undefined' || typeof Intl.RelativeTimeFormat === 'undefined') {
         return `on ${date.toLocaleDateString(preferredLanguage)}`;
     }

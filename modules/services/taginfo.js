@@ -11,6 +11,10 @@ import { taginfoApiUrl } from '../../config/id.js';
 var apibase = taginfoApiUrl;
 var _inflight = {};
 var _popularKeys = {};
+// manually exclude some additional keys – #5377, #7485, #10287
+// these will be returned by keys(), but taginfo will not be queried for values() requests
+var _extraExcludedKeys = /^(postal_code|via|((int_|loc_|nat_|official_|old_|ref_|reg_|short_|full_|sorting_|alt_|artist_|long_|bridge:|tunnel:)?name(:left|:right)?(:[a-z]+)?))$/;
+
 var _taginfoCache = {};
 
 var tag_sorts = {
@@ -195,20 +199,7 @@ export default {
     init: function() {
         _inflight = {};
         _taginfoCache = {};
-        _popularKeys = {
-            // manually exclude some keys – #5377, #7485
-            postal_code: true,
-            full_name: true,
-            loc_name: true,
-            reg_name: true,
-            short_name: true,
-            sorting_name: true,
-            artist_name: true,
-            nat_name: true,
-            long_name: true,
-            via: true,
-            'bridge:name': true
-        };
+        _popularKeys = [];
 
         // Fetch popular keys.  We'll exclude these from `values`
         // lookups because they stress taginfo, and they aren't likely
@@ -291,7 +282,7 @@ export default {
     values: function(params, callback) {
         // Exclude popular keys from values lookups.. see #3955
         var key = params.key;
-        if (key && _popularKeys[key]) {
+        if (key && _popularKeys[key] === true || _extraExcludedKeys.test(key)) {
             callback(null, []);
             return;
         }

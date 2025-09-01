@@ -35,13 +35,44 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# unreleased (v2.36.0-dev)
+# unreleased (v2.37.0-dev)
+
+#### :sparkles: Usability & Accessibility
+* Don't suggest values from Taginfo for `name:xx` tags ([#10287], thanks [@draunger])
+#### :scissors: Operations
+#### :camera: Street-Level
+* Always hide sequence lines when their photos are hidden by the date filter ([#11365])
+#### :white_check_mark: Validation
+* Show warnings for potentially incompatible sources also in changeset `source` tags ([#11334])
+* Include the number of changeset tags with incompatible sources in `warnings:incompatible_source` changeset tag ([#8400])
+#### :bug: Bugfixes
+* Display relative time section of "last edited {time ago} by…" text in the correct language when the user's locale is different from the browser language ([#11361])
+* Fix crash when a way has more than 2000 nodes ([#11360])
+#### :earth_asia: Localization
+#### :hourglass: Performance
+* Compress changesets before uploading, to slightly reduce bandwidth ([#11353], thank [@k-yle])
+* Migrate stored history data from LocalStorage to IndexedDB which allows larger amount of changed data to be stored and enhanced performance ([#11141], thanks [@Deeptanshu-sankhwar])
+#### :mortar_board: Walkthrough / Help
+#### :hammer: Development
+
+[#8400]: https://github.com/openstreetmap/iD/issues/8400
+[#10287]: https://github.com/openstreetmap/iD/issues/10287
+[#11141]: https://github.com/openstreetmap/iD/pull/11141
+[#11334]: https://github.com/openstreetmap/iD/pull/11334
+[#11353]: https://github.com/openstreetmap/iD/pull/11353
+[#11360]: https://github.com/openstreetmap/iD/issues/11360
+[#11361]: https://github.com/openstreetmap/iD/issues/11361
+[#11365]: https://github.com/openstreetmap/iD/issues/11365
+
+
+# v2.36.0
+##### 2025-08-27
 
 #### :sparkles: Usability & Accessibility
 * use `addr:` tags to label features with no name ([#8440], thanks [@k-yle])
 * The flip operation now works on nodes with no `direction` tag, to support quickly adding `direction` to features like traffic signs ([#9317], thanks [@k-yle])
 * Show "add new key" placeholder text for blank row in raw tag editor ([#11211], thanks [@bhavyaKhatri2703])
-* Consider other name-like tags for labelling features, such as `lock_name` ([#9588], thanks [@k-yle])
+* Consider other name-like tags for labelling features, such as `loc_name` ([#9588], thanks [@k-yle])
 * Always take reduced map size due to open side panels into account when zooming to selected entities
 * Limit landuse tags that are considered for "Landuse" area features ([#11184], thanks [@youssefelzedy])
 * When a feature is selected, show when and who last modified it ([#7629], thanks [@k-yle])
@@ -64,13 +95,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix lasso tool selecting nodes of hidden objects that have been recently hidden ([#11335])
 #### :earth_asia: Localization
 * Add Korean phone number formats ([#11319], thanks [@aaei924])
-#### :hourglass: Performance
 #### :rocket: Presets
 * Support more complex logic to define preset fields that are conditionally hidden ([#9511], thanks [@k-yle])
 * Allow tags to be configured as discardable, not just keys ([#11333], thanks [@k-yle])
 * Explicitly add the `layer=0` tag when changing layers ([#11300], thanks [@Waqibsk])
 * Add button next to schedule fields to link to YoHours ([#9678], thanks [@1ec5])
-#### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Add signatures audit to CI build pipeline and pin github action's versions ([#11103], thanks [@Harvester57])
 * Configure preview deployments for Pull Requests ([#11332], thanks [@k-yle])
@@ -88,18 +117,19 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11020]: https://github.com/openstreetmap/iD/pull/11020
 [#11021]: https://github.com/openstreetmap/iD/issues/11021
 [#11098]: https://github.com/openstreetmap/iD/issues/11098
+[#11103]: https://github.com/openstreetmap/iD/pull/11103
 [#11133]: https://github.com/openstreetmap/iD/issues/11133
 [#11184]: https://github.com/openstreetmap/iD/pull/11184
 [#11206]: https://github.com/openstreetmap/iD/issues/11206
 [#11211]: https://github.com/openstreetmap/iD/issues/11211
 [#11247]: https://github.com/openstreetmap/iD/issues/11247
-[3a661d]: https://github.com/openstreetmap/iD/commit/3a661d
 [#11281]: https://github.com/openstreetmap/iD/issues/11281
 [#11300]: https://github.com/openstreetmap/iD/issues/11300
 [#11319]: https://github.com/openstreetmap/iD/pull/11319
 [#11332]: https://github.com/openstreetmap/iD/pull/11332
 [#11333]: https://github.com/openstreetmap/iD/pull/11333
 [#11335]: https://github.com/openstreetmap/iD/issues/11335
+[3a661d]: https://github.com/openstreetmap/iD/commit/3a661d
 [@bhavyaKhatri2703]: https://github.com/bhavyaKhatri2703
 [@harahu]: https://github.com/harahu
 [@Harvester57]: https://github.com/Harvester57
