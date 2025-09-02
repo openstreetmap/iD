@@ -540,7 +540,23 @@ function _upgradeTags(tags, loc) {
     if (hits[0].match !== 'primary' && hits[0].match !== 'alternate') break;  // a generic match, stop looking
 
     const searchName = tuple.n.toLowerCase().replace(/[^a-z0-9]/g, '');
-    if (searchName.length < 3) continue;  // skip too-short names
+    for (let i = hits.length - 1; i >= 0; i--) {
+      const matchItem = _nsi.ids.get(hits[i].itemID);
+      if (matchItem) {
+        const matchName = (matchItem.tags.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (searchName && matchName) {
+          if (searchName.length < 5) {
+            //directly compare short names:
+            if (searchName !== matchName) {
+              hits.splice(i, 1);
+            }
+          }
+        }
+      }
+    }
+    
+    if (!hits.length) continue;  // if all matches were filtered out, try next tuple
+    
 
     // A match may contain multiple results, the first one is likely the best one for this location
     // e.g. `['pfk-a54c14', 'kfc-1ff19c', 'kfc-658eea']`
