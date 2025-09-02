@@ -262,7 +262,7 @@ export var osmRightSideIsInsideTags = {
     'barrier': {
         'retaining_wall': true,
         'kerb': true,
-        'guard_rail': true,
+        'guard_rail': 'guard_rail',
         'city_wall': true,
     },
     'man_made': {
