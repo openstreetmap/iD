@@ -106,7 +106,7 @@ const prototype = {
             if (SIDES.has(sideTag?.toLowerCase()) && !hideSideTag) {
                 rawValues.push({
                     type: 'side',
-                    value: this.tags.side?.toLowerCase(),
+                    value: sideTag?.toLowerCase(),
                 });
             }
 
