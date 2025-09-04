@@ -1786,6 +1786,13 @@ en:
       detached:
         message: "{feature} is too close to {feature2}"
         reference: "Separate points should not share a location."
+    connected_ways:
+      title: Connected Ways
+      message: "{feature} is connected to {feature2}"
+      building-power_connectable:
+        reference: "Use a power terminal to explicitly indicate that the power line enters the building at this location."
+      power-other:
+        reference: "Only connect power lines to features that are physically connected in the real world."
     crossing_ways:
       title: Crossing Ways
       message: "{feature} crosses {feature2}"
@@ -1828,14 +1835,10 @@ en:
         reference: "Crossing bridges should use different layers."
       bridge-bridge_connectable:
         reference: "Crossing bridges should be connected or use different layers."
-      building-power_connectable:
-        reference: "Use a power terminal to explicitly indicate that the power line enters the building at this location."
       indoor-indoor:
         reference: "Crossing indoor features should use different levels."
       indoor-indoor_connectable:
         reference: "Crossing indoor features should be connected or use different levels."
-      power-other:
-        reference: "Only connect power lines to features that are physically connected in the real world."
     disconnected_way:
       title: Disconnected Ways
       tip: "Find unroutable roads, paths, and ferry routes"

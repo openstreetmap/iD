@@ -4,15 +4,15 @@ import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionSplit } from '../actions/split';
-import { operationDisconnect } from '../operations/disconnect';
 import { modeSelect } from '../modes/select';
 import { geoAngle, geoExtent, geoLatToMeters, geoLonToMeters, geoLineIntersection,
     geoSphericalClosestNode, geoSphericalDistance, geoVecAngle, geoVecLength, geoMetersToLat, geoMetersToLon } from '../geo';
 import { osmNode } from '../osm/node';
-import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmPowerTagValues, osmRoutableAerowayTags, osmRoutableHighwayTagValues } from '../osm/tags';
+import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmRoutableAerowayTags, osmRoutableHighwayTagValues } from '../osm/tags';
 import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
+
 
 export function validationCrossingWays(context) {
     var type = 'crossing_ways';
@@ -74,8 +74,6 @@ export function validationCrossingWays(context) {
         if (hasTag(tags, 'railway') && osmRailwayTrackTagValues[tags.railway]) return 'railway';
         if (hasTag(tags, 'waterway') && osmFlowingWaterwayTagValues[tags.waterway]) return 'waterway';
 
-        if (hasTag(tags, 'power') && osmPowerTagValues[tags.power]) return 'power';
-
         return null;
     }
 
@@ -115,7 +113,6 @@ export function validationCrossingWays(context) {
         if (featureType1 === 'waterway' && featureType2 === 'highway' && tags2.man_made === 'pier') return true;
         if (featureType2 === 'waterway' && featureType1 === 'highway' && tags1.man_made === 'pier') return true;
 
-        if (featureType1 === 'power' && featureType2 === 'power') return true;
         if (featureType1 === 'building' || featureType2 === 'building' ||
             taggedAsIndoor(tags1) || taggedAsIndoor(tags2)) {
             // for building crossings, different layers are enough
@@ -159,10 +156,6 @@ export function validationCrossingWays(context) {
 
         if (featureTypes === 'aeroway-railway') {
             return { aeroway: 'aircraft_crossing', railway: 'level_crossing' };
-        }
-
-        if (featureTypes === 'building-power') {
-            return { power: 'terminal' };
         }
 
         if (featureTypes === 'aeroway-waterway') return null;
@@ -260,15 +253,15 @@ export function validationCrossingWays(context) {
         // declare vars ahead of time to reduce garbage collection
         var i, j;
         var extent;
-        var nA, nB, nAId, nBId, intersectingNode;
+        var n1, n2, nA, nB, nAId, nBId;
         var segment1, segment2;
         var oneOnly;
         var segmentInfos, segment2Info, way2, taggedFeature2, way2FeatureType;
         var way1Nodes = graph.childNodes(way1);
         var comparedWays = {};
         for (i = 0; i < way1Nodes.length - 1; i++) {
-            let n1 = way1Nodes[i];
-            let n2 = way1Nodes[i + 1];
+            n1 = way1Nodes[i];
+            n2 = way1Nodes[i + 1];
             extent = geoExtent([
                 [
                     Math.min(n1.loc[0], n2.loc[0]),
@@ -312,22 +305,10 @@ export function validationCrossingWays(context) {
 
                 nAId = segment2Info.nodes[0];
                 nBId = segment2Info.nodes[1];
-                intersectingNode = null;
-                const hasConnectionNode = (nAId === n1.id || nAId === n2.id || nBId === n1.id || nBId === n2.id);
-                if (way1FeatureType === 'power' || way2FeatureType === 'power') {
-                    if (!hasConnectionNode) {
-                        continue;
-                    } else {
-                        intersectingNode = [nAId, nBId].find(id => id === n1.id || id === n2.id);
-                        let intersectingNodeEntity = graph.entity(intersectingNode);
-                        if (intersectingNodeEntity.tags.power === 'terminal') {
-                            continue;
-                        }
-                    }
-                } else {
-                    if (hasConnectionNode) {
-                        continue;
-                    }
+                if (nAId === n1.id || nAId === n2.id ||
+                    nBId === n1.id || nBId === n2.id) {
+                    // n1 or n2 is a connection node; skip
+                    continue;
                 }
                 nA = graph.hasEntity(nAId);
                 if (!nA) continue;
@@ -351,8 +332,7 @@ export function validationCrossingWays(context) {
                                 edge: [nA.id, nB.id]
                             }
                         ],
-                        crossPoint: point,
-                        crossNode: intersectingNode
+                        crossPoint: point
                     });
                     if (oneOnly) {
                         checkedSingleCrossingWays[way2.id] = true;
@@ -439,7 +419,6 @@ export function validationCrossingWays(context) {
                                 allowsTunnel(featureType2) && hasTag(entities[1].tags, 'tunnel');
         var isCrossingBridges = allowsBridge(featureType1) && hasTag(entities[0].tags, 'bridge') &&
                                 allowsBridge(featureType2) && hasTag(entities[1].tags, 'bridge');
-        var isCrossingPower = hasTag(entities[0].tags, 'power') || hasTag(entities[1].tags, 'power');
 
         var subtype = [featureType1, featureType2].sort().join('-');
 
@@ -451,10 +430,8 @@ export function validationCrossingWays(context) {
             crossingTypeID = 'tunnel-tunnel';
         } else if (isCrossingBridges) {
             crossingTypeID = 'bridge-bridge';
-        } else if (isCrossingPower && subtype !== 'building-power') {
-            crossingTypeID = 'power-other';
         }
-        if (connectionTags && (isCrossingIndoors || isCrossingTunnels || isCrossingBridges || isCrossingPower)) {
+        if (connectionTags && (isCrossingIndoors || isCrossingTunnels || isCrossingBridges)) {
             crossingTypeID += '_connectable';
         }
 
@@ -481,7 +458,6 @@ export function validationCrossingWays(context) {
             data: {
                 edges: edges,
                 featureTypes: featureTypes,
-                crossingNode: crossing.crossNode,
                 connectionTags: connectionTags
             },
             hash: uniqueID,
@@ -508,22 +484,6 @@ export function validationCrossingWays(context) {
                     fixes.push(new validationIssueFix({
                         icon: 'iD-icon-layers',
                         title: t.append('issues.fix.use_different_levels.title')
-                    }));
-                } else if (isCrossingPower) {
-                    fixes.push(new validationIssueFix({
-                        icon: 'iD-operation-delete',
-                        title: t.append('issues.fix.disconnect_feature.title'),
-                        entityIds: [this.data.crossingNode],
-                        onClick: function(context) {
-                            var graph = context.graph();
-                            var entity1 = graph.entity(this.issue.entityIds[0]);
-                            var entity2 = graph.entity(this.issue.entityIds[1]);
-                            var powerEntity = hasTag(entity1.tags, 'power') ? entity1 : hasTag(entity2.tags, 'power') ? entity2 : null;
-                            var operation = operationDisconnect(context, [this.issue.data.crossingNode, powerEntity.id]);
-                            if (!operation.disabled()) {
-                                operation();
-                            }
-                        }
                     }));
                 } else if (isCrossingTunnels ||
                     isCrossingBridges ||
@@ -788,10 +748,6 @@ export function validationCrossingWays(context) {
         if (connectionTags.ford) {
             fixTitleID = 'connect_using_ford';
             fixIcon = 'roentgen-ford';
-        }
-        if (connectionTags.power) {
-            fixTitleID = 'connect_using_power_terminal';
-            fixIcon = 'temaki-power';
         }
 
         const fix = new validationIssueFix({
