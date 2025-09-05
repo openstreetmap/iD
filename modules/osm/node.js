@@ -48,7 +48,7 @@ osmNode.prototype = Object.create(osmEntity.prototype);
 
 const prototype = {
     type: 'node',
-    loc: [9999, 9999],
+    loc: /** @type {Vec2} */ ([9999, 9999]),
 
     extent: function() {
         return new geoExtent(this.loc);

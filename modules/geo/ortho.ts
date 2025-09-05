@@ -1,7 +1,10 @@
-import { geoVecEqual, geoVecNormalizedDot } from './vector';
+import { geoVecEqual, geoVecNormalizedDot, type Vec2 } from './vector';
 
+export interface Coord {
+    coord: Vec2
+};
 
-export function geoOrthoNormalizedDotProduct(a, b, origin) {
+export function geoOrthoNormalizedDotProduct(a: Vec2, b: Vec2, origin: Vec2) {
     if (geoVecEqual(origin, a) || geoVecEqual(origin, b)) {
         return 1;  // coincident points, treat as straight and try to remove
     }
@@ -9,7 +12,7 @@ export function geoOrthoNormalizedDotProduct(a, b, origin) {
 }
 
 
-function geoOrthoFilterDotProduct(dotp, epsilon, lowerThreshold, upperThreshold, allowStraightAngles) {
+function geoOrthoFilterDotProduct(dotp: number, epsilon: number, lowerThreshold: number, upperThreshold: number, allowStraightAngles?: boolean) {
     var val = Math.abs(dotp);
     if (val < epsilon) {
         return 0;      // already orthogonal
@@ -23,7 +26,7 @@ function geoOrthoFilterDotProduct(dotp, epsilon, lowerThreshold, upperThreshold,
 }
 
 
-export function geoOrthoCalcScore(points, isClosed, epsilon, threshold) {
+export function geoOrthoCalcScore(points: Coord[], isClosed: boolean, epsilon: number, threshold: number) {
     var score = 0;
     var first = isClosed ? 0 : 1;
     var last = isClosed ? points.length : points.length - 1;
@@ -46,7 +49,7 @@ export function geoOrthoCalcScore(points, isClosed, epsilon, threshold) {
 }
 
 // returns the maximum angle less than `lessThan` between the actual corner and a 0° or 90° corner
-export function geoOrthoMaxOffsetAngle(coords, isClosed, lessThan) {
+export function geoOrthoMaxOffsetAngle(coords: Vec2[], isClosed: boolean, lessThan: number) {
     var max = -Infinity;
 
     var first = isClosed ? 0 : 1;
@@ -74,7 +77,7 @@ export function geoOrthoMaxOffsetAngle(coords, isClosed, lessThan) {
 
 
 // similar to geoOrthoCalcScore, but returns quickly if there is something to do
-export function geoOrthoCanOrthogonalize(coords, isClosed, epsilon, threshold, allowStraightAngles) {
+export function geoOrthoCanOrthogonalize(coords: Vec2[], isClosed: boolean, epsilon: number, threshold: number, allowStraightAngles: boolean) {
     var score = null;
     var first = isClosed ? 0 : 1;
     var last = isClosed ? coords.length : coords.length - 1;
