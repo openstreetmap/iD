@@ -50,6 +50,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Display relative time section of "last edited {time ago} by…" text in the correct language when the user's locale is different from the browser language ([#11361])
 * Fix crash when a way has more than 2000 nodes ([#11360])
+* Fix crash when uploading changesets with more than 10,000 features ([#11388], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 * Compress changesets before uploading, to slightly reduce bandwidth ([#11353], thank [@k-yle])
@@ -66,6 +67,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11360]: https://github.com/openstreetmap/iD/issues/11360
 [#11361]: https://github.com/openstreetmap/iD/issues/11361
 [#11365]: https://github.com/openstreetmap/iD/issues/11365
+[#11388]: https://github.com/openstreetmap/iD/issues/11388
 
 
 # v2.36.0

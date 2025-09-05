@@ -50,6 +50,7 @@ var _off;
 
 // set a default but also load this from the API status
 var _maxWayNodes = 2000;
+let _maxChangesetElements = 10_000;
 
 
 function authLoading() {
@@ -1040,6 +1041,10 @@ export default {
                 var maxWayNodes = waynodes.length && parseInt(waynodes[0].getAttribute('maximum'), 10);
                 if (maxWayNodes && isFinite(maxWayNodes)) _maxWayNodes = maxWayNodes;
 
+                const changesets = xml.getElementsByTagName('changesets');
+                const maxChangesetElements = +changesets[0]?.getAttribute('maximum_elements');
+                if (!Number.isNaN(maxChangesetElements)) _maxChangesetElements = maxChangesetElements;
+
                 var apiStatus = xml.getElementsByTagName('status');
                 var val = apiStatus[0].getAttribute('api');
                 return callback(undefined, val);
@@ -1070,6 +1075,9 @@ export default {
     maxWayNodes: function() {
         return _maxWayNodes;
     },
+
+
+    maxChangesetElements: () => _maxChangesetElements,
 
 
     // Load data (entities) from the API in tiles
