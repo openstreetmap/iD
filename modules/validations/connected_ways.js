@@ -1,10 +1,8 @@
 import { isEqual } from 'lodash-es';
 
-import { actionAddMidpoint } from '../actions/add_midpoint';
-import { actionMergeNodes } from '../actions/merge_nodes';
 import { operationDisconnect } from '../operations/disconnect';
+import { operationDelete } from '../operations/delete';
 import { geoExtent,  geoLineIntersection, geoSphericalClosestNode,  } from '../geo';
-import { osmNode } from '../osm/node';
 import { osmFlowingWaterwayTagValues, osmRailwayTrackTagValues, osmPowerTagValues, osmRoutableAerowayTags, osmRoutableHighwayTagValues } from '../osm/tags';
 import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
@@ -52,6 +50,8 @@ export function validationConnectedWays(context) {
         if (hasTag(tags, 'building') && !ignoredBuildings[tags.building]) return 'building';
         if (hasTag(tags, 'highway') && osmRoutableHighwayTagValues[tags.highway]) return 'highway';
         if (hasTag(tags, 'landuse')) return 'landuse';
+        if (hasTag(tags, 'natural')) return 'natural';
+        if (hasTag(tags, 'man_made')) return 'man_made';
 
         // don't check railway or waterway areas
         if (geometry !== 'line') return null;
@@ -194,6 +194,7 @@ export function validationConnectedWays(context) {
                             }
                         ],
                         crossPoint: point,
+                        crossIndex: way1Nodes.findIndex(n => n.id === intersectingNode),
                         crossNode: intersectingNode
                     });
                     if (oneOnly) {
@@ -313,7 +314,8 @@ export function validationConnectedWays(context) {
             data: {
                 edges: edges,
                 featureTypes: featureTypes,
-                crossingNode: wrongConnection.crossNode,
+                connectingNode: wrongConnection.crossNode,
+                connectingNodeIndex: wrongConnection.crossIndex,
                 connectionTags: connectionTags
             },
             hash: uniqueID,
@@ -327,20 +329,28 @@ export function validationConnectedWays(context) {
                 fixes.push(new validationIssueFix({
                     icon: 'iD-operation-delete',
                     title: t.append('issues.fix.disconnect_feature.title'),
-                    entityIds: [this.data.crossingNode],
+                    entityIds: [this.data.connectingNode],
                     onClick: function(context) {
                         var graph = context.graph();
                         var entity1 = graph.entity(this.issue.entityIds[0]);
                         var entity2 = graph.entity(this.issue.entityIds[1]);
                         var powerEntity = hasTag(entity1.tags, 'power') ? entity1 : hasTag(entity2.tags, 'power') ? entity2 : null;
-                        var operation = operationDisconnect(context, [this.issue.data.crossingNode, powerEntity.id]);
+                        var operation = operationDisconnect(context, [this.issue.data.connectingNode]);
                         if (!operation.disabled()) {
                             operation();
                         }
                     }
                 }));
 
-                if (connectionTags) {
+                if (featureType1 === 'power') {
+                    var wayNodes = graph.childNodes(entities[0]);
+                } else if (featureType2 === 'power') {
+                    var wayNodes = graph.childNodes(entities[1]);
+                }
+                var connectingNodeIndex = this.data.connectingNodeIndex;
+                var isLastNodeOfWay = (connectingNodeIndex === 0 || connectingNodeIndex === wayNodes.length - 1);
+
+                if (connectionTags && isLastNodeOfWay) {
                     fixes.push(makeConnectWaysFix(this.data.connectionTags));
                     let lessLikelyConnectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph, true);
                     if (lessLikelyConnectionTags && !isEqual(connectionTags, lessLikelyConnectionTags)) {
@@ -382,9 +392,7 @@ export function validationConnectedWays(context) {
             icon: fixIcon,
             title: t.append('issues.fix.' + fixTitleID + '.title'),
             onClick: function(context) {
-                var loc = this.issue.loc;
-                var edges = this.issue.data.edges;
-                var connectingNode = this.issue.data.crossingNode;
+                var connectingNode = this.issue.data.connectingNode;
 
                 if (connectingNode && connectionTags) {
                     var node = context.graph().entity(connectingNode);
