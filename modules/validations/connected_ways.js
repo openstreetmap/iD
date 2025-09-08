@@ -2,7 +2,7 @@ import { isEqual } from 'lodash-es';
 
 import { operationDisconnect } from '../operations/disconnect';
 import { operationDelete } from '../operations/delete';
-import { geoExtent,  geoLineIntersection, geoSphericalClosestNode,  } from '../geo';
+import { geoExtent,  geoLineIntersection  } from '../geo';
 import { osmFlowingWaterwayTagValues, osmRailwayTrackTagValues, osmPowerTagValues, osmRoutableAerowayTags, osmRoutableHighwayTagValues } from '../osm/tags';
 import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
@@ -336,6 +336,15 @@ export function validationConnectedWays(context) {
                         var entity2 = graph.entity(this.issue.entityIds[1]);
                         var powerEntity = hasTag(entity1.tags, 'power') ? entity1 : hasTag(entity2.tags, 'power') ? entity2 : null;
                         var operation = operationDisconnect(context, [this.issue.data.connectingNode]);
+                        if (!operation.disabled()) {
+                            operation();
+                        }
+                        //reload graph and delete the node from powerEntity
+                        var graph = context.graph();
+                        var entity1 = graph.entity(this.issue.entityIds[0]);
+                        var entity2 = graph.entity(this.issue.entityIds[1]);
+                        var powerEntity = hasTag(entity1.tags, 'power') ? entity1 : hasTag(entity2.tags, 'power') ? entity2 : null;
+                        var operation = operationDelete(context, [powerEntity.nodes[this.issue.data.connectingNodeIndex]]);
                         if (!operation.disabled()) {
                             operation();
                         }
