@@ -384,38 +384,20 @@ export function validationConnectedWays(context) {
             onClick: function(context) {
                 var loc = this.issue.loc;
                 var edges = this.issue.data.edges;
+                var connectingNode = this.issue.data.crossingNode;
 
-                context.perform(
-                    function actionConnectCrossingWays(graph) {
-                        // create the new node for the points
-                        var node = osmNode({ loc: loc, tags: connectionTags });
-                        graph = graph.replace(node);
-
-                        var nodesToMerge = [node.id];
-                        var mergeThresholdInMeters = 0.75;
-
-                        edges.forEach(function(edge) {
-                            var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
-                            var nearby = geoSphericalClosestNode(edgeNodes, loc);
-                            // if there is already a suitable node nearby, use that
-                            // use the node if node has no interesting tags or if it is a crossing node #8326
-                            if ((!nearby.node.hasInterestingTags() || nearby.node.isCrossing()) && nearby.distance < mergeThresholdInMeters) {
-                                nodesToMerge.push(nearby.node.id);
-                            // else add the new node to the way
-                            } else {
-                                graph = actionAddMidpoint({loc: loc, edge: edge}, node)(graph);
-                            }
-                        });
-
-                        if (nodesToMerge.length > 1) {
-                            // if we're using nearby nodes, merge them with the new node
-                            graph = actionMergeNodes(nodesToMerge, loc)(graph);
-                        }
-
-                        return graph;
-                    },
-                    t('issues.fix.connect_crossing_features.annotation')
-                );
+                if (connectingNode && connectionTags) {
+                    var node = context.graph().entity(connectingNode);
+                    if (node) {
+                        var updatedTags = Object.assign({}, node.tags, connectionTags);
+                        context.perform(
+                            function updateNodeTags(graph) {
+                                return graph.replace(node.update({ tags: updatedTags }));
+                            },
+                            t('issues.fix.connect_using_power_terminal.title')
+                        );
+                    }
+                }
             }
         });
         fix._connectionTags = connectionTags;
