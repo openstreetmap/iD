@@ -111,6 +111,7 @@ export function validationConnectedWays(context) {
         var oneOnly;
         var segmentInfos, segment2Info, way2, taggedFeature2, way2FeatureType;
         var way1Nodes = graph.childNodes(way1);
+        var way1NodesId = way1Nodes.map(n => n.id);
         var comparedWays = {};
         for (i = 0; i < way1Nodes.length - 1; i++) {
             let n1 = way1Nodes[i];
@@ -194,7 +195,7 @@ export function validationConnectedWays(context) {
                             }
                         ],
                         crossPoint: point,
-                        crossIndex: way1Nodes.findIndex(n => n.id === intersectingNode),
+                        crossIndex: way1NodesId.indexOf(intersectingNode),
                         crossNode: intersectingNode
                     });
                     if (oneOnly) {
@@ -335,27 +336,27 @@ export function validationConnectedWays(context) {
                         var entity1 = graph.entity(this.issue.entityIds[0]);
                         var entity2 = graph.entity(this.issue.entityIds[1]);
                         var powerEntity = hasTag(entity1.tags, 'power') ? entity1 : hasTag(entity2.tags, 'power') ? entity2 : null;
-                        var operation = operationDisconnect(context, [this.issue.data.connectingNode]);
+                        var operation = operationDisconnect(context, [this.issue.data.connectingNode, powerEntity.id]);
                         if (!operation.disabled()) {
                             operation();
                         }
                         //reload graph and delete the node from powerEntity
-                        var graph = context.graph();
-                        var entity1 = graph.entity(this.issue.entityIds[0]);
-                        var entity2 = graph.entity(this.issue.entityIds[1]);
-                        var powerEntity = hasTag(entity1.tags, 'power') ? entity1 : hasTag(entity2.tags, 'power') ? entity2 : null;
-                        var operation = operationDelete(context, [powerEntity.nodes[this.issue.data.connectingNodeIndex]]);
-                        if (!operation.disabled()) {
-                            operation();
+                        var graph_ = context.graph();
+                        var entity1_ = graph_.entity(this.issue.entityIds[0]);
+                        var entity2_ = graph_.entity(this.issue.entityIds[1]);
+                        var powerEntity_ = hasTag(entity1_.tags, 'power') ? entity1_ : hasTag(entity2_.tags, 'power') ? entity2_ : null;
+                        var operation_ = operationDelete(context, [powerEntity_.nodes[this.issue.data.connectingNodeIndex]]);
+                        if (!operation_.disabled()) {
+                            operation_();
                         }
                     }
                 }));
 
+                 var wayNodes = graph.childNodes(entities[1]);
                 if (featureType1 === 'power') {
-                    var wayNodes = graph.childNodes(entities[0]);
-                } else if (featureType2 === 'power') {
-                    var wayNodes = graph.childNodes(entities[1]);
+                    wayNodes = graph.childNodes(entities[0]);
                 }
+
                 var connectingNodeIndex = this.data.connectingNodeIndex;
                 var isLastNodeOfWay = (connectingNodeIndex === 0 || connectingNodeIndex === wayNodes.length - 1);
 
