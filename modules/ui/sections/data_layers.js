@@ -401,7 +401,7 @@ export function uiSectionDataLayers(context) {
             .append('label')
             .call(uiTooltip()
                 .title(() => t.append('map_data.history_panel.tooltip'))
-                .keys([uiCmd('⌘⇧' + t('info_panels.history.key'))])
+                .keys([uiCmd('⌘⌥' + t('info_panels.history.key'))])
                 .placement('top')
             );
 
