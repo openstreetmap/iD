@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Include the number of changeset tags with incompatible sources in `warnings:incompatible_source` changeset tag ([#8400])
 #### :bug: Bugfixes
 * Display relative time section of "last edited {time ago} by…" text in the correct language when the user's locale is different from the browser language ([#11361])
+* Fix the help info not working for some namespaced fields like `payment:*` and `socket:*` ([#11402], thanks [@k-yle])
 * Fix crash when a way has more than 2000 nodes ([#11360])
 #### :earth_asia: Localization
 #### :hourglass: Performance
@@ -66,6 +67,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11360]: https://github.com/openstreetmap/iD/issues/11360
 [#11361]: https://github.com/openstreetmap/iD/issues/11361
 [#11365]: https://github.com/openstreetmap/iD/issues/11365
+[#11402]: https://github.com/openstreetmap/iD/pull/11402
 
 
 # v2.36.0
