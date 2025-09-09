@@ -1982,7 +1982,7 @@ en:
         message: Way has too many vertices
         reference: "The maximum number of vertices of a way is {maxWayNodes}. Split the feature into smaller parts or otherwise reduce the number of nodes of the affected way."
       max_changeset_elements:
-        reference: "You've edited {changesetElements} elements in this changeset, but the maxmium number allowed is {maxChangesetElements}. Therefore, your edit is too large to upload. You need to export your changes as an osmChange file, and use a different editor to upload it."
+        reference: "You've edited {changesetElements} elements in this changeset, but the maximum number allowed is {maxChangesetElements}. Therefore, your edit is too large to upload. You need to export your changes as an osmChange file and use a different editor to upload it."
     fix:
       add_a_bridge:
         title: Add a bridge
