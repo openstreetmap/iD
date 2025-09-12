@@ -11,7 +11,7 @@ export function uiViewOnOSM(context) {
     function viewOnOSM(selection) {
         var url;
         if (_what instanceof osmEntity) {
-            url = context.connection().entityURL(_what);
+            url = context.connection().historyURL(_what);
         } else if (_what instanceof osmNote) {
             url = context.connection().noteURL(_what);
         }
