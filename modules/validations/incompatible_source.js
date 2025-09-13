@@ -14,7 +14,7 @@ const incompatibleRules = [
   {
     id: 'google',
     regex: /(google)/i,
-    exceptRegex: /((books|drive)\.google|google\s?(books|drive|plus))|(esri\/Google_Africa_Buildings)/i
+    exceptRegex: /((books|drive)\.google|google\s?(books|drive|plus))|(esri\/Google_(Africa|Open)_Buildings)/i
   }
 ];
 
@@ -62,19 +62,19 @@ export function validationIncompatibleSource() {
         }))
       );
 
-      function getReference(id) {
-        return function showReference(selection) {
-          selection.selectAll('.issue-reference')
-            .data([0])
-            .enter()
-            .append('div')
-            .attr('class', 'issue-reference')
-            .call(t.append(`issues.incompatible_source.reference.${id}`));
-        };
-      }
-    };
+    function getReference(id) {
+      return function showReference(selection) {
+        selection.selectAll('.issue-reference')
+          .data([0])
+          .enter()
+          .append('div')
+          .attr('class', 'issue-reference')
+          .call(t.append(`issues.incompatible_source.reference.${id}`));
+      };
+    }
+  };
 
-    validation.type = type;
+  validation.type = type;
 
-    return validation;
+  return validation;
 }
