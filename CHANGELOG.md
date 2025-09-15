@@ -51,6 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Display relative time section of "last edited {time ago} by…" text in the correct language when the user's locale is different from the browser language ([#11361])
 * Fix the help info not working for some namespaced fields like `payment:*` and `socket:*` ([#11402], thanks [@k-yle])
 * Fix crash when a way has more than 2000 nodes ([#11360])
+* Fix data `source`s incorrectly flagged as _proprietary data_: `esri/Google_Open_Buildings` ([#11412], thanks [@Ankitgkp])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 * Compress changesets before uploading, to slightly reduce bandwidth ([#11353], thank [@k-yle])
@@ -68,6 +69,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11361]: https://github.com/openstreetmap/iD/issues/11361
 [#11365]: https://github.com/openstreetmap/iD/issues/11365
 [#11402]: https://github.com/openstreetmap/iD/pull/11402
+[#11412]: https://github.com/openstreetmap/iD/pull/11412
+[@Ankitgkp]: https://github.com/Ankitgkp
 
 
 # v2.36.0
