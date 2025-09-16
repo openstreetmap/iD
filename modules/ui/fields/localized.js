@@ -293,10 +293,14 @@ export function uiFieldLocalized(field, context) {
 
         var newKey = lang && context.cleanTagKey(key(lang));
 
-        var value = utilGetSetValue(d3_select(this.parentNode).selectAll('.localized-value'));
+        // Use existing value from the data, preserving multiselection values
+        var existingValue = d.value;
+        var inputValue = utilGetSetValue(d3_select(this.parentNode).selectAll('.localized-value'));
 
-        if (newKey && value) {
-            tags[newKey] = value;
+        if (newKey && existingValue) {
+            tags[newKey] = existingValue;
+        } else if (newKey && inputValue) {
+            tags[newKey] = inputValue;
         } else if (newKey && _wikiTitles && _wikiTitles[d.lang]) {
             tags[newKey] = _wikiTitles[d.lang];
         }
