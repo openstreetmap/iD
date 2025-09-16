@@ -64,7 +64,7 @@
     "fast-json-stable-stringify": "2.1.0",
     "idb-keyval": "^6.2.2",
     "lodash-es": "~4.17.15",
-    "marked": "~16.2.1",
+    "marked": "~16.3.0",
     "node-diff3": "~3.1.0",
     "osm-auth": "^3.0.0",
     "pannellum": "2.5.6",
@@ -91,7 +91,7 @@
     "@types/geojson": "^7946.0.16",
     "@types/happen": "^0.3.0",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^24.3.1",
+    "@types/node": "^24.5.0",
     "@types/sinon": "^17.0.4",
     "@types/sinon-chai": "^4.0.0",
     "autoprefixer": "^10.4.21",
@@ -132,7 +132,7 @@
     "smash": "0.0",
     "svg-sprite": "2.0.4",
     "typescript": "^5.9.2",
-    "typescript-eslint": "^8.43.0",
+    "typescript-eslint": "^8.44.0",
     "vparse": "~1.1.0"
   },
   "engines": {
