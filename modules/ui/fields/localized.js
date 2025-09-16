@@ -280,7 +280,7 @@ export function uiFieldLocalized(field, context) {
         // make sure unrecognized suffixes are lowercase - #7156
         var lang = utilGetSetValue(d3_select(this)).toLowerCase();
 
-        var language = _languagesArray.find(function (d) {
+        var language = _languagesArray.find(function(d) {
             return d.label.toLowerCase() === lang ||
                 (d.localName && d.localName.toLowerCase() === lang) ||
                 (d.nativeName && d.nativeName.toLowerCase() === lang);
