@@ -5,7 +5,6 @@ import * as countryCoder from '@rapideditor/country-coder';
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
 import { t, localizer } from '../../core/localizer';
-import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 import { uiCombobox } from '../combobox';
@@ -18,7 +17,6 @@ export const LANGUAGE_SUFFIX_REGEX = /^(.*):([a-z]{2,3}(?:-[A-Z][a-z]{3})?(?:-[A
 
 export function uiFieldLocalized(field, context) {
     var dispatch = d3_dispatch('change', 'input');
-    var wikipedia = services.wikipedia;
     var input = d3_select(null);
     var localizedInputs = d3_select(null);
     var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
@@ -48,7 +46,6 @@ export function uiFieldLocalized(field, context) {
     var _buttonTip = uiTooltip()
         .title(() => t.append('translate.translate'))
         .placement('left');
-    var _wikiTitles;
     var _entityIDs = [];
 
 
@@ -297,8 +294,6 @@ export function uiFieldLocalized(field, context) {
 
         if (newKey && value) {
             tags[newKey] = value;
-        } else if (newKey && _wikiTitles && _wikiTitles[d.lang]) {
-            tags[newKey] = _wikiTitles[d.lang];
         }
 
         d.lang = lang;
@@ -483,18 +478,6 @@ export function uiFieldLocalized(field, context) {
 
     localized.tags = function(tags) {
         _tags = tags;
-
-        // Fetch translations from wikipedia
-        if (typeof tags.wikipedia === 'string' && !_wikiTitles) {
-            _wikiTitles = {};
-            var wm = tags.wikipedia.match(/([^:]+):(.+)/);
-            if (wm && wm[0] && wm[1]) {
-                wikipedia.translations(wm[1], wm[2], function(err, d) {
-                    if (err || !d) return;
-                    _wikiTitles = d;
-                });
-            }
-        }
 
         var isMixed = Array.isArray(tags[field.key]);
 

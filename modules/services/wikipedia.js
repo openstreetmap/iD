@@ -78,42 +78,4 @@ export default {
             });
     },
 
-
-    translations: function(lang, title, callback) {
-        if (!title) {
-            if (callback) callback('No Title');
-            return;
-        }
-
-        var url = endpoint.replace('en', lang) +
-            utilQsString({
-                action: 'query',
-                prop: 'langlinks',
-                format: 'json',
-                origin: '*',
-                lllimit: 500,
-                titles: title
-            });
-
-        d3_json(url)
-            .then(function(result) {
-                if (result && result.error) {
-                    throw new Error(result.error);
-                } else if (!result || !result.query || !result.query.pages) {
-                    throw new Error('No Results');
-                }
-                if (callback) {
-                    var list = result.query.pages[Object.keys(result.query.pages)[0]];
-                    var translations = {};
-                    if (list && list.langlinks) {
-                        list.langlinks.forEach(function(d) { translations[d.lang] = d['*']; });
-                    }
-                    callback(null, translations);
-                }
-            })
-            .catch(function(err) {
-                if (callback) callback(err.message);
-            });
-    }
-
 };
