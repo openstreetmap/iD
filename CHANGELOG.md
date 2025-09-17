@@ -52,6 +52,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Display relative time section of "last edited {time ago} by…" text in the correct language when the user's locale is different from the browser language ([#11361])
 * Fix the help info not working for some namespaced fields like `payment:*` and `socket:*` ([#11402], thanks [@k-yle])
 * Fix crash when a way has more than 2000 nodes ([#11360])
+* Fix data `source`s incorrectly flagged as _proprietary data_: `esri/Google_Open_Buildings` ([#11412], thanks [@Ankitgkp])
+* Keep `natural=coastline` tag on the way when a coastline way that is also an area (e.g. `place=islet`) is split and converted into a multipolygon ([#9563])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 * Compress changesets before uploading, to slightly reduce bandwidth ([#11353], thank [@k-yle])
@@ -60,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 [#8400]: https://github.com/openstreetmap/iD/issues/8400
+[#9563]: https://github.com/openstreetmap/iD/issues/9563
 [#9575]: https://github.com/openstreetmap/iD/issues/9575
 [#10287]: https://github.com/openstreetmap/iD/issues/10287
 [#11141]: https://github.com/openstreetmap/iD/pull/11141
@@ -70,6 +73,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11365]: https://github.com/openstreetmap/iD/issues/11365
 [#11402]: https://github.com/openstreetmap/iD/pull/11402
 [#11403]: https://github.com/openstreetmap/iD/issues/11403
+[#11412]: https://github.com/openstreetmap/iD/pull/11412
+[@Ankitgkp]: https://github.com/Ankitgkp
 
 
 # v2.36.0

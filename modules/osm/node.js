@@ -92,7 +92,7 @@ const prototype = {
         } else {
             // generic side tag
 
-            // unfortunately, the proposal for highway=cylist_waiting_aid used
+            // unfortunately, the proposal for highway=cyclist_waiting_aid used
             // an ambiguous definition for `side`, which basically makes the tag
             // useless in the situation where the parent way (the cycleway) is
             // bidirectional. It's impossible for software to determine which
