@@ -287,8 +287,9 @@ export function uiFieldLocalized(field, context) {
         });
         if (language) lang = language.code;
 
+        var previousValue;
         if (d.lang && d.lang !== lang) {
-            tags[key(d.lang)] = undefined;
+            previousValue = tags[key(d.lang)];
         }
 
         var newKey = lang && context.cleanTagKey(key(lang));
@@ -297,6 +298,8 @@ export function uiFieldLocalized(field, context) {
 
         if (newKey && value) {
             tags[newKey] = value;
+        } else if (newKey && previousValue !== undefined) {
+            tags[newKey] = previousValue;
         } else if (newKey && _wikiTitles && _wikiTitles[d.lang]) {
             tags[newKey] = _wikiTitles[d.lang];
         }
