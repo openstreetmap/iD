@@ -25,6 +25,8 @@
     --nested-highlight-color: #e3e8ef;
     --nested-border-color: #ccd5e3;
     --selected-bg-color: #e8ebff;
+    --dark-tooltip-text-color: #fff;
+    --dark-tooltip-bg-color: #444;
 
     --bg-filter: none;
     --mix-blend-mode: normal;
@@ -90,6 +92,8 @@
         --nested-highlight-color: #33363b;
         --nested-border-color: #3e434e;
         --selected-bg-color: #3b3c49;
+        --dark-tooltip-text-color: #ccc;
+        --dark-tooltip-bg-color: #000;
 
         --bg-filter: invert();
         --mix-blend-mode: screen;

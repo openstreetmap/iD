@@ -5701,25 +5701,25 @@ button.conflicts-button {
 .map-pane .tooltip.top .popover-arrow,
 .sidebar .tooltip.top .popover-arrow,
 .modal .tooltip.top .popover-arrow {
-    border-top-color: #000;
+    border-top-color: var(--dark-tooltip-bg-color);
 }
 .tooltip.dark.bottom .popover-arrow,
 .map-pane .tooltip.bottom .popover-arrow,
 .sidebar .tooltip.bottom .popover-arrow,
 .modal .tooltip.bottom .popover-arrow {
-    border-bottom-color: #000;
+    border-bottom-color: var(--dark-tooltip-bg-color);
 }
 .tooltip.dark.left .popover-arrow,
 .map-pane .tooltip.left .popover-arrow,
 .sidebar .tooltip.left .popover-arrow,
 .modal .tooltip.left .popover-arrow {
-    border-left-color: #000;
+    border-left-color: var(--dark-tooltip-bg-color);
 }
 .tooltip.dark.right .popover-arrow,
 .map-pane .tooltip.right .popover-arrow,
 .sidebar .tooltip.right .popover-arrow,
 .modal .tooltip.right .popover-arrow {
-    border-right-color: #000;
+    border-right-color: var(--dark-tooltip-bg-color);
 }
 .tooltip.dark .popover-inner,
 .tooltip.dark .tooltip-heading,
@@ -5731,8 +5731,8 @@ button.conflicts-button {
 .sidebar .tooltip-heading,
 .sidebar .keyhint-wrap,
 .modal .popover-inner {
-    background: #000;
-    color: #ccc;
+    background: var(--dark-tooltip-bg-color);
+    color: var(--dark-tooltip-text-color);
 }
 .tooltip.dark kbd,
 .map-pane .tooltip kbd,
