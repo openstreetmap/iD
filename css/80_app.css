@@ -5313,7 +5313,7 @@ img.tile-debug {
     padding: 5px 10px;
     margin: 0 5px;
     cursor: pointer;
-    color: #666;
+    color: var(--text-color);
     font-size: 16px;
     font-weight: bold;
 }
@@ -5358,7 +5358,6 @@ img.tile-debug {
 
 .modal-shortcuts .shortcut-keys {
     padding: 0 10px;
-    color: #767676;
     text-align: right;
     white-space: nowrap;
 }
@@ -5366,12 +5365,7 @@ img.tile-debug {
     text-align: left;
 }
 
-.modal-shortcuts .shortcut-keys kbd {
-    color: var(--text-color);
-}
-
 .modal-shortcuts .shortcut-keys .gesture {
-    color: var(--text-color);
     padding: 3px;
 }
 
