@@ -12,6 +12,8 @@
     --outset-color: #fcfcfc; /* brighter than --border-color with white */
     --shadow-color: #bbb; /* mix 91.5% of --border-color with black */
     --text-color: #333;
+    --link-color: #7092ff;
+    --link-focus-color: #597be7;
     --muted-text-color: #aaa;
     --transparent-text-color: #2223;
     --transparent-text-emphasis-color: #0007;
@@ -77,6 +79,8 @@
         --outset-color: #54595d;
         --shadow-color: #3b4045;
         --text-color: #dee2e6;
+        --link-color: #7b92db;
+        --link-focus-color: #7e9cff;
         --muted-text-color: #6e7276;
         --transparent-text-color: #eee3;
         --transparent-text-emphasis-color: #fff7;
