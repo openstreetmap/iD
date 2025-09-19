@@ -37,6 +37,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # unreleased (v2.36.0-dev)
 
+#### :mega: Release Highlights
+* Add dark mode theme ([#8214], thanks [@hlfan]!)
 #### :sparkles: Usability & Accessibility
 * use `addr:` tags to label features with no name ([#8440], thanks [@k-yle])
 * The flip operation now works on nodes with no `direction` tag, to support quickly adding `direction` to features like traffic signs ([#9317], thanks [@k-yle])
@@ -76,6 +78,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Configure preview deployments for Pull Requests ([#11332], thanks [@k-yle])
 
 [#7629]: https://github.com/openstreetmap/iD/pull/7629
+[#8214]: https://github.com/openstreetmap/iD/issues/8214
 [#8440]: https://github.com/openstreetmap/iD/pull/8440
 [#9317]: https://github.com/openstreetmap/iD/issues/9317
 [#9511]: https://github.com/openstreetmap/iD/pull/9511
