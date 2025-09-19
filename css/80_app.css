@@ -5255,7 +5255,7 @@ img.tile-debug {
 
 .community-event,
 .community-more {
-    background-color: #efefef;
+    background-color: var(--bg-color-2);
     padding: 8px;
     border-radius: 4px;
     margin-bottom: 5px;
