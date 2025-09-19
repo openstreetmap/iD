@@ -4278,7 +4278,7 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .inspector-hover .form-field-input-multicombo .chip,
 .inspector-hover .form-field-input-check span,
 .inspector-hover .section-entity-issues .issue .icon {
-    color: #666;
+    color: var(--passive-text-color);
 }
 
 .inspector-hover .form-field-input-multicombo .chip {
@@ -4376,7 +4376,7 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .inspector-hover .entity-editor-pane a.hide-toggle {
     opacity: 1;
     background-color: transparent;
-    color: #666;
+    color: var(--passive-text-color);
     padding-left: 0;
     border-width: 0;
 }
