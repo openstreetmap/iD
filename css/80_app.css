@@ -1777,7 +1777,7 @@ input.date-selector {
     padding: 0px 5px 0px 5px;
     margin: 0;
     cursor: pointer;
-    color: #a6b4ce;
+    color: var(--muted-text-color);
     display: block;
     text-align: center;
     flex: 0 0 auto;
@@ -2317,7 +2317,6 @@ input.date-selector {
 
 .form-field-input-restrictions .restriction-container {
     position: relative;
-    color: #333;
     height: 370px;
 }
 /* zero width space, so container takes up space */
@@ -2536,7 +2535,7 @@ div.combobox {
     display: inline-block;
     padding: 5px 10px;
     cursor: pointer;
-    color: #666;
+    color: var(--text-color);
 }
 .field-help-nav-item.active {
     color: var(--link-color);
