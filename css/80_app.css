@@ -4020,9 +4020,9 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 }
 
 .nudge-container input.error {
-    border: 1px solid #ff7878;
+    border: 1px solid var(--warning-border-color);
     border-radius: 2px;
-    background: #ffb;
+    background: var(--warning-bg-color);
 }
 
 .nudge-container button {
