@@ -2509,11 +2509,10 @@ div.combobox {
     right: 20px;
     margin: 5px;
     padding: 8px;
-    border: 1px solid #ccc;
-    border-top: 0;
-    border-radius: 0 0 4px 4px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
     z-index: 20;
-    background: rgba(255,255,255,0.95);
+    background: var(--transparent-bg-color);
     box-shadow: 0 0 30px 5px rgba(0,0,0,.4);
 }
 
@@ -2524,8 +2523,8 @@ div.combobox {
 }
 .field-help-title button {
     width: 45px;
-    height: 55px;
-    border-radius: 0;
+    height: 45px;
+    border-radius: 0 5px 0 0;
 }
 
 .field-help-nav {
