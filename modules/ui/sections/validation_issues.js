@@ -114,32 +114,6 @@ export function uiSectionValidationIssues(id, severity, context) {
             .append('span')
             .attr('class', 'issue-message');
 
-        /*
-        labelsEnter
-            .append('span')
-            .attr('class', 'issue-autofix')
-            .each(function(d) {
-                if (!d.autoFix) return;
-
-                d3_select(this)
-                    .append('button')
-                    .attr('title', t('issues.fix_one.title'))
-                    .datum(d.autoFix)  // set button datum to the autofix
-                    .attr('class', 'autofix action')
-                    .on('click', function(d3_event, d) {
-                        d3_event.preventDefault();
-                        d3_event.stopPropagation();
-
-                        var issuesEntityIDs = d.issue.entityIds;
-                        utilHighlightEntities(issuesEntityIDs.concat(d.entityIds), false, context);
-
-                        context.perform.apply(context, d.autoArgs);
-                        context.validator().validate();
-                    })
-                    .call(svgIcon('#iD-icon-wrench'));
-            });
-        */
-
         // Update
         items = items
             .merge(itemsEnter)
@@ -150,62 +124,6 @@ export function uiSectionValidationIssues(id, severity, context) {
             .each(function(d) {
                 return d.message(context)(d3_select(this));
             });
-
-        /*
-        // autofix
-        var canAutoFix = issues.filter(function(issue) { return issue.autoFix; });
-
-        var autoFixAll = selection.selectAll('.autofix-all')
-            .data(canAutoFix.length ? [0] : []);
-
-        // exit
-        autoFixAll.exit()
-            .remove();
-
-        // enter
-        var autoFixAllEnter = autoFixAll.enter()
-            .insert('div', '.issues-list')
-            .attr('class', 'autofix-all');
-
-        var linkEnter = autoFixAllEnter
-            .append('a')
-            .attr('class', 'autofix-all-link')
-            .attr('href', '#');
-
-        linkEnter
-            .append('span')
-            .attr('class', 'autofix-all-link-text')
-            .call(t.append('issues.fix_all.title'));
-
-        linkEnter
-            .append('span')
-            .attr('class', 'autofix-all-link-icon')
-            .call(svgIcon('#iD-icon-wrench'));
-
-        if (severity === 'warning') {
-            renderIgnoredIssuesReset(selection);
-        }
-
-        // update
-        autoFixAll = autoFixAll
-            .merge(autoFixAllEnter);
-
-        autoFixAll.selectAll('.autofix-all-link')
-            .on('click', function() {
-                context.pauseChangeDispatch();
-                context.perform(actionNoop());
-                canAutoFix.forEach(function(issue) {
-                    var args = issue.autoFix.autoArgs.slice();  // copy
-                    if (typeof args[args.length - 1] !== 'function') {
-                        args.pop();
-                    }
-                    args.push(t('issues.fix_all.annotation'));
-                    context.replace.apply(context, args);
-                });
-                context.resumeChangeDispatch();
-                context.validator().validate();
-            });
-        */
     }
 
     context.validator().on('validated.uiSectionValidationIssues' + id, function() {

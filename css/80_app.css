@@ -3557,10 +3557,6 @@ div.full-screen > button:focus {
     flex: 1 1 auto;
     padding: 4px 5px;
 }
-.issue-label .issue-autofix {
-    flex: 0 0 auto;
-    padding: 5px 8px;
-}
 .issue-label .issue-info-button {
     height: unset;
     width: 32px;
@@ -3583,44 +3579,6 @@ div.full-screen > button:focus {
 }
 .ideditor[dir='rtl'] .issue-label .issue-info-button:last-child {
     border-radius: 4px 0 0 4px;
-}
-
-button.autofix.action {
-    flex: 0 0 20px;
-    height: 20px;
-    width: 20px;
-    background: var(--link-color);
-    color: #fff;
-}
-button.autofix.action:focus,
-button.autofix.action:active,
-button.autofix.action.active {
-    background: var(--link-focus-color);
-}
-@media (hover: hover) {
-    button.autofix.action:hover {
-        background: var(--link-focus-color);
-    }
-}
-
-/* fix all */
-.autofix-all {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-end;
-    margin-top: -25px;
-    padding-bottom: 5px;
-}
-.autofix-all-link-text {
-    padding: 0;
-}
-.autofix-all-link-icon svg {
-    margin: 0 9px;
-    background: currentColor;
-    border-radius: 4px;
-}
-.autofix-all-link-icon svg use {
-    color: #fff;
 }
 
 /* suggestion styles */
