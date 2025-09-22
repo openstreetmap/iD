@@ -2317,6 +2317,7 @@ input.date-selector {
 
 .form-field-input-restrictions .restriction-container {
     position: relative;
+    color: #333;
     height: 370px;
 }
 /* zero width space, so container takes up space */
