@@ -43,8 +43,8 @@ export function validationFormatting() {
                 .call(t.append('issues.invalid_format.website.reference'));
         }
 
-        // URL field validation - check multiple possible URL tags
-        const urlTags = ['website', 'url', 'website:mobile', 'contact:website', 'contact:url', 'image', 'source:website', 'source:url'];
+        // URL field validation - check multiple possible URL tags (excluding image which allows File: format)
+        const urlTags = ['website', 'url', 'website:mobile', 'contact:website', 'contact:url', 'source:website', 'source:url'];
 
         urlTags.forEach(function(tag) {
             if (entity.tags[tag]) {
