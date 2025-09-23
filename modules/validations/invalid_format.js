@@ -26,11 +26,14 @@ export function validationFormatting() {
                 .call(t.append('issues.invalid_format.email.reference'));
         }
 
-        /* see https://github.com/openstreetmap/iD/issues/6831#issuecomment-537121379
-        function isSchemePresent(url) {
-            var valid_scheme = /^https?:\/\//i;
-            return (!url || valid_scheme.test(url));
+        function isValidURL(url) {
+            try {
+                return Boolean(new URL(url));
+            } catch {
+                return false;
+            }
         }
+
         function showReferenceWebsite(selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
@@ -40,31 +43,35 @@ export function validationFormatting() {
                 .call(t.append('issues.invalid_format.website.reference'));
         }
 
-        if (entity.tags.website) {
-            // Multiple websites are possible
-            // If ever we support ES6, arrow functions make this nicer
-            var websites = entity.tags.website
-                .split(';')
-                .map(function(s) { return s.trim(); })
-                .filter(function(x) { return !isSchemePresent(x); });
+        // URL field validation - check multiple possible URL tags
+        const urlTags = ['website', 'url', 'website:mobile', 'contact:website', 'contact:url', 'image', 'source:website', 'source:url'];
 
-            if (websites.length) {
-                issues.push(new validationIssue({
-                    type: type,
-                    subtype: 'website',
-                    severity: 'warning',
-                    message: function(context) {
-                        var entity = context.hasEntity(this.entityIds[0]);
-                        return entity ? t.append('issues.invalid_format.website.message' + this.data,
-                            { feature: utilDisplayLabel(entity, context.graph()), site: websites.join(', ') }) : '';
-                    },
-                    reference: showReferenceWebsite,
-                    entityIds: [entity.id],
-                    hash: websites.join(),
-                    data: (websites.length > 1) ? '_multi' : ''
-                }));
+        urlTags.forEach(function(tag) {
+            if (entity.tags[tag]) {
+                // Multiple URLs are possible, separated by semicolons
+                var urls = entity.tags[tag]
+                    .split(';')
+                    .map(function(s) { return s.trim(); })
+                    .filter(function(x) { return !isValidURL(x); });
+
+                if (urls.length) {
+                    issues.push(new validationIssue({
+                        type: type,
+                        subtype: 'website',
+                        severity: 'warning',
+                        message: function(context) {
+                            var entity = context.hasEntity(this.entityIds[0]);
+                            return entity ? t.append('issues.invalid_format.website.message' + this.data,
+                                { feature: utilDisplayLabel(entity, context.graph()), site: urls.join(', ') }) : '';
+                        },
+                        reference: showReferenceWebsite,
+                        entityIds: [entity.id],
+                        hash: tag + '=' + urls.join(),
+                        data: (urls.length > 1) ? '_multi' : ''
+                    }));
+                }
             }
-        }*/
+        });
 
         if (entity.tags.email) {
             // Multiple emails are possible
