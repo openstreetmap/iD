@@ -28,9 +28,12 @@ export function validationFormatting() {
 
         function isValidURL(url) {
             try {
-                return Boolean(new URL(url));
+                // First try strict WHATWG parsing
+                new URL(url);
+                return true;
             } catch {
-                return false;
+                // Fallback: accept if it looks like a valid scheme://something, even if semicolons are present
+                return /^https?:\/\/\S+$/i.test(url);
             }
         }
 
@@ -48,8 +51,13 @@ export function validationFormatting() {
 
         urlTags.forEach(function(tag) {
             if (entity.tags[tag]) {
-                // Multiple URLs are possible, separated by semicolons
-                var urls = entity.tags[tag]
+                var value = entity.tags[tag].trim();
+                // First, try validating the entire value as a single URL
+                if (isValidURL(value)) {
+                    return; // Valid, skip further checks
+                }
+                // If not valid, split on semicolons and check each part
+                var urls = value
                     .split(';')
                     .map(function(s) { return s.trim(); })
                     .filter(function(x) { return !isValidURL(x); });
