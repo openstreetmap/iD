@@ -10,6 +10,8 @@ describe('iD.Map', function() {
         context = iD.coreContext().assetPath('../dist/').init().container(content);
         map = context.map();
         content.call(map);
+        // Set default dimensions for map before zoom/center tests
+        map.dimensions([1000, 1000]);
     });
 
     afterEach(function() {

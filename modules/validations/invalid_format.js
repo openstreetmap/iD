@@ -29,7 +29,7 @@ export function validationFormatting() {
         function isValidURL(url) {
             try {
                 // First try strict WHATWG parsing
-                new URL(url);
+                new URL(url); // eslint-disable-line no-new
                 return true;
             } catch {
                 // Fallback: accept if it looks like a valid scheme://something, even if semicolons are present
@@ -52,31 +52,61 @@ export function validationFormatting() {
         urlTags.forEach(function(tag) {
             if (entity.tags[tag]) {
                 var value = entity.tags[tag].trim();
-                // First, try validating the entire value as a single URL
-                if (isValidURL(value)) {
-                    return; // Valid, skip further checks
-                }
-                // If not valid, split on semicolons and check each part
-                var urls = value
-                    .split(';')
-                    .map(function(s) { return s.trim(); })
-                    .filter(function(x) { return !isValidURL(x); });
-
-                if (urls.length) {
-                    issues.push(new validationIssue({
-                        type: type,
-                        subtype: 'website',
-                        severity: 'warning',
-                        message: function(context) {
-                            var entity = context.hasEntity(this.entityIds[0]);
-                            return entity ? t.append('issues.invalid_format.website.message' + this.data,
-                                { feature: utilDisplayLabel(entity, context.graph()), site: urls.join(', ') }) : '';
-                        },
-                        reference: showReferenceWebsite,
-                        entityIds: [entity.id],
-                        hash: tag + '=' + urls.join(),
-                        data: (urls.length > 1) ? '_multi' : ''
-                    }));
+                if (value.includes(';')) {
+                    // If semicolon present, validate each part
+                    var parts = value.split(';').map(function(s) { return s.trim(); });
+                    var invalidParts = parts.filter(function(x) { return !isValidURL(x); });
+                    if (invalidParts.length) {
+                        // Always warn if any split parts are invalid
+                        issues.push(new validationIssue({
+                            type: type,
+                            subtype: 'website',
+                            severity: 'warning',
+                            message: function(context) {
+                                var entity = context.hasEntity(this.entityIds[0]);
+                                return entity ? t.append('issues.invalid_format.website.message' + this.data,
+                                    { feature: utilDisplayLabel(entity, context.graph()), site: invalidParts.join(', ') }) : '';
+                            },
+                            reference: showReferenceWebsite,
+                            entityIds: [entity.id],
+                            hash: tag + '=' + invalidParts.join(),
+                            data: (invalidParts.length > 1) ? '_multi' : ''
+                        }));
+                    } else if (!isValidURL(value)) {
+                        // All split parts valid, but whole value still invalid
+                        issues.push(new validationIssue({
+                            type: type,
+                            subtype: 'website',
+                            severity: 'warning',
+                            message: function(context) {
+                                var entity = context.hasEntity(this.entityIds[0]);
+                                return entity ? t.append('issues.invalid_format.website.message',
+                                    { feature: utilDisplayLabel(entity, context.graph()), site: value }) : '';
+                            },
+                            reference: showReferenceWebsite,
+                            entityIds: [entity.id],
+                            hash: tag + '=' + value,
+                            data: ''
+                        }));
+                    }
+                } else {
+                    // No semicolon, validate whole value
+                    if (!isValidURL(value)) {
+                        issues.push(new validationIssue({
+                            type: type,
+                            subtype: 'website',
+                            severity: 'warning',
+                            message: function(context) {
+                                var entity = context.hasEntity(this.entityIds[0]);
+                                return entity ? t.append('issues.invalid_format.website.message',
+                                    { feature: utilDisplayLabel(entity, context.graph()), site: value }) : '';
+                            },
+                            reference: showReferenceWebsite,
+                            entityIds: [entity.id],
+                            hash: tag + '=' + value,
+                            data: ''
+                        }));
+                    }
                 }
             }
         });
