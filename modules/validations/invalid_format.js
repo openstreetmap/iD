@@ -50,7 +50,10 @@ export function validationFormatting() {
         Object.keys(entity.tags).forEach(function(tag) {
             if (tag === 'image') return; // skip image
             if (!/(website|url)/i.test(tag)) return; // only process website/url tags
-            var value = entity.tags[tag].trim();
+            var raw = entity.tags[tag];
+            if (!raw) return; // skip empty or undefined
+            var value = raw.trim();
+            if (!value) return; // skip empty string after trim
             if (value.includes(';')) {
                 // If semicolon present, validate each part
                 var parts = value.split(';').map(function(s) { return s.trim(); });
