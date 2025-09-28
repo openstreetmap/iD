@@ -154,6 +154,10 @@ describe('iD.Map', function() {
             line     = behavior.append('div').attr('class', 'way line');
             area     = behavior.append('div').attr('class', 'way area');
             midpoint = behavior.append('div').attr('class', 'midpoint');
+            // Ensure map dimensions set for any map instance created in nested tests
+            if (typeof map !== 'undefined' && typeof map.dimensions === 'function') {
+                map.dimensions([1000, 1000]);
+            }
         });
 
         afterEach(function() {

@@ -46,20 +46,17 @@ export function validationFormatting() {
                 .call(t.append('issues.invalid_format.website.reference'));
         }
 
-        // Refactored: Iterate all tags, skip 'image', process tags matching /(website|url)/
         Object.keys(entity.tags).forEach(function(tag) {
-            if (tag === 'image') return; // skip image
-            if (!/(website|url)/i.test(tag)) return; // only process website/url tags
+            if (!/\b(website|url)\b/i.test(tag)) return;
             var raw = entity.tags[tag];
-            if (!raw) return; // skip empty or undefined
+            if (!raw) return;
             var value = raw.trim();
-            if (!value) return; // skip empty string after trim
+            if (!value) return;
             if (value.includes(';')) {
-                // If semicolon present, validate each part
+
                 var parts = value.split(';').map(function(s) { return s.trim(); });
                 var invalidParts = parts.filter(function(x) { return !isValidURL(x); });
                 if (invalidParts.length) {
-                    // Always warn if any split parts are invalid
                     issues.push(new validationIssue({
                         type: type,
                         subtype: 'website',
