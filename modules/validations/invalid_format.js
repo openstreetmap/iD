@@ -46,11 +46,23 @@ export function validationFormatting() {
                 .call(t.append('issues.invalid_format.website.reference'));
         }
 
-        Object.keys(entity.tags).forEach(function(tag) {
-            if (!/\b(website|url)\b/i.test(tag)) return;
-            var raw = entity.tags[tag];
-            if (!raw) return;
-            var value = raw.trim();
+        const websiteValidationIssueBase = {
+            type: type,
+            subtype: 'website',
+            severity: 'warning',
+            message: function(context) {
+                var entity = context.hasEntity(this.entityIds[0]);
+                return entity ? t.append('issues.invalid_format.website.message' + this.data,
+                    { feature: utilDisplayLabel(entity, context.graph()), site: this.value }) : '';
+            },
+            reference: showReferenceWebsite,
+            entityIds: [entity.id]
+        };
+
+        Object.entries(entity.tags).forEach(function([key, tag]) {
+            if (!/\b(website|url)\b/i.test(key)) return;
+            if (!tag) return;
+            var value = tag.trim();
             if (!value) return;
             if (value.includes(';')) {
 
@@ -58,33 +70,21 @@ export function validationFormatting() {
                 var invalidParts = parts.filter(function(x) { return !isValidURL(x); });
                 if (invalidParts.length) {
                     issues.push(new validationIssue({
-                        type: type,
-                        subtype: 'website',
-                        severity: 'warning',
-                        message: function(context) {
-                            var entity = context.hasEntity(this.entityIds[0]);
-                            return entity ? t.append('issues.invalid_format.website.message' + this.data,
-                                { feature: utilDisplayLabel(entity, context.graph()), site: invalidParts.join(', ') }) : '';
-                        },
-                        reference: showReferenceWebsite,
-                        entityIds: [entity.id],
-                        hash: tag + '=' + invalidParts.join(),
+                        ...websiteValidationIssueBase,
+
+                        value: invalidParts.join(', '),
+
+                        hash: key + '=' + invalidParts.join(),
                         data: (invalidParts.length > 1) ? '_multi' : ''
                     }));
                 } else if (!isValidURL(value)) {
                     // All split parts valid, but whole value still invalid
                     issues.push(new validationIssue({
-                        type: type,
-                        subtype: 'website',
-                        severity: 'warning',
-                        message: function(context) {
-                            var entity = context.hasEntity(this.entityIds[0]);
-                            return entity ? t.append('issues.invalid_format.website.message',
-                                { feature: utilDisplayLabel(entity, context.graph()), site: value }) : '';
-                        },
-                        reference: showReferenceWebsite,
-                        entityIds: [entity.id],
-                        hash: tag + '=' + value,
+                        ...websiteValidationIssueBase,
+
+                        value: value,
+
+                        hash: key + '=' + value,
                         data: ''
                     }));
                 }
@@ -92,17 +92,11 @@ export function validationFormatting() {
                 // No semicolon, validate whole value
                 if (!isValidURL(value)) {
                     issues.push(new validationIssue({
-                        type: type,
-                        subtype: 'website',
-                        severity: 'warning',
-                        message: function(context) {
-                            var entity = context.hasEntity(this.entityIds[0]);
-                            return entity ? t.append('issues.invalid_format.website.message',
-                                { feature: utilDisplayLabel(entity, context.graph()), site: value }) : '';
-                        },
-                        reference: showReferenceWebsite,
-                        entityIds: [entity.id],
-                        hash: tag + '=' + value,
+                        ...websiteValidationIssueBase,
+
+                        value: value,
+
+                        hash: key + '=' + value,
                         data: ''
                     }));
                 }
