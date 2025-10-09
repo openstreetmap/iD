@@ -1,0 +1,24 @@
+# Custom Dictionary Words
+aerialway
+aeroway
+busway
+chipseal
+colour
+flowline
+guideway
+halfpipe
+housename
+housenumber
+ideditor
+landuse
+multipolygon
+Multipolygons
+noaddress
+nohousenumber
+nostreet
+prefs
+pressurised
+tracktype
+uids
+unhewn_cobblestone
+waynodes

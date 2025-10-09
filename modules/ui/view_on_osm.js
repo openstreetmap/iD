@@ -11,7 +11,7 @@ export function uiViewOnOSM(context) {
     function viewOnOSM(selection) {
         var url;
         if (_what instanceof osmEntity) {
-            url = context.connection().entityURL(_what);
+            url = context.connection().historyURL(_what);
         } else if (_what instanceof osmNote) {
             url = context.connection().noteURL(_what);
         }
@@ -38,8 +38,7 @@ export function uiViewOnOSM(context) {
             const { user, timestamp } = uiViewOnOSM.findLastModifiedChild(context.history().base(), _what);
 
             linkEnter
-                .append('span')
-                .text(t('inspector.last_modified', {
+                .call(t.append('inspector.last_modified', {
                     timeago: getRelativeDate(new Date(timestamp)),
                     user
                 }))

@@ -7,6 +7,7 @@ Everyone involved in the iD project is subject to the [Code of Conduct](CODE_OF_
 Please take a moment to read it before proceeding, it's short and simple. We want
 everyone to feel comfortable contributing to iD.
 
+The project is currently maintained by [@tyr_asd](https://github.com/tyrasd) and [@k-yle](https://github.com/k-yle/). Get in touch if you have any questions.
 
 ## Submitting Issues
 

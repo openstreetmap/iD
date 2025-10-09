@@ -37,9 +37,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # unreleased (v2.37.0-dev)
 
+#### :mega: Release Highlights
+* Add dark mode theme ([#8214], thanks [@hlfan] and [@AntonKhorev]!)
 #### :sparkles: Usability & Accessibility
 * Render the `side` tag of vertices (such as traffic signs) in form of small triangles pointing to the respective side of the way ([#10303], thanks [@k-yle])
 * Don't suggest values from Taginfo for `name:xx` tags ([#10287], thanks [@draunger])
+* Link to object's history page on "view on osm" link ([#11403], thanks [@bhavyaKhatri2703])
 * Remove (rarely triggered) autofilling of localized names with wikipedia article titles ([#11423])
 #### :scissors: Operations
 * Be slightly more lenient when searching relations by id in the raw membership editor ([#9575])
@@ -53,14 +56,18 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix the help info not working for some namespaced fields like `payment:*` and `socket:*` ([#11402], thanks [@k-yle])
 * Fix crash when a way has more than 2000 nodes ([#11360])
 * Fix data `source`s incorrectly flagged as _proprietary data_: `esri/Google_Open_Buildings` ([#11412], thanks [@Ankitgkp])
+* Keep `natural=coastline` tag on the way when a coastline way that is also an area (e.g. `place=islet`) is split and converted into a multipolygon ([#9563])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 * Compress changesets before uploading, to slightly reduce bandwidth ([#11353], thank [@k-yle])
 * Migrate stored history data from LocalStorage to IndexedDB which allows larger amount of changed data to be stored and enhanced performance ([#11141], thanks [@Deeptanshu-sankhwar])
 #### :mortar_board: Walkthrough / Help
+* fix walkthrough getting stuck after "delete point" step ([#11442], thanks [@bgo-bell])
 #### :hammer: Development
 
+[#8214]: https://github.com/openstreetmap/iD/issues/8214
 [#8400]: https://github.com/openstreetmap/iD/issues/8400
+[#9563]: https://github.com/openstreetmap/iD/issues/9563
 [#9575]: https://github.com/openstreetmap/iD/issues/9575
 [#10287]: https://github.com/openstreetmap/iD/issues/10287
 [#11141]: https://github.com/openstreetmap/iD/pull/11141
@@ -70,8 +77,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11361]: https://github.com/openstreetmap/iD/issues/11361
 [#11365]: https://github.com/openstreetmap/iD/issues/11365
 [#11402]: https://github.com/openstreetmap/iD/pull/11402
+[#11403]: https://github.com/openstreetmap/iD/issues/11403
 [#11412]: https://github.com/openstreetmap/iD/pull/11412
 [@Ankitgkp]: https://github.com/Ankitgkp
+[@AntonKhorev]: https://github.com/AntonKhorev
+[@bgo-bell]: https://github.com/bgo-bell 
 
 
 # v2.36.0

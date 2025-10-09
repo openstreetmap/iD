@@ -421,15 +421,24 @@ export function coreContext() {
 
   /* Container */
   let _container = d3_select(null);
+  let _theme;
   context.container = function(val) {
     if (!arguments.length) return _container;
     _container = val;
     _container.classed('ideditor', true);
+    _container.classed('theme-dark', _theme === 'dark');
+    _container.classed('theme-light', _theme === 'light');
     return context;
   };
   context.containerNode = function(val) {
     if (!arguments.length) return context.container().node();
     context.container(d3_select(val));
+    return context;
+  };
+  context.theme = function(val) {
+    if (!arguments.length) return _theme;
+    _theme = val;
+    context.container(_container); // refresh theme
     return context;
   };
 
@@ -547,6 +556,10 @@ export function coreContext() {
 
       if (context.initialHashParams.locale) {
         localizer.preferredLocaleCodes(context.initialHashParams.locale);
+      }
+
+      if (context.initialHashParams.theme) {
+        context.theme(context.initialHashParams.theme);
       }
 
       // kick off some async work

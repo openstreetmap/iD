@@ -25,7 +25,7 @@ li.list-item-photos.active:after {
     width: 330px;
     height: 250px;
     padding: 5px;
-    background-color: #fff;
+    background-color: var(--bg-color);
 }
 .ideditor[dir='ltr'] .photoviewer {
     margin-left: 10px;
@@ -696,7 +696,7 @@ label.streetside-hires {
     filter: invert(1);
 }
 .local-photos label.button {
-    background: #7092ff;
+    background: var(--link-color);
     color: #fff;
     font-weight: bold;
     padding: 10px 25px;

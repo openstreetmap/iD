@@ -20,7 +20,7 @@ import { osmSummableTags } from '../osm/tags';
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 //
 export function actionSplit(nodeIds, newWayIds) {
-    // accept single ID for backwards-compatiblity
+    // accept single ID for backwards-compatibility
     if (typeof nodeIds === 'string') nodeIds = [nodeIds];
 
     var _wayIDs;
@@ -219,8 +219,17 @@ export function actionSplit(nodeIds, newWayIds) {
         });
 
         if (isArea) {
-            var multipolygon = osmRelation({
-                tags: Object.assign({}, wayA.tags, { type: 'multipolygon' }),
+            const areaTags = {
+                ...wayA.tags,
+                type: 'multipolygon'
+            };
+            const lineTags = {};
+            if (areaTags.natural === 'coastline') {
+                delete areaTags.natural;
+                lineTags.natural = 'coastline';
+            }
+            const multipolygon = osmRelation({
+                tags: areaTags,
                 members: [
                     { id: wayA.id, role: 'outer', type: 'way' },
                     { id: wayB.id, role: 'outer', type: 'way' }
@@ -228,8 +237,8 @@ export function actionSplit(nodeIds, newWayIds) {
             });
 
             graph = graph.replace(multipolygon);
-            graph = graph.replace(wayA.update({ tags: {} }));
-            graph = graph.replace(wayB.update({ tags: {} }));
+            graph = graph.replace(wayA.update({ tags: lineTags }));
+            graph = graph.replace(wayB.update({ tags: lineTags }));
         }
 
         _createdWayIDs.push(wayB.id);
