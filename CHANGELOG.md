@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 * Render the `side` tag of vertices (such as traffic signs) in form of small triangles pointing to the respective side of the way ([#10303], thanks [@k-yle])
 * Don't suggest values from Taginfo for `name:xx` tags ([#10287], thanks [@draunger])
+* Remove (rarely triggered) autofilling of localized names with wikipedia article titles ([#11423])
 #### :scissors: Operations
 * Be slightly more lenient when searching relations by id in the raw membership editor ([#9575])
 #### :camera: Street-Level
