@@ -5,7 +5,8 @@ import { isArray, isNumber } from 'lodash-es';
 import { localizer } from '../core/localizer';
 import { utilDetect } from '../util/detect';
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
-import planePhotoFrame from '../services/plane_photo';
+import { planePhotoFrame } from '../services/plane_photo';
+import { services } from '../services';
 
 var _initialized = false;
 var _enabled = false;
@@ -86,10 +87,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .on('click.forward', () => stepPhotos(1))
             .text('▶');
 
-        return planePhotoFrame.init(context, viewerEnter)
-            .then(planePhotoFrame => {
-                _photoFrame = planePhotoFrame;
-            });
+        return planePhotoFrame(context, viewerEnter)
+            .then(planePhotoFrame => _photoFrame = planePhotoFrame);
     }
 
     function stepPhotos(stepBy){
@@ -107,13 +106,21 @@ export function svgLocalPhotos(projection, context, dispatch) {
         _activePhotoIdx = _photos.indexOf(image);
         ensureViewerLoaded(context).then(() => {
             const viewer = context.container().select('.photoviewer')
-                .datum(image)
-                .classed('hide', false);
+                .datum(image);
 
-            const viewerWrap = viewer.select('.local-photos-wrapper')
-                .classed('hide', false);
+            const viewerWrap = viewer.select('.local-photos-wrapper');
+            const isHidden = viewerWrap.classed('hide');
+            if (isHidden) {
+                for (const service of Object.values(services)) {
+                    if (typeof service.hideViewer === 'function') {
+                        service.hideViewer(context);
+                    }
+                }
+                viewer.classed('hide', false);
+                viewerWrap.classed('hide', false);
+            }
 
-            const controlsWrap = viewer.select('.photo-controls-wrap');
+            const controlsWrap = viewerWrap.select('.photo-controls-wrap');
 
             controlsWrap.select('.back')
                 .attr('disabled', _activePhotoIdx <= 0 ? true: null);

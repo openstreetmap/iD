@@ -48,6 +48,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Be slightly more lenient when searching relations by id in the raw membership editor ([#9575])
 #### :camera: Street-Level
 * Always hide sequence lines when their photos are hidden by the date filter ([#11365])
+* Fix bug which caused photo viewer to be in an inconsistent state after e.g. switching between a local georeferenced photo and a photo from Panoramax.
+* Allow to pan non-360° photos fully to the right/left/top/bottom edge, especially relevant for photos in portrait format or very wide photos ([#11466])
 #### :white_check_mark: Validation
 * Show warnings for potentially incompatible sources also in changeset `source` tags ([#11334])
 * Include the number of changeset tags with incompatible sources in `warnings:incompatible_source` changeset tag ([#8400])
@@ -79,9 +81,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11402]: https://github.com/openstreetmap/iD/pull/11402
 [#11403]: https://github.com/openstreetmap/iD/issues/11403
 [#11412]: https://github.com/openstreetmap/iD/pull/11412
+[#11466]: https://github.com/openstreetmap/iD/issues/11466
 [@Ankitgkp]: https://github.com/Ankitgkp
 [@AntonKhorev]: https://github.com/AntonKhorev
-[@bgo-bell]: https://github.com/bgo-bell 
+[@bgo-bell]: https://github.com/bgo-bell
 
 
 # v2.36.0
