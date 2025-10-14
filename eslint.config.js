@@ -130,16 +130,16 @@ export default tseslint.config(
       globals: {
         ...globals.node,
         ...globals.jest,
-        'before': 'readonly',
         'after': 'readonly',
+        'before': 'readonly',
         'd3': 'readonly',
-        'iD': 'readonly',
-        'vi': 'readonly',
-        'sinon': 'readonly',
-        'happen': 'readonly',
+        'expect': 'writable',
         'fetchMock': 'readonly',
+        'happen': 'readonly',
+        'iD': 'readonly',
         'jsdom': 'readonly',
-        'expect': 'writable'
+        'sinon': 'readonly',
+        'vi': 'readonly'
       }
     },
     rules: {
@@ -158,7 +158,7 @@ export default tseslint.config(
   {
     files: ['eslint.config.js'],
     rules: {
-      'sort-keys': ['error', 'asc', { minKeys: 20 }]
+      'sort-keys': ['error', 'asc', { minKeys: 5 }]
     }
   }
 );
