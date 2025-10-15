@@ -1086,6 +1086,12 @@ a.hide-toggle {
     background: var(--bg-color-3);
 }
 
+.preset-search-info {
+    padding: 10px;
+    font-size: 12px;
+    color: #666;
+}
+
 .preset-icon-container {
     position: relative;
     width: 60px;

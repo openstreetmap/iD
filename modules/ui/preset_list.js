@@ -128,6 +128,13 @@ export function uiPresetList(context) {
             .on('keypress', keypress)
             .on('input', _debounce(inputevent));
 
+        var searchInfo = selection
+            .append('div')
+            .attr('class', 'preset-search-info');
+
+        searchInfo.append('span')
+            .html(t.html('inspector.search_more'));
+
         if (_autofocus) {
             search.node().focus();
 
