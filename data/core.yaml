@@ -1876,6 +1876,10 @@ en:
         message: '{feature} has an invalid email address'
         message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
+      website:
+        message: '{feature} has an invalid URL'
+        message_multi: '{feature} has multiple invalid URLs'
+        reference: 'URLs must start with "http://" or "https://".'
     line_as_area:
       message: '{feature} should be a line, not an area'
     line_as_point:
@@ -1991,6 +1995,12 @@ en:
       add_a_culvert:
         title: Add a culvert
         annotation: Added a culvert.
+      add_protocol_http:
+        title: Set HTTP for the URL
+        annotation: Set HTTP for the URL.
+      add_protocol_https:
+        title: Set HTTPS for the URL
+        annotation: Set HTTPS for the URL.
       address_the_concern:
         title: Address the concern
       connect_almost_junction:
@@ -2030,6 +2040,9 @@ en:
       move_tags:
         title: Move the tags
         annotation: Moved tags.
+      move_value_to_wikimedia_commons:
+        title: Set image as from Wikimedia Commons
+        annotation: Set image as from Wikimedia Commons.
       remove_from_relation:
         title: Remove from relation
       remove_generic_name:
