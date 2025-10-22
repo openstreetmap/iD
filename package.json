@@ -84,7 +84,7 @@
     "@mapbox/maki": "^8.2.0",
     "@openstreetmap/id-tagging-schema": "^6.12.0",
     "@rapideditor/mapillary_sprite_source": "^1.8.0",
-    "@rapideditor/temaki": "^5.9.0",
+    "@rapideditor/temaki": "^5.11.0",
     "@transifex/api": "^7.1.4",
     "@types/chai": "^5.2.2",
     "@types/d3": "^7.4.3",
