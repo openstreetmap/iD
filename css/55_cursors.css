@@ -8,7 +8,7 @@
 .map-in-map,
 .main-map {
     cursor: auto; /* Opera */
-    cursor: url(img/cursor-grab.png) 9 9, auto; /* FF */
+    cursor: url(img/cursor/grab.png) 9 9, auto; /* FF */
 }
 
 .ideditor.mode-browse .point,
@@ -17,7 +17,7 @@
 .ideditor.mode-select-error .point,
 .ideditor.mode-select-note .point {
     cursor: pointer; /* Opera */
-    cursor: url(img/cursor-select-point.png), pointer; /* FF */
+    cursor: url(img/cursor/select-point.png), pointer; /* FF */
 }
 
 .ideditor.mode-browse .vertex,
@@ -26,7 +26,7 @@
 .ideditor.mode-select-error .vertex,
 .ideditor.mode-select-note .vertex {
     cursor: pointer; /* Opera */
-    cursor: url(img/cursor-select-vertex.png), pointer; /* FF */
+    cursor: url(img/cursor/select-vertex.png), pointer; /* FF */
 }
 
 .ideditor.mode-browse .line,
@@ -35,7 +35,7 @@
 .ideditor.mode-select-error .line,
 .ideditor.mode-select-note .line {
     cursor: pointer; /* Opera */
-    cursor: url(img/cursor-select-line.png), pointer; /* FF */
+    cursor: url(img/cursor/select-line.png), pointer; /* FF */
 }
 
 .ideditor.mode-browse .area,
@@ -44,7 +44,7 @@
 .ideditor.mode-select-error .area,
 .ideditor.mode-select-note .area {
     cursor: pointer; /* Opera */
-    cursor: url(img/cursor-select-area.png), pointer; /* FF */
+    cursor: url(img/cursor/select-area.png), pointer; /* FF */
 }
 
 .ideditor.mode-browse .midpoint,
@@ -53,7 +53,7 @@
 .ideditor.mode-select-error .midpoint,
 .ideditor.mode-select-note .midpoint {
     cursor: pointer; /* Opera */
-    cursor: url(img/cursor-select-split.png), pointer; /* FF */
+    cursor: url(img/cursor/select-split.png), pointer; /* FF */
 }
 
 .ideditor.mode-select .behavior-multiselect .point,
@@ -61,12 +61,12 @@
 .ideditor.mode-select .behavior-multiselect .line,
 .ideditor.mode-select .behavior-multiselect .area {
     cursor: pointer; /* Opera */
-    cursor: url(img/cursor-select-add.png), pointer; /* FF */
+    cursor: url(img/cursor/select-add.png), pointer; /* FF */
 }
 
 .ideditor.mode-select .behavior-multiselect .selected {
     cursor: pointer; /* Opera */
-    cursor: url(img/cursor-select-remove.png), pointer; /* FF */
+    cursor: url(img/cursor/select-remove.png), pointer; /* FF */
 }
 
 .ideditor.mode-add-preset .main-map,
@@ -77,7 +77,7 @@
 .ideditor.mode-drag-node .main-map,
 .ideditor.mode-drag-note .main-map {
     cursor: crosshair; /* Opera */
-    cursor: url(img/cursor-draw.png) 9 9, crosshair; /* FF */
+    cursor: url(img/cursor/draw.png) 9 9, crosshair; /* FF */
 }
 
 .ideditor.mode-draw-line .way.target,
@@ -86,7 +86,7 @@
 .ideditor.mode-add-area  .way.target,
 .ideditor.mode-drag-node .way.target {
     cursor: crosshair; /* Opera */
-    cursor: url(img/cursor-draw-connect-line.png) 9 9, crosshair; /* FF */
+    cursor: url(img/cursor/draw-connect-line.png) 9 9, crosshair; /* FF */
 }
 
 .ideditor.mode-draw-line .vertex.target,
@@ -95,7 +95,7 @@
 .ideditor.mode-add-area  .vertex.target,
 .ideditor.mode-drag-node .vertex.target {
     cursor: crosshair; /* Opera */
-    cursor: url(img/cursor-draw-connect-vertex.png) 9 9, crosshair; /* FF */
+    cursor: url(img/cursor/draw-connect-vertex.png) 9 9, crosshair; /* FF */
 }
 
 .ideditor.mode-add-point .main-map,
@@ -109,7 +109,7 @@
 .ideditor.mode-select.lasso .vertex,
 .ideditor.mode-select.lasso .midpoint {
     cursor: crosshair; /* Opera */
-    cursor: url(img/cursor-draw.png) 9 9, crosshair; /* FF */
+    cursor: url(img/cursor/draw.png) 9 9, crosshair; /* FF */
 }
 
 .ideditor.mode-browse .note,

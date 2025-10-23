@@ -621,7 +621,7 @@ button.bar-button.dragging .tooltip {
     display: none;
 }
 button.bar-button.dragging.removing {
-    cursor: url(img/cursor-select-remove.png), pointer;
+    cursor: url(img/cursor/select-remove.png), pointer;
 }
 
 button.save {
