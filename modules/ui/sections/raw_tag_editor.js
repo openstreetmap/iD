@@ -351,10 +351,10 @@ export function uiSectionRawTagEditor(id, context) {
         var newText = this.value.trim();
         var newTags = {};
         newText.split('\n').forEach(function(row) {
-            var m = row.match(/^\s*([^=]+)=(.*)$/);
+            var m = row.match(/^\s*([^=]+)(?:=(.*))?$/);
             if (m !== null) {
                 var k = context.cleanTagKey(unstringify(m[1].trim()));
-                var v = context.cleanTagValue(unstringify(m[2].trim()));
+                var v = context.cleanTagValue(unstringify((m[2] || '').trim()));
                 newTags[k] = v;
             }
         });
