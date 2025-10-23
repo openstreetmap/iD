@@ -115,7 +115,7 @@
     "json-stringify-pretty-compact": "^3.0.0",
     "mapillary-js": "4.1.2",
     "name-suggestion-index": "~6.0",
-    "netlify-cli": "^23.9.1",
+    "netlify-cli": "^23.9.3",
     "nise": "^6.1.1",
     "npm-run-all": "^4.0.0",
     "osm-community-index": "5.9.3",
