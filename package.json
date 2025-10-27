@@ -97,6 +97,7 @@
     "autoprefixer": "^10.4.21",
     "browserslist": "^4.27.0",
     "browserslist-to-esbuild": "^2.1.1",
+    "chai": "^6.2.0",
     "cldr-core": "^47.0.0",
     "cldr-localenames-full": "^47.0.0",
     "concat-files": "^0.1.1",
