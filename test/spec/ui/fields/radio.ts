@@ -22,7 +22,7 @@ describe('iD.uiFieldRadio', () => {
                 { bridge: 'yes', layer: '2' }
             ],
             [
-                // negative layers are overriden with layer=1
+                // negative layers are overridden with layer=1
                 { layer: '-3' },
                 'bridge',
                 { bridge: 'yes', layer: '1' }
