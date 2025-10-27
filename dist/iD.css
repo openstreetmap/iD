@@ -337,6 +337,10 @@
     }
 }
 /* base styles */
+.ideditor {
+    background-color: var(--bg-color);
+}
+
 .ideditor .layer-osm path {
     fill: none;
 }

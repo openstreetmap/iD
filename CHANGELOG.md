@@ -35,7 +35,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+
+# v2.37.1
+##### 2025-10-27
+
+* Fix crash when loading non 360° street level photos
+
+
 # v2.37.0
+##### 2025-10-27
 
 #### :mega: Release Highlights
 * Add dark mode theme ([#8214], thanks [@hlfan] and [@AntonKhorev]!)

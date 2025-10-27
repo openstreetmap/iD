@@ -12,8 +12,8 @@ export async function planePhotoFrame(context, selection) {
     let _photo;
     let _imageWrapper;
     let _planeWrapper;
-    let _viewerDimensions;
-    let _photoDimensions;
+    let _viewerDimensions = [];
+    let _photoDimensions = [];
     const _imgZoom = d3_zoom()
         .on('zoom', zoomPan)
         .on('start', () => _imageWrapper.classed('grabbing', true))

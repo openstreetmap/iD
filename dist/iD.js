@@ -8706,7 +8706,7 @@
   // package.json
   var package_default = {
     name: "iD",
-    version: "2.37.0",
+    version: "2.37.1",
     description: "A friendly editor for OpenStreetMap",
     main: "dist/iD.min.js",
     repository: "github:openstreetmap/iD",
@@ -38471,8 +38471,8 @@
     let _photo;
     let _imageWrapper;
     let _planeWrapper;
-    let _viewerDimensions;
-    let _photoDimensions;
+    let _viewerDimensions = [];
+    let _photoDimensions = [];
     const _imgZoom = zoom_default2().on("zoom", zoomPan).on("start", () => _imageWrapper.classed("grabbing", true)).on("end", () => _imageWrapper.classed("grabbing", false));
     function zoomPan(d3_event) {
       let t2 = d3_event.transform;
