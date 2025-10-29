@@ -74,6 +74,7 @@ export function coreLocalizer() {
         } else {
             _preferredLocaleCodes = codes;
         }
+        _loadPromise = undefined;
         return localizer;
     };
 

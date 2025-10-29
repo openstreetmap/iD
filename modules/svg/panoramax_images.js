@@ -238,7 +238,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             ...(await filterSequences(sequences, true)).map(s => s.properties.date)]);
 
         images = await filterImages(images);
-        sequences = await filterSequences(sequences, service);
+        sequences = await filterSequences(sequences);
 
         let traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.id; });

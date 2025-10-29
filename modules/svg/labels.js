@@ -299,7 +299,7 @@ export function svgLabels(projection, context) {
             var preset = geometry === 'area' && presetManager.match(entity, graph);
             var icon = preset && !shouldSkipIcon(preset) && preset.icon;
 
-            if (!icon && !utilDisplayName(entity)) continue;
+            if (!icon && !utilDisplayName(entity, undefined, true)) continue;
 
             for (k = 0; k < labelStack.length; k++) {
                 var matchGeom = labelStack[k][0];
@@ -328,8 +328,9 @@ export function svgLabels(projection, context) {
                 entity = labelable[k][i];
                 geometry = entity.geometry(graph);
 
-                var getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName;
-                var name = getName(entity);
+                let name = geometry === 'line'
+                    ? utilDisplayNameForPath(entity)
+                    : utilDisplayName(entity, undefined, true);
                 var width = name && textWidth(name, fontSize, selection.select('g.layer-osm.labels').node());
                 var p = null;
 
@@ -718,7 +719,7 @@ export function svgLabels(projection, context) {
                     // in select mode: hide labels of currently selected line(s)
                     // to still allow accessing midpoints
                     // https://github.com/openstreetmap/iD/issues/11220
-                    context.mode().selectedIDs().includes(id) && graph.hasEntity(id).geometry(graph) === 'line');
+                    context.mode().selectedIDs().includes(id) && graph.hasEntity(id)?.geometry(graph) === 'line');
             hideIds.push.apply(hideIds, nearMouse);
             hideIds = utilArrayUniq(hideIds);
         }

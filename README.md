@@ -19,11 +19,12 @@ if you're looking for something to do.
 * Test a prerelease version of iD:
   * Stable mirror of `release` branch: https://ideditor-release.netlify.app
   * Development mirror of `develop` branch + latest translations: https://ideditor.netlify.app
+* Expect regular update releases of iD about every month.
 
-Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bhousel` on:
+Come on in, the water's lovely. More help?
 * [OpenStreetMap US Slack](https://slack.openstreetmap.us/) (`#id` channel)
 * [OpenStreetMap Discord](https://discord.com/invite/openstreetmap) (`#id-and-rapid` channel)
-* [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC) (`irc.oftc.net`, in `#osm-dev`)
+* [OpenStreetMap community forum](https://community.openstreetmap.org/)
 
 ## Installation
 

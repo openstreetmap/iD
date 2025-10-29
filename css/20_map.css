@@ -1,4 +1,8 @@
 /* base styles */
+.ideditor {
+    background-color: var(--bg-color);
+}
+
 .layer-osm path {
     fill: none;
 }

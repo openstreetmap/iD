@@ -18,7 +18,7 @@ export function validationOsmApiLimits(context) {
                     subtype: 'exceededMaxWayNodes',
                     severity: 'error',
                     message: function() {
-                        return t.html('issues.osm_api_limits.max_way_nodes.message');
+                        return t.append('issues.osm_api_limits.max_way_nodes.message');
                     },
                     reference: function(selection) {
                         selection.selectAll('.issue-reference')
@@ -26,7 +26,7 @@ export function validationOsmApiLimits(context) {
                             .enter()
                             .append('div')
                             .attr('class', 'issue-reference')
-                            .html(t.html('issues.osm_api_limits.max_way_nodes.reference', { maxWayNodes }));
+                            .call(t.append('issues.osm_api_limits.max_way_nodes.reference', { maxWayNodes }));
                     },
                     entityIds: [entity.id],
                     dynamicFixes: splitWayIntoSmallChunks
@@ -40,7 +40,7 @@ export function validationOsmApiLimits(context) {
     function splitWayIntoSmallChunks() {
         const fix = new validationIssueFix({
             icon: 'iD-operation-split',
-            title: t.html('issues.fix.split_way.title'),
+            title: t.append('issues.fix.split_way.title'),
             entityIds: this.entityIds,
             onClick: function(context) {
                 const maxWayNodes = context.connection().maxWayNodes();

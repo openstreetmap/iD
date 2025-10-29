@@ -48,7 +48,7 @@ export function actionExtract(entityID, projection) {
 
         var keysToCopyAndRetain = ['source', 'wheelchair'];
         var keysToRetain = ['area'];
-        var buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin'];
+        var buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin', 'ref:GB:uprn', 'ref:linz:building_id'];
 
         var extractedLoc = d3_geoPath(projection).centroid(entity.asGeoJSON(graph));
         extractedLoc = extractedLoc && projection.invert(extractedLoc);

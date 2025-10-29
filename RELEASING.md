@@ -6,7 +6,7 @@
 
 ### Prep
 - If you don't have a `transifex.auth` file in the root of your iD checkout,
-you'll need to create a Transifex account, ask @tyr_asd or @bhousel for admin rights
+you'll need to create a Transifex account, ask the project's maintainers for admin rights
 on the iD project, and then create this file with contents like
 
   ````json

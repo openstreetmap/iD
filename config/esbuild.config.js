@@ -1,0 +1,33 @@
+import esbuild from 'esbuild';
+import fs from 'node:fs';
+import { parseArgs } from 'node:util';
+import envs from './envs.js';
+import browserslistToEsbuild from 'browserslist-to-esbuild';
+
+let args = parseArgs({options: {
+  watch: { type: 'boolean' },
+  stats: { type: 'boolean' }
+}}).values;
+
+const context = await esbuild.context({
+  define: envs,
+  bundle: true,
+  sourcemap: true,
+  entryPoints: ['./modules/id.js'],
+  legalComments: 'none',
+  logLevel: 'info',
+  metafile: true,
+  outfile: 'dist/iD.js',
+  target: browserslistToEsbuild(),
+  loader: { '.DS_Store' : 'empty' },
+});
+
+if (args.watch) {
+  await context.watch();
+} else {
+  const build = await context.rebuild();
+  if (args.stats) {
+    fs.writeFileSync('./dist/esbuild.json', JSON.stringify(build.metafile, null, 2));
+  }
+  await context.dispose();
+}

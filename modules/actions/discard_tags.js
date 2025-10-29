@@ -13,7 +13,8 @@ export function actionDiscardTags(difference, discardTags) {
 
       for (let i = 0; i < keys.length; i++) {
         const k = keys[i];
-        if (discardTags[k] || !entity.tags[k]) {
+        const v = entity.tags[k];
+        if (discardTags[k] === true || (typeof discardTags[k] === 'object' && discardTags[k][v]) || !entity.tags[k]) {
           didDiscard = true;
         } else {
           tags[k] = entity.tags[k];
