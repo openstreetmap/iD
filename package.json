@@ -119,7 +119,7 @@
     "netlify-cli": "^23.9.5",
     "nise": "^6.1.1",
     "npm-run-all": "^4.0.0",
-    "osm-community-index": "5.9.3",
+    "osm-community-index": "6.0.0",
     "postcss": "^8.5.6",
     "postcss-prefix-selector": "^2.1.1",
     "serve-handler": "^6.1.6",
