@@ -4637,6 +4637,8 @@ img.tile-debug {
     -ms-user-select: element;
     pointer-events: none;
     overflow: hidden;
+    margin: 0 40px 2px 0
+    
 }
 
 .panel-container h1,
