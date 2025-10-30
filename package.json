@@ -99,7 +99,7 @@
     "browserslist-to-esbuild": "^2.1.1",
     "chai": "^6.2.0",
     "cldr-core": "^47.0.0",
-    "cldr-localenames-full": "^47.0.0",
+    "cldr-localenames-full": "^48.0.0",
     "concat-files": "^0.1.1",
     "d3": "~7.9.0",
     "dotenv": "^17.2.3",
