@@ -35,6 +35,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.37.2
+##### 2025-10-30
+
+* Correctly resolve subtitles of NSI presets when base preset has a crossreferenced string ([11527])
+
+[#11527]: https://github.com/openstreetmap/iD/issues/11527
+
 
 # v2.37.1
 ##### 2025-10-27

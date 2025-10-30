@@ -8706,7 +8706,7 @@
   // package.json
   var package_default = {
     name: "iD",
-    version: "2.37.1",
+    version: "2.37.2",
     description: "A friendly editor for OpenStreetMap",
     main: "dist/iD.min.js",
     repository: "github:openstreetmap/iD",
@@ -23642,7 +23642,8 @@
       if (_this.suggestion) {
         let path = presetID.split("/");
         path.pop();
-        return _t("_tagging.presets.presets." + path.join("/") + ".name");
+        const basePreset = allPresets[path.join("/")];
+        return basePreset.name();
       }
       return null;
     };
@@ -23650,7 +23651,8 @@
       if (_this.suggestion) {
         let path = presetID.split("/");
         path.pop();
-        return _t.append("_tagging.presets.presets." + path.join("/") + ".name");
+        const basePreset = allPresets[path.join("/")];
+        return basePreset.nameLabel();
       }
       return null;
     };
