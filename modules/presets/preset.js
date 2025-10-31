@@ -127,7 +127,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
         let path = presetID.split('/');
         path.pop();  // remove brand name
         const basePreset = allPresets[path.join('/')];
-        return basePreset.name();
+        return basePreset?.name();
       }
       return null;
   };
@@ -137,7 +137,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
         let path = presetID.split('/');
         path.pop();  // remove brand name
         const basePreset = allPresets[path.join('/')];
-        return basePreset.nameLabel();
+        return basePreset?.nameLabel();
       }
       return null;
   };

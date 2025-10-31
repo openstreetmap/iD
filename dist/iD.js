@@ -8706,7 +8706,7 @@
   // package.json
   var package_default = {
     name: "iD",
-    version: "2.37.2",
+    version: "2.37.3",
     description: "A friendly editor for OpenStreetMap",
     main: "dist/iD.min.js",
     repository: "github:openstreetmap/iD",
@@ -8788,7 +8788,7 @@
       "@fortawesome/free-regular-svg-icons": "^7.1.0",
       "@fortawesome/free-solid-svg-icons": "^7.1.0",
       "@mapbox/maki": "^8.2.0",
-      "@openstreetmap/id-tagging-schema": "^6.13.1",
+      "@openstreetmap/id-tagging-schema": "^6.13.4",
       "@rapideditor/mapillary_sprite_source": "^1.8.0",
       "@rapideditor/temaki": "^5.11.0",
       "@transifex/api": "^7.1.4",
@@ -23643,7 +23643,7 @@
         let path = presetID.split("/");
         path.pop();
         const basePreset = allPresets[path.join("/")];
-        return basePreset.name();
+        return basePreset == null ? void 0 : basePreset.name();
       }
       return null;
     };
@@ -23652,7 +23652,7 @@
         let path = presetID.split("/");
         path.pop();
         const basePreset = allPresets[path.join("/")];
-        return basePreset.nameLabel();
+        return basePreset == null ? void 0 : basePreset.nameLabel();
       }
       return null;
     };
