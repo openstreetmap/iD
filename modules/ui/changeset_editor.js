@@ -35,7 +35,7 @@ export function uiChangesetEditor(context) {
             _fieldsArr = [
                 uiField(context, presets.field('comment'), null, { show: true, revert: false }),
                 uiField(context, presets.field('source'), null, { show: true, revert: false }),
-                uiField(context, presets.field('hashtags'), null, { show: false, revert: false }),
+                uiField(context, { ...presets.field('hashtags'), options: [], autoSuggestions: false }, null, { show: false, revert: false }), // todo: remove temporary override when tagging schema v6.10 is released (see https://github.com/openstreetmap/id-tagging-schema/commit/d7bede7c7f444925d3293ffdf029915065529a7f)
             ];
 
             _fieldsArr.forEach(function(field) {
@@ -59,8 +59,9 @@ export function uiChangesetEditor(context) {
         if (initial) {
             var commentField = selection.select('.form-field-comment textarea');
             const sourceField = _fieldsArr.find(field => field.id === 'source');
-            var commentNode = commentField.node();
+            const hashtagsField = _fieldsArr.find(field => field.id === 'hashtags');
 
+            var commentNode = commentField.node();
             if (commentNode) {
                 commentNode.focus();
                 commentNode.select();
@@ -88,12 +89,25 @@ export function uiChangesetEditor(context) {
                     // add extra dropdown options to the `source` field
                     // based on the values used in recent changesets.
                     const recentSources = changesets
-                        .flatMap((changeset) => changeset.tags.source?.split(';'))
+                        .flatMap(changeset => changeset.tags.source?.split(';'))
                         .filter(value => !sourceField.options.includes(value))
                         .filter(Boolean)
                         .map(title => ({ title, value: title, klass: 'raw-option' }));
 
                     sourceField.impl.setCustomOptions(utilArrayUniqBy(recentSources, 'title'));
+
+                    // add extra dropdown options to the `hashtags` field
+                    // based on the values used in recent changesets.
+                    const recentHashtags = changesets
+                        .flatMap(changeset => changeset.tags.hashtags?.split(';'))
+                        .filter(Boolean);
+                    if (!hashtagsField.impl) {
+                        hashtagsField.options = recentHashtags;
+                    } else {
+                        hashtagsField.impl.setCustomOptions(utilArrayUniqBy(recentHashtags.map(title => (
+                            { title, value: title, klass: 'raw-option' }
+                        )), 'title'));
+                    }
                 });
             }
         }
