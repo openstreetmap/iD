@@ -222,206 +222,158 @@ utilKeybinding.modifierProperties = {
 utilKeybinding.plusKeys = ['plus', 'ffplus', '=', 'ffequals', '≠', '±'];
 utilKeybinding.minusKeys = ['_', '-', 'ffminus', 'dash', '–', '—'];
 
-/* eslint-disable sort-keys */
-utilKeybinding.keys = {
+utilKeybinding.keys = (() => {
+    const k = {};
     // Backspace key, on Mac: ⌫ (Backspace)
-    '⌫': 'Backspace', backspace: 'Backspace',
+    k['⌫'] = k.backspace = 'Backspace';
     // Tab Key, on Mac: ⇥ (Tab), on Windows ⇥⇥
-    '⇥': 'Tab', '⇆': 'Tab', tab: 'Tab',
+    k['⇥'] = k['⇆'] = k.tab = 'Tab';
     // Return key, ↩
-    '↩': 'Enter', '↵': 'Enter', '⏎': 'Enter', 'return': 'Enter', enter: 'Enter', '⌅': 'Enter',
+    k['↩'] = k['↵'] = k['⏎'] = k.return = k.enter = k['⌅'] = 'Enter';
     // Pause/Break key
-    'pause': 'Pause', 'pause-break': 'Pause',
+    k.pause = k['pause-break'] = 'Pause';
     // Caps Lock key, ⇪
-    '⇪': 'CapsLock', caps: 'CapsLock', 'caps-lock': 'CapsLock',
+    k['⇪'] = k.caps = k['caps-lock'] = 'CapsLock';
     // Escape key, on Mac: ⎋, on Windows: Esc
-    '⎋': ['Escape', 'Esc'], escape: ['Escape', 'Esc'], esc: ['Escape', 'Esc'],
+    k['⎋'] = k.escape = k.esc = ['Escape', 'Esc'];
     // Space key
-    space: [' ', 'Spacebar'],
+    k.space = [' ', 'Spacebar'];
     // Page-Up key, or pgup, on Mac: ↖
-    '↖': 'PageUp', pgup: 'PageUp', 'page-up': 'PageUp',
+    k['↖'] = k.pgup = k['page-up'] = 'PageUp';
     // Page-Down key, or pgdown, on Mac: ↘
-    '↘': 'PageDown', pgdown: 'PageDown', 'page-down': 'PageDown',
+    k['↘'] = k.pgdown = k['page-down'] = 'PageDown';
     // END key, on Mac: ⇟
-    '⇟': 'End', end: 'End',
+    k['⇟'] = k.end = 'End';
     // HOME key, on Mac: ⇞
-    '⇞': 'Home', home: 'Home',
+    k['⇞'] = k.home = 'Home';
     // Insert key, or ins
-    ins: 'Insert', insert: 'Insert',
+    k.ins = k.insert = 'Insert';
     // Delete key, on Mac: ⌦ (Delete)
-    '⌦': ['Delete', 'Del'], del: ['Delete', 'Del'], 'delete': ['Delete', 'Del'],
+    k['⌦'] = k.del = k.delete = ['Delete', 'Del'];
     // Left Arrow Key, or ←
-    '←': ['ArrowLeft', 'Left'], left: ['ArrowLeft', 'Left'], 'arrow-left': ['ArrowLeft', 'Left'],
+    k['←'] = k.left = k['arrow-left'] = ['ArrowLeft', 'Left'];
     // Up Arrow Key, or ↑
-    '↑': ['ArrowUp', 'Up'], up: ['ArrowUp', 'Up'], 'arrow-up': ['ArrowUp', 'Up'],
+    k['↑'] = k.up = k['arrow-up'] = ['ArrowUp', 'Up'];
     // Right Arrow Key, or →
-    '→': ['ArrowRight', 'Right'], right: ['ArrowRight', 'Right'], 'arrow-right': ['ArrowRight', 'Right'],
-    // Up Arrow Key, or ↓
-    '↓': ['ArrowDown', 'Down'], down: ['ArrowDown', 'Down'], 'arrow-down': ['ArrowDown', 'Down'],
-    // odities, stuff for backward compatibility (browsers and code):
+    k['→'] = k.right = k['arrow-right'] = ['ArrowRight', 'Right'];
+    // Down Arrow Key, or ↓
+    k['↓'] = k.down = k['arrow-down'] = ['ArrowDown', 'Down'];
+    // oddities, stuff for backward compatibility (browsers and code):
     // Num-Multiply, or *
-    '*': ['*', 'Multiply'], star: ['*', 'Multiply'], asterisk: ['*', 'Multiply'], multiply: ['*', 'Multiply'],
+    k['*'] = k.star = k.asterisk = k.multiply = ['*', 'Multiply'];
     // Num-Plus or +
-    '+': ['+', 'Add'], 'plus': ['+', 'Add'],
+    k['+'] = k.plus = ['+', 'Add'];
     // Num-Subtract, or -
-    '-': ['-', 'Subtract'], subtract: ['-', 'Subtract'], 'dash': ['-', 'Subtract'],
+    k['-'] = k.subtract = k.dash = ['-', 'Subtract'];
     // Semicolon
-    semicolon: ';',
+    k.semicolon = ';';
     // = or equals
-    equals: '=',
+    k.equals = '=';
     // Comma, or ,
-    comma: ',',
+    k.comma = ',';
     // Period, or ., or full-stop
-    period: '.', 'full-stop': '.',
+    k.period = k['full-stop'] = '.';
     // Slash, or /, or forward-slash
-    slash: '/', 'forward-slash': '/',
+    k.slash = k['forward-slash'] = '/';
     // Tick, or `, or back-quote
-    tick: '`', 'back-quote': '`',
+    k.tick = k['back-quote'] = '`';
     // Open bracket, or [
-    'open-bracket': '[',
+    k['open-bracket'] = '[';
     // Back slash, or \
-    'back-slash': '\\',
+    k['back-slash'] = '\\';
     // Close bracket, or ]
-    'close-bracket': ']',
+    k['close-bracket'] = ']';
     // Apostrophe, or Quote, or '
-    quote: '\'', apostrophe: '\'',
+    k.quote = k.apostrophe = '\'';
     // NUMPAD 0-9
-    'num-0': '0',
-    'num-1': '1',
-    'num-2': '2',
-    'num-3': '3',
-    'num-4': '4',
-    'num-5': '5',
-    'num-6': '6',
-    'num-7': '7',
-    'num-8': '8',
-    'num-9': '9',
+    for (let i = 0; i <= 9; i++) k[`num-${i}`] = `${i}`;
     // F1-F25
-    f1: 'F1',
-    f2: 'F2',
-    f3: 'F3',
-    f4: 'F4',
-    f5: 'F5',
-    f6: 'F6',
-    f7: 'F7',
-    f8: 'F8',
-    f9: 'F9',
-    f10: 'F10',
-    f11: 'F11',
-    f12: 'F12',
-    f13: 'F13',
-    f14: 'F14',
-    f15: 'F15',
-    f16: 'F16',
-    f17: 'F17',
-    f18: 'F18',
-    f19: 'F19',
-    f20: 'F20',
-    f21: 'F21',
-    f22: 'F22',
-    f23: 'F23',
-    f24: 'F24',
-    f25: 'F25'
-};
+    for (let i = 1; i <= 25; i++) k[`f${i}`] = `F${i}`;
 
-utilKeybinding.keyCodes = {
+    return k;
+})();
+
+utilKeybinding.keyCodes = (() => {
+    const c = {};
     // Backspace key, on Mac: ⌫ (Backspace)
-    '⌫': 8, backspace: 8,
+    c['⌫'] = c.backspace = 8;
     // Tab Key, on Mac: ⇥ (Tab), on Windows ⇥⇥
-    '⇥': 9, '⇆': 9, tab: 9,
+    c['⇥'] = c['⇆'] = c.tab = 9;
     // Return key, ↩
-    '↩': 13, '↵': 13, '⏎': 13, 'return': 13, enter: 13, '⌅': 13,
+    c['↩'] = c['↵'] = c['⏎'] = c.return = c.enter = c['⌅'] = 13;
     // Pause/Break key
-    'pause': 19, 'pause-break': 19,
+    c.pause = c['pause-break'] = 19;
     // Caps Lock key, ⇪
-    '⇪': 20, caps: 20, 'caps-lock': 20,
+    c['⇪'] = c.caps = c['caps-lock'] = 20;
     // Escape key, on Mac: ⎋, on Windows: Esc
-    '⎋': 27, escape: 27, esc: 27,
+    c['⎋'] = c.escape = c.esc = 27;
     // Space key
-    space: 32,
+    c.space = 32;
     // Page-Up key, or pgup, on Mac: ↖
-    '↖': 33, pgup: 33, 'page-up': 33,
+    c['↖'] = c.pgup = c['page-up'] = 33;
     // Page-Down key, or pgdown, on Mac: ↘
-    '↘': 34, pgdown: 34, 'page-down': 34,
+    c['↘'] = c.pgdown = c['page-down'] = 34;
     // END key, on Mac: ⇟
-    '⇟': 35, end: 35,
+    c['⇟'] = c.end = 35;
     // HOME key, on Mac: ⇞
-    '⇞': 36, home: 36,
+    c['⇞'] = c.home = 36;
     // Insert key, or ins
-    ins: 45, insert: 45,
+    c.ins = c.insert = 45;
     // Delete key, on Mac: ⌦ (Delete)
-    '⌦': 46, del: 46, 'delete': 46,
+    c['⌦'] = c.del = c.delete = 46;
     // Left Arrow Key, or ←
-    '←': 37, left: 37, 'arrow-left': 37,
+    c['←'] = c.left = c['arrow-left'] = 37;
     // Up Arrow Key, or ↑
-    '↑': 38, up: 38, 'arrow-up': 38,
+    c['↑'] = c.up = c['arrow-up'] = 38;
     // Right Arrow Key, or →
-    '→': 39, right: 39, 'arrow-right': 39,
-    // Up Arrow Key, or ↓
-    '↓': 40, down: 40, 'arrow-down': 40,
-    // odities, printing characters that come out wrong:
+    c['→'] = c.right = c['arrow-right'] = 39;
+    // Down Arrow Key, or ↓
+    c['↓'] = c.down = c['arrow-down'] = 40;
+    // oddities, printing characters that come out wrong:
     // Firefox Equals
-    'ffequals': 61,
+    c.ffequals = 61;
     // Num-Multiply, or *
-    '*': 106, star: 106, asterisk: 106, multiply: 106,
+    c['*'] = c.star = c.asterisk = c.multiply = 106;
     // Num-Plus or +
-    '+': 107, 'plus': 107,
+    c['+'] = c.plus = 107;
     // Num-Subtract, or -
-    '-': 109, subtract: 109,
+    c['-'] = c.subtract = 109;
     // Vertical Bar / Pipe
-    '|': 124,
+    c['|'] = 124;
     // Firefox Plus
-    'ffplus': 171,
+    c.ffplus = 171;
     // Firefox Minus
-    'ffminus': 173,
+    c.ffminus = 173;
     // Semicolon
-    ';': 186, semicolon: 186,
+    c[';'] = c.semicolon = 186;
     // = or equals
-    '=': 187, 'equals': 187,
+    c['='] = c.equals = 187;
     // Comma, or ,
-    ',': 188, comma: 188,
+    c[','] = c.comma = 188;
     // Dash / Underscore key
-    'dash': 189,
+    c.dash = 189;
     // Period, or ., or full-stop
-    '.': 190, period: 190, 'full-stop': 190,
+    c['.'] = c.period = c['full-stop'] = 190;
     // Slash, or /, or forward-slash
-    '/': 191, slash: 191, 'forward-slash': 191,
+    c['/'] = c.slash = c['forward-slash'] = 191;
     // Tick, or `, or back-quote
-    '`': 192, tick: 192, 'back-quote': 192,
+    c['`'] = c.tick = c['back-quote'] = 192;
     // Open bracket, or [
-    '[': 219, 'open-bracket': 219,
+    c['['] = c['open-bracket'] = 219;
     // Back slash, or \
-    '\\': 220, 'back-slash': 220,
+    c['\\'] = c['back-slash'] = 220;
     // Close bracket, or ]
-    ']': 221, 'close-bracket': 221,
+    c[']'] = c['close-bracket'] = 221;
     // Apostrophe, or Quote, or '
-    '\'': 222, quote: 222, apostrophe: 222
-};
+    c['\''] = c.quote = c.apostrophe = 222;
+    // NUMPAD 0-9
+    for (let n = 0; n <= 9; n++) c[`num-${n}`] = 96 + n;
+    // 0-9
+    for (let n = 0; n <= 9; n++) c[n] = 48 + n;
+    // F1-F25
+    for (let n = 1; n <= 25; n++) c[`f${n}`] = 111 + n;
+    // a-z
+    for (let n = 1; n <= 26; n++) c[String.fromCharCode(64 + n).toLowerCase()] = 64 + n;
 
-// NUMPAD 0-9
-var i = 95, n = 0;
-while (++i < 106) {
-    utilKeybinding.keyCodes['num-' + n] = i;
-    ++n;
-}
-
-// 0-9
-i = 47; n = 0;
-while (++i < 58) {
-    utilKeybinding.keyCodes[n] = i;
-    ++n;
-}
-
-// F1-F25
-i = 111; n = 1;
-while (++i < 136) {
-    utilKeybinding.keyCodes['f' + n] = i;
-    ++n;
-}
-
-// a-z
-i = 64;
-while (++i < 91) {
-    utilKeybinding.keyCodes[String.fromCharCode(i).toLowerCase()] = i;
-}
-/* eslint-enable sort-keys */
+    return c;
+})();
