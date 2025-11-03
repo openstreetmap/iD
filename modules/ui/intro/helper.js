@@ -52,19 +52,19 @@ export function helpHtml(id, replacements) {
     if (!helpStringReplacements) {
         helpStringReplacements = {
         // insert icons corresponding to various UI elements
-        point_icon: icon('#iD-icon-point', 'inline'),
-        line_icon: icon('#iD-icon-line', 'inline'),
         area_icon: icon('#iD-icon-area', 'inline'),
+        data_icon: icon('#iD-icon-data', 'inline'),
+        help_icon: icon('#iD-icon-help', 'inline'),
+        inspect: icon('#iD-icon-inspect', 'inline'),
+        layers_icon: icon('#iD-icon-layers', 'inline'),
+        line_icon: icon('#iD-icon-line', 'inline'),
+        minus: icon('#iD-icon-minus', 'inline'),
         note_icon: icon('#iD-icon-note', 'inline add-note'),
         plus: icon('#iD-icon-plus', 'inline'),
-        minus: icon('#iD-icon-minus', 'inline'),
-        layers_icon: icon('#iD-icon-layers', 'inline'),
-        data_icon: icon('#iD-icon-data', 'inline'),
-        inspect: icon('#iD-icon-inspect', 'inline'),
-        help_icon: icon('#iD-icon-help', 'inline'),
-        undo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'inline'),
+        point_icon: icon('#iD-icon-point', 'inline'),
         redo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-undo' : '#iD-icon-redo', 'inline'),
         save_icon: icon('#iD-icon-save', 'inline'),
+        undo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'inline'),
 
         // operation icons
         circularize_icon: icon('#iD-operation-circularize', 'inline operation'),
@@ -86,34 +86,34 @@ export function helpHtml(id, replacements) {
         straighten_icon: icon('#iD-operation-straighten', 'inline operation'),
 
         // interaction icons
-        leftclick: icon('#iD-walkthrough-mouse-left', 'inline operation'),
-        rightclick: icon('#iD-walkthrough-mouse-right', 'inline operation'),
-        mousewheel_icon: icon('#iD-walkthrough-mousewheel', 'inline operation'),
-        tap_icon: icon('#iD-walkthrough-tap', 'inline operation'),
         doubletap_icon: icon('#iD-walkthrough-doubletap', 'inline operation'),
+        leftclick: icon('#iD-walkthrough-mouse-left', 'inline operation'),
         longpress_icon: icon('#iD-walkthrough-longpress', 'inline operation'),
-        touchdrag_icon: icon('#iD-walkthrough-touchdrag', 'inline operation'),
+        mousewheel_icon: icon('#iD-walkthrough-mousewheel', 'inline operation'),
         pinch_icon: icon('#iD-walkthrough-pinch-apart', 'inline operation'),
+        rightclick: icon('#iD-walkthrough-mouse-right', 'inline operation'),
+        tap_icon: icon('#iD-walkthrough-tap', 'inline operation'),
+        touchdrag_icon: icon('#iD-walkthrough-touchdrag', 'inline operation'),
 
         // insert keys; may be localized and platform-dependent
-        shift: uiCmd.display('⇧'),
-        alt: uiCmd.display('⌥'),
-        return: uiCmd.display('↵'),
-        esc: t.html('shortcuts.key.esc'),
-        space: t.html('shortcuts.key.space'),
         add_note_key: t.html('modes.add_note.key'),
+        alt: uiCmd.display('⌥'),
+        esc: t.html('shortcuts.key.esc'),
         help_key: t.html('help.key'),
+        return: uiCmd.display('↵'),
+        shift: uiCmd.display('⇧'),
         shortcuts_key: t.html('shortcuts.toggle.key'),
+        space: t.html('shortcuts.key.space'),
 
         // reference localized UI labels directly so that they'll always match
+        area: t.html('modes.add_area.title'),
+        line: t.html('modes.add_line.title'),
+        note: t.html('modes.add_note.label'),
+        point: t.html('modes.add_point.title'),
+        redo: t.html('redo.title'),
         save: t.html('save.title'),
         undo: t.html('undo.title'),
-        redo: t.html('redo.title'),
         upload: t.html('commit.save'),
-        point: t.html('modes.add_point.title'),
-        line: t.html('modes.add_line.title'),
-        area: t.html('modes.add_area.title'),
-        note: t.html('modes.add_note.label'),
 
         circularize: t.html('operations.circularize.title'),
         continue: t.html('operations.continue.title'),
@@ -133,18 +133,18 @@ export function helpHtml(id, replacements) {
         split: t.html('operations.split.title'),
         straighten: t.html('operations.straighten.title'),
 
-        map_data: t.html('map_data.title'),
-        osm_notes: t.html('map_data.layers.notes.title'),
-        fields: t.html('inspector.fields'),
-        tags: t.html('inspector.tags'),
-        relations: t.html('inspector.relations'),
-        new_relation: t.html('inspector.new_relation'),
-        turn_restrictions: t.html('_tagging.presets.fields.restrictions.label'),
         background_settings: t.html('background.description'),
-        imagery_offset: t.html('background.fix_misalignment'),
-        start_the_walkthrough: t.html('splash.walkthrough'),
+        fields: t.html('inspector.fields'),
         help: t.html('help.title'),
-        ok: t.html('intro.ok')
+        imagery_offset: t.html('background.fix_misalignment'),
+        map_data: t.html('map_data.title'),
+        new_relation: t.html('inspector.new_relation'),
+        ok: t.html('intro.ok'),
+        osm_notes: t.html('map_data.layers.notes.title'),
+        relations: t.html('inspector.relations'),
+        start_the_walkthrough: t.html('splash.walkthrough'),
+        tags: t.html('inspector.tags'),
+        turn_restrictions: t.html('_tagging.presets.fields.restrictions.label')
         };
         for (var key in helpStringReplacements) {
             helpStringReplacements[key] = { html: helpStringReplacements[key] };

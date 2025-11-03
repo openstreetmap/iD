@@ -115,6 +115,7 @@ export default tseslint.config(
        'require-await': 'error',
        'semi': ['error', 'always'],
        'semi-spacing': 'error',
+       'sort-keys': ['error', 'asc', { allowLineSeparatedGroups: true, minKeys: 35 }],
        'space-unary-ops': 'error',
        'wrap-regex': 'off'
     }
