@@ -89,11 +89,11 @@ export function validationConnectedWays(context) {
         const checkedSingleCrossingWays = {};
 
         // declare vars ahead of time to reduce garbage collection
-        let i, j;
+        let i;
         let nA, nB, nAId, nBId, intersectingNode;
         let segment1, segment2;
         let oneOnly;
-        let segmentInfos, segment2Info, way2, taggedFeature2, way2FeatureType;
+        let way2, taggedFeature2, way2FeatureType;
         const way1Nodes = graph.childNodes(way1);
         const way1NodesId = way1Nodes.map(n => n.id);
         const comparedWays = {};
@@ -175,7 +175,7 @@ export function validationConnectedWays(context) {
                             }
                         ],
                         crossPoint: point,
-                        crossIndex: way1Nodes.findIndex(n => n.id === intersectingNode),
+                        crossIndex: way1NodesId.indexOf(intersectingNode),
                         crossNode: intersectingNode
                     });
                     if (oneOnly) {
