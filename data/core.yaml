@@ -2007,6 +2007,7 @@ en:
         title: Connect using a ford
       connect_using_power_terminal:
         title: Connect using a power terminal
+        annotation: Connected power line to building using a power terminal.
       continue_from_start:
         title: Continue drawing from start
       continue_from_end:
