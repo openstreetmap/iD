@@ -2,15 +2,14 @@ import { isEqual } from 'lodash-es';
 
 import { operationDisconnect } from '../operations/disconnect';
 import { operationDelete } from '../operations/delete';
-import { geoExtent,  geoLineIntersection  } from '../geo';
+import { geoExtent, geoLineIntersection } from '../geo';
 import { osmFlowingWaterwayTagValues, osmRailwayTrackTagValues, osmPowerTagValues, osmRoutableAerowayTags, osmRoutableHighwayTagValues } from '../osm/tags';
 import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
-
 export function validationConnectedWays(context) {
-    var type = 'connected_ways';
+    const type = 'connected_ways';
 
     // returns the way or its parent relation, whichever has a useful feature type
     function getFeatureWithFeatureTypeTagsForWay(way, graph) {
@@ -21,23 +20,20 @@ export function validationConnectedWays(context) {
         }
     }
 
-
     function hasTag(tags, key) {
         return tags[key] !== undefined && tags[key] !== 'no';
     }
 
     // discard
-    var ignoredBuildings = {
+    const ignoredBuildings = {
         demolished: true, dismantled: true, proposed: true, razed: true
     };
 
-
     function getFeatureType(entity, graph) {
-
-        var geometry = entity.geometry(graph);
+        const geometry = entity.geometry(graph);
         if (geometry !== 'line' && geometry !== 'area') return null;
 
-        var tags = entity.tags;
+        const tags = entity.tags;
 
         if (tags.aeroway in osmRoutableAerowayTags) return 'aeroway';
 
@@ -64,8 +60,8 @@ export function validationConnectedWays(context) {
      * @returns {object | null} the tags for the connecting node, or null if the entities should not be joined
      */
     function tagsForConnectionNodeIfAllowed(entity1, entity2, graph) {
-        var featureType1 = getFeatureType(entity1, graph);
-        var featureType2 = getFeatureType(entity2, graph);
+        const featureType1 = getFeatureType(entity1, graph);
+        const featureType2 = getFeatureType(entity2, graph);
 
         /**
          * @typedef {NonNullable<ReturnType<getFeatureType>>} FeatureType
@@ -80,32 +76,31 @@ export function validationConnectedWays(context) {
         return null;
     }
 
-
     function findConnectionOnWay(way1, graph, tree) {
-        var ConnectionsInfo = [];
+        const ConnectionsInfo = [];
         if (way1.type !== 'way') return ConnectionsInfo;
 
-        var taggedFeature1 = getFeatureWithFeatureTypeTagsForWay(way1, graph);
-        var way1FeatureType = getFeatureType(taggedFeature1, graph);
+        const taggedFeature1 = getFeatureWithFeatureTypeTagsForWay(way1, graph);
+        const way1FeatureType = getFeatureType(taggedFeature1, graph);
         if (way1FeatureType === null) return ConnectionsInfo;
+
         if (way1FeatureType !== 'power') return ConnectionsInfo;
 
-        var checkedSingleCrossingWays = {};
+        const checkedSingleCrossingWays = {};
 
         // declare vars ahead of time to reduce garbage collection
-        var i, j;
-        var extent;
-        var nA, nB, nAId, nBId, intersectingNode;
-        var segment1, segment2;
-        var oneOnly;
-        var segmentInfos, segment2Info, way2, taggedFeature2, way2FeatureType;
-        var way1Nodes = graph.childNodes(way1);
-        var way1NodesId = way1Nodes.map(n => n.id);
-        var comparedWays = {};
+        let i, j;
+        let nA, nB, nAId, nBId, intersectingNode;
+        let segment1, segment2;
+        let oneOnly;
+        let segmentInfos, segment2Info, way2, taggedFeature2, way2FeatureType;
+        const way1Nodes = graph.childNodes(way1);
+        const way1NodesId = way1Nodes.map(n => n.id);
+        const comparedWays = {};
         for (i = 0; i < way1Nodes.length - 1; i++) {
-            let n1 = way1Nodes[i];
-            let n2 = way1Nodes[i + 1];
-            extent = geoExtent([
+            const n1 = way1Nodes[i];
+            const n2 = way1Nodes[i + 1];
+            const extent = geoExtent([
                 [
                     Math.min(n1.loc[0], n2.loc[0]),
                     Math.min(n1.loc[1], n2.loc[1])
@@ -146,7 +141,7 @@ export function validationConnectedWays(context) {
                 intersectingNode = null;
                 const hasConnectionNode = (nAId === n1.id || nAId === n2.id || nBId === n1.id || nBId === n2.id);
                 if (!hasConnectionNode) {
-                        continue;
+                    continue;
                 }
                 // check tags of intersecting node
                 intersectingNode = [nAId, nBId].find(id => id === n1.id || id === n2.id);
@@ -164,7 +159,7 @@ export function validationConnectedWays(context) {
 
                 segment1 = [n1.loc, n2.loc];
                 segment2 = [nA.loc, nB.loc];
-                var point = geoLineIntersection(segment1, segment2);
+                const point = geoLineIntersection(segment1, segment2);
                 if (point) {
                     ConnectionsInfo.push({
                         wayInfos: [
@@ -193,9 +188,8 @@ export function validationConnectedWays(context) {
         return ConnectionsInfo;
     }
 
-
     function waysToCheck(entity, graph) {
-        var featureType = getFeatureType(entity, graph);
+        const featureType = getFeatureType(entity, graph);
         if (!featureType) return [];
 
         if (entity.type === 'way') {
@@ -205,7 +199,7 @@ export function validationConnectedWays(context) {
                 if (member.type === 'way' &&
                     // only look at geometry ways
                     (!member.role || member.role === 'outer' || member.role === 'inner')) {
-                    var entity = graph.hasEntity(member.id);
+                    const entity = graph.hasEntity(member.id);
                     // don't add duplicates
                     if (entity && !array.includes(entity)) {
                         array.push(entity);
@@ -217,7 +211,7 @@ export function validationConnectedWays(context) {
         return [];
     }
 
-    let validation = function (entity, graph) {
+    const validation = function (entity, graph) {
         const tree = context.history().tree();
         const issues = [];
         for (const way of waysToCheck(entity, graph)) {
@@ -231,9 +225,9 @@ export function validationConnectedWays(context) {
     function createIssue(wrongConnection, graph) {
 
         // use the entities with the tags that define the feature type
-        wrongConnection.wayInfos.sort(function(way1Info, way2Info) {
-            var type1 = way1Info.featureType;
-            var type2 = way2Info.featureType;
+        const wayInfosSorted = wrongConnection.wayInfos.sort((way1Info, way2Info) => {
+            const type1 = way1Info.featureType;
+            const type2 = way2Info.featureType;
             if (type1 === type2) {
                 return utilDisplayLabel(way1Info.way, graph) > utilDisplayLabel(way2Info.way, graph);
             } else if (type1 === 'waterway') {
@@ -243,16 +237,14 @@ export function validationConnectedWays(context) {
             }
             return type1 < type2;
         });
-        var entities = wrongConnection.wayInfos.map(function(wayInfo) {
-            return getFeatureWithFeatureTypeTagsForWay(wayInfo.way, graph);
-        });
-        const edges = wrongConnection.wayInfos.map(w => w.edge);
-        const featureTypes = wrongConnection.wayInfos.map(w => w.featureType);
+        const entities = wayInfosSorted.map(wayInfo => getFeatureWithFeatureTypeTagsForWay(wayInfo.way, graph));
+        const edges = wayInfosSorted.map(w => w.edge);
+        const featureTypes = wayInfosSorted.map(w => w.featureType);
 
         const connectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph);
 
-        const featureType1 = wrongConnection.wayInfos[0].featureType;
-        const featureType2 = wrongConnection.wayInfos[1].featureType;
+        const featureType1 = wayInfosSorted[0].featureType;
+        const featureType2 = wayInfosSorted[1].featureType;
 
         const isCrossingPower = entities.some(e => hasTag(e.tags, 'power'));
 
@@ -260,7 +252,7 @@ export function validationConnectedWays(context) {
 
         let crossingTypeID = subtype;
 
-         if (isCrossingPower && subtype !== 'building-power') {
+        if (isCrossingPower && subtype !== 'building-power') {
             crossingTypeID = 'power-other';
         }
         if (connectionTags && isCrossingPower) {
@@ -268,15 +260,15 @@ export function validationConnectedWays(context) {
         }
 
         // Differentiate based on the loc rounded to 4 digits, since two ways can cross multiple times.
-        var uniqueID = wrongConnection.crossPoint[0].toFixed(4) + ',' + wrongConnection.crossPoint[1].toFixed(4);
+        const uniqueID = wrongConnection.crossPoint[0].toFixed(4) + ',' + wrongConnection.crossPoint[1].toFixed(4);
 
         return new validationIssue({
             type: type,
             subtype: subtype,
             severity: 'warning',
             message: function(context) {
-                var graph = context.graph();
-                var entity1 = graph.hasEntity(this.entityIds[0]),
+                const graph = context.graph();
+                const entity1 = graph.hasEntity(this.entityIds[0]),
                     entity2 = graph.hasEntity(this.entityIds[1]);
                 return (entity1 && entity2) ? t.append('issues.connected_ways.message', {
                     feature: utilDisplayLabel(entity1, graph, featureType1 === 'building'),
@@ -284,54 +276,52 @@ export function validationConnectedWays(context) {
                 }) : '';
             },
             reference: showReference,
-            entityIds: entities.map(function(entity) {
-                return entity.id;
-            }),
+            entityIds: entities.map(entity => entity.id),
             data: {
-                edges: edges,
-                featureTypes: featureTypes,
+                edges,
+                featureTypes,
                 connectingNode: wrongConnection.crossNode,
                 connectingNodeIndex: wrongConnection.crossIndex,
-                connectionTags: connectionTags
+                connectionTags
             },
             hash: uniqueID,
             loc: wrongConnection.crossPoint,
             dynamicFixes: function(context) {
-                var mode = context.mode();
+                const mode = context.mode();
                 if (!mode || mode.id !== 'select' || mode.selectedIDs().length !== 1) return [];
 
-                var fixes = [];
+                const fixes = [];
 
                 fixes.push(new validationIssueFix({
                     icon: 'iD-operation-delete',
                     title: t.append('issues.fix.disconnect_feature.title'),
                     entityIds: [this.data.connectingNode],
                     onClick: function(context) {
-                        var graph = context.graph();
+                        const graph = context.graph();
                         const powerEntity = this.issue.entityIds.map(id => graph.entity(id)).find(e => hasTag(e.tags, 'power'));
-                        var operation = operationDisconnect(context, [this.issue.data.connectingNode, powerEntity.id]);
+                        const operation = operationDisconnect(context, [this.issue.data.connectingNode, powerEntity.id]);
                         if (!operation.disabled()) {
                             operation();
                         }
                         //reload graph and delete the node from powerEntity
-                        var graph_ = context.graph();
-                        var entity1_ = graph_.entity(this.issue.entityIds[0]);
-                        var entity2_ = graph_.entity(this.issue.entityIds[1]);
-                        var powerEntity_ = hasTag(entity1_.tags, 'power') ? entity1_ : hasTag(entity2_.tags, 'power') ? entity2_ : null;
-                        var operation_ = operationDelete(context, [powerEntity_.nodes[this.issue.data.connectingNodeIndex]]);
+                        const graph_ = context.graph();
+                        const entity1_ = graph_.entity(this.issue.entityIds[0]);
+                        const entity2_ = graph_.entity(this.issue.entityIds[1]);
+                        const powerEntity_ = hasTag(entity1_.tags, 'power') ? entity1_ : hasTag(entity2_.tags, 'power') ? entity2_ : null;
+                        const operation_ = operationDelete(context, [powerEntity_.nodes[this.issue.data.connectingNodeIndex]]);
                         if (!operation_.disabled()) {
                             operation_();
                         }
                     }
                 }));
 
-                 var wayNodes = graph.childNodes(entities[1]);
+                let wayNodes = graph.childNodes(entities[1]);
                 if (featureType1 === 'power') {
                     wayNodes = graph.childNodes(entities[0]);
                 }
 
-                var connectingNodeIndex = this.data.connectingNodeIndex;
-                var isLastNodeOfWay = (connectingNodeIndex === 0 || connectingNodeIndex === wayNodes.length - 1);
+                const connectingNodeIndex = this.data.connectingNodeIndex;
+                const isLastNodeOfWay = (connectingNodeIndex === 0 || connectingNodeIndex === wayNodes.length - 1);
 
                 if (connectionTags && isLastNodeOfWay) {
                     fixes.push(makeConnectWaysFix(this.data.connectionTags));
@@ -357,8 +347,8 @@ export function validationConnectedWays(context) {
 
     function makeConnectWaysFix(connectionTags) {
 
-        var fixTitleID = 'connect_features';
-        var fixIcon = 'iD-icon-crossing';
+        let fixTitleID = 'connect_features';
+        let fixIcon = 'iD-icon-crossing';
         if (connectionTags.power) {
             fixTitleID = 'connect_using_power_terminal';
             fixIcon = 'temaki-power';
@@ -368,10 +358,10 @@ export function validationConnectedWays(context) {
             icon: fixIcon,
             title: t.append('issues.fix.' + fixTitleID + '.title'),
             onClick: function(context) {
-                var connectingNode = this.issue.data.connectingNode;
+                const connectingNode = this.issue.data.connectingNode;
 
                 if (connectingNode && connectionTags) {
-                    var node = context.graph().entity(connectingNode);
+                    const node = context.graph().entity(connectingNode);
                     if (!node) return;
                     const tags = {...node.tags, ...connectionTags};
                     context.perform(
