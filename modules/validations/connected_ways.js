@@ -14,17 +14,11 @@ export function validationConnectedWays(context) {
 
     // returns the way or its parent relation, whichever has a useful feature type
     function getFeatureWithFeatureTypeTagsForWay(way, graph) {
-        if (getFeatureType(way, graph) === null) {
-            // if the way doesn't match a feature type, check its parent relations
-            var parentRels = graph.parentRelations(way);
-            for (var i = 0; i < parentRels.length; i++) {
-                var rel = parentRels[i];
-                if (getFeatureType(rel, graph) !== null) {
-                    return rel;
-                }
-            }
+        if (getFeatureType(way, graph) !== null) return way;
+        // if the way doesn't match a feature type, check its parent relations
+        for (const rel of graph.parentRelations(way)) {
+            if (getFeatureType(rel, graph) !== null) return rel;
         }
-        return way;
     }
 
 
@@ -64,11 +58,6 @@ export function validationConnectedWays(context) {
         //if (hasTag(tags, 'construction:power') && osmPowerTagValues[tags["construction:power"]]) return 'power';
 
         return null;
-    }
-
-    function isLegitCrossing(tags1, featureType1, tags2, featureType2) {
-        if (featureType1 === 'power' && featureType2 === 'power') return true;
-        return false;
     }
 
     /**
@@ -129,10 +118,7 @@ export function validationConnectedWays(context) {
 
             // Optimize by only checking overlapping segments, not every segment
             // of overlapping ways
-            segmentInfos = tree.waySegments(extent, graph);
-
-            for (j = 0; j < segmentInfos.length; j++) {
-                segment2Info = segmentInfos[j];
+            for (const segment2Info of tree.waySegments(extent, graph)) {
 
                 // don't check for self-intersection in this validation
                 if (segment2Info.wayId === way1.id) continue;
@@ -148,8 +134,7 @@ export function validationConnectedWays(context) {
                 taggedFeature2 = getFeatureWithFeatureTypeTagsForWay(way2, graph);
                 way2FeatureType = getFeatureType(taggedFeature2, graph);
 
-                if (way2FeatureType === null ||
-                    isLegitCrossing(taggedFeature1.tags, way1FeatureType, taggedFeature2.tags, way2FeatureType)) {
+                if (way2FeatureType === null || (way1FeatureType === 'power' && way2FeatureType === 'power')){
                     continue;
                 }
 
@@ -195,7 +180,7 @@ export function validationConnectedWays(context) {
                             }
                         ],
                         crossPoint: point,
-                        crossIndex: way1NodesId.indexOf(intersectingNode),
+                        crossIndex: way1Nodes.findIndex(n => n.id === intersectingNode),
                         crossNode: intersectingNode
                     });
                     if (oneOnly) {
@@ -222,7 +207,7 @@ export function validationConnectedWays(context) {
                     (!member.role || member.role === 'outer' || member.role === 'inner')) {
                     var entity = graph.hasEntity(member.id);
                     // don't add duplicates
-                    if (entity && array.indexOf(entity) === -1) {
+                    if (entity && !array.includes(entity)) {
                         array.push(entity);
                     }
                 }
@@ -232,25 +217,16 @@ export function validationConnectedWays(context) {
         return [];
     }
 
-
-    var validation = function checkConnectedWays(entity, graph) {
-
-        var tree = context.history().tree();
-
-        var ways = waysToCheck(entity, graph);
-
-        var issues = [];
-        // declare these here to reduce garbage collection
-        var wayIndex, connectionsIndex, connections;
-        for (wayIndex in ways) {
-            connections = findConnectionOnWay(ways[wayIndex], graph, tree);
-            for (connectionsIndex in connections) {
-                issues.push(createIssue(connections[connectionsIndex], graph));
+    let validation = function (entity, graph) {
+        const tree = context.history().tree();
+        const issues = [];
+        for (const way of waysToCheck(entity, graph)) {
+            for (const connection of findConnectionOnWay(way, graph, tree)) {
+                issues.push(createIssue(connection, graph));
             }
         }
         return issues;
     };
-
 
     function createIssue(wrongConnection, graph) {
 
@@ -270,20 +246,19 @@ export function validationConnectedWays(context) {
         var entities = wrongConnection.wayInfos.map(function(wayInfo) {
             return getFeatureWithFeatureTypeTagsForWay(wayInfo.way, graph);
         });
-        var edges = [wrongConnection.wayInfos[0].edge, wrongConnection.wayInfos[1].edge];
-        var featureTypes = [wrongConnection.wayInfos[0].featureType, wrongConnection.wayInfos[1].featureType];
+        const edges = wrongConnection.wayInfos.map(w => w.edge);
+        const featureTypes = wrongConnection.wayInfos.map(w => w.featureType);
 
-        var connectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph);
+        const connectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph);
 
-        var featureType1 = wrongConnection.wayInfos[0].featureType;
-        var featureType2 = wrongConnection.wayInfos[1].featureType;
+        const featureType1 = wrongConnection.wayInfos[0].featureType;
+        const featureType2 = wrongConnection.wayInfos[1].featureType;
 
+        const isCrossingPower = entities.some(e => hasTag(e.tags, 'power'));
 
-        var isCrossingPower = hasTag(entities[0].tags, 'power') || hasTag(entities[1].tags, 'power');
+        const subtype = featureTypes.sort().join('-');
 
-        var subtype = [featureType1, featureType2].sort().join('-');
-
-        var crossingTypeID = subtype;
+        let crossingTypeID = subtype;
 
          if (isCrossingPower && subtype !== 'building-power') {
             crossingTypeID = 'power-other';
@@ -333,9 +308,7 @@ export function validationConnectedWays(context) {
                     entityIds: [this.data.connectingNode],
                     onClick: function(context) {
                         var graph = context.graph();
-                        var entity1 = graph.entity(this.issue.entityIds[0]);
-                        var entity2 = graph.entity(this.issue.entityIds[1]);
-                        var powerEntity = hasTag(entity1.tags, 'power') ? entity1 : hasTag(entity2.tags, 'power') ? entity2 : null;
+                        const powerEntity = this.issue.entityIds.map(id => graph.entity(id)).find(e => hasTag(e.tags, 'power'));
                         var operation = operationDisconnect(context, [this.issue.data.connectingNode, powerEntity.id]);
                         if (!operation.disabled()) {
                             operation();
@@ -368,13 +341,6 @@ export function validationConnectedWays(context) {
                     }
                 }
 
-
-                // repositioning the features is always an option
-                fixes.push(new validationIssueFix({
-                    icon: 'iD-operation-move',
-                    title: t.append('issues.fix.reposition_features.title')
-                }));
-
                 return fixes;
             }
         });
@@ -406,15 +372,12 @@ export function validationConnectedWays(context) {
 
                 if (connectingNode && connectionTags) {
                     var node = context.graph().entity(connectingNode);
-                    if (node) {
-                        var updatedTags = Object.assign({}, node.tags, connectionTags);
-                        context.perform(
-                            function updateNodeTags(graph) {
-                                return graph.replace(node.update({ tags: updatedTags }));
-                            },
-                            t('issues.fix.connect_using_power_terminal.title')
-                        );
-                    }
+                    if (!node) return;
+                    const tags = {...node.tags, ...connectionTags};
+                    context.perform(
+                        graph => graph.replace(node.update({ tags } )),
+                        t('issues.fix.' + fixTitleID + '.annotation')
+                    );
                 }
             }
         });
