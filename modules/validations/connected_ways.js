@@ -90,12 +90,11 @@ export function validationConnectedWays(context) {
 
         // declare vars ahead of time to reduce garbage collection
         let i;
-        let nA, nB, nAId, nBId, intersectingNode;
+        let nA, nB, nAId, nBId;
         let segment1, segment2;
         let oneOnly;
         let way2, taggedFeature2, way2FeatureType;
         const way1Nodes = graph.childNodes(way1);
-        const way1NodesId = way1Nodes.map(n => n.id);
         const comparedWays = {};
         for (i = 0; i < way1Nodes.length - 1; i++) {
             const n1 = way1Nodes[i];
@@ -138,14 +137,13 @@ export function validationConnectedWays(context) {
 
                 nAId = segment2Info.nodes[0];
                 nBId = segment2Info.nodes[1];
-                intersectingNode = null;
                 const hasConnectionNode = (nAId === n1.id || nAId === n2.id || nBId === n1.id || nBId === n2.id);
                 if (!hasConnectionNode) {
                     continue;
                 }
                 // check tags of intersecting node
-                intersectingNode = [nAId, nBId].find(id => id === n1.id || id === n2.id);
-                let intersectingNodeEntity = graph.entity(intersectingNode);
+                const intersectingNode = [nAId, nBId].find(id => id === n1.id || id === n2.id);
+                const intersectingNodeEntity = graph.entity(intersectingNode);
                 if (way1FeatureType === 'power' || way2FeatureType === 'power') {
                     if (['insulator', 'terminal'].includes(intersectingNodeEntity.tags.power)) {
                         continue;
@@ -175,7 +173,7 @@ export function validationConnectedWays(context) {
                             }
                         ],
                         crossPoint: point,
-                        crossIndex: way1NodesId.indexOf(intersectingNode),
+                        crossIndex: way1Nodes.findIndex(n => n.id === intersectingNode),
                         crossNode: intersectingNode
                     });
                     if (oneOnly) {
@@ -195,18 +193,18 @@ export function validationConnectedWays(context) {
         if (entity.type === 'way') {
             return [entity];
         } else if (entity.type === 'relation') {
-            return entity.members.reduce(function(array, member) {
+            const waySet = new Set();
+            for (const member of entity.members) {
                 if (member.type === 'way' &&
                     // only look at geometry ways
                     (!member.role || member.role === 'outer' || member.role === 'inner')) {
                     const entity = graph.hasEntity(member.id);
-                    // don't add duplicates
-                    if (entity && !array.includes(entity)) {
-                        array.push(entity);
+                    if (entity) {
+                        waySet.add(entity);
                     }
                 }
-                return array;
-            }, []);
+            }
+            return Array.from(waySet);
         }
         return [];
     }
