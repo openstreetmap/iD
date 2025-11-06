@@ -40,156 +40,91 @@ When requesting a feature:
 We use GitHub labels to keep track of issues. Some guidelines:
 
 Green labels are for **action items**. Jump in and start working!
-* <sub>[![new-contributor-opportunity][new-contributor-opportunity]][new-contributor-opportunity_link]</sub> -
+* https://github.com/openstreetmap/iD/labels/new%20contributor%20opportunity -
 Best for new contributors. Little experience necessary!
-* <sub>[![help-wanted][help-wanted]][help-wanted_link]</sub> -
+* https://github.com/openstreetmap/iD/labels/help%20wanted -
 For more intermediate contributors, probably requires investigation or knowledge of iD code.
-* <sub>[![priority][priority]][priority_link]</sub> -
+* https://github.com/openstreetmap/iD/labels/priority -
 Issues that have a big impact or matter most to _new mappers_.
 <br/>(There should probably be 10 or fewer "priority" items.)
-
-[new-contributor-opportunity]: http://labl.es/svg?text=new%20contributor%20opportunity&bgcolor=0e8a16
-[help-wanted]: http://labl.es/svg?text=help%20wanted&bgcolor=0e8a16
-[priority]: http://labl.es/svg?text=priority&bgcolor=0e8a16
-
-[new-contributor-opportunity_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3A%22new%20contributor%20opportunity%22
-[help-wanted_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3A%22help%20wanted%22
-[priority_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Apriority
 
 Red labels are for **bugs**. These are things that we want fixed, but might be a bit more
 complicated than the green action items.
 
-* <sub>[![bug][bug]][bug_link]
-[![bug-release-blocker][bug-release-blocker]][bug-release-blocker_link]
-[![bug-browser-specific][bug-browser-specific]][bug-browser-specific_link]</sub>
-
-[bug]: http://labl.es/svg?text=bug&bgcolor=d93f0b
-[bug-release-blocker]: http://labl.es/svg?text=bug-release-blocker&bgcolor=d93f0b
-[bug-browser-specific]: http://labl.es/svg?text=bug-browser-specific&bgcolor=d93f0b
-
-[bug_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Abug
-[bug-release-blocker_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Abug-release-blocker
-[bug-browser-specific_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Abug-browser-specific
+* https://github.com/openstreetmap/iD/labels/bug
+  https://github.com/openstreetmap/iD/labels/bug-browser-specific
+  https://github.com/openstreetmap/iD/labels/bug-cant-reproduce
+  https://github.com/openstreetmap/iD/labels/bug-release-blocker
 
 Purple labels are for **non-action items**. These might be a question or feature request
 that needs some discussion about whether it belongs in iD.  Discuss before working on these.
 
-* <sub>[![considering][considering]][considering_link]
-[![question][question]][question_link]</sub>
+* https://github.com/openstreetmap/iD/labels/considering
+  https://github.com/openstreetmap/iD/labels/question
 
-[considering]: http://labl.es/svg?text=considering&bgcolor=cc33cc
-[question]: http://labl.es/svg?text=question&bgcolor=cc33cc
-
-[considering_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aconsidering
-[question_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aquestion
-
-Yellow labels are for **chores**. These are the things like code cleanup, upgrades, tests,
+Yellow labels are for **chores**. These are things like code cleanup, upgrades, tests,
 documentation, repository gardening, and other stuff that makes developers happy.
 
-* <sub>[![chore][chore]][chore_link]
-[![chore-dependency][chore-dependency]][chore-dependency_link]
-[![chore-documentation][chore-documentation]][chore-documentation_link]
-[![chore-dependabot][chore-dependabot]][chore-dependabot_link]</sub>
-
-[chore]: http://labl.es/svg?text=chore&bgcolor=fef2c0
-[chore-dependency]: http://labl.es/svg?text=chore-dependency&bgcolor=fef2c0
-[chore-documentation]: http://labl.es/svg?text=chore-documentation&bgcolor=fef2c0
-[chore-dependabot]: http://labl.es/svg?text=chore-dependabot&bgcolor=fef2c0
-
-[chore_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore
-[chore-dependency_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-dependency
-[chore-documentation_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-documentation
-[chore-dependabot_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-dependabot
+* https://github.com/openstreetmap/iD/labels/chore
+  https://github.com/openstreetmap/iD/labels/chore-build
+  https://github.com/openstreetmap/iD/labels/chore-dependabot
+  https://github.com/openstreetmap/iD/labels/chore-dependency
+  https://github.com/openstreetmap/iD/labels/chore-embed
+  https://github.com/openstreetmap/iD/labels/documentation
 
 Light blue labels are for **components**, the specific parts of iD that concern the issue.
 
-* <sub>[![core][core]][core_link]
-[![operation][operation]][operation_link]
-[![preset][preset]][preset_link]
-[![streetlevel][streetlevel]][streetlevel_link]
-[![validation][validation]][validation_link]</sub>
-
-[core]: http://labl.es/svg?text=core&bgcolor=c5def5
-[operation]: http://labl.es/svg?text=operation&bgcolor=c5def5
-[preset]: http://labl.es/svg?text=preset&bgcolor=c5def5
-[streetlevel]: http://labl.es/svg?text=streetlevel&bgcolor=c5def5
-[validation]: http://labl.es/svg?text=validation&bgcolor=c5def5
-
-[core_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Acore
-[operation_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%operation
-[preset_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Apreset
-[streetlevel_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Astreetlevel
-[validation_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Avalidation
+* https://github.com/openstreetmap/iD/labels/api
+  https://github.com/openstreetmap/iD/labels/core
+  https://github.com/openstreetmap/iD/labels/data
+  https://github.com/openstreetmap/iD/labels/field
+  https://github.com/openstreetmap/iD/labels/icon
+  https://github.com/openstreetmap/iD/labels/map-renderer
+  https://github.com/openstreetmap/iD/labels/operation
+  https://github.com/openstreetmap/iD/labels/preset
+  https://github.com/openstreetmap/iD/labels/streetlevel
+  https://github.com/openstreetmap/iD/labels/tools
+  https://github.com/openstreetmap/iD/labels/validation
+  https://github.com/openstreetmap/iD/labels/walkthrough-help
 
 Dark teal labels are for **categories**, the high-level concepts that the issue falls under.
 
-* <sub>[![accessibility][accessibility]][accessibility_link]
-[![compatibility][compatibility]][compatibility_link]
-[![localization][localization]][localization_link]
-[![performance][performance]][performance_link]
-[![usability][usability]][usability_link]</sub>
-
-[accessibility]: http://labl.es/svg?text=accessibility&bgcolor=007f99
-[compatibility]: http://labl.es/svg?text=compatibility&bgcolor=007f99
-[localization]: http://labl.es/svg?text=localization&bgcolor=007f99
-[performance]: http://labl.es/svg?text=performance&bgcolor=007f99
-[usability]: http://labl.es/svg?text=usability&bgcolor=007f99
-
-[accessibility_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aaccessibility
-[compatibility_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Acompatibility
-[localization_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Alocalization
-[performance_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aperformance
-[usability_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Ausability
-
+* https://github.com/openstreetmap/iD/labels/accessibility
+  https://github.com/openstreetmap/iD/labels/compatibility
+  https://github.com/openstreetmap/iD/labels/keyboard
+  https://github.com/openstreetmap/iD/labels/localization
+  https://github.com/openstreetmap/iD/labels/performance
+  https://github.com/openstreetmap/iD/labels/touch-stylus
+  https://github.com/openstreetmap/iD/labels/usability
 
 Dark grey labels are for **waitfor items**. We won't work on these now, but we'll keep the issues
 open while we wait for something to happen.
 
-* <sub>[![waitfor][waitfor]][waitfor_link]
-[![waitfor-consensus][waitfor-consensus]][waitfor-consensus_link]
-[![waitfor-icon][waitfor-icon]][waitfor-icon_link]
-[![waitfor-info][waitfor-info]][waitfor-info_link]
-[![waitfor-upstream][waitfor-upstream]][waitfor-upstream_link]</sub>
+* https://github.com/openstreetmap/iD/labels/waitfor
+  https://github.com/openstreetmap/iD/labels/waitfor-consensus
+  https://github.com/openstreetmap/iD/labels/waitfor-icon
+  https://github.com/openstreetmap/iD/labels/waitfor-info
+  https://github.com/openstreetmap/iD/labels/waitfor-tag
+  https://github.com/openstreetmap/iD/labels/waitfor-upstream
 
-[waitfor]: http://labl.es/svg?text=waitfor&bgcolor=444
-[waitfor-consensus]: http://labl.es/svg?text=waitfor-consensus&bgcolor=444
-[waitfor-icon]: http://labl.es/svg?text=waitfor-icon&bgcolor=444
-[waitfor-info]: http://labl.es/svg?text=waitfor-info&bgcolor=444
-[waitfor-upstream]: http://labl.es/svg?text=waitfor-upstream&bgcolor=444
-
-[waitfor_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor
-[waitfor-consensus_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-consensus
-[waitfor-icon_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-icon
-[waitfor-info_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-info
-[waitfor-upstream_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-upstream
-
-Light grey labels are for **wontfix items**. We've decided these doesn't belong in
+Light grey labels are for **wontfix items**. We've decided these don't belong in
 iD at this time. Don't feel bad, sometimes we change our minds later and revisit them!
 
-* <sub>[![wontfix][wontfix]][wontfix_link]
-[![wontfix-confusing][wontfix-confusing]][wontfix-confusing_link]
-[![wontfix-low-impact][wontfix-low-impact]][wontfix-low-impact_link]</sub>
-
-[wontfix]: http://labl.es/svg?text=wontfix&bgcolor=eee
-[wontfix-confusing]: http://labl.es/svg?text=wontfix-confusing&bgcolor=eee
-[wontfix-low-impact]: http://labl.es/svg?text=wontfix-low-impact&bgcolor=eee
-
-[wontfix_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix
-[wontfix-confusing_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-confusing
-[wontfix-low-impact_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-low-impact
+* https://github.com/openstreetmap/iD/labels/duplicate
+  https://github.com/openstreetmap/iD/labels/wontfix
+  https://github.com/openstreetmap/iD/labels/wontfix-confusing
+  https://github.com/openstreetmap/iD/labels/wontfix-impossible
+  https://github.com/openstreetmap/iD/labels/wontfix-low-impact
+  https://github.com/openstreetmap/iD/labels/wontfix-not-a-bug
+  https://github.com/openstreetmap/iD/labels/wontfix-not-iD
+  https://github.com/openstreetmap/iD/labels/wontfix-out-of-scope
 
 Special:
 
-* <sub>[![bluesky][bluesky]][bluesky_link]</sub> -
+* https://github.com/openstreetmap/iD/labels/bluesky -
 Bluesky issues are extra challenging. They might require weeks of development or not even be possible.
-* <sub>[![wip][wip]][wip_link]</sub> -
-Work in Progress.  Don't start work on these, somebody else already did!
-
-[bluesky]: http://labl.es/svg?text=bluesky&bgcolor=1d76db
-[wip]: http://labl.es/svg?text=wip&bgcolor=fbca04
-
-[bluesky_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Abluesky
-[wip_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awip
+* https://github.com/openstreetmap/iD/labels/wip -
+Work in Progress.  Don't start work on these; somebody else already did!
 
 
 ## Testing
