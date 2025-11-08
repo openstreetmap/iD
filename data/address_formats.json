@@ -91,7 +91,7 @@
     "format": [
       ["street+place"],
       ["housenumber", "suburb"],
-      ["city", "postcode"]
+      ["city", "state", "postcode"]
     ]
   },
   {
