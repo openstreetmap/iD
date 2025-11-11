@@ -4658,6 +4658,22 @@ img.tile-debug {
     background: none;
     color: #ddd;
 }
+/* Add to the END of css/80_app.css */
+
+/* Dynamic margin for overlapping panels */
+.panel-container.panel-overlaps-menu {
+  margin-right: 12px; /* Adjust based on your testing */
+}
+
+[dir="rtl"] .panel-container.panel-overlaps-menu {
+  margin-left: 12px;
+  margin-right: 0; /* Reset LTR margin */
+}
+
+/* Smooth transition */
+.panel-container {
+  transition: margin 0.2s ease;
+}
 .ideditor[dir='rtl'] .panel-title button.close {
     float: left;
 }

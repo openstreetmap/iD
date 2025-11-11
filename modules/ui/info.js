@@ -21,7 +21,33 @@ export function uiInfo(context) {
             active[k] = false;
         }
     });
+function adjustPanelOverlap() {
+        var panels = document.querySelectorAll('.panel-container');
+        if (panels.length === 0) return;
 
+        var toolbar = document.querySelector('.top-toolbar');
+        if (!toolbar) return;
+
+        var isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+        var toolbarRect = toolbar.getBoundingClientRect();
+        var lastPanel = panels[panels.length - 1];
+        
+        if (!lastPanel) return;
+
+        var panelRect = lastPanel.getBoundingClientRect();
+
+        var overlaps = isRTL 
+            ? panelRect.left < toolbarRect.right
+            : panelRect.right > toolbarRect.left;
+
+        panels.forEach(function(panel) {
+            panel.classList.remove('panel-overlaps-menu');
+        });
+
+        if (overlaps) {
+            lastPanel.classList.add('panel-overlaps-menu');
+        }
+    }
 
     function info(selection) {
 
@@ -77,12 +103,14 @@ export function uiInfo(context) {
 
 
             // redraw the panels
+
+            
             infoPanels.selectAll('.panel-content')
                 .each(function(d) {
                     d3_select(this).call(panels[d]);
                 });
+adjustPanelOverlap();
         }
-
 
         info.toggle = function(which) {
             var activeids = ids.filter(function(k) { return active[k]; });
@@ -108,6 +136,8 @@ export function uiInfo(context) {
             }
 
             redraw();
+
+            setTimeout(adjustPanelOverlap, 50);;
         };
 
 
@@ -140,6 +170,6 @@ export function uiInfo(context) {
                 });
         });
     }
-
+window.addEventListener('resize', adjustPanelOverlap);
     return info;
 }
