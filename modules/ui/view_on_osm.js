@@ -20,10 +20,8 @@ export function uiViewOnOSM(context) {
         const link = selection.selectAll('.view-on-osm')
             .data(data, d => d.id);
 
-        // exit
         link.exit().remove();
 
-        // enter
         const linkEnter = link.enter()
             .append('a')
             .attr('class', 'view-on-osm')
@@ -32,22 +30,18 @@ export function uiViewOnOSM(context) {
             .attr('aria-label', t('inspector.view_on_osm'))
             .call(svgIcon('#iD-icon-out-link', 'inline'));
 
-        // --- Handle OSM entities ---
         if (_what && !(_what instanceof osmNote)) {
-            // Find last modified child safely
             const last = uiViewOnOSM.findLastModifiedChild(context.history().base(), _what);
 
             const user = last.user || t('inspector.unknown_user', 'unknown');
             const timeStr = last.timestamp ? getRelativeDate(new Date(last.timestamp)) : t('inspector.unknown_time', 'unknown time');
 
-            // Add label and last touched info
             linkEnter
                 .append('span')
                 .attr('class', 'view-on-osm__text')
                 .text(`Edited ${timeStr} by ${user}`);
 
         } else {
-            // --- For Notes ---
             linkEnter
                 .append('span')
                 .attr('class', 'view-on-osm__text')
@@ -55,7 +49,6 @@ export function uiViewOnOSM(context) {
         }
     }
 
-    // getter-setter for _what
     viewOnOSM.what = function(_) {
         if (!arguments.length) return _what;
         _what = _;
@@ -68,11 +61,9 @@ export function uiViewOnOSM(context) {
 
 /**
  * Finds the most recently modified child entity of a given OSM feature.
- * Works safely for nodes, ways, and relations (avoids infinite recursion).
  *
  * @param {iD.Graph} graph
  * @param {iD.OsmEntity} feature
- * @returns {{id: string, user?: string, timestamp?: string}}
  */
 uiViewOnOSM.findLastModifiedChild = (graph, feature) => {
     const visited = new Set();
@@ -107,9 +98,5 @@ uiViewOnOSM.findLastModifiedChild = (graph, feature) => {
 
     recurse(feature);
 
-    return {
-        id: latest.id,
-        user: latest.user,
-        timestamp: latest.timestamp
-    };
+    return latest;
 };
