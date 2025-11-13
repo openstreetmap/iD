@@ -5,52 +5,57 @@ import { getRelativeDate } from '../util/date';
 
 
 export function uiViewOnOSM(context) {
-    var _what;   // an osmEntity or osmNote
-
+    let _what;   // an osmEntity or osmNote
 
     function viewOnOSM(selection) {
-        var url;
+        let url;
+
         if (_what instanceof osmEntity) {
             url = context.connection().historyURL(_what);
         } else if (_what instanceof osmNote) {
             url = context.connection().noteURL(_what);
         }
 
-        var data = ((!_what || _what.isNew()) ? [] : [_what]);
-        var link = selection.selectAll('.view-on-osm')
-            .data(data, function(d) { return d.id; });
+        const data = (!_what || _what.isNew()) ? [] : [_what];
+        const link = selection.selectAll('.view-on-osm')
+            .data(data, d => d.id);
 
         // exit
-        link.exit()
-            .remove();
+        link.exit().remove();
 
         // enter
-        var linkEnter = link.enter()
+        const linkEnter = link.enter()
             .append('a')
             .attr('class', 'view-on-osm')
             .attr('target', '_blank')
             .attr('href', url)
+            .attr('aria-label', t('inspector.view_on_osm'))
             .call(svgIcon('#iD-icon-out-link', 'inline'));
 
-
+        // --- Handle OSM entities ---
         if (_what && !(_what instanceof osmNote)) {
-            // node/way/relation
-            const { user, timestamp } = uiViewOnOSM.findLastModifiedChild(context.history().base(), _what);
+            // Find last modified child safely
+            const last = uiViewOnOSM.findLastModifiedChild(context.history().base(), _what);
 
-            linkEnter
-                .call(t.append('inspector.last_touched', {
-                    timeago: getRelativeDate(new Date(timestamp)),
-                    user
-                }))
-                .attr('title', t('inspector.view_on_osm'));
-        } else {
+            const user = last.user || t('inspector.unknown_user', 'unknown');
+            const timeStr = last.timestamp ? getRelativeDate(new Date(last.timestamp)) : t('inspector.unknown_time', 'unknown time');
+
+            // Add label and last touched info
             linkEnter
                 .append('span')
+                .attr('class', 'view-on-osm__text')
+                .text(`Edited ${timeStr} by ${user}`);
+
+        } else {
+            // --- For Notes ---
+            linkEnter
+                .append('span')
+                .attr('class', 'view-on-osm__text')
                 .call(t.append('inspector.view_on_osm'));
         }
     }
 
-
+    // getter-setter for _what
     viewOnOSM.what = function(_) {
         if (!arguments.length) return _what;
         _what = _;
@@ -62,30 +67,49 @@ export function uiViewOnOSM(context) {
 
 
 /**
+ * Finds the most recently modified child entity of a given OSM feature.
+ * Works safely for nodes, ways, and relations (avoids infinite recursion).
+ *
  * @param {iD.Graph} graph
  * @param {iD.OsmEntity} feature
+ * @returns {{id: string, user?: string, timestamp?: string}}
  */
 uiViewOnOSM.findLastModifiedChild = (graph, feature) => {
+    const visited = new Set();
     let latest = feature;
 
-    /** @param {iD.OsmEntity} obj */
-    function recurseChilds(obj) {
-        if (obj.timestamp > latest.timestamp) {
+    function recurse(obj) {
+        if (!obj || !obj.id || visited.has(obj.id)) return;
+        visited.add(obj.id);
+
+        // Compare timestamps safely
+        const objTime = obj.timestamp ? new Date(obj.timestamp) : null;
+        const latestTime = latest.timestamp ? new Date(latest.timestamp) : null;
+        if (objTime && (!latestTime || objTime > latestTime)) {
             latest = obj;
         }
-        if (obj instanceof osmWay) {
-            obj.nodes
-                .map(id => graph.hasEntity(id))
-                .filter(Boolean)
-                .forEach(recurseChilds);
-        } else if (obj instanceof osmRelation) {
-            obj.members
-                .map(m => graph.hasEntity(m.id))
-                .filter(e => e instanceof osmWay || e instanceof osmRelation)
-                .forEach(recurseChilds);
+
+        // Traverse child entities
+        if (obj instanceof osmWay && Array.isArray(obj.nodes)) {
+            for (const nodeId of obj.nodes) {
+                const node = graph.hasEntity(nodeId);
+                if (node) recurse(node);
+            }
+        } else if (obj instanceof osmRelation && Array.isArray(obj.members)) {
+            for (const member of obj.members) {
+                const memberEntity = graph.hasEntity(member.id);
+                if (memberEntity && (memberEntity instanceof osmWay || memberEntity instanceof osmRelation || memberEntity instanceof osmEntity)) {
+                    recurse(memberEntity);
+                }
+            }
         }
     }
 
-    recurseChilds(feature);
-    return latest;
+    recurse(feature);
+
+    return {
+        id: latest.id,
+        user: latest.user,
+        timestamp: latest.timestamp
+    };
 };
