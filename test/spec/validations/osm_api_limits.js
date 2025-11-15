@@ -1,14 +1,21 @@
 describe('iD.validations.osm_api_limits', function () {
-    var context;
+    let context;
+
+    before(function() {
+        iD.services.osm = iD.serviceOsm;
+        iD.services.osm.maxWayNodes = () => 10;
+        iD.services.osm.on = () => undefined;
+    });
 
     beforeEach(function() {
-        iD.services.osm = {
-            maxWayNodes: () => 10,
-            on: () => undefined,
-        };
         context = iD.coreContext().assetPath('../dist/').init();
         context.surface = () => d3.select('#nop'); // mock with NOP
     });
+
+    after(function() {
+        delete iD.services.osm;
+    });
+
 
     function createWay(numNodes) {
         var nodes = [];
