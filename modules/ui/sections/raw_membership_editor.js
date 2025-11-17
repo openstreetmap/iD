@@ -51,6 +51,8 @@ export function uiSectionRawMembershipEditor(context) {
     var _maxMemberships = 1000;
     /** @type {Set<string>} relations that were added after this panel was opened */
     const recentlyAdded = new Set();
+    /** @type {Set<string>} all relations that had members added during this edit session */
+    const previouslySelected = new Set();
 
     function getSharedParentRelations() {
         var parents = [];
@@ -216,6 +218,7 @@ export function uiSectionRawMembershipEditor(context) {
 
         if (d.relation) {
             recentlyAdded.add(d.relation.id);
+            previouslySelected.add(d.relation.id);
             context.perform(
                 actionAddMembers(d.relation.id, _entityIDs, role),
                 t('operations.add_member.annotation', {
@@ -314,8 +317,22 @@ export function uiSectionRawMembershipEditor(context) {
             });
         } else {
 
+            // any relation that has previously been added will remain
+            // in the dropdown for the rest of the edit session.
+            for (const id of previouslySelected) {
+                const relation = context.hasEntity(id);
+                if (relation && relation.id !== entityID) {
+                    result.push({
+                        relation,
+                        value: baseDisplayValue(relation),
+                        display: baseDisplayLabel(relation)
+                    });
+                }
+            }
+
             context.history().intersects(context.map().extent()).forEach(function(entity) {
                 if (entity.type !== 'relation' || entity.id === entityID) return;
+                if (previouslySelected.has(entity.id)) return; // already added above
 
                 var value = baseDisplayValue(entity);
                 if (q && (value + ' ' + entity.id).toLowerCase().indexOf(q.toLowerCase()) === -1) return;

@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.38.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Keep recently edited relations in relation membership dropdown for entire session ([#11588], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -49,6 +50,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
+[#11588]: https://github.com/openstreetmap/iD/pull/11588
 
 # v2.37.3
 ##### 2025-10-31
