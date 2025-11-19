@@ -1,6 +1,6 @@
 import { actionDeleteRelation } from './delete_relation';
 import { actionDeleteWay } from './delete_way';
-import { osmIsInterestingTag } from '../osm/tags';
+import { osmIsInterestingTag, osmSummableTags } from '../osm/tags';
 import { osmJoinWays } from '../osm/multipolygon';
 import { geoPathIntersections } from '../geo';
 import { utilArrayGroupBy, utilArrayIdentical, utilArrayIntersection, utilOldestID } from '../util';
@@ -61,7 +61,12 @@ export function actionJoin(ids) {
                 graph = graph.replace(parent.replaceMember(way, survivor));
             });
 
-            survivor = survivor.mergeTags(way.tags);
+            const summedTags = {};
+            for (const key in way.tags) {
+                if (!canSumTags(key, way.tags, survivor.tags)) continue;
+                summedTags[key] = (+way.tags[key] + +survivor.tags[key]).toString();
+            }
+            survivor = survivor.mergeTags(way.tags, summedTags);
 
             graph = graph.replace(survivor);
             graph = actionDeleteWay(way.id)(graph);
@@ -133,7 +138,7 @@ export function actionJoin(ids) {
         var sortedParentRelations = function (id) {
             return graph.parentRelations(graph.entity(id))
                 .filter((rel) => !rel.isRestriction() && !rel.isConnectivity())
-                .sort((a, b) => a.id - b.id);
+                .sort((a, b) => a.id.localeCompare(b.id));
         };
         var relsA = sortedParentRelations(ids[0]);
         for (i = 1; i < ids.length; i++) {
@@ -181,6 +186,8 @@ export function actionJoin(ids) {
             for (var k in way.tags) {
                 if (!(k in tags)) {
                     tags[k] = way.tags[k];
+                } else if (canSumTags(k, tags, way.tags)) {
+                    tags[k] = (+tags[k] + +way.tags[k]).toString();
                 } else if (tags[k] && osmIsInterestingTag(k) && tags[k] !== way.tags[k]) {
                     conflicting = true;
                 }
@@ -195,6 +202,12 @@ export function actionJoin(ids) {
             return 'conflicting_tags';
         }
     };
+
+    function canSumTags(key, tagsA, tagsB) {
+        return osmSummableTags.has(key) &&
+            isFinite(tagsA[key] &&
+            isFinite(tagsB[key]));
+    }
 
 
     return action;

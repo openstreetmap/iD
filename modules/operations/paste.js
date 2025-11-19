@@ -1,4 +1,3 @@
-
 import { actionCopyEntities } from '../actions/copy_entities';
 import { actionMove } from '../actions/move';
 import { modeSelect } from '../modes/select';

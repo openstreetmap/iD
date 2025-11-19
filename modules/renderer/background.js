@@ -225,9 +225,7 @@ export function rendererBackground(context) {
       delete hash.offset;
     }
 
-    if (!window.mocha) {
-      window.location.replace('#' + utilQsString(hash, true));
-    }
+    window.history.replaceState(null, '', '#' + utilQsString(hash, true));
 
     let imageryUsed = [];
     let photoOverlaysUsed = [];

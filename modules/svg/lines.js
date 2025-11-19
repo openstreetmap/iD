@@ -10,6 +10,17 @@ import { osmEntity } from '../osm';
 import { utilArrayFlatten, utilArrayGroupBy } from '../util';
 import { utilDetect } from '../util/detect';
 
+/** @param {{ [key: string ]: string }} tags */
+function onewayArrowColour(tags) {
+    // the return value must be defined in ./defs.js
+    if (tags.highway === 'construction' && tags.bridge) return 'white';
+    if (tags.highway === 'pedestrian') return 'gray';
+    if (tags.railway && !tags.highway) return 'gray';
+    if (tags.aeroway === 'runway') return 'white';
+
+    return 'black';
+}
+
 export function svgLines(projection, context) {
     var detected = utilDetect();
 
@@ -247,34 +258,21 @@ export function svgLines(projection, context) {
         }
 
         ways = ways.filter(getPath);
-        var pathdata = utilArrayGroupBy(ways, function(way) { return way.layer(); });
+        const pathdata = utilArrayGroupBy(ways, (way) => Math.trunc(way.layer()));
 
         Object.keys(pathdata).forEach(function(k) {
             var v = pathdata[k];
             var onewayArr = v.filter(function(d) { return d.isOneWay(); });
             var onewaySegments = svgMarkerSegments(
-                projection, graph, 35,
-                function shouldReverse(entity) {
-                    return (
-                        entity.tags.oneway === '-1'
-                        || entity.tags.conveying === 'backward'
-                    );
-                },
-                function bothDirections(entity) {
-                    return (
-                        entity.tags.oneway === 'alternating'
-                        || entity.tags.oneway === 'reversible'
-                        || entity.tags.conveying === 'reversible'
-                    );
-                }
+                projection, graph, 36,
+                entity => entity.isOneWayBackwards(),
+                entity => entity.isBiDirectional(),
             );
             onewaydata[k] = utilArrayFlatten(onewayArr.map(onewaySegments));
 
             var sidedArr = v.filter(function(d) { return d.isSided(); });
             var sidedSegments = svgMarkerSegments(
-                projection, graph, 30,
-                function shouldReverse() { return false; },
-                function bothDirections() { return false; }
+                projection, graph, 30
             );
             sideddata[k] = utilArrayFlatten(sidedArr.map(sidedSegments));
         });
@@ -317,7 +315,10 @@ export function svgLines(projection, context) {
             layergroup.selectAll('g.line-stroke-highlighted')
                 .call(drawLineGroup, 'stroke', true);
 
-            addMarkers(layergroup, 'oneway', 'onewaygroup', onewaydata, 'url(#ideditor-oneway-marker)');
+            addMarkers(layergroup, 'oneway', 'onewaygroup', onewaydata, (d) => {
+                const category = onewayArrowColour(graph.entity(d.id).tags);
+                return `url(#ideditor-oneway-marker-${category})`;
+            });
             addMarkers(layergroup, 'sided', 'sidedgroup', sideddata,
                 function marker(d) {
                     var category = graph.entity(d.id).sidednessIdentifier();

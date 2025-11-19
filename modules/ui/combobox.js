@@ -84,6 +84,9 @@ export function uiCombobox(context, klass) {
             if (input.classed('disabled')) return;
             _tDown = +new Date();
 
+            // mousedown should never bubble up (see #10481)
+            d3_event.stopPropagation();
+
             // clear selection
             var start = input.property('selectionStart');
             var end = input.property('selectionEnd');
@@ -154,18 +157,8 @@ export function uiCombobox(context, klass) {
                 .on('scroll.combo-scroll', render, true);
         }
 
-
         function hide() {
-            if (_comboHideTimerID) {
-                window.clearTimeout(_comboHideTimerID);
-                _comboHideTimerID = undefined;
-            }
-
-            container.selectAll('.combobox')
-                .remove();
-
-            container
-                .on('scroll.combo-scroll', null);
+            _hide(container);
         }
 
 
@@ -515,7 +508,22 @@ export function uiCombobox(context, klass) {
 }
 
 
+function _hide(container) {
+    if (_comboHideTimerID) {
+        window.clearTimeout(_comboHideTimerID);
+        _comboHideTimerID = undefined;
+    }
+
+    container.selectAll('.combobox')
+        .remove();
+
+    container
+        .on('scroll.combo-scroll', null);
+}
+
+
 uiCombobox.off = function(input, context) {
+    _hide(context.container());
     input
         .on('focus.combo-input', null)
         .on('blur.combo-input', null)

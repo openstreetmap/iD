@@ -5,6 +5,9 @@ describe('iD.validations.mismatched_geometry', function () {
         _savedAreaKeys = iD.osmAreaKeys;
         context = iD.coreContext().init();
         iD.fileFetcher.cache().preset_presets = {
+            'Line': { geometry: ['line'], fallback: true, tags: {} },
+            'Area': { geometry: ['area'], fallback: true, tags: { area: 'yes' } },
+            'Building': { geometry: ['area'], tags: { building: '*' } },
             library: {
                 tags: { amenity: 'library' },
                 geometry: ['point', 'vertex', 'line', 'area'],
@@ -98,7 +101,8 @@ describe('iD.validations.mismatched_geometry', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('flags open way with area tag', function() {
+    it('flags open way with area tag', async () => {
+        await iD.presetManager.ensureLoaded(true);
         iD.osmSetAreaKeys({ building: {} });
         createOpenWay({ building: 'yes' });
         var issues = validate();
@@ -121,6 +125,18 @@ describe('iD.validations.mismatched_geometry', function () {
         expect(issue.severity).to.eql('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
         expect(issue.entityIds[0]).to.eql('w-1');
+    });
+
+    it('does not flag cases whether the entity matches the generic preset, regardless of geometry', async () => {
+        // in this test case, waterway=dam is allowed as an area,
+        // and there is no preset for waterway=security_lock, so it
+        // uses to the fallback preset for all geometries.
+        await iD.presetManager.ensureLoaded(true);
+        iD.osmSetAreaKeys({ waterway: { dam: true } });
+
+        createOpenWay({ 'disused:waterway': 'security_lock' });
+        const issues = validate();
+        expect(issues).to.have.lengthOf(0);
     });
 
     it('does not error if the best preset is limited to certain regions', async () => {

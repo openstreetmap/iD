@@ -1,3 +1,5 @@
+import { presetManager } from '../presets';
+
 /*
 Order the nodes of a way in reverse order and reverse any direction dependent tags
 other than `oneway`. (We assume that correcting a backwards oneway is the primary
@@ -18,10 +20,8 @@ References:
     http://wiki.openstreetmap.org/wiki/Key:traffic_sign#On_a_way_or_area
 */
 export function actionReverse(entityID, options) {
-    var ignoreKey = /^.*(_|:)?(description|name|note|website|ref|source|comment|watch|attribution)(_|:)?/;
     var numeric = /^([+\-]?)(?=[\d.])/;
     var directionKey = /direction$/;
-    var turn_lanes = /^turn:lanes:?/;
     var keyReplacements = [
         [/:right$/, ':left'],
         [/:left$/, ':right'],
@@ -42,13 +42,27 @@ export function actionReverse(entityID, options) {
         forwards: 'backward',
         backwards: 'forward',
     };
-    // tags whose values should not be reversed when certain other tags are also present
-    // https://github.com/openstreetmap/iD/issues/10128
-    const valueReplacementsExceptions = {
-        'side': [
-            {highway: 'cyclist_waiting_aid'}
-        ]
-    };
+    // For some tags, keys or values like left/right/… don't refer to
+    // way direction and thus should not be reversed.
+    const keysToKeepUnchanged = [
+        // https://github.com/openstreetmap/iD/issues/10736
+        /^red_turn:(right|left):?/
+    ];
+    // If a key matches the key regex and any of the provided context
+    // tag sets, it will not be reversed.
+    const keyValuesToKeepUnchanged = [{
+            keyRegex: /^.*(_|:)?(description|name|note|website|ref|source|comment|watch|attribution)(_|:)?/,
+            prerequisiteTags: [{}]
+        }, {
+            // Turn lanes are left/right to key (not way) direction - #5674
+            keyRegex: /^turn:lanes:?/,
+            prerequisiteTags: [{}]
+        }, {
+            // https://github.com/openstreetmap/iD/issues/10128
+            keyRegex: /^side$/,
+            prerequisiteTags: [{highway: 'cyclist_waiting_aid'}]
+        }
+    ];
     var roleReplacements = {
         forward: 'backward',
         backward: 'forward',
@@ -82,6 +96,9 @@ export function actionReverse(entityID, options) {
 
 
     function reverseKey(key) {
+        if (keysToKeepUnchanged.some(keyRegex => keyRegex.test(key))) {
+            return key;
+        }
         for (var i = 0; i < keyReplacements.length; ++i) {
             var replacement = keyReplacements[i];
             if (replacement[0].test(key)) {
@@ -93,13 +110,17 @@ export function actionReverse(entityID, options) {
 
 
     function reverseValue(key, value, includeAbsolute, allTags) {
-        if (ignoreKey.test(key)) return value;
+        for (let { keyRegex, prerequisiteTags } of keyValuesToKeepUnchanged) {
+            if (keyRegex.test(key) && prerequisiteTags.some(expectedTags =>
+                Object.entries(expectedTags).every(([k, v]) => {
+                    return allTags[k] && (v === '*' || allTags[k] === v);
+                })
+            )) {
+                return value;
+            }
+        }
 
-        // Turn lanes are left/right to key (not way) direction - #5674
-        if (turn_lanes.test(key)) {
-            return value;
-
-        } else if (key === 'incline' && numeric.test(value)) {
+        if (key === 'incline' && numeric.test(value)) {
             return value.replace(numeric, function(_, sign) { return sign === '-' ? '' : '-'; });
 
         } else if (options && options.reverseOneway && key === 'oneway') {
@@ -122,18 +143,30 @@ export function actionReverse(entityID, options) {
                 }
             }).join(';');
         }
-
-        if (valueReplacementsExceptions[key] && valueReplacementsExceptions[key].some(exceptionTags =>
-            Object.keys(exceptionTags).every(k => {
-                const v = exceptionTags[k];
-                return allTags[k] && (v === '*' || allTags[k] === v);
-            })
-        )) {
-            // don't reverse, for example, side=left/right on highway=cyclist_waiting_aid features
-            // see https://github.com/openstreetmap/iD/issues/10128
-            return value;
-        }
         return valueReplacements[value] || value;
+    }
+
+    /** @returns {false | string} - returns false or the name of the direction key */
+    function supportsDirectionField(node, graph) {
+        const preset = presetManager.match(node, graph);
+        const loc = node.extent(graph).center();
+        const geometry = node.geometry(graph);
+
+        const fields = [...preset.fields(loc), ...preset.moreFields(loc)];
+
+        const maybeDirectionField = fields.find(field => {
+            const isDirectionField = field.key && (field.key === 'direction' || field.key.endsWith(':direction'));
+            // some direction fields are for angles, so ensure that the
+            // direction field on this preset is not a numeric field.
+            const isRelativeDirection = field.type === 'combo';
+
+            // the field's geometry might be restricted to a subset of the preset's geometry
+            const isGeometryValid = !field.geometry || field.geometry.includes(geometry);
+
+            return isDirectionField && isRelativeDirection && isGeometryValid;
+        });
+
+        return maybeDirectionField?.key || false;
     }
 
 
@@ -143,10 +176,26 @@ export function actionReverse(entityID, options) {
             var node = graph.hasEntity(nodeIDs[i]);
             if (!node || !Object.keys(node.tags).length) continue;
 
+            let anyChanges = false;
             var tags = {};
             for (var key in node.tags) {
-                tags[reverseKey(key)] = reverseValue(key, node.tags[key], node.id === entityID, node.tags);
+                const value = node.tags[key];
+
+                const newKey = reverseKey(key);
+                const newValue = reverseValue(key, value, node.id === entityID, node.tags);
+                tags[newKey] = newValue;
+                if (key !== newKey || value !== newValue) {
+                    anyChanges = true;
+                }
             }
+
+            // for features whose presets have a direction field,
+            // the first flip just adds the direction tag.
+            const directionKey = supportsDirectionField(node, graph);
+            if (node.id === entityID && !anyChanges && directionKey) {
+                tags[directionKey] = 'forward';
+            }
+
             graph = graph.replace(node.update({tags: tags}));
         }
         return graph;
@@ -196,6 +245,13 @@ export function actionReverse(entityID, options) {
                 return false;
             }
         }
+
+
+        // exception for features whose presets have a direction
+        // field - they're flipable even if they don't have a
+        // direction tag.
+        if (supportsDirectionField(entity, graph)) return false;
+
         return 'nondirectional_node';
     };
 

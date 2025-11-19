@@ -52,13 +52,13 @@ function setNsiSources() {
   const vMinor = `${v.major}.${v.minor}`;
   const cdn = nsiCdnUrl.replace('{version}', vMinor);
   const sources = {
-    'nsi_data': cdn + 'dist/nsi.min.json',
-    'nsi_dissolved': cdn + 'dist/dissolved.min.json',
-    'nsi_features': cdn + 'dist/featureCollection.min.json',
-    'nsi_generics': cdn + 'dist/genericWords.min.json',
+    'nsi_data': cdn + 'dist/json/nsi.min.json',
+    'nsi_dissolved': cdn + 'dist/wikidata/dissolved.min.json',
+    'nsi_features': cdn + 'dist/json/featureCollection.min.json',
+    'nsi_generics': cdn + 'dist/json/genericWords.min.json',
     'nsi_presets': cdn + 'dist/presets/nsi-id-presets.min.json',
-    'nsi_replacements': cdn + 'dist/replacements.min.json',
-    'nsi_trees': cdn + 'dist/trees.min.json'
+    'nsi_replacements': cdn + 'dist/json/replacements.min.json',
+    'nsi_trees': cdn + 'dist/json/trees.min.json'
   };
 
   let fileMap = fileFetcher.fileMap();
@@ -581,7 +581,7 @@ function _upgradeTags(tags, loc) {
 
     // These tags can be toplevel tags -or- attributes - so we generally want to preserve existing values - #8615
     // We'll only _replace_ the tag value if this tag is the toplevel/defining tag for the matched item (`k`)
-    ['building', 'emergency', 'internet_access', 'takeaway'].forEach(osmkey => {
+    ['building', 'emergency', 'internet_access', 'opening_hours', 'takeaway'].forEach(osmkey => {
       if (k !== osmkey) preserveTags.push(`^${osmkey}$`);
     });
 

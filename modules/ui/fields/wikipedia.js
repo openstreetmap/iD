@@ -113,6 +113,7 @@ export function uiFieldWikipedia(field, context) {
     _titleInput = _titleInput.enter()
       .append('input')
       .attr('type', 'text')
+      .attr('dir', 'auto')
       .attr('class', 'wiki-title')
       .attr('id', field.domId)
       .call(utilNoAuto)
@@ -204,7 +205,8 @@ export function uiFieldWikipedia(field, context) {
         value += '#' + anchor.replace(/_/g, ' ');
       }
       value = value.slice(0, 1).toUpperCase() + value.slice(1);
-      utilGetSetValue(_langInput, nativeLangName);
+      utilGetSetValue(_langInput, nativeLangName)
+        .attr('lang', langInfo[2]);
       utilGetSetValue(_titleInput, value);
     }
 
@@ -245,7 +247,7 @@ export function uiFieldWikipedia(field, context) {
       if (!actions.length) return;
 
       // Coalesce the update of wikidata tag into the previous tag change
-      context.overwrite(
+      context.replace(
         function actionUpdateWikidataTags(graph) {
           actions.forEach(function(action) {
             graph = action(graph);
@@ -281,6 +283,7 @@ export function uiFieldWikipedia(field, context) {
     if (tagLangInfo) {
       const nativeLangName = tagLangInfo[1];
       utilGetSetValue(_langInput, nativeLangName);
+      _titleInput.attr('lang', tagLangInfo[2]); // for CJK and other display issues
       utilGetSetValue(_titleInput, tagArticleTitle + (anchor ? ('#' + anchor) : ''));
       _wikiURL = `${scheme}${tagLang}.${domain}/wiki/${wiki.encodePath(tagArticleTitle, anchor)}`;
     } else {

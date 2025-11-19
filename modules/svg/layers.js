@@ -24,7 +24,7 @@ import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
 
 
 export function svgLayers(projection, context) {
-    var dispatch = d3_dispatch('change');
+    var dispatch = d3_dispatch('change', 'photoDatesChanged');
     var svg = d3_select(null);
     var _layers = [
         { id: 'osm', layer: svgOsm(projection, context, dispatch) },

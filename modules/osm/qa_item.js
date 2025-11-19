@@ -1,4 +1,3 @@
-
 export class QAItem {
   constructor(loc, service, itemType, id, props) {
     // Store required properties

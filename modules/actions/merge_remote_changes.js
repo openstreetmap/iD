@@ -1,6 +1,6 @@
 import deepEqual from 'fast-deep-equal';
 import { diff3Merge } from 'node-diff3';
-import { escape } from 'lodash';
+import { escape } from 'lodash-es';
 
 import { t } from '../core/localizer';
 import { actionDeleteMultiple } from './delete_multiple';

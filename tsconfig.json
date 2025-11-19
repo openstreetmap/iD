@@ -7,9 +7,10 @@
         "esModuleInterop": true,
         "lib": ["esnext", "dom"],
         "target": "esnext",
-        "module": "nodenext",
-        "moduleResolution": "nodenext",
-        "types": ["vitest/globals"]
+        "module": "preserve",
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "types": ["vitest/globals", "vitest/jsdom"]
     },
     "include": ["modules", "test"]
 }

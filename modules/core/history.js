@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { easeLinear as d3_easeLinear } from 'd3-ease';
 import { select as d3_select } from 'd3-selection';
 
-import { prefs } from './preferences';
+import { asyncPrefs, prefs } from './preferences';
 import { coreDifference } from './difference';
 import { coreGraph } from './graph';
 import { coreTree } from './tree';
@@ -19,7 +19,7 @@ export function coreHistory(context) {
     var lock = utilSessionMutex('lock');
 
     // restorable if iD not open in another window/tab and a saved history exists in localStorage
-    var _hasUnresolvedRestorableChanges = lock.lock() && !!prefs(getKey('saved_history'));
+    var _hasUnresolvedRestorableChanges = lock.lock() && !!prefs('has_saved_history');
 
     var duration = 150;
     var _imageryUsed = [];
@@ -102,12 +102,6 @@ export function coreHistory(context) {
     }
 
 
-    // iD uses namespaced keys so multiple installations do not conflict
-    function getKey(n) {
-        return 'iD_' + window.location.origin + '_' + n;
-    }
-
-
     var history = {
 
         graph: function() {
@@ -148,7 +142,8 @@ export function coreHistory(context) {
 
             if (transitionable) {
                 var origArguments = arguments;
-                d3_select(document)
+                return new Promise(resolve => {
+                  d3_select(document)
                     .transition('history.perform')
                     .duration(duration)
                     .ease(d3_easeLinear)
@@ -158,11 +153,12 @@ export function coreHistory(context) {
                         };
                     })
                     .on('start', function() {
-                        _perform([action0], 0);
+                        resolve(_perform([action0], 0));
                     })
                     .on('end interrupt', function() {
-                        _overwrite(origArguments, 1);
+                        resolve(_overwrite(origArguments, 1));
                     });
+                });
 
             } else {
                 return _perform(arguments);
@@ -172,14 +168,7 @@ export function coreHistory(context) {
 
         replace: function() {
             d3_select(document).interrupt('history.perform');
-            return _replace(arguments, 1);
-        },
-
-
-        // Same as calling pop and then perform
-        overwrite: function() {
-            d3_select(document).interrupt('history.perform');
-            return _overwrite(arguments, 1);
+            return _replace(arguments);
         },
 
 
@@ -362,6 +351,7 @@ export function coreHistory(context) {
                 _tree = coreTree(_stack[0].graph);
                 _checkpoints = {};
             }
+            _pausedGraph = null;
             dispatch.call('reset');
             dispatch.call('change');
             return history;
@@ -504,7 +494,7 @@ export function coreHistory(context) {
                 return x;
             });
 
-            return JSON.stringify({
+            return {
                 version: 3,
                 entities: Object.values(allEntities),
                 baseEntities: Object.values(baseEntities),
@@ -513,12 +503,11 @@ export function coreHistory(context) {
                 index: _index,
                 // note the time the changes were saved
                 timestamp: (new Date()).getTime()
-            });
+            };
         },
 
 
-        fromJSON: function(json, loadChildNodes) {
-            var h = JSON.parse(json);
+        fromJSON: function(h, loadChildNodes) {
             var loadComplete = true;
 
             osmEntity.id.next = h.nextIDs;
@@ -659,20 +648,30 @@ export function coreHistory(context) {
             if (lock.locked() &&
                 // don't overwrite existing, unresolved changes
                 !_hasUnresolvedRestorableChanges) {
-                const success = prefs(getKey('saved_history'), history.toJSON() || null);
 
-                if (!success) dispatch.call('storage_error');
+                const historyData = history.toJSON();
+                if (!historyData) {
+                    asyncPrefs.del('saved_history')
+                        .then(() => prefs('has_saved_history', null))
+                        .catch(() => dispatch.call('storage_error'));
+                } else {
+                    asyncPrefs.set('saved_history', history.toJSON())
+                        .then(() => prefs('has_saved_history', true))
+                        .catch(() => dispatch.call('storage_error'));
+                }
             }
             return history;
         },
 
 
-        // delete the history version saved in localStorage
+        // delete the history version saved in IndexedDB
         clearSaved: function() {
             context.debouncedSave.cancel();
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
-                prefs(getKey('saved_history'), null);
+
+                asyncPrefs.del('saved_history')
+                    .then(() => prefs('has_saved_history', null));
 
                 // clear the changeset metadata associated with the saved history
                 prefs('comment', null);
@@ -683,30 +682,35 @@ export function coreHistory(context) {
         },
 
 
-        savedHistoryJSON: function() {
-            return prefs(getKey('saved_history'));
-        },
-
-
         hasRestorableChanges: function() {
             return _hasUnresolvedRestorableChanges;
         },
 
 
-        // load history from a version stored in localStorage
-        restore: function() {
+        restore: async function() {
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
-                var json = this.savedHistoryJSON();
+                var json = await asyncPrefs.get('saved_history');
                 if (json) history.fromJSON(json, true);
             }
         },
 
 
-        _getKey: getKey
+        migrateHistoryData: async function() {
+            const value = JSON.parse(prefs(this._getLegacyKey('saved_history')));
 
+            if (value !== null) {
+                await asyncPrefs.set('saved_history', value);
+                prefs('has_saved_history', true);
+                prefs(this._getLegacyKey('saved_history'), null);
+            }
+        },
+
+
+        // (legacy, was used for local-storage based history)
+        // iD uses namespaced keys so multiple installations do not conflict
+        _getLegacyKey: n => 'iD_' + window.location.origin + '_' + n,
     };
-
 
     history.reset();
 

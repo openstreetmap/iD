@@ -123,7 +123,7 @@ export function uiSectionChanges(context) {
             .call(t.append('commit.download_changes'));
 
 
-        function mouseover(d) {
+        function mouseover(d3_event, d) {
             if (d.entity) {
                 context.surface().selectAll(
                     utilEntityOrMemberSelector([d.entity.id], context.graph())

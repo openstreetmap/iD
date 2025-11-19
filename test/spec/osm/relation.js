@@ -262,6 +262,32 @@ describe('iD.osmRelation', function () {
             });
             expect(r.hasFromViaTo()).to.be.false;
         });
+
+        it('returns true if the `intersection` role is used instead of `via` for destination signs', () => {
+            const r = iD.osmRelation({
+                id: 'r',
+                tags: { type: 'destination_sign' },
+                members: [
+                    { role: 'from', id: 'f', type: 'way' },
+                    { role: 'intersection', id: 'v', type: 'node' },
+                    { role: 'to', id: 't', type: 'way' },
+                ]
+            });
+            expect(r.hasFromViaTo()).to.be.true;
+        });
+
+        it('returns false if the `intersection` role is used on anything other than a destination sign', () => {
+            const r = iD.osmRelation({
+                id: 'r',
+                tags: { type: 'restriction' },
+                members: [
+                    { role: 'from', id: 'f', type: 'way' },
+                    { role: 'intersection', id: 'v', type: 'node' },
+                    { role: 'to', id: 't', type: 'way' },
+                ]
+            });
+            expect(r.hasFromViaTo()).to.be.false;
+        });
     });
 
     describe('#isRestriction', function () {

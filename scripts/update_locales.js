@@ -1,15 +1,15 @@
 /* eslint-disable no-console */
 /* Downloads the latest translations from Transifex */
-const chalk = require('chalk');
-const fs = require('fs');
-const YAML = require('js-yaml');
-const transifexApi = require('@transifex/api').transifexApi;
+import fs from 'node:fs';
+import { styleText } from 'node:util';
+import YAML from 'js-yaml';
+import { transifexApi } from '@transifex/api';
+import * as languageNames from './language_names.js';
 
 const resourceIds = ['core', 'imagery', 'community'];
 const reviewedOnlyLangs = ['vi'];
 const outdir = 'dist/locales/';
 
-const languageNames = require('./language_names.js');
 
 const transifexOrganization = 'openstreetmap';
 const transifexProject = 'id-editor';
@@ -21,7 +21,7 @@ if (process.env.transifex_password) {
   transifexApi.setup({ auth: process.env.transifex_password });
 } else {
   // Credentials can be stored in transifex.auth as a json object. This file is gitignored.
-  // You must use an API token for authentication: You can generate one at https://www.transifex.com/user/settings/api/.
+  // You must use an API token for authentication: You can generate one at https://app.transifex.com/user/settings/api/.
   // {
   //   "password": "<api_key>"
   // }
@@ -300,7 +300,7 @@ function checkForDuplicateShortcuts(code, coreStrings) {
       let shortcut = modifier + rep;
       if (usedShortcuts[shortcut] && usedShortcuts[shortcut] !== shortcutPathString) {
         let message = code + ': duplicate shortcut "' + shortcut + '" for "' + usedShortcuts[shortcut] + '" and "' + shortcutPathString + '"';
-        console.warn(chalk.yellow(message));
+        console.warn(styleText('yellow', message));
       } else {
         usedShortcuts[shortcut] = shortcutPathString;
       }

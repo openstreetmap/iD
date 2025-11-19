@@ -5,12 +5,16 @@ import { t, localizer } from '../core/localizer';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
-export function validationSuspiciousName() {
+export function validationSuspiciousName(context) {
   const type = 'suspicious_name';
   const keysToTestForGenericValues = [
     'aerialway', 'aeroway', 'amenity', 'building', 'craft', 'highway',
     'leisure', 'railway', 'man_made', 'office', 'shop', 'tourism', 'waterway'
   ];
+  const ignoredPresets = new Set([
+    'amenity/place_of_worship/christian/jehovahs_witness',
+    '__test__ignored_preset' // for unit tests
+  ]);
   let _waitingForNsi = false;
 
 
@@ -45,9 +49,19 @@ export function validationSuspiciousName() {
     return false;
   }
 
-  function isGenericName(name, tags) {
+  /** @param {string} name */
+  function nameMatchesPresetName(name, preset) {
+    if (!preset) return false;
+    if (ignoredPresets.has(preset.id)) return false;
+
     name = name.toLowerCase();
-    return nameMatchesRawTag(name, tags) || isGenericMatchInNsi(tags);
+    return name === preset.name().toLowerCase() || preset.aliases().some(alias => name === alias.toLowerCase());
+  }
+
+  /** @param {string} name */
+  function isGenericName(name, tags, preset) {
+    name = name.toLowerCase();
+    return nameMatchesRawTag(name, tags) || nameMatchesPresetName(name, preset) || isGenericMatchInNsi(tags);
   }
 
   function makeGenericNameIssue(entityId, nameKey, genericName, langCode) {
@@ -105,6 +119,8 @@ export function validationSuspiciousName() {
 
     let issues = [];
 
+    const preset = presetManager.match(entity, context.graph());
+
     for (let key in tags) {
       const m = key.match(/^name(?:(?::)([a-zA-Z_-]+))?$/);
       if (!m) continue;
@@ -112,7 +128,7 @@ export function validationSuspiciousName() {
       const langCode = m.length >= 2 ? m[1] : null;
       const value = tags[key];
 
-      if (isGenericName(value, tags)) {
+      if (isGenericName(value, tags, preset)) {
         issues.provisional = _waitingForNsi;  // retry later if we are waiting on NSI to finish loading
         issues.push(makeGenericNameIssue(entity.id, key, value, langCode));
       }

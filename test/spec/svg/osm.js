@@ -20,9 +20,9 @@ describe('iD.svgOsm', function () {
         container.call(iD.svgOsm());
         var layers = container.selectAll('g.points-group').nodes();
         expect(layers.length).to.eql(4);
-        expect(d3.select(layers[0]).classed('points')).to.be.true;
+        expect(d3.select(layers[0]).classed('vertices')).to.be.true;
         expect(d3.select(layers[1]).classed('midpoints')).to.be.true;
-        expect(d3.select(layers[2]).classed('vertices')).to.be.true;
+        expect(d3.select(layers[2]).classed('points')).to.be.true;
         expect(d3.select(layers[3]).classed('turns')).to.be.true;
     });
 

@@ -1,5 +1,8 @@
-const fs = require('fs');
-const prettyStringify = require('json-stringify-pretty-compact');
+import fs from 'node:fs';
+import { createRequire } from 'node:module';
+import prettyStringify from 'json-stringify-pretty-compact';
+
+const require = createRequire(import.meta.url);
 
 /** @type {import("geojson").FeatureCollection} */
 const sources = JSON.parse(

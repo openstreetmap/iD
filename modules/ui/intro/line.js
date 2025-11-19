@@ -208,7 +208,7 @@ export function uiIntroLine(context, reveal) {
             helpHtml('intro.lines.finish_line_' + (context.lastPointerType() === 'mouse' ? 'click' : 'tap')) +
             helpHtml('intro.lines.finish_road');
 
-        reveal('.surface', continueLineText);
+        reveal('.main-map .surface', continueLineText);
 
         context.on('enter.intro', function(mode) {
             if (mode.id === 'draw-line') {
@@ -354,7 +354,7 @@ export function uiIntroLine(context, reveal) {
         context.history().checkpoint('doneAddLine');
 
         timeout(function() {
-            reveal('.surface', helpHtml('intro.lines.did_name_road'), {
+            reveal('.main-map .surface', helpHtml('intro.lines.did_name_road'), {
                 buttonText: t.html('intro.ok'),
                 buttonCallback: function() { continueTo(updateLine); }
             });

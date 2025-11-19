@@ -59,20 +59,31 @@ export function svgPassiveVertex(node, graph, activeID) {
 }
 
 
-export function svgMarkerSegments(projection, graph, dt,
-                                  shouldReverse,
-                                  bothDirections) {
+/**
+ *
+ * @param {iD.Projection} projection
+ * @param {iD.Graph} graph
+ * @param {Number} dt spacing between segments
+ * @param {Function<Boolean>} [shouldReverse]
+ * @param {Function<Boolean>} [bothDirections]
+ */
+export function svgMarkerSegments(projection, graph, dt, shouldReverse = () => false, bothDirections = () => false) {
+    /**
+     * @param {iD.OsmWay} entity
+     * @returns {[{id: String, d: String}]} list of svg path segments corres
+     */
     return function(entity) {
-        var i = 0;
-        var offset = dt;
-        var segments = [];
-        var clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream;
-        var coordinates = graph.childNodes(entity).map(function(n) { return n.loc; });
-        var a, b;
+        let i = 0;
+        let offset = dt / 2;
+        const segments = [];
 
-        if (shouldReverse(entity)) {
-            coordinates.reverse();
-        }
+        const clip = paddedClipExtent(projection);
+
+        const coordinates = graph.childNodes(entity).map(function(n) { return n.loc; });
+        let a, b;
+
+        const _shouldReverse = shouldReverse(entity);
+        const _bothDirections = bothDirections(entity);
 
         d3_geoStream({
             type: 'LineString',
@@ -84,19 +95,19 @@ export function svgMarkerSegments(projection, graph, dt,
                 b = [x, y];
 
                 if (a) {
-                    var span = geoVecLength(a, b) - offset;
+                    let span = geoVecLength(a, b) - offset;
 
                     if (span >= 0) {
-                        var heading = geoVecAngle(a, b);
-                        var dx = dt * Math.cos(heading);
-                        var dy = dt * Math.sin(heading);
-                        var p = [
+                        const heading = geoVecAngle(a, b);
+                        const dx = dt * Math.cos(heading);
+                        const dy = dt * Math.sin(heading);
+                        let p = [
                             a[0] + offset * Math.cos(heading),
                             a[1] + offset * Math.sin(heading)
                         ];
 
                         // gather coordinates
-                        var coord = [a, p];
+                        const coord = [a, p];
                         for (span -= dt; span >= 0; span -= dt) {
                             p = geoVecAdd(p, [dx, dy]);
                             coord.push(p);
@@ -104,17 +115,18 @@ export function svgMarkerSegments(projection, graph, dt,
                         coord.push(b);
 
                         // generate svg paths
-                        var segment = '';
-                        var j;
+                        let segment = '';
 
-                        for (j = 0; j < coord.length; j++) {
-                            segment += (j === 0 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
+                        if (!_shouldReverse || _bothDirections) {
+                            for (let j = 0; j < coord.length; j++) {
+                                segment += (j === 0 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
+                            }
+                            segments.push({ id: entity.id, index: i++, d: segment });
                         }
-                        segments.push({ id: entity.id, index: i++, d: segment });
 
-                        if (bothDirections(entity)) {
+                        if (_shouldReverse || _bothDirections) {
                             segment = '';
-                            for (j = coord.length - 1; j >= 0; j--) {
+                            for (let j = coord.length - 1; j >= 0; j--) {
                                 segment += (j === coord.length - 1 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
                             }
                             segments.push({ id: entity.id, index: i++, d: segment });
@@ -133,30 +145,19 @@ export function svgMarkerSegments(projection, graph, dt,
 }
 
 
+/**
+ * @param {iD.Projection} projection
+ * @param {iD.Graph} graph
+ * @param {Boolean} isArea
+ */
 export function svgPath(projection, graph, isArea) {
-
-    // Explanation of magic numbers:
-    // "padding" here allows space for strokes to extend beyond the viewport,
-    // so that the stroke isn't drawn along the edge of the viewport when
-    // the shape is clipped.
-    //
-    // When drawing lines, pad viewport by 5px.
-    // When drawing areas, pad viewport by 65px in each direction to allow
-    // for 60px area fill stroke (see ".fill-partial path.fill" css rule)
-
-    var cache = {};
-    var padding = isArea ? 65 : 5;
-    var viewport = projection.clipExtent();
-    var paddedExtent = [
-        [viewport[0][0] - padding, viewport[0][1] - padding],
-        [viewport[1][0] + padding, viewport[1][1] + padding]
-    ];
-    var clip = d3_geoIdentity().clipExtent(paddedExtent).stream;
-    var project = projection.stream;
-    var path = d3_geoPath()
+    const cache = {};
+    const project = projection.stream;
+    const clip = paddedClipExtent(projection, isArea);
+    const path = d3_geoPath()
         .projection({stream: function(output) { return project(clip(output)); }});
 
-    var svgpath = function(entity) {
+    const svgpath = function(entity) {
         if (entity.id in cache) {
             return cache[entity.id];
         } else {
@@ -282,4 +283,30 @@ export function svgSegmentWay(way, graph, activeID) {
             });
         }
     }
+}
+
+
+/**
+ * Returns a d3 projection stream that clips the given geometries to an
+ * extent that is slightly padded.
+ *
+ * Explanation of magic numbers:
+ * "padding" here allows space for strokes to extend beyond the viewport,
+ * so that the stroke isn't drawn along the edge of the viewport when
+ * the shape is clipped.
+ * When drawing lines, pad viewport by 5px.
+ * When drawing areas, pad viewport by 65px in each direction to allow
+ * for 60px area fill stroke (see ".fill-partial path.fill" css rule)
+ *
+ * @param {import('../geo/raw_mercator').Projection} projection
+ * @param {Boolean} isArea
+ */
+function paddedClipExtent(projection, isArea = false) {
+    var padding = isArea ? 65 : 5;
+    var viewport = projection.clipExtent();
+    var paddedExtent = [
+        [viewport[0][0] - padding, viewport[0][1] - padding],
+        [viewport[1][0] + padding, viewport[1][1] + padding]
+    ];
+    return d3_geoIdentity().clipExtent(paddedExtent).stream;
 }

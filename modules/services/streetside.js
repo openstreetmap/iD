@@ -15,8 +15,10 @@ import {
 
 import { utilAesDecrypt, utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
 
+import { services } from './';
 
-const streetsideApi = 'https://dev.virtualearth.net/REST/v1/Imagery/MetaData/Streetside?mapArea={bbox}&key={key}&count={count}';
+
+const streetsideApi = 'https://dev.virtualearth.net/REST/v1/Imagery/MetaData/Streetside?mapArea={bbox}&key={key}&count={count}&uriScheme=https';
 const maxResults = 500;
 const bubbleAppKey = utilAesDecrypt('5c875730b09c6b422433e807e1ff060b6536c791dbfffcffc4c6b18a1bdba1f14593d151adb50e19e1be1ab19aef813bf135d0f103475e5c724dec94389e45d0');
 const pannellumViewerCSS = 'pannellum/pannellum.css';
@@ -120,11 +122,11 @@ function loadNextTilePage(which, url, tile) {
         bubble.lat || bubble.latitude
       ];
       const d = {
+        service: 'photo',
         loc: loc,
         key: bubbleId,
-        imageUrl: bubble.imageUrl.replace('{subdomain}',
-          bubble.imageUrlSubdomains[0]
-        ),
+        imageUrl: bubble.imageUrl
+          .replace('{subdomain}', bubble.imageUrlSubdomains[0]),
         ca: bubble.he || bubble.heading,
         captured_at: bubble.vintageEnd,
         captured_by: 'microsoft',
@@ -644,18 +646,18 @@ export default {
    * showViewer()
    */
   showViewer: function(context) {
-
-    let wrap = context.container().select('.photoviewer')
-      .classed('hide', false);
-
-    let isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
+    const wrap = context.container().select('.photoviewer');
+    const isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
 
     if (isHidden) {
+      for (const service of Object.values(services)) {
+        if (service === this) continue;
+        if (typeof service.hideViewer === 'function') {
+          service.hideViewer(context);
+        }
+      }
       wrap
-        .selectAll('.photo-wrapper:not(.ms-wrapper)')
-        .classed('hide', true);
-
-      wrap
+        .classed('hide', false)
         .selectAll('.photo-wrapper.ms-wrapper')
         .classed('hide', false);
     }
@@ -905,15 +907,13 @@ export default {
 
 
   updateUrlImage: function(imageKey) {
-      if (!window.mocha) {
-          var hash = utilStringQs(window.location.hash);
-          if (imageKey) {
-              hash.photo = 'streetside/' + imageKey;
-          } else {
-              delete hash.photo;
-          }
-          window.location.replace('#' + utilQsString(hash, true));
+      const hash = utilStringQs(window.location.hash);
+      if (imageKey) {
+          hash.photo = 'streetside/' + imageKey;
+      } else {
+          delete hash.photo;
       }
+      window.history.replaceState(null, '', '#' + utilQsString(hash, true));
   },
 
 
