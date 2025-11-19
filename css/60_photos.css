@@ -415,12 +415,6 @@ label.panoramax-hd {
     display: block !important;
 }
 
-#ideditor-viewer-mapilio-simple img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    overflow: hidden
-} 
 
 /* Streetside Viewer (pannellum) */
 .ms-wrapper .photo-attribution {
