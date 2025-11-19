@@ -368,9 +368,8 @@ export default {
         getUserData(d.created_by_id).then((username) => {
           if (username) {
             attribution
-              .append('a')
+              .append('span')
               .attr('class', 'captured_by')
-              .attr('target', '_blank')
               .text('@' + username);
   
             attribution
@@ -378,6 +377,7 @@ export default {
               .text('|');
           }
   
+        }).finally(()=>{
           if (d.capture_time) {
             attribution
               .append('span')
