@@ -313,14 +313,14 @@ en:
       connected_to_hidden: This can't be disconnected because it is connected to a hidden feature.
       relation: This can't be disconnected because it connects members of a relation.
     merge:
-      title: Merge
-      description: Merge these features.
+      title: Combine
+      description: Combine these features.
       key: C
       annotation:
-        one: "Merged a feature."
-        other: "Merged {n} features."
-      not_eligible: These features can't be merged.
-      not_adjacent: These features can't be merged because their endpoints aren't connected.
+        one: "Combined a feature."
+        other: "Combined {n} features."
+      not_eligible: These features can't be combined.
+      not_adjacent: These features can't be combined because their endpoints aren't connected.
       damage_relation: "These features can't be merged because it would damage a \"{relation}\" relation."
       relation: These features can't be merged because they have conflicting relation roles.
       incomplete_relation: These features can't be merged because at least one hasn't been fully downloaded.
@@ -1650,7 +1650,7 @@ en:
       continue: "{continue_icon} **{continue}** lets you extend existing lines from their endpoints."
       reverse: "{reverse_icon} **{reverse}** changes the direction of features. The direction matters for things like one-way roads, traffic signs, waterways, and cliffs."
       disconnect: "{disconnect_icon} **{disconnect}** separates connected lines and areas from each other. You can disconnect entire features or just selected points."
-      merge: "{merge_icon} **{merge}** combines multiple features into one. You can merge areas together to create multipolygons, merge lines together to create longer lines, and merge points into anything to transfer their tags."
+      merge: "{merge_icon} **{combine}** combines multiple features into one. You can combine areas together to create multipolygons, combine lines together to create longer lines, and combine points into anything to transfer their tags."
       split: "{split_icon} **{split}** divides lines at the selected points. If specific lines are also selected, only those are split."
       extract: "{extract_icon} **{extract}** detaches points from lines. It also pulls points out of buildings and other areas."
       delete: "{delete_icon} **{delete}** removes features from the map. Anything that doesn't exist in the real world should be deleted."
@@ -2024,7 +2024,7 @@ en:
       merge_close_vertices:
         annotation: Merged very close points in a way.
       merge_points:
-        title: Merge these points
+        title: Combine these points
       move_points_apart:
         title: Move these points apart
       move_tags:
