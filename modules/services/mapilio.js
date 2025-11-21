@@ -28,6 +28,7 @@ const imgZoom = d3_zoom()
 const pannellumViewerCSS = 'pannellum/pannellum.css';
 const pannellumViewerJS = 'pannellum/pannellum.js';
 const resolution = 1080;
+const hdResolution = 2080;
 
 let _activeImage;
 let _cache;
@@ -364,20 +365,51 @@ export default {
 
         let wrap = context.container().select('.photoviewer .mapilio-wrapper');
         let attribution = wrap.selectAll('.photo-attribution').text('\u00A0');
-      
+        let _username = '';
+        
         getUserData(d.created_by_id).then((username) => {
           if (username) {
+            _username = username;
+          }
+  
+        }).finally(()=>{
+
+            attribution
+             .append('input')
+             .attr('type','checkbox')
+             .on('click',(e)=>{
+                e.stopPropagation();
+                let isChecked = e.target.checked;
+                let parts = _sceneOptions.panorama.split('/');
+                
+                if(isChecked){
+                    parts[parts.length - 1] = hdResolution;
+                    _sceneOptions.panorama= parts.join('/');
+                    loadTheImage();
+                }else{
+                    parts[parts.length - 1] = resolution;
+                    _sceneOptions.panorama=parts.join('/');
+                    loadTheImage();
+                }
+             })
+
+            attribution
+             .append('span')
+             .text('High Resolution')
+
+            attribution
+             .append('span')
+             .text('|');
+
             attribution
               .append('span')
               .attr('class', 'captured_by')
-              .text('@' + username);
+              .text('@' + _username);
   
             attribution
               .append('span')
               .text('|');
-          }
-  
-        }).finally(()=>{
+
           if (d.capture_time) {
             attribution
               .append('span')
@@ -414,8 +446,7 @@ export default {
             .classed('hide', !_cache.images.forImageId.hasOwnProperty(+id + 1));
 
 
-        getImageData(d.id,d.sequence_id).then(function () {
-
+        function loadTheImage(){
             if (d.isPano) {
                 if (!_pannellumViewer) {
                     that.initViewer();
@@ -438,7 +469,9 @@ export default {
                 // make non-panoramic photo viewer
                 that.initOnlyPhoto(context);
             }
-        });
+        }
+
+        getImageData(d.id,d.sequence_id).then(loadTheImage);
 
         function localeDateString(s) {
             if (!s) return null;
