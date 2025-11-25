@@ -47,6 +47,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
+* Change package name to `@openstreetmap/id` to be able to publish releases on npm
+
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
 

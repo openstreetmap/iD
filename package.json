@@ -1,9 +1,12 @@
 {
-  "name": "iD",
+  "name": "@openstreetmap/id",
   "version": "2.38.0-dev",
   "description": "A friendly editor for OpenStreetMap",
   "main": "dist/iD.min.js",
-  "repository": "github:openstreetmap/iD",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openstreetmap/iD.git"
+  },
   "homepage": "https://github.com/openstreetmap/iD",
   "bugs": "https://github.com/openstreetmap/iD/issues",
   "keywords": [
