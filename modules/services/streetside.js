@@ -667,7 +667,6 @@ export default {
       this._pendingSelected = null;
     }
 
-
     return this;
   },
 
