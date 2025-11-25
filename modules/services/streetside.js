@@ -662,6 +662,12 @@ export default {
         .classed('hide', false);
     }
 
+    if (this._pendingSelected) {
+      context.container().select('.photoviewer').datum(this._pendingSelected);
+      this._pendingSelected = null;
+    }
+
+
     return this;
   },
 
@@ -695,8 +701,8 @@ export default {
 
     let d = this.cachedImage(key);
 
-    let viewer = context.container().select('.photoviewer');
-    if (!viewer.empty()) viewer.datum(d);
+    // Save the selected bubble until viewer is initialized
+    this._pendingSelected = d;
 
     this.setStyles(context, null, true);
 
