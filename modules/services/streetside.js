@@ -700,6 +700,8 @@ export default {
 
     let d = this.cachedImage(key);
 
+    let viewer = context.container().select('.photoviewer');
+    if (!viewer.empty()) viewer.datum(d);
     // Save the selected bubble until viewer is initialized
     this._pendingSelected = d;
 
