@@ -200,7 +200,7 @@ export class LocationManager {
         props.area = Number(area.toFixed(2));
       }
 
-      _loco._cache[id] = feature;   // insert directly into LocationConflations internal cache
+      _loco._cache.set(id, feature);   // insert directly into LocationConflations internal cache
     });
   }
 
