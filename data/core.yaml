@@ -2420,7 +2420,7 @@ en:
         title: "Selecting features"
         select_one: "Select a single feature"
         select_multi: "Select multiple features"
-        lasso: "Draw a selection lasso around features"
+        lasso: "Lasso select (points only)"
         search: "Find features matching search text"
       with_selected:
         title: "With features selected"
