@@ -10,7 +10,7 @@ export function uiDataEditor(context) {
     var dataHeader = uiDataHeader();
     var rawTagEditor = uiSectionRawTagEditor('custom-data-tag-editor', context)
         .expandedByDefault(true)
-        .readOnlyTags([/./]);
+        .readOnlyTags([/.*/]);
     var _datum;
 
 
