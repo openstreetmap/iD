@@ -37,12 +37,12 @@ export function uiDataEditor(context) {
             .call(t.append('map_data.title'));
 
 
-        var body = selection.selectAll('.body')
+        var body = selection.selectAll('.inspector-body')
             .data([0]);
 
         body = body.enter()
             .append('div')
-            .attr('class', 'body')
+            .attr('class', 'inspector-body entity-editor')
             .merge(body);
 
         var editor = body.selectAll('.data-editor')
@@ -51,7 +51,7 @@ export function uiDataEditor(context) {
         // enter/update
         editor.enter()
             .append('div')
-            .attr('class', 'modal-section data-editor')
+            .attr('class', 'data-editor section')
             .merge(editor)
             .call(dataHeader.datum(_datum));
 

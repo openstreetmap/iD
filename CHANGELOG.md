@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.38.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Minor usability improvements for custom map data ([#11635], [#11637], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -51,6 +52,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
+[#11635]: https://github.com/openstreetmap/iD/pull/11635
+[#11637]: https://github.com/openstreetmap/iD/pull/11637
 
 # v2.37.3
 ##### 2025-10-31

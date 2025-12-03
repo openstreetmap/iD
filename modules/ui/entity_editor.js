@@ -81,7 +81,7 @@ export function uiEntityEditor(context) {
         // Enter
         var bodyEnter = body.enter()
             .append('div')
-            .attr('class', 'entity-editor inspector-body sep-top');
+            .attr('class', 'entity-editor inspector-body');
 
         // Update
         body = body
