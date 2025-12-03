@@ -43,6 +43,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Don't error on features with a sole `note` tag ([#11522])
 #### :bug: Bugfixes
+* Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -51,6 +52,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
+[#11636]: https://github.com/openstreetmap/iD/pull/11636
 
 # v2.37.3
 ##### 2025-10-31
