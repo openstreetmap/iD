@@ -3,6 +3,7 @@ import { select as d3_select } from 'd3-selection';
 import { prefs } from '../core/preferences';
 import { svgIcon } from '../svg/icon';
 import { t } from '../core/localizer';
+import { utilTriggerEvent } from '../util';
 import { uiTooltip } from './tooltip';
 
 
@@ -72,7 +73,14 @@ export function uiIssuesInfo(context) {
 
                         tooltipBehavior.hide(d3_select(this));
                         // open the Issues pane
-                        context.ui().togglePanes(context.container().select('.map-panes .issues-pane'));
+                        var pane = context.container().select('.map-panes .issues-pane');
+                        context.ui().togglePanes(pane);
+                        var section = pane.select('.section-issues-errors');
+                        var toggle = section.select('.hide-toggle-issues_errors');
+                        if (!toggle.classed('expanded')) {
+                            utilTriggerEvent(toggle, 'click', { button: 0 });
+                        }
+                        section.node().scrollIntoView({ block: 'nearest' });
                     });
 
                 chipSelection.call(svgIcon('#' + d.iconID));

@@ -1,4 +1,5 @@
 import { t } from '../core/localizer';
+import { utilTriggerEvent } from '../util';
 import { uiTooltip } from './tooltip';
 
 export function uiFeatureInfo(context) {
@@ -39,7 +40,14 @@ export function uiFeatureInfo(context) {
                     tooltipBehavior.hide();
                     d3_event.preventDefault();
                     // open the Map Data pane
-                    context.ui().togglePanes(context.container().select('.map-panes .map-data-pane'));
+                    var pane = context.container().select('.map-panes .map-data-pane');
+                    context.ui().togglePanes(pane);
+                    var section = pane.select('.section-map-features');
+                    var toggle = section.select('.hide-toggle-map_features');
+                    if (!toggle.classed('expanded')) {
+                        utilTriggerEvent(toggle, 'click', { button: 0 });
+                    }
+                    section.node().scrollIntoView({ block: 'nearest' });
                 });
         }
 
