@@ -234,7 +234,8 @@ export var osmPavedTags = {
         'concrete': true,
         'chipseal': true,
         'concrete:lanes': true,
-        'concrete:plates': true
+        'concrete:plates': true,
+        'tiles': true
     },
     'tracktype': {
         'grade1': true
@@ -244,12 +245,15 @@ export var osmPavedTags = {
 // solid, if somewhat uncommon surfaces with a high range of smoothness
 export var osmSemipavedTags = {
     'surface': {
+        'bricks': true,
         'cobblestone': true,
-        'cobblestone:flattened': true,
         'unhewn_cobblestone': true,
         'sett': true,
         'paving_stones': true,
+        'grass_paver': true,
         'metal': true,
+        'metal_grid': true,
+        'fibre_reinforced_polymer_grate': true,
         'wood': true
     }
 };
