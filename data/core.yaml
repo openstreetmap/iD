@@ -35,15 +35,15 @@ en:
       other: "{labeled} and {count} more"
   modes:
     add_area:
-      title: Area
+      title: "Add area"
       description: "Add parks, buildings, lakes or other areas to the map."
       filter_tooltip: areas
     add_line:
-      title: Line
+      title: "Add line"
       description: "Add highways, streets, pedestrian paths, canals or other lines to the map."
       filter_tooltip: lines
     add_point:
-      title: Point
+      title: "Add point"
       description: "Add restaurants, monuments, postal boxes or other points to the map."
       filter_tooltip: points
     add_note:
