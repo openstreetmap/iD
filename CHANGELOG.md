@@ -43,6 +43,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Don't error on features with a sole `note` tag ([#11522])
 #### :bug: Bugfixes
+* Don't change the value of `railway:turnout_side` when reversing a railway track ([#11645])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -51,6 +52,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
+[#11645]: https://github.com/openstreetmap/iD/pull/11645
 
 # v2.37.3
 ##### 2025-10-31
