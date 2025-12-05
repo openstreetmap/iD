@@ -50,7 +50,7 @@ en:
       title: Note
       label: Add Note
       description: "Spotted an issue? Let other mappers know."
-      key: N
+      key: "Add note"
     add_preset:
       title: "Add {feature}"
     browse:
@@ -703,6 +703,7 @@ en:
     locating: "Locating, please wait..."
     location_unavailable: Your location is unavailable.
   inspector:
+    zoom_to_key: "Zoom to"
     zoom_to:
       key: Z
       title: Zoom To Selection
