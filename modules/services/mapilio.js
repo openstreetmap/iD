@@ -216,6 +216,26 @@ function getUserData(userId) {
     });
 }
 
+function rotate(degree, context){
+    return function(){
+        let wrap = context.container().select('#ideditor-viewer-mapilio-simple');
+        let img = wrap.select('img');
+
+
+        const node = img.node();
+        const current = parseFloat(node.dataset.rotation) || 0;
+        const next = current + degree;
+
+        // dataset'e kaydet
+        node.dataset.rotation = next;
+
+        // uygula
+        img.style("transform", `rotate(${next}deg)`)
+            .style("transition", "transform 0.3s ease")
+            .style("transform-origin", "center center");
+
+    }
+}
 
 export default {
     // Initialize Mapilio
@@ -540,6 +560,16 @@ export default {
             .classed('back', true)
             .on('click.back', step(-1))
             .text('◄');
+
+        controlsEnter
+            .append('button')
+            .on('click',rotate(-90,context))
+            .text('⤿');
+
+        controlsEnter
+            .append('button')
+            .on('click',rotate(90,context))
+            .text('⤾');
 
         controlsEnter
             .append('button')
