@@ -1880,6 +1880,9 @@ en:
         message: '{feature} has an invalid URL'
         message_multi: '{feature} has multiple invalid URLs'
         reference: 'URLs must start with "http://" or "https://".'
+      ref_rei:
+        message: '{feature} has an invalid ref:REI value'
+        reference: 'ref:REI values must be 8 characters long.'
     line_as_area:
       message: '{feature} should be a line, not an area'
     line_as_point:

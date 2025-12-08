@@ -27,6 +27,15 @@ export function validationFormatting() {
                 .call(t.append('issues.invalid_format.email.reference'));
         }
 
+        function showReferenceRefRei(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .call(t.append('issues.invalid_format.ref_rei.reference'));
+        }
+
         function isValidURL(url, strict = false) {
             try {
                 // First try strict WHATWG parsing
@@ -170,6 +179,25 @@ export function validationFormatting() {
                     entityIds: [entity.id],
                     hash: emails.join(),
                     data: (emails.length > 1) ? '_multi' : ''
+                }));
+            }
+        }
+
+        if (entity.tags['ref:REI']) {
+            var value = entity.tags['ref:REI'].trim();
+            // Value must be 8 characters long OR match 00-00-0000 format
+            if (value.length !== 8 && !/^\d{2}-\d{2}-\d{4}$/.test(value)) {
+                issues.push(new validationIssue({
+                    type: type,
+                    subtype: 'ref_rei',
+                    severity: 'warning',
+                    message: function(context) {
+                        var entity = context.hasEntity(this.entityIds[0]);
+                        return entity ? t.append('issues.invalid_format.ref_rei.message',
+                            { feature: utilDisplayLabel(entity, context.graph()) }) : '';
+                    },
+                    reference: showReferenceRefRei,
+                    entityIds: [entity.id]
                 }));
             }
         }
