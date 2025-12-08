@@ -11,6 +11,12 @@ import { uiCombobox } from '../combobox';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUniqueDomId } from '../../util';
 import { uiLengthIndicator } from '../length_indicator';
 
+const languageDisplayNames =
+    (typeof Intl !== 'undefined' && Intl.DisplayNames)
+        ? new Intl.DisplayNames([navigator.language], { type: 'language' })
+        : null;
+
+
 var _languagesArray = [];
 
 export const LANGUAGE_SUFFIX_REGEX = /^(.*):([a-z]{2,3}(?:-[A-Z][a-z]{3})?(?:-[A-Z]{2})?)$/;
@@ -340,7 +346,20 @@ export function uiFieldLocalized(field, context) {
                 (d.nativeName && d.nativeName.toLowerCase().indexOf(v) >= 0) ||
                 d.code.toLowerCase().indexOf(v) >= 0;
         }).map(function(d) {
-            return { value: d.label };
+            cb(langItems
+                .map(function(d) {
+                    const displayName = languageDisplayNames?.of(d.code) || d.label || d.code;
+                    return {
+                        value: displayName,
+                        title: d.code
+                    };
+                })
+                .filter(function(d) {
+                    return d.value.toLowerCase().indexOf(v) >= 0 ||
+                        d.title.toLowerCase().indexOf(v) >= 0;
+                })
+            );
+
         }));
     }
 
@@ -451,6 +470,7 @@ export function uiFieldLocalized(field, context) {
         entries.classed('present', true);
 
         utilGetSetValue(entries.select('.localized-lang'), function(d) {
+            lang = lang.toLowerCase();
             var langItem = _languagesArray.find(function(item) {
                 return item.code === d.lang;
             });
