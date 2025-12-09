@@ -2980,17 +2980,26 @@ img.tag-reference-wiki-image {
 .add-tag button {
     visibility: hidden;
 }
-.add-tag input.key {
-    border-bottom-left-radius: 4px;
-}
 .add-tag input.key::placeholder {
     font-weight: normal;
 }
-.add-tag input.value {
+.ideditor[dir='ltr'] .add-tag input.key {
+    border-bottom-left-radius: 4px;
+}
+.ideditor[dir='rtl'] .add-tag input.key {
     border-bottom-right-radius: 4px;
 }
-.tag-row:has(+ .add-tag) button:last-child {
+.ideditor[dir='ltr'] .add-tag input.value {
     border-bottom-right-radius: 4px;
+}
+.ideditor[dir='rtl'] .add-tag input.value {
+    border-bottom-left-radius: 4px;
+}
+.ideditor[dir='ltr'] .tag-row:has(+ .add-tag) button:last-child {
+    border-bottom-right-radius: 4px;
+}
+.ideditor[dir='rtl'] .tag-row:has(+ .add-tag) button:last-child {
+    border-bottom-left-radius: 4px;
 }
 
 .add-relation {
