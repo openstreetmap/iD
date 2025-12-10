@@ -423,27 +423,6 @@ export function uiSectionRawMembershipEditor(context) {
                 return utilDisplayName(d.relation, matched.suggestion);
             });
 
-        labelEnter
-            .append('button')
-            .attr('class', 'members-download')
-            .attr('title', t('icons.download'))
-            .call(svgIcon('#iD-icon-load'))
-            .on('click', downloadMembers);
-
-        labelEnter
-            .append('button')
-            .attr('class', 'remove member-delete')
-            .attr('title', t('icons.remove'))
-            .call(svgIcon('#iD-operation-delete'))
-            .on('click', deleteMembership);
-
-        labelEnter
-            .append('button')
-            .attr('class', 'member-zoom')
-            .attr('title', t('icons.zoom_to'))
-            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
-            .on('click', zoomToRelation);
-
         items = items.merge(itemsEnter);
         items.selectAll('button.members-download')
             .classed('hide', d => {
@@ -494,6 +473,30 @@ export function uiSectionRawMembershipEditor(context) {
             .call(utilNoAuto)
             .on('blur', changeRole)
             .on('change', changeRole);
+
+        wrapEnter
+            .append('button')
+            .classed('members-download', true)
+            .classed('form-field-button', true)
+            .attr('title', t('icons.download'))
+            .call(svgIcon('#iD-icon-load'))
+            .on('click', downloadMembers);
+
+        wrapEnter
+            .append('button')
+            .classed('remove member-delete', true)
+            .classed('form-field-button', true)
+            .attr('title', t('icons.remove'))
+            .call(svgIcon('#iD-operation-delete'))
+            .on('click', deleteMembership);
+
+        wrapEnter
+            .append('button')
+            .classed('member-zoom', true)
+            .classed('form-field-button', true)
+            .attr('title', t('icons.zoom_to'))
+            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
+            .on('click', zoomToRelation);
 
         if (taginfo) {
             wrapEnter.each(bindTypeahead);
