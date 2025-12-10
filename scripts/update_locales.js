@@ -122,7 +122,7 @@ function gotResource(err, results) {
         done();
       } else {
         let obj = {};
-        obj[code] = allStrings[code] || {};
+        obj[code] = allStrings[rawCode] || {};
         let lNames = languageNames.languageNamesInLanguageOf(code) || {};
         if (Object.keys(lNames).length) {
           obj[code].languageNames = lNames;
