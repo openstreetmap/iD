@@ -3,6 +3,13 @@ import { json as d3_json } from 'd3-fetch';
 import { utilQsString } from '../util';
 
 
+/** @param {string} title */
+export function encodeWikimediaPageTitle(title) {
+    return encodeURIComponent(title.replaceAll(' ', '_'))
+        .replace(/%3A/g, ':') // TODO: review this
+        .replace(/%2F/g, '/');
+}
+
 var endpoint = 'https://en.wikipedia.org/w/api.php?';
 
 export default {

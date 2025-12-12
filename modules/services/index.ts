@@ -1,3 +1,4 @@
+import serviceCommons from './commons';
 import serviceOsmose from './osmose';
 import serviceMapillary from './mapillary';
 import serviceNominatim from './nominatim';
@@ -16,6 +17,7 @@ import servicePanoramax from './panoramax';
 
 
 export let services = {
+  commons: serviceCommons,
   geocoder: serviceNominatim,
   osmose: serviceOsmose,
   mapillary: serviceMapillary,
@@ -34,6 +36,7 @@ export let services = {
 };
 
 export {
+  serviceCommons,
   serviceOsmose,
   serviceMapillary,
   serviceNominatim,
