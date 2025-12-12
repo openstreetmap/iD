@@ -552,12 +552,27 @@ export function modeSelect(context, selectedIDs) {
                 index = length - 2;
             }
 
-            if (index !== -1) {
-                context.enter(
-                    mode.selectedIDs([way.nodes[index]])
-                        .follow(true)
-                );
+            if (index === -1) {
+              context.ui().flash
+                .duration(4000)
+                .iconName('#iD-icon-info')
+                .label('This is the last node of the path.')();
+              return;
             }
+
+            const node = context.entity(way.nodes[index]);
+            const parentWays = context.graph().parentWays(node);
+            if (parentWays.length > 1) {
+              context.ui().flash
+                  .duration(4000)
+                  .iconName('#iD-icon-info')
+                  .label('This node is part of multiple ways. Select manually to switch paths or continue in the same path.')();
+            }
+
+            context.enter(
+              mode.selectedIDs([way.nodes[index]])
+                .follow(true)
+            );
         }
 
 
@@ -578,12 +593,27 @@ export function modeSelect(context, selectedIDs) {
                 index = 0;
             }
 
-            if (index !== -1) {
-                context.enter(
-                    mode.selectedIDs([way.nodes[index]])
-                        .follow(true)
-                );
+            if (index === -1) {
+              context.ui().flash
+                .duration(4000)
+                .iconName('#iD-icon-info')
+                .label('This is the last node of the path.')();
+              return;
             }
+
+            const node = context.entity(way.nodes[index]);
+            const parentWays = context.graph().parentWays(node);
+            if (parentWays.length > 1) {
+              context.ui().flash
+                .duration(4000)
+                .iconName('#iD-icon-info')
+                .label('This node is part of multiple ways. Select manually to switch paths or continue in the same path.')();
+            }
+
+            context.enter(
+              mode.selectedIDs([way.nodes[index]])
+                .follow(true)
+            );
         }
 
 
