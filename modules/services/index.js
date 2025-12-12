@@ -1,4 +1,5 @@
 import serviceKeepRight from './keepRight';
+import serviceCommons from './commons';
 import serviceOsmose from './osmose';
 import serviceMapillary from './mapillary';
 import serviceMapRules from './maprules';
@@ -18,6 +19,7 @@ import servicePanoramax from './panoramax';
 
 
 export let services = {
+  commons: serviceCommons,
   geocoder: serviceNominatim,
   keepRight: serviceKeepRight,
   osmose: serviceOsmose,

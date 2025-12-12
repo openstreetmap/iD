@@ -3,7 +3,7 @@ import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 import { utilSetTransform, utilRebind } from '../util';
 
 
-export async function planePhotoFrame(context, selection) {
+export function planePhotoFrame(context, selection) {
     const dispatch = d3_dispatch('viewerChanged');
 
     const module = {};
@@ -68,8 +68,6 @@ export async function planePhotoFrame(context, selection) {
       _viewerDimensions = dimensions;
       updateTransform();
     });
-
-    await Promise.resolve();
 
     /**
      * Shows the photo frame if hidden

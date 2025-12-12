@@ -1,4 +1,5 @@
 export { svgAreas } from './areas.js';
+export { svgCommonsImages } from './commons_images.js';
 export { svgData } from './data.js';
 export { svgDebug } from './debug.js';
 export { svgDefs } from './defs.js';

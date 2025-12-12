@@ -87,7 +87,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .on('click.forward', () => stepPhotos(1))
             .text('▶');
 
-        return planePhotoFrame(context, viewerEnter)
+        return Promise.resolve(planePhotoFrame(context, viewerEnter))
             .then(planePhotoFrame => _photoFrame = planePhotoFrame);
     }
 

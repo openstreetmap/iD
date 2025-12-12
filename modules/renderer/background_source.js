@@ -21,7 +21,8 @@ window.matchMedia?.(`
 });
 
 
-function localeDateString(s) {
+// TODO: deduplicate
+export function localeDateString(s) {
     if (!s) return null;
     var options = { day: 'numeric', month: 'short', year: 'numeric' };
     var d = new Date(s);

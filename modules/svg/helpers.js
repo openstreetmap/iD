@@ -181,7 +181,9 @@ export function svgPath(projection, graph, isArea) {
 }
 
 
+/** @param {iD.Projection} projection */
 export function svgPointTransform(projection) {
+    /** @param {{ loc: import('../geo/vector').Vec2 }} entity */
     var svgpoint = function(entity) {
         // http://jsperf.com/short-array-join
         var pt = projection(entity.loc);

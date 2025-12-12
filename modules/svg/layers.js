@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-
+import { svgCommonsImages } from './commons_images';
 import { svgData } from './data';
 import { svgLocalPhotos} from './local_photos';
 import { svgDebug } from './debug';
@@ -33,6 +33,7 @@ export function svgLayers(projection, context) {
         { id: 'keepRight', layer: svgKeepRight(projection, context, dispatch) },
         { id: 'osmose', layer: svgOsmose(projection, context, dispatch) },
         { id: 'streetside', layer: svgStreetside(projection, context, dispatch)},
+        { id: 'commons', layer: svgCommonsImages(projection, context, dispatch)},
         { id: 'mapillary', layer: svgMapillaryImages(projection, context, dispatch) },
         { id: 'mapillary-position', layer: svgMapillaryPosition(projection, context, dispatch) },
         { id: 'mapillary-map-features',  layer: svgMapillaryMapFeatures(projection, context, dispatch) },
