@@ -6,7 +6,7 @@ export type StreetSideEventMap = {
 }
 
 export interface IStreetSide {
-    event: Pick<Dispatch<any, StreetSideEventMap>, 'on'>;
+    event?: Pick<Dispatch<any, StreetSideEventMap>, 'on'>;
     on: Dispatch<any, StreetSideEventMap>['on'];
     init(): void;
     reset(): void;
