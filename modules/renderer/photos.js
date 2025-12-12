@@ -8,12 +8,15 @@ import { patchHash } from '../behavior';
 
 export function rendererPhotos(context) {
     var dispatch = d3_dispatch('change');
-    var _layerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio', 'vegbilder', 'panoramax'];
+    var _layerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio', 'vegbilder', 'panoramax', 'commons'];
     var _allPhotoTypes = ['flat', 'panoramic'];
     var _shownPhotoTypes = _allPhotoTypes.slice();   // shallow copy
     var _dateFilters = ['fromDate', 'toDate'];
+    /** @type {string | undefined} */
     var _fromDate;
+    /** @type {string | undefined} */
     var _toDate;
+    /** @type {string[] | undefined} */
     var _usernames;
 
     function photos() {}
@@ -156,7 +159,8 @@ export function rendererPhotos(context) {
      */
     photos.shouldFilterDateBySlider = function(){
         return showsLayer('mapillary') || showsLayer('kartaview') || showsLayer('mapilio')
-        || showsLayer('streetside') || showsLayer('vegbilder') || showsLayer('panoramax');
+        || showsLayer('streetside') || showsLayer('vegbilder') || showsLayer('panoramax')
+        || showsLayer('commons');
     };
 
     /**
@@ -171,7 +175,11 @@ export function rendererPhotos(context) {
      * @returns If the Username filter should be drawn
      */
     photos.shouldFilterByUsername = function() {
-        return !showsLayer('mapillary') && showsLayer('kartaview') && !showsLayer('streetside') || showsLayer('panoramax');
+        return (
+            (!showsLayer('mapillary') && showsLayer('kartaview') && !showsLayer('streetside'))
+            || showsLayer('panoramax')
+            || showsLayer('commons')
+        );
     };
 
     photos.showsPhotoType = function(val) {
@@ -261,8 +269,8 @@ export function rendererPhotos(context) {
                         service.ensureViewerLoaded(context)
                             .then(function() {
                                 service
-                                    .selectImage(context, photoKey)
-                                    .showViewer(context);
+                                    .showViewer(context)
+                                    .selectImage(context, photoKey);
                             });
                     });
                 }

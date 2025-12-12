@@ -29,27 +29,26 @@ describe('iD.svgLayers', function () {
     it('creates default data layers', function () {
         container.call(iD.svgLayers(projection, context));
         var nodes = container.selectAll('svg .data-layer').nodes();
-        expect(nodes.length).toEqual(17);
-        /* eslint-disable no-useless-assignment */
-        let i = 0;
-        expect(d3_select(nodes[i++]).classed('osm')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('notes')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('data')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('osmose')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('streetside')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('mapillary')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('mapillary-position')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('mapillary-map-features')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('mapillary-signs')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('kartaview')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('mapilio')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('vegbilder')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('panoramax')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('local-photos')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('debug')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('geolocate')).toBe(true);
-        expect(d3_select(nodes[i++]).classed('touch')).toBe(true);
-        /* eslint-enable no-useless-assignment */
+        expect(nodes.map(node => node.className.baseVal)).toStrictEqual([
+            'data-layer osm',
+            'data-layer notes',
+            'data-layer data',
+            'data-layer osmose',
+            'data-layer streetside',
+            'data-layer commons',
+            'data-layer mapillary',
+            'data-layer mapillary-position',
+            'data-layer mapillary-map-features',
+            'data-layer mapillary-signs',
+            'data-layer kartaview',
+            'data-layer mapilio',
+            'data-layer vegbilder',
+            'data-layer panoramax',
+            'data-layer local-photos',
+            'data-layer debug',
+            'data-layer geolocate',
+            'data-layer touch',
+        ]);
     });
 
 });
