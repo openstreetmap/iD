@@ -1386,6 +1386,10 @@ en:
   mapillary_map_features:
     title: "Map Features"
     tooltip: "Map features from Mapillary"
+  mapillary_signs:
+  tooltip: "Traffic signs from Mapillary"
+  kartaview_images:
+  tooltip: "Street-level photos from Kartaview"
     construction:
       barrier:
         temporary: temporary barrier
