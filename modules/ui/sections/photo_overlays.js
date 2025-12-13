@@ -100,10 +100,21 @@ export function uiSectionPhotoOverlays(context) {
             .append('label')
             .each(function(d) {
                 var titleID;
-                if (d.id === 'mapillary-signs') titleID = 'mapillary.signs.tooltip';
-                else if (d.id === 'mapillary') titleID = 'mapillary_images.tooltip';
-                else if (d.id === 'kartaview') titleID = 'kartaview_images.tooltip';
-                else titleID = d.id.replace(/-/g, '_') + '.tooltip';
+                if (d.id === 'mapillary-signs') {
+    titleID = 'Show Mapillary traffic signs';
+}
+else if (d.id === 'mapillary') {
+    titleID = 'Show Mapillary street-level photos';
+}
+else if (d.id === 'mapillary-map-features') {
+    titleID = 'Show Mapillary detected map features';
+}
+else if (d.id === 'kartaview') {
+    titleID = 'Show Kartaview images';
+}
+else {
+    titleID = d.id.replace(/-/g, '_') + ' layer';
+}
                 d3_select(this)
                     .call(uiTooltip()
                         .title(() => {
@@ -116,7 +127,6 @@ export function uiSectionPhotoOverlays(context) {
                         .placement('top')
                     );
             });
-
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
