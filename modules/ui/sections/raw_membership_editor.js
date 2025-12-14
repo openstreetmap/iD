@@ -115,6 +115,10 @@ export function uiSectionRawMembershipEditor(context) {
             membership.role = roles.length === 1 ? roles[0] : roles;
         });
 
+        const parentRelationIDs = new Set(
+            getSharedParentRelations().map(r => r.id)
+        );
+
         const existingRelations = memberships
             .filter(membership => !recentlyAdded.has(membership.relation.id))
             .map(membership => ({
@@ -129,6 +133,17 @@ export function uiSectionRawMembershipEditor(context) {
                 ].join('-'),
             }))
             .sort((a, b) => {
+
+                const aIsParent = parentRelationIDs.has(a.relation.id);
+                const bIsParent = parentRelationIDs.has(b.relation.id);
+
+
+                // 1️⃣ Parent relations first
+                if (aIsParent && !bIsParent) return -1;
+                if (!aIsParent && bIsParent) return 1;
+
+
+                // 2️⃣ Same category → older alphabetical sort
                 return a._sortKey.localeCompare(
                     b._sortKey,
                     localizer.localeCodes(),
