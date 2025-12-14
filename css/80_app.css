@@ -4144,8 +4144,13 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 }
 
 .pane-heading button {
-    width: 40px;
+    width: 50px;
     border-radius: 0;
+    background-color:  black;
+}
+
+.pane-heading button:hover {
+    background-color: #121212; /* slightly lighter */
 }
 
 .pane-content {
