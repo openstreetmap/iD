@@ -30,10 +30,22 @@ var readOnlyTags = [
     /^closed:keepright$/,
     /^closed:osmose:/
 ];
+var taxonKeys = [
+    'genus',
+    'family',
+    'subfamily',
+    'tribe'
+];
+
 
 // treat most punctuation (except -, _, +, &) as hashtag delimiters - #4398
 // from https://stackoverflow.com/a/25575009
 var hashtagRegex = /([#＃][^\u2000-\u206F\u2E00-\u2E7F\s\\'!"#$%()*,.\/:;<=>?@\[\]^`{|}~]+)/g;
+function capitalizeFirstLetter(value) {
+    if (!value || typeof value !== 'string') return value;
+    return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
 
 
 export function uiCommit(context) {
@@ -560,8 +572,15 @@ export function uiCommit(context) {
             } else if (onInput) {
                 tags[k] = v;
             } else {
-                tags[k] = context.cleanTagValue(v);
+                var cleaned = context.cleanTagValue(v);
+
+                if (taxonKeys.indexOf(k) !== -1) {
+                    cleaned = capitalizeFirstLetter(cleaned);
+                }
+
+                tags[k] = cleaned;
             }
+
         });
 
         if (!onInput) {
