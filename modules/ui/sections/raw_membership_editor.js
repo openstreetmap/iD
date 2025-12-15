@@ -115,52 +115,7 @@ export function uiSectionRawMembershipEditor(context) {
             membership.role = roles.length === 1 ? roles[0] : roles;
         });
 
-        const parentRelationIDs = new Set(
-            getSharedParentRelations().map(r => r.id)
-        );
-
-        const existingRelations = memberships
-            .filter(membership => !recentlyAdded.has(membership.relation.id))
-            .map(membership => ({
-                ...membership,
-                // We only sort relations that were not added just now.
-                // Sorting uses the same label as shown in the UI.
-                // If the label is not unique, the relation ID ensures
-                // that the sort order is still stable.
-                _sortKey: [
-                    baseDisplayValue(membership.relation),
-                    membership.relation.id,
-                ].join('-'),
-            }))
-            .sort((a, b) => {
-
-                const aIsParent = parentRelationIDs.has(a.relation.id);
-                const bIsParent = parentRelationIDs.has(b.relation.id);
-
-
-                // 1️⃣ Parent relations first
-                if (aIsParent && !bIsParent) return -1;
-                if (!aIsParent && bIsParent) return 1;
-
-
-                // 2️⃣ Same category → older alphabetical sort
-                return a._sortKey.localeCompare(
-                    b._sortKey,
-                    localizer.localeCodes(),
-                    { numeric: true },
-                );
-            });
-
-
-        const newlyAddedRelations = memberships
-            .filter(membership => recentlyAdded.has(membership.relation.id));
-
-        return [
-            // the sorted relations come first
-            ...existingRelations,
-            // then the ones that were just added from this panel
-            ...newlyAddedRelations,
-        ];
+       return memberships;
     }
 
     function selectRelation(d3_event, d) {
@@ -342,9 +297,26 @@ export function uiSectionRawMembershipEditor(context) {
                 });
             });
 
-            result.sort(function(a, b) {
+
+            // before result.sort(...)
+            const selectedEntity = graph.hasEntity(entityID);
+            
+            const parentRelationIDs = new Set(
+                selectedEntity ? graph.parentRelations(selectedEntity).map(r => r.id) : []
+            );
+
+            result.sort((a, b) => {
+
+                const aIsParent = !!(a.relation && parentRelationIDs.has(a.relation.id));
+                const bIsParent = !!(b.relation && parentRelationIDs.has(b.relation.id));
+
+                // 1) parent relations first
+                if (aIsParent && !bIsParent) return -1;
+                if (!aIsParent && bIsParent) return 1;
+
+                // 2) otherwise keep original creation order
                 return osmRelation.creationOrder(a.relation, b.relation);
-            });
+        });
 
             // Dedupe identical names by appending relation id - see #2891
             Object.values(utilArrayGroupBy(result, 'value'))
