@@ -124,7 +124,12 @@
       ["postcode", "city", "district"],
       ["street+place"],
       ["housenumber", "floor", "unit"]
-    ]
+    ],
+    "widths": {
+        "housenumber": 0.4,
+        "floor": 0.4,
+        "unit": 0.2
+    }
   },
   {
     "countryCodes": ["jp"],
