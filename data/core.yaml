@@ -1455,9 +1455,14 @@ en:
   kartaview:
     title: KartaView
     view_on_kartaview: "View this image on KartaView"
+  mapilio_images:
+    tooltip: "Street-level photos from Mapilio"
   mapilio:
     title: Mapilio
     tooltip: "Street-level photos from Mapilio"
+  mapilio_map_features:
+    title: "Map Objects"
+    tooltip: "Map objects from Mapilio"
   panoramax:
     title: Panoramax
     tooltip: "Street-level photos from Panoramax"

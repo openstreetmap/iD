@@ -17,10 +17,12 @@ const imageBaseUrl = 'https://cdn.mapilio.com/im';
 const baseTileUrl = 'https://geo.mapilio.com/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=mapilio:';
 const pointLayer = 'map_points';
 const lineLayer = 'map_roads_line';
-const tileStyle = '&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/vnd.mapbox-vector-tile&TILECOL={x}&TILEROW={y}';
+const mapFeaturesLayer = 'map_features'; // mapFeatures mapObjects ile alakalıdır.
 
+const tileStyle = '&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/vnd.mapbox-vector-tile&TILECOL={x}&TILEROW={y}';
+const mapFeatureTileUrl = "https://geo.mapilio.com/features/{x}/{y}/{z}";
 const minZoom = 14;
-const dispatch = d3_dispatch('loadedImages', 'loadedLines');
+const dispatch = d3_dispatch('loadedImages','loadedMapFeatures','loadedLines');
 const imgZoom = d3_zoom()
     .extent([[0, 0], [320, 240]])
     .translateExtent([[0, 0], [320, 240]])
@@ -110,7 +112,10 @@ function loadTile(which, url, tile) {
 
             if (which === 'images') {
                 dispatch.call('loadedImages');
-            } else {
+            } else if (which === 'mapFeatures') {
+                dispatch.call('loadedMapFeatures');
+            }
+            else{
                 dispatch.call('loadedLines');
             }
         })
@@ -185,6 +190,33 @@ function loadTileDataToCache(data, tile) {
         }
     }
 
+    // VectorTile üzerinden mapFeatures'i bulma
+if (vectorTile.layers.hasOwnProperty(mapFeaturesLayer)) {
+    const features = [];
+    const cache = _cache.mapFeatures;
+    const layer = vectorTile.layers[mapFeaturesLayer];
+
+    for (let i = 0; i < layer.length; i++) {
+        const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+        const loc = feature.geometry.coordinates;
+
+        const d = {
+            loc: loc,
+            id: feature.properties.id || `${loc[0]}_${loc[1]}`,
+            properties: feature.properties
+        };
+
+        cache.forFeatureId[d.id] = d;
+        features.push({
+            minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
+        });
+    }
+
+    if (cache.rtree) {
+        cache.rtree.load(features);
+    }
+}
+
 }
 
 function getImageData(imageId, sequenceId) {
@@ -256,6 +288,7 @@ export default {
         _cache = {
             images: { rtree: new RBush(), forImageId: {} },
             sequences: { rtree: new RBush(), lineString: {} },
+            mapFeatures: { rtree: new RBush(), forFeatureId: {} },
             requests: { loaded: {}, inflight: {} }
         };
     },
@@ -281,6 +314,22 @@ export default {
     loadLines: function(projection) {
         let url = baseTileUrl + lineLayer + tileStyle;
         loadTiles('line', url, 14, projection);
+    },
+
+    // Görüntülenebilir resimleri al
+    mapFeatures: function(projection) {
+    const limit = 10;
+    return searchLimited(limit, projection, _cache.mapFeatures.rtree);
+    },
+
+    // Map features yükle
+    loadMapFeatures: function(projection) {
+        loadTiles('mapFeatures', mapFeatureTileUrl, 14, projection);
+    },
+
+    // Cached map feature getir
+    cachedMapFeature: function(featureKey) {
+        return _cache.mapFeatures.forFeatureId[featureKey];
     },
 
     // Get visible sequences

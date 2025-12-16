@@ -29,4 +29,5 @@ export { svgTouch } from './touch.js';
 export { svgTurns } from './turns.js';
 export { svgVertices } from './vertices.js';
 export { svgMapilioImages } from './mapilio_images.js';
+export { svgMapilioMapFeatures } from './mapilio_map_features.js';
 export { svgPanoramaxImages } from './panoramax_images.js';

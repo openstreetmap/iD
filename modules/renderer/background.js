@@ -252,6 +252,7 @@ export function rendererBackground(context) {
       kartaview: 'KartaView Images',
       vegbilder: 'Norwegian Road Administration Images',
       mapilio: 'Mapilio Images',
+       'mapilio-map-features':'Mapilio Map Objects',
       panoramax: 'Panoramax Images'
     };
 

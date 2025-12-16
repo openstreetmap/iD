@@ -12,7 +12,7 @@ export function uiSectionPhotoOverlays(context) {
 
     let _savedLayers = [];
     let _layersHidden = false;
-    const _streetLayerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio', 'vegbilder', 'panoramax'];
+    const _streetLayerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio', 'mapilio-map-features','vegbilder', 'panoramax'];
 
     var settingsLocalPhotos = uiSettingsLocalPhotos(context)
         .on('change',  localPhotosChanged);
@@ -86,11 +86,16 @@ export function uiSectionPhotoOverlays(context) {
         li.exit()
             .remove();
 
+        // Photo Overlayde mapilio katmanına katman ekledik.
         var liEnter = li.enter()
             .append('li')
             .attr('class', function(d) {
                 var classes = 'list-item-photos list-item-' + d.id;
                 if (d.id === 'mapillary-signs' || d.id === 'mapillary-map-features') {
+                    classes += ' indented';
+                }
+                // Photo Overlay de Mapilio kısmının altına getiriyor.
+               if (d.id === 'mapilio-map-features') {
                     classes += ' indented';
                 }
                 return classes;
@@ -101,6 +106,7 @@ export function uiSectionPhotoOverlays(context) {
             .each(function(d) {
                 var titleID;
                 if (d.id === 'mapillary-signs') titleID = 'mapillary.signs.tooltip';
+                else if(d.id === 'mapilio-signs') titleID = 'mapilio.signs.tooltip';
                 else if (d.id === 'mapillary') titleID = 'mapillary_images.tooltip';
                 else if (d.id === 'kartaview') titleID = 'kartaview_images.tooltip';
                 else titleID = d.id.replace(/-/g, '_') + '.tooltip';
@@ -126,7 +132,7 @@ export function uiSectionPhotoOverlays(context) {
             .append('span')
             .html(function(d) {
                 var id = d.id;
-                if (id === 'mapillary-signs') id = 'photo_overlays.traffic_signs';
+                if (id === 'mapillary-signs' || id==='mapilio-signs') id = 'photo_overlays.traffic_signs';
                 return t.html(id.replace(/-/g, '_') + '.title');
             });
 
