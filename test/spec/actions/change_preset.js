@@ -84,6 +84,47 @@ describe('iD.actionChangePreset', function() {
         expect(action(graph).entity(entity.id).tags).to.eql({amenity: 'school'});
     });
 
+    it('does not preserve field tags which only exist in the old preset, not in the new preset', () => {
+        const entity = iD.osmNode({
+            tags: {
+                building: 'yes', // case 1: the preset's own tags.
+                'roof:colour': 'pink', // case 2: a field which exists in the old preset, but not the new one.
+                check_date: '2025-12-05', // case 3: a field which exists in the old AND new preset.
+                grades: '0-13', // case 4: a field which exists only in the new preset, not in the old one.
+                'ref:SG:address_id': '1234', // case 5: a tag which does not exist in either preset
+            },
+            loc: [0, 0],
+        });
+        const graph = iD.coreGraph([entity]);
+
+        const fields = {
+            'roof:colour': iD.presetField('roof:colour', { key: 'roof:colour', geometry: 'point' }),
+            check_date: iD.presetField('check_date', { key: 'check_date', geometry: 'point' }),
+            grades: iD.presetField('roof:colour', { key: 'grades', geometry: 'point' }),
+        };
+
+        const oldPreset = iD.presetPreset(
+            'building/yes',
+            { tags: { building: 'yes' }, fields: ['roof:colour', 'check_date'] },
+            undefined,
+            fields,
+        );
+        const newPreset = iD.presetPreset(
+            'amenity/school',
+            { tags: { amenity: 'school' }, fields: ['check_date', 'grades'] },
+            undefined,
+            fields,
+        );
+        const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
+        expect(action(graph).entity(entity.id).tags).toStrictEqual({
+            amenity: 'school', // case 1: the preset's own tags were replaced.
+            // case 2: the field which exists in the old preset was removed (roof:colour).
+            check_date: '2025-12-05', // case 3: the field which exists in the old AND new preset was kept.
+            grades: '0-13', // case 4: a field which exists only in the new preset was also kept.
+            'ref:SG:address_id': '1234', // case 5: tags which do not exist in either preset are kept
+        });
+    });
+
     // https://github.com/openstreetmap/iD/issues/9372
     it('does not preserve field tags when changing from a subpreset to its parent', function() {
         var entity = iD.osmNode({tags: {highway: 'service', service: 'driveway'}});
