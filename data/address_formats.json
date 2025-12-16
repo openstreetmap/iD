@@ -71,6 +71,14 @@
       ["postcode", "city"]
     ]
   },
+{
+    "countryCodes": ["ma"],
+    "format": [
+      ["housename"],
+      ["housenumber", "street+place"],
+      ["postcode", "city"]
+    ]
+  }
   {
     "countryCodes": ["mo"],
     "format": [
