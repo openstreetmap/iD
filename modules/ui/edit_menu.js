@@ -107,7 +107,7 @@ export function uiEditMenu(context) {
             var tooltip = uiTooltip()
                 .heading(() => d.title)
                 .title(d.tooltip)
-                .keys([d.keys[0]]);
+                .keys(d.keys.slice(0, 1));
 
             _tooltips.push(tooltip);
 
