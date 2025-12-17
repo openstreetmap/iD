@@ -44,12 +44,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Don't error on features with a sole `note` tag ([#11522])
 #### :bug: Bugfixes
 * Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
+* Fix language initialization for Firefox when quality is present on the requested locales
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Change package name to `@openstreetmap/id` to be able to publish releases on npm
-* Fix language initialization for Firefox when quality is present on the requested locales
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
 [#11636]: https://github.com/openstreetmap/iD/pull/11636
