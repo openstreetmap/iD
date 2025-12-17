@@ -148,19 +148,21 @@ export function coreLocalizer() {
         /** @type {string[]} */
         let toUse = [];
         for (const locale of requestedLocales) {
-            if (supportedLocales[locale]) toUse.push(locale);
+            const safeLocale = locale.split(';')[0].trim(); // strip any quality values like ";q=0.5"
 
-            if ('Intl' in window && 'Locale' in window.Intl) {
+            try {
+              if ('Intl' in window && 'Locale' in window.Intl) {
                 // Full locale ('es-ES'), add fallback to the base ('es')
-                const localeObj = new Intl.Locale(locale);
+                const localeObj = new Intl.Locale(safeLocale);
                 const withoutScript = `${localeObj.language}-${localeObj.region}`;
                 const base = localeObj.language;
 
                 if (supportedLocales[withoutScript]) toUse.push(withoutScript);
                 if (supportedLocales[base]) toUse.push(base);
-            } else if (locale.includes('-')) {
-                // legacy logic: if Intl.Locale is not available
-                let langPart = locale.split('-')[0];
+              }
+            } catch {
+                // legacy logic: if Intl.Locale is not available or fails
+                let langPart = safeLocale.split('-')[0];
                 if (supportedLocales[langPart]) toUse.push(langPart);
             }
         }
