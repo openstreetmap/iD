@@ -34,7 +34,7 @@ export function uiSectionRawMemberEditor(context) {
 
             var gt = entity.members.length > _maxMembers ? '>' : '';
             var count = gt + entity.members.slice(0, _maxMembers).length;
-            return t.append('inspector.title_count', { title: t('inspector.members'), count: count });
+            return t.append('inspector.title_count', { title: t('inspector.members.title'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -145,8 +145,7 @@ export function uiSectionRawMemberEditor(context) {
                 context.loadEntity(entity.id, () => section.reRender());
             });
         downloadMembersEnter
-            .append('span')
-            .text('Download all members');
+            .call(t.append('inspector.members.download_all'));
         downloadMembersEnter
             .append('button')
             .attr('title', t('icons.download'))
@@ -307,7 +306,7 @@ export function uiSectionRawMemberEditor(context) {
                 wrap
                     .append('span')
                     .classed('grab-icon', true)
-                    .attr('title', 'todo: grab to reorder members')
+                    .attr('title', t('inspector.members.grab'))
                     .each(function(d) {
                         if (d.connections.prev && d.connections.next || d.connections.loops) {
                             d3_select(this).call(svgIcon('#iD-icon-grab-connects-both'));

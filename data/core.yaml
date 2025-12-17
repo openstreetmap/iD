@@ -726,7 +726,10 @@ en:
     feature_type: Feature Type
     fields: Fields
     tags: Tags
-    members: Members
+    members:
+      title: Members
+      grab: Drag and drop to reorder members
+      download_all: Download all members
     relations: Relations
     features: Features
     title_count: "{title} ({count})"
