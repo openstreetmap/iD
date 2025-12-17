@@ -16,7 +16,7 @@ import { svgIcon } from '../../svg/icon';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
-import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto, utilUniqueDomId } from '../../util';
+import { utilArrayGroupBy, utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto, utilUniqueDomId } from '../../util';
 
 
 export function uiSectionRawMemberEditor(context) {
@@ -428,6 +428,23 @@ export function uiSectionRawMemberEditor(context) {
 
         items.select('button.member-delete')
             .on('click', deleteMember);
+
+        const dupeLabels = new WeakSet(Object.values(
+            utilArrayGroupBy(items.selectAll('.label-text').nodes(), 'textContent'))
+            .filter(v => v.length > 1)
+            .flat());
+
+        items.select('.label-text').each(function() {
+            const label = d3_select(this);
+            const entityName = label.select('.member-entity-name');
+            if (dupeLabels.has(this)) {
+                // Dedupe identical names in hover text by appending entity id - see #2891, #10184
+                label.attr('title', d => `${entityName.text()} ${d.id}`);
+            } else {
+                // set full label also as hover text: useful if a (long) label is cut off with an … ellipsis
+                label.attr('title', () => entityName.text());
+            }
+        });
 
         var dragOrigin, targetIndex;
 
