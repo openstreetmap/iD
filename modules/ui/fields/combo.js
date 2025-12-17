@@ -4,7 +4,7 @@ import { drag as d3_drag } from 'd3-drag';
 import * as countryCoder from '@rapideditor/country-coder';
 
 import { fileFetcher } from '../../core/file_fetcher';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { svgIcon } from '../../svg/icon';
@@ -114,6 +114,13 @@ export function uiFieldCombo(field, context) {
     // (for multiCombo, tval should be the key suffix, not the entire key)
     function displayValue(tval) {
         tval = tval || '';
+        // Issue #11652
+        if (field.key === 'language:'){
+          let langName = localizer.languageName(tval);
+          if (langName) {
+            return langName;
+          };
+        }
 
         var stringsField = field.resolveReference('stringsCrossReference');
         const labelId = getLabelId(stringsField, tval);
@@ -133,6 +140,12 @@ export function uiFieldCombo(field, context) {
     // (for multiCombo, tval should be the key suffix, not the entire key)
     function renderValue(tval) {
         tval = tval || '';
+
+        // Issue #11652
+        if (field.key === 'language:'){
+          let langName = localizer.languageName(tval);
+          if (langName) return selection => selection.text(langName);
+        }
 
         var stringsField = field.resolveReference('stringsCrossReference');
         const labelId = getLabelId(stringsField, tval);
@@ -289,12 +302,20 @@ export function uiFieldCombo(field, context) {
                 const labelId = getLabelId(stringsField, v);
                 var isLocalizable = stringsField.hasTextForStringId(labelId);
                 var label = stringsField.t(labelId, { default: v });
+                // If this is a language field, force the label to be the human readable name
+                if (['language:'].includes(field.key)) {
+                    let langName = localizer.languageName(v);
+                    if (langName) {
+                        label = langName;
+                        isLocalizable = true;
+                    }
+                }
                 return {
                     key: v,
-                    value: label,
+                    value: v,
                     title: stringsField.t(`options.${v}.description`, { default:
-                        isLocalizable ? v : (d.title !== label ? d.title : '') }),
-                    display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
+                        isLocalizable ? label : (d.title !== label ? d.title : '') }),
+                    display: addComboboxIcons(stringsField.t.append(labelId, { default: label }), v),
                     klass: isLocalizable ? '' : 'raw-option'
                 };
             });
