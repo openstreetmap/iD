@@ -2939,6 +2939,17 @@ img.tag-reference-wiki-image {
     border-radius: 0;
 }
 
+.members-download button,
+.members-download button.loading {
+    width: 32px;
+    background: none;
+    margin-right: -5px;
+}
+.members-download button .icon {
+    fill: var(--text-color);
+    opacity: .5;
+}
+
 
 /* only the raw-member-editor is reorederable, not the raw-membership-editor */
 .section-raw-member-editor .member-row label,

@@ -424,11 +424,6 @@ export function uiSectionRawMembershipEditor(context) {
             });
 
         items = items.merge(itemsEnter);
-        items.selectAll('button.members-download')
-            .classed('hide', d => {
-                const graph = context.graph();
-                return d.relation.members.every(m => graph.hasEntity(m.id));
-            });
 
         const dupeLabels = new WeakSet(Object.values(
             utilArrayGroupBy(items.selectAll('.label-text').nodes(), 'textContent'))
@@ -481,6 +476,12 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('title', t('icons.download'))
             .call(svgIcon('#iD-icon-load'))
             .on('click', downloadMembers);
+
+        items.selectAll('button.members-download')
+            .classed('hide', d => {
+                const graph = context.graph();
+                return d.relation.members.every(m => graph.hasEntity(m.id));
+            });
 
         wrapEnter
             .append('button')

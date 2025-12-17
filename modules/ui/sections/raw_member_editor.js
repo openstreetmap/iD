@@ -122,11 +122,37 @@ export function uiSectionRawMemberEditor(context) {
 
     function renderDisclosureContent(selection) {
 
-
         var entityID = _entityIDs[0];
 
         var memberships = [];
         var entity = context.entity(entityID);
+
+        const graph = context.graph();
+        const downloadMembers = selection.selectAll('.members-download')
+            .data(entity.members.every(m => graph.hasEntity(m.id)) ? []: [0]);
+        const downloadMembersEnter = downloadMembers.enter()
+            //.append('div')
+            .insert('div', ':first-child')
+            .classed('members-download', true)
+            .classed('section-footer', true)
+            .append('a')
+            .attr('role', 'button')
+            .on('click', function (d3_event) {
+                d3_event.preventDefault();
+                const button = d3_select(this).select('button');
+                // display the loading indicator
+                button.classed('loading', true);
+                context.loadEntity(entity.id, () => section.reRender());
+            });
+        downloadMembersEnter
+            .append('span')
+            .text('Download all members');
+        downloadMembersEnter
+            .append('button')
+            .attr('title', t('icons.download'))
+            .call(svgIcon('#iD-icon-load'));
+        downloadMembers.exit().remove();
+
 
         function connects(memberA, memberB, direction, ignoreNode) {
             const entityA = context.hasEntity(memberA.id);
