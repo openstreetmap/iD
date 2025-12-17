@@ -153,6 +153,8 @@ export function actionMergePolygon(ids, newRelationId) {
         }
     };
 
+    action.id = 'merge_polygon';
+
 
     return action;
 }

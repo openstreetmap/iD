@@ -314,7 +314,12 @@ en:
       relation: This can't be disconnected because it connects members of a relation.
     merge:
       title: Merge
-      description: Merge these features.
+      description:
+        join: Join these lines.
+        merge_polygon: Combine the selected areas.
+        merge_members: Add these features as members to the selected relation.
+        merge_nodes: Merge these points.
+        merge: Merge these features.
       key: C
       annotation:
         one: "Merged a feature."

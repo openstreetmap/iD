@@ -4,7 +4,7 @@ import { actionJoin } from '../actions/join';
 import { actionMerge } from '../actions/merge';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionMergePolygon } from '../actions/merge_polygon';
-import { actionMergeWithRelation } from '../actions/merge_with_relation';
+import { actionMergeMembers } from '../actions/merge_members';
 
 import { behaviorOperation } from '../behavior/operation';
 import { modeSelect } from '../modes/select';
@@ -28,7 +28,7 @@ export function operationMerge(context, selectedIDs) {
         const mergeNodes = actionMergeNodes(selectedIDs);
         if (!mergeNodes.disabled(context.graph())) return mergeNodes;
 
-        const mergeWithRelation = actionMergeWithRelation(selectedIDs);
+        const mergeWithRelation = actionMergeMembers(selectedIDs);
         if (!mergeWithRelation.disabled(context.graph())) return mergeWithRelation;
 
         // otherwise prefer an action with an interesting disabled reason
@@ -87,7 +87,7 @@ export function operationMerge(context, selectedIDs) {
             }
             return t.append('operations.merge.' + disabled);
         }
-        return t.append('operations.merge.description');
+        return t.append(`operations.merge.description.${_action.id}`);
     };
 
     operation.annotation = function() {
