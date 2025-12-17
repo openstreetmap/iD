@@ -15,7 +15,7 @@ var _popularKeys = {};
 // these will be returned by keys(), but taginfo will not be queried for values() requests
 var _extraExcludedKeys = /^(postal_code|via|((int_|loc_|nat_|official_|old_|ref_|reg_|short_|full_|sorting_|alt_|artist_|long_|bridge:|tunnel:)?name(:left|:right)?(:[a-z]+)?))$/;
 
-var _extraExcludedKeyNames = /^(hashtag|hashtags)$/;
+var _extraExcludedKeyNames = /^(hashtags?|created_by)$/;
 
 var _taginfoCache = {};
 
