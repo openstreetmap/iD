@@ -110,6 +110,12 @@ describe('iD.coreLocalizer', function() {
             [['zh-Hans-CN'], ['zh-CN', 'zh', 'en']],
             [['zh-Hans'], ['zh', 'en']],
             [['fr-Latn'], ['fr', 'en']],
+            // Firefox-style locales with quality values (see #11700)
+            [['en;q=0.5'], ['en']],
+            [['en-AU;q=0.9'], ['en-AU', 'en']],
+            [['zh-CN;q=0.8'], ['zh-CN', 'zh', 'en']],
+            [['fr;q=0.7', 'en;q=0.3'], ['fr', 'en']],
+            [['zh-Hans-CN;q=1.0'], ['zh-CN', 'zh', 'en']],
         ])('resolves %s to %s', (requested, matching) => {
             const localiser = iD.coreLocalizer();
             localiser.preferredLocaleCodes(requested);
