@@ -115,11 +115,12 @@ export function uiFieldCombo(field, context) {
     function displayValue(tval) {
         tval = tval || '';
         // Issue #11652
-        if (field.key === 'language:'){
+        // Ignore language: key and when tval is not others
+        if (field.key === 'language:' && tval !== 'others'){
           let langName = localizer.languageName(tval);
           if (langName) {
             return langName;
-          };
+          }
         }
 
         var stringsField = field.resolveReference('stringsCrossReference');
@@ -142,7 +143,8 @@ export function uiFieldCombo(field, context) {
         tval = tval || '';
 
         // Issue #11652
-        if (field.key === 'language:'){
+        // Ignore language: key and when tval is not others
+        if (field.key === 'language:' && tval !== 'others'){
           let langName = localizer.languageName(tval);
           if (langName) return selection => selection.text(langName);
         }
@@ -190,6 +192,37 @@ export function uiFieldCombo(field, context) {
     }
 
     function getOptions(allOptions) {
+        // Get dropdown list for language: key via localizer instead of taginfo
+        if (field.key === 'language:') {
+          let codes = Object.keys(localizer.languages());
+
+          let options = codes.map((c) => {
+            let name = localizer.languageName(c);
+            return {
+              key: c,
+              value: name,
+              title: name,
+              display: selection => selection.text(name)
+            };
+          }).filter(Boolean);
+
+          options.sort((a, b) => {
+            return a.value.localeCompare(b.value);
+          });
+
+          // inserting others because it does not come via _dataLanguages
+          options.push({
+            key: 'others',
+            value: 'others',
+            title: 'others',
+            display: selection => selection.text('others'),
+            klass: 'raw-option'
+          });
+
+
+          return options;
+        }
+
         var stringsField = field.resolveReference('stringsCrossReference');
         if (!(field.options || stringsField.options)) return [];
 
@@ -241,6 +274,9 @@ export function uiFieldCombo(field, context) {
         var queryFilter = d => d.value.toLowerCase().includes(q.toLowerCase()) || d.key.toLowerCase().includes(q.toLowerCase());
         if (hasStaticValues()) {
             setStaticValues(callback, queryFilter);
+
+            // If it is language field, we don't need to request for values, we get it from getOptions
+            if (field.key === 'language:') return;
         }
 
         var stringsField = field.resolveReference('stringsCrossReference');
@@ -302,17 +338,9 @@ export function uiFieldCombo(field, context) {
                 const labelId = getLabelId(stringsField, v);
                 var isLocalizable = stringsField.hasTextForStringId(labelId);
                 var label = stringsField.t(labelId, { default: v });
-                // If this is a language field, force the label to be the human readable name
-                if (['language:'].includes(field.key)) {
-                    let langName = localizer.languageName(v);
-                    if (langName) {
-                        label = langName;
-                        isLocalizable = true;
-                    }
-                }
                 return {
                     key: v,
-                    value: v,
+                    value: label,
                     title: stringsField.t(`options.${v}.description`, { default:
                         isLocalizable ? label : (d.title !== label ? d.title : '') }),
                     display: addComboboxIcons(stringsField.t.append(labelId, { default: label }), v),
@@ -737,6 +765,8 @@ export function uiFieldCombo(field, context) {
                 .classed('raw-value', function(d) {
                     var k = d.key;
                     if (_isMulti) k = k.replace(field.key, '');
+                    // Ignore the raw-value class for key language:
+                    if (field.key === 'language:' && localizer.languageName(k) && k !== 'others') return false;
                     return !stringsField.hasTextForStringId('options.' + k);
                 })
                 .classed('draggable', allowDragAndDrop)
