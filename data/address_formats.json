@@ -132,7 +132,16 @@
       ["postcode", "city", "district"],
       ["street+place"],
       ["housenumber", "floor", "unit"]
-    ]
+    ],
+      "widths": {
+          "postcode": 0.3,
+          "city": 0.5,
+          "district": 0.5,
+          "street+place": 1,
+          "housenumber": 0.7,
+          "floor": 0.2,
+          "unit": 0.2
+      }
   },
   {
     "countryCodes": ["jp"],
