@@ -192,12 +192,16 @@ export function uiFieldCombo(field, context) {
     }
 
     function getOptions(allOptions) {
+        var stringsField = field.resolveReference('stringsCrossReference');
         // Get dropdown list for language: key via localizer instead of taginfo
         if (field.key === 'language:') {
           let codes = Object.keys(localizer.languages());
 
           let options = codes.map((c) => {
             let name = localizer.languageName(c);
+
+            // Omit names which are null or equal to the code itself
+            if (!name || name === c) return null;
             return {
               key: c,
               value: name,
@@ -206,24 +210,28 @@ export function uiFieldCombo(field, context) {
             };
           }).filter(Boolean);
 
+          const localeCode = localizer.localeCode();
+
           options.sort((a, b) => {
-            return a.value.localeCompare(b.value);
+            return a.value.localeCompare(b.value, localeCode);
           });
+
+          const v = 'others';
+          const labelId = getLabelId(stringsField, v);
 
           // inserting others because it does not come via _dataLanguages
           options.push({
-            key: 'others',
-            value: 'others',
-            title: 'others',
-            display: selection => selection.text('others'),
-            klass: 'raw-option'
+            key: v,
+            value: stringsField.t(labelId, { default: v }),
+            title: stringsField.t(`options.${v}.description`, { default: v }),
+            display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
+            klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
           });
 
 
           return options;
         }
 
-        var stringsField = field.resolveReference('stringsCrossReference');
         if (!(field.options || stringsField.options)) return [];
 
         let options;
