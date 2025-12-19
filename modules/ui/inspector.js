@@ -87,7 +87,7 @@ export function uiInspector(context) {
             wrap.style('right', '-100%');
             editorPane.classed('hide', true);
             presetPane.classed('hide', false)
-                .call(presetList);
+                .call(presetList.autofocus(true));
         } else {
             wrap.style('right', '0%');
             presetPane.classed('hide', true);

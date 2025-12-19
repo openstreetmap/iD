@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.38.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Focus preset search box when selecting an untagged vertex of a way ([#11706])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -53,6 +54,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
 [#11636]: https://github.com/openstreetmap/iD/pull/11636
+[#11706]: https://github.com/openstreetmap/iD/issues/11706
 
 # v2.37.3
 ##### 2025-10-31
