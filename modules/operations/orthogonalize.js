@@ -28,9 +28,24 @@ export function operationOrthogonalize(context, selectedIDs) {
         if (entity.type === 'way' && new Set(entity.nodes).size > 2 ) {
             if (_type && _type !== 'feature') return null;
             _type = 'feature';
-            return actionOrthogonalize(entityID, context.projection);
 
-        // square a single vertex
+            var graph = context.graph();
+            var nodes = graph.childNodes(entity);
+
+            // Apply vertex-based orthogonalization to all nodes
+            return function(graph, t) {
+                nodes.forEach(function(node) {
+                    var action = actionOrthogonalize(
+                        entityID,
+                        context.projection,
+                        node.id
+                    );
+                    if (!action.disabled(graph)) {
+                        graph = action(graph, t);
+                    }
+                });
+                return graph;
+            };
         } else if (geometry === 'vertex') {
             if (_type && _type !== 'corner') return null;
             _type = 'corner';
