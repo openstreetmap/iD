@@ -346,7 +346,7 @@ export function uiCombobox(context, klass) {
             var bestIndex = -1;
             for (var i = 0; i < suggestionValues.length; i++) {
                 var suggestion = suggestionValues[i];
-                var compare = _caseSensitive ? suggestion : suggestion.toLowerCase();
+                var compare = suggestion.toLowerCase();
 
                 // if search string matches suggestion exactly, pick it..
                 if (compare === val) {
