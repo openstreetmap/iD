@@ -774,7 +774,7 @@ export function uiFieldCombo(field, context) {
                     var k = d.key;
                     if (_isMulti) k = k.replace(field.key, '');
                     // Ignore the raw-value class for key language:
-                    if (field.key === 'language:' && localizer.languageName(k) && k !== 'others') return false;
+                    if (field.key === 'language:' && localizer.languageName(k) !== k) return false;
                     return !stringsField.hasTextForStringId('options.' + k);
                 })
                 .classed('draggable', allowDragAndDrop)
