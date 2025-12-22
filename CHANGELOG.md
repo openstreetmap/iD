@@ -67,7 +67,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # v2.37.2
 ##### 2025-10-30
 
-* Correctly resolve subtitles of NSI presets when base preset has a crossreferenced string ([#11527])
+* Correctly resolve subtitles of NSI presets when base preset has a cross-referenced string ([#11527])
 
 [#11527]: https://github.com/openstreetmap/iD/issues/11527
 
