@@ -43,12 +43,19 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Don't error on features with a sole `note` tag ([#11522])
 #### :bug: Bugfixes
+* Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
 #### :earth_asia: Localization
+* The Languages field shows language names in your preferred language. ([#11699], thanks [@Razen04])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
+* Change package name to `@openstreetmap/id` to be able to publish releases on npm
+
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
+[#11636]: https://github.com/openstreetmap/iD/pull/11636
+[#11699]: https://github.com/openstreetmap/iD/pull/11699
+[@Razen04]: https://github.com/Razen04
 
 # v2.37.3
 ##### 2025-10-31
@@ -63,7 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # v2.37.2
 ##### 2025-10-30
 
-* Correctly resolve subtitles of NSI presets when base preset has a crossreferenced string ([#11527])
+* Correctly resolve subtitles of NSI presets when base preset has a cross-referenced string ([#11527])
 
 [#11527]: https://github.com/openstreetmap/iD/issues/11527
 

@@ -2980,17 +2980,26 @@ img.tag-reference-wiki-image {
 .add-tag button {
     visibility: hidden;
 }
-.add-tag input.key {
-    border-bottom-left-radius: 4px;
-}
 .add-tag input.key::placeholder {
     font-weight: normal;
 }
-.add-tag input.value {
+.ideditor[dir='ltr'] .add-tag input.key {
+    border-bottom-left-radius: 4px;
+}
+.ideditor[dir='rtl'] .add-tag input.key {
     border-bottom-right-radius: 4px;
 }
-.tag-row:has(+ .add-tag) button:last-child {
+.ideditor[dir='ltr'] .add-tag input.value {
     border-bottom-right-radius: 4px;
+}
+.ideditor[dir='rtl'] .add-tag input.value {
+    border-bottom-left-radius: 4px;
+}
+.ideditor[dir='ltr'] .tag-row:has(+ .add-tag) button:last-child {
+    border-bottom-right-radius: 4px;
+}
+.ideditor[dir='rtl'] .tag-row:has(+ .add-tag) button:last-child {
+    border-bottom-left-radius: 4px;
 }
 
 .add-relation {
@@ -5859,6 +5868,43 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 	* {
 	    scrollbar-width: thin;
 	}
+}
+
+:dir(rtl)::-webkit-scrollbar {
+    border-right: 1px solid var(--border-color-2);
+    border-left: none;
+}
+:dir(rtl)::-webkit-scrollbar-thumb {
+    border-width: 3px 4px 3px 3px;
+    border-radius: 6px;
+}
+
+/* Resize handles of textareas */
+textarea::-webkit-resizer {
+	background: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0gMiA5IGwgNyAtNyBNIDYgOSBsIDMgLTMiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlPSIjOTk5IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+Cjwvc3ZnPg==") var(--bg-color);
+	background-size: 12px 12px;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+}
+textarea:active::-webkit-resizer,
+textarea:focus::-webkit-resizer {
+	background: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0gMiA5IGwgNyAtNyBNIDYgOSBsIDMgLTMiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlPSIjOTk5IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+Cjwvc3ZnPg==") var(--active-bg-color);
+	background-size: 12px 12px;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+}
+textarea:dir(rtl)::-webkit-resizer {
+	background: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0gOCA5IGwgLTcgLTcgTSA0IDkgbCAtMyAtMyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2U9IiM5OTkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz4KPC9zdmc+") var(--bg-color);
+	background-size: 12px 12px;
+	background-position: bottom left;
+	background-repeat: no-repeat;
+}
+textarea:active:dir(rtl)::-webkit-resizer,
+textarea:focus:dir(rtl)::-webkit-resizer {
+	background: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0gOCA5IGwgLTcgLTcgTSA0IDkgbCAtMyAtMyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2U9IiM5OTkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz4KPC9zdmc+") var(--active-bg-color);
+	background-size: 12px 12px;
+	background-position: bottom left;
+	background-repeat: no-repeat;
 }
 
 
