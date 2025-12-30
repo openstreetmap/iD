@@ -13,7 +13,7 @@ var _inflight = {};
 var _popularKeys = {};
 // manually exclude some additional keys – #5377, #7485, #10287
 // these will be returned by keys(), but taginfo will not be queried for values() requests
-var _extraExcludedKeys = /^(postal_code|via|((int_|loc_|nat_|official_|old_|ref_|reg_|short_|full_|sorting_|alt_|artist_|long_|bridge:|tunnel:)?name(:left|:right)?(:[a-z]+)?))$/;
+var _extraExcludedKeys = /^(addr:.+|postal_code|via|((int_|loc_|nat_|official_|old_|ref_|reg_|short_|full_|sorting_|alt_|artist_|long_|bridge:|tunnel:)?name(:left|:right)?(:[a-z]+)?))$/;
 
 var _taginfoCache = {};
 
