@@ -32,7 +32,6 @@ export function validationCrossingWays(context) {
         return way;
     }
 
-
     function hasTag(tags, key) {
         return tags[key] !== undefined && tags[key] !== 'no';
     }
@@ -794,49 +793,63 @@ export function validationCrossingWays(context) {
         return fix;
     }
 
-    function makeChangeLayerFix(higherOrLower) {
-        return new validationIssueFix({
-            icon: 'iD-icon-' + (higherOrLower === 'higher' ? 'up' : 'down'),
-            title: t.append('issues.fix.tag_this_as_' + higherOrLower + '.title'),
-            onClick: function(context) {
+    // =============================
+// FIXED: makeChangeLayerFix
+// =============================
 
-                var mode = context.mode();
-                if (!mode || mode.id !== 'select') return;
+function makeChangeLayerFix(higherOrLower) {
+    return new validationIssueFix({
+        icon: 'iD-icon-' + (higherOrLower === 'higher' ? 'up' : 'down'),
+        title: t.append('issues.fix.tag_this_as_' + higherOrLower + '.title'),
+        onClick: function(context) {
+            var mode = context.mode();
+            if (!mode || mode.id !== 'select') return;
 
-                var selectedIDs = mode.selectedIDs();
-                if (selectedIDs.length !== 1) return;
+            var selectedIDs = mode.selectedIDs();
+            if (selectedIDs.length !== 1) return;
 
-                var selectedID = selectedIDs[0];
-                if (!this.issue.entityIds.some(function(entityId) {
-                    return entityId === selectedID;
-                })) return;
+            var selectedID = selectedIDs[0];
+            if (!this.issue.entityIds.includes(selectedID)) return;
 
-                var entity = context.hasEntity(selectedID);
-                if (!entity) return;
+            var entity = context.hasEntity(selectedID);
+            if (!entity) return;
 
-                var tags = Object.assign({}, entity.tags);   // shallow copy
-                var layer = tags.layer && Number(tags.layer);
-                if (layer && !isNaN(layer)) {
-                    if (higherOrLower === 'higher') {
-                        layer += 1;
-                    } else {
-                        layer -= 1;
-                    }
-                } else {
-                    if (higherOrLower === 'higher') {
-                        layer = 1;
-                    } else {
-                        layer = -1;
-                    }
-                }
-                tags.layer = layer.toString();
-                context.perform(
-                    actionChangeTags(entity.id, tags),
-                    t('operations.change_tags.annotation')
-                );
+            // Clone tags (never mutate original)
+            var tags = Object.assign({}, entity.tags);
+
+            // --- UX IMPROVEMENT ---
+            // We do NOT implement real elevation.
+            // Instead, we reuse existing bridge/tunnel styling
+            // to provide immediate visual feedback.
+
+            if (higherOrLower === 'higher') {
+                // Mark as visually "above"
+                tags.bridge = 'yes';
+                tags.layer = '1';
+
+                // Ensure mutually exclusive tagging
+                delete tags.tunnel;
+
+            } else {
+                // Mark as visually "below"
+                tags.tunnel = 'yes';
+                tags.layer = '-1';
+
+                // Ensure mutually exclusive tagging
+                delete tags.bridge;
             }
-        });
-    }
+
+            context.perform(
+                actionChangeTags(entity.id, tags),
+                t('operations.change_tags.annotation')
+            );
+
+            // Force immediate visual feedback
+            context.enter(modeSelect(context, [entity.id]));
+        }
+    });
+}
+
 
     validation.type = type;
 
