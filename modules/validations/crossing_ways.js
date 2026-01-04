@@ -797,59 +797,59 @@ export function validationCrossingWays(context) {
 // FIXED: makeChangeLayerFix
 // =============================
 
-function makeChangeLayerFix(higherOrLower) {
-    return new validationIssueFix({
-        icon: 'iD-icon-' + (higherOrLower === 'higher' ? 'up' : 'down'),
-        title: t.append('issues.fix.tag_this_as_' + higherOrLower + '.title'),
-        onClick: function(context) {
-            var mode = context.mode();
-            if (!mode || mode.id !== 'select') return;
+      function makeChangeLayerFix(higherOrLower) {
+        return new validationIssueFix({
+            icon: 'iD-icon-' + (higherOrLower === 'higher' ? 'up' : 'down'),
+            title: t.append('issues.fix.tag_this_as_' + higherOrLower + '.title'),
+            onClick: function(context) {
 
-            var selectedIDs = mode.selectedIDs();
-            if (selectedIDs.length !== 1) return;
+                var mode = context.mode();
+                if (!mode || mode.id !== 'select') return;
 
-            var selectedID = selectedIDs[0];
-            if (!this.issue.entityIds.includes(selectedID)) return;
+                var selectedIDs = mode.selectedIDs();
+                if (selectedIDs.length !== 1) return;
 
-            var entity = context.hasEntity(selectedID);
-            if (!entity) return;
+                var selectedID = selectedIDs[0];
+                if (!this.issue.entityIds.includes(selectedID)) return;
 
-            // Clone tags (never mutate original)
-            var tags = Object.assign({}, entity.tags);
+                var entity = context.hasEntity(selectedID);
+                if (!entity) return;
 
-            // --- UX IMPROVEMENT ---
-            // We do NOT implement real elevation.
-            // Instead, we reuse existing bridge/tunnel styling
-            // to provide immediate visual feedback.
+                // Clone tags (never mutate original)
+                var tags = Object.assign({}, entity.tags);
 
-            if (higherOrLower === 'higher') {
-                // Mark as visually "above"
-                tags.bridge = 'yes';
-                tags.layer = '1';
+                // Determine feature type
+                var featureType = getFeatureType(entity, context.graph());
 
-                // Ensure mutually exclusive tagging
-                delete tags.tunnel;
+                // Compute new layer value
+                var layer = Number(tags.layer);
+                if (!isNaN(layer)) {
+                    layer += (higherOrLower === 'higher' ? 1 : -1);
+                } else {
+                    layer = (higherOrLower === 'higher' ? 1 : -1);
+                }
+                tags.layer = layer.toString();
 
-            } else {
-                // Mark as visually "below"
-                tags.tunnel = 'yes';
-                tags.layer = '-1';
+                // Apply bridge/tunnel ONLY to allowed linear features
+                if (featureType && allowsBridge(featureType) && higherOrLower === 'higher') {
+                    tags.bridge = 'yes';
+                    delete tags.tunnel;
+                } else if (featureType && allowsTunnel(featureType) && higherOrLower === 'lower') {
+                    tags.tunnel = 'yes';
+                    delete tags.bridge;
+                } else {
+                    // Buildings or unsupported features
+                    delete tags.bridge;
+                    delete tags.tunnel;
+                }
 
-                // Ensure mutually exclusive tagging
-                delete tags.bridge;
+                context.perform(
+                    actionChangeTags(entity.id, tags),
+                    t('operations.change_tags.annotation')
+                );
             }
-
-            context.perform(
-                actionChangeTags(entity.id, tags),
-                t('operations.change_tags.annotation')
-            );
-
-            // Force immediate visual feedback
-            context.enter(modeSelect(context, [entity.id]));
-        }
-    });
-}
-
+        });
+    }
 
     validation.type = type;
 
