@@ -1406,6 +1406,16 @@ button.preset-reset .label.flash-bg {
                                                     -
 */
 
+.form-field-pattern-info {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: 4px;
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+
 .form-field {
     display: flex;
     flex-flow: row wrap;
