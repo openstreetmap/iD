@@ -110,14 +110,14 @@ export function actionConnect(nodeIDs) {
                     return 'would_degenerate_parent';
                 }
                 // Check for self-intersection (repeated non-endpoint nodes) - #9328
-                var nodes = newWay.nodes;
+                var wayNodes = newWay.nodes;
                 var seenNodes = {};
-                for (k = 1; k < nodes.length - 1; k++) {
-                    var n = nodes[k];
-                    if (seenNodes[n]) {
+                for (k = 1; k < wayNodes.length - 1; k++) {
+                    var nodeId = wayNodes[k];
+                    if (seenNodes[nodeId]) {
                         return 'would_degenerate_parent';
                     }
-                    seenNodes[n] = true;
+                    seenNodes[nodeId] = true;
                 }
             }
         }

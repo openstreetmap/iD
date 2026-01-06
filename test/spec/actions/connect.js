@@ -514,8 +514,8 @@ describe('iD.actionConnect', function() {
         });
 
     });
-    
-           it('allows uninteresting parent ways to be deleted by the operation', function () {
+
+        it('allows uninteresting parent ways to be deleted by the operation', function () {
             var graph = iD.coreGraph([
                 iD.osmNode({ id: 'a' }),
                 iD.osmNode({ id: 'b' }),
@@ -544,5 +544,5 @@ describe('iD.actionConnect', function() {
             ]);
             expect(iD.actionConnect(['b', 'd']).disabled(graph)).to.eql('would_degenerate_parent');
         });
-    
+
 });
