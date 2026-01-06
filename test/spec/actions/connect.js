@@ -514,4 +514,35 @@ describe('iD.actionConnect', function() {
         });
 
     });
+    
+           it('allows uninteresting parent ways to be deleted by the operation', function () {
+            var graph = iD.coreGraph([
+                iD.osmNode({ id: 'a' }),
+                iD.osmNode({ id: 'b' }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b'] }),
+            ]);
+            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.be.not.ok;
+        });
+
+        it('refuses to connect nodes if an interesting parent way would be deleted', function () {
+            var graph = iD.coreGraph([
+                iD.osmNode({ id: 'a' }),
+                iD.osmNode({ id: 'b' }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'residential' } }),
+            ]);
+            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.eql('would_destroy_parent');
+        });
+
+        it('refuses to connect nodes if any parent ways would become degenerate', function () {
+            var graph = iD.coreGraph([
+                iD.osmNode({ id: 'a', loc: [0, 0] }),
+                iD.osmNode({ id: 'b', loc: [2, 0] }),
+                iD.osmNode({ id: 'c', loc: [1, 1] }),
+                iD.osmNode({ id: 'd', loc: [2, 2] }),
+                iD.osmNode({ id: 'e', loc: [0, 2] }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a'], tags: { building: 'yes' } }),
+            ]);
+            expect(iD.actionConnect(['b', 'd']).disabled(graph)).to.eql('would_degenerate_parent');
+        });
+    
 });

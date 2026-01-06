@@ -84,28 +84,40 @@ export function actionConnect(nodeIDs) {
         // Select the node with the oldest ID as the survivor.
         survivor = graph.entity(utilOldestID(nodeIDs));
 
-        // 0. disable if merging would destroy a tagged closed way (e.g., building)
+        // 0. disable if merging would destroy or degenerate a parent way with interesting tags
+        // Run the action first on a copy to see what would happen
+        var parentWays = [];
         for (i = 0; i < nodeIDs.length; i++) {
             node = graph.entity(nodeIDs[i]);
-            var parentWays = graph.parentWays(node);
-            for (j = 0; j < parentWays.length; j++) {
-                way = parentWays[j];
-                if (way.isClosed() && way.hasInterestingTags()) {
-                    // Check if this way would become degenerate after merge
-                    var testWay = way.update({});
-                    for (k = 0; k < nodeIDs.length; k++) {
-                        if (nodeIDs[k] === survivor.id) continue;
-                        if (testWay.contains(nodeIDs[k])) {
-                            if (testWay.areAdjacent(nodeIDs[k], survivor.id)) {
-                                testWay = testWay.removeNode(nodeIDs[k]);
-                            } else {
-                                testWay = testWay.replaceNode(nodeIDs[k], survivor.id);
-                            }
-                        }
+            var ways = graph.parentWays(node);
+            for (j = 0; j < ways.length; j++) {
+                if (parentWays.indexOf(ways[j]) === -1) {
+                    parentWays.push(ways[j]);
+                }
+            }
+        }
+
+        // Check if any interesting parent ways would be destroyed or become degenerate
+        var newGraph = action(graph);
+        for (i = 0; i < parentWays.length; i++) {
+            way = parentWays[i];
+            if (way.hasInterestingTags()) {
+                if (!newGraph.hasEntity(way.id)) {
+                    return 'would_destroy_parent';
+                }
+                var newWay = newGraph.entity(way.id);
+                if (newWay.isDegenerate()) {
+                    return 'would_degenerate_parent';
+                }
+                // Check for self-intersection (repeated non-endpoint nodes) - #9328
+                var nodes = newWay.nodes;
+                var seenNodes = {};
+                for (k = 1; k < nodes.length - 1; k++) {
+                    var n = nodes[k];
+                    if (seenNodes[n]) {
+                        return 'would_degenerate_parent';
                     }
-                    if (testWay.isDegenerate()) {
-                        return 'would_destroy_feature';
-                    }
+                    seenNodes[n] = true;
                 }
             }
         }
