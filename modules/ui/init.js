@@ -143,6 +143,15 @@ export function uiInit(context) {
             .attr('class', 'sidebar')
             .call(ui.sidebar);
 
+        // If we're on a mobile-sized screen and the sidebar is opened by default,
+        // collapse it by invoking the existing toggle logic so behavior is consistent.
+        if (window.matchMedia && window.matchMedia('(max-width:640px)').matches) {
+            var sidebarSel = container.select('.sidebar');
+            if (!sidebarSel.classed('collapsed')) {
+                context.ui().sidebar.toggle();
+            }
+        }
+
         var content = container
             .append('div')
             .attr('class', 'main-content active');
