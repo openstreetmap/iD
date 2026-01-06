@@ -18,7 +18,7 @@ import { utilArrayUniq, utilOldestID } from '../util';
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/MergeNodesAction.java
 //
 export function actionConnect(nodeIDs) {
-    var action = function(graph) {
+    var action = function (graph) {
         var survivor;
         var node;
         var parents;
@@ -73,7 +73,7 @@ export function actionConnect(nodeIDs) {
     };
 
 
-    action.disabled = function(graph) {
+    action.disabled = function (graph) {
         var seen = {};
         var restrictionIDs = [];
         var survivor;
@@ -83,6 +83,32 @@ export function actionConnect(nodeIDs) {
 
         // Select the node with the oldest ID as the survivor.
         survivor = graph.entity(utilOldestID(nodeIDs));
+
+        // 0. disable if merging would destroy a tagged closed way (e.g., building)
+        for (i = 0; i < nodeIDs.length; i++) {
+            node = graph.entity(nodeIDs[i]);
+            var parentWays = graph.parentWays(node);
+            for (j = 0; j < parentWays.length; j++) {
+                way = parentWays[j];
+                if (way.isClosed() && way.hasInterestingTags()) {
+                    // Check if this way would become degenerate after merge
+                    var testWay = way.update({});
+                    for (k = 0; k < nodeIDs.length; k++) {
+                        if (nodeIDs[k] === survivor.id) continue;
+                        if (testWay.contains(nodeIDs[k])) {
+                            if (testWay.areAdjacent(nodeIDs[k], survivor.id)) {
+                                testWay = testWay.removeNode(nodeIDs[k]);
+                            } else {
+                                testWay = testWay.replaceNode(nodeIDs[k], survivor.id);
+                            }
+                        }
+                    }
+                    if (testWay.isDegenerate()) {
+                        return 'would_destroy_feature';
+                    }
+                }
+            }
+        }
 
         // 1. disable if the nodes being connected have conflicting relation roles
         for (i = 0; i < nodeIDs.length; i++) {
@@ -132,8 +158,8 @@ export function actionConnect(nodeIDs) {
             if (!relation.isComplete(graph)) continue;
 
             var memberWays = relation.members
-                .filter(function(m) { return m.type === 'way'; })
-                .map(function(m) { return graph.entity(m.id); });
+                .filter(function (m) { return m.type === 'way'; })
+                .map(function (m) { return graph.entity(m.id); });
 
             memberWays = utilArrayUniq(memberWays);
             var f = relation.memberByRole('from');
@@ -163,15 +189,15 @@ export function actionConnect(nodeIDs) {
 
             for (j = 0; j < nodeIDs.length; j++) {
                 var n = nodeIDs[j];
-                if (nodes.from.indexOf(n) !== -1)    { connectFrom = true; }
-                if (nodes.via.indexOf(n) !== -1)     { connectVia = true; }
-                if (nodes.to.indexOf(n) !== -1)      { connectTo = true; }
+                if (nodes.from.indexOf(n) !== -1) { connectFrom = true; }
+                if (nodes.via.indexOf(n) !== -1) { connectVia = true; }
+                if (nodes.to.indexOf(n) !== -1) { connectTo = true; }
                 if (nodes.keyfrom.indexOf(n) !== -1) { connectKeyFrom = true; }
-                if (nodes.keyto.indexOf(n) !== -1)   { connectKeyTo = true; }
+                if (nodes.keyto.indexOf(n) !== -1) { connectKeyTo = true; }
             }
             if (connectFrom && connectTo && !isUturn) { return 'restriction'; }
             if (connectFrom && connectVia) { return 'restriction'; }
-            if (connectTo   && connectVia) { return 'restriction'; }
+            if (connectTo && connectVia) { return 'restriction'; }
 
             // connecting to a key node -
             // if both nodes are on a member way (i.e. part of the turn restriction),
@@ -230,7 +256,7 @@ export function actionConnect(nodeIDs) {
         }
 
         function keyNodeFilter(froms, tos) {
-            return function(n) {
+            return function (n) {
                 return froms.indexOf(n) === -1 && tos.indexOf(n) === -1;
             };
         }

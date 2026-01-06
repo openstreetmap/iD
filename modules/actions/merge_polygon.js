@@ -6,9 +6,7 @@ import { utilArrayGroupBy, utilArrayIntersection, utilObjectOmit, utilOldestID }
 export function actionMergePolygon(ids, newRelationId) {
 
     function groupEntities(graph) {
-        var entities = ids
-            .map(function (id) { return graph.entity(id); })
-            .filter(function (entity) { return entity.type !== 'node'; });
+        var entities = ids.map(function (id) { return graph.entity(id); });
 
         var geometryGroups = utilArrayGroupBy(entities, function (entity) {
             if (entity.type === 'way' && entity.isClosed()) {
