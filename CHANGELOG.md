@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.38.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -45,6 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
 #### :earth_asia: Localization
+* Add Moroccan phone number formats ([#11651], thanks [@ilias52730])
 * The Languages field shows language names in your preferred language. ([#11699], thanks [@Razen04])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -54,7 +56,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
 [#11636]: https://github.com/openstreetmap/iD/pull/11636
+[#11651]: https://github.com/openstreetmap/iD/pull/11651
 [#11699]: https://github.com/openstreetmap/iD/pull/11699
+[#11733]: https://github.com/openstreetmap/iD/pull/11733
+[@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 
 # v2.37.3
