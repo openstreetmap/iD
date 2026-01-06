@@ -839,6 +839,39 @@ a.hide-toggle {
     left: -6px;
 }
 
+/* Mobile: make the sidebar act like a full-screen modal */
+@media (max-width: 640px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100% !important;
+        max-width: none !important;
+        z-index: 10000;
+        transform: translateX(100%);
+        transition: transform 200ms ease;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .sidebar:not(.collapsed) {
+        transform: translateX(0);
+    }
+
+    .sidebar.collapsed {
+        transform: translateX(100%);
+    }
+
+    .sidebar .sidebar-resizer { display: none; }
+
+    /* dim the main content when sidebar modal is open */
+    .main-content.inactive {
+        pointer-events: none;
+        filter: grayscale(80%) brightness(80%);
+    }
+}
+
 .sidebar.collapsed > *:not(.sidebar-resizer) {
     display: none;
 }

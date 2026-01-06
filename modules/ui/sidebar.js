@@ -53,6 +53,10 @@ export function uiSidebar(context) {
 
         var downPointerId, lastClientX, containerLocGetter;
 
+        function isMobileScreen() {
+            return window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
+        }
+
         function pointerdown(d3_event) {
             if (downPointerId) return;
 
@@ -362,6 +366,23 @@ export function uiSidebar(context) {
             var xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
 
             sidebarWidth = selection.node().getBoundingClientRect().width;
+
+            // On mobile, set dimming and click-to-close immediately for modal behavior
+            if (isMobileScreen()) {
+                if (!isCollapsing) {
+                    // expanding -> dim the main content and attach close handler
+                    container.select('.main-content').classed('inactive', true).on('click.sidebar-close', function() {
+                        if (!selection.classed('collapsed')) {
+                            sidebar.toggle();
+                        }
+                    });
+                    resizer.style('display', 'none');
+                } else {
+                    // collapsing -> un-dim and remove handler
+                    container.select('.main-content').classed('inactive', false).on('click.sidebar-close', null);
+                    resizer.style('display', null);
+                }
+            }
 
             // switch from % to px
             selection.style('width', sidebarWidth + 'px');
