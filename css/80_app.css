@@ -806,7 +806,7 @@ a.hide-toggle {
 }
 
 
-/* Sidebar / Inspector
+/* Sidebar / Inspector 
 ------------------------------------------------------- */
 .sidebar {
     position: relative;
@@ -822,6 +822,75 @@ a.hide-toggle {
     float: right;
     border-right-width: 0px;
     border-left-width: 1px;
+}
+
+/* MOBILE MODAL OVERRIDE */
+@media screen and (max-width: 850px) {
+    /* When the sidebar is open, hide the map */
+    .ideditor.sidebar-modal-open .main-content,
+    .ideditor.sidebar-modal-open .sidebar-resizer {
+        display: none !important;
+    }
+
+    /* sidebar fill the entire screen */
+    .ideditor.sidebar-modal-open .sidebar {
+        position: fixed; 
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100% !important;
+        max-width: 100% !important;
+        z-index: 9999; 
+        margin: 0 !important;
+        border: none;
+    }
+
+    /* header button visible and easy to tap */
+    .ideditor.sidebar-modal-open .sidebar .header button.close {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 44px; /* Thumb-friendly tap target */
+        height: 44px;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 100;
+        cursor: pointer;
+    }
+
+    /* icon inside is centered */
+    .ideditor.sidebar-modal-open .sidebar .header button.close svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+    }
+    .sidebar-close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 9999; /* Increased to stay above all inspector elements */
+        padding: 10px;
+        background: white; /* Changed from transparent for better visibility on mobile */
+        border-radius: 50%; /* Makes it look like a clean circular button */
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Helps it pop against map data */
+    }
+
+    .sidebar-close-button.hide {
+        display: none !important;
+    }
+
+    .sidebar-close-button .icon {
+        width: 24px;
+        height: 24px;
+        fill: #333;
+    }
 }
 
 .sidebar-resizer {
