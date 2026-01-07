@@ -214,7 +214,10 @@ export const osmOneWayForwardTags = {
         'spillway': true,
         'stream': true,
         'tidal_channel': true
-    }
+    },
+    'railway:preferred_direction': {
+        'forward': 'forward',
+    },
 };
 export const osmOneWayBackwardTags = {
     'conveying': {
@@ -222,6 +225,9 @@ export const osmOneWayBackwardTags = {
     },
     'oneway': {
         '-1': true,
+    },
+    'railway:preferred_direction': {
+        'backward': 'backward',
     },
 };
 export const osmOneWayBiDirectionalTags = {
@@ -231,6 +237,9 @@ export const osmOneWayBiDirectionalTags = {
     'oneway': {
         'alternating': true,
         'reversible': true,
+    },
+    'railway:preferred_direction': {
+        'both': true,
     },
 };
 export const osmOneWayTags = merge(

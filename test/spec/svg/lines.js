@@ -145,9 +145,9 @@ describe('iD.svgLines', function () {
             var selection = surface.selectAll('g.onewaygroup > path');
 
             expect(selection.size()).to.eql(3);
-            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black)');
-            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black)');
-            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black)');
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black-normal)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black-normal)');
+            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black-normal)');
         });
 
         it('has two marker layers for alternating oneway ways', function() {
@@ -162,8 +162,8 @@ describe('iD.svgLines', function () {
 
             var selection = surface.selectAll('g.onewaygroup > path');
             expect(selection.size()).to.eql(2);
-            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black)');
-            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black)');
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black-normal)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black-normal)');
         });
 
         it('has no marker layer for oneway=no ways', function() {

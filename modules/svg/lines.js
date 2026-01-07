@@ -316,8 +316,11 @@ export function svgLines(projection, context) {
                 .call(drawLineGroup, 'stroke', true);
 
             addMarkers(layergroup, 'oneway', 'onewaygroup', onewaydata, (d) => {
-                const category = onewayArrowColour(graph.entity(d.id).tags);
-                return `url(#ideditor-oneway-marker-${category})`;
+                const way = graph.entity(d.id);
+                const category = onewayArrowColour(way.tags);
+                const variant = way.priorityDirection() === d.direction ? 'priority' : 'normal';
+
+                return `url(#ideditor-oneway-marker-${category}-${variant})`;
             });
             addMarkers(layergroup, 'sided', 'sidedgroup', sideddata,
                 function marker(d) {
