@@ -583,7 +583,7 @@ en:
   zoom_in_edit: Zoom in to edit
   login: Log In
   logout: Log Out
-  loading_auth: "Connecting to OpenStreetMap..."
+  loading_auth: "Connecting to OpenStreetMap…"
   report_a_bug: Report a bug
   help_translate: Help translate
   sidebar:
@@ -696,11 +696,11 @@ en:
     relation: relation
     note: note
   geocoder:
-    search: Search worldwide...
+    search: Search worldwide…
     no_results_worldwide: No results found
   geolocate:
     title: Show My Location
-    locating: "Locating, please wait..."
+    locating: "Locating, please wait…"
     location_unavailable: Your location is unavailable.
   inspector:
     zoom_to:
@@ -721,7 +721,7 @@ en:
     title_count: "{title} ({count})"
     add_to_relation: Add to a relation
     add_tag: Add new tag
-    new_relation: New relation...
+    new_relation: New relation…
     choose_relation: Choose a parent relation
     role: Role
     multiple_roles: Multiple Roles
@@ -1038,7 +1038,7 @@ en:
     error: Errors occurred while trying to save
     status_code: "Server returned status code {code}"
     unknown_error_details: "Please ensure you are connected to the internet."
-    uploading: Uploading changes to OpenStreetMap...
+    uploading: Uploading changes to OpenStreetMap…
     conflict_progress: "Checking for conflicts: {num} of {total}"
     unsaved_changes: You have unsaved changes
     conflict:
