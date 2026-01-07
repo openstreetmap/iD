@@ -130,7 +130,6 @@
     "shx": "^0.4.0",
     "sinon": "^21.0.0",
     "sinon-chai": "^4.0.1",
-    "smash": "0.0",
     "svg-sprite": "2.0.4",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.3",
