@@ -860,7 +860,7 @@ a.hide-toggle {
     }
 
     .sidebar.collapsed {
-        transform: translateX(-200%);
+        transform: translateX(200%);
     }
 
     .sidebar .sidebar-resizer { display: none; }
