@@ -2270,7 +2270,7 @@ en:
       add_name: "Let's pretend that you have local knowledge of this cafe, and you know its name. **Add a name for the cafe.**"
       add_reminder: "All entered information should be objective and verifiable."
       add_close: "The feature editor will remember all of your changes automatically. **When you are finished adding the name, press the {button} button or `{esc}` to close the feature editor.**"
-      reselect: "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Select the cafe you just created.**"
+      reselect: "Often points will already exist, but have mistakes or are incomplete. We can edit existing points. **Select the cafe you just created.**"
       update: "Let's fill in some more details for this cafe. You can change its name, add a cuisine, or add an address. **Change the cafe details.**"
       update_close: "**When you are finished updating the cafe, press the {button} button or `{esc}` to close the feature editor.**"
       rightclick: "You can {rightclick} right-click on any feature to see the *edit menu*, which shows a list of editing operations that can be performed.{br}A right-click might be the same as a control-click or two-finger click. **Right-click to select the point you created and show the edit menu.**"
