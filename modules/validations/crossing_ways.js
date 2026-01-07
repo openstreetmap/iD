@@ -793,10 +793,6 @@ export function validationCrossingWays(context) {
         return fix;
     }
 
-    // =============================
-// FIXED: makeChangeLayerFix
-// =============================
-
       function makeChangeLayerFix(higherOrLower) {
         return new validationIssueFix({
             icon: 'iD-icon-' + (higherOrLower === 'higher' ? 'up' : 'down'),

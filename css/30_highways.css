@@ -1,6 +1,3 @@
-/* preset-icon-container highways */
-
-/* defaults */
 .preset-icon .icon.tag-highway.other-line {
     color: #fff;
     fill: #777;
@@ -13,7 +10,6 @@ path.line.casing.tag-highway {
 path.line.stroke.tag-highway {
     stroke: #ccc;
 }
-
 
 /* wide highways */
 path.line.shadow.tag-highway {
