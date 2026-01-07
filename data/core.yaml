@@ -477,8 +477,8 @@ en:
             single_node: Divide this line into two at this point.
             multiple_node: Divide this line at these points.
           multiple:
-            single_node: "Divide all lines at this point. Tip: To limit this operation to a specific line, select both the line and point before performing the split."
-            multiple_node: "Divide all lines at these points. Tip: To limit this operation to a specific line, select the line as well as the points before performing the split."
+            single_node: "Divide all lines at this point. Tip: To limit this operation to a specific line, select both the line and point before performing the split."
+            multiple_node: "Divide all lines at these points. Tip: To limit this operation to a specific line, select the line as well as the points before performing the split."
         area:
           single:
             single_node: Divide the edge of this area into two at this point.
@@ -1585,7 +1585,7 @@ en:
       connect_line_h: "Connecting Lines"
       connect_line: "Having roads connected properly is important for the map and essential for providing driving directions."
       connect_line_display: "The connections between roads are drawn with gray circles. The endpoints of a line are drawn with larger white circles if they don't connect to anything."
-      connect_line_drag: "To connect a line to another feature, drag one of the line's nodes onto the other feature until both features snap together. Tip: You can hold down the `{alt}` key to prevent nodes from connecting to other features."
+      connect_line_drag: "To connect a line to another feature, drag one of the line's nodes onto the other feature until both features snap together. Tip: You can hold down the `{alt}` key to prevent nodes from connecting to other features."
       connect_line_tag: "If you know that the connection has traffic lights or crosswalks, you can add them by selecting the connecting node and using the feature editor to select the correct feature's type."
       disconnect_line_h: "Disconnecting Lines"
       disconnect_line_command: "To disconnect a road from another feature, {rightclick} right-click or {longpress_icon} long-press the connecting node and choose the {disconnect_icon} **{disconnect}** operation from the edit menu."
@@ -1706,7 +1706,7 @@ en:
           about: "This field allows you to inspect and modify turn restrictions. It displays a model of the selected intersection including other nearby connected roads."
           from_via_to: "A turn restriction always contains: one **FROM way**, one **TO way**, and either one **VIA node** or one or more **VIA ways**."
           maxdist: "The \"{distField}\" slider controls how far to search for additional connected roads."
-          maxvia: "The \"{viaField}\" slider adjusts how many via ways may be included in the search. (Tip: simple is better)"
+          maxvia: "The \"{viaField}\" slider adjusts how many via ways may be included in the search. (Tip: simple is better)"
         inspecting:
           title: Inspecting
           about: "Hover over any **FROM** segment to see whether it has any turn restrictions. Each possible **TO** destination will be drawn with a colored shadow showing whether a restriction exists."
@@ -2284,7 +2284,7 @@ en:
       start_playground: "Let's add this playground to the map by drawing an area. Areas are drawn by placing *nodes* along the outer edge of the feature."
       starting_node_click: "**Click or press `{space}` to place a starting node on one of the corners of the playground.**"
       starting_node_tap: "**{tap_icon} Tap to place a starting node on one of the corners of the playground.**"
-      continue_playground: "Continue drawing the area by placing more nodes along the playground's edge. It is OK to connect the area to the existing walking paths.{br}Tip: You can hold down the `{alt}` key to prevent nodes from connecting to other features. **Continue drawing an area for the playground.**"
+      continue_playground: "Continue drawing the area by placing more nodes along the playground's edge. It is OK to connect the area to the existing walking paths.{br}Tip: You can hold down the `{alt}` key to prevent nodes from connecting to other features. **Continue drawing an area for the playground.**"
       finish_area_click: "Finish the area by pressing `{return}`, or clicking again on either the first or last node."
       finish_area_tap: "Finish the area by {tap_icon} tapping again on either the first or last node, or by pressing `{return}` on a keyboard."
       finish_playground: "**Finish drawing an area for the playground.**"
