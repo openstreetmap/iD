@@ -28,6 +28,10 @@ export function uiSidebar(context) {
     var _wasData = false;
     var _wasNote = false;
     var _wasQaItem = false;
+    var isMobile = (
+        window.matchMedia &&
+        window.matchMedia('(max-width: 640px)').matches
+    );
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -41,10 +45,19 @@ export function uiSidebar(context) {
         var dragOffset;
 
         // Set the initial width constraints
-        selection
-            .style('min-width', minWidth + 'px')
-            .style('max-width', '400px')
-            .style('width', '33.3333%');
+        if (isMobile) {
+            selection
+                .style('width', '100vw')
+                .style('min-width', null)
+                .style('max-width', null)
+                .style('position', 'fixed')
+                .style('z-index', '110');
+        } else {
+            selection
+                .style('min-width', minWidth + 'px')
+                .style('max-width', '400px')
+                .style('width', '33.3333%');
+        }
 
         var resizer = selection
             .append('div')
