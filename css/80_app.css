@@ -732,10 +732,22 @@ button.add-note svg.icon {
     right: 0;
     top: 0;
 }
+
+
+.sidebar .header button.sidebar-toggle {
+    position: absolute;
+    right: 40px;
+    top: 0;
+}
+
 .ideditor[dir='rtl'] .field-help-title button.close,
 .ideditor[dir='rtl'] .sidebar .header button.close,
 .ideditor[dir='rtl'] .preset-list-pane .header button.preset-choose {
     left: 0;
+    right: auto;
+}
+.ideditor[dir='rtl'] .sidebar .header button.sidebar-toggle {
+    left: 40px;
     right: auto;
 }
 
@@ -818,6 +830,7 @@ a.hide-toggle {
     border: 0px solid var(--border-color);
     border-right-width: 1px;
 }
+
 .ideditor[dir='rtl'] .sidebar {
     float: right;
     border-right-width: 0px;

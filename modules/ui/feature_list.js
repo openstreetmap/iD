@@ -37,12 +37,25 @@ export const idMatch = q => {
 
 export function uiFeatureList(context) {
     var _geocodeResults;
+    var isMobile = (
+        window.matchMedia &&
+        window.matchMedia('(max-width: 640px)').matches
+    );
 
 
     function featureList(selection) {
         var header = selection
             .append('div')
             .attr('class', 'header fillL');
+
+        isMobile && header
+            .append('button')
+            .attr('class', 'close')
+            .attr('title', 'toggle')
+            .on('click', function() {
+                context.ui().sidebar.toggle();
+            })
+            .call(svgIcon('#iD-icon-sidebar-left'));
 
         header
             .append('h2')
