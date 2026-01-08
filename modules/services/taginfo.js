@@ -247,7 +247,7 @@ export default {
                 callback(err);
             } else {
                 var f = filterKeys(params.filter);
-                var result = d.data.filter(f).filter(function(d) { return !_extraExcludedKeyNames.test(d.key); }).sort(sortKeys).map(valKey);
+                var result = d.data.filter(f).filter(d => !_extraExcludedKeyNames.test(d.key)).sort(sortKeys).map(valKey);
                 _taginfoCache[url] = result;
                 callback(null, result);
             }
