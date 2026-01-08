@@ -2,6 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
 import { t } from '../../core/localizer';
+
 import {
     utilGetSetValue,
     utilNoAuto,
@@ -9,14 +10,12 @@ import {
 } from '../../util';
 import { uiLengthIndicator } from '..';
 
-
 export function uiFieldTextarea(field, context) {
     var dispatch = d3_dispatch('change');
     var input = d3_select(null);
     var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue())
         .silent(field.usage === 'changeset' && field.key === 'comment');
     var _tags;
-
 
     function textarea(selection) {
         var wrap = selection.selectAll('.form-field-input-wrap')
