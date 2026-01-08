@@ -274,6 +274,7 @@ export function validationCrossingWays(context) {
 
             // Optimize by only checking overlapping segments, not every segment
             // of overlapping ways
+            
             segmentInfos = tree.waySegments(extent, graph);
 
             for (j = 0; j < segmentInfos.length; j++) {
