@@ -10,7 +10,6 @@ import {
 import { uiLengthIndicator } from '..';
 import { svgIcon } from '../../svg/icon';   // ← ADDED
 
-
 export function uiFieldTextarea(field, context) {
     var dispatch = d3_dispatch('change');
     var input = d3_select(null);

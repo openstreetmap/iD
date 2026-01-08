@@ -794,7 +794,7 @@ export function validationCrossingWays(context) {
         return fix;
     }
 
-        function makeChangeLayerFix(higherOrLower) {
+    function makeChangeLayerFix(higherOrLower) {
         return new validationIssueFix({
             icon: 'iD-icon-' + (higherOrLower === 'higher' ? 'up' : 'down'),
             title: t.append('issues.fix.tag_this_as_' + higherOrLower + '.title'),
@@ -807,39 +807,29 @@ export function validationCrossingWays(context) {
                 if (selectedIDs.length !== 1) return;
 
                 var selectedID = selectedIDs[0];
-                if (!this.issue.entityIds.includes(selectedID)) return;
+                if (!this.issue.entityIds.some(function(entityId) {
+                    return entityId === selectedID;
+                })) return;
 
                 var entity = context.hasEntity(selectedID);
                 if (!entity) return;
 
-                // Clone tags (never mutate original)
-                var tags = Object.assign({}, entity.tags);
-
-                // Determine feature type
-                var featureType = getFeatureType(entity, context.graph());
-
-                // Compute new layer value
-                var layer = Number(tags.layer);
-                if (!isNaN(layer)) {
-                    layer += (higherOrLower === 'higher' ? 1 : -1);
+                var tags = Object.assign({}, entity.tags);   // shallow copy
+                var layer = tags.layer && Number(tags.layer);
+                if (layer && !isNaN(layer)) {
+                    if (higherOrLower === 'higher') {
+                        layer += 1;
+                    } else {
+                        layer -= 1;
+                    }
                 } else {
-                    layer = (higherOrLower === 'higher' ? 1 : -1);
+                    if (higherOrLower === 'higher') {
+                        layer = 1;
+                    } else {
+                        layer = -1;
+                    }
                 }
                 tags.layer = layer.toString();
-
-                // Apply bridge/tunnel ONLY to allowed linear features
-                if (featureType && allowsBridge(featureType) && higherOrLower === 'higher') {
-                    tags.bridge = 'yes';
-                    delete tags.tunnel;
-                } else if (featureType && allowsTunnel(featureType) && higherOrLower === 'lower') {
-                    tags.tunnel = 'yes';
-                    delete tags.bridge;
-                } else {
-                    // Buildings or unsupported features
-                    delete tags.bridge;
-                    delete tags.tunnel;
-                }
-
                 context.perform(
                     actionChangeTags(entity.id, tags),
                     t('operations.change_tags.annotation')
@@ -847,7 +837,6 @@ export function validationCrossingWays(context) {
             }
         });
     }
-
 
     validation.type = type;
 
