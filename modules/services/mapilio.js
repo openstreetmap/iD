@@ -8,9 +8,10 @@ import { VectorTile } from '@mapbox/vector-tile';
 import { isEqual } from 'lodash-es';
 
 import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } from '../util';
-import {geoExtent, geoScaleToZoom} from '../geo';
-import {localizer} from '../core/localizer';
+import { geoExtent } from '../geo';
 import { services } from './';
+import { searchLimited } from '../util/partition';
+import { localeDateString } from '../util/date';
 
 const apiUrl = 'https://end.mapilio.com';
 const imageBaseUrl = 'https://cdn.mapilio.com/im';
@@ -42,32 +43,6 @@ let _sceneOptions = {
     hfov: 60,
 };
 let _currScene = 0;
-
-
-// Partition viewport into higher zoom tiles
-function partitionViewport(projection) {
-    const z = geoScaleToZoom(projection.scale());
-    const z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
-    const tiler = utilTiler().zoomExtent([z2, z2]);
-
-    return tiler.getTiles(projection)
-        .map(function(tile) { return tile.extent; });
-}
-
-
-// Return no more than `limit` results per partition.
-function searchLimited(limit, projection, rtree) {
-    limit = limit || 5;
-
-    return partitionViewport(projection)
-        .reduce(function(result, extent) {
-            const found = rtree.search(extent.bbox())
-                .slice(0, limit)
-                .map(function(d) { return d.data; });
-
-            return (found.length ? result.concat(found) : result);
-        }, []);
-}
 
 // Load all data for the specified type from Mapilio vector tiles
 function loadTiles(which, url, maxZoom, projection) {
@@ -411,14 +386,6 @@ export default {
                 that.initOnlyPhoto(context);
             }
         });
-
-        function localeDateString(s) {
-            if (!s) return null;
-            var options = { day: 'numeric', month: 'short', year: 'numeric' };
-            var d = new Date(s);
-            if (isNaN(d.getTime())) return null;
-            return d.toLocaleDateString(localizer.localeCode(), options);
-        }
 
         return this;
     },

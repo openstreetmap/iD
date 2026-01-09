@@ -28,3 +28,27 @@ export function getRelativeDate(date: Date) {
 
     return new Intl.RelativeTimeFormat(preferredLanguage).format(-number, units);
 }
+
+export function localeDateString(date: Date | string) {
+    if (!date) return null;
+    const options: Intl.DateTimeFormatOptions = {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+    };
+    const d = new Date(date);
+    if (Number.isNaN(d.getTime())) return null;
+    return d.toLocaleDateString(localizer.localeCode(), options);
+}
+
+export function localeTimestamp(date: Date) {
+    const options: Intl.DateTimeFormatOptions = {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+    };
+    return date.toLocaleString(localizer.localeCode(), options);
+}
