@@ -43,6 +43,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Don't error on features with a sole `note` tag ([#11522])
+* Warn when two features cross each other on same `layer`, regardless of `bridge` / `tunnel` tags ([#10999], thanks [@homersimpsons])
 #### :bug: Bugfixes
 * Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
 #### :earth_asia: Localization
@@ -61,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11733]: https://github.com/openstreetmap/iD/pull/11733
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
+[@homersimpsons]: https://github.com/homersimpsons
 
 # v2.37.3
 ##### 2025-10-31
