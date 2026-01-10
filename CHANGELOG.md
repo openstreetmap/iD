@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 * Add Moroccan phone number formats ([#11651], thanks [@ilias52730])
 * The Languages field shows language names in your preferred language. ([#11699], thanks [@Razen04])
+* When viewing the help information for tags or presets, use locale-specific properties if available ([#11760], thanks [@k-yle])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
@@ -60,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11651]: https://github.com/openstreetmap/iD/pull/11651
 [#11699]: https://github.com/openstreetmap/iD/pull/11699
 [#11733]: https://github.com/openstreetmap/iD/pull/11733
+[#11760]: https://github.com/openstreetmap/iD/pull/11760
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 [@homersimpsons]: https://github.com/homersimpsons
