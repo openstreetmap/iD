@@ -1,6 +1,6 @@
 import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
 import { json as d3_json } from 'd3-fetch';
-import { escape } from 'lodash';
+import { escape } from 'lodash-es';
 
 import { t, localizer } from '../core/localizer';
 import { geoExtent, geoSphericalDistance } from '../geo';
@@ -244,8 +244,7 @@ export function rendererBackgroundSource(data) {
 
     /* hides a source from the list, but leaves it available for use */
     source.isHidden = function() {
-        return source.id === 'DigitalGlobe-Premium-vintage' ||
-            source.id === 'DigitalGlobe-Standard-vintage';
+        return false; // currently there are no hidden layers
     };
 
 

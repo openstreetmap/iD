@@ -4,7 +4,7 @@ import { drag as d3_drag } from 'd3-drag';
 import * as countryCoder from '@rapideditor/country-coder';
 
 import { fileFetcher } from '../../core/file_fetcher';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { svgIcon } from '../../svg/icon';
@@ -92,7 +92,11 @@ export function uiFieldCombo(field, context) {
         }
 
         if (!field.caseSensitive) {
-            dval = dval.toLowerCase();
+            if (!(field.key === 'type' && dval === 'associatedStreet')) {
+                // don't lowercase "type=associatedStreet" tag
+                // https://github.com/openstreetmap/iD/issues/9639
+                dval = dval.toLowerCase();
+            }
         }
 
         return dval;
@@ -110,6 +114,14 @@ export function uiFieldCombo(field, context) {
     // (for multiCombo, tval should be the key suffix, not the entire key)
     function displayValue(tval) {
         tval = tval || '';
+        // Issue #11652
+        // Ignore language: key and when tval is not others
+        if (field.key === 'language:' && tval !== 'others'){
+          let langName = localizer.languageName(tval);
+          if (langName) {
+            return langName;
+          }
+        }
 
         var stringsField = field.resolveReference('stringsCrossReference');
         const labelId = getLabelId(stringsField, tval);
@@ -129,6 +141,13 @@ export function uiFieldCombo(field, context) {
     // (for multiCombo, tval should be the key suffix, not the entire key)
     function renderValue(tval) {
         tval = tval || '';
+
+        // Issue #11652
+        // Ignore language: key and when tval is not others
+        if (field.key === 'language:' && tval !== 'others'){
+          let langName = localizer.languageName(tval);
+          if (langName) return selection => selection.text(langName);
+        }
 
         var stringsField = field.resolveReference('stringsCrossReference');
         const labelId = getLabelId(stringsField, tval);
@@ -174,6 +193,45 @@ export function uiFieldCombo(field, context) {
 
     function getOptions(allOptions) {
         var stringsField = field.resolveReference('stringsCrossReference');
+        // Get dropdown list for language: key via localizer instead of taginfo
+        if (field.key === 'language:') {
+          let codes = Object.keys(localizer.languages());
+
+          let options = codes.map((c) => {
+            let name = localizer.languageName(c);
+
+            // Omit names which are null or equal to the code itself
+            if (!name || name === c) return null;
+            return {
+              key: c,
+              value: name,
+              title: name,
+              display: selection => selection.text(name)
+            };
+          }).filter(Boolean);
+
+          const localeCode = localizer.localeCode();
+
+          options.sort((a, b) => {
+            return a.value.localeCompare(b.value, localeCode);
+          });
+
+          const v = 'others';
+          const labelId = getLabelId(stringsField, v);
+
+          // inserting others because it does not come via _dataLanguages
+          options.push({
+            key: v,
+            value: stringsField.t(labelId, { default: v }),
+            title: stringsField.t(`options.${v}.description`, { default: v }),
+            display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
+            klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
+          });
+
+
+          return options;
+        }
+
         if (!(field.options || stringsField.options)) return [];
 
         let options;
@@ -208,7 +266,9 @@ export function uiFieldCombo(field, context) {
             _comboData = _comboData.filter(filter);
         }
 
-        _comboData = objectDifference(_comboData, _multiData);
+        if (!field.allowDuplicates) {
+            _comboData = objectDifference(_comboData, _multiData);
+        }
         _combobox.data(_comboData);
 
         // hide the caret if there are no suggestions
@@ -222,6 +282,9 @@ export function uiFieldCombo(field, context) {
         var queryFilter = d => d.value.toLowerCase().includes(q.toLowerCase()) || d.key.toLowerCase().includes(q.toLowerCase());
         if (hasStaticValues()) {
             setStaticValues(callback, queryFilter);
+
+            // If it is language field, we don't need to request for values, we get it from getOptions
+            if (field.key === 'language:') return;
         }
 
         var stringsField = field.resolveReference('stringsCrossReference');
@@ -287,15 +350,17 @@ export function uiFieldCombo(field, context) {
                     key: v,
                     value: label,
                     title: stringsField.t(`options.${v}.description`, { default:
-                        isLocalizable ? v : (d.title !== label ? d.title : '') }),
-                    display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
+                        isLocalizable ? label : (d.title !== label ? d.title : '') }),
+                    display: addComboboxIcons(stringsField.t.append(labelId, { default: label }), v),
                     klass: isLocalizable ? '' : 'raw-option'
                 };
             });
 
             _comboData = _comboData.filter(queryFilter);
 
-            _comboData = objectDifference(_comboData, _multiData);
+            if (!field.allowDuplicates) {
+                _comboData = objectDifference(_comboData, _multiData);
+            }
             if (callback) callback(_comboData, hasStaticValues());
         });
     }
@@ -390,7 +455,10 @@ export function uiFieldCombo(field, context) {
             } else if (_isSemi) {
                 var arr = _multiData.map(function(d) { return d.key; });
                 arr = arr.concat(vals);
-                t[field.key] = context.cleanTagValue(utilArrayUniq(arr).filter(Boolean).join(';'));
+                if (!field.allowDuplicates) {
+                    arr = utilArrayUniq(arr);
+                }
+                t[field.key] = context.cleanTagValue(arr.filter(Boolean).join(';'));
             }
 
             window.setTimeout(function() { _input.node().focus(); }, 10);
@@ -416,11 +484,15 @@ export function uiFieldCombo(field, context) {
         if (_isMulti) {
             t[d.key] = undefined;
         } else if (_isSemi) {
-            var arr = _multiData.map(function(md) {
-                return md.key === d.key ? null : md.key;
-            }).filter(Boolean);
+            let arr = _multiData.map(item => item.key);
 
-            arr = utilArrayUniq(arr);
+            // delete the value using the index, since a value
+            // may exist multiple times in the array.
+            arr.splice(d.index, 1);
+
+            if (!field.allowDuplicates) {
+                arr = utilArrayUniq(arr);
+            }
             t[field.key] = arr.length ? arr.join(';') : undefined;
 
             _lengthIndicator.update(t[field.key]);
@@ -494,6 +566,7 @@ export function uiFieldCombo(field, context) {
         _input = _input.enter()
             .append('input')
             .attr('type', 'text')
+            .attr('dir', 'auto')
             .attr('id', field.domId)
             .call(utilNoAuto)
             .call(initCombo, _container)
@@ -626,7 +699,7 @@ export function uiFieldCombo(field, context) {
                 if (Array.isArray(tags[field.key])) {
 
                     tags[field.key].forEach(function(tagVal) {
-                        var thisVals = utilArrayUniq((tagVal || '').split(';')).filter(Boolean);
+                        var thisVals = (tagVal || '').split(';').filter(Boolean);
                         allValues = allValues.concat(thisVals);
                         if (!commonValues) {
                             commonValues = thisVals;
@@ -634,11 +707,16 @@ export function uiFieldCombo(field, context) {
                             commonValues = commonValues.filter(value => thisVals.includes(value));
                         }
                     });
-                    allValues = utilArrayUniq(allValues).filter(Boolean);
+                    allValues = allValues.filter(Boolean);
 
                 } else {
-                    allValues =  utilArrayUniq((tags[field.key] || '').split(';')).filter(Boolean);
+                    allValues =  (tags[field.key] || '').split(';').filter(Boolean);
                     commonValues = allValues;
+                }
+
+                if (!field.allowDuplicates) {
+                    commonValues = utilArrayUniq(commonValues);
+                    allValues = utilArrayUniq(allValues);
                 }
 
                 _multiData = allValues.map(function(v) {
@@ -673,7 +751,7 @@ export function uiFieldCombo(field, context) {
 
             // Render chips
             var chips = _container.selectAll('.chip')
-                .data(_multiData);
+                .data(_multiData.map((item, index) => ({ ...item, index })));
 
             chips.exit()
                 .remove();
@@ -695,6 +773,8 @@ export function uiFieldCombo(field, context) {
                 .classed('raw-value', function(d) {
                     var k = d.key;
                     if (_isMulti) k = k.replace(field.key, '');
+                    // Ignore the raw-value class for key language:
+                    if (field.key === 'language:' && localizer.languageName(k) !== k) return false;
                     return !stringsField.hasTextForStringId('options.' + k);
                 })
                 .classed('draggable', allowDragAndDrop)

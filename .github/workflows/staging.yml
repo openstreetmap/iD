@@ -13,16 +13,19 @@ jobs:
     runs-on: ubuntu-latest
     environment: workflows
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
           node-version-file: '.nvmrc'
       # install and build development version of id-tagging-schema
-      - uses: actions/checkout@v4
+      - name: Checkout the id-tagging-schema repository code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           repository: openstreetmap/id-tagging-schema
           path: './id-tagging-schema'
       - run: npm clean-install
+        working-directory: './id-tagging-schema'
+      - run: npm audit signatures
         working-directory: './id-tagging-schema'
       - run: npm run translations
         working-directory: './id-tagging-schema'
@@ -31,10 +34,12 @@ jobs:
         if: env.transifex_password != null
       - run: npm run dist
         working-directory: './id-tagging-schema'
-      - run: mkdir dist/id-tagging-schema && mv id-tagging-schema/dist dist/id-tagging-schema/dist
+      - name: id-tagging-schema - Create directories
+        run: mkdir dist/id-tagging-schema && mv id-tagging-schema/dist dist/id-tagging-schema/dist
       # build iD using freshest version of presets and ELI
       - run: npm clean-install
       - run: npm install editor-layer-index
+      - run: npm audit signatures
       - run: mkdir dist/data
       - run: npm run imagery
       - run: npm run all
@@ -50,4 +55,4 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{secrets.NETLIFY_AUTH_TOKEN}}
           NETLIFY_SITE_ID: ${{secrets.NETLIFY_SITE_ID}}
-        run: ./node_modules/.bin/netlify deploy --prod --dir=dist
+        run: ./node_modules/.bin/netlify deploy --no-build --prod --dir=dist

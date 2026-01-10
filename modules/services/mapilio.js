@@ -5,11 +5,12 @@ import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 
 import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } from '../util';
 import {geoExtent, geoScaleToZoom} from '../geo';
 import {localizer} from '../core/localizer';
+import { services } from './';
 
 const apiUrl = 'https://end.mapilio.com';
 const imageBaseUrl = 'https://cdn.mapilio.com/im';
@@ -222,8 +223,6 @@ export default {
             sequences: { rtree: new RBush(), lineString: {} },
             requests: { loaded: {}, inflight: {} }
         };
-
-        _activeImage = null;
     },
 
     // Get visible images
@@ -575,17 +574,17 @@ export default {
     },
 
     showViewer:function (context) {
-        let wrap = context.container().select('.photoviewer')
-            .classed('hide', false);
-
-        let isHidden = wrap.selectAll('.photo-wrapper.mapilio-wrapper.hide').size();
+        const wrap = context.container().select('.photoviewer');
+        const isHidden = wrap.selectAll('.photo-wrapper.mapilio-wrapper.hide').size();
 
         if (isHidden) {
-            wrap
-                .selectAll('.photo-wrapper:not(.mapilio-wrapper)')
-                .classed('hide', true);
-
-            wrap
+            for (const service of Object.values(services)) {
+                if (service === this) continue;
+                if (typeof service.hideViewer === 'function') {
+                    service.hideViewer(context);
+                }
+            }
+            wrap.classed('hide', false)
                 .selectAll('.photo-wrapper.mapilio-wrapper')
                 .classed('hide', false);
         }
@@ -611,7 +610,6 @@ export default {
             .classed('currentView', false);
 
         this.setActiveImage();
-
         return this.setStyles(context, null);
     },
 

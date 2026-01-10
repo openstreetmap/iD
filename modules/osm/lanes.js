@@ -1,4 +1,3 @@
-
 export function osmLanes(entity) {
     if (entity.type !== 'way') return null;
     if (!entity.tags.highway) return null;

@@ -1,5 +1,5 @@
 /* Downloads the latest translations from Transifex */
-const fs = require('fs');
+import fs from 'node:fs';
 
 const cldrMainDir = 'node_modules/cldr-localenames-full/main/';
 const rematchCodes = {
@@ -284,11 +284,9 @@ function getLangNamesInNativeLang() {
   return ordered;
 }
 
-const langNamesInNativeLang = getLangNamesInNativeLang();
+export const langNamesInNativeLang = getLangNamesInNativeLang();
 
-exports.langNamesInNativeLang = langNamesInNativeLang;
-
-exports.languageNamesInLanguageOf = function(code) {
+export function languageNamesInLanguageOf(code) {
   if (rematchCodes[code]) code = rematchCodes[code];
 
   const { language } = new Intl.Locale(code);
@@ -332,8 +330,7 @@ exports.languageNamesInLanguageOf = function(code) {
   return translatedLangsByCode;
 };
 
-
-exports.scriptNamesInLanguageOf = function(code) {
+export function scriptNamesInLanguageOf(code) {
   if (rematchCodes[code]) code = rematchCodes[code];
 
   let languageFilePath = `${cldrMainDir}${code}/scripts.json`;

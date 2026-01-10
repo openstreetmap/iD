@@ -61,19 +61,10 @@ export function validationUnsquareWay(context) {
         var points = nodes.map(function(node) { return context.projection(node.loc); });
         if (!geoOrthoCanOrthogonalize(points, isClosed, epsilon, degreeThreshold, true)) return [];
 
-        var autoArgs;
-        // don't allow autosquaring features linked to wikidata
-        if (!entity.tags.wikidata) {
-            // use same degree threshold as for detection
-            var autoAction = actionOrthogonalize(entity.id, context.projection, undefined, degreeThreshold);
-            autoAction.transitionable = false;  // when autofixing, do it instantly
-            autoArgs = [autoAction, t('operations.orthogonalize.annotation.feature', { n: 1 })];
-        }
-
         return [new validationIssue({
             type: type,
             subtype: 'building',
-            severity: 'warning',
+            severity: 'suggestion',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.unsquare_way.message', {
@@ -88,7 +79,6 @@ export function validationUnsquareWay(context) {
                     new validationIssueFix({
                         icon: 'iD-operation-orthogonalize',
                         title: t.append('issues.fix.square_feature.title'),
-                        autoArgs: autoArgs,
                         onClick: function(context, completionHandler) {
                             var entityId = this.issue.entityIds[0];
                             // use same degree threshold as for detection

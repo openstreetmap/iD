@@ -131,7 +131,7 @@ export function uiFieldAddress(field, context) {
             if (d.tags.name) {
                 if (d.tags.boundary === 'administrative' && d.tags.admin_level === '8') return true;
                 if (d.tags.border_type === 'city') return true;
-                if (d.tags.place === 'city' || d.tags.place === 'town' || d.tags.place === 'village') return true;
+                if (d.tags.place === 'city' || d.tags.place === 'town' || d.tags.place === 'village' || d.tags.place === 'hamlet') return true;
             }
 
             if (d.tags[`${field.key}:city`]) return true;
@@ -233,7 +233,7 @@ export function uiFieldAddress(field, context) {
         ]);
 
         var widths = addressFormat.widths || {
-            housenumber: 1/5, unit: 1/5, street: 1/2, place: 1/2,
+            housenumber: 1/5, unit: 1/5, floor: 1/5, street: 1/2, place: 1/2,
             city: 2/3, state: 1/4, postcode: 1/3
         };
 
@@ -268,6 +268,7 @@ export function uiFieldAddress(field, context) {
             .enter()
             .append('input')
             .property('type', 'text')
+            .attr('id', d => d.id === 'housenumber' ? field.domId : null)
             .attr('class', function (d) { return 'addr-' + d.id; })
             .call(utilNoAuto)
             .each(addDropdown)
@@ -338,11 +339,9 @@ export function uiFieldAddress(field, context) {
         }
 
         _wrap.selectAll('input')
+            .on('input', change(true))
             .on('blur', change())
             .on('change', change());
-
-        _wrap.selectAll('input:not(.combobox-input)')
-            .on('input', change(true));
 
         if (_tags) updateTags(_tags);
     }

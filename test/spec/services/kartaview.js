@@ -43,13 +43,12 @@ describe('iD.serviceKartaview', function() {
     });
 
     describe('#reset', function() {
-        it('resets cache and image', function() {
+        it('resets cache', function() {
             kartaview.cache().foo = 'bar';
             kartaview.selectImage(context, {key: 'baz'});
 
             kartaview.reset();
             expect(kartaview.cache()).to.not.have.property('foo');
-            expect(kartaview.getSelectedImage()).to.be.null;
         });
     });
 

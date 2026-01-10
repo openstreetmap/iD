@@ -8,6 +8,7 @@ en:
     copy: copy
     view_on: view on {domain}
     visit_website: visit website
+    edit_in: edit in {tool}
     favorite: favorite
     list: list
     text: text
@@ -58,6 +59,8 @@ en:
     drag_node:
       connected_to_hidden: This can't be edited because it is connected to a hidden feature.
   operations:
+    _unavailable:
+      Cannot perform “{operation}” on currently selected features.
     add:
       annotation:
         point: Added a point.
@@ -611,6 +614,7 @@ en:
     download_changes: Download osmChange file
     errors: Errors
     warnings: Warnings
+    suggestions: Suggestions
     modified: Modified
     deleted: Deleted
     created: Created
@@ -619,8 +623,10 @@ en:
     about_changeset_comments: About changeset comments
     about_changeset_comments_link: //wiki.openstreetmap.org/wiki/Good_changeset_comments
     changeset_comment_length_warning: "Changeset comments can have a maximum of {maxChars} characters."
-    google_warning: "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden."
-    google_warning_link: https://www.openstreetmap.org/copyright
+    changeset_incompatible_source:
+      comment: 'You mentioned "{value}" in this changeset comment.'
+      source: 'You mentioned "{value}" as a source of this changeset.'
+      link: https://www.openstreetmap.org/copyright
   contributors:
     list: "Edits by {users}"
     truncated_list:
@@ -702,6 +708,7 @@ en:
       title: Zoom To Selection
       no_selection: Nothing to zoom to.
     show_more: Show More
+    last_touched: Last touched {timeago} by {user}
     view_on_osm: View on openstreetmap.org
     view_on_osmose: View on osmose.openstreetmap.fr
     view_on_keepRight: View on keepright.at
@@ -713,7 +720,7 @@ en:
     features: Features
     title_count: "{title} ({count})"
     add_to_relation: Add to a relation
-    add_to_tag: Add a tag
+    add_tag: Add new tag
     new_relation: New relation...
     choose_relation: Choose a parent relation
     role: Role
@@ -763,6 +770,8 @@ en:
     add_fields: "Add field:"
     lock:
       suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "Tags" section.'
+    display_name_addr: "{housenumber} {streetOrPlace}"
+    display_name_addr_with_unit: "{unit}, {housenumber} {streetOrPlace}"
     display_name:
       direction: "{direction}"
       network: "{network}"
@@ -806,7 +815,7 @@ en:
     max_length_reached: "This string is longer than the maximum length of {maxChars} characters. Anything exceeding that length will be truncated."
     set_today: "Sets the value to today."
     set_photo_from_viewer:
-      enable: "Tag this photo id on the currently selected map feature"
+      enable: "Tag this photo ID on the currently selected map feature"
       disable:
         already_set: "This photo is already tagged on the selected map feature"
         too_far: "This photo is too far away from the selected map feature"
@@ -914,6 +923,9 @@ en:
     points:
       description: Points
       tooltip: "Points of Interest"
+    address_points:
+      description: Address Points
+      tooltip: "Addresses Mapped as Individual Points"
     traffic_roads:
       description: Traffic Roads
       tooltip: "Highways, Streets, etc."
@@ -1666,7 +1678,7 @@ en:
       offset_change: "Press the small triangle buttons to adjust the imagery offset in small steps, or hold the {leftclick} left mouse button and drag within the gray square to slide the imagery into alignment."
     streetlevel:
       title: Street Level Photos
-      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), and [KartaView](https://kartaview.org)."
+      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from a variety of different providers, such as [Panoramax](https://panoramax.fr), [Mapillary](https://www.mapillary.com), or [KartaView](https://kartaview.org)."
       using_h: "Using Street Level Photos"
       using: "To use street level photos for mapping, open the {data_icon} **{map_data}** panel on the side of the map to enable or disable the available photo overlays."
       photos: "When enabled, the photo overlay displays a line along the sequence of photos. At higher zoom levels, a circle marks at each photo location, and at even higher zoom levels, a cone indicates the direction the camera was facing when the photo was taken."
@@ -1726,6 +1738,8 @@ en:
       list_title: "Errors"
     warnings:
       list_title: "Warnings"
+    suggestions:
+      list_title: "Suggestions"
     rules:
       title: Rules
     user_resolved_issues: Issues resolved by your edits
@@ -1862,6 +1876,10 @@ en:
         message: '{feature} has an invalid email address'
         message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
+      website:
+        message: '{feature} has an invalid URL'
+        message_multi: '{feature} has multiple invalid URLs'
+        reference: 'URLs must start with "http://" or "https://".'
     line_as_area:
       message: '{feature} should be a line, not an area'
     line_as_point:
@@ -1977,6 +1995,12 @@ en:
       add_a_culvert:
         title: Add a culvert
         annotation: Added a culvert.
+      add_protocol_http:
+        title: Set HTTP for the URL
+        annotation: Set HTTP for the URL.
+      add_protocol_https:
+        title: Set HTTPS for the URL
+        annotation: Set HTTPS for the URL.
       address_the_concern:
         title: Address the concern
       connect_almost_junction:
@@ -2016,6 +2040,9 @@ en:
       move_tags:
         title: Move the tags
         annotation: Moved tags.
+      move_value_to_wikimedia_commons:
+        title: Set image as from Wikimedia Commons
+        annotation: Set image as from Wikimedia Commons.
       remove_from_relation:
         title: Remove from relation
       remove_generic_name:

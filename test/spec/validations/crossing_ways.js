@@ -148,6 +148,24 @@ describe('iD.validations.crossing_ways', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
+    it('ignores road crossing road on different layers', function() {
+        createWaysWithOneCrossingPoint({ highway: 'path', layer: '-5' }, { highway: 'path', layer: '-4' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores road crossing road on different levels', function() {
+        createWaysWithOneCrossingPoint({ highway: 'path', level: '-5' }, { highway: 'path', level: '-4' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores indoor highways crossing each other on different levels', function() {
+        createWaysWithOneCrossingPoint({ highway: 'path', indoor: 'yes', level: '-5' }, { highway: 'path', indoor: 'yes', level: '-4' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
     it('ignores road crossing building on different layers', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential', layer: '-1' }, { building: 'yes' });
         var issues = validate();
