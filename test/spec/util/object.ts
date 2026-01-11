@@ -20,3 +20,26 @@ describe('iD.utilCheckTagDictionary', () => {
         expect(iD.utilCheckTagDictionary({ surface: 'paved' }, dictionary)).toBe(0);
     });
 });
+
+describe('stringifyProperties', () => {
+    it('converts object properties to a string', () => {
+        const input = {
+            a: 'a',
+            b: 1,
+            c: null,
+            d: undefined,
+            e: { f: 1 },
+            g: [1, 2n],
+            h: 1n,
+        };
+        expect(iD.stringifyProperties(input)).toStrictEqual({
+            a: 'a',
+            b: '1',
+            c: 'null',
+            // d (undefined) is skipped
+            e: '{"f":1}',
+            g: '[1,"2"]',
+            h: '"1"',
+        });
+    });
+});

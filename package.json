@@ -79,7 +79,7 @@
     "which-polygon": "2.2.1"
   },
   "devDependencies": {
-    "@actions/github-script": "github:actions/github-script",
+    "@actions/github-script": "github:actions/github-script#v8.0.0",
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/free-regular-svg-icons": "^7.1.0",
@@ -94,7 +94,7 @@
     "@types/geojson": "^7946.0.16",
     "@types/happen": "^0.3.0",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^24.10.1",
+    "@types/node": "^25.0.2",
     "@types/sinon": "^21.0.0",
     "@types/sinon-chai": "^4.0.0",
     "autoprefixer": "^10.4.21",
@@ -130,7 +130,6 @@
     "shx": "^0.4.0",
     "sinon": "^21.0.0",
     "sinon-chai": "^4.0.1",
-    "smash": "0.0",
     "svg-sprite": "2.0.4",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.3",

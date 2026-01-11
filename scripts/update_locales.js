@@ -51,6 +51,13 @@ dataShortcuts.forEach(tab => {
 
 let coverageByLocaleCode = {};
 
+/**
+ * transifex uses underscores and `@` for locale codes. iD only uses
+ * hyphens, so that all locale codes are valid BCP 47 language tags.
+ * @param {string} code
+ */
+const normaliseLocaleCode = (code) => code.replace(/[@_]/g, '-');
+
 // There's a race condition here, but it's highly unlikely that the info will
 // return after the resources. There's an error check just in case.
 asyncMap(resourceIds, getResourceInfo, gotResourceInfo);
@@ -76,7 +83,7 @@ function gotResourceInfo(err, results) {
   if (err) return console.log(err);
   results.forEach(info => {
     info.forEach(stat => {
-      let code = stat.relationships.language.data.id.substr(2).replace(/_/g, '-');
+      let code = normaliseLocaleCode(stat.relationships.language.data.id.substr(2));
       let type = 'translated_strings';
       if (reviewedOnlyLangs.indexOf(code) !== -1) {
         type = 'reviewed_strings';
@@ -108,12 +115,14 @@ function gotResource(err, results) {
     en: { rtl: false, pct: 1 }
   };
   asyncMap(Object.keys(allStrings),
-    (code, done) => {
+    (rawCode, done) => {
+      const code = normaliseLocaleCode(rawCode);
+
       if (code === 'en') {
         done();
       } else {
         let obj = {};
-        obj[code] = allStrings[code] || {};
+        obj[code] = allStrings[rawCode] || {};
         let lNames = languageNames.languageNamesInLanguageOf(code) || {};
         if (Object.keys(lNames).length) {
           obj[code].languageNames = lNames;
@@ -124,7 +133,7 @@ function gotResource(err, results) {
         }
         fs.writeFileSync(`${outdir}${code}.min.json`, JSON.stringify(obj));
 
-        getLanguageInfo(code, (err, info) => {
+        getLanguageInfo(rawCode, (err, info) => {
           if (err) return console.log(err);
 
           let rtl = info && info.attributes && info.attributes.rtl;
@@ -195,7 +204,6 @@ function getResource(resourceId, callback) {
 function getLanguage(resourceId) {
   return async (code, callback) => {
     try {
-      code = code.replace(/-/g, '_');
       // random delay to avoid rate-limit of Transifex' API
       await delay(Math.random() * 60000);
       const url = await transifexApi.ResourceTranslationsAsyncDownload.download({
@@ -216,7 +224,6 @@ function getLanguage(resourceId) {
 
 
 async function getLanguageInfo(code, callback) {
-  code = code.replace(/-/g, '_');
   try {
     const lng = await transifexApi.Language.get({
       code: code
@@ -240,7 +247,7 @@ async function getLanguages(callback) {
     const lngs = await project.fetch('languages');
     for await (const lng of lngs.all()) {
       if (lng.attributes.code === 'en') continue;
-      result.push(lng.attributes.code.replace(/_/g, '-'));
+      result.push(lng.attributes.code);
     }
     console.log('got project languages');
     callback(null, result);

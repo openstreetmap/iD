@@ -39,12 +39,18 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Show warning when attempting to paste but nothing has been copied ([#9401])
+* Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Don't error on features with a sole `note` tag ([#11522])
+* Warn when two features cross each other on same `layer`, regardless of `bridge` / `tunnel` tags ([#10999], thanks [@homersimpsons])
 #### :bug: Bugfixes
+* Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
 #### :earth_asia: Localization
+* Add Moroccan phone number formats ([#11651], thanks [@ilias52730])
+* The Languages field shows language names in your preferred language. ([#11699], thanks [@Razen04])
+* When viewing the help information for tags or presets, use locale-specific properties if available ([#11760], thanks [@k-yle])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
@@ -53,6 +59,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
 [#9401]: https://github.com/openstreetmap/iD/issues/9401
+[#11636]: https://github.com/openstreetmap/iD/pull/11636
+[#11651]: https://github.com/openstreetmap/iD/pull/11651
+[#11699]: https://github.com/openstreetmap/iD/pull/11699
+[#11733]: https://github.com/openstreetmap/iD/pull/11733
+[#11760]: https://github.com/openstreetmap/iD/pull/11760
+[@ilias52730]: https://github.com/ilias52730
+[@Razen04]: https://github.com/Razen04
+[@homersimpsons]: https://github.com/homersimpsons
 
 # v2.37.3
 ##### 2025-10-31
@@ -67,7 +81,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # v2.37.2
 ##### 2025-10-30
 
-* Correctly resolve subtitles of NSI presets when base preset has a crossreferenced string ([#11527])
+* Correctly resolve subtitles of NSI presets when base preset has a cross-referenced string ([#11527])
 
 [#11527]: https://github.com/openstreetmap/iD/issues/11527
 

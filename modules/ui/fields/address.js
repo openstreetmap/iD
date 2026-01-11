@@ -233,7 +233,7 @@ export function uiFieldAddress(field, context) {
         ]);
 
         var widths = addressFormat.widths || {
-            housenumber: 1/5, unit: 1/5, street: 1/2, place: 1/2,
+            housenumber: 1/5, unit: 1/5, floor: 1/5, street: 1/2, place: 1/2,
             city: 2/3, state: 1/4, postcode: 1/3
         };
 
