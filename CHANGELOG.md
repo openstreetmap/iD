@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.38.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Show warning when attempting to paste but nothing has been copied ([#9401])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -51,6 +52,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
+[#9401]: https://github.com/openstreetmap/iD/issues/9401
 
 # v2.37.3
 ##### 2025-10-31
