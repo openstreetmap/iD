@@ -1,6 +1,7 @@
 import { t } from '../core/localizer';
 import { actionReflect } from '../actions/reflect';
 import { behaviorOperation } from '../behavior/operation';
+import { geoGetSmallestSurroundingRectangle, geoVecLength } from '../geo';
 import { utilGetAllNodes, utilTotalExtent } from '../util/util';
 
 
@@ -84,6 +85,29 @@ export function operationReflect(context, selectedIDs, axis) {
 
     operation.annotation = function() {
         return t('operations.reflect.annotation.' + axis + '.feature', { n: selectedIDs.length });
+    };
+
+
+    operation.getReflectAxis = function() {
+        if (nodes.length < 3) return null;
+
+        var points = nodes.map(function(n) { return context.projection(n.loc); });
+        var ssr = geoGetSmallestSurroundingRectangle(points);
+
+        // Calculate both potential axes (same logic as actionReflect)
+        var p1 = [(ssr.poly[0][0] + ssr.poly[1][0]) / 2, (ssr.poly[0][1] + ssr.poly[1][1]) / 2];
+        var q1 = [(ssr.poly[2][0] + ssr.poly[3][0]) / 2, (ssr.poly[2][1] + ssr.poly[3][1]) / 2];
+        var p2 = [(ssr.poly[3][0] + ssr.poly[4][0]) / 2, (ssr.poly[3][1] + ssr.poly[4][1]) / 2];
+        var q2 = [(ssr.poly[1][0] + ssr.poly[2][0]) / 2, (ssr.poly[1][1] + ssr.poly[2][1]) / 2];
+
+        var isLong = (geoVecLength(p1, q1) > geoVecLength(p2, q2));
+        var useLongAxis = (axis === 'long');
+
+        if ((useLongAxis && isLong) || (!useLongAxis && !isLong)) {
+            return [p1, q1];
+        } else {
+            return [p2, q2];
+        }
     };
 
 

@@ -10,6 +10,34 @@ import { utilGetDimensions } from '../util/dimensions';
 import { svgIcon } from '../svg/icon';
 
 
+// Helper function to draw/remove reflect axis overlay
+function drawReflectAxis(context, axisPoints, show) {
+    var surface = context.surface();
+    // Append to the OSM data layer to be in the same coordinate space as map features
+    var dataLayer = surface.selectAll('.data-layer.osm');
+    var axis = surface.selectAll('.reflect-axis-overlay');
+
+    if (!show || !axisPoints) {
+        axis.remove();
+        return;
+    }
+
+    // Create or update the axis line
+    if (axis.empty()) {
+        // Append to dataLayer if it exists, otherwise fall back to surface
+        var parent = dataLayer.empty() ? surface : dataLayer;
+        axis = parent.append('line')
+            .attr('class', 'reflect-axis-overlay');
+    }
+
+    axis
+        .attr('x1', axisPoints[0][0])
+        .attr('y1', axisPoints[0][1])
+        .attr('x2', axisPoints[1][0])
+        .attr('y2', axisPoints[1][1]);
+}
+
+
 export function uiEditMenu(context) {
     var dispatch = d3_dispatch('toggled');
 
@@ -93,14 +121,26 @@ export function uiEditMenu(context) {
                 d3_event.stopPropagation();
             })
             .on('mouseenter.highlight', function(d3_event, d) {
-                if (!d.relatedEntityIds || d3_select(this).classed('disabled')) return;
+                if (d3_select(this).classed('disabled')) return;
 
-                utilHighlightEntities(d.relatedEntityIds(), true, context);
+                if (d.relatedEntityIds) {
+                    utilHighlightEntities(d.relatedEntityIds(), true, context);
+                }
+
+                // Draw axis for reflect operations
+                if (d.getReflectAxis) {
+                    drawReflectAxis(context, d.getReflectAxis(), true);
+                }
             })
             .on('mouseleave.highlight', function(d3_event, d) {
-                if (!d.relatedEntityIds) return;
+                if (d.relatedEntityIds) {
+                    utilHighlightEntities(d.relatedEntityIds(), false, context);
+                }
 
-                utilHighlightEntities(d.relatedEntityIds(), false, context);
+                // Remove axis overlay for reflect operations
+                if (d.getReflectAxis) {
+                    drawReflectAxis(context, null, false);
+                }
             });
 
         buttonsEnter.each(function(d) {
@@ -155,6 +195,11 @@ export function uiEditMenu(context) {
 
             if (operation.relatedEntityIds) {
                 utilHighlightEntities(operation.relatedEntityIds(), false, context);
+            }
+
+            // Clean up axis overlay for reflect operations
+            if (operation.getReflectAxis) {
+                drawReflectAxis(context, null, false);
             }
 
             if (operation.disabled()) {
@@ -295,6 +340,9 @@ export function uiEditMenu(context) {
 
         _menu.remove();
         _tooltips = [];
+
+        // Clean up any reflect axis overlay
+        drawReflectAxis(context, null, false);
 
         dispatch.call('toggled', this, false);
     };
