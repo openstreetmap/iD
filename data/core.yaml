@@ -313,7 +313,7 @@ en:
       connected_to_hidden: This can't be disconnected because it is connected to a hidden feature.
       relation: This can't be disconnected because it connects members of a relation.
     merge:
-      title: Merge
+      title: Merge (combine)
       description: Merge these features.
       key: C
       annotation:
