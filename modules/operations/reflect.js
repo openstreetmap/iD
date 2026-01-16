@@ -74,6 +74,17 @@ export function operationReflect(context, selectedIDs, axis) {
     };
 
 
+    operation.getAuxiliaryGeometry = function() {
+        const graph = context.graph();
+        const [p, q] = _action.getReflectAxis(graph);
+        return [{
+            id: 'axis',
+            path: `M ${p[0]} ${p[1]} L ${q[0]} ${q[1]}`,
+            klass: 'reflect-axis'
+        }];
+    };
+
+
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
@@ -84,11 +95,6 @@ export function operationReflect(context, selectedIDs, axis) {
 
     operation.annotation = function() {
         return t('operations.reflect.annotation.' + axis + '.feature', { n: selectedIDs.length });
-    };
-
-
-    operation.getReflectAxis = function() {
-        return _action.getReflectAxis(context.graph());
     };
 
 

@@ -10,34 +10,6 @@ import { utilGetDimensions } from '../util/dimensions';
 import { svgIcon } from '../svg/icon';
 
 
-// Helper function to draw/remove reflect axis overlay
-function drawReflectAxis(context, axisPoints, show) {
-    var surface = context.surface();
-    // Append to the OSM data layer to be in the same coordinate space as map features
-    var dataLayer = surface.selectAll('.data-layer.osm');
-    var axis = surface.selectAll('.reflect-axis-overlay');
-
-    if (!show || !axisPoints) {
-        axis.remove();
-        return;
-    }
-
-    // Create or update the axis line
-    if (axis.empty()) {
-        // Append to dataLayer if it exists, otherwise fall back to surface
-        var parent = dataLayer.empty() ? surface : dataLayer;
-        axis = parent.append('line')
-            .attr('class', 'reflect-axis-overlay');
-    }
-
-    axis
-        .attr('x1', axisPoints[0][0])
-        .attr('y1', axisPoints[0][1])
-        .attr('x2', axisPoints[1][0])
-        .attr('y2', axisPoints[1][1]);
-}
-
-
 export function uiEditMenu(context) {
     var dispatch = d3_dispatch('toggled');
 
@@ -127,9 +99,8 @@ export function uiEditMenu(context) {
                     utilHighlightEntities(d.relatedEntityIds(), true, context);
                 }
 
-                // Draw axis for reflect operations
-                if (d.getReflectAxis) {
-                    drawReflectAxis(context, d.getReflectAxis(), true);
+                if (d.getAuxiliaryGeometry) {
+                    drawAuxiliaryGeometry(context, d.getAuxiliaryGeometry());
                 }
             })
             .on('mouseleave.highlight', function(d3_event, d) {
@@ -137,9 +108,8 @@ export function uiEditMenu(context) {
                     utilHighlightEntities(d.relatedEntityIds(), false, context);
                 }
 
-                // Remove axis overlay for reflect operations
-                if (d.getReflectAxis) {
-                    drawReflectAxis(context, null, false);
+                if (d.getAuxiliaryGeometry) {
+                    drawAuxiliaryGeometry(context, []);
                 }
             });
 
@@ -195,11 +165,6 @@ export function uiEditMenu(context) {
 
             if (operation.relatedEntityIds) {
                 utilHighlightEntities(operation.relatedEntityIds(), false, context);
-            }
-
-            // Clean up axis overlay for reflect operations
-            if (operation.getReflectAxis) {
-                drawReflectAxis(context, null, false);
             }
 
             if (operation.disabled()) {
@@ -341,8 +306,8 @@ export function uiEditMenu(context) {
         _menu.remove();
         _tooltips = [];
 
-        // Clean up any reflect axis overlay
-        drawReflectAxis(context, null, false);
+        // Clean up any auxiliary overlays
+        drawAuxiliaryGeometry(context, []);
 
         dispatch.call('toggled', this, false);
     };
@@ -367,4 +332,22 @@ export function uiEditMenu(context) {
     };
 
     return utilRebind(editMenu, dispatch, 'on');
+}
+
+
+// Helper function to draw/remove reflect axis overlay
+function drawAuxiliaryGeometry(context, d) {
+    const surface = context.surface();
+    // Append to the OSM data layer to be in the same coordinate space as map features
+    const container = surface.selectAll('.data-layer.osm .auxiliary');
+    const paths = container.selectAll('path')
+        .data(d, d => d.id);
+
+    paths.exit().remove();
+    const enter = paths.enter()
+        .append('path');
+
+    enter.merge(paths)
+        .attr('class', d => d.klass)
+        .attr('d', d => d.path);
 }
