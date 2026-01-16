@@ -1,7 +1,6 @@
 import { t } from '../core/localizer';
 import { actionReflect } from '../actions/reflect';
 import { behaviorOperation } from '../behavior/operation';
-import { geoGetSmallestSurroundingRectangle, geoVecLength } from '../geo';
 import { utilGetAllNodes, utilTotalExtent } from '../util/util';
 
 
@@ -23,11 +22,11 @@ export function operationReflect(context, selectedIDs, axis) {
     var extent = utilTotalExtent(selectedIDs, context.graph());
 
 
-    var operation = function() {
-        var action = actionReflect(selectedIDs, context.projection)
-            .useLongAxis(Boolean(axis === 'long'));
+    var _action = actionReflect(selectedIDs, context.projection)
+        .useLongAxis(Boolean(axis === 'long'));
 
-        context.perform(action, operation.annotation());
+    var operation = function() {
+        context.perform(_action, operation.annotation());
 
         window.setTimeout(function() {
             context.validator().validate();
@@ -89,25 +88,7 @@ export function operationReflect(context, selectedIDs, axis) {
 
 
     operation.getReflectAxis = function() {
-        if (nodes.length < 3) return null;
-
-        var points = nodes.map(function(n) { return context.projection(n.loc); });
-        var ssr = geoGetSmallestSurroundingRectangle(points);
-
-        // Calculate both potential axes (same logic as actionReflect)
-        var p1 = [(ssr.poly[0][0] + ssr.poly[1][0]) / 2, (ssr.poly[0][1] + ssr.poly[1][1]) / 2];
-        var q1 = [(ssr.poly[2][0] + ssr.poly[3][0]) / 2, (ssr.poly[2][1] + ssr.poly[3][1]) / 2];
-        var p2 = [(ssr.poly[3][0] + ssr.poly[4][0]) / 2, (ssr.poly[3][1] + ssr.poly[4][1]) / 2];
-        var q2 = [(ssr.poly[1][0] + ssr.poly[2][0]) / 2, (ssr.poly[1][1] + ssr.poly[2][1]) / 2];
-
-        var isLong = (geoVecLength(p1, q1) > geoVecLength(p2, q2));
-        var useLongAxis = (axis === 'long');
-
-        if ((useLongAxis && isLong) || (!useLongAxis && !isLong)) {
-            return [p1, q1];
-        } else {
-            return [p2, q2];
-        }
+        return _action.getReflectAxis(context.graph());
     };
 
 
