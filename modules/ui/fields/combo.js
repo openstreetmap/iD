@@ -123,6 +123,13 @@ export function uiFieldCombo(field, context) {
           }
         }
 
+        if (field.key === 'country' && tval) {
+            const localeCode = localizer.localeCode();
+              const regionNames = new Intl.DisplayNames(localeCode, { type: 'region' });
+              const name = regionNames.of(tval);
+              if (name) return name;
+        }
+
         var stringsField = field.resolveReference('stringsCrossReference');
         const labelId = getLabelId(stringsField, tval);
         if (stringsField.hasTextForStringId(labelId)) {
@@ -147,6 +154,13 @@ export function uiFieldCombo(field, context) {
         if (field.key === 'language:' && tval !== 'others'){
           let langName = localizer.languageName(tval);
           if (langName) return selection => selection.text(langName);
+        }
+
+        if (field.key === 'country' && tval) {
+            const localeCode = localizer.localeCode();
+            const regionNames = new Intl.DisplayNames(localeCode, { type: 'region' });
+            const name = regionNames.of(tval);
+            if (name) return name;
         }
 
         var stringsField = field.resolveReference('stringsCrossReference');
@@ -232,6 +246,33 @@ export function uiFieldCombo(field, context) {
           return options;
         }
 
+        // Get dropdown list for country key
+        if (field.key === 'country') {
+          const features = countryCoder.borders.features;
+          const codes = features
+            .map(feature => feature.properties.iso1A2)
+            .filter(Boolean);
+
+          const localeCode = localizer.localeCode();
+          const regionNames = new Intl.DisplayNames(localeCode, { type: 'region' });
+
+          let options = codes.map((c) => {
+            const name = regionNames.of(c); // all the codes will be converted to pretty names like: IN=India
+            return {
+              key: c,
+              value: name,
+              title: name,
+              display: selection => selection.text(name)
+            };
+          });
+
+          options.sort((a, b) => {
+              return a.value.localeCompare(b.value, localeCode);
+          });
+
+          return options;
+        }
+
         if (!(field.options || stringsField.options)) return [];
 
         let options;
@@ -283,8 +324,9 @@ export function uiFieldCombo(field, context) {
         if (hasStaticValues()) {
             setStaticValues(callback, queryFilter);
 
-            // If it is language field, we don't need to request for values, we get it from getOptions
+            // If it is language field or a country field, we don't need to request for values, we get it from getOptions
             if (field.key === 'language:') return;
+            if (field.key === 'country') return;
         }
 
         var stringsField = field.resolveReference('stringsCrossReference');
