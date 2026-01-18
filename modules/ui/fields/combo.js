@@ -13,6 +13,7 @@ import { utilKeybinding } from '../../util/keybinding';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
 import { uiLengthIndicator } from '../length_indicator';
 import { deprecatedTagValuesByKey } from '../../osm/deprecated';
+import { osmIsoCountryKeys } from '../../osm/tags';
 
 export {
     uiFieldCombo as uiFieldManyCombo,
@@ -123,7 +124,7 @@ export function uiFieldCombo(field, context) {
           }
         }
 
-        if (field.key === 'country' && tval) {
+        if (osmIsoCountryKeys.has(field.key) && tval) {
             const localeCode = localizer.localeCode();
               const regionNames = new Intl.DisplayNames(localeCode, { type: 'region' });
               const name = regionNames.of(tval);
@@ -156,7 +157,7 @@ export function uiFieldCombo(field, context) {
           if (langName) return selection => selection.text(langName);
         }
 
-        if (field.key === 'country' && tval) {
+        if (osmIsoCountryKeys.has(field.key) && tval) {
             const localeCode = localizer.localeCode();
             const regionNames = new Intl.DisplayNames(localeCode, { type: 'region' });
             const name = regionNames.of(tval);
@@ -219,7 +220,7 @@ export function uiFieldCombo(field, context) {
             return {
               key: c,
               value: name,
-              title: name,
+              title: c, // the tooltip should show the raw-tag value
               display: selection => selection.text(name)
             };
           }).filter(Boolean);
@@ -247,7 +248,7 @@ export function uiFieldCombo(field, context) {
         }
 
         // Get dropdown list for country key
-        if (field.key === 'country') {
+        if (osmIsoCountryKeys.has(field.key)) {
           const features = countryCoder.borders.features;
           const codes = features
             .map(feature => feature.properties.iso1A2)
@@ -261,7 +262,7 @@ export function uiFieldCombo(field, context) {
             return {
               key: c,
               value: name,
-              title: name,
+              title: c, // the tooltip should show the raw-tag value
               display: selection => selection.text(name)
             };
           });
@@ -326,7 +327,7 @@ export function uiFieldCombo(field, context) {
 
             // If it is language field or a country field, we don't need to request for values, we get it from getOptions
             if (field.key === 'language:') return;
-            if (field.key === 'country') return;
+            if (osmIsoCountryKeys.has(field.key)) return;
         }
 
         var stringsField = field.resolveReference('stringsCrossReference');
@@ -697,7 +698,8 @@ export function uiFieldCombo(field, context) {
         var showsValue = value => !isMixed && value && !(field.type === 'typeCombo' && value === 'yes');
         var isRawValue = value => showsValue(value)
             && !stringsField.hasTextForStringId(`options.${value}`)
-            && !stringsField.hasTextForStringId(`options.${value}.title`);
+            && !stringsField.hasTextForStringId(`options.${value}.title`)
+            && !osmIsoCountryKeys.has(field.key); // the country key should not be raw-valued
         var isKnownValue = value => showsValue(value) && !isRawValue(value);
         var isReadOnly = !_allowCustomValues;
 
