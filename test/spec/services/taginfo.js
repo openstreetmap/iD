@@ -256,7 +256,7 @@ describe('iD.serviceTaginfo', function() {
             }));
         });
 
-        it('includes unpopular values with a wiki page', async () => {
+        it('excludes unpopular values even if they have a wiki page', async () => {
             fetchMock.mock(/\/key\/values/, {
                 body: '{"data":[{"value":"party","description":"A place for partying", "count":1, "in_wiki": true}]}',
                 status: 200,
@@ -268,7 +268,7 @@ describe('iD.serviceTaginfo', function() {
 
             await setTimeout(50);
             expect(callback).to.have.been.calledWith(
-                null, [{'value':'party','title':'A place for partying'}]
+                null, []
             );
         });
 
