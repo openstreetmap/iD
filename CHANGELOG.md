@@ -55,6 +55,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Change package name to `@openstreetmap/id` to be able to publish releases on npm
+* Use Röntgen icon set directly from upstream npm package ([#11784], thanks [@tordans])
 
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
@@ -64,6 +65,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11733]: https://github.com/openstreetmap/iD/pull/11733
 [#11760]: https://github.com/openstreetmap/iD/pull/11760
 [#11774]: https://github.com/openstreetmap/iD/pull/11774
+[#11784]: https://github.com/openstreetmap/iD/pull/11784
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 [@homersimpsons]: https://github.com/homersimpsons
