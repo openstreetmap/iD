@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
+* Don't suggest values from Taginfo for tags with less than 100 uses, even if they're documented on the wiki ([#11794], thanks [@Kaushik4141])
 #### :scissors: Operations
 * Display reflection axis on the map while hovering the reflection operations in the edit menu ([#11774], thanks [@Kaushik4141])
 #### :camera: Street-Level
@@ -66,6 +67,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11760]: https://github.com/openstreetmap/iD/pull/11760
 [#11774]: https://github.com/openstreetmap/iD/pull/11774
 [#11784]: https://github.com/openstreetmap/iD/pull/11784
+[#11794]: https://github.com/openstreetmap/iD/pull/11794
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 [@homersimpsons]: https://github.com/homersimpsons
