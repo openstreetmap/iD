@@ -657,6 +657,10 @@ path.line.stroke.tag-highway-via_ferrata {
     stroke-dasharray: 0, 9;
 }
 
+path.line.stroke.tag-highway-ladder {
+    stroke: #6f1f1f;
+}
+
 /* crossings */
 path.line.stroke.tag-highway.tag-crossing-unmarked {
     stroke-dasharray: 6, 4;
