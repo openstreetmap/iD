@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show warning when attempting to paste but nothing has been copied ([#9401], thanks [@omsaraykar])
 * Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
 * Don't suggest values from Taginfo for tags with less than 100 uses, even if they're documented on the wiki ([#11794], thanks [@Kaushik4141])
+* Don't suggest values from Taginfo for keys that should only be used on changesets, such as `hashtags` ([#11697], thanks [@bhavyaKhatri2703])
 #### :scissors: Operations
 * Display reflection axis on the map while hovering the reflection operations in the edit menu ([#11774], thanks [@Kaushik4141])
 #### :camera: Street-Level
@@ -64,6 +65,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9401]: https://github.com/openstreetmap/iD/issues/9401
 [#11636]: https://github.com/openstreetmap/iD/pull/11636
 [#11651]: https://github.com/openstreetmap/iD/pull/11651
+[#11697]: https://github.com/openstreetmap/iD/pull/11697
 [#11699]: https://github.com/openstreetmap/iD/pull/11699
 [#11733]: https://github.com/openstreetmap/iD/pull/11733
 [#11760]: https://github.com/openstreetmap/iD/pull/11760
