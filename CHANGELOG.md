@@ -38,7 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.38.0-dev)
 
 #### :sparkles: Usability & Accessibility
-* Show warning when attempting to paste but nothing has been copied ([#9401])
+* Show warning when attempting to paste but nothing has been copied ([#9401], thanks [@omsaraykar])
 * Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
@@ -67,6 +67,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 [@homersimpsons]: https://github.com/homersimpsons
+[@omsaraykar]: https://github.com/omsaraykar
 
 # v2.37.3
 ##### 2025-10-31
