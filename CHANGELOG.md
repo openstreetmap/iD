@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show warning when attempting to paste but nothing has been copied ([#9401], thanks [@omsaraykar])
 * Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
 #### :scissors: Operations
+* Display reflection axis on the map while hovering the reflection operations in the edit menu ([#11774], thanks [@Kaushik4141])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Don't error on features with a sole `note` tag ([#11522])
@@ -55,6 +56,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Change package name to `@openstreetmap/id` to be able to publish releases on npm
+* Use Röntgen icon set directly from upstream npm package ([#11784], thanks [@tordans])
 
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
@@ -64,10 +66,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11699]: https://github.com/openstreetmap/iD/pull/11699
 [#11733]: https://github.com/openstreetmap/iD/pull/11733
 [#11760]: https://github.com/openstreetmap/iD/pull/11760
+[#11774]: https://github.com/openstreetmap/iD/pull/11774
+[#11784]: https://github.com/openstreetmap/iD/pull/11784
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 [@homersimpsons]: https://github.com/homersimpsons
 [@omsaraykar]: https://github.com/omsaraykar
+[@Kaushik4141]: https://github.com/Kaushik4141
+
 
 # v2.37.3
 ##### 2025-10-31

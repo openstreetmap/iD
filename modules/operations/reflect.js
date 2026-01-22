@@ -22,11 +22,11 @@ export function operationReflect(context, selectedIDs, axis) {
     var extent = utilTotalExtent(selectedIDs, context.graph());
 
 
-    var operation = function() {
-        var action = actionReflect(selectedIDs, context.projection)
-            .useLongAxis(Boolean(axis === 'long'));
+    var _action = actionReflect(selectedIDs, context.projection)
+        .useLongAxis(Boolean(axis === 'long'));
 
-        context.perform(action, operation.annotation());
+    var operation = function() {
+        context.perform(_action, operation.annotation());
 
         window.setTimeout(function() {
             context.validator().validate();
@@ -71,6 +71,17 @@ export function operationReflect(context, selectedIDs, axis) {
             var entity = context.entity(id);
             return entity.type === 'relation' && !entity.isComplete(context.graph());
         }
+    };
+
+
+    operation.getAuxiliaryGeometry = function() {
+        const graph = context.graph();
+        const [p, q] = _action.getReflectAxis(graph);
+        return [{
+            id: 'axis',
+            path: `M ${p[0]} ${p[1]} L ${q[0]} ${q[1]}`,
+            klass: 'reflect-axis'
+        }];
     };
 
 
