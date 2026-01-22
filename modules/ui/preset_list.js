@@ -361,6 +361,33 @@ export function uiPresetList(context) {
                 shown = true;
                 var members = preset.members.matchAllGeometry(entityGeometries());
                 sublist.call(drawList, members);
+
+                requestAnimationFrame(() => {
+                    const container = box.node().closest('.inspector-body');
+                    if (!container) return;
+
+                    const childItems = box.node().querySelectorAll('.preset-list-item');
+                    if (!childItems.length) return;
+
+                    const target = childItems[Math.min(1, childItems.length - 1)];
+
+                    const targetRect = target.getBoundingClientRect();
+                    const containerRect = container.getBoundingClientRect();
+
+                    const notVisible =
+                        targetRect.top < containerRect.top ||
+                        targetRect.bottom > containerRect.bottom;
+
+                    if (notVisible) {
+                        target.scrollIntoView({
+                            block: 'nearest',
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+
+
+
                 box.transition()
                     .duration(200)
                     .style('opacity', '1')
