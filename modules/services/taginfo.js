@@ -11,9 +11,9 @@ import { taginfoApiUrl } from '../../config/id.js';
 var apibase = taginfoApiUrl;
 var _inflight = {};
 var _popularKeys = {};
-// manually exclude some additional keys – #5377, #7485, #10287
+// manually exclude some additional keys – #5377, #7485, #10287, #11733
 // these will be returned by keys(), but taginfo will not be queried for values() requests
-var _extraExcludedKeys = /^(postal_code|via|((int_|loc_|nat_|official_|old_|ref_|reg_|short_|full_|sorting_|alt_|artist_|long_|bridge:|tunnel:)?name(:left|:right)?(:[a-z]+)?))$/;
+var _extraExcludedKeys = /^(addr:.+|postal_code|via|((int_|loc_|nat_|official_|old_|ref_|reg_|short_|full_|sorting_|alt_|artist_|long_|bridge:|tunnel:)?name(:left|:right)?(:[a-z]+)?))$/;
 
 var _extraExcludedKeyNames = /^(hashtags?|created_by)$/;
 
@@ -99,7 +99,7 @@ function filterValues(allowUpperCase, key) {
         if (!allowUpperCase &&
             !(key === 'type' && d.value === 'associatedStreet') &&
             d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
-        return d.count > 100 || d.in_wiki; // exclude rare undocumented tags
+        return d.count > 100; // exclude rare undocumented tags
     };
 }
 
