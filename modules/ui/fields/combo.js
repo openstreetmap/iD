@@ -261,15 +261,13 @@ export function uiFieldCombo(field, context) {
           const langMap = getLanguageMap();
 
           let options = Array.from(langMap.entries()).map(([code, name]) => {
-            // Omit names which are null or equal to the code itself
-            if (!name || name === code) return null;
             return {
               key: code,
               value: name,
               title: code, // the tooltip should show the raw-tag value
               display: selection => selection.text(name)
             };
-          }).filter(Boolean);
+          });
 
           const localeCode = localizer.localeCode();
 
