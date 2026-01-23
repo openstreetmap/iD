@@ -615,9 +615,12 @@ path.line.stroke.tag-leisure-track,
 }
 
 /* steps */
-.preset-icon .icon.tag-highway-steps,
-.preset-icon .icon.tag-highway-ladder {
+.preset-icon .icon.tag-highway-steps{
     color: #81d25c;
+    fill: #fff;
+}
+.preset-icon .icon.tag-highway-ladder {
+    color: #6f1f1f;
     fill: #fff;
 }
 path.line.stroke.tag-highway-steps,
@@ -636,10 +639,12 @@ path.line.casing.tag-highway-ladder {
     stroke-dasharray: none;
 }
 path.line.stroke.tag-highway-steps,
-path.line.stroke.tag-highway-ladder,
-.preset-icon-container path.line.casing.tag-highway-steps,
-.preset-icon-container path.line.casing.tag-highway-ladder {
+.preset-icon-container path.line.casing.tag-highway-steps {
     stroke: #81d25c;
+}
+path.line.stroke.tag-highway-ladder,
+.preset-icon-container path.line.casing.tag-highway-ladder {
+    stroke: #6f1f1f;
 }
 .preset-icon-container path.line.stroke.tag-highway-steps,
 .preset-icon-container path.line.stroke.tag-highway-ladder {
@@ -655,10 +660,6 @@ path.line.stroke.tag-highway-via_ferrata {
     stroke: #6f1f1f;
     stroke-linecap: round;
     stroke-dasharray: 0, 9;
-}
-
-path.line.stroke.tag-highway-ladder {
-    stroke: #6f1f1f;
 }
 
 /* crossings */
