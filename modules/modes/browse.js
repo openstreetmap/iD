@@ -9,6 +9,8 @@ import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
 
 import { operationPaste } from '../operations/paste';
+import {actionAddEntity} from '../actions';
+import {modeSelect} from './select';
 
 export function modeBrowse(context) {
     var mode = {
@@ -53,6 +55,20 @@ export function modeBrowse(context) {
             context.ui().sidebar.show(sidebar);
         } else {
             context.ui().sidebar.select(null);
+        }
+
+        // Check for pending point creation
+        if (context.pendingAddPoint) {
+            context.map().centerZoom(context.pendingAddPoint.loc, 18);
+            setTimeout(() => {
+                context.perform(
+                  actionAddEntity(context.pendingAddPoint),
+                  t('operations.add.annotation.point')
+                );
+                context.enter(modeSelect(context, [context.pendingAddPoint.id]));
+                context.ui().sidebar.select([context.pendingAddPoint.id]);
+                context.pendingAddPoint = null;
+            }, 500);
         }
     };
 

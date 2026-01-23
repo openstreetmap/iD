@@ -21,6 +21,7 @@ import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } fro
 import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilKeybinding, utilRebind, utilStringQs, utilCleanOsmString } from '../util';
+import {osmNode} from '../osm';
 
 
 export function coreContext() {
@@ -250,6 +251,27 @@ export function coreContext() {
   context.cleanTagValue = (val) => utilCleanOsmString(val, context.maxCharsForTagValue());
   context.cleanRelationRole = (val) => utilCleanOsmString(val, context.maxCharsForRelationRole());
 
+  // Inspect URL to see if there is a request to add a point feature using query parameters.
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('add_point')) {
+    const newPoint = osmNode({
+      loc: [parseFloat(urlParams.get('lon')), parseFloat(urlParams.get('lat'))],
+      tags: {}
+    });
+    // Extract all query parameters as tag values (excluding special ones)
+    for (const [key, value] of urlParams.entries()) {
+      if (!['add_point', 'lat', 'lon'].includes(key)) {
+        newPoint.tags[key] = decodeURIComponent(value);
+      }
+    }
+    if (newPoint.isDegenerate()) {
+      /* eslint-disable no-console */
+      console.error('invalid lat/lon supplied in query parameters');
+      /* eslint-enable no-console */
+    } else {
+      context.pendingAddPoint = newPoint;
+    }
+  }
 
   /* History */
   let _inIntro = false;
