@@ -10,7 +10,7 @@ import { uiCombobox } from '../combobox';
 import { svgIcon } from '../../svg/icon';
 
 import { utilKeybinding } from '../../util/keybinding';
-import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
+import { utilArrayUniq, utilDetect, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
 import { uiLengthIndicator } from '../length_indicator';
 import { deprecatedTagValuesByKey } from '../../osm/deprecated';
 import { osmIsoCountryKeys } from '../../osm/tags';
@@ -69,6 +69,57 @@ export function uiFieldCombo(field, context) {
             .join(';');
     }
 
+    // cache for language and region maps
+    let languageMap = null;
+    let regionMap = null;
+    // flag to prevent displaying emojis on a windows machine
+    const showEmojiFlags = utilDetect().os !== 'win';
+
+    // Helper to get region code map
+    const getRegionMap = () => {
+      if (regionMap) return regionMap;
+      const localeCode = localizer.localeCode();
+
+      const regionNames = new Intl.DisplayNames(localeCode, { type: 'region' });
+      const features = countryCoder.borders.features;
+
+      regionMap = new Map();
+
+      for (const feature of features) {
+        const code = feature.properties.iso1A2;
+        const flag = feature.properties.emojiFlag;
+        if (!code) continue;
+
+        try {
+          const name = regionNames.of(code);
+          if (!name) continue;
+          regionMap.set(code, {
+            name,
+            flag
+          });
+        } catch {
+            continue;
+        }
+      }
+
+      return regionMap;
+    };
+
+    // Helper to get languageMap
+    const getLanguageMap = () => {
+      if (languageMap) return languageMap;
+
+      languageMap = new Map;
+      let codes = Object.keys(localizer.languages());
+
+      for (const code of codes) {
+        const name = localizer.languageName(code);
+        if (!name || name === code) continue;
+        languageMap.set(code, name);
+      }
+
+      return languageMap;
+    };
 
     // returns the tag value for a display value
     // (for multiCombo, dval should be the key suffix, not the entire key)
@@ -118,17 +169,14 @@ export function uiFieldCombo(field, context) {
         // Issue #11652
         // Ignore language: key and when tval is not others
         if (field.key === 'language:' && tval !== 'others'){
-          let langName = localizer.languageName(tval);
-          if (langName) {
-            return langName;
-          }
+            let langName = getLanguageMap().get(tval);
+            if (langName) return langName;
         }
 
         if (osmIsoCountryKeys.has(field.key) && tval) {
-            const localeCode = localizer.localeCode();
-              const regionNames = new Intl.DisplayNames(localeCode, { type: 'region' });
-              const name = regionNames.of(tval);
-              if (name) return name;
+            const data = getRegionMap().get(tval);
+            if (data) return (showEmojiFlags && data.flag) ? `${data.name} ${data.flag}` : data.name;
+            return tval;
         }
 
         var stringsField = field.resolveReference('stringsCrossReference');
@@ -153,15 +201,14 @@ export function uiFieldCombo(field, context) {
         // Issue #11652
         // Ignore language: key and when tval is not others
         if (field.key === 'language:' && tval !== 'others'){
-          let langName = localizer.languageName(tval);
+          let langName = getLanguageMap().get(tval);
           if (langName) return selection => selection.text(langName);
         }
 
         if (osmIsoCountryKeys.has(field.key) && tval) {
-            const localeCode = localizer.localeCode();
-            const regionNames = new Intl.DisplayNames(localeCode, { type: 'region' });
-            const name = regionNames.of(tval);
-            if (name) return name;
+          const data = getRegionMap().get(tval);
+          const label = (showEmojiFlags && data.flag) ? `${data.name} ${data.flag}` : data.name;
+          return selection => selection.text(label);
         }
 
         var stringsField = field.resolveReference('stringsCrossReference');
@@ -208,19 +255,18 @@ export function uiFieldCombo(field, context) {
 
     function getOptions(allOptions) {
         var stringsField = field.resolveReference('stringsCrossReference');
+        const localeCode = localizer.localeCode();
         // Get dropdown list for language: key via localizer instead of taginfo
         if (field.key === 'language:') {
-          let codes = Object.keys(localizer.languages());
+          const langMap = getLanguageMap();
 
-          let options = codes.map((c) => {
-            let name = localizer.languageName(c);
-
+          let options = Array.from(langMap.entries()).map(([code, name]) => {
             // Omit names which are null or equal to the code itself
-            if (!name || name === c) return null;
+            if (!name || name === code) return null;
             return {
-              key: c,
+              key: code,
               value: name,
-              title: c, // the tooltip should show the raw-tag value
+              title: code, // the tooltip should show the raw-tag value
               display: selection => selection.text(name)
             };
           }).filter(Boolean);
@@ -249,26 +295,22 @@ export function uiFieldCombo(field, context) {
 
         // Get dropdown list for country key
         if (osmIsoCountryKeys.has(field.key)) {
-          const features = countryCoder.borders.features;
-          const codes = features
-            .map(feature => feature.properties.iso1A2)
-            .filter(Boolean);
+          const countryMap = getRegionMap();
 
-          const localeCode = localizer.localeCode();
-          const regionNames = new Intl.DisplayNames(localeCode, { type: 'region' });
+          let options = Array.from(countryMap.entries()).map(([c, data]) => {
+            const label = (showEmojiFlags && data.flag) ? `${data.name} ${data.flag}` : data.name;
 
-          let options = codes.map((c) => {
-            const name = regionNames.of(c); // all the codes will be converted to pretty names like: IN=India
             return {
               key: c,
-              value: name,
+              value: label,
               title: c, // the tooltip should show the raw-tag value
-              display: selection => selection.text(name)
+              display: selection => selection.text(label),
+              sortname: data.name // store just the name without emojis to sort the names
             };
           });
 
           options.sort((a, b) => {
-              return a.value.localeCompare(b.value, localeCode);
+              return a.sortname.localeCompare(b.sortname, localeCode);
           });
 
           return options;
