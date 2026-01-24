@@ -69,56 +69,71 @@ export function uiFieldCombo(field, context) {
             .join(';');
     }
 
+    // adds emoji flags to country dropdown and input
+    function addFlagIcon(selection, name, flag) {
+        if (showEmojiFlags && flag) {
+            selection.insert('span', ':first-child')
+                .attr('class', 'tag-value-icon')
+                .text(flag);
+        }
+        selection.insert('span')
+            .attr('class', 'tag-value')
+            .text(name);
+    }
+
     // cache for language and region maps
-    let languageMap = null;
-    let regionMap = null;
-    // flag to prevent displaying emojis on a windows machine
+    let languageByCodes = null;
+    let regionByCodes = null;
+    // windows does not support emoji flags
     const showEmojiFlags = utilDetect().os !== 'win';
 
-    // Helper to get region code map
+    // Helper to get regionByCodes
     const getRegionMap = () => {
-      if (regionMap) return regionMap;
+      if (regionByCodes) return regionByCodes;
       const localeCode = localizer.localeCode();
 
       const regionNames = new Intl.DisplayNames(localeCode, { type: 'region' });
       const features = countryCoder.borders.features;
 
-      regionMap = new Map();
+      regionByCodes = {};
 
       for (const feature of features) {
         const code = feature.properties.iso1A2;
-        const flag = feature.properties.emojiFlag;
+        let flag = feature.properties.emojiFlag;
+        // if the flag is not present like for 'FX' code, we will look for the corresponding country flag for that code
+        if (!flag) {
+            if (feature.properties.country) {
+                  flag = countryCoder.feature(feature.properties.country).properties.emojiFlag;
+            }
+        }
         if (!code) continue;
 
         try {
           const name = regionNames.of(code);
           if (!name) continue;
-          regionMap.set(code, {
-            name,
-            flag
-          });
+          regionByCodes[code] = {name, flag};
         } catch {
             continue;
         }
       }
 
-      return regionMap;
+      return regionByCodes;
     };
 
-    // Helper to get languageMap
+    // Helper to get languageByCodes
     const getLanguageMap = () => {
-      if (languageMap) return languageMap;
+      if (languageByCodes) return languageByCodes;
 
-      languageMap = new Map;
+      languageByCodes = {};
       let codes = Object.keys(localizer.languages());
 
       for (const code of codes) {
         const name = localizer.languageName(code);
         if (!name || name === code) continue;
-        languageMap.set(code, name);
+        languageByCodes[code] = name;
       }
 
-      return languageMap;
+      return languageByCodes;
     };
 
     // returns the tag value for a display value
@@ -169,13 +184,13 @@ export function uiFieldCombo(field, context) {
         // Issue #11652
         // Ignore language: key and when tval is not others
         if (field.key === 'language:' && tval !== 'others'){
-            let langName = getLanguageMap().get(tval);
+            let langName = getLanguageMap()[tval];
             if (langName) return langName;
         }
 
         if (osmIsoCountryKeys.has(field.key) && tval) {
-            const data = getRegionMap().get(tval);
-            if (data) return (showEmojiFlags && data.flag) ? `${data.name} ${data.flag}` : data.name;
+            const data = getRegionMap()[tval];
+            if (data) return data.name;
             return tval;
         }
 
@@ -201,14 +216,14 @@ export function uiFieldCombo(field, context) {
         // Issue #11652
         // Ignore language: key and when tval is not others
         if (field.key === 'language:' && tval !== 'others'){
-          let langName = getLanguageMap().get(tval);
-          if (langName) return selection => selection.text(langName);
+            let langName = getLanguageMap()[tval];
+            if (langName) return selection => selection.text(langName);
         }
 
         if (osmIsoCountryKeys.has(field.key) && tval) {
-          const data = getRegionMap().get(tval);
-          const label = (showEmojiFlags && data.flag) ? `${data.name} ${data.flag}` : data.name;
-          return selection => selection.text(label);
+            const data = getRegionMap()[tval];
+            if (data) return selection => addFlagIcon(selection, data.name, data.flag);
+            return selection => selection(tval);
         }
 
         var stringsField = field.resolveReference('stringsCrossReference');
@@ -260,7 +275,7 @@ export function uiFieldCombo(field, context) {
         if (field.key === 'language:') {
           const langMap = getLanguageMap();
 
-          let options = Array.from(langMap.entries()).map(([code, name]) => {
+          let options = Object.entries(langMap).map(([code, name]) => {
             return {
               key: code,
               value: name,
@@ -295,15 +310,13 @@ export function uiFieldCombo(field, context) {
         if (osmIsoCountryKeys.has(field.key)) {
           const countryMap = getRegionMap();
 
-          let options = Array.from(countryMap.entries()).map(([c, data]) => {
-            const label = (showEmojiFlags && data.flag) ? `${data.name} ${data.flag}` : data.name;
-
+          let options = Object.entries(countryMap).map(([c, {name, flag}]) => {
             return {
               key: c,
-              value: label,
+              value: name,
               title: c, // the tooltip should show the raw-tag value
-              display: selection => selection.text(label),
-              sortname: data.name // store just the name without emojis to sort the names
+              display: selection => addFlagIcon(selection, name, flag),
+              sortname: name // store just the name without emojis to sort the names
             };
           });
 
@@ -716,6 +729,23 @@ export function uiFieldCombo(field, context) {
         if (field.type === 'multiCombo' || field.type === 'semiCombo') {
             container = _container.select('.input-wrap');
         }
+
+        // For the country emoji flags
+        container.selectAll('.tag-value-icon').remove();
+        if (osmIsoCountryKeys.has(field.key) && value) {
+            const data = getRegionMap()[value];
+
+            if (data && data.flag && showEmojiFlags) {
+                container.selectAll('.tag-value-icon')
+                    .data([value])
+                    .enter()
+                    .insert('div', 'input')
+                    .attr('class', 'tag-value-icon')
+                    .text(data.flag);
+                return;
+            }
+        };
+
         const iconsField = field.resolveReference('iconsCrossReference');
         if (iconsField.icons) {
             container.selectAll('.tag-value-icon').remove();
