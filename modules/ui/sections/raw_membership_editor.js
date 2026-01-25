@@ -366,9 +366,9 @@ export function uiSectionRawMembershipEditor(context) {
             .append('ul')
             .attr('class', 'member-list')
             .attr('tabindex', '0')
-            .on('mousedown.memberlist', function() {
+            .on('mousedown.memberlist', function(event) {
                 this.focus();
-                d3_event.stopPropagation();
+                event.stopPropagation();
             })
             .on('keydown.memberlist', handleListKeydown)
             .merge(list);
@@ -665,12 +665,12 @@ export function uiSectionRawMembershipEditor(context) {
         }
 
 
-        function handleListKeydown(d3_event) {
-            d3_event.preventDefault();
-            d3_event.stopImmediatePropagation();
+        function handleListKeydown(event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
 
             // Only handle navigation keys when list is focused
-            if (!['PageDown', 'PageUp', 'End', 'Home', 'ArrowDown', 'ArrowUp'].includes(d3_event.key)) {
+            if (!['PageDown', 'PageUp', 'End', 'Home', 'ArrowDown', 'ArrowUp'].includes(event.key)) {
                 return;
             }
 
@@ -681,7 +681,7 @@ export function uiSectionRawMembershipEditor(context) {
             var scrollTop = listNode.scrollTop;
             var scrollHeight = listNode.scrollHeight;
 
-            switch(d3_event.key) {
+            switch (event.key) {
                 case 'PageDown':
                     listNode.scrollTop = Math.min(scrollTop + listHeight, scrollHeight - listHeight);
                     break;
