@@ -174,6 +174,60 @@ export function validationFormatting() {
             }
         }
 
+        // Phone number validation
+        function isValidPhone(phone) {
+            if (!phone) return true;
+            // Accept international formats: +, digits, spaces, dashes, parentheses, dots
+            // Minimum 7 characters to be a valid phone number
+            // Examples: +1 (555) 123-4567, +44 20 7946 0958, 555-1234
+            var validPhone = /^\+?[\d\s\-\(\)\.]{7,}$/;
+            var trimmed = phone.trim();
+            // Must contain at least 7 digits
+            var digitCount = (trimmed.match(/\d/g) || []).length;
+            return validPhone.test(trimmed) && digitCount >= 7;
+        }
+
+        function showReferencePhone(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .call(t.append('issues.invalid_format.phone.reference'));
+        }
+
+        // Check phone-related tags: phone, contact:phone, fax, contact:fax
+        var phoneTags = ['phone', 'contact:phone', 'fax', 'contact:fax'];
+        phoneTags.forEach(function(phoneTag) {
+            if (entity.tags[phoneTag]) {
+                // Multiple phone numbers are possible (separated by semicolons)
+                var phones = entity.tags[phoneTag]
+                    .split(';')
+                    .map(function(s) { return s.trim(); })
+                    .filter(function(x) { return !isValidPhone(x); });
+
+                if (phones.length) {
+                    issues.push(new validationIssue({
+                        type: type,
+                        subtype: 'phone',
+                        severity: 'warning',
+                        message: function(context) {
+                            var entity = context.hasEntity(this.entityIds[0]);
+                            return entity ? t.append('issues.invalid_format.phone.message' + this.data.suffix,
+                                { feature: utilDisplayLabel(entity, context.graph()), phone: this.data.phones }) : '';
+                        },
+                        reference: showReferencePhone,
+                        entityIds: [entity.id],
+                        hash: phoneTag + '=' + phones.join(),
+                        data: {
+                            suffix: (phones.length > 1) ? '_multi' : '',
+                            phones: phones.join(', ')
+                        }
+                    }));
+                }
+            }
+        });
+
         return issues;
     };
 
