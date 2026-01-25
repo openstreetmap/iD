@@ -144,6 +144,12 @@ export function uiSectionRawMemberEditor(context) {
         list = list.enter()
             .append('ul')
             .attr('class', 'member-list')
+            .attr('tabindex', '0')
+            .on('mousedown.memberlist', function() {
+                this.focus();
+                d3_event.stopPropagation();
+            })
+            .on('keydown.memberlist', handleListKeydown)
             .merge(list);
 
 
@@ -389,6 +395,45 @@ export function uiSectionRawMemberEditor(context) {
                     role.property('value', origValue);
                 })
             );
+        }
+
+
+        function handleListKeydown(d3_event) {
+            d3_event.preventDefault();
+            d3_event.stopImmediatePropagation();
+
+            // Only handle navigation keys when list is focused
+            if (!['PageDown', 'PageUp', 'End', 'Home', 'ArrowDown', 'ArrowUp'].includes(d3_event.key)) {
+                return;
+            }
+
+            var listNode = d3_select(this).node();
+            if (!listNode) return;
+
+            var listHeight = listNode.clientHeight;
+            var scrollTop = listNode.scrollTop;
+            var scrollHeight = listNode.scrollHeight;
+
+            switch(d3_event.key) {
+                case 'PageDown':
+                    listNode.scrollTop = Math.min(scrollTop + listHeight, scrollHeight - listHeight);
+                    break;
+                case 'PageUp':
+                    listNode.scrollTop = Math.max(scrollTop - listHeight, 0);
+                    break;
+                case 'End':
+                    listNode.scrollTop = scrollHeight;
+                    break;
+                case 'Home':
+                    listNode.scrollTop = 0;
+                    break;
+                case 'ArrowDown':
+                    listNode.scrollTop = Math.min(scrollTop + 40, scrollHeight - listHeight);
+                    break;
+                case 'ArrowUp':
+                    listNode.scrollTop = Math.max(scrollTop - 40, 0);
+                    break;
+            }
         }
 
 

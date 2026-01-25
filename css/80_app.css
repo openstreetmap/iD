@@ -2877,6 +2877,13 @@ img.tag-reference-wiki-image {
 .section-raw-membership-editor .member-list {
     position: relative; /* required for drag-and-drop */
     padding-top: 5px;
+    overflow-y: auto;
+    max-height: 400px;
+}
+.section-raw-member-editor .member-list:focus,
+.section-raw-membership-editor .member-list:focus {
+    outline: 2px solid #0066ff;
+    outline-offset: -2px;
 }
 .section-raw-member-editor .member-list li,
 .section-raw-membership-editor .member-list li {
