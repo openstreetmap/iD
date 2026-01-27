@@ -107,8 +107,15 @@ export function actionMergePolygon(ids, newRelationId) {
                 return m.id === way.id && m.role !== 'inner';
             }
             if (members.some(isThisOuter)) {
-                relation = relation.mergeTags(way.tags);
-                graph = graph.replace(way.update({ tags: {} }));
+                //separate area tags from line-only tags (like natural=coastline)
+                var areaTags = Object.assign({}, way.tags);
+                var lineTags = {};
+                if (areaTags.natural === 'coastline') {
+                    delete areaTags.natural;
+                    lineTags.natural = 'coastline';
+                }
+                relation = relation.mergeTags(areaTags);
+                graph = graph.replace(way.update({ tags: lineTags }));
             }
         });
 

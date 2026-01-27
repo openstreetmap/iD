@@ -162,4 +162,16 @@ describe('iD.actionMergePolygon', function () {
         expect(find(r, 'w3').role).to.equal('inner');
         expect(find(r, 'w4').role).to.equal('inner');
     });
+
+    it('preserves coastline tag on the outer ways when creating a multipolygon', function() {
+        graph = graph.replace(graph.entity('w0').update({ tags: { 'natural': 'coastline', 'place': 'island' }}));
+        graph = iD.actionMergePolygon(['w0', 'w1'], 'r')(graph);
+
+        //coastline should stay on the way
+        expect(graph.entity('w0').tags).to.eql({ natural: 'coastline' });
+
+        //other tags should move to the relation
+        var r = graph.entity('r');
+        expect(r.tags).to.eql({ type: 'multipolygon', place: 'island' });
+    });
 });
