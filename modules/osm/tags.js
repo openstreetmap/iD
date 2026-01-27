@@ -388,5 +388,5 @@ export var osmSummableTags = new Set([
     'step_count',
     'parking:both:capacity',
     'parking:left:capacity',
-    'parking:left:capacity'
+    'parking:right:capacity'
 ]);
