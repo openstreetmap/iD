@@ -142,9 +142,14 @@ export function uiSectionRawMemberEditor(context) {
             .data([0]);
 
         list = list.enter()
-            .append('ul')
-            .attr('class', 'member-list')
-            .merge(list);
+    .append('ul')
+    .attr('class', 'member-list')
+    .attr('tabindex', 0)
+   .on('mousedown', function() {
+       this.focus();
+   })
+    .merge(list);
+
 
 
         var items = list.selectAll('li')
