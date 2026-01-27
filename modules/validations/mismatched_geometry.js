@@ -267,6 +267,10 @@ export function validationMismatchedGeometry() {
             // special case: buildings-as-points are discouraged by iD, but common in OSM, so ignore them
             if (primaryKey === 'building') return false;
 
+            //special case: emergency=* works like an access tag on highways and railways
+            //treat it as valid and don’t flag it as a mismatch with highway or railway.
+            if (primaryKey === 'emergency' && (entity.tags.highway || entity.tags.railway)) return false;
+
             if (asTarget.tags[primaryKey] === '*') return false;
 
             return asSource.isFallback() || asSource.tags[primaryKey] === '*';
