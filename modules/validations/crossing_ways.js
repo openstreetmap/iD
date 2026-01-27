@@ -419,6 +419,7 @@ export function validationCrossingWays(context) {
                                 allowsTunnel(featureType2) && hasTag(entities[1].tags, 'tunnel');
         var isCrossingBridges = allowsBridge(featureType1) && hasTag(entities[0].tags, 'bridge') &&
                                 allowsBridge(featureType2) && hasTag(entities[1].tags, 'bridge');
+        var isBothBuildings = featureType1 === 'building' && featureType2 === 'building';
 
         var subtype = [featureType1, featureType2].sort().join('-');
 
@@ -490,8 +491,12 @@ export function validationCrossingWays(context) {
                     featureType1 === 'building' ||
                     featureType2 === 'building')  {
 
-                    fixes.push(makeChangeLayerFix('higher'));
-                    fixes.push(makeChangeLayerFix('lower'));
+                    // For overlapping buildings, do not suggest changing the `layer=*` tag.
+                    // Vertically stacked buildings should use `level=*` instead.
+                    if (!isBothBuildings) {
+                        fixes.push(makeChangeLayerFix('higher'));
+                        fixes.push(makeChangeLayerFix('lower'));
+                    }
 
                 // can only add bridge/tunnel if both features are lines
                 } else if (context.graph().geometry(this.entityIds[0]) === 'line' &&
