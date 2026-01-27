@@ -53,6 +53,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * When viewing the help information for tags or presets, use locale-specific properties if available ([#11760], thanks [@k-yle])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* Add dedicated styling for `highway=ladder` to make it distinguishable from `highway=steps` ([#11799], thanks [@bhavyaKhatri2703])
 #### :hammer: Development
 * Change package name to `@openstreetmap/id` to be able to publish releases on npm
 * Use Röntgen icon set directly from upstream npm package ([#11784], thanks [@tordans])
@@ -66,6 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11760]: https://github.com/openstreetmap/iD/pull/11760
 [#11774]: https://github.com/openstreetmap/iD/pull/11774
 [#11784]: https://github.com/openstreetmap/iD/pull/11784
+[#11799]: https://github.com/openstreetmap/iD/issues/11799
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 [@homersimpsons]: https://github.com/homersimpsons
