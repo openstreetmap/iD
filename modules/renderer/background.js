@@ -23,6 +23,7 @@ export function rendererBackground(context) {
   let _checkedBlocklists = [];
   let _isValid = true;
   let _overlayLayers = [];
+  let _initComplete = false;
   let _brightness = 1;
   let _contrast = 1;
   let _saturation = 1;
@@ -265,6 +266,16 @@ export function rendererBackground(context) {
 
     context.history().imageryUsed(imageryUsed);
     context.history().photoOverlaysUsed(photoOverlaysUsed);
+
+    //Persist all overlay states to preferences(including locator overlay)
+    //Only save if init is complete to avoid overwriting saved state during startup
+    if (_initComplete) {
+      const allOverlayIds = _overlayLayers
+        .filter(d => !d.source().isHidden())
+        .map(d => d.source().id)
+        .join(',');
+      prefs('background-overlay-states', allOverlayIds);
+    }
   };
 
 
@@ -494,18 +505,43 @@ export function rendererBackground(context) {
         );
       }
 
-      const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
-      if (locator) {
-        background.toggleOverlayLayer(locator);
+      //prioritize saved preferences,then URL hash, then defaults
+      const savedOverlayStates = prefs('background-overlay-states');
+      const hashOverlays = hash.overlays || '';
+
+      if (savedOverlayStates !== null) {
+        //restore from saved preferences
+        const overlayIds = savedOverlayStates.split(',').filter(Boolean);
+        overlayIds.forEach(overlayId => {
+          const overlay = background.findSource(overlayId);
+          if (overlay) {
+            background.toggleOverlayLayer(overlay);
+          }
+        });
+      } else if (hashOverlays) {
+        //restore from URL hash(for shared links)
+        const overlays = hashOverlays.split(',');
+        overlays.forEach(overlayId => {
+          const overlay = background.findSource(overlayId);
+          if (overlay) {
+            background.toggleOverlayLayer(overlay);
+          }
+        });
+        //also enable default locator for firsttime users with hash overlays
+        const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
+        if (locator && !overlays.includes(locator.id)) {
+          background.toggleOverlayLayer(locator);
+        }
+      } else {
+        //first-time user enable default locator overlay
+        const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
+        if (locator) {
+          background.toggleOverlayLayer(locator);
+        }
       }
 
-      const overlays = (hash.overlays || '').split(',');
-      overlays.forEach(overlay => {
-        overlay = background.findSource(overlay);
-        if (overlay) {
-          background.toggleOverlayLayer(overlay);
-        }
-      });
+      //Mark initialization as complete - overlays can now be saved to preferences
+      _initComplete = true;
 
       if (hash.gpx) {
         const gpx = context.layers().layer('data');
