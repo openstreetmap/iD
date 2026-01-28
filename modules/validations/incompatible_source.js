@@ -1,3 +1,4 @@
+import { actionChangeTags } from '../actions/change_tags';
 import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
@@ -56,25 +57,54 @@ export function validationIncompatibleSource() {
           hash: source,
           dynamicFixes: () => {
             return [
-              new validationIssueFix({ title: t.append('issues.fix.remove_proprietary_data.title') })
+              new validationIssueFix({
+                icon: 'iD-operation-delete',
+                title: t.append('issues.fix.remove_proprietary_data.title'),
+                onClick: (context) => {
+                  const entity = context.hasEntity(entityID);
+                  if (!entity) return;
+
+                  let newTags = Object.assign({}, entity.tags);
+
+                  // If source has multiple values (semicolon-separated), remove only the bad ones
+                  if (entity.tags.source && entity.tags.source.includes(';')) {
+                    const sources = entity.tags.source.split(';').map(s => s.trim());
+                    const filteredSources = sources.filter(s => !getIncompatibleSources(s).length);
+
+                    if (filteredSources.length) {
+                      newTags.source = filteredSources.join(';');
+                    } else {
+                      delete newTags.source;
+                    }
+                  } else {
+                    // Single source value - just remove the tag
+                    delete newTags.source;
+                  }
+
+                  context.perform(
+                    actionChangeTags(entityID, newTags),
+                    t('issues.fix.remove_proprietary_data.annotation')
+                  );
+                }
+              })
             ];
           }
         }))
       );
 
-      function getReference(id) {
-        return function showReference(selection) {
-          selection.selectAll('.issue-reference')
-            .data([0])
-            .enter()
-            .append('div')
-            .attr('class', 'issue-reference')
-            .call(t.append(`issues.incompatible_source.reference.${id}`));
-        };
-      }
-    };
+    function getReference(id) {
+      return function showReference(selection) {
+        selection.selectAll('.issue-reference')
+          .data([0])
+          .enter()
+          .append('div')
+          .attr('class', 'issue-reference')
+          .call(t.append(`issues.incompatible_source.reference.${id}`));
+      };
+    }
+  };
 
-    validation.type = type;
+  validation.type = type;
 
-    return validation;
+  return validation;
 }
