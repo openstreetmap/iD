@@ -2736,6 +2736,10 @@ button.raw-tag-option svg.icon {
 .tag-row input.value {
     border-right: 1px solid var(--border-color);
 }
+.tag-row input.value.warning {
+    border-color: #d53;
+    background-color: rgba(221, 85, 51, 0.1);
+}
 .ideditor[dir='rtl'] .tag-row input.value {
     border-left: 1px solid var(--border-color);
 }
