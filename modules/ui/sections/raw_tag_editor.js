@@ -196,7 +196,14 @@ export function uiSectionRawTagEditor(id, context) {
             .call(utilNoAuto)
             .on('focus', interacted)
             .on('blur', valueChange)
-            .on('change', valueChange);
+            .on('change', valueChange)
+            .on('input', function () {
+                // Update warning class in real-time as user types
+                const maxChars = context.maxCharsForTagValue();
+                const value = this.value;
+                const exceedsLimit = value && utilUnicodeCharsCount(value) > maxChars;
+                d3_select(this).classed('warning', exceedsLimit);
+            });
 
         innerWrap
             .append('button')
