@@ -1862,6 +1862,14 @@ input.date-selector {
     height: 21px;
     margin: auto;
 }
+.combobox-option {
+    display: flex !important;
+    align-items: center !important;
+}
+.tag-value-icon .emoji {
+    font-size: 24px;
+    line-height: 24px;
+}
 .ideditor[dir='ltr'] .form-field-input-combo .tag-value-icon + input,
 .ideditor[dir='ltr'] .form-field-input-semicombo .input-wrap .tag-value-icon + input,
 .ideditor[dir='ltr'] .form-field-input-multicombo .input-wrap .tag-value-icon + input {

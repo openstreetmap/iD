@@ -69,12 +69,18 @@ export function uiFieldCombo(field, context) {
             .join(';');
     }
 
+    // windows does not support emoji flags
+    const showEmojiFlags = utilDetect().os !== 'win';
+
     // adds emoji flags to country dropdown and input
     function addFlagIcon(selection, name, flag) {
         if (showEmojiFlags && flag) {
-            selection.insert('span', ':first-child')
-                .attr('class', 'tag-value-icon')
-                .text(flag);
+          const icon = selection.insert('span', ':first-child')
+            .attr('class', 'tag-value-icon');
+
+          icon.append('span')
+            .attr('class', 'emoji')
+            .text(flag);
         }
         selection.insert('span')
             .attr('class', 'tag-value')
@@ -84,11 +90,9 @@ export function uiFieldCombo(field, context) {
     // cache for language and region maps
     let languageByCodes = null;
     let regionByCodes = null;
-    // windows does not support emoji flags
-    const showEmojiFlags = utilDetect().os !== 'win';
 
     // Helper to get regionByCodes
-    const getRegionMap = () => {
+    const buildCountry = () => {
       if (regionByCodes) return regionByCodes;
       const localeCode = localizer.localeCode();
 
@@ -101,10 +105,8 @@ export function uiFieldCombo(field, context) {
         const code = feature.properties.iso1A2;
         let flag = feature.properties.emojiFlag;
         // if the flag is not present like for 'FX' code, we will look for the corresponding country flag for that code
-        if (!flag) {
-            if (feature.properties.country) {
-                  flag = countryCoder.feature(feature.properties.country).properties.emojiFlag;
-            }
+        if (!flag && features?.properties?.country) {
+          flag = countryCoder.feature(feature.properties.country).properties.emojiFlag;
         }
         if (!code) continue;
 
@@ -121,7 +123,7 @@ export function uiFieldCombo(field, context) {
     };
 
     // Helper to get languageByCodes
-    const getLanguageMap = () => {
+    const buildLanguages = () => {
       if (languageByCodes) return languageByCodes;
 
       languageByCodes = {};
@@ -184,12 +186,12 @@ export function uiFieldCombo(field, context) {
         // Issue #11652
         // Ignore language: key and when tval is not others
         if (field.key === 'language:' && tval !== 'others'){
-            let langName = getLanguageMap()[tval];
+            let langName = buildLanguages()[tval];
             if (langName) return langName;
         }
 
         if (osmIsoCountryKeys.has(field.key) && tval) {
-            const data = getRegionMap()[tval];
+            const data = buildCountry()[tval];
             if (data) return data.name;
             return tval;
         }
@@ -216,12 +218,12 @@ export function uiFieldCombo(field, context) {
         // Issue #11652
         // Ignore language: key and when tval is not others
         if (field.key === 'language:' && tval !== 'others'){
-            let langName = getLanguageMap()[tval];
+            let langName = buildLanguages()[tval];
             if (langName) return selection => selection.text(langName);
         }
 
         if (osmIsoCountryKeys.has(field.key) && tval) {
-            const data = getRegionMap()[tval];
+            const data = buildCountry()[tval];
             if (data) return selection => addFlagIcon(selection, data.name, data.flag);
             return selection => selection(tval);
         }
@@ -273,7 +275,7 @@ export function uiFieldCombo(field, context) {
         const localeCode = localizer.localeCode();
         // Get dropdown list for language: key via localizer instead of taginfo
         if (field.key === 'language:') {
-          const langMap = getLanguageMap();
+          const langMap = buildLanguages();
 
           let options = Object.entries(langMap).map(([code, name]) => {
             return {
@@ -308,7 +310,7 @@ export function uiFieldCombo(field, context) {
 
         // Get dropdown list for country key
         if (osmIsoCountryKeys.has(field.key)) {
-          const countryMap = getRegionMap();
+          const countryMap = buildCountry();
 
           let options = Object.entries(countryMap).map(([c, {name, flag}]) => {
             return {
@@ -733,16 +735,18 @@ export function uiFieldCombo(field, context) {
         // For the country emoji flags
         container.selectAll('.tag-value-icon').remove();
         if (osmIsoCountryKeys.has(field.key) && value) {
-            const data = getRegionMap()[value];
+            const data = buildCountry()[value];
 
             if (data && data.flag && showEmojiFlags) {
-                container.selectAll('.tag-value-icon')
-                    .data([value])
-                    .enter()
-                    .insert('div', 'input')
-                    .attr('class', 'tag-value-icon')
-                    .text(data.flag);
-                return;
+              container.selectAll('.tag-value-icon')
+                .data([value])
+                .enter()
+                .insert('div', 'input')
+                .attr('class', 'tag-value-icon')
+                .append('span')
+                .attr('class', 'emoji')
+                .text(data.flag);
+              return;
             }
         };
 
