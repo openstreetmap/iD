@@ -47,8 +47,12 @@ export function actionExtract(entityID, projection) {
         var fromGeometry = entity.geometry(graph);
 
         var keysToCopyAndRetain = ['source', 'wheelchair'];
-        var keysToRetain = ['area'];
-        var buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin', 'ref:GB:uprn', 'ref:linz:building_id'];
+        //Tag should remain on the area
+        var keysToRetain = ['area', 'leisure', 'level'];
+        var buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'level', 'nycdoitt:bin', 'ref:GB:uprn', 'ref:linz:building_id'];
+        
+        //to prevent the "Area has no description" error.
+        var identityKeys = ['leisure', 'amenity', 'man_made', 'historic', 'shop', 'craft', 'tourism'];
 
         var extractedLoc = d3_geoPath(projection).centroid(entity.asGeoJSON(graph));
         extractedLoc = extractedLoc && projection.invert(extractedLoc);
@@ -78,8 +82,13 @@ export function actionExtract(entityID, projection) {
                 continue;
             }
 
-            if (keysToRetain.indexOf(key) !== -1) {
-                continue;
+            //If the tag is for Identity or Retention
+            if (keysToRetain.indexOf(key) !== -1 || identityKeys.indexOf(key) !== -1) {
+                // Copy identity to point so the point is searchable (e.g. 'pool')
+                if (identityKeys.indexOf(key) !== -1) {
+                    pointTags[key] = entityTags[key];
+                }
+                continue; 
             }
 
             if (isBuilding) {

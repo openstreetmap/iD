@@ -52,7 +52,26 @@ export function operationExtract(context, selectedIDs) {
 
 
     operation.available = function () {
-        return _actions.length && selectedIDs.length === _actions.length;
+        if (!(_actions.length && selectedIDs.length === _actions.length)) {
+            return false;
+        }
+
+        var entity = context.entity(selectedIDs[0]);
+        var graph = context.graph();
+        
+        //allows the tool to show up for pools/shops inside buildings
+        if (entity.type === 'way') {
+            var hasParent = graph.parentWays(entity).length > 0;
+            var isInteresting = entity.hasInterestingTags();
+            
+            // If it has no parents AND it's just a standalone building/area, hide it.
+            // But if the user has added extra tags (like a name or shop), let them extract.
+            if (!hasParent && !isInteresting) {
+                return false;
+            }
+        }
+
+        return true;
     };
 
 
