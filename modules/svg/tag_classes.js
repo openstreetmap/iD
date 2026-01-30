@@ -17,6 +17,10 @@ export function svgTagClasses() {
         'man_made', 'indoor', 'construction', 'proposed'
     ];
     var _tags = function(entity) { return entity.tags; };
+    // Cache computed class strings by tag object identity + base class.
+    // Safe for zoom/pan because tags do not change, and if tags change
+    // the graph creates new tag objects (cache miss => recompute).
+    var _classCache = new WeakMap();
 
 
     var tagClasses = function(selection) {
@@ -29,7 +33,19 @@ export function svgTagClasses() {
 
             var t = _tags(entity);
 
-            var computed = tagClasses.getClassesString(t, value);
+            // Avoid recomputing tagClasses for unchanged tags during zoom/pan.
+            // Cache is keyed by tag object identity and base class string.
+            var byBase = _classCache.get(t);
+            if (!byBase) {
+                byBase = new Map();
+                _classCache.set(t, byBase);
+            }
+
+            var computed = byBase.get(value);
+            if (!computed) {
+                computed = tagClasses.getClassesString(t, value);
+                byBase.set(value, computed);
+            }
 
             if (computed !== value) {
                 d3_select(this).attr('class', computed);

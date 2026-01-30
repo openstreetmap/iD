@@ -789,19 +789,31 @@ export function svgLabels(projection, context) {
 const _textWidthCache = {};
 export function textWidth(text, size, container) {
     let c = _textWidthCache[size];
-    if (!c) c = _textWidthCache[size] = {};
-
-    if (c[text]) {
-        return c[text];
+    if (!c) {
+        c = _textWidthCache[size] = { widths: {}, measurer: null };
     }
-    const elem = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    elem.style.fontSize = `${size}px`;
-    elem.style.fontWeight = 'bold';
+
+    if (c.widths[text]) {
+        return c.widths[text];
+    }
+
+    // Avoid repeated create/remove of SVG text nodes on every zoom/pan.
+    // The measured width depends only on text + font size/style, which
+    // are stable during zoom/pan, so caching is safe.
+    let elem = c.measurer;
+    if (!elem) {
+        elem = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        elem.style.fontSize = `${size}px`;
+        elem.style.fontWeight = 'bold';
+        elem.style.visibility = 'hidden';
+        elem.style.pointerEvents = 'none';
+        container.appendChild(elem);
+        c.measurer = elem;
+    }
+
     elem.textContent = text;
-    container.appendChild(elem);
-    c[text] = elem.getComputedTextLength();
-    elem.remove();
-    return c[text];
+    c.widths[text] = elem.getComputedTextLength();
+    return c.widths[text];
 }
 
 
