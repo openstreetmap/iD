@@ -38,7 +38,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.38.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Show warning when attempting to paste but nothing has been copied ([#9401], thanks [@omsaraykar])
 * Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
+* Don't suggest values from Taginfo for tags with less than 100 uses, even if they're documented on the wiki ([#11794], thanks [@Kaushik4141])
+* Don't suggest values from Taginfo for keys that should only be used on changesets, such as `hashtags` ([#11697], thanks [@bhavyaKhatri2703])
 #### :scissors: Operations
 * Display reflection axis on the map while hovering the reflection operations in the edit menu ([#11774], thanks [@Kaushik4141])
 #### :camera: Street-Level
@@ -54,21 +57,30 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show country names in your preferred language and country flag emoji in the Country field dropdown ([#11783], thanks [@Razen04])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* Add dedicated styling for `highway=ladder` to make it distinguishable from `highway=steps` ([#11799], thanks [@bhavyaKhatri2703])
 #### :hammer: Development
 * Change package name to `@openstreetmap/id` to be able to publish releases on npm
+* Use Röntgen icon set directly from upstream npm package ([#11784], thanks [@tordans])
 
 
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
+[#9401]: https://github.com/openstreetmap/iD/issues/9401
 [#11636]: https://github.com/openstreetmap/iD/pull/11636
 [#11651]: https://github.com/openstreetmap/iD/pull/11651
+[#11697]: https://github.com/openstreetmap/iD/pull/11697
 [#11699]: https://github.com/openstreetmap/iD/pull/11699
 [#11733]: https://github.com/openstreetmap/iD/pull/11733
 [#11760]: https://github.com/openstreetmap/iD/pull/11760
 [#11774]: https://github.com/openstreetmap/iD/pull/11774
+[#11784]: https://github.com/openstreetmap/iD/pull/11784
+[#11794]: https://github.com/openstreetmap/iD/pull/11794
+[#11799]: https://github.com/openstreetmap/iD/issues/11799
 [#11783]: https://github.com/openstreetmap/iD/pull/11783
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 [@homersimpsons]: https://github.com/homersimpsons
+[@omsaraykar]: https://github.com/omsaraykar
 [@Kaushik4141]: https://github.com/Kaushik4141
 
 
