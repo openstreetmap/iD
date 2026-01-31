@@ -77,10 +77,34 @@ export function rendererBackground(context) {
         // Add 'None'
         _imageryIndex.backgrounds.unshift(rendererBackgroundSource.None());
 
-        // Add 'Custom'
-        let template = prefs('background-custom-template') || '';
-        const custom = rendererBackgroundSource.Custom(template);
-        _imageryIndex.backgrounds.unshift(custom);
+        // Add Custom backgrounds (support multiple)
+        const oldTemplate = prefs('background-custom-template');
+        let customTemplates = [];
+        try {
+          customTemplates = JSON.parse(prefs('background-custom-templates') || '[]');
+        } catch {
+          customTemplates = [];
+        }
+
+        if (oldTemplate && !customTemplates.some(c => c.template === oldTemplate)) {
+          customTemplates.unshift({ id: 'custom-0', template: oldTemplate, name: 'Custom (Migrated)' });
+          prefs('background-custom-templates', JSON.stringify(customTemplates));
+          // Clear old single-template pref after migration to prevent re-migration
+          prefs('background-custom-template', null);
+        }
+
+        customTemplates.forEach((customData, index) => {
+          const customId = customData.id || `custom-${index}`;
+          const customName = customData.name || `Custom ${index + 1}`;
+          const custom = rendererBackgroundSource.Custom(customData.template, customName);
+          custom.id = customId;
+          _imageryIndex.backgrounds.unshift(custom);
+        });
+
+        const emptyCustom = rendererBackgroundSource.Custom('');
+        emptyCustom.id = 'custom';
+        emptyCustom.isEmptyCustomSlot = true;
+        _imageryIndex.backgrounds.unshift(emptyCustom);
 
         return _imageryIndex;
       });
@@ -187,7 +211,7 @@ export function rendererBackground(context) {
   }
 
 
-  background.updateImagery = function() {
+  background.updateImagery = function () {
     let currSource = baseLayer.source();
     if (context.inIntro() || !currSource) return;
 
@@ -307,7 +331,7 @@ export function rendererBackground(context) {
   };
 
 
-  background.baseLayerSource = function(d) {
+  background.baseLayerSource = function (d) {
     if (!arguments.length) return baseLayer.source();
 
     // test source against OSM imagery blocklists..
@@ -379,7 +403,7 @@ export function rendererBackground(context) {
       .source(d)
       .projection(context.projection)
       .dimensions(baseLayer.dimensions()
-    );
+      );
 
     _overlayLayers.push(layer);
     dispatch.call('change');
@@ -398,7 +422,7 @@ export function rendererBackground(context) {
   };
 
 
-  background.offset = function(d) {
+  background.offset = function (d) {
     const currSource = baseLayer.source();
     if (!arguments.length) {
       return (currSource && currSource.offset()) || [0, 0];
@@ -412,7 +436,7 @@ export function rendererBackground(context) {
   };
 
 
-  background.brightness = function(d) {
+  background.brightness = function (d) {
     if (!arguments.length) return _brightness;
     _brightness = d;
     if (context.mode()) dispatch.call('change');
@@ -420,7 +444,7 @@ export function rendererBackground(context) {
   };
 
 
-  background.contrast = function(d) {
+  background.contrast = function (d) {
     if (!arguments.length) return _contrast;
     _contrast = d;
     if (context.mode()) dispatch.call('change');
@@ -428,7 +452,7 @@ export function rendererBackground(context) {
   };
 
 
-  background.saturation = function(d) {
+  background.saturation = function (d) {
     if (!arguments.length) return _saturation;
     _saturation = d;
     if (context.mode()) dispatch.call('change');
@@ -436,7 +460,7 @@ export function rendererBackground(context) {
   };
 
 
-  background.sharpness = function(d) {
+  background.sharpness = function (d) {
     if (!arguments.length) return _sharpness;
     _sharpness = d;
     if (context.mode()) dispatch.call('change');
@@ -470,9 +494,9 @@ export function rendererBackground(context) {
         best = validBackgrounds.find(s => {
           if (!s.best() || s.overlay) return false;
           let bbox = turf_bbox(turf_bboxClip(
-                { type: 'MultiPolygon', coordinates: [ s.polygon || [extent.polygon()] ] },
-                extent.rectangle()));
-          let area = geoExtent(bbox.slice(0,2), bbox.slice(2,4)).area();
+            { type: 'MultiPolygon', coordinates: [s.polygon || [extent.polygon()]] },
+            extent.rectangle()));
+          let area = geoExtent(bbox.slice(0, 2), bbox.slice(2, 4)).area();
           return area / viewArea > 0.5; // min visible size: 50% of viewport area
         });
       }
@@ -525,11 +549,11 @@ export function rendererBackground(context) {
         }
       }
     })
-    .catch(err => {
-      /* eslint-disable no-console */
-      console.error(err);
-      /* eslint-enable no-console */
-    });
+      .catch(err => {
+        /* eslint-disable no-console */
+        console.error(err);
+        /* eslint-enable no-console */
+      });
   };
 
 

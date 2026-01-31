@@ -37,6 +37,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # Unreleased (2.38.0-dev)
 
+#### :tada: New Features
+* Allow users to save multiple custom background layers with custom names ([#10044], thanks [@JaiswalShivang])
+
 #### :sparkles: Usability & Accessibility
 * Show warning when attempting to paste but nothing has been copied ([#9401], thanks [@omsaraykar])
 * Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
@@ -80,6 +83,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@homersimpsons]: https://github.com/homersimpsons
 [@omsaraykar]: https://github.com/omsaraykar
 [@Kaushik4141]: https://github.com/Kaushik4141
+[#10044]: https://github.com/openstreetmap/iD/issues/10044
+[@JaiswalShivang]: https://github.com/JaiswalShivang
 
 
 # v2.37.3

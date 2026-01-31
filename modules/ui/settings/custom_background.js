@@ -13,10 +13,12 @@ export function uiSettingsCustomBackground() {
     function render(selection) {
         // keep separate copies of original and current settings
         var _origSettings = {
-            template: prefs('background-custom-template')
+            template: prefs('background-custom-template'),
+            name: prefs('background-custom-name') || ''
         };
         var _currSettings = {
-            template: prefs('background-custom-template')
+            template: prefs('background-custom-template'),
+            name: prefs('background-custom-name') || ''
         };
 
         var example = 'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png';
@@ -55,6 +57,14 @@ export function uiSettingsCustomBackground() {
             .append('div')
             .attr('class', 'instructions-template')
             .html(marked(instructions));
+
+        textSection
+            .append('input')
+            .attr('type', 'text')
+            .attr('class', 'field-name')
+            .attr('placeholder', 'Custom name (optional)')
+            .call(utilNoAuto)
+            .property('value', _currSettings.name || '');
 
         textSection
             .append('textarea')
@@ -97,7 +107,9 @@ export function uiSettingsCustomBackground() {
         // accept the current template
         function clickSave() {
             _currSettings.template = textSection.select('.field-template').property('value');
+            _currSettings.name = textSection.select('.field-name').property('value');
             prefs('background-custom-template', _currSettings.template);
+            prefs('background-custom-name', _currSettings.name);
             this.blur();
             modal.close();
             dispatch.call('change', this, _currSettings);
