@@ -34,18 +34,7 @@ export function svgTagClasses() {
             var t = _tags(entity);
 
             // Avoid recomputing tagClasses for unchanged tags during zoom/pan.
-            // Cache is keyed by tag object identity and base class string.
-            var byBase = _classCache.get(t);
-            if (!byBase) {
-                byBase = new Map();
-                _classCache.set(t, byBase);
-            }
-
-            var computed = byBase.get(value);
-            if (!computed) {
-                computed = tagClasses.getClassesString(t, value);
-                byBase.set(value, computed);
-            }
+            var computed = tagClasses.getClassesString(t, value);
 
             if (computed !== value) {
                 d3_select(this).attr('class', computed);
@@ -55,6 +44,16 @@ export function svgTagClasses() {
 
 
     tagClasses.getClassesString = function(t, value) {
+        // Fast path: return cached class string for identical tags + base class.
+        var byBase = _classCache.get(t);
+        if (!byBase) {
+            byBase = new Map();
+            _classCache.set(t, byBase);
+        }
+
+        var cached = byBase.get(value);
+        if (cached) return cached;
+
         var primary, status;
         var i, j, k, v;
 
@@ -177,10 +176,13 @@ export function svgTagClasses() {
 
         // ensure that classes for tags keys/values with special characters like spaces
         // are not added to the DOM, because it can cause bizarre issues (#9448)
-        return classes
+        var computed = classes
             .filter(klass => /^[-_a-z0-9]+$/.test(klass))
             .join(' ')
             .trim();
+
+        byBase.set(value, computed);
+        return computed;
     };
 
 
