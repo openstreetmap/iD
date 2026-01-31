@@ -74,17 +74,17 @@ export function uiFieldCombo(field, context) {
 
     // adds emoji flags to country dropdown and input
     function addFlagIcon(selection, name, flag) {
-        if (showEmojiFlags && flag) {
-          const icon = selection.insert('span', ':first-child')
-            .attr('class', 'tag-value-icon');
+      if (showEmojiFlags && flag) {
+        const icon = selection.insert('span', ':first-child')
+          .attr('class', 'tag-value-icon');
 
-          icon.append('span')
-            .attr('class', 'emoji')
-            .text(flag);
-        }
-        selection.insert('span')
-            .attr('class', 'tag-value')
-            .text(name);
+        icon.append('span')
+          .attr('class', 'emoji')
+          .text(flag);
+      }
+      selection.insert('span')
+        .attr('class', 'tag-value')
+        .text(name);
     }
 
     // cache for language and region maps
@@ -182,63 +182,63 @@ export function uiFieldCombo(field, context) {
     // returns the display value for a tag value
     // (for multiCombo, tval should be the key suffix, not the entire key)
     function displayValue(tval) {
-        tval = tval || '';
-        // Issue #11652
-        // Ignore language: key and when tval is not others
-        if (field.key === 'language:' && tval !== 'others'){
-            let langName = buildLanguages()[tval];
-            if (langName) return langName;
-        }
+      tval = tval || '';
+      // Issue #11652
+      // Ignore language: key and when tval is not others
+      if (field.key === 'language:' && tval !== 'others'){
+        let langName = buildLanguages()[tval];
+        if (langName) return langName;
+      }
 
-        if (osmIsoCountryKeys.has(field.key) && tval) {
-            const data = buildCountry()[tval];
-            if (data) return data.name;
-            return tval;
-        }
-
-        var stringsField = field.resolveReference('stringsCrossReference');
-        const labelId = getLabelId(stringsField, tval);
-        if (stringsField.hasTextForStringId(labelId)) {
-            return stringsField.t(labelId, { default: tval });
-        }
-
-        if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
-            return '';
-        }
-
+      if (osmIsoCountryKeys.has(field.key) && tval) {
+        const data = buildCountry()[tval];
+        if (data) return data.name;
         return tval;
+      }
+
+      var stringsField = field.resolveReference('stringsCrossReference');
+      const labelId = getLabelId(stringsField, tval);
+      if (stringsField.hasTextForStringId(labelId)) {
+        return stringsField.t(labelId, { default: tval });
+      }
+
+      if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
+        return '';
+      }
+
+      return tval;
     }
 
 
     // returns function which renders the display value for a tag value
     // (for multiCombo, tval should be the key suffix, not the entire key)
     function renderValue(tval) {
-        tval = tval || '';
+      tval = tval || '';
 
-        // Issue #11652
-        // Ignore language: key and when tval is not others
-        if (field.key === 'language:' && tval !== 'others'){
-            let langName = buildLanguages()[tval];
-            if (langName) return selection => selection.text(langName);
-        }
+      // Issue #11652
+      // Ignore language: key and when tval is not others
+      if (field.key === 'language:' && tval !== 'others') {
+        let langName = buildLanguages()[tval];
+        if (langName) return selection => selection.text(langName);
+      }
 
-        if (osmIsoCountryKeys.has(field.key) && tval) {
-            const data = buildCountry()[tval];
-            if (data) return selection => addFlagIcon(selection, data.name, data.flag);
-            return selection => selection(tval);
-        }
+      if (osmIsoCountryKeys.has(field.key) && tval) {
+        const data = buildCountry()[tval];
+        if (data) return selection => addFlagIcon(selection, data.name, data.flag);
+        return selection => selection(tval);
+      }
 
-        var stringsField = field.resolveReference('stringsCrossReference');
-        const labelId = getLabelId(stringsField, tval);
-        if (stringsField.hasTextForStringId(labelId)) {
-            return stringsField.t.append(labelId, { default: tval });
-        }
+      var stringsField = field.resolveReference('stringsCrossReference');
+      const labelId = getLabelId(stringsField, tval);
+      if (stringsField.hasTextForStringId(labelId)) {
+        return stringsField.t.append(labelId, { default: tval });
+      }
 
-        if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
-            tval = '';
-        }
+      if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
+        tval = '';
+      }
 
-        return selection => selection.text(tval);
+      return selection => selection.text(tval);
     }
 
 
@@ -318,12 +318,13 @@ export function uiFieldCombo(field, context) {
               value: name,
               title: c, // the tooltip should show the raw-tag value
               display: selection => addFlagIcon(selection, name, flag),
-              sortname: name // store just the name without emojis to sort the names
+              sortname: name, // store just the name without emojis to sort the names
+              klass: 'has-icon' // to specifically target the emoji css
             };
           });
 
           options.sort((a, b) => {
-              return a.sortname.localeCompare(b.sortname, localeCode);
+            return a.sortname.localeCompare(b.sortname, localeCode);
           });
 
           return options;
@@ -735,19 +736,19 @@ export function uiFieldCombo(field, context) {
         // For the country emoji flags
         container.selectAll('.tag-value-icon').remove();
         if (osmIsoCountryKeys.has(field.key) && value) {
-            const data = buildCountry()[value];
+          const data = buildCountry()[value];
 
-            if (data && data.flag && showEmojiFlags) {
-              container.selectAll('.tag-value-icon')
-                .data([value])
-                .enter()
-                .insert('div', 'input')
-                .attr('class', 'tag-value-icon')
-                .append('span')
-                .attr('class', 'emoji')
-                .text(data.flag);
-              return;
-            }
+          if (data && data.flag && showEmojiFlags) {
+            container.selectAll('.tag-value-icon')
+              .data([value])
+              .enter()
+              .insert('div', 'input')
+              .attr('class', 'tag-value-icon')
+              .append('span')
+              .attr('class', 'emoji')
+              .text(data.flag);
+            return;
+          }
         };
 
         const iconsField = field.resolveReference('iconsCrossReference');

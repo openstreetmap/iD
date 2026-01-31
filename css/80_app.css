@@ -1857,14 +1857,15 @@ input.date-selector {
     padding-left: 0;
     padding-right: 11px;
 }
+.combobox-address-street-place .combobox-option,
+.combobox-option.has-icon {
+    display: flex;
+    align-items: center;
+}
 .tag-value-icon .icon {
     width: 21px;
     height: 21px;
     margin: auto;
-}
-.combobox-option {
-    display: flex !important;
-    align-items: center !important;
 }
 .tag-value-icon .emoji {
     font-size: 24px;
