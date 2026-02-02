@@ -202,8 +202,16 @@ export function uiSectionRawTagEditor(id, context) {
                 const maxChars = context.maxCharsForTagValue();
                 const value = this.value;
                 const exceedsLimit = value && utilUnicodeCharsCount(value) > maxChars;
-                d3_select(this).classed('warning', exceedsLimit);
+                const row = d3_select(this.parentNode.parentNode);
+                row.select('input.value').classed('warning', exceedsLimit);
+                row.select('.warning-character-overflow')
+                    .text(exceedsLimit ? t('inspector.max_char_warning', { count: maxChars }) : '');
             });
+
+        innerWrap
+            .append('div')
+            .property('type', 'text')
+            .attr('class', 'warning-character-overflow');
 
         innerWrap
             .append('button')
@@ -283,6 +291,11 @@ export function uiSectionRawTagEditor(id, context) {
                 return isReadOnly(d) || null;
             })
             .call(utilGetSetValue, d => {
+                const exceedsLimit = d.value && utilUnicodeCharsCount(d.value) > maxChars;
+                items.filter(rowDatum => rowDatum === d)
+                    .select('.warning-character-overflow')
+                    .text(exceedsLimit ? t('inspector.max_char_warning', { count: maxChars }) : '');
+
                 if (_pendingChange !== null && !isEmpty(_pendingChange) && !_pendingChange[d.key]) {
                     // if there are pending changes: skip untouched tags
                     return null;
@@ -496,7 +509,7 @@ export function uiSectionRawTagEditor(id, context) {
         // exit if we are currently about to delete this row anyway - #6366
         if (_pendingChange && _pendingChange.hasOwnProperty(kOld) && _pendingChange[kOld] === undefined) return;
 
-        var kNew = context.cleanTagKey(this.value.trim());
+        var kNew = this.value.trim();
 
         // allow no change if the key should be readonly
         if (isReadOnly({ key: kNew })) {
@@ -537,7 +550,7 @@ export function uiSectionRawTagEditor(id, context) {
             // a new tag was added
             let row = this.parentNode.parentNode;
             let inputVal = d3_select(row).selectAll('input.value');
-            let vNew = context.cleanTagValue(utilGetSetValue(inputVal));
+            let vNew = utilGetSetValue(inputVal).trim();
             _pendingChange[kNew] = vNew;
             utilGetSetValue(inputVal, vNew);
         }
@@ -563,7 +576,7 @@ export function uiSectionRawTagEditor(id, context) {
 
         _pendingChange = _pendingChange || {};
 
-        const vNew = context.cleanTagValue(this.value);
+        const vNew = this.value.trim();
         if (vNew !== this.value) {
             utilGetSetValue(d3_select(this), vNew);
         }
