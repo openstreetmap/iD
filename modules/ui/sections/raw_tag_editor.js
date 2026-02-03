@@ -10,7 +10,7 @@ import { uiTagReference } from '../tag_reference';
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
-import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
+import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff, utilUnicodeCharsCount } from '../../util';
 import { allowUpperCaseTagValues } from '../../osm/tags';
 import { fileFetcher } from '../../core';
 
@@ -196,7 +196,20 @@ export function uiSectionRawTagEditor(id, context) {
             .call(utilNoAuto)
             .on('focus', interacted)
             .on('blur', valueChange)
-            .on('change', valueChange);
+            .on('change', valueChange)
+            .on('input', function() {
+                // Update warning class in real-time as user types
+                const maxChars = context.maxCharsForTagValue();
+                const value = this.value;
+                const exceedsLimit = value && utilUnicodeCharsCount(value) > maxChars;
+                d3_select(this).classed('warning', exceedsLimit);
+                d3_select(this.parentNode.parentNode).select('.warning-character-overflow')
+                .text(exceedsLimit ? t('inspector.max_char_warning', { count: maxChars }) : '');
+            });
+
+        innerWrap
+            .append('span')
+            .attr('class', 'warning-character-overflow');
 
         innerWrap
             .append('button')
@@ -257,12 +270,17 @@ export function uiSectionRawTagEditor(id, context) {
                 (_, newKey) => _pendingChange === null || isEmpty(_pendingChange) || _pendingChange[newKey] // if there are pending changes: skip untouched tags
             );
 
+        const maxChars = context.maxCharsForTagValue();
         items.selectAll('input.value')
             .attr('title', function(d) {
                 return Array.isArray(d.value) ? d.value.filter(Boolean).join('\n') : d.value;
             })
             .classed('mixed', function(d) {
                 return Array.isArray(d.value);
+            })
+            .classed('warning', function(d) {
+                if (Array.isArray(d.value)) return false;
+                return d.value && utilUnicodeCharsCount(d.value) > maxChars;
             })
             .attr('placeholder', function(d) {
                 return Array.isArray(d.value) ? t('inspector.multiple_values') : null;

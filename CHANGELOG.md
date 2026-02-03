@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Don't error on features with a sole `note` tag ([#11522])
 * Warn when two features cross each other on same `layer`, regardless of `bridge` / `tunnel` tags ([#10999], thanks [@homersimpsons])
 #### :bug: Bugfixes
+* Show warning in raw tag editor when tag values exceed 255 characters ([#10241], thanks [@JaiswalShivang])
 * Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
 #### :earth_asia: Localization
 * Add Moroccan phone number formats ([#11651], thanks [@ilias52730])
@@ -80,6 +81,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@homersimpsons]: https://github.com/homersimpsons
 [@omsaraykar]: https://github.com/omsaraykar
 [@Kaushik4141]: https://github.com/Kaushik4141
+[@JaiswalShivang]: https://github.com/JaiswalShivang
 
 
 # v2.37.3

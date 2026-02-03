@@ -2736,6 +2736,56 @@ button.raw-tag-option svg.icon {
 .tag-row input.value {
     border-right: 1px solid var(--border-color);
 }
+
+.tag-row input.value.warning {
+    background-color: rgba(221, 85, 51, 0.08) !important;
+    border: 1px solid transparent !important;
+    border-bottom: 2px solid #d53 !important;
+    box-shadow: none !important;
+}
+
+.warning-character-overflow {
+    position: absolute;
+    top: 100%;
+    right: 64px;
+    margin-top: 8px;
+    background-color: #d53;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    z-index: 1000;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    margin-top: 8px;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.warning-character-overflow::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 50%;
+    transform: translateX(50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #d53;
+}
+
+.warning-character-overflow:not(:empty) {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.ideditor[dir='rtl'] .warning-character-overflow {
+    right: auto;
+    left: 40px;
+}
+
 .ideditor[dir='rtl'] .tag-row input.value {
     border-left: 1px solid var(--border-color);
 }
