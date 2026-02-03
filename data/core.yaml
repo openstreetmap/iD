@@ -734,7 +734,6 @@ en:
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
     key_value: "key=value"
-    max_char_warning: "only {count} characters are allowed"
     empty: (empty)
     multiple_values: Multiple Values
     multiple_types: Multiple Types

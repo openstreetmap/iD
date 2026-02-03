@@ -13,6 +13,7 @@ import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff, utilUnicodeCharsCount } from '../../util';
 import { allowUpperCaseTagValues } from '../../osm/tags';
 import { fileFetcher } from '../../core';
+import { uiLengthIndicator } from '../length_indicator';
 
 
 export function uiSectionRawTagEditor(id, context) {
@@ -48,7 +49,6 @@ export function uiSectionRawTagEditor(id, context) {
     var _tags;
     var _entityIDs;
     var _didInteract = false;
-
     function interacted() {
         _didInteract = true;
     }
@@ -198,18 +198,18 @@ export function uiSectionRawTagEditor(id, context) {
             .on('blur', valueChange)
             .on('change', valueChange)
             .on('input', function() {
-                // Update warning class in real-time as user types
-                const maxChars = context.maxCharsForTagValue();
-                const value = this.value;
-                const exceedsLimit = value && utilUnicodeCharsCount(value) > maxChars;
-                d3_select(this).classed('warning', exceedsLimit);
-                d3_select(this.parentNode.parentNode).select('.warning-character-overflow')
-                .text(exceedsLimit ? t('inspector.max_char_warning', { count: maxChars }) : '');
+                var lengthIndicator = d3_select(this.parentNode).datum().__lengthIndicator;
+                if (lengthIndicator) {
+                    lengthIndicator.update(this.value);
+                }
             });
 
-        innerWrap
-            .append('span')
-            .attr('class', 'warning-character-overflow');
+        innerWrap.select('.value-wrap')
+            .each(function() {
+                var lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
+                d3_select(this).datum().__lengthIndicator = lengthIndicator;
+                d3_select(this).call(lengthIndicator);
+            });
 
         innerWrap
             .append('button')
@@ -294,6 +294,15 @@ export function uiSectionRawTagEditor(id, context) {
                     return null;
                 }
                 return Array.isArray(d.value) ? '' : d.value;
+            })
+            .each(function(d) {
+                if (!Array.isArray(d.value)) {
+                    var valueWrap = d3_select(this.parentNode);
+                    var lengthIndicator = valueWrap.datum().__lengthIndicator;
+                    if (lengthIndicator) {
+                        lengthIndicator.update(d.value || '');
+                    }
+                }
             });
 
         items.selectAll('button.remove')
