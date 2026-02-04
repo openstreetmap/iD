@@ -9,11 +9,9 @@ export function actionExtract(entityID, projection) {
     /** @param {boolean} shiftKeyPressed */
     var action = function(graph, shiftKeyPressed) {
         var entity = graph.entity(entityID);
-
         if (entity.type === 'node') {
             return extractFromNode(entity, graph, shiftKeyPressed);
         }
-
         return extractFromWayOrRelation(entity, graph);
     };
 
@@ -49,10 +47,13 @@ export function actionExtract(entityID, projection) {
         var keysToCopyAndRetain = ['source', 'wheelchair'];
         var keysToRetain = ['area'];
         var buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin', 'ref:GB:uprn', 'ref:linz:building_id'];
+        
+        // Comprehensive list of primary OSM categories to prevent "naked" areas
+        var primaryCategoryKeys = /^(amenity|shop|leisure|tourism|craft|office|landuse|natural|historic|military|place|power|railway|route|telecom|waterway|club|emergency|healthcare|boundary|highway|aeroway|man_made)$/;
 
         var extractedLoc = d3_geoPath(projection).centroid(entity.asGeoJSON(graph));
         extractedLoc = extractedLoc && projection.invert(extractedLoc);
-        if (!extractedLoc  || !isFinite(extractedLoc[0]) || !isFinite(extractedLoc[1])) {
+        if (!extractedLoc || !isFinite(extractedLoc[0]) || !isFinite(extractedLoc[1])) {
             extractedLoc = entity.extent(graph).center();
         }
 
@@ -69,15 +70,12 @@ export function actionExtract(entityID, projection) {
 
         var isIndoorArea = fromGeometry === 'area' && entity.tags.indoor && indoorAreaValues[entity.tags.indoor];
 
-        var entityTags = Object.assign({}, entity.tags);  // shallow copy
+        var entityTags = Object.assign({}, entity.tags);
         var pointTags = {};
         for (var key in entityTags) {
-
-            if (entity.type === 'relation' &&
-                key === 'type') {
+            if (entity.type === 'relation' && key === 'type') {
                 continue;
             }
-
             if (keysToRetain.indexOf(key) !== -1) {
                 continue;
             }
@@ -93,16 +91,23 @@ export function actionExtract(entityID, projection) {
                 continue;
             }
 
-            // copy the tag from the entity to the point
+            // Copy the tag to the new Point
             pointTags[key] = entityTags[key];
+            
+            // Retain 'level' on the area 
+            if (key === 'level' && fromGeometry === 'area') {
+                continue;
+            } 
 
             // leave addresses and some other tags so they're on both features
             if (keysToCopyAndRetain.indexOf(key) !== -1 ||
                 key.match(/^addr:.{1,}/)) {
                 continue;
-            } else if (isIndoorArea && key === 'level') {
-                // leave `level` on both features
-                continue;
+            }
+
+            // Keep the primary category if no other structural identity exists
+            if (key.match(primaryCategoryKeys) && !isBuilding && !isIndoorArea) {
+                continue; 
             }
 
             // remove the tag from the entity
