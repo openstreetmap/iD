@@ -1704,6 +1704,28 @@ describe('iD.actionSplit', function () {
                 expect(graph.entity('=').nodes).to.eql(['a', 'b', 'c', 'a']);
                 expect(graph.parentRelations(graph.entity('='))).to.have.length(0);
             });
+
+            it('preserves coastline tag on the ways when creating a multipolygon', function () {
+                var graph = iD.coreGraph([
+                    iD.osmNode({id: 'a', loc: [1,0]}),
+                    iD.osmNode({id: 'b', loc: [1,1]}),
+                    iD.osmNode({id: 'c', loc: [0,1]}),
+                    iD.osmNode({id: 'd', loc: [0,0]}),
+                    iD.osmWay({id: '-', tags: {natural: 'coastline', area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']})
+                ]);
+
+                graph = iD.actionSplit('a', ['='])(graph);
+                expect(graph.entity('-').tags).to.eql({natural: 'coastline'});
+                expect(graph.entity('=').tags).to.eql({natural: 'coastline'});
+                expect(graph.parentRelations(graph.entity('-'))).to.have.length(1);
+
+                var relation = graph.parentRelations(graph.entity('-'))[0];
+                expect(relation.tags).to.eql({type: 'multipolygon', area: 'yes'});
+                expect(relation.members).to.eql([
+                    {id: '-', role: 'outer', type: 'way'},
+                    {id: '=', role: 'outer', type: 'way'}
+                ]);
+            });
         });
 
 

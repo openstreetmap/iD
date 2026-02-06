@@ -185,7 +185,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             ...filterSequences(sequences, true).map(s => s.properties.captured_at)]);
 
         images = filterImages(images);
-        sequences = filterSequences(sequences, service);
+        sequences = filterSequences(sequences);
 
         service.filterViewer(context);
 

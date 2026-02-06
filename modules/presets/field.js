@@ -51,7 +51,7 @@ export function presetField(fieldID, field, allFields) {
   _this.terms = () => _this.resolveReference('label').t('terms', { 'default': _this.originalTerms })
     .toLowerCase().trim().split(/\s*,+\s*/);
 
-  _this.increment = _this.type === 'number' ? (_this.increment || 1) : undefined;
+  _this.increment = (_this.type === 'number' || _this.type === 'integer') ? (_this.increment || 1) : undefined;
 
   return _this;
 }

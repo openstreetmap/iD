@@ -24,6 +24,17 @@ import {
 } from '../util';
 
 
+export const idMatch = q => {
+    const idMatchRegex = /(?:^|\W)(node|way|relation|note|[nwr])\W{0,2}0*([1-9]\d*)(?:\W|$)/i;
+    const idMatch = q.match(idMatchRegex);
+    if (!idMatch) return false;
+
+    return {
+        type: idMatch[1] === 'note' ? idMatch[1] : idMatch[1].charAt(0),
+        id: idMatch[2]
+    };
+};
+
 export function uiFeatureList(context) {
     var _geocodeResults;
 
@@ -158,12 +169,11 @@ export function uiFeatureList(context) {
             }
 
             // A location search takes priority over an ID search
-            const idMatch = !locationMatch && q.match(/(?:^|\W)(node|way|relation|note|[nwr])\W{0,2}0*([1-9]\d*)(?:\W|$)/i);
-
+            const idMatchResult = !locationMatch && idMatch(q);
             const idResult = [];
-            if (idMatch) {
-                var elemType = idMatch[1] === 'note' ? idMatch[1] : idMatch[1].charAt(0);
-                var elemId = idMatch[2];
+            if (idMatchResult) {
+                const elemType = idMatchResult.type;
+                const elemId = idMatchResult.id;
                 idResult.push({
                     id: elemType + elemId,
                     geometry: elemType === 'n' ? 'point' : elemType === 'w' ? 'line' : elemType === 'note' ? 'note' : 'relation',

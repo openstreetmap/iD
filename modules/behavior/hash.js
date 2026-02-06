@@ -8,7 +8,7 @@ import { modeSelect, modeSelectNote } from '../modes';
 import { utilObjectOmit, utilQsString, utilStringQs } from '../util';
 import { utilArrayIdentical } from '../util/array';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
-import { t } from '../core/localizer';
+import { localizer, t } from '../core/localizer';
 import { prefs } from '../core/preferences';
 
 
@@ -128,15 +128,23 @@ export function behaviorHash(context) {
     }, 500);
 
     function hashchange() {
-
         // ignore spurious hashchange events
         if (window.location.hash === _cachedHash) return;
 
         _cachedHash = window.location.hash;
 
         var q = utilStringQs(_cachedHash);
-        var mapArgs = (q.map || '').split('/').map(Number);
 
+        if (q.theme) {
+          context.theme(q.theme);
+        }
+
+        if (q.locale && q.locale !== localizer.preferredLocaleCodes().join(',')) {
+          localizer.preferredLocaleCodes(q.locale);
+          context.ui().restart();
+        }
+
+        var mapArgs = (q.map || '').split('/').map(Number);
         if (mapArgs.length < 3 || mapArgs.some(isNaN)) {
             // replace bogus hash
             updateHashIfNeeded();

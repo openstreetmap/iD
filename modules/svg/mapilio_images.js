@@ -167,7 +167,7 @@ export function svgMapilioImages(projection, context, dispatch) {
         ]);
 
         images = await filterImages(images);
-        sequences = await filterSequences(sequences, service);
+        sequences = await filterSequences(sequences);
 
         const activeImage = service.getActiveImage?.();
         const activeImageId = activeImage ? activeImage.id : null;

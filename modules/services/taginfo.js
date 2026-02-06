@@ -11,6 +11,12 @@ import { taginfoApiUrl } from '../../config/id.js';
 var apibase = taginfoApiUrl;
 var _inflight = {};
 var _popularKeys = {};
+// manually exclude some additional keys – #5377, #7485, #10287, #11733
+// these will be returned by keys(), but taginfo will not be queried for values() requests
+var _extraExcludedKeys = /^(addr:.+|postal_code|via|((int_|loc_|nat_|official_|old_|ref_|reg_|short_|full_|sorting_|alt_|artist_|long_|bridge:|tunnel:)?name(:left|:right)?(:[a-z]+)?))$/;
+
+var _extraExcludedKeyNames = /^(hashtags?|created_by)$/;
+
 var _taginfoCache = {};
 
 var tag_sorts = {
@@ -87,11 +93,13 @@ function filterMultikeys(prefix) {
 }
 
 
-function filterValues(allowUpperCase) {
+function filterValues(allowUpperCase, key) {
     return function(d) {
         if (d.value.match(/[;,]/) !== null) return false;  // exclude some punctuation
-        if (!allowUpperCase && d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
-        return d.count > 100 || d.in_wiki; // exclude rare undocumented tags
+        if (!allowUpperCase &&
+            !(key === 'type' && d.value === 'associatedStreet') &&
+            d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
+        return d.count > 100; // exclude rare undocumented tags
     };
 }
 
@@ -193,20 +201,7 @@ export default {
     init: function() {
         _inflight = {};
         _taginfoCache = {};
-        _popularKeys = {
-            // manually exclude some keys – #5377, #7485
-            postal_code: true,
-            full_name: true,
-            loc_name: true,
-            reg_name: true,
-            short_name: true,
-            sorting_name: true,
-            artist_name: true,
-            nat_name: true,
-            long_name: true,
-            via: true,
-            'bridge:name': true
-        };
+        _popularKeys = [];
 
         // Fetch popular keys.  We'll exclude these from `values`
         // lookups because they stress taginfo, and they aren't likely
@@ -252,7 +247,7 @@ export default {
                 callback(err);
             } else {
                 var f = filterKeys(params.filter);
-                var result = d.data.filter(f).sort(sortKeys).map(valKey);
+                var result = d.data.filter(f).filter(d => !_extraExcludedKeyNames.test(d.key)).sort(sortKeys).map(valKey);
                 _taginfoCache[url] = result;
                 callback(null, result);
             }
@@ -289,7 +284,7 @@ export default {
     values: function(params, callback) {
         // Exclude popular keys from values lookups.. see #3955
         var key = params.key;
-        if (key && _popularKeys[key]) {
+        if (key && _popularKeys[key] === true || _extraExcludedKeys.test(key)) {
             callback(null, []);
             return;
         }
@@ -314,7 +309,7 @@ export default {
                 // This is not an exhaustive list (e.g. `name` also has uppercase values)
                 // but these are the fields where taginfo value lookup is most useful.
                 var allowUpperCase = allowUpperCaseTagValues.test(params.key);
-                var f = filterValues(allowUpperCase);
+                var f = filterValues(allowUpperCase, params.key);
 
                 var result = d.data.filter(f).map(valKeyDescription);
                 _taginfoCache[url] = result;

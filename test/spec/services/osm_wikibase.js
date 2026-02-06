@@ -297,6 +297,7 @@ describe('iD.serviceOsmWikibase', function () {
         key: keyData(),
         tag: tagData()
       });
+      expect(wikibase.getLocaleIDs()).toStrictEqual({ fr: 'Q7792' });
     });
   });
 

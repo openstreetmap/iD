@@ -16,7 +16,6 @@ export function validationIssue(attrs) {
 
     this.id = generateID.apply(this);      // generated - see below
     this.key = generateKey.apply(this);    // generated - see below (call after generating this.id)
-    this.autoFix = null;                   // generated - if autofix exists, will be set below
 
     // A unique, deterministic string hash.
     // Issues with identical id values are considered identical.
@@ -79,9 +78,6 @@ export function validationIssue(attrs) {
             fix.id = fix.title.stringId;
             // add a reference to the issue for use in actions
             fix.issue = issue;
-            if (fix.autoArgs) {
-                issue.autoFix = fix;
-            }
         });
         return fixes;
     };
@@ -101,7 +97,6 @@ export function validationIssueFix(attrs) {
     this.disabledReason = attrs.disabledReason; // Optional - a string explaining why the fix is unavailable, if any
     this.icon = attrs.icon;                     // Optional - shows 'iD-icon-wrench' if not set
     this.entityIds = attrs.entityIds || [];     // Optional - used for hover-higlighting.
-    this.autoArgs = attrs.autoArgs;             // Optional - pass [actions, annotation] arglist if this fix can automatically run
 
     this.issue = null;    // Generated link - added by validationIssue
 }
