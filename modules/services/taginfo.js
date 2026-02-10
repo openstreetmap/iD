@@ -99,7 +99,7 @@ function filterValues(allowUpperCase, key) {
         if (!allowUpperCase &&
             !(key === 'type' && d.value === 'associatedStreet') &&
             d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
-        return d.count > 100; // exclude rare undocumented tags
+        return d.count > 100; // exclude rare tags
     };
 }
 
