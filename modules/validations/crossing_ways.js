@@ -157,7 +157,7 @@ export function validationCrossingWays(context) {
             }
             if (featureType1 === 'waterway') return {};
             if (featureType1 === 'railway') {
-                return {railway: 'railway_crossing'};
+                return { railway: 'railway_crossing' };
             }
 
         } else {
