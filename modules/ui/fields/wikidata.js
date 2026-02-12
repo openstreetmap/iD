@@ -124,17 +124,12 @@ export function uiFieldWikidata(field, context) {
             .attr('class', 'form-field-button')
             .attr('title', t('icons.copy'))
             .call(svgIcon('#iD-operation-copy'))
-            .on('click', async function(d3_event) {
+            .on('click', async function (d3_event){
                 d3_event.preventDefault();
-                d3_select(this.parentNode)
+                var text=d3_select(this.parentNode)
                     .select('input')
-                    .node()
-                    .select();
-                try {
-                    await navigator.clipboard.writeText(text);
-                } catch (err) {
-                    console.error('Failed to copy: ', err);
-                }
+                    .property('value')
+                await navigator.clipboard.writeText(text);
             });
 
     }
