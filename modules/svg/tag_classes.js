@@ -1,7 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags, osmLifecyclePrefixes } from '../osm/tags';
 
-
+var _classCache = new WeakMap();
 export function svgTagClasses() {
     var primaries = [
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
@@ -17,10 +17,7 @@ export function svgTagClasses() {
         'man_made', 'indoor', 'construction', 'proposed'
     ];
     var _tags = function(entity) { return entity.tags; };
-    // Cache computed class strings by tag object identity + base class.
-    // Safe for zoom/pan because tags do not change, and if tags change
-    // the graph creates new tag objects (cache miss => recompute).
-    var _classCache = new WeakMap();
+    // Cache tag-derived classes by tag object identity.
 
 
     var tagClasses = function(selection) {
@@ -33,7 +30,6 @@ export function svgTagClasses() {
 
             var t = _tags(entity);
 
-            // Avoid recomputing tagClasses for unchanged tags during zoom/pan.
             var computed = tagClasses.getClassesString(t, value);
 
             if (computed !== value) {
@@ -44,16 +40,6 @@ export function svgTagClasses() {
 
 
     tagClasses.getClassesString = function(t, value) {
-        // Fast path: return cached class string for identical tags + base class.
-        var byBase = _classCache.get(t);
-        if (!byBase) {
-            byBase = new Map();
-            _classCache.set(t, byBase);
-        }
-
-        var cached = byBase.get(value);
-        if (cached) return cached;
-
         var primary, status;
         var i, j, k, v;
 
@@ -66,13 +52,21 @@ export function svgTagClasses() {
         }
 
         // preserve base classes (nothing with `tag-`)
-        var classes = value.trim().split(/\s+/)
+        var baseClasses = value.trim().split(/\s+/)
             .filter(function(klass) {
                 return klass.length && !/^tag-/.test(klass);
             })
             .map(function(klass) {  // special overrides for some perimeter strokes
                 return (klass === 'line' || klass === 'area') ? (overrideGeometry || klass) : klass;
             });
+
+        // Fast path: return cached tag-derived classes if available
+        var tagDerivedClasses = _classCache.get(t);
+        if (tagDerivedClasses) {
+            return baseClasses.concat(tagDerivedClasses).join(' ').trim();
+        }
+
+        var classes = [];
 
         // pick at most one primary classification tag..
         for (i = 0; i < primaries.length; i++) {
@@ -176,13 +170,9 @@ export function svgTagClasses() {
 
         // ensure that classes for tags keys/values with special characters like spaces
         // are not added to the DOM, because it can cause bizarre issues (#9448)
-        var computed = classes
-            .filter(klass => /^[-_a-z0-9]+$/.test(klass))
-            .join(' ')
-            .trim();
-
-        byBase.set(value, computed);
-        return computed;
+        var tagDerived = classes.filter(klass => /^[-_a-z0-9]+$/.test(klass));
+        _classCache.set(t, tagDerived);
+        return baseClasses.concat(tagDerived).join(' ').trim();
     };
 
 
