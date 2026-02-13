@@ -302,15 +302,7 @@ export function rendererMap(context) {
                 }
             }
             if (hasOrphan) {
-                var event = window.CustomEvent;
-                if (event) {
-                    event = new event('mouseup');
-                } else {
-                    event = window.document.createEvent('Event');
-                    event.initEvent('mouseup', false, false);
-                }
-                // Event needs to be dispatched with an event.view property.
-                event.view = window;
+                var event = new Event('mouseup', { view: window });
                 window.dispatchEvent(event);
             }
         }
