@@ -1941,6 +1941,11 @@ en:
       reference: "Sensitive data like personal phone numbers should not be tagged."
       contact:
         message: '{feature} might be tagged with private contact information'
+    redundant_area_yes:
+      title: Redundant area=yes
+      tip: "Find areas that have area=yes when other tags already imply area."
+      message: "{feature} has redundant area=yes tag"
+      reference: "This feature is already tagged as an area (e.g. landuse, natural, highway=services). The area=yes tag can be removed to avoid QA warnings."
     suspicious_name:
       title: Suspicious Names
       tip: "Find features with generic or suspicious names"
