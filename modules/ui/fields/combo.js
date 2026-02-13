@@ -774,7 +774,7 @@ export function uiFieldCombo(field, context) {
         var isRawValue = value => showsValue(value)
             && !stringsField.hasTextForStringId(`options.${value}`)
             && !stringsField.hasTextForStringId(`options.${value}.title`)
-            && !osmIsoCountryKeys.has(field.key); // the country key should not be raw-valued
+            && !(osmIsoCountryKeys.has(field.key) && value in buildCountry());
         var isKnownValue = value => showsValue(value) && !isRawValue(value);
         var isReadOnly = !_allowCustomValues;
 
