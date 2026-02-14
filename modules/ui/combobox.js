@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
+import { svgIcon } from '../svg/icon';
 import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 
 
@@ -386,19 +387,43 @@ export function uiCombobox(context, klass) {
                 .remove();
 
             // enter/update
-            options.enter()
+            var entered = options.enter()
                 .append('a')
                 .attr('class', function(d) {
                     return 'combobox-option ' + (d.klass || '');
                 })
-                .attr('title', function(d) { return d.title; })
-                .each(function(d) {
-                    if (d.display) {
-                        d.display(d3_select(this));
-                    } else {
-                        d3_select(this).text(d.value);
-                    }
-                })
+                .attr('title', function(d) { return d.title; });
+
+            entered.each(function(d) {
+                var sel = d3_select(this);
+                var row = sel.append('span')
+                    .attr('class', 'combobox-option-row');
+                var labelSpan = row.append('span')
+                    .attr('class', 'combobox-option-label');
+                if (d.display) {
+                    d.display(labelSpan);
+                } else {
+                    labelSpan.text(d.value);
+                }
+                if (d.description) {
+                    row.append('button')
+                        .attr('class', 'combobox-option-info')
+                        .call(svgIcon('#iD-icon-info'))
+                        .on('click', function(d3_event) {
+                            d3_event.stopPropagation();
+                            d3_event.preventDefault();
+                            var descEl = sel.select('.combobox-option-description');
+                            var isExpanded = descEl.classed('expanded');
+                            descEl.classed('expanded', !isExpanded);
+                            d3_select(this).classed('active', !isExpanded);
+                        });
+                    sel.append('span')
+                        .attr('class', 'combobox-option-description')
+                        .text(d.description);
+                }
+            });
+
+            entered
                 .on('mouseenter', _mouseEnterHandler)
                 .on('mouseleave', _mouseLeaveHandler)
                 .merge(options)

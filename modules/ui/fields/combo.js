@@ -300,6 +300,8 @@ export function uiFieldCombo(field, context) {
             key: v,
             value: stringsField.t(labelId, { default: v }),
             title: stringsField.t(`options.${v}.description`, { default: v }),
+            description: stringsField.hasTextForStringId(`options.${v}.description`)
+                ? stringsField.t(`options.${v}.description`) : undefined,
             display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
             klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
           });
@@ -344,6 +346,8 @@ export function uiFieldCombo(field, context) {
                 key: v,
                 value: stringsField.t(labelId, { default: v }),
                 title: stringsField.t(`options.${v}.description`, { default: v }),
+                description: stringsField.hasTextForStringId(`options.${v}.description`)
+                    ? stringsField.t(`options.${v}.description`) : undefined,
                 display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
                 klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
             };
@@ -450,6 +454,8 @@ export function uiFieldCombo(field, context) {
                     value: label,
                     title: stringsField.t(`options.${v}.description`, { default:
                         isLocalizable ? label : (d.title !== label ? d.title : '') }),
+                    description: stringsField.hasTextForStringId(`options.${v}.description`)
+                        ? stringsField.t(`options.${v}.description`) : undefined,
                     display: addComboboxIcons(stringsField.t.append(labelId, { default: label }), v),
                     klass: isLocalizable ? '' : 'raw-option'
                 };
