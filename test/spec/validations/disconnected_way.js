@@ -92,4 +92,18 @@ describe('iD.validations.disconnected_way', function() {
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
+    it('ignores disconnected golf walking path (iD preset)', function () {
+        createWay({ 'highway': 'footway', 'golf': 'path' });
+        expect(validate()).to.have.lengthOf(0);
+    });
+
+    it('ignores disconnected golf cartpath (iD preset)', function () {
+        createWay({ 'highway': 'path', 'golf': 'cartpath' });
+        expect(validate()).to.have.lengthOf(0);
+    });
+
+    it('ignores disconnected golf path (reporter tags)', function () {
+        createWay({ 'highway': 'path', 'golf': 'path', 'foot': 'designated' });
+        expect(validate()).to.have.lengthOf(0);
+    });
 });

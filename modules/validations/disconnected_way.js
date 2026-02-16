@@ -161,6 +161,11 @@ export function validationDisconnectedWay() {
         }
 
         function isRoutableWay(way, ignoreInnerWays) {
+            // Skip Golf Paths 
+            if (way.tags.golf === 'path' || way.tags.golf === 'cartpath') {
+                return false;
+            }
+
             if (isTaggedAsHighway(way) || way.tags.route === 'ferry') return true;
 
             return graph.parentRelations(way).some(function(parentRelation) {
