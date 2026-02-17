@@ -304,21 +304,42 @@ export function uiPopover(klass) {
         }
 
         if (position) {
+            popoverSelection.style('left', ~~position.x + 'px').style('top', ~~position.y + 'px');
 
-            if (scrollNode && (placement === 'top' || placement === 'bottom')) {
+            if (scrollNode) {
 
-                var initialPosX = position.x;
+                if ((placement === 'top' || placement === 'bottom')) {
 
-                if (position.x + popoverFrame.w > scrollNode.offsetWidth - 10) {
-                    position.x = scrollNode.offsetWidth - 10 - popoverFrame.w;
-                } else if (position.x < 10) {
-                    position.x = 10;
+                    var initialPosX = position.x;
+
+                    if (position.x + popoverFrame.w > scrollNode.offsetWidth - 10) {
+                        position.x = scrollNode.offsetWidth - 10 - popoverFrame.w;
+                    } else if (position.x < 10) {
+                        position.x = 10;
+                    }
+
+                    var arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
+                    // keep the arrow centered on the button, or as close as possible
+                    var arrowPosX = Math.min(Math.max(popoverFrame.w / 2 - (position.x - initialPosX), 10), popoverFrame.w - 10);
+                    arrow.style('left', ~~arrowPosX + 'px');
+                } else if (placement === "left" || placement === "right") {
+
+                    var popoverRect = popoverSelection.node().getBoundingClientRect();
+                    var scrollNodeRect = scrollNode.getBoundingClientRect()
+
+                    var initialPosY = position.y;
+
+                    if (popoverRect.bottom > scrollNodeRect.bottom - 10) {
+                        position.y -= popoverRect.bottom - (scrollNodeRect.bottom - 10);
+                    } else if (popoverRect.top < scrollNodeRect.top + 10) {
+                        position.y += (scrollNodeRect.top + 10) - popoverRect.top;
+                    }
+
+                    var arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
+                    // keep the arrow centered on the button, or as close as possible
+                    var arrowPosY = Math.min(Math.max(popoverFrame.h / 2 - (position.y - initialPosY), 0), popoverFrame.h - 30);
+                    arrow.style('top', ~~arrowPosY + 'px');
                 }
-
-                var arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
-                // keep the arrow centered on the button, or as close as possible
-                var arrowPosX = Math.min(Math.max(popoverFrame.w / 2 - (position.x - initialPosX), 10), popoverFrame.w - 10);
-                arrow.style('left', ~~arrowPosX + 'px');
             }
 
             popoverSelection.style('left', ~~position.x + 'px').style('top', ~~position.y + 'px');
