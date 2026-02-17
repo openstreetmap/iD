@@ -110,7 +110,7 @@
     "editor-layer-index": "github:osmlab/editor-layer-index#gh-pages",
     "esbuild": "^0.27.0",
     "esbuild-visualizer": "^0.7.0",
-    "eslint": "^9.39.1",
+    "eslint": "^10.0.0",
     "fake-indexeddb": "^6.2.5",
     "fetch-mock": "^11.1.1",
     "gaze": "^1.1.3",
