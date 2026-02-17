@@ -64,7 +64,7 @@ export function uiNoteComments() {
             .append('div')
             .attr('class', 'comment-date')
             .html(function(d) {
-                return t.html('note.status.' + d.action, { when: localeDateString(d.date) });
+                return t.html('note.status.' + d.action, { when: localeDateString(d.date) || '' });
             });
 
         mainEnter
