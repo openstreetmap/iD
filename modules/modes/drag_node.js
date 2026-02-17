@@ -301,7 +301,6 @@ export function modeDragNode(context) {
 
         for (i = 0; i < parents.length; i++) {
             var parent = parents[i];
-            var nodes = [];
             var activeIndex = null;    // which multipolygon ring contains node being dragged
 
             // test any parent multipolygons for valid geometry
@@ -313,7 +312,7 @@ export function modeDragNode(context) {
 
                 // find active ring and test it for self intersections
                 for (k = 0; k < rings.length; k++) {
-                    nodes = rings[k].nodes;
+                    const nodes = rings[k].nodes;
                     if (nodes.find(function(n) { return n.id === entity.id; })) {
                         activeIndex = k;
                         if (geoHasSelfIntersections(nodes, entity.id)) {
@@ -338,7 +337,7 @@ export function modeDragNode(context) {
             // If we still haven't tested this node's parent way for self-intersections.
             // (because it's not a member of a multipolygon), test it now.
             if (activeIndex === null) {
-                nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
+                const nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
                 if (nodes.length && geoHasSelfIntersections(nodes, entity.id)) {
                     return parent.geometry(graph);
                 }
