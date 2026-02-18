@@ -126,7 +126,7 @@ export function uiFieldWikidata(field, context) {
             .call(svgIcon('#iD-operation-copy'))
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
-                let text = d3_select(this.parentNode)
+                const text = d3_select(this.parentNode)
                     .select('input')
                     .property('value');
                 navigator.clipboard.writeText(text);
