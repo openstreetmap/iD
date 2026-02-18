@@ -64,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Change package name to `@openstreetmap/id` to be able to publish releases on npm
 * Use Röntgen icon set directly from upstream npm package ([#11784], thanks [@tordans])
+* Replace deprecated `document.createEvent`/`initEvent` with modern [Event] constructor ([#11870], thanks [@JaiswalShivang])
 
 
 [#8464]: https://github.com/openstreetmap/iD/issues/8464
@@ -87,6 +88,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@omsaraykar]: https://github.com/omsaraykar
 [@Kaushik4141]: https://github.com/Kaushik4141
 [@Kayd-06]: https://github.com/Kayd-06
+[@JaiswalShivang]: https://github.com/JaiswalShivang
 
 
 # v2.37.3
