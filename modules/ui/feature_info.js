@@ -38,8 +38,32 @@ export function uiFeatureInfo(context) {
                 .on('click', function(d3_event) {
                     tooltipBehavior.hide();
                     d3_event.preventDefault();
+                    
                     // open the Map Data pane
-                    context.ui().togglePanes(context.container().select('.map-panes .map-data-pane'));
+                    var mapDataPane = context.container().select('.map-panes .map-data-pane');
+                    context.ui().togglePanes(mapDataPane);
+                    
+                    // Wait for pane to render, then expand Map Features section and scroll to it
+                    setTimeout(function() {
+                        var mapFeaturesSection = mapDataPane.select('.section-map-features');
+                        if (!mapFeaturesSection.empty()) {
+                            var disclosure = mapFeaturesSection.select('.hide-toggle-map_features');
+                            var disclosureWrap = mapFeaturesSection.select('.disclosure-wrap-map_features');
+                            
+                            // Expand the disclosure if it's not already expanded
+                            if (!disclosure.classed('expanded')) {
+                                disclosure.node().click();
+                            }
+                            
+                            // Scroll to the map features section
+                            setTimeout(function() {
+                                var sectionNode = mapFeaturesSection.node();
+                                if (sectionNode) {
+                                    sectionNode.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }, 100);
+                        }
+                    }, 100);
                 });
         }
 
