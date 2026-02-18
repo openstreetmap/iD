@@ -124,12 +124,12 @@ export function uiFieldWikidata(field, context) {
             .attr('class', 'form-field-button')
             .attr('title', t('icons.copy'))
             .call(svgIcon('#iD-operation-copy'))
-            .on('click', async function(d3_event) {
+            .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 let text = d3_select(this.parentNode)
                     .select('input')
                     .property('value');
-                await navigator.clipboard.writeText(text);
+                navigator.clipboard.writeText(text);
             });
 
     }
