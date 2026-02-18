@@ -243,13 +243,11 @@ export function presetIndex() {
       const validHere = locationManager.locationSetsAt(loc);
       if (!validHere[bestMatch.locationSetID]) {
         bestMatch = undefined;
-        bestScore = undefined;
         matchCandidates.sort((a, b) => (a.score < b.score) ? 1 : -1);
         for (let i = 0; i < matchCandidates.length; i++) {
           const candidateScore = matchCandidates[i];
           if (!candidateScore.candidate.locationSetID || validHere[candidateScore.candidate.locationSetID]) {
             bestMatch = candidateScore.candidate;
-            bestScore = candidateScore.score;
             break;
           }
         }

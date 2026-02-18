@@ -51,6 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
 * Fix error setting custom background ([#11862], thanks [@Kayd-06])
+* Fix crash when commenting/closing notes when the note is closed by another mapper in the meantime ([#8464])
 #### :earth_asia: Localization
 * Add Moroccan phone number formats ([#11651], thanks [@ilias52730])
 * The Languages field shows language names in your preferred language. ([#11699], thanks [@Razen04])
@@ -65,8 +66,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Use Röntgen icon set directly from upstream npm package ([#11784], thanks [@tordans])
 
 
-[#11522]: https://github.com/openstreetmap/iD/issues/11522
+[#8464]: https://github.com/openstreetmap/iD/issues/8464
 [#9401]: https://github.com/openstreetmap/iD/issues/9401
+[#11522]: https://github.com/openstreetmap/iD/issues/11522
 [#11636]: https://github.com/openstreetmap/iD/pull/11636
 [#11651]: https://github.com/openstreetmap/iD/pull/11651
 [#11697]: https://github.com/openstreetmap/iD/pull/11697
