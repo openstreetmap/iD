@@ -1211,12 +1211,11 @@ export default {
 
     function tileCallback(err, parsed) {
       if (err && err.status === 400) {
+        delete _tileCache.inflight[tile.id];
+        delete _tileCache.toLoad[tile.id];
+
         if (depth < MAX_SUBDIVISION_DEPTH) {
-          delete _tileCache.inflight[tile.id];
-          delete _tileCache.toLoad[tile.id];
-
           var extentObj = tile.extent.bbox();
-
           var minLon = extentObj.minX;
           var minLat = extentObj.minY;
           var maxLon = extentObj.maxX;
@@ -1251,10 +1250,8 @@ export default {
 
           return;
         }
-        console.warn("Max subdivision depth reached, skipping:", tile.id);
 
-        delete _tileCache.inflight[tile.id];
-        delete _tileCache.toLoad[tile.id];
+        console.warn("Max subdivision depth reached, skipping:", tile.id);
 
         if (!hasInflightRequests(_tileCache) && _isLoading) {
           _isLoading = false;
@@ -1263,6 +1260,7 @@ export default {
 
         return;
       }
+
       if (!err) {
         delete _tileCache.inflight[tile.id];
         delete _tileCache.toLoad[tile.id];
@@ -1275,6 +1273,9 @@ export default {
           maxX: bboxObj.maxX,
           maxY: bboxObj.maxY,
         });
+      } else if (err.status === 429 || err.status === 509) {
+        delete _tileCache.inflight[tile.id];
+        _rateLimitError = err;
       } else {
         delete _tileCache.inflight[tile.id];
 
@@ -1284,11 +1285,13 @@ export default {
 
         return;
       }
+
       if (callback) {
         callback(null, Object.assign({ data: parsed }, tile));
       }
 
-      if (!hasInflightRequests(_tileCache)) {
+      if (!hasInflightRequests(_tileCache) && _isLoading) {
+        _isLoading = false;
         dispatch.call("loaded");
       }
     }
