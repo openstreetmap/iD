@@ -549,7 +549,11 @@ export function uiInit(context) {
         ui.checkOverflow('.top-toolbar');
         ui.checkOverflow('.map-footer-bar');
 
-        document.dispatchEvent(new Event('resizeWindow', { bubbles: true, cancelable: true }));
+        const event = new Event('resizeWindow', {
+            bubbles: true,
+            cancelable: true
+        });
+        document.dispatchEvent(event);
     };
 
 
