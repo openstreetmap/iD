@@ -327,7 +327,39 @@ export function uiSectionRawMembershipEditor(context) {
                 });
             });
 
+            const connectedRelationIDs = new Set();
+            const selected = graph.hasEntity(entityID);
+
+            if (selected) {
+                let connectedWays = [];
+
+                if (selected.type === 'node') {
+                    connectedWays = graph.parentWays(selected);
+                } else if (selected.type === 'way') {
+                    selected.nodes.forEach(nodeID => {
+                        const node = graph.hasEntity(nodeID);
+                        if (node) {
+                            graph.parentWays(node).forEach(w => {
+                                if (w.id !== selected.id) connectedWays.push(w);
+                            });
+                        }
+                    });
+                }
+
+                connectedWays.forEach(way => {
+                    graph.parentRelations(way).forEach(r => {
+                        connectedRelationIDs.add(r.id);
+                    });
+                });
+            }
+
             result.sort(function(a, b) {
+                const aConnected = connectedRelationIDs.has(a.relation.id);
+                const bConnected = connectedRelationIDs.has(b.relation.id);
+
+                if (aConnected && !bConnected) return -1;
+                if (!aConnected && bConnected) return 1;
+
                 return osmRelation.creationOrder(a.relation, b.relation);
             });
 
