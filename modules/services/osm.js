@@ -47,6 +47,8 @@ var _rateLimitError;
 var _userChangesets;
 var _userDetails;
 var _off;
+var _isLoading = false;
+var MAX_SUBDIVISION_DEPTH = 3;
 
 // set a default but also load this from the API status
 var _maxWayNodes = 2000;
@@ -553,6 +555,7 @@ export default {
         _userChangesets = undefined;
         _userDetails = undefined;
         _rateLimitError = undefined;
+        _isLoading = false;
 
         Object.values(_tileCache.inflight).forEach(abortRequest);
         Object.values(_noteCache.inflight).forEach(abortRequest);
@@ -1102,11 +1105,13 @@ export default {
 
     // Load a single data tile
     // GET /api/0.6/map?bbox=
-    loadTile: function(tile, callback) {
+    loadTile: function(tile, callback, depth) {
+        depth = depth || 0;
         if (_off) return;
         if (_tileCache.loaded[tile.id] || _tileCache.inflight[tile.id]) return;
 
-        if (!hasInflightRequests(_tileCache)) {
+        if (!hasInflightRequests(_tileCache) && !_isLoading) {
+            _isLoading = true;
             dispatch.call('loading');   // start the spinner
         }
 
@@ -1128,19 +1133,67 @@ export default {
                 bbox.id = tile.id;
                 _tileCache.rtree.insert(bbox);
             } else {
-                // map tile loading error: e.g. network connection error,
-                // 509 Bandwidth Limit Exceeded, 429 Too Many Requests
-                if (!_rateLimitError && err.status === 509 || err.status === 429) {
-                    // show "API rate limiting" warning
+
+                // 400 → subdivision (50k node limit)
+                if (err && err.status === 400) {
+
+                    delete _tileCache.inflight[tile.id];
+                    delete _tileCache.toLoad[tile.id];
+
+                    if (depth < MAX_SUBDIVISION_DEPTH) {
+
+                        var extent = tile.extent.bbox();
+                        var minLon = extent.minX;
+                        var minLat = extent.minY;
+                        var maxLon = extent.maxX;
+                        var maxLat = extent.maxY;
+
+                        var midLon = (minLon + maxLon) / 2;
+                        var midLat = (minLat + maxLat) / 2;
+
+                        var boxes = [
+                            [minLon, minLat, midLon, midLat],
+                            [midLon, minLat, maxLon, midLat],
+                            [minLon, midLat, midLon, maxLat],
+                            [midLon, midLat, maxLon, maxLat]
+                        ];
+
+                        boxes.forEach(function(bboxArr, i) {
+
+                            var childTile = {
+                                id: tile.id + '-' + depth + '-' + i,
+                                extent: {
+                                    toParam: function() { return bboxArr.join(','); },
+                                    bbox: function() {
+                                        return {
+                                            minX: bboxArr[0],
+                                            minY: bboxArr[1],
+                                            maxX: bboxArr[2],
+                                            maxY: bboxArr[3]
+                                        };
+                                    }
+                                }
+                            };
+
+                            this.loadTile(childTile, callback, depth + 1);
+
+                        }.bind(this));
+
+                        return;
+                    }
+
+                } else if (!_rateLimitError && (err.status === 509 || err.status === 429)) {
+
                     _rateLimitError = err;
                     dispatch.call('change');
                     this.reloadApiStatus();
+
                 }
-                setTimeout(() => {
-                    // retry loading the tiles
+
+                setTimeout(function() {
                     delete _tileCache.inflight[tile.id];
-                    this.loadTile(tile, callback);
-                }, 8000);
+                    this.loadTile(tile, callback, depth);
+                }.bind(this), 8000);
             }
             if (callback) {
                 callback(err, Object.assign({ data: parsed }, tile));
@@ -1152,6 +1205,7 @@ export default {
                     dispatch.call('change');
                     this.reloadApiStatus();
                 }
+                _isLoading = false;
                 dispatch.call('loaded');     // stop the spinner
             }
         }
