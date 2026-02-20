@@ -8,6 +8,7 @@ import { actionNoop } from '../actions/noop';
 import { actionRevert } from '../actions/revert';
 import { coreGraph } from '../core/graph';
 import { t } from '../core/localizer';
+import { coreChangesetSplitter } from './changeset_splitter';
 import { utilArrayUnion, utilArrayUniq, utilDisplayName, utilDisplayType, utilRebind } from '../util';
 
 
@@ -35,6 +36,11 @@ export function coreUploader(context) {
     var _conflicts = [];
     var _errors = [];
     var _origChanges;
+    var _uploadedEntityIDs = {};
+    var _splitBaseComment = null;
+    var _splitTotalParts = null;
+    var _splitUploadedParts = 0;
+    var _splitReferenceChangesetID = null;
 
     var _discardTags = {};
     fileFetcher.get('discarded')
@@ -77,6 +83,13 @@ export function coreUploader(context) {
         _anyConflictsAutomaticallyResolved = false;
         _conflicts = [];
         _errors = [];
+        if (!tryAgain) {
+            _uploadedEntityIDs = {};
+            _splitBaseComment = null;
+            _splitTotalParts = null;
+            _splitUploadedParts = 0;
+            _splitReferenceChangesetID = null;
+        }
 
         // Store original changes, in case user wants to download them as an .osc file
         _origChanges = history.changes(actionDiscardTags(history.difference(), _discardTags));
@@ -301,9 +314,29 @@ export function coreUploader(context) {
             var changes = history.changes(actionDiscardTags(history.difference(), _discardTags));
             if (changes.modified.length || changes.created.length || changes.deleted.length) {
 
+                var groups = coreChangesetSplitter(changes, context.graph());
+
                 dispatch.call('willAttemptUpload', this);
 
-                osm.putChangeset(changeset, changes, uploadCallback);
+                if (groups.length > 1) {
+                    if (_splitTotalParts === null) {
+                        _splitTotalParts = groups.length;
+                    }
+                    if (_splitBaseComment === null) {
+                        _splitBaseComment = (changeset.tags.comment || '').trim();
+                    }
+                    uploadGroupsSequentially(changeset, groups, 0);
+                } else {
+                    // If we are resuming a split upload and only one part remains,
+                    // preserve split metadata for the final part.
+                    if (_splitTotalParts && _splitTotalParts > 1) {
+                        var finalPartNumber = _splitUploadedParts + 1;
+                        var taggedChangeset = withSplitComment(changeset, finalPartNumber, _splitTotalParts);
+                        osm.putChangeset(taggedChangeset, groups[0], uploadCallback);
+                    } else {
+                        osm.putChangeset(changeset, groups[0], uploadCallback);
+                    }
+                }
 
             } else {
                 // changes were insignificant or reverted by user
@@ -330,6 +363,89 @@ export function coreUploader(context) {
         }
     }
 
+    function uploadGroupsSequentially(changeset, groups, index) {
+        var osm = context.connection();
+        if (!osm) {
+            _errors.push({ msg: 'No OSM Service' });
+            didResultInErrors();
+            return;
+        }
+
+        var partNumber = _splitUploadedParts + 1;
+        var totalParts = _splitTotalParts || groups.length;
+        var taggedChangeset = withSplitComment(changeset, partNumber, totalParts);
+        var group = groups[index];
+        osm.putChangeset(taggedChangeset, group, function(err, updatedChangeset) {
+            if (err) {
+                uploadCallback(err, updatedChangeset);
+                return;
+            }
+
+            if (!_splitReferenceChangesetID && updatedChangeset && updatedChangeset.id) {
+                _splitReferenceChangesetID = updatedChangeset.id;
+            }
+            _splitUploadedParts++;
+            markGroupAsUploaded(group);
+
+            if (index < groups.length - 1) {
+                uploadGroupsSequentially(changeset, groups, index + 1);
+            } else {
+                didResultInSuccess(updatedChangeset);
+            }
+        });
+    }
+
+    function withSplitComment(changeset, partNumber, totalParts) {
+        var tags = Object.assign({}, changeset.tags);
+        tags.comment = splitComment(partNumber, totalParts);
+        return changeset.update({ tags: tags });
+    }
+
+    function splitComment(partNumber, totalParts) {
+        var baseComment = _splitBaseComment || '';
+        var suffix = 'part ' + partNumber + '/' + totalParts;
+
+        if (partNumber > 1 && _splitReferenceChangesetID) {
+            var osm = context.connection();
+            var ref = osm && osm.changesetURL ?
+                osm.changesetURL(_splitReferenceChangesetID) :
+                String(_splitReferenceChangesetID);
+            suffix += ', ref: ' + ref;
+        }
+
+        if (baseComment) {
+            return baseComment + ' (' + suffix + ')';
+        }
+        return suffix.charAt(0).toUpperCase() + suffix.slice(1);
+    }
+
+    function markGroupAsUploaded(group) {
+        var history = context.history();
+        var entities = group.created.concat(group.modified).concat(group.deleted);
+        var ids = utilArrayUniq(entities.map(function(entity) { return entity.id; }));
+
+        if (!ids.length) return;
+
+        history.pauseChangeDispatch();
+        for (var i = 0; i < ids.length; i++) {
+            _uploadedEntityIDs[ids[i]] = true;
+            history.replace(actionRevert(ids[i]));
+        }
+        history.resumeChangeDispatch();
+    }
+
+    function applyUploadedReverts() {
+        var history = context.history();
+        var ids = Object.keys(_uploadedEntityIDs);
+        if (!ids.length) return;
+
+        history.pauseChangeDispatch();
+        for (var i = 0; i < ids.length; i++) {
+            history.replace(actionRevert(ids[i]));
+        }
+        history.resumeChangeDispatch();
+    }
+
     function didResultInNoChanges() {
 
         dispatch.call('resultNoChanges', this);
@@ -340,8 +456,9 @@ export function coreUploader(context) {
     }
 
     function didResultInErrors() {
-
-        context.history().pop();
+        var history = context.history();
+        history.pop();
+        applyUploadedReverts();
 
         dispatch.call('resultErrors', this, _errors);
 
@@ -381,6 +498,11 @@ export function coreUploader(context) {
 
     function endSave() {
         _isSaving = false;
+        _uploadedEntityIDs = {};
+        _splitBaseComment = null;
+        _splitTotalParts = null;
+        _splitUploadedParts = 0;
+        _splitReferenceChangesetID = null;
 
         dispatch.call('saveEnded', this);
     }

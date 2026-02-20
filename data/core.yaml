@@ -611,6 +611,8 @@ en:
     save: Upload
     cancel: Cancel
     changes: Changes
+    multiple_changesets_info: "Some edits are too far apart and will be uploaded separately as {count} changesets. Review each group below."
+    changeset_group: "Changeset {num}"
     download_changes: Download osmChange file
     errors: Errors
     warnings: Warnings

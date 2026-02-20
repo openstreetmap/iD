@@ -5483,6 +5483,16 @@ a.user-info {
     opacity: 0.5;
 }
 
+.changeset-group + .changeset-group {
+    margin-top: 10px;
+}
+
+.changeset-group-title {
+    margin: 0 0 4px 2px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
 
 /* Conflict resolution
 ------------------------------------------------------- */

@@ -1,3 +1,4 @@
+export { coreChangesetSplitter } from './changeset_splitter';
 export { coreContext } from './context';
 export { coreFileFetcher, fileFetcher } from './file_fetcher';
 export { coreDifference } from './difference';

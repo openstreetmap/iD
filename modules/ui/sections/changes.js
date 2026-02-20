@@ -2,6 +2,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
+import { coreChangesetSplitter } from '../../core/changeset_splitter';
 import { t } from '../../core/localizer';
 import { JXON } from '../../util/jxon';
 import { actionDiscardTags } from '../../actions/discard_tags';
@@ -33,6 +34,9 @@ export function uiSectionChanges(context) {
     function renderDisclosureContent(selection) {
         var history = context.history();
         var summary = history.difference().summary();
+        var changes = history.changes(actionDiscardTags(history.difference(), _discardTags));
+        var groups = coreChangesetSplitter(changes, context.graph());
+        var groupedSummary = splitSummaryIntoGroups(summary, groups);
 
         var container = selection.selectAll('.commit-section')
             .data([0]);
@@ -42,15 +46,65 @@ export function uiSectionChanges(context) {
             .attr('class', 'commit-section');
 
         containerEnter
-            .append('ul')
-            .attr('class', 'changeset-list');
+            .append('p')
+            .attr('class', 'changeset-multi-message field-warning hide');
+
+        containerEnter
+            .append('div')
+            .attr('class', 'changeset-groups');
+
+        containerEnter
+            .append('a')
+            .attr('class', 'download-changes');
 
         container = containerEnter
             .merge(container);
 
+        var splitMessage = container.select('.changeset-multi-message');
+        splitMessage
+            .classed('hide', groups.length <= 1)
+            .text(groups.length > 1 ? getSplitMessage(groups.length) : '');
 
-        var items = container.select('ul').selectAll('li')
-            .data(summary);
+        var groupContainers = container.select('.changeset-groups')
+            .selectAll('.changeset-group')
+            .data(groupedSummary);
+
+        var groupEnter = groupContainers.enter()
+            .append('div')
+            .attr('class', 'changeset-group');
+
+        groupEnter
+            .append('h4')
+            .attr('class', 'changeset-group-title');
+
+        groupEnter
+            .append('ul')
+            .attr('class', 'changeset-list');
+
+        groupContainers.exit()
+            .remove();
+
+        groupContainers = groupEnter
+            .merge(groupContainers);
+
+        groupContainers.select('.changeset-group-title')
+            .classed('hide', groups.length <= 1)
+            .text(function(d, i) {
+                var groupLabel = t('commit.changeset_group', {
+                    num: i + 1,
+                    default: ''
+                });
+                if (!groupLabel) {
+                    groupLabel = 'Changeset ' + (i + 1);
+                }
+                return t('inspector.title_count', {
+                    title: groupLabel,
+                    count: d.length
+                });
+            });
+
+        var items = groupContainers.select('ul').selectAll('li')
+            .data(function(d) { return d; }, function(d) { return d.changeType + '-' + d.entity.id; });
 
         var itemsEnter = items.enter()
             .append('li')
@@ -85,35 +139,30 @@ export function uiSectionChanges(context) {
             .append('span')
             .attr('class', 'entity-name')
             .text(function(d) {
-                var name = utilDisplayName(d.entity) || '',
-                    string = '';
-                if (name !== '') {
-                    string += ':';
-                }
-                return string += ' ' + name;
+                var name = utilDisplayName(d.entity) || '';
+                return (name !== '' ? ':' : '') + ' ' + name;
             });
 
-        items = itemsEnter
-            .merge(items);
+        items.exit()
+            .remove();
 
 
         // Download changeset link
         var changeset = new osmChangeset().update({ id: undefined });
-        var changes = history.changes(actionDiscardTags(history.difference(), _discardTags));
-
-        delete changeset.id;  // Export without chnageset_id
 
         var data = JXON.stringify(changeset.osmChangeJXON(changes));
         var blob = new Blob([data], {type: 'text/xml;charset=utf-8;'});
         var fileName = 'changes.osc';
 
-        var linkEnter = container.selectAll('.download-changes')
-            .data([0])
-            .enter()
+        var link = container.selectAll('.download-changes')
+            .data([0]);
+
+        var linkEnter = link.enter()
             .append('a')
             .attr('class', 'download-changes');
 
-        linkEnter
+        link = linkEnter
+            .merge(link)
             .attr('href', window.URL.createObjectURL(blob))
             .attr('download', fileName);
 
@@ -146,6 +195,38 @@ export function uiSectionChanges(context) {
                     .classed('hover', true);
             }
         }
+    }
+
+    function getSplitMessage(groupCount) {
+        var message = t('commit.multiple_changesets_info', {
+            count: groupCount,
+            default: ''
+        });
+        if (!message) {
+            message = 'Some edits are too far apart and will be uploaded separately as ' + groupCount + ' changesets. Review each group below.';
+        }
+        return message;
+    }
+
+    function splitSummaryIntoGroups(summary, groups) {
+        var indexByEntityID = {};
+        for (var i = 0; i < groups.length; i++) {
+            var entities = groups[i].created.concat(groups[i].modified).concat(groups[i].deleted);
+            for (var j = 0; j < entities.length; j++) {
+                indexByEntityID[entities[j].id] = i;
+            }
+        }
+
+        var grouped = groups.map(function() { return []; });
+        for (var k = 0; k < summary.length; k++) {
+            var change = summary[k];
+            var index = indexByEntityID[change.entity.id];
+            if (index === undefined) index = 0;
+            if (!grouped[index]) grouped[index] = [];
+            grouped[index].push(change);
+        }
+
+        return grouped.filter(function(group) { return group.length; });
     }
 
     return section;
