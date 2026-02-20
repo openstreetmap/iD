@@ -628,6 +628,27 @@ export function modeSelect(context, selectedIDs) {
 
             var currentSelectedIds = mode.selectedIDs();
 
+            // When a single relation is selected, Ctrl+↓ selects all its members (like way → nodes)
+            if (currentSelectedIds.length === 1) {
+                var entity = context.hasEntity(currentSelectedIds[0]);
+                if (entity && entity.type === 'relation' && entity.members.length > 0) {
+                    var memberIds = entity.members.map(function(m) { return m.id; });
+                    var missing = memberIds.filter(function(id) { return !context.hasEntity(id); });
+                    if (missing.length > 0) {
+                        context.loadEntity(entity.id, function(err) {
+                            if (err) return;
+                            var rel = context.entity(entity.id);
+                            if (!rel || !rel.members.length) return;
+                            var ids = rel.members.map(function(m) { return m.id; });
+                            context.enter(mode.selectedIDs(ids));
+                        });
+                        return;
+                    }
+                    context.enter(mode.selectedIDs(memberIds));
+                    return;
+                }
+            }
+
             var childIds = _focusedVertexIds ? _focusedVertexIds.filter(id => context.hasEntity(id)) : childNodeIdsOfSelection(true);
             if (!childIds || !childIds.length) return;
 

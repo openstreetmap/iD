@@ -2994,6 +2994,27 @@ img.tag-reference-wiki-image {
     */
 }
 
+.section-raw-member-editor .member-select-all-wrap {
+    margin-bottom: 4px;
+}
+.section-raw-member-editor .member-select-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--link-color, #06c);
+    cursor: pointer;
+}
+.section-raw-member-editor .member-select-all:hover {
+    text-decoration: underline;
+}
+.section-raw-member-editor .member-select-all .icon {
+    flex-shrink: 0;
+}
+.section-raw-member-editor .member-select-all.loading .icon use {
+    opacity: 0.5;
+}
+
 /* add tag, add relation buttons */
 .add-row {
     display: flex;

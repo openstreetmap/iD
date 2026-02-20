@@ -139,6 +139,39 @@ export function uiSectionRawMemberEditor(context) {
             });
         });
 
+        const selectAllWrap = selection.selectAll('.member-select-all-wrap')
+            .data([0]);
+        selectAllWrap.enter()
+            .append('div')
+            .attr('class', 'member-select-all-wrap form-field')
+            .merge(selectAllWrap)
+            .style('display', entity.members.length === 0 ? 'none' : null)
+            .each(function() {
+                const wrap = d3_select(this);
+                wrap.selectAll('*').remove();
+                const link = wrap
+                    .append('a')
+                    .attr('class', 'member-select-all')
+                    .attr('href', '#')
+                    .attr('title', t('inspector.select_all_members_tooltip'));
+                link.call(svgIcon('#iD-icon-layers', 'inline'));
+                link.append('span').text(t('inspector.select_all_members'));
+                link.on('click', function(d3_event) {
+                    d3_event.preventDefault();
+                    const linkEl = d3_select(this);
+                    if (linkEl.classed('loading')) return;
+                    linkEl.classed('loading', true);
+                    context.loadEntity(entity.id, function(err) {
+                        linkEl.classed('loading', false);
+                        if (err) return;
+                        const updated = context.entity(entity.id);
+                        if (!updated || !updated.members.length) return;
+                        const ids = updated.members.map(function(m) { return m.id; });
+                        context.enter(modeSelect(context, ids));
+                    });
+                });
+            });
+
         var list = selection.selectAll('.member-list')
             .data([0]);
 

@@ -716,6 +716,8 @@ en:
     fields: Fields
     tags: Tags
     members: Members
+    select_all_members: Select all members
+    select_all_members_tooltip: Load and select all relation members
     relations: Relations
     features: Features
     title_count: "{title} ({count})"

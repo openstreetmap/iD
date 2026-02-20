@@ -77,6 +77,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 ##### 2026-03-02
 
 #### :sparkles: Usability & Accessibility
+* Add "Select all members" link and Ctrl+↓ shortcut for relations ([#11873], fixes [#9982], thanks [@FaisalMisbah23])
 * Show warning when attempting to paste but nothing has been copied ([#9401], thanks [@omsaraykar])
 * Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
 * Don't suggest values from Taginfo for tags with less than 100 uses, even if they're documented on the wiki ([#11794], thanks [@Kaushik4141])
@@ -154,6 +155,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11819]: https://github.com/openstreetmap/iD/pull/11819
 [#11861]: https://github.com/openstreetmap/iD/pull/11861
 [#11862]: https://github.com/openstreetmap/iD/pull/11862
+<<<<<<< HEAD
 [#11869]: https://github.com/openstreetmap/iD/pull/11869
 [#11871]: https://github.com/openstreetmap/iD/pull/11871
 [#11904]: https://github.com/openstreetmap/iD/issues/11904
@@ -162,6 +164,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [be0a20e59]: https://github.com/openstreetmap/iD/commit/be0a20e59
 [b06496780]: https://github.com/openstreetmap/iD/commit/b06496780
 [#id-tagging-schema/pull/1507]: https://github.com/openstreetmap/id-tagging-schema/pull/1507
+=======
+[#11873]: https://github.com/openstreetmap/iD/pull/11873
+[#9982]: https://github.com/openstreetmap/iD/issues/9982
+[@FaisalMisbah23]: https://github.com/FaisalMisbah23
+>>>>>>> 5b96d6551d (Add Select all members for relations (fixes #9982))
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 [@homersimpsons]: https://github.com/homersimpsons
