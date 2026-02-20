@@ -213,10 +213,9 @@ const prototype = {
     isConvex: function(resolver) {
         if (!this.isClosed() || this.isDegenerate()) return null;
 
-        var nodes = utilArrayUniq(resolver.childNodes(this));
-        var coords = nodes.map(function(n) { return n.loc; });
-        var curr = 0;
-        var prev = 0;
+        const nodes = utilArrayUniq(resolver.childNodes(this));
+        const coords = nodes.map(function(n) { return n.loc; });
+        let prev = 0;
 
         for (var i = 0; i < coords.length; i++) {
             var o = coords[(i+1) % coords.length];
@@ -224,7 +223,7 @@ const prototype = {
             var b = coords[(i+2) % coords.length];
             var res = geoVecCross(a, b, o);
 
-            curr = (res > 0) ? 1 : (res < 0) ? -1 : 0;
+            const curr = (res > 0) ? 1 : (res < 0) ? -1 : 0;
             if (curr === 0) {
                 continue;
             } else if (prev && curr !== prev) {
@@ -532,7 +531,7 @@ const prototype = {
             // Heuristic for detecting counterclockwise winding order. Assumes
             // that OpenStreetMap polygons are not hemisphere-spanning.
             if (area > 2 * Math.PI) {
-                json.coordinates[0] = json.coordinates[0].reverse();
+                json.coordinates[0].reverse();
                 area = d3_geoArea(json);
             }
 
