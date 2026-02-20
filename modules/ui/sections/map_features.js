@@ -118,6 +118,10 @@ export function uiSectionMapFeatures(context) {
 
     function clickFeature(d3_event, d) {
         context.features().toggle(d);
+        // Release focus from the checkbox so keyboard shortcuts (e.g. M for move) work (fixes #9582)
+        if (document.activeElement && /^(INPUT|SELECT|TEXTAREA)$/.test(document.activeElement.tagName)) {
+            document.activeElement.blur();
+        }
     }
 
     function showsLayer(id) {

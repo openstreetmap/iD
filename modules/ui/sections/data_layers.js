@@ -65,6 +65,10 @@ export function uiSectionDataLayers(context) {
 
     function toggleLayer(which) {
         setLayer(which, !showsLayer(which));
+        // Release focus from the checkbox so keyboard shortcuts (e.g. M for move) work (fixes #9582)
+        if (document.activeElement && /^(INPUT|SELECT|TEXTAREA)$/.test(document.activeElement.tagName)) {
+            document.activeElement.blur();
+        }
     }
 
     function drawOsmItems(selection) {

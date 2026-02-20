@@ -92,6 +92,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add `railway=crossing` tag when connecting two railways using the validation fix ([#9226], thanks [@paulklie])
 #### :bug: Bugfixes
 * Fix typo: `parking:left:capacity` duplicated in osmSummableTags, missing `parking:right:capacity` ([#11819], thanks [@JaiswalShivang])
+* Fix move (M / drag) not working after toggling Data panel layer or Map Features checkbox with a node selected; blur focus from checkbox so shortcuts work ([#9582])
 * Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
 * Fix error setting custom background ([#11862], thanks [@Kayd-06])
 * Fix crash when commenting/closing notes when the note is closed by another mapper in the meantime ([#8464])
@@ -130,6 +131,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10935]: https://github.com/openstreetmap/iD/issues/10935
 [#10999]: https://github.com/openstreetmap/iD/pull/10999
 [#11327]: https://github.com/openstreetmap/iD/pull/11327
+[#9582]: https://github.com/openstreetmap/iD/issues/9582
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
 [#11533]: https://github.com/openstreetmap/iD/pull/11533
 [#11589]: https://github.com/openstreetmap/iD/pull/11589
