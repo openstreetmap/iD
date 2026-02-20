@@ -77,6 +77,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 ##### 2026-03-02
 
 #### :sparkles: Usability & Accessibility
+* Sidebar auto-scrolls when dragging relation members near top or bottom edge (fixes [#11897], thanks [@FaisalMisbah23])
 * Show warning when attempting to paste but nothing has been copied ([#9401], thanks [@omsaraykar])
 * Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
 * Don't suggest values from Taginfo for tags with less than 100 uses, even if they're documented on the wiki ([#11794], thanks [@Kaushik4141])
@@ -162,6 +163,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [be0a20e59]: https://github.com/openstreetmap/iD/commit/be0a20e59
 [b06496780]: https://github.com/openstreetmap/iD/commit/b06496780
 [#id-tagging-schema/pull/1507]: https://github.com/openstreetmap/id-tagging-schema/pull/1507
+[#11897]: https://github.com/openstreetmap/iD/issues/11897
+[@FaisalMisbah23]: https://github.com/FaisalMisbah23
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 [@homersimpsons]: https://github.com/homersimpsons

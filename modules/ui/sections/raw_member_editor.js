@@ -305,7 +305,9 @@ export function uiSectionRawMemberEditor(context) {
         items.select('button.member-delete')
             .on('click', deleteMember);
 
-        var dragOrigin, targetIndex;
+        var dragOrigin, targetIndex, scrollContainer;
+        var scrollEdgeThreshold = 40;
+        var scrollSpeed = 10;
 
         items.call(d3_drag()
             .on('start', function(d3_event) {
@@ -314,6 +316,7 @@ export function uiSectionRawMemberEditor(context) {
                     y: d3_event.y
                 };
                 targetIndex = null;
+                scrollContainer = selection.node().closest('.inspector-body');
             })
             .on('drag', function(d3_event) {
                 var x = d3_event.x - dragOrigin.x,
@@ -329,6 +332,23 @@ export function uiSectionRawMemberEditor(context) {
                     .classed('dragging', true);
 
                 targetIndex = null;
+
+                // Auto-scroll sidebar when dragging near top or bottom edge (fixes #11897)
+                if (scrollContainer) {
+                    var se = d3_event.sourceEvent;
+                    var clientY = (se && (se.touches && se.touches[0] ? se.touches[0].clientY : se.clientY)) ?? d3_event.clientY;
+                    if (typeof clientY === 'number') {
+                        var rect = scrollContainer.getBoundingClientRect();
+                        if (clientY - rect.top < scrollEdgeThreshold) {
+                            scrollContainer.scrollTop = Math.max(0, scrollContainer.scrollTop - scrollSpeed);
+                        } else if (rect.bottom - clientY < scrollEdgeThreshold) {
+                            var maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+                            if (maxScroll > 0) {
+                                scrollContainer.scrollTop = Math.min(maxScroll, scrollContainer.scrollTop + scrollSpeed);
+                            }
+                        }
+                    }
+                }
 
                 selection.selectAll('li.member-row')
                     .style('transform', function(d2, index2) {
@@ -352,6 +372,8 @@ export function uiSectionRawMemberEditor(context) {
             .on('end', function(d3_event, d) {
 
                 if (!d3_select(this).classed('dragging')) return;
+
+                scrollContainer = null;
 
                 var index = items.nodes().indexOf(this);
 
