@@ -96,6 +96,14 @@ export var osmAreaKeysExceptions = {
         bicycle_parking: true
     },
     emergency: {
+        ambulance_station: true,
+        assembly_point: true,
+        emergency_ward: true,
+        fire_station: true,
+        fire_water_pond: true,
+        landing_site: true,
+        lifeboat_station: true,
+        water_tank: true,
         yes: false,
         no: false,
         private: false,

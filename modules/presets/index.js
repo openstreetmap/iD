@@ -303,7 +303,8 @@ export function presetIndex() {
       footway: true,
       railway: true,
       junction: true,
-      type: true
+      type: true,
+      emergency: true
     };
     let areaKeys = {};
 
