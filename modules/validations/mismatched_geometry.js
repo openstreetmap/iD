@@ -6,7 +6,7 @@ import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionExtract } from '../actions/extract';
 import { modeSelect } from '../modes/select';
 import { osmJoinWays } from '../osm/multipolygon';
-import { osmNodeGeometriesForTags, osmTagSuggestingArea } from '../osm/tags';
+import { osmNodeGeometriesForTags, osmTagSuggestingArea, osmAreaKeysExceptions } from '../osm/tags';
 import { presetManager } from '../presets';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 import { t } from '../core/localizer';
@@ -268,6 +268,14 @@ export function validationMismatchedGeometry() {
             if (primaryKey === 'building') return false;
 
             if (asTarget.tags[primaryKey] === '*') return false;
+
+            // if it's explicitly excepted in osmTagSuggestingArea as false, don't suggest it
+            for (var key in entity.tags) {
+                const proxyKey = key.split(':').pop();   // handle lifecycle prefixes or similar
+                if (osmAreaKeysExceptions[proxyKey] && osmAreaKeysExceptions[proxyKey][entity.tags[key]] === false) {
+                    return false;
+                }
+            }
 
             return asSource.isFallback() || asSource.tags[primaryKey] === '*';
         });
