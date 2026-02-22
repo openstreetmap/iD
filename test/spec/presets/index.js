@@ -425,4 +425,82 @@ describe('iD.presetIndex', function () {
         });
     });
 
+    describe('Issue #11405: Region-specific Presets in Recently Used List', function () {
+        it('replaces an invalid regional preset in defaults with a valid equivalent', async () => {
+            // Define a base preset and a regional variant
+            var testPresets = {
+                'highway/motorway_link': {
+                    name: 'Motorway Link',
+                    tags: { highway: 'motorway_link' },
+                    geometry: ['line']
+                },
+                'highway/motorway_link-US': {
+                    name: 'Motorway Link (US)',
+                    tags: { highway: 'motorway_link' },
+                    geometry: ['line'],
+                    locationSet: { include: ['us'] }
+                }
+            };
+
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            await presets.ensureLoaded();
+
+            // Add the US variant to "Recent" presets
+            var usVariant = presets.item('highway/motorway_link-US');
+            presets.setMostRecent(usVariant);
+
+            // Location in US (e.g., New York)
+            var locUS = [-74.006, 40.7128];
+            // Location outside US (e.g., London)
+            var locUK = [-0.1278, 51.5074];
+
+            // 1. Verify that in US, the US variant is returned
+            var defaultsUS = presets.defaults('line', 10, true, locUS);
+            expect(defaultsUS.collection.some(p => p.id === 'highway/motorway_link-US')).to.be.true;
+
+            // 2. Verify that outside US, the US variant is REPLACED by the base variant
+            var defaultsUK = presets.defaults('line', 10, true, locUK);
+
+            expect(defaultsUK.collection.some(p => p.id === 'highway/motorway_link-US')).to.be.false;
+            expect(defaultsUK.collection.some(p => p.id === 'highway/motorway_link')).to.be.true;
+        });
+
+        it('removes an invalid regional preset in defaults if no equivalent exists', async () => {
+            // Define a regional preset with special tags that has NO base equivalent
+            var testPresets = {
+                'highway/special_us_road': {
+                    name: 'Special US Road',
+                    tags: { highway: 'residential', residential: 'special_us' },
+                    geometry: ['line'],
+                    locationSet: { include: ['us'] }
+                },
+                'residential': {
+                    name: 'Residential',
+                    tags: { highway: 'residential' },
+                    geometry: ['line']
+                }
+            };
+
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            await presets.ensureLoaded();
+
+            // Add the US variant to "Recent" presets
+            var usVariant = presets.item('highway/special_us_road');
+            presets.setMostRecent(usVariant);
+
+            // Location outside US
+            var locUK = [-0.1278, 51.5074];
+
+            var defaultsUK = presets.defaults('line', 10, true, locUK);
+
+            // 1. The US variant should be removed because it's invalid in UK
+            expect(defaultsUK.collection.some(p => p.id === 'highway/special_us_road')).to.be.false;
+
+            // 2. No replacement should happen because matchTags({highway: 'residential', residential: 'special_us'})
+            // will match 'residential', but 'residential' doesn't have the same specific tags.
+            expect(defaultsUK.collection.some(p => p.id === 'residential')).to.be.false;
+        });
+    });
 });

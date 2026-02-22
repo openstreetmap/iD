@@ -1,4 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { isEqual } from 'lodash-es';
 
 import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
@@ -428,7 +429,15 @@ export function presetIndex() {
 
     if (Array.isArray(loc)) {
       const validHere = locationManager.locationSetsAt(loc);
-      result.collection = result.collection.filter(a => !a.locationSetID || validHere[a.locationSetID]);
+      result.collection = result.collection.map(a => {
+        if (a.locationSetID && !validHere[a.locationSetID]) {
+          const equivalent = _this.matchTags(a.tags, geometry, loc);
+          if (equivalent && !equivalent.isFallback() && isEqual(a.tags, equivalent.tags)) {
+            return equivalent;
+          }
+        }
+        return a;
+      }).filter(a => !a.locationSetID || validHere[a.locationSetID]);
     }
 
     return result;
