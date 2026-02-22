@@ -15,6 +15,7 @@ import serviceWikidata from './wikidata';
 import serviceWikipedia from './wikipedia';
 import serviceMapilio from './mapilio';
 import servicePanoramax from './panoramax';
+import serviceKyFromAbove from './kyfromabove';
 
 
 export let services = {
@@ -34,7 +35,8 @@ export let services = {
   wikidata: serviceWikidata,
   wikipedia: serviceWikipedia,
   mapilio: serviceMapilio,
-  panoramax: servicePanoramax
+  panoramax: servicePanoramax,
+  kyfromabove: serviceKyFromAbove
 };
 
 export {
@@ -54,5 +56,6 @@ export {
   serviceWikidata,
   serviceWikipedia,
   serviceMapilio,
-  servicePanoramax
+  servicePanoramax,
+  serviceKyFromAbove
 };

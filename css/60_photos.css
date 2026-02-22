@@ -7,7 +7,7 @@ li.list-item-photos.active:after {
     right: 0;
     width: 8px;
 }
-.ideditor[dir='rtl'] li.list-item-photos.active:after {
+.ideditor[dir="rtl"] li.list-item-photos.active:after {
     right: auto;
     left: 0;
 }
@@ -27,11 +27,11 @@ li.list-item-photos.active:after {
     padding: 5px;
     background-color: var(--bg-color);
 }
-.ideditor[dir='ltr'] .photoviewer {
+.ideditor[dir="ltr"] .photoviewer {
     margin-left: 10px;
     margin-right: 2px;
 }
-.ideditor[dir='rtl'] .photoviewer {
+.ideditor[dir="rtl"] .photoviewer {
     margin-right: 10px;
     margin-left: 2px;
 }
@@ -94,7 +94,6 @@ li.list-item-photos.active:after {
     height: 6px;
     width: 100%;
 }
-
 
 .photo-wrapper {
     width: 100%;
@@ -187,9 +186,8 @@ li.list-item-photos.active:after {
     fill-opacity: 0.9;
 }
 
-
 .viewfield-group.currentView .viewfield-scale {
-    transform: scale(2,2);
+    transform: scale(2, 2);
 }
 
 .sequence {
@@ -203,7 +201,6 @@ li.list-item-photos.active:after {
     stroke-opacity: 1;
 }
 
-
 /* Streetside Image Layer */
 li.list-item-photos.list-item-streetside.active:after {
     background-color: #0fffc4;
@@ -216,7 +213,7 @@ li.list-item-photos.list-item-streetside.active:after {
 }
 .layer-streetside-images .sequence {
     stroke: #0fffc4;
-    stroke-opacity: 0.85;  /* bump opacity - only one per road */
+    stroke-opacity: 0.85; /* bump opacity - only one per road */
 }
 
 /* Vegbilder Image Layer */
@@ -231,9 +228,8 @@ li.list-item-photos.list-item-vegbilder.active:after {
 }
 .layer-vegbilder .sequence {
     stroke: #ed1c2e;
-    stroke-opacity: 0.85;  /* bump opacity - only one per road */
+    stroke-opacity: 0.85; /* bump opacity - only one per road */
 }
-
 
 /* Mapillary Image Layer */
 li.list-item-photos.list-item-mapillary.active:after {
@@ -248,7 +244,6 @@ li.list-item-photos.list-item-mapillary.active:after {
 .layer-mapillary .sequence {
     stroke: #55ff22;
 }
-
 
 /* Mapillary Traffic Signs and Map Features Layers */
 .layer-mapillary-detections {
@@ -284,7 +279,6 @@ li.list-item-photos.list-item-mapillary.active:after {
     outline: 3px solid rgba(255, 238, 0, 1);
 }
 
-
 /* KartaView Image Layer */
 li.list-item-photos.list-item-kartaview.active:after {
     background-color: #20c4ff;
@@ -299,7 +293,6 @@ li.list-item-photos.list-item-kartaview.active:after {
     stroke: #20c4ff;
 }
 
-
 /* Mapilio Image Layer */
 li.list-item-photos.list-item-mapilio.active:after {
     background-color: #0056f1;
@@ -312,8 +305,8 @@ li.list-item-photos.list-item-mapilio.active:after {
 }
 .layer-mapilio .viewfield-group:not(.currentView):not(.hovered) * {
     stroke: #ffffff;
-    stroke-opacity: .6;
-    fill-opacity: .6;
+    stroke-opacity: 0.6;
+    fill-opacity: 0.6;
 }
 .layer-mapilio .sequence {
     stroke: #0056f1;
@@ -325,7 +318,7 @@ li.list-item-photos.list-item-mapilio.active:after {
     gap: 4px;
 }
 .photo-controls-mapilio button {
-    padding:0 6px;
+    padding: 0 6px;
     pointer-events: initial;
 }
 .ideditor .mapilio-wrapper {
@@ -360,8 +353,8 @@ li.list-item-photos.list-item-panoramax.active:after {
 .layer-panoramax .viewfield-group * {
     fill: #ff6f00;
     stroke: #ffffff;
-    stroke-opacity: .6;
-    fill-opacity: .6;
+    stroke-opacity: 0.6;
+    fill-opacity: 0.6;
 }
 .layer-panoramax .sequence {
     stroke: #ff6f00;
@@ -373,7 +366,7 @@ li.list-item-photos.list-item-panoramax.active:after {
     gap: 4px;
 }
 .photo-controls-panoramax button {
-    padding:0 6px;
+    padding: 0 6px;
     pointer-events: initial;
 }
 
@@ -404,12 +397,11 @@ label.panoramax-hd {
     width: 100%;
 }
 
-.yearSliderSpan{
+.yearSliderSpan {
     padding: 2px;
 }
 
-
-.list-item-date-slider label{
+.list-item-date-slider label {
     display: block !important;
 }
 
@@ -446,8 +438,8 @@ label.panoramax-hd {
 }
 
 .ms-wrapper .pnlm-compass.pnlm-control,
-.vegbilder-wrapper  .pnlm-compass.pnlm-control,
-.panoramax-wrapper  .pnlm-compass.pnlm-control {
+.vegbilder-wrapper .pnlm-compass.pnlm-control,
+.panoramax-wrapper .pnlm-compass.pnlm-control {
     width: 26px;
     height: 26px;
     left: 4px;
@@ -473,11 +465,10 @@ label.streetside-hires {
     margin-top: 6px;
 }
 
-
 /* Mapillary viewer */
 #ideditor-mly .domRenderer .TagSymbol {
     font-size: 10px;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     padding: 0 4px;
     border-radius: 4px;
     top: -25px;
@@ -488,13 +479,15 @@ label.streetside-hires {
     align-items: center;
 }
 
-.mly-wrapper .mapillary-attribution-container .mapillary-attribution-icon-container {
+.mly-wrapper
+    .mapillary-attribution-container
+    .mapillary-attribution-icon-container {
     display: flex;
     align-items: center;
 }
 
 .mapillary-attribution-image-container {
-  height: auto;
+    height: auto;
 }
 
 .mly-wrapper .mapillary-attribution-container .mapillary-attribution-username {
@@ -598,7 +591,7 @@ label.streetside-hires {
     height: 18px;
     width: 18px;
     line-height: 18px;
-    background: rgba(0,0,0,0.65);
+    background: rgba(0, 0, 0, 0.65);
     color: #eee;
     border-radius: 0;
 }
@@ -609,12 +602,12 @@ label.streetside-hires {
     border-radius: 0 3px 3px 0;
 }
 .photo-controls button:active {
-    background: rgba(0,0,0,0.85);
+    background: rgba(0, 0, 0, 0.85);
     color: #fff;
 }
 @media (hover: hover) {
     .photo-controls button:hover {
-        background: rgba(0,0,0,0.85);
+        background: rgba(0, 0, 0, 0.85);
         color: #fff;
     }
 }
@@ -724,11 +717,63 @@ label.streetside-hires {
     gap: 4px;
 }
 .photo-controls-local button {
-    padding:0 6px;
+    padding: 0 6px;
     pointer-events: initial;
 }
 
 .photo-controls-local button:disabled {
-    background: rgba(255,255,255,.25);
+    background: rgba(255, 255, 255, 0.25);
 }
 
+/* KyFromAbove */
+.ky-oblique-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background: #000;
+}
+
+.ky-oblique-image-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.ky-oblique-canvas {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.ky-oblique-wrapper .photo-controls-wrap {
+    z-index: 20;
+}
+
+.ky-oblique-wrapper .angle-button {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: 1px solid #666;
+    margin: 0 2px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.ky-oblique-wrapper .angle-button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.ky-oblique-wrapper .angle-button.active {
+    background: #ffbc00;
+    color: #000;
+    border-color: #ffbc00;
+}

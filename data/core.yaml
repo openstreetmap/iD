@@ -59,8 +59,7 @@ en:
     drag_node:
       connected_to_hidden: This can't be edited because it is connected to a hidden feature.
   operations:
-    _unavailable:
-      Cannot perform “{operation}” on currently selected features.
+    _unavailable: Cannot perform “{operation}” on currently selected features.
     add:
       annotation:
         point: Added a point.
@@ -278,7 +277,7 @@ en:
           to_line: Moved a point to a line.
           to_area: Moved a point to an area.
       relation: These features can't be connected because they have conflicting relation roles.
-      restriction: "These features can't be connected because it would damage a \"{relation}\" relation."
+      restriction: 'These features can''t be connected because it would damage a "{relation}" relation.'
     disconnect:
       title: Disconnect
       description:
@@ -321,7 +320,7 @@ en:
         other: "Merged {n} features."
       not_eligible: These features can't be merged.
       not_adjacent: These features can't be merged because their endpoints aren't connected.
-      damage_relation: "These features can't be merged because it would damage a \"{relation}\" relation."
+      damage_relation: 'These features can''t be merged because it would damage a "{relation}" relation.'
       relation: These features can't be merged because they have conflicting relation roles.
       incomplete_relation: These features can't be merged because at least one hasn't been fully downloaded.
       conflicting_tags: These features can't be merged because some of their tags have conflicting values.
@@ -564,7 +563,7 @@ en:
       via_names: "{via} {viaNames}"
       select_from: "Click to select a {from} segment"
       select_from_name: "Click to select {from} {fromName}"
-      toggle: "Click for \"{turn}\""
+      toggle: 'Click for "{turn}"'
   undo:
     title: Undo
     tooltip: "Undo: {action}"
@@ -587,7 +586,7 @@ en:
   report_a_bug: Report a bug
   help_translate: Help translate
   sidebar:
-    key: '`'
+    key: "`"
     tooltip: Toggle the sidebar.
   feature_info:
     hidden_warning:
@@ -840,7 +839,7 @@ en:
     minimap:
       description: Show Minimap
       tooltip: Show a zoomed out map to help locate the area currently displayed.
-      key: '/'
+      key: "/"
     panel:
       description: Show Background Panel
       tooltip: Show advanced background information.
@@ -1043,9 +1042,9 @@ en:
     unsaved_changes: You have unsaved changes
     conflict:
       header: Resolve conflicting edits
-      count: 'Conflict {num} of {total}'
-      previous: '< Previous'
-      next: 'Next >'
+      count: "Conflict {num} of {total}"
+      previous: "< Previous"
+      next: "Next >"
       keep_local: Keep mine
       keep_remote: Use theirs
       restore: Restore
@@ -1055,10 +1054,10 @@ en:
       help: "Another user changed some of the same map features you changed. Click on each feature below for more details about the conflict, and choose whether to keep your changes or the other user's changes."
   merge_remote_changes:
     conflict:
-      deleted: 'This feature has been deleted by {user}.'
-      location: 'This feature was moved by both you and {user}.'
-      nodelist: 'Nodes were changed by both you and {user}.'
-      memberlist: 'Relation members were changed by both you and {user}.'
+      deleted: "This feature has been deleted by {user}."
+      location: "This feature was moved by both you and {user}."
+      nodelist: "Nodes were changed by both you and {user}."
+      memberlist: "Relation members were changed by both you and {user}."
       tags: 'You changed the "{tag}" tag to "{local}" and {user} changed it to "{remote}".'
   success:
     just_edited: "You just edited OpenStreetMap!"
@@ -1137,80 +1136,80 @@ en:
       close_comment: Close and Comment
       ignore_comment: Remove and Comment
       error_parts:
-        this_node: 'this node'
-        this_way: 'this way'
-        this_relation: 'this relation'
-        this_oneway: 'this oneway'
-        this_highway: 'this highway'
-        this_railway: 'this railway'
-        this_waterway: 'this waterway'
-        this_cycleway: 'this cycleway'
-        this_cycleway_footpath: 'this cycleway/footpath'
-        this_riverbank: 'this riverbank'
-        this_crossing: 'this crossing'
-        this_railway_crossing: 'this railway crossing'
-        this_bridge: 'this bridge'
-        this_tunnel: 'this tunnel'
-        this_boundary: 'this boundary'
-        this_turn_restriction: 'this turn restriction'
-        this_roundabout: 'this roundabout'
-        this_mini_roundabout: 'this mini-roundabout'
-        this_track: 'this track'
-        this_feature: 'this feature'
-        highway: 'highway'
-        railway: 'railway'
-        waterway: 'waterway'
-        cycleway: 'cycleway'
-        cycleway_footpath: 'cycleway/footpath'
-        riverbank: 'riverbank'
-        place_of_worship: 'place of worship'
-        pub: 'pub'
-        restaurant: 'restaurant'
-        school: 'school'
-        university: 'university'
-        hospital: 'hospital'
-        library: 'library'
-        theatre: 'theatre'
-        courthouse: 'courthouse'
-        bank: 'bank'
-        cinema: 'cinema'
-        pharmacy: 'pharmacy'
-        cafe: 'cafe'
-        fast_food: 'fast food'
-        fuel: 'fuel'
-        from: 'from'
-        to: 'to'
-        left_hand: 'left-hand'
-        right_hand: 'right-hand'
+        this_node: "this node"
+        this_way: "this way"
+        this_relation: "this relation"
+        this_oneway: "this oneway"
+        this_highway: "this highway"
+        this_railway: "this railway"
+        this_waterway: "this waterway"
+        this_cycleway: "this cycleway"
+        this_cycleway_footpath: "this cycleway/footpath"
+        this_riverbank: "this riverbank"
+        this_crossing: "this crossing"
+        this_railway_crossing: "this railway crossing"
+        this_bridge: "this bridge"
+        this_tunnel: "this tunnel"
+        this_boundary: "this boundary"
+        this_turn_restriction: "this turn restriction"
+        this_roundabout: "this roundabout"
+        this_mini_roundabout: "this mini-roundabout"
+        this_track: "this track"
+        this_feature: "this feature"
+        highway: "highway"
+        railway: "railway"
+        waterway: "waterway"
+        cycleway: "cycleway"
+        cycleway_footpath: "cycleway/footpath"
+        riverbank: "riverbank"
+        place_of_worship: "place of worship"
+        pub: "pub"
+        restaurant: "restaurant"
+        school: "school"
+        university: "university"
+        hospital: "hospital"
+        library: "library"
+        theatre: "theatre"
+        courthouse: "courthouse"
+        bank: "bank"
+        cinema: "cinema"
+        pharmacy: "pharmacy"
+        cafe: "cafe"
+        fast_food: "fast food"
+        fuel: "fuel"
+        from: "from"
+        to: "to"
+        left_hand: "left-hand"
+        right_hand: "right-hand"
       errorTypes:
         20:
-          title: 'Multiple nodes on the same spot'
-          description: 'There is more than one node in this spot. Node IDs: {var1}.'
+          title: "Multiple nodes on the same spot"
+          description: "There is more than one node in this spot. Node IDs: {var1}."
         30:
-          title: 'Non-closed area'
+          title: "Non-closed area"
           description: '{var1} is tagged with "{var2}" and should be a closed loop.'
         40:
-          title: 'Impossible oneway'
-          description: 'The first node {var1} of {var2} is not connected to any other way.'
+          title: "Impossible oneway"
+          description: "The first node {var1} of {var2} is not connected to any other way."
         41:
-          description: 'The last node {var1} of {var2} is not connected to any other way.'
+          description: "The last node {var1} of {var2} is not connected to any other way."
         42:
-          description: 'You cannot reach {var1} because all ways leading from it are oneway.'
+          description: "You cannot reach {var1} because all ways leading from it are oneway."
         43:
-          description: 'You cannot escape from {var1} because all ways leading to it are oneway.'
+          description: "You cannot escape from {var1} because all ways leading to it are oneway."
         50:
-          title: 'Almost junction'
-          description: '{var1} is very close but not connected to way {var2}.'
+          title: "Almost junction"
+          description: "{var1} is very close but not connected to way {var2}."
         60:
-          title: 'Deprecated tag'
+          title: "Deprecated tag"
           description: '{var1} uses deprecated tag "{var2}". Please use "{var3}" instead.'
         70:
-          title: 'Missing tag'
+          title: "Missing tag"
           description: '{var1} has an empty tag: "{var2}".'
         71:
-          description: '{var1} has no tags.'
+          description: "{var1} has no tags."
         72:
-          description: '{var1} is not member of any way and doesn''t have any tags.'
+          description: "{var1} is not member of any way and doesn't have any tags."
         73:
           description: '{var1} has a "{var2}" tag but no "highway" tag.'
         74:
@@ -1218,85 +1217,85 @@ en:
         75:
           description: '{var1} has a name "{var2}" but no other tags.'
         90:
-          title: 'Motorway without ref tag'
+          title: "Motorway without ref tag"
           description: '{var1} is tagged as a motorway and therefore needs a "ref", "nat_ref", or "int_ref" tag.'
         100:
-          title: 'Place of worship without religion'
-          description: '{var1} is tagged as a place of worship and therefore needs a religion tag.'
+          title: "Place of worship without religion"
+          description: "{var1} is tagged as a place of worship and therefore needs a religion tag."
         110:
-          title: 'Point of interest without name'
+          title: "Point of interest without name"
           description: '{var1} is tagged as a "{var2}" and therefore needs a name tag.'
         120:
-          title: 'Way without nodes'
-          description: '{var1} has just one single node.'
+          title: "Way without nodes"
+          description: "{var1} has just one single node."
         130:
-          title: 'Disconnected way'
-          description: '{var1} is not connected to the rest of the map.'
+          title: "Disconnected way"
+          description: "{var1} is not connected to the rest of the map."
         150:
-          title: 'Railway crossing without tag'
+          title: "Railway crossing without tag"
           description: '{var1} of a highway and a railway needs to be tagged as "railway=crossing" or "railway=level_crossing".'
         160:
-          title: 'Railway layer conflict'
-          description: 'There are ways in different layers (e.g. tunnel or bridge) meeting at {var1}.'
+          title: "Railway layer conflict"
+          description: "There are ways in different layers (e.g. tunnel or bridge) meeting at {var1}."
         170:
-          title: 'FIXME tagged item'
-          description: '{var1} has a FIXME tag: {var2}'
+          title: "FIXME tagged item"
+          description: "{var1} has a FIXME tag: {var2}"
         180:
-          title: 'Relation without type'
+          title: "Relation without type"
           description: '{var1} is missing a "type" tag.'
         190:
-          title: 'Intersection without junction'
-          description: '{var1} intersects the {var2} {var3} but there is no junction node, bridge, or tunnel.'
+          title: "Intersection without junction"
+          description: "{var1} intersects the {var2} {var3} but there is no junction node, bridge, or tunnel."
         200:
-          title: 'Overlapping ways'
-          description: '{var1} overlaps the {var2} {var3}.'
+          title: "Overlapping ways"
+          description: "{var1} overlaps the {var2} {var3}."
         210:
-          title: 'Self-intersecting way'
-          description: 'There is an unspecified issue with self intersecting ways.'
+          title: "Self-intersecting way"
+          description: "There is an unspecified issue with self intersecting ways."
         211:
-          description: '{var1} contains more than one node multiple times. Nodes are {var2}. This may or may not be an error.'
+          description: "{var1} contains more than one node multiple times. Nodes are {var2}. This may or may not be an error."
         212:
-          description: '{var1} has only two different nodes and contains one of them more than once.'
+          description: "{var1} has only two different nodes and contains one of them more than once."
         220:
-          title: 'Misspelled tag'
+          title: "Misspelled tag"
           description: '{var1} is tagged "{var2}" where "{var3}" looks like "{var4}".'
         221:
           description: '{var1} has a suspicious tag "{var2}".'
         230:
-          title: 'Layer conflict'
-          description: '{var1} is a junction of ways on different layers.'
+          title: "Layer conflict"
+          description: "{var1} is a junction of ways on different layers."
         231:
-          description: '{var1} is a junction of ways on different layers: {var2}.'
-          layer: '(layer: {layer})'
+          description: "{var1} is a junction of ways on different layers: {var2}."
+          layer: "(layer: {layer})"
         232:
           description: '{var1} is tagged with "layer={var2}". This need not be an error but it looks strange.'
         270:
-          title: 'Unusual motorway connection'
+          title: "Unusual motorway connection"
           description: '{var1} is a junction of a motorway and a highway other than "motorway", "motorway_link", "trunk", "rest_area", or "construction". Connection to "service" or "unclassified" is only valid if it has "access=no/private", or it leads to a motorway service area, or if it is a "service=parking_aisle".'
         280:
-          title: 'Boundary issue'
-          description: 'There is an unspecified issue with this boundary.'
+          title: "Boundary issue"
+          description: "There is an unspecified issue with this boundary."
         281:
-          title: 'Boundary missing name'
-          description: '{var1} has no name.'
+          title: "Boundary missing name"
+          description: "{var1} has no name."
         282:
-          title: 'Boundary missing admin level'
+          title: "Boundary missing admin level"
           description: 'The boundary of {var1} has no valid numeric admin_level. Please do not mix admin levels (e.g. "6;7"). Always tag the lowest admin_level of all boundaries.'
         283:
-          title: 'Boundary not a closed loop'
-          description: 'The boundary of {var1} is not a closed loop.'
+          title: "Boundary not a closed loop"
+          description: "The boundary of {var1} is not a closed loop."
         284:
-          title: 'Boundary is split'
-          description: 'The boundary of {var1} splits here.'
+          title: "Boundary is split"
+          description: "The boundary of {var1} splits here."
         285:
-          title: 'Boundary admin_level too high'
+          title: "Boundary admin_level too high"
           description: '{var1} has "admin_level={var2}" but belongs to a relation with lower "admin_level" (e.g. higher priority); it should have the lowest "admin_level" of all relations.'
         290:
-          title: 'Restriction issue'
-          description: 'There is an unspecified issue with this restriction.'
+          title: "Restriction issue"
+          description: "There is an unspecified issue with this restriction."
         291:
-          title: 'Restriction missing type'
-          description: '{var1} has an unrecognized restriction type.'
+          title: "Restriction missing type"
+          description: "{var1} has an unrecognized restriction type."
         292:
           title: 'Restriction missing "from" way'
           description: '{var1} has {var2} "from" members, but it should have 1.'
@@ -1310,62 +1309,62 @@ en:
           title: 'Restriction "via" is not an endpoint'
           description: '{var1} has a "via" (node {var2}) which is not the first or the last member of "{var3}" (way {var4}).'
         296:
-          title: 'Unusual restriction angle'
+          title: "Unusual restriction angle"
           description: '{var1} has a restriction type "{var2}" but the angle is {var3} degrees. Maybe the restriction type is not appropriate?'
         297:
           title: 'Wrong direction of "to" way'
           description: '{var1} does not match the direction of "to" way {var2}.'
         298:
-          title: 'Redundant restriction - oneway'
+          title: "Redundant restriction - oneway"
           description: '{var1} may be redundant. Entry already prohibited by "oneway" tag on {var2}.'
         300:
-          title: 'Missing maxspeed'
+          title: "Missing maxspeed"
           description: '{var1} is missing a "maxspeed" tag and is tagged as motorway, trunk, primary, or secondary.'
         310:
-          title: 'Roundabout issue'
-          description: 'There is an unspecified issue with this roundabout.'
+          title: "Roundabout issue"
+          description: "There is an unspecified issue with this roundabout."
         311:
-          title: 'Roundabout not closed loop'
-          description: '{var1} is part of a roundabout but is not closed-loop. (Split carriageways approaching a roundabout should not be tagged as roundabout).'
+          title: "Roundabout not closed loop"
+          description: "{var1} is part of a roundabout but is not closed-loop. (Split carriageways approaching a roundabout should not be tagged as roundabout)."
         312:
-          title: 'Roundabout wrong direction'
-          description: 'If {var1} is in a country with {var2} traffic then its orientation goes the wrong way around.'
+          title: "Roundabout wrong direction"
+          description: "If {var1} is in a country with {var2} traffic then its orientation goes the wrong way around."
         313:
-          title: 'Roundabout weakly connected'
-          description: '{var1} has only {var2} other road(s) connected. Roundabouts typically have 3 or more.'
+          title: "Roundabout weakly connected"
+          description: "{var1} has only {var2} other road(s) connected. Roundabouts typically have 3 or more."
         320:
-          title: 'Improper link connection'
+          title: "Improper link connection"
           description: '{var1} is tagged as "{var2}" but doesn''t have a connection to any other "{var3}" or "{var4}".'
         350:
-          title: 'Improper bridge tag'
-          description: '{var1} doesn''t have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: {var2}.'
+          title: "Improper bridge tag"
+          description: "{var1} doesn't have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: {var2}."
         360:
-          title: 'Missing local name tag'
+          title: "Missing local name tag"
           description: 'It would be nice if {var1} had a local name tag "name:XX={var2}" where XX shows the language of its common name "{var2}".'
         370:
-          title: 'Doubled places'
-          description: '{var1} has tags in common with the surrounding way {var2} {var3} and seems to be redundant.'
+          title: "Doubled places"
+          description: "{var1} has tags in common with the surrounding way {var2} {var3} and seems to be redundant."
           including_the_name: "(including the name {name})"
         380:
-          title: 'Non-physical use of sport tag'
+          title: "Non-physical use of sport tag"
           description: '{var1} is tagged "{var2}" but has no physical tag (e.g. "leisure", "building", "amenity", or "highway").'
         390:
-          title: 'Missing tracktype'
+          title: "Missing tracktype"
           description: '{var1} doesn''t have a "tracktype" tag.'
         400:
-          title: 'Geometry issue'
-          description: 'There is an unspecified issue with the geometry here.'
+          title: "Geometry issue"
+          description: "There is an unspecified issue with the geometry here."
         401:
-          title: 'Missing turn restriction'
-          description: 'Ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning.'
+          title: "Missing turn restriction"
+          description: "Ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning."
         402:
-          title: 'Impossible angle'
-          description: '{var1} bends in a very sharp angle here.'
+          title: "Impossible angle"
+          description: "{var1} bends in a very sharp angle here."
         410:
-          title: 'Website issue'
-          description: 'There is an unspecified issue with a contact website or URL.'
+          title: "Website issue"
+          description: "There is an unspecified issue with a contact website or URL."
         411:
-          description: '{var1} may have an outdated URL: {var2} returned HTTP status code {var3}.'
+          description: "{var1} may have an outdated URL: {var2} returned HTTP status code {var3}."
         412:
           description: '{var1} may have an outdated URL: {var2} contained suspicious text "{var3}".'
         413:
@@ -1464,6 +1463,9 @@ en:
     report: "Report"
     captured_by: "Captured by {username}"
     hd: "High resolution"
+  kyfromabove:
+    title: KyFromAbove
+    tooltip: "Oblique aerial imagery from Kentucky"
   street_side:
     minzoom_tooltip: "Zoom in to see street-side photos"
   local_photos:
@@ -1512,7 +1514,7 @@ en:
       open_data_h: "Open Data"
       open_data: "Edits that you make on this map will be visible to everyone who uses OpenStreetMap. Your edits can be based on personal knowledge, on-the-ground surveying, or imagery collected from aerial or street level photos. Copying from commercial sources, like Google Maps, [is strictly forbidden](https://www.openstreetmap.org/copyright)."
       before_start_h: "Before you start"
-      before_start: "You should be familiar with OpenStreetMap and this editor before you start editing. iD contains a walkthrough to teach you the basics of editing OpenStreetMap. Press the \"{start_the_walkthrough}\" button on this screen to start the tutorial—it takes only about 15 minutes."
+      before_start: 'You should be familiar with OpenStreetMap and this editor before you start editing. iD contains a walkthrough to teach you the basics of editing OpenStreetMap. Press the "{start_the_walkthrough}" button on this screen to start the tutorial—it takes only about 15 minutes.'
       open_source_h: "Open Source"
       open_source: "The iD editor is a collaborative open source project, and you are using version {version} now. The source code is available [on GitHub](https://github.com/openstreetmap/iD)."
       open_source_attribution: "This project includes icons from [Maki](https://github.com/mapbox/maki) (CC0), [temaki](https://github.com/ideditor/temaki) (CC0), [Fontawesome](https://github.com/FortAwesome/Font-Awesome) (CC BY 4.0) and [Map Machine](https://github.com/enzet/map-machine) (CC BY 4.0)."
@@ -1554,11 +1556,11 @@ en:
       type: "You can press the feature type to change the feature to a different type. Everything that exists in the real world can be added to OpenStreetMap, so there are thousands of feature types to choose from."
       type_picker: "The type picker displays the most common feature types, such as parks, hospitals, restaurants, roads, and buildings. You can search for anything by typing what you're looking for in the search box. You can also press the {inspect} **Info** icon next to the feature type to learn more about it."
       fields_h: "Fields"
-      fields_all_fields: "The \"{fields}\" section contains all of the feature's details that you may edit. In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure."
+      fields_all_fields: 'The "{fields}" section contains all of the feature''s details that you may edit. In OpenStreetMap, all of the fields are optional, and it''s OK to leave a field blank if you are unsure.'
       fields_example: "Each feature type will display different fields. For example, a road may display fields for its surface and speed limit, but a restaurant may display fields for the type of food it serves and the hours it is open."
-      fields_add_field: "You can also use the \"Add field\" dropdown to add more fields, such as a description, Wikipedia link, wheelchair access, and more."
+      fields_add_field: 'You can also use the "Add field" dropdown to add more fields, such as a description, Wikipedia link, wheelchair access, and more.'
       tags_h: "Tags"
-      tags_all_tags: "Below the fields section, you can expand the \"{tags}\" section to edit any of the OpenStreetMap *tags* for the selected feature. Each tag consists of a *key* and *value*, data elements that define all of the features stored in OpenStreetMap."
+      tags_all_tags: 'Below the fields section, you can expand the "{tags}" section to edit any of the OpenStreetMap *tags* for the selected feature. Each tag consists of a *key* and *value*, data elements that define all of the features stored in OpenStreetMap.'
       tags_resources: "Editing a feature's tags requires intermediate knowledge about OpenStreetMap. You should consult resources like the [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) or [Taginfo](https://taginfo.openstreetmap.org/) to learn more about accepted OpenStreetMap tagging practices."
     points:
       title: Points
@@ -1617,8 +1619,8 @@ en:
       title: Relations
       intro: "A *relation* is a special type of feature in OpenStreetMap that groups together other features. The features that belong to a relation are called *members*, and each member can have a *role* in the relation."
       edit_relation_h: "Editing Relations"
-      edit_relation: "At the bottom of the feature editor, you can expand the \"{relations}\" section to see if the selected feature is a member of any relations. You can then select a relation to edit it."
-      edit_relation_add: "To add a feature to a relation, select the feature, then press the {plus} add button in the \"{relations}\" section of the feature editor. You can choose from a list of nearby relations, or choose the \"{new_relation}\" option."
+      edit_relation: 'At the bottom of the feature editor, you can expand the "{relations}" section to see if the selected feature is a member of any relations. You can then select a relation to edit it.'
+      edit_relation_add: 'To add a feature to a relation, select the feature, then press the {plus} add button in the "{relations}" section of the feature editor. You can choose from a list of nearby relations, or choose the "{new_relation}" option.'
       edit_relation_delete: "You can also press the {delete_icon} **{delete}** button to remove the selected feature from the relation. If you remove all of the members from a relation, the relation will be deleted automatically."
       maintain_relation_h: "Maintaining Relations"
       maintain_relation: "For the most part, iD will maintain relations automatically as you edit. You should take care when replacing features that might be members of relations. For example if you delete a section of road and draw a new section of road to replace it, you should add the new section to the same relations (routes, turn restrictions, etc.) as the original."
@@ -1629,14 +1631,14 @@ en:
       multipolygon_merge: "Merging several lines or areas will create a new multipolygon relation with all selected areas as members. iD will choose the inner and outer roles automatically, based on which features are contained inside other features."
       turn_restriction_h: "Turn restrictions"
       turn_restriction: "A *turn restriction* relation is a group of several road segments in an intersection. Turn restrictions consist of a *from* road, *via* node or roads, and a *to* road."
-      turn_restriction_field: "To edit turn restrictions, select a junction node where two or more roads meet. The feature editor will display a special \"{turn_restrictions}\" field containing a model of the intersection."
-      turn_restriction_editing: "In the \"{turn_restrictions}\" field, select a \"from\" road, and see whether turns are allowed or restricted to any of the \"to\" roads. You can press the turn icons to toggle them between allowed and restricted. iD will create relations automatically and set the from, via, and to roles based on your choices."
+      turn_restriction_field: 'To edit turn restrictions, select a junction node where two or more roads meet. The feature editor will display a special "{turn_restrictions}" field containing a model of the intersection.'
+      turn_restriction_editing: 'In the "{turn_restrictions}" field, select a "from" road, and see whether turns are allowed or restricted to any of the "to" roads. You can press the turn icons to toggle them between allowed and restricted. iD will create relations automatically and set the from, via, and to roles based on your choices.'
       route_h: "Routes"
       route: "A *route* relation is a group of one or more line features that together form a route network, like a bus route, train route, or highway route."
-      route_add: "To add a feature to a route relation, select the feature and scroll down to the \"{relations}\" section of the feature editor, then press the {plus} add button to add this feature to a nearby existing relation or a new relation."
+      route_add: 'To add a feature to a route relation, select the feature and scroll down to the "{relations}" section of the feature editor, then press the {plus} add button to add this feature to a nearby existing relation or a new relation.'
       boundary_h: "Boundaries"
       boundary: "A *boundary* relation is a group of one or more line features that together form an administrative boundary."
-      boundary_add: "To add a feature to a boundary relation, select the feature and scroll down to the \"{relations}\" section of the feature editor, then press the {plus} add button to add this feature to a nearby existing relation or a new relation."
+      boundary_add: 'To add a feature to a boundary relation, select the feature and scroll down to the "{relations}" section of the feature editor, then press the {plus} add button to add this feature to a nearby existing relation or a new relation.'
     operations:
       title: Operations
       intro: "*Operations* are special commands you can use to edit features. {rightclick} Right-click or {longpress_icon} long-press any feature to view the available operations."
@@ -1674,7 +1676,7 @@ en:
       choosing: "To see which imagery sources are available for editing, open the {layers_icon} **{background_settings}** panel on the side of the map."
       sources: "The [Bing Maps](https://www.bing.com/maps/) satellite layer or the best local imagery is set as the default background. Depending on where you are editing, multiple imagery sources are available. Some may be newer or have higher resolution, so it is always useful to check and see which layer is the best one to use as a mapping reference."
       offsets_h: "Adjusting Imagery Offset"
-      offset: "Imagery is sometimes offset slightly from accurate map data. If you see a lot of roads or buildings shifted from the background imagery, it may be the imagery that's incorrect, so don't move them all to match the background. Instead, you can adjust the background so that it matches the existing data by expanding the \"{imagery_offset}\" section at the bottom of the Background Settings pane."
+      offset: 'Imagery is sometimes offset slightly from accurate map data. If you see a lot of roads or buildings shifted from the background imagery, it may be the imagery that''s incorrect, so don''t move them all to match the background. Instead, you can adjust the background so that it matches the existing data by expanding the "{imagery_offset}" section at the bottom of the Background Settings pane.'
       offset_change: "Press the small triangle buttons to adjust the imagery offset in small steps, or hold the {leftclick} left mouse button and drag within the gray square to slide the imagery into alignment."
     streetlevel:
       title: Street Level Photos
@@ -1705,8 +1707,8 @@ en:
           title: About
           about: "This field allows you to inspect and modify turn restrictions. It displays a model of the selected intersection including other nearby connected roads."
           from_via_to: "A turn restriction always contains: one **FROM way**, one **TO way**, and either one **VIA node** or one or more **VIA ways**."
-          maxdist: "The \"{distField}\" slider controls how far to search for additional connected roads."
-          maxvia: "The \"{viaField}\" slider adjusts how many via ways may be included in the search. (Tip: simple is better)"
+          maxdist: 'The "{distField}" slider controls how far to search for additional connected roads.'
+          maxvia: 'The "{viaField}" slider adjusts how many via ways may be included in the search. (Tip: simple is better)'
         inspecting:
           title: Inspecting
           about: "Hover over any **FROM** segment to see whether it has any turn restrictions. Each possible **TO** destination will be drawn with a colored shadow showing whether a restriction exists."
@@ -1714,12 +1716,12 @@ en:
           allow_shadow: "{allowShadow} **TO Allowed**"
           restrict_shadow: "{restrictShadow} **TO Restricted**"
           only_shadow: "{onlyShadow} **TO Only**"
-          restricted: "\"Restricted\" means that there is a turn restriction, for example \"No Left Turn\"."
-          only: "\"Only\" means that a vehicle taking that path may only make that choice, for example \"Only Straight On\"."
+          restricted: '"Restricted" means that there is a turn restriction, for example "No Left Turn".'
+          only: '"Only" means that a vehicle taking that path may only make that choice, for example "Only Straight On".'
         modifying:
           title: Modifying
           about: "To modify turn restrictions, first click on any starting **FROM** segment to select it. The selected segment will pulse, and all possible **TO** destinations will appear as turn symbols."
-          indicators: "Then, click on a turn symbol to toggle it between \"Allowed\", \"Restricted\", and \"Only\"."
+          indicators: 'Then, click on a turn symbol to toggle it between "Allowed", "Restricted", and "Only".'
           allow_turn: "{allowTurn} **TO Allowed**"
           restrict_turn: "{restrictTurn} **TO Restricted**"
           only_turn: "{onlyTurn} **TO Only**"
@@ -1727,8 +1729,8 @@ en:
           title: Tips
           simple: "**Prefer simple restrictions over complex ones.**"
           simple_example: "For example, avoid creating a via-way restriction if a simpler via-node turn restriction will do."
-          indirect: "**Some restrictions display the text \"(indirect)\" and are drawn lighter.**"
-          indirect_example: "These restrictions exist because of another nearby restriction. For example, an \"Only Straight On\" restriction will indirectly create \"No Turn\" restrictions for all other paths through the intersection."
+          indirect: '**Some restrictions display the text "(indirect)" and are drawn lighter.**'
+          indirect_example: 'These restrictions exist because of another nearby restriction. For example, an "Only Straight On" restriction will indirectly create "No Turn" restrictions for all other paths through the intersection.'
           indirect_noedit: "You may not edit indirect restrictions. Instead, edit the nearby direct restriction."
   issues:
     title: Issues
@@ -1787,7 +1789,7 @@ en:
       highway-highway:
         reference: Intersecting highways should share a junction vertex.
     area_as_point:
-      message: '{feature} should be an area, not a point'
+      message: "{feature} should be an area, not a point"
     close_nodes:
       title: "Very Close Points"
       tip: "Find redundant and crowded points"
@@ -1858,8 +1860,8 @@ en:
       message_language: '{feature} has the suspicious name "{name}" in {language}'
       reference: "Names should be the actual, on-the-ground names of features."
     help_request:
-      title: 'Help Requests'
-      tip: 'Find features where others requested assistance'
+      title: "Help Requests"
+      tip: "Find features where others requested assistance"
     incompatible_source:
       title: Suspicious Sources
       tip: "Find features with suspicious source tags"
@@ -1873,17 +1875,17 @@ en:
       title: Invalid Formatting
       tip: Find tags with unexpected formats
       email:
-        message: '{feature} has an invalid email address'
-        message_multi: '{feature} has multiple invalid email addresses'
+        message: "{feature} has an invalid email address"
+        message_multi: "{feature} has multiple invalid email addresses"
         reference: 'Email addresses must look like "user@example.com".'
       website:
-        message: '{feature} has an invalid URL'
-        message_multi: '{feature} has multiple invalid URLs'
+        message: "{feature} has an invalid URL"
+        message_multi: "{feature} has multiple invalid URLs"
         reference: 'URLs must start with "http://" or "https://".'
     line_as_area:
-      message: '{feature} should be a line, not an area'
+      message: "{feature} should be a line, not an area"
     line_as_point:
-      message: '{feature} should be a line, not a point'
+      message: "{feature} should be a line, not a point"
     mismatched_geometry:
       title: Mismatched Geometry
       tip: "Find features with conflicting tags and geometry"
@@ -1929,18 +1931,18 @@ en:
         message_incomplete: "{feature} looks like a common feature with incomplete tags"
         reference: "Some features, for example retail chains or post offices, are expected to have certain tags in common."
     point_as_area:
-      message: '{feature} should be a point, not an area'
+      message: "{feature} should be a point, not an area"
     point_as_line:
-      message: '{feature} should be a point, not a line'
+      message: "{feature} should be a point, not a line"
     point_as_vertex:
-      message: '{feature} should be a standalone point based on its tags'
+      message: "{feature} should be a standalone point based on its tags"
       reference: "Some features shouldn't be part of lines or areas."
     private_data:
       title: Private Information
       tip: "Find features that may contain private information"
       reference: "Sensitive data like personal phone numbers should not be tagged."
       contact:
-        message: '{feature} might be tagged with private contact information'
+        message: "{feature} might be tagged with private contact information"
     suspicious_name:
       title: Suspicious Names
       tip: "Find features with generic or suspicious names"
@@ -1977,7 +1979,7 @@ en:
       buildings:
         reference: "Buildings with unsquare corners can often be drawn more accurately."
     vertex_as_point:
-      message: '{feature} should be attached to a line or area based on its tags'
+      message: "{feature} should be attached to a line or area based on its tags"
       reference: "Some features shouldn't be standalone points."
     osm_api_limits:
       title: OSM Data Limitations
@@ -2083,7 +2085,7 @@ en:
         title: Tag as disconnected
         annotation: Tagged very close features as disconnected.
       tag_as_not:
-        title: "Tag as not the same \"{name}\""
+        title: 'Tag as not the same "{name}"'
         annotation: "Added not: tag"
       tag_as_unsquare:
         title: Tag as physically unsquare
@@ -2381,7 +2383,7 @@ en:
     title: "Keyboard Shortcuts"
     tooltip: "Show the keyboard shortcuts screen."
     toggle:
-      key: '?'
+      key: "?"
     key:
       alt: Alt
       backspace: Backspace

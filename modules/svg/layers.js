@@ -16,6 +16,7 @@ import { svgMapillaryMapFeatures } from './mapillary_map_features';
 import { svgKartaviewImages } from './kartaview_images';
 import { svgMapilioImages } from './mapilio_images';
 import { svgPanoramaxImages } from './panoramax_images';
+import { svgKyFromAbove } from './kyfromabove';
 import { svgOsm } from './osm';
 import { svgNotes } from './notes';
 import { svgTouch } from './touch';
@@ -41,6 +42,7 @@ export function svgLayers(projection, context) {
         { id: 'mapilio', layer: svgMapilioImages(projection, context, dispatch) },
         { id: 'vegbilder', layer: svgVegbilder(projection, context, dispatch) },
         { id: 'panoramax', layer: svgPanoramaxImages(projection, context, dispatch) },
+        { id: 'kyfromabove', layer: svgKyFromAbove(projection, context, dispatch) },
         { id: 'local-photos', layer: svgLocalPhotos(projection, context, dispatch) },
         { id: 'debug', layer: svgDebug(projection, context, dispatch) },
         { id: 'geolocate', layer: svgGeolocate(projection, context, dispatch) },

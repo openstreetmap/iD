@@ -12,7 +12,7 @@ export function uiSectionPhotoOverlays(context) {
 
     let _savedLayers = [];
     let _layersHidden = false;
-    const _streetLayerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio', 'vegbilder', 'panoramax'];
+    const _streetLayerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio', 'vegbilder', 'panoramax', 'kyfromabove'];
 
     var settingsLocalPhotos = uiSettingsLocalPhotos(context)
         .on('change',  localPhotosChanged);
