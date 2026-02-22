@@ -52,6 +52,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
 * Fix error setting custom background ([#11862], thanks [@Kayd-06])
 * Fix crash when commenting/closing notes when the note is closed by another mapper in the meantime ([#8464])
+* Fix `readOnlyTags` protection bypass in changeset editor where `indexOf` was used instead of regex matching ([#11911], thanks [@JaiswalShivang])
 #### :earth_asia: Localization
 * Add Moroccan phone number formats ([#11651], thanks [@ilias52730])
 * The Languages field shows language names in your preferred language. ([#11699], thanks [@Razen04])
