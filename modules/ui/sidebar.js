@@ -44,7 +44,10 @@ export function uiSidebar(context) {
         selection
             .style('min-width', minWidth + 'px')
             .style('max-width', '400px')
-            .style('width', '33.3333%');
+            .style('width', '33.3333%')
+            .style('overflow-y', 'auto')
+            .style('overflow-x', 'hidden')
+            .style('height', '100%');
 
         var resizer = selection
             .append('div')
@@ -77,7 +80,7 @@ export function uiSidebar(context) {
             resizer.classed('dragging', true);
 
             d3_select(window)
-                .on('touchmove.sidebar-resizer', function(d3_event) {
+                .on('touchmove.sidebar-resizer', function (d3_event) {
                     // disable page scrolling while resizing on touch input
                     d3_event.preventDefault();
                 }, { passive: false })
@@ -152,7 +155,7 @@ export function uiSidebar(context) {
             .append('div')
             .attr('class', 'inspector-hidden inspector-wrap');
 
-        var hoverModeSelect = function(targets) {
+        var hoverModeSelect = function (targets) {
             context.container().selectAll('.feature-list-item button').classed('hover', false);
 
             if (context.selectedIDs().length > 1 &&
@@ -214,7 +217,7 @@ export function uiSidebar(context) {
                 }
 
                 context.container().selectAll('.qaItem.' + datum.service)
-                    .classed('hover', function(d) { return d.id === datum.id; });
+                    .classed('hover', function (d) { return d.id === datum.id; });
 
                 sidebar
                     .show(errEditor.error(datum));
@@ -261,7 +264,7 @@ export function uiSidebar(context) {
         sidebar.hover = _throttle(hover, 200);
 
 
-        sidebar.intersects = function(extent) {
+        sidebar.intersects = function (extent) {
             var rect = selection.node().getBoundingClientRect();
             return extent.intersects([
                 context.projection.invert([0, rect.height]),
@@ -270,7 +273,7 @@ export function uiSidebar(context) {
         };
 
 
-        sidebar.select = function(ids, newFeature) {
+        sidebar.select = function (ids, newFeature) {
             sidebar.hide();
 
             if (ids && ids.length) {
@@ -306,12 +309,12 @@ export function uiSidebar(context) {
         };
 
 
-        sidebar.showPresetList = function() {
+        sidebar.showPresetList = function () {
             inspector.showList();
         };
 
 
-        sidebar.show = function(component, element) {
+        sidebar.show = function (component, element) {
             featureListWrap
                 .classed('inspector-hidden', true);
             inspectorWrap
@@ -325,7 +328,7 @@ export function uiSidebar(context) {
         };
 
 
-        sidebar.hide = function() {
+        sidebar.hide = function () {
             featureListWrap
                 .classed('inspector-hidden', false);
             inspectorWrap
@@ -336,21 +339,21 @@ export function uiSidebar(context) {
         };
 
 
-        sidebar.expand = function(moveMap) {
+        sidebar.expand = function (moveMap) {
             if (selection.classed('collapsed')) {
                 sidebar.toggle(moveMap);
             }
         };
 
 
-        sidebar.collapse = function(moveMap) {
+        sidebar.collapse = function (moveMap) {
             if (!selection.classed('collapsed')) {
                 sidebar.toggle(moveMap);
             }
         };
 
 
-        sidebar.toggle = function(moveMap) {
+        sidebar.toggle = function (moveMap) {
 
             // Don't allow sidebar to toggle when the user is in the walkthrough.
             if (context.inIntro()) return;
@@ -383,15 +386,15 @@ export function uiSidebar(context) {
             selection
                 .transition()
                 .style(xMarginProperty, endMargin + 'px')
-                .tween('panner', function() {
+                .tween('panner', function () {
                     var i = d3_interpolateNumber(startMargin, endMargin);
-                    return function(t) {
+                    return function (t) {
                         var dx = lastMargin - Math.round(i(t));
                         lastMargin = lastMargin - dx;
                         context.ui().onResize(moveMap ? undefined : [dx * scaleX, 0]);
                     };
                 })
-                .on('end', function() {
+                .on('end', function () {
                     if (isCollapsing) {
                         // hide the sidebar's content after it transitions offscreen
                         selection.classed('collapsed', isCollapsing);
@@ -409,7 +412,7 @@ export function uiSidebar(context) {
         };
 
         // toggle the sidebar collapse when double-clicking the resizer
-        resizer.on('dblclick', function(d3_event) {
+        resizer.on('dblclick', function (d3_event) {
             d3_event.preventDefault();
             if (d3_event.sourceEvent) {
                 d3_event.sourceEvent.preventDefault();
@@ -418,23 +421,23 @@ export function uiSidebar(context) {
         });
 
         // ensure hover sidebar is closed when zooming out beyond editable zoom
-        context.map().on('crossEditableZoom.sidebar', function(within) {
+        context.map().on('crossEditableZoom.sidebar', function (within) {
             if (!within && !selection.select('.inspector-hover').empty()) {
                 hover([]);
             }
         });
     }
 
-    sidebar.showPresetList = function() {};
-    sidebar.hover = function() {};
-    sidebar.hover.cancel = function() {};
-    sidebar.intersects = function() {};
-    sidebar.select = function() {};
-    sidebar.show = function() {};
-    sidebar.hide = function() {};
-    sidebar.expand = function() {};
-    sidebar.collapse = function() {};
-    sidebar.toggle = function() {};
+    sidebar.showPresetList = function () { };
+    sidebar.hover = function () { };
+    sidebar.hover.cancel = function () { };
+    sidebar.intersects = function () { };
+    sidebar.select = function () { };
+    sidebar.show = function () { };
+    sidebar.hide = function () { };
+    sidebar.expand = function () { };
+    sidebar.collapse = function () { };
+    sidebar.toggle = function () { };
 
     return sidebar;
 }
