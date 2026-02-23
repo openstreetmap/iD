@@ -58,11 +58,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * When viewing the help information for tags or presets, use locale-specific properties if available ([#11760], thanks [@k-yle])
 * Show country names in your preferred language and country flag emoji in the Country field dropdown ([#11783], thanks [@Razen04])
 #### :hourglass: Performance
-
 * iD is now twice as fast during long editing sessions ([#11861], thanks [@k-yle])
-
 * Improve zoom/pan performance by avoiding redundant tag class recomputation ([#11834], thanks [@1-navneet])
-
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * Add dedicated styling for `highway=ladder` to make it distinguishable from `highway=steps` ([#11799], thanks [@bhavyaKhatri2703])
@@ -89,22 +86,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11783]: https://github.com/openstreetmap/iD/pull/11783
 [#11861]: https://github.com/openstreetmap/iD/pull/11861
 [#11862]: https://github.com/openstreetmap/iD/pull/11862
-
 [#11870]: https://github.com/openstreetmap/iD/issues/11870
 [#11904]: https://github.com/openstreetmap/iD/issues/11904
-
 [#11834]: https://github.com/openstreetmap/iD/pull/11834
-
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 [@homersimpsons]: https://github.com/homersimpsons
 [@omsaraykar]: https://github.com/omsaraykar
 [@Kaushik4141]: https://github.com/Kaushik4141
-
 [@Kayd-06]: https://github.com/Kayd-06
 [@JaiswalShivang]: https://github.com/JaiswalShivang
-
-
 [@1-navneet]: https://github.com/1-navneet 
 
 
