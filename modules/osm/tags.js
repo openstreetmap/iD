@@ -390,3 +390,9 @@ export var osmSummableTags = new Set([
     'parking:left:capacity',
     'parking:right:capacity'
 ]);
+
+// ISO country codes keys
+export const osmIsoCountryKeys = new Set([
+  'country',
+  'target'
+]);

@@ -503,16 +503,13 @@ export function uiFieldText(field, context) {
 
         const vals = getVals(tags);
         const isMixed = vals.size > 1;
-        var val = vals.size === 1 ? [...vals][0] ?? '' : '';
-        var shouldUpdate;
+        let val = vals.size === 1 ? [...vals][0] ?? '' : '';
+        let shouldUpdate;
 
         if ((field.type === 'number' || field.type === 'integer') && val) {
-            var numbers = val.split(';');
-            var oriNumbers = utilGetSetValue(input).split(';');
-            if (numbers.length !== oriNumbers.length) shouldUpdate = true;
-            numbers = numbers.map(function(v) {
+            const numbers = val.split(';').map(function(v) {
                 v = v.trim();
-                var num = Number(v);
+                const num = Number(v);
                 if (!isFinite(num) || v === '') return v;
                 const fractionDigits = v.includes('.') ? v.split('.')[1].length : 0;
                 return formatFloat(num, fractionDigits);

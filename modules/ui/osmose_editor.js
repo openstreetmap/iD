@@ -86,7 +86,7 @@ export function uiOsmoseEditor(context) {
         .attr('class', 'qa-save save-section cf');
 
     // update
-    saveSection = saveSectionEnter
+    saveSectionEnter
       .merge(saveSection)
         .call(qaSaveButtons);
   }
