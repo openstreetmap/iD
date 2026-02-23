@@ -32,6 +32,79 @@ describe('iD.validations.crossing_ways', function () {
         );
     }
 
+    function createAerowayEndpointTouchCrossing() {
+        var n1 = iD.osmNode({id: 'n-1', loc: [1, 1]});
+        var n2 = iD.osmNode({id: 'n-2', loc: [3, 1]});
+        var w1 = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { aeroway: 'runway' }});
+
+        context.perform(
+            iD.actionAddEntity(n1),
+            iD.actionAddEntity(n2),
+            iD.actionAddEntity(w1)
+        );
+
+        // taxiway starts exactly on runway centerline but with a separate node id
+        var n3 = iD.osmNode({id: 'n-3', loc: [2, 1]});
+        var n4 = iD.osmNode({id: 'n-4', loc: [2, 2]});
+        var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { aeroway: 'taxiway' }});
+
+        context.perform(
+            iD.actionAddEntity(n3),
+            iD.actionAddEntity(n4),
+            iD.actionAddEntity(w2)
+        );
+    }
+
+    function createRunwayAreaWithCenterlineAndTaxiway(connectedToCenterline) {
+        var a1 = iD.osmNode({ id: 'n-a1', loc: [0, 0] });
+        var a2 = iD.osmNode({ id: 'n-a2', loc: [0.00004, 0] });
+        var a3 = iD.osmNode({ id: 'n-a3', loc: [0.00004, 0.00002] });
+        var a4 = iD.osmNode({ id: 'n-a4', loc: [0, 0.00002] });
+        var runwayArea = iD.osmWay({
+            id: 'w-area',
+            nodes: ['n-a1', 'n-a2', 'n-a3', 'n-a4', 'n-a1'],
+            tags: { aeroway: 'runway', area: 'yes' }
+        });
+
+        var c1 = iD.osmNode({ id: 'n-c1', loc: [0.00001, 0.00001] });
+        var cMid = iD.osmNode({ id: 'n-cm', loc: [0.00002, 0.00001] });
+        var c2 = iD.osmNode({ id: 'n-c2', loc: [0.00003, 0.00001] });
+        var runwayCenterline = iD.osmWay({
+            id: 'w-center',
+            nodes: ['n-c1', 'n-cm', 'n-c2'],
+            tags: { aeroway: 'runway' }
+        });
+
+        var t1 = iD.osmNode({ id: 'n-t1', loc: [0.00002, -0.00001] });
+        var taxiwayNodes;
+        if (connectedToCenterline) {
+            taxiwayNodes = ['n-t1', 'n-cm'];
+        } else {
+            var t2 = iD.osmNode({ id: 'n-t2', loc: [0.00002, 0] });
+            taxiwayNodes = ['n-t1', 'n-t2'];
+            context.perform(iD.actionAddEntity(t2));
+        }
+        var taxiway = iD.osmWay({
+            id: 'w-taxi',
+            nodes: taxiwayNodes,
+            tags: { aeroway: 'taxiway' }
+        });
+
+        context.perform(
+            iD.actionAddEntity(a1),
+            iD.actionAddEntity(a2),
+            iD.actionAddEntity(a3),
+            iD.actionAddEntity(a4),
+            iD.actionAddEntity(c1),
+            iD.actionAddEntity(cMid),
+            iD.actionAddEntity(c2),
+            iD.actionAddEntity(t1),
+            iD.actionAddEntity(runwayArea),
+            iD.actionAddEntity(runwayCenterline),
+            iD.actionAddEntity(taxiway)
+        );
+    }
+
     function createWaysWithTwoCrossingPoint() {
       var n1 = iD.osmNode({id: 'n-1', loc: [1,1]});
       var n2 = iD.osmNode({id: 'n-2', loc: [3,3]});
@@ -553,6 +626,78 @@ describe('iD.validations.crossing_ways', function () {
     it('flags an aeroway crosing another aeroway', function() {
         createWaysWithOneCrossingPoint({ aeroway: 'runway' }, { aeroway: 'taxiway' });
         verifySingleCrossingIssue(validate(), {});
+    });
+
+    it('flags touching aeroway endpoint crossing runway centerline', function() {
+        createAerowayEndpointTouchCrossing();
+        var issues = validate();
+        expect(issues).to.have.lengthOf(2);
+        expect(issues[0].id).to.eql(issues[1].id);
+        expect(issues[0].data.connectionTags).to.eql({});
+        expect(issues[1].data.connectionTags).to.eql({});
+        expect(issues[0].loc).to.eql([2, 1]);
+    });
+
+    it('connect fix joins runway and taxiway with a shared node', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway' }, { aeroway: 'taxiway' });
+        var issues = validate();
+        context.enter(iD.modeSelect(context, ['w-2']));
+        var fixes = issues[0].fixes(context);
+        fixes[0].onClick(context);
+
+        var graph = context.graph();
+        var runway = graph.entity('w-1');
+        var taxiway = graph.entity('w-2');
+        var sharedNodes = runway.nodes.filter(function(nodeID) {
+            return taxiway.nodes.indexOf(nodeID) !== -1;
+        });
+
+        expect(sharedNodes.length).to.be.greaterThan(0);
+        var sharedNode = graph.entity(sharedNodes[0]);
+        expect(sharedNode.loc[0]).to.eql(1.5);
+        expect(sharedNode.loc[1]).to.eql(1.5);
+    });
+
+    it('flags taxiway touching runway area when runway has centerline but no centerline connection', function() {
+        createRunwayAreaWithCenterlineAndTaxiway(false);
+        var issues = validate();
+        var centerlineSnapIssues = issues.filter(function(issue) {
+            return issue.type === 'crossing_ways' && !!issue.data.runwayCenterlineSnap;
+        });
+        expect(centerlineSnapIssues).to.have.lengthOf(2);
+        expect(centerlineSnapIssues[0].subtype).to.eql('aeroway-aeroway');
+    });
+
+    it('ignores taxiway crossing runway area if taxiway is already connected to runway centerline', function() {
+        createRunwayAreaWithCenterlineAndTaxiway(true);
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('runway area warning fix snaps taxiway endpoint to runway centerline', function() {
+        createRunwayAreaWithCenterlineAndTaxiway(false);
+        var issues = validate();
+        var snapIssue = issues.find(function(issue) {
+            return issue.type === 'crossing_ways' && !!issue.data.runwayCenterlineSnap;
+        });
+        expect(snapIssue).to.not.eql(undefined);
+        context.enter(iD.modeSelect(context, ['w-taxi']));
+        snapIssue.fixes(context)[0].onClick(context);
+
+        var graph = context.graph();
+        var taxiway = graph.entity('w-taxi');
+        var runwayCenterline = graph.entity('w-center');
+        var runwayArea = graph.entity('w-area');
+
+        var sharedCenterlineNodes = taxiway.nodes.filter(function(nodeID) {
+            return runwayCenterline.nodes.indexOf(nodeID) !== -1;
+        });
+        expect(sharedCenterlineNodes.length).to.be.greaterThan(0);
+
+        var sharedAreaNodes = taxiway.nodes.filter(function(nodeID) {
+            return runwayArea.nodes.indexOf(nodeID) !== -1;
+        });
+        expect(sharedAreaNodes.length).to.eql(0);
     });
 
     it('flags an aeroway crosing a major road', function() {

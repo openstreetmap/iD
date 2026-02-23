@@ -5,7 +5,7 @@ import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionSplit } from '../actions/split';
 import { modeSelect } from '../modes/select';
-import { geoAngle, geoExtent, geoLatToMeters, geoLonToMeters, geoLineIntersection,
+import { geoAngle, geoChooseEdge, geoExtent, geoLatToMeters, geoLonToMeters, geoLineIntersection,
     geoSphericalClosestNode, geoSphericalDistance, geoVecAngle, geoVecLength, geoMetersToLat, geoMetersToLon } from '../geo';
 import { osmNode } from '../osm/node';
 import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmRoutableAerowayTags, osmRoutableHighwayTagValues } from '../osm/tags';
@@ -226,6 +226,133 @@ export function validationCrossingWays(context) {
         return null;
     }
 
+    function pointOnSegment(point, segment) {
+        var x = point[0], y = point[1];
+        var x1 = segment[0][0], y1 = segment[0][1];
+        var x2 = segment[1][0], y2 = segment[1][1];
+        var dx = x2 - x1, dy = y2 - y1;
+        var epsilon = 1e-12;
+
+        var cross = (x - x1) * dy - (y - y1) * dx;
+        if (Math.abs(cross) > epsilon) return false;
+
+        var dot = (x - x1) * dx + (y - y1) * dy;
+        if (dot < -epsilon) return false;
+
+        var lenSq = dx * dx + dy * dy;
+        if (dot - lenSq > epsilon) return false;
+
+        return true;
+    }
+
+    function aerowayEndpointTouchIntersection(segment1, segment2) {
+        if (pointOnSegment(segment1[0], segment2)) return segment1[0];
+        if (pointOnSegment(segment1[1], segment2)) return segment1[1];
+        if (pointOnSegment(segment2[0], segment1)) return segment2[0];
+        if (pointOnSegment(segment2[1], segment1)) return segment2[1];
+        return null;
+    }
+
+    function runwayAreaTaxiwayConnectionInfo(wayInfos, crossPoint, graph) {
+        var runwayAreaInfo = wayInfos.find(function(info) {
+            return info.featureType === 'aeroway' &&
+                info.way.tags.aeroway === 'runway' &&
+                info.way.geometry(graph) === 'area';
+        });
+        var taxiwayInfo = wayInfos.find(function(info) {
+            return info.featureType === 'aeroway' &&
+                info.way.tags.aeroway === 'taxiway' &&
+                info.way.geometry(graph) === 'line';
+        });
+        if (!runwayAreaInfo || !taxiwayInfo) return null;
+
+        var tree = context.history().tree();
+        var runwayArea = runwayAreaInfo.way;
+        var taxiway = taxiwayInfo.way;
+        var runwayExtent = runwayArea.extent(graph);
+        var segmentInfos = tree.waySegments(runwayExtent, graph);
+        var centerlinesByID = {};
+        segmentInfos.forEach(function(segmentInfo) {
+            var way = graph.hasEntity(segmentInfo.wayId);
+            if (!way || way.id === runwayArea.id || way.type !== 'way') return;
+            if (way.tags.aeroway !== 'runway') return;
+            if (way.geometry(graph) !== 'line') return;
+            centerlinesByID[way.id] = way;
+        });
+        var centerlines = Object.values(centerlinesByID);
+        if (!centerlines.length) {
+            return { hasRunwayCenterline: false };
+        }
+
+        var taxiwayEndpointNodes = [graph.entity(taxiway.first()), graph.entity(taxiway.last())];
+        var isConnected = centerlines.some(function(centerline) {
+            return taxiwayEndpointNodes.some(function(endpointNode) {
+                return endpointNode && centerline.contains(endpointNode.id);
+            });
+        });
+        if (isConnected) {
+            return { isConnected: true };
+        }
+
+        var endpointToCrossing = taxiwayEndpointNodes
+            .filter(Boolean)
+            .map(function(node) {
+                return {
+                    node: node,
+                    distance: geoSphericalDistance(node.loc, crossPoint)
+                };
+            })
+            .sort(function(a, b) {
+                return a.distance - b.distance;
+            })[0];
+        if (!endpointToCrossing) {
+            return { hasRunwayCenterline: true };
+        }
+
+        // Only apply centerline snapping when the crossing is at the taxiway endpoint.
+        var endpointTouchThresholdMeters = 2;
+        if (endpointToCrossing.distance > endpointTouchThresholdMeters) {
+            return { hasRunwayCenterline: true };
+        }
+
+        var bestSnap = null;
+        centerlines.forEach(function(centerline) {
+            var centerlineNodes = graph.childNodes(centerline);
+            var snapInfo = geoChooseEdge(centerlineNodes, context.projection(endpointToCrossing.node.loc), context.projection, '');
+            if (!snapInfo || snapInfo.index === undefined) return;
+
+            var snapDistance = geoSphericalDistance(endpointToCrossing.node.loc, snapInfo.loc);
+            if (!bestSnap || snapDistance < bestSnap.distance) {
+                bestSnap = {
+                    distance: snapDistance,
+                    loc: snapInfo.loc,
+                    way: centerline,
+                    edge: [centerline.nodes[snapInfo.index - 1], centerline.nodes[snapInfo.index]]
+                };
+            }
+        });
+        if (!bestSnap) {
+            return { hasRunwayCenterline: true };
+        }
+
+        // Avoid snapping to a centerline that is implausibly far away.
+        var maxSnapDistanceMeters = 150;
+        if (bestSnap.distance > maxSnapDistanceMeters) {
+            return { hasRunwayCenterline: true };
+        }
+
+        return {
+            isConnected: false,
+            hasRunwayCenterline: true,
+            snap: {
+                taxiwayEndpointID: endpointToCrossing.node.id,
+                runwayCenterlineID: bestSnap.way.id,
+                runwayCenterlineEdge: bestSnap.edge,
+                loc: bestSnap.loc
+            }
+        };
+    }
+
 
     function findCrossingsByWay(way1, graph, tree) {
         var edgeCrossInfos = [];
@@ -305,6 +432,12 @@ export function validationCrossingWays(context) {
                 segment1 = [n1.loc, n2.loc];
                 segment2 = [nA.loc, nB.loc];
                 var point = geoLineIntersection(segment1, segment2);
+                if (!point &&
+                    way1FeatureType === 'aeroway' &&
+                    way2FeatureType === 'aeroway') {
+                    // Handle endpoint-to-segment touches that `geoLineIntersection` can miss.
+                    point = aerowayEndpointTouchIntersection(segment1, segment2);
+                }
                 if (point) {
                     edgeCrossInfos.push({
                         wayInfos: [
@@ -368,7 +501,10 @@ export function validationCrossingWays(context) {
         for (wayIndex in ways) {
             crossings = findCrossingsByWay(ways[wayIndex], graph, tree);
             for (crossingIndex in crossings) {
-                issues.push(createIssue(crossings[crossingIndex], graph));
+                var issue = createIssue(crossings[crossingIndex], graph);
+                if (issue) {
+                    issues.push(issue);
+                }
             }
         }
         return issues;
@@ -395,6 +531,11 @@ export function validationCrossingWays(context) {
         });
         var edges = [crossing.wayInfos[0].edge, crossing.wayInfos[1].edge];
         var featureTypes = [crossing.wayInfos[0].featureType, crossing.wayInfos[1].featureType];
+
+        var areaCenterlineConnectionInfo = runwayAreaTaxiwayConnectionInfo(crossing.wayInfos, crossing.crossPoint, graph);
+        if (areaCenterlineConnectionInfo && areaCenterlineConnectionInfo.isConnected) {
+            return null;
+        }
 
         var connectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph);
 
@@ -445,7 +586,8 @@ export function validationCrossingWays(context) {
             data: {
                 edges: edges,
                 featureTypes: featureTypes,
-                connectionTags: connectionTags
+                connectionTags: connectionTags,
+                runwayCenterlineSnap: areaCenterlineConnectionInfo && areaCenterlineConnectionInfo.snap
             },
             hash: uniqueID,
             loc: crossing.crossPoint,
@@ -460,10 +602,14 @@ export function validationCrossingWays(context) {
                 var fixes = [];
 
                 if (connectionTags) {
-                    fixes.push(makeConnectWaysFix(this.data.connectionTags));
-                    let lessLikelyConnectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph, true);
-                    if (lessLikelyConnectionTags && !isEqual(connectionTags, lessLikelyConnectionTags)) {
-                        fixes.push(makeConnectWaysFix(lessLikelyConnectionTags));
+                    if (this.data.runwayCenterlineSnap) {
+                        fixes.push(makeConnectTaxiwayToRunwayCenterlineFix(this.data.runwayCenterlineSnap));
+                    } else {
+                        fixes.push(makeConnectWaysFix(this.data.connectionTags));
+                        let lessLikelyConnectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph, true);
+                        if (lessLikelyConnectionTags && !isEqual(connectionTags, lessLikelyConnectionTags)) {
+                            fixes.push(makeConnectWaysFix(lessLikelyConnectionTags));
+                        }
                     }
                 }
 
@@ -720,6 +866,50 @@ export function validationCrossingWays(context) {
 
                 context.perform(action, t('issues.fix.' + fixTitleID + '.annotation'));
                 context.enter(modeSelect(context, resultWayIDs));
+            }
+        });
+    }
+
+    function makeConnectTaxiwayToRunwayCenterlineFix(snapInfo) {
+        return new validationIssueFix({
+            icon: 'iD-icon-crossing',
+            title: t.append('issues.fix.connect_features.title'),
+            onClick: function(context) {
+                context.perform(
+                    function actionConnectTaxiwayToRunwayCenterline(graph) {
+                        var endpointNode = graph.hasEntity(snapInfo.taxiwayEndpointID);
+                        if (!endpointNode || endpointNode.type !== 'node') return graph;
+
+                        var centerline = graph.hasEntity(snapInfo.runwayCenterlineID);
+                        if (!centerline || centerline.type !== 'way') return graph;
+
+                        var edge = snapInfo.runwayCenterlineEdge;
+                        var loc = snapInfo.loc;
+                        var edgeNodes = edge && [graph.hasEntity(edge[0]), graph.hasEntity(edge[1])];
+                        var edgeNeedsRefresh = !edgeNodes || !edgeNodes[0] || !edgeNodes[1];
+
+                        if (edgeNeedsRefresh) {
+                            var centerlineNodes = graph.childNodes(centerline);
+                            var refreshed = geoChooseEdge(centerlineNodes, context.projection(endpointNode.loc), context.projection, '');
+                            if (!refreshed || refreshed.index === undefined) return graph;
+                            edge = [centerline.nodes[refreshed.index - 1], centerline.nodes[refreshed.index]];
+                            loc = refreshed.loc;
+                            edgeNodes = [graph.hasEntity(edge[0]), graph.hasEntity(edge[1])];
+                            if (!edgeNodes[0] || !edgeNodes[1]) return graph;
+                        }
+
+                        var mergeThresholdInMeters = 0.75;
+                        var nearestCenterlineNode = geoSphericalClosestNode(graph.childNodes(centerline), loc);
+                        if (nearestCenterlineNode && nearestCenterlineNode.distance < mergeThresholdInMeters) {
+                            graph = actionMergeNodes([nearestCenterlineNode.node.id, endpointNode.id], nearestCenterlineNode.node.loc)(graph);
+                        } else {
+                            // Reuse the taxiway endpoint as the inserted midpoint so connectivity is guaranteed.
+                            graph = actionAddMidpoint({ loc: loc, edge: edge }, endpointNode)(graph);
+                        }
+                        return graph;
+                    },
+                    t('issues.fix.connect_crossing_features.annotation')
+                );
             }
         });
     }
