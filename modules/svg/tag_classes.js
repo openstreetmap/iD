@@ -16,8 +16,8 @@ export function svgTagClasses() {
         'public_transport', 'location', 'parking', 'golf', 'type', 'leisure',
         'man_made', 'indoor', 'construction', 'proposed'
     ];
-    var _tags = function(entity) { return entity.tags; };
     // Cache tag-derived classes by tag object identity.
+    var _tags = function(entity) { return entity.tags; };
 
 
     var tagClasses = function(selection) {
