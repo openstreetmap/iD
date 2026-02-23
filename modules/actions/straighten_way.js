@@ -14,7 +14,6 @@ export function actionStraightenWay(selectedIDs, projection) {
 
     // Return all selected ways as a continuous, ordered array of nodes
     function allNodes(graph) {
-        var nodes = [];
         var startNodes = [];
         var endNodes = [];
         var remainingWays = [];
@@ -27,7 +26,7 @@ export function actionStraightenWay(selectedIDs, projection) {
 
         for (var i = 0; i < selectedWays.length; i++) {
             var way = graph.entity(selectedWays[i]);
-            nodes = way.nodes.slice(0);
+            const nodes = way.nodes.slice(0);
             remainingWays.push(nodes);
             startNodes.push(nodes[0]);
             endNodes.push(nodes[nodes.length-1]);
@@ -46,8 +45,6 @@ export function actionStraightenWay(selectedIDs, projection) {
         // Choose the initial endpoint to start from
         var currNode = utilArrayDifference(startNodes, endNodes)
             .concat(utilArrayDifference(endNodes, startNodes))[0];
-        var nextWay = [];
-        nodes = [];
 
         // Create nested function outside of loop to avoid "function in loop" lint error
         var getNextWay = function(currNode, remainingWays) {
@@ -57,8 +54,9 @@ export function actionStraightenWay(selectedIDs, projection) {
         };
 
         // Add nodes to end of nodes array, until all ways are added
+        let nodes = [];
         while (remainingWays.length) {
-            nextWay = getNextWay(currNode, remainingWays);
+            const nextWay = getNextWay(currNode, remainingWays);
             remainingWays = utilArrayDifference(remainingWays, [nextWay]);
 
             if (nextWay[0] !== currNode) {

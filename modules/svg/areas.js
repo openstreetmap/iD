@@ -167,7 +167,7 @@ export function svgAreas(projection, context) {
             }
         }
 
-        paths = paths.enter()
+        paths.enter()
             .insert('path', sortedByArea)
             .merge(paths)
             .each(function(entity) {
