@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
@@ -89,36 +89,21 @@ export function validationCrossingWays(context) {
             return true;
         }
 
-        // assume 0 by default; don't use way.layer() since we account for structures here
-        var layer1 = tags1.layer || '0';
-        var layer2 = tags2.layer || '0';
-
-        if (allowsBridge(featureType1) && allowsBridge(featureType2)) {
-            if (hasTag(tags1, 'bridge') && !hasTag(tags2, 'bridge')) return true;
-            if (!hasTag(tags1, 'bridge') && hasTag(tags2, 'bridge')) return true;
-            // crossing bridges must use different layers
-            if (hasTag(tags1, 'bridge') && hasTag(tags2, 'bridge') && layer1 !== layer2) return true;
-        } else if (allowsBridge(featureType1) && hasTag(tags1, 'bridge')) return true;
-        else if (allowsBridge(featureType2) && hasTag(tags2, 'bridge')) return true;
-
-        if (allowsTunnel(featureType1) && allowsTunnel(featureType2)) {
-            if (hasTag(tags1, 'tunnel') && !hasTag(tags2, 'tunnel')) return true;
-            if (!hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel')) return true;
-            // crossing tunnels must use different layers
-            if (hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel') && layer1 !== layer2) return true;
-        } else if (allowsTunnel(featureType1) && hasTag(tags1, 'tunnel')) return true;
-        else if (allowsTunnel(featureType2) && hasTag(tags2, 'tunnel')) return true;
-
         // don't flag crossing waterways and pier/highways
         if (featureType1 === 'waterway' && featureType2 === 'highway' && tags2.man_made === 'pier') return true;
         if (featureType2 === 'waterway' && featureType1 === 'highway' && tags1.man_made === 'pier') return true;
 
-        if (featureType1 === 'building' || featureType2 === 'building' ||
-            taggedAsIndoor(tags1) || taggedAsIndoor(tags2)) {
-            // for building crossings, different layers are enough
-            if (layer1 !== layer2) return true;
-        }
-        return false;
+        if (tags1.layer !== undefined && tags1.layer === tags2.layer) return false; // Warn if both have the same defined layer
+
+        const isElement1Bridge = allowsBridge(featureType1) && hasTag(tags1, 'bridge');
+        const isElement2Bridge = allowsBridge(featureType2) && hasTag(tags2, 'bridge');
+        if (isElement1Bridge !== isElement2Bridge) return true; // Either one is bridge, the other is not
+
+        const isElement1Tunnel = allowsTunnel(featureType1) && hasTag(tags1, 'tunnel');
+        const isElement2Tunnel = allowsTunnel(featureType2) && hasTag(tags2, 'tunnel');
+        if (isElement1Tunnel !== isElement2Tunnel ) return true; // Either one is tunnel, the other is not
+
+        return (tags1.layer || '0') !== (tags2.layer || '0');
     }
 
 
@@ -196,7 +181,9 @@ export function validationCrossingWays(context) {
                 return {};
             }
             if (featureType1 === 'waterway') return {};
-            if (featureType1 === 'railway') return {};
+            if (featureType1 === 'railway') {
+                return { railway: 'railway_crossing' };
+            }
 
         } else {
             if (featureTypes.indexOf('highway') !== -1) {
@@ -447,8 +434,8 @@ export function validationCrossingWays(context) {
                 var entity1 = graph.hasEntity(this.entityIds[0]),
                     entity2 = graph.hasEntity(this.entityIds[1]);
                 return (entity1 && entity2) ? t.append('issues.crossing_ways.message', {
-                    feature: utilDisplayLabel(entity1, graph),
-                    feature2: utilDisplayLabel(entity2, graph)
+                    feature: utilDisplayLabel(entity1, graph, featureType1 === 'building'),
+                    feature2: utilDisplayLabel(entity2, graph, featureType2 === 'building')
                 }) : '';
             },
             reference: showReference,

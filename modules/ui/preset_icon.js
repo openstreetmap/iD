@@ -26,14 +26,13 @@ export function uiPresetIcon() {
 
 
   function renderPointBorder(container, drawPoint) {
-
-    let pointBorder = container.selectAll('.preset-icon-point-border')
+    const pointBorder = container.selectAll('.preset-icon-point-border')
       .data(drawPoint ? [0] : []);
 
     pointBorder.exit()
       .remove();
 
-    let pointBorderEnter = pointBorder.enter();
+    const pointBorderEnter = pointBorder.enter();
 
     const w = 40;
     const h = 40;
@@ -47,19 +46,17 @@ export function uiPresetIcon() {
       .append('path')
       .attr('transform', 'translate(11.5, 8)')
       .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
-
-    pointBorder = pointBorderEnter.merge(pointBorder);
   }
 
 
   function renderCategoryBorder(container, category) {
-    let categoryBorder = container.selectAll('.preset-icon-category-border')
+    const categoryBorder = container.selectAll('.preset-icon-category-border')
       .data(category ? [0] : []);
 
     categoryBorder.exit()
       .remove();
 
-    let categoryBorderEnter = categoryBorder.enter();
+    const categoryBorderEnter = categoryBorder.enter();
 
     const d = 60;
 
@@ -75,23 +72,22 @@ export function uiPresetIcon() {
         .attr('class', 'area')
         .attr('d', 'M9.5,7.5 L25.5,7.5 L28.5,12.5 L49.5,12.5 C51.709139,12.5 53.5,14.290861 53.5,16.5 L53.5,43.5 C53.5,45.709139 51.709139,47.5 49.5,47.5 L10.5,47.5 C8.290861,47.5 6.5,45.709139 6.5,43.5 L6.5,12.5 L9.5,7.5 Z');
 
-    categoryBorder = categoryBorderEnter.merge(categoryBorder);
-
     if (category) {
-      categoryBorder.selectAll('path')
+      categoryBorderEnter.merge(categoryBorder)
+        .selectAll('path')
         .attr('class', `area ${category.id}`);
     }
  }
 
 
   function renderCircleFill(container, drawVertex) {
-    let vertexFill = container.selectAll('.preset-icon-fill-vertex')
+    const vertexFill = container.selectAll('.preset-icon-fill-vertex')
       .data(drawVertex ? [0] : []);
 
     vertexFill.exit()
       .remove();
 
-    let vertexFillEnter = vertexFill.enter();
+    const vertexFillEnter = vertexFill.enter();
 
     const w = 60;
     const h = 60;
@@ -107,8 +103,6 @@ export function uiPresetIcon() {
       .attr('cx', w / 2)
       .attr('cy', h / 2)
       .attr('r', d / 2);
-
-    vertexFill = vertexFillEnter.merge(vertexFill);
   }
 
 
@@ -353,6 +347,7 @@ export function uiPresetIcon() {
   const routeSegments = {
     bicycle: ['highway/cycleway', 'highway/cycleway', 'highway/cycleway'],
     bus: ['highway/unclassified', 'highway/secondary', 'highway/primary'],
+    climbing: ['climbing/route', 'climbing/route', 'climbing/route'],
     trolleybus: ['highway/unclassified', 'highway/secondary', 'highway/primary'],
     detour: ['highway/tertiary', 'highway/residential', 'highway/unclassified'],
     ferry: ['route/ferry', 'route/ferry', 'route/ferry'],

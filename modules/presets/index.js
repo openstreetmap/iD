@@ -227,7 +227,7 @@ export function presetIndex() {
         const candidate = indexMatches[i];
         const score = candidate.matchScore(tags);
 
-        if (score === -1){
+        if (score === -1) {
           continue;
         }
         matchCandidates.push({score, candidate});
@@ -239,15 +239,15 @@ export function presetIndex() {
       }
     }
 
-    if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)){
+    if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)) {
       const validHere = locationManager.locationSetsAt(loc);
       if (!validHere[bestMatch.locationSetID]) {
+        bestMatch = undefined;
         matchCandidates.sort((a, b) => (a.score < b.score) ? 1 : -1);
         for (let i = 0; i < matchCandidates.length; i++) {
           const candidateScore = matchCandidates[i];
           if (!candidateScore.candidate.locationSetID || validHere[candidateScore.candidate.locationSetID]) {
             bestMatch = candidateScore.candidate;
-            bestScore = candidateScore.score;
             break;
           }
         }
@@ -256,7 +256,7 @@ export function presetIndex() {
 
     // If any part of an address is present, allow fallback to "Address" preset - #4353
     if (!bestMatch || bestMatch.isFallback()) {
-      for (let k in tags){
+      for (let k in tags) {
           if (/^addr:/.test(k) && keyIndex['addr:*'] && keyIndex['addr:*']['*']) {
             bestMatch = keyIndex['addr:*']['*'][0];
             break;

@@ -47,7 +47,7 @@ export function modeMove(context, entityIDs, baseGraph) {
 
     var _prevGraph;
     var _cache;
-    var _origin;
+    var _origMouseCoords;
     var _nudgeInterval;
 
     // use pointer events on supported platforms; fallback to mouse events
@@ -57,18 +57,22 @@ export function modeMove(context, entityIDs, baseGraph) {
     function doMove(nudge) {
         nudge = nudge || [0, 0];
 
-        var fn;
+        let fn;
         if (_prevGraph !== context.graph()) {
             _cache = {};
-            _origin = context.map().mouseCoordinates();
+            _origMouseCoords = context.map().mouseCoordinates();
             fn = context.perform;
         } else {
-            fn = context.overwrite;
+            fn = action => {
+                context.pop();
+                context.perform(action);
+            };
         }
 
-        var currMouse = context.map().mouse();
-        var origMouse = context.projection(_origin);
-        var delta = geoVecSubtract(geoVecSubtract(currMouse, origMouse), nudge);
+        const currMouseCoords = context.map().mouseCoordinates();
+        const currMouse = context.projection(currMouseCoords);
+        const origMouse = context.projection(_origMouseCoords);
+        const delta = geoVecSubtract(geoVecSubtract(currMouse, origMouse), nudge);
 
         fn(actionMove(entityIDs, delta, context.projection, _cache));
         _prevGraph = context.graph();
@@ -129,7 +133,7 @@ export function modeMove(context, entityIDs, baseGraph) {
 
 
     mode.enter = function() {
-        _origin = context.map().mouseCoordinates();
+        _origMouseCoords = context.map().mouseCoordinates();
         _prevGraph = null;
         _cache = {};
 
@@ -197,6 +201,12 @@ export function modeMove(context, entityIDs, baseGraph) {
     mode.selectedIDs = function() {
         if (!arguments.length) return entityIDs;
         // no assign
+        return mode;
+    };
+
+
+    mode.annotation = function(_annotation) {
+        annotation = _annotation;
         return mode;
     };
 

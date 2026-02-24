@@ -1,5 +1,5 @@
 describe('iD.actionDiscardTags', function() {
-    var discardTags = { created_by: true };
+    const discardTags = { created_by: true, attribution: { 'https://example.com': true } };
 
     it('discards obsolete tags from modified entities', function() {
         var way = iD.osmWay({ id: 'w1', tags: { created_by: 'Potlatch' } });
@@ -31,5 +31,21 @@ describe('iD.actionDiscardTags', function() {
         var head = base.replace(way);
         var action = iD.actionDiscardTags(iD.coreDifference(base, head), discardTags);
         expect(action(head).entity(way.id).tags).to.eql({});
+    });
+
+    it('discards obsolete key-value pairs', () => {
+        const way = iD.osmWay({ id: 'w1', tags: { attribution: 'https://example.com' } });
+        const base = iD.coreGraph([way]);
+        const head = base.replace(way.update({ tags: { ...way.tags, foo: 'bar' } }));
+        const action = iD.actionDiscardTags(iD.coreDifference(base, head), discardTags);
+        expect(action(head).entity(way.id).tags).to.eql({ foo: 'bar' });
+    });
+
+    it('does not discard tags where the key matches but the value does not match', () => {
+        const way = iD.osmWay({ id: 'w1', tags: { attribution: 'some other valid value' } });
+        const base = iD.coreGraph([way]);
+        const head = base.replace(way.update({ tags: { ...way.tags, foo: 'bar' } }));
+        const action = iD.actionDiscardTags(iD.coreDifference(base, head), discardTags);
+        expect(action(head).entity(way.id).tags).to.eql({ attribution: 'some other valid value', foo: 'bar' });
     });
 });

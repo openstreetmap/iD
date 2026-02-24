@@ -7,12 +7,15 @@ import { VectorTile } from '@mapbox/vector-tile';
 import { utilRebind, utilTiler, utilQsString, utilStringQs, utilUniqueDomId} from '../util';
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { t, localizer } from '../core/localizer';
-import pannellumPhotoFrame from './pannellum_photo';
-import planePhotoFrame from './plane_photo';
+import { pannellumPhotoFrame } from './pannellum_photo';
+import { planePhotoFrame } from './plane_photo';
+import { services } from './';
+
 
 const apiUrl = 'https://api.panoramax.xyz/';
 const tileUrl = apiUrl + 'api/map/{z}/{x}/{y}.mvt';
 const imageDataUrl = apiUrl + 'api/collections/{collectionId}/items/{itemId}';
+const sequenceDataUrl = apiUrl + 'api/collections/{collectionId}/items?limit=1000';
 const userIdUrl = apiUrl + 'api/users/search?q={username}';
 const usernameURL = apiUrl + 'api/users/{userId}';
 const viewerUrl = apiUrl;
@@ -178,12 +181,13 @@ function loadTileDataToCache(data, tile, zoom) {
             loc = feature.geometry.coordinates;
 
             d = {
+                service: 'photo',
                 loc: loc,
                 capture_time: feature.properties.ts,
                 capture_time_parsed: new Date(feature.properties.ts),
                 id: feature.properties.id,
                 account_id: feature.properties.account_id,
-                sequence_id: feature.properties.sequences.split('\"')[1],
+                sequence_id: feature.properties.first_sequence,
                 heading: parseInt(feature.properties.heading, 10),
                 image_path: '',
                 isPano: feature.properties.type === 'equirectangular',
@@ -220,17 +224,22 @@ function loadTileDataToCache(data, tile, zoom) {
 
 /**
  * Fetches the username from Panoramax
- * @param {string} user_id
+ * @param {string} userId
  * @returns the username
  */
-async function getUsername(user_id){
-    const requestUrl = usernameURL.replace('{userId}', user_id);
+async function getUsername(userId) {
+    const cache = _cache.users;
+    if (cache[userId]) return cache[userId].name;
+
+    const requestUrl = usernameURL.replace('{userId}', userId);
 
     const response = await fetch(requestUrl, { method: 'GET' });
     if (!response.ok) {
         throw new Error(response.status + ' ' + response.statusText);
     }
     const data = await response.json();
+    cache[userId] = data;
+
     return data.name;
 }
 
@@ -250,13 +259,11 @@ export default {
 
         _cache = {
             images: { rtree: new RBush(), forImageId: {} },
-            sequences: { rtree: new RBush(), lineString: {} },
+            sequences: { rtree: new RBush(), lineString: {}, items: {} },
+            users: {},
             mockSequences: { rtree: new RBush(), lineString: {} },
             requests: { loaded: {}, inflight: {} }
         };
-
-        _currentScene.currentImage = null;
-        _activeImage = null;
     },
 
     /**
@@ -418,15 +425,13 @@ export default {
      * @param {*} imageKey
      */
     updateUrlImage: function(imageKey) {
-        if (!window.mocha) {
-            var hash = utilStringQs(window.location.hash);
-            if (imageKey) {
-                hash.photo = 'panoramax/' + imageKey;
-            } else {
-                delete hash.photo;
-            }
-            window.location.replace('#' + utilQsString(hash, true));
+        const hash = utilStringQs(window.location.hash);
+        if (imageKey) {
+            hash.photo = 'panoramax/' + imageKey;
+        } else {
+            delete hash.photo;
         }
+        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
     },
 
     /**
@@ -479,7 +484,7 @@ export default {
                 _isHD = !_isHD;
                 _definition = _isHD ? highDefinition : standardDefinition;
                 that.selectImage(context, d.id)
-                .showViewer(context);
+                    .showViewer(context);
             });
 
         label
@@ -514,7 +519,7 @@ export default {
             .attr('href', viewerLink)
             .text('panoramax.xyz');
 
-        this.getImageData(d.sequence_id, d.id).then(function(data){
+        this.getImageData(d.sequence_id, d.id).then(function(data) {
             _currentScene = {
                 currentImage: null,
                 nextImage: null,
@@ -581,20 +586,47 @@ export default {
 
     /**
      * Fetches the data for a specific image
-     * @param {*} collection_id
-     * @param {*} image_id
+     * @param {*} collectionId
+     * @param {*} imageId
      * @returns The fetched image data
      */
-    getImageData: async function(collection_id, image_id){
-        const requestUrl = imageDataUrl.replace('{collectionId}', collection_id)
-            .replace('{itemId}', image_id);
+    getImageData: async function(collectionId, imageId) {
+        const cache = _cache.sequences.items;
+        if (cache[collectionId]) {
+            const cached = cache[collectionId]
+                .find(d => d.id === imageId);
+            if (cached) return cached;
+        } else {
+            // prime the cache with data from sequence
+            const response = await fetch(sequenceDataUrl
+                .replace('{collectionId}', collectionId),
+                { method: 'GET' });
 
-        const response = await fetch(requestUrl, { method: 'GET' });
-        if (!response.ok) {
-            throw new Error(response.status + ' ' + response.statusText);
+            if (!response.ok) {
+                throw new Error(response.status + ' ' + response.statusText);
+            }
+            const data = (await response.json()).features;
+            cache[collectionId] = data;
         }
-        const data = await response.json();
-        return data;
+
+        const result = cache[collectionId]
+            .find(d => d.id === imageId);
+        if (result) return result;
+
+        // not found in sequence: retry to load single item data
+        // ideally, we'd use the `withPicture` parameter, but it is buggy:
+        // https://gitlab.com/panoramax/server/api/-/issues/268
+        const itemResponse = await fetch(imageDataUrl
+            .replace('{collectionId}', collectionId)
+            .replace('{itemId}', imageId),
+            { method: 'GET' });
+
+        if (!itemResponse.ok) {
+            throw new Error(itemResponse.status + ' ' + itemResponse.statusText);
+        }
+        const itemData = await itemResponse.json();
+        cache[collectionId].push(itemData);
+        return itemData;
     },
 
     ensureViewerLoaded: function(context) {
@@ -645,8 +677,8 @@ export default {
 
         // Register viewer resize handler
         _loadViewerPromise = Promise.all([
-            pannellumPhotoFrame.init(context, wrapEnter),
-            planePhotoFrame.init(context, wrapEnter)
+            pannellumPhotoFrame(context, wrapEnter),
+            planePhotoFrame(context, wrapEnter)
           ]).then(([pannellumPhotoFrame, planePhotoFrame]) => {
             _pannellumFrame = pannellumPhotoFrame;
             _pannellumFrame.event.on('viewerChanged', () => dispatch.call('viewerChanged'));
@@ -686,20 +718,21 @@ export default {
      * @param {*} context
      */
     showViewer: function (context) {
-        let wrap = context.container().select('.photoviewer')
-            .classed('hide', false);
-        let isHidden = wrap.selectAll('.photo-wrapper.panoramax-wrapper.hide').size();
+        const wrap = context.container().select('.photoviewer');
+        const isHidden = wrap.selectAll('.photo-wrapper.panoramax-wrapper.hide').size();
         if (isHidden) {
-            wrap
-                .selectAll('.photo-wrapper:not(.panoramax-wrapper)')
-                .classed('hide', true);
-            wrap
+            for (const service of Object.values(services)) {
+                if (service === this) continue;
+                if (typeof service.hideViewer === 'function') {
+                    service.hideViewer(context);
+                }
+            }
+            wrap.classed('hide', false)
                 .selectAll('.photo-wrapper.panoramax-wrapper')
                 .classed('hide', false);
         }
 
         _isViewerOpen = true;
-
         return this;
     },
 

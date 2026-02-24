@@ -277,12 +277,12 @@ describe('iD.serviceOsmWikibase', function () {
         }),
         status: 200,
         headers: { 'Content-Type': 'application/json' }
-    });
+      });
 
       wikibase.getEntity({ key: 'amenity', value: 'parking', langCodes: ['fr'] }, callback);
 
       await setTimeout(50);
-      expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+      expect(parseQueryString(fetchMock.calls(/action=wbgetentities/)[0][0])).to.eql(
         {
           action: 'wbgetentities',
           sites: 'wiki',
@@ -297,6 +297,7 @@ describe('iD.serviceOsmWikibase', function () {
         key: keyData(),
         tag: tagData()
       });
+      expect(wikibase.getLocaleIDs()).toStrictEqual({ fr: 'Q7792' });
     });
   });
 

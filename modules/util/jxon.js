@@ -110,12 +110,12 @@ export var JXON = new (function () {
         oParentEl.setAttribute(sName.slice(1), vValue);
       } else if (vValue.constructor === Array) {
         for (var nItem = 0; nItem < vValue.length; nItem++) {
-          oChild = oXMLDoc.createElement(sName);
+          oChild = oXMLDoc.createElementNS(null, sName);
           loadObjTree(oXMLDoc, oChild, vValue[nItem]);
           oParentEl.appendChild(oChild);
         }
       } else {
-        oChild = oXMLDoc.createElement(sName);
+        oChild = oXMLDoc.createElementNS(null, sName);
         if (vValue instanceof Object) {
           loadObjTree(oXMLDoc, oChild, vValue);
         } else if (vValue !== null && vValue !== true) {

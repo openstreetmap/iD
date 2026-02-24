@@ -531,6 +531,40 @@ describe('iD.actionSplit', function () {
             expect(g1.entity('-').nodes).to.eql(['b', 'c', 'd', 'a']);
             expect(g1.entity('=').nodes).to.eql(['a', 'b']);
         });
+
+        it('distributes the number of steps proportionally', () => {
+            const tags = { highway: 'steps', step_count: '40' };
+            let graph = iD.coreGraph([
+                iD.osmNode({ id: 'a', loc: [0, 0] }),
+                iD.osmNode({ id: 'b', loc: [1, 0] }),
+                iD.osmNode({ id: 'c', loc: [4, 0] }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'], tags: tags })
+            ]);
+
+            graph = iD.actionSplit('b', ['='])(graph);
+
+            // step count should be distributed according the the resulting ways'
+            // segment lengths
+            expect(graph.entity('=').tags.step_count).to.equal('10');
+            expect(graph.entity('-').tags.step_count).to.equal('30');
+        });
+
+        it('preserves the total number of steps', () => {
+            const tags = { highway: 'steps', step_count: '42' };
+            let graph = iD.coreGraph([
+                iD.osmNode({ id: 'a', loc: [0, 0] }),
+                iD.osmNode({ id: 'b', loc: [1, 0] }),
+                iD.osmNode({ id: 'c', loc: [4, 0] }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'], tags: tags })
+            ]);
+
+            graph = iD.actionSplit('b', ['='])(graph);
+
+            // the sum of the resulting step count should be preserved
+            // even when the intermediate values are rounded
+            expect(+graph.entity('=').tags.step_count +
+                   +graph.entity('-').tags.step_count).to.equal(42);
+        });
     });
 
 
@@ -1669,6 +1703,28 @@ describe('iD.actionSplit', function () {
                 expect(graph.entity('-').nodes).to.eql(['a', 'b']);
                 expect(graph.entity('=').nodes).to.eql(['a', 'b', 'c', 'a']);
                 expect(graph.parentRelations(graph.entity('='))).to.have.length(0);
+            });
+
+            it('preserves coastline tag on the ways when creating a multipolygon', function () {
+                var graph = iD.coreGraph([
+                    iD.osmNode({id: 'a', loc: [1,0]}),
+                    iD.osmNode({id: 'b', loc: [1,1]}),
+                    iD.osmNode({id: 'c', loc: [0,1]}),
+                    iD.osmNode({id: 'd', loc: [0,0]}),
+                    iD.osmWay({id: '-', tags: {natural: 'coastline', area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']})
+                ]);
+
+                graph = iD.actionSplit('a', ['='])(graph);
+                expect(graph.entity('-').tags).to.eql({natural: 'coastline'});
+                expect(graph.entity('=').tags).to.eql({natural: 'coastline'});
+                expect(graph.parentRelations(graph.entity('-'))).to.have.length(1);
+
+                var relation = graph.parentRelations(graph.entity('-'))[0];
+                expect(relation.tags).to.eql({type: 'multipolygon', area: 'yes'});
+                expect(relation.members).to.eql([
+                    {id: '-', role: 'outer', type: 'way'},
+                    {id: '=', role: 'outer', type: 'way'}
+                ]);
             });
         });
 

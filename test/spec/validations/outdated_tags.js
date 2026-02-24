@@ -1,3 +1,4 @@
+import { select as d3_select } from 'd3-selection';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.validations.outdated_tags', function () {
@@ -192,6 +193,20 @@ describe('iD.validations.outdated_tags', function () {
             'brand:wikidata': 'Q110785465', // added
             ford: 'yes' // tag already added
         });
+    });
+
+    it('includes unchanged context tags of deprecation rule in tag reference', async () => {
+        createWay({ building: 'roof' });
+        const validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        const issues = validate(validator);
+        expect(issues).toHaveLength(1);
+        const selection = d3_select(document.createElement('div'));
+        issues[0].reference(selection);
+        const tagReference = selection.selectAll('table .tagDiff-row').data();
+        expect(tagReference).toHaveLength(2);
+        expect(tagReference.some(ref => ref.type === '+' && ref.key === 'layer')).toBeTruthy();
+        expect(tagReference.some(ref => ref.type === '~' && ref.key === 'building')).toBeTruthy();
     });
 
     it('generates 2 separate issues for incomplete tags and NSI suggestions', async () => {

@@ -1,0 +1,130 @@
+.ideditor {
+    color-scheme: light;
+    --bg-color: #fff; /* ~Bootstrap .bg-body */
+    --bg-color-2: #f6f6f6; /* ~Bootstrap .bg-body-tertiary */
+    --bg-color-3: #ececec; /* ~Bootstrap .bg-body-secondary */
+    --active-bg-color: #f1f1f1; /* in the middle between --bg-color-2 and --bg-color-3 */
+    --transparent-bg-color: #fffc;
+    --transparent-button-color: #fff4;
+    --border-color: #ccc; /* ~Bootstrap .border-secondary-subtle */
+    --transparent-border-color: #cccccc94; /* --border-color with alpha value to match rgba(0, 0, 0, .1) over --bg-color-2 */
+    --border-color-2: #ddd; /* mix 66% of --border-color with white */
+    --outset-color: #fcfcfc; /* brighter than --border-color with white */
+    --shadow-color: #bbb; /* mix 91.5% of --border-color with black */
+    --text-color: #333;
+    --link-color: #7092ff;
+    --link-focus-color: #597be7;
+    --muted-text-color: #aaa;
+    --transparent-text-color: #2223;
+    --transparent-text-emphasis-color: #0007;
+    --passive-bg-color: #cccccc; /* = --border-color */
+    --passive-text-color: #888;
+    --widget-color: #222;
+    --widget-bg-color: #eee;
+    --nested-bg-color: #eff2f7;
+    --nested-highlight-color: #e3e8ef;
+    --nested-border-color: #ccd5e3;
+    --selected-bg-color: #e8ebff;
+    --dark-tooltip-text-color: #fff;
+    --dark-tooltip-bg-color: #444;
+
+    --bg-filter: none;
+    --mix-blend-mode: normal;
+    --bg-blend-mode: normal;
+
+    --valid-bg-color: #cfc;
+    --valid-label-color: #afa;
+    --valid-highlight-color: #8f8;
+    --valid-border-color: #2f2;
+    --valid-text-color: #0b0;
+    --valid-highlight-text-color: #080;
+    --valid-icon-color: #0f0;
+
+    --suggestion-bg-color: #cef;
+    --suggestion-label-color: #adf;
+    --suggestion-highlight-color: #8cf;
+    --suggestion-border-color: #29f;
+    --suggestion-text-color: #05b;
+    --suggestion-highlight-text-color: #038;
+    --suggestion-icon-color: #07f;
+
+    --warning-bg-color: #ffc; /* mix 60% of --warning-label-color with white */
+    --warning-label-color: #ffa;
+    --warning-highlight-color: #ff8; /* ~saturate(1.5) of --warning-label-color */
+    --warning-border-color: #fb2;
+    --warning-text-color: #b15500;
+    --warning-highlight-text-color: #7f3d00;
+    --warning-icon-color: #f90;
+
+    --error-bg-color: #fcc;
+    --error-label-color: #faa;
+    --error-highlight-color: #f88;
+    --error-border-color: #f22;
+    --error-text-color: #a00;
+    --error-highlight-text-color: #800;
+    --error-icon-color: #f00;
+}
+
+@media (prefers-color-scheme: dark) {
+    .ideditor {
+        color-scheme: dark;
+        --bg-color: #212529;
+        --bg-color-2: #2b3035;
+        --bg-color-3: #343a40;
+        --active-bg-color: #30353b;
+        --passive-bg-color: #41464b;
+        --transparent-bg-color: #111c;
+        --transparent-button-color: #3338;
+        --border-color: #41464b;
+        --transparent-border-color: #41464b94;
+        --border-color-2: #32363b;
+        --outset-color: #54595d;
+        --shadow-color: #3b4045;
+        --text-color: #dee2e6;
+        --link-color: #7b92db;
+        --link-focus-color: #7e9cff;
+        --muted-text-color: #6e7276;
+        --transparent-text-color: #eee3;
+        --transparent-text-emphasis-color: #fff7;
+        --widget-color: #e9ecef;
+        --widget-bg-color: #31373c;
+        --nested-bg-color: #2d2e33;
+        --nested-highlight-color: #33363b;
+        --nested-border-color: #3e434e;
+        --selected-bg-color: #3b3c49;
+        --dark-tooltip-text-color: #ccc;
+        --dark-tooltip-bg-color: #000;
+
+        --bg-filter: invert();
+        --mix-blend-mode: screen;
+        --bg-blend-mode: difference;
+
+        --valid-bg-color: #030;
+        --valid-label-color: #050;
+        --valid-highlight-color: #060;
+        --valid-border-color: #080;
+        --valid-text-color: #3e3;
+        --valid-highlight-text-color: #6e6;
+
+        --suggestion-bg-color: #023;
+        --suggestion-label-color: #047;
+        --suggestion-highlight-color: #036;
+        --suggestion-border-color: #06d;
+        --suggestion-text-color: #38e;
+        --suggestion-highlight-text-color: #6ae;
+
+        --warning-bg-color: #332701;
+        --warning-label-color: #554102;
+        --warning-highlight-color: #5f4100;
+        --warning-border-color: #7e3b00;
+        --warning-text-color: #e98c38;
+        --warning-highlight-text-color: #f0ac71;
+
+        --error-bg-color: #300;
+        --error-label-color: #500;
+        --error-highlight-color: #600;
+        --error-border-color: #800;
+        --error-text-color: #e33;
+        --error-highlight-text-color: #e66;
+    }
+}

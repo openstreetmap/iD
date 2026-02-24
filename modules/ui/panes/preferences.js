@@ -1,4 +1,3 @@
-
 import { t } from '../../core/localizer';
 import { uiPane } from '../pane';
 import { uiSectionPrivacy } from '../sections/privacy';

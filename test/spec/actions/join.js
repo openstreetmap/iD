@@ -598,6 +598,19 @@ describe('iD.actionJoin', function () {
         expect(graph.entity('-').tags).to.eql({ natural: 'cliff' });
     });
 
+    it('merges the number of steps', function () {
+        let graph = iD.coreGraph([
+            iD.osmNode({ id: 'a', loc: [0, 0] }),
+            iD.osmNode({ id: 'b', loc: [1, 0] }),
+            iD.osmNode({ id: 'c', loc: [4, 0] }),
+            iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'steps', step_count: '12' } }),
+            iD.osmWay({ id: '=', nodes: ['b', 'c'], tags: { highway: 'steps', step_count: '30' } })
+        ]);
+        graph = iD.actionJoin(['-', '='])(graph);
+        // step count should be merged
+        expect(graph.entity('-').tags.step_count).to.equal('42');
+    });
+
 
     it('merges relations', function () {
         var graph = iD.coreGraph([

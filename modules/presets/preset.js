@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 
 import { t } from '../core/localizer';
 import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
@@ -126,7 +126,8 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       if (_this.suggestion) {
         let path = presetID.split('/');
         path.pop();  // remove brand name
-        return t('_tagging.presets.presets.' + path.join('/') + '.name');
+        const basePreset = allPresets[path.join('/')];
+        return basePreset?.name();
       }
       return null;
   };
@@ -135,7 +136,8 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       if (_this.suggestion) {
         let path = presetID.split('/');
         path.pop();  // remove brand name
-        return t.append('_tagging.presets.presets.' + path.join('/') + '.name');
+        const basePreset = allPresets[path.join('/')];
+        return basePreset?.nameLabel();
       }
       return null;
   };

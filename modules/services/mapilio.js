@@ -5,11 +5,12 @@ import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 
 import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } from '../util';
 import {geoExtent, geoScaleToZoom} from '../geo';
 import {localizer} from '../core/localizer';
+import { services } from './';
 
 const apiUrl = 'https://end.mapilio.com';
 const imageBaseUrl = 'https://cdn.mapilio.com/im';
@@ -140,6 +141,7 @@ function loadTileDataToCache(data, tile) {
             let isPano = sourceWidth % sourceHeight === 0;
 
             const d = {
+                service: 'photo',
                 loc: loc,
                 capture_time: feature.properties.capture_time,
                 id: feature.properties.id,
@@ -221,8 +223,6 @@ export default {
             sequences: { rtree: new RBush(), lineString: {} },
             requests: { loaded: {}, inflight: {} }
         };
-
-        _activeImage = null;
     },
 
     // Get visible images
@@ -307,15 +307,13 @@ export default {
     },
 
     updateUrlImage: function(imageKey) {
-        if (!window.mocha) {
-            var hash = utilStringQs(window.location.hash);
-            if (imageKey) {
-                hash.photo = 'mapilio/' + imageKey;
-            } else {
-                delete hash.photo;
-            }
-            window.location.replace('#' + utilQsString(hash, true));
+        const hash = utilStringQs(window.location.hash);
+        if (imageKey) {
+            hash.photo = 'mapilio/' + imageKey;
+        } else {
+            delete hash.photo;
         }
+        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
     },
 
     initViewer: function () {
@@ -576,17 +574,17 @@ export default {
     },
 
     showViewer:function (context) {
-        let wrap = context.container().select('.photoviewer')
-            .classed('hide', false);
-
-        let isHidden = wrap.selectAll('.photo-wrapper.mapilio-wrapper.hide').size();
+        const wrap = context.container().select('.photoviewer');
+        const isHidden = wrap.selectAll('.photo-wrapper.mapilio-wrapper.hide').size();
 
         if (isHidden) {
-            wrap
-                .selectAll('.photo-wrapper:not(.mapilio-wrapper)')
-                .classed('hide', true);
-
-            wrap
+            for (const service of Object.values(services)) {
+                if (service === this) continue;
+                if (typeof service.hideViewer === 'function') {
+                    service.hideViewer(context);
+                }
+            }
+            wrap.classed('hide', false)
                 .selectAll('.photo-wrapper.mapilio-wrapper')
                 .classed('hide', false);
         }
@@ -612,7 +610,6 @@ export default {
             .classed('currentView', false);
 
         this.setActiveImage();
-
         return this.setStyles(context, null);
     },
 
