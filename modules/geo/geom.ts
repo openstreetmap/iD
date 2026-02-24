@@ -285,7 +285,7 @@ export function geoGetSmallestSurroundingRectangle(points: Vec2[]) {
     var hull = d3_polygonHull(points)!;
     var centroid = d3_polygonCentroid(hull);
     var minArea = Infinity;
-    var ssrExtent: any = [];
+    var ssrExtent!: geoExtent;
     var ssrAngle = 0;
     var c1 = hull[0];
 
@@ -293,7 +293,7 @@ export function geoGetSmallestSurroundingRectangle(points: Vec2[]) {
         var c2 = (i === hull.length - 1) ? hull[0] : hull[i + 1];
         var angle = Math.atan2(c2[1] - c1[1], c2[0] - c1[0]);
         var poly = geoRotate(hull, -angle, centroid);
-        var extent = poly.reduce(function(extent: any, point) {
+        var extent = poly.reduce(function(extent, point) {
             return extent.extend(geoExtent(point));
         }, geoExtent());
 

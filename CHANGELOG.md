@@ -38,19 +38,65 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.38.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Show warning when attempting to paste but nothing has been copied ([#9401], thanks [@omsaraykar])
+* Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
+* Don't suggest values from Taginfo for tags with less than 100 uses, even if they're documented on the wiki ([#11794], thanks [@Kaushik4141])
+* Don't suggest values from Taginfo for keys that should only be used on changesets, such as `hashtags` ([#11697], thanks [@bhavyaKhatri2703])
 #### :scissors: Operations
+* Display reflection axis on the map while hovering the reflection operations in the edit menu ([#11774], thanks [@Kaushik4141])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Don't error on features with a sole `note` tag ([#11522])
+* Warn when two features cross each other on same `layer`, regardless of `bridge` / `tunnel` tags ([#10999], thanks [@homersimpsons])
 #### :bug: Bugfixes
+* Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
+* Fix error setting custom background ([#11862], thanks [@Kayd-06])
+* Fix crash when commenting/closing notes when the note is closed by another mapper in the meantime ([#8464])
 * Fix confusing 'Point should be a point' warning ([#11589], thanks [@k-yle])
 #### :earth_asia: Localization
+* Add Moroccan phone number formats ([#11651], thanks [@ilias52730])
+* The Languages field shows language names in your preferred language. ([#11699], thanks [@Razen04])
+* When viewing the help information for tags or presets, use locale-specific properties if available ([#11760], thanks [@k-yle])
+* Show country names in your preferred language and country flag emoji in the Country field dropdown ([#11783], thanks [@Razen04])
 #### :hourglass: Performance
+* iD is now twice as fast during long editing sessions ([#11861], thanks [@k-yle])
 #### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* Add dedicated styling for `highway=ladder` to make it distinguishable from `highway=steps` ([#11799], thanks [@bhavyaKhatri2703])
 #### :hammer: Development
+* Change package name to `@openstreetmap/id` to be able to publish releases on npm
+* Use Röntgen icon set directly from upstream npm package ([#11784], thanks [@tordans])
+* Replace deprecated `document.createEvent`/`initEvent` with modern [Event] constructor ([#11870], thanks [@JaiswalShivang])
+* Fix crash in country combo field when entering unrecognized ISO country codes ([#11904], thanks [@JaiswalShivang])
 
+
+[#8464]: https://github.com/openstreetmap/iD/issues/8464
+[#9401]: https://github.com/openstreetmap/iD/issues/9401
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
 [#11589]: https://github.com/openstreetmap/iD/pull/11589
+[#11636]: https://github.com/openstreetmap/iD/pull/11636
+[#11651]: https://github.com/openstreetmap/iD/pull/11651
+[#11697]: https://github.com/openstreetmap/iD/pull/11697
+[#11699]: https://github.com/openstreetmap/iD/pull/11699
+[#11733]: https://github.com/openstreetmap/iD/pull/11733
+[#11760]: https://github.com/openstreetmap/iD/pull/11760
+[#11774]: https://github.com/openstreetmap/iD/pull/11774
+[#11784]: https://github.com/openstreetmap/iD/pull/11784
+[#11794]: https://github.com/openstreetmap/iD/pull/11794
+[#11799]: https://github.com/openstreetmap/iD/issues/11799
+[#11783]: https://github.com/openstreetmap/iD/pull/11783
+[#11861]: https://github.com/openstreetmap/iD/pull/11861
+[#11862]: https://github.com/openstreetmap/iD/pull/11862
+[#11870]: https://github.com/openstreetmap/iD/issues/11870
+[#11904]: https://github.com/openstreetmap/iD/issues/11904
+[@ilias52730]: https://github.com/ilias52730
+[@Razen04]: https://github.com/Razen04
+[@homersimpsons]: https://github.com/homersimpsons
+[@omsaraykar]: https://github.com/omsaraykar
+[@Kaushik4141]: https://github.com/Kaushik4141
+[@Kayd-06]: https://github.com/Kayd-06
+[@JaiswalShivang]: https://github.com/JaiswalShivang
+
 
 # v2.37.3
 ##### 2025-10-31
@@ -65,7 +111,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # v2.37.2
 ##### 2025-10-30
 
-* Correctly resolve subtitles of NSI presets when base preset has a crossreferenced string ([#11527])
+* Correctly resolve subtitles of NSI presets when base preset has a cross-referenced string ([#11527])
 
 [#11527]: https://github.com/openstreetmap/iD/issues/11527
 

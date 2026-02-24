@@ -197,7 +197,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .remove();
 
         // enter/update
-        traces = traces.enter()
+        traces.enter()
             .append('path')
             .attr('class', 'sequence')
             .merge(traces)

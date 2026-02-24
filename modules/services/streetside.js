@@ -508,7 +508,7 @@ export default {
 
 
     // create working canvas for stitching together images
-    wrap = wrap
+    wrap
       .merge(wrapEnter)
       .call(setupCanvas, true);
 

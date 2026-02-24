@@ -1,6 +1,5 @@
 import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
 import { json as d3_json } from 'd3-fetch';
-import { escape } from 'lodash-es';
 
 import { t, localizer } from '../core/localizer';
 import { geoExtent, geoSphericalDistance } from '../geo';
@@ -69,26 +68,26 @@ export function rendererBackgroundSource(data) {
 
     source.name = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t('imagery.' + id_safe + '.name', { default: escape(_name) });
+        return t('imagery.' + id_safe + '.name', { default: _name });
     };
 
 
     source.label = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.append('imagery.' + id_safe + '.name', { default: escape(_name) });
+        return t.append('imagery.' + id_safe + '.name', { default: _name });
     };
 
 
     source.hasDescription = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).text;
+        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: _description }).text;
         return descriptionText !== '';
     };
 
 
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.append('imagery.' + id_safe + '.description', { default: escape(_description) });
+        return t.append('imagery.' + id_safe + '.description', { default: _description });
     };
 
 

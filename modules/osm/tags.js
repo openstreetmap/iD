@@ -69,6 +69,8 @@ export function osmSetAreaKeys(value) {
 // `highway` and `railway` are typically linear features, but there
 // are a few exceptions that should be treated as areas, even in the
 // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
+// similarly, some tags are both used as a primary key for area features,
+// but also as an attribute tag for linear features (e.g. `emergency=yes`)
 export var osmAreaKeysExceptions = {
     highway: {
         elevator: true,
@@ -92,6 +94,14 @@ export var osmAreaKeysExceptions = {
     },
     amenity: {
         bicycle_parking: true
+    },
+    emergency: {
+        yes: false,
+        no: false,
+        private: false,
+        designated: false,
+        destination: false,
+        official: false
     }
 };
 
@@ -103,6 +113,9 @@ export function osmTagSuggestingArea(tags) {
     var returnTags = {};
     for (var realKey in tags) {
         const key = osmRemoveLifecyclePrefix(realKey);
+        if (key in osmAreaKeysExceptions && osmAreaKeysExceptions[key][tags[realKey]] === false) {
+            continue;
+        }
         if (key in osmAreaKeys && !(tags[realKey] in osmAreaKeys[key])) {
             returnTags[realKey] = tags[realKey];
             return returnTags;
@@ -234,7 +247,8 @@ export var osmPavedTags = {
         'concrete': true,
         'chipseal': true,
         'concrete:lanes': true,
-        'concrete:plates': true
+        'concrete:plates': true,
+        'tiles': true
     },
     'tracktype': {
         'grade1': true
@@ -244,12 +258,15 @@ export var osmPavedTags = {
 // solid, if somewhat uncommon surfaces with a high range of smoothness
 export var osmSemipavedTags = {
     'surface': {
+        'bricks': true,
         'cobblestone': true,
-        'cobblestone:flattened': true,
         'unhewn_cobblestone': true,
         'sett': true,
         'paving_stones': true,
+        'grass_paver': true,
         'metal': true,
+        'metal_grid': true,
+        'fibre_reinforced_polymer_grate': true,
         'wood': true
     }
 };
@@ -372,4 +389,10 @@ export var osmSummableTags = new Set([
     'parking:both:capacity',
     'parking:left:capacity',
     'parking:left:capacity'
+]);
+
+// ISO country codes keys
+export const osmIsoCountryKeys = new Set([
+  'country',
+  'target'
 ]);
