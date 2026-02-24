@@ -20,6 +20,7 @@ import {
     utilNoAuto,
     utilRebind
 } from '../util';
+import { osmNote } from '../osm';
 
 
 export function uiNoteEditor(context) {
@@ -100,7 +101,7 @@ export function uiNoteEditor(context) {
     function noteSaveSection(selection) {
         var isSelected = (_note && _note.id === context.selectedNoteID());
         var noteSave = selection.selectAll('.note-save')
-            .data((isSelected ? [_note] : []), function(d) { return d.status + d.id; });
+            .data((isSelected ? [_note].filter(d => d.status !== 'hidden') : []), d => d.status + d.id);
 
         // exit
         noteSave.exit()
@@ -205,7 +206,7 @@ export function uiNoteEditor(context) {
                     clickSave(_note);
                 } else  {
                     noteSave.selectAll('.comment-button').node().focus();
-                    clickComment(_note);
+                    postCommentAndStatus(_note);
                 }
             }, 10);
         }
@@ -324,7 +325,7 @@ export function uiNoteEditor(context) {
 
         var isSelected = (_note && _note.id === context.selectedNoteID());
         var buttonSection = selection.selectAll('.buttons')
-            .data((isSelected ? [_note] : []), function(d) { return d.status + d.id; });
+            .data((isSelected ? [_note] : []), d => d.status + d.id);
 
         // exit
         buttonSection.exit()
@@ -376,11 +377,14 @@ export function uiNoteEditor(context) {
                 var andComment = (d.newComment ? '_comment' : '');
                 t.addOrUpdate('note.' + action + andComment)(d3_select(this));
             })
-            .on('click.status', clickStatus);
+            .on('click.status', function(d3_event, note) {
+                const setStatus = (note.status === 'open' ? 'closed' : 'open');
+                postCommentAndStatus.bind(this)(d3_event, note, setStatus);
+            });
 
         buttonSection.select('.comment-button')   // select and propagate data
             .attr('disabled', isSaveDisabled)
-            .on('click.comment', clickComment);
+            .on('click.comment', postCommentAndStatus);
 
 
         function isSaveDisabled(d) {
@@ -397,38 +401,36 @@ export function uiNoteEditor(context) {
             osm.removeNote(d);
         }
         context.enter(modeBrowse(context));
-        dispatch.call('change');
+        dispatch.call('change', d);
     }
 
 
-    function clickSave(d3_event, d) {
+    function clickSave(d3_event, note) {
         this.blur();    // avoid keeping focus on the button - #4641
         var osm = services.osm;
         if (osm) {
-            osm.postNoteCreate(d, function(err, note) {
-                dispatch.call('change', note);
-            });
+            osm.postNoteCreate(note, (err, d) => dispatch.call('change', d));
         }
     }
 
 
-    function clickStatus(d3_event, d) {
+    function postCommentAndStatus(d3_event, note, newStatus) {
         this.blur();    // avoid keeping focus on the button - #4641
         var osm = services.osm;
         if (osm) {
-            var setStatus = (d.status === 'open' ? 'closed' : 'open');
-            osm.postNoteUpdate(d, setStatus, function(err, note) {
-                dispatch.call('change', note);
-            });
-        }
-    }
-
-    function clickComment(d3_event, d) {
-        this.blur();    // avoid keeping focus on the button - #4641
-        var osm = services.osm;
-        if (osm) {
-            osm.postNoteUpdate(d, d.status, function(err, note) {
-                dispatch.call('change', note);
+            osm.postNoteUpdate(note, newStatus || note.status, function(err, d) {
+                if (!err) {
+                    dispatch.call('change', d);
+                } else if (err.status === 409) {
+                    // note was probably closed in the meantime: reload it - #8464
+                    osm.loadEntityNote(note.id, (err, d) => {
+                        dispatch.call('change', osmNote({ ...d.data[0], newComment: note.newComment }));
+                    });
+                } else if (err.status === 410) {
+                    // note was deleted/hidden by a moderator
+                    osm.removeNote(note);
+                    dispatch.call('change', osmNote({ id: note.id, status: 'hidden', comments: [...note.comments, { action: 'hidden' }] }));
+                }
             });
         }
     }

@@ -57,6 +57,8 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
 * __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).
 * __`source`__ - Prefills the changeset source.<br/>
   _Example:_ `source=Bing%3BMapillary`
+* __`theme`__ - Specifies whether to show the editor in `light` or `dark` mode.<br/>
+  _Example:_ `theme=dark`
 * __`validationDisable`__ - The issues identified by these types/subtypes will be disabled (i.e. Issues will not be shown at all). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
   _Example:_ `validationDisable=crossing_ways/highway*,crossing_ways/tunnel*`
 * __`validationSuggestion`__ - The issues identified by these types/subtypes will be treated as suggestions (i.e. Issues will only be surfaced to the user while inspecting the feature, not during changeset upload). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>

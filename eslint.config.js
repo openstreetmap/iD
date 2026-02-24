@@ -84,6 +84,7 @@ export default tseslint.config(
        'no-template-curly-in-string': 'warn',
        'no-throw-literal': 'error',
        'no-trailing-spaces': 'warn',
+       'no-unassigned-vars': 'warn',
        'no-undef-init': 'warn',
        'no-unexpected-multiline': 'error',
        'no-unmodified-loop-condition': 'error',
@@ -92,6 +93,7 @@ export default tseslint.config(
        'no-unreachable-loop': 'warn',
        'no-unused-expressions': 'error',
        'no-use-before-define': ['off', 'nofunc'],
+       'no-useless-assignment': 'warn',
        'no-useless-backreference': 'warn',
        'no-useless-call': 'warn',
        'no-useless-computed-key': 'warn',
@@ -130,16 +132,16 @@ export default tseslint.config(
       globals: {
         ...globals.node,
         ...globals.jest,
-        'before': 'readonly',
         'after': 'readonly',
+        'before': 'readonly',
         'd3': 'readonly',
-        'iD': 'readonly',
-        'vi': 'readonly',
-        'sinon': 'readonly',
-        'happen': 'readonly',
+        'expect': 'writable',
         'fetchMock': 'readonly',
+        'happen': 'readonly',
+        'iD': 'readonly',
         'jsdom': 'readonly',
-        'expect': 'writable'
+        'sinon': 'readonly',
+        'vi': 'readonly'
       }
     },
     rules: {
@@ -158,7 +160,7 @@ export default tseslint.config(
   {
     files: ['eslint.config.js'],
     rules: {
-      'sort-keys': ['error', 'asc', { minKeys: 20 }]
+      'sort-keys': ['error', 'asc', { minKeys: 5 }]
     }
   }
 );

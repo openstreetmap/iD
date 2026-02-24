@@ -220,16 +220,14 @@ export function svgSegmentWay(way, graph, activeID) {
     }
 
     function getWaySegments() {
-        var isActiveWay = (way.nodes.indexOf(activeID) !== -1);
-        var features = { passive: [], active: [] };
-        var start = {};
-        var end = {};
-        var node, type;
+        const isActiveWay = (way.nodes.indexOf(activeID) !== -1);
+        const features = { passive: [], active: [] };
+        let start = {};
 
         for (var i = 0; i < way.nodes.length; i++) {
-            node = graph.entity(way.nodes[i]);
-            type = svgPassiveVertex(node, graph, activeID);
-            end = { node: node, type: type };
+            const node = graph.entity(way.nodes[i]);
+            const type = svgPassiveVertex(node, graph, activeID);
+            const end = { node: node, type: type };
 
             if (start.type !== undefined) {
                 if (start.node.id === activeID || end.node.id === activeID) {

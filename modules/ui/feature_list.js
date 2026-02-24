@@ -171,7 +171,7 @@ export function uiFeatureList(context) {
             // A location search takes priority over an ID search
             const idMatchResult = !locationMatch && idMatch(q);
             const idResult = [];
-            if (idMatch) {
+            if (idMatchResult) {
                 const elemType = idMatchResult.type;
                 const elemId = idMatchResult.id;
                 idResult.push({

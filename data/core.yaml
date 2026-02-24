@@ -708,7 +708,7 @@ en:
       title: Zoom To Selection
       no_selection: Nothing to zoom to.
     show_more: Show More
-    last_modified: Last modified {timeago} by {user}
+    last_touched: Last touched {timeago} by {user}
     view_on_osm: View on openstreetmap.org
     view_on_osmose: View on osmose.openstreetmap.fr
     view_on_keepRight: View on keepright.at
@@ -1678,7 +1678,7 @@ en:
       offset_change: "Press the small triangle buttons to adjust the imagery offset in small steps, or hold the {leftclick} left mouse button and drag within the gray square to slide the imagery into alignment."
     streetlevel:
       title: Street Level Photos
-      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), and [KartaView](https://kartaview.org)."
+      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from a variety of different providers, such as [Panoramax](https://panoramax.fr), [Mapillary](https://www.mapillary.com), or [KartaView](https://kartaview.org)."
       using_h: "Using Street Level Photos"
       using: "To use street level photos for mapping, open the {data_icon} **{map_data}** panel on the side of the map to enable or disable the available photo overlays."
       photos: "When enabled, the photo overlay displays a line along the sequence of photos. At higher zoom levels, a circle marks at each photo location, and at even higher zoom levels, a cone indicates the direction the camera was facing when the photo was taken."
@@ -1876,6 +1876,10 @@ en:
         message: '{feature} has an invalid email address'
         message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
+      website:
+        message: '{feature} has an invalid URL'
+        message_multi: '{feature} has multiple invalid URLs'
+        reference: 'URLs must start with "http://" or "https://".'
     line_as_area:
       message: '{feature} should be a line, not an area'
     line_as_point:
@@ -1993,6 +1997,12 @@ en:
       add_a_culvert:
         title: Add a culvert
         annotation: Added a culvert.
+      add_protocol_http:
+        title: Set HTTP for the URL
+        annotation: Set HTTP for the URL.
+      add_protocol_https:
+        title: Set HTTPS for the URL
+        annotation: Set HTTPS for the URL.
       address_the_concern:
         title: Address the concern
       connect_almost_junction:
@@ -2032,6 +2042,9 @@ en:
       move_tags:
         title: Move the tags
         annotation: Moved tags.
+      move_value_to_wikimedia_commons:
+        title: Set image as from Wikimedia Commons
+        annotation: Set image as from Wikimedia Commons.
       remove_from_relation:
         title: Remove from relation
       remove_generic_name:

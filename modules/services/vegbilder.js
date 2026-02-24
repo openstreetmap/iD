@@ -6,8 +6,8 @@ import { iso1A2Codes } from '@rapideditor/country-coder';
 import { t, localizer } from '../core/localizer';
 import { utilQsString, utilTiler, utilRebind, utilArrayUnion, utilStringQs} from '../util';
 import {geoExtent, geoScaleToZoom, geoVecAngle, geoVecEqual} from '../geo';
-import pannellumPhotoFrame from './pannellum_photo';
-import planePhotoFrame from './plane_photo';
+import { pannellumPhotoFrame } from './pannellum_photo';
+import { planePhotoFrame } from './plane_photo';
 import { services } from './';
 
 
@@ -439,8 +439,8 @@ export default {
       .text('►');
 
     _loadViewerPromise = Promise.all([
-      pannellumPhotoFrame.init(context, wrapEnter),
-      planePhotoFrame.init(context, wrapEnter)
+      pannellumPhotoFrame(context, wrapEnter),
+      planePhotoFrame(context, wrapEnter)
     ]).then(([pannellumPhotoFrame, planePhotoFrame]) => {
       _pannellumFrame = pannellumPhotoFrame;
       _pannellumFrame.event.on('viewerChanged', () => dispatch.call('viewerChanged'));

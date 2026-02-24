@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import chalk from 'chalk';
 import fs from 'node:fs';
+import { styleText } from 'node:util';
 import prettyStringify from 'json-stringify-pretty-compact';
 import shell from 'shelljs';
 import YAML from 'js-yaml';
@@ -36,8 +36,8 @@ if (process.argv[1].indexOf('build_data.js') > -1) {
 function buildData() {
   if (_currBuild) return _currBuild;
 
-  const START = '🏗   ' + chalk.yellow('Building data...');
-  const END = '👍  ' + chalk.green('data built');
+  const START = '🏗   ' + styleText('yellow', 'Building data...');
+  const END = '👍  ' + styleText('green', 'data built');
 
   console.log('');
   console.log(START);

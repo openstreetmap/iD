@@ -7,8 +7,8 @@ import { VectorTile } from '@mapbox/vector-tile';
 import { utilRebind, utilTiler, utilQsString, utilStringQs, utilUniqueDomId} from '../util';
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { t, localizer } from '../core/localizer';
-import pannellumPhotoFrame from './pannellum_photo';
-import planePhotoFrame from './plane_photo';
+import { pannellumPhotoFrame } from './pannellum_photo';
+import { planePhotoFrame } from './plane_photo';
 import { services } from './';
 
 
@@ -677,8 +677,8 @@ export default {
 
         // Register viewer resize handler
         _loadViewerPromise = Promise.all([
-            pannellumPhotoFrame.init(context, wrapEnter),
-            planePhotoFrame.init(context, wrapEnter)
+            pannellumPhotoFrame(context, wrapEnter),
+            planePhotoFrame(context, wrapEnter)
           ]).then(([pannellumPhotoFrame, planePhotoFrame]) => {
             _pannellumFrame = pannellumPhotoFrame;
             _pannellumFrame.event.on('viewerChanged', () => dispatch.call('viewerChanged'));

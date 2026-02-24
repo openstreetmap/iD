@@ -1,5 +1,5 @@
 import http from 'node:http';
-import chalk from 'chalk';
+import { styleText } from 'node:util';
 import gaze from 'gaze';
 import serve from 'serve-handler';
 import { buildCSS } from './build_css.js';
@@ -30,5 +30,5 @@ const server = http.createServer((request, response) => {
 
 server.listen(port, () => {
   /* eslint-disable no-console */
-  console.log(chalk.yellow(`Listening on ${port}`));
+  console.log(styleText('yellow', `Listening on ${port}`));
 });

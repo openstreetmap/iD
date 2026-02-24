@@ -1,10 +1,13 @@
 import esbuild from 'esbuild';
 import fs from 'node:fs';
-import parse from 'minimist';
+import { parseArgs } from 'node:util';
 import envs from './envs.js';
 import browserslistToEsbuild from 'browserslist-to-esbuild';
 
-let args = parse(process.argv.slice(2), {boolean: true});
+let args = parseArgs({options: {
+  watch: { type: 'boolean' },
+  stats: { type: 'boolean' }
+}}).values;
 
 const context = await esbuild.context({
   define: envs,
