@@ -553,7 +553,6 @@ export function uiCommit(context) {
         Object.keys(changed).forEach(function(k) {
             var v = changed[k];
             k = context.cleanTagKey(k);
-            if (readOnlyTags.some(tag => k.match(tag))) return;
 
             if (v === undefined) {
                 delete tags[k];
