@@ -53,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix error setting custom background ([#11862], thanks [@Kayd-06])
 * Fix crash when commenting/closing notes when the note is closed by another mapper in the meantime ([#8464])
 * Fix `readOnlyTags` protection bypass in changeset editor where `indexOf` was used instead of regex matching ([#11911], thanks [@JaiswalShivang])
+* Fix confusing 'Point should be a point' warning ([#11589], thanks [@k-yle])
 #### :earth_asia: Localization
 * Add Moroccan phone number formats ([#11651], thanks [@ilias52730])
 * The Languages field shows language names in your preferred language. ([#11699], thanks [@Razen04])
@@ -67,11 +68,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Change package name to `@openstreetmap/id` to be able to publish releases on npm
 * Use Röntgen icon set directly from upstream npm package ([#11784], thanks [@tordans])
 * Replace deprecated `document.createEvent`/`initEvent` with modern [Event] constructor ([#11870], thanks [@JaiswalShivang])
+* Fix crash in country combo field when entering unrecognized ISO country codes ([#11904], thanks [@JaiswalShivang])
 
 
 [#8464]: https://github.com/openstreetmap/iD/issues/8464
 [#9401]: https://github.com/openstreetmap/iD/issues/9401
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
+[#11589]: https://github.com/openstreetmap/iD/pull/11589
 [#11636]: https://github.com/openstreetmap/iD/pull/11636
 [#11651]: https://github.com/openstreetmap/iD/pull/11651
 [#11697]: https://github.com/openstreetmap/iD/pull/11697
@@ -85,6 +88,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11783]: https://github.com/openstreetmap/iD/pull/11783
 [#11861]: https://github.com/openstreetmap/iD/pull/11861
 [#11862]: https://github.com/openstreetmap/iD/pull/11862
+[#11870]: https://github.com/openstreetmap/iD/issues/11870
+[#11904]: https://github.com/openstreetmap/iD/issues/11904
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 [@homersimpsons]: https://github.com/homersimpsons
