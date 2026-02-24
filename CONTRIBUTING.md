@@ -355,20 +355,20 @@ Additionally here is a step-by-step workflow example for beginners:
 
 8. Push Changes to your GitHub account `git push origin <working-branch-name>`. The next push also works without the branch name: `git push origin`.
 
-9.  Go to GitHub for your fork of iD at https://github.com/{{yourgithubaccount}}/iD. GitHub will already know about your recently pushed branch, and ask if you want to create a Pull Request for it.
+9.  Go to GitHub for your fork of iD at https://github.com/{{yourgithubaccount}}/iD. GitHub will already know about your recently pushed branch, and ask if you want to create a pull request for it.
 
-10. Your Pull Request will be seen by the maintainers of iD. They can merge it or ask for changes. You can update your Pull Request with Steps 7 and 8, Step 9 is required only once per Pull Request.
+10. Your pull request will be seen by the maintainers of iD. They can merge it or ask for changes. You can update your pull Request with Steps 7 and 8, Step 9 is required only once per pull request.
 
 ### Clean Up
 
-After your Pull Request gets merged into the main repository
+After your pull request gets merged into the main repository
 you can clean up by deleting the branch from your GitHub-iD-Clone and your local directory
 
 `git push --delete origin <working-branch-name> ; git branch -d <working-branch-name>`
 
 ### Restart with another PR after some while
 
-If you did not use your copy of iD for some while, other Pull Request gets merged and you don't have the latest version of iD. You can replace your `develop` with whatever is in our `develop`. If you have not done so yet: Add the main repo as an "upstream" remote:
+If you did not use your copy of iD for some while, other pull request gets merged and you don't have the latest version of iD. You can replace your `develop` with whatever is in our `develop`. If you have not done so yet: Add the main repo as an "upstream" remote:
 
 `git remote add upstream git@github.com:openstreetmap/iD.git`
 
@@ -377,10 +377,10 @@ Then change to the `develop` branch and get everything from upstream (the main r
 `git checkout develop ; git fetch --all && git reset --hard upstream/develop`
 
 
-## Submitting directly in the Browser
+## Submitting directly in the browser
 
-If you want to submit Documentation, Spelling improvements, etc. which do not need testing,
-you can do this with your browser in GitHub. Please don't use this to change Code and create untested Pull Requests.
+If you want to submit documentation, spelling improvements, etc. which do not need testing,
+you can do this with your browser in GitHub. Please don't use this to change code and create untested pull requests.
 You also need a GitHub account and may find this [Article about Editing](https://help.github.com/articles/editing-files-in-another-user-s-repository/) and this [Article about Pull Requests](https://help.github.com/articles/about-pull-requests/) useful.
 
 ### Step by Step with Browser
@@ -391,7 +391,7 @@ Additionally here is a step-by-step workflow example for beginners:
 
 2. Go to the [iD main repository](https://github.com/openstreetmap/iD) and fork iD into your GitHub account (Fork is top right).
 
-3. Create a New Branch by clicking on "Branch: develop" and entering the name of a new branch (choose a descriptive name).
+3. Create a new branch by clicking on "Branch: develop" and entering the name of a new branch (choose a descriptive name).
 
 4. Navigate to the file you want to edit and click on "Edit this file" and apply your changes to the file. Alternatively, you could also "Create a new file".
 
