@@ -310,12 +310,15 @@ export function uiPopover(klass) {
 
                 if (placement === 'top' || placement === 'bottom') {
 
+                    var popoverRect = popoverSelection.node().getBoundingClientRect();
+                    var scrollNodeRect = scrollNode.getBoundingClientRect();
+
                     var initialPosX = position.x;
 
-                    if (position.x + popoverFrame.w > scrollNode.offsetWidth - 10) {
-                        position.x = scrollNode.offsetWidth - 10 - popoverFrame.w;
-                    } else if (position.x < 10) {
-                        position.x = 10;
+                    if (popoverRect.right > scrollNodeRect.right - 10) {
+                        position.x -= popoverRect.right - (scrollNodeRect.right - 10);
+                    } else if (popoverRect.left < scrollNodeRect.left) {
+                        position.x += (scrollNodeRect.left + 10) - popoverRect.left;
                     }
 
                     const arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
