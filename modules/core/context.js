@@ -478,7 +478,7 @@ export function coreContext() {
 
 
   /* reset (aka flush) */
-  context.reset = context.flush = () => {
+  context.reset = () => {
     context.debouncedSave.cancel();
 
     Array.from(_deferred).forEach(handle => {
@@ -504,6 +504,7 @@ export function coreContext() {
 
     return context;
   };
+  context.flush = context.reset;
 
 
   /* Projections */

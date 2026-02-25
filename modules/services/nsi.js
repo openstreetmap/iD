@@ -128,7 +128,8 @@ function loadNsiData() {
         ids:           new Map()               // Map (id -> NSI item)
       };
 
-      const matcher = _nsi.matcher = new Matcher();
+      const matcher = new Matcher();
+      _nsi.matcher = matcher;
       matcher.buildMatchIndex(_nsi.data);
 
 // *** BEGIN HACK ***

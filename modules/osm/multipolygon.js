@@ -109,7 +109,8 @@ export function osmJoinWays(toJoin, graph) {
                     item = reverse(item);
                     break;
                 } else {
-                    fn = nodes = null;
+                    fn = null;
+                    nodes = null;
                 }
             }
 
