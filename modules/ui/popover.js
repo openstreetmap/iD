@@ -308,7 +308,7 @@ export function uiPopover(klass) {
 
             if (scrollNode) {
 
-                if ((placement === 'top' || placement === 'bottom')) {
+                if (placement === 'top' || placement === 'bottom') {
 
                     var initialPosX = position.x;
 
@@ -318,14 +318,14 @@ export function uiPopover(klass) {
                         position.x = 10;
                     }
 
-                    var arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
+                    const arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
                     // keep the arrow centered on the button, or as close as possible
-                    var arrowPosX = Math.min(Math.max(popoverFrame.w / 2 - (position.x - initialPosX), 10), popoverFrame.w - 10);
+                    const arrowPosX = Math.min(Math.max(popoverFrame.w / 2 - (position.x - initialPosX), 10), popoverFrame.w - 10);
                     arrow.style('left', ~~arrowPosX + 'px');
-                } else if (placement === "left" || placement === "right") {
+                } else if (placement === 'left' || placement === 'right') {
 
                     var popoverRect = popoverSelection.node().getBoundingClientRect();
-                    var scrollNodeRect = scrollNode.getBoundingClientRect()
+                    var scrollNodeRect = scrollNode.getBoundingClientRect();
 
                     var initialPosY = position.y;
 
@@ -335,9 +335,9 @@ export function uiPopover(klass) {
                         position.y += (scrollNodeRect.top + 10) - popoverRect.top;
                     }
 
-                    var arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
+                    const arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
                     // keep the arrow centered on the button, or as close as possible
-                    var arrowPosY = Math.min(Math.max(popoverFrame.h / 2 - (position.y - initialPosY), 0), popoverFrame.h - 30);
+                    const arrowPosY = Math.min(Math.max(popoverFrame.h / 2 - (position.y - initialPosY), 0), popoverFrame.h - 30);
                     arrow.style('top', ~~arrowPosY + 'px');
                 }
             }
