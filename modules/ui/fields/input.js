@@ -108,6 +108,15 @@ export function uiFieldText(field, context) {
 
         wrap.call(_lengthIndicator);
 
+        if (wrap.select('.field-validation-message').empty()) {
+            wrap.append('div')
+                .attr('class', 'field-validation-message')
+                .style('display', 'none')
+                .style('font-size', '12px')
+                .style('margin-top', '4px')
+                .style('color', '#888');
+        }
+
         if (field.type === 'tel') {
             updatePhonePlaceholder();
 
@@ -435,6 +444,28 @@ export function uiFieldText(field, context) {
         return function() {
             var t = {};
             var val = utilGetSetValue(input);
+            const validationMessage = wrap.select('.field-validation-message');
+
+            if (field.pattern && val) {
+                let regex = null;
+
+                try {
+                    regex = new RegExp(field.pattern);
+                } catch (e) {
+                    regex = null;
+                }
+
+                if (regex && !regex.test(val)) {
+                    validationMessage
+                        .style('display', 'block')
+                        .text('Value does not match expected format');
+                } else {
+                    validationMessage.style('display', 'none');
+                }
+
+            } else {
+                validationMessage.style('display', 'none');
+            }
             if (!onInput) val = context.cleanTagValue(val);
 
             // don't override multiple values with blank string
