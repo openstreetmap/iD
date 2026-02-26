@@ -1140,45 +1140,18 @@ export default {
                     delete _tileCache.inflight[tile.id];
                     delete _tileCache.toLoad[tile.id];
 
-                    if (depth < MAX_SUBDIVISION_DEPTH) {
-
-                        var extent = tile.extent.bbox();
-                        var minLon = extent.minX;
-                        var minLat = extent.minY;
-                        var maxLon = extent.maxX;
-                        var maxLat = extent.maxY;
-
-                        var midLon = (minLon + maxLon) / 2;
-                        var midLat = (minLat + maxLat) / 2;
-
-                        var boxes = [
-                            [minLon, minLat, midLon, midLat],
-                            [midLon, minLat, maxLon, midLat],
-                            [minLon, midLat, midLon, maxLat],
-                            [midLon, midLat, maxLon, maxLat]
-                        ];
-
-                        boxes.forEach(function(bboxArr, i) {
+                    if (depth < _maxSubdivisionDepth) {
+                        var quadrants = tile.extent.split();
+                        quadrants.forEach(function(extent, i) {
 
                             var childTile = {
                                 id: tile.id + '-' + depth + '-' + i,
-                                extent: {
-                                    toParam: function() { return bboxArr.join(','); },
-                                    bbox: function() {
-                                        return {
-                                            minX: bboxArr[0],
-                                            minY: bboxArr[1],
-                                            maxX: bboxArr[2],
-                                            maxY: bboxArr[3]
-                                        };
-                                    }
-                                }
+                                extent: extent
                             };
 
                             this.loadTile(childTile, callback, depth + 1);
 
                         }.bind(this));
-
                         return;
                     }
 
