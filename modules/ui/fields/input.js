@@ -110,11 +110,7 @@ export function uiFieldText(field, context) {
 
         if (wrap.select('.field-validation-message').empty()) {
             wrap.append('div')
-                .attr('class', 'field-validation-message')
-                .style('display', 'none')
-                .style('font-size', '12px')
-                .style('margin-top', '4px')
-                .style('color', '#888');
+                .attr('class', 'field-validation-message hide');
         }
 
         if (field.type === 'tel') {
@@ -441,6 +437,7 @@ export function uiFieldText(field, context) {
 
 
     function change(onInput) {
+        
         return function() {
             var t = {};
             var val = utilGetSetValue(input);
@@ -458,7 +455,7 @@ export function uiFieldText(field, context) {
                 if (regex && !regex.test(val)) {
                     validationMessage
                         .style('display', 'block')
-                        .text('Value does not match expected format');
+                        .text(localizer.t('validation.value_does_not_match_expected_format'));
                 } else {
                     validationMessage.style('display', 'none');
                 }
