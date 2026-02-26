@@ -48,7 +48,7 @@ var _userChangesets;
 var _userDetails;
 var _off;
 var _isLoading = false;
-var MAX_SUBDIVISION_DEPTH = 3;
+var _maxSubdivisionDepth = 3;
 
 // set a default but also load this from the API status
 var _maxWayNodes = 2000;
