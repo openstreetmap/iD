@@ -393,12 +393,11 @@ export function utilCombinedTags(entityIDs, graph) {
         });
     });
 
-    for (var key in tags) {
+    for (let key in tags) {
         if (!Array.isArray(tags[key])) continue;
 
         // sort values by frequency then alphabetically
         tags[key] = tags[key].sort(function(val1, val2) {
-            var key = key; // capture
             var count2 = tagCounts[key + '=' + val2];
             var count1 = tagCounts[key + '=' + val1];
             if (count2 !== count1) {
