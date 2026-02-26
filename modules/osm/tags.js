@@ -30,7 +30,7 @@ const uninterestingKeyRegex = /^(source(_ref)?|tiger):/;
  */
 export function osmIsInterestingTag(key) {
     if (uninterestingKeys.has(key)) return false;
-    if (uninterestingKeyRegex.test(key)) return false;
+    if (uninterestingKeyRegex.test(key))  return false;
     return true;
 }
 
