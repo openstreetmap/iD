@@ -83,11 +83,7 @@ export function uiKyObliqueViewer() {
                 imageData.data[i] = rgb[i];
             }
 
-            // readRGB returns RGB, we need RGBA for imageData
-            // geotiff.js readRGB often returns a Uint8Array with 3 values per pixel
-            // But canvas needs 4. Let's adjust.
-            // Wait, geotiff.js readRGB might return typed array.
-
+            // geotiff.js readRGB returns RGB, we need RGBA for imageData
             const data = imageData.data;
             let j = 0;
             for (let i = 0; i < rgb.length; i += 3) {
@@ -100,7 +96,7 @@ export function uiKyObliqueViewer() {
             ctx.putImageData(imageData, 0, 0);
 
             const attribution = d3_select('.ky-oblique-wrapper .photo-attribution');
-            attribution.text(`KyFromAbove - Shot ID: ${_image.key} - Angle: ${_angle}`);
+            attribution.text('KyFromAbove');
 
         } catch {
             // Failed to load COG

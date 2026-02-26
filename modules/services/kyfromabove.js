@@ -40,6 +40,7 @@ async function loadTile(tile) {
 
   try {
     const data = await d3_json(url, { signal: controller.signal });
+    /* eslint-disable-next-line require-atomic-updates */
     _kyCache.loaded[tile.id] = true;
     delete _kyCache.inflight[tile.id];
 
