@@ -14,60 +14,97 @@ export function osmLanes(entity) {
 
     // parse the piped string 'x|y|z' format
     var turnLanes = {};
-    turnLanes.unspecified = parseTurnLanes(tags['turn:lanes']);
-    turnLanes.forward = parseTurnLanes(tags['turn:lanes:forward']);
-    turnLanes.backward = parseTurnLanes(tags['turn:lanes:backward']);
+    turnLanes.unspecified = parseTurnLanes(tags['turn:lanes'], laneCount);
+    turnLanes.forward = parseTurnLanes(tags['turn:lanes:forward'], forward);
+    turnLanes.backward = parseTurnLanes(tags['turn:lanes:backward'], backward);
 
     var maxspeedLanes = {};
-    maxspeedLanes.unspecified = parseMaxspeedLanes(tags['maxspeed:lanes'], maxspeed);
-    maxspeedLanes.forward = parseMaxspeedLanes(tags['maxspeed:lanes:forward'], maxspeed);
-    maxspeedLanes.backward = parseMaxspeedLanes(tags['maxspeed:lanes:backward'], maxspeed);
+    maxspeedLanes.unspecified = parseMaxspeedLanes(tags['maxspeed:lanes'], maxspeed, laneCount);
+    maxspeedLanes.forward = parseMaxspeedLanes(tags['maxspeed:lanes:forward'], maxspeed, forward);
+    maxspeedLanes.backward = parseMaxspeedLanes(tags['maxspeed:lanes:backward'], maxspeed, backward);
 
     var psvLanes = {};
-    psvLanes.unspecified = parseMiscLanes(tags['psv:lanes']);
-    psvLanes.forward = parseMiscLanes(tags['psv:lanes:forward']);
-    psvLanes.backward = parseMiscLanes(tags['psv:lanes:backward']);
+    psvLanes.unspecified = parseMiscLanes(tags['psv:lanes'], laneCount);
+    psvLanes.forward = parseMiscLanes(tags['psv:lanes:forward'], forward);
+    psvLanes.backward = parseMiscLanes(tags['psv:lanes:backward'], backward);
 
     var busLanes = {};
-    busLanes.unspecified = parseMiscLanes(tags['bus:lanes']);
-    busLanes.forward = parseMiscLanes(tags['bus:lanes:forward']);
-    busLanes.backward = parseMiscLanes(tags['bus:lanes:backward']);
+    busLanes.unspecified = parseMiscLanes(tags['bus:lanes'], laneCount);
+    busLanes.forward = parseMiscLanes(tags['bus:lanes:forward'], forward);
+    busLanes.backward = parseMiscLanes(tags['bus:lanes:backward'], backward);
 
     var taxiLanes = {};
-    taxiLanes.unspecified = parseMiscLanes(tags['taxi:lanes']);
-    taxiLanes.forward = parseMiscLanes(tags['taxi:lanes:forward']);
-    taxiLanes.backward = parseMiscLanes(tags['taxi:lanes:backward']);
+    taxiLanes.unspecified = parseMiscLanes(tags['taxi:lanes'], laneCount);
+    taxiLanes.forward = parseMiscLanes(tags['taxi:lanes:forward'], forward);
+    taxiLanes.backward = parseMiscLanes(tags['taxi:lanes:backward'], backward);
 
     var hovLanes = {};
-    hovLanes.unspecified = parseMiscLanes(tags['hov:lanes']);
-    hovLanes.forward = parseMiscLanes(tags['hov:lanes:forward']);
-    hovLanes.backward = parseMiscLanes(tags['hov:lanes:backward']);
+    hovLanes.unspecified = parseMiscLanes(tags['hov:lanes'], laneCount);
+    hovLanes.forward = parseMiscLanes(tags['hov:lanes:forward'], forward);
+    hovLanes.backward = parseMiscLanes(tags['hov:lanes:backward'], backward);
 
     var hgvLanes = {};
-    hgvLanes.unspecified = parseMiscLanes(tags['hgv:lanes']);
-    hgvLanes.forward = parseMiscLanes(tags['hgv:lanes:forward']);
-    hgvLanes.backward = parseMiscLanes(tags['hgv:lanes:backward']);
+    hgvLanes.unspecified = parseMiscLanes(tags['hgv:lanes'], laneCount);
+    hgvLanes.forward = parseMiscLanes(tags['hgv:lanes:forward'], forward);
+    hgvLanes.backward = parseMiscLanes(tags['hgv:lanes:backward'], backward);
 
     var bicyclewayLanes = {};
-    bicyclewayLanes.unspecified = parseBicycleWay(tags['bicycleway:lanes']);
-    bicyclewayLanes.forward = parseBicycleWay(tags['bicycleway:lanes:forward']);
-    bicyclewayLanes.backward = parseBicycleWay(tags['bicycleway:lanes:backward']);
+    bicyclewayLanes.unspecified = parseBicycleWay(tags['bicycleway:lanes'], laneCount);
+    bicyclewayLanes.forward = parseBicycleWay(tags['bicycleway:lanes:forward'], forward);
+    bicyclewayLanes.backward = parseBicycleWay(tags['bicycleway:lanes:backward'], backward);
 
-    var lanesObj = {
-        forward: [],
-        backward: [],
-        unspecified: []
-    };
+    var lanesObj = [];
 
     // map forward/backward/unspecified of each lane type to lanesObj
-    mapToLanesObj(lanesObj, turnLanes, 'turnLane');
-    mapToLanesObj(lanesObj, maxspeedLanes, 'maxspeed');
-    mapToLanesObj(lanesObj, psvLanes, 'psv');
-    mapToLanesObj(lanesObj, busLanes, 'bus');
-    mapToLanesObj(lanesObj, taxiLanes, 'taxi');
-    mapToLanesObj(lanesObj, hovLanes, 'hov');
-    mapToLanesObj(lanesObj, hgvLanes, 'hgv');
-    mapToLanesObj(lanesObj, bicyclewayLanes, 'bicycleway');
+
+    if (tags['lanes:forward'] || tags['lanes:backward'] || tags['lanes:both_ways']) {
+        if (backward > 0) {
+            mapToLanesObj(lanesObj, Array(backward).fill(''), 'placeholder', 'backward');
+        }
+        if (bothways > 0) {
+            mapToLanesObj(lanesObj, Array(bothways).fill(''), 'placeholder', 'bothways');
+        }
+        if (forward > 0) {
+            mapToLanesObj(lanesObj, Array(forward).fill(''), 'placeholder', 'forward');
+        }
+    } else {
+        mapToLanesObj(lanesObj, Array(laneCount).fill(''), 'placeholder', isOneWay ? 'forward' : 'unspecified');
+    }
+
+    mapToLanesObj(lanesObj, turnLanes.unspecified, 'turnLane', 'unspecified');
+    mapToLanesObj(lanesObj, turnLanes.forward, 'turnLane', 'forward');
+    mapToLanesObj(lanesObj, turnLanes.backward, 'turnLane', 'backward');
+
+    mapToLanesObj(lanesObj, maxspeedLanes.unspecified, 'maxspeed', 'unspecified');
+    mapToLanesObj(lanesObj, maxspeedLanes.forward, 'maxspeed', 'forward');
+    mapToLanesObj(lanesObj, maxspeedLanes.backward, 'maxspeed', 'backward');
+
+    mapToLanesObj(lanesObj, psvLanes.unspecified, 'psv', 'unspecified');
+    mapToLanesObj(lanesObj, psvLanes.forward, 'psv', 'forward');
+    mapToLanesObj(lanesObj, psvLanes.backward, 'psv', 'backward');
+
+    mapToLanesObj(lanesObj, busLanes.unspecified, 'bus', 'unspecified');
+    mapToLanesObj(lanesObj, busLanes.forward, 'bus', 'forward');
+    mapToLanesObj(lanesObj, busLanes.backward, 'bus', 'backward');
+
+    mapToLanesObj(lanesObj, taxiLanes.unspecified, 'taxi', 'unspecified');
+    mapToLanesObj(lanesObj, taxiLanes.forward, 'taxi', 'forward');
+    mapToLanesObj(lanesObj, taxiLanes.backward, 'taxi', 'backward');
+
+    mapToLanesObj(lanesObj, hovLanes.unspecified, 'hov', 'unspecified');
+    mapToLanesObj(lanesObj, hovLanes.forward, 'hov', 'forward');
+    mapToLanesObj(lanesObj, hovLanes.backward, 'hov', 'backward');
+
+    mapToLanesObj(lanesObj, hgvLanes.unspecified, 'hgv', 'unspecified');
+    mapToLanesObj(lanesObj, hgvLanes.forward, 'hgv', 'forward');
+    mapToLanesObj(lanesObj, hgvLanes.backward, 'hgv', 'backward');
+
+    mapToLanesObj(lanesObj, bicyclewayLanes.unspecified, 'bicycleway', 'unspecified');
+    mapToLanesObj(lanesObj, bicyclewayLanes.forward, 'bicycleway', 'forward');
+    mapToLanesObj(lanesObj, bicyclewayLanes.backward, 'bicycleway', 'backward');
+
+    // remove placeholder before returning
+    lanesObj.forEach(function(l) { delete l.placeholder; delete l.innerIndex; });
 
     return {
         metadata: {
@@ -161,7 +198,7 @@ function parseLaneDirections(tags, isOneWay, laneCount) {
 }
 
 
-function parseTurnLanes(tag){
+function parseTurnLanes(tag, expectedCount) {
     if (!tag) return;
 
     var validValues = [
@@ -169,77 +206,137 @@ function parseTurnLanes(tag){
         'sharp_right', 'reverse', 'merge_to_left', 'merge_to_right', 'none'
     ];
 
-    return tag.split('|')
-        .map(function (s) {
+    var parsed = tag.split('|')
+        .map(function(s) {
             if (s === '') s = 'none';
             return s.split(';')
                 .map(function (d) {
                     return validValues.indexOf(d) === -1 ? 'unknown': d;
                 });
         });
+
+    if (expectedCount !== undefined && parsed.length !== expectedCount) {
+        if (parsed.length > expectedCount) {
+            parsed = parsed.slice(0, expectedCount);
+        } else {
+            while (parsed.length < expectedCount) {
+                parsed.push(['unknown']);
+            }
+        }
+    }
+    return parsed;
 }
 
 
-function parseMaxspeedLanes(tag, maxspeed) {
+function parseMaxspeedLanes(tag, maxspeed, expectedCount) {
     if (!tag) return;
 
-    return tag.split('|')
-        .map(function (s) {
+    var parsed = tag.split('|')
+        .map(function(s) {
             if (s === 'none') return s;
             var m = parseInt(s, 10);
             if (s === '' || m === maxspeed) return null;
             return isNaN(m) ? 'unknown': m;
         });
+
+    if (expectedCount !== undefined && parsed.length !== expectedCount) {
+        if (parsed.length > expectedCount) {
+            parsed = parsed.slice(0, expectedCount);
+        } else {
+            while (parsed.length < expectedCount) {
+                parsed.push('unknown');
+            }
+        }
+    }
+    return parsed;
 }
 
 
-function parseMiscLanes(tag) {
+function parseMiscLanes(tag, expectedCount) {
     if (!tag) return;
+
+    // console.log("parseMiscLanes", tag, expectedCount);
 
     var validValues = [
         'yes', 'no', 'designated'
     ];
 
-    return tag.split('|')
-        .map(function (s) {
+    var parsed = tag.split('|')
+        .map(function(s) {
             if (s === '') s = 'no';
             return validValues.indexOf(s) === -1 ? 'unknown': s;
         });
+
+    if (expectedCount !== undefined && parsed.length !== expectedCount) {
+        if (parsed.length > expectedCount) {
+            parsed = parsed.slice(0, expectedCount);
+        } else {
+            while (parsed.length < expectedCount) {
+                parsed.push('unknown');
+            }
+        }
+    }
+    return parsed;
 }
 
 
-function parseBicycleWay(tag) {
+function parseBicycleWay(tag, expectedCount) {
     if (!tag) return;
+
+    // console.log("parseBicycleWay", tag, expectedCount);
 
     var validValues = [
         'yes', 'no', 'designated', 'lane'
     ];
 
-    return tag.split('|')
-        .map(function (s) {
+    var parsed = tag.split('|')
+        .map(function(s) {
             if (s === '') s = 'no';
             return validValues.indexOf(s) === -1 ? 'unknown': s;
         });
+
+    if (expectedCount !== undefined && parsed.length !== expectedCount) {
+        if (parsed.length > expectedCount) {
+            parsed = parsed.slice(0, expectedCount);
+        } else {
+            while (parsed.length < expectedCount) {
+                parsed.push('unknown');
+            }
+        }
+    }
+    return parsed;
 }
 
-
-function mapToLanesObj(lanesObj, data, key) {
-    if (data.forward) {
-        data.forward.forEach(function(l, i) {
-            if (!lanesObj.forward[i]) lanesObj.forward[i] = {};
-            lanesObj.forward[i][key] = l;
-        });
-    }
-    if (data.backward) {
-        data.backward.forEach(function(l, i) {
-            if (!lanesObj.backward[i]) lanesObj.backward[i] = {};
-            lanesObj.backward[i][key] = l;
-        });
-    }
-    if (data.unspecified) {
-        data.unspecified.forEach(function(l, i) {
-            if (!lanesObj.unspecified[i]) lanesObj.unspecified[i] = {};
-            lanesObj.unspecified[i][key] = l;
+function mapToLanesObj(lanesObj, directionArray, key, directionTag) {
+    if (directionArray) {
+        directionArray.forEach(function(l, i) {
+            var newLane;
+            if (directionTag === 'unspecified') {
+                if (lanesObj[i]) {
+                    lanesObj[i][key] = l;
+                } else {
+                    newLane = {
+                        direction: 'unspecified',
+                        innerIndex: i,
+                        index: lanesObj.length
+                    };
+                    newLane[key] = l;
+                    lanesObj.push(newLane);
+                }
+            } else {
+                var existing = lanesObj.find(function(lane) { return lane.direction === directionTag && lane.innerIndex === i; });
+                if (existing) {
+                    existing[key] = l;
+                } else {
+                    newLane = {
+                        direction: directionTag,
+                        innerIndex: i,
+                        index: lanesObj.length
+                    };
+                    newLane[key] = l;
+                    lanesObj.push(newLane);
+                }
+            }
         });
     }
 }

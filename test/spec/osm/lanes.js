@@ -402,38 +402,38 @@ describe('iD.Lanes', function() {
 
     });
 
-    describe.skip('lanes array', function() {
-      it('should have correct number of direction elements', function() {
+    describe('lanes array', function() {
+        it('should have correct number of direction elements', function() {
         var lanes = iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 0, 'lanes:backward': 3 }}).lanes().lanes;
-        var forward = lanes.filter(function(l) {
-          return l.direction === 'forward';
-        });
-        var backward = lanes.filter(function(l) {
-          return l.direction === 'backward';
-        });
-        var bothways = lanes.filter(function(l) {
-          return l.direction === 'bothways';
-        });
-        expect(forward.length).to.eql(2);
-        expect(backward.length).to.eql(3);
-        expect(bothways.length).to.eql(0);
+            var forward = lanes.filter(function(l) {
+                return l.direction === 'forward';
+            });
+            var backward = lanes.filter(function(l) {
+                return l.direction === 'backward';
+            });
+            var bothways = lanes.filter(function(l) {
+                return l.direction === 'bothways';
+            });
+            expect(forward.length).to.eql(2);
+            expect(backward.length).to.eql(3);
+            expect(bothways.length).to.eql(0);
 
-      });
-      it('should have correct number of direction elements', function() {
+        });
+        it('should have correct number of direction elements', function() {
         var lanes = iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().lanes;
-        var forward = lanes.filter(function(l) {
-          return l.direction === 'forward';
+            var forward = lanes.filter(function(l) {
+                return l.direction === 'forward';
+            });
+            var backward = lanes.filter(function(l) {
+                return l.direction === 'backward';
+            });
+            var bothways = lanes.filter(function(l) {
+                return l.direction === 'bothways';
+            });
+            expect(forward.length).to.eql(3);
+            expect(backward.length).to.eql(1);
+            expect(bothways.length).to.eql(1);
         });
-        var backward = lanes.filter(function(l) {
-          return l.direction === 'backward';
-        });
-        var bothways = lanes.filter(function(l) {
-          return l.direction === 'bothways';
-        });
-        expect(forward.length).to.eql(3);
-        expect(backward.length).to.eql(1);
-        expect(bothways.length).to.eql(1);
-      });
     });
 
     describe('turn lanes', function() {
@@ -569,7 +569,7 @@ describe('iD.Lanes', function() {
                 ]);
         });
 
-        it.skip('fills with [\'unknown\'] when given turn:lanes are less than lanes count', function() {
+        it('fills with [\'unknown\'] when given turn:lanes are less than lanes count', function() {
             var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
@@ -581,11 +581,11 @@ describe('iD.Lanes', function() {
 
             expect(metadata.turnLanes.unspecified)
                 .to.deep.equal([
-                    ['slight_left'], ['none']
+                    ['slight_left'], ['none'], ['unknown'], ['unknown'], ['unknown']
                 ]);
         });
 
-        it.skip('fills with [\'unknown\'] when given turn:lanes:forward are less than lanes forward count', function() {
+        it('fills with [\'unknown\'] when given turn:lanes:forward are less than lanes forward count', function() {
             var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
@@ -607,7 +607,7 @@ describe('iD.Lanes', function() {
                 ]);
         });
 
-        it.skip('clips when turn lane information is more than lane count', function() {
+        it('clips when turn lane information is more than lane count', function() {
             var metadata = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
@@ -617,7 +617,7 @@ describe('iD.Lanes', function() {
                 }
             }).lanes().metadata;
 
-            expect(metadata.turnLanes)
+            expect(metadata.turnLanes.unspecified)
                 .to.deep.equal([
                     ['through'], ['through', 'slight_right']
                 ]);
@@ -720,7 +720,7 @@ describe('iD.Lanes', function() {
             }).lanes().metadata;
 
             expect(metadata.turnLanes.unspecified)
-                .to.deep.equal([['none'], ['through'], ['none']]);
+                .to.deep.equal([['none'], ['through'], ['none'], ['unknown'], ['unknown']]);
         });
 
         it('parses correctly when turn:lanes:forward= ||x', function() {
@@ -761,7 +761,7 @@ describe('iD.Lanes', function() {
                 .to.deep.equal([['none'], ['none']]);
         });
 
-        it('fills lanes.unspecified with key \'turnLane\' correctly', function() {
+        it('fills lanes array with key \'turnLane\' correctly', function() {
             var lanes = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
@@ -770,15 +770,13 @@ describe('iD.Lanes', function() {
                     'turn:lanes': 'slight_left||through|through;slight_right|slight_right'
                 }
             }).lanes().lanes;
-            var turnLanesUnspecified = lanes.unspecified.map(function(l) { return l.turnLane; });
-            expect(turnLanesUnspecified).to.deep.equal([
+            var turnLanesFromFlat = lanes.map(function(l) { return l.turnLane; });
+            expect(turnLanesFromFlat).to.deep.equal([
                 ['slight_left'], ['none'], ['through'], ['through', 'slight_right'], ['slight_right']
             ]);
-            expect(lanes.forward).to.deep.equal([]);
-            expect(lanes.backward).to.deep.equal([]);
         });
 
-        it('fills lanes.forward & lanes.backward with key \'turnLane\' correctly', function() {
+        it('fills lanes array with forward & backward \'turnLane\' correctly', function() {
             var lanes = iD.osmWay({
                 tags: {
                     highway: 'tertiary',
@@ -789,9 +787,8 @@ describe('iD.Lanes', function() {
                     'turn:lanes:forward': 'slight_left||',
                 }
             }).lanes().lanes;
-            expect(lanes.unspecified).to.deep.equal([]);
-            var turnLanesForward = lanes.forward.map(function(l) { return l.turnLane; });
-            var turnLanesBackward = lanes.backward.map(function(l) { return l.turnLane; });
+            var turnLanesForward = lanes.filter(function(l) { return l.direction === 'forward'; }).map(function(l) { return l.turnLane; });
+            var turnLanesBackward = lanes.filter(function(l) { return l.direction === 'backward'; }).map(function(l) { return l.turnLane; });
             expect(turnLanesForward).to.deep.equal([
                 ['slight_left'], ['none'], ['none']
             ]);
@@ -972,7 +969,7 @@ describe('iD.Lanes', function() {
                 }
             }).lanes();
             expect(lanes.metadata.maxspeedLanes.unspecified).to.deep.equal([
-                30, null, null, null
+                30, null, null, null, 'unknown'
             ]);
         });
 
@@ -1051,7 +1048,7 @@ describe('iD.Lanes', function() {
             ]);
         });
 
-        it('fills lanes.unspecified with key \'maxspeed\' correctly', function() {
+        it('fills lanes array with key \'maxspeed\' correctly', function() {
             var lanes = iD.osmWay({
                 tags: {
                     highway: 'residential',
@@ -1060,7 +1057,7 @@ describe('iD.Lanes', function() {
                     'maxspeed:lanes': '30|40|forty|40|40'
                 }
             }).lanes().lanes;
-            var maxspeedLanes = lanes.unspecified.map(function (l) {
+            var maxspeedLanes = lanes.map(function(l) {
                 return l.maxspeed;
             });
             expect(maxspeedLanes).to.deep.equal([
@@ -1082,13 +1079,13 @@ describe('iD.Lanes', function() {
                 }
             }).lanes();
             expect(lanes.metadata.bicyclewayLanes.unspecified).to.deep.equal([
-                'no','yes','no', 'designated', 'no'
+                'no', 'yes', 'no'
             ]);
-            var bicyclewayLanes = lanes.lanes.unspecified.map(function(l) {
+            var bicyclewayLanes = lanes.lanes.filter(function(l) { return l.direction === 'unspecified'; }).map(function(l) {
                 return l.bicycleway;
             });
             expect(bicyclewayLanes).to.deep.equal([
-                'no','yes','no', 'designated', 'no'
+                'no', 'yes', 'no'
             ]);
         });
 
@@ -1104,22 +1101,22 @@ describe('iD.Lanes', function() {
                 }
             }).lanes();
             expect(lanes.metadata.bicyclewayLanes.forward).to.deep.equal([
-                'lane','no','no', 'no', 'no'
+                'lane', 'no', 'no', 'no'
             ]);
             expect(lanes.metadata.bicyclewayLanes.backward).to.deep.equal([
-                'lane','no','no', 'no'
+                'lane', 'no', 'no'
             ]);
-            var bicyclewayLanesForward = lanes.lanes.forward.map(function(l) {
+            var bicyclewayLanesForward = lanes.lanes.filter(function(l) { return l.direction === 'forward'; }).map(function(l) {
                 return l.bicycleway;
             });
             expect(bicyclewayLanesForward).to.deep.equal([
-                'lane','no','no', 'no', 'no'
+                'lane', 'no', 'no', 'no'
             ]);
-            var bicyclewayLanesBackward = lanes.lanes.backward.map(function(l) {
+            var bicyclewayLanesBackward = lanes.lanes.filter(function(l) { return l.direction === 'backward'; }).map(function(l) {
                 return l.bicycleway;
             });
             expect(bicyclewayLanesBackward).to.deep.equal([
-                'lane','no','no', 'no'
+                'lane', 'no', 'no'
             ]);
         });
 
@@ -1134,13 +1131,13 @@ describe('iD.Lanes', function() {
                 }
             }).lanes();
             expect(lanes.metadata.bicyclewayLanes.unspecified).to.deep.equal([
-                'no','unknown','no', 'designated', 'no'
+                'no', 'unknown', 'no'
             ]);
-            var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
+            var psvLanesForward = lanes.lanes.filter(function(l) { return l.direction === 'unspecified'; }).map(function(l) {
                 return l.bicycleway;
             });
             expect(psvLanesForward).to.deep.equal([
-                'no','unknown','no', 'designated', 'no'
+                'no', 'unknown', 'no'
             ]);
         });
     });
@@ -1158,7 +1155,7 @@ describe('iD.Lanes', function() {
             expect(lanes.metadata.psvLanes.unspecified).to.deep.equal([
                 'yes','no','no', 'no', 'no'
             ]);
-            var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
+            var psvLanesForward = lanes.lanes.filter(function(l) { return l.direction === 'unspecified'; }).map(function(l) {
                 return l.psv;
             });
             expect(psvLanesForward).to.deep.equal([
@@ -1181,10 +1178,10 @@ describe('iD.Lanes', function() {
             expect(lanes.metadata.psvLanes.backward).to.deep.equal([
                 'yes', 'designated'
             ]);
-            var psvLanesForward = lanes.lanes.forward.map(function(l) {
+            var psvLanesForward = lanes.lanes.filter(function(l) { return l.direction === 'forward'; }).map(function(l) {
                 return l.psv;
             });
-            var psvLanesBackward = lanes.lanes.backward.map(function(l) {
+            var psvLanesBackward = lanes.lanes.filter(function(l) { return l.direction === 'backward'; }).map(function(l) {
                 return l.psv;
             });
             expect(psvLanesForward).to.deep.equal([
@@ -1206,7 +1203,7 @@ describe('iD.Lanes', function() {
             expect(lanes.metadata.psvLanes.unspecified).to.deep.equal([
                 'yes','no', 'unknown'
             ]);
-            var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
+            var psvLanesForward = lanes.lanes.filter(function(l) { return l.direction === 'unspecified'; }).map(function(l) {
                 return l.psv;
             });
             expect(psvLanesForward).to.deep.equal([
