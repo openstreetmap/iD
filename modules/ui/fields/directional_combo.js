@@ -9,7 +9,6 @@ export function uiFieldDirectionalCombo(field, context) {
     var dispatch = d3_dispatch('change');
     var items = d3_select(null);
     var wrap = d3_select(null);
-    var _tags;
 
     /** @type {Record<string, ReturnType<typeof uiFieldCombo>>} */
     const _combos = {};
@@ -86,18 +85,18 @@ export function uiFieldDirectionalCombo(field, context) {
 
     function change(key, newValue) {
         const commonKey = field.key;
-        /** if commonKey ends with :both, this is the key without :both. and vice-verca */
-        const otherCommonKey = field.key.endsWith(':both')
-            ? field.key.replace(/:both$/, '')
+        // if commonKey contains ":both", this is the key without :both. and vice-versa
+        const otherCommonKey = field.key.includes(':both')
+            ? field.key.replace(/:both(:|$)/,'$1')
             : `${field.key}:both`;
 
         const otherKey = key === field.keys[0] ? field.keys[1] : field.keys[0];
 
         dispatch.call('change', this, tags => {
             let otherValue = tags[otherKey] || tags[commonKey] || tags[otherCommonKey];
-            if (otherValue === 'left') { otherValue = otherKey.endsWith(':right') ? 'no' : 'yes'; }
-            if (otherValue === 'right') { otherValue = otherKey.endsWith(':left') ? 'no' : 'yes'; }
-            if (otherValue === 'both') { otherValue = 'yes'; }
+            if (!tags[otherKey] && otherValue === 'left') { otherValue = otherKey.endsWith(':right') ? 'no' : 'yes'; }
+            if (!tags[otherKey] && otherValue === 'right') { otherValue = otherKey.endsWith(':left') ? 'no' : 'yes'; }
+            if (!tags[otherKey] && otherValue === 'both') { otherValue = 'yes'; }
 
             if (newValue === otherValue) {
                 // both tags match, use the common tag to tag both sides the same way
@@ -117,45 +116,62 @@ export function uiFieldDirectionalCombo(field, context) {
     }
 
 
-    directionalCombo.tags = function(tags) {
-        _tags = tags;
+    directionalCombo.tags = function(_ignored, __test_tags /* for unit tests only */) {
+        const commonKey = field.key;
+        // if commonKey contains ":both", this is the key without :both. and vice-versa
+        const otherCommonKey = field.key.includes(':both')
+            ? field.key.replace(/:both(:|$)/,'$1')
+            : `${field.key}:both`;
+        // this is the key that might contain the direction (e.g. left/right) as a tag value,
+        // instead of the direction being part of the tag key
+        const fallbackKey = commonKey.includes(':both') ? otherCommonKey : commonKey;
+        // this is the key that is explicitly for ":both" directions
+        const bothDirectionsKey = fallbackKey !== commonKey ? commonKey : otherCommonKey;
 
-        /**
-         * @param {Array<any>} input - The input array.
-         */
-        const uniqueValues = (input) => [...new Set(input)].filter(Boolean);
-
-        const commonKey = field.key.replace(/:both$/, '');
-        const bothValue = [
-            tags[field.key] === 'both' ? 'yes' : undefined, // transform sidewalk=both
-            _tags[commonKey],
-            _tags[`${commonKey}:both`
-        ]];
-        const leftValue = uniqueValues([
-            // transform sidewalk=both once the UI was used to change one side to a specific value; we end up with sidewalk:left=separate+sidewalk:right=both|left because the original value is copied to the key:SIDE.
-            _tags[`${commonKey}:left`] === 'both' ? 'yes' : undefined,
-            _tags[`${commonKey}:left`] === 'left' ? 'yes' : undefined,
-            _tags[`${commonKey}:left`],
-            tags[field.key] === 'left' ? 'yes' : undefined,
-            tags[field.key] === 'right' ? 'no' : undefined,
-            ...bothValue
-        ]);
-        const rightValue = uniqueValues([
-            _tags[`${commonKey}:right`] === 'both' ? 'yes' : undefined,
-            _tags[`${commonKey}:right`] === 'right' ? 'yes' : undefined,
-            _tags[`${commonKey}:right`],
-            tags[field.key] === 'left' ? 'no' : undefined,
-            tags[field.key] === 'right' ? 'yes' : undefined,
-            ...bothValue
-        ]);
-
+        // harmonize tags of selected entities
+        const keys = Object.keys(_combos);
+        const entityTags = Array.isArray(__test_tags)
+            ? __test_tags // for unit tests only
+            : context.selectedIDs().map(id => context.graph().hasEntity(id).tags);
+        const combinedTags = {};
+        for (const key of keys) combinedTags[key] = new Set();
+        for (const tags of entityTags) {
+            let hadCommonValue = false;
+            if (tags[fallbackKey] === 'both') {
+                // interpret key=both as key:*=yes
+                for (const key of keys) combinedTags[key].add('yes');
+                hadCommonValue = true;
+            } else if (tags[fallbackKey]) {
+                const directionalKeyRegExp = new RegExp(`:${tags[fallbackKey]}(:|$)`);
+                if (keys.some(key => directionalKeyRegExp.test(key))) {
+                    // tag value looks like a direction: interpret as key:<value>=yes, key:<other>=no
+                    for (const key of keys) {
+                        if (directionalKeyRegExp.test(key)) {
+                            combinedTags[key].add('yes');
+                        } else {
+                            combinedTags[key].add('no');
+                        }
+                    }
+                } else {
+                    // tag does not look like a direction: handle like key:both=<value>
+                    for (const key of keys) combinedTags[key].add(tags[fallbackKey]);
+                }
+                hadCommonValue = true;
+            }
+            if (tags[bothDirectionsKey]) {
+                // handle ":both" key: set all tags to key:*=<value>
+                for (const key of keys) combinedTags[key].add(tags[bothDirectionsKey]);
+                hadCommonValue = true;
+            }
+            for (const key of keys) {
+                if (tags[key] || !hadCommonValue) {
+                    combinedTags[key].add(tags[key]);
+                }
+            }
+        }
         for (const key in _combos) {
-            if (key.endsWith(':left')) {
-                _combos[key].tags({ [key]: leftValue.at(0) });
-            }
-            if (key.endsWith(':right')) {
-                _combos[key].tags({ [key]: rightValue.at(0) });
-            }
+            const uniqueValues = [...combinedTags[key]];
+            _combos[key].tags({ [key]: uniqueValues.length > 1 ? uniqueValues : uniqueValues[0] });
         }
     };
 
