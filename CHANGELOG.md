@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
 * Don't suggest values from Taginfo for tags with less than 100 uses, even if they're documented on the wiki ([#11794], thanks [@Kaushik4141])
 * Don't suggest values from Taginfo for keys that should only be used on changesets, such as `hashtags` ([#11697], thanks [@bhavyaKhatri2703])
+* Handle `<key>=left|right|both` in the `directionalCombo` UI to enable support for `sidewalk=left|right|both` [in the future](#id-tagging-schema/pull/1507) ([#10935], thanks [@tordans], [@k-yle])
 #### :scissors: Operations
 * Display reflection axis on the map while hovering the reflection operations in the edit menu ([#11774], thanks [@Kaushik4141])
 #### :camera: Street-Level
@@ -73,6 +74,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#8464]: https://github.com/openstreetmap/iD/issues/8464
 [#9401]: https://github.com/openstreetmap/iD/issues/9401
+[#10935]: https://github.com/openstreetmap/iD/issues/10935
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
 [#11589]: https://github.com/openstreetmap/iD/pull/11589
 [#11636]: https://github.com/openstreetmap/iD/pull/11636
@@ -91,6 +93,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11862]: https://github.com/openstreetmap/iD/pull/11862
 [#11870]: https://github.com/openstreetmap/iD/issues/11870
 [#11904]: https://github.com/openstreetmap/iD/issues/11904
+[#id-tagging-schema/pull/1507]: https://github.com/openstreetmap/id-tagging-schema/pull/1507
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 [@homersimpsons]: https://github.com/homersimpsons
