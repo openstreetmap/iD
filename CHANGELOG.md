@@ -84,6 +84,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11794]: https://github.com/openstreetmap/iD/pull/11794
 [#11799]: https://github.com/openstreetmap/iD/issues/11799
 [#11783]: https://github.com/openstreetmap/iD/pull/11783
+[#11819]: https://github.com/openstreetmap/iD/pull/11819
 [#11861]: https://github.com/openstreetmap/iD/pull/11861
 [#11862]: https://github.com/openstreetmap/iD/pull/11862
 [#11870]: https://github.com/openstreetmap/iD/issues/11870
@@ -94,7 +95,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@omsaraykar]: https://github.com/omsaraykar
 [@Kaushik4141]: https://github.com/Kaushik4141
 [@JaiswalShivang]: https://github.com/JaiswalShivang
-[#11819]: https://github.com/openstreetmap/iD/pull/11819
 [@Kayd-06]: https://github.com/Kayd-06
 
 
