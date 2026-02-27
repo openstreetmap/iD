@@ -1,7 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags, osmLifecyclePrefixes } from '../osm/tags';
 
-
+var _classCache = new WeakMap();
 export function svgTagClasses() {
     var primaries = [
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
@@ -16,6 +16,7 @@ export function svgTagClasses() {
         'public_transport', 'location', 'parking', 'golf', 'type', 'leisure',
         'man_made', 'indoor', 'construction', 'proposed'
     ];
+    // Cache tag-derived classes by tag object identity.
     var _tags = function(entity) { return entity.tags; };
 
 
@@ -51,13 +52,21 @@ export function svgTagClasses() {
         }
 
         // preserve base classes (nothing with `tag-`)
-        var classes = value.trim().split(/\s+/)
+        var baseClasses = value.trim().split(/\s+/)
             .filter(function(klass) {
                 return klass.length && !/^tag-/.test(klass);
             })
             .map(function(klass) {  // special overrides for some perimeter strokes
                 return (klass === 'line' || klass === 'area') ? (overrideGeometry || klass) : klass;
             });
+
+        // Fast path: return cached tag-derived classes if available
+        var tagDerivedClasses = _classCache.get(t);
+        if (tagDerivedClasses) {
+            return baseClasses.concat(tagDerivedClasses).join(' ').trim();
+        }
+
+        var classes = [];
 
         // pick at most one primary classification tag..
         for (i = 0; i < primaries.length; i++) {
@@ -161,10 +170,9 @@ export function svgTagClasses() {
 
         // ensure that classes for tags keys/values with special characters like spaces
         // are not added to the DOM, because it can cause bizarre issues (#9448)
-        return classes
-            .filter(klass => /^[-_a-z0-9]+$/.test(klass))
-            .join(' ')
-            .trim();
+        var tagDerived = classes.filter(klass => /^[-_a-z0-9]+$/.test(klass));
+        _classCache.set(t, tagDerived);
+        return baseClasses.concat(tagDerived).join(' ').trim();
     };
 
 
