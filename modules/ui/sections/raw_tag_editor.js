@@ -49,6 +49,7 @@ export function uiSectionRawTagEditor(id, context) {
     var _tags;
     var _entityIDs;
     var _didInteract = false;
+    
     function interacted() {
         _didInteract = true;
     }
