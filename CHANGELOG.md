@@ -50,9 +50,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Warn when two features cross each other on same `layer`, regardless of `bridge` / `tunnel` tags ([#10999], thanks [@homersimpsons])
 #### :bug: Bugfixes
 * Show warning in raw tag editor when tag values exceed 255 characters ([#10241], thanks [@JaiswalShivang])
+* Fix typo: `parking:left:capacity` duplicated in osmSummableTags, missing `parking:right:capacity` ([#11819], thanks [@JaiswalShivang])
 * Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
 * Fix error setting custom background ([#11862], thanks [@Kayd-06])
 * Fix crash when commenting/closing notes when the note is closed by another mapper in the meantime ([#8464])
+* Fix confusing 'Point should be a point' warning ([#11589], thanks [@k-yle])
 #### :earth_asia: Localization
 * Add Moroccan phone number formats ([#11651], thanks [@ilias52730])
 * The Languages field shows language names in your preferred language. ([#11699], thanks [@Razen04])
@@ -73,6 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8464]: https://github.com/openstreetmap/iD/issues/8464
 [#9401]: https://github.com/openstreetmap/iD/issues/9401
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
+[#11589]: https://github.com/openstreetmap/iD/pull/11589
 [#11636]: https://github.com/openstreetmap/iD/pull/11636
 [#11651]: https://github.com/openstreetmap/iD/pull/11651
 [#11697]: https://github.com/openstreetmap/iD/pull/11697
@@ -84,6 +87,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11794]: https://github.com/openstreetmap/iD/pull/11794
 [#11799]: https://github.com/openstreetmap/iD/issues/11799
 [#11783]: https://github.com/openstreetmap/iD/pull/11783
+[#11819]: https://github.com/openstreetmap/iD/pull/11819
 [#11861]: https://github.com/openstreetmap/iD/pull/11861
 [#11862]: https://github.com/openstreetmap/iD/pull/11862
 [#11870]: https://github.com/openstreetmap/iD/issues/11870
@@ -93,8 +97,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@homersimpsons]: https://github.com/homersimpsons
 [@omsaraykar]: https://github.com/omsaraykar
 [@Kaushik4141]: https://github.com/Kaushik4141
-[@Kayd-06]: https://github.com/Kayd-06
 [@JaiswalShivang]: https://github.com/JaiswalShivang
+[@Kayd-06]: https://github.com/Kayd-06
 
 
 # v2.37.3

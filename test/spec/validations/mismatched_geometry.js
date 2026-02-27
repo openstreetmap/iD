@@ -1,3 +1,5 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.validations.mismatched_geometry', function () {
     var context, _savedAreaKeys;
 
@@ -16,6 +18,10 @@ describe('iD.validations.mismatched_geometry', function () {
             generic_amenity: {
                 tags: { amenity: '*' },
                 geometry: ['point', 'vertex', 'line', 'area']
+            },
+            chicane: {
+                tags: { traffic_calming: 'chicane' },
+                geometry: ['vertex']
             },
         };
     });
@@ -125,6 +131,16 @@ describe('iD.validations.mismatched_geometry', function () {
         expect(issue.severity).to.eql('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
         expect(issue.entityIds[0]).to.eql('w-1');
+    });
+
+    it('handles presets which only allow vertex, not point', () => {
+        const container = d3_select(document.createElement('div'));
+        createOpenWay({ traffic_calming: 'chicane' });
+
+        const issues = validate();
+        expect(issues).toHaveLength(1);
+        issues[0].message(context)(container); // render it
+        expect(container.text()).toBe('chicane should be a point, not a line');
     });
 
     it('does not flag cases whether the entity matches the generic preset, regardless of geometry', async () => {
