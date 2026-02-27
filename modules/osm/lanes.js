@@ -255,8 +255,6 @@ function parseMaxspeedLanes(tag, maxspeed, expectedCount) {
 function parseMiscLanes(tag, expectedCount) {
     if (!tag) return;
 
-    // console.log("parseMiscLanes", tag, expectedCount);
-
     var validValues = [
         'yes', 'no', 'designated'
     ];
@@ -282,8 +280,6 @@ function parseMiscLanes(tag, expectedCount) {
 
 function parseBicycleWay(tag, expectedCount) {
     if (!tag) return;
-
-    // console.log("parseBicycleWay", tag, expectedCount);
 
     var validValues = [
         'yes', 'no', 'designated', 'lane'
