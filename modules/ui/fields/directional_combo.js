@@ -89,14 +89,25 @@ export function uiFieldDirectionalCombo(field, context) {
         const otherCommonKey = field.key.includes(':both')
             ? field.key.replace(/:both(:|$)/,'$1')
             : `${field.key}:both`;
+        // this is the key that might contain the direction (e.g. left/right) as a tag value,
+        // instead of the direction being part of the tag key
+        const fallbackKey = commonKey.includes(':both') ? otherCommonKey : commonKey;
 
         const otherKey = key === field.keys[0] ? field.keys[1] : field.keys[0];
 
         dispatch.call('change', this, tags => {
             let otherValue = tags[otherKey] || tags[commonKey] || tags[otherCommonKey];
-            if (!tags[otherKey] && otherValue === 'left') { otherValue = otherKey.endsWith(':right') ? 'no' : 'yes'; }
-            if (!tags[otherKey] && otherValue === 'right') { otherValue = otherKey.endsWith(':left') ? 'no' : 'yes'; }
-            if (!tags[otherKey] && otherValue === 'both') { otherValue = 'yes'; }
+
+            if (tags[fallbackKey] === 'both' && !tags[otherKey]) {
+                otherValue = 'yes';
+            } else if (tags[fallbackKey] && !tags[otherKey]) {
+                const directionalKeyRegExp = new RegExp(`:${tags[fallbackKey]}(:|$)`);
+                if (directionalKeyRegExp.test(otherKey)) {
+                    otherValue = 'yes';
+                } else if (directionalKeyRegExp.test(key)) {
+                    otherValue = 'no';
+                }
+            }
 
             if (newValue === otherValue) {
                 // both tags match, use the common tag to tag both sides the same way
