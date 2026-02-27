@@ -38,11 +38,14 @@ async function loadTile(tile) {
 
   const url = `${featureServer}/query?${utilQsString(params)}`;
 
+  // Capture a local snapshot so post-await writes go to the same cache object
+  // even if reset() is called while the request is in-flight.
+  const cache = _kyCache;
+
   try {
     const data = await d3_json(url, { signal: controller.signal });
-    /* eslint-disable-next-line require-atomic-updates */
-    _kyCache.loaded[tile.id] = true;
-    delete _kyCache.inflight[tile.id];
+    cache.loaded[tile.id] = true;
+    delete cache.inflight[tile.id];
 
     if (!data || !data.features) return;
 
@@ -66,19 +69,19 @@ async function loadTile(tile) {
         }
       };
 
-      _kyCache.points.set(key, d);
+      cache.points.set(key, d);
 
       return {
         minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
       };
     });
 
-    _kyCache.rtree.load(features);
+    cache.rtree.load(features);
     dispatch.call('loadedImages');
   } catch (err) {
     if (err.name !== 'AbortError') {
-      _kyCache.loaded[tile.id] = true;
-      delete _kyCache.inflight[tile.id];
+      cache.loaded[tile.id] = true;
+      delete cache.inflight[tile.id];
     }
   }
 }
