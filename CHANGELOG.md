@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Don't error on features with a sole `note` tag ([#11522])
 * Warn when two features cross each other on same `layer`, regardless of `bridge` / `tunnel` tags ([#10999], thanks [@homersimpsons])
 #### :bug: Bugfixes
+* Fix typo: `parking:left:capacity` duplicated in osmSummableTags, missing `parking:right:capacity` ([#11819], thanks [@JaiswalShivang])
 * Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
 * Fix error setting custom background ([#11862], thanks [@Kayd-06])
 * Fix crash when commenting/closing notes when the note is closed by another mapper in the meantime ([#8464])
@@ -85,6 +86,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11794]: https://github.com/openstreetmap/iD/pull/11794
 [#11799]: https://github.com/openstreetmap/iD/issues/11799
 [#11783]: https://github.com/openstreetmap/iD/pull/11783
+[#11819]: https://github.com/openstreetmap/iD/pull/11819
 [#11861]: https://github.com/openstreetmap/iD/pull/11861
 [#11862]: https://github.com/openstreetmap/iD/pull/11862
 [#11870]: https://github.com/openstreetmap/iD/issues/11870
@@ -94,8 +96,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@homersimpsons]: https://github.com/homersimpsons
 [@omsaraykar]: https://github.com/omsaraykar
 [@Kaushik4141]: https://github.com/Kaushik4141
-[@Kayd-06]: https://github.com/Kayd-06
 [@JaiswalShivang]: https://github.com/JaiswalShivang
+[@Kayd-06]: https://github.com/Kayd-06
 
 
 # v2.37.3
