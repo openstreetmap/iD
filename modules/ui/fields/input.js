@@ -442,8 +442,10 @@ export function uiFieldText(field, context) {
             var t = {};
             var val = utilGetSetValue(input);
             const validationMessage = wrap.select('.field-validation-message');
-
-            if (field.pattern && val) {
+            if (!field.pattern && field.key === 'website') {
+                field.pattern = '^https?://.+';
+            }
+            if (!onInput && field.pattern && val) {
                 let regex = null;
 
                 try {
@@ -454,14 +456,14 @@ export function uiFieldText(field, context) {
 
                 if (regex && !regex.test(val)) {
                     validationMessage
-                        .style('display', 'block')
-                        .text(localizer.t('validation.value_does_not_match_expected_format'));
+                        .classed('hide', false)
+                        .text(localizer.t('inspector.invalid_format'));
                 } else {
-                    validationMessage.style('display', 'none');
+                    validationMessage.classed('hide', true);
                 }
 
-            } else {
-                validationMessage.style('display', 'none');
+            } else if(!onInput) {
+                validationMessage.classed('hide', true);
             }
             if (!onInput) val = context.cleanTagValue(val);
 
