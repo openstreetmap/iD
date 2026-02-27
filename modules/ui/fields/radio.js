@@ -20,6 +20,7 @@ export function uiFieldRadio(field, context) {
     var radioData = (field.options || strings.options || field.keys).slice();  // shallow copy
     var typeField;
     var layerField;
+    let _tags = {};
     var _oldType = {};
     var _entityIDs = [];
 
@@ -224,9 +225,6 @@ export function uiFieldRadio(field, context) {
 
 
     function changeLayer(t, onInput) {
-        if (t.layer === '0') {
-            t.layer = undefined;
-        }
         dispatch.call('change', this, t, onInput);
     }
 
@@ -253,9 +251,15 @@ export function uiFieldRadio(field, context) {
 
         if (field.type === 'structureRadio') {
             if (activeKey === 'bridge') {
-                t.layer = '1';
+                // if there already is an a layer tag, respect it if it's >0
+                const hasExistingLayer = !Number.isNaN(+_tags.layer) && +_tags.layer > 0;
+
+                t.layer = hasExistingLayer ? _tags.layer : '1';
             } else if (activeKey === 'tunnel' && t.tunnel !== 'building_passage') {
-                t.layer = '-1';
+                // if there already is an a layer tag, respect it if it's <0
+                const hasExistingLayer = !Number.isNaN(+_tags.layer) && +_tags.layer < 0;
+
+                t.layer = hasExistingLayer ? _tags.layer : '-1';
             } else {
                 t.layer = undefined;
             }
@@ -266,6 +270,7 @@ export function uiFieldRadio(field, context) {
 
 
     radio.tags = function(tags) {
+        _tags = tags;
         function isOptionChecked(d) {
             if (field.key) {
                 return tags[field.key] === d;

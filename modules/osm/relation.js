@@ -356,7 +356,7 @@ const prototype = {
             var inner = inners[i];
 
             if (d3_geoArea({ type: 'Polygon', coordinates: [inner] }) < 2 * Math.PI) {
-                inner = inner.reverse();
+                inner.reverse();
             }
 
             var o = findOuter(inners[i]);

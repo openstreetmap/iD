@@ -68,4 +68,10 @@ describe('iD.validations.incompatible_source', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
+
+    it('does not flag buildings in the google-open-buildings dataset', function() {
+        createWay({ building: 'yes', source: 'esri/Google_Open_Buildings' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
 });

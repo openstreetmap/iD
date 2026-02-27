@@ -7,8 +7,12 @@ import {
     zoomIdentity as d3_zoomIdentity
 } from 'd3-zoom';
 
+/**
+ * @import { Vec2 } from './vector';
+ * @typedef {[Vec2, Vec2]} ClipExtent
+ */
 
-/*
+/**
     Bypasses features of D3's default projection stream pipeline that are unnecessary:
     * Antimeridian clipping
     * Spherical rotation
@@ -19,11 +23,12 @@ export function geoRawMercator() {
     let k = 512 / Math.PI; // scale
     let x = 0;
     let y = 0; // translate
+    /** @type {ClipExtent} */
     let clipExtent = [[0, 0], [0, 0]];
 
     /**
-     * @param {[number, number]} point
-     * @returns {[number, number]}
+     * @param {Vec2} point
+     * @returns {Vec2}
      */
     function projection(point) {
         point = project(point[0] * Math.PI / 180, point[1] * Math.PI / 180);
@@ -31,8 +36,8 @@ export function geoRawMercator() {
     }
 
     /**
-     * @param {[number, number]} point
-     * @returns {[number, number]}
+     * @param {Vec2} point
+     * @returns {Vec2}
      */
     projection.invert = function(point) {
         point = project.invert((point[0] - x) / k, (y - point[1]) / k);
@@ -40,6 +45,7 @@ export function geoRawMercator() {
     };
 
 
+    /** @type {GetSet<typeof projection, number>} */
     projection.scale = function(_) {
         if (!arguments.length) return k;
         k = +_;
@@ -47,6 +53,7 @@ export function geoRawMercator() {
     };
 
 
+    /** @type {GetSet<typeof projection, Vec2>} */
     projection.translate = function(_) {
         if (!arguments.length) return [x, y];
         x = +_[0];
@@ -55,6 +62,7 @@ export function geoRawMercator() {
     };
 
 
+    /** @type {GetSet<typeof projection, Vec2>} */
     projection.clipExtent = function(_) {
         if (!arguments.length) return clipExtent;
         clipExtent = _;
@@ -62,6 +70,7 @@ export function geoRawMercator() {
     };
 
 
+    /** @type {GetSet<typeof projection, ZoomTransform>} */
     projection.transform = function(obj) {
         if (!arguments.length) return d3_zoomIdentity.translate(x, y).scale(k);
         x = +obj.x;

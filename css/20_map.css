@@ -1,4 +1,8 @@
 /* base styles */
+.ideditor {
+    background-color: var(--bg-color);
+}
+
 .layer-osm path {
     fill: none;
 }
@@ -347,6 +351,15 @@ g.vertex.highlighted .shadow {
 .surface.tr path.shadow.related.only,
 .surface.tr g.vertex.related.only .shadow {
     stroke: #68f;
+}
+
+/* Auxiliary temporary geometries for operations, e.g. reflect axis indicator */
+g.auxiliary path.reflect-axis {
+    stroke: #7092ff;
+    stroke-width: 3;
+    stroke-dasharray: 8, 4;
+    stroke-linecap: round;
+    pointer-events: none;
 }
 
 /* Visual Diffs

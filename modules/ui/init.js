@@ -549,12 +549,11 @@ export function uiInit(context) {
         ui.checkOverflow('.top-toolbar');
         ui.checkOverflow('.map-footer-bar');
 
-        // Use outdated code so it works on Explorer
-        var resizeWindowEvent = document.createEvent('Event');
-
-        resizeWindowEvent.initEvent('resizeWindow', true, true);
-
-        document.dispatchEvent(resizeWindowEvent);
+        const event = new Event('resizeWindow', {
+            bubbles: true,
+            cancelable: true
+        });
+        document.dispatchEvent(event);
     };
 
 
@@ -671,6 +670,8 @@ export function uiInit(context) {
     };
 
     ui.closeEditMenu = function() {
+        // try to regularly close the edit menu
+        _editMenu.close();
         // remove any existing menu no matter how it was added
         if (overMap !== undefined) {
             overMap.select('.edit-menu').remove();

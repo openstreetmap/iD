@@ -615,8 +615,11 @@ path.line.stroke.tag-leisure-track,
 }
 
 /* steps */
-.preset-icon .icon.tag-highway-steps,
 .preset-icon .icon.tag-highway-ladder {
+    color: #6f1f1f;
+    fill: #fff;
+}
+.preset-icon .icon.tag-highway-steps {
     color: #81d25c;
     fill: #fff;
 }
@@ -635,10 +638,12 @@ path.line.casing.tag-highway-ladder {
     stroke-linecap: round;
     stroke-dasharray: none;
 }
-path.line.stroke.tag-highway-steps,
 path.line.stroke.tag-highway-ladder,
-.preset-icon-container path.line.casing.tag-highway-steps,
 .preset-icon-container path.line.casing.tag-highway-ladder {
+    stroke: #6f1f1f;
+}
+path.line.stroke.tag-highway-steps,
+.preset-icon-container path.line.casing.tag-highway-steps {
     stroke: #81d25c;
 }
 .preset-icon-container path.line.stroke.tag-highway-steps,

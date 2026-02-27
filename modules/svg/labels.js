@@ -719,7 +719,7 @@ export function svgLabels(projection, context) {
                     // in select mode: hide labels of currently selected line(s)
                     // to still allow accessing midpoints
                     // https://github.com/openstreetmap/iD/issues/11220
-                    context.mode().selectedIDs().includes(id) && graph.hasEntity(id).geometry(graph) === 'line');
+                    context.mode().selectedIDs().includes(id) && graph.hasEntity(id)?.geometry(graph) === 'line');
             hideIds.push.apply(hideIds, nearMouse);
             hideIds = utilArrayUniq(hideIds);
         }
