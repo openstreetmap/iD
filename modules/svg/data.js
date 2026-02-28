@@ -540,10 +540,8 @@ export function svgData(projection, context, dispatch) {
             return utilArrayUnion(coords, c);
         }, []);
 
-        if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
             var extent = geoExtent(d3_geoBounds({ type: 'LineString', coordinates: coords }));
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
-        }
 
         return this;
     };
