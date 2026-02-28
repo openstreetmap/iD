@@ -29,14 +29,7 @@ export function validationImpossibleOneway() {
         }
 
         function nodeOccursMoreThanOnce(way, nodeID) {
-            let occurrences = 0;
-            for (const index in way.nodes) {
-                if (way.nodes[index] === nodeID) {
-                    occurrences++;
-                    if (occurrences > 1) return true;
-                }
-            }
-            return false;
+            return way.nodes.indexOf(nodeID) !== way.nodes.lastIndexOf(nodeID);
         }
 
         function isConnectedViaOtherTypes(way, node) {
