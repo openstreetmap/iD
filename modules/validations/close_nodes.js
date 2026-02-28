@@ -129,6 +129,17 @@ export function validationCloseNodes(context) {
 
             var issues = [];
 
+            // Helper to check if both nodes are the same type of stolperstein memorial
+            function isSameStohlperstein(node1, node2) {
+                if ('memorial:type' in node1.tags && 'memorial:type' in node2.tags) {
+                    return node1.tags['memorial:type'] === 'stolperstein' && node2.tags['memorial:type'] === 'stolperstein';
+                }
+                if ('memorial' in node1.tags && 'memorial' in node2.tags) {
+                    return node1.tags.memorial === 'stolperstein' && node2.tags.memorial === 'stolperstein';
+                }
+                return false;
+            }
+
             var lon = node.loc[0];
             var lat = node.loc[1];
             var lon_range = geoMetersToLon(pointThresholdMeters, lat) / 2;
@@ -149,8 +160,7 @@ export function validationCloseNodes(context) {
                     geoSphericalDistance(node.loc, nearby.loc) < pointThresholdMeters) {
 
                     // ignore stolperstein (https://wiki.openstreetmap.org/wiki/DE:Stolpersteine)
-                    if ('memorial:type' in node.tags && 'memorial:type' in nearby.tags && node.tags['memorial:type']==='stolperstein' && nearby.tags['memorial:type']==='stolperstein') continue;
-                    if ('memorial' in node.tags && 'memorial' in nearby.tags && node.tags.memorial==='stolperstein' && nearby.tags.memorial === 'stolperstein') continue;
+                    if (isSameStohlperstein(node, nearby)) continue;
 
                     // allow very close points if tags indicate the z-axis might vary
                     var zAxisKeys = { layer: true, level: true, 'addr:housenumber': true, 'addr:unit': true };
