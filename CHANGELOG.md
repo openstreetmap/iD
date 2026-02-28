@@ -52,7 +52,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
 * Fix error setting custom background ([#11862], thanks [@Kayd-06])
 * Fix crash when commenting/closing notes when the note is closed by another mapper in the meantime ([#8464])
-* Fix `readOnlyTags` protection bypass in changeset editor where `indexOf` was used instead of regex matching ([#11911], thanks [@JaiswalShivang])
 * Fix confusing 'Point should be a point' warning ([#11589], thanks [@k-yle])
 #### :earth_asia: Localization
 * Add Moroccan phone number formats ([#11651], thanks [@ilias52730])
