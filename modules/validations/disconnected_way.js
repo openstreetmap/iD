@@ -151,8 +151,10 @@ export function validationDisconnectedWay() {
                 vertex.tags.entrance !== 'no') return true;
             if (vertex.tags.amenity === 'parking_entrance') return true;
 
-            // treat nodes inside gandola stations and ski lifts as connected
-            if (vertex.tags.aerialway === 'station') return true;
+            // treat nodes inside gondola stations and ski lifts as connected
+            if (vertex.tags.aerialway) {
+                if (vertex.tags.aerialway === 'station' || vertex.tags.public_transport === 'stop_position') return true;
+            }
 
             return false;
         }
