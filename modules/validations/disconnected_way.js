@@ -151,6 +151,9 @@ export function validationDisconnectedWay() {
                 vertex.tags.entrance !== 'no') return true;
             if (vertex.tags.amenity === 'parking_entrance') return true;
 
+            // treat nodes inside gandola stations and ski lifts as connected
+            if (vertex.tags.aerialway === 'station') return true;
+
             return false;
         }
 
