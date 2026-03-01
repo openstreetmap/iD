@@ -283,12 +283,43 @@ export function uiSectionRawMembershipEditor(context) {
 
         var graph = context.graph();
 
-        function baseDisplayLabel(entity) {
+        //select entities
+        var selectedEntities = _entityIDs
+            .map(function(id) {
+                return graph.hasEntity(id);
+            })
+            .filter(function(entity) {
+                return entity;
+            });
+
+        // Map relationID -> number of selected entities in that relation
+        var relationCounts = new Map();
+
+        selectedEntities.forEach(function(ent) {
+            graph.parentRelations(ent).forEach(function (rel) {
+                relationCounts.set(rel.id, (relationCounts.get(rel.id) || 0) + 1);
+            });
+        });
+
+        function baseDisplayLabel(entity, flags) {
+            flags = flags || {};
+
             var matched = presetManager.match(entity, graph);
             var presetName = (matched && matched.name()) || t('inspector.relation');
             var entityName = utilDisplayName(entity) || '';
 
-            return selection => {
+            return function(selection) {
+                if (flags.isCommon) {
+                    selection.append('span')
+                        .attr('class', 'green')
+                        .text('(Applied)');
+                } else if (flags.isPartial) {
+                    selection.append('span')
+                        .attr('class', 'orange')
+                        .text('(Partially Applied)');
+
+                }
+
                 selection
                     .append('b')
                     .text(presetName + ' ');
@@ -310,6 +341,7 @@ export function uiSectionRawMembershipEditor(context) {
             result.push({
                 relation: explicitRelation,
                 value: baseDisplayValue(explicitRelation) + ' ' + explicitRelation.id,
+                title: baseDisplayValue(explicitRelation),
                 display: baseDisplayLabel(explicitRelation)
             });
         } else {
@@ -320,10 +352,20 @@ export function uiSectionRawMembershipEditor(context) {
                 var value = baseDisplayValue(entity);
                 if (q && (value + ' ' + entity.id).toLowerCase().indexOf(q.toLowerCase()) === -1) return;
 
+                var count = relationCounts.get(entity.id) || 0;
+                var flags = {
+                    isCommon: count === selectedEntities.length,
+                    isPartial: count > 0 && count < selectedEntities.length
+                };
+
+
                 result.push({
                     relation: entity,
                     value,
-                    display: baseDisplayLabel(entity)
+                    display: baseDisplayLabel(entity, flags),
+                    title: value,
+                    isCommon: flags.isCommon,
+                    isPartial: flags.isPartial
                 });
             });
 
