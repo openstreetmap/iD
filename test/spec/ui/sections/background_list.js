@@ -5,94 +5,119 @@ describe('iD.uiSectionBackgroundList', function () {
         container = d3.select('body').append('div').attr('class', 'id-container');
         context = iD.coreContext().assetPath('../dist/').init();
         context.container(container);
+        // Clear custom background preferences between tests
+        window.localStorage.removeItem('background-custom-templates');
+        window.localStorage.removeItem('background-custom-template');
     });
 
     afterEach(function () {
         container.remove();
+        // Clean up any modals attached to body
+        d3.selectAll('.modal-wrap').remove();
     });
 
-    it('does not crash during initialization if custom source is missing', function () {
-        const originalFindSource = context.background().findSource;
-        context.background().findSource = (id) => {
-            if (id === 'custom') return null;
-            return originalFindSource(id);
-        };
-
-        try {
-            expect(() => {
-                iD.uiSectionBackgroundList(context);
-            }).not.to.throw();
-        } finally {
-            context.background().findSource = originalFindSource;
-        }
+    it('does not crash during initialization', function() {
+        expect(() => {
+            iD.uiSectionBackgroundList(context);
+        }).not.to.throw();
     });
 
-    it('customChanged handles missing custom source gracefully', function () {
+    it('renders the background list UI with custom section', function () {
         const section = iD.uiSectionBackgroundList(context);
         const selection = container.append('div').call(section.render);
 
-        // Find the browse button for the custom layer
-        const browseButton = selection.selectAll('.layer-custom button.layer-browse');
-        expect(browseButton.size()).to.equal(1);
+        // Should render the main background list
+        expect(selection.selectAll('.layer-background-list').size()).to.equal(1);
 
-        // Click it to open the settings modal
-        iD.utilTriggerEvent(browseButton, 'click');
+        // Should render the custom backgrounds header
+        expect(selection.selectAll('.custom-backgrounds-header').size()).to.equal(1);
 
-        // The modal should now be in the container
+        // Should render the custom background list
+        expect(selection.selectAll('.layer-custom-background-list').size()).to.equal(1);
+
+        // Should render the "Add Custom" button
+        expect(selection.selectAll('.add-custom-background').size()).to.equal(1);
+    });
+
+    it('opens settings modal when "Add Custom" button is clicked', function () {
+        const section = iD.uiSectionBackgroundList(context);
+        container.append('div').call(section.render);
+
+        // Find and click the "Add Custom" button
+        const addButton = container.select('.add-custom-background');
+        expect(addButton.size()).to.equal(1);
+
+        iD.utilTriggerEvent(addButton, 'click');
+
+        // The modal should be rendered inside the container (context.container())
         const modal = container.select('.modal');
         expect(modal.size()).to.equal(1);
 
-        // Mock findSource to return null right before we "save"
-        const originalFindSource = context.background().findSource;
-        context.background().findSource = (id) => {
-            if (id === 'custom') return null;
-            return originalFindSource(id);
-        };
-
-        try {
-            // Find and click the "OK" (save) button in the modal
-            const okButton = modal.select('.modal-section.buttons .ok-button');
-            expect(okButton.size()).to.equal(1);
-
-            expect(() => {
-                iD.utilTriggerEvent(okButton, 'click');
-            }).not.to.throw();
-
-        } finally {
-            context.background().findSource = originalFindSource;
-        }
+        // Clean up modal
+        modal.remove();
     });
 
-    it('customChanged fallback to "none" handles missing "none" source gracefully', function () {
+    it('filters custom- prefixed sources from the main background list', function () {
         const section = iD.uiSectionBackgroundList(context);
         const selection = container.append('div').call(section.render);
 
-        // Find the browse button for the custom layer and click it
-        const browseButton = selection.selectAll('.layer-custom button.layer-browse');
-        iD.utilTriggerEvent(browseButton, 'click');
+        // The main list should not show sources whose id starts with 'custom-'
+        const mainListItems = selection.select('.layer-background-list').selectAll('li');
+        mainListItems.each(function (d) {
+            if (d && d.id) {
+                expect(d.id.startsWith('custom-')).to.be.false;
+            }
+        });
+    });
 
-        const modal = container.select('.modal');
+    it('renders custom backgrounds from preferences', function () {
+        // Pre-populate prefs with custom backgrounds
+        var customBgs = [
+            { id: 'custom-1', name: 'My Custom Map', template: 'https://example.com/{z}/{x}/{y}.png' },
+            { id: 'custom-2', name: 'Another Map', template: 'https://other.com/{z}/{x}/{y}.png' }
+        ];
+        window.localStorage.setItem('background-custom-templates', JSON.stringify(customBgs));
+
+        const section = iD.uiSectionBackgroundList(context);
+        const selection = container.append('div').call(section.render);
+
+        var customListItems = selection.select('.layer-custom-background-list').selectAll('li');
+        expect(customListItems.size()).to.equal(2);
+    });
+
+    it('shows edit and delete buttons for each custom background', function () {
+        var customBgs = [
+            { id: 'custom-1', name: 'My Custom Map', template: 'https://example.com/{z}/{x}/{y}.png' }
+        ];
+        window.localStorage.setItem('background-custom-templates', JSON.stringify(customBgs));
+
+        const section = iD.uiSectionBackgroundList(context);
+        const selection = container.append('div').call(section.render);
+
+        var customLi = selection.select('.layer-custom-background-list').select('li');
+        expect(customLi.select('.layer-browse').size()).to.equal(1);
+        expect(customLi.select('.layer-delete').size()).to.equal(1);
+    });
+
+    it('opens delete confirmation with cancel button when delete is clicked', function () {
+        var customBgs = [
+            { id: 'custom-1', name: 'My Custom Map', template: 'https://example.com/{z}/{x}/{y}.png' }
+        ];
+        window.localStorage.setItem('background-custom-templates', JSON.stringify(customBgs));
+
+        const section = iD.uiSectionBackgroundList(context);
+        container.append('div').call(section.render);
+
+        var deleteButton = container.select('.layer-custom-background-list .layer-delete');
+        iD.utilTriggerEvent(deleteButton, 'click');
+
+        var modal = container.select('.modal');
         expect(modal.size()).to.equal(1);
 
-        // Clear the template field to simulate falling back to 'none'
-        modal.select('textarea.field-template').property('value', '');
+        // Should have both cancel and ok buttons
+        expect(modal.select('.cancel-button').size()).to.equal(1);
+        expect(modal.select('.ok-button').size()).to.equal(1);
 
-        // Mock findSource to return null for 'none'
-        const originalFindSource = context.background().findSource;
-        context.background().findSource = (id) => {
-            if (id === 'none') return null;
-            return originalFindSource(id);
-        };
-
-        try {
-            const okButton = modal.select('.modal-section.buttons .ok-button');
-            expect(okButton.size()).to.equal(1);
-
-            expect(() => {
-                iD.utilTriggerEvent(okButton, 'click');
-            }).not.to.throw();
-        } finally {
-            context.background().findSource = originalFindSource;
-        }
+        modal.remove();
     });
 });

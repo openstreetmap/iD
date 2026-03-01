@@ -102,6 +102,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 ##### 2026-03-02
 
 #### :sparkles: Usability & Accessibility
+* Add support for multiple custom background layers with full CRUD operations - add, edit, name, and delete custom backgrounds ([#8874], [#11850], thanks [@JaiswalShivang])
 * Show warning when attempting to paste but nothing has been copied ([#9401], thanks [@omsaraykar])
 * Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
 * Don't suggest values from Taginfo for tags with less than 100 uses, even if they're documented on the wiki ([#11794], thanks [@Kaushik4141])
@@ -151,10 +152,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#8464]: https://github.com/openstreetmap/iD/issues/8464
 [#9226]: https://github.com/openstreetmap/iD/pull/9226
+[#8874]: https://github.com/openstreetmap/iD/issues/8874
 [#9401]: https://github.com/openstreetmap/iD/issues/9401
 [#10935]: https://github.com/openstreetmap/iD/issues/10935
 [#10999]: https://github.com/openstreetmap/iD/pull/10999
 [#11327]: https://github.com/openstreetmap/iD/pull/11327
+[#10999]: https://github.com/openstreetmap/iD/issues/10999
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
 [#11533]: https://github.com/openstreetmap/iD/pull/11533
 [#11589]: https://github.com/openstreetmap/iD/pull/11589
@@ -171,12 +174,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11759]: https://github.com/openstreetmap/iD/pull/11759
 [#11773]:https://github.com/openstreetmap/iD/pull/11773
 [#11774]: https://github.com/openstreetmap/iD/pull/11774
+[#11783]: https://github.com/openstreetmap/iD/pull/11783
 [#11784]: https://github.com/openstreetmap/iD/pull/11784
 [#11794]: https://github.com/openstreetmap/iD/pull/11794
 [#11799]: https://github.com/openstreetmap/iD/issues/11799
 [#11783]: https://github.com/openstreetmap/iD/pull/11783
 [#11804]: https://github.com/openstreetmap/iD/pull/11804
 [#11819]: https://github.com/openstreetmap/iD/pull/11819
+[#11850]: https://github.com/openstreetmap/iD/pull/11850
 [#11861]: https://github.com/openstreetmap/iD/pull/11861
 [#11862]: https://github.com/openstreetmap/iD/pull/11862
 [#11869]: https://github.com/openstreetmap/iD/pull/11869

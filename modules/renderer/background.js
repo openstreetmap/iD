@@ -7,6 +7,7 @@ import turf_bbox from '@turf/bbox';
 import whichPolygon from 'which-polygon';
 
 import { prefs } from '../core/preferences';
+import { t } from '../core/localizer';
 import { fileFetcher } from '../core/file_fetcher';
 import { geoMetersToOffset, geoOffsetToMeters, geoExtent } from '../geo';
 import { rendererBackgroundSource } from './background_source';
@@ -14,6 +15,9 @@ import { rendererTileLayer } from './tile_layer';
 import { utilQsString, utilStringQs } from '../util';
 import { utilRebind } from '../util/rebind';
 
+const PREF_CUSTOM_TEMPLATE_OLD = 'background-custom-template';
+const PREF_CUSTOM_TEMPLATES = 'background-custom-templates';
+export const CUSTOM_ID_PREFIX = 'custom-';
 
 let _imageryIndex = null;
 
@@ -77,13 +81,37 @@ export function rendererBackground(context) {
         // Add 'None'
         _imageryIndex.backgrounds.unshift(rendererBackgroundSource.None());
 
-        // Add 'Custom'
-        let template = prefs('background-custom-template') || '';
-        const custom = rendererBackgroundSource.Custom(template);
-        _imageryIndex.backgrounds.unshift(custom);
+        function migrateCustomBackgrounds() {
+          const oldTemplate = prefs(PREF_CUSTOM_TEMPLATE_OLD);
+          let customTemplates;
 
-        return _imageryIndex;
+          try {
+              customTemplates = JSON.parse(prefs(PREF_CUSTOM_TEMPLATES) || '[]');
+          } catch {
+              customTemplates = [];
+          }
+
+          // Migrate from old single custom background
+          if (oldTemplate && customTemplates.length === 0) {
+              customTemplates = [{
+                  id: CUSTOM_ID_PREFIX+'1',
+                  name: t('background.custom'),
+                  template: oldTemplate
+              }];
+              prefs(PREF_CUSTOM_TEMPLATES, JSON.stringify(customTemplates));
+              prefs(PREF_CUSTOM_TEMPLATE_OLD, null);
+          }
+
+          return customTemplates;
+      }
+      // Add custom
+      const customTemplates = migrateCustomBackgrounds();
+      customTemplates.forEach(function(entry) {
+          const customSource = rendererBackgroundSource.Custom(entry.id, entry.name, entry.template);
+          _imageryIndex.backgrounds.unshift(customSource);
       });
+      return _imageryIndex;
+    });
   }
 
 
@@ -204,6 +232,10 @@ export function rendererBackground(context) {
 
     let id = currSource.id;
     if (id === 'custom') {
+      id = `custom:${currSource.template()}`;
+    } else if (id && id.startsWith(CUSTOM_ID_PREFIX)) {
+      // Named custom backgrounds use custom:<template> in URL hash
+      // since the custom-N id is local to this browser
       id = `custom:${currSource.template()}`;
     }
 
@@ -346,6 +378,28 @@ export function rendererBackground(context) {
   };
 
 
+  background.addCustomSource = (source) => {
+    if (!_imageryIndex) return;
+    // Remove existing source with same id if present
+    const idx = _imageryIndex.backgrounds.findIndex(d => d.id === source.id);
+    if (idx !== -1) {
+      _imageryIndex.backgrounds.splice(idx, 1, source);
+    } else {
+      // Insert after 'None' (index 0) and before other imagery
+      _imageryIndex.backgrounds.unshift(source);
+    }
+  };
+
+
+  background.removeCustomSource = (id) => {
+    if (!_imageryIndex) return;
+    const idx = _imageryIndex.backgrounds.findIndex(d => d.id === id);
+    if (idx !== -1) {
+      _imageryIndex.backgrounds.splice(idx, 1);
+    }
+  };
+
+
   background.bing = () => {
     background.baseLayerSource(background.findSource('Bing'));
   };
@@ -482,7 +536,7 @@ export function rendererBackground(context) {
         const template = requestedBackground.replace(/^custom:/, '');
         const custom = background.findSource('custom');
         background.baseLayerSource(custom.template(template));
-        prefs('background-custom-template', template);
+        prefs(PREF_CUSTOM_TEMPLATE_OLD, template);
       } else {
         background.baseLayerSource(
           background.findSource(requestedBackground) ||

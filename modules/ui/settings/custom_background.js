@@ -10,13 +10,11 @@ import { utilNoAuto, utilRebind } from '../../util';
 export function uiSettingsCustomBackground() {
     var dispatch = d3_dispatch('change');
 
-    function render(selection) {
-        // keep separate copies of original and current settings
-        var _origSettings = {
-            template: prefs('background-custom-template')
-        };
+    function render(selection, customData) {
         var _currSettings = {
-            template: prefs('background-custom-template')
+            template: customData ? customData.template : prefs('background-custom-template'),
+            name: customData ? customData.name : '',
+            id: customData ? customData.id : null
         };
 
         var example = 'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png';
@@ -61,7 +59,18 @@ export function uiSettingsCustomBackground() {
             .attr('class', 'field-template')
             .attr('placeholder', t('settings.custom_background.template.placeholder'))
             .call(utilNoAuto)
-            .property('value', _currSettings.template);
+            .property('value', _currSettings.template)
+            .on('input', function() {
+                buttonSection.select('.ok-button').attr('disabled', isSaveDisabled);
+            });
+
+        textSection
+            .append('input')
+            .attr('class', 'field-name')
+            .attr('type', 'text')
+            .attr('placeholder', t('settings.custom_background.name.placeholder'))
+            .call(utilNoAuto)
+            .property('value', _currSettings.name || '');
 
 
         // insert a cancel button
@@ -82,22 +91,55 @@ export function uiSettingsCustomBackground() {
 
 
         function isSaveDisabled() {
-            return null;
+            var value = textSection.select('.field-template').property('value');
+            return (!value || value.trim() === '') ? 'disabled' : null;
         }
 
 
         // restore the original template
         function clickCancel() {
-            textSection.select('.field-template').property('value', _origSettings.template);
-            prefs('background-custom-template', _origSettings.template);
             this.blur();
             modal.close();
         }
 
-        // accept the current template
         function clickSave() {
             _currSettings.template = textSection.select('.field-template').property('value');
-            prefs('background-custom-template', _currSettings.template);
+            _currSettings.name = textSection.select('.field-name').property('value') || t('background.custom');
+            if (!_currSettings.template || _currSettings.template.trim() === '') {
+                return;
+            }
+
+            let customTemplates;
+            try {
+                customTemplates = JSON.parse(prefs('background-custom-templates') || '[]');
+            } catch {
+                customTemplates = [];
+            }
+            if (_currSettings.id) {
+                customTemplates = customTemplates.map(function(entry) {
+                    if (entry.id === _currSettings.id) {
+                        return {
+                            id: _currSettings.id,
+                            name: _currSettings.name,
+                            template: _currSettings.template
+                        };
+                    }
+                    return entry;
+                });
+            } else {
+                const maxId = customTemplates.reduce(function(max, e) {
+                    if (!e.id || !e.id.startsWith('custom-')) return max;
+                    const num = parseInt(e.id.replace('custom-', ''), 10);
+                    return isNaN(num) ? max : Math.max(max, num);
+                }, 0);
+                const newId = 'custom-' + (maxId + 1);
+                customTemplates.push({
+                    id: newId,
+                    name: _currSettings.name,
+                    template: _currSettings.template
+                });
+            }
+            prefs('background-custom-templates', JSON.stringify(customTemplates));
             this.blur();
             modal.close();
             dispatch.call('change', this, _currSettings);

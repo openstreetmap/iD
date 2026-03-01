@@ -553,15 +553,24 @@ rendererBackgroundSource.None = function() {
 };
 
 
-rendererBackgroundSource.Custom = function(template) {
-    var source = rendererBackgroundSource({ id: 'custom', template: template });
+rendererBackgroundSource.Custom = function(id, name, template) {
+    if (arguments.length === 1) {
+        template = id;
+        id = 'custom';
+        name = null;
+    }
+
+    var source = rendererBackgroundSource({ id: id || 'custom', template: template });
+    var _customName = name;
 
 
     source.name = function() {
+        if (_customName) return _customName;
         return t('background.custom');
     };
 
     source.label = function() {
+        if (_customName) return function(selection) { selection.text(_customName); };
         return t.append('background.custom');
     };
 

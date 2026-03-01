@@ -828,6 +828,10 @@ en:
     best_imagery: Best known imagery source for this location
     switch: Switch back to this background
     custom: Custom
+    custom_backgrounds: Custom Backgrounds
+    add_custom: Add Custom...
+    delete_custom: Delete
+    edit_custom: Edit
     overlays: Overlays
     imagery_problem_faq: Report an Imagery Problem
     reset: reset
@@ -1006,6 +1010,9 @@ en:
         example: "Example:"
       template:
         placeholder: Enter a url template
+      name:
+        placeholder: Enter a name for this background
+        label: Name
     custom_data:
       tooltip: Edit custom data layer
       header: Custom Map Data Settings
@@ -1087,6 +1094,7 @@ en:
   confirm:
     okay: "OK"
     cancel: "Cancel"
+    delete_custom_background: "Delete this custom background?"
   splash:
     welcome: Welcome to the iD OpenStreetMap editor
     text: "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}."
