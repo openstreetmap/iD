@@ -25,15 +25,15 @@ export function uiDisclosure(context, key, expandedDefault) {
             _expanded = preference === null ? !!expandedDefault : (preference === 'true');
         }
 
-        var details = selection.selectAll('.disclosure-wrap-' + key)
+        let details = selection.selectAll('.disclosure-wrap-' + key)
             .data([0]);
 
         // enter
-        var detailsEnter = details.enter()
+        const detailsEnter = details.enter()
             .append('details')
             .attr('class', 'disclosure-wrap disclosure-wrap-' + key);
 
-        var summaryEnter = detailsEnter
+        const summaryEnter = detailsEnter
             .append('summary')
             .attr('class', 'hide-toggle hide-toggle-' + key)
             .call(svgIcon('', 'pre-text', 'hide-toggle-icon'));
@@ -53,7 +53,7 @@ export function uiDisclosure(context, key, expandedDefault) {
         details
             .property('open', _expanded);
 
-        var summary = details.selectAll('summary.hide-toggle');
+        const summary = details.selectAll('summary.hide-toggle');
 
         summary
             .on('click', toggle);
@@ -68,7 +68,7 @@ export function uiDisclosure(context, key, expandedDefault) {
             labelSelection.text('').call(label);
         }
 
-        var contentWrap = details.selectAll('.disclosure-content');
+        const contentWrap = details.selectAll('.disclosure-content');
 
         if (_expanded) {
             contentWrap
