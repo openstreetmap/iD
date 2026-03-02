@@ -81,7 +81,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 * Add Moroccan phone number and address formats ([#11651], [#11698], thanks [@ilias52730])
 * The Languages field shows language names in your preferred language. ([#11699], thanks [@Razen04])
-* When viewing the help information for tags or presets, use locale-specific properties if available ([#11760], thanks [@k-yle])
+* When viewing the help information for tags or presets, use locale-specific properties if available ([#11759], thanks [@k-yle])
 * Show country names in your preferred language and country flag emoji in the Country field dropdown ([#11783], thanks [@Razen04])
 * Allow language codes of language variants (e.g. `name:zh-Latn-pinyin`) in multilingual name fields ([be0a20e59])
 #### :hourglass: Performance
@@ -119,7 +119,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11698]: https://github.com/openstreetmap/iD/pull/11698
 [#11699]: https://github.com/openstreetmap/iD/pull/11699
 [#11733]: https://github.com/openstreetmap/iD/pull/11733
-[#11760]: https://github.com/openstreetmap/iD/pull/11760
+[#11759]: https://github.com/openstreetmap/iD/pull/11759
 [#11773]:https://github.com/openstreetmap/iD/pull/11773
 [#11774]: https://github.com/openstreetmap/iD/pull/11774
 [#11784]: https://github.com/openstreetmap/iD/pull/11784
