@@ -35,7 +35,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.38.0-dev)
+# 2.38.0-dev
+##### 2026-03-02
 
 #### :sparkles: Usability & Accessibility
 * Show warning when attempting to paste but nothing has been copied ([#9401], thanks [@omsaraykar])
