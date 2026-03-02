@@ -1,6 +1,7 @@
 import { osmEntity } from './entity';
 import { geoAngle, geoExtent } from '../geo';
-import { utilArrayUniq } from '../util';
+import { utilArrayUniqBy } from '../util';
+import { osmShouldRenderDirection } from './tags';
 
 export const cardinal = {
     north: 0,               n: 0,
@@ -21,6 +22,18 @@ export const cardinal = {
     northnorthwest: 337,    nnw: 337
 };
 
+export const SIDE_TAGS = [
+    'side',
+    'railway:signal:position',
+    // railway:turnout_side can't be included, since it's not relative to the way direction
+];
+
+export const SIDES = new Set(['left', 'right', 'both']);
+
+/**
+ * @typedef {typeof prototype & iD.AbstractEntity} OsmNode
+ * @returns {OsmNode}
+ */
 export function osmNode() {
     if (!(this instanceof osmNode)) {
         return (new osmNode()).initialize(arguments);
@@ -33,9 +46,9 @@ osmEntity.node = osmNode;
 
 osmNode.prototype = Object.create(osmEntity.prototype);
 
-Object.assign(osmNode.prototype, {
+const prototype = {
     type: 'node',
-    loc: [9999, 9999],
+    loc: /** @type {Vec2} */ ([9999, 9999]),
 
     extent: function() {
         return new geoExtent(this.loc);
@@ -65,16 +78,40 @@ Object.assign(osmNode.prototype, {
 
     // Inspect tags and geometry to determine which direction(s) this node/vertex points
     directions: function(resolver, projection) {
-        var val;
+        /** @type {{ type: 'side' | 'direction'; value: string }[]} */
+        const rawValues = [];
         var i;
 
         // which tag to use?
         if (this.isHighwayIntersection(resolver) && (this.tags.stop || '').toLowerCase() === 'all') {
             // all-way stop tag on a highway intersection
-            val = 'all';
+            rawValues.push({
+                type: 'direction',
+                value: 'all',
+            });
         } else {
+            // generic side tag
+
+            // unfortunately, the proposal for highway=cyclist_waiting_aid used
+            // an ambiguous definition for `side`, which basically makes the tag
+            // useless in the situation where the parent way (the cycleway) is
+            // bidirectional. It's impossible for software to determine which
+            // direction the mapper is referring to…
+            const hideSideTag = (
+                this.tags.highway === 'cyclist_waiting_aid' &&
+                resolver.parentWays(this).some(way => !way.isOneWayForwards())
+            );
+
+            const sideTag = SIDE_TAGS.map(key => this.tags[key]).find(Boolean);
+            if (SIDES.has(sideTag?.toLowerCase()) && !hideSideTag) {
+                rawValues.push({
+                    type: 'side',
+                    value: sideTag?.toLowerCase(),
+                });
+            }
+
             // generic direction tag
-            val = (this.tags.direction || '').toLowerCase();
+            let val = (this.tags.direction || '').toLowerCase();
 
             // better suffix-style direction tag
             var re = /:direction$/i;
@@ -85,15 +122,18 @@ Object.assign(osmNode.prototype, {
                     break;
                 }
             }
+            for (const value of val.split(';')) {
+                rawValues.push({ type: 'direction', value });
+            }
         }
 
-        if (val === '') return [];
+        if (!rawValues.length) return [];
 
 
-        var values = val.split(';');
+        /** @type {{ type: 'side' | 'direction'; angle: number }[]} */
         var results = [];
 
-        values.forEach(function(v) {
+        rawValues.forEach(({ type, value: v }) => {
             // swap cardinal for numeric directions
             if (cardinal[v] !== undefined) {
                 v = cardinal[v];
@@ -101,43 +141,48 @@ Object.assign(osmNode.prototype, {
 
             // numeric direction - just add to results
             if (v !== '' && !isNaN(+v)) {
-                results.push(+v);
+                results.push({ type: 'direction', angle: +v });
                 return;
             }
 
+            const isSide = type === 'side' && SIDES.has(v);
+
             // string direction - inspect parent ways
             var lookBackward =
-                (this.tags['traffic_sign:backward'] || v === 'backward' || v === 'both' || v === 'all');
+                (this.tags['traffic_sign:backward'] || v === (isSide ? 'left' : 'backward') || v === 'both' || v === 'all');
             var lookForward =
-                (this.tags['traffic_sign:forward'] || v === 'forward' || v === 'both' || v === 'all');
+                (this.tags['traffic_sign:forward'] || v === (isSide ? 'right' : 'forward') || v === 'both' || v === 'all');
 
             if (!lookForward && !lookBackward) return;
 
             var nodeIds = {};
-            resolver.parentWays(this).forEach(function(parent) {
-                var nodes = parent.nodes;
-                for (i = 0; i < nodes.length; i++) {
-                    if (nodes[i] === this.id) {  // match current entity
-                        if (lookForward && i > 0) {
-                            nodeIds[nodes[i - 1]] = true;  // look back to prev node
-                        }
-                        if (lookBackward && i < nodes.length - 1) {
-                            nodeIds[nodes[i + 1]] = true;  // look ahead to next node
+            resolver.parentWays(this)
+                .filter(way => osmShouldRenderDirection(this.tags, way.tags))
+                .forEach(function(parent) {
+                    var nodes = parent.nodes;
+                    for (i = 0; i < nodes.length; i++) {
+                        if (nodes[i] === this.id) {  // match current entity
+                            if (lookForward && i > 0) {
+                                nodeIds[nodes[i - 1]] = true;  // look back to prev node
+                            }
+                            if (lookBackward && i < nodes.length - 1) {
+                                nodeIds[nodes[i + 1]] = true;  // look ahead to next node
+                            }
                         }
                     }
-                }
-            }, this);
+                }, this);
 
             Object.keys(nodeIds).forEach(function(nodeId) {
                 // +90 because geoAngle returns angle from X axis, not Y (north)
-                results.push(
-                    (geoAngle(this, resolver.entity(nodeId), projection) * (180 / Math.PI)) + 90
-                );
+                results.push({
+                    type: isSide ? 'side' : 'direction',
+                    angle: (geoAngle(this, resolver.entity(nodeId), projection) * (180 / Math.PI)) + (isSide ? 0 : 90)
+                });
             }, this);
 
         }, this);
 
-        return utilArrayUniq(results);
+        return utilArrayUniqBy(results, item => item.type + item.angle);
     },
 
     isCrossing: function(){
@@ -239,4 +284,5 @@ Object.assign(osmNode.prototype, {
             coordinates: this.loc
         };
     }
-});
+};
+Object.assign(osmNode.prototype, prototype);

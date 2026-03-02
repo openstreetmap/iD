@@ -1,20 +1,28 @@
 /* eslint-disable no-console */
-const chalk = require('chalk');
-const fs = require('fs');
-const prettyStringify = require('json-stringify-pretty-compact');
-const shell = require('shelljs');
-const YAML = require('js-yaml');
-const fetch = require('node-fetch');
-const lodash = require('lodash');
-
-const languageNames = require('./language_names.js');
+import fs from 'node:fs';
+import { styleText } from 'node:util';
+import prettyStringify from 'json-stringify-pretty-compact';
+import shell from 'shelljs';
+import YAML from 'js-yaml';
+import { pull } from 'lodash-es';
+import dotenv from 'dotenv';
+import cldrTerritoryInfo from 'cldr-core/supplemental/territoryInfo.json' with { type: 'json' };
+import packageJson from '../package.json' with { type: 'json' };
+import * as languageNames from './language_names.js';
 
 // fontawesome icons
-const fontawesome = require('@fortawesome/fontawesome-svg-core');
-const fas = require('@fortawesome/free-solid-svg-icons').fas;
-const far = require('@fortawesome/free-regular-svg-icons').far;
-const fab = require('@fortawesome/free-brands-svg-icons').fab;
+import * as fontawesome from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 fontawesome.library.add(fas, far, fab);
+
+dotenv.config({ quiet: true });
+
+const presetsVersion = packageJson.devDependencies['@openstreetmap/id-tagging-schema'];
+/* eslint-disable no-process-env */
+const presetsUrl = (process.env.ID_PRESETS_CDN_URL || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}').replace('{presets_version}', presetsVersion);
+/* eslint-enable no-process-env */
 
 let _currBuild = null;
 
@@ -22,16 +30,14 @@ let _currBuild = null;
 // if called directly, do the thing.
 if (process.argv[1].indexOf('build_data.js') > -1) {
   buildData();
-} else {
-  module.exports = buildData;
 }
 
 
 function buildData() {
   if (_currBuild) return _currBuild;
 
-  const START = '🏗   ' + chalk.yellow('Building data...');
-  const END = '👍  ' + chalk.green('data built');
+  const START = '🏗   ' + styleText('yellow', 'Building data...');
+  const END = '👍  ' + styleText('green', 'data built');
 
   console.log('');
   console.log(START);
@@ -65,7 +71,8 @@ function buildData() {
     'fas-th-list',
     'fas-user-cog',
     'fas-calendar-days',
-    'fas-rotate'
+    'fas-rotate',
+    'fas-eye-dropper'
   ]);
   // add icons for QA integrations
   readQAIssueIcons(faIcons);
@@ -92,14 +99,9 @@ function buildData() {
     minifyJSON('data/territory_languages.json', 'dist/data/territory_languages.min.json'),
     Promise.all([
       // Fetch the icons that are needed by the expected tagging schema version
-      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/presets.min.json'),
-      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/preset_categories.min.json'),
-      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/fields.min.json'),
-      // WARNING: we fetch the bleeding edge data too to make sure we're always hosting the
-      // latest icons, but note that the format could break at any time
-      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/presets.min.json'),
-      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/preset_categories.min.json'),
-      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/fields.min.json')
+      fetchOrRequire(`${presetsUrl}/dist/presets.min.json`),
+      fetchOrRequire(`${presetsUrl}/dist/preset_categories.min.json`),
+      fetchOrRequire(`${presetsUrl}/dist/fields.min.json`)
     ])
     .then(responses => Promise.all(responses.map(response => response.json())))
     .then((results) => {
@@ -111,8 +113,21 @@ function buildData() {
           if (datum.icon && /^fa[srb]-/.test(datum.icon)) {
             faIcons.add(datum.icon);
           }
+          if (datum.icons) {
+            Object.values(datum.icons)
+              .filter(icon => /^fa[srb]-/.test(icon))
+              .forEach(icon => faIcons.add(icon));
+          }
         }
       });
+    }).then(() =>
+      // also fetch the bleeding edge data too to make sure we're always hosting the latest icons
+      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/interim/icons.json')
+    ).then(response => response.json()).then(cuttingEdgeIcons => {
+      cuttingEdgeIcons
+        .filter(icon => /^fa[srb]-/.test(icon))
+        .forEach(icon => faIcons.add(icon));
+    }).then(() => {
       // copy over only those Font Awesome icons that we need
       writeFaIcons(faIcons);
     })
@@ -151,7 +166,7 @@ function readQAIssueIcons(faIcons) {
 
 
 function generateTerritoryLanguages() {
-  let allRawInfo = require('cldr-core/supplemental/territoryInfo.json').supplemental.territoryInfo;
+  const allRawInfo = cldrTerritoryInfo.supplemental.territoryInfo;
   let territoryLanguages = {};
 
   Object.keys(allRawInfo).forEach(territoryCode => {
@@ -171,8 +186,13 @@ function generateTerritoryLanguages() {
 
   // override/adjust some territory languages which are not included in CLDR data
   territoryLanguages.pk.push('pnb', 'scl', 'trw', 'kls'); // https://github.com/openstreetmap/iD/pull/9242
-  lodash.pull(territoryLanguages.pk, 'pa-Arab', 'lah', 'tg-Arab'); // - " -
-  territoryLanguages.it.push('lld'); // https://en.wikipedia.org/wiki/Ladin_language
+  pull(territoryLanguages.pk, 'pa-Arab', 'lah', 'tg-Arab'); // - " -
+  territoryLanguages.au = [
+     'en', 'aus', 'aer', 'aoi', 'bdy', 'coa', 'dgw', 'gjm', 'gjr', 'gup',
+    'jay', 'mwf', 'mwp', 'nys', 'pih', 'piu', 'pjt', 'rop', 'tcs', 'tiw',
+    'ulk', 'wbp', 'wrh', 'wth', 'wyi', 'xdk', 'xni', 'xph', 'xrd', 'zku'
+  ]; // https://github.com/openstreetmap/iD/pull/10684
+  territoryLanguages.nz.push('rrm'); // https://github.com/openstreetmap/iD/pull/10684
 
   return territoryLanguages;
 }
@@ -234,7 +254,10 @@ function writeFaIcons(faIcons) {
     const name = key.substring(4);
     const def = fontawesome.findIconDefinition({ prefix: prefix, iconName: name });
     try {
-      fs.writeFileSync(`svg/fontawesome/${key}.svg`, fontawesome.icon(def).html.toString());
+      const svg = fontawesome.icon(def, {
+        attributes: { xmlns: 'http://www.w3.org/2000/svg' },
+      }).html.toString();
+      fs.writeFileSync(`svg/fontawesome/${key}.svg`, svg);
     } catch (error) {
       console.error(`Error: No FontAwesome icon for ${key}`);
       throw (error);
@@ -259,4 +282,11 @@ function minifyJSON(inPath, outPath) {
 }
 
 
-module.exports = buildData;
+function fetchOrRequire(url) {
+  if (url.startsWith('.')) {
+    return import(url, { with: { type: 'json' } })
+      .then(module => ({ json: () => module.default }));
+  } else {
+    return fetch(url);
+  }
+}

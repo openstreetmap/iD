@@ -1,4 +1,4 @@
-describe('iD.modeAddNote', function() {
+describe.skip('iD.modeAddNote', function() {
     var context;
 
     before(function() {

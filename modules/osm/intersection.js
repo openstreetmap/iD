@@ -43,6 +43,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             'unclassified': true,
             'living_street': true,
             'service': true,
+            'busway': true,
             'road': true,
             'track': true
         };
@@ -57,11 +58,8 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     var vertexIds = [];
     var vertex;
     var ways = [];
-    var wayIds = [];
     var way;
-    var nodes = [];
     var node;
-    var parents = [];
     var parent;
 
     // `actions` will store whatever actions must be performed to satisfy
@@ -89,7 +87,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             hasWays = true;
 
             // check the way's children for more key vertices
-            nodes = utilArrayUniq(graph.childNodes(way));
+            const nodes = utilArrayUniq(graph.childNodes(way));
             for (j = 0; j < nodes.length; j++) {
                 node = nodes[j];
                 if (node === vertex) continue;                                           // same thing
@@ -98,7 +96,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
                 // a key vertex will have parents that are also roads
                 var hasParents = false;
-                parents = graph.parentWays(node);
+                const parents = graph.parentWays(node);
                 for (k = 0; k < parents.length; k++) {
                     parent = parents[k];
                     if (parent === way) continue;                 // same thing
@@ -193,8 +191,8 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     ways = [];
 
     vertexIds.forEach(function(id) {
-        var vertex = vgraph.entity(id);
-        var parents = vgraph.parentWays(vertex);
+        const vertex = vgraph.entity(id);
+        const parents = vgraph.parentWays(vertex);
         vertices.push(vertex);
         ways = ways.concat(parents);
     });
@@ -203,14 +201,15 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     ways = utilArrayUniq(ways);
 
     vertexIds = vertices.map(function(v) { return v.id; });
-    wayIds = ways.map(function(w) { return w.id; });
+    const wayIds = ways.map(function(w) { return w.id; });
 
 
     // STEP 6:  Update the ways with some metadata that will be useful for
     // walking the intersection graph later and rendering turn arrows.
 
     function withMetadata(way, vertexIds) {
-        var __oneWay = way.isOneWay();
+        // bidirectional ways are two-way from an intersection's perspective
+        var __oneWay = way.isOneWay() && !way.isBiDirectional();
 
         // which affixes are key vertices?
         var __first = (vertexIds.indexOf(way.first()) !== -1);
@@ -263,7 +262,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                 continue;
             }
 
-            parents = vgraph.parentWays(vertex);
+            let parents = vgraph.parentWays(vertex);
             if (parents.length < 3) {
                 if (vertexIds.indexOf(vertexId) !== -1) {
                     vertexIds.splice(vertexIds.indexOf(vertexId), 1);   // stop checking this one

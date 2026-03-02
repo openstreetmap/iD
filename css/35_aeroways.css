@@ -60,6 +60,7 @@ path.line.stroke.tag-aeroway-runway {
     stroke-width: 2;
     stroke-linecap: butt;
     stroke-dasharray: 24, 48;
+    stroke-dashoffset: -7;
 }
 .low-zoom path.line.shadow.tag-aeroway-runway {
     stroke-width: 16;

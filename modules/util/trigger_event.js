@@ -1,7 +1,10 @@
-export function utilTriggerEvent(target, type) {
+export function utilTriggerEvent(target, type, eventProperties) {
     target.each(function() {
-        var evt = document.createEvent('HTMLEvents');
-        evt.initEvent(type, true, true);
-        this.dispatchEvent(evt);
+        const event = new Event(type, {
+            bubbles: true,
+            cancelable: true
+        });
+        Object.assign(event, eventProperties);
+        this.dispatchEvent(event);
     });
 }

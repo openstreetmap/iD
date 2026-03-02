@@ -13,22 +13,22 @@ describe('uiCombobox', function() {
         var keyCode = iD.utilKeybinding.keyCodes[key];
         var value = input.property('value');
         var start = input.property('selectionStart');
-        var finis = input.property('selectionEnd');
+        var finish = input.property('selectionEnd');
 
-        happen.keydown(input.node(), {keyCode: keyCode});
+        input.node().dispatchEvent(new KeyboardEvent('keydown', { keyCode }));
 
         switch (key) {
             case '⇥':
                 break;
 
             case '←':
-                start = finis = Math.max(0, start - 1);
-                input.node().setSelectionRange(start, finis);
+                start = finish = Math.max(0, start - 1);
+                input.node().setSelectionRange(start, finish);
                 break;
 
             case '→':
-                start = finis = Math.max(start + 1, value.length);
-                input.node().setSelectionRange(start, finis);
+                start = finish = Math.max(start + 1, value.length);
+                input.node().setSelectionRange(start, finish);
                 break;
 
             case '↑':
@@ -38,26 +38,26 @@ describe('uiCombobox', function() {
                 break;
 
             case '⌫':
-                value = value.substring(0, start - (start === finis ? 1 : 0)) +
-                    value.substring(finis, value.length);
+                value = value.substring(0, start - (start === finish ? 1 : 0)) +
+                    value.substring(finish, value.length);
                 input.property('value', value);
-                happen.once(input.node(), {type: 'input'});
+                input.node().dispatchEvent(new MouseEvent('input'));
                 break;
 
             case '⌦':
                 value = value.substring(0, start) +
-                    value.substring(finis + (start === finis ? 1 : 0), value.length);
+                    value.substring(finish + (start === finish ? 1 : 0), value.length);
                 input.property('value', value);
-                happen.once(input.node(), {type: 'input'});
+                input.node().dispatchEvent(new MouseEvent('input'));
                 break;
 
             default:
-                value = value.substring(0, start) + key + value.substring(finis, value.length);
+                value = value.substring(0, start) + key + value.substring(finish, value.length);
                 input.property('value', value);
-                happen.once(input.node(), {type: 'input'});
+                input.node().dispatchEvent(new MouseEvent('input'));
         }
 
-        happen.keyup(input.node(), {keyCode: keyCode});
+        input.node().dispatchEvent(new KeyboardEvent('keyup', { keyCode }));
     }
 
     beforeEach(function() {
@@ -178,7 +178,7 @@ describe('uiCombobox', function() {
     it('does not select when value is empty', function() {
         input.call(combobox.data(data));
         focusTypeahead(input);
-        happen.once(input.node(), {type: 'input'});
+        input.node().dispatchEvent(new MouseEvent('input'));
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
     });
 
@@ -231,28 +231,24 @@ describe('uiCombobox', function() {
         expect(input.property('value')).to.equal('foobar');
     });
 
-    it('emits accepted event with selected datum on ⇥', function(done) {
-        combobox.on('accept', function(d) {
-            expect(d).to.eql({title: 'bar', value: 'bar'});
-            combobox.on('accept', null);
-            done();
-        });
+    it('emits accepted event with selected datum on ⇥', async () => {
+        const d = new Promise(cb => { combobox.on('accept', cb); });
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('⇥');
+        expect(await d).to.eql({title: 'bar', value: 'bar'});
+        combobox.on('accept', null);
     });
 
-    it('emits accepted event with selected datum on ↩', function(done) {
-        combobox.on('accept', function(d) {
-            expect(d).to.eql({title: 'bar', value: 'bar'});
-            combobox.on('accept', null);
-            done();
-        });
+    it('emits accepted event with selected datum on ↩', async () => {
+        const d = new Promise(cb => { combobox.on('accept', cb); });
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('↩');
+        expect(await d).to.eql({title: 'bar', value: 'bar'});
+        combobox.on('accept', null);
     });
 
     it('emits cancel event on ⎋', function() {

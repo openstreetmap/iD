@@ -1,5 +1,5 @@
 import { t } from '../core/localizer';
-import { utilDisplayLabel } from '../util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 

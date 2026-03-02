@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import _debounce from 'lodash-es/debounce';
-import * as countryCoder from '@ideditor/country-coder';
+import * as countryCoder from '@rapideditor/country-coder';
 
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
@@ -9,18 +9,24 @@ import { t, localizer } from '../../core/localizer';
 import { utilDetect, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
 import { svgIcon } from '../../svg/icon';
 import { cardinal } from '../../osm/node';
+import { isColourValid } from '../../osm/tags';
 import { uiLengthIndicator } from '..';
 import { uiTooltip } from '../tooltip';
+import { isEqual } from 'lodash-es';
 
 export {
     uiFieldText as uiFieldColour,
     uiFieldText as uiFieldEmail,
     uiFieldText as uiFieldIdentifier,
     uiFieldText as uiFieldNumber,
+    uiFieldText as uiFieldSchedule,
     uiFieldText as uiFieldTel,
-    uiFieldText as uiFieldUrl
+    uiFieldText as uiFieldUrl,
+    likelyRawNumberFormat
 };
 
+const likelyRawNumberFormat = /^-?(0\.\d*|\d*\.\d{0,2}(\d{4,})?|\d{4,}\.\d{3})$/;
+const yoHoursURLFormat = 'https://projets.pavie.info/yohours/?oh={value}';
 
 export function uiFieldText(field, context) {
     var dispatch = d3_dispatch('change');
@@ -32,6 +38,9 @@ export function uiFieldText(field, context) {
     var _tags;
     var _phoneFormats = {};
     const isDirectionField = field.key.split(':').some(keyPart => keyPart === 'direction');
+    const formatFloat = localizer.floatFormatter(localizer.languageCode());
+    const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
+    const countDecimalPlaces = localizer.decimalPlaceCounter(localizer.languageCode());
 
     if (field.type === 'tel') {
         fileFetcher.get('phone_formats')
@@ -84,6 +93,7 @@ export function uiFieldText(field, context) {
         input = input.enter()
             .append('input')
             .attr('type', field.type === 'identifier' ? 'text' : field.type)
+            .attr('dir', 'auto')
             .attr('id', field.domId)
             .classed(field.type, true)
             .call(utilNoAuto)
@@ -101,7 +111,7 @@ export function uiFieldText(field, context) {
         if (field.type === 'tel') {
             updatePhonePlaceholder();
 
-        } else if (field.type === 'number') {
+        } else if (field.type === 'number' || field.type === 'integer') {
             var rtl = (localizer.textDirection() === 'rtl');
 
             input.attr('type', 'text');
@@ -132,18 +142,20 @@ export function uiFieldText(field, context) {
                     var raw_vals = input.node().value || '0';
                     var vals = raw_vals.split(';');
                     vals = vals.map(function(v) {
-                        var num = Number(v);
+                        v = v.trim();
+                        const isRawNumber = likelyRawNumberFormat.test(v);
+                        var num = isRawNumber ? parseFloat(v) : parseLocaleFloat(v);
                         if (isDirectionField) {
-                            const compassDir = cardinal[v.trim().toLowerCase()];
+                            const compassDir = cardinal[v.toLowerCase()];
                             if (compassDir !== undefined) {
                                 num = compassDir;
                             }
                         }
 
-                        if (!isFinite(num)) {
-                            // do nothing if the value is neither a number, nor a cardinal direction
-                            return v.trim();
-                        }
+                        // do nothing if the value is neither a number, nor a cardinal direction
+                        if (!isFinite(num)) return v;
+                        num = parseFloat(num);
+                        if (!isFinite(num)) return v;
 
                         num += d;
                         // clamp to 0..359 degree range if it's a direction field
@@ -152,8 +164,9 @@ export function uiFieldText(field, context) {
                             num = ((num % 360) + 360) % 360;
                         }
                         // make sure no extra decimals are introduced
-                        const numDecimals = v.includes('.') ? v.split('.')[1].length : 0;
-                        return clamped(num).toFixed(numDecimals);
+                        return formatFloat(clamped(num), isRawNumber
+                            ? (v.includes('.') ? v.split('.')[1].length : 0)
+                            : countDecimalPlaces(v));
                     });
                     input.node().value = vals.join(';');
                     change()();
@@ -161,11 +174,10 @@ export function uiFieldText(field, context) {
         } else if (field.type === 'identifier' && field.urlFormat && field.pattern) {
 
             input.attr('type', 'text');
-
             outlinkButton = wrap.selectAll('.foreign-id-permalink')
                 .data([0]);
 
-            outlinkButton.enter()
+            outlinkButton = outlinkButton.enter()
                 .append('button')
                 .call(svgIcon('#iD-icon-out-link'))
                 .attr('class', 'form-field-button foreign-id-permalink')
@@ -177,14 +189,36 @@ export function uiFieldText(field, context) {
                     }
                     return '';
                 })
+                .merge(outlinkButton);
+            outlinkButton
                 .on('click', function(d3_event) {
                     d3_event.preventDefault();
-
                     var value = validIdentifierValueForLink();
                     if (value) {
                         var url = field.urlFormat.replace(/{value}/, encodeURIComponent(value));
                         window.open(url, '_blank');
                     }
+                })
+                .classed('disabled', () => !validIdentifierValueForLink())
+                .merge(outlinkButton);
+        } else if (field.type === 'schedule') {
+
+            input.attr('type', 'text');
+
+            outlinkButton = wrap.selectAll('.foreign-id-permalink')
+                .data([0]);
+
+            outlinkButton.enter()
+                .append('button')
+                .call(svgIcon('#iD-icon-out-link'))
+                .attr('class', 'form-field-button foreign-id-permalink')
+                .attr('title', () => t('icons.edit_in', { tool: 'YoHours' }))
+                .on('click', function(d3_event) {
+                    d3_event.preventDefault();
+
+                    var value = validIdentifierValueForLink();
+                    var url = yoHoursURLFormat.replace(/{value}/, encodeURIComponent(value || ''));
+                    window.open(url, '_blank');
                 })
                 .merge(outlinkButton);
         } else if (field.type === 'url') {
@@ -218,16 +252,6 @@ export function uiFieldText(field, context) {
 
 
     function updateColourPreview() {
-        function isColourValid(colour) {
-            if (!colour.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
-                // OSM only supports hex or named colors
-                return false;
-            } else if (!CSS.supports('color', colour) || ['unset', 'inherit', 'initial', 'revert'].includes(colour)) {
-                // see https://stackoverflow.com/a/68217760/1627467
-                return false;
-            }
-            return true;
-        }
         wrap.selectAll('.colour-preview')
             .remove();
 
@@ -361,12 +385,15 @@ export function uiFieldText(field, context) {
         if (field.type === 'url' && value) {
             try {
                 return (new URL(value)).href;
-            } catch (e) {
+            } catch {
                 return null;
             }
         }
         if (field.type === 'identifier' && field.pattern) {
-            return value && value.match(new RegExp(field.pattern))[0];
+            return value && value.match(new RegExp(field.pattern))?.[0];
+        }
+        if (field.type === 'schedule') {
+            return value;
         }
         return null;
     }
@@ -384,6 +411,26 @@ export function uiFieldText(field, context) {
     }
 
 
+    // returns all values of a (potential) multiselection and/or multi-key field
+    function getVals(tags) {
+        if (field.keys) {
+            const multiSelection = context.selectedIDs();
+            tags = multiSelection.length > 1
+                ? context.selectedIDs()
+                    .map(id => context.graph().entity(id))
+                    .map(entity => entity.tags)
+                : [tags];
+            return tags.map(tags => new Set(field.keys
+                    .reduce((acc, key) => acc.concat(tags[key]), [])
+                    .filter(Boolean)))
+                .map(vals => vals.size === 0 ? new Set([undefined]) : vals)
+                .reduce((a, b) => new Set([...a, ...b]));
+        } else {
+            return new Set([].concat(tags[field.key]));
+        }
+    }
+
+
     function change(onInput) {
         return function() {
             var t = {};
@@ -391,21 +438,56 @@ export function uiFieldText(field, context) {
             if (!onInput) val = context.cleanTagValue(val);
 
             // don't override multiple values with blank string
-            if (!val && Array.isArray(_tags[field.key])) return;
+            if (!val && getVals(_tags).size > 1) return;
 
-            if (!onInput) {
-                if (field.type === 'number' && val) {
-                    var vals = val.split(';');
-                    vals = vals.map(function(v) {
-                        var num = Number(v);
-                        return isFinite(num) ? clamped(num) : v.trim();
-                    });
-                    val = vals.join(';');
-                }
-                utilGetSetValue(input, val);
+            let displayVal = val;
+            if ((field.type === 'number' || field.type === 'integer') && val) {
+                const numbers = val.split(';').map(v => {
+                    if (likelyRawNumberFormat.test(v)) {
+                        // input number likely in "raw" format
+                        return {
+                            v,
+                            num: parseFloat(v),
+                            fractionDigits: v.includes('.') ? v.split('.')[1].length : 0
+                        };
+                    } else {
+                        // try to parse in localized number format
+                        return {
+                            v,
+                            num: parseLocaleFloat(v),
+                            fractionDigits: countDecimalPlaces(v)
+                        };
+                    }
+                });
+                val = numbers.map(({num, v, fractionDigits}) => {
+                    if (!isFinite(num)) return v;
+                    return clamped(num).toFixed(fractionDigits);
+                }).join(';');
+                displayVal = numbers.map(({num, v, fractionDigits}) => {
+                    if (!isFinite(num)) return v;
+                    return formatFloat(clamped(num), fractionDigits);
+                }).join(';');
             }
+            if (!onInput) utilGetSetValue(input, displayVal);
             t[field.key] = val || undefined;
-            dispatch.call('change', this, t, onInput);
+            if (field.keys) {
+                // for multi-key fields with: handle alternative tag keys gracefully
+                // https://github.com/openstreetmap/id-tagging-schema/issues/905
+                dispatch.call('change', this, tags => {
+                    if (field.keys.some(key => tags[key])) {
+                        // use exiting key(s)
+                        field.keys.filter(key => tags[key]).forEach(key => {
+                            tags[key] = val || undefined;
+                        });
+                    } else {
+                        // fall back to default key if none of the `keys` is preset
+                        tags[field.key] = val || undefined;
+                    }
+                    return tags;
+                }, onInput);
+            } else {
+                dispatch.call('change', this, t, onInput);
+            }
         };
     }
 
@@ -416,25 +498,63 @@ export function uiFieldText(field, context) {
         return i;
     };
 
-
     i.tags = function(tags) {
         _tags = tags;
 
-        var isMixed = Array.isArray(tags[field.key]);
+        const vals = getVals(tags);
+        const isMixed = vals.size > 1;
+        let val = vals.size === 1 ? [...vals][0] ?? '' : '';
+        let shouldUpdate;
 
-        utilGetSetValue(input, !isMixed && tags[field.key] ? tags[field.key] : '')
-            .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)
+        if ((field.type === 'number' || field.type === 'integer') && val) {
+            const numbers = val.split(';').map(function(v) {
+                v = v.trim();
+                const num = Number(v);
+                if (!isFinite(num) || v === '') return v;
+                const fractionDigits = v.includes('.') ? v.split('.')[1].length : 0;
+                return formatFloat(num, fractionDigits);
+            });
+            val = numbers.join(';');
+            // for number fields, we don't want to override the content of the
+            // input element with the same number using a different formatting
+            // (e.g. when entering "1234.5", this should not be reformatted to
+            // "1.234,5" which could otherwise cause the cursor to be in the
+            // wrong location after the change)
+            // but if the actual numeric value of the field has changed (e.g.
+            // by pressing the +/- buttons or using the raw tag editor), we
+            // can and should update the content of the input element.
+            shouldUpdate = (inputValue, setValue) => {
+                const inputNums = inputValue.split(';').map(val => {
+                    const parsedNum = likelyRawNumberFormat.test(val)
+                        ? parseFloat(val)
+                        : parseLocaleFloat(val);
+                    if (!isFinite(parsedNum)) return val; // keep unparsable values as-is
+                    return parsedNum;
+                });
+                const setNums = setValue.split(';').map(val => {
+                    const parsedNum = parseLocaleFloat(val);
+                    if (!isFinite(parsedNum)) return val; // keep unparsable values as-is
+                    return parsedNum;
+                });
+                return !isEqual(inputNums, setNums);
+            };
+        }
+
+        utilGetSetValue(input, val, shouldUpdate)
+            .attr('title', isMixed ? [...vals].join('\n') : undefined)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
             .classed('mixed', isMixed);
 
-        if (field.type === 'number') {
+        if (field.type === 'number' || field.type === 'integer') {
             const buttons = wrap.selectAll('.increment, .decrement');
             if (isMixed) {
                 buttons.attr('disabled', 'disabled').classed('disabled', true);
             } else {
                 var raw_vals = tags[field.key] || '0';
-                const canIncDec = raw_vals.split(';').some(val => isFinite(Number(val))
-                        || isDirectionField && cardinal[val.trim().toLowerCase()]);
+                const canIncDec = raw_vals.split(';').some((val) =>
+                    isFinite(Number(val))
+                    || (isDirectionField && (val.trim().toLowerCase() in cardinal))
+                );
                 buttons.attr('disabled', canIncDec ? null : 'disabled').classed('disabled', !canIncDec);
             }
         }
@@ -446,7 +566,7 @@ export function uiFieldText(field, context) {
         if (field.type === 'date') updateDateField();
 
         if (outlinkButton && !outlinkButton.empty()) {
-            var disabled = !validIdentifierValueForLink();
+            var disabled = !validIdentifierValueForLink() && field.type !== 'schedule';
             outlinkButton.classed('disabled', disabled);
         }
 

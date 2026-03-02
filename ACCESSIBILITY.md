@@ -165,12 +165,12 @@ for more info.
 | ✅ | Browser language preference | iD tries to use the language set in the browser |
 | ✅ | Base language fallback | E.g. if `pt_BR` is incomplete, `pt` should be tried before `en` | [#7996](https://github.com/openstreetmap/iD/issues/7996)
 | ✅ | Custom fallback languages | If the preferred language is incomplete, user-specified ones should be tried before `en` (e.g. `kk` → `ru`) | [#7996](https://github.com/openstreetmap/iD/issues/7996)
-| 🟠 | [`lang` HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) | Helps with text-to-speech, text formatting, and auto-transliteration, particularly when iD mixes strings from different languages | [#7963](https://github.com/openstreetmap/iD/issues/7963)
+| ✅ | [`lang` HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) | Helps with text-to-speech, text formatting, and auto-transliteration, particularly when iD mixes strings from different languages | [#7998](https://github.com/openstreetmap/iD/pull/7998)
 | ✅ | Locale URL parameters | `locale` and `rtl` can be used to manually set iD's locale preferences. See the [API](API.md#url-parameters) |
 | ❌ | Language selection in UI | The mapper should be able to view and change iD's language in the interface at any time. Useful for public computers with fixed browser languages | [#3120](https://github.com/openstreetmap/iD/issues/3120) |
 | 🟩 | Right-to-left layouts | The [`dir` HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir) is properly set for languages like Hebrew and Arabic |
-| ✅ | [Language-specific plurals](https://docs.transifex.com/localization-tips-workflows/plurals-and-genders#how-pluralized-strings-are-handled-by-transifex) | English has two plural forms, but some languages need more to be grammatically correct | [#597](https://github.com/openstreetmap/iD/issues/597), [#7991](https://github.com/openstreetmap/iD/issues/7991) |
-| 🟠 | [Localized number formats](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) | Most in-text numbers are localized. Numeric fields are not | [#3615](https://github.com/openstreetmap/iD/issues/3615), [#7993](https://github.com/openstreetmap/iD/issues/7993) |
+| ✅ | [Language-specific plurals](https://help.transifex.com/en/articles/6231958-working-with-plurals-and-genders#h_51e09ec18a) | English has two plural forms, but some languages need more to be grammatically correct | [#597](https://github.com/openstreetmap/iD/issues/597), [#7991](https://github.com/openstreetmap/iD/issues/7991) |
+| ✅ | [Localized number formats](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) | Most in-text numbers are localized, including numeric fields | [#8769](https://github.com/openstreetmap/iD/pull/8769), [#7993](https://github.com/openstreetmap/iD/issues/7993) |
 | 🟠 | Label icons | Icons should accompany text labels to illustrate the meaning of untranslated terms |
 
 ### Translatability
@@ -193,13 +193,12 @@ translated to one or more languages.
 | ✅ | OSM community index | | |
 | ✅ | iD validation issues | | |
 | ✅ | KeepRight issues | | |
-| ✅ | ImproveOSM issues | | |
-| ✅ | Osmose issues | Translated strings are [provided by Osmose](https://www.transifex.com/openstreetmap-france/osmose/) itself, not iD | |
+| ✅ | Osmose issues | Translated strings are [provided by Osmose](https://app.transifex.com/openstreetmap-france/osmose/) itself, not iD | |
 
 ### Language Coverage
 
 The completion percentages for iD translations constantly change, and so are not
-listed here. Visit the [Transifex project page](https://www.transifex.com/openstreetmap/id-editor/)
+listed here. Visit the [Transifex project page](https://app.transifex.com/openstreetmap/id-editor/)
 to see the latest numbers. Typically a few languages (German, Spanish, Japanese…)
 are kept close to 100% coverage, while most languages have less than 50% coverage.
 
@@ -215,7 +214,7 @@ are kept close to 100% coverage, while most languages have less than 50% coverag
 | ✅ | Browser zoom keyboard shortcuts | The <kbd>Cmd</kbd><kbd>+</kbd> and <kbd>Cmd</kbd><kbd>–</kbd> shortcuts used by major browsers are supported | [#7976](https://github.com/openstreetmap/iD/issues/7976) |
 | 🟠 | [Don't rely on color alone](https://www.wuhcag.com/use-of-colour/) | Some classes of map data are indistinguishable except for their colors | |
 | 🤷 | [High-contrast text colors](https://www.wuhcag.com/contrast-enhanced/) | | |
-| ❌ | [Dark mode](https://en.wikipedia.org/wiki/Light-on-dark_color_scheme) | Many people find light-on-dark UIs easier to read under certain conditions | [#8214](https://github.com/openstreetmap/iD/issues/8214) |
+| ✅ | [Dark mode](https://en.wikipedia.org/wiki/Light-on-dark_color_scheme) | Many people find light-on-dark UIs easier to read under certain conditions | [#8214](https://github.com/openstreetmap/iD/issues/8214) |
 | ❌ | Audio feedback | This would need to be easy to disable or even disabled by default | [#5821](https://github.com/openstreetmap/iD/issues/5821) |
 
 <br/>

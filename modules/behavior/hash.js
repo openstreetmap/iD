@@ -4,11 +4,13 @@ import { select as d3_select } from 'd3-selection';
 
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes/browse';
-import { modeSelect } from '../modes/select';
-import { utilDisplayLabel, utilObjectOmit, utilQsString, utilStringQs } from '../util';
+import { modeSelect, modeSelectNote } from '../modes';
+import { utilObjectOmit, utilQsString, utilStringQs } from '../util';
 import { utilArrayIdentical } from '../util/array';
-import { t } from '../core/localizer';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
+import { localizer, t } from '../core/localizer';
 import { prefs } from '../core/preferences';
+
 
 export function behaviorHash(context) {
 
@@ -33,6 +35,8 @@ export function behaviorHash(context) {
         });
         if (selected.length) {
             newParams.id = selected.join(',');
+        } else if (context.selectedNoteID()) {
+            newParams.id = `note/${context.selectedNoteID()}`;
         }
 
         newParams.map = zoom.toFixed(2) +
@@ -105,7 +109,7 @@ export function behaviorHash(context) {
 
             // Update the URL hash without affecting the browser navigation stack,
             // though unavoidably creating a browser history entry
-            window.history.replaceState(null, computedTitle(false /* includeChangeCount */), latestHash);
+            window.history.replaceState(null, '', latestHash);
 
             // set the title we want displayed for the browser tab/window
             updateTitle(true /* includeChangeCount */);
@@ -124,15 +128,23 @@ export function behaviorHash(context) {
     }, 500);
 
     function hashchange() {
-
         // ignore spurious hashchange events
         if (window.location.hash === _cachedHash) return;
 
         _cachedHash = window.location.hash;
 
         var q = utilStringQs(_cachedHash);
-        var mapArgs = (q.map || '').split('/').map(Number);
 
+        if (q.theme) {
+          context.theme(q.theme);
+        }
+
+        if (q.locale && q.locale !== localizer.preferredLocaleCodes().join(',')) {
+          localizer.preferredLocaleCodes(q.locale);
+          context.ui().restart();
+        }
+
+        var mapArgs = (q.map || '').split('/').map(Number);
         if (mapArgs.length < 3 || mapArgs.some(isNaN)) {
             // replace bogus hash
             updateHashIfNeeded();
@@ -147,11 +159,14 @@ export function behaviorHash(context) {
 
             if (q.id && mode) {
                 var ids = q.id.split(',').filter(function(id) {
-                    return context.hasEntity(id);
+                    return context.hasEntity(id) || id.startsWith('note/');
                 });
-                if (ids.length &&
-                    (mode.id === 'browse' || (mode.id === 'select' && !utilArrayIdentical(mode.selectedIDs(), ids)))) {
-                    context.enter(modeSelect(context, ids));
+                if (ids.length && ['browse', 'select-note', 'select'].includes(mode.id)) {
+                    if (ids.length === 1 && ids[0].startsWith('note/')) {
+                        context.enter(modeSelectNote(context, ids[0]));
+                    } else if (!utilArrayIdentical(mode.selectedIDs(), ids)) {
+                        context.enter(modeSelect(context, ids));
+                    }
                     return;
                 }
             }
@@ -185,10 +200,17 @@ export function behaviorHash(context) {
         var q = utilStringQs(window.location.hash);
 
         if (q.id) {
-            //if (!context.history().hasRestorableChanges()) {
             // targeting specific features: download, select, and zoom to them
-            context.zoomToEntity(q.id.split(',')[0], !q.map);
-            //}
+            const selectIds = q.id.split(',');
+            if (selectIds.length === 1 && selectIds[0].startsWith('note/')) {
+                const noteId = selectIds[0].split('/')[1];
+                context.moveToNote(noteId, !q.map);
+            } else {
+                context.zoomToEntities(
+                    // convert ids to short form id: node/123 -> n123
+                    selectIds.map(id => id.replace(/([nwr])[^/]*\//, '$1')),
+                    !q.map);
+            }
         }
 
         if (q.walkthrough === 'true') {

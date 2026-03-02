@@ -1,4 +1,4 @@
-import LocationConflation from '@ideditor/location-conflation';
+import { LocationConflation } from '@rapideditor/location-conflation';
 import whichPolygon from 'which-polygon';
 import calcArea from '@mapbox/geojson-area';
 
@@ -16,8 +16,8 @@ const _loco = new LocationConflation();    // instance of a location-conflation 
  * };
  *
  * For more info see the location-conflation and country-coder projects, see:
- * https://github.com/ideditor/location-conflation
- * https://github.com/ideditor/country-coder
+ * https://github.com/rapideditor/location-conflation
+ * https://github.com/rapideditor/country-coder
  */
 export class LocationManager {
 
@@ -109,7 +109,7 @@ export class LocationManager {
 
       this._knownLocationSets.set(locationSetID, area);
 
-    } catch (err) {
+    } catch {
       obj.locationSet = { include: ['Q2'] };  // default worldwide
       obj.locationSetID = '+[Q2]';
     }
@@ -144,7 +144,7 @@ export class LocationManager {
       geojson.properties.id = locationSetID;
       this._resolved.set(locationSetID, geojson);
 
-    } catch (err) {
+    } catch {
       obj.locationSet = { include: ['Q2'] };  // default worldwide
       obj.locationSetID = '+[Q2]';
     }
@@ -200,7 +200,7 @@ export class LocationManager {
         props.area = Number(area.toFixed(2));
       }
 
-      _loco._cache[id] = feature;   // insert directly into LocationConflations internal cache
+      _loco._cache.set(id, feature);   // insert directly into LocationConflations internal cache
     });
   }
 
@@ -244,7 +244,7 @@ export class LocationManager {
     let locationSetID;
     try {
       locationSetID = _loco.validateLocationSet(locationSet).id;
-    } catch (err) {
+    } catch {
       locationSetID = '+[Q2]';  // the world
     }
     return locationSetID;

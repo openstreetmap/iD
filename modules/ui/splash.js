@@ -17,7 +17,7 @@ export function uiSplash(context) {
     let updateMessage = '';
     const sawPrivacyVersion = prefs('sawPrivacyVersion');
     let showSplash = !prefs('sawSplash');
-    if (sawPrivacyVersion !== context.privacyVersion) {
+    if (sawPrivacyVersion && sawPrivacyVersion !== context.privacyVersion) {
       updateMessage = t('splash.privacy_update');
       showSplash = true;
     }

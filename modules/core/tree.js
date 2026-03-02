@@ -76,8 +76,8 @@ export function coreTree(head) {
         });
 
         head.parentRelations(entity).forEach(function(relation) {
-            if (memo[entity.id]) return;
-            memo[entity.id] = true;
+            if (memo[relation.id]) return;
+            memo[relation.id] = true;
             if (_bboxes[relation.id]) {
                 removeEntity(relation);
                 insertions[relation.id] = relation;

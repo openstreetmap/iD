@@ -1,4 +1,3 @@
-
 import { fileFetcher } from '../core/file_fetcher';
 import { svgPath } from './helpers';
 

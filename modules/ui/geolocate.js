@@ -91,9 +91,6 @@ export function uiGeolocate(context) {
             .call(uiTooltip()
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
                 .title(() => t.append('geolocate.title'))
-                .keys([t('geolocate.key')])
             );
-
-        context.keybinding().on(t('geolocate.key'), click);
     };
 }

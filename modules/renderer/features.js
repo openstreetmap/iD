@@ -1,14 +1,16 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
-import { osmEntity, osmLifecyclePrefixes } from '../osm';
+import { osmEntity } from '../osm';
+import { osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
 import { utilRebind } from '../util/rebind';
 import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
+import { isAddressPoint } from '../svg/labels';
 
 
 export function rendererFeatures(context) {
     var dispatch = d3_dispatch('change', 'redraw');
-    var features = utilRebind({}, dispatch, 'on');
+    const features = {};
     var _deferred = new Set();
 
     var traffic_roads = {
@@ -40,6 +42,7 @@ export function rendererFeatures(context) {
         'cycleway': true,
         'bridleway': true,
         'steps': true,
+        'ladder': true,
         'pedestrian': true
     };
 
@@ -53,17 +56,15 @@ export function rendererFeatures(context) {
 
 
     function update() {
-        if (!window.mocha) {
-            var hash = utilStringQs(window.location.hash);
-            var disabled = features.disabled();
-            if (disabled.length) {
-                hash.disable_features = disabled.join(',');
-            } else {
-                delete hash.disable_features;
-            }
-            window.location.replace('#' + utilQsString(hash, true));
-            prefs('disabled-features', disabled.join(','));
+        const hash = utilStringQs(window.location.hash);
+        const disabled = features.disabled();
+        if (disabled.length) {
+            hash.disable_features = disabled.join(',');
+        } else {
+            delete hash.disable_features;
         }
+        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
+        prefs('disabled-features', disabled.join(','));
         _hidden = features.hidden();
         dispatch.call('change');
         dispatch.call('redraw');
@@ -71,9 +72,16 @@ export function rendererFeatures(context) {
 
 
     /**
+     * @callback FilterFunction
+     * @param {Record<string, string>} tags
+     * @param {string} [geometry]
+     * @returns {boolean}
+     */
+
+    /**
      * @param {string} k
-     * @param {(tags: Record<string, string>, geometry: string) => boolean} filter
-     * @param {?number} max
+     * @param {FilterFunction} filter
+     * @param {number} [max]
      */
     function defineRule(k, filter, max) {
         var isEnabled = true;
@@ -95,10 +103,13 @@ export function rendererFeatures(context) {
         };
     }
 
+    defineRule('address_points', (tags, geometry) =>
+        geometry === 'point' && isAddressPoint(tags),
+        100);
 
-    defineRule('points', function isPoint(tags, geometry) {
-        return geometry === 'point';
-    }, 200);
+    defineRule('points', (tags, geometry) =>
+        geometry === 'point' && !isAddressPoint(tags, geometry),
+        200);
 
     defineRule('traffic_roads', function isTrafficRoad(tags) {
         return traffic_roads[tags.highway];
@@ -123,15 +134,26 @@ export function rendererFeatures(context) {
     }, 250);
 
     defineRule('building_parts', function isBuildingPart(tags) {
-        return tags['building:part'];
+        return !!tags['building:part'];
     });
 
     defineRule('indoor', function isIndoor(tags) {
-        return tags.indoor;
+        return (
+            (!!tags.indoor && tags.indoor !== 'no') ||
+            (!!tags.indoormark && tags.indoormark !== 'no')
+        );
     });
 
     defineRule('landuse', function isLanduse(tags, geometry) {
-        return geometry === 'area' &&
+        if (geometry !== 'area') return false;
+        let hasLanduseTag = false;
+        for (const key in osmLanduseTags) {
+            if (osmLanduseTags[key] === true && tags[key] ||
+                osmLanduseTags[key][tags[key]] === true) {
+                hasLanduseTag = true;
+            }
+        }
+        return hasLanduseTag &&
             !_rules.buildings.filter(tags) &&
             !_rules.building_parts.filter(tags) &&
             !_rules.indoor.filter(tags) &&
@@ -187,8 +209,8 @@ export function rendererFeatures(context) {
         return tags['piste:type'];
     });
 
-    defineRule('aerialways', function isPiste(tags) {
-        return tags.aerialway &&
+    defineRule('aerialways', function isAerialways(tags) {
+        return !!tags?.aerialway &&
             tags.aerialway !== 'yes' &&
             tags.aerialway !== 'station';
     });
@@ -205,11 +227,14 @@ export function rendererFeatures(context) {
             paths[tags.highway]
         ) { return false; }
 
-        var strings = Object.keys(tags);
+        const keys = Object.keys(tags);
 
-        for (var i = 0; i < strings.length; i++) {
-            var s = strings[i];
-            if (osmLifecyclePrefixes[s] || osmLifecyclePrefixes[tags[s]]) return true;
+        for (const key of keys) {
+            if (osmLifecyclePrefixes[tags[key]]) return true; // legacy tagging, e.g. `highway=construction`
+            const parts = key.split(':');
+            if (parts.length === 1) continue;
+            const prefix = parts[0];
+            if (osmLifecyclePrefixes[prefix]) return true; // lifecycle tagging, e.g. `demolished:building=yes`
         }
         return false;
     });
@@ -253,7 +278,7 @@ export function rendererFeatures(context) {
         if (!arguments.length) {
             return _keys.filter(function(k) { return _rules[k].hidden(); });
         }
-        return _rules[k] && _rules[k].hidden();
+        return _rules[k]?.hidden();
     };
 
 
@@ -370,6 +395,16 @@ export function rendererFeatures(context) {
 
     features.clearEntity = function(entity) {
         delete _cache[osmEntity.key(entity)];
+        for (const key in _cache) {
+            if (_cache[key].parents) {
+                for (const parent of _cache[key].parents) {
+                    if (parent.id === entity.id) {
+                        delete _cache[key];
+                        break;
+                    }
+                }
+            }
+        }
     };
 
 
@@ -444,13 +479,13 @@ export function rendererFeatures(context) {
     features.getParents = function(entity, resolver, geometry) {
         if (geometry === 'point') return [];
 
-        var ent = osmEntity.key(entity);
+        const ent = osmEntity.key(entity);
         if (!_cache[ent]) {
             _cache[ent] = {};
         }
 
         if (!_cache[ent].parents) {
-            var parents = [];
+            let parents;
             if (geometry === 'vertex') {
                 parents = resolver.parentWays(entity);
             } else {   // 'line', 'area', 'relation'
@@ -458,6 +493,7 @@ export function rendererFeatures(context) {
             }
             _cache[ent].parents = parents;
         }
+
         return _cache[ent].parents;
     };
 
@@ -466,7 +502,7 @@ export function rendererFeatures(context) {
         if (!_hidden.length) return false;
         if (!preset.tags) return false;
 
-        var test = preset.setTags({}, geometry);
+        var test = preset.setTags({...preset.tags}, geometry);
         for (var key in _rules) {
             if (_rules[key].filter(test, geometry)) {
                 if (_hidden.indexOf(key) !== -1) {
@@ -602,5 +638,5 @@ export function rendererFeatures(context) {
     });
 
 
-    return features;
+    return utilRebind(features, dispatch, 'on');
 }

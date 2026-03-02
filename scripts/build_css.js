@@ -1,27 +1,24 @@
 /* eslint-disable no-console */
-const chalk = require('chalk');
-const concat = require('concat-files');
-const glob = require('glob');
-const fs = require('fs');
-const postcss = require('postcss');
-const prepend = require('postcss-selector-prepend');
-const autoprefixer = require('autoprefixer');
+import concat from 'concat-files';
+import fs from 'node:fs';
+import { styleText } from 'node:util';
+import postcss from 'postcss';
+import prepend from 'postcss-prefix-selector';
+import autoprefixer from 'autoprefixer';
 
 let _currBuild = null;
 
 // if called directly, do the thing.
 if (process.argv[1].indexOf('build_css.js') > -1) {
   buildCSS();
-} else {
-  module.exports = buildCSS;
 }
 
 
-function buildCSS() {
+export function buildCSS() {
   if (_currBuild) return _currBuild;
 
-  const START = '🏗   ' + chalk.yellow('Building css...');
-  const END = '👍  ' + chalk.green('css built');
+  const START = '🏗   ' + styleText('yellow', 'Building css...');
+  const END = '👍  ' + styleText('green', 'css built');
 
   console.log('');
   console.log(START);
@@ -29,13 +26,14 @@ function buildCSS() {
 
   return _currBuild =
     Promise.resolve()
-      .then(() => glob('css/**/*.css'))
+      .then(() => fs.globSync('css/**/*.css'))
       .then(files => doConcat(files.sort(), 'dist/iD.css'))
       .then(() => {
         const css = fs.readFileSync('dist/iD.css', 'utf8');
         return postcss([
             autoprefixer,
-            prepend({ selector: '.ideditor ' })
+            duplicateDarkMode,
+            prepend({ prefix: '.ideditor', exclude: [ /^\.ideditor(\[.*?\])*/ ] })
           ])
           .process(css, { from: 'dist/iD.css', to: 'dist/iD.css' });
       })
@@ -62,3 +60,22 @@ function doConcat(files, output) {
     });
   });
 }
+
+
+function duplicateDarkMode() {
+  return {
+    postcssPlugin: 'duplicate-from-media',
+    Once(root) {
+      root.walkAtRules('media', atRule => {
+        if (atRule.params !== '(prefers-color-scheme: dark)') return;
+        atRule.walkRules(rule => {
+          const cloned = rule.clone();
+          rule.selector += ':not(.theme-light)';
+          cloned.selector += '.theme-dark';
+          atRule.parent.insertBefore(atRule, cloned);
+        });
+      });
+    }
+  };
+}
+duplicateDarkMode.postcss = true;

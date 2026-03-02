@@ -60,8 +60,9 @@ export function presetIndex() {
   let _loadPromise;
 
 
-  _this.ensureLoaded = () => {
-    if (_loadPromise) return _loadPromise;
+  /** @param {boolean=} bypassCache - used by unit tests */
+  _this.ensureLoaded = (bypassCache) => {
+    if (_loadPromise && !bypassCache) return _loadPromise;
 
     return _loadPromise = Promise.all([
         fileFetcher.get('preset_categories'),
@@ -167,9 +168,6 @@ export function presetIndex() {
     // Rebuild universal fields array
     _universal = Object.values(_fields).filter(field => field.universal);
 
-    // Reset all the preset fields - they'll need to be resolved again
-    Object.values(_presets).forEach(preset => preset.resetFields());
-
     // Rebuild geometry index
     _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
     _this.collection.forEach(preset => {
@@ -233,7 +231,7 @@ export function presetIndex() {
         const candidate = indexMatches[i];
         const score = candidate.matchScore(tags);
 
-        if (score === -1){
+        if (score === -1) {
           continue;
         }
         matchCandidates.push({score, candidate});
@@ -245,15 +243,15 @@ export function presetIndex() {
       }
     }
 
-    if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)){
+    if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)) {
       const validHere = locationManager.locationSetsAt(loc);
       if (!validHere[bestMatch.locationSetID]) {
+        bestMatch = undefined;
         matchCandidates.sort((a, b) => (a.score < b.score) ? 1 : -1);
         for (let i = 0; i < matchCandidates.length; i++) {
           const candidateScore = matchCandidates[i];
           if (!candidateScore.candidate.locationSetID || validHere[candidateScore.candidate.locationSetID]) {
             bestMatch = candidateScore.candidate;
-            bestScore = candidateScore.score;
             break;
           }
         }
@@ -262,7 +260,7 @@ export function presetIndex() {
 
     // If any part of an address is present, allow fallback to "Address" preset - #4353
     if (!bestMatch || bestMatch.isFallback()) {
-      for (let k in tags){
+      for (let k in tags) {
           if (/^addr:/.test(k) && keyIndex['addr:*'] && keyIndex['addr:*']['*']) {
             bestMatch = keyIndex['addr:*']['*'][0];
             break;
@@ -309,7 +307,6 @@ export function presetIndex() {
       footway: true,
       railway: true,
       junction: true,
-      traffic_calming: true,
       type: true
     };
     let areaKeys = {};

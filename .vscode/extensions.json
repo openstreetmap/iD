@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "EditorConfig.EditorConfig",
+        "eamodio.gitlens",
+        "lokalise.i18n-ally",
+        "dbaeumer.vscode-eslint"
+    ]
+}
