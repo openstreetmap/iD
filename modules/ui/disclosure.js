@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { select as d3_select } from 'd3-selection';
+import { uiToggle } from './toggle';
 
 import { prefs } from '../core/preferences';
 import { svgIcon } from '../svg/icon';
@@ -100,24 +100,11 @@ export function uiDisclosure(context, key, expandedDefault) {
             updateSummary();
 
             if (_expanded) {
-                details.property('open', true);
-                contentWrap.call(_content);
-                contentWrap
-                    .style('opacity', 0)
-                    .transition()
-                    .style('opacity', 1)
-                    .on('end', function() {
-                        d3_select(this).style('opacity', null);
-                    });
+                details.property('open', _expanded);
+                contentWrap.call(uiToggle(true));
             } else {
-                contentWrap
-                    .style('opacity', 1)
-                    .transition()
-                    .style('opacity', 0)
-                    .on('end', function() {
-                        d3_select(this).style('opacity', null);
-                        details.property('open', false);
-                    });
+                contentWrap.call(uiToggle(false), () =>
+                    details.property('open', _expanded));
             }
 
             dispatch.call('toggled', this, _expanded);
