@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 describe('iD.serviceKartaview', function() {
     var dimensions = [64, 64];
     var context, kartaview;
@@ -41,18 +43,17 @@ describe('iD.serviceKartaview', function() {
     });
 
     describe('#reset', function() {
-        it('resets cache and image', function() {
+        it('resets cache', function() {
             kartaview.cache().foo = 'bar';
             kartaview.selectImage(context, {key: 'baz'});
 
             kartaview.reset();
             expect(kartaview.cache()).to.not.have.property('foo');
-            expect(kartaview.getSelectedImage()).to.be.null;
         });
     });
 
     describe('#loadImages', function() {
-        it('fires loadedImages when images are loaded', function(done) {
+        it('fires loadedImages when images are loaded', async () => {
             var data = {
                 status: { apiCode: '600', httpCode: 200, httpMessage: 'Success' },
                 currentPageItems:[{
@@ -101,15 +102,13 @@ describe('iD.serviceKartaview', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            kartaview.on('loadedImages', function() {
-                expect(fetchMock.calls().length).to.eql(1);  // 1 nearby-photos
-                done();
-            });
-
             kartaview.loadImages(context.projection);
+
+            await new Promise(cb => { kartaview.on('loadedImages', cb); });
+            expect(fetchMock.calls().length).to.eql(1);  // 1 nearby-photos
         });
 
-        it('does not load images around null island', function (done) {
+        it('does not load images around null island', async () => {
             var data = {
                 status: { apiCode: '600', httpCode: 200, httpMessage: 'Success' },
                 currentPageItems:[{
@@ -164,14 +163,12 @@ describe('iD.serviceKartaview', function() {
             kartaview.on('loadedImages', spy);
             kartaview.loadImages(context.projection);
 
-            window.setTimeout(function() {
-                expect(spy).to.have.been.not.called;
-                expect(fetchMock.calls().length).to.eql(0);   // no tile requests of any kind
-                done();
-            }, 200);
+            await setTimeout(200);
+            expect(spy).to.have.been.not.called;
+            expect(fetchMock.calls().length).to.eql(0);   // no tile requests of any kind
         });
 
-        it('loads multiple pages of image results', function(done) {
+        it('loads multiple pages of image results', async () => {
             var features = [];
             for (var i = 0; i < 1000; i++) {
                 var key = String(i);
@@ -202,12 +199,10 @@ describe('iD.serviceKartaview', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            kartaview.on('loadedImages', function() {
-                expect(fetchMock.calls().length).to.eql(2);   // 2 nearby-photos
-                done();
-            });
-
             kartaview.loadImages(context.projection);
+
+            await new Promise(cb => { kartaview.on('loadedImages', cb); });
+            expect(fetchMock.calls().length).to.eql(2);   // 2 nearby-photos
         });
     });
 

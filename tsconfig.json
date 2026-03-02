@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "noEmit": true,
+        "strict": true,
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "lib": ["esnext", "dom"],
+        "target": "esnext",
+        "module": "preserve",
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "types": ["vitest/globals", "vitest/jsdom"]
+    },
+    "include": ["modules", "test"]
+}

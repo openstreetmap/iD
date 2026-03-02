@@ -105,18 +105,18 @@ export function svgKartaviewImages(projection, context, dispatch) {
     }
 
 
-    function filterImages(images) {
+    function filterImages(images, skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
         var usernames = context.photos().usernames();
 
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             var fromTimestamp = new Date(fromDate).getTime();
             images = images.filter(function(item) {
                 return new Date(item.captured_at).getTime() >= fromTimestamp;
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             var toTimestamp = new Date(toDate).getTime();
             images = images.filter(function(item) {
                 return new Date(item.captured_at).getTime() <= toTimestamp;
@@ -131,26 +131,26 @@ export function svgKartaviewImages(projection, context, dispatch) {
         return images;
     }
 
-    function filterSequences(sequences) {
+    function filterSequences(sequences, skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
         var usernames = context.photos().usernames();
 
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             var fromTimestamp = new Date(fromDate).getTime();
-            sequences = sequences.filter(function(image) {
-                return new Date(image.properties.captured_at).getTime() >= fromTimestamp;
+            sequences = sequences.filter(function(sequence) {
+                return new Date(sequence.properties.captured_at).getTime() >= fromTimestamp;
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             var toTimestamp = new Date(toDate).getTime();
-            sequences = sequences.filter(function(image) {
-                return new Date(image.properties.captured_at).getTime() <= toTimestamp;
+            sequences = sequences.filter(function(sequence) {
+                return new Date(sequence.properties.captured_at).getTime() <= toTimestamp;
             });
         }
         if (usernames) {
-            sequences = sequences.filter(function(image) {
-                return usernames.indexOf(image.properties.captured_by) !== -1;
+            sequences = sequences.filter(function(sequence) {
+                return usernames.indexOf(sequence.properties.captured_by) !== -1;
             });
         }
 
@@ -165,16 +165,15 @@ export function svgKartaviewImages(projection, context, dispatch) {
         var showMarkers = (z >= minMarkerZoom);
         var showViewfields = (z >= minViewfieldZoom);
 
-        var service = getService();
-        var sequences = [];
-        var images = [];
+        const service = getService();
 
-        if (context.photos().showsFlat()) {
-            sequences = (service ? service.sequences(projection) : []);
-            images = (service && showMarkers ? service.images(projection) : []);
-            sequences = filterSequences(sequences);
-            images = filterImages(images);
-        }
+        let sequences = (service ? service.sequences(projection) : []);
+        let images = (service && showMarkers ? service.images(projection) : []);
+        dispatch.call('photoDatesChanged', this, 'kartaview', [
+            ...filterImages(images, true).map(p => p.captured_at),
+            ...filterSequences(sequences, true).map(s => s.properties.captured_at)]);
+        sequences = filterSequences(sequences);
+        images = filterImages(images);
 
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
@@ -184,7 +183,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
             .remove();
 
         // enter/update
-        traces = traces.enter()
+        traces.enter()
             .append('path')
             .attr('class', 'sequence')
             .merge(traces)
@@ -276,8 +275,11 @@ export function svgKartaviewImages(projection, context, dispatch) {
                 update();
                 service.loadImages(projection);
             } else {
+                dispatch.call('photoDatesChanged', this, 'kartaview', []);
                 editOff();
             }
+        } else {
+            dispatch.call('photoDatesChanged', this, 'kartaview', []);
         }
     }
 

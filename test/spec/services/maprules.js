@@ -163,7 +163,17 @@ describe('maprules', function() {
     });
     describe('#clearRules', function() {
         it('clears _validationRules array', function() {
+            iD.serviceMapRules.clearRules();
+            expect(iD.serviceMapRules.validationRules()).to.be.empty;
+
+            iD.serviceMapRules.addRule({
+                geometry:'node',
+                equals: {amenity:'marketplace'},
+                absence:'name',
+                warning:'\'Marketplace\' preset must be coupled with name'
+            });
             expect(iD.serviceMapRules.validationRules().length).to.eql(1);
+
             iD.serviceMapRules.clearRules();
             expect(iD.serviceMapRules.validationRules()).to.be.empty;
         });
@@ -430,13 +440,13 @@ describe('maprules', function() {
                     }
                 ];
                 entities = [
-                    iD.osmEntity({ type: 'node', tags: { amenity: 'marketplace' }}),
+                    iD.osmNode({ tags: { amenity: 'marketplace' }}),
                     iD.osmWay({ tags: { building: 'house', amenity: 'clinic' }, nodes: [ 'a', 'b', 'c', 'a' ]}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 6 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 9 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 5 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 10 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 6 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 9 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 5 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 10 }}),
                     iD.osmWay({ tags: { amenity: 'clinic', emergency: 'definitely' }, nodes: [ 'd', 'e', 'f', 'd' ]}),
                     iD.osmWay({ tags: { highway: 'residential', structure: 'bridge' }}),
                 ];
@@ -525,13 +535,13 @@ describe('maprules', function() {
                     }
                 ];
                 entities = [
-                    iD.osmEntity({ type: 'node', tags: { amenity: 'marketplace' }}),
+                    iD.osmNode({ tags: { amenity: 'marketplace' }}),
                     iD.osmWay({ tags: { building: 'house', amenity: 'clinic' }, nodes: [ 'a', 'b', 'c', 'a' ]}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 6 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 9 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 5 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 10 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 6 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 9 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 5 }}),
+                    iD.osmNode({ tags: { man_made: 'tower', height: 10 }}),
                     iD.osmWay({ tags: { amenity: 'clinic', emergency: 'definitely' }, nodes: [ 'd', 'e', 'f', 'd' ]}),
                     iD.osmWay({ tags: { highway: 'residential', structure: 'bridge' }}),
                 ];
@@ -562,7 +572,7 @@ describe('maprules', function() {
 
                     expect(issues.length).to.eql(1);
                     expect(issue.entityIds).to.eql([entity.id]);
-                    expect(issue.message(context)).to.eql(selector[type]);
+                    expect(issue.message(iD.coreContext())).to.eql(selector[type]);
                     expect(type).to.eql(issue.severity);
                 });
             });

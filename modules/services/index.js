@@ -1,5 +1,4 @@
 import serviceKeepRight from './keepRight';
-import serviceImproveOSM from './improveOSM';
 import serviceOsmose from './osmose';
 import serviceMapillary from './mapillary';
 import serviceMapRules from './maprules';
@@ -15,12 +14,12 @@ import serviceVectorTile from './vector_tile';
 import serviceWikidata from './wikidata';
 import serviceWikipedia from './wikipedia';
 import serviceMapilio from './mapilio';
+import servicePanoramax from './panoramax';
 
 
 export let services = {
   geocoder: serviceNominatim,
   keepRight: serviceKeepRight,
-  improveOSM: serviceImproveOSM,
   osmose: serviceOsmose,
   mapillary: serviceMapillary,
   nsi: serviceNsi,
@@ -34,12 +33,12 @@ export let services = {
   vectorTile: serviceVectorTile,
   wikidata: serviceWikidata,
   wikipedia: serviceWikipedia,
-  mapilio: serviceMapilio
+  mapilio: serviceMapilio,
+  panoramax: servicePanoramax
 };
 
 export {
   serviceKeepRight,
-  serviceImproveOSM,
   serviceOsmose,
   serviceMapillary,
   serviceMapRules,
@@ -54,5 +53,6 @@ export {
   serviceVectorTile,
   serviceWikidata,
   serviceWikipedia,
-  serviceMapilio
+  serviceMapilio,
+  servicePanoramax
 };

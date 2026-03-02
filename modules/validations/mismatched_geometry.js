@@ -10,7 +10,8 @@ import { osmNodeGeometriesForTags, osmTagSuggestingArea } from '../osm/tags';
 import { presetManager } from '../presets';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 import { t } from '../core/localizer';
-import { utilDisplayLabel, utilTagText } from '../util';
+import { utilTagText } from '../util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
@@ -30,6 +31,12 @@ export function validationMismatchedGeometry() {
         var asArea = presetManager.matchTags(tagSuggestingArea, 'area');
         if (asLine && asArea && deepEqual(asLine.tags, asArea.tags)) {
             // this tag also allows lines and making this an area wouldn't matter
+            return null;
+        }
+
+        if (asLine.isFallback() && asArea.isFallback() && !deepEqual(tagSuggestingArea, { area: 'yes' })) {
+            // if the entity matches the fallback preset, regardless of the
+            // geometry, then changing the geometry will not help.
             return null;
         }
 
@@ -242,8 +249,12 @@ export function validationMismatchedGeometry() {
 
         var asSource = presetManager.match(entity, graph);
 
-        var targetGeom = targetGeoms.find(nodeGeom => {
-            var asTarget = presetManager.matchTags(entity.tags, nodeGeom);
+        const originalTargetGeom = targetGeoms.find(nodeGeom => {
+            const asTarget = presetManager.matchTags(
+                entity.tags,
+                nodeGeom,
+                entity.extent(graph).center(),
+            );
             if (!asSource || !asTarget ||
                 asSource === asTarget ||
                 // sometimes there are two presets with the same tags for different geometries
@@ -260,6 +271,8 @@ export function validationMismatchedGeometry() {
 
             return asSource.isFallback() || asSource.tags[primaryKey] === '*';
         });
+
+        let targetGeom = originalTargetGeom;
 
         if (!targetGeom) return null;
 
@@ -285,7 +298,7 @@ export function validationMismatchedGeometry() {
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.' + referenceId + '.message', {
-                    feature: utilDisplayLabel(entity, targetGeom, true /* verbose */)
+                    feature: utilDisplayLabel(entity, originalTargetGeom, true /* verbose */)
                 }) : '';
             },
             reference: function showReference(selection) {

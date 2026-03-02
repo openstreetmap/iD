@@ -1,17 +1,43 @@
+import { merge } from 'lodash-es';
+
+const uninterestingKeys = new Set([
+    'attribution',
+    'created_by',
+    'import_uuid',
+    'geobase:datasetName',
+    'geobase:uuid',
+    'KSJ2:curve_id',
+    'KSJ2:lat',
+    'KSJ2:long',
+    'lat',
+    'latitude',
+    'lon',
+    'longitude',
+    'source',
+    'source_ref',
+    'odbl',
+    'odbl:note'
+]);
+const uninterestingKeyRegex = /^(source(_ref)?|tiger):/;
+
+/**
+ * Returns whether the given OSM tag key is potentially "interesting".
+ * For example, some tags are deemed not interesting because the respective tag is
+ * considered "discardable".
+ *
+ * @param {string} key the key to test
+ * @returns {boolean}
+ */
 export function osmIsInterestingTag(key) {
-    return key !== 'attribution' &&
-        key !== 'created_by' &&
-        key !== 'source' &&
-        key !== 'odbl' &&
-        key.indexOf('source:') !== 0 &&
-        key.indexOf('source_ref') !== 0 && // purposely exclude colon
-        key.indexOf('tiger:') !== 0;
+    if (uninterestingKeys.has(key)) return false;
+    if (uninterestingKeyRegex.test(key))  return false;
+    return true;
 }
 
 export const osmLifecyclePrefixes = {
     // nonexistent, might be built
     proposed: true, planned: true,
-    // under maintentance or between groundbreaking and opening
+    // under maintenance or between groundbreaking and opening
     construction: true,
     // existent but not functional
     disused: true,
@@ -43,6 +69,8 @@ export function osmSetAreaKeys(value) {
 // `highway` and `railway` are typically linear features, but there
 // are a few exceptions that should be treated as areas, even in the
 // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
+// similarly, some tags are both used as a primary key for area features,
+// but also as an attribute tag for linear features (e.g. `emergency=yes`)
 export var osmAreaKeysExceptions = {
     highway: {
         elevator: true,
@@ -58,13 +86,22 @@ export var osmAreaKeysExceptions = {
         station: true,
         traverser: true,
         turntable: true,
-        wash: true
-    },
-    traffic_calming: {
-        island: true
+        wash: true,
+        ventilation_shaft: true
     },
     waterway: {
         dam: true
+    },
+    amenity: {
+        bicycle_parking: true
+    },
+    emergency: {
+        yes: false,
+        no: false,
+        private: false,
+        designated: false,
+        destination: false,
+        official: false
     }
 };
 
@@ -76,6 +113,9 @@ export function osmTagSuggestingArea(tags) {
     var returnTags = {};
     for (var realKey in tags) {
         const key = osmRemoveLifecyclePrefix(realKey);
+        if (key in osmAreaKeysExceptions && osmAreaKeysExceptions[key][tags[realKey]] === false) {
+            continue;
+        }
         if (key in osmAreaKeys && !(tags[realKey] in osmAreaKeys[key])) {
             returnTags[realKey] = tags[realKey];
             return returnTags;
@@ -123,7 +163,7 @@ export function osmNodeGeometriesForTags(nodeTags) {
     return geometries;
 }
 
-export var osmOneWayTags = {
+export const osmOneWayForwardTags = {
     'aerialway': {
         'chair_lift': true,
         'drag_lift': true,
@@ -135,6 +175,9 @@ export var osmOneWayTags = {
         't-bar': true,
         'zip_line': true
     },
+    'conveying': {
+        'forward': true,
+    },
     'highway': {
         'motorway': true
     },
@@ -145,6 +188,9 @@ export var osmOneWayTags = {
     'man_made': {
         'goods_conveyor': true,
         'piste:halfpipe': true
+    },
+    'oneway': {
+        'yes': true,
     },
     'piste:type': {
         'downhill': true,
@@ -162,6 +208,7 @@ export var osmOneWayTags = {
         'ditch': true,
         'drain': true,
         'fish_pass': true,
+        'flowline': true,
         'pressurised': true,
         'river': true,
         'spillway': true,
@@ -169,6 +216,28 @@ export var osmOneWayTags = {
         'tidal_channel': true
     }
 };
+export const osmOneWayBackwardTags = {
+    'conveying': {
+        'backward': true,
+    },
+    'oneway': {
+        '-1': true,
+    },
+};
+export const osmOneWayBiDirectionalTags = {
+    'conveying': {
+        'reversible': true,
+    },
+    'oneway': {
+        'alternating': true,
+        'reversible': true,
+    },
+};
+export const osmOneWayTags = merge(
+    osmOneWayForwardTags,
+    osmOneWayBackwardTags,
+    osmOneWayBiDirectionalTags,
+);
 
 // solid and smooth surfaces akin to the assumed default road surface in OSM
 export var osmPavedTags = {
@@ -178,7 +247,8 @@ export var osmPavedTags = {
         'concrete': true,
         'chipseal': true,
         'concrete:lanes': true,
-        'concrete:plates': true
+        'concrete:plates': true,
+        'tiles': true
     },
     'tracktype': {
         'grade1': true
@@ -188,12 +258,15 @@ export var osmPavedTags = {
 // solid, if somewhat uncommon surfaces with a high range of smoothness
 export var osmSemipavedTags = {
     'surface': {
+        'bricks': true,
         'cobblestone': true,
-        'cobblestone:flattened': true,
         'unhewn_cobblestone': true,
         'sett': true,
         'paving_stones': true,
+        'grass_paver': true,
         'metal': true,
+        'metal_grid': true,
+        'fibre_reinforced_polymer_grate': true,
         'wood': true
     }
 };
@@ -223,12 +296,16 @@ export var osmRightSideIsInsideTags = {
 export var osmRoutableHighwayTagValues = {
     motorway: true, trunk: true, primary: true, secondary: true, tertiary: true, residential: true,
     motorway_link: true, trunk_link: true, primary_link: true, secondary_link: true, tertiary_link: true,
-    unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true,
-    path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true
+    unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true, busway: true,
+    path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true, ladder: true
+};
+/** aeroway tags that are treated as routable for aircraft */
+export const osmRoutableAerowayTags = {
+    runway: true, taxiway: true
 };
 // "highway" tag values that generally do not allow motor vehicles
 export var osmPathHighwayTagValues = {
-    path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true
+    path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true, ladder: true
 };
 
 // "railway" tag values representing existing railroad tracks (purposely does not include 'abandoned')
@@ -240,8 +317,82 @@ export var osmRailwayTrackTagValues = {
 
 // "waterway" tag values for line features representing water flow
 export var osmFlowingWaterwayTagValues = {
-    canal: true, ditch: true, drain: true, fish_pass: true, river: true, stream: true, tidal_channel: true
+    canal: true, ditch: true, drain: true, fish_pass: true, flowline: true, river: true, stream: true, tidal_channel: true
+};
+
+// Tag values that represent actual land use (areas)
+export var osmLanduseTags = {
+    'amenity': {
+        'bicycle_parking': true,
+        'college': true,
+        'grave_yard': true,
+        'hospital': true,
+        'marketplace': true,
+        'motorcycle_parking': true,
+        'parking': true,
+        'place_of_worship': true,
+        'prison': true,
+        'school': true,
+        'university': true
+    },
+    'landuse': true,
+    'leisure': true,
+    'natural': true
 };
 
 // Tags which values should be considered case sensitive when offering tag suggestions
 export const allowUpperCaseTagValues = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer|country|target|brewery|cai_scale|traffic_sign/;
+
+// Returns whether a `colour` tag value looks like a valid color we can display
+export function isColourValid(value) {
+    if (!value.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
+        // OSM only supports hex or named colors
+        return false;
+    }
+    if (!CSS.supports('color', value) || ['unset', 'inherit', 'initial', 'revert'].includes(value)) {
+        // see https://stackoverflow.com/a/68217760/1627467
+        return false;
+    }
+    return true;
+}
+
+// https://wiki.openstreetmap.org/wiki/Special:WhatLinksHere/Property:P44
+export const osmMutuallyExclusiveTagPairs = [
+    ['noname', 'name'],
+    ['noref', 'ref'],
+    ['nohousenumber', 'addr:housenumber'],
+    ['noaddress', 'addr:housenumber'],
+    ['noaddress', 'addr:housename'],
+    ['noaddress', 'addr:unit'],
+    ['addr:nostreet', 'addr:street']
+];
+
+
+/**
+ * @param {Tags} vertexTags @param {Tags} wayTags
+ * returns true if iD should render the `direction` tag for
+ * this vertex+way combination.
+ */
+export function osmShouldRenderDirection(vertexTags, wayTags) {
+    if (vertexTags.highway || vertexTags.traffic_sign || vertexTags.traffic_calming || vertexTags.barrier) {
+        // allowed on roads and tramways
+        return !!(wayTags.highway || wayTags.railway);
+    }
+    if (vertexTags.railway) return !!wayTags.railway;
+    if (vertexTags.waterway) return !!wayTags.waterway;
+    if (vertexTags.cycleway === 'asl') return !!wayTags.highway;
+    return true;
+}
+
+export var osmSummableTags = new Set([
+    'step_count',
+    'parking:both:capacity',
+    'parking:left:capacity',
+    'parking:right:capacity'
+]);
+
+// ISO country codes keys
+export const osmIsoCountryKeys = new Set([
+  'country',
+  'target'
+]);

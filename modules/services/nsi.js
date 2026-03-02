@@ -52,13 +52,13 @@ function setNsiSources() {
   const vMinor = `${v.major}.${v.minor}`;
   const cdn = nsiCdnUrl.replace('{version}', vMinor);
   const sources = {
-    'nsi_data': cdn + 'dist/nsi.min.json',
-    'nsi_dissolved': cdn + 'dist/dissolved.min.json',
-    'nsi_features': cdn + 'dist/featureCollection.min.json',
-    'nsi_generics': cdn + 'dist/genericWords.min.json',
+    'nsi_data': cdn + 'dist/json/nsi.min.json',
+    'nsi_dissolved': cdn + 'dist/wikidata/dissolved.min.json',
+    'nsi_features': cdn + 'dist/json/featureCollection.min.json',
+    'nsi_generics': cdn + 'dist/json/genericWords.min.json',
     'nsi_presets': cdn + 'dist/presets/nsi-id-presets.min.json',
-    'nsi_replacements': cdn + 'dist/replacements.min.json',
-    'nsi_trees': cdn + 'dist/trees.min.json'
+    'nsi_replacements': cdn + 'dist/json/replacements.min.json',
+    'nsi_trees': cdn + 'dist/json/trees.min.json'
   };
 
   let fileMap = fileFetcher.fileMap();
@@ -81,6 +81,21 @@ function loadNsiPresets() {
       // Add `suggestion=true` to all the nsi presets
       // The preset json schema doesn't include it, but the iD code still uses it
       Object.values(vals[0].presets).forEach(preset => preset.suggestion = true);
+
+      // nsi does not specify *:wikipedia (anymore):
+      // clean up previous values to prevent that the wikidata/wikipedia information
+      // is going to be out of sync, see #9103
+      Object.values(vals[0].presets).forEach(preset => {
+        if (preset.tags['brand:wikidata']) {
+          preset.removeTags = {'brand:wikipedia': '*', ...(preset.removeTags || preset.addTags || preset.tags)};
+        }
+        if (preset.tags['operator:wikidata']) {
+          preset.removeTags = {'operator:wikipedia': '*', ...(preset.removeTags || preset.addTags || preset.tags)};
+        }
+        if (preset.tags['network:wikidata']) {
+          preset.removeTags = {'network:wikipedia': '*', ...(preset.removeTags || preset.addTags || preset.tags)};
+        }
+      });
 
       presetManager.merge({
         presets: vals[0].presets,
@@ -566,7 +581,7 @@ function _upgradeTags(tags, loc) {
 
     // These tags can be toplevel tags -or- attributes - so we generally want to preserve existing values - #8615
     // We'll only _replace_ the tag value if this tag is the toplevel/defining tag for the matched item (`k`)
-    ['building', 'emergency', 'internet_access', 'takeaway'].forEach(osmkey => {
+    ['building', 'emergency', 'internet_access', 'opening_hours', 'takeaway'].forEach(osmkey => {
       if (k !== osmkey) preserveTags.push(`^${osmkey}$`);
     });
 

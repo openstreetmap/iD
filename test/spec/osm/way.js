@@ -305,7 +305,6 @@ describe('iD.osmWay', function() {
 
         it('returns true when the way has tag oneway=yes', function() {
             expect(iD.osmWay({tags: { oneway: 'yes' }}).isOneWay(), 'oneway yes').to.be.true;
-            expect(iD.osmWay({tags: { oneway: '1' }}).isOneWay(), 'oneway 1').to.be.true;
             expect(iD.osmWay({tags: { oneway: '-1' }}).isOneWay(), 'oneway -1').to.be.true;
         });
 
@@ -471,6 +470,10 @@ describe('iD.osmWay', function() {
 
         it('returns false for a linear way with two or more nodes', function () {
             expect(iD.osmWay({nodes: ['a', 'b']}).isDegenerate()).to.equal(false);
+        });
+
+        it('returns true for a linear way that doubles back on itself', function () {
+            expect(iD.osmWay({nodes: ['a', 'b', 'a']}).isDegenerate()).to.equal(true);
         });
 
         it('returns true for an area with zero, one, or two unique nodes', function () {

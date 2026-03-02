@@ -225,9 +225,7 @@ export function rendererBackground(context) {
       delete hash.offset;
     }
 
-    if (!window.mocha) {
-      window.location.replace('#' + utilQsString(hash, true));
-    }
+    window.history.replaceState(null, '', '#' + utilQsString(hash, true));
 
     let imageryUsed = [];
     let photoOverlaysUsed = [];
@@ -253,7 +251,8 @@ export function rendererBackground(context) {
       'mapillary-signs': 'Mapillary Signs',
       kartaview: 'KartaView Images',
       vegbilder: 'Norwegian Road Administration Images',
-      mapilio: 'Mapilio Images'
+      mapilio: 'Mapilio Images',
+      panoramax: 'Panoramax Images'
     };
 
     for (let layerID in photoOverlayLayers) {

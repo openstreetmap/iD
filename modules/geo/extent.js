@@ -1,70 +1,78 @@
 import { geoMetersToLat, geoMetersToLon } from './geo';
 
+/** @import { Vec2 } from './vector' */
 
+/**
+ * @param {geoExtent | Vec2 | [Vec2, Vec2]} [min]
+ * @param {Vec2} [max]
+ */
 export function geoExtent(min, max) {
     if (!(this instanceof geoExtent)) {
         return new geoExtent(min, max);
     } else if (min instanceof geoExtent) {
-        return min;
+        return /** @type {geoExtent} */ (min);
     } else if (min && min.length === 2 && min[0].length === 2 && min[1].length === 2) {
-        this[0] = min[0];
-        this[1] = min[1];
+        this[0] = /** @type {Vec2} */ (min[0]);
+        this[1] = /** @type {Vec2} */ (min[1]);
     } else {
-        this[0] = min        || [ Infinity,  Infinity];
-        this[1] = max || min || [-Infinity, -Infinity];
+        this[0] = /** @type {Vec2} */ (min        || [ Infinity,  Infinity]);
+        this[1] = /** @type {Vec2} */ (max || min || [-Infinity, -Infinity]);
     }
 }
 
 geoExtent.prototype = new Array(2);
 
-Object.assign(geoExtent.prototype, {
-
-    equals: function (obj) {
+    /** @param {geoExtent} obj */
+    geoExtent.prototype.equals = function (obj) {
         return this[0][0] === obj[0][0] &&
             this[0][1] === obj[0][1] &&
             this[1][0] === obj[1][0] &&
             this[1][1] === obj[1][1];
-    },
+    };
 
 
-    extend: function(obj) {
+    /** @param {geoExtent | Vec2 | [Vec2, Vec2]} obj */
+    geoExtent.prototype.extend = function(obj) {
         if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
         return geoExtent(
             [Math.min(obj[0][0], this[0][0]), Math.min(obj[0][1], this[0][1])],
             [Math.max(obj[1][0], this[1][0]), Math.max(obj[1][1], this[1][1])]
         );
-    },
+    };
 
 
-    _extend: function(extent) {
+    /** @param {geoExtent} extent */
+    geoExtent.prototype._extend = function(extent) {
         this[0][0] = Math.min(extent[0][0], this[0][0]);
         this[0][1] = Math.min(extent[0][1], this[0][1]);
         this[1][0] = Math.max(extent[1][0], this[1][0]);
         this[1][1] = Math.max(extent[1][1], this[1][1]);
-    },
+    };
 
 
-    area: function() {
+    geoExtent.prototype.area = function() {
         return Math.abs((this[1][0] - this[0][0]) * (this[1][1] - this[0][1]));
-    },
+    };
 
 
-    center: function() {
+    /** @returns {Vec2} */
+    geoExtent.prototype.center = function() {
         return [(this[0][0] + this[1][0]) / 2, (this[0][1] + this[1][1]) / 2];
-    },
+    };
 
 
-    rectangle: function() {
+    geoExtent.prototype.rectangle = function() {
         return [this[0][0], this[0][1], this[1][0], this[1][1]];
-    },
+    };
 
 
-    bbox: function() {
+    geoExtent.prototype.bbox = function() {
         return { minX: this[0][0], minY: this[0][1], maxX: this[1][0], maxY: this[1][1] };
-    },
+    };
 
 
-    polygon: function() {
+    /** @returns {Vec2[]} */
+    geoExtent.prototype.polygon = function() {
         return [
             [this[0][0], this[0][1]],
             [this[0][0], this[1][1]],
@@ -72,37 +80,41 @@ Object.assign(geoExtent.prototype, {
             [this[1][0], this[0][1]],
             [this[0][0], this[0][1]]
         ];
-    },
+    };
 
 
-    contains: function(obj) {
+    /** @param {geoExtent | Vec2 | [Vec2, Vec2]} obj */
+    geoExtent.prototype.contains = function(obj) {
         if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
         return obj[0][0] >= this[0][0] &&
                obj[0][1] >= this[0][1] &&
                obj[1][0] <= this[1][0] &&
                obj[1][1] <= this[1][1];
-    },
+    };
 
 
-    intersects: function(obj) {
+    /** @param {geoExtent | Vec2 | [Vec2, Vec2]} obj */
+    geoExtent.prototype.intersects = function(obj) {
         if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
         return obj[0][0] <= this[1][0] &&
                obj[0][1] <= this[1][1] &&
                obj[1][0] >= this[0][0] &&
                obj[1][1] >= this[0][1];
-    },
+    };
 
 
-    intersection: function(obj) {
+    /** @param {geoExtent | [Vec2, Vec2]} obj */
+    geoExtent.prototype.intersection = function(obj) {
         if (!this.intersects(obj)) return new geoExtent();
         return new geoExtent(
             [Math.max(obj[0][0], this[0][0]), Math.max(obj[0][1], this[0][1])],
             [Math.min(obj[1][0], this[1][0]), Math.min(obj[1][1], this[1][1])]
         );
-    },
+    };
 
 
-    percentContainedIn: function(obj) {
+    /** @param {geoExtent | Vec2 | [Vec2, Vec2]} obj */
+    geoExtent.prototype.percentContainedIn = function(obj) {
         if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
         var a1 = this.intersection(obj).area();
         var a2 = this.area();
@@ -117,21 +129,30 @@ Object.assign(geoExtent.prototype, {
         } else {
             return a1 / a2;
         }
-    },
+    };
 
 
-    padByMeters: function(meters) {
+    /** @param {number} meters */
+    geoExtent.prototype.padByMeters = function(meters) {
         var dLat = geoMetersToLat(meters);
         var dLon = geoMetersToLon(meters, this.center()[1]);
         return geoExtent(
             [this[0][0] - dLon, this[0][1] - dLat],
             [this[1][0] + dLon, this[1][1] + dLat]
         );
-    },
+    };
 
 
-    toParam: function() {
+    geoExtent.prototype.toParam = function() {
         return this.rectangle().join(',');
-    }
+    };
 
-});
+    geoExtent.prototype.split = function() {
+        const center = this.center();
+        return [
+            geoExtent(this[0], center),
+            geoExtent([center[0], this[0][1]], [this[1][0], center[1]]),
+            geoExtent(center, this[1]),
+            geoExtent([this[0][0], center[1]], [center[0], this[1][1]])
+        ];
+    };

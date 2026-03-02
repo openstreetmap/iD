@@ -12,7 +12,6 @@ export function utilKeybinding(namespace) {
     function testBindings(d3_event, isCapturing) {
         var didMatch = false;
         var bindings = Object.keys(_keybindings).map(function(id) { return _keybindings[id]; });
-        var i, binding;
 
         // Most key shortcuts will accept either lower or uppercase ('h' or 'H'),
         // so we don't strictly match on the shift key, but we prioritize
@@ -20,8 +19,7 @@ export function utilKeybinding(namespace) {
         // (This lets us differentiate between '←'/'⇧←' or '⌘Z'/'⌘⇧Z')
 
         // priority match shifted keybindings first
-        for (i = 0; i < bindings.length; i++) {
-            binding = bindings[i];
+        for (const binding of bindings) {
             if (!binding.event.modifiers.shiftKey) continue;  // no shift
             if (!!binding.capture !== isCapturing) continue;
             if (matches(d3_event, binding, true)) {
@@ -36,8 +34,7 @@ export function utilKeybinding(namespace) {
         if (didMatch) return;
 
         // then unshifted keybindings
-        for (i = 0; i < bindings.length; i++) {
-            binding = bindings[i];
+        for (const binding of bindings) {
             if (binding.event.modifiers.shiftKey) continue;   // shift
             if (!!binding.capture !== isCapturing) continue;
             if (matches(d3_event, binding, false)) {
@@ -283,7 +280,7 @@ utilKeybinding.keys = {
     'open-bracket': '[',
     // Back slash, or \
     'back-slash': '\\',
-    // Close backet, or ]
+    // Close bracket, or ]
     'close-bracket': ']',
     // Apostrophe, or Quote, or '
     quote: '\'', apostrophe: '\'',
@@ -394,7 +391,7 @@ utilKeybinding.keyCodes = {
     '[': 219, 'open-bracket': 219,
     // Back slash, or \
     '\\': 220, 'back-slash': 220,
-    // Close backet, or ]
+    // Close bracket, or ]
     ']': 221, 'close-bracket': 221,
     // Apostrophe, or Quote, or '
     '\'': 222, quote: 222, apostrophe: 222

@@ -25,7 +25,11 @@ export { _mainPresetIndex as presetManager };
 //
 export function presetIndex() {
   const dispatch = d3_dispatch('favoritePreset', 'recentsChange');
-  const MAXRECENTS = 30;
+
+  /** the number of recent presets to save */
+  const MAX_RECENTS_TO_STORE = 30;
+  /** the number of recent presets to show in the preset list */
+  const MAX_RECENTS_TO_SHOW = 8;
 
   // seed the preset lists with geometry fallbacks
   const POINT = presetPreset('point', { name: 'Point', tags: {}, geometry: ['point', 'vertex'], matchScore: 0.1 } );
@@ -56,8 +60,9 @@ export function presetIndex() {
   let _loadPromise;
 
 
-  _this.ensureLoaded = () => {
-    if (_loadPromise) return _loadPromise;
+  /** @param {boolean=} bypassCache - used by unit tests */
+  _this.ensureLoaded = (bypassCache) => {
+    if (_loadPromise && !bypassCache) return _loadPromise;
 
     return _loadPromise = Promise.all([
         fileFetcher.get('preset_categories'),
@@ -226,7 +231,7 @@ export function presetIndex() {
         const candidate = indexMatches[i];
         const score = candidate.matchScore(tags);
 
-        if (score === -1){
+        if (score === -1) {
           continue;
         }
         matchCandidates.push({score, candidate});
@@ -238,15 +243,15 @@ export function presetIndex() {
       }
     }
 
-    if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)){
+    if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)) {
       const validHere = locationManager.locationSetsAt(loc);
       if (!validHere[bestMatch.locationSetID]) {
+        bestMatch = undefined;
         matchCandidates.sort((a, b) => (a.score < b.score) ? 1 : -1);
         for (let i = 0; i < matchCandidates.length; i++) {
           const candidateScore = matchCandidates[i];
           if (!candidateScore.candidate.locationSetID || validHere[candidateScore.candidate.locationSetID]) {
             bestMatch = candidateScore.candidate;
-            bestScore = candidateScore.score;
             break;
           }
         }
@@ -255,7 +260,7 @@ export function presetIndex() {
 
     // If any part of an address is present, allow fallback to "Address" preset - #4353
     if (!bestMatch || bestMatch.isFallback()) {
-      for (let k in tags){
+      for (let k in tags) {
           if (/^addr:/.test(k) && keyIndex['addr:*'] && keyIndex['addr:*']['*']) {
             bestMatch = keyIndex['addr:*']['*'][0];
             break;
@@ -302,7 +307,6 @@ export function presetIndex() {
       footway: true,
       railway: true,
       junction: true,
-      traffic_calming: true,
       type: true
     };
     let areaKeys = {};
@@ -408,7 +412,7 @@ export function presetIndex() {
   _this.defaults = (geometry, n, startWithRecents, loc, extraPresets) => {
     let recents = [];
     if (startWithRecents) {
-      recents = _this.recent().matchGeometry(geometry).collection.slice(0, 4);
+      recents = _this.recent().matchGeometry(geometry).collection.slice(0, MAX_RECENTS_TO_SHOW);
     }
 
     let defaults;
@@ -594,7 +598,7 @@ export function presetIndex() {
     }
 
     // remove the last recent (first in, first out)
-    while (items.length >= MAXRECENTS) {
+    while (items.length >= MAX_RECENTS_TO_STORE) {
       items.pop();
     }
 

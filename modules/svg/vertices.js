@@ -5,6 +5,7 @@ import { presetManager } from '../presets';
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './helpers';
+import { svgTagClasses } from './tag_classes';
 
 export function svgVertices(projection, context) {
     var radiuses = {
@@ -140,6 +141,7 @@ export function svgVertices(projection, context) {
             .classed('retagged', function(d) {
                 return base.entities[d.id] && !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
             })
+            .call(svgTagClasses())
             .call(updateAttributes);
 
         // Vertices with icons get a `use`.
@@ -192,8 +194,8 @@ export function svgVertices(projection, context) {
             .attr('class', 'viewfield')
             .attr('d', 'M0,0H0')
             .merge(viewfields)
-            .attr('marker-start', 'url(#ideditor-viewfield-marker' + (wireframe ? '-wireframe' : '') + ')')
-            .attr('transform', function(d) { return 'rotate(' + d + ')'; });
+            .attr('marker-start', d => 'url(#ideditor-viewfield-marker' + (d.type === 'side' ? '-side' : '') + (wireframe ? '-wireframe' : '') + ')')
+            .attr('transform', d => `rotate(${d.angle})`);
     }
 
 

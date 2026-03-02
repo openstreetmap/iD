@@ -58,7 +58,7 @@ describe('iD.rendererFeatures', function() {
                 iD.osmNode({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
                 iD.osmNode({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
                 iD.osmNode({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
-                iD.osmNode({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
+                iD.osmNode({id: 'point_old_rail_station', tags: {'disused:railway': 'station'}, version: 1}),
                 iD.osmWay({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
                 iD.osmWay({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
                 iD.osmWay({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
@@ -80,7 +80,7 @@ describe('iD.rendererFeatures', function() {
             expect(stats.paths).to.eql(0);
             expect(stats.points).to.eql(5);
             expect(stats.power).to.eql(1);
-            expect(stats.rail).to.eql(2);
+            expect(stats.rail).to.eql(1);
             expect(stats.water).to.eql(1);
         });
     });
@@ -92,7 +92,7 @@ describe('iD.rendererFeatures', function() {
             iD.osmNode({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
             iD.osmNode({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
             iD.osmNode({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
-            iD.osmNode({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
+            iD.osmNode({id: 'point_old_rail_station', tags: {'disused:railway': 'station'}, version: 1}),
 
             // Traffic Roads
             iD.osmWay({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
@@ -141,6 +141,9 @@ describe('iD.rendererFeatures', function() {
             iD.osmWay({id: 'downhill_piste', tags: {'piste:type': 'downhill'}, version: 1}),
             iD.osmWay({id: 'piste_track_combo', tags: {'piste:type': 'alpine', highway: 'track'}, version: 1}),
 
+            // Climbing routes
+            iD.osmWay({id: 'climbing_route', tags: {'climbing': 'route'}, version: 1}),
+
             // Aerialways
             iD.osmWay({id: 'gondola', tags: {aerialway: 'gondola'}, version: 1}),
             iD.osmWay({id: 'zip_line', tags: {aerialway: 'zip_line'}, version: 1}),
@@ -152,6 +155,7 @@ describe('iD.rendererFeatures', function() {
             iD.osmWay({id: 'scrub', tags: {area: 'yes', natural: 'scrub'}, version: 1}),
             iD.osmWay({id: 'industrial', tags: {area: 'yes', landuse: 'industrial'}, version: 1}),
             iD.osmWay({id: 'parkinglot', tags: {area: 'yes', amenity: 'parking', parking: 'surface'}, version: 1}),
+            iD.osmWay({id: 'park', tags: {area: 'yes', leisure: 'park', parking: 'surface'}, version: 1}),
 
             // Landuse Multipolygon
             iD.osmWay({id: 'outer', version: 1}),
@@ -471,12 +475,12 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
 
             doMatch('rail', [
-                'point_rail_station', 'point_old_rail_station',
-                'railway', 'rail_landuse', 'rail_disused'
+                'point_rail_station', 'railway', 'rail_landuse', 'rail_disused'
             ]);
 
             dontMatch('rail', [
                 'rail_streetcar', 'rail_trail',  // because rail also used as highway
+                'point_old_rail_station',
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'power_line',
                 'motorway_construction', 'fence'
@@ -550,13 +554,13 @@ describe('iD.rendererFeatures', function() {
         });
 
         it('hides uninteresting (e.g. untagged or "other") member ways on a hidden multipolygon relation', function() {
-            var outer = iD.osmWay({id: 'outer', tags: {area: 'yes', natural: 'wood'}, version: 1});
+            var outer = iD.osmWay({id: 'outer', tags: {}, version: 1});
             var inner1 = iD.osmWay({id: 'inner1', tags: {barrier: 'fence'}, version: 1});
             var inner2 = iD.osmWay({id: 'inner2', version: 1});
             var inner3 = iD.osmWay({id: 'inner3', tags: {highway: 'residential'}, version: 1});
             var r = iD.osmRelation({
                 id: 'r',
-                tags: {type: 'multipolygon'},
+                tags: {type: 'multipolygon', natural: 'wood'},
                 members: [
                     {id: outer.id, role: 'outer', type: 'way'},
                     {id: inner1.id, role: 'inner', type: 'way'},
@@ -629,7 +633,7 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
             hidden = features.hidden();
             autoHidden = features.autoHidden();
-            msg = ++i + ' points';
+            msg = (i + 1) + ' points';
 
             expect(hidden, msg).to.include('points');
             expect(autoHidden, msg).to.include('points');
@@ -660,7 +664,7 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
             hidden = features.hidden();
             autoHidden = features.autoHidden();
-            msg = ++i + ' points';
+            msg = (i + 1) + ' points';
 
             expect(hidden, msg).to.include('points');
             expect(autoHidden, msg).to.include('points');

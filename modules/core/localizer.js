@@ -61,6 +61,7 @@ export function coreLocalizer() {
     localizer.usesMetric = () => _usesMetric;
     localizer.languageNames = () => _languageNames;
     localizer.scriptNames = () => _scriptNames;
+    localizer.languages = () => _dataLanguages; // Expose all the languages supported
 
 
     // The client app may want to manually set the locale, regardless of the
@@ -74,6 +75,7 @@ export function coreLocalizer() {
         } else {
             _preferredLocaleCodes = codes;
         }
+        _loadPromise = undefined;
         return localizer;
     };
 
@@ -108,11 +110,8 @@ export function coreLocalizer() {
                 _dataLocales = results[1];
 
                 let indexes = results.slice(2);
-                let requestedLocales = (_preferredLocaleCodes || [])
-                    .concat(utilDetect().browserLocales)   // List of locales preferred by the browser in priority order.
-                    .concat(['en']);   // fallback to English since it's the only guaranteed complete language
 
-                _localeCodes = localesToUseFrom(requestedLocales);
+                _localeCodes = localizer.localesToUseFrom(_dataLocales);
                 _localeCode = _localeCodes[0];   // Run iD in the highest-priority locale; the rest are fallbacks
 
                 let loadStringsPromises = [];
@@ -139,23 +138,36 @@ export function coreLocalizer() {
     };
 
     // Returns the locales from `requestedLocales` supported by iD that we should use
-    function localesToUseFrom(requestedLocales) {
-        let supportedLocales = _dataLocales;
+    /** @param {{ [locale: string]: unknown }} supportedLocales */
+    localizer.localesToUseFrom = (supportedLocales) => {
+        const requestedLocales = [
+          ...(_preferredLocaleCodes || []),
+          ...utilDetect().browserLocales,  // List of locales preferred by the browser in priority order.
+          'en',  // fallback to English since it's the only guaranteed complete language
+        ];
 
+        /** @type {string[]} */
         let toUse = [];
-        for (let i in requestedLocales) {
-            let locale = requestedLocales[i];
+        for (const locale of requestedLocales) {
             if (supportedLocales[locale]) toUse.push(locale);
 
-            if (locale.includes('-')) {
+            if ('Intl' in window && 'Locale' in window.Intl) {
                 // Full locale ('es-ES'), add fallback to the base ('es')
+                const localeObj = new Intl.Locale(locale);
+                const withoutScript = `${localeObj.language}-${localeObj.region}`;
+                const base = localeObj.language;
+
+                if (supportedLocales[withoutScript]) toUse.push(withoutScript);
+                if (supportedLocales[base]) toUse.push(base);
+            } else if (locale.includes('-')) {
+                // legacy logic: if Intl.Locale is not available
                 let langPart = locale.split('-')[0];
                 if (supportedLocales[langPart]) toUse.push(langPart);
             }
         }
         // remove duplicates
         return utilArrayUniq(toUse);
-    }
+    };
 
     function updateForCurrentLocale() {
         if (!_localeCode) return;
@@ -390,6 +402,24 @@ export function coreLocalizer() {
         const info = localizer.tInfo(stringId, replacements, locale);
         return selection.append('span')
             .attr('class', 'localized-text')
+            .attr('lang', info.locale || 'und')
+            .text((replacements && replacements.prefix || '')
+                + info.text
+                + (replacements &&replacements.suffix || ''));
+      };
+      ret.stringId = stringId;
+      return ret;
+    };
+
+    // Adds or updates a localized text wrapped as an HTML span element with locale info to the DOM
+    localizer.t.addOrUpdate = function(stringId, replacements, locale) {
+      const ret = function(selection) {
+        const info = localizer.tInfo(stringId, replacements, locale);
+        const span = selection.selectAll('span.localized-text').data([info]);
+        const enter = span.enter()
+            .append('span')
+            .classed('localized-text', true);
+        span.merge(enter)
             .attr('lang', info.locale || 'und')
             .text((replacements && replacements.prefix || '')
                 + info.text

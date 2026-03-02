@@ -11,6 +11,7 @@ import { actionMoveMember } from '../../actions/move_member';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { osmEntity } from '../../osm';
+import { isColourValid } from '../../osm/tags';
 import { svgIcon } from '../../svg/icon';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
@@ -45,7 +46,7 @@ export function uiSectionRawMemberEditor(context) {
         d3_event.preventDefault();
 
         // display the loading indicator
-        d3_select(this.parentNode).classed('tag-reference-loading', true);
+        d3_select(this).classed('loading', true);
         context.loadEntity(d.id, function() {
             section.reRender();
         });
@@ -198,6 +199,8 @@ export function uiSectionRawMemberEditor(context) {
                     labelLink
                         .append('span')
                         .attr('class', 'member-entity-name')
+                        .classed('has-colour', d => d.member.type === 'relation' && d.member.tags.colour && isColourValid(d.member.tags.colour))
+                        .style('border-color', d => d.member.type === 'relation' && d.member.tags.colour)
                         .text(function(d) { return utilDisplayName(d.member); });
 
                     label

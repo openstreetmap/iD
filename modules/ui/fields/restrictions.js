@@ -53,9 +53,7 @@ export function uiFieldRestrictions(field, context) {
             _intersection.vertices.length &&           // has vertices
             _intersection.vertices                     // has the vertex that the user selected
                 .filter(function(vertex) { return vertex.id === _vertexID; }).length &&
-            _intersection.ways.length > 2 &&           // has more than 2 ways
-            _intersection.ways                         // has more than 1 TO way
-                .filter(function(way) { return way.__to; }).length > 1
+            _intersection.ways.length > 2              // has more than 2 ways
         );
 
         // Also hide in the case where

@@ -8,7 +8,7 @@ describe('iD.actionDeleteWay', function() {
 
     it('removes a way from parent relations', function() {
         var way      = iD.osmWay(),
-            relation = iD.osmRelation({members: [{ id: way.id }, { id: 'w-2' }]}),
+            relation = iD.osmRelation({members: [{ id: way.id }, { id: 'w-99' }]}),
             action   = iD.actionDeleteWay(way.id),
             graph    = iD.coreGraph([way, relation]).update(action),
             ids      = graph.entity(relation.id).members.map(function (m) { return m.id; });

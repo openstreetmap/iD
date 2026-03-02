@@ -1,6 +1,5 @@
 import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
 import { json as d3_json } from 'd3-fetch';
-import { escape } from 'lodash';
 
 import { t, localizer } from '../core/localizer';
 import { geoExtent, geoSphericalDistance } from '../geo';
@@ -11,7 +10,7 @@ import { IntervalTasksQueue } from '../util/IntervalTasksQueue';
 var isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 
 // listen for DPI change, e.g. when dragging a browser window from a retina to non-retina screen
-window.matchMedia(`
+window.matchMedia?.(`
         (-webkit-min-device-pixel-ratio: 2), /* Safari */
         (min-resolution: 2dppx),             /* standard */
         (min-resolution: 192dpi)             /* fallback */
@@ -69,26 +68,26 @@ export function rendererBackgroundSource(data) {
 
     source.name = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t('imagery.' + id_safe + '.name', { default: escape(_name) });
+        return t('imagery.' + id_safe + '.name', { default: _name });
     };
 
 
     source.label = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.append('imagery.' + id_safe + '.name', { default: escape(_name) });
+        return t.append('imagery.' + id_safe + '.name', { default: _name });
     };
 
 
     source.hasDescription = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).text;
+        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: _description }).text;
         return descriptionText !== '';
     };
 
 
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.append('imagery.' + id_safe + '.description', { default: escape(_description) });
+        return t.append('imagery.' + id_safe + '.description', { default: _description });
     };
 
 
@@ -230,8 +229,9 @@ export function rendererBackgroundSource(data) {
     };
 
 
-    source.validZoom = function(z) {
-        return source.zoomExtent[0] <= z &&
+    source.validZoom = function(z, underzoom) {
+        if (underzoom === undefined) underzoom = 0;
+        return source.zoomExtent[0] - underzoom <= z &&
             (source.overzoom || source.zoomExtent[1] > z);
     };
 
@@ -243,8 +243,7 @@ export function rendererBackgroundSource(data) {
 
     /* hides a source from the list, but leaves it available for use */
     source.isHidden = function() {
-        return source.id === 'DigitalGlobe-Premium-vintage' ||
-            source.id === 'DigitalGlobe-Standard-vintage';
+        return false; // currently there are no hidden layers
     };
 
 
@@ -583,7 +582,7 @@ rendererBackgroundSource.Custom = function(template) {
             var parts = cleaned.split('?', 2);
             var qs = utilStringQs(parts[1]);
 
-            ['access_token', 'connectId', 'token'].forEach(function(param) {
+            ['access_token', 'connectId', 'token', 'Signature'].forEach(function(param) {
                 if (qs[param]) {
                     qs[param] = '{apikey}';
                 }

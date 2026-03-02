@@ -90,11 +90,8 @@ export function uiSectionChanges(context) {
                 if (name !== '') {
                     string += ':';
                 }
-                return string += ' ' + name;
+                return string + ' ' + name;
             });
-
-        items = itemsEnter
-            .merge(items);
 
 
         // Download changeset link
@@ -123,7 +120,7 @@ export function uiSectionChanges(context) {
             .call(t.append('commit.download_changes'));
 
 
-        function mouseover(d) {
+        function mouseover(d3_event, d) {
             if (d.entity) {
                 context.surface().selectAll(
                     utilEntityOrMemberSelector([d.entity.id], context.graph())

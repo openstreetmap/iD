@@ -1,4 +1,3 @@
-
 import { geoPath as d3_geoPath } from 'd3-geo';
 
 import { osmNode } from '../osm/node';
@@ -7,17 +6,19 @@ export function actionExtract(entityID, projection) {
 
     var extractedNodeID;
 
-    var action = function(graph) {
+    /** @param {boolean} shiftKeyPressed */
+    var action = function(graph, shiftKeyPressed) {
         var entity = graph.entity(entityID);
 
         if (entity.type === 'node') {
-            return extractFromNode(entity, graph);
+            return extractFromNode(entity, graph, shiftKeyPressed);
         }
 
         return extractFromWayOrRelation(entity, graph);
     };
 
-    function extractFromNode(node, graph) {
+    /** @param {boolean} shiftKeyPressed */
+    function extractFromNode(node, graph, shiftKeyPressed) {
 
         extractedNodeID = node.id;
 
@@ -31,7 +32,10 @@ export function actionExtract(entityID, projection) {
                 return accGraph.replace(parentWay.replaceNode(entityID, replacement.id));
             }, graph);
 
+        if (!shiftKeyPressed) return graph;
+
         // Process any relations too
+        // but only if the user holds down the shift key while triggering the operation.
         return graph.parentRelations(node)
             .reduce(function(accGraph, parentRel) {
                 return accGraph.replace(parentRel.replaceMember(node, replacement));
@@ -44,7 +48,7 @@ export function actionExtract(entityID, projection) {
 
         var keysToCopyAndRetain = ['source', 'wheelchair'];
         var keysToRetain = ['area'];
-        var buildingKeysToRetain = ['architect', 'building', 'height', 'layer'];
+        var buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin', 'ref:GB:uprn', 'ref:linz:building_id'];
 
         var extractedLoc = d3_geoPath(projection).centroid(entity.asGeoJSON(graph));
         extractedLoc = extractedLoc && projection.invert(extractedLoc);

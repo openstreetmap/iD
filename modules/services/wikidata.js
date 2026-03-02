@@ -175,7 +175,7 @@ export default {
             // prepare result
             var result = {
                 title: entity.id,
-                description: description ? description.value : '',
+                description: selection => selection.text(description ? description.value : ''),
                 descriptionLocaleCode: description ? description.language : '',
                 editURL: 'https://www.wikidata.org/wiki/' + entity.id
             };

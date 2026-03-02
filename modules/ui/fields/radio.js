@@ -16,9 +16,11 @@ export function uiFieldRadio(field, context) {
     var wrap = d3_select(null);
     var labels = d3_select(null);
     var radios = d3_select(null);
-    var radioData = (field.options || field.keys).slice();  // shallow copy
+    var strings = field.resolveReference('stringsCrossReference');
+    var radioData = (field.options || strings.options || field.keys).slice();  // shallow copy
     var typeField;
     var layerField;
+    let _tags = {};
     var _oldType = {};
     var _entityIDs = [];
 
@@ -55,17 +57,16 @@ export function uiFieldRadio(field, context) {
         enter = labels.enter()
             .append('label');
 
-        var stringsField = field.resolveReference('stringsCrossReference');
         enter
             .append('input')
             .attr('type', 'radio')
             .attr('name', field.id)
-            .attr('value', function(d) { return stringsField.t('options.' + d, { 'default': d }); })
+            .attr('value', function(d) { return strings.t('options.' + d, { 'default': d }); })
             .attr('checked', false);
 
         enter
             .append('span')
-            .each(function(d) { stringsField.t.append('options.' + d, { 'default': d })(d3_select(this)); });
+            .each(function(d) { strings.t.append('options.' + d, { 'default': d })(d3_select(this)); });
 
         labels = labels
             .merge(enter);
@@ -127,7 +128,7 @@ export function uiFieldRadio(field, context) {
             .attr('class', 'labeled-input structure-type-item');
 
         typeEnter
-            .append('span')
+            .append('div')
             .attr('class', 'label structure-label-type')
             .attr('for', 'preset-input-' + selected)
             .call(t.append('inspector.radio.structure.type'));
@@ -172,7 +173,7 @@ export function uiFieldRadio(field, context) {
             .attr('class', 'labeled-input structure-layer-item');
 
         layerEnter
-            .append('span')
+            .append('div')
             .attr('class', 'label structure-label-layer')
             .attr('for', 'preset-input-layer')
             .call(t.append('inspector.radio.structure.layer'));
@@ -224,9 +225,6 @@ export function uiFieldRadio(field, context) {
 
 
     function changeLayer(t, onInput) {
-        if (t.layer === '0') {
-            t.layer = undefined;
-        }
         dispatch.call('change', this, t, onInput);
     }
 
@@ -253,9 +251,15 @@ export function uiFieldRadio(field, context) {
 
         if (field.type === 'structureRadio') {
             if (activeKey === 'bridge') {
-                t.layer = '1';
+                // if there already is an a layer tag, respect it if it's >0
+                const hasExistingLayer = !Number.isNaN(+_tags.layer) && +_tags.layer > 0;
+
+                t.layer = hasExistingLayer ? _tags.layer : '1';
             } else if (activeKey === 'tunnel' && t.tunnel !== 'building_passage') {
-                t.layer = '-1';
+                // if there already is an a layer tag, respect it if it's <0
+                const hasExistingLayer = !Number.isNaN(+_tags.layer) && +_tags.layer < 0;
+
+                t.layer = hasExistingLayer ? _tags.layer : '-1';
             } else {
                 t.layer = undefined;
             }
@@ -266,6 +270,7 @@ export function uiFieldRadio(field, context) {
 
 
     radio.tags = function(tags) {
+        _tags = tags;
         function isOptionChecked(d) {
             if (field.key) {
                 return tags[field.key] === d;
@@ -311,10 +316,13 @@ export function uiFieldRadio(field, context) {
         }
 
         if (field.type === 'structureRadio') {
-            // For waterways without a tunnel tag, set 'culvert' as
-            // the _oldType to default to if the user picks 'tunnel'
             if (!!tags.waterway && !_oldType.tunnel) {
+                // default waterway tunnels to 'culvert'
                 _oldType.tunnel = 'culvert';
+            }
+            if (!!tags.waterway && !_oldType.bridge) {
+                // default waterway bridges to 'aqueduct'
+                _oldType.bridge = 'aqueduct';
             }
 
             wrap.call(structureExtras, tags);

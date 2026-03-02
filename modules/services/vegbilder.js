@@ -6,8 +6,9 @@ import { iso1A2Codes } from '@rapideditor/country-coder';
 import { t, localizer } from '../core/localizer';
 import { utilQsString, utilTiler, utilRebind, utilArrayUnion, utilStringQs} from '../util';
 import {geoExtent, geoScaleToZoom, geoVecAngle, geoVecEqual} from '../geo';
-import pannellumPhotoFrame from './pannellum_photo';
-import planePhotoFrame from './plane_photo';
+import { pannellumPhotoFrame } from './pannellum_photo';
+import { planePhotoFrame } from './plane_photo';
+import { services } from './';
 
 
 const owsEndpoint = 'https://www.vegvesen.no/kart/ogc/vegbilder_1_0/ows?';
@@ -34,18 +35,9 @@ async function fetchAvailableLayers() {
 
   const urlForRequest = owsEndpoint + utilQsString(params);
   const response = await d3_xml(urlForRequest);
-  const xPathSelector = '/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType/wfs:Name';
   const regexMatcher = /^vegbilder_1_0:Vegbilder(?<image_type>_360)?_(?<year>\d{4})$/;
-  const NSResolver = response.createNSResolver(response);
-  const l = response.evaluate(
-    xPathSelector,
-    response,
-    NSResolver,
-    XPathResult.ANY_TYPE
-    );
-  let node;
   const availableLayers = [];
-  while ( (node = l.iterateNext()) !== null ) {
+  for (const node of response.querySelectorAll('FeatureType > Name')) {
     const match = node.textContent?.match(regexMatcher);
     if (match) {
       availableLayers.push({
@@ -151,6 +143,7 @@ async function loadTile(cache, typename, tile) {
     const lane_number = parseInt(lane_code.match(/^[0-9]+/)[0], 10);
     const direction = lane_number % 2 === 0 ? directionEnum.backward : directionEnum.forward;
     const data = {
+      service: 'photo',
       loc,
       key,
       ca,
@@ -446,8 +439,8 @@ export default {
       .text('►');
 
     _loadViewerPromise = Promise.all([
-      pannellumPhotoFrame.init(context, wrapEnter),
-      planePhotoFrame.init(context, wrapEnter)
+      pannellumPhotoFrame(context, wrapEnter),
+      planePhotoFrame(context, wrapEnter)
     ]).then(([pannellumPhotoFrame, planePhotoFrame]) => {
       _pannellumFrame = pannellumPhotoFrame;
       _pannellumFrame.event.on('viewerChanged', () => dispatch.call('viewerChanged'));
@@ -494,24 +487,25 @@ export default {
     _currentFrame = d.is_sphere? _pannellumFrame : _planeFrame;
 
     _currentFrame
-      .selectPhoto(d, keepOrientation)
-      .showPhotoFrame(wrap);
+      .showPhotoFrame(wrap)
+      .selectPhoto(d, keepOrientation);
 
     return this;
   },
 
   showViewer: function (context) {
-    const viewer = context.container().select('.photoviewer')
-      .classed('hide', false);
-
+    const viewer = context.container().select('.photoviewer');
     const isHidden = viewer.selectAll('.photo-wrapper.vegbilder-wrapper.hide').size();
 
     if (isHidden) {
+      for (const service of Object.values(services)) {
+        if (service === this) continue;
+        if (typeof service.hideViewer === 'function') {
+          service.hideViewer(context);
+        }
+      }
       viewer
-        .selectAll('.photo-wrapper:not(.vegbilder-wrapper)')
-        .classed('hide', true);
-
-      viewer
+        .classed('hide', false)
         .selectAll('.photo-wrapper.vegbilder-wrapper')
         .classed('hide', false);
     }
@@ -592,15 +586,13 @@ export default {
   },
 
   updateUrlImage: function (key) {
-    if (!window.mocha) {
-      const hash = utilStringQs(window.location.hash);
-      if (key) {
-        hash.photo = 'vegbilder/' + key;
-      } else {
-        delete hash.photo;
-      }
-      window.location.replace('#' + utilQsString(hash, true));
+    const hash = utilStringQs(window.location.hash);
+    if (key) {
+      hash.photo = 'vegbilder/' + key;
+    } else {
+      delete hash.photo;
     }
+    window.history.replaceState(null, '', '#' + utilQsString(hash, true));
   },
 
   validHere: function(extent) {

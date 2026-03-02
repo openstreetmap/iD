@@ -54,6 +54,7 @@ export function uiInit(context) {
 
     var _lastPointerType;
 
+    var overMap;
 
     function render(container) {
 
@@ -160,7 +161,7 @@ export function uiInit(context) {
             .attr('dir', 'ltr')
             .call(map);
 
-        var overMap = content
+        overMap = content
             .append('div')
             .attr('class', 'over-map');
 
@@ -375,7 +376,6 @@ export function uiInit(context) {
 
         var panPixels = 80;
         context.keybinding()
-            .on('⌫', function(d3_event) { d3_event.preventDefault(); })
             .on([t('sidebar.key'), '`', '²', '@'], ui.sidebar.toggle)   // #5663, #6864 - common QWERTY, AZERTY
             .on('←', pan([panPixels, 0]))
             .on('↑', pan([0, panPixels]))
@@ -549,12 +549,11 @@ export function uiInit(context) {
         ui.checkOverflow('.top-toolbar');
         ui.checkOverflow('.map-footer-bar');
 
-        // Use outdated code so it works on Explorer
-        var resizeWindowEvent = document.createEvent('Event');
-
-        resizeWindowEvent.initEvent('resizeWindow', true, true);
-
-        document.dispatchEvent(resizeWindowEvent);
+        const event = new Event('resizeWindow', {
+            bubbles: true,
+            cancelable: true
+        });
+        document.dispatchEvent(event);
     };
 
 
@@ -665,14 +664,18 @@ export function uiInit(context) {
             .triggerType(triggerType)
             .operations(operations);
 
-        // render the menu
-        context.map().supersurface.call(_editMenu);
+        // render the menu onto the overmap
+        overMap
+            .call(_editMenu);
     };
 
     ui.closeEditMenu = function() {
+        // try to regularly close the edit menu
+        _editMenu.close();
         // remove any existing menu no matter how it was added
-        context.map().supersurface
-            .select('.edit-menu').remove();
+        if (overMap !== undefined) {
+            overMap.select('.edit-menu').remove();
+        }
     };
 
 
