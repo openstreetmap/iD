@@ -10,8 +10,8 @@ import { select as d3_select } from 'd3-selection';
 // parent's `open` property is used instead of the `hide` class.
 export function uiToggle(show, callback) {
     return function(selection) {
-        var parent = selection.node().parentNode;
-        var isDetails = parent && parent.tagName === 'DETAILS';
+        const parent = selection.node().parentNode;
+        const isDetails = parent && parent.tagName === 'DETAILS';
 
         // ensure content is visible before animating
         if (isDetails) {
