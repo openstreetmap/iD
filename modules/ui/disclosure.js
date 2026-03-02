@@ -1,10 +1,10 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
 
 import { prefs } from '../core/preferences';
 import { svgIcon } from '../svg/icon';
 import { utilFunctor } from '../util';
 import { utilRebind } from '../util/rebind';
-import { uiToggle } from './toggle';
 import { t, localizer } from '../core/localizer';
 
 
@@ -25,58 +25,58 @@ export function uiDisclosure(context, key, expandedDefault) {
             _expanded = preference === null ? !!expandedDefault : (preference === 'true');
         }
 
-        var hideToggle = selection.selectAll('.hide-toggle-' + key)
+        var details = selection.selectAll('.disclosure-wrap-' + key)
             .data([0]);
 
         // enter
-        var hideToggleEnter = hideToggle.enter()
-            .append('h3')
-            .append('a')
-            .attr('role', 'button')
-            .attr('href', '#')
+        var detailsEnter = details.enter()
+            .append('details')
+            .attr('class', 'disclosure-wrap disclosure-wrap-' + key);
+
+        var summaryEnter = detailsEnter
+            .append('summary')
             .attr('class', 'hide-toggle hide-toggle-' + key)
             .call(svgIcon('', 'pre-text', 'hide-toggle-icon'));
 
-        hideToggleEnter
+        summaryEnter
             .append('span')
             .attr('class', 'hide-toggle-text');
 
-        // update
-        hideToggle = hideToggleEnter
-            .merge(hideToggle);
+        detailsEnter
+            .append('div')
+            .attr('class', 'disclosure-content');
 
-        hideToggle
+        // update
+        details = detailsEnter
+            .merge(details);
+
+        details
+            .property('open', _expanded);
+
+        var summary = details.selectAll('summary.hide-toggle');
+
+        summary
             .on('click', toggle)
             .attr('title', t(`icons.${_expanded ? 'collapse' : 'expand'}`))
-            .attr('aria-expanded', _expanded)
             .classed('expanded', _expanded);
 
         const label = _label();
-        const labelSelection = hideToggle.selectAll('.hide-toggle-text');
+        const labelSelection = summary.selectAll('.hide-toggle-text');
         if (typeof label !== 'function') {
             labelSelection.text(_label());
         } else {
             labelSelection.text('').call(label);
         }
 
-        hideToggle.selectAll('.hide-toggle-icon')
+        summary.selectAll('.hide-toggle-icon')
             .attr('xlink:href', _expanded ? '#iD-icon-down'
                 : (localizer.textDirection() === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
             );
 
-
-        var wrap = selection.selectAll('.disclosure-wrap')
-            .data([0]);
-
-        // enter/update
-        wrap = wrap.enter()
-            .append('div')
-            .attr('class', 'disclosure-wrap disclosure-wrap-' + key)
-            .merge(wrap)
-            .classed('hide', !_expanded);
+        var contentWrap = details.selectAll('.disclosure-content');
 
         if (_expanded) {
-            wrap
+            contentWrap
                 .call(_content);
         }
 
@@ -90,22 +90,34 @@ export function uiDisclosure(context, key, expandedDefault) {
                 prefs('disclosure.' + key + '.expanded', _expanded);
             }
 
-            hideToggle
+            summary
                 .classed('expanded', _expanded)
-                .attr('aria-expanded', _expanded)
                 .attr('title', t(`icons.${_expanded ? 'collapse' : 'expand'}`));
 
-            hideToggle.selectAll('.hide-toggle-icon')
+            summary.selectAll('.hide-toggle-icon')
                 .attr('xlink:href', _expanded ? '#iD-icon-down'
                     : (localizer.textDirection() === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
                 );
 
-            wrap
-                .call(uiToggle(_expanded));
-
             if (_expanded) {
-                wrap
-                    .call(_content);
+                details.property('open', true);
+                contentWrap.call(_content);
+                contentWrap
+                    .style('opacity', 0)
+                    .transition()
+                    .style('opacity', 1)
+                    .on('end', function() {
+                        d3_select(this).style('opacity', null);
+                    });
+            } else {
+                contentWrap
+                    .style('opacity', 1)
+                    .transition()
+                    .style('opacity', 0)
+                    .on('end', function() {
+                        d3_select(this).style('opacity', null);
+                        details.property('open', false);
+                    });
             }
 
             dispatch.call('toggled', this, _expanded);
