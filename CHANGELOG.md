@@ -57,7 +57,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
 * Don't suggest values from Taginfo for tags with less than 100 uses, even if they're documented on the wiki ([#11794], thanks [@Kaushik4141])
 * Don't suggest values from Taginfo for keys that should only be used on changesets, such as `hashtags` ([#11697], thanks [@bhavyaKhatri2703])
-* Handle `<key>=left|right|both` in the `directionalCombo` UI to enable support for `sidewalk=left|right|both` [in the future](#id-tagging-schema/pull/1507) ([#10935], thanks [@tordans], [@k-yle])
+* Handle `<key>=left|right|both` in the `directionalCombo` UI to enable support for `sidewalk=left|right|both` [in the future][#id-tagging-schema/pull/1507] ([#10935], thanks [@tordans], [@k-yle])
 * Update tag list for paved/semipaved `surface`s ([ffc7e2135])
 * Add dedicated rendering style for `highway=ladder` ways ([#11804], thanks [@bhavyaKhatri2703])
 #### :scissors: Operations
@@ -95,10 +95,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Change package name to `@openstreetmap/id` to be able to publish releases on npm
 * Use Röntgen icon set directly from upstream npm package ([#11784], thanks [@tordans])
-* Replace deprecated `document.createEvent`/`initEvent` with modern [Event] constructor ([#11870], thanks [@JaiswalShivang])
+* Replace deprecated `document.createEvent`/`initEvent` with modern Event constructor ([#11871], thanks [@JaiswalShivang])
 * Fix crash in country combo field when entering unrecognized ISO country codes ([#11904], thanks [@JaiswalShivang])
 * Upgrade clipboard functionality with modern Clipboard API ([#11869], thanks [@tulavamsidheeraj])
-* Upgrade event handlers to use modern Event API ([#11871], thanks [@JaiswalShivang])
 
 
 [#8464]: https://github.com/openstreetmap/iD/issues/8464
@@ -132,7 +131,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11861]: https://github.com/openstreetmap/iD/pull/11861
 [#11862]: https://github.com/openstreetmap/iD/pull/11862
 [#11869]: https://github.com/openstreetmap/iD/pull/11869
-[#11870]: https://github.com/openstreetmap/iD/issues/11870
 [#11871]: https://github.com/openstreetmap/iD/pull/11871
 [#11904]: https://github.com/openstreetmap/iD/issues/11904
 [cbeb0d503]: https://github.com/openstreetmap/iD/commit/cbeb0d503
