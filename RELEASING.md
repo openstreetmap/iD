@@ -47,7 +47,7 @@ git reset --hard develop
 npm run all
 git add -f dist
 git commit -m 'Check in build'
-git tag "v$ID_VERSION"
+git tag "v$ID_VERSION" -m "v$ID_VERSION" --sign
 git push origin -f release "v$ID_VERSION"
 ```
 - Open https://github.com/openstreetmap/iD/tags
