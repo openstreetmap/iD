@@ -43,6 +43,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
+* Make wording of fix for _overlapping features_ validator less ambiguous ([#9888], thanks [@k-yle)
 #### :bug: Bugfixes
 #### :earth_asia: Localization
 #### :hourglass: Performance
@@ -50,6 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 [#9545]: https://github.com/openstreetmap/iD/pull/9545
+[#9888]: https://github.com/openstreetmap/iD/pull/9888
 
 
 # 2.38.0-dev
