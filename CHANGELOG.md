@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.39.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Increase number of displayed _recently used presets_ to 8 (from 4) ([#9545], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -47,6 +48,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
+
+[#9545]: https://github.com/openstreetmap/iD/pull/9545
 
 
 # 2.38.0-dev
