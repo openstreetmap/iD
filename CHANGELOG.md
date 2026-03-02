@@ -95,10 +95,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Change package name to `@openstreetmap/id` to be able to publish releases on npm
 * Use Röntgen icon set directly from upstream npm package ([#11784], thanks [@tordans])
-* Replace deprecated `document.createEvent`/`initEvent` with modern [Event][#mdn-event-constructor] constructor ([#11870], thanks [@JaiswalShivang])
+* Replace deprecated `document.createEvent`/`initEvent` with modern Event constructor ([#11871], thanks [@JaiswalShivang])
 * Fix crash in country combo field when entering unrecognized ISO country codes ([#11904], thanks [@JaiswalShivang])
 * Upgrade clipboard functionality with modern Clipboard API ([#11869], thanks [@tulavamsidheeraj])
-* Upgrade event handlers to use modern Event API ([#11871], thanks [@JaiswalShivang])
 
 
 [#8464]: https://github.com/openstreetmap/iD/issues/8464
@@ -132,7 +131,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11861]: https://github.com/openstreetmap/iD/pull/11861
 [#11862]: https://github.com/openstreetmap/iD/pull/11862
 [#11869]: https://github.com/openstreetmap/iD/pull/11869
-[#11870]: https://github.com/openstreetmap/iD/issues/11870
 [#11871]: https://github.com/openstreetmap/iD/pull/11871
 [#11904]: https://github.com/openstreetmap/iD/issues/11904
 [cbeb0d503]: https://github.com/openstreetmap/iD/commit/cbeb0d503
@@ -140,7 +138,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [be0a20e59]: https://github.com/openstreetmap/iD/commit/be0a20e59
 [b06496780]: https://github.com/openstreetmap/iD/commit/b06496780
 [#id-tagging-schema/pull/1507]: https://github.com/openstreetmap/id-tagging-schema/pull/1507
-[#mdn-event-constructor]: https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
 [@homersimpsons]: https://github.com/homersimpsons
