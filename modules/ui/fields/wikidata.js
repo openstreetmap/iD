@@ -126,11 +126,10 @@ export function uiFieldWikidata(field, context) {
             .call(svgIcon('#iD-operation-copy'))
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
-                d3_select(this.parentNode)
+                const text = d3_select(this.parentNode)
                     .select('input')
-                    .node()
-                    .select();
-                document.execCommand('copy');
+                    .property('value');
+                navigator.clipboard.writeText(text);
             });
 
     }

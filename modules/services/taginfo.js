@@ -15,6 +15,8 @@ var _popularKeys = {};
 // these will be returned by keys(), but taginfo will not be queried for values() requests
 var _extraExcludedKeys = /^(addr:.+|postal_code|via|((int_|loc_|nat_|official_|old_|ref_|reg_|short_|full_|sorting_|alt_|artist_|long_|bridge:|tunnel:)?name(:left|:right)?(:[a-z]+)?))$/;
 
+var _extraExcludedKeyNames = /^(hashtags?|created_by)$/;
+
 var _taginfoCache = {};
 
 var tag_sorts = {
@@ -97,7 +99,7 @@ function filterValues(allowUpperCase, key) {
         if (!allowUpperCase &&
             !(key === 'type' && d.value === 'associatedStreet') &&
             d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
-        return d.count > 100 || d.in_wiki; // exclude rare undocumented tags
+        return d.count > 100; // exclude rare tags
     };
 }
 
@@ -245,7 +247,7 @@ export default {
                 callback(err);
             } else {
                 var f = filterKeys(params.filter);
-                var result = d.data.filter(f).sort(sortKeys).map(valKey);
+                var result = d.data.filter(f).filter(d => !_extraExcludedKeyNames.test(d.key)).sort(sortKeys).map(valKey);
                 _taginfoCache[url] = result;
                 callback(null, result);
             }

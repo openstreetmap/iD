@@ -1447,7 +1447,6 @@ button.preset-reset .label.flash-bg {
 
 .label-text .label-textannotation svg.icon {
     margin: 0 8px;
-    color: #333;
     opacity: 0.5;
     width: 14px;
     height: 14px;
@@ -1857,10 +1856,19 @@ input.date-selector {
     padding-left: 0;
     padding-right: 11px;
 }
+.combobox-address-street-place .combobox-option,
+.combobox-option.has-icon {
+    display: flex;
+    align-items: center;
+}
 .tag-value-icon .icon {
     width: 21px;
     height: 21px;
     margin: auto;
+}
+.tag-value-icon .emoji {
+    font-size: 24px;
+    line-height: 24px;
 }
 .ideditor[dir='ltr'] .form-field-input-combo .tag-value-icon + input,
 .ideditor[dir='ltr'] .form-field-input-semicombo .input-wrap .tag-value-icon + input,

@@ -388,5 +388,11 @@ export var osmSummableTags = new Set([
     'step_count',
     'parking:both:capacity',
     'parking:left:capacity',
-    'parking:left:capacity'
+    'parking:right:capacity'
+]);
+
+// ISO country codes keys
+export const osmIsoCountryKeys = new Set([
+  'country',
+  'target'
 ]);
