@@ -56,28 +56,35 @@ export function uiDisclosure(context, key, expandedDefault) {
         var summary = details.selectAll('summary.hide-toggle');
 
         summary
-            .on('click', toggle)
-            .attr('title', t(`icons.${_expanded ? 'collapse' : 'expand'}`))
-            .classed('expanded', _expanded);
+            .on('click', toggle);
+
+        updateSummary();
 
         const label = _label();
         const labelSelection = summary.selectAll('.hide-toggle-text');
         if (typeof label !== 'function') {
-            labelSelection.text(_label());
+            labelSelection.text(label);
         } else {
             labelSelection.text('').call(label);
         }
-
-        summary.selectAll('.hide-toggle-icon')
-            .attr('xlink:href', _expanded ? '#iD-icon-down'
-                : (localizer.textDirection() === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
-            );
 
         var contentWrap = details.selectAll('.disclosure-content');
 
         if (_expanded) {
             contentWrap
                 .call(_content);
+        }
+
+
+        function updateSummary() {
+            summary
+                .classed('expanded', _expanded)
+                .attr('title', t(`icons.${_expanded ? 'collapse' : 'expand'}`));
+
+            summary.selectAll('.hide-toggle-icon')
+                .attr('xlink:href', _expanded ? '#iD-icon-down'
+                    : (localizer.textDirection() === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
+                );
         }
 
 
@@ -90,14 +97,7 @@ export function uiDisclosure(context, key, expandedDefault) {
                 prefs('disclosure.' + key + '.expanded', _expanded);
             }
 
-            summary
-                .classed('expanded', _expanded)
-                .attr('title', t(`icons.${_expanded ? 'collapse' : 'expand'}`));
-
-            summary.selectAll('.hide-toggle-icon')
-                .attr('xlink:href', _expanded ? '#iD-icon-down'
-                    : (localizer.textDirection() === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
-                );
+            updateSummary();
 
             if (_expanded) {
                 details.property('open', true);
