@@ -99,12 +99,10 @@ export function uiDisclosure(context, key, expandedDefault) {
 
             updateSummary();
 
+            contentWrap.call(uiToggle(_expanded));
+
             if (_expanded) {
-                details.property('open', _expanded);
-                contentWrap.call(uiToggle(true));
-            } else {
-                contentWrap.call(uiToggle(false), () =>
-                    details.property('open', _expanded));
+                contentWrap.call(_content);
             }
 
             dispatch.call('toggled', this, _expanded);
