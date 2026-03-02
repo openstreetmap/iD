@@ -442,9 +442,6 @@ export function uiFieldText(field, context) {
             var t = {};
             var val = utilGetSetValue(input);
             const validationMessage = wrap.select('.field-validation-message');
-            if (!field.pattern && field.key === 'website') {
-                field.pattern = '^https?://.+';
-            }
             if (!onInput && field.pattern && val) {
                 let regex = null;
 
