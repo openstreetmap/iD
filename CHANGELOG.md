@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Increase number of displayed _recently used presets_ to 8 (from 4) ([#9545], thanks [@k-yle])
 * Always render icons for `craft` features mapped as areas ([#9183])
 * Change labeling of route relation to show icons, `ref` and route colours ([#11052])
+* Render the `turnout_side` of railway switches ([#11944], thanks [@hlfan])
 #### :scissors: Operations
 * Show a preview of the result of some geometry opertions while the respective button in the edit menu is hovered ([#11778])
 #### :camera: Street-Level
@@ -62,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10904]: https://github.com/openstreetmap/iD/pull/10904
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
 [#11778]: https://github.com/openstreetmap/iD/pull/11778
+[#11944]: https://github.com/openstreetmap/iD/pull/11944
 [#11952]: https://github.com/openstreetmap/iD/pull/11952
 [@Shrinks99]: https://github.com/Shrinks99
 [@Vectorial1024]: https://github.com/Vectorial1024
