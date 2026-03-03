@@ -393,7 +393,7 @@ export function utilCombinedTags(entityIDs, graph) {
         });
     });
 
-    for (let key in tags) {
+    for (const key in tags) {
         if (!Array.isArray(tags[key])) continue;
 
         // sort values by frequency then alphabetically
