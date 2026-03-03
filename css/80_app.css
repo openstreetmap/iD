@@ -797,6 +797,9 @@ summary.hide-toggle {
     color: var(--link-color);
     font-size: 14px;
     font-weight: bold;
+    line-height: 25px;
+}
+details.disclosure-wrap[open] summary.hide-toggle {
     margin-bottom: 10px;
 }
 summary.hide-toggle::-webkit-details-marker {
