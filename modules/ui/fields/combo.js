@@ -4,15 +4,16 @@ import { drag as d3_drag } from 'd3-drag';
 import * as countryCoder from '@rapideditor/country-coder';
 
 import { fileFetcher } from '../../core/file_fetcher';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { svgIcon } from '../../svg/icon';
 
 import { utilKeybinding } from '../../util/keybinding';
-import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
+import { utilArrayUniq, utilDetect, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
 import { uiLengthIndicator } from '../length_indicator';
 import { deprecatedTagValuesByKey } from '../../osm/deprecated';
+import { osmIsoCountryKeys } from '../../osm/tags';
 
 export {
     uiFieldCombo as uiFieldManyCombo,
@@ -68,6 +69,74 @@ export function uiFieldCombo(field, context) {
             .join(';');
     }
 
+    // windows does not support emoji flags
+    const showEmojiFlags = utilDetect().os !== 'win';
+
+    // adds emoji flags to country dropdown and input
+    function addFlagIcon(selection, name, flag) {
+      if (showEmojiFlags && flag) {
+        const icon = selection.insert('span', ':first-child')
+          .attr('class', 'tag-value-icon');
+
+        icon.append('span')
+          .attr('class', 'emoji')
+          .text(flag);
+      }
+      selection.insert('span')
+        .attr('class', 'tag-value')
+        .text(name);
+    }
+
+    // cache for language and region maps
+    let languageByCodes = null;
+    let regionByCodes = null;
+
+    // Helper to get regionByCodes
+    const buildCountry = () => {
+      if (regionByCodes) return regionByCodes;
+      const localeCode = localizer.localeCode();
+
+      const regionNames = new Intl.DisplayNames(localeCode, { type: 'region' });
+      const features = countryCoder.borders.features;
+
+      regionByCodes = {};
+
+      for (const feature of features) {
+        const code = feature.properties.iso1A2;
+        let flag = feature.properties.emojiFlag;
+        // if the flag is not present like for 'FX' code, we will look for the corresponding country flag for that code
+        if (!flag && features?.properties?.country) {
+          flag = countryCoder.feature(feature.properties.country).properties.emojiFlag;
+        }
+        if (!code) continue;
+
+        try {
+          const name = regionNames.of(code);
+          if (!name) continue;
+          regionByCodes[code] = {name, flag};
+        } catch {
+            continue;
+        }
+      }
+
+      return regionByCodes;
+    };
+
+    // Helper to get languageByCodes
+    const buildLanguages = () => {
+      if (languageByCodes) return languageByCodes;
+
+      languageByCodes = {};
+      let codes = Object.keys(localizer.languages());
+
+      for (const code of codes) {
+        const name = localizer.languageName(code);
+        if (!name || name === code) continue;
+        languageByCodes[code] = name;
+      }
+
+      return languageByCodes;
+    };
 
     // returns the tag value for a display value
     // (for multiCombo, dval should be the key suffix, not the entire key)
@@ -92,7 +161,11 @@ export function uiFieldCombo(field, context) {
         }
 
         if (!field.caseSensitive) {
-            dval = dval.toLowerCase();
+            if (!(field.key === 'type' && dval === 'associatedStreet')) {
+                // don't lowercase "type=associatedStreet" tag
+                // https://github.com/openstreetmap/iD/issues/9639
+                dval = dval.toLowerCase();
+            }
         }
 
         return dval;
@@ -109,38 +182,63 @@ export function uiFieldCombo(field, context) {
     // returns the display value for a tag value
     // (for multiCombo, tval should be the key suffix, not the entire key)
     function displayValue(tval) {
-        tval = tval || '';
+      tval = tval || '';
+      // Issue #11652
+      // Ignore language: key and when tval is not others
+      if (field.key === 'language:' && tval !== 'others'){
+        let langName = buildLanguages()[tval];
+        if (langName) return langName;
+      }
 
-        var stringsField = field.resolveReference('stringsCrossReference');
-        const labelId = getLabelId(stringsField, tval);
-        if (stringsField.hasTextForStringId(labelId)) {
-            return stringsField.t(labelId, { default: tval });
-        }
-
-        if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
-            return '';
-        }
-
+      if (osmIsoCountryKeys.has(field.key) && tval) {
+        const data = buildCountry()[tval];
+        if (data) return data.name;
         return tval;
+      }
+
+      var stringsField = field.resolveReference('stringsCrossReference');
+      const labelId = getLabelId(stringsField, tval);
+      if (stringsField.hasTextForStringId(labelId)) {
+        return stringsField.t(labelId, { default: tval });
+      }
+
+      if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
+        return '';
+      }
+
+      return tval;
     }
 
 
     // returns function which renders the display value for a tag value
     // (for multiCombo, tval should be the key suffix, not the entire key)
     function renderValue(tval) {
-        tval = tval || '';
+      tval = tval || '';
 
-        var stringsField = field.resolveReference('stringsCrossReference');
-        const labelId = getLabelId(stringsField, tval);
-        if (stringsField.hasTextForStringId(labelId)) {
-            return stringsField.t.append(labelId, { default: tval });
-        }
+      // Issue #11652
+      // Ignore language: key and when tval is not others
+      if (field.key === 'language:' && tval !== 'others') {
+        let langName = buildLanguages()[tval];
+        if (langName) return selection => selection.text(langName);
+      }
 
-        if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
-            tval = '';
-        }
-
+      if (osmIsoCountryKeys.has(field.key) && tval) {
+        const data = buildCountry()[tval];
+        if (data) return selection => addFlagIcon(selection, data.name, data.flag);
         return selection => selection.text(tval);
+      }
+
+      var stringsField = field.resolveReference('stringsCrossReference');
+      const labelId = getLabelId(stringsField, tval);
+      if (stringsField.hasTextForStringId(labelId)) {
+        return stringsField.t.append(labelId, { default: tval });
+      }
+
+      if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
+        tval = '';
+      }
+
+      return selection => selection.text(tval);
     }
 
 
@@ -174,6 +272,64 @@ export function uiFieldCombo(field, context) {
 
     function getOptions(allOptions) {
         var stringsField = field.resolveReference('stringsCrossReference');
+        const localeCode = localizer.localeCode();
+        // Get dropdown list for language: key via localizer instead of taginfo
+        if (field.key === 'language:') {
+          const langMap = buildLanguages();
+
+          let options = Object.entries(langMap).map(([code, name]) => {
+            return {
+              key: code,
+              value: name,
+              title: code, // the tooltip should show the raw-tag value
+              display: selection => selection.text(name)
+            };
+          });
+
+          const localeCode = localizer.localeCode();
+
+          options.sort((a, b) => {
+            return a.value.localeCompare(b.value, localeCode);
+          });
+
+          const v = 'others';
+          const labelId = getLabelId(stringsField, v);
+
+          // inserting others because it does not come via _dataLanguages
+          options.push({
+            key: v,
+            value: stringsField.t(labelId, { default: v }),
+            title: stringsField.t(`options.${v}.description`, { default: v }),
+            display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
+            klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
+          });
+
+
+          return options;
+        }
+
+        // Get dropdown list for country key
+        if (osmIsoCountryKeys.has(field.key)) {
+          const countryMap = buildCountry();
+
+          let options = Object.entries(countryMap).map(([c, {name, flag}]) => {
+            return {
+              key: c,
+              value: name,
+              title: c, // the tooltip should show the raw-tag value
+              display: selection => addFlagIcon(selection, name, flag),
+              sortname: name, // store just the name without emojis to sort the names
+              klass: 'has-icon' // to specifically target the emoji css
+            };
+          });
+
+          options.sort((a, b) => {
+            return a.sortname.localeCompare(b.sortname, localeCode);
+          });
+
+          return options;
+        }
+
         if (!(field.options || stringsField.options)) return [];
 
         let options;
@@ -208,7 +364,9 @@ export function uiFieldCombo(field, context) {
             _comboData = _comboData.filter(filter);
         }
 
-        _comboData = objectDifference(_comboData, _multiData);
+        if (!field.allowDuplicates) {
+            _comboData = objectDifference(_comboData, _multiData);
+        }
         _combobox.data(_comboData);
 
         // hide the caret if there are no suggestions
@@ -222,6 +380,10 @@ export function uiFieldCombo(field, context) {
         var queryFilter = d => d.value.toLowerCase().includes(q.toLowerCase()) || d.key.toLowerCase().includes(q.toLowerCase());
         if (hasStaticValues()) {
             setStaticValues(callback, queryFilter);
+
+            // If it is language field or a country field, we don't need to request for values, we get it from getOptions
+            if (field.key === 'language:') return;
+            if (osmIsoCountryKeys.has(field.key)) return;
         }
 
         var stringsField = field.resolveReference('stringsCrossReference');
@@ -287,15 +449,17 @@ export function uiFieldCombo(field, context) {
                     key: v,
                     value: label,
                     title: stringsField.t(`options.${v}.description`, { default:
-                        isLocalizable ? v : (d.title !== label ? d.title : '') }),
-                    display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
+                        isLocalizable ? label : (d.title !== label ? d.title : '') }),
+                    display: addComboboxIcons(stringsField.t.append(labelId, { default: label }), v),
                     klass: isLocalizable ? '' : 'raw-option'
                 };
             });
 
             _comboData = _comboData.filter(queryFilter);
 
-            _comboData = objectDifference(_comboData, _multiData);
+            if (!field.allowDuplicates) {
+                _comboData = objectDifference(_comboData, _multiData);
+            }
             if (callback) callback(_comboData, hasStaticValues());
         });
     }
@@ -390,7 +554,10 @@ export function uiFieldCombo(field, context) {
             } else if (_isSemi) {
                 var arr = _multiData.map(function(d) { return d.key; });
                 arr = arr.concat(vals);
-                t[field.key] = context.cleanTagValue(utilArrayUniq(arr).filter(Boolean).join(';'));
+                if (!field.allowDuplicates) {
+                    arr = utilArrayUniq(arr);
+                }
+                t[field.key] = context.cleanTagValue(arr.filter(Boolean).join(';'));
             }
 
             window.setTimeout(function() { _input.node().focus(); }, 10);
@@ -416,11 +583,15 @@ export function uiFieldCombo(field, context) {
         if (_isMulti) {
             t[d.key] = undefined;
         } else if (_isSemi) {
-            var arr = _multiData.map(function(md) {
-                return md.key === d.key ? null : md.key;
-            }).filter(Boolean);
+            let arr = _multiData.map(item => item.key);
 
-            arr = utilArrayUniq(arr);
+            // delete the value using the index, since a value
+            // may exist multiple times in the array.
+            arr.splice(d.index, 1);
+
+            if (!field.allowDuplicates) {
+                arr = utilArrayUniq(arr);
+            }
             t[field.key] = arr.length ? arr.join(';') : undefined;
 
             _lengthIndicator.update(t[field.key]);
@@ -494,6 +665,7 @@ export function uiFieldCombo(field, context) {
         _input = _input.enter()
             .append('input')
             .attr('type', 'text')
+            .attr('dir', 'auto')
             .attr('id', field.domId)
             .call(utilNoAuto)
             .call(initCombo, _container)
@@ -560,6 +732,25 @@ export function uiFieldCombo(field, context) {
         if (field.type === 'multiCombo' || field.type === 'semiCombo') {
             container = _container.select('.input-wrap');
         }
+
+        // For the country emoji flags
+        container.selectAll('.tag-value-icon').remove();
+        if (osmIsoCountryKeys.has(field.key) && value) {
+          const data = buildCountry()[value];
+
+          if (data && data.flag && showEmojiFlags) {
+            container.selectAll('.tag-value-icon')
+              .data([value])
+              .enter()
+              .insert('div', 'input')
+              .attr('class', 'tag-value-icon')
+              .append('span')
+              .attr('class', 'emoji')
+              .text(data.flag);
+            return;
+          }
+        };
+
         const iconsField = field.resolveReference('iconsCrossReference');
         if (iconsField.icons) {
             container.selectAll('.tag-value-icon').remove();
@@ -582,7 +773,8 @@ export function uiFieldCombo(field, context) {
         var showsValue = value => !isMixed && value && !(field.type === 'typeCombo' && value === 'yes');
         var isRawValue = value => showsValue(value)
             && !stringsField.hasTextForStringId(`options.${value}`)
-            && !stringsField.hasTextForStringId(`options.${value}.title`);
+            && !stringsField.hasTextForStringId(`options.${value}.title`)
+            && !(osmIsoCountryKeys.has(field.key) && value in buildCountry());
         var isKnownValue = value => showsValue(value) && !isRawValue(value);
         var isReadOnly = !_allowCustomValues;
 
@@ -626,7 +818,7 @@ export function uiFieldCombo(field, context) {
                 if (Array.isArray(tags[field.key])) {
 
                     tags[field.key].forEach(function(tagVal) {
-                        var thisVals = utilArrayUniq((tagVal || '').split(';')).filter(Boolean);
+                        var thisVals = (tagVal || '').split(';').filter(Boolean);
                         allValues = allValues.concat(thisVals);
                         if (!commonValues) {
                             commonValues = thisVals;
@@ -634,11 +826,16 @@ export function uiFieldCombo(field, context) {
                             commonValues = commonValues.filter(value => thisVals.includes(value));
                         }
                     });
-                    allValues = utilArrayUniq(allValues).filter(Boolean);
+                    allValues = allValues.filter(Boolean);
 
                 } else {
-                    allValues =  utilArrayUniq((tags[field.key] || '').split(';')).filter(Boolean);
+                    allValues =  (tags[field.key] || '').split(';').filter(Boolean);
                     commonValues = allValues;
+                }
+
+                if (!field.allowDuplicates) {
+                    commonValues = utilArrayUniq(commonValues);
+                    allValues = utilArrayUniq(allValues);
                 }
 
                 _multiData = allValues.map(function(v) {
@@ -673,7 +870,7 @@ export function uiFieldCombo(field, context) {
 
             // Render chips
             var chips = _container.selectAll('.chip')
-                .data(_multiData);
+                .data(_multiData.map((item, index) => ({ ...item, index })));
 
             chips.exit()
                 .remove();
@@ -695,6 +892,8 @@ export function uiFieldCombo(field, context) {
                 .classed('raw-value', function(d) {
                     var k = d.key;
                     if (_isMulti) k = k.replace(field.key, '');
+                    // Ignore the raw-value class for key language:
+                    if (field.key === 'language:' && localizer.languageName(k) !== k) return false;
                     return !stringsField.hasTextForStringId('options.' + k);
                 })
                 .classed('draggable', allowDragAndDrop)

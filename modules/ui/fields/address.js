@@ -4,7 +4,7 @@ import * as countryCoder from '@rapideditor/country-coder';
 
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
-import { geoExtent, geoChooseEdge, geoSphericalDistance } from '../../geo';
+import { geoChooseEdge, geoSphericalDistance, geoPolygonContainsPolygon, geoPointInPolygon } from '../../geo';
 import { uiCombobox } from '../combobox';
 import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilTriggerEvent } from '../../util';
 import { t } from '../../core/localizer';
@@ -39,7 +39,7 @@ export function uiFieldAddress(field, context) {
     function getNear(isAddressable, type, searchRadius, resultProp) {
         var extent = combinedEntityExtent();
         var l = extent.center();
-        var box = geoExtent(l).padByMeters(searchRadius);
+        var box = extent.padByMeters(searchRadius);
 
         var features = context.history().intersects(box)
             .filter(isAddressable)
@@ -77,6 +77,35 @@ export function uiFieldAddress(field, context) {
         return utilArrayUniqBy(features, 'value');
     }
 
+    function getEnclosing(isAddressable, type, resultProp) {
+        var extent = combinedEntityExtent();
+
+        var features = context.history().intersects(extent)
+            .filter(isAddressable)
+            .map(d => {
+                if (d.geometry(context.graph()) !== 'area') {
+                    return false;
+                }
+
+                const geom = d.asGeoJSON(context.graph()).coordinates[0];
+                if (!geoPolygonContainsPolygon(geom, extent.polygon())) {
+                    return false;
+                }
+
+                const value = resultProp && d.tags[resultProp] ? d.tags[resultProp] : d.tags.name;
+                return {
+                    title: value,
+                    value,
+                    dist: 0,
+                    geom,
+                    type,
+                    klass: `address-${type}`
+                };
+            }).filter(Boolean);
+
+        return utilArrayUniqBy(features, 'value');
+    }
+
     function getNearStreets() {
         function isAddressable(d) {
             return d.tags.highway && d.tags.name && d.type === 'way';
@@ -102,7 +131,7 @@ export function uiFieldAddress(field, context) {
             if (d.tags.name) {
                 if (d.tags.boundary === 'administrative' && d.tags.admin_level === '8') return true;
                 if (d.tags.border_type === 'city') return true;
-                if (d.tags.place === 'city' || d.tags.place === 'town' || d.tags.place === 'village') return true;
+                if (d.tags.place === 'city' || d.tags.place === 'town' || d.tags.place === 'village' || d.tags.place === 'hamlet') return true;
             }
 
             if (d.tags[`${field.key}:city`]) return true;
@@ -130,6 +159,37 @@ export function uiFieldAddress(field, context) {
         return getNear(hasTag, key, 200, tagKey);
     }
 
+    function getEnclosingValues(key) {
+        const tagKey = `${field.key}:${key}`;
+
+        // 1. areas encompassing the feature that have the address tag
+        function hasTag(d) {
+            return _entityIDs.indexOf(d.id) === -1 && d.tags[tagKey];
+        }
+        const enclosingAddresses = getEnclosing(hasTag, key, tagKey);
+
+        // 2. also include addresses from points which are encompassed by
+        // the same building area as the current feature
+        function isBuilding(d) {
+            return _entityIDs.indexOf(d.id) === -1 && d.tags.building && d.tags.building !== 'no';
+        }
+        const enclosingBuildings = getEnclosing(isBuilding, 'building', 'building').map(d => d.geom);
+        function isInNearbyBuilding(d) {
+            return hasTag(d) &&
+                d.type === 'node' &&
+                enclosingBuildings.some(geom =>
+                    geoPointInPolygon(d.loc, geom) ||
+                    geom.indexOf(d.loc) !== -1
+                );
+        }
+        const nearPointAddresses = getNear(isInNearbyBuilding, key, 100, tagKey);
+
+        return utilArrayUniqBy([
+            ...enclosingAddresses,
+            ...nearPointAddresses
+        ], 'value').sort((a, b) => a.value > b.value ? 1 : -1);
+    }
+
 
     function updateForCountryCode() {
 
@@ -146,14 +206,34 @@ export function uiFieldAddress(field, context) {
             }
         }
 
-        var dropdowns = addressFormat.dropdowns || [
-            'city', 'county', 'country', 'district', 'hamlet',
-            'neighbourhood', 'place', 'postcode', 'province',
-            'quarter', 'state', 'street', 'street+place', 'subdistrict', 'suburb'
-        ];
+        const maybeDropdowns = new Set([
+            'housenumber',
+            'housename'
+        ]);
+        const dropdowns = new Set([
+            'block_number',
+            'city',
+            'country',
+            'county',
+            'district',
+            'floor',
+            'hamlet',
+            'neighbourhood',
+            'place',
+            'postcode',
+            'province',
+            'quarter',
+            'state',
+            'street',
+            'street+place',
+            'subdistrict',
+            'suburb',
+            'town',
+            ...maybeDropdowns
+        ]);
 
         var widths = addressFormat.widths || {
-            housenumber: 1/5, unit: 1/5, street: 1/2, place: 1/2,
+            housenumber: 1/5, unit: 1/5, floor: 1/5, street: 1/2, place: 1/2,
             city: 2/3, state: 1/4, postcode: 1/3
         };
 
@@ -188,6 +268,7 @@ export function uiFieldAddress(field, context) {
             .enter()
             .append('input')
             .property('type', 'text')
+            .attr('id', d => d.id === 'housenumber' ? field.domId : null)
             .attr('class', function (d) { return 'addr-' + d.id; })
             .call(utilNoAuto)
             .each(addDropdown)
@@ -196,7 +277,9 @@ export function uiFieldAddress(field, context) {
 
 
         function addDropdown(d) {
-            if (dropdowns.indexOf(d.id) === -1) return;  // not a dropdown
+            if (!dropdowns.has(d.id)) {
+                return false;  // not a dropdown
+            }
 
             var nearValues;
             switch (d.id) {
@@ -219,8 +302,21 @@ export function uiFieldAddress(field, context) {
                 case 'postcode':
                     nearValues = getNearPostcodes;
                 break;
+                case 'housenumber':
+                case 'housename':
+                    nearValues = getEnclosingValues;
+                break;
                 default:
                     nearValues = getNearValues;
+            }
+
+            if (maybeDropdowns.has(d.id)) {
+                const candidates = nearValues(d.id);
+                // only add dropdown if there are possible values for the
+                // corresponding tag: e.g. only show ▼ caret for
+                // housenumber/housename if the feature is actually
+                // encompassed by another feature with such an address
+                if (candidates.length === 0) return false;
             }
 
             d3_select(this)
@@ -243,11 +339,9 @@ export function uiFieldAddress(field, context) {
         }
 
         _wrap.selectAll('input')
+            .on('input', change(true))
             .on('blur', change())
             .on('change', change());
-
-        _wrap.selectAll('input:not(.combobox-input)')
-            .on('input', change(true));
 
         if (_tags) updateTags(_tags);
     }

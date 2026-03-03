@@ -123,12 +123,20 @@ osmEntity.prototype = {
     },
 
 
-    mergeTags: function(tags) {
-        var merged = Object.assign({}, this.tags);   // shallow copy
-        var changed = false;
-        for (var k in tags) {
-            var t1 = merged[k];
-            var t2 = tags[k];
+    /**
+     *
+     * @param {Tags} tags tags to merge into this entity's tags
+     * @param {Tags} setTags (optional) a set of tags to overwrite in this entity's tags
+     * @returns {iD.OsmEntity}
+     */
+    mergeTags: function(tags, setTags = {}) {
+        const merged = Object.assign({}, this.tags);   // shallow copy
+        let changed = false;
+
+        for (const k in tags) {
+            if (setTags.hasOwnProperty(k)) continue;
+            const t1 = this.tags[k];
+            const t2 = tags[k];
             if (!t1) {
                 changed = true;
                 merged[k] = t2;
@@ -140,6 +148,13 @@ osmEntity.prototype = {
                 );
             }
         }
+        for (const k in setTags) {
+            if (this.tags[k] !== setTags[k]) {
+                changed = true;
+                merged[k] = setTags[k];
+            }
+        }
+
         return changed ? this.update({ tags: merged }) : this;
     },
 

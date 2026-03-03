@@ -104,9 +104,9 @@ export function operationCopy(context, selectedIDs) {
 
 
     operation.availableForKeypress = function() {
-        var selection = window.getSelection && window.getSelection();
+        const selection = window.getSelection?.();
         // if the user has text selected then let them copy that, not the selected feature
-        return !selection || !selection.toString();
+        return !selection?.toString();
     };
 
 

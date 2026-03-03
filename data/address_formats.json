@@ -72,6 +72,14 @@
     ]
   },
   {
+    "countryCodes": ["ma"],
+    "format": [
+      ["housename"],
+      ["housenumber", "street+place"],
+      ["postcode", "city"]
+    ]
+  },
+  {
     "countryCodes": ["mo"],
     "format": [
       ["housenumber", "street"],
@@ -133,10 +141,6 @@
       ["city", "suburb"],
       ["quarter", "neighbourhood"],
       ["block_number", "housenumber"]
-    ],
-    "dropdowns": [
-      "postcode", "province", "county", "city", "suburb",
-      "quarter", "neighbourhood", "block_number"
     ],
     "widths": {
       "postcode": 0.3,
@@ -212,9 +216,6 @@
       ["neighbourhood"],
       ["city", "state", "postcode"]
     ],
-    "dropdowns": [
-      "street", "neighbourhood", "city", "state", "postcode"
-    ],
     "widths": {
       "street": 0.7,
       "housenumber": 0.3,
@@ -237,9 +238,6 @@
       ["street", "housenumber"],
       ["housename", "subdistrict"],
       ["district", "city", "postcode"]
-    ],
-    "dropdowns": [
-      "street", "city", "subdistrict", "district", "postcode"
     ],
     "widths": {
       "street": 0.7,

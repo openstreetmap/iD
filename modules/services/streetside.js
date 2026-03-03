@@ -15,6 +15,8 @@ import {
 
 import { utilAesDecrypt, utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
 
+import { services } from './';
+
 
 const streetsideApi = 'https://dev.virtualearth.net/REST/v1/Imagery/MetaData/Streetside?mapArea={bbox}&key={key}&count={count}&uriScheme=https';
 const maxResults = 500;
@@ -120,6 +122,7 @@ function loadNextTilePage(which, url, tile) {
         bubble.lat || bubble.latitude
       ];
       const d = {
+        service: 'photo',
         loc: loc,
         key: bubbleId,
         imageUrl: bubble.imageUrl
@@ -505,7 +508,7 @@ export default {
 
 
     // create working canvas for stitching together images
-    wrap = wrap
+    wrap
       .merge(wrapEnter)
       .call(setupCanvas, true);
 
@@ -643,18 +646,18 @@ export default {
    * showViewer()
    */
   showViewer: function(context) {
-
-    let wrap = context.container().select('.photoviewer')
-      .classed('hide', false);
-
-    let isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
+    const wrap = context.container().select('.photoviewer');
+    const isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
 
     if (isHidden) {
+      for (const service of Object.values(services)) {
+        if (service === this) continue;
+        if (typeof service.hideViewer === 'function') {
+          service.hideViewer(context);
+        }
+      }
       wrap
-        .selectAll('.photo-wrapper:not(.ms-wrapper)')
-        .classed('hide', true);
-
-      wrap
+        .classed('hide', false)
         .selectAll('.photo-wrapper.ms-wrapper')
         .classed('hide', false);
     }
@@ -904,15 +907,13 @@ export default {
 
 
   updateUrlImage: function(imageKey) {
-      if (!window.mocha) {
-          var hash = utilStringQs(window.location.hash);
-          if (imageKey) {
-              hash.photo = 'streetside/' + imageKey;
-          } else {
-              delete hash.photo;
-          }
-          window.location.replace('#' + utilQsString(hash, true));
+      const hash = utilStringQs(window.location.hash);
+      if (imageKey) {
+          hash.photo = 'streetside/' + imageKey;
+      } else {
+          delete hash.photo;
       }
+      window.history.replaceState(null, '', '#' + utilQsString(hash, true));
   },
 
 

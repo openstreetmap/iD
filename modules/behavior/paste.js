@@ -2,6 +2,8 @@ import { actionCopyEntities } from '../actions/copy_entities';
 import { actionMove } from '../actions/move';
 import { geoExtent, geoPointInPolygon, geoVecSubtract } from '../geo';
 import { modeMove } from '../modes/move';
+import { operationPaste } from '../operations';
+import { t } from '../core/localizer';
 import { uiCmd } from '../ui/cmd';
 
 // see also `operationPaste`
@@ -25,7 +27,14 @@ export function behaviorPaste(context) {
         if (!geoPointInPolygon(mouse, viewport)) return;
 
         var oldIDs = context.copyIDs();
-        if (!oldIDs.length) return;
+        if (!oldIDs.length) {
+            context.ui().flash
+                .duration(4000)
+                .iconName('#iD-icon-no')
+                .iconClass('disabled')
+                .label(t.append('operations.paste.nothing_copied'))();
+            return;
+        }
 
         var extent = geoExtent();
         var oldGraph = context.copyGraph();
@@ -60,7 +69,8 @@ export function behaviorPaste(context) {
         var delta = geoVecSubtract(mouse, copyPoint);
 
         context.perform(actionMove(newIDs, delta, projection));
-        context.enter(modeMove(context, newIDs, baseGraph));
+        context.enter(modeMove(context, newIDs, baseGraph)
+            .annotation(operationPaste(context).annotation()));
     }
 
 

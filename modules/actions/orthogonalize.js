@@ -217,7 +217,7 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
         way = way.removeNode('');  // sanity check - remove any consecutive duplicates
         graph = graph.replace(way);
 
-        const isClosed = way.isClosed() && vertexID === undefined;
+        let isClosed = way.isClosed();
         var nodes = graph.childNodes(way).slice();  // shallow copy
         if (isClosed) nodes.pop();
 
@@ -226,6 +226,7 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
             allowStraightAngles = true;
             nodes = nodeSubset(nodes, vertexID, isClosed);
             if (nodes.length !== 3) return 'end_vertex';
+            isClosed = false; // from now on: treat these 3 ways as a line
         }
 
         var coords = nodes.map(function(n) { return projection(n.loc); });

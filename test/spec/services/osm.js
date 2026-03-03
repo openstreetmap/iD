@@ -1,5 +1,6 @@
 import { setTimeout } from 'node:timers/promises';
 import { promisify } from 'node:util';
+import { fakeServer } from 'nise';
 
 describe('iD.serviceOsm', function () {
     var context, connection, spy;
@@ -26,7 +27,7 @@ describe('iD.serviceOsm', function () {
     });
 
     beforeEach(function () {
-        serverXHR = sinon.fakeServer.create();      // authenticated calls use XHR via osm-auth
+        serverXHR = fakeServer.create();      // authenticated calls use XHR via osm-auth
         context = iD.coreContext().assetPath('../dist/').init();
         connection = context.connection();
         connection.switch({ url: 'https://www.openstreetmap.org' });
@@ -726,7 +727,7 @@ describe('iD.serviceOsm', function () {
 
                 await promisify(connection.status).call(connection);
                 var blocklists = connection.imageryBlocklists();
-                expect(blocklists).to.deep.equal([new RegExp('\.foo\.com'), new RegExp('\.bar\.org')]);
+                expect(blocklists).to.deep.equal([new RegExp('\.foo\.com', 'i'), new RegExp('\.bar\.org', 'i')]);
             });
         });
 

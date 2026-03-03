@@ -18,8 +18,6 @@ export function rendererPhotos(context) {
     function photos() {}
 
     function updateStorage() {
-        if (window.mocha) return;
-
         var hash = utilStringQs(window.location.hash);
         var enabled = context.layers().all().filter(function(d) {
             return _layerIDs.indexOf(d.id) !== -1 && d.layer && d.layer.supported() && d.layer.enabled();
@@ -31,7 +29,7 @@ export function rendererPhotos(context) {
         } else {
             delete hash.photo_overlay;
         }
-        window.location.replace('#' + utilQsString(hash, true));
+        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
     }
 
     /**
@@ -150,17 +148,15 @@ export function rendererPhotos(context) {
      * @param {string} property Name of the value
      */
     function setUrlFilterValue(property, val) {
-        if (!window.mocha) {
-            var hash = utilStringQs(window.location.hash);
-            if (val) {
-                if (hash[property] === val) return;
-                hash[property] = val;
-            } else {
-                if (!(property in hash)) return;
-                delete hash[property];
-            }
-            window.location.replace('#' + utilQsString(hash, true));
+        const hash = utilStringQs(window.location.hash);
+        if (val) {
+            if (hash[property] === val) return;
+            hash[property] = val;
+        } else {
+            if (!(property in hash)) return;
+            delete hash[property];
         }
+        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
     }
 
     function showsLayer(id) {

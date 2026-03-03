@@ -105,7 +105,7 @@ export function uiToolNotes(context) {
             }
 
             // update
-            buttons = buttons
+            buttons
                 .merge(buttonsEnter)
                 .classed('disabled', function() { return !enabled(); })
                 .attr('aria-disabled', function() { return !enabled(); })

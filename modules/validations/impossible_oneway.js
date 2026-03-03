@@ -7,22 +7,18 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';
 
 export function validationImpossibleOneway() {
-    var type = 'impossible_oneway';
+    const type = 'impossible_oneway';
 
-    var validation = function checkImpossibleOneway(entity, graph) {
-
+    const validation = function checkImpossibleOneway(entity, graph) {
         if (entity.type !== 'way' || entity.geometry(graph) !== 'line') return [];
-
         if (entity.isClosed()) return [];
-
         if (!typeForWay(entity)) return [];
-
         if (!entity.isOneWay()) return [];
 
-        var firstIssues = issuesForNode(entity, entity.first());
-        var lastIssues = issuesForNode(entity, entity.last());
-
-        return firstIssues.concat(lastIssues);
+        return [
+            ...issuesForNode(entity, entity.first()),
+            ...issuesForNode(entity, entity.last())
+        ];
 
         function typeForWay(way) {
             if (way.geometry(graph) !== 'line') return null;
@@ -33,10 +29,10 @@ export function validationImpossibleOneway() {
         }
 
         function nodeOccursMoreThanOnce(way, nodeID) {
-            var occurrences = 0;
-            for (var index in way.nodes) {
+            let occurrences = 0;
+            for (const index in way.nodes) {
                 if (way.nodes[index] === nodeID) {
-                    occurrences += 1;
+                    occurrences++;
                     if (occurrences > 1) return true;
                 }
             }
@@ -90,25 +86,21 @@ export function validationImpossibleOneway() {
         }
 
         function issuesForNode(way, nodeID) {
-
-            var isFirst = nodeID === way.first();
-
-            var wayType = typeForWay(way);
+            const isFirst = (nodeID === way.first()) ^ way.isOneWayBackwards();
+            const wayType = typeForWay(way);
 
             // ignore if this way is self-connected at this node
             if (nodeOccursMoreThanOnce(way, nodeID)) return [];
 
-            var osm = services.osm;
+            const osm = services.osm;
             if (!osm) return [];
-
-            var node = graph.hasEntity(nodeID);
-
+            const node = graph.hasEntity(nodeID);
             // ignore if this node or its tile are unloaded
             if (!node || !osm.isDataLoaded(node.loc)) return [];
 
             if (isConnectedViaOtherTypes(way, node)) return [];
 
-            var attachedWaysOfSameType = graph.parentWays(node).filter(function(parentWay) {
+            const attachedWaysOfSameType = graph.parentWays(node).filter(parentWay => {
                 if (parentWay.id === way.id) return false;
                 return typeForWay(parentWay) === wayType;
             });
@@ -116,25 +108,30 @@ export function validationImpossibleOneway() {
             // assume it's okay for waterways to start or end disconnected for now
             if (wayType === 'waterway' && attachedWaysOfSameType.length === 0) return [];
 
-            var attachedOneways = attachedWaysOfSameType.filter(function(attachedWay) {
-                return attachedWay.isOneWay();
-            });
+            const attachedOneways = attachedWaysOfSameType
+                .filter(attachedWay => attachedWay.isOneWay());
 
             // ignore if the way is connected to some non-oneway features
             if (attachedOneways.length < attachedWaysOfSameType.length) return [];
 
             if (attachedOneways.length) {
-                var connectedEndpointsOkay = attachedOneways.some(function(attachedOneway) {
-                    if ((isFirst ? attachedOneway.first() : attachedOneway.last()) !== nodeID) return true;
+                const connectedEndpointsOkay = attachedOneways.some(attachedOneway => {
+                    const isAttachedBackwards = attachedOneway.isOneWayBackwards();
+                    if ((isFirst ^ isAttachedBackwards
+                        ? attachedOneway.first()
+                        : attachedOneway.last()
+                    ) !== nodeID) {
+                        return true;
+                    }
                     if (nodeOccursMoreThanOnce(attachedOneway, nodeID)) return true;
                     return false;
                 });
                 if (connectedEndpointsOkay) return [];
             }
 
-            var placement = isFirst ? 'start' : 'end',
-                messageID = wayType + '.',
-                referenceID = wayType + '.';
+            const placement = isFirst ? 'start' : 'end';
+            let messageID = wayType + '.';
+            let referenceID = wayType + '.';
 
             if (wayType === 'waterway') {
                 messageID += 'connected.' + placement;

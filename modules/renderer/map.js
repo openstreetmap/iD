@@ -17,7 +17,7 @@ import { utilGetDimensions } from '../util/dimensions';
 import { utilRebind } from '../util/rebind';
 import { utilZoomPan } from '../util/zoom_pan';
 import { utilDoubleUp } from '../util/double_up';
-import { isArray } from 'lodash-es';
+import { isArray, clamp } from 'lodash-es';
 
 // constants
 var TILESIZE = 256;
@@ -25,10 +25,6 @@ var minZoom = 2;
 var maxZoom = 24;
 var kMin = geoZoomToScale(minZoom, TILESIZE);
 var kMax = geoZoomToScale(maxZoom, TILESIZE);
-
-function clamp(num, min, max) {
-    return Math.max(min, Math.min(num, max));
-}
 
 
 export function rendererMap(context) {
@@ -306,13 +302,7 @@ export function rendererMap(context) {
                 }
             }
             if (hasOrphan) {
-                var event = window.CustomEvent;
-                if (event) {
-                    event = new event('mouseup');
-                } else {
-                    event = window.document.createEvent('Event');
-                    event.initEvent('mouseup', false, false);
-                }
+                const event = new Event('mouseup');
                 // Event needs to be dispatched with an event.view property.
                 event.view = window;
                 window.dispatchEvent(event);
@@ -393,8 +383,8 @@ export function rendererMap(context) {
             .call(drawLines, graph, data, filter)
             .call(drawAreas, graph, data, filter)
             .call(drawMidpoints, graph, data, filter, map.trimmedExtent())
-            .call(drawLabels, graph, data, filter, _dimensions, fullRedraw)
-            .call(drawPoints, graph, data, filter);
+            .call(drawPoints, graph, data, filter)
+            .call(drawLabels, graph, data, filter, _dimensions, fullRedraw);
 
         dispatch.call('drawn', this, {full: true});
     }
@@ -825,11 +815,11 @@ export function rendererMap(context) {
 
 
     function zoomIn(delta) {
-        setCenterZoom(map.center(), ~~map.zoom() + delta, 250, true);
+        setCenterZoom(map.center(), Math.trunc(map.zoom() + 0.45) + delta, 150, true);
     }
 
     function zoomOut(delta) {
-        setCenterZoom(map.center(), ~~map.zoom() - delta, 250, true);
+        setCenterZoom(map.center(), Math.ceil(map.zoom() - 0.45) - delta, 150, true);
     }
 
     map.zoomIn = function() { zoomIn(1); };
@@ -853,8 +843,8 @@ export function rendererMap(context) {
         return map;
     };
 
-    map.unobscuredCenterZoomEase = function(loc, zoom) {
-        var offset = map.unobscuredOffsetPx();
+    function trimmedCenter(loc, zoom) {
+        var offset = [paneWidth() / 2, (footerHeight() - toolbarHeight()) / 2];
 
         var proj = geoRawMercator().transform(projection.transform());  // copy projection
         // use the target zoom to calculate the offset center
@@ -864,16 +854,26 @@ export function rendererMap(context) {
         var offsetLocPx = [locPx[0] + offset[0], locPx[1] + offset[1]];
         var offsetLoc = proj.invert(offsetLocPx);
 
-        map.centerZoomEase(offsetLoc, zoom);
+        return offsetLoc;
     };
 
-    map.unobscuredOffsetPx = function() {
-        var openPane = context.container().select('.map-panes .map-pane.shown');
+    function paneWidth() {
+        const openPane = context.container().select('.map-panes .map-pane.shown');
         if (!openPane.empty()) {
-            return [openPane.node().offsetWidth/2, 0];
+            return openPane.node().offsetWidth;
         }
-        return [0, 0];
+        return 0;
     };
+
+    function toolbarHeight() {
+        const toolbar = context.container().select('.top-toolbar');
+        return toolbar.node().offsetHeight;
+    };
+
+    function footerHeight() {
+        const footer = context.container().select('.map-footer-bar');
+        return footer.node().offsetHeight;
+    }
 
     map.zoom = function(z2) {
         if (!arguments.length) {
@@ -905,21 +905,8 @@ export function rendererMap(context) {
     };
 
 
-    map.zoomTo = function(entities) {
-        if (!isArray(entities)) {
-            entities = [entities];
-        }
-
-        if (entities.length === 0) return map;
-
-        var extent = entities
-            .map(entity => entity.extent(context.graph()))
-            .reduce((a, b) => a.extend(b));
-
-        if (!isFinite(extent.area())) return map;
-
-        var z2 = clamp(map.trimmedExtentZoom(extent), 0, 20);
-        return map.centerZoom(extent.center(), z2);
+    map.zoomTo = function(what) {
+        return map.zoomToEase(what, 0);
     };
 
 
@@ -951,24 +938,29 @@ export function rendererMap(context) {
     };
 
 
-    map.zoomToEase = function(obj, duration) {
-        var extent;
-        if (Array.isArray(obj)) {
-            obj.forEach(function(entity) {
-                var entityExtent = entity.extent(context.graph());
-                if (!extent) {
-                    extent = entityExtent;
-                } else {
-                    extent = extent.extend(entityExtent);
-                }
-            });
+    map.zoomToEase = function(what, duration) {
+        let extent;
+        if (what instanceof geoExtent) {
+            // we've directly been given an extent
+            extent = what;
         } else {
-            extent = obj.extent(context.graph());
+            // we're given one or more entities to zoom to
+            if (!isArray(what)) what = [what];
+            extent = what
+                .map(entity => entity.extent(context.graph()))
+                .reduce((a, b) => a.extend(b));
         }
+
         if (!isFinite(extent.area())) return map;
 
-        var z2 = clamp(map.trimmedExtentZoom(extent), 0, 20);
-        return map.centerZoomEase(extent.center(), z2, duration);
+        var z = clamp(map.trimmedExtentZoom(extent), 0, 20);
+        const loc = trimmedCenter(extent.center(), z);
+
+        if (duration === 0) {
+            return map.centerZoom(loc, z);
+        } else {
+            return map.centerZoomEase(loc, z, duration);
+        }
     };
 
 
@@ -1036,9 +1028,11 @@ export function rendererMap(context) {
 
 
     map.trimmedExtentZoom = function(val) {
-        var trimY = 120;
-        var trimX = 40;
-        var trimmed = [_dimensions[0] - trimX, _dimensions[1] - trimY];
+        const trim = 40;
+        const trimmed = [
+            _dimensions[0] - trim - paneWidth(),
+            _dimensions[1] - trim - toolbarHeight() - footerHeight()
+        ];
         return calcExtentZoom(geoExtent(val), trimmed);
     };
 

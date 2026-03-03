@@ -1,4 +1,4 @@
-
+import { t } from '../core';
 
 /* Creates a keybinding behavior for an operation */
 export function behaviorOperation(context) {
@@ -9,19 +9,26 @@ export function behaviorOperation(context) {
         // prevent operations during low zoom selection
         if (!context.map().withinEditableZoom()) return;
 
-        if (_operation.availableForKeypress && !_operation.availableForKeypress()) return;
+        // ignore (temporarily) disabled operation keyboard shortcuts,
+        // e.g. Ctrl+C while text is selected
+        if (_operation.availableForKeypress?.() === false) return;
 
         d3_event.preventDefault();
 
-        var disabled = _operation.disabled();
-
-        if (disabled) {
+        if (!_operation.available()) {
+            context.ui().flash
+                .duration(4000)
+                .iconName('#iD-operation-' + _operation.id)
+                .iconClass('operation disabled')
+                .label(t.append('operations._unavailable', {
+                    operation: t(`operations.${_operation.id}.title`) || _operation.id
+                }))();
+        } else if (_operation.disabled()) {
             context.ui().flash
                 .duration(4000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation disabled')
                 .label(_operation.tooltip())();
-
         } else {
             context.ui().flash
                 .duration(2000)
@@ -37,12 +44,17 @@ export function behaviorOperation(context) {
 
     function behavior() {
         if (_operation && _operation.available()) {
-            context.keybinding()
-                .on(_operation.keys, keypress);
+            behavior.on();
         }
 
         return behavior;
     }
+
+
+    behavior.on = function() {
+        context.keybinding()
+            .on(_operation.keys, keypress);
+    };
 
 
     behavior.off = function() {

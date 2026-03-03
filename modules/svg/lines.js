@@ -15,7 +15,7 @@ function onewayArrowColour(tags) {
     // the return value must be defined in ./defs.js
     if (tags.highway === 'construction' && tags.bridge) return 'white';
     if (tags.highway === 'pedestrian') return 'gray';
-    if (tags.railway) return 'gray';
+    if (tags.railway && !tags.highway) return 'gray';
     if (tags.aeroway === 'runway') return 'white';
 
     return 'black';

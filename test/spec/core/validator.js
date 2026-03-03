@@ -107,7 +107,7 @@ describe('iD.coreValidator', function() {
         var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
         var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
         var n3 = iD.osmNode({ id: 'n-3', loc: [4, 6] });
-        var w1 = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'note': 'foo' } });
+        var w1 = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'description': 'foo' } });
         var w2 = iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: {} });
         var r = iD.osmRelation({ id: 'r-1', members: [{ id: 'w-2' }], tags: { 'type': 'boundary' } });
         context.perform(
@@ -140,7 +140,7 @@ describe('iD.coreValidator', function() {
         // A way is "untagged", but part of a larger (boundary) relation
         var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
         var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
-        var w1 = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'note': 'foo' } });
+        var w1 = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'description': 'foo' } });
         var r = iD.osmRelation({ id: 'r-1', members: [{ id: 'w-1' }], tags: { 'type': 'boundary' } });
         context.perform(
             iD.actionAddEntity(n1),

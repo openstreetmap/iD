@@ -7,6 +7,7 @@ import RBush from 'rbush';
 import { localizer } from '../core/localizer';
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { utilQsString, utilRebind, utilSetTransform, utilStringQs, utilTiler } from '../util';
+import { services } from './';
 
 
 var apibase = 'https://kartaview.org';
@@ -100,12 +101,13 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
                 if (which === 'images') {
                     d = {
+                        service: 'photo',
                         loc: loc,
                         key: item.id,
                         ca: +item.heading,
                         captured_at: (item.shot_date || item.date_added),
                         captured_by: item.username,
-                        imagePath: item.lth_name,
+                        imagePath: item.name,
                         sequence_id: item.sequence_id,
                         sequence_index: +item.sequence_index
                     };
@@ -190,8 +192,6 @@ export default {
             images: { inflight: {}, loaded: {}, nextPage: {}, rtree: new RBush(), forImageKey: {} },
             sequences: {}
         };
-
-        _oscSelectedImage = null;
     },
 
 
@@ -367,17 +367,17 @@ export default {
 
 
     showViewer: function(context) {
-        var viewer = context.container().select('.photoviewer')
-            .classed('hide', false);
-
-        var isHidden = viewer.selectAll('.photo-wrapper.kartaview-wrapper.hide').size();
+        const wrap = context.container().select('.photoviewer');
+        const isHidden = wrap.selectAll('.photo-wrapper.kartaview-wrapper.hide').size();
 
         if (isHidden) {
-            viewer
-                .selectAll('.photo-wrapper:not(.kartaview-wrapper)')
-                .classed('hide', true);
-
-            viewer
+            for (const service of Object.values(services)) {
+                if (service === this) continue;
+                if (typeof service.hideViewer === 'function') {
+                    service.hideViewer(context);
+                }
+            }
+            wrap.classed('hide', false)
                 .selectAll('.photo-wrapper.kartaview-wrapper')
                 .classed('hide', false);
         }
@@ -444,7 +444,7 @@ export default {
             imageWrap
                 .append('img')
                 .attr('class', 'kartaview-image')
-                .attr('src', (apibase + '/' + d.imagePath).replace('https://kartaview.org/storage2/', 'https://storage2.openstreetcam.org/'))
+                .attr('src', (apibase + '/' + d.imagePath).replace(/^https:\/\/kartaview\.org\/storage(\d+)\//, 'https://storage$1.openstreetcam.org/'))
                 .style('transform', 'rotate(' + r + 'deg)');
 
             if (d.captured_by) {
@@ -553,15 +553,13 @@ export default {
 
 
     updateUrlImage: function(imageKey) {
-        if (!window.mocha) {
-            var hash = utilStringQs(window.location.hash);
-            if (imageKey) {
-                hash.photo = 'kartaview/' + imageKey;
-            } else {
-                delete hash.photo;
-            }
-            window.location.replace('#' + utilQsString(hash, true));
+        const hash = utilStringQs(window.location.hash);
+        if (imageKey) {
+            hash.photo = 'kartaview/' + imageKey;
+        } else {
+            delete hash.photo;
         }
+        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
     },
 
 

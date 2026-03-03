@@ -105,18 +105,18 @@ export function svgKartaviewImages(projection, context, dispatch) {
     }
 
 
-    function filterImages(images) {
+    function filterImages(images, skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
         var usernames = context.photos().usernames();
 
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             var fromTimestamp = new Date(fromDate).getTime();
             images = images.filter(function(item) {
                 return new Date(item.captured_at).getTime() >= fromTimestamp;
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             var toTimestamp = new Date(toDate).getTime();
             images = images.filter(function(item) {
                 return new Date(item.captured_at).getTime() <= toTimestamp;
@@ -131,18 +131,18 @@ export function svgKartaviewImages(projection, context, dispatch) {
         return images;
     }
 
-    function filterSequences(sequences) {
+    function filterSequences(sequences, skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
         var usernames = context.photos().usernames();
 
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             var fromTimestamp = new Date(fromDate).getTime();
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.captured_at).getTime() >= fromTimestamp;
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             var toTimestamp = new Date(toDate).getTime();
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.captured_at).getTime() <= toTimestamp;
@@ -165,13 +165,13 @@ export function svgKartaviewImages(projection, context, dispatch) {
         var showMarkers = (z >= minMarkerZoom);
         var showViewfields = (z >= minViewfieldZoom);
 
-        var service = getService();
-        var sequences = [];
-        var images = [];
+        const service = getService();
 
-        sequences = (service ? service.sequences(projection) : []);
-        images = (service && showMarkers ? service.images(projection) : []);
-        dispatch.call('photoDatesChanged', this, 'kartaview', [...images.map(p => p.captured_at), ...sequences.map(s => s.properties.captured_at)]);
+        let sequences = (service ? service.sequences(projection) : []);
+        let images = (service && showMarkers ? service.images(projection) : []);
+        dispatch.call('photoDatesChanged', this, 'kartaview', [
+            ...filterImages(images, true).map(p => p.captured_at),
+            ...filterSequences(sequences, true).map(s => s.properties.captured_at)]);
         sequences = filterSequences(sequences);
         images = filterImages(images);
 
@@ -183,7 +183,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
             .remove();
 
         // enter/update
-        traces = traces.enter()
+        traces.enter()
             .append('path')
             .attr('class', 'sequence')
             .merge(traces)

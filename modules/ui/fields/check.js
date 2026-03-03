@@ -1,13 +1,15 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
 import {
     select as d3_select
 } from 'd3-selection';
+import { omit } from 'lodash-es';
 
 import { utilRebind } from '../../util/rebind';
 import { t } from '../../core/localizer';
 import { actionReverse } from '../../actions/reverse';
 import { svgIcon } from '../../svg/icon';
+import { utilCheckTagDictionary } from '../../util';
+import { osmOneWayTags } from '../../osm/tags';
 
 export { uiFieldCheck as uiFieldDefaultCheck };
 export { uiFieldCheck as uiFieldOnewayCheck };
@@ -60,7 +62,7 @@ export function uiFieldCheck(field, context) {
         // where implied oneway tag exists (e.g. `junction=roundabout`) #2220, #1841
         if (field.id === 'oneway') {
             var entity = context.entity(_entityIDs[0]);
-            if (entity.type === 'way' && entity.isOneWay()) {
+            if (entity.type === 'way' && !!utilCheckTagDictionary(entity.tags, omit(osmOneWayTags, 'oneway'))) {
                 _impliedYes = true;
                 texts[0] = t.html('_tagging.presets.fields.oneway_yes.options.undefined');
             }

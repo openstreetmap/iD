@@ -1,6 +1,7 @@
 import {
     select as d3_select
 } from 'd3-selection';
+import { clamp } from 'lodash-es';
 
 import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
@@ -26,10 +27,6 @@ export function uiSectionBackgroundDisplayOptions(context) {
         saturation: 1,
         sharpness: 1
     };
-
-    function clamp(x, min, max) {
-        return Math.max(min, Math.min(x, max));
-    }
 
     function updateValue(d, val) {
         val = clamp(val, _minVal, _maxVal);

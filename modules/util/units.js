@@ -1,3 +1,5 @@
+import { clamp } from 'lodash-es';
+
 import { t, localizer } from '../core/localizer';
 
 var OSM_PRECISION = 7;
@@ -45,7 +47,8 @@ export function displayArea(m2, isImperial) {
     var locale = localizer.localeCode();
     var d = m2 * (isImperial ? 10.7639111056 : 1);
     var d1, d2, area;
-    var unit1 = '';
+
+    var unit1 = ''; // eslint-disable-line no-useless-assignment
     var unit2 = '';
 
     if (isImperial) {
@@ -100,10 +103,6 @@ export function displayArea(m2, isImperial) {
 function wrap(x, min, max) {
     var d = max - min;
     return ((x - min) % d + d) % d + min;
-}
-
-function clamp(x, min, max) {
-    return Math.max(min, Math.min(x, max));
 }
 
 function roundToDecimal (target, decimalPlace) {

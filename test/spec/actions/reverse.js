@@ -1,4 +1,31 @@
 describe('iD.actionReverse', function () {
+    beforeEach(() => {
+        iD.fileFetcher.cache().preset_fields = {
+            direction: { key: 'direction', type: 'combo' },
+            'prefixed:direction': { key: 'prefixed:direction', type: 'combo' }
+        };
+        iD.fileFetcher.cache().preset_presets = {
+            'Give Way Sign': {
+                 // this preset has direction as a normal field
+                tags: { highway: 'give_way' },
+                geometry: ['point', 'vertex'],
+                fields: ['direction']
+            },
+            'Advance Stop Line': {
+                // this preset has direction under moreFields
+                tags: { cycleway: 'asl' },
+                geometry: ['point', 'vertex'],
+                moreFields: ['direction']
+            },
+            'Traffic Lights': {
+                // this preset uses a prefixed direction tag
+                tags: { highway: 'traffic_signals' },
+                geometry: ['point', 'vertex'],
+                moreFields: ['prefixed:direction']
+            },
+        };
+    });
+
     it('reverses the order of nodes in the way', function () {
         var node1 = iD.osmNode();
         var node2 = iD.osmNode();
@@ -93,6 +120,36 @@ describe('iD.actionReverse', function () {
             var node1 = iD.osmNode({ tags: { 'direction': 'both' } });
             var graph = iD.actionReverse(node1.id)(iD.coreGraph([node1]));
             expect(graph.entity(node1.id).tags).to.eql({ 'direction': 'both' });
+        });
+
+        describe('directionless nodes', () => {
+            it('adds a direction tag to directionless nodes if the preset has a direction field', async () => {
+                await iD.presetManager.ensureLoaded(true);
+                const node1 = iD.osmNode({ tags: { highway: 'give_way' } });
+                const graph = iD.actionReverse(node1.id)(iD.coreGraph([node1]));
+                expect(graph.entity(node1.id).tags).to.eql({ highway: 'give_way', direction: 'forward' });
+            });
+
+            it('adds a direction tag to directionless nodes if the preset has a direction field under moreFields', async () => {
+                await iD.presetManager.ensureLoaded(true);
+                const node1 = iD.osmNode({ tags: { cycleway: 'asl' } });
+                const graph = iD.actionReverse(node1.id)(iD.coreGraph([node1]));
+                expect(graph.entity(node1.id).tags).to.eql({ cycleway: 'asl', direction: 'forward' });
+            });
+
+            it('does not add a direction tag to directionless nodes if the preset has no direction field', async () => {
+                await iD.presetManager.ensureLoaded(true);
+                const node1 = iD.osmNode({ tags: { amenity: 'ferry_terminal' } });
+                const graph = iD.actionReverse(node1.id)(iD.coreGraph([node1]));
+                expect(graph.entity(node1.id).tags).to.eql({ amenity: 'ferry_terminal' });
+            });
+
+            it('adds a custom direction tag to directionless nodes if the preset has a custom direction field', async () => {
+                await iD.presetManager.ensureLoaded(true);
+                const node1 = iD.osmNode({ tags: { highway: 'traffic_signals' } });
+                const graph = iD.actionReverse(node1.id)(iD.coreGraph([node1]));
+                expect(graph.entity(node1.id).tags).to.eql({ highway: 'traffic_signals', 'prefixed:direction': 'forward' });
+            });
         });
     });
 
