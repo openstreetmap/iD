@@ -44,7 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Change labeling of route relation to show icons, `ref` and route colours ([#11052])
 * Render the `turnout_side` of railway switches ([#11944], thanks [@hlfan])
 #### :scissors: Operations
-* Show a preview of the result of some geometry opertions while the respective button in the edit menu is hovered ([#11778])
+* Show a preview of the result of some geometry operations while the respective button in the edit menu is hovered ([#11778])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Make wording of fix for _overlapping features_ validator less ambiguous ([#9888], thanks [@k-yle])
