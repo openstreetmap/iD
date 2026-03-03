@@ -11,7 +11,7 @@ import { geoSphericalDistance } from '../geo/geo';
 import { geoExtent } from '../geo';
 import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm/entity';
-import { isColourValid } from '../osm/tags';
+import { getRelationColor } from '../osm/tags';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
@@ -188,10 +188,9 @@ export function uiFeatureList(context) {
                 var entity = allEntities[id];
                 if (!entity) continue;
 
-                var name = utilDisplayName(entity) || '';
-                if (name.toLowerCase().indexOf(q) < 0) continue;
-
                 var matched = presetManager.match(entity, graph);
+                var name = utilDisplayName(entity, { hideNetwork: matched.suggestion }) || '';
+                if (name.toLowerCase().indexOf(q) < 0) continue;
                 var type = (matched && matched.name()) || utilDisplayType(entity.id);
                 var extent = entity.extent(graph);
                 var distance = extent ? geoSphericalDistance(visibleCenter, extent.center()) : 0;
@@ -329,7 +328,8 @@ export function uiFeatureList(context) {
 
             var label = enter
                 .append('div')
-                .attr('class', 'label');
+                .attr('class', 'label')
+                .attr('title', d => d.name);
 
             label
                 .each(function(d) {
@@ -342,12 +342,29 @@ export function uiFeatureList(context) {
                 .attr('class', 'entity-type')
                 .text(function(d) { return d.type; });
 
+            label.each(function(d) {
+                if (d.entity?.type !== 'relation') return;
+
+                const hasRef = d.entity.tags.ref;
+                const relColors = getRelationColor(d.entity.tags, '#555');
+                if (relColors.isValid || hasRef) {
+                    const refs = (d.entity.tags.ref || '').split(';');
+                    for (const ref of refs) {
+                        d3_select(this)
+                            .append('span')
+                            .classed('member-entity-ref-color', true)
+                            .style('border-color', relColors.color)
+                            .style('background-color', relColors.color)
+                            .style('color', relColors.textColor)
+                            .text(ref);
+                    }
+                }
+            });
+
             label
                 .append('span')
                 .attr('class', 'entity-name')
-                .classed('has-colour', d => d.entity && d.entity.type === 'relation' && d.entity.tags.colour && isColourValid(d.entity.tags.colour))
-                .style('border-color', d => d.entity && d.entity.type === 'relation' && d.entity.tags.colour)
-                .text(function(d) { return d.name; });
+                .text(d => d.name);
 
             enter
                 .style('opacity', 0)
