@@ -1,5 +1,5 @@
 import { osmEntity } from './entity';
-import { geoAngle, geoExtent } from '../geo';
+import { geoAngle, geoExtent, geoVecAdd, geoVecLength, geoVecNormalize, geoVecSubtract } from '../geo';
 import { utilArrayUniqBy } from '../util';
 import { osmShouldRenderDirection } from './tags';
 
@@ -25,10 +25,12 @@ export const cardinal = {
 export const SIDE_TAGS = [
     'side',
     'railway:signal:position',
-    // railway:turnout_side can't be included, since it's not relative to the way direction
+    // railway:turnout_side has special handling, since it's not relative to the way direction
 ];
 
 export const SIDES = new Set(['left', 'right', 'both']);
+
+export const SIDE_ANGLE_OFFSET = { left: 180, right: 0 };
 
 /**
  * @typedef {typeof prototype & iD.AbstractEntity} OsmNode
@@ -78,9 +80,8 @@ const prototype = {
 
     // Inspect tags and geometry to determine which direction(s) this node/vertex points
     directions: function(resolver, projection) {
-        /** @type {{ type: 'side' | 'direction'; value: string }[]} */
+        /** @type {{ type: 'side' | 'turnout_side' | 'direction'; value: string }[]} */
         const rawValues = [];
-        var i;
 
         // which tag to use?
         if (this.isHighwayIntersection(resolver) && (this.tags.stop || '').toLowerCase() === 'all') {
@@ -88,6 +89,11 @@ const prototype = {
             rawValues.push({
                 type: 'direction',
                 value: 'all',
+            });
+        } else if (this.tags['railway:turnout_side'] && resolver.parentWays(this).length > 1) {
+            rawValues.push({
+                type: 'turnout_side',
+                value: this.tags['railway:turnout_side'].toLowerCase(),
             });
         } else {
             // generic side tag
@@ -114,11 +120,10 @@ const prototype = {
             let val = (this.tags.direction || '').toLowerCase();
 
             // better suffix-style direction tag
-            var re = /:direction$/i;
-            var keys = Object.keys(this.tags);
-            for (i = 0; i < keys.length; i++) {
-                if (re.test(keys[i])) {
-                    val = this.tags[keys[i]].toLowerCase();
+            const re = /:direction$/i;
+            for (const key of Object.keys(this.tags)) {
+                if (re.test(key)) {
+                    val = this.tags[key].toLowerCase();
                     break;
                 }
             }
@@ -131,7 +136,21 @@ const prototype = {
 
 
         /** @type {{ type: 'side' | 'direction'; angle: number }[]} */
-        var results = [];
+        const results = [];
+
+        const neighborNodeReducer = (neighbor, { lookBackward = true, lookForward = true } = {}) => function(collection, { nodes }) {
+            nodes.forEach((_, i) => {
+                if (nodes[i] !== neighbor.id) return;  // not a match of current entity
+
+                if (lookForward && i > 0) {
+                    collection[nodes[i - 1]] = true;  // look back to prev node
+                }
+                if (lookBackward && i < nodes.length - 1) {
+                    collection[nodes[i + 1]] = true;  // look ahead to next node
+                }
+            });
+            return collection;
+        };
 
         rawValues.forEach(({ type, value: v }) => {
             // swap cardinal for numeric directions
@@ -145,41 +164,59 @@ const prototype = {
                 return;
             }
 
-            const isSide = type === 'side' && SIDES.has(v);
+            if (type === 'turnout_side') {
+                if (SIDE_ANGLE_OFFSET[v] === undefined) return;
 
-            // string direction - inspect parent ways
-            var lookBackward =
-                (this.tags['traffic_sign:backward'] || v === (isSide ? 'left' : 'backward') || v === 'both' || v === 'all');
-            var lookForward =
-                (this.tags['traffic_sign:forward'] || v === (isSide ? 'right' : 'forward') || v === 'both' || v === 'all');
+                const branchVectors = resolver.parentWays(this)
+                    .filter(way => way.tags.railway && way.geometry(resolver) === 'line')
+                    .reduce(neighborNodeReducer(this), {});
 
-            if (!lookForward && !lookBackward) return;
+                const ids = Object.keys(branchVectors);
+                // the turnout side tag is only meaningfully defined for switches with 3 branches - one incoming and two outgoing
+                if (ids.length !== 3) return;
 
-            var nodeIds = {};
-            resolver.parentWays(this)
-                .filter(way => osmShouldRenderDirection(this.tags, way.tags))
-                .forEach(function(parent) {
-                    var nodes = parent.nodes;
-                    for (i = 0; i < nodes.length; i++) {
-                        if (nodes[i] === this.id) {  // match current entity
-                            if (lookForward && i > 0) {
-                                nodeIds[nodes[i - 1]] = true;  // look back to prev node
-                            }
-                            if (lookBackward && i < nodes.length - 1) {
-                                nodeIds[nodes[i + 1]] = true;  // look ahead to next node
-                            }
-                        }
-                    }
-                }, this);
+                ids.forEach(id => branchVectors[id] = geoVecNormalize(geoVecSubtract(projection(resolver.entity(id).loc), projection(this.loc))));
 
-            Object.keys(nodeIds).forEach(function(nodeId) {
-                // +90 because geoAngle returns angle from X axis, not Y (north)
+                const sortedIds = ids.map(id => {
+                    const otherVectorSum = ids
+                        .filter(n => n !== id)
+                        .map(n => branchVectors[n])
+                        .reduce(geoVecAdd, [0, 0]);
+                    return { id, alignment: geoVecLength(otherVectorSum) };
+                }).sort((a, b) => b.alignment - a.alignment);
+
+                // don't attempt to interpret the turnout side if the angles of the branches are too similar
+                const MIN_ALIGNMENT_RATIO = 2;
+                if (sortedIds[0].alignment < MIN_ALIGNMENT_RATIO * sortedIds[1].alignment || !sortedIds[0].id) return;
+
                 results.push({
-                    type: isSide ? 'side' : 'direction',
-                    angle: (geoAngle(this, resolver.entity(nodeId), projection) * (180 / Math.PI)) + (isSide ? 0 : 90)
+                    type: 'side',
+                    angle: (geoAngle(this, resolver.entity(sortedIds[0].id), projection) * (180 / Math.PI)) + SIDE_ANGLE_OFFSET[v]
                 });
-            }, this);
+            } else {
 
+                const isSide = type === 'side' && SIDES.has(v);
+
+                // string direction - inspect parent ways
+                const lookBackward =
+                    (this.tags['traffic_sign:backward'] || v === (isSide ? 'left' : 'backward') || v === 'both' || v === 'all');
+                const lookForward =
+                    (this.tags['traffic_sign:forward'] || v === (isSide ? 'right' : 'forward') || v === 'both' || v === 'all');
+
+                if (!lookForward && !lookBackward) return;
+
+                const nodeIds = resolver.parentWays(this)
+                    .filter(way => osmShouldRenderDirection(this.tags, way.tags))
+                    .reduce(neighborNodeReducer(this, { lookForward, lookBackward }), {});
+
+                Object.keys(nodeIds).forEach(function(nodeId) {
+                    // +90 because geoAngle returns angle from X axis, not Y (north)
+                    results.push({
+                        type: isSide ? 'side' : 'direction',
+                        angle: (geoAngle(this, resolver.entity(nodeId), projection) * (180 / Math.PI)) + (isSide ? 0 : 90)
+                    });
+                }, this);
+            }
         }, this);
 
         return utilArrayUniqBy(results, item => item.type + item.angle);
