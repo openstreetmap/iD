@@ -284,7 +284,7 @@ export function uiSectionRawMembershipEditor(context) {
         var graph = context.graph();
 
         //select entities
-        var selectedEntities = _entityIDs
+        const selectedEntities = _entityIDs
             .map(function(id) {
                 return graph.hasEntity(id);
             })
@@ -293,7 +293,7 @@ export function uiSectionRawMembershipEditor(context) {
             });
 
         // Map relationID -> number of selected entities in that relation
-        var relationCounts = new Map();
+        const relationCounts = new Map();
 
         selectedEntities.forEach(function(ent) {
             graph.parentRelations(ent).forEach(function (rel) {
@@ -352,20 +352,18 @@ export function uiSectionRawMembershipEditor(context) {
                 var value = baseDisplayValue(entity);
                 if (q && (value + ' ' + entity.id).toLowerCase().indexOf(q.toLowerCase()) === -1) return;
 
-                var count = relationCounts.get(entity.id) || 0;
-                var flags = {
-                    isCommon: count === selectedEntities.length,
-                    isPartial: count > 0 && count < selectedEntities.length
-                };
+                const count = relationCounts.get(entity.id) || 0;
+                const isCommon = count === selectedEntities.length;
+                const isPartial = count > 0 && count < selectedEntities.length;
 
 
                 result.push({
                     relation: entity,
                     value,
-                    display: baseDisplayLabel(entity, flags),
+                    display: baseDisplayLabel(entity, { isCommon, isPartial }),
                     title: value,
-                    isCommon: flags.isCommon,
-                    isPartial: flags.isPartial
+                    isCommon,
+                    isPartial
                 });
             });
 
