@@ -48,6 +48,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Make wording of fix for _overlapping features_ validator less ambiguous ([#9888], thanks [@k-yle])
+* Skip `disconnected_way` validation for Golf Paths ([#11863], thanks [@Kayd-06])
 #### :bug: Bugfixes
 #### :earth_asia: Localization
 * Support territory-level phone hints ([#10904], thanks [@Vectorial1024])
@@ -63,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10904]: https://github.com/openstreetmap/iD/pull/10904
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
 [#11778]: https://github.com/openstreetmap/iD/pull/11778
+[#11865]: https://github.com/openstreetmap/iD/pull/11865
 [#11944]: https://github.com/openstreetmap/iD/pull/11944
 [#11952]: https://github.com/openstreetmap/iD/pull/11952
 [@Shrinks99]: https://github.com/Shrinks99
@@ -84,7 +86,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Display reflection axis on the map while hovering the reflection operations in the edit menu ([#11774], thanks [@Kaushik4141])
 #### :white_check_mark: Validation
 * Don't error on features with a sole `note` tag ([#11522])
-* Skip `disconnected_way` validation for Golf Paths ([#11863], thanks [@Kayd-06])
 * Warn when two features cross each other on same `layer`, regardless of `bridge` / `tunnel` tags ([#10999], thanks [@homersimpsons])
 * Add `railway=crossing` tag when connecting two railways using the validation fix ([#9226], thanks [@paulklie])
 #### :bug: Bugfixes
