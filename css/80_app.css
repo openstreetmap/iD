@@ -2408,11 +2408,14 @@ div.combobox {
     box-shadow: 0 4px 10px 1px rgba(0,0,0,.2);
     margin-top: -1px;
     background: var(--bg-color);
-    max-height: 400px;
+    max-height: 245px;
     overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid var(--border-color);
     border-radius: 0 0 4px 4px;
+}
+div.combobox:has(.has-description) {
+    max-height: 400px;
 }
 
 .combobox a {
