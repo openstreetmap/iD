@@ -43,6 +43,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Always render icons for `craft` features mapped as areas ([#9183])
 * Change labeling of route relation to show icons, `ref` and route colours ([#11052])
 * Render the `turnout_side` of railway switches ([#11944], thanks [@hlfan])
+* Show descriptions of preset field _options_ directly in the combobox dropdown menu in slightly smaller font size ([#11876], thanks [@Sembauke])
 #### :scissors: Operations
 * Show a preview of the result of some geometry operations while the respective button in the edit menu is hovered ([#11778])
 #### :camera: Street-Level
@@ -65,6 +66,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
 [#11778]: https://github.com/openstreetmap/iD/pull/11778
 [#11865]: https://github.com/openstreetmap/iD/pull/11865
+[#11876]: https://github.com/openstreetmap/iD/pull/11876
 [#11944]: https://github.com/openstreetmap/iD/pull/11944
 [#11952]: https://github.com/openstreetmap/iD/pull/11952
 [@Shrinks99]: https://github.com/Shrinks99
