@@ -72,6 +72,35 @@ describe('iD.util', function() {
         });
     });
 
+    describe('utilCombinedTags', function() {
+        it('sorts tag values by frequency then alphabetically', function() {
+            var entities = [
+                iD.osmNode({ tags: { surface: 'paved' } }),
+                iD.osmNode({ tags: { surface: 'paved' } }),
+                iD.osmNode({ tags: { surface: 'paved' } }),
+                iD.osmNode({ tags: { surface: 'asphalt' } }),
+                iD.osmNode({ tags: { surface: 'gravel' } })
+            ];
+            var result = iD.utilCombinedTags(entities);
+
+            expect(result.surface).to.be.an('array');
+            expect(result.surface[0]).to.eql('paved');
+            expect(result.surface[1]).to.eql('asphalt');
+            expect(result.surface[2]).to.eql('gravel');
+        });
+
+        it('returns raw value when all entities share the same tag value', function() {
+            var entities = [
+                iD.osmNode({ tags: { highway: 'residential' } }),
+                iD.osmNode({ tags: { highway: 'residential' } })
+            ];
+            var result = iD.utilCombinedTags(entities);
+
+            expect(result.highway).to.eql('residential');
+        });
+    });
+
+
     it('utilTagText', function() {
         expect(iD.utilTagText({})).to.eql('');
         expect(iD.utilTagText({tags:{foo:'bar'}})).to.eql('foo=bar');
