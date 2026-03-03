@@ -74,14 +74,13 @@ describe('iD.util', function() {
 
     describe('utilCombinedTags', function() {
         it('sorts tag values by frequency then alphabetically', function() {
-            var entities = [
-                iD.osmNode({ tags: { surface: 'paved' } }),
-                iD.osmNode({ tags: { surface: 'paved' } }),
-                iD.osmNode({ tags: { surface: 'paved' } }),
-                iD.osmNode({ tags: { surface: 'asphalt' } }),
-                iD.osmNode({ tags: { surface: 'gravel' } })
-            ];
-            var result = iD.utilCombinedTags(entities);
+            var n1 = iD.osmNode({ id: 'n-1', tags: { surface: 'paved' } });
+            var n2 = iD.osmNode({ id: 'n-2', tags: { surface: 'paved' } });
+            var n3 = iD.osmNode({ id: 'n-3', tags: { surface: 'paved' } });
+            var n4 = iD.osmNode({ id: 'n-4', tags: { surface: 'asphalt' } });
+            var n5 = iD.osmNode({ id: 'n-5', tags: { surface: 'gravel' } });
+            var graph = iD.coreGraph([n1, n2, n3, n4, n5]);
+            var result = iD.utilCombinedTags(['n-1', 'n-2', 'n-3', 'n-4', 'n-5'], graph);
 
             expect(result.surface).to.be.an('array');
             expect(result.surface[0]).to.eql('paved');
@@ -90,15 +89,15 @@ describe('iD.util', function() {
         });
 
         it('returns raw value when all entities share the same tag value', function() {
-            var entities = [
-                iD.osmNode({ tags: { highway: 'residential' } }),
-                iD.osmNode({ tags: { highway: 'residential' } })
-            ];
-            var result = iD.utilCombinedTags(entities);
+            var n1 = iD.osmNode({ id: 'n-1', tags: { highway: 'residential' } });
+            var n2 = iD.osmNode({ id: 'n-2', tags: { highway: 'residential' } });
+            var graph = iD.coreGraph([n1, n2]);
+            var result = iD.utilCombinedTags(['n-1', 'n-2'], graph);
 
             expect(result.highway).to.eql('residential');
         });
     });
+
 
 
     it('utilTagText', function() {
