@@ -1,17 +1,19 @@
 ## Release Checklist
 
 ### Prerelease (several days prior)
+
 - [Notify translators](https://app.transifex.com/openstreetmap/communication/?q=project%3Aid-editor) of the impending release
 - Notify TomH
 
 ### Prep
-- If you don't have a `transifex.auth` file in the root of your iD checkout,
-you'll need to create a Transifex account, ask the project's maintainers for admin rights
-on the iD project, and then create this file with contents like
 
-  ````json
-  { "user":"api", "password": "<your-transifex-api-key>" }
-  ````
+- If you don't have a `transifex.auth` file in the root of your iD checkout,
+  you'll need to create a Transifex account, ask the project's maintainers for admin rights
+  on the iD project, and then create this file with contents like
+
+  ```json
+  { "user": "api", "password": "<your-transifex-api-key>" }
+  ```
 
   where you insert your personal [transifex api token](https://app.transifex.com/user/settings/api/). This file is not version-controlled and will not be checked in.
 
@@ -19,10 +21,12 @@ on the iD project, and then create this file with contents like
 
 #### Update `develop` branch
 
+note: do **not** install `editor-layer-index` from npmjs.com use the github url instead
+
 ```bash
 git checkout develop
 npm clean-install
-npm install editor-layer-index
+npm install github:osmlab/editor-layer-index#gh-pages
 npm run imagery
 npm run all
 git add . && git commit -m 'npm run imagery'
@@ -50,6 +54,7 @@ git commit -m 'Check in build'
 git tag "v$ID_VERSION" -m "v$ID_VERSION" --sign
 git push origin -f release "v$ID_VERSION"
 ```
+
 - Open https://github.com/openstreetmap/iD/tags
 - Click `•••` –> `Create Release`, paste version(vA.B.C) to `Release title` and copy/paste the relevant [`changelog`](https://github.com/openstreetmap/iD/blob/release/CHANGELOG.md) entries into the description of the release.
 
@@ -76,15 +81,25 @@ git push origin develop
 ### Update `openstreetmap-website`
 
 - Create a PR branch that updates the version number of iD (`@openstreetmap/id`) in the [`package.json`](https://github.com/openstreetmap/openstreetmap-website/blob/master/package.json) file of the OpenStreetMap Website repository.
+
 ```bash
 bundle install
 bundle exec bin/yarn add "@openstreetmap/id@$ID_VERSION"
 ```
+
 - If there have been any changes to iD's [URL parameters](https://github.com/openstreetmap/iD/blob/develop/API.md#url-parameters), make sure they're reflected in [app/assets/javascripts/edit/id.js.erb](https://github.com/openstreetmap/openstreetmap-website/blob/master/app/assets/javascripts/edit/id.js.erb).
 - Test the new version locally:
+
 ```bash
 bundle exec rails assets:precompile
 bundle exec rails server
 ```
+
 - Open the pull request on github and link to the release on github in the issue text for the changelog.
 
+```bash
+bundle exec rails assets:precompile
+bundle exec rails server
+```
+
+- Open the pull request on github and link to the release on github in the issue text for the changelog.
