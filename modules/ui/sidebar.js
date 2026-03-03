@@ -152,6 +152,21 @@ export function uiSidebar(context) {
             .append('div')
             .attr('class', 'inspector-hidden inspector-wrap');
 
+        // Add a close button that only shows up on mobile
+        var closeButton = selection
+            .append('button')
+            .attr('class', 'sidebar-close-button hide') // 'hide' by default
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                sidebar.collapse();
+            });
+
+        closeButton
+            .append('svg')
+            .attr('class', 'icon')
+            .append('use')
+            .attr('href', '#iD-icon-close');
+
         var hoverModeSelect = function(targets) {
             context.container().selectAll('.feature-list-item button').classed('hover', false);
 
@@ -367,14 +382,26 @@ export function uiSidebar(context) {
             selection.style('width', sidebarWidth + 'px');
 
             var startMargin, endMargin, lastMargin;
-            if (isCollapsing) {
-                startMargin = lastMargin = 0;
-                endMargin = -sidebarWidth;
-            } else {
-                startMargin = lastMargin = -sidebarWidth;
-                endMargin = 0;
-            }
+            // mobile sidebar fullwidth 
+            var isMobile = (window.innerWidth <= 850);
+            closeButton.classed('hide', !isMobile || isCollapsing);
+            var idContainer = d3_select('.ideditor');
 
+            if (isCollapsing) {
+           
+            if (isMobile) {
+                idContainer.classed('sidebar-modal-open', false);
+            }
+            startMargin = lastMargin = 0;
+            endMargin = -sidebarWidth;
+            } else {
+           
+            if (isMobile) {
+                idContainer.classed('sidebar-modal-open', true);
+            }   
+            startMargin = lastMargin = -sidebarWidth;
+            endMargin = 0;
+        }
             if (!isCollapsing) {
                 // unhide the sidebar's content before it transitions onscreen
                 selection.classed('collapsed', isCollapsing);
@@ -421,6 +448,16 @@ export function uiSidebar(context) {
         context.map().on('crossEditableZoom.sidebar', function(within) {
             if (!within && !selection.select('.inspector-hover').empty()) {
                 hover([]);
+            }
+        });
+        // close button 
+        selection.on('click.sidebar-close', function(d3_event) {
+            if (window.innerWidth > 850) return;
+            
+           
+            if (d3_event.target.closest('button.close')) {
+                d3_event.preventDefault();
+                sidebar.collapse(); 
             }
         });
     }
