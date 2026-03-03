@@ -68,7 +68,7 @@ export function uiTopToolbar(context) {
                 .enter()
                 .append('div')
                 .attr('class', function(d) {
-                    var classes = 'toolbar-item ' + (d.id || d).replace('_', '-');
+                    var classes = 'toolbar-item ' + (d.id || d).replaceAll('_', '-');
                     if (d.klass) classes += ' ' + d.klass;
                     return classes;
                 });
