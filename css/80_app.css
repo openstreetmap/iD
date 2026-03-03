@@ -790,19 +790,26 @@ button.add-note svg.icon {
 
 /* Hide/Toggle collapsible sections (aka Disclosure)
 ------------------------------------------------------- */
+summary.hide-toggle {
+    display: block;
+    list-style: none;
+    cursor: pointer;
+    color: var(--link-color);
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 25px;
+}
+details.disclosure-wrap[open] summary.hide-toggle {
+    margin-bottom: 10px;
+}
+summary.hide-toggle::-webkit-details-marker {
+    display: none;
+}
 .hide-toggle .icon.pre-text {
     vertical-align: middle;
     width: 16px;
     height: 16px;
     margin-top: -3px;
-}
-
-a:visited.hide-toggle,
-a.hide-toggle {
-    display: inline-block;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 5px;
 }
 
 
@@ -1447,7 +1454,6 @@ button.preset-reset .label.flash-bg {
 
 .label-text .label-textannotation svg.icon {
     margin: 0 8px;
-    color: #333;
     opacity: 0.5;
     width: 14px;
     height: 14px;
@@ -1857,10 +1863,19 @@ input.date-selector {
     padding-left: 0;
     padding-right: 11px;
 }
+.combobox-address-street-place .combobox-option,
+.combobox-option.has-icon {
+    display: flex;
+    align-items: center;
+}
 .tag-value-icon .icon {
     width: 21px;
     height: 21px;
     margin: auto;
+}
+.tag-value-icon .emoji {
+    font-size: 24px;
+    line-height: 24px;
 }
 .ideditor[dir='ltr'] .form-field-input-combo .tag-value-icon + input,
 .ideditor[dir='ltr'] .form-field-input-semicombo .input-wrap .tag-value-icon + input,
@@ -2894,21 +2909,35 @@ img.tag-reference-wiki-image {
     font-weight: normal;
     padding-left: 10px;
 }
-.section-raw-member-editor .member-row .member-entity-name.has-colour::before,
-.section-raw-membership-editor .member-row .member-entity-name.has-colour::before,
-.feature-list .entity-name.has-colour::before,
+
 .combobox-parent-relation .has-colour::before {
     display: inline-block;
     content: '';
-    margin-left: -5px;
+    margin-left: 2px;
     margin-right: 5px;
     border-style: solid;
     border-width: 4px;
     border-radius: 4px;
     border-color: inherit;
 }
-.combobox-parent-relation .has-colour::before  {
-    margin-left: 2px;
+.section-raw-membership-editor .member-row img.member-entity-icon,
+.section-raw-member-editor .member-row img.member-entity-icon {
+    display: inline-block;
+    width: auto;
+    height: 18px;
+    margin-left: 5px;
+    margin-bottom: -4.5px;
+}
+.section-raw-membership-editor .member-row span.member-entity-ref-color,
+.section-raw-member-editor .member-row span.member-entity-ref-color,
+.feature-list .feature-list-item span.member-entity-ref-color {
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: -5px;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 10px;
+    line-height: 10px;
 }
 
 .ideditor[dir='rtl'] .section-raw-member-editor .member-row .member-entity-name,
@@ -2980,17 +3009,26 @@ img.tag-reference-wiki-image {
 .add-tag button {
     visibility: hidden;
 }
-.add-tag input.key {
-    border-bottom-left-radius: 4px;
-}
 .add-tag input.key::placeholder {
     font-weight: normal;
 }
-.add-tag input.value {
+.ideditor[dir='ltr'] .add-tag input.key {
+    border-bottom-left-radius: 4px;
+}
+.ideditor[dir='rtl'] .add-tag input.key {
     border-bottom-right-radius: 4px;
 }
-.tag-row:has(+ .add-tag) button:last-child {
+.ideditor[dir='ltr'] .add-tag input.value {
     border-bottom-right-radius: 4px;
+}
+.ideditor[dir='rtl'] .add-tag input.value {
+    border-bottom-left-radius: 4px;
+}
+.ideditor[dir='ltr'] .tag-row:has(+ .add-tag) button:last-child {
+    border-bottom-right-radius: 4px;
+}
+.ideditor[dir='rtl'] .tag-row:has(+ .add-tag) button:last-child {
+    border-bottom-left-radius: 4px;
 }
 
 .add-relation {
@@ -4373,7 +4411,7 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 
 /* Unstyle button fields */
 .inspector-hover .form-field-input-radio label.active,
-.inspector-hover .entity-editor-pane a.hide-toggle {
+.inspector-hover .entity-editor-pane summary.hide-toggle {
     opacity: 1;
     background-color: transparent;
     color: var(--passive-text-color);
@@ -5238,8 +5276,7 @@ img.tile-debug {
     margin-top: 0;
 }
 
-.community-detail a.hide-toggle,
-.community-detail a:visited.hide-toggle {
+.community-detail summary.hide-toggle {
     font-size: 12px;
     font-weight: normal;
     padding-bottom: 0;
@@ -5859,6 +5896,43 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 	* {
 	    scrollbar-width: thin;
 	}
+}
+
+:dir(rtl)::-webkit-scrollbar {
+    border-right: 1px solid var(--border-color-2);
+    border-left: none;
+}
+:dir(rtl)::-webkit-scrollbar-thumb {
+    border-width: 3px 4px 3px 3px;
+    border-radius: 6px;
+}
+
+/* Resize handles of textareas */
+textarea::-webkit-resizer {
+	background: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0gMiA5IGwgNyAtNyBNIDYgOSBsIDMgLTMiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlPSIjOTk5IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+Cjwvc3ZnPg==") var(--bg-color);
+	background-size: 12px 12px;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+}
+textarea:active::-webkit-resizer,
+textarea:focus::-webkit-resizer {
+	background: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0gMiA5IGwgNyAtNyBNIDYgOSBsIDMgLTMiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlPSIjOTk5IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+Cjwvc3ZnPg==") var(--active-bg-color);
+	background-size: 12px 12px;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+}
+textarea:dir(rtl)::-webkit-resizer {
+	background: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0gOCA5IGwgLTcgLTcgTSA0IDkgbCAtMyAtMyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2U9IiM5OTkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz4KPC9zdmc+") var(--bg-color);
+	background-size: 12px 12px;
+	background-position: bottom left;
+	background-repeat: no-repeat;
+}
+textarea:active:dir(rtl)::-webkit-resizer,
+textarea:focus:dir(rtl)::-webkit-resizer {
+	background: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0gOCA5IGwgLTcgLTcgTSA0IDkgbCAtMyAtMyIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2U9IiM5OTkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz4KPC9zdmc+") var(--active-bg-color);
+	background-size: 12px 12px;
+	background-position: bottom left;
+	background-repeat: no-repeat;
 }
 
 

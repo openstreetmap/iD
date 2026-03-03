@@ -61,6 +61,7 @@ export function coreLocalizer() {
     localizer.usesMetric = () => _usesMetric;
     localizer.languageNames = () => _languageNames;
     localizer.scriptNames = () => _scriptNames;
+    localizer.languages = () => _dataLanguages; // Expose all the languages supported
 
 
     // The client app may want to manually set the locale, regardless of the

@@ -655,7 +655,7 @@ export function coreHistory(context) {
                         .then(() => prefs('has_saved_history', null))
                         .catch(() => dispatch.call('storage_error'));
                 } else {
-                    asyncPrefs.set('saved_history', history.toJSON())
+                    asyncPrefs.set('saved_history', historyData)
                         .then(() => prefs('has_saved_history', true))
                         .catch(() => dispatch.call('storage_error'));
                 }
