@@ -139,7 +139,7 @@ export function uiToolDrawModes(context) {
             }
 
             // update
-            buttons = buttons
+            buttons
                 .merge(buttonsEnter)
                 .attr('aria-disabled', function(d) { return !enabled(d); })
                 .classed('disabled', function(d) { return !enabled(d); })

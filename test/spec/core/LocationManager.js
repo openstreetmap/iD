@@ -30,9 +30,9 @@ describe('LocationManager', () => {
 
 
   describe('#mergeCustomGeoJSON', () => {
-    it('merges geojson into lococation-conflation cache', () => {
+    it('merges geojson into lococation-conflation', () => {
       locationManager.mergeCustomGeoJSON(fc);
-      expect(locationManager.loco()._cache['colorado.geojson']).to.be.eql(colorado);
+      expect(locationManager.loco().resolveLocationSet({ include: ['colorado.geojson'] }).feature).to.be.eql(colorado);
     });
   });
 

@@ -703,3 +703,20 @@ export function getLuma(color) {
     const {r, g, b} = d3_color(color);
     return 0.2999 * r + 0.587 * g + 0.114 * b;
 }
+
+/** @param {XMLHttpRequestBodyInit} input */
+export function utilGzip(input) {
+    // check if compression is supported natively
+    if (!globalThis.CompressionStream) return undefined;
+
+    try {
+        const stream = new Response(input).body.pipeThrough(
+            new CompressionStream('gzip')
+        );
+        return new Response(stream).blob();
+     } catch {
+        // if an error is thrown, it means the browser supports
+        // CompressionStream but not the specific algorithm.
+        return undefined;
+    }
+}

@@ -1,6 +1,4 @@
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../../presets';
 import { t, localizer } from '../../core/localizer';
@@ -21,6 +19,7 @@ import { uiTooltip } from '../tooltip';
 import { utilArrayGroupBy, utilArrayIntersection } from '../../util/array';
 import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } from '../../util';
 import { prefs } from '../../core';
+import { idMatch } from '../feature_list';
 
 
 export function uiSectionRawMembershipEditor(context) {
@@ -302,7 +301,10 @@ export function uiSectionRawMembershipEditor(context) {
             };
         }
 
-        var explicitRelation = q && context.hasEntity(q.toLowerCase());
+
+        // A location search takes priority over an ID search
+        const idMatchResult = q && idMatch(q);
+        var explicitRelation = context.hasEntity(`r${idMatchResult?.id || q}`);
         if (explicitRelation && explicitRelation.type === 'relation' && explicitRelation.id !== entityID) {
             // loaded relation is specified explicitly, only show that
 

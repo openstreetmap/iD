@@ -19,12 +19,14 @@ export {
     uiFieldText as uiFieldEmail,
     uiFieldText as uiFieldIdentifier,
     uiFieldText as uiFieldNumber,
+    uiFieldText as uiFieldSchedule,
     uiFieldText as uiFieldTel,
     uiFieldText as uiFieldUrl,
     likelyRawNumberFormat
 };
 
 const likelyRawNumberFormat = /^-?(0\.\d*|\d*\.\d{0,2}(\d{4,})?|\d{4,}\.\d{3})$/;
+const yoHoursURLFormat = 'https://projets.pavie.info/yohours/?oh={value}';
 
 export function uiFieldText(field, context) {
     var dispatch = d3_dispatch('change');
@@ -109,7 +111,7 @@ export function uiFieldText(field, context) {
         if (field.type === 'tel') {
             updatePhonePlaceholder();
 
-        } else if (field.type === 'number') {
+        } else if (field.type === 'number' || field.type === 'integer') {
             var rtl = (localizer.textDirection() === 'rtl');
 
             input.attr('type', 'text');
@@ -198,6 +200,26 @@ export function uiFieldText(field, context) {
                     }
                 })
                 .classed('disabled', () => !validIdentifierValueForLink())
+                .merge(outlinkButton);
+        } else if (field.type === 'schedule') {
+
+            input.attr('type', 'text');
+
+            outlinkButton = wrap.selectAll('.foreign-id-permalink')
+                .data([0]);
+
+            outlinkButton.enter()
+                .append('button')
+                .call(svgIcon('#iD-icon-out-link'))
+                .attr('class', 'form-field-button foreign-id-permalink')
+                .attr('title', () => t('icons.edit_in', { tool: 'YoHours' }))
+                .on('click', function(d3_event) {
+                    d3_event.preventDefault();
+
+                    var value = validIdentifierValueForLink();
+                    var url = yoHoursURLFormat.replace(/{value}/, encodeURIComponent(value || ''));
+                    window.open(url, '_blank');
+                })
                 .merge(outlinkButton);
         } else if (field.type === 'url') {
             input.attr('type', 'text');
@@ -370,6 +392,9 @@ export function uiFieldText(field, context) {
         if (field.type === 'identifier' && field.pattern) {
             return value && value.match(new RegExp(field.pattern))?.[0];
         }
+        if (field.type === 'schedule') {
+            return value;
+        }
         return null;
     }
 
@@ -416,7 +441,7 @@ export function uiFieldText(field, context) {
             if (!val && getVals(_tags).size > 1) return;
 
             let displayVal = val;
-            if (field.type === 'number' && val) {
+            if ((field.type === 'number' || field.type === 'integer') && val) {
                 const numbers = val.split(';').map(v => {
                     if (likelyRawNumberFormat.test(v)) {
                         // input number likely in "raw" format
@@ -478,16 +503,13 @@ export function uiFieldText(field, context) {
 
         const vals = getVals(tags);
         const isMixed = vals.size > 1;
-        var val = vals.size === 1 ? [...vals][0] ?? '' : '';
-        var shouldUpdate;
+        let val = vals.size === 1 ? [...vals][0] ?? '' : '';
+        let shouldUpdate;
 
-        if (field.type === 'number' && val) {
-            var numbers = val.split(';');
-            var oriNumbers = utilGetSetValue(input).split(';');
-            if (numbers.length !== oriNumbers.length) shouldUpdate = true;
-            numbers = numbers.map(function(v) {
+        if ((field.type === 'number' || field.type === 'integer') && val) {
+            const numbers = val.split(';').map(function(v) {
                 v = v.trim();
-                var num = Number(v);
+                const num = Number(v);
                 if (!isFinite(num) || v === '') return v;
                 const fractionDigits = v.includes('.') ? v.split('.')[1].length : 0;
                 return formatFloat(num, fractionDigits);
@@ -523,7 +545,7 @@ export function uiFieldText(field, context) {
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
             .classed('mixed', isMixed);
 
-        if (field.type === 'number') {
+        if (field.type === 'number' || field.type === 'integer') {
             const buttons = wrap.selectAll('.increment, .decrement');
             if (isMixed) {
                 buttons.attr('disabled', 'disabled').classed('disabled', true);
@@ -544,7 +566,7 @@ export function uiFieldText(field, context) {
         if (field.type === 'date') updateDateField();
 
         if (outlinkButton && !outlinkButton.empty()) {
-            var disabled = !validIdentifierValueForLink();
+            var disabled = !validIdentifierValueForLink() && field.type !== 'schedule';
             outlinkButton.classed('disabled', disabled);
         }
 

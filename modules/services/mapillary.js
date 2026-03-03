@@ -125,7 +125,6 @@ function loadTileDataToCache(data, tile, which) {
     }
 
     if (vectorTile.layers.hasOwnProperty('sequence')) {
-        features = [];
         cache = _mlyCache.sequences;
         layer = vectorTile.layers.sequence;
 

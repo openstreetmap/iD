@@ -180,7 +180,7 @@ export function uiPresetList(context) {
 
         items.enter()
             .append('div')
-            .attr('class', function(item) { return 'preset-list-item preset-' + item.preset.id.replace('/', '-'); })
+            .attr('class', function(item) { return 'preset-list-item preset-' + item.preset.id.replaceAll('/', '-'); })
             .classed('current', function(item) { return _currentPresets.indexOf(item.preset) !== -1; })
             .each(function(item) { d3_select(this).call(item); })
             .style('opacity', 0)

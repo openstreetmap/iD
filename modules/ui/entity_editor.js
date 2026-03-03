@@ -1,4 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { presetManager } from '../presets';
@@ -142,10 +143,10 @@ export function uiEntityEditor(context) {
             if (priorActivePreset && _activePresets.length === 1 && priorActivePreset !== _activePresets[0]) {
                 // flash the button to indicate the preset changed
                 context.container().selectAll('.entity-editor button.preset-reset .label')
-                    .style('background-color', '#fff')
-                    .transition()
-                    .duration(750)
-                    .style('background-color', null);
+                    .classed('flash-bg', true)
+                    .on('animationend', function() {
+                        d3_select(this).classed('flash-bg', false);
+                    });
             }
         }
     }
