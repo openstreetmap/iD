@@ -309,17 +309,6 @@ export function uiSectionRawMembershipEditor(context) {
             var entityName = utilDisplayName(entity) || '';
 
             return function(selection) {
-                if (flags.isCommon) {
-                    selection.append('span')
-                        .attr('class', 'green')
-                        .text('(Applied)');
-                } else if (flags.isPartial) {
-                    selection.append('span')
-                        .attr('class', 'orange')
-                        .text('(Partially Applied)');
-
-                }
-
                 selection
                     .append('b')
                     .text(presetName + ' ');
@@ -328,6 +317,18 @@ export function uiSectionRawMembershipEditor(context) {
                     .classed('has-colour', entity.tags.colour && isColourValid(entity.tags.colour))
                     .style('border-color', entity.tags.colour)
                     .text(entityName);
+
+                if (flags.isCommon) {
+                    selection.append('span')
+                        .attr('class', 'relation-badge')
+                        .text('Already Applied');
+                } else if (flags.isPartial) {
+                    selection.append('span')
+                        .attr('class', 'relation-badge')
+                        .text('Partially Applied');
+
+                }
+
             };
         }
 
