@@ -1,6 +1,4 @@
 import { Matcher } from 'name-suggestion-index';
-import parseVersion from 'vparse';
-
 import { fileFetcher, locationManager } from '../core';
 import { presetManager } from '../presets';
 
@@ -48,9 +46,7 @@ const notBranches = /(coop|express|wireless|factory|outlet)/i;
 //
 function setNsiSources() {
   const nsiVersion = packageJSON.dependencies['name-suggestion-index'] || packageJSON.devDependencies['name-suggestion-index'];
-  const v = parseVersion(nsiVersion);
-  const vMinor = `${v.major}.${v.minor}`;
-  const cdn = nsiCdnUrl.replace('{version}', vMinor);
+  const cdn = nsiCdnUrl.replace('{version}', nsiVersion);
   const sources = {
     'nsi_data': cdn + 'dist/json/nsi.min.json',
     'nsi_dissolved': cdn + 'dist/wikidata/dissolved.min.json',
