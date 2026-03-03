@@ -161,8 +161,8 @@ export function validationDisconnectedWay() {
         }
 
         function isRoutableWay(way, ignoreInnerWays) {
-            // Skip Golf Paths 
             if (way.tags.golf === 'path' || way.tags.golf === 'cartpath') {
+                // skip golf paths #11863
                 return false;
             }
 
