@@ -225,7 +225,7 @@ export function uiFieldCombo(field, context) {
       if (osmIsoCountryKeys.has(field.key) && tval) {
         const data = buildCountry()[tval];
         if (data) return selection => addFlagIcon(selection, data.name, data.flag);
-        return selection => selection(tval);
+        return selection => selection.text(tval);
       }
 
       var stringsField = field.resolveReference('stringsCrossReference');

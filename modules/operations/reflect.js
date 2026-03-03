@@ -2,6 +2,7 @@ import { t } from '../core/localizer';
 import { actionReflect } from '../actions/reflect';
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes, utilTotalExtent } from '../util/util';
+import { svgPath } from '../svg';
 
 
 export function operationReflectShort(context, selectedIDs) {
@@ -77,11 +78,20 @@ export function operationReflect(context, selectedIDs, axis) {
     operation.getAuxiliaryGeometry = function() {
         const graph = context.graph();
         const [p, q] = _action.getReflectAxis(graph);
+        const previewGraph = _action(graph);
+        const getPath = svgPath(context.projection, previewGraph, false);
         return [{
             id: 'axis',
             path: `M ${p[0]} ${p[1]} L ${q[0]} ${q[1]}`,
             klass: 'reflect-axis'
-        }];
+        }, ...selectedIDs.map(entityId => {
+            const entity = previewGraph.hasEntity(entityId);
+            return {
+                id: entity.id,
+                path: getPath(entity),
+                klass: 'preview'
+            };
+        })];
     };
 
 

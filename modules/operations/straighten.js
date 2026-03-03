@@ -3,6 +3,7 @@ import { actionStraightenNodes } from '../actions/straighten_nodes';
 import { actionStraightenWay } from '../actions/straighten_way';
 import { behaviorOperation } from '../behavior/operation';
 import { utilArrayDifference, utilGetAllNodes, utilTotalExtent } from '../util/index';
+import { svgPath } from '../svg';
 
 
 export function operationStraighten(context, selectedIDs) {
@@ -118,6 +119,21 @@ export function operationStraighten(context, selectedIDs) {
             }
             return false;
         }
+    };
+
+
+    operation.getAuxiliaryGeometry = function() {
+        const graph = context.graph();
+        const previewGraph = _action(graph);
+        const getPath = svgPath(context.projection, previewGraph, false);
+        return selectedIDs.map(entityId => {
+            const entity = previewGraph.hasEntity(entityId);
+            return {
+                id: entity.id,
+                path: getPath(entity),
+                klass: 'preview'
+            };
+        });
     };
 
 
