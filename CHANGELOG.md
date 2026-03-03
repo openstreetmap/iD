@@ -51,11 +51,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
+* Use `<details>` element for collapsible _disclosure_ content ([#11952], thanks [@Shrinks99])
+
 
 [#9183]: https://github.com/openstreetmap/iD/issues/9183
 [#9545]: https://github.com/openstreetmap/iD/pull/9545
 [#9888]: https://github.com/openstreetmap/iD/pull/9888
 [#11778]: https://github.com/openstreetmap/iD/pull/11778
+[#11952]: https://github.com/openstreetmap/iD/pull/11952
+[@Shrinks99]: https://github.com/Shrinks99
 
 
 # 2.38.0-dev
