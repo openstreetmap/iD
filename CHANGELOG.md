@@ -46,9 +46,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show a preview of the result of some geometry opertions while the respective button in the edit menu is hovered ([#11778])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
-* Make wording of fix for _overlapping features_ validator less ambiguous ([#9888], thanks [@k-yle)
+* Make wording of fix for _overlapping features_ validator less ambiguous ([#9888], thanks [@k-yle])
 #### :bug: Bugfixes
 #### :earth_asia: Localization
+* Support territory-level phone hints ([#10904], thanks [@Vectorial1024])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
@@ -56,8 +57,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9183]: https://github.com/openstreetmap/iD/issues/9183
 [#9545]: https://github.com/openstreetmap/iD/pull/9545
 [#9888]: https://github.com/openstreetmap/iD/pull/9888
+[#10904]: https://github.com/openstreetmap/iD/pull/10904
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
 [#11778]: https://github.com/openstreetmap/iD/pull/11778
+[@Vectorial1024]: https://github.com/Vectorial1024
 
 
 # 2.38.0-dev
