@@ -47,7 +47,8 @@ export function displayArea(m2, isImperial) {
     var locale = localizer.localeCode();
     var d = m2 * (isImperial ? 10.7639111056 : 1);
     var d1, d2, area;
-    var unit1 = '';
+
+    var unit1 = ''; // eslint-disable-line no-useless-assignment
     var unit2 = '';
 
     if (isImperial) {
