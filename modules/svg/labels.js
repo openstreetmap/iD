@@ -43,6 +43,7 @@ export function svgLabels(projection, context) {
         ['area', 'man_made', '*', 12],
         ['area', 'natural', '*', 12],
         ['area', 'shop', '*', 12],
+        ['area', 'craft', '*', 12],
         ['area', 'tourism', '*', 12],
         ['area', 'camp_site', '*', 12],
         ['point', 'aeroway', '*', 10],
