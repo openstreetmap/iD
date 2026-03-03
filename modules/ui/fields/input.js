@@ -9,7 +9,7 @@ import { t, localizer } from '../../core/localizer';
 import { utilDetect, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
 import { svgIcon } from '../../svg/icon';
 import { cardinal } from '../../osm/node';
-import { isColourValid } from '../../osm/tags';
+import { isColorValid } from '../../osm/tags';
 import { uiLengthIndicator } from '..';
 import { uiTooltip } from '../tooltip';
 import { isEqual } from 'lodash-es';
@@ -257,7 +257,7 @@ export function uiFieldText(field, context) {
 
         const colour = utilGetSetValue(input);
 
-        if (!isColourValid(colour) && colour !== '') {
+        if (!isColorValid(colour) && colour !== '') {
             wrap.selectAll('input.colour-selector').remove();
             wrap.selectAll('.form-field-button').remove();
             return;
@@ -274,7 +274,7 @@ export function uiFieldText(field, context) {
             .on('input', _debounce(function(d3_event) {
                 d3_event.preventDefault();
                 var colour = this.value;
-                if (!isColourValid(colour)) return;
+                if (!isColorValid(colour)) return;
                 utilGetSetValue(input, this.value);
                 change()();
                 updateColourPreview();

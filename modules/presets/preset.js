@@ -292,6 +292,11 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
 
+  _this.getParentPreset = function() {
+    return allPresets[_this.id.split('/').slice(0, -1).join('/')];
+  };
+
+
   // For a preset without fields, use the fields of the parent preset.
   // Replace {preset} placeholders with the fields of the specified presets.
   function resolveFields(which, loc) {
