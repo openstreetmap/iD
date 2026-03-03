@@ -1868,6 +1868,10 @@ input.date-selector {
     display: flex;
     align-items: center;
 }
+.combobox-option.has-icon .combobox-option-label {
+    display: flex;
+    align-items: center;
+}
 .tag-value-icon .icon {
     width: 21px;
     height: 21px;
@@ -2416,6 +2420,9 @@ div.combobox {
     border: 1px solid var(--border-color);
     border-radius: 0 0 4px 4px;
 }
+div.combobox:has(.has-description) {
+    max-height: 400px;
+}
 
 .combobox a {
     display: block;
@@ -2467,6 +2474,18 @@ div.combobox {
     border-right: 5px solid transparent;
 }
 
+.combobox .combobox-option.has-description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.combobox .combobox-option-description {
+    font-size: 11px;
+    line-height: 1.3;
+    opacity: 0.7;
+    white-space: normal;
+    padding-top: 2px;
+}
 .combobox .combobox-option.raw-option {
     font-family: monospace;
     color: var(--text-color);

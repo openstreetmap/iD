@@ -102,6 +102,8 @@ export function uiFieldAccess(field, context) {
         return options.map(function(option) {
             return {
                 title: stringsField.t('options.' + option + '.description'),
+                description: stringsField.hasTextForStringId('options.' + option + '.description')
+                    ? stringsField.t('options.' + option + '.description') : undefined,
                 value: option
             };
         });
