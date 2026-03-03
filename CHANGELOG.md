@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 * Increase number of displayed _recently used presets_ to 8 (from 4) ([#9545], thanks [@k-yle])
 * Always render icons for `craft` features mapped as areas ([#9183])
+* Change labeling of route relation to show icons, `ref` and route colours ([#11052])
 #### :scissors: Operations
 * Show a preview of the result of some geometry opertions while the respective button in the edit menu is hovered ([#11778])
 #### :camera: Street-Level
@@ -55,6 +56,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9183]: https://github.com/openstreetmap/iD/issues/9183
 [#9545]: https://github.com/openstreetmap/iD/pull/9545
 [#9888]: https://github.com/openstreetmap/iD/pull/9888
+[#11052]: https://github.com/openstreetmap/iD/pull/11052
 [#11778]: https://github.com/openstreetmap/iD/pull/11778
 
 
