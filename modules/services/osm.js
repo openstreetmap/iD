@@ -1143,14 +1143,11 @@ export default {
                     if (depth < _maxSubdivisionDepth) {
                         var quadrants = tile.extent.split();
                         quadrants.forEach(function(extent, i) {
-
                             var childTile = {
                                 id: tile.id + '-' + depth + '-' + i,
                                 extent: extent
                             };
-
                             this.loadTile(childTile, callback, depth + 1);
-
                         }.bind(this));
                         return;
                     }
