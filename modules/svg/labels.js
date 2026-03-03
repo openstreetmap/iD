@@ -43,6 +43,7 @@ export function svgLabels(projection, context) {
         ['area', 'man_made', '*', 12],
         ['area', 'natural', '*', 12],
         ['area', 'shop', '*', 12],
+        ['area', 'craft', '*', 12],
         ['area', 'tourism', '*', 12],
         ['area', 'camp_site', '*', 12],
         ['point', 'aeroway', '*', 10],
@@ -299,7 +300,7 @@ export function svgLabels(projection, context) {
             var preset = geometry === 'area' && presetManager.match(entity, graph);
             var icon = preset && !shouldSkipIcon(preset) && preset.icon;
 
-            if (!icon && !utilDisplayName(entity, undefined, true)) continue;
+            if (!icon && !utilDisplayName(entity, { isMapLabel: true })) continue;
 
             for (k = 0; k < labelStack.length; k++) {
                 var matchGeom = labelStack[k][0];
@@ -330,7 +331,7 @@ export function svgLabels(projection, context) {
 
                 let name = geometry === 'line'
                     ? utilDisplayNameForPath(entity)
-                    : utilDisplayName(entity, undefined, true);
+                    : utilDisplayName(entity, { isMapLabel: true });
                 var width = name && textWidth(name, fontSize, selection.select('g.layer-osm.labels').node());
                 var p = null;
 

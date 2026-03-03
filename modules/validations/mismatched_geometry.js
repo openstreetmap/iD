@@ -249,7 +249,7 @@ export function validationMismatchedGeometry() {
 
         var asSource = presetManager.match(entity, graph);
 
-        var targetGeom = targetGeoms.find(nodeGeom => {
+        const originalTargetGeom = targetGeoms.find(nodeGeom => {
             const asTarget = presetManager.matchTags(
                 entity.tags,
                 nodeGeom,
@@ -271,6 +271,8 @@ export function validationMismatchedGeometry() {
 
             return asSource.isFallback() || asSource.tags[primaryKey] === '*';
         });
+
+        let targetGeom = originalTargetGeom;
 
         if (!targetGeom) return null;
 
@@ -296,7 +298,7 @@ export function validationMismatchedGeometry() {
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.' + referenceId + '.message', {
-                    feature: utilDisplayLabel(entity, targetGeom, true /* verbose */)
+                    feature: utilDisplayLabel(entity, originalTargetGeom, true /* verbose */)
                 }) : '';
             },
             reference: function showReference(selection) {

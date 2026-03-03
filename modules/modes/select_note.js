@@ -27,7 +27,7 @@ export function modeSelectNote(context, selectedNoteID) {
     var _noteEditor = uiNoteEditor(context)
         .on('change', function() {
             context.map().pan([0,0]);  // trigger a redraw
-            var note = checkSelectedID();
+            var note = this || checkSelectedID();
             if (!note) return;
             context.ui().sidebar
                 .show(_noteEditor.note(note));
