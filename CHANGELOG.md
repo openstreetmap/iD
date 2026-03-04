@@ -58,6 +58,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Use `<details>` element for collapsible _disclosure_ content ([#11952], thanks [@Shrinks99])
+* Use JSON endpoints for (almost) all OSM APIs ([#11661], thanks [@k-yle])
 
 
 [#9183]: https://github.com/openstreetmap/iD/issues/9183
@@ -65,6 +66,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9888]: https://github.com/openstreetmap/iD/pull/9888
 [#10904]: https://github.com/openstreetmap/iD/pull/10904
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
+[#11661]: https://github.com/openstreetmap/iD/pull/11661
 [#11778]: https://github.com/openstreetmap/iD/pull/11778
 [#11865]: https://github.com/openstreetmap/iD/pull/11865
 [#11876]: https://github.com/openstreetmap/iD/pull/11876
