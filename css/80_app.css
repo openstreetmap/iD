@@ -790,19 +790,26 @@ button.add-note svg.icon {
 
 /* Hide/Toggle collapsible sections (aka Disclosure)
 ------------------------------------------------------- */
+summary.hide-toggle {
+    display: block;
+    list-style: none;
+    cursor: pointer;
+    color: var(--link-color);
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 25px;
+}
+details.disclosure-wrap[open] summary.hide-toggle {
+    margin-bottom: 10px;
+}
+summary.hide-toggle::-webkit-details-marker {
+    display: none;
+}
 .hide-toggle .icon.pre-text {
     vertical-align: middle;
     width: 16px;
     height: 16px;
     margin-top: -3px;
-}
-
-a:visited.hide-toggle,
-a.hide-toggle {
-    display: inline-block;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 5px;
 }
 
 
@@ -1447,7 +1454,6 @@ button.preset-reset .label.flash-bg {
 
 .label-text .label-textannotation svg.icon {
     margin: 0 8px;
-    color: #333;
     opacity: 0.5;
     width: 14px;
     height: 14px;
@@ -1859,6 +1865,10 @@ input.date-selector {
 }
 .combobox-address-street-place .combobox-option,
 .combobox-option.has-icon {
+    display: flex;
+    align-items: center;
+}
+.combobox-option.has-icon .combobox-option-label {
     display: flex;
     align-items: center;
 }
@@ -2410,6 +2420,9 @@ div.combobox {
     border: 1px solid var(--border-color);
     border-radius: 0 0 4px 4px;
 }
+div.combobox:has(.has-description) {
+    max-height: 400px;
+}
 
 .combobox a {
     display: block;
@@ -2461,6 +2474,18 @@ div.combobox {
     border-right: 5px solid transparent;
 }
 
+.combobox .combobox-option.has-description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.combobox .combobox-option-description {
+    font-size: 11px;
+    line-height: 1.3;
+    opacity: 0.7;
+    white-space: normal;
+    padding-top: 2px;
+}
 .combobox .combobox-option.raw-option {
     font-family: monospace;
     color: var(--text-color);
@@ -2903,21 +2928,35 @@ img.tag-reference-wiki-image {
     font-weight: normal;
     padding-left: 10px;
 }
-.section-raw-member-editor .member-row .member-entity-name.has-colour::before,
-.section-raw-membership-editor .member-row .member-entity-name.has-colour::before,
-.feature-list .entity-name.has-colour::before,
+
 .combobox-parent-relation .has-colour::before {
     display: inline-block;
     content: '';
-    margin-left: -5px;
+    margin-left: 2px;
     margin-right: 5px;
     border-style: solid;
     border-width: 4px;
     border-radius: 4px;
     border-color: inherit;
 }
-.combobox-parent-relation .has-colour::before  {
-    margin-left: 2px;
+.section-raw-membership-editor .member-row img.member-entity-icon,
+.section-raw-member-editor .member-row img.member-entity-icon {
+    display: inline-block;
+    width: auto;
+    height: 18px;
+    margin-left: 5px;
+    margin-bottom: -4.5px;
+}
+.section-raw-membership-editor .member-row span.member-entity-ref-color,
+.section-raw-member-editor .member-row span.member-entity-ref-color,
+.feature-list .feature-list-item span.member-entity-ref-color {
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: -5px;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 10px;
+    line-height: 10px;
 }
 
 .ideditor[dir='rtl'] .section-raw-member-editor .member-row .member-entity-name,
@@ -4391,7 +4430,7 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 
 /* Unstyle button fields */
 .inspector-hover .form-field-input-radio label.active,
-.inspector-hover .entity-editor-pane a.hide-toggle {
+.inspector-hover .entity-editor-pane summary.hide-toggle {
     opacity: 1;
     background-color: transparent;
     color: var(--passive-text-color);
@@ -5256,8 +5295,7 @@ img.tile-debug {
     margin-top: 0;
 }
 
-.community-detail a.hide-toggle,
-.community-detail a:visited.hide-toggle {
+.community-detail summary.hide-toggle {
     font-size: 12px;
     font-weight: normal;
     padding-bottom: 0;
