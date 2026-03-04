@@ -466,7 +466,8 @@ export function rendererFeatures(context) {
                 }
 
                 if (_rules[_keys[i]].filter(entity.tags, geometry)) {
-                    matches[_keys[i]] = hasMatch = true;
+                    matches[_keys[i]] = true;
+                    hasMatch = true;
                 }
             }
             _cache[ent].matches = matches;
