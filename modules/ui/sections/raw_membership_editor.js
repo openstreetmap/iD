@@ -354,9 +354,8 @@ export function uiSectionRawMembershipEditor(context) {
                 if (q && (value + ' ' + entity.id).toLowerCase().indexOf(q.toLowerCase()) === -1) return;
 
                 const count = relationCounts.get(entity.id) || 0;
-                const isCommon = count === selectedEntities.length;
-                const isPartial = count > 0 && count < selectedEntities.length;
-
+                const isCommon = selectedEntities.length > 0 && count === selectedEntities.length;
+                const isPartial = selectedEntities.length > 0 && count > 0 && count < selectedEntities.length;
 
                 result.push({
                     relation: entity,
