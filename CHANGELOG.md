@@ -53,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 #### :earth_asia: Localization
 * Support territory-level phone hints ([#10904], thanks [@Vectorial1024])
+* Add phone format for Moldova ([#11965], thanks [@Oni-DOS])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
@@ -69,8 +70,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11876]: https://github.com/openstreetmap/iD/pull/11876
 [#11944]: https://github.com/openstreetmap/iD/pull/11944
 [#11952]: https://github.com/openstreetmap/iD/pull/11952
+[#11965]: https://github.com/openstreetmap/iD/pull/11965
 [@Shrinks99]: https://github.com/Shrinks99
 [@Vectorial1024]: https://github.com/Vectorial1024
+[@Oni-DOS]: https://github.com/Oni-DOS
 
 
 # 2.38.0-dev
