@@ -5,7 +5,7 @@ export function utilDetect(refresh) {
   _detected = {};
 
   const ua = navigator.userAgent;
-  let m = null;
+  let m;
 
   /* Browser */
   m = ua.match(/(edge)\/?\s*(\.?\d+(\.\d+)*)/i);   // Edge

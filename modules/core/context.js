@@ -214,12 +214,11 @@ export function coreContext() {
   };
 
   context.moveToNote = (noteId, moveTo) => {
-    context.loadNote(noteId, (err, result) => {
+    context.loadNote(noteId, (err) => {
       if (err) return;
-      const entity = result.data.find(e => e.id === noteId);
-      if (!entity) return;
       // zoom to, used note loc
       const note = services.osm.getNote(noteId);
+      if (!note) return;
       if (moveTo !== false) {
         context.map().center(note.loc);
       }
@@ -478,7 +477,7 @@ export function coreContext() {
 
 
   /* reset (aka flush) */
-  context.reset = context.flush = () => {
+  context.reset = () => {
     context.debouncedSave.cancel();
 
     Array.from(_deferred).forEach(handle => {
@@ -504,6 +503,7 @@ export function coreContext() {
 
     return context;
   };
+  context.flush = context.reset;
 
 
   /* Projections */

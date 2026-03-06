@@ -429,7 +429,8 @@ export function coreHistory(context) {
                     do { permID = nrw + (++nextID[nrw]); }
                     while (baseEntities.hasOwnProperty(permID));
 
-                    copy.id = permIDs[source.id] = permID;
+                    copy.id = permID;
+                    permIDs[source.id] = permID;
                 }
                 return copy;
             }
@@ -655,7 +656,7 @@ export function coreHistory(context) {
                         .then(() => prefs('has_saved_history', null))
                         .catch(() => dispatch.call('storage_error'));
                 } else {
-                    asyncPrefs.set('saved_history', history.toJSON())
+                    asyncPrefs.set('saved_history', historyData)
                         .then(() => prefs('has_saved_history', true))
                         .catch(() => dispatch.call('storage_error'));
                 }

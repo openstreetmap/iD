@@ -2,6 +2,7 @@ import { t } from '../core/localizer';
 import { actionCircularize } from '../actions/circularize';
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';
+import { svgPath } from '../svg';
 
 
 export function operationCircularize(context, selectedIDs) {
@@ -90,6 +91,25 @@ export function operationCircularize(context, selectedIDs) {
             }
             return false;
         }
+    };
+
+
+    operation.getAuxiliaryGeometry = function() {
+        const graph = context.graph();
+        return _actions.map((action, idx) => {
+            if (!action.disabled(graph)) {
+                const previewGraph = action(graph, t);
+                const way = previewGraph.hasEntity(selectedIDs[idx]);
+                const getPath = svgPath(context.projection, previewGraph, false);
+                return {
+                    id: way.id,
+                    path: getPath(way),
+                    klass: 'preview'
+                };
+            } else {
+                return false;
+            }
+        }).filter(Boolean);
     };
 
 

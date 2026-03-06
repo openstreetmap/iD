@@ -156,9 +156,10 @@ export function rendererMap(context) {
             .call(_zoomerPanner.transform, projection.transform())
             .on('dblclick.zoom', null); // override d3-zoom dblclick handling
 
-        map.supersurface = supersurface = selection.append('div')
+        map.supersurface = selection.append('div')
             .attr('class', 'supersurface')
             .call(utilSetTransform, 0, 0);
+        supersurface = map.supersurface;
 
         // Need a wrapper div because Opera can't cope with an absolutely positioned
         // SVG element: http://bl.ocks.org/jfirebaugh/6fbfbd922552bf776c16
@@ -166,9 +167,10 @@ export function rendererMap(context) {
             .append('div')
             .attr('class', 'layer layer-data');
 
-        map.surface = surface = wrapper
+        map.surface = wrapper
             .call(drawLayers)
             .selectAll('.surface');
+        surface = map.surface;
 
         surface
             .call(drawLabels.observe)
@@ -302,13 +304,7 @@ export function rendererMap(context) {
                 }
             }
             if (hasOrphan) {
-                var event = window.CustomEvent;
-                if (event) {
-                    event = new event('mouseup');
-                } else {
-                    event = window.document.createEvent('Event');
-                    event.initEvent('mouseup', false, false);
-                }
+                const event = new Event('mouseup');
                 // Event needs to be dispatched with an event.view property.
                 event.view = window;
                 window.dispatchEvent(event);
@@ -651,7 +647,8 @@ export function rendererMap(context) {
         // It would result in artifacts where differenced entities are redrawn with
         // one transform and unchanged entities with another.
         if (resetTransform()) {
-            difference = extent = undefined;
+            difference = undefined;
+            extent = undefined;
         }
 
         var zoom = map.zoom();
