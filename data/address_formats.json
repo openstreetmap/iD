@@ -82,9 +82,9 @@
     {
     "countryCodes": ["md"],
     "format": [
-      ["street", "housenumber"],
-      ["postcode", "floor", "unit"],
-      ["city", "subdistrict", "district"]
+      ["street", "housenumber", "floor", "unit"],
+      ["postcode", "city"],
+      ["subdistrict", "district"]
     ]
   },
   {
