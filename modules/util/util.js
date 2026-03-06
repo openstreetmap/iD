@@ -398,12 +398,11 @@ export function utilCombinedTags(entityIDs, graph) {
         });
     });
 
-    for (var key in tags) {
+    for (const key in tags) {
         if (!Array.isArray(tags[key])) continue;
 
         // sort values by frequency then alphabetically
         tags[key] = tags[key].sort(function(val1, val2) {
-            var key = key; // capture
             var count2 = tagCounts[key + '=' + val2];
             var count1 = tagCounts[key + '=' + val1];
             if (count2 !== count1) {
@@ -482,7 +481,8 @@ export function utilPrefixCSSProperty(property) {
 
 var transformProperty;
 export function utilSetTransform(el, x, y, scale) {
-    var prop = transformProperty = transformProperty || utilPrefixCSSProperty('Transform');
+    transformProperty ||= utilPrefixCSSProperty('Transform');
+    var prop = transformProperty;
     var translate = utilDetect().opera ? 'translate('   + x + 'px,' + y + 'px)'
         : 'translate3d(' + x + 'px,' + y + 'px,0)';
     return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));

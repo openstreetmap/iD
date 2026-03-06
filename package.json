@@ -139,8 +139,7 @@
     "sinon-chai": "^4.0.1",
     "svg-sprite": "2.0.4",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.56.0",
-    "vparse": "~1.1.0"
+    "typescript-eslint": "^8.56.0"
   },
   "engines": {
     "node": ">=22"

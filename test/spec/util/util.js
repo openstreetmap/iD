@@ -72,6 +72,34 @@ describe('iD.util', function() {
         });
     });
 
+    describe('utilCombinedTags', function() {
+        it('sorts tag values by frequency then alphabetically', function() {
+            var n1 = iD.osmNode({ id: 'n-1', tags: { surface: 'paved' } });
+            var n2 = iD.osmNode({ id: 'n-2', tags: { surface: 'paved' } });
+            var n3 = iD.osmNode({ id: 'n-3', tags: { surface: 'paved' } });
+            var n4 = iD.osmNode({ id: 'n-4', tags: { surface: 'asphalt' } });
+            var n5 = iD.osmNode({ id: 'n-5', tags: { surface: 'gravel' } });
+            var graph = iD.coreGraph([n1, n2, n3, n4, n5]);
+            var result = iD.utilCombinedTags(['n-1', 'n-2', 'n-3', 'n-4', 'n-5'], graph);
+
+            expect(result.surface).to.be.an('array');
+            expect(result.surface[0]).to.eql('paved');
+            expect(result.surface[1]).to.eql('asphalt');
+            expect(result.surface[2]).to.eql('gravel');
+        });
+
+        it('returns raw value when all entities share the same tag value', function() {
+            var n1 = iD.osmNode({ id: 'n-1', tags: { highway: 'residential' } });
+            var n2 = iD.osmNode({ id: 'n-2', tags: { highway: 'residential' } });
+            var graph = iD.coreGraph([n1, n2]);
+            var result = iD.utilCombinedTags(['n-1', 'n-2'], graph);
+
+            expect(result.highway).to.eql('residential');
+        });
+    });
+
+
+
     it('utilTagText', function() {
         expect(iD.utilTagText({})).to.eql('');
         expect(iD.utilTagText({tags:{foo:'bar'}})).to.eql('foo=bar');

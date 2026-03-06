@@ -789,8 +789,8 @@ export function svgLabels(projection, context) {
 
 const _textWidthCache = {};
 export function textWidth(text, size, container) {
+    _textWidthCache[size] ||= {};
     let c = _textWidthCache[size];
-    if (!c) c = _textWidthCache[size] = {};
 
     if (c[text]) {
         return c[text];

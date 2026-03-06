@@ -51,6 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Make wording of fix for _overlapping features_ validator less ambiguous ([#9888], thanks [@k-yle])
 * Skip `disconnected_way` validation for Golf Paths ([#11863], thanks [@Kayd-06])
 #### :bug: Bugfixes
+* Fix the sorting of tag values when multiple objects' tags are combined in `utilCombinedTags` ([#11932], thanks [@JaiswalShivang])
 #### :earth_asia: Localization
 * Support territory-level phone hints ([#10904], thanks [@Vectorial1024])
 * Add phone format for Moldova ([#11965], thanks [@Oni-DOS])
@@ -58,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Use `<details>` element for collapsible _disclosure_ content ([#11952], thanks [@Shrinks99])
+* Use JSON endpoints for (almost) all OSM APIs ([#11661], thanks [@k-yle])
 
 
 [#9183]: https://github.com/openstreetmap/iD/issues/9183
@@ -65,9 +67,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9888]: https://github.com/openstreetmap/iD/pull/9888
 [#10904]: https://github.com/openstreetmap/iD/pull/10904
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
+[#11661]: https://github.com/openstreetmap/iD/pull/11661
 [#11778]: https://github.com/openstreetmap/iD/pull/11778
 [#11865]: https://github.com/openstreetmap/iD/pull/11865
 [#11876]: https://github.com/openstreetmap/iD/pull/11876
+[#11932]: https://github.com/openstreetmap/iD/pull/11932
 [#11944]: https://github.com/openstreetmap/iD/pull/11944
 [#11952]: https://github.com/openstreetmap/iD/pull/11952
 [#11965]: https://github.com/openstreetmap/iD/pull/11965

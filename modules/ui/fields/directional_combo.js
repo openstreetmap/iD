@@ -25,7 +25,7 @@ export function uiFieldDirectionalCombo(field, context) {
     function directionalCombo(selection) {
 
         function stripcolon(s) {
-            return s.replace(':', '');
+            return s.replaceAll(':', '');
         }
 
 
