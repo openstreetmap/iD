@@ -2468,7 +2468,7 @@ en:
       operations:
         title: "Operations"
         continue_line: "Continue a line at the selected endpoint"
-        merge: "Merge (combine) selected features"
+        merge: "Merge selected features"
         disconnect: "Disconnect selected features"
         extract: "Extract a point from a feature"
         extract_without_relations: "Extract a point from a feature, without extracting its relations"
