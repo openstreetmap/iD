@@ -332,34 +332,40 @@ export function uiSectionRawMembershipEditor(context) {
             const selected = graph.hasEntity(entityID);
 
             if (selected) {
-                let connectedWays = [];
+                const connectedWays = new Set();
 
                 if (selected.type === 'node') {
-                    connectedWays = graph.parentWays(selected);
+                    graph.parentWays(selected).forEach(way => {
+                        connectedWays.add(way);
+                    });
                 } else if (selected.type === 'way') {
                     selected.nodes.forEach(nodeID => {
                         const node = graph.hasEntity(nodeID);
                         if (node) {
-                            graph.parentWays(node).forEach(w => {
-                                if (w.id !== selected.id) connectedWays.push(w);
+                            graph.parentWays(node).forEach(way => {
+                                if (way.id !== selected.id) {
+                                    connectedWays.add(way);
+                                }
                             });
                         }
                     });
                 }
 
                 connectedWays.forEach(way => {
-                    graph.parentRelations(way).forEach(r => {
-                        connectedRelationIDs.add(r.id);
+                    graph.parentRelations(way).forEach(relation => {
+                        connectedRelationIDs.add(relation.id);
                     });
                 });
             }
 
-            result.sort(function(a, b) {
-                const aConnected = connectedRelationIDs.has(a.relation.id);
-                const bConnected = connectedRelationIDs.has(b.relation.id);
+            result.sort(function (a, b) {
+                const isRelationAConnectedToSelection = connectedRelationIDs.has(a.relation.id);
+                const isRelationBConnectedToSelection = connectedRelationIDs.has(b.relation.id);
 
-                if (aConnected && !bConnected) return -1;
-                if (!aConnected && bConnected) return 1;
+                // if exactly one of the relations is connected to the selected entity,
+                // prioritize the connected relation over the unconnected one
+                if (isRelationAConnectedToSelection && !isRelationBConnectedToSelection) return -1;
+                if (!isRelationAConnectedToSelection && isRelationBConnectedToSelection) return 1;
 
                 return osmRelation.creationOrder(a.relation, b.relation);
             });
