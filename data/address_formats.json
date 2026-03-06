@@ -79,6 +79,14 @@
       ["postcode", "city"]
     ]
   },
+    {
+    "countryCodes": ["md"],
+    "format": [
+      ["street", "housenumber"],
+      ["postcode", "floor", "unit"],
+      ["city", "subdistrict", "district"]
+    ]
+  },
   {
     "countryCodes": ["mo"],
     "format": [
