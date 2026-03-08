@@ -30,8 +30,8 @@ export function validationFormatting() {
         function isValidURL(url, strict = false) {
             try {
                 // First try strict WHATWG parsing
-                const link = new URL(url);
-                return link.href.includes(url);
+                const link = new URL(encodeURI(url));
+                return link.href.includes(encodeURI(url));
             } catch {
                 if (strict) return false;
                 // Fallback: accept if it looks like a valid scheme://something, even if semicolons are present
