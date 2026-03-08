@@ -28,17 +28,18 @@ export function validationFormatting() {
         }
 
         function isValidURL(url, strict = false) {
-            try {
-                // First try strict WHATWG parsing
-                const link = new URL(encodeURI(url));
-                return link.href.includes(encodeURI(url));
-            } catch {
-                if (strict) return false;
-                // Fallback: accept if it looks like a valid scheme://something, even if semicolons are present
-                return /^https?:\/\/\S+$/i.test(url);
-            }
+          // reject URLs containing spaces
+          if (/\s/.test(url)) return false;
+          try {
+            const link = new URL(url);
+            const encoded = encodeURI(url);
+            return link.href.includes(url) || link.href.includes(encoded);
+         } catch {
+            if (strict) return false;
+            return /^https?:\/\/\S+$/i.test(url);
+         }
         }
-
+ 
         function cleanWikimediaCommonsReference(value) {
             if (!value) return null;
             for (const prefix of ['file', 'datei', 'fichier', 'plik']) {
