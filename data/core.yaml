@@ -2095,8 +2095,8 @@ en:
         title: Tag this as lower
         informative_title: Tag {feature} as lower
       upgrade_tags:
-        title: Upgrade the tags
-        annotation: Upgraded old tags.
+        title: Accept the suggested updates
+        annotation: Accepted the suggested updates
       use_different_layers:
         title: Use different layers
       use_different_layers_or_levels:
