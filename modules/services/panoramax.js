@@ -50,6 +50,7 @@ let _activeImage;
 let _isViewerOpen = false;
 
 
+// TODO: deduplicate
 // Partition viewport into higher zoom tiles
 function partitionViewport(projection) {
     const z = geoScaleToZoom(projection.scale());

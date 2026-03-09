@@ -1381,6 +1381,9 @@ en:
     tooltip: "Street-level photos from the Norwegian Public Roads Administration"
     publisher: "Norwegian Public Roads Administration"
     view_on: "View it on Vegbilder"
+  commons:
+    title: Wikimedia Commons
+    tooltip: Georeferenced photos with a compatible license from Wikimedia Commons
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"
   mapillary_map_features:

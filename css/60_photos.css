@@ -350,6 +350,20 @@ li.list-item-photos.list-item-mapilio.active:after {
     overflow: hidden;
 }
 
+/* commons Image Layer */
+li.list-item-photos.list-item-commons.active:after {
+    background-color: #069;
+}
+.layer-commons {
+    pointer-events: none;
+}
+.layer-commons .viewfield-group * {
+    fill: #069;
+    stroke: #ffffff;
+    stroke-opacity: .6;
+    fill-opacity: .6;
+}
+
 /* panoramax Image Layer */
 li.list-item-photos.list-item-panoramax.active:after {
     background-color: #ff6f00;
