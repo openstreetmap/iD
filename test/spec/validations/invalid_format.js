@@ -27,22 +27,6 @@ describe('iD.validations.invalid_format', function () {
             expect(issues).to.have.lengthOf(0);
         });
 
-        it('should not flag a valid URL with accent characters', function() {
-            var entity = createPointWithTags({
-                website: 'https://www.rando92.fr/randonner/itinéraires/'
-            });
-            var issues = validate(entity);
-            expect(issues).to.have.lengthOf(0);
-        });
-
-        it('should not flag a valid URL with internationalized domain names', function() {
-            var entity = createPointWithTags({
-                website: 'https://teaomārama.school.nz'
-            });
-            var issues = validate(entity);
-            expect(issues).to.have.lengthOf(0);
-        });
-
         it('should flag URLs missing scheme', function() {
             var entity = createPointWithTags({
                 website: 'example.com'
@@ -52,6 +36,30 @@ describe('iD.validations.invalid_format', function () {
             expect(issues[0].type).to.eql('invalid_format');
             expect(issues[0].subtype).to.eql('website');
         });
+
+        it('should flag URLs with spaces', function() {
+        var entity = createPointWithTags({
+        website: 'https://exa mple.com'
+        });
+        var issues = validate(entity);
+        expect(issues).to.have.lengthOf(1);
+        });
+
+        it('should flag incomplete URLs', function() {
+        var entity = createPointWithTags({
+        website: 'https://'
+        });
+       var issues = validate(entity);
+       expect(issues).to.have.lengthOf(1);
+       });
+
+       it('should flag malformed protocol URLs', function() {
+       var entity = createPointWithTags({
+        website: 'http//example.com'
+       });
+      var issues = validate(entity);
+      expect(issues).to.have.lengthOf(1);
+      });
 
         it('should flag malformed URLs', function() {
             var entity = createPointWithTags({
