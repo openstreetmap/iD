@@ -27,6 +27,12 @@ updates:
         patterns:
           - "@turf/*"
         applies-to: version-updates
+      eslint:
+        patterns:
+          - "@eslint/*"
+          - "eslint"
+          - "typescript-eslint"
+        applies-to: version-updates
     labels:
       - "chore-dependabot"
   - package-ecosystem: "github-actions"
