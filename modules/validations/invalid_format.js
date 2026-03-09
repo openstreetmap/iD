@@ -39,7 +39,7 @@ export function validationFormatting() {
             return /^https?:\/\/\S+$/i.test(url);
          }
         }
- 
+
         function cleanWikimediaCommonsReference(value) {
             if (!value) return null;
             for (const prefix of ['file', 'datei', 'fichier', 'plik']) {
