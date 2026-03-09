@@ -28,17 +28,19 @@ export function validationFormatting() {
         }
 
         function isValidURL(url, strict = false) {
-          // reject URLs containing spaces
-          if (/\s/.test(url)) return false;
-          try {
-            const link = new URL(url);
-            const encoded = encodeURI(url);
-            return link.href.includes(url) || link.href.includes(encoded);
-         } catch {
-            if (strict) return false;
-            return /^https?:\/\/\S+$/i.test(url);
-         }
+         try {
+              const link = new URL(url);
+              const encoded = encodeURI(url);
+        return link.href.includes(url) ||
+               link.href.includes(encoded) ||
+               link.hostname === new URL(encodeURI(url)).hostname;
+        } catch {
+              if (strict) return false;
+              // reject URLs with spaces
+              if (/\s/.test(url)) return false;
+              return /^https?:\/\/\S+$/i.test(url);
         }
+       }
 
         function cleanWikimediaCommonsReference(value) {
             if (!value) return null;
