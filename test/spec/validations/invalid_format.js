@@ -27,6 +27,22 @@ describe('iD.validations.invalid_format', function () {
             expect(issues).to.have.lengthOf(0);
         });
 
+        it('should not flag a valid URL with accent characters', function() {
+            var entity = createPointWithTags({
+                website: 'https://www.rando92.fr/randonner/itinéraires/'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(0);
+        });
+
+        it('should not flag a valid URL with internationalized domain names', function() {
+            var entity = createPointWithTags({
+                website: 'https://teaomārama.school.nz'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(0);
+        });
+
         it('should flag URLs missing scheme', function() {
             var entity = createPointWithTags({
                 website: 'example.com'
