@@ -29,9 +29,9 @@ export function validationFormatting() {
 
         function isValidURL(url, strict = false) {
             try {
-                // First try strict WHATWG parsing
                 const link = new URL(url);
-                return link.href.includes(url);
+                // Accept normalized/encoded URLs as long as they are absolute http(s) URLs.
+                return /^https?:$/i.test(link.protocol) && !!link.hostname;
             } catch {
                 if (strict) return false;
                 // Fallback: accept if it looks like a valid scheme://something, even if semicolons are present
