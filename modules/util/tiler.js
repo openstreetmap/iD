@@ -3,6 +3,7 @@ import { clamp } from 'lodash-es';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
 
+/** @typedef {{ id: string; xyz: import('../geo/vector').Vec3; extent: geoExtent }} Tile */
 
 export function utilTiler() {
     var _size = [256, 256];
@@ -74,6 +75,7 @@ export function utilTiler() {
 
     /**
      * getTiles() returns an array of tiles that cover the map view
+     * @returns {false | Tile[]}
      */
     tiler.getTiles = function(projection) {
         var origin = [
@@ -140,6 +142,7 @@ export function utilTiler() {
     };
 
 
+    /** @type {GetSet<typeof tiler, Vec2>} */
     tiler.zoomExtent = function(val) {
         if (!arguments.length) return _zoomExtent;
         _zoomExtent = val;
@@ -176,6 +179,7 @@ export function utilTiler() {
     };
 
 
+    /** @type {GetSet<typeof tiler, boolean>} */
     tiler.skipNullIsland = function(val) {
         if (!arguments.length) return _skipNullIsland;
         _skipNullIsland = val;
