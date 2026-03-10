@@ -55,6 +55,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix the sorting of tag values when multiple objects' tags are combined in `utilCombinedTags` ([#11932], thanks [@JaiswalShivang])
 * Don't change the value of `railway:turnout_side` when reversing a railway track ([#11645])
+* Fix a bug where the _squaring_ operation would remove a whole corner if it had duplicate vertices (same coordinates, but different node ids) at that point ([#9155])
 #### :earth_asia: Localization
 * Support territory-level phone hints ([#10904], thanks [@Vectorial1024])
 * Add phone and address format for Moldova ([#11965], [#11976], thanks [@Oni-DOS])
@@ -65,6 +66,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Use JSON endpoints for (almost) all OSM APIs ([#11661], thanks [@k-yle])
 
 
+[#9155]: https://github.com/openstreetmap/iD/issues/9155
 [#9183]: https://github.com/openstreetmap/iD/issues/9183
 [#9272]: https://github.com/openstreetmap/iD/issues/9272
 [#9545]: https://github.com/openstreetmap/iD/pull/9545
