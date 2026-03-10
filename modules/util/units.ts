@@ -1,6 +1,7 @@
 import { clamp } from 'lodash-es';
 
 import { t, localizer } from '../core/localizer';
+import type { Vec2, Vec3 } from '../geo/vector';
 
 var OSM_PRECISION = 7;
 
@@ -10,7 +11,7 @@ var OSM_PRECISION = 7;
  * @param {Number} m area in meters
  * @param {Boolean} isImperial true for U.S. customary units; false for metric
  */
-export function displayLength(m, isImperial) {
+export function displayLength(m: number, isImperial: boolean) {
     var d = m * (isImperial ? 3.28084 : 1);
     var unit;
 
@@ -43,7 +44,7 @@ export function displayLength(m, isImperial) {
  * @param {Number} m2 area in square meters
  * @param {Boolean} isImperial true for U.S. customary units; false for metric
  */
-export function displayArea(m2, isImperial) {
+export function displayArea(m2: number, isImperial: boolean) {
     var locale = localizer.localeCode();
     var d = m2 * (isImperial ? 10.7639111056 : 1);
     var d1, d2, area;
@@ -100,19 +101,19 @@ export function displayArea(m2, isImperial) {
     }
 }
 
-function wrap(x, min, max) {
+function wrap(x: number, min: number, max: number) {
     var d = max - min;
     return ((x - min) % d + d) % d + min;
 }
 
-function roundToDecimal (target, decimalPlace) {
+function roundToDecimal (target: number, decimalPlace: number) {
     target = Number(target);
     decimalPlace = Number(decimalPlace);
     const factor = Math.pow(10, decimalPlace);
     return Math.round(target * factor) /  factor;
 }
 
-function displayCoordinate(deg, pos, neg) {
+function displayCoordinate(deg: number, pos: string, neg: string) {
     var displayCoordinate;
     var locale = localizer.localeCode();
 
@@ -165,7 +166,7 @@ function displayCoordinate(deg, pos, neg) {
  *
  * @param {Array<Number>} coord longitude and latitude
  */
-export function dmsCoordinatePair(coord) {
+export function dmsCoordinatePair(coord: Vec2) {
     return t('units.coordinate_pair', {
         latitude: displayCoordinate(clamp(coord[1], -90, 90), 'north', 'south'),
         longitude: displayCoordinate(wrap(coord[0], -180, 180), 'east', 'west')
@@ -178,7 +179,7 @@ export function dmsCoordinatePair(coord) {
  *
  * @param {Array<Number>} coord longitude and latitude
  */
-export function decimalCoordinatePair(coord) {
+export function decimalCoordinatePair(coord: Vec2) {
     return t('units.coordinate_pair', {
         latitude: clamp(coord[1], -90, 90).toFixed(OSM_PRECISION),
         longitude: wrap(coord[0], -180, 180).toFixed(OSM_PRECISION)
@@ -187,13 +188,16 @@ export function decimalCoordinatePair(coord) {
 
 // Return the parsed value  that @mapbox/sexagesimal can't parse
 // return value format : [D, D]  ex:[ 35.1861, 136.83161 ]
-export function dmsMatcher(q, _localeCode = undefined) {
-    const matchers = [
+export function dmsMatcher(q: string, _localeCode = undefined) {
+    const matchers: {
+        condition: RegExp;
+        parser(q: string): Vec2 | Vec3 | false
+    }[] = [
         // D M SS , D M SS  ex: 35 11 10.1 , 136 49 53.8
         {
             condition: /^\s*(-?)\s*(\d+)\s+(\d+)\s+(\d+\.?\d*)\s*\,\s*(-?)\s*(\d+)\s+(\d+)\s+(\d+\.?\d*)\s*$/,
             parser: function(q) {
-                const match = this.condition.exec(q);
+                const match = this.condition.exec(q)!;
                 const lat = (+match[2]) + (+match[3]) / 60 + (+match[4]) / 3600;
                 const lng = (+match[6]) + (+match[7]) / 60 + (+match[8]) / 3600;
                 const isNegLat = match[1] === '-' ? -lat : lat;
@@ -205,7 +209,7 @@ export function dmsMatcher(q, _localeCode = undefined) {
         {
             condition: /^\s*(-?)\s*(\d+)\s+(\d+\.?\d*)\s*\,\s*(-?)\s*(\d+)\s+(\d+\.?\d*)\s*$/,
             parser: function(q) {
-                const match = this.condition.exec(q);
+                const match = this.condition.exec(q)!;
                 const lat = +match[2] + (+match[3]) / 60;
                 const lng = +match[5] + (+match[6]) / 60;
                 const isNegLat = match[1] === '-' ? -lat : lat;
@@ -217,7 +221,7 @@ export function dmsMatcher(q, _localeCode = undefined) {
         {
             condition: /^\s*(-?\d+\.?\d*)\s*\/\s*(-?\d+\.?\d*)\s*$/,
             parser: function(q) {
-                const match = this.condition.exec(q);
+                const match = this.condition.exec(q)!;
                 return [+match[1], +match[2]];
             }
         },
@@ -225,7 +229,7 @@ export function dmsMatcher(q, _localeCode = undefined) {
         {
             condition: /^\s*(\d+\.?\d*)\s*\/\s*(-?\d+\.?\d*)\s*\/\s*(-?\d+\.?\d*)\s*$/,
             parser: function(q) {
-                const match = this.condition.exec(q);
+                const match = this.condition.exec(q)!;
                 const lat = +match[2];
                 const lng = +match[3];
                 const zoom = +match[1];
@@ -234,11 +238,11 @@ export function dmsMatcher(q, _localeCode = undefined) {
         },
         // x/y , x, y , x y  where x and y are localized floats, e.g. in German locale: 49,4109399, 8,7147086
         {
-            condition: { test: q => !!localizedNumberCoordsParser(q) },
+            condition: <RegExp>{ test: q => !!localizedNumberCoordsParser(q) },
             parser: localizedNumberCoordsParser
         }
     ];
-    function localizedNumberCoordsParser(q) {
+    function localizedNumberCoordsParser(q: string): Vec2 | false {
         const parseLocaleFloat = localizer.floatParser(_localeCode || localizer.localeCode());
         let parts = q.split(/,?\s+|\s*[\/\\]\s*/);
         if (parts.length !== 2) return false;
