@@ -119,6 +119,7 @@ function loadTileDataToCache(data, tile) {
                 service: 'photo',
                 loc: loc,
                 capture_time: feature.properties.capture_time,
+                created_by_id: feature.properties.created_by_id,
                 id: feature.properties.id,
                 sequence_id: feature.properties.sequence_uuid,
                 heading: feature.properties.heading,
@@ -174,6 +175,19 @@ function getImageData(imageId, sequenceId) {
             const {filename, uploaded_hash} = data.data[index];
             _sceneOptions.panorama = imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + resolution;
         });
+}
+
+function getUserData(userId) {
+  return fetch(apiUrl + `/api/search-user?options[parameters][id]=${userId}`, {method: 'GET'})
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error(response.status + ' ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(function (data) {
+      return data.data[0].username;
+    });
 }
 
 
@@ -324,25 +338,35 @@ export default {
         if (!d) return this;
 
         let wrap = context.container().select('.photoviewer .mapilio-wrapper');
-        let attribution = wrap.selectAll('.photo-attribution').text('');
+        let attribution = wrap.selectAll('.photo-attribution').text('\u00A0');
 
-        if (d.capture_time) {
+        getUserData(d.created_by_id).then((username) => {
+          if (username) {
             attribution
-                .append('span')
-                .attr('class', 'captured_at')
-                .text(localeDateString(d.capture_time));
-
+              .append('span')
+              .attr('class', 'captured_by')
+              .text('@' + username);
             attribution
-                .append('span')
-                .text('|');
-        }
-
-        attribution
+              .append('span')
+              .text('|');
+          }
+        }).finally(()=>{
+          if (d.capture_time) {
+            attribution
+              .append('span')
+              .attr('class', 'captured_at')
+              .text(localeDateString(d.capture_time));
+            attribution
+              .append('span')
+              .text('|');
+          }
+          attribution
             .append('a')
             .attr('class', 'image-link')
             .attr('target', '_blank')
             .attr('href', `https://mapilio.com/app?lat=${d.loc[1]}&lng=${d.loc[0]}&zoom=17&pId=${d.id}`)
             .text('mapilio.com');
+        });
 
         wrap
             .transition()

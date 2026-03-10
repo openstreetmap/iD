@@ -47,6 +47,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 * Show a preview of the result of some geometry operations while the respective button in the edit menu is hovered ([#11778])
 #### :camera: Street-Level
+* Show username of Mapilio photos ([#9903], thanks [@sezerbozbiyik])
 #### :white_check_mark: Validation
 * Make wording of fix for _overlapping features_ validator less ambiguous ([#9888], thanks [@k-yle])
 * Skip `disconnected_way` validation for Golf Paths ([#11863], thanks [@Kayd-06])
@@ -68,6 +69,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9272]: https://github.com/openstreetmap/iD/issues/9272
 [#9545]: https://github.com/openstreetmap/iD/pull/9545
 [#9888]: https://github.com/openstreetmap/iD/pull/9888
+[#9903]: https://github.com/openstreetmap/iD/pull/9903
 [#10904]: https://github.com/openstreetmap/iD/pull/10904
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
 [#11645]: https://github.com/openstreetmap/iD/pull/11645
@@ -83,6 +85,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@Shrinks99]: https://github.com/Shrinks99
 [@Vectorial1024]: https://github.com/Vectorial1024
 [@Oni-DOS]: https://github.com/Oni-DOS
+[@sezerbozbiyik]: https://github.com/sezerbozbiyik
 
 
 # 2.38.0-dev
