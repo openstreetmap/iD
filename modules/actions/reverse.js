@@ -61,6 +61,9 @@ export function actionReverse(entityID, options) {
             // https://github.com/openstreetmap/iD/issues/10128
             keyRegex: /^side$/,
             prerequisiteTags: [{highway: 'cyclist_waiting_aid'}]
+        }, {
+            keyRegex: /^railway:turnout_side$/,
+            prerequisiteTags: [{}]
         }
     ];
     var roleReplacements = {
