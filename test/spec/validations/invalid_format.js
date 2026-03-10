@@ -58,6 +58,19 @@ describe('iD.validations.invalid_format', function () {
             });
         });
 
+        it('should flag malformed protocol and incomplete URLs', function() {
+            var entity = createPointWithTags({
+                website: 'http//example.com',
+                url: 'https://'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(2);
+            issues.forEach(function(issue) {
+                expect(issue.type).to.eql('invalid_format');
+                expect(issue.subtype).to.eql('website');
+            });
+        });
+
         it('should handle multiple URLs separated by semicolons', function() {
             var entity = createPointWithTags({
                 website: 'https://example.com;invalid-url;http://valid.org'
