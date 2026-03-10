@@ -1,6 +1,12 @@
-import { LocationConflation } from '@rapideditor/location-conflation';
+import { LocationConflation, type LocationSet, type GeoJSONFeature, type FeatureProperties, type FeatureCollection } from '@rapideditor/location-conflation';
 import whichPolygon from 'which-polygon';
 import calcArea from '@mapbox/geojson-area';
+import type { Vec2 } from '../geo/vector';
+
+export interface ObjectWithLocationSet {
+  locationSetID?: string;
+  locationSet: LocationSet;
+}
 
 const _loco = new LocationConflation();    // instance of a location-conflation resolver
 
@@ -20,17 +26,21 @@ const _loco = new LocationConflation();    // instance of a location-conflation 
  * https://github.com/rapideditor/country-coder
  */
 export class LocationManager {
+  /** A which-polygon index */
+  _wp!: whichPolygon.Query<FeatureProperties>;
+  /** Map (id -> GeoJSON feature) */
+  _resolved = new Map<string | undefined, GeoJSONFeature>();
+  /** Map (locationSetID -> Number area) */
+  _knownLocationSets = new Map<string, number>();
+  /** Map (locationID -> Set(locationSetID) ) */
+  _locationIncludedIn = new Map<string, Set<string>>();
+  /** Map (locationID -> Set(locationSetID) ) */
+  _locationExcludedIn = new Map<string, Set<string>>();
 
   /**
    * @constructor
    */
   constructor() {
-    this._wp = null;                        // A which-polygon index
-    this._resolved = new Map();             // Map (id -> GeoJSON feature)
-    this._knownLocationSets = new Map();    // Map (locationSetID -> Number area)
-    this._locationIncludedIn = new Map();   // Map (locationID -> Set(locationSetID) )
-    this._locationExcludedIn = new Map();   // Map (locationID -> Set(locationSetID) )
-
     // pre-resolve the worldwide locationSet
     const world = { locationSet: { include: ['Q2'] } };
     this._resolveLocationSet(world);
@@ -49,7 +59,7 @@ export class LocationManager {
    *
    * @param  `obj`  Object to check, it should have `locationSet` property
    */
-  _validateLocationSet(obj) {
+  _validateLocationSet(obj: ObjectWithLocationSet) {
     if (obj.locationSetID) return;  // work was done already
 
     try {
@@ -71,11 +81,11 @@ export class LocationManager {
 
       // Resolve and index the 'includes'
       (locationSet.include || []).forEach(location => {
-        const locationID = _loco.validateLocation(location).id;
+        const locationID = _loco.validateLocation(location)!.id;
         let geojson = this._resolved.get(locationID);
 
         if (!geojson) {    // first time seeing a location like this
-          geojson = _loco.resolveLocation(location).feature;     // resolve to GeoJSON
+          geojson = _loco.resolveLocation(location)!.feature;     // resolve to GeoJSON
           this._resolved.set(locationID, geojson);
         }
         area += geojson.properties.area;
@@ -90,11 +100,11 @@ export class LocationManager {
 
       // Resolve and index the 'excludes'
       (locationSet.exclude || []).forEach(location => {
-        const locationID = _loco.validateLocation(location).id;
+        const locationID = _loco.validateLocation(location)!.id;
         let geojson = this._resolved.get(locationID);
 
         if (!geojson) {    // first time seeing a location like this
-          geojson = _loco.resolveLocation(location).feature;     // resolve to GeoJSON
+          geojson = _loco.resolveLocation(location)!.feature;     // resolve to GeoJSON
           this._resolved.set(locationID, geojson);
         }
         area -= geojson.properties.area;
@@ -125,13 +135,13 @@ export class LocationManager {
    *
    * @param  `obj`  Object to check, it should have `locationSet` property
    */
-  _resolveLocationSet(obj) {
+  _resolveLocationSet(obj: ObjectWithLocationSet) {
     this._validateLocationSet(obj);
 
     if (this._resolved.has(obj.locationSetID)) return;  // work was done already
 
     try {
-      const result = _loco.resolveLocationSet(obj.locationSet);
+      const result = _loco.resolveLocationSet(obj.locationSet)!;
       const locationSetID = result.id;
       obj.locationSetID = locationSetID;
 
@@ -156,7 +166,10 @@ export class LocationManager {
    * Rebuilds the whichPolygon index with whatever features have been resolved into GeoJSON.
    */
   _rebuildIndex() {
-    this._wp = whichPolygon({ features: [...this._resolved.values()] });
+    this._wp = whichPolygon({
+      type: 'FeatureCollection',
+      features: [...this._resolved.values()],
+    });
   }
 
 
@@ -178,7 +191,7 @@ export class LocationManager {
    *
    * @param  `fc`  FeatureCollection-like Object containing custom locations
    */
-  mergeCustomGeoJSON(fc) {
+  mergeCustomGeoJSON(fc: FeatureCollection) {
     if (!fc || fc.type !== 'FeatureCollection' || !Array.isArray(fc.features)) return;
 
     fc.features.forEach(feature => {
@@ -223,7 +236,7 @@ export class LocationManager {
    * @param  `objects`  Objects to check - they should have `locationSet` property
    * @return  Promise resolved true (this function used to be slow/async, now it's faster and sync)
    */
-  mergeLocationSets(objects) {
+  mergeLocationSets(objects: ObjectWithLocationSet[]) {
     if (!Array.isArray(objects)) return Promise.reject('nothing to do');
 
     objects.forEach(obj => this._validateLocationSet(obj));
@@ -240,7 +253,7 @@ export class LocationManager {
    * @param  `locationSet`  A locationSet Object, e.g. `{ include: ['us'] }`
    * @return  String locationSetID, e.g. `+[Q30]`
    */
-  locationSetID(locationSet) {
+  locationSetID(locationSet: LocationSet) {
     let locationSetID;
     try {
       locationSetID = _loco.validateLocationSet(locationSet).id;
@@ -287,10 +300,11 @@ export class LocationManager {
    * @param  `loc`  `[lon,lat]` location to query, e.g. `[-74.4813, 40.7967]`
    * @return  Object of locationSetIDs valid at given location
    */
-  locationSetsAt(loc) {
-    let result = {};
+  locationSetsAt(loc: Vec2) {
+    const result: { [locationSetID: string]: number } = {};
 
     const hits = this._wp(loc, true) || [];
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const thiz = this;
 
     // locationSets
