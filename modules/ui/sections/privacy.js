@@ -9,6 +9,9 @@ export function uiSectionPrivacy(context) {
       .label(() => t.append('preferences.privacy.title'))
       .disclosureContent(renderDisclosureContent);
 
+      let wikimedia = prefs('preferences.privacy.icons.wikimedia') || 'true';
+      let facebook = prefs('preferences.privacy.icons.facebook') || 'true';
+
     function renderDisclosureContent(selection) {
       // enter
       selection.selectAll('.privacy-options-list')
@@ -17,9 +20,14 @@ export function uiSectionPrivacy(context) {
         .append('ul')
         .attr('class', 'layer-list privacy-options-list');
 
-      let thirdPartyIconsEnter = selection.select('.privacy-options-list')
+      let options = [
+      { key: 'preferences.privacy.icons.wikimedia', label: 'Wikimedia icons' },
+      { key: 'preferences.privacy.icons.facebook', label: 'Facebook icons' }
+      ];
+
+     let thirdPartyIconsEnter = selection.select('.privacy-options-list')
         .selectAll('.privacy-third-party-icons-item')
-        .data([prefs('preferences.privacy.thirdpartyicons') || 'true'])
+        .data(options)
         .enter()
         .append('li')
         .attr('class', 'privacy-third-party-icons-item')
@@ -30,22 +38,23 @@ export function uiSectionPrivacy(context) {
         );
 
       thirdPartyIconsEnter
-        .append('input')
-        .attr('type', 'checkbox')
-        .on('change', (d3_event, d) => {
-          d3_event.preventDefault();
-          prefs('preferences.privacy.thirdpartyicons', d === 'true' ? 'false' : 'true');
-        });
+       .append('input')
+       .attr('type', 'checkbox')
+       .property('checked', d => (prefs(d.key) || 'true') === 'true')
+       .on('change', (event, d) => {
+       let current = prefs(d.key) || 'true';
+       prefs(d.key, current === 'true' ? 'false' : 'true');
+      });
 
       thirdPartyIconsEnter
-        .append('span')
-        .call(t.append('preferences.privacy.third_party_icons.description'));
+       .append('span')
+       .text(d => d.label);
 
       // update
       selection.selectAll('.privacy-third-party-icons-item')
         .classed('active', d => d === 'true')
         .select('input')
-        .property('checked', d => d === 'true');
+        .property('checked', d => (prefs(d.key) || 'true') === 'true');
 
       // Privacy Policy link
       selection.selectAll('.privacy-link')
@@ -62,7 +71,8 @@ export function uiSectionPrivacy(context) {
 
     }
 
-    prefs.onChange('preferences.privacy.thirdpartyicons', section.reRender);
+    prefs.onChange('preferences.privacy.icons.wikimedia', section.reRender);
+    prefs.onChange('preferences.privacy.icons.facebook', section.reRender);
 
     return section;
 }
