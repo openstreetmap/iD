@@ -350,7 +350,7 @@ export default {
               .append('span')
               .text('|');
           }
-        }).finally(()=>{
+        }).finally(() => {
           if (d.capture_time) {
             attribution
               .append('span')
