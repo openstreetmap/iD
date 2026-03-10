@@ -43,9 +43,10 @@
     "start:single-build": "run-p build:js start:server",
     "start:watch": "run-p build:js:watch start:server",
     "start:server": "node scripts/server.js",
-    "test": "npm-run-all -s lint build test:*",
+    "test": "npm-run-all -s lint build test:typecheck test:spec",
     "test:typecheck": "tsc",
     "test:spec": "vitest --no-isolate",
+    "test:once": "vitest run --no-isolate",
     "translations": "node scripts/update_locales.js"
   },
   "dependencies": {
@@ -139,8 +140,7 @@
     "sinon-chai": "^4.0.1",
     "svg-sprite": "2.0.4",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.56.0",
-    "vparse": "~1.1.0"
+    "typescript-eslint": "^8.56.0"
   },
   "engines": {
     "node": ">=22"

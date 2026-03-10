@@ -4,10 +4,11 @@ import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import RBush from 'rbush';
 
-import { localizer } from '../core/localizer';
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { utilQsString, utilRebind, utilSetTransform, utilStringQs, utilTiler } from '../util';
 import { services } from './';
+import { searchLimited } from '../util/partition';
+import { localeDateString } from '../util/date';
 
 
 var apibase = 'https://kartaview.org';
@@ -145,33 +146,6 @@ function loadNextTilePage(which, currZoom, url, tile) {
             delete cache.inflight[id];
         });
 }
-
-
-// partition viewport into higher zoom tiles
-function partitionViewport(projection) {
-    var z = geoScaleToZoom(projection.scale());
-    var z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
-    var tiler = utilTiler().zoomExtent([z2, z2]);
-
-    return tiler.getTiles(projection)
-        .map(function(tile) { return tile.extent; });
-}
-
-
-// no more than `limit` results per partition.
-function searchLimited(limit, projection, rtree) {
-    limit = limit || 5;
-
-    return partitionViewport(projection)
-        .reduce(function(result, extent) {
-            var found = rtree.search(extent.bbox())
-                .slice(0, limit)
-                .map(function(d) { return d.data; });
-
-            return (found.length ? result.concat(found) : result);
-        }, []);
-}
-
 
 export default {
 
@@ -480,15 +454,6 @@ export default {
         }
 
         return this;
-
-
-        function localeDateString(s) {
-            if (!s) return null;
-            var options = { day: 'numeric', month: 'short', year: 'numeric' };
-            var d = new Date(s);
-            if (isNaN(d.getTime())) return null;
-            return d.toLocaleDateString(localizer.localeCode(), options);
-        }
     },
 
 

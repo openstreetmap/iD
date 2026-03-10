@@ -43,7 +43,8 @@ export function uiMapInMap(context) {
 
         function zoomStarted() {
             if (_skipEvents) return;
-            _tStart = _tCurr = projection.transform();
+            _tCurr = projection.transform();
+            _tStart = _tCurr;
             _gesture = null;
         }
 

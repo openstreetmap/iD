@@ -8,12 +8,14 @@ export function getDeprecatedTags(tags, dataDeprecated) {
   /** @type {DataDeprecated} */
   var deprecated = [];
   dataDeprecated.forEach((d) => {
-    var oldKeys = Object.keys(d.old);
+    const oldKeys = Object.keys(d.old);
+    const transferKeys = oldKeys.filter(key => d.old[key] === '*');
     if (d.replace) {
       var hasExistingValues = Object.keys(d.replace).some((replaceKey) => {
         if (!tags[replaceKey] || d.old[replaceKey]) return false;
         var replaceValue = d.replace[replaceKey];
         if (replaceValue === '*') return false;
+        if (replaceValue.startsWith('$1') && tags[replaceKey] === tags[transferKeys[+replaceValue.substring(1) - 1]]) return false;
         if (replaceValue === tags[replaceKey]) return false;
         return true;
       });
