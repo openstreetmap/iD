@@ -22,7 +22,7 @@ on the iD project, and then create this file with contents like
 ```bash
 git checkout develop
 npm clean-install
-npm install github:osmlab/editor-layer-index#gh-pages
+npm install @openstreetmap/editor-layer-index
 npm run imagery
 npm run all
 git add . && git commit -m 'npm run imagery'

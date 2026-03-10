@@ -38,7 +38,7 @@ jobs:
         run: mkdir dist/id-tagging-schema && mv id-tagging-schema/dist dist/id-tagging-schema/dist
       # build iD using freshest version of presets and ELI
       - run: npm clean-install
-      - run: npm install github:osmlab/editor-layer-index#gh-pages
+      - run: npm install @openstreetmap/editor-layer-index
       - run: npm audit signatures
       - run: mkdir dist/data
       - run: npm run imagery

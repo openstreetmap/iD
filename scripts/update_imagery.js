@@ -6,7 +6,7 @@ const require = createRequire(import.meta.url);
 
 /** @type {import("geojson").FeatureCollection} */
 const sources = JSON.parse(
-  fs.readFileSync(require.resolve('editor-layer-index/imagery.geojson'), 'utf8')
+  fs.readFileSync(require.resolve('@openstreetmap/editor-layer-index/imagery.geojson'), 'utf8')
 );
 
 if (fs.existsSync('./data/manual_imagery.json')) {
