@@ -57,11 +57,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Use `<details>` element for collapsible _disclosure_ content ([#11952], thanks [@Shrinks99])
+* Switch `editor-layer-index` dependency to a (temporarily dummy) `@openstreetmap` namespace to avoid false positive in malware detection ([#10772])
 
 
 [#9183]: https://github.com/openstreetmap/iD/issues/9183
 [#9545]: https://github.com/openstreetmap/iD/pull/9545
 [#9888]: https://github.com/openstreetmap/iD/pull/9888
+[#10772]: https://github.com/openstreetmap/iD/issues/10772
 [#10904]: https://github.com/openstreetmap/iD/pull/10904
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
 [#11778]: https://github.com/openstreetmap/iD/pull/11778
