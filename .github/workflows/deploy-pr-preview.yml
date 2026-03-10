@@ -17,15 +17,15 @@ jobs:
     environment: workflows
     if: ${{github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'}}
     steps:
-      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: '24'
       - run: npm clean-install
 
       - name: Download all artifacts (dist folder and pr_metadata)
-        uses: dawidd6/action-download-artifact@ac66b43f0e6a346234dd65d4d0c8fbb31cb316e5 # v11
+        uses: dawidd6/action-download-artifact@2536c51d3d126276eb39f74d6bc9c72ac6ef30d3 # v16
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
           run_id: ${{github.event.workflow_run.id}}

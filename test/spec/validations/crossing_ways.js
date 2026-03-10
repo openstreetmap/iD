@@ -148,6 +148,24 @@ describe('iD.validations.crossing_ways', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
+    it('ignores road crossing road on different layers', function() {
+        createWaysWithOneCrossingPoint({ highway: 'path', layer: '-5' }, { highway: 'path', layer: '-4' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores road crossing road on different levels', function() {
+        createWaysWithOneCrossingPoint({ highway: 'path', level: '-5' }, { highway: 'path', level: '-4' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores indoor highways crossing each other on different levels', function() {
+        createWaysWithOneCrossingPoint({ highway: 'path', indoor: 'yes', level: '-5' }, { highway: 'path', indoor: 'yes', level: '-4' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
     it('ignores road crossing building on different layers', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential', layer: '-1' }, { building: 'yes' });
         var issues = validate();
@@ -365,12 +383,17 @@ describe('iD.validations.crossing_ways', function () {
 
     it('flags railway crossing railway', function() {
         createWaysWithOneCrossingPoint({ railway: 'rail' }, { railway: 'rail' });
-        verifySingleCrossingIssue(validate(), {});
+        verifySingleCrossingIssue(validate(), { railway: 'railway_crossing' });
     });
 
     it('flags railway crossing waterway', function() {
         createWaysWithOneCrossingPoint({ railway: 'rail' }, { waterway: 'river' });
         verifySingleCrossingIssue(validate(), null);
+    });
+
+    it('flags road bridge crossing road on the same layer', function() {
+        createWaysWithOneCrossingPoint({ highway: 'residential', bridge: 'yes', layer: '1' }, { highway: 'tertiary', layer: '1' });
+        verifySingleCrossingIssue(validate(), {});
     });
 
     it('flags road bridge crossing road bridge on the same layer', function() {
@@ -381,6 +404,16 @@ describe('iD.validations.crossing_ways', function () {
     it('flags road bridge crossing aqueduct on the same layer', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential', bridge: 'yes' }, { waterway: 'canal', bridge: 'aqueduct' });
         verifySingleCrossingIssue(validate(), null);
+    });
+
+    it('flags road tunnel crossing road on the same layer', function() {
+        createWaysWithOneCrossingPoint({ highway: 'residential', tunnel: 'yes', layer: '-1' }, { highway: 'tertiary', layer: '-1' });
+        verifySingleCrossingIssue(validate(), {});
+    });
+
+    it('flags a crossing where only one feature is indoor', () => {
+        createWaysWithOneCrossingPoint({ highway: 'path' }, { highway: 'path', level: '1' });
+        verifySingleCrossingIssue(validate(), {});
     });
 
     it('flags road tunnel crossing waterway tunnel on the same layer', function() {

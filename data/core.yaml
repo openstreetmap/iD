@@ -2090,11 +2090,13 @@ en:
         annotation: Tagged a way as having unsquare corners.
       tag_this_as_higher:
         title: Tag this as higher
+        informative_title: Tag {feature} as higher
       tag_this_as_lower:
         title: Tag this as lower
+        informative_title: Tag {feature} as lower
       upgrade_tags:
-        title: Upgrade the tags
-        annotation: Upgraded old tags.
+        title: Accept the suggested updates
+        annotation: Accepted the suggested updates
       use_different_layers:
         title: Use different layers
       use_different_layers_or_levels:
@@ -2466,7 +2468,7 @@ en:
       operations:
         title: "Operations"
         continue_line: "Continue a line at the selected endpoint"
-        merge: "Combine (merge) selected features"
+        merge: "Merge selected features"
         disconnect: "Disconnect selected features"
         extract: "Extract a point from a feature"
         extract_without_relations: "Extract a point from a feature, without extracting its relations"

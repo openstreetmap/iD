@@ -50,6 +50,7 @@ var helpStringReplacements;
 export function helpHtml(id, replacements) {
     // only load these the first time
     if (!helpStringReplacements) {
+        /* eslint-disable sort-keys */
         helpStringReplacements = {
         // insert icons corresponding to various UI elements
         point_icon: icon('#iD-icon-point', 'inline'),
@@ -146,6 +147,7 @@ export function helpHtml(id, replacements) {
         help: t.html('help.title'),
         ok: t.html('intro.ok')
         };
+        /* eslint-enable sort-keys */
         for (var key in helpStringReplacements) {
             helpStringReplacements[key] = { html: helpStringReplacements[key] };
         }

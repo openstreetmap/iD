@@ -140,7 +140,7 @@ async function loadTile(cache, typename, tile) {
       METER: metering,
       FELTKODE: lane_code
     } = properties;
-    const lane_number = parseInt(lane_code.match(/^[0-9]+/)[0], 10);
+    const lane_number = parseInt((lane_code.match(/^[0-9]+/) || [])[0], 10);
     const direction = lane_number % 2 === 0 ? directionEnum.backward : directionEnum.forward;
     const data = {
       service: 'photo',

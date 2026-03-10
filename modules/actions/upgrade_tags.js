@@ -3,7 +3,7 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
     return function(graph) {
         var entity = graph.entity(entityId);
         var tags = Object.assign({}, entity.tags);  // shallow copy
-        var transferValue;
+        var transferValues = [];
         var semiIndex;
 
         for (var oldTagKey in oldTags) {
@@ -11,7 +11,7 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
             // wildcard match
             if (oldTags[oldTagKey] === '*') {
                 // note the value since we might need to transfer it
-                transferValue = tags[oldTagKey];
+                transferValues.push(tags[oldTagKey]);
                 delete tags[oldTagKey];
             // exact match
             } else if (oldTags[oldTagKey] === tags[oldTagKey]) {
@@ -44,8 +44,8 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
                         // otherwise assume `yes` is okay
                         tags[replaceKey] = 'yes';
                     }
-                } else if (replaceValue === '$1') {
-                    tags[replaceKey] = transferValue;
+                } else if (replaceValue.startsWith('$')) {
+                    tags[replaceKey] = transferValues[+replaceValue.substring(1) - 1];
                 } else {
                     if (tags[replaceKey] && oldTags[replaceKey] && semiIndex !== undefined) {
                         // don't override preexisting values

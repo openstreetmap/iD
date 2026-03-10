@@ -13,7 +13,7 @@ import { uiLengthIndicator } from '../length_indicator';
 
 var _languagesArray = [];
 
-export const LANGUAGE_SUFFIX_REGEX = /^(.*):([a-z]{2,3}(?:-[A-Z][a-z]{3})?(?:-[A-Z]{2})?)$/;
+export const LANGUAGE_SUFFIX_REGEX = /^(.*):([a-z]{2,3}(?:-[A-Z][a-z]{3})?(?:-[A-Z]{2}|-[0-9]{3})?(?:-[a-z][a-z0-9]{4,7}|-[0-9][a-z0-9]{3})?)$/;
 
 export function uiFieldLocalized(field, context) {
     var dispatch = d3_dispatch('change', 'input');

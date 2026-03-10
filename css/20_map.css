@@ -353,6 +353,20 @@ g.vertex.highlighted .shadow {
     stroke: #68f;
 }
 
+/* Auxiliary temporary geometries for operations, e.g. reflect axis indicator */
+g.auxiliary path.reflect-axis {
+    stroke: #7092ff;
+    stroke-width: 3;
+    stroke-dasharray: 8, 4;
+    stroke-linecap: round;
+    pointer-events: none;
+}
+g.auxiliary path.preview {
+    stroke: #ccc;
+    stroke-width: 2;
+    stroke-dasharray: 8, 4;
+}
+
 /* Visual Diffs
 ------------------
 `highlight-edited` - visual diff activated
