@@ -98,13 +98,31 @@ export function uiFeatureList(context) {
 
 
         function keypress(d3_event) {
-            var q = search.property('value'),
-                items = list.selectAll('.feature-list-item');
-            if (d3_event.keyCode === 13 && // ↩ Return
-                q.length &&
-                items.size()) {
-                click(d3_event, items.datum());
+          var q = search.property('value'),
+          items = list.selectAll('.feature-list-item');
+
+          if (d3_event.keyCode === 13 && q.length && items.size()) {
+
+          const tagMatch = q.match(/^([a-zA-Z0-9:_-]+)=([a-zA-Z0-9:_-]+)$/);
+
+          if (tagMatch) {
+            const ids = [];
+
+            items.each(function(d) {
+                if (d.entity) {
+                    ids.push(d.entity.id);
+                }
+            });
+
+            if (ids.length) {
+                context.enter(modeSelect(context, ids));
             }
+
+            return;
+          }
+
+          click(d3_event, items.datum());
+         }
         }
 
 
@@ -131,6 +149,7 @@ export function uiFeatureList(context) {
             var graph = context.graph();
             var visibleCenter = context.map().extent().center();
             var q = search.property('value').toLowerCase().trim();
+            const tagMatch = q.match(/^([a-zA-Z0-9:_-]+)=([a-zA-Z0-9:_-]+)$/);
 
             if (!q) return [];
 
@@ -183,6 +202,33 @@ export function uiFeatureList(context) {
             }
 
             var allEntities = graph.entities;
+            const tagResults = [];
+
+          if (tagMatch) {
+          const key = tagMatch[1];
+          const value = tagMatch[2];
+          const extent = context.map().extent();
+
+         for (let entityID in allEntities) {
+           let entity = allEntities[entityID];
+           if (!entity || !entity.tags) continue;
+
+           if (entity.tags[key] === value) {
+
+           if (!extent.intersects(entity.extent(graph))) continue;
+
+           tagResults.push({
+            id: entity.id,
+            entity: entity,
+            geometry: entity.geometry(graph),
+            type: utilDisplayType(entity.id),
+            name: utilDisplayName(entity) || key + '=' + value
+        });
+        }
+
+        if (tagResults.length > 100) break;
+       }
+       }
             const localResults = [];
             for (var id in allEntities) {
                 var entity = allEntities[id];
@@ -269,7 +315,7 @@ export function uiFeatureList(context) {
                 });
             }
 
-            return [...idResult, ...localResults, ...coordResult, ...geocodeResults, ...extraResults];
+            return [...tagResults, ...idResult, ...localResults, ...coordResult, ...geocodeResults, ...extraResults];
         }
 
 
