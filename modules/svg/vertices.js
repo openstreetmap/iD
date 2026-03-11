@@ -199,11 +199,40 @@ export function svgVertices(projection, context) {
     }
 
 
+    // Node ids of every selected way, so we can keep their vertices on top when stacked.
+    function selectedWayNodeIDs(graph) {
+        var ids = {};
+        context.selectedIDs().forEach(function(id) {
+            var entity = graph.hasEntity(id);
+            if (entity && entity.type === 'way') {
+                entity.nodes.forEach(function(nodeID) { ids[nodeID] = true; });
+            }
+        });
+        return ids;
+    }
+
+    // Sort so the selected way's vertex is last (drawn on top), so it receives the pointer
+    // when targets stack at the same location. Z-order only matters where circles overlap.
+    // A vertex of a selected way ranks above a merely co-selected node, which ranks above the
+    // rest - this keeps the right endpoint grabbable after e.g. disconnecting it. #11314
+    function sortTouchByLocSelected(items, wayNodeIDs) {
+        function rank(item) {
+            var id = item.properties.entity.id;
+            if (id in wayNodeIDs) return 2;
+            if (id in _currSelected) return 1;
+            return 0;
+        }
+        items.sort(function(a, b) {
+            return rank(a) - rank(b);
+        });
+    }
+
     function drawTargets(selection, graph, entities, filter) {
         var targetClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
         var getTransform = svgPointTransform(projection).geojson;
         var activeID = context.activeID();
+        var wayNodeIDs = selectedWayNodeIDs(graph);
         var data = { targets: [], nopes: [] };
 
         entities.forEach(function(node) {
@@ -234,6 +263,10 @@ export function svgVertices(projection, context) {
             }
         });
 
+        // At stacked locations, put the selected way's vertex last so it ends up on top. #11314
+        sortTouchByLocSelected(data.targets, wayNodeIDs);
+        sortTouchByLocSelected(data.nopes, wayNodeIDs);
+
         // Targets allow hover and vertex snapping
         var targets = selection.selectAll('.vertex.target-allowed')
             .filter(function(d) { return filter(d.properties.entity); })
@@ -251,6 +284,7 @@ export function svgVertices(projection, context) {
                   || radiuses.shadow[3];
             })
             .merge(targets)
+            .order()  // keep DOM order in sync with the sorted data (selected vertex on top) #11314
             .attr('class', function(d) {
                 return 'node vertex target target-allowed '
                 + targetClass + d.id;
@@ -272,6 +306,7 @@ export function svgVertices(projection, context) {
             .append('circle')
             .attr('r', function(d) { return (_radii[d.properties.entity.id] || radiuses.shadow[3]); })
             .merge(nopes)
+            .order()  // keep DOM order in sync with the sorted data (selected vertex on top) #11314
             .attr('class', function(d) { return 'node vertex target target-nope ' + nopeClass + d.id; })
             .attr('transform', getTransform);
     }
