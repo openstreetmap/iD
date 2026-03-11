@@ -21,7 +21,7 @@ import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } fro
 import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilKeybinding, utilRebind, utilStringQs, utilCleanOsmString } from '../util';
-
+import { CommandRegistry } from './command_registry';
 
 export function coreContext() {
   const dispatch = d3_dispatch('enter', 'exit', 'change');
@@ -417,10 +417,12 @@ export function coreContext() {
     return context;
   };
 
+  context.commands = new CommandRegistry();
 
   /* Container */
   let _container = d3_select(null);
   let _theme;
+  /** @type {GetSet<typeof context, d3.Selection>} */
   context.container = function(val) {
     if (!arguments.length) return _container;
     _container = val;

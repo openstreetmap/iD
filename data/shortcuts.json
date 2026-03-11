@@ -362,6 +362,11 @@
           },
           {
             "modifiers": ["⌘"],
+            "shortcuts": ["command-bar.key"],
+            "text": "shortcuts.tools.command-bar"
+          },
+          {
+            "modifiers": ["⌘"],
             "shortcuts": ["info_panels.key"],
             "text": "shortcuts.tools.info.all"
           },

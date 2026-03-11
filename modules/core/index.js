@@ -1,3 +1,4 @@
+export * from './command_registry';
 export { coreContext } from './context';
 export { coreFileFetcher, fileFetcher } from './file_fetcher';
 export { coreDifference } from './difference';

@@ -13,6 +13,7 @@ import { uiCmd } from '../cmd';
 import { uiSection } from '../section';
 import { uiSettingsCustomData } from '../settings/custom_data';
 
+/** @param {iD.Context} context */
 export function uiSectionDataLayers(context) {
 
     var settingsCustomData = uiSettingsCustomData(context)
@@ -100,12 +101,28 @@ export function uiSectionDataLayers(context) {
                             .keys([uiCmd('⌥' + t('area_fill.wireframe.key'))])
                             .placement('bottom')
                         );
+                    context.commands.register({
+                        categoryId: 'background',
+                        id: `toggle_layer-${d.id}`,
+                        label: `Toggle ‘${t(`map_data.layers.${d.id}.title`)}’`, // TODO: i18n
+                        action: () => toggleLayer(d.id),
+                        terms: [t(`map_data.layers.${d.id}.tooltip`)],
+                        keyboardShortcuts: ['⌥' + t('area_fill.wireframe.key')],
+                    });
                 } else {
                     d3_select(this)
                         .call(uiTooltip()
                             .title(() => t.append('map_data.layers.' + d.id + '.tooltip'))
                             .placement('bottom')
                         );
+                    context.commands.register({
+                        categoryId: 'background',
+                        id: `toggle_layer-${d.id}`,
+                        label: `Toggle ‘${t(`map_data.layers.${d.id}.title`)}’`, // TODO: i18n
+                        action: () => toggleLayer(d.id),
+                        terms: [t(`map_data.layers.${d.id}.tooltip`)],
+                        keyboardShortcuts: [],
+                    });
                 }
             });
 
@@ -158,6 +175,13 @@ export function uiSectionDataLayers(context) {
                         .title(() => t.append('map_data.layers.' + d.id + '.tooltip'))
                         .placement('bottom')
                     );
+                context.commands.register({
+                    categoryId: 'background',
+                    id: `toggle_layer-${d.id}`,
+                    label: `Toggle ‘${t(`map_data.layers.${d.id}.title`)}’`, // TODO: i18n
+                    action: () => toggleLayer(d.id),
+                    terms: [t(`map_data.layers.${d.id}.tooltip`)],
+                });
             });
 
         labelEnter

@@ -39,7 +39,7 @@ declare global {
     export type Selection<T = any> = import('d3').Selection<
       T,
       unknown,
-      unknown,
+      any,
       unknown
     >;
   }

@@ -6,6 +6,7 @@ import { operationPaste } from '../operations';
 import { t } from '../core/localizer';
 import { uiCmd } from '../ui/cmd';
 
+/** @param {iD.Context} context */
 // see also `operationPaste`
 export function behaviorPaste(context) {
 
@@ -76,12 +77,20 @@ export function behaviorPaste(context) {
 
     function behavior() {
         context.keybinding().on(uiCmd('⌘V'), doPaste);
+        context.commands.register({
+            categoryId: 'behavior',
+            id: 'paste',
+            label: t('shortcuts.editing.commands.paste'),
+            action: doPaste,
+            keyboardShortcut: { modifiers: ['⌘'], shortcuts: ['V'] },
+        });
         return behavior;
     }
 
 
     behavior.off = function() {
         context.keybinding().off(uiCmd('⌘V'));
+        delete context.commands.registry.paste;
     };
 
 

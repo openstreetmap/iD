@@ -138,6 +138,13 @@ export function uiInfo(context) {
                     d3_event.preventDefault();
                     info.toggle(k);
                 });
+            context.commands.register({
+                categoryId: 'panels',
+                id: 'toggle_panel_measurement',
+                label: t('shortcuts.tools.info.' + k),
+                action: () => info.toggle(k),
+                keyboardShortcut: { shortcuts: [key], modifiers: ['⌘', '⇧'] },
+            });
         });
     }
 

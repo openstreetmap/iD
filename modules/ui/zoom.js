@@ -102,11 +102,39 @@ export function uiZoom(context) {
         utilKeybinding.plusKeys.forEach(function(key) {
             context.keybinding().on([key], zoomIn);
             context.keybinding().on([uiCmd('⌥' + key)], zoomInFurther);
+            context.commands.register({
+                categoryId: 'behavior',
+                id: 'zoom_in',
+                label: t('shortcuts.browsing.navigation.zoom'), // TODO: bad label
+                action: zoomIn,
+                keyboardShortcut: { shortcuts: [key] },
+            });
+            context.commands.register({
+                categoryId: 'behavior',
+                id: 'zoom_in_more',
+                label: t('shortcuts.browsing.navigation.zoom_more'), // TODO: bad label
+                action: zoomInFurther,
+                keyboardShortcut: { modifiers: ['⌥'], shortcuts: [key] },
+            });
         });
 
         utilKeybinding.minusKeys.forEach(function(key) {
             context.keybinding().on([key], zoomOut);
             context.keybinding().on([uiCmd('⌥' + key)], zoomOutFurther);
+            context.commands.register({
+                categoryId: 'behavior',
+                id: 'zoom_out',
+                label: t('shortcuts.browsing.navigation.zoom'), // TODO: bad label
+                action: zoomOut,
+                keyboardShortcut: { shortcuts: [key] },
+            });
+            context.commands.register({
+                categoryId: 'behavior',
+                id: 'zoom_out_more',
+                label: t('shortcuts.browsing.navigation.zoom_more'), // TODO: bad label
+                action: zoomOutFurther,
+                keyboardShortcut: { modifiers: ['⌥'], shortcuts: [key] },
+            });
         });
 
         function updateButtonStates() {

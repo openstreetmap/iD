@@ -41,6 +41,7 @@ import { uiVersion } from './version';
 import { uiZoom } from './zoom';
 import { uiZoomToSelection } from './zoom_to_selection';
 import { uiCmd } from './cmd';
+import { uiCommandBar } from './command_bar';
 
 import { uiPaneBackground } from './panes/background';
 import { uiPaneHelp } from './panes/help';
@@ -122,6 +123,9 @@ export function uiInit(context) {
         // setup fullscreen keybindings (no button shown at this time)
         container
             .call(uiFullScreen(context));
+
+        container
+            .call(uiCommandBar(context));
 
         var map = context.map();
         map.redrawEnable(false);  // don't draw until we've set zoom/lat/long
