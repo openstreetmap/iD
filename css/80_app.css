@@ -6125,3 +6125,87 @@ textarea:focus:dir(rtl)::-webkit-resizer {
     width: 100px;
     color: var(--link-color);
 }
+
+.command-bar {
+    margin: 10% auto;
+    border: solid 1px var(--border-color);
+    border-radius: 4px;
+    width: 600px;
+    padding: 0;
+    font-size: 14px;
+    background: var(--bg-color);
+}
+
+.command-bar::backdrop {
+    background-color: #000a;
+}
+
+.command-bar footer {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0 6px 0;
+    gap: 20px;
+    border-top: solid 1px var(--border-color);
+}
+
+.command-bar input {
+    width: 100%;
+    border: 0;
+    background: var(--bg-color-3);
+    padding: 8px 12px;
+    box-shadow: inset 0 0px 2px 0px var(--shadow-color);
+}
+.command-bar:focus-visible,
+.command-bar input:focus-visible {
+    outline: none;
+}
+
+.command-bar ul {
+    max-height: 450px;
+    overflow-y: auto;
+    padding: 4px;
+    margin: 0;
+    max-height: 50vh;
+}
+
+.command-bar li {
+    content-visibility: auto; /* major perf boost if supported */
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+    user-select: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    align-items: center;
+    line-height: 1.2;
+    height: 30px;
+    position: relative;
+}
+.command-bar li:hover {
+    background-color: #0231;
+}
+.command-bar li.command-bar-selected {
+    background-color: var(--suggestion-highlight-color);
+    color: var(--dark-tooltip-text-color);
+}
+.command-bar li.command-bar-selected kbd {
+    color: initial;
+}
+li.command-bar-recently-used:not(:has(+ li.command-bar-recently-used))::after {
+    /* line after the last recently-used item */
+    content: "";
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    bottom: 0;
+    height: 1px;
+    background: var(--border-color);
+}
+.command-bar-no-results {
+    text-align: center;
+    padding-bottom: 4px;
+    padding-bottom: 8px;
+    color: var(--passive-text-color);
+}

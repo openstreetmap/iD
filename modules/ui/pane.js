@@ -26,6 +26,13 @@ export function uiPane(id, context) {
     pane.label = function(val) {
         if (!arguments.length) return _label;
         _label = val;
+        context.commands.register({
+            categoryId: 'panels',
+            id: `panel-${id}`,
+            label: t(val.stringId),
+            keyboardShortcut: { shortcuts: [_key] },
+            action: () => pane.togglePane(),
+        });
         return pane;
     };
 

@@ -1477,6 +1477,13 @@ en:
       label: "Browse files"
     no_geolocation:
       tooltip: Image without geolocation cannot be located on the map
+  command-bar:
+    key: K
+    placeholder: Run a command…
+    help:
+      navigate_list: to navigate
+      execute: to use
+      exit: to exit
   note:
     note: Note
     title: Edit note
@@ -2496,6 +2503,7 @@ en:
         save: "Save changes"
     tools:
       title: "Tools"
+      command-bar: Open the Command Bar
       info:
         title: "Information"
         all: "Toggle all information panels"
