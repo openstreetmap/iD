@@ -22,7 +22,8 @@ export function uiSectionPrivacy(context) {
 
       let options = [
       { key: 'preferences.privacy.icons.wikimedia', label: 'Wikimedia icons' },
-      { key: 'preferences.privacy.icons.facebook', label: 'Facebook icons' }
+      { key: 'preferences.privacy.icons.facebook', label: 'Facebook icons' },
+      { key: 'preferences.privacy.icons.other', label: 'Other third-party icons' }
       ];
 
      let thirdPartyIconsEnter = selection.select('.privacy-options-list')
@@ -73,6 +74,7 @@ export function uiSectionPrivacy(context) {
 
     prefs.onChange('preferences.privacy.icons.wikimedia', section.reRender);
     prefs.onChange('preferences.privacy.icons.facebook', section.reRender);
+    prefs.onChange('preferences.privacy.icons.other', section.reRender);
 
     return section;
 }
