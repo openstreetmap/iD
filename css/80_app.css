@@ -408,6 +408,11 @@ button.action:focus,
 button.action:active {
     background: var(--link-focus-color);
 }
+.buttons .button:focus-visible {
+  outline: none !important;
+  border: 3px solid #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.8) !important;
+}
 button.secondary-action {
     background: var(--bg-color-3);
     font-weight: bold;
