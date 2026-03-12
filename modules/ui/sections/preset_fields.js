@@ -15,7 +15,7 @@ export function uiSectionPresetFields(context) {
         .label(() => t.append('inspector.fields'))
         .disclosureContent(renderDisclosureContent);
 
-    var dispatch = d3_dispatch('change', 'revert');
+    var dispatch = d3_dispatch('change', 'revert', 'expandSubtag');
     var formFields = uiFormFields(context);
     var _state;
     var _fieldsArr;
@@ -105,6 +105,9 @@ export function uiSectionPresetFields(context) {
                     })
                     .on('revert', function(keys) {
                         dispatch.call('revert', field, keys);
+                    })
+                    .on('expandSubtag', function() {
+                        dispatch.call('expandSubtag', this);
                     });
             });
         }

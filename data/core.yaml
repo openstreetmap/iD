@@ -770,6 +770,13 @@ en:
     add_fields: "Add field:"
     lock:
       suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "Tags" section.'
+    subtag:
+      check_date: Additional related tag – when this was last verified (so you can check it more easily).
+      note_desc: Additional related tags – notes or descriptions (so you can check them more easily).
+      source: Additional related tag – source of this value (so you can check it more easily).
+      conditional: Additional related tag – conditional value, e.g. weather or time (so you can check it more easily).
+      numeric: Tags with numeric postfix (e.g. 1, 2, 3) for this key (so you can check them more easily).
+      other: Other additional related tags (so you can check them more easily).
     display_name_addr: "{housenumber} {streetOrPlace}"
     display_name_addr_with_unit: "{unit}, {housenumber} {streetOrPlace}"
     display_name:

@@ -11,6 +11,7 @@ import { uiFields } from './fields';
 import { LANGUAGE_SUFFIX_REGEX } from './fields/localized';
 import { uiTagReference } from './tag_reference';
 import { utilRebind, utilUniqueDomId } from '../util';
+import { renderSubtagIcons, renderSubtagExpanded } from './field_subtag_icons';
 
 
 export function uiField(context, presetField, entityIDs, options) {
@@ -19,10 +20,11 @@ export function uiField(context, presetField, entityIDs, options) {
         wrap: true,
         remove: true,
         revert: true,
-        info: true
+        info: true,
+        showSubtagIcons: true
     }, options);
 
-    var dispatch = d3_dispatch('change', 'revert');
+    var dispatch = d3_dispatch('change', 'revert', 'expandSubtag');
     var field = Object.assign({}, presetField);   // shallow copy
     field.domId = utilUniqueDomId('form-field-' + field.safeid);
     var _show = options.show;
@@ -38,6 +40,11 @@ export function uiField(context, presetField, entityIDs, options) {
     }
 
     var _locked = false;
+    /**
+     * Keys of subtag categories whose editable blocks are expanded (multiple can be open).
+     * @type {Set<string>}
+     */
+    let _expandedSubtagCategories = new Set();
     var _lockedTip = uiTooltip()
         .title(() => t.append('inspector.lock.suggestion', { label: field.title }))
         .placement('bottom');
@@ -166,6 +173,12 @@ export function uiField(context, presetField, entityIDs, options) {
                 .append('span')
                 .attr('class', 'label-textannotation');
 
+            if (options.showSubtagIcons) {
+                labelEnter
+                    .append('span')
+                    .attr('class', 'subtag-icons');
+            }
+
             if (options.remove) {
                 labelEnter
                     .append('button')
@@ -246,6 +259,19 @@ export function uiField(context, presetField, entityIDs, options) {
                 }
 
                 d.impl.tags(_tags);
+
+                // Expandable sub-fields for editing subtags (top-level preset fields only)
+                if (options.showSubtagIcons) {
+                    renderSubtagExpanded(selection, {
+                        field,
+                        _tags,
+                        allKeys,
+                        _expandedSubtagCategories,
+                        entityIDs,
+                        createFieldComponent: (config, eids, opts) => uiField(context, config, eids, opts),
+                        dispatch
+                    });
+                }
             });
 
 
@@ -254,6 +280,23 @@ export function uiField(context, presetField, entityIDs, options) {
                 .classed('modified', isModified())
                 .classed('present', tagsContainFieldKey());
 
+
+            // Subtag icons: show category icons only on top-level preset fields
+            if (options.showSubtagIcons) {
+                renderSubtagIcons(container, {
+                    field,
+                    _tags,
+                    allKeys,
+                    _expandedSubtagCategories,
+                    dispatch
+                }, function (categoryKey) {
+                    if (_expandedSubtagCategories.has(categoryKey)) {
+                        _expandedSubtagCategories.delete(categoryKey);
+                    } else {
+                        _expandedSubtagCategories.add(categoryKey);
+                    }
+                });
+            }
 
             // show a tip and lock icon if the field is locked
             var annotation = container.selectAll('.field-label .label-textannotation');

@@ -1478,6 +1478,64 @@ button.preset-reset .label.flash-bg {
     fill: var(--text-color);
 }
 
+/* Subtag category icons – same as remove/revert buttons in label row */
+.field-label .subtag-icons {
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 0 0 auto;
+    align-items: stretch;
+}
+.field-label .subtag-icon {
+    display: inline-block;
+}
+.field-label .subtag-icon .icon {
+    width: 14px;
+    height: 14px;
+}
+.field-label .subtag-icon.active,
+.field-label .tag-reference-button.active {
+    background-color: var(--active-bg-color);
+}
+.field-label .subtag-icon.active .icon,
+.field-label .tag-reference-button.active .icon {
+    opacity: 1;
+}
+
+/* Wrapper around all expanded subtag fields (grouping + rounded border) */
+.subtag-expanded-outer {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 10px;
+    padding: 8px 10px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--fill-secondary);
+}
+.subtag-expanded-outer:last-child {
+    margin-bottom: 0;
+}
+/* One section per expanded category inside the outer wrapper */
+.subtag-expanded-wrap {
+    margin-top: 8px;
+}
+.subtag-expanded-wrap:first-child {
+    margin-top: 0;
+}
+/* Each row is a full preset field (wrap-form-field) – same as sidebar */
+.subtag-expanded-row {
+    margin-top: 6px;
+}
+.subtag-expanded-row:first-child {
+    margin-top: 0;
+}
+.subtag-expanded-outer .form-field {
+    margin-bottom: 0;
+}
+.subtag-expanded-outer .wrap-form-field:last-child .form-field {
+    margin-bottom: 0;
+}
+
 .field-label .modified-icon,
 .field-label .remove-icon,
 .field-label .remove-icon-multilingual {
