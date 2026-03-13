@@ -507,6 +507,13 @@ export function validationCrossingWays(context) {
                     title: t.append('issues.fix.reposition_features.title')
                 }));
 
+                if (featureType1 === 'building' || featureType2 === 'building') {
+                    // if the validation is about overlapping buildings:
+                    // show "reposition features" suggestion first, as that is most often
+                    // most sensible fix for those errors, see #11329
+                    fixes.unshift(fixes.pop());
+                }
+
                 return fixes;
             }
         });
