@@ -44,6 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Change labeling of route relation to show icons, `ref` and route colours ([#11052])
 * Render the `turnout_side` of railway switches ([#11944], thanks [@hlfan])
 * Show descriptions of preset field _options_ directly in the combobox dropdown menu in slightly smaller font size ([#11876], thanks [@Sembauke])
+* Render "outside" side of guardrails with small dots ([#9594])
 #### :scissors: Operations
 * Show a preview of the result of some geometry operations while the respective button in the edit menu is hovered ([#11778])
 #### :camera: Street-Level
@@ -70,6 +71,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9183]: https://github.com/openstreetmap/iD/issues/9183
 [#9272]: https://github.com/openstreetmap/iD/issues/9272
 [#9545]: https://github.com/openstreetmap/iD/pull/9545
+[#9594]: https://github.com/openstreetmap/iD/issues/9594
 [#9888]: https://github.com/openstreetmap/iD/pull/9888
 [#9903]: https://github.com/openstreetmap/iD/pull/9903
 [#10904]: https://github.com/openstreetmap/iD/pull/10904
