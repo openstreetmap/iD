@@ -5,11 +5,9 @@ import { select as d3_select } from 'd3-selection';
 import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
-import { uiConfirm } from '../confirm';
 import { svgIcon } from '../../svg/icon';
 import { uiCmd } from '../cmd';
 import { rendererBackgroundSource } from '../../renderer/background_source';
-import { CUSTOM_ID_PREFIX } from '../../renderer/background';
 import { uiSettingsCustomBackground } from '../settings/custom_background';
 import { uiMapInMap } from '../map_in_map';
 import { uiSection } from '../section';
@@ -17,8 +15,6 @@ import { uiSection } from '../section';
 export function uiSectionBackgroundList(context) {
 
     var _backgroundList = d3_select(null);
-
-    var _customList = d3_select(null);
 
     var _settingsCustomBackground = uiSettingsCustomBackground(context)
         .on('change', customChanged);
@@ -29,11 +25,11 @@ export function uiSectionBackgroundList(context) {
         var source = rendererBackgroundSource.Custom(settings.id, settings.name, settings.template);
         context.background().addCustomSource(source);
 
-        // Re-render the custom list
-        drawCustomListItems(_customList);
+        // Re-render the background list to include the new/updated custom source
+        section.reRender();
 
         // Select the newly added/edited custom background
-        chooseCustomBackground(settings);
+        chooseBackground(source);
     }
 
     var section = uiSection('background-list', context)
@@ -56,37 +52,20 @@ export function uiSectionBackgroundList(context) {
             .attr('dir', 'auto')
             .merge(container);
 
-        var customHeader = selection.selectAll('.custom-backgrounds-header')
+        var addCustomRow = selection.selectAll('.layer-list-add-custom')
             .data([0]);
 
-        customHeader.enter()
-            .append('div')
-            .attr('class', 'custom-backgrounds-header')
-            .append('span')
-            .call(t.append('background.custom_backgrounds'));
-
-        var customContainer = selection.selectAll('.layer-custom-background-list')
-            .data([0]);
-
-        _customList = customContainer.enter()
+        addCustomRow.enter()
             .append('ul')
-            .attr('class', 'layer-list layer-custom-background-list')
-            .attr('dir', 'auto')
-            .merge(customContainer);
-
-        drawCustomListItems(_customList);
-
-        var addCustomButton = selection.selectAll('.add-custom-background')
-            .data([0]);
-
-        addCustomButton.enter()
-            .append('button')
-            .attr('class', 'add-custom-background')
+            .attr('class', 'layer-list layer-list-add-custom')
+            .append('li')
+            .attr('class', 'layer-custom')
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 editCustom();
             })
-            .call(t.append('background.add_custom'));
+            .append('label')
+            .call(t.append('background.custom'));
 
         // add minimap toggle below list
         var bgExtrasListEnter = selection.selectAll('.bg-extras-list')
@@ -180,7 +159,7 @@ export function uiSectionBackgroundList(context) {
             .call(drawListItems, 'radio', function(d3_event, d) {
                 chooseBackground(d);
             }, function(d) {
-                return !d.isHidden() && !d.overlay && !(d.id && d.id.startsWith(CUSTOM_ID_PREFIX));
+                return !d.isHidden() && !d.overlay;
             });
     }
 
@@ -301,131 +280,6 @@ export function uiSectionBackgroundList(context) {
         context.background().baseLayerSource(d);
     }
 
-    function drawCustomListItems(layerList) {
-        var customSources;
-        try {
-            customSources = JSON.parse(prefs('background-custom-templates') || '[]');
-        } catch {
-            customSources = [];
-        }
-
-        var layerLinks = layerList.selectAll('li')
-            .data(customSources, function(d) { return d.id; });
-
-        layerLinks.exit()
-            .remove();
-
-        var enter = layerLinks.enter()
-            .append('li')
-            .attr('class', 'layer-custom');
-
-        var label = enter.append('label');
-
-        label.append('input')
-            .attr('type', 'radio')
-            .attr('name', 'background-layer')
-            .attr('value', function(d) { return d.id; })
-            .on('change', function(d3_event, d) {
-                chooseCustomBackground(d);
-            });
-
-        label.append('span')
-            .text(function(d) { return d.name || t('background.custom'); });
-
-        // Edit button
-        enter.append('button')
-            .attr('class', 'layer-browse')
-            .call(uiTooltip()
-                .title(() => t.append('background.edit_custom'))
-                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', function(d3_event, d) {
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-                editCustom(d);
-            })
-            .call(svgIcon('#iD-icon-edit'));
-
-        enter.append('button')
-            .attr('class', 'layer-delete')
-            .call(uiTooltip()
-                .title(() => t.append('background.delete_custom'))
-                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', function(d3_event, d) {
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-                deleteCustom(d.id);
-            })
-            .call(svgIcon('#iD-icon-close'));
-    }
-
-
-    function chooseCustomBackground(d) {
-        var source = context.background().findSource(d.id);
-        if (source) {
-            var previousBackground = context.background().baseLayerSource();
-            prefs('background-last-used-toggle', previousBackground.id);
-            prefs('background-last-used', d.id);
-            context.background().baseLayerSource(source);
-        }
-    }
-
-
-    function deleteCustom(customId) {
-        var modal = uiConfirm(context.container());
-
-        modal.select('.modal-section.header')
-            .append('h3')
-            .text(t('confirm.delete_custom_background'));
-
-        modal.okButton();
-
-        // Add a cancel button
-        var buttonSection = modal.select('.modal-section.buttons');
-        buttonSection
-            .insert('button', '.ok-button')
-            .attr('class', 'button cancel-button secondary-action')
-            .call(t.append('confirm.cancel'))
-            .on('click.cancel', function() {
-                modal.close();
-            });
-
-        modal.select('.ok-button')
-            .on('click.confirm', function() {
-                // If the deleted source is currently active, switch to a safe default
-                var currentSource = context.background().baseLayerSource();
-                if (currentSource && currentSource.id === customId) {
-                    context.background().baseLayerSource(
-                        context.background().findSource('Bing') ||
-                        context.background().findSource('none')
-                    );
-                }
-
-                // Remove from preferences
-                let customTemplates;
-                try {
-                    customTemplates = JSON.parse(prefs('background-custom-templates') || '[]');
-                } catch {
-                    customTemplates = [];
-                }
-                customTemplates = customTemplates.filter(function (entry) {
-                    return entry.id !== customId;
-                });
-                prefs('background-custom-templates', JSON.stringify(customTemplates));
-
-                // Remove from in-memory imagery index
-                context.background().removeCustomSource(customId);
-
-                // Re-render the custom list and update selections
-                drawCustomListItems(_customList);
-                _backgroundList.call(updateLayerSelections);
-
-                modal.close();
-            });
-    }
-
-
     function editCustom(customData) {
         context.container()
             .call(_settingsCustomBackground, customData);
@@ -435,7 +289,6 @@ export function uiSectionBackgroundList(context) {
     context.background()
         .on('change.background_list', function() {
             _backgroundList.call(updateLayerSelections);
-            _customList.call(updateLayerSelections);
         });
 
     context.map()
