@@ -47,6 +47,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render "outside" side of guardrails with small dots ([#9594])
 #### :scissors: Operations
 * Show a preview of the result of some geometry operations while the respective button in the edit menu is hovered ([#11778])
+* Preserve tagged nodes from being moved around too much when circularizing a feature ([#8265])
 #### :camera: Street-Level
 * Show username of Mapilio photos ([#9903], thanks [@sezerbozbiyik])
 #### :white_check_mark: Validation
@@ -68,6 +69,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Use JSON endpoints for (almost) all OSM APIs ([#11661], thanks [@k-yle])
 
 
+[#8265]: https://github.com/openstreetmap/iD/issues/8265
 [#9155]: https://github.com/openstreetmap/iD/issues/9155
 [#9183]: https://github.com/openstreetmap/iD/issues/9183
 [#9272]: https://github.com/openstreetmap/iD/issues/9272
