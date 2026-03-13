@@ -13,7 +13,10 @@ export function uiSectionPhotoOverlays(context) {
     let _savedLayers = [];
     let _layersHidden = false;
     const _streetLayerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio', 'vegbilder', 'panoramax'];
-
+    const _mapillaryChildLayerIDs = [
+    'mapillary-map-features',
+    'mapillary-signs'
+];
     var settingsLocalPhotos = uiSettingsLocalPhotos(context)
         .on('change',  localPhotosChanged);
 
@@ -434,7 +437,20 @@ export function uiSectionPhotoOverlays(context) {
      * @param {*} which Id of the selected layer
      */
     function toggleLayer(which) {
+        if (which === 'mapillary') {
+        const enabled = !showsLayer('mapillary');
+        setLayer('mapillary', enabled);
+
+        _mapillaryChildLayerIDs.forEach(id => {
+            setLayer(id, enabled);
+        });
+        return;
+        }
         setLayer(which, !showsLayer(which));
+        if (_mapillaryChildLayerIDs.includes(which)) {
+        const allEnabled = _mapillaryChildLayerIDs.every(id => showsLayer(id));
+        setLayer('mapillary', allEnabled);
+    }
     }
 
     /**
