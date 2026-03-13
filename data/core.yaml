@@ -91,8 +91,8 @@ en:
     copy:
       title: Copy
       description:
-        one: Set this feature for pasting.
-        other: Set these features for pasting.
+        one: Copy this feature to paste it later.
+        other: Copy these features to paste them later.
       annotation:
         one: Copied a feature.
         other: "Copied {n} features."
