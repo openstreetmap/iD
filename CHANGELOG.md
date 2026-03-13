@@ -53,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Make wording of fix for _overlapping features_ validator less ambiguous ([#9888], thanks [@k-yle])
 * Skip `disconnected_way` validation for Golf Paths ([#11863], thanks [@Kayd-06])
 * Also suggest to remove deprecated tag when the object already has the corresponding new tag ([#9272])
+* Add explanation how to fix "point should be vertex" validation warning ([#10958])
 #### :bug: Bugfixes
 * Fix the sorting of tag values when multiple objects' tags are combined in `utilCombinedTags` ([#11932], thanks [@JaiswalShivang])
 * Don't change the value of `railway:turnout_side` when reversing a railway track ([#11645])
@@ -75,6 +76,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9888]: https://github.com/openstreetmap/iD/pull/9888
 [#9903]: https://github.com/openstreetmap/iD/pull/9903
 [#10904]: https://github.com/openstreetmap/iD/pull/10904
+[#10958]: https://github.com/openstreetmap/iD/issues/10958
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
 [#11645]: https://github.com/openstreetmap/iD/pull/11645
 [#11661]: https://github.com/openstreetmap/iD/pull/11661

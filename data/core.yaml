@@ -2063,6 +2063,8 @@ en:
         title: Remove the tags
       remove_the_name:
         title: Remove the name
+      reposition_point_to_vertex:
+        title: Move the point onto a line
       reposition_features:
         title: Reposition the features
       reverse_feature:
