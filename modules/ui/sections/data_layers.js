@@ -405,6 +405,7 @@ export function uiSectionDataLayers(context) {
                 .placement('top')
             );
 
+
         historyPanelLabelEnter
             .append('input')
             .attr('type', 'checkbox')

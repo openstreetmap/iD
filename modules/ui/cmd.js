@@ -14,14 +14,14 @@ export var uiCmd = function (code) {
     if (detected.os === 'win') {
         if (code === '⌘⇧Z') return 'Ctrl+Y';
     }
-
+    var mac = (detected.os === 'mac');
     var result = '',
         replacements = {
-            '⌘': 'Ctrl',
-            '⇧': 'Shift',
-            '⌥': 'Alt',
-            '⌫': 'Backspace',
-            '⌦': 'Delete'
+            '⌘': mac ? '⌘ '  : t('shortcuts.key.ctrl'),
+            '⇧': mac ? '⇧ '  : t('shortcuts.key.shift'),
+            '⌥': mac ? '⌥ '  : t('shortcuts.key.alt'),
+            '⌫': mac ? '⌫ '  : t('shortcuts.key.backspace'),
+            '⌦': mac ? '⌦ '  : t('shortcuts.key.del'),
         };
 
     for (var i = 0; i < code.length; i++) {
@@ -36,12 +36,14 @@ export var uiCmd = function (code) {
 };
 
 
+
 // return a display-focused string for a given keyboard code
 uiCmd.display = function(code) {
     if (code.length !== 1) return code;
 
     var detected = utilDetect();
     var mac = (detected.os === 'mac');
+
     var replacements = {
         '⌘': mac ? '⌘ ' + t('shortcuts.key.cmd')    : t('shortcuts.key.ctrl'),
         '⇧': mac ? '⇧ ' + t('shortcuts.key.shift')  : t('shortcuts.key.shift'),
