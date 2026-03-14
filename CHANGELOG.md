@@ -57,6 +57,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add explanation how to fix "point should be vertex" validation warning ([#10958])
 * Suggest to "reposition features" before other fixes when the validator found overlapping buildings ([#11329])
 #### :bug: Bugfixes
+* Fix background list tooltip showing "undefined" for some imagery layers ([#12013])
 * Fix the sorting of tag values when multiple objects' tags are combined in `utilCombinedTags` ([#11932], thanks [@JaiswalShivang])
 * Don't change the value of `railway:turnout_side` when reversing a railway track ([#11645])
 * Fix a bug where the _squaring_ operation would remove a whole corner if it had duplicate vertices (same coordinates, but different node ids) at that point ([#9155])
@@ -92,6 +93,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11952]: https://github.com/openstreetmap/iD/pull/11952
 [#11965]: https://github.com/openstreetmap/iD/pull/11965
 [#11976]: https://github.com/openstreetmap/iD/pull/11976
+[#12013]: https://github.com/openstreetmap/iD/issues/12013
 [@Shrinks99]: https://github.com/Shrinks99
 [@Vectorial1024]: https://github.com/Vectorial1024
 [@Oni-DOS]: https://github.com/Oni-DOS

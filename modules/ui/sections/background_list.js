@@ -138,10 +138,8 @@ export function uiSectionBackgroundList(context) {
     function setTooltips(selection) {
         selection.each(function(d, i, nodes) {
             var item = d3_select(this).select('label');
-            var span = item.select('span');
             var placement = (i < nodes.length / 2) ? 'bottom' : 'top';
             var hasDescription = d.hasDescription();
-            var isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
 
             item.call(uiTooltip().destroyAny);
 
@@ -151,10 +149,13 @@ export function uiSectionBackgroundList(context) {
                     .title(() => t.append('background.switch'))
                     .keys([uiCmd('⌘' + t('background.key'))])
                 );
-            } else if (hasDescription || isOverflowing) {
+            } else {
                 item.call(uiTooltip()
                     .placement(placement)
-                    .title(() => hasDescription ? d.description() : d.label())
+                    .title(() => {
+                        var text = (hasDescription ? d.descriptionText() : d.name());
+                        return (text !== null && text !== undefined && text !== '') ? text : d.id;
+                    })
                 );
             }
         });
