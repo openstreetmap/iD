@@ -4,6 +4,7 @@ import { select as d3_select } from 'd3-selection';
 import { uiCombobox } from '../combobox';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 import { t } from '../../core/localizer';
+import { formatTag } from './tag_title';
 
 export function uiFieldAccess(field, context) {
     var dispatch = d3_dispatch('change');
@@ -98,17 +99,16 @@ export function uiFieldAccess(field, context) {
             options.splice(options.length - 4, 0, 'dismount');
         }
 
-        var stringsField = field.resolveReference('stringsCrossReference');
+        const stringsField = field.resolveReference('stringsCrossReference');
         return options.map(function(option) {
             return {
-                title: stringsField.t('options.' + option + '.description'),
+                title: formatTag(type, option),
                 description: stringsField.hasTextForStringId('options.' + option + '.description')
                     ? stringsField.t('options.' + option + '.description') : undefined,
                 value: option
             };
         });
     };
-
 
     const placeholdersByTag = {
         highway: {
