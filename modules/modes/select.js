@@ -27,7 +27,6 @@ import {
     utilEntitySelector, utilKeybinding, utilTotalExtent, utilGetAllNodes
 } from '../util';
 
-
 export function modeSelect(context, selectedIDs) {
     var mode = {
         id: 'select',

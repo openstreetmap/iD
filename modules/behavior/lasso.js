@@ -6,7 +6,6 @@ import { uiLasso } from '../ui/lasso';
 import { utilArrayIntersection } from '../util/array';
 import { utilGetAllNodes } from '../util/util';
 
-
 export function behaviorLasso(context) {
 
     // use pointer events on supported platforms; fallback to mouse events
@@ -102,7 +101,7 @@ export function behaviorLasso(context) {
         }
 
 
-        function pointerup() {
+        function pointerup(e) {
             d3_select(window)
                 .on(_pointerPrefix + 'move.lasso', null)
                 .on(_pointerPrefix + 'up.lasso', null);
@@ -111,9 +110,16 @@ export function behaviorLasso(context) {
 
             var ids = lassoed();
             lasso.close();
-
             if (ids.length) {
-                context.enter(modeSelect(context, ids));
+
+                let newIDs = ids;
+
+                if (e && e.shiftKey) {
+                    const current = context.selectedIDs();
+                    newIDs = Array.from(new Set([...current, ...ids]));
+                }
+
+                context.enter(modeSelect(context, newIDs));
             }
         }
 
