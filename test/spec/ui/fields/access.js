@@ -146,4 +146,43 @@ describe('iD.uiFieldAccess', function() {
         expect(selection.selectAll('.preset-input-access-motor_vehicle').attr('placeholder')).to.equal(iD.localizer.t('inspector.multiple_values'));
     });
 
+    it('shows access key when present in tags but not in default list (e.g. motorcar)', function() {
+        var access = iD.uiFieldAccess(field, context);
+        selection.call(access);
+        expect(selection.selectAll('.preset-access-motorcar').size()).to.equal(0);
+
+        access.tags({ highway: 'residential', motorcar: 'no' });
+        expect(selection.selectAll('.preset-access-motorcar').size()).to.equal(1);
+        expect(selection.selectAll('.preset-input-access-motorcar').size()).to.equal(1);
+    });
+
+    it('orders effective keys by canonical order (motorcar after motor_vehicle)', function() {
+        var access = iD.uiFieldAccess(field, context);
+        selection.call(access);
+        access.tags({ highway: 'residential', motorcar: 'destination', vehicle: 'yes' });
+
+        var keys = field.effectiveKeys;
+        var motorVehicleIdx = keys.indexOf('motor_vehicle');
+        var motorcarIdx = keys.indexOf('motorcar');
+        expect(motorVehicleIdx).to.be.at.least(0);
+        expect(motorcarIdx).to.be.at.least(0);
+        expect(motorcarIdx).to.be.above(motorVehicleIdx);
+    });
+
+    it('effectiveKeys contains default keys and keys present in tags', function() {
+        var access = iD.uiFieldAccess(field, context);
+        selection.call(access);
+        var keysWithoutTags = field.effectiveKeys;
+        expect(keysWithoutTags).to.include('access');
+        expect(keysWithoutTags).to.include('foot');
+        expect(keysWithoutTags).to.include('motor_vehicle');
+        expect(keysWithoutTags).to.include('bicycle');
+        expect(keysWithoutTags).to.include('horse');
+        expect(keysWithoutTags).not.to.include('motorcar');
+
+        access.tags({ highway: 'residential', motorcar: 'no' });
+        var keysWithMotorcar = field.effectiveKeys;
+        expect(keysWithMotorcar).to.include('motorcar');
+    });
+
 });

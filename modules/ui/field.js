@@ -66,6 +66,8 @@ export function uiField(context, presetField, entityIDs, options) {
 
 
     function allKeys() {
+        // The access field shows a dynamic key list at runtime and sets field.effectiveKeys
+        if (field.effectiveKeys && field.effectiveKeys.length) return field.effectiveKeys;
         return field.allKeys();
     }
 

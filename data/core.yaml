@@ -2290,6 +2290,66 @@ en:
     coordinate_pair: "{latitude}, {longitude}"
     # translate the letters but leave the format the same
     year_month_day: "YYYY-MM-DD"
+  fields:
+    access:
+      types:
+        access: All
+        foot: Foot
+        motor_vehicle: Motor Vehicles
+        bicycle: Bicycles
+        horse: Horses
+        dog: Dog
+        ski: Ski
+        "ski:nordic": Nordic skiing
+        "ski:alpine": Alpine skiing
+        "ski:telemark": Telemark skiing
+        inline_skates: Inline skates
+        portage: Portage
+        vehicle: Vehicle
+        electric_bicycle: Electric bicycle
+        mtb: Mountain bike
+        cargo_bike: Cargo bike
+        kick_scooter: Kick scooter
+        carriage: Carriage
+        cycle_rickshaw: Cycle rickshaw
+        hand_cart: Hand cart
+        trailer: Trailer
+        caravan: Caravan
+        electric_vehicle: Electric vehicle
+        motorcycle: Motorcycle
+        moped: Moped
+        speed_pedelec: Speed pedelec
+        mofa: Mofa
+        small_electric_vehicle: Small electric vehicle
+        motorcar: Cars
+        motorhome: Motorhome
+        tourist_bus: Tourist bus
+        coach: Coach
+        goods: Goods vehicle
+        hgv: Heavy goods vehicle
+        hgv_articulated: Articulated HGV
+        bdouble: B-double
+        agricultural: Agricultural
+        auto_rickshaw: Auto rickshaw
+        nev: Neighborhood electric vehicle
+        golf_cart: Golf cart
+        microcar: Microcar
+        atv: ATV
+        ohv: Off-highway vehicle
+        snowmobile: Snowmobile
+        psv: Public service vehicle
+        bus: Bus
+        taxi: Taxi
+        minibus: Minibus
+        share_taxi: Share taxi
+        hov: High-occupancy vehicle
+        carpool: Carpool
+        car_sharing: Car sharing
+        emergency: Emergency vehicle
+        hazmat: Hazardous materials
+        "hazmat:water": Hazardous materials (water)
+        school_bus: School bus
+        disabled: Disabled
   wikidata:
     identifier: "Identifier"
     label: "Label"
