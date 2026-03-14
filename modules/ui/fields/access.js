@@ -98,13 +98,17 @@ export function uiFieldAccess(field, context) {
             options.splice(options.length - 4, 0, 'dismount');
         }
 
-        var stringsField = field.resolveReference('stringsCrossReference');
+        const stringsField = field.resolveReference('stringsCrossReference');
         return options.map(function(option) {
+            const isRawKey = option === 'unknown';
+            const description = stringsField.hasTextForStringId('options.' + option + '.description')
+                ? stringsField.t('options.' + option + '.description') : undefined;
+            const title = isRawKey ? option : stringsField.t('options.' + option + '.description');
             return {
-                title: stringsField.t('options.' + option + '.description'),
-                description: stringsField.hasTextForStringId('options.' + option + '.description')
-                    ? stringsField.t('options.' + option + '.description') : undefined,
-                value: option
+                title: title,
+                description: description,
+                value: option,
+                klass: isRawKey ? 'raw-option' : ''
             };
         });
     };

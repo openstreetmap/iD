@@ -2486,8 +2486,11 @@ div.combobox:has(.has-description) {
     white-space: normal;
     padding-top: 2px;
 }
-.combobox .combobox-option.raw-option {
+.combobox .combobox-option.raw-option .combobox-option-label {
     font-family: monospace;
+    color: var(--text-color);
+}
+.combobox .combobox-option.raw-option .combobox-option-description {
     color: var(--text-color);
 }
 
