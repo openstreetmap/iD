@@ -22,6 +22,7 @@ import {
     utilHighlightEntities,
     utilNoAuto
 } from '../util';
+const tagRegex = /^([a-zA-Z0-9:_-]+)=([a-zA-Z0-9:_-]+)$/;
 
 
 export const idMatch = q => {
@@ -103,7 +104,7 @@ export function uiFeatureList(context) {
             if (d3_event.keyCode === 13 && // ↩ Return
                 q.length &&
                 items.size()) {
-                const tagMatch = q.match(/^([a-zA-Z0-9:_-]+)=([a-zA-Z0-9:_-]+)$/);
+                const tagMatch = q.match(tagRegex);
                 if (tagMatch) {
                     const ids = [];
 
@@ -145,7 +146,7 @@ export function uiFeatureList(context) {
             var graph = context.graph();
             var visibleCenter = context.map().extent().center();
             var q = search.property('value').toLowerCase().trim();
-            const tagMatch = q.match(/^([a-zA-Z0-9:_-]+)=([a-zA-Z0-9:_-]+)$/);
+            const tagMatch = q.match(tagRegex);
 
             if (!q) return [];
 
