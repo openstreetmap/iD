@@ -105,22 +105,19 @@ export function uiFeatureList(context) {
                 items.size()) {
                 const tagMatch = q.match(/^([a-zA-Z0-9:_-]+)=([a-zA-Z0-9:_-]+)$/);
 
-               if (tagMatch) {
+             if (tagMatch) {
                 const ids = [];
-
                 items.each(function(d) {
-                if (d.entity) {
-                    ids.push(d.entity.id);
-                }
+                 if (d.entity) { 
+                    ids.push(d.entity.id);}
                 });
-
                 if (ids.length) {
                   context.enter(modeSelect(context, ids));
                 }
-                  return;
-                }
-                click(d3_event, items.datum());
-               }
+                return;
+             }
+            click(d3_event, items.datum());
+            }
         }
 
 
@@ -208,8 +205,8 @@ export function uiFeatureList(context) {
           const extent = context.map().extent();
 
         for (let entityID in allEntities) {
-           let entity = allEntities[entityID];
-           if (!entity || !entity.tags) continue;
+         let entity = allEntities[entityID];
+         if (!entity || !entity.tags) continue;
          if (entity.tags[key] === value) {
            if (!extent.intersects(entity.extent(graph))) continue;
 
@@ -219,7 +216,7 @@ export function uiFeatureList(context) {
             geometry: entity.geometry(graph),
             type: utilDisplayType(entity.id),
             name: utilDisplayName(entity) || key + '=' + value
-           } );}
+           });}
 
          if (tagResults.length > 100) break;
         }}
