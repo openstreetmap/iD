@@ -112,7 +112,7 @@ export function behaviorLasso(context) {
             lasso.close();
             if (ids.length) {
 
-                let newIDs = ids;
+                var newIDs = ids;
 
                 if (e && e.shiftKey) {
                     const current = context.selectedIDs();
