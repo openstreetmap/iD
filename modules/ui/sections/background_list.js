@@ -21,9 +21,35 @@ export function uiSectionBackgroundList(context) {
 
 
     function customChanged(settings) {
+        if (!settings) return;
+
+        var template = (settings.template || '').trim();
+        if (!template) return;
+
+        var id = settings.id;
+        if (!id) {
+            var customTemplates = [];
+            try {
+                customTemplates = JSON.parse(prefs('background-custom-templates') || '[]');
+            } catch {
+                customTemplates = [];
+            }
+
+            // New entries are persisted before dispatching change, so resolve the generated id from prefs.
+            for (var i = customTemplates.length - 1; i >= 0; i--) {
+                var entry = customTemplates[i];
+                if (entry && entry.template === template) {
+                    id = entry.id;
+                    break;
+                }
+            }
+        }
+        if (!id) return;
+
         // Create or update the background source in _imageryIndex
-        var source = rendererBackgroundSource.Custom(settings.id, settings.name, settings.template);
+        var source = rendererBackgroundSource.Custom(id, settings.name || t('background.custom'), template);
         context.background().addCustomSource(source);
+        source = context.background().findSource(id) || source;
 
         // Re-render the background list to include the new/updated custom source
         section.reRender();
@@ -56,16 +82,16 @@ export function uiSectionBackgroundList(context) {
             .data([0]);
 
         addCustomRow.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-list-add-custom')
-            .append('li')
-            .attr('class', 'layer-custom')
+            .append('div')
+            .attr('class', 'layer-list-add-custom cf')
+            .append('button')
+            .attr('class', 'button fr add-custom-background')
+            .attr('type', 'button')
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 editCustom();
             })
-            .append('label')
-            .call(t.append('background.custom'));
+            .text('Add custom background');
 
         // add minimap toggle below list
         var bgExtrasListEnter = selection.selectAll('.bg-extras-list')
@@ -275,7 +301,9 @@ export function uiSectionBackgroundList(context) {
         }
 
         var previousBackground = context.background().baseLayerSource();
-        prefs('background-last-used-toggle', previousBackground.id);
+        if (previousBackground && previousBackground.id) {
+            prefs('background-last-used-toggle', previousBackground.id);
+        }
         prefs('background-last-used', d.id);
         context.background().baseLayerSource(d);
     }
