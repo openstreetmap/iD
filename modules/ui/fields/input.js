@@ -1,7 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { debounce } from 'es-toolkit/compat';
-import { isEqual } from 'es-toolkit/predicate';
 import * as countryCoder from '@rapideditor/country-coder';
 
 import { presetManager } from '../../presets';
@@ -13,6 +12,7 @@ import { cardinal } from '../../osm/node';
 import { isColorValid } from '../../osm/tags';
 import { uiLengthIndicator } from '..';
 import { uiTooltip } from '../tooltip';
+import { deepEqual } from 'fast-equals';
 
 export {
     uiFieldText as uiFieldColour,
@@ -551,7 +551,7 @@ export function uiFieldText(field, context) {
                     if (!isFinite(parsedNum)) return val; // keep unparsable values as-is
                     return parsedNum;
                 });
-                return !isEqual(inputNums, setNums);
+                return !deepEqual(inputNums, setNums);
             };
         }
 

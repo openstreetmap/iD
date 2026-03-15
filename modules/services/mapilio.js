@@ -2,10 +2,10 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
-import { isEqual } from 'es-toolkit/predicate';
 import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
+import { deepEqual } from 'fast-equals';
 
 import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } from '../util';
 import { geoExtent } from '../geo';
@@ -150,7 +150,7 @@ function loadTileDataToCache(data, tile) {
                     // see https://github.com/openstreetmap/iD/issues/10532
                     const cachedCoords = f.geometry.coordinates;
                     const featureCoords = feature.geometry.coordinates;
-                    return isEqual(cachedCoords, featureCoords);
+                    return deepEqual(cachedCoords, featureCoords);
                 })) continue;
                 cacheEntry.push(feature);
             } else {

@@ -1,4 +1,4 @@
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 
 import { geoVecEqual } from '../geo';
 import { utilArrayDifference, utilArrayUnion, utilArrayUniq } from '../util/array';
