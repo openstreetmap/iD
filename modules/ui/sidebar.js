@@ -161,11 +161,7 @@ export function uiSidebar(context) {
                 sidebar.collapse();
             });
 
-        closeButton
-            .append('svg')
-            .attr('class', 'icon')
-            .append('use')
-            .attr('href', '#iD-icon-close');
+        closeButton.text('✕');
 
         var hoverModeSelect = function(targets) {
             context.container().selectAll('.feature-list-item button').classed('hover', false);

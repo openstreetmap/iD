@@ -866,31 +866,36 @@ a.hide-toggle {
         height: 20px;
         fill: currentColor;
     }
+
     .sidebar-close-button {
         position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 9999; /* Increased to stay above all inspector elements */
-        padding: 10px;
-        background: white; /* Changed from transparent for better visibility on mobile */
-        border-radius: 50%; /* Makes it look like a clean circular button */
+        top: 0;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        background: transparent;
         border: none;
+        border-radius: 0;        
+        outline: none;           
+        -webkit-appearance: none; 
+        appearance: none;  
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Helps it pop against map data */
+        font-size: 20px;
+        color: #fff;
+        font-weight: 300;
+    }
+
+    .sidebar-close-button:hover {
+        background: rgba(255,255,255,0.1);
     }
 
     .sidebar-close-button.hide {
         display: none !important;
     }
 
-    .sidebar-close-button .icon {
-        width: 24px;
-        height: 24px;
-        fill: #333;
-    }
 }
 
 .sidebar-resizer {
