@@ -1811,8 +1811,7 @@ en:
       aeroway-waterway:
         reference: "Aeroways crossing waterways should use tunnels."
       building-building:
-        message: "Buildings should not intersect. If they are vertically stacked, please use the level tag instead of layer."
-        reference: "Buildings should not intersect. If they are vertically stacked, please use the **level** tag instead of **layer**."
+        reference: "Buildings should not intersect. Please fix the geometry of the overlapping buildings."
       building-highway:
         reference: "Highways crossing buildings should use bridges, tunnels, or different layers."
       building-railway:

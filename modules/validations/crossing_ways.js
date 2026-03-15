@@ -115,8 +115,9 @@ export function validationCrossingWays(context) {
 
         if (featureType1 === 'building' || featureType2 === 'building' ||
             taggedAsIndoor(tags1) || taggedAsIndoor(tags2)) {
-            // for building crossings, different layers are enough
-            if (layer1 !== layer2) return true;
+             // For overlapping buildings, layer=* is not a valid resolution.
+            // The geometry must be fixed instead.
+            return false;  // always warn, nothing resolves it
         }
         return false;
     }
@@ -492,8 +493,10 @@ export function validationCrossingWays(context) {
                     featureType2 === 'building')  {
 
                     // For overlapping buildings, do not suggest changing the `layer=*` tag.
-                    // Vertically stacked buildings should use `level=*` instead.
-                    if (!isBothBuildings) {
+                    // The geometry of the overlapping buildings should be fixed instead.
+                    if (!isBothBuildings &&
+                        !taggedAsIndoor(entities[0].tags) &&
+                        !taggedAsIndoor(entities[1].tags)) {
                         fixes.push(makeChangeLayerFix('higher'));
                         fixes.push(makeChangeLayerFix('lower'));
                     }
