@@ -29,7 +29,7 @@ export function uiSectionRawMembershipEditor(context) {
             return _entityIDs && _entityIDs.length;
         })
         .label(function() {
-            var parents = getSharedParentRelations();
+            var parents = getAllParentRelations();
             var gt = parents.length > _maxMemberships ? '>' : '';
             var count = gt + parents.slice(0, _maxMemberships).length;
             return t.append('inspector.title_count', { title: t('inspector.relations'), count: count });
@@ -53,26 +53,28 @@ export function uiSectionRawMembershipEditor(context) {
     /** @type {Set<string>} relations that were added after this panel was opened */
     const recentlyAdded = new Set();
 
-    function getSharedParentRelations() {
-        var parents = [];
-        for (var i = 0; i < _entityIDs.length; i++) {
-            var entity = context.graph().hasEntity(_entityIDs[i]);
-            if (!entity) continue;
+    function getAllParentRelations() {
+    var relationsMap = new Map();
 
-            if (i === 0) {
-                parents = context.graph().parentRelations(entity);
-            } else {
-                parents = utilArrayIntersection(parents, context.graph().parentRelations(entity));
-            }
-            if (!parents.length) break;
+    for (var i = 0; i < _entityIDs.length; i++) {
+        var entity = context.graph().hasEntity(_entityIDs[i]);
+        if (!entity) continue;
+
+        var parents = context.graph().parentRelations(entity);
+
+        for (var j = 0; j < parents.length; j++) {
+            var rel = parents[j];
+            relationsMap.set(rel.id, rel);   // ensures unique relations
         }
-        return parents;
     }
+
+    return Array.from(relationsMap.values());
+}
 
     function getMemberships() {
 
         var memberships = [];
-        var relations = getSharedParentRelations().slice(0, _maxMemberships);
+        var relations = getAllParentRelations().slice(0, _maxMemberships);
 
         var isMultiselect = _entityIDs.length > 1;
 
