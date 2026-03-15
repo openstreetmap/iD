@@ -1,11 +1,11 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit/compat';
 import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './helpers';
 import { services } from '../services';
 
 
 export function svgVegbilder(projection, context, dispatch) {
-  const throttledRedraw = _throttle(() => dispatch.call('change'), 1000);
+  const throttledRedraw = throttle(() => dispatch.call('change'), 1000);
   const minZoom = 14;
   const minMarkerZoom = 16;
   const minViewfieldZoom = 18;

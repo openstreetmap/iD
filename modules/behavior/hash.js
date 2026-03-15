@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit/compat';
 
 import { select as d3_select } from 'd3-selection';
 
@@ -122,8 +122,8 @@ export function behaviorHash(context) {
         }
     }
 
-    var _throttledUpdate = _throttle(updateHashIfNeeded, 500);
-    var _throttledUpdateTitle = _throttle(function() {
+    var _throttledUpdate = throttle(updateHashIfNeeded, 500);
+    var _throttledUpdateTitle = throttle(function() {
         updateTitle(true /* includeChangeCount */);
     }, 500);
 

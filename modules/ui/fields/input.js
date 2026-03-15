@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 import * as countryCoder from '@rapideditor/country-coder';
 
 import { presetManager } from '../../presets';
@@ -12,7 +12,7 @@ import { cardinal } from '../../osm/node';
 import { isColorValid } from '../../osm/tags';
 import { uiLengthIndicator } from '..';
 import { uiTooltip } from '../tooltip';
-import { isEqual } from 'lodash-es';
+import deepEqual from 'fast-deep-equal';
 
 export {
     uiFieldText as uiFieldColour,
@@ -271,7 +271,7 @@ export function uiFieldText(field, context) {
             .append('input')
             .attr('type', 'color')
             .attr('class', 'colour-selector')
-            .on('input', _debounce(function(d3_event) {
+            .on('input', debounce(function(d3_event) {
                 d3_event.preventDefault();
                 var colour = this.value;
                 if (!isColorValid(colour)) return;
@@ -344,7 +344,7 @@ export function uiFieldText(field, context) {
                 .append('input')
                 .attr('type', 'date')
                 .attr('class', 'date-selector')
-                .on('input', _debounce(function(d3_event) {
+                .on('input', debounce(function(d3_event) {
                     d3_event.preventDefault();
                     var date = this.value;
                     if (!isDateValid(date)) return;
@@ -551,7 +551,7 @@ export function uiFieldText(field, context) {
                     if (!isFinite(parsedNum)) return val; // keep unparsable values as-is
                     return parsedNum;
                 });
-                return !isEqual(inputNums, setNums);
+                return !deepEqual(inputNums, setNums);
             };
         }
 

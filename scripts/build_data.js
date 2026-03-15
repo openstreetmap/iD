@@ -4,7 +4,7 @@ import { styleText } from 'node:util';
 import prettyStringify from 'json-stringify-pretty-compact';
 import shell from 'shelljs';
 import YAML from 'js-yaml';
-import { pull } from 'lodash-es';
+import { pull } from 'es-toolkit/compat';
 import dotenv from 'dotenv';
 import cldrTerritoryInfo from 'cldr-core/supplemental/territoryInfo.json' with { type: 'json' };
 import packageJson from '../package.json' with { type: 'json' };

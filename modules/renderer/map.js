@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle, isArray, clamp } from 'es-toolkit/compat';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolate as d3_interpolate } from 'd3-interpolate';
@@ -17,7 +17,6 @@ import { utilGetDimensions } from '../util/dimensions';
 import { utilRebind } from '../util/rebind';
 import { utilZoomPan } from '../util/zoom_pan';
 import { utilDoubleUp } from '../util/double_up';
-import { isArray, clamp } from 'lodash-es';
 
 // constants
 var TILESIZE = 256;
@@ -83,7 +82,7 @@ export function rendererMap(context) {
         });
     var _doubleUpHandler = utilDoubleUp();
 
-    var scheduleRedraw = _throttle(redraw, 750);
+    var scheduleRedraw = throttle(redraw, 750);
     // var isRedrawScheduled = false;
     // var pendingRedrawCall;
     // function scheduleRedraw() {

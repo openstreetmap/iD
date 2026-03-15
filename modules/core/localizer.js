@@ -1,4 +1,4 @@
-import { escape } from 'lodash-es';
+import { escape } from 'es-toolkit/compat';
 
 import { fileFetcher } from './file_fetcher';
 import { utilDetect } from '../util/detect';

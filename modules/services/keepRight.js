@@ -2,7 +2,7 @@ import RBush from 'rbush';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
-import { unescape } from 'lodash-es';
+import { unescape } from 'es-toolkit/compat';
 
 import { fileFetcher } from '../core/file_fetcher';
 import { geoExtent, geoVecAdd } from '../geo';

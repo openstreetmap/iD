@@ -1,4 +1,4 @@
-import { merge } from 'lodash-es';
+import { merge } from 'es-toolkit/compat';
 import { getLuma } from '../util/util';
 
 const uninterestingKeys = new Set([

@@ -5,7 +5,7 @@ import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
-import { isEqual } from 'lodash-es';
+import deepEqual from 'fast-deep-equal';
 
 import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } from '../util';
 import { geoExtent } from '../geo';
@@ -150,7 +150,7 @@ function loadTileDataToCache(data, tile) {
                     // see https://github.com/openstreetmap/iD/issues/10532
                     const cachedCoords = f.geometry.coordinates;
                     const featureCoords = feature.geometry.coordinates;
-                    return isEqual(cachedCoords, featureCoords);
+                    return deepEqual(cachedCoords, featureCoords);
                 })) continue;
                 cacheEntry.push(feature);
             } else {

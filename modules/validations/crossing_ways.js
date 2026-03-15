@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash-es';
+import deepEqual from 'fast-deep-equal';
 
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
@@ -462,7 +462,7 @@ export function validationCrossingWays(context) {
                 if (connectionTags) {
                     fixes.push(makeConnectWaysFix(this.data.connectionTags));
                     let lessLikelyConnectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph, true);
-                    if (lessLikelyConnectionTags && !isEqual(connectionTags, lessLikelyConnectionTags)) {
+                    if (lessLikelyConnectionTags && !deepEqual(connectionTags, lessLikelyConnectionTags)) {
                         fixes.push(makeConnectWaysFix(lessLikelyConnectionTags));
                     }
                 }
