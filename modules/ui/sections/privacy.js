@@ -19,7 +19,7 @@ export function uiSectionPrivacy(context) {
 
       let thirdPartyIconsEnter = selection.select('.privacy-options-list')
         .selectAll('.privacy-third-party-icons-item')
-        .data([prefs('preferences.privacy.thirdpartyicons') || 'true'])
+        .data([prefs('preferences.privacy.thirdpartyicons') || 'false'])
         .enter()
         .append('li')
         .attr('class', 'privacy-third-party-icons-item')
