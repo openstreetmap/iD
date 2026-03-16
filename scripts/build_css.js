@@ -32,7 +32,6 @@ export function buildCSS() {
         const css = fs.readFileSync('dist/iD.css', 'utf8');
         return postcss([
             autoprefixer,
-            duplicateDarkMode,
             prepend({ prefix: '.ideditor', exclude: [ /^\.ideditor(\[.*?\])*/ ] })
           ])
           .process(css, { from: 'dist/iD.css', to: 'dist/iD.css' });
@@ -60,22 +59,3 @@ function doConcat(files, output) {
     });
   });
 }
-
-
-function duplicateDarkMode() {
-  return {
-    postcssPlugin: 'duplicate-from-media',
-    Once(root) {
-      root.walkAtRules('media', atRule => {
-        if (atRule.params !== '(prefers-color-scheme: dark)') return;
-        atRule.walkRules(rule => {
-          const cloned = rule.clone();
-          rule.selector += ':not(.theme-light)';
-          cloned.selector += '.theme-dark';
-          atRule.parent.insertBefore(atRule, cloned);
-        });
-      });
-    }
-  };
-}
-duplicateDarkMode.postcss = true;

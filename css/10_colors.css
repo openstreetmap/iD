@@ -65,8 +65,7 @@
     --error-icon-color: #f00;
 }
 
-@media (prefers-color-scheme: dark) {
-    .ideditor {
+.ideditor.theme-dark {
         color-scheme: dark;
         --bg-color: #212529;
         --bg-color-2: #2b3035;
@@ -126,5 +125,4 @@
         --error-border-color: #800;
         --error-text-color: #e33;
         --error-highlight-text-color: #e66;
-    }
 }

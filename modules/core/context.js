@@ -419,7 +419,11 @@ export function coreContext() {
 
   /* Container */
   let _container = d3_select(null);
-  let _theme;
+
+  const themeQuery = window.matchMedia?.('(prefers-color-scheme: dark)');
+  themeQuery?.addEventListener?.('change', () => context.theme(themeQuery.matches ? 'dark' : 'light'));
+  let _theme = themeQuery?.matches ? 'dark' : 'light';
+
   context.container = function(val) {
     if (!arguments.length) return _container;
     _container = val;
