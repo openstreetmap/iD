@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import {
     select as d3_select
 } from 'd3-selection';
-import { omit } from 'lodash-es';
+import { omit } from 'es-toolkit/compat';
 
 import { utilRebind } from '../../util/rebind';
 import { t } from '../../core/localizer';

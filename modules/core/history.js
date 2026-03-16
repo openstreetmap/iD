@@ -434,7 +434,8 @@ export function coreHistory(context) {
                     do { permID = nrw + (++nextID[nrw]); }
                     while (baseEntities.hasOwnProperty(permID));
 
-                    copy.id = permIDs[source.id] = permID;
+                    copy.id = permID;
+                    permIDs[source.id] = permID;
                 }
                 return copy;
             }

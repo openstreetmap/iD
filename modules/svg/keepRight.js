@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit/compat';
 import { select as d3_select } from 'd3-selection';
 
 import { modeBrowse } from '../modes/browse';
@@ -9,7 +9,7 @@ let _layerEnabled = false;
 let _qaService;
 
 export function svgKeepRight(projection, context, dispatch) {
-  const throttledRedraw = _throttle(() => dispatch.call('change'), 1000);
+  const throttledRedraw = throttle(() => dispatch.call('change'), 1000);
   const minZoom = 12;
 
   let touchLayer = d3_select(null);

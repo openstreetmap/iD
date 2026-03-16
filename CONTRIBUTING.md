@@ -297,10 +297,8 @@ We write vanilla CSS with no preprocessing step. Since iD targets modern browser
 Test your code and make sure it passes.
 
 1. Go to the directory where you have checked out `iD`
-2. run `npm install`
-3. run `npm test` to see whether your tests pass or fail.
-
-Note that in order to run the tests, Chrome needs to be installed on the system. Chromium can be used as an alternative, but requires setting the environment variable `CHROME_BIN` to the corresponding executable (e.g. `export CHROME_BIN="`which chromium`"`).
+2. run `npm clean-install`
+3. run `npm test` to see whether your tests pass or fail. Note that this command will run constantly and automatically re-run tests if source or test files are modified – if you want to run tests only once, use `npm run test:once` instead
 
 ### Building / Installing
 

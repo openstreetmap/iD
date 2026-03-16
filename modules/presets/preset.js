@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit/predicate';
 
 import { t } from '../core/localizer';
 import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
@@ -289,6 +289,11 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     }
 
     return tags;
+  };
+
+
+  _this.getParentPreset = function() {
+    return allPresets[_this.id.split('/').slice(0, -1).join('/')];
   };
 
 

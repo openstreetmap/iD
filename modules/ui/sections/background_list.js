@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
 import { select as d3_select } from 'd3-selection';
 
@@ -284,7 +284,7 @@ export function uiSectionBackgroundList(context) {
 
     context.map()
         .on('move.background_list',
-            _debounce(function() {
+            debounce(function() {
                 // layers in-view may have changed due to map move
                 window.requestIdleCallback(section.reRender);
             }, 1000)

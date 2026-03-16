@@ -564,8 +564,11 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                 if (way.__oneWay) return null;
 
                 isUturn = true;
-                viaNodeId = fromVertexId = toVertexId = path[1];
-                fromNodeId = toNodeId = adjacentNode(fromWayId, viaNodeId);
+                viaNodeId = path[1];
+                fromVertexId = path[1];
+                toVertexId = path[1];
+                fromNodeId = adjacentNode(fromWayId, viaNodeId);
+                toNodeId = fromNodeId;
 
             } else {
                 isUturn = false;

@@ -722,6 +722,32 @@ describe('iD.osmNode', function () {
                     { type: 'direction', angle: 91 },
                 ]);
             });
+
+            it('supports railway:turnout_side=right', () => {
+                const node1 = iD.osmNode({ id: 'n1', loc: [-1, -1] });
+                const node2 = iD.osmNode({ id: 'n2', loc: [-1, 0] });
+                const node3 = iD.osmNode({ id: 'n3', loc: [0, 0], tags: { 'railway:turnout_side': 'right' } });
+                const node4 = iD.osmNode({ id: 'n4', loc: [1, 0] });
+                const way1 = iD.osmWay({ id: 'w1', nodes: ['n1','n3'], tags: { 'railway': 'rail' } });
+                const way2 = iD.osmWay({ id: 'w2', nodes: ['n2','n3','n4'], tags: { 'railway': 'rail' } });
+                const graph = iD.coreGraph([node1, node2, node3, node4, way1, way2]);
+                expect(node3.directions(graph, projection)).to.eql([
+                    { type: 'side', angle: 0 },
+                ]);
+            });
+
+            it('supports railway:turnout_side=left', () => {
+                const node1 = iD.osmNode({ id: 'n1', loc: [-1, -1] });
+                const node2 = iD.osmNode({ id: 'n2', loc: [-1, 0] });
+                const node3 = iD.osmNode({ id: 'n3', loc: [0, 0], tags: { 'railway:turnout_side': 'left' } });
+                const node4 = iD.osmNode({ id: 'n4', loc: [1, 0] });
+                const way1 = iD.osmWay({ id: 'w1', nodes: ['n1','n3'], tags: { 'railway': 'rail' } });
+                const way2 = iD.osmWay({ id: 'w2', nodes: ['n2','n3','n4'], tags: { 'railway': 'rail' } });
+                const graph = iD.coreGraph([node1, node2, node3, node4, way1, way2]);
+                expect(node3.directions(graph, projection)).to.eql([
+                    { type: 'side', angle: 180 },
+                ]);
+            });
         });
 
     });

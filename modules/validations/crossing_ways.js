@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit/predicate';
 
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
@@ -507,6 +507,13 @@ export function validationCrossingWays(context) {
                     title: t.append('issues.fix.reposition_features.title')
                 }));
 
+                if (featureType1 === 'building' || featureType2 === 'building') {
+                    // if the validation is about overlapping buildings:
+                    // show "reposition features" suggestion first, as that is most often
+                    // most sensible fix for those errors, see #11329
+                    fixes.unshift(fixes.pop());
+                }
+
                 return fixes;
             }
         });
@@ -781,25 +788,46 @@ export function validationCrossingWays(context) {
         return fix;
     }
 
+    /** @returns {osmEntity | undefined} */
+    function getSelectedFeature() {
+        const mode = context.mode();
+        if (!mode || mode.id !== 'select') return undefined;
+
+        const selectedIDs = mode.selectedIDs();
+        if (selectedIDs.length !== 1) return undefined;
+
+        const selectedID = selectedIDs[0];
+
+        const entity = context.hasEntity(selectedID);
+        return entity;
+    }
+
+    /**
+     * @param {"higher" | "lower"} higherOrLower
+     * @returns {validationIssueFix | undefined}
+     */
     function makeChangeLayerFix(higherOrLower) {
+        const selectedFeature = getSelectedFeature();
         return new validationIssueFix({
+            id: selectedFeature.id,
             icon: 'iD-icon-' + (higherOrLower === 'higher' ? 'up' : 'down'),
-            title: t.append('issues.fix.tag_this_as_' + higherOrLower + '.title'),
+            title: selectedFeature
+                ? t.append('issues.fix.tag_this_as_' + higherOrLower + '.informative_title', {
+                    feature: utilDisplayLabel(selectedFeature, context.graph())
+                })
+                // in this context, there is no selected feature so we
+                // have to show a generic name
+                : t.append('issues.fix.tag_this_as_' + higherOrLower + '.title'),
+
             onClick: function(context) {
+                const entity = getSelectedFeature();
+                const selectedID = entity.id;
+                if (!entity) return;
 
-                var mode = context.mode();
-                if (!mode || mode.id !== 'select') return;
 
-                var selectedIDs = mode.selectedIDs();
-                if (selectedIDs.length !== 1) return;
-
-                var selectedID = selectedIDs[0];
                 if (!this.issue.entityIds.some(function(entityId) {
                     return entityId === selectedID;
                 })) return;
-
-                var entity = context.hasEntity(selectedID);
-                if (!entity) return;
 
                 var tags = Object.assign({}, entity.tags);   // shallow copy
                 var layer = tags.layer && Number(tags.layer);
