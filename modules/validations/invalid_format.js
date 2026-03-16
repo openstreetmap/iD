@@ -29,9 +29,8 @@ export function validationFormatting() {
 
         function isValidURL(url, strict = false) {
             try {
-                // First try strict WHATWG parsing
-                const link = new URL(url);
-                return link.href.includes(url);
+                new URL(url); // eslint-disable-line no-new
+                return true;
             } catch {
                 if (strict) return false;
                 // Fallback: accept if it looks like a valid scheme://something, even if semicolons are present
