@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 import {
     select as d3_select
 } from 'd3-selection';
@@ -134,7 +134,7 @@ export function uiSectionValidationIssues(id, severity, context) {
     });
 
     context.map().on('move.uiSectionValidationIssues' + id,
-        _debounce(function() {
+        debounce(function() {
             window.requestIdleCallback(function() {
                 if (getOptions().where === 'visible') {
                     // must refetch issues if they are viewport-dependent

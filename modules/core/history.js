@@ -289,6 +289,11 @@ export function coreHistory(context) {
         },
 
 
+        changesCount() {
+            return Object.values(this.changes()).flat().length;
+        },
+
+
         hasChanges: function() {
             return this.difference().length() > 0;
         },

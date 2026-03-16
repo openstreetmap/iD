@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 
 import { t } from '../../core/localizer';
 
@@ -11,7 +11,7 @@ export function uiPanelBackground(context) {
         'zoom', 'vintage', 'source', 'description', 'resolution', 'accuracy'
     ];
 
-    var debouncedRedraw = _debounce(redraw, 250);
+    var debouncedRedraw = debounce(redraw, 250);
 
     function redraw(selection) {
         var source = background.baseLayerSource();
@@ -60,7 +60,7 @@ export function uiPanelBackground(context) {
     }
 
 
-    var debouncedGetMetadata = _debounce(getMetadata, 250);
+    var debouncedGetMetadata = debounce(getMetadata, 250);
 
     function getMetadata(selection) {
         var tile = context.container().select('.layer-background img.tile-center');   // tile near viewport center

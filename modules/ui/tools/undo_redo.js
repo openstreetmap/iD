@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 
 import {
     select as d3_select
@@ -113,7 +113,7 @@ export function uiToolUndoRedo(context) {
             });
 
 
-        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
+        var debouncedUpdate = debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
             .on('move.undo_redo', debouncedUpdate)

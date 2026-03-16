@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 
 import { json as d3_json } from 'd3-fetch';
 
@@ -12,7 +12,7 @@ var _wikibaseCache = {};
 var _localeIDs = { en: false };
 
 
-var debouncedRequest = _debounce(request, 500, { leading: false });
+var debouncedRequest = debounce(request, 500, { leading: false });
 
 function request(url, callback) {
     if (_inflight[url]) return;

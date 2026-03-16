@@ -1,15 +1,8 @@
-import { geoVecEqual, geoVecNormalizedDot, type Vec2 } from './vector';
+import { geoVecNormalizedDot, type Vec2 } from './vector';
 
 export interface Coord {
     coord: Vec2
 };
-
-export function geoOrthoNormalizedDotProduct(a: Vec2, b: Vec2, origin: Vec2) {
-    if (geoVecEqual(origin, a) || geoVecEqual(origin, b)) {
-        return 1;  // coincident points, treat as straight and try to remove
-    }
-    return geoVecNormalizedDot(a, b, origin);
-}
 
 
 function geoOrthoFilterDotProduct(dotp: number, epsilon: number, lowerThreshold: number, upperThreshold: number, allowStraightAngles?: boolean) {
@@ -40,7 +33,7 @@ export function geoOrthoCalcScore(points: Coord[], isClosed: boolean, epsilon: n
         var origin = coords[i];
         var b = coords[(i + 1) % coords.length];
 
-        var dotp = geoOrthoFilterDotProduct(geoOrthoNormalizedDotProduct(a, b, origin), epsilon, lowerThreshold, upperThreshold);
+        var dotp = geoOrthoFilterDotProduct(geoVecNormalizedDot(a, b, origin), epsilon, lowerThreshold, upperThreshold);
         if (dotp === null) continue;    // ignore vertex
         score = score + 2.0 * Math.min(Math.abs(dotp - 1.0), Math.min(Math.abs(dotp), Math.abs(dotp + 1)));
     }
@@ -59,7 +52,7 @@ export function geoOrthoMaxOffsetAngle(coords: Vec2[], isClosed: boolean, lessTh
         var a = coords[(i - 1 + coords.length) % coords.length];
         var origin = coords[i];
         var b = coords[(i + 1) % coords.length];
-        var normalizedDotP = geoOrthoNormalizedDotProduct(a, b, origin);
+        var normalizedDotP = geoVecNormalizedDot(a, b, origin);
 
         var angle = Math.acos(Math.abs(normalizedDotP)) * 180 / Math.PI;
 
@@ -90,7 +83,7 @@ export function geoOrthoCanOrthogonalize(coords: Vec2[], isClosed: boolean, epsi
         var origin = coords[i];
         var b = coords[(i + 1) % coords.length];
 
-        var dotp = geoOrthoFilterDotProduct(geoOrthoNormalizedDotProduct(a, b, origin), epsilon, lowerThreshold, upperThreshold, allowStraightAngles);
+        var dotp = geoOrthoFilterDotProduct(geoVecNormalizedDot(a, b, origin), epsilon, lowerThreshold, upperThreshold, allowStraightAngles);
         if (dotp === null) continue;        // ignore vertex
         if (Math.abs(dotp) > 0) return 1;   // something to do
         score = 0;                          // already square
