@@ -67,6 +67,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add phone and address format for Moldova ([#11965], [#11976], thanks [@Oni-DOS])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* When changing presets, delete tags from the old preset which are not in the new preset ([#11696], thanks [@k-yle])
 #### :hammer: Development
 * Use `<details>` element for collapsible _disclosure_ content ([#11952], thanks [@Shrinks99])
 * Use JSON endpoints for (almost) all OSM APIs ([#11661], thanks [@k-yle])
@@ -90,6 +92,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11388]: https://github.com/openstreetmap/iD/pull/11388
 [#11645]: https://github.com/openstreetmap/iD/pull/11645
 [#11661]: https://github.com/openstreetmap/iD/pull/11661
+[#11696]: https://github.com/openstreetmap/iD/pull/11696
 [#11778]: https://github.com/openstreetmap/iD/pull/11778
 [#11865]: https://github.com/openstreetmap/iD/pull/11865
 [#11876]: https://github.com/openstreetmap/iD/pull/11876
@@ -461,7 +464,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 * Change background imagery of walkthrough tutorial to Bing (the previous source is not available anymore)
 #### :rocket: Presets
-* When changing presets, delete tags from the old preset which are not in the new preset ([#11696], thanks [@k-yle])
 * Suggest housenumber/housename values from surrounding areas ([#10946])
 #### :hammer: Development
 * Drop support for Node 18
@@ -479,7 +481,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10997]: https://github.com/openstreetmap/iD/issues/10997
 [#11006]: https://github.com/openstreetmap/iD/issues/11006
 [#11011]: https://github.com/openstreetmap/iD/issues/11011
-[#11696]: https://github.com/openstreetmap/iD/pull/11696
 [@ChaitanyaKadu03]: https://github.com/ChaitanyaKadu03
 
 
