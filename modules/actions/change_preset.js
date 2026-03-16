@@ -1,3 +1,5 @@
+import { utilArrayDifference, utilObjectOmit } from '../util';
+
 export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefaults) {
     return function action(graph) {
         var entity = graph.entity(entityID);
@@ -18,8 +20,21 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
                 // https://github.com/openstreetmap/iD/issues/9372
                 newPreset.fields(loc).concat(newPreset.moreFields(loc))
                     .filter(f => f.matchGeometry(geometry))
-                    .map(f => f.key).filter(Boolean)
+                    .flatMap(f => f.allKeys())
+                    .filter(Boolean)
                     .forEach(key => preserveKeys.push(key));
+            }
+
+            if (oldPreset) {
+                // 'field-keys' are keys used by fields (different to the keys used by preset itself)
+                const oldPresetFieldKeys = [
+                    ...oldPreset.fields(loc),
+                    ...oldPreset.moreFields(loc)
+                ].flatMap(f => f.allKeys());
+
+                // field-keys used by the old preset but not the new preset
+                const fieldKeysToRemove = utilArrayDifference(oldPresetFieldKeys, preserveKeys);
+                tags = utilObjectOmit(tags, fieldKeysToRemove);
             }
         }
         if (oldPreset) tags = oldPreset.unsetTags(tags, geometry, preserveKeys, false, loc);
