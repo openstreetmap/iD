@@ -167,7 +167,7 @@ export function svgAreas(projection, context) {
             }
         }
 
-        paths = paths.enter()
+        paths.enter()
             .insert('path', sortedByArea)
             .merge(paths)
             .each(function(entity) {
@@ -176,7 +176,8 @@ export function svgAreas(projection, context) {
 
                 if (layer === 'fill') {
                     this.setAttribute('clip-path', 'url(#ideditor-' + entity.id + '-clippath)');
-                    this.style.fill = this.style.stroke = getPatternStyle(entity.tags);
+                    this.style.fill = getPatternStyle(entity.tags);
+                    this.style.stroke = this.style.fill;
                 }
             })
             .classed('added', function(d) {

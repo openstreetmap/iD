@@ -1,12 +1,12 @@
 import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
 import { json as d3_json } from 'd3-fetch';
-import { escape } from 'lodash-es';
 
 import { t, localizer } from '../core/localizer';
 import { geoExtent, geoSphericalDistance } from '../geo';
 import { utilQsString, utilStringQs } from '../util';
 import { utilAesDecrypt } from '../util/aes';
 import { IntervalTasksQueue } from '../util/IntervalTasksQueue';
+import { localeDateString } from '../util/date';
 
 var isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 
@@ -20,14 +20,6 @@ window.matchMedia?.(`
     isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 });
 
-
-function localeDateString(s) {
-    if (!s) return null;
-    var options = { day: 'numeric', month: 'short', year: 'numeric' };
-    var d = new Date(s);
-    if (isNaN(d.getTime())) return null;
-    return d.toLocaleDateString(localizer.localeCode(), options);
-}
 
 function vintageRange(vintage) {
     var s;
@@ -69,26 +61,26 @@ export function rendererBackgroundSource(data) {
 
     source.name = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t('imagery.' + id_safe + '.name', { default: escape(_name) });
+        return t('imagery.' + id_safe + '.name', { default: _name });
     };
 
 
     source.label = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.append('imagery.' + id_safe + '.name', { default: escape(_name) });
+        return t.append('imagery.' + id_safe + '.name', { default: _name });
     };
 
 
     source.hasDescription = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).text;
-        return descriptionText !== '';
+        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: _description }).text;
+        return !!descriptionText;
     };
 
 
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.append('imagery.' + id_safe + '.description', { default: escape(_description) });
+        return t.append('imagery.' + id_safe + '.description', { default: _description });
     };
 
 

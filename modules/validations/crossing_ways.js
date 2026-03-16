@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit/predicate';
 
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
@@ -89,36 +89,21 @@ export function validationCrossingWays(context) {
             return true;
         }
 
-        // assume 0 by default; don't use way.layer() since we account for structures here
-        var layer1 = tags1.layer || '0';
-        var layer2 = tags2.layer || '0';
-
-        if (allowsBridge(featureType1) && allowsBridge(featureType2)) {
-            if (hasTag(tags1, 'bridge') && !hasTag(tags2, 'bridge')) return true;
-            if (!hasTag(tags1, 'bridge') && hasTag(tags2, 'bridge')) return true;
-            // crossing bridges must use different layers
-            if (hasTag(tags1, 'bridge') && hasTag(tags2, 'bridge') && layer1 !== layer2) return true;
-        } else if (allowsBridge(featureType1) && hasTag(tags1, 'bridge')) return true;
-        else if (allowsBridge(featureType2) && hasTag(tags2, 'bridge')) return true;
-
-        if (allowsTunnel(featureType1) && allowsTunnel(featureType2)) {
-            if (hasTag(tags1, 'tunnel') && !hasTag(tags2, 'tunnel')) return true;
-            if (!hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel')) return true;
-            // crossing tunnels must use different layers
-            if (hasTag(tags1, 'tunnel') && hasTag(tags2, 'tunnel') && layer1 !== layer2) return true;
-        } else if (allowsTunnel(featureType1) && hasTag(tags1, 'tunnel')) return true;
-        else if (allowsTunnel(featureType2) && hasTag(tags2, 'tunnel')) return true;
-
         // don't flag crossing waterways and pier/highways
         if (featureType1 === 'waterway' && featureType2 === 'highway' && tags2.man_made === 'pier') return true;
         if (featureType2 === 'waterway' && featureType1 === 'highway' && tags1.man_made === 'pier') return true;
 
-        if (featureType1 === 'building' || featureType2 === 'building' ||
-            taggedAsIndoor(tags1) || taggedAsIndoor(tags2)) {
-            // for building crossings, different layers are enough
-            if (layer1 !== layer2) return true;
-        }
-        return false;
+        if (tags1.layer !== undefined && tags1.layer === tags2.layer) return false; // Warn if both have the same defined layer
+
+        const isElement1Bridge = allowsBridge(featureType1) && hasTag(tags1, 'bridge');
+        const isElement2Bridge = allowsBridge(featureType2) && hasTag(tags2, 'bridge');
+        if (isElement1Bridge !== isElement2Bridge) return true; // Either one is bridge, the other is not
+
+        const isElement1Tunnel = allowsTunnel(featureType1) && hasTag(tags1, 'tunnel');
+        const isElement2Tunnel = allowsTunnel(featureType2) && hasTag(tags2, 'tunnel');
+        if (isElement1Tunnel !== isElement2Tunnel ) return true; // Either one is tunnel, the other is not
+
+        return (tags1.layer || '0') !== (tags2.layer || '0');
     }
 
 
@@ -196,7 +181,9 @@ export function validationCrossingWays(context) {
                 return {};
             }
             if (featureType1 === 'waterway') return {};
-            if (featureType1 === 'railway') return {};
+            if (featureType1 === 'railway') {
+                return { railway: 'railway_crossing' };
+            }
 
         } else {
             if (featureTypes.indexOf('highway') !== -1) {
@@ -520,6 +507,13 @@ export function validationCrossingWays(context) {
                     title: t.append('issues.fix.reposition_features.title')
                 }));
 
+                if (featureType1 === 'building' || featureType2 === 'building') {
+                    // if the validation is about overlapping buildings:
+                    // show "reposition features" suggestion first, as that is most often
+                    // most sensible fix for those errors, see #11329
+                    fixes.unshift(fixes.pop());
+                }
+
                 return fixes;
             }
         });
@@ -794,25 +788,46 @@ export function validationCrossingWays(context) {
         return fix;
     }
 
+    /** @returns {osmEntity | undefined} */
+    function getSelectedFeature() {
+        const mode = context.mode();
+        if (!mode || mode.id !== 'select') return undefined;
+
+        const selectedIDs = mode.selectedIDs();
+        if (selectedIDs.length !== 1) return undefined;
+
+        const selectedID = selectedIDs[0];
+
+        const entity = context.hasEntity(selectedID);
+        return entity;
+    }
+
+    /**
+     * @param {"higher" | "lower"} higherOrLower
+     * @returns {validationIssueFix | undefined}
+     */
     function makeChangeLayerFix(higherOrLower) {
+        const selectedFeature = getSelectedFeature();
         return new validationIssueFix({
+            id: selectedFeature.id,
             icon: 'iD-icon-' + (higherOrLower === 'higher' ? 'up' : 'down'),
-            title: t.append('issues.fix.tag_this_as_' + higherOrLower + '.title'),
+            title: selectedFeature
+                ? t.append('issues.fix.tag_this_as_' + higherOrLower + '.informative_title', {
+                    feature: utilDisplayLabel(selectedFeature, context.graph())
+                })
+                // in this context, there is no selected feature so we
+                // have to show a generic name
+                : t.append('issues.fix.tag_this_as_' + higherOrLower + '.title'),
+
             onClick: function(context) {
+                const entity = getSelectedFeature();
+                const selectedID = entity.id;
+                if (!entity) return;
 
-                var mode = context.mode();
-                if (!mode || mode.id !== 'select') return;
 
-                var selectedIDs = mode.selectedIDs();
-                if (selectedIDs.length !== 1) return;
-
-                var selectedID = selectedIDs[0];
                 if (!this.issue.entityIds.some(function(entityId) {
                     return entityId === selectedID;
                 })) return;
-
-                var entity = context.hasEntity(selectedID);
-                if (!entity) return;
 
                 var tags = Object.assign({}, entity.tags);   // shallow copy
                 var layer = tags.layer && Number(tags.layer);

@@ -426,18 +426,14 @@ describe('iD.serviceOsm', function () {
 
 
         it('loads user changesets', async () => {
-            var changesetsXML = '<?xml version="1.0" encoding="UTF-8"?>' +
-                '<osm>' +
-                '<changeset id="36777543" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
-                '  <tag k="comment" v="Caprice Court has been extended"/>' +
-                '  <tag k="created_by" v="iD 2.0.0"/>' +
-                '</changeset>' +
-                '</osm>';
+            const changesetsJSON = {
+                changesets: [{ tags: { comment: 'Caprice Court has been extended', created_by: 'iD 2.0.0' } }]
+            };
 
             login();
 
-            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets\\?user=1',
-                [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
+            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets.json\\?user=1',
+                [200, {}, JSON.stringify(changesetsJSON)]);
             serverXHR.respond();
 
             const changesets = await promisify(connection.userChangesets).call(connection);
@@ -452,21 +448,17 @@ describe('iD.serviceOsm', function () {
         });
 
         it('excludes changesets without comment tag', async () => {
-            var changesetsXML = '<?xml version="1.0" encoding="UTF-8"?>' +
-                '<osm>' +
-                '<changeset id="36777543" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
-                '  <tag k="comment" v="Caprice Court has been extended"/>' +
-                '  <tag k="created_by" v="iD 2.0.0"/>' +
-                '</changeset>' +
-                '<changeset id="36777544" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
-                '  <tag k="created_by" v="iD 2.0.0"/>' +
-                '</changeset>' +
-                '</osm>';
+            const changesetsJSON = {
+                changesets: [
+                    { tags: { comment: 'Caprice Court has been extended', created_by: 'iD 2.0.0' } },
+                    { tags: {  created_by: 'iD 2.0.0' } }
+                ]
+            };
 
             login();
 
-            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets\\?user=1',
-                [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
+            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets.json\\?user=1',
+                [200, {}, JSON.stringify(changesetsJSON)]);
             serverXHR.respond();
 
             const changesets = await promisify(connection.userChangesets).call(connection);
@@ -481,22 +473,17 @@ describe('iD.serviceOsm', function () {
         });
 
         it('excludes changesets with empty comment', async () => {
-            var changesetsXML = '<?xml version="1.0" encoding="UTF-8"?>' +
-                '<osm>' +
-                '<changeset id="36777543" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
-                '  <tag k="comment" v="Caprice Court has been extended"/>' +
-                '  <tag k="created_by" v="iD 2.0.0"/>' +
-                '</changeset>' +
-                '<changeset id="36777544" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
-                '  <tag k="comment" v=""/>' +
-                '  <tag k="created_by" v="iD 2.0.0"/>' +
-                '</changeset>' +
-                '</osm>';
+            const changesetsJSON = {
+                changesets: [
+                    { tags: { comment: 'Caprice Court has been extended', created_by: 'iD 2.0.0' } },
+                    { tags: { comment: '', created_by: 'iD 2.0.0' } }
+                ]
+            };
 
             login();
 
-            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets\\?user=1',
-                [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
+            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets.json\\?user=1',
+                [200, {}, JSON.stringify(changesetsJSON)]);
             serverXHR.respond();
 
             const changesets = await promisify(connection.userChangesets)();
@@ -555,28 +542,34 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadNotes', function() {
-        var notesXML = '<?xml version="1.0" encoding="UTF-8"?>' +
-            '<osm>' +
-            '<note lon="10" lat="0">' +
-            '  <id>1</id>' +
-            '  <url>https://www.openstreetmap.org/api/0.6/notes/1</url>' +
-            '  <comment_url>https://www.openstreetmap.org/api/0.6/notes/1/comment</comment_url>' +
-            '  <close_url>https://www.openstreetmap.org/api/0.6/notes/1/close</close_url>' +
-            '  <date_created>2019-01-01 00:00:00 UTC</date_created>' +
-            '  <status>open</status>' +
-            '  <comments>' +
-            '    <comment>' +
-            '      <date>2019-01-01 00:00:00 UTC</date>' +
-            '      <uid>1</uid>' +
-            '      <user>Steve</user>' +
-            '      <user_url>https://www.openstreetmap.org/user/Steve</user_url>' +
-            '      <action>opened</action>' +
-            '      <text>This is a note</text>' +
-            '      <html>&lt;p&gt;This is a note&lt;/p&gt;</html>' +
-            '    </comment>' +
-            '  </comments>' +
-            '</note>' +
-            '</osm>';
+        const notesJSON = {
+            type: 'FeatureCollection',
+            features: [
+                {
+                    type: 'Feature',
+                    geometry: { type: 'Point', coordinates: [10, 0] },
+                    properties: {
+                        id: 1,
+                        url: 'https://www.openstreetmap.org/api/0.6/notes/1',
+                        comment_url: 'https://www.openstreetmap.org/api/0.6/notes/1/comment',
+                        close_url: 'https://www.openstreetmap.org/api/0.6/notes/1/close',
+                        date_created: '2019-01-01 00:00:00 UTC',
+                        status: 'open',
+                        comments: [
+                            {
+                                date: '2019-01-01 00:00:00 UTC',
+                                uid: 1,
+                                user: 'Steve',
+                                user_url: 'https://www.openstreetmap.org/user/Steve',
+                                action: 'opened',
+                                text: 'This is a note',
+                                html: '&lt;p&gt;This is a note&lt;/p&gt;'
+                            }
+                        ]
+                    }
+                }
+            ]
+        };
 
         beforeEach(function() {
             var dimensions = [64, 64];
@@ -587,10 +580,10 @@ describe('iD.serviceOsm', function () {
         });
 
         it('fires loadedNotes when notes are loaded', async () => {
-            fetchMock.mock(/notes\?/, {
-                body: notesXML,
+            fetchMock.mock(/notes\.json\?/, {
+                body: JSON.stringify(notesJSON),
                 status: 200,
-                headers: { 'Content-Type': 'text/xml' }
+                headers: {}
             });
 
             connection.on('loadedNotes', spy);
@@ -680,32 +673,22 @@ describe('iD.serviceOsm', function () {
 
 
     describe('API capabilities', function() {
-        var capabilitiesXML = `<?xml version="1.0" encoding="UTF-8"?>
-        <osm version="0.6" generator="OpenStreetMap server" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
-            <api>
-                <version minimum="0.6" maximum="0.6"/>
-                <area maximum="0.25"/>
-                <note_area maximum="25"/>
-                <tracepoints per_page="5000"/>
-                <waynodes maximum="2000"/>
-                <changesets maximum_elements="50000"/>
-                <timeout seconds="300"/>
-                <status database="online" api="online" gpx="online"/>
-            </api>
-            <policy>
-                <imagery>
-                    <blacklist regex="\.foo\.com"/>
-                    <blacklist regex="\.bar\.org"/>
-                </imagery>
-            </policy>
-        </osm>`;
+        var capabilitiesJSON = {
+            api: {
+                waynodes: { maximum: 2000 },
+                status: { database: 'online', api: 'online', gpx: 'online' },
+                changesets: { maximum_elements: 10000 }
+            },
+            policy: {
+                imagery: { blacklist: [{ regex: '.foo.com' }, { regex: '.bar.org' }] }
+            }
+        };
 
         describe('#status', function() {
             it('gets API status', async () => {
-                fetchMock.mock('https://www.openstreetmap.org/api/capabilities', {
-                    body: capabilitiesXML,
+                fetchMock.mock('https://www.openstreetmap.org/api/capabilities.json', {
+                    body: JSON.stringify(capabilitiesJSON),
                     status: 200,
-                    headers: { 'Content-Type': 'text/xml' }
                 }, {
                     overwriteRoutes: true
                 });
@@ -717,10 +700,9 @@ describe('iD.serviceOsm', function () {
 
         describe('#imageryBlocklists', function() {
             it('updates imagery blocklists', async () => {
-                fetchMock.mock('https://www.openstreetmap.org/api/capabilities', {
-                    body: capabilitiesXML,
+                fetchMock.mock('https://www.openstreetmap.org/api/capabilities.json', {
+                    body: JSON.stringify(capabilitiesJSON),
                     status: 200,
-                    headers: { 'Content-Type': 'text/xml' }
                 }, {
                     overwriteRoutes: true
                 });

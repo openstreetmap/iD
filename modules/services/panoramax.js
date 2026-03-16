@@ -3,13 +3,14 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
-
-import { utilRebind, utilTiler, utilQsString, utilStringQs, utilUniqueDomId} from '../util';
-import { geoExtent, geoScaleToZoom } from '../geo';
-import { t, localizer } from '../core/localizer';
+import { utilRebind, utilTiler, utilQsString, utilStringQs, utilUniqueDomId } from '../util';
+import { geoExtent } from '../geo';
+import { t } from '../core/localizer';
 import { pannellumPhotoFrame } from './pannellum_photo';
 import { planePhotoFrame } from './plane_photo';
 import { services } from './';
+import { partitionViewport } from '../util/partition';
+import { localeDateString } from '../util/date';
 
 
 const apiUrl = 'https://api.panoramax.xyz/';
@@ -49,16 +50,6 @@ let _currentScene = {
 let _activeImage;
 let _isViewerOpen = false;
 
-
-// Partition viewport into higher zoom tiles
-function partitionViewport(projection) {
-    const z = geoScaleToZoom(projection.scale());
-    const z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
-    const tiler = utilTiler().zoomExtent([z2, z2]);
-
-    return tiler.getTiles(projection)
-        .map(function(tile) { return tile.extent; });
-}
 
 /**
  * Return no more than `limit` results per partition.
@@ -551,14 +542,6 @@ export default {
                 .showPhotoFrame(wrap)
                 .selectPhoto(d, true);
         });
-
-        function localeDateString(s) {
-            if (!s) return null;
-            var options = { day: 'numeric', month: 'short', year: 'numeric' };
-            var d = new Date(s);
-            if (isNaN(d.getTime())) return null;
-            return d.toLocaleDateString(localizer.localeCode(), options);
-        }
 
         if (d.account_id) {
             attribution

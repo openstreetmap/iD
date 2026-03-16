@@ -72,6 +72,22 @@
     ]
   },
   {
+    "countryCodes": ["ma"],
+    "format": [
+      ["housename"],
+      ["housenumber", "street+place"],
+      ["postcode", "city"]
+    ]
+  },
+    {
+    "countryCodes": ["md"],
+    "format": [
+      ["street", "housenumber", "floor", "unit"],
+      ["postcode", "city"],
+      ["subdistrict", "district"]
+    ]
+  },
+  {
     "countryCodes": ["mo"],
     "format": [
       ["housenumber", "street"],

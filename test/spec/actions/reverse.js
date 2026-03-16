@@ -704,6 +704,17 @@ describe('iD.actionReverse', function () {
             expect(target.tags.side).to.eql('right');
         });
 
+        it('preserves the value of railway:turnout_side', () => {
+            const node1 = iD.osmNode();
+            const node2 = iD.osmNode({ tags: { direction: 'forward', 'railway:turnout_side': 'right' } });
+            const node3 = iD.osmNode();
+            const way = iD.osmWay({ nodes: [node1.id, node2.id, node3.id] });
+            const graph = iD.actionReverse(way.id)(iD.coreGraph([node1, node2, node3, way]));
+            const target = graph.entity(node2.id);
+            expect(target.tags.direction).toBe('backward');
+            expect(target.tags['railway:turnout_side']).toBe('right');
+        });
+
         it('preserves the direction of a red turn at a traffic signal', function () {
             var node1 = iD.osmNode();
             var node2 = iD.osmNode({tags: {

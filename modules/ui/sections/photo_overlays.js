@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 import { select as d3_select } from 'd3-selection';
 
 import { localizer, t } from '../../core/localizer';
@@ -12,7 +12,6 @@ export function uiSectionPhotoOverlays(context) {
 
     let _savedLayers = [];
     let _layersHidden = false;
-    const _streetLayerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio', 'vegbilder', 'panoramax'];
 
     var settingsLocalPhotos = uiSettingsLocalPhotos(context)
         .on('change',  localPhotosChanged);
@@ -557,8 +556,9 @@ export function uiSectionPhotoOverlays(context) {
     function toggleStreetSide(){
         let layerContainer = d3_select('.photo-overlay-container');
         if (!_layersHidden){
+            const streetLayerIDs = context.photos().overlayLayerIDs();
             layers.all().forEach(d => {
-                if (_streetLayerIDs.includes(d.id)) {
+                if (streetLayerIDs.includes(d.id)) {
                     if (showsLayer(d.id)) _savedLayers.push(d.id);
                     setLayer(d.id, false);
                 }
@@ -584,7 +584,7 @@ export function uiSectionPhotoOverlays(context) {
 
     context.map()
         .on('move.photo_overlays',
-            _debounce(function() {
+            debounce(function() {
                 // layers in-view may have changed due to map move
                 window.requestIdleCallback(section.reRender);
             }, 1000)

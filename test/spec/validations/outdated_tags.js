@@ -8,7 +8,9 @@ describe('iD.validations.outdated_tags', function () {
         iD.fileFetcher.cache().deprecated = [
           { old: { building: 'roof' }, replace: { building: 'roof', layer: '1' } },
           { old: { highway: 'no' } },
-          { old: { highway: 'ford' }, replace: { ford: '*' } }
+          { old: { highway: 'ford' }, replace: { ford: '*' } },
+          { old: { amenity: 'bench', capacity: '*' }, replace: { amenity: 'bench', seats: '$1' } },
+          { old: { oldKey1: '*', oldKey2: '*' }, replace: { newKey1: '$1', newKey2: '$2' } }
         ];
         iD.services.nsi = {
             status: () => 'ok',
@@ -115,6 +117,44 @@ describe('iD.validations.outdated_tags', function () {
         expect(issue.severity).to.eql('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
         expect(issue.entityIds[0]).to.eql('w-1');
+    });
+
+    it('flags deprecated tag with transfer replacement', async () => {
+        createWay({'amenity': 'bench', 'capacity': '4'});
+        var validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('outdated_tags');
+        expect(issue.subtype).to.eql('deprecated_tags');
+        expect(issue.severity).to.eql('warning');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
+        issues[0].dynamicFixes()[0].onClick(context);
+        expect(context.graph().entity('w-1').tags).toStrictEqual({
+            amenity: 'bench',
+            seats: '4'
+        });
+    });
+
+    it('flags deprecated tag with multiple transfer tags', async () => {
+        createWay({'oldKey1': 'foo', 'oldKey2': 'bar'});
+        var validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('outdated_tags');
+        expect(issue.subtype).to.eql('deprecated_tags');
+        expect(issue.severity).to.eql('warning');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
+        issues[0].dynamicFixes()[0].onClick(context);
+        expect(context.graph().entity('w-1').tags).toStrictEqual({
+            newKey1: 'foo',
+            newKey2: 'bar'
+        });
     });
 
     it('ignores way with no relations', async () => {
