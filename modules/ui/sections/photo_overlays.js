@@ -12,7 +12,6 @@ export function uiSectionPhotoOverlays(context) {
 
     let _savedLayers = [];
     let _layersHidden = false;
-    const _streetLayerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio', 'vegbilder', 'panoramax'];
 
     var settingsLocalPhotos = uiSettingsLocalPhotos(context)
         .on('change',  localPhotosChanged);
@@ -557,8 +556,9 @@ export function uiSectionPhotoOverlays(context) {
     function toggleStreetSide(){
         let layerContainer = d3_select('.photo-overlay-container');
         if (!_layersHidden){
+            const streetLayerIDs = context.photos().overlayLayerIDs();
             layers.all().forEach(d => {
-                if (_streetLayerIDs.includes(d.id)) {
+                if (streetLayerIDs.includes(d.id)) {
                     if (showsLayer(d.id)) _savedLayers.push(d.id);
                     setLayer(d.id, false);
                 }
