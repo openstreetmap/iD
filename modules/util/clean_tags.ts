@@ -1,5 +1,5 @@
-export function utilCleanTags(tags) {
-    var out = {};
+export function utilCleanTags(tags: Tags) {
+    var out: Tags = {};
     for (var k in tags) {
         if (!k) continue;
         var v = tags[k];
@@ -11,12 +11,12 @@ export function utilCleanTags(tags) {
     return out;
 
 
-    function cleanValue(k, v) {
-        function keepSpaces(k) {
+    function cleanValue(k: string, v: string) {
+        function keepSpaces(k: string) {
             return /_hours|_times|:conditional$/.test(k);
         }
 
-        function skip(k) {
+        function skip(k: string) {
             return /^(description|note|fixme|inscription)(:.+)?$/.test(k);
         }
 
