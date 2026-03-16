@@ -23,6 +23,15 @@ describe('iD.actionChangePreset', function() {
         expect(action(graph).entity(entity.id).tags).to.eql({});
     });
 
+    it('preserves the tags that are defined in neither preset when changing from one preset to another', function() {
+        const entity = iD.osmNode({tags: {old: 'true', other: 'other'}});
+        const graph = iD.coreGraph([entity]);
+        const oldPreset = iD.presetPreset('old', {tags: {old: 'true'}});
+        const newPreset = iD.presetPreset('new', {tags: {new: 'true'}});
+        const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
+        expect(action(graph).entity(entity.id).tags).to.eql({new: 'true', other: 'other'});
+    });
+
     // https://github.com/openstreetmap/iD/issues/8159
     it('preserves the tags of a new preset\'s addTags', function() {
         var entity = iD.osmNode({tags: {
@@ -84,6 +93,7 @@ describe('iD.actionChangePreset', function() {
         expect(action(graph).entity(entity.id).tags).to.eql({amenity: 'school'});
     });
 
+    // https://github.com/openstreetmap/iD/pull/11696
     it('does not preserve field tags which only exist in the old preset, not in the new preset', () => {
         const entity = iD.osmNode({
             tags: {
