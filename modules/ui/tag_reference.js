@@ -121,6 +121,7 @@ export function uiTagReference(what) {
             .style('opacity', '1');
 
         _showing = true;
+        _button.classed('active', true);
 
         _button.selectAll('svg.icon use').each(function() {
             var iconUse = d3_select(this);
@@ -142,6 +143,7 @@ export function uiTagReference(what) {
             });
 
         _showing = false;
+        _button.classed('active', false);
 
         _button.selectAll('svg.icon use').each(function() {
             var iconUse = d3_select(this);
@@ -165,6 +167,7 @@ export function uiTagReference(what) {
             .merge(_button);
 
         _button
+            .classed('active', _showing)
             .on('click', function (d3_event) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();

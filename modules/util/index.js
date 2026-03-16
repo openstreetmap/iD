@@ -43,6 +43,7 @@ export { utilRebind } from './rebind';
 export { utilSafeClassName } from './util';
 export { utilSetTransform } from './util';
 export { utilSessionMutex } from './session_mutex';
+export { detectSubtags, formatSubtagTooltip, getSubtagKeys } from './subtags';
 export { utilStringQs } from './util';
 export { utilTagDiff } from './util';
 export { utilTagText } from './util';

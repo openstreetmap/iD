@@ -29,6 +29,12 @@ export function uiEntityEditor(context) {
     var _newFeature;
 
     var _sections;
+    /**
+     * D3 selection of the inspector body container. Kept so the preset fields
+     * section can be re-rendered when a subtag category is expanded.
+     * @type {d3.Selection}
+     */
+    let _bodySelection;
 
     function entityEditor(selection) {
 
@@ -88,19 +94,28 @@ export function uiEntityEditor(context) {
             .merge(bodyEnter);
 
         if (!_sections) {
+            const presetFieldsSection = uiSectionPresetFields(context)
+                .on('change', changeTags)
+                .on('revert', revertTags)
+                .on('expandSubtag', function() {
+                    if (_bodySelection) {
+                        _bodySelection.call(presetFieldsSection.render);
+                    }
+                });
             _sections = [
                 uiSectionSelectionList(context),
                 uiSectionFeatureType(context).on('choose', function(presets) {
                     dispatch.call('choose', this, presets);
                 }),
                 uiSectionEntityIssues(context),
-                uiSectionPresetFields(context).on('change', changeTags).on('revert', revertTags),
+                presetFieldsSection,
                 uiSectionRawTagEditor('raw-tag-editor', context).on('change', changeTags),
                 uiSectionRawMemberEditor(context),
                 uiSectionRawMembershipEditor(context)
             ];
         }
 
+        _bodySelection = body;
         _sections.forEach(function(section) {
             if (section.entityIDs) {
                 section.entityIDs(_entityIDs);
