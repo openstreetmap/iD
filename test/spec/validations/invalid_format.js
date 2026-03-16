@@ -95,6 +95,30 @@ describe('iD.validations.invalid_format', function () {
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(0);
         });
+
+        it('should not flag URLs with accented characters', function() {
+            var entity = createPointWithTags({
+                website: 'https://www.rando92.fr/randonner/itinéraires/'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(0);
+        });
+
+        it('should not flag internationalized domain names', function() {
+            var entity = createPointWithTags({
+                website: 'https://teaomārama.school.nz'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(0);
+        });
+
+        it('should not flag URLs with uppercase letters in domain', function() {
+            var entity = createPointWithTags({
+                website: 'https://www.TownChronicle.com'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(0);
+        });
     });
 
     describe('Email validation', function() {
