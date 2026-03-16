@@ -68,6 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Use `<details>` element for collapsible _disclosure_ content ([#11952], thanks [@Shrinks99])
 * Use JSON endpoints for (almost) all OSM APIs ([#11661], thanks [@k-yle])
+* Replace `lodash` with `es-toolkit` ([#12016], thanks [@tordans])
 
 
 [#8265]: https://github.com/openstreetmap/iD/issues/8265
@@ -92,6 +93,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11952]: https://github.com/openstreetmap/iD/pull/11952
 [#11965]: https://github.com/openstreetmap/iD/pull/11965
 [#11976]: https://github.com/openstreetmap/iD/pull/11976
+[#12016]: https://github.com/openstreetmap/iD/pull/12016
 [@Shrinks99]: https://github.com/Shrinks99
 [@Vectorial1024]: https://github.com/Vectorial1024
 [@Oni-DOS]: https://github.com/Oni-DOS
