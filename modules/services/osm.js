@@ -50,6 +50,7 @@ var _off;
 
 // set a default but also load this from the API status
 var _maxWayNodes = 2000;
+let _maxChangesetElements = 10_000;
 
 
 function authLoading() {
@@ -801,6 +802,9 @@ export default {
 
                 _imageryBlocklists = payload.policy.imagery.blacklist.map(item => new RegExp(item.regex, 'i'));
 
+                const maxChangesetElements = payload.api.changesets.maximum_elements;
+                if (!Number.isNaN(maxChangesetElements)) _maxChangesetElements = maxChangesetElements;
+
                 return callback(undefined, payload.api.status.api);
             }
         }
@@ -829,6 +833,9 @@ export default {
     maxWayNodes: function() {
         return _maxWayNodes;
     },
+
+
+    maxChangesetElements: () => _maxChangesetElements,
 
 
     // Load data (entities) from the API in tiles

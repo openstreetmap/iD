@@ -60,6 +60,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix the sorting of tag values when multiple objects' tags are combined in `utilCombinedTags` ([#11932], thanks [@JaiswalShivang])
 * Don't change the value of `railway:turnout_side` when reversing a railway track ([#11645])
 * Fix a bug where the _squaring_ operation would remove a whole corner if it had duplicate vertices (same coordinates, but different node ids) at that point ([#9155])
+* Fix crash when uploading changesets with more than 10,000 features ([#11388], thanks [@k-yle])
 #### :earth_asia: Localization
 * Support territory-level phone hints ([#10904], thanks [@Vectorial1024])
 * Add phone and address format for Moldova ([#11965], [#11976], thanks [@Oni-DOS])
@@ -83,6 +84,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10958]: https://github.com/openstreetmap/iD/issues/10958
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
 [#11329]: https://github.com/openstreetmap/iD/issues/11329
+[#11388]: https://github.com/openstreetmap/iD/pull/11388
 [#11645]: https://github.com/openstreetmap/iD/pull/11645
 [#11661]: https://github.com/openstreetmap/iD/pull/11661
 [#11778]: https://github.com/openstreetmap/iD/pull/11778
