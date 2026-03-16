@@ -44,17 +44,24 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Change labeling of route relation to show icons, `ref` and route colours ([#11052])
 * Render the `turnout_side` of railway switches ([#11944], thanks [@hlfan])
 * Show descriptions of preset field _options_ directly in the combobox dropdown menu in slightly smaller font size ([#11876], thanks [@Sembauke])
+* Render "outside" side of guardrails with small dots ([#9594])
 #### :scissors: Operations
 * Show a preview of the result of some geometry operations while the respective button in the edit menu is hovered ([#11778])
+* Preserve tagged nodes from being moved around too much when circularizing a feature ([#8265])
 #### :camera: Street-Level
 * Show username of Mapilio photos ([#9903], thanks [@sezerbozbiyik])
 #### :white_check_mark: Validation
 * Make wording of fix for _overlapping features_ validator less ambiguous ([#9888], thanks [@k-yle])
 * Skip `disconnected_way` validation for Golf Paths ([#11863], thanks [@Kayd-06])
 * Also suggest to remove deprecated tag when the object already has the corresponding new tag ([#9272])
+* Add explanation how to fix "point should be vertex" validation warning ([#10958])
+* Suggest to "reposition features" before other fixes when the validator found overlapping buildings ([#11329])
 #### :bug: Bugfixes
 * Fix the sorting of tag values when multiple objects' tags are combined in `utilCombinedTags` ([#11932], thanks [@JaiswalShivang])
 * Don't change the value of `railway:turnout_side` when reversing a railway track ([#11645])
+* Fix a bug where the _squaring_ operation would remove a whole corner if it had duplicate vertices (same coordinates, but different node ids) at that point ([#9155])
+* Fix crash when uploading changesets with more than 10,000 features ([#11388], thanks [@k-yle])
+* Preserve relation memberships when an area is automatically converted from a closed way to a multipolygon or vice versa during a merge or split operation ([#9064], [#12024])
 #### :earth_asia: Localization
 * Support territory-level phone hints ([#10904], thanks [@Vectorial1024])
 * Add phone and address format for Moldova ([#11965], [#11976], thanks [@Oni-DOS])
@@ -63,15 +70,23 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Use `<details>` element for collapsible _disclosure_ content ([#11952], thanks [@Shrinks99])
 * Use JSON endpoints for (almost) all OSM APIs ([#11661], thanks [@k-yle])
+* Replace `lodash` with `es-toolkit` ([#12016], thanks [@tordans])
 
 
+[#8265]: https://github.com/openstreetmap/iD/issues/8265
+[#9064]: https://github.com/openstreetmap/iD/issues/9064
+[#9155]: https://github.com/openstreetmap/iD/issues/9155
 [#9183]: https://github.com/openstreetmap/iD/issues/9183
 [#9272]: https://github.com/openstreetmap/iD/issues/9272
 [#9545]: https://github.com/openstreetmap/iD/pull/9545
+[#9594]: https://github.com/openstreetmap/iD/issues/9594
 [#9888]: https://github.com/openstreetmap/iD/pull/9888
 [#9903]: https://github.com/openstreetmap/iD/pull/9903
 [#10904]: https://github.com/openstreetmap/iD/pull/10904
+[#10958]: https://github.com/openstreetmap/iD/issues/10958
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
+[#11329]: https://github.com/openstreetmap/iD/issues/11329
+[#11388]: https://github.com/openstreetmap/iD/pull/11388
 [#11645]: https://github.com/openstreetmap/iD/pull/11645
 [#11661]: https://github.com/openstreetmap/iD/pull/11661
 [#11778]: https://github.com/openstreetmap/iD/pull/11778
@@ -82,6 +97,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11952]: https://github.com/openstreetmap/iD/pull/11952
 [#11965]: https://github.com/openstreetmap/iD/pull/11965
 [#11976]: https://github.com/openstreetmap/iD/pull/11976
+[#12016]: https://github.com/openstreetmap/iD/pull/12016
+[#12024]: https://github.com/openstreetmap/iD/issues/12024
 [@Shrinks99]: https://github.com/Shrinks99
 [@Vectorial1024]: https://github.com/Vectorial1024
 [@Oni-DOS]: https://github.com/Oni-DOS

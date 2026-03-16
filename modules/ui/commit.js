@@ -453,6 +453,17 @@ export function uiCommit(context) {
 
 
     function getUploadBlockerMessage() {
+        // if there are too many edits to fit into a single changeset, then
+        // prevent uploading.
+        const changesetElements = context.history().changesCount();
+        const maxChangesetElements = context.connection().maxChangesetElements();
+        if (changesetElements > maxChangesetElements) {
+            return t.append('issues.osm_api_limits.max_changeset_elements.reference', {
+                changesetElements,
+                maxChangesetElements,
+            });
+        }
+
         var errors = context.validator()
             .getIssuesBySeverity({ what: 'edited', where: 'all' }).error;
 

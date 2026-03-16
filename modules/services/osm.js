@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit/compat';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
@@ -50,6 +50,7 @@ var _off;
 
 // set a default but also load this from the API status
 var _maxWayNodes = 2000;
+let _maxChangesetElements = 10_000;
 
 
 function authLoading() {
@@ -801,6 +802,9 @@ export default {
 
                 _imageryBlocklists = payload.policy.imagery.blacklist.map(item => new RegExp(item.regex, 'i'));
 
+                const maxChangesetElements = payload.api.changesets.maximum_elements;
+                if (!Number.isNaN(maxChangesetElements)) _maxChangesetElements = maxChangesetElements;
+
                 return callback(undefined, payload.api.status.api);
             }
         }
@@ -812,7 +816,7 @@ export default {
         // throttle to avoid unnecessary API calls
         if (!this.throttledReloadApiStatus) {
             var that = this;
-            this.throttledReloadApiStatus = _throttle(function() {
+            this.throttledReloadApiStatus = throttle(function() {
                 that.status(function(err, status) {
                     if (status !== _cachedApiStatus) {
                         _cachedApiStatus = status;
@@ -829,6 +833,9 @@ export default {
     maxWayNodes: function() {
         return _maxWayNodes;
     },
+
+
+    maxChangesetElements: () => _maxChangesetElements,
 
 
     // Load data (entities) from the API in tiles
@@ -952,7 +959,7 @@ export default {
 
         var that = this;
         var path = `/api/0.6/notes.json?limit=${noteOptions.limit}&closed=${noteOptions.closed}&bbox=`;
-        var throttleLoadUsers = _throttle(function() {
+        var throttleLoadUsers = throttle(function() {
             var uids = Object.keys(_userCache.toLoad);
             if (!uids.length) return;
             that.loadUsers(uids, function() {});  // eagerly load user details

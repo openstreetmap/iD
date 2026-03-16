@@ -1,6 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 import exifr from 'exifr';
-import { isArray, isNumber } from 'lodash-es';
+import { isArray, isNumber } from 'es-toolkit/compat';
 
 import { localizer } from '../core/localizer';
 import { utilDetect } from '../util/detect';

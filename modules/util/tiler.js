@@ -1,5 +1,5 @@
 import { range as d3_range } from 'd3-array';
-import { clamp } from 'lodash-es';
+import { clamp } from 'es-toolkit/compat';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
 

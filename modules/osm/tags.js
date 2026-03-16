@@ -1,4 +1,4 @@
-import { merge } from 'lodash-es';
+import { merge } from 'es-toolkit/compat';
 import { getLuma } from '../util/util';
 
 const uninterestingKeys = new Set([
@@ -280,7 +280,7 @@ export var osmRightSideIsInsideTags = {
     'barrier': {
         'retaining_wall': true,
         'kerb': true,
-        'guard_rail': true,
+        'guard_rail': 'guard_rail',
         'city_wall': true,
     },
     'man_made': {

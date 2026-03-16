@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit/compat';
 
 import { geoPath as d3_geoPath } from 'd3-geo';
 import RBush from 'rbush';
@@ -766,7 +766,7 @@ export function svgLabels(projection, context) {
     }
 
 
-    var throttleFilterLabels = _throttle(filterLabels, 100);
+    var throttleFilterLabels = throttle(filterLabels, 100);
 
 
     drawLabels.observe = function(selection) {

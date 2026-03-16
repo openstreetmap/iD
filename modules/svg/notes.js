@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit/compat';
 
 import { select as d3_select } from 'd3-selection';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -16,7 +16,7 @@ var _osmService;
 
 export function svgNotes(projection, context, dispatch) {
     if (!dispatch) { dispatch = d3_dispatch('change'); }
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    var throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 12;
     var touchLayer = d3_select(null);
     var drawLayer = d3_select(null);

@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 
 import { presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
@@ -126,7 +126,7 @@ export function uiPresetList(context) {
             .call(utilNoAuto)
             .on('keydown', initialKeydown)
             .on('keypress', keypress)
-            .on('input', _debounce(inputevent));
+            .on('input', debounce(inputevent));
 
         if (_autofocus) {
             search.node().focus();

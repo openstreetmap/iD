@@ -676,7 +676,8 @@ describe('iD.serviceOsm', function () {
         var capabilitiesJSON = {
             api: {
                 waynodes: { maximum: 2000 },
-                status: { database: 'online', api: 'online', gpx: 'online' }
+                status: { database: 'online', api: 'online', gpx: 'online' },
+                changesets: { maximum_elements: 10000 }
             },
             policy: {
                 imagery: { blacklist: [{ regex: '.foo.com' }, { regex: '.bar.org' }] }

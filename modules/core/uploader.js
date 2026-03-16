@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { escape } from 'lodash-es';
+import { escape } from 'es-toolkit/compat';
 
 import { fileFetcher } from './file_fetcher';
 import { actionDiscardTags } from '../actions/discard_tags';
