@@ -61,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Don't change the value of `railway:turnout_side` when reversing a railway track ([#11645])
 * Fix a bug where the _squaring_ operation would remove a whole corner if it had duplicate vertices (same coordinates, but different node ids) at that point ([#9155])
 * Fix crash when uploading changesets with more than 10,000 features ([#11388], thanks [@k-yle])
+* Preserve relation memberships when an area is automatically converted from a closed way to a multipolygon or vice versa during a merge or split operation ([#9064], [#12024])
 #### :earth_asia: Localization
 * Support territory-level phone hints ([#10904], thanks [@Vectorial1024])
 * Add phone and address format for Moldova ([#11965], [#11976], thanks [@Oni-DOS])
@@ -73,6 +74,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 
 [#8265]: https://github.com/openstreetmap/iD/issues/8265
+[#9064]: https://github.com/openstreetmap/iD/issues/9064
 [#9155]: https://github.com/openstreetmap/iD/issues/9155
 [#9183]: https://github.com/openstreetmap/iD/issues/9183
 [#9272]: https://github.com/openstreetmap/iD/issues/9272
@@ -96,6 +98,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11965]: https://github.com/openstreetmap/iD/pull/11965
 [#11976]: https://github.com/openstreetmap/iD/pull/11976
 [#12016]: https://github.com/openstreetmap/iD/pull/12016
+[#12024]: https://github.com/openstreetmap/iD/issues/12024
 [@Shrinks99]: https://github.com/Shrinks99
 [@Vectorial1024]: https://github.com/Vectorial1024
 [@Oni-DOS]: https://github.com/Oni-DOS

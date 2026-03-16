@@ -712,6 +712,39 @@ describe('iD.actionJoin', function () {
         expect(graph.hasEntity('m')).to.be.undefined;
     });
 
+    it('transfers memberships of collapsed single-member multipolygon onto resulting basic area', function () {
+        // Situation: same as above, but the multipolygon relation was also
+        // a member of a site relation. #9064
+        let graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0,0]}),
+            iD.osmNode({id: 'b', loc: [0,2]}),
+            iD.osmNode({id: 'c', loc: [2,2]}),
+            iD.osmNode({id: 'd', loc: [2,0]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+            iD.osmWay({id: '=', nodes: ['d', 'a']}),
+            iD.osmRelation({id: 'm', members: [
+                {id: '-', role: 'outer', type: 'way'},
+                {id: '=', role: 'outer', type: 'way'}
+            ], tags: {
+                type: 'multipolygon',
+                man_made: 'pier'
+            }}),
+            iD.osmRelation({id: 's', members: [
+                {id: 'm', role: 'main', type: 'relation'}
+            ], tags: {
+                type: 'site'
+            }})
+        ]);
+
+        graph = iD.actionJoin(['-', '='])(graph);
+
+        expect(graph.hasEntity('s')).to.not.be.undefined;
+        expect(graph.entity('s').members.length).to.eql(1);
+        expect(graph.entity('s').members[0]).to.eql(
+            {id: '-', role: 'main', type: 'way'}
+        );
+    });
+
     it('does not collapse resultant single-member multipolygon into basic area when tags conflict', function () {
         // Situation:
         // b --> c
