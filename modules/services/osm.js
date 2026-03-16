@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit/compat';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
@@ -812,7 +812,7 @@ export default {
         // throttle to avoid unnecessary API calls
         if (!this.throttledReloadApiStatus) {
             var that = this;
-            this.throttledReloadApiStatus = _throttle(function() {
+            this.throttledReloadApiStatus = throttle(function() {
                 that.status(function(err, status) {
                     if (status !== _cachedApiStatus) {
                         _cachedApiStatus = status;
@@ -952,7 +952,7 @@ export default {
 
         var that = this;
         var path = `/api/0.6/notes.json?limit=${noteOptions.limit}&closed=${noteOptions.closed}&bbox=`;
-        var throttleLoadUsers = _throttle(function() {
+        var throttleLoadUsers = throttle(function() {
             var uids = Object.keys(_userCache.toLoad);
             if (!uids.length) return;
             that.loadUsers(uids, function() {});  // eagerly load user details

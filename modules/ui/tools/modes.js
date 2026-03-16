@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 
 import { select as d3_select } from 'd3-selection';
 
@@ -76,7 +76,7 @@ export function uiToolDrawModes(context) {
             .attr('class', 'joined')
             .style('display', 'flex');
 
-        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
+        var debouncedUpdate = debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
             .on('move.modes', debouncedUpdate)
