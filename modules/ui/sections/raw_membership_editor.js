@@ -16,7 +16,7 @@ import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
 import { uiTooltip } from '../tooltip';
-import { utilArrayGroupBy, utilArrayIntersection } from '../../util/array';
+import { utilArrayGroupBy} from '../../util/array';
 import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } from '../../util';
 import { prefs } from '../../core';
 import { idMatch } from '../feature_list';
@@ -54,22 +54,22 @@ export function uiSectionRawMembershipEditor(context) {
     const recentlyAdded = new Set();
 
     function getAllParentRelations() {
-    var relationsMap = new Map();
+        var relationsMap = new Map();
 
-    for (var i = 0; i < _entityIDs.length; i++) {
-        var entity = context.graph().hasEntity(_entityIDs[i]);
-        if (!entity) continue;
+        for (var i = 0; i < _entityIDs.length; i++) {
+            var entity = context.graph().hasEntity(_entityIDs[i]);
+            if (!entity) continue;
 
-        var parents = context.graph().parentRelations(entity);
+            var parents = context.graph().parentRelations(entity);
 
-        for (var j = 0; j < parents.length; j++) {
-            var rel = parents[j];
-            relationsMap.set(rel.id, rel);   // ensures unique relations
+            for (var j = 0; j < parents.length; j++) {
+                var rel = parents[j];
+                relationsMap.set(rel.id, rel);   // ensures unique relations
+            }
         }
-    }
 
-    return Array.from(relationsMap.values());
-}
+        return Array.from(relationsMap.values());
+    }
 
     function getMemberships() {
 
