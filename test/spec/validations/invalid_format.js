@@ -95,6 +95,17 @@ describe('iD.validations.invalid_format', function () {
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(0);
         });
+
+        it('should suggest moving image URLs to Wikimedia Commons', function() {
+            var entity = createPointWithTags({
+                image: 'File:OpenStreetMap-Editor iD Logo.svg'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(1);
+            expect(issues[0].type).to.eql('invalid_format');
+            expect(issues[0].subtype).to.eql('website');
+            expect(issues[0].dynamicFixes()[0].icon).to.eql('iD-icon-out-link');
+        });
     });
 
     describe('Email validation', function() {
