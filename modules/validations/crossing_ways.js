@@ -115,9 +115,9 @@ export function validationCrossingWays(context) {
 
         if (featureType1 === 'building' || featureType2 === 'building' ||
             taggedAsIndoor(tags1) || taggedAsIndoor(tags2)) {
-             // For overlapping buildings, layer=* is not a valid resolution.
-            // The geometry must be fixed instead.
-            return false;  // always warn, nothing resolves it
+            // Buildings on different layers are genuinely stacked - this is valid
+            if (layer1 !== layer2) return true;
+            return false;  // else always warn, nothing resolves it
         }
         return false;
     }
