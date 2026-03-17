@@ -80,6 +80,23 @@ export async function pannellumPhotoFrame(context, selection) {
     options,
   );
 
+  function normalizedWheelDelta(event) {
+    let delta = event.deltaY;
+    switch (event.deltaMode) {
+      case 1: // LINE
+        delta *= PANNELLUM_WHEEL_LINE_PIXELS;
+        break;
+      case 2: // PAGE
+        delta *= PANNELLUM_WHEEL_PAGE_PIXELS;
+        break;
+      default:
+        break;
+    }
+    // Safari and some touchpads report tiny deltas; clamp to avoid no-op.
+    if (Math.abs(delta) < 1e-4) delta = event.deltaY;
+    return delta;
+  }
+
   const viewerEl = d3_select("#ideditor-pannellum-viewer");
   viewerEl.on("wheel.pannellum", function (d3_event) {
     if (!_pannellumViewer || !_pannellumViewer.getHfov) return;
@@ -87,20 +104,18 @@ export async function pannellumPhotoFrame(context, selection) {
     d3_event.preventDefault();
     d3_event.stopPropagation();
 
-    let deltaY = d3_event.deltaY;
-    if (d3_event.deltaMode === 1) {
-      deltaY *= PANNELLUM_WHEEL_LINE_PIXELS;
-    } else if (d3_event.deltaMode === 2) {
-      deltaY *= PANNELLUM_WHEEL_PAGE_PIXELS;
-    }
+    const deltaY = normalizedWheelDelta(d3_event);
+    if (!Number.isFinite(deltaY) || deltaY === 0) return;
 
     const currentHfov = _pannellumViewer.getHfov();
+    // Use a smooth exponential zoom factor; `deltaY` positive should zoom out.
+    const factor = Math.pow(2, -deltaY / 600);
     const nextHfov = Math.max(
       PANNELLUM_MIN_HFOV,
-      Math.min(PANNELLUM_MAX_HFOV, currentHfov * Math.pow(2, deltaY / 500)),
+      Math.min(PANNELLUM_MAX_HFOV, currentHfov * factor),
     );
 
-    if (Math.abs(nextHfov - currentHfov) > 0.00001) {
+    if (Math.abs(nextHfov - currentHfov) > 1e-6) {
       if (typeof _pannellumViewer.setHfov === "function") {
         _pannellumViewer.setHfov(nextHfov);
       }
