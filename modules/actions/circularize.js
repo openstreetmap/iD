@@ -20,30 +20,34 @@ export function actionCircularize(wayId, projection, maxAngle) {
         if (t === null || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
-        var way = graph.entity(wayId);
-        var origNodes = {};
+        const way = graph.entity(wayId);
+        const origNodes = {};
 
-        graph.childNodes(way).forEach(function(node) {
-            if (!origNodes[node.id]) origNodes[node.id] = node;
-        });
+        for (const node of graph.childNodes(way)) {
+            if (!origNodes[node.id]) {
+                origNodes[node.id] = node;
+            }
+        }
 
         if (!way.isConvex(graph)) {
             graph = action.makeConvex(graph);
         }
 
-        var nodes = utilArrayUniq(graph.childNodes(way));
-        var keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; });
-        var points = nodes.map(function(n) { return projection(n.loc); });
-        var keyPoints = keyNodes.map(function(n) { return projection(n.loc); });
-        var centroid = (points.length === 2) ? geoVecInterp(points[0], points[1], 0.5) : d3_polygonCentroid(points);
-        var radius = d3_median(points, function(p) { return geoVecLength(centroid, p); });
-        var sign = d3_polygonArea(points) > 0 ? 1 : -1;
-        var ids, i, j, k;
+        const nodes = utilArrayUniq(graph.childNodes(way));
+        const keyNodes = nodes.filter(n => graph.parentWays(n).length > 1 || n.hasInterestingTags() );
+        const points = nodes.map(n => projection(n.loc));
+        const keyPoints = keyNodes.map(n => projection(n.loc));
+        const centroid = (points.length === 2)
+            ? geoVecInterp(points[0], points[1], 0.5)
+            : d3_polygonCentroid(points);
+        const radius = d3_median(points, p => geoVecLength(centroid, p));
+        const sign = d3_polygonArea(points) > 0 ? 1 : -1;
+        let ids, i, j, k;
 
         // we need at least two key nodes for the algorithm to work
         if (!keyNodes.length) {
-            keyNodes = [nodes[0]];
-            keyPoints = [points[0]];
+            keyNodes.push(nodes[0]);
+            keyPoints.push(points[0]);
         }
 
         if (keyNodes.length === 1) {
@@ -184,8 +188,9 @@ export function actionCircularize(wayId, projection, maxAngle) {
         ids = nodes.map(function(n) { return n.id; });
         ids.push(ids[0]);
 
-        way = way.update({nodes: ids});
-        graph = graph.replace(way);
+        graph = graph.replace(
+            way.update({nodes: ids})
+        );
 
         return graph;
     };

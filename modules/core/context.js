@@ -1,5 +1,4 @@
-import _debounce from 'lodash-es/debounce';
-import _throttle from 'lodash-es/throttle';
+import { debounce, throttle } from 'es-toolkit/compat';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
@@ -187,7 +186,7 @@ export function coreContext() {
   context.zoomToEntities = (entityIDs, zoomTo) => {
     // be sure to load the entity even if we're not going to zoom to it
     let loadedEntities = [];
-    const throttledZoomTo = _throttle(() => _map.zoomTo(loadedEntities), 500);
+    const throttledZoomTo = throttle(() => _map.zoomTo(loadedEntities), 500);
     entityIDs.forEach(entityID => context.loadEntity(entityID, (err, result) => {
       if (err) return;
       const entity = result.data.find(e => e.id === entityID);
@@ -214,12 +213,11 @@ export function coreContext() {
   };
 
   context.moveToNote = (noteId, moveTo) => {
-    context.loadNote(noteId, (err, result) => {
+    context.loadNote(noteId, (err) => {
       if (err) return;
-      const entity = result.data.find(e => e.id === noteId);
-      if (!entity) return;
       // zoom to, used note loc
       const note = services.osm.getNote(noteId);
+      if (!note) return;
       if (moveTo !== false) {
         context.map().center(note.loc);
       }
@@ -292,7 +290,7 @@ export function coreContext() {
 
   // Debounce save, since it's a synchronous localStorage write,
   // and history changes can happen frequently (e.g. when dragging).
-  context.debouncedSave = _debounce(context.save, 100);
+  context.debouncedSave = debounce(context.save, 100);
 
   function withDebouncedSave(fn) {
     return function() {
@@ -478,7 +476,7 @@ export function coreContext() {
 
 
   /* reset (aka flush) */
-  context.reset = context.flush = () => {
+  context.reset = () => {
     context.debouncedSave.cancel();
 
     Array.from(_deferred).forEach(handle => {
@@ -504,6 +502,7 @@ export function coreContext() {
 
     return context;
   };
+  context.flush = context.reset;
 
 
   /* Projections */

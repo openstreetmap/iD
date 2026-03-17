@@ -119,7 +119,8 @@ export async function pannellumPhotoFrame(context, selection) {
      * @param {boolean} keepOrientation if true, HFOV, pitch and yaw will be kept between images
      */
     module.selectPhoto = function(data, keepOrientation) {
-        const key = _activeSceneKey = data.image_path;
+        const key = data.image_path;
+        _activeSceneKey = key;
         if (!_currScenes.includes(key)) {
             let newSceneOptions = {
                 showFullscreenCtrl: false,

@@ -1,11 +1,25 @@
-let _detected;
+export interface Detected {
+  browser: string;
+  version: string;
+  opera: boolean;
+  ie: boolean;
+  support: boolean;
+  filedrop: boolean;
+  os: 'win' | 'mac' | 'linux';
+  platform: 'Windows' | 'Macintosh' | 'Linux' | 'Unknown';
+  isMobileWebKit: boolean;
+  browserLocales: string[];
+  host: string;
+}
 
-export function utilDetect(refresh) {
+let _detected: Detected;
+
+export function utilDetect(refresh?: boolean) {
   if (_detected && !refresh) return _detected;
-  _detected = {};
+  _detected = <Detected>{};
 
   const ua = navigator.userAgent;
-  let m = null;
+  let m;
 
   /* Browser */
   m = ua.match(/(edge)\/?\s*(\.?\d+(\.\d+)*)/i);   // Edge
@@ -81,6 +95,7 @@ export function utilDetect(refresh) {
     (navigator.platform === 'MacIntel' && 'maxTouchPoints' in navigator && navigator.maxTouchPoints > 1)) &&
     /WebKit/.test(ua) &&
     !/Edge/.test(ua) &&
+    // @ts-expect-error -- this attribute is so old that there are no definitions in @types/web
     !window.MSStream;
 
 
@@ -90,6 +105,7 @@ export function utilDetect(refresh) {
       [navigator.language]
         .concat(navigator.languages || [])
         .concat([
+            // @ts-expect-error -- this attribute is so old that there are no definitions in @types/web
             // old property for backwards compatibility
             navigator.userLanguage
         ])
@@ -101,7 +117,7 @@ export function utilDetect(refresh) {
   /* Host */
   let loc;
   try {
-    loc = window.top.location;
+    loc = window.top!.location;
   } catch {
     loc = window.location;
   }

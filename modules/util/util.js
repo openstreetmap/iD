@@ -1,4 +1,6 @@
+import { color as d3_color } from 'd3';
 import { remove as removeDiacritics } from 'diacritics';
+
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
 import { t, localizer } from '../core/localizer';
@@ -183,13 +185,16 @@ export function utilGetAllNodes(ids, graph) {
 }
 
 /**
- * @param {boolean} hideNetwork If true, the `network` tag will not be used in the name to prevent
- *                              it being shown twice (see PR #8707#discussion_r712658175)
- *
- * @param {boolean} isMapLabel If true, this name is for a label on the map. If falsy, it's for a
- *                             label elsewhere in the UI.
+ * @param {iD.OsmEntity} entity the entity to generate a display name for
+ * @param {object} flags a set of flags to tweak the display name output:
+ *             - hideNetwork: If true, the `network` tag will not be used
+ *                            in the name to prevent it being shown twice
+ *                            (see PR #8707#discussion_r712658175)
+ *             - hideRef:     If true, the `ref` tag will not be output.
+ *             - isMapLabel:  If true, this name is for a label on the map.
+ *                            If falsy, it's for a label elsewhere in the UI.
  */
-export function utilDisplayName(entity, hideNetwork, isMapLabel) {
+export function utilDisplayName(entity, flags) {
     var localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
     var name = entity.tags[localizedNameKey] || entity.tags.name || '';
 
@@ -197,8 +202,8 @@ export function utilDisplayName(entity, hideNetwork, isMapLabel) {
         direction: entity.tags.direction,
         from: entity.tags.from,
         name,
-        network: hideNetwork ? undefined : (entity.tags.cycle_network || entity.tags.network),
-        ref: entity.tags.ref,
+        network: flags?.hideNetwork ? undefined : (entity.tags.cycle_network || entity.tags.network),
+        ref: flags?.hideRef ? undefined : entity.tags.ref,
         to: entity.tags.to,
         via: entity.tags.via
     };
@@ -272,7 +277,7 @@ export function utilDisplayName(entity, hideNetwork, isMapLabel) {
     const housenumber = entity.tags['addr:housenumber'];
     const streetOrPlace = entity.tags['addr:street'] || entity.tags['addr:place'];
 
-    if (!isMapLabel && unit && housenumber && streetOrPlace) {
+    if (!flags?.isMapLabel && unit && housenumber && streetOrPlace) {
         return t('inspector.display_name_addr_with_unit', {
             unit,
             housenumber,
@@ -280,7 +285,7 @@ export function utilDisplayName(entity, hideNetwork, isMapLabel) {
         });
     }
 
-    if (!isMapLabel && housenumber && streetOrPlace) {
+    if (!flags?.isMapLabel && housenumber && streetOrPlace) {
         return t('inspector.display_name_addr', {
             housenumber,
             streetOrPlace,
@@ -296,7 +301,7 @@ export function utilDisplayName(entity, hideNetwork, isMapLabel) {
 
 
 export function utilDisplayNameForPath(entity) {
-    var name = utilDisplayName(entity, undefined, true);
+    var name = utilDisplayName(entity, { isMapLabel: true });
     var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
     var isNewChromium = Number(utilDetect().version.split('.')[0]) >= 96.0;
 
@@ -393,12 +398,11 @@ export function utilCombinedTags(entityIDs, graph) {
         });
     });
 
-    for (var key in tags) {
+    for (const key in tags) {
         if (!Array.isArray(tags[key])) continue;
 
         // sort values by frequency then alphabetically
         tags[key] = tags[key].sort(function(val1, val2) {
-            var key = key; // capture
             var count2 = tagCounts[key + '=' + val2];
             var count1 = tagCounts[key + '=' + val1];
             if (count2 !== count1) {
@@ -477,7 +481,8 @@ export function utilPrefixCSSProperty(property) {
 
 var transformProperty;
 export function utilSetTransform(el, x, y, scale) {
-    var prop = transformProperty = transformProperty || utilPrefixCSSProperty('Transform');
+    transformProperty ||= utilPrefixCSSProperty('Transform');
+    var prop = transformProperty;
     var translate = utilDetect().opera ? 'translate('   + x + 'px,' + y + 'px)'
         : 'translate3d(' + x + 'px,' + y + 'px,0)';
     return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));
@@ -691,6 +696,12 @@ export function utilCleanOsmString(val, maxChars) {
 
     // trim to the number of allowed characters
     return utilUnicodeCharsTruncated(val, maxChars);
+}
+
+// https://stackoverflow.com/a/70360753/1627467
+export function getLuma(color) {
+    const {r, g, b} = d3_color(color);
+    return 0.2999 * r + 0.587 * g + 0.114 * b;
 }
 
 /** @param {XMLHttpRequestBodyInit} input */
