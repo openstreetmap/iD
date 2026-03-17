@@ -146,6 +146,13 @@ export function osmSetVertexTags(value) {
     osmVertexTags = value;
 }
 
+//These tags belong strictly on ways and should never be moved up to a relation
+export const osmWayOnlyTags = {
+    'natural': {
+        'coastline': true
+    }
+};
+
 export function osmNodeGeometriesForTags(nodeTags) {
     var geometries = {};
     for (var key in nodeTags) {

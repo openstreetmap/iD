@@ -164,7 +164,7 @@ describe('iD.actionMergePolygon', function () {
     });
 
     it('preserves coastline tag on the outer ways when creating a multipolygon', function() {
-        graph = graph.replace(graph.entity('w0').update({ tags: { 'natural': 'coastline', 'place': 'island' }}));
+        graph = graph.replace(graph.entity('w0').update({ tags: { 'natural': 'coastline', 'leisure': 'nature_reserve' }}));
         graph = iD.actionMergePolygon(['w0', 'w1'], 'r')(graph);
 
         //coastline should stay on the way
@@ -172,6 +172,6 @@ describe('iD.actionMergePolygon', function () {
 
         //other tags should move to the relation
         var r = graph.entity('r');
-        expect(r.tags).to.eql({ type: 'multipolygon', place: 'island' });
+        expect(r.tags).to.eql({ type: 'multipolygon', leisure: 'nature_reserve' });
     });
 });

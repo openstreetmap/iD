@@ -2,8 +2,7 @@ import { geoSphericalDistance } from '../geo/geo';
 import { osmRelation } from '../osm/relation';
 import { osmWay } from '../osm/way';
 import { utilArrayIntersection, utilWrap } from '../util';
-import { osmSummableTags } from '../osm/tags';
-
+import { osmSummableTags, osmWayOnlyTags } from '../osm/tags';
 
 // Split a way at the given node.
 //
@@ -224,9 +223,11 @@ export function actionSplit(nodeIds, newWayIds) {
                 type: 'multipolygon'
             };
             const lineTags = {};
-            if (areaTags.natural === 'coastline') {
-                delete areaTags.natural;
-                lineTags.natural = 'coastline';
+            for (const key in areaTags) {
+                if (osmWayOnlyTags[key] && osmWayOnlyTags[key][areaTags[key]]) {
+                    lineTags[key] = areaTags[key];
+                    delete areaTags[key];
+                }
             }
             const multipolygon = osmRelation({
                 tags: areaTags,
