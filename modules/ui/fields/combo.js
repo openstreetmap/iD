@@ -278,23 +278,6 @@ export function uiFieldCombo(field, context) {
             ? stringsField.t(`options.${value}.description`) : undefined;
     }
 
-    /**
-     * Native `title` for combobox rows.
-     * - If a preset description is rendered inline, do not repeat any prose in title.
-     * - Otherwise, include the wiki/taginfo description above the raw tag line.
-     * @param {string|undefined} presetDesc - `options.*.description` text rendered in the row.
-     * @param {string|undefined} wikiDesc - External description from wiki/taginfo.
-     * @param {string} key - Tag key.
-     * @param {string} value - Tag value.
-     * @param {boolean} [isMulti]
-     * @returns {string}
-     */
-    function optionTooltip(presetDesc, wikiDesc, key, value, isMulti) {
-        const tag = formatTag(key, value, isMulti);
-        if (presetDesc) return tag;
-        return wikiDesc ? `${wikiDesc}\n${tag}` : tag;
-    }
-
     function getOptions(allOptions) {
         var stringsField = field.resolveReference('stringsCrossReference');
         const localeCode = localizer.localeCode();
@@ -319,14 +302,13 @@ export function uiFieldCombo(field, context) {
 
           const v = 'others';
           const labelId = getLabelId(stringsField, v);
-          const presetDesc = presetDescription(v);
 
           // inserting others because it does not come via _dataLanguages
           options.push({
             key: v,
             value: stringsField.t(labelId, { default: v }),
-            title: optionTooltip(presetDesc, undefined, field.key, v, true),
-            description: presetDesc,
+            title: formatTag(field.key, v, true),
+            description: presetDescription(v),
             display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
             klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
           });
@@ -367,12 +349,11 @@ export function uiFieldCombo(field, context) {
         }
         const result = options.map(function(v) {
             const labelId = getLabelId(stringsField, v);
-            const presetDesc = presetDescription(v);
             return {
                 key: v,
                 value: stringsField.t(labelId, { default: v }),
-                title: optionTooltip(presetDesc, undefined, field.key, v, _isMulti),
-                description: presetDesc,
+                title: formatTag(field.key, v, _isMulti),
+                description: presetDescription(v),
                 display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
                 klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
             };
@@ -474,14 +455,16 @@ export function uiFieldCombo(field, context) {
                 const labelId = getLabelId(stringsField, v);
                 var isLocalizable = stringsField.hasTextForStringId(labelId);
                 var label = stringsField.t(labelId, { default: v });
+
+                // Only here is data for `taginfoDesc` present. We render it as `title`, when no `presetDesc` is given.
                 const presetDesc = presetDescription(v);
-                let wikiDesc = d.title && d.title !== label ? d.title : undefined;
+                let taginfoDesc = d.title && d.title !== label ? d.title : undefined;
                 // For multiCombo, Taginfo often returns the key (e.g. recycling:glass_bottles) as title; don't use as description.
-                if (_isMulti && wikiDesc === field.key + v) wikiDesc = undefined;
+                if (_isMulti && taginfoDesc === field.key + v) taginfoDesc = undefined;
                 return {
                     key: v,
                     value: label,
-                    title: optionTooltip(presetDesc, wikiDesc, field.key, v, _isMulti),
+                    title: !presetDesc && taginfoDesc ? `${taginfoDesc}\n${formatTag(field.key, v, _isMulti)}` : formatTag(field.key, v, _isMulti),
                     description: presetDesc,
                     display: addComboboxIcons(stringsField.t.append(labelId, { default: label }), v),
                     klass: isLocalizable ? '' : 'raw-option'
