@@ -2,10 +2,10 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
+import { deepEqual } from 'fast-equals';
 import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
-import { deepEqual } from 'fast-equals';
 
 import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } from '../util';
 import { geoExtent } from '../geo';

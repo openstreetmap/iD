@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { debounce } from 'es-toolkit/compat';
+import { deepEqual } from 'fast-equals';
 import * as countryCoder from '@rapideditor/country-coder';
 
 import { presetManager } from '../../presets';
@@ -12,7 +13,6 @@ import { cardinal } from '../../osm/node';
 import { isColorValid } from '../../osm/tags';
 import { uiLengthIndicator } from '..';
 import { uiTooltip } from '../tooltip';
-import { deepEqual } from 'fast-equals';
 
 export {
     uiFieldText as uiFieldColour,

@@ -73,6 +73,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Use `<details>` element for collapsible _disclosure_ content ([#11952], thanks [@Shrinks99])
 * Use JSON endpoints for (almost) all OSM APIs ([#11661], thanks [@k-yle])
 * Replace `lodash` with `es-toolkit` ([#12016], thanks [@tordans])
+* Replace `fast-deep-equals` with `fast-equals` ([#12021], thanks [@tordans])
 * Add type definitions to some util functions ([#11993], thanks [@k-yle])
 
 
@@ -103,6 +104,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11976]: https://github.com/openstreetmap/iD/pull/11976
 [#11993]: https://github.com/openstreetmap/iD/pull/11993
 [#12016]: https://github.com/openstreetmap/iD/pull/12016
+[#12021]: https://github.com/openstreetmap/iD/pull/12021
 [#12024]: https://github.com/openstreetmap/iD/issues/12024
 [@Shrinks99]: https://github.com/Shrinks99
 [@Vectorial1024]: https://github.com/Vectorial1024
