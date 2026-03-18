@@ -50,6 +50,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Preserve tagged nodes from being moved around too much when circularizing a feature ([#8265])
 #### :camera: Street-Level
 * Show username of Mapilio photos ([#9903], thanks [@sezerbozbiyik])
+* Fix mouse wheel zooming on 360° photos using the pannellum viewer (e.g. the ones from Panoramax) ([#11995])
 #### :white_check_mark: Validation
 * Make wording of fix for _overlapping features_ validator less ambiguous ([#9888], thanks [@k-yle])
 * Skip `disconnected_way` validation for Golf Paths ([#11863], thanks [@Kayd-06])
@@ -103,6 +104,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11965]: https://github.com/openstreetmap/iD/pull/11965
 [#11976]: https://github.com/openstreetmap/iD/pull/11976
 [#11993]: https://github.com/openstreetmap/iD/pull/11993
+[#11995]: https://github.com/openstreetmap/iD/issues/11995
 [#12016]: https://github.com/openstreetmap/iD/pull/12016
 [#12021]: https://github.com/openstreetmap/iD/pull/12021
 [#12024]: https://github.com/openstreetmap/iD/issues/12024
