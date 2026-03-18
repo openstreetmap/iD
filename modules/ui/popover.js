@@ -2,6 +2,7 @@ import { select as d3_select } from 'd3-selection';
 import { utilFunctor } from '../util/util';
 
 var _popoverID = 0;
+const MIN_MARGIN = 10;
 
 export function uiPopover(klass) {
     var _id = _popoverID++;
@@ -308,34 +309,31 @@ export function uiPopover(klass) {
 
             if (scrollNode) {
 
+                const popoverRect = popoverSelection.node().getBoundingClientRect();
+                const scrollNodeRect = scrollNode.getBoundingClientRect();
+
                 if (placement === 'top' || placement === 'bottom') {
 
-                    var popoverRect = popoverSelection.node().getBoundingClientRect();
-                    var scrollNodeRect = scrollNode.getBoundingClientRect();
+                    const initialPosX = position.x;
 
-                    var initialPosX = position.x;
-
-                    if (popoverRect.right > scrollNodeRect.right - 10) {
-                        position.x -= popoverRect.right - (scrollNodeRect.right - 10);
+                    if (popoverRect.right > scrollNodeRect.right - MIN_MARGIN) {
+                        position.x -= popoverRect.right - (scrollNodeRect.right - MIN_MARGIN);
                     } else if (popoverRect.left < scrollNodeRect.left) {
-                        position.x += (scrollNodeRect.left + 10) - popoverRect.left;
+                        position.x += (scrollNodeRect.left + MIN_MARGIN) - popoverRect.left;
                     }
 
                     const arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
                     // keep the arrow centered on the button, or as close as possible
-                    const arrowPosX = Math.min(Math.max(popoverFrame.w / 2 - (position.x - initialPosX), 10), popoverFrame.w - 10);
+                    const arrowPosX = Math.min(Math.max(popoverFrame.w / 2 - (position.x - initialPosX), MIN_MARGIN), popoverFrame.w - MIN_MARGIN);
                     arrow.style('left', ~~arrowPosX + 'px');
                 } else if (placement === 'left' || placement === 'right') {
 
-                    var popoverRect = popoverSelection.node().getBoundingClientRect();
-                    var scrollNodeRect = scrollNode.getBoundingClientRect();
+                    const initialPosY = position.y;
 
-                    var initialPosY = position.y;
-
-                    if (popoverRect.bottom > scrollNodeRect.bottom - 10) {
-                        position.y -= popoverRect.bottom - (scrollNodeRect.bottom - 10);
-                    } else if (popoverRect.top < scrollNodeRect.top + 10) {
-                        position.y += (scrollNodeRect.top + 10) - popoverRect.top;
+                    if (popoverRect.bottom > scrollNodeRect.bottom - MIN_MARGIN) {
+                        position.y -= popoverRect.bottom - (scrollNodeRect.bottom - MIN_MARGIN);
+                    } else if (popoverRect.top < scrollNodeRect.top + MIN_MARGIN) {
+                        position.y += (scrollNodeRect.top + MIN_MARGIN) - popoverRect.top;
                     }
 
                     const arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
