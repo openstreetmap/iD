@@ -141,6 +141,8 @@ var difference = iD.coreDifference(a, b);
 difference.created();
 ```
 
+![](docs/img/graph-difference.png)
+
 `iD.coreTree` calculates the set of downloaded entities that are visible in the
 current map view. To calculate this quickly during map
 interaction, it uses an [R-tree](https://en.wikipedia.org/wiki/R-tree).
