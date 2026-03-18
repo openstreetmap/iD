@@ -29,6 +29,7 @@ export function validationFormatting() {
 
         function isValidURL(url, strict = false) {
             try {
+                // First try strict WHATWG parsing
                 const link = new URL(url);
                 return link.protocol.startsWith('http');
             } catch {
