@@ -526,6 +526,7 @@ export function uiSectionRawTagEditor(id, context) {
             let row = this.parentNode.parentNode;
             let inputVal = d3_select(row).selectAll('input.value');
             let vNew = context.cleanTagValue(utilGetSetValue(inputVal));
+            if (!kNew) return;
             _pendingChange[kNew] = vNew;
             utilGetSetValue(inputVal, vNew);
         }
