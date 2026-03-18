@@ -279,16 +279,20 @@ export function uiFieldCombo(field, context) {
     }
 
     /**
-     * Tooltip: optional description + raw tag line.
-     * @param {string} [description]
+     * Native `title` for combobox rows.
+     * - If a preset description is rendered inline, do not repeat any prose in title.
+     * - Otherwise, include the wiki/taginfo description above the raw tag line.
+     * @param {string|undefined} presetDesc - `options.*.description` text rendered in the row.
+     * @param {string|undefined} wikiDesc - External description from wiki/taginfo.
      * @param {string} key - Tag key.
      * @param {string} value - Tag value.
      * @param {boolean} [isMulti]
      * @returns {string}
      */
-    function optionTooltip(description, key, value, isMulti) {
+    function optionTooltip(presetDesc, wikiDesc, key, value, isMulti) {
         const tag = formatTag(key, value, isMulti);
-        return description ? `${description}\n${tag}` : tag;
+        if (presetDesc) return tag;
+        return wikiDesc ? `${wikiDesc}\n${tag}` : tag;
     }
 
     function getOptions(allOptions) {
@@ -315,14 +319,14 @@ export function uiFieldCombo(field, context) {
 
           const v = 'others';
           const labelId = getLabelId(stringsField, v);
-          const desc = presetDescription(v);
+          const presetDesc = presetDescription(v);
 
           // inserting others because it does not come via _dataLanguages
           options.push({
             key: v,
             value: stringsField.t(labelId, { default: v }),
-            title: optionTooltip(desc, field.key, v, true),
-            description: desc,
+            title: optionTooltip(presetDesc, undefined, field.key, v, true),
+            description: presetDesc,
             display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
             klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
           });
@@ -363,12 +367,12 @@ export function uiFieldCombo(field, context) {
         }
         const result = options.map(function(v) {
             const labelId = getLabelId(stringsField, v);
-            const desc = presetDescription(v);
+            const presetDesc = presetDescription(v);
             return {
                 key: v,
                 value: stringsField.t(labelId, { default: v }),
-                title: optionTooltip(desc, field.key, v, _isMulti),
-                description: desc,
+                title: optionTooltip(presetDesc, undefined, field.key, v, _isMulti),
+                description: presetDesc,
                 display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
                 klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
             };
@@ -471,13 +475,13 @@ export function uiFieldCombo(field, context) {
                 var isLocalizable = stringsField.hasTextForStringId(labelId);
                 var label = stringsField.t(labelId, { default: v });
                 const presetDesc = presetDescription(v);
-                let taginfoDesc = d.title && d.title !== label ? d.title : undefined;
+                let wikiDesc = d.title && d.title !== label ? d.title : undefined;
                 // For multiCombo, Taginfo often returns the key (e.g. recycling:glass_bottles) as title; don't use as description.
-                if (_isMulti && taginfoDesc === field.key + v) taginfoDesc = undefined;
+                if (_isMulti && wikiDesc === field.key + v) wikiDesc = undefined;
                 return {
                     key: v,
                     value: label,
-                    title: optionTooltip(presetDesc || taginfoDesc, field.key, v, _isMulti),
+                    title: optionTooltip(presetDesc, wikiDesc, field.key, v, _isMulti),
                     description: presetDesc,
                     display: addComboboxIcons(stringsField.t.append(labelId, { default: label }), v),
                     klass: isLocalizable ? '' : 'raw-option'
