@@ -63,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix a bug where the _squaring_ operation would remove a whole corner if it had duplicate vertices (same coordinates, but different node ids) at that point ([#9155])
 * Fix crash when uploading changesets with more than 10,000 features ([#11388], thanks [@k-yle])
 * Preserve relation memberships when an area is automatically converted from a closed way to a multipolygon or vice versa during a merge or split operation ([#9064], [#12024])
+* Make sure tooltips of the map menu are not clipped on the top/bottom of the map ([#11017], thanks [@mykh-hailo])
 #### :earth_asia: Localization
 * Support territory-level phone hints ([#10904], thanks [@Vectorial1024])
 * Add phone and address format for Moldova ([#11965], [#11976], thanks [@Oni-DOS])
@@ -89,6 +90,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9903]: https://github.com/openstreetmap/iD/pull/9903
 [#10904]: https://github.com/openstreetmap/iD/pull/10904
 [#10958]: https://github.com/openstreetmap/iD/issues/10958
+[#11017]: https://github.com/openstreetmap/iD/issues/11017
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
 [#11329]: https://github.com/openstreetmap/iD/issues/11329
 [#11388]: https://github.com/openstreetmap/iD/pull/11388
@@ -112,6 +114,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@Vectorial1024]: https://github.com/Vectorial1024
 [@Oni-DOS]: https://github.com/Oni-DOS
 [@sezerbozbiyik]: https://github.com/sezerbozbiyik
+[@mykh-hailo]: https://github.com/mykh-hailo
 
 
 # 2.38.0-dev
