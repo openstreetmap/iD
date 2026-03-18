@@ -486,6 +486,11 @@ export function uiSectionRawTagEditor(id, context) {
 
         var kNew = context.cleanTagKey(this.value.trim());
 
+        if (!kNew) {
+            this.value = kOld;
+            return;
+        }
+
         // allow no change if the key should be readonly
         if (isReadOnly({ key: kNew })) {
             this.value = kOld;
@@ -526,7 +531,6 @@ export function uiSectionRawTagEditor(id, context) {
             let row = this.parentNode.parentNode;
             let inputVal = d3_select(row).selectAll('input.value');
             let vNew = context.cleanTagValue(utilGetSetValue(inputVal));
-            if (!kNew) return;
             _pendingChange[kNew] = vNew;
             utilGetSetValue(inputVal, vNew);
         }
@@ -543,6 +547,7 @@ export function uiSectionRawTagEditor(id, context) {
 
     function valueChange(d3_event, d) {
         if (isReadOnly(d)) return;
+        if (!d.key) return;
 
         // exit if this is a multiselection and no value was entered
         if (Array.isArray(d.value) && !this.value) return;
