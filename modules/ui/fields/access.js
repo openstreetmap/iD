@@ -132,6 +132,9 @@ export function uiFieldAccess(field, context) {
                 foot: 'yes',
                 motor_vehicle: 'no'
             },
+            living_street: {
+                foot: 'yes'
+            },
             cycleway: {
                 motor_vehicle: 'no',
                 bicycle: 'designated'
