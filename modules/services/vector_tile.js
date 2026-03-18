@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 import turf_bboxClip from '@turf/bbox-clip';
 import stringify from 'fast-json-stable-stringify';
 import polygonClipping from 'polygon-clipping';

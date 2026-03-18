@@ -1,4 +1,4 @@
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../presets';
