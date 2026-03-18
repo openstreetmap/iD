@@ -53,4 +53,17 @@ describe('iD.uiSectionRawTagEditor', function() {
         iD.utilTriggerEvent(element.selectAll('button.remove'), 'mousedown', { button: 0 });
         expect(await tags).to.eql({highway: undefined});
     });
+
+    it('does not dispatch change when key is emptied', async () => {
+        let changeFired = false;
+        taglist.on('change', () => { changeFired = true; });
+
+        var keyInput = element.select('.tag-list').select('input.key');
+        iD.utilGetSetValue(keyInput, '');
+        iD.utilTriggerEvent(keyInput, 'change');
+
+        // give it a moment to ensure nothing fires
+        await new Promise(resolve => { window.setTimeout(resolve, 100); });
+        expect(changeFired).to.be.false;
+    });
 });
