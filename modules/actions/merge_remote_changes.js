@@ -1,4 +1,4 @@
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 import { diff3Merge } from 'node-diff3';
 import { escape } from 'es-toolkit/compat';
 
