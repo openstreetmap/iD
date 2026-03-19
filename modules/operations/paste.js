@@ -77,7 +77,10 @@ export function operationPaste(context) {
         if (!ids.length) {
             return t.append('operations.paste.nothing_copied');
         }
-        return t.append('operations.paste.description', { feature: utilDisplayLabel(oldGraph.entity(ids[0]), oldGraph), n: ids.length });
+        return t.append('operations.paste.description', {
+            feature: utilDisplayLabel(oldGraph.entity(ids[0]), oldGraph),
+            n: ids.length
+        });
     };
 
     operation.annotation = function() {

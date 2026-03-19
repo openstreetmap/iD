@@ -42,14 +42,14 @@ export function uiFieldCheck(field, context) {
         for (var i in options) {
             var v = options[i];
             values.push(v === 'undefined' ? undefined : v);
-            texts.push(stringsField.t.html('options.' + v, { 'default': v }));
+            texts.push(stringsField.t.append('options.' + v, { 'default': v }));
         }
     } else {
         values = [undefined, 'yes'];
-        texts = [t.html('inspector.unknown'), t.html('inspector.check.yes')];
+        texts = [t.append('inspector.unknown'), t.append('inspector.check.yes')];
         if (field.type !== 'defaultCheck') {
             values.push('no');
-            texts.push(t.html('inspector.check.no'));
+            texts.push(t.append('inspector.check.no'));
         }
     }
 
@@ -64,7 +64,7 @@ export function uiFieldCheck(field, context) {
             var entity = context.entity(_entityIDs[0]);
             if (entity.type === 'way' && !!utilCheckTagDictionary(entity.tags, omit(osmOneWayTags, 'oneway'))) {
                 _impliedYes = true;
-                texts[0] = t.html('_tagging.presets.fields.oneway_yes.options.undefined');
+                texts[0] = t.append('_tagging.presets.fields.oneway_yes.options.undefined');
             }
         }
     }
@@ -86,7 +86,7 @@ export function uiFieldCheck(field, context) {
         var icon = pseudoDirection ? '#iD-icon-forward' : '#iD-icon-backward';
 
         selection.selectAll('.reverser-span')
-            .html('')
+            .text('')
             .call(t.append('inspector.check.reverser'))
             .call(svgIcon(icon, 'inline'));
 
@@ -112,7 +112,7 @@ export function uiFieldCheck(field, context) {
 
         enter
             .append('span')
-            .html(texts[0])
+            .call(texts[0])
             .attr('class', 'value');
 
         if (field.type === 'onewayCheck') {
@@ -215,7 +215,8 @@ export function uiFieldCheck(field, context) {
             .property('checked', isChecked(_value));
 
         text
-            .html(isMixed ? t.html('inspector.multiple_values') : textFor(_value))
+            .text('')
+            .call(isMixed ? t.append('inspector.multiple_values') : textFor(_value))
             .classed('mixed', isMixed);
 
         label

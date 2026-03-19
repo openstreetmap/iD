@@ -50,9 +50,8 @@ export function uiPanelMeasurement(context) {
         var totalNodeCount, length = 0, area = 0, distance;
 
         if (selectedNoteID && osm) {       // selected 1 note
-
             var note = osm.getNote(selectedNoteID);
-            heading = t.html('note.note') + ' ' + selectedNoteID;
+            heading = t.append('note.note', { suffix: ' ' + selectedNoteID });
             location = note.loc;
             geometry = 'note';
 
@@ -65,7 +64,7 @@ export function uiPanelMeasurement(context) {
             });
 
             heading = selected.length === 1 ? selected[0].id :
-                t.html('info_panels.selected', { n: selected.length });
+                t.append('info_panels.selected', { n: selected.length });
 
             if (selected.length) {
                 var extent = geoExtent();
@@ -115,11 +114,16 @@ export function uiPanelMeasurement(context) {
 
         selection.html('');
 
-        if (heading) {
+        if (heading && typeof heading === 'function') {
             selection
                 .append('h4')
                 .attr('class', 'measurement-heading')
-                .html(heading);
+                .call(heading);
+        } else {
+            selection
+                .append('h4')
+                .attr('class', 'measurement-heading')
+                .text(heading);
         }
 
         var list = selection
@@ -131,8 +135,8 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .call(t.append('info_panels.measurement.geometry', { suffix: ':' }))
                 .append('span')
-                .html(
-                    closed ? t.html('info_panels.measurement.closed_' + geometry) : t.html('geometry.' + geometry)
+                .call(
+                    closed ? t.append('info_panels.measurement.closed_' + geometry) : t.append('geometry.' + geometry)
                 );
         }
 

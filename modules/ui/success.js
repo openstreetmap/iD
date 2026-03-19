@@ -153,8 +153,12 @@ export function uiSuccess(context) {
 
     summaryDetail
       .append('div')
-      .html(t.html('success.changeset_id', {
-        changeset_id: { html: `<a href="${changesetURL}" target="_blank">${_changeset.id}</a>` }
+      .call(t.addOrUpdate('success.changeset_id', {
+        changeset_id: selection => selection
+          .append('a')
+          .attr('target', '_blank')
+          .attr('href', changesetURL)
+          .text(_changeset.id)
       }));
 
     if (showDonationMessage !== false) {
@@ -338,7 +342,7 @@ export function uiSuccess(context) {
         .call(uiDisclosure(context, `community-events-${d.id}`, false)
           .expanded(false)
           .updatePreference(false)
-          .label(t.html('success.events'))
+          .label(t.append('success.events'))
           .content(showNextEvents)
         )
         .select('.hide-toggle')
