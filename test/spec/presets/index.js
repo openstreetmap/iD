@@ -428,7 +428,7 @@ describe('iD.presetIndex', function () {
     });
 
     describe('PresetIndex.recents', () => {
-        it('fills all recent slots by filtering before slicing (#11405)', () => {
+        it('fills all recent slots even when some remembered presets are not available in the current region (#11405)', () => {
             const testIndex = presetIndex();
 
             locationManager.locationSetsAt = () => ({ 'world': true, 'us_only': false });
