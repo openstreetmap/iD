@@ -77,6 +77,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Replace `lodash` with `es-toolkit` ([#12016], thanks [@tordans])
 * Replace `fast-deep-equals` with `fast-equals` ([#12021], thanks [@tordans])
 * Add type definitions to some util functions ([#11993], thanks [@k-yle])
+* Localizer module: allow string replacements to use callback functions ([#11347])
 
 
 [#8265]: https://github.com/openstreetmap/iD/issues/8265
@@ -93,6 +94,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11017]: https://github.com/openstreetmap/iD/issues/11017
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
 [#11329]: https://github.com/openstreetmap/iD/issues/11329
+[#11347]: https://github.com/openstreetmap/iD/pull/11347
 [#11388]: https://github.com/openstreetmap/iD/pull/11388
 [#11645]: https://github.com/openstreetmap/iD/pull/11645
 [#11661]: https://github.com/openstreetmap/iD/pull/11661
