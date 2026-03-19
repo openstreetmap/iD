@@ -166,6 +166,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Replace deprecated `document.createEvent`/`initEvent` with modern Event constructor ([#11871], thanks [@JaiswalShivang])
 * Fix crash in country combo field when entering unrecognized ISO country codes ([#11904], thanks [@JaiswalShivang])
 * Upgrade clipboard functionality with modern Clipboard API ([#11869], thanks [@tulavamsidheeraj])
+* Ensure the recent presets list is always full by filtering for location before limiting the count. ([#11405], thanks [@Razen04])
 
 
 [#8464]: https://github.com/openstreetmap/iD/issues/8464
@@ -205,6 +206,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [ffc7e2135]: https://github.com/openstreetmap/iD/commit/ffc7e2135
 [be0a20e59]: https://github.com/openstreetmap/iD/commit/be0a20e59
 [b06496780]: https://github.com/openstreetmap/iD/commit/b06496780
+[#11405]: https://github.com/openstreetmap/iD/issues/11405
 [#id-tagging-schema/pull/1507]: https://github.com/openstreetmap/id-tagging-schema/pull/1507
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04
