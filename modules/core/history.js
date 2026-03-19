@@ -289,6 +289,11 @@ export function coreHistory(context) {
         },
 
 
+        changesCount() {
+            return Object.values(this.changes()).flat().length;
+        },
+
+
         hasChanges: function() {
             return this.difference().length() > 0;
         },
@@ -429,7 +434,8 @@ export function coreHistory(context) {
                     do { permID = nrw + (++nextID[nrw]); }
                     while (baseEntities.hasOwnProperty(permID));
 
-                    copy.id = permIDs[source.id] = permID;
+                    copy.id = permID;
+                    permIDs[source.id] = permID;
                 }
                 return copy;
             }
@@ -649,9 +655,16 @@ export function coreHistory(context) {
                 // don't overwrite existing, unresolved changes
                 !_hasUnresolvedRestorableChanges) {
 
-                asyncPrefs.set('saved_history', history.toJSON() || null)
-                    .then(() => prefs('has_saved_history', true))
-                    .catch(() => dispatch.call('storage_error'));
+                const historyData = history.toJSON();
+                if (!historyData) {
+                    asyncPrefs.del('saved_history')
+                        .then(() => prefs('has_saved_history', null))
+                        .catch(() => dispatch.call('storage_error'));
+                } else {
+                    asyncPrefs.set('saved_history', historyData)
+                        .then(() => prefs('has_saved_history', true))
+                        .catch(() => dispatch.call('storage_error'));
+                }
             }
             return history;
         },

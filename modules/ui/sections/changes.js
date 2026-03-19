@@ -93,11 +93,8 @@ export function uiSectionChanges(context) {
                 if (name !== '') {
                     string += ':';
                 }
-                return string += ' ' + name;
+                return string + ' ' + name;
             });
-
-        items = itemsEnter
-            .merge(items);
 
 
         // Download changeset link

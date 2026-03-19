@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit/compat';
 
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import {
@@ -169,7 +169,7 @@ export function uiSidebar(context) {
             }
         };
 
-        sidebar.hoverModeSelect = _throttle(hoverModeSelect, 200);
+        sidebar.hoverModeSelect = throttle(hoverModeSelect, 200);
 
         function hover(targets) {
             var datum = targets && targets.length && targets[0];
@@ -258,7 +258,7 @@ export function uiSidebar(context) {
             }
         }
 
-        sidebar.hover = _throttle(hover, 200);
+        sidebar.hover = throttle(hover, 200);
 
 
         sidebar.intersects = function(extent) {
@@ -366,14 +366,15 @@ export function uiSidebar(context) {
             // switch from % to px
             selection.style('width', sidebarWidth + 'px');
 
-            var startMargin, endMargin, lastMargin;
+            var startMargin, endMargin;
             if (isCollapsing) {
-                startMargin = lastMargin = 0;
+                startMargin = 0;
                 endMargin = -sidebarWidth;
             } else {
-                startMargin = lastMargin = -sidebarWidth;
+                startMargin = -sidebarWidth;
                 endMargin = 0;
             }
+            let lastMargin = startMargin;
 
             if (!isCollapsing) {
                 // unhide the sidebar's content before it transitions onscreen

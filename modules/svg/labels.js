@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit/compat';
 
 import { geoPath as d3_geoPath } from 'd3-geo';
 import RBush from 'rbush';
@@ -43,6 +43,7 @@ export function svgLabels(projection, context) {
         ['area', 'man_made', '*', 12],
         ['area', 'natural', '*', 12],
         ['area', 'shop', '*', 12],
+        ['area', 'craft', '*', 12],
         ['area', 'tourism', '*', 12],
         ['area', 'camp_site', '*', 12],
         ['point', 'aeroway', '*', 10],
@@ -299,7 +300,7 @@ export function svgLabels(projection, context) {
             var preset = geometry === 'area' && presetManager.match(entity, graph);
             var icon = preset && !shouldSkipIcon(preset) && preset.icon;
 
-            if (!icon && !utilDisplayName(entity, undefined, true)) continue;
+            if (!icon && !utilDisplayName(entity, { isMapLabel: true })) continue;
 
             for (k = 0; k < labelStack.length; k++) {
                 var matchGeom = labelStack[k][0];
@@ -330,7 +331,7 @@ export function svgLabels(projection, context) {
 
                 let name = geometry === 'line'
                     ? utilDisplayNameForPath(entity)
-                    : utilDisplayName(entity, undefined, true);
+                    : utilDisplayName(entity, { isMapLabel: true });
                 var width = name && textWidth(name, fontSize, selection.select('g.layer-osm.labels').node());
                 var p = null;
 
@@ -719,7 +720,7 @@ export function svgLabels(projection, context) {
                     // in select mode: hide labels of currently selected line(s)
                     // to still allow accessing midpoints
                     // https://github.com/openstreetmap/iD/issues/11220
-                    context.mode().selectedIDs().includes(id) && graph.hasEntity(id).geometry(graph) === 'line');
+                    context.mode().selectedIDs().includes(id) && graph.hasEntity(id)?.geometry(graph) === 'line');
             hideIds.push.apply(hideIds, nearMouse);
             hideIds = utilArrayUniq(hideIds);
         }
@@ -765,7 +766,7 @@ export function svgLabels(projection, context) {
     }
 
 
-    var throttleFilterLabels = _throttle(filterLabels, 100);
+    var throttleFilterLabels = throttle(filterLabels, 100);
 
 
     drawLabels.observe = function(selection) {
@@ -788,8 +789,8 @@ export function svgLabels(projection, context) {
 
 const _textWidthCache = {};
 export function textWidth(text, size, container) {
+    _textWidthCache[size] ||= {};
     let c = _textWidthCache[size];
-    if (!c) c = _textWidthCache[size] = {};
 
     if (c[text]) {
         return c[text];

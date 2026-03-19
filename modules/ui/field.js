@@ -213,7 +213,7 @@ export function uiField(context, presetField, entityIDs, options) {
                 if (options.wrap && options.info) {
                     var referenceKey = d.key || '';
                     if (d.type === 'multiCombo') {   // lookup key without the trailing ':'
-                        referenceKey = referenceKey.replace(/:$/, '');
+                        referenceKey = referenceKey.replace(/:$/, ':*');
                     }
 
                     var referenceOptions = d.reference || {

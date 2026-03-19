@@ -355,10 +355,10 @@ describe('iD.osmWay', function() {
             expect(iD.osmWay({tags: { natural: 'coastline' }}).sidednessIdentifier()).to.eql('coastline');
             expect(iD.osmWay({tags: { barrier: 'retaining_wall' }}).sidednessIdentifier()).to.eql('barrier');
             expect(iD.osmWay({tags: { barrier: 'kerb' }}).sidednessIdentifier()).to.eql('barrier');
-            expect(iD.osmWay({tags: { barrier: 'guard_rail' }}).sidednessIdentifier()).to.eql('barrier');
+            expect(iD.osmWay({tags: { barrier: 'guard_rail' }}).sidednessIdentifier()).to.eql('guard_rail');
             expect(iD.osmWay({tags: { barrier: 'city_wall' }}).sidednessIdentifier()).to.eql('barrier');
             expect(iD.osmWay({tags: { man_made: 'embankment' }}).sidednessIdentifier()).to.eql('man_made');
-            expect(iD.osmWay({tags: { 'abandoned:barrier': 'guard_rail' }}).sidednessIdentifier()).to.eql('barrier');
+            expect(iD.osmWay({tags: { 'abandoned:barrier': 'retaining_wall' }}).sidednessIdentifier()).to.eql('barrier');
         });
 
         it('returns null when tag does not have implied sidedness', function() {

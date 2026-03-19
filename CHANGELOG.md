@@ -35,34 +35,269 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# unreleased (v2.37.0-dev)
+
+# Unreleased (2.39.0-dev)
 
 #### :sparkles: Usability & Accessibility
-* Don't suggest values from Taginfo for `name:xx` tags ([#10287], thanks [@draunger])
+* Increase number of displayed _recently used presets_ to 8 (from 4) ([#9545], thanks [@k-yle])
+* Always render icons for `craft` features mapped as areas ([#9183])
+* Change labeling of route relation to show icons, `ref` and route colours ([#11052])
+* Render the `turnout_side` of railway switches ([#11944], thanks [@hlfan])
+* Show descriptions of preset field _options_ directly in the combobox dropdown menu in slightly smaller font size ([#11876], thanks [@Sembauke])
+* Render "outside" side of guardrails with small dots ([#9594])
 #### :scissors: Operations
+* Show a preview of the result of some geometry operations while the respective button in the edit menu is hovered ([#11778])
+* Preserve tagged nodes from being moved around too much when circularizing a feature ([#8265])
+#### :camera: Street-Level
+* Show username of Mapilio photos ([#9903], thanks [@sezerbozbiyik])
+* Fix mouse wheel zooming on 360° photos using the pannellum viewer (e.g. the ones from Panoramax) ([#11995])
+#### :white_check_mark: Validation
+* Make wording of fix for _overlapping features_ validator less ambiguous ([#9888], thanks [@k-yle])
+* Skip `disconnected_way` validation for Golf Paths ([#11863], thanks [@Kayd-06])
+* Also suggest to remove deprecated tag when the object already has the corresponding new tag ([#9272])
+* Add explanation how to fix "point should be vertex" validation warning ([#10958])
+* Suggest to "reposition features" before other fixes when the validator found overlapping buildings ([#11329])
+#### :bug: Bugfixes
+* Fix the sorting of tag values when multiple objects' tags are combined in `utilCombinedTags` ([#11932], thanks [@JaiswalShivang])
+* Don't change the value of `railway:turnout_side` when reversing a railway track ([#11645])
+* Fix a bug where the _squaring_ operation would remove a whole corner if it had duplicate vertices (same coordinates, but different node ids) at that point ([#9155])
+* Fix crash when uploading changesets with more than 10,000 features ([#11388], thanks [@k-yle])
+* Preserve relation memberships when an area is automatically converted from a closed way to a multipolygon or vice versa during a merge or split operation ([#9064], [#12024])
+* Make sure tooltips of the map menu are not clipped on the top/bottom of the map ([#11017], thanks [@mykh-hailo])
+#### :earth_asia: Localization
+* Support territory-level phone hints ([#10904], thanks [@Vectorial1024])
+* Add phone and address format for Moldova ([#11965], [#11976], thanks [@Oni-DOS])
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* When changing presets, delete tags from the old preset which are not in the new preset ([#11696], thanks [@k-yle])
+#### :hammer: Development
+* Use `<details>` element for collapsible _disclosure_ content ([#11952], thanks [@Shrinks99])
+* Use JSON endpoints for (almost) all OSM APIs ([#11661], thanks [@k-yle])
+* Replace `lodash` with `es-toolkit` ([#12016], thanks [@tordans])
+* Replace `fast-deep-equals` with `fast-equals` ([#12021], thanks [@tordans])
+* Add type definitions to some util functions ([#11993], thanks [@k-yle])
+
+
+[#8265]: https://github.com/openstreetmap/iD/issues/8265
+[#9064]: https://github.com/openstreetmap/iD/issues/9064
+[#9155]: https://github.com/openstreetmap/iD/issues/9155
+[#9183]: https://github.com/openstreetmap/iD/issues/9183
+[#9272]: https://github.com/openstreetmap/iD/issues/9272
+[#9545]: https://github.com/openstreetmap/iD/pull/9545
+[#9594]: https://github.com/openstreetmap/iD/issues/9594
+[#9888]: https://github.com/openstreetmap/iD/pull/9888
+[#9903]: https://github.com/openstreetmap/iD/pull/9903
+[#10904]: https://github.com/openstreetmap/iD/pull/10904
+[#10958]: https://github.com/openstreetmap/iD/issues/10958
+[#11017]: https://github.com/openstreetmap/iD/issues/11017
+[#11052]: https://github.com/openstreetmap/iD/pull/11052
+[#11329]: https://github.com/openstreetmap/iD/issues/11329
+[#11388]: https://github.com/openstreetmap/iD/pull/11388
+[#11645]: https://github.com/openstreetmap/iD/pull/11645
+[#11661]: https://github.com/openstreetmap/iD/pull/11661
+[#11696]: https://github.com/openstreetmap/iD/pull/11696
+[#11778]: https://github.com/openstreetmap/iD/pull/11778
+[#11865]: https://github.com/openstreetmap/iD/pull/11865
+[#11876]: https://github.com/openstreetmap/iD/pull/11876
+[#11932]: https://github.com/openstreetmap/iD/pull/11932
+[#11944]: https://github.com/openstreetmap/iD/pull/11944
+[#11952]: https://github.com/openstreetmap/iD/pull/11952
+[#11965]: https://github.com/openstreetmap/iD/pull/11965
+[#11976]: https://github.com/openstreetmap/iD/pull/11976
+[#11993]: https://github.com/openstreetmap/iD/pull/11993
+[#11995]: https://github.com/openstreetmap/iD/issues/11995
+[#12016]: https://github.com/openstreetmap/iD/pull/12016
+[#12021]: https://github.com/openstreetmap/iD/pull/12021
+[#12024]: https://github.com/openstreetmap/iD/issues/12024
+[@Shrinks99]: https://github.com/Shrinks99
+[@Vectorial1024]: https://github.com/Vectorial1024
+[@Oni-DOS]: https://github.com/Oni-DOS
+[@sezerbozbiyik]: https://github.com/sezerbozbiyik
+[@mykh-hailo]: https://github.com/mykh-hailo
+
+
+# 2.38.0-dev
+##### 2026-03-02
+
+#### :sparkles: Usability & Accessibility
+* Show warning when attempting to paste but nothing has been copied ([#9401], thanks [@omsaraykar])
+* Don't suggest values from Taginfo for `addr:*` tags ([#11733], thanks [@k-yle])
+* Don't suggest values from Taginfo for tags with less than 100 uses, even if they're documented on the wiki ([#11794], thanks [@Kaushik4141])
+* Don't suggest values from Taginfo for keys that should only be used on changesets, such as `hashtags` ([#11697], thanks [@bhavyaKhatri2703])
+* Handle `<key>=left|right|both` in the `directionalCombo` UI to enable support for `sidewalk=left|right|both` [in the future][#id-tagging-schema/pull/1507] ([#10935], thanks [@tordans], [@k-yle])
+* Update tag list for paved/semipaved `surface`s ([ffc7e2135])
+* Add dedicated rendering style for `highway=ladder` ways ([#11804], thanks [@bhavyaKhatri2703])
+#### :scissors: Operations
+* Display reflection axis on the map while hovering the reflection operations in the edit menu ([#11774], thanks [@Kaushik4141])
+#### :white_check_mark: Validation
+* Don't error on features with a sole `note` tag ([#11522])
+* Warn when two features cross each other on same `layer`, regardless of `bridge` / `tunnel` tags ([#10999], thanks [@homersimpsons])
+* Add `railway=crossing` tag when connecting two railways using the validation fix ([#9226], thanks [@paulklie])
+#### :bug: Bugfixes
+* Fix typo: `parking:left:capacity` duplicated in osmSummableTags, missing `parking:right:capacity` ([#11819], thanks [@JaiswalShivang])
+* Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
+* Fix error setting custom background ([#11862], thanks [@Kayd-06])
+* Fix crash when commenting/closing notes when the note is closed by another mapper in the meantime ([#8464])
+* Fix confusing 'Point should be a point' warning ([#11589], thanks [@k-yle])
+* Let presets fall back to base point/line/area presets if there is no matching preset in the current region ([cbeb0d503])
+* Properly skip tag suggestions for tags ending in  `_1` ([#11633], thanks [@k-yle])
+* Skip `emergency` access tags when determining whether a feature should be an area or not ([#11327])
+* Correctly show special characters in names of background layers ([#11773], thanks [@Kaushik4141])
+* Fix a bug where the validator mixed up _point_ and _vertex_ in some warning messages ([#11590], thanks [@k-yle])
+* Fix some icons having the wrong background color in dark mode ([#11657], thanks [@hlfan])
+#### :earth_asia: Localization
+* Add Moroccan phone number and address formats ([#11651], [#11698], thanks [@ilias52730])
+* The Languages field shows language names in your preferred language. ([#11699], thanks [@Razen04])
+* When viewing the help information for tags or presets, use locale-specific properties if available ([#11759], thanks [@k-yle])
+* Show country names in your preferred language and country flag emoji in the Country field dropdown ([#11783], thanks [@Razen04])
+* Allow language codes of language variants (e.g. `name:zh-Latn-pinyin`) in multilingual name fields ([be0a20e59])
+#### :hourglass: Performance
+* iD is now twice as fast during long editing sessions ([#11861], thanks [@k-yle])
+#### :mortar_board: Walkthrough / Help
+* Update help text about street level imagery providers ([#11560], thanks [@danieldegroot2])
+#### :rocket: Presets
+* Add dedicated styling for `highway=ladder` to make it distinguishable from `highway=steps` ([#11799], thanks [@bhavyaKhatri2703])
+* Make fields more rubust when options are undefined ([#11533], thanks [@hlfan])
+* make `addr:floor` subfield of the address field narrow by default ([b06496780])
+#### :hammer: Development
+* Change package name to `@openstreetmap/id` to be able to publish releases on npm
+* Use Röntgen icon set directly from upstream npm package ([#11784], thanks [@tordans])
+* Replace deprecated `document.createEvent`/`initEvent` with modern Event constructor ([#11871], thanks [@JaiswalShivang])
+* Fix crash in country combo field when entering unrecognized ISO country codes ([#11904], thanks [@JaiswalShivang])
+* Upgrade clipboard functionality with modern Clipboard API ([#11869], thanks [@tulavamsidheeraj])
+
+
+[#8464]: https://github.com/openstreetmap/iD/issues/8464
+[#9226]: https://github.com/openstreetmap/iD/pull/9226
+[#9401]: https://github.com/openstreetmap/iD/issues/9401
+[#10935]: https://github.com/openstreetmap/iD/issues/10935
+[#10999]: https://github.com/openstreetmap/iD/pull/10999
+[#11327]: https://github.com/openstreetmap/iD/pull/11327
+[#11522]: https://github.com/openstreetmap/iD/issues/11522
+[#11533]: https://github.com/openstreetmap/iD/pull/11533
+[#11589]: https://github.com/openstreetmap/iD/pull/11589
+[#11590]: https://github.com/openstreetmap/iD/pull/11590
+[#11560]: https://github.com/openstreetmap/iD/pull/11560
+[#11633]: https://github.com/openstreetmap/iD/pull/11633
+[#11636]: https://github.com/openstreetmap/iD/pull/11636
+[#11651]: https://github.com/openstreetmap/iD/pull/11651
+[#11657]: https://github.com/openstreetmap/iD/pull/11657
+[#11697]: https://github.com/openstreetmap/iD/pull/11697
+[#11698]: https://github.com/openstreetmap/iD/pull/11698
+[#11699]: https://github.com/openstreetmap/iD/pull/11699
+[#11733]: https://github.com/openstreetmap/iD/pull/11733
+[#11759]: https://github.com/openstreetmap/iD/pull/11759
+[#11773]:https://github.com/openstreetmap/iD/pull/11773
+[#11774]: https://github.com/openstreetmap/iD/pull/11774
+[#11784]: https://github.com/openstreetmap/iD/pull/11784
+[#11794]: https://github.com/openstreetmap/iD/pull/11794
+[#11799]: https://github.com/openstreetmap/iD/issues/11799
+[#11783]: https://github.com/openstreetmap/iD/pull/11783
+[#11804]: https://github.com/openstreetmap/iD/pull/11804
+[#11819]: https://github.com/openstreetmap/iD/pull/11819
+[#11861]: https://github.com/openstreetmap/iD/pull/11861
+[#11862]: https://github.com/openstreetmap/iD/pull/11862
+[#11869]: https://github.com/openstreetmap/iD/pull/11869
+[#11871]: https://github.com/openstreetmap/iD/pull/11871
+[#11904]: https://github.com/openstreetmap/iD/issues/11904
+[cbeb0d503]: https://github.com/openstreetmap/iD/commit/cbeb0d503
+[ffc7e2135]: https://github.com/openstreetmap/iD/commit/ffc7e2135
+[be0a20e59]: https://github.com/openstreetmap/iD/commit/be0a20e59
+[b06496780]: https://github.com/openstreetmap/iD/commit/b06496780
+[#id-tagging-schema/pull/1507]: https://github.com/openstreetmap/id-tagging-schema/pull/1507
+[@ilias52730]: https://github.com/ilias52730
+[@Razen04]: https://github.com/Razen04
+[@homersimpsons]: https://github.com/homersimpsons
+[@omsaraykar]: https://github.com/omsaraykar
+[@Kaushik4141]: https://github.com/Kaushik4141
+[@JaiswalShivang]: https://github.com/JaiswalShivang
+[@Kayd-06]: https://github.com/Kayd-06
+[@danieldegroot2]: https://github.com/danieldegroot2
+[@paulklie]: https://github.com/paulklie
+[@tulavamsidheeraj]: https://github.com/tulavamsidheeraj
+
+
+# v2.37.3
+##### 2025-10-31
+
+#### :bug: Bugfixes
+* bump id-taging-schema to 6.13.4 ([#11532])
+* fix a potential crash when base presets are missing
+
+[#11532]: https://github.com/openstreetmap/iD/issues/11532
+
+
+# v2.37.2
+##### 2025-10-30
+
+* Correctly resolve subtitles of NSI presets when base preset has a cross-referenced string ([#11527])
+
+[#11527]: https://github.com/openstreetmap/iD/issues/11527
+
+
+# v2.37.1
+##### 2025-10-27
+
+* Fix crash when loading non 360° street level photos
+
+
+# v2.37.0
+##### 2025-10-27
+
+#### :mega: Release Highlights
+* Add dark mode theme ([#8214], thanks [@hlfan] and [@AntonKhorev]!)
+#### :sparkles: Usability & Accessibility
+* Render the `side` tag of vertices (such as traffic signs) in form of small triangles pointing to the respective side of the way ([#10303], thanks [@k-yle])
+* Don't suggest values from Taginfo for `name:xx` tags ([#10287], thanks [@draunger])
+* Link to object's history page on "view on osm" link ([#11403], thanks [@bhavyaKhatri2703])
+* Remove (rarely triggered) autofilling of localized names with wikipedia article titles ([#11423])
+#### :scissors: Operations
+* Be slightly more lenient when searching relations by id in the raw membership editor ([#9575])
 #### :camera: Street-Level
 * Always hide sequence lines when their photos are hidden by the date filter ([#11365])
+* Fix bug which caused photo viewer to be in an inconsistent state after e.g. switching between a local georeferenced photo and a photo from Panoramax.
+* Allow to pan non-360° photos fully to the right/left/top/bottom edge, especially relevant for photos in portrait format or very wide photos ([#11466])
 #### :white_check_mark: Validation
 * Show warnings for potentially incompatible sources also in changeset `source` tags ([#11334])
 * Include the number of changeset tags with incompatible sources in `warnings:incompatible_source` changeset tag ([#8400])
 #### :bug: Bugfixes
 * Display relative time section of "last edited {time ago} by…" text in the correct language when the user's locale is different from the browser language ([#11361])
+* Fix the help info not working for some namespaced fields like `payment:*` and `socket:*` ([#11402], thanks [@k-yle])
 * Fix crash when a way has more than 2000 nodes ([#11360])
-#### :earth_asia: Localization
+* Fix data `source`s incorrectly flagged as _proprietary data_: `esri/Google_Open_Buildings` ([#11412], thanks [@Ankitgkp])
+* Keep `natural=coastline` tag on the way when a coastline way that is also an area (e.g. `place=islet`) is split and converted into a multipolygon ([#9563])
+* Fix address preset from being hidden in presets list when "point" features are hidden, but "address points" visible ([#11456])
+* Preserve existing `layer` tags when adding a bridge or tunnel ([#11511], thanks [@k-yle])
 #### :hourglass: Performance
 * Compress changesets before uploading, to slightly reduce bandwidth ([#11353], thank [@k-yle])
 * Migrate stored history data from LocalStorage to IndexedDB which allows larger amount of changed data to be stored and enhanced performance ([#11141], thanks [@Deeptanshu-sankhwar])
 #### :mortar_board: Walkthrough / Help
-#### :hammer: Development
+* fix walkthrough getting stuck after "delete point" step ([#11442], thanks [@bgo-bell])
 
+[#8214]: https://github.com/openstreetmap/iD/issues/8214
 [#8400]: https://github.com/openstreetmap/iD/issues/8400
+[#9563]: https://github.com/openstreetmap/iD/issues/9563
+[#9575]: https://github.com/openstreetmap/iD/issues/9575
 [#10287]: https://github.com/openstreetmap/iD/issues/10287
+[#10303]: https://github.com/openstreetmap/iD/pull/10303
 [#11141]: https://github.com/openstreetmap/iD/pull/11141
 [#11334]: https://github.com/openstreetmap/iD/pull/11334
 [#11353]: https://github.com/openstreetmap/iD/pull/11353
 [#11360]: https://github.com/openstreetmap/iD/issues/11360
 [#11361]: https://github.com/openstreetmap/iD/issues/11361
 [#11365]: https://github.com/openstreetmap/iD/issues/11365
+[#11402]: https://github.com/openstreetmap/iD/pull/11402
+[#11403]: https://github.com/openstreetmap/iD/issues/11403
+[#11412]: https://github.com/openstreetmap/iD/pull/11412
+[#11423]: https://github.com/openstreetmap/iD/pull/11423
+[#11442]: https://github.com/openstreetmap/iD/pull/11442
+[#11456]: https://github.com/openstreetmap/iD/issues/11456
+[#11466]: https://github.com/openstreetmap/iD/issues/11466
+[#11511]: https://github.com/openstreetmap/iD/pull/11511
+[@Ankitgkp]: https://github.com/Ankitgkp
+[@AntonKhorev]: https://github.com/AntonKhorev
+[@bgo-bell]: https://github.com/bgo-bell
 
 
 # v2.36.0

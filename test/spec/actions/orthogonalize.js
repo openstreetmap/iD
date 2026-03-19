@@ -156,6 +156,21 @@ describe('iD.actionOrthogonalize', function () {
                 expect(finalWidth / initialWidth).within(0.90, 1.10);
             }
         });
+
+        it('preserves a way\'s duplicate vertices', function () {
+            // #9155
+            let graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [0, 0]}),
+                iD.osmNode({id: 'b', loc: [2.1, 0]}),
+                iD.osmNode({id: 'c', loc: [2.1, 0]}),
+                iD.osmNode({id: 'd', loc: [2, 2]}),
+                iD.osmNode({id: 'e', loc: [0, 2]}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
+            ]);
+
+            graph = iD.actionOrthogonalize('-', projection)(graph);
+            expect(graph.entity('-').nodes.length).to.eql(6);
+        });
     });
 
 

@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 
 import { svgIcon } from '../../svg/icon';
 import { prefs } from '../../core/preferences';
@@ -171,7 +171,7 @@ export function uiSectionValidationStatus(context) {
     });
 
     context.map().on('move.uiSectionValidationStatus',
-        _debounce(function() {
+        debounce(function() {
             window.requestIdleCallback(section.reRender);
         }, 1000)
     );

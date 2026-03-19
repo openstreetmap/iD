@@ -1,6 +1,4 @@
 import { Matcher } from 'name-suggestion-index';
-import parseVersion from 'vparse';
-
 import { fileFetcher, locationManager } from '../core';
 import { presetManager } from '../presets';
 
@@ -48,17 +46,15 @@ const notBranches = /(coop|express|wireless|factory|outlet)/i;
 //
 function setNsiSources() {
   const nsiVersion = packageJSON.dependencies['name-suggestion-index'] || packageJSON.devDependencies['name-suggestion-index'];
-  const v = parseVersion(nsiVersion);
-  const vMinor = `${v.major}.${v.minor}`;
-  const cdn = nsiCdnUrl.replace('{version}', vMinor);
+  const cdn = nsiCdnUrl.replace('{version}', nsiVersion);
   const sources = {
-    'nsi_data': cdn + 'dist/nsi.min.json',
-    'nsi_dissolved': cdn + 'dist/dissolved.min.json',
-    'nsi_features': cdn + 'dist/featureCollection.min.json',
-    'nsi_generics': cdn + 'dist/genericWords.min.json',
+    'nsi_data': cdn + 'dist/json/nsi.min.json',
+    'nsi_dissolved': cdn + 'dist/wikidata/dissolved.min.json',
+    'nsi_features': cdn + 'dist/json/featureCollection.min.json',
+    'nsi_generics': cdn + 'dist/json/genericWords.min.json',
     'nsi_presets': cdn + 'dist/presets/nsi-id-presets.min.json',
-    'nsi_replacements': cdn + 'dist/replacements.min.json',
-    'nsi_trees': cdn + 'dist/trees.min.json'
+    'nsi_replacements': cdn + 'dist/json/replacements.min.json',
+    'nsi_trees': cdn + 'dist/json/trees.min.json'
   };
 
   let fileMap = fileFetcher.fileMap();
@@ -128,7 +124,8 @@ function loadNsiData() {
         ids:           new Map()               // Map (id -> NSI item)
       };
 
-      const matcher = _nsi.matcher = new Matcher();
+      const matcher = new Matcher();
+      _nsi.matcher = matcher;
       matcher.buildMatchIndex(_nsi.data);
 
 // *** BEGIN HACK ***

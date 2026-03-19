@@ -466,7 +466,8 @@ export function rendererFeatures(context) {
                 }
 
                 if (_rules[_keys[i]].filter(entity.tags, geometry)) {
-                    matches[_keys[i]] = hasMatch = true;
+                    matches[_keys[i]] = true;
+                    hasMatch = true;
                 }
             }
             _cache[ent].matches = matches;
@@ -502,7 +503,7 @@ export function rendererFeatures(context) {
         if (!_hidden.length) return false;
         if (!preset.tags) return false;
 
-        var test = preset.setTags({}, geometry);
+        var test = preset.setTags({...preset.tags}, geometry);
         for (var key in _rules) {
             if (_rules[key].filter(test, geometry)) {
                 if (_hidden.indexOf(key) !== -1) {

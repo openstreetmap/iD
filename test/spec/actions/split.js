@@ -1688,6 +1688,32 @@ describe('iD.actionSplit', function () {
                 ]);
             });
 
+            it('transfers relation memberships of an area to the resulting multipolygon', function () {
+                // Situation: same as above, but the way was also a member of a
+                // site relation. #12024
+                let graph = iD.coreGraph([
+                    iD.osmNode({id: 'a', loc: [0,1]}),
+                    iD.osmNode({id: 'b', loc: [1,1]}),
+                    iD.osmNode({id: 'c', loc: [1,0]}),
+                    iD.osmNode({id: 'd', loc: [0,0]}),
+                    iD.osmWay({id: '-', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
+                    iD.osmRelation({id: 's', members: [
+                        {id: '-', role: 'main', type: 'way'}
+                    ], tags: {
+                        type: 'site'
+                    }})
+                ]);
+
+                graph = iD.actionSplit('a', ['='])(graph);
+
+                expect(graph.parentRelations(graph.entity('-')).length).to.eql(1);
+                const relation = graph.parentRelations(graph.entity('-'))[0];
+                expect(graph.entity('s').members.length).to.eql(1);
+                expect(graph.entity('s').members[0]).to.eql(
+                    {id: relation.id, role: 'main', type: 'relation'}
+                );
+            });
+
             it('splits only the line of a node shared by a line and an area', function () {
                 var graph = iD.coreGraph([
                     iD.osmNode({id: 'a', loc: [0,1]}),
@@ -1703,6 +1729,28 @@ describe('iD.actionSplit', function () {
                 expect(graph.entity('-').nodes).to.eql(['a', 'b']);
                 expect(graph.entity('=').nodes).to.eql(['a', 'b', 'c', 'a']);
                 expect(graph.parentRelations(graph.entity('='))).to.have.length(0);
+            });
+
+            it('preserves coastline tag on the ways when creating a multipolygon', function () {
+                var graph = iD.coreGraph([
+                    iD.osmNode({id: 'a', loc: [1,0]}),
+                    iD.osmNode({id: 'b', loc: [1,1]}),
+                    iD.osmNode({id: 'c', loc: [0,1]}),
+                    iD.osmNode({id: 'd', loc: [0,0]}),
+                    iD.osmWay({id: '-', tags: {natural: 'coastline', area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']})
+                ]);
+
+                graph = iD.actionSplit('a', ['='])(graph);
+                expect(graph.entity('-').tags).to.eql({natural: 'coastline'});
+                expect(graph.entity('=').tags).to.eql({natural: 'coastline'});
+                expect(graph.parentRelations(graph.entity('-'))).to.have.length(1);
+
+                var relation = graph.parentRelations(graph.entity('-'))[0];
+                expect(relation.tags).to.eql({type: 'multipolygon', area: 'yes'});
+                expect(relation.members).to.eql([
+                    {id: '-', role: 'outer', type: 'way'},
+                    {id: '=', role: 'outer', type: 'way'}
+                ]);
             });
         });
 

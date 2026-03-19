@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 import {
     select as d3_select
 } from 'd3-selection';
@@ -446,7 +446,7 @@ export function uiSectionDataLayers(context) {
 
     context.map()
         .on('move.uiSectionDataLayers',
-            _debounce(function() {
+            debounce(function() {
                 // Detroit layers may have moved in or out of view
                 window.requestIdleCallback(section.reRender);
             }, 1000)

@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 
 import { select as d3_select } from 'd3-selection';
 
@@ -46,7 +46,7 @@ export function uiToolNotes(context) {
 
     tool.render = function(selection) {
 
-        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
+        var debouncedUpdate = debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
             .on('move.notes', debouncedUpdate)
@@ -105,7 +105,7 @@ export function uiToolNotes(context) {
             }
 
             // update
-            buttons = buttons
+            buttons
                 .merge(buttonsEnter)
                 .classed('disabled', function() { return !enabled(); })
                 .attr('aria-disabled', function() { return !enabled(); })

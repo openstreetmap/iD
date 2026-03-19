@@ -1,7 +1,7 @@
 import {
     select as d3_select
 } from 'd3-selection';
-import { clamp } from 'lodash-es';
+import { clamp } from 'es-toolkit/compat';
 
 import { t } from '../core/localizer';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -290,6 +290,8 @@ export function uiPhotoviewer(context) {
                 .style('height', setPhotoDimensions[1] + 'px');
 
             dispatch.call('resize', photoviewer, subtractPadding(setPhotoDimensions, photoviewer));
+        } else {
+            dispatch.call('resize', photoviewer, subtractPadding(photoDimensions, photoviewer));
         }
     };
 
@@ -299,6 +301,11 @@ export function uiPhotoviewer(context) {
             dimensions[1] - parseFloat(selection.style('padding-top')) - parseFloat(selection.style('padding-bottom'))
         ];
     }
+
+    photoviewer.viewerSize = function() {
+        const photoviewer = context.container().select('.photoviewer');
+        return subtractPadding(utilGetDimensions(photoviewer, true), photoviewer);
+    };
 
     return utilRebind(photoviewer, dispatch, 'on');
 }

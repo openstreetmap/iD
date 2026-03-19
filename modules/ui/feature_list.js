@@ -11,7 +11,7 @@ import { geoSphericalDistance } from '../geo/geo';
 import { geoExtent } from '../geo';
 import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm/entity';
-import { isColourValid } from '../osm/tags';
+import { getRelationColor } from '../osm/tags';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
@@ -23,6 +23,17 @@ import {
     utilNoAuto
 } from '../util';
 
+
+export const idMatch = q => {
+    const idMatchRegex = /(?:^|\W)(node|way|relation|note|[nwr])\W{0,2}0*([1-9]\d*)(?:\W|$)/i;
+    const idMatch = q.match(idMatchRegex);
+    if (!idMatch) return false;
+
+    return {
+        type: idMatch[1] === 'note' ? idMatch[1] : idMatch[1].charAt(0),
+        id: idMatch[2]
+    };
+};
 
 export function uiFeatureList(context) {
     var _geocodeResults;
@@ -158,12 +169,11 @@ export function uiFeatureList(context) {
             }
 
             // A location search takes priority over an ID search
-            const idMatch = !locationMatch && q.match(/(?:^|\W)(node|way|relation|note|[nwr])\W{0,2}0*([1-9]\d*)(?:\W|$)/i);
-
+            const idMatchResult = !locationMatch && idMatch(q);
             const idResult = [];
-            if (idMatch) {
-                var elemType = idMatch[1] === 'note' ? idMatch[1] : idMatch[1].charAt(0);
-                var elemId = idMatch[2];
+            if (idMatchResult) {
+                const elemType = idMatchResult.type;
+                const elemId = idMatchResult.id;
                 idResult.push({
                     id: elemType + elemId,
                     geometry: elemType === 'n' ? 'point' : elemType === 'w' ? 'line' : elemType === 'note' ? 'note' : 'relation',
@@ -178,10 +188,9 @@ export function uiFeatureList(context) {
                 var entity = allEntities[id];
                 if (!entity) continue;
 
-                var name = utilDisplayName(entity) || '';
-                if (name.toLowerCase().indexOf(q) < 0) continue;
-
                 var matched = presetManager.match(entity, graph);
+                var name = utilDisplayName(entity, { hideNetwork: matched.suggestion }) || '';
+                if (name.toLowerCase().indexOf(q) < 0) continue;
                 var type = (matched && matched.name()) || utilDisplayType(entity.id);
                 var extent = entity.extent(graph);
                 var distance = extent ? geoSphericalDistance(visibleCenter, extent.center()) : 0;
@@ -319,7 +328,8 @@ export function uiFeatureList(context) {
 
             var label = enter
                 .append('div')
-                .attr('class', 'label');
+                .attr('class', 'label')
+                .attr('title', d => d.name);
 
             label
                 .each(function(d) {
@@ -332,12 +342,29 @@ export function uiFeatureList(context) {
                 .attr('class', 'entity-type')
                 .text(function(d) { return d.type; });
 
+            label.each(function(d) {
+                if (d.entity?.type !== 'relation') return;
+
+                const hasRef = d.entity.tags.ref;
+                const relColors = getRelationColor(d.entity.tags, '#555');
+                if (relColors.isValid || hasRef) {
+                    const refs = (d.entity.tags.ref || '').split(';');
+                    for (const ref of refs) {
+                        d3_select(this)
+                            .append('span')
+                            .classed('member-entity-ref-color', true)
+                            .style('border-color', relColors.color)
+                            .style('background-color', relColors.color)
+                            .style('color', relColors.textColor)
+                            .text(ref);
+                    }
+                }
+            });
+
             label
                 .append('span')
                 .attr('class', 'entity-name')
-                .classed('has-colour', d => d.entity && d.entity.type === 'relation' && d.entity.tags.colour && isColourValid(d.entity.tags.colour))
-                .style('border-color', d => d.entity && d.entity.type === 'relation' && d.entity.tags.colour)
-                .text(function(d) { return d.name; });
+                .text(d => d.name);
 
             enter
                 .style('opacity', 0)

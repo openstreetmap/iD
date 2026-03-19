@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 
 import { select as d3_select } from 'd3-selection';
 
@@ -8,7 +8,7 @@ import { svgIcon } from '../svg/index';
 
 export function uiContributors(context) {
     var osm = context.connection(),
-        debouncedUpdate = _debounce(function() { update(); }, 1000),
+        debouncedUpdate = debounce(function() { update(); }, 1000),
         limit = 4,
         hidden = false,
         wrap = d3_select(null);

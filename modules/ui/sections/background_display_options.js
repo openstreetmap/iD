@@ -1,7 +1,7 @@
 import {
     select as d3_select
 } from 'd3-selection';
-import { clamp } from 'lodash-es';
+import { clamp } from 'es-toolkit/compat';
 
 import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';

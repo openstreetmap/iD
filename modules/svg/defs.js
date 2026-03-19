@@ -51,7 +51,7 @@ export function svgDefs(context) {
         addOnewayMarker('gray', '#eee'); // for railway lines
 
 
-        function addSidedMarker(name, color, offset) {
+        function addSidedMarker(name, color, offset, style) {
             _defsSelection
                 .append('marker')
                 .attr('id', 'ideditor-sided-marker-' + name)
@@ -64,7 +64,9 @@ export function svgDefs(context) {
                 .attr('orient', 'auto')
                 .append('path')
                 .attr('class', 'sided-marker-path sided-marker-' + name + '-path')
-                .attr('d', 'M 0,0 L 1,1 L 2,0 z')
+                .attr('d', style === 'circle'
+                    ? 'M 0,0.5 a 0.5,0.5 0 1,0 1,0 a 0.5,0.5 0 1,0 -1,0'
+                    : 'M 0,0 L 1,1 L 2,0 z')
                 .attr('stroke', 'none')
                 .attr('fill', color);
         }
@@ -77,6 +79,9 @@ export function svgDefs(context) {
         // barriers have a dashed line, and separating the triangle
         // from the line visually suits that
         addSidedMarker('barrier', '#ddd', 1);
+        // dedicated style for guard rails (#9594):
+        // marker on opposite side, circles instead of triangles
+        addSidedMarker('guard_rail', '#ddd', -1.5, 'circle');
         addSidedMarker('man_made', '#fff', 0);
 
         _defsSelection
@@ -115,6 +120,44 @@ export function svgDefs(context) {
             .attr('stroke', '#fff')
             .attr('stroke-width', '0.5px')
             .attr('stroke-opacity', '0.75');
+
+        _defsSelection
+            .append('marker')
+            .attr('id', 'ideditor-viewfield-marker-side')
+            .attr('viewBox', '0 0 16 16')
+            .attr('refX', 8)
+            .attr('refY', 16)
+            .attr('markerWidth', 4)
+            .attr('markerHeight', 4)
+            .attr('markerUnits', 'strokeWidth')
+            .attr('orient', 'auto')
+            .append('path')
+            .attr('class', 'viewfield-marker-path')
+            .attr('d', 'M 3 14 C 8 13 8 13 13 14 L 8 5 Z')
+            .attr('fill', '#333')
+            .attr('fill-opacity', '0.75')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', '0.5px')
+            .attr('stroke-opacity', '0.75');
+
+        _defsSelection
+            .append('marker')
+            .attr('id', 'ideditor-viewfield-marker-side-wireframe')
+            .attr('viewBox', '0 0 16 16')
+            .attr('refX', 8)
+            .attr('refY', 16)
+            .attr('markerWidth', 4)
+            .attr('markerHeight', 4)
+            .attr('markerUnits', 'strokeWidth')
+            .attr('orient', 'auto')
+            .append('path')
+            .attr('class', 'viewfield-marker-path')
+            .attr('d', 'M 3 14 C 8 13 8 13 13 14 L 8 5 Z')
+            .attr('fill', 'none')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', '0.5px')
+            .attr('stroke-opacity', '0.75');
+
 
         // add patterns
         var patterns = _defsSelection.selectAll('pattern')

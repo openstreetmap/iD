@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/index';
@@ -35,7 +35,7 @@ export function uiNotice(context) {
         }
 
         context.map()
-            .on('move.notice', _debounce(disableTooHigh, 500));
+            .on('move.notice', debounce(disableTooHigh, 500));
 
         disableTooHigh();
     };

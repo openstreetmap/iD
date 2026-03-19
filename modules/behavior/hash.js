@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit/compat';
 
 import { select as d3_select } from 'd3-selection';
 
@@ -8,7 +8,7 @@ import { modeSelect, modeSelectNote } from '../modes';
 import { utilObjectOmit, utilQsString, utilStringQs } from '../util';
 import { utilArrayIdentical } from '../util/array';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
-import { t } from '../core/localizer';
+import { localizer, t } from '../core/localizer';
 import { prefs } from '../core/preferences';
 
 
@@ -122,21 +122,29 @@ export function behaviorHash(context) {
         }
     }
 
-    var _throttledUpdate = _throttle(updateHashIfNeeded, 500);
-    var _throttledUpdateTitle = _throttle(function() {
+    var _throttledUpdate = throttle(updateHashIfNeeded, 500);
+    var _throttledUpdateTitle = throttle(function() {
         updateTitle(true /* includeChangeCount */);
     }, 500);
 
     function hashchange() {
-
         // ignore spurious hashchange events
         if (window.location.hash === _cachedHash) return;
 
         _cachedHash = window.location.hash;
 
         var q = utilStringQs(_cachedHash);
-        var mapArgs = (q.map || '').split('/').map(Number);
 
+        if (q.theme) {
+          context.theme(q.theme);
+        }
+
+        if (q.locale && q.locale !== localizer.preferredLocaleCodes().join(',')) {
+          localizer.preferredLocaleCodes(q.locale);
+          context.ui().restart();
+        }
+
+        var mapArgs = (q.map || '').split('/').map(Number);
         if (mapArgs.length < 3 || mapArgs.some(isNaN)) {
             // replace bogus hash
             updateHashIfNeeded();

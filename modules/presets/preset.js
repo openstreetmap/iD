@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash-es';
+import { deepEqual } from 'fast-equals';
 
 import { t } from '../core/localizer';
 import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
@@ -126,7 +126,8 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       if (_this.suggestion) {
         let path = presetID.split('/');
         path.pop();  // remove brand name
-        return t('_tagging.presets.presets.' + path.join('/') + '.name');
+        const basePreset = allPresets[path.join('/')];
+        return basePreset?.name();
       }
       return null;
   };
@@ -135,7 +136,8 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       if (_this.suggestion) {
         let path = presetID.split('/');
         path.pop();  // remove brand name
-        return t.append('_tagging.presets.presets.' + path.join('/') + '.name');
+        const basePreset = allPresets[path.join('/')];
+        return basePreset?.nameLabel();
       }
       return null;
   };
@@ -290,6 +292,11 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
 
+  _this.getParentPreset = function() {
+    return allPresets[_this.id.split('/').slice(0, -1).join('/')];
+  };
+
+
   // For a preset without fields, use the fields of the parent preset.
   // Replace {preset} placeholders with the fields of the specified presets.
   function resolveFields(which, loc) {
@@ -320,7 +327,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
             const candidateIDs = Object.keys(allPresets).filter(k => k.startsWith(parentID));
             parent = allPresets[candidateIDs.find(candidateID => {
               const candidate = allPresets[candidateID];
-              return validHere[candidate.locationSetID] && isEqual(candidate.tags, parent.tags);
+              return validHere[candidate.locationSetID] && deepEqual(candidate.tags, parent.tags);
             })];
           }
         }
