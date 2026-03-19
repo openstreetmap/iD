@@ -117,7 +117,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@mykh-hailo]: https://github.com/mykh-hailo
 
 
-# 2.38.0-dev
+# 2.38.0
 ##### 2026-03-02
 
 #### :sparkles: Usability & Accessibility
