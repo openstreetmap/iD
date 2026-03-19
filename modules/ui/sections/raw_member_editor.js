@@ -16,7 +16,7 @@ import { svgIcon } from '../../svg/icon';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
-import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto, utilUniqueDomId } from '../../util';
+import { utilArrayGroupBy, utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto, utilUniqueDomId } from '../../util';
 import { prefs } from '../../core';
 
 
@@ -35,7 +35,7 @@ export function uiSectionRawMemberEditor(context) {
 
             var gt = entity.members.length > _maxMembers ? '>' : '';
             var count = gt + entity.members.slice(0, _maxMembers).length;
-            return t.append('inspector.title_count', { title: t('inspector.members'), count: count });
+            return t.append('inspector.title_count', { title: t('inspector.members.title'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -127,15 +127,138 @@ export function uiSectionRawMemberEditor(context) {
 
         var memberships = [];
         var entity = context.entity(entityID);
-        entity.members.slice(0, _maxMembers).forEach(function(member, index) {
+
+        const graph = context.graph();
+        const downloadMembers = selection.selectAll('.members-download')
+            .data(entity.members.every(m => graph.hasEntity(m.id)) ? []: [0]);
+        const downloadMembersEnter = downloadMembers.enter()
+            //.append('div')
+            .insert('div', ':first-child')
+            .classed('members-download', true)
+            .classed('section-footer', true)
+            .append('a')
+            .attr('role', 'button')
+            .on('click', function (d3_event) {
+                d3_event.preventDefault();
+                const button = d3_select(this).select('button');
+                // display the loading indicator
+                button.classed('loading', true);
+                context.loadEntity(entity.id, () => section.reRender());
+            });
+        downloadMembersEnter
+            .call(t.append('inspector.members.download_all'));
+        downloadMembersEnter
+            .append('button')
+            .attr('title', t('icons.download'))
+            .call(svgIcon('#iD-icon-load'));
+        downloadMembers.exit().remove();
+
+
+        function connects(memberA, memberB, direction, ignoreNode) {
+            const entityA = context.hasEntity(memberA.id);
+            const entityB = context.hasEntity(memberB.id);
+            if (entityA === undefined || entityA.type !== 'way') return false;
+            if (entityB === undefined || entityB.type !== 'way') return false;
+            // determine valid connection points between A and B
+            const pointsA = [];
+            const pointsB = [];
+            if (memberA.role === 'forward' && direction || memberA.role === 'backward' && !direction) {
+                pointsA.push(entityA.nodes[entityA.nodes.length - 1]);
+            } else if (memberA.role === 'backward' && direction || memberA.role === 'forward' && !direction) {
+                pointsA.push(entityA.nodes[0]);
+            } else if (entityA.tags.junction === 'roundabout' && entityA.isClosed()) {
+                entityA.nodes.forEach(n => pointsA.push(n));
+            } else {
+                pointsA.push(entityA.nodes[entityA.nodes.length - 1]);
+                pointsA.push(entityA.nodes[0]);
+            }
+            if (memberB.role === 'forward' && direction || memberB.role === 'backward' && !direction) {
+                pointsB.push(entityB.nodes[0]);
+            } else if (memberB.role === 'backward' && direction || memberB.role === 'forward' && !direction) {
+                pointsB.push(entityB.nodes[entityB.nodes.length - 1]);
+            } else if (entityB.tags.junction === 'roundabout' && entityB.isClosed()) {
+                entityB.nodes.forEach(n => pointsB.push(n));
+            } else {
+                pointsB.push(entityB.nodes[entityB.nodes.length - 1]);
+                pointsB.push(entityB.nodes[0]);
+            }
+            return pointsA.find(idA =>
+                idA !== ignoreNode &&
+                pointsB.indexOf(idA) !== -1);
+        }
+
+        const members = entity.members.slice(0, _maxMembers);
+
+        const forwardConnections = members.map(() => undefined);
+        let thatIndex = 0;
+        let that = members[thatIndex];
+        let lastConnectionVertex;
+        for (let i = 1; i < members.length; i++) {
+            const cur = members[i];
+            const connectionVertex = connects(that, cur, true, lastConnectionVertex);
+            if (connectionVertex) {
+                forwardConnections[thatIndex] = true;
+                lastConnectionVertex = connectionVertex;
+            } else if (cur.role !== 'forward' && cur.role !== 'backward') {
+                forwardConnections[thatIndex] = false;
+                lastConnectionVertex = undefined;
+            } else {
+                // role is forward or backward -> skip current member and try next
+                continue;
+            }
+            that = cur;
+            thatIndex = i;
+        }
+        const backwardConnections = members.map(() => undefined);
+        thatIndex = members.length - 1;
+        that = members[thatIndex];
+        lastConnectionVertex = undefined;
+        for (let i = members.length - 2; i >= 0; i--) {
+            const cur = members[i];
+            const connectionVertex = connects(cur, that, false, lastConnectionVertex);
+            if (connectionVertex) {
+                backwardConnections[thatIndex] = true;
+                lastConnectionVertex = connectionVertex;
+            } else if (cur.role !== 'forward' && cur.role !== 'backward') {
+                backwardConnections[thatIndex] = false;
+                lastConnectionVertex = undefined;
+            } else {
+                continue;
+            }
+            that = cur;
+            thatIndex = i;
+        }
+        const loopsConnections = members.map(() => undefined);
+        for (let i = 0; i < members.length; i++) {
+            if (forwardConnections[i] === false || i === members.length - 1) {
+                // check if current segment forms a loop
+                let j = i - 1;
+                while (j >= 0 && forwardConnections[j] !== false) {
+                    j--;
+                }
+                if (i !== j + 1 && connects(members[i], members[j + 1], true)) {
+                    loopsConnections[i] = true;
+                    loopsConnections[j + 1] = true;
+                }
+            }
+        }
+
+        members.forEach(function(member, index) {
+            const memberEntity = context.hasEntity(member.id);
             memberships.push({
                 index: index,
                 id: member.id,
                 type: member.type,
                 role: member.role,
                 relation: entity,
-                member: context.hasEntity(member.id),
-                domId: utilUniqueDomId(entityID + '-member-' + index)
+                member: memberEntity,
+                domId: utilUniqueDomId(entityID + '-member-' + index),
+                connections: {
+                    next: forwardConnections[index],
+                    prev: backwardConnections[index],
+                    joined: forwardConnections[index] || backwardConnections[index + 1],
+                    loops: loopsConnections[index]
+                }
             });
         });
 
@@ -149,10 +272,11 @@ export function uiSectionRawMemberEditor(context) {
 
 
         var items = list.selectAll('li')
-            .data(memberships, function(d) {
-                return osmEntity.key(d.relation) + ',' + d.index + ',' +
-                    (d.member ? osmEntity.key(d.member) : 'incomplete');
-            });
+            .data(memberships, d =>
+                osmEntity.key(d.relation) + ',' + d.index + ','
+                    + (d.member ? osmEntity.key(d.member) : 'incomplete') + ','
+                    + Object.values(d.connections).join('-')
+            );
 
         items.exit()
             .each(unbind)
@@ -160,17 +284,52 @@ export function uiSectionRawMemberEditor(context) {
 
         var itemsEnter = items.enter()
             .append('li')
-            .attr('class', 'member-row form-field')
-            .classed('member-incomplete', function(d) { return !d.member; });
+            .classed('member-row form-field', true)
+            .classed('member-incomplete', d => !d.member)
+            .classed('member-connects', d => d.connections.joined)
+            .classed('member-connects-prev', d => d.connections.prev)
+            .classed('member-connects-next', d => d.connections.next);
 
         itemsEnter
             .each(function(d) {
-                var item = d3_select(this);
+                const item = d3_select(this);
 
-                var label = item
+                const label = item
                     .append('label')
-                    .attr('class', 'field-label')
+                    .classed('field-label', true)
                     .attr('for', d.domId);
+
+                const wrap = item
+                    .append('div')
+                    .classed('form-field-input-wrap', true)
+                    .classed('form-field-input-member', true);
+
+                wrap
+                    .append('span')
+                    .classed('grab-icon', true)
+                    .attr('title', t('inspector.members.grab'))
+                    .each(function(d) {
+                        if (d.connections.prev && d.connections.next || d.connections.loops) {
+                            d3_select(this).call(svgIcon('#iD-icon-grab-connects-both'));
+                        } else if (d.connections.prev) {
+                            d3_select(this).call(svgIcon('#iD-icon-grab-connects-prev'));
+                        } else if (d.connections.next) {
+                            d3_select(this).call(svgIcon('#iD-icon-grab-connects-next'));
+                        } else {
+                            d3_select(this).call(svgIcon('#iD-icon-grab'));
+                        }
+                    });
+
+                wrap.append('input')
+                    .attr('class', 'member-role')
+                    .attr('id', d => d.domId)
+                    .property('type', 'text')
+                    .attr('placeholder', t('inspector.role'))
+                    .call(utilNoAuto);
+
+                if (taginfo) {
+                    wrap.each(bindTypeahead);
+                }
 
                 if (d.member) {
                     // highlight the member feature in the map while hovering on the list item
@@ -237,15 +396,31 @@ export function uiSectionRawMemberEditor(context) {
                         .attr('class', 'member-entity-name')
                         .text(function(d) { return utilDisplayName(d.member, { hideRef: true }); });
 
-                    label
+                    wrap
                         .append('button')
+                        .classed('form-field-button', true)
                         .attr('title', t('icons.remove'))
-                        .attr('class', 'remove member-delete')
+                        .classed('remove', true)
+                        .classed('member-delete', true)
                         .call(svgIcon('#iD-operation-delete'));
 
-                    label
+                    wrap.select('.grab-icon')
+                        .each(function(d) {
+                            if (d.connections.prev && d.connections.next) {
+                                d3_select(this).call(svgIcon('#iD-icon-grab-connects-both'));
+                            } else if (d.connections.prev) {
+                                d3_select(this).call(svgIcon('#iD-icon-grab-connects-prev'));
+                            } else if (d.connections.next) {
+                                d3_select(this).call(svgIcon('#iD-icon-grab-connects-next'));
+                            } else {
+                                d3_select(this).call(svgIcon('#iD-icon-grab'));
+                            }
+                        });
+
+                    wrap
                         .append('button')
                         .attr('class', 'member-zoom')
+                        .classed('form-field-button', true)
                         .attr('title', t('icons.zoom_to'))
                         .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
                         .on('click', zoomToMember);
@@ -265,32 +440,15 @@ export function uiSectionRawMemberEditor(context) {
                         .attr('class', 'member-entity-name')
                         .call(t.append('inspector.incomplete', { id: d.id }));
 
-                    label
+                    wrap
                         .append('button')
                         .attr('class', 'member-download')
+                        .classed('form-field-button', true)
                         .attr('title', t('icons.download'))
                         .call(svgIcon('#iD-icon-load'))
                         .on('click', downloadMember);
                 }
             });
-
-        var wrapEnter = itemsEnter
-            .append('div')
-            .attr('class', 'form-field-input-wrap form-field-input-member');
-
-        wrapEnter
-            .append('input')
-            .attr('class', 'member-role')
-            .attr('id', function(d) {
-                return d.domId;
-            })
-            .property('type', 'text')
-            .attr('placeholder', t('inspector.role'))
-            .call(utilNoAuto);
-
-        if (taginfo) {
-            wrapEnter.each(bindTypeahead);
-        }
 
         // update
         items = items
@@ -304,6 +462,23 @@ export function uiSectionRawMemberEditor(context) {
 
         items.select('button.member-delete')
             .on('click', deleteMember);
+
+        const dupeLabels = new WeakSet(Object.values(
+            utilArrayGroupBy(items.selectAll('.label-text').nodes(), 'textContent'))
+            .filter(v => v.length > 1)
+            .flat());
+
+        items.select('.label-text').each(function() {
+            const label = d3_select(this);
+            const entityName = label.select('.member-entity-name');
+            if (dupeLabels.has(this)) {
+                // Dedupe identical names in hover text by appending entity id - see #2891, #10184
+                label.attr('title', d => `${entityName.text()} ${d.id}`);
+            } else {
+                // set full label also as hover text: useful if a (long) label is cut off with an … ellipsis
+                label.attr('title', () => entityName.text());
+            }
+        });
 
         var dragOrigin, targetIndex;
 

@@ -58,5 +58,7 @@ export function actionMergeNodes(nodeIDs, loc) {
         return actionConnect(nodeIDs).disabled(graph);
     };
 
+    action.id = 'merge_nodes';
+
     return action;
 }

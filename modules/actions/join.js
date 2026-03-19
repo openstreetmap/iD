@@ -214,6 +214,8 @@ export function actionJoin(ids) {
             isFinite(tagsB[key]));
     }
 
+    action.id = 'join';
+
 
     return action;
 }

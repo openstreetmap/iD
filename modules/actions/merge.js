@@ -116,6 +116,8 @@ export function actionMerge(ids) {
         }
     };
 
+    action.id = 'merge';
+
 
     return action;
 }

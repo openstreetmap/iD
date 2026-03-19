@@ -314,7 +314,12 @@ en:
       relation: This can't be disconnected because it connects members of a relation.
     merge:
       title: Merge
-      description: Merge these features.
+      description:
+        join: Join these lines.
+        merge_polygon: Combine the selected areas.
+        merge_members: Add these features as members to the selected relation.
+        merge_nodes: Merge these points.
+        merge: Merge these features.
       key: C
       annotation:
         one: "Merged a feature."
@@ -328,6 +333,12 @@ en:
       conflicting_relations: These features can't be merged because they belong to conflicting relations.
       paths_intersect: These features can't be merged because the resulting path would intersect itself.
       too_many_vertices: These features can't be merged because the resulting path would have too many points.
+    members_remove:
+      title: Remove Members
+      description: Remove one or more selected members from the selected relation.
+      annotation:
+        one: "Remove a member from the relation."
+        other: "Merged {n} members from the relation."
     move:
       title: Move
       description:
@@ -715,7 +726,10 @@ en:
     feature_type: Feature Type
     fields: Fields
     tags: Tags
-    members: Members
+    members:
+      title: Members
+      grab: Drag and drop to reorder members
+      download_all: Download all members
     relations: Relations
     features: Features
     title_count: "{title} ({count})"

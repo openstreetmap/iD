@@ -2919,9 +2919,88 @@ img.tag-reference-wiki-image {
     margin: 0;
     padding-bottom: 10px;
 }
+
+.member-list .member-row label {
+    border-bottom: none;
+}
+
+.member-list .member-row div.form-field-input-wrap {
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-right: none;
+}
+.member-list .member-row div.form-field-input-wrap input {
+    border-top: 1px solid var(--border-color);
+    flex: 1 1 auto;
+    min-width: 80px;
+}
+.member-list .member-row div.form-field-input-wrap .combobox-caret,
+.member-list .member-row div.form-field-input-wrap button {
+    flex: 0 0 auto;
+}
+.section-raw-member-editor .member-list .member-row div.form-field-input-wrap input {
+    border-bottom: none;
+    border-radius: 0;
+}
+.section-raw-membership-editor .member-list .member-row div.form-field-input-wrap input {
+    border-bottom: none;
+    border-left: none; /* todo: rtl layout */
+    border-bottom-right-radius: 0; /* todo: rtl layout */
+}
+.member-list .member-row div.form-field-input-wrap button {
+    border-bottom: none;
+    border-top: 1px solid var(--border-color);
+}
+
+.member-list .grab-icon svg.icon {
+    padding-top: 4px;
+    height: 20px;
+    fill: var(--text-color);
+    opacity: .5;
+}
+
+.member-list .member-row.member-connects {
+    padding-bottom: 0;
+    margin-bottom: -1px;
+}
+.member-list .member-row.member-connects-prev label {
+    border-radius: 0;
+}
+.member-list .member-row.member-connects-next div.form-field-input-wrap {
+    border-radius: 0;
+}
+.member-list .member-row.member-connects-next button {
+    border-radius: 0;
+}
+
+.members-download button,
+.members-download button.loading {
+    width: 32px;
+    background: none;
+    margin-right: -5px;
+}
+.members-download button .icon {
+    fill: var(--text-color);
+    opacity: .5;
+}
+
+
 /* only the raw-member-editor is reorederable, not the raw-membership-editor */
-.section-raw-member-editor .member-row .label-text { cursor: grab; }
-.section-raw-member-editor .member-row .label-text:active { cursor: grabbing; }
+.section-raw-member-editor .member-row label,
+.section-raw-member-editor .member-row div.form-field-input-wrap {
+    cursor: grab;
+}
+.section-raw-member-editor .member-row:active label,
+.section-raw-member-editor .member-row:active div.form-field-input-wrap {
+    cursor: grabbing;
+}
+.section-raw-member-editor .member-row:hover label,
+.section-raw-member-editor .member-row:hover div.form-field-input-wrap {
+    background: var(--bg-color-3);
+}
+.section-raw-member-editor .member-row:hover .grab-icon svg.icon {
+    opacity: .8;
+}
 
 .section-raw-member-editor .member-row .member-entity-name,
 .section-raw-membership-editor .member-row .member-entity-name {

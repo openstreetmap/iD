@@ -452,33 +452,7 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('class', 'member-entity-name')
             .text(d => utilDisplayName(d.relation, { hideRef: true }));
 
-        labelEnter
-            .append('button')
-            .attr('class', 'members-download')
-            .attr('title', t('icons.download'))
-            .call(svgIcon('#iD-icon-load'))
-            .on('click', downloadMembers);
-
-        labelEnter
-            .append('button')
-            .attr('class', 'remove member-delete')
-            .attr('title', t('icons.remove'))
-            .call(svgIcon('#iD-operation-delete'))
-            .on('click', deleteMembership);
-
-        labelEnter
-            .append('button')
-            .attr('class', 'member-zoom')
-            .attr('title', t('icons.zoom_to'))
-            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
-            .on('click', zoomToRelation);
-
         items = items.merge(itemsEnter);
-        items.selectAll('button.members-download')
-            .classed('hide', d => {
-                const graph = context.graph();
-                return d.relation.members.every(m => graph.hasEntity(m.id));
-            });
 
         const dupeLabels = new WeakSet(Object.values(
             utilArrayGroupBy(items.selectAll('.label-text').nodes(), 'textContent'))
@@ -523,6 +497,36 @@ export function uiSectionRawMembershipEditor(context) {
             .call(utilNoAuto)
             .on('blur', changeRole)
             .on('change', changeRole);
+
+        wrapEnter
+            .append('button')
+            .classed('members-download', true)
+            .classed('form-field-button', true)
+            .attr('title', t('icons.download'))
+            .call(svgIcon('#iD-icon-load'))
+            .on('click', downloadMembers);
+
+        items.selectAll('button.members-download')
+            .classed('hide', d => {
+                const graph = context.graph();
+                return d.relation.members.every(m => graph.hasEntity(m.id));
+            });
+
+        wrapEnter
+            .append('button')
+            .classed('remove member-delete', true)
+            .classed('form-field-button', true)
+            .attr('title', t('icons.remove'))
+            .call(svgIcon('#iD-operation-delete'))
+            .on('click', deleteMembership);
+
+        wrapEnter
+            .append('button')
+            .classed('member-zoom', true)
+            .classed('form-field-button', true)
+            .attr('title', t('icons.zoom_to'))
+            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
+            .on('click', zoomToRelation);
 
         if (taginfo) {
             wrapEnter.each(bindTypeahead);

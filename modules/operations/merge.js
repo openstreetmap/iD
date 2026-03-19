@@ -4,6 +4,7 @@ import { actionJoin } from '../actions/join';
 import { actionMerge } from '../actions/merge';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionMergePolygon } from '../actions/merge_polygon';
+import { actionMergeMembers } from '../actions/merge_members';
 
 import { behaviorOperation } from '../behavior/operation';
 import { modeSelect } from '../modes/select';
@@ -15,17 +16,20 @@ export function operationMerge(context, selectedIDs) {
 
     function getAction() {
         // prefer a non-disabled action first
-        var join = actionJoin(selectedIDs);
+        const join = actionJoin(selectedIDs);
         if (!join.disabled(context.graph())) return join;
 
-        var merge = actionMerge(selectedIDs);
+        const merge = actionMerge(selectedIDs);
         if (!merge.disabled(context.graph())) return merge;
 
-        var mergePolygon = actionMergePolygon(selectedIDs);
+        const mergePolygon = actionMergePolygon(selectedIDs);
         if (!mergePolygon.disabled(context.graph())) return mergePolygon;
 
-        var mergeNodes = actionMergeNodes(selectedIDs);
+        const mergeNodes = actionMergeNodes(selectedIDs);
         if (!mergeNodes.disabled(context.graph())) return mergeNodes;
+
+        const mergeWithRelation = actionMergeMembers(selectedIDs);
+        if (!mergeWithRelation.disabled(context.graph())) return mergeWithRelation;
 
         // otherwise prefer an action with an interesting disabled reason
         if (join.disabled(context.graph()) !== 'not_eligible') return join;
@@ -83,7 +87,7 @@ export function operationMerge(context, selectedIDs) {
             }
             return t.append('operations.merge.' + disabled);
         }
-        return t.append('operations.merge.description');
+        return t.append(`operations.merge.description.${_action.id}`);
     };
 
     operation.annotation = function() {
