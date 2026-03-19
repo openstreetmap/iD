@@ -115,6 +115,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@Oni-DOS]: https://github.com/Oni-DOS
 [@sezerbozbiyik]: https://github.com/sezerbozbiyik
 [@mykh-hailo]: https://github.com/mykh-hailo
+[@Sembauke]: https://github.com/Sembauke
 
 
 # 2.38.0
