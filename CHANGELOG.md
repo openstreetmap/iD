@@ -36,7 +36,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
-# Unreleased (2.39.0-dev)
+# 2.39.0
+##### 2026-03-19
 
 #### :sparkles: Usability & Accessibility
 * Increase number of displayed _recently used presets_ to 8 (from 4) ([#9545], thanks [@k-yle])
@@ -67,8 +68,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 * Support territory-level phone hints ([#10904], thanks [@Vectorial1024])
 * Add phone and address format for Moldova ([#11965], [#11976], thanks [@Oni-DOS])
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * When changing presets, delete tags from the old preset which are not in the new preset ([#11696], thanks [@k-yle])
 #### :hammer: Development
