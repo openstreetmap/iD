@@ -5,7 +5,7 @@ name: build
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, develop, 'node-v25' ]
   pull_request:
     branches: [ main, develop ]
 
