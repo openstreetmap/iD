@@ -17,7 +17,7 @@ describe('iD.validations.crossing_vertex_tags', function () {
         //        n5
 
         var n1 = iD.osmNode({id: 'n-1', loc: [0,0]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [1,1], tags: nodeTags});  //This will allows us to pass specific tags to the intersection point
+        var n2 = iD.osmNode({id: 'n-2', loc: [1,1], tags: nodeTags});  //This will allow us to pass specific tags to the intersection point
         var n3 = iD.osmNode({id: 'n-3', loc: [2,2]});
         var n4 = iD.osmNode({id: 'n-4', loc: [0,2]});
         var n5 = iD.osmNode({id: 'n-5', loc: [2,0]});
@@ -34,7 +34,7 @@ describe('iD.validations.crossing_vertex_tags', function () {
             iD.actionAddEntity(road),
             iD.actionAddEntity(path)
         );
-        return { path: path, node: n2, road: road };  // return object that will bundle path(pedestrian way- footway, cycleway and path), shared intersection node(vertex) and road(residential road whoch is being crossed)
+        return { path: path, node: n2, road: road };  // return object that will bundle path(pedestrian way- footway, cycleway and path), shared intersection node(vertex) and road(residential road which is being crossed)
     }
 
     function validate() {
@@ -88,7 +88,7 @@ describe('iD.validations.crossing_vertex_tags', function () {
         context.perform(iD.actionAddEntity(n), iD.actionAddEntity(w), iD.actionAddEntity(w_road));
 
         var issues = validate();
-        // Victor should notice the node is missing the 'highway=crossing' tag
+        // Validator should notice the node is missing the 'highway=crossing' tag
         // but should NOT delete the existing 'zebra' markings.
         expect(issues).to.have.lengthOf(1);
         expect(issues[0].message).to.contain('Missing crossing tag');
@@ -182,8 +182,11 @@ describe('iD.validations.crossing_vertex_tags', function () {
 
 
     it('skips normalization when semicolons are present', function() {
+        // Way has complex markings, Node is empty
         createCrossing({ 'crossing:markings': 'zebra;lines' }, {});
-        // Logic from Section 4: If semicolons exist, return tags as-is (no sync/cleanup)
+        // Logic from Section 4: 
+        // If semicolons exist in crossing tags, the validator should return early 
+        // and not flag a mismatch to avoid corrupting complex multi-value tags.
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
