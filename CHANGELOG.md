@@ -36,6 +36,19 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
+# Unreleased (2.40.0-dev)
+
+#### :sparkles: Usability & Accessibility
+#### :scissors: Operations
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+#### :bug: Bugfixes
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :hammer: Development
+
+
 # 2.39.0
 ##### 2026-03-19
 
