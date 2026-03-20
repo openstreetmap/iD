@@ -315,7 +315,7 @@ export function uiFieldText(field, context) {
                 .enter()
                 .append('button')
                 .attr('class', 'form-field-button date-set-today')
-                .call(svgIcon('#fas-rotate'))
+                .call(svgIcon('#iD-icon-apply'))
                 .call(uiTooltip().title(() => t.append('inspector.set_today')))
                 .on('click', () => {
                     utilGetSetValue(input, today);
