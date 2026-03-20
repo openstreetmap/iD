@@ -45,6 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
 * Prevent duplicate nodes from being created while using spacebar key to draw a way ([#12051])
+* Fix user images and upload help text from showing up as duplicates in upload dialog ([#12063])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -58,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12050]: https://github.com/openstreetmap/iD/issues/12050
 [#12051]: https://github.com/openstreetmap/iD/issues/12051
 [#12058]: https://github.com/openstreetmap/iD/pull/12058
+[#12063]: https://github.com/openstreetmap/iD/issues/12063
 [#12065]: https://github.com/openstreetmap/iD/issues/12065
 
 

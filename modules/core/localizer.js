@@ -434,9 +434,7 @@ export function coreLocalizer() {
               .attr('lang', info.locale || 'und')
               .text(replacements?._trim ? text.trim() : text);
           } else {
-            selection.each(function(d) {
-              d3_select(this).call(text, d);
-            });
+            d3_select(this).call(text);
           }
         });
       };
@@ -454,23 +452,20 @@ export function coreLocalizer() {
           replacements?.suffix
         ].filter(Boolean);
 
-        const span = selection.selectAll('span.localized-text')
+        const span = selection.selectAll('span')
           .data(texts.map((_, i) => i), d => stringId + d);
         span.exit().remove();
         const enter = span.enter()
-          .append('span')
-          .classed('localized-text', true);
+          .append('span');
         span.merge(enter).each(function(d) {
           const text = texts[d];
           if (typeof text === 'string') {
-            selection.append('span')
-              .attr('class', 'localized-text')
+            d3_select(this)
+              .classed('localized-text', true)
               .attr('lang', info.locale || 'und')
               .text(replacements?._trim ? text.trim() : text);
           } else {
-            selection.each(function(d) {
-              d3_select(this).call(text, d);
-            });
+            d3_select(this).call(text);
           }
         });
       };

@@ -273,7 +273,7 @@ export function uiCommit(context) {
         prose = prose.enter()
             .append('p')
             .attr('class', 'commit-info')
-            .call(t.append('commit.upload_explanation'))
+            .call(t.addOrUpdate('commit.upload_explanation'))
             .merge(prose);
 
         // always check if this has changed, but only update prose.html()
@@ -284,15 +284,20 @@ export function uiCommit(context) {
             if (_userDetails === user) return;  // no change
             _userDetails = user;
 
-            const userLink = selection => {
+            const userLink = function(selection) {
+                selection = selection.selectAll('span.user-link').data([user.id], d => d);
+                selection.exit().remove();
+                const enter = selection.enter()
+                    .append('span')
+                    .classed('user-link', true);
                 if (user.image_url) {
-                    selection
+                    enter
                         .append('img')
                         .attr('src', user.image_url)
                         .attr('class', 'icon pre-text user-icon');
                 }
 
-                selection
+                enter
                     .append('a')
                     .attr('class', 'user-info')
                     .text(user.display_name)
