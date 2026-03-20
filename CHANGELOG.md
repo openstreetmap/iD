@@ -35,12 +35,24 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.39.4
+##### 2026-03-23
+
+* Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
+* Fix user images and upload help text from showing up as duplicates in upload dialog ([#12063])
+* Fix crash when a checkbox-field is rendered using a custom (non-`yes/no`) value ([#12078])
+
+[#12050]: https://github.com/openstreetmap/iD/issues/12050
+[#12063]: https://github.com/openstreetmap/iD/issues/12063
+[#12078]: https://github.com/openstreetmap/iD/issues/12078
+
+
 # 2.39.3
 ##### 2026-03-21
 
 * Revert: When changing presets, delete tags from the old preset which are not in the new preset ([#12068])
 
-* https://github.com/openstreetmap/iD/issues/12068
+[#12068]: https://github.com/openstreetmap/iD/issues/12068
 
 
 # 2.39.2
@@ -49,19 +61,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix a bug where iD would crash when the "Style Options" submenu is expanded during startup ([0241c765])
 
 [0241c765]: https://github.com/openstreetmap/iD/commit/0241c7653d4a93692f59b7aa1021242e63a3de72)
-
-
-# Unreleased (2.40.0-dev)
-
-#### :sparkles: Usability & Accessibility
-#### :scissors: Operations
-#### :camera: Street-Level
-#### :white_check_mark: Validation
-#### :bug: Bugfixes
-#### :earth_asia: Localization
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
-#### :hammer: Development
 
 
 # 2.39.0

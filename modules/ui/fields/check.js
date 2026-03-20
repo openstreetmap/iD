@@ -214,9 +214,12 @@ export function uiFieldCheck(field, context) {
             .property('indeterminate', isMixed || (field.type !== 'defaultCheck' && !_value))
             .property('checked', isChecked(_value));
 
+        const textForValue = textFor(_value);
         text
             .text('')
-            .call(isMixed ? t.append('inspector.multiple_values') : textFor(_value))
+            .call(isMixed
+                ? t.append('inspector.multiple_values')
+                : typeof textForValue === 'string' ? selection => selection.text(textForValue) : textForValue)
             .classed('mixed', isMixed);
 
         label

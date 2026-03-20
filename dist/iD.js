@@ -26195,9 +26195,7 @@ ${source}
           if (typeof text === "string") {
             selection2.append("span").attr("class", "localized-text").attr("lang", info.locale || "und").text(replacements?._trim ? text.trim() : text);
           } else {
-            selection2.each(function(d2) {
-              select_default2(this).call(text, d2);
-            });
+            select_default2(this).call(text);
           }
         });
       };
@@ -26212,17 +26210,15 @@ ${source}
           ...info.texts,
           replacements?.suffix
         ].filter(Boolean);
-        const span = selection2.selectAll("span.localized-text").data(texts.map((_3, i3) => i3), (d2) => stringId + d2);
+        const span = selection2.selectAll("span").data(texts.map((_3, i3) => i3), (d2) => stringId + d2);
         span.exit().remove();
-        const enter = span.enter().append("span").classed("localized-text", true);
+        const enter = span.enter().append("span");
         span.merge(enter).each(function(d2) {
           const text = texts[d2];
           if (typeof text === "string") {
-            selection2.append("span").attr("class", "localized-text").attr("lang", info.locale || "und").text(replacements?._trim ? text.trim() : text);
+            select_default2(this).classed("localized-text", true).attr("lang", info.locale || "und").text(replacements?._trim ? text.trim() : text);
           } else {
-            selection2.each(function(d4) {
-              select_default2(this).call(text, d4);
-            });
+            select_default2(this).call(text);
           }
         });
       };
@@ -35240,7 +35236,7 @@ ${source}
     "package.json"() {
       package_default = {
         name: "@openstreetmap/id",
-        version: "2.39.3",
+        version: "2.39.4",
         description: "A friendly editor for OpenStreetMap",
         main: "dist/iD.min.js",
         repository: {
@@ -73064,7 +73060,8 @@ ${currentIndent}`
         _value = "yes";
       }
       input.property("indeterminate", isMixed || field.type !== "defaultCheck" && !_value).property("checked", isChecked(_value));
-      text.text("").call(isMixed ? _t.append("inspector.multiple_values") : textFor(_value)).classed("mixed", isMixed);
+      const textForValue = textFor(_value);
+      text.text("").call(isMixed ? _t.append("inspector.multiple_values") : typeof textForValue === "string" ? (selection2) => selection2.text(textForValue) : textForValue).classed("mixed", isMixed);
       label.classed("set", !!_value);
       if (field.type === "onewayCheck") {
         reverser.classed("hide", reverserHidden()).call(reverserSetText);
@@ -85293,7 +85290,7 @@ ${currentIndent}`
       var presets = _mainPresetIndex.matchAllGeometry(entityGeometries());
       selection2.html("");
       var messagewrap = selection2.append("div").attr("class", "header fillL");
-      var message2 = messagewrap.append("h2").call(_t.append("inspector.choose"));
+      var message2 = messagewrap.append("h2").call(_t.addOrUpdate("inspector.choose"));
       messagewrap.append("button").attr("class", "preset-choose").attr("title", _entityIDs.length === 1 ? _t("inspector.edit") : _t("inspector.edit_features")).on("click", function() {
         dispatch11.call("cancel", this);
       }).call(svgIcon("#iD-icon-close"));
@@ -93811,16 +93808,19 @@ ${currentIndent}`
       if (prose.enter().size()) {
         _userDetails2 = null;
       }
-      prose = prose.enter().append("p").attr("class", "commit-info").call(_t.append("commit.upload_explanation")).merge(prose);
+      prose = prose.enter().append("p").attr("class", "commit-info").call(_t.addOrUpdate("commit.upload_explanation")).merge(prose);
       osm.userDetails(function(err, user) {
         if (err) return;
         if (_userDetails2 === user) return;
         _userDetails2 = user;
-        const userLink = (selection3) => {
+        const userLink = function(selection3) {
+          selection3 = selection3.selectAll("span.user-link").data([user.id], (d2) => d2);
+          selection3.exit().remove();
+          const enter = selection3.enter().append("span").classed("user-link", true);
           if (user.image_url) {
-            selection3.append("img").attr("src", user.image_url).attr("class", "icon pre-text user-icon");
+            enter.append("img").attr("src", user.image_url).attr("class", "icon pre-text user-icon");
           }
-          selection3.append("a").attr("class", "user-info").text(user.display_name).attr("href", osm.userURL(user.display_name)).attr("target", "_blank");
+          enter.append("a").attr("class", "user-info").text(user.display_name).attr("href", osm.userURL(user.display_name)).attr("target", "_blank");
         };
         prose.call(_t.addOrUpdate("commit.upload_explanation_with_user", { user: userLink }));
       });
