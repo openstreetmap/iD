@@ -43,12 +43,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
 
+[#12050]: https://github.com/openstreetmap/iD/issues/12050
 [#12058]: https://github.com/openstreetmap/iD/pull/12058
 
 
