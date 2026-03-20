@@ -50,6 +50,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * Standardize tooltips in combo boxes: always show (full) raw tag, don't duplicate the already rendered titles, and show descriptions from wiki/taginfo where available ([#12010], thanks [@tordans])
+* Use full width for the dropdown box for the values of the `access` field ([#12065])
 #### :hammer: Development
 * Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
 
@@ -57,6 +58,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12050]: https://github.com/openstreetmap/iD/issues/12050
 [#12051]: https://github.com/openstreetmap/iD/issues/12051
 [#12058]: https://github.com/openstreetmap/iD/pull/12058
+[#12065]: https://github.com/openstreetmap/iD/issues/12065
 
 
 # 2.39.2
