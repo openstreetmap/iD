@@ -44,6 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
+* Prevent duplicate nodes from being created while using spacebar key to draw a way ([#12051])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -54,6 +55,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#12010]: https://github.com/openstreetmap/iD/pull/12010
 [#12050]: https://github.com/openstreetmap/iD/issues/12050
+[#12051]: https://github.com/openstreetmap/iD/issues/12051
 [#12058]: https://github.com/openstreetmap/iD/pull/12058
 
 
