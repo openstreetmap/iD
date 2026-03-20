@@ -38,7 +38,7 @@ declare global {
   declare namespace d3 {
     export type Selection<T = any> = import('d3').Selection<
       T,
-      unknown,
+      any,
       unknown,
       unknown
     >;
