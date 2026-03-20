@@ -12,6 +12,7 @@ import { utilFastMouse, utilKeybinding, utilRebind } from '../util';
 
 var _disableSpace = false;
 var _lastSpace = null;
+var _spaceHeld = false;
 
 
 export function behaviorDraw(context) {
@@ -191,6 +192,10 @@ export function behaviorDraw(context) {
         d3_event.preventDefault();
         d3_event.stopPropagation();
 
+        // ignore key-repeat events while space is held down
+        if (_spaceHeld) return;
+        _spaceHeld = true;
+
         var currSpace = context.map().mouse();
         if (_disableSpace && _lastSpace) {
             var dist = geoVecLength(_lastSpace, currSpace);
@@ -209,6 +214,7 @@ export function behaviorDraw(context) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
             _disableSpace = false;
+            _spaceHeld = false;
             d3_select(window).on('keyup.space-block', null);
         });
 
