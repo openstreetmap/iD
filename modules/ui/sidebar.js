@@ -12,7 +12,6 @@ import { services } from '../services';
 import { uiDataEditor } from './data_editor';
 import { uiFeatureList } from './feature_list';
 import { uiInspector } from './inspector';
-import { uiKeepRightEditor } from './keepRight_editor';
 import { uiOsmoseEditor } from './osmose_editor';
 import { uiNoteEditor } from './note_editor';
 import { localizer } from '../core/localizer';
@@ -22,7 +21,6 @@ export function uiSidebar(context) {
     var inspector = uiInspector(context);
     var dataEditor = uiDataEditor(context);
     var noteEditor = uiNoteEditor(context);
-    var keepRightEditor = uiKeepRightEditor(context);
     var osmoseEditor = uiOsmoseEditor(context);
     var _current;
     var _wasData = false;
@@ -205,11 +203,9 @@ export function uiSidebar(context) {
                     datum = errService.getError(datum.id);
                 }
 
-                // Currently only three possible services
+                // Currently only one possible service
                 var errEditor;
-                if (datum.service === 'keepRight') {
-                    errEditor = keepRightEditor;
-                } else {
+                if (datum.service === 'osmose') {
                     errEditor = osmoseEditor;
                 }
 

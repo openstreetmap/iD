@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 
 import { prefs } from '../core/preferences';
 import { t, localizer } from '../core/localizer';
@@ -27,7 +27,6 @@ var readOnlyTags = [
     /^warnings:/,
     /^resolved:/,
     /^closed:note$/,
-    /^closed:keepright$/,
     /^closed:osmose:/
 ];
 
@@ -146,12 +145,6 @@ export function uiCommit(context) {
         var itemType;
         if (osmClosed.length) {
             tags['closed:note'] = context.cleanTagValue(osmClosed.join(';'));
-        }
-        if (services.keepRight) {
-            var krClosed = services.keepRight.getClosedIDs();
-            if (krClosed.length) {
-                tags['closed:keepright'] = context.cleanTagValue(krClosed.join(';'));
-            }
         }
         if (services.osmose) {
             var osmoseClosed = services.osmose.getClosedCounts();
@@ -291,24 +284,24 @@ export function uiCommit(context) {
             if (_userDetails === user) return;  // no change
             _userDetails = user;
 
-            var userLink = d3_select(document.createElement('div'));
+            const userLink = selection => {
+                if (user.image_url) {
+                    selection
+                        .append('img')
+                        .attr('src', user.image_url)
+                        .attr('class', 'icon pre-text user-icon');
+                }
 
-            if (user.image_url) {
-                userLink
-                    .append('img')
-                    .attr('src', user.image_url)
-                    .attr('class', 'icon pre-text user-icon');
-            }
-
-            userLink
-                .append('a')
-                .attr('class', 'user-info')
-                .text(user.display_name)
-                .attr('href', osm.userURL(user.display_name))
-                .attr('target', '_blank');
+                selection
+                    .append('a')
+                    .attr('class', 'user-info')
+                    .text(user.display_name)
+                    .attr('href', osm.userURL(user.display_name))
+                    .attr('target', '_blank');
+            };
 
             prose
-                .html(t.html('commit.upload_explanation_with_user', { user: { html: userLink.html() } }));
+                .call(t.addOrUpdate('commit.upload_explanation_with_user', { user: userLink }));
         });
 
 

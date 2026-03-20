@@ -19,7 +19,6 @@ export function coreFileFetcher() {
     'address_formats': 'data/address_formats.min.json',
     'imagery': 'data/imagery.min.json',
     'intro_graph': 'data/intro_graph.min.json',
-    'keepRight': 'data/keepRight.min.json',
     'languages': 'data/languages.min.json',
     'locales': 'locales/index.min.json',
     'phone_formats': 'data/phone_formats.min.json',

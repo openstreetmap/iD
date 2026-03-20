@@ -2363,11 +2363,8 @@ input.date-selector {
     user-select: none;
 }
 
-.restriction-help span {
-    margin: 2px;
-}
-
 .restriction-help .qualifier {
+    margin: 2px;
     color: #666;
     font-weight: bold;
 }
@@ -5015,7 +5012,7 @@ img.tile-debug {
     margin-left: 5px;
 }
 
-.user-list a:not(:last-child):after {
+.user-list a:not(:last-of-type):after {
     content: ', ';
 }
 

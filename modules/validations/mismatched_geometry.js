@@ -1,4 +1,4 @@
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 
 import { actionAddVertex } from '../actions/add_vertex';
 import { actionChangeTags } from '../actions/change_tags';

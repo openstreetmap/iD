@@ -1,3 +1,4 @@
+import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.svgData', function () {
@@ -119,7 +120,7 @@ describe('iD.svgData', function () {
         it('handles gpx files', async () => {
             var files = [ makeFile(gpx, 'test.gpx', 'application/gpx+xml') ];
             var render = iD.svgData(projection, context, dispatch);
-            var spy = sinon.spy();
+            const spy = fn();
             dispatch.on('change', spy);
             render.fileList(files);
 
@@ -138,7 +139,7 @@ describe('iD.svgData', function () {
         it('handles kml files', async () => {
             var files = [ makeFile(kml, 'test.kml', 'application/vnd.google-earth.kml+xml') ];
             var render = iD.svgData(projection, context, dispatch);
-            var spy = sinon.spy();
+            const spy = fn();
             dispatch.on('change', spy);
             render.fileList(files);
 
@@ -157,7 +158,7 @@ describe('iD.svgData', function () {
         it('handles geojson files', async () => {
             var files = [ makeFile(geojson, 'test.geojson', 'application/vnd.geo+json') ];
             var render = iD.svgData(projection, context, dispatch);
-            var spy = sinon.spy();
+            const spy = fn();
             dispatch.on('change', spy);
             render.fileList(files);
 

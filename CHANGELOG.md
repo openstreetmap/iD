@@ -36,7 +36,34 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
-# Unreleased (2.39.0-dev)
+# Unreleased (2.40.0-dev)
+
+#### :sparkles: Usability & Accessibility
+#### :scissors: Operations
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+#### :bug: Bugfixes
+* Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :hammer: Development
+* Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
+
+[#12050]: https://github.com/openstreetmap/iD/issues/12050
+[#12058]: https://github.com/openstreetmap/iD/pull/12058
+
+
+# 2.39.2
+##### 2026-03-19
+
+* Fix a bug where iD would crash when the "Style Options" submenu is expanded during startup ([0241c765])
+
+[0241c765]: https://github.com/openstreetmap/iD/commit/0241c7653d4a93692f59b7aa1021242e63a3de72)
+
+
+# 2.39.0
+##### 2026-03-19
 
 #### :sparkles: Usability & Accessibility
 * Increase number of displayed _recently used presets_ to 8 (from 4) ([#9545], thanks [@k-yle])
@@ -50,6 +77,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Preserve tagged nodes from being moved around too much when circularizing a feature ([#8265])
 #### :camera: Street-Level
 * Show username of Mapilio photos ([#9903], thanks [@sezerbozbiyik])
+* Fix mouse wheel zooming on 360° photos using the pannellum viewer (e.g. the ones from Panoramax) ([#11995])
 #### :white_check_mark: Validation
 * Make wording of fix for _overlapping features_ validator less ambiguous ([#9888], thanks [@k-yle])
 * Skip `disconnected_way` validation for Golf Paths ([#11863], thanks [@Kayd-06])
@@ -62,18 +90,19 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix a bug where the _squaring_ operation would remove a whole corner if it had duplicate vertices (same coordinates, but different node ids) at that point ([#9155])
 * Fix crash when uploading changesets with more than 10,000 features ([#11388], thanks [@k-yle])
 * Preserve relation memberships when an area is automatically converted from a closed way to a multipolygon or vice versa during a merge or split operation ([#9064], [#12024])
+* Make sure tooltips of the map menu are not clipped on the top/bottom of the map ([#11017], thanks [@mykh-hailo])
 #### :earth_asia: Localization
 * Support territory-level phone hints ([#10904], thanks [@Vectorial1024])
 * Add phone and address format for Moldova ([#11965], [#11976], thanks [@Oni-DOS])
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * When changing presets, delete tags from the old preset which are not in the new preset ([#11696], thanks [@k-yle])
 #### :hammer: Development
 * Use `<details>` element for collapsible _disclosure_ content ([#11952], thanks [@Shrinks99])
 * Use JSON endpoints for (almost) all OSM APIs ([#11661], thanks [@k-yle])
 * Replace `lodash` with `es-toolkit` ([#12016], thanks [@tordans])
+* Replace `fast-deep-equals` with `fast-equals` ([#12021], thanks [@tordans])
 * Add type definitions to some util functions ([#11993], thanks [@k-yle])
+* Localizer module: allow string replacements to use callback functions ([#11347])
 
 
 [#8265]: https://github.com/openstreetmap/iD/issues/8265
@@ -87,8 +116,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9903]: https://github.com/openstreetmap/iD/pull/9903
 [#10904]: https://github.com/openstreetmap/iD/pull/10904
 [#10958]: https://github.com/openstreetmap/iD/issues/10958
+[#11017]: https://github.com/openstreetmap/iD/issues/11017
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
 [#11329]: https://github.com/openstreetmap/iD/issues/11329
+[#11347]: https://github.com/openstreetmap/iD/pull/11347
 [#11388]: https://github.com/openstreetmap/iD/pull/11388
 [#11645]: https://github.com/openstreetmap/iD/pull/11645
 [#11661]: https://github.com/openstreetmap/iD/pull/11661
@@ -102,15 +133,19 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11965]: https://github.com/openstreetmap/iD/pull/11965
 [#11976]: https://github.com/openstreetmap/iD/pull/11976
 [#11993]: https://github.com/openstreetmap/iD/pull/11993
+[#11995]: https://github.com/openstreetmap/iD/issues/11995
 [#12016]: https://github.com/openstreetmap/iD/pull/12016
+[#12021]: https://github.com/openstreetmap/iD/pull/12021
 [#12024]: https://github.com/openstreetmap/iD/issues/12024
 [@Shrinks99]: https://github.com/Shrinks99
 [@Vectorial1024]: https://github.com/Vectorial1024
 [@Oni-DOS]: https://github.com/Oni-DOS
 [@sezerbozbiyik]: https://github.com/sezerbozbiyik
+[@mykh-hailo]: https://github.com/mykh-hailo
+[@Sembauke]: https://github.com/Sembauke
 
 
-# 2.38.0-dev
+# 2.38.0
 ##### 2026-03-02
 
 #### :sparkles: Usability & Accessibility
@@ -159,6 +194,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Replace deprecated `document.createEvent`/`initEvent` with modern Event constructor ([#11871], thanks [@JaiswalShivang])
 * Fix crash in country combo field when entering unrecognized ISO country codes ([#11904], thanks [@JaiswalShivang])
 * Upgrade clipboard functionality with modern Clipboard API ([#11869], thanks [@tulavamsidheeraj])
+* Ensure the recent presets list is always full by filtering for location before limiting the count. ([#11405], thanks [@Razen04])
 
 
 [#8464]: https://github.com/openstreetmap/iD/issues/8464
@@ -198,6 +234,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [ffc7e2135]: https://github.com/openstreetmap/iD/commit/ffc7e2135
 [be0a20e59]: https://github.com/openstreetmap/iD/commit/be0a20e59
 [b06496780]: https://github.com/openstreetmap/iD/commit/b06496780
+[#11405]: https://github.com/openstreetmap/iD/issues/11405
 [#id-tagging-schema/pull/1507]: https://github.com/openstreetmap/id-tagging-schema/pull/1507
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04

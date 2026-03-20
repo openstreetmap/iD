@@ -1,3 +1,5 @@
+import { select as d3_select } from 'd3-selection';
+
 import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
@@ -65,7 +67,9 @@ export function uiSectionMapStyleOptions(context) {
 
         label
             .append('span')
-            .html(function(d) { return t.html(name + '.' + d + '.description'); });
+            .each(function(d) {
+                d3_select(this).call(t.append(name + '.' + d + '.description'));
+            });
 
         // Update
         items = items

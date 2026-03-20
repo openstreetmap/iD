@@ -1,4 +1,4 @@
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 import { bisector as d3_bisector } from 'd3-array';
 
 import { osmEntity } from '../osm';

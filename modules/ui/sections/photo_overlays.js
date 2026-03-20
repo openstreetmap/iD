@@ -123,10 +123,10 @@ export function uiSectionPhotoOverlays(context) {
 
         labelEnter
             .append('span')
-            .html(function(d) {
+            .each(function(d) {
                 var id = d.id;
                 if (id === 'mapillary-signs') id = 'photo_overlays.traffic_signs';
-                return t.html(id.replace(/-/g, '_') + '.title');
+                d3_select(this).call(t.append(id.replace(/-/g, '_') + '.title'));
             });
 
         // Update
@@ -191,8 +191,8 @@ export function uiSectionPhotoOverlays(context) {
 
         labelEnter
             .append('span')
-            .html(function(d) {
-                return t.html('photo_overlays.photo_type.' + d + '.title');
+            .each(function(d) {
+                d3_select(this).call(t.append('photo_overlays.photo_type.' + d + '.title'));
             });
 
 

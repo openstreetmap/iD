@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { debounce } from 'es-toolkit/compat';
-import { isEqual } from 'es-toolkit/predicate';
+import { deepEqual } from 'fast-equals';
 import * as countryCoder from '@rapideditor/country-coder';
 
 import { presetManager } from '../../presets';
@@ -551,7 +551,7 @@ export function uiFieldText(field, context) {
                     if (!isFinite(parsedNum)) return val; // keep unparsable values as-is
                     return parsedNum;
                 });
-                return !isEqual(inputNums, setNums);
+                return !deepEqual(inputNums, setNums);
             };
         }
 

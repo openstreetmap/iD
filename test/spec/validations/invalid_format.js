@@ -95,6 +95,23 @@ describe('iD.validations.invalid_format', function () {
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(0);
         });
+
+        it('should suggest moving image URLs to Wikimedia Commons', function() {
+            const entity = createPointWithTags({
+                image: 'File:OpenStreetMap-Editor iD Logo.svg'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(1);
+            expect(issues[0].type).to.eql('invalid_format');
+            expect(issues[0].subtype).to.eql('website');
+            const fixes = issues[0].dynamicFixes();
+            expect(fixes).to.have.lengthOf(1);
+            issues[0].fixes(context)[0].onClick(context);
+            const fixedEntity = context.entity(entity.id);
+            expect(fixedEntity.tags.image).to.be.undefined;
+            expect(fixedEntity.tags.wikimedia_commons).to.eql(entity.tags.image);
+
+        });
     });
 
     describe('Email validation', function() {

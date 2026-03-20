@@ -41,7 +41,10 @@ export function uiFieldAccess(field, context) {
             .append('div')
             .attr('class', 'label preset-label-access')
             .attr('for', function(d) { return 'preset-input-access-' + d; })
-            .html(function(d) { return field.t.html('types.' + d); });
+            .each(function(d) {
+                d3_select(this).call(
+                    field.t.append('types.' + d));
+            });
 
         enter
             .append('div')
@@ -131,6 +134,9 @@ export function uiFieldAccess(field, context) {
             pedestrian: {
                 foot: 'yes',
                 motor_vehicle: 'no'
+            },
+            living_street: {
+                foot: 'yes'
             },
             cycleway: {
                 motor_vehicle: 'no',
