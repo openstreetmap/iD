@@ -1,3 +1,5 @@
+import { fn } from '@vitest/spy';
+
 describe('uiCombobox', function() {
     var body, context, container, content, input, combobox;
 
@@ -254,7 +256,7 @@ describe('uiCombobox', function() {
     });
 
     it('emits cancel event on ⎋', function() {
-        var spy = sinon.spy();
+        const spy = fn();
         combobox.on('cancel', spy);
 
         input.call(combobox.data(data));

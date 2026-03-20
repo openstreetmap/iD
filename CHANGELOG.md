@@ -47,6 +47,17 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
+* Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
+
+[#12058]: https://github.com/openstreetmap/iD/pull/12058
+
+
+# 2.39.2
+##### 2026-03-19
+
+* Fix a bug where iD would crash when the "Style Options" submenu is expanded during startup ([0241c765])
+
+[0241c765]: https://github.com/openstreetmap/iD/commit/0241c7653d4a93692f59b7aa1021242e63a3de72)
 
 
 # 2.39.0

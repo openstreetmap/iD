@@ -1,3 +1,4 @@
+import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 import css from '../../../css/55_cursors.css?raw';
 
@@ -25,7 +26,7 @@ describe('iD.Map', function() {
         });
 
         it('dispatches move event when zoom changes', function() {
-            var spy = sinon.spy();
+            const spy = fn();
             map.zoom(4);
             map.on('move', spy);
             map.zoom(5);
@@ -33,7 +34,7 @@ describe('iD.Map', function() {
         });
 
         it('dispatches no move event when zoom does not change', function() {
-            var spy = sinon.spy();
+            const spy = fn();
             map.zoom(4);
             map.on('move', spy);
             map.zoom(4);
@@ -84,7 +85,7 @@ describe('iD.Map', function() {
         });
 
         it('dispatches move event when center changes', function() {
-            var spy = sinon.spy();
+            const spy = fn();
             map.center([0, 0]);
             map.on('move', spy);
             map.center([1, 1]);
@@ -92,7 +93,7 @@ describe('iD.Map', function() {
         });
 
         it('dispatches no move event when center does not change', function() {
-            var spy = sinon.spy();
+            const spy = fn();
             map.center([0, 0]);
             map.on('move', spy);
             map.center([0, 0]);

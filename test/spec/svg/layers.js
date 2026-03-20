@@ -27,6 +27,7 @@ describe('iD.svgLayers', function () {
         container.call(iD.svgLayers(projection, context));
         var nodes = container.selectAll('svg .data-layer').nodes();
         expect(nodes.length).to.eql(17);
+        /* eslint-disable no-useless-assignment */
         let i = 0;
         expect(d3.select(nodes[i++]).classed('osm')).to.be.true;
         expect(d3.select(nodes[i++]).classed('notes')).to.be.true;
@@ -45,6 +46,7 @@ describe('iD.svgLayers', function () {
         expect(d3.select(nodes[i++]).classed('debug')).to.be.true;
         expect(d3.select(nodes[i++]).classed('geolocate')).to.be.true;
         expect(d3.select(nodes[i++]).classed('touch')).to.be.true;
+        /* eslint-enable no-useless-assignment */
     });
 
 });

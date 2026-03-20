@@ -67,7 +67,7 @@ export function uiSectionMapStyleOptions(context) {
 
         label
             .append('span')
-            .ech(function(d) {
+            .each(function(d) {
                 d3_select(this).call(t.append(name + '.' + d + '.description'));
             });
 

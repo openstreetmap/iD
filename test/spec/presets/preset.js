@@ -1,3 +1,5 @@
+import { spyOn } from '@vitest/spy';
+
 describe('iD.presetPreset', function() {
 
     describe('#fields', function() {
@@ -263,22 +265,22 @@ describe('iD.presetPreset', function() {
             allPresets.preset = preset;
 
             // mock localizer
-            sinon.spy(other, 't');
-            sinon.spy(preset, 't');
+            spyOn(other, 't');
+            spyOn(preset, 't');
 
             preset.name();
             expect(other.t).to.have.been.calledOnce;
             expect(preset.t).not.to.have.been.called;
 
-            other.t.resetHistory();
-            preset.t.resetHistory();
+            other.t.mockClear();
+            preset.t.mockClear();
 
             preset.aliases();
             expect(other.t).to.have.been.calledOnce;
             expect(preset.t).not.to.have.been.called;
 
-            other.t.resetHistory();
-            preset.t.resetHistory();
+            other.t.mockClear();
+            preset.t.mockClear();
 
             preset.terms();
             expect(other.t).to.have.been.calledOnce;
