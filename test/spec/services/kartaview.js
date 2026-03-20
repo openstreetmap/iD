@@ -1,3 +1,4 @@
+import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.serviceKartaview', function() {
@@ -151,7 +152,7 @@ describe('iD.serviceKartaview', function() {
                 totalFilteredItems: ['3']
             };
 
-            var spy = sinon.spy();
+            const spy = fn();
             fetchMock.mock(new RegExp('/nearby-photos/'), {
                 body: JSON.stringify(data),
                 status: 200,

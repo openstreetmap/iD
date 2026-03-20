@@ -1,3 +1,4 @@
+import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 import { clear } from 'idb-keyval';
 import { asyncPrefs } from '../../../modules/core/preferences';
@@ -14,7 +15,7 @@ describe('iD.coreHistory', function () {
     beforeEach(function () {
         context = iD.coreContext().assetPath('../dist/').init();
         history = context.history();
-        spy = sinon.spy();
+        spy = fn();
     });
 
     describe('#graph', function () {
@@ -57,13 +58,12 @@ describe('iD.coreHistory', function () {
         it('emits a change event', function () {
             history.on('change', spy);
             var difference = history.perform(actionNoop);
-            expect(spy).to.have.been.calledWith(difference);
-            expect(spy.callCount).to.eql(1);
+            expect(spy).to.have.been.calledOnceWith(difference);
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.coreGraph());
-            var action2 = sinon.stub().returns(iD.coreGraph());
+            const action1 = fn().mockReturnValue(iD.coreGraph());
+            const action2 = fn().mockReturnValue(iD.coreGraph());
             history.perform(action1, action2, 'annotation');
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
@@ -76,7 +76,7 @@ describe('iD.coreHistory', function () {
             history.on('change', spy);
             await history.perform(action1);
             await setTimeout(300);
-            expect(spy.callCount).to.be.above(2);
+            expect(spy.mock.calls.length).to.be.above(2);
         });
     });
 
@@ -104,8 +104,8 @@ describe('iD.coreHistory', function () {
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.coreGraph());
-            var action2 = sinon.stub().returns(iD.coreGraph());
+            const action1 = fn().mockReturnValue(iD.coreGraph());
+            const action2 = fn().mockReturnValue(iD.coreGraph());
             history.replace(action1, action2, 'annotation');
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;

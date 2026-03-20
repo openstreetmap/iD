@@ -1,3 +1,5 @@
+import { spyOn } from '@vitest/spy';
+
 describe('iD.presetField', function() {
     describe('#references', function() {
         it('references label and terms of another field', function() {
@@ -8,15 +10,15 @@ describe('iD.presetField', function() {
             allFields.preset = field;
 
             // mock localizer
-            sinon.spy(other, 't');
-            sinon.spy(field, 't');
+            spyOn(other, 't');
+            spyOn(field, 't');
 
             field.title();
             expect(other.t).to.have.been.calledOnce;
             expect(field.t).not.to.have.been.called;
 
-            other.t.resetHistory();
-            field.t.resetHistory();
+            other.t.mockClear();
+            field.t.mockClear();
 
             field.terms();
             expect(other.t).to.have.been.calledOnce;
@@ -31,8 +33,8 @@ describe('iD.presetField', function() {
             allFields.preset = field;
 
             // mock localizer
-            sinon.spy(other, 't');
-            sinon.spy(field, 't');
+            spyOn(other, 't');
+            spyOn(field, 't');
 
             field.placeholder();
             expect(other.t).to.have.been.calledOnce;
@@ -47,9 +49,9 @@ describe('iD.presetField', function() {
             allFields.preset = field;
 
             // mock localizer
-            sinon.spy(other.t, 'append');
-            sinon.spy(field.t, 'append');
-            sinon.stub(other, 'hasTextForStringId').returns(true);
+            spyOn(other.t, 'append');
+            spyOn(field.t, 'append');
+            spyOn(other, 'hasTextForStringId').mockReturnValue(true);
 
             var context = iD.coreContext().assetPath('../dist/').init();
             var uiField = iD.uiFieldCombo(field, context);
