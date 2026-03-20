@@ -14,6 +14,7 @@ import { utilArrayUniq, utilDetect, utilGetSetValue, utilNoAuto, utilRebind, uti
 import { uiLengthIndicator } from '../length_indicator';
 import { deprecatedTagValuesByKey } from '../../osm/deprecated';
 import { osmIsoCountryKeys } from '../../osm/tags';
+import { formatTag } from './tag_title';
 
 export {
     uiFieldCombo as uiFieldManyCombo,
@@ -270,6 +271,13 @@ export function uiFieldCombo(field, context) {
         }
     }
 
+    /** Preset description for this option value. @param {string} value @returns {string|undefined} */
+    function presetDescription(value) {
+        const stringsField = field.resolveReference('stringsCrossReference');
+        return stringsField.hasTextForStringId(`options.${value}.description`)
+            ? stringsField.t(`options.${value}.description`) : undefined;
+    }
+
     function getOptions(allOptions) {
         var stringsField = field.resolveReference('stringsCrossReference');
         const localeCode = localizer.localeCode();
@@ -281,7 +289,7 @@ export function uiFieldCombo(field, context) {
             return {
               key: code,
               value: name,
-              title: code, // the tooltip should show the raw-tag value
+              title: formatTag(field.key, code, true),
               display: selection => selection.text(name)
             };
           });
@@ -299,9 +307,8 @@ export function uiFieldCombo(field, context) {
           options.push({
             key: v,
             value: stringsField.t(labelId, { default: v }),
-            title: stringsField.t(`options.${v}.description`, { default: v }),
-            description: stringsField.hasTextForStringId(`options.${v}.description`)
-                ? stringsField.t(`options.${v}.description`) : undefined,
+            title: formatTag(field.key, v, true),
+            description: presetDescription(v),
             display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
             klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
           });
@@ -318,7 +325,7 @@ export function uiFieldCombo(field, context) {
             return {
               key: c,
               value: name,
-              title: c, // the tooltip should show the raw-tag value
+              title: formatTag(field.key, c),
               display: selection => addFlagIcon(selection, name, flag),
               sortname: name, // store just the name without emojis to sort the names
               klass: 'has-icon' // to specifically target the emoji css
@@ -345,9 +352,8 @@ export function uiFieldCombo(field, context) {
             return {
                 key: v,
                 value: stringsField.t(labelId, { default: v }),
-                title: stringsField.t(`options.${v}.description`, { default: v }),
-                description: stringsField.hasTextForStringId(`options.${v}.description`)
-                    ? stringsField.t(`options.${v}.description`) : undefined,
+                title: formatTag(field.key, v, _isMulti),
+                description: presetDescription(v),
                 display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
                 klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
             };
@@ -449,13 +455,17 @@ export function uiFieldCombo(field, context) {
                 const labelId = getLabelId(stringsField, v);
                 var isLocalizable = stringsField.hasTextForStringId(labelId);
                 var label = stringsField.t(labelId, { default: v });
+
+                // Only here is data for `taginfoDesc` present. We render it as `title`, when no `presetDesc` is given.
+                const presetDesc = presetDescription(v);
+                let taginfoDesc = d.title && d.title !== label ? d.title : undefined;
+                // For multiCombo, Taginfo often returns the key (e.g. recycling:glass_bottles) as title; don't use as description.
+                if (_isMulti && taginfoDesc === field.key + v) taginfoDesc = undefined;
                 return {
                     key: v,
                     value: label,
-                    title: stringsField.t(`options.${v}.description`, { default:
-                        isLocalizable ? label : (d.title !== label ? d.title : '') }),
-                    description: stringsField.hasTextForStringId(`options.${v}.description`)
-                        ? stringsField.t(`options.${v}.description`) : undefined,
+                    title: !presetDesc && taginfoDesc ? `${taginfoDesc}\n${formatTag(field.key, v, _isMulti)}` : formatTag(field.key, v, _isMulti),
+                    description: presetDesc,
                     display: addComboboxIcons(stringsField.t.append(labelId, { default: label }), v),
                     klass: isLocalizable ? '' : 'raw-option'
                 };
@@ -977,7 +987,7 @@ export function uiFieldCombo(field, context) {
                 .classed('raw-value', isRawValue)
                 .classed('known-value', isKnownValue)
                 .attr('readonly', isReadOnly ? 'readonly' : undefined)
-                .attr('title', isMixed ? mixedValues.join('\n') : undefined)
+                .attr('title', isMixed ? mixedValues.join('\n') : (tags[field.key] ? formatTag(field.key, tags[field.key], _isMulti) : undefined))
                 .attr('placeholder', isMixed ? t('inspector.multiple_values') : _staticPlaceholder || '')
                 .classed('mixed', isMixed)
                 .on('keydown.deleteCapture', function(d3_event) {
