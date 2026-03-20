@@ -46,7 +46,7 @@ export default tseslint.config(
       'no-console': 'warn',
       'no-constructor-return': 'error',
       'no-div-regex': 'error',
-      'no-duplicate-imports': 'warn',
+      'no-duplicate-imports': ['warn', { 'allowSeparateTypeImports': true }],
       'no-eq-null': 'error',
       'no-eval': 'error',
       'no-extend-native': 'error',
