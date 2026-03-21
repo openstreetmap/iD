@@ -533,8 +533,8 @@ export function validationCrossingWays(context) {
                             });
                         } else {
                             allFixes.push({
-                                type: 'culvert',
-                                fix: makeAddBridgeOrTunnelFix('add_a_culvert', 'temaki-waste', 'tunnel')
+                                type: 'tunnel',
+                                fix: makeAddBridgeOrTunnelFix('add_a_tunnel', 'temaki-tunnel', 'tunnel')
                             });
                         }
                     }
@@ -556,12 +556,26 @@ export function validationCrossingWays(context) {
                 // See: #12007, #11329
                 const priority = getFixPriority(highway, waterway);
 
+                const priorityRank = {};
+                for (let i = 0; i < priority.length; i++) {
+                    priorityRank[priority[i]] = i;
+                }
+
                 allFixes.sort((a, b) => {
-                    return priority.indexOf(a.type) - priority.indexOf(b.type);
+                    const rankA = Object.prototype.hasOwnProperty.call(priorityRank, a.type)
+                        ? priorityRank[a.type]
+                        : Number.POSITIVE_INFINITY;
+
+                    const rankB = Object.prototype.hasOwnProperty.call(priorityRank, b.type)
+                        ? priorityRank[b.type]
+                        : Number.POSITIVE_INFINITY;
+
+                    return rankA - rankB;
                 });
 
                 // push sorted fixes
                 allFixes.forEach(item => fixes.push(item.fix));
+
                 return fixes;
             }
         });
