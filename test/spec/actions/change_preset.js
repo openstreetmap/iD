@@ -135,6 +135,36 @@ describe('iD.actionChangePreset', function() {
         });
     });
 
+    it('preserves all tags when re-selecting the same preset', () => {
+        const entity = iD.osmNode({
+            tags: {
+                building: 'yes', // the preset's own tags.
+                'building:colour': 'green', // a field which exists in the preset
+                'name': 'The Frog House', // a tag which does not exist in the preset
+            },
+            loc: [0, 0],
+        });
+        const graph = iD.coreGraph([entity]);
+
+        const fields = {
+            'building:colour': iD.presetField('building:colour', { key: 'building:colour', geometry: 'point' }),
+        };
+
+        const preset = iD.presetPreset(
+            'building/yes',
+            { tags: { building: 'yes' }, fields: ['building:colour'] },
+            undefined,
+            fields,
+        );
+        const action = iD.actionChangePreset(entity.id, preset, preset);
+        expect(action(graph).entity(entity.id).tags).toStrictEqual({
+            // all tags are preserved
+            building: 'yes',
+            'building:colour': 'green',
+            'name': 'The Frog House',
+        });
+    });
+
     // https://github.com/openstreetmap/iD/issues/9372
     it('does not preserve field tags when changing from a subpreset to its parent', function() {
         var entity = iD.osmNode({tags: {highway: 'service', service: 'driveway'}});
