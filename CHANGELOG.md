@@ -35,6 +35,21 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.39.3
+##### 2026-03-21
+
+* Revert: When changing presets, delete tags from the old preset which are not in the new preset ([#12068])
+
+* https://github.com/openstreetmap/iD/issues/12068
+
+
+# 2.39.2
+##### 2026-03-19
+
+* Fix a bug where iD would crash when the "Style Options" submenu is expanded during startup ([0241c765])
+
+[0241c765]: https://github.com/openstreetmap/iD/commit/0241c7653d4a93692f59b7aa1021242e63a3de72)
+
 
 # Unreleased (2.40.0-dev)
 

@@ -25909,15 +25909,15 @@ ${source}
           apiUrl: null,
           client_id: null
         });
-      } else if (defaultOsmApiConnections["dev"] !== void 0) {
-        osmApiConnections.push(defaultOsmApiConnections["dev"]);
+      } else if (false) {
+        osmApiConnections.push(defaultOsmApiConnections[null]);
       } else {
         osmApiConnections.push(defaultOsmApiConnections.live);
         osmApiConnections.push(defaultOsmApiConnections.dev);
       }
       taginfoApiUrl = "https://taginfo.openstreetmap.org/api/4/";
       nominatimApiUrl = "https://nominatim.openstreetmap.org/";
-      showDonationMessage = false;
+      showDonationMessage = true;
     }
   });
 
@@ -28106,15 +28106,7 @@ ${source}
           preserveKeys = preserveKeys.concat(Object.keys(newPreset.addTags));
         }
         if (oldPreset && !oldPreset.id.startsWith(newPreset.id)) {
-          newPreset.fields(loc).concat(newPreset.moreFields(loc)).filter((f2) => f2.matchGeometry(geometry2)).flatMap((f2) => f2.allKeys()).filter(Boolean).forEach((key) => preserveKeys.push(key));
-        }
-        if (oldPreset) {
-          const oldPresetFieldKeys = [
-            ...oldPreset.fields(loc),
-            ...oldPreset.moreFields(loc)
-          ].flatMap((f2) => f2.allKeys());
-          const fieldKeysToRemove = utilArrayDifference(oldPresetFieldKeys, preserveKeys);
-          tags = utilObjectOmit(tags, fieldKeysToRemove);
+          newPreset.fields(loc).concat(newPreset.moreFields(loc)).filter((f2) => f2.matchGeometry(geometry2)).map((f2) => f2.key).filter(Boolean).forEach((key) => preserveKeys.push(key));
         }
       }
       if (oldPreset) tags = oldPreset.unsetTags(tags, geometry2, preserveKeys, false, loc);
@@ -28125,7 +28117,6 @@ ${source}
   var init_change_preset = __esm({
     "modules/actions/change_preset.js"() {
       "use strict";
-      init_util2();
     }
   });
 
@@ -35249,7 +35240,7 @@ ${source}
     "package.json"() {
       package_default = {
         name: "@openstreetmap/id",
-        version: "2.39.2",
+        version: "2.39.3",
         description: "A friendly editor for OpenStreetMap",
         main: "dist/iD.min.js",
         repository: {
@@ -97098,12 +97089,6 @@ ${currentIndent}`
     _this.originalTerms = (_this.terms || []).join();
     _this.terms = () => _this.resolveReference("label").t("terms", { "default": _this.originalTerms }).toLowerCase().trim().split(/\s*,+\s*/);
     _this.increment = _this.type === "number" || _this.type === "integer" ? _this.increment || 1 : void 0;
-    _this.allKeys = () => {
-      const allKeys = [];
-      if (_this.key) allKeys.push(_this.key);
-      if (_this.keys) allKeys.push(..._this.keys);
-      return allKeys;
-    };
     return _this;
   }
   var init_field2 = __esm({

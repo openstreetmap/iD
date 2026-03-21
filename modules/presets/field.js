@@ -52,13 +52,5 @@ export function presetField(fieldID, field, allFields) {
 
   _this.increment = (_this.type === 'number' || _this.type === 'integer') ? (_this.increment || 1) : undefined;
 
-  /** all keys controlled by this field */
-  _this.allKeys = () => {
-    const allKeys = [];
-    if (_this.key) allKeys.push(_this.key);
-    if (_this.keys) allKeys.push(..._this.keys);
-    return allKeys;
-  };
-
   return _this;
 }
