@@ -79,7 +79,6 @@ export function validationCrossingWays(context) {
 
 
     function isLegitCrossing(tags1, featureType1, tags2, featureType2) {
-
         // assume 0 by default
         var level1 = tags1.level || '0';
         var level2 = tags2.level || '0';
@@ -458,12 +457,43 @@ export function validationCrossingWays(context) {
                 var otherFeatureType = this.data.featureTypes[selectedIndex === 0 ? 1 : 0];
 
                 var fixes = [];
+                var allFixes = [];
+                const highway = entities[0].tags.highway || entities[1].tags.highway;
+                const waterway = entities[0].tags.waterway || entities[1].tags.waterway;
 
+                function getFixPriority(highway, waterway) {
+                    if (waterway === 'river' || waterway === 'canal') {
+                        return ['bridge', 'culvert', 'ford'];
+                    }
+                    if (waterway === 'ditch' || waterway === 'drain') {
+                        return ['culvert', 'bridge', 'ford'];
+                    }
+                    if (waterway === 'stream') {
+                        if (['path', 'track', 'footway'].includes(highway)) {
+                            return ['ford', 'culvert', 'bridge'];
+                        }
+                        return ['culvert', 'bridge', 'ford'];
+                    }
+                    return ['culvert', 'bridge', 'ford'];
+                }
+                
                 if (connectionTags) {
-                    fixes.push(makeConnectWaysFix(this.data.connectionTags));
+                    allFixes.push({
+                        type: connectionTags.ford ? 'ford' :
+                            connectionTags.tunnel ? 'culvert' :
+                            connectionTags.bridge ? 'bridge' : 'other',
+                        fix: makeConnectWaysFix(this.data.connectionTags)
+                    });
+
                     let lessLikelyConnectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph, true);
+
                     if (lessLikelyConnectionTags && !deepEqual(connectionTags, lessLikelyConnectionTags)) {
-                        fixes.push(makeConnectWaysFix(lessLikelyConnectionTags));
+                        allFixes.push({
+                            type: lessLikelyConnectionTags.ford ? 'ford' :
+                                lessLikelyConnectionTags.tunnel ? 'culvert' :
+                                lessLikelyConnectionTags.bridge ? 'bridge' : 'other',
+                            fix: makeConnectWaysFix(lessLikelyConnectionTags)
+                        });
                     }
                 }
 
@@ -486,7 +516,10 @@ export function validationCrossingWays(context) {
 
                     // don't recommend adding bridges to waterways since they're uncommon
                     if (allowsBridge(selectedFeatureType) && selectedFeatureType !== 'waterway') {
-                        fixes.push(makeAddBridgeOrTunnelFix('add_a_bridge', 'temaki-bridge', 'bridge'));
+                        allFixes.push({
+                            type: 'bridge',
+                            fix: makeAddBridgeOrTunnelFix('add_a_bridge', 'temaki-bridge', 'bridge')
+                        });
                     }
 
                     // don't recommend adding tunnels under waterways since they're uncommon
@@ -494,9 +527,15 @@ export function validationCrossingWays(context) {
                     if (allowsTunnel(selectedFeatureType) && !skipTunnelFix) {
                         if (selectedFeatureType === 'waterway') {
                             // naming piped waterway "tunnel" is a confusing osmism, culvert should be more clear
-                            fixes.push(makeAddBridgeOrTunnelFix('add_a_culvert', 'temaki-waste', 'tunnel'));
+                            allFixes.push({
+                                type: 'culvert',
+                                fix: makeAddBridgeOrTunnelFix('add_a_culvert', 'temaki-waste', 'tunnel')
+                            });
                         } else {
-                            fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'temaki-tunnel', 'tunnel'));
+                            allFixes.push({
+                                type: 'culvert',
+                                fix: makeAddBridgeOrTunnelFix('add_a_culvert', 'temaki-waste', 'tunnel')
+                            });
                         }
                     }
                 }
@@ -513,7 +552,16 @@ export function validationCrossingWays(context) {
                     // most sensible fix for those errors, see #11329
                     fixes.unshift(fixes.pop());
                 }
+                // Order crossing fixes based on likely real-world scenarios
+                // See: #12007, #11329
+                const priority = getFixPriority(highway, waterway);
 
+                allFixes.sort((a, b) => {
+                    return priority.indexOf(a.type) - priority.indexOf(b.type);
+                });
+
+                // push sorted fixes
+                allFixes.forEach(item => fixes.push(item.fix));
                 return fixes;
             }
         });
