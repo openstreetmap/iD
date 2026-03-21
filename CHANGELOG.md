@@ -55,7 +55,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Use full width for the dropdown box for the values of the `access` field ([#12065])
 #### :hammer: Development
 * Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
+* Add type annotations to `context.js` module ([#11589], thanks [@k-yle])
 
+[#11589]: https://github.com/openstreetmap/iD/pull/11589
 [#12010]: https://github.com/openstreetmap/iD/pull/12010
 [#12050]: https://github.com/openstreetmap/iD/issues/12050
 [#12051]: https://github.com/openstreetmap/iD/issues/12051
