@@ -74,7 +74,6 @@ describe('iD.validations.disconnected_way', function() {
     });
 
     it('ignores highway with connected entrance vertex', function() {
-
         var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
         var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
         var n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
@@ -100,6 +99,26 @@ describe('iD.validations.disconnected_way', function() {
 
     it('ignores disconnected golf cartpath', function () {
         createWay({ 'highway': 'path', 'golf': 'cartpath' });
+        expect(validate()).to.have.lengthOf(0);
+    });
+
+    it('considers golf path when checking connectivity of other paths', function () {
+        createWay();
+
+        const n1 = iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
+        const n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        const n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
+        const w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'path', 'golf': 'cartpath' } });
+        const w2 = iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'unclassified' } });
+
+        context.perform(
+            iD.actionAddEntity(n1),
+            iD.actionAddEntity(n2),
+            iD.actionAddEntity(n3),
+            iD.actionAddEntity(w),
+            iD.actionAddEntity(w2)
+        );
+
         expect(validate()).to.have.lengthOf(0);
     });
 });

@@ -103,7 +103,10 @@ export function validationDisconnectedWay() {
                 });
             }
 
-            if (entity.type === 'way' && isRoutableWay(entity, true)) {
+            if (entity.type === 'way' &&
+                isRoutableWay(entity, true) &&
+                !shouldSkipRoutableWay(entity)
+            ) {
 
                 routingIsland.add(entity);
                 waysToCheck.push(entity);
@@ -161,11 +164,6 @@ export function validationDisconnectedWay() {
         }
 
         function isRoutableWay(way, ignoreInnerWays) {
-            if (way.tags.golf === 'path' || way.tags.golf === 'cartpath') {
-                // skip golf paths #11863
-                return false;
-            }
-
             if (isTaggedAsHighway(way) || way.tags.route === 'ferry') return true;
 
             return graph.parentRelations(way).some(function(parentRelation) {
@@ -178,6 +176,14 @@ export function validationDisconnectedWay() {
 
                 return false;
             });
+        }
+
+        function shouldSkipRoutableWay(way) {
+            if (way.tags.golf === 'path' || way.tags.golf === 'cartpath') {
+                // skip golf paths #11863
+                return true;
+            }
+            return false;
         }
 
         function makeContinueDrawingFixIfAllowed(textDirection, vertexID, whichEnd) {
