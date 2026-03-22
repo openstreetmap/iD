@@ -427,7 +427,7 @@ export function uiCombobox(context, klass) {
                         .title(d.description)
                         .placement('left');
 
-                        // Support long-press or tap interactions for mobile users
+                        // Handle interaction logic for touch devices (long-press support)
 
                         let timeout;
 

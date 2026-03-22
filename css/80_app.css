@@ -5683,12 +5683,12 @@ button.conflicts-button {
   white-space: normal;
 }
 
-.tooltip {   /*for users with pc, laptop with big screen*/
+.tooltip {   /*for users with with big screen*/
   max-width: min(260px, 80vw);
   white-space: normal;
 }
 
-@media (max-width: 480px) { /*for mobile users with small screen */
+@media (max-width: 480px) { /*for mobile phone users/ small screen */
   .tooltip {
     max-width: 135px;   /*adjusted perfectly so that the tooltip info dosent overflow*/
   }
