@@ -1868,10 +1868,65 @@ input.date-selector {
     display: flex;
     align-items: center;
 }
-.combobox-option.has-icon .combobox-option-label {
+.combobox-option.has-icon {
     display: flex;
     align-items: center;
 }
+
+.combobox {
+  scrollbar-gutter: stable;  /*helped remove the jitter due to "i" and scrollbar overlap*/
+}
+
+.combobox-option-info .icon {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.combobox-option-info {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--border-color);
+  position: relative;
+  left: 7px;
+
+  cursor: pointer;
+
+  transition: 
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.combobox-option-info:hover {  /*for laptop, pc*/
+  border-color: #ffffff;
+  background-color: #258292;
+  transform: scale(1.05);
+}
+
+.combobox-option-info.is-active {  /*same as above class but for mobile devices*/
+  border-color: #ffffff;
+  background-color: #1e6a77;
+   transform: scale(1.03);   /* slightly less aggressive */
+}
+
+.combobox-option-label {
+  flex: 1;
+  min-width: 0;
+}
+
+.combobox-option-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .tag-value-icon .icon {
     width: 21px;
     height: 21px;
@@ -2411,7 +2466,7 @@ div.combobox {
     box-shadow: 0 4px 10px 1px rgba(0,0,0,.2);
     margin-top: -1px;
     background: var(--bg-color);
-    max-height: 245px;
+    max-height: 400px;
     overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid var(--border-color);
@@ -2473,14 +2528,15 @@ div.combobox:has(.has-description) {
 
 .combobox .combobox-option.has-description {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
 }
+
 .combobox .combobox-option-description {
     font-size: 11px;
     line-height: 1.3;
     opacity: 0.7;
     white-space: normal;
+}
+.combobox-option-description.expanded {
     padding-top: 2px;
 }
 .combobox .combobox-option.raw-option {
@@ -5621,6 +5677,23 @@ button.conflicts-button {
     font-size: 12px;
     white-space: initial;
 }
+
+.tooltip { 
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.tooltip {   /*for users with pc, laptop with big screen*/
+  max-width: min(260px, 80vw);
+  white-space: normal;
+}
+
+@media (max-width: 480px) { /*for mobile users with small screen */
+  .tooltip {
+    max-width: 135px;   /*adjusted perfectly so that the tooltip info dosent overflow*/
+  }
+}
+
 .tooltip:not(.curtain-tooltip) {
     pointer-events: none;
 }

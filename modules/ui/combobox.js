@@ -1,8 +1,8 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
-
-
+import { uiTooltip } from './tooltip';
+import { svgIcon } from '../svg/icon';
 // This code assumes that the combobox values will not have duplicate entries.
 // It is keyed on the `value` of the entry. Data should be an array of objects like:
 //   [{
@@ -393,19 +393,77 @@ export function uiCombobox(context, klass) {
                 })
                 .attr('title', function(d) { return d.title; });
 
-            enter.each(function(d) {
+                d3_select(window)
+                    .on('touchend.comboboxInfo touchcancel.comboboxInfo', null) // Reset the icons' look whenever a touch interaction is finished
+                    .on('touchend.comboboxInfo touchcancel.comboboxInfo', () => {
+                       d3_select(window).selectAll('.combobox-option-info').classed('is-active', false);
+                });
+
+                enter.each(function(d) {
                     const sel = d3_select(this);
-                    const labelSpan = sel.append('span')
+
+                    const row = sel.append('div')
+                        .attr('class', 'combobox-option-row');
+
+                    const labelSpan = row.append('span')
                         .attr('class', 'combobox-option-label');
                     if (d.display) {
                         d.display(labelSpan);
                     } else {
                         labelSpan.text(d.value);
                     }
-                    if (d.description) {
-                        sel.append('span')
-                            .attr('class', 'combobox-option-description')
-                            .text(d.description);
+
+                    if (d.description) {   //althought, all options have descriptions but just for "future-proofing"
+
+                        //dropdown icon
+                        row.append('div')  // Visual caret indicator to match combobox styling
+                            .attr('class', 'combobox-caret');
+
+                        const info = row.append('span')
+                        .attr('class', 'combobox-option-info')
+                        .call(svgIcon('#iD-icon-inspect'));
+
+                        const tooltip = uiTooltip(context)
+                        .title(d.description)
+                        .placement('left');
+
+                        // Support long-press or tap interactions for mobile users
+
+                        let timeout;
+
+                        info
+                        .on('touchstart mousedown', function(event) {
+                            event.stopPropagation();
+                            event.preventDefault();
+
+                            const activeItem = d3_select(this);
+                            activeItem.classed('is-active', true);
+
+                            clearTimeout(timeout); // Resets the wait time if the user clicks "i" again.
+
+                            timeout = setTimeout(() => {
+                                tooltip.show(this);
+                                if (tooltip.update) tooltip.update();
+
+                            }, 200);  // small delay to prevent accidental touch on mobile phones
+
+                        })
+
+                        .on('touchend mouseup mouseleave touchcancel', function(event) {
+                            event.stopPropagation();
+
+                            const activeItem = d3_select(this);
+                            activeItem.classed('is-active', false);
+
+                            clearTimeout(timeout);
+                            tooltip.hide();
+                        })
+
+                        .on('click', function(event) {
+                            event.stopPropagation();
+                        });
+
+                        info.call(tooltip);
                     }
                 });
 
