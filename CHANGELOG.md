@@ -70,7 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Use Röntgen icon set directly from upstream npm package ([#11784], thanks [@tordans])
 * Replace deprecated `document.createEvent`/`initEvent` with modern [Event] constructor ([#11870], thanks [@JaiswalShivang])
 * Fix crash in country combo field when entering unrecognized ISO country codes ([#11904], thanks [@JaiswalShivang])
-* Fixed showing "Disconnected Way" warnings for paths ending at aerialway stations and stopping locations. ([#9406], thanks [@Razen04])
+* Fixed showing "Disconnected Way" warnings for ways ending at aerialway stations and stopping locations. ([#9406], thanks [@Razen04])
 
 
 [#8464]: https://github.com/openstreetmap/iD/issues/8464
