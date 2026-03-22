@@ -102,7 +102,7 @@ describe('iD.validations.disconnected_way', function() {
         expect(validate()).to.have.lengthOf(0);
     });
 
-    it('considers golf path when checking connectivity of other paths', function () {
+    it('considers golf path as routable when checking connectivity of other paths', function () {
         createWay();
 
         const n1 = iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
@@ -110,6 +110,31 @@ describe('iD.validations.disconnected_way', function() {
         const n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
         const w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'path', 'golf': 'cartpath' } });
         const w2 = iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'unclassified' } });
+
+        context.perform(
+            iD.actionAddEntity(n1),
+            iD.actionAddEntity(n2),
+            iD.actionAddEntity(n3),
+            iD.actionAddEntity(w),
+            iD.actionAddEntity(w2)
+        );
+
+        expect(validate()).to.have.lengthOf(0);
+    });
+
+    it('ignores disconnected aerialway', function () {
+        createWay({ 'aerialway': 'gondola' });
+        expect(validate()).to.have.lengthOf(0);
+    });
+
+    it('considers aerialway as routable when checking connectivity of other paths', function () {
+        createWay();
+
+        const n1 = iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
+        const n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        const n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
+        const w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'aerialway': ' 	gondola' } });
+        const w2 = iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'corridor' } });
 
         context.perform(
             iD.actionAddEntity(n1),

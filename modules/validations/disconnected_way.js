@@ -149,7 +149,7 @@ export function validationDisconnectedWay() {
             var osm = services.osm;
             if (osm && !osm.isDataLoaded(vertex.loc)) return true;
 
-            // entrances are considered connected
+            // entrances are considered connected - #3906
             if (vertex.tags.entrance &&
                 vertex.tags.entrance !== 'no') return true;
             if (vertex.tags.amenity === 'parking_entrance') return true;
@@ -164,7 +164,12 @@ export function validationDisconnectedWay() {
         }
 
         function isRoutableWay(way, ignoreInnerWays) {
-            if (isTaggedAsHighway(way) || way.tags.route === 'ferry') return true;
+            if (isTaggedAsHighway(way)) return true;
+            if (way.tags.route === 'ferry') return true;
+            if (way.tags.aerialway && way.tags.aerialway !== 'no' && way.tags.aerialway !== 'goods') {
+                // treat most aerialways as routable for checking connectivity of other ways - #9406
+                return true;
+            }
 
             return graph.parentRelations(way).some(function(parentRelation) {
                 if (parentRelation.tags.type === 'route' &&
@@ -181,6 +186,10 @@ export function validationDisconnectedWay() {
         function shouldSkipRoutableWay(way) {
             if (way.tags.golf === 'path' || way.tags.golf === 'cartpath') {
                 // skip golf paths #11863
+                return true;
+            }
+            if (way.tags.aerialway) {
+                // aerialways should not be validated by themselves - #9406
                 return true;
             }
             return false;
