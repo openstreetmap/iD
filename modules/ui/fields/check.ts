@@ -15,22 +15,22 @@ export { uiFieldCheck as uiFieldDefaultCheck };
 export { uiFieldCheck as uiFieldOnewayCheck };
 
 
-export function uiFieldCheck(field, context) {
-    var dispatch = d3_dispatch('change');
-    var options = field.options;
-    var values = [];
-    var texts = [];
+export function uiFieldCheck(field: any, context: iD.Context) {
+    const dispatch = d3_dispatch('change');
+    let options = field.options;
+    let values: (string | undefined)[] = [];
+    let texts: ReturnType<typeof t.append>[] = [];
 
-    var _tags;
+    let _tags: Tags;
 
-    var input = d3_select(null);
-    var text = d3_select(null);
-    var label = d3_select(null);
-    var reverser = d3_select(null);
+    let input:    d3.Selection<HTMLInputElement>  | d3.Selection<null> = d3_select(null);
+    let text:     d3.Selection<HTMLSpanElement>   | d3.Selection<null> = d3_select(null);
+    let label:    d3.Selection<HTMLLabelElement>  | d3.Selection<null> = d3_select(null);
+    let reverser: d3.Selection<HTMLButtonElement> | d3.Selection<null> = d3_select(null);
 
-    var _impliedYes;
-    var _entityIDs = [];
-    var _value;
+    let _impliedYes: boolean;
+    let _entityIDs: string[]  = [];
+    let _value: string | undefined;
 
 
     var stringsField = field.resolveReference('stringsCrossReference');
@@ -76,7 +76,7 @@ export function uiFieldCheck(field, context) {
     }
 
 
-    function reverserSetText(selection) {
+    function reverserSetText(selection: d3.Selection) {
         var entity = _entityIDs.length && context.hasEntity(_entityIDs[0]);
         if (reverserHidden() || !entity) return selection;
 
@@ -94,10 +94,10 @@ export function uiFieldCheck(field, context) {
     }
 
 
-    var check = function(selection) {
+    const check = function(selection: d3.Selection) {
         checkImpliedYes();
 
-        label = selection.selectAll('.form-field-input-wrap')
+        label = selection.selectAll<HTMLLabelElement, any>('.form-field-input-wrap')
             .data([0]);
 
         var enter = label.enter()
@@ -124,16 +124,16 @@ export function uiFieldCheck(field, context) {
         }
 
         label = label.merge(enter);
-        input = label.selectAll('input');
-        text = label.selectAll('span.value');
+        input = label.selectAll<HTMLInputElement, any>('input');
+        text = label.selectAll<HTMLSpanElement, any>('span.value');
 
         input
             .on('click', function(d3_event) {
                 d3_event.stopPropagation();
-                var t = {};
+                var t: Tags = {};
 
                 if (Array.isArray(_tags[field.key])) {
-                    if (values.indexOf('yes') !== -1) {
+                    if (values.includes('yes')) {
                         t[field.key] = 'yes';
                     } else {
                         t[field.key] = values[0];
@@ -152,7 +152,7 @@ export function uiFieldCheck(field, context) {
             });
 
         if (field.type === 'onewayCheck') {
-            reverser = label.selectAll('.reverser');
+            reverser = label.selectAll<HTMLButtonElement, any>('.reverser');
 
             reverser
                 .call(reverserSetText)
@@ -160,7 +160,7 @@ export function uiFieldCheck(field, context) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
                     context.perform(
-                        function(graph) {
+                        function(graph: iD.Graph) {
                             for (var i in _entityIDs) {
                                 graph = actionReverse(_entityIDs[i])(graph);
                             }
@@ -179,22 +179,22 @@ export function uiFieldCheck(field, context) {
     };
 
 
-    check.entityIDs = function(val) {
+    check.entityIDs = function(val?: string[]) {
         if (!arguments.length) return _entityIDs;
-        _entityIDs = val;
+        _entityIDs = val!;
         return check;
     };
 
 
-    check.tags = function(tags) {
+    check.tags = function(tags: Tags) {
 
         _tags = tags;
 
-        function isChecked(val) {
+        function isChecked(val: string | undefined) {
             return val !== 'no' && val !== '' && val !== undefined && val !== null;
         }
 
-        function textFor(val) {
+        function textFor(val: string | undefined) {
             if (val === '') val = undefined;
             var index = values.indexOf(val);
             return (index !== -1 ? texts[index] : ('"' + val + '"'));
@@ -204,7 +204,7 @@ export function uiFieldCheck(field, context) {
 
         var isMixed = Array.isArray(tags[field.key]);
 
-        _value = !isMixed && tags[field.key] && tags[field.key].toLowerCase();
+        _value = !isMixed && tags[field.key] ? tags[field.key]?.toLowerCase() : undefined;
 
         if (field.type === 'onewayCheck' && (_value === '1' || _value === '-1')) {
             _value = 'yes';
@@ -215,11 +215,12 @@ export function uiFieldCheck(field, context) {
             .property('checked', isChecked(_value));
 
         const textForValue = textFor(_value);
-        text
-            .text('')
-            .call(isMixed
+        text.text('');
+        text.call(isMixed
                 ? t.append('inspector.multiple_values')
-                : typeof textForValue === 'string' ? selection => selection.text(textForValue) : textForValue)
+                : typeof textForValue === 'string'
+                    ? (selection: d3.Selection) => selection.text(textForValue)
+                    : textForValue)
             .classed('mixed', isMixed);
 
         label
@@ -234,7 +235,7 @@ export function uiFieldCheck(field, context) {
 
 
     check.focus = function() {
-        input.node().focus();
+        input.node()?.focus();
     };
 
     return utilRebind(check, dispatch, 'on');

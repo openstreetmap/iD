@@ -9,7 +9,7 @@ declare global {
   declare var after: typeof afterEach;
   declare var VITEST: true;
 
-  declare type Tags = { [key: string]: string };
+  declare type Tags = { [key: string]: string | undefined };
 
   /**
    * A class method that acts as both a getter and a
