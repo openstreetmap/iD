@@ -792,6 +792,12 @@ button.add-note svg.icon {
 ------------------------------------------------------- */
 summary.hide-toggle {
     display: block;
+
+    width: max-content;   /* Makes the element expand only as much as the text */
+
+    min-width: 0%;       /* we can adjust these two to the set the cap or remove completly*/
+    max-width: 100%;    
+
     list-style: none;
     cursor: pointer;
     color: var(--link-color);
