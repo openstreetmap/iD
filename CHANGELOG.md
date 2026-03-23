@@ -71,6 +71,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12078]: https://github.com/openstreetmap/iD/issues/12078
 
 
+# 2.39.4
+##### 2026-03-23
+
+* Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
+* Fix user images and upload help text from showing up as duplicates in upload dialog ([#12063])
+* Fix crash when a checkbox-field is rendered using a custom (non-`yes/no`) value ([#12078])
+
+
 # 2.39.2
 ##### 2026-03-19
 
