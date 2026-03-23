@@ -48,6 +48,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Prevent duplicate nodes from being created while using spacebar key to draw a way ([#12051])
 * Fix user images and upload help text from showing up as duplicates in upload dialog ([#12063])
 * Fix some tags automatically deleted when re-selecting the same preset ([#12070], thanks [@k-yle])
+* Fix crash when a checkbox-field is rendered using a custom (non-`yes/no`) value ([#12078])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -67,6 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12063]: https://github.com/openstreetmap/iD/issues/12063
 [#12065]: https://github.com/openstreetmap/iD/issues/12065
 [#12070]: https://github.com/openstreetmap/iD/issues/12070
+[#12078]: https://github.com/openstreetmap/iD/issues/12078
 
 
 # 2.39.2
