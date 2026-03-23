@@ -26195,7 +26195,7 @@ ${source}
           if (typeof text === "string") {
             selection2.append("span").attr("class", "localized-text").attr("lang", info.locale || "und").text(replacements?._trim ? text.trim() : text);
           } else {
-            select_default2(this).call(text);
+            selection2.call(text);
           }
         });
       };
@@ -35236,7 +35236,7 @@ ${source}
     "package.json"() {
       package_default = {
         name: "@openstreetmap/id",
-        version: "2.39.4",
+        version: "2.39.5",
         description: "A friendly editor for OpenStreetMap",
         main: "dist/iD.min.js",
         repository: {
