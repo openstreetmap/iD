@@ -434,7 +434,7 @@ export function coreLocalizer() {
               .attr('lang', info.locale || 'und')
               .text(replacements?._trim ? text.trim() : text);
           } else {
-            d3_select(this).call(text);
+            selection.call(text);
           }
         });
       };

@@ -42,11 +42,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
+* Treat most aerialways as part of the routable network when checking other ways' connectivity ([#9406])
 #### :bug: Bugfixes
 * Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
 * Prevent duplicate nodes from being created while using spacebar key to draw a way ([#12051])
 * Fix user images and upload help text from showing up as duplicates in upload dialog ([#12063])
 * Fix some tags automatically deleted when re-selecting the same preset ([#12070], thanks [@k-yle])
+* Fix crash when a checkbox-field is rendered using a custom (non-`yes/no`) value ([#12078])
+* Fix regression where some strings (like some section headings) are not rendered correctly ([#12083])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -57,6 +60,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
 * Add type annotations to `context.js` module ([#11589], thanks [@k-yle])
 
+[#9406]: https://github.com/openstreetmap/iD/issues/9406
 [#11589]: https://github.com/openstreetmap/iD/pull/11589
 [#12010]: https://github.com/openstreetmap/iD/pull/12010
 [#12050]: https://github.com/openstreetmap/iD/issues/12050
@@ -65,6 +69,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12063]: https://github.com/openstreetmap/iD/issues/12063
 [#12065]: https://github.com/openstreetmap/iD/issues/12065
 [#12070]: https://github.com/openstreetmap/iD/issues/12070
+[#12078]: https://github.com/openstreetmap/iD/issues/12078
+[#12083]: https://github.com/openstreetmap/iD/issues/12083
+
+
+# 2.39.4
+##### 2026-03-23
+
+* Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
+* Fix user images and upload help text from showing up as duplicates in upload dialog ([#12063])
+* Fix crash when a checkbox-field is rendered using a custom (non-`yes/no`) value ([#12078])
 
 
 # 2.39.2

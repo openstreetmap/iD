@@ -798,6 +798,7 @@ summary.hide-toggle {
     font-size: 14px;
     font-weight: bold;
     line-height: 25px;
+    width: fit-content;
 }
 details.disclosure-wrap[open] summary.hide-toggle {
     margin-bottom: 10px;
