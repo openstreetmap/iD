@@ -9,7 +9,14 @@ declare global {
   declare var after: typeof afterEach;
   declare var VITEST: true;
 
-  declare type Tags = { [key: string]: string | undefined };
+  declare type EntityID = string;
+
+  declare type TagKey = string;
+  declare type TagValue = string;
+  declare type TagValueUpdate = string | undefined;
+  declare type Tags = { [key: TagKey]: TagValue };
+  declare type TagsMulti = { [key: TagKey]: TagValue | TagValue[] };
+  declare type TagsUpdate = { [key: TagKey]: TagValueUpdate };
 
   /**
    * A class method that acts as both a getter and a

@@ -18,10 +18,10 @@ export { uiFieldCheck as uiFieldOnewayCheck };
 export function uiFieldCheck(field: any, context: iD.Context) {
     const dispatch = d3_dispatch('change');
     let options = field.options;
-    let values: (string | undefined)[] = [];
+    let values: TagValueUpdate[] = [];
     let texts: ReturnType<typeof t.append>[] = [];
 
-    let _tags: Tags;
+    let _tags: TagsMulti;
 
     let input:    d3.Selection<HTMLInputElement>  | d3.Selection<null> = d3_select(null);
     let text:     d3.Selection<HTMLSpanElement>   | d3.Selection<null> = d3_select(null);
@@ -29,8 +29,8 @@ export function uiFieldCheck(field: any, context: iD.Context) {
     let reverser: d3.Selection<HTMLButtonElement> | d3.Selection<null> = d3_select(null);
 
     let _impliedYes: boolean;
-    let _entityIDs: string[]  = [];
-    let _value: string | undefined;
+    let _entityIDs: EntityID[]  = [];
+    let _value: TagValueUpdate;
 
 
     var stringsField = field.resolveReference('stringsCrossReference');
@@ -130,7 +130,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
         input
             .on('click', function(d3_event) {
                 d3_event.stopPropagation();
-                var t: Tags = {};
+                var t: TagsUpdate = {};
 
                 if (Array.isArray(_tags[field.key])) {
                     if (values.includes('yes')) {
@@ -186,7 +186,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
     };
 
 
-    check.tags = function(tags: Tags) {
+    check.tags = function(tags: TagsMulti) {
 
         _tags = tags;
 
@@ -202,9 +202,9 @@ export function uiFieldCheck(field: any, context: iD.Context) {
 
         checkImpliedYes();
 
-        var isMixed = Array.isArray(tags[field.key]);
-
-        _value = !isMixed && tags[field.key] ? tags[field.key]?.toLowerCase() : undefined;
+        const tag = tags[field.key];
+        const isMixed = Array.isArray(tag);
+        _value = !isMixed && tag ? tag.toLowerCase() : undefined;
 
         if (field.type === 'onewayCheck' && (_value === '1' || _value === '-1')) {
             _value = 'yes';
