@@ -326,8 +326,6 @@ export function uiFieldRadio(field, context) {
 
                 unknownLabel.append('span')
                   .text('"' + unknownVal + '"');
-                placeholder.text('');
-                placeholder.call(t.append('inspector.none'));
 
             } else {
                 placeholder.text('');
