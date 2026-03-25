@@ -380,8 +380,10 @@ export function rendererBackgroundSourceEsriWayback(
 
         // Get the map tile covering the center point - used only for bounding box and caching
         const tiler = _tiler.zoomExtent([TILEZOOM, TILEZOOM]) as ReturnType<typeof utilTiler>;
-        const tiles = tiler.getTiles(projection);
-        const tile = tiles.find(t => t !== false); // Get first valid tile covering the center point
+        const tileResults = tiler.getTiles(projection);
+        const tiles = Array.isArray(tileResults) ? tileResults : [];
+        const tile = (tiles as Array<(typeof tiles)[number] | false>)
+            .find((t): t is (typeof tiles)[number] => t !== false); // Get first valid tile covering the center point
 
         if (!tile) {
             return Promise.resolve(new Set<string>());

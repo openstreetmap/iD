@@ -36,14 +36,9 @@ export function updateWaybackDropdownOptions(
         currDate = releaseDates[0];
     }
 
-    const options = dropdown.selectAll('option')
-        .data(releaseDates, (d: string) => d);
-
-    options.exit().remove();
-
-    options.enter()
-        .append('option')
-        .merge(options as Selection<HTMLOptionElement, string, HTMLSelectElement, unknown>)
+    dropdown.selectAll<HTMLOptionElement, string>('option')
+        .data(releaseDates, (d: string) => d)
+        .join('option')
         .attr('value', (d: string) => d)
         .text((d: string) => formatWaybackReleaseLabel(d))
         .property('selected', (d: string) => d === currDate);
@@ -58,7 +53,7 @@ export function setWaybackLoading(
     context: iD.Context
 ): void {
     li.classed(WAYBACK_READY_CLASS, !isLoading);
-    uiSetInlineLoading(li, isLoading, {
+    uiSetInlineLoading(li as unknown as Selection<HTMLElement, unknown, null, undefined>, isLoading, {
         className: WAYBACK_LOADING_CLASS,
         spinner: true,
         spinnerClass: WAYBACK_SPINNER_CLASS,
