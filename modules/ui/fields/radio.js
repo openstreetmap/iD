@@ -5,6 +5,7 @@ import { presetManager } from '../../presets';
 import { t } from '../../core/localizer';
 import { uiField } from '../field';
 import { utilArrayUnion, utilRebind } from '../../util';
+import { formatTag } from './tag_title';
 
 
 export { uiFieldRadio as uiFieldStructureRadio };
@@ -304,8 +305,13 @@ export function uiFieldRadio(field, context) {
             })
             .classed('mixed', isMixed)
             .attr('title', function(d) {
-                return isMixed(d) ? t('inspector.unshared_value_tooltip') : null;
-            });
+                    if (isMixed(d)) return t('inspector.unshared_value_tooltip');
+                    if (!field.key) return null;
+                    const desc = strings.hasTextForStringId('options.' + d + '.description')
+                        ? strings.t('options.' + d + '.description') : undefined;
+                    const tag = formatTag(field.key, d);
+                    return desc ? `${desc}\n${tag}` : tag;
+                });
 
 
         var selection = radios.filter(function() { return this.checked; });
