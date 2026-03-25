@@ -7,11 +7,21 @@ import * as countryCoder from '@rapideditor/country-coder';
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
 import { t, localizer } from '../../core/localizer';
-import { utilDetect, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
+import {
+    utilDetect,
+    utilDirectionSegmentFractionDigits,
+    utilGetSetValue,
+    utilNoAuto,
+    utilNormalizeAzimuthDegrees,
+    utilParseDirectionDegreesString,
+    utilRebind,
+    utilTotalExtent,
+    numberFieldRawRegex
+} from '../../util';
 import { svgIcon } from '../../svg/icon';
-import { cardinal } from '../../osm/node';
 import { isColorValid } from '../../osm/tags';
 import { uiLengthIndicator } from '..';
+import { createDirectionFieldDialMount } from '../direction_field_dial';
 import { uiTooltip } from '../tooltip';
 import { utilIsValidURL } from '../../util/util';
 
@@ -24,10 +34,9 @@ export {
     uiFieldText as uiFieldSchedule,
     uiFieldText as uiFieldTel,
     uiFieldText as uiFieldUrl,
-    likelyRawNumberFormat
+    numberFieldRawRegex as likelyRawNumberFormat, // Legacy export
 };
 
-const likelyRawNumberFormat = /^-?(0\.\d*|\d*\.\d{0,2}(\d{4,})?|\d{4,}\.\d{3})$/;
 const yoHoursURLFormat = 'https://projets.pavie.info/yohours/?oh={value}';
 
 export function uiFieldText(field, context) {
@@ -43,6 +52,7 @@ export function uiFieldText(field, context) {
     const formatFloat = localizer.floatFormatter(localizer.languageCode());
     const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
     const countDecimalPlaces = localizer.decimalPlaceCounter(localizer.languageCode());
+    const isDirectionNumberField = isDirectionField && (field.type === 'number' || field.type === 'integer');
 
     if (field.type === 'tel') {
         fileFetcher.get('phone_formats')
@@ -110,6 +120,8 @@ export function uiFieldText(field, context) {
 
         wrap.call(_lengthIndicator);
 
+        syncDirectionDial = mountDirectionDial(selection);
+
         if (field.type === 'tel') {
             updatePhonePlaceholder();
 
@@ -145,30 +157,27 @@ export function uiFieldText(field, context) {
                     var vals = raw_vals.split(';');
                     vals = vals.map(function(v) {
                         v = v.trim();
-                        const isRawNumber = likelyRawNumberFormat.test(v);
-                        var num = isRawNumber ? parseFloat(v) : parseLocaleFloat(v);
+                        const isRawNumber = numberFieldRawRegex.test(v);
+                        let num;
                         if (isDirectionField) {
-                            const compassDir = cardinal[v.toLowerCase()];
-                            if (compassDir !== undefined) {
-                                num = compassDir;
-                            }
+                            num = utilParseDirectionDegreesString(v, parseLocaleFloat);
+                            if (num === null) return v;
+                        } else {
+                            num = isRawNumber ? parseFloat(v) : parseLocaleFloat(v);
+                            // do nothing if the value is not a number
+                            if (!isFinite(num)) return v;
+                            num = parseFloat(num);
+                            if (!isFinite(num)) return v;
                         }
-
-                        // do nothing if the value is neither a number, nor a cardinal direction
-                        if (!isFinite(num)) return v;
-                        num = parseFloat(num);
-                        if (!isFinite(num)) return v;
 
                         num += d;
                         // clamp to 0..359 degree range if it's a direction field
                         // https://github.com/openstreetmap/iD/issues/9386
                         if (isDirectionField) {
-                            num = ((num % 360) + 360) % 360;
+                            num = utilNormalizeAzimuthDegrees(num);
                         }
-                        // make sure no extra decimals are introduced
-                        return formatFloat(clamped(num), isRawNumber
-                            ? (v.includes('.') ? v.split('.')[1].length : 0)
-                            : countDecimalPlaces(v));
+                        const fractionDigits = utilDirectionSegmentFractionDigits(v, countDecimalPlaces);
+                        return formatFloat(clamped(num), fractionDigits);
                     });
                     input.node().value = vals.join(';');
                     change()();
@@ -247,7 +256,6 @@ export function uiFieldText(field, context) {
             updateDateField();
         }
     }
-
 
     function updateColourPreview() {
         wrap.selectAll('.colour-preview')
@@ -458,7 +466,7 @@ export function uiFieldText(field, context) {
             let displayVal = val;
             if ((field.type === 'number' || field.type === 'integer') && val) {
                 const numbers = val.split(';').map(v => {
-                    if (likelyRawNumberFormat.test(v)) {
+                    if (numberFieldRawRegex.test(v)) {
                         // input number likely in "raw" format
                         return {
                             v,
@@ -506,6 +514,18 @@ export function uiFieldText(field, context) {
         };
     }
 
+    const mountDirectionDial = createDirectionFieldDialMount(isDirectionNumberField, {
+        step: isDirectionNumberField && field.increment ? field.increment : 1,
+        getInput: function() { return input; },
+        notifyChange: function(onInput) {
+            change(onInput)();
+        },
+        clampNumber: clamped,
+        formatFloat: formatFloat,
+        countDecimalPlaces: countDecimalPlaces,
+        parseLocaleFloat: parseLocaleFloat
+    });
+    let syncDirectionDial = function directionDialSyncNoop() {};
 
     i.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
@@ -540,7 +560,7 @@ export function uiFieldText(field, context) {
             // can and should update the content of the input element.
             shouldUpdate = (inputValue, setValue) => {
                 const inputNums = inputValue.split(';').map(val => {
-                    const parsedNum = likelyRawNumberFormat.test(val)
+                    const parsedNum = numberFieldRawRegex.test(val)
                         ? parseFloat(val)
                         : parseLocaleFloat(val);
                     if (!isFinite(parsedNum)) return val; // keep unparsable values as-is
@@ -568,11 +588,14 @@ export function uiFieldText(field, context) {
                 var raw_vals = tags[field.key] || '0';
                 const canIncDec = raw_vals.split(';').some((val) =>
                     isFinite(Number(val))
-                    || (isDirectionField && (val.trim().toLowerCase() in cardinal))
+                    || (isDirectionField
+                        && utilParseDirectionDegreesString(val, parseLocaleFloat) !== null)
                 );
                 buttons.attr('disabled', canIncDec ? null : 'disabled').classed('disabled', !canIncDec);
             }
         }
+
+        syncDirectionDial(isMixed, field.locked());
 
         if (field.type === 'tel') updatePhonePlaceholder();
 

@@ -5,6 +5,12 @@ export { utilCleanTags } from './clean_tags';
 export { utilCombinedTags } from './util';
 export { utilDeepMemberSelector } from './util';
 export { utilDetect } from './detect';
+export { numberFieldRawRegex } from './number_field';
+export {
+    utilNormalizeAzimuthDegrees,
+    utilParseDirectionDegreesString,
+    utilDirectionSegmentFractionDigits
+} from './direction_degrees';
 export { utilDisplayName } from './util';
 export { utilDisplayNameForPath } from './util';
 export { utilDisplayType } from './util';

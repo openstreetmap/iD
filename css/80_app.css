@@ -1503,6 +1503,104 @@ button.preset-reset .label.flash-bg {
     border-radius: 0;
 }
 
+.form-field-has-direction-dial {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "label dial"
+        "input dial";
+    align-items: stretch;
+    column-gap: 0;
+}
+
+.form-field-has-direction-dial > .field-label {
+    grid-area: label;
+    border-radius: 4px 0 0 0;
+}
+
+.form-field-has-direction-dial > .form-field-input-wrap {
+    grid-area: input;
+    border-radius: 0 0 0 4px;
+}
+
+.form-field-has-direction-dial .direction-dial-wrap {
+    grid-area: dial;
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 0 0 auto;
+    width: min-content;
+    border: 1px solid var(--border-color);
+    border-left: 0;
+    border-radius: 0 4px 4px 0;
+    background: var(--bg-color-2);
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+}
+
+.direction-dial {
+    width: 55px;
+    height: 55px;
+    cursor: crosshair;
+    outline: none;
+}
+
+.direction-dial-ring {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 2;
+    pointer-events: none;
+}
+
+@media (hover: hover) {
+    .direction-dial:not(.disabled):hover .direction-dial-ring {
+        stroke: var(--border-color);
+    }
+}
+
+.direction-dial:not(.disabled):focus .direction-dial-ring,
+.direction-dial:not(.disabled):focus-visible .direction-dial-ring {
+    stroke: var(--border-color);
+}
+
+.form-field-has-direction-dial .field-label .tag-reference-button {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.form-field-has-direction-dial .form-field-input-wrap > button.increment:last-of-type {
+    border-bottom-right-radius: 0;
+}
+
+.direction-dial-inner {
+    fill: var(--bg-color);
+}
+
+.direction-dial-center-dot {
+    fill: var(--text-color);
+}
+
+.direction-dial-line {
+    stroke: var(--text-color);
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.direction-dial-line.hidden {
+    display: none;
+}
+
+.direction-dial-tick {
+    stroke: var(--border-color);
+    stroke-width: 1;
+    pointer-events: none;
+}
+
+.direction-dial.disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
 
 .form-field-input-wrap > input,
 .form-field-input-wrap > label,
