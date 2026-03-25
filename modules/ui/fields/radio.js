@@ -311,7 +311,7 @@ export function uiFieldRadio(field, context) {
                         ? strings.t('options.' + d + '.description') : undefined;
                     const tag = formatTag(field.key, d);
                     return desc ? `${desc}\n${tag}` : tag;
-                });
+            });
 
 
         var selection = radios.filter(function() { return this.checked; });
