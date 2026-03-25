@@ -1,6 +1,3 @@
-import { select as d3_select } from 'd3-selection';
-import type { Selection } from 'd3-selection';
-
 import {
     utilDirectionSegmentFractionDigits,
     utilGetSetValue,
@@ -9,12 +6,12 @@ import {
 } from '../util';
 import { uiDirectionDial } from './direction_dial';
 
-/**
- * Preset field container passed to `uiFieldText`’s render function (the `.form-field` node).
- */
-type FormFieldRootSelection = Selection<HTMLElement, unknown, HTMLElement | null, unknown>;
+/** Preset field container passed to `uiFieldText`’s render function (the `.form-field` node). */
+type FormFieldRootSelection = d3.Selection<HTMLElement>;
 
-type InputSelection = Selection<HTMLInputElement, unknown, HTMLElement | null, unknown>;
+type InputSelection = d3.Selection<HTMLInputElement>;
+
+type DialWrapSelection = d3.Selection<HTMLDivElement>;
 
 interface DirectionFieldDialMountOptions {
     /** Preset `increment` when sensible; dial falls back to 1 if invalid. */
@@ -47,7 +44,7 @@ export function createDirectionFieldDialMount(
         };
     }
 
-    let dialWrap = d3_select(null) as unknown as Selection<HTMLDivElement, unknown, HTMLElement | null, unknown>;
+    let dialWrap: DialWrapSelection | null = null;
 
     const dial = uiDirectionDial()
         .step(options.step)
@@ -77,7 +74,7 @@ export function createDirectionFieldDialMount(
     }
 
     function syncDialFromInput(isMixed: boolean, isLocked: boolean) {
-        if (dialWrap.empty()) return;
+        if (!dialWrap) return;
 
         const inputSel = options.getInput();
         const rawValue = utilGetSetValue(inputSel);
@@ -100,7 +97,7 @@ export function createDirectionFieldDialMount(
             .enter()
             .insert('div', '.form-field-input-wrap')
             .attr('class', 'direction-dial-wrap')
-            .merge(wrapSel) as unknown as Selection<HTMLDivElement, unknown, HTMLElement | null, unknown>;
+            .merge(wrapSel);
 
         return syncDialFromInput;
     };

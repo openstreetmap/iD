@@ -1548,7 +1548,7 @@ button.preset-reset .label.flash-bg {
 .direction-dial-ring {
     fill: none;
     stroke: transparent;
-    stroke-width: 2;
+    stroke-width: 1;
     pointer-events: none;
 }
 
@@ -1558,7 +1558,6 @@ button.preset-reset .label.flash-bg {
     }
 }
 
-.direction-dial:not(.disabled):focus .direction-dial-ring,
 .direction-dial:not(.disabled):focus-visible .direction-dial-ring {
     stroke: var(--border-color);
 }
@@ -1578,12 +1577,36 @@ button.preset-reset .label.flash-bg {
 
 .direction-dial-center-dot {
     fill: var(--text-color);
+    fill-opacity: 0.5;
+}
+
+@media (hover: hover) {
+    .direction-dial:not(.disabled):hover .direction-dial-center-dot {
+        fill-opacity: 1;
+    }
+}
+
+.direction-dial:not(.disabled):focus .direction-dial-center-dot,
+.direction-dial:not(.disabled):focus-visible .direction-dial-center-dot {
+    fill-opacity: 1;
 }
 
 .direction-dial-line {
     stroke: var(--text-color);
+    stroke-opacity: 0.5;
     stroke-width: 2;
     stroke-linecap: round;
+}
+
+@media (hover: hover) {
+    .direction-dial:not(.disabled):hover .direction-dial-line {
+        stroke-opacity: 1;
+    }
+}
+
+.direction-dial:not(.disabled):focus .direction-dial-line,
+.direction-dial:not(.disabled):focus-visible .direction-dial-line {
+    stroke-opacity: 1;
 }
 
 .direction-dial-line.hidden {
