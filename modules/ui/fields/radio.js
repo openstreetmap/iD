@@ -271,6 +271,9 @@ export function uiFieldRadio(field, context) {
 
     radio.tags = function(tags) {
         _tags = tags;
+
+        wrap.selectAll('label.unknown-radio-option').remove();
+
         function isOptionChecked(d) {
             if (field.key) {
                 return tags[field.key] === d;
@@ -308,8 +311,28 @@ export function uiFieldRadio(field, context) {
         var selection = radios.filter(function() { return this.checked; });
 
         if (selection.empty()) {
-            placeholder.text('');
-            placeholder.call(t.append('inspector.none'));
+            var unknownVal = field.key && tags[field.key] && !Array.isArray(tags[field.key])
+                ? tags[field.key]
+                : null;
+
+            if (unknownVal) {
+                var unknownLabel = wrap.append('label')
+                    .attr('class', 'unknown-radio-option')
+
+                unknownLabel.append('input')
+                    .attr('type', 'radio')
+                    .attr('name', field.id)
+                    .property('checked', true);
+
+                unknownLabel.append('span')
+                  .text('"' + unknownVal + '"');
+                placeholder.text('');
+                placeholder.call(t.append('inspector.none'));
+
+            } else {
+                placeholder.text('');
+                placeholder.call(t.append('inspector.none'));
+            }
         } else {
             placeholder.text(selection.attr('value'));
             _oldType[selection.datum()] = tags[selection.datum()];
