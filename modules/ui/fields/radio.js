@@ -317,7 +317,7 @@ export function uiFieldRadio(field, context) {
 
             if (unknownVal) {
                 var unknownLabel = wrap.append('label')
-                    .attr('class', 'unknown-radio-option')
+                    .attr('class', 'unknown-radio-option');
 
                 unknownLabel.append('input')
                     .attr('type', 'radio')
