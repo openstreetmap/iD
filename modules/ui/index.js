@@ -25,6 +25,7 @@ export { uiFullScreen } from './full_screen';
 export { uiGeolocate } from './geolocate';
 export { uiInfo } from './info';
 export { uiInspector } from './inspector';
+export { uiSetInlineLoading } from './inline_loading';
 export { uiIssuesInfo } from './issues_info';
 export { uiLengthIndicator } from './length_indicator';
 export { uiLasso } from './lasso';

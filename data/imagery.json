@@ -23925,6 +23925,125 @@
     "icon": "https://www.manteca.gov/home/showpublishedimage/906/637945998633470000"
   },
   {
+    "id": "Maple-Ridge-RGB-2016",
+    "name": "City of Maple Ridge Orthoimagery (2016)",
+    "type": "wms",
+    "template": "https://geoservices.mapleridge.ca/image/rest/services/Orthoimagery/2016_8cm/ImageServer/exportImage?f=image&bbox={bbox}&bboxSR={wkid}&imageSR={wkid}&size={width},{height}&format=jpgpng",
+    "category": "photo",
+    "projection": "EPSG:3857",
+    "endDate": "2016-01-01T00:00:00.000Z",
+    "startDate": "2016-01-01T00:00:00.000Z",
+    "zoomExtent": [0, 24],
+    "polygon": [
+      [
+        [-122.40266, 49.15511],
+        [-122.40293, 49.35922],
+        [-122.65698, 49.3575],
+        [-122.7869, 49.22385],
+        [-122.71382, 49.18344],
+        [-122.60249, 49.18324],
+        [-122.57155, 49.16302],
+        [-122.40266, 49.15511]
+      ]
+    ],
+    "terms_url": "https://www.mapleridge.ca/terms-use#OpenGovernmentLicenceMapleRidge",
+    "terms_text": "Contains information licensed under the Open Government Licence – Maple Ridge",
+    "description": "Aerial imagery acquired by the City of Maple Ridge in 2016"
+  },
+  {
+    "id": "Maple-Ridge-RGB-2018",
+    "name": "City of Maple Ridge Orthoimagery (2018)",
+    "type": "wms",
+    "template": "https://geoservices.mapleridge.ca/image/rest/services/Orthoimagery/2018_8cm/ImageServer/exportImage?f=image&bbox={bbox}&bboxSR={wkid}&imageSR={wkid}&size={width},{height}&format=jpgpng",
+    "category": "photo",
+    "projection": "EPSG:3857",
+    "endDate": "2018-01-01T00:00:00.000Z",
+    "startDate": "2018-01-01T00:00:00.000Z",
+    "zoomExtent": [0, 24],
+    "polygon": [
+      [
+        [-122.40266, 49.15511],
+        [-122.40293, 49.35922],
+        [-122.65698, 49.3575],
+        [-122.7869, 49.22385],
+        [-122.71382, 49.18344],
+        [-122.60249, 49.18324],
+        [-122.57155, 49.16302],
+        [-122.40266, 49.15511]
+      ]
+    ],
+    "terms_url": "https://www.mapleridge.ca/terms-use#OpenGovernmentLicenceMapleRidge",
+    "terms_text": "Contains information licensed under the Open Government Licence – Maple Ridge",
+    "description": "Aerial imagery acquired by the City of Maple Ridge in 2018"
+  },
+  {
+    "id": "Maple-Ridge-RGB-2020",
+    "name": "City of Maple Ridge Orthoimagery (2020)",
+    "type": "wms",
+    "template": "https://geoservices.mapleridge.ca/image/rest/services/Orthoimagery/2020_8cm/ImageServer/exportImage?f=image&bbox={bbox}&bboxSR={wkid}&imageSR={wkid}&size={width},{height}&format=jpgpng",
+    "category": "photo",
+    "projection": "EPSG:3857",
+    "endDate": "2020-01-01T00:00:00.000Z",
+    "startDate": "2020-01-01T00:00:00.000Z",
+    "zoomExtent": [0, 24],
+    "polygon": [
+      [
+        [-122.40266, 49.15511],
+        [-122.40293, 49.35922],
+        [-122.65698, 49.3575],
+        [-122.7869, 49.22385],
+        [-122.71382, 49.18344],
+        [-122.60249, 49.18324],
+        [-122.57155, 49.16302],
+        [-122.40266, 49.15511]
+      ]
+    ],
+    "terms_url": "https://www.mapleridge.ca/terms-use#OpenGovernmentLicenceMapleRidge",
+    "terms_text": "Contains information licensed under the Open Government Licence – Maple Ridge",
+    "description": "Aerial imagery acquired by the City of Maple Ridge in 2020"
+  },
+  {
+    "id": "Maple-Ridge-RGB-2023",
+    "name": "City of Maple Ridge Orthoimagery (2023)",
+    "type": "wms",
+    "template": "https://geoservices.mapleridge.ca/image/rest/services/Orthoimagery/2023_7_5cm/ImageServer/exportImage?f=image&bbox={bbox}&bboxSR={wkid}&imageSR={wkid}&size={width},{height}&format=jpgpng",
+    "category": "photo",
+    "projection": "EPSG:3857",
+    "endDate": "2023-01-01T00:00:00.000Z",
+    "startDate": "2023-01-01T00:00:00.000Z",
+    "zoomExtent": [0, 24],
+    "polygon": [
+      [
+        [-122.64794, 49.20259],
+        [-122.63865, 49.2062],
+        [-122.62012, 49.21026],
+        [-122.60347, 49.20875],
+        [-122.59311, 49.20104],
+        [-122.58521, 49.1872],
+        [-122.5188, 49.16611],
+        [-122.46698, 49.17022],
+        [-122.44698, 49.1706],
+        [-122.43282, 49.1685],
+        [-122.41355, 49.16354],
+        [-122.41359, 49.24345],
+        [-122.47934, 49.24821],
+        [-122.47966, 49.27266],
+        [-122.51708, 49.27272],
+        [-122.54886, 49.25652],
+        [-122.62304, 49.28683],
+        [-122.6782, 49.22664],
+        [-122.67758, 49.19962],
+        [-122.66368, 49.19774],
+        [-122.654, 49.19999],
+        [-122.64794, 49.20259]
+      ]
+    ],
+    "terms_url": "https://www.mapleridge.ca/terms-use#OpenGovernmentLicenceMapleRidge",
+    "terms_text": "Contains information licensed under the Open Government Licence – Maple Ridge",
+    "best": true,
+    "description": "Aerial imagery acquired by the City of Maple Ridge in Spring 2023"
+  },
+  {
     "id": "Marco_Island_FL_Ortho_2023",
     "name": "City of Marco Island Orthoimagery (2023)",
     "type": "tms",
@@ -169643,11 +169762,11 @@
     "id": "NYSDOP_Latest_CIR",
     "name": "NYSDOP Latest Orthoimagery (Infrared)",
     "type": "wms",
-    "template": "https://orthos.its.ny.gov/arcgis/services/wms/Latest_cir/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap&LAYERS=0,1,2,3,4&STYLES=&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://orthos.its.ny.gov/arcgis/services/wms/Latest_cir/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap&LAYERS=0,1,2,3&STYLES=&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
     "category": "photo",
     "projection": "EPSG:3857",
     "endDate": "2025-01-01T00:00:00.000Z",
-    "startDate": "2021-01-01T00:00:00.000Z",
+    "startDate": "2022-01-01T00:00:00.000Z",
     "zoomExtent": [0, 19],
     "polygon": [
       [
@@ -170000,11 +170119,11 @@
     "id": "NYSDOP_Latest",
     "name": "NYSDOP Latest Orthoimagery (Natural Color)",
     "type": "wms",
-    "template": "https://orthos.its.ny.gov/arcgis/services/wms/Latest/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap&LAYERS=0,1,2,3,4&STYLES=&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://orthos.its.ny.gov/arcgis/services/wms/Latest/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap&LAYERS=0,1,2,3&STYLES=&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
     "category": "photo",
     "projection": "EPSG:3857",
     "endDate": "2025-01-01T00:00:00.000Z",
-    "startDate": "2021-01-01T00:00:00.000Z",
+    "startDate": "2022-01-01T00:00:00.000Z",
     "zoomExtent": [0, 19],
     "polygon": [
       [

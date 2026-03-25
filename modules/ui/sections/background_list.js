@@ -10,18 +10,28 @@ import { uiCmd } from '../cmd';
 import { uiSettingsCustomBackground } from '../settings/custom_background';
 import { uiMapInMap } from '../map_in_map';
 import { uiSection } from '../section';
+import {
+    ESRI_WAYBACK_ID,
+    renderWaybackRowContent,
+    updateWaybackRow,
+    selectWaybackAndUpdateRow,
+    refreshWaybackDropdownFromApi
+} from './background_list_wayback.js';
 
 export function uiSectionBackgroundList(context) {
 
-    var _backgroundList = d3_select(null);
+    let _backgroundList = d3_select(null);
 
-    var _settingsCustomBackground = uiSettingsCustomBackground(context)
+    const _settingsCustomBackground = uiSettingsCustomBackground(context)
         .on('change', customChanged);
 
-    var section = uiSection('background-list', context)
+    const section = uiSection('background-list', context)
         .label(() => t.append('background.backgrounds'))
         .disclosureContent(renderDisclosureContent);
 
+    /**
+     * @returns {string} Previous background ID used for switch shortcut.
+     */
     function previousBackgroundID() {
         return prefs('background-last-used-toggle');
     }
@@ -29,7 +39,7 @@ export function uiSectionBackgroundList(context) {
     function renderDisclosureContent(selection) {
 
         // the background list
-        var container = selection.selectAll('.layer-background-list')
+        const container = selection.selectAll('.layer-background-list')
             .data([0]);
 
         _backgroundList = container.enter()
@@ -40,13 +50,13 @@ export function uiSectionBackgroundList(context) {
 
 
         // add minimap toggle below list
-        var bgExtrasListEnter = selection.selectAll('.bg-extras-list')
+        const bgExtrasListEnter = selection.selectAll('.bg-extras-list')
             .data([0])
             .enter()
             .append('ul')
             .attr('class', 'layer-list bg-extras-list');
 
-        var minimapLabelEnter = bgExtrasListEnter
+        const minimapLabelEnter = bgExtrasListEnter
             .append('li')
             .attr('class', 'minimap-toggle-item')
             .append('label')
@@ -69,7 +79,7 @@ export function uiSectionBackgroundList(context) {
             .call(t.append('background.minimap.description'));
 
 
-        var panelLabelEnter = bgExtrasListEnter
+        const panelLabelEnter = bgExtrasListEnter
             .append('li')
             .attr('class', 'background-panel-toggle-item')
             .append('label')
@@ -91,7 +101,7 @@ export function uiSectionBackgroundList(context) {
             .append('span')
             .call(t.append('background.panel.description'));
 
-        var locPanelLabelEnter = bgExtrasListEnter
+        const locPanelLabelEnter = bgExtrasListEnter
             .append('li')
             .attr('class', 'location-panel-toggle-item')
             .append('label')
@@ -137,11 +147,11 @@ export function uiSectionBackgroundList(context) {
 
     function setTooltips(selection) {
         selection.each(function(d, i, nodes) {
-            var item = d3_select(this).select('label');
-            var span = item.select('span');
-            var placement = (i < nodes.length / 2) ? 'bottom' : 'top';
-            var hasDescription = d.hasDescription();
-            var isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
+            const item = d3_select(this).select('label');
+            const span = item.select('span');
+            const placement = (i < nodes.length / 2) ? 'bottom' : 'top';
+            const hasDescription = d.hasDescription();
+            const isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
 
             item.call(uiTooltip().destroyAny);
 
@@ -161,7 +171,7 @@ export function uiSectionBackgroundList(context) {
     }
 
     function drawListItems(layerList, type, change, filter) {
-        var sources = context.background()
+        let sources = context.background()
             .sources(context.map().extent(), context.map().zoom(), true)
             .filter(filter)
             .sort(function(a, b) {
@@ -170,7 +180,15 @@ export function uiSectionBackgroundList(context) {
                     : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
             });
 
-        var layerLinks = layerList.selectAll('li')
+        const waybackIndex = sources.findIndex(source => source.id === ESRI_WAYBACK_ID);
+        const worldImageryIndex = sources.findIndex(source => source.id === 'EsriWorldImagery');
+        if (waybackIndex >= 0 && worldImageryIndex >= 0 && waybackIndex !== worldImageryIndex + 1) {
+            const [waybackSource] = sources.splice(waybackIndex, 1);
+            const insertIndex = worldImageryIndex < waybackIndex ? worldImageryIndex + 1 : worldImageryIndex;
+            sources.splice(insertIndex, 0, waybackSource);
+        }
+
+        const layerLinks = layerList.selectAll('li')
             // We have to be a bit inefficient about reordering the list since
             // arrow key navigation of radio values likes to work in the order
             // they were added, not the display document order.
@@ -179,12 +197,12 @@ export function uiSectionBackgroundList(context) {
         layerLinks.exit()
             .remove();
 
-        var enter = layerLinks.enter()
+        const enter = layerLinks.enter()
             .append('li')
             .classed('layer-custom', function(d) { return d.id === 'custom'; })
             .classed('best', function(d) { return d.best(); });
 
-        var label = enter
+        const label = enter
             .append('label');
 
         label
@@ -199,6 +217,13 @@ export function uiSectionBackgroundList(context) {
         label
             .append('span')
             .each(function(d) { d.label()(d3_select(this)); });
+
+        // Esri Wayback row: spinner next to label, dropdown (via helper)
+        const waybackEnter = enter.filter(function(d) { return d.id === ESRI_WAYBACK_ID; });
+        renderWaybackRowContent(waybackEnter, context, {
+            onDateFocus: waybackDateFocus,
+            onDateChange: waybackDateChange
+        });
 
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')
@@ -238,15 +263,57 @@ export function uiSectionBackgroundList(context) {
             .call(setTooltips)
             .selectAll('input')
             .property('checked', active);
+
+        // Update wayback row (dropdown visibility and options when already loaded)
+        selection.selectAll('li')
+            .filter(function(d) { return d && d.id === ESRI_WAYBACK_ID; })
+            .each(function(d) {
+                const waybackSource = d;
+                const li = d3_select(this);
+                updateWaybackRow(li, waybackSource);
+            });
     }
 
+    /**
+     * @param {d3.Selection} dropdown - Selection of the wayback date select element.
+     */
+    function waybackDateFocus(dropdown) {
+        const waybackSource = context.background().findSource(ESRI_WAYBACK_ID);
+        if (!waybackSource) return;
+        const listItem = dropdown.node() && dropdown.node().closest('li');
+        const li = listItem ? d3_select(listItem) : null;
+        if (!li.empty()) {
+            refreshWaybackDropdownFromApi(waybackSource, li, context);
+        }
+    }
+
+    function waybackDateChange(d3_event) {
+        const waybackSource = context.background().findSource(ESRI_WAYBACK_ID);
+        if (waybackSource) {
+            const selectedDate = d3_event.target.value;
+            waybackSource.date(selectedDate || null);
+            context.background().baseLayerSource(waybackSource);
+        }
+    }
 
     function chooseBackground(d) {
         if (d.id === 'custom' && !d.template()) {
             return editCustom();
         }
 
-        var previousBackground = context.background().baseLayerSource();
+        const previousBackground = context.background().baseLayerSource();
+        if (d.id === ESRI_WAYBACK_ID) {
+            const waybackLi = _backgroundList.selectAll('li').filter(function(row) {
+                return row && row.id === ESRI_WAYBACK_ID;
+            });
+            selectWaybackAndUpdateRow(d, waybackLi, context, function() {
+                prefs('background-last-used-toggle', previousBackground.id);
+                prefs('background-last-used', d.id);
+                context.background().baseLayerSource(d);
+            });
+            return;
+        }
+
         prefs('background-last-used-toggle', previousBackground.id);
         prefs('background-last-used', d.id);
         context.background().baseLayerSource(d);
@@ -254,8 +321,8 @@ export function uiSectionBackgroundList(context) {
 
 
     function customChanged(d) {
-        var background = context.background();
-        var customSource = background.findSource('custom');
+        const background = context.background();
+        const customSource = background.findSource('custom');
         if (!customSource) return;
 
         if (d && d.template) {
@@ -263,7 +330,7 @@ export function uiSectionBackgroundList(context) {
             chooseBackground(customSource);
         } else {
             customSource.template('');
-            var noneSource = background.findSource('none');
+            const noneSource = background.findSource('none');
             if (noneSource) {
                 chooseBackground(noneSource);
             }

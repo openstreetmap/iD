@@ -388,6 +388,31 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
 
 
 
+/**
+ * @typedef {Object} EsriSource
+ * @property {string} id
+ * @property {number} tileSize
+ * @property {[number, number]} zoomExtent
+ * @property {boolean} overzoom
+ * @property {string|null|undefined} [startDate]
+ * @property {string|null|undefined} [endDate]
+ * @property {function(): string} name
+ * @property {function(): any} label
+ * @property {function(): any} description
+ * @property {function(): boolean} hasDescription
+ * @property {function(string|null|undefined): string|EsriSource} template
+ * @property {function([number, number, number]): string} url
+ * @property {function(): string} key
+ * @property {function(): string|null} imageryUsed
+ * @property {function([number, number], number[], function): void} getMetadata
+ * @property {function([number, number]): void} fetchTilemap
+ */
+
+/**
+ * Create an Esri imagery source with dynamic zoom detection
+ * @param {Object} data - Source data object
+ * @returns {EsriSource} Esri source
+ */
 rendererBackgroundSource.Esri = function(data) {
     // in addition to using the tilemap at zoom level 20, overzoom real tiles - #4327 (deprecated technique, but it works)
     if (data.template.match(/blankTile/) === null) {

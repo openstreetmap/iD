@@ -1,6 +1,8 @@
 import { debounce } from 'es-toolkit/compat';
 
 import { t } from '../../core/localizer';
+import { ESRI_WAYBACK_ID } from '../../renderer/background_source_wayback.js';
+/** @typedef {import('../../renderer/background_source_wayback.js').WaybackSource} WaybackSource */
 
 
 export function uiPanelBackground(context) {
@@ -31,6 +33,17 @@ export function uiPanelBackground(context) {
         list
             .append('li')
             .call(_currSource.label());
+
+        /** @type {WaybackSource|undefined} */
+        const waybackSource = source.id === ESRI_WAYBACK_ID ? source : undefined;
+        if (waybackSource) {
+            const waybackDate = waybackSource.date();
+            list
+                .append('li')
+                .text(t('background.EsriWayback.date') + ':')
+                .append('span')
+                .text(waybackDate || t('info_panels.background.unknown'));
+        }
 
         _metadataKeys.forEach(function(k) {
             list

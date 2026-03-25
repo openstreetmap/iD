@@ -18,6 +18,7 @@ export function coreFileFetcher() {
   let _fileMap = {
     'address_formats': 'data/address_formats.min.json',
     'imagery': 'data/imagery.min.json',
+    'imagery_esri_wayback': 'data/imagery_esri_wayback.min.json',
     'intro_graph': 'data/intro_graph.min.json',
     'languages': 'data/languages.min.json',
     'locales': 'locales/index.min.json',

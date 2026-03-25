@@ -836,6 +836,10 @@ en:
     contrast: Contrast
     saturation: Saturation
     sharpness: Sharpness
+    EsriWayback:
+      name: Esri Wayback
+      description: Esri Wayback contains archived snapshots of Esri World Imagery created over time.
+      date: Date
     minimap:
       description: Show Minimap
       tooltip: Show a zoomed out map to help locate the area currently displayed.
