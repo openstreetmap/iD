@@ -916,15 +916,8 @@ export function uiFieldCombo(field, context) {
                 .classed('mixed', function(d) {
                     return d.isMixed;
                 })
-                .attr('title', function(d) {
-                    if (d.isMixed) {
-                        return t('inspector.unshared_value_tooltip');
-                    }
-                    if (!['yes', 'no'].includes(d.state)) {
-                        return d.state;
-                    }
-                    return null;
-                })
+                .attr('title', d => d.isMixed ? t('inspector.unshared_value_tooltip') : (!['yes', 'no'].includes(d.state) ? d.state : undefined))
+
                 .classed('negated', d => d.state === 'no');
 
             if (!_isSemi) {
