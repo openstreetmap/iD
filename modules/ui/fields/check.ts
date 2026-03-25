@@ -5,12 +5,13 @@ import {
 import { omit } from 'es-toolkit/compat';
 
 import { utilRebind } from '../../util/rebind';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { actionReverse } from '../../actions/reverse';
 import { svgIcon } from '../../svg/icon';
 import { utilCheckTagDictionary } from '../../util';
 import { osmOneWayTags } from '../../osm/tags';
 import type { EntityId } from '../../osm';
+import { formatTag } from './tag_title';
 
 export { uiFieldCheck as uiFieldDefaultCheck };
 export { uiFieldCheck as uiFieldOnewayCheck };
@@ -225,7 +226,15 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                     ? (selection: d3.Selection) => selection.text(textForValue)
                     : textForValue)
             .classed('mixed', isMixed)
-            .classed('raw-value', !options.includes(tag));
+            .classed('raw-value', !options.includes(tag))
+            .attr('title', function() {
+                if (isMixed) return t('inspector.unshared_value_tooltip');
+                if (!_value) return null;
+                const desc = localizer.hasTextForStringId(`options.${_value}.description`)
+                    ? t(`options.${_value}.description`) : undefined;
+                const tag = formatTag(field.key, _value);
+                return desc ? `${desc}\n${tag}` : tag;
+            });
 
         label
             .classed('set', !!_value);

@@ -71,6 +71,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * For radio fields: show "unknown" values (that don't match one of the specified radio options) as a temporary placeholder raw value option ([#12082])
+* Show tooltips with tag values (and descriptions if available) for options of `radio` and `check` fields (thanks [@bhavyaKhatri2703])
 #### :hammer: Development
 * Fix unit tests failing with nodejs v26 ([#12401], thanks [@brianstrauch])
 * Remove the unused lane parsing code, which was left over from an unfinished lane editor and was not reachable from any preset ([#12664], thanks [@wantaekchoi])
