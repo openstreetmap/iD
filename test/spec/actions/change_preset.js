@@ -176,4 +176,76 @@ describe('iD.actionChangePreset', function() {
         var action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
         expect(action(graph).entity(entity.id).tags).to.eql({highway: 'service'});
     });
+
+    // https://github.com/openstreetmap/iD/issues/12075
+    it('removes all localized name tags when switching presets', () => {
+        const graph = iD.coreGraph([
+            iD.osmNode({ id: 'n1', tags: {
+                craft: 'key_cutter',
+                name: 'foo',
+                'name:en': 'bar',
+                'name:hi': 'baz'
+            }})
+        ]);
+        const nameField = {
+            key: 'name',
+            type: 'localized',
+            allKeys: () => ['name'],
+            matchGeometry: () => true
+        };
+
+        const oldPreset = iD.presetPreset('craft/key_cutter', { tags: { craft: 'key_cutter' }, fields: ['name'] }, undefined, { name: nameField });
+        const newPreset = iD.presetPreset('amenity/recycling');
+
+        const result = iD.actionChangePreset('n1', oldPreset, newPreset)(graph);
+        const tags = result.entity('n1').tags;
+
+        expect(tags.name).to.be.undefined; // base localized key should be removed when the field is no longer present
+        expect(tags['name:en']).to.be.undefined; // all localized variants should also be removed
+        expect(tags['name:hi']).to.be.undefined;
+    });
+
+    it('removes all prefix-based recycling tags when switching presets', () => {
+        const graph = iD.coreGraph([
+            iD.osmNode({
+                id: 'n1',
+                tags: {
+                    amenity: 'recycling',
+                    'recycling:plastic': 'yes',
+                    'recycling:glass': 'yes',
+                    'recycling:paper': 'yes'
+                }
+            })
+        ]);
+
+        const recyclingField = {
+            key: 'recycling:',
+            type: 'combo',
+            allKeys: () => ['recycling'],
+            matchGeometry: () => true
+        };
+
+        const oldPreset = iD.presetPreset(
+            'amenity/recycling',
+            {
+                tags: { amenity: 'recycling' },
+                fields: ['recycling']
+            },
+            undefined,
+            { recycling: recyclingField }
+        );
+
+        const newPreset = iD.presetPreset(
+            'craft/key_cutter',
+            { tags: { craft: 'key_cutter' } }
+        );
+
+        const result = iD.actionChangePreset('n1', oldPreset, newPreset)(graph);
+        const tags = result.entity('n1').tags;
+
+        expect(tags['recycling:plastic']).to.be.undefined; //prefix-based tags should be removed when the field is no longer present
+        expect(tags['recycling:glass']).to.be.undefined;
+        expect(tags['recycling:paper']).to.be.undefined;
+        expect(tags.craft).to.equal('key_cutter');  // unrelated tags should be preserved during preset change
+    });
 });

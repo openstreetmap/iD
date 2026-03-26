@@ -26,15 +26,56 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
             }
 
             if (oldPreset && (oldPreset.id !== newPreset.id)) {
-                // 'field-keys' are keys used by fields (different to the keys used by preset itself)
-                const oldPresetFieldKeys = [
+                const oldFields = [
                     ...oldPreset.fields(loc),
                     ...oldPreset.moreFields(loc)
-                ].flatMap(f => f.allKeys());
+                ].filter(f => f.matchGeometry(geometry));
 
-                // field-keys used by the old preset but not the new preset
+                const oldPresetFieldKeys = oldFields.flatMap(f => f.allKeys());
+
                 const fieldKeysToRemove = utilArrayDifference(oldPresetFieldKeys, preserveKeys);
-                tags = utilObjectOmit(tags, fieldKeysToRemove);
+                const fieldKeysToRemoveSet = new Set(fieldKeysToRemove);
+
+                const expandedKeysToRemove = new Set();
+                const tagKeys = Object.keys(tags);  // Cache all existing tag keys once to avoid repeated Object iteration
+
+                // Only consider fields that are actually being removed
+                const fieldsToRemove = oldFields.filter(field => {
+                    const keys = field.allKeys();
+                    return keys.some(k => fieldKeysToRemoveSet.has(k));
+                });
+
+                // Expand removed fields into their full tag namespaces (localized and prefix-based)
+                for (const field of fieldsToRemove) {
+                    const keys = field.allKeys();
+
+                    const isLocalized = field.type === 'localized';
+                    const hasKeyPrefix = field.key && field.key.endsWith(':');
+
+                    for (const baseKey of keys) {
+                        // Always remove the base key itself (e.g. 'name', 'recycling')
+                        expandedKeysToRemove.add(baseKey);
+
+                        //For localized fields, remove all language variants (name:*)
+                        if (isLocalized) {
+                            for (const k of tagKeys) {
+                                if (k.startsWith(baseKey + ':')) {
+                                    expandedKeysToRemove.add(k);
+                                }
+                            }
+                        }
+                    }
+                    // For prefix-based fields, remove all tags that share the prefix (recycling:*)
+                    if (hasKeyPrefix) {
+                        for (const k of tagKeys) {
+                            if (k.startsWith(field.key)) {
+                                expandedKeysToRemove.add(k);
+                            }
+                        }
+                    }
+                }
+
+                tags = utilObjectOmit(tags, Array.from(expandedKeysToRemove));
             }
         }
         if (oldPreset) tags = oldPreset.unsetTags(tags, geometry, preserveKeys, false, loc);
