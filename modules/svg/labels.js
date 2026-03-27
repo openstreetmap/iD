@@ -26,6 +26,7 @@ export function svgLabels(projection, context) {
 
     // Listed from highest to lowest priority
     const labelStack = [
+        // geometry, key, value, font size
         ['line', 'aeroway', '*', 12],
         ['line', 'highway', 'motorway', 12],
         ['line', 'highway', 'trunk', 12],
