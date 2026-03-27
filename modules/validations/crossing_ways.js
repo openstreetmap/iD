@@ -382,13 +382,15 @@ export function validationCrossingWays(context) {
             var type1 = way1Info.featureType;
             var type2 = way2Info.featureType;
             if (type1 === type2) {
-                return utilDisplayLabel(way1Info.way, graph) > utilDisplayLabel(way2Info.way, graph);
+                var label1 = utilDisplayLabel(way1Info.way, graph);
+                var label2 = utilDisplayLabel(way2Info.way, graph);
+                return label1 > label2 ? 1 : label1 < label2 ? -1 : 0;
             } else if (type1 === 'waterway') {
-                return true;
+                return 1;
             } else if (type2 === 'waterway') {
-                return false;
+                return -1;
             }
-            return type1 < type2;
+            return type1 > type2 ? 1 : type1 < type2 ? -1 : 0;
         });
         var entities = crossing.wayInfos.map(function(wayInfo) {
             return getFeatureWithFeatureTypeTagsForWay(wayInfo.way, graph);
