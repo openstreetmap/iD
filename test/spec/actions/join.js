@@ -611,40 +611,37 @@ describe('iD.actionJoin', function () {
         expect(graph.entity('-').tags.step_count).to.equal('42');
     });
 
-    it('does not produce NaN when the first way has a non-numeric summable tag', function () {
-        let graph = iD.coreGraph([
+    it('returns conflicting_tags when the first way has a non-numeric summable tag', function () {
+        var graph = iD.coreGraph([
             iD.osmNode({ id: 'a', loc: [0, 0] }),
             iD.osmNode({ id: 'b', loc: [1, 0] }),
             iD.osmNode({ id: 'c', loc: [4, 0] }),
             iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'steps', step_count: 'many' } }),
             iD.osmWay({ id: '=', nodes: ['b', 'c'], tags: { highway: 'steps', step_count: '10' } })
         ]);
-        graph = iD.actionJoin(['-', '='])(graph);
-        expect(graph.entity('-').tags.step_count).not.to.equal('NaN');
+        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
     });
 
-    it('does not produce NaN when the second way has a non-numeric summable tag', function () {
-        let graph = iD.coreGraph([
+    it('returns conflicting_tags when the second way has a non-numeric summable tag', function () {
+        var graph = iD.coreGraph([
             iD.osmNode({ id: 'a', loc: [0, 0] }),
             iD.osmNode({ id: 'b', loc: [1, 0] }),
             iD.osmNode({ id: 'c', loc: [4, 0] }),
             iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'steps', step_count: '10' } }),
             iD.osmWay({ id: '=', nodes: ['b', 'c'], tags: { highway: 'steps', step_count: 'bbb' } })
         ]);
-        graph = iD.actionJoin(['-', '='])(graph);
-        expect(graph.entity('-').tags.step_count).not.to.equal('NaN');
+        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
     });
 
-    it('does not produce NaN when both ways have non-numeric summable tags', function () {
-        let graph = iD.coreGraph([
+    it('returns conflicting_tags when both ways have non-numeric summable tags', function () {
+        var graph = iD.coreGraph([
             iD.osmNode({ id: 'a', loc: [0, 0] }),
             iD.osmNode({ id: 'b', loc: [1, 0] }),
             iD.osmNode({ id: 'c', loc: [4, 0] }),
             iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'steps', step_count: 'many' } }),
             iD.osmWay({ id: '=', nodes: ['b', 'c'], tags: { highway: 'steps', step_count: 'lots' } })
         ]);
-        graph = iD.actionJoin(['-', '='])(graph);
-        expect(graph.entity('-').tags.step_count).not.to.equal('NaN');
+        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
     });
 
 
