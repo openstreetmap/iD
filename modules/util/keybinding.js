@@ -22,7 +22,7 @@ export function utilKeybinding(namespace) {
         for (const binding of bindings) {
             if (!binding.event.modifiers.shiftKey) continue;  // no shift
             if (!!binding.capture !== isCapturing) continue;
-            if (matches(d3_event, binding, true)) {
+            if (matches(d3_event, binding)) {
                 binding.callback(d3_event);
                 didMatch = true;
 
@@ -37,14 +37,14 @@ export function utilKeybinding(namespace) {
         for (const binding of bindings) {
             if (binding.event.modifiers.shiftKey) continue;   // shift
             if (!!binding.capture !== isCapturing) continue;
-            if (matches(d3_event, binding, false)) {
+            if (matches(d3_event, binding)) {
                 binding.callback(d3_event);
                 break;
             }
         }
 
 
-        function matches(d3_event, binding, testShift) {
+        function matches(d3_event, binding) {
             var event = d3_event;
             var isMatch = false;
             var tryKeyCode = true;
@@ -84,7 +84,8 @@ export function utilKeybinding(namespace) {
                 if (event.altKey !== binding.event.modifiers.altKey) return false;
             }
             if (event.metaKey !== binding.event.modifiers.metaKey) return false;
-            if (testShift && event.shiftKey !== binding.event.modifiers.shiftKey) return false;
+            // Always require exact shift matching(previously, unshifted bindings ignored the Shift key).
+            if (event.shiftKey !== binding.event.modifiers.shiftKey) return false;
 
             return true;
         }
