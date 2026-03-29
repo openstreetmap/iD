@@ -187,7 +187,7 @@ export function uiFieldAddress(field, context) {
         return utilArrayUniqBy([
             ...enclosingAddresses,
             ...nearPointAddresses
-        ], 'value').sort((a, b) => a.value > b.value ? 1 : -1);
+        ], 'value').sort((a, b) => a.value === b.value ? 0 : (a.value > b.value ? 1 : -1));
     }
 
 
