@@ -491,48 +491,26 @@ export function modeSelect(context, selectedIDs) {
         }
 
 
-        function firstVertex(d3_event) {
-            d3_event.preventDefault();
-            var entity = singular();
-            var parentId = parentWayIdForVertexNavigation();
-            var way;
-
-            if (entity && entity.type === 'way') {
-                way = entity;
-            } else if (parentId) {
-                way = context.entity(parentId);
-            }
-            _focusedParentWayId = way && way.id;
-
-            if (way) {
-                context.enter(
-                    mode.selectedIDs([way.first()])
-                        .follow(true)
-                );
-            }
-        }
+        function firstVertex() {
+    var way = graph.hasEntity(_selectedData[0]);
+    if (way) {
+        context.enter(
+            modeSelect(context, [way.first()])
+                .follow(true)
+        );
+    }
+}
 
 
-        function lastVertex(d3_event) {
-            d3_event.preventDefault();
-            var entity = singular();
-            var parentId = parentWayIdForVertexNavigation();
-            var way;
-
-            if (entity && entity.type === 'way') {
-                way = entity;
-            } else if (parentId) {
-                way = context.entity(parentId);
-            }
-            _focusedParentWayId = way && way.id;
-
-            if (way) {
-                context.enter(
-                    mode.selectedIDs([way.last()])
-                        .follow(true)
-                );
-            }
-        }
+        function lastVertex() {
+    var way = graph.hasEntity(_selectedData[0]);
+    if (way) {
+        context.enter(
+            modeSelect(context, [way.last()])
+                .follow(true)
+        );
+    }
+}
 
 
         function previousVertex(d3_event) {
