@@ -45,7 +45,8 @@
     "start:server": "node scripts/server.js",
     "test": "npm-run-all -s lint build test:typecheck test:spec",
     "test:typecheck": "tsc",
-    "test:spec": "vitest --no-isolate",
+    "test:spec": "vitest run --no-isolate",
+    "test:watch": "vitest --no-isolate",
     "test:once": "vitest run --no-isolate",
     "translations": "node scripts/update_locales.js"
   },

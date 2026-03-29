@@ -294,7 +294,9 @@ Test your code and make sure it passes.
 
 1. Go to the directory where you have checked out `iD`
 2. run `npm clean-install`
-3. run `npm test` to see whether your tests pass or fail. Note that this command will run constantly and automatically re-run tests if source or test files are modified – if you want to run tests only once, use `npm run test:once` instead
+3. run `npm test` to see whether your tests pass or fail.
+  - To re-run tests automatically in watch mode, use `npm run test:watch`.
+  - To run just the Vitest suite once, use `npm run test:spec` (or `npm run test:once`).
 
 ### Building / Installing
 
