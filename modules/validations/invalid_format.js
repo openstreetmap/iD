@@ -123,6 +123,7 @@ export function validationFormatting() {
             if (!tag) return null;
             const value = tag.trim();
             if (!value) return null;
+            if (value.toLowerCase() === 'no') return null;
             if (!value.includes(';')) {
                 // No semicolon, validate whole value
                 if (isValidURL(value)) return null;
