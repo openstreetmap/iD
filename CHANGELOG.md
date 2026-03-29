@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix user images and upload help text from showing up as duplicates in upload dialog ([#12063])
 * Fix some tags automatically deleted when re-selecting the same preset ([#12070], thanks [@k-yle])
 * Fix crash when a checkbox-field is rendered using a custom (non-`yes/no`) value ([#12078])
+* Fix a bug that caused `step_count` to be set to `NaN` when merging features with non-numeric step count values ([#12110], thanks [@JaiswalShivang])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -69,6 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12065]: https://github.com/openstreetmap/iD/issues/12065
 [#12070]: https://github.com/openstreetmap/iD/issues/12070
 [#12078]: https://github.com/openstreetmap/iD/issues/12078
+[#12110]: https://github.com/openstreetmap/iD/issues/12110
 
 
 # 2.39.4
