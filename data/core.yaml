@@ -604,7 +604,7 @@ en:
     retry: Retry
   commit:
     title: Upload to OpenStreetMap
-    upload_explanation: "The changes you upload will be visible on all maps that use OpenStreetMap data."
+    upload_explanation: "Your changes should appear on OpenStreetMap within a few minutes. If you don’t see them, try refreshing the page (you may need to clear cache). It may take longer for other maps to update."
     upload_explanation_with_user: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
     request_review: "I would like someone to review my edits."
     request_review_info: "Unsure about something? Invite an experienced mapper to check your work once it's live."
