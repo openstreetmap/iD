@@ -327,7 +327,7 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
             var unmovedPath = unmovedNodes.map(function(n) { return projection(n.loc); });
             var hits = geoPathIntersections(movedPath, unmovedPath);
 
-            for (var j = 0; i < hits.length; i++) {
+            for (var j = 0; j < hits.length; j++) {
                 if (geoVecEqual(hits[j], end)) continue;
                 var edge = geoChooseEdge(unmovedNodes, end, projection);
                 _delta = geoVecSubtract(projection(edge.loc), start);
