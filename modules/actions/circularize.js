@@ -1,5 +1,5 @@
 import { median as d3_median } from 'd3-array';
-
+import { geoLength } from 'd3-geo';
 import {
     polygonArea as d3_polygonArea,
     polygonHull as d3_polygonHull,
@@ -9,12 +9,11 @@ import {
 import { geoVecInterp, geoVecLength } from '../geo';
 import { osmNode } from '../osm/node';
 import { utilArrayUniq } from '../util';
-import { geoVecLengthSquare } from '../geo/vector';
+import { radiansToMeters } from '../ui/panels';
 
 
-export function actionCircularize(wayId, projection, maxAngle) {
-    maxAngle = (maxAngle || 20) * Math.PI / 180;
-
+export function actionCircularize(wayId, projection) {
+    const _maxSegmentLength = 4;
 
     var action = function(graph, t) {
         if (t === null || !isFinite(t)) t = 1;
@@ -58,6 +57,14 @@ export function actionCircularize(wayId, projection, maxAngle) {
             keyPoints.push(points[oppositeIndex]);
         }
 
+        const radiusM = radiansToMeters(geoLength({ type: 'LineString', coordinates: [
+            projection.invert(centroid),
+            projection.invert([centroid[0] + radius, centroid[1]])
+        ]}));
+        const numberOfPoints = Math.min(32, Math.max(12,
+            Math.round(radiusM * Math.PI / _maxSegmentLength) * 2
+        ));
+        const maxAngle = Math.PI * 2 / (numberOfPoints - 1);
         // key points and nodes are those connected to the ways,
         // they are projected onto the circle, in between nodes are moved
         // to constant intervals between key nodes, extra in between nodes are
@@ -244,21 +251,30 @@ export function actionCircularize(wayId, projection, maxAngle) {
         if (hull.length !== points.length || hull.length < 3){
             return false;
         }
-        var centroid = d3_polygonCentroid(points);
-        var radius = geoVecLengthSquare(centroid, points[0]);
+        const centroid = d3_polygonCentroid(points);
+        const radius = d3_median(points, p => geoVecLength(centroid, p));
 
         var i, actualPoint;
 
         // compare distances between centroid and points
         for (i = 0; i < hull.length; i++){
             actualPoint = hull[i];
-            var actualDist = geoVecLengthSquare(actualPoint, centroid);
+            var actualDist = geoVecLength(actualPoint, centroid);
             var diff = Math.abs(actualDist - radius);
             //compare distances with epsilon-error (5%)
-            if (diff > 0.05*radius) {
+            if (diff > 0.05 * radius) {
                 return false;
             }
         }
+
+        const radiusM = radiansToMeters(geoLength({ type: 'LineString', coordinates: [
+            projection.invert(centroid),
+            projection.invert([centroid[0] + radius, centroid[1]])
+        ]}));
+        const numberOfPoints = Math.min(32, Math.max(12,
+            Math.round(radiusM * Math.PI / _maxSegmentLength) * 2
+        ));
+        const maxAngle = Math.PI * 2 / (numberOfPoints - 1);
 
         //check if central angles are smaller than maxAngle
         for (i = 0; i < hull.length; i++){
