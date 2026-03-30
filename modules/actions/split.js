@@ -120,6 +120,8 @@ export function actionSplit(nodeIds, newWayIds) {
             nodesB = wayA.nodes.slice(idx);
         }
 
+        if (nodesA.length < 2 || nodesB.length < 2) return graph;
+
         var lengthA = totalLengthBetweenNodes(graph, nodesA);
         var lengthB = totalLengthBetweenNodes(graph, nodesB);
 
@@ -414,11 +416,17 @@ export function actionSplit(nodeIds, newWayIds) {
     const action = function(graph) {
         _createdWayIDs = [];
         let newWayIndex = 0;
-        for (const i in nodeIds) {
-            const nodeId = nodeIds[i];
-            const candidates = waysForNodes(nodeIds.slice(i), graph);
-            for (const candidate of candidates) {
+        const candidates = waysForNodes(nodeIds, graph);
+        for (let candidate of candidates) {
+            for (const i in nodeIds) {
+                const nodeId = nodeIds[i];
+                candidate = graph.entity(candidate.id);
                 graph = split(graph, nodeId, candidate, newWayIds && newWayIds[newWayIndex], nodeIds.slice(i + 1));
+                for (const wayId of _createdWayIDs) {
+                    // also try to split created ways resulting from previous splits
+                    // #12120
+                    graph = split(graph, nodeId, graph.entity(wayId), newWayIds && newWayIds[newWayIndex], nodeIds.slice(i + 1));
+                }
                 newWayIndex += 1;
             }
         }
@@ -452,7 +460,7 @@ export function actionSplit(nodeIds, newWayIds) {
 
         function isSplittable(way) {
             // If the ways to split are specified, ignore everything else.
-            if (_wayIDs && _wayIDs.indexOf(way.id) === -1) return false;
+            if (_wayIDs && !_wayIDs.includes(way.id)) return false;
 
             // We can fake splitting closed ways at their endpoints...
             if (way.isClosed()) return true;

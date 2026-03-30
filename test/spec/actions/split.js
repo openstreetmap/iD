@@ -532,6 +532,54 @@ describe('iD.actionSplit', function () {
             expect(g1.entity('=').nodes).to.eql(['a', 'b']);
         });
 
+        it('splits an open way at multiple given points', function () {
+            //
+            // Situation:
+            //    a ---- b -- c -- d
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({ id: 'a', loc: [0, 0] }),
+                iD.osmNode({ id: 'b', loc: [0, 1] }),
+                iD.osmNode({ id: 'c', loc: [0, 1.5] }),
+                iD.osmNode({ id: 'd', loc: [0, 2] }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd']})
+            ]);
+
+            var g1 = iD.actionSplit(['b', 'c'], ['=', '≡'])(graph);
+            expect(g1.entity('-').nodes).to.eql(['a', 'b']); // original id remains on longest section
+            expect(g1.entity('=').nodes).to.eql(['b', 'c']);
+            expect(g1.entity('≡').nodes).to.eql(['c', 'd']);
+        });
+
+        it('splits an open way at multiple given points specified in any order', function () {
+            //
+            // Situation:
+            //    a -- b -- c -- d -- e
+            //
+            // #12120
+            var graph = iD.coreGraph([
+                iD.osmNode({ id: 'a', loc: [0, 0] }),
+                iD.osmNode({ id: 'b', loc: [0, 1] }),
+                iD.osmNode({ id: 'c', loc: [0, 2] }),
+                iD.osmNode({ id: 'd', loc: [0, 3] }),
+                iD.osmNode({ id: 'e', loc: [0, 4] }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'e']})
+            ]);
+
+            var g1 = iD.actionSplit(['c', 'b', 'd'], ['=', '≡', '≣'])(graph);
+            expect([
+                g1.entity('-').nodes,
+                g1.entity('=').nodes,
+                g1.entity('≡').nodes,
+                g1.entity('≣').nodes
+            ].sort((a, b) => a[0] > b[0] ? 1 : -1)).to.eql([
+                ['a', 'b'],
+                ['b', 'c'],
+                ['c', 'd'],
+                ['d', 'e']
+            ]);
+        });
+
         it('distributes the number of steps proportionally', () => {
             const tags = { highway: 'steps', step_count: '40' };
             let graph = iD.coreGraph([
