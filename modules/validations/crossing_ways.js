@@ -376,22 +376,6 @@ export function validationCrossingWays(context) {
 
 
     function createIssue(crossing, graph) {
-
-        // use the entities with the tags that define the feature type
-        crossing.wayInfos.sort(function(way1Info, way2Info) {
-            var type1 = way1Info.featureType;
-            var type2 = way2Info.featureType;
-            if (type1 === type2) {
-                var label1 = utilDisplayLabel(way1Info.way, graph);
-                var label2 = utilDisplayLabel(way2Info.way, graph);
-                return label1 > label2 ? 1 : label1 < label2 ? -1 : 0;
-            } else if (type1 === 'waterway') {
-                return 1;
-            } else if (type2 === 'waterway') {
-                return -1;
-            }
-            return type1 > type2 ? 1 : type1 < type2 ? -1 : 0;
-        });
         var entities = crossing.wayInfos.map(function(wayInfo) {
             return getFeatureWithFeatureTypeTagsForWay(wayInfo.way, graph);
         });
