@@ -10,7 +10,7 @@ export { _mainFileFetcher as fileFetcher };
 // coreFileFetcher asynchronously fetches data from JSON files
 //
 export function coreFileFetcher() {
-  const ociVersion = '5.10.0'; //packageJSON.devDependencies['osm-community-index'];
+  const ociVersion = packageJSON.devDependencies['osm-community-index'];
   const presetsVersion = packageJSON.devDependencies['@openstreetmap/id-tagging-schema'];
 
   let _this = {};
