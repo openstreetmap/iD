@@ -21,7 +21,7 @@ on the iD project, and then create this file with contents like
 
 ```bash
 git checkout develop
-npm install --save-dev editor-layer-index --omit=dev
+npm install --save-dev @openstreetmap/editor-layer-index --omit=dev
 npm clean-install
 npm run imagery
 npm run all
