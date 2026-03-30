@@ -71,4 +71,57 @@ describe('iD.actionMove', function() {
         expect(loc[0]).to.be.closeTo( 1.440, 0.001);
         expect(loc[1]).to.be.closeTo(-2.159, 0.001);
     });
+
+    it('limits delta when movedPath and unmovedPath intersect twice', function() {
+        // Use a simple planar projection so we can reason about intersections in 2D.
+        var planar = function(p) { return p; };
+        planar.invert = function(p) { return p; };
+
+        // moved way is a single segment (b -> d)
+        var b = iD.osmNode({ loc: [0, 0] });
+        var d = iD.osmNode({ loc: [10, 0] });
+        var moved = iD.osmWay({ nodes: [b.id, d.id] });
+
+        // Unmoved zigzag way contains b as an interior node.
+        // With tryDelta [5,5], the moved segment becomes y=5 from x=5..15.
+        // That segment intersects the zigzag in two places: at (5,5) and (10,5).
+        var u0 = iD.osmNode({ loc: [-10, 10] });
+        var u1 = iD.osmNode({ loc: [10, 10] });
+        var u2 = iD.osmNode({ loc: [10, 0] });
+        var zigzag = iD.osmWay({ nodes: [u0.id, b.id, u1.id, u2.id] });
+
+        // Unmoved vertical way contains d as an interior node.
+        // With tryDelta [5,5], the moved endpoint would cross this way, so x movement should be limited.
+        var v0 = iD.osmNode({ loc: [10, -10] });
+        var v1 = iD.osmNode({ loc: [10, 10] });
+        var vertical = iD.osmWay({ nodes: [v0.id, d.id, v1.id] });
+
+        var graph = iD.coreGraph([
+            b, d, moved,
+            u0, u1, u2, zigzag,
+            v0, v1, vertical
+        ]);
+
+        // Explicitly verify the scenario: with the attempted delta, the moved segment
+        // intersects the unmoved zigzag in exactly two points.
+        var movedPath = [b.loc, d.loc].map(function(p) { return [p[0] + 5, p[1] + 5]; });
+        var zigzagPath = [u0.loc, b.loc, u1.loc, u2.loc];
+        var hits = iD.geoPathIntersections(movedPath, zigzagPath);
+        expect(hits).to.have.lengthOf(2);
+        hits.sort(function(a, b) { return a[0] - b[0]; });
+        expect(hits[0][0]).to.be.closeTo(5, 1e-6);
+        expect(hits[0][1]).to.be.closeTo(5, 1e-6);
+        expect(hits[1][0]).to.be.closeTo(10, 1e-6);
+        expect(hits[1][1]).to.be.closeTo(5, 1e-6);
+
+        var action = iD.actionMove([moved.id], [5, 5], planar);
+        var result = action(graph);
+
+        var limited = action.delta();
+        expect(limited[0]).to.be.closeTo(0, 1e-6);
+        expect(limited[1]).to.be.closeTo(5, 1e-6);
+
+        expect(result.entity(d.id).loc[0]).to.be.closeTo(10, 1e-6);
+        expect(result.entity(d.id).loc[1]).to.be.closeTo(5, 1e-6);
+    });
 });
