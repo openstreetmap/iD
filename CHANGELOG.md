@@ -75,7 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12120]: https://github.com/openstreetmap/iD/issues/12120
 
 
-# 2.39.4
+# 2.39.5
 ##### 2026-03-23
 
 * Fix regression where some strings (like some section headings) are not rendered correctly ([#12083])
@@ -89,7 +89,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix crash when a checkbox-field is rendered using a custom (non-`yes/no`) value ([#12078])
 
 
-# 2.39.2
+# 2.39.3
 ##### 2026-03-19
 
 * Revert: When changing presets, delete tags from the old preset which are not in the new preset ([#12068])
