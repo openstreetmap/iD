@@ -12,10 +12,11 @@ import { utilArrayUniq } from '../util';
 import { radiansToMeters } from '../ui/panels';
 
 
+const MAX_SEGMENT_LENGTH = 4;
+export const MIN_VERTICES = 12;
+export const MAX_VERTICES = 32;
+
 export function actionCircularize(wayId, projection) {
-    const MAX_SEGMENT_LENGTH = 4;
-    const MIN_VERTICES = 12;
-    const MAX_VERTICES = 32;
 
     var action = function(graph, t) {
         if (t === null || !isFinite(t)) t = 1;
