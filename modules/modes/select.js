@@ -435,14 +435,14 @@ export function modeSelect(context, selectedIDs) {
                 var next = entity.nodes[choice.index];
 
                 context.perform(
-                    actionAddMidpoint({ loc: choice.loc, edge: [prev, next] }, osmNode()),
+                    actionAddMidpoint({ loc: choice.loc, edge: [prev, next] }, new osmNode()),
                     t('operations.add.annotation.vertex')
                 );
                 context.validator().validate();
 
             } else if (entity.type === 'midpoint') {
                 context.perform(
-                    actionAddMidpoint({ loc: entity.loc, edge: entity.edge }, osmNode()),
+                    actionAddMidpoint({ loc: entity.loc, edge: entity.edge }, new osmNode()),
                     t('operations.add.annotation.vertex')
                 );
                 context.validator().validate();

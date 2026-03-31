@@ -97,7 +97,7 @@ export function actionSplit(nodeIds, newWayIds) {
     }
 
     function split(graph, nodeId, wayA, newWayId, otherNodeIds) {
-        var wayB = osmWay({ id: newWayId, tags: wayA.tags });   // `wayB` is the NEW way
+        var wayB = new osmWay({ id: newWayId, tags: wayA.tags });   // `wayB` is the NEW way
         var nodesA;
         var nodesB;
         var isArea = wayA.isArea();
@@ -232,7 +232,7 @@ export function actionSplit(nodeIds, newWayIds) {
                 delete areaTags.natural;
                 lineTags.natural = 'coastline';
             }
-            const multipolygon = osmRelation({
+            const multipolygon = new osmRelation({
                 tags: areaTags,
                 members: [
                     { id: wayA.id, role: 'outer', type: 'way' },

@@ -351,7 +351,7 @@ export function coreHistory(context) {
                 _stack = _checkpoints[key].stack;
                 _index = _checkpoints[key].index;
             } else {
-                _stack = [{graph: coreGraph()}];
+                _stack = [{graph: new coreGraph()}];
                 _index = 0;
                 _tree = coreTree(_stack[0].graph);
                 _checkpoints = {};
@@ -603,7 +603,7 @@ export function coreHistory(context) {
                     }
 
                     return {
-                        graph: coreGraph(_stack[0].graph).load(entities),
+                        graph: new coreGraph(_stack[0].graph).load(entities),
                         annotation: d.annotation,
                         imageryUsed: d.imageryUsed,
                         photoOverlaysUsed: d.photoOverlaysUsed,
@@ -621,7 +621,7 @@ export function coreHistory(context) {
                         entities[i] = entity === 'undefined' ? undefined : osmEntity(entity);
                     }
 
-                    d.graph = coreGraph(_stack[0].graph).load(entities);
+                    d.graph = new coreGraph(_stack[0].graph).load(entities);
                     return d;
                 });
             }

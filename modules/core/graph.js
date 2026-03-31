@@ -285,7 +285,7 @@ coreGraph.prototype = {
 
 
     update: function() {
-        var graph = this.frozen ? coreGraph(this, true) : this;
+        var graph = this.frozen ? new coreGraph(this, true) : this;
         for (var i = 0; i < arguments.length; i++) {
             arguments[i].call(graph, graph);
         }

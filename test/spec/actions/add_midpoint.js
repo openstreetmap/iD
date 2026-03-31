@@ -1,35 +1,35 @@
 describe('iD.actionAddMidpoint', function () {
     it('adds the node at the midpoint location', function () {
-        var node = iD.osmNode(),
-            a = iD.osmNode(),
-            b = iD.osmNode(),
+        var node = new iD.osmNode(),
+            a = new iD.osmNode(),
+            b = new iD.osmNode(),
             midpoint = {loc: [1, 2], edge: [a.id, b.id]},
-            graph = iD.actionAddMidpoint(midpoint, node)(iD.coreGraph([a, b]));
+            graph = iD.actionAddMidpoint(midpoint, node)(new iD.coreGraph([a, b]));
 
         expect(graph.entity(node.id).loc).to.eql([1, 2]);
     });
 
     it('adds the node to a way that contains the given edge in forward order', function () {
-        var node = iD.osmNode(),
-            a = iD.osmNode(),
-            b = iD.osmNode(),
-            w1 = iD.osmWay(),
-            w2 = iD.osmWay({nodes: [a.id, b.id]}),
+        var node = new iD.osmNode(),
+            a = new iD.osmNode(),
+            b = new iD.osmNode(),
+            w1 = new iD.osmWay(),
+            w2 = new iD.osmWay({nodes: [a.id, b.id]}),
             midpoint = {loc: [1, 2], edge: [a.id, b.id]},
-            graph = iD.actionAddMidpoint(midpoint, node)(iD.coreGraph([a, b, w1, w2]));
+            graph = iD.actionAddMidpoint(midpoint, node)(new iD.coreGraph([a, b, w1, w2]));
 
         expect(graph.entity(w1.id).nodes).to.eql([]);
         expect(graph.entity(w2.id).nodes).to.eql([a.id, node.id, b.id]);
     });
 
     it('adds the node to a way that contains the given edge in reverse order', function () {
-        var node = iD.osmNode(),
-            a = iD.osmNode(),
-            b = iD.osmNode(),
-            w1 = iD.osmWay(),
-            w2 = iD.osmWay({nodes: [b.id, a.id]}),
+        var node = new iD.osmNode(),
+            a = new iD.osmNode(),
+            b = new iD.osmNode(),
+            w1 = new iD.osmWay(),
+            w2 = new iD.osmWay({nodes: [b.id, a.id]}),
             midpoint = {loc: [1, 2], edge: [a.id, b.id]},
-            graph = iD.actionAddMidpoint(midpoint, node)(iD.coreGraph([a, b, w1, w2]));
+            graph = iD.actionAddMidpoint(midpoint, node)(new iD.coreGraph([a, b, w1, w2]));
 
         expect(graph.entity(w1.id).nodes).to.eql([]);
         expect(graph.entity(w2.id).nodes).to.eql([b.id, node.id, a.id]);
@@ -42,12 +42,12 @@ describe('iD.actionAddMidpoint', function () {
         //  \ /
         //   c
 
-        var a = iD.osmNode(),
-            b = iD.osmNode(),
-            c = iD.osmNode(),
-            w = iD.osmWay({nodes: [a.id, b.id, a.id]}),
+        var a = new iD.osmNode(),
+            b = new iD.osmNode(),
+            c = new iD.osmNode(),
+            w = new iD.osmWay({nodes: [a.id, b.id, a.id]}),
             midpoint = {loc: [1, 2], edge: [a.id, b.id]},
-            graph = iD.actionAddMidpoint(midpoint, c)(iD.coreGraph([a, b, w]));
+            graph = iD.actionAddMidpoint(midpoint, c)(new iD.coreGraph([a, b, w]));
 
         expect(graph.entity(w.id).nodes).to.eql([a.id, c.id, b.id, a.id]);
     });

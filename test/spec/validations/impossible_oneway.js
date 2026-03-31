@@ -31,18 +31,18 @@ describe('iD.validations.impossible_oneway', function() {
     describe('highways', function() {
         it('does not flag properly connecting oneway roads', function() {
             context.perform(...[
-                iD.osmNode({ id: 'n-0', loc: [2, 1] }),
-                iD.osmNode({ id: 'n-1', loc: [1, 0] }),
-                iD.osmNode({ id: 'n-2', loc: [2, 0] }),
-                iD.osmNode({ id: 'n-3', loc: [3, 0] }),
-                iD.osmWay({ id: 'w-0', nodes: ['n-1', 'n-0', 'n-3'], tags: {
+                new iD.osmNode({ id: 'n-0', loc: [2, 1] }),
+                new iD.osmNode({ id: 'n-1', loc: [1, 0] }),
+                new iD.osmNode({ id: 'n-2', loc: [2, 0] }),
+                new iD.osmNode({ id: 'n-3', loc: [3, 0] }),
+                new iD.osmWay({ id: 'w-0', nodes: ['n-1', 'n-0', 'n-3'], tags: {
                     'highway': 'unclassified'
                 }}),
-                iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: {
+                new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: {
                     'highway': 'unclassified',
                     'oneway' : 'yes'
                 }}),
-                iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: {
+                new iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: {
                     'highway': 'unclassified',
                     'oneway' : 'yes'
                 }})
@@ -54,13 +54,13 @@ describe('iD.validations.impossible_oneway', function() {
 
         it('flags dangling oneway end', function() {
             context.perform(...[
-                iD.osmNode({ id: 'n-0', loc: [0, 0] }),
-                iD.osmNode({ id: 'n-1', loc: [1, 0] }),
-                iD.osmNode({ id: 'n-2', loc: [2, 0] }),
-                iD.osmWay({ id: 'w-0', nodes: ['n-0', 'n-1'], tags: {
+                new iD.osmNode({ id: 'n-0', loc: [0, 0] }),
+                new iD.osmNode({ id: 'n-1', loc: [1, 0] }),
+                new iD.osmNode({ id: 'n-2', loc: [2, 0] }),
+                new iD.osmWay({ id: 'w-0', nodes: ['n-0', 'n-1'], tags: {
                     'highway': 'unclassified'
                 }}),
-                iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: {
+                new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: {
                     'highway': 'unclassified',
                     'oneway' : 'yes'
                 }})
@@ -77,13 +77,13 @@ describe('iD.validations.impossible_oneway', function() {
 
         it('flags unconnected oneway start', function() {
             context.perform(...[
-                iD.osmNode({ id: 'n-0', loc: [0, 0] }),
-                iD.osmNode({ id: 'n-1', loc: [1, 0] }),
-                iD.osmNode({ id: 'n-2', loc: [2, 0] }),
-                iD.osmWay({ id: 'w-0', nodes: ['n-0', 'n-1'], tags: {
+                new iD.osmNode({ id: 'n-0', loc: [0, 0] }),
+                new iD.osmNode({ id: 'n-1', loc: [1, 0] }),
+                new iD.osmNode({ id: 'n-2', loc: [2, 0] }),
+                new iD.osmWay({ id: 'w-0', nodes: ['n-0', 'n-1'], tags: {
                     'highway': 'unclassified'
                 }}),
-                iD.osmWay({ id: 'w-1', nodes: ['n-2', 'n-1'], tags: {
+                new iD.osmWay({ id: 'w-1', nodes: ['n-2', 'n-1'], tags: {
                     'highway': 'unclassified',
                     'oneway' : 'yes'
                 }})
@@ -100,18 +100,18 @@ describe('iD.validations.impossible_oneway', function() {
 
         it('flags oneway pointing to each other', function() {
             context.perform(...[
-                iD.osmNode({ id: 'n-0', loc: [2, 1] }),
-                iD.osmNode({ id: 'n-1', loc: [1, 0] }),
-                iD.osmNode({ id: 'n-2', loc: [2, 0] }),
-                iD.osmNode({ id: 'n-3', loc: [3, 0] }),
-                iD.osmWay({ id: 'w-0', nodes: ['n-1', 'n-0', 'n-3'], tags: {
+                new iD.osmNode({ id: 'n-0', loc: [2, 1] }),
+                new iD.osmNode({ id: 'n-1', loc: [1, 0] }),
+                new iD.osmNode({ id: 'n-2', loc: [2, 0] }),
+                new iD.osmNode({ id: 'n-3', loc: [3, 0] }),
+                new iD.osmWay({ id: 'w-0', nodes: ['n-1', 'n-0', 'n-3'], tags: {
                     'highway': 'unclassified'
                 }}),
-                iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: {
+                new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: {
                     'highway': 'unclassified',
                     'oneway' : 'yes'
                 }}),
-                iD.osmWay({ id: 'w-2', nodes: ['n-3', 'n-2'], tags: {
+                new iD.osmWay({ id: 'w-2', nodes: ['n-3', 'n-2'], tags: {
                     'highway': 'unclassified',
                     'oneway' : 'yes'
                 }})
@@ -131,18 +131,18 @@ describe('iD.validations.impossible_oneway', function() {
 
         it('does not flags oneway with reverse "-1" oneway direction', function() {
             context.perform(...[
-                iD.osmNode({ id: 'n-0', loc: [2, 1] }),
-                iD.osmNode({ id: 'n-1', loc: [1, 0] }),
-                iD.osmNode({ id: 'n-2', loc: [2, 0] }),
-                iD.osmNode({ id: 'n-3', loc: [3, 0] }),
-                iD.osmWay({ id: 'w-0', nodes: ['n-1', 'n-0', 'n-3'], tags: {
+                new iD.osmNode({ id: 'n-0', loc: [2, 1] }),
+                new iD.osmNode({ id: 'n-1', loc: [1, 0] }),
+                new iD.osmNode({ id: 'n-2', loc: [2, 0] }),
+                new iD.osmNode({ id: 'n-3', loc: [3, 0] }),
+                new iD.osmWay({ id: 'w-0', nodes: ['n-1', 'n-0', 'n-3'], tags: {
                     'highway': 'unclassified'
                 }}),
-                iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: {
+                new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: {
                     'highway': 'unclassified',
                     'oneway' : 'yes'
                 }}),
-                iD.osmWay({ id: 'w-2', nodes: ['n-3', 'n-2'], tags: {
+                new iD.osmWay({ id: 'w-2', nodes: ['n-3', 'n-2'], tags: {
                     'highway': 'unclassified',
                     'oneway' : '-1'
                 }})
@@ -156,9 +156,9 @@ describe('iD.validations.impossible_oneway', function() {
     describe('waterways', function() {
         it('does not flag unconnected start or end points', function() {
             context.perform(...[
-                iD.osmNode({ id: 'n-1', loc: [1, 0] }),
-                iD.osmNode({ id: 'n-2', loc: [2, 0] }),
-                iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: {
+                new iD.osmNode({ id: 'n-1', loc: [1, 0] }),
+                new iD.osmNode({ id: 'n-2', loc: [2, 0] }),
+                new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: {
                     'waterway': 'stream'
                 }})
             ].map(iD.actionAddEntity));
@@ -169,13 +169,13 @@ describe('iD.validations.impossible_oneway', function() {
 
         it('flags waterways pointing to each other', function() {
             context.perform(...[
-                iD.osmNode({ id: 'n-1', loc: [1, 0] }),
-                iD.osmNode({ id: 'n-2', loc: [2, 0] }),
-                iD.osmNode({ id: 'n-3', loc: [3, 0] }),
-                iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: {
+                new iD.osmNode({ id: 'n-1', loc: [1, 0] }),
+                new iD.osmNode({ id: 'n-2', loc: [2, 0] }),
+                new iD.osmNode({ id: 'n-3', loc: [3, 0] }),
+                new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: {
                     'waterway': 'stream'
                 }}),
-                iD.osmWay({ id: 'w-2', nodes: ['n-3', 'n-2'], tags: {
+                new iD.osmWay({ id: 'w-2', nodes: ['n-3', 'n-2'], tags: {
                     'waterway': 'stream'
                 }})
             ].map(iD.actionAddEntity));

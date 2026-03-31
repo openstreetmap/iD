@@ -42,7 +42,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
     function createDrawNode(loc) {
         // don't make the draw node until we actually need it
-        _drawNode = osmNode({ loc: loc });
+        _drawNode = new osmNode({ loc: loc });
 
         context.pauseChangeDispatch();
         context.replace(function actionAddDrawNode(graph) {

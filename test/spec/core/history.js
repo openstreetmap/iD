@@ -8,7 +8,7 @@ describe('iD.coreHistory', function () {
     var actionNoop = function(g) { return g; };
     var actionAddNode = function (nodeID) {
         return function(g) {
-            return g.replace(iD.osmNode({ id: nodeID }));
+            return g.replace(new iD.osmNode({ id: nodeID }));
         };
     };
 
@@ -26,13 +26,13 @@ describe('iD.coreHistory', function () {
 
     describe('#merge', function () {
         it('merges the entities into all graph versions', function () {
-            var n = iD.osmNode({id: 'n'});
+            var n = new iD.osmNode({id: 'n'});
             history.merge([n]);
             expect(history.graph().entity('n')).to.equal(n);
         });
 
         it('emits a merge event with the new entities', function () {
-            var n = iD.osmNode({id: 'n'});
+            var n = new iD.osmNode({id: 'n'});
             history.on('merge', spy);
             history.merge([n]);
             expect(spy).to.have.been.calledWith([n]);
@@ -45,7 +45,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('updates the graph', function () {
-            var node = iD.osmNode();
+            var node = new iD.osmNode();
             history.perform(function (graph) { return graph.replace(node); });
             expect(history.graph().entity(node.id)).to.equal(node);
         });
@@ -62,8 +62,8 @@ describe('iD.coreHistory', function () {
         });
 
         it('performs multiple actions', function () {
-            const action1 = fn().mockReturnValue(iD.coreGraph());
-            const action2 = fn().mockReturnValue(iD.coreGraph());
+            const action1 = fn().mockReturnValue(new iD.coreGraph());
+            const action2 = fn().mockReturnValue(new iD.coreGraph());
             history.perform(action1, action2, 'annotation');
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
@@ -71,7 +71,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('performs transitionable actions in a transition', async () => {
-            var action1 = function() { return iD.coreGraph(); };
+            var action1 = function() { return new iD.coreGraph(); };
             action1.transitionable = true;
             history.on('change', spy);
             await history.perform(action1);
@@ -86,7 +86,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('updates the graph', function () {
-            var node = iD.osmNode();
+            var node = new iD.osmNode();
             history.replace(function (graph) { return graph.replace(node); });
             expect(history.graph().entity(node.id)).to.equal(node);
         });
@@ -104,8 +104,8 @@ describe('iD.coreHistory', function () {
         });
 
         it('performs multiple actions', function () {
-            const action1 = fn().mockReturnValue(iD.coreGraph());
-            const action2 = fn().mockReturnValue(iD.coreGraph());
+            const action1 = fn().mockReturnValue(new iD.coreGraph());
+            const action2 = fn().mockReturnValue(new iD.coreGraph());
             history.replace(action1, action2, 'annotation');
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
@@ -276,13 +276,13 @@ describe('iD.coreHistory', function () {
 
     describe('#changes', function () {
         it('includes created entities', function () {
-            var node = iD.osmNode();
+            var node = new iD.osmNode();
             history.perform(function (graph) { return graph.replace(node); });
             expect(history.changes().created).to.eql([node]);
         });
 
         it('includes modified entities', function () {
-            var node1 = iD.osmNode({id: 'n1'});
+            var node1 = new iD.osmNode({id: 'n1'});
             var node2 = node1.update({ tags: { yes: 'no' } });
             history.merge([node1]);
             history.perform(function (graph) { return graph.replace(node2); });
@@ -290,7 +290,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('includes deleted entities', function () {
-            var node = iD.osmNode({id: 'n1'});
+            var node = new iD.osmNode({id: 'n1'});
             history.merge([node]);
             history.perform(function (graph) { return graph.remove(node); });
             expect(history.changes().deleted).to.eql([node]);
@@ -299,7 +299,7 @@ describe('iD.coreHistory', function () {
 
     describe('#hasChanges', function() {
         it('is true when any of change\'s values are nonempty', function() {
-            var node = iD.osmNode();
+            var node = new iD.osmNode();
             history.perform(function (graph) { return graph.replace(node); });
             expect(history.hasChanges()).to.eql(true);
         });
@@ -364,10 +364,10 @@ describe('iD.coreHistory', function () {
         });
 
         it('generates v3 JSON', function() {
-            var node_1 = iD.osmNode({id: 'n-1'});
-            var node1 = iD.osmNode({id: 'n1'});
-            var node2 = iD.osmNode({id: 'n2'});
-            var node3 = iD.osmNode({id: 'n3'});
+            var node_1 = new iD.osmNode({id: 'n-1'});
+            var node1 = new iD.osmNode({id: 'n1'});
+            var node2 = new iD.osmNode({id: 'n2'});
+            var node3 = new iD.osmNode({id: 'n3'});
             history.merge([node1, node2, node3]);
             history.perform(iD.actionAddEntity(node_1));           // addition
             history.perform(iD.actionChangeTags('n2', {k: 'v'}));  // modification
@@ -400,7 +400,7 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
+            expect(history.graph().entity('n-1')).to.eql(new iD.osmNode({id: 'n-1', loc: [1, 2]}));
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
@@ -417,7 +417,7 @@ describe('iD.coreHistory', function () {
                 'index': 2
             };
             history.fromJSON(json);
-            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [2, 3], v: 1}));
+            expect(history.graph().entity('n-1')).to.eql(new iD.osmNode({id: 'n-1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
@@ -433,7 +433,7 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            history.merge([iD.osmNode({id: 'n1'})]);
+            history.merge([new iD.osmNode({id: 'n1'})]);
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
@@ -454,7 +454,7 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
+            expect(history.graph().entity('n-1')).to.eql(new iD.osmNode({id: 'n-1', loc: [1, 2]}));
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
@@ -475,8 +475,8 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            history.merge([iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
-            expect(history.graph().entity('n1')).to.eql(iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
+            history.merge([new iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
+            expect(history.graph().entity('n1')).to.eql(new iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
@@ -495,7 +495,7 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            history.merge([iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
+            history.merge([new iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
@@ -518,7 +518,7 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
+            expect(history.graph().entity('n-1')).to.eql(new iD.osmNode({id: 'n-1', loc: [1, 2]}));
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
@@ -540,7 +540,7 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            expect(history.graph().entity('n1')).to.eql(iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
+            expect(history.graph().entity('n1')).to.eql(new iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
