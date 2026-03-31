@@ -375,6 +375,12 @@ describe('iD.geo - geometry', function() {
             var b = [[5, 10], [5, -10]];
             expect(iD.geoLineIntersection(a, b)).to.eql([5, 0]);
         });
+        it('returns the intersection point when it lies on segment endpoints', function() {
+            // intersection at start of segment b (u = 0)
+            var a = [[0, 0], [10, 0]];
+            var b = [[5, 0], [5, 10]];
+            expect(iD.geoLineIntersection(a, b)).to.eql([5, 0]);
+        });
         it('returns null if lines are not parallel but not intersecting', function() {
             var a = [[0, 0], [10, 0]];
             var b = [[-5, 10], [-5, -10]];

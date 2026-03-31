@@ -189,7 +189,7 @@ export function geoLineIntersection(a: Vec2[], b: Vec2[]) {
     var uNumerator = geoVecCross(geoVecSubtract(q, p), r);
     var denominator = geoVecCross(r, s);
 
-    if (uNumerator && denominator) {
+    if (denominator) {
         var u = uNumerator / denominator;
         var t = geoVecCross(geoVecSubtract(q, p), s) / denominator;
 
