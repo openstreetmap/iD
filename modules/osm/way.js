@@ -24,7 +24,7 @@ osmWay.prototype = Object.create(osmEntity.prototype);
 
 
 const prototype = {
-    type: 'way',
+    type: /** @type {'way'} */ ('way'),
     nodes: [],
 
 

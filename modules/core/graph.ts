@@ -1,10 +1,18 @@
 import { debug } from '../index';
+import type { OsmNode as osmNode } from '../osm/node';
+import type { OsmRelation as osmRelation } from '../osm/relation';
+import type { OsmWay as osmWay } from '../osm/way';
 import { utilArrayDifference } from '../util';
 
+export class coreGraph {
+    entities: { [id: string]: iD.OsmEntity | undefined };
+    _parentWays: { [id: string]: Set<string> };
+    _parentRels: { [id: string]: Set<string> };
+    transients: { [id: string]: { [key: string]: unknown } };
+    _childNodes: { [id: string]: osmNode[] };
+    frozen: boolean;
 
-export function coreGraph(other, mutable) {
-    if (!(this instanceof coreGraph)) return new coreGraph(other, mutable);
-
+  constructor(other?: coreGraph, mutable?: boolean) {
     if (other instanceof coreGraph) {
         var base = other.base();
         this.entities = Object.assign(Object.create(base.entities), other.entities);
@@ -21,117 +29,110 @@ export function coreGraph(other, mutable) {
     this.transients = {};
     this._childNodes = {};
     this.frozen = !mutable;
-}
+  }
 
+    hasEntity<T extends iD.OsmEntity>(id: string) {
+        return this.entities[id] as T | undefined;
+    }
 
-coreGraph.prototype = {
-
-    hasEntity: function(id) {
-        return this.entities[id];
-    },
-
-
-    entity: function(id) {
+    entity<T extends iD.OsmEntity>(id: string) {
         var entity = this.entities[id];
 
         if (!entity) {
             throw new Error('entity ' + id + ' not found');
         }
-        return entity;
-    },
+        return entity as T;
+    }
 
-
-    geometry: function(id) {
+    geometry(id: string) {
         return this.entity(id).geometry(this);
-    },
+    }
 
-
-    transient: function(entity, key, fn) {
+    transient<T>(entity: iD.OsmEntity, key: string, fn: () => T): T {
         var id = entity.id;
         var transients = this.transients[id] || (this.transients[id] = {});
 
         if (transients[key] !== undefined) {
-            return transients[key];
+            return transients[key] as T;
         }
 
         transients[key] = fn.call(entity);
 
-        return transients[key];
-    },
+        return transients[key] as T;
+    }
 
-
-    parentWays: function(entity) {
+    parentWays(entity: iD.OsmEntity) {
         var parents = this._parentWays[entity.id];
-        var result = [];
+        var result: osmWay[] = [];
         if (parents) {
-            parents.forEach(function(id) {
-                result.push(this.entity(id));
+            parents.forEach((id) => {
+                result.push(this.entity<osmWay>(id));
             }, this);
         }
         return result;
-    },
+    }
 
-
-    isPoi: function(entity) {
+    isPoi(entity: iD.OsmEntity) {
         var parents = this._parentWays[entity.id];
         return !parents || parents.size === 0;
-    },
+    }
 
-
-    isShared: function(entity) {
+    isShared(entity: iD.OsmEntity) {
         var parents = this._parentWays[entity.id];
         return parents && parents.size > 1;
-    },
+    }
 
-
-    parentRelations: function(entity) {
+    parentRelations(entity: iD.OsmEntity) {
         var parents = this._parentRels[entity.id];
-        var result = [];
+        var result: osmRelation[] = [];
         if (parents) {
-            parents.forEach(function(id) {
-                result.push(this.entity(id));
+            parents.forEach((id) => {
+                result.push(this.entity<osmRelation>(id));
             }, this);
         }
         return result;
-    },
+    }
 
-    parentMultipolygons: function(entity) {
-        return this.parentRelations(entity).filter(function(relation) {
+    parentMultipolygons(entity: iD.OsmEntity) {
+        return this.parentRelations(entity).filter((relation) => {
             return relation.isMultipolygon();
         });
-    },
+    }
 
 
-    childNodes: function(entity) {
+    childNodes(entity: osmWay) {
         if (this._childNodes[entity.id]) return this._childNodes[entity.id];
         if (!entity.nodes) return [];
 
-        var nodes = [];
+        var nodes: osmNode[] = [];
         for (var i = 0; i < entity.nodes.length; i++) {
-            nodes[i] = this.entity(entity.nodes[i]);
+            nodes[i] = this.entity<osmNode>(entity.nodes[i]);
         }
 
         if (debug) Object.freeze(nodes);
 
+        // @ts-expect-error -- temporary issue which will be solved after upgrading osmEntity
         this._childNodes[entity.id] = nodes;
         return this._childNodes[entity.id];
-    },
+    }
 
-
-    base: function() {
+    base(): {
+        entities: coreGraph['entities'];
+        parentWays: coreGraph['_parentWays'];
+        parentRels: coreGraph['_parentRels'];
+    } {
         return {
             'entities': Object.getPrototypeOf(this.entities),
             'parentWays': Object.getPrototypeOf(this._parentWays),
             'parentRels': Object.getPrototypeOf(this._parentRels)
         };
-    },
-
+    }
 
     // Unlike other graph methods, rebase mutates in place. This is because it
     // is used only during the history operation that merges newly downloaded
     // data into each state. To external consumers, it should appear as if the
     // graph always contained the newly downloaded data.
-    rebase: function(entities, stack, force) {
+    rebase(entities: iD.OsmEntity[], stack: coreGraph[], force?: boolean) {
         var base = this.base();
         var i, j, k, id;
 
@@ -161,15 +162,14 @@ coreGraph.prototype = {
         for (i = 0; i < stack.length; i++) {
             stack[i]._updateRebased();
         }
-    },
+    }
 
-
-    _updateRebased: function() {
+    _updateRebased() {
         var base = this.base();
 
-        Object.keys(this._parentWays).forEach(function(child) {
+        Object.keys(this._parentWays).forEach((child) => {
             if (base.parentWays[child]) {
-                base.parentWays[child].forEach(function(id) {
+                base.parentWays[child].forEach((id) => {
                     if (!this.entities.hasOwnProperty(id)) {
                         this._parentWays[child].add(id);
                     }
@@ -177,9 +177,9 @@ coreGraph.prototype = {
             }
         }, this);
 
-        Object.keys(this._parentRels).forEach(function(child) {
+        Object.keys(this._parentRels).forEach((child) => {
             if (base.parentRels[child]) {
-                base.parentRels[child].forEach(function(id) {
+                base.parentRels[child].forEach((id) => {
                     if (!this.entities.hasOwnProperty(id)) {
                         this._parentRels[child].add(id);
                     }
@@ -191,18 +191,29 @@ coreGraph.prototype = {
 
         // this._childNodes is not updated, under the assumption that
         // ways are always downloaded with their child nodes.
-    },
-
+    }
 
     // Updates calculated properties (parentWays, parentRels) for the specified change
-    _updateCalculated: function(oldentity, entity, parentWays, parentRels) {
+    _updateCalculated(
+        oldentity: iD.OsmEntity | undefined,
+        entity: iD.OsmEntity | undefined,
+        parentWays?: coreGraph['_parentWays'],
+        parentRels?: coreGraph['_parentRels'],
+    ) {
         parentWays = parentWays || this._parentWays;
         parentRels = parentRels || this._parentRels;
 
         var type = entity && entity.type || oldentity && oldentity.type;
-        var removed, added, i;
+        let removed: string[] = [];
+        let added: string[] = [];
+        let i: number;
 
         if (type === 'way') {   // Update parentWays
+
+            // this is purely to help TypeScript understand
+            entity = <osmWay | undefined>entity;
+            oldentity = <osmWay | undefined>oldentity;
+
             if (oldentity && entity) {
                 removed = utilArrayDifference(oldentity.nodes, entity.nodes);
                 added = utilArrayDifference(entity.nodes, oldentity.nodes);
@@ -216,15 +227,19 @@ coreGraph.prototype = {
             for (i = 0; i < removed.length; i++) {
                 // make a copy of prototype property, store as own property, and update..
                 parentWays[removed[i]] = new Set(parentWays[removed[i]]);
-                parentWays[removed[i]].delete(oldentity.id);
+                parentWays[removed[i]].delete(oldentity!.id);
             }
             for (i = 0; i < added.length; i++) {
                 // make a copy of prototype property, store as own property, and update..
                 parentWays[added[i]] = new Set(parentWays[added[i]]);
-                parentWays[added[i]].add(entity.id);
+                parentWays[added[i]].add(entity!.id);
             }
 
         } else if (type === 'relation') {   // Update parentRels
+
+            // this is purely to help TypeScript understand
+            entity = <osmRelation | undefined>entity;
+            oldentity = <osmRelation | undefined>oldentity;
 
             // diff only on the IDs since the same entity can be a member multiple times with different roles
             var oldentityMemberIDs = oldentity ? oldentity.members.map(function(m) { return m.id; }) : [];
@@ -243,36 +258,33 @@ coreGraph.prototype = {
             for (i = 0; i < removed.length; i++) {
                 // make a copy of prototype property, store as own property, and update..
                 parentRels[removed[i]] = new Set(parentRels[removed[i]]);
-                parentRels[removed[i]].delete(oldentity.id);
+                parentRels[removed[i]].delete(oldentity!.id);
             }
             for (i = 0; i < added.length; i++) {
                 // make a copy of prototype property, store as own property, and update..
                 parentRels[added[i]] = new Set(parentRels[added[i]]);
-                parentRels[added[i]].add(entity.id);
+                parentRels[added[i]].add(entity!.id);
             }
         }
-    },
+    }
 
-
-    replace: function(entity) {
+    replace(entity: iD.OsmEntity) {
         if (this.entities[entity.id] === entity) return this;
 
         return this.update(function() {
             this._updateCalculated(this.entities[entity.id], entity);
             this.entities[entity.id] = entity;
         });
-    },
+    }
 
-
-    remove: function(entity) {
+    remove(entity: iD.OsmEntity) {
         return this.update(function() {
             this._updateCalculated(entity, undefined);
             this.entities[entity.id] = undefined;
         });
-    },
+    }
 
-
-    revert: function(id) {
+    revert(id: string) {
         var baseEntity = this.base().entities[id];
         var headEntity = this.entities[id];
         if (headEntity === baseEntity) return this;
@@ -281,23 +293,21 @@ coreGraph.prototype = {
             this._updateCalculated(headEntity, baseEntity);
             delete this.entities[id];
         });
-    },
+    }
 
-
-    update: function() {
+    update(...args: ((this: coreGraph, graph: coreGraph) => void)[]) {
         var graph = this.frozen ? new coreGraph(this, true) : this;
-        for (var i = 0; i < arguments.length; i++) {
-            arguments[i].call(graph, graph);
+        for (var i = 0; i < args.length; i++) {
+            args[i].call(graph, graph);
         }
 
         if (this.frozen) graph.frozen = true;
 
         return graph;
-    },
-
+    }
 
     // Obliterates any existing entities
-    load: function(entities) {
+    load(entities: { [key: string | number]: iD.OsmEntity }) {
         var base = this.base();
         this.entities = Object.create(base.entities);
 
@@ -308,4 +318,4 @@ coreGraph.prototype = {
 
         return this;
     }
-};
+}

@@ -63,6 +63,12 @@ osmEntity.prototype = {
     /** @type {String} */
     id: undefined,
 
+    /** @type {number | undefined} */
+    v: undefined,
+
+    /** @type {boolean | undefined} */
+    visible: undefined,
+
     initialize: function(sources) {
         for (var i = 0; i < sources.length; ++i) {
             var source = sources[i];
@@ -127,7 +133,7 @@ osmEntity.prototype = {
      *
      * @param {Tags} tags tags to merge into this entity's tags
      * @param {Tags} setTags (optional) a set of tags to overwrite in this entity's tags
-     * @returns {iD.OsmEntity}
+     * @returns {typeof this}
      */
     mergeTags: function(tags, setTags = {}) {
         const merged = Object.assign({}, this.tags);   // shallow copy

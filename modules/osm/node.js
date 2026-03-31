@@ -48,7 +48,7 @@ osmEntity.node = osmNode;
 osmNode.prototype = Object.create(osmEntity.prototype);
 
 const prototype = {
-    type: 'node',
+    type: /** @type {'node'} */ ('node'),
     loc: /** @type {Vec2} */ ([9999, 9999]),
 
     extent: function() {

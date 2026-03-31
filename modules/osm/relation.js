@@ -5,6 +5,11 @@ import { osmJoinWays } from './multipolygon';
 import { geoExtent, geoPolygonContainsPolygon, geoPolygonIntersectsPolygon } from '../geo';
 
 /**
+ * @typedef {'node' | 'way' | 'relation'} FeatureType
+ * @typedef {{ type: FeatureType; id: string; role: string }} RelationMember
+ */
+
+/**
  * @typedef {typeof prototype & iD.AbstractEntity} OsmRelation
  * @returns {OsmRelation}
  */
@@ -31,8 +36,8 @@ osmRelation.creationOrder = function(a, b) {
 
 
 const prototype = {
-    type: 'relation',
-    members: [],
+    type: /** @type {'relation'} */ ('relation'),
+    members: /** @type {RelationMember[]} */ ([]),
 
 
     copy: function(resolver, copies) {

@@ -23,13 +23,12 @@ declare global {
   declare namespace iD {
     export type Context = ReturnType<typeof iD.coreContext>;
 
-    export type Graph = InstanceType<typeof iD.coreGraph>;
-
+    export type Graph = import('./core/graph').coreGraph;
     export type OsmNode = import('./osm/node').OsmNode;
     export type OsmWay = import('./osm/way').OsmWay;
     export type OsmRelation = import('./osm/relation').OsmRelation;
 
-    export type AbstractEntity = InstanceType<typeof iD.osmEntity>;
+    export type AbstractEntity = typeof import('./osm/entity').osmEntity.prototype;
     export type OsmEntity = OsmNode | OsmWay | OsmRelation;
 
     export type Projection = import('./geo/raw_mercator').Projection;
