@@ -10,10 +10,9 @@ import { geoExtent, geoPolygonContainsPolygon, geoPolygonIntersectsPolygon } fro
  */
 export function osmRelation() {
     if (!(this instanceof osmRelation)) {
-        return (new osmRelation()).initialize(arguments);
-    } else if (arguments.length) {
-        this.initialize(arguments);
+        return new osmRelation(...arguments);
     }
+    this.initialize(arguments);
 }
 
 

@@ -10,9 +10,9 @@ export function osmEntity(attrs) {
 
     // Create the appropriate subtype.
     if (attrs && attrs.type) {
-        return osmEntity[attrs.type].apply(this, arguments);
+        return new osmEntity[attrs.type](...arguments);
     } else if (attrs && attrs.id) {
-        return osmEntity[osmEntity.id.type(attrs.id)].apply(this, arguments);
+        return new osmEntity[osmEntity.id.type(attrs.id)](...arguments);
     }
 
     // Initialize a generic Entity (used only in tests).
