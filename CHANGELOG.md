@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 #### :scissors: Operations
 * Correctly split a way on all selected vertices when three or more nodes are selected ([#12120])
+* Create fewer points when circularizing small features (and vice versa): the number of vertices in the resulting circle is now dynamic between a 12 and 32 depending on the radius of the circle (instead of always resulting in 19 nodes) ([#12139])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Treat most aerialways as part of the routable network when checking other ways' connectivity ([#9406])
@@ -73,6 +74,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12078]: https://github.com/openstreetmap/iD/issues/12078
 [#12110]: https://github.com/openstreetmap/iD/issues/12110
 [#12120]: https://github.com/openstreetmap/iD/issues/12120
+[#12139]: https://github.com/openstreetmap/iD/pull/12139
 
 
 # 2.39.4
