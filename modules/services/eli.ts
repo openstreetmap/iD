@@ -1,36 +1,4 @@
-import fs from 'node:fs';
-import { createRequire } from 'node:module';
-import prettyStringify from 'json-stringify-pretty-compact';
-
-const require = createRequire(import.meta.url);
-
-/** @type {import("geojson").FeatureCollection} */
-const sources = JSON.parse(
-  fs.readFileSync(require.resolve('@openstreetmap/editor-layer-index/imagery.geojson'), 'utf8')
-);
-
-if (fs.existsSync('./data/manual_imagery.json')) {
-  /** @type {any[]} */
-  const manualImagery = JSON.parse(fs.readFileSync('./data/manual_imagery.json', 'utf8'));
-  // we can include additional imagery sources that aren't in the index
-  sources.features = sources.features
-    .filter(source => !manualImagery.find(manualSource => manualSource.id === source.properties?.id));
-
-  sources.features.push(
-    ...manualImagery.map(source => {
-      /** @type {import("geojson").Feature} */
-      const feature = {
-        type: 'Feature',
-        properties: { ...source, ...source.extent },
-        geometry: null,
-        bbox: source.bbox,
-      };
-      return feature;
-    })
-  );
-}
-
-let imagery = [];
+import type { Feature, FeatureCollection } from 'geojson';
 
 // ignore imagery more than 20 years old..
 let cutoffDate = new Date();
@@ -58,7 +26,6 @@ const discard = [
   /^openinframap-(petroleum|power|telecoms)$/,
   /^openpt_map$/,
   /^openrailwaymap$/,
-  /^openseamap$/,
   /^opensnowmap-overlay$/,
 
   /^US-TIGER-Roads-201\d/,
@@ -82,14 +49,42 @@ const supportedWMSProjections = [
   'EPSG:4326'
 ];
 
-sources.features.forEach(feature => {
+export interface Layer {
+  id: string;
+  name: string;
+  type: string;
+  template: string;
+  category: string;
+  tileSize?: 512;
+  projection?: string;
+  startDate?: Date;
+  endDate?: Date;
+  zoomExtent?: [min: number, max: number];
+  overzoom?: boolean;
+  terms_url?: string;
+  terms_text?: string;
+  terms_html?: string;
+  polygon?: unknown;
+  best?: boolean;
+  default?: boolean;
+  description?: string;
+  encrypted?: boolean;
+  icon?: string;
+  overlay?: boolean;
+}
+
+/**
+ * transforms the layer from ELI, and returns
+ * undefined if it should not be rendered.
+ */
+export function processImageryLayer(feature: Feature, sources: FeatureCollection): Layer | undefined {
   const source = feature.properties;
 
   if (!source) return;
   if (source.type !== 'tms' && source.type !== 'wms' && source.type !== 'bing') return;
   if (discard.some(regex => regex.test(source.id))) return;
 
-  let im = {
+  let im: Layer = {
     id: source.id,
     name: source.name,
     type: source.type,
@@ -174,17 +169,11 @@ sources.features.forEach(feature => {
     im.terms_html = attribution.html;
   }
 
-  ['best', 'default', 'description', 'encrypted', 'icon', 'overlay', 'tileSize'].forEach(prop => {
+  (['best', 'default', 'description', 'encrypted', 'icon', 'overlay', 'tileSize'] as const).forEach(prop => {
     if (source[prop]) {
       im[prop] = source[prop];
     }
   });
 
-  imagery.push(im);
-});
-
-
-imagery.sort((a, b) => a.name.localeCompare(b.name));
-
-fs.writeFileSync('data/imagery.json', prettyStringify(imagery));
-fs.writeFileSync('dist/data/imagery.min.json', JSON.stringify(imagery));
+  return im;
+}

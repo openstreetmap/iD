@@ -116,7 +116,8 @@ iD.localizer.loadLocale('en', 'tagging');
 
 
 // Initializing `coreContext` initializes `_background`, which tries loading:
-cached.imagery = [];
+cached.imagery = { features: [] };
+cached.manual_imagery = [];
 // Initializing `coreContext` initializes `_presets`, which tries loading:
 cached.preset_categories = {};
 cached.preset_defaults = {};

@@ -13,6 +13,7 @@ import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
 import { utilQsString, utilStringQs } from '../util';
 import { utilRebind } from '../util/rebind';
+import { processImageryLayer } from '../services/eli';
 
 
 let _imageryIndex = null;
@@ -30,9 +31,32 @@ export function rendererBackground(context) {
 
 
   function ensureImageryIndex() {
-    return fileFetcher.get('imagery')
-      .then(sources => {
+    return Promise.all([
+      fileFetcher.get('imagery'),
+      fileFetcher.get('manual_imagery'),
+    ])
+      .then(([eliSources, manualSources]) => {
         if (_imageryIndex) return _imageryIndex;
+
+        // if the same ID exists in manual_imagery, prefer that
+        // over the original from ELI.
+        const overridenIds = new Set(manualSources.map(s => s.id));
+
+        /** @type {import("geojson").Feature[]} */
+        const sources = [
+          ...eliSources.features.filter(s => !overridenIds.has(s.properties.id)),
+          ...manualSources.map(source => ({
+            type: 'Feature',
+            properties: { ...source, ...source.extent },
+            geometry: source.polygon
+              ? { type: 'Polygon', coordinates: source.polygon }
+              : null,
+            bbox: source.bbox,
+          })),
+        ]
+          .map(layer => processImageryLayer(layer, eliSources))
+          .filter(Boolean)
+          .sort((a, b) => a.name.localeCompare(b.name));
 
         _imageryIndex = {
           imagery: sources,
