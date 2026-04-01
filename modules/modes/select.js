@@ -234,7 +234,6 @@ export function modeSelect(context, selectedIDs) {
         return _operations.filter(operation => operation.available());
     };
 
-
     mode.enter = function() {
         if (!checkSelectedIDs()) return;
 
@@ -280,7 +279,7 @@ export function modeSelect(context, selectedIDs) {
             .on(['\\', 'pause'], focusNextParent)
             .on(uiCmd('⌘↑'), selectParent)
             .on(uiCmd('⌘↓'), selectChild)
-            .on('⎋', esc, true);
+            .on('⎋', esc, true)
 
         d3_select(document)
             .call(keybinding);

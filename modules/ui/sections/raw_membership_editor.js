@@ -356,9 +356,115 @@ export function uiSectionRawMembershipEditor(context) {
         return presetName + ' ' + entityName;
     }
 
+    function loadAllMembers() {
+        var selectedIDs = context.selectedIDs();
+        if (!selectedIDs.length) return;
+
+        var entity = context.graph().entity(selectedIDs[0]);
+        if (entity.type !== 'relation') return;
+
+        downloadMembers(entity); 
+    }
+
+    function selectAllMembers() {
+        var graph = context.graph();
+        var selectedIDs = context.selectedIDs();
+        var entity = graph.entity(selectedIDs[0]);
+        if (entity.type !== 'relation') return;
+
+        var allLoaded = entity.members.every(m => graph.hasEntity(m.id));
+        console.log('allLoaded:', allLoaded);
+
+        if (!allLoaded) {
+            alert('Not all members are loaded'); 
+            return;
+        }
+
+        var memberIDs = entity.members
+            .filter(m => m.type === 'way' || m.type === 'node')
+            .map(m => m.id);
+
+        context.enter(
+            modeSelect(context, { selection: memberIDs })
+        );
+    }
+
+    function selectLoadedMembers() {
+        var graph = context.graph();
+        var selectedIDs = context.selectedIDs();
+
+        if (!selectedIDs.length) return;
+
+        var entity = graph.entity(selectedIDs[0]);
+
+        if (entity.type !== 'relation') {
+            return;
+        }
+
+        var memberIDs = entity.members
+            .map(m => m.id)
+            .filter(id => graph.hasEntity(id));
+
+        if (!memberIDs.length) {
+            return;
+        }
+
+        context.enter(modeSelect(context, memberIDs));  
+    }
+
     function renderDisclosureContent(selection) {
 
         var memberships = getMemberships();
+
+        //Member Controls (compact UI)
+        var controls = selection.selectAll('.member-controls')
+            .data([0]);
+
+        var controlsEnter = controls.enter()
+            .append('div')
+            .attr('class', 'member-controls');
+
+        controls = controls.merge(controlsEnter);
+
+        // Buttons data
+        var btnData = [
+            { type: 'load', label: '📥', title: 'Load all members' },
+            { type: 'selectLoaded', label: '🗃️', title: 'Select loaded members' },
+            { type: 'selectAll', label: '✅', title: 'Select all members' }
+        ];
+
+        var buttons = controls.selectAll('button')
+            .data(btnData);
+
+        var buttonsEnter = buttons.enter()
+            .append('button')
+            .attr('class', d => 'member-btn member-btn-' + d.type)
+            .text(d => d.label)
+            .attr('title', d => d.title);
+
+        buttons = buttons.merge(buttonsEnter);
+
+        buttons.on('click', function(event, d) {
+            if (d3_select(this).classed('disabled')) return;
+            if (d.type === 'load') {
+                loadAllMembers();
+            } else if (d.type === 'selectLoaded') {
+                selectLoadedMembers();
+            } else if (d.type === 'selectAll') {
+                selectAllMembers();
+            }
+        });
+        buttons.classed('disabled', function(d) {
+            if (d.type !== 'selectAll') return false;
+
+            var selectedIDs = context.selectedIDs();
+            if (!selectedIDs.length) return true;
+
+            var entity = context.graph().entity(selectedIDs[0]);
+            if (entity.type !== 'relation') return true;
+
+            return !entity.members.every(m => context.graph().hasEntity(m.id));
+        });
 
         var list = selection.selectAll('.member-list')
             .data([0]);

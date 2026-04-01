@@ -1,0 +1,26 @@
+.member-controls {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 6px;
+}
+
+.member-controls .member-btn {
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.member-controls .member-btn:hover {
+    background: #f3f3f3;
+}
+
+.member-controls .member-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
