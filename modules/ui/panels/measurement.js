@@ -9,12 +9,13 @@ import { geoExtent, geoSphericalDistance } from '../../geo';
 import { services } from '../../services';
 import { utilGetAllNodes } from '../../util';
 
+export function radiansToMeters(r) {
+    // using WGS84 authalic radius (6371007.1809 m)
+    return r * 6371007.1809;
+}
+
 export function uiPanelMeasurement(context) {
 
-    function radiansToMeters(r) {
-        // using WGS84 authalic radius (6371007.1809 m)
-        return r * 6371007.1809;
-    }
 
     function steradiansToSqmeters(r) {
         // http://gis.stackexchange.com/a/124857/40446
