@@ -150,8 +150,8 @@ Translations are managed using the
 [Transifex](https://app.transifex.com/openstreetmap/id-editor/) platform. Sign up to Transifex via the
 ["Join This Project"](https://app.transifex.com/join/?o=openstreetmap&p=id-editor&t=opensource) link on
 the [iD's project page](https://app.transifex.com/openstreetmap/id-editor/) and
-click **Translate** to start translating. Registration form asks for "business email" but you may provide
-regular one. If you try to join via the Transifex's home page "Sign up" link you may be unable to create an 
+click **Translate** to start translating. Registration form asks for a "business email" but you may provide
+a regular one. If you try to join via the Transifex's home page "Sign up" link you may be unable to create an
 account. Translations are divided into separate resources:
 
 * *core* - contains text for the main interface of iD
