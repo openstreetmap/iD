@@ -1063,8 +1063,8 @@ en:
     thank_you_where:
       format: "{place}{separator}{region}"
       separator: ", "
-    help_html: Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.
-    help_link_text: Details
+    help_html: Your changes should appear on OpenStreetMap within a few minutes. If you don’t see them, try refreshing the page. It may take longer for maps elsewhere to receive updates.
+    help_link_text: Details on how to see your changes
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     view_on_osm: "View Changes on OSM"
     changeset_id: "Your changeset #: {changeset_id}"
