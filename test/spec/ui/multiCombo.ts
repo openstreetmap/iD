@@ -94,7 +94,7 @@ describe('iD.uiField as multiCombo', () => {
             // Simulate entity_editor.revertTags()
             field.on('revert', (keys: string[]) => {
                 const original = context.graph().base().entities[entityID]!;
-                const tags = Object.assign({}, context.entity(entityID).tags);
+                const tags = { ...context.entity(entityID).tags };
                 keys.forEach((key: string) => { tags[key] = original.tags[key]; });
                 context.perform(iD.actionChangeTags(entityID, tags));
             });
@@ -235,7 +235,7 @@ describe('iD.uiField as multiCombo', () => {
         function wireChange(field: any, entityID: EntityId) {
             // Simulates entity_editor.changeTags()
             field.on('change', (changed: Record<string, string | undefined>) => {
-                const tags = Object.assign({}, context.entity(entityID).tags);
+                const tags = { ...context.entity(entityID).tags };
                 Object.keys(changed).forEach((key) => {
                     if (changed[key] === undefined) {
                         delete tags[key];

@@ -97,7 +97,7 @@ export function coreContext() {
   // Instantiate the connection here because it doesn't require passing in
   // `context` and it's needed for pre-init calls like `preauth`
   let _connection = services.osm;
-  /** @type {ReturnType<coreHistory>} */
+  /** @type {coreHistory} */
   let _history;
   /** @type {ReturnType<coreValidator>} */
   let _validator;
@@ -316,6 +316,7 @@ export function coreContext() {
 
   /* Graph */
   context.hasEntity = (id) => _history.graph().hasEntity(id);
+  /** @type {import('./graph').coreGraph['entity']} */
   context.entity = (id) => _history.graph().entity(id);
 
 
@@ -365,7 +366,7 @@ export function coreContext() {
 
   /** @type {string[]} */
   let _copyIDs = [];
-  /** @type {GetSet<iD.Context, string[]>} */
+  /** @type {GetSet<iD.Context, import('../osm').EntityId[]>} */
   context.copyIDs = function(val) {
     if (!arguments.length) return _copyIDs;
     _copyIDs = val;
@@ -444,8 +445,7 @@ export function coreContext() {
   let _container = d3_select(null);
   /** @type {'light' | 'dark'} */
   let _theme;
-
-  /** @type {GetSet<iD.Context, typeof _container>} */
+  /** @type {GetSet<typeof context, typeof _container>} */
   context.container = function(val) {
     if (!arguments.length) return _container;
     _container = val;
@@ -566,10 +566,10 @@ export function coreContext() {
     // of instantiation shouldn't matter.
     function instantiateInternal() {
 
-      _history = coreHistory(context);
-      context.graph = _history.graph;
-      context.pauseChangeDispatch = _history.pauseChangeDispatch;
-      context.resumeChangeDispatch = _history.resumeChangeDispatch;
+      _history = new coreHistory(context);
+      context.graph = () => _history.graph();
+      context.pauseChangeDispatch = () => _history.pauseChangeDispatch();
+      context.resumeChangeDispatch = () => _history.resumeChangeDispatch();
       context.perform = withDebouncedSave(_history.perform);
       context.replace = withDebouncedSave(_history.replace);
       context.pop = withDebouncedSave(_history.pop);

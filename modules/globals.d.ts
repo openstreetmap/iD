@@ -1,4 +1,9 @@
 declare global {
+  /** opposite transformation of {@link Readonly} */
+  type UnReadonly<T> = {
+    -readonly [P in keyof T]: T[P];
+  };
+
   declare var iD: typeof import('.');
   declare var d3: typeof import('d3');
   declare var VITEST: true;
