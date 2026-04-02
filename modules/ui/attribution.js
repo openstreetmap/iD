@@ -18,7 +18,7 @@ export function uiAttribution(context) {
 
 
     let attributions = div.selectAll('.attribution')
-      .data(data, d => d.id);
+      .data(data.filter(d => d.id !== 'none'), d => d.id);
 
     attributions.exit()
       .remove();
