@@ -16,9 +16,9 @@ export function uiAttribution(context) {
       .attr('class', klass)
       .merge(div);
 
-
+    const NO_IMAGERY = 'none';
     let attributions = div.selectAll('.attribution')
-      .data(data.filter(d => d.id !== 'none'), d => d.id);
+      .data(data.filter(d => d.id !== NO_IMAGERY), d => d.id);
 
     attributions.exit()
       .remove();
