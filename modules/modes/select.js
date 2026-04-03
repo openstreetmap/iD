@@ -279,7 +279,7 @@ export function modeSelect(context, selectedIDs) {
             .on(['\\', 'pause'], focusNextParent)
             .on(uiCmd('⌘↑'), selectParent)
             .on(uiCmd('⌘↓'), selectChild)
-            .on('⎋', esc, true)
+            .on('⎋', esc, true);
 
         d3_select(document)
             .call(keybinding);

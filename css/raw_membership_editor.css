@@ -24,3 +24,9 @@
     opacity: 0.4;
     cursor: not-allowed;
 }
+
+.member-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}

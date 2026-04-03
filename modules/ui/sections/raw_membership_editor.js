@@ -360,23 +360,24 @@ export function uiSectionRawMembershipEditor(context) {
         var selectedIDs = context.selectedIDs();
         if (!selectedIDs.length) return;
 
-        var entity = context.graph().entity(selectedIDs[0]);
-        if (entity.type !== 'relation') return;
+        var entityID = selectedIDs[0];
+        var entity = context.graph().hasEntity(entityID);
+        if (!entity || entity.type !== 'relation') return;
 
-        downloadMembers(entity); 
+        context.loadEntity(entityID);
     }
 
     function selectAllMembers() {
         var graph = context.graph();
         var selectedIDs = context.selectedIDs();
+        if (!selectedIDs.length) return;
         var entity = graph.entity(selectedIDs[0]);
         if (entity.type !== 'relation') return;
 
         var allLoaded = entity.members.every(m => graph.hasEntity(m.id));
-        console.log('allLoaded:', allLoaded);
 
         if (!allLoaded) {
-            alert('Not all members are loaded'); 
+            context.ui().flash(t('raw_membership_editor.not_all_members_loaded'));
             return;
         }
 
@@ -385,7 +386,7 @@ export function uiSectionRawMembershipEditor(context) {
             .map(m => m.id);
 
         context.enter(
-            modeSelect(context, { selection: memberIDs })
+            modeSelect(context, memberIDs)
         );
     }
 
@@ -409,7 +410,7 @@ export function uiSectionRawMembershipEditor(context) {
             return;
         }
 
-        context.enter(modeSelect(context, memberIDs));  
+        context.enter(modeSelect(context, memberIDs));
     }
 
     function renderDisclosureContent(selection) {
@@ -428,9 +429,9 @@ export function uiSectionRawMembershipEditor(context) {
 
         // Buttons data
         var btnData = [
-            { type: 'load', label: '📥', title: 'Load all members' },
-            { type: 'selectLoaded', label: '🗃️', title: 'Select loaded members' },
-            { type: 'selectAll', label: '✅', title: 'Select all members' }
+            { type: 'load', icon: '#iD-icon-plus', title: 'Load all members' },
+            { type: 'selectLoaded', icon: '#iD-icon-note', title: 'Select loaded members' },
+            { type: 'selectAll', icon: '#iD-icon-apply', title: 'Select all members' }
         ];
 
         var buttons = controls.selectAll('button')
@@ -438,14 +439,17 @@ export function uiSectionRawMembershipEditor(context) {
 
         var buttonsEnter = buttons.enter()
             .append('button')
-            .attr('class', d => 'member-btn member-btn-' + d.type)
-            .text(d => d.label)
-            .attr('title', d => d.title);
+            .attr('type', 'button')
+            .attr('class', function(d) { return 'member-btn member-btn-' + d.type; })
+            .attr('title', function(d) { return d.title; })
+            .each(function(d) {
+                d3_select(this).call(svgIcon(d.icon));
+            });
 
         buttons = buttons.merge(buttonsEnter);
 
         buttons.on('click', function(event, d) {
-            if (d3_select(this).classed('disabled')) return;
+            if (this.disabled) return;
             if (d.type === 'load') {
                 loadAllMembers();
             } else if (d.type === 'selectLoaded') {
@@ -454,16 +458,31 @@ export function uiSectionRawMembershipEditor(context) {
                 selectAllMembers();
             }
         });
-        buttons.classed('disabled', function(d) {
-            if (d.type !== 'selectAll') return false;
 
-            var selectedIDs = context.selectedIDs();
-            if (!selectedIDs.length) return true;
+        buttons.each(function(d) {
+            var isDisabled = false;
 
-            var entity = context.graph().entity(selectedIDs[0]);
-            if (entity.type !== 'relation') return true;
+            if (d.type === 'selectAll') {
+                var selectedIDs = context.selectedIDs();
+                if (!selectedIDs.length) {
+                    isDisabled = true;
+                } else {
+                    var entity = context.graph().hasEntity(selectedIDs[0]);
+                    if (!entity || entity.type !== 'relation') {
+                        isDisabled = true;
+                    } else {
+                        isDisabled = !entity.members.every(m =>
+                            context.graph().hasEntity(m.id)
+                        );
+                    }
+                }
+            }
 
-            return !entity.members.every(m => context.graph().hasEntity(m.id));
+            d3_select(this)
+                .classed('disabled', isDisabled)
+                .attr('disabled', isDisabled ? true : null)
+                .attr('aria-disabled', isDisabled ? 'true' : null)
+                .attr('tabindex', isDisabled ? -1 : null);
         });
 
         var list = selection.selectAll('.member-list')
