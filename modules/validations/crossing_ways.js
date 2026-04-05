@@ -409,7 +409,6 @@ export function validationCrossingWays(context) {
         }
 
         // Differentiate based on the loc rounded to 4 digits, since two ways can cross multiple times.
-
         var uniqueID = crossing.crossPoint[0].toFixed(4) + ',' + crossing.crossPoint[1].toFixed(4);
 
         return new validationIssue({
