@@ -130,6 +130,7 @@ describe('iD.rendererFeatures', function() {
             iD.osmWay({id: 'garage2', tags: {area: 'yes', amenity: 'parking', parking: 'sheds'}, version: 1}),
             iD.osmWay({id: 'garage3', tags: {area: 'yes', amenity: 'parking', parking: 'carports'}, version: 1}),
             iD.osmWay({id: 'garage4', tags: {area: 'yes', amenity: 'parking', parking: 'garage_boxes'}, version: 1}),
+            iD.osmWay({id: 'building_construction', tags: {building: 'construction'}, version: 1}),
 
             // Indoor
             iD.osmWay({id: 'room', tags: {area: 'yes', indoor: 'room'}, version: 1}),
@@ -330,7 +331,7 @@ describe('iD.rendererFeatures', function() {
             ]);
 
             dontMatch('buildings', [
-                'building_no', 'point_bar', 'motorway', 'service', 'path',
+                'building_no', 'building_construction', 'point_bar', 'motorway', 'service', 'path',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
@@ -475,7 +476,7 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
 
             doMatch('rail', [
-                'point_rail_station', 'railway', 'rail_landuse', 'rail_disused'
+                'point_rail_station', 'railway', 'rail_landuse'
             ]);
 
             dontMatch('rail', [
@@ -507,7 +508,7 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
 
             doMatch('past_future', [
-                'point_old_rail_station', 'rail_disused',
+                'building_construction', 'point_old_rail_station', 'rail_disused',
                 'motorway_construction', 'cycleway_proposed', 'landuse_construction'
             ]);
 

@@ -56,6 +56,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix a bug that caused `step_count` to be set to `NaN` when merging features with non-numeric step count values ([#12110], thanks [@JaiswalShivang])
 * Fix a bug that caused duplicates of new notes to appear when such a note is dragged on the map ([#9092])
 * Prevent keyboard shortcuts from triggering an additional input after their action is performed ([#9071])
+* Include `railway` and `building` features with lifecycle status only in _past/future_ features category ([#9058])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -66,6 +67,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
 * Add type annotations to `context.js` module ([#11589], thanks [@k-yle])
 
+[#9058]: https://github.com/openstreetmap/iD/issues/9058
 [#9071]: https://github.com/openstreetmap/iD/issues/9071
 [#9092]: https://github.com/openstreetmap/iD/issues/9092
 [#9406]: https://github.com/openstreetmap/iD/issues/9406
@@ -83,7 +85,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12120]: https://github.com/openstreetmap/iD/issues/12120
 [#12139]: https://github.com/openstreetmap/iD/pull/12139
 [#12176]: https://github.com/openstreetmap/iD/pull/12176
-
 
 
 # 2.39.5
