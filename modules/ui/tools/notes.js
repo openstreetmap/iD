@@ -34,8 +34,10 @@ export function uiToolNotes(context) {
         return context.map().notesEditable() && mode && mode.id !== 'save';
     }
 
-    context.keybinding().on(mode.key, function() {
+    context.keybinding().on(mode.key, function(d3_event) {
         if (!enabled()) return;
+
+        d3_event.preventDefault();
 
         if (mode.id === context.mode().id) {
             context.enter(modeBrowse(context));

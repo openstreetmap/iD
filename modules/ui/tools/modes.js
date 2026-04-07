@@ -58,8 +58,10 @@ export function uiToolDrawModes(context) {
     }
 
     modes.forEach(function(mode) {
-        context.keybinding().on(mode.key, function() {
+        context.keybinding().on(mode.key, function(d3_event) {
             if (!enabled(mode)) return;
+
+            d3_event.preventDefault();
 
             if (mode.id === context.mode().id) {
                 context.enter(modeBrowse(context));
