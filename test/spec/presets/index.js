@@ -1,3 +1,5 @@
+import { locationManager, presetIndex } from '../../../modules';
+
 describe('iD.presetIndex', function () {
     var _savedPresets, _savedAreaKeys;
 
@@ -422,6 +424,36 @@ describe('iD.presetIndex', function () {
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(presetData)]
             );
             _server.respond();
+        });
+    });
+
+    describe('PresetIndex.recents', () => {
+        it('fills all recent slots even when some remembered presets are not available in the current region (#11405)', () => {
+            const testIndex = presetIndex();
+
+            locationManager.locationSetsAt = () => ({ 'world': true, 'us_only': false });
+
+            const p1 = { id: 'p1', matchGeometry: () => true, locationSetID: 'world' };
+            const p2 = { id: 'p2', matchGeometry: () => true, locationSetID: 'us_only' }; // Invalid
+            const p3 = { id: 'p3', matchGeometry: () => true, locationSetID: 'world' };
+            const p4 = { id: 'p4', matchGeometry: () => true, locationSetID: 'us_only' }; // Invalid
+            const p5 = { id: 'p5', matchGeometry: () => true, locationSetID: 'world' };
+
+            testIndex.recent = () => ({
+                matchGeometry: () => ({
+                    collection: [p1, p2, p3, p4, p5]
+                })
+            });
+
+            const locCoords = [0, 51];
+            const result = testIndex.defaults('point', 10, true, locCoords);
+
+            const ids = result.collection.map(p => p.id);
+
+            expect(ids).to.include('p5');
+            expect(ids).to.not.include('p2');
+            expect(ids).to.not.include('p4');
+            expect(ids.slice(0, 3)).to.eql(['p1', 'p3', 'p5']);
         });
     });
 

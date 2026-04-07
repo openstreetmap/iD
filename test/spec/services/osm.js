@@ -1,3 +1,4 @@
+import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 import { promisify } from 'node:util';
 import { fakeServer } from 'nise';
@@ -32,7 +33,7 @@ describe('iD.serviceOsm', function () {
         connection = context.connection();
         connection.switch({ url: 'https://www.openstreetmap.org' });
         connection.reset();
-        spy = sinon.spy();
+        spy = fn();
     });
 
     afterEach(function() {
@@ -240,7 +241,7 @@ describe('iD.serviceOsm', function () {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var spy = sinon.spy();
+            const spy = fn();
             connection.loadTiles(context.projection, spy);
 
             await setTimeout(500);

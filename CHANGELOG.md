@@ -36,7 +36,89 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
-# Unreleased (2.39.0-dev)
+# Unreleased (2.40.0-dev)
+
+#### :sparkles: Usability & Accessibility
+* Render shared bicycle/foot paths with a dedicated colour ([#10256], thanks [@k-yle])
+#### :scissors: Operations
+* Correctly split a way on all selected vertices when three or more nodes are selected ([#12120])
+* Create fewer points when circularizing small features (and vice versa): the number of vertices in the resulting circle is now dynamic between a 12 and 32 depending on the radius of the circle (instead of always resulting in 19 nodes) ([#12139])
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+* Treat most aerialways as part of the routable network when checking other ways' connectivity ([#9406])
+#### :bug: Bugfixes
+* Fix crash when restoring changes ([#12176], thanks [@k-yle])
+* Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
+* Prevent duplicate nodes from being created while using spacebar key to draw a way ([#12051])
+* Fix user images and upload help text from showing up as duplicates in upload dialog ([#12063])
+* Fix some tags automatically deleted when re-selecting the same preset ([#12070], thanks [@k-yle])
+* Fix crash when a checkbox-field is rendered using a custom (non-`yes/no`) value ([#12078])
+* Fix a bug that caused `step_count` to be set to `NaN` when merging features with non-numeric step count values ([#12110], thanks [@JaiswalShivang])
+* Fix a bug that caused duplicates of new notes to appear when such a note is dragged on the map ([#9092])
+* Prevent keyboard shortcuts from triggering an additional input after their action is performed ([#9071])
+* Include `railway` and `building` features with lifecycle status only in _past/future_ features category ([#9058])
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* Standardize tooltips in combo boxes: always show (full) raw tag, don't duplicate the already rendered titles, and show descriptions from wiki/taginfo where available ([#12010], thanks [@tordans])
+* Use full width for the dropdown box for the values of the `access` field ([#12065])
+#### :hammer: Development
+* Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
+* Add type annotations to `context.js` module ([#11589], thanks [@k-yle])
+
+[#9058]: https://github.com/openstreetmap/iD/issues/9058
+[#9071]: https://github.com/openstreetmap/iD/issues/9071
+[#9092]: https://github.com/openstreetmap/iD/issues/9092
+[#9406]: https://github.com/openstreetmap/iD/issues/9406
+[#10256]: https://github.com/openstreetmap/iD/pull/10256
+[#11589]: https://github.com/openstreetmap/iD/pull/11589
+[#12010]: https://github.com/openstreetmap/iD/pull/12010
+[#12050]: https://github.com/openstreetmap/iD/issues/12050
+[#12051]: https://github.com/openstreetmap/iD/issues/12051
+[#12058]: https://github.com/openstreetmap/iD/pull/12058
+[#12063]: https://github.com/openstreetmap/iD/issues/12063
+[#12065]: https://github.com/openstreetmap/iD/issues/12065
+[#12070]: https://github.com/openstreetmap/iD/issues/12070
+[#12078]: https://github.com/openstreetmap/iD/issues/12078
+[#12110]: https://github.com/openstreetmap/iD/issues/12110
+[#12120]: https://github.com/openstreetmap/iD/issues/12120
+[#12139]: https://github.com/openstreetmap/iD/pull/12139
+[#12176]: https://github.com/openstreetmap/iD/pull/12176
+
+
+# 2.39.5
+##### 2026-03-23
+
+* Fix regression where some strings (like some section headings) are not rendered correctly ([#12083])
+
+
+# 2.39.4
+##### 2026-03-23
+
+* Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
+* Fix user images and upload help text from showing up as duplicates in upload dialog ([#12063])
+* Fix crash when a checkbox-field is rendered using a custom (non-`yes/no`) value ([#12078])
+
+
+# 2.39.3
+##### 2026-03-19
+
+* Revert: When changing presets, delete tags from the old preset which are not in the new preset ([#12068])
+
+[#12068]: https://github.com/openstreetmap/iD/issues/12068
+
+
+# 2.39.2
+##### 2026-03-19
+
+* Fix a bug where iD would crash when the "Style Options" submenu is expanded during startup ([0241c765])
+
+[0241c765]: https://github.com/openstreetmap/iD/commit/0241c7653d4a93692f59b7aa1021242e63a3de72)
+
+
+# 2.39.0
+##### 2026-03-19
 
 #### :sparkles: Usability & Accessibility
 * Increase number of displayed _recently used presets_ to 8 (from 4) ([#9545], thanks [@k-yle])
@@ -63,11 +145,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix a bug where the _squaring_ operation would remove a whole corner if it had duplicate vertices (same coordinates, but different node ids) at that point ([#9155])
 * Fix crash when uploading changesets with more than 10,000 features ([#11388], thanks [@k-yle])
 * Preserve relation memberships when an area is automatically converted from a closed way to a multipolygon or vice versa during a merge or split operation ([#9064], [#12024])
+* Make sure tooltips of the map menu are not clipped on the top/bottom of the map ([#11017], thanks [@mykh-hailo])
 #### :earth_asia: Localization
 * Support territory-level phone hints ([#10904], thanks [@Vectorial1024])
 * Add phone and address format for Moldova ([#11965], [#11976], thanks [@Oni-DOS])
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * When changing presets, delete tags from the old preset which are not in the new preset ([#11696], thanks [@k-yle])
 #### :hammer: Development
@@ -76,6 +157,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Replace `lodash` with `es-toolkit` ([#12016], thanks [@tordans])
 * Replace `fast-deep-equals` with `fast-equals` ([#12021], thanks [@tordans])
 * Add type definitions to some util functions ([#11993], thanks [@k-yle])
+* Localizer module: allow string replacements to use callback functions ([#11347])
 
 
 [#8265]: https://github.com/openstreetmap/iD/issues/8265
@@ -89,8 +171,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9903]: https://github.com/openstreetmap/iD/pull/9903
 [#10904]: https://github.com/openstreetmap/iD/pull/10904
 [#10958]: https://github.com/openstreetmap/iD/issues/10958
+[#11017]: https://github.com/openstreetmap/iD/issues/11017
 [#11052]: https://github.com/openstreetmap/iD/pull/11052
 [#11329]: https://github.com/openstreetmap/iD/issues/11329
+[#11347]: https://github.com/openstreetmap/iD/pull/11347
 [#11388]: https://github.com/openstreetmap/iD/pull/11388
 [#11645]: https://github.com/openstreetmap/iD/pull/11645
 [#11661]: https://github.com/openstreetmap/iD/pull/11661
@@ -112,9 +196,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@Vectorial1024]: https://github.com/Vectorial1024
 [@Oni-DOS]: https://github.com/Oni-DOS
 [@sezerbozbiyik]: https://github.com/sezerbozbiyik
+[@mykh-hailo]: https://github.com/mykh-hailo
+[@Sembauke]: https://github.com/Sembauke
 
 
-# 2.38.0-dev
+# 2.38.0
 ##### 2026-03-02
 
 #### :sparkles: Usability & Accessibility
@@ -163,6 +249,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Replace deprecated `document.createEvent`/`initEvent` with modern Event constructor ([#11871], thanks [@JaiswalShivang])
 * Fix crash in country combo field when entering unrecognized ISO country codes ([#11904], thanks [@JaiswalShivang])
 * Upgrade clipboard functionality with modern Clipboard API ([#11869], thanks [@tulavamsidheeraj])
+* Ensure the recent presets list is always full by filtering for location before limiting the count. ([#11405], thanks [@Razen04])
 
 
 [#8464]: https://github.com/openstreetmap/iD/issues/8464
@@ -202,6 +289,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [ffc7e2135]: https://github.com/openstreetmap/iD/commit/ffc7e2135
 [be0a20e59]: https://github.com/openstreetmap/iD/commit/be0a20e59
 [b06496780]: https://github.com/openstreetmap/iD/commit/b06496780
+[#11405]: https://github.com/openstreetmap/iD/issues/11405
 [#id-tagging-schema/pull/1507]: https://github.com/openstreetmap/id-tagging-schema/pull/1507
 [@ilias52730]: https://github.com/ilias52730
 [@Razen04]: https://github.com/Razen04

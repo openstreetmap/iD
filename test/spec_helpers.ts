@@ -1,13 +1,8 @@
 import { beforeAll, beforeEach, afterEach } from 'vitest';
-import { use } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 import 'happen';
 import fetchMock from 'fetch-mock';
 import 'fake-indexeddb/auto';
 import envs from '../config/envs.js';
-
-use(sinonChai);
 
 declare var global: typeof globalThis;
 declare var jsdom: typeof globalThis;
@@ -15,7 +10,6 @@ declare var jsdom: typeof globalThis;
 global.before = beforeEach;
 global.after = afterEach;
 global.fetchMock = fetchMock;
-global.sinon = sinon;
 global.VITEST = true;
 
 // create global variables for this data, to match what the esbuild config does

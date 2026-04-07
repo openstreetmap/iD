@@ -210,8 +210,8 @@ export function actionJoin(ids) {
 
     function canSumTags(key, tagsA, tagsB) {
         return osmSummableTags.has(key) &&
-            isFinite(tagsA[key] &&
-            isFinite(tagsB[key]));
+            isFinite(tagsA[key]) &&
+            isFinite(tagsB[key]);
     }
 
 

@@ -368,7 +368,9 @@ describe('iD.validations.crossing_ways', function () {
 
     it('flags minor road crossing waterway', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential' }, { waterway: 'river' });
-        verifySingleCrossingIssue(validate(), { ford: 'yes' });
+        const issues = validate();
+        verifySingleCrossingIssue(issues, { ford: 'yes' });
+        expect(issues[0].data.featureTypes).to.eql(['highway', 'waterway']);
     });
 
     it('flags major road crossing waterway', function() {

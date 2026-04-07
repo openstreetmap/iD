@@ -25,7 +25,7 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
                     .forEach(key => preserveKeys.push(key));
             }
 
-            if (oldPreset) {
+            if (oldPreset && (oldPreset.id !== newPreset.id)) {
                 // 'field-keys' are keys used by fields (different to the keys used by preset itself)
                 const oldPresetFieldKeys = [
                     ...oldPreset.fields(loc),

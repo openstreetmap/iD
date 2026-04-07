@@ -35,7 +35,7 @@ export function uiPresetList(context) {
 
         var message = messagewrap
             .append('h2')
-            .call(t.append('inspector.choose'));
+            .call(t.addOrUpdate('inspector.choose'));
 
         messagewrap
             .append('button')
@@ -97,7 +97,7 @@ export function uiPresetList(context) {
             var results, messageText;
             if (value.length) {
                 results = presets.search(value, entityGeometries()[0], _currLoc);
-                messageText = t.html('inspector.results', {
+                messageText = t.addOrUpdate('inspector.results', {
                     n: results.collection.length,
                     search: value
                 });
@@ -105,10 +105,10 @@ export function uiPresetList(context) {
                 var entityPresets = _entityIDs.map(entityID =>
                     presetManager.match(context.graph().entity(entityID), context.graph()));
                 results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets);
-                messageText = t.html('inspector.choose');
+                messageText = t.addOrUpdate('inspector.choose');
             }
             list.call(drawList, results);
-            message.html(messageText);
+            message.call(messageText);
         }
 
         var searchWrap = selection

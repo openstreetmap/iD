@@ -38,10 +38,9 @@ export const SIDE_ANGLE_OFFSET = { left: 180, right: 0 };
  */
 export function osmNode() {
     if (!(this instanceof osmNode)) {
-        return (new osmNode()).initialize(arguments);
-    } else if (arguments.length) {
-        this.initialize(arguments);
+        return new osmNode(...arguments);
     }
+    this.initialize(arguments);
 }
 
 osmEntity.node = osmNode;

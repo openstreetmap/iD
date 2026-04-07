@@ -115,6 +115,7 @@ export function uiEditMenu(context) {
 
         buttonsEnter.each(function(d) {
             var tooltip = uiTooltip()
+                .scrollContainer(context.container().select('.over-map'))
                 .heading(() => d.title)
                 .title(d.tooltip)
                 .keys([d.keys[0]]);

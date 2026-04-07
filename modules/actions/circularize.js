@@ -1,5 +1,5 @@
 import { median as d3_median } from 'd3-array';
-
+import { geoLength } from 'd3-geo';
 import {
     polygonArea as d3_polygonArea,
     polygonHull as d3_polygonHull,
@@ -9,12 +9,14 @@ import {
 import { geoVecInterp, geoVecLength } from '../geo';
 import { osmNode } from '../osm/node';
 import { utilArrayUniq } from '../util';
-import { geoVecLengthSquare } from '../geo/vector';
+import { radiansToMeters } from '../ui/panels';
 
 
-export function actionCircularize(wayId, projection, maxAngle) {
-    maxAngle = (maxAngle || 20) * Math.PI / 180;
+const MAX_SEGMENT_LENGTH = 4;
+export const MIN_VERTICES = 12;
+export const MAX_VERTICES = 32;
 
+export function actionCircularize(wayId, projection) {
 
     var action = function(graph, t) {
         if (t === null || !isFinite(t)) t = 1;
@@ -41,6 +43,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
             ? geoVecInterp(points[0], points[1], 0.5)
             : d3_polygonCentroid(points);
         const radius = d3_median(points, p => geoVecLength(centroid, p));
+        const maxAngle = getMaxAngle(centroid, radius);
         const sign = d3_polygonArea(points) > 0 ? 1 : -1;
         let ids, i, j, k;
 
@@ -196,6 +199,25 @@ export function actionCircularize(wayId, projection, maxAngle) {
     };
 
 
+    /**
+     * Returns the maximum internal angle of a regular polygon with
+     * the given centroid and radius such that the length of the segments
+     * are just shorter than approximately MAX_SEGMENT_LENGTH. But
+     * never returns fewer than MIN_VERTICES or more than MAX_VERTICES.
+     * #12139
+     */
+    function getMaxAngle(centroid, radius) {
+        const radiusM = radiansToMeters(geoLength({ type: 'LineString', coordinates: [
+            projection.invert(centroid),
+            projection.invert([centroid[0] + radius, centroid[1]])
+        ]}));
+        const numberOfPoints = Math.min(MAX_VERTICES, Math.max(MIN_VERTICES,
+            Math.round(radiusM * Math.PI / MAX_SEGMENT_LENGTH) * 2
+        ));
+        return Math.PI * 2 / (numberOfPoints - 1);
+    }
+
+
     action.makeConvex = function(graph) {
         var way = graph.entity(wayId);
         var nodes = utilArrayUniq(graph.childNodes(way));
@@ -244,18 +266,19 @@ export function actionCircularize(wayId, projection, maxAngle) {
         if (hull.length !== points.length || hull.length < 3){
             return false;
         }
-        var centroid = d3_polygonCentroid(points);
-        var radius = geoVecLengthSquare(centroid, points[0]);
+        const centroid = d3_polygonCentroid(points);
+        const radius = d3_median(points, p => geoVecLength(centroid, p));
+        const maxAngle = getMaxAngle(centroid, radius);
 
         var i, actualPoint;
 
         // compare distances between centroid and points
         for (i = 0; i < hull.length; i++){
             actualPoint = hull[i];
-            var actualDist = geoVecLengthSquare(actualPoint, centroid);
+            var actualDist = geoVecLength(actualPoint, centroid);
             var diff = Math.abs(actualDist - radius);
             //compare distances with epsilon-error (5%)
-            if (diff > 0.05*radius) {
+            if (diff > 0.05 * radius) {
                 return false;
             }
         }

@@ -798,6 +798,7 @@ summary.hide-toggle {
     font-size: 14px;
     font-weight: bold;
     line-height: 25px;
+    width: fit-content;
 }
 details.disclosure-wrap[open] summary.hide-toggle {
     margin-bottom: 10px;
@@ -2363,11 +2364,8 @@ input.date-selector {
     user-select: none;
 }
 
-.restriction-help span {
-    margin: 2px;
-}
-
 .restriction-help .qualifier {
+    margin: 2px;
     color: #666;
     font-weight: bold;
 }
@@ -4864,6 +4862,12 @@ img.tile-debug {
     }
 }
 
+.attribution-wrap .attribution span {
+    background-color: rgba(0,0,0,0.33);
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+
 .attribution-wrap .attribution .source-image {
     height: 20px;
     vertical-align: middle;
@@ -5015,7 +5019,7 @@ img.tile-debug {
     margin-left: 5px;
 }
 
-.user-list a:not(:last-child):after {
+.user-list a:not(:last-of-type):after {
     content: ', ';
 }
 

@@ -293,7 +293,7 @@ function parseNoteJSON(payload, callback, _options) {
         var note = new osmNote(props);
         var item = encodeNoteRtree(note);
         _noteCache.note[note.id] = note;
-        updateRtree(item, true);
+        updateRtree(item, item);
 
         return note;
     });
@@ -301,11 +301,11 @@ function parseNoteJSON(payload, callback, _options) {
 }
 
 // replace or remove note from rtree
-function updateRtree(item, replace) {
+function updateRtree(item, replaceItem) {
     _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
 
-    if (replace) {
-        _noteCache.rtree.insert(item);
+    if (replaceItem) {
+        _noteCache.rtree.insert(replaceItem);
     }
 }
 
@@ -1278,8 +1278,9 @@ export default {
     replaceNote: function(note) {
         if (!(note instanceof osmNote) || !note.id) return;
 
+        const item = encodeNoteRtree(_noteCache.note[note.id] || note);
         _noteCache.note[note.id] = note;
-        updateRtree(encodeNoteRtree(note), true);  // true = replace
+        updateRtree(item, encodeNoteRtree(note));
         return note;
     },
 

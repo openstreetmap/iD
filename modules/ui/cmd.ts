@@ -4,7 +4,7 @@ import { utilDetect } from '../util/detect';
 
 // Translate a MacOS key command into the appropriate Windows/Linux equivalent.
 // For example, ⌘Z -> Ctrl+Z
-export var uiCmd = function (code) {
+export function uiCmd(code: string) {
     var detected = utilDetect();
 
     if (detected.os === 'mac') {
@@ -16,7 +16,7 @@ export var uiCmd = function (code) {
     }
 
     var result = '',
-        replacements = {
+        replacements: Record<string, string> = {
             '⌘': 'Ctrl',
             '⇧': 'Shift',
             '⌥': 'Alt',
@@ -37,12 +37,12 @@ export var uiCmd = function (code) {
 
 
 // return a display-focused string for a given keyboard code
-uiCmd.display = function(code) {
+uiCmd.display = function(code: string) {
     if (code.length !== 1) return code;
 
     var detected = utilDetect();
     var mac = (detected.os === 'mac');
-    var replacements = {
+    var replacements: Record<string, string> = {
         '⌘': mac ? '⌘ ' + t('shortcuts.key.cmd')    : t('shortcuts.key.ctrl'),
         '⇧': mac ? '⇧ ' + t('shortcuts.key.shift')  : t('shortcuts.key.shift'),
         '⌥': mac ? '⌥ ' + t('shortcuts.key.option') : t('shortcuts.key.alt'),

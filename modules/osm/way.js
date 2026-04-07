@@ -12,10 +12,9 @@ import { utilArrayUniq, utilCheckTagDictionary } from '../util';
  */
 export function osmWay() {
     if (!(this instanceof osmWay)) {
-        return (new osmWay()).initialize(arguments);
-    } else if (arguments.length) {
-        this.initialize(arguments);
+        return new osmWay(...arguments);
     }
+    this.initialize(arguments);
 }
 
 

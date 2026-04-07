@@ -1,4 +1,3 @@
-import serviceKeepRight from './keepRight';
 import serviceOsmose from './osmose';
 import serviceMapillary from './mapillary';
 import serviceMapRules from './maprules';
@@ -19,7 +18,6 @@ import servicePanoramax from './panoramax';
 
 export let services = {
   geocoder: serviceNominatim,
-  keepRight: serviceKeepRight,
   osmose: serviceOsmose,
   mapillary: serviceMapillary,
   nsi: serviceNsi,
@@ -38,7 +36,6 @@ export let services = {
 };
 
 export {
-  serviceKeepRight,
   serviceOsmose,
   serviceMapillary,
   serviceMapRules,
