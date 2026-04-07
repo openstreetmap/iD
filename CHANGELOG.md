@@ -57,6 +57,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix a bug that caused duplicates of new notes to appear when such a note is dragged on the map ([#9092])
 * Prevent keyboard shortcuts from triggering an additional input after their action is performed ([#9071])
 * Include `railway` and `building` features with lifecycle status only in _past/future_ features category ([#9058])
+* Fix false positives in URL validation ([#12030], thanks [@bhavyaKhatri2703])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -74,6 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10256]: https://github.com/openstreetmap/iD/pull/10256
 [#11589]: https://github.com/openstreetmap/iD/pull/11589
 [#12010]: https://github.com/openstreetmap/iD/pull/12010
+[#12030]: https://github.com/openstreetmap/iD/pull/12030
 [#12050]: https://github.com/openstreetmap/iD/issues/12050
 [#12051]: https://github.com/openstreetmap/iD/issues/12051
 [#12058]: https://github.com/openstreetmap/iD/pull/12058
