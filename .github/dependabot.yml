@@ -37,6 +37,10 @@ updates:
         patterns:
           - "cldr*"
         applies-to: version-updates
+      vite:
+        patterns:
+          - "vite*"
+        applies-to: version-updates
     labels:
       - "chore-dependabot"
   - package-ecosystem: "github-actions"
