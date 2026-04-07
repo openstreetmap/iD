@@ -36,7 +36,7 @@ export function svgNotes(projection, context, dispatch) {
         if (services.osm && !_osmService) {
             _osmService = services.osm;
             _osmService.on('loadedNotes', throttledRedraw);
-            context.history().on('change.map', updateMarkers);
+            context.history().on('change.render-notes', updateMarkers);
         } else if (!services.osm && _osmService) {
             _osmService = null;
         }
