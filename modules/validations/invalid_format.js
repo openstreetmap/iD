@@ -118,8 +118,26 @@ export function validationFormatting() {
             entityIds: [entity.id]
         };
 
+        const urlValidationKeys = new Set([
+            'website',
+            'url',
+            'contact:website',
+            'contact:url',
+            'source:website',
+            'source:url',
+            'image',
+            'wikimedia_commons',
+            'brand:website',
+            'operator:website',
+            'network:website',
+            'website:en',
+            'website:fr',
+            'website:menu',
+            'post_office:website',
+        ]);
+
         Object.entries(entity.tags).map(function([key, tag]) {
-            if (!/\b(website|url)\b|^image$/i.test(key)) return null;
+            if (!urlValidationKeys.has(key)) return null;
             if (!tag) return null;
             const value = tag.trim();
             if (!value) return null;
