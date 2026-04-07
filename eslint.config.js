@@ -74,6 +74,7 @@ export default tseslint.config(
       'no-promise-executor-return': 'error',
       'no-proto': 'error',
       'no-prototype-builtins': 'off',
+      'no-restricted-globals': ['error', 'message'],
       'no-restricted-properties': 'error',
       'no-return-assign': 'off',
       'no-return-await': 'error',
