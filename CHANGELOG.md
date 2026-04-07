@@ -53,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix some tags automatically deleted when re-selecting the same preset ([#12070], thanks [@k-yle])
 * Fix crash when a checkbox-field is rendered using a custom (non-`yes/no`) value ([#12078])
 * Fix a bug that caused `step_count` to be set to `NaN` when merging features with non-numeric step count values ([#12110], thanks [@JaiswalShivang])
+* Fix a bug that caused duplicates of new notes to appear when such a note is dragged on the map ([#9092])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -63,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
 * Add type annotations to `context.js` module ([#11589], thanks [@k-yle])
 
+[#9092]: https://github.com/openstreetmap/iD/issues/9092
 [#9406]: https://github.com/openstreetmap/iD/issues/9406
 [#10256]: https://github.com/openstreetmap/iD/pull/10256
 [#11589]: https://github.com/openstreetmap/iD/pull/11589
