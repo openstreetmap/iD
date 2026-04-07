@@ -524,13 +524,13 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
 
             doMatch('others', [
-                'fence', 'pipeline'
+                'fence', 'pipeline', 'inner2'
             ]);
 
             dontMatch('others', [
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
-                'motorway_construction', 'retail', 'outer', 'inner1', 'inner2', 'inner3'
+                'motorway_construction', 'retail', 'outer', 'inner1', 'inner3'
             ]);
         });
     });
@@ -577,7 +577,7 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
 
             expect(features.isHidden(outer, graph, outer.geometry(graph))).to.be.true;     // #2548
-            expect(features.isHidden(inner1, graph, inner1.geometry(graph))).to.be.true;   // #2548
+            expect(features.isHidden(inner1, graph, inner1.geometry(graph))).to.be.false;  // #9065
             expect(features.isHidden(inner2, graph, inner2.geometry(graph))).to.be.true;   // #2548
             expect(features.isHidden(inner3, graph, inner3.geometry(graph))).to.be.false;  // #2887
         });
