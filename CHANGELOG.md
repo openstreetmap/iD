@@ -47,6 +47,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Treat most aerialways as part of the routable network when checking other ways' connectivity ([#9406])
 #### :bug: Bugfixes
+* Fix crash when restoring changes ([#12176], thanks [@k-yle])
 * Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
 * Prevent duplicate nodes from being created while using spacebar key to draw a way ([#12051])
 * Fix user images and upload help text from showing up as duplicates in upload dialog ([#12063])
@@ -81,6 +82,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12110]: https://github.com/openstreetmap/iD/issues/12110
 [#12120]: https://github.com/openstreetmap/iD/issues/12120
 [#12139]: https://github.com/openstreetmap/iD/pull/12139
+[#12176]: https://github.com/openstreetmap/iD/pull/12176
 
 
 
