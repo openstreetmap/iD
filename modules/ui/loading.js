@@ -21,7 +21,7 @@ export function uiLoading(context) {
       .attr('class', 'loader')
       .attr('src', context.imagePath('loader-white.gif'));
 
-    if (typeof message === 'string') {
+    if (typeof _message === 'string') {
       loadertext
         .append('h3')
         .text(_message);

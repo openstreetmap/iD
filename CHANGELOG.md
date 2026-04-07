@@ -36,6 +36,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
+# 2.39.6
+##### 2026-04-07
+
+* Fix crash when restoring changes ([#12176], thanks [@k-yle])
+* Fix false positives in URL validation ([#12030], thanks [@bhavyaKhatri2703])
+
+[#12030]: https://github.com/openstreetmap/iD/pull/12030
+[#12176]: https://github.com/openstreetmap/iD/pull/12176
+
+
 # 2.39.5
 ##### 2026-03-23
 

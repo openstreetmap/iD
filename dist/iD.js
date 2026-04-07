@@ -555,10 +555,10 @@
       try {
         new DOMException2();
       } catch (err) {
-        DOMException2 = function(message2, name) {
-          this.message = message2;
+        DOMException2 = function(message, name) {
+          this.message = message;
           this.name = name;
-          var error = Error(message2);
+          var error = Error(message);
           this.stack = error.stack;
         };
         DOMException2.prototype = Object.create(Error.prototype);
@@ -35236,7 +35236,7 @@ ${source}
     "package.json"() {
       package_default = {
         name: "@openstreetmap/id",
-        version: "2.39.5",
+        version: "2.39.6",
         description: "A friendly editor for OpenStreetMap",
         main: "dist/iD.min.js",
         repository: {
@@ -36260,7 +36260,7 @@ ${source}
       _modalSelection = uiModal(selection2, _blocking);
       let loadertext = _modalSelection.select(".content").classed("loading-modal", true).append("div").attr("class", "modal-section fillL");
       loadertext.append("img").attr("class", "loader").attr("src", context.imagePath("loader-white.gif"));
-      if (typeof message === "string") {
+      if (typeof _message === "string") {
         loadertext.append("h3").text(_message);
       } else {
         loadertext.append("h3").call(_message);
@@ -40406,12 +40406,12 @@ Please report this to https://github.com/markedjs/marked.`, e3) {
             findIssues: function(entity, graph, issues) {
               if (this.geometryMatches(entity, graph) && this.matches(entity)) {
                 var severity = Object.keys(selector).indexOf("error") > -1 ? "error" : "warning";
-                var message2 = selector[severity];
+                var message = selector[severity];
                 issues.push(new validationIssue({
                   type: "maprules",
                   severity,
                   message: function() {
-                    return message2;
+                    return message;
                   },
                   entityIds: [entity.id]
                 }));
@@ -41718,8 +41718,8 @@ Please report this to https://github.com/markedjs/marked.`, e3) {
               try {
                 resolved = loco.resolveLocationSet(item.locationSet);
               } catch (err) {
-                const message2 = err instanceof Error ? err.message : err;
-                console.warn(`buildLocationIndex: ${message2}`);
+                const message = err instanceof Error ? err.message : err;
+                console.warn(`buildLocationIndex: ${message}`);
               }
               if (!resolved || !resolved.id)
                 return;
@@ -53280,7 +53280,7 @@ Please report this to https://github.com/markedjs/marked.`, e3) {
       function isValidURL(url, strict = false) {
         try {
           const link2 = new URL(url);
-          return link2.href.includes(url);
+          return link2.protocol.startsWith("http");
         } catch {
           if (strict) return false;
           return /^https?:\/\/\S+$/i.test(url);
@@ -85290,7 +85290,7 @@ ${currentIndent}`
       var presets = _mainPresetIndex.matchAllGeometry(entityGeometries());
       selection2.html("");
       var messagewrap = selection2.append("div").attr("class", "header fillL");
-      var message2 = messagewrap.append("h2").call(_t.addOrUpdate("inspector.choose"));
+      var message = messagewrap.append("h2").call(_t.addOrUpdate("inspector.choose"));
       messagewrap.append("button").attr("class", "preset-choose").attr("title", _entityIDs.length === 1 ? _t("inspector.edit") : _t("inspector.edit_features")).on("click", function() {
         dispatch11.call("cancel", this);
       }).call(svgIcon("#iD-icon-close"));
@@ -85342,7 +85342,7 @@ ${currentIndent}`
           messageText = _t.addOrUpdate("inspector.choose");
         }
         list.call(drawList, results);
-        message2.call(messageText);
+        message.call(messageText);
       }
       var searchWrap = selection2.append("div").attr("class", "search-header");
       searchWrap.call(svgIcon("#iD-icon-search", "pre-text"));
@@ -94090,8 +94090,8 @@ ${currentIndent}`
       selection2.okButton();
     }
     function addErrors(selection2, data) {
-      var message2 = selection2.select(".modal-section.message-text");
-      var items = message2.selectAll(".error-container").data(data);
+      var message = selection2.select(".modal-section.message-text");
+      var items = message.selectAll(".error-container").data(data);
       var enter = items.enter().append("div").attr("class", "error-container");
       enter.append("a").attr("class", "error-description").attr("href", "#").classed("hide-toggle", true).text(function(d2) {
         return d2.msg || _t("save.unknown_error_details");
