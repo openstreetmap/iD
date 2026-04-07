@@ -118,8 +118,8 @@ describe('iD.validations.invalid_format', function () {
             });
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(0);
-        }); 
-          
+        });
+
         it('should suggest moving image URLs to Wikimedia Commons', function() {
             const entity = createPointWithTags({
                 image: 'File:OpenStreetMap-Editor iD Logo.svg'
