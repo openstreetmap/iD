@@ -31,7 +31,7 @@ export function validationFormatting() {
             try {
                 // First try strict WHATWG parsing
                 const link = new URL(url);
-                return link.href.includes(url);
+                return link.protocol.startsWith('http');
             } catch {
                 if (strict) return false;
                 // Fallback: accept if it looks like a valid scheme://something, even if semicolons are present
