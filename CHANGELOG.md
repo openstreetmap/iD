@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.40.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Render shared bicycle/foot paths with a dedicated colour ([#10256], thanks [@k-yle])
 #### :scissors: Operations
 * Correctly split a way on all selected vertices when three or more nodes are selected ([#12120])
 * Create fewer points when circularizing small features (and vice versa): the number of vertices in the resulting circle is now dynamic between a 12 and 32 depending on the radius of the circle (instead of always resulting in 19 nodes) ([#12139])
@@ -63,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add type annotations to `context.js` module ([#11589], thanks [@k-yle])
 
 [#9406]: https://github.com/openstreetmap/iD/issues/9406
+[#10256]: https://github.com/openstreetmap/iD/pull/10256
 [#11589]: https://github.com/openstreetmap/iD/pull/11589
 [#12010]: https://github.com/openstreetmap/iD/pull/12010
 [#12050]: https://github.com/openstreetmap/iD/issues/12050
@@ -75,6 +77,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12110]: https://github.com/openstreetmap/iD/issues/12110
 [#12120]: https://github.com/openstreetmap/iD/issues/12120
 [#12139]: https://github.com/openstreetmap/iD/pull/12139
+
 
 
 # 2.39.5
