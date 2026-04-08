@@ -2,6 +2,7 @@ import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions/change_tags';
+import { osmUrlKeys } from '../osm/tags';
 
 export function validationFormatting() {
     var type = 'invalid_format';
@@ -118,26 +119,8 @@ export function validationFormatting() {
             entityIds: [entity.id]
         };
 
-        const urlValidationKeys = new Set([
-            'website',
-            'url',
-            'contact:website',
-            'contact:url',
-            'source:website',
-            'source:url',
-            'image',
-            'wikimedia_commons',
-            'brand:website',
-            'operator:website',
-            'network:website',
-            'website:en',
-            'website:fr',
-            'website:menu',
-            'post_office:website',
-        ]);
-
         Object.entries(entity.tags).map(function([key, tag]) {
-            if (!urlValidationKeys.has(key)) return null;
+            if (!osmUrlKeys.has(key)) return null;
             if (!tag) return null;
             const value = tag.trim();
             if (!value) return null;
