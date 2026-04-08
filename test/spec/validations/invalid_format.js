@@ -128,21 +128,65 @@ describe('iD.validations.invalid_format', function () {
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(0);
         });
+    });
 
-        it('should suggest moving image URLs to Wikimedia Commons', function() {
+    describe('Wikimedia Commons validation', function() {
+        it.each([
+            'File:OpenStreetMap-Editor iD Logo.svg',
+            'File:100%.svg',
+        ])('should suggest moving image URLs to Wikimedia Commons', function(value) {
             const entity = createPointWithTags({
-                image: 'File:OpenStreetMap-Editor iD Logo.svg'
+                image: value
             });
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(1);
             expect(issues[0].type).to.eql('invalid_format');
-            expect(issues[0].subtype).to.eql('website');
-            const fixes = issues[0].dynamicFixes();
+            expect(issues[0].subtype).to.eql('wikimedia_commons');
+            const fixes = issues[0].dynamicFixes(context);
             expect(fixes).to.have.lengthOf(1);
             issues[0].fixes(context)[0].onClick(context);
             const fixedEntity = context.entity(entity.id);
             expect(fixedEntity.tags.image).to.be.undefined;
             expect(fixedEntity.tags.wikimedia_commons).to.eql(entity.tags.image);
+        });
+
+        it('should not suggest moving tag when image tag contains a semicolon', function() {
+            const entity = createPointWithTags({
+                image: 'https://example.com;File:OpenStreetMap-Editor iD Logo.svg'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(1);
+            expect(issues[0].type).to.eql('invalid_format');
+            expect(issues[0].subtype).to.eql('website'); // still an invalid URL in the tag
+            const fixes = issues[0].dynamicFixes(context);
+            expect(fixes).to.have.lengthOf(0);
+        });
+
+        it('should not suggest moving tag when wikimedia_commons tag is already present', function() {
+            const entity = createPointWithTags({
+                image: 'File:OpenStreetMap-Editor iD Logo.svg',
+                wikimedia_commons: 'Category:OpenStreetMap'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(1);
+            expect(issues[0].subtype).to.eql('website'); // still an invalid URL in the tag
+            const fixes = issues[0].dynamicFixes(context);
+            expect(fixes).to.have.lengthOf(0);
+        });
+
+        it('should propose to remove URL from Wikimedia Commons tag', function() {
+            var entity = createPointWithTags({
+                'wikimedia_commons': 'https://commons.wikimedia.org/wiki/File:OpenStreetMap-Editor_iD_Logo.svg#mw-jump-to-license'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(1);
+            expect(issues[0].type).to.eql('invalid_format');
+            expect(issues[0].subtype).to.eql('wikimedia_commons');
+            const fixes = issues[0].dynamicFixes(context);
+            expect(fixes).to.have.lengthOf(1);
+            issues[0].fixes(context)[0].onClick(context);
+            const fixedEntity = context.entity(entity.id);
+            expect(fixedEntity.tags.wikimedia_commons).to.eql('File:OpenStreetMap-Editor iD Logo.svg');
         });
     });
 
