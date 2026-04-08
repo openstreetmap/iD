@@ -46,6 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Treat most aerialways as part of the routable network when checking other ways' connectivity ([#9406])
+* Only consider well known tags containing URLs during website validation ([#12178], thanks [@bhavyaKhatri2703])
 #### :bug: Bugfixes
 * Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
 * Prevent duplicate nodes from being created while using spacebar key to draw a way ([#12051])
@@ -83,6 +84,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12110]: https://github.com/openstreetmap/iD/issues/12110
 [#12120]: https://github.com/openstreetmap/iD/issues/12120
 [#12139]: https://github.com/openstreetmap/iD/pull/12139
+[#12178]: https://github.com/openstreetmap/iD/pull/12178
 
 
 # 2.39.6
