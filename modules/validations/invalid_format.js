@@ -2,6 +2,7 @@ import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions/change_tags';
+import { osmUrlKeys } from '../osm/tags';
 
 export function validationFormatting() {
     var type = 'invalid_format';
@@ -119,7 +120,7 @@ export function validationFormatting() {
         };
 
         Object.entries(entity.tags).map(function([key, tag]) {
-            if (!/\b(website|url)\b|^image$/i.test(key)) return null;
+            if (!osmUrlKeys.has(key)) return null;
             if (!tag) return null;
             const value = tag.trim();
             if (!value) return null;

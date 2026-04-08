@@ -120,6 +120,15 @@ describe('iD.validations.invalid_format', function () {
             expect(issues).to.have.lengthOf(0);
         });
 
+        it('should only flag well known tags containing URLs', function() {
+            var entity = createPointWithTags({
+                'website:source': 'survey',
+                'wikimedia_commons': 'File:photo.jpg'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(0);
+        });
+
         it('should suggest moving image URLs to Wikimedia Commons', function() {
             const entity = createPointWithTags({
                 image: 'File:OpenStreetMap-Editor iD Logo.svg'

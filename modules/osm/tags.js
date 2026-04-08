@@ -414,3 +414,20 @@ export const osmIsoCountryKeys = new Set([
   'country',
   'target'
 ]);
+
+export const osmUrlKeys = new Set([
+    'website',
+    'url',
+    'contact:website',
+    'contact:url',
+    'source:website',
+    'source:url',
+    'image',
+    'brand:website',
+    'operator:website',
+    'network:website',
+    'website:en',
+    'website:fr',
+    'website:menu',
+    'post_office:website',
+]);
