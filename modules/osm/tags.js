@@ -423,7 +423,6 @@ export const osmUrlKeys = new Set([
     'source:website',
     'source:url',
     'image',
-    'wikimedia_commons',
     'brand:website',
     'operator:website',
     'network:website',
