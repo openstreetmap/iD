@@ -224,8 +224,8 @@ export function uiFeatureList(context) {
                 }
             }
             const localResults = [];
-            for (var id in allEntities) {
-                var entity = allEntities[id];
+            for (const id in allEntities) {
+                const entity = allEntities[id];
                 if (!entity) continue;
 
                 var matched = presetManager.match(entity, graph);
@@ -254,19 +254,19 @@ export function uiFeatureList(context) {
 
                     // Make a temporary osmEntity so we can preset match
                     // and better localize the search result - #4725
-                    var id = osmEntity.id.fromOSM(d.osm_type, d.osm_id);
-                    var tags = {};
+                    const id = osmEntity.id.fromOSM(d.osm_type, d.osm_id);
+                    const tags = {};
                     tags[d.class] = d.type;
 
-                    var attrs = { id: id, type: d.osm_type, tags: tags };
+                    const attrs = { id: id, type: d.osm_type, tags: tags };
                     if (d.osm_type === 'way') {   // for ways, add some fake closed nodes
                         attrs.nodes = ['a','a'];  // so that geometry area is possible
                     }
 
-                    var tempEntity = osmEntity(attrs);
-                    var tempGraph = coreGraph([tempEntity]);
-                    var matched = presetManager.match(tempEntity, tempGraph);
-                    var type = (matched && matched.name()) || utilDisplayType(id);
+                    const tempEntity = osmEntity(attrs);
+                    const tempGraph = coreGraph([tempEntity]);
+                    const matched = presetManager.match(tempEntity, tempGraph);
+                    const type = (matched && matched.name()) || utilDisplayType(id);
 
                     geocodeResults.push({
                         id: tempEntity.id,
