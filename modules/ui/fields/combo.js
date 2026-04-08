@@ -442,19 +442,28 @@ export function uiFieldCombo(field, context) {
                     d.value.toLowerCase().indexOf(_countryCode + ':') === 0);
             }
 
-            const additionalOptions = (field.options || stringsField.options || [])
-                .filter(v => !data.some(dv => dv.value === (_isMulti ? field.key + v : v)))
-                .map(v => ({ value: v }));
+            const staticOptions = getOptions();
 
             // hide the caret if there are no suggestions
-            _container.classed('empty-combobox', data.length === 0);
+            _container.classed('empty-combobox', data.length + staticOptions.length === 0);
 
-            _comboData = data.concat(additionalOptions).map(function(d) {
+            data = data.map(function(d) {
                 var v = d.value;
                 if (_isMulti) v = v.replace(field.key, '');
                 const labelId = getLabelId(stringsField, v);
-                var isLocalizable = stringsField.hasTextForStringId(labelId);
-                var label = stringsField.t(labelId, { default: v });
+                let isLocalizable;
+                let label;
+                let display;
+                if (hasStaticValues() && !staticOptions.find(option => option.key === v)) {
+                    // field has static options, but value is not one of them: include only as a raw option
+                    isLocalizable = false;
+                    label = v;
+                    display = selection => selection.append('span').text(v);
+                } else {
+                    isLocalizable = stringsField.hasTextForStringId(labelId);
+                    label = stringsField.t(labelId, { default: v });
+                    display = stringsField.t.append(labelId, { default: v });
+                }
 
                 // Only here is data for `taginfoDesc` present. We render it as `title`, when no `presetDesc` is given.
                 const presetDesc = presetDescription(v);
@@ -466,10 +475,21 @@ export function uiFieldCombo(field, context) {
                     value: label,
                     title: !presetDesc && taginfoDesc ? `${taginfoDesc}\n${formatTag(field.key, v, _isMulti)}` : formatTag(field.key, v, _isMulti),
                     description: presetDesc,
-                    display: addComboboxIcons(stringsField.t.append(labelId, { default: label }), v),
+                    display: addComboboxIcons(display, v),
                     klass: isLocalizable ? '' : 'raw-option'
                 };
             });
+
+            if (hasStaticValues()) {
+                _comboData = staticOptions.map(option =>
+                    // prefer taginfo entry, as those might have additional details like the taginfoDesc
+                    data.find(d => d.key === option.key) || option
+                ).concat(data.filter(d =>
+                    // append taginfo results that are not present in the static options at the end
+                    !staticOptions.some(option => d.key === option.key)));
+            } else {
+                _comboData = data;
+            }
 
             _comboData = _comboData.filter(queryFilter);
 
