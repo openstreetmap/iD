@@ -424,8 +424,10 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     }
 
     /** see PR #8671 */
-    function followMode() {
+    function followMode(d3_event) {
         if (_didResolveTempEdit) return;
+
+        d3_event.preventDefault();
 
         try {
 

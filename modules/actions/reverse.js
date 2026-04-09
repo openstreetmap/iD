@@ -161,7 +161,7 @@ export function actionReverse(entityID, options) {
             const isDirectionField = field.key && (field.key === 'direction' || field.key.endsWith(':direction'));
             // some direction fields are for angles, so ensure that the
             // direction field on this preset is not a numeric field.
-            const isRelativeDirection = field.type === 'combo';
+            const isRelativeDirection = field.type !== 'number';
 
             // the field's geometry might be restricted to a subset of the preset's geometry
             const isGeometryValid = !field.geometry || field.geometry.includes(geometry);

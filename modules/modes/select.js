@@ -260,7 +260,10 @@ export function modeSelect(context, selectedIDs) {
         _behaviors.forEach(context.install);
 
         keybinding
-            .on(t('inspector.zoom_to.key'), mode.zoomToSelected)
+            .on(t('inspector.zoom_to.key'), (d3_event) => {
+                d3_event.preventDefault();
+                mode.zoomToSelected();
+            })
             .on(['[', 'pgup'], previousVertex)
             .on([']', 'pgdown'], nextVertex)
             .on(['{', uiCmd('⌘['), 'home'], firstVertex)

@@ -43,7 +43,7 @@ export function uiAttribution(context) {
 
         const sourceID = d.id.replace(/\./g, '<TX_DOT>');
         const terms_text = t(`imagery.${sourceID}.attribution.text`,
-          { default: d.terms_text || d.id || d.name() }
+          { default: d.terms_text || (d.terms_url && d.name()) }
         );
 
         if (d.icon && !d.overlay) {

@@ -39,12 +39,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.40.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Render shared bicycle/foot paths with a dedicated colour ([#10256], thanks [@k-yle])
 #### :scissors: Operations
 * Correctly split a way on all selected vertices when three or more nodes are selected ([#12120])
 * Create fewer points when circularizing small features (and vice versa): the number of vertices in the resulting circle is now dynamic between a 12 and 32 depending on the radius of the circle (instead of always resulting in 19 nodes) ([#12139])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Treat most aerialways as part of the routable network when checking other ways' connectivity ([#9406])
+* Only consider well known tags containing URLs during website validation ([#12178], thanks [@bhavyaKhatri2703])
 #### :bug: Bugfixes
 * Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
 * Prevent duplicate nodes from being created while using spacebar key to draw a way ([#12051])
@@ -52,17 +54,25 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix some tags automatically deleted when re-selecting the same preset ([#12070], thanks [@k-yle])
 * Fix crash when a checkbox-field is rendered using a custom (non-`yes/no`) value ([#12078])
 * Fix a bug that caused `step_count` to be set to `NaN` when merging features with non-numeric step count values ([#12110], thanks [@JaiswalShivang])
+* Fix a bug that caused duplicates of new notes to appear when such a note is dragged on the map ([#9092])
+* Prevent keyboard shortcuts from triggering an additional input after their action is performed ([#9071])
+* Include `railway` and `building` features with lifecycle status only in _past/future_ features category ([#9058])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * Standardize tooltips in combo boxes: always show (full) raw tag, don't duplicate the already rendered titles, and show descriptions from wiki/taginfo where available ([#12010], thanks [@tordans])
 * Use full width for the dropdown box for the values of the `access` field ([#12065])
+* Preserve the order of options when a combo field accepts both static options as well as autosuggestions from taginfo and display additional tag values from taginfo as raw-options only ([#12117])
 #### :hammer: Development
 * Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
 * Add type annotations to `context.js` module ([#11589], thanks [@k-yle])
 
+[#9058]: https://github.com/openstreetmap/iD/issues/9058
+[#9071]: https://github.com/openstreetmap/iD/issues/9071
+[#9092]: https://github.com/openstreetmap/iD/issues/9092
 [#9406]: https://github.com/openstreetmap/iD/issues/9406
+[#10256]: https://github.com/openstreetmap/iD/pull/10256
 [#11589]: https://github.com/openstreetmap/iD/pull/11589
 [#12010]: https://github.com/openstreetmap/iD/pull/12010
 [#12050]: https://github.com/openstreetmap/iD/issues/12050
@@ -73,8 +83,20 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12070]: https://github.com/openstreetmap/iD/issues/12070
 [#12078]: https://github.com/openstreetmap/iD/issues/12078
 [#12110]: https://github.com/openstreetmap/iD/issues/12110
+[#12117]: https://github.com/openstreetmap/iD/issues/12117
 [#12120]: https://github.com/openstreetmap/iD/issues/12120
 [#12139]: https://github.com/openstreetmap/iD/pull/12139
+[#12178]: https://github.com/openstreetmap/iD/pull/12178
+
+
+# 2.39.6
+##### 2026-04-07
+
+* Fix crash when restoring changes ([#12176], thanks [@k-yle])
+* Fix false positives in URL validation ([#12030], thanks [@bhavyaKhatri2703])
+
+[#12030]: https://github.com/openstreetmap/iD/pull/12030
+[#12176]: https://github.com/openstreetmap/iD/pull/12176
 
 
 # 2.39.5
