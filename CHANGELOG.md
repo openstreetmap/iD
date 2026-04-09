@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Render shared bicycle/foot paths with a dedicated colour ([#10256], thanks [@k-yle])
+* Make sure long autocomplete-suggestions in input fields do not scroll the input field beyond the cursor location in Firefox
 #### :scissors: Operations
 * Correctly split a way on all selected vertices when three or more nodes are selected ([#12120])
 * Create fewer points when circularizing small features (and vice versa): the number of vertices in the resulting circle is now dynamic between a 12 and 32 depending on the radius of the circle (instead of always resulting in 19 nodes) ([#12139])
