@@ -1825,11 +1825,16 @@ input.date-selector {
 
 .form-field-input-multicombo .input-wrap {
     border: 1px solid var(--border-color-2);
-    width: 180px;
+    width: auto;
+    max-width: 100%;
 }
 .form-field-input-multicombo input {
     border: none;
-    width: 100%;
+}
+.form-field-input-multicombo input.combobox-input {
+    max-width: 100%;
+    min-width: 180px;
+    field-sizing: content;
 }
 
 .form-field-input-multicombo input:focus {
