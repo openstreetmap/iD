@@ -1637,7 +1637,7 @@ en:
         message_multi: '{feature} has multiple invalid URLs'
         reference: 'URLs must start with "http://" or "https://".'
       wikimedia_commons:
-        message: '{feature} has an invalid Wikimedia Commons link'
+        message: '{feature} has an invalid Wikimedia Commons tag'
         reference:
           wrong_key: 'Wikimedia Commons links should use the wikimedia_commons tag.'
           wrong_value: 'Wikimedia Commons tags should only contain the file or category instead of the full URL.'
