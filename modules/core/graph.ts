@@ -67,7 +67,7 @@ export class coreGraph {
         if (parents) {
             parents.forEach((id) => {
                 result.push(this.entity<osmWay>(id));
-            }, this);
+            });
         }
         return result;
     }
@@ -88,7 +88,7 @@ export class coreGraph {
         if (parents) {
             parents.forEach((id) => {
                 result.push(this.entity<osmRelation>(id));
-            }, this);
+            });
         }
         return result;
     }
@@ -173,9 +173,9 @@ export class coreGraph {
                     if (!this.entities.hasOwnProperty(id)) {
                         this._parentWays[child].add(id);
                     }
-                }, this);
+                });
             }
-        }, this);
+        });
 
         Object.keys(this._parentRels).forEach((child) => {
             if (base.parentRels[child]) {
@@ -183,9 +183,9 @@ export class coreGraph {
                     if (!this.entities.hasOwnProperty(id)) {
                         this._parentRels[child].add(id);
                     }
-                }, this);
+                });
             }
-        }, this);
+        });
 
         this.transients = {};
 
