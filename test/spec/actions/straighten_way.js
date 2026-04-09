@@ -3,34 +3,34 @@ describe('iD.actionStraightenWay', function () {
 
     describe('#disabled', function () {
         it('returns falsy for ways with internal nodes near centerline', function () {
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [1, 0.01]}),
-                iD.osmNode({id: 'c', loc: [2, 0]}),
-                iD.osmNode({id: 'd', loc: [3, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [1, 0.01]}),
+                new iD.osmNode({id: 'c', loc: [2, 0]}),
+                new iD.osmNode({id: 'd', loc: [3, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
             expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).not.to.be.ok;
         });
 
         it('returns \'too_bendy\' for ways with internal nodes far off centerline', function () {
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [1, 1]}),
-                iD.osmNode({id: 'c', loc: [2, 0]}),
-                iD.osmNode({id: 'd', loc: [3, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [1, 1]}),
+                new iD.osmNode({id: 'c', loc: [2, 0]}),
+                new iD.osmNode({id: 'd', loc: [3, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
             expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).to.equal('too_bendy');
         });
 
         it('returns \'too_bendy\' for ways with coincident start/end nodes', function () {
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [1, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 0]}),
-                iD.osmNode({id: 'd', loc: [0, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [1, 0]}),
+                new iD.osmNode({id: 'c', loc: [2, 0]}),
+                new iD.osmNode({id: 'd', loc: [0, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
             expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).to.equal('too_bendy');
         });
@@ -38,11 +38,11 @@ describe('iD.actionStraightenWay', function () {
 
 
     it('deletes empty nodes', function() {
-        var graph = iD.coreGraph([
-            iD.osmNode({id: 'a', loc: [0, 0]}),
-            iD.osmNode({id: 'b', loc: [1, 0.01], tags: {}}),
-            iD.osmNode({id: 'c', loc: [2, 0]}),
-            iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
+        var graph = new iD.coreGraph([
+            new iD.osmNode({id: 'a', loc: [0, 0]}),
+            new iD.osmNode({id: 'b', loc: [1, 0.01], tags: {}}),
+            new iD.osmNode({id: 'c', loc: [2, 0]}),
+            new iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
         ]);
 
         graph = iD.actionStraightenWay(['-'], projection)(graph);
@@ -51,11 +51,11 @@ describe('iD.actionStraightenWay', function () {
     });
 
     it('does not delete tagged nodes', function() {
-       var graph = iD.coreGraph([
-            iD.osmNode({id: 'a', loc: [0, 0]}),
-            iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-            iD.osmNode({id: 'c', loc: [2, 0]}),
-            iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
+       var graph = new iD.coreGraph([
+            new iD.osmNode({id: 'a', loc: [0, 0]}),
+            new iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+            new iD.osmNode({id: 'c', loc: [2, 0]}),
+            new iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
         ]);
 
         graph = iD.actionStraightenWay(['-'], projection)(graph);
@@ -65,12 +65,12 @@ describe('iD.actionStraightenWay', function () {
     });
 
     it('does not delete nodes connected to other ways', function() {
-        var graph = iD.coreGraph([
-            iD.osmNode({id: 'a', loc: [0, 0]}),
-            iD.osmNode({id: 'b', loc: [1, 0.01]}),
-            iD.osmNode({id: 'c', loc: [2, 0]}),
-            iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
-            iD.osmWay({id: '=', nodes: ['b']})
+        var graph = new iD.coreGraph([
+            new iD.osmNode({id: 'a', loc: [0, 0]}),
+            new iD.osmNode({id: 'b', loc: [1, 0.01]}),
+            new iD.osmNode({id: 'c', loc: [2, 0]}),
+            new iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+            new iD.osmWay({id: '=', nodes: ['b']})
         ]);
 
         graph = iD.actionStraightenWay(['-'], projection)(graph);
@@ -80,18 +80,18 @@ describe('iD.actionStraightenWay', function () {
     });
 
     it('straightens multiple, connected ways', function() {
-        var graph = iD.coreGraph([
-            iD.osmNode({id: 'a', loc: [0, 0]}),
-            iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-            iD.osmNode({id: 'c', loc: [2, -0.01]}),
-            iD.osmNode({id: 'd', loc: [3, 0]}),
-            iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+        var graph = new iD.coreGraph([
+            new iD.osmNode({id: 'a', loc: [0, 0]}),
+            new iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+            new iD.osmNode({id: 'c', loc: [2, -0.01]}),
+            new iD.osmNode({id: 'd', loc: [3, 0]}),
+            new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
 
-            iD.osmNode({id: 'e', loc: [4, 0]}),
-            iD.osmNode({id: 'f', loc: [5, 0.01], tags: {foo: 'bar'}}),
-            iD.osmNode({id: 'g', loc: [6, -0.01]}),
-            iD.osmNode({id: 'h', loc: [7, 0]}),
-            iD.osmWay({id: '--', nodes: ['d', 'e', 'f', 'g', 'h']})
+            new iD.osmNode({id: 'e', loc: [4, 0]}),
+            new iD.osmNode({id: 'f', loc: [5, 0.01], tags: {foo: 'bar'}}),
+            new iD.osmNode({id: 'g', loc: [6, -0.01]}),
+            new iD.osmNode({id: 'h', loc: [7, 0]}),
+            new iD.osmWay({id: '--', nodes: ['d', 'e', 'f', 'g', 'h']})
         ]);
 
         graph = iD.actionStraightenWay(['-', '--'], projection)(graph);
@@ -103,18 +103,18 @@ describe('iD.actionStraightenWay', function () {
     });
 
     it('straightens multiple, connected ways going in different directions', function() {
-        var graph = iD.coreGraph([
-            iD.osmNode({id: 'a', loc: [0, 0]}),
-            iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-            iD.osmNode({id: 'c', loc: [2, -0.01]}),
-            iD.osmNode({id: 'd', loc: [3, 0]}),
-            iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+        var graph = new iD.coreGraph([
+            new iD.osmNode({id: 'a', loc: [0, 0]}),
+            new iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+            new iD.osmNode({id: 'c', loc: [2, -0.01]}),
+            new iD.osmNode({id: 'd', loc: [3, 0]}),
+            new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
 
-            iD.osmNode({id: 'e', loc: [4, 0]}),
-            iD.osmNode({id: 'f', loc: [5, 0.01], tags: {foo: 'bar'}}),
-            iD.osmNode({id: 'g', loc: [6, -0.01]}),
-            iD.osmNode({id: 'h', loc: [7, 0]}),
-            iD.osmWay({id: '--', nodes: ['h', 'g', 'f', 'e', 'd']})
+            new iD.osmNode({id: 'e', loc: [4, 0]}),
+            new iD.osmNode({id: 'f', loc: [5, 0.01], tags: {foo: 'bar'}}),
+            new iD.osmNode({id: 'g', loc: [6, -0.01]}),
+            new iD.osmNode({id: 'h', loc: [7, 0]}),
+            new iD.osmWay({id: '--', nodes: ['h', 'g', 'f', 'e', 'd']})
         ]);
 
         graph = iD.actionStraightenWay(['-', '--'], projection)(graph);
@@ -131,12 +131,12 @@ describe('iD.actionStraightenWay', function () {
         });
 
         it('straighten at t = 0', function() {
-           var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-                iD.osmNode({id: 'c', loc: [2, -0.01]}),
-                iD.osmNode({id: 'd', loc: [3, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+           var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+                new iD.osmNode({id: 'c', loc: [2, -0.01]}),
+                new iD.osmNode({id: 'd', loc: [3, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
 
             graph = iD.actionStraightenWay(['-'], projection)(graph, 0);
@@ -148,12 +148,12 @@ describe('iD.actionStraightenWay', function () {
         });
 
         it('straighten at t = 0.5', function() {
-           var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-                iD.osmNode({id: 'c', loc: [2, -0.01]}),
-                iD.osmNode({id: 'd', loc: [3, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+           var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+                new iD.osmNode({id: 'c', loc: [2, -0.01]}),
+                new iD.osmNode({id: 'd', loc: [3, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
 
             graph = iD.actionStraightenWay(['-'], projection)(graph, 0.5);
@@ -165,12 +165,12 @@ describe('iD.actionStraightenWay', function () {
         });
 
         it('straighten at t = 1', function() {
-           var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-                iD.osmNode({id: 'c', loc: [2, -0.01]}),
-                iD.osmNode({id: 'd', loc: [3, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+           var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+                new iD.osmNode({id: 'c', loc: [2, -0.01]}),
+                new iD.osmNode({id: 'd', loc: [3, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
 
             graph = iD.actionStraightenWay(['-'], projection)(graph, 1);

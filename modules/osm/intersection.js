@@ -17,7 +17,7 @@ export function osmTurn(turn) {
 
 export function osmIntersection(graph, startVertexId, maxDistance) {
     maxDistance = maxDistance || 30;    // in meters
-    var vgraph = coreGraph();           // virtual graph
+    var vgraph = new coreGraph();           // virtual graph
     var i, j, k;
 
 

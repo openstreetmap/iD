@@ -6,7 +6,7 @@ describe('iD.validations.invalid_format', function () {
     });
 
     function createPointWithTags(tags) {
-        var n = iD.osmNode({id: 'n-1', loc: [4,4], tags: tags});
+        var n = new iD.osmNode({id: 'n-1', loc: [4,4], tags: tags});
         context.perform(iD.actionAddEntity(n));
         return n;
     }

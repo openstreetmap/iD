@@ -226,7 +226,7 @@ export function uiSectionRawMembershipEditor(context) {
             context.validator().validate();
 
         } else {
-            var relation = osmRelation();
+            var relation = new osmRelation();
             context.perform(
                 actionAddEntity(relation),
                 actionAddMembers(relation.id, _entityIDs, role),

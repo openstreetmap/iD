@@ -224,7 +224,7 @@ export function uiFeatureList(context) {
                     }
 
                     var tempEntity = osmEntity(attrs);
-                    var tempGraph = coreGraph([tempEntity]);
+                    var tempGraph = new coreGraph([tempEntity]);
                     var matched = presetManager.match(tempEntity, tempGraph);
                     var type = (matched && matched.name()) || utilDisplayType(id);
 

@@ -84,34 +84,34 @@ describe('iD.serviceOsm', function () {
 
     describe('#entityURL', function() {
         it('provides an entity url for a node', function() {
-            var e = iD.osmNode({id: 'n1'});
+            var e = new iD.osmNode({id: 'n1'});
             expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/node/1');
         });
 
         it('provides an entity url for a way', function() {
-            var e = iD.osmWay({id: 'w1'});
+            var e = new iD.osmWay({id: 'w1'});
             expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/way/1');
         });
 
         it('provides an entity url for a relation', function() {
-            var e = iD.osmRelation({id: 'r1'});
+            var e = new iD.osmRelation({id: 'r1'});
             expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/relation/1');
         });
     });
 
     describe('#historyURL', function() {
         it('provides a history url for a node', function() {
-            var e = iD.osmNode({id: 'n1'});
+            var e = new iD.osmNode({id: 'n1'});
             expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/node/1/history');
         });
 
         it('provides a history url for a way', function() {
-            var e = iD.osmWay({id: 'w1'});
+            var e = new iD.osmWay({id: 'w1'});
             expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/way/1/history');
         });
 
         it('provides a history url for a relation', function() {
-            var e = iD.osmRelation({id: 'r1'});
+            var e = new iD.osmRelation({id: 'r1'});
             expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/relation/1/history');
         });
     });

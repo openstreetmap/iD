@@ -87,7 +87,7 @@ export function uiIntro(context) {
     // Load semi-real data used in intro
     if (osm) { osm.toggle(false).reset(); }
     context.history().reset();
-    context.history().merge(Object.values(coreGraph().load(_introGraph).entities));
+    context.history().merge(Object.values(new coreGraph().load(_introGraph).entities));
     context.history().checkpoint('initial');
 
     // Setup imagery

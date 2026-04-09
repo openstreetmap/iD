@@ -133,7 +133,7 @@ Finally, we have the auxiliary classes `iD.coreDifference` and `iD.coreTree`.
 set of entities that were created, modified, or deleted, and need to be redrawn.
 
 ```js
-var a = iD.coreGraph(), b = iD.coreGraph();
+var a = new iD.coreGraph(), b = new iD.coreGraph();
 // (fill a & b with data)
 var difference = iD.coreDifference(a, b);
 
@@ -148,7 +148,7 @@ current map view. To calculate this quickly during map
 interaction, it uses an [R-tree](https://en.wikipedia.org/wiki/R-tree).
 
 ```js
-var graph = iD.coreGraph();
+var graph = new iD.coreGraph();
 // (load OSM data into graph)
 
 // this tree indexes the contents of the graph

@@ -3,29 +3,29 @@ describe('iD.actionChangePreset', function() {
     var newPreset = iD.presetPreset('new', {tags: {new: 'true'}});
 
     it('changes from one preset\'s tags to another\'s', function() {
-        var entity = iD.osmNode({tags: {old: 'true'}});
-        var graph = iD.coreGraph([entity]);
+        var entity = new iD.osmNode({tags: {old: 'true'}});
+        var graph = new iD.coreGraph([entity]);
         var action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
         expect(action(graph).entity(entity.id).tags).to.eql({new: 'true'});
     });
 
     it('adds the tags of a new preset to an entity without an old preset', function() {
-        var entity = iD.osmNode();
-        var graph = iD.coreGraph([entity]);
+        var entity = new iD.osmNode();
+        var graph = new iD.coreGraph([entity]);
         var action = iD.actionChangePreset(entity.id, null, newPreset);
         expect(action(graph).entity(entity.id).tags).to.eql({new: 'true'});
     });
 
     it('removes the tags of an old preset from an entity without a new preset', function() {
-        var entity = iD.osmNode({tags: {old: 'true'}});
-        var graph = iD.coreGraph([entity]);
+        var entity = new iD.osmNode({tags: {old: 'true'}});
+        var graph = new iD.coreGraph([entity]);
         var action = iD.actionChangePreset(entity.id, oldPreset, null);
         expect(action(graph).entity(entity.id).tags).to.eql({});
     });
 
     it('preserves the tags that are defined in neither preset when changing from one preset to another', function() {
-        const entity = iD.osmNode({tags: {old: 'true', other: 'other'}});
-        const graph = iD.coreGraph([entity]);
+        const entity = new iD.osmNode({tags: {old: 'true', other: 'other'}});
+        const graph = new iD.coreGraph([entity]);
         const oldPreset = iD.presetPreset('old', {tags: {old: 'true'}});
         const newPreset = iD.presetPreset('new', {tags: {new: 'true'}});
         const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
@@ -34,13 +34,13 @@ describe('iD.actionChangePreset', function() {
 
     // https://github.com/openstreetmap/iD/issues/8159
     it('preserves the tags of a new preset\'s addTags', function() {
-        var entity = iD.osmNode({tags: {
+        var entity = new iD.osmNode({tags: {
             'power': 'plant',
             'plant:source': 'coal',
             'plant:method': 'combustion',
             'plant:output:electricity': '10 MW'
         }});
-        var graph = iD.coreGraph([entity]);
+        var graph = new iD.coreGraph([entity]);
         var oldPreset = iD.presetPreset('old', {tags: {
             'power': 'plant',
             'plant:source': 'coal'
@@ -72,8 +72,8 @@ describe('iD.actionChangePreset', function() {
     // https://github.com/openstreetmap/iD/issues/9341
     // https://github.com/openstreetmap/iD/issues/9104
     it('preserves the tags when there is a matching field in the new preset', function() {
-        var entity = iD.osmNode({tags: {building: 'yes'}});
-        var graph = iD.coreGraph([entity]);
+        var entity = new iD.osmNode({tags: {building: 'yes'}});
+        var graph = new iD.coreGraph([entity]);
         var oldPreset = iD.presetPreset('old', {tags: {building: 'yes'}});
         var newPreset = iD.presetPreset('new', {tags: {amenity: 'school'}, fields: ['field']}, undefined, {
             field: iD.presetField('field', {key: 'building'})
@@ -83,8 +83,8 @@ describe('iD.actionChangePreset', function() {
     });
 
     it('does not preserves the tags of a non-matching field in the new preset', function() {
-        var entity = iD.osmNode({tags: {building: 'yes'}, loc: [0, 0]});
-        var graph = iD.coreGraph([entity]);
+        var entity = new iD.osmNode({tags: {building: 'yes'}, loc: [0, 0]});
+        var graph = new iD.coreGraph([entity]);
         var oldPreset = iD.presetPreset('old', {tags: {building: 'yes'}});
         var newPreset = iD.presetPreset('new', {tags: {amenity: 'school'}, fields: ['field']}, undefined, {
             field: iD.presetField('field', {key: 'building', geometry: 'area'})
@@ -95,7 +95,7 @@ describe('iD.actionChangePreset', function() {
 
     // https://github.com/openstreetmap/iD/pull/11696
     it('does not preserve field tags which only exist in the old preset, not in the new preset', () => {
-        const entity = iD.osmNode({
+        const entity = new iD.osmNode({
             tags: {
                 building: 'yes', // case 1: the preset's own tags.
                 'roof:colour': 'pink', // case 2: a field which exists in the old preset, but not the new one.
@@ -105,7 +105,7 @@ describe('iD.actionChangePreset', function() {
             },
             loc: [0, 0],
         });
-        const graph = iD.coreGraph([entity]);
+        const graph = new iD.coreGraph([entity]);
 
         const fields = {
             'roof:colour': iD.presetField('roof:colour', { key: 'roof:colour', geometry: 'point' }),
@@ -136,7 +136,7 @@ describe('iD.actionChangePreset', function() {
     });
 
     it('preserves all tags when re-selecting the same preset', () => {
-        const entity = iD.osmNode({
+        const entity = new iD.osmNode({
             tags: {
                 building: 'yes', // the preset's own tags.
                 'building:colour': 'green', // a field which exists in the preset
@@ -144,7 +144,7 @@ describe('iD.actionChangePreset', function() {
             },
             loc: [0, 0],
         });
-        const graph = iD.coreGraph([entity]);
+        const graph = new iD.coreGraph([entity]);
 
         const fields = {
             'building:colour': iD.presetField('building:colour', { key: 'building:colour', geometry: 'point' }),
@@ -167,8 +167,8 @@ describe('iD.actionChangePreset', function() {
 
     // https://github.com/openstreetmap/iD/issues/9372
     it('does not preserve field tags when changing from a subpreset to its parent', function() {
-        var entity = iD.osmNode({tags: {highway: 'service', service: 'driveway'}});
-        var graph = iD.coreGraph([entity]);
+        var entity = new iD.osmNode({tags: {highway: 'service', service: 'driveway'}});
+        var graph = new iD.coreGraph([entity]);
         var oldPreset = iD.presetPreset('highway/service/driveway', {tags: {highway: 'service', service: 'driveway'}});
         var newPreset = iD.presetPreset('highway/service', {tags: {highway: 'service'}, fields: ['field']}, undefined, {
             field: iD.presetField('field', {key: 'service'})

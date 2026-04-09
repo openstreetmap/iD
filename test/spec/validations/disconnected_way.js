@@ -6,9 +6,9 @@ describe('iD.validations.disconnected_way', function() {
     });
 
     function createWay(tags) {
-        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
-        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
-        var w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags });
+        var n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var w = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags });
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -18,11 +18,11 @@ describe('iD.validations.disconnected_way', function() {
     }
 
     function createConnectingWays(tags1, tags2) {
-        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
-        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
-        var n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
-        var w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags1 });
-        var w2 = iD.osmWay({ id: 'w-2', nodes: ['n-1', 'n-3'], tags: tags2 });
+        var n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var n3 = new iD.osmNode({ id: 'n-3', loc: [5, 5] });
+        var w = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags1 });
+        var w2 = new iD.osmWay({ id: 'w-2', nodes: ['n-1', 'n-3'], tags: tags2 });
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -74,11 +74,11 @@ describe('iD.validations.disconnected_way', function() {
     });
 
     it('ignores highway with connected entrance vertex', function() {
-        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
-        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
-        var n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
-        var w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'unclassified' } });
-        var w2 = iD.osmWay({ id: 'w-2', nodes: ['n-1', 'n-3'] });
+        var n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
+        var n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var n3 = new iD.osmNode({ id: 'n-3', loc: [5, 5] });
+        var w = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'unclassified' } });
+        var w2 = new iD.osmWay({ id: 'w-2', nodes: ['n-1', 'n-3'] });
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -105,11 +105,11 @@ describe('iD.validations.disconnected_way', function() {
     it('considers golf path as routable when checking connectivity of other paths', function () {
         createWay();
 
-        const n1 = iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
-        const n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
-        const n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
-        const w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'path', 'golf': 'cartpath' } });
-        const w2 = iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'unclassified' } });
+        const n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
+        const n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        const n3 = new iD.osmNode({ id: 'n-3', loc: [5, 5] });
+        const w = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'path', 'golf': 'cartpath' } });
+        const w2 = new iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'unclassified' } });
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -130,11 +130,11 @@ describe('iD.validations.disconnected_way', function() {
     it('considers aerialway as routable when checking connectivity of other paths', function () {
         createWay();
 
-        const n1 = iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
-        const n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
-        const n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
-        const w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'aerialway': ' 	gondola' } });
-        const w2 = iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'corridor' } });
+        const n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
+        const n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        const n3 = new iD.osmNode({ id: 'n-3', loc: [5, 5] });
+        const w = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'aerialway': ' 	gondola' } });
+        const w2 = new iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'corridor' } });
 
         context.perform(
             iD.actionAddEntity(n1),
