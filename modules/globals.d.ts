@@ -9,7 +9,14 @@ declare global {
   declare var after: typeof afterEach;
   declare var VITEST: true;
 
-  declare type Tags = { [key: string]: string };
+  declare type EntityID = string;
+
+  declare type TagKey = string;
+  declare type TagValue = string;
+  declare type TagValueUpdate = string | undefined;
+  declare type Tags = { [key: TagKey]: TagValue };
+  declare type TagsMulti = { [key: TagKey]: TagValue | TagValue[] };
+  declare type TagsUpdate = { [key: TagKey]: TagValueUpdate };
 
   /**
    * A class method that acts as both a getter and a
@@ -37,7 +44,7 @@ declare global {
   declare namespace d3 {
     export type Selection<T = any> = import('d3').Selection<
       T,
-      unknown,
+      any,
       unknown,
       unknown
     >;
