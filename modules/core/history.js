@@ -12,6 +12,7 @@ import {
     utilArrayDifference, utilArrayGroupBy, utilArrayUnion,
     utilObjectOmit, utilRebind, utilSessionMutex
 } from '../util';
+import { osmIdManager } from '../osm';
 
 
 export function coreHistory(context) {
@@ -505,7 +506,7 @@ export function coreHistory(context) {
                 entities: Object.values(allEntities),
                 baseEntities: Object.values(baseEntities),
                 stack: s,
-                nextIDs: osmEntity.id.next,
+                nextIDs: osmIdManager.next,
                 index: _index,
                 // note the time the changes were saved
                 timestamp: (new Date()).getTime()
@@ -516,7 +517,7 @@ export function coreHistory(context) {
         fromJSON: function(h, loadChildNodes) {
             var loadComplete = true;
 
-            osmEntity.id.next = h.nextIDs;
+            osmIdManager.next = h.nextIDs;
             _index = h.index;
 
             if (h.version === 2 || h.version === 3) {

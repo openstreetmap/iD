@@ -20,23 +20,23 @@ describe('iD.osmEntity', function () {
 
     describe('.id', function () {
         it('generates unique IDs', function () {
-            expect(iD.osmEntity.id('node')).not.to.equal(iD.osmEntity.id('node'));
+            expect(iD.osmIdManager.newId('node')).not.to.equal(iD.osmIdManager.newId('node'));
         });
 
         describe('.fromOSM', function () {
             it('returns a ID string unique across entity types', function () {
-                expect(iD.osmEntity.id.fromOSM('node', '1')).to.equal('n1');
+                expect(iD.osmIdManager.fromOSM('node', '1')).to.equal('n1');
             });
         });
 
         describe('.toOSM', function () {
             it('reverses fromOSM', function () {
-                expect(iD.osmEntity.id.toOSM(iD.osmEntity.id.fromOSM('node', '1'))).to.equal('1');
-                expect(iD.osmEntity.id.toOSM(iD.osmEntity.id.fromOSM('node', '-1'))).to.equal('-1');
+                expect(iD.osmIdManager.toOSM(iD.osmIdManager.fromOSM('node', '1'))).to.equal('1');
+                expect(iD.osmIdManager.toOSM(iD.osmIdManager.fromOSM('node', '-1'))).to.equal('-1');
             });
 
             it('returns the empty string for other strings', function () {
-                expect(iD.osmEntity.id.toOSM('a')).to.equal('');
+                expect(iD.osmIdManager.toOSM('a')).to.equal('');
             });
         });
     });

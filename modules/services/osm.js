@@ -7,7 +7,7 @@ import RBush from 'rbush';
 
 import { JXON } from '../util/jxon';
 import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
-import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
+import { osmIdManager, osmNode, osmNote, osmRelation, osmWay } from '../osm';
 import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilObjectOmit, utilRebind, utilTiler, utilQsString } from '../util';
 import { localizer } from '../core/localizer.js';
 import { utilGzip } from '../util/util';
@@ -206,7 +206,7 @@ function parseJSON(payload, callback, options) {
 
         var uid;
 
-        uid = osmEntity.id.fromOSM(child.type, child.id);
+        uid = osmIdManager.fromOSM(child.type, child.id);
         if (options.skipSeen) {
             if (_tileCache.seen[uid]) return null;  // avoid reparsing a "seen" entity
             _tileCache.seen[uid] = true;
@@ -484,8 +484,8 @@ export default {
     // GET /api/0.6/node/#id
     // GET /api/0.6/[way|relation]/#id/full
     loadEntity: function(id, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
+        var type = osmIdManager.type(id);
+        var osmID = osmIdManager.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
@@ -514,8 +514,8 @@ export default {
     // Load a single entity with a specific version
     // GET /api/0.6/[node|way|relation]/#id/#version
     loadEntityVersion: function(id, version, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
+        var type = osmIdManager.type(id);
+        var osmID = osmIdManager.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
@@ -531,8 +531,8 @@ export default {
     // Load the relations of a single entity with the given.
     // GET /api/0.6/[node|way|relation]/#id/relations
     loadEntityRelations: function(id, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
+        var type = osmIdManager.type(id);
+        var osmID = osmIdManager.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
@@ -551,11 +551,11 @@ export default {
     // GET /api/0.6/[nodes|ways|relations]?#parameters
     loadMultiple: function(ids, callback) {
         var that = this;
-        var groups = utilArrayGroupBy(utilArrayUniq(ids), osmEntity.id.type);
+        var groups = utilArrayGroupBy(utilArrayUniq(ids), osmIdManager.type);
 
         Object.keys(groups).forEach(function(k) {
             var type = k + 's';   // nodes, ways, relations
-            var osmIDs = groups[k].map(function(id) { return osmEntity.id.toOSM(id); });
+            var osmIDs = groups[k].map(function(id) { return osmIdManager.toOSM(id); });
             var options = { skipSeen: false };
 
             utilArrayChunk(osmIDs, 150).forEach(function(arr) {
