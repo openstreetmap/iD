@@ -485,6 +485,28 @@ export function validationCrossingWays(context) {
                             fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'temaki-tunnel', 'tunnel'));
                         }
                     }
+
+                    // special case: if
+                    //  (1) we're about to join these lines with a highway=crossing node; and
+                    //  (2) one of the lines is a sidewalk
+                    // then we will split the sidewalk and create a highway=crossing way
+                    const isSidewalk = (
+                        entities[0].tags.footway === 'sidewalk' ||
+                        entities[1].tags.footway === 'sidewalk' ||
+                        entities[0].tags.cycleway === 'sidewalk' ||
+                        entities[1].tags.cycleway === 'sidewalk'
+                    );
+                    if (connectionTags.highway === 'crossing' && isSidewalk) {
+                        const newAction = makeAddBridgeOrTunnelFix(
+                            'connect_using_crossing',
+                            'temaki-pedestrian',
+                            'crossing',
+                            connectionTags
+                        );
+                        // replace the default action with this action
+                        fixes = fixes.filter(action => action.id !== newAction.id);
+                        fixes.unshift(newAction);
+                    }
                 }
 
                 // repositioning the features is always an option
@@ -514,7 +536,13 @@ export function validationCrossingWays(context) {
         }
     }
 
-    function makeAddBridgeOrTunnelFix(fixTitleID, iconName, bridgeOrTunnel){
+    /**
+     * @param {string} fixTitleID
+     * @param {string} iconName
+     * @param {'bridge' | 'tunnel' | 'crossing'} crossingType
+     * @param {Tags=} connectionTags
+     */
+    function makeAddBridgeOrTunnelFix(fixTitleID, iconName, crossingType, connectionTags){
         return new validationIssueFix({
             icon: iconName,
             title: t.append('issues.fix.' + fixTitleID + '.title'),
@@ -694,10 +722,10 @@ export function validationCrossingWays(context) {
                     });
 
                     var tags = Object.assign({}, structureWay.tags); // copy tags
-                    if (bridgeOrTunnel === 'bridge'){
+                    if (crossingType === 'bridge'){
                         tags.bridge = 'yes';
                         tags.layer = '1';
-                    } else {
+                    } else if (crossingType === 'tunnel') {
                         var tunnelValue = 'yes';
                         if (getFeatureType(structureWay, graph) === 'waterway') {
                             // use `tunnel=culvert` for waterways by default
@@ -705,9 +733,24 @@ export function validationCrossingWays(context) {
                         }
                         tags.tunnel = tunnelValue;
                         tags.layer = '-1';
+                    } else if (crossingType === 'crossing') {
+                        // we know that the line will already have
+                        // `footway=sidewalk` or `cycleway=sidewalk`
+                        tags[tags.footway ? 'footway' : 'cycleway'] = 'crossing';
                     }
+
                     // apply the structure tags to the way
                     graph = actionChangeTags(structureWay.id, tags)(graph);
+
+                    // for crossing, we also need to join the two lines
+                    if (crossingType === 'crossing') {
+                        const edgesToJoin = [
+                            [structEndNode1.id, structEndNode2.id],
+                            crossedEdge,
+                        ];
+                        graph = actionConnectCrossingWays(crossingLoc, edgesToJoin, connectionTags)(graph);
+                    }
+
                     return graph;
                 };
 
@@ -715,6 +758,42 @@ export function validationCrossingWays(context) {
                 context.enter(modeSelect(context, resultWayIDs));
             }
         });
+    }
+
+    /**
+     * @param {[number, number]} loc
+     * @param {[string, string][]} edges
+     * @param {Tags} connectionTags
+     */
+    function actionConnectCrossingWays(loc, edges, connectionTags) {
+        return (graph) => {
+            // create the new node for the points
+            var node = osmNode({ loc: loc, tags: connectionTags });
+            graph = graph.replace(node);
+
+            var nodesToMerge = [node.id];
+            var mergeThresholdInMeters = 0.75;
+
+            edges.forEach(function(edge) {
+                var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
+                var nearby = geoSphericalClosestNode(edgeNodes, loc);
+                // if there is already a suitable node nearby, use that
+                // use the node if node has no interesting tags or if it is a crossing node #8326
+                if ((!nearby.node.hasInterestingTags() || nearby.node.isCrossing()) && nearby.distance < mergeThresholdInMeters) {
+                    nodesToMerge.push(nearby.node.id);
+                // else add the new node to the way
+                } else {
+                    graph = actionAddMidpoint({loc: loc, edge: edge}, node)(graph);
+                }
+            });
+
+            if (nodesToMerge.length > 1) {
+                // if we're using nearby nodes, merge them with the new node
+                graph = actionMergeNodes(nodesToMerge, loc)(graph);
+            }
+
+            return graph;
+        };
     }
 
     function makeConnectWaysFix(connectionTags) {
@@ -734,38 +813,8 @@ export function validationCrossingWays(context) {
             icon: fixIcon,
             title: t.append('issues.fix.' + fixTitleID + '.title'),
             onClick: function(context) {
-                var loc = this.issue.loc;
-                var edges = this.issue.data.edges;
-
                 context.perform(
-                    function actionConnectCrossingWays(graph) {
-                        // create the new node for the points
-                        var node = osmNode({ loc: loc, tags: connectionTags });
-                        graph = graph.replace(node);
-
-                        var nodesToMerge = [node.id];
-                        var mergeThresholdInMeters = 0.75;
-
-                        edges.forEach(function(edge) {
-                            var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
-                            var nearby = geoSphericalClosestNode(edgeNodes, loc);
-                            // if there is already a suitable node nearby, use that
-                            // use the node if node has no interesting tags or if it is a crossing node #8326
-                            if ((!nearby.node.hasInterestingTags() || nearby.node.isCrossing()) && nearby.distance < mergeThresholdInMeters) {
-                                nodesToMerge.push(nearby.node.id);
-                            // else add the new node to the way
-                            } else {
-                                graph = actionAddMidpoint({loc: loc, edge: edge}, node)(graph);
-                            }
-                        });
-
-                        if (nodesToMerge.length > 1) {
-                            // if we're using nearby nodes, merge them with the new node
-                            graph = actionMergeNodes(nodesToMerge, loc)(graph);
-                        }
-
-                        return graph;
-                    },
+                    actionConnectCrossingWays(this.issue.loc, this.issue.data.edges, connectionTags),
                     t('issues.fix.connect_crossing_features.annotation')
                 );
             }
