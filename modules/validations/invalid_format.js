@@ -41,6 +41,16 @@ export function validationFormatting() {
                 return /^https?:\/\/\S+$/i.test(url);
             }
         }
+        function isFixableURL(url) {
+            try {
+                // must be a valid URL after adding a protocol
+                const link = new URL(`https://${url}`);
+                // should contain at least something that looks like a TLD
+                return link.hostname.includes('.');
+            } catch {
+                return false;
+            }
+        }
 
         function cleanWikimediaCommonsReference(value, allTags) {
             if (!value) return null;
@@ -75,6 +85,7 @@ export function validationFormatting() {
             },
             dynamicFixes: function(context) {
                 if (this.data?.count > 1) return [];
+                if (!this.data?.isFixable) return [];
                 return [{ protocol: 'https', icon: 'temaki-lock' }, { protocol: 'http' }]
                     .filter(fix => isValidURL(fix.protocol + '://' + this.data?.value, true))
                     .map(fix => new validationIssueFix({
@@ -117,16 +128,22 @@ export function validationFormatting() {
                 .map(s => s.trim())
                 .filter(x => !isValidURL(x));
             if (invalidParts.length === 0) return false;
+            const isFixable = invalidParts.some(isFixableURL);
             const fix = value
                 .split(';')
                 .map(s => s.trim())
-                .map(s => isValidURL(s) ? s : `{protocol}://${s}`)
+                .map(s => isValidURL(s) || !isFixableURL(s) ? s : `{protocol}://${s}`)
                 .join(';');
             return {
                 ...websiteValidationIssueBase,
-                data: { key, value: invalidParts.join(', '), fix, count: invalidParts.length },
-                hash: key + '=' + invalidParts.join(),
-                reference: invalidParts.length === 1
+                data: {
+                    key,
+                    isFixable,
+                    fix,
+                    count: invalidParts.length,
+                },
+                hash: key + '=' + invalidParts.join(';'),
+                reference: isFixable
                     ? websiteReferenceWithDiff(entity.tags, {...entity.tags, [key]: fix.replace('{protocol}', 'https') })
                     : showReferenceWebsite
             };
@@ -151,7 +168,7 @@ export function validationFormatting() {
             if (fix) {
                 issues.push(new validationIssue({
                     ...wikimediaCommonsValidationIssueBase,
-                    data: { key: 'image', value: value, fix },
+                    data: { key: 'image', fix },
                     hash: 'image=' + value,
                     dynamicFixes: function(context) {
                         const wikimedia_commons_reference = this.data?.fix;
@@ -196,7 +213,7 @@ export function validationFormatting() {
                     const previewDiff = utilTagDiff({ wikimedia_commons: value }, { wikimedia_commons: newValue });
                     issues.push(new validationIssue({
                         ...wikimediaCommonsValidationIssueBase,
-                        data: { key: 'wikimedia_commons', value },
+                        data: {},
                         hash: 'wikimedia_commons=' + value,
                         dynamicFixes: function(context) {
                             return [new validationIssueFix({

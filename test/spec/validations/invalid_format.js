@@ -128,6 +128,33 @@ describe('iD.validations.invalid_format', function () {
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(0);
         });
+
+        it('should add a protocol in the suggested fix', function() {
+            var entity = createPointWithTags({
+                website: 'example.com'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(1);
+            expect(issues[0].type).to.eql('invalid_format');
+            expect(issues[0].subtype).to.eql('website');
+            const fixes = issues[0].dynamicFixes(context);
+            expect(fixes).to.have.lengthOf.above(0);
+            issues[0].fixes(context)[0].onClick(context);
+            const fixedEntity = context.entity(entity.id);
+            expect(fixedEntity.tags.website).to.eql(`https://${entity.tags.website}`);
+        });
+
+        it('should not offer to add a protocol for a URL without TLD', function() {
+            var entity = createPointWithTags({
+                website: 'none'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(1);
+            expect(issues[0].type).to.eql('invalid_format');
+            expect(issues[0].subtype).to.eql('website');
+            const fixes = issues[0].dynamicFixes(context);
+            expect(fixes).to.have.lengthOf(0);
+        });
     });
 
     describe('Wikimedia Commons validation', function() {
