@@ -47,6 +47,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Treat most aerialways as part of the routable network when checking other ways' connectivity ([#9406])
 * Only consider well known tags containing URLs during website validation ([#12178], thanks [@bhavyaKhatri2703])
+* Show the proposed change of the fix for invalid URL validation warnings ([#12182])
+* Do not suggest to fix invalid URLs without a TLD ([#12182])
+* Suggest to remove full URLs from `wikimedia_commons` tag ([#12182])
 #### :bug: Bugfixes
 * Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
 * Prevent duplicate nodes from being created while using spacebar key to draw a way ([#12051])
@@ -85,6 +88,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12120]: https://github.com/openstreetmap/iD/issues/12120
 [#12139]: https://github.com/openstreetmap/iD/pull/12139
 [#12178]: https://github.com/openstreetmap/iD/pull/12178
+[#12182]: https://github.com/openstreetmap/iD/pull/12182
 
 
 # 2.39.6
