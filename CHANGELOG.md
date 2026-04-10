@@ -227,6 +227,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Don't error on features with a sole `note` tag ([#11522])
 * Warn when two features cross each other on same `layer`, regardless of `bridge` / `tunnel` tags ([#10999], thanks [@homersimpsons])
 * Add `railway=crossing` tag when connecting two railways using the validation fix ([#9226], thanks [@paulklie])
+* Enable validation of invalid URLs in tags like `website` ([#6831], [#11499], thanks [@hlfan])
 #### :bug: Bugfixes
 * Fix typo: `parking:left:capacity` duplicated in osmSummableTags, missing `parking:right:capacity` ([#11819], thanks [@JaiswalShivang])
 * Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
@@ -262,12 +263,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Ensure the recent presets list is always full by filtering for location before limiting the count. ([#11405], thanks [@Razen04])
 
 
+[#6831]: https://github.com/openstreetmap/iD/issues/6831
 [#8464]: https://github.com/openstreetmap/iD/issues/8464
 [#9226]: https://github.com/openstreetmap/iD/pull/9226
 [#9401]: https://github.com/openstreetmap/iD/issues/9401
 [#10935]: https://github.com/openstreetmap/iD/issues/10935
 [#10999]: https://github.com/openstreetmap/iD/pull/10999
 [#11327]: https://github.com/openstreetmap/iD/pull/11327
+[#11499]: https://github.com/openstreetmap/iD/pull/11499
 [#11522]: https://github.com/openstreetmap/iD/issues/11522
 [#11533]: https://github.com/openstreetmap/iD/pull/11533
 [#11589]: https://github.com/openstreetmap/iD/pull/11589
