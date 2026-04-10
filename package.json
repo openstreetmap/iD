@@ -143,6 +143,6 @@
     "node": ">=22"
   },
   "browserslist": [
-    "> 0.3%, last 6 major versions, not dead, Firefox ESR, maintained node versions"
+    "> 0.3%, last 6 major versions, Firefox ESR, not Safari < 14.1, not iOS <= 14, not dead, maintained node versions"
   ]
 }
