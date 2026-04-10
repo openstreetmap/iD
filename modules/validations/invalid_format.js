@@ -106,46 +106,32 @@ export function validationFormatting() {
             );
         }
 
-        Object.entries(entity.tags).map(function([key, tag]) {
-            if (!osmUrlKeys.has(key)) return null;
-            if (!tag) return null;
-            const value = tag.trim();
-            if (!value) return null;
-            if (key === 'image' && cleanWikimediaCommonsReference(value, entity.tags)) return null; // handled separately below
-            if (!value.includes(';')) {
-                // No semicolon, validate whole value
-                if (isValidURL(value)) return null;
-                const fix = `{protocol}://${value}`;
-                return {
-                    ...websiteValidationIssueBase,
-                    data: { key, value, fix },
-                    hash: key + '=' + value,
-                    reference: websiteReferenceWithDiff(entity.tags, {...entity.tags, [key]: fix.replace('{protocol}', 'https') })
-                };
+        Object.entries(entity.tags).map(function([key, value]) {
+            if (!osmUrlKeys.has(key)) return false;
+            if (!value?.trim()) return false;
+            if (key === 'image' && cleanWikimediaCommonsReference(value, entity.tags)) {
+                // wikimedia commons tags are handled separately below
+                return false;
             }
-            const invalidParts = value.split(';').map(s => s.trim()).filter(x => !isValidURL(x));
-            if (!invalidParts.length) {
-                if (isValidURL(value)) return null;
-                // All split parts valid, but whole value still invalid
-                const fix = value
-                    .split(';')
-                    .map(s => s.trim())
-                    .map(s => isValidURL(s) ? s : `{protocol}://${s}`)
-                    .join(';');
-                return {
-                    ...websiteValidationIssueBase,
-                    data: { key, value, fix },
-                    hash: key + '=' + value,
-                    reference: websiteReferenceWithDiff(entity.tags, {...entity.tags, [key]: fix.replace('{protocol}', 'https') })
-                };
-            }
+            const invalidParts = value.split(';')
+                .map(s => s.trim())
+                .filter(x => !isValidURL(x));
+            if (invalidParts.length === 0) return false;
+            const fix = value
+                .split(';')
+                .map(s => s.trim())
+                .map(s => isValidURL(s) ? s : `{protocol}://${s}`)
+                .join(';');
             return {
                 ...websiteValidationIssueBase,
-                data: { key, value: invalidParts.join(', '), count: invalidParts.length },
+                data: { key, value: invalidParts.join(', '), fix, count: invalidParts.length },
                 hash: key + '=' + invalidParts.join(),
-                reference: showReferenceWebsite
+                reference: invalidParts.length === 1
+                    ? websiteReferenceWithDiff(entity.tags, {...entity.tags, [key]: fix.replace('{protocol}', 'https') })
+                    : showReferenceWebsite
             };
-        }).filter(issue => issue !== null).forEach(issueData => issues.push(new validationIssue(issueData)));
+        }).filter(Boolean)
+        .forEach(issueData => issues.push(new validationIssue(issueData)));
 
         const wikimediaCommonsValidationIssueBase = {
             type: type,
