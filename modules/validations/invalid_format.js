@@ -59,6 +59,20 @@ export function validationFormatting() {
                 .call(t.append('issues.invalid_format.website.reference'));
         }
 
+        function isValidCharge(value) {
+            const charge_regex = /^\d+(\.\d{1,3})? [A-Z]{3}(\/.+)?$/;
+            return (!value || charge_regex.test(value));
+        }
+
+        function showReferenceCharge(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .call(t.append('issues.invalid_format.charge.reference'));
+        }
+
         const websiteValidationIssueBase = {
             type: type,
             subtype: 'website',
@@ -171,6 +185,23 @@ export function validationFormatting() {
                     entityIds: [entity.id],
                     hash: emails.join(),
                     data: (emails.length > 1) ? '_multi' : ''
+                }));
+            }
+        }
+        if (entity.tags.charge) {
+            if(!isValidCharge(entity.tags.charge)) {
+                issues.push(new validationIssue({
+                    type: type,
+                    subtype: 'charge',
+                    severity: 'suggestion',
+                    message: function(context) {
+                        var entity = context.hasEntity(this.entityIds[0]);
+                        return entity ? t.append('issues.invalid_format.charge.message' + this.data,
+                            { feature: utilDisplayLabel(entity, context.graph()) }) : '';
+                    },
+                    reference: showReferenceCharge,
+                    entityIds: [entity.id],
+                    hash: entity.tags.charge.join(),
                 }));
             }
         }
