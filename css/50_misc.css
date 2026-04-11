@@ -95,6 +95,51 @@ path.line.casing.tag-route-ferry {
     stroke: none;
 }
 
+/* Zipwire */
+
+.preset-icon .icon.tag-playground-zipwire {
+    color: #2b8cbe;
+}
+path.line.stroke.tag-playground-zipwire {
+    stroke: #4e97bb;
+    stroke-width: 2;
+}
+path.line.casing.tag-playground-zipwire {
+    stroke: #79c0d3;
+}
+
+/* Tunnel tube */
+
+.preset-icon .icon.tag-playground-tunnel_tube {
+    color: #65a45a;
+}
+path.line.stroke.tag-playground-tunnel_tube {
+    stroke: #5b8048;
+}
+path.line.casing.tag-playground-tunnel_tube {
+    stroke: #efe9a7;
+}
+
+/* Playground structure */
+
+.preset-icon .icon.tag-playground-structure {
+    color: #e95fa4;
+}
+path.area.fill.tag-playground-structure {
+    fill: rgba(255, 168, 249, 0.481);
+}
+path.line.stroke.tag-playground-structure {
+    stroke: #ed9ac3;
+    stroke-width: 2;
+}
+path.line.casing.tag-playground-structure {
+    stroke: #bb94a8;
+    stroke-width: 1;
+}
+path.area.stroke.tag-playground-structure {
+    stroke: #dba4c0;
+    stroke-width: 1;
+}
 
 /* aerialways */
 path.line.stroke.tag-aerialway {

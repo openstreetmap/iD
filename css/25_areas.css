@@ -188,10 +188,12 @@ path.fill.tag-landuse-military {
 
 
 /* Pink things */
+path.stroke.tag-playground-structure,
 path.stroke.tag-landuse-industrial,
 path.stroke.tag-power-plant {
     stroke: rgb(228, 164, 245);
 }
+path.fill.tag-playground-structure,
 path.fill.tag-landuse-industrial,
 path.fill.tag-power-plant {
     stroke: rgba(228, 164, 245, 0.3);
