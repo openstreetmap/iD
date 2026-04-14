@@ -153,7 +153,6 @@ export function validationFormatting() {
         const wikimediaCommonsValidationIssueBase = {
             type: type,
             subtype: 'wikimedia_commons',
-            severity: 'warning',
             message: function(context) {
                 const entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.invalid_format.wikimedia_commons.message',
@@ -168,6 +167,7 @@ export function validationFormatting() {
             if (fix) {
                 issues.push(new validationIssue({
                     ...wikimediaCommonsValidationIssueBase,
+                    severity: 'suggestion',
                     data: { key: 'image', fix },
                     hash: 'image=' + value,
                     dynamicFixes: function(context) {
@@ -213,6 +213,7 @@ export function validationFormatting() {
                     const previewDiff = utilTagDiff({ wikimedia_commons: value }, { wikimedia_commons: newValue });
                     issues.push(new validationIssue({
                         ...wikimediaCommonsValidationIssueBase,
+                        severity: 'warning',
                         data: {},
                         hash: 'wikimedia_commons=' + value,
                         dynamicFixes: function(context) {
