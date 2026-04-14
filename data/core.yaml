@@ -1789,6 +1789,8 @@ en:
         title: Extract this point
       ignore_issue:
         title: Ignore this issue
+      ignore_suggestion:
+        title: Ignore this suggestion
       merge_close_vertices:
         annotation: Merged very close points in a way.
       merge_points:
