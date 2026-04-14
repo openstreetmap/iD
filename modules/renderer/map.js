@@ -1080,6 +1080,7 @@ export function rendererMap(context) {
     };
 
 
+    /** @type import('../ui/sections/map_style_options').MapStyle[] */
     map.areaFillOptions = ['wireframe', 'partial', 'full'];
 
     map.activeAreaFill = function(val) {

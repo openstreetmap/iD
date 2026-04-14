@@ -12,6 +12,7 @@ import {
     utilArrayDifference, utilArrayGroupBy, utilArrayUnion,
     utilObjectOmit, utilRebind, utilSessionMutex
 } from '../util';
+import { osmIdManager } from '../osm';
 
 
 export function coreHistory(context) {
@@ -351,7 +352,7 @@ export function coreHistory(context) {
                 _stack = _checkpoints[key].stack;
                 _index = _checkpoints[key].index;
             } else {
-                _stack = [{graph: coreGraph()}];
+                _stack = [{graph: new coreGraph()}];
                 _index = 0;
                 _tree = coreTree(_stack[0].graph);
                 _checkpoints = {};
@@ -505,7 +506,7 @@ export function coreHistory(context) {
                 entities: Object.values(allEntities),
                 baseEntities: Object.values(baseEntities),
                 stack: s,
-                nextIDs: osmEntity.id.next,
+                nextIDs: osmIdManager.next,
                 index: _index,
                 // note the time the changes were saved
                 timestamp: (new Date()).getTime()
@@ -516,7 +517,7 @@ export function coreHistory(context) {
         fromJSON: function(h, loadChildNodes) {
             var loadComplete = true;
 
-            osmEntity.id.next = h.nextIDs;
+            osmIdManager.next = h.nextIDs;
             _index = h.index;
 
             if (h.version === 2 || h.version === 3) {
@@ -603,7 +604,7 @@ export function coreHistory(context) {
                     }
 
                     return {
-                        graph: coreGraph(_stack[0].graph).load(entities),
+                        graph: new coreGraph(_stack[0].graph).load(entities),
                         annotation: d.annotation,
                         imageryUsed: d.imageryUsed,
                         photoOverlaysUsed: d.photoOverlaysUsed,
@@ -621,7 +622,7 @@ export function coreHistory(context) {
                         entities[i] = entity === 'undefined' ? undefined : osmEntity(entity);
                     }
 
-                    d.graph = coreGraph(_stack[0].graph).load(entities);
+                    d.graph = new coreGraph(_stack[0].graph).load(entities);
                     return d;
                 });
             }

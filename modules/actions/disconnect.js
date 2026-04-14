@@ -30,7 +30,7 @@ export function actionDisconnect(nodeId, newNodeId) {
 
         connections.forEach(function(connection) {
             var way = graph.entity(connection.wayID);
-            var newNode = osmNode({id: newNodeId, loc: node.loc, tags: node.tags});
+            var newNode = new osmNode({id: newNodeId, loc: node.loc, tags: node.tags});
 
             graph = graph.replace(newNode);
             if (connection.index === 0 && way.isArea()) {

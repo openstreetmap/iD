@@ -7,12 +7,12 @@ describe('iD.actionOrthogonalize', function () {
             //    d --- c
             //    |     |
             //    a --- b
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [2, 0]}),
+                new iD.osmNode({id: 'c', loc: [2, 2]}),
+                new iD.osmNode({id: 'd', loc: [0, 2]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
@@ -23,12 +23,12 @@ describe('iD.actionOrthogonalize', function () {
             //    d --- c
             //    |     |
             //    a ---  b
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2.1, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [2.1, 0]}),
+                new iD.osmNode({id: 'c', loc: [2, 2]}),
+                new iD.osmNode({id: 'd', loc: [0, 2]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
@@ -40,11 +40,11 @@ describe('iD.actionOrthogonalize', function () {
             //    | \
             //    |   \
             //     b - c
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 3]}),
-                iD.osmNode({id: 'b', loc: [0.1, 0]}),
-                iD.osmNode({id: 'c', loc: [3, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'a']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 3]}),
+                new iD.osmNode({id: 'b', loc: [0.1, 0]}),
+                new iD.osmNode({id: 'c', loc: [3, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'a']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
@@ -55,13 +55,13 @@ describe('iD.actionOrthogonalize', function () {
             //    e - d - c
             //    |       |
             //    a ----- b
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [1, 2]}),
-                iD.osmNode({id: 'e', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [2, 0]}),
+                new iD.osmNode({id: 'c', loc: [2, 2]}),
+                new iD.osmNode({id: 'd', loc: [1, 2]}),
+                new iD.osmNode({id: 'e', loc: [0, 2]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
@@ -72,13 +72,13 @@ describe('iD.actionOrthogonalize', function () {
             //    e - d - c
             //    |       |
             //    a ----- b
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [1, 2], tags: {foo: 'bar'}}),
-                iD.osmNode({id: 'e', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [2, 0]}),
+                new iD.osmNode({id: 'c', loc: [2, 2]}),
+                new iD.osmNode({id: 'd', loc: [1, 2], tags: {foo: 'bar'}}),
+                new iD.osmNode({id: 'e', loc: [0, 2]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
@@ -92,14 +92,14 @@ describe('iD.actionOrthogonalize', function () {
             //    |     d - c
             //    |         |
             //    a -------- b
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [3.1, 0]}),
-                iD.osmNode({id: 'c', loc: [3, 1]}),
-                iD.osmNode({id: 'd', loc: [2, 1]}),
-                iD.osmNode({id: 'e', loc: [1, 2]}),
-                iD.osmNode({id: 'f', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [3.1, 0]}),
+                new iD.osmNode({id: 'c', loc: [3, 1]}),
+                new iD.osmNode({id: 'd', loc: [2, 1]}),
+                new iD.osmNode({id: 'e', loc: [1, 2]}),
+                new iD.osmNode({id: 'f', loc: [0, 2]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection)(graph));
@@ -112,15 +112,15 @@ describe('iD.actionOrthogonalize', function () {
             //   e --- d - c
             //        |    |
             //        a -- b
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [ 0, -1]}),
-                iD.osmNode({id: 'b', loc: [ 1, -1]}),
-                iD.osmNode({id: 'c', loc: [ 0,  1]}),
-                iD.osmNode({id: 'd', loc: [ 0.1,  0]}),
-                iD.osmNode({id: 'e', loc: [-1,  0]}),
-                iD.osmNode({id: 'f', loc: [-1,  1]}),
-                iD.osmNode({id: 'g', loc: [ 0,  1]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'd', 'a']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [ 0, -1]}),
+                new iD.osmNode({id: 'b', loc: [ 1, -1]}),
+                new iD.osmNode({id: 'c', loc: [ 0,  1]}),
+                new iD.osmNode({id: 'd', loc: [ 0.1,  0]}),
+                new iD.osmNode({id: 'e', loc: [-1,  0]}),
+                new iD.osmNode({id: 'f', loc: [-1,  1]}),
+                new iD.osmNode({id: 'g', loc: [ 0,  1]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'd', 'a']})
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection)(graph));
@@ -143,12 +143,12 @@ describe('iD.actionOrthogonalize', function () {
             ]];
 
             for (var i = 0; i < tests.length; i++) {
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: tests[i][0]}),
-                    iD.osmNode({id: 'b', loc: tests[i][1]}),
-                    iD.osmNode({id: 'c', loc: tests[i][2]}),
-                    iD.osmNode({id: 'd', loc: tests[i][3]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: tests[i][0]}),
+                    new iD.osmNode({id: 'b', loc: tests[i][1]}),
+                    new iD.osmNode({id: 'c', loc: tests[i][2]}),
+                    new iD.osmNode({id: 'd', loc: tests[i][3]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
                 var initialWidth = iD.geoSphericalDistance(graph.entity('a').loc, graph.entity('b').loc);
                 graph = iD.actionOrthogonalize('-', projection)(graph);
@@ -159,13 +159,13 @@ describe('iD.actionOrthogonalize', function () {
 
         it('preserves a way\'s duplicate vertices', function () {
             // #9155
-            let graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2.1, 0]}),
-                iD.osmNode({id: 'c', loc: [2.1, 0]}),
-                iD.osmNode({id: 'd', loc: [2, 2]}),
-                iD.osmNode({id: 'e', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
+            let graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [2.1, 0]}),
+                new iD.osmNode({id: 'c', loc: [2.1, 0]}),
+                new iD.osmNode({id: 'd', loc: [2, 2]}),
+                new iD.osmNode({id: 'e', loc: [0, 2]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
@@ -179,12 +179,12 @@ describe('iD.actionOrthogonalize', function () {
             //    d --- c
             //          |
             //    a --- b
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [2, 0]}),
+                new iD.osmNode({id: 'c', loc: [2, 2]}),
+                new iD.osmNode({id: 'd', loc: [0, 2]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
@@ -195,12 +195,12 @@ describe('iD.actionOrthogonalize', function () {
             //    d --- c
             //          |
             //    a ---  b
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2.1, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [2.1, 0]}),
+                new iD.osmNode({id: 'c', loc: [2, 2]}),
+                new iD.osmNode({id: 'd', loc: [0, 2]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
@@ -212,11 +212,11 @@ describe('iD.actionOrthogonalize', function () {
             //    |
             //    |
             //     b - c
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 3]}),
-                iD.osmNode({id: 'b', loc: [0.1, 0]}),
-                iD.osmNode({id: 'c', loc: [3, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 3]}),
+                new iD.osmNode({id: 'b', loc: [0.1, 0]}),
+                new iD.osmNode({id: 'c', loc: [3, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
@@ -227,13 +227,13 @@ describe('iD.actionOrthogonalize', function () {
             //    e - d - c
             //            |
             //    a ----- b
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [1, 2]}),
-                iD.osmNode({id: 'e', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [2, 0]}),
+                new iD.osmNode({id: 'c', loc: [2, 2]}),
+                new iD.osmNode({id: 'd', loc: [1, 2]}),
+                new iD.osmNode({id: 'e', loc: [0, 2]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
@@ -244,13 +244,13 @@ describe('iD.actionOrthogonalize', function () {
             //    e - d - c
             //            |
             //    a ----- b
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [1, 2], tags: {foo: 'bar'}}),
-                iD.osmNode({id: 'e', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [2, 0]}),
+                new iD.osmNode({id: 'c', loc: [2, 2]}),
+                new iD.osmNode({id: 'd', loc: [1, 2], tags: {foo: 'bar'}}),
+                new iD.osmNode({id: 'e', loc: [0, 2]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
@@ -264,14 +264,14 @@ describe('iD.actionOrthogonalize', function () {
             //          d - c
             //              |
             //    a -------- b
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [3.1, 0]}),
-                iD.osmNode({id: 'c', loc: [3, 1]}),
-                iD.osmNode({id: 'd', loc: [2, 1]}),
-                iD.osmNode({id: 'e', loc: [1, 2]}),
-                iD.osmNode({id: 'f', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [3.1, 0]}),
+                new iD.osmNode({id: 'c', loc: [3, 1]}),
+                new iD.osmNode({id: 'd', loc: [2, 1]}),
+                new iD.osmNode({id: 'e', loc: [1, 2]}),
+                new iD.osmNode({id: 'f', loc: [0, 2]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f']})
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection)(graph));
@@ -282,13 +282,13 @@ describe('iD.actionOrthogonalize', function () {
             //   f -- g
             //   |    |
             //   e --- d - c
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'c', loc: [ 0,  1]}),
-                iD.osmNode({id: 'd', loc: [ 0.1,  0]}),
-                iD.osmNode({id: 'e', loc: [-1,  0]}),
-                iD.osmNode({id: 'f', loc: [-1,  1]}),
-                iD.osmNode({id: 'g', loc: [ 0,  1]}),
-                iD.osmWay({id: '-', nodes: ['c', 'd', 'e', 'f', 'g', 'd']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'c', loc: [ 0,  1]}),
+                new iD.osmNode({id: 'd', loc: [ 0.1,  0]}),
+                new iD.osmNode({id: 'e', loc: [-1,  0]}),
+                new iD.osmNode({id: 'f', loc: [-1,  1]}),
+                new iD.osmNode({id: 'g', loc: [ 0,  1]}),
+                new iD.osmWay({id: '-', nodes: ['c', 'd', 'e', 'f', 'g', 'd']})
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection)(graph));
@@ -303,12 +303,12 @@ describe('iD.actionOrthogonalize', function () {
             //    d --- c
             //    |     |
             //    a ---  b
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2.1, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [2.1, 0]}),
+                new iD.osmNode({id: 'c', loc: [2, 2]}),
+                new iD.osmNode({id: 'd', loc: [0, 2]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
@@ -323,11 +323,11 @@ describe('iD.actionOrthogonalize', function () {
             //    | \
             //    |   \
             //     b - c
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 3]}),
-                iD.osmNode({id: 'b', loc: [0.1, 0]}),
-                iD.osmNode({id: 'c', loc: [3, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'a']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 3]}),
+                new iD.osmNode({id: 'b', loc: [0.1, 0]}),
+                new iD.osmNode({id: 'c', loc: [3, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'a']})
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
@@ -340,12 +340,12 @@ describe('iD.actionOrthogonalize', function () {
             //    d --- c
             //          |
             //    a ---  b
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2.1, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [2.1, 0]}),
+                new iD.osmNode({id: 'c', loc: [2, 2]}),
+                new iD.osmNode({id: 'd', loc: [0, 2]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
@@ -360,11 +360,11 @@ describe('iD.actionOrthogonalize', function () {
             //    |
             //    |
             //     b - c
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 3]}),
-                iD.osmNode({id: 'b', loc: [0.1, 0]}),
-                iD.osmNode({id: 'c', loc: [3, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 3]}),
+                new iD.osmNode({id: 'b', loc: [0.1, 0]}),
+                new iD.osmNode({id: 'c', loc: [3, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
@@ -383,12 +383,12 @@ describe('iD.actionOrthogonalize', function () {
                 //    d ---- c
                 //    |      |
                 //    a ---- b
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [2, 0]}),
-                    iD.osmNode({id: 'c', loc: [2, 2]}),
-                    iD.osmNode({id: 'd', loc: [0, 2]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0, 0]}),
+                    new iD.osmNode({id: 'b', loc: [2, 0]}),
+                    new iD.osmNode({id: 'c', loc: [2, 2]}),
+                    new iD.osmNode({id: 'd', loc: [0, 2]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
@@ -399,12 +399,12 @@ describe('iD.actionOrthogonalize', function () {
                 //    d --- c
                 //    |     |
                 //    a ---- b
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [2.1, 0]}),
-                    iD.osmNode({id: 'c', loc: [2, 2]}),
-                    iD.osmNode({id: 'd', loc: [0, 2]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0, 0]}),
+                    new iD.osmNode({id: 'b', loc: [2.1, 0]}),
+                    new iD.osmNode({id: 'c', loc: [2, 2]}),
+                    new iD.osmNode({id: 'd', loc: [0, 2]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
@@ -416,11 +416,11 @@ describe('iD.actionOrthogonalize', function () {
                 //    | \
                 //    |   \
                 //     b - c
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 3]}),
-                    iD.osmNode({id: 'b', loc: [0.1, 0]}),
-                    iD.osmNode({id: 'c', loc: [3, 0]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'a']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0, 3]}),
+                    new iD.osmNode({id: 'b', loc: [0.1, 0]}),
+                    new iD.osmNode({id: 'c', loc: [3, 0]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'a']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
@@ -431,13 +431,13 @@ describe('iD.actionOrthogonalize', function () {
                 //    e - d - c
                 //    |       |
                 //    a ----- b
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [2, 0]}),
-                    iD.osmNode({id: 'c', loc: [2, 2]}),
-                    iD.osmNode({id: 'd', loc: [1, 2]}),
-                    iD.osmNode({id: 'e', loc: [0, 2]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0, 0]}),
+                    new iD.osmNode({id: 'b', loc: [2, 0]}),
+                    new iD.osmNode({id: 'c', loc: [2, 2]}),
+                    new iD.osmNode({id: 'd', loc: [1, 2]}),
+                    new iD.osmNode({id: 'e', loc: [0, 2]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
@@ -450,14 +450,14 @@ describe('iD.actionOrthogonalize', function () {
                 //    f        c
                 //     \      /
                 //      a -- b
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [1, 0]}),
-                    iD.osmNode({id: 'b', loc: [3, 0]}),
-                    iD.osmNode({id: 'c', loc: [4, 2]}),
-                    iD.osmNode({id: 'd', loc: [3, 4]}),
-                    iD.osmNode({id: 'e', loc: [1, 4]}),
-                    iD.osmNode({id: 'f', loc: [0, 2]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [1, 0]}),
+                    new iD.osmNode({id: 'b', loc: [3, 0]}),
+                    new iD.osmNode({id: 'c', loc: [4, 2]}),
+                    new iD.osmNode({id: 'd', loc: [3, 4]}),
+                    new iD.osmNode({id: 'e', loc: [1, 4]}),
+                    new iD.osmNode({id: 'f', loc: [0, 2]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
@@ -470,15 +470,15 @@ describe('iD.actionOrthogonalize', function () {
                 //   e --- d - c
                 //        |    |
                 //        a -- b
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [ 0, -1]}),
-                    iD.osmNode({id: 'b', loc: [ 1, -1]}),
-                    iD.osmNode({id: 'c', loc: [ 0,  1]}),
-                    iD.osmNode({id: 'd', loc: [ 0.1,  0]}),
-                    iD.osmNode({id: 'e', loc: [-1,  0]}),
-                    iD.osmNode({id: 'f', loc: [-1,  1]}),
-                    iD.osmNode({id: 'g', loc: [ 0,  1]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'd', 'a']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [ 0, -1]}),
+                    new iD.osmNode({id: 'b', loc: [ 1, -1]}),
+                    new iD.osmNode({id: 'c', loc: [ 0,  1]}),
+                    new iD.osmNode({id: 'd', loc: [ 0.1,  0]}),
+                    new iD.osmNode({id: 'e', loc: [-1,  0]}),
+                    new iD.osmNode({id: 'f', loc: [-1,  1]}),
+                    new iD.osmNode({id: 'g', loc: [ 0,  1]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'd', 'a']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
@@ -494,12 +494,12 @@ describe('iD.actionOrthogonalize', function () {
                 //    d ---- c
                 //           |
                 //    a ---- b
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [2, 0]}),
-                    iD.osmNode({id: 'c', loc: [2, 2]}),
-                    iD.osmNode({id: 'd', loc: [0, 2]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0, 0]}),
+                    new iD.osmNode({id: 'b', loc: [2, 0]}),
+                    new iD.osmNode({id: 'c', loc: [2, 2]}),
+                    new iD.osmNode({id: 'd', loc: [0, 2]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
@@ -510,12 +510,12 @@ describe('iD.actionOrthogonalize', function () {
                 //    d --- c
                 //          |
                 //    a ---  b
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [2.1, 0]}),
-                    iD.osmNode({id: 'c', loc: [2, 2]}),
-                    iD.osmNode({id: 'd', loc: [0, 2]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0, 0]}),
+                    new iD.osmNode({id: 'b', loc: [2.1, 0]}),
+                    new iD.osmNode({id: 'c', loc: [2, 2]}),
+                    new iD.osmNode({id: 'd', loc: [0, 2]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
@@ -527,11 +527,11 @@ describe('iD.actionOrthogonalize', function () {
                 //    |
                 //    |
                 //     b - c
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 3]}),
-                    iD.osmNode({id: 'b', loc: [0, 0.1]}),
-                    iD.osmNode({id: 'c', loc: [3, 0]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0, 3]}),
+                    new iD.osmNode({id: 'b', loc: [0, 0.1]}),
+                    new iD.osmNode({id: 'c', loc: [3, 0]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
@@ -542,13 +542,13 @@ describe('iD.actionOrthogonalize', function () {
                 //    e - d - c
                 //            |
                 //    a ----- b
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [2, 0]}),
-                    iD.osmNode({id: 'c', loc: [2, 2]}),
-                    iD.osmNode({id: 'd', loc: [1, 2]}),
-                    iD.osmNode({id: 'e', loc: [0, 2]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0, 0]}),
+                    new iD.osmNode({id: 'b', loc: [2, 0]}),
+                    new iD.osmNode({id: 'c', loc: [2, 2]}),
+                    new iD.osmNode({id: 'd', loc: [1, 2]}),
+                    new iD.osmNode({id: 'e', loc: [0, 2]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
@@ -561,14 +561,14 @@ describe('iD.actionOrthogonalize', function () {
                 //    f        c
                 //            /
                 //      a -- b
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [1, 0]}),
-                    iD.osmNode({id: 'b', loc: [3, 0]}),
-                    iD.osmNode({id: 'c', loc: [4, 2]}),
-                    iD.osmNode({id: 'd', loc: [3, 4]}),
-                    iD.osmNode({id: 'e', loc: [1, 4]}),
-                    iD.osmNode({id: 'f', loc: [0, 2]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [1, 0]}),
+                    new iD.osmNode({id: 'b', loc: [3, 0]}),
+                    new iD.osmNode({id: 'c', loc: [4, 2]}),
+                    new iD.osmNode({id: 'd', loc: [3, 4]}),
+                    new iD.osmNode({id: 'e', loc: [1, 4]}),
+                    new iD.osmNode({id: 'f', loc: [0, 2]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
@@ -579,13 +579,13 @@ describe('iD.actionOrthogonalize', function () {
                 //   f -- g
                 //   |    |
                 //   e --- d - c
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'c', loc: [ 0,  1]}),
-                    iD.osmNode({id: 'd', loc: [ 0.1,  0]}),
-                    iD.osmNode({id: 'e', loc: [-1,  0]}),
-                    iD.osmNode({id: 'f', loc: [-1,  1]}),
-                    iD.osmNode({id: 'g', loc: [ 0,  1]}),
-                    iD.osmWay({id: '-', nodes: ['c', 'd', 'e', 'f', 'g', 'd']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'c', loc: [ 0,  1]}),
+                    new iD.osmNode({id: 'd', loc: [ 0.1,  0]}),
+                    new iD.osmNode({id: 'e', loc: [-1,  0]}),
+                    new iD.osmNode({id: 'f', loc: [-1,  1]}),
+                    new iD.osmNode({id: 'g', loc: [ 0,  1]}),
+                    new iD.osmWay({id: '-', nodes: ['c', 'd', 'e', 'f', 'g', 'd']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
@@ -599,12 +599,12 @@ describe('iD.actionOrthogonalize', function () {
                 //    d ---- c
                 //           |
                 //    a ---- b
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [2, 0]}),
-                    iD.osmNode({id: 'c', loc: [2, 2]}),
-                    iD.osmNode({id: 'd', loc: [0, 2]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0, 0]}),
+                    new iD.osmNode({id: 'b', loc: [2, 0]}),
+                    new iD.osmNode({id: 'c', loc: [2, 2]}),
+                    new iD.osmNode({id: 'd', loc: [0, 2]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection, 'b').disabled(graph);
@@ -615,12 +615,12 @@ describe('iD.actionOrthogonalize', function () {
                 //    d --- c
                 //          |
                 //    a ---  b
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [2.1, 0]}),
-                    iD.osmNode({id: 'c', loc: [2, 2]}),
-                    iD.osmNode({id: 'd', loc: [0, 2]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0, 0]}),
+                    new iD.osmNode({id: 'b', loc: [2.1, 0]}),
+                    new iD.osmNode({id: 'c', loc: [2, 2]}),
+                    new iD.osmNode({id: 'd', loc: [0, 2]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection, 'b').disabled(graph);
@@ -632,11 +632,11 @@ describe('iD.actionOrthogonalize', function () {
                 //    |
                 //    |
                 //     b - c
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 3]}),
-                    iD.osmNode({id: 'b', loc: [0, 0.1]}),
-                    iD.osmNode({id: 'c', loc: [3, 0]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0, 3]}),
+                    new iD.osmNode({id: 'b', loc: [0, 0.1]}),
+                    new iD.osmNode({id: 'c', loc: [3, 0]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection, 'b').disabled(graph);
@@ -649,14 +649,14 @@ describe('iD.actionOrthogonalize', function () {
                 //    f        c
                 //            /
                 //      a -- b
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [1, 0]}),
-                    iD.osmNode({id: 'b', loc: [3, 0]}),
-                    iD.osmNode({id: 'c', loc: [4, 2]}),
-                    iD.osmNode({id: 'd', loc: [3, 4]}),
-                    iD.osmNode({id: 'e', loc: [1, 4]}),
-                    iD.osmNode({id: 'f', loc: [0, 2]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [1, 0]}),
+                    new iD.osmNode({id: 'b', loc: [3, 0]}),
+                    new iD.osmNode({id: 'c', loc: [4, 2]}),
+                    new iD.osmNode({id: 'd', loc: [3, 4]}),
+                    new iD.osmNode({id: 'e', loc: [1, 4]}),
+                    new iD.osmNode({id: 'f', loc: [0, 2]}),
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f']})
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection, 'b').disabled(graph);
@@ -678,14 +678,14 @@ describe('iD.actionOrthogonalize', function () {
         //     a -- b -- c -- d
 
         it('orthogonalize at t = 0', function() {
-           var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-                iD.osmNode({id: 'c', loc: [2, -0.01]}),
-                iD.osmNode({id: 'd', loc: [3, 0]}),
-                iD.osmNode({id: 'e', loc: [3, 1]}),
-                iD.osmNode({id: 'f', loc: [0, 1]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
+           var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+                new iD.osmNode({id: 'c', loc: [2, -0.01]}),
+                new iD.osmNode({id: 'd', loc: [3, 0]}),
+                new iD.osmNode({id: 'e', loc: [3, 1]}),
+                new iD.osmNode({id: 'f', loc: [0, 1]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph, 0);
@@ -698,14 +698,14 @@ describe('iD.actionOrthogonalize', function () {
         });
 
         it('orthogonalize at t = 0.5', function() {
-           var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-                iD.osmNode({id: 'c', loc: [2, -0.01]}),
-                iD.osmNode({id: 'd', loc: [3, 0]}),
-                iD.osmNode({id: 'e', loc: [3, 1]}),
-                iD.osmNode({id: 'f', loc: [0, 1]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
+           var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+                new iD.osmNode({id: 'c', loc: [2, -0.01]}),
+                new iD.osmNode({id: 'd', loc: [3, 0]}),
+                new iD.osmNode({id: 'e', loc: [3, 1]}),
+                new iD.osmNode({id: 'f', loc: [0, 1]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph, 0.5);
@@ -717,14 +717,14 @@ describe('iD.actionOrthogonalize', function () {
         });
 
         it('orthogonalize at t = 1', function() {
-           var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-                iD.osmNode({id: 'c', loc: [2, -0.01]}),
-                iD.osmNode({id: 'd', loc: [3, 0]}),
-                iD.osmNode({id: 'e', loc: [3, 1]}),
-                iD.osmNode({id: 'f', loc: [0, 1]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
+           var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+                new iD.osmNode({id: 'c', loc: [2, -0.01]}),
+                new iD.osmNode({id: 'd', loc: [3, 0]}),
+                new iD.osmNode({id: 'e', loc: [3, 1]}),
+                new iD.osmNode({id: 'f', loc: [0, 1]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph, 1);

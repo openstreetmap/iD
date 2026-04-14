@@ -40,6 +40,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Render shared bicycle/foot paths with a dedicated colour ([#10256], thanks [@k-yle])
+* Make sure long autocomplete-suggestions in input fields do not scroll the input field beyond the cursor location in Firefox
+* Expand input element of multi-combo fields while typing to fit content ([#12169])
 #### :scissors: Operations
 * Correctly split a way on all selected vertices when three or more nodes are selected ([#12120])
 * Create fewer points when circularizing small features (and vice versa): the number of vertices in the resulting circle is now dynamic between a 12 and 32 depending on the radius of the circle (instead of always resulting in 19 nodes) ([#12139])
@@ -66,6 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 * Standardize tooltips in combo boxes: always show (full) raw tag, don't duplicate the already rendered titles, and show descriptions from wiki/taginfo where available ([#12010], thanks [@tordans])
 * Use full width for the dropdown box for the values of the `access` field ([#12065])
+* Preserve the order of options when a combo field accepts both static options as well as autosuggestions from taginfo and display additional tag values from taginfo as raw-options only ([#12117])
 #### :hammer: Development
 * Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
 * Add type annotations to `context.js` module ([#11589], thanks [@k-yle])
@@ -85,8 +88,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12070]: https://github.com/openstreetmap/iD/issues/12070
 [#12078]: https://github.com/openstreetmap/iD/issues/12078
 [#12110]: https://github.com/openstreetmap/iD/issues/12110
+[#12117]: https://github.com/openstreetmap/iD/issues/12117
 [#12120]: https://github.com/openstreetmap/iD/issues/12120
 [#12139]: https://github.com/openstreetmap/iD/pull/12139
+[#12169]: https://github.com/openstreetmap/iD/issues/12169
 [#12178]: https://github.com/openstreetmap/iD/pull/12178
 [#12182]: https://github.com/openstreetmap/iD/pull/12182
 

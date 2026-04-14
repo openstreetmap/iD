@@ -23,7 +23,7 @@ export function actionExtract(entityID, projection) {
         extractedNodeID = node.id;
 
         // Create a new node to replace the one we will detach
-        var replacement = osmNode({ loc: node.loc });
+        var replacement = new osmNode({ loc: node.loc });
         graph = graph.replace(replacement);
 
         // Process each way in turn, updating the graph as we go
@@ -114,7 +114,7 @@ export function actionExtract(entityID, projection) {
             entityTags.area = 'yes';
         }
 
-        var replacement = osmNode({ loc: extractedLoc, tags: pointTags });
+        var replacement = new osmNode({ loc: extractedLoc, tags: pointTags });
         graph = graph.replace(replacement);
 
         extractedNodeID = replacement.id;

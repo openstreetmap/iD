@@ -3,12 +3,12 @@ describe('iD.actionRestrictTurn', function() {
         //
         // u === * --- w
         //
-        var graph = iD.coreGraph([
-            iD.osmNode({id: 'u'}),
-            iD.osmNode({id: '*'}),
-            iD.osmNode({id: 'w'}),
-            iD.osmWay({id: '=', nodes: ['u', '*']}),
-            iD.osmWay({id: '-', nodes: ['*', 'w']})
+        var graph = new iD.coreGraph([
+            new iD.osmNode({id: 'u'}),
+            new iD.osmNode({id: '*'}),
+            new iD.osmNode({id: 'w'}),
+            new iD.osmWay({id: '=', nodes: ['u', '*']}),
+            new iD.osmWay({id: '-', nodes: ['*', 'w']})
         ]);
 
         var turn = {
@@ -43,14 +43,14 @@ describe('iD.actionRestrictTurn', function() {
         //       |
         // w --- v2
         //
-        var graph = iD.coreGraph([
-            iD.osmNode({id: 'u'}),
-            iD.osmNode({id: 'v1'}),
-            iD.osmNode({id: 'v2'}),
-            iD.osmNode({id: 'w'}),
-            iD.osmWay({id: '=', nodes: ['u', 'v1']}),
-            iD.osmWay({id: '|', nodes: ['v1', 'v2']}),
-            iD.osmWay({id: '-', nodes: ['v2', 'w']})
+        var graph = new iD.coreGraph([
+            new iD.osmNode({id: 'u'}),
+            new iD.osmNode({id: 'v1'}),
+            new iD.osmNode({id: 'v2'}),
+            new iD.osmNode({id: 'w'}),
+            new iD.osmWay({id: '=', nodes: ['u', 'v1']}),
+            new iD.osmWay({id: '|', nodes: ['v1', 'v2']}),
+            new iD.osmWay({id: '-', nodes: ['v2', 'w']})
         ]);
 
         var turn = {

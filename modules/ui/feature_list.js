@@ -22,6 +22,7 @@ import {
     utilHighlightEntities,
     utilNoAuto
 } from '../util';
+import { osmIdManager } from '../osm';
 
 
 export const idMatch = q => {
@@ -214,7 +215,7 @@ export function uiFeatureList(context) {
 
                     // Make a temporary osmEntity so we can preset match
                     // and better localize the search result - #4725
-                    var id = osmEntity.id.fromOSM(d.osm_type, d.osm_id);
+                    var id = osmIdManager.fromOSM(d.osm_type, d.osm_id);
                     var tags = {};
                     tags[d.class] = d.type;
 
@@ -224,7 +225,7 @@ export function uiFeatureList(context) {
                     }
 
                     var tempEntity = osmEntity(attrs);
-                    var tempGraph = coreGraph([tempEntity]);
+                    var tempGraph = new coreGraph([tempEntity]);
                     var matched = presetManager.match(tempEntity, tempGraph);
                     var type = (matched && matched.name()) || utilDisplayType(id);
 

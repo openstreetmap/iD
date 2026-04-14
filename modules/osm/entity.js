@@ -1,4 +1,4 @@
-import { debug } from '../index';
+import { debug, osmIdManager } from '../index';
 import { osmIsInterestingTag } from './tags';
 import { utilArrayUnion } from '../util/array';
 import { utilUnicodeCharsTruncated } from '../util/util';
@@ -12,41 +12,12 @@ export function osmEntity(attrs) {
     if (attrs && attrs.type) {
         return new osmEntity[attrs.type](...arguments);
     } else if (attrs && attrs.id) {
-        return new osmEntity[osmEntity.id.type(attrs.id)](...arguments);
+        return new osmEntity[osmIdManager.type(attrs.id)](...arguments);
     }
 
     // Initialize a generic Entity (used only in tests).
     return (new osmEntity()).initialize(arguments);
 }
-
-
-osmEntity.id = function(type) {
-    return osmEntity.id.fromOSM(type, osmEntity.id.next[type]--);
-};
-
-
-osmEntity.id.next = {
-    changeset: -1, node: -1, way: -1, relation: -1
-};
-
-
-osmEntity.id.fromOSM = function(type, id) {
-    return type[0] + id;
-};
-
-
-osmEntity.id.toOSM = function(id) {
-    var match = id.match(/^[cnwr](-?\d+)$/);
-    if (match) {
-        return match[1];
-    }
-    return '';
-};
-
-
-osmEntity.id.type = function(id) {
-    return { 'c': 'changeset', 'n': 'node', 'w': 'way', 'r': 'relation' }[id[0]];
-};
 
 
 // A function suitable for use as the second argument to d3.selection#data().
@@ -63,6 +34,12 @@ osmEntity.prototype = {
     /** @type {String} */
     id: undefined,
 
+    /** @type {number | undefined} */
+    v: undefined,
+
+    /** @type {boolean | undefined} */
+    visible: undefined,
+
     initialize: function(sources) {
         for (var i = 0; i < sources.length; ++i) {
             var source = sources[i];
@@ -78,7 +55,7 @@ osmEntity.prototype = {
         }
 
         if (!this.id && this.type) {
-            this.id = osmEntity.id(this.type);
+            this.id = osmIdManager.newId(this.type);
         }
         if (!this.hasOwnProperty('visible')) {
             this.visible = true;
@@ -108,12 +85,12 @@ osmEntity.prototype = {
 
 
     osmId: function() {
-        return osmEntity.id.toOSM(this.id);
+        return osmIdManager.toOSM(this.id);
     },
 
 
     isNew: function() {
-        var osmId = osmEntity.id.toOSM(this.id);
+        var osmId = osmIdManager.toOSM(this.id);
         return osmId.length === 0 || osmId[0] === '-';
     },
 
@@ -127,7 +104,7 @@ osmEntity.prototype = {
      *
      * @param {Tags} tags tags to merge into this entity's tags
      * @param {Tags} setTags (optional) a set of tags to overwrite in this entity's tags
-     * @returns {iD.OsmEntity}
+     * @returns {typeof this}
      */
     mergeTags: function(tags, setTags = {}) {
         const merged = Object.assign({}, this.tags);   // shallow copy

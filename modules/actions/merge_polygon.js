@@ -92,7 +92,7 @@ export function actionMergePolygon(ids, newRelationId) {
             var oldestID = utilOldestID(entities.multipolygon.map((entity) => entity.id));
             relation = entities.multipolygon.find((entity) => entity.id === oldestID);
         } else {
-            relation = osmRelation({ id: newRelationId, tags: { type: 'multipolygon' }});
+            relation = new osmRelation({ id: newRelationId, tags: { type: 'multipolygon' }});
         }
 
         entities.multipolygon.forEach(function(m) {

@@ -4,15 +4,17 @@ import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
 
-export function uiSectionMapStyleOptions(context) {
+export type MapStyle = 'wireframe' | 'area_fill' | 'highlight_edits';
 
-    var section = uiSection('fill-area', context)
+export function uiSectionMapStyleOptions(context: iD.Context) {
+
+    const section = (uiSection('fill-area', context) as any)
         .label(() => t.append('map_data.style_options'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
-    function renderDisclosureContent(selection) {
-        var container = selection.selectAll('.layer-fill-list')
+    function renderDisclosureContent(selection: d3.Selection) {
+        const container = selection.selectAll<HTMLUListElement, any>('ul.layer-fill-list')
             .data([0]);
 
         container.enter()
@@ -21,20 +23,27 @@ export function uiSectionMapStyleOptions(context) {
             .merge(container)
             .call(drawListItems, context.map().areaFillOptions, 'radio', 'area_fill', setFill, isActiveFill);
 
-        var container2 = selection.selectAll('.layer-visual-diff-list')
+        const container2 = selection.selectAll<HTMLUListElement, any>('ul.layer-visual-diff-list')
             .data([0]);
 
         container2.enter()
             .append('ul')
             .attr('class', 'layer-list layer-visual-diff-list')
             .merge(container2)
-            .call(drawListItems, ['highlight_edits'], 'checkbox', 'visual_diff', toggleHighlightEdited, function() {
-                return context.surface().classed('highlight-edited');
-            });
+            .call(drawListItems, ['highlight_edits'], 'checkbox', 'visual_diff', toggleHighlightEdited, () =>
+                context.surface().classed('highlight-edited')
+            );
     }
 
-    function drawListItems(selection, data, type, name, change, active) {
-        var items = selection.selectAll('li')
+    function drawListItems(
+        selection: d3.Selection<HTMLUListElement>,
+        data: MapStyle[],
+        type: 'radio' | 'checkbox',
+        name: string,
+        change: any,
+        active: (d: string) => boolean
+    ) {
+        let items = selection.selectAll<HTMLLIElement, any>('li')
             .data(data);
 
         // Exit
@@ -42,21 +51,19 @@ export function uiSectionMapStyleOptions(context) {
             .remove();
 
         // Enter
-        var enter = items.enter()
+        const enter = items.enter()
             .append('li')
-            .call(uiTooltip()
-                .title(function(d) {
-                    return t.append(name + '.' + d + '.tooltip');
-                })
-                .keys(function(d) {
-                    var key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
+            .call((uiTooltip() as any)
+                .title((d: MapStyle) => t.append(`${name}.${d}.tooltip`))
+                .keys((d: MapStyle) => {
+                    let key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
                     if (d === 'highlight_edits') key = t('map_data.highlight_edits.key');
                     return key ? [key] : null;
                 })
                 .placement('top')
             );
 
-        var label = enter
+        const label = enter
             .append('label');
 
         label
@@ -67,8 +74,8 @@ export function uiSectionMapStyleOptions(context) {
 
         label
             .append('span')
-            .each(function(d) {
-                d3_select(this).call(t.append(name + '.' + d + '.description'));
+            .each(function(d: string) {
+                d3_select(this).call(t.append(`${name}.${d}.description`));
             });
 
         // Update
@@ -82,16 +89,16 @@ export function uiSectionMapStyleOptions(context) {
             .property('indeterminate', false);
     }
 
-    function isActiveFill(d) {
+    function isActiveFill(d: string) {
         return context.map().activeAreaFill() === d;
     }
 
-    function toggleHighlightEdited(d3_event) {
+    function toggleHighlightEdited(d3_event: Event) {
         d3_event.preventDefault();
         context.map().toggleHighlightEdited();
     }
 
-    function setFill(d3_event, d) {
+    function setFill(ignored: Event, d: string) {
         context.map().activeAreaFill(d);
     }
 

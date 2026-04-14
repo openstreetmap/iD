@@ -47,6 +47,7 @@
     "test:typecheck": "tsc",
     "test:spec": "vitest --no-isolate",
     "test:once": "vitest run --no-isolate",
+    "test:coverage": "vitest run --no-isolate --coverage.enabled",
     "translations": "node scripts/update_locales.js"
   },
   "dependencies": {
@@ -78,7 +79,7 @@
     "which-polygon": "2.2.1"
   },
   "devDependencies": {
-    "@actions/github-script": "github:actions/github-script#v8.0.0",
+    "@actions/github-script": "github:actions/github-script#v9",
     "@enzet/roentgen": "^0.14.0",
     "@eslint/js": "^10.0.1",
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
@@ -102,6 +103,7 @@
     "@types/sinon": "^21.0.0",
     "@types/sinon-chai": "^4.0.0",
     "@types/which-polygon": "^2.2.5",
+    "@vitest/coverage-v8": "^4.1.4",
     "autoprefixer": "^10.4.21",
     "browserslist": "^4.27.0",
     "browserslist-to-esbuild": "^2.1.1",
@@ -111,7 +113,7 @@
     "concat-files": "^0.1.1",
     "d3": "~7.9.0",
     "dotenv": "^17.2.3",
-    "esbuild": "^0.27.0",
+    "esbuild": "^0.28.0",
     "esbuild-visualizer": "^0.7.0",
     "eslint": "^10.0.0",
     "fake-indexeddb": "^6.2.5",
@@ -143,6 +145,6 @@
     "node": ">=22"
   },
   "browserslist": [
-    "> 0.3%, last 6 major versions, not dead, Firefox ESR, maintained node versions"
+    "> 0.3%, last 6 major versions, Firefox ESR, not Safari < 14.1, not iOS <= 14, not dead, maintained node versions"
   ]
 }

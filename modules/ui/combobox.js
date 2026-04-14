@@ -362,7 +362,7 @@ export function uiCombobox(context, klass) {
             if (bestIndex !== -1) {
                 var bestVal = suggestionValues[bestIndex];
                 input.property('value', bestVal);
-                input.node().setSelectionRange(val.length, bestVal.length);
+                input.node().setSelectionRange(val.length, bestVal.length, 'backward');
                 dispatch.call('update');
                 return bestVal;
             }
