@@ -70,7 +70,10 @@ export function svgTagClasses() {
             } else if (k === 'building:part') {  // avoid a ':' in the class name
                 k = 'building_part';
             }
-
+            if (k === 'playground') {
+                classes.push('tag-playground');
+                continue;
+            }
             primary = k;
             if (statuses.indexOf(v) !== -1) {   // e.g. `railway=abandoned`
                 status = v;
