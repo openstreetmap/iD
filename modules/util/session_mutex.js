@@ -36,5 +36,15 @@ export function utilSessionMutex(name) {
         return !!intervalID;
     };
 
+    mutex.isLockedByAnother = function () {
+        var cookie = document.cookie.replace(
+            new RegExp('(?:(?:^|.*;)\\s*' + name + '\\s*\\=\\s*([^;]*).*$)|^.*$'),
+            '$1'
+        );
+
+        //If cookie exists AND we don't own lock
+        return !!cookie && !intervalID;
+    };
+
     return mutex;
 }

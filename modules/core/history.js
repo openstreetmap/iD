@@ -15,6 +15,10 @@ import {
 import { osmIdManager } from '../osm';
 
 
+function showBackupConflictWarning() {
+    dispatch.call('storage_error'); // reuse existing warning system
+}
+
 export function coreHistory(context) {
     var dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone', 'storage_error');
     var lock = utilSessionMutex('lock');
@@ -652,6 +656,11 @@ export function coreHistory(context) {
 
 
         save: function() {
+            if (lock.isLockedByAnother()) {
+                showBackupConflictWarning();
+                return history;
+            }
+
             if (lock.locked() &&
                 // don't overwrite existing, unresolved changes
                 !_hasUnresolvedRestorableChanges) {
