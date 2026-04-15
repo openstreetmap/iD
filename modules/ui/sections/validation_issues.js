@@ -3,7 +3,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-//import { actionNoop } from '../actions/noop';
 import { geoSphericalDistance } from '../../geo';
 import { svgIcon } from '../../svg/icon';
 import { prefs } from '../../core/preferences';
@@ -11,6 +10,7 @@ import { t } from '../../core/localizer';
 import { utilHighlightEntities } from '../../util';
 import { uiSection } from '../section';
 import { validationIssue } from '../../core/validation';
+import { sortBy } from 'es-toolkit';
 
 export function uiSectionValidationIssues(id, severity, context) {
 
@@ -40,22 +40,27 @@ export function uiSectionValidationIssues(id, severity, context) {
     }
 
     function renderDisclosureContent(selection) {
-
-        var center = context.map().center();
-        var graph = context.graph();
-
-        // sort issues by distance away from the center of the map
-        var issues = _issues.map(function withDistance(issue) {
-                var extent = issue.extent(graph);
-                var dist = extent ? geoSphericalDistance(center, extent.center()) : 0;
-                return Object.assign(issue, { dist: dist });
-            })
-            .sort(function byDistance(a, b) {
-                return a.dist - b.dist;
-            });
-
-        // cut off at 1000
-        issues = issues.slice(0, 1000);
+        // sort by the same order the rules are listed in the section below:
+        // first by the issue's rule type (alphabetically by localized title),
+        // then issue's internal subtype, and only then by distance from map center
+        // finally: cut off at a maximum 1000 entries
+        const center = context.map().center();
+        const graph = context.graph();
+        const rules = sortBy(context.validator().getRuleKeys(), [
+            rule => t(`issues.${rule}.title`)
+        ]);
+        const withDistance = _issues.map(issue => {
+            const extent = issue.extent(graph);
+            return {
+                ...issue,
+                dist: extent ? geoSphericalDistance(center, extent.center()) : 0
+            };
+        });
+        const issues = sortBy(withDistance, [
+            issue => rules.indexOf(issue.type),
+            'subtype',
+            'dist'
+        ]).slice(0, 1000);
 
         //renderIgnoredIssuesReset(_warningsSelection);
 

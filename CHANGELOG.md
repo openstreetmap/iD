@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Treat most aerialways as part of the routable network when checking other ways' connectivity ([#9406])
 * Only consider well known tags containing URLs during website validation ([#12178], thanks [@bhavyaKhatri2703])
+* Sort full issues list by issue type first (instead of only by distance from map center), such that similar issues are always listed next to each other ([#9017])
 #### :bug: Bugfixes
 * Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
 * Prevent duplicate nodes from being created while using spacebar key to draw a way ([#12051])
@@ -70,6 +71,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
 * Add type annotations to `context.js` module ([#11589], thanks [@k-yle])
 
+[#9017]: https://github.com/openstreetmap/iD/issues/9017
 [#9058]: https://github.com/openstreetmap/iD/issues/9058
 [#9071]: https://github.com/openstreetmap/iD/issues/9071
 [#9092]: https://github.com/openstreetmap/iD/issues/9092
