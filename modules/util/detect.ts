@@ -8,6 +8,7 @@ export interface Detected {
   os: 'win' | 'mac' | 'linux';
   platform: 'Windows' | 'Macintosh' | 'Linux' | 'Unknown';
   isMobileWebKit: boolean;
+  isMobileFirefox: boolean;
   browserLocales: string[];
   host: string;
 }
@@ -98,6 +99,8 @@ export function utilDetect(refresh?: boolean) {
     // @ts-expect-error -- this attribute is so old that there are no definitions in @types/web
     !window.MSStream;
 
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Browser_detection_using_the_user_agent#mobile_tablet_or_desktop
+  _detected.isMobileFirefox = /Mobile|Tablet/.test(ua) && /Firefox/.test(ua);
 
   /* Locale */
   // An array of locales requested by the browser in priority order.
