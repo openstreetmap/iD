@@ -50,4 +50,12 @@ describe('iD.actionDeleteNode', function () {
             graph    = action(new iD.coreGraph([node1, relation]));
         expect(graph.hasEntity(relation.id)).to.be.undefined;
     });
+
+    it('deletes a single-node way fully when deleting its only node', function () {
+        var node   = new iD.osmNode(),
+            way    = new iD.osmWay({nodes: [node.id]}),
+            action = iD.actionDeleteNode(node.id),
+            graph  = action(new iD.coreGraph([node, way]));
+        expect(graph.hasEntity(way.id)).to.be.undefined;
+    });
 });

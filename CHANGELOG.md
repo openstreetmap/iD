@@ -61,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Prevent keyboard shortcuts from triggering an additional input after their action is performed ([#9071])
 * Include `railway` and `building` features with lifecycle status only in _past/future_ features category ([#9058])
 * Disable autocomplete on changeset comment box on mobile Firefox to work around buggy/glitchy behavior of the input field ([#9011])
+* Fix crash when trying to delete a single-node way ([#9007])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -72,6 +73,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
 * Add type annotations to `context.js` module ([#11589], thanks [@k-yle])
 
+[#9007]: https://github.com/openstreetmap/iD/issues/9007
 [#9011]: https://github.com/openstreetmap/iD/issues/9011
 [#9017]: https://github.com/openstreetmap/iD/issues/9017
 [#9058]: https://github.com/openstreetmap/iD/issues/9058
