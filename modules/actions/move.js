@@ -154,7 +154,7 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
         var key = wayId + '_' + nodeId;
         var orig = cache.replacedVertex[key];
         if (!orig) {
-            orig = osmNode();
+            orig = new osmNode();
             cache.replacedVertex[key] = orig;
             cache.startLoc[orig.id] = cache.startLoc[nodeId];
         }

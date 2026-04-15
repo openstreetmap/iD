@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit/compat';
 
 import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './helpers';
@@ -6,7 +6,7 @@ import { services } from '../services';
 
 
 export function svgMapillaryImages(projection, context, dispatch) {
-    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    const throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     const minZoom = 12;
     const minMarkerZoom = 16;
     const minViewfieldZoom = 18;

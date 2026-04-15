@@ -1,5 +1,5 @@
-import deepEqual from 'fast-deep-equal';
-import { clamp } from 'lodash-es';
+import { deepEqual } from 'fast-equals';
+import { clamp } from 'es-toolkit/compat';
 import { select as d3_select } from 'd3';
 
 import { geoScaleToZoom } from '../geo';

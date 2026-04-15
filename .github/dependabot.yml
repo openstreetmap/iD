@@ -7,11 +7,50 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    cooldown:
+      semver-minor-days: 7
+      semver-patch-days: 7
+    groups:
+      fontawesome:
+        patterns:
+          - "@fortawesome/*"
+        applies-to: version-updates
+      types:
+        patterns:
+          - "@types/*"
+        applies-to: version-updates
+      rapideditor:
+        patterns:
+          - "@rapideditor/*"
+        applies-to: version-updates
+      turf:
+        patterns:
+          - "@turf/*"
+        applies-to: version-updates
+      eslint:
+        patterns:
+          - "@eslint/*"
+          - "eslint"
+          - "typescript-eslint"
+        applies-to: version-updates
+      cldr:
+        patterns:
+          - "cldr*"
+        applies-to: version-updates
+      vite:
+        patterns:
+          - "vite*"
+        applies-to: version-updates
     labels:
       - "chore-dependabot"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+        applies-to: version-updates
     labels:
       - "chore-dependabot"

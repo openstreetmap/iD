@@ -6,7 +6,7 @@ describe('iD.validations.invalid_format', function () {
     });
 
     function createPointWithTags(tags) {
-        var n = iD.osmNode({id: 'n-1', loc: [4,4], tags: tags});
+        var n = new iD.osmNode({id: 'n-1', loc: [4,4], tags: tags});
         context.perform(iD.actionAddEntity(n));
         return n;
     }
@@ -94,6 +94,55 @@ describe('iD.validations.invalid_format', function () {
             });
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(0);
+        });
+
+        it('should not flag URLs with accented characters', function() {
+            var entity = createPointWithTags({
+                website: 'https://www.rando92.fr/randonner/itinéraires/'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(0);
+        });
+
+        it('should not flag internationalized domain names', function() {
+            var entity = createPointWithTags({
+                website: 'https://teaomārama.school.nz'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(0);
+        });
+
+        it('should not flag URLs with uppercase letters in domain', function() {
+            var entity = createPointWithTags({
+                website: 'https://www.TownChronicle.com'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(0);
+        });
+
+        it('should only flag well known tags containing URLs', function() {
+            var entity = createPointWithTags({
+                'website:source': 'survey',
+                'wikimedia_commons': 'File:photo.jpg'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(0);
+        });
+
+        it('should suggest moving image URLs to Wikimedia Commons', function() {
+            const entity = createPointWithTags({
+                image: 'File:OpenStreetMap-Editor iD Logo.svg'
+            });
+            var issues = validate(entity);
+            expect(issues).to.have.lengthOf(1);
+            expect(issues[0].type).to.eql('invalid_format');
+            expect(issues[0].subtype).to.eql('website');
+            const fixes = issues[0].dynamicFixes();
+            expect(fixes).to.have.lengthOf(1);
+            issues[0].fixes(context)[0].onClick(context);
+            const fixedEntity = context.entity(entity.id);
+            expect(fixedEntity.tags.image).to.be.undefined;
+            expect(fixedEntity.tags.wikimedia_commons).to.eql(entity.tags.image);
         });
     });
 

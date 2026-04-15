@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 import {
     select as d3_select
 } from 'd3-selection';
@@ -20,7 +20,7 @@ export function uiSectionValidationIssues(id, severity, context) {
         .label(function() {
             if (!_issues) return '';
             var issueCountText = _issues.length > 1000 ? '1000+' : String(_issues.length);
-            return t.append('inspector.title_count', { title: t('issues.' + severity + 's.list_title'), count: issueCountText });
+            return t.append('inspector.title_count', { title: t.append('issues.' + severity + 's.list_title'), count: issueCountText });
         })
         .disclosureContent(renderDisclosureContent)
         .shouldDisplay(function() {
@@ -134,7 +134,7 @@ export function uiSectionValidationIssues(id, severity, context) {
     });
 
     context.map().on('move.uiSectionValidationIssues' + id,
-        _debounce(function() {
+        debounce(function() {
             window.requestIdleCallback(function() {
                 if (getOptions().where === 'visible') {
                     // must refetch issues if they are viewport-dependent

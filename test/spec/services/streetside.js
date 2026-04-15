@@ -1,3 +1,4 @@
+import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.serviceStreetside', function() {
@@ -57,7 +58,7 @@ describe('iD.serviceStreetside', function() {
                 .translate([-1863988.9381333336, 762.8270222954452])  // 10.002,0.002
                 .clipExtent([[0,0], dimensions]);
 
-            var spy = sinon.spy();
+            const spy = fn();
             streetside.on('loadedImages', spy);
 
             var mockData = {
@@ -83,7 +84,7 @@ describe('iD.serviceStreetside', function() {
                 .translate([0, 0])
                 .clipExtent([[0,0], dimensions]);
 
-            var spy = sinon.spy();
+            const spy = fn();
             streetside.on('loadedImages', spy);
 
             var mockData = {

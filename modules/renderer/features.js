@@ -125,7 +125,7 @@ export function rendererFeatures(context) {
 
     defineRule('buildings', function isBuilding(tags) {
         return (
-            (!!tags.building && tags.building !== 'no') ||
+            (!!tags.building && tags.building !== 'no' && !osmLifecyclePrefixes[tags.building]) ||
             tags.parking === 'multi-storey' ||
             tags.parking === 'sheds' ||
             tags.parking === 'carports' ||
@@ -202,7 +202,7 @@ export function rendererFeatures(context) {
             traffic_roads[tags.highway] ||
             service_roads[tags.highway] ||
             paths[tags.highway]
-        );
+        ) && !osmLifecyclePrefixes[tags.railway];
     });
 
     defineRule('pistes', function isPiste(tags) {
@@ -466,7 +466,8 @@ export function rendererFeatures(context) {
                 }
 
                 if (_rules[_keys[i]].filter(entity.tags, geometry)) {
-                    matches[_keys[i]] = hasMatch = true;
+                    matches[_keys[i]] = true;
+                    hasMatch = true;
                 }
             }
             _cache[ent].matches = matches;

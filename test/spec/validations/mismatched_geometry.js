@@ -32,17 +32,17 @@ describe('iD.validations.mismatched_geometry', function () {
 
 
     function createPoint(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4], tags: tags});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [4,4], tags: tags});
         context.perform(
             iD.actionAddEntity(n1)
         );
     }
 
     function createOpenWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3'], tags: tags});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = new iD.osmNode({id: 'n-2', loc: [4,5]});
+        var n3 = new iD.osmNode({id: 'n-3', loc: [5,5]});
+        var w = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3'], tags: tags});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -53,10 +53,10 @@ describe('iD.validations.mismatched_geometry', function () {
     }
 
     function createClosedWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3', 'n-1'], tags: tags});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = new iD.osmNode({id: 'n-2', loc: [4,5]});
+        var n3 = new iD.osmNode({id: 'n-3', loc: [5,5]});
+        var w = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3', 'n-1'], tags: tags});
 
         context.perform(
             iD.actionAddEntity(n1),

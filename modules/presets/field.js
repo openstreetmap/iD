@@ -22,7 +22,6 @@ export function presetField(fieldID, field, allFields) {
   };
 
   _this.t = (scope, options) => t(`_tagging.presets.fields.${fieldID}.${scope}`, options);
-  _this.t.html = (scope, options) => t.html(`_tagging.presets.fields.${fieldID}.${scope}`, options);
   _this.t.append = (scope, options) => t.append(`_tagging.presets.fields.${fieldID}.${scope}`, options);
   _this.hasTextForStringId = (scope) => localizer.hasTextForStringId(`_tagging.presets.fields.${fieldID}.${scope}`);
 
@@ -52,6 +51,14 @@ export function presetField(fieldID, field, allFields) {
     .toLowerCase().trim().split(/\s*,+\s*/);
 
   _this.increment = (_this.type === 'number' || _this.type === 'integer') ? (_this.increment || 1) : undefined;
+
+  /** all keys controlled by this field */
+  _this.allKeys = () => {
+    const allKeys = [];
+    if (_this.key) allKeys.push(_this.key);
+    if (_this.keys) allKeys.push(..._this.keys);
+    return allKeys;
+  };
 
   return _this;
 }

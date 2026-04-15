@@ -76,6 +76,7 @@ path.fill.tag-golf-green {
 
 /* Blue things */
 path.stroke.tag-amenity-fountain,
+path.fill.tag-landuse-basin,
 path.stroke.tag-leisure-swimming_pool,
 path.stroke.tag-natural-bay,
 path.stroke.tag-natural-strait,
@@ -83,6 +84,7 @@ path.stroke.tag-natural-water {
     stroke: rgb(119, 211, 222);
 }
 path.fill.tag-amenity-fountain,
+path.fill.tag-landuse-basin,
 path.fill.tag-leisure-swimming_pool,
 path.fill.tag-natural-bay,
 path.fill.tag-natural-strait,

@@ -1,4 +1,5 @@
 import { setTimeout } from 'node:timers/promises';
+import { fn } from '@vitest/spy';
 
 describe('iD.uiFieldWikipedia', function() {
     var entity, context, selection, field;
@@ -19,7 +20,7 @@ describe('iD.uiFieldWikipedia', function() {
     });
 
     beforeEach(function() {
-        entity = iD.osmNode({id: 'n12345'});
+        entity = new iD.osmNode({id: 'n12345'});
         context = iD.coreContext().assetPath('../dist/').init();
         context.history().merge([entity]);
         selection = d3.select(document.createElement('div'));
@@ -78,7 +79,7 @@ describe('iD.uiFieldWikipedia', function() {
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
 
-        var spy = sinon.spy();
+        const spy = fn();
         wikipedia.on('change.spy', spy);
 
         iD.utilGetSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
@@ -89,11 +90,11 @@ describe('iD.uiFieldWikipedia', function() {
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
 
-        expect(spy.callCount).to.equal(4);
-        expect(spy.getCall(0)).to.have.been.calledWith({ wikipedia: undefined});  // lang on change
-        expect(spy.getCall(1)).to.have.been.calledWith({ wikipedia: undefined});  // lang on blur
-        expect(spy.getCall(2)).to.have.been.calledWith({ wikipedia: 'de:Title' });   // title on change
-        expect(spy.getCall(3)).to.have.been.calledWith({ wikipedia: 'de:Title' });   // title on blur
+        expect(spy).to.have.callCount(4);
+        expect(spy).to.have.been.calledWith({ wikipedia: undefined});  // lang on change
+        expect(spy).to.have.been.calledWith({ wikipedia: undefined});  // lang on blur
+        expect(spy).to.have.been.calledWith({ wikipedia: 'de:Title' });   // title on change
+        expect(spy).to.have.been.calledWith({ wikipedia: 'de:Title' });   // title on blur
     });
 
     it('recognizes pasted URLs', async () => {

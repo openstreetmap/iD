@@ -376,7 +376,10 @@ export function uiInit(context) {
 
         var panPixels = 80;
         context.keybinding()
-            .on([t('sidebar.key'), '`', '²', '@'], ui.sidebar.toggle)   // #5663, #6864 - common QWERTY, AZERTY
+            .on([t('sidebar.key'), '`', '²', '@'], (d3_event) => {
+                d3_event.preventDefault();
+                ui.sidebar.toggle();
+            })   // #5663, #6864 - common QWERTY, AZERTY
             .on('←', pan([panPixels, 0]))
             .on('↑', pan([0, panPixels]))
             .on('→', pan([-panPixels, 0]))
@@ -448,7 +451,7 @@ export function uiInit(context) {
         }
 
         var osm = context.connection();
-        var auth = uiLoading(context).message(t.html('loading_auth')).blocking(true);
+        var auth = uiLoading(context).message(t.addOrUpdate('loading_auth')).blocking(true);
 
         if (osm && auth) {
             osm
@@ -684,7 +687,7 @@ export function uiInit(context) {
     context.uploader()
         .on('saveStarted.ui', function() {
             _saveLoading = uiLoading(context)
-                .message(t.html('save.uploading'))
+                .message(t.addOrUpdate('save.uploading'))
                 .blocking(true);
             context.container().call(_saveLoading);  // block input during upload
         })

@@ -1,4 +1,4 @@
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 import { bisector as d3_bisector } from 'd3-array';
 
 import { osmEntity } from '../osm';
@@ -176,7 +176,8 @@ export function svgAreas(projection, context) {
 
                 if (layer === 'fill') {
                     this.setAttribute('clip-path', 'url(#ideditor-' + entity.id + '-clippath)');
-                    this.style.fill = this.style.stroke = getPatternStyle(entity.tags);
+                    this.style.fill = getPatternStyle(entity.tags);
+                    this.style.stroke = this.style.fill;
                 }
             })
             .classed('added', function(d) {

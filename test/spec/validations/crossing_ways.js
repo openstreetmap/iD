@@ -11,9 +11,9 @@ describe('iD.validations.crossing_ways', function () {
     });
 
     function createWaysWithOneCrossingPoint(tags1, tags2) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [1,1]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [2,2]});
-        var w1 = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags1});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [1,1]});
+        var n2 = new iD.osmNode({id: 'n-2', loc: [2,2]});
+        var w1 = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags1});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -21,9 +21,9 @@ describe('iD.validations.crossing_ways', function () {
             iD.actionAddEntity(w1)
         );
 
-        var n3 = iD.osmNode({id: 'n-3', loc: [1,2]});
-        var n4 = iD.osmNode({id: 'n-4', loc: [2,1]});
-        var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4'], tags: tags2});
+        var n3 = new iD.osmNode({id: 'n-3', loc: [1,2]});
+        var n4 = new iD.osmNode({id: 'n-4', loc: [2,1]});
+        var w2 = new iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4'], tags: tags2});
 
         context.perform(
             iD.actionAddEntity(n3),
@@ -33,9 +33,9 @@ describe('iD.validations.crossing_ways', function () {
     }
 
     function createWaysWithTwoCrossingPoint() {
-      var n1 = iD.osmNode({id: 'n-1', loc: [1,1]});
-      var n2 = iD.osmNode({id: 'n-2', loc: [3,3]});
-      var w1 = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
+      var n1 = new iD.osmNode({id: 'n-1', loc: [1,1]});
+      var n2 = new iD.osmNode({id: 'n-2', loc: [3,3]});
+      var w1 = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' }});
 
       context.perform(
           iD.actionAddEntity(n1),
@@ -43,11 +43,11 @@ describe('iD.validations.crossing_ways', function () {
           iD.actionAddEntity(w1)
       );
 
-      var n3 = iD.osmNode({id: 'n-3', loc: [1,2]});
-      var n4 = iD.osmNode({id: 'n-4', loc: [2,1]});
-      var n5 = iD.osmNode({id: 'n-5', loc: [3,2]});
-      var n6 = iD.osmNode({id: 'n-6', loc: [2,3]});
-      var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4', 'n-5', 'n-6'], tags: { highway: 'residential' }});
+      var n3 = new iD.osmNode({id: 'n-3', loc: [1,2]});
+      var n4 = new iD.osmNode({id: 'n-4', loc: [2,1]});
+      var n5 = new iD.osmNode({id: 'n-5', loc: [3,2]});
+      var n6 = new iD.osmNode({id: 'n-6', loc: [2,3]});
+      var w2 = new iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4', 'n-5', 'n-6'], tags: { highway: 'residential' }});
 
       context.perform(
           iD.actionAddEntity(n3),
@@ -368,7 +368,9 @@ describe('iD.validations.crossing_ways', function () {
 
     it('flags minor road crossing waterway', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential' }, { waterway: 'river' });
-        verifySingleCrossingIssue(validate(), { ford: 'yes' });
+        const issues = validate();
+        verifySingleCrossingIssue(issues, { ford: 'yes' });
+        expect(issues[0].data.featureTypes).to.eql(['highway', 'waterway']);
     });
 
     it('flags major road crossing waterway', function() {
@@ -478,9 +480,9 @@ describe('iD.validations.crossing_ways', function () {
     });
 
     function createWayAndRelationWithOneCrossingPoint(wayTags, relTags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [1,1]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [2,2]});
-        var w1 = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: wayTags});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [1,1]});
+        var n2 = new iD.osmNode({id: 'n-2', loc: [2,2]});
+        var w1 = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: wayTags});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -488,13 +490,13 @@ describe('iD.validations.crossing_ways', function () {
             iD.actionAddEntity(w1)
         );
 
-        var n3 = iD.osmNode({id: 'n-3', loc: [1,2]});
-        var n4 = iD.osmNode({id: 'n-4', loc: [2,1]});
-        var n5 = iD.osmNode({id: 'n-5', loc: [3,2]});
-        var n6 = iD.osmNode({id: 'n-6', loc: [2,3]});
-        var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4', 'n-5'], tags: {}});
-        var w3 = iD.osmWay({id: 'w-3', nodes: ['n-5', 'n-6', 'n-3'], tags: {}});
-        var r1 = iD.osmRelation({id: 'r-1', members: [{id: 'w-2', type: 'way'}, {id: 'w-3', type: 'way'}], tags: relTags});
+        var n3 = new iD.osmNode({id: 'n-3', loc: [1,2]});
+        var n4 = new iD.osmNode({id: 'n-4', loc: [2,1]});
+        var n5 = new iD.osmNode({id: 'n-5', loc: [3,2]});
+        var n6 = new iD.osmNode({id: 'n-6', loc: [2,3]});
+        var w2 = new iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4', 'n-5'], tags: {}});
+        var w3 = new iD.osmWay({id: 'w-3', nodes: ['n-5', 'n-6', 'n-3'], tags: {}});
+        var r1 = new iD.osmRelation({id: 'r-1', members: [{id: 'w-2', type: 'way'}, {id: 'w-3', type: 'way'}], tags: relTags});
 
         context.perform(
             iD.actionAddEntity(n3),

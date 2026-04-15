@@ -5,6 +5,7 @@ import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
 import { osmTagSuggestingArea, osmRightSideIsInsideTags, osmRemoveLifecyclePrefix, osmOneWayBiDirectionalTags, osmOneWayBackwardTags, osmOneWayForwardTags, osmOneWayTags } from './tags';
 import { utilArrayUniq, utilCheckTagDictionary } from '../util';
+import { osmIdManager } from './id_manager';
 
 /**
  * @typedef {typeof prototype & iD.AbstractEntity} OsmWay
@@ -12,10 +13,9 @@ import { utilArrayUniq, utilCheckTagDictionary } from '../util';
  */
 export function osmWay() {
     if (!(this instanceof osmWay)) {
-        return (new osmWay()).initialize(arguments);
-    } else if (arguments.length) {
-        this.initialize(arguments);
+        return new osmWay(...arguments);
     }
+    this.initialize(arguments);
 }
 
 
@@ -25,7 +25,7 @@ osmWay.prototype = Object.create(osmEntity.prototype);
 
 
 const prototype = {
-    type: 'way',
+    type: /** @type {'way'} */ ('way'),
     nodes: [],
 
 
@@ -479,7 +479,7 @@ const prototype = {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
                 nd: this.nodes.map(function(id) {
-                    return { keyAttributes: { ref: osmEntity.id.toOSM(id) } };
+                    return { keyAttributes: { ref: osmIdManager.toOSM(id) } };
                 }, this),
                 tag: Object.keys(this.tags).map(function(k) {
                     return { keyAttributes: { k: k, v: this.tags[k] } };

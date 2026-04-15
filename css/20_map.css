@@ -36,8 +36,7 @@
 
 /* No interactivity except what we specifically allow */
 .data-layer.osm *,
-.data-layer.notes *,
-.data-layer.keepRight * {
+.data-layer.notes * {
     pointer-events: none;
 }
 
@@ -360,6 +359,11 @@ g.auxiliary path.reflect-axis {
     stroke-dasharray: 8, 4;
     stroke-linecap: round;
     pointer-events: none;
+}
+g.auxiliary path.preview {
+    stroke: #ccc;
+    stroke-width: 2;
+    stroke-dasharray: 8, 4;
 }
 
 /* Visual Diffs

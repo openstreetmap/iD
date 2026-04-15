@@ -14,7 +14,7 @@ export function svgTagClasses() {
         'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
         'public_transport', 'location', 'parking', 'golf', 'type', 'leisure',
-        'man_made', 'indoor', 'construction', 'proposed'
+        'man_made', 'indoor', 'construction', 'proposed', 'bicycle', 'foot'
     ];
     var _tags = function(entity) { return entity.tags; };
 
@@ -61,7 +61,7 @@ export function svgTagClasses() {
 
         // pick at most one primary classification tag..
         for (i = 0; i < primaries.length; i++) {
-            k = primaries[i];
+            k = primaries[i].replace(':', '_');
             v = t[k];
             if (!v || v === 'no') continue;
 
@@ -72,7 +72,8 @@ export function svgTagClasses() {
             }
             if (k === 'playground') {
                 classes.push('tag-playground');
-                continue;
+                primary = k; 
+                break;
             }
             primary = k;
             if (statuses.indexOf(v) !== -1) {   // e.g. `railway=abandoned`

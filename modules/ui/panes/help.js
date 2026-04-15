@@ -1,4 +1,6 @@
+import { select as d3_select } from 'd3-selection';
 import { marked } from 'marked';
+
 import { svgIcon } from '../../svg/icon';
 import { uiIntro } from '../intro/intro';
 import { uiPane } from '../pane';
@@ -205,51 +207,51 @@ export function uiPaneHelp(context) {
     ];
 
     var headings = {
-        'help.help.open_data_h': 3,
-        'help.help.before_start_h': 3,
-        'help.help.open_source_h': 3,
-        'help.overview.navigation_h': 3,
-        'help.overview.features_h': 3,
-        'help.editing.select_h': 3,
-        'help.editing.multiselect_h': 3,
-        'help.editing.undo_redo_h': 3,
-        'help.editing.save_h': 3,
-        'help.editing.upload_h': 3,
+        'help.areas.add_area_h': 3,
+        'help.areas.delete_area_h': 3,
+        'help.areas.modify_area_h': 3,
+        'help.areas.point_or_area_h': 3,
+        'help.areas.square_area_h': 3,
         'help.editing.backups_h': 3,
         'help.editing.keyboard_h': 3,
-        'help.feature_editor.type_h': 3,
+        'help.editing.multiselect_h': 3,
+        'help.editing.save_h': 3,
+        'help.editing.select_h': 3,
+        'help.editing.undo_redo_h': 3,
+        'help.editing.upload_h': 3,
         'help.feature_editor.fields_h': 3,
         'help.feature_editor.tags_h': 3,
-        'help.points.add_point_h': 3,
-        'help.points.move_point_h': 3,
-        'help.points.delete_point_h': 3,
+        'help.feature_editor.type_h': 3,
+        'help.gps.using_h': 3,
+        'help.help.before_start_h': 3,
+        'help.help.open_data_h': 3,
+        'help.help.open_source_h': 3,
+        'help.imagery.offsets_h': 3,
+        'help.imagery.sources_h': 3,
         'help.lines.add_line_h': 3,
-        'help.lines.modify_line_h': 3,
         'help.lines.connect_line_h': 3,
-        'help.lines.disconnect_line_h': 3,
-        'help.lines.move_line_h': 3,
         'help.lines.delete_line_h': 3,
-        'help.areas.point_or_area_h': 3,
-        'help.areas.add_area_h': 3,
-        'help.areas.square_area_h': 3,
-        'help.areas.modify_area_h': 3,
-        'help.areas.delete_area_h': 3,
+        'help.lines.disconnect_line_h': 3,
+        'help.lines.modify_line_h': 3,
+        'help.lines.move_line_h': 3,
+        'help.notes.add_note_h': 3,
+        'help.notes.save_note_h': 3,
+        'help.notes.update_note_h': 3,
+        'help.overview.features_h': 3,
+        'help.overview.navigation_h': 3,
+        'help.points.add_point_h': 3,
+        'help.points.delete_point_h': 3,
+        'help.points.move_point_h': 3,
+        'help.qa.issues_h': 3,
+        'help.qa.tools_h': 3,
+        'help.relations.boundary_h': 3,
         'help.relations.edit_relation_h': 3,
         'help.relations.maintain_relation_h': 3,
-        'help.relations.relation_types_h': 2,
         'help.relations.multipolygon_h': 3,
-        'help.relations.turn_restriction_h': 3,
+        'help.relations.relation_types_h': 2,
         'help.relations.route_h': 3,
-        'help.relations.boundary_h': 3,
-        'help.notes.add_note_h': 3,
-        'help.notes.update_note_h': 3,
-        'help.notes.save_note_h': 3,
-        'help.imagery.sources_h': 3,
-        'help.imagery.offsets_h': 3,
-        'help.streetlevel.using_h': 3,
-        'help.gps.using_h': 3,
-        'help.qa.tools_h': 3,
-        'help.qa.issues_h': 3
+        'help.relations.turn_restriction_h': 3,
+        'help.streetlevel.using_h': 3
     };
 
     // For each section, squash all the texts into a single markdown document
@@ -264,7 +266,8 @@ export function uiPaneHelp(context) {
         }, '');
 
         return {
-            title: t.html(helpkey + '.title'),
+            title: t.addOrUpdate(helpkey + '.title'),
+            _title: t(helpkey + '.title'),
             content: marked(text.trim())
                 // use keyboard key styling for shortcuts
                 .replace(/<code>/g, '<kbd>')
@@ -284,16 +287,16 @@ export function uiPaneHelp(context) {
 
             var rtl = (localizer.textDirection() === 'rtl');
             content.property('scrollTop', 0);
-            helpPane.selection().select('.pane-heading h2').html(d.title);
+            helpPane.selection().select('.pane-heading h2').call(d.title);
 
             body.html(d.content);
             body.selectAll('a')
                 .attr('target', '_blank');
             menuItems.classed('selected', function(m) {
-                return m.title === d.title;
+                return m._title === d._title;
             });
 
-            nav.html('');
+            nav.text('');
             if (rtl) {
                 nav.call(drawNext).call(drawPrevious);
             } else {
@@ -314,7 +317,7 @@ export function uiPaneHelp(context) {
 
                     nextLink
                         .append('span')
-                        .html(docs[i + 1].title)
+                        .call(docs[i + 1].title)
                         .call(svgIcon((rtl ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
                 }
             }
@@ -334,7 +337,7 @@ export function uiPaneHelp(context) {
                     prevLink
                         .call(svgIcon((rtl ? '#iD-icon-forward' : '#iD-icon-backward'), 'inline'))
                         .append('span')
-                        .html(docs[i - 1].title);
+                        .call(docs[i - 1].title);
                 }
             }
         }
@@ -364,7 +367,9 @@ export function uiPaneHelp(context) {
             .append('a')
             .attr('role', 'button')
             .attr('href', '#')
-            .html(function(d) { return d.title; })
+            .each(function(d) {
+                d3_select(this).call(d.title);
+            })
             .on('click', function(d3_event, d) {
                 d3_event.preventDefault();
                 clickHelp(d, docs.indexOf(d));

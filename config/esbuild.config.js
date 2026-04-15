@@ -20,6 +20,7 @@ const context = await esbuild.context({
   outfile: 'dist/iD.js',
   target: browserslistToEsbuild(),
   loader: { '.DS_Store' : 'empty' },
+  treeShaking: false,
 });
 
 if (args.watch) {

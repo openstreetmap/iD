@@ -10,7 +10,7 @@ import { actionDeleteMembers } from '../../actions/delete_members';
 
 import { modeSelect } from '../../modes/select';
 import { osmEntity, osmRelation } from '../../osm';
-import { isColourValid } from '../../osm/tags';
+import { getRelationColor, isColorValid } from '../../osm/tags';
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
@@ -18,6 +18,7 @@ import { uiSection } from '../section';
 import { uiTooltip } from '../tooltip';
 import { utilArrayGroupBy, utilArrayIntersection } from '../../util/array';
 import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } from '../../util';
+import { prefs } from '../../core';
 import { idMatch } from '../feature_list';
 
 
@@ -31,7 +32,7 @@ export function uiSectionRawMembershipEditor(context) {
             var parents = getSharedParentRelations();
             var gt = parents.length > _maxMemberships ? '>' : '';
             var count = gt + parents.slice(0, _maxMemberships).length;
-            return t.append('inspector.title_count', { title: t('inspector.relations'), count: count });
+            return t.append('inspector.title_count', { title: t.append('inspector.relations'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -225,7 +226,7 @@ export function uiSectionRawMembershipEditor(context) {
             context.validator().validate();
 
         } else {
-            var relation = osmRelation();
+            var relation = new osmRelation();
             context.perform(
                 actionAddEntity(relation),
                 actionAddMembers(relation.id, _entityIDs, role),
@@ -294,7 +295,7 @@ export function uiSectionRawMembershipEditor(context) {
                     .text(presetName + ' ');
                 selection
                     .append('span')
-                    .classed('has-colour', entity.tags.colour && isColourValid(entity.tags.colour))
+                    .classed('has-colour', entity.tags.colour && isColorValid(entity.tags.colour))
                     .style('border-color', entity.tags.colour)
                     .text(entityName);
             };
@@ -407,21 +408,49 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-type')
-            .text(function(d) {
-                var matched = presetManager.match(d.relation, context.graph());
-                return (matched && matched.name()) || t.html('inspector.relation');
+            .text(d => {
+                let matched = presetManager.match(d.relation, context.graph());
+                while (matched?.suggestion) {
+                    // if is NSI preset: look for a parent preset
+                    matched = matched.getParentPreset();
+                }
+                return (matched && matched.name()) || t('inspector.relation');
             });
+
+        const showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
+        labelLink.each(function(d) {
+            if (!showThirdPartyIcons) return;
+            const matched = presetManager.match(d.relation, context.graph());
+            if (matched.suggestion) {
+                // if matching an NSI preset: append icon
+                d3_select(this)
+                    .append('img')
+                    .classed('member-entity-icon', true)
+                    .attr('src', matched.imageURL);
+            }
+        });
+
+        labelLink.each(function(d) {
+            const relColors = getRelationColor(d.relation.tags, '#555');
+            const hasRef = d.relation.tags.ref;
+            if (relColors.isValid || hasRef) {
+                const refs = (d.relation.tags.ref || '').split(';');
+                for (const ref of refs) {
+                    d3_select(this)
+                        .append('span')
+                        .classed('member-entity-ref-color', true)
+                        .style('border-color', relColors.color)
+                        .style('background-color', relColors.color)
+                        .style('color', relColors.textColor)
+                        .text(ref);
+                }
+            }
+        });
 
         labelLink
             .append('span')
             .attr('class', 'member-entity-name')
-            .classed('has-colour', d => d.relation.tags.colour && isColourValid(d.relation.tags.colour))
-            .style('border-color', d => d.relation.tags.colour)
-            .text(function(d) {
-                const matched = presetManager.match(d.relation, context.graph());
-                // hide the network from the name if there is NSI match
-                return utilDisplayName(d.relation, matched.suggestion);
-            });
+            .text(d => utilDisplayName(d.relation, { hideRef: true }));
 
         labelEnter
             .append('button')

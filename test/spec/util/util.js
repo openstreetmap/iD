@@ -2,10 +2,10 @@ describe('iD.util', function() {
 
     describe('utilGetAllNodes', function() {
         it('gets all descendant nodes of a way', function() {
-            var a = iD.osmNode({ id: 'a' });
-            var b = iD.osmNode({ id: 'b' });
-            var w = iD.osmWay({ id: 'w', nodes: ['a','b','a'] });
-            var graph = iD.coreGraph([a, b, w]);
+            var a = new iD.osmNode({ id: 'a' });
+            var b = new iD.osmNode({ id: 'b' });
+            var w = new iD.osmWay({ id: 'w', nodes: ['a','b','a'] });
+            var graph = new iD.coreGraph([a, b, w]);
             var result = iD.utilGetAllNodes(['w'], graph);
 
             expect(result).to.have.members([a, b]);
@@ -13,12 +13,12 @@ describe('iD.util', function() {
         });
 
         it('gets all descendant nodes of a relation', function() {
-            var a = iD.osmNode({ id: 'a' });
-            var b = iD.osmNode({ id: 'b' });
-            var c = iD.osmNode({ id: 'c' });
-            var w = iD.osmWay({ id: 'w', nodes: ['a','b','a'] });
-            var r = iD.osmRelation({ id: 'r', members: [{id: 'w'}, {id: 'c'}] });
-            var graph = iD.coreGraph([a, b, c, w, r]);
+            var a = new iD.osmNode({ id: 'a' });
+            var b = new iD.osmNode({ id: 'b' });
+            var c = new iD.osmNode({ id: 'c' });
+            var w = new iD.osmWay({ id: 'w', nodes: ['a','b','a'] });
+            var r = new iD.osmRelation({ id: 'r', members: [{id: 'w'}, {id: 'c'}] });
+            var graph = new iD.coreGraph([a, b, c, w, r]);
             var result = iD.utilGetAllNodes(['r'], graph);
 
             expect(result).to.have.members([a, b, c]);
@@ -26,15 +26,15 @@ describe('iD.util', function() {
         });
 
         it('gets all descendant nodes of multiple ids', function() {
-            var a = iD.osmNode({ id: 'a' });
-            var b = iD.osmNode({ id: 'b' });
-            var c = iD.osmNode({ id: 'c' });
-            var d = iD.osmNode({ id: 'd' });
-            var e = iD.osmNode({ id: 'e' });
-            var w1 = iD.osmWay({ id: 'w1', nodes: ['a','b','a'] });
-            var w2 = iD.osmWay({ id: 'w2', nodes: ['c','b','a','c'] });
-            var r = iD.osmRelation({ id: 'r', members: [{id: 'w1'}, {id: 'd'}] });
-            var graph = iD.coreGraph([a, b, c, d, e, w1, w2, r]);
+            var a = new iD.osmNode({ id: 'a' });
+            var b = new iD.osmNode({ id: 'b' });
+            var c = new iD.osmNode({ id: 'c' });
+            var d = new iD.osmNode({ id: 'd' });
+            var e = new iD.osmNode({ id: 'e' });
+            var w1 = new iD.osmWay({ id: 'w1', nodes: ['a','b','a'] });
+            var w2 = new iD.osmWay({ id: 'w2', nodes: ['c','b','a','c'] });
+            var r = new iD.osmRelation({ id: 'r', members: [{id: 'w1'}, {id: 'd'}] });
+            var graph = new iD.coreGraph([a, b, c, d, e, w1, w2, r]);
             var result = iD.utilGetAllNodes(['r', 'w2', 'e'], graph);
 
             expect(result).to.have.members([a, b, c, d, e]);
@@ -42,10 +42,10 @@ describe('iD.util', function() {
         });
 
         it('handles recursive relations', function() {
-            var a = iD.osmNode({ id: 'a' });
-            var r1 = iD.osmRelation({ id: 'r1', members: [{id: 'r2'}] });
-            var r2 = iD.osmRelation({ id: 'r2', members: [{id: 'r1'}, {id: 'a'}] });
-            var graph = iD.coreGraph([a, r1, r2]);
+            var a = new iD.osmNode({ id: 'a' });
+            var r1 = new iD.osmRelation({ id: 'r1', members: [{id: 'r2'}] });
+            var r2 = new iD.osmRelation({ id: 'r2', members: [{id: 'r1'}, {id: 'a'}] });
+            var graph = new iD.coreGraph([a, r1, r2]);
             var result = iD.utilGetAllNodes(['r1'], graph);
 
             expect(result).to.have.members([a]);
@@ -71,6 +71,34 @@ describe('iD.util', function() {
             type: '+', key: 'd', oldVal: undefined, newVal: 'four', display: '+ d=four'    // insert
         });
     });
+
+    describe('utilCombinedTags', function() {
+        it('sorts tag values by frequency then alphabetically', function() {
+            var n1 = new iD.osmNode({ id: 'n-1', tags: { surface: 'paved' } });
+            var n2 = new iD.osmNode({ id: 'n-2', tags: { surface: 'paved' } });
+            var n3 = new iD.osmNode({ id: 'n-3', tags: { surface: 'paved' } });
+            var n4 = new iD.osmNode({ id: 'n-4', tags: { surface: 'asphalt' } });
+            var n5 = new iD.osmNode({ id: 'n-5', tags: { surface: 'gravel' } });
+            var graph = new iD.coreGraph([n1, n2, n3, n4, n5]);
+            var result = iD.utilCombinedTags(['n-1', 'n-2', 'n-3', 'n-4', 'n-5'], graph);
+
+            expect(result.surface).to.be.an('array');
+            expect(result.surface[0]).to.eql('paved');
+            expect(result.surface[1]).to.eql('asphalt');
+            expect(result.surface[2]).to.eql('gravel');
+        });
+
+        it('returns raw value when all entities share the same tag value', function() {
+            var n1 = new iD.osmNode({ id: 'n-1', tags: { highway: 'residential' } });
+            var n2 = new iD.osmNode({ id: 'n-2', tags: { highway: 'residential' } });
+            var graph = new iD.coreGraph([n1, n2]);
+            var result = iD.utilCombinedTags(['n-1', 'n-2'], graph);
+
+            expect(result.highway).to.eql('residential');
+        });
+    });
+
+
 
     it('utilTagText', function() {
         expect(iD.utilTagText({})).to.eql('');
@@ -275,9 +303,14 @@ describe('iD.util', function() {
             expect(iD.utilDisplayName({tags: { name: 'Bus 224: Downtown Garland Station -> Lake Ray Hubbard TC -> Downtown Dallas', route: 'bus', ref: '224', from: 'Downtown Garland Station', to: 'Downtown Dallas', via: 'Lake Ray Hubbard TC'}})).to.eql('Bus 224: Downtown Garland Station -> Lake Ray Hubbard TC -> Downtown Dallas');
         });
         it('suppresses the network tag if the hideNetwork argument is true', function() {
-            expect(iD.utilDisplayName({tags: { name: 'Lynfield Express', ref: '25L', network: 'AT', route: 'bus' }}, true)).to.eql('25L: Lynfield Express');
-            expect(iD.utilDisplayName({tags: { network: 'SORTA', ref: '3X' }}, true)).to.eql('3X');
-            expect(iD.utilDisplayName({tags: { name: 'Dallas North Tollway', network: 'US:TX:NTTA', route: 'road' }}, true)).to.eql('Dallas North Tollway');
+            expect(iD.utilDisplayName({tags: { name: 'Lynfield Express', ref: '25L', network: 'AT', route: 'bus' }}, { hideNetwork: true })).to.eql('25L: Lynfield Express');
+            expect(iD.utilDisplayName({tags: { network: 'SORTA', ref: '3X' }}, { hideNetwork: true })).to.eql('3X');
+            expect(iD.utilDisplayName({tags: { name: 'Dallas North Tollway', network: 'US:TX:NTTA', route: 'road' }}, { hideNetwork: true })).to.eql('Dallas North Tollway');
+        });
+        it('suppresses the ref tag if the hideRef argument is true', function() {
+            expect(iD.utilDisplayName({tags: { name: 'Lynfield Express', ref: '25L', network: 'AT', route: 'bus' }}, { hideRef: true })).to.eql('AT Lynfield Express');
+            expect(iD.utilDisplayName({tags: { network: 'SORTA', ref: '3X' }}, { hideRef: true })).to.eql('SORTA');
+            expect(iD.utilDisplayName({tags: { name: 'Dallas North Tollway', network: 'US:TX:NTTA', route: 'road' }}, { hideRef: true })).to.eql('US:TX:NTTA Dallas North Tollway');
         });
         it('distinguishes unnamed features by ref', function() {
             expect(iD.utilDisplayName({tags: {ref: '66'}})).to.eql('66');
@@ -350,7 +383,7 @@ describe('iD.util', function() {
             expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '32' } })).to.eql('32');
         });
         it('uses only the housenumber for map labels', () => {
-            expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '31', 'addr:street': 'Princes Street' } }, undefined, true)).to.eql('31');
+            expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '31', 'addr:street': 'Princes Street' } }, { isMapLabel: true })).to.eql('31');
         });
     });
 

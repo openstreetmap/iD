@@ -25,7 +25,7 @@ export function uiFieldDirectionalCombo(field, context) {
     function directionalCombo(selection) {
 
         function stripcolon(s) {
-            return s.replace(':', '');
+            return s.replaceAll(':', '');
         }
 
 
@@ -57,7 +57,9 @@ export function uiFieldDirectionalCombo(field, context) {
             .append('div')
             .attr('class', 'label preset-label-directionalcombo')
             .attr('for', function(d) { return 'preset-input-directionalcombo-' + stripcolon(d); })
-            .html(function(d) { return field.t.html('types.' + d); });
+            .each(function(d) {
+                d3_select(this).call(field.t.append('types.' + d));
+            });
 
         enter
             .append('div')

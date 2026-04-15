@@ -1,4 +1,4 @@
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 
 import { actionAddVertex } from '../actions/add_vertex';
 import { actionChangeTags } from '../actions/change_tags';
@@ -200,7 +200,11 @@ export function validationMismatchedGeometry() {
                         .attr('class', 'issue-reference')
                         .call(t.append('issues.vertex_as_point.reference'));
                 },
-                entityIds: [entity.id]
+                entityIds: [entity.id],
+                dynamicFixes: () => [new validationIssueFix({
+                    icon: 'iD-operation-move',
+                    title: t.append('issues.fix.reposition_point_to_vertex.title')
+                })]
             });
 
         } else if (geometry === 'vertex' && !allowedGeometries.vertex && allowedGeometries.point) {

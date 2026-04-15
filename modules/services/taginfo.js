@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 
 import { json as d3_json } from 'd3-fetch';
 
@@ -146,7 +146,7 @@ function sortKeys(a, b) {
 }
 
 
-var debouncedRequest = _debounce(request, 300, { leading: false });
+var debouncedRequest = debounce(request, 300, { leading: false });
 
 function request(url, params, exactMatch, callback, loaded) {
     if (_inflight[url]) return;

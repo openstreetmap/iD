@@ -6,9 +6,9 @@ describe('iD.coreValidator', function() {
     });
 
     function createInvalidWay() {
-        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
-        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
-        var w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'] });
+        var n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var w = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'] });
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -43,9 +43,9 @@ describe('iD.coreValidator', function() {
 
     it('removes validation issue when highway is no longer disconnected', async () => {
         // Add a way which is disconnected from the rest of the map
-        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
-        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
-        var w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'unclassified' } });
+        var n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var w = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'unclassified' } });
         context.perform(
             iD.actionAddEntity(n1),
             iD.actionAddEntity(n2),
@@ -59,8 +59,8 @@ describe('iD.coreValidator', function() {
         expect(issues).to.have.lengthOf(1);
 
         // Add new node with entrance node to simulate connection with rest of map
-        var n3 = iD.osmNode({ id: 'n-3', loc: [4, 6], tags: { 'entrance': 'yes' } });
-        var w2 = iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'unclassified' } });
+        var n3 = new iD.osmNode({ id: 'n-3', loc: [4, 6], tags: { 'entrance': 'yes' } });
+        var w2 = new iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'unclassified' } });
         context.perform(
             iD.actionAddEntity(n3),
             iD.actionAddEntity(w2)
@@ -73,11 +73,11 @@ describe('iD.coreValidator', function() {
 
     it('add validation issue when highway becomes disconnected', async () => {
         // Add a way which is connected to another way with an entrance node to simulate connection with rest of map
-        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
-        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
-        var w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'unclassified' } });
-        var n3 = iD.osmNode({ id: 'n-3', loc: [4, 6], tags: { 'entrance': 'yes' } });
-        var w2 = iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'unclassified' } });
+        var n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var w = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'unclassified' } });
+        var n3 = new iD.osmNode({ id: 'n-3', loc: [4, 6], tags: { 'entrance': 'yes' } });
+        var w2 = new iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'unclassified' } });
         context.perform(
             iD.actionAddEntity(n1),
             iD.actionAddEntity(n2),
@@ -104,12 +104,12 @@ describe('iD.coreValidator', function() {
     });
 
     it('removes validation issue when untagged way is becomes part of a boundary relation', async () => {
-        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
-        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
-        var n3 = iD.osmNode({ id: 'n-3', loc: [4, 6] });
-        var w1 = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'description': 'foo' } });
-        var w2 = iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: {} });
-        var r = iD.osmRelation({ id: 'r-1', members: [{ id: 'w-2' }], tags: { 'type': 'boundary' } });
+        var n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var n3 = new iD.osmNode({ id: 'n-3', loc: [4, 6] });
+        var w1 = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'description': 'foo' } });
+        var w2 = new iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: {} });
+        var r = new iD.osmRelation({ id: 'r-1', members: [{ id: 'w-2' }], tags: { 'type': 'boundary' } });
         context.perform(
             iD.actionAddEntity(n1),
             iD.actionAddEntity(n2),
@@ -138,10 +138,10 @@ describe('iD.coreValidator', function() {
 
     it('add validation issue when untagged way is removed from boundary relation', async () => {
         // A way is "untagged", but part of a larger (boundary) relation
-        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
-        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
-        var w1 = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'description': 'foo' } });
-        var r = iD.osmRelation({ id: 'r-1', members: [{ id: 'w-1' }], tags: { 'type': 'boundary' } });
+        var n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var w1 = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'description': 'foo' } });
+        var r = new iD.osmRelation({ id: 'r-1', members: [{ id: 'w-1' }], tags: { 'type': 'boundary' } });
         context.perform(
             iD.actionAddEntity(n1),
             iD.actionAddEntity(n2),

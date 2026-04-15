@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 
 import { prefs } from '../core/preferences';
 import { t, localizer } from '../core/localizer';
@@ -27,7 +27,6 @@ var readOnlyTags = [
     /^warnings:/,
     /^resolved:/,
     /^closed:note$/,
-    /^closed:keepright$/,
     /^closed:osmose:/
 ];
 
@@ -146,12 +145,6 @@ export function uiCommit(context) {
         var itemType;
         if (osmClosed.length) {
             tags['closed:note'] = context.cleanTagValue(osmClosed.join(';'));
-        }
-        if (services.keepRight) {
-            var krClosed = services.keepRight.getClosedIDs();
-            if (krClosed.length) {
-                tags['closed:keepright'] = context.cleanTagValue(krClosed.join(';'));
-            }
         }
         if (services.osmose) {
             var osmoseClosed = services.osmose.getClosedCounts();
@@ -280,7 +273,7 @@ export function uiCommit(context) {
         prose = prose.enter()
             .append('p')
             .attr('class', 'commit-info')
-            .call(t.append('commit.upload_explanation'))
+            .call(t.addOrUpdate('commit.upload_explanation'))
             .merge(prose);
 
         // always check if this has changed, but only update prose.html()
@@ -291,24 +284,29 @@ export function uiCommit(context) {
             if (_userDetails === user) return;  // no change
             _userDetails = user;
 
-            var userLink = d3_select(document.createElement('div'));
+            const userLink = function(selection) {
+                selection = selection.selectAll('span.user-link').data([user.id], d => d);
+                selection.exit().remove();
+                const enter = selection.enter()
+                    .append('span')
+                    .classed('user-link', true);
+                if (user.image_url) {
+                    enter
+                        .append('img')
+                        .attr('src', user.image_url)
+                        .attr('class', 'icon pre-text user-icon');
+                }
 
-            if (user.image_url) {
-                userLink
-                    .append('img')
-                    .attr('src', user.image_url)
-                    .attr('class', 'icon pre-text user-icon');
-            }
-
-            userLink
-                .append('a')
-                .attr('class', 'user-info')
-                .text(user.display_name)
-                .attr('href', osm.userURL(user.display_name))
-                .attr('target', '_blank');
+                enter
+                    .append('a')
+                    .attr('class', 'user-info')
+                    .text(user.display_name)
+                    .attr('href', osm.userURL(user.display_name))
+                    .attr('target', '_blank');
+            };
 
             prose
-                .html(t.html('commit.upload_explanation_with_user', { user: { html: userLink.html() } }));
+                .call(t.addOrUpdate('commit.upload_explanation_with_user', { user: userLink }));
         });
 
 
@@ -453,6 +451,17 @@ export function uiCommit(context) {
 
 
     function getUploadBlockerMessage() {
+        // if there are too many edits to fit into a single changeset, then
+        // prevent uploading.
+        const changesetElements = context.history().changesCount();
+        const maxChangesetElements = context.connection().maxChangesetElements();
+        if (changesetElements > maxChangesetElements) {
+            return t.append('issues.osm_api_limits.max_changeset_elements.reference', {
+                changesetElements,
+                maxChangesetElements,
+            });
+        }
+
         var errors = context.validator()
             .getIssuesBySeverity({ what: 'edited', where: 'all' }).error;
 
@@ -553,7 +562,6 @@ export function uiCommit(context) {
         Object.keys(changed).forEach(function(k) {
             var v = changed[k];
             k = context.cleanTagKey(k);
-            if (readOnlyTags.indexOf(k) !== -1) return;
 
             if (v === undefined) {
                 delete tags[k];
