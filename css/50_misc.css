@@ -72,19 +72,19 @@ path.line.stroke.tag-piste {
 
 .preset-icon .icon.tag-playground {
     color: #f3c4ee;
-    stroke: #7474743d;
+    stroke: rgba(116, 116, 116, 0.239);
 }
 path.line.stroke.tag-playground {
-    stroke: #eaeaeae5;
+    stroke: #f7f7f7e5;
     stroke-width: 2;
 }
 path.line.casing.tag-playground {
-    stroke: #efa4e9;
+    stroke: #ed97e6;
     stroke-width: 3;
 }
 path.area.fill.tag-playground {
     fill: #c878b84d;
-    stroke: rgba(255, 255, 255, 0.3);
+    stroke: #ffffff4d;
 }
 path.area.stroke.tag-playground {
     stroke-width: 1;
