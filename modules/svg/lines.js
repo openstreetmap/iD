@@ -1,6 +1,6 @@
 import { deepEqual } from 'fast-equals';
 import { range as d3_range } from 'd3-array';
-
+import { select as d3_select } from 'd3-selection';
 import {
     svgMarkerSegments, svgPath, svgRelationMemberTags, svgSegmentWay
 } from './helpers';
@@ -186,7 +186,11 @@ export function svgLines(projection, context) {
                 .merge(lines)
                 .sort(waystack)
                 .attr('d', getPath)
-                .call(svgTagClasses().tags(svgRelationMemberTags(graph)));
+                .call(svgTagClasses().tags(svgRelationMemberTags(graph)))
+                .each(function(d) {
+                    d3_select(this)
+                    .attr('data-playground', d.tags.playground ?? null);
+                });
 
             return selection;
         }

@@ -217,5 +217,27 @@ describe('iD.svgLines', function () {
             var selection = surface.selectAll('g.sidedgroup > path');
             expect(selection.empty()).to.be.true;
         });
+
+        it('adds data-playground attribute for playground features', function () {
+            var a = iD.osmNode({ loc: [0, 0] });
+            var b = iD.osmNode({ loc: [1, 1] });
+            var line = iD.osmWay({ nodes: [a.id, b.id], tags: { playground: 'zipwire' } });
+            var graph = new iD.coreGraph([a, b, line]);
+
+            surface.call(iD.svgLines(projection, context), graph, [line], all);
+
+            expect(surface.select('path').attr('data-playground')).to.equal('zipwire');
+        });
+
+        it('does not add data-playground for non-playground features', function () {
+            var a = iD.osmNode({ loc: [0, 0] });
+            var b = iD.osmNode({ loc: [1, 1] });
+            var line = iD.osmWay({ nodes: [a.id, b.id], tags: { highway: 'primary' } });
+            var graph = new iD.coreGraph([a, b, line]);
+
+            surface.call(iD.svgLines(projection, context), graph, [line], all);
+
+            expect(surface.select('path').attr('data-playground')).to.be.null;
+        });
     });
 });
