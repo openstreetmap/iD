@@ -1,6 +1,7 @@
 // @ts-check
 import js from '@eslint/js';
 import globals from 'globals';
+import confusingGlobals from 'confusing-browser-globals';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
@@ -74,7 +75,7 @@ export default tseslint.config(
       'no-promise-executor-return': 'error',
       'no-proto': 'error',
       'no-prototype-builtins': 'off',
-      'no-restricted-globals': ['error', 'message'],
+      'no-restricted-globals': ['error', ...confusingGlobals],
       'no-restricted-properties': 'error',
       'no-return-assign': 'off',
       'no-return-await': 'error',
