@@ -15,12 +15,8 @@ import {
 import { osmIdManager } from '../osm';
 
 
-function showBackupConflictWarning() {
-    dispatch.call('storage_error'); // reuse existing warning system
-}
-
 export function coreHistory(context) {
-    var dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone', 'storage_error');
+    var dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone', 'storage_error', 'backup_conflict');
     var lock = utilSessionMutex('lock');
 
     // restorable if iD not open in another window/tab and a saved history exists in localStorage
@@ -35,6 +31,9 @@ export function coreHistory(context) {
     var _index;
     var _tree;
 
+    function showBackupConflictWarning() {
+    dispatch.call('backup_conflict'); // reuse existing warning system
+    }
 
     // internal _act, accepts list of actions and eased time
     function _act(actions, t) {
