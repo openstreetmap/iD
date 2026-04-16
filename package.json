@@ -111,6 +111,7 @@
     "cldr-core": "^48.0.0",
     "cldr-localenames-full": "^48.0.0",
     "concat-files": "^0.1.1",
+    "confusing-browser-globals": "^1.0.11",
     "d3": "~7.9.0",
     "dotenv": "^17.2.3",
     "esbuild": "^0.28.0",
