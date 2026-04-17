@@ -431,3 +431,15 @@ export const osmUrlKeys = new Set([
     'website:menu',
     'post_office:website',
 ]);
+
+export const osmLifecycleConflictPrefixes = new Set([
+    'demolished',
+    'removed',
+    'razed',
+    'destroyed',
+    'obliterated',
+    'dismantled',
+    'disused',
+    'abandoned',
+    'was',
+]);

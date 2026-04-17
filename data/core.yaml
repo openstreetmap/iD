@@ -1672,6 +1672,9 @@ en:
       same_value:
         message: "{feature}: {tag1} and {tag2} have same value"
         reference: 'The tags "{tag1}" and "{tag2}" have the same value. Only one tag should be set.'
+    lifecycle_prefix_conflict:
+      message: "{feature} has both {tag1} and {tag2}"
+      reference: 'The tags "{tag1}" and "{tag2}" contradict each other. Only one tag should be set.'
     old_multipolygon:
       message: "{multipolygon} has misplaced tags"
       reference: "Multipolygons should be tagged on their relation, not their outer way."
