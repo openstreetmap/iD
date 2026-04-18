@@ -91,15 +91,6 @@ path.area.stroke.tag-playground {
     stroke: #e797d9ce;
 }
 
-/* Playground Structure */
-path.area.stroke.tag-playground[data-playground="structure"] {
-    stroke-width: 2;
-    stroke: rgba(231, 163, 219, 0.807);
-}
-path.area.fill.tag-playground[data-playground="structure"] {
-    stroke: rgba(227, 159, 246, 0.3);
-}
-
 /* ferry routes  */
 .preset-icon .icon.tag-route-ferry {
     color: #58a9ed;
