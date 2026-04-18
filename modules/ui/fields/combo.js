@@ -262,6 +262,9 @@ export function uiFieldCombo(field, context) {
             selection.attr('readonly', 'readonly');
         }
 
+        // clear previously existing old event handlers (e.g. when switching preset)
+        selection.call(uiCombobox.off, context);
+
         if (_showTagInfoSuggestions && services.taginfo) {
             selection.call(_combobox.fetcher(setTaginfoValues), attachTo);
             setTaginfoValues('', setPlaceholder);
@@ -703,9 +706,9 @@ export function uiFieldCombo(field, context) {
             .attr('type', 'text')
             .attr('dir', 'auto')
             .attr('id', field.domId)
+            .merge(_input)
             .call(utilNoAuto)
-            .call(initCombo, _container)
-            .merge(_input);
+            .call(initCombo, _container);
 
         if (_isSemi) {
             _inputWrap.call(_lengthIndicator);
