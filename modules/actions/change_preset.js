@@ -30,7 +30,7 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
                 const oldPresetFieldKeys = [
                     ...oldPreset.fields(loc),
                     ...oldPreset.moreFields(loc)
-                ].flatMap(f => f.allKeys());
+                ].flatMap(f => f.allKeys(tags));
 
                 // field-keys used by the old preset but not the new preset
                 const fieldKeysToRemove = utilArrayDifference(oldPresetFieldKeys, preserveKeys);

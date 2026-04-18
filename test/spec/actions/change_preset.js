@@ -165,6 +165,64 @@ describe('iD.actionChangePreset', function() {
         });
     });
 
+    // https://github.com/openstreetmap/iD/issues/12075
+    it.each([{
+        fieldType: 'multiCombo',
+        fieldId: 'recycling',
+        fieldKey: 'recycling:',
+        fieldKeys: [],
+        oldTags: { 'recycling:paper': 'yes', 'recycling:others': 'no' },
+        tagsToPreserve: {}
+    }, {
+        fieldType: 'localized',
+        fieldId: 'name',
+        fieldKey: 'name',
+        fieldKeys: [],
+        oldTags: { 'name': 'foo', 'name:en': 'bar', 'name:etymology:wikidata': 'Q860' },
+        tagsToPreserve: { 'name:etymology:wikidata': 'Q860' }
+    }, {
+        fieldType: 'directionalCombo',
+        fieldId: 'cycleway',
+        fieldKey: 'cycleway',
+        fieldKeys: [ 'cycleway:left', 'cycleway:right' ],
+        oldTags: { 'cycleway:left': 'no', 'cycleway:both': 'separate', 'cycleway:foo': 'bar' },
+        tagsToPreserve: { 'cycleway:foo': 'bar' }
+    }])('does not preserve $fieldType field tags that are only present in the old preset', ({
+        fieldType, fieldId, fieldKey, fieldKeys, oldTags: fieldTags, tagsToPreserve
+    }) => {
+        const entity = iD.osmNode({
+            tags: {
+                amenity: 'recycling',
+                ...fieldTags
+            },
+            loc: [0, 0],
+        });
+        const graph = new iD.coreGraph([entity]);
+
+        const fields = {
+            [fieldId]: iD.presetField('recycling', { type: fieldType, key: fieldKey, keys: fieldKeys }),
+        };
+
+        const oldPreset = iD.presetPreset(
+            'amenity/recycling',
+            { tags: { amenity: 'recycling' }, fields: [fieldId] },
+            undefined,
+            fields,
+        );
+        const newPreset = iD.presetPreset(
+            'amenity/bench',
+            { tags: { amenity: 'bench' }, fields: [] },
+            undefined,
+            fields,
+        );
+        const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
+        expect(action(graph).entity(entity.id).tags).toStrictEqual({
+            // no field tags are preserved
+            amenity: 'bench',
+            ...tagsToPreserve
+        });
+    });
+
     // https://github.com/openstreetmap/iD/issues/9372
     it('does not preserve field tags when changing from a subpreset to its parent', function() {
         var entity = new iD.osmNode({tags: {highway: 'service', service: 'driveway'}});
