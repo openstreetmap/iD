@@ -9,6 +9,8 @@ const wmfSitematrixCdnUrl = ENV__ID_WMF_SITEMATRIX_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/wmf-sitematrix@{version}/';
 const nsiCdnUrl = ENV__ID_NSI_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/name-suggestion-index@{version}/';
+const eliCdnUrl = ENV__ID_ELI_CDN_URL
+  || 'https://cdn.jsdelivr.net/gh/osmlab/editor-layer-index@gh-pages/';
 
 // api urls and settings
 const defaultOsmApiConnections = {
@@ -58,6 +60,7 @@ export {
   ociCdnUrl,
   wmfSitematrixCdnUrl,
   nsiCdnUrl,
+  eliCdnUrl,
   osmApiConnections,
   taginfoApiUrl,
   nominatimApiUrl,

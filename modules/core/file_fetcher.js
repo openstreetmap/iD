@@ -1,4 +1,4 @@
-import { presetsCdnUrl, ociCdnUrl, wmfSitematrixCdnUrl } from '../../config/id.js';
+import { eliCdnUrl, presetsCdnUrl, ociCdnUrl, wmfSitematrixCdnUrl } from '../../config/id.js';
 
 import packageJSON from '../../package.json';
 
@@ -17,10 +17,11 @@ export function coreFileFetcher() {
   let _inflight = {};
   let _fileMap = {
     'address_formats': 'data/address_formats.min.json',
-    'imagery': 'data/imagery.min.json',
+    'imagery': `${eliCdnUrl}imagery.geojson`,
     'intro_graph': 'data/intro_graph.min.json',
     'languages': 'data/languages.min.json',
     'locales': 'locales/index.min.json',
+    'manual_imagery': 'data/manual_imagery.min.json',
     'phone_formats': 'data/phone_formats.min.json',
     'qa_data': 'data/qa_data.min.json',
     'shortcuts': 'data/shortcuts.min.json',

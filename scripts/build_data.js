@@ -89,9 +89,9 @@ function buildData() {
   // Save individual data files
   let tasks = [
     minifyJSON('data/address_formats.json', 'dist/data/address_formats.min.json'),
-    minifyJSON('data/imagery.json', 'dist/data/imagery.min.json'),
     minifyJSON('data/intro_graph.json', 'dist/data/intro_graph.min.json'),
     minifyJSON('data/languages.json', 'dist/data/languages.min.json'),
+    minifyJSON('data/manual_imagery.json', 'dist/data/manual_imagery.min.json'),
     minifyJSON('data/phone_formats.json', 'dist/data/phone_formats.min.json'),
     minifyJSON('data/qa_data.json', 'dist/data/qa_data.min.json'),
     minifyJSON('data/shortcuts.json', 'dist/data/shortcuts.min.json'),
