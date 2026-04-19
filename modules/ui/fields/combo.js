@@ -613,17 +613,14 @@ export function uiFieldCombo(field, context) {
 
 
     function removeMultikey(d3_event, d) {
-        console.log(_comboData)
         d3_event.preventDefault();
         d3_event.stopPropagation();
         var t = {};
         if (_isMulti) {
             t[d.key] = undefined;
         } else if (_isSemi) {
-
             let arr = _multiData.map(item => item.key);
 
-            _multiData.splice(d.index, 1);
 
             // delete the value using the index, since a value
             // may exist multiple times in the array.
@@ -635,13 +632,8 @@ export function uiFieldCombo(field, context) {
             t[field.key] = arr.length ? arr.join(';') : undefined;
 
             _lengthIndicator.update(t[field.key]);
-
-            console.log(_comboData)
-
         }
         dispatch.call('change', this, t);
-
-        console.log(_comboData)
     }
 
 
