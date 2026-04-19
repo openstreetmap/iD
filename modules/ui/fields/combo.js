@@ -621,7 +621,6 @@ export function uiFieldCombo(field, context) {
         } else if (_isSemi) {
             let arr = _multiData.map(item => item.key);
 
-
             // delete the value using the index, since a value
             // may exist multiple times in the array.
             arr.splice(d.index, 1);
