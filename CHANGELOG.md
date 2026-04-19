@@ -63,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Disable autocomplete on changeset comment box on mobile Firefox to work around buggy/glitchy behavior of the input field ([#9011])
 * Fix crash when trying to delete a single-node way ([#9007])
 * Make sure the available options of multi/semi-combo fields are updated properly when a previous tag change caused a change of the feature's preset ([#12217])
+* Handle OSM API responses with 200 status code, but a runtime `error` in the response ([#6454])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -74,6 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
 * Add type annotations to `context.js` module ([#11589], thanks [@k-yle])
 
+[#6454]: https://github.com/openstreetmap/iD/issues/6454
 [#9007]: https://github.com/openstreetmap/iD/issues/9007
 [#9011]: https://github.com/openstreetmap/iD/issues/9011
 [#9017]: https://github.com/openstreetmap/iD/issues/9017

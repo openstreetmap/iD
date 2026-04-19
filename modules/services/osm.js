@@ -186,6 +186,11 @@ function parseJSON(payload, callback, options) {
 
     if (!json.elements) return callback({ message: 'No JSON', status: -1 });
 
+    if (typeof json.elements.at(-1).error === 'string') {
+        const errorMessage = payload.elements.at(-1).error;
+        return callback({ message: errorMessage, status: -1 });
+    }
+
     var children = json.elements;
 
     var handle = window.requestIdleCallback(function() {
