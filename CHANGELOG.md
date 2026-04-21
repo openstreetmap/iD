@@ -76,6 +76,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
 * Add type annotations to `context.js` module ([#11589], thanks [@k-yle])
+* Drop `netlify-cli` dependency and run it during CI via `npx` ([#12237])
 
 [#6454]: https://github.com/openstreetmap/iD/issues/6454
 [#9007]: https://github.com/openstreetmap/iD/issues/9007
@@ -104,6 +105,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12169]: https://github.com/openstreetmap/iD/issues/12169
 [#12178]: https://github.com/openstreetmap/iD/pull/12178
 [#12217]: https://github.com/openstreetmap/iD/issues/12217
+[#12237]: https://github.com/openstreetmap/iD/pull/12237
 
 
 # 2.39.6

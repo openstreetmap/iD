@@ -55,4 +55,4 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{secrets.NETLIFY_AUTH_TOKEN}}
           NETLIFY_SITE_ID: ${{secrets.NETLIFY_SITE_ID}}
-        run: ./node_modules/.bin/netlify deploy --no-build --prod --dir=dist
+        run: npx netlify-cli deploy --no-build --prod --dir=dist
