@@ -25,9 +25,6 @@ Because iD uses CSS and SVG for all its rendering, users can override the colors
 with the [Stylish extension](https://en.wikipedia.org/wiki/Stylish) on Firefox or Chrome.
 Stylish also allows users to share custom styles with others.
 
-You can find detailed instructions on how to install Stylish
-[here on learnosm.org](http://learnosm.org/en/hot-tips/enhance/).
-
 See also: https://github.com/openstreetmap/iD/issues/3095#issuecomment-224988925
 
 
