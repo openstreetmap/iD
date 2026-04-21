@@ -211,8 +211,8 @@ are kept close to 100% coverage, while most languages have less than 50% coverag
 | 🟠 | [Browser zoom](https://support.mozilla.org/en-US/kb/accessibility-features-firefox-make-firefox-and-we#w_page-zoom) | Scrolling-to-pan the map may react oddly on some browsers | |
 | 🟠 | [Text-only browser zoom](https://support.mozilla.org/en-US/kb/accessibility-features-firefox-make-firefox-and-we#w_text-zoom) | Interface elements scale to compensate larger text sizes. Map labels don't scale | [#7965](https://github.com/openstreetmap/iD/issues/7965) |
 | ✅ | Browser zoom keyboard shortcuts | The <kbd>Cmd</kbd><kbd>+</kbd> and <kbd>Cmd</kbd><kbd>–</kbd> shortcuts used by major browsers are supported | [#7976](https://github.com/openstreetmap/iD/issues/7976) |
-| 🟠 | [Don't rely on color alone](https://www.wuhcag.com/use-of-colour/) | Some classes of map data are indistinguishable except for their colors | |
-| 🤷 | [High-contrast text colors](https://www.wuhcag.com/contrast-enhanced/) | | |
+| 🟠 | [Don't rely on color alone](https://web.archive.org/web/20240125180238/https://www.wuhcag.com/use-of-colour/) | Some classes of map data are indistinguishable except for their colors | |
+| 🤷 | [High-contrast text colors](https://web.archive.org/web/20240125180238/https://www.wuhcag.com/contrast-enhanced/) | | |
 | ✅ | [Dark mode](https://en.wikipedia.org/wiki/Light-on-dark_color_scheme) | Many people find light-on-dark UIs easier to read under certain conditions | [#8214](https://github.com/openstreetmap/iD/issues/8214) |
 | ❌ | Audio feedback | This would need to be easy to disable or even disabled by default | [#5821](https://github.com/openstreetmap/iD/issues/5821) |
 
