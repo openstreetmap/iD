@@ -11,8 +11,9 @@ import { fileFetcher } from '../core/file_fetcher';
 import { geoMetersToOffset, geoOffsetToMeters, geoExtent } from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
-import { utilQsString, utilStringQs } from '../util';
+import { utilStringQs } from '../util';
 import { utilRebind } from '../util/rebind';
+import { patchHash } from '../behavior';
 
 
 let _imageryIndex = null;
@@ -200,32 +201,18 @@ export function rendererBackground(context) {
     const EPSILON = 0.01;
     const x = +meters[0].toFixed(2);
     const y = +meters[1].toFixed(2);
-    let hash = utilStringQs(window.location.hash);
+    const notableOffset = Math.abs(x) > EPSILON || Math.abs(y) > EPSILON;
 
     let id = currSource.id;
     if (id === 'custom') {
       id = `custom:${currSource.template()}`;
     }
 
-    if (id) {
-      hash.background = id;
-    } else {
-      delete hash.background;
-    }
-
-    if (o) {
-      hash.overlays = o;
-    } else {
-      delete hash.overlays;
-    }
-
-    if (Math.abs(x) > EPSILON || Math.abs(y) > EPSILON) {
-      hash.offset = `${x},${y}`;
-    } else {
-      delete hash.offset;
-    }
-
-    window.history.replaceState(null, '', '#' + utilQsString(hash, true));
+    patchHash({
+      background: id || null,
+      overlays: o || null,
+      offset: notableOffset ? `${x},${y}` : null
+    });
 
     let imageryUsed = [];
     let photoOverlaysUsed = [];

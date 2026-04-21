@@ -4,8 +4,9 @@ import { prefs } from '../core/preferences';
 import { osmEntity } from '../osm';
 import { osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
 import { utilRebind } from '../util/rebind';
-import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
+import { utilArrayGroupBy, utilArrayUnion, utilStringQs } from '../util';
 import { isAddressPoint } from '../svg/labels';
+import { patchHash } from '../behavior';
 
 
 export function rendererFeatures(context) {
@@ -56,15 +57,9 @@ export function rendererFeatures(context) {
 
 
     function update() {
-        const hash = utilStringQs(window.location.hash);
-        const disabled = features.disabled();
-        if (disabled.length) {
-            hash.disable_features = disabled.join(',');
-        } else {
-            delete hash.disable_features;
-        }
-        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
-        prefs('disabled-features', disabled.join(','));
+        const disabled = features.disabled().join(',');
+        patchHash({ disable_features: disabled || null });
+        prefs('disabled-features', disabled);
         _hidden = features.hidden();
         dispatch.call('change');
         dispatch.call('redraw');

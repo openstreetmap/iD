@@ -4,13 +4,14 @@ import { pairs as d3_pairs } from 'd3-array';
 import RBush from 'rbush';
 import { iso1A2Codes } from '@rapideditor/country-coder';
 import { t } from '../core/localizer';
-import { utilQsString, utilTiler, utilRebind, utilArrayUnion, utilStringQs } from '../util';
+import { utilQsString, utilTiler, utilRebind, utilArrayUnion } from '../util';
 import { searchLimited } from '../util/partition';
 import { localeTimestamp } from '../util/date';
 import { geoExtent, geoVecAngle, geoVecEqual } from '../geo';
 import { pannellumPhotoFrame } from './pannellum_photo';
 import { planePhotoFrame } from './plane_photo';
 import { services } from './';
+import { patchHash } from '../behavior';
 
 
 const owsEndpoint = 'https://www.vegvesen.no/kart/ogc/vegbilder_1_0/ows?';
@@ -426,7 +427,7 @@ export default {
 
   selectImage: function(context, key, keepOrientation) {
     const d = this.cachedImage(key);
-    this.updateUrlImage(key);
+    patchHash({ photo: 'vegbilder/' + key });
 
     const viewer = context.container().select('.photoviewer');
     if (!viewer.empty()) { viewer.datum(d); }
@@ -486,7 +487,7 @@ export default {
   },
 
   hideViewer: function(context) {
-    this.updateUrlImage(null);
+    patchHash({ photo: null });
 
     const viewer = context.container().select('.photoviewer');
     if (!viewer.empty()) viewer.datum(null);
@@ -556,16 +557,6 @@ export default {
     }
 
     return this;
-  },
-
-  updateUrlImage: function (key) {
-    const hash = utilStringQs(window.location.hash);
-    if (key) {
-      hash.photo = 'vegbilder/' + key;
-    } else {
-      delete hash.photo;
-    }
-    window.history.replaceState(null, '', '#' + utilQsString(hash, true));
   },
 
   validHere: function(extent) {
