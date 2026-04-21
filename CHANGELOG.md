@@ -64,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix crash when trying to delete a single-node way ([#9007])
 * Make sure the available options of multi/semi-combo fields are updated properly when a previous tag change caused a change of the feature's preset ([#12217])
 * Handle OSM API responses with 200 status code, but a runtime `error` in the response ([#6454])
+* Keep `natural=coastline` tag on outer way of created multipolygon when combining areas ([#11818], thanks [@Kaushik4141])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -85,6 +86,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9406]: https://github.com/openstreetmap/iD/issues/9406
 [#10256]: https://github.com/openstreetmap/iD/pull/10256
 [#11589]: https://github.com/openstreetmap/iD/pull/11589
+[#11818]: https://github.com/openstreetmap/iD/pull/11818
 [#12010]: https://github.com/openstreetmap/iD/pull/12010
 [#12050]: https://github.com/openstreetmap/iD/issues/12050
 [#12051]: https://github.com/openstreetmap/iD/issues/12051
