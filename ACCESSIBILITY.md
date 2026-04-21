@@ -42,14 +42,14 @@ elsewhere in this document.
 | 🟩 | ![android logo] | [Android](https://en.wikipedia.org/wiki/Android_(operating_system)) browsers | Browsers on Android can use their own engines, so support may vary, but there are currently no known issues |
 | 🟩 | 🌐 | Others | iD should run on any browser implementing [modern web standards](https://www.w3.org/standards/). Hardware factors such as screen size may affect usability |
 
-[safari logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/30px-Safari_browser_logo.svg.png
-[opera logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Opera_browser_logo_2013_vector.svg/30px-Opera_browser_logo_2013_vector.svg.png
-[chrome logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/30px-Google_Chrome_icon_%28September_2014%29.svg.png
-[firefox logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/30px-Firefox_logo%2C_2019.svg.png
-[edge logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Microsoft_Edge_logo_%282015%E2%80%932019%29.svg/30px-Microsoft_Edge_logo_%282015%E2%80%932019%29.svg.png
-[ie logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/30px-Internet_Explorer_10%2B11_logo.svg.png
-[webkit logo]: https://upload.wikimedia.org/wikipedia/en/thumb/b/be/WebKit_logo_(2015).svg/35px-WebKit_logo_(2015).svg.png
-[android logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/28px-Android_robot.svg.png
+[safari logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Font_Awesome_5_brands_safari.svg/40px-Font_Awesome_5_brands_safari.svg.png
+[opera logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Opera_browser_logo_2013_vector.svg/40px-Opera_browser_logo_2013_vector.svg.png
+[chrome logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/40px-Google_Chrome_icon_%28September_2014%29.svg.png
+[firefox logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/40px-Firefox_logo%2C_2019.svg.png
+[edge logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Microsoft_Edge_logo_%282015%E2%80%932019%29.svg/40px-Microsoft_Edge_logo_%282015%E2%80%932019%29.svg.png
+[ie logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/40px-Internet_Explorer_10%2B11_logo.svg.png
+[webkit logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/WebKit_logo.svg/40px-WebKit_logo.svg.png
+[android logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/40px-Android_robot.svg.png
 
 <br/>
 
@@ -89,13 +89,13 @@ It's impractical to ensure every single input device works as expected, so the t
 | 🤷 | 🎮  | [Gamepad](https://en.wikipedia.org/wiki/Gamepad) | |
 
 [ibm mouse]: https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Myszka_IBM.jpg/40px-Myszka_IBM.jpg
-[apple adb mouse]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Apple-ADB-mouse.jpg/70px-Apple-ADB-mouse.jpg
-[apple mighty mouse]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Apple_Mighty_Mouse_top_viewo.jpg/35px-Apple_Mighty_Mouse_top_viewo.jpg
-[vertical scroll wheel]: https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Razer_DeathAdder_2013_Edition-mouse_wheel_PNr%C2%B00405.jpg/50px-Razer_DeathAdder_2013_Edition-mouse_wheel_PNr%C2%B00405.jpg
-[magic mouse]: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Magic_Mouse.jpg/70px-Magic_Mouse.jpg
-[pointing stick]: https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Mouse_pointing_stick.jpeg/70px-Mouse_pointing_stick.jpeg
-[touchpad]: https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Touchpad_F3JA.jpg/70px-Touchpad_F3JA.jpg
-[macbook trackpad]: https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/MacBook_Pro%27s_trackpad.JPG/70px-MacBook_Pro%27s_trackpad.JPG
+[apple adb mouse]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Apple-ADB-mouse.jpg/60px-Apple-ADB-mouse.jpg
+[apple mighty mouse]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Apple_Mighty_Mouse_top_viewo.jpg/40px-Apple_Mighty_Mouse_top_viewo.jpg
+[vertical scroll wheel]: https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Razer_DeathAdder_2013_Edition-mouse_wheel_PNr%C2%B00405.jpg/60px-Razer_DeathAdder_2013_Edition-mouse_wheel_PNr%C2%B00405.jpg
+[magic mouse]: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Magic_Mouse.jpg/60px-Magic_Mouse.jpg
+[pointing stick]: https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Mouse_pointing_stick.jpeg/60px-Mouse_pointing_stick.jpeg
+[touchpad]: https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Touchpad_F3JA.jpg/60px-Touchpad_F3JA.jpg
+[macbook trackpad]: https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/MacBook_Pro%27s_trackpad.JPG/60px-MacBook_Pro%27s_trackpad.JPG
 
 ### Input Setups
 
