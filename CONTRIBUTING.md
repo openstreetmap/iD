@@ -16,7 +16,7 @@ before [opening a new one](https://github.com/openstreetmap/iD/issues/new/choose
 
 When reporting a bug:
 
-* Write specifically what browser (type and version, like "Firefox 49.0"), OS,
+* Write specifically what browser (type and version, like "Firefox 150.0"), OS,
 and browser extensions you have installed
 * Write steps to replicate the error: when did it happen? What did you expect to happen?
 What happened instead?
@@ -44,9 +44,6 @@ Green labels are for **action items**. Jump in and start working!
 Best for new contributors. Little experience necessary!
 * https://github.com/openstreetmap/iD/labels/help%20wanted -
 For more intermediate contributors, probably requires investigation or knowledge of iD code.
-* https://github.com/openstreetmap/iD/labels/priority -
-Issues that have a big impact or matter most to _new mappers_.
-<br/>(There should probably be 10 or fewer "priority" items.)
 
 Red labels are for **bugs**. These are things that we want fixed, but might be a bit more
 complicated than the green action items.
@@ -381,9 +378,9 @@ You also need a GitHub account and may find this [Article about Editing](https:/
 
 Additionally here is a step-by-step workflow example for beginners:
 
-1. [Login](https://github.com/login) to your GitHub account or [create](https://services.github.com/on-demand/intro-to-github/create-github-account) a GitHub account, if you do not already have one.
+1. [Login](https://github.com/login) to your GitHub account or [create](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github) a GitHub account, if you do not already have one.
 
-2. Go to the [iD main repository](https://github.com/openstreetmap/iD) and fork iD into your GitHub account (Fork is top right).
+2. Go to the [iD main repository](https://github.com/openstreetmap/iD) and [fork iD into your GitHub account (Fork is top right)](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo).
 
 3. Create a new branch by clicking on "Branch: develop" and entering the name of a new branch (choose a descriptive name).
 
