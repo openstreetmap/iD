@@ -544,7 +544,7 @@ describe('iD.coreGraph', function() {
             var relation = graph.parentRelations(graph.entity(wayRemoved))[0];
             var idx = relation.members.findIndex(function(m) { return m.id === wayRemoved; });
 
-            graph = iD.actionDeleteMembers(relation.id, [idx])(graph);
+            graph = iD.actionDeleteMember(relation.id, idx)(graph);
 
             expect(graph.parentRelations(graph.entity(wayRemoved))).to.eql([]);
         });
