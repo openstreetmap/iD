@@ -244,11 +244,11 @@ remove a `hover` class from map elements.
 
 Because certain behaviors are appropriate to some but not all modes, we need
 the ability to remove a behavior when entering a mode where it is not
-appropriate. While older versions of D3 did not provide this functionality,
-it is now possible to remove namespaced event listeners (e.g. `selection.on(".zoom", null)`).
-Each behavior implements an `off` function that "uninstalls" the behavior.
-This is very similar to the `exit` method of a mode, and in fact many modes do
-little else but uninstall behaviors in their `exit` methods.
+appropriate. Although it is possible to remove event listeners by namespace
+(e.g. `selection.on(".zoom", null)`), each behavior implements an `off` function
+that "uninstalls" the behavior. This is very similar to the `exit` method of
+a mode, and in fact many modes do little else but uninstall behaviors in
+their `exit` methods.
 
 ### Operations Module
 
