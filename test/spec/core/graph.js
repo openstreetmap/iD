@@ -529,6 +529,47 @@ describe('iD.coreGraph', function() {
             expect(graph.parentRelations(node)).to.eql([relation]);
             expect(graph.parentRelations(nonnode)).to.eql([]);
         });
+
+        it('updates after removing a way from a multipolygon (#split area → remove member)', function () {
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 1]}),
+                new iD.osmNode({id: 'b', loc: [1, 1]}),
+                new iD.osmNode({id: 'c', loc: [1, 0]}),
+                new iD.osmNode({id: 'd', loc: [0, 0]}),
+                new iD.osmWay({id: '-', tags: { area: 'yes' }, nodes: ['a', 'b', 'c', 'd', 'a']}),
+            ]);
+            graph = iD.actionSplit('a', ['='])(graph);
+
+            var wayRemoved = '=';
+            var relation = graph.parentRelations(graph.entity(wayRemoved))[0];
+            var idx = relation.members.findIndex(function(m) { return m.id === wayRemoved; });
+
+            graph = iD.actionDeleteMembers(relation.id, [idx])(graph);
+
+            expect(graph.parentRelations(graph.entity(wayRemoved))).to.eql([]);
+        });
+
+        it('handles duplicate member ids when updating parentRels', function () {
+            var n = new iD.osmNode({ id: 'n1' }),
+                r = new iD.osmRelation({
+                    id: 'r',
+                    members: [
+                        { id: 'n1', type: 'node', role: 'outer' },
+                        { id: 'n1', type: 'node', role: 'inner' },
+                    ],
+                }),
+                graph = new iD.coreGraph([n, r]);
+
+            expect(graph.parentRelations(n).map(function(x) { return x.id; })).to.eql(['r']);
+
+            graph = graph.replace(graph.entity('r').removeMember(0));
+
+            expect(graph.parentRelations(n).map(function(x) { return x.id; })).to.eql(['r']);
+
+            graph = graph.replace(graph.entity('r').removeMember(0));
+
+            expect(graph.parentRelations(n)).to.eql([]);
+        });
     });
 
     describe('#childNodes', function () {

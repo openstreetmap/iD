@@ -204,8 +204,6 @@ export class coreGraph {
         parentRels = parentRels || this._parentRels;
 
         var type = entity && entity.type || oldentity && oldentity.type;
-        let removed: string[] = [];
-        let added: string[] = [];
         let i: number;
 
         if (type === 'way') {   // Update parentWays
@@ -214,6 +212,8 @@ export class coreGraph {
             entity = <osmWay | undefined>entity;
             oldentity = <osmWay | undefined>oldentity;
 
+            let removed: string[] = [];
+            let added: string[] = [];
             if (oldentity && entity) {
                 removed = utilArrayDifference(oldentity.nodes, entity.nodes);
                 added = utilArrayDifference(entity.nodes, oldentity.nodes);
@@ -241,29 +241,47 @@ export class coreGraph {
             entity = <osmRelation | undefined>entity;
             oldentity = <osmRelation | undefined>oldentity;
 
-            // diff only on the IDs since the same entity can be a member multiple times with different roles
-            var oldentityMemberIDs = oldentity ? oldentity.members.map(function(m) { return m.id; }) : [];
-            var entityMemberIDs = entity ? entity.members.map(function(m) { return m.id; }) : [];
+            function memberIDCounts(members: osmRelation['members'] | undefined) {
+                var counts = new Map<string, number>();
+                if (!members) return counts;
+                for (var j = 0; j < members.length; j++) {
+                    var mid = members[j].id;
+                    counts.set(mid, (counts.get(mid) || 0) + 1);
+                }
+                return counts;
+            }
 
+            // _parentRels stores each parent relation at most once per child id, but a relation
+            // may list the same member id multiple times (different roles). Membership changes
+            // must use multiset counts — utilArrayDifference(Set) breaks duplicate members.
             if (oldentity && entity) {
-                removed = utilArrayDifference(oldentityMemberIDs, entityMemberIDs);
-                added = utilArrayDifference(entityMemberIDs, oldentityMemberIDs);
+                var oldCounts = memberIDCounts(oldentity.members);
+                var newCounts = memberIDCounts(entity.members);
+                var relationId = oldentity.id;
+                var memberIds = new Set([...oldCounts.keys(), ...newCounts.keys()]);
+                memberIds.forEach(function(mid) {
+                    var oc = oldCounts.get(mid) || 0;
+                    var nc = newCounts.get(mid) || 0;
+                    if (oc > 0 && nc === 0) {
+                        parentRels[mid] = new Set(parentRels[mid]);
+                        parentRels[mid].delete(relationId);
+                    } else if (oc === 0 && nc > 0) {
+                        parentRels[mid] = new Set(parentRels[mid]);
+                        parentRels[mid].add(relationId);
+                    }
+                });
             } else if (oldentity) {
-                removed = oldentityMemberIDs;
-                added = [];
+                var removedRel = oldentity;
+                memberIDCounts(removedRel.members).forEach(function(_oc, mid) {
+                    parentRels[mid] = new Set(parentRels[mid]);
+                    parentRels[mid].delete(removedRel.id);
+                });
             } else if (entity) {
-                removed = [];
-                added = entityMemberIDs;
-            }
-            for (i = 0; i < removed.length; i++) {
-                // make a copy of prototype property, store as own property, and update..
-                parentRels[removed[i]] = new Set(parentRels[removed[i]]);
-                parentRels[removed[i]].delete(oldentity!.id);
-            }
-            for (i = 0; i < added.length; i++) {
-                // make a copy of prototype property, store as own property, and update..
-                parentRels[added[i]] = new Set(parentRels[added[i]]);
-                parentRels[added[i]].add(entity!.id);
+                var addedRel = entity;
+                memberIDCounts(addedRel.members).forEach(function(_nc, mid) {
+                    parentRels[mid] = new Set(parentRels[mid]);
+                    parentRels[mid].add(addedRel.id);
+                });
             }
         }
     }
