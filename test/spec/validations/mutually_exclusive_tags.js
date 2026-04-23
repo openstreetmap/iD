@@ -81,4 +81,21 @@ describe('iD.validations.mutually_exclusive_tags', function () {
         expect(issue.entityIds).to.have.lengthOf(1);
         expect(issue.entityIds[0]).to.eql('n-1');
     });
+
+    it('ignores double-negative tags like noname=no', async () => {
+        createNode({ name: 'Liluah St.', 'noname': 'no' });
+        let validator = iD.validationMutuallyExclusiveTags(context);
+        await setTimeout(20);
+        let issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('flags actual conflicts like name=* and noname=yes', async () => {
+        createNode({ crossing_ref: 'zebra', 'crossing': 'unmarked' });
+        let validator = iD.validationMutuallyExclusiveTags(context);
+        await setTimeout(20);
+        let issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        expect(issues[0].type).to.eql('mutually_exclusive_tags');
+    });
 });
