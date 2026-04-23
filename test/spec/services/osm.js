@@ -210,6 +210,20 @@ describe('iD.serviceOsm', function () {
             await expect(promise).rejects.toThrow(expect.objectContaining({ status: -1, message: 'server error' }));
         });
 
+        it('handles empty response gracefully', async () => {
+            const emptyResponse = JSON.parse(response);
+            emptyResponse.elements = [];
+            fetchMock.mock(`https://www.openstreetmap.org${path}`, {
+                body: JSON.stringify(emptyResponse),
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const payload = await promisify(connection.loadFromAPI).call(connection, path);
+            expect(typeof payload).to.eql('object');
+            expect(payload).toHaveLength(0);
+        });
+
         it('uses apiUrl', async () => {
             fetchMock.mock('https://api.openstreetmap.org' + path, {
                 body: response,
