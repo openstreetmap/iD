@@ -368,7 +368,8 @@ export const osmMutuallyExclusiveTagPairs = [
     [
       {key: 'crossing', value:'unmarked'},
       {key: 'crossing_ref', value: 'zebra'}
-    ]
+    ],
+    [ 'crossing_ref', { key: 'crossing:markings', value: 'no' } ]
 ];
 
 
