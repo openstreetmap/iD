@@ -38,7 +38,7 @@ export function validationMutuallyExclusiveTags(/* context */) {
         }).filter((pair) => {
             // noname=no is double-negation, thus positive and not conflicting. We'll ignore those
             return !(isIgnoredNoTag(pair[0], entity.tags) ||
-                     isIgnoredNoTag(pair[0], entity.tags));
+                     isIgnoredNoTag(pair[1], entity.tags));
         });
 
         // Additional:
