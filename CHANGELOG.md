@@ -51,6 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Treat most aerialways as part of the routable network when checking other ways' connectivity ([#9406])
 * Only consider well known tags containing URLs during website validation ([#12178], thanks [@bhavyaKhatri2703])
 * Sort full issues list by issue type first (instead of only by distance from map center), such that similar issues are always listed next to each other ([#9017])
+* For disconnected routable multipolygon areas: report the relation in the validation warning ([#12245])
 #### :bug: Bugfixes
 * Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
 * Prevent duplicate nodes from being created while using spacebar key to draw a way ([#12051])
@@ -106,6 +107,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12178]: https://github.com/openstreetmap/iD/pull/12178
 [#12217]: https://github.com/openstreetmap/iD/issues/12217
 [#12237]: https://github.com/openstreetmap/iD/pull/12237
+[#12245]: https://github.com/openstreetmap/iD/issues/12245
 
 
 # 2.39.6
