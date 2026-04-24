@@ -13,24 +13,39 @@ export function uiShortcuts(context) {
 
 
     function shortcutsModal(_modalSelection) {
-        _modalSelection.select('.modal')
-            .classed('modal-shortcuts', true);
+       _modalSelection.select('.modal')
+           .classed('modal-shortcuts', true);
 
-        var content = _modalSelection.select('.content');
 
-        content
-            .append('div')
-            .attr('class', 'modal-section header')
-            .append('h2')
-            .call(t.append('shortcuts.title'));
+       var content = _modalSelection.select('.content');
 
-        fileFetcher.get('shortcuts')
-            .then(function(data) {
-                _dataShortcuts = data;
-                content.call(render);
-            })
-            .catch(function() { /* ignore */ });
-    }
+
+       var header = content
+           .append('div')
+           .attr('class', 'modal-section header')
+           .on('wheel', function (d3_event) {
+               var wrapper = content.select('.wrapper').node();
+               if (!wrapper) return;
+
+
+               wrapper.scrollTop += d3_event.deltaY;
+               d3_event.preventDefault();
+           });
+
+
+       header
+           .append('h2')
+           .call(t.append('shortcuts.title'));
+
+
+       fileFetcher.get('shortcuts')
+           .then(function (data) {
+               _dataShortcuts = data;
+               content.call(render);
+           })
+           .catch(function () { /* ignore */ });
+   }
+
 
 
     function render(selection) {

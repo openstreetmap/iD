@@ -5352,6 +5352,21 @@ img.tile-debug {
     max-width: 1050px;
 }
 
+.modal-shortcuts .content {
+   display: flex;
+   flex-direction: column;
+   max-height: 90vh;
+   overflow-y: hidden;
+}
+
+
+.modal-shortcuts .wrapper {
+   flex: 1 1 auto;
+   min-height: 0;
+   overflow-y: auto;
+}
+
+
 .modal-shortcuts .modal-section:last-child {
     padding: 10px 15px 20px 15px;
     min-height: 275px;
