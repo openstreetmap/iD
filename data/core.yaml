@@ -596,6 +596,9 @@ en:
   osm_api_status:
     message:
       error: Unable to reach the OpenStreetMap API. Your edits are safe locally. Check your network connection.
+      server_error: The OpenStreetMap server encountered an error (500). Your edits are safe locally.
+      service_unavailable: The OpenStreetMap service is temporarily unavailable (503). Your edits are safe locally.
+      timeout: The connection to OpenStreetMap timed out. Please check your internet connection.
       offline: The OpenStreetMap API is offline. Your edits are safe locally. Please come back later.
       readonly: The OpenStreetMap API is currently read-only. You can continue editing, but must wait to save your changes.
       rateLimit: The OpenStreetMap API is limiting anonymous connections. You can fix this by logging in.
