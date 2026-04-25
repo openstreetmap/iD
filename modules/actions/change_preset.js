@@ -20,7 +20,7 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
                 // https://github.com/openstreetmap/iD/issues/9372
                 newPreset.fields(loc).concat(newPreset.moreFields(loc))
                     .filter(f => f.matchGeometry(geometry))
-                    .flatMap(f => f.allKeys())
+                    .flatMap(f => f.allKeys(tags))
                     .filter(Boolean)
                     .forEach(key => preserveKeys.push(key));
             }
