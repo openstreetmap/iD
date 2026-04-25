@@ -74,7 +74,7 @@ export function presetField(fieldID, field, allFields) {
             .forEach(key => allKeys.add(key));
     }
     if (field.type === 'multiCombo' && field.key && tags) {
-        const prefix = field.key + field.key.endsWith(':') ? '' : ':';
+        const prefix = field.key + (field.key.endsWith(':') ? '' : ':');
         Object.keys(tags)
             .filter(k => k.startsWith(prefix))
             .forEach(key => allKeys.add(key));

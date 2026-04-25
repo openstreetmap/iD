@@ -193,7 +193,8 @@ describe('iD.actionChangePreset', function() {
         const entity = iD.osmNode({
             tags: {
                 amenity: 'recycling',
-                ...fieldTags
+                ...fieldTags,
+                unrelatedTagKey: 'unrelatedTagValue',
             },
             loc: [0, 0],
         });
@@ -219,7 +220,8 @@ describe('iD.actionChangePreset', function() {
         expect(action(graph).entity(entity.id).tags).toStrictEqual({
             // no field tags are preserved
             amenity: 'bench',
-            ...tagsToPreserve
+            ...tagsToPreserve,
+            unrelatedTagKey: 'unrelatedTagValue',
         });
     });
 
