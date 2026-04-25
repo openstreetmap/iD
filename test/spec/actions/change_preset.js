@@ -281,14 +281,16 @@ describe('iD.actionChangePreset', function() {
     });
 
     // https://github.com/openstreetmap/iD/issues/9372
-    it('does not preserve field tags when changing from a subpreset to its parent', function() {
-        var entity = new iD.osmNode({tags: {highway: 'service', service: 'driveway'}});
-        var graph = new iD.coreGraph([entity]);
-        var oldPreset = iD.presetPreset('highway/service/driveway', {tags: {highway: 'service', service: 'driveway'}});
-        var newPreset = iD.presetPreset('highway/service', {tags: {highway: 'service'}, fields: ['field']}, undefined, {
-            field: iD.presetField('field', {key: 'service'})
-        });
-        var action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
-        expect(action(graph).entity(entity.id).tags).to.eql({highway: 'service'});
+    it('does not preserve old preset\'s primary tags when changing from a subpreset to its parent', () => {
+        const entity = new iD.osmNode({tags: {highway: 'service', service: 'driveway', name: 'foo bar'}});
+        const graph = new iD.coreGraph([entity]);
+        const fields = {
+            field: iD.presetField('field', {key: 'service'}),
+            name: iD.presetField('name', {key: 'name'})
+        };
+        const oldPreset = iD.presetPreset('highway/service/driveway', {tags: {highway: 'service', service: 'driveway'}, fields: ['name']}, undefined, fields);
+        const newPreset = iD.presetPreset('highway/service', {tags: {highway: 'service'}, fields: ['field', 'name']}, undefined, fields);
+        const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
+        expect(action(graph).entity(entity.id).tags).to.eql({highway: 'service', name: 'foo bar'});
     });
 });
