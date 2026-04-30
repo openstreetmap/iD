@@ -41,6 +41,7 @@ updates:
       vite:
         patterns:
           - "vite*"
+          - "@vitest/*"
         applies-to: version-updates
     labels:
       - "chore-dependabot"
