@@ -68,6 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Handle OSM API responses with 200 status code, but a runtime `error` in the response ([#6454])
 * Keep `natural=coastline` tag on outer way of created multipolygon when combining areas ([#11818], thanks [@Kaushik4141])
 * Fix exception when a `onewayCheck` field is present on a non-way feature (e.g. a ferry route) ([#12272])
+* Make sure that `disable_features` parameter from URL hash is not overwritten by locally cached value from last session
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help

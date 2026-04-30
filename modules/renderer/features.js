@@ -608,16 +608,15 @@ export function rendererFeatures(context) {
 
 
     features.init = function() {
-        var storage = prefs('disabled-features');
-        if (storage) {
-            var storageDisabled = storage.replace(/;/g, ',').split(',');
-            storageDisabled.forEach(features.disable);
-        }
+        const hash = utilStringQs(window.location.hash).disable_features;
+        const storage = prefs('disabled-features');
 
-        var hash = utilStringQs(window.location.hash);
-        if (hash.disable_features) {
-            var hashDisabled = hash.disable_features.replace(/;/g, ',').split(',');
-            hashDisabled.forEach(features.disable);
+        if (hash) {
+            const disabledFeatures = hash.replace(/;/g, ',').split(',');
+            disabledFeatures.forEach(features.disable);
+        } else if (storage) {
+            const disabledFeatures = storage.replace(/;/g, ',').split(',');
+            disabledFeatures.forEach(features.disable);
         }
     };
 
