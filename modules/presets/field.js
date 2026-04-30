@@ -1,4 +1,5 @@
 import { localizer, t } from '../core/localizer';
+import { LANGUAGE_SUFFIX_REGEX } from '../ui/fields';
 import { utilSafeClassName } from '../util/util';
 
 
@@ -53,11 +54,32 @@ export function presetField(fieldID, field, allFields) {
   _this.increment = (_this.type === 'number' || _this.type === 'integer') ? (_this.increment || 1) : undefined;
 
   /** all keys controlled by this field */
-  _this.allKeys = () => {
-    const allKeys = [];
-    if (_this.key) allKeys.push(_this.key);
-    if (_this.keys) allKeys.push(..._this.keys);
-    return allKeys;
+  _this.allKeys = (tags) => {
+    const allKeys = new Set();
+    if (_this.key) allKeys.add(_this.key);
+    if (_this.keys) _this.keys.forEach(key => allKeys.add(key));
+    if (field.type === 'directionalCombo' && _this.key) {
+        // directionalCombo fields can have an additional key describing the for
+        // cases where both directions share a "common" value.
+        // The field also support *:both. The preset decides which field to write to.
+        const baseKey = field.key.replace(/:both$/, '');
+        allKeys.add(baseKey);
+        allKeys.add(`${baseKey}:both`);
+    }
+    if (field.type === 'localized' && field.key && tags) {
+        const prefix = `${field.key}:`;
+        Object.keys(tags)
+            .filter(k => k.startsWith(prefix))
+            .filter(k => LANGUAGE_SUFFIX_REGEX.test(k))
+            .forEach(key => allKeys.add(key));
+    }
+    if (field.type === 'multiCombo' && field.key && tags) {
+        const prefix = field.key + (field.key.endsWith(':') ? '' : ':');
+        Object.keys(tags)
+            .filter(k => k.startsWith(prefix))
+            .forEach(key => allKeys.add(key));
+    }
+    return [...allKeys];
   };
 
   return _this;

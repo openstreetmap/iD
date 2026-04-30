@@ -78,6 +78,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Standardize tooltips in combo boxes: always show (full) raw tag, don't duplicate the already rendered titles, and show descriptions from wiki/taginfo where available ([#12010], thanks [@tordans])
 * Use full width for the dropdown box for the values of the `access` field ([#12065])
 * Preserve the order of options when a combo field accepts both static options as well as autosuggestions from taginfo and display additional tag values from taginfo as raw-options only ([#12117])
+* When removing tags while changing presets: include all tags associated with `localized`, `multiCombo` and `directionalCombo` fields ([#12075], [#11696])
 #### :hammer: Development
 * Replace `sinon` with `vitest`'s built in spy/mock library ([#12058])
 * Add type annotations to `context.js` module ([#11589], thanks [@k-yle])
@@ -101,6 +102,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12063]: https://github.com/openstreetmap/iD/issues/12063
 [#12065]: https://github.com/openstreetmap/iD/issues/12065
 [#12070]: https://github.com/openstreetmap/iD/issues/12070
+[#12075]: https://github.com/openstreetmap/iD/issues/12075
 [#12078]: https://github.com/openstreetmap/iD/issues/12078
 [#12110]: https://github.com/openstreetmap/iD/issues/12110
 [#12117]: https://github.com/openstreetmap/iD/issues/12117

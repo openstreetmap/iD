@@ -14,27 +14,38 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
             if (newPreset.addTags) {
                 preserveKeys = preserveKeys.concat(Object.keys(newPreset.addTags));
             }
-            if (oldPreset && !oldPreset.id.startsWith(newPreset.id)) {
-                // only if old preset is not a sub-preset of the new one:
-                // preserve tags for which the new preset has a field
-                // https://github.com/openstreetmap/iD/issues/9372
+            if (oldPreset) {
+                const wasSubPreset = oldPreset.id.startsWith(newPreset.id);
                 newPreset.fields(loc).concat(newPreset.moreFields(loc))
                     .filter(f => f.matchGeometry(geometry))
-                    .flatMap(f => f.allKeys())
+                    .flatMap(f => f.allKeys(tags))
+                    .filter(key => {
+                        if (wasSubPreset) {
+                            // if old preset was a sub-preset of the new one:
+                            // don't preserve tags which defined the old sub-preset,
+                            // even if the new preset has a field for it
+                            // for example:
+                            //   amenity=restaurant + cuisine=pizza + name, etc.
+                            //   should result in: amenity=restaurant + name, etc.
+                            // https://github.com/openstreetmap/iD/issues/9372
+                            return oldPreset.tags[key] === undefined;
+                        }
+                        return true;
+                    })
                     .filter(Boolean)
                     .forEach(key => preserveKeys.push(key));
-            }
 
-            if (oldPreset && (oldPreset.id !== newPreset.id)) {
-                // 'field-keys' are keys used by fields (different to the keys used by preset itself)
-                const oldPresetFieldKeys = [
-                    ...oldPreset.fields(loc),
-                    ...oldPreset.moreFields(loc)
-                ].flatMap(f => f.allKeys());
+                if (oldPreset.id !== newPreset.id) {
+                    // 'field-keys' are keys used by fields (different to the keys used by preset itself)
+                    const oldPresetFieldKeys = [
+                        ...oldPreset.fields(loc),
+                        ...oldPreset.moreFields(loc)
+                    ].flatMap(f => f.allKeys(tags));
 
-                // field-keys used by the old preset but not the new preset
-                const fieldKeysToRemove = utilArrayDifference(oldPresetFieldKeys, preserveKeys);
-                tags = utilObjectOmit(tags, fieldKeysToRemove);
+                    // field-keys used by the old preset but not the new preset
+                    const fieldKeysToRemove = utilArrayDifference(oldPresetFieldKeys, preserveKeys);
+                    tags = utilObjectOmit(tags, fieldKeysToRemove);
+                }
             }
         }
         if (oldPreset) tags = oldPreset.unsetTags(tags, geometry, preserveKeys, false, loc);
