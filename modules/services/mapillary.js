@@ -6,9 +6,10 @@ import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 import { geoExtent } from '../geo';
-import { utilQsString, utilRebind, utilTiler, utilStringQs } from '../util';
+import { utilRebind, utilTiler } from '../util';
 import { services } from './';
 import { searchLimited } from '../util/partition';
+import { patchHash } from '../behavior';
 
 const accessToken = 'MLY|4100327730013843|5bb78b81720791946a9a7b956c57b7cf';
 const apiUrl = 'https://graph.mapillary.com/';
@@ -477,7 +478,7 @@ export default {
             .selectAll('.photo-wrapper')
             .classed('hide', true);
 
-        this.updateUrlImage(null);
+        patchHash({ photo: null });
 
         dispatch.call('imageChanged');
         dispatch.call('loadedMapFeatures');
@@ -492,18 +493,6 @@ export default {
     // Get viewer status
     isViewerOpen: function() {
             return _isViewerOpen;
-    },
-
-
-    // Update the URL with current image id
-    updateUrlImage: function(imageId) {
-        const hash = utilStringQs(window.location.hash);
-        if (imageId) {
-            hash.photo = 'mapillary/' + imageId;
-        } else {
-            delete hash.photo;
-        }
-        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
     },
 
 
@@ -568,7 +557,7 @@ export default {
             this.setStyles(context, null);
             const loc = [image.originalLngLat.lng, image.originalLngLat.lat];
             context.map().centerEase(loc);
-            this.updateUrlImage(image.id);
+            patchHash({ photo: 'mapillary/' + image.id });
 
             if (_mlyShowFeatureDetections || _mlyShowSignDetections) {
                 this.updateDetections(image.id, `${apiUrl}/${image.id}/detections?access_token=${accessToken}&fields=id,image,geometry,value`);

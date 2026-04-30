@@ -7,11 +7,12 @@ import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 
-import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } from '../util';
+import { utilRebind, utilTiler, utilSetTransform } from '../util';
 import { geoExtent } from '../geo';
 import { services } from './';
 import { searchLimited } from '../util/partition';
 import { localeDateString } from '../util/date';
+import { patchHash } from '../behavior';
 
 const apiUrl = 'https://end.mapilio.com';
 const imageBaseUrl = 'https://cdn.mapilio.com/im';
@@ -295,16 +296,6 @@ export default {
         return this;
     },
 
-    updateUrlImage: function(imageKey) {
-        const hash = utilStringQs(window.location.hash);
-        if (imageKey) {
-            hash.photo = 'mapilio/' + imageKey;
-        } else {
-            delete hash.photo;
-        }
-        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
-    },
-
     initViewer: function () {
         if (!window.pannellum) return;
         if (_pannellumViewer) return;
@@ -328,7 +319,7 @@ export default {
 
         this.setActiveImage(d);
 
-        this.updateUrlImage(d.id);
+        patchHash({ photo: 'mapilio/' + d.id });
 
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
@@ -590,7 +581,7 @@ export default {
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
 
-        this.updateUrlImage(null);
+        patchHash({ photo: null });
 
         viewer
             .classed('hide', true)

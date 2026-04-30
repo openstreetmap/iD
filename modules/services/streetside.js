@@ -13,11 +13,12 @@ import {
   geoRotate, geoVecLength
 } from '../geo';
 
-import { utilAesDecrypt, utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
+import { utilAesDecrypt, utilArrayUnion, utilRebind, utilTiler, utilUniqueDomId } from '../util';
 
 import { services } from './';
 import { searchLimited } from '../util/partition';
 import { localeTimestamp } from '../util/date';
+import { patchHash } from '../behavior';
 
 
 const streetsideApi = 'https://dev.virtualearth.net/REST/v1/Imagery/MetaData/Streetside?mapArea={bbox}&key={key}&count={count}&uriScheme=https';
@@ -644,7 +645,7 @@ export default {
     context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
       .classed('currentView', false);
 
-    this.updateUrlImage(null);
+    patchHash({ photo: null });
 
     return this.setStyles(context, null, true);
   },
@@ -671,7 +672,7 @@ export default {
 
     if (!d) return this;
 
-    this.updateUrlImage(key);
+    patchHash({ photo: 'streetside/' + key });
 
     _sceneOptions.northOffset = d.ca;
 
@@ -866,17 +867,6 @@ export default {
     }
 
     return this;
-  },
-
-
-  updateUrlImage: function(imageKey) {
-      const hash = utilStringQs(window.location.hash);
-      if (imageKey) {
-          hash.photo = 'streetside/' + imageKey;
-      } else {
-          delete hash.photo;
-      }
-      window.history.replaceState(null, '', '#' + utilQsString(hash, true));
   },
 
 
