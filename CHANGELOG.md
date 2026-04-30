@@ -67,6 +67,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Make sure the available options of multi/semi-combo fields are updated properly when a previous tag change caused a change of the feature's preset ([#12217])
 * Handle OSM API responses with 200 status code, but a runtime `error` in the response ([#6454])
 * Keep `natural=coastline` tag on outer way of created multipolygon when combining areas ([#11818], thanks [@Kaushik4141])
+* Show correct cursor on headings of quality assurance results in the sidebar ([#12276], thanks [@Quantum-Cucumber])
 * Fix exception when a `onewayCheck` field is present on a non-way feature (e.g. a ferry route) ([#12272])
 * Make sure that `disable_features` parameter from URL hash is not overwritten by locally cached value from last session
 * Fix feature filter falsely hiding _boundary_ relation members while in dragging mode when _other_ features are hidden ([#12267])
@@ -112,6 +113,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12237]: https://github.com/openstreetmap/iD/pull/12237
 [#12245]: https://github.com/openstreetmap/iD/issues/12245
 [#12272]: https://github.com/openstreetmap/iD/issues/12272
+[#12276]: https://github.com/openstreetmap/iD/pull/12276
+[@Quantum-Cucumber]: https://github.com/Quantum-Cucumber
 
 
 # 2.39.6
