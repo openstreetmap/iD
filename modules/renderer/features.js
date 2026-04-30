@@ -578,6 +578,14 @@ export function rendererFeatures(context) {
     features.filter = function(d, resolver) {
         if (!_hidden.length) return d;
 
+        // enforce that relations are checked before ways
+        // because some filters rely on the relation cache to be
+        // up to date in order to work properly
+        // https://github.com/openstreetmap/iD/issues/12267
+        const rels = d.filter(e => e.type === 'relation');
+        const rest = d.filter(e => e.type !== 'relation');
+        d = [...rels, ...rest];
+
         var result = [];
         for (var i = 0; i < d.length; i++) {
             var entity = d[i];
@@ -608,16 +616,15 @@ export function rendererFeatures(context) {
 
 
     features.init = function() {
-        var storage = prefs('disabled-features');
-        if (storage) {
-            var storageDisabled = storage.replace(/;/g, ',').split(',');
-            storageDisabled.forEach(features.disable);
-        }
+        const hash = utilStringQs(window.location.hash).disable_features;
+        const storage = prefs('disabled-features');
 
-        var hash = utilStringQs(window.location.hash);
-        if (hash.disable_features) {
-            var hashDisabled = hash.disable_features.replace(/;/g, ',').split(',');
-            hashDisabled.forEach(features.disable);
+        if (hash) {
+            const disabledFeatures = hash.replace(/;/g, ',').split(',');
+            disabledFeatures.forEach(features.disable);
+        } else if (storage) {
+            const disabledFeatures = storage.replace(/;/g, ',').split(',');
+            disabledFeatures.forEach(features.disable);
         }
     };
 
