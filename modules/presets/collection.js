@@ -1,4 +1,4 @@
-import { locationManager } from '../core/LocationManager';
+import { locationManager } from '../core/location_manager';
 import { utilArrayUniq } from '../util/array';
 import { utilEditDistance } from '../util';
 
@@ -110,7 +110,7 @@ export function presetCollection(collection) {
     let pool = _this.collection;
     if (Array.isArray(loc)) {
       const validHere = locationManager.locationSetsAt(loc);
-      pool = pool.filter(a => !a.locationSetID || validHere[a.locationSetID]);
+      pool = pool.filter(a => !a.locationSetID || validHere.has(a.locationSetID));
     }
 
     const searchable = pool.filter(a => a.searchable !== false && a.suggestion !== true);

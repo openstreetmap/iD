@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
 import { t, localizer } from '../core/localizer';
-import { locationManager } from '../core/LocationManager';
+import { locationManager } from '../core/location_manager';
 import { svgIcon } from '../svg/icon';
 import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo/extent';
@@ -335,7 +335,7 @@ export function uiField(context, presetField, entityIDs, options) {
 
         if (entityIDs && _entityExtent && field.locationSetID) {   // is field allowed in this location?
             var validHere = locationManager.locationSetsAt(_entityExtent.center());
-            if (!validHere[field.locationSetID]) return false;
+            if (!validHere.has(field.locationSetID)) return false;
         }
 
         var prerequisiteTag = field.prerequisiteTag;
