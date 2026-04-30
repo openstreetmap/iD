@@ -72,18 +72,21 @@ export function uiFieldCheck(field: any, context: iD.Context) {
 
     function reverserHidden() {
         if (!context.container().select('div.inspector-hover').empty()) return true;
+        const entity = _entityIDs.length && context.hasEntity(_entityIDs[0]);
+        if (entity.type !== 'way') return true;
         return !(_value === 'yes' || (_impliedYes && !_value));
     }
 
 
     function reverserSetText(selection: d3.Selection) {
-        var entity = _entityIDs.length && context.hasEntity(_entityIDs[0]);
+        const entity = _entityIDs.length && context.hasEntity(_entityIDs[0]);
         if (reverserHidden() || !entity) return selection;
 
-        var first = entity.first();
-        var last = entity.isClosed() ? entity.nodes[entity.nodes.length - 2] : entity.last();
-        var pseudoDirection = first < last;
-        var icon = pseudoDirection ? '#iD-icon-forward' : '#iD-icon-backward';
+        if (entity.type !== 'way') return selection;
+        const first = entity.first();
+        const last = entity.isClosed() ? entity.nodes[entity.nodes.length - 2] : entity.last();
+        const pseudoDirection = first < last;
+        const icon = pseudoDirection ? '#iD-icon-forward' : '#iD-icon-backward';
 
         selection.selectAll('.reverser-span')
             .text('')
