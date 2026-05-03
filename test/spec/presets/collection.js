@@ -137,6 +137,18 @@ describe('iD.presetCollection', function() {
             expect(result.indexOf(p.grass1)).to.eql(0);  // 1. 'Grass' (by tag key=value)
         });
 
+        it('matches tag key=value in addTags', function() {
+            var school = iD.presetPreset('__TEST/education/school', {
+                name: 'School',
+                tags: { education: 'school' },
+                addTags: { amenity: 'school', education: 'school' },
+                geometry: ['point', 'area'],
+                terms: []
+            });
+            var collection = iD.presetCollection([school, p.point]);
+            var result = collection.search('amenity=school', 'point').collection;
+            expect(result.indexOf(school)).to.eql(0);
+        });
         it.each([
             'private grill',
             'very private and secret mysterious grill',
