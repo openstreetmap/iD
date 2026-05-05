@@ -104,11 +104,11 @@ describe('iD.validations.time_ranges', function () {
     });
 
     it('ignores special dashes inside commented sections', function () {
-      // Ensure that non-standard dashes (like en-dash –) or tildes (~) 
+      // Ensure that non-standard dashes (like en-dash –) or tildes (~)
       // are ignored when they appear inside quoted comments
-    
+
         createWay({ opening_hours: 'Mo-Fr 10:00-18:00 "comment including ~ (some special dash) which is valid syntax" ' });
-        
+
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
