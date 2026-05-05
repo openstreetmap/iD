@@ -56,7 +56,7 @@ describe('iD.validations.time_ranges', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('flags multiple  syntax errors in time range keys', function () {
+    it('flags multiple syntax errors in time range keys', function () {
         createWay({
             opening_hours: 'mo-Fr 10:00~18:00',
             service_times: '10~20',
@@ -84,7 +84,7 @@ describe('iD.validations.time_ranges', function () {
         expect(entity.tags.opening_hours).to.eql('Mo-Fr 10:00-18:00');
     });
 
-    it('fixes multiple syntax errors in different  time range keys', function () {
+    it('fixes multiple syntax errors in different time range keys', function () {
         createWay({
             opening_hours: 'Mo–Fr 10:00–18:00', //two en dashes
             service_times: '10~20',
@@ -101,5 +101,15 @@ describe('iD.validations.time_ranges', function () {
         var entity = context.hasEntity('w-1');
         expect(entity.tags.opening_hours).to.eql('Mo-Fr 10:00-18:00');
         expect(entity.tags.service_times).to.eql('10:00-20:00');
+    });
+
+    it('ignores special dashes inside commented sections', function () {
+      // Ensure that non-standard dashes (like en-dash –) or tildes (~) 
+      // are ignored when they appear inside quoted comments
+    
+        createWay({ opening_hours: 'Mo-Fr 10:00-18:00 "comment including ~ (some special dash) which is valid syntax" ' });
+        
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
     });
 });
