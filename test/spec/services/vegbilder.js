@@ -1,3 +1,4 @@
+import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.serviceVegbilder', function() {
@@ -246,7 +247,7 @@ describe('iD.serviceVegbilder', function() {
 
       context.projection.translate([0, 0]);
 
-      const spy = sinon.spy();
+      const spy = fn();
       vegbilder.on('loadedImages', spy);
       vegbilder.loadImages(context, 0);
 

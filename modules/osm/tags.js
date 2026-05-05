@@ -1,4 +1,5 @@
-import { merge } from 'lodash-es';
+import { merge } from 'es-toolkit/compat';
+import { getLuma } from '../util/util';
 
 const uninterestingKeys = new Set([
     'attribution',
@@ -146,6 +147,13 @@ export function osmSetVertexTags(value) {
     osmVertexTags = value;
 }
 
+//These tags belong strictly on ways and should never be moved up to a relation
+export const osmWayOnlyTags = {
+    'natural': {
+        'coastline': true
+    }
+};
+
 export function osmNodeGeometriesForTags(nodeTags) {
     var geometries = {};
     for (var key in nodeTags) {
@@ -279,7 +287,7 @@ export var osmRightSideIsInsideTags = {
     'barrier': {
         'retaining_wall': true,
         'kerb': true,
-        'guard_rail': true,
+        'guard_rail': 'guard_rail',
         'city_wall': true,
     },
     'man_made': {
@@ -344,7 +352,8 @@ export var osmLanduseTags = {
 export const allowUpperCaseTagValues = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer|country|target|brewery|cai_scale|traffic_sign/;
 
 // Returns whether a `colour` tag value looks like a valid color we can display
-export function isColourValid(value) {
+export function isColorValid(value) {
+    if (!value) return false;
     if (!value.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
         // OSM only supports hex or named colors
         return false;
@@ -354,6 +363,22 @@ export function isColourValid(value) {
         return false;
     }
     return true;
+}
+
+export function getRelationColor(tags, fallback) {
+    let color, textColor;
+    if (tags['ref:colour'])       color = tags['ref:colour'];
+    else if (tags.colour)         color = tags.colour;
+    const isValid = isColorValid(color);
+    if (!isValid)                 color = fallback;
+    if (tags['ref:colour_tx'])    textColor = tags['ref:colour_tx'];
+    if (!isColorValid(textColor)) textColor = getLuma(color) > 165 ? '#000' : '#fff';
+
+    return {
+        isValid,
+        color,
+        textColor
+    };
 }
 
 // https://wiki.openstreetmap.org/wiki/Special:WhatLinksHere/Property:P44
@@ -388,7 +413,30 @@ export var osmSummableTags = new Set([
     'step_count',
     'parking:both:capacity',
     'parking:left:capacity',
-    'parking:left:capacity'
+    'parking:right:capacity'
+]);
+
+// ISO country codes keys
+export const osmIsoCountryKeys = new Set([
+  'country',
+  'target'
+]);
+
+export const osmUrlKeys = new Set([
+    'website',
+    'url',
+    'contact:website',
+    'contact:url',
+    'source:website',
+    'source:url',
+    'image',
+    'brand:website',
+    'operator:website',
+    'network:website',
+    'website:en',
+    'website:fr',
+    'website:menu',
+    'post_office:website',
 ]);
 export  const timeRangeKeys  = new Set([
   'opening_hours',

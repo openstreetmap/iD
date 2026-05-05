@@ -1,3 +1,5 @@
+import { fn } from '@vitest/spy';
+
 describe('uiCombobox', function() {
     var body, context, container, content, input, combobox;
 
@@ -22,12 +24,14 @@ describe('uiCombobox', function() {
                 break;
 
             case '←':
-                start = finish = Math.max(0, start - 1);
+                start = Math.max(0, start - 1);
+                finish = start;
                 input.node().setSelectionRange(start, finish);
                 break;
 
             case '→':
-                start = finish = Math.max(start + 1, value.length);
+                start = Math.max(start + 1, value.length);
+                finish = start;
                 input.node().setSelectionRange(start, finish);
                 break;
 
@@ -252,7 +256,7 @@ describe('uiCombobox', function() {
     });
 
     it('emits cancel event on ⎋', function() {
-        var spy = sinon.spy();
+        const spy = fn();
         combobox.on('cancel', spy);
 
         input.call(combobox.data(data));

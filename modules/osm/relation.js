@@ -3,6 +3,11 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 import { osmEntity } from './entity';
 import { osmJoinWays } from './multipolygon';
 import { geoExtent, geoPolygonContainsPolygon, geoPolygonIntersectsPolygon } from '../geo';
+import { osmIdManager } from './id_manager';
+
+/**
+ * @typedef {{ type: import('./id_manager').FeatureType; id: string; role: string }} RelationMember
+ */
 
 /**
  * @typedef {typeof prototype & iD.AbstractEntity} OsmRelation
@@ -10,10 +15,9 @@ import { geoExtent, geoPolygonContainsPolygon, geoPolygonIntersectsPolygon } fro
  */
 export function osmRelation() {
     if (!(this instanceof osmRelation)) {
-        return (new osmRelation()).initialize(arguments);
-    } else if (arguments.length) {
-        this.initialize(arguments);
+        return new osmRelation(...arguments);
     }
+    this.initialize(arguments);
 }
 
 
@@ -23,8 +27,8 @@ osmRelation.prototype = Object.create(osmEntity.prototype);
 
 
 osmRelation.creationOrder = function(a, b) {
-    var aId = parseInt(osmEntity.id.toOSM(a.id), 10);
-    var bId = parseInt(osmEntity.id.toOSM(b.id), 10);
+    var aId = parseInt(osmIdManager.toOSM(a.id), 10);
+    var bId = parseInt(osmIdManager.toOSM(b.id), 10);
 
     if (aId < 0 || bId < 0) return aId - bId;
     return bId - aId;
@@ -32,8 +36,8 @@ osmRelation.creationOrder = function(a, b) {
 
 
 const prototype = {
-    type: 'relation',
-    members: [],
+    type: /** @type {'relation'} */ ('relation'),
+    members: /** @type {RelationMember[]} */ ([]),
 
 
     copy: function(resolver, copies) {
@@ -201,7 +205,7 @@ const prototype = {
                         keyAttributes: {
                             type: member.type,
                             role: member.role,
-                            ref: osmEntity.id.toOSM(member.id)
+                            ref: osmIdManager.toOSM(member.id)
                         }
                     };
                 }, this),
@@ -356,7 +360,7 @@ const prototype = {
             var inner = inners[i];
 
             if (d3_geoArea({ type: 'Polygon', coordinates: [inner] }) < 2 * Math.PI) {
-                inner = inner.reverse();
+                inner.reverse();
             }
 
             var o = findOuter(inners[i]);

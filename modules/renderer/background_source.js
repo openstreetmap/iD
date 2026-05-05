@@ -6,6 +6,7 @@ import { geoExtent, geoSphericalDistance } from '../geo';
 import { utilQsString, utilStringQs } from '../util';
 import { utilAesDecrypt } from '../util/aes';
 import { IntervalTasksQueue } from '../util/IntervalTasksQueue';
+import { localeDateString } from '../util/date';
 
 var isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 
@@ -19,14 +20,6 @@ window.matchMedia?.(`
     isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 });
 
-
-function localeDateString(s) {
-    if (!s) return null;
-    var options = { day: 'numeric', month: 'short', year: 'numeric' };
-    var d = new Date(s);
-    if (isNaN(d.getTime())) return null;
-    return d.toLocaleDateString(localizer.localeCode(), options);
-}
 
 function vintageRange(vintage) {
     var s;
@@ -80,8 +73,8 @@ export function rendererBackgroundSource(data) {
 
     source.hasDescription = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: _description }).text;
-        return descriptionText !== '';
+        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).texts.join('');
+        return !!descriptionText;
     };
 
 

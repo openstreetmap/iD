@@ -65,7 +65,9 @@ export function validationIssue(attrs) {
         if (issue.severity === 'warning' || issue.severity === 'suggestion') {
             // allow ignoring any issue that's not an error
             fixes.push(new validationIssueFix({
-                title: t.append('issues.fix.ignore_issue.title'),
+                title: this.severity === 'suggestion'
+                    ? t.append('issues.fix.ignore_suggestion.title')
+                    : t.append('issues.fix.ignore_issue.title'),
                 icon: 'iD-icon-close',
                 onClick: function() {
                     context.validator().ignoreIssue(this.issue.id);
@@ -75,7 +77,8 @@ export function validationIssue(attrs) {
 
         fixes.forEach(function(fix) {
             // the id doesn't matter as long as it's unique to this issue/fix
-            fix.id = fix.title.stringId;
+            // except cases where fix depends on the currently selected feature.
+            fix.id ||= fix.title.stringId;
             // add a reference to the issue for use in actions
             fix.issue = issue;
         });
@@ -93,6 +96,7 @@ validationIssue.ICONS = {
 
 export function validationIssueFix(attrs) {
     this.title = attrs.title;                   // Required
+    this.id = attrs.id;                         // Optional
     this.onClick = attrs.onClick;               // Optional - the function to run to apply the fix
     this.disabledReason = attrs.disabledReason; // Optional - a string explaining why the fix is unavailable, if any
     this.icon = attrs.icon;                     // Optional - shows 'iD-icon-wrench' if not set

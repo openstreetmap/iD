@@ -1,3 +1,5 @@
+import { spyOn } from '@vitest/spy';
+
 describe('iD.presetPreset', function() {
 
     describe('#fields', function() {
@@ -41,29 +43,29 @@ describe('iD.presetPreset', function() {
     describe('#matchScore', function() {
         it('returns -1 if preset does not match tags', function() {
             var preset = iD.presetPreset('test', {tags: {foo: 'bar'}});
-            var entity = iD.osmWay({tags: {highway: 'motorway'}});
+            var entity = new iD.osmWay({tags: {highway: 'motorway'}});
             expect(preset.matchScore(entity.tags)).to.equal(-1);
         });
 
         it('returns the value of the matchScore property when matched', function() {
             var preset = iD.presetPreset('test', {tags: {highway: 'motorway'}, matchScore: 0.2});
-            var entity = iD.osmWay({tags: {highway: 'motorway'}});
+            var entity = new iD.osmWay({tags: {highway: 'motorway'}});
             expect(preset.matchScore(entity.tags)).to.equal(0.2);
         });
 
         it('defaults to the number of matched tags', function() {
             var preset = iD.presetPreset('test', {tags: {highway: 'residential'}});
-            var entity = iD.osmWay({tags: {highway: 'residential'}});
+            var entity = new iD.osmWay({tags: {highway: 'residential'}});
             expect(preset.matchScore(entity.tags)).to.equal(1);
 
             preset = iD.presetPreset('test', {tags: {highway: 'service', service: 'alley'}});
-            entity = iD.osmWay({tags: {highway: 'service', service: 'alley'}});
+            entity = new iD.osmWay({tags: {highway: 'service', service: 'alley'}});
             expect(preset.matchScore(entity.tags)).to.equal(2);
         });
 
         it('counts * as a match for any value with score 0.5', function() {
             var preset = iD.presetPreset('test', {tags: {building: '*'}});
-            var entity = iD.osmWay({tags: {building: 'yep'}});
+            var entity = new iD.osmWay({tags: {building: 'yep'}});
             expect(preset.matchScore(entity.tags)).to.equal(0.5);
         });
 
@@ -77,12 +79,12 @@ describe('iD.presetPreset', function() {
                 addTags: { 'name': 'Walmart Neighborhood Market' }
             });
 
-            var supercenter = iD.osmWay({ tags: {
+            var supercenter = new iD.osmWay({ tags: {
                 'brand:wikidata': 'Q483551',
                 'shop': 'supermarket',
                 'name': 'Walmart Supercenter'
             }});
-            var market = iD.osmWay({ tags: {
+            var market = new iD.osmWay({ tags: {
                 'brand:wikidata': 'Q483551',
                 'shop': 'supermarket',
                 'name': 'Walmart Neighborhood Market'
@@ -263,22 +265,22 @@ describe('iD.presetPreset', function() {
             allPresets.preset = preset;
 
             // mock localizer
-            sinon.spy(other, 't');
-            sinon.spy(preset, 't');
+            spyOn(other, 't');
+            spyOn(preset, 't');
 
             preset.name();
             expect(other.t).to.have.been.calledOnce;
             expect(preset.t).not.to.have.been.called;
 
-            other.t.resetHistory();
-            preset.t.resetHistory();
+            other.t.mockClear();
+            preset.t.mockClear();
 
             preset.aliases();
             expect(other.t).to.have.been.calledOnce;
             expect(preset.t).not.to.have.been.called;
 
-            other.t.resetHistory();
-            preset.t.resetHistory();
+            other.t.mockClear();
+            preset.t.mockClear();
 
             preset.terms();
             expect(other.t).to.have.been.calledOnce;

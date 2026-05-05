@@ -65,6 +65,14 @@ export function presetCollection(collection) {
       return index === 0;
     }
 
+    function presetInSearchTerm(presetText) {
+      if (presetText.length === 0) {
+        return false;
+      }
+      const index = value.indexOf(presetText.toLowerCase().trim());
+      return index === 0 || value[index - 1] === ' ';
+    }
+
     function sortPresets(nameProp, aliasesProp) {
       return function sortNames(a, b) {
         let aCompare = a[nameProp]();
@@ -168,6 +176,13 @@ export function presetCollection(collection) {
           Object.keys(a.tags).some(key => leading(key + '=' + a.tags[key]))));
     }
 
+    // also match cases where preset string is inside searched term
+    const presetsInValues = searchable
+      .filter(a => ([a.searchName()].concat(a.searchAliases(), a.terms(), a.searchNameStripped(), a.searchAliasesStripped())).some(presetInSearchTerm));
+
+    const presetsInValuesViaSuggested = suggestions
+      .filter(a => ([a.searchName()].concat(a.searchAliases(), a.terms(), a.searchNameStripped(), a.searchAliasesStripped())).some(presetInSearchTerm));
+
     let results = leadingNames.concat(
       leadingSuggestions,
       leadingNamesStripped,
@@ -178,7 +193,9 @@ export function presetCollection(collection) {
       similarName,
       similarSuggestions,
       similarTerms,
-      leadingTagKeyValues
+      leadingTagKeyValues,
+      presetsInValues,
+      presetsInValuesViaSuggested
     ).slice(0, MAXRESULTS - 1);
 
     if (geometry) {

@@ -4,8 +4,9 @@ import { prefs } from '../core/preferences';
 import { osmEntity } from '../osm';
 import { osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
 import { utilRebind } from '../util/rebind';
-import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
+import { utilArrayGroupBy, utilArrayUnion, utilStringQs } from '../util';
 import { isAddressPoint } from '../svg/labels';
+import { patchHash } from '../behavior';
 
 
 export function rendererFeatures(context) {
@@ -56,15 +57,9 @@ export function rendererFeatures(context) {
 
 
     function update() {
-        const hash = utilStringQs(window.location.hash);
-        const disabled = features.disabled();
-        if (disabled.length) {
-            hash.disable_features = disabled.join(',');
-        } else {
-            delete hash.disable_features;
-        }
-        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
-        prefs('disabled-features', disabled.join(','));
+        const disabled = features.disabled().join(',');
+        patchHash({ disable_features: disabled || null });
+        prefs('disabled-features', disabled);
         _hidden = features.hidden();
         dispatch.call('change');
         dispatch.call('redraw');
@@ -125,7 +120,7 @@ export function rendererFeatures(context) {
 
     defineRule('buildings', function isBuilding(tags) {
         return (
-            (!!tags.building && tags.building !== 'no') ||
+            (!!tags.building && tags.building !== 'no' && !osmLifecyclePrefixes[tags.building]) ||
             tags.parking === 'multi-storey' ||
             tags.parking === 'sheds' ||
             tags.parking === 'carports' ||
@@ -202,7 +197,7 @@ export function rendererFeatures(context) {
             traffic_roads[tags.highway] ||
             service_roads[tags.highway] ||
             paths[tags.highway]
-        );
+        ) && !osmLifecyclePrefixes[tags.railway];
     });
 
     defineRule('pistes', function isPiste(tags) {
@@ -466,7 +461,8 @@ export function rendererFeatures(context) {
                 }
 
                 if (_rules[_keys[i]].filter(entity.tags, geometry)) {
-                    matches[_keys[i]] = hasMatch = true;
+                    matches[_keys[i]] = true;
+                    hasMatch = true;
                 }
             }
             _cache[ent].matches = matches;
@@ -577,6 +573,14 @@ export function rendererFeatures(context) {
     features.filter = function(d, resolver) {
         if (!_hidden.length) return d;
 
+        // enforce that relations are checked before ways
+        // because some filters rely on the relation cache to be
+        // up to date in order to work properly
+        // https://github.com/openstreetmap/iD/issues/12267
+        const rels = d.filter(e => e.type === 'relation');
+        const rest = d.filter(e => e.type !== 'relation');
+        d = [...rels, ...rest];
+
         var result = [];
         for (var i = 0; i < d.length; i++) {
             var entity = d[i];
@@ -607,16 +611,15 @@ export function rendererFeatures(context) {
 
 
     features.init = function() {
-        var storage = prefs('disabled-features');
-        if (storage) {
-            var storageDisabled = storage.replace(/;/g, ',').split(',');
-            storageDisabled.forEach(features.disable);
-        }
+        const hash = utilStringQs(window.location.hash).disable_features;
+        const storage = prefs('disabled-features');
 
-        var hash = utilStringQs(window.location.hash);
-        if (hash.disable_features) {
-            var hashDisabled = hash.disable_features.replace(/;/g, ',').split(',');
-            hashDisabled.forEach(features.disable);
+        if (hash) {
+            const disabledFeatures = hash.replace(/;/g, ',').split(',');
+            disabledFeatures.forEach(features.disable);
+        } else if (storage) {
+            const disabledFeatures = storage.replace(/;/g, ',').split(',');
+            disabledFeatures.forEach(features.disable);
         }
     };
 

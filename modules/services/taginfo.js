@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 
 import { json as d3_json } from 'd3-fetch';
 
@@ -99,7 +99,7 @@ function filterValues(allowUpperCase, key) {
         if (!allowUpperCase &&
             !(key === 'type' && d.value === 'associatedStreet') &&
             d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
-        return d.count > 100; // exclude rare undocumented tags
+        return d.count > 100; // exclude rare tags
     };
 }
 
@@ -146,7 +146,7 @@ function sortKeys(a, b) {
 }
 
 
-var debouncedRequest = _debounce(request, 300, { leading: false });
+var debouncedRequest = debounce(request, 300, { leading: false });
 
 function request(url, params, exactMatch, callback, loaded) {
     if (_inflight[url]) return;

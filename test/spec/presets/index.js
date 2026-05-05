@@ -1,3 +1,5 @@
+import { locationManager, presetIndex } from '../../../modules';
+
 describe('iD.presetIndex', function () {
     var _savedPresets, _savedAreaKeys;
 
@@ -14,28 +16,28 @@ describe('iD.presetIndex', function () {
 
     describe('#init', function () {
         it('has a fallback point preset', function () {
-            var node = iD.osmNode({ id: 'n' });
-            var graph = iD.coreGraph([node]);
+            var node = new iD.osmNode({ id: 'n' });
+            var graph = new iD.coreGraph([node]);
             var presets = iD.presetIndex();
             expect(presets.match(node, graph).id).to.eql('point');
         });
         it('has a fallback line preset', function () {
-            var node = iD.osmNode({ id: 'n' });
-            var way = iD.osmWay({ id: 'w', nodes: ['n'] });
-            var graph = iD.coreGraph([node, way]);
+            var node = new iD.osmNode({ id: 'n' });
+            var way = new iD.osmWay({ id: 'w', nodes: ['n'] });
+            var graph = new iD.coreGraph([node, way]);
             var presets = iD.presetIndex();
             expect(presets.match(way, graph).id).to.eql('line');
         });
         it('has a fallback area preset', function () {
-            var node = iD.osmNode({ id: 'n' });
-            var way = iD.osmWay({ id: 'w', nodes: ['n'], tags: { area: 'yes' }});
-            var graph = iD.coreGraph([node, way]);
+            var node = new iD.osmNode({ id: 'n' });
+            var way = new iD.osmWay({ id: 'w', nodes: ['n'], tags: { area: 'yes' }});
+            var graph = new iD.coreGraph([node, way]);
             var presets = iD.presetIndex();
             expect(presets.match(way, graph).id).to.eql('area');
         });
         it('has a fallback relation preset', function () {
-            var relation = iD.osmRelation({ id: 'r' });
-            var graph = iD.coreGraph([relation]);
+            var relation = new iD.osmRelation({ id: 'r' });
+            var graph = new iD.coreGraph([relation]);
             var presets = iD.presetIndex();
             expect(presets.match(relation, graph).id).to.eql('relation');
         });
@@ -52,17 +54,17 @@ describe('iD.presetIndex', function () {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
-            var way = iD.osmWay({ tags: { highway: 'residential' } });
-            var graph = iD.coreGraph([way]);
+            var way = new iD.osmWay({ tags: { highway: 'residential' } });
+            var graph = new iD.coreGraph([way]);
             expect(presets.match(way, graph).id).to.eql('residential');
         });
 
         it('returns the appropriate fallback preset when no tags match', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var point = iD.osmNode();
-            var line = iD.osmWay({ tags: { foo: 'bar' } });
-            var graph = iD.coreGraph([point, line]);
+            var point = new iD.osmNode();
+            var line = new iD.osmWay({ tags: { foo: 'bar' } });
+            var graph = new iD.coreGraph([point, line]);
 
             await presets.ensureLoaded();
             expect(presets.match(point, graph).id).to.eql('point');
@@ -72,9 +74,9 @@ describe('iD.presetIndex', function () {
         it('matches vertices on a line as points', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var point = iD.osmNode({ tags: { leisure: 'park' } });
-            var line = iD.osmWay({ nodes: [point.id], tags: { 'highway': 'residential' } });
-            var graph = iD.coreGraph([point, line]);
+            var point = new iD.osmNode({ tags: { leisure: 'park' } });
+            var line = new iD.osmWay({ nodes: [point.id], tags: { 'highway': 'residential' } });
+            var graph = new iD.coreGraph([point, line]);
 
             await presets.ensureLoaded();
             expect(presets.match(point, graph).id).to.eql('point');
@@ -83,9 +85,9 @@ describe('iD.presetIndex', function () {
         it('matches vertices on an addr:interpolation line as points', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var point = iD.osmNode({ tags: { leisure: 'park' } });
-            var line = iD.osmWay({ nodes: [point.id], tags: { 'addr:interpolation': 'even' } });
-            var graph = iD.coreGraph([point, line]);
+            var point = new iD.osmNode({ tags: { leisure: 'park' } });
+            var line = new iD.osmWay({ nodes: [point.id], tags: { 'addr:interpolation': 'even' } });
+            var graph = new iD.coreGraph([point, line]);
 
             await presets.ensureLoaded();
             expect(presets.match(point, graph).id).to.eql('park');
@@ -247,8 +249,8 @@ describe('iD.presetIndex', function () {
 
     describe.skip('#build', function () {
         it('builds presets from provided', function () {
-            var surfShop = iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
-            var graph = iD.coreGraph([surfShop]);
+            var surfShop = new iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
+            var graph = new iD.coreGraph([surfShop]);
             var presets = iD.presetIndex();
             var presetData = {
                 presets: {
@@ -265,10 +267,10 @@ describe('iD.presetIndex', function () {
         });
 
         it('configures presets\' initial visibility', function () {
-            var surfShop = iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
-            var firstStreetJetty = iD.osmNode({ tags: { man_made: 'jetty' } });
+            var surfShop = new iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
+            var firstStreetJetty = new iD.osmNode({ tags: { man_made: 'jetty' } });
             var entities = [surfShop, firstStreetJetty];
-            var graph = iD.coreGraph(entities);
+            var graph = new iD.coreGraph(entities);
             var presets = iD.presetIndex();
             var presetData = {
                 presets: {
@@ -318,8 +320,8 @@ describe('iD.presetIndex', function () {
         it('prefers building to multipolygon', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var relation = iD.osmRelation({ tags: { type: 'multipolygon', building: 'yes' } });
-            var graph = iD.coreGraph([relation]);
+            var relation = new iD.osmRelation({ tags: { type: 'multipolygon', building: 'yes' } });
+            var graph = new iD.coreGraph([relation]);
             await presets.ensureLoaded();
             var match = presets.match(relation, graph);
             expect(match.id).to.eql('building');
@@ -328,8 +330,8 @@ describe('iD.presetIndex', function () {
         it('prefers building to address', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var way = iD.osmWay({ tags: { area: 'yes', building: 'yes', 'addr:housenumber': '1234' } });
-            var graph = iD.coreGraph([way]);
+            var way = new iD.osmWay({ tags: { area: 'yes', building: 'yes', 'addr:housenumber': '1234' } });
+            var graph = new iD.coreGraph([way]);
             await presets.ensureLoaded();
             var match = presets.match(way, graph);
             expect(match.id).to.eql('building');
@@ -338,8 +340,8 @@ describe('iD.presetIndex', function () {
         it('prefers pedestrian to area', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var way = iD.osmWay({ tags: { area: 'yes', highway: 'pedestrian' } });
-            var graph = iD.coreGraph([way]);
+            var way = new iD.osmWay({ tags: { area: 'yes', highway: 'pedestrian' } });
+            var graph = new iD.coreGraph([way]);
             await presets.ensureLoaded();
             var match = presets.match(way, graph);
             expect(match.id).to.eql('highway/pedestrian_area');
@@ -378,15 +380,15 @@ describe('iD.presetIndex', function () {
         });
 
         it('builds presets w/external sources set to addable', function () {
-            var surfShop = iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
-            var graph = iD.coreGraph([surfShop]);
+            var surfShop = new iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
+            var graph = new iD.coreGraph([surfShop]);
             var url = 'https://fakemaprules.io/fake.json';
 
             // no external presets yet
             expect(iD.presetIndex().match(surfShop, graph).id).to.eql('point');
 
             // reset graph...
-            graph = iD.coreGraph([surfShop]);
+            graph = new iD.coreGraph([surfShop]);
 
             // add the validations query param...
             iD.presetIndex().fromExternal(url, function (externalPresets) {
@@ -422,6 +424,36 @@ describe('iD.presetIndex', function () {
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(presetData)]
             );
             _server.respond();
+        });
+    });
+
+    describe('PresetIndex.recents', () => {
+        it('fills all recent slots even when some remembered presets are not available in the current region (#11405)', () => {
+            const testIndex = presetIndex();
+
+            locationManager.locationSetsAt = () => ({ 'world': true, 'us_only': false });
+
+            const p1 = { id: 'p1', matchGeometry: () => true, locationSetID: 'world' };
+            const p2 = { id: 'p2', matchGeometry: () => true, locationSetID: 'us_only' }; // Invalid
+            const p3 = { id: 'p3', matchGeometry: () => true, locationSetID: 'world' };
+            const p4 = { id: 'p4', matchGeometry: () => true, locationSetID: 'us_only' }; // Invalid
+            const p5 = { id: 'p5', matchGeometry: () => true, locationSetID: 'world' };
+
+            testIndex.recent = () => ({
+                matchGeometry: () => ({
+                    collection: [p1, p2, p3, p4, p5]
+                })
+            });
+
+            const locCoords = [0, 51];
+            const result = testIndex.defaults('point', 10, true, locCoords);
+
+            const ids = result.collection.map(p => p.id);
+
+            expect(ids).to.include('p5');
+            expect(ids).to.not.include('p2');
+            expect(ids).to.not.include('p4');
+            expect(ids.slice(0, 3)).to.eql(['p1', 'p3', 'p5']);
         });
     });
 

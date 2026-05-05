@@ -3,6 +3,9 @@
  * Enabled task execution under interval limit
  */
 export class IntervalTasksQueue {
+  readonly intervalInMs: number;
+  pendingHandles: ReturnType<typeof setTimeout>[];
+  time: number;
 
   /**
    * Interval in milliseconds inside which only 1 task can execute.
@@ -10,13 +13,13 @@ export class IntervalTasksQueue {
    * they will complete in ~1s if not cleared
    * @param {number} intervalInMs
    */
-  constructor(intervalInMs) {
+  constructor(intervalInMs: number) {
     this.intervalInMs = intervalInMs;
     this.pendingHandles = [];
     this.time = 0;
   }
 
-  enqueue(task) {
+  enqueue(task: () => void) {
     let taskTimeout = this.time;
     this.time += this.intervalInMs;
     this.pendingHandles.push(setTimeout(() => {

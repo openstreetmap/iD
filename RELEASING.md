@@ -21,8 +21,8 @@ on the iD project, and then create this file with contents like
 
 ```bash
 git checkout develop
+npm install --save-dev @openstreetmap/editor-layer-index --omit=dev
 npm clean-install
-npm install editor-layer-index
 npm run imagery
 npm run all
 git add . && git commit -m 'npm run imagery'
@@ -47,7 +47,7 @@ git reset --hard develop
 npm run all
 git add -f dist
 git commit -m 'Check in build'
-git tag "v$ID_VERSION"
+git tag "v$ID_VERSION" -m "v$ID_VERSION" --sign
 git push origin -f release "v$ID_VERSION"
 ```
 - Open https://github.com/openstreetmap/iD/tags
@@ -56,6 +56,7 @@ git push origin -f release "v$ID_VERSION"
 #### Push release to npm
 
 ```bash
+npm login
 npm publish
 ```
 

@@ -2,7 +2,8 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { services } from '../services';
 import { utilRebind } from '../util/rebind';
-import { utilQsString, utilStringQs } from '../util';
+import { utilStringQs } from '../util';
+import { patchHash } from '../behavior';
 
 
 export function rendererPhotos(context) {
@@ -18,18 +19,12 @@ export function rendererPhotos(context) {
     function photos() {}
 
     function updateStorage() {
-        var hash = utilStringQs(window.location.hash);
         var enabled = context.layers().all().filter(function(d) {
             return _layerIDs.indexOf(d.id) !== -1 && d.layer && d.layer.supported() && d.layer.enabled();
         }).map(function(d) {
             return d.id;
         });
-        if (enabled.length) {
-            hash.photo_overlay = enabled.join(',');
-        } else {
-            delete hash.photo_overlay;
-        }
-        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
+        patchHash({ photo_overlay: enabled.join(',') || null });
     }
 
     /**
@@ -148,15 +143,7 @@ export function rendererPhotos(context) {
      * @param {string} property Name of the value
      */
     function setUrlFilterValue(property, val) {
-        const hash = utilStringQs(window.location.hash);
-        if (val) {
-            if (hash[property] === val) return;
-            hash[property] = val;
-        } else {
-            if (!(property in hash)) return;
-            delete hash[property];
-        }
-        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
+        patchHash({ [property]: val || null });
     }
 
     function showsLayer(id) {

@@ -222,6 +222,7 @@ utilKeybinding.modifierProperties = {
 utilKeybinding.plusKeys = ['plus', 'ffplus', '=', 'ffequals', '≠', '±'];
 utilKeybinding.minusKeys = ['_', '-', 'ffminus', 'dash', '–', '—'];
 
+/* eslint-disable sort-keys */
 utilKeybinding.keys = {
     // Backspace key, on Mac: ⌫ (Backspace)
     '⌫': 'Backspace', backspace: 'Backspace',
@@ -423,3 +424,4 @@ i = 64;
 while (++i < 91) {
     utilKeybinding.keyCodes[String.fromCharCode(i).toLowerCase()] = i;
 }
+/* eslint-enable sort-keys */

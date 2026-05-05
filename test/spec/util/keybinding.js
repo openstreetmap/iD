@@ -1,9 +1,11 @@
+import { fn } from '@vitest/spy';
+
 describe('iD.utilKeybinding', function() {
     var keybinding, spy, input;
 
     beforeEach(function () {
         keybinding = iD.utilKeybinding('keybinding-test');
-        spy = sinon.spy();
+        spy = fn();
         input = d3.select('body')
             .append('input');
     });
@@ -46,7 +48,7 @@ describe('iD.utilKeybinding', function() {
         });
 
         it('matches shifted bindings before unshifted bindings', function () {
-            var spy2 = sinon.spy();
+            const spy2 = fn();
             d3.select(document).call(keybinding.on('A', spy2));
             d3.select(document).call(keybinding.on('⇧A', spy));
 
@@ -91,11 +93,11 @@ describe('iD.utilKeybinding', function() {
             happen.keydown(document, {keyCode: 65});
             expect(spy).to.have.been.calledOnce;
 
-            spy = sinon.spy();
+            const spy2 = fn();
             d3.select(document).call(keybinding.unbind);
-            d3.select(document).call(keybinding.on('A', spy));
+            d3.select(document).call(keybinding.on('A', spy2));
             happen.keydown(document, {keyCode: 65});
-            expect(spy).to.have.been.calledOnce;
+            expect(spy2).to.have.been.calledOnce;
         });
 
     });

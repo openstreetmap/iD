@@ -133,7 +133,7 @@ Finally, we have the auxiliary classes `iD.coreDifference` and `iD.coreTree`.
 set of entities that were created, modified, or deleted, and need to be redrawn.
 
 ```js
-var a = iD.coreGraph(), b = iD.coreGraph();
+var a = new iD.coreGraph(), b = new iD.coreGraph();
 // (fill a & b with data)
 var difference = iD.coreDifference(a, b);
 
@@ -141,12 +141,14 @@ var difference = iD.coreDifference(a, b);
 difference.created();
 ```
 
+![](docs/img/graph-difference.png)
+
 `iD.coreTree` calculates the set of downloaded entities that are visible in the
 current map view. To calculate this quickly during map
 interaction, it uses an [R-tree](https://en.wikipedia.org/wiki/R-tree).
 
 ```js
-var graph = iD.coreGraph();
+var graph = new iD.coreGraph();
 // (load OSM data into graph)
 
 // this tree indexes the contents of the graph
@@ -242,9 +244,7 @@ remove a `hover` class from map elements.
 
 Because certain behaviors are appropriate to some but not all modes, we need
 the ability to remove a behavior when entering a mode where it is not
-appropriate. (This is functionality [not yet
-provided](https://github.com/mbostock/d3/issues/894) by d3's own behaviors.)
-Each behavior implements an `off` function that "uninstalls" the behavior.
+appropriate. Each behavior implements an `off` function that "uninstalls" the behavior.
 This is very similar to the `exit` method of a mode, and in fact many modes do
 little else but uninstall behaviors in their `exit` methods.
 

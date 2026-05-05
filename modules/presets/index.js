@@ -25,7 +25,11 @@ export { _mainPresetIndex as presetManager };
 //
 export function presetIndex() {
   const dispatch = d3_dispatch('favoritePreset', 'recentsChange');
-  const MAXRECENTS = 30;
+
+  /** the number of recent presets to save */
+  const MAX_RECENTS_TO_STORE = 30;
+  /** the number of recent presets to show in the preset list */
+  const MAX_RECENTS_TO_SHOW = 8;
 
   // seed the preset lists with geometry fallbacks
   const POINT = presetPreset('point', { name: 'Point', tags: {}, geometry: ['point', 'vertex'], matchScore: 0.1 } );
@@ -243,13 +247,11 @@ export function presetIndex() {
       const validHere = locationManager.locationSetsAt(loc);
       if (!validHere[bestMatch.locationSetID]) {
         bestMatch = undefined;
-        bestScore = undefined;
         matchCandidates.sort((a, b) => (a.score < b.score) ? 1 : -1);
         for (let i = 0; i < matchCandidates.length; i++) {
           const candidateScore = matchCandidates[i];
           if (!candidateScore.candidate.locationSetID || validHere[candidateScore.candidate.locationSetID]) {
             bestMatch = candidateScore.candidate;
-            bestScore = candidateScore.score;
             break;
           }
         }
@@ -408,9 +410,14 @@ export function presetIndex() {
 
 
   _this.defaults = (geometry, n, startWithRecents, loc, extraPresets) => {
+    const validHere = Array.isArray(loc) ? locationManager.locationSetsAt(loc) : null;
+
     let recents = [];
     if (startWithRecents) {
-      recents = _this.recent().matchGeometry(geometry).collection.slice(0, 4);
+        // filtering before slicing to prevent unused slots in the recent preset list, issue #11405
+        recents = _this.recent().matchGeometry(geometry).collection
+        .filter(a => !a.locationSetID || (validHere && validHere[a.locationSetID]))
+        .slice(0, MAX_RECENTS_TO_SHOW);
     }
 
     let defaults;
@@ -419,7 +426,9 @@ export function presetIndex() {
         var preset = _this.item(id);
         if (preset && preset.matchGeometry(geometry)) return preset;
         return null;
-      }).filter(Boolean);
+      })
+        .filter(Boolean)
+        .filter(a => !a.locationSetID || validHere[a.locationSetID]);
     } else {
       defaults = _defaults[geometry].collection.concat(_this.fallback(geometry));
     }
@@ -427,11 +436,6 @@ export function presetIndex() {
     let result = presetCollection(
       utilArrayUniq(recents.concat(defaults).concat(extraPresets || [])).slice(0, n - 1)
     );
-
-    if (Array.isArray(loc)) {
-      const validHere = locationManager.locationSetsAt(loc);
-      result.collection = result.collection.filter(a => !a.locationSetID || validHere[a.locationSetID]);
-    }
 
     return result;
   };
@@ -596,7 +600,7 @@ export function presetIndex() {
     }
 
     // remove the last recent (first in, first out)
-    while (items.length >= MAXRECENTS) {
+    while (items.length >= MAX_RECENTS_TO_STORE) {
       items.pop();
     }
 

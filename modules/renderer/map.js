@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle, isArray, clamp } from 'es-toolkit/compat';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolate as d3_interpolate } from 'd3-interpolate';
@@ -17,7 +17,6 @@ import { utilGetDimensions } from '../util/dimensions';
 import { utilRebind } from '../util/rebind';
 import { utilZoomPan } from '../util/zoom_pan';
 import { utilDoubleUp } from '../util/double_up';
-import { isArray, clamp } from 'lodash-es';
 
 // constants
 var TILESIZE = 256;
@@ -83,7 +82,7 @@ export function rendererMap(context) {
         });
     var _doubleUpHandler = utilDoubleUp();
 
-    var scheduleRedraw = _throttle(redraw, 750);
+    var scheduleRedraw = throttle(redraw, 750);
     // var isRedrawScheduled = false;
     // var pendingRedrawCall;
     // function scheduleRedraw() {
@@ -156,9 +155,10 @@ export function rendererMap(context) {
             .call(_zoomerPanner.transform, projection.transform())
             .on('dblclick.zoom', null); // override d3-zoom dblclick handling
 
-        map.supersurface = supersurface = selection.append('div')
+        map.supersurface = selection.append('div')
             .attr('class', 'supersurface')
             .call(utilSetTransform, 0, 0);
+        supersurface = map.supersurface;
 
         // Need a wrapper div because Opera can't cope with an absolutely positioned
         // SVG element: http://bl.ocks.org/jfirebaugh/6fbfbd922552bf776c16
@@ -166,9 +166,10 @@ export function rendererMap(context) {
             .append('div')
             .attr('class', 'layer layer-data');
 
-        map.surface = surface = wrapper
+        map.surface = wrapper
             .call(drawLayers)
             .selectAll('.surface');
+        surface = map.surface;
 
         surface
             .call(drawLabels.observe)
@@ -302,13 +303,7 @@ export function rendererMap(context) {
                 }
             }
             if (hasOrphan) {
-                var event = window.CustomEvent;
-                if (event) {
-                    event = new event('mouseup');
-                } else {
-                    event = window.document.createEvent('Event');
-                    event.initEvent('mouseup', false, false);
-                }
+                const event = new Event('mouseup');
                 // Event needs to be dispatched with an event.view property.
                 event.view = window;
                 window.dispatchEvent(event);
@@ -651,7 +646,8 @@ export function rendererMap(context) {
         // It would result in artifacts where differenced entities are redrawn with
         // one transform and unchanged entities with another.
         if (resetTransform()) {
-            difference = extent = undefined;
+            difference = undefined;
+            extent = undefined;
         }
 
         var zoom = map.zoom();
@@ -1084,6 +1080,7 @@ export function rendererMap(context) {
     };
 
 
+    /** @type import('../ui/sections/map_style_options').MapStyle[] */
     map.areaFillOptions = ['wireframe', 'partial', 'full'];
 
     map.activeAreaFill = function(val) {

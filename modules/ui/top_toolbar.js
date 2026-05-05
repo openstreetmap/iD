@@ -2,7 +2,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 import { uiToolDrawModes, uiToolNotes, uiToolSave, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
 
 
@@ -29,7 +29,7 @@ export function uiTopToolbar(context) {
             }
         });
 
-        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
+        var debouncedUpdate = debounce(update, 500, { leading: true, trailing: true });
         context.layers()
             .on('change.topToolbar', debouncedUpdate);
 
@@ -68,7 +68,7 @@ export function uiTopToolbar(context) {
                 .enter()
                 .append('div')
                 .attr('class', function(d) {
-                    var classes = 'toolbar-item ' + (d.id || d).replace('_', '-');
+                    var classes = 'toolbar-item ' + (d.id || d).replaceAll('_', '-');
                     if (d.klass) classes += ' ' + d.klass;
                     return classes;
                 });

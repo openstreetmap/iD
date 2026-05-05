@@ -39,7 +39,7 @@ export function uiField(context, presetField, entityIDs, options) {
 
     var _locked = false;
     var _lockedTip = uiTooltip()
-        .title(() => t.append('inspector.lock.suggestion', { label: field.title }))
+        .title(() => t.append('inspector.lock.suggestion', { label: field.label() }))
         .placement('bottom');
 
     // only create the fields that are actually being shown
@@ -66,15 +66,7 @@ export function uiField(context, presetField, entityIDs, options) {
 
 
     function allKeys() {
-        let keys = field.keys || [field.key];
-        if (field.type === 'directionalCombo' && field.key) {
-            // directionalCombo fields can have an additional key describing the for
-            // cases where both directions share a "common" value.
-            // The field also support *:both. The preset decides which field to write to.
-            const baseKey = field.key.replace(/:both$/, '');
-            keys = keys.concat(baseKey, `${baseKey}:both`);
-        }
-        return keys;
+        return field.allKeys();
     }
 
 

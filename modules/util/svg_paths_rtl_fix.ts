@@ -6,8 +6,8 @@ import { WordShaper } from 'alif-toolkit';
 
 export var rtlRegex = /[\u0590-\u05FF\u0600-\u06FF\u0750-\u07BF\u08A0–\u08BF]/;
 
-export function fixRTLTextForSvg(inputText) {
-    var ret = '', rtlBuffer = [];
+export function fixRTLTextForSvg(inputText: string) {
+    var ret = '', rtlBuffer: string[] = [];
     var arabicRegex = /[\u0600-\u06FF]/g;
     var arabicDiacritics = /[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]/g;
     var arabicMath = /[\u0660-\u066C\u06F0-\u06F9]+/g;
