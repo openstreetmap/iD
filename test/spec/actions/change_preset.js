@@ -280,6 +280,44 @@ describe('iD.actionChangePreset', function() {
         });
     });
 
+
+    // https://github.com/openstreetmap/iD/issues/12071
+    it('preserves tags of the old preset when selecting a new preset with a field for the old preset\'s primary tag', () => {
+        const entity = iD.osmNode({
+            tags: {
+                building: 'yes', // the preset's own tags.
+                'building:colour': 'green', // a field which exists in the preset
+            },
+            loc: [0, 0],
+        });
+        const graph = new iD.coreGraph([entity]);
+
+        const fields = {
+            'building:colour': iD.presetField('building:colour', { key: 'building:colour' }),
+            'building': iD.presetField('building', { key: 'building' }),
+        };
+
+        const oldPreset = iD.presetPreset(
+            'building/yes',
+            { tags: { building: 'yes' }, fields: ['building:colour'] },
+            undefined,
+            fields,
+        );
+        const newPreset = iD.presetPreset(
+            'amenity/school',
+            { tags: { amenity: 'school' }, fields: ['building'] },
+            undefined,
+            fields,
+        );
+        const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
+        expect(action(graph).entity(entity.id).tags).toStrictEqual({
+            // all tags are preserved
+            amenity: 'school',
+            building: 'yes',
+            'building:colour': 'green',
+        });
+    });
+
     // https://github.com/openstreetmap/iD/issues/9372
     it('does not preserve old preset\'s primary tags when changing from a subpreset to its parent', () => {
         const entity = new iD.osmNode({tags: {highway: 'service', service: 'driveway', name: 'foo bar'}});
