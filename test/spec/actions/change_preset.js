@@ -100,7 +100,7 @@ describe('iD.actionChangePreset', function() {
                 building: 'yes', // case 1: the preset's own tags.
                 'roof:colour': 'pink', // case 2: a field which exists in the old preset, but not the new one.
                 check_date: '2025-12-05', // case 3: a field which exists in the old AND new preset.
-                grades: '0-13', // case 4: a field which exists only in the new preset, not in the old one.
+                surface: 'grass', // case 4: a field which exists only in the new preset, not in the old one.
                 'ref:SG:address_id': '1234', // case 5: a tag which does not exist in either preset
             },
             loc: [0, 0],
@@ -110,7 +110,7 @@ describe('iD.actionChangePreset', function() {
         const fields = {
             'roof:colour': iD.presetField('roof:colour', { key: 'roof:colour', geometry: 'point' }),
             check_date: iD.presetField('check_date', { key: 'check_date', geometry: 'point' }),
-            grades: iD.presetField('roof:colour', { key: 'grades', geometry: 'point' }),
+            surface: iD.presetField('surface', { key: 'surface', geometry: 'point' }),
         };
 
         const oldPreset = iD.presetPreset(
@@ -120,17 +120,17 @@ describe('iD.actionChangePreset', function() {
             fields,
         );
         const newPreset = iD.presetPreset(
-            'amenity/school',
-            { tags: { amenity: 'school' }, fields: ['check_date', 'grades'] },
+            'leisure/pitch',
+            { tags: { leisure: 'pitch' }, fields: ['check_date', 'surface'] },
             undefined,
             fields,
         );
         const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
         expect(action(graph).entity(entity.id).tags).toStrictEqual({
-            amenity: 'school', // case 1: the preset's own tags were replaced.
+            leisure: 'pitch', // case 1: the preset's own tags were replaced.
             // case 2: the field which exists in the old preset was removed (roof:colour).
             check_date: '2025-12-05', // case 3: the field which exists in the old AND new preset was kept.
-            grades: '0-13', // case 4: a field which exists only in the new preset was also kept.
+            surface: 'grass', // case 4: a field which exists only in the new preset was also kept.
             'ref:SG:address_id': '1234', // case 5: tags which do not exist in either preset are kept
         });
     });
@@ -201,7 +201,7 @@ describe('iD.actionChangePreset', function() {
         const graph = new iD.coreGraph([entity]);
 
         const fields = {
-            [fieldId]: iD.presetField('recycling', { type: fieldType, key: fieldKey, keys: fieldKeys }),
+            [fieldId]: iD.presetField(fieldId, { type: fieldType, key: fieldKey, keys: fieldKeys }),
         };
 
         const oldPreset = iD.presetPreset(
@@ -219,9 +219,9 @@ describe('iD.actionChangePreset', function() {
         const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
         expect(action(graph).entity(entity.id).tags).toStrictEqual({
             // no field tags are preserved
-            amenity: 'bench',
             ...tagsToPreserve,
             unrelatedTagKey: 'unrelatedTagValue',
+            amenity: 'bench',
         });
     });
 
@@ -257,7 +257,7 @@ describe('iD.actionChangePreset', function() {
         const graph = new iD.coreGraph([entity]);
 
         const fields = {
-            [fieldId]: iD.presetField('recycling', { type: fieldType, key: fieldKey, keys: fieldKeys }),
+            [fieldId]: iD.presetField(fieldId, { type: fieldType, key: fieldKey, keys: fieldKeys }),
         };
 
         const oldPreset = iD.presetPreset(
@@ -277,6 +277,44 @@ describe('iD.actionChangePreset', function() {
             // all field tags are preserved
             ...oldTags,
             amenity: 'bench', // override primary preset tag
+        });
+    });
+
+
+    // https://github.com/openstreetmap/iD/issues/12071
+    it('preserves tags of the old preset when selecting a new preset with a field for the old preset\'s primary tag', () => {
+        const entity = iD.osmNode({
+            tags: {
+                building: 'yes', // the preset's own tags.
+                'building:colour': 'green', // a field which exists in the preset
+            },
+            loc: [0, 0],
+        });
+        const graph = new iD.coreGraph([entity]);
+
+        const fields = {
+            'building:colour': iD.presetField('building:colour', { key: 'building:colour' }),
+            'building': iD.presetField('building', { key: 'building' }),
+        };
+
+        const oldPreset = iD.presetPreset(
+            'building/yes',
+            { tags: { building: 'yes' }, fields: ['building:colour'] },
+            undefined,
+            fields,
+        );
+        const newPreset = iD.presetPreset(
+            'amenity/school',
+            { tags: { amenity: 'school' }, fields: ['building'] },
+            undefined,
+            fields,
+        );
+        const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
+        expect(action(graph).entity(entity.id).tags).toStrictEqual({
+            // all tags are preserved
+            amenity: 'school',
+            building: 'yes',
+            'building:colour': 'green',
         });
     });
 
