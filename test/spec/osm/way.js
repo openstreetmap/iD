@@ -43,7 +43,7 @@ describe('iD.osmWay', function() {
             var w = new iD.osmWay({id: 'w'}),
                 result = w.copy(null, {});
 
-            expect(result).to.be.an.instanceof(iD.osmWay);
+            expect(result).toBeInstanceOf(iD.osmWay);
             expect(result).not.to.equal(w);
         });
 
@@ -73,8 +73,8 @@ describe('iD.osmWay', function() {
                 result = w.copy(graph, copies);
 
             expect(Object.keys(copies)).to.have.length(3);
-            expect(copies.a).to.be.an.instanceof(iD.osmNode);
-            expect(copies.b).to.be.an.instanceof(iD.osmNode);
+            expect(copies.a).toBeInstanceOf(iD.osmNode);
+            expect(copies.b).toBeInstanceOf(iD.osmNode);
             expect(copies.a).not.to.equal(w.nodes[0]);
             expect(copies.b).not.to.equal(w.nodes[1]);
             expect(result.nodes).to.deep.eql([copies.a.id, copies.b.id]);

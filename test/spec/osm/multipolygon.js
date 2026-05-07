@@ -156,9 +156,9 @@ describe('iD.osmJoinWays', function() {
         expect(result.actions.length).to.equal(1);
         expect(getIDs(result[0].nodes)).to.eql(['a', 'b', 'c']);
         expect(result[0].length).to.equal(2);
-        expect(result[0][0]).to.be.an.instanceof(iD.osmWay);
+        expect(result[0][0]).toBeInstanceOf(iD.osmWay);
         expect(result[0][0].nodes).to.eql(['a', 'b']);
-        expect(result[0][1]).to.be.an.instanceof(iD.osmWay);
+        expect(result[0][1]).toBeInstanceOf(iD.osmWay);
         expect(result[0][1].nodes).to.eql(['b', 'c']);
         expect(result[0][1].tags).to.eql({'oneway': '-1', 'lanes:backward': 2});
     });

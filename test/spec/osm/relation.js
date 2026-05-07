@@ -31,7 +31,7 @@ describe('iD.osmRelation', function () {
             var r = new iD.osmRelation({id: 'r'});
             var result = r.copy(null, {});
 
-            expect(result).to.be.an.instanceof(iD.osmRelation);
+            expect(result).toBeInstanceOf(iD.osmRelation);
             expect(result).not.to.equal(r);
         });
 
@@ -63,10 +63,10 @@ describe('iD.osmRelation', function () {
             var result = r.copy(graph, copies);
 
             expect(Object.keys(copies)).to.have.length(5);
-            expect(copies.w).to.be.an.instanceof(iD.osmWay);
-            expect(copies.a).to.be.an.instanceof(iD.osmNode);
-            expect(copies.b).to.be.an.instanceof(iD.osmNode);
-            expect(copies.c).to.be.an.instanceof(iD.osmNode);
+            expect(copies.w).toBeInstanceOf(iD.osmWay);
+            expect(copies.a).toBeInstanceOf(iD.osmNode);
+            expect(copies.b).toBeInstanceOf(iD.osmNode);
+            expect(copies.c).toBeInstanceOf(iD.osmNode);
             expect(result.members[0].id).not.to.equal(r.members[0].id);
             expect(result.members[0].role).to.equal(r.members[0].role);
         });
@@ -80,9 +80,9 @@ describe('iD.osmRelation', function () {
             r1.copy(graph, copies);
 
             expect(Object.keys(copies)).to.have.length(3);
-            expect(copies.r1).to.be.an.instanceof(iD.osmRelation);
-            expect(copies.r2).to.be.an.instanceof(iD.osmRelation);
-            expect(copies.w).to.be.an.instanceof(iD.osmWay);
+            expect(copies.r1).toBeInstanceOf(iD.osmRelation);
+            expect(copies.r2).toBeInstanceOf(iD.osmRelation);
+            expect(copies.w).toBeInstanceOf(iD.osmWay);
             expect(copies.r1.members[0].id).to.equal(copies.r2.id);
             expect(copies.r1.members[1].id).to.equal(copies.w.id);
             expect(copies.r2.members[0].id).to.equal(copies.w.id);

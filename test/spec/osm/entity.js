@@ -45,7 +45,7 @@ describe('iD.osmEntity', function () {
         it('returns a new Entity', function () {
             var n = new iD.osmNode();
             var result = n.copy(null, {});
-            expect(result).to.be.an.instanceof(iD.osmEntity);
+            expect(result).toBeInstanceOf(iD.osmEntity);
             expect(result).not.to.equal(n);
         });
 
