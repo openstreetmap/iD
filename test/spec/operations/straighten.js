@@ -43,12 +43,12 @@ describe('iD.operationStraighten', function () {
 
         it('is not available for no selected ids', function () {
             var result = iD.operationStraighten(fakeContext, []).available();
-            expect(result).to.be.not.ok;
+            expect(result).toBeFalsy();
         });
 
         it('is not available for way with only 2 nodes', function () {
             var result = iD.operationStraighten(fakeContext, ['w1']).available();
-            expect(result).to.be.not.ok;
+            expect(result).toBeFalsy();
         });
 
         it('is available for way with only 2 nodes connected to another 2-node way', function () {
@@ -58,7 +58,7 @@ describe('iD.operationStraighten', function () {
 
         it('is not available for non-continuous ways', function () {
             var result = iD.operationStraighten(fakeContext, ['w2', 'w4']).available();
-            expect(result).to.be.not.ok;
+            expect(result).toBeFalsy();
         });
 
         it('is available for selected way with more than 2 nodes', function () {
@@ -103,17 +103,17 @@ describe('iD.operationStraighten', function () {
 
         it('is not available for nodes not on selected ways', function () {
             var result = iD.operationStraighten(fakeContext, ['w5', 'n4', 'n11']).available();
-            expect(result).to.be.not.ok;
+            expect(result).toBeFalsy();
         });
 
         it('is not available for one selected node', function () {
             var result = iD.operationStraighten(fakeContext, ['w5', 'n9']).available();
-            expect(result).to.be.not.ok;
+            expect(result).toBeFalsy();
         });
 
         it('is not available for more than two selected nodes', function () {
             var result = iD.operationStraighten(fakeContext, ['w5', 'n9', 'n11', 'n12']).available();
-            expect(result).to.be.not.ok;
+            expect(result).toBeFalsy();
         });
     });
 });

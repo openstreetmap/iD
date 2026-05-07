@@ -313,7 +313,7 @@ describe('iD.actionCircularize', function () {
                     new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionCircularize('-', projection)(graph, 0);
-            expect(isCircular('-', graph)).to.be.not.ok;
+            expect(isCircular('-', graph)).toBeFalsy();
             expect(graph.entity('-').nodes).to.have.length(MAX_VERTICES + 1);
             expect(area('-', graph)).to.be.closeTo(-4, 1e-2);
         });
@@ -327,7 +327,7 @@ describe('iD.actionCircularize', function () {
                     new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionCircularize('-', projection)(graph, 0.5);
-            expect(isCircular('-', graph)).to.be.not.ok;
+            expect(isCircular('-', graph)).toBeFalsy();
             expect(graph.entity('-').nodes).to.have.length(MAX_VERTICES + 1);
             expect(area('-', graph)).to.be.closeTo(-4.74, 1e-2);
         });

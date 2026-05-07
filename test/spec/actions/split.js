@@ -167,7 +167,7 @@ describe('iD.actionSplit', function () {
             ]);
 
             var action = iD.actionSplit('b', ['=']);
-            expect(action.disabled(graph)).to.be.not.ok;
+            expect(action.disabled(graph)).toBeFalsy();
         });
 
         it('returns \'simple_roundabout\' when a closed roundabout is part of a route relations', function () {
@@ -647,7 +647,7 @@ describe('iD.actionSplit', function () {
             ]);
 
             var action = iD.actionSplit('c', ['=']);
-            expect(action.disabled(graph)).to.be.not.ok;
+            expect(action.disabled(graph)).toBeFalsy();
             graph = action(graph);
             expect(members(graph)).to.eql(['~', '-', '=', '?']);
         });
@@ -677,7 +677,7 @@ describe('iD.actionSplit', function () {
             ]);
 
             var action = iD.actionSplit('b', ['=']);
-            expect(action.disabled(graph)).to.be.not.ok;
+            expect(action.disabled(graph)).toBeFalsy();
             graph = action(graph);
             expect(members(graph)).to.eql(['?', '-', '=', '~']);
         });

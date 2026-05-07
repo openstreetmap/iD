@@ -51,7 +51,7 @@ describe('iD.geoExtent', function () {
                 e2 = iD.geoExtent([0, 0], [10, 10]),
                 e3 = iD.geoExtent([0, 0], [12, 12]);
             expect(e1.equals(e2)).to.be.ok;
-            expect(e1.equals(e3)).to.be.not.ok;
+            expect(e1.equals(e3)).toBeFalsy();
         });
     });
 

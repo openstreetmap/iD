@@ -360,7 +360,7 @@ describe('iD.coreHistory', function () {
         it('doesn\'t generate unsaveable changes', function() {
             history.perform(actionAddNode('n-1'));
             history.perform(iD.actionDeleteNode('n-1'));
-            expect(history.toJSON()).to.be.not.ok;
+            expect(history.toJSON()).toBeFalsy();
         });
 
         it('generates v3 JSON', function() {

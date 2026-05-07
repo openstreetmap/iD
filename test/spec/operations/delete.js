@@ -73,7 +73,7 @@ describe('iD.operationDelete', function () {
 
             const operation = iD.operationDelete(fakeContext, ['n']);
             operation();
-            expect(fakeContext.graph().hasEntity('w')).to.be.not.ok;
+            expect(fakeContext.graph().hasEntity('w')).toBeFalsy();
         });
     });
 });

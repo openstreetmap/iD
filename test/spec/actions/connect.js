@@ -243,7 +243,7 @@ describe('iD.actionConnect', function() {
                 ]})
             ]);
 
-            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy when connecting members of different relation and different roles', function () {
@@ -256,7 +256,7 @@ describe('iD.actionConnect', function() {
                 new iD.osmRelation({id: 'r2', members: [{ id: 'c', type: 'node', role: 'bar' } ]})
             ]);
 
-            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).toBeFalsy();
         });
 
         it('returns \'relation\' when connecting members of the same relation but different roles', function () {
@@ -297,9 +297,9 @@ describe('iD.actionConnect', function() {
                 ]})
             ]);
 
-            expect(iD.actionConnect(['a', 'd']).disabled(graph)).to.be.not.ok;
-            expect(iD.actionConnect(['b', 'd']).disabled(graph)).to.be.not.ok;
-            expect(iD.actionConnect(['c', 'd']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['a', 'd']).disabled(graph)).toBeFalsy();
+            expect(iD.actionConnect(['b', 'd']).disabled(graph)).toBeFalsy();
+            expect(iD.actionConnect(['c', 'd']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy when connecting nodes that would not break a via-node restriction', function () {
@@ -326,10 +326,10 @@ describe('iD.actionConnect', function() {
             ]);
 
             // allowed: adjacent connections that don't destroy a way
-            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.be.not.ok;
-            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.be.not.ok;
-            expect(iD.actionConnect(['c', 'd']).disabled(graph)).to.be.not.ok;
-            expect(iD.actionConnect(['d', 'e']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['a', 'b']).disabled(graph)).toBeFalsy();
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).toBeFalsy();
+            expect(iD.actionConnect(['c', 'd']).disabled(graph)).toBeFalsy();
+            expect(iD.actionConnect(['d', 'e']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy when connecting nodes that would not break a via-way restriction', function () {
@@ -359,12 +359,12 @@ describe('iD.actionConnect', function() {
             ]);
 
             // allowed: adjacent connections that don't destroy a way
-            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.be.not.ok;
-            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.be.not.ok;
-            expect(iD.actionConnect(['c', 'd']).disabled(graph)).to.be.not.ok;
-            expect(iD.actionConnect(['d', 'e']).disabled(graph)).to.be.not.ok;
-            expect(iD.actionConnect(['e', 'f']).disabled(graph)).to.be.not.ok;
-            expect(iD.actionConnect(['f', 'g']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['a', 'b']).disabled(graph)).toBeFalsy();
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).toBeFalsy();
+            expect(iD.actionConnect(['c', 'd']).disabled(graph)).toBeFalsy();
+            expect(iD.actionConnect(['d', 'e']).disabled(graph)).toBeFalsy();
+            expect(iD.actionConnect(['e', 'f']).disabled(graph)).toBeFalsy();
+            expect(iD.actionConnect(['f', 'g']).disabled(graph)).toBeFalsy();
         });
 
         it('returns \'restriction\' when connecting nodes that would break a via-node restriction', function () {
@@ -421,8 +421,8 @@ describe('iD.actionConnect', function() {
             ]);
 
             // The u-turn case is one where a connection between FROM-TO should be allowed
-            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.be.not.ok;
-            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['a', 'b']).disabled(graph)).toBeFalsy();
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).toBeFalsy();
         });
 
         it('returns \'restriction\' when connecting nodes that would break a via-way restriction', function () {

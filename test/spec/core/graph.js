@@ -83,7 +83,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([node], [graph]);
 
-            expect(graph.hasEntity('n')).to.be.not.ok;
+            expect(graph.hasEntity('n')).toBeFalsy();
         });
 
         it('gives precedence to existing entities', function () {

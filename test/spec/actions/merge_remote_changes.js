@@ -497,7 +497,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
                 expect(result.entity('w1').nodes).to.eql(remoteNodes);
                 expect(result.hasEntity('r1')).to.eql(localr1);
-                expect(result.hasEntity('r2')).to.be.not.ok;
+                expect(result.hasEntity('r2')).toBeFalsy();
                 expect(action.conflicts()).toHaveLength(0);
             });
         });

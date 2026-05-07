@@ -19,7 +19,7 @@ describe('iD.actionMergeNodes', function () {
                 new iD.osmWay({ id: '|', nodes: ['d', 'e'] })
             ]);
 
-            expect(iD.actionMergeNodes(['b', 'e']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionMergeNodes(['b', 'e']).disabled(graph)).toBeFalsy();
         });
     });
 
