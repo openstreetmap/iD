@@ -36,14 +36,14 @@ describe('iD.uiSectionRawTagEditor', function() {
         element.remove();
         render({});
         expect(element.selectAll('.tag-list li').nodes().length).to.eql(1);
-        expect(element.select('.tag-list').selectAll('input.value').property('value')).to.be.empty;
-        expect(element.select('.tag-list').selectAll('input.key').property('value')).to.be.empty;
+        expect(element.select('.tag-list').selectAll('input.value').property('value')).toBe('');
+        expect(element.select('.tag-list').selectAll('input.key').property('value')).toBe('');
     });
 
     it('adds pair of empty input elements at end of list', () => {
         expect(element.selectAll('.tag-list li').nodes().length).to.eql(2);
-        expect(element.select('.tag-list').selectAll('input').nodes()[2].value).to.be.empty;
-        expect(element.select('.tag-list').selectAll('input').nodes()[3].value).to.be.empty;
+        expect(element.select('.tag-list').selectAll('input').nodes()[2].value).toBe('');
+        expect(element.select('.tag-list').selectAll('input').nodes()[3].value).toBe('');
     });
 
     it('removes tags when clicking the remove button', async () => {
