@@ -65,8 +65,8 @@ describe('iD.coreHistory', function () {
             const action1 = fn().mockReturnValue(new iD.coreGraph());
             const action2 = fn().mockReturnValue(new iD.coreGraph());
             history.perform(action1, action2, 'annotation');
-            expect(action1).to.have.been.called;
-            expect(action2).to.have.been.called;
+            expect(action1).toHaveBeenCalled();
+            expect(action2).toHaveBeenCalled();
             expect(history.undoAnnotation()).to.equal('annotation');
         });
 
@@ -107,8 +107,8 @@ describe('iD.coreHistory', function () {
             const action1 = fn().mockReturnValue(new iD.coreGraph());
             const action2 = fn().mockReturnValue(new iD.coreGraph());
             history.replace(action1, action2, 'annotation');
-            expect(action1).to.have.been.called;
-            expect(action2).to.have.been.called;
+            expect(action1).toHaveBeenCalled();
+            expect(action2).toHaveBeenCalled();
             expect(history.undoAnnotation()).to.equal('annotation');
         });
     });
@@ -186,7 +186,7 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop);
             history.on('undone', spy);
             history.undo();
-            expect(spy).to.have.been.called;
+            expect(spy).toHaveBeenCalled();
         });
 
         it('emits a change event', function () {
@@ -208,7 +208,7 @@ describe('iD.coreHistory', function () {
             history.undo();
             history.redo();
             expect(history.undoAnnotation()).to.equal('annotation');
-            expect(spy).to.have.been.called;
+            expect(spy).toHaveBeenCalled();
         });
 
         it('does not redo into a non-annotated state', function () {
@@ -322,7 +322,7 @@ describe('iD.coreHistory', function () {
         it('emits a change event', function () {
             history.on('change', spy);
             history.reset();
-            expect(spy).to.have.been.called;
+            expect(spy).toHaveBeenCalled();
         });
     });
 
@@ -352,7 +352,7 @@ describe('iD.coreHistory', function () {
         it('emits a change event', function () {
             history.on('change', spy);
             history.reset();
-            expect(spy).to.have.been.called;
+            expect(spy).toHaveBeenCalled();
         });
     });
 

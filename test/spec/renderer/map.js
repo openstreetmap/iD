@@ -30,7 +30,7 @@ describe('iD.Map', function() {
             map.zoom(4);
             map.on('move', spy);
             map.zoom(5);
-            expect(spy).to.have.been.called;
+            expect(spy).toHaveBeenCalled();
         });
 
         it('dispatches no move event when zoom does not change', function() {
@@ -89,7 +89,7 @@ describe('iD.Map', function() {
             map.center([0, 0]);
             map.on('move', spy);
             map.center([1, 1]);
-            expect(spy).to.have.been.called;
+            expect(spy).toHaveBeenCalled();
         });
 
         it('dispatches no move event when center does not change', function() {

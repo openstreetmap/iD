@@ -58,7 +58,7 @@ describe('iD.presetField', function() {
             uiField(d3.select(document.createElement('div')).classed('form-field-input-wrap', true));
             uiField.tags({k: 'v'});
             expect(field.t.append).not.toHaveBeenCalled();
-            expect(other.t.append).to.have.been.called;
+            expect(other.t.append).toHaveBeenCalled();
         });
     });
 });
