@@ -130,12 +130,12 @@ describe('iD.actionCircularize', function () {
                 new iD.osmWay({id: '+', nodes: ['a', 'd', 'c', 'b', 'a']})
             ]);
 
-        expect(area('+', graph)).to.be.gt(0);
+        expect(area('+', graph)).toBeGreaterThan(0);
 
         graph = iD.actionCircularize('+', projection)(graph);
 
         expect(isCircular('+', graph)).toBeTruthy();
-        expect(area('+', graph)).to.be.gt(0);
+        expect(area('+', graph)).toBeGreaterThan(0);
     });
 
     it('leaves counter-clockwise ways counter-clockwise', function () {
@@ -187,7 +187,7 @@ describe('iD.actionCircularize', function () {
         graph = iD.actionCircularize('-', projection)(graph);
 
         expect(isCircular('-', graph)).toBeTruthy();
-        expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.be.gt(3);
+        expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).toBeGreaterThan(3);
         expect(graph.entity('-').isConvex(graph)).toBe(true);
         expect(graph.entity('=').isConvex(graph)).toBe(false);
     });
@@ -221,7 +221,7 @@ describe('iD.actionCircularize', function () {
         graph = iD.actionCircularize('-', projection)(graph);
 
         expect(isCircular('-', graph)).toBeTruthy();
-        expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.be.gt(3);
+        expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).toBeGreaterThan(3);
         expect(graph.entity('-').isConvex(graph)).toBe(true);
         expect(graph.entity('=').isConvex(graph)).toBe(false);
     });
