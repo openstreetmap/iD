@@ -76,7 +76,7 @@ describe('iD.coreHistory', function () {
             history.on('change', spy);
             await history.perform(action1);
             await setTimeout(300);
-            expect(spy.mock.calls.length).to.be.above(2);
+            expect(spy.mock.calls.length).toBeGreaterThan(2);
         });
     });
 

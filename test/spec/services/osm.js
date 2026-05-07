@@ -52,14 +52,14 @@ describe('iD.serviceOsm', function () {
             var cid1 = connection.getConnectionId();
             connection.reset();
             var cid2 = connection.getConnectionId();
-            expect(cid2).to.be.above(cid1);
+            expect(cid2).toBeGreaterThan(cid1);
         });
 
         it('changes the connection id every time connection is switched', function () {
             var cid1 = connection.getConnectionId();
             connection.switch({ url: 'https://api06.dev.openstreetmap.org' });
             var cid2 = connection.getConnectionId();
-            expect(cid2).to.be.above(cid1);
+            expect(cid2).toBeGreaterThan(cid1);
         });
     });
 
