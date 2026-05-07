@@ -370,10 +370,10 @@ describe('iD.util', function() {
         it('uses addr:housename', () => {
             expect(iD.utilDisplayName({ tags: { 'addr:housename': 'Siglap House' } })).to.eql('Siglap House');
         });
-        it('uses the street address as a last resort', () => {
+        it('uses the street address (addr:street) as a last resort', () => {
             expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '31', 'addr:street': 'Princes Street' } })).to.eql('31 Princes Street');
         });
-        it('uses the street address as a last resort', () => {
+        it('uses the street address (addr:place) as a last resort', () => {
             expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '1', 'addr:place': 'Motutapu Island' } })).to.eql('1 Motutapu Island');
         });
         it('uses addr:unit if present', () => {
@@ -396,8 +396,6 @@ describe('iD.util', function() {
         });
         it('returns the oldest IDs among database and editor IDs', function() {
             expect(iD.utilOldestID(['w-1', 'w1', 'w-2'])).to.eql('w1');
-        });
-        it('returns the oldest database ID', function() {
             expect(iD.utilOldestID(['w100', 'w-1', 'a', 'w-300', 'w2'])).to.eql('w2');
         });
         it('returns the oldest editor ID if no database IDs', function() {

@@ -419,7 +419,7 @@ describe('iD.Lanes', function() {
         expect(bothways.length).to.eql(0);
 
       });
-      it('should have correct number of direction elements', function() {
+      it('should have correct number of direction elements (with bothways lane)', function() {
         var lanes = new iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().lanes;
         var forward = lanes.filter(function(l) {
           return l.direction === 'forward';
