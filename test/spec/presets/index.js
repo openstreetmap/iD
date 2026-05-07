@@ -133,28 +133,28 @@ describe('iD.presetIndex', function () {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
-            expect(presets.areaKeys().natural).not.to.include.keys('peak');
+            expect(presets.areaKeys().natural).not.toHaveProperty('peak');
         });
 
         it('does not discard generic \'*\' key-values', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
-            expect(presets.areaKeys().natural).not.to.include.keys('natural');
+            expect(presets.areaKeys().natural).not.toHaveProperty('natural');
         });
 
         it('ignores keys like \'highway\' that are assumed to be lines', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
-            expect(presets.areaKeys()).not.to.include.keys('highway');
+            expect(presets.areaKeys()).not.toHaveProperty('highway');
         });
 
         it('ignores suggestion presets', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
-            expect(presets.areaKeys()).not.to.include.keys('amenity');
+            expect(presets.areaKeys()).not.toHaveProperty('amenity');
         });
     });
 
