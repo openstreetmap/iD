@@ -80,7 +80,7 @@ describe('iD.actionExtract', function () {
 
                 // confirm that a still exists
                 var targetNode = assertionGraph.entity('a');
-                expect(targetNode).not.to.eql(undefined);
+                expect(targetNode).toBeDefined();
                 // ... and that the location is correct
                 expect(targetNode.loc).to.eql([0, 0]);
                 // ... and that the tags are intact
@@ -150,7 +150,7 @@ describe('iD.actionExtract', function () {
 
                 // confirm that a still exists
                 var targetNode = assertionGraph.entity('b');
-                expect(targetNode).not.to.eql(undefined);
+                expect(targetNode).toBeDefined();
                 // ... and that the location is correct
                 expect(targetNode.loc).to.eql([1, 0]);
                 // ... and that the tags are intact
@@ -244,7 +244,7 @@ describe('iD.actionExtract', function () {
 
                 // confirm that a still exists
                 var targetNode = assertionGraph.entity('a');
-                expect(targetNode).not.to.eql(undefined);
+                expect(targetNode).toBeDefined();
                 // ... and that the location is correct
                 expect(targetNode.loc).to.eql([0, 0]);
                 // ... and that the tags are intact
@@ -316,7 +316,7 @@ describe('iD.actionExtract', function () {
 
                 // confirm that a still exists
                 var targetNode = assertionGraph.entity('b');
-                expect(targetNode).not.to.eql(undefined);
+                expect(targetNode).toBeDefined();
                 // ... and that the location is correct
                 expect(targetNode.loc).to.eql([1, 0]);
                 // ... and that the tags are intact
@@ -426,7 +426,7 @@ describe('iD.actionExtract', function () {
 
             // confirm that a still exists
             var targetNode = assertionGraph.entity('c');
-            expect(targetNode).not.to.eql(undefined);
+            expect(targetNode).toBeDefined();
             // ... and that the location is correct
             expect(targetNode.loc).to.eql([2, 0]);
             // ... and that the tags are intact
@@ -543,7 +543,7 @@ describe('iD.actionExtract', function () {
 
             // confirm that a still exists
             var targetNode = assertionGraph.entity('c');
-            expect(targetNode).not.to.eql(undefined);
+            expect(targetNode).toBeDefined();
             // ... and that the location is correct
             expect(targetNode.loc).to.eql([1, 1]);
             // ... and that the tags are intact
