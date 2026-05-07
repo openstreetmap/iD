@@ -81,9 +81,12 @@ describe('iD.presetCollection', function() {
             expect(result.indexOf(p.grill), 'Grill').toEqual(0);            // 1. 'Grill' (leading name)
             expect(result.indexOf(p.football), 'Football').toEqual(1);      // 2. 'Football' (leading term 'gridiron')
             expect(result.indexOf(p.sandpit), 'Sandpit').toEqual(2);        // 3. 'Sandpit' (leading tag value 'grit_bin')
-            expect(result.indexOf(p.grass1), 'Grass').to.be.within(3,5);   // 4. 'Grass' (similar name)
-            expect(result.indexOf(p.grass2), 'Ğṝȁß').to.be.within(3,5);    // 5. 'Ğṝȁß' (similar name)
-            expect(result.indexOf(p.park), 'Park').to.be.within(3,5);      // 6. 'Park' (similar term 'grass')
+            expect(result.indexOf(p.grass1), 'Grass').toBeGreaterThanOrEqual(3);   // 4. 'Grass' (similar name)
+            expect(result.indexOf(p.grass1), 'Grass').toBeLessThanOrEqual(5);
+            expect(result.indexOf(p.grass2), 'Ğṝȁß').toBeGreaterThanOrEqual(3);    // 5. 'Ğṝȁß' (similar name)
+            expect(result.indexOf(p.grass2), 'Ğṝȁß').toBeLessThanOrEqual(5);
+            expect(result.indexOf(p.park), 'Park').toBeGreaterThanOrEqual(3);      // 6. 'Park' (similar term 'grass')
+            expect(result.indexOf(p.park), 'Park').toBeLessThanOrEqual(5);
         });
 
         it('matches alias', function() {
@@ -111,8 +114,10 @@ describe('iD.presetCollection', function() {
 
         it('replaces diacritics on fuzzy matches', function() {
             var result = c.search('graß', 'point').matchGeometry('point').collection;
-            expect(result.indexOf(p.grass1), 'Grass').to.be.within(0,1);   // 1. 'Grass' (similar name)
-            expect(result.indexOf(p.grass2), 'Ğṝȁß').to.be.within(0,1);    // 2. 'Ğṝȁß'  (similar name)
+            expect(result.indexOf(p.grass1), 'Grass').toBeGreaterThanOrEqual(0);   // 1. 'Grass' (similar name)
+            expect(result.indexOf(p.grass1), 'Grass').toBeLessThanOrEqual(1);
+            expect(result.indexOf(p.grass2), 'Ğṝȁß').toBeGreaterThanOrEqual(0);    // 2. 'Ğṝȁß'  (similar name)
+            expect(result.indexOf(p.grass2), 'Ğṝȁß').toBeLessThanOrEqual(1);
         });
 
         it('includes the appropriate fallback preset', function() {

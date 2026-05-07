@@ -80,8 +80,10 @@ describe('iD.geo - geography', function() {
         });
         it('[0.00064, -0.00064] pixel offset is roughly [100, 100] meter offset', function() {
             var meters = iD.geoOffsetToMeters([0.00064, -0.00064]);
-            expect(meters[0]).to.be.within(99.5, 100.5);
-            expect(meters[1]).to.be.within(99.5, 100.5);
+            expect(meters[0]).toBeGreaterThanOrEqual(99.5);
+            expect(meters[0]).toBeLessThanOrEqual(100.5);
+            expect(meters[1]).toBeGreaterThanOrEqual(99.5);
+            expect(meters[1]).toBeLessThanOrEqual(100.5);
         });
     });
 
@@ -93,8 +95,10 @@ describe('iD.geo - geography', function() {
         });
         it('[100, 100] meter offset is roughly [0.00064, -0.00064] pixel offset', function() {
             var offset = iD.geoMetersToOffset([100, 100]);
-            expect(offset[0]).to.be.within(0.000635, 0.000645);
-            expect(offset[1]).to.be.within(-0.000645, -0.000635);
+            expect(offset[0]).toBeGreaterThanOrEqual(0.000635);
+            expect(offset[0]).toBeLessThanOrEqual(0.000645);
+            expect(offset[1]).toBeGreaterThanOrEqual(-0.000645);
+            expect(offset[1]).toBeLessThanOrEqual(-0.000635);
         });
     });
 
