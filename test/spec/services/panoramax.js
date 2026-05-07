@@ -166,7 +166,7 @@ describe('iD.servicePanoramax', function() {
             const start = performance.now();
             panoramax.loadImages(context.projection);
             const duration = performance.now() - start;
-            expect(duration).to.be.lessThan(1000);
+            expect(duration).toBeLessThan(1000);
         });
     });
 
