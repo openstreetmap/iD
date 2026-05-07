@@ -77,7 +77,7 @@ describe('iD.osmWay', function() {
             expect(copies.b).toBeInstanceOf(iD.osmNode);
             expect(copies.a).not.to.equal(w.nodes[0]);
             expect(copies.b).not.to.equal(w.nodes[1]);
-            expect(result.nodes).to.deep.eql([copies.a.id, copies.b.id]);
+            expect(result.nodes).toEqual([copies.a.id, copies.b.id]);
         });
 
         it('creates only one copy of shared nodes', function () {

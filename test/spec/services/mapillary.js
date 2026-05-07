@@ -63,7 +63,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.cache().images.rtree.load(features);
             var res = mapillary.images(context.projection);
 
-            expect(res).to.deep.eql([
+            expect(res).toEqual([
                 { key: '0', loc: [10,0], ca: 90 },
                 { key: '1', loc: [10,0], ca: 90 }
             ]);
@@ -97,7 +97,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.cache().signs.rtree.load(features);
             var res = mapillary.signs(context.projection);
 
-            expect(res).to.deep.eql([
+            expect(res).toEqual([
                 { key: '0', loc: [10,0] },
                 { key: '1', loc: [10,0] }
             ]);
@@ -131,7 +131,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.cache().points.rtree.load(features);
             var res = mapillary.mapFeatures(context.projection);
 
-            expect(res).to.deep.eql([
+            expect(res).toEqual([
                 { key: '0', loc: [10,0] },
                 { key: '1', loc: [10,0] }
             ]);
@@ -187,7 +187,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.cache().sequences.lineString['-'] = [gj];
 
             var res = mapillary.sequences(context.projection);
-            expect(res).to.deep.eql([gj]);
+            expect(res).toEqual([gj]);
         });
     });
 

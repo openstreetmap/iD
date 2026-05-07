@@ -219,7 +219,7 @@ describe('iD.serviceKartaview', function() {
             kartaview.cache().images.rtree.load(features);
             var res = kartaview.images(context.projection);
 
-            expect(res).to.deep.eql([
+            expect(res).toEqual([
                 { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 },
                 { key: '1', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 1 }
             ]);
@@ -254,7 +254,7 @@ describe('iD.serviceKartaview', function() {
             kartaview.cache().sequences['100'] = { rotation: 0, images: [ features[0].data, features[1].data, features[2].data ] };
 
             var res = kartaview.sequences(context.projection);
-            expect(res).to.deep.eql([{
+            expect(res).toEqual([{
                 type: 'LineString',
                 coordinates: [[10,0], [10,0], [10,1]],
                 properties: {

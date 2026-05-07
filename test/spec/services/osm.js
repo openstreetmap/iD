@@ -643,7 +643,7 @@ describe('iD.serviceOsm', function () {
             connection.caches('get').note.rtree.load(notes);
             var res = connection.notes(context.projection);
 
-            expect(res).to.deep.eql([
+            expect(res).toEqual([
                 { key: '0', loc: [10,0] },
                 { key: '1', loc: [10,0] }
             ]);

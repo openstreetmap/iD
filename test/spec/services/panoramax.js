@@ -130,7 +130,7 @@ describe('iD.servicePanoramax', function() {
             panoramax.cache().images.rtree.load(features);
             var res = panoramax.images(context.projection);
 
-            expect(res).to.deep.eql([
+            expect(res).toEqual([
                 { id: '0', loc: [10,0], heading: 90, sequence_id: '100', account_id: '0' },
                 { id: '1', loc: [10,0], heading: 90, sequence_id: '100', account_id: '1' }
             ]);
@@ -183,7 +183,7 @@ describe('iD.servicePanoramax', function() {
             panoramax.cache().sequences.lineString['100'] = { rotation: 0, images: [ features[0].data, features[1].data, features[2].data ] };
 
             var res = panoramax.sequences(context.projection, 15);
-            expect(res).to.deep.eql([{
+            expect(res).toEqual([{
                 rotation: 0, images: [features[0].data, features[1].data, features[2].data]
             }]);
         });

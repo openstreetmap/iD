@@ -117,7 +117,7 @@ describe('iD.serviceStreetside', function() {
             streetside.cache().bubbles.rtree.load(features);
             var res = streetside.bubbles(context.projection);
 
-            expect(res).to.deep.eql([
+            expect(res).toEqual([
                 { key: 1, loc: [10, 0], ca: 90, pr: undefined, ne: 2, pano: true, sequenceKey: 1 },
                 { key: 2, loc: [10, 0], ca: 90, pr: 1, ne: 3, pano: true, sequenceKey: 1 }
             ]);
@@ -163,7 +163,7 @@ describe('iD.serviceStreetside', function() {
             streetside.cache().sequences[1] = seq;
 
             var res = streetside.sequences(context.projection);
-            expect(res).to.deep.eql([seq.geojson]);
+            expect(res).toEqual([seq.geojson]);
         });
     });
 

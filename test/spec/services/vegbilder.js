@@ -265,7 +265,7 @@ describe('iD.serviceVegbilder', function() {
       vegbilder.cache().rtree.load(features);
       const result = vegbilder.images(context.projection);
 
-      expect(result).to.deep.eql(testImages.slice(0, 2));
+      expect(result).toEqual(testImages.slice(0, 2));
     });
 
     it('limits results no more than 5 stacked images in one spot', function() {
@@ -297,7 +297,7 @@ describe('iD.serviceVegbilder', function() {
       }
 
       const result = vegbilder.sequences(context.projection);
-      expect(result).to.deep.eql([{
+      expect(result).toEqual([{
         type: 'LineString',
         coordinates: [[5.7, 58.90001], [5.7, 58.90002], [5.7, 59.90003]],
         key: '1',
