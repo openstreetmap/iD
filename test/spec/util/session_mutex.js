@@ -83,7 +83,7 @@ describe('iD.utilSessionMutex', function() {
         expect(b.lock()).to.equal(true);
     });
 
-    it('automatically unlocks when a session crashes', function() {
+    it.skip('automatically unlocks when a session crashes', function() {
         // Tested manually.
     });
 });

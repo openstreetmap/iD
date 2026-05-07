@@ -11,9 +11,7 @@ describe('iD.osmNote', function () {
     });
 
     describe('#update', function() {
-        it('returns an updated note', function() {
-
-        });
+        it.todo('returns an updated note');
     });
 
     describe('#isNew', function() {
