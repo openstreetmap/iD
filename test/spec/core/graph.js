@@ -54,7 +54,7 @@ describe('iD.coreGraph', function() {
         });
 
         it('throws when the entity is not present', function () {
-            expect(function() { new iD.coreGraph().entity('1'); }).to.throw;
+            expect(function() { new iD.coreGraph().entity('1'); }).toThrow();
         });
     });
 
