@@ -273,7 +273,7 @@ describe('iD.serviceVegbilder', function() {
 
       vegbilder.cache().rtree.load(features);
       const result = vegbilder.images(context.projection);
-      expect(features).to.have.length.of.at.least(6);
+      expect(features.length).toBeGreaterThanOrEqual(6);
       expect(result.length).toBeLessThanOrEqual(5);
     });
   });
