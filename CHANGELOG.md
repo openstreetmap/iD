@@ -66,11 +66,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Sort full issues list by issue type first (instead of only by distance from map center), such that similar issues are always listed next to each other ([#9017])
 * For disconnected routable multipolygon areas: report the relation in the validation warning ([#12245])
 #### :bug: Bugfixes
-* Fix title of preset search results not updating correctly ([#12050], thanks [@bhavyaKhatri2703])
 * Prevent duplicate nodes from being created while using spacebar key to draw a way ([#12051])
-* Fix user images and upload help text from showing up as duplicates in upload dialog ([#12063])
 * Fix some tags automatically deleted when re-selecting the same preset ([#12070], thanks [@k-yle])
-* Fix crash when a checkbox-field is rendered using a custom (non-`yes/no`) value ([#12078])
 * Fix a bug that caused `step_count` to be set to `NaN` when merging features with non-numeric step count values ([#12110], thanks [@JaiswalShivang])
 * Fix a bug that caused duplicates of new notes to appear when such a note is dragged on the map ([#9092])
 * Prevent keyboard shortcuts from triggering an additional input after their action is performed ([#9071])
