@@ -370,7 +370,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags);
                     action(localGraph);
 
-                expect(action.conflicts()).not.to.be.empty;
+                expect(action.conflicts()).not.toEqual([]);
             });
         });
     });
