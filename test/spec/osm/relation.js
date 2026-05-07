@@ -840,14 +840,14 @@ describe('iD.osmRelation', function () {
             var a = new iD.osmRelation({ id: 'r1' });
             var b = new iD.osmRelation({ id: 'r2' });
             expect(iD.osmRelation.creationOrder(a, b)).toBeGreaterThan(0);
-            expect(iD.osmRelation.creationOrder(b, a)).to.be.below(0);
+            expect(iD.osmRelation.creationOrder(b, a)).toBeLessThan(0);
         });
 
         it('orders new relations newest-first', function () {
             var a = new iD.osmRelation({ id: 'r-1' });
             var b = new iD.osmRelation({ id: 'r-2' });
             expect(iD.osmRelation.creationOrder(a, b)).toBeGreaterThan(0);
-            expect(iD.osmRelation.creationOrder(b, a)).to.be.below(0);
+            expect(iD.osmRelation.creationOrder(b, a)).toBeLessThan(0);
         });
     });
 });
