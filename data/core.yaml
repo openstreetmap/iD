@@ -734,7 +734,8 @@ en:
     edit_reference: "edit/translate documentation"
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
-    direction_rotate_help: "Press {key} to adjust this value on the map."
+direction_rotate_help: "Press {key} to adjust this value on the map."
+    direction_dial_help: "You can use the dial to change direction. Use {shift} for 5° steps. Use {command} to set a range."
     key_value: "key=value"
     empty: (empty)
     multiple_values: Multiple Values

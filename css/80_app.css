@@ -3056,6 +3056,13 @@ button.raw-tag-option svg.icon {
 .tag-reference-link {
     display: block;
 }
+.tag-reference-separator {
+    border-top: 1px solid var(--border-color);
+    margin: 8px 0;
+}
+.tag-reference-direction-help {
+    margin: 0;
+}
 .tag-reference-link .icon:first-child {
     margin-left: 0;
 }

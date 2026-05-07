@@ -94,7 +94,8 @@ export function uiTagReference(what) {
               .call(t.append(docs.wiki.text));
         }
 
-        // Rotate (R) adjusts numeric direction=* on standalone points.
+// Rotate (R) adjusts numeric direction=* on standalone points.
+        // The dial provides an alternate UI for the same tag.
         if (what.key === 'direction') {
             _body
                 .append('div')
@@ -105,6 +106,14 @@ export function uiTagReference(what) {
                 .attr('class', 'shortcut-hint')
                 .call(t.append('inspector.direction_rotate_help', {
                     key: uiCmd.display(t('operations.rotate.key'))
+                }));
+
+            _body
+                .append('p')
+                .attr('class', 'tag-reference-direction-help')
+                .call(t.append('inspector.direction_dial_help', {
+                    shift: uiCmd.display('⇧'),
+                    command: uiCmd.display('⌘')
                 }));
         }
 
