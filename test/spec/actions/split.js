@@ -216,7 +216,7 @@ describe('iD.actionSplit', function () {
             ]);
 
             var action = iD.actionSplit('a', ['*']);
-            expect(action.disabled(graph)).to.not.be.ok;
+            expect(action.disabled(graph)).toBeFalsy();
         });
     });
 
