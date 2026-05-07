@@ -24,7 +24,7 @@ describe('iD.utilKeybinding', function() {
             d3.select(document).call(keybinding.on('A', spy));
 
             happen.keydown(document, {keyCode: 65, metaKey: true});
-            expect(spy).not.to.have.been.called;
+            expect(spy).not.toHaveBeenCalled();
 
             happen.keydown(document, {keyCode: 65});
             expect(spy).toHaveBeenCalledOnce();
@@ -34,7 +34,7 @@ describe('iD.utilKeybinding', function() {
             d3.select(document).call(keybinding.on('⌘+A', spy));
 
             happen.keydown(document, {keyCode: 65});
-            expect(spy).not.to.have.been.called;
+            expect(spy).not.toHaveBeenCalled();
 
             happen.keydown(document, {keyCode: 65, metaKey: true});
             expect(spy).toHaveBeenCalledOnce();
@@ -54,7 +54,7 @@ describe('iD.utilKeybinding', function() {
 
             happen.keydown(document, {keyCode: 65, shiftKey: true});
             expect(spy).toHaveBeenCalledOnce();
-            expect(spy2).not.to.have.been.called;
+            expect(spy2).not.toHaveBeenCalled();
         });
 
         it('ignores alt and control if both are present (e.g. as AltGr) #4096', function () {
@@ -78,7 +78,7 @@ describe('iD.utilKeybinding', function() {
             d3.select(document).call(keybinding.on('A', spy));
 
             happen.keydown(input.node(), {keyCode: 65});
-            expect(spy).not.to.have.been.called;
+            expect(spy).not.toHaveBeenCalled();
         });
 
         it('dispatches when focus is in input elements when the capture flag was passed', function () {

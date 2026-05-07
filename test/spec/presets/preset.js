@@ -270,21 +270,21 @@ describe('iD.presetPreset', function() {
 
             preset.name();
             expect(other.t).toHaveBeenCalledOnce();
-            expect(preset.t).not.to.have.been.called;
+            expect(preset.t).not.toHaveBeenCalled();
 
             other.t.mockClear();
             preset.t.mockClear();
 
             preset.aliases();
             expect(other.t).toHaveBeenCalledOnce();
-            expect(preset.t).not.to.have.been.called;
+            expect(preset.t).not.toHaveBeenCalled();
 
             other.t.mockClear();
             preset.t.mockClear();
 
             preset.terms();
             expect(other.t).toHaveBeenCalledOnce();
-            expect(preset.t).not.to.have.been.called;
+            expect(preset.t).not.toHaveBeenCalled();
         });
     });
 });

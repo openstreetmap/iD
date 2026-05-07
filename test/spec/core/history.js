@@ -216,7 +216,7 @@ describe('iD.coreHistory', function () {
             history.on('redone', spy);
             history.undo();
             history.redo();
-            expect(spy).not.to.have.been.called;
+            expect(spy).not.toHaveBeenCalled();
         });
 
         it('emits a change event', function () {

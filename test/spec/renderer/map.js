@@ -38,7 +38,7 @@ describe('iD.Map', function() {
             map.zoom(4);
             map.on('move', spy);
             map.zoom(4);
-            expect(spy).not.to.have.been.called;
+            expect(spy).not.toHaveBeenCalled();
         });
 
         it('respects minzoom', function() {
@@ -97,7 +97,7 @@ describe('iD.Map', function() {
             map.center([0, 0]);
             map.on('move', spy);
             map.center([0, 0]);
-            expect(spy).not.to.have.been.called;
+            expect(spy).not.toHaveBeenCalled();
         });
     });
 
