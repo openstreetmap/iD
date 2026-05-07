@@ -21,12 +21,12 @@ describe('iD.behaviorHover', function() {
         it('removes the .hover class from all elements', function () {
             _container.append('span').attr('class', 'hover');
             _container.call(iD.behaviorHover(_context).off);
-            expect(_container.select('span').classed('hover')).to.be.false;
+            expect(_container.select('span').classed('hover')).toBe(false);
         });
         it('removes the .hover-disabled class from the surface element', function () {
             _container.attr('class', 'hover-disabled');
             _container.call(iD.behaviorHover(_context).off);
-            expect(_container.classed('hover-disabled')).to.be.false;
+            expect(_container.classed('hover-disabled')).toBe(false);
         });
     });
 
@@ -106,7 +106,7 @@ describe('iD.behaviorHover', function() {
 
             happen.keydown(window, { keyCode: 18 });
             happen.keyup(window, { keyCode: 18 });
-            expect(_container.classed('hover-disabled')).to.be.false;
+            expect(_container.classed('hover-disabled')).toBe(false);
         });
     });
 });

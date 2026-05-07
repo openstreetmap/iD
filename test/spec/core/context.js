@@ -75,7 +75,7 @@ describe('iD.coreContext', function() {
             expect(context.getDebug('collision')).toBe(true);
 
             context.setDebug('tile', false);
-            expect(context.getDebug('tile')).to.be.false;
+            expect(context.getDebug('tile')).toBe(false);
         });
     });
 

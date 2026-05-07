@@ -185,7 +185,7 @@ describe('iD.presetIndex', function () {
             presets.addablePresetIDs(ids);
 
             expect(presets.item('residential').addable()).toBe(true);
-            expect(presets.item('park').addable()).to.be.false;
+            expect(presets.item('park').addable()).toBe(false);
             expect(presets.addablePresetIDs()).to.eql(ids);
 
             presets.addablePresetIDs(null);
@@ -213,7 +213,7 @@ describe('iD.presetIndex', function () {
             expect(presets.item('')).to.eql(undefined);
             expect(presets.item('garbage')).to.eql(undefined);
             expect(presets.item('residential').addable()).toBe(true);
-            expect(presets.item('park').addable()).to.be.false;
+            expect(presets.item('park').addable()).toBe(false);
             expect(presets.addablePresetIDs()).to.eql(ids);
 
             presets.addablePresetIDs(null);
@@ -288,7 +288,7 @@ describe('iD.presetIndex', function () {
             presets.build(presetData, false);
             entities.forEach(function (entity) {
                 var preset = presets.match(entity, graph);
-                expect(preset.addable()).to.be.false;
+                expect(preset.addable()).toBe(false);
             });
         });
     });

@@ -408,7 +408,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
-                expect(result).to.be.false;
+                expect(result).toBe(false);
             });
 
             it('returns false for unsquared triangle', function () {
@@ -424,7 +424,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
-                expect(result).to.be.false;
+                expect(result).toBe(false);
             });
 
             it('returns false for perfectly square shape with redundant nodes', function () {
@@ -441,7 +441,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
-                expect(result).to.be.false;
+                expect(result).toBe(false);
             });
 
             it('returns "not_squarish" for shape that can not be squared', function () {
@@ -482,7 +482,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
-                expect(result).to.be.false;
+                expect(result).toBe(false);
             });
 
         });
@@ -519,7 +519,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
-                expect(result).to.be.false;
+                expect(result).toBe(false);
             });
 
             it('returns false for unsquared 3-point path', function () {
@@ -535,7 +535,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
-                expect(result).to.be.false;
+                expect(result).toBe(false);
             });
 
             it('returns false for perfectly square shape with redundant nodes', function () {
@@ -552,7 +552,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
-                expect(result).to.be.false;
+                expect(result).toBe(false);
             });
 
             it('returns "not_squarish" for path that can not be squared', function () {
@@ -589,7 +589,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
-                expect(result).to.be.false;
+                expect(result).toBe(false);
             });
         });
 
@@ -624,7 +624,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection, 'b').disabled(graph);
-                expect(result).to.be.false;
+                expect(result).toBe(false);
             });
 
             it('returns false for a vertex in an unsquared 3-point path', function () {
@@ -640,7 +640,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection, 'b').disabled(graph);
-                expect(result).to.be.false;
+                expect(result).toBe(false);
             });
 
             it('returns "not_squarish" for vertex that can not be squared', function () {

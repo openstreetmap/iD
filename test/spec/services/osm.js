@@ -291,7 +291,7 @@ describe('iD.serviceOsm', function () {
             caches.tile.seen = {};
             caches.tile.rtree.clear();
 
-            expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.false;
+            expect(connection.isDataLoaded([-74.0444216, 40.6694299])).toBe(false);
 
             connection.loadTiles(context.projection);
 

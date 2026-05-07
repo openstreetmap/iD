@@ -250,7 +250,7 @@ describe('iD.presetPreset', function() {
     describe('#addable', function() {
         it('sets/gets addability of preset', function() {
             var preset = iD.presetPreset('test', {}, false);
-            expect(preset.addable()).to.be.false;
+            expect(preset.addable()).toBe(false);
             preset.addable(true);
             expect(preset.addable()).toBe(true);
         });

@@ -181,7 +181,7 @@ describe('iD.actionCircularize', function () {
             ]);
 
         expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.eql(3);
-        expect(graph.entity('-').isConvex(graph)).to.be.false;
+        expect(graph.entity('-').isConvex(graph)).toBe(false);
         expect(graph.entity('=').isConvex(graph)).toBe(true);
 
         graph = iD.actionCircularize('-', projection)(graph);
@@ -189,7 +189,7 @@ describe('iD.actionCircularize', function () {
         expect(isCircular('-', graph)).toBeTruthy();
         expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.be.gt(3);
         expect(graph.entity('-').isConvex(graph)).toBe(true);
-        expect(graph.entity('=').isConvex(graph)).to.be.false;
+        expect(graph.entity('=').isConvex(graph)).toBe(false);
     });
 
     it('adds new nodes on shared way wound in similar direction', function () {
@@ -215,7 +215,7 @@ describe('iD.actionCircularize', function () {
             ]);
 
         expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.eql(3);
-        expect(graph.entity('-').isConvex(graph)).to.be.false;
+        expect(graph.entity('-').isConvex(graph)).toBe(false);
         expect(graph.entity('=').isConvex(graph)).toBe(true);
 
         graph = iD.actionCircularize('-', projection)(graph);
@@ -223,7 +223,7 @@ describe('iD.actionCircularize', function () {
         expect(isCircular('-', graph)).toBeTruthy();
         expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.be.gt(3);
         expect(graph.entity('-').isConvex(graph)).toBe(true);
-        expect(graph.entity('=').isConvex(graph)).to.be.false;
+        expect(graph.entity('=').isConvex(graph)).toBe(false);
     });
 
     it('circularizes extremely concave ways with a key node on the wrong side of the centroid', function () {
@@ -247,7 +247,7 @@ describe('iD.actionCircularize', function () {
                 new iD.osmWay({id: '=', nodes: ['a', 'b', 'f', 'g', 'e', 'a']})
             ]);
 
-        expect(graph.entity('-').isConvex(graph)).to.be.false;
+        expect(graph.entity('-').isConvex(graph)).toBe(false);
 
         graph = iD.actionCircularize('-', projection)(graph);
 
@@ -280,7 +280,7 @@ describe('iD.actionCircularize', function () {
             new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
         ]);
         var result = iD.actionCircularize('-', projection).disabled(graph);
-        expect(result).to.be.false;
+        expect(result).toBe(false);
 
     });
 

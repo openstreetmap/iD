@@ -204,7 +204,7 @@ describe('maprules', function() {
             it('is false when two tag maps intersect', function() {
                 var a = { man_made: 'water_tap' };
                 var b = { amenity: 'school' };
-                expect(_ruleChecks.equals(a)(b)).to.be.false;
+                expect(_ruleChecks.equals(a)(b)).toBe(false);
             });
         });
         describe('#notEquals', function() {
@@ -216,7 +216,7 @@ describe('maprules', function() {
             it('is not true when two tag maps intersect', function() {
                 var a = { amenity: 'school' };
                 var b = { amenity: 'school', opening_hours: '9-5' };
-                expect(_ruleChecks.notEquals(a)(b)).to.be.false;
+                expect(_ruleChecks.notEquals(a)(b)).toBe(false);
             });
         });
         describe('absence', function() {
@@ -228,7 +228,7 @@ describe('maprules', function() {
             it('is false when tag map keys does include key in question', function() {
                 var key = 'amenity';
                 var map = { amenity: 'school' };
-                expect(_ruleChecks.absence(key)(map)).to.be.false;
+                expect(_ruleChecks.absence(key)(map)).toBe(false);
             });
         });
         describe('presence', function() {
@@ -240,7 +240,7 @@ describe('maprules', function() {
             it('is false when tag map keys do not include key in question', function() {
                 var key = 'amenity';
                 var map = { building: 'yes'};
-                expect(_ruleChecks.presence(key)(map)).to.be.false;
+                expect(_ruleChecks.presence(key)(map)).toBe(false);
             });
         });
         describe('greaterThan', function() {
@@ -252,7 +252,7 @@ describe('maprules', function() {
             it('is false when a tag value is less than or equal to the selector value', function() {
                 var selectorTags = { lanes: 5 };
                 [4, 5].forEach(function(val) {
-                    expect(_ruleChecks.greaterThan(selectorTags)({ lanes: val })).to.be.false;
+                    expect(_ruleChecks.greaterThan(selectorTags)({ lanes: val })).toBe(false);
                 });
             });
         });
@@ -266,7 +266,7 @@ describe('maprules', function() {
             it('is false when a tag value is less than the selector value', function () {
                 var selectorTags = { lanes: 5 };
                 var tags = { lanes: 4 };
-                expect(_ruleChecks.greaterThanEqual(selectorTags)(tags)).to.be.false;
+                expect(_ruleChecks.greaterThanEqual(selectorTags)(tags)).toBe(false);
             });
         });
         describe('lessThan', function() {
@@ -278,7 +278,7 @@ describe('maprules', function() {
             it('is false when a tag value is greater than or equal to the selector value', function() {
                 var selectorTags = { lanes: 5 };
                 [6, 7].forEach(function(val) {
-					expect(_ruleChecks.lessThan(selectorTags)({ lanes: val })).to.be.false;
+					expect(_ruleChecks.lessThan(selectorTags)({ lanes: val })).toBe(false);
 				});
             });
         });
@@ -292,7 +292,7 @@ describe('maprules', function() {
             it('is false when a tag value is greater than the selector value', function() {
                var selectorTags = { lanes: 5 };
                var tags = { lanes: 6 };
-               expect(_ruleChecks.lessThanEqual(selectorTags)(tags)).to.be.false;
+               expect(_ruleChecks.lessThanEqual(selectorTags)(tags)).toBe(false);
             });
         });
         describe('positiveRegex', function() {
@@ -303,7 +303,7 @@ describe('maprules', function() {
             });
             it('is false when tag value does not match negative regex', function() {
                 var tags = { amenity: 'school' };
-                expect(_ruleChecks.positiveRegex(positiveRegex)(tags)).to.be.false;
+                expect(_ruleChecks.positiveRegex(positiveRegex)(tags)).toBe(false);
             });
         });
         describe('negativeRegex', function() {
@@ -314,7 +314,7 @@ describe('maprules', function() {
             });
             it('is false when tag value matches negativeRegex', function() {
                 var tags = { bicycle: 'designated' };
-                expect(_ruleChecks.negativeRegex(negativeRegex)(tags)).to.be.false;
+                expect(_ruleChecks.negativeRegex(negativeRegex)(tags)).toBe(false);
             });
         });
     });
@@ -472,7 +472,7 @@ describe('maprules', function() {
                 iD.serviceMapRules.addRule(selector);
                 var rule = iD.serviceMapRules.validationRules()[0];
 
-                expect(rule.matches(entity)).to.be.false;
+                expect(rule.matches(entity)).toBe(false);
             });
         });
         describe('#findIssues', function() {

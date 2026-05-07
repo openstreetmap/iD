@@ -27,7 +27,7 @@ describe('iD.osmNote', function () {
                 id: 1,
                 loc: [5, 10]
             });
-            expect(note.isNew()).to.be.false;
+            expect(note.isNew()).toBe(false);
         });
     });
 

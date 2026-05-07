@@ -224,7 +224,7 @@ describe('iD.osmRelation', function () {
                     { role: 'to', id: 't', type: 'way' }
                 ]
             });
-            expect(r.hasFromViaTo()).to.be.false;
+            expect(r.hasFromViaTo()).toBe(false);
         });
 
         it('returns false if via missing', function () {
@@ -236,7 +236,7 @@ describe('iD.osmRelation', function () {
                     { role: 'to', id: 't', type: 'way' }
                 ]
             });
-            expect(r.hasFromViaTo()).to.be.false;
+            expect(r.hasFromViaTo()).toBe(false);
         });
 
         it('returns false if to missing', function () {
@@ -248,7 +248,7 @@ describe('iD.osmRelation', function () {
                     { role: 'via', id: 'v', type: 'node' }
                 ]
             });
-            expect(r.hasFromViaTo()).to.be.false;
+            expect(r.hasFromViaTo()).toBe(false);
         });
 
         it('returns false if all missing', function () {
@@ -260,7 +260,7 @@ describe('iD.osmRelation', function () {
                     { role: 'outer', id: 'o', type: 'way' }
                 ]
             });
-            expect(r.hasFromViaTo()).to.be.false;
+            expect(r.hasFromViaTo()).toBe(false);
         });
 
         it('returns true if the `intersection` role is used instead of `via` for destination signs', () => {
@@ -286,7 +286,7 @@ describe('iD.osmRelation', function () {
                     { role: 'to', id: 't', type: 'way' },
                 ]
             });
-            expect(r.hasFromViaTo()).to.be.false;
+            expect(r.hasFromViaTo()).toBe(false);
         });
     });
 
@@ -300,8 +300,8 @@ describe('iD.osmRelation', function () {
         });
 
         it('returns false otherwise', function () {
-            expect(new iD.osmRelation().isRestriction()).to.be.false;
-            expect(new iD.osmRelation({tags: {type: 'multipolygon'}}).isRestriction()).to.be.false;
+            expect(new iD.osmRelation().isRestriction()).toBe(false);
+            expect(new iD.osmRelation({tags: {type: 'multipolygon'}}).isRestriction()).toBe(false);
         });
     });
 
@@ -309,7 +309,7 @@ describe('iD.osmRelation', function () {
         it('not a restriction', function () {
             var r = new iD.osmRelation({ id: 'r', tags: { type: 'multipolygon' }});
             var graph = new iD.coreGraph([r]);
-            expect(r.isValidRestriction(graph)).to.be.false;
+            expect(r.isValidRestriction(graph)).toBe(false);
         });
 
         it('typical restriction (from way, via node, to way) is valid', function () {
@@ -347,7 +347,7 @@ describe('iD.osmRelation', function () {
             });
             var graph = new iD.coreGraph([f1, f2, v, t, r]);
 
-            expect(r.isValidRestriction(graph)).to.be.false;
+            expect(r.isValidRestriction(graph)).toBe(false);
         });
 
         it('multiple froms, no_entry restriction is valid', function () {
@@ -387,7 +387,7 @@ describe('iD.osmRelation', function () {
             });
             var graph = new iD.coreGraph([f, v, t1, t2, r]);
 
-            expect(r.isValidRestriction(graph)).to.be.false;
+            expect(r.isValidRestriction(graph)).toBe(false);
         });
 
         it('multiple tos, no_exit restriction is valid', function () {
@@ -427,7 +427,7 @@ describe('iD.osmRelation', function () {
             });
             var graph = new iD.coreGraph([f, v1, v2, t, r]);
 
-            expect(r.isValidRestriction(graph)).to.be.false;
+            expect(r.isValidRestriction(graph)).toBe(false);
         });
 
         it('multiple vias, with all as way is valid', function () {

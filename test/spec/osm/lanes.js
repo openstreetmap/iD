@@ -203,7 +203,7 @@ describe('iD.Lanes', function() {
             expect(new iD.osmWay({tags: { highway: 'residential', oneway: 'yes' }}).lanes().metadata.oneway, 'residential lanes')
                 .toBe(true);
             expect(new iD.osmWay({tags: { highway: 'residential', oneway: 'no' }}).lanes().metadata.oneway, 'residential lanes')
-                .to.be.false;
+                .toBe(false);
         });
     });
 

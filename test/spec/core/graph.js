@@ -30,7 +30,7 @@ describe('iD.coreGraph', function() {
         });
 
         it('remains mutable if passed true as second argument', function () {
-            expect(new iD.coreGraph([], true).frozen).to.be.false;
+            expect(new iD.coreGraph([], true).frozen).toBe(false);
         });
     });
 
@@ -123,7 +123,7 @@ describe('iD.coreGraph', function() {
             graph.rebase([w2], [graph]);
 
             expect(graph.parentWays(n)).to.eql([w1, w2]);
-            expect(graph._parentWays.hasOwnProperty('n')).to.be.false;
+            expect(graph._parentWays.hasOwnProperty('n')).toBe(false);
         });
 
         it('avoids adding duplicate parentWays', function () {
@@ -194,7 +194,7 @@ describe('iD.coreGraph', function() {
             graph.rebase([r2], [graph]);
 
             expect(graph.parentRelations(n)).to.eql([r1, r2]);
-            expect(graph._parentRels.hasOwnProperty('n')).to.be.false;
+            expect(graph._parentRels.hasOwnProperty('n')).toBe(false);
         });
 
         it('avoids re-adding a modified relation as a parent relation', function() {

@@ -579,7 +579,7 @@ describe('iD.rendererFeatures', function() {
             expect(features.isHidden(outer, graph, outer.geometry(graph))).toBe(true);     // #2548
             expect(features.isHidden(inner1, graph, inner1.geometry(graph))).toBe(true);   // #2548
             expect(features.isHidden(inner2, graph, inner2.geometry(graph))).toBe(true);   // #2548
-            expect(features.isHidden(inner3, graph, inner3.geometry(graph))).to.be.false;  // #2887
+            expect(features.isHidden(inner3, graph, inner3.geometry(graph))).toBe(false);  // #2887
         });
 
         it('hides only versioned entities', function() {
@@ -594,7 +594,7 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
 
             expect(features.isHidden(a, graph, ageo)).toBe(true);
-            expect(features.isHidden(b, graph, bgeo)).to.be.false;
+            expect(features.isHidden(b, graph, bgeo)).toBe(false);
         });
 
         it('#forceVisible', function() {
@@ -607,7 +607,7 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
             features.forceVisible(['a']);
 
-            expect(features.isHidden(a, graph, ageo)).to.be.false;
+            expect(features.isHidden(a, graph, ageo)).toBe(false);
         });
 
         it('auto-hides features', function() {
