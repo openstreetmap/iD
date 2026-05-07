@@ -750,14 +750,6 @@ export default {
 
     line2
       .append('a')
-      .attr('class', 'image-view-link')
-      .attr('target', '_blank')
-      .attr('href', 'https://www.bing.com/maps?cp=' + d.loc[1] + '~' + d.loc[0] +
-        '&lvl=17&dir=' + d.ca + '&style=x&v=2&sV=1')
-      .call(t.append('streetside.view_on_bing'));
-
-    line2
-      .append('a')
       .attr('class', 'image-report-link')
       .attr('target', '_blank')
       .attr('href', 'https://www.bing.com/maps/privacyreport/streetsideprivacyreport?bubbleid=' +
