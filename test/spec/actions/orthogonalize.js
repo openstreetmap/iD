@@ -313,7 +313,7 @@ describe('iD.actionOrthogonalize', function () {
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
             expect(diff.changes().a).to.be.undefined;
-            expect(diff.changes().b).to.be.not.undefined;
+            expect(diff.changes().b).toBeDefined();
             expect(diff.changes().c).to.be.undefined;
             expect(diff.changes().d).to.be.undefined;
         });
@@ -332,7 +332,7 @@ describe('iD.actionOrthogonalize', function () {
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
             expect(diff.changes().a).to.be.undefined;
-            expect(diff.changes().b).to.be.not.undefined;
+            expect(diff.changes().b).toBeDefined();
             expect(diff.changes().c).to.be.undefined;
         });
 
@@ -350,7 +350,7 @@ describe('iD.actionOrthogonalize', function () {
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
             expect(diff.changes().a).to.be.undefined;
-            expect(diff.changes().b).to.be.not.undefined;
+            expect(diff.changes().b).toBeDefined();
             expect(diff.changes().c).to.be.undefined;
             expect(diff.changes().d).to.be.undefined;
         });
@@ -369,7 +369,7 @@ describe('iD.actionOrthogonalize', function () {
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
             expect(diff.changes().a).to.be.undefined;
-            expect(diff.changes().b).to.be.not.undefined;
+            expect(diff.changes().b).toBeDefined();
             expect(diff.changes().c).to.be.undefined;
         });
     });
