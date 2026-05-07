@@ -23,9 +23,9 @@ describe('iD.uiFieldAccess', function() {
     it('does not include "yes", "designated", "dismount" options for general access (#934), (#2213)', function() {
         var access = iD.uiFieldAccess(field, context);
         var options = access.options('access').map(function(v) { return v.value; });
-        expect(options).not.to.include('yes');
-        expect(options).not.to.include('designated');
-        expect(options).not.to.include('dismount');
+        expect(options).not.toContain('yes');
+        expect(options).not.toContain('designated');
+        expect(options).not.toContain('dismount');
     });
 
     it('does include a "dismount" option for bicycles (#2726)', function() {
@@ -36,7 +36,7 @@ describe('iD.uiFieldAccess', function() {
         expect(options).to.include('dismount');
 
         options = access.options('foot').map(function(v) { return v.value; });
-        expect(options).not.to.include('dismount');
+        expect(options).not.toContain('dismount');
     });
 
     it('sets foot placeholder to "yes" for steps and pedestrian', function() {

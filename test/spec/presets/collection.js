@@ -134,7 +134,7 @@ describe('iD.presetCollection', function() {
                 searchable: false
             });
             var collection = iD.presetCollection([excluded, p.point]);
-            expect(collection.search('excluded', 'point').collection).not.to.include(excluded);
+            expect(collection.search('excluded', 'point').collection).not.toContain(excluded);
         });
 
         it('matches tag key=value', function() {
