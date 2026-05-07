@@ -71,7 +71,7 @@ describe('iD.utilKeybinding', function() {
             expect(spy).to.have.been.calledOnce;
 
             happen.keydown(document, {keyCode: 66});
-            expect(spy).to.have.been.calledTwice;
+            expect(spy).toHaveBeenCalledTimes(2);
         });
 
         it('does not dispatch when focus is in input elements by default', function () {
