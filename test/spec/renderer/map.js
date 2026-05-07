@@ -167,43 +167,42 @@ describe('iD.Map', function() {
             return window.getComputedStyle(selection.node()).cursor;
         }
 
-        const specify = it;
-        specify('points use select-point cursor in browse and select modes', function() {
+        test('points use select-point cursor in browse and select modes', function() {
             mode.attr('class', 'ideditor mode-browse');
             expect(cursor(point)).to.match(/cursor\/select-point/);
             mode.attr('class', 'ideditor mode-select');
             expect(cursor(point)).to.match(/cursor\/select-point/);
         });
 
-        specify('vertices use select-vertex cursor in browse and select modes', function() {
+        test('vertices use select-vertex cursor in browse and select modes', function() {
             mode.attr('class', 'ideditor mode-browse');
             expect(cursor(vertex)).to.match(/cursor\/select-vertex/);
             mode.attr('class', 'ideditor mode-select');
             expect(cursor(vertex)).to.match(/cursor\/select-vertex/);
         });
 
-        specify('lines use select-line cursor in browse and select modes', function() {
+        test('lines use select-line cursor in browse and select modes', function() {
             mode.attr('class', 'ideditor mode-browse');
             expect(cursor(line)).to.match(/cursor\/select-line/);
             mode.attr('class', 'ideditor mode-select');
             expect(cursor(line)).to.match(/cursor\/select-line/);
         });
 
-        specify('areas use select-area cursor in browse and select modes', function() {
+        test('areas use select-area cursor in browse and select modes', function() {
             mode.attr('class', 'ideditor mode-browse');
             expect(cursor(area)).to.match(/cursor\/select-area/);
             mode.attr('class', 'ideditor mode-select');
             expect(cursor(area)).to.match(/cursor\/select-area/);
         });
 
-        specify('midpoints use select-split cursor in browse and select modes', function() {
+        test('midpoints use select-split cursor in browse and select modes', function() {
             mode.attr('class', 'ideditor mode-browse');
             expect(cursor(midpoint)).to.match(/cursor\/select-split/);
             mode.attr('class', 'ideditor mode-select');
             expect(cursor(midpoint)).to.match(/cursor\/select-split/);
         });
 
-        specify('features use select-add cursor for adding to a selection', function() {
+        test('features use select-add cursor for adding to a selection', function() {
             mode.attr('class', 'ideditor mode-select');
             behavior.attr('class', 'behavior-multiselect');
             expect(cursor(point)).to.match(/cursor\/select-add/);
@@ -212,7 +211,7 @@ describe('iD.Map', function() {
             expect(cursor(area)).to.match(/cursor\/select-add/);
         });
 
-        specify('features use select-remove cursor for removing from a selection', function() {
+        test('features use select-remove cursor for removing from a selection', function() {
             mode.attr('class', 'ideditor mode-select');
             behavior.attr('class', 'behavior-multiselect');
             point.classed('selected', true);
@@ -225,7 +224,7 @@ describe('iD.Map', function() {
             expect(cursor(area)).to.match(/cursor\/select-remove/);
         });
 
-        specify('targeted ways use draw-connect-line cursor in draw modes', function() {
+        test('targeted ways use draw-connect-line cursor in draw modes', function() {
             behavior.attr('class', 'behavior-hover');
             line.classed('target', true);
             area.classed('target', true);
@@ -246,7 +245,7 @@ describe('iD.Map', function() {
             expect(cursor(area)).to.match(/cursor\/draw-connect-line/);
         });
 
-        specify('targeted vertices use draw-connect-vertex cursor in draw modes', function() {
+        test('targeted vertices use draw-connect-vertex cursor in draw modes', function() {
             behavior.attr('class', 'behavior-hover');
             vertex.classed('target', true);
             mode.attr('class', 'ideditor mode-draw-line');

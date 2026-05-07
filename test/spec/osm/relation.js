@@ -615,8 +615,7 @@ describe('iD.osmRelation', function () {
     });
 
     describe('#multipolygon', function () {
-        const specify = it;
-        specify('single polygon consisting of a single way', function () {
+        test('single polygon consisting of a single way', function () {
             var a = new iD.osmNode({loc: [1, 1]});
             var b = new iD.osmNode({loc: [3, 3]});
             var c = new iD.osmNode({loc: [2, 2]});
@@ -627,7 +626,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
-        specify('single polygon consisting of multiple ways', function () {
+        test('single polygon consisting of multiple ways', function () {
             var a = new iD.osmNode({loc: [1, 1]});
             var b = new iD.osmNode({loc: [3, 3]});
             var c = new iD.osmNode({loc: [2, 2]});
@@ -639,7 +638,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
-        specify('single polygon consisting of multiple ways, one needing reversal', function () {
+        test('single polygon consisting of multiple ways, one needing reversal', function () {
             var a  = new iD.osmNode({loc: [1, 1]});
             var b  = new iD.osmNode({loc: [3, 3]});
             var c  = new iD.osmNode({loc: [2, 2]});
@@ -651,7 +650,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
-        specify('multiple polygons consisting of single ways', function () {
+        test('multiple polygons consisting of single ways', function () {
             var a  = new iD.osmNode({loc: [1, 1]});
             var b  = new iD.osmNode({loc: [3, 3]});
             var c  = new iD.osmNode({loc: [2, 2]});
@@ -666,7 +665,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]], [[d.loc, e.loc, f.loc, d.loc]]]);
         });
 
-        specify('invalid geometry: unclosed ring consisting of a single way', function () {
+        test('invalid geometry: unclosed ring consisting of a single way', function () {
             var a = new iD.osmNode({loc: [1, 1]});
             var b = new iD.osmNode({loc: [3, 3]});
             var c = new iD.osmNode({loc: [2, 2]});
@@ -677,7 +676,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
-        specify('invalid geometry: unclosed ring consisting of multiple ways', function () {
+        test('invalid geometry: unclosed ring consisting of multiple ways', function () {
             var a  = new iD.osmNode({loc: [1, 1]});
             var b  = new iD.osmNode({loc: [3, 3]});
             var c  = new iD.osmNode({loc: [2, 2]});
@@ -689,7 +688,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
-        specify('invalid geometry: unclosed ring consisting of multiple ways, alternate order', function () {
+        test('invalid geometry: unclosed ring consisting of multiple ways, alternate order', function () {
             var a  = new iD.osmNode({loc: [1, 1]});
             var b  = new iD.osmNode({loc: [2, 2]});
             var c  = new iD.osmNode({loc: [3, 3]});
@@ -702,7 +701,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(g)).to.eql([[[d.loc, c.loc, b.loc, a.loc, d.loc]]]);
         });
 
-        specify('invalid geometry: unclosed ring consisting of multiple ways, one needing reversal', function () {
+        test('invalid geometry: unclosed ring consisting of multiple ways, one needing reversal', function () {
             var a  = new iD.osmNode({loc: [1, 1]});
             var b  = new iD.osmNode({loc: [2, 2]});
             var c  = new iD.osmNode({loc: [3, 3]});
@@ -715,7 +714,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(g)).to.eql([[[a.loc, d.loc, c.loc, b.loc, a.loc]]]);
         });
 
-        specify('invalid geometry: unclosed ring consisting of multiple ways, one needing reversal, alternate order', function () {
+        test('invalid geometry: unclosed ring consisting of multiple ways, one needing reversal, alternate order', function () {
             var a  = new iD.osmNode({loc: [1, 1]});
             var b  = new iD.osmNode({loc: [2, 2]});
             var c  = new iD.osmNode({loc: [3, 3]});
@@ -728,7 +727,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(g)).to.eql([[[d.loc, c.loc, b.loc, a.loc, d.loc]]]);
         });
 
-        specify('single polygon with single single-way inner', function () {
+        test('single polygon with single single-way inner', function () {
             var a = new iD.osmNode({loc: [0, 0]});
             var b = new iD.osmNode({loc: [0, 1]});
             var c = new iD.osmNode({loc: [1, 0]});
@@ -746,7 +745,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc]]]);
         });
 
-        specify('single polygon with single multi-way inner', function () {
+        test('single polygon with single multi-way inner', function () {
             var a = new iD.osmNode({loc: [0, 0]});
             var b = new iD.osmNode({loc: [0, 1]});
             var c = new iD.osmNode({loc: [1, 0]});
@@ -766,7 +765,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(graph)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc]]]);
         });
 
-        specify('single polygon with multiple single-way inners', function () {
+        test('single polygon with multiple single-way inners', function () {
             var a = new iD.osmNode({loc: [0, 0]});
             var b = new iD.osmNode({loc: [0, 1]});
             var c = new iD.osmNode({loc: [1, 0]});
@@ -789,7 +788,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(graph)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc], [g.loc, h.loc, i.loc, g.loc]]]);
         });
 
-        specify('multiple polygons with single single-way inner', function () {
+        test('multiple polygons with single single-way inner', function () {
             var a = new iD.osmNode({loc: [0, 0]});
             var b = new iD.osmNode({loc: [0, 1]});
             var c = new iD.osmNode({loc: [1, 0]});
@@ -812,7 +811,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(graph)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc]], [[g.loc, h.loc, i.loc, g.loc]]]);
         });
 
-        specify('invalid geometry: unmatched inner', function () {
+        test('invalid geometry: unmatched inner', function () {
             var a = new iD.osmNode({loc: [1, 1]});
             var b = new iD.osmNode({loc: [2, 2]});
             var c = new iD.osmNode({loc: [3, 3]});
@@ -823,7 +822,7 @@ describe('iD.osmRelation', function () {
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
-        specify('incomplete relation', function () {
+        test('incomplete relation', function () {
             var a = new iD.osmNode({loc: [1, 1]});
             var b = new iD.osmNode({loc: [2, 2]});
             var c = new iD.osmNode({loc: [3, 3]});
@@ -837,15 +836,14 @@ describe('iD.osmRelation', function () {
     });
 
     describe('.creationOrder comparator', function () {
-        const specify = it;
-        specify('orders existing relations newest-first', function () {
+        it('orders existing relations newest-first', function () {
             var a = new iD.osmRelation({ id: 'r1' });
             var b = new iD.osmRelation({ id: 'r2' });
             expect(iD.osmRelation.creationOrder(a, b)).to.be.above(0);
             expect(iD.osmRelation.creationOrder(b, a)).to.be.below(0);
         });
 
-        specify('orders new relations newest-first', function () {
+        it('orders new relations newest-first', function () {
             var a = new iD.osmRelation({ id: 'r-1' });
             var b = new iD.osmRelation({ id: 'r-2' });
             expect(iD.osmRelation.creationOrder(a, b)).to.be.above(0);
