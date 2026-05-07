@@ -104,6 +104,7 @@
     "@types/sinon-chai": "^4.0.0",
     "@types/which-polygon": "^2.2.5",
     "@vitest/coverage-v8": "^4.1.4",
+    "@vitest/eslint-plugin": "^1.6.16",
     "autoprefixer": "^10.4.21",
     "browserslist": "^4.27.0",
     "browserslist-to-esbuild": "^2.1.1",
