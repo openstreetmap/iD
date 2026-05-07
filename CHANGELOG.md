@@ -51,12 +51,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 
 # 2.40.0
-##### 2026-04-07
+##### 2026-05-07
 
 #### :sparkles: Usability & Accessibility
 * Render shared bicycle/foot paths with a dedicated colour ([#10256], thanks [@k-yle])
 * Expand input element of multi-combo fields while typing to fit content ([#12169])
-* Include presets when the when preset label is included in the search input ([#12159], thanks [@matkoniecz])
+* When searching presets, include presets when the preset label is included in the search input ([#12159], thanks [@matkoniecz])
 #### :scissors: Operations
 * Correctly split a way on all selected vertices when three or more nodes are selected ([#12120])
 * Create fewer points when circularizing small features (and vice versa): the number of vertices in the resulting circle is now dynamic between a 12 and 32 depending on the radius of the circle (instead of always resulting in 19 nodes) ([#12139])
