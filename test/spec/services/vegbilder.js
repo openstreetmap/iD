@@ -156,7 +156,7 @@ describe('iD.serviceVegbilder', function() {
     it('resets cache', async function() {
       vegbilder.cache().foo = 'bar';
       await vegbilder.reset();
-      expect(vegbilder.cache()).to.not.have.property('foo');
+      expect(vegbilder.cache()).not.toHaveProperty('foo');
     });
   });
 

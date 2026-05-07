@@ -49,7 +49,7 @@ describe('iD.serviceKartaview', function() {
             kartaview.selectImage(context, {key: 'baz'});
 
             kartaview.reset();
-            expect(kartaview.cache()).to.not.have.property('foo');
+            expect(kartaview.cache()).not.toHaveProperty('foo');
         });
     });
 

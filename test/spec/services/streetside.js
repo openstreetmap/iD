@@ -45,7 +45,7 @@ describe('iD.serviceStreetside', function() {
         it('resets cache', function() {
             streetside.cache().foo = 'bar';
             streetside.reset();
-            expect(streetside.cache()).to.not.have.property('foo');
+            expect(streetside.cache()).not.toHaveProperty('foo');
         });
     });
 

@@ -47,7 +47,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.selectImage(context, { key: 'baz', loc: [10,0] });
 
             mapillary.reset();
-            expect(mapillary.cache()).to.not.have.property('foo');
+            expect(mapillary.cache()).not.toHaveProperty('foo');
         });
     });
 

@@ -85,7 +85,7 @@ describe('iD.servicePanoramax', function() {
             panoramax.setActiveImage(context, {key: 'baz'});
 
             panoramax.reset();
-            expect(panoramax.cache()).to.not.have.property('foo');
+            expect(panoramax.cache()).not.toHaveProperty('foo');
         });
     });
 
