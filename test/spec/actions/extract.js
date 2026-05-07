@@ -69,7 +69,7 @@ describe('iD.actionExtract', function () {
 
                 var nodes = assertionGraph.entity('-').nodes;
                 // Confirm that the target is no longer "a"
-                expect(nodes[0]).not.to.eql('a');
+                expect(nodes[0]).not.toEqual('a');
                 // and that the tags are not present
                 expect(assertionGraph.entity(nodes[0]).tags).to.eql({});
             });
@@ -139,7 +139,7 @@ describe('iD.actionExtract', function () {
 
                 var nodes = assertionGraph.entity('-').nodes;
                 // Confirm that the target is no longer "a"
-                expect(nodes[1]).not.to.eql('b');
+                expect(nodes[1]).not.toEqual('b');
                 // and that the tags are not present
                 expect(assertionGraph.entity(nodes[1]).tags).to.eql({});
             });
@@ -231,9 +231,9 @@ describe('iD.actionExtract', function () {
 
                 var nodes = assertionGraph.entity('-').nodes;
                 // Confirm that the target is no longer "a"
-                expect(nodes[0]).not.to.eql('a');
+                expect(nodes[0]).not.toEqual('a');
                 // .. also in the tail position
-                expect(nodes[4]).not.to.eql('a');
+                expect(nodes[4]).not.toEqual('a');
                 // and that the tags are not present (already confirmed same node in position 0 & 4, so only need to check tags once)
                 expect(assertionGraph.entity(nodes[0]).tags).to.eql({});
             });
@@ -305,7 +305,7 @@ describe('iD.actionExtract', function () {
 
                 var nodes = assertionGraph.entity('-').nodes;
                 // Confirm that the target is no longer "a"
-                expect(nodes[1]).not.to.eql('b');
+                expect(nodes[1]).not.toEqual('b');
                 // and that the tags are not present
                 expect(assertionGraph.entity(nodes[1]).tags).to.eql({});
             });
@@ -413,7 +413,7 @@ describe('iD.actionExtract', function () {
 
             var nodes = assertionGraph.entity('-').nodes;
             // Confirm that the target is no longer "c"
-            expect(nodes[2]).not.to.eql('c');
+            expect(nodes[2]).not.toEqual('c');
             // and that the tags are not present
             expect(assertionGraph.entity(nodes[2]).tags).to.eql({});
             // Confirm that the second way's first node is the same
@@ -529,9 +529,9 @@ describe('iD.actionExtract', function () {
 
             var nodes = assertionGraph.entity('-').nodes;
             // Confirm that the target is no longer "c"
-            expect(nodes[0]).not.to.eql('c');
+            expect(nodes[0]).not.toEqual('c');
             // .. also in the tail position
-            expect(nodes[4]).not.to.eql('c');
+            expect(nodes[4]).not.toEqual('c');
             // and that the tags are not present (already confirmed same node in position 0 & 4, so only need to check tags once)
             expect(assertionGraph.entity(nodes[0]).tags).to.eql({});
             // Don't need to check for way 2 since we've already confirmed it is the same node
