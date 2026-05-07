@@ -28,8 +28,8 @@ describe('iD.uiSectionRawTagEditor', function() {
 
 
     it('creates input elements for each key-value pair', function () {
-        expect(element.selectAll('input[value=highway]')).not.to.be.empty;
-        expect(element.selectAll('input[value=residential]')).not.to.be.empty;
+        expect(element.selectAll('input[title=highway]').size()).toBeGreaterThan(0);
+        expect(element.selectAll('input[title=residential]').size()).toBeGreaterThan(0);
     });
 
     it('creates a pair of empty input elements if the entity has no tags', function () {
