@@ -52,11 +52,11 @@ describe('iD.validations.osm_api_limits', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('osm_api_limits');
-        expect(issue.subtype).to.eql('exceededMaxWayNodes');
-        expect(issue.severity).to.eql('error');
+        expect(issue.type).toEqual('osm_api_limits');
+        expect(issue.subtype).toEqual('exceededMaxWayNodes');
+        expect(issue.severity).toEqual('error');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
 
         var fixes = issue.fixes(context);
         expect(fixes).to.have.lengthOf(1);

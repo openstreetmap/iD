@@ -65,12 +65,12 @@ describe('iD.serviceOsm', function () {
 
     describe('#changesetURL', function() {
         it('provides a changeset url', function() {
-            expect(connection.changesetURL(2)).to.eql('https://www.openstreetmap.org/changeset/2');
+            expect(connection.changesetURL(2)).toEqual('https://www.openstreetmap.org/changeset/2');
         });
 
         it('allows secure connections', function() {
             connection.switch({ url: 'https://www.openstreetmap.org' });
-            expect(connection.changesetURL(2)).to.eql('https://www.openstreetmap.org/changeset/2');
+            expect(connection.changesetURL(2)).toEqual('https://www.openstreetmap.org/changeset/2');
         });
     });
 
@@ -78,53 +78,53 @@ describe('iD.serviceOsm', function () {
         it('provides a local changesets url', function() {
             var center = [-74.65, 40.65];
             var zoom = 17;
-            expect(connection.changesetsURL(center, zoom)).to.eql('https://www.openstreetmap.org/history#map=17/40.65000/-74.65000');
+            expect(connection.changesetsURL(center, zoom)).toEqual('https://www.openstreetmap.org/history#map=17/40.65000/-74.65000');
         });
     });
 
     describe('#entityURL', function() {
         it('provides an entity url for a node', function() {
             var e = new iD.osmNode({id: 'n1'});
-            expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/node/1');
+            expect(connection.entityURL(e)).toEqual('https://www.openstreetmap.org/node/1');
         });
 
         it('provides an entity url for a way', function() {
             var e = new iD.osmWay({id: 'w1'});
-            expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/way/1');
+            expect(connection.entityURL(e)).toEqual('https://www.openstreetmap.org/way/1');
         });
 
         it('provides an entity url for a relation', function() {
             var e = new iD.osmRelation({id: 'r1'});
-            expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/relation/1');
+            expect(connection.entityURL(e)).toEqual('https://www.openstreetmap.org/relation/1');
         });
     });
 
     describe('#historyURL', function() {
         it('provides a history url for a node', function() {
             var e = new iD.osmNode({id: 'n1'});
-            expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/node/1/history');
+            expect(connection.historyURL(e)).toEqual('https://www.openstreetmap.org/node/1/history');
         });
 
         it('provides a history url for a way', function() {
             var e = new iD.osmWay({id: 'w1'});
-            expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/way/1/history');
+            expect(connection.historyURL(e)).toEqual('https://www.openstreetmap.org/way/1/history');
         });
 
         it('provides a history url for a relation', function() {
             var e = new iD.osmRelation({id: 'r1'});
-            expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/relation/1/history');
+            expect(connection.historyURL(e)).toEqual('https://www.openstreetmap.org/relation/1/history');
         });
     });
 
     describe('#userURL', function() {
         it('provides a user url', function() {
-            expect(connection.userURL('bob')).to.eql('https://www.openstreetmap.org/user/bob');
+            expect(connection.userURL('bob')).toEqual('https://www.openstreetmap.org/user/bob');
         });
     });
 
     describe('#reset', function() {
         it('resets the connection', function() {
-            expect(connection.reset()).to.eql(connection);
+            expect(connection.reset()).toEqual(connection);
         });
     });
 
@@ -162,7 +162,7 @@ describe('iD.serviceOsm', function () {
             });
 
             const payload = await promisify(connection.loadFromAPI).call(connection, path);
-            expect(typeof payload).to.eql('object');
+            expect(typeof payload).toEqual('object');
         });
 
         it('dispatches change event if 509 Bandwidth Limit Exceeded', async () => {
@@ -220,7 +220,7 @@ describe('iD.serviceOsm', function () {
             });
 
             const payload = await promisify(connection.loadFromAPI).call(connection, path);
-            expect(typeof payload).to.eql('object');
+            expect(typeof payload).toEqual('object');
             expect(payload).toHaveLength(0);
         });
 
@@ -238,8 +238,8 @@ describe('iD.serviceOsm', function () {
 
             await promisify(connection.loadFromAPI).call(connection, path);
 
-            expect(fetchMock.calls().length).to.eql(1);
-            expect(fetchMock.calls()[0][0]).to.eql('https://api.openstreetmap.org' + path);
+            expect(fetchMock.calls().length).toEqual(1);
+            expect(fetchMock.calls()[0][0]).toEqual('https://api.openstreetmap.org' + path);
         });
     });
 
@@ -541,8 +541,8 @@ describe('iD.serviceOsm', function () {
                     tile: { loaded: { '1,2,16': true, '3,4,16': true } }
                 };
                 connection.caches(obj);
-                expect(connection.caches().tile.loaded['1,2,16']).to.eql(true);
-                expect(Object.keys(connection.caches().tile.loaded).length).to.eql(2);
+                expect(connection.caches().tile.loaded['1,2,16']).toEqual(true);
+                expect(Object.keys(connection.caches().tile.loaded).length).toEqual(2);
             });
 
             it('sets/gets a note', function () {
@@ -552,8 +552,8 @@ describe('iD.serviceOsm', function () {
                     note: { note: { 1: note, 2: note2 } }
                 };
                 connection.caches(obj);
-                expect(connection.caches().note.note[note.id]).to.eql(note);
-                expect(Object.keys(connection.caches().note.note).length).to.eql(2);
+                expect(connection.caches().note.note[note.id]).toEqual(note);
+                expect(Object.keys(connection.caches().note.note).length).toEqual(2);
             });
 
             it('sets/gets a user', function () {
@@ -563,8 +563,8 @@ describe('iD.serviceOsm', function () {
                     user: { user: { 1: user, 2: user2 } }
                 };
                 connection.caches(obj);
-                expect(connection.caches().user.user[user.id]).to.eql(user);
-                expect(Object.keys(connection.caches().user.user).length).to.eql(2);
+                expect(connection.caches().user.user[user.id]).toEqual(user);
+                expect(Object.keys(connection.caches().user.user).length).toEqual(2);
             });
         });
 
@@ -669,7 +669,7 @@ describe('iD.serviceOsm', function () {
             connection.replaceNote(note);
             connection.removeNote(note);
             var result = connection.getNote(-1);
-            expect(result).to.eql(undefined);
+            expect(result).toEqual(undefined);
         });
     });
 
@@ -678,12 +678,12 @@ describe('iD.serviceOsm', function () {
         it('returns a new note', function () {
             var note = iD.osmNote({ id: 2, loc: [0, 0], });
             var result = connection.replaceNote(note);
-            expect(result.id).to.eql(2);
-            expect(connection.caches().note.note[2]).to.eql(note);
+            expect(result.id).toEqual(2);
+            expect(connection.caches().note.note[2]).toEqual(note);
             var rtree = connection.caches().note.rtree;
             var result_rtree = rtree.search({ 'minX': -1, 'minY': -1, 'maxX': 1, 'maxY': 1 });
-            expect(result_rtree.length).to.eql(1);
-            expect(result_rtree[0].data).to.eql(note);
+            expect(result_rtree.length).toEqual(1);
+            expect(result_rtree[0].data).toEqual(note);
         });
 
         it('replaces a note', function () {
@@ -691,12 +691,12 @@ describe('iD.serviceOsm', function () {
             connection.replaceNote(note);
             note.status = 'closed';
             var result = connection.replaceNote(note);
-            expect(result.status).to.eql('closed');
+            expect(result.status).toEqual('closed');
 
             var rtree = connection.caches().note.rtree;
             var result_rtree = rtree.search({ 'minX': -1, 'minY': -1, 'maxX': 1, 'maxY': 1 });
-            expect(result_rtree.length).to.eql(1);
-            expect(result_rtree[0].data.status).to.eql('closed');
+            expect(result_rtree.length).toEqual(1);
+            expect(result_rtree[0].data.status).toEqual('closed');
         });
     });
 
@@ -723,7 +723,7 @@ describe('iD.serviceOsm', function () {
                 });
 
                 const val = await promisify(connection.status).call(connection);
-                expect(val).to.eql('online');
+                expect(val).toEqual('online');
             });
         });
 

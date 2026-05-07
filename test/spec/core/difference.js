@@ -5,7 +5,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph();
             var head = base.replace(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({n: {base: undefined, head: node}});
+            expect(diff.changes()).toEqual({n: {base: undefined, head: node}});
         });
 
         it('includes undone created entities', function () {
@@ -13,7 +13,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph();
             var head = base.replace(node);
             var diff = iD.coreDifference(head, base);
-            expect(diff.changes()).to.eql({n: {base: node, head: undefined}});
+            expect(diff.changes()).toEqual({n: {base: node, head: undefined}});
         });
 
         it('includes modified entities', function () {
@@ -22,7 +22,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([n1]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({n: {base: n1, head: n2}});
+            expect(diff.changes()).toEqual({n: {base: n1, head: n2}});
         });
 
         it('includes undone modified entities', function () {
@@ -31,7 +31,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([n1]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(head, base);
-            expect(diff.changes()).to.eql({n: {base: n2, head: n1}});
+            expect(diff.changes()).toEqual({n: {base: n2, head: n1}});
         });
 
         it('doesn\'t include updated but identical entities', function () {
@@ -40,7 +40,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([n1]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({});
+            expect(diff.changes()).toEqual({});
         });
 
         it('includes deleted entities', function () {
@@ -48,7 +48,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([node]);
             var head = base.remove(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({n: {base: node, head: undefined}});
+            expect(diff.changes()).toEqual({n: {base: node, head: undefined}});
         });
 
         it('includes undone deleted entities', function () {
@@ -56,7 +56,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([node]);
             var head = base.remove(node);
             var diff = iD.coreDifference(head, base);
-            expect(diff.changes()).to.eql({n: {base: undefined, head: node}});
+            expect(diff.changes()).toEqual({n: {base: undefined, head: node}});
         });
 
         it('doesn\'t include created entities that were subsequently deleted', function () {
@@ -64,7 +64,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph();
             var head = base.replace(node).remove(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({});
+            expect(diff.changes()).toEqual({});
         });
 
         it('doesn\'t include created entities that were subsequently reverted', function () {
@@ -72,7 +72,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph();
             var head = base.replace(node).revert('n-1');
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({});
+            expect(diff.changes()).toEqual({});
         });
 
         it('doesn\'t include modified entities that were subsequently reverted', function () {
@@ -81,7 +81,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([n1]);
             var head = base.replace(n2).revert('n');
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({});
+            expect(diff.changes()).toEqual({});
         });
 
         it('doesn\'t include deleted entities that were subsequently reverted', function () {
@@ -89,7 +89,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([node]);
             var head = base.remove(node).revert('n');
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({});
+            expect(diff.changes()).toEqual({});
         });
     });
 
@@ -99,7 +99,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph();
             var head = base.replace(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.extantIDs()).to.eql(['n']);
+            expect(diff.extantIDs()).toEqual(['n']);
         });
 
         it('includes the ids of modified entities', function () {
@@ -108,7 +108,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([n1]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.extantIDs()).to.eql(['n']);
+            expect(diff.extantIDs()).toEqual(['n']);
         });
 
         it('omits the ids of deleted entities', function () {
@@ -116,7 +116,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([node]);
             var head = base.remove(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.extantIDs()).to.eql([]);
+            expect(diff.extantIDs()).toEqual([]);
         });
 
         it('omits the ids of members of modified relations by default', function () {
@@ -131,7 +131,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([r1, w1, w2]);
             var head = base.replace(r2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.extantIDs()).to.eql(['r']);
+            expect(diff.extantIDs()).toEqual(['r']);
         });
 
         it('includes the ids of members of modified relations with option', function () {
@@ -146,7 +146,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([r1, w1, w2]);
             var head = base.replace(r2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.extantIDs(true)).to.eql(['r', 'w1', 'w2']);
+            expect(diff.extantIDs(true)).toEqual(['r', 'w1', 'w2']);
         });
     });
 
@@ -156,7 +156,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph();
             var head = base.replace(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.created()).to.eql([node]);
+            expect(diff.created()).toEqual([node]);
         });
     });
 
@@ -167,7 +167,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([n1]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.modified()).to.eql([n2]);
+            expect(diff.modified()).toEqual([n2]);
         });
     });
 
@@ -177,7 +177,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([node]);
             var head = base.remove(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.deleted()).to.eql([node]);
+            expect(diff.deleted()).toEqual([node]);
         });
     });
 
@@ -194,7 +194,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(way);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'created',
                 entity: way,
                 graph: head
@@ -206,7 +206,7 @@ describe('iD.coreDifference', function () {
             var head = base.remove(way);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'deleted',
                 entity: way,
                 graph: base
@@ -218,7 +218,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(way);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: way,
                 graph: head
@@ -230,7 +230,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: head.entity('-'),
                 graph: head
@@ -243,7 +243,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(vertex).replace(way);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: way,
                 graph: head
@@ -255,7 +255,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(way);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: way,
                 graph: head
@@ -268,7 +268,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(way).replace(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'created',
                 entity: way,
                 graph: head
@@ -285,7 +285,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(vertex).replace(way);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'created',
                 entity: way,
                 graph: head
@@ -297,7 +297,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: vertex,
                 graph: head
@@ -309,7 +309,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: head.entity('-'),
                 graph: head
@@ -325,7 +325,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: head.entity('-'),
                 graph: head
@@ -337,7 +337,7 @@ describe('iD.coreDifference', function () {
             var head = base.remove(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'deleted',
                 entity: vertex,
                 graph: base
@@ -350,7 +350,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(way).replace(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: way,
                 graph: head
@@ -385,7 +385,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([node]);
             var head = base.remove(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.complete()).to.eql({n: undefined});
+            expect(diff.complete()).toEqual({n: undefined});
         });
 
         it('includes nodes added to a way', function () {

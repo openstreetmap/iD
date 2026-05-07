@@ -40,7 +40,7 @@ describe('iD.uiFieldLocalized', function() {
         happen.click(selection.selectAll('.localized-add').node());
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({});
+            expect(tags).toEqual({});
         });
 
         iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'Deutsch');
@@ -55,7 +55,7 @@ describe('iD.uiFieldLocalized', function() {
         happen.click(selection.selectAll('.localized-add').node());
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({});
+            expect(tags).toEqual({});
         });
 
         iD.utilGetSetValue(selection.selectAll('.localized-value'), 'Value');
@@ -73,7 +73,7 @@ describe('iD.uiFieldLocalized', function() {
         happen.once(selection.selectAll('.localized-lang').node(), {type: 'change'});
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({'name:de': 'Value'});
+            expect(tags).toEqual({'name:de': 'Value'});
         });
 
         iD.utilGetSetValue(selection.selectAll('.localized-value'), 'Value');
@@ -90,7 +90,7 @@ describe('iD.uiFieldLocalized', function() {
         happen.once(selection.selectAll('.localized-value').node(), {type: 'change'});
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({'name:de': 'Value'});
+            expect(tags).toEqual({'name:de': 'Value'});
         });
 
         iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'Deutsch');
@@ -104,7 +104,7 @@ describe('iD.uiFieldLocalized', function() {
         localized.tags({'name:de': 'Value'});
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({
+            expect(tags).toEqual({
                 'name:de': undefined,
                 'name:en': 'Value'});
         });
@@ -130,7 +130,7 @@ describe('iD.uiFieldLocalized', function() {
         localized.tags({'name:de': 'Value'});
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({'name:de': undefined});
+            expect(tags).toEqual({'name:de': undefined});
         });
 
         iD.utilGetSetValue(selection.selectAll('.localized-lang'), '');
@@ -144,7 +144,7 @@ describe('iD.uiFieldLocalized', function() {
         localized.tags({'name:de': 'Value'});
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({'name:de': undefined});
+            expect(tags).toEqual({'name:de': undefined});
         });
 
         iD.utilGetSetValue(selection.selectAll('.localized-value'), '');
@@ -156,6 +156,6 @@ describe('iD.uiFieldLocalized', function() {
         localized.tags({'name:de': 'Value'});
         await setTimeout(20);
         selection.call(localized);
-        expect(selection.selectAll('.localized-value').attr('lang')).to.eql('de');
+        expect(selection.selectAll('.localized-value').attr('lang')).toEqual('de');
     });
 });

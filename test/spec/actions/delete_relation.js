@@ -12,7 +12,7 @@ describe('iD.actionDeleteRelation', function () {
             parent = new iD.osmRelation({members: [{ id: a.id }, { id: b.id }]}),
             action = iD.actionDeleteRelation(a.id),
             graph  = action(new iD.coreGraph([a, b, parent]));
-        expect(graph.entity(parent.id).members).to.eql([{ id: b.id }]);
+        expect(graph.entity(parent.id).members).toEqual([{ id: b.id }]);
     });
 
     it('deletes member nodes not referenced by another parent', function() {

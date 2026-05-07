@@ -36,9 +36,9 @@ describe('iD.coreValidator', function() {
         issues = validator.getIssues();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('missing_tag');
+        expect(issue.type).toEqual('missing_tag');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('removes validation issue when highway is no longer disconnected', async () => {

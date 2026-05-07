@@ -53,7 +53,7 @@ describe('iD.actionCopyEntities', function () {
         var created = diff.created();
 
         expect(created).to.have.length(5);
-        expect(action.copies().w1.nodes[1]).to.eql(action.copies().w2.nodes[0]);
+        expect(action.copies().w1.nodes[1]).toEqual(action.copies().w2.nodes[0]);
     });
 
     it('obtains source entities from an alternate graph', function () {

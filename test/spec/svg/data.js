@@ -100,7 +100,7 @@ describe('iD.svgData', function () {
         surface.call(render);
 
         var layers = surface.selectAll('g.layer-mapdata').nodes();
-        expect(layers.length).to.eql(1);
+        expect(layers.length).toEqual(1);
     });
 
     it('draws geojson', function () {
@@ -109,10 +109,10 @@ describe('iD.svgData', function () {
 
         var path;
         path = surface.selectAll('path.shadow');
-        expect(path.nodes().length).to.eql(1);
+        expect(path.nodes().length).toEqual(1);
         expect(path.attr('d')).to.match(/^M.*z$/);
         path = surface.selectAll('path.stroke');
-        expect(path.nodes().length).to.eql(1);
+        expect(path.nodes().length).toEqual(1);
         expect(path.attr('d')).to.match(/^M.*z$/);
     });
 
@@ -129,10 +129,10 @@ describe('iD.svgData', function () {
             surface.call(render);
             var path;
             path = surface.selectAll('path.shadow');
-            expect(path.nodes().length).to.eql(1);
+            expect(path.nodes().length).toEqual(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
             path = surface.selectAll('path.stroke');
-            expect(path.nodes().length).to.eql(1);
+            expect(path.nodes().length).toEqual(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
         });
 
@@ -148,10 +148,10 @@ describe('iD.svgData', function () {
             surface.call(render);
             var path;
             path = surface.selectAll('path.shadow');
-            expect(path.nodes().length).to.eql(1);
+            expect(path.nodes().length).toEqual(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
             path = surface.selectAll('path.stroke');
-            expect(path.nodes().length).to.eql(1);
+            expect(path.nodes().length).toEqual(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
         });
 
@@ -167,10 +167,10 @@ describe('iD.svgData', function () {
             surface.call(render);
             var path;
             path = surface.selectAll('path.shadow');
-            expect(path.nodes().length).to.eql(1);
+            expect(path.nodes().length).toEqual(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
             path = surface.selectAll('path.stroke');
-            expect(path.nodes().length).to.eql(1);
+            expect(path.nodes().length).toEqual(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
             expect(render.geojson().features[0].properties.osm_id).to.be.a('string');
             expect(render.geojson().features[0].properties.flag).to.be.a('string');
@@ -187,12 +187,12 @@ describe('iD.svgData', function () {
             surface.call(render);
 
             var label = surface.selectAll('text.label');
-            expect(label.nodes().length).to.eql(1);
-            expect(label.text()).to.eql('New Jersey');
+            expect(label.nodes().length).toEqual(1);
+            expect(label.text()).toEqual('New Jersey');
 
             var halo = surface.selectAll('text.label-halo');
-            expect(halo.nodes().length).to.eql(1);
-            expect(halo.text()).to.eql('New Jersey');
+            expect(halo.nodes().length).toEqual(1);
+            expect(halo.text()).toEqual('New Jersey');
         });
 
 

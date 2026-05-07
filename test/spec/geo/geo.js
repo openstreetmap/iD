@@ -2,7 +2,7 @@ describe('iD.geo - geography', function() {
 
     describe('geoLatToMeters', function() {
         it('0 degrees latitude is 0 meters', function() {
-            expect(iD.geoLatToMeters(0)).to.eql(0);
+            expect(iD.geoLatToMeters(0)).toEqual(0);
         });
         it('1 degree latitude is approx 111 km', function() {
             expect(iD.geoLatToMeters(1)).toBeCloseTo(110946, -1);
@@ -14,7 +14,7 @@ describe('iD.geo - geography', function() {
 
     describe('geoLonToMeters', function() {
         it('0 degrees longitude is 0 km', function() {
-            expect(iD.geoLonToMeters(0, 0)).to.eql(0);
+            expect(iD.geoLonToMeters(0, 0)).toEqual(0);
         });
         it('distance of 1 degree longitude varies with latitude', function() {
             expect(iD.geoLonToMeters(1,  0)).toBeCloseTo(111319, -1);
@@ -23,7 +23,7 @@ describe('iD.geo - geography', function() {
             expect(iD.geoLonToMeters(1, 45)).toBeCloseTo(78714, -1);
             expect(iD.geoLonToMeters(1, 60)).toBeCloseTo(55659, -1);
             expect(iD.geoLonToMeters(1, 75)).toBeCloseTo(28811, -1);
-            expect(iD.geoLonToMeters(1, 90)).to.eql(0);
+            expect(iD.geoLonToMeters(1, 90)).toEqual(0);
         });
         it('distance of -1 degree longitude varies with latitude', function() {
             expect(iD.geoLonToMeters(-1,  -0)).toBeCloseTo(-111319, -1);
@@ -32,13 +32,13 @@ describe('iD.geo - geography', function() {
             expect(iD.geoLonToMeters(-1, -45)).toBeCloseTo(-78714, -1);
             expect(iD.geoLonToMeters(-1, -60)).toBeCloseTo(-55659, -1);
             expect(iD.geoLonToMeters(-1, -75)).toBeCloseTo(-28811, -1);
-            expect(iD.geoLonToMeters(-1, -90)).to.eql(0);
+            expect(iD.geoLonToMeters(-1, -90)).toEqual(0);
         });
     });
 
     describe('geoMetersToLat', function() {
         it('0 meters is 0 degrees latitude', function() {
-            expect(iD.geoMetersToLat(0)).to.eql(0);
+            expect(iD.geoMetersToLat(0)).toEqual(0);
         });
         it('111 km is approx 1 degree latitude', function() {
             expect(iD.geoMetersToLat(110946)).toBeCloseTo(1, 4);
@@ -50,7 +50,7 @@ describe('iD.geo - geography', function() {
 
     describe('geoMetersToLon', function() {
         it('0 meters is 0 degrees longitude', function() {
-            expect(iD.geoMetersToLon(0, 0)).to.eql(0);
+            expect(iD.geoMetersToLon(0, 0)).toEqual(0);
         });
         it('distance of 1 degree longitude varies with latitude', function() {
             expect(iD.geoMetersToLon(111319,  0)).toBeCloseTo(1, 4);
@@ -59,7 +59,7 @@ describe('iD.geo - geography', function() {
             expect(iD.geoMetersToLon(78714,  45)).toBeCloseTo(1, 4);
             expect(iD.geoMetersToLon(55659,  60)).toBeCloseTo(1, 4);
             expect(iD.geoMetersToLon(28811,  75)).toBeCloseTo(1, 4);
-            expect(iD.geoMetersToLon(1, 90)).to.eql(0);
+            expect(iD.geoMetersToLon(1, 90)).toEqual(0);
         });
         it('distance of -1 degree longitude varies with latitude', function() {
             expect(iD.geoMetersToLon(-111319,  -0)).toBeCloseTo(-1, 4);
@@ -68,15 +68,15 @@ describe('iD.geo - geography', function() {
             expect(iD.geoMetersToLon(-78714,  -45)).toBeCloseTo(-1, 4);
             expect(iD.geoMetersToLon(-55659,  -60)).toBeCloseTo(-1, 4);
             expect(iD.geoMetersToLon(-28811,  -75)).toBeCloseTo(-1, 4);
-            expect(iD.geoMetersToLon(-1, -90)).to.eql(0);
+            expect(iD.geoMetersToLon(-1, -90)).toEqual(0);
         });
     });
 
     describe('geoOffsetToMeters', function() {
         it('[0, 0] pixel offset is [0, -0] meter offset', function() {
             var meters = iD.geoOffsetToMeters([0, 0]);
-            expect(meters[0]).to.eql(0);
-            expect(meters[1]).to.eql(-0);
+            expect(meters[0]).toEqual(0);
+            expect(meters[1]).toEqual(-0);
         });
         it('[0.00064, -0.00064] pixel offset is roughly [100, 100] meter offset', function() {
             var meters = iD.geoOffsetToMeters([0.00064, -0.00064]);
@@ -88,8 +88,8 @@ describe('iD.geo - geography', function() {
     describe('geoMetersToOffset', function() {
         it('[0, 0] meter offset is [0, -0] pixel offset', function() {
             var offset = iD.geoMetersToOffset([0, 0]);
-            expect(offset[0]).to.eql(0);
-            expect(offset[1]).to.eql(-0);
+            expect(offset[0]).toEqual(0);
+            expect(offset[1]).toEqual(-0);
         });
         it('[100, 100] meter offset is roughly [0.00064, -0.00064] pixel offset', function() {
             var offset = iD.geoMetersToOffset([100, 100]);
@@ -102,7 +102,7 @@ describe('iD.geo - geography', function() {
         it('distance between two same points is zero', function() {
             var a = [0, 0];
             var b = [0, 0];
-            expect(iD.geoSphericalDistance(a, b)).to.eql(0);
+            expect(iD.geoSphericalDistance(a, b)).toEqual(0);
         });
         it('a straight 1 degree line at the equator is approximately 111 km', function() {
             var a = [0, 0];

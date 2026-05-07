@@ -38,7 +38,7 @@ describe('iD.osmNote', function () {
                 loc: [5, 5]
             });
             note = note.move([10, 10]);
-            expect(note.loc).to.eql([10, 10]);
+            expect(note.loc).toEqual([10, 10]);
         });
     });
 

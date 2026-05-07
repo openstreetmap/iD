@@ -8,7 +8,7 @@ describe('iD.coreTree', function() {
             graph.rebase([node], [graph]);
             tree.rebase([node]);
 
-            expect(tree.intersects(iD.geoExtent([0, 0], [2, 2]), graph)).to.eql([node]);
+            expect(tree.intersects(iD.geoExtent([0, 0], [2, 2]), graph)).toEqual([node]);
         });
 
         it('is idempotent', function() {
@@ -19,11 +19,11 @@ describe('iD.coreTree', function() {
 
             graph.rebase([node], [graph]);
             tree.rebase([node]);
-            expect(tree.intersects(extent, graph)).to.eql([node]);
+            expect(tree.intersects(extent, graph)).toEqual([node]);
 
             graph.rebase([node], [graph]);
             tree.rebase([node]);
-            expect(tree.intersects(extent, graph)).to.eql([node]);
+            expect(tree.intersects(extent, graph)).toEqual([node]);
         });
 
         it('does not insert if entity has a modified version', function() {
@@ -33,13 +33,13 @@ describe('iD.coreTree', function() {
                 node_ = node.update({loc: [10, 10]}),
                 g = graph.replace(node_);
 
-            expect(tree.intersects(iD.geoExtent([9, 9], [11, 11]), g)).to.eql([node_]);
+            expect(tree.intersects(iD.geoExtent([9, 9], [11, 11]), g)).toEqual([node_]);
 
             graph.rebase([node], [graph]);
             tree.rebase([node]);
 
-            expect(tree.intersects(iD.geoExtent([0, 0], [2, 2]), g)).to.eql([]);
-            expect(tree.intersects(iD.geoExtent([0, 0], [11, 11]), g)).to.eql([node_]);
+            expect(tree.intersects(iD.geoExtent([0, 0], [2, 2]), g)).toEqual([]);
+            expect(tree.intersects(iD.geoExtent([0, 0], [11, 11]), g)).toEqual([node_]);
         });
 
         it('does not error on self-referencing relations', function() {
@@ -54,7 +54,7 @@ describe('iD.coreTree', function() {
             graph.rebase([node, relation], [graph]);
             tree.rebase([relation]);
 
-            expect(tree.intersects(iD.geoExtent([0, 0], [2, 2]), graph)).to.eql([relation]);
+            expect(tree.intersects(iD.geoExtent([0, 0], [2, 2]), graph)).toEqual([relation]);
         });
 
         it('adjusts entities that are force-rebased', function() {
@@ -69,7 +69,7 @@ describe('iD.coreTree', function() {
             graph.rebase([node], [graph], true);
             tree.rebase([node], true);
 
-            expect(tree.intersects(iD.geoExtent([0, 0], [2, 2]), graph)).to.eql([]);
+            expect(tree.intersects(iD.geoExtent([0, 0], [2, 2]), graph)).toEqual([]);
         });
     });
 
@@ -82,7 +82,7 @@ describe('iD.coreTree', function() {
                 extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph = graph.replace(n1).replace(n2);
-            expect(tree.intersects(extent, graph)).to.eql([n1]);
+            expect(tree.intersects(extent, graph)).toEqual([n1]);
         });
 
         it('includes intersecting relations after incomplete members are loaded', function() {
@@ -95,11 +95,11 @@ describe('iD.coreTree', function() {
 
             graph.rebase([relation, n1], [graph]);
             tree.rebase([relation, n1]);
-            expect(tree.intersects(extent, graph)).to.eql([]);
+            expect(tree.intersects(extent, graph)).toEqual([]);
 
             graph.rebase([n2], [graph]);
             tree.rebase([n2]);
-            expect(tree.intersects(extent, graph)).to.eql([n2, relation]);
+            expect(tree.intersects(extent, graph)).toEqual([n2, relation]);
         });
 
         // This happens when local storage includes a changed way but not its nodes.
@@ -111,11 +111,11 @@ describe('iD.coreTree', function() {
                 graph = base.replace(way),
                 extent = iD.geoExtent([0, 0], [1, 1]);
 
-            expect(tree.intersects(extent, graph)).to.eql([]);
+            expect(tree.intersects(extent, graph)).toEqual([]);
 
             base.rebase([node], [base, graph]);
             tree.rebase([node]);
-            expect(tree.intersects(extent, graph)).to.eql([node, way]);
+            expect(tree.intersects(extent, graph)).toEqual([node, way]);
         });
 
         it('adjusts parent ways when a member node is moved', function() {
@@ -126,10 +126,10 @@ describe('iD.coreTree', function() {
                 extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph = graph.replace(node).replace(way);
-            expect(tree.intersects(extent, graph)).to.eql([node, way]);
+            expect(tree.intersects(extent, graph)).toEqual([node, way]);
 
             graph = graph.replace(node.move([3, 3]));
-            expect(tree.intersects(extent, graph)).to.eql([]);
+            expect(tree.intersects(extent, graph)).toEqual([]);
         });
 
         it('adjusts parent relations when a member node is moved', function() {
@@ -140,10 +140,10 @@ describe('iD.coreTree', function() {
                 extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph = graph.replace(node).replace(relation);
-            expect(tree.intersects(extent, graph)).to.eql([node, relation]);
+            expect(tree.intersects(extent, graph)).toEqual([node, relation]);
 
             graph = graph.replace(node.move([3, 3]));
-            expect(tree.intersects(extent, graph)).to.eql([]);
+            expect(tree.intersects(extent, graph)).toEqual([]);
         });
 
         it('adjusts all parent relations when a member node is moved', function() {
@@ -155,10 +155,10 @@ describe('iD.coreTree', function() {
                 extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph = graph.replace(node).replace(relation1).replace(relation2);
-            expect(tree.intersects(extent, graph)).to.eql([node, relation1, relation2]);
+            expect(tree.intersects(extent, graph)).toEqual([node, relation1, relation2]);
 
             graph = graph.replace(node.move([3, 3]));
-            expect(tree.intersects(extent, graph)).to.eql([]);
+            expect(tree.intersects(extent, graph)).toEqual([]);
         });
 
         it('adjusts parent relations of parent ways when a member node is moved', function() {
@@ -170,10 +170,10 @@ describe('iD.coreTree', function() {
                 extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph = graph.replace(node).replace(way).replace(relation);
-            expect(tree.intersects(extent, graph)).to.eql([node, way, relation]);
+            expect(tree.intersects(extent, graph)).toEqual([node, way, relation]);
 
             graph = graph.replace(node.move([3, 3]));
-            expect(tree.intersects(extent, graph)).to.eql([]);
+            expect(tree.intersects(extent, graph)).toEqual([]);
         });
 
         it('adjusts parent ways when a member node is removed', function() {
@@ -185,10 +185,10 @@ describe('iD.coreTree', function() {
                 extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph = graph.replace(n1).replace(n2).replace(way);
-            expect(tree.intersects(extent, graph)).to.eql([n1, way]);
+            expect(tree.intersects(extent, graph)).toEqual([n1, way]);
 
             graph = graph.replace(way.removeNode('n1'));
-            expect(tree.intersects(extent, graph)).to.eql([n1]);
+            expect(tree.intersects(extent, graph)).toEqual([n1]);
         });
 
         it('don\'t include parent way multiple times when multiple child nodes are moved', function() {
@@ -201,7 +201,7 @@ describe('iD.coreTree', function() {
                 extent = iD.geoExtent([0, 0], [4, 4]);
 
             graph = graph.replace(n1).replace(n2).replace(way);
-            expect(tree.intersects(extent, graph)).to.eql([n1, n2, way]);
+            expect(tree.intersects(extent, graph)).toEqual([n1, n2, way]);
 
             graph = graph.replace(n1.move([1.1,1.1])).replace(n2.move([2.1,2.1]));
             var intersects = tree.intersects(extent, graph).map(function(e) { return e.id; });
@@ -215,10 +215,10 @@ describe('iD.coreTree', function() {
                 extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph = graph.replace(node);
-            expect(tree.intersects(extent, graph)).to.eql([node]);
+            expect(tree.intersects(extent, graph)).toEqual([node]);
 
             graph = graph.remove(node);
-            expect(tree.intersects(extent, graph)).to.eql([]);
+            expect(tree.intersects(extent, graph)).toEqual([]);
         });
 
         it('doesn\'t include removed entities after rebase', function() {
@@ -228,11 +228,11 @@ describe('iD.coreTree', function() {
                 extent = iD.geoExtent([0, 0], [2, 2]);
 
             var graph = base.replace(node).remove(node);
-            expect(tree.intersects(extent, graph)).to.eql([]);
+            expect(tree.intersects(extent, graph)).toEqual([]);
 
             base.rebase([node], [base]);
             tree.rebase([node]);
-            expect(tree.intersects(extent, graph)).to.eql([]);
+            expect(tree.intersects(extent, graph)).toEqual([]);
         });
 
         it('handles recursive relations', function() {
@@ -244,11 +244,11 @@ describe('iD.coreTree', function() {
                 extent = iD.geoExtent([0, 0], [2, 2]);
 
             var graph = base.replace(r1).replace(r2);
-            expect(tree.intersects(extent, graph)).to.eql([]);
+            expect(tree.intersects(extent, graph)).toEqual([]);
 
             base.rebase([node], [base, graph]);
             tree.rebase([node]);
-            expect(tree.intersects(extent, graph)).to.eql([node, r1, r2]);
+            expect(tree.intersects(extent, graph)).toEqual([node, r1, r2]);
         });
     });
 });

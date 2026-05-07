@@ -70,18 +70,18 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
             stats = features.stats();
 
-            expect(stats.boundaries).to.eql(1);
-            expect(stats.buildings).to.eql(1);
-            expect(stats.landuse).to.eql(0);
-            expect(stats.traffic_roads).to.eql(1);
-            expect(stats.service_roads).to.eql(0);
-            expect(stats.others).to.eql(1);
-            expect(stats.past_future).to.eql(1);
-            expect(stats.paths).to.eql(0);
-            expect(stats.points).to.eql(5);
-            expect(stats.power).to.eql(1);
-            expect(stats.rail).to.eql(1);
-            expect(stats.water).to.eql(1);
+            expect(stats.boundaries).toEqual(1);
+            expect(stats.buildings).toEqual(1);
+            expect(stats.landuse).toEqual(0);
+            expect(stats.traffic_roads).toEqual(1);
+            expect(stats.service_roads).toEqual(0);
+            expect(stats.others).toEqual(1);
+            expect(stats.past_future).toEqual(1);
+            expect(stats.paths).toEqual(0);
+            expect(stats.points).toEqual(5);
+            expect(stats.power).toEqual(1);
+            expect(stats.rail).toEqual(1);
+            expect(stats.water).toEqual(1);
         });
     });
 

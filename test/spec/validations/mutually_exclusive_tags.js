@@ -46,11 +46,11 @@ describe('iD.validations.mutually_exclusive_tags', function () {
         var issues = validate(validator);
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('mutually_exclusive_tags');
-        expect(issue.subtype).to.eql('default');
-        expect(issue.severity).to.eql('warning');
+        expect(issue.type).toEqual('mutually_exclusive_tags');
+        expect(issue.subtype).toEqual('default');
+        expect(issue.severity).toEqual('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('n-1');
+        expect(issue.entityIds[0]).toEqual('n-1');
     });
 
     it('flags feature with a mutually exclusive `not:name` value', async () => {
@@ -60,11 +60,11 @@ describe('iD.validations.mutually_exclusive_tags', function () {
         var issues = validate(validator);
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('mutually_exclusive_tags');
-        expect(issue.subtype).to.eql('same_value');
-        expect(issue.severity).to.eql('warning');
+        expect(issue.type).toEqual('mutually_exclusive_tags');
+        expect(issue.subtype).toEqual('same_value');
+        expect(issue.severity).toEqual('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('n-1');
+        expect(issue.entityIds[0]).toEqual('n-1');
     });
 
 
@@ -75,10 +75,10 @@ describe('iD.validations.mutually_exclusive_tags', function () {
         var issues = validate(validator);
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('mutually_exclusive_tags');
-        expect(issue.subtype).to.eql('same_value');
-        expect(issue.severity).to.eql('warning');
+        expect(issue.type).toEqual('mutually_exclusive_tags');
+        expect(issue.subtype).toEqual('same_value');
+        expect(issue.severity).toEqual('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('n-1');
+        expect(issue.entityIds[0]).toEqual('n-1');
     });
 });

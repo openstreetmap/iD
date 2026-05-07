@@ -241,7 +241,7 @@ describe('uiCombobox', function() {
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('⇥');
-        expect(await d).to.eql({title: 'bar', value: 'bar'});
+        expect(await d).toEqual({title: 'bar', value: 'bar'});
         combobox.on('accept', null);
     });
 
@@ -251,7 +251,7 @@ describe('uiCombobox', function() {
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('↩');
-        expect(await d).to.eql({title: 'bar', value: 'bar'});
+        expect(await d).toEqual({title: 'bar', value: 'bar'});
         combobox.on('accept', null);
     });
 

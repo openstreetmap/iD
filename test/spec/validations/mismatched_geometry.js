@@ -114,11 +114,11 @@ describe('iD.validations.mismatched_geometry', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('mismatched_geometry');
-        expect(issue.subtype).to.eql('area_as_line');
-        expect(issue.severity).to.eql('warning');
+        expect(issue.type).toEqual('mismatched_geometry');
+        expect(issue.subtype).toEqual('area_as_line');
+        expect(issue.severity).toEqual('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags open way with both area and line tags', function() {
@@ -126,11 +126,11 @@ describe('iD.validations.mismatched_geometry', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('mismatched_geometry');
-        expect(issue.subtype).to.eql('area_as_line');
-        expect(issue.severity).to.eql('warning');
+        expect(issue.type).toEqual('mismatched_geometry');
+        expect(issue.subtype).toEqual('area_as_line');
+        expect(issue.severity).toEqual('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('handles presets which only allow vertex, not point', () => {

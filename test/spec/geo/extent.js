@@ -57,38 +57,38 @@ describe('iD.geoExtent', function () {
 
     describe('#center', function () {
         it('returns the center point', function () {
-            expect(iD.geoExtent([0, 0], [5, 10]).center()).to.eql([2.5, 5]);
+            expect(iD.geoExtent([0, 0], [5, 10]).center()).toEqual([2.5, 5]);
         });
     });
 
     describe('#rectangle', function () {
         it('returns the extent as a rectangle', function () {
-            expect(iD.geoExtent([0, 0], [5, 10]).rectangle()).to.eql([0, 0, 5, 10]);
+            expect(iD.geoExtent([0, 0], [5, 10]).rectangle()).toEqual([0, 0, 5, 10]);
         });
     });
 
     describe('#polygon', function () {
         it('returns the extent as a polygon', function () {
             expect(iD.geoExtent([0, 0], [5, 10]).polygon())
-                .to.eql([[0, 0], [0, 10], [5, 10], [5, 0], [0, 0]]);
+                .toEqual([[0, 0], [0, 10], [5, 10], [5, 0], [0, 0]]);
         });
     });
 
     describe('#area', function () {
         it('returns the area', function () {
-           expect(iD.geoExtent([0, 0], [5, 10]).area()).to.eql(50);
+           expect(iD.geoExtent([0, 0], [5, 10]).area()).toEqual(50);
         });
     });
 
     describe('#padByMeters', function () {
         it('does not change centerpoint of an extent', function () {
            var min = [0, 0], max = [5, 10];
-           expect(iD.geoExtent(min, max).padByMeters(100).center()).to.eql([2.5, 5]);
+           expect(iD.geoExtent(min, max).padByMeters(100).center()).toEqual([2.5, 5]);
         });
 
         it('does not affect the extent with a pad of zero', function () {
            var min = [0, 0], max = [5, 10];
-           expect(iD.geoExtent(min, max).padByMeters(0)[0]).to.eql([0, 0]);
+           expect(iD.geoExtent(min, max).padByMeters(0)[0]).toEqual([0, 0]);
         });
     });
 
@@ -184,42 +184,42 @@ describe('iD.geoExtent', function () {
         it('returns an empty extent if self does not intersect with other', function () {
             var a = iD.geoExtent([0, 0], [5, 5]),
                 b = iD.geoExtent([6, 6], [7, 7]);
-            expect(a.intersection(b)).to.eql(iD.geoExtent());
+            expect(a.intersection(b)).toEqual(iD.geoExtent());
         });
 
         it('returns the intersection of self with other (1)', function () {
             var a = iD.geoExtent([0, 0], [5, 5]),
                 b = iD.geoExtent([3, 4], [7, 7]);
-            expect(a.intersection(b)).to.eql(iD.geoExtent([3, 4], [5, 5]));
-            expect(b.intersection(a)).to.eql(iD.geoExtent([3, 4], [5, 5]));
+            expect(a.intersection(b)).toEqual(iD.geoExtent([3, 4], [5, 5]));
+            expect(b.intersection(a)).toEqual(iD.geoExtent([3, 4], [5, 5]));
         });
 
         it('returns the intersection of self with other (2)', function () {
             var a = iD.geoExtent([0, 0], [5, 5]),
                 b = iD.geoExtent([3, -4], [7, 2]);
-            expect(a.intersection(b)).to.eql(iD.geoExtent([3, 0], [5, 2]));
-            expect(b.intersection(a)).to.eql(iD.geoExtent([3, 0], [5, 2]));
+            expect(a.intersection(b)).toEqual(iD.geoExtent([3, 0], [5, 2]));
+            expect(b.intersection(a)).toEqual(iD.geoExtent([3, 0], [5, 2]));
         });
 
         it('returns the intersection of self with other (3)', function () {
             var a = iD.geoExtent([0, 0], [5, 5]),
                 b = iD.geoExtent([3, 3], [4, 7]);
-            expect(a.intersection(b)).to.eql(iD.geoExtent([3, 3], [4, 5]));
-            expect(b.intersection(a)).to.eql(iD.geoExtent([3, 3], [4, 5]));
+            expect(a.intersection(b)).toEqual(iD.geoExtent([3, 3], [4, 5]));
+            expect(b.intersection(a)).toEqual(iD.geoExtent([3, 3], [4, 5]));
         });
 
         it('returns the intersection of self with other (4)', function () {
             var a = iD.geoExtent([0, 0], [5, 5]),
                 b = iD.geoExtent([3, -2], [4, 2]);
-            expect(a.intersection(b)).to.eql(iD.geoExtent([3, 0], [4, 2]));
-            expect(b.intersection(a)).to.eql(iD.geoExtent([3, 0], [4, 2]));
+            expect(a.intersection(b)).toEqual(iD.geoExtent([3, 0], [4, 2]));
+            expect(b.intersection(a)).toEqual(iD.geoExtent([3, 0], [4, 2]));
         });
 
         it('returns the intersection of self with other (5)', function () {
             var a = iD.geoExtent([0, 0], [5, 5]),
                 b = iD.geoExtent([1, 1], [2, 2]);
-            expect(a.intersection(b)).to.eql(iD.geoExtent([1, 1], [2, 2]));
-            expect(b.intersection(a)).to.eql(iD.geoExtent([1, 1], [2, 2]));
+            expect(a.intersection(b)).toEqual(iD.geoExtent([1, 1], [2, 2]));
+            expect(b.intersection(a)).toEqual(iD.geoExtent([1, 1], [2, 2]));
         });
     });
 
@@ -227,22 +227,22 @@ describe('iD.geoExtent', function () {
         it('returns a 0 if self does not intersect other', function () {
             var a = iD.geoExtent([0, 0], [1, 1]),
                 b = iD.geoExtent([0, 3], [4, 1]);
-            expect(a.percentContainedIn(b)).to.eql(0);
-            expect(b.percentContainedIn(a)).to.eql(0);
+            expect(a.percentContainedIn(b)).toEqual(0);
+            expect(b.percentContainedIn(a)).toEqual(0);
         });
 
         it('returns the percent contained of self with other (1)', function () {
             var a = iD.geoExtent([0, 0], [2, 1]),
                 b = iD.geoExtent([1, 0], [3, 1]);
-            expect(a.percentContainedIn(b)).to.eql(0.5);
-            expect(b.percentContainedIn(a)).to.eql(0.5);
+            expect(a.percentContainedIn(b)).toEqual(0.5);
+            expect(b.percentContainedIn(a)).toEqual(0.5);
         });
 
         it('returns the percent contained of self with other (2)', function () {
             var a = iD.geoExtent([0, 0], [4, 1]),
                 b = iD.geoExtent([3, 0], [4, 2]);
-            expect(a.percentContainedIn(b)).to.eql(0.25);
-            expect(b.percentContainedIn(a)).to.eql(0.5);
+            expect(a.percentContainedIn(b)).toEqual(0.25);
+            expect(b.percentContainedIn(a)).toEqual(0.5);
         });
 
     });

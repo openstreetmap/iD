@@ -71,9 +71,9 @@ describe('iD.geo - geometry', function() {
             var c = [2, 1];
             var nodes = [ new iD.osmNode({loc: a}), new iD.osmNode({loc: b}) ];
             var choice = iD.geoChooseEdge(nodes, c, projection);
-            expect(choice.index).to.eql(1);
-            expect(choice.distance).to.eql(1);
-            expect(choice.loc).to.eql([2, 0]);
+            expect(choice.index).toEqual(1);
+            expect(choice.distance).toEqual(1);
+            expect(choice.loc).toEqual([2, 0]);
         });
 
         it('returns the starting vertex when the orthogonal projection is < 0', function() {
@@ -82,9 +82,9 @@ describe('iD.geo - geometry', function() {
             var c = [-3, 4];
             var nodes = [ new iD.osmNode({loc: a}), new iD.osmNode({loc: b}) ];
             var choice = iD.geoChooseEdge(nodes, c, projection);
-            expect(choice.index).to.eql(1);
-            expect(choice.distance).to.eql(5);
-            expect(choice.loc).to.eql([0, 0]);
+            expect(choice.index).toEqual(1);
+            expect(choice.distance).toEqual(5);
+            expect(choice.loc).toEqual([0, 0]);
         });
 
         it('returns the ending vertex when the orthogonal projection is > 1', function() {
@@ -93,9 +93,9 @@ describe('iD.geo - geometry', function() {
             var c = [8, 4];
             var nodes = [ new iD.osmNode({loc: a}), new iD.osmNode({loc: b}) ];
             var choice = iD.geoChooseEdge(nodes, c, projection);
-            expect(choice.index).to.eql(1);
-            expect(choice.distance).to.eql(5);
-            expect(choice.loc).to.eql([5, 0]);
+            expect(choice.index).toEqual(1);
+            expect(choice.distance).toEqual(5);
+            expect(choice.loc).toEqual([5, 0]);
         });
 
         it('skips the given nodeID at end of way', function() {
@@ -119,9 +119,9 @@ describe('iD.geo - geometry', function() {
                 new iD.osmNode({id: 'e', loc: e})
             ];
             var choice = iD.geoChooseEdge(nodes, e, projection, 'e');
-            expect(choice.index).to.eql(1);
-            expect(choice.distance).to.eql(0.1);
-            expect(choice.loc).to.eql([2, 0]);
+            expect(choice.index).toEqual(1);
+            expect(choice.distance).toEqual(0.1);
+            expect(choice.loc).toEqual([2, 0]);
         });
 
         it('skips the given nodeID in middle of way', function() {
@@ -145,9 +145,9 @@ describe('iD.geo - geometry', function() {
                 new iD.osmNode({id: 'e', loc: e})
             ];
             var choice = iD.geoChooseEdge(nodes, d, projection, 'd');
-            expect(choice.index).to.eql(1);
-            expect(choice.distance).to.eql(0.1);
-            expect(choice.loc).to.eql([2, 0]);
+            expect(choice.index).toEqual(1);
+            expect(choice.distance).toEqual(0.1);
+            expect(choice.loc).toEqual([2, 0]);
         });
 
         it('returns null if all nodes are skipped', function() {
@@ -373,7 +373,7 @@ describe('iD.geo - geometry', function() {
         it('returns the intersection point between 2 lines', function() {
             var a = [[0, 0], [10, 0]];
             var b = [[5, 10], [5, -10]];
-            expect(iD.geoLineIntersection(a, b)).to.eql([5, 0]);
+            expect(iD.geoLineIntersection(a, b)).toEqual([5, 0]);
         });
         it('returns null if lines are not parallel but not intersecting', function() {
             var a = [[0, 0], [10, 0]];
@@ -453,8 +453,8 @@ describe('iD.geo - geometry', function() {
             //  a---------c----+
             var points = [[0, -1], [5, 1], [10, -1], [15, 1]];
             var ssr = iD.geoGetSmallestSurroundingRectangle(points);
-            expect(ssr.poly).to.eql([[0, -1], [0, 1], [15, 1], [15, -1], [0, -1]]);
-            expect(ssr.angle).to.eql(0);
+            expect(ssr.poly).toEqual([[0, -1], [0, 1], [15, 1], [15, -1], [0, -1]]);
+            expect(ssr.angle).toEqual(0);
         });
 
     });
@@ -462,17 +462,17 @@ describe('iD.geo - geometry', function() {
     describe('geoPathLength', function() {
         it('calculates a simple path length', function() {
             var path = [[0, 0], [0, 1], [3, 5]];
-            expect(iD.geoPathLength(path)).to.eql(6);
+            expect(iD.geoPathLength(path)).toEqual(6);
         });
 
         it('does not fail on single-point path', function() {
             var path = [[0, 0]];
-            expect(iD.geoPathLength(path)).to.eql(0);
+            expect(iD.geoPathLength(path)).toEqual(0);
         });
 
         it('estimates zero-length edges', function() {
             var path = [[0, 0], [0, 0]];
-            expect(iD.geoPathLength(path)).to.eql(0);
+            expect(iD.geoPathLength(path)).toEqual(0);
         });
     });
 
@@ -482,28 +482,28 @@ describe('iD.geo - geometry', function() {
             expect(iD.geoViewportEdge([500, 500], dimensions)).toBeNull();
         });
         it('nudges top edge', function() {
-            expect(iD.geoViewportEdge([500, 5], dimensions)).to.eql([0, 10]);
+            expect(iD.geoViewportEdge([500, 5], dimensions)).toEqual([0, 10]);
         });
         it('nudges top-right corner', function() {
-            expect(iD.geoViewportEdge([995, 5], dimensions)).to.eql([-10, 10]);
+            expect(iD.geoViewportEdge([995, 5], dimensions)).toEqual([-10, 10]);
         });
         it('nudges right edge', function() {
-            expect(iD.geoViewportEdge([995, 500], dimensions)).to.eql([-10, 0]);
+            expect(iD.geoViewportEdge([995, 500], dimensions)).toEqual([-10, 0]);
         });
         it('nudges bottom-right corner', function() {
-            expect(iD.geoViewportEdge([995, 995], dimensions)).to.eql([-10, -10]);
+            expect(iD.geoViewportEdge([995, 995], dimensions)).toEqual([-10, -10]);
         });
         it('nudges bottom edge', function() {
-            expect(iD.geoViewportEdge([500, 995], dimensions)).to.eql([0, -10]);
+            expect(iD.geoViewportEdge([500, 995], dimensions)).toEqual([0, -10]);
         });
         it('nudges bottom-left corner', function() {
-            expect(iD.geoViewportEdge([5, 995], dimensions)).to.eql([10, -10]);
+            expect(iD.geoViewportEdge([5, 995], dimensions)).toEqual([10, -10]);
         });
         it('nudges left edge', function() {
-            expect(iD.geoViewportEdge([5, 500], dimensions)).to.eql([10, 0]);
+            expect(iD.geoViewportEdge([5, 500], dimensions)).toEqual([10, 0]);
         });
         it('nudges top-left corner', function() {
-            expect(iD.geoViewportEdge([5, 5], dimensions)).to.eql([10, 10]);
+            expect(iD.geoViewportEdge([5, 5], dimensions)).toEqual([10, 10]);
         });
     });
 

@@ -80,16 +80,16 @@ describe('iD.svgLines', function () {
             surface.call(iD.svgLines(projection, context), graph, [graph.entity('lo'), graph.entity('hi')], none);
 
             var selection = surface.selectAll('g.line-stroke > path.line');
-            expect(selection.nodes()[0].__data__.id).to.eql('lo');
-            expect(selection.nodes()[1].__data__.id).to.eql('hi');
+            expect(selection.nodes()[0].__data__.id).toEqual('lo');
+            expect(selection.nodes()[1].__data__.id).toEqual('hi');
         });
 
         it('stacks higher lines above lower ones in a single render (reverse)', function () {
             surface.call(iD.svgLines(projection, context), graph, [graph.entity('hi'), graph.entity('lo')], none);
 
             var selection = surface.selectAll('g.line-stroke > path.line');
-            expect(selection.nodes()[0].__data__.id).to.eql('lo');
-            expect(selection.nodes()[1].__data__.id).to.eql('hi');
+            expect(selection.nodes()[0].__data__.id).toEqual('lo');
+            expect(selection.nodes()[1].__data__.id).toEqual('hi');
         });
 
         it('stacks higher lines above lower ones in separate renders', function () {
@@ -97,8 +97,8 @@ describe('iD.svgLines', function () {
             surface.call(iD.svgLines(projection, context), graph, [graph.entity('hi')], none);
 
             var selection = surface.selectAll('g.line-stroke > path.line');
-            expect(selection.nodes()[0].__data__.id).to.eql('lo');
-            expect(selection.nodes()[1].__data__.id).to.eql('hi');
+            expect(selection.nodes()[0].__data__.id).toEqual('lo');
+            expect(selection.nodes()[1].__data__.id).toEqual('hi');
         });
 
         it('stacks higher lines above lower in separate renders (reverse)', function () {
@@ -106,8 +106,8 @@ describe('iD.svgLines', function () {
             surface.call(iD.svgLines(projection, context), graph, [graph.entity('lo')], none);
 
             var selection = surface.selectAll('g.line-stroke > path.line');
-            expect(selection.nodes()[0].__data__.id).to.eql('lo');
-            expect(selection.nodes()[1].__data__.id).to.eql('hi');
+            expect(selection.nodes()[0].__data__.id).toEqual('lo');
+            expect(selection.nodes()[1].__data__.id).toEqual('hi');
         });
     });
 
@@ -122,7 +122,7 @@ describe('iD.svgLines', function () {
         const layerGroup = surface.select('path.w1').nodes()[0].parentNode.parentNode;
 
         // the feature with layer=-2.5 was rendered in layer -2
-        expect(layerGroup.className.baseVal).to.eql('layergroup layer-2');
+        expect(layerGroup.className.baseVal).toEqual('layergroup layer-2');
     });
 
     describe('oneway-markers', function() {
@@ -144,10 +144,10 @@ describe('iD.svgLines', function () {
 
             var selection = surface.selectAll('g.onewaygroup > path');
 
-            expect(selection.size()).to.eql(3);
-            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black)');
-            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black)');
-            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black)');
+            expect(selection.size()).toEqual(3);
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).toEqual('url(#ideditor-oneway-marker-black)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).toEqual('url(#ideditor-oneway-marker-black)');
+            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).toEqual('url(#ideditor-oneway-marker-black)');
         });
 
         it('has two marker layers for alternating oneway ways', function() {
@@ -161,9 +161,9 @@ describe('iD.svgLines', function () {
             surface.call(iD.svgLines(projection, context), graph, [e_a], all);
 
             var selection = surface.selectAll('g.onewaygroup > path');
-            expect(selection.size()).to.eql(2);
-            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black)');
-            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker-black)');
+            expect(selection.size()).toEqual(2);
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).toEqual('url(#ideditor-oneway-marker-black)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).toEqual('url(#ideditor-oneway-marker-black)');
         });
 
         it('has no marker layer for oneway=no ways', function() {
@@ -198,11 +198,11 @@ describe('iD.svgLines', function () {
 
             surface.call(iD.svgLines(projection, context), graph, [i_n, i_nc, i_b, i_mm], all);
             var selection = surface.selectAll('g.sidedgroup > path');
-            expect(selection.size()).to.eql(4);
-            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-sided-marker-natural)');
-            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-sided-marker-coastline)');
-            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-sided-marker-barrier)');
-            expect(selection.nodes()[3].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-sided-marker-man_made)');
+            expect(selection.size()).toEqual(4);
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).toEqual('url(#ideditor-sided-marker-natural)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).toEqual('url(#ideditor-sided-marker-coastline)');
+            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).toEqual('url(#ideditor-sided-marker-barrier)');
+            expect(selection.nodes()[3].attributes['marker-mid'].nodeValue).toEqual('url(#ideditor-sided-marker-man_made)');
         });
 
         it('has no marker layer for two_sided way', function() {

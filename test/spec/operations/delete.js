@@ -28,7 +28,7 @@ describe('iD.operationDelete', function () {
             operation();
             expect(fakeContext.graph().hasEntity('w')).toBeTruthy();
             expect(fakeContext.enter).to.toHaveBeenCalledOnce();
-            expect(fakeContext.enter.mock.calls[0][0].selectedIDs()).to.eql(['n2']);
+            expect(fakeContext.enter.mock.calls[0][0].selectedIDs()).toEqual(['n2']);
         });
 
         it('selects previous node after deleting last node of a way', function () {
@@ -45,7 +45,7 @@ describe('iD.operationDelete', function () {
             operation();
             expect(fakeContext.graph().hasEntity('w')).toBeTruthy();
             expect(fakeContext.enter).to.toHaveBeenCalledOnce();
-            expect(fakeContext.enter.mock.calls[0][0].selectedIDs()).to.eql(['n3']);
+            expect(fakeContext.enter.mock.calls[0][0].selectedIDs()).toEqual(['n3']);
         });
 
         it('selects nearest node after deleting a middle node of a way', function () {
@@ -61,7 +61,7 @@ describe('iD.operationDelete', function () {
             operation();
             expect(fakeContext.graph().hasEntity('w')).toBeTruthy();
             expect(fakeContext.enter).to.toHaveBeenCalledOnce();
-            expect(fakeContext.enter.mock.calls[0][0].selectedIDs()).to.eql(['n1']);
+            expect(fakeContext.enter.mock.calls[0][0].selectedIDs()).toEqual(['n1']);
         });
 
         it('does not crash for a single-noded way', function () {

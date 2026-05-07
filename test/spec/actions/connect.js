@@ -10,7 +10,7 @@ describe('iD.actionConnect', function() {
 
         var survivor = graph.hasEntity('b');
         expect(survivor).toBeInstanceOf(iD.osmNode);
-        expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
+        expect(survivor.tags).toEqual({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
     });
 
     it('chooses the oldest node as the survivor', function() {
@@ -44,7 +44,7 @@ describe('iD.actionConnect', function() {
 
         var survivor = graph.hasEntity('n2');
         expect(survivor).toBeInstanceOf(iD.osmNode);
-        expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
+        expect(survivor.tags).toEqual({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
     });
 
     it('chooses an existing node as the survivor', function() {
@@ -63,7 +63,7 @@ describe('iD.actionConnect', function() {
 
         var survivor = graph.hasEntity('n3');
         expect(survivor).toBeInstanceOf(iD.osmNode);
-        expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
+        expect(survivor.tags).toEqual({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
     });
 
     it('chooses the last node as the survivor when all are new', function() {
@@ -79,7 +79,7 @@ describe('iD.actionConnect', function() {
 
         var survivor = graph.hasEntity('c');
         expect(survivor).toBeInstanceOf(iD.osmNode);
-        expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
+        expect(survivor.tags).toEqual({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
     });
 
 
@@ -109,8 +109,8 @@ describe('iD.actionConnect', function() {
         ]);
 
         graph = iD.actionConnect(['e', 'b'])(graph);
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.entity('|').nodes).to.eql(['d', 'b']);
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c']);
+        expect(graph.entity('|').nodes).toEqual(['d', 'b']);
     });
 
     it('handles circular ways', function() {
@@ -133,7 +133,7 @@ describe('iD.actionConnect', function() {
         ]);
 
         graph = iD.actionConnect(['a', 'd'])(graph);
-        expect(graph.entity('-').nodes).to.eql(['d', 'b', 'c', 'd']);
+        expect(graph.entity('-').nodes).toEqual(['d', 'b', 'c', 'd']);
     });
 
     it('merges adjacent nodes', function() {
@@ -153,7 +153,7 @@ describe('iD.actionConnect', function() {
         ]);
 
         graph = iD.actionConnect(['b', 'c'])(graph);
-        expect(graph.entity('-').nodes).to.eql(['a', 'c']);
+        expect(graph.entity('-').nodes).toEqual(['a', 'c']);
         expect(graph.hasEntity('b')).toBeUndefined();
     });
 
@@ -180,8 +180,8 @@ describe('iD.actionConnect', function() {
         ]);
 
         graph = iD.actionConnect(['b', 'c'])(graph);
-        expect(graph.entity('-').nodes).to.eql(['a', 'c']);
-        expect(graph.entity('|').nodes).to.eql(['c', 'd']);
+        expect(graph.entity('-').nodes).toEqual(['a', 'c']);
+        expect(graph.entity('|').nodes).toEqual(['c', 'd']);
         expect(graph.hasEntity('b')).toBeUndefined();
     });
 
@@ -209,7 +209,7 @@ describe('iD.actionConnect', function() {
         ]);
 
         graph = iD.actionConnect(['a', 'b', 'c'])(graph);
-        expect(graph.entity('c').tags).to.eql({a: 'a', b: 'b', c: 'c'});
+        expect(graph.entity('c').tags).toEqual({a: 'a', b: 'b', c: 'c'});
     });
 
     it('merges memberships to the surviving node', function() {
@@ -225,8 +225,8 @@ describe('iD.actionConnect', function() {
         ]);
 
         graph = iD.actionConnect(['b', 'c'])(graph);
-        expect(graph.entity('r1').members).to.eql([{id: 'c', role: 'r1', type: 'node'}]);
-        expect(graph.entity('r2').members).to.eql([{id: 'c', role: 'r2', type: 'node'}]);
+        expect(graph.entity('r1').members).toEqual([{id: 'c', role: 'r1', type: 'node'}]);
+        expect(graph.entity('r2').members).toEqual([{id: 'c', role: 'r2', type: 'node'}]);
     });
 
 
@@ -271,7 +271,7 @@ describe('iD.actionConnect', function() {
                 ]})
             ]);
 
-            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.eql('relation');
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).toEqual('relation');
         });
 
         it('returns falsy when connecting a node unrelated to the restriction', function () {
@@ -392,9 +392,9 @@ describe('iD.actionConnect', function() {
 
             // prevented:
             // extra connections to the VIA node, or any connections between distinct FROM and TO
-            expect(iD.actionConnect(['a', 'c']).disabled(graph)).to.eql('restriction', 'extra connection FROM-VIA');
-            expect(iD.actionConnect(['e', 'c']).disabled(graph)).to.eql('restriction', 'extra connection TO-VIA');
-            expect(iD.actionConnect(['b', 'd']).disabled(graph)).to.eql('restriction', 'extra connection FROM-TO');
+            expect(iD.actionConnect(['a', 'c']).disabled(graph)).toEqual('restriction', 'extra connection FROM-VIA');
+            expect(iD.actionConnect(['e', 'c']).disabled(graph)).toEqual('restriction', 'extra connection TO-VIA');
+            expect(iD.actionConnect(['b', 'd']).disabled(graph)).toEqual('restriction', 'extra connection FROM-TO');
         });
 
         it('returns falsy when connecting nodes on a via-node u_turn restriction', function () {
@@ -453,13 +453,13 @@ describe('iD.actionConnect', function() {
 
             // prevented:
             // extra connections to any node along VIA way
-            expect(iD.actionConnect(['a', 'c']).disabled(graph)).to.eql('restriction', 'extra connection TO-VIA c');
-            expect(iD.actionConnect(['b', 'd']).disabled(graph)).to.eql('restriction', 'extra connection TO-VIA d');
-            expect(iD.actionConnect(['b', 'e']).disabled(graph)).to.eql('restriction', 'extra connection TO-VIA e');
-            expect(iD.actionConnect(['c', 'e']).disabled(graph)).to.eql('restriction', 'extra connection VIA-VIA');
-            expect(iD.actionConnect(['f', 'c']).disabled(graph)).to.eql('restriction', 'extra connection FROM-VIA c');
-            expect(iD.actionConnect(['f', 'd']).disabled(graph)).to.eql('restriction', 'extra connection FROM-VIA d');
-            expect(iD.actionConnect(['g', 'e']).disabled(graph)).to.eql('restriction', 'extra connection FROM-VIA e');
+            expect(iD.actionConnect(['a', 'c']).disabled(graph)).toEqual('restriction', 'extra connection TO-VIA c');
+            expect(iD.actionConnect(['b', 'd']).disabled(graph)).toEqual('restriction', 'extra connection TO-VIA d');
+            expect(iD.actionConnect(['b', 'e']).disabled(graph)).toEqual('restriction', 'extra connection TO-VIA e');
+            expect(iD.actionConnect(['c', 'e']).disabled(graph)).toEqual('restriction', 'extra connection VIA-VIA');
+            expect(iD.actionConnect(['f', 'c']).disabled(graph)).toEqual('restriction', 'extra connection FROM-VIA c');
+            expect(iD.actionConnect(['f', 'd']).disabled(graph)).toEqual('restriction', 'extra connection FROM-VIA d');
+            expect(iD.actionConnect(['g', 'e']).disabled(graph)).toEqual('restriction', 'extra connection FROM-VIA e');
         });
 
         it('returns \'restriction\' when connecting would destroy a way in a via-node restriction', function () {
@@ -482,8 +482,8 @@ describe('iD.actionConnect', function() {
                 ]})
             ]);
 
-            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.eql('restriction', 'destroy FROM');
-            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.eql('restriction', 'destroy TO');
+            expect(iD.actionConnect(['a', 'b']).disabled(graph)).toEqual('restriction', 'destroy FROM');
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).toEqual('restriction', 'destroy TO');
         });
 
         it('returns \'restriction\' when connecting would destroy a way in via-way restriction', function () {
@@ -508,9 +508,9 @@ describe('iD.actionConnect', function() {
                 ]})
             ]);
 
-            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.eql('restriction', 'destroy TO');
-            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.eql('restriction', 'destroy VIA');
-            expect(iD.actionConnect(['c', 'd']).disabled(graph)).to.eql('restriction', 'destroy FROM');
+            expect(iD.actionConnect(['a', 'b']).disabled(graph)).toEqual('restriction', 'destroy TO');
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).toEqual('restriction', 'destroy VIA');
+            expect(iD.actionConnect(['c', 'd']).disabled(graph)).toEqual('restriction', 'destroy FROM');
         });
 
     });

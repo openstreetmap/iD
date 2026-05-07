@@ -37,7 +37,7 @@ describe('iD.svgMidpoints', function () {
         context.hasEntity = function(id) { return graph.entities[id]; };
 
         surface.call(iD.svgMidpoints(projection, context), graph, [line], filter, extent);
-        expect(surface.selectAll('.midpoint').datum().loc).to.eql([0.5, 0]);
+        expect(surface.selectAll('.midpoint').datum().loc).toEqual([0.5, 0]);
     });
 
     it('doesn\'t create midpoint on segment with pixel length less than 40', function () {
@@ -82,7 +82,7 @@ describe('iD.svgMidpoints', function () {
         context.hasEntity = function(id) { return graph.entities[id]; };
 
         surface.call(iD.svgMidpoints(projection, context), graph, [line], filter, extent);
-        expect(surface.selectAll('.midpoint').datum().loc).to.eql([1, 0]);
+        expect(surface.selectAll('.midpoint').datum().loc).toEqual([1, 0]);
     });
 
     it('doesn\'t create midpoint on extent edge for segment with pixel length less than 20', function () {

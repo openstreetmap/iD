@@ -3,6 +3,6 @@ describe('iD.actionChangeTags', function () {
         var entity = new iD.osmNode(),
             tags   = {foo: 'bar'},
             graph  = iD.actionChangeTags(entity.id, tags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql(tags);
+        expect(graph.entity(entity.id).tags).toEqual(tags);
     });
 });

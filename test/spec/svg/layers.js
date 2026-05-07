@@ -19,14 +19,14 @@ describe('iD.svgLayers', function () {
     it('creates surface defs', function () {
         container.call(iD.svgLayers(projection, context));
         var nodes = container.selectAll('svg defs').nodes();
-        expect(nodes.length).to.eql(1);
+        expect(nodes.length).toEqual(1);
         expect(d3.select(nodes[0]).classed('surface-defs')).toBe(true);
     });
 
     it('creates default data layers', function () {
         container.call(iD.svgLayers(projection, context));
         var nodes = container.selectAll('svg .data-layer').nodes();
-        expect(nodes.length).to.eql(17);
+        expect(nodes.length).toEqual(17);
         /* eslint-disable no-useless-assignment */
         let i = 0;
         expect(d3.select(nodes[i++]).classed('osm')).toBe(true);

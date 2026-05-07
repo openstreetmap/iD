@@ -13,7 +13,7 @@ describe('iD.actionDeleteNode', function () {
             way    = new iD.osmWay({nodes: [node1.id, node2.id, node3.id]}),
             action = iD.actionDeleteNode(node1.id),
             graph  = action(new iD.coreGraph([node1, node2, node3, way]));
-        expect(graph.entity(way.id).nodes).to.eql([node2.id, node3.id]);
+        expect(graph.entity(way.id).nodes).toEqual([node2.id, node3.id]);
     });
 
     it('removes the node from parent relations', function () {
@@ -22,7 +22,7 @@ describe('iD.actionDeleteNode', function () {
             relation = new iD.osmRelation({members: [{ id: node1.id }, { id: node2.id }]}),
             action   = iD.actionDeleteNode(node1.id),
             graph    = action(new iD.coreGraph([node1, node2, relation]));
-        expect(graph.entity(relation.id).members).to.eql([{ id: node2.id }]);
+        expect(graph.entity(relation.id).members).toEqual([{ id: node2.id }]);
     });
 
     it('deletes parent ways that would otherwise have less than two nodes', function () {

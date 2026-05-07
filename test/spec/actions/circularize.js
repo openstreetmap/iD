@@ -180,7 +180,7 @@ describe('iD.actionCircularize', function () {
                 new iD.osmWay({id: '=', nodes: ['a', 'b', 'f', 'g', 'e', 'a']})
             ]);
 
-        expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.eql(3);
+        expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).toEqual(3);
         expect(graph.entity('-').isConvex(graph)).toBe(false);
         expect(graph.entity('=').isConvex(graph)).toBe(true);
 
@@ -214,7 +214,7 @@ describe('iD.actionCircularize', function () {
                 new iD.osmWay({id: '=', nodes: ['a', 'e', 'g', 'f', 'b', 'a']})
             ]);
 
-        expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.eql(3);
+        expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).toEqual(3);
         expect(graph.entity('-').isConvex(graph)).toBe(false);
         expect(graph.entity('=').isConvex(graph)).toBe(true);
 
@@ -264,7 +264,7 @@ describe('iD.actionCircularize', function () {
                 new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'a']})
             ]);
 
-        expect(area('-', graph)).to.eql(2);
+        expect(area('-', graph)).toEqual(2);
 
         graph = iD.actionCircularize('-', projection)(graph);
 
@@ -294,7 +294,7 @@ describe('iD.actionCircularize', function () {
         ]);
         graph = iD.actionCircularize('-', projection)(graph);
         var result = iD.actionCircularize('-', projection).disabled(graph);
-        expect(result).to.eql('already_circular');
+        expect(result).toEqual('already_circular');
 
     });
 

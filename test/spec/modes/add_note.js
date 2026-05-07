@@ -36,7 +36,7 @@ describe.skip('iD.modeAddNote', function() {
 
         //     context.on('enter.addNoteTest', function(mode) {
         //         if (mode.id === 'select-note') {
-        //             expect(iD.services.osm.caches().note.note[-1]).to.eql(note);
+        //             expect(iD.services.osm.caches().note.note[-1]).toEqual(note);
         //             context.mode().exit();
         //             d3.select('window').on('click.draw-block', null);
         //             context.on('enter.addNoteTest', null);
@@ -52,7 +52,7 @@ describe.skip('iD.modeAddNote', function() {
         // it('selects an existing note rather than adding a new one', function() {
         //     happen.mousedown(context.surface().node(), {});
         //     happen.mouseup(window, {});
-        //     expect(context.selectedNoteID()).to.eql(-1);
+        //     expect(context.selectedNoteID()).toEqual(-1);
         //     expect(context.mode().id).to.equal('select-note');
         //     context.mode().exit();
         //     d3.select('window').on('click.draw-block', null);

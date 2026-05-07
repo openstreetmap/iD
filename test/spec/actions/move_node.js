@@ -5,7 +5,7 @@ describe('iD.actionMoveNode', function () {
         var graph = new iD.coreGraph([node]);
 
         graph = iD.actionMoveNode('a', toLoc)(graph);
-        expect(graph.entity('a').loc).to.eql(toLoc);
+        expect(graph.entity('a').loc).toEqual(toLoc);
     });
 
     describe('transitions', function () {

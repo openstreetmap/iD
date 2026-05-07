@@ -43,11 +43,11 @@ describe('iD.behaviorHover', function() {
             _container.call(iD.behaviorHover(_context));
             iD.utilTriggerEvent(_container.select('.a'), 'mouseover');
 
-            expect(_container.selectAll('.a.hover').size()).to.eql(2);
-            expect(_container.selectAll('.b.hover').size()).to.eql(0);
+            expect(_container.selectAll('.a.hover').size()).toEqual(2);
+            expect(_container.selectAll('.b.hover').size()).toEqual(0);
 
             iD.utilTriggerEvent(_container.select('.a'), 'mouseout');
-            expect(_container.selectAll('.hover').size()).to.eql(0);
+            expect(_container.selectAll('.hover').size()).toEqual(0);
         });
 
         it('adds the .hover class to all members of a relation', function() {
@@ -62,11 +62,11 @@ describe('iD.behaviorHover', function() {
             _container.call(iD.behaviorHover(_context));
             iD.utilTriggerEvent(_container.selectAll('.a'), 'mouseover');
 
-            expect(_container.selectAll('.a.hover').size()).to.eql(1);
-            expect(_container.selectAll('.b.hover').size()).to.eql(1);
+            expect(_container.selectAll('.a.hover').size()).toEqual(1);
+            expect(_container.selectAll('.b.hover').size()).toEqual(1);
 
             iD.utilTriggerEvent(_container.selectAll('.a'), 'mouseout');
-            expect(_container.selectAll('.hover').size()).to.eql(0);
+            expect(_container.selectAll('.hover').size()).toEqual(0);
         });
     });
 
@@ -76,8 +76,8 @@ describe('iD.behaviorHover', function() {
             _container.call(iD.behaviorHover(_context).altDisables(true));
 
             happen.keydown(window, { keyCode: 18 });
-            expect(_container.selectAll('.hover').size()).to.eql(0);
-            expect(_container.selectAll('.hover-suppressed').size()).to.eql(1);
+            expect(_container.selectAll('.hover').size()).toEqual(0);
+            expect(_container.selectAll('.hover-suppressed').size()).toEqual(1);
             happen.keyup(window, { keyCode: 18 });
         });
 
@@ -97,8 +97,8 @@ describe('iD.behaviorHover', function() {
 
             happen.keydown(window, { keyCode: 18 });
             happen.keyup(window, { keyCode: 18 });
-            expect(_container.selectAll('.hover').size()).to.eql(1);
-            expect(_container.selectAll('.hover-suppressed').size()).to.eql(0);
+            expect(_container.selectAll('.hover').size()).toEqual(1);
+            expect(_container.selectAll('.hover-suppressed').size()).toEqual(0);
         });
 
         it('removes the .hover-disabled class from the surface', function () {

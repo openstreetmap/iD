@@ -8,7 +8,7 @@ describe('iD.svgOsm', function () {
     it('creates default osm layers', function () {
         container.call(iD.svgOsm());
         var layers = container.selectAll('g.layer-osm').nodes();
-        expect(layers.length).to.eql(6);
+        expect(layers.length).toEqual(6);
         expect(d3.select(layers[0]).classed('covered')).toBe(true);
         expect(d3.select(layers[1]).classed('areas')).toBe(true);
         expect(d3.select(layers[2]).classed('lines')).toBe(true);
@@ -20,7 +20,7 @@ describe('iD.svgOsm', function () {
     it('creates default osm point layers', function () {
         container.call(iD.svgOsm());
         var layers = container.selectAll('g.points-group').nodes();
-        expect(layers.length).to.eql(4);
+        expect(layers.length).toEqual(4);
         expect(d3.select(layers[0]).classed('vertices')).toBe(true);
         expect(d3.select(layers[1]).classed('midpoints')).toBe(true);
         expect(d3.select(layers[2]).classed('points')).toBe(true);

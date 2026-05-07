@@ -27,7 +27,7 @@ describe.skip('iD.modeAddPoint', function() {
             happen.mousedown(context.surface().node(), {});
             happen.mouseup(window, {});
             expect(context.mode().id).to.equal('select');
-            expect(context.mode().selectedIDs()).to.eql([context.history().changes().created[0].id]);
+            expect(context.mode().selectedIDs()).toEqual([context.history().changes().created[0].id]);
             context.mode().exit();
         });
     });

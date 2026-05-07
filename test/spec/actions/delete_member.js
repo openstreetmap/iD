@@ -5,7 +5,7 @@ describe('iD.actionDeleteMember', function () {
             r      = new iD.osmRelation({members: [{id: 'a'}, {id: 'b'}]}),
             action = iD.actionDeleteMember(r.id, 0),
             graph  = action(new iD.coreGraph([a, b, r]));
-        expect(graph.entity(r.id).members).to.eql([{id: 'b'}]);
+        expect(graph.entity(r.id).members).toEqual([{id: 'b'}]);
     });
 
     it('deletes relations that become degenerate', function () {

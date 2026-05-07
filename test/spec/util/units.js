@@ -25,7 +25,7 @@ describe('iD.units', function() {
             var result = iD.dmsMatcher('2/-1.23/34.44');
             expect(result[0]).toBeCloseTo(-1.23, 5);
             expect(result[1]).toBeCloseTo(34.44, 5);
-            expect(result[2]).to.eql(2);
+            expect(result[2]).toEqual(2);
         });
         it('parses x/y coordinate', () => {
             var result = iD.dmsMatcher('-1.23/34.44', 'de');
@@ -68,4 +68,3 @@ describe('iD.units', function() {
         });
     });
 });
-

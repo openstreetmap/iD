@@ -72,19 +72,19 @@ describe('iD.validations.crossing_ways', function () {
     function verifySingleCrossingIssue(issues, connectionTags) {
         // each entity must produce an identical issue
         expect(issues).to.have.lengthOf(2);
-        expect(issues[0].id).to.eql(issues[1].id);
+        expect(issues[0].id).toEqual(issues[1].id);
 
         for (var i in issues) {
             var issue = issues[i];
-            expect(issue.type).to.eql('crossing_ways');
-            expect(issue.severity).to.eql('warning');
+            expect(issue.type).toEqual('crossing_ways');
+            expect(issue.severity).toEqual('warning');
             expect(issue.entityIds).to.have.lengthOf(2);
 
             expect(issue.loc).to.have.lengthOf(2);
-            expect(issue.loc[0]).to.eql(1.5);
-            expect(issue.loc[1]).to.eql(1.5);
+            expect(issue.loc[0]).toEqual(1.5);
+            expect(issue.loc[1]).toEqual(1.5);
 
-            expect(issue.data.connectionTags).to.eql(connectionTags);
+            expect(issue.data.connectionTags).toEqual(connectionTags);
         }
     }
 
@@ -347,8 +347,8 @@ describe('iD.validations.crossing_ways', function () {
         context.enter(iD.modeSelect(context, ['w-1']));
         const dynamicFixes = issues[0].dynamicFixes(context);
         expect(dynamicFixes).to.have.lengthOf(5);
-        expect(dynamicFixes[0]._connectionTags).to.eql({});
-        expect(dynamicFixes[1]._connectionTags).to.eql({ highway: 'crossing' });
+        expect(dynamicFixes[0]._connectionTags).toEqual({});
+        expect(dynamicFixes[1]._connectionTags).toEqual({ highway: 'crossing' });
     });
 
     it('flags road crossing railway', function() {
@@ -370,7 +370,7 @@ describe('iD.validations.crossing_ways', function () {
         createWaysWithOneCrossingPoint({ highway: 'residential' }, { waterway: 'river' });
         const issues = validate();
         verifySingleCrossingIssue(issues, { ford: 'yes' });
-        expect(issues[0].data.featureTypes).to.eql(['highway', 'waterway']);
+        expect(issues[0].data.featureTypes).toEqual(['highway', 'waterway']);
     });
 
     it('flags major road crossing waterway', function() {
@@ -463,20 +463,20 @@ describe('iD.validations.crossing_ways', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(4);
         var issue = issues[0];
-        expect(issue.type).to.eql('crossing_ways');
+        expect(issue.type).toEqual('crossing_ways');
         expect(issue.entityIds).to.have.lengthOf(2);
 
         expect(issue.loc).to.have.lengthOf(2);
-        expect(issue.loc[0]).to.eql(1.5);
-        expect(issue.loc[1]).to.eql(1.5);
+        expect(issue.loc[0]).toEqual(1.5);
+        expect(issue.loc[1]).toEqual(1.5);
 
         issue = issues[1];
-        expect(issue.type).to.eql('crossing_ways');
+        expect(issue.type).toEqual('crossing_ways');
         expect(issue.entityIds).to.have.lengthOf(2);
 
         expect(issue.loc).to.have.lengthOf(2);
-        expect(issue.loc[0]).to.eql(2.5);
-        expect(issue.loc[1]).to.eql(2.5);
+        expect(issue.loc[0]).toEqual(2.5);
+        expect(issue.loc[1]).toEqual(2.5);
     });
 
     function createWayAndRelationWithOneCrossingPoint(wayTags, relTags) {

@@ -58,9 +58,9 @@ describe('iD.validations.incompatible_source', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('incompatible_source');
+        expect(issue.type).toEqual('incompatible_source');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('does not flag buildings in the google-africa-buildings dataset', function() {

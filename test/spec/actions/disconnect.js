@@ -96,7 +96,7 @@ describe('iD.actionDisconnect', function () {
                 ]})
             ]);
 
-            expect(iD.actionDisconnect('b').disabled(graph)).to.eql('relation');
+            expect(iD.actionDisconnect('b').disabled(graph)).toEqual('relation');
         });
 
         it('returns falsy for a node connecting two members of an unaffected relation', function () {
@@ -147,8 +147,8 @@ describe('iD.actionDisconnect', function () {
 
         graph = iD.actionDisconnect('b', 'e')(graph);
 
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.entity('|').nodes).to.eql(['d', 'e']);
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c']);
+        expect(graph.entity('|').nodes).toEqual(['d', 'e']);
     });
 
     it('replaces the node with a new node in the specified ways', function () {
@@ -175,9 +175,9 @@ describe('iD.actionDisconnect', function () {
 
         graph = iD.actionDisconnect('b', 'e').limitWays(['-'])(graph);
 
-        expect(graph.entity('-').nodes).to.eql(['a', 'e']);
-        expect(graph.entity('=').nodes).to.eql(['b', 'c']);
-        expect(graph.entity('|').nodes).to.eql(['d', 'b']);
+        expect(graph.entity('-').nodes).toEqual(['a', 'e']);
+        expect(graph.entity('=').nodes).toEqual(['b', 'c']);
+        expect(graph.entity('|').nodes).toEqual(['d', 'b']);
     });
 
     it('preserves the closed way when part of a larger disconnect operation', function () {
@@ -205,8 +205,8 @@ describe('iD.actionDisconnect', function () {
 
         graph = iD.actionDisconnect('b', 'e').limitWays(['='])(graph);
 
-        expect(graph.entity('-').nodes).to.eql(['a', 'b']);
-        expect(graph.entity('=').nodes).to.eql(['e', 'c', 'd', 'e']);
+        expect(graph.entity('-').nodes).toEqual(['a', 'b']);
+        expect(graph.entity('=').nodes).toEqual(['e', 'c', 'd', 'e']);
     });
 
     it('replaces later occurrences in a self-intersecting way', function() {
@@ -229,7 +229,7 @@ describe('iD.actionDisconnect', function () {
                 new iD.osmWay({id: 'w', nodes: ['a', 'b', 'c', 'a']})
             ]);
         graph = iD.actionDisconnect('a', 'd')(graph);
-        expect(graph.entity('w').nodes).to.eql(['a', 'b', 'c', 'd']);
+        expect(graph.entity('w').nodes).toEqual(['a', 'b', 'c', 'd']);
     });
 
     it('disconnects a way with multiple intersection points', function() {
@@ -259,8 +259,8 @@ describe('iD.actionDisconnect', function () {
 
         graph = iD.actionDisconnect('b', '*')(graph);
 
-        expect(graph.entity('w1').nodes).to.eql(['a', 'b']);
-        expect(graph.entity('w2').nodes).to.eql(['*', 'c', 'd', 'e', '*']);
+        expect(graph.entity('w1').nodes).toEqual(['a', 'b']);
+        expect(graph.entity('w2').nodes).toEqual(['*', 'c', 'd', 'e', '*']);
     });
 
     it('disconnects a shared non-closing node in an area', function() {
@@ -287,7 +287,7 @@ describe('iD.actionDisconnect', function () {
 
         graph = iD.actionDisconnect('b', '*')(graph);
 
-        expect(graph.entity('w').nodes).to.eql(['a', 'b', 'c', 'd', 'e', '*', 'a']);
+        expect(graph.entity('w').nodes).toEqual(['a', 'b', 'c', 'd', 'e', '*', 'a']);
     });
 
     it('disconnects the closing node of an area without breaking the area', function() {
@@ -319,8 +319,8 @@ describe('iD.actionDisconnect', function () {
 
         graph = iD.actionDisconnect('b', '*')(graph);
 
-        expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'a']);
-        expect(graph.entity('w2').nodes).to.eql(['*', 'd', 'e', '*']);
+        expect(graph.entity('w1').nodes).toEqual(['a', 'b', 'c', 'a']);
+        expect(graph.entity('w2').nodes).toEqual(['*', 'd', 'e', '*']);
     });
 
     it('disconnects multiple closing nodes of multiple areas without breaking the areas', function() {
@@ -352,8 +352,8 @@ describe('iD.actionDisconnect', function () {
 
         graph = iD.actionDisconnect('b', '*')(graph);
 
-        expect(graph.entity('w1').nodes).to.eql(['b', 'c', 'a', 'b']);
-        expect(graph.entity('w2').nodes).to.eql(['*', 'd', 'e', '*']);
+        expect(graph.entity('w1').nodes).toEqual(['b', 'c', 'a', 'b']);
+        expect(graph.entity('w2').nodes).toEqual(['*', 'd', 'e', '*']);
     });
 
     it('copies location and tags to the new nodes', function () {

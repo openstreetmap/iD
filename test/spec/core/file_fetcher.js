@@ -21,7 +21,7 @@ describe('iD.coreFileFetcher', function() {
             expect(prom).to.be.a('promise');
             data = await prom;
             expect(data).to.be.a('object');
-            expect(data.hello).to.eql('world');
+            expect(data.hello).toEqual('world');
         });
 
         it('returns a promise rejected if we can not get the data', async () => {
@@ -37,7 +37,7 @@ describe('iD.coreFileFetcher', function() {
             expect(prom).to.be.a('promise');
             data = await prom;
             expect(data).to.be.a('object');
-            expect(data.n2061.tags.name).to.eql('Three Rivers City Hall');
+            expect(data.n2061.tags.name).toEqual('Three Rivers City Hall');
         });
     });
 

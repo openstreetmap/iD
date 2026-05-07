@@ -105,7 +105,7 @@ describe('iD.osmEntity', function () {
         it('doesn\'t modify the input', function () {
             var attrs = {tags: {foo: 'bar'}};
             new iD.osmNode().update(attrs);
-            expect(attrs).to.eql({tags: {foo: 'bar'}});
+            expect(attrs).toEqual({tags: {foo: 'bar'}});
         });
 
         it('doesn\'t copy prototype properties', function () {
@@ -138,35 +138,35 @@ describe('iD.osmEntity', function () {
         it('merges tags', function () {
             var a = new iD.osmNode({tags: {a: 'a'}});
             var b = a.mergeTags({b: 'b'});
-            expect(b.tags).to.eql({a: 'a', b: 'b'});
+            expect(b.tags).toEqual({a: 'a', b: 'b'});
         });
 
         it('combines non-conflicting tags', function () {
             var a = new iD.osmNode({tags: {a: 'a'}});
             var b = a.mergeTags({a: 'a'});
-            expect(b.tags).to.eql({a: 'a'});
+            expect(b.tags).toEqual({a: 'a'});
         });
 
         it('combines conflicting tags with semicolons', function () {
             var a = new iD.osmNode({tags: {a: 'a'}});
             var b = a.mergeTags({a: 'b'});
-            expect(b.tags).to.eql({a: 'a;b'});
+            expect(b.tags).toEqual({a: 'a;b'});
         });
 
         it('combines combined tags', function () {
             var a = new iD.osmNode({tags: {a: 'a;b'}});
             var b = new iD.osmNode({tags: {a: 'b'}});
 
-            expect(a.mergeTags(b.tags).tags).to.eql({a: 'a;b'});
-            expect(b.mergeTags(a.tags).tags).to.eql({a: 'b;a'});
+            expect(a.mergeTags(b.tags).tags).toEqual({a: 'a;b'});
+            expect(b.mergeTags(a.tags).tags).toEqual({a: 'b;a'});
         });
 
         it('combines combined tags with whitespace', function () {
             var a = new iD.osmNode({tags: {a: 'a; b'}});
             var b = new iD.osmNode({tags: {a: 'b'}});
 
-            expect(a.mergeTags(b.tags).tags).to.eql({a: 'a;b'});
-            expect(b.mergeTags(a.tags).tags).to.eql({a: 'b;a'});
+            expect(a.mergeTags(b.tags).tags).toEqual({a: 'a;b'});
+            expect(b.mergeTags(a.tags).tags).toEqual({a: 'b;a'});
         });
 
         it('accepts override tags', function () {
@@ -175,15 +175,15 @@ describe('iD.osmEntity', function () {
 
             const merged = a.mergeTags(b.tags, { c: '3' });
 
-            expect(merged.tags.c).to.eql('3');
+            expect(merged.tags.c).toEqual('3');
         });
     });
 
     describe('#osmId', function () {
         it('returns an OSM ID as a string', function () {
-            expect(new iD.osmWay({id: 'w1234'}).osmId()).to.eql('1234');
-            expect(new iD.osmNode({id: 'n1234'}).osmId()).to.eql('1234');
-            expect(new iD.osmRelation({id: 'r1234'}).osmId()).to.eql('1234');
+            expect(new iD.osmWay({id: 'w1234'}).osmId()).toEqual('1234');
+            expect(new iD.osmNode({id: 'n1234'}).osmId()).toEqual('1234');
+            expect(new iD.osmRelation({id: 'r1234'}).osmId()).toEqual('1234');
         });
     });
 

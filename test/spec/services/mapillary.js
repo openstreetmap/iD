@@ -196,7 +196,7 @@ describe('iD.serviceMapillary', function() {
         it('gets and sets the selected image', function() {
             const photo = { id: 'baz', originalLngLat: {lng: 10, lat: 0}};
             mapillary.setActiveImage(photo);
-            expect(mapillary.getActiveImage().id).to.eql(photo.id);
+            expect(mapillary.getActiveImage().id).toEqual(photo.id);
         });
     });
 

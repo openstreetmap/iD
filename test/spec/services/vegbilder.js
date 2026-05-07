@@ -210,7 +210,7 @@ describe('iD.serviceVegbilder', function() {
 
       return new Promise((resolve) => {
         vegbilder.on('loadedImages', () => {
-          expect(fetchMock.calls().length).to.eql(1);
+          expect(fetchMock.calls().length).toEqual(1);
           resolve();
         });
 
@@ -254,7 +254,7 @@ describe('iD.serviceVegbilder', function() {
       await setTimeout(200);
 
       expect(spy).not.toHaveBeenCalled();
-      expect(fetchMock.calls().length).to.eql(0);
+      expect(fetchMock.calls().length).toEqual(0);
     });
   });
 

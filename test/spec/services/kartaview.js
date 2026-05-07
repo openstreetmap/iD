@@ -106,7 +106,7 @@ describe('iD.serviceKartaview', function() {
             kartaview.loadImages(context.projection);
 
             await new Promise(cb => { kartaview.on('loadedImages', cb); });
-            expect(fetchMock.calls().length).to.eql(1);  // 1 nearby-photos
+            expect(fetchMock.calls().length).toEqual(1);  // 1 nearby-photos
         });
 
         it('does not load images around null island', async () => {
@@ -166,7 +166,7 @@ describe('iD.serviceKartaview', function() {
 
             await setTimeout(200);
             expect(spy).not.toHaveBeenCalled();
-            expect(fetchMock.calls().length).to.eql(0);   // no tile requests of any kind
+            expect(fetchMock.calls().length).toEqual(0);   // no tile requests of any kind
         });
 
         it('loads multiple pages of image results', async () => {
@@ -203,7 +203,7 @@ describe('iD.serviceKartaview', function() {
             kartaview.loadImages(context.projection);
 
             await new Promise(cb => { kartaview.on('loadedImages', cb); });
-            expect(fetchMock.calls().length).to.eql(2);   // 2 nearby-photos
+            expect(fetchMock.calls().length).toEqual(2);   // 2 nearby-photos
         });
     });
 
@@ -271,7 +271,7 @@ describe('iD.serviceKartaview', function() {
             var d = { key: 'foo' };
             kartaview.cache().images = { forImageKey: { foo: d }};
             kartaview.selectImage(context, 'foo');
-            expect(kartaview.getSelectedImage()).to.eql(d);
+            expect(kartaview.getSelectedImage()).toEqual(d);
         });
     });
 

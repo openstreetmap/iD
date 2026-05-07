@@ -35,13 +35,13 @@ describe('iD.uiSectionRawTagEditor', function() {
     it('creates a pair of empty input elements if the entity has no tags', function () {
         element.remove();
         render({});
-        expect(element.selectAll('.tag-list li').nodes().length).to.eql(1);
+        expect(element.selectAll('.tag-list li').nodes().length).toEqual(1);
         expect(element.select('.tag-list').selectAll('input.value').property('value')).toBe('');
         expect(element.select('.tag-list').selectAll('input.key').property('value')).toBe('');
     });
 
     it('adds pair of empty input elements at end of list', () => {
-        expect(element.selectAll('.tag-list li').nodes().length).to.eql(2);
+        expect(element.selectAll('.tag-list li').nodes().length).toEqual(2);
         expect(element.select('.tag-list').selectAll('input').nodes()[2].value).toBe('');
         expect(element.select('.tag-list').selectAll('input').nodes()[3].value).toBe('');
     });
@@ -51,6 +51,6 @@ describe('iD.uiSectionRawTagEditor', function() {
             taglist.on('change', (_, tags) => cb(tags));
         });
         iD.utilTriggerEvent(element.selectAll('button.remove'), 'mousedown', { button: 0 });
-        expect(await tags).to.eql({highway: undefined});
+        expect(await tags).toEqual({highway: undefined});
     });
 });

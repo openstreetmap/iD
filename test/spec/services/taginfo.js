@@ -47,7 +47,7 @@ describe('iD.serviceTaginfo', function() {
             taginfo.keys({ query: 'amen' }, callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {query: 'amen', page: '1', rp: '10', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
             );
             expect(callback).toHaveBeenCalledWith(
@@ -137,7 +137,7 @@ describe('iD.serviceTaginfo', function() {
             taginfo.multikeys({ query: 'recycling:' }, callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {query: 'recycling:', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
             );
             expect(callback).toHaveBeenCalledWith(
@@ -192,7 +192,7 @@ describe('iD.serviceTaginfo', function() {
             taginfo.values({ key: 'amenity', query: 'par' }, callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {key: 'amenity', query: 'par', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
             );
             expect(callback).toHaveBeenCalledWith(
@@ -379,7 +379,7 @@ describe('iD.serviceTaginfo', function() {
             taginfo.roles({ rtype: 'route', query: 's', geometry: 'relation' }, callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {rtype: 'route', query: 's', page: '1', rp: '25', sortname: 'count_relation_members', sortorder: 'desc', lang: 'en'}
             );
             expect(callback).toHaveBeenCalledWith(null, [
@@ -401,7 +401,7 @@ describe('iD.serviceTaginfo', function() {
             taginfo.docs({ key: 'amenity', value: 'parking' }, callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {key: 'amenity', value: 'parking'}
             );
             expect(callback).toHaveBeenCalledWith(

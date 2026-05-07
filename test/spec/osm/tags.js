@@ -16,8 +16,8 @@ describe('osmTagSuggestingArea', function () {
     });
 
     it('handles features with a lifecycle prefixes', function () {
-        expect(iD.osmTagSuggestingArea({ leisure: 'stadium' })).to.eql({ leisure: 'stadium' });
-        expect(iD.osmTagSuggestingArea({ 'disused:leisure': 'stadium' })).to.eql({ 'disused:leisure': 'stadium' });
+        expect(iD.osmTagSuggestingArea({ leisure: 'stadium' })).toEqual({ leisure: 'stadium' });
+        expect(iD.osmTagSuggestingArea({ 'disused:leisure': 'stadium' })).toEqual({ 'disused:leisure': 'stadium' });
         expect(iD.osmTagSuggestingArea({ 'ex:leisure': 'stadium' })).toBeNull();
     });
 });

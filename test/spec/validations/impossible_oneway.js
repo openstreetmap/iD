@@ -69,10 +69,10 @@ describe('iD.validations.impossible_oneway', function() {
             const issues = validate();
             expect(issues).to.have.lengthOf(1);
             const issue1 = issues[0];
-            expect(issue1.type).to.eql('impossible_oneway');
-            expect(issue1.subtype).to.eql('highway');
-            expect(issue1.severity).to.eql('warning');
-            expect(issue1.entityIds).to.eql(['w-1', 'n-2']);
+            expect(issue1.type).toEqual('impossible_oneway');
+            expect(issue1.subtype).toEqual('highway');
+            expect(issue1.severity).toEqual('warning');
+            expect(issue1.entityIds).toEqual(['w-1', 'n-2']);
         });
 
         it('flags unconnected oneway start', function() {
@@ -92,10 +92,10 @@ describe('iD.validations.impossible_oneway', function() {
             const issues = validate();
             expect(issues).to.have.lengthOf(1);
             const issue1 = issues[0];
-            expect(issue1.type).to.eql('impossible_oneway');
-            expect(issue1.subtype).to.eql('highway');
-            expect(issue1.severity).to.eql('warning');
-            expect(issue1.entityIds).to.eql(['w-1', 'n-2']);
+            expect(issue1.type).toEqual('impossible_oneway');
+            expect(issue1.subtype).toEqual('highway');
+            expect(issue1.severity).toEqual('warning');
+            expect(issue1.entityIds).toEqual(['w-1', 'n-2']);
         });
 
         it('flags oneway pointing to each other', function() {
@@ -120,13 +120,13 @@ describe('iD.validations.impossible_oneway', function() {
             const issues = validate();
             expect(issues).to.have.lengthOf(2);
             const issue1 = issues[0];
-            expect(issue1.type).to.eql('impossible_oneway');
-            expect(issue1.subtype).to.eql('highway');
-            expect(issue1.severity).to.eql('warning');
-            expect(issue1.entityIds).to.eql(['w-1', 'n-2']);
+            expect(issue1.type).toEqual('impossible_oneway');
+            expect(issue1.subtype).toEqual('highway');
+            expect(issue1.severity).toEqual('warning');
+            expect(issue1.entityIds).toEqual(['w-1', 'n-2']);
             const issue2 = issues[1];
-            expect(issue2.type).to.eql('impossible_oneway');
-            expect(issue2.entityIds).to.eql(['w-2', 'n-2']);
+            expect(issue2.type).toEqual('impossible_oneway');
+            expect(issue2.entityIds).toEqual(['w-2', 'n-2']);
         });
 
         it('does not flags oneway with reverse "-1" oneway direction', function() {
@@ -183,13 +183,13 @@ describe('iD.validations.impossible_oneway', function() {
             const issues = validate();
             expect(issues).to.have.lengthOf(2);
             const issue1 = issues[0];
-            expect(issue1.type).to.eql('impossible_oneway');
-            expect(issue1.subtype).to.eql('waterway');
-            expect(issue1.severity).to.eql('warning');
-            expect(issue1.entityIds).to.eql(['w-1', 'n-2']);
+            expect(issue1.type).toEqual('impossible_oneway');
+            expect(issue1.subtype).toEqual('waterway');
+            expect(issue1.severity).toEqual('warning');
+            expect(issue1.entityIds).toEqual(['w-1', 'n-2']);
             const issue2 = issues[1];
-            expect(issue2.type).to.eql('impossible_oneway');
-            expect(issue2.entityIds).to.eql(['w-2', 'n-2']);
+            expect(issue2.type).toEqual('impossible_oneway');
+            expect(issue2.entityIds).toEqual(['w-2', 'n-2']);
         });
     });
 });

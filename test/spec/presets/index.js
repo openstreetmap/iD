@@ -19,27 +19,27 @@ describe('iD.presetIndex', function () {
             var node = new iD.osmNode({ id: 'n' });
             var graph = new iD.coreGraph([node]);
             var presets = iD.presetIndex();
-            expect(presets.match(node, graph).id).to.eql('point');
+            expect(presets.match(node, graph).id).toEqual('point');
         });
         it('has a fallback line preset', function () {
             var node = new iD.osmNode({ id: 'n' });
             var way = new iD.osmWay({ id: 'w', nodes: ['n'] });
             var graph = new iD.coreGraph([node, way]);
             var presets = iD.presetIndex();
-            expect(presets.match(way, graph).id).to.eql('line');
+            expect(presets.match(way, graph).id).toEqual('line');
         });
         it('has a fallback area preset', function () {
             var node = new iD.osmNode({ id: 'n' });
             var way = new iD.osmWay({ id: 'w', nodes: ['n'], tags: { area: 'yes' }});
             var graph = new iD.coreGraph([node, way]);
             var presets = iD.presetIndex();
-            expect(presets.match(way, graph).id).to.eql('area');
+            expect(presets.match(way, graph).id).toEqual('area');
         });
         it('has a fallback relation preset', function () {
             var relation = new iD.osmRelation({ id: 'r' });
             var graph = new iD.coreGraph([relation]);
             var presets = iD.presetIndex();
-            expect(presets.match(relation, graph).id).to.eql('relation');
+            expect(presets.match(relation, graph).id).toEqual('relation');
         });
     });
 
@@ -56,7 +56,7 @@ describe('iD.presetIndex', function () {
             await presets.ensureLoaded();
             var way = new iD.osmWay({ tags: { highway: 'residential' } });
             var graph = new iD.coreGraph([way]);
-            expect(presets.match(way, graph).id).to.eql('residential');
+            expect(presets.match(way, graph).id).toEqual('residential');
         });
 
         it('returns the appropriate fallback preset when no tags match', async () => {
@@ -67,8 +67,8 @@ describe('iD.presetIndex', function () {
             var graph = new iD.coreGraph([point, line]);
 
             await presets.ensureLoaded();
-            expect(presets.match(point, graph).id).to.eql('point');
-            expect(presets.match(line, graph).id).to.eql('line');
+            expect(presets.match(point, graph).id).toEqual('point');
+            expect(presets.match(line, graph).id).toEqual('line');
         });
 
         it('matches vertices on a line as points', async () => {
@@ -79,7 +79,7 @@ describe('iD.presetIndex', function () {
             var graph = new iD.coreGraph([point, line]);
 
             await presets.ensureLoaded();
-            expect(presets.match(point, graph).id).to.eql('point');
+            expect(presets.match(point, graph).id).toEqual('point');
         });
 
         it('matches vertices on an addr:interpolation line as points', async () => {
@@ -90,7 +90,7 @@ describe('iD.presetIndex', function () {
             var graph = new iD.coreGraph([point, line]);
 
             await presets.ensureLoaded();
-            expect(presets.match(point, graph).id).to.eql('park');
+            expect(presets.match(point, graph).id).toEqual('park');
         });
     });
 
@@ -186,7 +186,7 @@ describe('iD.presetIndex', function () {
 
             expect(presets.item('residential').addable()).toBe(true);
             expect(presets.item('park').addable()).toBe(false);
-            expect(presets.addablePresetIDs()).to.eql(ids);
+            expect(presets.addablePresetIDs()).toEqual(ids);
 
             presets.addablePresetIDs(null);
             expect(presets.item('residential').addable()).toBe(true);
@@ -198,29 +198,29 @@ describe('iD.presetIndex', function () {
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
 
-            expect(presets.item(null)).to.eql(undefined);
-            expect(presets.item(undefined)).to.eql(undefined);
-            expect(presets.item('')).to.eql(undefined);
-            expect(presets.item('garbage')).to.eql(undefined);
+            expect(presets.item(null)).toEqual(undefined);
+            expect(presets.item(undefined)).toEqual(undefined);
+            expect(presets.item('')).toEqual(undefined);
+            expect(presets.item('garbage')).toEqual(undefined);
             expect(presets.item('residential').addable()).toBe(true);
             expect(presets.item('park').addable()).toBe(true);
 
             var ids = new Set([null, undefined, '', 'garbage', 'residential']);   // can only add preset with these IDs
             presets.addablePresetIDs(ids);
 
-            expect(presets.item(null)).to.eql(undefined);
-            expect(presets.item(undefined)).to.eql(undefined);
-            expect(presets.item('')).to.eql(undefined);
-            expect(presets.item('garbage')).to.eql(undefined);
+            expect(presets.item(null)).toEqual(undefined);
+            expect(presets.item(undefined)).toEqual(undefined);
+            expect(presets.item('')).toEqual(undefined);
+            expect(presets.item('garbage')).toEqual(undefined);
             expect(presets.item('residential').addable()).toBe(true);
             expect(presets.item('park').addable()).toBe(false);
-            expect(presets.addablePresetIDs()).to.eql(ids);
+            expect(presets.addablePresetIDs()).toEqual(ids);
 
             presets.addablePresetIDs(null);
-            expect(presets.item(null)).to.eql(undefined);
-            expect(presets.item(undefined)).to.eql(undefined);
-            expect(presets.item('')).to.eql(undefined);
-            expect(presets.item('garbage')).to.eql(undefined);
+            expect(presets.item(null)).toEqual(undefined);
+            expect(presets.item(undefined)).toEqual(undefined);
+            expect(presets.item('')).toEqual(undefined);
+            expect(presets.item('garbage')).toEqual(undefined);
             expect(presets.item('residential').addable()).toBe(true);
             expect(presets.item('park').addable()).toBe(true);
         });
@@ -233,16 +233,16 @@ describe('iD.presetIndex', function () {
             presets.addablePresetIDs(ids);
 
             var areaDefaults = presets.defaults('area', 10).collection;
-            expect(areaDefaults.length).to.eql(0);
+            expect(areaDefaults.length).toEqual(0);
 
             var pointDefaults = presets.defaults('point', 10).collection;
-            expect(pointDefaults.length).to.eql(1);
-            expect(pointDefaults[0].id).to.eql('bench');
+            expect(pointDefaults.length).toEqual(1);
+            expect(pointDefaults[0].id).toEqual('bench');
 
             var lineDefaults = presets.defaults('line', 10).collection;
-            expect(lineDefaults.length).to.eql(2);
-            expect(lineDefaults[0].id).to.eql('bench');
-            expect(lineDefaults[1].id).to.eql('residential');
+            expect(lineDefaults.length).toEqual(2);
+            expect(lineDefaults[0].id).toEqual('bench');
+            expect(lineDefaults[1].id).toEqual('residential');
         });
     });
 
@@ -261,9 +261,9 @@ describe('iD.presetIndex', function () {
                 }
             };
 
-            expect(presets.match(surfShop, graph)).to.eql(undefined); // no surfshop preset yet...
+            expect(presets.match(surfShop, graph)).toEqual(undefined); // no surfshop preset yet...
             presets.build(presetData, true);
-            expect(presets.match(surfShop, graph).addTags).to.eql({ amenity: 'shop', 'shop:type': 'surf' });
+            expect(presets.match(surfShop, graph).addTags).toEqual({ amenity: 'shop', 'shop:type': 'surf' });
         });
 
         it('configures presets\' initial visibility', function () {
@@ -324,7 +324,7 @@ describe('iD.presetIndex', function () {
             var graph = new iD.coreGraph([relation]);
             await presets.ensureLoaded();
             var match = presets.match(relation, graph);
-            expect(match.id).to.eql('building');
+            expect(match.id).toEqual('building');
         });
 
         it('prefers building to address', async () => {
@@ -334,7 +334,7 @@ describe('iD.presetIndex', function () {
             var graph = new iD.coreGraph([way]);
             await presets.ensureLoaded();
             var match = presets.match(way, graph);
-            expect(match.id).to.eql('building');
+            expect(match.id).toEqual('building');
         });
 
         it('prefers pedestrian to area', async () => {
@@ -344,7 +344,7 @@ describe('iD.presetIndex', function () {
             var graph = new iD.coreGraph([way]);
             await presets.ensureLoaded();
             var match = presets.match(way, graph);
-            expect(match.id).to.eql('highway/pedestrian_area');
+            expect(match.id).toEqual('highway/pedestrian_area');
         });
     });
 
@@ -385,14 +385,14 @@ describe('iD.presetIndex', function () {
             var url = 'https://fakemaprules.io/fake.json';
 
             // no external presets yet
-            expect(iD.presetIndex().match(surfShop, graph).id).to.eql('point');
+            expect(iD.presetIndex().match(surfShop, graph).id).toEqual('point');
 
             // reset graph...
             graph = new iD.coreGraph([surfShop]);
 
             // add the validations query param...
             iD.presetIndex().fromExternal(url, function (externalPresets) {
-                expect(externalPresets.match(surfShop, graph).id).to.eql('8bc64d6d');
+                expect(externalPresets.match(surfShop, graph).id).toEqual('8bc64d6d');
             });
 
             _server.respondWith('GET', /fake\.json/,
@@ -413,7 +413,7 @@ describe('iD.presetIndex', function () {
                 }, []);
 
                 var morePresetKeys = Object.keys(presetData.presets);
-                expect(morePresetKeys.length).to.eql(external.length);
+                expect(morePresetKeys.length).toEqual(external.length);
 
                 morePresetKeys.forEach(function(presetID) {
                     expect(external.indexOf(presetID)).to.be.at.least(0);
@@ -453,7 +453,7 @@ describe('iD.presetIndex', function () {
             expect(ids).to.include('p5');
             expect(ids).to.not.include('p2');
             expect(ids).to.not.include('p4');
-            expect(ids.slice(0, 3)).to.eql(['p1', 'p3', 'p5']);
+            expect(ids.slice(0, 3)).toEqual(['p1', 'p3', 'p5']);
         });
     });
 

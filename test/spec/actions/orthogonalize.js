@@ -103,7 +103,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection)(graph));
-            expect(Object.keys(diff.changes()).sort()).to.eql(['a', 'b', 'c', 'f']);
+            expect(Object.keys(diff.changes()).sort()).toEqual(['a', 'b', 'c', 'f']);
         });
 
         it('does not move or remove self-intersecting nodes', function() {
@@ -169,7 +169,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
-            expect(graph.entity('-').nodes.length).to.eql(6);
+            expect(graph.entity('-').nodes.length).toEqual(6);
         });
     });
 
@@ -275,7 +275,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection)(graph));
-            expect(Object.keys(diff.changes()).sort()).to.eql(['b', 'c']);
+            expect(Object.keys(diff.changes()).sort()).toEqual(['b', 'c']);
         });
 
         it('does not move or remove self-intersecting nodes', function() {
@@ -392,7 +392,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
-                expect(result).to.eql('square_enough');
+                expect(result).toEqual('square_enough');
             });
 
             it('returns false for unsquared quad', function () {
@@ -461,7 +461,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
-                expect(result).to.eql('not_squarish');
+                expect(result).toEqual('not_squarish');
             });
 
             it('returns false for non-square self-intersecting shapes', function() {
@@ -503,7 +503,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
-                expect(result).to.eql('square_enough');
+                expect(result).toEqual('square_enough');
             });
 
             it('returns false for unsquared quad', function () {
@@ -572,7 +572,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection).disabled(graph);
-                expect(result).to.eql('not_squarish');
+                expect(result).toEqual('not_squarish');
             });
 
             it('returns false for non-square self-intersecting paths', function() {
@@ -608,7 +608,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection, 'b').disabled(graph);
-                expect(result).to.eql('square_enough');
+                expect(result).toEqual('square_enough');
             });
 
             it('returns false for a vertex in an unsquared quad', function () {
@@ -660,7 +660,7 @@ describe('iD.actionOrthogonalize', function () {
                 ]);
 
                 var result = iD.actionOrthogonalize('-', projection, 'b').disabled(graph);
-                expect(result).to.eql('not_squarish');
+                expect(result).toEqual('not_squarish');
             });
 
         });
@@ -689,7 +689,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph, 0);
-            expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'e', 'f', 'a']);
+            expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c', 'd', 'e', 'f', 'a']);
             expect(graph.entity('b').loc[0]).toBeCloseTo(1, 6);
             expect(graph.entity('b').loc[1]).toBeCloseTo(0.01, 6);
             expect(graph.entity('c').loc[0]).toBeCloseTo(2, 6);
@@ -709,7 +709,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph, 0.5);
-            expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'e', 'f', 'a']);
+            expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c', 'd', 'e', 'f', 'a']);
             expect(graph.entity('b').loc[0]).toBeCloseTo(1, 3);
             expect(graph.entity('b').loc[1]).toBeCloseTo(0.005, 3);
             expect(graph.entity('c').loc[0]).toBeCloseTo(2, 3);
@@ -728,7 +728,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph, 1);
-            expect(graph.entity('-').nodes).to.eql(['a', 'b', 'd', 'e', 'f', 'a']);
+            expect(graph.entity('-').nodes).toEqual(['a', 'b', 'd', 'e', 'f', 'a']);
             expect(graph.entity('b').loc[0]).toBeCloseTo(1, 3);
             expect(graph.entity('b').loc[1]).toBeCloseTo(0, 3);
             expect(graph.hasEntity('c')).to.eq(undefined);

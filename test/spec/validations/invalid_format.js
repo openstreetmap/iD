@@ -33,8 +33,8 @@ describe('iD.validations.invalid_format', function () {
             });
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(1);
-            expect(issues[0].type).to.eql('invalid_format');
-            expect(issues[0].subtype).to.eql('website');
+            expect(issues[0].type).toEqual('invalid_format');
+            expect(issues[0].subtype).toEqual('website');
         });
 
         it('should flag malformed URLs', function() {
@@ -45,8 +45,8 @@ describe('iD.validations.invalid_format', function () {
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(2);
             issues.forEach(function(issue) {
-                expect(issue.type).to.eql('invalid_format');
-                expect(issue.subtype).to.eql('website');
+                expect(issue.type).toEqual('invalid_format');
+                expect(issue.subtype).toEqual('website');
             });
         });
 
@@ -56,9 +56,9 @@ describe('iD.validations.invalid_format', function () {
             });
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(1);
-            expect(issues[0].type).to.eql('invalid_format');
-            expect(issues[0].subtype).to.eql('website');
-            expect(issues[0].data.count).to.eql(1);
+            expect(issues[0].type).toEqual('invalid_format');
+            expect(issues[0].subtype).toEqual('website');
+            expect(issues[0].data.count).toEqual(1);
         });
 
         it('should handle multiple invalid URLs', function() {
@@ -67,9 +67,9 @@ describe('iD.validations.invalid_format', function () {
             });
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(1);
-            expect(issues[0].type).to.eql('invalid_format');
-            expect(issues[0].subtype).to.eql('website');
-            expect(issues[0].data.count).to.eql(2);
+            expect(issues[0].type).toEqual('invalid_format');
+            expect(issues[0].subtype).toEqual('website');
+            expect(issues[0].data.count).toEqual(2);
         });
 
         it('should validate all URL tags', function() {
@@ -82,8 +82,8 @@ describe('iD.validations.invalid_format', function () {
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(4);
             issues.forEach(function(issue) {
-                expect(issue.type).to.eql('invalid_format');
-                expect(issue.subtype).to.eql('website');
+                expect(issue.type).toEqual('invalid_format');
+                expect(issue.subtype).toEqual('website');
             });
         });
 
@@ -135,14 +135,14 @@ describe('iD.validations.invalid_format', function () {
             });
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(1);
-            expect(issues[0].type).to.eql('invalid_format');
-            expect(issues[0].subtype).to.eql('website');
+            expect(issues[0].type).toEqual('invalid_format');
+            expect(issues[0].subtype).toEqual('website');
             const fixes = issues[0].dynamicFixes();
             expect(fixes).to.have.lengthOf(1);
             issues[0].fixes(context)[0].onClick(context);
             const fixedEntity = context.entity(entity.id);
             expect(fixedEntity.tags.image).toBeUndefined();
-            expect(fixedEntity.tags.wikimedia_commons).to.eql(entity.tags.image);
+            expect(fixedEntity.tags.wikimedia_commons).toEqual(entity.tags.image);
         });
     });
 
@@ -161,8 +161,8 @@ describe('iD.validations.invalid_format', function () {
             });
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(1);
-            expect(issues[0].type).to.eql('invalid_format');
-            expect(issues[0].subtype).to.eql('email');
+            expect(issues[0].type).toEqual('invalid_format');
+            expect(issues[0].subtype).toEqual('email');
         });
     });
 });

@@ -66,10 +66,10 @@ describe('iD.validations.missing_tag', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('missing_tag');
-        expect(issue.subtype).to.eql('any');
+        expect(issue.type).toEqual('missing_tag');
+        expect(issue.subtype).toEqual('any');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags no descriptive tags', function() {
@@ -77,10 +77,10 @@ describe('iD.validations.missing_tag', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('missing_tag');
-        expect(issue.subtype).to.eql('descriptive');
+        expect(issue.type).toEqual('missing_tag');
+        expect(issue.subtype).toEqual('descriptive');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags no descriptive tags on multipolygon', function() {
@@ -88,10 +88,10 @@ describe('iD.validations.missing_tag', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('missing_tag');
-        expect(issue.subtype).to.eql('descriptive');
+        expect(issue.type).toEqual('missing_tag');
+        expect(issue.subtype).toEqual('descriptive');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('r-1');
+        expect(issue.entityIds[0]).toEqual('r-1');
     });
 
     it('flags no type tag on relation', function() {
@@ -99,10 +99,10 @@ describe('iD.validations.missing_tag', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('missing_tag');
-        expect(issue.subtype).to.eql('relation_type');
+        expect(issue.type).toEqual('missing_tag');
+        expect(issue.subtype).toEqual('relation_type');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('r-1');
+        expect(issue.entityIds[0]).toEqual('r-1');
     });
 
     it('ignores highway with classification', function() {
@@ -116,10 +116,10 @@ describe('iD.validations.missing_tag', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('missing_tag');
-        expect(issue.subtype).to.eql('highway_classification');
+        expect(issue.type).toEqual('missing_tag');
+        expect(issue.subtype).toEqual('highway_classification');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
 });

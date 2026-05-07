@@ -91,7 +91,7 @@ describe('maprules', function() {
                     }
                 }
             ].forEach(function(test) {
-                expect(iD.serviceMapRules.buildTagMap(test.t)).to.eql(test.r);
+                expect(iD.serviceMapRules.buildTagMap(test.t)).toEqual(test.r);
             });
         });
     });
@@ -158,7 +158,7 @@ describe('maprules', function() {
             };
             expect(iD.serviceMapRules.validationRules()).toEqual([]);
             iD.serviceMapRules.addRule(selector);
-            expect(iD.serviceMapRules.validationRules().length).to.eql(1);
+            expect(iD.serviceMapRules.validationRules().length).toEqual(1);
         });
     });
     describe('#clearRules', function() {
@@ -172,7 +172,7 @@ describe('maprules', function() {
                 absence:'name',
                 warning:'\'Marketplace\' preset must be coupled with name'
             });
-            expect(iD.serviceMapRules.validationRules().length).to.eql(1);
+            expect(iD.serviceMapRules.validationRules().length).toEqual(1);
 
             iD.serviceMapRules.clearRules();
             expect(iD.serviceMapRules.validationRules()).toEqual([]);
@@ -190,7 +190,7 @@ describe('maprules', function() {
             iD.serviceMapRules.addRule(selector);
             var rules = iD.serviceMapRules.validationRules();
             expect(rules).instanceof(Array);
-            expect(rules.length).to.eql(1);
+            expect(rules.length).toEqual(1);
         });
     });
 
@@ -570,10 +570,10 @@ describe('maprules', function() {
                     var issue = issues[0];
                     var type = Object.keys(selector).indexOf('error') ? 'error' : 'warning';
 
-                    expect(issues.length).to.eql(1);
-                    expect(issue.entityIds).to.eql([entity.id]);
-                    expect(issue.message(iD.coreContext())).to.eql(selector[type]);
-                    expect(type).to.eql(issue.severity);
+                    expect(issues.length).toEqual(1);
+                    expect(issue.entityIds).toEqual([entity.id]);
+                    expect(issue.message(iD.coreContext())).toEqual(selector[type]);
+                    expect(type).toEqual(issue.severity);
                 });
             });
         });

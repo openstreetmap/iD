@@ -168,10 +168,10 @@ describe('iD.actionMergePolygon', function () {
         graph = iD.actionMergePolygon(['w0', 'w1'], 'r')(graph);
 
         //coastline should stay on the way
-        expect(graph.entity('w0').tags).to.eql({ natural: 'coastline' });
+        expect(graph.entity('w0').tags).toEqual({ natural: 'coastline' });
 
         //other tags should move to the relation
         var r = graph.entity('r');
-        expect(r.tags).to.eql({ type: 'multipolygon', leisure: 'nature_reserve' });
+        expect(r.tags).toEqual({ type: 'multipolygon', leisure: 'nature_reserve' });
     });
 });

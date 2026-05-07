@@ -242,24 +242,24 @@ describe('iD.validations.almost_junction', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('almost_junction');
-        expect(issue.subtype).to.eql('highway-highway');
+        expect(issue.type).toEqual('almost_junction');
+        expect(issue.subtype).toEqual('highway-highway');
         expect(issue.entityIds).to.have.lengthOf(3);
-        expect(issue.entityIds[0]).to.eql('w-1');
-        expect(issue.entityIds[1]).to.eql('n-1');
-        expect(issue.entityIds[2]).to.eql('w-2');
+        expect(issue.entityIds[0]).toEqual('w-1');
+        expect(issue.entityIds[1]).toEqual('n-1');
+        expect(issue.entityIds[2]).toEqual('w-2');
 
         expect(issue.loc).to.have.lengthOf(2);
-        expect(issue.loc[0]).to.eql(22.42357);
-        expect(issue.loc[1]).to.eql(0);
+        expect(issue.loc[0]).toEqual(22.42357);
+        expect(issue.loc[1]).toEqual(0);
 
         expect(issue.data.edge).to.have.lengthOf(2);
-        expect(issue.data.edge[0]).to.eql('n-3');
-        expect(issue.data.edge[1]).to.eql('n-4');
+        expect(issue.data.edge[0]).toEqual('n-3');
+        expect(issue.data.edge[1]).toEqual('n-4');
 
         expect(issue.data.cross_loc).to.have.lengthOf(2);
-        expect(issue.data.cross_loc[0]).to.eql(22.42356);
-        expect(issue.data.cross_loc[1]).to.eql(0);
+        expect(issue.data.cross_loc[0]).toEqual(22.42356);
+        expect(issue.data.cross_loc[1]).toEqual(0);
 
         expect(issue.fixes(context)).to.have.lengthOf(3);
         issue.fixes(context)[0].onClick(context);
@@ -272,24 +272,24 @@ describe('iD.validations.almost_junction', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('almost_junction');
-        expect(issue.subtype).to.eql('highway-highway');
+        expect(issue.type).toEqual('almost_junction');
+        expect(issue.subtype).toEqual('highway-highway');
         expect(issue.entityIds).to.have.lengthOf(3);
-        expect(issue.entityIds[0]).to.eql('w-1');
-        expect(issue.entityIds[1]).to.eql('n-1');
-        expect(issue.entityIds[2]).to.eql('w-2');
+        expect(issue.entityIds[0]).toEqual('w-1');
+        expect(issue.entityIds[1]).toEqual('n-1');
+        expect(issue.entityIds[2]).toEqual('w-2');
 
         expect(issue.loc).to.have.lengthOf(2);
-        expect(issue.loc[0]).to.eql(22.42357);
-        expect(issue.loc[1]).to.eql(0);
+        expect(issue.loc[0]).toEqual(22.42357);
+        expect(issue.loc[1]).toEqual(0);
 
         expect(issue.data.edge).to.have.lengthOf(2);
-        expect(issue.data.edge[0]).to.eql('n-3');
-        expect(issue.data.edge[1]).to.eql('n-4');
+        expect(issue.data.edge[0]).toEqual('n-3');
+        expect(issue.data.edge[1]).toEqual('n-4');
 
         expect(issue.data.cross_loc).to.have.lengthOf(2);
-        expect(issue.data.cross_loc[0]).to.eql(22.42356);
-        expect(issue.data.cross_loc[1]).to.eql(0);
+        expect(issue.data.cross_loc[0]).toEqual(22.42356);
+        expect(issue.data.cross_loc[1]).toEqual(0);
 
         expect(issue.fixes(context)).to.have.lengthOf(3);
         issue.fixes(context)[1].onClick(context);
@@ -320,12 +320,12 @@ describe('iD.validations.almost_junction', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('almost_junction');
-        expect(issue.subtype).to.eql('highway-highway');
+        expect(issue.type).toEqual('almost_junction');
+        expect(issue.subtype).toEqual('highway-highway');
         expect(issue.entityIds).to.have.lengthOf(3);
-        expect(issue.entityIds[0]).to.eql('w-2');
-        expect(issue.entityIds[1]).to.eql('n-3');
-        expect(issue.entityIds[2]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-2');
+        expect(issue.entityIds[1]).toEqual('n-3');
+        expect(issue.entityIds[2]).toEqual('w-1');
 
         issue.fixes(context)[0].onClick(context);
         var w1 = context.entity('w-1');
@@ -339,12 +339,12 @@ describe('iD.validations.almost_junction', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('almost_junction');
-        expect(issue.subtype).to.eql('highway-highway');
+        expect(issue.type).toEqual('almost_junction');
+        expect(issue.subtype).toEqual('highway-highway');
         expect(issue.entityIds).to.have.lengthOf(3);
-        expect(issue.entityIds[0]).to.eql('w-2');
-        expect(issue.entityIds[1]).to.eql('n-3');
-        expect(issue.entityIds[2]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-2');
+        expect(issue.entityIds[1]).toEqual('n-3');
+        expect(issue.entityIds[2]).toEqual('w-1');
 
         issue.fixes(context)[0].onClick(context);
         var w1 = context.entity('w-1');
@@ -358,12 +358,12 @@ describe('iD.validations.almost_junction', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('almost_junction');
-        expect(issue.subtype).to.eql('highway-highway');
+        expect(issue.type).toEqual('almost_junction');
+        expect(issue.subtype).toEqual('highway-highway');
         expect(issue.entityIds).to.have.lengthOf(3);
-        expect(issue.entityIds[0]).to.eql('w-1');
-        expect(issue.entityIds[1]).to.eql('n-5');
-        expect(issue.entityIds[2]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
+        expect(issue.entityIds[1]).toEqual('n-5');
+        expect(issue.entityIds[2]).toEqual('w-1');
 
         issue.fixes(context)[0].onClick(context);
         var w = context.entity('w-1');
@@ -377,12 +377,12 @@ describe('iD.validations.almost_junction', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('almost_junction');
-        expect(issue.subtype).to.eql('highway-highway');
+        expect(issue.type).toEqual('almost_junction');
+        expect(issue.subtype).toEqual('highway-highway');
         expect(issue.entityIds).to.have.lengthOf(3);
-        expect(issue.entityIds[0]).to.eql('w-2');
-        expect(issue.entityIds[1]).to.eql('n-5');
-        expect(issue.entityIds[2]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-2');
+        expect(issue.entityIds[1]).toEqual('n-5');
+        expect(issue.entityIds[2]).toEqual('w-1');
 
         issue.fixes(context)[0].onClick(context);
         var w1 = context.entity('w-1');

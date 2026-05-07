@@ -5,14 +5,14 @@ describe('iD.presetPreset', function() {
     describe('#fields', function() {
         it('has no fields by default', function() {
             var preset = iD.presetPreset('test', {});
-            expect(preset.fields()).to.eql([]);
+            expect(preset.fields()).toEqual([]);
         });
     });
 
     describe('#moreFields', function() {
         it('has no moreFields by default', function() {
             var preset = iD.presetPreset('test', {});
-            expect(preset.moreFields()).to.eql([]);
+            expect(preset.moreFields()).toEqual([]);
         });
     });
 
@@ -134,54 +134,54 @@ describe('iD.presetPreset', function() {
 
         it('adds match tags', function() {
             var preset = iD.presetPreset('test', {tags: {highway: 'residential'}});
-            expect(preset.setTags({}, 'line')).to.eql({highway: 'residential'});
+            expect(preset.setTags({}, 'line')).toEqual({highway: 'residential'});
         });
 
         it('adds wildcard tags with value \'yes\'', function() {
             var preset = iD.presetPreset('test', {tags: {natural: '*'}});
-            expect(preset.setTags({}, 'area')).to.eql({natural: 'yes'});
+            expect(preset.setTags({}, 'area')).toEqual({natural: 'yes'});
         });
 
         it('prefers to add tags of addTags property', function() {
             var preset = iD.presetPreset('test', {tags: {building: '*'}, addTags: {building: 'ok'}});
-            expect(preset.setTags({}, 'area')).to.eql({building: 'ok'});
+            expect(preset.setTags({}, 'area')).toEqual({building: 'ok'});
         });
 
         it('adds default tags of fields with matching geometry', function() {
             var isAddable = true;
             var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
             var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
-            expect(preset.setTags({}, 'area')).to.eql({area: 'yes', building: 'yes'});
+            expect(preset.setTags({}, 'area')).toEqual({area: 'yes', building: 'yes'});
         });
 
         it('adds no default tags of fields with non-matching geometry', function() {
             var isAddable = true;
             var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
             var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
-            expect(preset.setTags({}, 'point')).to.eql({});
+            expect(preset.setTags({}, 'point')).toEqual({});
         });
 
         describe('for a preset with no tag in areaKeys', function() {
             var preset = iD.presetPreset('test', {geometry: ['line', 'area'], tags: {name: 'testname', highway: 'pedestrian'}});
 
             it('doesn\'t add area=yes to non-areas', function() {
-                expect(preset.setTags({}, 'line')).to.eql({name: 'testname', highway: 'pedestrian'});
+                expect(preset.setTags({}, 'line')).toEqual({name: 'testname', highway: 'pedestrian'});
             });
 
             it('adds area=yes to areas', function() {
-                expect(preset.setTags({}, 'area')).to.eql({name: 'testname', highway: 'pedestrian', area: 'yes'});
+                expect(preset.setTags({}, 'area')).toEqual({name: 'testname', highway: 'pedestrian', area: 'yes'});
             });
         });
 
         describe('for a preset with a tag in areaKeys', function() {
             it('doesn\'t add area=yes automatically', function() {
                 var preset = iD.presetPreset('test', {geometry: ['area'], tags: {name: 'testname', building: 'yes'}});
-                expect(preset.setTags({}, 'area')).to.eql({name: 'testname', building: 'yes'});
+                expect(preset.setTags({}, 'area')).toEqual({name: 'testname', building: 'yes'});
             });
 
             it('does add area=yes if asked to', function() {
                 var preset = iD.presetPreset('test', {geometry: ['area'], tags: {name: 'testname', area: 'yes'}});
-                expect(preset.setTags({}, 'area')).to.eql({name: 'testname', area: 'yes'});
+                expect(preset.setTags({}, 'area')).toEqual({name: 'testname', area: 'yes'});
             });
         });
     });
@@ -189,61 +189,61 @@ describe('iD.presetPreset', function() {
     describe('#unsetTags', function() {
         it('removes tags that match preset tags', function() {
             var preset = iD.presetPreset('test', {tags: {highway: 'residential'}});
-            expect(preset.unsetTags({highway: 'residential'}, 'area')).to.eql({});
+            expect(preset.unsetTags({highway: 'residential'}, 'area')).toEqual({});
         });
 
         it('removes tags that match field default tags', function() {
             var isAddable = true;
             var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
             var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
-            expect(preset.unsetTags({building: 'yes'}, 'area')).to.eql({});
+            expect(preset.unsetTags({building: 'yes'}, 'area')).toEqual({});
         });
 
         it('removes area=yes', function() {
             var preset = iD.presetPreset('test', {tags: {highway: 'pedestrian'}});
-            expect(preset.unsetTags({highway: 'pedestrian', area: 'yes'}, 'area')).to.eql({});
+            expect(preset.unsetTags({highway: 'pedestrian', area: 'yes'}, 'area')).toEqual({});
         });
 
         it('preserves tags that do not match field default value', function() {
             var isAddable = true;
             var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
             var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
-            expect(preset.unsetTags({building: 'yep'}, 'area')).to.eql({ building: 'yep'});
+            expect(preset.unsetTags({building: 'yep'}, 'area')).toEqual({ building: 'yep'});
         });
 
         it('preserves tags that do match field default value, but do not match geometry', function() {
             var isAddable = true;
             var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
             var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
-            expect(preset.unsetTags({building: 'yes'}, 'line')).to.eql({ building: 'yes'});
+            expect(preset.unsetTags({building: 'yes'}, 'line')).toEqual({ building: 'yes'});
         });
 
         it('preserves tags that are not listed in removeTags', function() {
             var preset = iD.presetPreset('test', {tags: {a: 'b'}, removeTags: {}});
-            expect(preset.unsetTags({a: 'b'}, 'area')).to.eql({a: 'b'});
+            expect(preset.unsetTags({a: 'b'}, 'area')).toEqual({a: 'b'});
         });
 
         it('preserves field default tags when "skipFieldDefaults" flag is on', function() {
             var isAddable = true;
             var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
             var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
-            expect(preset.unsetTags({building: 'yes'}, 'area', undefined, true)).to.eql({building: 'yes'});
+            expect(preset.unsetTags({building: 'yes'}, 'area', undefined, true)).toEqual({building: 'yes'});
         });
 
         it('preserves "ignoringKeys" tags', function() {
             var preset = iD.presetPreset('test', {tags: {a: 'a', b: 'b'}});
-            expect(preset.unsetTags({a: 'a', b: 'b'}, 'area', ['b'])).to.eql({b: 'b'});
+            expect(preset.unsetTags({a: 'a', b: 'b'}, 'area', ['b'])).toEqual({b: 'b'});
         });
 
         it('preserves "ignoringKeys" tags from default fields', function() {
             var field = iD.presetField('field', {key: 'b', geometry: 'area', default: 'default'});
             var preset = iD.presetPreset('test', {fields: ['field']}, true, {field: field});
-            expect(preset.unsetTags({b: 'default'}, 'area', ['b'])).to.eql({b: 'default'});
+            expect(preset.unsetTags({b: 'default'}, 'area', ['b'])).toEqual({b: 'default'});
         });
 
         it('uses tags from addTags if removeTags is not defined', function() {
             var preset = iD.presetPreset('test', {tags: {a: 'b'}, addTags: {remove: 'me'}});
-            expect(preset.unsetTags({a: 'b', remove: 'me'}, 'area')).to.eql({a: 'b'});
+            expect(preset.unsetTags({a: 'b', remove: 'me'}, 'area')).toEqual({a: 'b'});
         });
     });
 

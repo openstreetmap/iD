@@ -11,19 +11,19 @@ describe('iD.osmRelation', function () {
     });
 
     it('defaults members to an empty array', function () {
-        expect(new iD.osmRelation().members).to.eql([]);
+        expect(new iD.osmRelation().members).toEqual([]);
     });
 
     it('sets members as specified', function () {
-        expect(new iD.osmRelation({members: ['n-1']}).members).to.eql(['n-1']);
+        expect(new iD.osmRelation({members: ['n-1']}).members).toEqual(['n-1']);
     });
 
     it('defaults tags to an empty object', function () {
-        expect(new iD.osmRelation().tags).to.eql({});
+        expect(new iD.osmRelation().tags).toEqual({});
     });
 
     it('sets tags as specified', function () {
-        expect(new iD.osmRelation({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
+        expect(new iD.osmRelation({tags: {foo: 'bar'}}).tags).toEqual({foo: 'bar'});
     });
 
     describe('#copy', function () {
@@ -133,7 +133,7 @@ describe('iD.osmRelation', function () {
         it('does not error on self-referencing relations', function () {
             var r = new iD.osmRelation();
             r = r.addMember({id: r.id});
-            expect(r.extent(new iD.coreGraph([r]))).to.eql(iD.geoExtent());
+            expect(r.extent(new iD.coreGraph([r]))).toEqual(iD.geoExtent());
         });
     });
 
@@ -163,7 +163,7 @@ describe('iD.osmRelation', function () {
                 {id: 'a', role: 'inner'},
                 {id: 'b', role: 'outer'},
                 {id: 'c', role: 'outer'}]});
-            expect(r.memberByRole('outer')).to.eql({id: 'b', role: 'outer', index: 1});
+            expect(r.memberByRole('outer')).toEqual({id: 'b', role: 'outer', index: 1});
         });
 
         it('returns undefined if no members have the given role', function () {
@@ -177,7 +177,7 @@ describe('iD.osmRelation', function () {
                 {id: 'a', role: 'outer'},
                 {id: 'b', role: 'outer'},
                 {id: 'b', role: 'inner'}]});
-            expect(r.memberById('b')).to.eql({id: 'b', role: 'outer', index: 1});
+            expect(r.memberById('b')).toEqual({id: 'b', role: 'outer', index: 1});
         });
 
         it('returns undefined if no members have the given role', function () {
@@ -454,50 +454,50 @@ describe('iD.osmRelation', function () {
     describe('#indexedMembers', function () {
         it('returns an array of members extended with indexes', function () {
             var r = new iD.osmRelation({members: [{id: '1'}, {id: '3'}]});
-            expect(r.indexedMembers()).to.eql([{id: '1', index: 0}, {id: '3', index: 1}]);
+            expect(r.indexedMembers()).toEqual([{id: '1', index: 0}, {id: '3', index: 1}]);
         });
     });
 
     describe('#addMember', function () {
         it('adds a member at the end of the relation', function () {
             var r = new iD.osmRelation();
-            expect(r.addMember({id: '1'}).members).to.eql([{id: '1'}]);
+            expect(r.addMember({id: '1'}).members).toEqual([{id: '1'}]);
         });
 
         it('adds a member at index 0', function () {
             var r = new iD.osmRelation({members: [{id: '1'}]});
-            expect(r.addMember({id: '2'}, 0).members).to.eql([{id: '2'}, {id: '1'}]);
+            expect(r.addMember({id: '2'}, 0).members).toEqual([{id: '2'}, {id: '1'}]);
         });
 
         it('adds a member at a positive index', function () {
             var r = new iD.osmRelation({members: [{id: '1'}, {id: '3'}]});
-            expect(r.addMember({id: '2'}, 1).members).to.eql([{id: '1'}, {id: '2'}, {id: '3'}]);
+            expect(r.addMember({id: '2'}, 1).members).toEqual([{id: '1'}, {id: '2'}, {id: '3'}]);
         });
 
         it('adds a member at a negative index', function () {
             var r = new iD.osmRelation({members: [{id: '1'}, {id: '3'}]});
-            expect(r.addMember({id: '2'}, -1).members).to.eql([{id: '1'}, {id: '2'}, {id: '3'}]);
+            expect(r.addMember({id: '2'}, -1).members).toEqual([{id: '1'}, {id: '2'}, {id: '3'}]);
         });
     });
 
     describe('#updateMember', function () {
         it('updates the properties of the relation member at the specified index', function () {
             var r = new iD.osmRelation({members: [{role: 'forward'}]});
-            expect(r.updateMember({role: 'backward'}, 0).members).to.eql([{role: 'backward'}]);
+            expect(r.updateMember({role: 'backward'}, 0).members).toEqual([{role: 'backward'}]);
         });
     });
 
     describe('#removeMember', function () {
         it('removes the member at the specified index', function () {
             var r = new iD.osmRelation({members: [{id: 'a'}, {id: 'b'}, {id: 'c'}]});
-            expect(r.removeMember(1).members).to.eql([{id: 'a'}, {id: 'c'}]);
+            expect(r.removeMember(1).members).toEqual([{id: 'a'}, {id: 'c'}]);
         });
     });
 
     describe('#removeMembersWithID', function () {
         it('removes members with the given ID', function () {
             var r = new iD.osmRelation({members: [{id: 'a'}, {id: 'b'}, {id: 'a'}]});
-            expect(r.removeMembersWithID('a').members).to.eql([{id: 'b'}]);
+            expect(r.removeMembersWithID('a').members).toEqual([{id: 'b'}]);
         });
     });
 
@@ -510,19 +510,19 @@ describe('iD.osmRelation', function () {
         it('replaces a member which doesn\'t already exist', function () {
             var r = new iD.osmRelation({members: [{id: 'a', role: 'a'}]});
             expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'node'}).members)
-                .to.eql([{id: 'b', role: 'a', type: 'node'}]);
+                .toEqual([{id: 'b', role: 'a', type: 'node'}]);
         });
 
         it('preserves the existing role', function () {
             var r = new iD.osmRelation({members: [{id: 'a', role: 'a', type: 'node'}]});
             expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'node'}).members)
-                .to.eql([{id: 'b', role: 'a', type: 'node'}]);
+                .toEqual([{id: 'b', role: 'a', type: 'node'}]);
         });
 
         it('uses the replacement type', function () {
             var r = new iD.osmRelation({members: [{id: 'a', role: 'a', type: 'node'}]});
             expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'way'}).members)
-                .to.eql([{id: 'b', role: 'a', type: 'way'}]);
+                .toEqual([{id: 'b', role: 'a', type: 'way'}]);
         });
 
         it('removes members if replacing them would produce duplicates', function () {
@@ -531,7 +531,7 @@ describe('iD.osmRelation', function () {
                 {id: 'b', role: 'b', type: 'node'}
             ]});
             expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'node'}).members)
-                .to.eql([{id: 'b', role: 'b', type: 'node'}]);
+                .toEqual([{id: 'b', role: 'b', type: 'node'}]);
         });
         it('keeps duplicate members if `keepDuplicates = true`', function () {
             var r = new iD.osmRelation({members: [
@@ -539,14 +539,14 @@ describe('iD.osmRelation', function () {
                 {id: 'b', role: 'b', type: 'node'}
             ]});
             expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'node'}, true).members)
-                .to.eql([{id: 'b', role: 'b', type: 'node'}, {id: 'b', role: 'b', type: 'node'}]);
+                .toEqual([{id: 'b', role: 'b', type: 'node'}, {id: 'b', role: 'b', type: 'node'}]);
         });
     });
 
     describe('#asJXON', function () {
         it('converts a relation to jxon', function() {
             var relation = new iD.osmRelation({id: 'r-1', members: [{id: 'w1', role: 'forward', type: 'way'}], tags: {type: 'route'}});
-            expect(relation.asJXON()).to.eql({relation: {
+            expect(relation.asJXON()).toEqual({relation: {
                 '@id': '-1',
                 '@version': 0,
                 member: [{keyAttributes: {ref: '1', role: 'forward', type: 'way'}}],
@@ -569,7 +569,7 @@ describe('iD.osmRelation', function () {
             var json = r.asGeoJSON(g);
 
             expect(json.type).to.equal('MultiPolygon');
-            expect(json.coordinates).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
+            expect(json.coordinates).toEqual([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
         it('forces clockwise winding order for outer multipolygon ways', function() {
@@ -581,7 +581,7 @@ describe('iD.osmRelation', function () {
             var g = new iD.coreGraph([a, b, c, w, r]);
             var json = r.asGeoJSON(g);
 
-            expect(json.coordinates[0][0]).to.eql([a.loc, b.loc, c.loc, a.loc]);
+            expect(json.coordinates[0][0]).toEqual([a.loc, b.loc, c.loc, a.loc]);
         });
 
         it('forces counterclockwise winding order for inner multipolygon ways', function() {
@@ -596,7 +596,7 @@ describe('iD.osmRelation', function () {
             var r = new iD.osmRelation({members: [{id: outer.id, type: 'way'}, {id: inner.id, role: 'inner', type: 'way'}]});
             var g = new iD.coreGraph([a, b, c, d, e, f, outer, inner, r]);
 
-            expect(r.multipolygon(g)[0][1]).to.eql([d.loc, f.loc, e.loc, d.loc]);
+            expect(r.multipolygon(g)[0][1]).toEqual([d.loc, f.loc, e.loc, d.loc]);
         });
 
         it('converts a relation to a GeoJSON FeatureCollection', function() {
@@ -606,11 +606,11 @@ describe('iD.osmRelation', function () {
             var json = r.asGeoJSON(g);
 
             expect(json.type).to.equal('FeatureCollection');
-            expect(json.properties).to.eql({type: 'type'});
+            expect(json.properties).toEqual({type: 'type'});
 
             var nodejson = a.asGeoJSON(g);
             nodejson.role = 'role';
-            expect(json.features).to.eql([nodejson]);
+            expect(json.features).toEqual([nodejson]);
         });
     });
 
@@ -623,7 +623,7 @@ describe('iD.osmRelation', function () {
             var r = new iD.osmRelation({members: [{id: w.id, type: 'way'}]});
             var g = new iD.coreGraph([a, b, c, w, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
+            expect(r.multipolygon(g)).toEqual([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
         test('single polygon consisting of multiple ways', function () {
@@ -635,7 +635,7 @@ describe('iD.osmRelation', function () {
             var r  = new iD.osmRelation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]});
             var g  = new iD.coreGraph([a, b, c, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
+            expect(r.multipolygon(g)).toEqual([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
         test('single polygon consisting of multiple ways, one needing reversal', function () {
@@ -647,7 +647,7 @@ describe('iD.osmRelation', function () {
             var r  = new iD.osmRelation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]});
             var g  = new iD.coreGraph([a, b, c, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
+            expect(r.multipolygon(g)).toEqual([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
         test('multiple polygons consisting of single ways', function () {
@@ -662,7 +662,7 @@ describe('iD.osmRelation', function () {
             var r  = new iD.osmRelation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]});
             var g  = new iD.coreGraph([a, b, c, d, e, f, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]], [[d.loc, e.loc, f.loc, d.loc]]]);
+            expect(r.multipolygon(g)).toEqual([[[a.loc, b.loc, c.loc, a.loc]], [[d.loc, e.loc, f.loc, d.loc]]]);
         });
 
         test('invalid geometry: unclosed ring consisting of a single way', function () {
@@ -673,7 +673,7 @@ describe('iD.osmRelation', function () {
             var r = new iD.osmRelation({members: [{id: w.id, type: 'way'}]});
             var g = new iD.coreGraph([a, b, c, w, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
+            expect(r.multipolygon(g)).toEqual([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
         test('invalid geometry: unclosed ring consisting of multiple ways', function () {
@@ -685,7 +685,7 @@ describe('iD.osmRelation', function () {
             var r  = new iD.osmRelation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]});
             var g  = new iD.coreGraph([a, b, c, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
+            expect(r.multipolygon(g)).toEqual([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
         test('invalid geometry: unclosed ring consisting of multiple ways, alternate order', function () {
@@ -698,7 +698,7 @@ describe('iD.osmRelation', function () {
             var r  = new iD.osmRelation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]});
             var g  = new iD.coreGraph([a, b, c, d, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[d.loc, c.loc, b.loc, a.loc, d.loc]]]);
+            expect(r.multipolygon(g)).toEqual([[[d.loc, c.loc, b.loc, a.loc, d.loc]]]);
         });
 
         test('invalid geometry: unclosed ring consisting of multiple ways, one needing reversal', function () {
@@ -711,7 +711,7 @@ describe('iD.osmRelation', function () {
             var r  = new iD.osmRelation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]});
             var g  = new iD.coreGraph([a, b, c, d, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a.loc, d.loc, c.loc, b.loc, a.loc]]]);
+            expect(r.multipolygon(g)).toEqual([[[a.loc, d.loc, c.loc, b.loc, a.loc]]]);
         });
 
         test('invalid geometry: unclosed ring consisting of multiple ways, one needing reversal, alternate order', function () {
@@ -724,7 +724,7 @@ describe('iD.osmRelation', function () {
             var r  = new iD.osmRelation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]});
             var g  = new iD.coreGraph([a, b, c, d, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[d.loc, c.loc, b.loc, a.loc, d.loc]]]);
+            expect(r.multipolygon(g)).toEqual([[[d.loc, c.loc, b.loc, a.loc, d.loc]]]);
         });
 
         test('single polygon with single single-way inner', function () {
@@ -742,7 +742,7 @@ describe('iD.osmRelation', function () {
             ]});
             var g = new iD.coreGraph([a, b, c, d, e, f, outer, inner, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc]]]);
+            expect(r.multipolygon(g)).toEqual([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc]]]);
         });
 
         test('single polygon with single multi-way inner', function () {
@@ -762,7 +762,7 @@ describe('iD.osmRelation', function () {
             ]});
             var graph = new iD.coreGraph([a, b, c, d, e, f, outer, inner1, inner2, r]);
 
-            expect(r.multipolygon(graph)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc]]]);
+            expect(r.multipolygon(graph)).toEqual([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc]]]);
         });
 
         test('single polygon with multiple single-way inners', function () {
@@ -785,7 +785,7 @@ describe('iD.osmRelation', function () {
             ]});
             var graph = new iD.coreGraph([a, b, c, d, e, f, g, h, i, outer, inner1, inner2, r]);
 
-            expect(r.multipolygon(graph)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc], [g.loc, h.loc, i.loc, g.loc]]]);
+            expect(r.multipolygon(graph)).toEqual([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc], [g.loc, h.loc, i.loc, g.loc]]]);
         });
 
         test('multiple polygons with single single-way inner', function () {
@@ -808,7 +808,7 @@ describe('iD.osmRelation', function () {
             ]});
             var graph = new iD.coreGraph([a, b, c, d, e, f, g, h, i, outer1, outer2, inner, r]);
 
-            expect(r.multipolygon(graph)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc]], [[g.loc, h.loc, i.loc, g.loc]]]);
+            expect(r.multipolygon(graph)).toEqual([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc]], [[g.loc, h.loc, i.loc, g.loc]]]);
         });
 
         test('invalid geometry: unmatched inner', function () {
@@ -819,7 +819,7 @@ describe('iD.osmRelation', function () {
             var r = new iD.osmRelation({members: [{id: w.id, role: 'inner', type: 'way'}]});
             var g = new iD.coreGraph([a, b, c, w, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
+            expect(r.multipolygon(g)).toEqual([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
         test('incomplete relation', function () {
@@ -831,7 +831,7 @@ describe('iD.osmRelation', function () {
             var r  = new iD.osmRelation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]});
             var g  = new iD.coreGraph([a, b, c, w1, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a.loc, c.loc, b.loc, a.loc]]]);
+            expect(r.multipolygon(g)).toEqual([[[a.loc, c.loc, b.loc, a.loc]]]);
         });
     });
 

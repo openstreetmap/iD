@@ -23,19 +23,19 @@ describe('iD.osmWay', function() {
     });
 
     it('defaults nodes to an empty array', function () {
-        expect(new iD.osmWay().nodes).to.eql([]);
+        expect(new iD.osmWay().nodes).toEqual([]);
     });
 
     it('sets nodes as specified', function () {
-        expect(new iD.osmWay({nodes: ['n-1']}).nodes).to.eql(['n-1']);
+        expect(new iD.osmWay({nodes: ['n-1']}).nodes).toEqual(['n-1']);
     });
 
     it('defaults tags to an empty object', function () {
-        expect(new iD.osmWay().tags).to.eql({});
+        expect(new iD.osmWay().tags).toEqual({});
     });
 
     it('sets tags as specified', function () {
-        expect(new iD.osmWay({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
+        expect(new iD.osmWay({tags: {foo: 'bar'}}).tags).toEqual({foo: 'bar'});
     });
 
     describe('#copy', function () {
@@ -351,14 +351,14 @@ describe('iD.osmWay', function() {
 
     describe('#sidednessIdentifier', function() {
         it('returns tag when the tag has implied sidedness', function() {
-            expect(new iD.osmWay({tags: { natural: 'cliff' }}).sidednessIdentifier()).to.eql('natural');
-            expect(new iD.osmWay({tags: { natural: 'coastline' }}).sidednessIdentifier()).to.eql('coastline');
-            expect(new iD.osmWay({tags: { barrier: 'retaining_wall' }}).sidednessIdentifier()).to.eql('barrier');
-            expect(new iD.osmWay({tags: { barrier: 'kerb' }}).sidednessIdentifier()).to.eql('barrier');
-            expect(new iD.osmWay({tags: { barrier: 'guard_rail' }}).sidednessIdentifier()).to.eql('guard_rail');
-            expect(new iD.osmWay({tags: { barrier: 'city_wall' }}).sidednessIdentifier()).to.eql('barrier');
-            expect(new iD.osmWay({tags: { man_made: 'embankment' }}).sidednessIdentifier()).to.eql('man_made');
-            expect(new iD.osmWay({tags: { 'abandoned:barrier': 'retaining_wall' }}).sidednessIdentifier()).to.eql('barrier');
+            expect(new iD.osmWay({tags: { natural: 'cliff' }}).sidednessIdentifier()).toEqual('natural');
+            expect(new iD.osmWay({tags: { natural: 'coastline' }}).sidednessIdentifier()).toEqual('coastline');
+            expect(new iD.osmWay({tags: { barrier: 'retaining_wall' }}).sidednessIdentifier()).toEqual('barrier');
+            expect(new iD.osmWay({tags: { barrier: 'kerb' }}).sidednessIdentifier()).toEqual('barrier');
+            expect(new iD.osmWay({tags: { barrier: 'guard_rail' }}).sidednessIdentifier()).toEqual('guard_rail');
+            expect(new iD.osmWay({tags: { barrier: 'city_wall' }}).sidednessIdentifier()).toEqual('barrier');
+            expect(new iD.osmWay({tags: { man_made: 'embankment' }}).sidednessIdentifier()).toEqual('man_made');
+            expect(new iD.osmWay({tags: { 'abandoned:barrier': 'retaining_wall' }}).sidednessIdentifier()).toEqual('barrier');
         });
 
         it('returns null when tag does not have implied sidedness', function() {
@@ -536,20 +536,20 @@ describe('iD.osmWay', function() {
 
         it('closes a way', function () {
             var w1 = new iD.osmWay({ nodes: 'ab'.split('') });
-            expect(w1.close().nodes.join('')).to.eql('aba', 'multiple');
+            expect(w1.close().nodes.join('')).toEqual('aba', 'multiple');
             var w2 = new iD.osmWay({ nodes: 'a'.split('') });
-            expect(w2.close().nodes.join('')).to.eql('aa', 'single');
+            expect(w2.close().nodes.join('')).toEqual('aa', 'single');
         });
 
         it('eliminates duplicate consecutive nodes when closing a linear way', function () {
             var w1 = new iD.osmWay({ nodes: 'abb'.split('') });
-            expect(w1.close().nodes.join('')).to.eql('aba', 'duplicate at end');
+            expect(w1.close().nodes.join('')).toEqual('aba', 'duplicate at end');
             var w2 = new iD.osmWay({ nodes: 'abbc'.split('') });
-            expect(w2.close().nodes.join('')).to.eql('abca', 'duplicate in middle');
+            expect(w2.close().nodes.join('')).toEqual('abca', 'duplicate in middle');
             var w3 = new iD.osmWay({ nodes: 'aabc'.split('') });
-            expect(w3.close().nodes.join('')).to.eql('abca', 'duplicate at beginning');
+            expect(w3.close().nodes.join('')).toEqual('abca', 'duplicate at beginning');
             var w4 = new iD.osmWay({ nodes: 'abbbcbb'.split('') });
-            expect(w4.close().nodes.join('')).to.eql('abcba', 'duplicates multiple places');
+            expect(w4.close().nodes.join('')).toEqual('abcba', 'duplicates multiple places');
         });
     });
 
@@ -568,69 +568,69 @@ describe('iD.osmWay', function() {
 
         it('uncloses a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'aba'.split('') });
-            expect(w1.unclose().nodes.join('')).to.eql('ab', 'multiple');
+            expect(w1.unclose().nodes.join('')).toEqual('ab', 'multiple');
             var w2 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w2.unclose().nodes.join('')).to.eql('a', 'single');
+            expect(w2.unclose().nodes.join('')).toEqual('a', 'single');
         });
 
         it('eliminates duplicate consecutive nodes when unclosing a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcca'.split('') });
-            expect(w1.unclose().nodes.join('')).to.eql('abc', 'duplicate internal node at end');
+            expect(w1.unclose().nodes.join('')).toEqual('abc', 'duplicate internal node at end');
             var w2 = new iD.osmWay({ nodes: 'abbca'.split('') });
-            expect(w2.unclose().nodes.join('')).to.eql('abc', 'duplicate internal node in middle');
+            expect(w2.unclose().nodes.join('')).toEqual('abc', 'duplicate internal node in middle');
             var w3 = new iD.osmWay({ nodes: 'aabca'.split('') });
-            expect(w3.unclose().nodes.join('')).to.eql('abc', 'duplicate connector node at beginning');
+            expect(w3.unclose().nodes.join('')).toEqual('abc', 'duplicate connector node at beginning');
             var w4 = new iD.osmWay({ nodes: 'abcaa'.split('') });
-            expect(w4.unclose().nodes.join('')).to.eql('abc', 'duplicate connector node at end');
+            expect(w4.unclose().nodes.join('')).toEqual('abc', 'duplicate connector node at end');
             var w5 = new iD.osmWay({ nodes: 'abbbcbba'.split('') });
-            expect(w5.unclose().nodes.join('')).to.eql('abcb', 'duplicates multiple places');
+            expect(w5.unclose().nodes.join('')).toEqual('abcb', 'duplicates multiple places');
             var w6 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w6.unclose().nodes.join('')).to.eql('a', 'single node circular');
+            expect(w6.unclose().nodes.join('')).toEqual('a', 'single node circular');
             var w7 = new iD.osmWay({ nodes: 'aaa'.split('') });
-            expect(w7.unclose().nodes.join('')).to.eql('a', 'single node circular with duplicates');
+            expect(w7.unclose().nodes.join('')).toEqual('a', 'single node circular with duplicates');
         });
     });
 
     describe('#addNode', function () {
         it('adds a node to an empty way', function () {
             var w = new iD.osmWay();
-            expect(w.addNode('a').nodes).to.eql(['a']);
+            expect(w.addNode('a').nodes).toEqual(['a']);
         });
 
         it('adds a node to the end of a linear way when index is undefined', function () {
             var w = new iD.osmWay({ nodes: 'ab'.split('') });
-            expect(w.addNode('c').nodes.join('')).to.eql('abc');
+            expect(w.addNode('c').nodes.join('')).toEqual('abc');
         });
 
         it('adds a node before the end connector of a circular way when index is undefined', function () {
             var w1 = new iD.osmWay({ nodes: 'aba'.split('') });
-            expect(w1.addNode('c').nodes.join('')).to.eql('abca', 'circular');
+            expect(w1.addNode('c').nodes.join('')).toEqual('abca', 'circular');
             var w2 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w2.addNode('c').nodes.join('')).to.eql('aca', 'single node circular');
+            expect(w2.addNode('c').nodes.join('')).toEqual('aca', 'single node circular');
         });
 
         it('adds an internal node to a linear way at a positive index', function () {
             var w = new iD.osmWay({ nodes: 'ab'.split('') });
-            expect(w.addNode('c', 1).nodes.join('')).to.eql('acb');
+            expect(w.addNode('c', 1).nodes.join('')).toEqual('acb');
         });
 
         it('adds an internal node to a circular way at a positive index', function () {
             var w1 = new iD.osmWay({ nodes: 'aba'.split('') });
-            expect(w1.addNode('c', 1).nodes.join('')).to.eql('acba', 'circular');
+            expect(w1.addNode('c', 1).nodes.join('')).toEqual('acba', 'circular');
             var w2 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w2.addNode('c', 1).nodes.join('')).to.eql('aca', 'single node circular');
+            expect(w2.addNode('c', 1).nodes.join('')).toEqual('aca', 'single node circular');
         });
 
         it('adds a leading node to a linear way at index 0', function () {
             var w = new iD.osmWay({ nodes: 'ab'.split('') });
-            expect(w.addNode('c', 0).nodes.join('')).to.eql('cab');
+            expect(w.addNode('c', 0).nodes.join('')).toEqual('cab');
         });
 
         it('adds a leading node to a circular way at index 0, preserving circularity', function () {
             var w1 = new iD.osmWay({ nodes: 'aba'.split('') });
-            expect(w1.addNode('c', 0).nodes.join('')).to.eql('cabc', 'circular');
+            expect(w1.addNode('c', 0).nodes.join('')).toEqual('cabc', 'circular');
             var w2 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w2.addNode('c', 0).nodes.join('')).to.eql('cac', 'single node circular');
+            expect(w2.addNode('c', 0).nodes.join('')).toEqual('cac', 'single node circular');
         });
 
         it('throws RangeError if index outside of array range for linear way', function () {
@@ -647,92 +647,92 @@ describe('iD.osmWay', function() {
 
         it('eliminates duplicate consecutive nodes when adding to the end of a linear way', function () {
             var w1 = new iD.osmWay({ nodes: 'abb'.split('') });
-            expect(w1.addNode('b').nodes.join('')).to.eql('ab', 'duplicate at end');
+            expect(w1.addNode('b').nodes.join('')).toEqual('ab', 'duplicate at end');
             var w2 = new iD.osmWay({ nodes: 'abbc'.split('') });
-            expect(w2.addNode('c').nodes.join('')).to.eql('abc', 'duplicate in middle');
+            expect(w2.addNode('c').nodes.join('')).toEqual('abc', 'duplicate in middle');
             var w3 = new iD.osmWay({ nodes: 'aabc'.split('') });
-            expect(w3.addNode('c').nodes.join('')).to.eql('abc', 'duplicate at beginning');
+            expect(w3.addNode('c').nodes.join('')).toEqual('abc', 'duplicate at beginning');
             var w4 = new iD.osmWay({ nodes: 'abbbcbb'.split('') });
-            expect(w4.addNode('b').nodes.join('')).to.eql('abcb', 'duplicates multiple places');
+            expect(w4.addNode('b').nodes.join('')).toEqual('abcb', 'duplicates multiple places');
         });
 
         it('eliminates duplicate consecutive nodes when adding same node before the end connector of a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcca'.split('') });
-            expect(w1.addNode('c').nodes.join('')).to.eql('abca', 'duplicate internal node at end');
+            expect(w1.addNode('c').nodes.join('')).toEqual('abca', 'duplicate internal node at end');
             var w2 = new iD.osmWay({ nodes: 'abbca'.split('') });
-            expect(w2.addNode('c').nodes.join('')).to.eql('abca', 'duplicate internal node in middle');
+            expect(w2.addNode('c').nodes.join('')).toEqual('abca', 'duplicate internal node in middle');
             var w3 = new iD.osmWay({ nodes: 'aabca'.split('') });
-            expect(w3.addNode('c').nodes.join('')).to.eql('abca', 'duplicate connector node at beginning');
+            expect(w3.addNode('c').nodes.join('')).toEqual('abca', 'duplicate connector node at beginning');
             var w4 = new iD.osmWay({ nodes: 'abcaa'.split('') });
-            expect(w4.addNode('a').nodes.join('')).to.eql('abca', 'duplicate connector node at end');
+            expect(w4.addNode('a').nodes.join('')).toEqual('abca', 'duplicate connector node at end');
             var w5 = new iD.osmWay({ nodes: 'abbbcbba'.split('') });
-            expect(w5.addNode('b').nodes.join('')).to.eql('abcba', 'duplicates multiple places');
+            expect(w5.addNode('b').nodes.join('')).toEqual('abcba', 'duplicates multiple places');
             var w6 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w6.addNode('a').nodes.join('')).to.eql('aa', 'single node circular');
+            expect(w6.addNode('a').nodes.join('')).toEqual('aa', 'single node circular');
             var w7 = new iD.osmWay({ nodes: 'aaa'.split('') });
-            expect(w7.addNode('a').nodes.join('')).to.eql('aa', 'single node circular with duplicates');
+            expect(w7.addNode('a').nodes.join('')).toEqual('aa', 'single node circular with duplicates');
         });
 
         it('eliminates duplicate consecutive nodes when adding different node before the end connector of a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcca'.split('') });
-            expect(w1.addNode('d').nodes.join('')).to.eql('abcda', 'duplicate internal node at end');
+            expect(w1.addNode('d').nodes.join('')).toEqual('abcda', 'duplicate internal node at end');
             var w2 = new iD.osmWay({ nodes: 'abbca'.split('') });
-            expect(w2.addNode('d').nodes.join('')).to.eql('abcda', 'duplicate internal node in middle');
+            expect(w2.addNode('d').nodes.join('')).toEqual('abcda', 'duplicate internal node in middle');
             var w3 = new iD.osmWay({ nodes: 'aabca'.split('') });
-            expect(w3.addNode('d').nodes.join('')).to.eql('abcda', 'duplicate connector node at beginning');
+            expect(w3.addNode('d').nodes.join('')).toEqual('abcda', 'duplicate connector node at beginning');
             var w4 = new iD.osmWay({ nodes: 'abcaa'.split('') });
-            expect(w4.addNode('d').nodes.join('')).to.eql('abcda', 'duplicate connector node at end');
+            expect(w4.addNode('d').nodes.join('')).toEqual('abcda', 'duplicate connector node at end');
             var w5 = new iD.osmWay({ nodes: 'abbbcbba'.split('') });
-            expect(w5.addNode('d').nodes.join('')).to.eql('abcbda', 'duplicates multiple places');
+            expect(w5.addNode('d').nodes.join('')).toEqual('abcbda', 'duplicates multiple places');
             var w6 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w6.addNode('d').nodes.join('')).to.eql('ada', 'single node circular');
+            expect(w6.addNode('d').nodes.join('')).toEqual('ada', 'single node circular');
             var w7 = new iD.osmWay({ nodes: 'aaa'.split('') });
-            expect(w7.addNode('d').nodes.join('')).to.eql('ada', 'single node circular with duplicates');
+            expect(w7.addNode('d').nodes.join('')).toEqual('ada', 'single node circular with duplicates');
         });
 
         it('eliminates duplicate consecutive nodes when adding to the beginning of a linear way', function () {
             var w1 = new iD.osmWay({ nodes: 'abb'.split('') });
-            expect(w1.addNode('a', 0).nodes.join('')).to.eql('ab', 'duplicate at end');
+            expect(w1.addNode('a', 0).nodes.join('')).toEqual('ab', 'duplicate at end');
             var w2 = new iD.osmWay({ nodes: 'abbc'.split('') });
-            expect(w2.addNode('a', 0).nodes.join('')).to.eql('abc', 'duplicate in middle');
+            expect(w2.addNode('a', 0).nodes.join('')).toEqual('abc', 'duplicate in middle');
             var w3 = new iD.osmWay({ nodes: 'aabc'.split('') });
-            expect(w3.addNode('a', 0).nodes.join('')).to.eql('abc', 'duplicate at beginning');
+            expect(w3.addNode('a', 0).nodes.join('')).toEqual('abc', 'duplicate at beginning');
             var w4 = new iD.osmWay({ nodes: 'abbbcbb'.split('') });
-            expect(w4.addNode('a', 0).nodes.join('')).to.eql('abcb', 'duplicates multiple places');
+            expect(w4.addNode('a', 0).nodes.join('')).toEqual('abcb', 'duplicates multiple places');
         });
 
         it('eliminates duplicate consecutive nodes when adding same node as beginning connector a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcca'.split('') });
-            expect(w1.addNode('a', 0).nodes.join('')).to.eql('abca', 'duplicate internal node at end');
+            expect(w1.addNode('a', 0).nodes.join('')).toEqual('abca', 'duplicate internal node at end');
             var w2 = new iD.osmWay({ nodes: 'abbca'.split('') });
-            expect(w2.addNode('a', 0).nodes.join('')).to.eql('abca', 'duplicate internal node in middle');
+            expect(w2.addNode('a', 0).nodes.join('')).toEqual('abca', 'duplicate internal node in middle');
             var w3 = new iD.osmWay({ nodes: 'aabca'.split('') });
-            expect(w3.addNode('a', 0).nodes.join('')).to.eql('abca', 'duplicate connector node at beginning');
+            expect(w3.addNode('a', 0).nodes.join('')).toEqual('abca', 'duplicate connector node at beginning');
             var w4 = new iD.osmWay({ nodes: 'abcaa'.split('') });
-            expect(w4.addNode('a', 0).nodes.join('')).to.eql('abca', 'duplicate connector node at end');
+            expect(w4.addNode('a', 0).nodes.join('')).toEqual('abca', 'duplicate connector node at end');
             var w5 = new iD.osmWay({ nodes: 'abbbcbba'.split('') });
-            expect(w5.addNode('a', 0).nodes.join('')).to.eql('abcba', 'duplicates multiple places');
+            expect(w5.addNode('a', 0).nodes.join('')).toEqual('abcba', 'duplicates multiple places');
             var w6 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w6.addNode('a', 0).nodes.join('')).to.eql('aa', 'single node circular');
+            expect(w6.addNode('a', 0).nodes.join('')).toEqual('aa', 'single node circular');
             var w7 = new iD.osmWay({ nodes: 'aaa'.split('') });
-            expect(w7.addNode('a', 0).nodes.join('')).to.eql('aa', 'single node circular with duplicates');
+            expect(w7.addNode('a', 0).nodes.join('')).toEqual('aa', 'single node circular with duplicates');
         });
 
         it('eliminates duplicate consecutive nodes when adding different node as beginning connector of a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcca'.split('') });
-            expect(w1.addNode('d', 0).nodes.join('')).to.eql('dabcd', 'duplicate internal node at end');
+            expect(w1.addNode('d', 0).nodes.join('')).toEqual('dabcd', 'duplicate internal node at end');
             var w2 = new iD.osmWay({ nodes: 'abbca'.split('') });
-            expect(w2.addNode('d', 0).nodes.join('')).to.eql('dabcd', 'duplicate internal node in middle');
+            expect(w2.addNode('d', 0).nodes.join('')).toEqual('dabcd', 'duplicate internal node in middle');
             var w3 = new iD.osmWay({ nodes: 'aabca'.split('') });
-            expect(w3.addNode('d', 0).nodes.join('')).to.eql('dabcd', 'duplicate connector node at beginning');
+            expect(w3.addNode('d', 0).nodes.join('')).toEqual('dabcd', 'duplicate connector node at beginning');
             var w4 = new iD.osmWay({ nodes: 'abcaa'.split('') });
-            expect(w4.addNode('d', 0).nodes.join('')).to.eql('dabcd', 'duplicate connector node at end');
+            expect(w4.addNode('d', 0).nodes.join('')).toEqual('dabcd', 'duplicate connector node at end');
             var w5 = new iD.osmWay({ nodes: 'abbbcbba'.split('') });
-            expect(w5.addNode('d', 0).nodes.join('')).to.eql('dabcbd', 'duplicates multiple places');
+            expect(w5.addNode('d', 0).nodes.join('')).toEqual('dabcbd', 'duplicates multiple places');
             var w6 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w6.addNode('d', 0).nodes.join('')).to.eql('dad', 'single node circular');
+            expect(w6.addNode('d', 0).nodes.join('')).toEqual('dad', 'single node circular');
             var w7 = new iD.osmWay({ nodes: 'aaa'.split('') });
-            expect(w7.addNode('d', 0).nodes.join('')).to.eql('dad', 'single node circular with duplicates');
+            expect(w7.addNode('d', 0).nodes.join('')).toEqual('dad', 'single node circular with duplicates');
         });
     });
 
@@ -744,24 +744,24 @@ describe('iD.osmWay', function() {
 
         it('updates an internal node on a linear way at a positive index', function () {
             var w = new iD.osmWay({ nodes: 'ab'.split('') });
-            expect(w.updateNode('d', 1).nodes.join('')).to.eql('ad');
+            expect(w.updateNode('d', 1).nodes.join('')).toEqual('ad');
         });
 
         it('updates an internal node on a circular way at a positive index', function () {
             var w = new iD.osmWay({ nodes: 'aba'.split('') });
-            expect(w.updateNode('d', 1).nodes.join('')).to.eql('ada', 'circular');
+            expect(w.updateNode('d', 1).nodes.join('')).toEqual('ada', 'circular');
         });
 
         it('updates a leading node on a linear way at index 0', function () {
             var w = new iD.osmWay({ nodes: 'ab'.split('') });
-            expect(w.updateNode('d', 0).nodes.join('')).to.eql('db');
+            expect(w.updateNode('d', 0).nodes.join('')).toEqual('db');
         });
 
         it('updates a leading node on a circular way at index 0, preserving circularity', function () {
             var w1 = new iD.osmWay({ nodes: 'aba'.split('') });
-            expect(w1.updateNode('d', 0).nodes.join('')).to.eql('dbd', 'circular');
+            expect(w1.updateNode('d', 0).nodes.join('')).toEqual('dbd', 'circular');
             var w2 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w2.updateNode('d', 0).nodes.join('')).to.eql('dd', 'single node circular');
+            expect(w2.updateNode('d', 0).nodes.join('')).toEqual('dd', 'single node circular');
         });
 
         it('throws RangeError if index outside of array range for linear way', function () {
@@ -778,224 +778,224 @@ describe('iD.osmWay', function() {
 
         it('eliminates duplicate consecutive nodes when updating the end of a linear way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcc'.split('') });
-            expect(w1.updateNode('c', 3).nodes.join('')).to.eql('abc', 'duplicate at end');
+            expect(w1.updateNode('c', 3).nodes.join('')).toEqual('abc', 'duplicate at end');
             var w2 = new iD.osmWay({ nodes: 'abbc'.split('') });
-            expect(w2.updateNode('c', 3).nodes.join('')).to.eql('abc', 'duplicate in middle');
+            expect(w2.updateNode('c', 3).nodes.join('')).toEqual('abc', 'duplicate in middle');
             var w3 = new iD.osmWay({ nodes: 'aabc'.split('') });
-            expect(w3.updateNode('c', 3).nodes.join('')).to.eql('abc', 'duplicate at beginning');
+            expect(w3.updateNode('c', 3).nodes.join('')).toEqual('abc', 'duplicate at beginning');
             var w4 = new iD.osmWay({ nodes: 'abbbcbb'.split('') });
-            expect(w4.updateNode('b', 6).nodes.join('')).to.eql('abcb', 'duplicates multiple places');
+            expect(w4.updateNode('b', 6).nodes.join('')).toEqual('abcb', 'duplicates multiple places');
         });
 
         it('eliminates duplicate consecutive nodes when updating same node before the end connector of a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcca'.split('') });
-            expect(w1.updateNode('c', 3).nodes.join('')).to.eql('abca', 'duplicate internal node at end');
+            expect(w1.updateNode('c', 3).nodes.join('')).toEqual('abca', 'duplicate internal node at end');
             var w2 = new iD.osmWay({ nodes: 'abbca'.split('') });
-            expect(w2.updateNode('c', 3).nodes.join('')).to.eql('abca', 'duplicate internal node in middle');
+            expect(w2.updateNode('c', 3).nodes.join('')).toEqual('abca', 'duplicate internal node in middle');
             var w3 = new iD.osmWay({ nodes: 'aabca'.split('') });
-            expect(w3.updateNode('c', 3).nodes.join('')).to.eql('abca', 'duplicate connector node at beginning');
+            expect(w3.updateNode('c', 3).nodes.join('')).toEqual('abca', 'duplicate connector node at beginning');
             var w4 = new iD.osmWay({ nodes: 'abcaa'.split('') });
-            expect(w4.updateNode('a', 3).nodes.join('')).to.eql('abca', 'duplicate connector node at end');
+            expect(w4.updateNode('a', 3).nodes.join('')).toEqual('abca', 'duplicate connector node at end');
             var w5 = new iD.osmWay({ nodes: 'abbbcbba'.split('') });
-            expect(w5.updateNode('b', 6).nodes.join('')).to.eql('abcba', 'duplicates multiple places');
+            expect(w5.updateNode('b', 6).nodes.join('')).toEqual('abcba', 'duplicates multiple places');
         });
 
         it('eliminates duplicate consecutive nodes when updating different node before the end connector of a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcca'.split('') });
-            expect(w1.updateNode('d', 3).nodes.join('')).to.eql('abcda', 'duplicate internal node at end');
+            expect(w1.updateNode('d', 3).nodes.join('')).toEqual('abcda', 'duplicate internal node at end');
             var w2 = new iD.osmWay({ nodes: 'abbca'.split('') });
-            expect(w2.updateNode('d', 3).nodes.join('')).to.eql('abda', 'duplicate internal node in middle');
+            expect(w2.updateNode('d', 3).nodes.join('')).toEqual('abda', 'duplicate internal node in middle');
             var w3 = new iD.osmWay({ nodes: 'aabca'.split('') });
-            expect(w3.updateNode('d', 3).nodes.join('')).to.eql('abda', 'duplicate connector node at beginning');
+            expect(w3.updateNode('d', 3).nodes.join('')).toEqual('abda', 'duplicate connector node at beginning');
             var w4 = new iD.osmWay({ nodes: 'abcaa'.split('') });
-            expect(w4.updateNode('d', 3).nodes.join('')).to.eql('dbcd', 'duplicate connector node at end');
+            expect(w4.updateNode('d', 3).nodes.join('')).toEqual('dbcd', 'duplicate connector node at end');
             var w5 = new iD.osmWay({ nodes: 'abbbcbba'.split('') });
-            expect(w5.updateNode('d', 6).nodes.join('')).to.eql('abcbda', 'duplicates multiple places');
+            expect(w5.updateNode('d', 6).nodes.join('')).toEqual('abcbda', 'duplicates multiple places');
         });
 
         it('eliminates duplicate consecutive nodes when updating the beginning of a linear way', function () {
             var w1 = new iD.osmWay({ nodes: 'abb'.split('') });
-            expect(w1.updateNode('b', 0).nodes.join('')).to.eql('b', 'duplicate at end');
+            expect(w1.updateNode('b', 0).nodes.join('')).toEqual('b', 'duplicate at end');
             var w2 = new iD.osmWay({ nodes: 'abbc'.split('') });
-            expect(w2.updateNode('b', 0).nodes.join('')).to.eql('bc', 'duplicate in middle');
+            expect(w2.updateNode('b', 0).nodes.join('')).toEqual('bc', 'duplicate in middle');
             var w3 = new iD.osmWay({ nodes: 'aabc'.split('') });
-            expect(w3.updateNode('a', 0).nodes.join('')).to.eql('abc', 'duplicate at beginning');
+            expect(w3.updateNode('a', 0).nodes.join('')).toEqual('abc', 'duplicate at beginning');
             var w4 = new iD.osmWay({ nodes: 'abbbcbb'.split('') });
-            expect(w4.updateNode('a', 0).nodes.join('')).to.eql('abcb', 'duplicates multiple places');
+            expect(w4.updateNode('a', 0).nodes.join('')).toEqual('abcb', 'duplicates multiple places');
         });
 
         it('eliminates duplicate consecutive nodes when updating same node as beginning connector a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcca'.split('') });
-            expect(w1.updateNode('a', 0).nodes.join('')).to.eql('abca', 'duplicate internal node at end');
+            expect(w1.updateNode('a', 0).nodes.join('')).toEqual('abca', 'duplicate internal node at end');
             var w2 = new iD.osmWay({ nodes: 'abbca'.split('') });
-            expect(w2.updateNode('a', 0).nodes.join('')).to.eql('abca', 'duplicate internal node in middle');
+            expect(w2.updateNode('a', 0).nodes.join('')).toEqual('abca', 'duplicate internal node in middle');
             var w3 = new iD.osmWay({ nodes: 'aabca'.split('') });
-            expect(w3.updateNode('a', 0).nodes.join('')).to.eql('abca', 'duplicate connector node at beginning');
+            expect(w3.updateNode('a', 0).nodes.join('')).toEqual('abca', 'duplicate connector node at beginning');
             var w4 = new iD.osmWay({ nodes: 'abcaa'.split('') });
-            expect(w4.updateNode('a', 0).nodes.join('')).to.eql('abca', 'duplicate connector node at end');
+            expect(w4.updateNode('a', 0).nodes.join('')).toEqual('abca', 'duplicate connector node at end');
             var w5 = new iD.osmWay({ nodes: 'abbbcbba'.split('') });
-            expect(w5.updateNode('a', 0).nodes.join('')).to.eql('abcba', 'duplicates multiple places');
+            expect(w5.updateNode('a', 0).nodes.join('')).toEqual('abcba', 'duplicates multiple places');
             var w6 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w6.updateNode('a', 0).nodes.join('')).to.eql('aa', 'single node circular');
+            expect(w6.updateNode('a', 0).nodes.join('')).toEqual('aa', 'single node circular');
             var w7 = new iD.osmWay({ nodes: 'aaa'.split('') });
-            expect(w7.updateNode('a', 0).nodes.join('')).to.eql('aa', 'single node circular with duplicates');
+            expect(w7.updateNode('a', 0).nodes.join('')).toEqual('aa', 'single node circular with duplicates');
         });
 
         it('eliminates duplicate consecutive nodes when updating different node as beginning connector of a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcca'.split('') });
-            expect(w1.updateNode('d', 0).nodes.join('')).to.eql('dbcd', 'duplicate internal node at end');
+            expect(w1.updateNode('d', 0).nodes.join('')).toEqual('dbcd', 'duplicate internal node at end');
             var w2 = new iD.osmWay({ nodes: 'abbca'.split('') });
-            expect(w2.updateNode('d', 0).nodes.join('')).to.eql('dbcd', 'duplicate internal node in middle');
+            expect(w2.updateNode('d', 0).nodes.join('')).toEqual('dbcd', 'duplicate internal node in middle');
             var w3 = new iD.osmWay({ nodes: 'aabca'.split('') });
-            expect(w3.updateNode('d', 0).nodes.join('')).to.eql('dbcd', 'duplicate connector node at beginning');
+            expect(w3.updateNode('d', 0).nodes.join('')).toEqual('dbcd', 'duplicate connector node at beginning');
             var w4 = new iD.osmWay({ nodes: 'abcaa'.split('') });
-            expect(w4.updateNode('d', 0).nodes.join('')).to.eql('dbcd', 'duplicate connector node at end');
+            expect(w4.updateNode('d', 0).nodes.join('')).toEqual('dbcd', 'duplicate connector node at end');
             var w5 = new iD.osmWay({ nodes: 'abbbcbba'.split('') });
-            expect(w5.updateNode('d', 0).nodes.join('')).to.eql('dbcbd', 'duplicates multiple places');
+            expect(w5.updateNode('d', 0).nodes.join('')).toEqual('dbcbd', 'duplicates multiple places');
             var w6 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w6.updateNode('d', 0).nodes.join('')).to.eql('dd', 'single node circular');
+            expect(w6.updateNode('d', 0).nodes.join('')).toEqual('dd', 'single node circular');
             var w7 = new iD.osmWay({ nodes: 'aaa'.split('') });
-            expect(w7.updateNode('d', 0).nodes.join('')).to.eql('dd', 'single node circular with duplicates');
+            expect(w7.updateNode('d', 0).nodes.join('')).toEqual('dd', 'single node circular with duplicates');
         });
 
         it('eliminates duplicate consecutive nodes when updating different node as ending connector of a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcca'.split('') });
-            expect(w1.updateNode('d', 4).nodes.join('')).to.eql('dbcd', 'duplicate internal node at end');
+            expect(w1.updateNode('d', 4).nodes.join('')).toEqual('dbcd', 'duplicate internal node at end');
             var w2 = new iD.osmWay({ nodes: 'abbca'.split('') });
-            expect(w2.updateNode('d', 4).nodes.join('')).to.eql('dbcd', 'duplicate internal node in middle');
+            expect(w2.updateNode('d', 4).nodes.join('')).toEqual('dbcd', 'duplicate internal node in middle');
             var w3 = new iD.osmWay({ nodes: 'aabca'.split('') });
-            expect(w3.updateNode('d', 4).nodes.join('')).to.eql('dbcd', 'duplicate connector node at beginning');
+            expect(w3.updateNode('d', 4).nodes.join('')).toEqual('dbcd', 'duplicate connector node at beginning');
             var w4 = new iD.osmWay({ nodes: 'abcaa'.split('') });
-            expect(w4.updateNode('d', 4).nodes.join('')).to.eql('dbcd', 'duplicate connector node at end');
+            expect(w4.updateNode('d', 4).nodes.join('')).toEqual('dbcd', 'duplicate connector node at end');
             var w5 = new iD.osmWay({ nodes: 'abbbcbba'.split('') });
-            expect(w5.updateNode('d', 7).nodes.join('')).to.eql('dbcbd', 'duplicates multiple places');
+            expect(w5.updateNode('d', 7).nodes.join('')).toEqual('dbcbd', 'duplicates multiple places');
             var w6 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w6.updateNode('d', 1).nodes.join('')).to.eql('dd', 'single node circular');
+            expect(w6.updateNode('d', 1).nodes.join('')).toEqual('dd', 'single node circular');
             var w7 = new iD.osmWay({ nodes: 'aaa'.split('') });
-            expect(w7.updateNode('d', 2).nodes.join('')).to.eql('dd', 'single node circular with duplicates');
+            expect(w7.updateNode('d', 2).nodes.join('')).toEqual('dd', 'single node circular with duplicates');
         });
     });
 
     describe('#replaceNode', function () {
         it('replaces a node', function () {
             var w1 = new iD.osmWay({ nodes: 'a'.split('') });
-            expect(w1.replaceNode('a','b').nodes.join('')).to.eql('b', 'single replace, single node');
+            expect(w1.replaceNode('a','b').nodes.join('')).toEqual('b', 'single replace, single node');
             var w2 = new iD.osmWay({ nodes: 'abc'.split('') });
-            expect(w2.replaceNode('b','d').nodes.join('')).to.eql('adc', 'single replace, linear');
+            expect(w2.replaceNode('b','d').nodes.join('')).toEqual('adc', 'single replace, linear');
             var w4 = new iD.osmWay({ nodes: 'abca'.split('') });
-            expect(w4.replaceNode('b','d').nodes.join('')).to.eql('adca', 'single replace, circular');
+            expect(w4.replaceNode('b','d').nodes.join('')).toEqual('adca', 'single replace, circular');
         });
 
         it('replaces multiply occurring nodes', function () {
             var w1 = new iD.osmWay({ nodes: 'abcb'.split('') });
-            expect(w1.replaceNode('b','d').nodes.join('')).to.eql('adcd', 'multiple replace, linear');
+            expect(w1.replaceNode('b','d').nodes.join('')).toEqual('adcd', 'multiple replace, linear');
             var w2 = new iD.osmWay({ nodes: 'abca'.split('') });
-            expect(w2.replaceNode('a','d').nodes.join('')).to.eql('dbcd', 'multiple replace, circular');
+            expect(w2.replaceNode('a','d').nodes.join('')).toEqual('dbcd', 'multiple replace, circular');
             var w3 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w3.replaceNode('a','d').nodes.join('')).to.eql('dd', 'multiple replace, single node circular');
+            expect(w3.replaceNode('a','d').nodes.join('')).toEqual('dd', 'multiple replace, single node circular');
         });
 
         it('eliminates duplicate consecutive nodes when replacing along a linear way', function () {
             var w1 = new iD.osmWay({ nodes: 'abbcd'.split('') });
-            expect(w1.replaceNode('c','b').nodes.join('')).to.eql('abd', 'duplicate before');
+            expect(w1.replaceNode('c','b').nodes.join('')).toEqual('abd', 'duplicate before');
             var w2 = new iD.osmWay({ nodes: 'abcdd'.split('') });
-            expect(w2.replaceNode('c','d').nodes.join('')).to.eql('abd', 'duplicate after');
+            expect(w2.replaceNode('c','d').nodes.join('')).toEqual('abd', 'duplicate after');
             var w3 = new iD.osmWay({ nodes: 'abbcbb'.split('')});
-            expect(w3.replaceNode('c','b').nodes.join('')).to.eql('ab', 'duplicate before and after');
+            expect(w3.replaceNode('c','b').nodes.join('')).toEqual('ab', 'duplicate before and after');
         });
 
         it('eliminates duplicate consecutive nodes when replacing internal nodes along a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abbcda'.split('') });
-            expect(w1.replaceNode('c','b').nodes.join('')).to.eql('abda', 'duplicate before');
+            expect(w1.replaceNode('c','b').nodes.join('')).toEqual('abda', 'duplicate before');
             var w2 = new iD.osmWay({ nodes: 'abcdda'.split('') });
-            expect(w2.replaceNode('c','d').nodes.join('')).to.eql('abda', 'duplicate after');
+            expect(w2.replaceNode('c','d').nodes.join('')).toEqual('abda', 'duplicate after');
             var w3 = new iD.osmWay({ nodes: 'abbcbba'.split('')});
-            expect(w3.replaceNode('c','b').nodes.join('')).to.eql('aba', 'duplicate before and after');
+            expect(w3.replaceNode('c','b').nodes.join('')).toEqual('aba', 'duplicate before and after');
         });
 
         it('eliminates duplicate consecutive nodes when replacing adjacent to connecting nodes along a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcda'.split('') });
-            expect(w1.replaceNode('d','a').nodes.join('')).to.eql('abca', 'before single end connector');
+            expect(w1.replaceNode('d','a').nodes.join('')).toEqual('abca', 'before single end connector');
             var w2 = new iD.osmWay({ nodes: 'abcda'.split('') });
-            expect(w2.replaceNode('b','a').nodes.join('')).to.eql('acda', 'after single beginning connector');
+            expect(w2.replaceNode('b','a').nodes.join('')).toEqual('acda', 'after single beginning connector');
             var w3 = new iD.osmWay({ nodes: 'abcdaa'.split('') });
-            expect(w3.replaceNode('d','a').nodes.join('')).to.eql('abca', 'before duplicate end connector');
+            expect(w3.replaceNode('d','a').nodes.join('')).toEqual('abca', 'before duplicate end connector');
             var w4 = new iD.osmWay({ nodes: 'aabcda'.split('') });
-            expect(w4.replaceNode('b','a').nodes.join('')).to.eql('acda', 'after duplicate beginning connector');
+            expect(w4.replaceNode('b','a').nodes.join('')).toEqual('acda', 'after duplicate beginning connector');
         });
 
         it('eliminates duplicate consecutive nodes when replacing connecting nodes along a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcaa'.split('') });
-            expect(w1.replaceNode('a','d').nodes.join('')).to.eql('dbcd', 'duplicate end connector');
+            expect(w1.replaceNode('a','d').nodes.join('')).toEqual('dbcd', 'duplicate end connector');
             var w2 = new iD.osmWay({ nodes: 'aabca'.split('') });
-            expect(w2.replaceNode('a','d').nodes.join('')).to.eql('dbcd', 'duplicate beginning connector');
+            expect(w2.replaceNode('a','d').nodes.join('')).toEqual('dbcd', 'duplicate beginning connector');
             var w3 = new iD.osmWay({ nodes: 'aabcaa'.split('') });
-            expect(w3.replaceNode('a','d').nodes.join('')).to.eql('dbcd', 'duplicate beginning and end connectors');
+            expect(w3.replaceNode('a','d').nodes.join('')).toEqual('dbcd', 'duplicate beginning and end connectors');
             var w4 = new iD.osmWay({ nodes: 'aabaacaa'.split('') });
-            expect(w4.replaceNode('a','d').nodes.join('')).to.eql('dbdcd', 'duplicates multiple places');
+            expect(w4.replaceNode('a','d').nodes.join('')).toEqual('dbdcd', 'duplicates multiple places');
         });
     });
 
     describe('#removeNode', function () {
         it('removes a node', function () {
             var w1 = new iD.osmWay({ nodes: 'a'.split('') });
-            expect(w1.removeNode('a').nodes.join('')).to.eql('', 'single remove, single node');
+            expect(w1.removeNode('a').nodes.join('')).toEqual('', 'single remove, single node');
             var w2 = new iD.osmWay({ nodes: 'abc'.split('') });
-            expect(w2.removeNode('b').nodes.join('')).to.eql('ac', 'single remove, linear');
+            expect(w2.removeNode('b').nodes.join('')).toEqual('ac', 'single remove, linear');
             var w3 = new iD.osmWay({ nodes: 'abca'.split('') });
-            expect(w3.removeNode('b').nodes.join('')).to.eql('aca', 'single remove, circular');
+            expect(w3.removeNode('b').nodes.join('')).toEqual('aca', 'single remove, circular');
             var w4 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w4.removeNode('a').nodes.join('')).to.eql('', 'multiple remove, single node circular');
+            expect(w4.removeNode('a').nodes.join('')).toEqual('', 'multiple remove, single node circular');
         });
 
         it('removes multiply occurring nodes', function () {
             var w1 = new iD.osmWay({ nodes: 'abcb'.split('') });
-            expect(w1.removeNode('b').nodes.join('')).to.eql('ac', 'multiple remove, linear');
+            expect(w1.removeNode('b').nodes.join('')).toEqual('ac', 'multiple remove, linear');
             var w2 = new iD.osmWay({ nodes: 'abcba'.split('') });
-            expect(w2.removeNode('b').nodes.join('')).to.eql('aca', 'multiple remove, circular');
+            expect(w2.removeNode('b').nodes.join('')).toEqual('aca', 'multiple remove, circular');
         });
 
         it('eliminates duplicate consecutive nodes when removing along a linear way', function () {
             var w1 = new iD.osmWay({ nodes: 'abbcd'.split('') });
-            expect(w1.removeNode('c').nodes.join('')).to.eql('abd', 'duplicate before');
+            expect(w1.removeNode('c').nodes.join('')).toEqual('abd', 'duplicate before');
             var w2 = new iD.osmWay({ nodes: 'abcdd'.split('') });
-            expect(w2.removeNode('c').nodes.join('')).to.eql('abd', 'duplicate after');
+            expect(w2.removeNode('c').nodes.join('')).toEqual('abd', 'duplicate after');
             var w3 = new iD.osmWay({ nodes: 'abbcbb'.split('')});
-            expect(w3.removeNode('c').nodes.join('')).to.eql('ab', 'duplicate before and after');
+            expect(w3.removeNode('c').nodes.join('')).toEqual('ab', 'duplicate before and after');
         });
 
         it('eliminates duplicate consecutive nodes when removing internal nodes along a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abbcda'.split('') });
-            expect(w1.removeNode('c').nodes.join('')).to.eql('abda', 'duplicate before');
+            expect(w1.removeNode('c').nodes.join('')).toEqual('abda', 'duplicate before');
             var w2 = new iD.osmWay({ nodes: 'abcdda'.split('') });
-            expect(w2.removeNode('c').nodes.join('')).to.eql('abda', 'duplicate after');
+            expect(w2.removeNode('c').nodes.join('')).toEqual('abda', 'duplicate after');
             var w3 = new iD.osmWay({ nodes: 'abbcbba'.split('')});
-            expect(w3.removeNode('c').nodes.join('')).to.eql('aba', 'duplicate before and after');
+            expect(w3.removeNode('c').nodes.join('')).toEqual('aba', 'duplicate before and after');
         });
 
         it('eliminates duplicate consecutive nodes when removing adjacent to connecting nodes along a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcdaa'.split('') });
-            expect(w1.removeNode('d').nodes.join('')).to.eql('abca', 'duplicate end connector');
+            expect(w1.removeNode('d').nodes.join('')).toEqual('abca', 'duplicate end connector');
             var w2 = new iD.osmWay({ nodes: 'aabcda'.split('') });
-            expect(w2.removeNode('b').nodes.join('')).to.eql('acda', 'duplicate beginning connector');
+            expect(w2.removeNode('b').nodes.join('')).toEqual('acda', 'duplicate beginning connector');
         });
 
         it('eliminates duplicate consecutive nodes when removing connecting nodes along a circular way', function () {
             var w1 = new iD.osmWay({ nodes: 'abcaa'.split('') });
-            expect(w1.removeNode('a').nodes.join('')).to.eql('bcb', 'duplicate end connector');
+            expect(w1.removeNode('a').nodes.join('')).toEqual('bcb', 'duplicate end connector');
             var w2 = new iD.osmWay({ nodes: 'aabca'.split('') });
-            expect(w2.removeNode('a').nodes.join('')).to.eql('bcb', 'duplicate beginning connector');
+            expect(w2.removeNode('a').nodes.join('')).toEqual('bcb', 'duplicate beginning connector');
             var w3 = new iD.osmWay({ nodes: 'aabcaa'.split('') });
-            expect(w3.removeNode('a').nodes.join('')).to.eql('bcb', 'duplicate beginning and end connectors');
+            expect(w3.removeNode('a').nodes.join('')).toEqual('bcb', 'duplicate beginning and end connectors');
             var w4 = new iD.osmWay({ nodes: 'aabaacaa'.split('') });
-            expect(w4.removeNode('a').nodes.join('')).to.eql('bcb', 'duplicates multiple places');
+            expect(w4.removeNode('a').nodes.join('')).toEqual('bcb', 'duplicates multiple places');
         });
     });
 
     describe('#asJXON', function () {
         it('converts a way to jxon', function() {
             var node = new iD.osmWay({id: 'w-1', nodes: ['n1', 'n2'], tags: {highway: 'residential'}});
-            expect(node.asJXON()).to.eql({way: {
+            expect(node.asJXON()).toEqual({way: {
                 '@id': '-1',
                 '@version': 0,
                 nd: [{keyAttributes: {ref: '1'}}, {keyAttributes: {ref: '2'}}],
@@ -1016,7 +1016,7 @@ describe('iD.osmWay', function() {
                 json = w.asGeoJSON(graph);
 
             expect(json.type).to.equal('LineString');
-            expect(json.coordinates).to.eql([a.loc, b.loc]);
+            expect(json.coordinates).toEqual([a.loc, b.loc]);
         });
 
         it('converts an area to a GeoJSON Polygon geometry', function () {
@@ -1028,7 +1028,7 @@ describe('iD.osmWay', function() {
                 json = w.asGeoJSON(graph);
 
             expect(json.type).to.equal('Polygon');
-            expect(json.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
+            expect(json.coordinates).toEqual([[a.loc, b.loc, c.loc, a.loc]]);
         });
 
         it('converts an unclosed area to a GeoJSON LineString geometry', function () {
@@ -1040,7 +1040,7 @@ describe('iD.osmWay', function() {
                 json = w.asGeoJSON(graph);
 
             expect(json.type).to.equal('LineString');
-            expect(json.coordinates).to.eql([a.loc, b.loc, c.loc]);
+            expect(json.coordinates).toEqual([a.loc, b.loc, c.loc]);
         });
     });
 

@@ -108,7 +108,7 @@ describe('iD.servicePanoramax', function() {
 
             await setTimeout(200);
             expect(spy).not.toHaveBeenCalled();
-            expect(fetchMock.calls().length).to.eql(0);   // no tile requests of any kind
+            expect(fetchMock.calls().length).toEqual(0);   // no tile requests of any kind
         });
 
         it('handle API error response', async ({ expect }) => {
@@ -194,7 +194,7 @@ describe('iD.servicePanoramax', function() {
             const photo = { id: 'foo', sequence_id: '100'};
             panoramax.cache().images = { forImageId: { foo: photo }};
             panoramax.selectImage(context, 'foo');
-            expect(panoramax.getActiveImage().id).to.eql(photo.id);
+            expect(panoramax.getActiveImage().id).toEqual(photo.id);
         });
     });
 });

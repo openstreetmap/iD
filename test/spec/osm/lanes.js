@@ -6,26 +6,26 @@ describe('iD.Lanes', function() {
 
             it('returns 2 lanes for highway=motorway', function() {
                 expect(new iD.osmWay({tags: { highway: 'motorway' }}).lanes().metadata.count, 'motorway lanes')
-                    .to.eql(2);
+                    .toEqual(2);
                 expect(new iD.osmWay({tags: { highway: 'motorway', oneway: 'yes' }}).lanes().metadata.count, 'motorway lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 4 lanes for highway=motorway and oneway=no', function() {
                 expect(new iD.osmWay({tags: { highway: 'motorway', oneway: 'no' }}).lanes().metadata.count, 'motorway lanes')
-                    .to.eql(4);
+                    .toEqual(4);
             });
 
             it('returns 2 lanes for highway=motorway_link', function() {
                 expect(new iD.osmWay({tags: { highway: 'motorway_link' }}).lanes().metadata.count, 'motorway_link lanes')
-                    .to.eql(2);
+                    .toEqual(2);
                 expect(new iD.osmWay({tags: { highway: 'motorway_link', oneway: 'no' }}).lanes().metadata.count, 'motorway_link lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 1 lane for highway=motorway_link and oneway=yes', function() {
                 expect(new iD.osmWay({tags: { highway: 'motorway_link', oneway: 'yes' }}).lanes().metadata.count, 'motorway_link lanes')
-                    .to.eql(1);
+                    .toEqual(1);
             });
         });
 
@@ -33,26 +33,26 @@ describe('iD.Lanes', function() {
 
             it('returns 4 lanes for highway=trunk', function() {
                 expect(new iD.osmWay({tags: { highway: 'trunk' }}).lanes().metadata.count, 'trunk lanes')
-                    .to.eql(4);
+                    .toEqual(4);
                 expect(new iD.osmWay({tags: { highway: 'trunk', oneway: 'no' }}).lanes().metadata.count, 'trunk lanes')
-                    .to.eql(4);
+                    .toEqual(4);
             });
 
             it('returns 2 lanes for highway=trunk and oneway=yes', function() {
                 expect(new iD.osmWay({tags: { highway: 'trunk', oneway: 'yes' }}).lanes().metadata.count, 'trunk lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 2 lanes for highway=trunk_link', function() {
                 expect(new iD.osmWay({tags: { highway: 'trunk_link' }}).lanes().metadata.count, 'trunk_link lanes')
-                    .to.eql(2);
+                    .toEqual(2);
                 expect(new iD.osmWay({tags: { highway: 'trunk_link', oneway: 'no' }}).lanes().metadata.count, 'trunk_link lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 1 lane for highway=trunk_link and oneway=yes', function() {
                 expect(new iD.osmWay({tags: { highway: 'trunk_link', oneway: 'yes' }}).lanes().metadata.count, 'trunk_link lanes')
-                    .to.eql(1);
+                    .toEqual(1);
             });
         });
 
@@ -60,26 +60,26 @@ describe('iD.Lanes', function() {
 
             it('returns 2 lanes for highway=primary', function() {
                 expect(new iD.osmWay({tags: { highway: 'primary' }}).lanes().metadata.count, 'primary lanes')
-                    .to.eql(2);
+                    .toEqual(2);
                 expect(new iD.osmWay({tags: { highway: 'primary', oneway: 'no' }}).lanes().metadata.count, 'primary lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 1 lane for highway=primary and oneway=yes', function() {
                 expect(new iD.osmWay({tags: { highway: 'primary', oneway: 'yes' }}).lanes().metadata.count, 'primary lanes')
-                    .to.eql(1);
+                    .toEqual(1);
             });
 
             it('returns 2 lanes for highway=primary_link', function() {
                 expect(new iD.osmWay({tags: { highway: 'primary_link' }}).lanes().metadata.count, 'primary lanes')
-                    .to.eql(2);
+                    .toEqual(2);
                 expect(new iD.osmWay({tags: { highway: 'primary_link', oneway: 'no' }}).lanes().metadata.count, 'primary lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 1 lane for highway=primary_link and oneway=yes', function() {
                 expect(new iD.osmWay({tags: { highway: 'primary_link', oneway: 'yes' }}).lanes().metadata.count, 'primary lanes')
-                    .to.eql(1);
+                    .toEqual(1);
             });
         });
 
@@ -87,26 +87,26 @@ describe('iD.Lanes', function() {
 
             it('returns 2 lanes for highway=secondary', function() {
                 expect(new iD.osmWay({tags: { highway: 'secondary' }}).lanes().metadata.count, 'secondary lanes')
-                    .to.eql(2);
+                    .toEqual(2);
                 expect(new iD.osmWay({tags: { highway: 'secondary', oneway: 'no' }}).lanes().metadata.count, 'secondary lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 1 lane for highway=secondary and oneway=yes', function() {
                 expect(new iD.osmWay({tags: { highway: 'secondary', oneway: 'yes' }}).lanes().metadata.count, 'secondary lanes')
-                    .to.eql(1);
+                    .toEqual(1);
             });
 
             it('returns 2 lane for highway=secondary_link', function() {
                 expect(new iD.osmWay({tags: { highway: 'secondary_link' }}).lanes().metadata.count, 'secondary_link lanes')
-                    .to.eql(2);
+                    .toEqual(2);
                 expect(new iD.osmWay({tags: { highway: 'secondary_link', oneway: 'no' }}).lanes().metadata.count, 'secondary_link lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 1 lane for highway=secondary_link and oneway=yes', function() {
                 expect(new iD.osmWay({tags: { highway: 'secondary_link', oneway: 'yes' }}).lanes().metadata.count, 'secondary_link lanes')
-                    .to.eql(1);
+                    .toEqual(1);
             });
         });
 
@@ -114,26 +114,26 @@ describe('iD.Lanes', function() {
 
             it('returns 2 lanes for highway=tertiary', function() {
                 expect(new iD.osmWay({tags: { highway: 'tertiary' }}).lanes().metadata.count, 'tertiary lanes')
-                    .to.eql(2);
+                    .toEqual(2);
                 expect(new iD.osmWay({tags: { highway: 'tertiary', oneway: 'no' }}).lanes().metadata.count, 'tertiary lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 1 lane for highway=tertiary and oneway=yes', function() {
                 expect(new iD.osmWay({tags: { highway: 'tertiary', oneway: 'yes' }}).lanes().metadata.count, 'tertiary lanes')
-                    .to.eql(1);
+                    .toEqual(1);
             });
 
             it('returns 2 lane for highway=tertiary_link', function() {
                 expect(new iD.osmWay({tags: { highway: 'tertiary_link' }}).lanes().metadata.count, 'tertiary_link lanes')
-                    .to.eql(2);
+                    .toEqual(2);
                 expect(new iD.osmWay({tags: { highway: 'tertiary_link', oneway: 'no' }}).lanes().metadata.count, 'tertiary_link lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 1 lane for highway=tertiary_link and oneway=yes', function() {
                 expect(new iD.osmWay({tags: { highway: 'tertiary_link', oneway: 'yes' }}).lanes().metadata.count, 'tertiary_link lanes')
-                    .to.eql(1);
+                    .toEqual(1);
             });
         });
 
@@ -141,14 +141,14 @@ describe('iD.Lanes', function() {
 
             it('returns 2 lanes for highway=residential', function() {
                 expect(new iD.osmWay({tags: { highway: 'residential' }}).lanes().metadata.count, 'residential lanes')
-                    .to.eql(2);
+                    .toEqual(2);
                 expect(new iD.osmWay({tags: { highway: 'residential', oneway: 'no' }}).lanes().metadata.count, 'residential lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 1 lane for highway=residential and oneway=yes', function() {
                 expect(new iD.osmWay({tags: { highway: 'residential', oneway: 'yes' }}).lanes().metadata.count, 'residential lanes')
-                    .to.eql(1);
+                    .toEqual(1);
             });
         });
 
@@ -156,14 +156,14 @@ describe('iD.Lanes', function() {
 
             it('returns 2 lanes for highway=service', function() {
                 expect(new iD.osmWay({tags: { highway: 'service' }}).lanes().metadata.count, 'service lanes')
-                    .to.eql(2);
+                    .toEqual(2);
                 expect(new iD.osmWay({tags: { highway: 'service', oneway: 'no' }}).lanes().metadata.count, 'service lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 1 lane for highway=service and oneway=yes', function() {
                 expect(new iD.osmWay({tags: { highway: 'service', oneway: 'yes' }}).lanes().metadata.count, 'service lanes')
-                    .to.eql(1);
+                    .toEqual(1);
             });
         });
 
@@ -171,14 +171,14 @@ describe('iD.Lanes', function() {
 
             it('returns 2 lanes for highway=track', function() {
                 expect(new iD.osmWay({tags: { highway: 'track' }}).lanes().metadata.count, 'track lanes')
-                    .to.eql(2);
+                    .toEqual(2);
                 expect(new iD.osmWay({tags: { highway: 'track', oneway: 'no' }}).lanes().metadata.count, 'track lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 1 lane for highway=track and oneway=yes', function() {
                 expect(new iD.osmWay({tags: { highway: 'track', oneway: 'yes' }}).lanes().metadata.count, 'track lanes')
-                    .to.eql(1);
+                    .toEqual(1);
             });
         });
 
@@ -186,14 +186,14 @@ describe('iD.Lanes', function() {
 
             it('returns 2 lanes for highway=path', function() {
                 expect(new iD.osmWay({tags: { highway: 'path' }}).lanes().metadata.count, 'path lanes')
-                    .to.eql(2);
+                    .toEqual(2);
                 expect(new iD.osmWay({tags: { highway: 'path', oneway: 'no' }}).lanes().metadata.count, 'path lanes')
-                    .to.eql(2);
+                    .toEqual(2);
             });
 
             it('returns 1 lane for highway=path and oneway=yes', function() {
                 expect(new iD.osmWay({tags: { highway: 'path', oneway: 'yes' }}).lanes().metadata.count, 'path lanes')
-                    .to.eql(1);
+                    .toEqual(1);
             });
         });
     });
@@ -414,9 +414,9 @@ describe('iD.Lanes', function() {
         var bothways = lanes.filter(function(l) {
           return l.direction === 'bothways';
         });
-        expect(forward.length).to.eql(2);
-        expect(backward.length).to.eql(3);
-        expect(bothways.length).to.eql(0);
+        expect(forward.length).toEqual(2);
+        expect(backward.length).toEqual(3);
+        expect(bothways.length).toEqual(0);
 
       });
       it('should have correct number of direction elements (with bothways lane)', function() {
@@ -430,9 +430,9 @@ describe('iD.Lanes', function() {
         var bothways = lanes.filter(function(l) {
           return l.direction === 'bothways';
         });
-        expect(forward.length).to.eql(3);
-        expect(backward.length).to.eql(1);
-        expect(bothways.length).to.eql(1);
+        expect(forward.length).toEqual(3);
+        expect(backward.length).toEqual(1);
+        expect(bothways.length).toEqual(1);
       });
     });
 

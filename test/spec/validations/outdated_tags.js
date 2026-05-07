@@ -98,11 +98,11 @@ describe('iD.validations.outdated_tags', function () {
         var issues = validate(validator);
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('outdated_tags');
-        expect(issue.subtype).to.eql('deprecated_tags');
-        expect(issue.severity).to.eql('warning');
+        expect(issue.type).toEqual('outdated_tags');
+        expect(issue.subtype).toEqual('deprecated_tags');
+        expect(issue.severity).toEqual('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags deprecated tag with no replacement', async () => {
@@ -112,11 +112,11 @@ describe('iD.validations.outdated_tags', function () {
         var issues = validate(validator);
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('outdated_tags');
-        expect(issue.subtype).to.eql('deprecated_tags');
-        expect(issue.severity).to.eql('warning');
+        expect(issue.type).toEqual('outdated_tags');
+        expect(issue.subtype).toEqual('deprecated_tags');
+        expect(issue.severity).toEqual('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags deprecated tag with transfer replacement', async () => {
@@ -126,11 +126,11 @@ describe('iD.validations.outdated_tags', function () {
         var issues = validate(validator);
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('outdated_tags');
-        expect(issue.subtype).to.eql('deprecated_tags');
-        expect(issue.severity).to.eql('warning');
+        expect(issue.type).toEqual('outdated_tags');
+        expect(issue.subtype).toEqual('deprecated_tags');
+        expect(issue.severity).toEqual('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
         issues[0].dynamicFixes()[0].onClick(context);
         expect(context.graph().entity('w-1').tags).toStrictEqual({
             amenity: 'bench',
@@ -145,11 +145,11 @@ describe('iD.validations.outdated_tags', function () {
         var issues = validate(validator);
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('outdated_tags');
-        expect(issue.subtype).to.eql('deprecated_tags');
-        expect(issue.severity).to.eql('warning');
+        expect(issue.type).toEqual('outdated_tags');
+        expect(issue.subtype).toEqual('deprecated_tags');
+        expect(issue.severity).toEqual('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
         issues[0].dynamicFixes()[0].onClick(context);
         expect(context.graph().entity('w-1').tags).toStrictEqual({
             newKey1: 'foo',

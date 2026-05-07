@@ -122,7 +122,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([w2], [graph]);
 
-            expect(graph.parentWays(n)).to.eql([w1, w2]);
+            expect(graph.parentWays(n)).toEqual([w1, w2]);
             expect(graph._parentWays.hasOwnProperty('n')).toBe(false);
         });
 
@@ -133,7 +133,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([w1], [graph]);
 
-            expect(graph.parentWays(n)).to.eql([w1]);
+            expect(graph.parentWays(n)).toEqual([w1]);
         });
 
         it('updates parentWays for nodes with modified parentWays', function () {
@@ -146,7 +146,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([w3], [graph, graph2]);
 
-            expect(graph2.parentWays(n)).to.eql([w1, w2, w3]);
+            expect(graph2.parentWays(n)).toEqual([w1, w2, w3]);
         });
 
         it('avoids re-adding a modified way as a parent way', function() {
@@ -159,7 +159,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([w1], [graph, graph2]);
 
-            expect(graph2.parentWays(n2)).to.eql([]);
+            expect(graph2.parentWays(n2)).toEqual([]);
         });
 
         it('avoids re-adding a deleted way as a parent way', function() {
@@ -170,7 +170,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([w1], [graph, graph2]);
 
-            expect(graph2.parentWays(n)).to.eql([]);
+            expect(graph2.parentWays(n)).toEqual([]);
         });
 
         it('re-adds a deleted node that is discovered to have another parent', function() {
@@ -182,7 +182,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([n, w2], [graph, graph2]);
 
-            expect(graph2.entity('n')).to.eql(n);
+            expect(graph2.entity('n')).toEqual(n);
         });
 
         it('updates parentRelations', function () {
@@ -193,7 +193,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([r2], [graph]);
 
-            expect(graph.parentRelations(n)).to.eql([r1, r2]);
+            expect(graph.parentRelations(n)).toEqual([r1, r2]);
             expect(graph._parentRels.hasOwnProperty('n')).toBe(false);
         });
 
@@ -206,7 +206,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([r1], [graph, graph2]);
 
-            expect(graph2.parentRelations(n)).to.eql([]);
+            expect(graph2.parentRelations(n)).toEqual([]);
         });
 
         it('avoids re-adding a deleted relation as a parent relation', function() {
@@ -217,7 +217,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([r1], [graph, graph2]);
 
-            expect(graph2.parentRelations(n)).to.eql([]);
+            expect(graph2.parentRelations(n)).toEqual([]);
         });
 
         it('updates parentRels for nodes with modified parentWays', function () {
@@ -230,7 +230,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([r3], [graph, graph2]);
 
-            expect(graph2.parentRelations(n)).to.eql([r1, r2, r3]);
+            expect(graph2.parentRelations(n)).toEqual([r1, r2, r3]);
         });
 
         it('invalidates transients', function() {
@@ -275,14 +275,14 @@ describe('iD.coreGraph', function() {
             var node = new iD.osmNode({id: 'n' }),
                 w1 = new iD.osmWay({id: 'w', nodes: ['n']}),
                 graph = new iD.coreGraph([node, w1]);
-            expect(graph.remove(w1).parentWays(node)).to.eql([]);
+            expect(graph.remove(w1).parentWays(node)).toEqual([]);
         });
 
         it('removes the entity as a parentRelation', function () {
             var node = new iD.osmNode({id: 'n' }),
                 r1 = new iD.osmRelation({id: 'w', members: [{id: 'n' }]}),
                 graph = new iD.coreGraph([node, r1]);
-            expect(graph.remove(r1).parentRelations(node)).to.eql([]);
+            expect(graph.remove(r1).parentRelations(node)).toEqual([]);
         });
     });
 
@@ -317,42 +317,42 @@ describe('iD.coreGraph', function() {
             var node = new iD.osmNode({id: 'n' }),
                 w1 = new iD.osmWay({id: 'w', nodes: ['n']}),
                 graph = new iD.coreGraph([node]);
-            expect(graph.replace(w1).parentWays(node)).to.eql([w1]);
+            expect(graph.replace(w1).parentWays(node)).toEqual([w1]);
         });
 
         it('removes parentWays',  function () {
             var node = new iD.osmNode({id: 'n' }),
                 w1 = new iD.osmWay({id: 'w', nodes: ['n']}),
                 graph = new iD.coreGraph([node, w1]);
-            expect(graph.remove(w1).parentWays(node)).to.eql([]);
+            expect(graph.remove(w1).parentWays(node)).toEqual([]);
         });
 
         it('doesn\'t add duplicate parentWays',  function () {
             var node = new iD.osmNode({id: 'n' }),
                 w1 = new iD.osmWay({id: 'w', nodes: ['n']}),
                 graph = new iD.coreGraph([node, w1]);
-            expect(graph.replace(w1).parentWays(node)).to.eql([w1]);
+            expect(graph.replace(w1).parentWays(node)).toEqual([w1]);
         });
 
         it('adds parentRelations',  function () {
             var node = new iD.osmNode({id: 'n' }),
                 r1 = new iD.osmRelation({id: 'r', members: [{id: 'n'}]}),
                 graph = new iD.coreGraph([node]);
-            expect(graph.replace(r1).parentRelations(node)).to.eql([r1]);
+            expect(graph.replace(r1).parentRelations(node)).toEqual([r1]);
         });
 
         it('removes parentRelations',  function () {
             var node = new iD.osmNode({id: 'n' }),
                 r1 = new iD.osmRelation({id: 'r', members: [{id: 'n'}]}),
                 graph = new iD.coreGraph([node, r1]);
-            expect(graph.remove(r1).parentRelations(node)).to.eql([]);
+            expect(graph.remove(r1).parentRelations(node)).toEqual([]);
         });
 
         it('doesn\'t add duplicate parentRelations',  function () {
             var node = new iD.osmNode({id: 'n' }),
                 r1 = new iD.osmRelation({id: 'r', members: [{id: 'n'}]}),
                 graph = new iD.coreGraph([node, r1]);
-            expect(graph.replace(r1).parentRelations(node)).to.eql([r1]);
+            expect(graph.replace(r1).parentRelations(node)).toEqual([r1]);
         });
     });
 
@@ -410,7 +410,7 @@ describe('iD.coreGraph', function() {
 
             graph = graph.revert('w');
             expect(graph.hasEntity('n')).to.equal(n1);
-            expect(graph.parentWays(n1)).to.eql([]);
+            expect(graph.parentWays(n1)).toEqual([]);
         });
 
         it('removes new parentRelations', function () {
@@ -420,7 +420,7 @@ describe('iD.coreGraph', function() {
 
             graph = graph.revert('r');
             expect(graph.hasEntity('n')).to.equal(n1);
-            expect(graph.parentRelations(n1)).to.eql([]);
+            expect(graph.parentRelations(n1)).toEqual([]);
         });
 
         it('reverts updated parentWays', function () {
@@ -431,7 +431,7 @@ describe('iD.coreGraph', function() {
 
             graph = graph.revert('w');
             expect(graph.hasEntity('n')).to.equal(n1);
-            expect(graph.parentWays(n1)).to.eql([w1]);
+            expect(graph.parentWays(n1)).toEqual([w1]);
         });
 
         it('reverts updated parentRelations', function () {
@@ -442,7 +442,7 @@ describe('iD.coreGraph', function() {
 
             graph = graph.revert('r');
             expect(graph.hasEntity('n')).to.equal(n1);
-            expect(graph.parentRelations(n1)).to.eql([r1]);
+            expect(graph.parentRelations(n1)).toEqual([r1]);
         });
 
         it('restores deleted parentWays', function () {
@@ -452,7 +452,7 @@ describe('iD.coreGraph', function() {
 
             graph = graph.revert('w');
             expect(graph.hasEntity('n')).to.equal(n1);
-            expect(graph.parentWays(n1)).to.eql([w1]);
+            expect(graph.parentWays(n1)).toEqual([w1]);
         });
 
         it('restores deleted parentRelations', function () {
@@ -462,7 +462,7 @@ describe('iD.coreGraph', function() {
 
             graph = graph.revert('r');
             expect(graph.hasEntity('n')).to.equal(n1);
-            expect(graph.parentRelations(n1)).to.eql([r1]);
+            expect(graph.parentRelations(n1)).toEqual([r1]);
         });
     });
 
@@ -515,8 +515,8 @@ describe('iD.coreGraph', function() {
             var node  = new iD.osmNode({id: 'n1'}),
                 way   = new iD.osmWay({id: 'w1', nodes: ['n1']}),
                 graph = new iD.coreGraph([node, way]);
-            expect(graph.parentWays(node)).to.eql([way]);
-            expect(graph.parentWays(way)).to.eql([]);
+            expect(graph.parentWays(node)).toEqual([way]);
+            expect(graph.parentWays(way)).toEqual([]);
         });
     });
 
@@ -526,8 +526,8 @@ describe('iD.coreGraph', function() {
                 nonnode  = new iD.osmNode({id: 'n2'}),
                 relation = new iD.osmRelation({id: 'r1', members: [{ id: 'n1', role: 'from' }]}),
                 graph    = new iD.coreGraph([node, relation]);
-            expect(graph.parentRelations(node)).to.eql([relation]);
-            expect(graph.parentRelations(nonnode)).to.eql([]);
+            expect(graph.parentRelations(node)).toEqual([relation]);
+            expect(graph.parentRelations(nonnode)).toEqual([]);
         });
     });
 
@@ -536,7 +536,7 @@ describe('iD.coreGraph', function() {
             var node  = new iD.osmNode({id: 'n1'}),
                 way   = new iD.osmWay({id: 'w1', nodes: ['n1']}),
                 graph = new iD.coreGraph([node, way]);
-            expect(graph.childNodes(way)).to.eql([node]);
+            expect(graph.childNodes(way)).toEqual([node]);
         });
     });
 });

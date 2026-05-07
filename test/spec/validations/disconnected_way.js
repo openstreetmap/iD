@@ -54,11 +54,11 @@ describe('iD.validations.disconnected_way', function() {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('disconnected_way');
-        expect(issue.subtype).to.eql('highway');
-        expect(issue.severity).to.eql('warning');
+        expect(issue.type).toEqual('disconnected_way');
+        expect(issue.subtype).toEqual('highway');
+        expect(issue.severity).toEqual('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags highway connected only to service area', function() {
@@ -66,11 +66,11 @@ describe('iD.validations.disconnected_way', function() {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('disconnected_way');
-        expect(issue.subtype).to.eql('highway');
-        expect(issue.severity).to.eql('warning');
+        expect(issue.type).toEqual('disconnected_way');
+        expect(issue.subtype).toEqual('highway');
+        expect(issue.severity).toEqual('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags disconnected highway multipolygon', function() {
@@ -88,11 +88,11 @@ describe('iD.validations.disconnected_way', function() {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('disconnected_way');
-        expect(issue.subtype).to.eql('highway');
-        expect(issue.severity).to.eql('warning');
+        expect(issue.type).toEqual('disconnected_way');
+        expect(issue.subtype).toEqual('highway');
+        expect(issue.severity).toEqual('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('r-1');
+        expect(issue.entityIds[0]).toEqual('r-1');
     });
 
     it('ignores highway with connected entrance vertex', function() {
