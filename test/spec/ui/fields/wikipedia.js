@@ -185,7 +185,7 @@ describe('iD.uiFieldWikipedia', function() {
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
 
         // t0
-        expect(context.entity(entity.id).tags.wikidata).to.be.undefined;
+        expect(context.entity(entity.id).tags.wikidata).toBeUndefined();
 
         // Create a new XHR server that will respond after 60ms to
         // separate requests after this point from those before
@@ -209,7 +209,7 @@ describe('iD.uiFieldWikipedia', function() {
 
         // t70:  check that wikidata unchanged
         window.setTimeout(function() {
-            expect(context.entity(entity.id).tags.wikidata).to.be.undefined;
+            expect(context.entity(entity.id).tags.wikidata).toBeUndefined();
         }, 70);
 
         // t90:  at t30 + 60ms (delay), wikidata SHOULD be set because graph is unchanged.

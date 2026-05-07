@@ -42,7 +42,7 @@ describe('iD.coreGraph', function() {
         });
 
         it('returns undefined when the entity is not present', function () {
-            expect(new iD.coreGraph().hasEntity('1')).to.be.undefined;
+            expect(new iD.coreGraph().hasEntity('1')).toBeUndefined();
         });
     });
 
@@ -268,7 +268,7 @@ describe('iD.coreGraph', function() {
         it('removes the entity from the result', function () {
             var node = new iD.osmNode(),
                 graph = new iD.coreGraph([node]);
-            expect(graph.remove(node).hasEntity(node.id)).to.be.undefined;
+            expect(graph.remove(node).hasEntity(node.id)).toBeUndefined();
         });
 
         it('removes the entity as a parentWay', function () {
@@ -383,7 +383,7 @@ describe('iD.coreGraph', function() {
                 graph = new iD.coreGraph().replace(n1);
 
             graph = graph.revert('n');
-            expect(graph.hasEntity('n')).to.be.undefined;
+            expect(graph.hasEntity('n')).toBeUndefined();
         });
 
         it('reverts an updated entity to the base version', function () {
@@ -492,7 +492,7 @@ describe('iD.coreGraph', function() {
 
             graph.update(function (graph) { graph.remove(node); });
 
-            expect(graph.hasEntity(node.id)).to.be.undefined;
+            expect(graph.hasEntity(node.id)).toBeUndefined();
         });
 
         it('executes all of the given functions', function () {
@@ -505,7 +505,7 @@ describe('iD.coreGraph', function() {
                 function (graph) { graph.replace(b); }
             );
 
-            expect(graph.hasEntity(a.id)).to.be.undefined;
+            expect(graph.hasEntity(a.id)).toBeUndefined();
             expect(graph.entity(b.id)).to.equal(b);
         });
     });

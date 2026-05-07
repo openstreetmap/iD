@@ -32,7 +32,7 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['a', 'b'])(graph);
 
-        expect(graph.hasEntity('a')).to.be.undefined;
+        expect(graph.hasEntity('a')).toBeUndefined();
 
         var survivor = graph.hasEntity('b');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
@@ -48,7 +48,7 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['a', 'b'])(graph);
 
-        expect(graph.hasEntity('a')).to.be.undefined;
+        expect(graph.hasEntity('a')).toBeUndefined();
 
         var survivor = graph.hasEntity('b');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
@@ -64,7 +64,7 @@ describe('iD.actionMergeNodes', function () {
         ]);
         graph = iD.actionMergeNodes(['a', 'b'])(graph);
 
-        expect(graph.hasEntity('a')).to.be.undefined;
+        expect(graph.hasEntity('a')).toBeUndefined();
 
         var survivor = graph.hasEntity('b');
         expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
@@ -80,7 +80,7 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['n1', 'n2'])(graph);
 
-        expect(graph.hasEntity('n1')).to.be.undefined;
+        expect(graph.hasEntity('n1')).toBeUndefined();
 
         var survivor = graph.hasEntity('n2');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
@@ -97,7 +97,7 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['n1', 'b'])(graph);
 
-        expect(graph.hasEntity('b')).to.be.undefined;
+        expect(graph.hasEntity('b')).toBeUndefined();
 
         var survivor = graph.hasEntity('n1');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
@@ -115,8 +115,8 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['n2', 'n1', 'n3'])(graph);
 
-        expect(graph.hasEntity('n2')).to.be.undefined;
-        expect(graph.hasEntity('n3')).to.be.undefined;
+        expect(graph.hasEntity('n2')).toBeUndefined();
+        expect(graph.hasEntity('n3')).toBeUndefined();
 
         var survivor = graph.hasEntity('n1');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
@@ -133,9 +133,9 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['n2', 'n1', 'n3', 'n4'])(graph);
 
-        expect(graph.hasEntity('n1')).to.be.undefined;
-        expect(graph.hasEntity('n3')).to.be.undefined;
-        expect(graph.hasEntity('n4')).to.be.undefined;
+        expect(graph.hasEntity('n1')).toBeUndefined();
+        expect(graph.hasEntity('n3')).toBeUndefined();
+        expect(graph.hasEntity('n4')).toBeUndefined();
 
         var survivor = graph.hasEntity('n2');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
@@ -157,7 +157,7 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['b', 'c'])(graph);
 
-        expect(graph.hasEntity('b')).to.be.undefined;
+        expect(graph.hasEntity('b')).toBeUndefined();
 
         var survivor = graph.hasEntity('c');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
@@ -188,7 +188,7 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['b', 'd'])(graph);
 
-        expect(graph.hasEntity('b')).to.be.undefined;
+        expect(graph.hasEntity('b')).toBeUndefined();
 
         var survivor = graph.hasEntity('d');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
@@ -225,8 +225,8 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['b', 'd', 'e'])(graph);
 
-        expect(graph.hasEntity('b')).to.be.undefined;
-        expect(graph.hasEntity('d')).to.be.undefined;
+        expect(graph.hasEntity('b')).toBeUndefined();
+        expect(graph.hasEntity('d')).toBeUndefined();
 
         var survivor = graph.hasEntity('e');
         expect(survivor).to.be.an.instanceof(iD.osmNode);

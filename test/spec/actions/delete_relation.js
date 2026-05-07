@@ -3,7 +3,7 @@ describe('iD.actionDeleteRelation', function () {
         var relation = new iD.osmRelation(),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(new iD.coreGraph([relation]));
-        expect(graph.hasEntity(relation.id)).to.be.undefined;
+        expect(graph.hasEntity(relation.id)).toBeUndefined();
     });
 
     it('removes the relation from parent relations', function () {
@@ -20,7 +20,7 @@ describe('iD.actionDeleteRelation', function () {
             relation = new iD.osmRelation({members: [{id: node.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(new iD.coreGraph([node, relation]));
-        expect(graph.hasEntity(node.id)).to.be.undefined;
+        expect(graph.hasEntity(node.id)).toBeUndefined();
     });
 
     it('does not delete member nodes referenced by another parent', function() {
@@ -45,7 +45,7 @@ describe('iD.actionDeleteRelation', function () {
             relation = new iD.osmRelation({members: [{id: way.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(new iD.coreGraph([way, relation]));
-        expect(graph.hasEntity(way.id)).to.be.undefined;
+        expect(graph.hasEntity(way.id)).toBeUndefined();
     });
 
     it('does not delete member ways referenced by another parent', function() {
@@ -71,7 +71,7 @@ describe('iD.actionDeleteRelation', function () {
             relation = new iD.osmRelation({members: [{id: way.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(new iD.coreGraph([node, way, relation]));
-        expect(graph.hasEntity(node.id)).to.be.undefined;
+        expect(graph.hasEntity(node.id)).toBeUndefined();
     });
 
     it('deletes parent relations that become empty', function () {
@@ -79,7 +79,7 @@ describe('iD.actionDeleteRelation', function () {
             parent = new iD.osmRelation({members: [{ id: child.id }]}),
             action = iD.actionDeleteRelation(child.id),
             graph  = action(new iD.coreGraph([child, parent]));
-        expect(graph.hasEntity(parent.id)).to.be.undefined;
+        expect(graph.hasEntity(parent.id)).toBeUndefined();
     });
 
     // This was moved to operationDelete.  We should test operations and move this test there.

@@ -3,7 +3,7 @@ describe('iD.actionDeleteNode', function () {
         var node   = new iD.osmNode(),
             action = iD.actionDeleteNode(node.id),
             graph  = action(new iD.coreGraph([node]));
-        expect(graph.hasEntity(node.id)).to.be.undefined;
+        expect(graph.hasEntity(node.id)).toBeUndefined();
     });
 
     it('removes the node from parent ways', function () {
@@ -31,7 +31,7 @@ describe('iD.actionDeleteNode', function () {
             way    = new iD.osmWay({nodes: [node1.id, node2.id]}),
             action = iD.actionDeleteNode(node1.id),
             graph  = action(new iD.coreGraph([node1, node2, way]));
-        expect(graph.hasEntity(way.id)).to.be.undefined;
+        expect(graph.hasEntity(way.id)).toBeUndefined();
     });
 
     it('deletes degenerate circular ways', function () {
@@ -40,7 +40,7 @@ describe('iD.actionDeleteNode', function () {
             way    = new iD.osmWay({nodes: [node1.id, node2.id, node1.id]}),
             action = iD.actionDeleteNode(node2.id),
             graph  = action(new iD.coreGraph([node1, node2, way]));
-        expect(graph.hasEntity(way.id)).to.be.undefined;
+        expect(graph.hasEntity(way.id)).toBeUndefined();
     });
 
     it('deletes parent relations that become empty', function () {
@@ -48,7 +48,7 @@ describe('iD.actionDeleteNode', function () {
             relation = new iD.osmRelation({members: [{ id: node1.id }]}),
             action   = iD.actionDeleteNode(node1.id),
             graph    = action(new iD.coreGraph([node1, relation]));
-        expect(graph.hasEntity(relation.id)).to.be.undefined;
+        expect(graph.hasEntity(relation.id)).toBeUndefined();
     });
 
     it('deletes a single-node way fully when deleting its only node', function () {
@@ -56,6 +56,6 @@ describe('iD.actionDeleteNode', function () {
             way    = new iD.osmWay({nodes: [node.id]}),
             action = iD.actionDeleteNode(node.id),
             graph  = action(new iD.coreGraph([node, way]));
-        expect(graph.hasEntity(way.id)).to.be.undefined;
+        expect(graph.hasEntity(way.id)).toBeUndefined();
     });
 });

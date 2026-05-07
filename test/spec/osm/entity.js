@@ -71,8 +71,8 @@ describe('iD.osmEntity', function () {
             var copies = {};
             n.copy(null, copies);
             expect(copies.n.isNew()).toBeTruthy();
-            expect(copies.n.version).to.be.undefined;
-            expect(copies.n.user).to.be.undefined;
+            expect(copies.n.version).toBeUndefined();
+            expect(copies.n.user).toBeUndefined();
         });
 
         it('copies tags', function () {

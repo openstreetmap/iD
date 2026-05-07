@@ -5,7 +5,7 @@ describe('iD.actionRevert', function() {
                 graph = new iD.coreGraph().replace(n1);
 
             graph = iD.actionRevert('n-1')(graph);
-            expect(graph.hasEntity('n-1')).to.be.undefined;
+            expect(graph.hasEntity('n-1')).toBeUndefined();
         });
 
         it('reverts an updated entity', function() {
@@ -41,7 +41,7 @@ describe('iD.actionRevert', function() {
             var w1_1 = graph.hasEntity('w1');
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n2'), 'n2 unchanged').to.equal(n2);
-            expect(graph.hasEntity('n-3'), 'n-3 removed').to.be.undefined;
+            expect(graph.hasEntity('n-3'), 'n-3 removed').toBeUndefined();
             expect(graph.parentWays(n1), 'n1 has w1 as parent way').to.deep.equal([w1_1]);
             expect(graph.parentWays(n2), 'n2 has w1 as parent way').to.deep.equal([w1_1]);
             expect(w1_1.nodes, 'w1 nodes updated').to.deep.equal(w1.nodes);
@@ -77,7 +77,7 @@ describe('iD.actionRevert', function() {
 
             var r1_1 = graph.hasEntity('r1');
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
-            expect(graph.hasEntity('n-2'), 'n-2 removed').to.be.undefined;
+            expect(graph.hasEntity('n-2'), 'n-2 removed').toBeUndefined();
             expect(graph.parentRelations(n1), 'n1 has r1 as parent relation').to.deep.equal([r1_1]);
             expect(r1_1.members, 'r1 members updated').to.deep.equal(r1.members);
         });
@@ -108,7 +108,7 @@ describe('iD.actionRevert', function() {
                 graph = new iD.coreGraph([n1]).replace(n2).replace(w1);
 
             graph = iD.actionRevert('w-1')(graph);
-            expect(graph.hasEntity('w-1'), 'w-1 removed').to.be.undefined;
+            expect(graph.hasEntity('w-1'), 'w-1 removed').toBeUndefined();
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
             expect(graph.parentWays(n1), 'n1 has no parent ways').to.be.empty;
@@ -154,7 +154,7 @@ describe('iD.actionRevert', function() {
                 graph = new iD.coreGraph([n1]).replace(n2).replace(r1);
 
             graph = iD.actionRevert('r-1')(graph);
-            expect(graph.hasEntity('r-1'), 'r-1 removed').to.be.undefined;
+            expect(graph.hasEntity('r-1'), 'r-1 removed').toBeUndefined();
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
             expect(graph.parentRelations(n1), 'n1 has no parent relations').to.be.empty;

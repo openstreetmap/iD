@@ -154,7 +154,7 @@ describe('iD.actionConnect', function() {
 
         graph = iD.actionConnect(['b', 'c'])(graph);
         expect(graph.entity('-').nodes).to.eql(['a', 'c']);
-        expect(graph.hasEntity('b')).to.be.undefined;
+        expect(graph.hasEntity('b')).toBeUndefined();
     });
 
     it('merges adjacent nodes with connections', function() {
@@ -182,7 +182,7 @@ describe('iD.actionConnect', function() {
         graph = iD.actionConnect(['b', 'c'])(graph);
         expect(graph.entity('-').nodes).to.eql(['a', 'c']);
         expect(graph.entity('|').nodes).to.eql(['c', 'd']);
-        expect(graph.hasEntity('b')).to.be.undefined;
+        expect(graph.hasEntity('b')).toBeUndefined();
     });
 
     it('deletes a degenerate way', function() {
@@ -197,8 +197,8 @@ describe('iD.actionConnect', function() {
         ]);
 
         graph = iD.actionConnect(['a', 'b'])(graph);
-        expect(graph.hasEntity('a')).to.be.undefined;
-        expect(graph.hasEntity('-')).to.be.undefined;
+        expect(graph.hasEntity('a')).toBeUndefined();
+        expect(graph.hasEntity('-')).toBeUndefined();
     });
 
     it('merges tags to the surviving node', function() {

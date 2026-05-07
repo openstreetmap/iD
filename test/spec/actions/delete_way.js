@@ -3,7 +3,7 @@ describe('iD.actionDeleteWay', function() {
         var way    = new iD.osmWay(),
             action = iD.actionDeleteWay(way.id),
             graph  = new iD.coreGraph([way]).update(action);
-        expect(graph.hasEntity(way.id)).to.be.undefined;
+        expect(graph.hasEntity(way.id)).toBeUndefined();
     });
 
     it('removes a way from parent relations', function() {
@@ -20,7 +20,7 @@ describe('iD.actionDeleteWay', function() {
             way    = new iD.osmWay({nodes: [node.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = new iD.coreGraph([node, way]).update(action);
-        expect(graph.hasEntity(node.id)).to.be.undefined;
+        expect(graph.hasEntity(node.id)).toBeUndefined();
     });
 
     it('does not delete member nodes referenced by another parent', function() {
@@ -38,8 +38,8 @@ describe('iD.actionDeleteWay', function() {
             way    = new iD.osmWay({nodes: [a.id, b.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = new iD.coreGraph([a, b, way]).update(action);
-        expect(graph.hasEntity(a.id)).to.be.undefined;
-        expect(graph.hasEntity(b.id)).to.be.undefined;
+        expect(graph.hasEntity(a.id)).toBeUndefined();
+        expect(graph.hasEntity(b.id)).toBeUndefined();
     });
 
     it('deletes a circular way\'s start/end node', function() {
@@ -49,9 +49,9 @@ describe('iD.actionDeleteWay', function() {
             way    = new iD.osmWay({nodes: [a.id, b.id, c.id, a.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = new iD.coreGraph([a, b, c, way]).update(action);
-        expect(graph.hasEntity(a.id)).to.be.undefined;
-        expect(graph.hasEntity(b.id)).to.be.undefined;
-        expect(graph.hasEntity(c.id)).to.be.undefined;
+        expect(graph.hasEntity(a.id)).toBeUndefined();
+        expect(graph.hasEntity(b.id)).toBeUndefined();
+        expect(graph.hasEntity(c.id)).toBeUndefined();
     });
 
     it('does not delete member nodes with interesting tags', function() {
@@ -67,7 +67,7 @@ describe('iD.actionDeleteWay', function() {
             relation = new iD.osmRelation({members: [{ id: way.id }]}),
             action   = iD.actionDeleteWay(way.id),
             graph    = new iD.coreGraph([way, relation]).update(action);
-        expect(graph.hasEntity(relation.id)).to.be.undefined;
+        expect(graph.hasEntity(relation.id)).toBeUndefined();
     });
 
     // This was moved to operationDelete.  We should test operations and move this test there.

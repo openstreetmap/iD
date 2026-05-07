@@ -13,6 +13,6 @@ describe('iD.actionDeleteMember', function () {
             r      = new iD.osmRelation({id: 'r', members: [{id: 'a'}]}),
             action = iD.actionDeleteMember(r.id, 0),
             graph  = action(new iD.coreGraph([a, r]));
-        expect(graph.hasEntity('r')).to.be.undefined;
+        expect(graph.hasEntity('r')).toBeUndefined();
     });
 });

@@ -531,7 +531,7 @@ describe('iD.actionReverse', function () {
             var way = new iD.osmWay({nodes: [node1.id, node2.id, node3.id]});
             var graph = iD.actionReverse(way.id)(new iD.coreGraph([node1, node2, node3, way]));
             var target = graph.entity(node2.id);
-            expect(target.tags.direction).to.be.undefined;
+            expect(target.tags.direction).toBeUndefined();
         });
 
         it('ignores directions other than forward or backward on attached stop sign during a reverse', function () {
@@ -635,7 +635,7 @@ describe('iD.actionReverse', function () {
             var way = new iD.osmWay({nodes: [node1.id, node2.id, node3.id]});
             var graph = iD.actionReverse(way.id)(new iD.coreGraph([node1, node2, node3, way]));
             var target = graph.entity(node2.id);
-            expect(target.tags['traffic_signals:direction']).to.be.undefined;
+            expect(target.tags['traffic_signals:direction']).toBeUndefined();
         });
 
         it('ignores directions other than forward or backward on attached traffic_signals during a reverse', function () {

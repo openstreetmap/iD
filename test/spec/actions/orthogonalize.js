@@ -124,7 +124,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection)(graph));
-            expect(diff.changes().d).to.be.undefined;
+            expect(diff.changes().d).toBeUndefined();
             expect(graph.hasEntity('d')).toBeTruthy();
         });
 
@@ -237,7 +237,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
-            expect(graph.hasEntity('d')).to.be.undefined;
+            expect(graph.hasEntity('d')).toBeUndefined();
         });
 
         it('preserves non empty redundant nodes', function() {
@@ -292,7 +292,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection)(graph));
-            expect(diff.changes().d).to.be.undefined;
+            expect(diff.changes().d).toBeUndefined();
             expect(graph.hasEntity('d')).toBeTruthy();
         });
     });
@@ -312,10 +312,10 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
-            expect(diff.changes().a).to.be.undefined;
+            expect(diff.changes().a).toBeUndefined();
             expect(diff.changes().b).toBeDefined();
-            expect(diff.changes().c).to.be.undefined;
-            expect(diff.changes().d).to.be.undefined;
+            expect(diff.changes().c).toBeUndefined();
+            expect(diff.changes().d).toBeUndefined();
         });
 
         it('orthogonalizes a single vertex in a triangle', function () {
@@ -331,9 +331,9 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
-            expect(diff.changes().a).to.be.undefined;
+            expect(diff.changes().a).toBeUndefined();
             expect(diff.changes().b).toBeDefined();
-            expect(diff.changes().c).to.be.undefined;
+            expect(diff.changes().c).toBeUndefined();
         });
 
         it('orthogonalizes a single vertex in a quad path', function () {
@@ -349,10 +349,10 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
-            expect(diff.changes().a).to.be.undefined;
+            expect(diff.changes().a).toBeUndefined();
             expect(diff.changes().b).toBeDefined();
-            expect(diff.changes().c).to.be.undefined;
-            expect(diff.changes().d).to.be.undefined;
+            expect(diff.changes().c).toBeUndefined();
+            expect(diff.changes().d).toBeUndefined();
         });
 
         it('orthogonalizes a single vertex in a 3-point path', function () {
@@ -368,9 +368,9 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection, 'b')(graph));
-            expect(diff.changes().a).to.be.undefined;
+            expect(diff.changes().a).toBeUndefined();
             expect(diff.changes().b).toBeDefined();
-            expect(diff.changes().c).to.be.undefined;
+            expect(diff.changes().c).toBeUndefined();
         });
     });
 

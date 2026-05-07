@@ -321,7 +321,7 @@ describe('iD.actionJoin', function () {
         graph = iD.actionJoin(['-', '='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.hasEntity('=')).to.be.undefined;
+        expect(graph.hasEntity('=')).toBeUndefined();
     });
 
     it('joins a <-- b <== c', function () {
@@ -337,7 +337,7 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '='])(graph);
         expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
-        expect(graph.hasEntity('=')).to.be.undefined;
+        expect(graph.hasEntity('=')).toBeUndefined();
     });
 
     it('joins a <-- b ==> c', function () {
@@ -354,7 +354,7 @@ describe('iD.actionJoin', function () {
         graph = iD.actionJoin(['-', '='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
-        expect(graph.hasEntity('=')).to.be.undefined;
+        expect(graph.hasEntity('=')).toBeUndefined();
         expect(graph.entity('-').tags).to.eql({'lanes:forward': 2});
     });
 
@@ -373,7 +373,7 @@ describe('iD.actionJoin', function () {
         graph = iD.actionJoin(['-', '='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.hasEntity('=')).to.be.undefined;
+        expect(graph.hasEntity('=')).toBeUndefined();
         expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
     });
 
@@ -396,9 +396,9 @@ describe('iD.actionJoin', function () {
         graph = iD.actionJoin(['-', '=', '+', '*'])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'e']);
-        expect(graph.hasEntity('=')).to.be.undefined;
-        expect(graph.hasEntity('+')).to.be.undefined;
-        expect(graph.hasEntity('*')).to.be.undefined;
+        expect(graph.hasEntity('=')).toBeUndefined();
+        expect(graph.hasEntity('+')).toBeUndefined();
+        expect(graph.hasEntity('*')).toBeUndefined();
         expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
     });
 
@@ -420,8 +420,8 @@ describe('iD.actionJoin', function () {
         graph = iD.actionJoin(['w-1', 'w1', 'w-2'])(graph);
 
         expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'd']);
-        expect(graph.hasEntity('w-1')).to.be.undefined;
-        expect(graph.hasEntity('w-2')).to.be.undefined;
+        expect(graph.hasEntity('w-1')).toBeUndefined();
+        expect(graph.hasEntity('w-2')).toBeUndefined();
     });
 
     it('prefers to keep the oldest way', function () {
@@ -443,8 +443,8 @@ describe('iD.actionJoin', function () {
 
         // way 1 is the oldest (it has the lower id) so it kept that one
         expect(graph.entity('w1').nodes).to.eql(['n1', 'n2', 'n3', 'n4']);
-        expect(graph.hasEntity('w2')).to.be.undefined;
-        expect(graph.hasEntity('w-1')).to.be.undefined;
+        expect(graph.hasEntity('w2')).toBeUndefined();
+        expect(graph.hasEntity('w-1')).toBeUndefined();
     });
 
     it('keeps the oldest id - oldest first', function () {
@@ -461,8 +461,8 @@ describe('iD.actionJoin', function () {
         graph = iD.actionJoin(['w1', 'w2', 'w3'])(graph);
 
         expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'd']);
-        expect(graph.hasEntity('w2')).to.be.undefined;
-        expect(graph.hasEntity('w3')).to.be.undefined;
+        expect(graph.hasEntity('w2')).toBeUndefined();
+        expect(graph.hasEntity('w3')).toBeUndefined();
     });
 
     it('keeps the oldest id - oldest last', function () {
@@ -479,8 +479,8 @@ describe('iD.actionJoin', function () {
         graph = iD.actionJoin(['w3', 'w2', 'w1'])(graph);
 
         expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'd']);
-        expect(graph.hasEntity('w2')).to.be.undefined;
-        expect(graph.hasEntity('w3')).to.be.undefined;
+        expect(graph.hasEntity('w2')).toBeUndefined();
+        expect(graph.hasEntity('w3')).toBeUndefined();
     });
 
     it('keeps the oldest id - oldest middle', function () {
@@ -497,8 +497,8 @@ describe('iD.actionJoin', function () {
         graph = iD.actionJoin(['w2', 'w1', 'w3'])(graph);
 
         expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'd']);
-        expect(graph.hasEntity('w2')).to.be.undefined;
-        expect(graph.hasEntity('w3')).to.be.undefined;
+        expect(graph.hasEntity('w2')).toBeUndefined();
+        expect(graph.hasEntity('w3')).toBeUndefined();
     });
 
     it('merges tags', function () {
@@ -741,8 +741,8 @@ describe('iD.actionJoin', function () {
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'a']);
         expect(graph.entity('-').tags).to.eql({ man_made: 'pier', area: 'yes' });
-        expect(graph.hasEntity('=')).to.be.undefined;
-        expect(graph.hasEntity('m')).to.be.undefined;
+        expect(graph.hasEntity('=')).toBeUndefined();
+        expect(graph.hasEntity('m')).toBeUndefined();
     });
 
     it('transfers memberships of collapsed single-member multipolygon onto resulting basic area', function () {
@@ -813,7 +813,7 @@ describe('iD.actionJoin', function () {
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'a']);
         expect(graph.entity('-').tags).to.eql({ surface: 'paved' });
-        expect(graph.hasEntity('=')).to.be.undefined;
+        expect(graph.hasEntity('=')).toBeUndefined();
         expect(graph.hasEntity('m').tags).to.eql({
             type: 'multipolygon',
             man_made: 'pier',

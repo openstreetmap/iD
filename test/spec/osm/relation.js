@@ -167,7 +167,7 @@ describe('iD.osmRelation', function () {
         });
 
         it('returns undefined if no members have the given role', function () {
-            expect(new iD.osmRelation().memberByRole('outer')).to.be.undefined;
+            expect(new iD.osmRelation().memberByRole('outer')).toBeUndefined();
         });
     });
 
@@ -181,7 +181,7 @@ describe('iD.osmRelation', function () {
         });
 
         it('returns undefined if no members have the given role', function () {
-            expect(new iD.osmRelation().memberById('b')).to.be.undefined;
+            expect(new iD.osmRelation().memberById('b')).toBeUndefined();
         });
     });
 

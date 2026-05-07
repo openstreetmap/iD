@@ -141,7 +141,7 @@ describe('iD.validations.invalid_format', function () {
             expect(fixes).to.have.lengthOf(1);
             issues[0].fixes(context)[0].onClick(context);
             const fixedEntity = context.entity(entity.id);
-            expect(fixedEntity.tags.image).to.be.undefined;
+            expect(fixedEntity.tags.image).toBeUndefined();
             expect(fixedEntity.tags.wikimedia_commons).to.eql(entity.tags.image);
         });
     });

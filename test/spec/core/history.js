@@ -122,13 +122,13 @@ describe('iD.coreHistory', function () {
         it('updates the graph', function () {
             history.perform(actionNoop, 'annotation');
             history.pop();
-            expect(history.undoAnnotation()).to.be.undefined;
+            expect(history.undoAnnotation()).toBeUndefined();
         });
 
         it('does not push the redo stack', function () {
             history.perform(actionNoop, 'annotation');
             history.pop();
-            expect(history.redoAnnotation()).to.be.undefined;
+            expect(history.redoAnnotation()).toBeUndefined();
         });
 
         it('emits a change event', function () {
@@ -173,7 +173,7 @@ describe('iD.coreHistory', function () {
         it('pops the undo stack', function () {
             history.perform(actionNoop, 'annotation');
             history.undo();
-            expect(history.undoAnnotation()).to.be.undefined;
+            expect(history.undoAnnotation()).toBeUndefined();
         });
 
         it('pushes the redo stack', function () {
@@ -315,8 +315,8 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop, 'annotation');
             history.undo();
             history.reset();
-            expect(history.undoAnnotation()).to.be.undefined;
-            expect(history.redoAnnotation()).to.be.undefined;
+            expect(history.undoAnnotation()).toBeUndefined();
+            expect(history.redoAnnotation()).toBeUndefined();
         });
 
         it('emits a change event', function () {
@@ -434,7 +434,7 @@ describe('iD.coreHistory', function () {
             };
             history.fromJSON(json);
             history.merge([new iD.osmNode({id: 'n1'})]);
-            expect(history.graph().hasEntity('n1')).to.be.undefined;
+            expect(history.graph().hasEntity('n1')).toBeUndefined();
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.osmIdManager.next).to.eql({node: -1, way: -2, relation: -3});
@@ -496,7 +496,7 @@ describe('iD.coreHistory', function () {
             };
             history.fromJSON(json);
             history.merge([new iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
-            expect(history.graph().hasEntity('n1')).to.be.undefined;
+            expect(history.graph().hasEntity('n1')).toBeUndefined();
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.osmIdManager.next).to.eql({node: -1, way: -2, relation: -3});
@@ -560,7 +560,7 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            expect(history.graph().hasEntity('n1')).to.be.undefined;
+            expect(history.graph().hasEntity('n1')).toBeUndefined();
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
             expect(iD.osmIdManager.next).to.eql({node: -1, way: -2, relation: -3});

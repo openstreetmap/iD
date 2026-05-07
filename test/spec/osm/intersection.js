@@ -1485,8 +1485,8 @@ describe('iD.osmIntersection', function() {
 
                 expect(turns[3].key).to.eql('=_b_/_e_\\_c_~');
                 expect(turns[3].u).toBeFalsy();
-                expect(turns[3].restrictionID).to.be.undefined;   // the alternate path should not match
-                expect(turns[3].direct).to.be.undefined;
+                expect(turns[3].restrictionID).toBeUndefined();   // the alternate path should not match
+                expect(turns[3].direct).toBeUndefined();
 
                 expect(turns[4].key).to.eql('=_b_-');
                 expect(turns[4].u).toBeFalsy();
@@ -1538,8 +1538,8 @@ describe('iD.osmIntersection', function() {
 
                 expect(turns[3].key).to.eql('=_b_/_e_\\_c_~');    // not towards via
                 expect(turns[3].u).toBeFalsy();
-                expect(turns[3].restrictionID).to.be.undefined;   // the alternate path should not match
-                expect(turns[3].direct).to.be.undefined;
+                expect(turns[3].restrictionID).toBeUndefined();   // the alternate path should not match
+                expect(turns[3].direct).toBeUndefined();
 
                 expect(turns[4].key).to.eql('=_b_-');         // not towards via
                 expect(turns[4].u).toBeFalsy();
