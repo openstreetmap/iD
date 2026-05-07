@@ -148,7 +148,7 @@ describe('iD.servicePanoramax', function() {
 
             panoramax.cache().images.rtree.load(features);
             var res = panoramax.images(context.projection);
-            expect(res).to.have.length.of.at.most(5);
+            expect(res.length).toBeLessThanOrEqual(5);
         });
 
         it('handle invalid image data', function() {

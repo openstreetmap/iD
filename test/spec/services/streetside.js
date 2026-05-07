@@ -135,7 +135,7 @@ describe('iD.serviceStreetside', function() {
 
             streetside.cache().bubbles.rtree.load(features);
             var res = streetside.bubbles(context.projection);
-            expect(res).to.have.length.of.at.most(5);
+            expect(res.length).toBeLessThanOrEqual(5);
         });
     });
 

@@ -81,7 +81,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.cache().images.rtree.load(features);
             var res = mapillary.images(context.projection);
-            expect(res).to.have.length.of.at.most(5);
+            expect(res.length).toBeLessThanOrEqual(5);
         });
     });
 
@@ -115,7 +115,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.cache().signs.rtree.load(features);
             var res = mapillary.signs(context.projection);
-            expect(res).to.have.length.of.at.most(5);
+            expect(res.length).toBeLessThanOrEqual(5);
         });
     });
 
@@ -153,7 +153,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.cache().points.rtree.load(features);
             var res = mapillary.mapFeatures(context.projection);
-            expect(res).to.have.length.of.at.most(5);
+            expect(res.length).toBeLessThanOrEqual(5);
         });
     });
 

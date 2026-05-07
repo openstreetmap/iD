@@ -237,7 +237,7 @@ describe('iD.serviceKartaview', function() {
 
             kartaview.cache().images.rtree.load(features);
             var res = kartaview.images(context.projection);
-            expect(res).to.have.length.of.at.most(5);
+            expect(res.length).toBeLessThanOrEqual(5);
         });
     });
 
