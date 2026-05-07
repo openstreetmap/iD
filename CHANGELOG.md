@@ -36,17 +36,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
-# Unreleased (2.40.0-dev)
+# 2.40.0
+##### 2026-04-07
 
 #### :sparkles: Usability & Accessibility
 * Render shared bicycle/foot paths with a dedicated colour ([#10256], thanks [@k-yle])
-* Make sure long autocomplete-suggestions in input fields do not scroll the input field beyond the cursor location in Firefox
 * Expand input element of multi-combo fields while typing to fit content ([#12169])
 * Include presets when the when preset label is included in the search input ([#12159], thanks [@matkoniecz])
 #### :scissors: Operations
 * Correctly split a way on all selected vertices when three or more nodes are selected ([#12120])
 * Create fewer points when circularizing small features (and vice versa): the number of vertices in the resulting circle is now dynamic between a 12 and 32 depending on the radius of the circle (instead of always resulting in 19 nodes) ([#12139])
-#### :camera: Street-Level
 #### :white_check_mark: Validation
 * Treat most aerialways as part of the routable network when checking other ways' connectivity ([#9406])
 * Only consider well known tags containing URLs during website validation ([#12178], thanks [@bhavyaKhatri2703])
@@ -71,9 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix exception when a `onewayCheck` field is present on a non-way feature (e.g. a ferry route) ([#12272])
 * Make sure that `disable_features` parameter from URL hash is not overwritten by locally cached value from last session
 * Fix feature filter falsely hiding _boundary_ relation members while in dragging mode when _other_ features are hidden ([#12267])
-#### :earth_asia: Localization
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
+* Make sure long autocomplete-suggestions in input fields do not scroll the input field beyond the cursor location in Firefox
 #### :rocket: Presets
 * Standardize tooltips in combo boxes: always show (full) raw tag, don't duplicate the already rendered titles, and show descriptions from wiki/taginfo where available ([#12010], thanks [@tordans])
 * Use full width for the dropdown box for the values of the `access` field ([#12065])
@@ -116,6 +113,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12217]: https://github.com/openstreetmap/iD/issues/12217
 [#12237]: https://github.com/openstreetmap/iD/pull/12237
 [#12245]: https://github.com/openstreetmap/iD/issues/12245
+[#12267]: https://github.com/openstreetmap/iD/issues/12267
 [#12272]: https://github.com/openstreetmap/iD/issues/12272
 [#12276]: https://github.com/openstreetmap/iD/pull/12276
 [@Quantum-Cucumber]: https://github.com/Quantum-Cucumber
