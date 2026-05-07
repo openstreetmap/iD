@@ -876,7 +876,7 @@ describe('iD.Lanes', function() {
             expect(maxspeed).to.equal(50);
         });
 
-        it('should return undefined when incorrect maxspeed unit provided ', function() {
+        it('should return undefined when incorrect maxspeed unit provided', function() {
             var maxspeed = new iD.osmWay({
                 tags: {
                     highway: 'residential',
@@ -887,7 +887,7 @@ describe('iD.Lanes', function() {
             expect(maxspeed).to.equal(undefined);
         });
 
-        it('should return undefined when incorrect maxspeed value provided ', function() {
+        it('should return undefined when incorrect maxspeed value provided', function() {
             var maxspeed = new iD.osmWay({
                 tags: {
                     highway: 'residential',
@@ -898,7 +898,7 @@ describe('iD.Lanes', function() {
             expect(maxspeed).to.equal(undefined);
         });
 
-        it('should return undefined when maxspeed not provided ', function() {
+        it('should return undefined when maxspeed not provided', function() {
             var maxspeed = new iD.osmWay({
                 tags: {
                     highway: 'residential',
