@@ -5,11 +5,6 @@ const uninterestingKeys = new Set([
     'attribution',
     'created_by',
     'import_uuid',
-    'geobase:datasetName',
-    'geobase:uuid',
-    'KSJ2:curve_id',
-    'KSJ2:lat',
-    'KSJ2:long',
     'lat',
     'latitude',
     'lon',
@@ -19,7 +14,7 @@ const uninterestingKeys = new Set([
     'odbl',
     'odbl:note'
 ]);
-const uninterestingKeyRegex = /^(source(_ref)?|tiger):/;
+const uninterestingKeyRegex = /^(source(_ref)?|at_bev|geobase|hcpaogis|KSJ2|mvdgis|nvdb|nysgissam|tiger):|:(identifier|ref|ref_id|id)$/;
 
 /**
  * Returns whether the given OSM tag key is potentially "interesting".

@@ -814,8 +814,9 @@ const nonPrimaryKeys = new Set([
     'fixme',
     'layer',
     'level',
-    'level:ref',
-    'note'
+    'note',
+    'start_date',
+    'ele'
 ]);
 const nonPrimaryKeysRegex = /^(ref|survey|note|([^:]+:|old_|alt_)addr):/;
 export function isAddressPoint(tags) {
