@@ -107,7 +107,7 @@ describe('iD.servicePanoramax', function() {
             panoramax.loadImages(context.projection);
 
             await setTimeout(200);
-            expect(spy).to.have.been.not.called;
+            expect(spy).not.toHaveBeenCalled();
             expect(fetchMock.calls().length).to.eql(0);   // no tile requests of any kind
         });
 
