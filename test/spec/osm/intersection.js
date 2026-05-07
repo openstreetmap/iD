@@ -72,11 +72,11 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('=');
             expect(turns.length).to.eql(2);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).toBe(true);
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('=_*_-');
             expect(turns[1].u).toBeFalsy();
         });
@@ -94,11 +94,11 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('=');
             expect(turns.length).to.eql(2);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).toBe(true);
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('=_*_-');
             expect(turns[1].u).toBeFalsy();
         });
@@ -121,15 +121,15 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('-');
             expect(turns.length).to.eql(3);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('-_*_=');
             expect(turns[0].u).toBeFalsy();
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('-_*_-');
             expect(turns[1].u).toBe(true);
 
-            expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[2]).toBeInstanceOf(iD.osmTurn);
             expect(turns[2].key).to.match(/^-\_\*\_w-\d+$/);   // new way
             expect(turns[2].u).toBeFalsy();
         });
@@ -152,15 +152,15 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('=');
             expect(turns.length).to.eql(3);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).toBe(true);
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('=_*_-');
             expect(turns[1].u).toBeFalsy();
 
-            expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[2]).toBeInstanceOf(iD.osmTurn);
             expect(turns[2].key).to.match(/^=\_\*\_w-\d+$/);   // new way
             expect(turns[2].u).toBeFalsy();
         });
@@ -178,7 +178,7 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('=');
             expect(turns.length).to.eql(1);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_-');
             expect(turns[0].u).toBeFalsy();
         });
@@ -196,7 +196,7 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('=');
             expect(turns.length).to.eql(1);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_-');
             expect(turns[0].u).toBeFalsy();
         });
@@ -238,11 +238,11 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('=');
             expect(turns.length).to.eql(2);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).toBe(true);
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('=_*_-');
             expect(turns[1].u).toBeFalsy();
         });
@@ -260,11 +260,11 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('=');
             expect(turns.length).to.eql(2);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).toBe(true);
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('=_*_-');
             expect(turns[1].u).toBeFalsy();
         });
@@ -282,7 +282,7 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('=');
             expect(turns.length).to.eql(1);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).toBe(true);
         });
@@ -300,7 +300,7 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('=');
             expect(turns.length).to.eql(1);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).toBe(true);
         });
@@ -323,11 +323,11 @@ describe('iD.osmIntersection', function() {
 
             expect(turns.length).to.eql(2);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).toBe(true);
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('=_*_-');
             expect(turns[1].u).toBeFalsy();
             expect(turns[1].restrictionID).to.eql('r');
@@ -357,20 +357,20 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('=');
             expect(turns.length).to.eql(3);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).toBe(true);
             expect(turns[1].direct).toBe(false);
             expect(turns[1].only).toBeFalsy();
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('=_*_~');
             expect(turns[1].restrictionID).to.eql('r');
             expect(turns[1].u).toBeFalsy();
             expect(turns[1].direct).toBe(false);
             expect(turns[1].only).toBeFalsy();
 
-            expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[2]).toBeInstanceOf(iD.osmTurn);
             expect(turns[2].key).to.eql('=_*_-');
             expect(turns[2].restrictionID).to.eql('r');
             expect(turns[2].u).toBeFalsy();
@@ -397,15 +397,15 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('=');
             expect(turns.length).to.eql(3);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_-');
             expect(turns[0].u).toBeFalsy();
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('=_*_=');
             expect(turns[1].u).toBe(true);
 
-            expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[2]).toBeInstanceOf(iD.osmTurn);
             expect(turns[2].key).to.match(/^=\_\*\_w-\d+$/);   // new way
             expect(turns[2].u).toBeFalsy();
         });
@@ -429,15 +429,15 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('-');
             expect(turns.length).to.eql(3);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('-_*_-');
             expect(turns[0].u).toBe(true);
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('-_*_=');
             expect(turns[1].u).toBeFalsy();
 
-            expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[2]).toBeInstanceOf(iD.osmTurn);
             expect(turns[2].key).to.match(/^-\_\*\_w-\d+$/);   // new way
             expect(turns[2].u).toBeFalsy();
         });
@@ -461,11 +461,11 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('=');
             expect(turns.length).to.eql(2);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_-');
             expect(turns[0].u).toBeFalsy();
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('=_*_=');
             expect(turns[1].u).toBe(true);
         });
@@ -489,11 +489,11 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns('=');
             expect(turns.length).to.eql(2);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql('=_*_-');
             expect(turns[0].u).toBeFalsy();
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('=_*_=');
             expect(turns[1].u).toBe(true);
         });
@@ -519,11 +519,11 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns(newWay.id);
             expect(turns.length).to.eql(2);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql(newWay.id + '_*_-');
             expect(turns[0].u).toBeFalsy();
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql(newWay.id + '_*_=');
             expect(turns[1].u).toBeFalsy();
         });
@@ -549,11 +549,11 @@ describe('iD.osmIntersection', function() {
             var turns = iD.osmIntersection(graph, '*', maxDist).turns(newWay.id);
             expect(turns.length).to.eql(2);
 
-            expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[0]).toBeInstanceOf(iD.osmTurn);
             expect(turns[0].key).to.eql(newWay.id + '_*_-');
             expect(turns[0].u).toBeFalsy();
 
-            expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+            expect(turns[1]).toBeInstanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql(newWay.id + '_*_=');
             expect(turns[1].u).toBeFalsy();
         });
@@ -601,23 +601,23 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('=', 1);
                 expect(turns.length).to.eql(5);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('=_b_-');  // straight to -
                 expect(turns[0].u).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('=_b_|');  // left to |
                 expect(turns[1].u).toBeFalsy();
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('=_b_|_e_≈');  // u-turn via | to ≈
                 expect(turns[2].u).toBeFalsy();
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('=_b_|_e_\\');  // left via | to \
                 expect(turns[3].u).toBeFalsy();
 
-                expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[4]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('=_b_/');  // right to /
                 expect(turns[4].u).toBeFalsy();
             });
@@ -627,23 +627,23 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('/', 1);
                 expect(turns.length).to.eql(5);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('/_b_-');  // right to -
                 expect(turns[0].u).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('/_b_|');  // straight to |
                 expect(turns[1].u).toBeFalsy();
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('/_b_|_e_≈');  // left via | to ≈
                 expect(turns[2].u).toBeFalsy();
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('/_b_|_e_\\');  // straight via | to \
                 expect(turns[3].u).toBeFalsy();
 
-                expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[4]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('/_b_/');  // u-turn
                 expect(turns[4].u).toBeTruthy();
             });
@@ -693,15 +693,15 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('=', 1);
                 expect(turns.length).to.eql(5);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('=_b_-');  // straight to -
                 expect(turns[0].u).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('=_b_|');  // left to |
                 expect(turns[1].u).toBeFalsy();
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('|_e_≈');  // right turn from | to ≈
                 expect(turns[2].u).toBeFalsy();
                 expect(turns[2].restrictionID).to.eql('r');
@@ -709,11 +709,11 @@ describe('iD.osmIntersection', function() {
                 expect(turns[2].no).toBe(true);             // restricted!
                 expect(turns[2].only).toBeFalsy();
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('=_b_|_e_\\');  // left via | to \
                 expect(turns[3].u).toBeFalsy();
 
-                expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[4]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('=_b_/');  // right to /
                 expect(turns[4].u).toBeFalsy();
             });
@@ -723,15 +723,15 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('/', 1);
                 expect(turns.length).to.eql(5);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('/_b_-');  // right to -
                 expect(turns[0].u).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('/_b_|');  // straight to |
                 expect(turns[1].u).toBeFalsy();
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('|_e_≈');  // right turn from | to ≈
                 expect(turns[2].u).toBeFalsy();
                 expect(turns[2].restrictionID).to.eql('r');
@@ -739,11 +739,11 @@ describe('iD.osmIntersection', function() {
                 expect(turns[2].no).toBe(true);             // restricted!
                 expect(turns[2].only).toBeFalsy();
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('/_b_|_e_\\');  // straight via | to \
                 expect(turns[3].u).toBeFalsy();
 
-                expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[4]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('/_b_/');  // u-turn
                 expect(turns[4].u).toBeTruthy();
             });
@@ -802,15 +802,15 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('=', 1);
                 expect(turns.length).to.eql(5);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('=_b_-');  // straight to -
                 expect(turns[0].u).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('=_b_|');  // left to |
                 expect(turns[1].u).toBeFalsy();
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('=_b_|_e_≈');  // u turn via | to ≈
                 expect(turns[2].u).toBeFalsy();
                 expect(turns[2].restrictionID).to.eql('r1');
@@ -818,11 +818,11 @@ describe('iD.osmIntersection', function() {
                 expect(turns[2].no).toBe(true);             // restricted!
                 expect(turns[2].only).toBeFalsy();
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('=_b_|_e_\\');  // left via | to \
                 expect(turns[3].u).toBeFalsy();
 
-                expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[4]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('=_b_/');  // right to /
                 expect(turns[4].u).toBeFalsy();
             });
@@ -832,15 +832,15 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('/', 1);
                 expect(turns.length).to.eql(5);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('/_b_-');  // right to -
                 expect(turns[0].u).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('/_b_|');  // straight to |
                 expect(turns[1].u).toBeFalsy();
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('/_b_|_e_≈');  // right turn from | to ≈
                 expect(turns[2].u).toBeFalsy();
                 expect(turns[2].restrictionID).to.eql('r2');
@@ -848,11 +848,11 @@ describe('iD.osmIntersection', function() {
                 expect(turns[2].no).toBe(true);             // restricted!
                 expect(turns[2].only).toBeFalsy();
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('/_b_|_e_\\');  // straight via | to \
                 expect(turns[3].u).toBeFalsy();
 
-                expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[4]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('/_b_/');  // u-turn
                 expect(turns[4].u).toBeTruthy();
             });
@@ -902,15 +902,15 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('=', 1);
                 expect(turns.length).to.eql(5);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('=_b_-');  // straight to -
                 expect(turns[0].u).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('=_b_|');  // left to |
                 expect(turns[1].u).toBeFalsy();
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('|_e_≈');  // right turn from | to ≈
                 expect(turns[2].u).toBeFalsy();
                 expect(turns[2].restrictionID).to.eql('r');
@@ -918,7 +918,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[2].no).toBeFalsy();
                 expect(turns[2].only).toBe(true);           // only!
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('|_e_\\');  // straight from | to \
                 expect(turns[3].u).toBeFalsy();
                 expect(turns[3].restrictionID).to.eql('r');
@@ -926,7 +926,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[3].no).toBe(true);             // restricted!
                 expect(turns[3].only).toBeFalsy();
 
-                expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[4]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('=_b_/');  // right to /
                 expect(turns[4].u).toBeFalsy();
             });
@@ -936,15 +936,15 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('/', 1);
                 expect(turns.length).to.eql(5);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('/_b_-');  // right to -
                 expect(turns[0].u).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('/_b_|');  // straight to |
                 expect(turns[1].u).toBeFalsy();
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('|_e_≈');  // right turn from | to ≈
                 expect(turns[2].u).toBeFalsy();
                 expect(turns[2].restrictionID).to.eql('r');
@@ -952,7 +952,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[2].no).toBeFalsy();
                 expect(turns[2].only).toBe(true);           // only!
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('|_e_\\');  // straight from | to \
                 expect(turns[3].u).toBeFalsy();
                 expect(turns[3].restrictionID).to.eql('r');
@@ -960,7 +960,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[3].no).toBe(true);             // restricted!
                 expect(turns[3].only).toBeFalsy();
 
-                expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[4]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('/_b_/');  // u-turn
                 expect(turns[4].u).toBeTruthy();
             });
@@ -970,19 +970,19 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('|', 1);
                 expect(turns.length).to.eql(6);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('|_b_-');  // left from | to - (away from only-via)
                 expect(turns[0].u).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('|_b_|');  // u-turn from | to | (away from only-via)
                 expect(turns[1].u).toBe(true);
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('|_b_/');  // straight from | to / (away from only-via)
                 expect(turns[2].u).toBeFalsy();
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('|_e_|');  // u-turn from | to | via e
                 expect(turns[3].u).toBe(true);
                 expect(turns[3].restrictionID).to.eql('r');
@@ -990,7 +990,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[3].no).toBe(true);             // restricted!
                 expect(turns[3].only).toBeFalsy();
 
-                expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[4]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('|_e_≈');  // right turn from | to ≈
                 expect(turns[4].u).toBeFalsy();
                 expect(turns[4].restrictionID).to.eql('r');
@@ -998,7 +998,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[4].no).toBeFalsy();
                 expect(turns[4].only).toBe(true);           // only!
 
-                expect(turns[5]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[5]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[5].key).to.eql('|_e_\\');  // straight from | to \
                 expect(turns[5].u).toBeFalsy();
                 expect(turns[5].restrictionID).to.eql('r');
@@ -1067,7 +1067,7 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('=', 1);
                 expect(turns.length).to.eql(5);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('=_b_-');       // straight to -
                 expect(turns[0].u).toBeFalsy();
                 expect(turns[0].restrictionID).to.eql('r1');
@@ -1075,7 +1075,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[0].no).toBe(true);             // restricted!
                 expect(turns[0].only).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('=_b_|');       // left to |
                 expect(turns[1].u).toBeFalsy();
                 expect(turns[1].restrictionID).to.eql('r1');
@@ -1083,7 +1083,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[1].no).toBeFalsy();
                 expect(turns[1].only).toBe(true);           // only (along via path)
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('=_b_|_e_≈');   // u-turn to ≈ via |
                 expect(turns[2].u).toBeFalsy();
                 expect(turns[2].restrictionID).to.eql('r1');
@@ -1091,7 +1091,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[2].no).toBeFalsy();
                 expect(turns[2].only).toBe(true);           // only!
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('=_b_|_e_\\');  // left to \ via |
                 expect(turns[3].u).toBeFalsy();
                 expect(turns[3].restrictionID).to.eql('r1');
@@ -1099,7 +1099,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[3].no).toBe(true);             // restricted!
                 expect(turns[3].only).toBeFalsy();
 
-                expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[4]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('=_b_/');       // right to /
                 expect(turns[4].u).toBeFalsy();
                 expect(turns[4].restrictionID).to.eql('r1');
@@ -1113,7 +1113,7 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('/', 1);
                 expect(turns.length).to.eql(8);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('/_b_-');       // right to -
                 expect(turns[0].u).toBeFalsy();
                 expect(turns[0].restrictionID).to.eql('r2');
@@ -1121,7 +1121,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[0].no).toBe(true);             // restricted!
                 expect(turns[0].only).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('/_b_|');       // straight to |
                 expect(turns[1].u).toBeFalsy();
                 expect(turns[1].restrictionID).to.eql('r2');
@@ -1129,7 +1129,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[1].no).toBeFalsy();
                 expect(turns[1].only).toBe(true);           // only (along via path)
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('/_b_|_e_≈');   // right turn from | to ≈
                 expect(turns[2].u).toBeFalsy();
                 expect(turns[2].restrictionID).to.eql('r2');
@@ -1137,7 +1137,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[2].no).toBeFalsy();
                 expect(turns[2].only).toBe(true);           // only!
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('/_b_|_e_\\');  // straight from | to \
                 expect(turns[3].u).toBeFalsy();
                 expect(turns[3].restrictionID).to.eql('r2');
@@ -1145,7 +1145,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[3].no).toBe(true);             // restricted!
                 expect(turns[3].only).toBeFalsy();
 
-                expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[4]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('/_b_/');       // u-turn
                 expect(turns[4].u).toBeTruthy();
                 expect(turns[4].restrictionID).to.eql('r2');
@@ -1159,15 +1159,15 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('/', 1);
                 expect(turns.length).to.eql(8);
 
-                expect(turns[5]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[5]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[5].key).to.eql('/_g_/');  // u-turn from / to / (away from only-via)
                 expect(turns[5].u).toBe(true);
 
-                expect(turns[6]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[6]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[6].key).to.eql('/_g_≃');  // left turn from / to ≃ (away from only-via)
                 expect(turns[6].u).toBeFalsy();
 
-                expect(turns[7]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[7]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[7].key).to.eql('/_g_‖');  // straight from / to ‖ (away from only-via)
                 expect(turns[7].u).toBeFalsy();
             });
@@ -1202,19 +1202,19 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('=', 2);
                 expect(turns.length).to.eql(4);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('=_b_-');  // straight to -
                 expect(turns[0].u).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('=_b_|');  // left to |
                 expect(turns[1].u).toBeFalsy();
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('=_b_|_*_‖');  // left to ‖ via |
                 expect(turns[2].u).toBeFalsy();
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('=_b_|_*_‖_e_≈');  // u-turn via |,‖ to ≈
                 expect(turns[3].u).toBeFalsy();
             });
@@ -1238,19 +1238,19 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('=', 2);
                 expect(turns.length).to.eql(4);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('=_b_-');  // straight to -
                 expect(turns[0].u).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('=_b_|');  // left to |
                 expect(turns[1].u).toBeFalsy();
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('=_b_|_*_‖');  // left to ‖ via |
                 expect(turns[2].u).toBeFalsy();
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('=_b_|_*_‖_e_≈');  // u-turn via |,‖ to ≈
                 expect(turns[3].u).toBeFalsy();
                 expect(turns[3].restrictionID).to.eql('r1');
@@ -1278,19 +1278,19 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('=', 2);
                 expect(turns.length).to.eql(4);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('=_b_-');  // straight to -
                 expect(turns[0].u).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('=_b_|');  // left to |
                 expect(turns[1].u).toBeFalsy();
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('=_b_|_*_‖');  // left to ‖ via |
                 expect(turns[2].u).toBeFalsy();
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('=_b_|_*_‖_e_≈');  // u-turn via |,‖ to ≈
                 expect(turns[3].u).toBeFalsy();
                 expect(turns[3].restrictionID).to.eql('r1');
@@ -1318,7 +1318,7 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('=', 2);
                 expect(turns.length).to.eql(4);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('=_b_-');  // straight to -
                 expect(turns[0].u).toBeFalsy();
                 expect(turns[0].restrictionID).to.eql('r1');
@@ -1326,7 +1326,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[0].no).toBe(true);              // restricted!
                 expect(turns[0].only).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('=_b_|');  // left to |
                 expect(turns[1].u).toBeFalsy();
                 expect(turns[1].restrictionID).to.eql('r1');
@@ -1334,7 +1334,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[1].no).toBeFalsy();
                 expect(turns[1].only).toBe(true);           // only (along via path)
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('=_b_|_*_‖');  // left to ‖ via |
                 expect(turns[2].u).toBeFalsy();
                 expect(turns[2].restrictionID).to.eql('r1');
@@ -1342,7 +1342,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[2].no).toBeFalsy();
                 expect(turns[2].only).toBe(true);           // only (along via path)
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('=_b_|_*_‖_e_≈');  // u-turn via |,‖ to ≈
                 expect(turns[3].u).toBeFalsy();
                 expect(turns[3].restrictionID).to.eql('r1');
@@ -1369,7 +1369,7 @@ describe('iD.osmIntersection', function() {
                 turns = iD.osmIntersection(graph, 'b', maxDist).turns('=', 2);
                 expect(turns.length).to.eql(4);
 
-                expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[0]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[0].key).to.eql('=_b_-');  // straight to -
                 expect(turns[0].u).toBeFalsy();
                 expect(turns[0].restrictionID).to.eql('r1');
@@ -1377,7 +1377,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[0].no).toBe(true);              // restricted!
                 expect(turns[0].only).toBeFalsy();
 
-                expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[1]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[1].key).to.eql('=_b_|');  // left to |
                 expect(turns[1].u).toBeFalsy();
                 expect(turns[1].restrictionID).to.eql('r1');
@@ -1385,7 +1385,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[1].no).toBeFalsy();
                 expect(turns[1].only).toBe(true);           // only (along via path)
 
-                expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[2]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[2].key).to.eql('=_b_|_*_‖');  // left to ‖ via |
                 expect(turns[2].u).toBeFalsy();
                 expect(turns[2].restrictionID).to.eql('r1');
@@ -1393,7 +1393,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[2].no).toBeFalsy();
                 expect(turns[2].only).toBe(true);           // only (along via path)
 
-                expect(turns[3]).to.be.an.instanceOf(iD.osmTurn);
+                expect(turns[3]).toBeInstanceOf(iD.osmTurn);
                 expect(turns[3].key).to.eql('=_b_|_*_‖_e_≈');  // u-turn via |,‖ to ≈
                 expect(turns[3].u).toBeFalsy();
                 expect(turns[3].restrictionID).to.eql('r1');

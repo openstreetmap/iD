@@ -18,7 +18,7 @@ describe('iD.osmWay', function() {
     }
 
     it('returns a way', function () {
-        expect(new iD.osmWay()).to.be.an.instanceOf(iD.osmWay);
+        expect(new iD.osmWay()).toBeInstanceOf(iD.osmWay);
         expect(new iD.osmWay().type).to.equal('way');
     });
 

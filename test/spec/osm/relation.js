@@ -6,7 +6,7 @@ describe('iD.osmRelation', function () {
     }
 
     it('returns a relation', function () {
-        expect(new iD.osmRelation()).to.be.an.instanceOf(iD.osmRelation);
+        expect(new iD.osmRelation()).toBeInstanceOf(iD.osmRelation);
         expect(new iD.osmRelation().type).to.equal('relation');
     });
 

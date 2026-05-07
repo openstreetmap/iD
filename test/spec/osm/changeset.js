@@ -1,6 +1,6 @@
 describe('iD.osmChangeset', function () {
     it('returns a changeset', function () {
-        expect(new iD.osmChangeset()).to.be.an.instanceOf(iD.osmChangeset);
+        expect(new iD.osmChangeset()).toBeInstanceOf(iD.osmChangeset);
         expect(new iD.osmChangeset().type).to.equal('changeset');
     });
 

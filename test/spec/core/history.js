@@ -20,7 +20,7 @@ describe('iD.coreHistory', function () {
 
     describe('#graph', function () {
         it('returns the current graph', function () {
-            expect(history.graph()).to.be.an.instanceOf(iD.coreGraph);
+            expect(history.graph()).toBeInstanceOf(iD.coreGraph);
         });
     });
 

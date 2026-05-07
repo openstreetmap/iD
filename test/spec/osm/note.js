@@ -1,6 +1,6 @@
 describe('iD.osmNote', function () {
     it('returns a note', function () {
-        expect(iD.osmNote()).to.be.an.instanceOf(iD.osmNote);
+        expect(iD.osmNote()).toBeInstanceOf(iD.osmNote);
         expect(iD.osmNote().type).to.equal('note');
     });
 

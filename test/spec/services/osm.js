@@ -330,7 +330,7 @@ describe('iD.serviceOsm', function () {
             const result = await promisify(connection.loadEntity).call(connection, id);
 
             var entity = result.data.find(function(e) { return e.id === id; });
-            expect(entity).to.be.an.instanceOf(iD.osmNode);
+            expect(entity).toBeInstanceOf(iD.osmNode);
         });
 
         it('loads a way', async () => {
@@ -344,7 +344,7 @@ describe('iD.serviceOsm', function () {
             const result = await promisify(connection.loadEntity).call(connection, id);
 
             var entity = result.data.find(function(e) { return e.id === id; });
-            expect(entity).to.be.an.instanceOf(iD.osmWay);
+            expect(entity).toBeInstanceOf(iD.osmWay);
         });
 
         it('does not ignore repeat requests', async () => {
@@ -357,11 +357,11 @@ describe('iD.serviceOsm', function () {
             var id = 'n1';
             const result1 = await promisify(connection.loadEntity).call(connection, id);
             var entity1 = result1.data.find(function(e1) { return e1.id === id; });
-            expect(entity1).to.be.an.instanceOf(iD.osmNode);
+            expect(entity1).toBeInstanceOf(iD.osmNode);
 
             const result2 = await promisify(connection.loadEntity).call(connection, id);
             var entity2 = result2.data.find(function(e2) { return e2.id === id; });
-            expect(entity2).to.be.an.instanceOf(iD.osmNode);
+            expect(entity2).toBeInstanceOf(iD.osmNode);
         });
     });
 
@@ -394,7 +394,7 @@ describe('iD.serviceOsm', function () {
             const result = await promisify(connection.loadEntityVersion).call(connection, id, 1);
 
             var entity = result.data.find(function(e) { return e.id === id; });
-            expect(entity).to.be.an.instanceOf(iD.osmNode);
+            expect(entity).toBeInstanceOf(iD.osmNode);
         });
 
         it('loads a way', async () => {
@@ -408,7 +408,7 @@ describe('iD.serviceOsm', function () {
             const result = await promisify(connection.loadEntityVersion).call(connection, id, 1);
 
             var entity = result.data.find(function(e) { return e.id === id; });
-            expect(entity).to.be.an.instanceOf(iD.osmWay);
+            expect(entity).toBeInstanceOf(iD.osmWay);
         });
 
         it('does not ignore repeat requests', async () => {
@@ -422,12 +422,12 @@ describe('iD.serviceOsm', function () {
             const result1 = await promisify(connection.loadEntityVersion).call(connection, id, 1);
 
             var entity1 = result1.data.find(function(e1) { return e1.id === id; });
-            expect(entity1).to.be.an.instanceOf(iD.osmNode);
+            expect(entity1).toBeInstanceOf(iD.osmNode);
 
             const result2 = await promisify(connection.loadEntityVersion).call(connection, id, 1);
 
             var entity2 = result2.data.find(function(e2) { return e2.id === id; });
-            expect(entity2).to.be.an.instanceOf(iD.osmNode);
+            expect(entity2).toBeInstanceOf(iD.osmNode);
         });
     });
 
