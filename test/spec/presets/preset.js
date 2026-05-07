@@ -269,21 +269,21 @@ describe('iD.presetPreset', function() {
             spyOn(preset, 't');
 
             preset.name();
-            expect(other.t).to.have.been.calledOnce;
+            expect(other.t).toHaveBeenCalledOnce();
             expect(preset.t).not.to.have.been.called;
 
             other.t.mockClear();
             preset.t.mockClear();
 
             preset.aliases();
-            expect(other.t).to.have.been.calledOnce;
+            expect(other.t).toHaveBeenCalledOnce();
             expect(preset.t).not.to.have.been.called;
 
             other.t.mockClear();
             preset.t.mockClear();
 
             preset.terms();
-            expect(other.t).to.have.been.calledOnce;
+            expect(other.t).toHaveBeenCalledOnce();
             expect(preset.t).not.to.have.been.called;
         });
     });

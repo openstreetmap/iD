@@ -148,7 +148,7 @@ describe('iD.serviceNominatim', function() {
             expect(fetchMock.calls()[0][1].headers).to.eql({
                 'Accept-Language': 'en'
             });
-            expect(callback).to.have.been.calledOnce;
+            expect(callback).toHaveBeenCalledOnce();
         });
     });
 

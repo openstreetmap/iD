@@ -75,7 +75,7 @@ describe('iD.serviceStreetside', function() {
             streetside.loadBubbles(context.projection, 0);  // 0 = don't fetch margin tiles
 
             await setTimeout(200);
-            expect(spy).to.have.been.calledOnce;
+            expect(spy).toHaveBeenCalledOnce();
         });
 
         it('does not load bubbles around null island', async () => {

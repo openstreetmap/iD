@@ -14,14 +14,14 @@ describe('iD.presetField', function() {
             spyOn(field, 't');
 
             field.title();
-            expect(other.t).to.have.been.calledOnce;
+            expect(other.t).toHaveBeenCalledOnce();
             expect(field.t).not.to.have.been.called;
 
             other.t.mockClear();
             field.t.mockClear();
 
             field.terms();
-            expect(other.t).to.have.been.calledOnce;
+            expect(other.t).toHaveBeenCalledOnce();
             expect(field.t).not.to.have.been.called;
         });
 
@@ -37,7 +37,7 @@ describe('iD.presetField', function() {
             spyOn(field, 't');
 
             field.placeholder();
-            expect(other.t).to.have.been.calledOnce;
+            expect(other.t).toHaveBeenCalledOnce();
             expect(field.t).not.to.have.been.called;
         });
 

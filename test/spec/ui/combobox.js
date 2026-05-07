@@ -263,7 +263,7 @@ describe('uiCombobox', function() {
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('⎋');
-        expect(spy).to.have.been.calledOnce;
+        expect(spy).toHaveBeenCalledOnce();
     });
 
     it('hides on ↩', function() {

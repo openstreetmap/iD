@@ -137,7 +137,7 @@ describe('iD.serviceOsm', function () {
         it('emits a change event', function() {
             connection.on('change', spy);
             connection.switch({ url: 'https://example.com' });
-            expect(spy).to.have.been.calledOnce;
+            expect(spy).toHaveBeenCalledOnce();
         });
     });
 
@@ -178,7 +178,7 @@ describe('iD.serviceOsm', function () {
 
             await expect(promise).rejects.toThrow(expect.objectContaining({ status: 509 }));
 
-            expect(spy).to.have.been.calledOnce;
+            expect(spy).toHaveBeenCalledOnce();
         });
 
         it('dispatches change event if 429 Too Many Requests', async () => {
@@ -193,7 +193,7 @@ describe('iD.serviceOsm', function () {
             const promise = promisify(connection.loadTile).call(connection, { id: '0', extent: { toParam: () => '', bbox: () => ({}) } });
 
             await expect(promise).rejects.toThrow(expect.objectContaining({ status: 429 }));
-            expect(spy).to.have.been.calledOnce;
+            expect(spy).toHaveBeenCalledOnce();
         });
 
         it('handles errors in partial JOSN response', async () => {
@@ -273,7 +273,7 @@ describe('iD.serviceOsm', function () {
             connection.loadTiles(context.projection, spy);
 
             await setTimeout(500);
-            expect(spy).to.have.been.calledOnce;
+            expect(spy).toHaveBeenCalledOnce();
         });
 
         it('#isDataLoaded', async () => {
@@ -619,7 +619,7 @@ describe('iD.serviceOsm', function () {
             connection.loadNotes(context.projection, {});
 
             await setTimeout(500);
-            expect(spy).to.have.been.calledOnce;
+            expect(spy).toHaveBeenCalledOnce();
         });
     });
 
