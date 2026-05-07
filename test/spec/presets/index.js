@@ -110,14 +110,14 @@ describe('iD.presetIndex', function () {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
-            expect(presets.areaKeys()).to.include.keys('natural');
+            expect(presets.areaKeys()).toHaveProperty('natural');
         });
 
         it('discards key-values for presets with a line geometry', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
-            expect(presets.areaKeys().natural).to.include.keys('tree_row');
+            expect(presets.areaKeys().natural).toHaveProperty('tree_row');
             expect(presets.areaKeys().natural.tree_row).toBe(true);
 
         });
@@ -126,7 +126,7 @@ describe('iD.presetIndex', function () {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
-            expect(presets.areaKeys().leisure).to.include.keys('track');
+            expect(presets.areaKeys().leisure).toHaveProperty('track');
         });
 
         it('does not discard key-values for presets with neither area nor line geometry', async () => {
