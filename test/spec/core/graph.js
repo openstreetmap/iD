@@ -16,7 +16,7 @@ describe('iD.coreGraph', function() {
             var entity = new iD.osmNode(),
                 base   = new iD.coreGraph([entity]),
                 graph  = new iD.coreGraph(base);
-            expect(graph.entities).not.to.equal(base.entities);
+            expect(graph.entities).not.toBe(base.entities);
         });
 
         it('rebases on other\'s base', function () {
@@ -255,7 +255,7 @@ describe('iD.coreGraph', function() {
         it('returns a new graph', function () {
             var node = new iD.osmNode(),
                 graph = new iD.coreGraph([node]);
-            expect(graph.remove(node)).not.to.equal(graph);
+            expect(graph.remove(node)).not.toBe(graph);
         });
 
         it('doesn\'t modify the receiver', function () {
@@ -296,7 +296,7 @@ describe('iD.coreGraph', function() {
         it('returns a new graph', function () {
             var node = new iD.osmNode(),
                 graph = new iD.coreGraph([node]);
-            expect(graph.replace(node.update())).not.to.equal(graph);
+            expect(graph.replace(node.update())).not.toBe(graph);
         });
 
         it('doesn\'t modify the receiver', function () {
@@ -367,7 +367,7 @@ describe('iD.coreGraph', function() {
             var n1 = new iD.osmNode({id: 'n'}),
                 n2 = n1.update({}),
                 graph = new iD.coreGraph([n1]).replace(n2);
-            expect(graph.revert('n')).not.to.equal(graph);
+            expect(graph.revert('n')).not.toBe(graph);
         });
 
         it('doesn\'t modify the receiver', function () {
@@ -469,7 +469,7 @@ describe('iD.coreGraph', function() {
     describe('#update', function () {
         it('returns a new graph if self is frozen', function () {
             var graph = new iD.coreGraph();
-            expect(graph.update()).not.to.equal(graph);
+            expect(graph.update()).not.toBe(graph);
         });
 
         it('returns self if self is not frozen', function () {

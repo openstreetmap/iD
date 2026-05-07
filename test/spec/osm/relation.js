@@ -32,7 +32,7 @@ describe('iD.osmRelation', function () {
             var result = r.copy(null, {});
 
             expect(result).toBeInstanceOf(iD.osmRelation);
-            expect(result).not.to.equal(r);
+            expect(result).not.toBe(r);
         });
 
         it('adds the new Relation to input object', function () {
@@ -67,7 +67,7 @@ describe('iD.osmRelation', function () {
             expect(copies.a).toBeInstanceOf(iD.osmNode);
             expect(copies.b).toBeInstanceOf(iD.osmNode);
             expect(copies.c).toBeInstanceOf(iD.osmNode);
-            expect(result.members[0].id).not.to.equal(r.members[0].id);
+            expect(result.members[0].id).not.toBe(r.members[0].id);
             expect(result.members[0].role).to.equal(r.members[0].role);
         });
 

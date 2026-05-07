@@ -20,7 +20,7 @@ describe('iD.osmEntity', function () {
 
     describe('.id', function () {
         it('generates unique IDs', function () {
-            expect(iD.osmIdManager.newId('node')).not.to.equal(iD.osmIdManager.newId('node'));
+            expect(iD.osmIdManager.newId('node')).not.toBe(iD.osmIdManager.newId('node'));
         });
 
         describe('.fromOSM', function () {
@@ -46,7 +46,7 @@ describe('iD.osmEntity', function () {
             var n = new iD.osmNode();
             var result = n.copy(null, {});
             expect(result).toBeInstanceOf(iD.osmEntity);
-            expect(result).not.to.equal(n);
+            expect(result).not.toBe(n);
         });
 
         it('adds the new Entity to input object', function () {
@@ -88,7 +88,7 @@ describe('iD.osmEntity', function () {
             var a = new iD.osmNode();
             var b = a.update({});
             expect(b instanceof iD.osmEntity).toBe(true);
-            expect(a).not.to.equal(b);
+            expect(a).not.toBe(b);
         });
 
         it('updates the specified attributes', function () {
@@ -132,7 +132,7 @@ describe('iD.osmEntity', function () {
             var a = new iD.osmNode({tags: {a: 'a'}});
             var b = a.mergeTags({a: 'b'});
             expect(b instanceof iD.osmEntity).toBe(true);
-            expect(a).not.to.equal(b);
+            expect(a).not.toBe(b);
         });
 
         it('merges tags', function () {

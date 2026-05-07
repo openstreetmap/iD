@@ -44,7 +44,7 @@ describe('iD.osmWay', function() {
                 result = w.copy(null, {});
 
             expect(result).toBeInstanceOf(iD.osmWay);
-            expect(result).not.to.equal(w);
+            expect(result).not.toBe(w);
         });
 
         it('adds the new Way to input object', function () {
@@ -75,8 +75,8 @@ describe('iD.osmWay', function() {
             expect(Object.keys(copies)).to.have.length(3);
             expect(copies.a).toBeInstanceOf(iD.osmNode);
             expect(copies.b).toBeInstanceOf(iD.osmNode);
-            expect(copies.a).not.to.equal(w.nodes[0]);
-            expect(copies.b).not.to.equal(w.nodes[1]);
+            expect(copies.a).not.toBe(w.nodes[0]);
+            expect(copies.b).not.toBe(w.nodes[1]);
             expect(result.nodes).toEqual([copies.a.id, copies.b.id]);
         });
 
