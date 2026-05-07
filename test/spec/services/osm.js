@@ -530,9 +530,9 @@ describe('iD.serviceOsm', function () {
     describe('#caches', function() {
         it('loads reset caches', function () {
             var caches = connection.caches();
-            expect(caches.tile).to.have.all.keys(['toLoad','loaded','inflight','seen','rtree']);
-            expect(caches.note).to.have.all.keys(['toLoad','loaded','inflight','inflightPost','note','closed','rtree']);
-            expect(caches.user).to.have.all.keys(['toLoad','user']);
+            expect(Object.keys(caches.tile).sort()).toEqual(['inflight','loaded','rtree','seen','toLoad']);
+            expect(Object.keys(caches.note).sort()).toEqual(['closed','inflight','inflightPost','loaded','note','rtree','toLoad']);
+            expect(Object.keys(caches.user).sort()).toEqual(['toLoad','user']);
         });
 
         describe('sets/gets caches', function() {
