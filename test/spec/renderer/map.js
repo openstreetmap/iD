@@ -132,8 +132,10 @@ describe('iD.Map', function() {
             expect(map.extent()[0][0]).to.be.closeTo(10, 0.1);
             expect(map.extent()[1][0]).to.be.closeTo(30, 0.1);
             map.extent([[-1, -40], [1, -20]]);
-            expect(map.extent()[0][1]).to.be.closeTo(-40, 1);
-            expect(map.extent()[1][1]).to.be.closeTo(-20, 1);
+            expect(map.extent()[0][1]).toBeGreaterThan(-41);
+            expect(map.extent()[0][1]).toBeLessThan(-39);
+            expect(map.extent()[1][1]).toBeGreaterThan(-21);
+            expect(map.extent()[1][1]).toBeLessThan(-19);
         });
     });
 
