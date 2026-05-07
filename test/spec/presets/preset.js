@@ -91,10 +91,10 @@ describe('iD.presetPreset', function() {
             }});
 
             expect(presetSupercenter.matchScore(supercenter.tags))
-                .to.be.greaterThan(presetMarket.matchScore(supercenter.tags));
+                .toBeGreaterThan(presetMarket.matchScore(supercenter.tags));
 
             expect(presetMarket.matchScore(market.tags))
-                .to.be.greaterThan(presetSupercenter.matchScore(market.tags));
+                .toBeGreaterThan(presetSupercenter.matchScore(market.tags));
         });
     });
 
