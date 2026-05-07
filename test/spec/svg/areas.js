@@ -144,4 +144,34 @@ describe('iD.svgAreas', function () {
 
         expect(_surface.selectAll('.stroke').size()).to.equal(0);
     });
+
+    it('adds data-playground attribute for playground areas', function () {
+        var a = iD.osmNode({ loc: [0, 0] });
+        var b = iD.osmNode({ loc: [1, 0] });
+        var c = iD.osmNode({ loc: [1, 1] });
+        var d = iD.osmNode({ loc: [0, 1] });
+        var w = new iD.osmWay({ nodes: [a.id, b.id, c.id, d.id, a.id], tags: { playground: 'sandbox' } });
+        var r = new iD.osmRelation({ tags: { type: 'multipolygon', playground: 'sandbox' }, members: [{ id: w.id, type: 'way' }] });
+        var graph = new iD.coreGraph([a, b, c, d, w, r]);
+        var areas = [w, r];
+
+        _surface.call(iD.svgAreas(projection, context), graph, areas, all);
+
+        expect(_surface.select('.fill').attr('data-playground')).to.equal('sandbox');
+    });
+
+    it('does not add data-playground for non-playground areas', function () {
+        var a = iD.osmNode({ loc: [0, 0] });
+        var b = iD.osmNode({ loc: [1, 0] });
+        var c = iD.osmNode({ loc: [1, 1] });
+        var d = iD.osmNode({ loc: [0, 1] });
+        var w = new iD.osmWay({ nodes: [a.id, b.id, c.id, d.id, a.id], tags: { building: 'yes' } });
+        var r = new iD.osmRelation({ tags: { type: 'multipolygon' }, members: [{ id: w.id, type: 'way' }] });
+        var graph = new iD.coreGraph([a, b, c, d, w, r]);
+        var areas = [w, r];
+
+        _surface.call(iD.svgAreas(projection, context), graph, areas, all);
+
+        expect(_surface.select('.fill').attr('data-playground')).to.be.null;
+    });
 });

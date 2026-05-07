@@ -1,6 +1,6 @@
 import { deepEqual } from 'fast-equals';
 import { bisector as d3_bisector } from 'd3-array';
-
+import { select as d3_select } from 'd3-selection';
 import { osmEntity } from '../osm';
 import { svgPath, svgSegmentWay } from './helpers';
 import { svgTagClasses } from './tag_classes';
@@ -192,6 +192,10 @@ export function svgAreas(projection, context) {
                 return graph.entities[d.id] &&
                     base.entities[d.id] &&
                     !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
+            })
+            .each(function(d) {
+                d3_select(this)
+                .attr('data-playground', d.tags.playground ?? null);
             })
             .call(svgTagClasses())
             .attr('d', path);

@@ -7,7 +7,7 @@ export function svgTagClasses() {
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
         'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
         'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
-        'roller_coaster', 'building:part', 'indoor', 'climbing'
+        'roller_coaster', 'building:part', 'indoor', 'climbing', 'playground'
     ];
     var statuses = Object.keys(osmLifecyclePrefixes);
     var secondaries = [
@@ -65,6 +65,16 @@ export function svgTagClasses() {
             v = t[k];
             if (!v || v === 'no') continue;
 
+            if (k === 'piste:type') {  // avoid a ':' in the class name
+                k = 'piste';
+            } else if (k === 'building:part') {  // avoid a ':' in the class name
+                k = 'building_part';
+            }
+            if (k === 'playground') {
+                classes.push('tag-playground');
+                primary = k; 
+                break;
+            }
             primary = k;
             if (statuses.indexOf(v) !== -1) {   // e.g. `railway=abandoned`
                 status = v;

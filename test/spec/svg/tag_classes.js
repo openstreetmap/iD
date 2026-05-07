@@ -274,4 +274,24 @@ describe('iD.svgTagClasses', function () {
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal(null);
     });
+
+    it('treats playground as key-only classification (no value-based class)', function() {
+        selection = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'g'));
+        selection
+            .datum(iD.osmWay({ tags: { playground: 'zipwire' } }))
+            .call(iD.svgTagClasses());
+
+        const classes = selection.attr('class');
+
+        expect(classes).to.contain('tag-playground');
+        expect(classes).to.not.contain('tag-playground-zipwire');
+    });
+
+    it('still generates value-based classes for other tags', function() {
+        selection = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'g'));
+        selection
+            .datum(iD.osmWay({ tags: { highway: 'primary' } }))
+            .call(iD.svgTagClasses());
+        expect(selection.attr('class')).to.contain('tag-highway-primary');
+    });
 });

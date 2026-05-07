@@ -68,6 +68,28 @@ path.line.stroke.tag-piste {
     stroke-width: 3;
 }
 
+/* Playground (base style) */
+
+.preset-icon .icon.tag-playground {
+    color: #f3c4ee;
+    stroke: rgba(116, 116, 116, 0.239);
+}
+path.line.stroke.tag-playground {
+    stroke: #f7f7f7e5;
+    stroke-width: 2;
+}
+path.line.casing.tag-playground {
+    stroke: #ed97e6;
+    stroke-width: 3;
+}
+path.area.fill.tag-playground {
+    fill: #c878b84d;
+    stroke: #ffffff4d;
+}
+path.area.stroke.tag-playground {
+    stroke-width: 1;
+    stroke: #e797d9ce;
+}
 
 /* ferry routes  */
 .preset-icon .icon.tag-route-ferry {
@@ -94,7 +116,6 @@ path.line.stroke.tag-route-ferry {
 path.line.casing.tag-route-ferry {
     stroke: none;
 }
-
 
 /* aerialways */
 path.line.stroke.tag-aerialway {
