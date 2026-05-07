@@ -10,7 +10,7 @@ describe('iD.actionStraightenWay', function () {
                 new iD.osmNode({id: 'd', loc: [3, 0]}),
                 new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
-            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).not.to.be.ok;
+            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).toBeFalsy();
         });
 
         it('returns \'too_bendy\' for ways with internal nodes far off centerline', function () {

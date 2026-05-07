@@ -7,7 +7,7 @@ describe('iD.actionMove', function() {
     //         var node  = new iD.osmNode({loc: [0, 0]}),
     //             action = iD.actionMove([node.id], [0, 0], projection),
     //             graph = new iD.coreGraph([node]);
-    //         expect(action.disabled(graph)).not.to.be.ok;
+    //         expect(action.disabled(graph)).toBeFalsy();
     //     });
 
     //     it('returns \'incomplete_relation\' for an incomplete relation', function() {
@@ -22,7 +22,7 @@ describe('iD.actionMove', function() {
     //             relation = new iD.osmRelation({members: [{id: node.id}]}),
     //             action = iD.actionMove([relation.id], [0, 0], projection),
     //             graph = new iD.coreGraph([node, relation]);
-    //         expect(action.disabled(graph)).not.to.be.ok;
+    //         expect(action.disabled(graph)).toBeFalsy();
     //     });
     // });
 

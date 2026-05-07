@@ -8,7 +8,7 @@ describe('iD.actionMerge', function () {
             ]),
             action = iD.actionMerge(['a', 'b', 'w']);
 
-        expect(action.disabled(graph)).not.to.be.ok;
+        expect(action.disabled(graph)).toBeFalsy();
 
         graph = action(graph);
 
@@ -27,7 +27,7 @@ describe('iD.actionMerge', function () {
             ]),
             action = iD.actionMerge(['a', 'b', 'w']);
 
-        expect(action.disabled(graph)).not.to.be.ok;
+        expect(action.disabled(graph)).toBeFalsy();
 
         graph = action(graph);
 

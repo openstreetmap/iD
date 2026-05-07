@@ -10,7 +10,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['b', 'c']})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for ways that share a start/end node', function () {
@@ -23,7 +23,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['c', 'b']})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for ways that share a start/start node', function () {
@@ -36,7 +36,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['b', 'c']})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for ways that share an end/end node', function () {
@@ -49,7 +49,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['c', 'b']})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for more than two ways when connected, regardless of order', function () {
@@ -64,12 +64,12 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '~', nodes: ['c', 'd']})
             ]);
 
-            expect(iD.actionJoin(['-', '=', '~']).disabled(graph)).not.to.be.ok;
-            expect(iD.actionJoin(['-', '~', '=']).disabled(graph)).not.to.be.ok;
-            expect(iD.actionJoin(['=', '-', '~']).disabled(graph)).not.to.be.ok;
-            expect(iD.actionJoin(['=', '~', '-']).disabled(graph)).not.to.be.ok;
-            expect(iD.actionJoin(['~', '=', '-']).disabled(graph)).not.to.be.ok;
-            expect(iD.actionJoin(['~', '-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=', '~']).disabled(graph)).toBeFalsy();
+            expect(iD.actionJoin(['-', '~', '=']).disabled(graph)).toBeFalsy();
+            expect(iD.actionJoin(['=', '-', '~']).disabled(graph)).toBeFalsy();
+            expect(iD.actionJoin(['=', '~', '-']).disabled(graph)).toBeFalsy();
+            expect(iD.actionJoin(['~', '=', '-']).disabled(graph)).toBeFalsy();
+            expect(iD.actionJoin(['~', '-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns \'not_eligible\' for non-line geometries', function () {
@@ -165,7 +165,7 @@ describe('iD.actionJoin', function () {
                     ]})
                 ]);
 
-                expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+                expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
             });
 
             it('returns falsy in situations where a ' + type + 'restriction wouldn\'t be damaged (b)', function () {
@@ -194,7 +194,7 @@ describe('iD.actionJoin', function () {
                     ]})
                 ]);
 
-                expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+                expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
             });
         });
 
@@ -279,7 +279,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['c', 'b'], tags: {'oneway': '-1'}})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for exceptions to tag conflicts: missing tag', function () {
@@ -291,7 +291,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['b', 'c'], tags: {}})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for exceptions to tag conflicts: uninteresting tag', function () {
@@ -303,7 +303,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['b', 'c'], tags: {'tiger:cfcc': 'A42'}})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
     });
 

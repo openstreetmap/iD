@@ -123,8 +123,8 @@ describe('iD.osmWay', function() {
         });
 
         it('returns falsy if the way does not start or end with the given node', function () {
-            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).affix('b')).not.to.be.ok;
-            expect(new iD.osmWay({nodes: []}).affix('b')).not.to.be.ok;
+            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).affix('b')).toBeFalsy();
+            expect(new iD.osmWay({nodes: []}).affix('b')).toBeFalsy();
         });
     });
 

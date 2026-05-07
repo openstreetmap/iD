@@ -63,7 +63,7 @@ describe('iD.actionCopyEntities', function () {
         var action = iD.actionCopyEntities(['a'], old);
         var head = action(base);
 
-        expect(head.hasEntity('a')).not.to.be.ok;
+        expect(head.hasEntity('a')).toBeFalsy();
         expect(Object.keys(action.copies())).to.have.length(1);
     });
 });

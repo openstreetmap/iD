@@ -6,7 +6,7 @@ describe('iD.actionConnect', function() {
         ]);
 
         graph = iD.actionConnect(['a', 'b'])(graph);
-        expect(graph.hasEntity('a')).not.to.be.ok;
+        expect(graph.hasEntity('a')).toBeFalsy();
 
         var survivor = graph.hasEntity('b');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
@@ -22,10 +22,10 @@ describe('iD.actionConnect', function() {
         ]);
 
         graph = iD.actionConnect(['n3', 'n-1', 'n2', 'n4'])(graph);
-        expect(graph.hasEntity('n3')).not.to.be.ok;
-        expect(graph.hasEntity('n-1')).not.to.be.ok;
+        expect(graph.hasEntity('n3')).toBeFalsy();
+        expect(graph.hasEntity('n-1')).toBeFalsy();
         expect(graph.hasEntity('n2')).to.be.ok;
-        expect(graph.hasEntity('n4')).not.to.be.ok;
+        expect(graph.hasEntity('n4')).toBeFalsy();
     });
 
     it('chooses the oldest interesting node as the survivor', function() {
@@ -38,9 +38,9 @@ describe('iD.actionConnect', function() {
 
         graph = iD.actionConnect(['n3', 'n1', 'n2', 'n4'])(graph);
 
-        expect(graph.hasEntity('n3')).not.to.be.ok;
-        expect(graph.hasEntity('n1')).not.to.be.ok;
-        expect(graph.hasEntity('n4')).not.to.be.ok;
+        expect(graph.hasEntity('n3')).toBeFalsy();
+        expect(graph.hasEntity('n1')).toBeFalsy();
+        expect(graph.hasEntity('n4')).toBeFalsy();
 
         var survivor = graph.hasEntity('n2');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
@@ -57,9 +57,9 @@ describe('iD.actionConnect', function() {
 
         graph = iD.actionConnect(['n3', 'n-1', 'n-2', 'n-4'])(graph);
 
-        expect(graph.hasEntity('n-1')).not.to.be.ok;
-        expect(graph.hasEntity('n-2')).not.to.be.ok;
-        expect(graph.hasEntity('n-4')).not.to.be.ok;
+        expect(graph.hasEntity('n-1')).toBeFalsy();
+        expect(graph.hasEntity('n-2')).toBeFalsy();
+        expect(graph.hasEntity('n-4')).toBeFalsy();
 
         var survivor = graph.hasEntity('n3');
         expect(survivor).to.be.an.instanceof(iD.osmNode);
@@ -74,8 +74,8 @@ describe('iD.actionConnect', function() {
         ]);
 
         graph = iD.actionConnect(['a', 'b', 'c'])(graph);
-        expect(graph.hasEntity('a')).not.to.be.ok;
-        expect(graph.hasEntity('b')).not.to.be.ok;
+        expect(graph.hasEntity('a')).toBeFalsy();
+        expect(graph.hasEntity('b')).toBeFalsy();
 
         var survivor = graph.hasEntity('c');
         expect(survivor).to.be.an.instanceof(iD.osmNode);

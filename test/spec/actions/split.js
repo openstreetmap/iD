@@ -12,7 +12,7 @@ describe('iD.actionSplit', function () {
                 new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] })
             ]);
 
-            expect(iD.actionSplit('b').disabled(graph)).not.to.be.ok;
+            expect(iD.actionSplit('b').disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for an intersection of two ways', function () {
@@ -33,7 +33,7 @@ describe('iD.actionSplit', function () {
                 new iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
             ]);
 
-            expect(iD.actionSplit('*').disabled(graph)).not.to.be.ok;
+            expect(iD.actionSplit('*').disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for an intersection of two ways with parent way specified', function () {
@@ -54,7 +54,7 @@ describe('iD.actionSplit', function () {
                 new iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
             ]);
 
-            expect(iD.actionSplit('*').limitWays(['-']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionSplit('*').limitWays(['-']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for a self-intersection', function () {
@@ -73,7 +73,7 @@ describe('iD.actionSplit', function () {
                 new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'a', 'd'] })
             ]);
 
-            expect(iD.actionSplit('a').disabled(graph)).not.to.be.ok;
+            expect(iD.actionSplit('a').disabled(graph)).toBeFalsy();
         });
 
         it('returns \'not_eligible\' for the first node of a single way', function () {

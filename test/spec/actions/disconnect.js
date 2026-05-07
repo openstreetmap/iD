@@ -16,7 +16,7 @@ describe('iD.actionDisconnect', function () {
                 new iD.osmNode({id: 'd'}),
                 new iD.osmWay({id: 'w', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
-            expect(iD.actionDisconnect('a').disabled(graph)).not.to.be.ok;
+            expect(iD.actionDisconnect('a').disabled(graph)).toBeFalsy();
         });
 
         it('returns not_connected for the closing node in a closed area', function () {
@@ -46,7 +46,7 @@ describe('iD.actionDisconnect', function () {
                     new iD.osmWay({id: 'w', nodes: ['a', 'b', 'c', 'd', 'e', 'b', 'a'], tags: {area: 'yes'}})
             ]);
 
-            expect(iD.actionDisconnect('b').disabled(graph)).not.to.be.ok;
+            expect(iD.actionDisconnect('b').disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for a node shared by two or more ways', function () {
@@ -62,7 +62,7 @@ describe('iD.actionDisconnect', function () {
                     new iD.osmWay({id: '|', nodes: ['d', 'b']})
                 ]);
 
-            expect(iD.actionDisconnect('b').disabled(graph)).not.to.be.ok;
+            expect(iD.actionDisconnect('b').disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for an intersection of two ways with parent way specified', function () {
@@ -78,7 +78,7 @@ describe('iD.actionDisconnect', function () {
                     new iD.osmWay({id: '|', nodes: ['d', 'b']})
             ]);
 
-            expect(iD.actionDisconnect('b', ['|']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionDisconnect('b', ['|']).disabled(graph)).toBeFalsy();
         });
 
         it('returns \'relation\' for a node connecting any two members of the same relation', function () {
@@ -118,7 +118,7 @@ describe('iD.actionDisconnect', function () {
                 ]})
             ]);
 
-            expect(iD.actionDisconnect('b').limitWays(['|']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionDisconnect('b').limitWays(['|']).disabled(graph)).toBeFalsy();
         });
     });
 
