@@ -29,7 +29,7 @@ describe('iD.actionDeleteRelation', function () {
             relation = new iD.osmRelation({members: [{id: node.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(new iD.coreGraph([node, way, relation]));
-        expect(graph.hasEntity(node.id)).not.to.be.undefined;
+        expect(graph.hasEntity(node.id)).toBeDefined();
     });
 
     it('does not delete member nodes with interesting tags', function() {
@@ -37,7 +37,7 @@ describe('iD.actionDeleteRelation', function () {
             relation = new iD.osmRelation({members: [{id: node.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(new iD.coreGraph([node, relation]));
-        expect(graph.hasEntity(node.id)).not.to.be.undefined;
+        expect(graph.hasEntity(node.id)).toBeDefined();
     });
 
     it('deletes member ways not referenced by another parent', function() {
@@ -54,7 +54,7 @@ describe('iD.actionDeleteRelation', function () {
             relation2 = new iD.osmRelation({members: [{id: way.id}]}),
             action    = iD.actionDeleteRelation(relation1.id),
             graph     = action(new iD.coreGraph([way, relation1, relation2]));
-        expect(graph.hasEntity(way.id)).not.to.be.undefined;
+        expect(graph.hasEntity(way.id)).toBeDefined();
     });
 
     it('does not delete member ways with interesting tags', function() {
@@ -62,7 +62,7 @@ describe('iD.actionDeleteRelation', function () {
             relation = new iD.osmRelation({members: [{id: way.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(new iD.coreGraph([way, relation]));
-        expect(graph.hasEntity(way.id)).not.to.be.undefined;
+        expect(graph.hasEntity(way.id)).toBeDefined();
     });
 
     it('deletes nodes of deleted member ways', function() {

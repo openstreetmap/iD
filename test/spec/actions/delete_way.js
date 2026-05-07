@@ -29,7 +29,7 @@ describe('iD.actionDeleteWay', function() {
             way2   = new iD.osmWay({nodes: [node.id]}),
             action = iD.actionDeleteWay(way1.id),
             graph  = new iD.coreGraph([node, way1, way2]).update(action);
-        expect(graph.hasEntity(node.id)).not.to.be.undefined;
+        expect(graph.hasEntity(node.id)).toBeDefined();
     });
 
     it('deletes multiple member nodes', function() {
@@ -59,7 +59,7 @@ describe('iD.actionDeleteWay', function() {
             way    = new iD.osmWay({nodes: [node.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = new iD.coreGraph([node, way]).update(action);
-        expect(graph.hasEntity(node.id)).not.to.be.undefined;
+        expect(graph.hasEntity(node.id)).toBeDefined();
     });
 
     it('deletes parent relations that become empty', function () {
