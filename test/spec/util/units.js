@@ -47,15 +47,15 @@ describe('iD.units', function() {
     describe('dmsCoordinatePair', function() {
         it('formats coordinate pair', function () {
             var result = iD.dmsCoordinatePair([90 + 0.5/3600, 45]);
-            expect(result).to.be.eql('45°N, 90°0′1″E');
+            expect(result).toEqual('45°N, 90°0′1″E');
         });
         it('formats 0°', function () {
             var result = iD.dmsCoordinatePair([0, 0]);
-            expect(result).to.be.eql('0°, 0°');
+            expect(result).toEqual('0°, 0°');
         });
         it('formats negative value', function () {
             var result = iD.dmsCoordinatePair([-179, -90]);
-            expect(result).to.be.eql('90°S, 179°W');
+            expect(result).toEqual('90°S, 179°W');
         });
         it('formats 180° lng, should be E or W', function () {
             // The longitude at this line can be given as either east or west.

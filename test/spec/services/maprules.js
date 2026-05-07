@@ -128,23 +128,23 @@ describe('maprules', function() {
             var tagMap, geom;
             tagMap = iD.serviceMapRules.buildTagMap(amenityDerivedArea);
             geom = iD.serviceMapRules.inferGeometry(tagMap);
-            expect(geom).to.be.eql('area');
+            expect(geom).toEqual('area');
 
             tagMap = iD.serviceMapRules.buildTagMap(areaDerivedArea);
             geom = iD.serviceMapRules.inferGeometry(tagMap);
-            expect(geom).to.be.eql('area');
+            expect(geom).toEqual('area');
 
             tagMap = iD.serviceMapRules.buildTagMap(badAreaDerivedLine);
             geom = iD.serviceMapRules.inferGeometry(tagMap);
-            expect(geom).to.be.eql('line');
+            expect(geom).toEqual('line');
 
             tagMap = iD.serviceMapRules.buildTagMap(roundHouseRailwayDerivedArea);
             geom = iD.serviceMapRules.inferGeometry(tagMap);
-            expect(geom).to.be.eql('area');
+            expect(geom).toEqual('area');
 
             tagMap = iD.serviceMapRules.buildTagMap(justClosedWayDerivedLine);
             geom = iD.serviceMapRules.inferGeometry(tagMap);
-            expect(geom).to.be.eql('line');
+            expect(geom).toEqual('line');
         });
     });
 
