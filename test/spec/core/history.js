@@ -270,7 +270,7 @@ describe('iD.coreHistory', function () {
 
             var diff = history.resumeChangeDispatch();
             expect(spy).toHaveBeenCalledExactlyOnceWith(diff);
-            expect(diff.changes()).to.include.keys(['a', 'b']);
+            expect(Object.keys(diff.changes())).toEqual(expect.arrayContaining(['a', 'b']));
         });
     });
 
