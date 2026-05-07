@@ -82,7 +82,7 @@ describe('iD.util', function() {
             var graph = new iD.coreGraph([n1, n2, n3, n4, n5]);
             var result = iD.utilCombinedTags(['n-1', 'n-2', 'n-3', 'n-4', 'n-5'], graph);
 
-            expect(result.surface).to.be.an('array');
+            expect(result.surface).toBeInstanceOf(Array);
             expect(result.surface[0]).toEqual('paved');
             expect(result.surface[1]).toEqual('asphalt');
             expect(result.surface[2]).toEqual('gravel');
