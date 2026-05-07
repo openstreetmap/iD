@@ -148,7 +148,7 @@ describe('iD.serviceVegbilder', function() {
     it('fetches available layers', function() {
       const availableLayers = vegbilder.cache().wfslayers;
       expect(availableLayers).to.have.key('vegbilder_1_0:Vegbilder_2020');
-      expect(availableLayers).to.not.have.key('not_matched_layer:Vegbilder_2020');
+      expect(availableLayers.has('not_matched_layer:Vegbilder_2020')).toBe(false);
     });
   });
 
