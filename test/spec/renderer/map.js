@@ -117,7 +117,7 @@ describe('iD.Map', function() {
             expect(map.centerZoom([20, 25], 4)).to.equal(map);
             expect(map.center()[0]).toBeCloseTo(20, 6);
             expect(map.center()[1]).toBeCloseTo(25, 6);
-            expect(map.zoom()).to.be.equal(4);
+            expect(map.zoom()).toBe(4);
         });
     });
 

@@ -206,7 +206,7 @@ describe('iD.serviceMapillary', function() {
             context.photos().setDateFilter('fromDate', '2020-01-01');
             context.photos().setDateFilter('toDate', '2021-01-01');
             var filter = mapillary.filterViewer(context);
-            expect(filter.length).to.be.equal(3);
+            expect(filter.length).toBe(3);
         });
     });
 });

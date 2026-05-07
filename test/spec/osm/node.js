@@ -156,27 +156,27 @@ describe('iD.osmNode', function () {
 
     describe('#isDegenerate', function () {
         it('returns true if node has invalid loc', function () {
-            expect(new iD.osmNode().isDegenerate()).to.be.equal(true, 'no loc');
-            expect(new iD.osmNode({loc: ''}).isDegenerate()).to.be.equal(true, 'empty string loc');
-            expect(new iD.osmNode({loc: []}).isDegenerate()).to.be.equal(true, 'empty array loc');
-            expect(new iD.osmNode({loc: [0]}).isDegenerate()).to.be.equal(true, '1-array loc');
-            expect(new iD.osmNode({loc: [0, 0, 0]}).isDegenerate()).to.be.equal(true, '3-array loc');
-            expect(new iD.osmNode({loc: [-181, 0]}).isDegenerate()).to.be.equal(true, '< min lon');
-            expect(new iD.osmNode({loc: [181, 0]}).isDegenerate()).to.be.equal(true, '> max lon');
-            expect(new iD.osmNode({loc: [0, -91]}).isDegenerate()).to.be.equal(true, '< min lat');
-            expect(new iD.osmNode({loc: [0, 91]}).isDegenerate()).to.be.equal(true, '> max lat');
-            expect(new iD.osmNode({loc: [Infinity, 0]}).isDegenerate()).to.be.equal(true, 'Infinity lon');
-            expect(new iD.osmNode({loc: [0, Infinity]}).isDegenerate()).to.be.equal(true, 'Infinity lat');
-            expect(new iD.osmNode({loc: [NaN, 0]}).isDegenerate()).to.be.equal(true, 'NaN lon');
-            expect(new iD.osmNode({loc: [0, NaN]}).isDegenerate()).to.be.equal(true, 'NaN lat');
+            expect(new iD.osmNode().isDegenerate(), 'no loc').toBe(true);
+            expect(new iD.osmNode({loc: ''}).isDegenerate(), 'empty string loc').toBe(true);
+            expect(new iD.osmNode({loc: []}).isDegenerate(), 'empty array loc').toBe(true);
+            expect(new iD.osmNode({loc: [0]}).isDegenerate(), '1-array loc').toBe(true);
+            expect(new iD.osmNode({loc: [0, 0, 0]}).isDegenerate(), '3-array loc').toBe(true);
+            expect(new iD.osmNode({loc: [-181, 0]}).isDegenerate(), '< min lon').toBe(true);
+            expect(new iD.osmNode({loc: [181, 0]}).isDegenerate(), '> max lon').toBe(true);
+            expect(new iD.osmNode({loc: [0, -91]}).isDegenerate(), '< min lat').toBe(true);
+            expect(new iD.osmNode({loc: [0, 91]}).isDegenerate(), '> max lat').toBe(true);
+            expect(new iD.osmNode({loc: [Infinity, 0]}).isDegenerate(), 'Infinity lon').toBe(true);
+            expect(new iD.osmNode({loc: [0, Infinity]}).isDegenerate(), 'Infinity lat').toBe(true);
+            expect(new iD.osmNode({loc: [NaN, 0]}).isDegenerate(), 'NaN lon').toBe(true);
+            expect(new iD.osmNode({loc: [0, NaN]}).isDegenerate(), 'NaN lat').toBe(true);
         });
 
         it('returns false if node has valid loc', function () {
-            expect(new iD.osmNode({loc: [0, 0]}).isDegenerate()).to.be.equal(false, '2-array loc');
-            expect(new iD.osmNode({loc: [-180, 0]}).isDegenerate()).to.be.equal(false, 'min lon');
-            expect(new iD.osmNode({loc: [180, 0]}).isDegenerate()).to.be.equal(false, 'max lon');
-            expect(new iD.osmNode({loc: [0, -90]}).isDegenerate()).to.be.equal(false, 'min lat');
-            expect(new iD.osmNode({loc: [0, 90]}).isDegenerate()).to.be.equal(false, 'max lat');
+            expect(new iD.osmNode({loc: [0, 0]}).isDegenerate(), '2-array loc').toBe(false);
+            expect(new iD.osmNode({loc: [-180, 0]}).isDegenerate(), 'min lon').toBe(false);
+            expect(new iD.osmNode({loc: [180, 0]}).isDegenerate(), 'max lon').toBe(false);
+            expect(new iD.osmNode({loc: [0, -90]}).isDegenerate(), 'min lat').toBe(false);
+            expect(new iD.osmNode({loc: [0, 90]}).isDegenerate(), 'max lat').toBe(false);
         });
     });
 
