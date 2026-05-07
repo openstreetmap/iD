@@ -18,7 +18,7 @@ describe('iD.coreFileFetcher', function() {
             data.cache().test = { hello: 'world' };
 
             var prom = data.get('test');
-            expect(prom).to.be.a('promise');
+            expect(prom).toBeInstanceOf(Promise);
             data = await prom;
             expect(data).toBeTypeOf('object');
             expect(data.hello).toEqual('world');
@@ -34,7 +34,7 @@ describe('iD.coreFileFetcher', function() {
             var files = { 'intro_graph': 'data/intro_graph.min.json' };
             var data = iD.coreFileFetcher().assetPath('../dist/').fileMap(files);
             var prom = data.get('intro_graph');
-            expect(prom).to.be.a('promise');
+            expect(prom).toBeInstanceOf(Promise);
             data = await prom;
             expect(data).toBeTypeOf('object');
             expect(data.n2061.tags.name).toEqual('Three Rivers City Hall');
