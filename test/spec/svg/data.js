@@ -172,11 +172,11 @@ describe('iD.svgData', function () {
             path = surface.selectAll('path.stroke');
             expect(path.nodes().length).toEqual(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
-            expect(render.geojson().features[0].properties.osm_id).to.be.a('string');
-            expect(render.geojson().features[0].properties.flag).to.be.a('string');
-            expect(render.geojson().features[0].properties.list).to.be.a('string');
-            expect(render.geojson().features[0].properties.null).to.be.a('string');
-            expect(render.geojson().features[0].properties.object).to.be.a('string');
+            expect(render.geojson().features[0].properties.osm_id).toBeTypeOf('string');
+            expect(render.geojson().features[0].properties.flag).toBeTypeOf('string');
+            expect(render.geojson().features[0].properties.list).toBeTypeOf('string');
+            expect(render.geojson().features[0].properties.null).toBeTypeOf('string');
+            expect(render.geojson().features[0].properties.object).toBeTypeOf('string');
         });
     });
 
