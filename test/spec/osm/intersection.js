@@ -645,7 +645,7 @@ describe('iD.osmIntersection', function() {
 
                 expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('/_b_/');  // u-turn
-                expect(turns[4].u).to.be.ok;
+                expect(turns[4].u).toBeTruthy();
             });
         });
 
@@ -745,7 +745,7 @@ describe('iD.osmIntersection', function() {
 
                 expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('/_b_/');  // u-turn
-                expect(turns[4].u).to.be.ok;
+                expect(turns[4].u).toBeTruthy();
             });
         });
 
@@ -854,7 +854,7 @@ describe('iD.osmIntersection', function() {
 
                 expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('/_b_/');  // u-turn
-                expect(turns[4].u).to.be.ok;
+                expect(turns[4].u).toBeTruthy();
             });
         });
 
@@ -962,7 +962,7 @@ describe('iD.osmIntersection', function() {
 
                 expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('/_b_/');  // u-turn
-                expect(turns[4].u).to.be.ok;
+                expect(turns[4].u).toBeTruthy();
             });
 
             it('`only_` restriction is only effective towards the via', function() {
@@ -1147,7 +1147,7 @@ describe('iD.osmIntersection', function() {
 
                 expect(turns[4]).to.be.an.instanceOf(iD.osmTurn);
                 expect(turns[4].key).to.eql('/_b_/');       // u-turn
-                expect(turns[4].u).to.be.ok;
+                expect(turns[4].u).toBeTruthy();
                 expect(turns[4].restrictionID).to.eql('r2');
                 expect(turns[4].direct).to.be.false;        // indirect
                 expect(turns[4].no).to.be.true;             // restricted!

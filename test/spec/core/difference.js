@@ -482,7 +482,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(node.move([1, 2]));
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete()).to.be.ok;
+            expect(diff.complete()).toBeTruthy();
         });
 
         it.todo('limits changes to those within a given extent');

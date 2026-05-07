@@ -125,7 +125,7 @@ describe('iD.actionOrthogonalize', function () {
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection)(graph));
             expect(diff.changes().d).to.be.undefined;
-            expect(graph.hasEntity('d')).to.be.ok;
+            expect(graph.hasEntity('d')).toBeTruthy();
         });
 
         it('preserves the shape of skinny quads', function () {
@@ -255,7 +255,7 @@ describe('iD.actionOrthogonalize', function () {
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
             expect(graph.entity('-').nodes).to.have.length(5);
-            expect(graph.hasEntity('d')).to.be.ok;
+            expect(graph.hasEntity('d')).toBeTruthy();
         });
 
         it('only moves non-endpoint nodes which are near right or near straight', function() {
@@ -293,7 +293,7 @@ describe('iD.actionOrthogonalize', function () {
 
             var diff = iD.coreDifference(graph, iD.actionOrthogonalize('-', projection)(graph));
             expect(diff.changes().d).to.be.undefined;
-            expect(graph.hasEntity('d')).to.be.ok;
+            expect(graph.hasEntity('d')).toBeTruthy();
         });
     });
 

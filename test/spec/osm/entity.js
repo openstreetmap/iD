@@ -70,7 +70,7 @@ describe('iD.osmEntity', function () {
             var n = new iD.osmNode({id: 'n', version: 10, user: 'user'});
             var copies = {};
             n.copy(null, copies);
-            expect(copies.n.isNew()).to.be.ok;
+            expect(copies.n.isNew()).toBeTruthy();
             expect(copies.n.version).to.be.undefined;
             expect(copies.n.user).to.be.undefined;
         });

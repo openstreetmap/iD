@@ -43,7 +43,7 @@ describe('iD.serviceOsm', function () {
 
 
     it('is instantiated', function () {
-        expect(connection).to.be.ok;
+        expect(connection).toBeTruthy();
     });
 
 

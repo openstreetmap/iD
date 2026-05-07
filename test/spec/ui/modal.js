@@ -16,7 +16,7 @@ describe('iD.uiModal', function () {
 
     it('can be instantiated', function() {
         var selection = iD.uiModal(elem);
-        expect(selection).to.be.ok;
+        expect(selection).toBeTruthy();
     });
 
     it('has a content section', function () {

@@ -14,7 +14,7 @@ describe('iD.osmNode', function () {
 
     describe('#extent', function() {
         it('returns a point extent', function() {
-            expect(new iD.osmNode({loc: [5, 10]}).extent().equals([[5, 10], [5, 10]])).to.be.ok;
+            expect(new iD.osmNode({loc: [5, 10]}).extent().equals([[5, 10], [5, 10]])).toBeTruthy();
         });
     });
 

@@ -200,8 +200,8 @@ describe('iD.svgData', function () {
             var render = iD.svgData(projection, context, dispatch).geojson(gj).showLabels(false);
             surface.call(render);
 
-            expect(surface.selectAll('text.label').empty()).to.be.ok;
-            expect(surface.selectAll('text.label-halo').empty()).to.be.ok;
+            expect(surface.selectAll('text.label').empty()).toBeTruthy();
+            expect(surface.selectAll('text.label-halo').empty()).toBeTruthy();
         });
     });
 

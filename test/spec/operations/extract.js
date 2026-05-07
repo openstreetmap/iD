@@ -80,17 +80,17 @@ describe('iD.operationExtract', function () {
 
         it('is available for selected node with tags, parent way', function () {
             var result = iD.operationExtract(fakeContext, ['a']).available();
-            expect(result).to.be.ok;
+            expect(result).toBeTruthy();
         });
 
         it('is available for selected node with tags, two parent ways', function () {
             var result = iD.operationExtract(fakeContext, ['b']).available();
-            expect(result).to.be.ok;
+            expect(result).toBeTruthy();
         });
 
         it('is available for two selected nodes with tags and parent ways', function () {
             var result = iD.operationExtract(fakeContext, ['a', 'b']).available();
-            expect(result).to.be.ok;
+            expect(result).toBeTruthy();
         });
     });
 

@@ -22,12 +22,12 @@ describe('iD.uiFlash', function () {
         iD.uiFlash(context).duration(0)();
         var flashWrap = d3.selectAll('.flash-wrap');
         var footerWrap = d3.selectAll('.main-footer-wrap');
-        expect(flashWrap.classed('footer-show')).to.be.ok;
-        expect(footerWrap.classed('footer-hide')).to.be.ok;
+        expect(flashWrap.classed('footer-show')).toBeTruthy();
+        expect(footerWrap.classed('footer-hide')).toBeTruthy();
         d3.timerFlush();
         await setTimeout(200);
-        expect(flashWrap.classed('footer-hide')).to.be.ok;
-        expect(footerWrap.classed('footer-show')).to.be.ok;
+        expect(flashWrap.classed('footer-hide')).toBeTruthy();
+        expect(footerWrap.classed('footer-show')).toBeTruthy();
     });
 
 });

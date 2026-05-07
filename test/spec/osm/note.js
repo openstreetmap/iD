@@ -6,7 +6,7 @@ describe('iD.osmNote', function () {
 
     describe('#extent', function() {
         it('returns a note extent', function() {
-            expect(iD.osmNote({loc: [5, 10]}).extent().equals([[5, 10], [5, 10]])).to.be.ok;
+            expect(iD.osmNote({loc: [5, 10]}).extent().equals([[5, 10], [5, 10]])).toBeTruthy();
         });
     });
 

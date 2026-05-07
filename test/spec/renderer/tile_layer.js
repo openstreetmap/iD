@@ -12,7 +12,7 @@ describe('iD.rendererTileLayer', function() {
     });
 
     it('is instantiated', function() {
-        expect(c).to.be.ok;
+        expect(c).toBeTruthy();
     });
 
     it('#dimensions', function() {

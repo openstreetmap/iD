@@ -24,7 +24,7 @@ describe('iD.actionConnect', function() {
         graph = iD.actionConnect(['n3', 'n-1', 'n2', 'n4'])(graph);
         expect(graph.hasEntity('n3')).toBeFalsy();
         expect(graph.hasEntity('n-1')).toBeFalsy();
-        expect(graph.hasEntity('n2')).to.be.ok;
+        expect(graph.hasEntity('n2')).toBeTruthy();
         expect(graph.hasEntity('n4')).toBeFalsy();
     });
 

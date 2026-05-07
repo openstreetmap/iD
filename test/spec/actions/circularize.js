@@ -50,7 +50,7 @@ describe('iD.actionCircularize', function () {
 
         graph = iD.actionCircularize('-', projection)(graph);
 
-        expect(isCircular('-', graph)).to.be.ok;
+        expect(isCircular('-', graph)).toBeTruthy();
         expect(graph.entity('-').nodes).to.have.length(MAX_VERTICES + 1);
     });
 
@@ -69,7 +69,7 @@ describe('iD.actionCircularize', function () {
         const projection = d3.geoMercator().scale(150 * 1e5);
         graph = iD.actionCircularize('-', projection)(graph);
 
-        expect(isCircular('-', graph, projection)).to.be.ok;
+        expect(isCircular('-', graph, projection)).toBeTruthy();
         expect(graph.entity('-').nodes).to.have.length(MIN_VERTICES + 1);
     });
 
@@ -89,7 +89,7 @@ describe('iD.actionCircularize', function () {
 
         graph = iD.actionCircularize('-', projection)(graph);
 
-        expect(isCircular('-', graph)).to.be.ok;
+        expect(isCircular('-', graph)).toBeTruthy();
 
         nodes = graph.entity('-').nodes;
         expect(nodes).to.contain('a');
@@ -114,7 +114,7 @@ describe('iD.actionCircularize', function () {
 
         graph = iD.actionCircularize('-', projection)(graph);
 
-        expect(isCircular('-', graph)).to.be.ok;
+        expect(isCircular('-', graph)).toBeTruthy();
         expect(iD.geoVecLength(graph.entity('d').loc, [2, -2])).to.be.lt(0.5);
     });
 
@@ -134,7 +134,7 @@ describe('iD.actionCircularize', function () {
 
         graph = iD.actionCircularize('+', projection)(graph);
 
-        expect(isCircular('+', graph)).to.be.ok;
+        expect(isCircular('+', graph)).toBeTruthy();
         expect(area('+', graph)).to.be.gt(0);
     });
 
@@ -154,7 +154,7 @@ describe('iD.actionCircularize', function () {
 
         graph = iD.actionCircularize('-', projection)(graph);
 
-        expect(isCircular('-', graph)).to.be.ok;
+        expect(isCircular('-', graph)).toBeTruthy();
         expect(area('-', graph)).to.be.lt(0);
     });
 
@@ -186,7 +186,7 @@ describe('iD.actionCircularize', function () {
 
         graph = iD.actionCircularize('-', projection)(graph);
 
-        expect(isCircular('-', graph)).to.be.ok;
+        expect(isCircular('-', graph)).toBeTruthy();
         expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.be.gt(3);
         expect(graph.entity('-').isConvex(graph)).to.be.true;
         expect(graph.entity('=').isConvex(graph)).to.be.false;
@@ -220,7 +220,7 @@ describe('iD.actionCircularize', function () {
 
         graph = iD.actionCircularize('-', projection)(graph);
 
-        expect(isCircular('-', graph)).to.be.ok;
+        expect(isCircular('-', graph)).toBeTruthy();
         expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.be.gt(3);
         expect(graph.entity('-').isConvex(graph)).to.be.true;
         expect(graph.entity('=').isConvex(graph)).to.be.false;
@@ -251,7 +251,7 @@ describe('iD.actionCircularize', function () {
 
         graph = iD.actionCircularize('-', projection)(graph);
 
-        expect(isCircular('-', graph)).to.be.ok;
+        expect(isCircular('-', graph)).toBeTruthy();
         expect(graph.entity('-').isConvex(graph)).to.be.true;
         expect(graph.entity('-').nodes).to.have.length(MAX_VERTICES + 1);
     });
@@ -268,7 +268,7 @@ describe('iD.actionCircularize', function () {
 
         graph = iD.actionCircularize('-', projection)(graph);
 
-        expect(isCircular('-', graph)).to.be.ok;
+        expect(isCircular('-', graph)).toBeTruthy();
     });
 
     it('not disable circularize when its not circular', function(){
@@ -341,7 +341,7 @@ describe('iD.actionCircularize', function () {
                     new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionCircularize('-', projection)(graph, 1);
-            expect(isCircular('-', graph)).to.be.ok;
+            expect(isCircular('-', graph)).toBeTruthy();
             expect(graph.entity('-').nodes).to.have.length(MAX_VERTICES + 1);
             expect(area('-', graph)).to.be.closeTo(-6.24, 1e-2);
         });

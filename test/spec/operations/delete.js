@@ -26,7 +26,7 @@ describe('iD.operationDelete', function () {
             const operation = iD.operationDelete(fakeContext, ['n1']);
             fakeContext.enter = vi.fn();
             operation();
-            expect(fakeContext.graph().hasEntity('w')).to.be.ok;
+            expect(fakeContext.graph().hasEntity('w')).toBeTruthy();
             expect(fakeContext.enter).to.toHaveBeenCalledOnce();
             expect(fakeContext.enter.mock.calls[0][0].selectedIDs()).to.eql(['n2']);
         });
@@ -43,7 +43,7 @@ describe('iD.operationDelete', function () {
             const operation = iD.operationDelete(fakeContext, ['n4']);
             fakeContext.enter = vi.fn();
             operation();
-            expect(fakeContext.graph().hasEntity('w')).to.be.ok;
+            expect(fakeContext.graph().hasEntity('w')).toBeTruthy();
             expect(fakeContext.enter).to.toHaveBeenCalledOnce();
             expect(fakeContext.enter.mock.calls[0][0].selectedIDs()).to.eql(['n3']);
         });
@@ -59,7 +59,7 @@ describe('iD.operationDelete', function () {
             const operation = iD.operationDelete(fakeContext, ['n2']);
             fakeContext.enter = vi.fn();
             operation();
-            expect(fakeContext.graph().hasEntity('w')).to.be.ok;
+            expect(fakeContext.graph().hasEntity('w')).toBeTruthy();
             expect(fakeContext.enter).to.toHaveBeenCalledOnce();
             expect(fakeContext.enter.mock.calls[0][0].selectedIDs()).to.eql(['n1']);
         });

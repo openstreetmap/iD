@@ -8,7 +8,7 @@ describe('iD.coreFileFetcher', function() {
         it('sets the fileMap', function() {
             var data = iD.coreFileFetcher();
             var files = { 'intro_graph': 'data/intro_graph.min.json' };
-            expect(data.fileMap(files)).to.be.ok;
+            expect(data.fileMap(files)).toBeTruthy();
         });
     });
 

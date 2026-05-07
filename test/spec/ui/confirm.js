@@ -16,7 +16,7 @@ describe('iD.uiConfirm', function () {
 
     it('can be instantiated', function () {
         var selection = iD.uiConfirm(elem);
-        expect(selection).to.be.ok;
+        expect(selection).toBeTruthy();
     });
 
     it('has a header section', function () {

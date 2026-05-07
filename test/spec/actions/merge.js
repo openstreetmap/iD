@@ -47,9 +47,9 @@ describe('iD.actionMerge', function () {
             action = iD.actionMerge(['n1', 'w']);
 
         graph = action(graph);
-        expect(graph.hasEntity('n1')).to.be.ok;
+        expect(graph.hasEntity('n1')).toBeTruthy();
         expect(graph.hasEntity('a')).to.be.undefined;
-        expect(graph.hasEntity('b')).to.be.ok;
+        expect(graph.hasEntity('b')).toBeTruthy();
         expect(graph.entity('w').tags).to.eql({n1: 'n1', w: 'w'});
         expect(graph.entity('w').nodes).to.eql(['n1', 'b']);
         expect(graph.entity('n1').loc[0]).to.eql(0);
@@ -68,11 +68,11 @@ describe('iD.actionMerge', function () {
             action = iD.actionMerge(['n1', 'n2', 'w']);
 
         graph = action(graph);
-        expect(graph.hasEntity('n1')).to.be.ok;
-        expect(graph.hasEntity('n2')).to.be.ok;
+        expect(graph.hasEntity('n1')).toBeTruthy();
+        expect(graph.hasEntity('n2')).toBeTruthy();
         expect(graph.hasEntity('a')).to.be.undefined;
         expect(graph.hasEntity('b')).to.be.undefined;
-        expect(graph.hasEntity('c')).to.be.ok;
+        expect(graph.hasEntity('c')).toBeTruthy();
         expect(graph.entity('n2').tags).to.eql({b: 'b'});
         expect(graph.entity('w').tags).to.eql({n1: 'n1', n2: 'n2', w: 'w'});
         expect(graph.entity('w').nodes).to.eql(['n1', 'n2', 'c']);
@@ -95,8 +95,8 @@ describe('iD.actionMerge', function () {
         graph = action(graph);
         expect(graph.hasEntity('a')).to.be.undefined;
         expect(graph.hasEntity('b')).to.be.undefined;
-        expect(graph.hasEntity('n1')).to.be.ok;
-        expect(graph.hasEntity('n2')).to.be.ok;
+        expect(graph.hasEntity('n1')).toBeTruthy();
+        expect(graph.hasEntity('n2')).toBeTruthy();
         expect(graph.entity('w').tags).to.eql({a: 'a', w: 'w'});
         expect(graph.entity('w').nodes).to.eql(['n1', 'n2']);
         expect(graph.entity('n1').loc[0]).to.eql(0);
@@ -115,8 +115,8 @@ describe('iD.actionMerge', function () {
             action = iD.actionMerge(['n1', 'w']);
 
         graph = action(graph);
-        expect(graph.hasEntity('n1')).to.be.ok;
-        expect(graph.hasEntity('n2')).to.be.ok;
+        expect(graph.hasEntity('n1')).toBeTruthy();
+        expect(graph.hasEntity('n2')).toBeTruthy();
         expect(graph.hasEntity('n3')).to.be.undefined;
         expect(graph.entity('w').tags).to.eql({n1: 'n1', w: 'w'});
         expect(graph.entity('w').nodes).to.eql(['n2', 'n1']);
@@ -137,10 +137,10 @@ describe('iD.actionMerge', function () {
             action = iD.actionMerge(['n3', 'n6', 'w']);
 
         graph = action(graph);
-        expect(graph.hasEntity('n1')).to.be.ok;
-        expect(graph.hasEntity('n2')).to.be.ok;
-        expect(graph.hasEntity('n3')).to.be.ok;
-        expect(graph.hasEntity('n4')).to.be.ok;
+        expect(graph.hasEntity('n1')).toBeTruthy();
+        expect(graph.hasEntity('n2')).toBeTruthy();
+        expect(graph.hasEntity('n3')).toBeTruthy();
+        expect(graph.hasEntity('n4')).toBeTruthy();
         expect(graph.hasEntity('n5')).to.be.undefined;
         expect(graph.hasEntity('n6')).to.be.undefined;
         expect(graph.entity('w').tags).to.eql({n3: 'n3', n6: 'n6', w: 'w'});

@@ -6,7 +6,7 @@ describe('iD.actionCopyEntities', function () {
         var diff = iD.coreDifference(base, head);
         var created = diff.created();
 
-        expect(head.hasEntity('a')).to.be.ok;
+        expect(head.hasEntity('a')).toBeTruthy();
         expect(created).to.have.length(1);
     });
 
@@ -20,7 +20,7 @@ describe('iD.actionCopyEntities', function () {
         var diff = iD.coreDifference(base, head);
         var created = diff.created();
 
-        expect(head.hasEntity('w')).to.be.ok;
+        expect(head.hasEntity('w')).toBeTruthy();
         expect(created).to.have.length(3);
     });
 
@@ -34,8 +34,8 @@ describe('iD.actionCopyEntities', function () {
         var diff = iD.coreDifference(base, head);
         var created = diff.created();
 
-        expect(head.hasEntity('a')).to.be.ok;
-        expect(head.hasEntity('b')).to.be.ok;
+        expect(head.hasEntity('a')).toBeTruthy();
+        expect(head.hasEntity('b')).toBeTruthy();
         expect(created).to.have.length(2);
     });
 

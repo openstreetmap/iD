@@ -119,8 +119,8 @@ describe('iD.uiFieldLocalized', function() {
         selection.call(localized);
         localized.tags({'old_name:de': 'Value'});
 
-        expect(selection.selectAll('.localized-lang').empty()).to.be.ok;
-        expect(selection.selectAll('.localized-value').empty()).to.be.ok;
+        expect(selection.selectAll('.localized-lang').empty()).toBeTruthy();
+        expect(selection.selectAll('.localized-value').empty()).toBeTruthy();
     });
 
     it('removes the tag when the language is emptied', async () => {
