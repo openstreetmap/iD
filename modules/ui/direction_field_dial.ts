@@ -2,7 +2,8 @@ import {
     utilDirectionSegmentFractionDigits,
     utilGetSetValue,
     utilNormalizeAzimuthDegrees,
-    utilParseDirectionDegreesString
+    utilParseDirectionDegreesString,
+    utilParseDirectionRangeString
 } from '../util';
 import { uiDirectionDial } from './direction_dial';
 
@@ -25,6 +26,7 @@ interface DirectionFieldDialMountOptions {
 }
 
 type SyncDirectionDial = (isMixed: boolean, isLocked: boolean) => void;
+type DialValue = number | { start: number; end: number };
 
 /**
  * Returns a function called on each `i(selection)` pass: updates the dial shell for `fieldRoot`
@@ -48,18 +50,17 @@ export function createDirectionFieldDialMount(
 
     const dial = uiDirectionDial()
         .step(options.step)
-        .onInput(function(degrees: number) {
-            applyDegreesToInput(degrees, true);
+        .onInput(function(value: DialValue) {
+            applyDialValueToInput(value, true);
         })
-        .onCommit(function(degrees: number) {
-            applyDegreesToInput(degrees, false);
+        .onCommit(function(value: DialValue) {
+            applyDialValueToInput(value, false);
         });
 
-    function applyDegreesToInput(degrees: number, onInput: boolean) {
+    function applyDialValueToInput(value: DialValue, onInput: boolean) {
         const inputSel = options.getInput();
         if (inputSel.empty()) return;
 
-        const normalized = utilNormalizeAzimuthDegrees(degrees);
         const currentValue = utilGetSetValue(inputSel);
         const vals = currentValue ? currentValue.split(';') : [''];
         const firstValue = (vals[0] || '').trim();
@@ -68,7 +69,14 @@ export function createDirectionFieldDialMount(
             options.countDecimalPlaces
         );
 
-        vals[0] = options.formatFloat(options.clampNumber(normalized), fractionDigits);
+        if (typeof value === 'number') {
+            const normalized = utilNormalizeAzimuthDegrees(value);
+            vals[0] = options.formatFloat(options.clampNumber(normalized), fractionDigits);
+        } else {
+            const start = options.formatFloat(options.clampNumber(utilNormalizeAzimuthDegrees(value.start)), fractionDigits);
+            const end = options.formatFloat(options.clampNumber(utilNormalizeAzimuthDegrees(value.end)), fractionDigits);
+            vals[0] = `${start}-${end}`;
+        }
         utilGetSetValue(inputSel, vals.join(';'));
         options.notifyChange(onInput);
     }
@@ -79,12 +87,18 @@ export function createDirectionFieldDialMount(
         const inputSel = options.getInput();
         const rawValue = utilGetSetValue(inputSel);
         const firstValue = (rawValue || '').split(';')[0];
-        const degrees = isMixed
+        const range = isMixed
+            ? null
+            : utilParseDirectionRangeString(firstValue, options.parseLocaleFloat);
+        const degrees = range
+            ? null
+            : isMixed
             ? null
             : utilParseDirectionDegreesString(firstValue, options.parseLocaleFloat);
 
         dial
             .value(degrees)
+            .range(range)
             .disabled(isMixed || isLocked);
 
         dialWrap.call(dial);

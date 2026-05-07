@@ -1511,8 +1511,8 @@ button.preset-reset .label.flash-bg {
     display: flex;
     flex-flow: row nowrap;
     flex: 0 0 auto;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 31px;
     border: 1px solid var(--border-color);
     border-left: 0;
     border-top-width: 0;
@@ -1528,6 +1528,10 @@ button.preset-reset .label.flash-bg {
 .direction-dial {
     width: 28px;
     height: 28px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     overflow: visible;
     cursor: crosshair;
     outline: none;
@@ -1535,10 +1539,6 @@ button.preset-reset .label.flash-bg {
 }
 
 .direction-dial.dragging {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     z-index: 3;
 }
 
@@ -1615,6 +1615,19 @@ button.preset-reset .label.flash-bg {
 }
 
 .direction-dial-line.hidden {
+    display: none;
+}
+
+.direction-dial-range {
+    fill: none;
+    stroke: var(--link-color);
+    stroke-opacity: 0.8;
+    stroke-width: 3;
+    pointer-events: none;
+    vector-effect: non-scaling-stroke;
+}
+
+.direction-dial-range.hidden {
     display: none;
 }
 

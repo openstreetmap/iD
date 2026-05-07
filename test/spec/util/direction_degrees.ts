@@ -42,6 +42,31 @@ describe('iD.direction_degrees util', () => {
         });
     });
 
+    describe('utilParseDirectionRangeString', () => {
+        it('returns null for empty or non-range input', () => {
+            expect(iD.utilParseDirectionRangeString('', parseIdentity)).to.equal(null);
+            expect(iD.utilParseDirectionRangeString('90', parseIdentity)).to.equal(null);
+        });
+
+        it('parses numeric range strings and normalizes', () => {
+            expect(iD.utilParseDirectionRangeString('120-300', parseIdentity)).to.deep.equal({
+                start: 120,
+                end: 300
+            });
+            expect(iD.utilParseDirectionRangeString('-10-370', parseIdentity)).to.deep.equal({
+                start: 350,
+                end: 10
+            });
+        });
+
+        it('parses range strings with cardinal directions', () => {
+            expect(iD.utilParseDirectionRangeString('N-E', parseIdentity)).to.deep.equal({
+                start: 0,
+                end: 90
+            });
+        });
+    });
+
     describe('utilDirectionSegmentFractionDigits', () => {
         it('uses decimal places from raw dot notation', () => {
             expect(
