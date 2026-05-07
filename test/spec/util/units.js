@@ -60,11 +60,11 @@ describe('iD.units', function() {
         it('formats 180° lng, should be E or W', function () {
             // The longitude at this line can be given as either east or west.
             var result = iD.dmsCoordinatePair([180, 0]);
-            expect(result).to.be.oneOf(['0°, 180°W', '0°, 180E°']);
+            expect(result).toBeOneOf(['0°, 180°W', '0°, 180E°']);
         });
         it('formats value over 90°lat or 180°lng', function () {
             var result = iD.dmsCoordinatePair([181, 91]);
-            expect(result).to.be.oneOf(['90°N, 179°W']);
+            expect(result).toBeOneOf(['90°N, 179°W']);
         });
     });
 });

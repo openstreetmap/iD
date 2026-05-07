@@ -134,7 +134,7 @@ describe('iD.util', function() {
         expect(iD.utilQsString({})).toEqual('');
         expect(iD.utilQsString({ foo: 'bar' })).toEqual('foo=bar');
         expect(iD.utilQsString({ foo: 'bar', one: 2 })).toEqual('foo=bar&one=2');
-        expect(iD.utilQsString({ foo: 'bar baz' })).to.be.oneOf(['foo=bar%20baz', 'foo=bar+baz']);
+        expect(iD.utilQsString({ foo: 'bar baz' })).toBeOneOf(['foo=bar%20baz', 'foo=bar+baz']);
         expect(iD.utilQsString({ foo: 'bar/baz' })).toEqual('foo=bar%2Fbaz');
         expect(iD.utilQsString({ foo: 'bar/baz' }, true)).toEqual('foo=bar/baz');
     });
@@ -199,12 +199,12 @@ describe('iD.util', function() {
             // The `Array.from` polyfill may not account for emojis, so
             // be lenient here. Worst case scenario is that IE users might be
             // limited to somewhat fewer characters on tag and role input.
-            expect(iD.utilUnicodeCharsCount('😎')).to.be.oneOf([1, 2]);
-            expect(iD.utilUnicodeCharsCount('🇨🇦')).to.be.oneOf([2, 4]);
-            expect(iD.utilUnicodeCharsCount('🏳️‍🌈')).to.be.oneOf([4, 6]);
-            expect(iD.utilUnicodeCharsCount('‍👩‍👩‍👧‍👧')).to.be.oneOf([8, 12]);
-            expect(iD.utilUnicodeCharsCount('👩‍❤️‍💋‍👩')).to.be.oneOf([8, 11]);
-            expect(iD.utilUnicodeCharsCount('😎😬😆😵😴😄🙂🤔')).to.be.oneOf([8, 16]);
+            expect(iD.utilUnicodeCharsCount('😎')).toBeOneOf([1, 2]);
+            expect(iD.utilUnicodeCharsCount('🇨🇦')).toBeOneOf([2, 4]);
+            expect(iD.utilUnicodeCharsCount('🏳️‍🌈')).toBeOneOf([4, 6]);
+            expect(iD.utilUnicodeCharsCount('‍👩‍👩‍👧‍👧')).toBeOneOf([8, 12]);
+            expect(iD.utilUnicodeCharsCount('👩‍❤️‍💋‍👩')).toBeOneOf([8, 11]);
+            expect(iD.utilUnicodeCharsCount('😎😬😆😵😴😄🙂🤔')).toBeOneOf([8, 16]);
         });
     });
 
@@ -245,14 +245,14 @@ describe('iD.util', function() {
         });
         it('truncates emoji', function() {
             expect(iD.utilUnicodeCharsTruncated('😎', 0)).toEqual('');
-            expect(iD.utilUnicodeCharsTruncated('😎', 1)).to.be.oneOf(['😎', '\ud83d']);
-            expect(iD.utilUnicodeCharsTruncated('🇨🇦', 1)).to.be.oneOf(['🇨', '\ud83c']);
-            expect(iD.utilUnicodeCharsTruncated('🏳️‍🌈', 2)).to.be.oneOf(['🏳️', '\ud83c\udff3']);
-            expect(iD.utilUnicodeCharsTruncated('‍👩‍👩‍👧‍👧', 4)).to.be.oneOf(['‍👩‍👩', '‍👩‍']);
-            expect(iD.utilUnicodeCharsTruncated('👩‍❤️‍💋‍👩', 6)).to.be.oneOf(['👩‍❤️‍💋', '👩‍❤️‍']);
+            expect(iD.utilUnicodeCharsTruncated('😎', 1)).toBeOneOf(['😎', '\ud83d']);
+            expect(iD.utilUnicodeCharsTruncated('🇨🇦', 1)).toBeOneOf(['🇨', '\ud83c']);
+            expect(iD.utilUnicodeCharsTruncated('🏳️‍🌈', 2)).toBeOneOf(['🏳️', '\ud83c\udff3']);
+            expect(iD.utilUnicodeCharsTruncated('‍👩‍👩‍👧‍👧', 4)).toBeOneOf(['‍👩‍👩', '‍👩‍']);
+            expect(iD.utilUnicodeCharsTruncated('👩‍❤️‍💋‍👩', 6)).toBeOneOf(['👩‍❤️‍💋', '👩‍❤️‍']);
             expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 0)).toEqual('');
-            expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 4)).to.be.oneOf(['😎😬😆😵', '😎😬']);
-            expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 8)).to.be.oneOf(['😎😬😆😵😴😄🙂🤔', '😎😬😆😵']);
+            expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 4)).toBeOneOf(['😎😬😆😵', '😎😬']);
+            expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 8)).toBeOneOf(['😎😬😆😵😴😄🙂🤔', '😎😬😆😵']);
             expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 16)).toEqual('😎😬😆😵😴😄🙂🤔');
             expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 255)).toEqual('😎😬😆😵😴😄🙂🤔');
         });
