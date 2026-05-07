@@ -3,7 +3,7 @@ describe('iD.coreFileFetcher', function() {
     describe('#fileMap', function() {
         it('gets the fileMap', function() {
             var data = iD.coreFileFetcher();
-            expect(data.fileMap()).to.be.a('object');
+            expect(data.fileMap()).toBeTypeOf('object');
         });
         it('sets the fileMap', function() {
             var data = iD.coreFileFetcher();
@@ -20,7 +20,7 @@ describe('iD.coreFileFetcher', function() {
             var prom = data.get('test');
             expect(prom).to.be.a('promise');
             data = await prom;
-            expect(data).to.be.a('object');
+            expect(data).toBeTypeOf('object');
             expect(data.hello).toEqual('world');
         });
 
@@ -36,7 +36,7 @@ describe('iD.coreFileFetcher', function() {
             var prom = data.get('intro_graph');
             expect(prom).to.be.a('promise');
             data = await prom;
-            expect(data).to.be.a('object');
+            expect(data).toBeTypeOf('object');
             expect(data.n2061.tags.name).toEqual('Three Rivers City Hall');
         });
     });
