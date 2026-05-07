@@ -35,7 +35,7 @@ describe('iD.coreHistory', function () {
             var n = new iD.osmNode({id: 'n'});
             history.on('merge', spy);
             history.merge([n]);
-            expect(spy).to.have.been.calledWith([n]);
+            expect(spy).toHaveBeenCalledWith([n]);
         });
     });
 
@@ -100,7 +100,7 @@ describe('iD.coreHistory', function () {
         it('emits a change event', function () {
             history.on('change', spy);
             var difference = history.replace(actionNoop);
-            expect(spy).to.have.been.calledWith(difference);
+            expect(spy).toHaveBeenCalledWith(difference);
         });
 
         it('performs multiple actions', function () {
@@ -135,7 +135,7 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop);
             history.on('change', spy);
             var difference = history.pop();
-            expect(spy).to.have.been.calledWith(difference);
+            expect(spy).toHaveBeenCalledWith(difference);
         });
 
         it('pops n times', function () {
@@ -193,7 +193,7 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop);
             history.on('change', spy);
             var difference = history.undo();
-            expect(spy).to.have.been.calledWith(difference);
+            expect(spy).toHaveBeenCalledWith(difference);
         });
     });
 
@@ -224,7 +224,7 @@ describe('iD.coreHistory', function () {
             history.undo();
             history.on('change', spy);
             var difference = history.redo();
-            expect(spy).to.have.been.calledWith(difference);
+            expect(spy).toHaveBeenCalledWith(difference);
         });
     });
 

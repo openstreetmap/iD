@@ -294,7 +294,7 @@ describe('iD.serviceOsmWikibase', function () {
           format: 'json',
         }
       );
-      expect(callback).to.have.been.calledWith(null, {
+      expect(callback).toHaveBeenCalledWith(null, {
         key: keyData(),
         tag: tagData()
       });

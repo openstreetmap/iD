@@ -91,10 +91,10 @@ describe('iD.uiFieldWikipedia', function() {
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
 
         expect(spy).to.have.callCount(4);
-        expect(spy).to.have.been.calledWith({ wikipedia: undefined});  // lang on change
-        expect(spy).to.have.been.calledWith({ wikipedia: undefined});  // lang on blur
-        expect(spy).to.have.been.calledWith({ wikipedia: 'de:Title' });   // title on change
-        expect(spy).to.have.been.calledWith({ wikipedia: 'de:Title' });   // title on blur
+        expect(spy).toHaveBeenCalledWith({ wikipedia: undefined});  // lang on change
+        expect(spy).toHaveBeenCalledWith({ wikipedia: undefined});  // lang on blur
+        expect(spy).toHaveBeenCalledWith({ wikipedia: 'de:Title' });   // title on change
+        expect(spy).toHaveBeenCalledWith({ wikipedia: 'de:Title' });   // title on blur
     });
 
     it('recognizes pasted URLs', async () => {
@@ -219,9 +219,9 @@ describe('iD.uiFieldWikipedia', function() {
         expect(context.entity(entity.id).tags.wikidata).to.equal('Q216353');
 
         expect(spy.callCount).to.equal(4);
-        expect(spy.getCall(0)).to.have.been.calledWith({ wikipedia: 'de:Skip' });   // 'Skip' on change
-        expect(spy.getCall(1)).to.have.been.calledWith({ wikipedia: 'de:Skip' });   // 'Skip' on blur
-        expect(spy.getCall(2)).to.have.been.calledWith({ wikipedia: 'de:Title' });  // 'Title' on change +10ms
-        expect(spy.getCall(3)).to.have.been.calledWith({ wikipedia: 'de:Title' });  // 'Title' on blur   +10ms
+        expect(spy.getCall(0)).toHaveBeenCalledWith({ wikipedia: 'de:Skip' });   // 'Skip' on change
+        expect(spy.getCall(1)).toHaveBeenCalledWith({ wikipedia: 'de:Skip' });   // 'Skip' on blur
+        expect(spy.getCall(2)).toHaveBeenCalledWith({ wikipedia: 'de:Title' });  // 'Title' on change +10ms
+        expect(spy.getCall(3)).toHaveBeenCalledWith({ wikipedia: 'de:Title' });  // 'Title' on blur   +10ms
     });
 });
