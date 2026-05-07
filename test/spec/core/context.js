@@ -69,10 +69,10 @@ describe('iD.coreContext', function() {
             expect(context.debugFlags()).to.eql(flags);
 
             context.setDebug('tile', true);
-            expect(context.getDebug('tile')).to.be.true;
+            expect(context.getDebug('tile')).toBe(true);
 
             context.setDebug('collision');
-            expect(context.getDebug('collision')).to.be.true;
+            expect(context.getDebug('collision')).toBe(true);
 
             context.setDebug('tile', false);
             expect(context.getDebug('tile')).to.be.false;

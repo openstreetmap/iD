@@ -16,11 +16,11 @@ describe('iD.geo - geometry', function() {
         });
 
         it('returns true for equal edges along same direction', function() {
-            expect(iD.geoEdgeEqual(['a', 'b'], ['a', 'b'])).to.be.true;
+            expect(iD.geoEdgeEqual(['a', 'b'], ['a', 'b'])).toBe(true);
         });
 
         it('returns true for equal edges along opposite direction', function() {
-            expect(iD.geoEdgeEqual(['a', 'b'], ['b', 'a'])).to.be.true;
+            expect(iD.geoEdgeEqual(['a', 'b'], ['b', 'a'])).toBe(true);
         });
     });
 
@@ -222,13 +222,13 @@ describe('iD.geo - geometry', function() {
             var h = new iD.osmNode({id: 'h', loc: [0, 8]});
             var inner = [a, b, c, d, a];
             var outer = [e, f, g, h, e];
-            expect(iD.geoHasLineIntersections(inner, outer, 'a')).to.be.true;
-            expect(iD.geoHasLineIntersections(inner, outer, 'b')).to.be.true;
-            expect(iD.geoHasLineIntersections(inner, outer, 'c')).to.be.true;
+            expect(iD.geoHasLineIntersections(inner, outer, 'a')).toBe(true);
+            expect(iD.geoHasLineIntersections(inner, outer, 'b')).toBe(true);
+            expect(iD.geoHasLineIntersections(inner, outer, 'c')).toBe(true);
             expect(iD.geoHasLineIntersections(inner, outer, 'd')).to.be.false;
             expect(iD.geoHasLineIntersections(outer, inner, 'e')).to.be.false;
-            expect(iD.geoHasLineIntersections(outer, inner, 'f')).to.be.true;
-            expect(iD.geoHasLineIntersections(outer, inner, 'g')).to.be.true;
+            expect(iD.geoHasLineIntersections(outer, inner, 'f')).toBe(true);
+            expect(iD.geoHasLineIntersections(outer, inner, 'g')).toBe(true);
             expect(iD.geoHasLineIntersections(outer, inner, 'h')).to.be.false;
         });
     });
@@ -274,10 +274,10 @@ describe('iD.geo - geometry', function() {
             var c = new iD.osmNode({id: 'c', loc: [2, 0]});
             var d = new iD.osmNode({id: 'd', loc: [0, 2]});
             var nodes = [a, b, c, d, a];
-            expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.true;
-            expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.true;
-            expect(iD.geoHasSelfIntersections(nodes, 'c')).to.be.true;
-            expect(iD.geoHasSelfIntersections(nodes, 'd')).to.be.true;
+            expect(iD.geoHasSelfIntersections(nodes, 'a')).toBe(true);
+            expect(iD.geoHasSelfIntersections(nodes, 'b')).toBe(true);
+            expect(iD.geoHasSelfIntersections(nodes, 'c')).toBe(true);
+            expect(iD.geoHasSelfIntersections(nodes, 'd')).toBe(true);
         });
 
         it('returns false if there are self intersections with a junction (closed way)', function() {
@@ -326,10 +326,10 @@ describe('iD.geo - geometry', function() {
             var c = new iD.osmNode({id: 'c', loc: [2, 0]});
             var d = new iD.osmNode({id: 'd', loc: [0, 2]});
             var nodes = [a, b, c, d];
-            expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.true;
-            expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.true;
-            expect(iD.geoHasSelfIntersections(nodes, 'c')).to.be.true;
-            expect(iD.geoHasSelfIntersections(nodes, 'd')).to.be.true;
+            expect(iD.geoHasSelfIntersections(nodes, 'a')).toBe(true);
+            expect(iD.geoHasSelfIntersections(nodes, 'b')).toBe(true);
+            expect(iD.geoHasSelfIntersections(nodes, 'c')).toBe(true);
+            expect(iD.geoHasSelfIntersections(nodes, 'd')).toBe(true);
         });
 
         it('returns false if there are self intersections with a junction (open way)', function() {
@@ -386,7 +386,7 @@ describe('iD.geo - geometry', function() {
         it('says a point in a polygon is on a polygon', function() {
             var poly = [[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]];
             var point = [0.5, 0.5];
-            expect(iD.geoPointInPolygon(point, poly)).to.be.true;
+            expect(iD.geoPointInPolygon(point, poly)).toBe(true);
         });
         it('says a point outside of a polygon is outside', function() {
             var poly = [[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]];
@@ -399,7 +399,7 @@ describe('iD.geo - geometry', function() {
         it('says a polygon in a polygon is in', function() {
             var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
             var inner = [[1, 1], [1, 2], [2, 2], [2, 1], [1, 1]];
-            expect(iD.geoPolygonContainsPolygon(outer, inner)).to.be.true;
+            expect(iD.geoPolygonContainsPolygon(outer, inner)).toBe(true);
         });
         it('says a polygon outside of a polygon is out', function() {
             var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
@@ -412,7 +412,7 @@ describe('iD.geo - geometry', function() {
         it('returns true when outer polygon fully contains inner', function() {
             var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
             var inner = [[1, 1], [1, 2], [2, 2], [2, 1], [1, 1]];
-            expect(iD.geoPolygonIntersectsPolygon(outer, inner)).to.be.true;
+            expect(iD.geoPolygonIntersectsPolygon(outer, inner)).toBe(true);
         });
 
         it('returns false when inner polygon fully contains outer', function() {
@@ -424,7 +424,7 @@ describe('iD.geo - geometry', function() {
         it('returns true when outer polygon partially contains inner (some vertices contained)', function() {
             var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
             var inner = [[-1, -1], [1, 2], [2, 2], [2, 1], [1, 1]];
-            expect(iD.geoPolygonIntersectsPolygon(outer, inner)).to.be.true;
+            expect(iD.geoPolygonIntersectsPolygon(outer, inner)).toBe(true);
         });
 
         it('returns false when outer polygon partially contains inner (no vertices contained - lax test)', function() {
@@ -436,7 +436,7 @@ describe('iD.geo - geometry', function() {
         it('returns true when outer polygon partially contains inner (no vertices contained - strict test)', function() {
             var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
             var inner = [[1, -1], [1, 4], [2, 4], [2, -1], [1, -1]];
-            expect(iD.geoPolygonIntersectsPolygon(outer, inner, true)).to.be.true;
+            expect(iD.geoPolygonIntersectsPolygon(outer, inner, true)).toBe(true);
         });
 
         it('returns false when outer and inner are fully disjoint', function() {

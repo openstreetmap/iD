@@ -85,7 +85,7 @@ describe('iD.behaviorHover', function() {
             _container.call(iD.behaviorHover(_context).altDisables(true));
 
             happen.keydown(window, { keyCode: 18 });
-            expect(_container.classed('hover-disabled')).to.be.true;
+            expect(_container.classed('hover-disabled')).toBe(true);
             happen.keyup(window, { keyCode: 18 });
         });
     });

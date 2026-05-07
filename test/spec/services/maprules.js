@@ -29,8 +29,8 @@ describe('maprules', function() {
             var entityTags = { amenity: 'marketplace' };
 
             expect(filteredChecks.length).eql(2);
-            expect(equalsCheck(entityTags)).to.be.true;
-            expect(absenceCheck(entityTags)).to.be.true;
+            expect(equalsCheck(entityTags)).toBe(true);
+            expect(absenceCheck(entityTags)).toBe(true);
         });
     });
 
@@ -199,7 +199,7 @@ describe('maprules', function() {
             it('is true when two tag maps intersect', function() {
                 var a = { amenity: 'school' };
                 var b = { amenity: 'school' };
-                expect(_ruleChecks.equals(a)(b)).to.be.true;
+                expect(_ruleChecks.equals(a)(b)).toBe(true);
             });
             it('is false when two tag maps intersect', function() {
                 var a = { man_made: 'water_tap' };
@@ -211,7 +211,7 @@ describe('maprules', function() {
             it('is true when two tag maps do not intersect', function() {
                 var a = { man_made: 'water_tap' };
                 var b = { amenity: 'school' };
-                expect(_ruleChecks.notEquals(a)(b)).to.be.true;
+                expect(_ruleChecks.notEquals(a)(b)).toBe(true);
             });
             it('is not true when two tag maps intersect', function() {
                 var a = { amenity: 'school' };
@@ -223,7 +223,7 @@ describe('maprules', function() {
             it('is true when tag map keys does not include key in question', function() {
                 var key = 'amenity';
                 var map = { building: 'yes' };
-                expect(_ruleChecks.absence(key)(map)).to.be.true;
+                expect(_ruleChecks.absence(key)(map)).toBe(true);
             });
             it('is false when tag map keys does include key in question', function() {
                 var key = 'amenity';
@@ -235,7 +235,7 @@ describe('maprules', function() {
             it('is true when tag map keys includes key in question', function() {
                 var key = 'amenity';
                 var map = { amenity: 'school'};
-                expect(_ruleChecks.presence(key)(map)).to.be.true;
+                expect(_ruleChecks.presence(key)(map)).toBe(true);
             });
             it('is false when tag map keys do not include key in question', function() {
                 var key = 'amenity';
@@ -247,7 +247,7 @@ describe('maprules', function() {
             it('is true when a tag value is greater than the selector value', function() {
                 var selectorTags = { lanes: 5 };
                 var tags = { lanes : 6 };
-                expect(_ruleChecks.greaterThan(selectorTags)(tags)).to.be.true;
+                expect(_ruleChecks.greaterThan(selectorTags)(tags)).toBe(true);
             });
             it('is false when a tag value is less than or equal to the selector value', function() {
                 var selectorTags = { lanes: 5 };
@@ -260,7 +260,7 @@ describe('maprules', function() {
             it('is true when a tag value is greater than or equal to the selector value', function() {
                 var selectorTags = { lanes: 5 };
                 [5, 6].forEach(function(val) {
-                    expect(_ruleChecks.greaterThanEqual(selectorTags)({ lanes: val })).to.be.true;
+                    expect(_ruleChecks.greaterThanEqual(selectorTags)({ lanes: val })).toBe(true);
                 });
             });
             it('is false when a tag value is less than the selector value', function () {
@@ -273,7 +273,7 @@ describe('maprules', function() {
             it('is true when a tag value is less than the selector value', function() {
                 var selectorTags = { lanes: 5 };
                 var tags = { lanes: 4 };
-                expect(_ruleChecks.lessThan(selectorTags)(tags)).to.be.true;
+                expect(_ruleChecks.lessThan(selectorTags)(tags)).toBe(true);
             });
             it('is false when a tag value is greater than or equal to the selector value', function() {
                 var selectorTags = { lanes: 5 };
@@ -286,7 +286,7 @@ describe('maprules', function() {
             it('is true when a tag value  is less than or equal to the selector value', function() {
                 var selectorTags = { lanes: 5 };
                 [4, 5].forEach(function(val) {
-                    expect(_ruleChecks.lessThanEqual(selectorTags)({ lanes: val })).to.be.true;
+                    expect(_ruleChecks.lessThanEqual(selectorTags)({ lanes: val })).toBe(true);
                 });
             });
             it('is false when a tag value is greater than the selector value', function() {
@@ -299,7 +299,7 @@ describe('maprules', function() {
             var positiveRegex = { amenity: ['^hospital$','^clinic$']};
             it('is true when tag value matches positiveRegex', function() {
                 var tags = { amenity: 'hospital' };
-                expect(_ruleChecks.positiveRegex(positiveRegex)(tags)).to.be.true;
+                expect(_ruleChecks.positiveRegex(positiveRegex)(tags)).toBe(true);
             });
             it('is false when tag value does not match negative regex', function() {
                 var tags = { amenity: 'school' };
@@ -310,7 +310,7 @@ describe('maprules', function() {
             var negativeRegex = { bicycle: [ 'use_path', 'designated' ] };
             it('is true when tag value does not match negativeRegex', function() {
                 var tags = { bicycle: 'yes' };
-                expect(_ruleChecks.negativeRegex(negativeRegex)(tags)).to.be.true;
+                expect(_ruleChecks.negativeRegex(negativeRegex)(tags)).toBe(true);
             });
             it('is false when tag value matches negativeRegex', function() {
                 var tags = { bicycle: 'designated' };
@@ -457,7 +457,7 @@ describe('maprules', function() {
             });
             it('is true when each rule check is \'true\'', function() {
                 validationRules.forEach(function(rule, i) {
-                    expect(rule.matches(entities[i])).to.be.true;
+                    expect(rule.matches(entities[i])).toBe(true);
                 });
             });
             it('is true when at least one rule check is \'false\'', function() {

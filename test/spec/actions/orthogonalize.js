@@ -668,7 +668,7 @@ describe('iD.actionOrthogonalize', function () {
 
     describe('transitions', function () {
         it('is transitionable', function() {
-            expect(iD.actionOrthogonalize().transitionable).to.be.true;
+            expect(iD.actionOrthogonalize().transitionable).toBe(true);
         });
 
         //  for all of these:

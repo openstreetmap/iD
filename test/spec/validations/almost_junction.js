@@ -331,7 +331,7 @@ describe('iD.validations.almost_junction', function () {
         var w1 = context.entity('w-1');
         var w2 = context.entity('w-2');
         var joined = w2.nodes[0] === w1.nodes[0];
-        expect(joined).to.be.true;
+        expect(joined).toBe(true);
     });
 
     it('won\'t join close endpoints if significant angle change', function() {
@@ -350,7 +350,7 @@ describe('iD.validations.almost_junction', function () {
         var w1 = context.entity('w-1');
         var w2 = context.entity('w-2');
         var joined = w2.nodes[0] === w1.nodes[0];
-        expect(joined).not.to.be.true;
+        expect(joined).not.toBe(true);
     });
 
     it('joins close endpoints of the same way', function() {
@@ -368,7 +368,7 @@ describe('iD.validations.almost_junction', function () {
         issue.fixes(context)[0].onClick(context);
         var w = context.entity('w-1');
         var joined = w.nodes[0] === w.nodes[w.nodes.length - 1];
-        expect(joined).to.be.true;
+        expect(joined).toBe(true);
     });
 
 
@@ -388,6 +388,6 @@ describe('iD.validations.almost_junction', function () {
         var w1 = context.entity('w-1');
         var w2 = context.entity('w-2');
         var joined = w2.nodes[0] === w1.nodes[0];
-        expect(joined).to.be.true;
+        expect(joined).toBe(true);
     });
 });

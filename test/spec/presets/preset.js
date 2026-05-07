@@ -252,7 +252,7 @@ describe('iD.presetPreset', function() {
             var preset = iD.presetPreset('test', {}, false);
             expect(preset.addable()).to.be.false;
             preset.addable(true);
-            expect(preset.addable()).to.be.true;
+            expect(preset.addable()).toBe(true);
         });
     });
 

@@ -127,7 +127,7 @@ describe('iD.actionStraightenWay', function () {
 
     describe('transitions', function () {
         it('is transitionable', function() {
-            expect(iD.actionStraightenWay().transitionable).to.be.true;
+            expect(iD.actionStraightenWay().transitionable).toBe(true);
         });
 
         it('straighten at t = 0', function() {

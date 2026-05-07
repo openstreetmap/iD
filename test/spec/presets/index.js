@@ -118,7 +118,7 @@ describe('iD.presetIndex', function () {
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
             expect(presets.areaKeys().natural).to.include.keys('tree_row');
-            expect(presets.areaKeys().natural.tree_row).to.be.true;
+            expect(presets.areaKeys().natural.tree_row).toBe(true);
 
         });
 
@@ -178,19 +178,19 @@ describe('iD.presetIndex', function () {
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
 
-            expect(presets.item('residential').addable()).to.be.true;
-            expect(presets.item('park').addable()).to.be.true;
+            expect(presets.item('residential').addable()).toBe(true);
+            expect(presets.item('park').addable()).toBe(true);
 
             var ids = new Set(['residential']);   // can only add preset with this ID
             presets.addablePresetIDs(ids);
 
-            expect(presets.item('residential').addable()).to.be.true;
+            expect(presets.item('residential').addable()).toBe(true);
             expect(presets.item('park').addable()).to.be.false;
             expect(presets.addablePresetIDs()).to.eql(ids);
 
             presets.addablePresetIDs(null);
-            expect(presets.item('residential').addable()).to.be.true;
-            expect(presets.item('park').addable()).to.be.true;
+            expect(presets.item('residential').addable()).toBe(true);
+            expect(presets.item('park').addable()).toBe(true);
         });
 
         it('ignores invalid IDs in addablePresetIDs', async () => {
@@ -202,8 +202,8 @@ describe('iD.presetIndex', function () {
             expect(presets.item(undefined)).to.eql(undefined);
             expect(presets.item('')).to.eql(undefined);
             expect(presets.item('garbage')).to.eql(undefined);
-            expect(presets.item('residential').addable()).to.be.true;
-            expect(presets.item('park').addable()).to.be.true;
+            expect(presets.item('residential').addable()).toBe(true);
+            expect(presets.item('park').addable()).toBe(true);
 
             var ids = new Set([null, undefined, '', 'garbage', 'residential']);   // can only add preset with these IDs
             presets.addablePresetIDs(ids);
@@ -212,7 +212,7 @@ describe('iD.presetIndex', function () {
             expect(presets.item(undefined)).to.eql(undefined);
             expect(presets.item('')).to.eql(undefined);
             expect(presets.item('garbage')).to.eql(undefined);
-            expect(presets.item('residential').addable()).to.be.true;
+            expect(presets.item('residential').addable()).toBe(true);
             expect(presets.item('park').addable()).to.be.false;
             expect(presets.addablePresetIDs()).to.eql(ids);
 
@@ -221,8 +221,8 @@ describe('iD.presetIndex', function () {
             expect(presets.item(undefined)).to.eql(undefined);
             expect(presets.item('')).to.eql(undefined);
             expect(presets.item('garbage')).to.eql(undefined);
-            expect(presets.item('residential').addable()).to.be.true;
-            expect(presets.item('park').addable()).to.be.true;
+            expect(presets.item('residential').addable()).toBe(true);
+            expect(presets.item('park').addable()).toBe(true);
         });
 
         it('addablePresetIDs are default presets', async () => {

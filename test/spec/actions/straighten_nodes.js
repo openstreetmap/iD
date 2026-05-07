@@ -24,7 +24,7 @@ describe('iD.actionStraightenNodes', function () {
 
     describe('transitions', function () {
         it('is transitionable', function() {
-            expect(iD.actionStraightenNodes().transitionable).to.be.true;
+            expect(iD.actionStraightenNodes().transitionable).toBe(true);
         });
 
         it('straighten at t = 0', function() {

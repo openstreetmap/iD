@@ -25,8 +25,8 @@ describe('iD.svgLines', function () {
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
-        expect(surface.select('path.way').classed('way')).to.be.true;
-        expect(surface.select('path.line').classed('line')).to.be.true;
+        expect(surface.select('path.way').classed('way')).toBe(true);
+        expect(surface.select('path.line').classed('line')).toBe(true);
     });
 
     it('adds relation and area classes for untagged line member of multipolygon', function () {
@@ -38,8 +38,8 @@ describe('iD.svgLines', function () {
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
-        expect(surface.select('.stroke').classed('relation')).to.be.true;
-        expect(surface.select('.stroke').classed('area')).to.be.true;
+        expect(surface.select('.stroke').classed('relation')).toBe(true);
+        expect(surface.select('.stroke').classed('area')).toBe(true);
     });
 
     it('adds tag classes', function () {
@@ -50,8 +50,8 @@ describe('iD.svgLines', function () {
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
-        expect(surface.select('.line').classed('tag-highway')).to.be.true;
-        expect(surface.select('.line').classed('tag-highway-residential')).to.be.true;
+        expect(surface.select('.line').classed('tag-highway')).toBe(true);
+        expect(surface.select('.line').classed('tag-highway-residential')).toBe(true);
     });
 
     it('adds stroke classes for the tags of the parent relation of multipolygon members', function() {
@@ -63,7 +63,7 @@ describe('iD.svgLines', function () {
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
-        expect(surface.select('.stroke').classed('tag-natural-wood')).to.be.true;
+        expect(surface.select('.stroke').classed('tag-natural-wood')).toBe(true);
     });
 
     describe('z-indexing', function() {
@@ -178,7 +178,7 @@ describe('iD.svgLines', function () {
 
             surface.call(iD.svgLines(projection, context), graph, [i_no, e_no], all);
             var selection = surface.selectAll('g.onewaygroup > path');
-            expect(selection.empty()).to.be.true;
+            expect(selection.empty()).toBe(true);
         });
     });
 
@@ -215,7 +215,7 @@ describe('iD.svgLines', function () {
 
             surface.call(iD.svgLines(projection, context), graph, [e_ts], all);
             var selection = surface.selectAll('g.sidedgroup > path');
-            expect(selection.empty()).to.be.true;
+            expect(selection.empty()).toBe(true);
         });
     });
 });

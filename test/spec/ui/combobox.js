@@ -85,7 +85,7 @@ describe('uiCombobox', function() {
 
     it('adds the combobox-input class', function() {
         input.call(combobox);
-        expect(input.classed('combobox-input')).to.be.true;
+        expect(input.classed('combobox-input')).toBe(true);
     });
 
     it('adds combobox under container', function() {

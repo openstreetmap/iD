@@ -182,13 +182,13 @@ describe('iD.actionCircularize', function () {
 
         expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.eql(3);
         expect(graph.entity('-').isConvex(graph)).to.be.false;
-        expect(graph.entity('=').isConvex(graph)).to.be.true;
+        expect(graph.entity('=').isConvex(graph)).toBe(true);
 
         graph = iD.actionCircularize('-', projection)(graph);
 
         expect(isCircular('-', graph)).toBeTruthy();
         expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.be.gt(3);
-        expect(graph.entity('-').isConvex(graph)).to.be.true;
+        expect(graph.entity('-').isConvex(graph)).toBe(true);
         expect(graph.entity('=').isConvex(graph)).to.be.false;
     });
 
@@ -216,13 +216,13 @@ describe('iD.actionCircularize', function () {
 
         expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.eql(3);
         expect(graph.entity('-').isConvex(graph)).to.be.false;
-        expect(graph.entity('=').isConvex(graph)).to.be.true;
+        expect(graph.entity('=').isConvex(graph)).toBe(true);
 
         graph = iD.actionCircularize('-', projection)(graph);
 
         expect(isCircular('-', graph)).toBeTruthy();
         expect(intersection(graph.entity('-').nodes, graph.entity('=').nodes).length).to.be.gt(3);
-        expect(graph.entity('-').isConvex(graph)).to.be.true;
+        expect(graph.entity('-').isConvex(graph)).toBe(true);
         expect(graph.entity('=').isConvex(graph)).to.be.false;
     });
 
@@ -252,7 +252,7 @@ describe('iD.actionCircularize', function () {
         graph = iD.actionCircularize('-', projection)(graph);
 
         expect(isCircular('-', graph)).toBeTruthy();
-        expect(graph.entity('-').isConvex(graph)).to.be.true;
+        expect(graph.entity('-').isConvex(graph)).toBe(true);
         expect(graph.entity('-').nodes).to.have.length(MAX_VERTICES + 1);
     });
 
@@ -301,7 +301,7 @@ describe('iD.actionCircularize', function () {
 
     describe('transitions', function () {
         it('is transitionable', function() {
-            expect(iD.actionCircularize().transitionable).to.be.true;
+            expect(iD.actionCircularize().transitionable).toBe(true);
         });
 
         it('circularize at t = 0', function() {

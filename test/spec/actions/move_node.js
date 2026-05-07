@@ -10,7 +10,7 @@ describe('iD.actionMoveNode', function () {
 
     describe('transitions', function () {
         it('is transitionable', function() {
-            expect(iD.actionMoveNode().transitionable).to.be.true;
+            expect(iD.actionMoveNode().transitionable).toBe(true);
         });
 
         it('move node at t = 0', function() {

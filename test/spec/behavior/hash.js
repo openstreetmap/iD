@@ -21,7 +21,7 @@ describe('iD.behaviorHash', function () {
     it('sets hadLocation if window.location.hash is present', function () {
         window.location.hash = '#background=none&map=20.00/38.87952/-77.02405';
         hash();
-        expect(hash.hadLocation).to.be.true;
+        expect(hash.hadLocation).toBe(true);
     });
 
     it('centerZooms map to requested coordinates', function () {
@@ -45,7 +45,7 @@ describe('iD.behaviorHash', function () {
     it('sets hadLocation if map-location is in local storage', function () {
         iD.prefs('map-location', '19/43.80082/11.24567');
         hash();
-        expect(hash.hadLocation).to.be.true;
+        expect(hash.hadLocation).toBe(true);
         iD.prefs('map-location', null);
     });
 

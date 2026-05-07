@@ -201,7 +201,7 @@ describe('iD.Lanes', function() {
     describe('oneway tags', function() {
         it('returns correctly oneway when tagged as oneway', function() {
             expect(new iD.osmWay({tags: { highway: 'residential', oneway: 'yes' }}).lanes().metadata.oneway, 'residential lanes')
-                .to.be.true;
+                .toBe(true);
             expect(new iD.osmWay({tags: { highway: 'residential', oneway: 'no' }}).lanes().metadata.oneway, 'residential lanes')
                 .to.be.false;
         });

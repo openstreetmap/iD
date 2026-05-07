@@ -548,10 +548,10 @@ describe('iD.rendererFeatures', function() {
             features.disable('paths');
             features.gatherStats(all, graph, dimensions);
 
-            expect(features.isHiddenChild(a, graph, geometry)).to.be.true;
-            expect(features.isHiddenChild(b, graph, geometry)).to.be.true;
-            expect(features.isHidden(a, graph, geometry)).to.be.true;
-            expect(features.isHidden(b, graph, geometry)).to.be.true;
+            expect(features.isHiddenChild(a, graph, geometry)).toBe(true);
+            expect(features.isHiddenChild(b, graph, geometry)).toBe(true);
+            expect(features.isHidden(a, graph, geometry)).toBe(true);
+            expect(features.isHidden(b, graph, geometry)).toBe(true);
         });
 
         it('hides uninteresting (e.g. untagged or "other") member ways on a hidden multipolygon relation', function() {
@@ -576,9 +576,9 @@ describe('iD.rendererFeatures', function() {
             features.disable('landuse');
             features.gatherStats(all, graph, dimensions);
 
-            expect(features.isHidden(outer, graph, outer.geometry(graph))).to.be.true;     // #2548
-            expect(features.isHidden(inner1, graph, inner1.geometry(graph))).to.be.true;   // #2548
-            expect(features.isHidden(inner2, graph, inner2.geometry(graph))).to.be.true;   // #2548
+            expect(features.isHidden(outer, graph, outer.geometry(graph))).toBe(true);     // #2548
+            expect(features.isHidden(inner1, graph, inner1.geometry(graph))).toBe(true);   // #2548
+            expect(features.isHidden(inner2, graph, inner2.geometry(graph))).toBe(true);   // #2548
             expect(features.isHidden(inner3, graph, inner3.geometry(graph))).to.be.false;  // #2887
         });
 
@@ -593,7 +593,7 @@ describe('iD.rendererFeatures', function() {
             features.disable('points');
             features.gatherStats(all, graph, dimensions);
 
-            expect(features.isHidden(a, graph, ageo)).to.be.true;
+            expect(features.isHidden(a, graph, ageo)).toBe(true);
             expect(features.isHidden(b, graph, bgeo)).to.be.false;
         });
 

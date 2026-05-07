@@ -1,7 +1,7 @@
 describe('iD.osmRelation', function () {
     if (iD.debug) {
         it('freezes nodes', function () {
-            expect(Object.isFrozen(new iD.osmRelation().members)).to.be.true;
+            expect(Object.isFrozen(new iD.osmRelation().members)).toBe(true);
         });
     }
 
@@ -196,7 +196,7 @@ describe('iD.osmRelation', function () {
                     { role: 'to', id: 't', type: 'way' }
                 ]
             });
-            expect(r.hasFromViaTo()).to.be.true;
+            expect(r.hasFromViaTo()).toBe(true);
         });
 
         it('returns true if there are extra froms, vias, tos', function () {
@@ -212,7 +212,7 @@ describe('iD.osmRelation', function () {
                     { role: 'to', id: 't2', type: 'way' }
                 ]
             });
-            expect(r.hasFromViaTo()).to.be.true;
+            expect(r.hasFromViaTo()).toBe(true);
         });
 
         it('returns false if from missing', function () {
@@ -273,7 +273,7 @@ describe('iD.osmRelation', function () {
                     { role: 'to', id: 't', type: 'way' },
                 ]
             });
-            expect(r.hasFromViaTo()).to.be.true;
+            expect(r.hasFromViaTo()).toBe(true);
         });
 
         it('returns false if the `intersection` role is used on anything other than a destination sign', () => {
@@ -292,11 +292,11 @@ describe('iD.osmRelation', function () {
 
     describe('#isRestriction', function () {
         it('returns true for \'restriction\' type', function () {
-            expect(new iD.osmRelation({tags: {type: 'restriction'}}).isRestriction()).to.be.true;
+            expect(new iD.osmRelation({tags: {type: 'restriction'}}).isRestriction()).toBe(true);
         });
 
         it('returns true for \'restriction:type\' types', function () {
-            expect(new iD.osmRelation({tags: {type: 'restriction:bus'}}).isRestriction()).to.be.true;
+            expect(new iD.osmRelation({tags: {type: 'restriction:bus'}}).isRestriction()).toBe(true);
         });
 
         it('returns false otherwise', function () {
@@ -327,7 +327,7 @@ describe('iD.osmRelation', function () {
             });
             var graph = new iD.coreGraph([f, v, t, r]);
 
-            expect(r.isValidRestriction(graph)).to.be.true;
+            expect(r.isValidRestriction(graph)).toBe(true);
         });
 
         it('multiple froms, normal restriction is invalid', function () {
@@ -367,7 +367,7 @@ describe('iD.osmRelation', function () {
             });
             var graph = new iD.coreGraph([f1, f2, v, t, r]);
 
-            expect(r.isValidRestriction(graph)).to.be.true;
+            expect(r.isValidRestriction(graph)).toBe(true);
         });
 
         it('multiple tos, normal restriction is invalid', function () {
@@ -407,7 +407,7 @@ describe('iD.osmRelation', function () {
             });
             var graph = new iD.coreGraph([f, v, t1, t2, r]);
 
-            expect(r.isValidRestriction(graph)).to.be.true;
+            expect(r.isValidRestriction(graph)).toBe(true);
         });
 
         it('multiple vias, with some as node is invalid', function () {
@@ -447,7 +447,7 @@ describe('iD.osmRelation', function () {
             });
             var graph = new iD.coreGraph([f, v1, v2, t, r]);
 
-            expect(r.isValidRestriction(graph)).to.be.true;
+            expect(r.isValidRestriction(graph)).toBe(true);
         });
     });
 

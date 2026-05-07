@@ -66,7 +66,7 @@ describe('iD.actionReflect', function() {
 
     describe('transitions', function () {
         it('is transitionable', function() {
-            expect(iD.actionReflect().transitionable).to.be.true;
+            expect(iD.actionReflect().transitionable).toBe(true);
         });
 
         it('reflect long at t = 0', function() {

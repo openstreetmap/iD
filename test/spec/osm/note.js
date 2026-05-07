@@ -20,7 +20,7 @@ describe('iD.osmNote', function () {
                 id: -1,
                 loc: [5, 10]
             });
-            expect(note.isNew()).to.be.true;
+            expect(note.isNew()).toBe(true);
         });
         it('returns false if a note is not new', function() {
             var note = iD.osmNote({

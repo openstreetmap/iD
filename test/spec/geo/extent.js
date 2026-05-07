@@ -124,11 +124,11 @@ describe('iD.geoExtent', function () {
 
     describe('#contains', function () {
         it('returns true for a point inside self', function () {
-            expect(iD.geoExtent([0, 0], [5, 5]).contains([2, 2])).to.be.true;
+            expect(iD.geoExtent([0, 0], [5, 5]).contains([2, 2])).toBe(true);
         });
 
         it('returns true for a point on the boundary of self', function () {
-            expect(iD.geoExtent([0, 0], [5, 5]).contains([0, 0])).to.be.true;
+            expect(iD.geoExtent([0, 0], [5, 5]).contains([0, 0])).toBe(true);
         });
 
         it('returns false for a point outside self', function () {
@@ -136,7 +136,7 @@ describe('iD.geoExtent', function () {
         });
 
         it('returns true for an extent contained by self', function () {
-            expect(iD.geoExtent([0, 0], [5, 5]).contains([[1, 1], [2, 2]])).to.be.true;
+            expect(iD.geoExtent([0, 0], [5, 5]).contains([[1, 1], [2, 2]])).toBe(true);
             expect(iD.geoExtent([1, 1], [2, 2]).contains([[0, 0], [5, 5]])).to.be.false;
         });
 
@@ -153,11 +153,11 @@ describe('iD.geoExtent', function () {
 
     describe('#intersects', function () {
         it('returns true for a point inside self', function () {
-            expect(iD.geoExtent([0, 0], [5, 5]).intersects([2, 2])).to.be.true;
+            expect(iD.geoExtent([0, 0], [5, 5]).intersects([2, 2])).toBe(true);
         });
 
         it('returns true for a point on the boundary of self', function () {
-            expect(iD.geoExtent([0, 0], [5, 5]).intersects([0, 0])).to.be.true;
+            expect(iD.geoExtent([0, 0], [5, 5]).intersects([0, 0])).toBe(true);
         });
 
         it('returns false for a point outside self', function () {
@@ -165,13 +165,13 @@ describe('iD.geoExtent', function () {
         });
 
         it('returns true for an extent contained by self', function () {
-            expect(iD.geoExtent([0, 0], [5, 5]).intersects([[1, 1], [2, 2]])).to.be.true;
-            expect(iD.geoExtent([1, 1], [2, 2]).intersects([[0, 0], [5, 5]])).to.be.true;
+            expect(iD.geoExtent([0, 0], [5, 5]).intersects([[1, 1], [2, 2]])).toBe(true);
+            expect(iD.geoExtent([1, 1], [2, 2]).intersects([[0, 0], [5, 5]])).toBe(true);
         });
 
         it('returns true for an extent partially contained by self', function () {
-            expect(iD.geoExtent([0, 0], [5, 5]).intersects([[1, 1], [6, 6]])).to.be.true;
-            expect(iD.geoExtent([1, 1], [6, 6]).intersects([[0, 0], [5, 5]])).to.be.true;
+            expect(iD.geoExtent([0, 0], [5, 5]).intersects([[1, 1], [6, 6]])).toBe(true);
+            expect(iD.geoExtent([1, 1], [6, 6]).intersects([[0, 0], [5, 5]])).toBe(true);
         });
 
         it('returns false for an extent not intersected by self', function () {

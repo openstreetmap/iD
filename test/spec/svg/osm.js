@@ -9,22 +9,22 @@ describe('iD.svgOsm', function () {
         container.call(iD.svgOsm());
         var layers = container.selectAll('g.layer-osm').nodes();
         expect(layers.length).to.eql(6);
-        expect(d3.select(layers[0]).classed('covered')).to.be.true;
-        expect(d3.select(layers[1]).classed('areas')).to.be.true;
-        expect(d3.select(layers[2]).classed('lines')).to.be.true;
-        expect(d3.select(layers[3]).classed('points')).to.be.true;
-        expect(d3.select(layers[4]).classed('auxiliary')).to.be.true;
-        expect(d3.select(layers[5]).classed('labels')).to.be.true;
+        expect(d3.select(layers[0]).classed('covered')).toBe(true);
+        expect(d3.select(layers[1]).classed('areas')).toBe(true);
+        expect(d3.select(layers[2]).classed('lines')).toBe(true);
+        expect(d3.select(layers[3]).classed('points')).toBe(true);
+        expect(d3.select(layers[4]).classed('auxiliary')).toBe(true);
+        expect(d3.select(layers[5]).classed('labels')).toBe(true);
     });
 
     it('creates default osm point layers', function () {
         container.call(iD.svgOsm());
         var layers = container.selectAll('g.points-group').nodes();
         expect(layers.length).to.eql(4);
-        expect(d3.select(layers[0]).classed('vertices')).to.be.true;
-        expect(d3.select(layers[1]).classed('midpoints')).to.be.true;
-        expect(d3.select(layers[2]).classed('points')).to.be.true;
-        expect(d3.select(layers[3]).classed('turns')).to.be.true;
+        expect(d3.select(layers[0]).classed('vertices')).toBe(true);
+        expect(d3.select(layers[1]).classed('midpoints')).toBe(true);
+        expect(d3.select(layers[2]).classed('points')).toBe(true);
+        expect(d3.select(layers[3]).classed('turns')).toBe(true);
     });
 
 });

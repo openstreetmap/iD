@@ -13,7 +13,7 @@ describe('iD.osmWay', function() {
 
     if (iD.debug) {
         it('freezes nodes', function () {
-            expect(Object.isFrozen(new iD.osmWay().nodes)).to.be.true;
+            expect(Object.isFrozen(new iD.osmWay().nodes)).toBe(true);
         });
     }
 
@@ -105,7 +105,7 @@ describe('iD.osmWay', function() {
 
     describe('#contains', function () {
         it('returns true if the way contains the given node', function () {
-            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).contains('b')).to.be.true;
+            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).contains('b')).toBe(true);
         });
 
         it('returns false if the way does not contain the given node', function () {
@@ -152,11 +152,11 @@ describe('iD.osmWay', function() {
         });
 
         it('returns true when the way ends are equal', function() {
-            expect(new iD.osmWay({ nodes: 'aba'.split('') }).isClosed()).to.be.true;
+            expect(new iD.osmWay({ nodes: 'aba'.split('') }).isClosed()).toBe(true);
         });
 
         it('returns true when the way contains two of the same node', function() {
-            expect(new iD.osmWay({ nodes: 'aa'.split('') }).isClosed()).to.be.true;
+            expect(new iD.osmWay({ nodes: 'aa'.split('') }).isClosed()).toBe(true);
         });
     });
 
@@ -175,7 +175,7 @@ describe('iD.osmWay', function() {
                 new iD.osmNode({id: 'e', loc: [ 0.0002,  0.0002]}),
                 new iD.osmWay({id: 'w', nodes: ['a','b','c','d','e','a']})
             ]);
-            expect(graph.entity('w').isConvex(graph)).to.be.true;
+            expect(graph.entity('w').isConvex(graph)).toBe(true);
         });
 
         it('returns false for concave ways', function() {
@@ -304,24 +304,24 @@ describe('iD.osmWay', function() {
         });
 
         it('returns true when the way has tag oneway=yes', function() {
-            expect(new iD.osmWay({tags: { oneway: 'yes' }}).isOneWay(), 'oneway yes').to.be.true;
-            expect(new iD.osmWay({tags: { oneway: '-1' }}).isOneWay(), 'oneway -1').to.be.true;
+            expect(new iD.osmWay({tags: { oneway: 'yes' }}).isOneWay(), 'oneway yes').toBe(true);
+            expect(new iD.osmWay({tags: { oneway: '-1' }}).isOneWay(), 'oneway -1').toBe(true);
         });
 
         it('returns true when the way has tag oneway=reversible', function() {
-            expect(new iD.osmWay({tags: { oneway: 'reversible' }}).isOneWay(), 'oneway reversible').to.be.true;
+            expect(new iD.osmWay({tags: { oneway: 'reversible' }}).isOneWay(), 'oneway reversible').toBe(true);
         });
 
         it('returns true when the way has tag oneway=alternating', function() {
-            expect(new iD.osmWay({tags: { oneway: 'alternating' }}).isOneWay(), 'oneway alternating').to.be.true;
+            expect(new iD.osmWay({tags: { oneway: 'alternating' }}).isOneWay(), 'oneway alternating').toBe(true);
         });
 
         it('returns true when the way has implied oneway tag (waterway=river, waterway=stream, etc)', function() {
-            expect(new iD.osmWay({tags: { waterway: 'river' }}).isOneWay(), 'river').to.be.true;
-            expect(new iD.osmWay({tags: { waterway: 'stream' }}).isOneWay(), 'stream').to.be.true;
-            expect(new iD.osmWay({tags: { highway: 'motorway' }}).isOneWay(), 'motorway').to.be.true;
-            expect(new iD.osmWay({tags: { junction: 'roundabout' }}).isOneWay(), 'roundabout').to.be.true;
-            expect(new iD.osmWay({tags: { junction: 'circular' }}).isOneWay(), 'circular').to.be.true;
+            expect(new iD.osmWay({tags: { waterway: 'river' }}).isOneWay(), 'river').toBe(true);
+            expect(new iD.osmWay({tags: { waterway: 'stream' }}).isOneWay(), 'stream').toBe(true);
+            expect(new iD.osmWay({tags: { highway: 'motorway' }}).isOneWay(), 'motorway').toBe(true);
+            expect(new iD.osmWay({tags: { junction: 'roundabout' }}).isOneWay(), 'roundabout').toBe(true);
+            expect(new iD.osmWay({tags: { junction: 'circular' }}).isOneWay(), 'circular').toBe(true);
         });
 
         it('returns false when the way does not have implied oneway tag', function() {
@@ -381,13 +381,13 @@ describe('iD.osmWay', function() {
         });
 
         it('returns true when the tag has implied sidedness', function() {
-            expect(new iD.osmWay({tags: { natural: 'cliff' }}).isSided()).to.be.true;
-            expect(new iD.osmWay({tags: { natural: 'coastline' }}).isSided()).to.be.true;
-            expect(new iD.osmWay({tags: { barrier: 'retaining_wall' }}).isSided()).to.be.true;
-            expect(new iD.osmWay({tags: { barrier: 'kerb' }}).isSided()).to.be.true;
-            expect(new iD.osmWay({tags: { barrier: 'guard_rail' }}).isSided()).to.be.true;
-            expect(new iD.osmWay({tags: { barrier: 'city_wall' }}).isSided()).to.be.true;
-            expect(new iD.osmWay({tags: { man_made: 'embankment' }}).isSided()).to.be.true;
+            expect(new iD.osmWay({tags: { natural: 'cliff' }}).isSided()).toBe(true);
+            expect(new iD.osmWay({tags: { natural: 'coastline' }}).isSided()).toBe(true);
+            expect(new iD.osmWay({tags: { barrier: 'retaining_wall' }}).isSided()).toBe(true);
+            expect(new iD.osmWay({tags: { barrier: 'kerb' }}).isSided()).toBe(true);
+            expect(new iD.osmWay({tags: { barrier: 'guard_rail' }}).isSided()).toBe(true);
+            expect(new iD.osmWay({tags: { barrier: 'city_wall' }}).isSided()).toBe(true);
+            expect(new iD.osmWay({tags: { man_made: 'embankment' }}).isSided()).toBe(true);
         });
 
         it('returns false when two_sided=yes overrides tag with implied sidedness', function() {
@@ -401,13 +401,13 @@ describe('iD.osmWay', function() {
         });
 
         it('returns true when two_sided=no is on tag with implied sidedness', function() {
-            expect(new iD.osmWay({tags: { natural: 'cliff', two_sided: 'no' }}).isSided()).to.be.true;
-            expect(new iD.osmWay({tags: { natural: 'coastline', two_sided: 'no' }}).isSided()).to.be.true;
-            expect(new iD.osmWay({tags: { barrier: 'retaining_wall', two_sided: 'no' }}).isSided()).to.be.true;
-            expect(new iD.osmWay({tags: { barrier: 'kerb', two_sided: 'no' }}).isSided()).to.be.true;
-            expect(new iD.osmWay({tags: { barrier: 'guard_rail', two_sided: 'no' }}).isSided()).to.be.true;
-            expect(new iD.osmWay({tags: { barrier: 'city_wall', two_sided: 'no' }}).isSided()).to.be.true;
-            expect(new iD.osmWay({tags: { man_made: 'embankment', two_sided: 'no' }}).isSided()).to.be.true;
+            expect(new iD.osmWay({tags: { natural: 'cliff', two_sided: 'no' }}).isSided()).toBe(true);
+            expect(new iD.osmWay({tags: { natural: 'coastline', two_sided: 'no' }}).isSided()).toBe(true);
+            expect(new iD.osmWay({tags: { barrier: 'retaining_wall', two_sided: 'no' }}).isSided()).toBe(true);
+            expect(new iD.osmWay({tags: { barrier: 'kerb', two_sided: 'no' }}).isSided()).toBe(true);
+            expect(new iD.osmWay({tags: { barrier: 'guard_rail', two_sided: 'no' }}).isSided()).toBe(true);
+            expect(new iD.osmWay({tags: { barrier: 'city_wall', two_sided: 'no' }}).isSided()).toBe(true);
+            expect(new iD.osmWay({tags: { man_made: 'embankment', two_sided: 'no' }}).isSided()).toBe(true);
         });
 
         it('returns false when the tag does not have implied sidedness', function() {

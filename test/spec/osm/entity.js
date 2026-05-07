@@ -10,11 +10,11 @@ describe('iD.osmEntity', function () {
 
     if (iD.debug) {
         it('is frozen', function () {
-            expect(Object.isFrozen(new iD.osmNode())).to.be.true;
+            expect(Object.isFrozen(new iD.osmNode())).toBe(true);
         });
 
         it('freezes tags', function () {
-            expect(Object.isFrozen(new iD.osmNode().tags)).to.be.true;
+            expect(Object.isFrozen(new iD.osmNode().tags)).toBe(true);
         });
     }
 
@@ -87,7 +87,7 @@ describe('iD.osmEntity', function () {
         it('returns a new Entity', function () {
             var a = new iD.osmNode();
             var b = a.update({});
-            expect(b instanceof iD.osmEntity).to.be.true;
+            expect(b instanceof iD.osmEntity).toBe(true);
             expect(a).not.to.equal(b);
         });
 
@@ -131,7 +131,7 @@ describe('iD.osmEntity', function () {
         it('returns a new Entity if changed', function () {
             var a = new iD.osmNode({tags: {a: 'a'}});
             var b = a.mergeTags({a: 'b'});
-            expect(b instanceof iD.osmEntity).to.be.true;
+            expect(b instanceof iD.osmEntity).toBe(true);
             expect(a).not.to.equal(b);
         });
 
@@ -255,9 +255,9 @@ describe('iD.osmEntity', function () {
 
     describe('#isDegenerate', function () {
         it('returns true', function () {
-            expect(new iD.osmNode().isDegenerate()).to.be.true;
-            expect(new iD.osmWay().isDegenerate()).to.be.true;
-            expect(new iD.osmRelation().isDegenerate()).to.be.true;
+            expect(new iD.osmNode().isDegenerate()).toBe(true);
+            expect(new iD.osmWay().isDegenerate()).toBe(true);
+            expect(new iD.osmRelation().isDegenerate()).toBe(true);
         });
     });
 

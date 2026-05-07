@@ -26,7 +26,7 @@ describe('iD.coreGraph', function() {
         });
 
         it('freezes by default', function () {
-            expect(new iD.coreGraph().frozen).to.be.true;
+            expect(new iD.coreGraph().frozen).toBe(true);
         });
 
         it('remains mutable if passed true as second argument', function () {

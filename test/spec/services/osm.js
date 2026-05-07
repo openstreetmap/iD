@@ -296,8 +296,8 @@ describe('iD.serviceOsm', function () {
             connection.loadTiles(context.projection);
 
             await setTimeout(500);
-            expect(fetchMock.called()).to.be.true;
-            expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.true;
+            expect(fetchMock.called()).toBe(true);
+            expect(connection.isDataLoaded([-74.0444216, 40.6694299])).toBe(true);
         });
     });
 
