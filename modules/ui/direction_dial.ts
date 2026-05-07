@@ -1,5 +1,4 @@
 import { drag as d3_drag, type D3DragEvent } from 'd3-drag';
-import { pointer as d3_pointer } from 'd3-selection';
 
 import { utilNormalizeAzimuthDegrees } from '../util/direction_degrees';
 
@@ -26,6 +25,10 @@ interface DirectionDial {
 const DIAL_SIZE = 92;
 const DIAL_CENTER = DIAL_SIZE / 2;
 const DIAL_RADIUS = 34;
+const DIAL_BASE_RENDER_SIZE = 28;
+const DIAL_MAX_DRAG_DIAMETER = 180;
+const DIAL_BASE_RADIUS_PX = DIAL_BASE_RENDER_SIZE / 2;
+const DIAL_MAX_RADIUS_PX = DIAL_MAX_DRAG_DIAMETER / 2;
 /** White disk to the dial edge (no ring stroke). */
 const DIAL_WHITE_RADIUS = DIAL_RADIUS;
 const DIAL_VIEWBOX_EXTENT = DIAL_RADIUS + 1;
@@ -56,22 +59,34 @@ function precisionGain(distanceFromCenter: number): number {
 }
 
 
-function angleFromPointer(
+function dragPointerDistanceFromCenterPx(
     event: DialSvgDragEvent,
-    node: SVGSVGElement
-): { angle: number; distanceFromCenter: number } | null {
+    node: SVGSVGElement,
+    centerX?: number | null,
+    centerY?: number | null
+): { dx: number; dy: number; distanceFromCenter: number } | null {
     const sourceEvent = event.sourceEvent as MouseEvent | TouchEvent | undefined;
     if (!sourceEvent) return null;
 
-    const [x, y] = d3_pointer(sourceEvent, node);
-    const dx = x - DIAL_CENTER;
-    const dy = y - DIAL_CENTER;
-    const distanceFromCenter = Math.hypot(dx, dy);
-    if (!isFinite(distanceFromCenter)) return null;
+    let clientX: number;
+    let clientY: number;
+    if (sourceEvent instanceof MouseEvent) {
+        clientX = sourceEvent.clientX;
+        clientY = sourceEvent.clientY;
+    } else {
+        const touch = (sourceEvent.touches && sourceEvent.touches[0]) ||
+            (sourceEvent.changedTouches && sourceEvent.changedTouches[0]);
+        if (!touch) return null;
+        clientX = touch.clientX;
+        clientY = touch.clientY;
+    }
 
-    const radians = Math.atan2(dx, -dy);
-    const angle = utilNormalizeAzimuthDegrees(radians * (180 / Math.PI));
-    return { angle, distanceFromCenter };
+    const rect = node.getBoundingClientRect();
+    const cx = (centerX !== null && centerX !== undefined) ? centerX : (rect.left + (rect.width / 2));
+    const cy = (centerY !== null && centerY !== undefined) ? centerY : (rect.top + (rect.height / 2));
+    const dx = clientX - cx;
+    const dy = clientY - cy;
+    return { dx, dy, distanceFromCenter: Math.hypot(dx, dy) };
 }
 
 
@@ -87,8 +102,12 @@ export function uiDirectionDial(): DirectionDial {
     let _onInput: DirectionDialCallback = function() {};
     let _onCommit: DirectionDialCallback = function() {};
     let _isDragging = false;
+    let _isExpandedDrag = false;
     let _dragValue = 0;
     let _lastPointerAngle = 0;
+    let _dragDialDiameter = DIAL_BASE_RENDER_SIZE;
+    let _dragCenterClientX: number | null = null;
+    let _dragCenterClientY: number | null = null;
 
     function attachWrapShiftListeners() {
         if (_shiftWindowListenersAttached || typeof window === 'undefined') return;
@@ -122,6 +141,19 @@ export function uiDirectionDial(): DirectionDial {
         return false;
     }
 
+    function pointerStateFromEvent(
+        event: DialSvgDragEvent,
+        node: SVGSVGElement
+    ): { angle: number; distanceFromCenter: number } | null {
+        const state = dragPointerDistanceFromCenterPx(event, node, _dragCenterClientX, _dragCenterClientY);
+        if (!state || !isFinite(state.distanceFromCenter)) return null;
+        const radians = Math.atan2(state.dx, -state.dy);
+        return {
+            angle: utilNormalizeAzimuthDegrees(radians * (180 / Math.PI)),
+            distanceFromCenter: state.distanceFromCenter
+        };
+    }
+
     function renderDial(selection: DialWrapperSelection) {
         _selectionRef = selection;
 
@@ -133,6 +165,7 @@ export function uiDirectionDial(): DirectionDial {
                 renderDial(selection);
             })
             .on('mouseleave.directionDialShift', function() {
+                if (_isDragging) return;
                 _shiftHeld = false;
                 detachWrapShiftListeners();
                 renderDial(selection);
@@ -179,18 +212,26 @@ export function uiDirectionDial(): DirectionDial {
             .attr('r', 3);
 
         const dialMerge = dialEnter.merge(dialSVG);
-
         dialMerge
             .classed('disabled', _disabled)
             .classed('dragging', _isDragging)
+            .classed('expanded', _isDragging && _isExpandedDrag)
+            .style('width', _isDragging ? `${_dragDialDiameter}px` : null)
+            .style('height', _isDragging ? `${_dragDialDiameter}px` : null)
             .attr('tabindex', _disabled ? null : 0);
 
         const dragBehavior = d3_drag<SVGSVGElement, DialSvgDatum>()
             .on('start', function(this: SVGSVGElement, event: DialSvgDragEvent) {
                 if (_disabled) return;
                 _isDragging = true;
+                _isExpandedDrag = false;
+                _dragDialDiameter = DIAL_BASE_RENDER_SIZE;
+                attachWrapShiftListeners();
+                const rect = this.getBoundingClientRect();
+                _dragCenterClientX = rect.left + (rect.width / 2);
+                _dragCenterClientY = rect.top + (rect.height / 2);
 
-                const pointerState = angleFromPointer(event, this);
+                const pointerState = pointerStateFromEvent(event, this);
                 if (!pointerState) {
                     _isDragging = false;
                     return;
@@ -210,15 +251,35 @@ export function uiDirectionDial(): DirectionDial {
             .on('drag', function(this: SVGSVGElement, event: DialSvgDragEvent) {
                 if (_disabled || !_isDragging) return;
 
-                const pointerState = angleFromPointer(event, this);
+                const pointerState = pointerStateFromEvent(event, this);
                 if (!pointerState) return;
+                const pointerDistancePx = dragPointerDistanceFromCenterPx(
+                    event,
+                    this,
+                    _dragCenterClientX,
+                    _dragCenterClientY
+                );
+                if (pointerDistancePx) {
+                    if (!_isExpandedDrag && pointerDistancePx.distanceFromCenter > DIAL_BASE_RADIUS_PX) {
+                        _isExpandedDrag = true;
+                        _dragDialDiameter = DIAL_MAX_DRAG_DIAMETER;
+                        renderDial(selection);
+                    }
+                    if (_isExpandedDrag && pointerDistancePx.distanceFromCenter > DIAL_MAX_RADIUS_PX) {
+                        return;
+                    }
+                }
 
                 const pointerAngle = pointerState.angle;
-                const delta = shortestAngleDelta(_lastPointerAngle, pointerAngle);
+                if (_isExpandedDrag) {
+                    // In expanded mode, keep indicator directly under cursor angle.
+                    _dragValue = pointerAngle;
+                } else {
+                    const delta = shortestAngleDelta(_lastPointerAngle, pointerAngle);
+                    const gain = precisionGain(pointerState.distanceFromCenter);
+                    _dragValue = utilNormalizeAzimuthDegrees(_dragValue + (delta * gain));
+                }
                 _lastPointerAngle = pointerAngle;
-
-                const gain = precisionGain(pointerState.distanceFromCenter);
-                _dragValue = utilNormalizeAzimuthDegrees(_dragValue + (delta * gain));
                 if (shiftFromDragEvent(event)) {
                     _dragValue = snapAbsolute(_dragValue, _step);
                 }
@@ -230,11 +291,17 @@ export function uiDirectionDial(): DirectionDial {
             .on('end', function(this: SVGSVGElement, event: DialSvgDragEvent) {
                 if (_disabled || !_isDragging) return;
                 _isDragging = false;
+                _isExpandedDrag = false;
+                _dragDialDiameter = DIAL_BASE_RENDER_SIZE;
+                _dragCenterClientX = null;
+                _dragCenterClientY = null;
                 if (shiftFromDragEvent(event)) {
                     _dragValue = snapAbsolute(_dragValue, _step);
                 }
                 _value = _dragValue;
                 _onCommit(Math.round(_dragValue));
+                _shiftHeld = false;
+                detachWrapShiftListeners();
                 renderDial(selection);
             });
 

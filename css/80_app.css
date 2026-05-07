@@ -1511,7 +1511,8 @@ button.preset-reset .label.flash-bg {
     display: flex;
     flex-flow: row nowrap;
     flex: 0 0 auto;
-    width: 32px;
+    width: 30px;
+    height: 30px;
     border: 1px solid var(--border-color);
     border-left: 0;
     border-top-width: 0;
@@ -1519,14 +1520,30 @@ button.preset-reset .label.flash-bg {
     background: var(--bg-color);
     justify-content: center;
     align-items: center;
-    padding: 2px;
+    padding: 1px;
+    position: relative;
+    z-index: 2;
 }
 
 .direction-dial {
     width: 28px;
     height: 28px;
+    overflow: visible;
     cursor: crosshair;
     outline: none;
+    transition: width 120ms ease-out, height 120ms ease-out, filter 120ms ease-out;
+}
+
+.direction-dial.dragging {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.direction-dial.dragging.expanded {
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35));
 }
 
 .direction-dial-ring {
@@ -1534,6 +1551,7 @@ button.preset-reset .label.flash-bg {
     stroke: transparent;
     stroke-width: 1;
     pointer-events: none;
+    vector-effect: non-scaling-stroke;
 }
 
 @media (hover: hover) {
@@ -1581,6 +1599,7 @@ button.preset-reset .label.flash-bg {
     stroke-opacity: 0.5;
     stroke-width: 2;
     stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
 }
 
 @media (hover: hover) {
@@ -1603,6 +1622,7 @@ button.preset-reset .label.flash-bg {
     stroke: var(--border-color);
     stroke-width: 1;
     pointer-events: none;
+    vector-effect: non-scaling-stroke;
 }
 
 .direction-dial.disabled {
