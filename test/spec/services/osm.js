@@ -467,7 +467,7 @@ describe('iD.serviceOsm', function () {
 
             const changesets = await promisify(connection.userChangesets).call(connection);
 
-            expect(changesets).to.deep.equal([{
+            expect(changesets).toEqual([{
                 tags: {
                     comment: 'Caprice Court has been extended',
                     created_by: 'iD 2.0.0'
@@ -492,7 +492,7 @@ describe('iD.serviceOsm', function () {
 
             const changesets = await promisify(connection.userChangesets).call(connection);
 
-            expect(changesets).to.deep.equal([{
+            expect(changesets).toEqual([{
                 tags: {
                     comment: 'Caprice Court has been extended',
                     created_by: 'iD 2.0.0'
@@ -517,7 +517,7 @@ describe('iD.serviceOsm', function () {
 
             const changesets = await promisify(connection.userChangesets)();
 
-            expect(changesets).to.deep.equal([{
+            expect(changesets).toEqual([{
                 tags: {
                     comment: 'Caprice Court has been extended',
                     created_by: 'iD 2.0.0'
@@ -659,7 +659,7 @@ describe('iD.serviceOsm', function () {
             };
             connection.caches(obj);
             var result = connection.getNote(1);
-            expect(result).to.deep.equal(note);
+            expect(result).toEqual(note);
         });
     });
 
@@ -738,7 +738,7 @@ describe('iD.serviceOsm', function () {
 
                 await promisify(connection.status).call(connection);
                 var blocklists = connection.imageryBlocklists();
-                expect(blocklists).to.deep.equal([new RegExp('\.foo\.com', 'i'), new RegExp('\.bar\.org', 'i')]);
+                expect(blocklists).toEqual([new RegExp('\.foo\.com', 'i'), new RegExp('\.bar\.org', 'i')]);
             });
         });
 

@@ -42,9 +42,9 @@ describe('iD.actionRevert', function() {
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n2'), 'n2 unchanged').to.equal(n2);
             expect(graph.hasEntity('n-3'), 'n-3 removed').toBeUndefined();
-            expect(graph.parentWays(n1), 'n1 has w1 as parent way').to.deep.equal([w1_1]);
-            expect(graph.parentWays(n2), 'n2 has w1 as parent way').to.deep.equal([w1_1]);
-            expect(w1_1.nodes, 'w1 nodes updated').to.deep.equal(w1.nodes);
+            expect(graph.parentWays(n1), 'n1 has w1 as parent way').toEqual([w1_1]);
+            expect(graph.parentWays(n2), 'n2 has w1 as parent way').toEqual([w1_1]);
+            expect(w1_1.nodes, 'w1 nodes updated').toEqual(w1.nodes);
         });
 
         it('reverts existing node, preserves parent way nodelist', function() {
@@ -59,9 +59,9 @@ describe('iD.actionRevert', function() {
             var w1_1 = graph.hasEntity('w1');
             expect(graph.hasEntity('n1'), 'n1 reverted').to.equal(n1);
             expect(graph.hasEntity('n2'), 'n2 unchanged').to.equal(n2);
-            expect(graph.parentWays(n1), 'n1 has w1 as parent way').to.deep.equal([w1_1]);
-            expect(graph.parentWays(n2), 'n2 has w1 as parent way').to.deep.equal([w1_1]);
-            expect(w1_1.nodes, 'w1 nodes preserved').to.deep.equal(w1.nodes);
+            expect(graph.parentWays(n1), 'n1 has w1 as parent way').toEqual([w1_1]);
+            expect(graph.parentWays(n2), 'n2 has w1 as parent way').toEqual([w1_1]);
+            expect(w1_1.nodes, 'w1 nodes preserved').toEqual(w1.nodes);
         });
     });
 
@@ -78,8 +78,8 @@ describe('iD.actionRevert', function() {
             var r1_1 = graph.hasEntity('r1');
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 removed').toBeUndefined();
-            expect(graph.parentRelations(n1), 'n1 has r1 as parent relation').to.deep.equal([r1_1]);
-            expect(r1_1.members, 'r1 members updated').to.deep.equal(r1.members);
+            expect(graph.parentRelations(n1), 'n1 has r1 as parent relation').toEqual([r1_1]);
+            expect(r1_1.members, 'r1 members updated').toEqual(r1.members);
         });
 
         it('reverts existing node, preserves parent relation memberlist', function() {
@@ -94,9 +94,9 @@ describe('iD.actionRevert', function() {
             var r1_1 = graph.hasEntity('r1');
             expect(graph.hasEntity('n1'), 'n1 reverted').to.equal(n1);
             expect(graph.hasEntity('n2'), 'n2 unchanged').to.equal(n2);
-            expect(graph.parentRelations(n1), 'n1 has r1 as parent relation').to.deep.equal([r1_1]);
-            expect(graph.parentRelations(n2), 'n2 has r1 as parent relation').to.deep.equal([r1_1]);
-            expect(r1_1.members, 'r1 members preserved').to.deep.equal(r1.members);
+            expect(graph.parentRelations(n1), 'n1 has r1 as parent relation').toEqual([r1_1]);
+            expect(graph.parentRelations(n2), 'n2 has r1 as parent relation').toEqual([r1_1]);
+            expect(r1_1.members, 'r1 members preserved').toEqual(r1.members);
         });
     });
 
@@ -126,7 +126,7 @@ describe('iD.actionRevert', function() {
             expect(graph.hasEntity('w1'), 'w1 reverted').to.equal(w1);
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
-            expect(graph.parentWays(n1), 'n1 has w1 as parent way').to.deep.equal([w1]);
+            expect(graph.parentWays(n1), 'n1 has w1 as parent way').toEqual([w1]);
             expect(graph.parentWays(n2), 'n-2 has no parent ways').toEqual([]);
         });
 
@@ -141,7 +141,7 @@ describe('iD.actionRevert', function() {
             expect(graph.hasEntity('w1'), 'w1 reverted').to.equal(w1);
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
-            expect(graph.parentWays(n1), 'n1 has w1 as parent way').to.deep.equal([w1]);
+            expect(graph.parentWays(n1), 'n1 has w1 as parent way').toEqual([w1]);
             expect(graph.parentWays(n2), 'n-2 has no parent ways').toEqual([]);
         });
     });
@@ -172,7 +172,7 @@ describe('iD.actionRevert', function() {
             expect(graph.hasEntity('r1'), 'r1 reverted').to.equal(r1);
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
-            expect(graph.parentRelations(n1), 'n1 has r1 as parent relation').to.deep.equal([r1]);
+            expect(graph.parentRelations(n1), 'n1 has r1 as parent relation').toEqual([r1]);
             expect(graph.parentRelations(n2), 'n-2 has no parent relations').toEqual([]);
         });
 
@@ -187,7 +187,7 @@ describe('iD.actionRevert', function() {
             expect(graph.hasEntity('r1'), 'r1 reverted').to.equal(r1);
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
-            expect(graph.parentRelations(n1), 'n1 has r1 as parent relation').to.deep.equal([r1]);
+            expect(graph.parentRelations(n1), 'n1 has r1 as parent relation').toEqual([r1]);
             expect(graph.parentRelations(n2), 'n-2 has no parent relations').toEqual([]);
         });
     });

@@ -159,7 +159,7 @@ describe('iD.servicePanoramax', function() {
 
         it('return empty array when no images are available', function() {
             const result = panoramax.images(context.projection);
-            expect(result).to.deep.equal([]);
+            expect(result).toEqual([]);
         });
 
         it('load images quickly under normal conditions', function() {

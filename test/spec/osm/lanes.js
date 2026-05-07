@@ -446,7 +446,7 @@ describe('iD.Lanes', function() {
                 }
             }).lanes().metadata;
             expect(metadata.turnLanes.unspecified)
-                .to.deep.equal([
+                .toEqual([
                     ['none'], ['slight_right']
                 ]);
         });
@@ -462,7 +462,7 @@ describe('iD.Lanes', function() {
             }).lanes().metadata;
 
             expect(metadata.turnLanes.unspecified)
-                .to.deep.equal([
+                .toEqual([
                     ['none'], ['slight_right']
                 ]);
         });
@@ -479,11 +479,11 @@ describe('iD.Lanes', function() {
                 }
             }).lanes().metadata;
             expect(metadata.turnLanes.forward)
-                .to.deep.equal([
+                .toEqual([
                     ['slight_left']
                 ]);
             expect(metadata.turnLanes.backward)
-                .to.deep.equal([
+                .toEqual([
                     ['none'], ['through'], ['through', 'slight_right']
                 ]);
         });
@@ -499,7 +499,7 @@ describe('iD.Lanes', function() {
             }).lanes();
 
             expect(lanesData.metadata.turnLanes.unspecified)
-                .to.deep.equal([
+                .toEqual([
                     ['slight_left', 'reverse', 'left'],
                     ['slight_left', 'left', 'through'],
                     ['through'],
@@ -521,13 +521,13 @@ describe('iD.Lanes', function() {
                 }
             }).lanes();
             expect(lanesData.metadata.turnLanes.forward)
-                .to.deep.equal([
+                .toEqual([
                     ['slight_left', 'reverse', 'left'],
                     ['slight_left', 'left', 'through'],
                     ['through']
                 ]);
             expect(lanesData.metadata.turnLanes.backward)
-                .to.deep.equal([
+                .toEqual([
                     ['none'],
                     ['through', 'left']
                 ]);
@@ -543,7 +543,7 @@ describe('iD.Lanes', function() {
                 }
             }).lanes().metadata;
             expect(metadata.turnLanes.unspecified)
-                .to.deep.equal([
+                .toEqual([
                     ['none'], ['none'], ['unknown', 'unknown']
                 ]);
         });
@@ -560,11 +560,11 @@ describe('iD.Lanes', function() {
                 }
             }).lanes().metadata;
             expect(metadata.turnLanes.forward)
-                .to.deep.equal([
+                .toEqual([
                     ['unknown']
                 ]);
             expect(metadata.turnLanes.backward)
-                .to.deep.equal([
+                .toEqual([
                     ['none'], ['through'], ['unknown', 'slight_right']
                 ]);
         });
@@ -580,7 +580,7 @@ describe('iD.Lanes', function() {
             }).lanes().metadata;
 
             expect(metadata.turnLanes.unspecified)
-                .to.deep.equal([
+                .toEqual([
                     ['slight_left'], ['none']
                 ]);
         });
@@ -598,11 +598,11 @@ describe('iD.Lanes', function() {
             }).lanes().metadata;
 
             expect(metadata.turnLanes.forward)
-                .to.deep.equal([
+                .toEqual([
                     ['slight_left'], ['unknown'], ['unknown']
                 ]);
             expect(metadata.turnLanes.backward)
-                .to.deep.equal([
+                .toEqual([
                     ['through'], ['unknown']
                 ]);
         });
@@ -618,7 +618,7 @@ describe('iD.Lanes', function() {
             }).lanes().metadata;
 
             expect(metadata.turnLanes)
-                .to.deep.equal([
+                .toEqual([
                     ['through'], ['through', 'slight_right']
                 ]);
         });
@@ -651,7 +651,7 @@ describe('iD.Lanes', function() {
             }).lanes().metadata;
 
             expect(metadata.turnLanes.unspecified)
-                .to.deep.equal([['through'], ['through', 'slight_right']]);
+                .toEqual([['through'], ['through', 'slight_right']]);
             expect(metadata.turnLanes.forward)
                 .to.equal(undefined);
             expect(metadata.turnLanes.backward)
@@ -672,9 +672,9 @@ describe('iD.Lanes', function() {
                 }
             }).lanes();
             expect(lanes.metadata.turnLanes.backward)
-                .to.deep.equal([['slight_right']]);
+                .toEqual([['slight_right']]);
             expect(lanes.metadata.turnLanes.forward)
-                .to.deep.equal([['slight_left'], ['none'], ['none']]);
+                .toEqual([['slight_left'], ['none'], ['none']]);
         });
 
         it('parses turnLane correctly when lanes:both_ways=1 & lanes:forward < lanes:backward', function() {
@@ -691,9 +691,9 @@ describe('iD.Lanes', function() {
                 }
             }).lanes();
             expect(lanes.metadata.turnLanes.forward)
-                .to.deep.equal([['through']]);
+                .toEqual([['through']]);
             expect(lanes.metadata.turnLanes.backward)
-                .to.deep.equal([['slight_left'], ['none'], ['none']]);
+                .toEqual([['slight_left'], ['none'], ['none']]);
         });
 
         it('parses correctly when turn:lanes= ||x', function() {
@@ -707,7 +707,7 @@ describe('iD.Lanes', function() {
             }).lanes().metadata;
 
             expect(metadata.turnLanes.unspecified)
-                .to.deep.equal([['none'], ['none'], ['through', 'slight_right']]);
+                .toEqual([['none'], ['none'], ['through', 'slight_right']]);
         });
 
         it('parses correctly when turn:lanes= |x|', function() {
@@ -720,7 +720,7 @@ describe('iD.Lanes', function() {
             }).lanes().metadata;
 
             expect(metadata.turnLanes.unspecified)
-                .to.deep.equal([['none'], ['through'], ['none']]);
+                .toEqual([['none'], ['through'], ['none']]);
         });
 
         it('parses correctly when turn:lanes:forward= ||x', function() {
@@ -737,9 +737,9 @@ describe('iD.Lanes', function() {
             }).lanes().metadata;
 
             expect(metadata.turnLanes.forward)
-                .to.deep.equal([['none'], ['none'], ['through', 'slight_right']]);
+                .toEqual([['none'], ['none'], ['through', 'slight_right']]);
             expect(metadata.turnLanes.backward)
-                .to.deep.equal([['none']]);
+                .toEqual([['none']]);
         });
 
         it('parses correctly when turn:lanes:backward= |', function() {
@@ -756,9 +756,9 @@ describe('iD.Lanes', function() {
             }).lanes().metadata;
 
             expect(metadata.turnLanes.forward)
-                .to.deep.equal([['slight_left'], ['none'], ['none']]);
+                .toEqual([['slight_left'], ['none'], ['none']]);
             expect(metadata.turnLanes.backward)
-                .to.deep.equal([['none'], ['none']]);
+                .toEqual([['none'], ['none']]);
         });
 
         it('fills lanes.unspecified with key \'turnLane\' correctly', function() {
@@ -771,11 +771,11 @@ describe('iD.Lanes', function() {
                 }
             }).lanes().lanes;
             var turnLanesUnspecified = lanes.unspecified.map(function(l) { return l.turnLane; });
-            expect(turnLanesUnspecified).to.deep.equal([
+            expect(turnLanesUnspecified).toEqual([
                 ['slight_left'], ['none'], ['through'], ['through', 'slight_right'], ['slight_right']
             ]);
-            expect(lanes.forward).to.deep.equal([]);
-            expect(lanes.backward).to.deep.equal([]);
+            expect(lanes.forward).toEqual([]);
+            expect(lanes.backward).toEqual([]);
         });
 
         it('fills lanes.forward & lanes.backward with key \'turnLane\' correctly', function() {
@@ -789,13 +789,13 @@ describe('iD.Lanes', function() {
                     'turn:lanes:forward': 'slight_left||',
                 }
             }).lanes().lanes;
-            expect(lanes.unspecified).to.deep.equal([]);
+            expect(lanes.unspecified).toEqual([]);
             var turnLanesForward = lanes.forward.map(function(l) { return l.turnLane; });
             var turnLanesBackward = lanes.backward.map(function(l) { return l.turnLane; });
-            expect(turnLanesForward).to.deep.equal([
+            expect(turnLanesForward).toEqual([
                 ['slight_left'], ['none'], ['none']
             ]);
-            expect(turnLanesBackward).to.deep.equal([
+            expect(turnLanesBackward).toEqual([
                 ['none'], ['slight_right']
             ]);
         });
@@ -919,7 +919,7 @@ describe('iD.Lanes', function() {
                     'maxspeed:lanes': '30|40|40|40|40'
                 }
             }).lanes().metadata.maxspeedLanes.unspecified;
-            expect(maxspeedLanes).to.deep.equal([
+            expect(maxspeedLanes).toEqual([
                 30, 40, 40, 40, 40
             ]);
         });
@@ -936,10 +936,10 @@ describe('iD.Lanes', function() {
                     'maxspeed:lanes:backward': '30'
                 }
             }).lanes().metadata;
-            expect(metadata.maxspeedLanes.forward).to.deep.equal([
+            expect(metadata.maxspeedLanes.forward).toEqual([
                 null, 40, 40, 40
             ]);
-            expect(metadata.maxspeedLanes.backward).to.deep.equal([
+            expect(metadata.maxspeedLanes.backward).toEqual([
                 null
             ]);
         });
@@ -953,7 +953,7 @@ describe('iD.Lanes', function() {
                     'maxspeed:lanes': '30|||40'
                 }
             }).lanes().metadata.maxspeedLanes;
-            expect(maxspeedLanes.unspecified).to.deep.equal([
+            expect(maxspeedLanes.unspecified).toEqual([
                 30, null, null, null
             ]);
         });
@@ -971,7 +971,7 @@ describe('iD.Lanes', function() {
                     'maxspeed:lanes': '30|||'
                 }
             }).lanes();
-            expect(lanes.metadata.maxspeedLanes.unspecified).to.deep.equal([
+            expect(lanes.metadata.maxspeedLanes.unspecified).toEqual([
                 30, null, null, null
             ]);
         });
@@ -985,7 +985,7 @@ describe('iD.Lanes', function() {
                     'maxspeed:lanes': '30|40|40|40|40'
                 }
             }).lanes().metadata.maxspeedLanes;
-            expect(maxspeedLanes.unspecified).to.deep.equal([
+            expect(maxspeedLanes.unspecified).toEqual([
                 30, null, null, null, null
             ]);
             maxspeedLanes = new iD.osmWay({
@@ -996,7 +996,7 @@ describe('iD.Lanes', function() {
                     'maxspeed:lanes': '30|40|40|40|40'
                 }
             }).lanes().metadata.maxspeedLanes;
-            expect(maxspeedLanes.unspecified).to.deep.equal([
+            expect(maxspeedLanes.unspecified).toEqual([
                 30, 40, 40, 40, 40
             ]);
             maxspeedLanes = new iD.osmWay({
@@ -1007,7 +1007,7 @@ describe('iD.Lanes', function() {
                     'maxspeed:lanes': '30|40|40|40|40'
                 }
             }).lanes().metadata.maxspeedLanes;
-            expect(maxspeedLanes.unspecified).to.deep.equal([
+            expect(maxspeedLanes.unspecified).toEqual([
                 null, 40, 40, 40, 40
             ]);
         });
@@ -1021,7 +1021,7 @@ describe('iD.Lanes', function() {
                     'maxspeed:lanes': '30|40|forty|40|40'
                 }
             }).lanes().metadata.maxspeedLanes;
-            expect(maxspeedLanes.unspecified).to.deep.equal([
+            expect(maxspeedLanes.unspecified).toEqual([
                 null, 40, 'unknown', 40, 40
             ]);
             maxspeedLanes = new iD.osmWay({
@@ -1033,7 +1033,7 @@ describe('iD.Lanes', function() {
                 }
             }).lanes().metadata.maxspeedLanes;
 
-            expect(maxspeedLanes.unspecified).to.deep.equal([
+            expect(maxspeedLanes.unspecified).toEqual([
                 null, 40, 'unknown', 40, 'unknown'
             ]);
         });
@@ -1046,7 +1046,7 @@ describe('iD.Lanes', function() {
                     'maxspeed:lanes': '30|40|none|40|40'
                 }
             }).lanes().metadata.maxspeedLanes;
-            expect(maxspeedLanes.unspecified).to.deep.equal([
+            expect(maxspeedLanes.unspecified).toEqual([
                 30, 40, 'none', 40, 40
             ]);
         });
@@ -1063,7 +1063,7 @@ describe('iD.Lanes', function() {
             var maxspeedLanes = lanes.unspecified.map(function (l) {
                 return l.maxspeed;
             });
-            expect(maxspeedLanes).to.deep.equal([
+            expect(maxspeedLanes).toEqual([
                 null, 40, 'unknown', 40, 40
             ]);
         });
@@ -1081,13 +1081,13 @@ describe('iD.Lanes', function() {
                     'turn:lanes': 'left|||through|right'
                 }
             }).lanes();
-            expect(lanes.metadata.bicyclewayLanes.unspecified).to.deep.equal([
+            expect(lanes.metadata.bicyclewayLanes.unspecified).toEqual([
                 'no','yes','no', 'designated', 'no'
             ]);
             var bicyclewayLanes = lanes.lanes.unspecified.map(function(l) {
                 return l.bicycleway;
             });
-            expect(bicyclewayLanes).to.deep.equal([
+            expect(bicyclewayLanes).toEqual([
                 'no','yes','no', 'designated', 'no'
             ]);
         });
@@ -1103,22 +1103,22 @@ describe('iD.Lanes', function() {
                     'bicycleway:lanes:backward': 'lane|no|no|no'
                 }
             }).lanes();
-            expect(lanes.metadata.bicyclewayLanes.forward).to.deep.equal([
+            expect(lanes.metadata.bicyclewayLanes.forward).toEqual([
                 'lane','no','no', 'no', 'no'
             ]);
-            expect(lanes.metadata.bicyclewayLanes.backward).to.deep.equal([
+            expect(lanes.metadata.bicyclewayLanes.backward).toEqual([
                 'lane','no','no', 'no'
             ]);
             var bicyclewayLanesForward = lanes.lanes.forward.map(function(l) {
                 return l.bicycleway;
             });
-            expect(bicyclewayLanesForward).to.deep.equal([
+            expect(bicyclewayLanesForward).toEqual([
                 'lane','no','no', 'no', 'no'
             ]);
             var bicyclewayLanesBackward = lanes.lanes.backward.map(function(l) {
                 return l.bicycleway;
             });
-            expect(bicyclewayLanesBackward).to.deep.equal([
+            expect(bicyclewayLanesBackward).toEqual([
                 'lane','no','no', 'no'
             ]);
         });
@@ -1133,13 +1133,13 @@ describe('iD.Lanes', function() {
                     'turn:lanes': 'left|||through|right'
                 }
             }).lanes();
-            expect(lanes.metadata.bicyclewayLanes.unspecified).to.deep.equal([
+            expect(lanes.metadata.bicyclewayLanes.unspecified).toEqual([
                 'no','unknown','no', 'designated', 'no'
             ]);
             var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
                 return l.bicycleway;
             });
-            expect(psvLanesForward).to.deep.equal([
+            expect(psvLanesForward).toEqual([
                 'no','unknown','no', 'designated', 'no'
             ]);
         });
@@ -1155,13 +1155,13 @@ describe('iD.Lanes', function() {
                     'psv:lanes': 'yes|no||no|no'
                 }
             }).lanes();
-            expect(lanes.metadata.psvLanes.unspecified).to.deep.equal([
+            expect(lanes.metadata.psvLanes.unspecified).toEqual([
                 'yes','no','no', 'no', 'no'
             ]);
             var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
                 return l.psv;
             });
-            expect(psvLanesForward).to.deep.equal([
+            expect(psvLanesForward).toEqual([
                 'yes','no','no', 'no', 'no'
             ]);
         });
@@ -1175,10 +1175,10 @@ describe('iD.Lanes', function() {
                     'psv:lanes:backward': 'yes|designated',
                 }
             }).lanes();
-            expect(lanes.metadata.psvLanes.forward).to.deep.equal([
+            expect(lanes.metadata.psvLanes.forward).toEqual([
                 'no','no','no'
             ]);
-            expect(lanes.metadata.psvLanes.backward).to.deep.equal([
+            expect(lanes.metadata.psvLanes.backward).toEqual([
                 'yes', 'designated'
             ]);
             var psvLanesForward = lanes.lanes.forward.map(function(l) {
@@ -1187,10 +1187,10 @@ describe('iD.Lanes', function() {
             var psvLanesBackward = lanes.lanes.backward.map(function(l) {
                 return l.psv;
             });
-            expect(psvLanesForward).to.deep.equal([
+            expect(psvLanesForward).toEqual([
                 'no','no','no'
             ]);
-            expect(psvLanesBackward).to.deep.equal([
+            expect(psvLanesBackward).toEqual([
                 'yes', 'designated'
             ]);
         });
@@ -1203,13 +1203,13 @@ describe('iD.Lanes', function() {
                     'psv:lanes': 'yes|no|garbage'
                 }
             }).lanes();
-            expect(lanes.metadata.psvLanes.unspecified).to.deep.equal([
+            expect(lanes.metadata.psvLanes.unspecified).toEqual([
                 'yes','no', 'unknown'
             ]);
             var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
                 return l.psv;
             });
-            expect(psvLanesForward).to.deep.equal([
+            expect(psvLanesForward).toEqual([
                 'yes','no', 'unknown'
             ]);
         });

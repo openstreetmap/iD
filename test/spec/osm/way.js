@@ -524,14 +524,14 @@ describe('iD.osmWay', function() {
     describe('#close', function () {
         it('returns self for empty way', function () {
             var w = new iD.osmWay();
-            expect(w.close()).to.deep.equal(w);
+            expect(w.close()).toEqual(w);
         });
 
         it('returns self for already closed way', function () {
             var w1 = new iD.osmWay({ nodes: 'aba'.split('') });
-            expect(w1.close()).to.deep.equal(w1);
+            expect(w1.close()).toEqual(w1);
             var w2 = new iD.osmWay({ nodes: 'aa'.split('') });
-            expect(w2.close()).to.deep.equal(w2);
+            expect(w2.close()).toEqual(w2);
         });
 
         it('closes a way', function () {
@@ -556,14 +556,14 @@ describe('iD.osmWay', function() {
     describe('#unclose', function () {
         it('returns self for empty way', function () {
             var w = new iD.osmWay();
-            expect(w.unclose()).to.deep.equal(w);
+            expect(w.unclose()).toEqual(w);
         });
 
         it('returns self for already unclosed way', function () {
             var w1 = new iD.osmWay({ nodes: 'a'.split('') });
-            expect(w1.unclose()).to.deep.equal(w1);
+            expect(w1.unclose()).toEqual(w1);
             var w2 = new iD.osmWay({ nodes: 'ab'.split('') });
-            expect(w2.unclose()).to.deep.equal(w2);
+            expect(w2.unclose()).toEqual(w2);
         });
 
         it('uncloses a circular way', function () {
