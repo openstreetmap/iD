@@ -115,7 +115,7 @@ describe('iD.actionCircularize', function () {
         graph = iD.actionCircularize('-', projection)(graph);
 
         expect(isCircular('-', graph)).toBeTruthy();
-        expect(iD.geoVecLength(graph.entity('d').loc, [2, -2])).to.be.lt(0.5);
+        expect(iD.geoVecLength(graph.entity('d').loc, [2, -2])).toBeLessThan(0.5);
     });
 
     it('leaves clockwise ways clockwise', function () {
@@ -150,12 +150,12 @@ describe('iD.actionCircularize', function () {
                 new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
 
-        expect(area('-', graph)).to.be.lt(0);
+        expect(area('-', graph)).toBeLessThan(0);
 
         graph = iD.actionCircularize('-', projection)(graph);
 
         expect(isCircular('-', graph)).toBeTruthy();
-        expect(area('-', graph)).to.be.lt(0);
+        expect(area('-', graph)).toBeLessThan(0);
     });
 
     it('adds new nodes on shared way wound in opposite direction', function () {

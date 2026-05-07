@@ -1062,7 +1062,7 @@ describe('iD.osmWay', function() {
             var s = Math.abs(graph.entity('s').area(graph)),
                 l = Math.abs(graph.entity('l').area(graph));
 
-            expect(s).to.be.lt(l);
+            expect(s).toBeLessThan(l);
         });
 
         it('treats unclosed areas as if they were closed', function () {
