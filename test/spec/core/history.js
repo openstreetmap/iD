@@ -377,15 +377,15 @@ describe('iD.coreHistory', function () {
             var node2_upd = node2.update({tags: {k: 'v'}});
 
             expect(json.version).toEqual(3);
-            expect(json.entities).to.deep.own.include(node_1);
+            expect(json.entities).toContainEqual(expect.objectContaining(node_1));
             expect(json.entities).to.not.include(node1);
-            expect(json.entities).to.deep.own.include(node2_upd);
+            expect(json.entities).toContainEqual(expect.objectContaining(node2_upd));
             expect(json.entities).to.not.include(node3);
 
             expect(json.baseEntities).to.not.include(node_1);
             expect(json.baseEntities).to.not.include(node1);
-            expect(json.baseEntities).to.deep.own.include(node2);
-            expect(json.baseEntities).to.deep.own.include(node3);
+            expect(json.baseEntities).toContainEqual(expect.objectContaining(node2));
+            expect(json.baseEntities).toContainEqual(expect.objectContaining(node3));
         });
     });
 
