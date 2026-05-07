@@ -1,11 +1,11 @@
 describe('iD.osmEntity', function () {
     it('returns a subclass of the appropriate type', function () {
-        expect(iD.osmEntity({type: 'node'})).be.an.instanceOf(iD.osmNode);
-        expect(iD.osmEntity({type: 'way'})).be.an.instanceOf(iD.osmWay);
-        expect(iD.osmEntity({type: 'relation'})).be.an.instanceOf(iD.osmRelation);
-        expect(iD.osmEntity({id: 'n1'})).be.an.instanceOf(iD.osmNode);
-        expect(iD.osmEntity({id: 'w1'})).be.an.instanceOf(iD.osmWay);
-        expect(iD.osmEntity({id: 'r1'})).be.an.instanceOf(iD.osmRelation);
+        expect(iD.osmEntity({type: 'node'})).toBeInstanceOf(iD.osmNode);
+        expect(iD.osmEntity({type: 'way'})).toBeInstanceOf(iD.osmWay);
+        expect(iD.osmEntity({type: 'relation'})).toBeInstanceOf(iD.osmRelation);
+        expect(iD.osmEntity({id: 'n1'})).toBeInstanceOf(iD.osmNode);
+        expect(iD.osmEntity({id: 'w1'})).toBeInstanceOf(iD.osmWay);
+        expect(iD.osmEntity({id: 'r1'})).toBeInstanceOf(iD.osmRelation);
     });
 
     if (iD.debug) {
