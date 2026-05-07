@@ -416,7 +416,7 @@ describe('iD.presetIndex', function () {
                 expect(morePresetKeys.length).toEqual(external.length);
 
                 morePresetKeys.forEach(function(presetID) {
-                    expect(external.indexOf(presetID)).to.be.at.least(0);
+                    expect(external.indexOf(presetID)).toBeGreaterThanOrEqual(0);
                 });
             });
 
