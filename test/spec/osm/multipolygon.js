@@ -194,13 +194,13 @@ describe('iD.osmJoinWays', function() {
         var node = new iD.osmNode({loc: [0, 0]});
         var member = {id: 'n', type: 'node'};
         var graph = new iD.coreGraph([node]);
-        expect(iD.osmJoinWays([member], graph)).to.eql([]);
+        expect(iD.osmJoinWays([member], graph)).toHaveLength(0);
     });
 
     it('ignores incomplete members', function() {
         var member = {id: 'w', type: 'way'};
         var graph = new iD.coreGraph();
-        expect(iD.osmJoinWays([member], graph)).to.eql([]);
+        expect(iD.osmJoinWays([member], graph)).toHaveLength(0);
     });
 
     it('returns multiple arrays for disjoint ways', function() {
