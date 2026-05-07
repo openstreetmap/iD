@@ -111,8 +111,8 @@ describe('iD.actionRevert', function() {
             expect(graph.hasEntity('w-1'), 'w-1 removed').toBeUndefined();
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
-            expect(graph.parentWays(n1), 'n1 has no parent ways').to.be.empty;
-            expect(graph.parentWays(n2), 'n-2 has no parent ways').to.be.empty;
+            expect(graph.parentWays(n1), 'n1 has no parent ways').toEqual([]);
+            expect(graph.parentWays(n2), 'n-2 has no parent ways').toEqual([]);
         });
 
         it('reverts an updated way, preserves new and existing child nodes', function() {
@@ -127,7 +127,7 @@ describe('iD.actionRevert', function() {
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
             expect(graph.parentWays(n1), 'n1 has w1 as parent way').to.deep.equal([w1]);
-            expect(graph.parentWays(n2), 'n-2 has no parent ways').to.be.empty;
+            expect(graph.parentWays(n2), 'n-2 has no parent ways').toEqual([]);
         });
 
         it('restores a deleted way, preserves new and existing child nodes', function() {
@@ -142,7 +142,7 @@ describe('iD.actionRevert', function() {
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
             expect(graph.parentWays(n1), 'n1 has w1 as parent way').to.deep.equal([w1]);
-            expect(graph.parentWays(n2), 'n-2 has no parent ways').to.be.empty;
+            expect(graph.parentWays(n2), 'n-2 has no parent ways').toEqual([]);
         });
     });
 
@@ -157,8 +157,8 @@ describe('iD.actionRevert', function() {
             expect(graph.hasEntity('r-1'), 'r-1 removed').toBeUndefined();
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
-            expect(graph.parentRelations(n1), 'n1 has no parent relations').to.be.empty;
-            expect(graph.parentRelations(n2), 'n-2 has no parent relations').to.be.empty;
+            expect(graph.parentRelations(n1), 'n1 has no parent relations').toEqual([]);
+            expect(graph.parentRelations(n2), 'n-2 has no parent relations').toEqual([]);
         });
 
         it('reverts an updated relation, preserves new and existing members', function() {
@@ -173,7 +173,7 @@ describe('iD.actionRevert', function() {
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
             expect(graph.parentRelations(n1), 'n1 has r1 as parent relation').to.deep.equal([r1]);
-            expect(graph.parentRelations(n2), 'n-2 has no parent relations').to.be.empty;
+            expect(graph.parentRelations(n2), 'n-2 has no parent relations').toEqual([]);
         });
 
         it('restores a deleted relation, preserves new and existing members', function() {
@@ -188,7 +188,7 @@ describe('iD.actionRevert', function() {
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
             expect(graph.parentRelations(n1), 'n1 has r1 as parent relation').to.deep.equal([r1]);
-            expect(graph.parentRelations(n2), 'n-2 has no parent relations').to.be.empty;
+            expect(graph.parentRelations(n2), 'n-2 has no parent relations').toEqual([]);
         });
     });
 

@@ -156,7 +156,7 @@ describe('maprules', function() {
                 absence:'name',
                 warning:'\'Marketplace\' preset must be coupled with name'
             };
-            expect(iD.serviceMapRules.validationRules()).to.be.empty;
+            expect(iD.serviceMapRules.validationRules()).toEqual([]);
             iD.serviceMapRules.addRule(selector);
             expect(iD.serviceMapRules.validationRules().length).to.eql(1);
         });
@@ -164,7 +164,7 @@ describe('maprules', function() {
     describe('#clearRules', function() {
         it('clears _validationRules array', function() {
             iD.serviceMapRules.clearRules();
-            expect(iD.serviceMapRules.validationRules()).to.be.empty;
+            expect(iD.serviceMapRules.validationRules()).toEqual([]);
 
             iD.serviceMapRules.addRule({
                 geometry:'node',
@@ -175,7 +175,7 @@ describe('maprules', function() {
             expect(iD.serviceMapRules.validationRules().length).to.eql(1);
 
             iD.serviceMapRules.clearRules();
-            expect(iD.serviceMapRules.validationRules()).to.be.empty;
+            expect(iD.serviceMapRules.validationRules()).toEqual([]);
         });
     });
 
