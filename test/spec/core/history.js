@@ -236,15 +236,15 @@ describe('iD.coreHistory', function () {
             history.pauseChangeDispatch();
 
             history.perform(actionNoop, 'perform');
-            expect(spy).to.have.not.been.called;
+            expect(spy).not.toHaveBeenCalled();
             history.replace(actionNoop, 'replace');
-            expect(spy).to.have.not.been.called;
+            expect(spy).not.toHaveBeenCalled();
             history.undo();
-            expect(spy).to.have.not.been.called;
+            expect(spy).not.toHaveBeenCalled();
             history.redo();
-            expect(spy).to.have.not.been.called;
+            expect(spy).not.toHaveBeenCalled();
             history.pop();
-            expect(spy).to.have.not.been.called;
+            expect(spy).not.toHaveBeenCalled();
 
             var diff = history.resumeChangeDispatch();
             expect(spy).toHaveBeenCalledExactlyOnceWith(diff);
@@ -255,7 +255,7 @@ describe('iD.coreHistory', function () {
             history.on('change', spy);
 
             history.resumeChangeDispatch();
-            expect(spy).to.have.not.been.called;
+            expect(spy).not.toHaveBeenCalled();
         });
 
         it('uses earliest difference if pause called multiple times', function() {
