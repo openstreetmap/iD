@@ -109,7 +109,7 @@ describe('iD.osmEntity', function () {
         });
 
         it('doesn\'t copy prototype properties', function () {
-            expect(new iD.osmNode().update({})).not.to.have.ownProperty('update');
+            expect(Object.hasOwn(new iD.osmNode().update({}), 'update')).toBe(false);
         });
 
         it('sets v to 1 if previously undefined', function() {

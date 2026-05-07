@@ -111,7 +111,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([new iD.osmNode({id: 'n'})], [graph]);
 
-            expect(graph.entities).not.to.have.ownProperty('n');
+            expect(Object.hasOwn(graph.entities, 'n')).toBe(false);
         });
 
         it('updates parentWays', function () {
