@@ -12,7 +12,7 @@ describe('iD.actionDeleteWay', function() {
             action   = iD.actionDeleteWay(way.id),
             graph    = new iD.coreGraph([way, relation]).update(action),
             ids      = graph.entity(relation.id).members.map(function (m) { return m.id; });
-        expect(ids).not.to.contain(way.id);
+        expect(ids).not.toContain(way.id);
     });
 
     it('deletes member nodes not referenced by another parent', function() {
