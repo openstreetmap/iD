@@ -148,11 +148,11 @@ describe('iD.geo - vector', function() {
 
     describe('geoVecProject', function() {
         it('returns null for a degenerate path (no nodes)', function() {
-            expect(iD.geoVecProject([0, 1], [])).to.be.null;
+            expect(iD.geoVecProject([0, 1], [])).toBeNull();
         });
 
         it('returns null for a degenerate path (single node)', function() {
-            expect(iD.geoVecProject([0, 1], [0, 0])).to.be.null;
+            expect(iD.geoVecProject([0, 1], [0, 0])).toBeNull();
         });
 
         it('calculates the orthogonal projection of a point onto a path', function() {

@@ -40,7 +40,7 @@ describe('iD.units', function() {
 
         it('handles invalid input', function() {
             var result = iD.dmsMatcher('!@#$');
-            expect(result).to.be.null;
+            expect(result).toBeNull();
         });
     });
 

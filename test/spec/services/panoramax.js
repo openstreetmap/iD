@@ -154,7 +154,7 @@ describe('iD.servicePanoramax', function() {
         it('handle invalid image data', function() {
             const invalidImage = { id: null, sequence_id: null };
             panoramax.setActiveImage(invalidImage);
-            expect(panoramax.getActiveImage()).to.be.null;
+            expect(panoramax.getActiveImage()).toBeNull();
         });
 
         it('return empty array when no images are available', function() {

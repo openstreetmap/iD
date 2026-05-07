@@ -209,7 +209,7 @@ describe('iD.osmWay', function() {
                 new iD.osmNode({id: 'e', loc: [ 0.0002,  0.0002]}),
                 new iD.osmWay({id: 'w', nodes: ['a','b','c','d','e']})
             ]);
-            expect(graph.entity('w').isConvex(graph)).to.be.null;
+            expect(graph.entity('w').isConvex(graph)).toBeNull();
         });
 
         it('returns null for degenerate ways', function() {
@@ -217,7 +217,7 @@ describe('iD.osmWay', function() {
                 new iD.osmNode({id: 'a', loc: [0.0000,  0.0000]}),
                 new iD.osmWay({id: 'w', nodes: ['a','a']})
             ]);
-            expect(graph.entity('w').isConvex(graph)).to.be.null;
+            expect(graph.entity('w').isConvex(graph)).toBeNull();
         });
     });
 
@@ -362,12 +362,12 @@ describe('iD.osmWay', function() {
         });
 
         it('returns null when tag does not have implied sidedness', function() {
-            expect(new iD.osmWay({tags: { natural: 'ridge' }}).sidednessIdentifier()).to.be.null;
-            expect(new iD.osmWay({tags: { barrier: 'fence' }}).sidednessIdentifier()).to.be.null;
-            expect(new iD.osmWay({tags: { man_made: 'dyke' }}).sidednessIdentifier()).to.be.null;
-            expect(new iD.osmWay({tags: { highway: 'motorway' }}).sidednessIdentifier()).to.be.null;
-            expect(new iD.osmWay({tags: { 'demolished:highway': 'motorway' }}).sidednessIdentifier()).to.be.null;
-            expect(new iD.osmWay({tags: { 'not:natural': 'cliff' }}).sidednessIdentifier()).to.be.null;
+            expect(new iD.osmWay({tags: { natural: 'ridge' }}).sidednessIdentifier()).toBeNull();
+            expect(new iD.osmWay({tags: { barrier: 'fence' }}).sidednessIdentifier()).toBeNull();
+            expect(new iD.osmWay({tags: { man_made: 'dyke' }}).sidednessIdentifier()).toBeNull();
+            expect(new iD.osmWay({tags: { highway: 'motorway' }}).sidednessIdentifier()).toBeNull();
+            expect(new iD.osmWay({tags: { 'demolished:highway': 'motorway' }}).sidednessIdentifier()).toBeNull();
+            expect(new iD.osmWay({tags: { 'not:natural': 'cliff' }}).sidednessIdentifier()).toBeNull();
         });
     });
 

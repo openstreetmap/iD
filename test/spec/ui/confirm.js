@@ -44,7 +44,7 @@ describe('iD.uiConfirm', function () {
         selection.close();
         await setTimeout(275);
         d3.timerFlush();
-        expect(selection.node().parentNode).to.be.null;
+        expect(selection.node().parentNode).toBeNull();
     });
 
     it('can be dismissed by clicking the close button', async () => {
@@ -52,7 +52,7 @@ describe('iD.uiConfirm', function () {
         happen.click(selection.select('button.close').node());
         await setTimeout(275);
         d3.timerFlush();
-        expect(selection.node().parentNode).to.be.null;
+        expect(selection.node().parentNode).toBeNull();
     });
 
     it('can be dismissed by pressing escape', async () => {
@@ -61,7 +61,7 @@ describe('iD.uiConfirm', function () {
         happen.keyup(document, {keyCode: 27});
         await setTimeout(275);
         d3.timerFlush();
-        expect(selection.node().parentNode).to.be.null;
+        expect(selection.node().parentNode).toBeNull();
     });
 
     it('can be dismissed by pressing backspace', async () => {
@@ -70,7 +70,7 @@ describe('iD.uiConfirm', function () {
         happen.keyup(document, {keyCode: 8});
         await setTimeout(275);
         d3.timerFlush();
-        expect(selection.node().parentNode).to.be.null;
+        expect(selection.node().parentNode).toBeNull();
     });
 
     it('can be dismissed by clicking the ok button', async () => {
@@ -78,6 +78,6 @@ describe('iD.uiConfirm', function () {
         happen.click(selection.select('div.content div.buttons button.action').node());
         await setTimeout(275);
         d3.timerFlush();
-        expect(selection.node().parentNode).to.be.null;
+        expect(selection.node().parentNode).toBeNull();
     });
 });

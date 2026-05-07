@@ -53,11 +53,11 @@ describe('iD.geo - geometry', function() {
         projection.invert = projection;
 
         it('returns null for a degenerate way (no nodes)', function() {
-            expect(iD.geoChooseEdge([], [0, 0], projection)).to.be.null;
+            expect(iD.geoChooseEdge([], [0, 0], projection)).toBeNull();
         });
 
         it('returns null for a degenerate way (single node)', function() {
-            expect(iD.geoChooseEdge([new iD.osmNode({loc: [0, 0]})], [0, 0], projection)).to.be.null;
+            expect(iD.geoChooseEdge([new iD.osmNode({loc: [0, 0]})], [0, 0], projection)).toBeNull();
         });
 
         it('calculates the orthogonal projection of a point onto a segment', function() {
@@ -156,7 +156,7 @@ describe('iD.geo - geometry', function() {
                 new iD.osmNode({id: 'b', loc: [5, 0]}),
             ];
             var choice = iD.geoChooseEdge(nodes, [2, 2], projection, 'a');
-            expect(choice).to.be.null;
+            expect(choice).toBeNull();
         });
     });
 
@@ -358,17 +358,17 @@ describe('iD.geo - geometry', function() {
         it('returns null if lines are colinear with overlap', function() {
             var a = [[0, 0], [10, 0]];
             var b = [[-5, 0], [5, 0]];
-            expect(iD.geoLineIntersection(a, b)).to.be.null;
+            expect(iD.geoLineIntersection(a, b)).toBeNull();
         });
         it('returns null if lines are colinear but disjoint', function() {
             var a = [[5, 0], [10, 0]];
             var b = [[-10, 0], [-5, 0]];
-            expect(iD.geoLineIntersection(a, b)).to.be.null;
+            expect(iD.geoLineIntersection(a, b)).toBeNull();
         });
         it('returns null if lines are parallel', function() {
             var a = [[0, 0], [10, 0]];
             var b = [[0, 5], [10, 5]];
-            expect(iD.geoLineIntersection(a, b)).to.be.null;
+            expect(iD.geoLineIntersection(a, b)).toBeNull();
         });
         it('returns the intersection point between 2 lines', function() {
             var a = [[0, 0], [10, 0]];
@@ -378,7 +378,7 @@ describe('iD.geo - geometry', function() {
         it('returns null if lines are not parallel but not intersecting', function() {
             var a = [[0, 0], [10, 0]];
             var b = [[-5, 10], [-5, -10]];
-            expect(iD.geoLineIntersection(a, b)).to.be.null;
+            expect(iD.geoLineIntersection(a, b)).toBeNull();
         });
     });
 
@@ -479,7 +479,7 @@ describe('iD.geo - geometry', function() {
     describe('geoViewportEdge', function() {
         var dimensions = [1000, 1000];
         it('returns null if the point is not at the edge', function() {
-            expect(iD.geoViewportEdge([500, 500], dimensions)).to.be.null;
+            expect(iD.geoViewportEdge([500, 500], dimensions)).toBeNull();
         });
         it('nudges top edge', function() {
             expect(iD.geoViewportEdge([500, 5], dimensions)).to.eql([0, 10]);

@@ -170,7 +170,7 @@ describe('iD.presetIndex', function () {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             await presets.ensureLoaded();
-            expect(presets.addablePresetIDs()).to.be.null;
+            expect(presets.addablePresetIDs()).toBeNull();
         });
 
         it('can set and get addablePresetIDs', async () => {

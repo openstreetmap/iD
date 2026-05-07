@@ -29,7 +29,7 @@ describe('iD.uiModal', function () {
         selection.close();
         await setTimeout(275);
         d3.timerFlush();
-        expect(selection.node().parentNode).to.be.null;
+        expect(selection.node().parentNode).toBeNull();
     });
 
     it('can be dismissed by clicking the close button', async () => {
@@ -37,7 +37,7 @@ describe('iD.uiModal', function () {
         happen.click(selection.select('button.close').node());
         await setTimeout(275);
         d3.timerFlush();
-        expect(selection.node().parentNode).to.be.null;
+        expect(selection.node().parentNode).toBeNull();
     });
 
     it('can be dismissed by pressing escape', async () => {
@@ -46,7 +46,7 @@ describe('iD.uiModal', function () {
         happen.keyup(document, {keyCode: 27});
         await setTimeout(275);
         d3.timerFlush();
-        expect(selection.node().parentNode).to.be.null;
+        expect(selection.node().parentNode).toBeNull();
     });
 
     it('can be dismissed by pressing backspace', async () => {
@@ -55,7 +55,7 @@ describe('iD.uiModal', function () {
         happen.keyup(document, {keyCode: 8});
         await setTimeout(275);
         d3.timerFlush();
-        expect(selection.node().parentNode).to.be.null;
+        expect(selection.node().parentNode).toBeNull();
     });
 
 });

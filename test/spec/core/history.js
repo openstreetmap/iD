@@ -594,7 +594,7 @@ describe('iD.coreHistory', function () {
 
             var migratedData = await asyncPrefs.get('saved_history');
             expect(migratedData).to.deep.equal(testHistoryData);
-            expect(iD.prefs(oldKey)).to.be.null;
+            expect(iD.prefs(oldKey)).toBeNull();
         });
     });
 });
