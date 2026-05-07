@@ -1504,43 +1504,27 @@ button.preset-reset .label.flash-bg {
 }
 
 .form-field-has-direction-dial {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas:
-        "label dial"
-        "input dial";
-    align-items: stretch;
-    column-gap: 0;
-}
-
-.form-field-has-direction-dial > .field-label {
-    grid-area: label;
-    border-radius: 4px 0 0 0;
-}
-
-.form-field-has-direction-dial > .form-field-input-wrap {
-    grid-area: input;
-    border-radius: 0 0 0 4px;
+    /* Keep hook class for direction fields; layout is handled in input row. */
 }
 
 .form-field-has-direction-dial .direction-dial-wrap {
-    grid-area: dial;
     display: flex;
     flex-flow: row nowrap;
     flex: 0 0 auto;
-    width: min-content;
+    width: 32px;
     border: 1px solid var(--border-color);
     border-left: 0;
-    border-radius: 0 4px 4px 0;
-    background: var(--bg-color-2);
+    border-top-width: 0;
+    border-radius: 0;
+    background: var(--bg-color);
     justify-content: center;
     align-items: center;
-    padding: 3px;
+    padding: 2px;
 }
 
 .direction-dial {
-    width: 55px;
-    height: 55px;
+    width: 28px;
+    height: 28px;
     cursor: crosshair;
     outline: none;
 }
@@ -1553,7 +1537,8 @@ button.preset-reset .label.flash-bg {
 }
 
 @media (hover: hover) {
-    .direction-dial:not(.disabled):hover .direction-dial-ring {
+    .direction-dial:not(.disabled):hover .direction-dial-ring,
+    .direction-dial:not(.disabled).dragging .direction-dial-ring {
         stroke: var(--border-color);
     }
 }
@@ -1562,13 +1547,12 @@ button.preset-reset .label.flash-bg {
     stroke: var(--border-color);
 }
 
-.form-field-has-direction-dial .field-label .tag-reference-button {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+.form-field-has-direction-dial .form-field-input-wrap > button:last-of-type {
+    border-bottom-right-radius: 4px;
 }
 
-.form-field-has-direction-dial .form-field-input-wrap > button.increment:last-of-type {
-    border-bottom-right-radius: 0;
+.form-field-has-direction-dial .form-field-input-wrap > .form-field-button {
+    padding: 0;
 }
 
 .direction-dial-inner {
@@ -1581,7 +1565,8 @@ button.preset-reset .label.flash-bg {
 }
 
 @media (hover: hover) {
-    .direction-dial:not(.disabled):hover .direction-dial-center-dot {
+    .direction-dial:not(.disabled):hover .direction-dial-center-dot,
+    .direction-dial:not(.disabled).dragging .direction-dial-center-dot {
         fill-opacity: 1;
     }
 }
@@ -1599,7 +1584,8 @@ button.preset-reset .label.flash-bg {
 }
 
 @media (hover: hover) {
-    .direction-dial:not(.disabled):hover .direction-dial-line {
+    .direction-dial:not(.disabled):hover .direction-dial-line,
+    .direction-dial:not(.disabled).dragging .direction-dial-line {
         stroke-opacity: 1;
     }
 }

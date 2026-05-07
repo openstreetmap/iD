@@ -182,6 +182,7 @@ export function uiDirectionDial(): DirectionDial {
 
         dialMerge
             .classed('disabled', _disabled)
+            .classed('dragging', _isDragging)
             .attr('tabindex', _disabled ? null : 0);
 
         const dragBehavior = d3_drag<SVGSVGElement, DialSvgDatum>()

@@ -92,10 +92,17 @@ export function createDirectionFieldDialMount(
 
     return function mountFieldDirectionDial(fieldRoot: FormFieldRootSelection) {
         fieldRoot.classed('form-field-has-direction-dial', true);
-        const wrapSel = fieldRoot.selectAll<HTMLDivElement, number>('.direction-dial-wrap').data([0]);
+        const inputWrap = fieldRoot.select<HTMLElement>('.form-field-input-wrap');
+        if (inputWrap.empty()) {
+            fieldRoot.selectAll('.direction-dial-wrap').remove();
+            dialWrap = null;
+            return syncDialFromInput;
+        }
+
+        const wrapSel = inputWrap.selectAll<HTMLDivElement, number>('.direction-dial-wrap').data([0]);
         dialWrap = wrapSel
             .enter()
-            .insert('div', '.form-field-input-wrap')
+            .insert('div', '.form-field-button')
             .attr('class', 'direction-dial-wrap')
             .merge(wrapSel);
 
