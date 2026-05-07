@@ -771,7 +771,7 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '='])(graph);
 
-        expect(graph.hasEntity('s')).to.not.be.undefined;
+        expect(graph.hasEntity('s')).toBeDefined();
         expect(graph.entity('s').members.length).to.eql(1);
         expect(graph.entity('s').members[0]).to.eql(
             {id: '-', role: 'main', type: 'way'}
