@@ -82,17 +82,17 @@ describe('iD.geo - vector', function() {
             expect(iD.geoVecNormalize([1, 0])).to.eql([1, 0]);
             expect(iD.geoVecNormalize([5, 0])).to.eql([1, 0]);
             expect(iD.geoVecNormalize([-5, 0])).to.eql([-1, 0]);
-            expect(iD.geoVecNormalize([1, 1])[0]).to.be.closeTo(Math.sqrt(2)/2, 1e-6);
-            expect(iD.geoVecNormalize([1, 1])[1]).to.be.closeTo(Math.sqrt(2)/2, 1e-6);
+            expect(iD.geoVecNormalize([1, 1])[0]).toBeCloseTo(Math.sqrt(2)/2, 6);
+            expect(iD.geoVecNormalize([1, 1])[1]).toBeCloseTo(Math.sqrt(2)/2, 6);
         });
     });
 
     describe('geoVecAngle', function() {
         it('returns angle between a and b', function() {
-            expect(iD.geoVecAngle([0, 0], [1, 0])).to.be.closeTo(0, 1e-6);
-            expect(iD.geoVecAngle([0, 0], [0, 1])).to.be.closeTo(Math.PI / 2, 1e-6);
-            expect(iD.geoVecAngle([0, 0], [-1, 0])).to.be.closeTo(Math.PI, 1e-6);
-            expect(iD.geoVecAngle([0, 0], [0, -1])).to.be.closeTo(-Math.PI / 2, 1e-6);
+            expect(iD.geoVecAngle([0, 0], [1, 0])).toBeCloseTo(0, 6);
+            expect(iD.geoVecAngle([0, 0], [0, 1])).toBeCloseTo(Math.PI / 2, 6);
+            expect(iD.geoVecAngle([0, 0], [-1, 0])).toBeCloseTo(Math.PI, 6);
+            expect(iD.geoVecAngle([0, 0], [0, -1])).toBeCloseTo(-Math.PI / 2, 6);
         });
     });
 
@@ -123,7 +123,7 @@ describe('iD.geo - vector', function() {
         it('normalized dot product of 45 degrees', function() {
             var a = [0, 2];
             var b = [2, 2];
-            expect(iD.geoVecNormalizedDot(a, b)).to.be.closeTo(Math.sqrt(2)/2, 1e-6);
+            expect(iD.geoVecNormalizedDot(a, b)).toBeCloseTo(Math.sqrt(2)/2, 6);
         });
     });
 

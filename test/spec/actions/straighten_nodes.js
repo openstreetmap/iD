@@ -11,14 +11,14 @@ describe('iD.actionStraightenNodes', function () {
         ]);
 
         graph = iD.actionStraightenNodes(['a','b','c','d'], projection)(graph);
-        expect(graph.entity('a').loc[0]).to.be.closeTo(0, 1e-6);
-        expect(graph.entity('a').loc[1]).to.be.closeTo(0, 1e-6);
-        expect(graph.entity('b').loc[0]).to.be.closeTo(5, 1e-6);
-        expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);
-        expect(graph.entity('c').loc[0]).to.be.closeTo(10, 1e-6);  // doesn't delete untagged
-        expect(graph.entity('c').loc[1]).to.be.closeTo(0, 1e-6);   // doesn't delete untagged
-        expect(graph.entity('d').loc[0]).to.be.closeTo(15, 1e-6);
-        expect(graph.entity('d').loc[1]).to.be.closeTo(0, 1e-6);
+        expect(graph.entity('a').loc[0]).toBeCloseTo(0, 6);
+        expect(graph.entity('a').loc[1]).toBeCloseTo(0, 6);
+        expect(graph.entity('b').loc[0]).toBeCloseTo(5, 6);
+        expect(graph.entity('b').loc[1]).toBeCloseTo(0, 6);
+        expect(graph.entity('c').loc[0]).toBeCloseTo(10, 6);  // doesn't delete untagged
+        expect(graph.entity('c').loc[1]).toBeCloseTo(0, 6);   // doesn't delete untagged
+        expect(graph.entity('d').loc[0]).toBeCloseTo(15, 6);
+        expect(graph.entity('d').loc[1]).toBeCloseTo(0, 6);
     });
 
 
@@ -36,14 +36,14 @@ describe('iD.actionStraightenNodes', function () {
             ]);
 
             graph = iD.actionStraightenNodes(['a','b','c','d'], projection)(graph, 0);
-            expect(graph.entity('a').loc[0]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('a').loc[1]).to.be.closeTo(-1, 1e-6);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(5, 1e-6);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(1, 1e-6);
-            expect(graph.entity('c').loc[0]).to.be.closeTo(10, 1e-6);   // doesn't delete untagged
-            expect(graph.entity('c').loc[1]).to.be.closeTo(-1, 1e-6);   // doesn't delete untagged
-            expect(graph.entity('d').loc[0]).to.be.closeTo(15, 1e-6);
-            expect(graph.entity('d').loc[1]).to.be.closeTo(1, 1e-6);
+            expect(graph.entity('a').loc[0]).toBeCloseTo(0, 6);
+            expect(graph.entity('a').loc[1]).toBeCloseTo(-1, 6);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(5, 6);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(1, 6);
+            expect(graph.entity('c').loc[0]).toBeCloseTo(10, 6);   // doesn't delete untagged
+            expect(graph.entity('c').loc[1]).toBeCloseTo(-1, 6);   // doesn't delete untagged
+            expect(graph.entity('d').loc[0]).toBeCloseTo(15, 6);
+            expect(graph.entity('d').loc[1]).toBeCloseTo(1, 6);
         });
 
         it('straighten at t = 0.5', function() {
@@ -55,14 +55,14 @@ describe('iD.actionStraightenNodes', function () {
             ]);
 
             graph = iD.actionStraightenNodes(['a','b','c','d'], projection)(graph, 0.5);
-            expect(graph.entity('a').loc[0]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('a').loc[1]).to.be.closeTo(-0.5, 1e-6);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(5, 1e-6);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(0.5, 1e-6);
-            expect(graph.entity('c').loc[0]).to.be.closeTo(10, 1e-6);   // doesn't delete untagged
-            expect(graph.entity('c').loc[1]).to.be.closeTo(-0.5, 1e-6);   // doesn't delete untagged
-            expect(graph.entity('d').loc[0]).to.be.closeTo(15, 1e-6);
-            expect(graph.entity('d').loc[1]).to.be.closeTo(0.5, 1e-6);
+            expect(graph.entity('a').loc[0]).toBeCloseTo(0, 6);
+            expect(graph.entity('a').loc[1]).toBeCloseTo(-0.5, 6);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(5, 6);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(0.5, 6);
+            expect(graph.entity('c').loc[0]).toBeCloseTo(10, 6);   // doesn't delete untagged
+            expect(graph.entity('c').loc[1]).toBeCloseTo(-0.5, 6);   // doesn't delete untagged
+            expect(graph.entity('d').loc[0]).toBeCloseTo(15, 6);
+            expect(graph.entity('d').loc[1]).toBeCloseTo(0.5, 6);
         });
 
         it('straighten at t = 1', function() {
@@ -74,14 +74,14 @@ describe('iD.actionStraightenNodes', function () {
             ]);
 
             graph = iD.actionStraightenNodes(['a','b','c','d'], projection)(graph, 1);
-            expect(graph.entity('a').loc[0]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('a').loc[1]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(5, 1e-6);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('c').loc[0]).to.be.closeTo(10, 1e-6);   // doesn't delete untagged
-            expect(graph.entity('c').loc[1]).to.be.closeTo(0, 1e-6);   // doesn't delete untagged
-            expect(graph.entity('d').loc[0]).to.be.closeTo(15, 1e-6);
-            expect(graph.entity('d').loc[1]).to.be.closeTo(0, 1e-6);
+            expect(graph.entity('a').loc[0]).toBeCloseTo(0, 6);
+            expect(graph.entity('a').loc[1]).toBeCloseTo(0, 6);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(5, 6);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(0, 6);
+            expect(graph.entity('c').loc[0]).toBeCloseTo(10, 6);   // doesn't delete untagged
+            expect(graph.entity('c').loc[1]).toBeCloseTo(0, 6);   // doesn't delete untagged
+            expect(graph.entity('d').loc[0]).toBeCloseTo(15, 6);
+            expect(graph.entity('d').loc[1]).toBeCloseTo(0, 6);
         });
     });
 

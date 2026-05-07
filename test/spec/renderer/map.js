@@ -54,7 +54,7 @@ describe('iD.Map', function() {
             map.zoomIn();
             await setTimeout(275);
             d3.timerFlush();
-            expect(map.zoom()).to.be.closeTo(5, 1e-6);
+            expect(map.zoom()).toBeCloseTo(5, 6);
         });
     });
 
@@ -64,7 +64,7 @@ describe('iD.Map', function() {
             map.zoomOut();
             await setTimeout(275);
             d3.timerFlush();
-            expect(map.zoom()).to.be.closeTo(3, 1e-6);
+            expect(map.zoom()).toBeCloseTo(3, 6);
         });
     });
 
@@ -77,11 +77,11 @@ describe('iD.Map', function() {
     describe('#center', function() {
         it('gets and sets center', function() {
             expect(map.center([0, 0])).to.equal(map);
-            expect(map.center()[0]).to.be.closeTo(0, 1e-6);
-            expect(map.center()[1]).to.be.closeTo(0, 1e-6);
+            expect(map.center()[0]).toBeCloseTo(0, 6);
+            expect(map.center()[1]).toBeCloseTo(0, 6);
             expect(map.center([10, 15])).to.equal(map);
-            expect(map.center()[0]).to.be.closeTo(10, 1e-6);
-            expect(map.center()[1]).to.be.closeTo(15, 1e-6);
+            expect(map.center()[0]).toBeCloseTo(10, 6);
+            expect(map.center()[1]).toBeCloseTo(15, 6);
         });
 
         it('dispatches move event when center changes', function() {
@@ -107,16 +107,16 @@ describe('iD.Map', function() {
             expect(map.centerEase([20, 20], 250)).to.equal(map);
             await setTimeout(275);
             d3.timerFlush();
-            expect(map.center()[0]).to.be.closeTo(20, 1e-6);
-            expect(map.center()[1]).to.be.closeTo(20, 1e-6);
+            expect(map.center()[0]).toBeCloseTo(20, 6);
+            expect(map.center()[1]).toBeCloseTo(20, 6);
         });
     });
 
     describe('#centerZoom', function() {
         it('gets and sets center and zoom', function() {
             expect(map.centerZoom([20, 25], 4)).to.equal(map);
-            expect(map.center()[0]).to.be.closeTo(20, 1e-6);
-            expect(map.center()[1]).to.be.closeTo(25, 1e-6);
+            expect(map.center()[0]).toBeCloseTo(20, 6);
+            expect(map.center()[1]).toBeCloseTo(25, 6);
             expect(map.zoom()).to.be.equal(4);
         });
     });
@@ -126,11 +126,11 @@ describe('iD.Map', function() {
             map.dimensions([100, 100])
                 .center([0, 0]);
 
-            expect(map.extent()[0][0]).to.be.closeTo(-17.5, 0.5);
-            expect(map.extent()[1][0]).to.be.closeTo(17.5, 0.5);
+            expect(map.extent()[0][0]).toBeCloseTo(-17.5, 0);
+            expect(map.extent()[1][0]).toBeCloseTo(17.5, 0);
             map.extent([[10, 1], [30, 1]]);
-            expect(map.extent()[0][0]).to.be.closeTo(10, 0.1);
-            expect(map.extent()[1][0]).to.be.closeTo(30, 0.1);
+            expect(map.extent()[0][0]).toBeCloseTo(10, 1);
+            expect(map.extent()[1][0]).toBeCloseTo(30, 1);
             map.extent([[-1, -40], [1, -20]]);
             expect(map.extent()[0][1]).toBeGreaterThan(-41);
             expect(map.extent()[0][1]).toBeLessThan(-39);

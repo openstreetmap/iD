@@ -3,10 +3,10 @@ describe('iD.geo - geometry', function() {
     describe('geoAngle', function() {
         it('returns angle between a and b', function() {
             var projection = function (_) { return _; };
-            expect(iD.geoAngle({loc:[0, 0]}, {loc:[1, 0]}, projection)).to.be.closeTo(0, 1e-6);
-            expect(iD.geoAngle({loc:[0, 0]}, {loc:[0, 1]}, projection)).to.be.closeTo(Math.PI / 2, 1e-6);
-            expect(iD.geoAngle({loc:[0, 0]}, {loc:[-1, 0]}, projection)).to.be.closeTo(Math.PI, 1e-6);
-            expect(iD.geoAngle({loc:[0, 0]}, {loc:[0, -1]}, projection)).to.be.closeTo(-Math.PI / 2, 1e-6);
+            expect(iD.geoAngle({loc:[0, 0]}, {loc:[1, 0]}, projection)).toBeCloseTo(0, 6);
+            expect(iD.geoAngle({loc:[0, 0]}, {loc:[0, 1]}, projection)).toBeCloseTo(Math.PI / 2, 6);
+            expect(iD.geoAngle({loc:[0, 0]}, {loc:[-1, 0]}, projection)).toBeCloseTo(Math.PI, 6);
+            expect(iD.geoAngle({loc:[0, 0]}, {loc:[0, -1]}, projection)).toBeCloseTo(-Math.PI / 2, 6);
         });
     });
 
@@ -30,10 +30,10 @@ describe('iD.geo - geometry', function() {
             var angle = Math.PI;
             var around = [0, 0];
             var result = iD.geoRotate(points, angle, around);
-            expect(result[0][0]).to.be.closeTo(-5, 1e-6);
-            expect(result[0][1]).to.be.closeTo(0, 1e-6);
-            expect(result[1][0]).to.be.closeTo(-5, 1e-6);
-            expect(result[1][1]).to.be.closeTo(-1, 1e-6);
+            expect(result[0][0]).toBeCloseTo(-5, 6);
+            expect(result[0][1]).toBeCloseTo(0, 6);
+            expect(result[1][0]).toBeCloseTo(-5, 6);
+            expect(result[1][1]).toBeCloseTo(-1, 6);
         });
 
         it('rotates points around [3, 0]', function() {
@@ -41,10 +41,10 @@ describe('iD.geo - geometry', function() {
             var angle = Math.PI;
             var around = [3, 0];
             var result = iD.geoRotate(points, angle, around);
-            expect(result[0][0]).to.be.closeTo(1, 1e-6);
-            expect(result[0][1]).to.be.closeTo(0, 1e-6);
-            expect(result[1][0]).to.be.closeTo(1, 1e-6);
-            expect(result[1][1]).to.be.closeTo(-1, 1e-6);
+            expect(result[0][0]).toBeCloseTo(1, 6);
+            expect(result[0][1]).toBeCloseTo(0, 6);
+            expect(result[1][0]).toBeCloseTo(1, 6);
+            expect(result[1][1]).toBeCloseTo(-1, 6);
         });
     });
 

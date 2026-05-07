@@ -5,10 +5,10 @@ describe('iD.geo - geography', function() {
             expect(iD.geoLatToMeters(0)).to.eql(0);
         });
         it('1 degree latitude is approx 111 km', function() {
-            expect(iD.geoLatToMeters(1)).to.be.closeTo(110946, 10);
+            expect(iD.geoLatToMeters(1)).toBeCloseTo(110946, -1);
         });
         it('-1 degree latitude is approx -111 km', function() {
-            expect(iD.geoLatToMeters(-1)).to.be.closeTo(-110946, 10);
+            expect(iD.geoLatToMeters(-1)).toBeCloseTo(-110946, -1);
         });
     });
 
@@ -17,21 +17,21 @@ describe('iD.geo - geography', function() {
             expect(iD.geoLonToMeters(0, 0)).to.eql(0);
         });
         it('distance of 1 degree longitude varies with latitude', function() {
-            expect(iD.geoLonToMeters(1,  0)).to.be.closeTo(111319, 10);
-            expect(iD.geoLonToMeters(1, 15)).to.be.closeTo(107526, 10);
-            expect(iD.geoLonToMeters(1, 30)).to.be.closeTo(96405, 10);
-            expect(iD.geoLonToMeters(1, 45)).to.be.closeTo(78714, 10);
-            expect(iD.geoLonToMeters(1, 60)).to.be.closeTo(55659, 10);
-            expect(iD.geoLonToMeters(1, 75)).to.be.closeTo(28811, 10);
+            expect(iD.geoLonToMeters(1,  0)).toBeCloseTo(111319, -1);
+            expect(iD.geoLonToMeters(1, 15)).toBeCloseTo(107526, -1);
+            expect(iD.geoLonToMeters(1, 30)).toBeCloseTo(96405, -1);
+            expect(iD.geoLonToMeters(1, 45)).toBeCloseTo(78714, -1);
+            expect(iD.geoLonToMeters(1, 60)).toBeCloseTo(55659, -1);
+            expect(iD.geoLonToMeters(1, 75)).toBeCloseTo(28811, -1);
             expect(iD.geoLonToMeters(1, 90)).to.eql(0);
         });
         it('distance of -1 degree longitude varies with latitude', function() {
-            expect(iD.geoLonToMeters(-1,  -0)).to.be.closeTo(-111319, 10);
-            expect(iD.geoLonToMeters(-1, -15)).to.be.closeTo(-107526, 10);
-            expect(iD.geoLonToMeters(-1, -30)).to.be.closeTo(-96405, 10);
-            expect(iD.geoLonToMeters(-1, -45)).to.be.closeTo(-78714, 10);
-            expect(iD.geoLonToMeters(-1, -60)).to.be.closeTo(-55659, 10);
-            expect(iD.geoLonToMeters(-1, -75)).to.be.closeTo(-28811, 10);
+            expect(iD.geoLonToMeters(-1,  -0)).toBeCloseTo(-111319, -1);
+            expect(iD.geoLonToMeters(-1, -15)).toBeCloseTo(-107526, -1);
+            expect(iD.geoLonToMeters(-1, -30)).toBeCloseTo(-96405, -1);
+            expect(iD.geoLonToMeters(-1, -45)).toBeCloseTo(-78714, -1);
+            expect(iD.geoLonToMeters(-1, -60)).toBeCloseTo(-55659, -1);
+            expect(iD.geoLonToMeters(-1, -75)).toBeCloseTo(-28811, -1);
             expect(iD.geoLonToMeters(-1, -90)).to.eql(0);
         });
     });
@@ -41,10 +41,10 @@ describe('iD.geo - geography', function() {
             expect(iD.geoMetersToLat(0)).to.eql(0);
         });
         it('111 km is approx 1 degree latitude', function() {
-            expect(iD.geoMetersToLat(110946)).to.be.closeTo(1, 0.0001);
+            expect(iD.geoMetersToLat(110946)).toBeCloseTo(1, 4);
         });
         it('-111 km is approx -1 degree latitude', function() {
-            expect(iD.geoMetersToLat(-110946)).to.be.closeTo(-1, 0.0001);
+            expect(iD.geoMetersToLat(-110946)).toBeCloseTo(-1, 4);
         });
     });
 
@@ -53,21 +53,21 @@ describe('iD.geo - geography', function() {
             expect(iD.geoMetersToLon(0, 0)).to.eql(0);
         });
         it('distance of 1 degree longitude varies with latitude', function() {
-            expect(iD.geoMetersToLon(111319,  0)).to.be.closeTo(1, 1e-4);
-            expect(iD.geoMetersToLon(107526, 15)).to.be.closeTo(1, 1e-4);
-            expect(iD.geoMetersToLon(96405,  30)).to.be.closeTo(1, 1e-4);
-            expect(iD.geoMetersToLon(78714,  45)).to.be.closeTo(1, 1e-4);
-            expect(iD.geoMetersToLon(55659,  60)).to.be.closeTo(1, 1e-4);
-            expect(iD.geoMetersToLon(28811,  75)).to.be.closeTo(1, 1e-4);
+            expect(iD.geoMetersToLon(111319,  0)).toBeCloseTo(1, 4);
+            expect(iD.geoMetersToLon(107526, 15)).toBeCloseTo(1, 4);
+            expect(iD.geoMetersToLon(96405,  30)).toBeCloseTo(1, 4);
+            expect(iD.geoMetersToLon(78714,  45)).toBeCloseTo(1, 4);
+            expect(iD.geoMetersToLon(55659,  60)).toBeCloseTo(1, 4);
+            expect(iD.geoMetersToLon(28811,  75)).toBeCloseTo(1, 4);
             expect(iD.geoMetersToLon(1, 90)).to.eql(0);
         });
         it('distance of -1 degree longitude varies with latitude', function() {
-            expect(iD.geoMetersToLon(-111319,  -0)).to.be.closeTo(-1, 1e-4);
-            expect(iD.geoMetersToLon(-107526, -15)).to.be.closeTo(-1, 1e-4);
-            expect(iD.geoMetersToLon(-96405,  -30)).to.be.closeTo(-1, 1e-4);
-            expect(iD.geoMetersToLon(-78714,  -45)).to.be.closeTo(-1, 1e-4);
-            expect(iD.geoMetersToLon(-55659,  -60)).to.be.closeTo(-1, 1e-4);
-            expect(iD.geoMetersToLon(-28811,  -75)).to.be.closeTo(-1, 1e-4);
+            expect(iD.geoMetersToLon(-111319,  -0)).toBeCloseTo(-1, 4);
+            expect(iD.geoMetersToLon(-107526, -15)).toBeCloseTo(-1, 4);
+            expect(iD.geoMetersToLon(-96405,  -30)).toBeCloseTo(-1, 4);
+            expect(iD.geoMetersToLon(-78714,  -45)).toBeCloseTo(-1, 4);
+            expect(iD.geoMetersToLon(-55659,  -60)).toBeCloseTo(-1, 4);
+            expect(iD.geoMetersToLon(-28811,  -75)).toBeCloseTo(-1, 4);
             expect(iD.geoMetersToLon(-1, -90)).to.eql(0);
         });
     });
@@ -107,40 +107,40 @@ describe('iD.geo - geography', function() {
         it('a straight 1 degree line at the equator is approximately 111 km', function() {
             var a = [0, 0];
             var b = [1, 0];
-            expect(iD.geoSphericalDistance(a, b)).to.be.closeTo(111319, 10);
+            expect(iD.geoSphericalDistance(a, b)).toBeCloseTo(111319, -1);
         });
         it('a pythagorean triangle is (nearly) right', function() {
             var a = [0, 0];
             var b = [4, 3];
-            expect(iD.geoSphericalDistance(a, b)).to.be.closeTo(555804, 10);
+            expect(iD.geoSphericalDistance(a, b)).toBeCloseTo(555804, -1);
         });
         it('east-west distances at high latitude are shorter', function() {
             var a = [0, 60];
             var b = [1, 60];
-            expect(iD.geoSphericalDistance(a, b)).to.be.closeTo(55659, 10);
+            expect(iD.geoSphericalDistance(a, b)).toBeCloseTo(55659, -1);
         });
         it('north-south distances at high latitude are not shorter', function() {
             var a = [0, 60];
             var b = [0, 61];
-            expect(iD.geoSphericalDistance(a, b)).to.be.closeTo(110946, 10);
+            expect(iD.geoSphericalDistance(a, b)).toBeCloseTo(110946, -1);
         });
     });
 
     describe('geoZoomToScale', function() {
         it('converts from zoom to projection scale (tileSize = 256)', function() {
-            expect(iD.geoZoomToScale(17)).to.be.closeTo(5340353.715440872, 1e-6);
+            expect(iD.geoZoomToScale(17)).toBeCloseTo(5340353.715440872, 6);
         });
         it('converts from zoom to projection scale (tileSize = 512)', function() {
-            expect(iD.geoZoomToScale(17, 512)).to.be.closeTo(10680707.430881744, 1e-6);
+            expect(iD.geoZoomToScale(17, 512)).toBeCloseTo(10680707.430881744, 6);
         });
     });
 
     describe('geoScaleToZoom', function() {
         it('converts from projection scale to zoom (tileSize = 256)', function() {
-            expect(iD.geoScaleToZoom(5340353.715440872)).to.be.closeTo(17, 1e-6);
+            expect(iD.geoScaleToZoom(5340353.715440872)).toBeCloseTo(17, 6);
         });
         it('converts from projection scale to zoom (tileSize = 512)', function() {
-            expect(iD.geoScaleToZoom(10680707.430881744, 512)).to.be.closeTo(17, 1e-6);
+            expect(iD.geoScaleToZoom(10680707.430881744, 512)).toBeCloseTo(17, 6);
         });
     });
 

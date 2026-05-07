@@ -2,40 +2,40 @@ describe('iD.units', function() {
     describe('dmsMatcher', function() {
         it('parses D M SS format', function() {
             var result = iD.dmsMatcher('35 11 10.1 , 136 49 53.8');
-            expect(result[0]).to.be.closeTo( 35.18614, 0.00001);
-            expect(result[1]).to.be.closeTo(136.83161, 0.00001);
+            expect(result[0]).toBeCloseTo( 35.18614, 5);
+            expect(result[1]).toBeCloseTo(136.83161, 5);
         });
         it('parses D M SS format, with negative value', function() {
             var result = iD.dmsMatcher('-35 11 10.1 , -136 49 53.8');
-            expect(result[0]).to.be.closeTo( -35.18614, 0.00001);
-            expect(result[1]).to.be.closeTo(-136.83161, 0.00001);
+            expect(result[0]).toBeCloseTo( -35.18614, 5);
+            expect(result[1]).toBeCloseTo(-136.83161, 5);
         });
 
         it('parses D MM format', function() {
             var result = iD.dmsMatcher('35 11.1683 , 136 49.8966');
-            expect(result[0]).to.be.closeTo( 35.18614, 0.00001);
-            expect(result[1]).to.be.closeTo(136.83161, 0.00001);
+            expect(result[0]).toBeCloseTo( 35.18614, 5);
+            expect(result[1]).toBeCloseTo(136.83161, 5);
         });
         it('parses D MM format, with negative value', function() {
             var result = iD.dmsMatcher('-35 11.1683 , -136 49.8966');
-            expect(result[0]).to.be.closeTo( -35.18614, 0.00001);
-            expect(result[1]).to.be.closeTo(-136.83161, 0.00001);
+            expect(result[0]).toBeCloseTo( -35.18614, 5);
+            expect(result[1]).toBeCloseTo(-136.83161, 5);
         });
         it('parses z/x/y coordinate', () => {
             var result = iD.dmsMatcher('2/-1.23/34.44');
-            expect(result[0]).to.be.closeTo(-1.23, 0.00001);
-            expect(result[1]).to.be.closeTo(34.44, 0.00001);
+            expect(result[0]).toBeCloseTo(-1.23, 5);
+            expect(result[1]).toBeCloseTo(34.44, 5);
             expect(result[2]).to.eql(2);
         });
         it('parses x/y coordinate', () => {
             var result = iD.dmsMatcher('-1.23/34.44', 'de');
-            expect(result[0]).to.be.closeTo(-1.23, 0.00001);
-            expect(result[1]).to.be.closeTo(34.44, 0.00001);
+            expect(result[0]).toBeCloseTo(-1.23, 5);
+            expect(result[1]).toBeCloseTo(34.44, 5);
         });
         it('parses coordinate with localized numbers', () => {
             var result = iD.dmsMatcher('49,4109399, 8,7147086', 'de');
-            expect(result[0]).to.be.closeTo(49.4109399, 0.00001);
-            expect(result[1]).to.be.closeTo( 8.7147086, 0.00001);
+            expect(result[0]).toBeCloseTo(49.4109399, 5);
+            expect(result[1]).toBeCloseTo( 8.7147086, 5);
         });
 
         it('handles invalid input', function() {

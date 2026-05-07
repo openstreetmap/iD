@@ -28,10 +28,10 @@ describe('iD.rendererBackgroundSource', function() {
         expect(result.HEIGHT).to.equal('256');
 
         var bbox = result.BBOX.split(',');
-        expect(+bbox[0]).to.be.closeTo(-20037508.34, 1e-3);
-        expect(+bbox[1]).to.be.closeTo(0, 1e-3);
-        expect(+bbox[2]).to.be.closeTo(-10018754.17, 1e-3);
-        expect(+bbox[3]).to.be.closeTo(10018754.17, 1e-3);
+        expect(+bbox[0]).toBeCloseTo(-20037508.34, 3);
+        expect(+bbox[1]).toBeCloseTo(0, 3);
+        expect(+bbox[2]).toBeCloseTo(-10018754.17, 3);
+        expect(+bbox[3]).toBeCloseTo(10018754.17, 3);
     });
 
     it('supports subdomains', function() {

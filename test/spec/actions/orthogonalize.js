@@ -690,10 +690,10 @@ describe('iD.actionOrthogonalize', function () {
 
             graph = iD.actionOrthogonalize('-', projection)(graph, 0);
             expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'e', 'f', 'a']);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-6);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(0.01, 1e-6);
-            expect(graph.entity('c').loc[0]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('c').loc[1]).to.be.closeTo(-0.01, 1e-6);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(1, 6);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(0.01, 6);
+            expect(graph.entity('c').loc[0]).toBeCloseTo(2, 6);
+            expect(graph.entity('c').loc[1]).toBeCloseTo(-0.01, 6);
 
         });
 
@@ -710,10 +710,10 @@ describe('iD.actionOrthogonalize', function () {
 
             graph = iD.actionOrthogonalize('-', projection)(graph, 0.5);
             expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'e', 'f', 'a']);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-3);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(0.005, 1e-3);
-            expect(graph.entity('c').loc[0]).to.be.closeTo(2, 1e-3);
-            expect(graph.entity('c').loc[1]).to.be.closeTo(-0.005, 1e-3);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(1, 3);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(0.005, 3);
+            expect(graph.entity('c').loc[0]).toBeCloseTo(2, 3);
+            expect(graph.entity('c').loc[1]).toBeCloseTo(-0.005, 3);
         });
 
         it('orthogonalize at t = 1', function() {
@@ -729,8 +729,8 @@ describe('iD.actionOrthogonalize', function () {
 
             graph = iD.actionOrthogonalize('-', projection)(graph, 1);
             expect(graph.entity('-').nodes).to.eql(['a', 'b', 'd', 'e', 'f', 'a']);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(1, 2e-3);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(0, 2e-3);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(1, 3);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(0, 3);
             expect(graph.hasEntity('c')).to.eq(undefined);
         });
     });
