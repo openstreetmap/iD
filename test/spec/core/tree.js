@@ -205,7 +205,7 @@ describe('iD.coreTree', function() {
 
             graph = graph.replace(n1.move([1.1,1.1])).replace(n2.move([2.1,2.1]));
             var intersects = tree.intersects(extent, graph).map(function(e) { return e.id; });
-            expect(intersects).to.have.same.members(['n1','n2','w1']);
+            expect(intersects.sort()).toEqual(['n1','n2','w1']);
         });
 
         it('doesn\'t include removed entities', function() {
