@@ -21,7 +21,7 @@ describe('iD.uiSectionBackgroundList', function () {
         try {
             expect(() => {
                 iD.uiSectionBackgroundList(context);
-            }).not.to.throw();
+            }).not.toThrow();
         } finally {
             context.background().findSource = originalFindSource;
         }
@@ -56,7 +56,7 @@ describe('iD.uiSectionBackgroundList', function () {
 
             expect(() => {
                 iD.utilTriggerEvent(okButton, 'click');
-            }).not.to.throw();
+            }).not.toThrow();
 
         } finally {
             context.background().findSource = originalFindSource;
@@ -90,7 +90,7 @@ describe('iD.uiSectionBackgroundList', function () {
 
             expect(() => {
                 iD.utilTriggerEvent(okButton, 'click');
-            }).not.to.throw();
+            }).not.toThrow();
         } finally {
             context.background().findSource = originalFindSource;
         }
