@@ -242,8 +242,8 @@ describe('iD.rendererFeatures', function() {
             ids.forEach(function(id) {
                 var entity = graph.entity(id);
                 var geometry = entity.geometry(graph);
-                expect(features.getMatches(entity, graph, geometry), 'doMatch: ' + id)
-                    .to.have.property(rule);
+                const matches = features.getMatches(entity, graph, geometry);
+                expect(matches).toHaveProperty(rule);
             });
         }
 
@@ -251,8 +251,8 @@ describe('iD.rendererFeatures', function() {
             ids.forEach(function(id) {
                 var entity = graph.entity(id);
                 var geometry = entity.geometry(graph);
-                expect(features.getMatches(entity, graph, geometry), 'dontMatch: ' + id)
-                    .not.to.have.property(rule);
+                const matches = features.getMatches(entity, graph, geometry);
+                expect(matches).not.toHaveProperty(rule);
             });
         }
 
