@@ -263,9 +263,18 @@ export function uiDirectionDial(): DirectionDial {
             .classed('disabled', _disabled)
             .classed('dragging', _isDragging)
             .classed('expanded', _isDragging && _isExpandedDrag)
-            .style('width', _isDragging ? `${_dragDialDiameter}px` : null)
-            .style('height', _isDragging ? `${_dragDialDiameter}px` : null)
             .attr('tabindex', _disabled ? null : 0);
+
+        if (_isDragging) {
+            const dragDialSize = `${_dragDialDiameter}px`;
+            dialMerge
+                .style('width', dragDialSize)
+                .style('height', dragDialSize);
+        } else {
+            dialMerge
+                .style('width', null)
+                .style('height', null);
+        }
 
         const dragBehavior = d3_drag<SVGSVGElement, DialSvgDatum>()
             .on('start', function(this: SVGSVGElement, event: DialSvgDragEvent) {
