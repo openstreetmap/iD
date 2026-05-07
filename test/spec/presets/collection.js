@@ -64,9 +64,9 @@ describe('iD.presetCollection', function() {
 
     describe('#matchGeometry', function() {
         it('returns a new collection only containing presets matching a geometry', function() {
-            expect(c.matchGeometry('area').collection).to.include.members(
+            expect(c.matchGeometry('area').collection).toEqual(expect.arrayContaining(
                 [p.area, p.residential, p.park, p.soccer, p.football]
-            );
+            ));
         });
     });
 
