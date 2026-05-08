@@ -43,11 +43,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* Restore dedicated rendering of ski pistes and building parts ([#12297], thanks [@matkoniecz])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
+
+[#12297]: https://github.com/openstreetmap/iD/issues/12297
 
 
 # 2.40.0
