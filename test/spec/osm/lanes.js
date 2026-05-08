@@ -211,7 +211,7 @@ describe('iD.Lanes', function() {
 
         it('returns correctly the lane:forward and lane:backward count', function() {
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:backward': 1 }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 2,
                     oneway: false,
                     forward: 1,
@@ -219,7 +219,7 @@ describe('iD.Lanes', function() {
                     bothways: 0
                 });
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 4, 'lanes:forward': 3, 'lanes:backward': 1 }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 4,
                     oneway: false,
                     forward: 3,
@@ -230,7 +230,7 @@ describe('iD.Lanes', function() {
 
         it('returns correctly the count if erroneous values are supplied', function() {
             expect(new iD.osmWay({tags: { highway: 'trunk', lanes: 2, 'lanes:forward': 3 }}).lanes().metadata, 'trunk lanes')
-                .to.include({
+                .toMatchObject({
                     count: 2,
                     oneway: false,
                     forward: 2,
@@ -241,7 +241,7 @@ describe('iD.Lanes', function() {
 
         it('returns correctly forward count when oneway=yes', function() {
             expect(new iD.osmWay({tags: { highway: 'trunk', lanes: 2, oneway: 'yes' }}).lanes().metadata, 'trunk lanes')
-                .to.include({
+                .toMatchObject({
                     count: 2,
                     oneway: true,
                     forward: 2,
@@ -252,7 +252,7 @@ describe('iD.Lanes', function() {
 
         it('returns correctly backward count the when oneway=-1', function() {
             expect(new iD.osmWay({tags: { highway: 'primary', lanes: 4, oneway: '-1' }}).lanes().metadata, 'primary lanes')
-                .to.include({
+                .toMatchObject({
                     count: 4,
                     oneway: true,
                     backward: 4,
@@ -263,7 +263,7 @@ describe('iD.Lanes', function() {
 
         it('skips provided lanes:forward value when oneway=yes', function() {
             expect(new iD.osmWay({tags: { highway: 'trunk', lanes: 2, oneway: 'yes', 'lanes:forward': 1 }}).lanes().metadata, 'trunk lanes')
-                .to.include({
+                .toMatchObject({
                     count: 2,
                     oneway: true,
                     forward: 2,
@@ -274,7 +274,7 @@ describe('iD.Lanes', function() {
 
         it('skips provided lanes:backward value when oneway=yes', function() {
             expect(new iD.osmWay({tags: { highway: 'trunk', lanes: 2, oneway: 'yes', 'lanes:backward': 1 }}).lanes().metadata, 'trunk lanes')
-                .to.include({
+                .toMatchObject({
                     count: 2,
                     oneway: true,
                     forward: 2,
@@ -285,7 +285,7 @@ describe('iD.Lanes', function() {
 
         it('returns correctly forward count if only backward is supplied', function() {
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 3, 'lanes:backward': 1, }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 3,
                     oneway: false,
                     forward: 2,
@@ -293,7 +293,7 @@ describe('iD.Lanes', function() {
                     bothways: 0
                 });
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 4, 'lanes:backward': 3, }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 4,
                     oneway: false,
                     forward: 1,
@@ -304,7 +304,7 @@ describe('iD.Lanes', function() {
 
         it('returns correctly backward count if only forward is supplied', function() {
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 3, 'lanes:forward': 1, }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 3,
                     oneway: false,
                     forward: 1,
@@ -312,7 +312,7 @@ describe('iD.Lanes', function() {
                     bothways: 0
                 });
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 2,
                     oneway: false,
                     forward: 1,
@@ -323,7 +323,7 @@ describe('iD.Lanes', function() {
 
         it('returns correctly backward count if forward and both_ways are supplied', function() {
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 3, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 3,
                     oneway: false,
                     forward: 1,
@@ -331,7 +331,7 @@ describe('iD.Lanes', function() {
                     bothways: 1
                 });
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 5,
                     oneway: false,
                     forward: 1,
@@ -342,7 +342,7 @@ describe('iD.Lanes', function() {
 
         it('returns correctly forward count if backward and both_ways are supplied', function() {
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 3, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 3,
                     oneway: false,
                     forward: 1,
@@ -350,7 +350,7 @@ describe('iD.Lanes', function() {
                     bothways: 1
                 });
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 5,
                     oneway: false,
                     forward: 3,
@@ -361,7 +361,7 @@ describe('iD.Lanes', function() {
 
         it('returns correctly the lane:both_ways count as 1', function() {
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 2,
                     oneway: false,
                     forward: 1,
@@ -372,7 +372,7 @@ describe('iD.Lanes', function() {
 
         it('returns correctly when lane:both_ways>1', function() {
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 2, 'lanes:backward': 2 }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 5,
                     oneway: false,
                     forward: 2,
@@ -383,7 +383,7 @@ describe('iD.Lanes', function() {
 
         it('returns correctly when lane:both_ways is 0 or Not a Number', function() {
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 0, 'lanes:backward': 3 }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 5,
                     oneway: false,
                     forward: 2,
@@ -391,7 +391,7 @@ describe('iD.Lanes', function() {
                     bothways: 0
                 });
             expect(new iD.osmWay({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:both_ways': 'none' }}).lanes().metadata, 'residential lanes')
-                .to.include({
+                .toMatchObject({
                     count: 2,
                     oneway: false,
                     forward: 1,
