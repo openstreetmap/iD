@@ -141,7 +141,7 @@ describe('iD.geo - vector', function() {
         it('2D cross product of colinear points is zero', function() {
             var a = [-2, 0];
             var b = [2, 0];
-            expect(iD.geoVecCross(a, b)).to.equal(0);
+            expect(iD.geoVecCross(a, b)).toEqual(-0);
         });
     });
 
