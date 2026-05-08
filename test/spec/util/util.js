@@ -57,7 +57,7 @@ describe('iD.util', function() {
         var oldTags = { a: 'one', b: 'two', c: 'three' };
         var newTags = { a: 'one', b: 'three', d: 'four' };
         var diff = iD.utilTagDiff(oldTags, newTags);
-        expect(diff).to.have.length(4);
+        expect(diff).toHaveLength(4);
         expect(diff[0]).toEqual({
             type: '-', key: 'b', oldVal: 'two', newVal: 'three', display: '- b=two'        // delete-modify
         });

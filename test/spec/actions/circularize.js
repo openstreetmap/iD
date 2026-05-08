@@ -51,7 +51,7 @@ describe('iD.actionCircularize', function () {
         graph = iD.actionCircularize('-', projection)(graph);
 
         expect(isCircular('-', graph)).toBeTruthy();
-        expect(graph.entity('-').nodes).to.have.length(MAX_VERTICES + 1);
+        expect(graph.entity('-').nodes).toHaveLength(MAX_VERTICES + 1);
     });
 
     it('creates fewer nodes for small features', function () {
@@ -70,7 +70,7 @@ describe('iD.actionCircularize', function () {
         graph = iD.actionCircularize('-', projection)(graph);
 
         expect(isCircular('-', graph, projection)).toBeTruthy();
-        expect(graph.entity('-').nodes).to.have.length(MIN_VERTICES + 1);
+        expect(graph.entity('-').nodes).toHaveLength(MIN_VERTICES + 1);
     });
 
     it('reuses existing nodes', function () {
@@ -253,7 +253,7 @@ describe('iD.actionCircularize', function () {
 
         expect(isCircular('-', graph)).toBeTruthy();
         expect(graph.entity('-').isConvex(graph)).toBe(true);
-        expect(graph.entity('-').nodes).to.have.length(MAX_VERTICES + 1);
+        expect(graph.entity('-').nodes).toHaveLength(MAX_VERTICES + 1);
     });
 
     it('circularizes a closed single line way', function () {
@@ -314,7 +314,7 @@ describe('iD.actionCircularize', function () {
                 ]);
             graph = iD.actionCircularize('-', projection)(graph, 0);
             expect(isCircular('-', graph)).toBeFalsy();
-            expect(graph.entity('-').nodes).to.have.length(MAX_VERTICES + 1);
+            expect(graph.entity('-').nodes).toHaveLength(MAX_VERTICES + 1);
             expect(area('-', graph)).toBeCloseTo(-4, 2);
         });
 
@@ -328,7 +328,7 @@ describe('iD.actionCircularize', function () {
                 ]);
             graph = iD.actionCircularize('-', projection)(graph, 0.5);
             expect(isCircular('-', graph)).toBeFalsy();
-            expect(graph.entity('-').nodes).to.have.length(MAX_VERTICES + 1);
+            expect(graph.entity('-').nodes).toHaveLength(MAX_VERTICES + 1);
             expect(area('-', graph)).toBeCloseTo(-4.74, 2);
         });
 
@@ -342,7 +342,7 @@ describe('iD.actionCircularize', function () {
                 ]);
             graph = iD.actionCircularize('-', projection)(graph, 1);
             expect(isCircular('-', graph)).toBeTruthy();
-            expect(graph.entity('-').nodes).to.have.length(MAX_VERTICES + 1);
+            expect(graph.entity('-').nodes).toHaveLength(MAX_VERTICES + 1);
             expect(area('-', graph)).toBeCloseTo(-6.24, 2);
         });
     });

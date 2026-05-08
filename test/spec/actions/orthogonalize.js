@@ -16,7 +16,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
-            expect(graph.entity('-').nodes).to.have.length(5);
+            expect(graph.entity('-').nodes).toHaveLength(5);
         });
 
         it('orthogonalizes a quad', function () {
@@ -32,7 +32,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
-            expect(graph.entity('-').nodes).to.have.length(5);
+            expect(graph.entity('-').nodes).toHaveLength(5);
         });
 
         it('orthogonalizes a triangle', function () {
@@ -48,7 +48,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
-            expect(graph.entity('-').nodes).to.have.length(4);
+            expect(graph.entity('-').nodes).toHaveLength(4);
         });
 
         it('deletes empty redundant nodes', function() {
@@ -82,7 +82,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
-            expect(graph.entity('-').nodes).to.have.length(6);
+            expect(graph.entity('-').nodes).toHaveLength(6);
             expect(graph.hasEntity('d')).to.not.eq(undefined);
         });
 
@@ -188,7 +188,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
-            expect(graph.entity('-').nodes).to.have.length(4);
+            expect(graph.entity('-').nodes).toHaveLength(4);
         });
 
         it('orthogonalizes a quad path', function () {
@@ -204,7 +204,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
-            expect(graph.entity('-').nodes).to.have.length(4);
+            expect(graph.entity('-').nodes).toHaveLength(4);
         });
 
         it('orthogonalizes a 3-point path', function () {
@@ -220,7 +220,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
-            expect(graph.entity('-').nodes).to.have.length(3);
+            expect(graph.entity('-').nodes).toHaveLength(3);
         });
 
         it('deletes empty redundant nodes', function() {
@@ -254,7 +254,7 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
             graph = iD.actionOrthogonalize('-', projection)(graph);
-            expect(graph.entity('-').nodes).to.have.length(5);
+            expect(graph.entity('-').nodes).toHaveLength(5);
             expect(graph.hasEntity('d')).toBeTruthy();
         });
 

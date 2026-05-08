@@ -18,7 +18,7 @@ describe.skip('iD.modeAddPoint', function() {
         it('adds a point', function() {
             happen.mousedown(context.surface().node(), {});
             happen.mouseup(window, {});
-            expect(context.history().changes().created).to.have.length(1);
+            expect(context.history().changes().created).toHaveLength(1);
             context.mode().exit();
             d3.select('window').on('click.draw-block', null);
         });

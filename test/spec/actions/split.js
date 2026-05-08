@@ -1726,7 +1726,7 @@ describe('iD.actionSplit', function () {
                 graph = iD.actionSplit('a', ['='])(graph);
                 expect(graph.entity('-').tags).toEqual({});
                 expect(graph.entity('=').tags).toEqual({});
-                expect(graph.parentRelations(graph.entity('-'))).to.have.length(1);
+                expect(graph.parentRelations(graph.entity('-'))).toHaveLength(1);
 
                 var relation = graph.parentRelations(graph.entity('-'))[0];
                 expect(relation.tags).toEqual({type: 'multipolygon', area: 'yes'});
@@ -1776,7 +1776,7 @@ describe('iD.actionSplit', function () {
                 expect(graph.entity('~').nodes).toEqual(['b', 'c']);
                 expect(graph.entity('-').nodes).toEqual(['a', 'b']);
                 expect(graph.entity('=').nodes).toEqual(['a', 'b', 'c', 'a']);
-                expect(graph.parentRelations(graph.entity('='))).to.have.length(0);
+                expect(graph.parentRelations(graph.entity('='))).toHaveLength(0);
             });
 
             it('preserves coastline tag on the ways when creating a multipolygon', function () {
@@ -1791,7 +1791,7 @@ describe('iD.actionSplit', function () {
                 graph = iD.actionSplit('a', ['='])(graph);
                 expect(graph.entity('-').tags).toEqual({natural: 'coastline'});
                 expect(graph.entity('=').tags).toEqual({natural: 'coastline'});
-                expect(graph.parentRelations(graph.entity('-'))).to.have.length(1);
+                expect(graph.parentRelations(graph.entity('-'))).toHaveLength(1);
 
                 var relation = graph.parentRelations(graph.entity('-'))[0];
                 expect(relation.tags).toEqual({type: 'multipolygon', area: 'yes'});

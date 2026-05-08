@@ -39,7 +39,7 @@ describe('iD.osmRelation', function () {
             var r = new iD.osmRelation({id: 'r'});
             var copies = {};
             var result = r.copy(null, copies);
-            expect(Object.keys(copies)).to.have.length(1);
+            expect(Object.keys(copies)).toHaveLength(1);
             expect(copies.r).toEqual(result);
         });
 
@@ -48,7 +48,7 @@ describe('iD.osmRelation', function () {
             var copies = {};
             var result1 = r.copy(null, copies);
             var result2 = r.copy(null, copies);
-            expect(Object.keys(copies)).to.have.length(1);
+            expect(Object.keys(copies)).toHaveLength(1);
             expect(result1).toEqual(result2);
         });
 
@@ -62,7 +62,7 @@ describe('iD.osmRelation', function () {
             var copies = {};
             var result = r.copy(graph, copies);
 
-            expect(Object.keys(copies)).to.have.length(5);
+            expect(Object.keys(copies)).toHaveLength(5);
             expect(copies.w).toBeInstanceOf(iD.osmWay);
             expect(copies.a).toBeInstanceOf(iD.osmNode);
             expect(copies.b).toBeInstanceOf(iD.osmNode);
@@ -79,7 +79,7 @@ describe('iD.osmRelation', function () {
             var copies = {};
             r1.copy(graph, copies);
 
-            expect(Object.keys(copies)).to.have.length(3);
+            expect(Object.keys(copies)).toHaveLength(3);
             expect(copies.r1).toBeInstanceOf(iD.osmRelation);
             expect(copies.r2).toBeInstanceOf(iD.osmRelation);
             expect(copies.w).toBeInstanceOf(iD.osmWay);
@@ -95,7 +95,7 @@ describe('iD.osmRelation', function () {
             var copies = {};
             r1.copy(graph, copies);
 
-            expect(Object.keys(copies)).to.have.length(2);
+            expect(Object.keys(copies)).toHaveLength(2);
             expect(copies.r1.members[0].id).toEqual(copies.r2.id);
             expect(copies.r2.members[0].id).toEqual(copies.r1.id);
         });
@@ -106,7 +106,7 @@ describe('iD.osmRelation', function () {
             var copies = {};
             r.copy(graph, copies);
 
-            expect(Object.keys(copies)).to.have.length(1);
+            expect(Object.keys(copies)).toHaveLength(1);
             expect(copies.r.members[0].id).toEqual(copies.r.id);
          });
     });

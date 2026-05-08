@@ -53,7 +53,7 @@ describe('iD.osmEntity', function () {
             var n = new iD.osmNode({id: 'n'});
             var copies = {};
             var result = n.copy(null, copies);
-            expect(Object.keys(copies)).to.have.length(1);
+            expect(Object.keys(copies)).toHaveLength(1);
             expect(copies.n).toEqual(result);
         });
 
@@ -62,7 +62,7 @@ describe('iD.osmEntity', function () {
             var copies = {};
             var result1 = n.copy(null, copies);
             var result2 = n.copy(null, copies);
-            expect(Object.keys(copies)).to.have.length(1);
+            expect(Object.keys(copies)).toHaveLength(1);
             expect(result1).toEqual(result2);
         });
 

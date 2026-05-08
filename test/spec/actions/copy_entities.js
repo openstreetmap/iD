@@ -7,7 +7,7 @@ describe('iD.actionCopyEntities', function () {
         var created = diff.created();
 
         expect(head.hasEntity('a')).toBeTruthy();
-        expect(created).to.have.length(1);
+        expect(created).toHaveLength(1);
     });
 
     it('copies a way', function () {
@@ -21,7 +21,7 @@ describe('iD.actionCopyEntities', function () {
         var created = diff.created();
 
         expect(head.hasEntity('w')).toBeTruthy();
-        expect(created).to.have.length(3);
+        expect(created).toHaveLength(3);
     });
 
     it('copies multiple nodes', function () {
@@ -36,7 +36,7 @@ describe('iD.actionCopyEntities', function () {
 
         expect(head.hasEntity('a')).toBeTruthy();
         expect(head.hasEntity('b')).toBeTruthy();
-        expect(created).to.have.length(2);
+        expect(created).toHaveLength(2);
     });
 
     it('copies multiple ways, keeping the same connections', function () {
@@ -52,7 +52,7 @@ describe('iD.actionCopyEntities', function () {
         var diff = iD.coreDifference(base, head);
         var created = diff.created();
 
-        expect(created).to.have.length(5);
+        expect(created).toHaveLength(5);
         expect(action.copies().w1.nodes[1]).toEqual(action.copies().w2.nodes[0]);
     });
 
@@ -64,6 +64,6 @@ describe('iD.actionCopyEntities', function () {
         var head = action(base);
 
         expect(head.hasEntity('a')).toBeFalsy();
-        expect(Object.keys(action.copies())).to.have.length(1);
+        expect(Object.keys(action.copies())).toHaveLength(1);
     });
 });

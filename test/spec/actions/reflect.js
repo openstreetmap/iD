@@ -10,7 +10,7 @@ describe('iD.actionReflect', function() {
                 new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
         graph = iD.actionReflect(['-'], projection)(graph);
-        expect(graph.entity('-').nodes).to.have.length(5);
+        expect(graph.entity('-').nodes).toHaveLength(5);
     });
 
 
