@@ -5,7 +5,6 @@ import { debounce } from 'es-toolkit/compat';
 import { presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
 import { actionChangePreset } from '../actions/change_preset';
-import { operationDelete } from '../operations/delete';
 import { svgIcon } from '../svg/index';
 import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo/extent';
