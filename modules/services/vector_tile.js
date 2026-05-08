@@ -3,7 +3,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { deepEqual } from 'fast-equals';
 import turf_bboxClip from '@turf/bbox-clip';
 import stringify from 'fast-json-stable-stringify';
-import polygonClipping from 'polygon-clipping';
+import { union } from 'polyclip-ts';
 
 import Protobuf from 'pbf';
 import { VectorTile } from '@mapbox/vector-tile';
@@ -66,7 +66,7 @@ function vtToGeoJSON(data, tile, mergeCache) {
                     var merged = mergeCache[propertyhash];
                     if (merged && merged.length) {
                         var other = merged[0];
-                        var coords = polygonClipping.union(
+                        const coords = union(
                             feature.geometry.coordinates,
                             other.geometry.coordinates
                         );
