@@ -9,77 +9,77 @@ describe('iD.svgTagClasses', function () {
         selection
             .datum(new iD.osmWay())
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal(null);
+        expect(selection.attr('class')).toEqual(null);
     });
 
     it('adds classes for primary tag key and key-value', function() {
         selection
             .datum(new iD.osmWay({tags: {building: 'residential'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('tag-building tag-building-residential');
+        expect(selection.attr('class')).toEqual('tag-building tag-building-residential');
     });
 
     it('adds only one primary tag', function() {
         selection
             .datum(new iD.osmWay({tags: {building: 'residential', railway: 'rail'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('tag-building tag-building-residential');
+        expect(selection.attr('class')).toEqual('tag-building tag-building-residential');
     });
 
     it('orders primary tags', function() {
         selection
             .datum(new iD.osmWay({tags: {railway: 'rail', building: 'residential'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('tag-building tag-building-residential');
+        expect(selection.attr('class')).toEqual('tag-building tag-building-residential');
     });
 
     it('adds status tag when status in primary value (`railway=abandoned`)', function() {
         selection
             .datum(new iD.osmWay({tags: {railway: 'abandoned'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('tag-railway tag-status tag-status-abandoned');
+        expect(selection.attr('class')).toEqual('tag-railway tag-status tag-status-abandoned');
     });
 
     it('adds status tag when status in key and value matches "yes" (railway=rail + abandoned=yes)', function() {
         selection
             .datum(new iD.osmWay({tags: {railway: 'rail', abandoned: 'yes'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('tag-railway tag-railway-rail tag-status tag-status-abandoned');
+        expect(selection.attr('class')).toEqual('tag-railway tag-railway-rail tag-status tag-status-abandoned');
     });
 
     it('adds status tag when status in key and value matches primary (railway=rail + abandoned=railway)', function() {
         selection
             .datum(new iD.osmWay({tags: {railway: 'rail', abandoned: 'railway'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('tag-railway tag-railway-rail tag-status tag-status-abandoned');
+        expect(selection.attr('class')).toEqual('tag-railway tag-railway-rail tag-status tag-status-abandoned');
     });
 
     it('adds primary and status tag when status in key and no primary (abandoned=railway)', function() {
         selection
             .datum(new iD.osmWay({tags: {abandoned: 'railway'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('tag-railway tag-status tag-status-abandoned');
+        expect(selection.attr('class')).toEqual('tag-railway tag-status tag-status-abandoned');
     });
 
     it('does not add status tag for different primary tag (highway=path + abandoned=railway)', function() {
         selection
             .datum(new iD.osmWay({tags: {highway: 'path', abandoned: 'railway'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('tag-highway tag-highway-path');
+        expect(selection.attr('class')).toEqual('tag-highway tag-highway-path');
     });
 
     it('adds secondary tags', function() {
         selection
             .datum(new iD.osmWay({tags: {railway: 'rail', bridge: 'yes'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('tag-railway tag-railway-rail tag-bridge tag-bridge-yes');
+        expect(selection.attr('class')).toEqual('tag-railway tag-railway-rail tag-bridge tag-bridge-yes');
     });
 
     it('adds no bridge=no tags', function() {
         selection
             .datum(new iD.osmWay({tags: {bridge: 'no'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal(null);
+        expect(selection.attr('class')).toEqual(null);
     });
 
     it('adds tag-unpaved for highway=track with no surface tagging', function() {
@@ -239,7 +239,7 @@ describe('iD.svgTagClasses', function () {
         selection
             .datum(new iD.osmWay())
             .call(iD.svgTagClasses().tags(primary));
-        expect(selection.attr('class')).to.equal('tag-railway tag-railway-rail');
+        expect(selection.attr('class')).toEqual('tag-railway tag-railway-rail');
     });
 
     it('removes classes for tags that are no longer present', function() {
@@ -247,7 +247,7 @@ describe('iD.svgTagClasses', function () {
             .attr('class', 'tag-highway tag-highway-primary')
             .datum(new iD.osmWay())
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('');
+        expect(selection.attr('class')).toEqual('');
     });
 
     it('preserves existing non-"tag-"-prefixed classes', function() {
@@ -255,7 +255,7 @@ describe('iD.svgTagClasses', function () {
             .attr('class', 'selected')
             .datum(new iD.osmWay())
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('selected');
+        expect(selection.attr('class')).toEqual('selected');
     });
 
     it('stroke overrides: renders areas with barriers as lines', function() {
@@ -272,6 +272,6 @@ describe('iD.svgTagClasses', function () {
         selection
             .datum(new iD.osmWay())
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal(null);
+        expect(selection.attr('class')).toEqual(null);
     });
 });

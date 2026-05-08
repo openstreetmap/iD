@@ -1,7 +1,7 @@
 describe('iD.osmNode', function () {
     it('returns a node', function () {
         expect(new iD.osmNode()).toBeInstanceOf(iD.osmNode);
-        expect(new iD.osmNode().type).to.equal('node');
+        expect(new iD.osmNode().type).toEqual('node');
     });
 
     it('defaults tags to an empty object', function () {
@@ -20,11 +20,11 @@ describe('iD.osmNode', function () {
 
     describe('#intersects', function () {
         it('returns true for a node within the given extent', function () {
-            expect(new iD.osmNode({loc: [0, 0]}).intersects([[-5, -5], [5, 5]])).to.equal(true);
+            expect(new iD.osmNode({loc: [0, 0]}).intersects([[-5, -5], [5, 5]])).toEqual(true);
         });
 
         it('returns false for a node outside the given extend', function () {
-            expect(new iD.osmNode({loc: [6, 6]}).intersects([[-5, -5], [5, 5]])).to.equal(false);
+            expect(new iD.osmNode({loc: [6, 6]}).intersects([[-5, -5], [5, 5]])).toEqual(false);
         });
     });
 
@@ -33,13 +33,13 @@ describe('iD.osmNode', function () {
             var node = new iD.osmNode(),
                 way  = new iD.osmWay({nodes: [node.id]}),
                 graph = new iD.coreGraph([node, way]);
-            expect(node.geometry(graph)).to.equal('vertex');
+            expect(node.geometry(graph)).toEqual('vertex');
         });
 
         it('returns \'point\' if the node is not a member of any way', function () {
             var node = new iD.osmNode(),
                 graph = new iD.coreGraph([node]);
-            expect(node.geometry(graph)).to.equal('point');
+            expect(node.geometry(graph)).toEqual('point');
         });
     });
 
@@ -50,9 +50,9 @@ describe('iD.osmNode', function () {
                 c = new iD.osmNode({id: 'c'}),
                 w = new iD.osmWay({nodes: ['a', 'b', 'c']}),
                 graph = new iD.coreGraph([a, b, c, w]);
-            expect(a.isEndpoint(graph)).to.equal(true, 'linear way, beginning node');
-            expect(b.isEndpoint(graph)).to.equal(false, 'linear way, middle node');
-            expect(c.isEndpoint(graph)).to.equal(true, 'linear way, ending node');
+            expect(a.isEndpoint(graph)).toEqual(true, 'linear way, beginning node');
+            expect(b.isEndpoint(graph)).toEqual(false, 'linear way, middle node');
+            expect(c.isEndpoint(graph)).toEqual(true, 'linear way, ending node');
         });
 
         it('returns false for nodes along a circular way', function () {
@@ -61,9 +61,9 @@ describe('iD.osmNode', function () {
                 c = new iD.osmNode({id: 'c'}),
                 w = new iD.osmWay({nodes: ['a', 'b', 'c', 'a']}),
                 graph = new iD.coreGraph([a, b, c, w]);
-            expect(a.isEndpoint(graph)).to.equal(false, 'circular way, connector node');
-            expect(b.isEndpoint(graph)).to.equal(false, 'circular way, middle node');
-            expect(c.isEndpoint(graph)).to.equal(false, 'circular way, ending node');
+            expect(a.isEndpoint(graph)).toEqual(false, 'circular way, connector node');
+            expect(b.isEndpoint(graph)).toEqual(false, 'circular way, middle node');
+            expect(c.isEndpoint(graph)).toEqual(false, 'circular way, ending node');
         });
     });
 
@@ -73,7 +73,7 @@ describe('iD.osmNode', function () {
                 w1 = new iD.osmWay({nodes: [node.id]}),
                 w2 = new iD.osmWay({nodes: [node.id], tags: { highway: 'residential' }}),
                 graph = new iD.coreGraph([node, w1, w2]);
-            expect(node.isConnected(graph)).to.equal(true);
+            expect(node.isConnected(graph)).toEqual(true);
         });
 
         it('returns false for a node with only area parent ways', function () {
@@ -81,7 +81,7 @@ describe('iD.osmNode', function () {
                 w1 = new iD.osmWay({nodes: [node.id], tags: { area: 'yes' }}),
                 w2 = new iD.osmWay({nodes: [node.id], tags: { area: 'yes' }}),
                 graph = new iD.coreGraph([node, w1, w2]);
-            expect(node.isConnected(graph)).to.equal(false);
+            expect(node.isConnected(graph)).toEqual(false);
         });
 
         it('returns false for a node with only uninteresting parent ways', function () {
@@ -89,14 +89,14 @@ describe('iD.osmNode', function () {
                 w1 = new iD.osmWay({nodes: [node.id]}),
                 w2 = new iD.osmWay({nodes: [node.id]}),
                 graph = new iD.coreGraph([node, w1, w2]);
-            expect(node.isConnected(graph)).to.equal(false);
+            expect(node.isConnected(graph)).toEqual(false);
         });
 
         it('returns false for a standalone node on a single parent way', function () {
             var node = new iD.osmNode(),
                 way = new iD.osmWay({nodes: [node.id]}),
                 graph = new iD.coreGraph([node, way]);
-            expect(node.isConnected(graph)).to.equal(false);
+            expect(node.isConnected(graph)).toEqual(false);
         });
 
         it('returns true for a self-intersecting node on a single parent way', function () {
@@ -105,7 +105,7 @@ describe('iD.osmNode', function () {
                 c = new iD.osmNode({id: 'c'}),
                 w = new iD.osmWay({nodes: ['a', 'b', 'c', 'b']}),
                 graph = new iD.coreGraph([a, b, c, w]);
-            expect(b.isConnected(graph)).to.equal(true);
+            expect(b.isConnected(graph)).toEqual(true);
         });
 
         it('returns false for the connecting node of a closed way', function () {
@@ -114,7 +114,7 @@ describe('iD.osmNode', function () {
                 c = new iD.osmNode({id: 'c'}),
                 w = new iD.osmWay({nodes: ['a', 'b', 'c', 'a']}),
                 graph = new iD.coreGraph([a, b, c, w]);
-            expect(a.isConnected(graph)).to.equal(false);
+            expect(a.isConnected(graph)).toEqual(false);
         });
     });
 
@@ -124,7 +124,7 @@ describe('iD.osmNode', function () {
                 w1 = new iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}}),
                 w2 = new iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}}),
                 graph = new iD.coreGraph([node, w1, w2]);
-            expect(node.isIntersection(graph)).to.equal(true);
+            expect(node.isIntersection(graph)).toEqual(true);
         });
 
         it('returns true for a node shared by more than one waterway', function () {
@@ -132,7 +132,7 @@ describe('iD.osmNode', function () {
                 w1 = new iD.osmWay({nodes: [node.id], tags: {waterway: 'river'}}),
                 w2 = new iD.osmWay({nodes: [node.id], tags: {waterway: 'river'}}),
                 graph = new iD.coreGraph([node, w1, w2]);
-            expect(node.isIntersection(graph)).to.equal(true);
+            expect(node.isIntersection(graph)).toEqual(true);
         });
     });
 
@@ -142,7 +142,7 @@ describe('iD.osmNode', function () {
                 w1 = new iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}}),
                 w2 = new iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}}),
                 graph = new iD.coreGraph([node, w1, w2]);
-            expect(node.isHighwayIntersection(graph)).to.equal(true);
+            expect(node.isHighwayIntersection(graph)).toEqual(true);
         });
 
         it('returns false for a node shared by more than one waterway', function () {
@@ -150,7 +150,7 @@ describe('iD.osmNode', function () {
                 w1 = new iD.osmWay({nodes: [node.id], tags: {waterway: 'river'}}),
                 w2 = new iD.osmWay({nodes: [node.id], tags: {waterway: 'river'}}),
                 graph = new iD.coreGraph([node, w1, w2]);
-            expect(node.isHighwayIntersection(graph)).to.equal(false);
+            expect(node.isHighwayIntersection(graph)).toEqual(false);
         });
     });
 
@@ -764,7 +764,7 @@ describe('iD.osmNode', function () {
         });
 
         it('includes changeset if provided', function() {
-            expect(new iD.osmNode({loc: [0, 0]}).asJXON('1234').node['@changeset']).to.equal('1234');
+            expect(new iD.osmNode({loc: [0, 0]}).asJXON('1234').node['@changeset']).toEqual('1234');
         });
     });
 
@@ -773,7 +773,7 @@ describe('iD.osmNode', function () {
             var node = new iD.osmNode({tags: {amenity: 'cafe'}, loc: [1, 2]}),
                 json = node.asGeoJSON();
 
-            expect(json.type).to.equal('Point');
+            expect(json.type).toEqual('Point');
             expect(json.coordinates).toEqual([1, 2]);
         });
     });

@@ -77,7 +77,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmNode({id: 'a', loc: [0,0]})
             ]);
 
-            expect(iD.actionJoin(['a']).disabled(graph)).to.equal('not_eligible');
+            expect(iD.actionJoin(['a']).disabled(graph)).toEqual('not_eligible');
         });
 
         it('returns \'not_adjacent\' for ways that don\'t share the necessary nodes', function () {
@@ -93,7 +93,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['b', 'd']})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('not_adjacent');
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('not_adjacent');
         });
 
         ['restriction', 'connectivity'].forEach(function (type) {
@@ -115,7 +115,7 @@ describe('iD.actionJoin', function () {
                     ]})
                 ]);
 
-                expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal(type);
+                expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual(type);
             });
 
             it('returns ' + type + ' in situations where a ' + type + 'relation would be damaged (b)', function () {
@@ -140,7 +140,7 @@ describe('iD.actionJoin', function () {
                     ]})
                 ]);
 
-                expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal(type);
+                expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual(type);
             });
 
             it('returns falsy in situations where a '+ type + 'relation wouldn\'t be damaged (a)', function () {
@@ -213,7 +213,7 @@ describe('iD.actionJoin', function () {
                     ]})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_relations');
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('conflicting_relations');
         });
 
         it('returns \'conflicting_relations\' when a relation would be forked', function () {
@@ -236,7 +236,7 @@ describe('iD.actionJoin', function () {
                 ]})
             ]);
 
-            expect(iD.actionJoin(['-', '|']).disabled(graph)).to.equal('conflicting_relations');
+            expect(iD.actionJoin(['-', '|']).disabled(graph)).toEqual('conflicting_relations');
         });
 
         it('returns \'paths_intersect\' if resulting way intersects itself', function () {
@@ -255,7 +255,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['c', 'd']}),
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('paths_intersect');
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('paths_intersect');
         });
 
         it('returns \'conflicting_tags\' for two entities that have conflicting tags', function () {
@@ -267,7 +267,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['b', 'c'], tags: {highway: 'secondary'}})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('conflicting_tags');
         });
 
         it('takes tag reversals into account when calculating conflicts', function () {
@@ -608,7 +608,7 @@ describe('iD.actionJoin', function () {
         ]);
         graph = iD.actionJoin(['-', '='])(graph);
         // step count should be merged
-        expect(graph.entity('-').tags.step_count).to.equal('42');
+        expect(graph.entity('-').tags.step_count).toEqual('42');
     });
 
     it('returns conflicting_tags when the first way has a non-numeric summable tag', function () {
@@ -619,7 +619,7 @@ describe('iD.actionJoin', function () {
             new iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'steps', step_count: 'many' } }),
             new iD.osmWay({ id: '=', nodes: ['b', 'c'], tags: { highway: 'steps', step_count: '10' } })
         ]);
-        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
+        expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('conflicting_tags');
     });
 
     it('returns conflicting_tags when the second way has a non-numeric summable tag', function () {
@@ -630,7 +630,7 @@ describe('iD.actionJoin', function () {
             new iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'steps', step_count: '10' } }),
             new iD.osmWay({ id: '=', nodes: ['b', 'c'], tags: { highway: 'steps', step_count: 'bbb' } })
         ]);
-        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
+        expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('conflicting_tags');
     });
 
     it('returns conflicting_tags when both ways have non-numeric summable tags', function () {
@@ -641,7 +641,7 @@ describe('iD.actionJoin', function () {
             new iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'steps', step_count: 'many' } }),
             new iD.osmWay({ id: '=', nodes: ['b', 'c'], tags: { highway: 'steps', step_count: 'lots' } })
         ]);
-        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
+        expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('conflicting_tags');
     });
 
 

@@ -1,7 +1,7 @@
 describe('iD.rendererBackgroundSource', function() {
     it('does not error with blank template', function() {
         var source = iD.rendererBackgroundSource({ template: '' });
-        expect(source.url([0,1,2])).to.equal('');
+        expect(source.url([0,1,2])).toEqual('');
     });
 
     it('supports tms replacement tokens', function() {
@@ -9,7 +9,7 @@ describe('iD.rendererBackgroundSource', function() {
             type: 'tms',
             template: '{z}/{x}/{y}'
         });
-        expect(source.url([0,1,2])).to.equal('2/0/1');
+        expect(source.url([0,1,2])).toEqual('2/0/1');
     });
 
     it('supports wms replacement tokens', function() {
@@ -20,12 +20,12 @@ describe('iD.rendererBackgroundSource', function() {
         });
 
         var result = iD.utilStringQs(source.url([0,1,2]));
-        expect(result.SRS).to.equal('EPSG:3857');
-        expect(result.imageSR).to.equal('3857');
-        expect(result.bboxSR).to.equal('3857');
-        expect(result.FORMAT).to.equal('image/jpeg');
-        expect(result.WIDTH).to.equal('256');
-        expect(result.HEIGHT).to.equal('256');
+        expect(result.SRS).toEqual('EPSG:3857');
+        expect(result.imageSR).toEqual('3857');
+        expect(result.bboxSR).toEqual('3857');
+        expect(result.FORMAT).toEqual('image/jpeg');
+        expect(result.WIDTH).toEqual('256');
+        expect(result.HEIGHT).toEqual('256');
 
         var bbox = result.BBOX.split(',');
         expect(+bbox[0]).toBeCloseTo(-20037508.34, 3);
@@ -36,13 +36,13 @@ describe('iD.rendererBackgroundSource', function() {
 
     it('supports subdomains', function() {
         var source = iD.rendererBackgroundSource({ template: '{switch:a,b}/{z}/{x}/{y}'});
-        expect(source.url([0,1,2])).to.equal('b/2/0/1');
+        expect(source.url([0,1,2])).toEqual('b/2/0/1');
     });
 
     it('distributes requests between subdomains', function() {
         var source = iD.rendererBackgroundSource({ template: '{switch:a,b}/{z}/{x}/{y}' });
-        expect(source.url([0,1,1])).to.equal('b/1/0/1');
-        expect(source.url([0,2,1])).to.equal('a/1/0/2');
+        expect(source.url([0,1,1])).toEqual('b/1/0/1');
+        expect(source.url([0,2,1])).toEqual('a/1/0/2');
     });
 
     it('correctly displays an overlay with no overzoom specified', function() {

@@ -3,13 +3,13 @@ describe('iD.coreGraph', function() {
         it('accepts an entities Array', function () {
             var entity = new iD.osmNode(),
                 graph = new iD.coreGraph([entity]);
-            expect(graph.entity(entity.id)).to.equal(entity);
+            expect(graph.entity(entity.id)).toEqual(entity);
         });
 
         it('accepts a Graph', function () {
             var entity = new iD.osmNode(),
                 graph = new iD.coreGraph(new iD.coreGraph([entity]));
-            expect(graph.entity(entity.id)).to.equal(entity);
+            expect(graph.entity(entity.id)).toEqual(entity);
         });
 
         it('copies other\'s entities', function () {
@@ -22,7 +22,7 @@ describe('iD.coreGraph', function() {
         it('rebases on other\'s base', function () {
             var base   = new iD.coreGraph(),
                 graph  = new iD.coreGraph(base);
-            expect(graph.base().entities).to.equal(base.base().entities);
+            expect(graph.base().entities).toEqual(base.base().entities);
         });
 
         it('freezes by default', function () {
@@ -38,7 +38,7 @@ describe('iD.coreGraph', function() {
         it('returns the entity when present', function () {
             var node = new iD.osmNode(),
                 graph = new iD.coreGraph([node]);
-            expect(graph.hasEntity(node.id)).to.equal(node);
+            expect(graph.hasEntity(node.id)).toEqual(node);
         });
 
         it('returns undefined when the entity is not present', function () {
@@ -50,7 +50,7 @@ describe('iD.coreGraph', function() {
         it('returns the entity when present', function () {
             var node = new iD.osmNode(),
                 graph = new iD.coreGraph([node]);
-            expect(graph.entity(node.id)).to.equal(node);
+            expect(graph.entity(node.id)).toEqual(node);
         });
 
         it('throws when the entity is not present', function () {
@@ -65,7 +65,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([], [graph]);
 
-            expect(graph.entity('n')).to.equal(node);
+            expect(graph.entity('n')).toEqual(node);
         });
 
         it('includes new entities', function () {
@@ -74,7 +74,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([node], [graph]);
 
-            expect(graph.entity('n')).to.equal(node);
+            expect(graph.entity('n')).toEqual(node);
         });
 
         it('doesn\'t rebase deleted entities', function () {
@@ -93,7 +93,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([b], [graph]);
 
-            expect(graph.entity('n')).to.equal(a);
+            expect(graph.entity('n')).toEqual(a);
         });
 
         it('gives precedence to new entities when force = true', function () {
@@ -103,7 +103,7 @@ describe('iD.coreGraph', function() {
 
             graph.rebase([b], [graph], true);
 
-            expect(graph.entity('n')).to.equal(b);
+            expect(graph.entity('n')).toEqual(b);
         });
 
         it('inherits entities from base prototypally', function () {
@@ -245,9 +245,9 @@ describe('iD.coreGraph', function() {
                 });
             }
 
-            expect(numParents(n)).to.equal(1);
+            expect(numParents(n)).toEqual(1);
             graph.rebase([w2], [graph]);
-            expect(numParents(n)).to.equal(2);
+            expect(numParents(n)).toEqual(2);
         });
     });
 
@@ -262,7 +262,7 @@ describe('iD.coreGraph', function() {
             var node = new iD.osmNode(),
                 graph = new iD.coreGraph([node]);
             graph.remove(node);
-            expect(graph.entity(node.id)).to.equal(node);
+            expect(graph.entity(node.id)).toEqual(node);
         });
 
         it('removes the entity from the result', function () {
@@ -290,7 +290,7 @@ describe('iD.coreGraph', function() {
         it('is a no-op if the replacement is identical to the existing entity', function () {
             var node = new iD.osmNode(),
                 graph = new iD.coreGraph([node]);
-            expect(graph.replace(node)).to.equal(graph);
+            expect(graph.replace(node)).toEqual(graph);
         });
 
         it('returns a new graph', function () {
@@ -303,14 +303,14 @@ describe('iD.coreGraph', function() {
             var node = new iD.osmNode(),
                 graph = new iD.coreGraph([node]);
             graph.replace(node);
-            expect(graph.entity(node.id)).to.equal(node);
+            expect(graph.entity(node.id)).toEqual(node);
         });
 
         it('replaces the entity in the result', function () {
             var node1 = new iD.osmNode(),
                 node2 = node1.update({}),
                 graph = new iD.coreGraph([node1]);
-            expect(graph.replace(node2).entity(node2.id)).to.equal(node2);
+            expect(graph.replace(node2).entity(node2.id)).toEqual(node2);
         });
 
         it('adds parentWays',  function () {
@@ -360,7 +360,7 @@ describe('iD.coreGraph', function() {
         it('is a no-op if the head entity is identical to the base entity', function () {
             var n1 = new iD.osmNode({id: 'n'}),
                 graph = new iD.coreGraph([n1]);
-            expect(graph.revert('n')).to.equal(graph);
+            expect(graph.revert('n')).toEqual(graph);
         });
 
         it('returns a new graph', function () {
@@ -375,7 +375,7 @@ describe('iD.coreGraph', function() {
                 n2 = n1.update({}),
                 graph = new iD.coreGraph([n1]).replace(n2);
             graph.revert('n');
-            expect(graph.hasEntity('n')).to.equal(n2);
+            expect(graph.hasEntity('n')).toEqual(n2);
         });
 
         it('removes a new entity', function () {
@@ -392,7 +392,7 @@ describe('iD.coreGraph', function() {
                 graph = new iD.coreGraph([n1]).replace(n2);
 
             graph = graph.revert('n');
-            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.hasEntity('n')).toEqual(n1);
         });
 
         it('restores a deleted entity', function () {
@@ -400,7 +400,7 @@ describe('iD.coreGraph', function() {
                 graph = new iD.coreGraph([n1]).remove(n1);
 
             graph = graph.revert('n');
-            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.hasEntity('n')).toEqual(n1);
         });
 
         it('removes new parentWays', function () {
@@ -409,7 +409,7 @@ describe('iD.coreGraph', function() {
                 graph = new iD.coreGraph().replace(n1).replace(w1);
 
             graph = graph.revert('w');
-            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.hasEntity('n')).toEqual(n1);
             expect(graph.parentWays(n1)).toEqual([]);
         });
 
@@ -419,7 +419,7 @@ describe('iD.coreGraph', function() {
                 graph = new iD.coreGraph().replace(n1).replace(r1);
 
             graph = graph.revert('r');
-            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.hasEntity('n')).toEqual(n1);
             expect(graph.parentRelations(n1)).toEqual([]);
         });
 
@@ -430,7 +430,7 @@ describe('iD.coreGraph', function() {
                 graph = new iD.coreGraph([n1, w1]).replace(w2);
 
             graph = graph.revert('w');
-            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.hasEntity('n')).toEqual(n1);
             expect(graph.parentWays(n1)).toEqual([w1]);
         });
 
@@ -441,7 +441,7 @@ describe('iD.coreGraph', function() {
                 graph = new iD.coreGraph([n1, r1]).replace(r2);
 
             graph = graph.revert('r');
-            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.hasEntity('n')).toEqual(n1);
             expect(graph.parentRelations(n1)).toEqual([r1]);
         });
 
@@ -451,7 +451,7 @@ describe('iD.coreGraph', function() {
                 graph = new iD.coreGraph([n1, w1]).remove(w1);
 
             graph = graph.revert('w');
-            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.hasEntity('n')).toEqual(n1);
             expect(graph.parentWays(n1)).toEqual([w1]);
         });
 
@@ -461,7 +461,7 @@ describe('iD.coreGraph', function() {
                 graph = new iD.coreGraph([n1, r1]).remove(r1);
 
             graph = graph.revert('r');
-            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.hasEntity('n')).toEqual(n1);
             expect(graph.parentRelations(n1)).toEqual([r1]);
         });
     });
@@ -474,7 +474,7 @@ describe('iD.coreGraph', function() {
 
         it('returns self if self is not frozen', function () {
             var graph = new iD.coreGraph([], true);
-            expect(graph.update()).to.equal(graph);
+            expect(graph.update()).toEqual(graph);
         });
 
         it('doesn\'t modify self is self is frozen', function () {
@@ -483,7 +483,7 @@ describe('iD.coreGraph', function() {
 
             graph.update(function (graph) { graph.remove(node); });
 
-            expect(graph.entity(node.id)).to.equal(node);
+            expect(graph.entity(node.id)).toEqual(node);
         });
 
         it('modifies self is self is not frozen', function () {
@@ -506,7 +506,7 @@ describe('iD.coreGraph', function() {
             );
 
             expect(graph.hasEntity(a.id)).toBeUndefined();
-            expect(graph.entity(b.id)).to.equal(b);
+            expect(graph.entity(b.id)).toEqual(b);
         });
     });
 

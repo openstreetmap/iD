@@ -33,14 +33,14 @@ describe('iD.uiSectionBackgroundList', function () {
 
         // Find the browse button for the custom layer
         const browseButton = selection.selectAll('.layer-custom button.layer-browse');
-        expect(browseButton.size()).to.equal(1);
+        expect(browseButton.size()).toEqual(1);
 
         // Click it to open the settings modal
         iD.utilTriggerEvent(browseButton, 'click');
 
         // The modal should now be in the container
         const modal = container.select('.modal');
-        expect(modal.size()).to.equal(1);
+        expect(modal.size()).toEqual(1);
 
         // Mock findSource to return null right before we "save"
         const originalFindSource = context.background().findSource;
@@ -52,7 +52,7 @@ describe('iD.uiSectionBackgroundList', function () {
         try {
             // Find and click the "OK" (save) button in the modal
             const okButton = modal.select('.modal-section.buttons .ok-button');
-            expect(okButton.size()).to.equal(1);
+            expect(okButton.size()).toEqual(1);
 
             expect(() => {
                 iD.utilTriggerEvent(okButton, 'click');
@@ -72,7 +72,7 @@ describe('iD.uiSectionBackgroundList', function () {
         iD.utilTriggerEvent(browseButton, 'click');
 
         const modal = container.select('.modal');
-        expect(modal.size()).to.equal(1);
+        expect(modal.size()).toEqual(1);
 
         // Clear the template field to simulate falling back to 'none'
         modal.select('textarea.field-template').property('value', '');
@@ -86,7 +86,7 @@ describe('iD.uiSectionBackgroundList', function () {
 
         try {
             const okButton = modal.select('.modal-section.buttons .ok-button');
-            expect(okButton.size()).to.equal(1);
+            expect(okButton.size()).toEqual(1);
 
             expect(() => {
                 iD.utilTriggerEvent(okButton, 'click');

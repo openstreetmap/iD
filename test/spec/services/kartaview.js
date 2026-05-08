@@ -39,7 +39,7 @@ describe('iD.serviceKartaview', function() {
 
             kartaview.init();
             var cache2 = kartaview.cache();
-            expect(cache).to.equal(cache2);
+            expect(cache).toEqual(cache2);
         });
     });
 

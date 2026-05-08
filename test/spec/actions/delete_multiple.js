@@ -26,7 +26,7 @@ describe('iD.actionDeleteMultiple', function () {
     //             relation = new iD.osmRelation({members: [{id: 'w'}]}),
     //             graph    = new iD.coreGraph([node, relation]),
     //             action   = iD.actionDeleteMultiple([node.id, relation.id]);
-    //         expect(action.disabled(graph)).to.equal('incomplete_relation');
+    //         expect(action.disabled(graph)).toEqual('incomplete_relation');
     //     });
     // });
 });

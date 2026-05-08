@@ -1,11 +1,11 @@
 describe('iD.osmRemoveLifecyclePrefix',  function () {
     it('removes the lifecycle prefix from a tag key',  function () {
-        expect(iD.osmRemoveLifecyclePrefix('was:natural')).to.equal('natural');
-        expect(iD.osmRemoveLifecyclePrefix('destroyed:seamark:type')).to.equal('seamark:type');
+        expect(iD.osmRemoveLifecyclePrefix('was:natural')).toEqual('natural');
+        expect(iD.osmRemoveLifecyclePrefix('destroyed:seamark:type')).toEqual('seamark:type');
     });
 
     it('ignores invalid lifecycle prefixes', function () {
-        expect(iD.osmRemoveLifecyclePrefix('ex:leisure')).to.equal('ex:leisure');
+        expect(iD.osmRemoveLifecyclePrefix('ex:leisure')).toEqual('ex:leisure');
     });
 });
 

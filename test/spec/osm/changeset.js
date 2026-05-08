@@ -1,7 +1,7 @@
 describe('iD.osmChangeset', function () {
     it('returns a changeset', function () {
         expect(new iD.osmChangeset()).toBeInstanceOf(iD.osmChangeset);
-        expect(new iD.osmChangeset().type).to.equal('changeset');
+        expect(new iD.osmChangeset().type).toEqual('changeset');
     });
 
     it('defaults tags to an empty object', function () {

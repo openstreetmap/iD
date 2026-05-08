@@ -49,16 +49,16 @@ describe('iD.presetCollection', function() {
 
     describe('#item', function() {
         it('fetches a preset by id', function() {
-            expect(c.item('__TEST/highway/residential')).to.equal(p.residential);
+            expect(c.item('__TEST/highway/residential')).toEqual(p.residential);
         });
     });
 
     describe('#index', function() {
         it('returns preset position in the collection', function() {
-            expect(c.index('point')).to.equal(0);
+            expect(c.index('point')).toEqual(0);
         });
         it('return -1 when given id for preset not in the collection', function() {
-            expect(c.index('foobar')).to.equal(-1);
+            expect(c.index('foobar')).toEqual(-1);
         });
     });
 

@@ -21,8 +21,8 @@ describe('iD.Map', function() {
 
     describe('#zoom', function() {
         it('gets and sets zoom level', function() {
-            expect(map.zoom(4)).to.equal(map);
-            expect(map.zoom()).to.equal(4);
+            expect(map.zoom(4)).toEqual(map);
+            expect(map.zoom()).toEqual(4);
         });
 
         it('dispatches move event when zoom changes', function() {
@@ -44,13 +44,13 @@ describe('iD.Map', function() {
         it('respects minzoom', function() {
             map.minzoom(16);
             map.zoom(15);
-            expect(map.zoom()).to.equal(16);
+            expect(map.zoom()).toEqual(16);
         });
     });
 
     describe('#zoomIn', function() {
         it('increments zoom', async () => {
-            expect(map.zoom(4)).to.equal(map);
+            expect(map.zoom(4)).toEqual(map);
             map.zoomIn();
             await setTimeout(275);
             d3.timerFlush();
@@ -60,7 +60,7 @@ describe('iD.Map', function() {
 
     describe('#zoomOut', function() {
         it('decrements zoom', async () => {
-            expect(map.zoom(4)).to.equal(map);
+            expect(map.zoom(4)).toEqual(map);
             map.zoomOut();
             await setTimeout(275);
             d3.timerFlush();
@@ -70,16 +70,16 @@ describe('iD.Map', function() {
 
     describe('#minzoom', function() {
         it('is zero by default', function() {
-            expect(map.minzoom()).to.equal(0);
+            expect(map.minzoom()).toEqual(0);
         });
     });
 
     describe('#center', function() {
         it('gets and sets center', function() {
-            expect(map.center([0, 0])).to.equal(map);
+            expect(map.center([0, 0])).toEqual(map);
             expect(map.center()[0]).toBeCloseTo(0, 6);
             expect(map.center()[1]).toBeCloseTo(0, 6);
-            expect(map.center([10, 15])).to.equal(map);
+            expect(map.center([10, 15])).toEqual(map);
             expect(map.center()[0]).toBeCloseTo(10, 6);
             expect(map.center()[1]).toBeCloseTo(15, 6);
         });
@@ -103,8 +103,8 @@ describe('iD.Map', function() {
 
     describe('#centerEase', function() {
         it('sets center', async () => {
-            expect(map.center([10, 10])).to.equal(map);
-            expect(map.centerEase([20, 20], 250)).to.equal(map);
+            expect(map.center([10, 10])).toEqual(map);
+            expect(map.centerEase([20, 20], 250)).toEqual(map);
             await setTimeout(275);
             d3.timerFlush();
             expect(map.center()[0]).toBeCloseTo(20, 6);
@@ -114,7 +114,7 @@ describe('iD.Map', function() {
 
     describe('#centerZoom', function() {
         it('gets and sets center and zoom', function() {
-            expect(map.centerZoom([20, 25], 4)).to.equal(map);
+            expect(map.centerZoom([20, 25], 4)).toEqual(map);
             expect(map.center()[0]).toBeCloseTo(20, 6);
             expect(map.center()[1]).toBeCloseTo(25, 6);
             expect(map.zoom()).toBe(4);
@@ -141,7 +141,7 @@ describe('iD.Map', function() {
 
     describe('surface', function() {
         it('is an SVG element', function() {
-           expect(map.surface.node().tagName).to.equal('svg');
+           expect(map.surface.node().tagName).toEqual('svg');
         });
     });
 

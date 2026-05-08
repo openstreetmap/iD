@@ -368,7 +368,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph();
             var head = base.replace(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.complete().n).to.equal(node);
+            expect(diff.complete().n).toEqual(node);
         });
 
         it('includes modified entities', function () {
@@ -377,7 +377,7 @@ describe('iD.coreDifference', function () {
             var base = new iD.coreGraph([n1]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.complete().n).to.equal(n2);
+            expect(diff.complete().n).toEqual(n2);
         });
 
         it('includes deleted entities', function () {
@@ -397,7 +397,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(w2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().n2).to.equal(n2);
+            expect(diff.complete().n2).toEqual(n2);
         });
 
         it('includes nodes removed from a way', function () {
@@ -409,7 +409,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(w2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().n2).to.equal(n2);
+            expect(diff.complete().n2).toEqual(n2);
         });
 
         it('includes multipolygon members', function () {
@@ -425,7 +425,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(r2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().w2).to.equal(w2);
+            expect(diff.complete().w2).toEqual(w2);
         });
 
         it('includes parent ways of modified nodes', function () {
@@ -436,7 +436,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().w).to.equal(way);
+            expect(diff.complete().w).toEqual(way);
         });
 
         it('includes parent relations of modified entities', function () {
@@ -447,7 +447,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().r).to.equal(rel);
+            expect(diff.complete().r).toEqual(rel);
         });
 
         it('includes parent relations of modified entities, recursively', function () {
@@ -459,7 +459,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().r2).to.equal(rel2);
+            expect(diff.complete().r2).toEqual(rel2);
         });
 
         it('includes parent relations of parent ways of modified nodes', function () {
@@ -471,7 +471,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().r).to.equal(rel);
+            expect(diff.complete().r).toEqual(rel);
         });
 
         it('copes with recursive relations', function () {

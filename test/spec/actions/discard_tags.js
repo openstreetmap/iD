@@ -22,7 +22,7 @@ describe('iD.actionDiscardTags', function() {
         var base = new iD.coreGraph();
         var head = base.replace(way);
         var action = iD.actionDiscardTags(iD.coreDifference(base, head), discardTags);
-        expect(action(head).entity(way.id)).to.equal(way);
+        expect(action(head).entity(way.id)).toEqual(way);
     });
 
     it('discards tags with empty values', function() {

@@ -37,7 +37,7 @@ describe('iD.serviceStreetside', function() {
 
             streetside.init();
             var cache2 = streetside.cache();
-            expect(cache).to.equal(cache2);
+            expect(cache).toEqual(cache2);
         });
     });
 

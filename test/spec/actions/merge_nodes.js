@@ -162,7 +162,7 @@ describe('iD.actionMergeNodes', function () {
         var survivor = graph.hasEntity('c');
         expect(survivor).toBeInstanceOf(iD.osmNode);
         expect(survivor.loc).toEqual([1, 2]);
-        expect(graph.parentWays(survivor).length).to.equal(1);
+        expect(graph.parentWays(survivor).length).toEqual(1);
     });
 
 
@@ -193,7 +193,7 @@ describe('iD.actionMergeNodes', function () {
         var survivor = graph.hasEntity('d');
         expect(survivor).toBeInstanceOf(iD.osmNode);
         expect(survivor.loc).toEqual([0, 1]);
-        expect(graph.parentWays(survivor).length).to.equal(2);
+        expect(graph.parentWays(survivor).length).toEqual(2);
     });
 
 
@@ -231,7 +231,7 @@ describe('iD.actionMergeNodes', function () {
         var survivor = graph.hasEntity('e');
         expect(survivor).toBeInstanceOf(iD.osmNode);
         expect(survivor.loc).toEqual([0, 0]);
-        expect(graph.parentWays(survivor).length).to.equal(3);
+        expect(graph.parentWays(survivor).length).toEqual(3);
     });
 
 });

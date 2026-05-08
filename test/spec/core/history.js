@@ -28,7 +28,7 @@ describe('iD.coreHistory', function () {
         it('merges the entities into all graph versions', function () {
             var n = new iD.osmNode({id: 'n'});
             history.merge([n]);
-            expect(history.graph().entity('n')).to.equal(n);
+            expect(history.graph().entity('n')).toEqual(n);
         });
 
         it('emits a merge event with the new entities', function () {
@@ -47,12 +47,12 @@ describe('iD.coreHistory', function () {
         it('updates the graph', function () {
             var node = new iD.osmNode();
             history.perform(function (graph) { return graph.replace(node); });
-            expect(history.graph().entity(node.id)).to.equal(node);
+            expect(history.graph().entity(node.id)).toEqual(node);
         });
 
         it('pushes an undo annotation', function () {
             history.perform(actionNoop, 'annotation');
-            expect(history.undoAnnotation()).to.equal('annotation');
+            expect(history.undoAnnotation()).toEqual('annotation');
         });
 
         it('emits a change event', function () {
@@ -67,7 +67,7 @@ describe('iD.coreHistory', function () {
             history.perform(action1, action2, 'annotation');
             expect(action1).toHaveBeenCalled();
             expect(action2).toHaveBeenCalled();
-            expect(history.undoAnnotation()).to.equal('annotation');
+            expect(history.undoAnnotation()).toEqual('annotation');
         });
 
         it('performs transitionable actions in a transition', async () => {
@@ -88,13 +88,13 @@ describe('iD.coreHistory', function () {
         it('updates the graph', function () {
             var node = new iD.osmNode();
             history.replace(function (graph) { return graph.replace(node); });
-            expect(history.graph().entity(node.id)).to.equal(node);
+            expect(history.graph().entity(node.id)).toEqual(node);
         });
 
         it('replaces the undo annotation', function () {
             history.perform(actionNoop, 'annotation1');
             history.replace(actionNoop, 'annotation2');
-            expect(history.undoAnnotation()).to.equal('annotation2');
+            expect(history.undoAnnotation()).toEqual('annotation2');
         });
 
         it('emits a change event', function () {
@@ -109,7 +109,7 @@ describe('iD.coreHistory', function () {
             history.replace(action1, action2, 'annotation');
             expect(action1).toHaveBeenCalled();
             expect(action2).toHaveBeenCalled();
-            expect(history.undoAnnotation()).to.equal('annotation');
+            expect(history.undoAnnotation()).toEqual('annotation');
         });
     });
 
@@ -143,7 +143,7 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop, 'annotation2');
             history.perform(actionNoop, 'annotation3');
             history.pop(2);
-            expect(history.undoAnnotation()).to.equal('annotation1');
+            expect(history.undoAnnotation()).toEqual('annotation1');
         });
 
         it('pops 0 times', function () {
@@ -151,7 +151,7 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop, 'annotation2');
             history.perform(actionNoop, 'annotation3');
             history.pop(0);
-            expect(history.undoAnnotation()).to.equal('annotation3');
+            expect(history.undoAnnotation()).toEqual('annotation3');
         });
 
         it('pops 1 time if argument is invalid', function () {
@@ -159,9 +159,9 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop, 'annotation2');
             history.perform(actionNoop, 'annotation3');
             history.pop('foo');
-            expect(history.undoAnnotation()).to.equal('annotation2');
+            expect(history.undoAnnotation()).toEqual('annotation2');
             history.pop(-1);
-            expect(history.undoAnnotation()).to.equal('annotation1');
+            expect(history.undoAnnotation()).toEqual('annotation1');
         });
     });
 
@@ -179,7 +179,7 @@ describe('iD.coreHistory', function () {
         it('pushes the redo stack', function () {
             history.perform(actionNoop, 'annotation');
             history.undo();
-            expect(history.redoAnnotation()).to.equal('annotation');
+            expect(history.redoAnnotation()).toEqual('annotation');
         });
 
         it('emits an undone event', function () {
@@ -207,7 +207,7 @@ describe('iD.coreHistory', function () {
             history.on('redone', spy);
             history.undo();
             history.redo();
-            expect(history.undoAnnotation()).to.equal('annotation');
+            expect(history.undoAnnotation()).toEqual('annotation');
             expect(spy).toHaveBeenCalled();
         });
 
@@ -340,13 +340,13 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop, 'annotation8');
 
             history.reset('check1');
-            expect(history.undoAnnotation()).to.equal('annotation3');
+            expect(history.undoAnnotation()).toEqual('annotation3');
 
             history.reset('check2');
-            expect(history.undoAnnotation()).to.equal('annotation5');
+            expect(history.undoAnnotation()).toEqual('annotation5');
 
             history.reset('check1');
-            expect(history.undoAnnotation()).to.equal('annotation3');
+            expect(history.undoAnnotation()).toEqual('annotation3');
         });
 
         it('emits a change event', function () {
@@ -576,7 +576,7 @@ describe('iD.coreHistory', function () {
         it('asyncPrefs get and set work correctly', async function() {
             await asyncPrefs.set('test_async_key', 'test_async_value');
             var retrievedData = await asyncPrefs.get('test_async_key');
-            expect(retrievedData).to.equal('test_async_value');
+            expect(retrievedData).toEqual('test_async_value');
         });
 
         it('migrates history data from localStorage to IndexedDB', async function() {

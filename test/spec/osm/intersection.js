@@ -1594,37 +1594,37 @@ describe('iD.osmInferRestriction', function() {
             from: { node: 'u', way: '=', vertex: '*' },
             to:   { node: 'x', way: '-', vertex: '*' }
         }, projection);
-        expect(r1).to.equal('no_right_turn');
+        expect(r1).toEqual('no_right_turn');
 
         var r2 = iD.osmInferRestriction(graph, {
             from: { node: 'x', way: '-', vertex: '*' },
             to:   { node: 'w', way: '~', vertex: '*' }
         }, projection);
-        expect(r2).to.equal('no_right_turn');
+        expect(r2).toEqual('no_right_turn');
 
         var l1 = iD.osmInferRestriction(graph, {
             from: { node: 'x', way: '-', vertex: '*' },
             to:   { node: 'u', way: '=', vertex: '*' }
         }, projection);
-        expect(l1).to.equal('no_left_turn');
+        expect(l1).toEqual('no_left_turn');
 
         var l2 = iD.osmInferRestriction(graph, {
             from: { node: 'w', way: '~', vertex: '*' },
             to:   { node: 'x', way: '-', vertex: '*' }
         }, projection);
-        expect(l2).to.equal('no_left_turn');
+        expect(l2).toEqual('no_left_turn');
 
         var s = iD.osmInferRestriction(graph, {
             from: { node: 'u', way: '=', vertex: '*' },
             to:   { node: 'w', way: '~', vertex: '*' }
         }, projection);
-        expect(s).to.equal('no_straight_on');
+        expect(s).toEqual('no_straight_on');
 
         var u = iD.osmInferRestriction(graph, {
             from: { node: 'u', way: '=', vertex: '*' },
             to:   { node: 'u', way: '=', vertex: '*' }
         }, projection);
-        expect(u).to.equal('no_u_turn');
+        expect(u).toEqual('no_u_turn');
     });
 
 
@@ -1646,7 +1646,7 @@ describe('iD.osmInferRestriction', function() {
             from: { node: 'x', way: 'w1', vertex: '*' },
             to:   { node: 'u', way: 'w2', vertex: '*' }
         }, projection);
-        expect(r).to.equal('no_u_turn');
+        expect(r).toEqual('no_u_turn');
     });
 
 
@@ -1668,7 +1668,7 @@ describe('iD.osmInferRestriction', function() {
             from: { node: 'x', way: 'w1', vertex: '*' },
             to:   { node: 'u', way: 'w2', vertex: '*' }
         }, projection);
-        expect(r).to.equal('no_left_turn');
+        expect(r).toEqual('no_left_turn');
     });
 
 
@@ -1692,7 +1692,7 @@ describe('iD.osmInferRestriction', function() {
             from: { node: 'x', way: 'w1', vertex: '+' },
             to:   { node: 'u', way: 'w2', vertex: '*' }
         }, projection);
-        expect(r).to.equal('no_u_turn');
+        expect(r).toEqual('no_u_turn');
     });
 
 
@@ -1716,6 +1716,6 @@ describe('iD.osmInferRestriction', function() {
             from: { node: 'x', way: 'w1', vertex: '+' },
             to:   { node: 'u', way: 'w2', vertex: '*' }
         }, projection);
-        expect(r).to.equal('no_u_turn');
+        expect(r).toEqual('no_u_turn');
     });
 });

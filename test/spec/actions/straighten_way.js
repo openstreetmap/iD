@@ -21,7 +21,7 @@ describe('iD.actionStraightenWay', function () {
                 new iD.osmNode({id: 'd', loc: [3, 0]}),
                 new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
-            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).to.equal('too_bendy');
+            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).toEqual('too_bendy');
         });
 
         it('returns \'too_bendy\' for ways with coincident start/end nodes', function () {
@@ -32,7 +32,7 @@ describe('iD.actionStraightenWay', function () {
                 new iD.osmNode({id: 'd', loc: [0, 0]}),
                 new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
-            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).to.equal('too_bendy');
+            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).toEqual('too_bendy');
         });
     });
 

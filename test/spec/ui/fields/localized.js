@@ -29,8 +29,8 @@ describe('iD.uiFieldLocalized', function() {
         await setTimeout(20);
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
-        expect(selection.selectAll('.localized-lang').nodes().length).to.equal(1);
-        expect(selection.selectAll('.localized-value').nodes().length).to.equal(1);
+        expect(selection.selectAll('.localized-lang').nodes().length).toEqual(1);
+        expect(selection.selectAll('.localized-value').nodes().length).toEqual(1);
     });
 
     it('doesn\'t create a tag when the value is empty', async () => {

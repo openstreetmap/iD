@@ -16,7 +16,7 @@ describe('iD.rendererTileLayer', function() {
     });
 
     it('#dimensions', function() {
-        expect(c.dimensions([100, 100])).to.equal(c);
+        expect(c.dimensions([100, 100])).toEqual(c);
         expect(c.dimensions()).toEqual([100,100]);
     });
 });

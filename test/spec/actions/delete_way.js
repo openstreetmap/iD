@@ -78,8 +78,8 @@ describe('iD.actionDeleteWay', function() {
     //             route    = new iD.osmRelation({members: [{id: 'a'}], tags: {type: 'route'}}),
     //             boundary = new iD.osmRelation({members: [{id: 'b'}], tags: {type: 'boundary'}}),
     //             graph    = new iD.coreGraph([a, b, route, boundary]);
-    //         expect(iD.actionDeleteWay('a').disabled(graph)).to.equal('part_of_relation');
-    //         expect(iD.actionDeleteWay('b').disabled(graph)).to.equal('part_of_relation');
+    //         expect(iD.actionDeleteWay('a').disabled(graph)).toEqual('part_of_relation');
+    //         expect(iD.actionDeleteWay('b').disabled(graph)).toEqual('part_of_relation');
     //     });
 
     //     it('returns \'part_of_relation\' for outer members of multipolygons', function () {
@@ -87,7 +87,7 @@ describe('iD.actionDeleteWay', function() {
     //             relation = new iD.osmRelation({members: [{id: 'w', role: 'outer'}], tags: {type: 'multipolygon'}}),
     //             graph    = new iD.coreGraph([way, relation]),
     //             action   = iD.actionDeleteWay(way.id);
-    //         expect(action.disabled(graph)).to.equal('part_of_relation');
+    //         expect(action.disabled(graph)).toEqual('part_of_relation');
     //     });
 
     //     it('returns falsy for inner members of multipolygons', function () {

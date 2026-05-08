@@ -75,7 +75,7 @@ describe('iD.servicePanoramax', function() {
 
             panoramax.init();
             var cache2 = panoramax.cache();
-            expect(cache).to.equal(cache2);
+            expect(cache).toEqual(cache2);
         });
     });
 

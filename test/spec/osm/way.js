@@ -19,7 +19,7 @@ describe('iD.osmWay', function() {
 
     it('returns a way', function () {
         expect(new iD.osmWay()).toBeInstanceOf(iD.osmWay);
-        expect(new iD.osmWay().type).to.equal('way');
+        expect(new iD.osmWay().type).toEqual('way');
     });
 
     it('defaults nodes to an empty array', function () {
@@ -52,7 +52,7 @@ describe('iD.osmWay', function() {
                 copies = {},
                 result = w.copy(null, copies);
             expect(Object.keys(copies)).to.have.length(1);
-            expect(copies.w).to.equal(result);
+            expect(copies.w).toEqual(result);
         });
 
         it('returns an existing copy in input object', function () {
@@ -61,7 +61,7 @@ describe('iD.osmWay', function() {
                 result1 = w.copy(null, copies),
                 result2 = w.copy(null, copies);
             expect(Object.keys(copies)).to.have.length(1);
-            expect(result1).to.equal(result2);
+            expect(result1).toEqual(result2);
         });
 
         it('deep copies nodes', function () {
@@ -87,19 +87,19 @@ describe('iD.osmWay', function() {
                 copies = {},
                 result = w.copy(graph, copies);
 
-            expect(result.nodes[0]).to.equal(result.nodes[1]);
+            expect(result.nodes[0]).toEqual(result.nodes[1]);
         });
     });
 
     describe('#first', function () {
         it('returns the first node', function () {
-            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).first()).to.equal('a');
+            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).first()).toEqual('a');
         });
     });
 
     describe('#last', function () {
         it('returns the last node', function () {
-            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).last()).to.equal('c');
+            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).last()).toEqual('c');
         });
     });
 
@@ -115,11 +115,11 @@ describe('iD.osmWay', function() {
 
     describe('#affix', function () {
         it('returns \'prefix\' if the way starts with the given node', function () {
-            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).affix('a')).to.equal('prefix');
+            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).affix('a')).toEqual('prefix');
         });
 
         it('returns \'suffix\' if the way ends with the given node', function () {
-            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).affix('c')).to.equal('suffix');
+            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).affix('c')).toEqual('suffix');
         });
 
         it('returns falsy if the way does not start or end with the given node', function () {
@@ -223,72 +223,72 @@ describe('iD.osmWay', function() {
 
     describe('#layer', function() {
         it('returns 0 when the way has no tags', function() {
-            expect(new iD.osmWay().layer()).to.equal(0);
+            expect(new iD.osmWay().layer()).toEqual(0);
         });
 
         it('returns 0 when the way has a non numeric layer tag', function() {
-            expect(new iD.osmWay({tags: { layer: 'NaN' }}).layer()).to.equal(0);
-            expect(new iD.osmWay({tags: { layer: 'Infinity' }}).layer()).to.equal(0);
-            expect(new iD.osmWay({tags: { layer: 'Foo' }}).layer()).to.equal(0);
+            expect(new iD.osmWay({tags: { layer: 'NaN' }}).layer()).toEqual(0);
+            expect(new iD.osmWay({tags: { layer: 'Infinity' }}).layer()).toEqual(0);
+            expect(new iD.osmWay({tags: { layer: 'Foo' }}).layer()).toEqual(0);
         });
 
         it('returns the layer when the way has an explicit layer tag', function() {
-            expect(new iD.osmWay({tags: { layer: '2' }}).layer()).to.equal(2);
-            expect(new iD.osmWay({tags: { layer: '-5' }}).layer()).to.equal(-5);
+            expect(new iD.osmWay({tags: { layer: '2' }}).layer()).toEqual(2);
+            expect(new iD.osmWay({tags: { layer: '-5' }}).layer()).toEqual(-5);
         });
 
         it('clamps the layer to within -10, 10', function() {
-            expect(new iD.osmWay({tags: { layer: '12' }}).layer()).to.equal(10);
-            expect(new iD.osmWay({tags: { layer: '-15' }}).layer()).to.equal(-10);
+            expect(new iD.osmWay({tags: { layer: '12' }}).layer()).toEqual(10);
+            expect(new iD.osmWay({tags: { layer: '-15' }}).layer()).toEqual(-10);
         });
 
         it('returns 1 for location=overground', function() {
-            expect(new iD.osmWay({tags: { location: 'overground' }}).layer()).to.equal(1);
+            expect(new iD.osmWay({tags: { location: 'overground' }}).layer()).toEqual(1);
         });
 
         it('returns -1 for covered=yes', function() {
-            expect(new iD.osmWay({tags: { covered: 'yes' }}).layer()).to.equal(-1);
+            expect(new iD.osmWay({tags: { covered: 'yes' }}).layer()).toEqual(-1);
         });
 
         it('returns -1 for location=underground', function() {
-            expect(new iD.osmWay({tags: { location: 'underground' }}).layer()).to.equal(-1);
+            expect(new iD.osmWay({tags: { location: 'underground' }}).layer()).toEqual(-1);
         });
 
         it('returns -10 for location=underwater', function() {
-            expect(new iD.osmWay({tags: { location: 'underwater' }}).layer()).to.equal(-10);
+            expect(new iD.osmWay({tags: { location: 'underwater' }}).layer()).toEqual(-10);
         });
 
         it('returns 10 for power lines', function() {
-            expect(new iD.osmWay({tags: { power: 'line' }}).layer()).to.equal(10);
-            expect(new iD.osmWay({tags: { power: 'minor_line' }}).layer()).to.equal(10);
+            expect(new iD.osmWay({tags: { power: 'line' }}).layer()).toEqual(10);
+            expect(new iD.osmWay({tags: { power: 'minor_line' }}).layer()).toEqual(10);
         });
 
         it('returns 10 for aerialways', function() {
-            expect(new iD.osmWay({tags: { aerialway: 'cable_car' }}).layer()).to.equal(10);
+            expect(new iD.osmWay({tags: { aerialway: 'cable_car' }}).layer()).toEqual(10);
         });
 
         it('returns 1 for bridges', function() {
-            expect(new iD.osmWay({tags: { bridge: 'yes' }}).layer()).to.equal(1);
+            expect(new iD.osmWay({tags: { bridge: 'yes' }}).layer()).toEqual(1);
         });
 
         it('returns -1 for cuttings', function() {
-            expect(new iD.osmWay({tags: { cutting: 'yes' }}).layer()).to.equal(-1);
+            expect(new iD.osmWay({tags: { cutting: 'yes' }}).layer()).toEqual(-1);
         });
 
         it('returns -1 for tunnels', function() {
-            expect(new iD.osmWay({tags: { tunnel: 'yes' }}).layer()).to.equal(-1);
+            expect(new iD.osmWay({tags: { tunnel: 'yes' }}).layer()).toEqual(-1);
         });
 
         it('returns -1 for waterways', function() {
-            expect(new iD.osmWay({tags: { waterway: 'stream' }}).layer()).to.equal(-1);
+            expect(new iD.osmWay({tags: { waterway: 'stream' }}).layer()).toEqual(-1);
         });
 
         it('returns -10 for pipelines', function() {
-            expect(new iD.osmWay({tags: { man_made: 'pipeline' }}).layer()).to.equal(-10);
+            expect(new iD.osmWay({tags: { man_made: 'pipeline' }}).layer()).toEqual(-10);
         });
 
         it('returns -10 for boundaries', function() {
-            expect(new iD.osmWay({tags: { boundary: 'administrative' }}).layer()).to.equal(-10);
+            expect(new iD.osmWay({tags: { boundary: 'administrative' }}).layer()).toEqual(-10);
         });
 
     });
@@ -420,104 +420,104 @@ describe('iD.osmWay', function() {
 
     describe('#isArea', function() {
         it('returns false when the way has no tags', function() {
-            expect(new iD.osmWay().isArea()).to.equal(false);
+            expect(new iD.osmWay().isArea()).toEqual(false);
         });
 
         it('returns true if the way has tag area=yes', function() {
-            expect(new iD.osmWay({tags: { area: 'yes' }}).isArea()).to.equal(true);
+            expect(new iD.osmWay({tags: { area: 'yes' }}).isArea()).toEqual(true);
         });
 
         it('returns false if the way is closed and has no tags', function() {
-            expect(new iD.osmWay({nodes: ['n1', 'n1']}).isArea()).to.equal(false);
+            expect(new iD.osmWay({nodes: ['n1', 'n1']}).isArea()).toEqual(false);
         });
 
         it('returns true if the way is closed and has a key in iD.osmAreaKeys', function() {
-            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: {building: 'yes'}}).isArea()).to.equal(true);
+            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: {building: 'yes'}}).isArea()).toEqual(true);
         });
 
         it('returns true for some highway and railway exceptions', function() {
-            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { highway: 'services' }}).isArea(), 'highway=services').to.equal(true);
-            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { highway: 'rest_area' }}).isArea(), 'highway=rest_area').to.equal(true);
-            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { railway: 'roundhouse' }}).isArea(), 'railway=roundhouse').to.equal(true);
-            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { railway: 'station' }}).isArea(), 'railway=station').to.equal(true);
-            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { railway: 'traverser' }}).isArea(), 'railway=traverser').to.equal(true);
-            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { railway: 'turntable' }}).isArea(), 'railway=turntable').to.equal(true);
-            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { railway: 'wash' }}).isArea(), 'railway=wash').to.equal(true);
+            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { highway: 'services' }}).isArea(), 'highway=services').toEqual(true);
+            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { highway: 'rest_area' }}).isArea(), 'highway=rest_area').toEqual(true);
+            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { railway: 'roundhouse' }}).isArea(), 'railway=roundhouse').toEqual(true);
+            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { railway: 'station' }}).isArea(), 'railway=station').toEqual(true);
+            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { railway: 'traverser' }}).isArea(), 'railway=traverser').toEqual(true);
+            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { railway: 'turntable' }}).isArea(), 'railway=turntable').toEqual(true);
+            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: { railway: 'wash' }}).isArea(), 'railway=wash').toEqual(true);
         });
 
         it('returns false if the way is closed and has no keys in iD.osmAreaKeys', function() {
-            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: {a: 'b'}}).isArea()).to.equal(false);
+            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: {a: 'b'}}).isArea()).toEqual(false);
         });
 
         it('returns false if the way is closed and has tag area=no', function() {
-            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: {area: 'no', building: 'yes'}}).isArea()).to.equal(false);
+            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: {area: 'no', building: 'yes'}}).isArea()).toEqual(false);
         });
 
         it('returns false for coastline', function() {
-            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: {natural: 'coastline'}}).isArea()).to.equal(false);
+            expect(new iD.osmWay({nodes: ['n1', 'n1'], tags: {natural: 'coastline'}}).isArea()).toEqual(false);
         });
     });
 
     describe('#isDegenerate', function() {
        it('returns true for a linear way with zero or one nodes', function () {
-           expect(new iD.osmWay({nodes: []}).isDegenerate()).to.equal(true);
-           expect(new iD.osmWay({nodes: ['a']}).isDegenerate()).to.equal(true);
+           expect(new iD.osmWay({nodes: []}).isDegenerate()).toEqual(true);
+           expect(new iD.osmWay({nodes: ['a']}).isDegenerate()).toEqual(true);
        });
 
         it('returns true for a circular way with only one unique node', function () {
-            expect(new iD.osmWay({nodes: ['a', 'a']}).isDegenerate()).to.equal(true);
+            expect(new iD.osmWay({nodes: ['a', 'a']}).isDegenerate()).toEqual(true);
         });
 
         it('returns false for a linear way with two or more nodes', function () {
-            expect(new iD.osmWay({nodes: ['a', 'b']}).isDegenerate()).to.equal(false);
+            expect(new iD.osmWay({nodes: ['a', 'b']}).isDegenerate()).toEqual(false);
         });
 
         it('returns true for a linear way that doubles back on itself', function () {
-            expect(new iD.osmWay({nodes: ['a', 'b', 'a']}).isDegenerate()).to.equal(true);
+            expect(new iD.osmWay({nodes: ['a', 'b', 'a']}).isDegenerate()).toEqual(true);
         });
 
         it('returns true for an area with zero, one, or two unique nodes', function () {
-            expect(new iD.osmWay({tags: {area: 'yes'}, nodes: []}).isDegenerate()).to.equal(true);
-            expect(new iD.osmWay({tags: {area: 'yes'}, nodes: ['a', 'a']}).isDegenerate()).to.equal(true);
-            expect(new iD.osmWay({tags: {area: 'yes'}, nodes: ['a', 'b', 'a']}).isDegenerate()).to.equal(true);
+            expect(new iD.osmWay({tags: {area: 'yes'}, nodes: []}).isDegenerate()).toEqual(true);
+            expect(new iD.osmWay({tags: {area: 'yes'}, nodes: ['a', 'a']}).isDegenerate()).toEqual(true);
+            expect(new iD.osmWay({tags: {area: 'yes'}, nodes: ['a', 'b', 'a']}).isDegenerate()).toEqual(true);
         });
 
         it('returns false for an area with three or more unique nodes', function () {
-            expect(new iD.osmWay({tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'a']}).isDegenerate()).to.equal(false);
+            expect(new iD.osmWay({tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'a']}).isDegenerate()).toEqual(false);
         });
     });
 
     describe('#areAdjacent', function() {
         it('returns false for nodes not in the way', function() {
-            expect(new iD.osmWay().areAdjacent('a', 'b')).to.equal(false);
+            expect(new iD.osmWay().areAdjacent('a', 'b')).toEqual(false);
         });
 
         it('returns false for non-adjacent nodes in the way', function() {
-            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).areAdjacent('a', 'c')).to.equal(false);
+            expect(new iD.osmWay({nodes: ['a', 'b', 'c']}).areAdjacent('a', 'c')).toEqual(false);
         });
 
         it('returns true for adjacent nodes in the way (forward)', function() {
             var way = new iD.osmWay({nodes: ['a', 'b', 'c', 'd']});
-            expect(way.areAdjacent('a', 'b')).to.equal(true);
-            expect(way.areAdjacent('b', 'c')).to.equal(true);
-            expect(way.areAdjacent('c', 'd')).to.equal(true);
+            expect(way.areAdjacent('a', 'b')).toEqual(true);
+            expect(way.areAdjacent('b', 'c')).toEqual(true);
+            expect(way.areAdjacent('c', 'd')).toEqual(true);
         });
 
         it('returns true for adjacent nodes in the way (reverse)', function() {
             var way = new iD.osmWay({nodes: ['a', 'b', 'c', 'd']});
-            expect(way.areAdjacent('b', 'a')).to.equal(true);
-            expect(way.areAdjacent('c', 'b')).to.equal(true);
-            expect(way.areAdjacent('d', 'c')).to.equal(true);
+            expect(way.areAdjacent('b', 'a')).toEqual(true);
+            expect(way.areAdjacent('c', 'b')).toEqual(true);
+            expect(way.areAdjacent('d', 'c')).toEqual(true);
         });
     });
 
     describe('#geometry', function() {
         it('returns \'line\' when the way is not an area', function () {
-            expect(new iD.osmWay().geometry(new iD.coreGraph())).to.equal('line');
+            expect(new iD.osmWay().geometry(new iD.coreGraph())).toEqual('line');
         });
 
         it('returns \'area\' when the way is an area', function () {
-            expect(new iD.osmWay({tags: { area: 'yes' }}).geometry(new iD.coreGraph())).to.equal('area');
+            expect(new iD.osmWay({tags: { area: 'yes' }}).geometry(new iD.coreGraph())).toEqual('area');
         });
     });
 
@@ -1003,7 +1003,7 @@ describe('iD.osmWay', function() {
         });
 
         it('includes changeset if provided', function() {
-            expect(new iD.osmWay().asJXON('1234').way['@changeset']).to.equal('1234');
+            expect(new iD.osmWay().asJXON('1234').way['@changeset']).toEqual('1234');
         });
     });
 
@@ -1015,7 +1015,7 @@ describe('iD.osmWay', function() {
                 graph = new iD.coreGraph([a, b, w]),
                 json = w.asGeoJSON(graph);
 
-            expect(json.type).to.equal('LineString');
+            expect(json.type).toEqual('LineString');
             expect(json.coordinates).toEqual([a.loc, b.loc]);
         });
 
@@ -1027,7 +1027,7 @@ describe('iD.osmWay', function() {
                 graph = new iD.coreGraph([a, b, c, w]),
                 json = w.asGeoJSON(graph);
 
-            expect(json.type).to.equal('Polygon');
+            expect(json.type).toEqual('Polygon');
             expect(json.coordinates).toEqual([[a.loc, b.loc, c.loc, a.loc]]);
         });
 
@@ -1039,7 +1039,7 @@ describe('iD.osmWay', function() {
                 graph = new iD.coreGraph([a, b, c, w]),
                 json = w.asGeoJSON(graph);
 
-            expect(json.type).to.equal('LineString');
+            expect(json.type).toEqual('LineString');
             expect(json.coordinates).toEqual([a.loc, b.loc, c.loc]);
         });
     });
@@ -1078,7 +1078,7 @@ describe('iD.osmWay', function() {
             var s = graph.entity('s').area(graph),
                 l = graph.entity('l').area(graph);
 
-            expect(s).to.equal(l);
+            expect(s).toEqual(l);
         });
 
         it('returns 0 for degenerate areas', function () {
@@ -1090,9 +1090,9 @@ describe('iD.osmWay', function() {
                 new iD.osmWay({id: '2', tags: {area: 'yes'}, nodes: ['a', 'b']})
             ]);
 
-            expect(graph.entity('0').area(graph)).to.equal(0);
-            expect(graph.entity('1').area(graph)).to.equal(0);
-            expect(graph.entity('2').area(graph)).to.equal(0);
+            expect(graph.entity('0').area(graph)).toEqual(0);
+            expect(graph.entity('1').area(graph)).toEqual(0);
+            expect(graph.entity('2').area(graph)).toEqual(0);
         });
     });
 

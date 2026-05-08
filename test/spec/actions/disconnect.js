@@ -2,7 +2,7 @@ describe('iD.actionDisconnect', function () {
     describe('#disabled', function () {
         it('returns \'not_connected\' for a node shared by less than two ways', function () {
             var graph = new iD.coreGraph([new iD.osmNode({id: 'a'})]);
-            expect(iD.actionDisconnect('a').disabled(graph)).to.equal('not_connected');
+            expect(iD.actionDisconnect('a').disabled(graph)).toEqual('not_connected');
         });
 
         it('returns falsy for the closing node in a closed line', function () {
@@ -30,7 +30,7 @@ describe('iD.actionDisconnect', function () {
                 new iD.osmNode({id: 'd'}),
                 new iD.osmWay({id: 'w', nodes: ['a', 'b', 'c', 'd', 'a'], tags: {area: 'yes'}})
             ]);
-            expect(iD.actionDisconnect('a').disabled(graph)).to.equal('not_connected');
+            expect(iD.actionDisconnect('a').disabled(graph)).toEqual('not_connected');
         });
 
         it('returns falsy for a shared non-closing node in an area', function () {
@@ -371,11 +371,11 @@ describe('iD.actionDisconnect', function () {
         graph = iD.actionDisconnect('b', 'e')(graph);
 
         // Immutable loc => should be shared by identity.
-        expect(graph.entity('b').loc).to.equal(loc);
-        expect(graph.entity('e').loc).to.equal(loc);
+        expect(graph.entity('b').loc).toEqual(loc);
+        expect(graph.entity('e').loc).toEqual(loc);
 
         // Immutable tags => should be shared by identity.
-        expect(graph.entity('b').tags).to.equal(tags);
-        expect(graph.entity('e').tags).to.equal(tags);
+        expect(graph.entity('b').tags).toEqual(tags);
+        expect(graph.entity('e').tags).toEqual(tags);
     });
 });

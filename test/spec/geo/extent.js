@@ -29,19 +29,19 @@ describe('iD.geoExtent', function () {
         });
 
         it('has length 2', function () {
-            expect(iD.geoExtent().length).to.equal(2);
+            expect(iD.geoExtent().length).toEqual(2);
         });
 
         it('has min element', function () {
             var min = [0, 0],
                 max = [5, 10];
-            expect(iD.geoExtent(min, max)[0]).to.equal(min);
+            expect(iD.geoExtent(min, max)[0]).toEqual(min);
         });
 
         it('has max element', function () {
             var min = [0, 0],
                 max = [5, 10];
-            expect(iD.geoExtent(min, max)[1]).to.equal(max);
+            expect(iD.geoExtent(min, max)[1]).toEqual(max);
         });
     });
 

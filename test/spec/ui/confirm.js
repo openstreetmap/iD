@@ -21,22 +21,22 @@ describe('iD.uiConfirm', function () {
 
     it('has a header section', function () {
         var selection = iD.uiConfirm(elem);
-        expect(selection.selectAll('div.content div.header').size()).to.equal(1);
+        expect(selection.selectAll('div.content div.header').size()).toEqual(1);
     });
 
     it('has a message section', function () {
         var selection = iD.uiConfirm(elem);
-        expect(selection.selectAll('div.content div.message-text').size()).to.equal(1);
+        expect(selection.selectAll('div.content div.message-text').size()).toEqual(1);
     });
 
     it('has a buttons section', function () {
         var selection = iD.uiConfirm(elem);
-        expect(selection.selectAll('div.content div.buttons').size()).to.equal(1);
+        expect(selection.selectAll('div.content div.buttons').size()).toEqual(1);
     });
 
     it('can have an ok button added to it', function () {
         var selection = iD.uiConfirm(elem).okButton();
-        expect(selection.selectAll('div.content div.buttons button.action').size()).to.equal(1);
+        expect(selection.selectAll('div.content div.buttons button.action').size()).toEqual(1);
     });
 
     it('can be dismissed by calling close function', async () => {

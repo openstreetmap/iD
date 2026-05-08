@@ -86,7 +86,7 @@ describe('iD.actionSplit', function () {
                 new iD.osmWay({ id: '-', nodes: ['a', 'b'] })
             ]);
 
-            expect(iD.actionSplit('a').disabled(graph)).to.equal('not_eligible');
+            expect(iD.actionSplit('a').disabled(graph)).toEqual('not_eligible');
         });
 
         it('returns \'not_eligible\' for the last node of a single way', function () {
@@ -99,7 +99,7 @@ describe('iD.actionSplit', function () {
                 new iD.osmWay({ id: '-', nodes: ['a', 'b'] })
             ]);
 
-            expect(iD.actionSplit('b').disabled(graph)).to.equal('not_eligible');
+            expect(iD.actionSplit('b').disabled(graph)).toEqual('not_eligible');
         });
 
         it('returns \'not_eligible\' for an intersection of two ways with non-parent way specified', function () {
@@ -120,7 +120,7 @@ describe('iD.actionSplit', function () {
                 new iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
             ]);
 
-            expect(iD.actionSplit('*').limitWays(['-', '=']).disabled(graph)).to.equal('not_eligible');
+            expect(iD.actionSplit('*').limitWays(['-', '=']).disabled(graph)).toEqual('not_eligible');
         });
 
         it('returns \'parent_incomplete\' when parent relations are too incomplete', function () {
@@ -144,7 +144,7 @@ describe('iD.actionSplit', function () {
             ]);
 
             var action = iD.actionSplit('b', ['=']);
-            expect(action.disabled(graph)).to.equal('parent_incomplete');
+            expect(action.disabled(graph)).toEqual('parent_incomplete');
         });
 
         it('allows split operation for single-member relations', function () {
@@ -196,7 +196,7 @@ describe('iD.actionSplit', function () {
             ]);
 
             var action = iD.actionSplit('b', ['*']);
-            expect(action.disabled(graph)).to.equal('simple_roundabout');
+            expect(action.disabled(graph)).toEqual('simple_roundabout');
         });
 
         it('allows splitting of a closed roundabout that is part of a junction relation', function () {
@@ -256,8 +256,8 @@ describe('iD.actionSplit', function () {
             graph = iD.actionSplit('b', ['='])(graph);
 
             // Immutable tags => should be shared by identity.
-            expect(graph.entity('-').tags).to.equal(tags);
-            expect(graph.entity('=').tags).to.equal(tags);
+            expect(graph.entity('-').tags).toEqual(tags);
+            expect(graph.entity('=').tags).toEqual(tags);
         });
 
         it('gives the previous id to the longest way (first)', function () {
@@ -593,8 +593,8 @@ describe('iD.actionSplit', function () {
 
             // step count should be distributed according the the resulting ways'
             // segment lengths
-            expect(graph.entity('=').tags.step_count).to.equal('10');
-            expect(graph.entity('-').tags.step_count).to.equal('30');
+            expect(graph.entity('=').tags.step_count).toEqual('10');
+            expect(graph.entity('-').tags.step_count).toEqual('30');
         });
 
         it('preserves the total number of steps', () => {
@@ -611,7 +611,7 @@ describe('iD.actionSplit', function () {
             // the sum of the resulting step count should be preserved
             // even when the intermediate values are rounded
             expect(+graph.entity('=').tags.step_count +
-                   +graph.entity('-').tags.step_count).to.equal(42);
+                   +graph.entity('-').tags.step_count).toEqual(42);
         });
     });
 

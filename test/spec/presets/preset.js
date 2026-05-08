@@ -19,24 +19,24 @@ describe('iD.presetPreset', function() {
     describe('#matchGeometry', function() {
         it('returns false if it doesn\'t match', function() {
             var preset = iD.presetPreset('test', {geometry: ['line']});
-            expect(preset.matchGeometry('point')).to.equal(false);
+            expect(preset.matchGeometry('point')).toEqual(false);
         });
 
         it('returns true if it does match', function() {
             var preset = iD.presetPreset('test', {geometry: ['point', 'line']});
-            expect(preset.matchGeometry('point')).to.equal(true);
+            expect(preset.matchGeometry('point')).toEqual(true);
         });
     });
 
     describe('#matchAllGeometry', function() {
         it('returns false if they don\'t all match', function() {
             var preset = iD.presetPreset('test', {geometry: ['line']});
-            expect(preset.matchAllGeometry(['point','line'])).to.equal(false);
+            expect(preset.matchAllGeometry(['point','line'])).toEqual(false);
         });
 
         it('returns true if they do all match', function() {
             var preset = iD.presetPreset('test', {geometry: ['point', 'line']});
-            expect(preset.matchAllGeometry(['point','line'])).to.equal(true);
+            expect(preset.matchAllGeometry(['point','line'])).toEqual(true);
         });
     });
 
@@ -44,29 +44,29 @@ describe('iD.presetPreset', function() {
         it('returns -1 if preset does not match tags', function() {
             var preset = iD.presetPreset('test', {tags: {foo: 'bar'}});
             var entity = new iD.osmWay({tags: {highway: 'motorway'}});
-            expect(preset.matchScore(entity.tags)).to.equal(-1);
+            expect(preset.matchScore(entity.tags)).toEqual(-1);
         });
 
         it('returns the value of the matchScore property when matched', function() {
             var preset = iD.presetPreset('test', {tags: {highway: 'motorway'}, matchScore: 0.2});
             var entity = new iD.osmWay({tags: {highway: 'motorway'}});
-            expect(preset.matchScore(entity.tags)).to.equal(0.2);
+            expect(preset.matchScore(entity.tags)).toEqual(0.2);
         });
 
         it('defaults to the number of matched tags', function() {
             var preset = iD.presetPreset('test', {tags: {highway: 'residential'}});
             var entity = new iD.osmWay({tags: {highway: 'residential'}});
-            expect(preset.matchScore(entity.tags)).to.equal(1);
+            expect(preset.matchScore(entity.tags)).toEqual(1);
 
             preset = iD.presetPreset('test', {tags: {highway: 'service', service: 'alley'}});
             entity = new iD.osmWay({tags: {highway: 'service', service: 'alley'}});
-            expect(preset.matchScore(entity.tags)).to.equal(2);
+            expect(preset.matchScore(entity.tags)).toEqual(2);
         });
 
         it('counts * as a match for any value with score 0.5', function() {
             var preset = iD.presetPreset('test', {tags: {building: '*'}});
             var entity = new iD.osmWay({tags: {building: 'yep'}});
-            expect(preset.matchScore(entity.tags)).to.equal(0.5);
+            expect(preset.matchScore(entity.tags)).toEqual(0.5);
         });
 
         it('boosts matchScore for additional matches in addTags', function() {
@@ -101,22 +101,22 @@ describe('iD.presetPreset', function() {
     describe('isFallback', function() {
         it('returns true if preset has no tags', function() {
             var preset = iD.presetPreset('point', {tags: {}});
-            expect(preset.isFallback()).to.equal(true);
+            expect(preset.isFallback()).toEqual(true);
         });
 
         it('returns true if preset has a single \'area\' tag', function() {
             var preset = iD.presetPreset('area', {tags: {area: 'yes'}});
-            expect(preset.isFallback()).to.equal(true);
+            expect(preset.isFallback()).toEqual(true);
         });
 
         it('returns false if preset has a single non-\'area\' tag', function() {
             var preset = iD.presetPreset('building', {tags: {building: 'yes'}});
-            expect(preset.isFallback()).to.equal(false);
+            expect(preset.isFallback()).toEqual(false);
         });
 
         it('returns false if preset has multiple tags', function() {
             var preset = iD.presetPreset('building', {tags: {area: 'yes', building: 'yes'}});
-            expect(preset.isFallback()).to.equal(false);
+            expect(preset.isFallback()).toEqual(false);
         });
     });
 

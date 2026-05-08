@@ -633,11 +633,11 @@ describe('iD.Lanes', function() {
             }).lanes().metadata;
 
             expect(metadata.turnLanes.unspecified)
-                .to.equal(undefined);
+                .toEqual(undefined);
             expect(metadata.turnLanes.forward)
-                .to.equal(undefined);
+                .toEqual(undefined);
             expect(metadata.turnLanes.backward)
-                .to.equal(undefined);
+                .toEqual(undefined);
         });
 
         it('turnLanes.forward and turnLanes.backward are both undefined when both are not provided', function() {
@@ -653,9 +653,9 @@ describe('iD.Lanes', function() {
             expect(metadata.turnLanes.unspecified)
                 .toEqual([['through'], ['through', 'slight_right']]);
             expect(metadata.turnLanes.forward)
-                .to.equal(undefined);
+                .toEqual(undefined);
             expect(metadata.turnLanes.backward)
-                .to.equal(undefined);
+                .toEqual(undefined);
         });
 
         it('parses turnLane correctly when lanes:both_ways=1', function() {
@@ -810,7 +810,7 @@ describe('iD.Lanes', function() {
                     'maxspeed': '70'
                 }
             }).lanes().metadata.maxspeed;
-            expect(maxspeed).to.equal(70);
+            expect(maxspeed).toEqual(70);
             maxspeed = new iD.osmWay({
                 tags: {
                     highway: 'residential',
@@ -818,7 +818,7 @@ describe('iD.Lanes', function() {
                     'maxspeed': 70
                 }
             }).lanes().metadata.maxspeed;
-            expect(maxspeed).to.equal(70);
+            expect(maxspeed).toEqual(70);
         });
 
         it('should parse maxspeed with km/h correctly', function() {
@@ -829,7 +829,7 @@ describe('iD.Lanes', function() {
                     'maxspeed': '70 km/h'
                 }
             }).lanes().metadata.maxspeed;
-            expect(maxspeed).to.equal(70);
+            expect(maxspeed).toEqual(70);
         });
 
         it('should parse maxspeed with kmh correctly', function() {
@@ -840,7 +840,7 @@ describe('iD.Lanes', function() {
                     'maxspeed': '70kmh'
                 }
             }).lanes().metadata.maxspeed;
-            expect(maxspeed).to.equal(70);
+            expect(maxspeed).toEqual(70);
         });
 
         it('should parse maxspeed with kph correctly', function() {
@@ -851,7 +851,7 @@ describe('iD.Lanes', function() {
                     'maxspeed': '70 kph'
                 }
             }).lanes().metadata.maxspeed;
-            expect(maxspeed).to.equal(70);
+            expect(maxspeed).toEqual(70);
         });
 
         it('should parse maxspeed with mph correctly', function() {
@@ -862,7 +862,7 @@ describe('iD.Lanes', function() {
                     'maxspeed': '70mph'
                 }
             }).lanes().metadata.maxspeed;
-            expect(maxspeed).to.equal(70);
+            expect(maxspeed).toEqual(70);
         });
 
         it('should parse maxspeed with knots correctly', function() {
@@ -873,7 +873,7 @@ describe('iD.Lanes', function() {
                     'maxspeed': '50knots'
                 }
             }).lanes().metadata.maxspeed;
-            expect(maxspeed).to.equal(50);
+            expect(maxspeed).toEqual(50);
         });
 
         it('should return undefined when incorrect maxspeed unit provided', function() {
@@ -884,7 +884,7 @@ describe('iD.Lanes', function() {
                     'maxspeed': '70km'
                 }
             }).lanes().metadata.maxspeed;
-            expect(maxspeed).to.equal(undefined);
+            expect(maxspeed).toEqual(undefined);
         });
 
         it('should return undefined when incorrect maxspeed value provided', function() {
@@ -895,7 +895,7 @@ describe('iD.Lanes', function() {
                     'maxspeed': 'a70knots'
                 }
             }).lanes().metadata.maxspeed;
-            expect(maxspeed).to.equal(undefined);
+            expect(maxspeed).toEqual(undefined);
         });
 
         it('should return undefined when maxspeed not provided', function() {
@@ -905,7 +905,7 @@ describe('iD.Lanes', function() {
                     lanes: 5,
                 }
             }).lanes().metadata.maxspeed;
-            expect(maxspeed).to.equal(undefined);
+            expect(maxspeed).toEqual(undefined);
         });
     });
 

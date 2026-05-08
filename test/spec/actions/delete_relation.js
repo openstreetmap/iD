@@ -88,7 +88,7 @@ describe('iD.actionDeleteRelation', function () {
     //         var relation = new iD.osmRelation({members: [{id: 'w'}]}),
     //             graph    = new iD.coreGraph([relation]),
     //             action   = iD.actionDeleteRelation(relation.id);
-    //         expect(action.disabled(graph)).to.equal('incomplete_relation');
+    //         expect(action.disabled(graph)).toEqual('incomplete_relation');
     //     });
     // });
 });

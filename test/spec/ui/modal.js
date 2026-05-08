@@ -21,7 +21,7 @@ describe('iD.uiModal', function () {
 
     it('has a content section', function () {
         var selection = iD.uiModal(elem);
-        expect(selection.selectAll('div.content').size()).to.equal(1);
+        expect(selection.selectAll('div.content').size()).toEqual(1);
     });
 
     it('can be dismissed by calling close function', async () => {

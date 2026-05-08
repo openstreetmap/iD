@@ -53,7 +53,7 @@ describe.skip('iD.modeAddNote', function() {
         //     happen.mousedown(context.surface().node(), {});
         //     happen.mouseup(window, {});
         //     expect(context.selectedNoteID()).toEqual(-1);
-        //     expect(context.mode().id).to.equal('select-note');
+        //     expect(context.mode().id).toEqual('select-note');
         //     context.mode().exit();
         //     d3.select('window').on('click.draw-block', null);
         // });
@@ -63,7 +63,7 @@ describe.skip('iD.modeAddNote', function() {
     //     it('exits to browse mode', function(done) {
     //         happen.keydown(document, {keyCode: 27});
     //         window.setTimeout(function() {
-    //             expect(context.mode().id).to.equal('browse');
+    //             expect(context.mode().id).toEqual('browse');
     //             done();
     //         }, 200);
     //     });

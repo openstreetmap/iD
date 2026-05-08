@@ -17,7 +17,7 @@ describe('iD.utilKeybinding', function() {
 
     describe('#on', function () {
         it('returns self', function () {
-            expect(keybinding.on('a', spy)).to.equal(keybinding);
+            expect(keybinding.on('a', spy)).toEqual(keybinding);
         });
 
         it('adds a binding for the specified bare key', function () {

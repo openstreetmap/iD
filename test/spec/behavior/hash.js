@@ -29,7 +29,7 @@ describe('iD.behaviorHash', function () {
         hash();
         expect(context.map().center()[0]).toBeCloseTo(-77.02405, 1);
         expect(context.map().center()[1]).toBeCloseTo(38.87952, 1);
-        expect(context.map().zoom()).to.equal(20.0);
+        expect(context.map().zoom()).toEqual(20.0);
     });
 
     it('centerZooms map at requested coordinates on hash change', async () => {
@@ -38,7 +38,7 @@ describe('iD.behaviorHash', function () {
         await new Promise(cb => { d3.select(window).on('hashchange', cb); });
         expect(context.map().center()[0]).toBeCloseTo(-77.02405, 1);
         expect(context.map().center()[1]).toBeCloseTo(38.87952, 1);
-        expect(context.map().zoom()).to.equal(20.0);
+        expect(context.map().zoom()).toEqual(20.0);
         d3.select(window).on('hashchange', null);
     });
 
@@ -54,7 +54,7 @@ describe('iD.behaviorHash', function () {
         hash();
         expect(context.map().center()[0]).toBeCloseTo(11.24567, 1);
         expect(context.map().center()[1]).toBeCloseTo(43.80082, 1);
-        expect(context.map().zoom()).to.equal(19.0);
+        expect(context.map().zoom()).toEqual(19.0);
         iD.prefs('map-location', null);
     });
 
@@ -64,7 +64,7 @@ describe('iD.behaviorHash', function () {
         hash();
         expect(context.map().center()[0]).toBeCloseTo(-77.02405, 1);
         expect(context.map().center()[1]).toBeCloseTo(38.87952, 1);
-        expect(context.map().zoom()).to.equal(20.0);
+        expect(context.map().zoom()).toEqual(20.0);
         iD.prefs('map-location', null);
     });
 

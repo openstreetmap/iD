@@ -26,7 +26,7 @@ describe.skip('iD.modeAddPoint', function() {
         it('selects an existing point rather than adding a new one', function() {
             happen.mousedown(context.surface().node(), {});
             happen.mouseup(window, {});
-            expect(context.mode().id).to.equal('select');
+            expect(context.mode().id).toEqual('select');
             expect(context.mode().selectedIDs()).toEqual([context.history().changes().created[0].id]);
             context.mode().exit();
         });
@@ -36,7 +36,7 @@ describe.skip('iD.modeAddPoint', function() {
     //     it.skip('exits to browse mode', function(done) {
     //         happen.keydown(document, {keyCode: 27});
     //         window.setTimeout(function() {
-    //             expect(context.mode().id).to.equal('browse');
+    //             expect(context.mode().id).toEqual('browse');
     //             done();
     //         }, 200);
     //     });

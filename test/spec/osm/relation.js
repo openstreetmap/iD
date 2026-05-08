@@ -7,7 +7,7 @@ describe('iD.osmRelation', function () {
 
     it('returns a relation', function () {
         expect(new iD.osmRelation()).toBeInstanceOf(iD.osmRelation);
-        expect(new iD.osmRelation().type).to.equal('relation');
+        expect(new iD.osmRelation().type).toEqual('relation');
     });
 
     it('defaults members to an empty array', function () {
@@ -40,7 +40,7 @@ describe('iD.osmRelation', function () {
             var copies = {};
             var result = r.copy(null, copies);
             expect(Object.keys(copies)).to.have.length(1);
-            expect(copies.r).to.equal(result);
+            expect(copies.r).toEqual(result);
         });
 
         it('returns an existing copy in input object', function () {
@@ -49,7 +49,7 @@ describe('iD.osmRelation', function () {
             var result1 = r.copy(null, copies);
             var result2 = r.copy(null, copies);
             expect(Object.keys(copies)).to.have.length(1);
-            expect(result1).to.equal(result2);
+            expect(result1).toEqual(result2);
         });
 
         it('deep copies members', function () {
@@ -68,7 +68,7 @@ describe('iD.osmRelation', function () {
             expect(copies.b).toBeInstanceOf(iD.osmNode);
             expect(copies.c).toBeInstanceOf(iD.osmNode);
             expect(result.members[0].id).not.toBe(r.members[0].id);
-            expect(result.members[0].role).to.equal(r.members[0].role);
+            expect(result.members[0].role).toEqual(r.members[0].role);
         });
 
         it('deep copies non-tree relation graphs without duplicating children', function () {
@@ -83,9 +83,9 @@ describe('iD.osmRelation', function () {
             expect(copies.r1).toBeInstanceOf(iD.osmRelation);
             expect(copies.r2).toBeInstanceOf(iD.osmRelation);
             expect(copies.w).toBeInstanceOf(iD.osmWay);
-            expect(copies.r1.members[0].id).to.equal(copies.r2.id);
-            expect(copies.r1.members[1].id).to.equal(copies.w.id);
-            expect(copies.r2.members[0].id).to.equal(copies.w.id);
+            expect(copies.r1.members[0].id).toEqual(copies.r2.id);
+            expect(copies.r1.members[1].id).toEqual(copies.w.id);
+            expect(copies.r2.members[0].id).toEqual(copies.w.id);
         });
 
         it('deep copies cyclical relation graphs without issue', function () {
@@ -96,8 +96,8 @@ describe('iD.osmRelation', function () {
             r1.copy(graph, copies);
 
             expect(Object.keys(copies)).to.have.length(2);
-            expect(copies.r1.members[0].id).to.equal(copies.r2.id);
-            expect(copies.r2.members[0].id).to.equal(copies.r1.id);
+            expect(copies.r1.members[0].id).toEqual(copies.r2.id);
+            expect(copies.r2.members[0].id).toEqual(copies.r1.id);
         });
 
         it('deep copies self-referencing relations without issue', function () {
@@ -107,7 +107,7 @@ describe('iD.osmRelation', function () {
             r.copy(graph, copies);
 
             expect(Object.keys(copies)).to.have.length(1);
-            expect(copies.r.members[0].id).to.equal(copies.r.id);
+            expect(copies.r.members[0].id).toEqual(copies.r.id);
          });
     });
 
@@ -139,21 +139,21 @@ describe('iD.osmRelation', function () {
 
     describe('#geometry', function () {
         it('returns \'area\' for multipolygons', function () {
-            expect(new iD.osmRelation({tags: {type: 'multipolygon'}}).geometry(new iD.coreGraph())).to.equal('area');
+            expect(new iD.osmRelation({tags: {type: 'multipolygon'}}).geometry(new iD.coreGraph())).toEqual('area');
         });
 
         it('returns \'relation\' for other relations', function () {
-            expect(new iD.osmRelation().geometry(new iD.coreGraph())).to.equal('relation');
+            expect(new iD.osmRelation().geometry(new iD.coreGraph())).toEqual('relation');
         });
     });
 
     describe('#isDegenerate', function () {
         it('returns true for a relation without members', function () {
-            expect(new iD.osmRelation().isDegenerate()).to.equal(true);
+            expect(new iD.osmRelation().isDegenerate()).toEqual(true);
         });
 
         it('returns false for a relation with members', function () {
-            expect(new iD.osmRelation({members: [{id: 'a', role: 'inner'}]}).isDegenerate()).to.equal(false);
+            expect(new iD.osmRelation({members: [{id: 'a', role: 'inner'}]}).isDegenerate()).toEqual(false);
         });
     });
 
@@ -504,7 +504,7 @@ describe('iD.osmRelation', function () {
     describe('#replaceMember', function () {
         it('returns self if self does not contain needle', function () {
             var r = new iD.osmRelation({members: []});
-            expect(r.replaceMember({id: 'a'}, {id: 'b'})).to.equal(r);
+            expect(r.replaceMember({id: 'a'}, {id: 'b'})).toEqual(r);
         });
 
         it('replaces a member which doesn\'t already exist', function () {
@@ -554,7 +554,7 @@ describe('iD.osmRelation', function () {
         });
 
         it('includes changeset if provided', function() {
-            expect(new iD.osmRelation().asJXON('1234').relation['@changeset']).to.equal('1234');
+            expect(new iD.osmRelation().asJXON('1234').relation['@changeset']).toEqual('1234');
         });
     });
 
@@ -568,7 +568,7 @@ describe('iD.osmRelation', function () {
             var g = new iD.coreGraph([a, b, c, w, r]);
             var json = r.asGeoJSON(g);
 
-            expect(json.type).to.equal('MultiPolygon');
+            expect(json.type).toEqual('MultiPolygon');
             expect(json.coordinates).toEqual([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
@@ -605,7 +605,7 @@ describe('iD.osmRelation', function () {
             var g = new iD.coreGraph([a, r]);
             var json = r.asGeoJSON(g);
 
-            expect(json.type).to.equal('FeatureCollection');
+            expect(json.type).toEqual('FeatureCollection');
             expect(json.properties).toEqual({type: 'type'});
 
             var nodejson = a.asGeoJSON(g);

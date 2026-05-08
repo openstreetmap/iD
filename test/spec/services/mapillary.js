@@ -36,7 +36,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.init();
             var cache2 = mapillary.cache();
-            expect(cache).to.equal(cache2);
+            expect(cache).toEqual(cache2);
         });
     });
 

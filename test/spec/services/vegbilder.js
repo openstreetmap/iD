@@ -142,7 +142,7 @@ describe('iD.serviceVegbilder', function() {
 
       vegbilder.init();
       const cache2 = vegbilder.cache();
-      expect(cache).to.equal(cache2);
+      expect(cache).toEqual(cache2);
     });
 
     it('fetches available layers', function() {

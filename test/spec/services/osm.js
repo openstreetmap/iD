@@ -131,7 +131,7 @@ describe('iD.serviceOsm', function () {
     describe('#switch', function() {
         it('changes the URL', function() {
             connection.switch({ url: 'https://example.com' });
-            expect(connection.changesetURL(1)).to.equal('https://example.com/changeset/1');
+            expect(connection.changesetURL(1)).toEqual('https://example.com/changeset/1');
         });
 
         it('emits a change event', function() {

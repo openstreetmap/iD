@@ -14,7 +14,7 @@ describe('iD.actionMove', function() {
     //         var relation = new iD.osmRelation({members: [{id: 1}]}),
     //             action = iD.actionMove([relation.id], [0, 0], projection),
     //             graph = new iD.coreGraph([relation]);
-    //         expect(action.disabled(graph)).to.equal('incomplete_relation');
+    //         expect(action.disabled(graph)).toEqual('incomplete_relation');
     //     });
 
     //     it('returns falsy for a complete relation', function() {
