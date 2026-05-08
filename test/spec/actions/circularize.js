@@ -92,11 +92,11 @@ describe('iD.actionCircularize', function () {
         expect(isCircular('-', graph)).toBeTruthy();
 
         nodes = graph.entity('-').nodes;
-        expect(nodes).to.contain('a');
-        expect(nodes).to.contain('b');
-        expect(nodes).to.contain('c');
-        expect(nodes).to.contain('d');
-        expect(nodes).to.contain('e');
+        expect(nodes).toContain('a');
+        expect(nodes).toContain('b');
+        expect(nodes).toContain('c');
+        expect(nodes).toContain('d');
+        expect(nodes).toContain('e');
     });
 
     it('limits movement of nodes that are members of other ways', function () {
