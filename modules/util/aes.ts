@@ -8,49 +8,49 @@ const ALGO = { name: 'AES-CTR', counter: new Uint8Array(16), length: 128 };
 ALGO.counter[0xf] = 1; // for backwards compatibility with the aes library that was previously used
 
 function importKey(raw: ArrayLike<number>) {
-  return crypto.subtle.importKey(
-    'raw',
-    Uint8Array.from(raw),
-    'AES-CTR',
-    false,
-    ['encrypt', 'decrypt'],
-  );
+    return crypto.subtle.importKey(
+        'raw',
+        Uint8Array.from(raw),
+        'AES-CTR',
+        false,
+        ['encrypt', 'decrypt'],
+    );
 }
 
 function hexFromBytes(bytes: Uint8Array): string {
-  return Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
+    return Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
 }
 
 function hexToBytes(hex: string): Uint8Array<ArrayBuffer> {
-  const out = new Uint8Array(hex.length >>> 1);
-  for (let i = 0; i < out.length; i++) {
-    out[i] = parseInt(hex.substring(i * 2, i * 2 + 2), 16);
-  }
-  return out;
+    const out = new Uint8Array(hex.length >>> 1);
+    for (let i = 0; i < out.length; i++) {
+        out[i] = parseInt(hex.substring(i * 2, i * 2 + 2), 16);
+    }
+    return out;
 }
 
 export async function utilAesEncrypt(
-  text: string,
-  key?: ArrayLike<number>,
+    text: string,
+    key?: ArrayLike<number>,
 ): Promise<string> {
-  const cryptoKey = await importKey(key ?? DEFAULT_128);
-  const encrypted = await crypto.subtle.encrypt(
-    ALGO,
-    cryptoKey,
-    new TextEncoder().encode(text),
-  );
-  return hexFromBytes(new Uint8Array(encrypted));
+    const cryptoKey = await importKey(key ?? DEFAULT_128);
+    const encrypted = await crypto.subtle.encrypt(
+        ALGO,
+        cryptoKey,
+        new TextEncoder().encode(text),
+    );
+    return hexFromBytes(new Uint8Array(encrypted));
 }
 
 export async function utilAesDecrypt(
-  encryptedHex: string,
-  key?: ArrayLike<number>,
+    encryptedHex: string,
+    key?: ArrayLike<number>,
 ): Promise<string> {
-  const cryptoKey = await importKey(key ?? DEFAULT_128);
-  const decrypted = await crypto.subtle.decrypt(
-    ALGO,
-    cryptoKey,
-    hexToBytes(encryptedHex),
-  );
-  return new TextDecoder().decode(decrypted);
+    const cryptoKey = await importKey(key ?? DEFAULT_128);
+    const decrypted = await crypto.subtle.decrypt(
+        ALGO,
+        cryptoKey,
+        hexToBytes(encryptedHex),
+    );
+    return new TextDecoder().decode(decrypted);
 }
