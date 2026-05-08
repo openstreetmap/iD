@@ -45,16 +45,8 @@ export function uiPresetList(context) {
             .call(svgIcon('#iD-icon-close'));
 
         function initialKeydown(d3_event) {
-            // hack to let delete shortcut work when search is autofocused
-            if (search.property('value').length === 0 &&
-                (d3_event.keyCode === utilKeybinding.keyCodes['⌫'] ||
-                 d3_event.keyCode === utilKeybinding.keyCodes['⌦'])) {
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-                operationDelete(context, _entityIDs)();
-
             // hack to let undo work when search is autofocused
-            } else if (search.property('value').length === 0 &&
+            if (search.property('value').length === 0 &&
                 (d3_event.ctrlKey || d3_event.metaKey) &&
                 d3_event.keyCode === utilKeybinding.keyCodes.z) {
                 d3_event.preventDefault();
