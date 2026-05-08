@@ -46,6 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Restore dedicated rendering of ski pistes and building parts ([#12297], thanks [@matkoniecz])
 * Pressing backspace while in the feature type selecting mode should not delete the object
+* Fix combo box dropdown not always opening automatically when changing focus from other input fields ([#12299])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -53,6 +54,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 [#12297]: https://github.com/openstreetmap/iD/issues/12297
+[#12299]: https://github.com/openstreetmap/iD/issues/12299
 [#12306]: https://github.com/openstreetmap/iD/pull/12306
 
 
