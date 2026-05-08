@@ -151,7 +151,15 @@ Object.keys(_nsi.data).forEach(tkv => {
   items.forEach(item => {
     if (matcher.itemLocation.has(item.id)) return;   // we've seen item id already - shouldn't be possible?
 
-    const locationSetID = locationManager.locationSetID(item.locationSet);
+
+  function tryGettingLocationSetID(locationSet) {
+    try {
+      return locationManager.validateLocationSet(locationSet).id;
+    } catch {
+      return '+[Q2]';  // the world
+    }
+  }
+    const locationSetID = tryGettingLocationSetID(item.locationSet);
     matcher.itemLocation.set(item.id, locationSetID);
 
     if (matcher.locationSets.has(locationSetID)) return;   // we've seen this locationSet before..
