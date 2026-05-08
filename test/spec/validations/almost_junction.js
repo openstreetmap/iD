@@ -234,95 +234,95 @@ describe('iD.validations.almost_junction', function () {
 
     it('has no errors on init', function() {
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags horizontal and vertical road closer than threshold', function() {
         horizontalVertialCloserThanThd();
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('almost_junction');
         expect(issue.subtype).toEqual('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(3);
+        expect(issue.entityIds).toHaveLength(3);
         expect(issue.entityIds[0]).toEqual('w-1');
         expect(issue.entityIds[1]).toEqual('n-1');
         expect(issue.entityIds[2]).toEqual('w-2');
 
-        expect(issue.loc).to.have.lengthOf(2);
+        expect(issue.loc).toHaveLength(2);
         expect(issue.loc[0]).toEqual(22.42357);
         expect(issue.loc[1]).toEqual(0);
 
-        expect(issue.data.edge).to.have.lengthOf(2);
+        expect(issue.data.edge).toHaveLength(2);
         expect(issue.data.edge[0]).toEqual('n-3');
         expect(issue.data.edge[1]).toEqual('n-4');
 
-        expect(issue.data.cross_loc).to.have.lengthOf(2);
+        expect(issue.data.cross_loc).toHaveLength(2);
         expect(issue.data.cross_loc[0]).toEqual(22.42356);
         expect(issue.data.cross_loc[1]).toEqual(0);
 
-        expect(issue.fixes(context)).to.have.lengthOf(3);
+        expect(issue.fixes(context)).toHaveLength(3);
         issue.fixes(context)[0].onClick(context);
         issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags horizontal and tilted road closer than threshold', function() {
         horizontalTiltedCloserThanThd();
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('almost_junction');
         expect(issue.subtype).toEqual('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(3);
+        expect(issue.entityIds).toHaveLength(3);
         expect(issue.entityIds[0]).toEqual('w-1');
         expect(issue.entityIds[1]).toEqual('n-1');
         expect(issue.entityIds[2]).toEqual('w-2');
 
-        expect(issue.loc).to.have.lengthOf(2);
+        expect(issue.loc).toHaveLength(2);
         expect(issue.loc[0]).toEqual(22.42357);
         expect(issue.loc[1]).toEqual(0);
 
-        expect(issue.data.edge).to.have.lengthOf(2);
+        expect(issue.data.edge).toHaveLength(2);
         expect(issue.data.edge[0]).toEqual('n-3');
         expect(issue.data.edge[1]).toEqual('n-4');
 
-        expect(issue.data.cross_loc).to.have.lengthOf(2);
+        expect(issue.data.cross_loc).toHaveLength(2);
         expect(issue.data.cross_loc[0]).toEqual(22.42356);
         expect(issue.data.cross_loc[1]).toEqual(0);
 
-        expect(issue.fixes(context)).to.have.lengthOf(3);
+        expect(issue.fixes(context)).toHaveLength(3);
         issue.fixes(context)[1].onClick(context);
         issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores horizontal and vertical road further than threshold', function() {
         horizontalVertialFurtherThanThd();
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores horizontal and vertical road closer than threshold, but with noexit tag', function() {
         horizontalVertialWithNoExit();
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores two horizontal roads closer than threshold', function() {
         twoHorizontalCloserThanThd();
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('joins close endpoints if insignificant angle change', function() {
         closeEndNodesSmallAngle();
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('almost_junction');
         expect(issue.subtype).toEqual('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(3);
+        expect(issue.entityIds).toHaveLength(3);
         expect(issue.entityIds[0]).toEqual('w-2');
         expect(issue.entityIds[1]).toEqual('n-3');
         expect(issue.entityIds[2]).toEqual('w-1');
@@ -337,11 +337,11 @@ describe('iD.validations.almost_junction', function () {
     it('won\'t join close endpoints if significant angle change', function() {
         closeEndNodesBigAngle();
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('almost_junction');
         expect(issue.subtype).toEqual('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(3);
+        expect(issue.entityIds).toHaveLength(3);
         expect(issue.entityIds[0]).toEqual('w-2');
         expect(issue.entityIds[1]).toEqual('n-3');
         expect(issue.entityIds[2]).toEqual('w-1');
@@ -356,11 +356,11 @@ describe('iD.validations.almost_junction', function () {
     it('joins close endpoints of the same way', function() {
         closeEndNodesSmallAngleSelf();
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('almost_junction');
         expect(issue.subtype).toEqual('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(3);
+        expect(issue.entityIds).toHaveLength(3);
         expect(issue.entityIds[0]).toEqual('w-1');
         expect(issue.entityIds[1]).toEqual('n-5');
         expect(issue.entityIds[2]).toEqual('w-1');
@@ -375,11 +375,11 @@ describe('iD.validations.almost_junction', function () {
     it('joins to close endpoint with smaller angle change', function() {
         closeEndNodesBothSmallAngle();
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('almost_junction');
         expect(issue.subtype).toEqual('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(3);
+        expect(issue.entityIds).toHaveLength(3);
         expect(issue.entityIds[0]).toEqual('w-2');
         expect(issue.entityIds[1]).toEqual('n-5');
         expect(issue.entityIds[2]).toEqual('w-1');

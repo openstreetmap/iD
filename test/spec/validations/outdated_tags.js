@@ -80,7 +80,7 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('has no errors on good tags', async () => {
@@ -88,7 +88,7 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags deprecated tag with replacement', async () => {
@@ -96,12 +96,12 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('outdated_tags');
         expect(issue.subtype).toEqual('deprecated_tags');
         expect(issue.severity).toEqual('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds).toHaveLength(1);
         expect(issue.entityIds[0]).toEqual('w-1');
     });
 
@@ -110,12 +110,12 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('outdated_tags');
         expect(issue.subtype).toEqual('deprecated_tags');
         expect(issue.severity).toEqual('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds).toHaveLength(1);
         expect(issue.entityIds[0]).toEqual('w-1');
     });
 
@@ -124,12 +124,12 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('outdated_tags');
         expect(issue.subtype).toEqual('deprecated_tags');
         expect(issue.severity).toEqual('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds).toHaveLength(1);
         expect(issue.entityIds[0]).toEqual('w-1');
         issues[0].dynamicFixes()[0].onClick(context);
         expect(context.graph().entity('w-1').tags).toStrictEqual({
@@ -143,12 +143,12 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('outdated_tags');
         expect(issue.subtype).toEqual('deprecated_tags');
         expect(issue.severity).toEqual('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds).toHaveLength(1);
         expect(issue.entityIds[0]).toEqual('w-1');
         issues[0].dynamicFixes()[0].onClick(context);
         expect(context.graph().entity('w-1').tags).toStrictEqual({
@@ -162,7 +162,7 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores multipolygon tagged on the relation', async () => {
@@ -170,7 +170,7 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags suggestions from NSI', async () => {

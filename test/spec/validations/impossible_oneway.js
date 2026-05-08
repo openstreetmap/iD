@@ -25,7 +25,7 @@ describe('iD.validations.impossible_oneway', function() {
 
     it('has no errors on init', function() {
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     describe('highways', function() {
@@ -49,7 +49,7 @@ describe('iD.validations.impossible_oneway', function() {
             ].map(iD.actionAddEntity));
 
             const issues = validate();
-            expect(issues).to.have.lengthOf(0);
+            expect(issues).toHaveLength(0);
         });
 
         it('flags dangling oneway end', function() {
@@ -67,7 +67,7 @@ describe('iD.validations.impossible_oneway', function() {
             ].map(iD.actionAddEntity));
 
             const issues = validate();
-            expect(issues).to.have.lengthOf(1);
+            expect(issues).toHaveLength(1);
             const issue1 = issues[0];
             expect(issue1.type).toEqual('impossible_oneway');
             expect(issue1.subtype).toEqual('highway');
@@ -90,7 +90,7 @@ describe('iD.validations.impossible_oneway', function() {
             ].map(iD.actionAddEntity));
 
             const issues = validate();
-            expect(issues).to.have.lengthOf(1);
+            expect(issues).toHaveLength(1);
             const issue1 = issues[0];
             expect(issue1.type).toEqual('impossible_oneway');
             expect(issue1.subtype).toEqual('highway');
@@ -118,7 +118,7 @@ describe('iD.validations.impossible_oneway', function() {
             ].map(iD.actionAddEntity));
 
             const issues = validate();
-            expect(issues).to.have.lengthOf(2);
+            expect(issues).toHaveLength(2);
             const issue1 = issues[0];
             expect(issue1.type).toEqual('impossible_oneway');
             expect(issue1.subtype).toEqual('highway');
@@ -149,7 +149,7 @@ describe('iD.validations.impossible_oneway', function() {
             ].map(iD.actionAddEntity));
 
             const issues = validate();
-            expect(issues).to.have.lengthOf(0);
+            expect(issues).toHaveLength(0);
         });
     });
 
@@ -164,7 +164,7 @@ describe('iD.validations.impossible_oneway', function() {
             ].map(iD.actionAddEntity));
 
             const issues = validate();
-            expect(issues).to.have.lengthOf(0);
+            expect(issues).toHaveLength(0);
         });
 
         it('flags waterways pointing to each other', function() {
@@ -181,7 +181,7 @@ describe('iD.validations.impossible_oneway', function() {
             ].map(iD.actionAddEntity));
 
             const issues = validate();
-            expect(issues).to.have.lengthOf(2);
+            expect(issues).toHaveLength(2);
             const issue1 = issues[0];
             expect(issue1.type).toEqual('impossible_oneway');
             expect(issue1.subtype).toEqual('waterway');

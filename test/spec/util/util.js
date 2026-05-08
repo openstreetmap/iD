@@ -9,7 +9,7 @@ describe('iD.util', function() {
             var result = iD.utilGetAllNodes(['w'], graph);
 
             expect(result).to.have.members([a, b]);
-            expect(result).to.have.lengthOf(2);
+            expect(result).toHaveLength(2);
         });
 
         it('gets all descendant nodes of a relation', function() {
@@ -22,7 +22,7 @@ describe('iD.util', function() {
             var result = iD.utilGetAllNodes(['r'], graph);
 
             expect(result).to.have.members([a, b, c]);
-            expect(result).to.have.lengthOf(3);
+            expect(result).toHaveLength(3);
         });
 
         it('gets all descendant nodes of multiple ids', function() {
@@ -38,7 +38,7 @@ describe('iD.util', function() {
             var result = iD.utilGetAllNodes(['r', 'w2', 'e'], graph);
 
             expect(result).to.have.members([a, b, c, d, e]);
-            expect(result).to.have.lengthOf(5);
+            expect(result).toHaveLength(5);
         });
 
         it('handles recursive relations', function() {
@@ -49,7 +49,7 @@ describe('iD.util', function() {
             var result = iD.utilGetAllNodes(['r1'], graph);
 
             expect(result).to.have.members([a]);
-            expect(result).to.have.lengthOf(1);
+            expect(result).toHaveLength(1);
         });
     });
 

@@ -32,40 +32,40 @@ describe('iD.validations.private_data', function () {
 
     it('has no errors on init', function() {
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with no tags', function() {
         createWay({});
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with phone tag', function() {
         createWay({ phone: '123-456-7890' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores generic building with phone tag', function() {
         createWay({ building: 'yes', phone: '123-456-7890' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores guest house with phone tag', function() {
         createWay({ building: 'house', phone: '123-456-7890', tourism: 'guest_house' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags house with phone tag', function() {
         createWay({ building: 'house', phone: '123-456-7890' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('private_data');
-        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds).toHaveLength(1);
         expect(issue.entityIds[0]).toEqual('w-1');
     });
 

@@ -46,79 +46,79 @@ describe('iD.validations.missing_tag', function () {
 
     it('has no errors on init', function() {
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with descriptive tags', function() {
         createWay({ leisure: 'park' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores multipolygon with descriptive tags', function() {
         createRelation({ leisure: 'park', type: 'multipolygon' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags no tags', function() {
         createWay({});
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('missing_tag');
         expect(issue.subtype).toEqual('any');
-        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds).toHaveLength(1);
         expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags no descriptive tags', function() {
         createWay({ name: 'Main Street', source: 'Bing' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('missing_tag');
         expect(issue.subtype).toEqual('descriptive');
-        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds).toHaveLength(1);
         expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags no descriptive tags on multipolygon', function() {
         createRelation({ name: 'City Park', source: 'Bing', type: 'multipolygon' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('missing_tag');
         expect(issue.subtype).toEqual('descriptive');
-        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds).toHaveLength(1);
         expect(issue.entityIds[0]).toEqual('r-1');
     });
 
     it('flags no type tag on relation', function() {
         createRelation({ name: 'City Park', source: 'Bing', leisure: 'park' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('missing_tag');
         expect(issue.subtype).toEqual('relation_type');
-        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds).toHaveLength(1);
         expect(issue.entityIds[0]).toEqual('r-1');
     });
 
     it('ignores highway with classification', function() {
         createWay({ highway: 'primary' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags highway=road', function() {
         createWay({ highway: 'road' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
         expect(issue.type).toEqual('missing_tag');
         expect(issue.subtype).toEqual('highway_classification');
-        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds).toHaveLength(1);
         expect(issue.entityIds[0]).toEqual('w-1');
     });
 
