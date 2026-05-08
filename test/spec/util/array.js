@@ -39,8 +39,8 @@ describe('iD.utilArray', function() {
         var a = [1, 2, 3, 4, 5, 6, 7];
         // bad chunkSizes, just copy whole array into a single chunk
         expect(iD.utilArrayChunk(a)).to.eql([[1, 2, 3, 4, 5, 6, 7]]);
-        expect(iD.utilArrayChunk(a), -1).to.eql([[1, 2, 3, 4, 5, 6, 7]]);
-        expect(iD.utilArrayChunk(a), 0).to.eql([[1, 2, 3, 4, 5, 6, 7]]);
+        expect(iD.utilArrayChunk(a, -1)).to.eql([[1, 2, 3, 4, 5, 6, 7]]);
+        expect(iD.utilArrayChunk(a, 0)).to.eql([[1, 2, 3, 4, 5, 6, 7]]);
         // good chunkSizes
         expect(iD.utilArrayChunk(a, 2)).to.eql([[1, 2], [3, 4], [5, 6], [7]]);
         expect(iD.utilArrayChunk(a, 3)).to.eql([[1, 2, 3], [4, 5, 6], [7]]);
