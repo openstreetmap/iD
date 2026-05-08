@@ -165,7 +165,7 @@ describe('iD.uiFieldWikipedia', function() {
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
 
-        var spy = sinon.spy();
+        var spy = fn();
         wikipedia.on('change.spy', spy);
 
         // Create an XHR server that will respond after 60ms
