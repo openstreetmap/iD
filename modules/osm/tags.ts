@@ -1,4 +1,5 @@
 import { merge } from 'es-toolkit/compat';
+import type { TagDictionary } from '../util/object';
 import { getLuma } from '../util/util';
 
 const uninterestingKeys = new Set([
@@ -20,11 +21,8 @@ const uninterestingKeyRegex = /^(source(_ref)?|at_bev|geobase|hcpaogis|KSJ2|mvdg
  * Returns whether the given OSM tag key is potentially "interesting".
  * For example, some tags are deemed not interesting because the respective tag is
  * considered "discardable".
- *
- * @param {string} key the key to test
- * @returns {boolean}
  */
-export function osmIsInterestingTag(key) {
+export function osmIsInterestingTag(key: string): boolean {
     if (uninterestingKeys.has(key)) return false;
     if (uninterestingKeyRegex.test(key))  return false;
     return true;
@@ -45,8 +43,7 @@ export const osmLifecyclePrefixes = {
     intermittent: true
 };
 
-/** @param {string} key */
-export function osmRemoveLifecyclePrefix(key) {
+export function osmRemoveLifecyclePrefix(key: string) {
     const keySegments = key.split(':');
     if (keySegments.length === 1) return key;
 
@@ -57,8 +54,8 @@ export function osmRemoveLifecyclePrefix(key) {
     return key;
 }
 
-export var osmAreaKeys = {};
-export function osmSetAreaKeys(value) {
+export var osmAreaKeys: TagDictionary<true> = {};
+export function osmSetAreaKeys(value: TagDictionary<true>) {
     osmAreaKeys = value;
 }
 
@@ -67,7 +64,7 @@ export function osmSetAreaKeys(value) {
 // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
 // similarly, some tags are both used as a primary key for area features,
 // but also as an attribute tag for linear features (e.g. `emergency=yes`)
-export var osmAreaKeysExceptions = {
+export var osmAreaKeysExceptions: TagDictionary<boolean> = {
     highway: {
         elevator: true,
         rest_area: true,
@@ -102,11 +99,11 @@ export var osmAreaKeysExceptions = {
 };
 
 // returns an object with the tag from `tags` that implies an area geometry, if any
-export function osmTagSuggestingArea(tags) {
+export function osmTagSuggestingArea(tags: Tags) {
     if (tags.area === 'yes') return { area: 'yes' };
     if (tags.area === 'no') return null;
 
-    var returnTags = {};
+    var returnTags: Tags = {};
     for (var realKey in tags) {
         const key = osmRemoveLifecyclePrefix(realKey);
         if (key in osmAreaKeysExceptions && osmAreaKeysExceptions[key][tags[realKey]] === false) {
@@ -124,33 +121,33 @@ export function osmTagSuggestingArea(tags) {
     return null;
 }
 
-export var osmLineTags = {};
-export function osmSetLineTags(value) {
+export var osmLineTags: TagDictionary<true> = {};
+export function osmSetLineTags(value: TagDictionary<true>) {
     osmLineTags = value;
 }
 
 // Tags that indicate a node can be a standalone point
 // e.g. { amenity: { bar: true, parking: true, ... } ... }
-export var osmPointTags = {};
-export function osmSetPointTags(value) {
+export var osmPointTags: TagDictionary<true> = {};
+export function osmSetPointTags(value: TagDictionary<true>) {
     osmPointTags = value;
 }
 // Tags that indicate a node can be part of a way
 // e.g. { amenity: { parking: true, ... }, highway: { stop: true ... } ... }
-export var osmVertexTags = {};
-export function osmSetVertexTags(value) {
+export var osmVertexTags: TagDictionary<true> = {};
+export function osmSetVertexTags(value: TagDictionary<true>) {
     osmVertexTags = value;
 }
 
 //These tags belong strictly on ways and should never be moved up to a relation
-export const osmWayOnlyTags = {
+export const osmWayOnlyTags: TagDictionary<true> = {
     'natural': {
         'coastline': true
     }
 };
 
-export function osmNodeGeometriesForTags(nodeTags) {
-    var geometries = {};
+export function osmNodeGeometriesForTags(nodeTags: Tags) {
+    const geometries: { point?: boolean; vertex?: boolean } = {};
     for (var key in nodeTags) {
         if (osmPointTags[key] &&
             (osmPointTags[key]['*'] || osmPointTags[key][nodeTags[key]])) {
@@ -274,7 +271,7 @@ export var osmSemipavedTags = {
     }
 };
 
-export var osmRightSideIsInsideTags = {
+export var osmRightSideIsInsideTags: TagDictionary<true | string> = {
     'natural': {
         'cliff': true,
         'coastline': 'coastline'
@@ -296,30 +293,30 @@ export var osmRightSideIsInsideTags = {
 
 // "highway" tag values for pedestrian or vehicle right-of-ways that make up the routable network
 // (does not include `raceway`)
-export var osmRoutableHighwayTagValues = {
+export var osmRoutableHighwayTagValues: Record<string, true> = {
     motorway: true, trunk: true, primary: true, secondary: true, tertiary: true, residential: true,
     motorway_link: true, trunk_link: true, primary_link: true, secondary_link: true, tertiary_link: true,
     unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true, busway: true,
     path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true, ladder: true
 };
 /** aeroway tags that are treated as routable for aircraft */
-export const osmRoutableAerowayTags = {
+export const osmRoutableAerowayTags: Record<string, true> = {
     runway: true, taxiway: true
 };
 // "highway" tag values that generally do not allow motor vehicles
-export var osmPathHighwayTagValues = {
+export var osmPathHighwayTagValues: Record<string, true> = {
     path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true, ladder: true
 };
 
 // "railway" tag values representing existing railroad tracks (purposely does not include 'abandoned')
-export var osmRailwayTrackTagValues = {
+export var osmRailwayTrackTagValues: Record<string, true> = {
     rail: true, light_rail: true, tram: true, subway: true,
     monorail: true, funicular: true, miniature: true, narrow_gauge: true,
     disused: true, preserved: true
 };
 
 // "waterway" tag values for line features representing water flow
-export var osmFlowingWaterwayTagValues = {
+export var osmFlowingWaterwayTagValues: Record<string, true> = {
     canal: true, ditch: true, drain: true, fish_pass: true, flowline: true, river: true, stream: true, tidal_channel: true
 };
 
@@ -347,7 +344,7 @@ export var osmLanduseTags = {
 export const allowUpperCaseTagValues = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer|country|target|brewery|cai_scale|traffic_sign/;
 
 // Returns whether a `colour` tag value looks like a valid color we can display
-export function isColorValid(value) {
+export function isColorValid(value: string) {
     if (!value) return false;
     if (!value.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
         // OSM only supports hex or named colors
@@ -360,8 +357,8 @@ export function isColorValid(value) {
     return true;
 }
 
-export function getRelationColor(tags, fallback) {
-    let color, textColor;
+export function getRelationColor(tags: Tags, fallback: string) {
+    let color = '', textColor = '';
     if (tags['ref:colour'])       color = tags['ref:colour'];
     else if (tags.colour)         color = tags.colour;
     const isValid = isColorValid(color);
@@ -389,11 +386,10 @@ export const osmMutuallyExclusiveTagPairs = [
 
 
 /**
- * @param {Tags} vertexTags @param {Tags} wayTags
  * returns true if iD should render the `direction` tag for
  * this vertex+way combination.
  */
-export function osmShouldRenderDirection(vertexTags, wayTags) {
+export function osmShouldRenderDirection(vertexTags: Tags, wayTags: Tags) {
     if (vertexTags.highway || vertexTags.traffic_sign || vertexTags.traffic_calming || vertexTags.barrier) {
         // allowed on roads and tramways
         return !!(wayTags.highway || wayTags.railway);

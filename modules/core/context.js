@@ -333,6 +333,7 @@ export function coreContext() {
     dispatch.call('enter', this, _mode);
   };
 
+  /** @returns {string[]} */
   context.selectedIDs = () => (_mode && _mode.selectedIDs && _mode.selectedIDs()) || [];
   context.activeID = () => _mode && _mode.activeID && _mode.activeID();
 

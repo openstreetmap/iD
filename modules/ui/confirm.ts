@@ -2,7 +2,7 @@ import { t } from '../core/localizer';
 import { uiModal } from './modal';
 
 
-export function uiConfirm(selection) {
+export function uiConfirm(selection: d3.Selection) {
     var modalSelection = uiModal(selection);
 
     modalSelection.select('.modal')

@@ -1,11 +1,13 @@
-function refresh(selection, node) {
+import type { Vec2 } from '../geo/vector';
+
+function refresh(selection: d3.Selection, node: HTMLElement): Vec2 {
     var cr = node.getBoundingClientRect();
-    var prop = [cr.width, cr.height];
+    const prop: Vec2 = [cr.width, cr.height];
     selection.property('__dimensions__', prop);
     return prop;
 }
 
-export function utilGetDimensions(selection, force) {
+export function utilGetDimensions(selection: d3.Selection, force?: boolean): Vec2 {
     if (!selection || selection.empty()) {
         return [0, 0];
     }
@@ -15,7 +17,7 @@ export function utilGetDimensions(selection, force) {
 }
 
 
-export function utilSetDimensions(selection, dimensions) {
+export function utilSetDimensions(selection: d3.Selection, dimensions: Vec2 | null) {
     if (!selection || selection.empty()) {
         return selection;
     }
