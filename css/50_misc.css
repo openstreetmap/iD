@@ -8,7 +8,7 @@ path.line.shadow.tag-man_made-pipeline,
 path.line.shadow.tag-natural-tree_row,
 path.line.shadow.tag-roller_coaster-track,
 path.line.shadow.tag-roller_coaster-support,
-path.line.shadow.tag-piste {
+path.line.shadow.tag-piste_type {
     stroke-width: 16;
 }
 path.line.casing.tag-aerialway,
@@ -19,7 +19,7 @@ path.line.casing.tag-man_made-pipeline,
 path.line.casing.tag-natural-tree_row,
 path.line.casing.tag-roller_coaster-track,
 path.line.casing.tag-roller_coaster-support,
-path.line.casing.tag-piste {
+path.line.casing.tag-piste_type {
     stroke-width: 7;
 }
 path.line.stroke.tag-aerialway,
@@ -30,7 +30,7 @@ path.line.stroke.tag-man_made-pipeline,
 path.line.stroke.tag-natural-tree_row,
 path.line.stroke.tag-roller_coaster-track,
 path.line.stroke.tag-roller_coaster-support,
-path.line.stroke.tag-piste {
+path.line.stroke.tag-piste_type {
     stroke-width: 5;
 }
 
@@ -42,7 +42,7 @@ path.line.stroke.tag-piste {
 .low-zoom path.line.shadow.tag-natural-tree_row,
 .low-zoom path.line.shadow.tag-roller_coaster-track,
 .low-zoom path.line.shadow.tag-roller_coaster-support,
-.low-zoom path.line.shadow.tag-piste {
+.low-zoom path.line.shadow.tag-piste_type {
     stroke-width: 12;
 }
 .low-zoom path.line.casing.tag-aerialway,
@@ -53,7 +53,7 @@ path.line.stroke.tag-piste {
 .low-zoom path.line.casing.tag-natural-tree_row,
 .low-zoom path.line.casing.tag-roller_coaster-track,
 .low-zoom path.line.casing.tag-roller_coaster-support,
-.low-zoom path.line.casing.tag-piste {
+.low-zoom path.line.casing.tag-piste_type {
     stroke-width: 5;
 }
 .low-zoom path.line.stroke.tag-aerialway,
@@ -64,7 +64,7 @@ path.line.stroke.tag-piste {
 .low-zoom path.line.stroke.tag-natural-tree_row,
 .low-zoom path.line.stroke.tag-roller_coaster-track,
 .low-zoom path.line.stroke.tag-roller_coaster-support,
-.low-zoom path.line.stroke.tag-piste {
+.low-zoom path.line.stroke.tag-piste_type {
     stroke-width: 3;
 }
 
@@ -105,11 +105,11 @@ path.line.casing.tag-aerialway {
 }
 
 
-/* pistes */
-path.line.stroke.tag-piste {
+/* piste_types */
+path.line.stroke.tag-piste_type {
     stroke: #a9d;
 }
-path.line.casing.tag-piste {
+path.line.casing.tag-piste_type {
     stroke: #444;
 }
 
