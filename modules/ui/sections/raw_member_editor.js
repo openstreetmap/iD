@@ -10,7 +10,7 @@ import { actionDeleteMember } from '../../actions/delete_member';
 import { actionMoveMember } from '../../actions/move_member';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
-import { osmEntity } from '../../osm';
+import { osmIdManager } from '../../osm';
 import { getRelationColor } from '../../osm/tags';
 import { svgIcon } from '../../svg/icon';
 import { services } from '../../services';
@@ -150,8 +150,8 @@ export function uiSectionRawMemberEditor(context) {
 
         var items = list.selectAll('li')
             .data(memberships, function(d) {
-                return osmEntity.key(d.relation) + ',' + d.index + ',' +
-                    (d.member ? osmEntity.key(d.member) : 'incomplete');
+                return osmIdManager.key(d.relation) + ',' + d.index + ',' +
+                    (d.member ? osmIdManager.key(d.member) : 'incomplete');
             });
 
         items.exit()
