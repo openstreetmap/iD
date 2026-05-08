@@ -378,12 +378,12 @@ describe('iD.coreHistory', function () {
 
             expect(json.version).toEqual(3);
             expect(json.entities).toContainEqual(expect.objectContaining(node_1));
-            expect(json.entities).to.not.include(node1);
+            expect(json.entities).not.toContain(node1);
             expect(json.entities).toContainEqual(expect.objectContaining(node2_upd));
-            expect(json.entities).to.not.include(node3);
+            expect(json.entities).not.toContain(node3);
 
-            expect(json.baseEntities).to.not.include(node_1);
-            expect(json.baseEntities).to.not.include(node1);
+            expect(json.baseEntities).not.toContain(node_1);
+            expect(json.baseEntities).not.toContain(node1);
             expect(json.baseEntities).toContainEqual(expect.objectContaining(node2));
             expect(json.baseEntities).toContainEqual(expect.objectContaining(node3));
         });

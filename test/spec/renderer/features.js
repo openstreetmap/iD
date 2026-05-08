@@ -26,7 +26,7 @@ describe('iD.rendererFeatures', function() {
         it('disables features', function() {
             features.disable('water');
             expect(features.disabled()).to.include('water');
-            expect(features.enabled()).to.not.include('water');
+            expect(features.enabled()).not.toContain('water');
         });
     });
 
@@ -34,7 +34,7 @@ describe('iD.rendererFeatures', function() {
         it('enables features', function() {
             features.disable('water');
             features.enable('water');
-            expect(features.disabled()).to.not.include('water');
+            expect(features.disabled()).not.toContain('water');
             expect(features.enabled()).to.include('water');
         });
     });
@@ -43,10 +43,10 @@ describe('iD.rendererFeatures', function() {
         it('toggles features', function() {
             features.toggle('water');
             expect(features.disabled()).to.include('water');
-            expect(features.enabled()).to.not.include('water');
+            expect(features.enabled()).not.toContain('water');
 
             features.toggle('water');
-            expect(features.disabled()).to.not.include('water');
+            expect(features.disabled()).not.toContain('water');
             expect(features.enabled()).to.include('water');
         });
     });
@@ -625,8 +625,8 @@ describe('iD.rendererFeatures', function() {
             autoHidden = features.autoHidden();
             msg = i + ' points';
 
-            expect(hidden, msg).to.not.include('points');
-            expect(autoHidden, msg).to.not.include('points');
+            expect(hidden, msg).not.toContain('points');
+            expect(autoHidden, msg).not.toContain('points');
 
             graph.rebase([new iD.osmNode({version: 1})], [graph]);
 
@@ -656,8 +656,8 @@ describe('iD.rendererFeatures', function() {
             autoHidden = features.autoHidden();
             msg = i + ' points';
 
-            expect(hidden, msg).to.not.include('points');
-            expect(autoHidden, msg).to.not.include('points');
+            expect(hidden, msg).not.toContain('points');
+            expect(autoHidden, msg).not.toContain('points');
 
             graph.rebase([new iD.osmNode({version: 1})], [graph]);
 

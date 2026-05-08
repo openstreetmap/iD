@@ -451,8 +451,8 @@ describe('iD.presetIndex', function () {
             const ids = result.collection.map(p => p.id);
 
             expect(ids).to.include('p5');
-            expect(ids).to.not.include('p2');
-            expect(ids).to.not.include('p4');
+            expect(ids).not.toContain('p2');
+            expect(ids).not.toContain('p4');
             expect(ids.slice(0, 3)).toEqual(['p1', 'p3', 'p5']);
         });
     });
