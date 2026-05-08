@@ -74,8 +74,8 @@ describe('iD.behaviorHash', function () {
         context.map().zoom(2.0);
         await setTimeout(600);
         // the hash might contain other things like `disable_features`
-        expect(window.location.hash).to.include('background=none');
-        expect(window.location.hash).to.include('map=2.00/38.9/-77.0');
+        expect(window.location.hash).toContain('background=none');
+        expect(window.location.hash).toContain('map=2.00/38.9/-77.0');
     });
 
     it('accepts default changeset comment as hash parameter', function () {

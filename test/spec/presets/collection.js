@@ -121,9 +121,9 @@ describe('iD.presetCollection', function() {
         });
 
         it('includes the appropriate fallback preset', function() {
-            expect(c.search('foo', 'point').collection, 'point').to.include(p.point);
-            expect(c.search('foo', 'line').collection, 'line').to.include(p.line);
-            expect(c.search('foo', 'area').collection, 'area').to.include(p.area);
+            expect(c.search('foo', 'point').collection, 'point').toContain(p.point);
+            expect(c.search('foo', 'line').collection, 'line').toContain(p.line);
+            expect(c.search('foo', 'area').collection, 'area').toContain(p.area);
         });
 
         it('excludes presets with searchable: false', function() {

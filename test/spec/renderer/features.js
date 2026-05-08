@@ -14,7 +14,7 @@ describe('iD.rendererFeatures', function() {
     describe('#keys', function() {
         it('returns feature keys', function() {
             var keys = features.keys();
-            expect(keys).to.include(
+            expect(keys).toContain(
                 'points', 'traffic_roads', 'service_roads', 'paths',
                 'buildings', 'landuse', 'boundaries', 'water', 'rail',
                 'power', 'past_future', 'others'
@@ -25,7 +25,7 @@ describe('iD.rendererFeatures', function() {
     describe('#disable', function() {
         it('disables features', function() {
             features.disable('water');
-            expect(features.disabled()).to.include('water');
+            expect(features.disabled()).toContain('water');
             expect(features.enabled()).not.toContain('water');
         });
     });
@@ -35,19 +35,19 @@ describe('iD.rendererFeatures', function() {
             features.disable('water');
             features.enable('water');
             expect(features.disabled()).not.toContain('water');
-            expect(features.enabled()).to.include('water');
+            expect(features.enabled()).toContain('water');
         });
     });
 
     describe('#toggle', function() {
         it('toggles features', function() {
             features.toggle('water');
-            expect(features.disabled()).to.include('water');
+            expect(features.disabled()).toContain('water');
             expect(features.enabled()).not.toContain('water');
 
             features.toggle('water');
             expect(features.disabled()).not.toContain('water');
-            expect(features.enabled()).to.include('water');
+            expect(features.enabled()).toContain('water');
         });
     });
 
@@ -636,8 +636,8 @@ describe('iD.rendererFeatures', function() {
             autoHidden = features.autoHidden();
             msg = (i + 1) + ' points';
 
-            expect(hidden, msg).to.include('points');
-            expect(autoHidden, msg).to.include('points');
+            expect(hidden, msg).toContain('points');
+            expect(autoHidden, msg).toContain('points');
         });
 
         it('doubles auto-hide threshold when doubling viewport size', function() {
@@ -667,8 +667,8 @@ describe('iD.rendererFeatures', function() {
             autoHidden = features.autoHidden();
             msg = (i + 1) + ' points';
 
-            expect(hidden, msg).to.include('points');
-            expect(autoHidden, msg).to.include('points');
+            expect(hidden, msg).toContain('points');
+            expect(autoHidden, msg).toContain('points');
         });
     });
 

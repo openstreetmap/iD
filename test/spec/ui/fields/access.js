@@ -33,7 +33,7 @@ describe('iD.uiFieldAccess', function() {
         var options;
 
         options = access.options('bicycle').map(function(v) { return v.value; });
-        expect(options).to.include('dismount');
+        expect(options).toContain('dismount');
 
         options = access.options('foot').map(function(v) { return v.value; });
         expect(options).not.toContain('dismount');
