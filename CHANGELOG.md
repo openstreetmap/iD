@@ -51,9 +51,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
+* Remove redundant software dependencies to reduce the amount of the code that is bundled with iD ([#11634], [#12307], thanks [@k-yle])
 
+[#11634]: https://github.com/openstreetmap/iD/pull/11634
 [#12297]: https://github.com/openstreetmap/iD/issues/12297
 [#12306]: https://github.com/openstreetmap/iD/pull/12306
+[#12307]: https://github.com/openstreetmap/iD/pull/12307
 
 
 # 2.40.0
