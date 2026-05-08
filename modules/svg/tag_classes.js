@@ -61,8 +61,9 @@ export function svgTagClasses() {
 
         // pick at most one primary classification tag..
         for (i = 0; i < primaries.length; i++) {
-            k = primaries[i].replace(':', '_');
+            k = primaries[i];
             v = t[k];
+            k = k.replace(':', '_');
             if (!v || v === 'no') continue;
 
             primary = k;

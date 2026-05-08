@@ -274,4 +274,11 @@ describe('iD.svgTagClasses', function () {
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal(null);
     });
+
+    it('normalizes colons in primary tag key to underlines', function() {
+        selection
+            .datum(new iD.osmWay({tags: {'piste:type': 'nordic'}}))
+            .call(iD.svgTagClasses());
+        expect(selection.attr('class')).to.equal('tag-piste_type tag-piste_type-nordic');
+    });
 });
