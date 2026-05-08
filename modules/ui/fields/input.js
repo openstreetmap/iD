@@ -13,6 +13,7 @@ import { cardinal } from '../../osm/node';
 import { isColorValid } from '../../osm/tags';
 import { uiLengthIndicator } from '..';
 import { uiTooltip } from '../tooltip';
+import { utilIsValidURL } from '../../util/util';
 
 export {
     uiFieldText as uiFieldColour,
@@ -193,13 +194,10 @@ export function uiFieldText(field, context) {
             outlinkButton
                 .on('click', function(d3_event) {
                     d3_event.preventDefault();
-                    var value = validIdentifierValueForLink();
-                    if (value) {
-                        var url = field.urlFormat.replace(/{value}/, encodeURIComponent(value));
-                        window.open(url, '_blank');
-                    }
+                    const url = getExternalLink();
+                    if (url) window.open(url, '_blank');
                 })
-                .classed('disabled', () => !validIdentifierValueForLink())
+                .classed('disabled', () => !getExternalLink())
                 .merge(outlinkButton);
         } else if (field.type === 'schedule') {
 
@@ -216,9 +214,8 @@ export function uiFieldText(field, context) {
                 .on('click', function(d3_event) {
                     d3_event.preventDefault();
 
-                    var value = validIdentifierValueForLink();
-                    var url = yoHoursURLFormat.replace(/{value}/, encodeURIComponent(value || ''));
-                    window.open(url, '_blank');
+                    const url = getExternalLink();
+                    if (url) window.open(url, '_blank');
                 })
                 .merge(outlinkButton);
         } else if (field.type === 'url') {
@@ -235,7 +232,7 @@ export function uiFieldText(field, context) {
                 .on('click', function(d3_event) {
                     d3_event.preventDefault();
 
-                    const value = validIdentifierValueForLink();
+                    const value = getExternalLink();
                     if (value) window.open(value, '_blank');
                 })
                 .merge(outlinkButton);
@@ -394,21 +391,23 @@ export function uiFieldText(field, context) {
     }
 
 
-    function validIdentifierValueForLink() {
+    /** @returns {string | null} */
+    function getExternalLink() {
         const value = utilGetSetValue(input).trim();
+        if (!value) return null;
 
-        if (field.type === 'url' && value) {
-            try {
-                return (new URL(value)).href;
-            } catch {
-                return null;
-            }
+        if (field.type === 'url' && utilIsValidURL(value, true)) {
+            return value;
         }
         if (field.type === 'identifier' && field.pattern) {
-            return value && value.match(new RegExp(field.pattern))?.[0];
+            if (utilIsValidURL(value, true)) return value;
+            const id = value.match(new RegExp(field.pattern))?.[0];
+            if (id) {
+                return field.urlFormat.replace(/{value}/, encodeURIComponent(id));
+            }
         }
         if (field.type === 'schedule') {
-            return value;
+            return yoHoursURLFormat.replace(/{value}/, encodeURIComponent(value || ''));
         }
         return null;
     }
@@ -581,7 +580,7 @@ export function uiFieldText(field, context) {
         if (field.type === 'date') updateDateField();
 
         if (outlinkButton && !outlinkButton.empty()) {
-            var disabled = !validIdentifierValueForLink() && field.type !== 'schedule';
+            var disabled = !getExternalLink() && field.type !== 'schedule';
             outlinkButton.classed('disabled', disabled);
         }
 

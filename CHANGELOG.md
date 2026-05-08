@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.41.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Make tags like `contact:instagram` clickable if they contain a plain username, or a full URL ([#12306], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -52,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 [#12297]: https://github.com/openstreetmap/iD/issues/12297
+[#12306]: https://github.com/openstreetmap/iD/pull/12306
 
 
 # 2.40.0
