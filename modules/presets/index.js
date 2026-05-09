@@ -1,4 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { json as d3_json } from 'd3-fetch';
 
 import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
@@ -192,6 +193,41 @@ export function presetIndex() {
     }
 
     return _this;
+  };
+
+  /**
+   * Loads custom preset JSON from a remote location (value of the
+   * `#presets_merge=` hash parameter) after bundled presets are loaded, then
+   * merges via `merge`. Logs `[presets_merge]` lines to the
+   * console on success or failure.
+   *
+   * @param {string} presetsMergeUrl
+   */
+  _this.mergePresetsMerge = function (presetsMergeUrl) {
+    _this.ensureLoaded()
+      .then(function () {
+        return d3_json(presetsMergeUrl);
+      })
+      .then(function (data) {
+        if (!data || typeof data !== 'object' || Array.isArray(data)) {
+          console.warn(  // eslint-disable-line no-console
+            '[presets_merge] expected the JSON at ' + presetsMergeUrl +
+            ' to be an object with `presets`/`fields`/`categories`/`defaults` keys, got ' +
+            (Array.isArray(data) ? 'array' : typeof data) + '. No presets loaded.'
+          );
+          return;
+        }
+        _this.merge(data);
+        console.info(  // eslint-disable-line no-console
+          '[presets_merge] merged custom presets from ' + presetsMergeUrl,
+          data
+        );
+      })
+      .catch(function (err) {
+        console.warn(  // eslint-disable-line no-console
+          '[presets_merge] failed to load presets from ' + presetsMergeUrl + ':', err
+        );
+      });
   };
 
 

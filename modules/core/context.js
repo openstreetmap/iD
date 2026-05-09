@@ -1,7 +1,6 @@
 import { debounce, throttle } from 'es-toolkit/compat';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { json as d3_json } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
 import packageJSON from '../../package.json';
@@ -621,71 +620,11 @@ export function coreContext() {
       _history.migrateHistoryData();
 
       if (context.initialHashParams.presets_merge) {
-        // Fetch a user-supplied presets file and merge it into the running
-        // preset index after the bundled presets have finished loading. The
-        // JSON file must match the shape that `presetManager.merge` accepts,
-        // which is the same shape used by `id-tagging-schema`:
-        //   { presets?, fields?, categories?, defaults?, featureCollection? }
-        // Hash param name follows the same pattern as `gpx` and `maprules`
-        // (value is a URL; no `_url` suffix). It is not `presets=` because
-        // that parameter is already the built-in-preset allowlist.
-        const presetsMergeUrl = context.initialHashParams.presets_merge;
-        presetManager.ensureLoaded()
-          .then(function () {
-            return d3_json(presetsMergeUrl);
-          })
-          .then(function (data) {
-            if (!data || typeof data !== 'object' || Array.isArray(data)) {
-              console.warn(  // eslint-disable-line no-console
-                '[presets_merge] expected the JSON at ' + presetsMergeUrl +
-                ' to be an object with `presets`/`fields`/`categories`/`defaults` keys, got ' +
-                (Array.isArray(data) ? 'array' : typeof data) + '. No presets loaded.'
-              );
-              return;
-            }
-            presetManager.merge(data);
-            console.info(  // eslint-disable-line no-console
-              '[presets_merge] merged custom presets from ' + presetsMergeUrl,
-              data
-            );
-          })
-          .catch(function (err) {
-            console.warn(  // eslint-disable-line no-console
-              '[presets_merge] failed to load presets from ' + presetsMergeUrl + ':', err
-            );
-          });
+        presetManager.mergePresetsMerge(context.initialHashParams.presets_merge);
       }
 
       if (services.maprules && context.initialHashParams.maprules) {
-        // Fetch the user-supplied maprules JSON, register each selector
-        // with `services.maprules`, and surface success/failure on the
-        // console (the rules silently affect validation, so we want some
-        // dev-visible signal that the file was actually loaded).
-        const maprulesUrl = context.initialHashParams.maprules;
-        d3_json(maprulesUrl)
-          .then(function (mapcss) {
-            services.maprules.init();
-            if (!Array.isArray(mapcss)) {
-              console.warn(  // eslint-disable-line no-console
-                '[maprules] expected the JSON at ' + maprulesUrl +
-                ' to be an array of selector objects, got ' + typeof mapcss +
-                '. No rules loaded.'
-              );
-              return;
-            }
-            mapcss.forEach(function (mapcssSelector) {
-              services.maprules.addRule(mapcssSelector);
-            });
-            console.info(  // eslint-disable-line no-console
-              '[maprules] loaded ' + mapcss.length + ' rule(s) from ' + maprulesUrl,
-              mapcss
-            );
-          })
-          .catch(function (err) {
-            console.warn(  // eslint-disable-line no-console
-              '[maprules] failed to load rules from ' + maprulesUrl + ':', err
-            );
-          });
+        services.maprules.loadFromUrl(context.initialHashParams.maprules);
       }
 
       // if the container isn't available, e.g. when testing, don't load the UI

@@ -1,3 +1,5 @@
+import { json as d3_json } from 'd3-fetch';
+
 import { osmAreaKeys as areaKeys } from '../osm/tags';
 import { utilArrayIntersection } from '../util';
 import { validationIssue } from '../core/validation';
@@ -104,6 +106,42 @@ export default {
         this._validationRules = [];
         this._areaKeys = areaKeys;
         this._lineKeys = buildLineKeys();
+    },
+
+    /**
+     * Fetches maprules JSON from a URL (e.g. `#maprules=` hash value),
+     * initializes the service, registers each selector, and logs `[maprules]`
+     * success or failure to the console. Expects a JSON array of selector
+     * objects.
+     *
+     * @param {string} maprulesUrl
+     */
+    loadFromUrl: function (maprulesUrl) {
+        const self = this;
+        d3_json(maprulesUrl)
+          .then(function (mapcss) {
+            self.init();
+            if (!Array.isArray(mapcss)) {
+              console.warn(  // eslint-disable-line no-console
+                '[maprules] expected the JSON at ' + maprulesUrl +
+                ' to be an array of selector objects, got ' + typeof mapcss +
+                '. No rules loaded.'
+              );
+              return;
+            }
+            mapcss.forEach(function (mapcssSelector) {
+              self.addRule(mapcssSelector);
+            });
+            console.info(  // eslint-disable-line no-console
+              '[maprules] loaded ' + mapcss.length + ' rule(s) from ' + maprulesUrl,
+              mapcss
+            );
+          })
+          .catch(function (err) {
+            console.warn(  // eslint-disable-line no-console
+              '[maprules] failed to load rules from ' + maprulesUrl + ':', err
+            );
+          });
     },
 
     // list of rules only relevant to tag checks...
