@@ -6,7 +6,7 @@ This document answers a recurring question:
 
 Short answer: yes, both. iD supports loading custom **presets** at runtime via the `presets=` URL hash parameter when its value is an `http`/`https` URL to a JSON file, and custom **validation rules** at runtime via the `maprules=` URL hash parameter. Both are static-JSON files you host yourself — no server, no fork, no rebuild.
 
-The sections below explain the available extension points (`presets=` in two modes, plus `maprules=`) and which one to use when.
+The sections below explain the available extension points (`presets=` in two modes, plus `maprules=`).
 
 ---
 
@@ -66,7 +66,7 @@ Use the same `presets=` URL hash parameter with a **comma-separated list of pres
 
 iD supports loading a JSON file of custom warnings and errors via the `maprules=` URL hash parameter. The file is fetched once at iD startup and each entry is registered as an extra rule that runs alongside the built-in validators.
 
-This mechanism originated as the client side of the [MapRules](https://github.com/radiant-maxar/maprules) service, which is no longer maintained. **You do not need that service.** The URL just points at a static JSON file on any host that allows CORS — for example a GitHub Pages site, an S3 bucket, or your campaign's own server.
+This mechanism originated as the client side of the [MapRules](https://github.com/radiant-maxar/maprules) service, which is no longer maintained. **You do not need that service.** The URL just points at a static JSON file on any host that allows CORS — for example a GitHub Pages site, an S3 bucket, a [GitHub Gist](https://gist.github.com/) raw file (see [section 4](#4-hosting-on-github-gist)), or your campaign's own server.
 
 ```
 https://ideditor-release.netlify.app/#maprules=https://example.org/my-rules.json&map=18/52.5/13.4
@@ -126,8 +126,12 @@ Each selector object has:
 ]
 ```
 
-### When to use `maprules=` vs. `presets=` (URL merge)
+## 4. Hosting on GitHub Gist
 
-- Use `presets=https://…` when you want a new entry in the preset picker, with its own icon, default tags, fields, and search terms (the _Bench with Backrest_ example in Section 1).
-- Use `maprules=` when you want to validate or constrain tag combinations on existing presets without adding a new picker entry ("warn when an `amenity=bench` is missing `backrest`").
-- The two compose: ship a `presets=` URL merge file with your custom preset _and_ a `maprules=` file with the validation rules that go with it.
+[GitHub Gists](https://gist.github.com/) are a practical place to host the static JSON for `presets=` (URL merge) and `maprules=`: create a gist, add one file per payload (preset bundle as a single object, rules as a single array), then open each file and use its **Raw** URL from the browser address bar in your iD hash parameters. Raw gist URLs typically work with iD's fetch + CORS expectations for small campaign files.
+
+Worked example you can open, fork, or copy from — a **Bench with Backrest** preset JSON and a companion **bench** `maprules` array in the same gist:
+
+https://gist.github.com/tordans/549a328ccff34963192899113c73d35a
+
+Point `presets=` at the raw URL of the preset object file and `maprules=` at the raw URL of the rules array file in one editor link to try both together.
