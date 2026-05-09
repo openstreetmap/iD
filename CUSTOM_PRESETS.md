@@ -4,25 +4,25 @@ This document answers a recurring question:
 
 > _"Can I add my own presets or validation rules to iD — for a mapping campaign, an organization, or a custom tagging schema?"_
 
-Short answer: yes, both. iD supports loading custom **presets** at runtime via the `presets_merge=` URL hash parameter, and custom **validation rules** at runtime via the `maprules=` URL hash parameter. Both are static-JSON files you host yourself — no server, no fork, no rebuild.
+Short answer: yes, both. iD supports loading custom **presets** at runtime via the `presets=` URL hash parameter when its value is an `http`/`https` URL to a JSON file, and custom **validation rules** at runtime via the `maprules=` URL hash parameter. Both are static-JSON files you host yourself — no server, no fork, no rebuild.
 
-The sections below explain the three available extension points and which one to use when.
+The sections below explain the available extension points (`presets=` in two modes, plus `maprules=`) and which one to use when.
 
 ---
 
 ## 1. Adding custom presets at runtime
 
-iD supports merging extra presets, fields, categories, and defaults into the running preset library via the `presets_merge=` URL hash parameter. The file is fetched once at iD startup, after iD's bundled presets finish loading, and merged in via the same `presetManager.merge` API used internally by the Name-Suggestion-Index.
+iD supports merging extra presets, fields, categories, and defaults into the running preset library when `presets=` is set to an **`http` or `https` URL** pointing at a JSON file. The file is fetched once at iD startup, after iD's bundled presets finish loading, and merged in via the same `presetManager.merge` API used internally by the Name-Suggestion-Index.
 
 ```
-https://ideditor-release.netlify.app/#presets_merge=https://example.org/my-presets.json&map=18/52.5/13.4
+https://ideditor-release.netlify.app/#presets=https://example.org/my-presets.json&map=18/52.5/13.4
 ```
 
 ### Operational notes
 
 - The URL is fetched once at startup. Changes to the file require a page reload.
 - The URL must be reachable via CORS from the iD origin.
-- On success / failure / wrong shape, `[presets_merge] …` lines are written to the browser console.
+- On success / failure / wrong shape, `[presets] …` lines are written to the browser console.
 - Field IDs referenced under each preset's `fields` array must already exist (either as iD built-ins or because you also defined them under a `fields` key in the same file).
 - Mappers without your URL will not see the preset. Use this for campaigns, organization-internal deployments, and previewing schema changes — not as a substitute for contributing to [`@openstreetmap/id-tagging-schema`](https://github.com/openstreetmap/id-tagging-schema) when the preset belongs in the global library.
 
@@ -60,7 +60,7 @@ After loading, the preset shows up in the search list and the _Change feature ty
 
 ## 2. Restricting which built-in presets a user may select
 
-Use the `presets=` URL hash parameter to allowlist which built-in presets may be selected (for example, campaigns limited to certain feature types). It only **filters** the built-in library; it does not add new presets. See the __`presets`__ entry under [URL parameters → iD Standalone in API.md](API.md#id-standalone).
+Use the same `presets=` URL hash parameter with a **comma-separated list of preset IDs** (when the value does **not** start with `http://` or `https://`). That allowlists which built-in presets may be selected (for example, campaigns limited to certain feature types). It only **filters** the built-in library; it does not add new presets. You cannot combine a merge URL and an allowlist in a single `presets=` value — pick one mode per link. See the __`presets`__ entry under [URL parameters → iD Standalone in API.md](API.md#id-standalone).
 
 ## 3. Adding custom validation rules at runtime
 
@@ -126,8 +126,8 @@ Each selector object has:
 ]
 ```
 
-### When to use `maprules=` vs. `presets_merge=`
+### When to use `maprules=` vs. `presets=` (URL merge)
 
-- Use `presets_merge=` when you want a new entry in the preset picker, with its own icon, default tags, fields, and search terms (the _Bench with Backrest_ example in Section 1).
+- Use `presets=https://…` when you want a new entry in the preset picker, with its own icon, default tags, fields, and search terms (the _Bench with Backrest_ example in Section 1).
 - Use `maprules=` when you want to validate or constrain tag combinations on existing presets without adding a new picker entry ("warn when an `amenity=bench` is missing `backrest`").
-- The two compose: ship a `presets_merge=` file with your custom preset _and_ a `maprules=` file with the validation rules that go with it.
+- The two compose: ship a `presets=` URL merge file with your custom preset _and_ a `maprules=` file with the validation rules that go with it.

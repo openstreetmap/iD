@@ -75,8 +75,8 @@ and/or a tile rendering stack, but neither of these are required for editing wit
 
 Yes. There are three URL hash parameters that cover the common cases:
 
-- `presets_merge=` loads a static JSON file of additional presets (and optionally fields, categories, defaults) and merges them into the running preset library at startup. Use this to add a new entry to the preset picker.
-- `presets=` restricts the built-in preset list to an allowlist (e.g. roads only). It does not add new presets.
+- `presets=https://…` loads a static JSON file of additional presets (and optionally fields, categories, defaults) and merges them into the running preset library at startup. Use this to add a new entry to the preset picker (the value must start with `http://` or `https://`).
+- `presets=id1,id2,…` (comma-separated preset IDs, not a URL) restricts the built-in preset list to an allowlist (e.g. roads only). It does not add new presets.
 - `maprules=` loads a static JSON file of custom validation warnings and errors, useful for enforcing tag conventions without adding a new preset.
 
 The presets shipped to all iD users are still maintained centrally in [`@openstreetmap/id-tagging-schema`](https://github.com/openstreetmap/id-tagging-schema); contribute there if your preset belongs in the global library rather than only in a campaign or organization-internal deployment.

@@ -197,21 +197,21 @@ export function presetIndex() {
 
   /**
    * Loads custom preset JSON from a remote location (value of the
-   * `#presets_merge=` hash parameter) after bundled presets are loaded, then
-   * merges via `merge`. Logs `[presets_merge]` lines to the
+   * `#presets=` hash parameter when it is an `http`/`https` URL) after bundled
+   * presets are loaded, then merges via `merge`. Logs `[presets]` lines to the
    * console on success or failure.
    *
-   * @param {string} presetsMergeUrl
+   * @param {string} presetsJsonUrl
    */
-  _this.mergePresetsMerge = function (presetsMergeUrl) {
+  _this.mergePresets = function (presetsJsonUrl) {
     _this.ensureLoaded()
       .then(function () {
-        return d3_json(presetsMergeUrl);
+        return d3_json(presetsJsonUrl);
       })
       .then(function (data) {
         if (!data || typeof data !== 'object' || Array.isArray(data)) {
           console.warn(  // eslint-disable-line no-console
-            '[presets_merge] expected the JSON at ' + presetsMergeUrl +
+            '[presets] expected the JSON at ' + presetsJsonUrl +
             ' to be an object with `presets`/`fields`/`categories`/`defaults` keys, got ' +
             (Array.isArray(data) ? 'array' : typeof data) + '. No presets loaded.'
           );
@@ -219,13 +219,13 @@ export function presetIndex() {
         }
         _this.merge(data);
         console.info(  // eslint-disable-line no-console
-          '[presets_merge] merged custom presets from ' + presetsMergeUrl,
+          '[presets] merged custom presets from ' + presetsJsonUrl,
           data
         );
       })
       .catch(function (err) {
         console.warn(  // eslint-disable-line no-console
-          '[presets_merge] failed to load presets from ' + presetsMergeUrl + ':', err
+          '[presets] failed to load presets from ' + presetsJsonUrl + ':', err
         );
       });
   };
