@@ -134,4 +134,4 @@ Worked example you can open, fork, or copy from — a **Bench with Backrest** pr
 
 https://gist.github.com/tordans/549a328ccff34963192899113c73d35a
 
-Point `presets=` at the raw URL of the preset object file and `maprules=` at the raw URL of the rules array file in one editor link to try both together.
+Full hash example (same gist raw files, `presets=` merge URL + `maprules=`; adjust host/port if your dev server differs): [open local iD with both loaded](http://localhost:8080/#presets=https://gist.githubusercontent.com/tordans/549a328ccff34963192899113c73d35a/raw/bench-presets.json&maprules=https://gist.githubusercontent.com/tordans/549a328ccff34963192899113c73d35a/raw/bench-rules.json&map=20.00/52.47414/13.44576&disable_features=boundaries&id=n6399964554&locale=en)
