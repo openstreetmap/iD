@@ -1802,6 +1802,8 @@ en:
         title: Merge these points
       move_points_apart:
         title: Move these points apart
+      maprules_apply_tags:
+        annotation: Applied tags from a custom validation rule.
       move_tags:
         title: Move the tags
         annotation: Moved tags.

@@ -64,7 +64,7 @@ Use the same `presets=` URL hash parameter with a **comma-separated list of pres
 
 ## 3. Adding custom validation rules at runtime
 
-iD supports loading a JSON file of custom warnings and errors via the `maprules=` URL hash parameter. The file is fetched once at iD startup and each entry is registered as an extra rule that runs alongside the built-in validators.
+iD supports loading a JSON file of custom validation rules (errors, warnings, and optional soft suggestions) via the `maprules=` URL hash parameter. The file is fetched once at iD startup and each entry is registered as an extra rule that runs alongside the built-in validators.
 
 This mechanism originated as the client side of the [MapRules](https://github.com/radiant-maxar/maprules) service, which is no longer maintained. **You do not need that service.** The URL just points at a static JSON file on any host that allows CORS — for example a GitHub Pages site, an S3 bucket, a [GitHub Gist](https://gist.github.com/) raw file (see [section 4](#4-hosting-on-github-gist)), or your campaign's own server.
 
@@ -77,7 +77,7 @@ https://ideditor-release.netlify.app/#maprules=https://example.org/my-rules.json
 - The URL is fetched once at iD startup. Changing the file requires a page reload.
 - The URL must be reachable via CORS from the iD origin. If the request fails or the JSON is malformed, the failure is silently ignored — there is no error toast.
 - Issues raised by these rules show up in the sidebar like any other issue, but the `maprules` rule type is intentionally hidden from the issue-rule toggle UI under _Map Data → Issues_, so users cannot disable individual custom rules from the UI.
-- Rules can produce either errors (which block changeset upload) or warnings (which do not). See `error` / `warning` below.
+- Rules can produce errors (which block changeset upload), warnings (which do not), or suggestions (the softer blue notice; they do not block upload). See the message keys below.
 
 ### JSON file format
 
@@ -97,9 +97,17 @@ Each selector object has:
   - `greaterThan` / `greaterThanEqual` / `lessThan` / `lessThanEqual`: `{ key: number }` — compared against the raw OSM tag value (string-coerced; intended for numeric tags).
   - `positiveRegex` / `negativeRegex`: `{ key: ["regex1", "regex2"] }` — the entries are joined with `|` and used as a single `RegExp`. Anchor with `^` / `$` if you want exact matches.
 
-- Exactly one of:
+- Exactly one **message** (use only one key per selector; if more than one is present, iD uses **error** first, then **warning**, then **suggestion**, and logs a console warning):
   - `error: "message"` — surfaced as an error, blocks changeset upload.
   - `warning: "message"` — surfaced as a warning, does not block upload.
+  - `suggestion: "message"` — surfaced as a suggestion (blue notice), does not block upload.
+
+- Optional **`fixes`** — array of quick actions shown on the issue in the inspector. Each item:
+  - `title` (**required**) — short label on the button, plain text (not translated through iD’s locale files).
+  - `tags` (**required**) — object of tag keys and values to **merge** onto the feature when the user chooses that fix (existing tags are kept unless overwritten by a key in `tags`).
+  - `icon` (optional) — icon id (same style as other issue fixes, e.g. `iD-icon-wrench`).
+
+Selectors without a `fixes` array behave as before (only **Ignore** is offered for warnings and suggestions, besides built-in behavior).
 
 ### Example file
 
@@ -122,6 +130,17 @@ Each selector object has:
     "equals": { "man_made": "tower", "tower:type": "communication" },
     "presence": "height",
     "warning": "Communication towers should record height when known"
+  },
+  {
+    "geometry": "node",
+    "equals": { "amenity": "bench" },
+    "presence": "backrest",
+    "negativeRegex": { "backrest": ["^yes$", "^no$"] },
+    "suggestion": "Bench backrest should be yes or no",
+    "fixes": [
+      { "title": "Set backrest=yes", "tags": { "backrest": "yes" } },
+      { "title": "Set backrest=no", "tags": { "backrest": "no" } }
+    ]
   }
 ]
 ```

@@ -32,6 +32,25 @@ describe('maprules', function() {
             expect(equalsCheck(entityTags)).to.be.true;
             expect(absenceCheck(entityTags)).to.be.true;
         });
+
+        it('ignores suggestion and fixes keys (not tag conditions)', function() {
+            var selector = {
+                geometry: 'node',
+                equals: { amenity: 'bench' },
+                absence: 'backrest',
+                suggestion: 'Consider backrest',
+                fixes: [
+                    { title: 'Yes', tags: { backrest: 'yes' } }
+                ],
+                error: 'must have name'
+            };
+            var filteredChecks = iD.serviceMapRules.filterRuleChecks(selector);
+            expect(filteredChecks.length).to.eql(2);
+            var tags = { amenity: 'bench' };
+            filteredChecks.forEach(function(check) {
+                expect(check(tags)).to.be.true;
+            });
+        });
     });
 
     describe('#buildTagMap', function() {
@@ -161,6 +180,82 @@ describe('maprules', function() {
             expect(iD.serviceMapRules.validationRules().length).to.eql(1);
         });
     });
+
+    describe('#addRule message and fixes', function() {
+        beforeEach(function() {
+            iD.serviceMapRules.clearRules();
+        });
+
+        it('skips selector when error, warning, and suggestion are all missing or empty', function() {
+            iD.serviceMapRules.addRule({
+                geometry: 'node',
+                equals: { foo: 'bar' },
+                warning: ''
+            });
+            expect(iD.serviceMapRules.validationRules()).to.be.empty;
+        });
+
+        it('uses suggestion severity when only suggestion is set', function() {
+            iD.serviceMapRules.addRule({
+                geometry: 'node',
+                equals: { amenity: 'bench' },
+                absence: 'backrest',
+                suggestion: 'Record whether the bench has a backrest'
+            });
+            var rules = iD.serviceMapRules.validationRules();
+            var node = new iD.osmNode({ tags: { amenity: 'bench' } });
+            var graph = new iD.coreGraph([node]);
+            var issues = [];
+            rules[0].findIssues(node, graph, issues);
+            expect(issues.length).to.eql(1);
+            expect(issues[0].severity).to.eql('suggestion');
+            expect(issues[0].hash).to.eql('maprules-0');
+        });
+
+        it('prefers error over warning when both message keys are set', function() {
+            iD.serviceMapRules.addRule({
+                geometry: 'node',
+                equals: { amenity: 'kiosk' },
+                absence: 'name',
+                warning: 'warn',
+                error: 'err'
+            });
+            var rules = iD.serviceMapRules.validationRules();
+            var node = new iD.osmNode({ tags: { amenity: 'kiosk' } });
+            var graph = new iD.coreGraph([node]);
+            var issues = [];
+            rules[0].findIssues(node, graph, issues);
+            expect(issues[0].severity).to.eql('error');
+            var captured;
+            issues[0].message(iD.coreContext())({ text: function(value) { captured = value; } });
+            expect(captured).to.eql('err');
+        });
+
+        it('applies tags when a quick-fix onClick runs', function() {
+            var context = iD.coreContext().assetPath('../dist/').init();
+            var node = new iD.osmNode({ id: 'n1', tags: { amenity: 'bench' }, loc: [0, 0] });
+            context.perform(iD.actionAddEntity(node));
+            // Register rules after context.init — init() calls maprules.init() and clears rules.
+            iD.serviceMapRules.addRule({
+                geometry: 'node',
+                equals: { amenity: 'bench' },
+                absence: 'backrest',
+                warning: 'Missing backrest',
+                fixes: [
+                    { title: 'Set backrest=yes', tags: { backrest: 'yes' } }
+                ]
+            });
+            var rules = iD.serviceMapRules.validationRules();
+            var issues = [];
+            rules[0].findIssues(context.entity('n1'), context.graph(), issues);
+            var fixes = issues[0].fixes(context);
+            var tagFix = fixes.filter(function(f) { return f.id && f.id.indexOf('maprules-') === 0; })[0];
+            expect(tagFix).to.be.ok;
+            tagFix.onClick(context);
+            expect(context.entity('n1').tags.backrest).to.eql('yes');
+        });
+    });
+
     describe('#clearRules', function() {
         it('clears _validationRules array', function() {
             iD.serviceMapRules.clearRules();

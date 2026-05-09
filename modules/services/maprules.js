@@ -1,8 +1,20 @@
 import { json as d3_json } from 'd3-fetch';
 
+import { actionChangeTags } from '../actions/change_tags';
+import { t } from '../core/localizer';
+import { validationIssue, validationIssueFix } from '../core/validation';
 import { osmAreaKeys as areaKeys } from '../osm/tags';
 import { utilArrayIntersection } from '../util';
-import { validationIssue } from '../core/validation';
+
+
+/** Keys on a selector that are not tag-condition checks (see #filterRuleChecks). */
+var SELECTOR_META_KEYS = {
+    geometry: true,
+    error: true,
+    warning: true,
+    suggestion: true,
+    fixes: true
+};
 
 
 var buildRuleChecks = function() {
@@ -148,9 +160,10 @@ export default {
     filterRuleChecks: function(selector) {
         var _ruleChecks = this._ruleChecks;
         return Object.keys(selector).reduce(function(rules, key) {
-            if (['geometry', 'error', 'warning'].indexOf(key) === -1) {
-                rules.push(_ruleChecks[key](selector[key]));
+            if (SELECTOR_META_KEYS[key]) {
+                return rules;
             }
+            rules.push(_ruleChecks[key](selector[key]));
             return rules;
         }, []);
     },
@@ -232,6 +245,57 @@ export default {
 
     // adds from mapcss-parse selector check...
     addRule: function(selector) {
+        var hasError = typeof selector.error === 'string' && selector.error.length > 0;
+        var hasWarning = typeof selector.warning === 'string' && selector.warning.length > 0;
+        var hasSuggestion = typeof selector.suggestion === 'string' && selector.suggestion.length > 0;
+        var messageKeyCount = (hasError ? 1 : 0) + (hasWarning ? 1 : 0) + (hasSuggestion ? 1 : 0);
+
+        if (messageKeyCount === 0) {
+            console.warn(  // eslint-disable-line no-console
+                '[maprules] rule skipped: expected a non-empty string in exactly one of error, warning, suggestion',
+                selector
+            );
+            return;
+        }
+
+        if (messageKeyCount > 1) {
+            console.warn(  // eslint-disable-line no-console
+                '[maprules] multiple message keys; using precedence error > warning > suggestion',
+                selector
+            );
+        }
+
+        var severity = hasError ? 'error' : (hasWarning ? 'warning' : 'suggestion');
+        var messageText = hasError ? selector.error : (hasWarning ? selector.warning : selector.suggestion);
+
+        var ruleIndex = this._validationRules.length;
+
+        var validFixes = [];
+        if (Array.isArray(selector.fixes)) {
+            selector.fixes.forEach(function(entry, i) {
+                if (!entry || typeof entry.title !== 'string' || entry.title.length === 0) {
+                    console.warn(  // eslint-disable-line no-console
+                        '[maprules] skipping fix entry ' + i + ': title must be a non-empty string',
+                        entry
+                    );
+                    return;
+                }
+                if (!entry.tags || typeof entry.tags !== 'object' || Array.isArray(entry.tags) ||
+                    Object.keys(entry.tags).length === 0) {
+                    console.warn(  // eslint-disable-line no-console
+                        '[maprules] skipping fix entry ' + i + ': tags must be a non-empty object',
+                        entry
+                    );
+                    return;
+                }
+                validFixes.push({
+                    title: entry.title,
+                    tags: entry.tags,
+                    icon: (typeof entry.icon === 'string' && entry.icon.length > 0) ? entry.icon : null
+                });
+            });
+        }
+
         var rule = {
             // checks relevant to mapcss-selector
             checks: this.filterRuleChecks(selector),
@@ -250,19 +314,15 @@ export default {
                     return this.inferredGeometry === entity.geometry(graph);
                 }
             },
-            // when geometries match and tag matches are present, return a warning...
             findIssues: function (entity, graph, issues) {
                 if (this.geometryMatches(entity, graph) && this.matches(entity)) {
-                    const severity = Object.keys(selector).indexOf('error') > -1
-                            ? 'error'
-                            : 'warning';
-                    const message = selector[severity];
-                    issues.push(new validationIssue({
+                    var issueAttrs = {
                         type: 'maprules',
                         severity: severity,
+                        hash: 'maprules-' + ruleIndex,
                         /**
                          * Returns a renderer that writes the user-supplied
-                         * `message` string into a d3 selection as plain text.
+                         * message string into a d3 selection as plain text.
                          *
                          * The string comes verbatim from the maprules JSON
                          * file and must NOT be passed through the localizer
@@ -273,11 +333,37 @@ export default {
                          */
                         message: function () {
                             return function (selection) {
-                                selection.text(message);
+                                selection.text(messageText);
                             };
                         },
                         entityIds: [entity.id]
-                    }));
+                    };
+
+                    if (validFixes.length > 0) {
+                        issueAttrs.dynamicFixes = function (/* context */) {
+                            return validFixes.map(function(entry, fixIndex) {
+                                return new validationIssueFix({
+                                    id: 'maprules-' + ruleIndex + '-' + fixIndex,
+                                    title: function (selection) {
+                                        selection.text(entry.title);
+                                    },
+                                    icon: entry.icon || undefined,
+                                    onClick: function (context) {
+                                        var id = this.issue.entityIds[0];
+                                        var ent = context.hasEntity(id);
+                                        if (!ent) return;
+                                        var newTags = Object.assign({}, ent.tags, entry.tags);
+                                        context.perform(
+                                            actionChangeTags(id, newTags),
+                                            t('issues.fix.maprules_apply_tags.annotation')
+                                        );
+                                    }
+                                });
+                            });
+                        };
+                    }
+
+                    issues.push(new validationIssue(issueAttrs));
                 }
             }
         };
