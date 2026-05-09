@@ -1536,6 +1536,9 @@ en:
     fix_all:
       title: Fix All
       annotation: Fixed several validation issues.
+    maprules:
+      title: Custom validation rule
+      tip: "Issues raised by a custom validation rule loaded via the `maprules=` URL hash parameter."
     almost_junction:
       title: Almost Junctions
       message: "{feature} is very close but not connected to {feature2}"
