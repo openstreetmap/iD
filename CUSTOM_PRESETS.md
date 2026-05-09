@@ -69,7 +69,7 @@ iD supports loading a JSON file of custom validation rules (errors, warnings, an
 This mechanism originated as the client side of the [MapRules](https://github.com/radiant-maxar/maprules) service, which is no longer maintained. **You do not need that service.** The URL just points at a static JSON file on any host that allows CORS — for example a GitHub Pages site, an S3 bucket, a [GitHub Gist](https://gist.github.com/) raw file (see [section 4](#4-hosting-on-github-gist)), or your campaign's own server.
 
 ```
-https://ideditor-release.netlify.app/#maprules=https://example.org/my-rules.json&map=18/52.5/13.4
+https://ideditor.netlify.app/#maprules=https://example.org/my-rules.json&map=18/52.5/13.4
 ```
 
 ### Operational notes
@@ -153,4 +153,4 @@ Worked example you can open, fork, or copy from — a **Bench with Backrest** pr
 
 https://gist.github.com/tordans/549a328ccff34963192899113c73d35a
 
-Full hash example (same gist raw files, `presets=` merge URL + `maprules=`; adjust host/port if your dev server differs): [open local iD with both loaded](http://localhost:8080/#presets=https://gist.githubusercontent.com/tordans/549a328ccff34963192899113c73d35a/raw/bench-presets.json&maprules=https://gist.githubusercontent.com/tordans/549a328ccff34963192899113c73d35a/raw/bench-rules.json&map=20.00/52.47414/13.44576&disable_features=boundaries&id=n6399964554&locale=en)
+Full hash example (same gist raw files, `presets=` merge URL + `maprules=`; adjust host/port if your dev server differs): [open local iD with both loaded](https://ideditor.netlify.app/#presets=https://gist.githubusercontent.com/tordans/549a328ccff34963192899113c73d35a/raw/bench-presets.json&maprules=https://gist.githubusercontent.com/tordans/549a328ccff34963192899113c73d35a/raw/bench-rules.json&map=20.00/52.47414/13.44576&disable_features=boundaries&id=n6399964554&locale=en)
