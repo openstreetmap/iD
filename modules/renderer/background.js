@@ -63,7 +63,6 @@ export function rendererBackground(context) {
 
         for (const source of features) {
           if (source.encrypted) {
-            // eslint-disable-next-line no-await-in-loop
             source.template = await utilAesDecrypt(source.template);
           }
         }
