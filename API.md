@@ -36,7 +36,7 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   _Available values:_ Any of the [supported locales](https://github.com/openstreetmap/iD/tree/develop/dist/locales).
 * __`map`__ - A slash-separated `zoom/latitude/longitude`.<br/>
   _Example:_ `map=20.00/38.90085/-77.02271`
-* __`maprules`__ - A path to a [MapRules](https://github.com/radiant-maxar/maprules) service endpoint for enhanced tag validation.<br/>
+* __`maprules`__ - A URL to a static JSON file of custom tag-validation rules, loaded once at startup. See [CUSTOM_PRESETS.md](CUSTOM_PRESETS.md) for the JSON format, an example, and notes on what this parameter can and cannot do (in particular: it only adds validation rules, not presets).<br/>
   _Example:_ `maprules=https://path/to/file.json`
 * __`notes`__ - Enables the notes layer by default.<br/>
   _Example:_ `notes=true`
@@ -54,6 +54,8 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   _Available prefixes:_ `streetside/`, `mapillary/`, `kartaview`
 * __`presets`__ - A comma-separated list of preset IDs. These will be the only presets the user may select.<br/>
   _Example:_ `presets=building,highway/residential,highway/unclassified`
+* __`presets_url`__ - A URL to a static JSON file describing custom presets (and optionally fields, categories, defaults) to merge into iD's preset library at startup. The JSON shape matches what [`@openstreetmap/id-tagging-schema`](https://github.com/openstreetmap/id-tagging-schema) ships, i.e. an object with one or more of the keys `presets`, `fields`, `categories`, `defaults`, `featureCollection`. See [CUSTOM_PRESETS.md](CUSTOM_PRESETS.md) for the full shape, an example file, and caveats.<br/>
+  _Example:_ `presets_url=https://path/to/presets.json`
 * __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).
 * __`source`__ - Prefills the changeset source.<br/>
   _Example:_ `source=Bing%3BMapillary`
@@ -92,6 +94,7 @@ _Example:_ `https://www.openstreetmap.org/edit?editor=id#gpx=https://gist.github
 * __`photo_overlay`__
 * __`photo_username`__
 * __`presets`__
+* __`presets_url`__
 * __`source`__
 * __`validationDisable`__
 * __`validationWarning`__

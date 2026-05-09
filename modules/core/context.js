@@ -620,6 +620,39 @@ export function coreContext() {
       // Migrate history data from localStorage to IndexedDB
       _history.migrateHistoryData();
 
+      if (context.initialHashParams.presets_url) {
+        // Fetch a user-supplied presets file and merge it into the running
+        // preset index after the bundled presets have finished loading. The
+        // JSON file must match the shape that `presetManager.merge` accepts,
+        // which is the same shape used by `id-tagging-schema`:
+        //   { presets?, fields?, categories?, defaults?, featureCollection? }
+        const presetsUrl = context.initialHashParams.presets_url;
+        presetManager.ensureLoaded()
+          .then(function () {
+            return d3_json(presetsUrl);
+          })
+          .then(function (data) {
+            if (!data || typeof data !== 'object' || Array.isArray(data)) {
+              console.warn(  // eslint-disable-line no-console
+                '[presets_url] expected the JSON at ' + presetsUrl +
+                ' to be an object with `presets`/`fields`/`categories`/`defaults` keys, got ' +
+                (Array.isArray(data) ? 'array' : typeof data) + '. No presets loaded.'
+              );
+              return;
+            }
+            presetManager.merge(data);
+            console.info(  // eslint-disable-line no-console
+              '[presets_url] merged custom presets from ' + presetsUrl,
+              data
+            );
+          })
+          .catch(function (err) {
+            console.warn(  // eslint-disable-line no-console
+              '[presets_url] failed to load presets from ' + presetsUrl + ':', err
+            );
+          });
+      }
+
       if (services.maprules && context.initialHashParams.maprules) {
         // Fetch the user-supplied maprules JSON, register each selector
         // with `services.maprules`, and surface success/failure on the

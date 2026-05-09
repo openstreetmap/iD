@@ -450,7 +450,7 @@ A tag of a feature has an unexpected syntax.
 
 ##### `maprules`
 
-An issue with the active [MapRules](https://github.com/radiant-maxar/maprules) validation rules.
+An issue raised by a custom validation rule loaded via the `maprules=` URL hash parameter. Each rule is defined by a JSON selector object describing a tag-based condition and a `warning` or `error` message. See [CUSTOM_PRESETS.md](CUSTOM_PRESETS.md) for the JSON format and usage notes.
 
 ##### `mismatched_geometry`
 
