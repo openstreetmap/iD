@@ -39,7 +39,7 @@ export function rendererBackgroundSource(data) {
     var _name = source.name;
     var _description = source.description;
     var _best = !!source.best;
-    var _template = source.encrypted ? utilAesDecrypt(source.template) : source.template;
+    var _template = source.template;
 
     source.tileSize = data.tileSize || 256;
     source.zoomExtent = data.zoomExtent || [0, 22];
