@@ -109,6 +109,8 @@ Each selector object has:
 
 Selectors without a `fixes` array behave as before (only **Ignore** is offered for warnings and suggestions, besides built-in behavior).
 
+Each rule is independent: **all** of its conditions must match for that rule (and its `fixes`) to apply. For example, a rule with `absence: "backrest"` never runs at the same time as one with `presence: "backrest"` — so if you want quick fixes both when the tag is missing and when it is present but invalid, add the same `fixes` to **both** selector objects (or split concerns across two rules as in the gist example).
+
 ### Example file
 
 ```json
@@ -130,6 +132,16 @@ Selectors without a `fixes` array behave as before (only **Ignore** is offered f
     "equals": { "man_made": "tower", "tower:type": "communication" },
     "presence": "height",
     "warning": "Communication towers should record height when known"
+  },
+  {
+    "geometry": "node",
+    "equals": { "amenity": "bench" },
+    "absence": "backrest",
+    "warning": "Bench is missing backrest=yes or backrest=no",
+    "fixes": [
+      { "title": "Set backrest=yes", "tags": { "backrest": "yes" } },
+      { "title": "Set backrest=no", "tags": { "backrest": "no" } }
+    ]
   },
   {
     "geometry": "node",
