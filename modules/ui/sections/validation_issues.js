@@ -46,7 +46,7 @@ export function uiSectionValidationIssues(id, severity, context) {
         // finally: cut off at a maximum 1000 entries
         const center = context.map().center();
         const graph = context.graph();
-        const rules = sortBy(context.validator().getRuleKeys(), [
+        const rules = sortBy(context.validator().getRuleKeys().filter(key => key !== 'maprules'), [
             rule => t(`issues.${rule}.title`)
         ]);
         const withDistance = _issues.map(issue => {
