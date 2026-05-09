@@ -58,7 +58,14 @@ export function uiSectionDataLayers(context) {
             layer.enabled(enabled);
 
             if (!enabled && (which === 'osm' || which === 'notes')) {
-                context.enter(modeBrowse(context));
+                var modeId = mode && mode.id;
+                var isNoteMode = modeId === 'add-note' || modeId === 'select-note' || modeId === 'drag-note';
+
+                if (which === 'osm' && !isNoteMode) {
+                    context.enter(modeBrowse(context));
+                } else if (which === 'notes' && isNoteMode) {
+                    context.enter(modeBrowse(context));
+                }
             }
         }
     }
@@ -69,7 +76,7 @@ export function uiSectionDataLayers(context) {
 
     function drawOsmItems(selection) {
         var osmKeys = ['osm', 'notes'];
-        var osmLayers = layers.all().filter(function(obj) { return osmKeys.indexOf(obj.id) !== -1; });
+        var osmLayers = layers.all().filter(function (obj) { return osmKeys.indexOf(obj.id) !== -1; });
 
         var ul = selection
             .selectAll('.layer-list-osm')
@@ -88,11 +95,11 @@ export function uiSectionDataLayers(context) {
 
         var liEnter = li.enter()
             .append('li')
-            .attr('class', function(d) { return 'list-item list-item-' + d.id; });
+            .attr('class', function (d) { return 'list-item list-item-' + d.id; });
 
         var labelEnter = liEnter
             .append('label')
-            .each(function(d) {
+            .each(function (d) {
                 if (d.id === 'osm') {
                     d3_select(this)
                         .call(uiTooltip()
@@ -112,11 +119,11 @@ export function uiSectionDataLayers(context) {
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function(d3_event, d) { toggleLayer(d.id); });
+            .on('change', function (d3_event, d) { toggleLayer(d.id); });
 
         labelEnter
             .append('span')
-            .each(function(d) {
+            .each(function (d) {
                 d3_select(this).call(t.append('map_data.layers.' + d.id + '.title'));
             });
 
@@ -131,7 +138,7 @@ export function uiSectionDataLayers(context) {
 
     function drawQAItems(selection) {
         var qaKeys = ['osmose'];
-        var qaLayers = layers.all().filter(function(obj) { return qaKeys.indexOf(obj.id) !== -1; });
+        var qaLayers = layers.all().filter(function (obj) { return qaKeys.indexOf(obj.id) !== -1; });
 
         var ul = selection
             .selectAll('.layer-list-qa')
@@ -150,11 +157,11 @@ export function uiSectionDataLayers(context) {
 
         var liEnter = li.enter()
             .append('li')
-            .attr('class', function(d) { return 'list-item list-item-' + d.id; });
+            .attr('class', function (d) { return 'list-item list-item-' + d.id; });
 
         var labelEnter = liEnter
             .append('label')
-            .each(function(d) {
+            .each(function (d) {
                 d3_select(this)
                     .call(uiTooltip()
                         .title(() => t.append('map_data.layers.' + d.id + '.tooltip'))
@@ -165,11 +172,11 @@ export function uiSectionDataLayers(context) {
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function(d3_event, d) { toggleLayer(d.id); });
+            .on('change', function (d3_event, d) { toggleLayer(d.id); });
 
         labelEnter
             .append('span')
-            .each(function(d) { t.append('map_data.layers.' + d.id + '.title')(d3_select(this)); });
+            .each(function (d) { t.append('map_data.layers.' + d.id + '.title')(d3_select(this)); });
 
 
         // Update
@@ -250,11 +257,11 @@ export function uiSectionDataLayers(context) {
 
         var liEnter = li.enter()
             .append('li')
-            .attr('class', function(d) { return 'list-item list-item-' + d.src; });
+            .attr('class', function (d) { return 'list-item list-item-' + d.src; });
 
         var labelEnter = liEnter
             .append('label')
-            .each(function(d) {
+            .each(function (d) {
                 d3_select(this).call(
                     uiTooltip().title(d.tooltip).placement('top')
                 );
@@ -268,7 +275,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) { return d.name; });
+            .text(function (d) { return d.name; });
 
         // Update
         li
@@ -323,7 +330,7 @@ export function uiSectionDataLayers(context) {
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function() { toggleLayer('data'); });
+            .on('change', function () { toggleLayer('data'); });
 
         labelEnter
             .append('span')
@@ -336,7 +343,7 @@ export function uiSectionDataLayers(context) {
                 .title(() => t.append('settings.custom_data.tooltip'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
-            .on('click', function(d3_event) {
+            .on('click', function (d3_event) {
                 d3_event.preventDefault();
                 editCustom();
             })
@@ -349,7 +356,7 @@ export function uiSectionDataLayers(context) {
                 .title(() => t.append('map_data.layers.custom.zoom'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
-            .on('click', function(d3_event) {
+            .on('click', function (d3_event) {
                 if (d3_select(this).classed('disabled')) return;
 
                 d3_event.preventDefault();
@@ -410,7 +417,7 @@ export function uiSectionDataLayers(context) {
         historyPanelLabelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function(d3_event) {
+            .on('change', function (d3_event) {
                 d3_event.preventDefault();
                 context.ui().info.toggle('history');
             });
@@ -432,7 +439,7 @@ export function uiSectionDataLayers(context) {
         measurementPanelLabelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function(d3_event) {
+            .on('change', function (d3_event) {
                 d3_event.preventDefault();
                 context.ui().info.toggle('measurement');
             });
@@ -446,7 +453,7 @@ export function uiSectionDataLayers(context) {
 
     context.map()
         .on('move.uiSectionDataLayers',
-            debounce(function() {
+            debounce(function () {
                 // Detroit layers may have moved in or out of view
                 window.requestIdleCallback(section.reRender);
             }, 1000)
