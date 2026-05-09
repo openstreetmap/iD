@@ -75,7 +75,7 @@ and/or a tile rendering stack, but neither of these are required for editing wit
 
 Yes. There are three URL hash parameters that cover the common cases:
 
-- `presets_url=` loads a static JSON file of additional presets (and optionally fields, categories, defaults) and merges them into the running preset library at startup. Use this to add a new entry to the preset picker.
+- `presets_merge=` loads a static JSON file of additional presets (and optionally fields, categories, defaults) and merges them into the running preset library at startup. Use this to add a new entry to the preset picker.
 - `presets=` restricts the built-in preset list to an allowlist (e.g. roads only). It does not add new presets.
 - `maprules=` loads a static JSON file of custom validation warnings and errors, useful for enforcing tag conventions without adding a new preset.
 
