@@ -1591,10 +1591,11 @@ input.date-selector {
 }
 
 
-/* Field - Access, DirectionalCombo
+/* Field - Access, DirectionalCombo, SegregatedCombo
 ------------------------------------------------------- */
 .form-field-input-access,
-.form-field-input-directionalCombo {
+.form-field-input-directionalCombo,
+.form-field-input-segregatedCombo {
     flex: 1 1 auto;
     display: flex;
     flex-flow: row wrap;
