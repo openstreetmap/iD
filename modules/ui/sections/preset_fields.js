@@ -71,9 +71,21 @@ export function uiSectionPresetFields(context) {
 
             sharedFields.forEach(function(field) {
                 if (field.matchAllGeometry(geometries)) {
-                    _fieldsArr.push(
-                        uiField(context, field, _entityIDs)
-                    );
+                    var mainField = uiField(context, field, _entityIDs);
+                    _fieldsArr.push(mainField);
+
+                    // If a fallback field is specified, add it as well
+                    // e.g. "surface_segregated" has "surface" as fallback when it's not shown itself
+                    if (field.fallbackKey) {
+                        if (!sharedFields.some(function (f) { return f.id === field.fallbackKey; })) {
+                            var fallbackField = presetsManager.field(field.fallbackKey);
+                            if (fallbackField) {
+                                _fieldsArr.push(
+                                    uiField(context, fallbackField, _entityIDs, {fallbackFor: mainField})
+                                );
+                            }
+                        }
+                    }
                 }
             });
 

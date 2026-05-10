@@ -317,6 +317,12 @@ export function uiField(context, presetField, entityIDs, options) {
     // A non-allowed field is hidden from the user altogether
     field.isAllowed = function() {
 
+        // A fallback field is not allowed if the primary field is shown.
+        // e.g. "surface" is potentially allowed only when "surface_segregated" is not shown.
+        if (options.fallbackFor) {
+            return !options.fallbackFor.isAllowed();
+        }
+
         if (entityIDs &&
             entityIDs.length > 1 &&
             uiFields[field.type].supportsMultiselection === false) return false;
