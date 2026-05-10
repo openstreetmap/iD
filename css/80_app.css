@@ -1594,7 +1594,7 @@ input.date-selector {
 /* Field - Access, DirectionalCombo
 ------------------------------------------------------- */
 .form-field-input-access,
-.form-field-input-directionalcombo {
+.form-field-input-directionalCombo {
     flex: 1 1 auto;
     display: flex;
     flex-flow: row wrap;
