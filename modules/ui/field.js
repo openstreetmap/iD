@@ -101,6 +101,12 @@ export function uiField(context, presetField, entityIDs, options) {
                     }
                 }
             }
+
+            // For segregatedCombo, only the sub-keys (not the main/fallback key) count as
+            // "having a value" for the purpose of bypassing `prerequisiteTag` checks.
+            // e.g. `surface=asphalt` alone doesn't suppress the `segregated=yes` prerequisite
+            if (field.type === 'segregatedCombo' && field.fallbackKey && key === field.keys[0]) return false;
+
             return _tags[key] !== undefined;
         });
     }
