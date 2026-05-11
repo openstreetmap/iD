@@ -4,10 +4,10 @@ import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags, osmLifecyclePr
 
 export function svgTagClasses() {
     const primaries = [
-        'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
-        'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
-        'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
-        'roller_coaster', 'building:part', 'indoor', 'climbing'
+        'building:part', 'building', 'highway', 'railway', 'waterway', 'aeroway',
+        'aerialway', 'piste:type', 'boundary', 'power', 'amenity', 'natural',
+        'landuse', 'leisure', 'military', 'place', 'man_made', 'route',
+        'attraction', 'roller_coaster', 'indoor', 'climbing'
     ];
     const statuses = Object.keys(osmLifecyclePrefixes);
     const secondaries = [
@@ -16,10 +16,10 @@ export function svgTagClasses() {
         'public_transport', 'location', 'parking', 'golf', 'type', 'leisure',
         'man_made', 'indoor', 'construction', 'proposed', 'bicycle', 'foot'
     ];
-    var _tags = function(entity) { return entity.tags; };
+    var _tags = function (entity) { return entity.tags; };
 
 
-    var tagClasses = function(selection) {
+    var tagClasses = function (selection) {
         selection.each(function tagClassesEach(entity) {
             var value = this.className;
 
@@ -38,7 +38,7 @@ export function svgTagClasses() {
     };
 
 
-    tagClasses.getClassesString = function(t, value) {
+    tagClasses.getClassesString = function (t, value) {
         let primary, status;
 
         // in some situations we want to render perimeter strokes a certain way
@@ -158,7 +158,7 @@ export function svgTagClasses() {
     };
 
 
-    tagClasses.tags = function(val) {
+    tagClasses.tags = function (val) {
         if (!arguments.length) return _tags;
         _tags = val;
         return tagClasses;
