@@ -14,12 +14,12 @@ export function uiFieldSegregatedCombo(field, context) {
     const _combos = {};
 
 
+    function stripcolon(s) {
+        return s.replaceAll(':', '');
+    }
+
+
     function segregatedCombo(selection) {
-
-        function stripcolon(s) {
-            return s.replaceAll(':', '');
-        }
-
 
         wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
@@ -93,10 +93,23 @@ export function uiFieldSegregatedCombo(field, context) {
                 .map(id => context.graph().hasEntity(id)?.tags)
                 .filter(Boolean);
 
+        const mainKey = field.keys[0]; // e.g. `surface`
+        const uniqueMainValues = [...new Set(entityTags.map(tags => tags[mainKey]))]; // e.g. [ 'asphalt' ] or [ 'asphalt', 'concrete' ]
+        const sharedMainValue = uniqueMainValues.length === 1 ? uniqueMainValues[0] : null; // e.g. 'asphalt' or `null`
+
         for (const key of Object.keys(_combos)) {
-            const values = entityTags.map(tags => tags[key]);
-            const uniqueValues = [...new Set(values)];
-            _combos[key].tags({ [key]: uniqueValues.length > 1 ? uniqueValues : uniqueValues[0] });
+            const uniqueValues = [...new Set(entityTags.map(tags => tags[key]))]; // e.g. for `cycleway:surface` => [ undefined ]
+            const tagValue = uniqueValues.length > 1 ? uniqueValues : uniqueValues[0]; // e.g. for `cycleway:surface` => undefined
+            // Apply values to combo display
+            _combos[key].tags({ [key]: tagValue });
+
+            // When sub-key is unset but main key has a value, show it as an implied placeholder
+            // e.g. if `surface` is `asphalt` but `cycleway:surface` is unset, show `asphalt` as a placeholder for `cycleway:surface`
+            if (key !== mainKey && !tagValue && sharedMainValue) {
+                const displayValue = _combos[mainKey].displayValue(sharedMainValue); // e.g. `asphalt` to "Asphalt" (same as combobox would do for a set value)
+                wrap.select('.preset-segregatedcombo-' + stripcolon(key) + ' input')
+                    .attr('placeholder', displayValue);
+            }
         }
     };
 
