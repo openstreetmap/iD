@@ -47,6 +47,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Restore dedicated rendering of ski pistes and building parts ([#12297], thanks [@matkoniecz])
 * Pressing backspace while in the feature type selecting mode should not delete the object
 * Fix minor styling issues in the presets list ([#12321], thanks [@k-yle])
+* Hide icons that failed to load in the relations list ([#12320], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -58,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12297]: https://github.com/openstreetmap/iD/issues/12297
 [#12306]: https://github.com/openstreetmap/iD/pull/12306
 [#12307]: https://github.com/openstreetmap/iD/pull/12307
+[#12320]: https://github.com/openstreetmap/iD/pull/12320
 [#12321]: https://github.com/openstreetmap/iD/pull/12321
 
 
