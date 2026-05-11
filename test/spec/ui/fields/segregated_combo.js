@@ -283,5 +283,39 @@ describe('iD.uiFieldSegregatedCombo', () => {
             const fallbackField = makeFallbackField(uiField);
             expect(fallbackField.isAllowed()).toBe(true);
         });
+
+        function makeFieldForMultiple(tags1, tags2) {
+            const node1 = new iD.osmNode({ loc: [0, 0], tags: tags1 });
+            const node2 = new iD.osmNode({ loc: [0, 0], tags: tags2 });
+            context.perform(iD.actionAddEntity(node1));
+            context.perform(iD.actionAddEntity(node2));
+            const uiField = iD.uiField(context, presetField, [node1.id, node2.id]);
+            uiField.tags([ tags1, tags2 ]);
+            return uiField;
+        }
+
+        it('is allowed when all entities have segregated=yes', () => {
+            const uiField = makeFieldForMultiple({ segregated: 'yes' }, { segregated: 'yes' });
+            expect(uiField.isAllowed()).toBe(true);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(false);
+        });
+
+        it('is allowed when at least one entity has segregated=yes', () => {
+            const uiField = makeFieldForMultiple({ segregated: 'yes' }, { segregated: 'no' });
+            expect(uiField.isAllowed()).toBe(true);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(false);
+        });
+
+        it('is not allowed when no entities have segregated=yes', () => {
+            const uiField = makeFieldForMultiple({ segregated: 'no' }, { segregated: 'no' });
+            expect(uiField.isAllowed()).toBe(false);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(true);
+        });
     });
 });

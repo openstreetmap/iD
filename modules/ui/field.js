@@ -348,7 +348,14 @@ export function uiField(context, presetField, entityIDs, options) {
             !tagsContainFieldKey() && // ignore tagging prerequisites if a value is already present
             prerequisiteTag) {
 
-            if (!entityIDs.every(function(entityID) {
+           var prerequisiteCheck =
+               // For segregatedCombo, show the field if any entity satisfies the prerequisite
+               // e.g. still show `surface_segregated` even if not all entities have `segregated=yes`
+               field.type === 'segregatedCombo'
+                    ? entityIDs.some.bind(entityIDs)
+                    : entityIDs.every.bind(entityIDs);
+
+            if (!prerequisiteCheck(function(entityID) {
                 var entity = context.graph().entity(entityID);
                 if (prerequisiteTag.key) {
                     var value = entity.tags[prerequisiteTag.key] || '';
