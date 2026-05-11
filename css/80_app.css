@@ -1115,10 +1115,10 @@ summary.hide-toggle::-webkit-details-marker {
     object-fit: contain;
     border-radius: 2px;
     z-index: 2;
-    visibility: hidden;
+    display: none;
 }
 .preset-icon-container.showing-img img.image-icon {
-    visibility: visible;
+    display: initial;
 }
 .preset-icon-container.showing-img *:not(.image-icon) {
     display: none;
