@@ -86,10 +86,12 @@ export function uiFieldSegregatedCombo(field, context) {
     }
 
 
-    segregatedCombo.tags = function(_ignored) {
-        const entityTags = context.selectedIDs()
-            .map(id => context.graph().hasEntity(id)?.tags)
-            .filter(Boolean);
+    segregatedCombo.tags = function(_ignored, __test_tags /* for unit tests only */) {
+        const entityTags = Array.isArray(__test_tags)
+            ? __test_tags // for unit tests only
+            : context.selectedIDs()
+                .map(id => context.graph().hasEntity(id)?.tags)
+                .filter(Boolean);
 
         for (const key of Object.keys(_combos)) {
             const values = entityTags.map(tags => tags[key]);
