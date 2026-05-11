@@ -3,6 +3,7 @@ import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions/change_tags';
 import { osmUrlKeys } from '../osm/tags';
+import { utilIsValidURL as isValidURL } from '../util/util';
 
 export function validationFormatting() {
     var type = 'invalid_format';
@@ -26,18 +27,6 @@ export function validationFormatting() {
                 .append('div')
                 .attr('class', 'issue-reference')
                 .call(t.append('issues.invalid_format.email.reference'));
-        }
-
-        function isValidURL(url, strict = false) {
-            try {
-                // First try strict WHATWG parsing
-                const link = new URL(url);
-                return link.protocol.startsWith('http');
-            } catch {
-                if (strict) return false;
-                // Fallback: accept if it looks like a valid scheme://something, even if semicolons are present
-                return /^https?:\/\/\S+$/i.test(url);
-            }
         }
 
         function cleanWikimediaCommonsReference(value) {

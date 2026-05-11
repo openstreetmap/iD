@@ -39,15 +39,24 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.41.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Make tags like `contact:instagram` clickable if they contain a plain username, or a full URL ([#12306], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* Restore dedicated rendering of ski pistes and building parts ([#12297], thanks [@matkoniecz])
+* Pressing backspace while in the feature type selecting mode should not delete the object
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
+* Remove redundant software dependencies to reduce the amount of the code that is bundled with iD ([#11634], [#12307], thanks [@k-yle])
+
+[#11634]: https://github.com/openstreetmap/iD/pull/11634
+[#12297]: https://github.com/openstreetmap/iD/issues/12297
+[#12306]: https://github.com/openstreetmap/iD/pull/12306
+[#12307]: https://github.com/openstreetmap/iD/pull/12307
 
 
 # 2.40.0

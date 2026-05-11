@@ -720,3 +720,16 @@ export function utilGzip(input) {
         return undefined;
     }
 }
+
+/** @param {string} url */
+export function utilIsValidURL(url, strict = false) {
+    try {
+        // First try strict WHATWG parsing
+        const link = new URL(url);
+        return link.protocol.startsWith('http');
+    } catch {
+        if (strict) return false;
+        // Fallback: accept if it looks like a valid scheme://something, even if semicolons are present
+        return /^https?:\/\/\S+$/i.test(url);
+    }
+}
