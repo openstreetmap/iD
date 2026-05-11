@@ -157,59 +157,99 @@ describe('iD.uiFieldSegregatedCombo', () => {
             return uiField;
         }
 
+        // Mock up plain "surface" field
+        const fallbackPresetField = iD.presetField('surface', { key: 'surface', type: 'combo' });
+
+        function makeFallbackField(mainField) {
+            return iD.uiField(context, fallbackPresetField, mainField.entityIDs, { fallbackFor: mainField });
+        }
+
         it('is allowed when segregated=yes', () => {
             const uiField = makeField({ segregated: 'yes' });
             expect(uiField.isAllowed()).toBe(true);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(false);
         });
 
         it('is allowed when segregated=yes and also surface is set', () => {
             const uiField = makeField({ segregated: 'yes', surface: 'asphalt' });
             expect(uiField.isAllowed()).toBe(true);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(false);
         });
 
         it('is allowed when segregated=yes and also cycleway:surface is set', () => {
             const uiField = makeField({ segregated: 'yes', 'cycleway:surface': 'asphalt' });
             expect(uiField.isAllowed()).toBe(true);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(false);
         });
 
         it('is allowed when segregated=yes and also both surface and cycleway:surface are set', () => {
             const uiField = makeField({ segregated: 'yes', surface: 'paved', 'cycleway:surface': 'asphalt' });
             expect(uiField.isAllowed()).toBe(true);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(false);
         });
 
         it('is not allowed when segregated=no', () => {
             const uiField = makeField({ segregated: 'no' });
             expect(uiField.isAllowed()).toBe(false);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(true);
         });
 
         it('is not allowed when segregated=no even if surface is set', () => {
             const uiField = makeField({ segregated: 'no', surface: 'asphalt' });
             expect(uiField.isAllowed()).toBe(false);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(true);
         });
 
         it('is allowed when segregated=no, but cycleway:surface is set', () => {
             const uiField = makeField({ segregated: 'no', 'cycleway:surface': 'asphalt' });
             expect(uiField.isAllowed()).toBe(true);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(false);
         });
 
         it('is not allowed when segregated is not set', () => {
             const uiField = makeField({});
             expect(uiField.isAllowed()).toBe(false);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(true);
         });
 
         it('is not allowed when segregated is not set even if surface is set', () => {
             const uiField = makeField({ surface: 'asphalt' });
             expect(uiField.isAllowed()).toBe(false);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(true);
         });
 
         it('is allowed when segregated is not set, but cycleway:surface is set', () => {
             const uiField = makeField({ 'cycleway:surface': 'asphalt' });
             expect(uiField.isAllowed()).toBe(true);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(false);
         });
 
         it('is not allowed when segregated is an unknown values', () => {
             const uiField = makeField({ segregated: 'perhaps' });
             expect(uiField.isAllowed()).toBe(false);
+
+            const fallbackField = makeFallbackField(uiField);
+            expect(fallbackField.isAllowed()).toBe(true);
         });
     });
 });
