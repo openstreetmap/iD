@@ -137,4 +137,79 @@ describe('iD.uiFieldSegregatedCombo', () => {
             expect(onChange).toHaveBeenNthCalledWith(1, { ...initialTags, 'footway:surface': 'paving_stones' });
         });
     });
+
+    describe('widget display allowance', () => {
+
+        // Mock up "surface_segregated" field
+        const presetField = iD.presetField('surface_segregated', {
+            key: 'surface',
+            keys: ['surface', 'cycleway:surface', 'footway:surface'],
+            type: 'segregatedCombo',
+            fallbackKey: 'surface',
+            prerequisiteTag: { key: 'segregated', value: 'yes' },
+        });
+
+        function makeField(tags) {
+            const node = new iD.osmNode({ loc: [0, 0], tags });
+            context.perform(iD.actionAddEntity(node));
+            const uiField = iD.uiField(context, presetField, [node.id]);
+            uiField.tags(tags);
+            return uiField;
+        }
+
+        it('is allowed when segregated=yes', () => {
+            const uiField = makeField({ segregated: 'yes' });
+            expect(uiField.isAllowed()).toBe(true);
+        });
+
+        it('is allowed when segregated=yes and also surface is set', () => {
+            const uiField = makeField({ segregated: 'yes', surface: 'asphalt' });
+            expect(uiField.isAllowed()).toBe(true);
+        });
+
+        it('is allowed when segregated=yes and also cycleway:surface is set', () => {
+            const uiField = makeField({ segregated: 'yes', 'cycleway:surface': 'asphalt' });
+            expect(uiField.isAllowed()).toBe(true);
+        });
+
+        it('is allowed when segregated=yes and also both surface and cycleway:surface are set', () => {
+            const uiField = makeField({ segregated: 'yes', surface: 'paved', 'cycleway:surface': 'asphalt' });
+            expect(uiField.isAllowed()).toBe(true);
+        });
+
+        it('is not allowed when segregated=no', () => {
+            const uiField = makeField({ segregated: 'no' });
+            expect(uiField.isAllowed()).toBe(false);
+        });
+
+        it('is not allowed when segregated=no even if surface is set', () => {
+            const uiField = makeField({ segregated: 'no', surface: 'asphalt' });
+            expect(uiField.isAllowed()).toBe(false);
+        });
+
+        it('is allowed when segregated=no, but cycleway:surface is set', () => {
+            const uiField = makeField({ segregated: 'no', 'cycleway:surface': 'asphalt' });
+            expect(uiField.isAllowed()).toBe(true);
+        });
+
+        it('is not allowed when segregated is not set', () => {
+            const uiField = makeField({});
+            expect(uiField.isAllowed()).toBe(false);
+        });
+
+        it('is not allowed when segregated is not set even if surface is set', () => {
+            const uiField = makeField({ surface: 'asphalt' });
+            expect(uiField.isAllowed()).toBe(false);
+        });
+
+        it('is allowed when segregated is not set, but cycleway:surface is set', () => {
+            const uiField = makeField({ 'cycleway:surface': 'asphalt' });
+            expect(uiField.isAllowed()).toBe(true);
+        });
+
+        it('is not allowed when segregated is an unknown values', () => {
+            const uiField = makeField({ segregated: 'perhaps' });
+            expect(uiField.isAllowed()).toBe(false);
+        });
+    });
 });
