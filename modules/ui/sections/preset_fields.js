@@ -48,6 +48,23 @@ export function uiSectionPresetFields(context) {
                 var fields = preset.fields(loc);
                 var moreFields = preset.moreFields(loc);
 
+                if (_presets.length > 1) {
+                    // If there is a mix of presets, use fallback field unless every preset supports the field
+                    // e.g. "surface_segregated" will map back to "surface" as common field unless every preset uses it
+                    fields = fields.map(function (field) {
+                        if (field.fallbackKey) {
+                            if (_presets.some(function (p) {
+                                return p !== preset && !p.fields(loc).some(function (f) {
+                                    return f.fallbackKey === field.fallbackKey;
+                                })
+                            })) {
+                                return presetsManager.field(field.fallbackKey);
+                            }
+                        }
+                        return field;
+                    });
+                }
+
                 allFields = utilArrayUnion(allFields, fields);
                 allMoreFields = utilArrayUnion(allMoreFields, moreFields);
 

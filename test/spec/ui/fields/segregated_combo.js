@@ -181,14 +181,6 @@ describe('iD.uiFieldSegregatedCombo', () => {
             prerequisiteTag: { key: 'segregated', value: 'yes' },
         });
 
-        function makeField(tags) {
-            const node = new iD.osmNode({ loc: [0, 0], tags });
-            context.perform(iD.actionAddEntity(node));
-            const uiField = iD.uiField(context, presetField, [node.id]);
-            uiField.tags(tags);
-            return uiField;
-        }
-
         // Mock up plain "surface" field
         const fallbackPresetField = iD.presetField('surface', { key: 'surface', type: 'combo' });
 
@@ -196,126 +188,220 @@ describe('iD.uiFieldSegregatedCombo', () => {
             return iD.uiField(context, fallbackPresetField, mainField.entityIDs, { fallbackFor: mainField });
         }
 
-        it('is allowed when segregated=yes', () => {
-            const uiField = makeField({ segregated: 'yes' });
-            expect(uiField.isAllowed()).toBe(true);
+        describe('single element', () => {
 
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(false);
+            function makeField(tags) {
+                const node = new iD.osmNode({ loc: [0, 0], tags });
+                context.perform(iD.actionAddEntity(node));
+                const uiField = iD.uiField(context, presetField, [node.id]);
+                uiField.tags(tags);
+                return uiField;
+            }
+
+
+            it('is allowed when segregated=yes', () => {
+                const uiField = makeField({ segregated: 'yes' });
+                expect(uiField.isAllowed()).toBe(true);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(false);
+            });
+
+            it('is allowed when segregated=yes and also surface is set', () => {
+                const uiField = makeField({ segregated: 'yes', surface: 'asphalt' });
+                expect(uiField.isAllowed()).toBe(true);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(false);
+            });
+
+            it('is allowed when segregated=yes and also cycleway:surface is set', () => {
+                const uiField = makeField({ segregated: 'yes', 'cycleway:surface': 'asphalt' });
+                expect(uiField.isAllowed()).toBe(true);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(false);
+            });
+
+            it('is allowed when segregated=yes and also both surface and cycleway:surface are set', () => {
+                const uiField = makeField({ segregated: 'yes', surface: 'paved', 'cycleway:surface': 'asphalt' });
+                expect(uiField.isAllowed()).toBe(true);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(false);
+            });
+
+            it('is not allowed when segregated=no', () => {
+                const uiField = makeField({ segregated: 'no' });
+                expect(uiField.isAllowed()).toBe(false);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(true);
+            });
+
+            it('is not allowed when segregated=no even if surface is set', () => {
+                const uiField = makeField({ segregated: 'no', surface: 'asphalt' });
+                expect(uiField.isAllowed()).toBe(false);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(true);
+            });
+
+            it('is allowed when segregated=no, but cycleway:surface is set', () => {
+                const uiField = makeField({ segregated: 'no', 'cycleway:surface': 'asphalt' });
+                expect(uiField.isAllowed()).toBe(true);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(false);
+            });
+
+            it('is not allowed when segregated is not set', () => {
+                const uiField = makeField({});
+                expect(uiField.isAllowed()).toBe(false);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(true);
+            });
+
+            it('is not allowed when segregated is not set even if surface is set', () => {
+                const uiField = makeField({ surface: 'asphalt' });
+                expect(uiField.isAllowed()).toBe(false);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(true);
+            });
+
+            it('is allowed when segregated is not set, but cycleway:surface is set', () => {
+                const uiField = makeField({ 'cycleway:surface': 'asphalt' });
+                expect(uiField.isAllowed()).toBe(true);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(false);
+            });
+
+            it('is not allowed when segregated is an unknown values', () => {
+                const uiField = makeField({ segregated: 'perhaps' });
+                expect(uiField.isAllowed()).toBe(false);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(true);
+            });
         });
 
-        it('is allowed when segregated=yes and also surface is set', () => {
-            const uiField = makeField({ segregated: 'yes', surface: 'asphalt' });
-            expect(uiField.isAllowed()).toBe(true);
+        describe('multiple elements with compatible preset', () => {
 
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(false);
+            function makeFieldForMultiple(tags1, tags2) {
+                const node1 = new iD.osmNode({ loc: [0, 0], tags: tags1 });
+                const node2 = new iD.osmNode({ loc: [0, 0], tags: tags2 });
+                context.perform(iD.actionAddEntity(node1));
+                context.perform(iD.actionAddEntity(node2));
+                const uiField = iD.uiField(context, presetField, [node1.id, node2.id]);
+                uiField.tags([ tags1, tags2 ]);
+                return uiField;
+            }
+
+            it('is allowed when all entities have segregated=yes', () => {
+                const uiField = makeFieldForMultiple({ segregated: 'yes' }, { segregated: 'yes' });
+                expect(uiField.isAllowed()).toBe(true);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(false);
+            });
+
+            it('is allowed when at least one entity has segregated=yes', () => {
+                const uiField = makeFieldForMultiple({ segregated: 'yes' }, { segregated: 'no' });
+                expect(uiField.isAllowed()).toBe(true);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(false);
+            });
+
+            it('is not allowed when no entities have segregated=yes', () => {
+                const uiField = makeFieldForMultiple({ segregated: 'no' }, { segregated: 'no' });
+                expect(uiField.isAllowed()).toBe(false);
+
+                const fallbackField = makeFallbackField(uiField);
+                expect(fallbackField.isAllowed()).toBe(true);
+            });
         });
 
-        it('is allowed when segregated=yes and also cycleway:surface is set', () => {
-            const uiField = makeField({ segregated: 'yes', 'cycleway:surface': 'asphalt' });
-            expect(uiField.isAllowed()).toBe(true);
+        describe('mixed elements with different presets', () => {
 
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(false);
-        });
+            describe('entity 2 has compatible preset', () => {
 
-        it('is allowed when segregated=yes and also both surface and cycleway:surface are set', () => {
-            const uiField = makeField({ segregated: 'yes', surface: 'paved', 'cycleway:surface': 'asphalt' });
-            expect(uiField.isAllowed()).toBe(true);
+                function makeExtraCompatibleField(tags1, tags2) {
+                    const node1 = new iD.osmNode({ loc: [0, 0], tags: tags1 });
+                    const node2 = new iD.osmNode({ loc: [0, 0], tags: tags2 });
+                    context.perform(iD.actionAddEntity(node1));
+                    context.perform(iD.actionAddEntity(node2));
+                    const uiField = iD.uiField(context, presetField, [node1.id, node2.id]);
+                    uiField.tags([tags1, tags2]);
+                    return uiField;
+                }
 
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(false);
-        });
+                it('segregated field is shown for two different but compatible presets with segregated=yes', () => {
+                    const uiField = makeExtraCompatibleField({ segregated: 'yes' }, { segregated: 'yes' });
+                    expect(uiField.isAllowed()).toBe(true);
 
-        it('is not allowed when segregated=no', () => {
-            const uiField = makeField({ segregated: 'no' });
-            expect(uiField.isAllowed()).toBe(false);
+                    const fallbackField = makeFallbackField(uiField);
+                    expect(fallbackField.isAllowed()).toBe(false);
+                });
 
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(true);
-        });
+                it('segregated field is shown even when one doesn\'t have segregated=yes', () => {
+                    const uiField = makeExtraCompatibleField({ }, { segregated: 'yes' });
+                    expect(uiField.isAllowed()).toBe(true);
 
-        it('is not allowed when segregated=no even if surface is set', () => {
-            const uiField = makeField({ segregated: 'no', surface: 'asphalt' });
-            expect(uiField.isAllowed()).toBe(false);
+                    const fallbackField = makeFallbackField(uiField);
+                    expect(fallbackField.isAllowed()).toBe(false);
+                });
 
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(true);
-        });
+                it('segregated field is not shown if neither preset has segregated=yes', () => {
+                    const uiField = makeExtraCompatibleField({ }, { });
+                    expect(uiField.isAllowed()).toBe(false);
 
-        it('is allowed when segregated=no, but cycleway:surface is set', () => {
-            const uiField = makeField({ segregated: 'no', 'cycleway:surface': 'asphalt' });
-            expect(uiField.isAllowed()).toBe(true);
+                    const fallbackField = makeFallbackField(uiField);
+                    expect(fallbackField.isAllowed()).toBe(true);
+                });
 
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(false);
-        });
+                it('segregated field is shown without segregated=yes if subkey is set on both', () => {
+                    const uiField = makeExtraCompatibleField({ 'cycleway:surface': 'asphalt' }, { 'cycleway:surface': 'concrete' });
+                    expect(uiField.isAllowed()).toBe(true);
 
-        it('is not allowed when segregated is not set', () => {
-            const uiField = makeField({});
-            expect(uiField.isAllowed()).toBe(false);
+                    const fallbackField = makeFallbackField(uiField);
+                    expect(fallbackField.isAllowed()).toBe(false);
+                });
 
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(true);
-        });
+                it('segregated field is shown without segregated=yes even if subkey is only set on one', () => {
+                    const uiField = makeExtraCompatibleField({ 'cycleway:surface': 'asphalt' }, { });
+                    expect(uiField.isAllowed()).toBe(true);
 
-        it('is not allowed when segregated is not set even if surface is set', () => {
-            const uiField = makeField({ surface: 'asphalt' });
-            expect(uiField.isAllowed()).toBe(false);
+                    const fallbackField = makeFallbackField(uiField);
+                    expect(fallbackField.isAllowed()).toBe(false);
+                });
+            });
 
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(true);
-        });
+            describe('entity 2 has incompatible preset', () => {
 
-        it('is allowed when segregated is not set, but cycleway:surface is set', () => {
-            const uiField = makeField({ 'cycleway:surface': 'asphalt' });
-            expect(uiField.isAllowed()).toBe(true);
+                function makeExtraIncompatibleField(tags1, tags2) {
+                    const node1 = new iD.osmNode({ loc: [0, 0], tags: tags1 });
+                    const node2 = new iD.osmNode({ loc: [0, 0], tags: tags2 });
+                    context.perform(iD.actionAddEntity(node1));
+                    context.perform(iD.actionAddEntity(node2));
+                    const uiField = iD.uiField(context, fallbackPresetField, [node1.id, node2.id]);
+                    uiField.tags([tags1, tags2]);
+                    return uiField;
+                }
 
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(false);
-        });
+                it('fallback surface field is shown instead of segregated', () => {
+                    const uiField = makeExtraIncompatibleField({ }, { });
+                    expect(uiField.isAllowed()).toBe(true);
+                });
 
-        it('is not allowed when segregated is an unknown values', () => {
-            const uiField = makeField({ segregated: 'perhaps' });
-            expect(uiField.isAllowed()).toBe(false);
-
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(true);
-        });
-
-        function makeFieldForMultiple(tags1, tags2) {
-            const node1 = new iD.osmNode({ loc: [0, 0], tags: tags1 });
-            const node2 = new iD.osmNode({ loc: [0, 0], tags: tags2 });
-            context.perform(iD.actionAddEntity(node1));
-            context.perform(iD.actionAddEntity(node2));
-            const uiField = iD.uiField(context, presetField, [node1.id, node2.id]);
-            uiField.tags([ tags1, tags2 ]);
-            return uiField;
-        }
-
-        it('is allowed when all entities have segregated=yes', () => {
-            const uiField = makeFieldForMultiple({ segregated: 'yes' }, { segregated: 'yes' });
-            expect(uiField.isAllowed()).toBe(true);
-
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(false);
-        });
-
-        it('is allowed when at least one entity has segregated=yes', () => {
-            const uiField = makeFieldForMultiple({ segregated: 'yes' }, { segregated: 'no' });
-            expect(uiField.isAllowed()).toBe(true);
-
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(false);
-        });
-
-        it('is not allowed when no entities have segregated=yes', () => {
-            const uiField = makeFieldForMultiple({ segregated: 'no' }, { segregated: 'no' });
-            expect(uiField.isAllowed()).toBe(false);
-
-            const fallbackField = makeFallbackField(uiField);
-            expect(fallbackField.isAllowed()).toBe(true);
+                it('fallback surface field is shown even if compatible preset has segregated=yes', () => {
+                    const uiField = makeExtraIncompatibleField({ segregated: 'yes' }, { });
+                    expect(uiField.isAllowed()).toBe(true);
+                });
+            });
         });
     });
 });
