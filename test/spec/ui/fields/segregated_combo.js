@@ -138,6 +138,38 @@ describe('iD.uiFieldSegregatedCombo', () => {
         });
     });
 
+    describe('placeholder value for subkeys', () => {
+
+        function getSubkeyPlaceholders(...entityTagsList) {
+            const instance = iD.uiFieldSegregatedCombo(field, context);
+            selection.call(instance);
+            instance.tags(undefined, entityTagsList);
+            const [, cyclewayInput, footwayInput] = selection.selectAll('input').nodes();
+            return [
+                cyclewayInput.getAttribute('placeholder'),
+                footwayInput.getAttribute('placeholder')
+            ];
+        }
+
+        it('shows the main value as placeholder on unset subkeys', () => {
+            const [cycleway, footway] = getSubkeyPlaceholders({ 'surface': 'asphalt' });
+            expect(cycleway).toBe('asphalt');
+            expect(footway).toBe('asphalt');
+        });
+
+        it('does not set a placeholder on a subkey with value', () => {
+            const [cycleway, footway] = getSubkeyPlaceholders({ 'surface': 'asphalt', 'cycleway:surface': 'asphalt' });
+            expect(cycleway).not.toBe('asphalt');
+            expect(footway).toBe('asphalt');
+        });
+
+        it('does not set a placeholder when the main value is not set', () => {
+            const [cycleway, footway] = getSubkeyPlaceholders({});
+            expect(cycleway).toBeFalsy();
+            expect(footway).toBeFalsy();
+        });
+    });
+
     describe('widget display allowance', () => {
 
         // Mock up "surface_segregated" field
