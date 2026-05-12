@@ -56,7 +56,7 @@ export function uiSectionPresetFields(context) {
                             if (_presets.some(function (p) {
                                 return p !== preset && !p.fields(loc).some(function (f) {
                                     return f.fallbackKey === field.fallbackKey;
-                                })
+                                });
                             })) {
                                 return presetsManager.field(field.fallbackKey);
                             }
