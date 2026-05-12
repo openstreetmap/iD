@@ -1637,11 +1637,11 @@ input.date-selector {
 .form-field ul.rows li button {
     border-width: 0;
 }
-.ideditor[dir='ltr'] .form-field ul.rows li.labeled-input input,
+.ideditor[dir='ltr'] .form-field ul.rows li.labeled-input:has(> .label) input,
 .ideditor[dir='ltr'] .form-field ul.rows li button {
     border-left-width: 1px;
 }
-.ideditor[dir='rtl'] .form-field ul.rows li.labeled-input input,
+.ideditor[dir='rtl'] .form-field ul.rows li.labeled-input:has(> .label) input,
 .ideditor[dir='rtl'] .form-field ul.rows li button {
     border-right-width: 1px;
 }
