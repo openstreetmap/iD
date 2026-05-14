@@ -16,17 +16,19 @@ export function uiSectionBackgroundDisplayOptions(context) {
         .disclosureContent(renderDisclosureContent);
 
     var _storedOpacity = prefs('background-opacity');
-    var _sliders = ['brightness', 'contrast', 'saturation', 'sharpness'];
+    var _sliders = ['brightness', 'contrast', 'saturation', 'sharpness', 'invert'];
 
     var _options = {
         brightness: {
+            def: 1,
             val: _storedOpacity !== null ? +_storedOpacity : 1,
             min: 0,
             max: 3
         },
-        contrast: { val: 1, min: 0, max: 3 },
-        saturation: { val: 1, min: 0, max: 3 },
-        sharpness: { val: 1, min: 0, max: 3 }
+        contrast: { def: 1, val: 1, min: 0, max: 3 },
+        saturation: { def: 1, val: 1, min: 0, max: 3 },
+        sharpness: { def: 1, val: 1, min: 0, max: 3 },
+        invert: { def: 0, val: 0, min: 0, max: 1 }
     };
 
     function updateValue(d, val) {
@@ -89,7 +91,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('class', function(d) { return 'display-option-reset display-option-reset-' + d; })
             .on('click', function(d3_event, d) {
                 if (d3_event.button !== 0) return;
-                updateValue(d, 1);
+                updateValue(d, _options[d].def);
             })
             .call(svgIcon('#iD-icon-' + (localizer.textDirection() === 'rtl' ? 'redo' : 'undo')));
 
@@ -103,7 +105,8 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 for (var i = 0; i < _sliders.length; i++) {
-                    updateValue(_sliders[i], 1);
+                    var slider = _sliders[i];
+                    updateValue(slider, _options[slider].def);
                 }
             });
 
