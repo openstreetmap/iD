@@ -207,9 +207,12 @@ export function uiSectionRawMemberEditor(context) {
                         const matched = presetManager.match(d, context.graph());
                         if (matched.suggestion) {
                             // if matching an NSI preset: append icon
-                            d3_select(this)
-                                .append('img')
+                            const img = d3_select(this)
+                                .append('img');
+                            img
                                 .classed('member-entity-icon', true)
+                                .on('load', () => img.classed('hide', false))
+                                .on('error', () => img.classed('hide', true))
                                 .attr('src', matched.imageURL);
                         }
                     });
