@@ -598,9 +598,6 @@ export function uiFieldCombo(field, context) {
                 }
                 t[field.key] = context.cleanTagValue(arr.filter(Boolean).join(';'));
             }
-
-            window.setTimeout(function() { _input.node().focus(); }, 10);
-
         } else {
             var rawValue = utilGetSetValue(_input);
 
@@ -749,7 +746,7 @@ export function uiFieldCombo(field, context) {
             _combobox
                 .on('accept', function() {
                     _input.node().blur();
-                    _input.node().focus();
+                    window.setTimeout(function() { _input.node().focus(); }, 10);
                 });
 
             _input

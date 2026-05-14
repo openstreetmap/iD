@@ -57,6 +57,7 @@ export function uiCombobox(context, klass) {
             .on('keyup.combo-input', keyup)
             .on('input.combo-input', change)
             .on('mousedown.combo-input', mousedown)
+            .on('mouseup.combo-input', mouseup)
             .each(function() {
                 var parent = this.parentNode;
                 var sibling = this.nextSibling;
@@ -95,13 +96,10 @@ export function uiCombobox(context, klass) {
                 input.node().setSelectionRange(val.length, val.length);
                 return;
             }
-
-            input.on('mouseup.combo-input', mouseup);
         }
 
 
         function mouseup(d3_event) {
-            input.on('mouseup.combo-input', null);
             if (d3_event.button !== 0) return;    // left click only
             if (input.classed('disabled')) return;
             if (input.node() !== document.activeElement) return;   // exit if this input is not focused
@@ -446,7 +444,12 @@ export function uiCombobox(context, klass) {
             if (!d) {
                 d = _fetched[val];
             }
-            dispatch.call('accept', thiz, d, val);
+
+            if (val !== '') {
+                // skipped if nothing was selected
+                dispatch.call('accept', thiz, d, val);
+            }
+
             hide();
         }
 
@@ -542,7 +545,9 @@ uiCombobox.off = function(input, context) {
         .on('keyup.combo-input', null)
         .on('input.combo-input', null)
         .on('mousedown.combo-input', null)
-        .on('mouseup.combo-input', null);
+        .on('mouseup.combo-input', null)
+        .on('mousedown.combo-caret', null)
+        .on('mouseup.combo-caret', null);
 
 
     context.container()
