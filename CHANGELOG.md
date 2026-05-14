@@ -48,6 +48,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Pressing backspace while in the feature type selecting mode should not delete the object
 * Fix minor styling issues in the presets list ([#12321], thanks [@k-yle])
 * Hide icons that failed to load in the relations list ([#12320], thanks [@k-yle])
+* Fix some false-positive warnings about mismatched geometry ([#12339], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -61,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12307]: https://github.com/openstreetmap/iD/pull/12307
 [#12320]: https://github.com/openstreetmap/iD/pull/12320
 [#12321]: https://github.com/openstreetmap/iD/pull/12321
+[#12339]: https://github.com/openstreetmap/iD/pull/12339
 
 
 # 2.40.0
