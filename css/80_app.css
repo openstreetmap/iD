@@ -2104,19 +2104,14 @@ input.date-selector {
     min-width: 0;
     width: auto;
 }
-.ideditor[dir='ltr'] .form-field-input-radio.one-line > label:first-of-type,
-.ideditor[dir='rtl'] .form-field-input-radio.one-line > label:last-of-type {
-    border-radius: 0 0 0 4px;
+.form-field-input-radio.one-line > label:first-of-type {
+    border-end-start-radius: 4px;
 }
-.ideditor[dir='ltr'] .form-field-input-radio.one-line > label:last-of-type,
-.ideditor[dir='rtl'] .form-field-input-radio.one-line > label:first-of-type {
-    border-radius: 0 0 4px 0;
+.form-field-input-radio.one-line > label:last-of-type {
+    border-end-start-radius: 0;
 }
-.ideditor[dir='ltr'] .form-field-input-radio.one-line > label:not(:first-of-type) {
-    border-left: none;
-}
-.ideditor[dir='rtl'] .form-field-input-radio.one-line > label:not(:first-of-type) {
-    border-right: none;
+.form-field-input-radio.one-line > label:not(:first-of-type) {
+    border-inline-start: none;
 }
 
 
