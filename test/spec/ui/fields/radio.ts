@@ -68,4 +68,33 @@ describe('iD.uiFieldRadio', () => {
             expect(onChange).toHaveBeenNthCalledWith(1, toTags);
         });
     });
+
+    describe('radio with stringsCrossReference', () => {
+        let context: iD.Context;
+        let selection: d3.Selection;
+
+        beforeEach(() => {
+            context = iD.coreContext().assetPath('../dist/').init();
+            selection = d3.select(document.createElement('div'));
+        });
+
+        it('renders option labels from .title when the referenced field has nested title/description option strings', () => {
+            const accessField = iD.presetField('access', { type: 'combo', key: 'access' });
+            const field = iD.presetField('access_boolean', {
+                type: 'radio',
+                key: 'access',
+                stringsCrossReference: '{access}',
+                options: ['yes', 'no'],
+            }, { access: accessField });
+
+            const instance = iD.uiFieldRadio(field, context);
+
+            expect(() => selection.call(instance)).not.toThrow();
+
+            const labels = selection.selectAll<HTMLLabelElement, unknown>('label').nodes();
+            expect(labels).toHaveLength(2);
+            expect(labels[0].querySelector('.localized-text')?.innerHTML).toBe('Allowed');
+            expect(labels[1].querySelector('.localized-text')?.innerHTML).toBe('Prohibited');
+        });
+    });
 });
