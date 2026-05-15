@@ -2095,6 +2095,30 @@ input.date-selector {
     overflow: hidden;
 }
 
+/* One-line (horizontal) layout when all options fit on a single row */
+.form-field-input-radio.one-line {
+    overflow: hidden;
+}
+.form-field-input-radio.one-line > label {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+}
+.ideditor[dir='ltr'] .form-field-input-radio.one-line > label:first-of-type,
+.ideditor[dir='rtl'] .form-field-input-radio.one-line > label:last-of-type {
+    border-radius: 0 0 0 4px;
+}
+.ideditor[dir='ltr'] .form-field-input-radio.one-line > label:last-of-type,
+.ideditor[dir='rtl'] .form-field-input-radio.one-line > label:first-of-type {
+    border-radius: 0 0 4px 0;
+}
+.ideditor[dir='ltr'] .form-field-input-radio.one-line > label:not(:first-of-type) {
+    border-left: none;
+}
+.ideditor[dir='rtl'] .form-field-input-radio.one-line > label:not(:first-of-type) {
+    border-right: none;
+}
+
 
 /* Field - roadheight and roadspeed
 ------------------------------------------------------- */
