@@ -121,7 +121,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .text(function(d) { return Math.floor(_options[d].val * 100) + '%'; });
 
         container.selectAll('.display-option-reset')
-            .classed('disabled', function(d) { return _options[d].val === 1; });
+            .classed('disabled', function(d) { return _options[d].val === _options[d].def; });
 
         // first time only, set brightness if needed
         if (containerEnter.size() && _options.brightness.val !== 1) {
