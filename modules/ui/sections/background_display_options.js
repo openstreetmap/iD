@@ -32,7 +32,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
     };
 
     function updateValue(d, val) {
-        val = clamp(val, _options[d].min, _options[d].max);
+        val = clamp(+val, _options[d].min, _options[d].max);
 
         _options[d].val = val;
         context.background()[d](val);
