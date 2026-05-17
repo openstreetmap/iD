@@ -69,6 +69,12 @@ export function uiFieldWikidata(field, context) {
                 node.setSelectionRange(0, node.value.length);
             })
             .on('blur', function() {
+                var value = _searchInput.property('value').trim();
+                if (/^Q\d+$/i.test(value)) {
+                    _qid = value.toUpperCase();
+                    change();
+                    return;
+                }
                 setLabelForEntity();
             })
             .call(combobox.fetcher(fetchWikidataItems));
