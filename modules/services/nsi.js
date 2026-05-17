@@ -128,66 +128,8 @@ function loadNsiData() {
       _nsi.matcher = matcher;
       matcher.buildMatchIndex(_nsi.data);
 
-// *** BEGIN HACK ***
 
-// old - built in matcher will set up the locationindex by resolving all the locationSets one-by-one
-      // matcher.buildLocationIndex(_nsi.data, locationManager.loco());
-
-// new - Use the location manager instead of redoing that work
-// It has already processed the presets at this point
-
-// We need to monkeypatch a few of the collections that the NSI matcher depends on.
-// The `itemLocation` structure maps itemIDs to locationSetIDs
-matcher.itemLocation = new Map();
-
-// The `locationSets` structure maps locationSetIDs to GeoJSON
-// We definitely need this, but don't need full geojson, just { properties: { area: xxx }}
-matcher.locationSets = new Map();
-
-Object.keys(_nsi.data).forEach(tkv => {
-  const items = _nsi.data[tkv].items;
-  if (!Array.isArray(items) || !items.length) return;
-
-  items.forEach(item => {
-    if (matcher.itemLocation.has(item.id)) return;   // we've seen item id already - shouldn't be possible?
-
-
-  function tryGettingLocationSetID(locationSet) {
-    try {
-      return locationManager.validateLocationSet(locationSet).id;
-    } catch {
-      return '+[Q2]';  // the world
-    }
-  }
-    const locationSetID = tryGettingLocationSetID(item.locationSet);
-    matcher.itemLocation.set(item.id, locationSetID);
-
-    if (matcher.locationSets.has(locationSetID)) return;   // we've seen this locationSet before..
-
-    const fakeFeature = { id: locationSetID, properties: { id: locationSetID, area: 1 } };
-    matcher.locationSets.set(locationSetID, fakeFeature);
-  });
-});
-
-// The `locationIndex` is an instance of which-polygon spatial index for the locationSets.
-// We only really need this to _look like_ which-polygon query `_wp.locationIndex(bbox, true);`
-// i.e. it needs to return the properties of the locationsets
-matcher.locationIndex = (bbox) => {
-  const validHere = locationManager.locationSetsAt([bbox[0], bbox[1]]);
-  const results = [];
-
-  for (const [locationSetID, area] of Object.entries(validHere)) {
-    const fakeFeature = matcher.locationSets.get(locationSetID);
-    if (fakeFeature) {
-      fakeFeature.properties.area = area;
-      results.push(fakeFeature);
-    }
-  }
-  return results;
-};
-
-// *** END HACK ***
-
+      matcher.buildLocationIndex(_nsi.data, locationManager);
 
       Object.keys(_nsi.data).forEach(tkv => {
         const category = _nsi.data[tkv];
