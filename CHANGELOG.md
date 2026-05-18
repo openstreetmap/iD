@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Make tags like `contact:instagram` clickable if they contain a plain username, or a full URL ([#12306], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
+* Add high-resolution toggle for Mapilio photo viewer ([#12353], thanks [@sezerbozbiyik])
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Restore dedicated rendering of ski pistes and building parts ([#12297], thanks [@matkoniecz])
@@ -65,6 +66,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12320]: https://github.com/openstreetmap/iD/pull/12320
 [#12321]: https://github.com/openstreetmap/iD/pull/12321
 [#12337]: https://github.com/openstreetmap/iD/issues/12337
+[#12353]: https://github.com/openstreetmap/iD/pull/12353
 
 
 # 2.40.0
