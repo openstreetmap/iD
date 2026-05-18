@@ -339,30 +339,30 @@ export default {
             _username = username;
           }
 
-        }).finally(()=>{
+        }).finally(() => {
 
             attribution
              .append('input')
              .attr('type','checkbox')
-             .on('click',(e)=>{
+             .on('click',(e) => {
                 e.stopPropagation();
                 let isChecked = e.target.checked;
                 let parts = _sceneOptions.panorama.split('/');
 
-                if(isChecked){
+                if (isChecked){
                     parts[parts.length - 1] = hdResolution;
                     _sceneOptions.panorama= parts.join('/');
                     loadTheImage();
-                }else{
+                } else {
                     parts[parts.length - 1] = resolution;
                     _sceneOptions.panorama=parts.join('/');
                     loadTheImage();
                 }
-             })
+             });
 
             attribution
              .append('span')
-             .text('High Resolution')
+             .text('High Resolution');
 
             attribution
              .append('span')
@@ -371,14 +371,11 @@ export default {
             attribution
               .append('span')
               .attr('class', 'captured_by')
-              .text('@' + username);
               .text('@' + _username);
 
             attribution
               .append('span')
               .text('|');
-          }
-        }).finally(() => {
 
           if (d.capture_time) {
             attribution
