@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 
 import { select as d3_select } from 'd3-selection';
 
@@ -8,7 +8,7 @@ import { svgIcon } from '../svg/index';
 
 export function uiContributors(context) {
     var osm = context.connection(),
-        debouncedUpdate = _debounce(function() { update(); }, 1000),
+        debouncedUpdate = debounce(function() { update(); }, 1000),
         limit = 4,
         hidden = false,
         wrap = d3_select(null);
@@ -30,35 +30,30 @@ export function uiContributors(context) {
         wrap.html('')
             .call(svgIcon('#iD-icon-nearby', 'pre-text light'));
 
-        var userList = d3_select(document.createElement('span'));
-
-        userList.selectAll()
+        const userList = selection => selection.selectAll()
             .data(subset)
             .enter()
             .append('a')
             .attr('class', 'user-link')
-            .attr('href', function(d) { return osm.userURL(d); })
+            .attr('href', d => osm.userURL(d))
             .attr('target', '_blank')
             .text(String);
 
         if (u.length > limit) {
-            var count = d3_select(document.createElement('span'));
-
             var othersNum = u.length - limit + 1;
 
-            count.append('a')
+            const count = selection => selection
+                .append('a')
                 .attr('target', '_blank')
-                .attr('href', function() {
-                    return osm.changesetsURL(context.map().center(), context.map().zoom());
-                })
+                .attr('href', () => osm.changesetsURL(context.map().center(), context.map().zoom()))
                 .text(othersNum);
 
             wrap.append('span')
-                .html(t.html('contributors.truncated_list', { n: othersNum, users: { html: userList.html() }, count: { html: count.html() } }));
+                .call(t.append('contributors.truncated_list', { n: othersNum, users: userList, count }));
 
         } else {
             wrap.append('span')
-                .html(t.html('contributors.list', { users: { html: userList.html() } }));
+                .call(t.append('contributors.list', { users: userList }));
         }
 
         if (!u.length) {

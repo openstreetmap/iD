@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
 
 import { json as d3_json } from 'd3-fetch';
 
@@ -12,7 +12,7 @@ var _wikibaseCache = {};
 var _localeIDs = { en: false };
 
 
-var debouncedRequest = _debounce(request, 500, { leading: false });
+var debouncedRequest = debounce(request, 500, { leading: false });
 
 function request(url, callback) {
     if (_inflight[url]) return;
@@ -151,7 +151,6 @@ export default {
         var rtypeSitelink = (params.key === 'type' && params.value) ? ('Relation:' + params.value).replace(/_/g, ' ').trim() : false;
         var keySitelink = params.key ? this.toSitelink(params.key) : false;
         var tagSitelink = (params.key && params.value) ? this.toSitelink(params.key, params.value) : false;
-        const localeSitelinks = [];
 
         if (params.langCodes) {
             params.langCodes.forEach(function(langCode) {
@@ -236,7 +235,7 @@ export default {
                         } else if (title === tagSitelink) {
                             _wikibaseCache[tagSitelink] = res;
                             result.tag = res;
-                        } else if (localeSitelinks.includes(title)) {
+                        } else if (title.startsWith('Locale:')) {
                             const langCode = title.replace(/ /g, '_').replace(/^Locale:/, '');
                             that.addLocale(langCode, res.id);
                         } else {
@@ -362,6 +361,8 @@ export default {
             }
         });
     },
+
+    getLocaleIDs: () => _localeIDs,
 
 
     addLocale: function(langCode, qid) {

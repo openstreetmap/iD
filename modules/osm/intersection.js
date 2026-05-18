@@ -3,7 +3,7 @@ import { actionReverse } from '../actions/reverse';
 import { actionSplit } from '../actions/split';
 import { coreGraph } from '../core/graph';
 import { geoAngle, geoSphericalDistance } from '../geo';
-import { osmEntity } from './entity';
+import { osmIdManager } from './id_manager';
 import { utilArrayDifference, utilArrayUniq } from '../util';
 
 
@@ -17,7 +17,7 @@ export function osmTurn(turn) {
 
 export function osmIntersection(graph, startVertexId, maxDistance) {
     maxDistance = maxDistance || 30;    // in meters
-    var vgraph = coreGraph();           // virtual graph
+    var vgraph = new coreGraph();           // virtual graph
     var i, j, k;
 
 
@@ -58,11 +58,8 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     var vertexIds = [];
     var vertex;
     var ways = [];
-    var wayIds = [];
     var way;
-    var nodes = [];
     var node;
-    var parents = [];
     var parent;
 
     // `actions` will store whatever actions must be performed to satisfy
@@ -90,7 +87,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             hasWays = true;
 
             // check the way's children for more key vertices
-            nodes = utilArrayUniq(graph.childNodes(way));
+            const nodes = utilArrayUniq(graph.childNodes(way));
             for (j = 0; j < nodes.length; j++) {
                 node = nodes[j];
                 if (node === vertex) continue;                                           // same thing
@@ -99,7 +96,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
                 // a key vertex will have parents that are also roads
                 var hasParents = false;
-                parents = graph.parentWays(node);
+                const parents = graph.parentWays(node);
                 for (k = 0; k < parents.length; k++) {
                     parent = parents[k];
                     if (parent === way) continue;                 // same thing
@@ -158,7 +155,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
 
     // STEP 4:  Split ways on key vertices
-    var origCount = osmEntity.id.next.way;
+    var origCount = osmIdManager.next.way;
     vertices.forEach(function(v) {
         // This is an odd way to do it, but we need to find all the ways that
         // will be split here, then split them one at a time to ensure that these
@@ -185,7 +182,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     //     these actions later if the user decides to create a turn restriction
     //  2. Avoids churning way ids just by hovering over a vertex
     //     and displaying the turn restriction editor
-    osmEntity.id.next.way = origCount;
+    osmIdManager.next.way = origCount;
 
 
     // STEP 5:  Update arrays to point to vgraph entities
@@ -194,8 +191,8 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     ways = [];
 
     vertexIds.forEach(function(id) {
-        var vertex = vgraph.entity(id);
-        var parents = vgraph.parentWays(vertex);
+        const vertex = vgraph.entity(id);
+        const parents = vgraph.parentWays(vertex);
         vertices.push(vertex);
         ways = ways.concat(parents);
     });
@@ -204,7 +201,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     ways = utilArrayUniq(ways);
 
     vertexIds = vertices.map(function(v) { return v.id; });
-    wayIds = ways.map(function(w) { return w.id; });
+    const wayIds = ways.map(function(w) { return w.id; });
 
 
     // STEP 6:  Update the ways with some metadata that will be useful for
@@ -265,7 +262,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                 continue;
             }
 
-            parents = vgraph.parentWays(vertex);
+            let parents = vgraph.parentWays(vertex);
             if (parents.length < 3) {
                 if (vertexIds.indexOf(vertexId) !== -1) {
                     vertexIds.splice(vertexIds.indexOf(vertexId), 1);   // stop checking this one
@@ -567,8 +564,11 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                 if (way.__oneWay) return null;
 
                 isUturn = true;
-                viaNodeId = fromVertexId = toVertexId = path[1];
-                fromNodeId = toNodeId = adjacentNode(fromWayId, viaNodeId);
+                viaNodeId = path[1];
+                fromVertexId = path[1];
+                toVertexId = path[1];
+                fromNodeId = adjacentNode(fromWayId, viaNodeId);
+                toNodeId = fromNodeId;
 
             } else {
                 isUturn = false;

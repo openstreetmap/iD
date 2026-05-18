@@ -1,4 +1,4 @@
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 import { range as d3_range } from 'd3-array';
 
 import {

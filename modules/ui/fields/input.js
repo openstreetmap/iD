@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit/compat';
+import { deepEqual } from 'fast-equals';
 import * as countryCoder from '@rapideditor/country-coder';
 
 import { presetManager } from '../../presets';
@@ -9,10 +10,10 @@ import { t, localizer } from '../../core/localizer';
 import { utilDetect, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
 import { svgIcon } from '../../svg/icon';
 import { cardinal } from '../../osm/node';
-import { isColourValid } from '../../osm/tags';
+import { isColorValid } from '../../osm/tags';
 import { uiLengthIndicator } from '..';
 import { uiTooltip } from '../tooltip';
-import { isEqual } from 'lodash-es';
+import { utilIsValidURL } from '../../util/util';
 
 export {
     uiFieldText as uiFieldColour,
@@ -193,13 +194,10 @@ export function uiFieldText(field, context) {
             outlinkButton
                 .on('click', function(d3_event) {
                     d3_event.preventDefault();
-                    var value = validIdentifierValueForLink();
-                    if (value) {
-                        var url = field.urlFormat.replace(/{value}/, encodeURIComponent(value));
-                        window.open(url, '_blank');
-                    }
+                    const url = getExternalLink();
+                    if (url) window.open(url, '_blank');
                 })
-                .classed('disabled', () => !validIdentifierValueForLink())
+                .classed('disabled', () => !getExternalLink())
                 .merge(outlinkButton);
         } else if (field.type === 'schedule') {
 
@@ -216,9 +214,8 @@ export function uiFieldText(field, context) {
                 .on('click', function(d3_event) {
                     d3_event.preventDefault();
 
-                    var value = validIdentifierValueForLink();
-                    var url = yoHoursURLFormat.replace(/{value}/, encodeURIComponent(value || ''));
-                    window.open(url, '_blank');
+                    const url = getExternalLink();
+                    if (url) window.open(url, '_blank');
                 })
                 .merge(outlinkButton);
         } else if (field.type === 'url') {
@@ -235,7 +232,7 @@ export function uiFieldText(field, context) {
                 .on('click', function(d3_event) {
                     d3_event.preventDefault();
 
-                    const value = validIdentifierValueForLink();
+                    const value = getExternalLink();
                     if (value) window.open(value, '_blank');
                 })
                 .merge(outlinkButton);
@@ -257,7 +254,7 @@ export function uiFieldText(field, context) {
 
         const colour = utilGetSetValue(input);
 
-        if (!isColourValid(colour) && colour !== '') {
+        if (!isColorValid(colour) && colour !== '') {
             wrap.selectAll('input.colour-selector').remove();
             wrap.selectAll('.form-field-button').remove();
             return;
@@ -271,10 +268,10 @@ export function uiFieldText(field, context) {
             .append('input')
             .attr('type', 'color')
             .attr('class', 'colour-selector')
-            .on('input', _debounce(function(d3_event) {
+            .on('input', debounce(function(d3_event) {
                 d3_event.preventDefault();
                 var colour = this.value;
-                if (!isColourValid(colour)) return;
+                if (!isColorValid(colour)) return;
                 utilGetSetValue(input, this.value);
                 change()();
                 updateColourPreview();
@@ -344,7 +341,7 @@ export function uiFieldText(field, context) {
                 .append('input')
                 .attr('type', 'date')
                 .attr('class', 'date-selector')
-                .on('input', _debounce(function(d3_event) {
+                .on('input', debounce(function(d3_event) {
                     d3_event.preventDefault();
                     var date = this.value;
                     if (!isDateValid(date)) return;
@@ -372,28 +369,45 @@ export function uiFieldText(field, context) {
     function updatePhonePlaceholder() {
         if (input.empty() || !Object.keys(_phoneFormats).length) return;
 
-        var extent = combinedEntityExtent();
-        var countryCode = extent && countryCoder.iso1A2Code(extent.center());
-        var format = countryCode && _phoneFormats[countryCode.toLowerCase()];
-        if (format) input.attr('placeholder', format);
+        const extent = combinedEntityExtent();
+        // some territories have their own phone format (e.g. Hong Kong); use them first
+        // if such territory-level format is unknown, then fall back to use the usual country-level format
+        const countryCode = extent && countryCoder.iso1A2Code(extent.center(), { level: 'territory' });
+        if (!countryCode) {
+            // can assume the geometry input has bad data
+            return;
+        }
+        let format = _phoneFormats[countryCode.toLowerCase()];
+        if (!format) {
+            // detect whether countryCode is actually territory-level
+            const countryCodeSovereign = countryCoder.iso1A2Code(extent.center());
+            if (countryCodeSovereign !== countryCode) {
+                format = _phoneFormats[countryCodeSovereign.toLowerCase()];
+            }
+        }
+        if (format) {
+            input.attr('placeholder', format);
+        }
     }
 
 
-    function validIdentifierValueForLink() {
+    /** @returns {string | null} */
+    function getExternalLink() {
         const value = utilGetSetValue(input).trim();
+        if (!value) return null;
 
-        if (field.type === 'url' && value) {
-            try {
-                return (new URL(value)).href;
-            } catch {
-                return null;
-            }
+        if (field.type === 'url' && utilIsValidURL(value, true)) {
+            return value;
         }
         if (field.type === 'identifier' && field.pattern) {
-            return value && value.match(new RegExp(field.pattern))?.[0];
+            if (utilIsValidURL(value, true)) return value;
+            const id = value.match(new RegExp(field.pattern))?.[0];
+            if (id) {
+                return field.urlFormat.replace(/{value}/, encodeURIComponent(id));
+            }
         }
         if (field.type === 'schedule') {
-            return value;
+            return yoHoursURLFormat.replace(/{value}/, encodeURIComponent(value || ''));
         }
         return null;
     }
@@ -503,16 +517,13 @@ export function uiFieldText(field, context) {
 
         const vals = getVals(tags);
         const isMixed = vals.size > 1;
-        var val = vals.size === 1 ? [...vals][0] ?? '' : '';
-        var shouldUpdate;
+        let val = vals.size === 1 ? [...vals][0] ?? '' : '';
+        let shouldUpdate;
 
         if ((field.type === 'number' || field.type === 'integer') && val) {
-            var numbers = val.split(';');
-            var oriNumbers = utilGetSetValue(input).split(';');
-            if (numbers.length !== oriNumbers.length) shouldUpdate = true;
-            numbers = numbers.map(function(v) {
+            const numbers = val.split(';').map(function(v) {
                 v = v.trim();
-                var num = Number(v);
+                const num = Number(v);
                 if (!isFinite(num) || v === '') return v;
                 const fractionDigits = v.includes('.') ? v.split('.')[1].length : 0;
                 return formatFloat(num, fractionDigits);
@@ -539,7 +550,7 @@ export function uiFieldText(field, context) {
                     if (!isFinite(parsedNum)) return val; // keep unparsable values as-is
                     return parsedNum;
                 });
-                return !isEqual(inputNums, setNums);
+                return !deepEqual(inputNums, setNums);
             };
         }
 
@@ -569,7 +580,7 @@ export function uiFieldText(field, context) {
         if (field.type === 'date') updateDateField();
 
         if (outlinkButton && !outlinkButton.empty()) {
-            var disabled = !validIdentifierValueForLink() && field.type !== 'schedule';
+            var disabled = !getExternalLink() && field.type !== 'schedule';
             outlinkButton.classed('disabled', disabled);
         }
 

@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit/compat';
 
 import { geoPath as d3_geoPath } from 'd3-geo';
 import RBush from 'rbush';
@@ -26,6 +26,7 @@ export function svgLabels(projection, context) {
 
     // Listed from highest to lowest priority
     const labelStack = [
+        // geometry, key, value, font size
         ['line', 'aeroway', '*', 12],
         ['line', 'highway', 'motorway', 12],
         ['line', 'highway', 'trunk', 12],
@@ -43,8 +44,10 @@ export function svgLabels(projection, context) {
         ['area', 'man_made', '*', 12],
         ['area', 'natural', '*', 12],
         ['area', 'shop', '*', 12],
+        ['area', 'craft', '*', 12],
         ['area', 'tourism', '*', 12],
         ['area', 'camp_site', '*', 12],
+        ['area', 'animal', 'horse_walker', 12],
         ['point', 'aeroway', '*', 10],
         ['point', 'amenity', '*', 10],
         ['point', 'building', '*', 10],
@@ -299,7 +302,7 @@ export function svgLabels(projection, context) {
             var preset = geometry === 'area' && presetManager.match(entity, graph);
             var icon = preset && !shouldSkipIcon(preset) && preset.icon;
 
-            if (!icon && !utilDisplayName(entity, undefined, true)) continue;
+            if (!icon && !utilDisplayName(entity, { isMapLabel: true })) continue;
 
             for (k = 0; k < labelStack.length; k++) {
                 var matchGeom = labelStack[k][0];
@@ -330,7 +333,7 @@ export function svgLabels(projection, context) {
 
                 let name = geometry === 'line'
                     ? utilDisplayNameForPath(entity)
-                    : utilDisplayName(entity, undefined, true);
+                    : utilDisplayName(entity, { isMapLabel: true });
                 var width = name && textWidth(name, fontSize, selection.select('g.layer-osm.labels').node());
                 var p = null;
 
@@ -765,7 +768,7 @@ export function svgLabels(projection, context) {
     }
 
 
-    var throttleFilterLabels = _throttle(filterLabels, 100);
+    var throttleFilterLabels = throttle(filterLabels, 100);
 
 
     drawLabels.observe = function(selection) {
@@ -788,8 +791,8 @@ export function svgLabels(projection, context) {
 
 const _textWidthCache = {};
 export function textWidth(text, size, container) {
+    _textWidthCache[size] ||= {};
     let c = _textWidthCache[size];
-    if (!c) c = _textWidthCache[size] = {};
 
     if (c[text]) {
         return c[text];
@@ -811,8 +814,9 @@ const nonPrimaryKeys = new Set([
     'fixme',
     'layer',
     'level',
-    'level:ref',
-    'note'
+    'note',
+    'start_date',
+    'ele'
 ]);
 const nonPrimaryKeysRegex = /^(ref|survey|note|([^:]+:|old_|alt_)addr):/;
 export function isAddressPoint(tags) {

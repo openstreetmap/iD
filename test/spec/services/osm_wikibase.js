@@ -1,3 +1,4 @@
+import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.serviceOsmWikibase', function () {
@@ -265,7 +266,7 @@ describe('iD.serviceOsmWikibase', function () {
 
   describe('#getEntity', function () {
     it('calls the given callback with the results of the getEntity data item query', async () => {
-      var callback = sinon.spy();
+      const callback = fn();
       fetchMock.mock(/action=wbgetentities/, {
         body: JSON.stringify({
           entities: {
@@ -297,6 +298,7 @@ describe('iD.serviceOsmWikibase', function () {
         key: keyData(),
         tag: tagData()
       });
+      expect(wikibase.getLocaleIDs()).toStrictEqual({ fr: 'Q7792' });
     });
   });
 

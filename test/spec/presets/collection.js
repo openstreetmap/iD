@@ -136,5 +136,14 @@ describe('iD.presetCollection', function() {
             var result = c.search('landuse=grass', 'area').collection;
             expect(result.indexOf(p.grass1)).to.eql(0);  // 1. 'Grass' (by tag key=value)
         });
+
+        it.each([
+            'private grill',
+            'very private and secret mysterious grill',
+            'private grill in garden',
+        ])('returns matches also when search term includes the preset name as substring', function(search) {
+            var result = c.search(search, 'point').matchGeometry('point').collection;
+            expect(result.indexOf(p.grill), 'Grill').to.eql(0);
+        });
     });
 });

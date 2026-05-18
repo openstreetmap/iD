@@ -3,12 +3,15 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { pairs as d3_pairs } from 'd3-array';
 import RBush from 'rbush';
 import { iso1A2Codes } from '@rapideditor/country-coder';
-import { t, localizer } from '../core/localizer';
-import { utilQsString, utilTiler, utilRebind, utilArrayUnion, utilStringQs} from '../util';
-import {geoExtent, geoScaleToZoom, geoVecAngle, geoVecEqual} from '../geo';
+import { t } from '../core/localizer';
+import { utilQsString, utilTiler, utilRebind, utilArrayUnion } from '../util';
+import { searchLimited } from '../util/partition';
+import { localeTimestamp } from '../util/date';
+import { geoExtent, geoVecAngle, geoVecEqual } from '../geo';
 import { pannellumPhotoFrame } from './pannellum_photo';
 import { planePhotoFrame } from './plane_photo';
 import { services } from './';
+import { patchHash } from '../behavior';
 
 
 const owsEndpoint = 'https://www.vegvesen.no/kart/ogc/vegbilder_1_0/ows?';
@@ -140,7 +143,7 @@ async function loadTile(cache, typename, tile) {
       METER: metering,
       FELTKODE: lane_code
     } = properties;
-    const lane_number = parseInt(lane_code.match(/^[0-9]+/)[0], 10);
+    const lane_number = parseInt((lane_code.match(/^[0-9]+/) || [])[0], 10);
     const direction = lane_number % 2 === 0 ? directionEnum.backward : directionEnum.forward;
     const data = {
       service: 'photo',
@@ -270,35 +273,6 @@ function roadReference(properties) {
 
   return reference;
 }
-
-function localeTimestamp(date) {
-  const options = { day: '2-digit', month: '2-digit', year: 'numeric',
-    hour: 'numeric', minute: 'numeric', second: 'numeric' };
-  return date.toLocaleString(localizer.localeCode(), options);
-}
-
-function partitionViewport(projection) {
-  const zoom = geoScaleToZoom(projection.scale());
-  const roundZoom = (Math.ceil(zoom * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
-  const tiler = utilTiler().zoomExtent([roundZoom, roundZoom]);
-
-  return tiler.getTiles(projection)
-    .map(tile => tile.extent);
-}
-
-function searchLimited(limit, projection, rtree) {
-  limit ??= 5;
-
-  return partitionViewport(projection)
-    .reduce((result, extent) => {
-      const found = rtree.search(extent.bbox())
-        .slice(0, limit)
-        .map(d => d.data);
-
-      return result.concat(found);
-    }, []);
-}
-
 
 export default {
 
@@ -453,7 +427,7 @@ export default {
 
   selectImage: function(context, key, keepOrientation) {
     const d = this.cachedImage(key);
-    this.updateUrlImage(key);
+    patchHash({ photo: 'vegbilder/' + key });
 
     const viewer = context.container().select('.photoviewer');
     if (!viewer.empty()) { viewer.datum(d); }
@@ -513,7 +487,7 @@ export default {
   },
 
   hideViewer: function(context) {
-    this.updateUrlImage(null);
+    patchHash({ photo: null });
 
     const viewer = context.container().select('.photoviewer');
     if (!viewer.empty()) viewer.datum(null);
@@ -583,16 +557,6 @@ export default {
     }
 
     return this;
-  },
-
-  updateUrlImage: function (key) {
-    const hash = utilStringQs(window.location.hash);
-    if (key) {
-      hash.photo = 'vegbilder/' + key;
-    } else {
-      delete hash.photo;
-    }
-    window.history.replaceState(null, '', '#' + utilQsString(hash, true));
   },
 
   validHere: function(extent) {

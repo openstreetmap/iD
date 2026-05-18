@@ -5,10 +5,11 @@ import { select as d3_select } from 'd3-selection';
 import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
-
-import { geoExtent, geoScaleToZoom } from '../geo';
-import { utilQsString, utilRebind, utilTiler, utilStringQs } from '../util';
+import { geoExtent } from '../geo';
+import { utilRebind, utilTiler } from '../util';
 import { services } from './';
+import { searchLimited } from '../util/partition';
+import { patchHash } from '../behavior';
 
 const accessToken = 'MLY|4100327730013843|5bb78b81720791946a9a7b956c57b7cf';
 const apiUrl = 'https://graph.mapillary.com/';
@@ -125,7 +126,6 @@ function loadTileDataToCache(data, tile, which) {
     }
 
     if (vectorTile.layers.hasOwnProperty('sequence')) {
-        features = [];
         cache = _mlyCache.sequences;
         layer = vectorTile.layers.sequence;
 
@@ -209,33 +209,6 @@ function loadData(url) {
             return result.data || [];
         });
 }
-
-
-// Partition viewport into higher zoom tiles
-function partitionViewport(projection) {
-    const z = geoScaleToZoom(projection.scale());
-    const z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
-    const tiler = utilTiler().zoomExtent([z2, z2]);
-
-    return tiler.getTiles(projection)
-        .map(function(tile) { return tile.extent; });
-}
-
-
-// Return no more than `limit` results per partition.
-function searchLimited(limit, projection, rtree) {
-    limit = limit || 5;
-
-    return partitionViewport(projection)
-        .reduce(function(result, extent) {
-            const found = rtree.search(extent.bbox())
-                .slice(0, limit)
-                .map(function(d) { return d.data; });
-
-            return (found.length ? result.concat(found) : result);
-        }, []);
-}
-
 
 export default {
     // Initialize Mapillary
@@ -505,7 +478,7 @@ export default {
             .selectAll('.photo-wrapper')
             .classed('hide', true);
 
-        this.updateUrlImage(null);
+        patchHash({ photo: null });
 
         dispatch.call('imageChanged');
         dispatch.call('loadedMapFeatures');
@@ -520,18 +493,6 @@ export default {
     // Get viewer status
     isViewerOpen: function() {
             return _isViewerOpen;
-    },
-
-
-    // Update the URL with current image id
-    updateUrlImage: function(imageId) {
-        const hash = utilStringQs(window.location.hash);
-        if (imageId) {
-            hash.photo = 'mapillary/' + imageId;
-        } else {
-            delete hash.photo;
-        }
-        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
     },
 
 
@@ -596,7 +557,7 @@ export default {
             this.setStyles(context, null);
             const loc = [image.originalLngLat.lng, image.originalLngLat.lat];
             context.map().centerEase(loc);
-            this.updateUrlImage(image.id);
+            patchHash({ photo: 'mapillary/' + image.id });
 
             if (_mlyShowFeatureDetections || _mlyShowSignDetections) {
                 this.updateDetections(image.id, `${apiUrl}/${image.id}/detections?access_token=${accessToken}&fields=id,image,geometry,value`);

@@ -1,6 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 import exifr from 'exifr';
-import { isArray, isNumber } from 'lodash-es';
+import { isArray, isNumber } from 'es-toolkit/compat';
 
 import { localizer } from '../core/localizer';
 import { utilDetect } from '../util/detect';
@@ -276,7 +276,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
         for (const file of files) {
             try {
-                const exifData = await exifr.parse(file); // eslint-disable-line no-await-in-loop
+                const exifData = await exifr.parse(file);
                 const photo = {
                     service: 'photo',
                     id: _idAutoinc++,
@@ -292,8 +292,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
                 if (sameName.length === 0) {
                     _photos.push(photo);
                 } else {
-                    const thisContent = await photo.getSrc(); // eslint-disable-line no-await-in-loop
-                    const sameNameContent = await Promise.allSettled(sameName.map(i => i.getSrc())); // eslint-disable-line no-await-in-loop
+                    const thisContent = await photo.getSrc();
+                    const sameNameContent = await Promise.allSettled(sameName.map(i => i.getSrc()));
                     if (!sameNameContent.some(i => i.value === thisContent)) {
                         _photos.push(photo);
                     }

@@ -1,3 +1,4 @@
+import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.servicePanoramax', function() {
@@ -90,7 +91,7 @@ describe('iD.servicePanoramax', function() {
 
     describe('#loadImages', function() {
         it('does not load images around null island', async () => {
-            var spy = sinon.spy();
+            const spy = fn();
             fetchMock.reset();
             fetchMock.mock(new RegExp('/api\.panoramax\.xyz/'), {
                 body: JSON.stringify(data),

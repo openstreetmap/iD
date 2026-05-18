@@ -21,6 +21,7 @@ export function utilArrayIdentical(a, b) {
 //   [1]
 // utilArrayDifference(b, a)
 //   [4]
+/** @template T @param {T[]} a @param {T[]} b @returns {T[]} */
 export function utilArrayDifference(a, b) {
     var other = new Set(b);
     return Array.from(new Set(a))

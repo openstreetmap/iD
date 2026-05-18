@@ -1,14 +1,10 @@
-import { merge } from 'lodash-es';
+import { merge } from 'es-toolkit/compat';
+import { getLuma } from '../util/util';
 
 const uninterestingKeys = new Set([
     'attribution',
     'created_by',
     'import_uuid',
-    'geobase:datasetName',
-    'geobase:uuid',
-    'KSJ2:curve_id',
-    'KSJ2:lat',
-    'KSJ2:long',
     'lat',
     'latitude',
     'lon',
@@ -18,7 +14,7 @@ const uninterestingKeys = new Set([
     'odbl',
     'odbl:note'
 ]);
-const uninterestingKeyRegex = /^(source(_ref)?|tiger):/;
+const uninterestingKeyRegex = /^(source(_ref)?|at_bev|geobase|hcpaogis|KSJ2|mvdgis|nvdb|nysgissam|tiger):|:(identifier|ref|ref_id|id)$/;
 
 /**
  * Returns whether the given OSM tag key is potentially "interesting".
@@ -69,6 +65,8 @@ export function osmSetAreaKeys(value) {
 // `highway` and `railway` are typically linear features, but there
 // are a few exceptions that should be treated as areas, even in the
 // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
+// similarly, some tags are both used as a primary key for area features,
+// but also as an attribute tag for linear features (e.g. `emergency=yes`)
 export var osmAreaKeysExceptions = {
     highway: {
         elevator: true,
@@ -92,6 +90,14 @@ export var osmAreaKeysExceptions = {
     },
     amenity: {
         bicycle_parking: true
+    },
+    emergency: {
+        yes: false,
+        no: false,
+        private: false,
+        designated: false,
+        destination: false,
+        official: false
     }
 };
 
@@ -103,6 +109,9 @@ export function osmTagSuggestingArea(tags) {
     var returnTags = {};
     for (var realKey in tags) {
         const key = osmRemoveLifecyclePrefix(realKey);
+        if (key in osmAreaKeysExceptions && osmAreaKeysExceptions[key][tags[realKey]] === false) {
+            continue;
+        }
         if (key in osmAreaKeys && !(tags[realKey] in osmAreaKeys[key])) {
             returnTags[realKey] = tags[realKey];
             return returnTags;
@@ -132,6 +141,13 @@ export var osmVertexTags = {};
 export function osmSetVertexTags(value) {
     osmVertexTags = value;
 }
+
+//These tags belong strictly on ways and should never be moved up to a relation
+export const osmWayOnlyTags = {
+    'natural': {
+        'coastline': true
+    }
+};
 
 export function osmNodeGeometriesForTags(nodeTags) {
     var geometries = {};
@@ -234,7 +250,8 @@ export var osmPavedTags = {
         'concrete': true,
         'chipseal': true,
         'concrete:lanes': true,
-        'concrete:plates': true
+        'concrete:plates': true,
+        'tiles': true
     },
     'tracktype': {
         'grade1': true
@@ -244,12 +261,15 @@ export var osmPavedTags = {
 // solid, if somewhat uncommon surfaces with a high range of smoothness
 export var osmSemipavedTags = {
     'surface': {
+        'bricks': true,
         'cobblestone': true,
-        'cobblestone:flattened': true,
         'unhewn_cobblestone': true,
         'sett': true,
         'paving_stones': true,
+        'grass_paver': true,
         'metal': true,
+        'metal_grid': true,
+        'fibre_reinforced_polymer_grate': true,
         'wood': true
     }
 };
@@ -262,7 +282,7 @@ export var osmRightSideIsInsideTags = {
     'barrier': {
         'retaining_wall': true,
         'kerb': true,
-        'guard_rail': true,
+        'guard_rail': 'guard_rail',
         'city_wall': true,
     },
     'man_made': {
@@ -327,7 +347,8 @@ export var osmLanduseTags = {
 export const allowUpperCaseTagValues = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer|country|target|brewery|cai_scale|traffic_sign/;
 
 // Returns whether a `colour` tag value looks like a valid color we can display
-export function isColourValid(value) {
+export function isColorValid(value) {
+    if (!value) return false;
     if (!value.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
         // OSM only supports hex or named colors
         return false;
@@ -337,6 +358,22 @@ export function isColourValid(value) {
         return false;
     }
     return true;
+}
+
+export function getRelationColor(tags, fallback) {
+    let color, textColor;
+    if (tags['ref:colour'])       color = tags['ref:colour'];
+    else if (tags.colour)         color = tags.colour;
+    const isValid = isColorValid(color);
+    if (!isValid)                 color = fallback;
+    if (tags['ref:colour_tx'])    textColor = tags['ref:colour_tx'];
+    if (!isColorValid(textColor)) textColor = getLuma(color) > 165 ? '#000' : '#fff';
+
+    return {
+        isValid,
+        color,
+        textColor
+    };
 }
 
 // https://wiki.openstreetmap.org/wiki/Special:WhatLinksHere/Property:P44
@@ -371,5 +408,28 @@ export var osmSummableTags = new Set([
     'step_count',
     'parking:both:capacity',
     'parking:left:capacity',
-    'parking:left:capacity'
+    'parking:right:capacity'
+]);
+
+// ISO country codes keys
+export const osmIsoCountryKeys = new Set([
+  'country',
+  'target'
+]);
+
+export const osmUrlKeys = new Set([
+    'website',
+    'url',
+    'contact:website',
+    'contact:url',
+    'source:website',
+    'source:url',
+    'image',
+    'brand:website',
+    'operator:website',
+    'network:website',
+    'website:en',
+    'website:fr',
+    'website:menu',
+    'post_office:website',
 ]);

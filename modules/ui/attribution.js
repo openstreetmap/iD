@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit/compat';
 import { select as d3_select } from 'd3-selection';
 import { t } from '../core/localizer';
 
@@ -43,7 +43,7 @@ export function uiAttribution(context) {
 
         const sourceID = d.id.replace(/\./g, '<TX_DOT>');
         const terms_text = t(`imagery.${sourceID}.attribution.text`,
-          { default: d.terms_text || d.id || d.name() }
+          { default: d.terms_text || (d.terms_url && d.name()) }
         );
 
         if (d.icon && !d.overlay) {
@@ -99,7 +99,7 @@ export function uiAttribution(context) {
       .on('change.attribution', update);
 
     context.map()
-      .on('move.attribution', _throttle(update, 400, { leading: false }));
+      .on('move.attribution', throttle(update, 400, { leading: false }));
 
     update();
   };

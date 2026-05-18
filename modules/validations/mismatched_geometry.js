@@ -1,4 +1,4 @@
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 
 import { actionAddVertex } from '../actions/add_vertex';
 import { actionChangeTags } from '../actions/change_tags';
@@ -200,7 +200,11 @@ export function validationMismatchedGeometry() {
                         .attr('class', 'issue-reference')
                         .call(t.append('issues.vertex_as_point.reference'));
                 },
-                entityIds: [entity.id]
+                entityIds: [entity.id],
+                dynamicFixes: () => [new validationIssueFix({
+                    icon: 'iD-operation-move',
+                    title: t.append('issues.fix.reposition_point_to_vertex.title')
+                })]
             });
 
         } else if (geometry === 'vertex' && !allowedGeometries.vertex && allowedGeometries.point) {
@@ -249,7 +253,7 @@ export function validationMismatchedGeometry() {
 
         var asSource = presetManager.match(entity, graph);
 
-        var targetGeom = targetGeoms.find(nodeGeom => {
+        const originalTargetGeom = targetGeoms.find(nodeGeom => {
             const asTarget = presetManager.matchTags(
                 entity.tags,
                 nodeGeom,
@@ -271,6 +275,8 @@ export function validationMismatchedGeometry() {
 
             return asSource.isFallback() || asSource.tags[primaryKey] === '*';
         });
+
+        let targetGeom = originalTargetGeom;
 
         if (!targetGeom) return null;
 
@@ -296,7 +302,7 @@ export function validationMismatchedGeometry() {
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.' + referenceId + '.message', {
-                    feature: utilDisplayLabel(entity, targetGeom, true /* verbose */)
+                    feature: utilDisplayLabel(entity, originalTargetGeom, true /* verbose */)
                 }) : '';
             },
             reference: function showReference(selection) {

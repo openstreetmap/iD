@@ -42,7 +42,6 @@ function getCLDROverrides() {
     'brh': {
       nativeName: 'براہوئی'
     },
-    coa: { nativeName: 'Basa Pulu Kokos', names: { en: 'Cocos Malay' } },
     'cdo': {
       nativeName: '閩東語'
     },
@@ -61,6 +60,7 @@ function getCLDROverrides() {
       script: 'Latn',
       nativeName: 'Mìng-dĕ̤ng-ngṳ̄ (Bàng-uâ-cê)'
     },
+    coa: { nativeName: 'Basa Pulu Kokos', names: { en: 'Cocos Malay' } },
     'cpx': {
       nativeName: '莆仙語'
     },
@@ -194,6 +194,8 @@ function getCLDROverrides() {
       nativeName: 'وخی'
     },
     wlp: { nativeName: 'Warlpiri' },
+    wrh: { nativeName: 'Wiradjuri' },
+    wth: { nativeName: 'Wathawurrung' },
     'wuu': {
       nativeName: '吳語'
     },
@@ -207,8 +209,6 @@ function getCLDROverrides() {
       script: 'Hant',
       nativeName: '吳語（正體）'
     },
-    wrh: { nativeName: 'Wiradjuri' },
-    wth: { nativeName: 'Wathawurrung' },
     wyi: { nativeName: 'Woiwurrung' },
     xdk: { nativeName: 'Dharug' },
     xni: { nativeName: 'Ngarigo' },
