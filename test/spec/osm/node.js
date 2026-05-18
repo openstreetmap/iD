@@ -610,6 +610,62 @@ describe('iD.osmNode', function () {
             expect(node2.directions(graph, projection)).to.eql([]);
         });
 
+        it('does not return outbound one-way directions for an all-way stop', function () {
+            var node1 = new iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            var node2 = new iD.osmNode({ id: 'n2', loc: [0, 0], tags: { highway: 'stop', stop: 'all' } });
+            var node3 = new iD.osmNode({ id: 'n3', loc: [1, 0] });
+            var node4 = new iD.osmNode({ id: 'n4', loc: [0, -1] });
+            var node5 = new iD.osmNode({ id: 'n5', loc: [0, 1] });
+            var way1 = new iD.osmWay({ id: 'w1', nodes: ['n1', 'n2', 'n3'], tags: { highway: 'residential', oneway: 'yes' } });
+            var way2 = new iD.osmWay({ id: 'w2', nodes: ['n4', 'n2', 'n5'], tags: { highway: 'residential' } });
+            var graph = new iD.coreGraph([node1, node2, node3, node4, node5, way1, way2]);
+
+            var angles = node2.directions(graph, projection).map(d => d.angle).sort((a, b) => a - b);
+            expect(angles).to.eql([0, 180, 270]);
+        });
+
+        it('does not return outbound oneway=-1 directions for an all-way stop', function () {
+            var node1 = new iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            var node2 = new iD.osmNode({ id: 'n2', loc: [0, 0], tags: { highway: 'stop', stop: 'all' } });
+            var node3 = new iD.osmNode({ id: 'n3', loc: [1, 0] });
+            var node4 = new iD.osmNode({ id: 'n4', loc: [0, -1] });
+            var node5 = new iD.osmNode({ id: 'n5', loc: [0, 1] });
+            var way1 = new iD.osmWay({ id: 'w1', nodes: ['n1', 'n2', 'n3'], tags: { highway: 'residential', oneway: '-1' } });
+            var way2 = new iD.osmWay({ id: 'w2', nodes: ['n4', 'n2', 'n5'], tags: { highway: 'residential' } });
+            var graph = new iD.coreGraph([node1, node2, node3, node4, node5, way1, way2]);
+
+            var angles = node2.directions(graph, projection).map(d => d.angle).sort((a, b) => a - b);
+            expect(angles).to.eql([0, 180, 270]);
+        });
+
+        it('respects partial oneway tags for an all-way stop', function () {
+            var node1 = new iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            var node2 = new iD.osmNode({ id: 'n2', loc: [0, 0], tags: { highway: 'stop', stop: 'all' } });
+            var node3 = new iD.osmNode({ id: 'n3', loc: [1, 0] });
+            var node4 = new iD.osmNode({ id: 'n4', loc: [0, -1] });
+            var node5 = new iD.osmNode({ id: 'n5', loc: [0, 1] });
+            var way1 = new iD.osmWay({ id: 'w1', nodes: ['n1', 'n2', 'n3'], tags: { highway: 'residential', oneway: 'yes', 'oneway:bicycle': 'no' } });
+            var way2 = new iD.osmWay({ id: 'w2', nodes: ['n4', 'n2', 'n5'], tags: { highway: 'residential' } });
+            var graph = new iD.coreGraph([node1, node2, node3, node4, node5, way1, way2]);
+
+            var angles = node2.directions(graph, projection).map(d => d.angle).sort((a, b) => a - b);
+            expect(angles).to.eql([0, 90, 180, 270]);
+        });
+
+        it('does not return outbound one-way directions for intersection traffic signals', function () {
+            var node1 = new iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            var node2 = new iD.osmNode({ id: 'n2', loc: [0, 0], tags: { highway: 'traffic_signals', 'traffic_signals:direction': 'all' } });
+            var node3 = new iD.osmNode({ id: 'n3', loc: [1, 0] });
+            var node4 = new iD.osmNode({ id: 'n4', loc: [0, -1] });
+            var node5 = new iD.osmNode({ id: 'n5', loc: [0, 1] });
+            var way1 = new iD.osmWay({ id: 'w1', nodes: ['n1', 'n2', 'n3'], tags: { highway: 'residential', oneway: 'yes' } });
+            var way2 = new iD.osmWay({ id: 'w2', nodes: ['n4', 'n2', 'n5'], tags: { highway: 'residential' } });
+            var graph = new iD.coreGraph([node1, node2, node3, node4, node5, way1, way2]);
+
+            var angles = node2.directions(graph, projection).map(d => d.angle).sort((a, b) => a - b);
+            expect(angles).to.eql([0, 180, 270]);
+        });
+
         it('supports multiple directions delimited by ;', function () {
             var node1 = new iD.osmNode({ loc: [0, 0], tags: { direction: '0;45' }});
             var node2 = new iD.osmNode({ loc: [0, 0], tags: { direction: '45;north' }});
