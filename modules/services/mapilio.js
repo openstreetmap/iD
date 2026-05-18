@@ -32,6 +32,7 @@ const pannellumViewerJS = 'pannellum/pannellum.js';
 const resolution = 1080;
 const hdResolution = 2080;
 
+let _useHd = false;
 let _activeImage;
 let _cache;
 let _loadViewerPromise;
@@ -175,7 +176,8 @@ function getImageData(imageId, sequenceId) {
         .then(function (data) {
             let index = data.data.findIndex((feature) => feature.id === imageId);
             const {filename, uploaded_hash} = data.data[index];
-            _sceneOptions.panorama = imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + resolution;
+            const targetResolution = _useHd ? hdResolution : resolution;
+            _sceneOptions.panorama = imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + targetResolution;
         });
 }
 
@@ -344,12 +346,13 @@ export default {
             attribution
              .append('input')
              .attr('type','checkbox')
+             .property('checked', _useHd)
              .on('click',(e) => {
                 e.stopPropagation();
-                let isChecked = e.target.checked;
+                _useHd = e.target.checked;
                 let parts = _sceneOptions.panorama.split('/');
 
-                if (isChecked){
+                if (_useHd){
                     parts[parts.length - 1] = hdResolution;
                     _sceneOptions.panorama= parts.join('/');
                     loadTheImage();
