@@ -27,7 +27,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.safeid = utilSafeClassName(presetID);  // for use in css classes, selectors, element ids
 
-  _this.originalTerms = _this.terms;
+  _this.originalTerms = _this.terms || [];
 
   _this.originalName = _this.name || '';
 
@@ -89,10 +89,14 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     return score;
   };
 
-
   _this.t = (scope, options) => {
     const textID = `_tagging.presets.presets.${presetID}.${scope}`;
     return t(textID, options);
+  };
+
+  _this.t.all = (scope, options) => {
+    const textID = `_tagging.presets.presets.${presetID}.${scope}`;
+    return t.all(textID, options);
   };
 
   _this.t.append = (scope, options) => {
@@ -144,12 +148,12 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.aliases = () => {
     return resolveReference('originalName')
-      .t('aliases', { 'default': _this.originalAliases });
+        .t.all('aliases', { 'default': _this.originalAliases });
   };
 
   _this.terms = () => {
     return resolveReference('originalName')
-      .t('terms', { 'default': _this.originalTerms });
+        .t.all('terms', { 'default': _this.originalTerms });
   };
 
   _this.searchName = () => {

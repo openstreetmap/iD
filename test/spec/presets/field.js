@@ -17,12 +17,13 @@ describe('iD.presetField', function() {
             expect(other.t).to.have.been.calledOnce;
             expect(field.t).not.to.have.been.called;
 
-            other.t.mockClear();
-            field.t.mockClear();
+            // mock localizer
+            spyOn(other.t, 'all');
+            spyOn(field.t, 'all');
 
             field.terms();
-            expect(other.t).to.have.been.calledOnce;
-            expect(field.t).not.to.have.been.called;
+            expect(other.t.all).to.have.been.calledOnce;
+            expect(field.t.all).not.to.have.been.called;
         });
 
         it('references placeholder of another field', function() {
