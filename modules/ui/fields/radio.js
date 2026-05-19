@@ -45,19 +45,6 @@ export function uiFieldRadio(field, context) {
             .append('span')
             .attr('class', 'placeholder');
 
-        enter.each(function() {
-            if (typeof ResizeObserver === 'undefined') return;
-            const element = this;
-            const observer = new ResizeObserver(() => {
-                if (!element.isConnected) {
-                    observer.disconnect();
-                    return;
-                }
-                updateOneLineLayout();
-            });
-            observer.observe(element);
-        });
-
         wrap = wrap
             .merge(enter);
 
