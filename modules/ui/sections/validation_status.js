@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit/compat';
+import { debounce } from 'es-toolkit';
 
 import { svgIcon } from '../../svg/icon';
 import { prefs } from '../../core/preferences';
