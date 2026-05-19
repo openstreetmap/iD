@@ -347,12 +347,12 @@ export function coreLocalizer() {
                   texts: result,
                   locale
                 };
-              }
             }
             return {
-                texts: [localeString],
-                locale
+              texts: Array.isArray(localeString) ? localeString : [localeString],
+              locale
             };
+          }
         }
         // no localized string found...
 

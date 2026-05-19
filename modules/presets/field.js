@@ -46,10 +46,9 @@ export function presetField(fieldID, field, allFields) {
 
   _this.placeholder = () => _this.resolveReference('placeholder').t('placeholder', { 'default': '' });
 
-  _this.originalTerms = (_this.terms || []).join();
+  _this.originalTerms = _this.terms;
 
-  _this.terms = () => _this.resolveReference('label').t('terms', { 'default': _this.originalTerms })
-    .toLowerCase().trim().split(/\s*,+\s*/);
+  _this.terms = () => _this.resolveReference('label').t('terms', { 'default': _this.originalTerms });
 
   _this.increment = (_this.type === 'number' || _this.type === 'integer') ? (_this.increment || 1) : undefined;
 
