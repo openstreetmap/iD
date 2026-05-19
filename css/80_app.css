@@ -1951,19 +1951,23 @@ input.date-selector {
 
 /* draw the up/down on the buttons */
 .form-field-input-number button.decrement::after,
-.form-field-input-number button.increment::after {
+.form-field-input-number button.increment::after,
+.form-field-input-integer button.decrement::after,
+.form-field-input-integer button.increment::after {
     content: "";
     height: 0; width: 0;
     position: absolute;
     left: 0; right: 0; bottom: 0; top: 0;
     margin: auto;
 }
-.form-field-input-number button.decrement::after {
+.form-field-input-number button.decrement::after,
+.form-field-input-integer button.decrement::after {
     border-top: 5px solid var(--border-color);
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
 }
-.form-field-input-number button.increment::after {
+.form-field-input-number button.increment::after,
+.form-field-input-integer button.increment::after {
     border-bottom: 5px solid var(--border-color);
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
