@@ -79,7 +79,7 @@
   },
   "devDependencies": {
     "@actions/github-script": "github:actions/github-script#v9",
-    "@enzet/roentgen": "^0.14.0",
+    "@enzet/roentgen": "^0.15.0",
     "@eslint/js": "^10.0.1",
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/free-brands-svg-icons": "^7.2.0",
