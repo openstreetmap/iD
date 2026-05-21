@@ -66,7 +66,12 @@ export function uiFieldRadio(field, context) {
 
         enter
             .append('span')
-            .each(function(d) { strings.t.append('options.' + d, { 'default': d })(d3_select(this)); });
+            .each(function(d) {
+                const labelId = strings.hasTextForStringId('options.' + d + '.title')
+                    ? 'options.' + d + '.title'
+                    : 'options.' + d;
+                strings.t.append(labelId, { 'default': d })(d3_select(this));
+            });
 
         labels = labels
             .merge(enter);

@@ -42,7 +42,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Make tags like `contact:instagram` clickable if they contain a plain username, or a full URL ([#12306], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
+* Add high-resolution toggle for Mapilio photo viewer ([#12353], thanks [@sezerbozbiyik])
 #### :white_check_mark: Validation
+* Fix bug causing first click not focussing the respective features when clicking on a validation message in the upload dialog ([#8848])
 #### :bug: Bugfixes
 * Restore dedicated rendering of ski pistes and building parts ([#12297], thanks [@matkoniecz])
 * Pressing backspace while in the feature type selecting mode should not delete the object
@@ -55,7 +57,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 #### :hammer: Development
 * Remove redundant software dependencies to reduce the amount of the code that is bundled with iD ([#11634], [#12307], thanks [@k-yle])
+* Update name-suggestion-index to v7.2 ([#12337], thanks [@bjornstar])
 
+[#8848]: https://github.com/openstreetmap/iD/issues/8848
 [#11634]: https://github.com/openstreetmap/iD/pull/11634
 [#12297]: https://github.com/openstreetmap/iD/issues/12297
 [#12299]: https://github.com/openstreetmap/iD/issues/12299
@@ -63,6 +67,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12307]: https://github.com/openstreetmap/iD/pull/12307
 [#12320]: https://github.com/openstreetmap/iD/pull/12320
 [#12321]: https://github.com/openstreetmap/iD/pull/12321
+[#12337]: https://github.com/openstreetmap/iD/issues/12337
+[#12353]: https://github.com/openstreetmap/iD/pull/12353
 
 
 # 2.40.0
