@@ -179,6 +179,7 @@ export function actionJoin(ids) {
         var relation;
         var tags = {};
         var conflicting = false;
+        var conflictingKeys = [];
 
         joined[0].forEach(function(way) {
             var parents = graph.parentRelations(way);
@@ -194,6 +195,9 @@ export function actionJoin(ids) {
                 } else if (canSumTags(k, tags, way.tags)) {
                     tags[k] = (+tags[k] + +way.tags[k]).toString();
                 } else if (tags[k] && osmIsInterestingTag(k) && tags[k] !== way.tags[k]) {
+                    if (!conflictingKeys.includes(k)) {
+                        conflictingKeys.push(k);
+                    }
                     conflicting = true;
                 }
             }
@@ -204,7 +208,7 @@ export function actionJoin(ids) {
         }
 
         if (conflicting) {
-            return 'conflicting_tags';
+            return { type: 'conflicting_tags', keys: conflictingKeys };
         }
     };
 

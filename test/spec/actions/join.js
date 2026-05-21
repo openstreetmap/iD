@@ -267,7 +267,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['b', 'c'], tags: {highway: 'secondary'}})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).to.deep.include({ type: 'conflicting_tags' });
         });
 
         it('takes tag reversals into account when calculating conflicts', function () {
@@ -619,7 +619,7 @@ describe('iD.actionJoin', function () {
             new iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'steps', step_count: 'many' } }),
             new iD.osmWay({ id: '=', nodes: ['b', 'c'], tags: { highway: 'steps', step_count: '10' } })
         ]);
-        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
+        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.deep.include({ type: 'conflicting_tags' });
     });
 
     it('returns conflicting_tags when the second way has a non-numeric summable tag', function () {
@@ -630,7 +630,7 @@ describe('iD.actionJoin', function () {
             new iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'steps', step_count: '10' } }),
             new iD.osmWay({ id: '=', nodes: ['b', 'c'], tags: { highway: 'steps', step_count: 'bbb' } })
         ]);
-        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
+        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.deep.include({ type: 'conflicting_tags' });
     });
 
     it('returns conflicting_tags when both ways have non-numeric summable tags', function () {
@@ -641,7 +641,7 @@ describe('iD.actionJoin', function () {
             new iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'steps', step_count: 'many' } }),
             new iD.osmWay({ id: '=', nodes: ['b', 'c'], tags: { highway: 'steps', step_count: 'lots' } })
         ]);
-        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
+        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.deep.include({ type: 'conflicting_tags' });
     });
 
 
