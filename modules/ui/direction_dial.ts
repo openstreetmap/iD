@@ -29,7 +29,7 @@ const DIAL_SIZE = 92;
 const DIAL_CENTER = DIAL_SIZE / 2;
 const DIAL_RADIUS = 34;
 const DIAL_BASE_RENDER_SIZE = 28;
-const DIAL_MAX_DRAG_DIAMETER = 180;
+const DIAL_MAX_DRAG_DIAMETER = DIAL_BASE_RENDER_SIZE + 30;
 const DIAL_BASE_RADIUS_PX = DIAL_BASE_RENDER_SIZE / 2;
 const DIAL_MAX_RADIUS_PX = DIAL_MAX_DRAG_DIAMETER / 2;
 /** White disk to the dial edge (no ring stroke). */
