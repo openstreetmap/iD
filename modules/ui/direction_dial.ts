@@ -3,9 +3,7 @@ import { drag as d3_drag, type D3DragEvent } from 'd3-drag';
 import { utilNormalizeAzimuthDegrees } from '../util/direction_degrees';
 
 
-type DialRange = { start: number; end: number };
-type DirectionDialValue = number | DialRange;
-type DirectionDialCallback = (value: DirectionDialValue) => void;
+type DirectionDialCallback = (degrees: number) => void;
 
 type DialWrapperSelection = d3.Selection<HTMLDivElement>;
 
@@ -16,7 +14,6 @@ type DialSvgDragEvent = D3DragEvent<SVGSVGElement, DialSvgDatum, DialSvgDatum>;
 interface DirectionDial {
     (selection: DialWrapperSelection): void;
     value: (val: number | null) => DirectionDial;
-    range: (val: DialRange | null) => DirectionDial;
     disabled: (val: boolean) => DirectionDial;
     /** Degrees between absolute snap positions (preset `increment`, e.g. 5 → 0, 5, 10, …). */
     step: (val: number) => DirectionDial;
@@ -96,7 +93,6 @@ function dragPointerDistanceFromCenterPx(
 /** Direction dial UI for `*:direction` numeric fields. */
 export function uiDirectionDial(): DirectionDial {
     let _value: number | null = null;
-    let _range: DialRange | null = null;
     let _disabled = false;
     let _step = 1;
     let _shiftHeld = false;
@@ -112,8 +108,6 @@ export function uiDirectionDial(): DirectionDial {
     let _dragDialDiameter = DIAL_BASE_RENDER_SIZE;
     let _dragCenterClientX: number | null = null;
     let _dragCenterClientY: number | null = null;
-    let _rangeSpan = 0;
-    let _rangeAnchor: number | null = null;
 
     function attachWrapShiftListeners() {
         if (_shiftWindowListenersAttached || typeof window === 'undefined') return;
@@ -147,14 +141,6 @@ export function uiDirectionDial(): DirectionDial {
         return false;
     }
 
-    function rangeModifierFromDragEvent(event: DialSvgDragEvent): boolean {
-        const source = event.sourceEvent;
-        if (!source || typeof source !== 'object') return false;
-        if (source instanceof MouseEvent) return source.metaKey || source.ctrlKey;
-        if (source instanceof KeyboardEvent) return source.metaKey || source.ctrlKey;
-        return false;
-    }
-
     function pointerStateFromEvent(
         event: DialSvgDragEvent,
         node: SVGSVGElement
@@ -166,35 +152,6 @@ export function uiDirectionDial(): DirectionDial {
             angle: utilNormalizeAzimuthDegrees(radians * (180 / Math.PI)),
             distanceFromCenter: state.distanceFromCenter
         };
-    }
-
-    function rangeSpan(start: number, end: number): number {
-        return utilNormalizeAzimuthDegrees(end - start);
-    }
-
-    function rangeCenter(start: number, end: number): number {
-        return utilNormalizeAzimuthDegrees(start + (rangeSpan(start, end) / 2));
-    }
-
-    function rangeFromCenterSpan(center: number, span: number): DialRange {
-        const half = span / 2;
-        return {
-            start: utilNormalizeAzimuthDegrees(center - half),
-            end: utilNormalizeAzimuthDegrees(center + half)
-        };
-    }
-
-    function rangeArcPath(start: number, end: number): string {
-        const span = rangeSpan(start, end);
-        if (span <= 0) return '';
-        const startRad = start * (Math.PI / 180);
-        const endRad = end * (Math.PI / 180);
-        const x1 = DIAL_CENTER + (Math.sin(startRad) * DIAL_RADIUS);
-        const y1 = DIAL_CENTER - (Math.cos(startRad) * DIAL_RADIUS);
-        const x2 = DIAL_CENTER + (Math.sin(endRad) * DIAL_RADIUS);
-        const y2 = DIAL_CENTER - (Math.cos(endRad) * DIAL_RADIUS);
-        const largeArc = span > 180 ? 1 : 0;
-        return `M ${x1} ${y1} A ${DIAL_RADIUS} ${DIAL_RADIUS} 0 ${largeArc} 1 ${x2} ${y2}`;
     }
 
     function renderDial(selection: DialWrapperSelection) {
@@ -248,10 +205,6 @@ export function uiDirectionDial(): DirectionDial {
             .attr('y1', DIAL_CENTER);
 
         dialEnter
-            .append('path')
-            .attr('class', 'direction-dial-range');
-
-        dialEnter
             .append('circle')
             .attr('class', 'direction-dial-center-dot')
             .attr('cx', DIAL_CENTER)
@@ -296,19 +249,11 @@ export function uiDirectionDial(): DirectionDial {
                 // Jump needle to click angle; drag continues from this pointer direction.
                 _lastPointerAngle = pointerState.angle;
                 _dragValue = pointerState.angle;
-                _rangeAnchor = _dragValue;
-                if (!_range && shiftFromDragEvent(event)) {
+                if (shiftFromDragEvent(event)) {
                     _dragValue = snapAbsolute(_dragValue, _step);
                 }
-
-                if (_range) {
-                    _rangeSpan = rangeSpan(_range.start, _range.end);
-                    _value = rangeCenter(_range.start, _range.end);
-                    _onInput({ start: _range.start, end: _range.end });
-                } else {
-                    _value = _dragValue;
-                    _onInput(Math.round(_dragValue));
-                }
+                _value = _dragValue;
+                _onInput(Math.round(_dragValue));
                 renderDial(selection);
             })
             .on('drag', function(this: SVGSVGElement, event: DialSvgDragEvent) {
@@ -333,60 +278,21 @@ export function uiDirectionDial(): DirectionDial {
                     }
                 }
 
-                const pointerAngleRaw = pointerState.angle;
-                const wantsSnap = shiftFromDragEvent(event);
-                const wantsRangeAdjust = rangeModifierFromDragEvent(event);
-                const pointerAngle = wantsSnap ? snapAbsolute(pointerAngleRaw, _step) : pointerAngleRaw;
-                if (_range) {
-                    if (wantsRangeAdjust && _rangeAnchor !== null) {
-                        const delta = shortestAngleDelta(_rangeAnchor, pointerAngle);
-                        if (delta >= 0) {
-                            _range = { start: _rangeAnchor, end: pointerAngle };
-                        } else {
-                            _range = { start: pointerAngle, end: _rangeAnchor };
-                        }
-                        _rangeSpan = rangeSpan(_range.start, _range.end);
-                    } else {
-                        const span = _rangeSpan || rangeSpan(_range.start, _range.end);
-                        _range = rangeFromCenterSpan(pointerAngle, span);
-                    }
-                    _dragValue = rangeCenter(_range.start, _range.end);
-                    _value = _dragValue;
+                const pointerAngle = pointerState.angle;
+                if (_isExpandedDrag) {
+                    // In expanded mode, keep indicator directly under cursor angle.
+                    _dragValue = pointerAngle;
                 } else {
-                    if (wantsRangeAdjust) {
-                        if (_rangeAnchor === null) {
-                            _rangeAnchor = _dragValue;
-                        }
-                        const delta = shortestAngleDelta(_rangeAnchor, pointerAngle);
-                        if (Math.abs(delta) > 0) {
-                            if (delta >= 0) {
-                                _range = { start: _rangeAnchor, end: pointerAngle };
-                            } else {
-                                _range = { start: pointerAngle, end: _rangeAnchor };
-                            }
-                            _rangeSpan = rangeSpan(_range.start, _range.end);
-                            _dragValue = rangeCenter(_range.start, _range.end);
-                            _value = _dragValue;
-                        }
-                    } else {
-                        _rangeAnchor = null;
-                        if (_isExpandedDrag) {
-                            _dragValue = pointerAngle;
-                        } else {
-                            const delta = shortestAngleDelta(_lastPointerAngle, pointerAngle);
-                            const gain = precisionGain(pointerState.distanceFromCenter);
-                            _dragValue = utilNormalizeAzimuthDegrees(_dragValue + (delta * gain));
-                        }
-                        _value = _dragValue;
-                    }
+                    const delta = shortestAngleDelta(_lastPointerAngle, pointerAngle);
+                    const gain = precisionGain(pointerState.distanceFromCenter);
+                    _dragValue = utilNormalizeAzimuthDegrees(_dragValue + (delta * gain));
                 }
                 _lastPointerAngle = pointerAngle;
-                if (_range) {
-                    _onInput({ start: _range.start, end: _range.end });
-                } else {
-                    _onInput(Math.round(_dragValue));
+                if (shiftFromDragEvent(event)) {
+                    _dragValue = snapAbsolute(_dragValue, _step);
                 }
-
+                _value = _dragValue;
+                _onInput(Math.round(_dragValue));
                 renderDial(selection);
             })
             .on('end', function(this: SVGSVGElement, event: DialSvgDragEvent) {
@@ -396,16 +302,11 @@ export function uiDirectionDial(): DirectionDial {
                 _dragDialDiameter = DIAL_BASE_RENDER_SIZE;
                 _dragCenterClientX = null;
                 _dragCenterClientY = null;
-                _rangeAnchor = null;
-                if (!_range && shiftFromDragEvent(event)) {
+                if (shiftFromDragEvent(event)) {
                     _dragValue = snapAbsolute(_dragValue, _step);
                 }
                 _value = _dragValue;
-                if (_range) {
-                    _onCommit({ start: _range.start, end: _range.end });
-                } else {
-                    _onCommit(Math.round(_dragValue));
-                }
+                _onCommit(Math.round(_dragValue));
                 _shiftHeld = false;
                 detachWrapShiftListeners();
                 renderDial(selection);
@@ -447,21 +348,10 @@ export function uiDirectionDial(): DirectionDial {
             .attr('y2', (d: number) => DIAL_CENTER - Math.cos(d * (Math.PI / 180)) * rOuter);
 
         const line = dialMerge.select<SVGLineElement>('line.direction-dial-line');
-        const rangePath = dialMerge.select<SVGPathElement>('path.direction-dial-range');
         const angle = (_value === null) ? null : utilNormalizeAzimuthDegrees(_value);
         const displayAngle = angle === null
             ? null
             : (_shiftHeld ? snapAbsolute(angle, _step) : angle);
-
-        if (_range) {
-            rangePath
-                .classed('hidden', false)
-                .attr('d', rangeArcPath(_range.start, _range.end));
-        } else {
-            rangePath
-                .classed('hidden', true)
-                .attr('d', '');
-        }
 
         if (displayAngle === null) {
             line.classed('hidden', true);
@@ -482,23 +372,6 @@ export function uiDirectionDial(): DirectionDial {
 
     directionDial.value = function(val: number | null) {
         _value = (val === null || !isFinite(val)) ? null : utilNormalizeAzimuthDegrees(val);
-        if (_value !== null) {
-            _range = null;
-        }
-        return directionDial;
-    };
-
-    directionDial.range = function(val: DialRange | null) {
-        if (!val) {
-            _range = null;
-            _rangeSpan = 0;
-            return directionDial;
-        }
-        const start = utilNormalizeAzimuthDegrees(val.start);
-        const end = utilNormalizeAzimuthDegrees(val.end);
-        _range = { start, end };
-        _rangeSpan = rangeSpan(start, end);
-        _value = rangeCenter(start, end);
         return directionDial;
     };
 

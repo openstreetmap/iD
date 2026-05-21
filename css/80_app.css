@@ -1618,19 +1618,6 @@ button.preset-reset .label.flash-bg {
     display: none;
 }
 
-.direction-dial-range {
-    fill: none;
-    stroke: var(--link-color);
-    stroke-opacity: 0.8;
-    stroke-width: 3;
-    pointer-events: none;
-    vector-effect: non-scaling-stroke;
-}
-
-.direction-dial-range.hidden {
-    display: none;
-}
-
 .direction-dial-tick {
     stroke: var(--border-color);
     stroke-width: 1;

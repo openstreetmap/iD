@@ -9,7 +9,6 @@ export { numberFieldRawRegex } from './number_field';
 export {
     utilNormalizeAzimuthDegrees,
     utilParseDirectionDegreesString,
-    utilParseDirectionRangeString,
     utilDirectionSegmentFractionDigits
 } from './direction_degrees';
 export { utilDisplayName } from './util';
