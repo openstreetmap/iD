@@ -59,12 +59,12 @@ function precisionGain(distanceFromCenter: number): number {
 }
 
 
-function dragPointerDistanceFromCenterPx(
+function dragPointerState(
     event: DialSvgDragEvent,
     node: SVGSVGElement,
     centerX?: number | null,
     centerY?: number | null
-): { dx: number; dy: number; distanceFromCenter: number } | null {
+): { angle: number; distanceFromCenter: number } | null {
     const sourceEvent = event.sourceEvent as MouseEvent | TouchEvent | undefined;
     if (!sourceEvent) return null;
 
@@ -86,7 +86,13 @@ function dragPointerDistanceFromCenterPx(
     const cy = (centerY !== null && centerY !== undefined) ? centerY : (rect.top + (rect.height / 2));
     const dx = clientX - cx;
     const dy = clientY - cy;
-    return { dx, dy, distanceFromCenter: Math.hypot(dx, dy) };
+    const distanceFromCenter = Math.hypot(dx, dy);
+    if (!isFinite(distanceFromCenter)) return null;
+    const radians = Math.atan2(dx, -dy);
+    return {
+        angle: utilNormalizeAzimuthDegrees(radians * (180 / Math.PI)),
+        distanceFromCenter
+    };
 }
 
 
@@ -139,19 +145,6 @@ export function uiDirectionDial(): DirectionDial {
         if (source instanceof MouseEvent) return source.shiftKey;
         if (source instanceof KeyboardEvent) return source.shiftKey;
         return false;
-    }
-
-    function pointerStateFromEvent(
-        event: DialSvgDragEvent,
-        node: SVGSVGElement
-    ): { angle: number; distanceFromCenter: number } | null {
-        const state = dragPointerDistanceFromCenterPx(event, node, _dragCenterClientX, _dragCenterClientY);
-        if (!state || !isFinite(state.distanceFromCenter)) return null;
-        const radians = Math.atan2(state.dx, -state.dy);
-        return {
-            angle: utilNormalizeAzimuthDegrees(radians * (180 / Math.PI)),
-            distanceFromCenter: state.distanceFromCenter
-        };
     }
 
     function renderDial(selection: DialWrapperSelection) {
@@ -240,7 +233,7 @@ export function uiDirectionDial(): DirectionDial {
                 _dragCenterClientX = rect.left + (rect.width / 2);
                 _dragCenterClientY = rect.top + (rect.height / 2);
 
-                const pointerState = pointerStateFromEvent(event, this);
+                const pointerState = dragPointerState(event, this, _dragCenterClientX, _dragCenterClientY);
                 if (!pointerState) {
                     _isDragging = false;
                     return;
@@ -259,23 +252,15 @@ export function uiDirectionDial(): DirectionDial {
             .on('drag', function(this: SVGSVGElement, event: DialSvgDragEvent) {
                 if (_disabled || !_isDragging) return;
 
-                const pointerState = pointerStateFromEvent(event, this);
+                const pointerState = dragPointerState(event, this, _dragCenterClientX, _dragCenterClientY);
                 if (!pointerState) return;
-                const pointerDistancePx = dragPointerDistanceFromCenterPx(
-                    event,
-                    this,
-                    _dragCenterClientX,
-                    _dragCenterClientY
-                );
-                if (pointerDistancePx) {
-                    if (!_isExpandedDrag && pointerDistancePx.distanceFromCenter > DIAL_BASE_RADIUS_PX) {
-                        _isExpandedDrag = true;
-                        _dragDialDiameter = DIAL_MAX_DRAG_DIAMETER;
-                        renderDial(selection);
-                    }
-                    if (_isExpandedDrag && pointerDistancePx.distanceFromCenter > DIAL_MAX_RADIUS_PX) {
-                        return;
-                    }
+                if (!_isExpandedDrag && pointerState.distanceFromCenter > DIAL_BASE_RADIUS_PX) {
+                    _isExpandedDrag = true;
+                    _dragDialDiameter = DIAL_MAX_DRAG_DIAMETER;
+                    renderDial(selection);
+                }
+                if (_isExpandedDrag && pointerState.distanceFromCenter > DIAL_MAX_RADIUS_PX) {
+                    return;
                 }
 
                 const pointerAngle = pointerState.angle;
