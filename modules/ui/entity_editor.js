@@ -118,7 +118,8 @@ export function uiEntityEditor(context) {
         });
 
         context.history()
-            .on('change.entity-editor', historyChanged);
+            .on('change.entity-editor', historyChanged)
+            .on('merge.entity-editor', () => historyChanged());
 
         function historyChanged(difference) {
             if (selection.selectAll('.entity-editor').empty()) return;
