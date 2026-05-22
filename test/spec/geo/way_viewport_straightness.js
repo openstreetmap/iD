@@ -52,6 +52,23 @@ describe('geoWayStraightnessInViewport', () => {
         expect(result.totalTurnDeg).to.be.above(90);
     });
 
+    it('uses the longest visible segment for dominant heading', () => {
+        const nodes = [
+            node('h0', [0, 0]),
+            node('h1', [0.00002, 0]),
+            node('h2', [0.00004, 0])
+        ];
+        const center = projection([0, 0]);
+        projection.clipExtent([
+            [center[0] - 60, center[1] - 30],
+            [center[0] + 60, center[1] + 30]
+        ]);
+        const result = iD.geoWayDominantHeadingInViewport(projection, nodes, false);
+        expect(result).to.not.be.null;
+        expect(result.length).to.be.above(40);
+        expect(result.headingDeg).to.be.closeTo(0, 2);
+    });
+
     it('only measures the portion inside the viewport', () => {
         const points = [[50, 200], [200, 200], [350, 200]];
         const visible = iD.geoVisiblePolylineInExtent(

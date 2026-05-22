@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import { geoWayStraightnessInViewport } from '../../geo';
+import { geoWayDominantHeadingInViewport, geoWayStraightnessInViewport } from '../../geo';
 import { DIRECTIONAL_COMBO_ARROW_UP_PATH, DIRECTIONAL_COMBO_ARROW_VIEWBOX } from '../../svg/directional_combo_arrow';
 import { utilRebind } from '../../util';
 import { uiFieldCombo } from './combo';
@@ -81,8 +81,7 @@ export function uiFieldDirectionalCombo(field, context) {
         function refreshLabelArrowVisibility() {
             const entityIDs = selectedLinearEntityIDs();
             const straightEnough = selectedWaysStraightEnough(entityIDs);
-            if (straightEnough === _showLabelArrows) return;
-
+            const prevShow = _showLabelArrows;
             _showLabelArrows = straightEnough;
             items.selectAll('.directionalcombo-label-arrow')
                 .classed('directionalcombo-label-arrow-hidden', !_showLabelArrows);
@@ -90,32 +89,11 @@ export function uiFieldDirectionalCombo(field, context) {
             if (!_showLabelArrows && _activeIndicatorKey) {
                 clearIndicator();
             }
+            return prevShow !== straightEnough;
         }
 
         /**
-         * @returns {void}
-         */
-        function installMapListeners() {
-            if (_mapListenersInstalled || !context.map) return;
-            _mapListenersInstalled = true;
-            context.map()
-                .on('move.directionalcomboStraightness', refreshLabelArrowVisibility)
-                .on('drawn.directionalcomboStraightness', refreshLabelArrowVisibility);
-        }
-
-        /**
-         * @returns {void}
-         */
-        function uninstallMapListeners() {
-            if (!_mapListenersInstalled || !context.map) return;
-            _mapListenersInstalled = false;
-            context.map()
-                .on('move.directionalcomboStraightness', null)
-                .on('drawn.directionalcomboStraightness', null);
-        }
-
-        /**
-         * Compute base indicator rotation (degrees) from selected way direction.
+         * Compute base indicator rotation (degrees) from the longest visible way segment.
          * The shared label arrow glyph points "up" at 0deg.
          * Left uses base heading, right uses base + 180deg.
          * @param {string[]} entityIDs
@@ -128,43 +106,56 @@ export function uiFieldDirectionalCombo(field, context) {
 
             if (typeof projection !== 'function') return fallback;
 
-            let bestDX = null;
-            let bestDY = null;
+            let bestHeading = null;
             let bestLen = 0;
 
             for (let i = 0; i < entityIDs.length; i++) {
                 const entity = graph.hasEntity(entityIDs[i]);
                 if (!entity || entity.geometry(graph) !== 'line') continue;
 
-                const points = graph.childNodes(entity)
-                    .map(node => projection(node.loc))
-                    .filter(Boolean);
-
-                if (points.length < 2) continue;
-
-                for (let j = 0; j < points.length - 1; j++) {
-                    const dx = points[j + 1][0] - points[j][0];
-                    const dy = points[j + 1][1] - points[j][1];
-                    const len = Math.hypot(dx, dy);
-                    if (len > bestLen) {
-                        bestLen = len;
-                        bestDX = dx;
-                        bestDY = dy;
-                    }
+                const nodes = graph.childNodes(entity);
+                const dominant = geoWayDominantHeadingInViewport(projection, nodes, entity.isClosed());
+                if (dominant && dominant.length > bestLen) {
+                    bestLen = dominant.length;
+                    bestHeading = dominant.headingDeg;
                 }
             }
 
-            if (!bestLen || bestDX === null || bestDY === null) return fallback;
-
-            return Math.atan2(bestDY, bestDX) * 180 / Math.PI;
+            return bestHeading ?? fallback;
         }
 
         /**
          * Refreshes the base directional rotation from current selected linear entities.
-         * @returns {void}
+         * @returns {boolean} whether rotation changed
          */
         function refreshBaseIndicatorRotation() {
-            _baseIndicatorRotation = indicatorBaseRotation(selectedLinearEntityIDs());
+            const entityIDs = selectedLinearEntityIDs();
+            const next = indicatorBaseRotation(entityIDs);
+            const changed = next !== _baseIndicatorRotation;
+            _baseIndicatorRotation = next;
+            return changed;
+        }
+
+        /**
+         * Updates label arrows and rotation after pan/zoom or graph changes.
+         * @returns {void}
+         */
+        function refreshViewportDependentState() {
+            refreshLabelArrowVisibility();
+            if (refreshBaseIndicatorRotation()) {
+                updateIndicatorRowState();
+            }
+        }
+
+        /**
+         * @returns {void}
+         */
+        function installMapListeners() {
+            if (_mapListenersInstalled || !context.map) return;
+            _mapListenersInstalled = true;
+            context.map()
+                .on('move.directionalcomboStraightness', refreshViewportDependentState)
+                .on('drawn.directionalcomboStraightness', refreshViewportDependentState);
         }
 
         /**

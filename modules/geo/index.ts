@@ -35,6 +35,7 @@ export {
     WAY_STRAIGHTNESS_MIN_VISIBLE_LENGTH,
     geoPolylineStraightness,
     geoVisiblePolylineInExtent,
+    geoWayDominantHeadingInViewport,
     geoWayStraightnessInViewport
 } from './way_viewport_straightness.js';
 

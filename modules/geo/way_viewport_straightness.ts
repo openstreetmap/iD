@@ -33,8 +33,8 @@ export type WayStraightness = {
 
 
 function pointInExtent(p: Vec2, extent: geoExtent) {
-    return p[0] >= extent[0][0] && p[0] <= extent[1][0] &&
-        p[1] >= extent[0][1] && p[1] <= extent[1][1];
+    const { minX, minY, maxX, maxY } = extent.bbox();
+    return p[0] >= minX && p[0] <= maxX && p[1] >= minY && p[1] <= maxY;
 }
 
 
@@ -205,6 +205,104 @@ export function geoPolylineStraightness(points: Vec2[]): WayStraightness {
         spreadDeg,
         tortuosity,
         visiblePointCount: points.length
+    };
+}
+
+
+type VisibleSpan = {
+    length: number;
+    heading: number;
+};
+
+
+/**
+ * Longest portion of a segment that lies inside the viewport (or the full segment).
+ */
+function visibleSpanOnSegment(p0: Vec2, p1: Vec2, extent: geoExtent | null): VisibleSpan | null {
+    if (!extent) {
+        const length = geoVecLength(p0, p1);
+        if (length < 1) return null;
+        return { length, heading: geoVecAngle(p0, p1) };
+    }
+
+    const inside0 = pointInExtent(p0, extent);
+    const inside1 = pointInExtent(p1, extent);
+    const hits = segmentIntersectionsWithExtent(p0, p1, extent);
+
+    let start: Vec2;
+    let end: Vec2;
+
+    if (inside0 && inside1) {
+        start = p0;
+        end = p1;
+    } else if (inside0 && !inside1) {
+        start = p0;
+        const ordered = orderPointsAlongSegment(p0, p1, hits);
+        if (!ordered.length) return null;
+        end = ordered[ordered.length - 1];
+    } else if (!inside0 && inside1) {
+        end = p1;
+        const ordered = orderPointsAlongSegment(p0, p1, hits);
+        if (!ordered.length) return null;
+        start = ordered[0];
+    } else if (hits.length >= 2) {
+        const ordered = orderPointsAlongSegment(p0, p1, hits);
+        start = ordered[0];
+        end = ordered[ordered.length - 1];
+    } else {
+        return null;
+    }
+
+    const length = geoVecLength(start, end);
+    if (length < 1) return null;
+    return { length, heading: geoVecAngle(start, end) };
+}
+
+
+export type WayDominantHeading = {
+    headingDeg: number;
+    length: number;
+};
+
+
+/**
+ * Dominant travel heading (degrees) from the longest way segment currently visible
+ * in the viewport. Falls back to the longest full segment when clip extent is unset.
+ */
+export function geoWayDominantHeadingInViewport(
+    projection: Projection,
+    nodes: OsmNode[],
+    isClosed: boolean
+): WayDominantHeading | null {
+    const points = nodes
+        .map(n => projection(n.loc))
+        .filter((p): p is Vec2 => !!p);
+
+    if (points.length < 2) return null;
+
+    const clip = projection.clipExtent?.();
+    const extent = clip && geoExtent(clip);
+    const useExtent = extent && isFinite(extent.area()) && extent.area() > 0 ? extent : null;
+
+    let best: VisibleSpan | null = null;
+    const segmentCount = isClosed ? points.length : points.length - 1;
+
+    for (let i = 0; i < segmentCount; i++) {
+        const span = visibleSpanOnSegment(
+            points[i],
+            points[(i + 1) % points.length],
+            useExtent
+        );
+        if (span && (!best || span.length > best.length)) {
+            best = span;
+        }
+    }
+
+    if (!best) return null;
+
+    return {
+        headingDeg: best.heading * 180 / Math.PI,
+        length: best.length
     };
 }
 
