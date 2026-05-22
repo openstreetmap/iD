@@ -58,7 +58,10 @@ ${t.html('settings.custom_background.instructions.license_disclaimer')}
         textSection
             .append('div')
             .attr('class', 'instructions-template')
-            .html(marked(instructions));
+            .html(marked(instructions))
+            .selectAll('a')
+            .attr('target', '_blank')
+            .attr('rel', 'noopener noreferrer');
 
         textSection
             .append('textarea')
