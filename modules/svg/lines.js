@@ -6,6 +6,7 @@ import {
 } from './helpers';
 import { svgTagClasses } from './tag_classes';
 
+import { geoWayStraightnessInViewport } from '../geo';
 import { osmEntity } from '../osm';
 import { utilArrayFlatten, utilArrayGroupBy } from '../util';
 import { utilDetect } from '../util/detect';
@@ -256,8 +257,18 @@ export function svgLines(projection, context) {
             const indicator = context.directionalComboIndicator && context.directionalComboIndicator();
             if (!indicator || !indicator.entityIDs || !indicator.entityIDs.length) return [];
 
+            const projection = context.projection;
+            const straightEntityIDs = indicator.entityIDs.filter(function(id) {
+                const entity = graph.hasEntity(id);
+                if (!entity || entity.geometry(graph) !== 'line') return false;
+                if (typeof projection !== 'function') return true;
+                const nodes = graph.childNodes(entity);
+                return geoWayStraightnessInViewport(projection, nodes, entity.isClosed()).isStraightEnough;
+            });
+            if (!straightEntityIDs.length) return [];
+
             const candidates = (pathdata[layer] || []).filter(function(entity) {
-                return indicator.entityIDs.indexOf(entity.id) !== -1;
+                return straightEntityIDs.indexOf(entity.id) !== -1;
             });
             if (!candidates.length) return [];
 

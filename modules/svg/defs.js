@@ -2,6 +2,9 @@ import { svg as d3_svg } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
 import { utilArrayUniq } from '../util';
+import {
+    DIRECTIONAL_COMBO_ARROW_DOWN_PATH, DIRECTIONAL_COMBO_ARROW_UP_PATH, DIRECTIONAL_COMBO_ARROW_VIEWBOX
+} from './directional_combo_arrow';
 
 
 /*
@@ -90,24 +93,15 @@ export function svgDefs(context) {
          * @returns {void}
          */
         function addDirectionalComboMarker(side) {
-            // Two mirrored triangles (apex away from the stroke). With orient=auto, OSM :left / :right
-            // match the named marker only when mirrored geometry + refY use the opposite assignment
-            // from a naive “left = sided triangle” pairing (perpendicular offset was inverted).
-            const gap = 2.8;
-            const pathD = side === 'left'
-                ? 'M 0,2 L 1,1 L 2,2 z'
-                : 'M 0,0 L 1,1 L 2,0 z';
+            const gap = 1.4;
+            const pathD = side === 'left' ? DIRECTIONAL_COMBO_ARROW_UP_PATH : DIRECTIONAL_COMBO_ARROW_DOWN_PATH;
             const refY = side === 'left' ? 2 + gap : -gap;
-            // Tight viewBox per side so uniform scale min(markerW/vbW, markerH/vbH) matches the old
-            // 2×2 viewBox + 3×3 marker (scale 1.5). A tall shared viewBox (e.g. 2×8) with marker 3×3
-            // used min(3/2, 3/8) and shrank the glyph ~4×.
-            const viewBox = side === 'left' ? '0 1 2 4' : '0 -3 2 4';
             const markerW = 3;
             const markerH = 6;
             _defsSelection
                 .append('marker')
                 .attr('id', 'ideditor-directionalcombo-marker-' + side)
-                .attr('viewBox', viewBox)
+                .attr('viewBox', DIRECTIONAL_COMBO_ARROW_VIEWBOX)
                 .attr('refX', 1)
                 .attr('refY', refY)
                 .attr('markerWidth', markerW)

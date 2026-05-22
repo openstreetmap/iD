@@ -1664,6 +1664,23 @@ input.date-selector {
     display: table-cell;
     width: auto;
 }
+.form-field ul.rows.rows-table li.labeled-input > .preset-label-directionalcombo .directionalcombo-label-arrow {
+    width: 13.2px;
+    height: 13.2px;
+    margin-left: 0.35em;
+    vertical-align: middle;
+    transform: rotate(var(--indicator-rotation, 0deg));
+    transform-origin: center;
+    opacity: 1;
+}
+.form-field ul.rows.rows-table li.labeled-input > .preset-label-directionalcombo .directionalcombo-label-arrow path {
+    fill: var(--passive-text-color);
+    transition: fill 120ms ease-in-out;
+}
+.form-field ul.rows.rows-table li.labeled-input.is-active-indicator > .preset-label-directionalcombo .directionalcombo-label-arrow path { fill: #7092ff; }
+.form-field ul.rows.rows-table li.labeled-input > .preset-label-directionalcombo .directionalcombo-label-arrow.directionalcombo-label-arrow-hidden {
+    display: none;
+}
 
 
 /* Field - Structure
