@@ -336,6 +336,28 @@ export function coreContext() {
   context.selectedIDs = () => (_mode && _mode.selectedIDs && _mode.selectedIDs()) || [];
   context.activeID = () => _mode && _mode.activeID && _mode.activeID();
 
+  /**
+   * @typedef {{
+   *   side: 'left' | 'right',
+   *   entityIDs: string[]
+   * }} DirectionalComboIndicatorState
+   */
+
+  /** @type {DirectionalComboIndicatorState | null} */
+  let _directionalComboIndicator = null;
+  context.directionalComboIndicator = function() {
+    return _directionalComboIndicator;
+  };
+  /**
+   * @param {DirectionalComboIndicatorState | null} val
+   * @returns {typeof context}
+   */
+  context.setDirectionalComboIndicator = function(val) {
+    _directionalComboIndicator = val;
+    dispatch.call('change');
+    return context;
+  };
+
   let _selectedNoteID;
   context.selectedNoteID = function(noteID) {
     if (!arguments.length) return _selectedNoteID;

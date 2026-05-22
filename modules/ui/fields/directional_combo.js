@@ -23,6 +23,56 @@ export function uiFieldDirectionalCombo(field, context) {
     }
 
     function directionalCombo(selection) {
+        /**
+         * Maps a directional combo key to renderer-facing indicator side.
+         * @param {string} key
+         * @returns {'left' | 'right' | null}
+         */
+        function keyToIndicatorSide(key) {
+            if (/:left(:|$)/.test(key)) return 'left';
+            if (/:right(:|$)/.test(key)) return 'right';
+            return null;
+        }
+
+        /**
+         * Returns selected editable linear entity IDs for indicator rendering.
+         * @returns {string[]}
+         */
+        function selectedLinearEntityIDs() {
+            const graph = context.graph();
+            return context.selectedIDs().filter(function(id) {
+                const entity = graph.hasEntity(id);
+                return entity && entity.geometry(graph) === 'line';
+            });
+        }
+
+        /**
+         * Activates map indicator for a directional combo row interaction.
+         * @param {string} key
+         * @returns {void}
+         */
+        function activateIndicatorForKey(key) {
+            const side = keyToIndicatorSide(key);
+            const entityIDs = selectedLinearEntityIDs();
+            if (!side || !entityIDs.length) {
+                clearIndicator();
+                return;
+            }
+
+            context.setDirectionalComboIndicator({
+                side: side,
+                entityIDs: entityIDs
+            });
+        }
+
+        /**
+         * Deactivates the directional combo indicator and row highlight.
+         * @returns {void}
+         */
+        function clearIndicator() {
+            context.setDirectionalComboIndicator(null);
+        }
+
 
         function stripcolon(s) {
             return s.replaceAll(':', '');
@@ -77,6 +127,14 @@ export function uiFieldDirectionalCombo(field, context) {
             });
 
         items = items.merge(enter);
+
+        items
+            .on('mouseenter.indicator', function(d3_event, key) {
+                activateIndicatorForKey(key);
+            })
+            .on('mouseleave.indicator', function() {
+                clearIndicator();
+            });
 
         // Update
         wrap.selectAll('.preset-input-directionalcombo')
@@ -192,6 +250,10 @@ export function uiFieldDirectionalCombo(field, context) {
     directionalCombo.focus = function() {
         var node = wrap.selectAll('input').node();
         if (node) node.focus();
+    };
+
+    directionalCombo.off = function() {
+        context.setDirectionalComboIndicator(null);
     };
 
 

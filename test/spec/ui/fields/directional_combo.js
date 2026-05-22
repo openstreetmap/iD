@@ -208,4 +208,59 @@ describe('iD.uiFieldDirectionalCombo', () => {
             });
         });
     });
+
+    describe('directional combo indicator interaction', function() {
+        const field = iD.presetField('name', {
+            key: 'cycleway',
+            keys: ['cycleway:left', 'cycleway:right'],
+        });
+
+        it('translates left/right row interaction to indicator sides', () => {
+            const instance = iD.uiFieldDirectionalCombo(field, context);
+            const onIndicator = vi.spyOn(context, 'setDirectionalComboIndicator');
+            const a = iD.osmNode({ id: 'nA', loc: [0, 0] });
+            const b = iD.osmNode({ id: 'nB', loc: [1, 1] });
+            const way = iD.osmWay({ id: 'w1', nodes: [a.id, b.id] });
+            vi.spyOn(context, 'selectedIDs').mockReturnValue([way.id]);
+            vi.spyOn(context, 'graph').mockReturnValue(new iD.coreGraph([a, b, way]));
+            selection.call(instance);
+
+            const rows = selection.selectAll('li.labeled-input').nodes();
+            expect(rows).toHaveLength(2);
+
+            d3.select(rows[0]).dispatch('mouseenter');
+            expect(onIndicator).toHaveBeenLastCalledWith(
+                expect.objectContaining({ side: 'left' })
+            );
+
+            d3.select(rows[1]).dispatch('mouseenter');
+            expect(onIndicator).toHaveBeenLastCalledWith(
+                expect.objectContaining({ side: 'right' })
+            );
+
+            d3.select(rows[1]).dispatch('mouseleave');
+            expect(onIndicator).toHaveBeenLastCalledWith(null);
+        });
+
+        it('ignores non-left/right directional keys', () => {
+            const forwardBackwardField = iD.presetField('name', {
+                key: 'cycleway',
+                keys: ['cycleway:forward', 'cycleway:backward'],
+            });
+            const instance = iD.uiFieldDirectionalCombo(forwardBackwardField, context);
+            const onIndicator = vi.spyOn(context, 'setDirectionalComboIndicator');
+            const a = iD.osmNode({ id: 'nA2', loc: [0, 0] });
+            const b = iD.osmNode({ id: 'nB2', loc: [1, 1] });
+            const way = iD.osmWay({ id: 'w2', nodes: [a.id, b.id] });
+            vi.spyOn(context, 'selectedIDs').mockReturnValue([way.id]);
+            vi.spyOn(context, 'graph').mockReturnValue(new iD.coreGraph([a, b, way]));
+            selection.call(instance);
+
+            const rows = selection.selectAll('li.labeled-input').nodes();
+            expect(rows).toHaveLength(2);
+
+            d3.select(rows[0]).dispatch('mouseenter');
+            expect(onIndicator).toHaveBeenLastCalledWith(null);
+        });
+    });
 });

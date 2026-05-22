@@ -13,6 +13,8 @@
 .layer-osm path.sided-marker-coastline-path { fill: #77dede; }
 .layer-osm path.sided-marker-barrier-path   { fill: #ddd; }
 .layer-osm path.sided-marker-man_made-path  { fill: #fff; }
+.layer-osm path.directionalcombo-marker-left-path,
+.layer-osm path.directionalcombo-marker-right-path { fill: #7092ff; }
 
 /* IE/Edge rule for <use> marker style */
 .layer-osm path.viewfield-marker-path {
@@ -243,8 +245,13 @@ text {
 
 .onewaygroup path.oneway,
 .viewfieldgroup path.viewfield,
-.sidedgroup path.sided {
+.sidedgroup path.sided,
+.directional-combo-group path.directionalcombo {
     stroke-width: 6px;
+}
+
+.directional-combo-group path.directionalcombo {
+    opacity: 0.95;
 }
 
 text.arealabel-halo,

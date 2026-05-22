@@ -244,7 +244,27 @@ export function svgLines(projection, context) {
         var ways = [];
         var onewaydata = {};
         var sideddata = {};
+        var directionalComboData = {};
         var oldMultiPolygonOuters = {};
+
+        /**
+         * Computes marker path segments for active directional combo indicator.
+         * @param {number} layer
+         * @returns {Array<{id: string, index: number, d: string}>}
+         */
+        function getDirectionalComboLayerData(layer) {
+            const indicator = context.directionalComboIndicator && context.directionalComboIndicator();
+            if (!indicator || !indicator.entityIDs || !indicator.entityIDs.length) return [];
+
+            const candidates = (pathdata[layer] || []).filter(function(entity) {
+                return indicator.entityIDs.indexOf(entity.id) !== -1;
+            });
+            if (!candidates.length) return [];
+
+            // Keep way direction so marker orientation matches left/right marker refY offsets.
+            const markerSegments = svgMarkerSegments(projection, graph, 30, function() { return false; });
+            return utilArrayFlatten(candidates.map(markerSegments));
+        }
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
@@ -275,6 +295,8 @@ export function svgLines(projection, context) {
                 projection, graph, 30
             );
             sideddata[k] = utilArrayFlatten(sidedArr.map(sidedSegments));
+
+            directionalComboData[k] = getDirectionalComboLayerData(k);
         });
 
 
@@ -323,6 +345,13 @@ export function svgLines(projection, context) {
                 function marker(d) {
                     var category = graph.entity(d.id).sidednessIdentifier();
                     return 'url(#ideditor-sided-marker-' + category + ')';
+                }
+            );
+            addMarkers(layergroup, 'directionalcombo', 'directional-combo-group', directionalComboData,
+                function marker() {
+                    const indicator = context.directionalComboIndicator && context.directionalComboIndicator();
+                    const side = indicator && indicator.side || 'right';
+                    return 'url(#ideditor-directionalcombo-marker-' + side + ')';
                 }
             );
         });
