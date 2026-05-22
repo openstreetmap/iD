@@ -257,7 +257,6 @@ export function svgLines(projection, context) {
             const indicator = context.directionalComboIndicator && context.directionalComboIndicator();
             if (!indicator || !indicator.entityIDs || !indicator.entityIDs.length) return [];
 
-            const projection = context.projection;
             const straightEntityIDs = indicator.entityIDs.filter(function(id) {
                 const entity = graph.hasEntity(id);
                 if (!entity || entity.geometry(graph) !== 'line') return false;
