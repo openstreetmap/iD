@@ -1,8 +1,8 @@
 import { deepEqual } from 'fast-equals';
 import { bisector as d3_bisector } from 'd3-array';
+import { svgPath, svgSegmentWay, svgRelationMemberTags } from './helpers';
 
 import { osmEntity } from '../osm';
-import { svgPath, svgSegmentWay } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { svgTagPattern } from './tag_pattern';
 
@@ -94,7 +94,19 @@ export function svgAreas(projection, context) {
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
-            if (entity.geometry(graph) !== 'area') continue;
+            // Skip non-area geometries
+        if (entity.geometry(graph) !== 'area') continue;
+
+        // Boundary relation members should render as lines
+        var parents = graph.parentRelations(entity);
+        var isBoundaryMember = parents.some(function(relation) {
+            return relation.tags && (
+                relation.tags.type === 'boundary' ||
+                relation.tags.boundary
+            );
+        });
+
+        if (isBoundaryMember) continue;
             if (!areas[entity.id]) {
                 areas[entity.id] = {
                     entity: entity,
@@ -193,7 +205,7 @@ export function svgAreas(projection, context) {
                     base.entities[d.id] &&
                     !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
             })
-            .call(svgTagClasses())
+            .call(svgTagClasses().tags(svgRelationMemberTags(graph)))
             .attr('d', path);
 
 
