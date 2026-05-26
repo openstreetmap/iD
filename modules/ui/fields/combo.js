@@ -33,8 +33,7 @@ export function uiFieldCombo(field, context) {
     var _allowCustomValues = field.type !== 'manyCombo' && field.customValues !== false;
     var _snake_case = (field.snake_case || (field.snake_case === undefined));
     var _combobox = uiCombobox(context, 'combo-' + field.safeid)
-        .caseSensitive(field.caseSensitive)
-        .minItems(1);
+        .caseSensitive(field.caseSensitive);
     var _container = d3_select(null);
     var _inputWrap = d3_select(null);
     var _input = d3_select(null);

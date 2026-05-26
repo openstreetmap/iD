@@ -26,7 +26,7 @@ export function uiCombobox(context, klass) {
     var _canAutocomplete = true;
     var _caseSensitive = false;
     var _cancelFetch = false;
-    var _minItems = 2;
+    var _minItems = 1;
     var _tDown = 0;
     var _mouseEnterHandler, _mouseLeaveHandler;
 

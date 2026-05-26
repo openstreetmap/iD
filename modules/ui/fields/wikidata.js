@@ -26,8 +26,7 @@ export function uiFieldWikidata(field, context) {
     var _hintKey = field.key === 'wikidata' ? 'name' : field.key.split(':')[0];
 
     var combobox = uiCombobox(context, 'combo-' + field.safeid)
-        .caseSensitive(true)
-        .minItems(1);
+        .caseSensitive(true);
 
 
     function wiki(selection) {
