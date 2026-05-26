@@ -1,5 +1,3 @@
-import { utilEditDistance, utilEditDistanceSubstring } from '../../../modules/util/util';
-
 describe('iD.util', function() {
 
     describe('utilGetAllNodes', function() {
@@ -143,41 +141,41 @@ describe('iD.util', function() {
 
     describe('utilEditDistance', function() {
         it('returns zero for same strings', function() {
-            expect(utilEditDistance('foo', 'foo')).to.eql(0);
+            expect(iD.utilEditDistance('foo', 'foo')).to.eql(0);
         });
 
         it('reports an insertion of 1', function() {
-            expect(utilEditDistance('foo', 'fooa')).to.eql(1);
+            expect(iD.utilEditDistance('foo', 'fooa')).to.eql(1);
         });
 
         it('reports a replacement of 1', function() {
-            expect(utilEditDistance('foob', 'fooa')).to.eql(1);
+            expect(iD.utilEditDistance('foob', 'fooa')).to.eql(1);
         });
 
         it('does not fail on empty input', function() {
-            expect(utilEditDistance('', '')).to.eql(0);
+            expect(iD.utilEditDistance('', '')).to.eql(0);
         });
     });
 
-    describe('utilEditDistanceSubstring', function() {
+    describe('utilEditDistance, for substring', function() {
         it('returns zero for same strings', function() {
-            expect(utilEditDistanceSubstring('foo', 'foo')).to.eql(0);
+            expect(iD.utilEditDistance('foo', 'foo', {substring: true})).to.eql(0);
         });
 
         it('returns zero for exact substring match', function() {
-            expect(utilEditDistanceSubstring('foo', 'asd foo bar')).to.eql(0);
+            expect(iD.utilEditDistance('foo', 'asd foo bar', {substring: true})).to.eql(0);
         });
 
         it('reports an insertion of 1', function() {
-            expect(utilEditDistanceSubstring('fooa', 'asd fo1oa fasd')).to.eql(1);
+            expect(iD.utilEditDistance('fooa', 'asd fo1oa fasd', {substring: true})).to.eql(1);
         });
 
         it('reports a replacement of 1', function() {
-            expect(utilEditDistanceSubstring('foob', 'asd fooa fasd')).to.eql(1);
+            expect(iD.utilEditDistance('foob', 'asd fooa fasd', {substring: true})).to.eql(1);
         });
 
         it('does not fail on empty input', function() {
-            expect(utilEditDistanceSubstring('', '')).to.eql(0);
+            expect(iD.utilEditDistance('', '', {substring: true})).to.eql(0);
         });
 
         it.each([
@@ -191,7 +189,7 @@ describe('iD.util', function() {
             ['cofeesho', 2],
             ['cofeeshop', 2]
         ])('while (mis)typing', function(str, expected) {
-            expect(utilEditDistanceSubstring(str, 'Coffee Shop')).to.eql(expected);
+            expect(iD.utilEditDistance(str, 'Coffee Shop', {substring: true})).to.eql(expected);
         });
     });
 

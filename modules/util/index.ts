@@ -20,7 +20,6 @@ export { utilDisplayNameForPath } from './util';
 export { utilDisplayType } from './util';
 export { utilEntityRoot } from './util';
 export { utilEditDistance } from './util';
-export { utilEditDistanceSubstring } from './util';
 export { utilEntityAndDeepMemberIDs } from './util';
 export { utilEntityOrMemberSelector } from './util';
 export { utilEntityOrDeepMemberSelector } from './util';

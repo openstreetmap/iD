@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { utilEditDistanceSubstring, utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
+import { utilEditDistance, utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 
 
 // This code assumes that the combobox values will not have duplicate entries.
@@ -17,7 +17,7 @@ var _comboHideTimerID;
 
 export function fuzzyMatch(search, string) {
     const numAllowedTypos = Math.floor(search.length / 4);
-    if (utilEditDistanceSubstring(search, string) <= numAllowedTypos) {
+    if (utilEditDistance(search, string, {substring: true}) <= numAllowedTypos) {
         return true;
     }
 }
