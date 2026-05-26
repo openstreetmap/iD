@@ -395,8 +395,8 @@ export function uiFieldCombo(field, context) {
             const search  = q.toLowerCase();
             if (value.includes(search)) return true;
             if (key.includes(search)) return true;
-            if (fuzzyMatch(search, value)) return true;
-            if (fuzzyMatch(search, key)) return true;
+            if (d.klass !== 'raw-option' && fuzzyMatch(search, value)) return true;
+            if (d.klass !== 'raw-option' && fuzzyMatch(search, key)) return true;
             return false;
         };
         if (hasStaticValues()) {
