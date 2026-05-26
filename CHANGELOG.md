@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Make tags like `contact:instagram` clickable if they contain a plain username, or a full URL ([#12306], thanks [@k-yle])
+* Show suggestions in combobox dropdown also when the entered text contains a few typos ([#8802])
 #### :scissors: Operations
 #### :camera: Street-Level
 * Add high-resolution toggle for Mapilio photo viewer ([#12353], thanks [@sezerbozbiyik])
@@ -59,6 +60,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Remove redundant software dependencies to reduce the amount of the code that is bundled with iD ([#11634], [#12307], thanks [@k-yle])
 * Update name-suggestion-index to v7.2 ([#12337], thanks [@bjornstar])
 
+[#8802]: https://github.com/openstreetmap/iD/issues/8802
 [#8848]: https://github.com/openstreetmap/iD/issues/8848
 [#11634]: https://github.com/openstreetmap/iD/pull/11634
 [#12297]: https://github.com/openstreetmap/iD/issues/12297
