@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Make tags like `contact:instagram` clickable if they contain a plain username, or a full URL ([#12306], thanks [@k-yle])
+* Render the `side` arrow of cyclist waiting aid features ([#12374], thanks [@RudyTheDev])
 #### :scissors: Operations
 #### :camera: Street-Level
 * Add high-resolution toggle for Mapilio photo viewer ([#12353], thanks [@sezerbozbiyik])
@@ -69,6 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12321]: https://github.com/openstreetmap/iD/pull/12321
 [#12337]: https://github.com/openstreetmap/iD/issues/12337
 [#12353]: https://github.com/openstreetmap/iD/pull/12353
+[#12374]: https://github.com/openstreetmap/iD/pull/12374
 
 
 # 2.40.0
