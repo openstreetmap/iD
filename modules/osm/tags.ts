@@ -317,7 +317,7 @@ export const osmRailwayTrackTagValues: Record<TagValue, true> = {
 
 // "waterway" tag values for line features representing water flow
 export const osmFlowingWaterwayTagValues: Record<string, true> = {
-    canal: true, ditch: true, drain: true, fish_pass: true, flowline: true, river: true, stream: true, tidal_channel: true
+    canal: true, ditch: true, drain: true, fish_pass: true, flowline: true, river: true, stream: true, tidal_channel: true, pressurised: true
 };
 
 // Tag values that represent actual land use (areas)
