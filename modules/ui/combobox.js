@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
+import { utilEditDistanceSubstring, utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 
 
 // This code assumes that the combobox values will not have duplicate entries.
@@ -14,6 +14,13 @@ import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 //   }, ...]
 
 var _comboHideTimerID;
+
+export function fuzzyMatch(search, string) {
+    const numAllowedTypos = Math.floor(search.length / 4);
+    if (utilEditDistanceSubstring(search, string) <= numAllowedTypos) {
+        return true;
+    }
+}
 
 export function uiCombobox(context, klass) {
     var dispatch = d3_dispatch('accept', 'cancel', 'update');
@@ -31,6 +38,7 @@ export function uiCombobox(context, klass) {
     var _mouseEnterHandler, _mouseLeaveHandler;
 
     var _fetcher = function(val, cb) {
+        val = val.toLowerCase();
         cb(_data.filter(function(d) {
             var terms = d.terms || [];
             terms.push(d.value);
@@ -38,10 +46,12 @@ export function uiCombobox(context, klass) {
                 terms.push(d.key);
             }
             return terms.some(function(term) {
-                return term
+                term = term
                     .toString()
-                    .toLowerCase()
-                    .indexOf(val.toLowerCase()) !== -1;
+                    .toLowerCase();
+                if (term.indexOf(val.toLowerCase()) !== -1) return true;
+                if (fuzzyMatch(val, term)) return true;
+                return false;
             });
         }));
     };

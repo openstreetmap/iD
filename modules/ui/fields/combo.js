@@ -6,11 +6,11 @@ import * as countryCoder from '@rapideditor/country-coder';
 import { fileFetcher } from '../../core/file_fetcher';
 import { localizer, t } from '../../core/localizer';
 import { services } from '../../services';
-import { uiCombobox } from '../combobox';
+import { fuzzyMatch, uiCombobox } from '../combobox';
 import { svgIcon } from '../../svg/icon';
 
 import { utilKeybinding } from '../../util/keybinding';
-import { utilArrayUniq, utilDetect, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
+import { utilArrayUniq, utilDetect, utilEditDistanceSubstring, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
 import { uiLengthIndicator } from '../length_indicator';
 import { deprecatedTagValuesByKey } from '../../osm/deprecated';
 import { osmIsoCountryKeys } from '../../osm/tags';
@@ -389,7 +389,16 @@ export function uiFieldCombo(field, context) {
 
 
     function setTaginfoValues(q, callback) {
-        var queryFilter = d => d.value.toLowerCase().includes(q.toLowerCase()) || d.key.toLowerCase().includes(q.toLowerCase());
+        var queryFilter = d => {
+            const value = d.value.toLowerCase();
+            const key = d.key.toLowerCase();
+            const search  = q.toLowerCase();
+            if (value.includes(search)) return true;
+            if (key.includes(search)) return true;
+            if (fuzzyMatch(search, value)) return true;
+            if (fuzzyMatch(search, key)) return true;
+            return false;
+        };
         if (hasStaticValues()) {
             setStaticValues(callback, queryFilter);
 

@@ -1,3 +1,5 @@
+import { utilEditDistance, utilEditDistanceSubstring } from '../../../modules/util/util';
+
 describe('iD.util', function() {
 
     describe('utilGetAllNodes', function() {
@@ -141,19 +143,55 @@ describe('iD.util', function() {
 
     describe('utilEditDistance', function() {
         it('returns zero for same strings', function() {
-            expect(iD.utilEditDistance('foo', 'foo')).to.eql(0);
+            expect(utilEditDistance('foo', 'foo')).to.eql(0);
         });
 
         it('reports an insertion of 1', function() {
-            expect(iD.utilEditDistance('foo', 'fooa')).to.eql(1);
+            expect(utilEditDistance('foo', 'fooa')).to.eql(1);
         });
 
         it('reports a replacement of 1', function() {
-            expect(iD.utilEditDistance('foob', 'fooa')).to.eql(1);
+            expect(utilEditDistance('foob', 'fooa')).to.eql(1);
         });
 
         it('does not fail on empty input', function() {
-            expect(iD.utilEditDistance('', '')).to.eql(0);
+            expect(utilEditDistance('', '')).to.eql(0);
+        });
+    });
+
+    describe('utilEditDistanceSubstring', function() {
+        it('returns zero for same strings', function() {
+            expect(utilEditDistanceSubstring('foo', 'foo')).to.eql(0);
+        });
+
+        it('returns zero for exact substring match', function() {
+            expect(utilEditDistanceSubstring('foo', 'asd foo bar')).to.eql(0);
+        });
+
+        it('reports an insertion of 1', function() {
+            expect(utilEditDistanceSubstring('fooa', 'asd fo1oa fasd')).to.eql(1);
+        });
+
+        it('reports a replacement of 1', function() {
+            expect(utilEditDistanceSubstring('foob', 'asd fooa fasd')).to.eql(1);
+        });
+
+        it('does not fail on empty input', function() {
+            expect(utilEditDistanceSubstring('', '')).to.eql(0);
+        });
+
+        it.each([
+            ['c', 0],
+            ['co', 0],
+            ['cof', 0],
+            ['cofe', 1],
+            ['cofee', 1],
+            ['cofees', 2],
+            ['cofeesh', 2],
+            ['cofeesho', 2],
+            ['cofeeshop', 2]
+        ])('while (mis)typing', function(str, expected) {
+            expect(utilEditDistanceSubstring(str, 'Coffee Shop')).to.eql(expected);
         });
     });
 
