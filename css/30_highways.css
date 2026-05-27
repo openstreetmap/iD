@@ -600,8 +600,8 @@ path.line.casing.tag-highway-path.tag-bicycle-designated.tag-foot-designated:not
 }
 path.line.stroke.tag-highway-cycleway.tag-foot-designated,
 path.line.stroke.tag-highway-path.tag-bicycle-designated.tag-foot-designated,
-.preset-icon-container path.casing.tag-highway-cycleway.tag-foot-designated,
-.preset-icon-container path.casing.tag-highway-path.tag-bicycle-designated.tag-foot-designated {
+.preset-icon-container path.line.casing.tag-highway-cycleway.tag-foot-designated:not(.tag-crossing),
+.preset-icon-container path.line.casing.tag-highway-path.tag-bicycle-designated.tag-foot-designated:not(.tag-crossing) {
     stroke: #b458ed;
 }
 .preset-icon-container path.stroke.tag-highway-cycleway.tag-foot-designated:not(.tag-crossing),

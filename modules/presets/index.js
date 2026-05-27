@@ -472,6 +472,11 @@ export function presetIndex() {
   };
 
 
+  _this.getPresets = () => {
+    return _presets;
+  };
+
+
   function RibbonItem(preset, source) {
     let item = {};
     item.preset = preset;

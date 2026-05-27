@@ -11,7 +11,7 @@ import { fileFetcher } from '../core/file_fetcher';
 import { geoMetersToOffset, geoOffsetToMeters, geoExtent } from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
-import { utilStringQs } from '../util';
+import { utilAesDecrypt, utilStringQs } from '../util';
 import { utilRebind } from '../util/rebind';
 import { patchHash } from '../behavior';
 
@@ -32,7 +32,7 @@ export function rendererBackground(context) {
 
   function ensureImageryIndex() {
     return fileFetcher.get('imagery')
-      .then(sources => {
+      .then(async sources => {
         if (_imageryIndex) return _imageryIndex;
 
         _imageryIndex = {
@@ -60,6 +60,12 @@ export function rendererBackground(context) {
           return feature;
 
         }).filter(Boolean);
+
+        for (const source of features) {
+          if (source.encrypted) {
+            source.template = await utilAesDecrypt(source.template);
+          }
+        }
 
         _imageryIndex.query = whichPolygon({ type: 'FeatureCollection', features: features });
 

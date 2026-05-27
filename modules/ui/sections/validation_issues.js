@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit/compat';
+import { debounce, sortBy } from 'es-toolkit';
 import {
     select as d3_select
 } from 'd3-selection';
@@ -10,7 +10,7 @@ import { t } from '../../core/localizer';
 import { utilHighlightEntities } from '../../util';
 import { uiSection } from '../section';
 import { validationIssue } from '../../core/validation';
-import { sortBy } from 'es-toolkit';
+
 
 export function uiSectionValidationIssues(id, severity, context) {
 
@@ -46,7 +46,7 @@ export function uiSectionValidationIssues(id, severity, context) {
         // finally: cut off at a maximum 1000 entries
         const center = context.map().center();
         const graph = context.graph();
-        const rules = sortBy(context.validator().getRuleKeys(), [
+        const rules = sortBy(context.validator().getRuleKeys().filter(key => key !== 'maprules'), [
             rule => t(`issues.${rule}.title`)
         ]);
         const withDistance = _issues.map(issue => {

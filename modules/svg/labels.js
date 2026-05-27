@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit/compat';
+import { throttle } from 'es-toolkit';
 
 import { geoPath as d3_geoPath } from 'd3-geo';
 import RBush from 'rbush';

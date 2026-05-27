@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit/compat';
+import { throttle } from 'es-toolkit';
 
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import {

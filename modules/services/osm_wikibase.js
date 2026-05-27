@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit/compat';
+import { debounce } from 'es-toolkit';
 
 import { json as d3_json } from 'd3-fetch';
 
@@ -12,7 +12,7 @@ var _wikibaseCache = {};
 var _localeIDs = { en: false };
 
 
-var debouncedRequest = debounce(request, 500, { leading: false });
+var debouncedRequest = debounce(request, 500, { edges: [ 'trailing' ] });
 
 function request(url, callback) {
     if (_inflight[url]) return;

@@ -146,13 +146,15 @@ function loadNextTilePage(which, url, tile) {
  */
 function getBubbles(url, tile, callback) {
   let rect = tile.extent.rectangle();
-  let urlForRequest = url
-    .replace('{key}', bubbleAppKey)
-    .replace('{bbox}', [rect[1], rect[0], rect[3], rect[2]].join(','))
-    .replace('{count}', maxResults);
-
     const controller = new AbortController();
-    fetch(urlForRequest, { signal: controller.signal })
+
+    bubbleAppKey
+      .then(key => url
+        .replace('{key}', key)
+        .replace('{bbox}', [rect[1], rect[0], rect[3], rect[2]].join(','))
+        .replace('{count}', maxResults)
+      )
+      .then(url => fetch(url, { signal: controller.signal }))
       .then(function(response) {
         if (!response.ok) {
           throw new Error(response.status + ' ' + response.statusText);

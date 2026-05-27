@@ -1,4 +1,4 @@
-import { color as d3_color } from 'd3';
+import { color as d3_color, type RGBColor } from 'd3';
 import { remove as removeDiacritics } from 'diacritics';
 
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
@@ -7,21 +7,22 @@ import { t, localizer } from '../core/localizer';
 import { utilArrayUnion } from './array';
 import { utilDetect } from './detect';
 import { geoExtent } from '../geo/extent';
+import type { coreGraph } from '../core';
+import type { OsmNode } from '../osm/node';
 
 
-export function utilTagText(entity) {
-    var obj = (entity && entity.tags) || {};
+export function utilTagText(entity: iD.OsmEntity): string {
+    const obj = (entity && entity.tags) || {};
     return Object.keys(obj)
-        .map(function(k) { return k + '=' + obj[k]; })
+        .map(k => k + '=' + obj[k])
         .join(', ');
 }
 
 
-export function utilTotalExtent(array, graph) {
-    var extent = geoExtent();
-    var val, entity;
-    for (var i = 0; i < array.length; i++) {
-        val = array[i];
+export function utilTotalExtent(array: EntityID[] | iD.OsmEntity[], graph: coreGraph): geoExtent {
+    const extent = geoExtent();
+    let entity : iD.OsmEntity | undefined;
+    for (const val of array) {
         entity = typeof val === 'string' ? graph.hasEntity(val) : val;
         if (entity) {
             extent._extend(entity.extent(graph));
@@ -30,18 +31,19 @@ export function utilTotalExtent(array, graph) {
     return extent;
 }
 
-/**
- * @typedef {{ type: '-' | '+'; key: string; oldVal: string; newVal: string; display: string; }} TagDiff
- * @param {Tags} oldTags
- * @param {Tags} newTags
- */
-export function utilTagDiff(oldTags, newTags) {
-    /** @type {TagDiff[]} */
-    var tagDiff = [];
-    var keys = utilArrayUnion(Object.keys(oldTags), Object.keys(newTags)).sort();
+export type TagDiff = {
+    type: '-' | '+';
+    key: string;
+    oldVal: string;
+    newVal: string;
+    display: string;
+};
+export function utilTagDiff(oldTags: Tags, newTags: Tags): TagDiff[] {
+    const tagDiff : TagDiff[] = [];
+    const keys = utilArrayUnion(Object.keys(oldTags), Object.keys(newTags)).sort();
     keys.forEach(function(k) {
-        var oldVal = oldTags[k];
-        var newVal = newTags[k];
+        const oldVal = oldTags[k];
+        const newVal = newTags[k];
 
         if ((oldVal || oldVal === '') && (newVal === undefined || newVal !== oldVal)) {
             tagDiff.push({
@@ -66,7 +68,7 @@ export function utilTagDiff(oldTags, newTags) {
 }
 
 
-export function utilEntitySelector(ids) {
+export function utilEntitySelector(ids: EntityID[]): string {
     return ids.length ? '.' + ids.join(',.') : 'nothing';
 }
 
@@ -74,18 +76,18 @@ export function utilEntitySelector(ids) {
 // returns an selector to select entity ids for:
 //  - entityIDs passed in
 //  - shallow descendant entityIDs for any of those entities that are relations
-export function utilEntityOrMemberSelector(ids, graph) {
-    var seen = new Set(ids);
+export function utilEntityOrMemberSelector(ids: EntityID[], graph: coreGraph) {
+    const seen = new Set(ids);
     ids.forEach(collectShallowDescendants);
     return utilEntitySelector(Array.from(seen));
 
-    function collectShallowDescendants(id) {
-        var entity = graph.hasEntity(id);
+    function collectShallowDescendants(id: EntityID) {
+        const entity = graph.hasEntity(id);
         if (!entity || entity.type !== 'relation') return;
 
         entity.members
-            .map(function(member) { return member.id; })
-            .forEach(function(id) { seen.add(id); });
+            .map(member => member.id)
+            .forEach(id => seen.add(id));
     }
 }
 
@@ -93,7 +95,7 @@ export function utilEntityOrMemberSelector(ids, graph) {
 // returns an selector to select entity ids for:
 //  - entityIDs passed in
 //  - deep descendant entityIDs for any of those entities that are relations
-export function utilEntityOrDeepMemberSelector(ids, graph) {
+export function utilEntityOrDeepMemberSelector(ids: EntityID[], graph: coreGraph): string {
     return utilEntitySelector(utilEntityAndDeepMemberIDs(ids, graph));
 }
 
@@ -101,34 +103,34 @@ export function utilEntityOrDeepMemberSelector(ids, graph) {
 // returns an selector to select entity ids for:
 //  - entityIDs passed in
 //  - deep descendant entityIDs for any of those entities that are relations
-export function utilEntityAndDeepMemberIDs(ids, graph) {
-    var seen = new Set();
+export function utilEntityAndDeepMemberIDs(ids: EntityID[], graph: coreGraph): EntityID[] {
+    const seen: Set<EntityID> = new Set();
     ids.forEach(collectDeepDescendants);
     return Array.from(seen);
 
-    function collectDeepDescendants(id) {
+    function collectDeepDescendants(id: EntityID) {
         if (seen.has(id)) return;
         seen.add(id);
 
-        var entity = graph.hasEntity(id);
+        const entity = graph.hasEntity(id);
         if (!entity || entity.type !== 'relation') return;
 
         entity.members
-            .map(function(member) { return member.id; })
+            .map(member => member.id)
             .forEach(collectDeepDescendants);   // recurse
     }
 }
 
 // returns an selector to select entity ids for:
 //  - deep descendant entityIDs for any of those entities that are relations
-export function utilDeepMemberSelector(ids, graph, skipMultipolgonMembers) {
-    var idsSet = new Set(ids);
-    var seen = new Set();
-    var returners = new Set();
+export function utilDeepMemberSelector(ids: EntityID[], graph: coreGraph, skipMultipolygonMembers: boolean): string {
+    const idsSet = new Set(ids);
+    const seen: Set<EntityID> = new Set();
+    const returners: Set<EntityID> = new Set();
     ids.forEach(collectDeepDescendants);
     return utilEntitySelector(Array.from(returners));
 
-    function collectDeepDescendants(id) {
+    function collectDeepDescendants(id: EntityID) {
         if (seen.has(id)) return;
         seen.add(id);
 
@@ -136,18 +138,18 @@ export function utilDeepMemberSelector(ids, graph, skipMultipolgonMembers) {
             returners.add(id);
         }
 
-        var entity = graph.hasEntity(id);
+        const entity = graph.hasEntity(id);
         if (!entity || entity.type !== 'relation') return;
-        if (skipMultipolgonMembers && entity.isMultipolygon()) return;
+        if (skipMultipolygonMembers && entity.isMultipolygon()) return;
         entity.members
-            .map(function(member) { return member.id; })
+            .map(member => member.id)
             .forEach(collectDeepDescendants);   // recurse
     }
 }
 
 
 // Adds or removes highlight styling for the specified entities
-export function utilHighlightEntities(ids, highlighted, context) {
+export function utilHighlightEntities(ids: EntityID[], highlighted: boolean, context: iD.Context): void {
     context.surface()
         .selectAll(utilEntityOrDeepMemberSelector(ids, context.graph()))
         .classed('highlighted', highlighted);
@@ -158,35 +160,35 @@ export function utilHighlightEntities(ids, highlighted, context) {
 //  - nodes for any nodeIDs passed in
 //  - child nodes of any wayIDs passed in
 //  - descendant member and child nodes of relationIDs passed in
-export function utilGetAllNodes(ids, graph) {
-    var seen = new Set();
-    var nodes = new Set();
+export function utilGetAllNodes(ids: EntityID[], graph: coreGraph): OsmNode[] {
+    const seen: Set<EntityID> = new Set();
+    const nodes: Set<OsmNode> = new Set<OsmNode>();
 
     ids.forEach(collectNodes);
-    return Array.from(nodes);
+    return Array.from<OsmNode>(nodes);
 
-    function collectNodes(id) {
+    function collectNodes(id: EntityID) {
         if (seen.has(id)) return;
         seen.add(id);
 
-        var entity = graph.hasEntity(id);
+        const entity = graph.hasEntity(id);
         if (!entity) return;
 
         if (entity.type === 'node') {
-            nodes.add(entity);
+            nodes.add(entity as OsmNode);
         } else if (entity.type === 'way') {
             entity.nodes.forEach(collectNodes);
         } else {
             entity.members
-                .map(function(member) { return member.id; })
+                .map(member => member.id)
                 .forEach(collectNodes);   // recurse
         }
     }
 }
 
 /**
- * @param {iD.OsmEntity} entity the entity to generate a display name for
- * @param {object} flags a set of flags to tweak the display name output:
+ * @param entity the entity to generate a display name for
+ * @param flags a set of flags to tweak the display name output:
  *             - hideNetwork: If true, the `network` tag will not be used
  *                            in the name to prevent it being shown twice
  *                            (see PR #8707#discussion_r712658175)
@@ -194,11 +196,15 @@ export function utilGetAllNodes(ids, graph) {
  *             - isMapLabel:  If true, this name is for a label on the map.
  *                            If falsy, it's for a label elsewhere in the UI.
  */
-export function utilDisplayName(entity, flags) {
-    var localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
-    var name = entity.tags[localizedNameKey] || entity.tags.name || '';
+export function utilDisplayName(entity: iD.OsmEntity, flags: {
+    hideNetwork?: boolean,
+    hideRef?: boolean,
+    isMapLabel?: boolean
+}): string {
+    const localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
+    const name = entity.tags[localizedNameKey] || entity.tags.name || '';
 
-    var tags = {
+    const tags = {
         direction: entity.tags.direction,
         from: entity.tags.from,
         name,
@@ -219,7 +225,7 @@ export function utilDisplayName(entity, flags) {
         return name;
     }
 
-    var keyComponents = [];
+    const keyComponents = [];
 
     if (tags.network) {
         keyComponents.push('network');
@@ -300,10 +306,10 @@ export function utilDisplayName(entity, flags) {
 }
 
 
-export function utilDisplayNameForPath(entity) {
-    var name = utilDisplayName(entity, { isMapLabel: true });
-    var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
-    var isNewChromium = Number(utilDetect().version.split('.')[0]) >= 96.0;
+export function utilDisplayNameForPath(entity: iD.OsmEntity): string {
+    let name = utilDisplayName(entity, { isMapLabel: true });
+    const isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
+    const isNewChromium = Number(utilDetect().version.split('.')[0]) >= 96.0;
 
     if (!isFirefox && !isNewChromium && name && rtlRegex.test(name)) {
         name = fixRTLTextForSvg(name);
@@ -313,21 +319,22 @@ export function utilDisplayNameForPath(entity) {
 }
 
 
-export function utilDisplayType(id) {
-    return {
-        n: t('inspector.node'),
-        w: t('inspector.way'),
-        r: t('inspector.relation')
-    }[id.charAt(0)];
+export function utilDisplayType(id: EntityID): string {
+    switch (id.charAt(0)) {
+        case 'n': return t('inspector.node');
+        case 'w': return t('inspector.way');
+        case 'r': return t('inspector.relation');
+        default: throw new Error('entity id with invalid or missing type');
+    }
 }
 
 
-export function utilEntityRoot(entityType) {
-    return {
-        node: 'n',
-        way: 'w',
-        relation: 'r'
-    }[entityType];
+export function utilEntityRoot(entityType: 'node' | 'way' | 'relation'): 'n' | 'w' | 'r' {
+    switch (entityType) {
+        case 'node': return 'n';
+        case 'way': return 'w';
+        case 'relation': return 'r';
+    }
 }
 
 
@@ -349,31 +356,30 @@ export function utilEntityRoot(entityType) {
 //   service: [ 'driveway', 'parking_aisle' ],
 //   width: [ '3', undefined ]
 // }
-export function utilCombinedTags(entityIDs, graph) {
+export function utilCombinedTags(entityIDs: EntityID[], graph: coreGraph): TagsMulti {
+    const tags: TagsMulti = {};
+    const tagCounts: { [key: TagKey]: number } = {};
+    const allKeys: Set<TagKey> = new Set();
+    const allTags: Tags[] = [];
 
-    var tags = {};
-    var tagCounts = {};
-    var allKeys = new Set();
-    var allTags = [];
+    const entities = entityIDs
+        .map(entityID => graph.hasEntity(entityID))
+        .filter(x => x !== undefined);
 
-    var entities = entityIDs.map(function(entityID) {
-        return graph.hasEntity(entityID);
-    }).filter(Boolean);
 
     // gather the aggregate keys
-    entities.forEach(function(entity) {
-        var keys = Object.keys(entity.tags).filter(Boolean);
+    for (const entity of entities) {
+        const keys = Object.keys(entity.tags).filter(Boolean);
         keys.forEach(function(key) {
             allKeys.add(key);
         });
-    });
+    }
 
-    entities.forEach(function(entity) {
+    for (const entity of entities) {
         allTags.push(entity.tags);
 
-        allKeys.forEach(function(key) {
-
-            var value = entity.tags[key]; // purposely allow `undefined`
+        for (const key of allKeys) {
+            const value = entity.tags[key]; // purposely allow `undefined`
 
             if (!tags.hasOwnProperty(key)) {
                 // first value, set as raw
@@ -392,19 +398,19 @@ export function utilCombinedTags(entityIDs, graph) {
                 }
             }
 
-            var tagHash = key + '=' + value;
+            const tagHash = key + '=' + value;
             if (!tagCounts[tagHash]) tagCounts[tagHash] = 0;
             tagCounts[tagHash] += 1;
-        });
-    });
+        }
+    }
 
     for (const key in tags) {
         if (!Array.isArray(tags[key])) continue;
 
         // sort values by frequency then alphabetically
         tags[key] = tags[key].sort(function(val1, val2) {
-            var count2 = tagCounts[key + '=' + val2];
-            var count1 = tagCounts[key + '=' + val1];
+            const count2 = tagCounts[key + '=' + val2];
+            const count1 = tagCounts[key + '=' + val1];
             if (count2 !== count1) {
                 return count2 - count1;
             }
@@ -415,18 +421,17 @@ export function utilCombinedTags(entityIDs, graph) {
         });
     }
 
-    tags = Object.defineProperty(tags, Symbol.for('allTags'), { enumerable: false, value: allTags });
-    return tags;
+    return Object.defineProperty(tags, Symbol.for('allTags'), { enumerable: false, value: allTags });
 }
 
 
-export function utilStringQs(str) {
+export function utilStringQs(str: string): {[k: string]: string} {
     str = str.replace(/^[#?]{0,2}/, ''); // advance past any leading '?' or '#' characters
     return Object.fromEntries(new URLSearchParams(str));
 }
 
 
-export function utilQsString(obj, softEncode) {
+export function utilQsString(obj: {[k: string]: string}, softEncode: boolean) {
     let str = new URLSearchParams(obj).toString();
     if (softEncode) {
         // for better readability of URL hashes: optionally
@@ -439,11 +444,11 @@ export function utilQsString(obj, softEncode) {
 }
 
 
-export function utilPrefixDOMProperty(property) {
-    var prefixes = ['webkit', 'ms', 'moz', 'o'];
-    var i = -1;
-    var n = prefixes.length;
-    var s = document.body;
+export function utilPrefixDOMProperty(property: string): string | false {
+    const prefixes = ['webkit', 'ms', 'moz', 'o'];
+    let i = -1;
+    const n = prefixes.length;
+    const s = document.body;
 
     if (property in s) return property;
 
@@ -459,11 +464,11 @@ export function utilPrefixDOMProperty(property) {
 }
 
 
-export function utilPrefixCSSProperty(property) {
-    var prefixes = ['webkit', 'ms', 'Moz', 'O'];
-    var i = -1;
-    var n = prefixes.length;
-    var s = document.body.style;
+export function utilPrefixCSSProperty(property: string): string | false {
+    const prefixes = ['webkit', 'ms', 'Moz', 'O'];
+    let i = -1;
+    const n = prefixes.length;
+    const s = document.body.style;
 
     if (property.toLowerCase() in s) {
         return property.toLowerCase();
@@ -479,11 +484,11 @@ export function utilPrefixCSSProperty(property) {
 }
 
 
-var transformProperty;
-export function utilSetTransform(el, x, y, scale) {
+let transformProperty;
+export function utilSetTransform(el: d3.Selection, x: number, y: number, scale: number): d3.Selection {
     transformProperty ||= utilPrefixCSSProperty('Transform');
-    var prop = transformProperty;
-    var translate = utilDetect().opera ? 'translate('   + x + 'px,' + y + 'px)'
+    const prop = transformProperty;
+    const translate = utilDetect().opera ? 'translate('   + x + 'px,' + y + 'px)'
         : 'translate3d(' + x + 'px,' + y + 'px,0)';
     return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));
 }
@@ -492,17 +497,16 @@ export function utilSetTransform(el, x, y, scale) {
 // Calculates Levenshtein distance between two strings
 // see:  https://en.wikipedia.org/wiki/Levenshtein_distance
 // first converts the strings to lowercase and replaces diacritic marks with ascii equivalents.
-export function utilEditDistance(a, b) {
+export function utilEditDistance(a: string, b: string): number {
     a = removeDiacritics(a.toLowerCase());
     b = removeDiacritics(b.toLowerCase());
     if (a.length === 0) return b.length;
     if (b.length === 0) return a.length;
-    var matrix = [];
-    var i, j;
-    for (i = 0; i <= b.length; i++) { matrix[i] = [i]; }
-    for (j = 0; j <= a.length; j++) { matrix[0][j] = j; }
-    for (i = 1; i <= b.length; i++) {
-        for (j = 1; j <= a.length; j++) {
+    const matrix = [];
+    for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
+    for (let j = 0; j <= a.length; j++) { matrix[0][j] = j; }
+    for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
             if (b.charAt(i-1) === a.charAt(j-1)) {
                 matrix[i][j] = matrix[i-1][j-1];
             } else {
@@ -519,13 +523,13 @@ export function utilEditDistance(a, b) {
 // a d3.mouse-alike which
 // 1. Only works on HTML elements, not SVG
 // 2. Does not cause style recalculation
-export function utilFastMouse(container) {
-    var rect = container.getBoundingClientRect();
-    var rectLeft = rect.left;
-    var rectTop = rect.top;
-    var clientLeft = +container.clientLeft;
-    var clientTop = +container.clientTop;
-    return function(e) {
+export function utilFastMouse(container: HTMLElement) {
+    const rect = container.getBoundingClientRect();
+    const rectLeft = rect.left;
+    const rectTop = rect.top;
+    const clientLeft = +container.clientLeft;
+    const clientTop = +container.clientTop;
+    return function(e: MouseEvent) {
         return [
             e.clientX - rectLeft - clientLeft,
             e.clientY - rectTop - clientTop
@@ -534,24 +538,8 @@ export function utilFastMouse(container) {
 }
 
 
-export function utilAsyncMap(inputs, func, callback) {
-    var remaining = inputs.length;
-    var results = [];
-    var errors = [];
-
-    inputs.forEach(function(d, i) {
-        func(d, function done(err, data) {
-            errors[i] = err;
-            results[i] = data;
-            remaining--;
-            if (!remaining) callback(errors, results);
-        });
-    });
-}
-
-
 // wraps an index to an interval [0..length-1]
-export function utilWrap(index, length) {
+export function utilWrap(index: number, length: number): number {
     if (index < 0) {
         index += Math.ceil(-index/length)*length;
     }
@@ -562,19 +550,17 @@ export function utilWrap(index, length) {
 /**
  * a replacement for functor
  *
- * @param {*} value any value
- * @returns {Function} a function that returns that value or the value if it's a function
+ * @param value any value
+ * @returns a function that returns that value or the value if it's a function
  */
-export function utilFunctor(value) {
-    if (typeof value === 'function') return value;
-    return function() {
-        return value;
-    };
+export function utilFunctor<T>(value: T | (() => T)): () => T {
+    if (typeof value === 'function') return value as (() => T);
+    return () => value;
 }
 
 
-export function utilNoAuto(selection) {
-    var isText = (selection.size() && selection.node().tagName.toLowerCase() === 'textarea');
+export function utilNoAuto(selection: d3.Selection): d3.Selection {
+    const isText = (selection.size() && selection.node().tagName.toLowerCase() === 'textarea');
 
     return selection
         // assign 'new-password' even for non-password fields to prevent browsers (Chrome) ignoring 'off'
@@ -591,13 +577,13 @@ export function utilNoAuto(selection) {
 
 // https://stackoverflow.com/questions/194846/is-there-any-kind-of-hash-code-function-in-javascript
 // https://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
-export function utilHashcode(str) {
-    var hash = 0;
+export function utilHashcode(str: string): number {
+    let hash = 0;
     if (str.length === 0) {
         return hash;
     }
-    for (var i = 0; i < str.length; i++) {
-        var char = str.charCodeAt(i);
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
         hash = ((hash << 5) - hash) + char;
         hash = hash & hash; // Convert to 32bit integer
     }
@@ -606,40 +592,40 @@ export function utilHashcode(str) {
 
 // Returns version of `str` with all runs of special characters replaced by `_`;
 // suitable for HTML ids, classes, selectors, etc.
-export function utilSafeClassName(str) {
+export function utilSafeClassName(str: string): string {
     return str.toLowerCase().replace(/[^a-z0-9]+/g, '_');
 }
 
 // Returns string based on `val` that is highly unlikely to collide with an id
 // used previously or that's present elsewhere in the document. Useful for preventing
 // browser-provided autofills or when embedding iD on pages with unknown elements.
-export function utilUniqueDomId(val) {
+export function utilUniqueDomId(val: any): string {
     return 'ideditor-' + utilSafeClassName(val.toString()) + '-' + new Date().getTime().toString();
 }
 
 // Returns the length of `str` in unicode characters. This can be less than
 // `String.length()` since a single unicode character can be composed of multiple
 // JavaScript UTF-16 code units.
-export function utilUnicodeCharsCount(str) {
+export function utilUnicodeCharsCount(str: string): number {
     // Native ES2015 implementations of `Array.from` split strings into unicode characters
     return Array.from(str).length;
 }
 
 // Returns a new string representing `str` cut from its start to `limit` length
 // in unicode characters. Note that this runs the risk of splitting graphemes.
-export function utilUnicodeCharsTruncated(str, limit) {
+export function utilUnicodeCharsTruncated(str: string, limit: number): string {
     return Array.from(str).slice(0, limit).join('');
 }
 
-function toNumericID(id) {
-    var match = id.match(/^[cnwr](-?\d+)$/);
+function toNumericID(id: EntityID): number {
+    const match = id.match(/^[cnwr](-?\d+)$/);
     if (match) {
         return parseInt(match[1], 10);
     }
     return NaN;
 }
 
-function compareNumericIDs(left, right) {
+function compareNumericIDs(left: number, right: number): number {
     if (isNaN(left) && isNaN(right)) return -1;
     if (isNaN(left)) return 1;
     if (isNaN(right)) return -1;
@@ -651,7 +637,7 @@ function compareNumericIDs(left, right) {
 // Returns -1 if the first parameter ID is older than the second,
 // 1 if the second parameter is older, 0 if they are the same.
 // If both IDs are test IDs, the function returns -1.
-export function utilCompareIDs(left, right) {
+export function utilCompareIDs(left: EntityID, right: EntityID): number {
     return compareNumericIDs(toNumericID(left), toNumericID(right));
 }
 
@@ -659,16 +645,16 @@ export function utilCompareIDs(left, right) {
 // Database IDs (with positive numbers) before editor ones (with negative numbers).
 // Among each category, the closest number to 0 is the oldest.
 // Test IDs (any string that does not conform to OSM's ID scheme) are taken last.
-export function utilOldestID(ids) {
+export function utilOldestID(ids: EntityID[]): EntityID | undefined {
     if (ids.length === 0) {
         return undefined;
     }
 
-    var oldestIDIndex = 0;
-    var oldestID = toNumericID(ids[0]);
+    let oldestIDIndex = 0;
+    let oldestID = toNumericID(ids[0]);
 
-    for (var i = 1; i < ids.length; i++) {
-        var num = toNumericID(ids[i]);
+    for (let i = 1; i < ids.length; i++) {
+        const num = toNumericID(ids[i]);
 
         if (compareNumericIDs(oldestID, num) === 1) {
             oldestIDIndex = i;
@@ -680,7 +666,7 @@ export function utilOldestID(ids) {
 }
 
 // returns a normalized and truncated string to `maxChars` utf-8 characters
-export function utilCleanOsmString(val, maxChars) {
+export function utilCleanOsmString(val: any, maxChars: number) {
     // be lenient with input
     if (val === undefined || val === null) {
       val = '';
@@ -699,18 +685,18 @@ export function utilCleanOsmString(val, maxChars) {
 }
 
 // https://stackoverflow.com/a/70360753/1627467
-export function getLuma(color) {
-    const {r, g, b} = d3_color(color);
+export function getLuma(color: string): number {
+    const {r, g, b} = d3_color(color) as RGBColor;
     return 0.2999 * r + 0.587 * g + 0.114 * b;
 }
 
 /** @param {XMLHttpRequestBodyInit} input */
-export function utilGzip(input) {
+export function utilGzip(input: string) {
     // check if compression is supported natively
     if (!globalThis.CompressionStream) return undefined;
 
     try {
-        const stream = new Response(input).body.pipeThrough(
+        const stream = new Response(input).body!.pipeThrough(
             new CompressionStream('gzip')
         );
         return new Response(stream).blob();
@@ -721,8 +707,7 @@ export function utilGzip(input) {
     }
 }
 
-/** @param {string} url */
-export function utilIsValidURL(url, strict = false) {
+export function utilIsValidURL(url: string, strict = false): boolean {
     try {
         // First try strict WHATWG parsing
         const link = new URL(url);

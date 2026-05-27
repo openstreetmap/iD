@@ -390,7 +390,6 @@ export function uiSectionRawTagEditor(id, context) {
 
         if (Array.isArray(value.datum().value)) {
             value.call(uiCombobox(context, 'tag-value')
-                .minItems(1)
                 .fetcher(function(value, callback) {
                     var keyString = utilGetSetValue(key);
                     if (!_tags[keyString]) return;

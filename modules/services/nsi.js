@@ -1,4 +1,4 @@
-import { Matcher } from 'name-suggestion-index';
+import { Matcher, buildIDPresets } from 'name-suggestion-index';
 import { fileFetcher, locationManager } from '../core';
 import { presetManager } from '../presets';
 
@@ -52,9 +52,9 @@ function setNsiSources() {
     'nsi_dissolved': cdn + 'dist/wikidata/dissolved.min.json',
     'nsi_features': cdn + 'dist/json/featureCollection.min.json',
     'nsi_generics': cdn + 'dist/json/genericWords.min.json',
-    'nsi_presets': cdn + 'dist/presets/nsi-id-presets.min.json',
     'nsi_replacements': cdn + 'dist/json/replacements.min.json',
-    'nsi_trees': cdn + 'dist/json/trees.min.json'
+    'nsi_trees': cdn + 'dist/json/trees.min.json',
+    'nsi_wikidata': cdn + 'dist/wikidata/wikidata.min.json',
   };
 
   let fileMap = fileFetcher.fileMap();
@@ -70,18 +70,33 @@ function setNsiSources() {
 function loadNsiPresets() {
   return (
     Promise.all([
-      fileFetcher.get('nsi_presets'),
-      fileFetcher.get('nsi_features')
+      fileFetcher.get('nsi_data'),
+      fileFetcher.get('nsi_dissolved'),
+      fileFetcher.get('nsi_features'),
+      fileFetcher.get('nsi_wikidata'),
     ])
-    .then(vals => {
+    .then(([
+        nsi_data,
+        nsi_dissolved,
+        nsi_features,
+        nsi_wikidata
+    ]) => {
+      const nsiPresets = buildIDPresets(nsi_data.nsi, {
+        sourcePresets: presetManager.getPresets(),
+        wikidata: nsi_wikidata.wikidata,
+        dissolved: nsi_dissolved.dissolved,
+      }).presets;
+
       // Add `suggestion=true` to all the nsi presets
       // The preset json schema doesn't include it, but the iD code still uses it
-      Object.values(vals[0].presets).forEach(preset => preset.suggestion = true);
+      for (const preset of Object.values(nsiPresets)) {
+        preset.suggestion = true;
+      }
 
       // nsi does not specify *:wikipedia (anymore):
       // clean up previous values to prevent that the wikidata/wikipedia information
       // is going to be out of sync, see #9103
-      Object.values(vals[0].presets).forEach(preset => {
+      for (const preset of Object.values(nsiPresets)) {
         if (preset.tags['brand:wikidata']) {
           preset.removeTags = {'brand:wikipedia': '*', ...(preset.removeTags || preset.addTags || preset.tags)};
         }
@@ -91,11 +106,11 @@ function loadNsiPresets() {
         if (preset.tags['network:wikidata']) {
           preset.removeTags = {'network:wikipedia': '*', ...(preset.removeTags || preset.addTags || preset.tags)};
         }
-      });
+      }
 
       presetManager.merge({
-        presets: vals[0].presets,
-        featureCollection: vals[1]
+        presets: nsiPresets,
+        featureCollection: nsi_features
       });
     })
   );
@@ -113,81 +128,26 @@ function loadNsiData() {
       fileFetcher.get('nsi_replacements'),
       fileFetcher.get('nsi_trees')
     ])
-    .then(vals => {
+    .then(([
+        nsi_data,          // the raw name-suggestion-index data
+        nsi_dissolved,     // list of dissolved items
+        nsi_replacements,  // trivial old->new qid replacements
+        nsi_trees          // metadata about trees, main tags
+    ]) => {
       _nsi = {
-        data:          vals[0].nsi,            // the raw name-suggestion-index data
-        dissolved:     vals[1].dissolved,      // list of dissolved items
-        replacements:  vals[2].replacements,   // trivial old->new qid replacements
-        trees:         vals[3].trees,          // metadata about trees, main tags
-        kvt:           new Map(),              // Map (k -> Map (v -> t) )
-        qids:          new Map(),              // Map (wd/wp tag values -> qids)
-        ids:           new Map()               // Map (id -> NSI item)
+        data:          nsi_data.nsi,
+        dissolved:     nsi_dissolved.dissolved,
+        replacements:  nsi_replacements.replacements,
+        trees:         nsi_trees.trees,
+        kvt:           new Map(),  // Map (k -> Map (v -> t) )
+        qids:          new Map(),  // Map (wd/wp tag values -> qids)
+        ids:           new Map()   // Map (id -> NSI item)
       };
 
       const matcher = new Matcher();
       _nsi.matcher = matcher;
       matcher.buildMatchIndex(_nsi.data);
-
-// *** BEGIN HACK ***
-
-// old - built in matcher will set up the locationindex by resolving all the locationSets one-by-one
-      // matcher.buildLocationIndex(_nsi.data, locationManager.loco());
-
-// new - Use the location manager instead of redoing that work
-// It has already processed the presets at this point
-
-// We need to monkeypatch a few of the collections that the NSI matcher depends on.
-// The `itemLocation` structure maps itemIDs to locationSetIDs
-matcher.itemLocation = new Map();
-
-// The `locationSets` structure maps locationSetIDs to GeoJSON
-// We definitely need this, but don't need full geojson, just { properties: { area: xxx }}
-matcher.locationSets = new Map();
-
-Object.keys(_nsi.data).forEach(tkv => {
-  const items = _nsi.data[tkv].items;
-  if (!Array.isArray(items) || !items.length) return;
-
-  items.forEach(item => {
-    if (matcher.itemLocation.has(item.id)) return;   // we've seen item id already - shouldn't be possible?
-
-
-  function tryGettingLocationSetID(locationSet) {
-    try {
-      return locationManager.validateLocationSet(locationSet).id;
-    } catch {
-      return '+[Q2]';  // the world
-    }
-  }
-    const locationSetID = tryGettingLocationSetID(item.locationSet);
-    matcher.itemLocation.set(item.id, locationSetID);
-
-    if (matcher.locationSets.has(locationSetID)) return;   // we've seen this locationSet before..
-
-    const fakeFeature = { id: locationSetID, properties: { id: locationSetID, area: 1 } };
-    matcher.locationSets.set(locationSetID, fakeFeature);
-  });
-});
-
-// The `locationIndex` is an instance of which-polygon spatial index for the locationSets.
-// We only really need this to _look like_ which-polygon query `_wp.locationIndex(bbox, true);`
-// i.e. it needs to return the properties of the locationsets
-matcher.locationIndex = (bbox) => {
-  const validHere = locationManager.locationSetsAt([bbox[0], bbox[1]]);
-  const results = [];
-
-  for (const [locationSetID, area] of Object.entries(validHere)) {
-    const fakeFeature = matcher.locationSets.get(locationSetID);
-    if (fakeFeature) {
-      fakeFeature.properties.area = area;
-      results.push(fakeFeature);
-    }
-  }
-  return results;
-};
-
-// *** END HACK ***
-
+      matcher.buildLocationIndex(_nsi.data, locationManager);
 
       Object.keys(_nsi.data).forEach(tkv => {
         const category = _nsi.data[tkv];
