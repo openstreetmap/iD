@@ -134,6 +134,13 @@ export function svgTagClasses() {
                 }
             }
             classes.push('tag-' + surface);
+
+            // Unpaved tracks with no `tracktype` for default/unknown grade-based styling
+            if (t.highway === 'track' &&
+                surface === 'unpaved' && // otherwise, this will style paved tracks
+                (!t.tracktype || (t.tracktype !== 'grade2' && t.tracktype !== 'grade3' && t.tracktype !== 'grade4' && t.tracktype !== 'grade5'))) {
+                classes.push('tag-ungraded');
+            }
         }
 
         // If this is a wikidata-tagged item, add a class for that..
