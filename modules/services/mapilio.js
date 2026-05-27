@@ -104,7 +104,7 @@ function loadTile(which, url, tile) {
 // Load the data from the vector tile into cache
 function loadTileDataToCache(data, tile) {
     const vectorTile = new VectorTile(new PbfReader(data));
-    if (vectorTile.layers.hasOwnProperty(pointLayer)) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, pointLayer)) {
         const features = [];
         const cache = _cache.images;
         const layer = vectorTile.layers[pointLayer];
@@ -139,7 +139,7 @@ function loadTileDataToCache(data, tile) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty(lineLayer)) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, lineLayer)) {
         const cache = _cache.sequences;
         const layer = vectorTile.layers[lineLayer];
 

@@ -163,7 +163,7 @@ function loadTileDataToCache(data, tile, zoom) {
         loc,
         d;
 
-    if (vectorTile.layers.hasOwnProperty(pictureLayer)) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, pictureLayer)) {
         features = [];
         cache = _cache.images;
         layer = vectorTile.layers[pictureLayer];
@@ -195,7 +195,7 @@ function loadTileDataToCache(data, tile, zoom) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty(sequenceLayer)) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, sequenceLayer)) {
 
         cache = _cache.sequences;
 
