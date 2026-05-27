@@ -65,6 +65,6 @@ export function uiRestore(context: iD.Context) {
       .append('div')
       .call(t.append('restore.reset'));
 
-    restore.node().focus();
+    restore.node()!.focus();
   };
 }

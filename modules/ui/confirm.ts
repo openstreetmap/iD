@@ -3,12 +3,12 @@ import { uiModal } from './modal';
 
 
 export function uiConfirm(selection: d3.Selection) {
-    var modalSelection = uiModal(selection);
+    const modalSelection = uiModal(selection);
 
     modalSelection.select('.modal')
         .classed('modal-alert', true);
 
-    var section = modalSelection.select('.content');
+    const section = modalSelection.select('.content');
 
     section.append('div')
         .attr('class', 'modal-section header');
@@ -16,24 +16,24 @@ export function uiConfirm(selection: d3.Selection) {
     section.append('div')
         .attr('class', 'modal-section message-text');
 
-    var buttons = section.append('div')
+    const buttons = section.append('div')
         .attr('class', 'modal-section buttons cf');
 
 
-    modalSelection.okButton = function() {
-        buttons
-            .append('button')
-            .attr('class', 'button ok-button action')
-            .on('click.confirm', function() {
-                modalSelection.remove();
-            })
-            .call(t.append('confirm.okay'))
-            .node()
-            .focus();
+    return Object.assign(
+        modalSelection, {
+        okButton: function() {
+            buttons
+                .append('button')
+                .attr('class', 'button ok-button action')
+                .on('click.confirm', function() {
+                    modalSelection.remove();
+                })
+                .call(t.append('confirm.okay'))
+                .node()!
+                .focus();
 
-        return modalSelection;
-    };
-
-
-    return modalSelection;
+            return modalSelection;
+        }
+    });
 }

@@ -78,7 +78,7 @@ const patterns: TagDictionary<string | Tags[]> = {
     }
 };
 
-export function svgTagPattern(tags: Tags) {
+export function svgTagPattern(tags: Tags): string | null {
     // Skip pattern filling if this is a building (buildings don't get patterns applied)
     if (tags.building && tags.building !== 'no') {
         return null;

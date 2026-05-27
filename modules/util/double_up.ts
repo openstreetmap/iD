@@ -15,14 +15,14 @@ export function utilDoubleUp() {
     /** object representing the pointer that could trigger double up */
     var _pointer: { startLoc: Vec2; startTime: number; upCount: number; pointerId: number; } | undefined;
 
-    function pointerIsValidFor(loc: Vec2) {
+    function pointerIsValidFor(loc: Vec2): boolean {
         // second pointerup must occur within a small timeframe after the first pointerdown
         return new Date().getTime() - _pointer!.startTime <= _maxTimespan &&
             // all pointer events must occur within a small distance of the first pointerdown
             geoVecLength(_pointer!.startLoc, loc) <= _maxDistance;
     }
 
-    function pointerdown(d3_event: PointerEvent) {
+    function pointerdown(d3_event: PointerEvent): void {
 
         // ignore right-click
         if (d3_event.ctrlKey || d3_event.button === 2) return;
@@ -68,7 +68,7 @@ export function utilDoubleUp() {
         }
     }
 
-    function doubleUp(selection: d3.Selection) {
+    function doubleUp(selection: d3.Selection<HTMLElement>) {
         if ('PointerEvent' in window) {
             // dblclick isn't well supported on touch devices so manually use
             // pointer events if they're available
@@ -84,7 +84,7 @@ export function utilDoubleUp() {
         }
     }
 
-    doubleUp.off = function(selection: d3.Selection) {
+    doubleUp.off = function(selection: d3.Selection<HTMLElement>) {
         selection
             .on('pointerdown.doubleUp', null)
             .on('pointerup.doubleUp', null)

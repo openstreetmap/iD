@@ -1,7 +1,7 @@
 export type DataDeprecated = { old: Tags; replace?: Tags }[];
 
 /** @param {Tags} tags @param {DataDeprecated} dataDeprecated */
-export function getDeprecatedTags(tags: Tags, dataDeprecated: DataDeprecated) {
+export function getDeprecatedTags(tags: Tags, dataDeprecated: DataDeprecated): DataDeprecated {
   // if there are no tags, none can be deprecated
   if (Object.keys(tags).length === 0) return [];
 

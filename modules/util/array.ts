@@ -1,5 +1,5 @@
 // Returns true if a and b have the same elements at the same indices.
-export function utilArrayIdentical<T>(a: T[], b: T[]) {
+export function utilArrayIdentical<T>(a: T[], b: T[]): boolean {
     // an array is always identical to itself
     if (a === b) return true;
 
@@ -22,9 +22,9 @@ export function utilArrayIdentical<T>(a: T[], b: T[]) {
 // utilArrayDifference(b, a)
 //   [4]
 export function utilArrayDifference<T>(a: Iterable<T>, b: Iterable<T>): T[] {
-    var other = new Set(b);
+    const other = new Set(b);
     return Array.from(new Set(a))
-        .filter(function(v) { return !other.has(v); });
+        .filter(v => !other.has(v));
 }
 
 // Intersection (a ∩ b): create a set that contains those elements of set a that are also in set b.
@@ -33,9 +33,9 @@ export function utilArrayDifference<T>(a: Iterable<T>, b: Iterable<T>): T[] {
 // utilArrayIntersection(a, b)
 //   [2,3]
 export function utilArrayIntersection<T>(a: Iterable<T>, b: Iterable<T>): T[] {
-    var other = new Set(b);
+    const other = new Set(b);
     return Array.from(new Set(a))
-        .filter(function(v) { return other.has(v); });
+        .filter(v => other.has(v));
 }
 
 // Union (a ∪ b): create a set that contains the elements of both set a and set b.
@@ -44,8 +44,8 @@ export function utilArrayIntersection<T>(a: Iterable<T>, b: Iterable<T>): T[] {
 // utilArrayUnion(a, b)
 //   [1,2,3,4]
 export function utilArrayUnion<T>(a: Iterable<T>, b: T[]): T[] {
-    var result = new Set(a);
-    b.forEach(function(v) { result.add(v); });
+    const result = new Set(a);
+    b.forEach(v => result.add(v));
     return Array.from(result);
 }
 
@@ -66,9 +66,8 @@ export function utilArrayChunk<T>(a: T[], chunkSize?: number): T[][] {
     if (!chunkSize || chunkSize < 0) return [a.slice()];
 
     var result = new Array(Math.ceil(a.length / chunkSize));
-    return Array.from(result, function(item, i) {
-        return a.slice(i * chunkSize, i * chunkSize + chunkSize);
-    });
+    return Array.from(result, (item, i) =>
+        a.slice(i * chunkSize, i * chunkSize + chunkSize));
 }
 
 
@@ -77,9 +76,7 @@ export function utilArrayChunk<T>(a: T[], chunkSize?: number): T[][] {
 // utilArrayFlatten(a);
 //   [1,2,3,4,5,6,7];
 export function utilArrayFlatten<T>(a: T[][]): T[] {
-    return a.reduce(function(acc, val) {
-        return acc.concat(val);
-    }, []);
+    return a.reduce((acc, val) => acc.concat(val), []);
 }
 
 
@@ -105,14 +102,15 @@ export function utilArrayFlatten<T>(a: T[][]): T[] {
 //     4: [{type: 'Dog', name: 'Spot'}],
 //     5: [{type: 'Cat', name: 'Tiger'}, {type: 'Dog', name: 'Rover'}]
 //   }
-export function utilArrayGroupBy<T>(a: T[], key: keyof T | ((item: T) => string)) {
-    return a.reduce<Record<string, T[]>>(function(acc, item) {
-        var group = (typeof key === 'function') ? key(item) : <string>item[key];
+export function utilArrayGroupBy<T>(a: T[], key: keyof T): Record<string, T[]>;
+export function utilArrayGroupBy<T, K extends string | number | symbol>(a: T[], key: (item: T) => K): Record<K, T[]>;
+export function utilArrayGroupBy<T, K extends string | number | symbol>(a: T[], key: keyof T | ((item: T) => K)): Record<K, T[]> {
+    return a.reduce<Record<K, T[]>>((acc, item) => {
+        const group: K = (typeof key === 'function') ? key(item) : <K>item[key];
         (acc[group] = acc[group] || []).push(item);
         return acc;
-    }, {});
+    }, <Record<K, T[]>>{});
 }
-
 
 // Returns an Array with all the duplicates removed
 // where uniqueness determined by the given key
@@ -137,10 +135,12 @@ export function utilArrayGroupBy<T>(a: T[], key: keyof T | ((item: T) => string)
 //     { type: 'Cat', name: 'Tiger' },
 //     { type: 'Cat', name: 'Leo' }
 //   }
-export function utilArrayUniqBy<T>(a: T[], key: keyof T | ((item: T) => string)): T[] {
-    var seen = new Set();
-    return a.reduce<T[]>(function(acc, item) {
-        var val = (typeof key === 'function') ? key(item) : item[key];
+export function utilArrayUniqBy<T>(a: T[], key: keyof T): T[];
+export function utilArrayUniqBy<T, K>(a: T[], key: (item: T) => K): T[];
+export function utilArrayUniqBy<T, K>(a: T[], key: keyof T | ((item: T) => K)): T[] {
+    var seen: Set<K> = new Set();
+    return a.reduce<T[]>((acc, item) => {
+        const val: K = (typeof key === 'function') ? key(item) : <K>item[key];
         if (val && !seen.has(val)) {
             seen.add(val);
             acc.push(item);

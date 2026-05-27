@@ -32,7 +32,7 @@ export function utilCheckTagDictionary<T>(tags:Tags, tagDictionary: TagDictionar
  * converts every value in an object to a string, if
  * it's not already a string.
  */
-export function stringifyProperties(object: Record<string, unknown>) {
+export function stringifyProperties(object: Record<string, unknown>): Tags {
     const tags: Tags = {};
     for (const key in object) {
         switch (typeof object[key]) {
