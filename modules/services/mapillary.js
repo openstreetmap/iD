@@ -2,7 +2,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import Protobuf from 'pbf';
+import { PbfReader } from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 import { geoExtent } from '../geo';
@@ -89,7 +89,7 @@ function loadTile(which, url, tile) {
 
 // Load the data from the vector tile into cache
 function loadTileDataToCache(data, tile, which) {
-    const vectorTile = new VectorTile(new Protobuf(data));
+    const vectorTile = new VectorTile(new PbfReader(data));
     let features,
         cache,
         layer,
@@ -697,7 +697,7 @@ export default {
             for (var i = 0; i < decodedGeometry.length; i++) {
                 uintArray[i] = decodedGeometry.charCodeAt(i);
             }
-            const tile = new VectorTile(new Protobuf(uintArray.buffer));
+            const tile = new VectorTile(new PbfReader(uintArray.buffer));
             const layer = tile.layers['mpy-or'];
 
             const geometries = layer.feature(0).loadGeometry();

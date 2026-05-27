@@ -5,7 +5,7 @@ import turf_bboxClip from '@turf/bbox-clip';
 import stringify from 'fast-json-stable-stringify';
 import { union } from 'polyclip-ts';
 
-import Protobuf from 'pbf';
+import { PbfReader } from 'pbf';
 import { VectorTile } from '@mapbox/vector-tile';
 
 import { utilHashcode, utilRebind, utilTiler } from '../util';
@@ -22,7 +22,7 @@ function abortRequest(controller) {
 
 
 function vtToGeoJSON(data, tile, mergeCache) {
-    var vectorTile = new VectorTile(new Protobuf(data));
+    var vectorTile = new VectorTile(new PbfReader(data));
     var layers = Object.keys(vectorTile.layers);
     if (!Array.isArray(layers)) { layers = [layers]; }
 
