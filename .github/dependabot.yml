@@ -43,6 +43,13 @@ updates:
           - "vite*"
           - "@vitest/*"
         applies-to: version-updates
+      mapbox:
+        patterns:
+          - "@mapbox/*"
+          - "pbf"
+        exclude-patterns:
+          - "@mapbox/maki"
+        applies-to: version-updates
     labels:
       - "chore-dependabot"
   - package-ecosystem: "github-actions"
