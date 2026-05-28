@@ -51,18 +51,18 @@ export function svgDefs(context) {
         addOnewayMarker('gray', '#eee'); // for railway lines
 
 
-        function addSidedMarker(name, color, offset, style) {
+        function addSidedMarker(name, options) {
             const path = {
                 circle: 'M 0,0.5 a 0.5,0.5 0 1,0 1,0 a 0.5,0.5 0 1,0 -1,0',
                 mirrored: 'M 0,1 l 1,-1 l 1,1 z',
                 default: 'M 0,0 l 1,1 l 1,-1 z'
-            }[style || 'default'];
+            }[options.style || 'default'];
             _defsSelection
                 .append('marker')
                 .attr('id', 'ideditor-sided-marker-' + name)
                 .attr('viewBox', '0 0 2 2')
                 .attr('refX', 1)
-                .attr('refY', -offset)
+                .attr('refY', -options.offset)
                 .attr('markerWidth', 1.5)
                 .attr('markerHeight', 1.5)
                 .attr('markerUnits', 'strokeWidth')
@@ -70,52 +70,59 @@ export function svgDefs(context) {
                 .append('path')
                 .attr('class', 'sided-marker-path sided-marker-' + name + '-path')
                 .attr('d', path)
-                .attr('stroke', 'none')
-                .attr('fill', color);
+                .attr('stroke', options.strokeColor || 'none')
+                .attr('stroke-width', options.strokeColor ? 0.1 : 0)
+                .attr('fill', options.color);
         }
-        addSidedMarker('natural', 'rgb(170, 170, 170)', 0);
+        addSidedMarker('natural', { color: 'rgb(170, 170, 170)', offset: 0 });
         // for a coastline, the arrows are (somewhat unintuitively) on
         // the water side, so let's color them blue (with a gap) to
         // give a stronger indication
-        addSidedMarker('coastline', '#77dede', 1);
-        addSidedMarker('waterway', '#77dede', 1);
+        addSidedMarker('coastline', { color: '#77dede', offset: 1 });
+        addSidedMarker('waterway', { color: '#77dede', offset: 1 });
         // barriers have a dashed line, and separating the triangle
         // from the line visually suits that
-        addSidedMarker('barrier', '#ddd', 1);
+        addSidedMarker('barrier', { color: '#ddd', offset: 1 });
         // dedicated style for guard rails (#9594):
         // marker on opposite side, circles instead of triangles
-        addSidedMarker('guard_rail', '#ddd', -1.5, 'circle');
-        addSidedMarker('man_made', '#fff', 0);
-        function addBothSidedMarker(name, color, offset) {
+        addSidedMarker('guard_rail', { color: '#ddd', offset: -1.5, style: 'circle' });
+        addSidedMarker('man_made', { color: '#fff', offset: 0 });
+        function addBothSidedMarker(name, options) {
             let mirror = false;
-            if (offset < 0) {
-                offset = Math.abs(offset);
+            if (options.offset < 0) {
+                options.offset = Math.abs(options.offset);
                 mirror = true;
             }
             _defsSelection
                 .append('marker')
                 .attr('id', 'ideditor-sided-marker-' + name)
-                .attr('viewBox', `0,-${1+offset}, 2,${2*(1+offset)}`)
+                .attr('viewBox', `0,-${1+options.offset}, 2,${2*(1+options.offset)}`)
                 .attr('refX', 1)
                 .attr('refY', 0)
                 .attr('markerWidth', 1.5)
-                .attr('markerHeight', 1.5 * (2 + offset))
+                .attr('markerHeight', 1.5 * (2 + options.offset))
                 .attr('markerUnits', 'strokeWidth')
                 .attr('orient', 'auto')
                 .append('path')
                 .attr('class', 'sided-marker-path sided-marker-' + name + '-path')
                 .attr('d', mirror
-                    ? `M 0,${-offset-1} l 1,1 l 1,-1 z M 0,${1+offset} l 1,-1 l 1,1 z`
-                    : `M 0,${offset} l 1,1 l 1,-1 z M 0,${-offset} l 1,-1 l 1,1 z`)
-                .attr('stroke', 'none')
-                .attr('fill', color);
+                    ? `M 0,${-options.offset-1} l 1,1 l 1,-1 z M 0,${1+options.offset} l 1,-1 l 1,1 z`
+                    : `M 0,${options.offset} l 1,1 l 1,-1 z M 0,${-options.offset} l 1,-1 l 1,1 z`)
+                .attr('stroke', options.strokeColor || 'none')
+                .attr('stroke-width', options.strokeColor ? 0.1 : 0)
+                .attr('fill', options.color);
         }
-        addBothSidedMarker('embankment', '#444', 1.5);
-        addBothSidedMarker('cutting', '#444', -1.5);
-        addSidedMarker('embankment-right', '#444', 1.5);
-        addSidedMarker('embankment-left', '#444', -2.5, 'mirrored');
-        addSidedMarker('cutting-right', '#444', 1.5, 'mirrored');
-        addSidedMarker('cutting-left', '#444', -2.5);
+        const embankmentColors = {
+            color: '#444',
+            strokeColor: 'rgba(200, 200, 200, 0.75)'
+        };
+        addBothSidedMarker('embankment', { ...embankmentColors, offset: 1.5 });
+        addSidedMarker('embankment-right', { ...embankmentColors, offset: 1.5 });
+        addSidedMarker('embankment-left', { ...embankmentColors, offset: -2.5, style: 'mirrored' });
+        addSidedMarker('embankment-man_made', { ...embankmentColors, offset: 1 });
+        addBothSidedMarker('cutting', { ...embankmentColors, offset: -1.5 });
+        addSidedMarker('cutting-right', { ...embankmentColors, offset: 1.5, style: 'mirrored' });
+        addSidedMarker('cutting-left', { ...embankmentColors, offset: -2.5 });
 
         _defsSelection
             .append('marker')

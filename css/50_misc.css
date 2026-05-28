@@ -360,6 +360,20 @@ path.line.casing.tag-location-underwater {
 }
 
 
+/* embankments / cuttings */
+/* see also #ideditor-sided-marker-embankment */
+path.line.stroke.tag-man_made-embankment {
+    stroke: #444;
+    stroke-width: 2px;
+}
+path.line.casing.tag-man_made-embankment {
+    stroke: rgba(200, 200, 200, 0.75);
+    stroke-linecap: butt;
+    stroke-dasharray: none;
+    stroke-width: 2.5px;
+}
+
+
 /* Surface - unpaved */
 path.line.casing.tag-unpaved {
     stroke: #ccc;

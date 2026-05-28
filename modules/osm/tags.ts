@@ -296,7 +296,7 @@ export const osmSidednessTags: TagDictionary<true | string> = {
         'city_wall': true,
     },
     'man_made': {
-        'embankment': true,
+        'embankment': 'embankment-man_made',
         'quay': true
     },
     'waterway': {
