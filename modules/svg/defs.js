@@ -52,6 +52,11 @@ export function svgDefs(context) {
 
 
         function addSidedMarker(name, color, offset, style) {
+            const path = {
+                circle: 'M 0,0.5 a 0.5,0.5 0 1,0 1,0 a 0.5,0.5 0 1,0 -1,0',
+                mirrored: 'M 0,1 l 1,-1 l 1,1 z',
+                default: 'M 0,0 l 1,1 l 1,-1 z'
+            }[style || 'default'];
             _defsSelection
                 .append('marker')
                 .attr('id', 'ideditor-sided-marker-' + name)
@@ -64,9 +69,7 @@ export function svgDefs(context) {
                 .attr('orient', 'auto')
                 .append('path')
                 .attr('class', 'sided-marker-path sided-marker-' + name + '-path')
-                .attr('d', style === 'circle'
-                    ? 'M 0,0.5 a 0.5,0.5 0 1,0 1,0 a 0.5,0.5 0 1,0 -1,0'
-                    : 'M 0,0 L 1,1 L 2,0 z')
+                .attr('d', path)
                 .attr('stroke', 'none')
                 .attr('fill', color);
         }
@@ -83,6 +86,36 @@ export function svgDefs(context) {
         // marker on opposite side, circles instead of triangles
         addSidedMarker('guard_rail', '#ddd', -1.5, 'circle');
         addSidedMarker('man_made', '#fff', 0);
+        function addBothSidedMarker(name, color, offset) {
+            let mirror = false;
+            if (offset < 0) {
+                offset = Math.abs(offset);
+                mirror = true;
+            }
+            _defsSelection
+                .append('marker')
+                .attr('id', 'ideditor-sided-marker-' + name)
+                .attr('viewBox', `0,-${1+offset}, 2,${2*(1+offset)}`)
+                .attr('refX', 1)
+                .attr('refY', 0)
+                .attr('markerWidth', 1.5)
+                .attr('markerHeight', 1.5 * (2 + offset))
+                .attr('markerUnits', 'strokeWidth')
+                .attr('orient', 'auto')
+                .append('path')
+                .attr('class', 'sided-marker-path sided-marker-' + name + '-path')
+                .attr('d', mirror
+                    ? `M 0,${-offset-1} l 1,1 l 1,-1 z M 0,${1+offset} l 1,-1 l 1,1 z`
+                    : `M 0,${offset} l 1,1 l 1,-1 z M 0,${-offset} l 1,-1 l 1,1 z`)
+                .attr('stroke', 'none')
+                .attr('fill', color);
+        }
+        addBothSidedMarker('embankment', '#444', 1.5);
+        addBothSidedMarker('cutting', '#444', -1.5);
+        addSidedMarker('embankment-right', '#444', 1.5);
+        addSidedMarker('embankment-left', '#444', -2.5, 'mirrored');
+        addSidedMarker('cutting-right', '#444', 1.5, 'mirrored');
+        addSidedMarker('cutting-left', '#444', -2.5);
 
         _defsSelection
             .append('marker')

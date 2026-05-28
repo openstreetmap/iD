@@ -360,30 +360,6 @@ path.line.casing.tag-location-underwater {
 }
 
 
-/* embankments / cuttings */
-path.line.shadow.tag-embankment,
-path.line.shadow.tag-cutting {
-    stroke-width: 28;
-}
-path.line.casing.tag-embankment,
-path.line.casing.tag-cutting {
-    stroke-opacity: 0.5;
-    stroke: #000;
-    stroke-width: 22;
-    stroke-dasharray: 2, 4;
-    stroke-linecap: butt;
-}
-
-.low-zoom path.line.shadow.tag-embankment,
-.low-zoom path.line.shadow.tag-cutting {
-    stroke-width: 14;
-}
-.low-zoom path.line.casing.tag-embankment,
-.low-zoom path.line.casing.tag-cutting {
-    stroke-width: 10;
-}
-
-
 /* Surface - unpaved */
 path.line.casing.tag-unpaved {
     stroke: #ccc;

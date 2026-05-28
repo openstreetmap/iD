@@ -271,7 +271,20 @@ export const osmSemipavedTags: TagDictionary<boolean> = {
     }
 };
 
-export const osmRightSideIsInsideTags: TagDictionary<true | string> = {
+/**
+ * `true` means that the right side of the way is representing the "interesting"
+ * side of the feature, e.g.:
+ *   - the face of a cliff
+ *   - the steep side of a retaining wall
+ *   - the road side of a kerb
+ *   - the downstream side of a weir
+ * strings indicate special cases:
+ *   - coastlines have the land on the right hand side, but we want to mark the ocean
+ *   - guard rails have the road on the right, but we use dedicated markers that represent the posts of the guard rail
+ *   - embankments can be on either or (typically) both sides of a road  or railway
+ *   - cuttings (see embankments, and they also) use inverted triangles as markers
+ */
+export const osmSidednessTags: TagDictionary<true | string> = {
     'natural': {
         'cliff': true,
         'coastline': 'coastline'
@@ -288,7 +301,20 @@ export const osmRightSideIsInsideTags: TagDictionary<true | string> = {
     },
     'waterway': {
         'weir': true
-    }
+    },
+    'cutting': {
+        'yes': 'cutting',
+        'both': 'cutting',
+        'left': 'cutting-left',
+        'right': 'cutting-right'
+    },
+    'embankment': {
+        'yes': 'embankment',
+        'dyke': 'embankment',
+        'both': 'embankment',
+        'left': 'embankment-left',
+        'right': 'embankment-right'
+    },
 };
 
 // "highway" tag values for pedestrian or vehicle right-of-ways that make up the routable network
