@@ -384,7 +384,12 @@ export const osmMutuallyExclusiveTagPairs = [
     ['noaddress', 'addr:housenumber'],
     ['noaddress', 'addr:housename'],
     ['noaddress', 'addr:unit'],
-    ['addr:nostreet', 'addr:street']
+    ['addr:nostreet', 'addr:street'],
+    [
+      {key: 'crossing', value:'unmarked'},
+      {key: 'crossing_ref', value: 'zebra'}
+    ],
+    [ 'crossing_ref', { key: 'crossing:markings', value: 'no' } ]
 ];
 
 

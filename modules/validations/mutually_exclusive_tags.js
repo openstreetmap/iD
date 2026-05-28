@@ -12,12 +12,33 @@ export function validationMutuallyExclusiveTags(/* context */) {
 
     const validation = function checkMutuallyExclusiveTags(entity /*, graph */) {
 
+        function matchesRule(rule, tags){
+          if (typeof rule === 'string') {
+            return rule in tags;
+          }
+          return tags[rule.key] === rule.value;
+        }
+
+        function isIgnoredNoTag(rule, tags){
+          return typeof rule === 'string' && rule.match(/^(addr:)?no[a-z]/) && tags[rule] === 'no';
+        }
+
+        // To get the key
+        function ruleKey(rule){
+          return typeof rule === 'string' ? rule : rule.key;
+        }
+
+        // To get the key or both key and value for the UI
+        function ruleLabel(rule) {
+          return typeof rule === 'string' ? rule : `${rule.key}=${rule.value}`;
+        }
+
         let pairsFounds = tagKeyPairs.filter((pair) => {
-            return (pair[0] in entity.tags && pair[1] in entity.tags);
+            return matchesRule(pair[0], entity.tags) && matchesRule(pair[1], entity.tags);
         }).filter((pair) => {
             // noname=no is double-negation, thus positive and not conflicting. We'll ignore those
-            return !((pair[0].match(/^(addr:)?no[a-z]/) && entity.tags[pair[0]] === 'no') ||
-                     (pair[1].match(/^(addr:)?no[a-z]/) && entity.tags[pair[1]] === 'no'));
+            return !(isIgnoredNoTag(pair[0], entity.tags) ||
+                     isIgnoredNoTag(pair[1], entity.tags));
         });
 
         // Additional:
@@ -48,13 +69,13 @@ export function validationMutuallyExclusiveTags(/* context */) {
                     let entity = context.hasEntity(this.entityIds[0]);
                     return entity ? t.append(`issues.${type}.${subtype}.message`, {
                         feature: utilDisplayLabel(entity, context.graph()),
-                        tag1: pair[0],
-                        tag2: pair[1]
+                        tag1: ruleLabel(pair[0]),
+                        tag2: ruleLabel(pair[1])
                     }) : '';
                 },
                 reference: (selection) => showReference(selection, pair, subtype),
                 entityIds: [entity.id],
-                dynamicFixes: () => pair.slice(0,2).map((tagToRemove) => createIssueFix(tagToRemove))
+                dynamicFixes: () => pair.slice(0,2).map((tagToRemove) => createIssueFix(ruleKey(tagToRemove)))
             });
         });
 
@@ -81,7 +102,7 @@ export function validationMutuallyExclusiveTags(/* context */) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .call(t.append(`issues.${type}.${subtype}.reference`, { tag1: pair[0], tag2: pair[1] }));
+                .call(t.append(`issues.${type}.${subtype}.reference`, { tag1: ruleLabel(pair[0]), tag2: ruleLabel(pair[1]) }));
         }
 
         return issues;
