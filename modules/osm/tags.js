@@ -433,3 +433,13 @@ export const osmUrlKeys = new Set([
     'website:menu',
     'post_office:website',
 ]);
+export  const timeRangeKeys  = new Set([
+  'opening_hours',
+  'service_times',
+  'collection_times',
+]);
+
+export function needsTimeRangeValidation(key) {
+    return timeRangeKeys.has(key);
+}
+

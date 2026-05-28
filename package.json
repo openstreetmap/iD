@@ -69,6 +69,7 @@
     "idb-keyval": "^6.2.2",
     "marked": "~18.0.0",
     "node-diff3": "~3.2.0",
+    "opening_hours": "^3.12.0",
     "osm-auth": "^3.1.1",
     "pannellum": "2.5.7",
     "pbf": "^5.0.0",

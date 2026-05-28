@@ -1634,6 +1634,13 @@ en:
         message: '{feature} has an invalid email address'
         message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
+    invalid_time_range:
+      title: Invalid time range syntax 
+      tip: Fix the invalid time range syntax 
+      message: '{feature} contains invalid time range  '
+      message_multi: '{feature} contains multiple tag values with invalid time ranges ' 
+      reference: 'Schedule tags must follow the standard opening_hours format, e.g. `Mo-Fr 09:00-18:00`, `Sa 10:00-14:00`, or `24/7`'
+ 
       website:
         message: '{feature} has an invalid URL'
         message_multi: '{feature} has multiple invalid URLs'
@@ -1772,6 +1779,9 @@ en:
         annotation: Connected the endpoints of a way.
       connect_feature:
         title: Connect this feature
+      fix_time_range:
+        title: Fix all invalid time range syntax 
+        annotation: Fixed invalid time range syntax in tag values 
       connect_features:
         title: Connect the features
       connect_using_crossing:
