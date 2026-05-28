@@ -1554,6 +1554,13 @@ en:
       detached:
         message: "{feature} is too close to {feature2}"
         reference: "Separate points should not share a location."
+    connected_ways:
+      title: Connected Ways
+      message: "{feature} is connected to {feature2}"
+      building-power_connectable:
+        reference: "Use a power terminal to explicitly indicate that the power line enters the building at this location."
+      power-other:
+        reference: "Only connect power lines to features that are physically connected in the real world."
     crossing_ways:
       title: Crossing Ways
       message: "{feature} crosses {feature2}"
@@ -1778,6 +1785,9 @@ en:
         title: Connect using a crossing
       connect_using_ford:
         title: Connect using a ford
+      connect_using_power_terminal:
+        title: Connect using a power terminal
+        annotation: Connected power line to building using a power terminal.
       continue_from_start:
         title: Continue drawing from start
       continue_from_end:
@@ -1787,6 +1797,8 @@ en:
         annotation: Converted an area to a line.
       delete_feature:
         title: Delete this feature
+      disconnect_feature:
+        title: Disconnect the feature
       extract_point:
         title: Extract this point
       ignore_issue:

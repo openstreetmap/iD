@@ -318,6 +318,11 @@ export var osmRailwayTrackTagValues = {
     disused: true, preserved: true
 };
 
+// "power" tag values for way features
+export var osmPowerTagValues = {
+    line: true, minor_line: true, cable: true
+};
+
 // "waterway" tag values for line features representing water flow
 export var osmFlowingWaterwayTagValues = {
     canal: true, ditch: true, drain: true, fish_pass: true, flowline: true, river: true, stream: true, tidal_channel: true
