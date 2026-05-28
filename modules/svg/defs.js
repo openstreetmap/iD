@@ -29,22 +29,38 @@ export function svgDefs(context) {
 
         /** @param {string} name @param {string} colour */
         function addOnewayMarker(name, colour) {
-            _defsSelection
+            const VARIANTS = [
+                {
+                    id: 'normal',
+                    viewBox: '0 0 10 5',
+                    d: 'M 6,3 L 0,3 L 0,2 L 6,2 L 5,0 L 10,2.5 L 5,5 z', // -->
+                    markerWidth: 2,
+                },
+                {
+                    id: 'priority',
+                    viewBox: '0 0 16 5',
+                    d: 'M 12 3 L 7 5 L 8 3 H 0 V 2 H 8 L 7 0 L 12 2 L 11 0 L 16 2.5 L 11 5 z', // -->>
+                    markerWidth: 3.3,
+                },
+            ];
+            for (const variant of VARIANTS) {
+              _defsSelection
                 .append('marker')
-                .attr('id', `ideditor-oneway-marker-${name}`)
-                .attr('viewBox', '0 0 10 5')
+                .attr('id', `ideditor-oneway-marker-${name}-${variant.id}`)
+                .attr('viewBox', variant.viewBox)
                 .attr('refX', 4)
                 .attr('refY', 2.5)
-                .attr('markerWidth', 2)
+                .attr('markerWidth', variant.markerWidth)
                 .attr('markerHeight', 2)
                 .attr('markerUnits', 'strokeWidth')
                 .attr('orient', 'auto')
                 .append('path')
                 .attr('class', 'oneway-marker-path')
-                .attr('d', 'M 6,3 L 0,3 L 0,2 L 6,2 L 5,0 L 10,2.5 L 5,5 z')
+                .attr('d', variant.d)
                 .attr('stroke', 'none')
                 .attr('fill', colour)
                 .attr('opacity', '1');
+            }
         }
         addOnewayMarker('black', '#333'); // default
         addOnewayMarker('white', '#fff'); // for dark lines (bridges under construction, railways, etc.)

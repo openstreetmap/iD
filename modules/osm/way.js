@@ -162,6 +162,24 @@ const prototype = {
         return !!utilCheckTagDictionary(this.tags, osmOneWayBiDirectionalTags);
     },
 
+    /**
+     * @returns {'forward' | 'backward'} for bidirectional ways that have
+     *          a defined priority in one direction.
+     */
+    priorityDirection() {
+        if (!this.isBiDirectional()) return undefined;
+
+        if (['forward', 'backward'].includes(this.tags.priority)) {
+            return this.tags.priority;
+        }
+        if (
+            ['forward', 'backward'].includes(this.tags['railway:preferred_direction']) &&
+            ['regular', 'possible', 'signals'].includes(this.tags['railway:bidirectional'])
+        ) {
+            return this.tags['railway:preferred_direction'];
+        }
+    },
+
     /** @returns {boolean} */
     isOneWay() {
         if (this.tags.oneway === 'no') return false;

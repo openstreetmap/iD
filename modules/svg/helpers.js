@@ -121,7 +121,7 @@ export function svgMarkerSegments(projection, graph, dt, shouldReverse = () => f
                             for (let j = 0; j < coord.length; j++) {
                                 segment += (j === 0 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
                             }
-                            segments.push({ id: entity.id, index: i++, d: segment });
+                            segments.push({ id: entity.id, index: i++, d: segment, direction: 'forward' });
                         }
 
                         if (_shouldReverse || _bothDirections) {
@@ -129,7 +129,7 @@ export function svgMarkerSegments(projection, graph, dt, shouldReverse = () => f
                             for (let j = coord.length - 1; j >= 0; j--) {
                                 segment += (j === coord.length - 1 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
                             }
-                            segments.push({ id: entity.id, index: i++, d: segment });
+                            segments.push({ id: entity.id, index: i++, d: segment, direction: 'backward' });
                         }
                     }
 
