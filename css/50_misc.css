@@ -408,8 +408,12 @@ path.line.casing.tag-bridge.tag-semipaved {
     stroke: #000;
 }
 
-/* Track grading (tracktype) */
-path.line.casing.tag-highway-track.tag-ungraded { stroke-dasharray: 7, 5, 3, 5; }
+/* Track - based on grading (tracktype) */
+path.line.casing.tag-highway-track {
+    stroke: #ccc;
+    stroke-linecap: butt;
+}
+path.line.casing.tag-highway-track.tag-ungraded { stroke-dasharray: 7, 3, 3, 3, 3, 3; }
 path.line.casing.tag-highway-track.tag-tracktype-grade2 { stroke-dasharray: 10, 4; }
 path.line.casing.tag-highway-track.tag-tracktype-grade3 { stroke-dasharray: 6, 4; }
 path.line.casing.tag-highway-track.tag-tracktype-grade4 { stroke-dasharray: 4, 6; }

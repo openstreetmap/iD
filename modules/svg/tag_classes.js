@@ -123,23 +123,24 @@ export function svgTagClasses() {
 
         // For highways, look for surface tagging..
         if ((primary === 'highway' && !osmPathHighwayTagValues[t.highway]) || primary === 'aeroway') {
-            let surface = t.highway === 'track' ? 'unpaved' : 'paved';
-            for (const k in t) {
-                const v = t[k];
-                if (k in osmPavedTags) {
-                    surface = osmPavedTags[k][v] ? 'paved' : 'unpaved';
+            if (t.highway !== 'track') { // tracks are styled by grade and not surface
+                let surface = 'paved';
+                for (const k in t) {
+                    const v = t[k];
+                    if (k in osmPavedTags) {
+                        surface = osmPavedTags[k][v] ? 'paved' : 'unpaved';
+                    }
+                    if (k in osmSemipavedTags && !!osmSemipavedTags[k][v]) {
+                        surface = 'semipaved';
+                    }
                 }
-                if (k in osmSemipavedTags && !!osmSemipavedTags[k][v]) {
-                    surface = 'semipaved';
+                classes.push('tag-' + surface);
+            } else {
+                // Tracks with no `tracktype` for default/unknown grade-based styling
+                if (t.highway === 'track' &&
+                    (!t.tracktype || (t.tracktype !== 'grade1' && t.tracktype !== 'grade2' && t.tracktype !== 'grade3' && t.tracktype !== 'grade4' && t.tracktype !== 'grade5'))) {
+                    classes.push('tag-ungraded');
                 }
-            }
-            classes.push('tag-' + surface);
-
-            // Unpaved tracks with no `tracktype` for default/unknown grade-based styling
-            if (t.highway === 'track' &&
-                surface === 'unpaved' && // otherwise, this will style paved tracks
-                (!t.tracktype || (t.tracktype !== 'grade2' && t.tracktype !== 'grade3' && t.tracktype !== 'grade4' && t.tracktype !== 'grade5'))) {
-                classes.push('tag-ungraded');
             }
         }
 
