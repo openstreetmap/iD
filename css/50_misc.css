@@ -410,7 +410,7 @@ path.line.casing.tag-bridge.tag-semipaved {
 
 /* Track - based on grading (tracktype) */
 path.line.casing.tag-highway-track {
-    stroke: #ccc;
+    stroke: #ddd;
     stroke-linecap: butt;
 }
 path.line.casing.tag-highway-track.tag-ungraded { stroke-dasharray: 7, 3, 3, 3, 3, 3; }
