@@ -239,10 +239,16 @@ export const osmOneWayBiDirectionalTags: TagDictionary<boolean> = {
         'reversible': true,
     },
     'flow_direction': {
-        'both' : true,
-        'unknown' : true,
-        // instead of BiDirectional, 'unknown' might fit better under a new "UnDirectional" category
+        'both' : true
     },
+};
+export const osmOneWayNoTags: TagDictionary<boolean> = {
+    'oneway': {
+        'no': true
+    },
+    'flow_direction': {
+        'unknown' : true
+    }
 };
 export const osmOneWayTags = merge(
     osmOneWayForwardTags,

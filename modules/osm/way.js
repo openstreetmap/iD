@@ -3,7 +3,7 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 import { geoExtent, geoVecCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
-import { osmTagSuggestingArea, osmRightSideIsInsideTags, osmRemoveLifecyclePrefix, osmOneWayBiDirectionalTags, osmOneWayBackwardTags, osmOneWayForwardTags, osmOneWayTags } from './tags';
+import { osmTagSuggestingArea, osmRightSideIsInsideTags, osmRemoveLifecyclePrefix, osmOneWayBiDirectionalTags, osmOneWayBackwardTags, osmOneWayForwardTags, osmOneWayTags, osmOneWayNoTags } from './tags';
 import { utilArrayUniq, utilCheckTagDictionary } from '../util';
 import { osmIdManager } from './id_manager';
 
@@ -143,28 +143,28 @@ const prototype = {
 
     /** @returns {boolean} for example, if `oneway=yes` */
     isOneWayForwards() {
-        if (this.tags.oneway === 'no') return false;
+        if (utilCheckTagDictionary(this.tags, osmOneWayNoTags)) return false;
 
         return !!utilCheckTagDictionary(this.tags, osmOneWayForwardTags);
     },
 
     /** @returns {boolean} for example, if `oneway=-1` */
     isOneWayBackwards() {
-        if (this.tags.oneway === 'no') return false;
+        if (utilCheckTagDictionary(this.tags, osmOneWayNoTags)) return false;
 
         return !!utilCheckTagDictionary(this.tags, osmOneWayBackwardTags);
     },
 
     /** @returns {boolean} for example, if `oneway=alternating` */
     isBiDirectional() {
-        if (this.tags.oneway === 'no') return false;
+        if (utilCheckTagDictionary(this.tags, osmOneWayNoTags)) return false;
 
         return !!utilCheckTagDictionary(this.tags, osmOneWayBiDirectionalTags);
     },
 
     /** @returns {boolean} */
     isOneWay() {
-        if (this.tags.oneway === 'no') return false;
+        if (utilCheckTagDictionary(this.tags, osmOneWayNoTags)) return false;
 
         return !!utilCheckTagDictionary(this.tags, osmOneWayTags);
     },
