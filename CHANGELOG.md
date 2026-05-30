@@ -46,6 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add high-resolution toggle for Mapilio photo viewer ([#12353], thanks [@sezerbozbiyik])
 #### :white_check_mark: Validation
 * Fix bug causing first click not focussing the respective features when clicking on a validation message in the upload dialog ([#8848])
+* Check the flow direction of `waterway=pressurised` ([#12386], thanks [@paulklie])
 #### :bug: Bugfixes
 * Restore dedicated rendering of ski pistes and building parts ([#12297], thanks [@matkoniecz])
 * Pressing backspace while in the feature type selecting mode should not delete the object
@@ -71,6 +72,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12337]: https://github.com/openstreetmap/iD/issues/12337
 [#12353]: https://github.com/openstreetmap/iD/pull/12353
 [#12374]: https://github.com/openstreetmap/iD/pull/12374
+[#12386]: https://github.com/openstreetmap/iD/pull/12386
 
 
 # 2.40.0
