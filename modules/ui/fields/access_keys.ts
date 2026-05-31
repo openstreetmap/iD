@@ -74,9 +74,20 @@ export const ACCESS_KEYS: ReadonlyArray<AccessKeyEntry> = [
 const KEY_SET = new Set(ACCESS_KEYS.map(function(e) { return e.key; }));
 
 /** Returns keys to show in the UI: defaults + any tagKeys that are known access keys. */
-export function getEffectiveAccessKeys(tagKeys: string[]): string[] {
-    const present = new Set(tagKeys.filter(function(k) { return KEY_SET.has(k); }));
+export function getEffectiveAccessKeys(tagKeys: string[], addedKeys: string[] = []): string[] {
+    const present = new Set([
+        ...tagKeys.filter(function(k) { return KEY_SET.has(k); }),
+        ...addedKeys.filter(function(k) { return KEY_SET.has(k); })
+    ]);
     return ACCESS_KEYS
         .filter(function(entry) { return entry.default === true || present.has(entry.key); })
+        .map(function(entry) { return entry.key; });
+}
+
+/** Returns known access keys not already shown in the UI. */
+export function getAddableAccessKeys(currentKeys: string[]): string[] {
+    const current = new Set(currentKeys);
+    return ACCESS_KEYS
+        .filter(function(entry) { return !current.has(entry.key); })
         .map(function(entry) { return entry.key; });
 }

@@ -185,4 +185,40 @@ describe('iD.uiFieldAccess', function() {
         expect(keysWithMotorcar).to.include('motorcar');
     });
 
+    it('shows an add row for additional access keys', function() {
+        var access = iD.uiFieldAccess(field, context);
+        selection.call(access);
+
+        expect(selection.selectAll('.preset-access-add').size()).to.equal(1);
+        expect(selection.select('.preset-access-add input.preset-input-access-add-key').attr('placeholder')).to.equal('Add a new mode of transport');
+        expect(selection.selectAll('.preset-access-add .preset-input-access-wrap').size()).to.equal(0);
+        expect(selection.selectAll('.preset-access-motorcar').size()).to.equal(0);
+    });
+
+    it('sets tags with the selected access key, not a numeric index', async function() {
+        var access = iD.uiFieldAccess(field, context);
+        var tagsChanged;
+        access.on('change', function(t) { tagsChanged = t; });
+        selection.call(access);
+        access.tags({ highway: 'residential', dog: 'no', ski: 'designated' });
+
+        var dogInput = selection.select('.preset-access-dog .preset-input-access');
+        expect(dogInput.size()).to.equal(1);
+
+        tagsChanged = undefined;
+        dogInput.node().value = 'yes';
+        dogInput.node().dispatchEvent(new Event('change', { bubbles: true }));
+        await new Promise(function(resolve) { window.setTimeout(resolve, 0); });
+        expect(tagsChanged).to.deep.equal({ dog: 'yes' });
+        expect(tagsChanged).to.not.have.property('0');
+
+        tagsChanged = undefined;
+        var skiInput = selection.select('.preset-access-ski .preset-input-access');
+        skiInput.node().value = 'permissive';
+        skiInput.node().dispatchEvent(new Event('change', { bubbles: true }));
+        await new Promise(function(resolve) { window.setTimeout(resolve, 0); });
+        expect(tagsChanged).to.deep.equal({ ski: 'permissive' });
+        expect(tagsChanged).to.not.have.property('0');
+    });
+
 });

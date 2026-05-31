@@ -3,6 +3,8 @@ import 'happen';
 import fetchMock from 'fetch-mock';
 import 'fake-indexeddb/auto';
 import envs from '../config/envs.js';
+import taggingEn from '@openstreetmap/id-tagging-schema/dist/translations/en.min.json' with { type: 'json' };
+import { applyAccessFieldTypes } from '../modules/presets/access_field_type_strings.js';
 
 declare var global: typeof globalThis;
 declare var jsdom: typeof globalThis;
@@ -51,63 +53,9 @@ cached.locales = { en: { rtl: false, pct: 1 } };
 cached.locales_index_general = { en: { rtl: false, pct: 1 } };
 cached.locales_index_tagging = { en: { rtl: false, pct: 1 } };
 
-// Use fake data for the 'tagging' scope
-cached.locale_tagging_en = {
-  en: {
-    presets: {
-      fields: {
-        restrictions: {
-          label: 'Turn Restrictions'
-        },
-        access: {
-          label: 'Allowed Access',
-          placeholder: 'Not Specified',
-          types: {
-            access: 'All',
-            foot: 'Foot',
-            motor_vehicle: 'Motor Vehicles',
-            bicycle: 'Bicycles',
-            horse: 'Horses'
-          },
-          options: {
-            yes: {
-              title: 'Allowed',
-              description: 'Access allowed by law; a right of way'
-            },
-            no: {
-              title: 'Prohibited',
-              description: 'Access not allowed to the general public'
-            },
-            permissive: {
-              title: 'Permissive',
-              description: 'Access allowed until such time as the owner revokes the permission'
-            },
-            private: {
-              title: 'Private',
-              description: 'Access allowed only with permission of the owner on an individual basis'
-            },
-            designated: {
-              title: 'Designated',
-              description: 'Access allowed according to signs or specific local laws'
-            },
-            destination: {
-              title: 'Destination',
-              description: 'Access allowed only to reach a destination'
-            },
-            dismount: {
-              title: 'Dismount',
-              description: 'Access allowed but rider must dismount'
-            },
-            permit: {
-              title: 'Permit',
-              description: 'Access allowed only with a valid permit or license'
-            }
-          }
-        }
-      }
-    }
-  }
-};
+// Tagging locale from schema, with temporary access type labels merged at runtime
+applyAccessFieldTypes(taggingEn.en);
+cached.locale_tagging_en = taggingEn;
 
 // Load the actual data from `dist/locales/` for the 'general' scope
 iD.localizer.loadLocale('en', 'general', 'locales');
