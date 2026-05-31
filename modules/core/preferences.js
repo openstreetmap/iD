@@ -7,7 +7,7 @@ try { _storage = localStorage; } catch {}  // eslint-disable-line no-empty
 _storage = _storage || (() => {
   let s = {};
   return {
-    getItem: (k) => s[k] || null,
+    getItem: (k) => s[k] === undefined ? null : s[k],
     setItem: (k, v) => s[k] = v,
     removeItem: (k) => delete s[k]
   };
