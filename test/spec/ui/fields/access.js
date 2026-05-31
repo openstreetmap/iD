@@ -185,14 +185,66 @@ describe('iD.uiFieldAccess', function() {
         expect(keysWithMotorcar).to.include('motorcar');
     });
 
-    it('shows an add row for additional access keys', function() {
-        var access = iD.uiFieldAccess(field, context);
-        selection.call(access);
+    it('shows an add row for additional access keys after clicking the add button', function() {
+        var container = d3.select('body').append('div').attr('class', 'ideditor');
+        context.container(container);
 
-        expect(selection.selectAll('.preset-access-add').size()).to.equal(1);
-        expect(selection.select('.preset-access-add input.preset-input-access-add-key').attr('placeholder')).to.equal('Add a new mode of transport');
-        expect(selection.selectAll('.preset-access-add .preset-input-access-wrap').size()).to.equal(0);
-        expect(selection.selectAll('.preset-access-motorcar').size()).to.equal(0);
+        var formField = selection.append('div').attr('class', 'form-field form-field-access');
+        var label = formField.append('label').attr('class', 'field-label');
+        label.append('span').attr('class', 'label-text');
+        label.append('button').attr('class', 'remove-icon');
+
+        var access = iD.uiFieldAccess(field, context);
+        container.append(function() { return formField.node(); });
+        formField.call(access);
+
+        expect(formField.selectAll('.access-add').size()).to.equal(1);
+        expect(formField.select('.access-add').attr('aria-label')).to.equal('Add a new mode of transport');
+        expect(formField.select('.preset-access-add').style('display')).to.equal('none');
+        expect(formField.select('ul.rows li:first-child').classed('preset-access-add')).not.to.be.ok;
+        expect(formField.selectAll('.preset-access-add .preset-input-access-wrap').size()).to.equal(0);
+        expect(formField.selectAll('.preset-access-motorcar').size()).to.equal(0);
+
+        formField.select('.access-add').node().click();
+
+        expect(formField.select('.preset-access-add').style('display')).not.to.equal('none');
+        expect(formField.select('.preset-access-add input.preset-input-access-add-key').attr('placeholder')).to.equal('Add a new mode of transport');
+        expect(formField.select('ul.rows li:first-child').classed('preset-access-add')).to.be.ok;
+        expect(container.selectAll('.combobox-access-add-key').size()).to.equal(1);
+
+        container.remove();
+    });
+
+    it('opens the value combobox after selecting a new access key', async function() {
+        var container = d3.select('body').append('div').attr('class', 'ideditor');
+        context.container(container);
+
+        var formField = selection.append('div').attr('class', 'form-field form-field-access');
+        var label = formField.append('label').attr('class', 'field-label');
+        label.append('span').attr('class', 'label-text');
+        label.append('button').attr('class', 'remove-icon');
+        container.append(function() { return formField.node(); });
+
+        var access = iD.uiFieldAccess(field, context);
+        formField.call(access);
+        access.tags({ highway: 'residential' });
+
+        formField.select('.access-add').node().click();
+        var addInput = formField.select('.preset-access-add input');
+        addInput.node().value = 'motorcar';
+        addInput.node().focus();
+        iD.uiCombobox.open(addInput);
+        container.selectAll('.combobox-access-add-key .combobox-option')
+            .filter(function() { return d3.select(this).attr('title') === 'motorcar'; })
+            .node()
+            .click();
+
+        await new Promise(function(resolve) { window.setTimeout(resolve, 0); });
+
+        expect(formField.select('.preset-access-motorcar .preset-input-access').size()).to.equal(1);
+        expect(container.selectAll('.combobox-access-motorcar').size()).to.equal(1);
+
+        container.remove();
     });
 
     it('sets tags with the selected access key, not a numeric index', async function() {

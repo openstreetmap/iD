@@ -1635,6 +1635,14 @@ input.date-selector {
     flex: 1 1 50%;
     min-width: 0;
 }
+.form-field-input-access ul.rows li.labeled-input > .preset-input-access-wrap {
+    display: flex;
+    flex-flow: row nowrap;
+}
+.form-field-input-access ul.rows li.labeled-input > .preset-input-access-wrap input {
+    flex: 1 1 auto;
+    min-width: 0;
+}
 .form-field ul.rows li.labeled-input button {
     border-width: 0;
 }
@@ -1642,24 +1650,23 @@ input.date-selector {
     flex: 1 1 100%;
     max-width: 100%;
     padding: 0;
+    display: flex;
+    flex-flow: row nowrap;
 }
 .form-field ul.rows li.preset-access-add > .label input.preset-input-access-add-key {
     background: var(--bg-color-2);
     font-weight: normal;
     border-radius: 0;
     border-width: 0;
-    width: 100%;
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+}
+.form-field ul.rows li.preset-access-add > .label .combobox-caret {
+    flex: 0 0 auto;
 }
 .form-field ul.rows li.preset-access-add input::placeholder {
     font-weight: normal;
-}
-.ideditor[dir='ltr'] .form-field ul.rows li.preset-access-add > .label input.preset-input-access-add-key {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-}
-.ideditor[dir='rtl'] .form-field ul.rows li.preset-access-add > .label input.preset-input-access-add-key {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
 }
 .ideditor[dir='ltr'] .form-field ul.rows li.labeled-input > div:nth-child(2) input,
 .ideditor[dir='ltr'] .form-field ul.rows li.labeled-input button {

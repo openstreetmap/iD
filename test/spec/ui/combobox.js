@@ -272,4 +272,17 @@ describe('uiCombobox', function() {
         simulateKeypress('↩');
         expect(body.selectAll('.combobox').size()).to.equal(0);
     });
+
+    it('opens the suggestion list on uiCombobox.open', function() {
+        input.call(combobox.data(data));
+        input.node().focus();
+        iD.uiCombobox.open(input);
+        expect(body.selectAll('.combobox .combobox-option').size()).to.equal(5);
+    });
+
+    it('opens the suggestion list on uiCombobox.open even without focus', function() {
+        input.call(combobox.data(data));
+        iD.uiCombobox.open(input);
+        expect(body.selectAll('.combobox .combobox-option').size()).to.equal(5);
+    });
 });

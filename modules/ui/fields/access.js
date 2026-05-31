@@ -3,6 +3,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { getAddableAccessKeys, getEffectiveAccessKeys } from './access_keys';
 import { uiCombobox } from '../combobox';
+import { svgIcon } from '../../svg/icon';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 import { t } from '../../core/localizer';
 import { formatTag } from './tag_title';
@@ -14,6 +15,8 @@ export function uiFieldAccess(field, context) {
     let _wrap = d3_select(null);
     let _addKeyInput = d3_select(null);
     let _addKeyCombo;
+    let _addButton = d3_select(null);
+    let _addRowVisible = false;
     /** @type {string[]} */
     let _addedKeys = [];
     /** @type {Record<string, string|string[]>} */
@@ -35,23 +38,22 @@ export function uiFieldAccess(field, context) {
     }
 
 
-    function updateAddRow(currentKeys) {
-        if (!_list.size()) return;
-
+    function positionAddRowAtTop() {
         const addRow = _list.select('li.preset-access-add');
-        const addable = getAddableAccessKeys(currentKeys);
-
-        if (addable.length === 0) {
-            addRow.style('display', 'none');
-            return;
+        const node = addRow.node();
+        const first = _list.select('li.labeled-input:not(.preset-access-add)').node();
+        if (node && node.parentNode) {
+            if (first) {
+                node.parentNode.insertBefore(node, first);
+            } else {
+                node.parentNode.appendChild(node);
+            }
         }
+    }
 
-        addRow.style('display', null);
-        if (_addKeyCombo) {
-            _addKeyCombo.data(addKeyOptions(currentKeys));
-        }
 
-        // Keep the add row last even after the keyed rows rebind.
+    function positionAddRowAtEnd() {
+        const addRow = _list.select('li.preset-access-add');
         const node = addRow.node();
         if (node && node.parentNode) {
             node.parentNode.appendChild(node);
@@ -59,17 +61,75 @@ export function uiFieldAccess(field, context) {
     }
 
 
+    function openCombobox(input) {
+        uiCombobox.open(input);
+    }
+
+
+    function showAddRow(currentKeys) {
+        _addRowVisible = true;
+        updateAddRow(currentKeys);
+        if (_addKeyInput.node()) {
+            _addKeyInput.node().focus();
+            openCombobox(_addKeyInput);
+        }
+    }
+
+
+    function hideAddRow() {
+        _addRowVisible = false;
+        utilGetSetValue(_addKeyInput, '');
+        if (_list.size()) {
+            _list.select('li.preset-access-add').style('display', 'none');
+            positionAddRowAtEnd();
+        }
+    }
+
+
+    function updateAddRow(currentKeys) {
+        if (!_list.size()) return;
+
+        const addRow = _list.select('li.preset-access-add');
+        const addable = getAddableAccessKeys(currentKeys);
+
+        if (addable.length === 0) {
+            hideAddRow();
+            if (_addButton.size()) _addButton.style('display', 'none');
+            return;
+        }
+
+        if (_addButton.size()) _addButton.style('display', null);
+
+        if (_addRowVisible) {
+            addRow.style('display', null);
+            positionAddRowAtTop();
+            if (_addKeyCombo) {
+                _addKeyCombo.data(addKeyOptions(currentKeys));
+            }
+        } else {
+            addRow.style('display', 'none');
+            positionAddRowAtEnd();
+        }
+    }
+
+
+    function focusAndOpenValueCombobox(key) {
+        window.setTimeout(function() {
+            const input = _list.select('.preset-access-' + key + ' .preset-input-access');
+            if (input.node()) {
+                uiCombobox.open(input);
+            }
+        }, 0);
+    }
+
+
     function addAccessKey(key) {
         if (!key || field.effectiveKeys.indexOf(key) !== -1) return;
 
         _addedKeys.push(key);
-        utilGetSetValue(_addKeyInput, '');
+        hideAddRow();
         updateAccessUI(_tags);
-
-        const input = _list.select('.preset-access-' + key + ' .preset-input-access');
-        if (input.node()) {
-            input.node().focus();
-        }
+        focusAndOpenValueCombobox(key);
     }
 
 
@@ -221,8 +281,35 @@ export function uiFieldAccess(field, context) {
 
         _addKeyInput = _list.select('.preset-access-add input.preset-input-access-add-key');
         _addKeyCombo = uiCombobox(context, 'access-add-key')
-            .on('accept', function(d) { addAccessKey(d.value); });
+            .on('accept', function(d, datum, val) {
+                addAccessKey((datum && datum.value) || val || d.value);
+            });
         _addKeyInput.call(_addKeyCombo, _list.select('li.preset-access-add'));
+
+        _list.select('li.preset-access-add').style('display', 'none');
+
+        const label = selection.select('.field-label');
+        if (!label.empty()) {
+            let addButton = label.selectAll('.access-add')
+                .data([0]);
+
+            addButton = addButton.enter()
+                .insert('button', '.remove-icon, .modified-icon')
+                .attr('class', 'access-add')
+                .attr('aria-label', t('fields.access.add_type'))
+                .call(svgIcon('#iD-icon-plus'))
+                .merge(addButton);
+
+            addButton
+                .on('click', function(d3_event) {
+                    d3_event.stopPropagation();
+                    d3_event.preventDefault();
+                    this.blur();
+                    showAddRow(getEffectiveAccessKeys(Object.keys(_tags), _addedKeys));
+                });
+
+            _addButton = addButton;
+        }
 
         updateAccessUI({});
     }
