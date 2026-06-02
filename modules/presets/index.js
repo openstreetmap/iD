@@ -428,7 +428,7 @@ export function presetIndex() {
         return null;
       })
         .filter(Boolean)
-        .filter(a => !a.locationSetID || validHere[a.locationSetID]);
+        .filter(a => !a.locationSetID || validHere.has(a.locationSetID));
     } else {
       defaults = _defaults[geometry].collection.concat(_this.fallback(geometry));
     }

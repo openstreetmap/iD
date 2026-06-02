@@ -38,7 +38,6 @@ export function uiSectionRawMembershipEditor(context) {
 
     var taginfo = services.taginfo;
     var nearbyCombo = uiCombobox(context, 'parent-relation')
-        .minItems(1)
         .fetcher(fetchNearbyRelations)
         .itemsMouseEnter(function(d3_event, d) {
             if (d.relation) utilHighlightEntities([d.relation.id], true, context);

@@ -41,11 +41,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 * Render short radio field options inline on one row when they fit side-by-side ([#12343], thanks [@FloEdelmann])
 * Make tags like `contact:instagram` clickable if they contain a plain username, or a full URL ([#12306], thanks [@k-yle])
+* Render the `side` arrow of cyclist waiting aid features ([#12374], thanks [@RudyTheDev])
 #### :scissors: Operations
 #### :camera: Street-Level
 * Add high-resolution toggle for Mapilio photo viewer ([#12353], thanks [@sezerbozbiyik])
 #### :white_check_mark: Validation
 * Fix bug causing first click not focussing the respective features when clicking on a validation message in the upload dialog ([#8848])
+* Check the flow direction of `waterway=pressurised` ([#12386], thanks [@paulklie])
 #### :bug: Bugfixes
 * Restore dedicated rendering of ski pistes and building parts ([#12297], thanks [@matkoniecz])
 * Pressing backspace while in the feature type selecting mode should not delete the object
@@ -71,6 +73,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12337]: https://github.com/openstreetmap/iD/issues/12337
 [#12343]: https://github.com/openstreetmap/iD/pull/12343
 [#12353]: https://github.com/openstreetmap/iD/pull/12353
+[#12374]: https://github.com/openstreetmap/iD/pull/12374
+[#12386]: https://github.com/openstreetmap/iD/pull/12386
 [@FloEdelmann]: https://github.com/FloEdelmann
 
 
