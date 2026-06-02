@@ -65,8 +65,8 @@ export function uiField(context, presetField, entityIDs, options) {
     }
 
 
-    function allKeys() {
-        return field.allKeys();
+    function allKeys(tags) {
+        return field.allKeys(tags);
     }
 
 
@@ -75,7 +75,7 @@ export function uiField(context, presetField, entityIDs, options) {
         return entityIDs.some(function(entityID) {
             var original = context.graph().base().entities[entityID];
             var latest = context.graph().entity(entityID);
-            return allKeys().some(function(key) {
+            return allKeys(_tags).some(function(key) {
                 return original ? latest.tags[key] !== original.tags[key] : latest.tags[key];
             });
         });
@@ -83,7 +83,7 @@ export function uiField(context, presetField, entityIDs, options) {
 
 
     function tagsContainFieldKey() {
-        return allKeys().some(function(key) {
+        return allKeys(_tags).some(function(key) {
             if (field.type === 'multiCombo') {
                 for (var tagKey in _tags) {
                     if (tagKey.indexOf(key) === 0) {
@@ -111,7 +111,7 @@ export function uiField(context, presetField, entityIDs, options) {
         d3_event.preventDefault();
         if (!entityIDs || _locked) return;
 
-        dispatch.call('revert', d, allKeys());
+        dispatch.call('revert', d, allKeys(_tags));
     }
 
 
@@ -121,7 +121,7 @@ export function uiField(context, presetField, entityIDs, options) {
         if (_locked) return;
 
         var t = {};
-        allKeys().forEach(function(key) {
+        allKeys(_tags).forEach(function(key) {
             t[key] = undefined;
         });
 
