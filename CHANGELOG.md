@@ -59,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Remove redundant software dependencies to reduce the amount of the code that is bundled with iD ([#11634], [#12307], thanks [@k-yle])
 * Update name-suggestion-index to v7.2 ([#12337], thanks [@bjornstar])
+* Fix unit tests failing with nodejs v26 ([#12401], thanks [@brianstrauch])
 
 [#8848]: https://github.com/openstreetmap/iD/issues/8848
 [#11634]: https://github.com/openstreetmap/iD/pull/11634
@@ -71,6 +72,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12337]: https://github.com/openstreetmap/iD/issues/12337
 [#12353]: https://github.com/openstreetmap/iD/pull/12353
 [#12374]: https://github.com/openstreetmap/iD/pull/12374
+[#12401]: https://github.com/openstreetmap/iD/pull/12401
+[@brianstrauch]: https://github.com/brianstrauch
 
 
 # 2.40.0

@@ -12,6 +12,7 @@ _storage = _storage || (() => {
     removeItem: (k) => delete s[k]
   };
 })();
+globalThis.localStorage ||= _storage;
 
 const _listeners = {};
 
