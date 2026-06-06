@@ -28,36 +28,6 @@
 
   <body>
     <div id='id-container'></div>
-
-    <script>
-      var container = document.getElementById('id-container');
-      var newScript = document.createElement('script');
-      newScript.type = 'text/javascript';
-      newScript.onload = checkScript;
-      newScript.onerror = checkScript;
-      newScript.src = 'iD.min.js';
-
-      document.getElementsByTagName('head')[0].appendChild(newScript);
-
-
-      function checkScript() {
-        if (typeof iD === 'undefined' || !iD.utilDetect().support) {
-          container.innerHTML = 'Sorry, your browser is not currently supported. Please use another <a href="https://github.com/openstreetmap/iD#basics">browser</a> or <a href="https://wiki.openstreetmap.org/wiki/Editors">editor</a> to contribute to the map.';
-          container.style.padding = '20px';
-
-        } else {
-          var context = iD.coreContext()
-            .assetPath('')
-            .containerNode(container);
-          context.init();
-
-          // disable boundaries (unless we have an explicit disable_features list)
-          var q = iD.utilStringQs(window.location.hash);
-          if (!q.hasOwnProperty('disable_features')) {
-            context.features().disable('boundaries');
-          }
-        }
-      }
-    </script>
+    <script type='module' src='iD.min.js'></script>
   </body>
 </html>

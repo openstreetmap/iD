@@ -145,7 +145,7 @@ export function coreFileFetcher() {
   function getUrl<T extends FileId>(url: string, which: T): Promise<Definitions[T]> {
     let prom = _inflight[url];
     if (!prom) {
-      prom = (window.VITEST ? import(`../${url}`) : fetch(url))
+      prom = (window.VITEST ? import(/* @vite-ignore */ `../${url}`) : fetch(url))
         .then(response => {
           if (window.VITEST) return response.default;
 

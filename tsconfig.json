@@ -12,5 +12,5 @@
         "resolveJsonModule": true,
         "types": ["vitest/globals", "vitest/jsdom"]
     },
-    "include": ["modules", "test"]
+    "include": ["**/*.ts"]
 }
