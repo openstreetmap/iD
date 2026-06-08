@@ -349,7 +349,7 @@ export function coreValidator(context) {
   validator.getSharedEntityIssues = (entityIDs, options) => {
     const orderedIssueTypes = [                 // Show some issue types in a particular order:
       'missing_tag', 'missing_role',            // - missing data first
-      'outdated_tags', 'mismatched_geometry',   // - identity issues
+      'outdated_tags', 'mismatched_geometry', 'misplaced_tag',   // - identity issues
       'crossing_ways', 'almost_junction',       // - geometry issues where fixing them might solve connectivity issues
       'disconnected_way', 'impossible_oneway'   // - finally connectivity issues
     ];

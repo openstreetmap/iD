@@ -1646,6 +1646,12 @@ en:
       title: Mismatched Geometry
       tip: "Find features with conflicting tags and geometry"
       reference: Most features are limited to certain geometry types.
+    misplaced_tag:
+      title: Misplaced Tags
+      tip: "Find tags that belong on a different feature"
+      traffic_calming_on_crossing_way:
+        message: "{feature} has traffic calming tags"
+        reference: "Traffic calming affects vehicle traffic. To map a raised crossing, add traffic_calming to the crossing point or the main road, not the crossing way."
     missing_role:
       title: Missing Roles
       message: "{member} has no role within {relation}"
