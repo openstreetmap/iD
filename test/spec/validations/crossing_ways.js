@@ -315,8 +315,13 @@ describe('iD.validations.crossing_ways', function () {
         verifySingleCrossingIssue(validate(), { highway: 'crossing', crossing: 'marked', 'crossing:markings': 'zebra' });
     });
 
-    it('does not copy `crossing` and `crossing:markings` if the `crossing` tag has an unknown value', function() {
-        createWaysWithOneCrossingPoint({ highway: 'residential' }, { highway: 'footway', crossing: 'zebra', 'crossing:markings': 'zebra' });
+    it('copies over `crossing:island`', function() {
+        createWaysWithOneCrossingPoint({ highway: 'residential' }, { highway: 'footway', crossing: 'marked', 'crossing:island': 'yes' });
+        verifySingleCrossingIssue(validate(), { highway: 'crossing', crossing: 'marked', 'crossing:island': 'yes' });
+    });
+
+    it('does not copy `crossing`, `crossing:markings`, and `crossing:island` if the `crossing` tag has an unknown value', function() {
+        createWaysWithOneCrossingPoint({ highway: 'residential' }, { highway: 'footway', crossing: 'zebra', 'crossing:markings': 'zebra', 'crossing:island': 'yes' });
         verifySingleCrossingIssue(validate(), { highway: 'crossing' });
     });
 
