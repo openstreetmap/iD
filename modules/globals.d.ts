@@ -3,8 +3,6 @@ declare global {
   declare var d3: typeof import('d3');
   declare var VITEST: true;
 
-  declare type EntityID = string;
-
   declare type TagKey = string;
   declare type TagValue = string;
   declare type TagValueUpdate = string | undefined;
@@ -25,12 +23,12 @@ declare global {
     export type Context = ReturnType<typeof iD.coreContext>;
 
     export type Graph = import('./core/graph').coreGraph;
-    export type OsmNode = import('./osm/node').OsmNode;
-    export type OsmWay = import('./osm/way').OsmWay;
-    export type OsmRelation = import('./osm/relation').OsmRelation;
 
-    export type AbstractEntity = typeof import('./osm/entity').osmEntity.prototype;
-    export type OsmEntity = OsmNode | OsmWay | OsmRelation;
+    export type OsmNode = import('./osm/node').osmNode;
+    export type OsmWay = import('./osm/way').osmWay;
+    export type OsmRelation = import('./osm/relation').osmRelation;
+    export type OsmEntity = import('./osm/abstract-entity').OsmEntity;
+    export type OsmAbstractEntity = import('./osm/abstract-entity').OsmAbstractEntity;
 
     export type Projection = import('./geo/raw_mercator').Projection;
   }

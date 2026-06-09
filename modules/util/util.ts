@@ -8,7 +8,8 @@ import { utilArrayUnion } from './array';
 import { utilDetect } from './detect';
 import { geoExtent } from '../geo/extent';
 import type { coreGraph } from '../core';
-import type { OsmNode } from '../osm/node';
+import type { osmNode as OsmNode } from '../osm/node';
+import type { EntityId as EntityID } from '../osm';
 
 
 export function utilTagText(entity: iD.OsmEntity): string {

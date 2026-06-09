@@ -5,7 +5,7 @@ import { prefs } from '../../core/preferences';
 import { fileFetcher } from '../../core/file_fetcher';
 import { coreGraph } from '../../core/graph';
 import { modeBrowse } from '../../modes/browse';
-import { osmEntity } from '../../osm/entity';
+import { createEntity } from '../../osm/create-entity';
 import { svgIcon } from '../../svg/icon';
 import { uiCurtain } from '../curtain';
 import { utilArrayDifference, utilArrayUniq, utilStringQs } from '../../util';
@@ -53,7 +53,7 @@ export function uiIntro(context) {
         // create entities for intro graph and localize names
         for (let id in dataIntroGraph) {
           if (!_introGraph[id]) {
-            _introGraph[id] = osmEntity(localize(dataIntroGraph[id]));
+            _introGraph[id] = createEntity(localize(dataIntroGraph[id]));
           }
         }
         selection.call(startIntro);

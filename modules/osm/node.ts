@@ -1,9 +1,15 @@
-import { osmEntity } from './entity';
+import type { Point } from 'geojson';
 import { geoAngle, geoExtent, geoVecAdd, geoVecLength, geoVecNormalize, geoVecSubtract } from '../geo';
 import { utilArrayUniqBy } from '../util';
 import { osmShouldRenderDirection } from './tags';
+import { OsmAbstractEntity, type OsmEntityProps } from './abstract-entity';
+import type { ChangesetId, NodeId } from './id_manager';
+import type { Vec2 } from '../geo/vector';
+import type { coreGraph } from '../core/graph';
+import { debug } from '..';
+import type { Projection } from '../geo/raw_mercator';
 
-export const cardinal = {
+export const cardinal: Record<string, number> = {
     north: 0,               n: 0,
     northnortheast: 22,     nne: 22,
     northeast: 45,          ne: 45,
@@ -30,57 +36,57 @@ export const SIDE_TAGS = [
 
 export const SIDES = new Set(['left', 'right', 'both']);
 
-export const SIDE_ANGLE_OFFSET = { left: 180, right: 0 };
+export const SIDE_ANGLE_OFFSET: Record<string, number> = { left: 180, right: 0 };
 
-/**
- * @typedef {typeof prototype & iD.AbstractEntity} OsmNode
- * @returns {OsmNode}
- */
-export function osmNode() {
-    if (!(this instanceof osmNode)) {
-        return new osmNode(...arguments);
+export class osmNode extends OsmAbstractEntity {
+    declare readonly type: 'node';
+    declare readonly id: NodeId;
+    declare readonly loc: Vec2;
+
+    constructor(...args: Partial<OsmEntityProps & Pick<osmNode, 'loc'>>[]) {
+        super({ type: 'node', loc: [9999, 9999] }, ...args);
+        if (debug) Object.freeze(this.loc);
     }
-    this.initialize(arguments);
-}
 
-osmEntity.node = osmNode;
-
-osmNode.prototype = Object.create(osmEntity.prototype);
-
-const prototype = {
-    type: /** @type {'node'} */ ('node'),
-    loc: /** @type {Vec2} */ ([9999, 9999]),
-
-    extent: function() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- intentional, to make the method signature compatible with way/relation
+    extent(resolver?: coreGraph) {
         return new geoExtent(this.loc);
-    },
+    }
 
-
-    geometry: function(graph) {
-        return graph.transient(this, 'geometry', function() {
+    geometry(graph: coreGraph) {
+        return graph.transient(this, 'geometry', () => {
             return graph.isPoi(this) ? 'point' : 'vertex';
         });
-    },
+    }
 
+    copy(resolver: coreGraph, copies: { [id: NodeId]: any }) {
+        if (copies[this.id]) return copies[this.id];
 
-    move: function(loc) {
+        var copy = new osmNode(this, {
+            id: undefined,
+            user: undefined,
+            version: undefined,
+        });
+        copies[this.id] = copy;
+
+        return copy;
+    }
+
+    move(loc: Vec2) {
         return this.update({loc: loc});
-    },
+    }
 
-
-    isDegenerate: function() {
+    isDegenerate() {
         return !(
             Array.isArray(this.loc) && this.loc.length === 2 &&
             this.loc[0] >= -180 && this.loc[0] <= 180 &&
             this.loc[1] >= -90 && this.loc[1] <= 90
         );
-    },
-
+    }
 
     // Inspect tags and geometry to determine which direction(s) this node/vertex points
-    directions: function(resolver, projection) {
-        /** @type {{ type: 'side' | 'turnout_side' | 'direction'; value: string }[]} */
-        const rawValues = [];
+    directions(resolver: coreGraph, projection: Projection) {
+        const rawValues: { type: 'side' | 'turnout_side' | 'direction'; value: string | number }[] = [];
 
         // which tag to use?
         if (this.isHighwayIntersection(resolver) && (this.tags.stop || '').toLowerCase() === 'all') {
@@ -107,7 +113,7 @@ const prototype = {
             );
 
             const sideTag = SIDE_TAGS.map(key => this.tags[key]).find(Boolean);
-            if (SIDES.has(sideTag?.toLowerCase()) && !isSideTagAmbiguous) {
+            if (sideTag && SIDES.has(sideTag.toLowerCase()) && !isSideTagAmbiguous) {
                 rawValues.push({
                     type: 'side',
                     value: sideTag?.toLowerCase(),
@@ -133,10 +139,9 @@ const prototype = {
         if (!rawValues.length) return [];
 
 
-        /** @type {{ type: 'side' | 'direction'; angle: number }[]} */
-        const results = [];
+        const results: { type: 'side' | 'direction'; angle: number }[] = [];
 
-        const neighborNodeReducer = (neighbor, { lookBackward = true, lookForward = true } = {}) => function(collection, { nodes }) {
+        const neighborNodeReducer = (neighbor: osmNode, { lookBackward = true, lookForward = true } = {}) => function(collection: { [nodeId: NodeId]: boolean }, { nodes }: { nodes: NodeId[] }) {
             nodes.forEach((_, i) => {
                 if (nodes[i] !== neighbor.id) return;  // not a match of current entity
 
@@ -165,15 +170,16 @@ const prototype = {
             if (type === 'turnout_side') {
                 if (SIDE_ANGLE_OFFSET[v] === undefined) return;
 
-                const branchVectors = resolver.parentWays(this)
+                const branchVectors: Record<string, Vec2> = {};
+                const ids = Object.keys(resolver.parentWays(this)
                     .filter(way => way.tags.railway && way.geometry(resolver) === 'line')
-                    .reduce(neighborNodeReducer(this), {});
+                    .reduce(neighborNodeReducer(this), {})
+                );
 
-                const ids = Object.keys(branchVectors);
                 // the turnout side tag is only meaningfully defined for switches with 3 branches - one incoming and two outgoing
                 if (ids.length !== 3) return;
 
-                ids.forEach(id => branchVectors[id] = geoVecNormalize(geoVecSubtract(projection(resolver.entity(id).loc), projection(this.loc))));
+                ids.forEach(id => branchVectors[id] = geoVecNormalize(geoVecSubtract(projection(resolver.entity<osmNode>(id).loc), projection(this.loc))));
 
                 const sortedIds = ids.map(id => {
                     const otherVectorSum = ids
@@ -193,7 +199,7 @@ const prototype = {
                 });
             } else {
 
-                const isSide = type === 'side' && SIDES.has(v);
+                const isSide = type === 'side' && SIDES.has(v as string);
 
                 // In case of `highway=cyclist_waiting_aid`, if the `side` is to be shown, then
                 // it will be explicitly specified by the `direction` from the cyclist's perspective (not way's perspective)
@@ -203,9 +209,9 @@ const prototype = {
 
                 // string direction - inspect parent ways
                 const lookBackward =
-                    (this.tags['traffic_sign:backward'] || v === (isSide ? 'left' : 'backward') || v === 'both' || v === 'all');
+                    (!!this.tags['traffic_sign:backward'] || v === (isSide ? 'left' : 'backward') || v === 'both' || v === 'all');
                 const lookForward =
-                    (this.tags['traffic_sign:forward'] || v === (isSide ? 'right' : 'forward') || v === 'both' || v === 'all');
+                    (!!this.tags['traffic_sign:forward'] || v === (isSide ? 'right' : 'forward') || v === 'both' || v === 'all');
 
                 if (!lookForward && !lookBackward) return;
 
@@ -213,7 +219,7 @@ const prototype = {
                     .filter(way => osmShouldRenderDirection(this.tags, way.tags))
                     .reduce(neighborNodeReducer(this, { lookForward, lookBackward }), {});
 
-                Object.keys(nodeIds).forEach(function(nodeId) {
+                Object.keys(nodeIds).forEach((nodeId) => {
                     // +90 because geoAngle returns angle from X axis, not Y (north)
                     results.push({
                         type: isSide ? 'side' : 'direction',
@@ -224,25 +230,24 @@ const prototype = {
         }, this);
 
         return utilArrayUniqBy(results, item => item.type + item.angle);
-    },
+    }
 
-    isCrossing: function(){
+    isCrossing() {
         return this.tags.highway === 'crossing' ||
                this.tags.railway && this.tags.railway.indexOf('crossing') !== -1;
-    },
+    }
 
-    isEndpoint: function(resolver) {
-        return resolver.transient(this, 'isEndpoint', function() {
+    isEndpoint(resolver: coreGraph) {
+        return resolver.transient(this, 'isEndpoint', () => {
             var id = this.id;
             return resolver.parentWays(this).filter(function(parent) {
                 return !parent.isClosed() && !!parent.affix(id);
             }).length > 0;
         });
-    },
+    }
 
-
-    isConnected: function(resolver) {
-        return resolver.transient(this, 'isConnected', function() {
+    isConnected(resolver: coreGraph) {
+        return resolver.transient(this, 'isConnected', () => {
             var parents = resolver.parentWays(this);
 
             if (parents.length > 1) {
@@ -262,11 +267,10 @@ const prototype = {
 
             return false;
         });
-    },
+    }
 
-
-    parentIntersectionWays: function(resolver) {
-        return resolver.transient(this, 'parentIntersectionWays', function() {
+    parentIntersectionWays(resolver: coreGraph) {
+        return resolver.transient(this, 'parentIntersectionWays', () => {
             return resolver.parentWays(this).filter(function(parent) {
                 return (parent.tags.highway ||
                     parent.tags.waterway ||
@@ -275,55 +279,50 @@ const prototype = {
                     parent.geometry(resolver) === 'line';
             });
         });
-    },
+    }
 
-
-    isIntersection: function(resolver) {
+    isIntersection(resolver: coreGraph) {
         return this.parentIntersectionWays(resolver).length > 1;
-    },
+    }
 
-
-    isHighwayIntersection: function(resolver) {
-        return resolver.transient(this, 'isHighwayIntersection', function() {
+    isHighwayIntersection(resolver: coreGraph) {
+        return resolver.transient(this, 'isHighwayIntersection', () => {
             return resolver.parentWays(this).filter(function(parent) {
                 return parent.tags.highway && parent.geometry(resolver) === 'line';
             }).length > 1;
         });
-    },
+    }
 
-
-    isOnAddressLine: function(resolver) {
-        return resolver.transient(this, 'isOnAddressLine', function() {
+    isOnAddressLine(resolver: coreGraph) {
+        return resolver.transient(this, 'isOnAddressLine', () => {
             return resolver.parentWays(this).filter(function(parent) {
                 return parent.tags.hasOwnProperty('addr:interpolation') &&
                     parent.geometry(resolver) === 'line';
             }).length > 0;
         });
-    },
+    }
 
 
-    asJXON: function(changeset_id) {
-        var r = {
+    asJXON(changeset_id: ChangesetId) {
+        var r: any = {
             node: {
                 '@id': this.osmId(),
                 '@lon': this.loc[0],
                 '@lat': this.loc[1],
                 '@version': (this.version || 0),
-                tag: Object.keys(this.tags).map(function(k) {
+                tag: Object.keys(this.tags).map((k) => {
                     return { keyAttributes: { k: k, v: this.tags[k] } };
                 }, this)
             }
         };
         if (changeset_id) r.node['@changeset'] = changeset_id;
         return r;
-    },
+    }
 
-
-    asGeoJSON: function() {
+    asGeoJSON(): Point {
         return {
             type: 'Point',
             coordinates: this.loc
         };
     }
-};
-Object.assign(osmNode.prototype, prototype);
+}

@@ -1,107 +1,103 @@
-import { debug, osmIdManager } from '../index';
+import type { GeoJSON } from 'geojson';
+import { debug, createEntity, osmIdManager, type OsmType, type EntityId } from '../index';
 import { osmIsInterestingTag } from './tags';
 import { utilArrayUnion } from '../util/array';
 import { utilUnicodeCharsTruncated } from '../util/util';
+import type { osmNode } from './node';
+import type { osmWay } from './way';
+import type { osmRelation } from './relation';
+import type { coreGraph } from '../core/graph';
+import type { geoExtent } from '../geo';
 
+export type OsmEntity = osmNode | osmWay | osmRelation;
+export type GeometryType = 'point' | 'vertex' | 'area' | 'line' | 'relation';
 
-export function osmEntity(attrs) {
-    // For prototypal inheritance.
-    if (this instanceof osmEntity) return;
-
-    // Create the appropriate subtype.
-    if (attrs && attrs.type) {
-        return new osmEntity[attrs.type](...arguments);
-    } else if (attrs && attrs.id) {
-        return new osmEntity[osmIdManager.type(attrs.id)](...arguments);
-    }
-
-    // Initialize a generic Entity (used only in tests).
-    return (new osmEntity()).initialize(arguments);
+export interface OsmEntityProps {
+    type: OsmType;
+    id: EntityId;
+    visible: boolean;
+    tags: Tags;
+    version?: number;
+    changeset?: string;
+    user?: string;
+    uid?: number;
+    timestamp?: number;
 }
 
 
-osmEntity.prototype = {
+export abstract class OsmAbstractEntity implements OsmEntityProps {
+    readonly type!: OsmType;
+    readonly id!: EntityId;
+    readonly visible: boolean;
+    readonly tags: Readonly<Tags> = {};
+    readonly version?: number;
+    readonly user?: string;
+    readonly changeset?: string;
+    readonly uid?: number;
+    readonly timestamp?: number;
 
-    /** @type {Tags} */
-    tags: {},
+    readonly v?: number;
 
-    /** @type {String} */
-    id: undefined,
-
-    /** @type {number | undefined} */
-    v: undefined,
-
-    /** @type {boolean | undefined} */
-    visible: undefined,
-
-    initialize: function(sources) {
+    constructor(...sources: (Partial<OsmEntity> | Partial<OsmEntityProps>)[]) {
         for (var i = 0; i < sources.length; ++i) {
             var source = sources[i];
             for (var prop in source) {
                 if (Object.prototype.hasOwnProperty.call(source, prop)) {
-                    if (source[prop] === undefined) {
-                        delete this[prop];
+                    if (source[prop as keyof OsmEntityProps] === undefined) {
+                        delete this[prop as keyof OsmEntityProps];
                     } else {
+                        // @ts-expect-error -- this is a hack
                         this[prop] = source[prop];
                     }
                 }
             }
         }
 
-        if (!this.id && this.type) {
-            this.id = osmIdManager.newId(this.type);
-        }
-        if (!this.hasOwnProperty('visible')) {
-            this.visible = true;
-        }
+        this.id ||= osmIdManager.newId(this.type);
+        this.visible ??= true;
+        this.tags ||= {};
 
         if (debug) {
             Object.freeze(this);
             Object.freeze(this.tags);
-
-            if (this.loc) Object.freeze(this.loc);
-            if (this.nodes) Object.freeze(this.nodes);
-            if (this.members) Object.freeze(this.members);
+            // properties specific to a subclass (like `members`) are frozen in the subclass
         }
+    }
 
-        return this;
-    },
+    abstract copy(resolver: coreGraph, copies: { [id: EntityId]: unknown }): this;
 
+    abstract geometry(graph: coreGraph): GeometryType;
 
-    copy: function(resolver, copies) {
-        if (copies[this.id]) return copies[this.id];
+    abstract extent(
+        resolver: coreGraph,
+        memo?: { [id: EntityId]: boolean },
+    ): geoExtent;
 
-        var copy = osmEntity(this, { id: undefined, user: undefined, version: undefined });
-        copies[this.id] = copy;
+    abstract isDegenerate(): boolean;
 
-        return copy;
-    },
+    abstract asGeoJSON(resolver: coreGraph): GeoJSON;
 
+    abstract asJXON(changesetId: EntityId): unknown;
 
-    osmId: function() {
+    osmId() {
         return osmIdManager.toOSM(this.id);
-    },
+    }
 
-
-    isNew: function() {
+    isNew() {
         var osmId = osmIdManager.toOSM(this.id);
         return osmId.length === 0 || osmId[0] === '-';
-    },
+    }
 
+    update(this: osmNode, attrs: Partial<osmNode>): this;
+    update(this: osmWay, attrs: Partial<osmWay>): this;
+    update(this: osmRelation, attrs: Partial<osmRelation>): this;
+    update(this: OsmAbstractEntity, attrs: Partial<OsmAbstractEntity>): this;
+    update(attrs: Partial<OsmAbstractEntity | OsmEntity>): this {
+        return <never>createEntity(this, <OsmAbstractEntity>{ ...attrs, v: 1 + (this.v || 0) });
+    }
 
-    update: function(attrs) {
-        return osmEntity(this, attrs, { v: 1 + (this.v || 0) });
-    },
-
-
-    /**
-     *
-     * @param {Tags} tags tags to merge into this entity's tags
-     * @param {Tags} setTags (optional) a set of tags to overwrite in this entity's tags
-     * @returns {typeof this}
-     */
-    mergeTags: function(tags, setTags = {}) {
-        const merged = Object.assign({}, this.tags);   // shallow copy
+    mergeTags(tags: Tags, setTags: Tags = {}) {
+        const merged = { ...this.tags };   // shallow copy
         let changed = false;
 
         for (const k in tags) {
@@ -127,27 +123,22 @@ osmEntity.prototype = {
         }
 
         return changed ? this.update({ tags: merged }) : this;
-    },
+    }
 
 
-    intersects: function(extent, resolver) {
+    intersects(extent: geoExtent, resolver: coreGraph) {
         return this.extent(resolver).intersects(extent);
-    },
+    }
 
-
-    hasNonGeometryTags: function() {
+    hasNonGeometryTags() {
         return Object.keys(this.tags).some(function(k) { return k !== 'area'; });
-    },
+    }
 
-    hasParentRelations: function(resolver) {
+    hasParentRelations(resolver: coreGraph) {
         return resolver.parentRelations(this).length > 0;
-    },
+    }
 
-    hasInterestingTags: function() {
+    hasInterestingTags() {
         return Object.keys(this.tags).some(osmIsInterestingTag);
-    },
-
-    isDegenerate: function() {
-        return true;
-    },
-};
+    }
+}
