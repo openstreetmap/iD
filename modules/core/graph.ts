@@ -1,7 +1,7 @@
 import { debug } from '../index';
-import type { OsmNode as osmNode } from '../osm/node';
-import type { OsmRelation as osmRelation } from '../osm/relation';
-import type { OsmWay as osmWay } from '../osm/way';
+import type { osmNode } from '../osm/node';
+import type { osmRelation } from '../osm/relation';
+import type { osmWay } from '../osm/way';
 import { utilArrayDifference } from '../util';
 
 export class coreGraph {
@@ -82,7 +82,7 @@ export class coreGraph {
         return parents && parents.size > 1;
     }
 
-    parentRelations(entity: iD.OsmEntity) {
+    parentRelations(entity: iD.OsmAbstractEntity) {
         var parents = this._parentRels[entity.id];
         var result: osmRelation[] = [];
         if (parents) {
@@ -111,7 +111,6 @@ export class coreGraph {
 
         if (debug) Object.freeze(nodes);
 
-        // @ts-expect-error -- temporary issue which will be solved after upgrading osmEntity
         this._childNodes[entity.id] = nodes;
         return this._childNodes[entity.id];
     }

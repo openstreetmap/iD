@@ -190,7 +190,7 @@ describe('iD.actionChangePreset', function() {
     }])('does not preserve $fieldType field tags that are only present in the old preset', ({
         fieldType, fieldId, fieldKey, fieldKeys, oldTags, tagsToPreserve
     }) => {
-        const entity = iD.osmNode({
+        const entity = new iD.osmNode({
             tags: {
                 amenity: 'recycling',
                 ...oldTags,
@@ -247,7 +247,7 @@ describe('iD.actionChangePreset', function() {
     }])('preserve $fieldType field tags when they are present in the old and the new preset', ({
         fieldType, fieldId, fieldKey, fieldKeys, oldTags
     }) => {
-        const entity = iD.osmNode({
+        const entity = new iD.osmNode({
             tags: {
                 amenity: 'recycling',
                 ...oldTags,
@@ -283,7 +283,7 @@ describe('iD.actionChangePreset', function() {
 
     // https://github.com/openstreetmap/iD/issues/12071
     it('preserves tags of the old preset when selecting a new preset with a field for the old preset\'s primary tag', () => {
-        const entity = iD.osmNode({
+        const entity = new iD.osmNode({
             tags: {
                 building: 'yes', // the preset's own tags.
                 'building:colour': 'green', // a field which exists in the preset
