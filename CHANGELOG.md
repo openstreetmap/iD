@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.41.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Allow coastlines and roads with long bus routes to be split ([#10615], thanks [@k-yle])
 * Make tags like `contact:instagram` clickable if they contain a plain username, or a full URL ([#12306], thanks [@k-yle])
 * Render the `side` arrow of cyclist waiting aid features ([#12374], thanks [@RudyTheDev])
 #### :scissors: Operations
@@ -62,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Update name-suggestion-index to v7.2 ([#12337], thanks [@bjornstar])
 
 [#8848]: https://github.com/openstreetmap/iD/issues/8848
+[#10615]: https://github.com/openstreetmap/iD/pull/10615
 [#11634]: https://github.com/openstreetmap/iD/pull/11634
 [#12297]: https://github.com/openstreetmap/iD/issues/12297
 [#12299]: https://github.com/openstreetmap/iD/issues/12299
