@@ -68,7 +68,7 @@ export function operationSplit(context, selectedIDs) {
     };
 
     operation.interrupts = {
-        async parent_incomplete() {
+        parent_incomplete: async () => {
             const graph = context.graph();
 
             const confirmed = await uiAsyncModal(context).open(
