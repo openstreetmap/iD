@@ -104,13 +104,13 @@ export function operationSplit(context, selectedIDs) {
             }
 
             // only download the ways that aren't downloaded yet
-            const promises = [...requiredWayIds]
+            const waysToLoad = [...requiredWayIds]
                 .filter(wayId => !context.graph().hasEntity(wayId))
                 .map((wayId) => new Promise(resolve => {
                     context.loadEntity(wayId, resolve);
                 }));
 
-            await Promise.all(promises);
+            await Promise.all(waysToLoad);
 
             loading.close();
 
