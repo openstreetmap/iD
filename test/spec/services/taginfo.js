@@ -1,3 +1,4 @@
+import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.serviceTaginfo', function() {
@@ -42,7 +43,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.keys({ query: 'amen' }, callback);
 
             await setTimeout(50);
@@ -62,7 +63,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.keys({ query: 'amen' }, callback);
 
             await setTimeout(50);
@@ -79,7 +80,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.keys({ query: 'amen', filter: 'nodes' }, callback);
 
             await setTimeout(50);
@@ -96,7 +97,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.keys({ query: 'amen' }, callback);
 
             await setTimeout(50);
@@ -114,7 +115,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.keys({ query: 'ref' }, callback);
 
             await setTimeout(50);
@@ -132,7 +133,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.multikeys({ query: 'recycling:' }, callback);
 
             await setTimeout(50);
@@ -152,7 +153,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.multikeys({ query: 'service:bicycle:' }, callback);
 
             await setTimeout(50);
@@ -169,7 +170,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.multikeys({ query: 'service:bicycle:' }, callback);
 
             await setTimeout(50);
@@ -187,7 +188,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'amenity', query: 'par' }, callback);
 
             await setTimeout(50);
@@ -207,7 +208,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'amenity', query: 'par' }, callback);
 
             await setTimeout(50);
@@ -223,7 +224,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'name', query: 'str' }, callback);
 
             await setTimeout(50);
@@ -247,7 +248,7 @@ describe('iD.serviceTaginfo', function() {
             ];
 
             await Promise.all(keysToTest.map(async key => {
-                var callback = sinon.spy();
+                const callback = fn();
 
                 taginfo.values({ key, query: 'xxx' }, callback);
 
@@ -256,19 +257,19 @@ describe('iD.serviceTaginfo', function() {
             }));
         });
 
-        it('includes unpopular values with a wiki page', async () => {
+        it('excludes unpopular values even if they have a wiki page', async () => {
             fetchMock.mock(/\/key\/values/, {
                 body: '{"data":[{"value":"party","description":"A place for partying", "count":1, "in_wiki": true}]}',
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'amenity', query: 'par' }, callback);
 
             await setTimeout(50);
             expect(callback).to.have.been.calledWith(
-                null, [{'value':'party','title':'A place for partying'}]
+                null, []
             );
         });
 
@@ -283,7 +284,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'amenity', query: 'par' }, callback);
 
             await setTimeout(50);
@@ -303,7 +304,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'network', query: 'us' }, callback);
 
             await setTimeout(50);
@@ -323,7 +324,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'genus', query: 'qu' }, callback);
 
             await setTimeout(50);
@@ -339,7 +340,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'taxon', query: 'qu' }, callback);
 
             await setTimeout(50);
@@ -355,7 +356,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'species', query: 'qu' }, callback);
 
             await setTimeout(50);
@@ -374,7 +375,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.roles({ rtype: 'route', query: 's', geometry: 'relation' }, callback);
 
             await setTimeout(50);
@@ -396,7 +397,7 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.docs({ key: 'amenity', value: 'parking' }, callback);
 
             await setTimeout(50);

@@ -100,7 +100,7 @@ export function validationOutdatedTags() {
           key,
           oldVal: oldTags[key],
           newVal: newTags[key],
-          display: '&nbsp; ' + key + '=' + oldTags[key]
+          display: decodeURIComponent('%C2%A0' /* &nbsp; */) + ' ' + key + '=' + oldTags[key]
         }));
 
     let issues = [];
@@ -265,7 +265,7 @@ export function validationOutdatedTags() {
               return `${klass} tagDiff-cell-unchanged`;
           }
         })
-        .html(d => d.display);
+        .text(d => d.display);
     }
   }
 

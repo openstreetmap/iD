@@ -1,3 +1,4 @@
+import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 import css from '../../../css/55_cursors.css?raw';
 
@@ -10,6 +11,8 @@ describe('iD.Map', function() {
         context = iD.coreContext().assetPath('../dist/').init().container(content);
         map = context.map();
         content.call(map);
+        // Set default dimensions for map before zoom/center tests
+        map.dimensions([1000, 1000]);
     });
 
     afterEach(function() {
@@ -23,7 +26,7 @@ describe('iD.Map', function() {
         });
 
         it('dispatches move event when zoom changes', function() {
-            var spy = sinon.spy();
+            const spy = fn();
             map.zoom(4);
             map.on('move', spy);
             map.zoom(5);
@@ -31,7 +34,7 @@ describe('iD.Map', function() {
         });
 
         it('dispatches no move event when zoom does not change', function() {
-            var spy = sinon.spy();
+            const spy = fn();
             map.zoom(4);
             map.on('move', spy);
             map.zoom(4);
@@ -82,7 +85,7 @@ describe('iD.Map', function() {
         });
 
         it('dispatches move event when center changes', function() {
-            var spy = sinon.spy();
+            const spy = fn();
             map.center([0, 0]);
             map.on('move', spy);
             map.center([1, 1]);
@@ -90,7 +93,7 @@ describe('iD.Map', function() {
         });
 
         it('dispatches no move event when center does not change', function() {
-            var spy = sinon.spy();
+            const spy = fn();
             map.center([0, 0]);
             map.on('move', spy);
             map.center([0, 0]);
@@ -152,6 +155,8 @@ describe('iD.Map', function() {
             line     = behavior.append('div').attr('class', 'way line');
             area     = behavior.append('div').attr('class', 'way area');
             midpoint = behavior.append('div').attr('class', 'midpoint');
+            // Ensure map dimensions set for any map instance created in nested tests
+            if (typeof map?.dimensions === 'function') map.dimensions([1000, 1000]);
         });
 
         afterEach(function() {

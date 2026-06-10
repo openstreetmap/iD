@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit';
 
 import { select as d3_select } from 'd3-selection';
 import { svgPointTransform } from './helpers';
@@ -6,7 +6,7 @@ import { services } from '../services';
 
 
 export function svgMapillaryPosition(projection, context) {
-    const throttledRedraw = _throttle(function () { update(); }, 1000);
+    const throttledRedraw = throttle(function () { update(); }, 1000);
     const minZoom = 12;
     const minViewfieldZoom = 18;
     let layer = d3_select(null);

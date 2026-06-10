@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
 import { select as d3_select } from 'd3-selection';
 
@@ -14,8 +14,6 @@ import { uiSection } from '../section';
 export function uiSectionBackgroundList(context) {
 
     var _backgroundList = d3_select(null);
-
-    var _customSource = context.background().findSource('custom');
 
     var _settingsCustomBackground = uiSettingsCustomBackground(context)
         .on('change', customChanged);
@@ -256,12 +254,19 @@ export function uiSectionBackgroundList(context) {
 
 
     function customChanged(d) {
+        var background = context.background();
+        var customSource = background.findSource('custom');
+        if (!customSource) return;
+
         if (d && d.template) {
-            _customSource.template(d.template);
-            chooseBackground(_customSource);
+            customSource.template(d.template);
+            chooseBackground(customSource);
         } else {
-            _customSource.template('');
-            chooseBackground(context.background().findSource('none'));
+            customSource.template('');
+            var noneSource = background.findSource('none');
+            if (noneSource) {
+                chooseBackground(noneSource);
+            }
         }
     }
 
@@ -279,7 +284,7 @@ export function uiSectionBackgroundList(context) {
 
     context.map()
         .on('move.background_list',
-            _debounce(function() {
+            debounce(function() {
                 // layers in-view may have changed due to map move
                 window.requestIdleCallback(section.reRender);
             }, 1000)

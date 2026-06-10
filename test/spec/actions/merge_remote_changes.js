@@ -1,32 +1,32 @@
 describe('iD.actionMergeRemoteChanges', function () {
     var discardTags = { created_by: true };
 
-    var base = iD.coreGraph([
-            iD.osmNode({id: 'a', loc: [1, 1], version: '1', tags: {foo: 'foo'}}),
+    var base = new iD.coreGraph([
+            new iD.osmNode({id: 'a', loc: [1, 1], version: '1', tags: {foo: 'foo'}}),
 
-            iD.osmNode({id: 'p1', loc: [ 10,  10], version: '1'}),
-            iD.osmNode({id: 'p2', loc: [ 10, -10], version: '1'}),
-            iD.osmNode({id: 'p3', loc: [-10, -10], version: '1'}),
-            iD.osmNode({id: 'p4', loc: [-10,  10], version: '1'}),
-            iD.osmWay({
+            new iD.osmNode({id: 'p1', loc: [ 10,  10], version: '1'}),
+            new iD.osmNode({id: 'p2', loc: [ 10, -10], version: '1'}),
+            new iD.osmNode({id: 'p3', loc: [-10, -10], version: '1'}),
+            new iD.osmNode({id: 'p4', loc: [-10,  10], version: '1'}),
+            new iD.osmWay({
                 id: 'w1',
                 nodes: ['p1', 'p2', 'p3', 'p4', 'p1'],
                 version: '1',
                 tags: {foo: 'foo', area: 'yes'}
             }),
 
-            iD.osmNode({id: 'q1', loc: [ 5,  5], version: '1'}),
-            iD.osmNode({id: 'q2', loc: [ 5, -5], version: '1'}),
-            iD.osmNode({id: 'q3', loc: [-5, -5], version: '1'}),
-            iD.osmNode({id: 'q4', loc: [-5,  5], version: '1'}),
-            iD.osmWay({
+            new iD.osmNode({id: 'q1', loc: [ 5,  5], version: '1'}),
+            new iD.osmNode({id: 'q2', loc: [ 5, -5], version: '1'}),
+            new iD.osmNode({id: 'q3', loc: [-5, -5], version: '1'}),
+            new iD.osmNode({id: 'q4', loc: [-5,  5], version: '1'}),
+            new iD.osmWay({
                 id: 'w2',
                 nodes: ['q1', 'q2', 'q3', 'q4', 'q1'],
                 version: '1',
                 tags: {foo: 'foo', area: 'yes'}
             }),
 
-            iD.osmRelation({
+            new iD.osmRelation({
                 id: 'r',
                 members: [{id: 'w1', role: 'outer'}, {id: 'w2', role: 'inner'}],
                 version: '1',
@@ -35,22 +35,22 @@ describe('iD.actionMergeRemoteChanges', function () {
         ]),
 
         // some new objects not in the graph yet..
-        r1 = iD.osmNode({id: 'r1', loc: [ 12,  12], version: '1'}),
-        r2 = iD.osmNode({id: 'r2', loc: [ 12, -12], version: '1'}),
-        r3 = iD.osmNode({id: 'r3', loc: [-12, -12], version: '1'}),
-        r4 = iD.osmNode({id: 'r4', loc: [-12,  12], version: '1'}),
-        w3 = iD.osmWay({
+        r1 = new iD.osmNode({id: 'r1', loc: [ 12,  12], version: '1'}),
+        r2 = new iD.osmNode({id: 'r2', loc: [ 12, -12], version: '1'}),
+        r3 = new iD.osmNode({id: 'r3', loc: [-12, -12], version: '1'}),
+        r4 = new iD.osmNode({id: 'r4', loc: [-12,  12], version: '1'}),
+        w3 = new iD.osmWay({
                 id: 'w3',
                 nodes: ['r1', 'r2', 'r3', 'r4', 'r1'],
                 version: '1',
                 tags: {foo: 'foo_new', area: 'yes'}
             }),
 
-        s1 = iD.osmNode({id: 's1', loc: [ 6,  6], version: '1'}),
-        s2 = iD.osmNode({id: 's2', loc: [ 6, -6], version: '1'}),
-        s3 = iD.osmNode({id: 's3', loc: [-6, -6], version: '1'}),
-        s4 = iD.osmNode({id: 's4', loc: [-6,  6], version: '1'}),
-        w4 = iD.osmWay({
+        s1 = new iD.osmNode({id: 's1', loc: [ 6,  6], version: '1'}),
+        s2 = new iD.osmNode({id: 's2', loc: [ 6, -6], version: '1'}),
+        s3 = new iD.osmNode({id: 's3', loc: [-6, -6], version: '1'}),
+        s4 = new iD.osmNode({id: 's4', loc: [-6,  6], version: '1'}),
+        w4 = new iD.osmWay({
                 id: 'w4',
                 nodes: ['s1', 's2', 's3', 's4', 's1'],
                 version: '1',
@@ -61,7 +61,7 @@ describe('iD.actionMergeRemoteChanges', function () {
     function makeGraph(entities) {
         return entities.reduce(function(graph, entity) {
             return graph.replace(entity);
-        }, iD.coreGraph(base));
+        }, new iD.coreGraph(base));
     }
 
 

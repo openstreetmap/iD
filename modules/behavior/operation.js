@@ -23,7 +23,7 @@ export function behaviorOperation(context) {
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation disabled')
                 .label(t.append('operations._unavailable', {
-                    operation: t(`operations.${_operation.id}.title`) || _operation.id
+                    operation: t.append(`operations.${_operation.id}.title`) || _operation.id
                 }))();
         } else if (disabled) {
             const interrupt = _operation.interrupts?.[disabled];

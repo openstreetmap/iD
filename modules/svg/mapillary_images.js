@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit';
 
 import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './helpers';
@@ -6,7 +6,7 @@ import { services } from '../services';
 
 
 export function svgMapillaryImages(projection, context, dispatch) {
-    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    const throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     const minZoom = 12;
     const minMarkerZoom = 16;
     const minViewfieldZoom = 18;
@@ -142,7 +142,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
         if (!showsPano || !showsFlat) {
             sequences = sequences.filter(function(sequence) {
-                if (sequence.properties.hasOwnProperty('is_pano')) {
+                if (Object.hasOwnProperty.call(sequence.properties, 'is_pano')) {
                     if (sequence.properties.is_pano) return showsPano;
                     return showsFlat;
                 }
@@ -197,7 +197,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .remove();
 
         // enter/update
-        traces = traces.enter()
+        traces.enter()
             .append('path')
             .attr('class', 'sequence')
             .merge(traces)

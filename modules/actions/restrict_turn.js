@@ -38,7 +38,7 @@ export function actionRestrictTurn(turn, restrictionType, restrictionID) {
 
         members.push({ id: toWay.id, type: 'way',  role: 'to' });
 
-        return graph.replace(osmRelation({
+        return graph.replace(new osmRelation({
             id: restrictionID,
             tags: {
                 type: 'restriction',

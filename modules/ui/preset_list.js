@@ -1,11 +1,10 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit';
 
 import { presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
 import { actionChangePreset } from '../actions/change_preset';
-import { operationDelete } from '../operations/delete';
 import { svgIcon } from '../svg/index';
 import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo/extent';
@@ -35,7 +34,7 @@ export function uiPresetList(context) {
 
         var message = messagewrap
             .append('h2')
-            .call(t.append('inspector.choose'));
+            .call(t.addOrUpdate('inspector.choose'));
 
         messagewrap
             .append('button')
@@ -45,16 +44,8 @@ export function uiPresetList(context) {
             .call(svgIcon('#iD-icon-close'));
 
         function initialKeydown(d3_event) {
-            // hack to let delete shortcut work when search is autofocused
-            if (search.property('value').length === 0 &&
-                (d3_event.keyCode === utilKeybinding.keyCodes['⌫'] ||
-                 d3_event.keyCode === utilKeybinding.keyCodes['⌦'])) {
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-                operationDelete(context, _entityIDs)();
-
             // hack to let undo work when search is autofocused
-            } else if (search.property('value').length === 0 &&
+            if (search.property('value').length === 0 &&
                 (d3_event.ctrlKey || d3_event.metaKey) &&
                 d3_event.keyCode === utilKeybinding.keyCodes.z) {
                 d3_event.preventDefault();
@@ -97,7 +88,7 @@ export function uiPresetList(context) {
             var results, messageText;
             if (value.length) {
                 results = presets.search(value, entityGeometries()[0], _currLoc);
-                messageText = t.html('inspector.results', {
+                messageText = t.addOrUpdate('inspector.results', {
                     n: results.collection.length,
                     search: value
                 });
@@ -105,10 +96,10 @@ export function uiPresetList(context) {
                 var entityPresets = _entityIDs.map(entityID =>
                     presetManager.match(context.graph().entity(entityID), context.graph()));
                 results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets);
-                messageText = t.html('inspector.choose');
+                messageText = t.addOrUpdate('inspector.choose');
             }
             list.call(drawList, results);
-            message.html(messageText);
+            message.call(messageText);
         }
 
         var searchWrap = selection
@@ -126,7 +117,7 @@ export function uiPresetList(context) {
             .call(utilNoAuto)
             .on('keydown', initialKeydown)
             .on('keypress', keypress)
-            .on('input', _debounce(inputevent));
+            .on('input', debounce(inputevent, 0));
 
         if (_autofocus) {
             search.node().focus();
@@ -149,6 +140,7 @@ export function uiPresetList(context) {
             .attr('class', 'preset-list')
             .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets));
 
+        listWrap.node().scrollTo({ top: 0 });
         context.features().on('change.preset-list', updateForFeatureHiddenState);
     }
 
@@ -180,7 +172,7 @@ export function uiPresetList(context) {
 
         items.enter()
             .append('div')
-            .attr('class', function(item) { return 'preset-list-item preset-' + item.preset.id.replace('/', '-'); })
+            .attr('class', function(item) { return 'preset-list-item preset-' + item.preset.id.replaceAll('/', '-'); })
             .classed('current', function(item) { return _currentPresets.indexOf(item.preset) !== -1; })
             .each(function(item) { d3_select(this).call(item); })
             .style('opacity', 0)

@@ -93,18 +93,29 @@ export function uiEditMenu(context) {
                 d3_event.stopPropagation();
             })
             .on('mouseenter.highlight', function(d3_event, d) {
-                if (!d.relatedEntityIds || d3_select(this).classed('disabled')) return;
+                if (d3_select(this).classed('disabled')) return;
 
-                utilHighlightEntities(d.relatedEntityIds(), true, context);
+                if (d.relatedEntityIds) {
+                    utilHighlightEntities(d.relatedEntityIds(), true, context);
+                }
+
+                if (d.getAuxiliaryGeometry) {
+                    drawAuxiliaryGeometry(context, d.getAuxiliaryGeometry());
+                }
             })
             .on('mouseleave.highlight', function(d3_event, d) {
-                if (!d.relatedEntityIds) return;
+                if (d.relatedEntityIds) {
+                    utilHighlightEntities(d.relatedEntityIds(), false, context);
+                }
 
-                utilHighlightEntities(d.relatedEntityIds(), false, context);
+                if (d.getAuxiliaryGeometry) {
+                    drawAuxiliaryGeometry(context, []);
+                }
             });
 
         buttonsEnter.each(function(d) {
             var tooltip = uiTooltip()
+                .scrollContainer(context.container().select('.over-map'))
                 .heading(() => d.title)
                 .title(d.tooltip)
                 .keys([d.keys[0]]);
@@ -304,6 +315,9 @@ export function uiEditMenu(context) {
         _menu.remove();
         _tooltips = [];
 
+        // Clean up any auxiliary overlays
+        drawAuxiliaryGeometry(context, []);
+
         dispatch.call('toggled', this, false);
     };
 
@@ -327,4 +341,22 @@ export function uiEditMenu(context) {
     };
 
     return utilRebind(editMenu, dispatch, 'on');
+}
+
+
+// Helper function to draw/remove reflect axis overlay
+function drawAuxiliaryGeometry(context, d) {
+    const surface = context.surface();
+    // Append to the OSM data layer to be in the same coordinate space as map features
+    const container = surface.selectAll('.data-layer.osm .auxiliary');
+    const paths = container.selectAll('path')
+        .data(d, d => d.id);
+
+    paths.exit().remove();
+    const enter = paths.enter()
+        .append('path');
+
+    enter.merge(paths)
+        .attr('class', d => d.klass)
+        .attr('d', d => d.path);
 }

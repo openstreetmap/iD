@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { isArray, isNumber } from 'lodash-es';
+import { isArray, isNumber } from 'es-toolkit/compat';
 
 import { t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';

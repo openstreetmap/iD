@@ -588,6 +588,27 @@ path.line.stroke.tag-highway-cycleway,
     stroke: #fff;
 }
 
+/* shared paths */
+path.line.casing.tag-highway-cycleway.tag-foot-designated:not(.tag-crossing),
+path.line.casing.tag-highway-path.tag-bicycle-designated.tag-foot-designated:not(.tag-crossing) {
+    stroke: #fff;
+}
+.preset-icon .icon.tag-highway-cycleway.tag-foot-designated,
+.preset-icon .icon.tag-highway-path.tag-bicycle-designated.tag-foot-designated {
+    color: #b458ed;
+    fill: #fff;
+}
+path.line.stroke.tag-highway-cycleway.tag-foot-designated,
+path.line.stroke.tag-highway-path.tag-bicycle-designated.tag-foot-designated,
+.preset-icon-container path.line.casing.tag-highway-cycleway.tag-foot-designated:not(.tag-crossing),
+.preset-icon-container path.line.casing.tag-highway-path.tag-bicycle-designated.tag-foot-designated:not(.tag-crossing) {
+    stroke: #b458ed;
+}
+.preset-icon-container path.stroke.tag-highway-cycleway.tag-foot-designated:not(.tag-crossing),
+.preset-icon-container path.stroke.tag-highway-path.tag-bicycle-designated.tag-foot-designated:not(.tag-crossing) {
+    stroke: #fff;
+}
+
 /* bridleways */
 .preset-icon .icon.tag-route-horse,
 .preset-icon .icon.tag-highway-bridleway {
@@ -615,8 +636,11 @@ path.line.stroke.tag-leisure-track,
 }
 
 /* steps */
-.preset-icon .icon.tag-highway-steps,
 .preset-icon .icon.tag-highway-ladder {
+    color: #6f1f1f;
+    fill: #fff;
+}
+.preset-icon .icon.tag-highway-steps {
     color: #81d25c;
     fill: #fff;
 }
@@ -635,10 +659,12 @@ path.line.casing.tag-highway-ladder {
     stroke-linecap: round;
     stroke-dasharray: none;
 }
-path.line.stroke.tag-highway-steps,
 path.line.stroke.tag-highway-ladder,
-.preset-icon-container path.line.casing.tag-highway-steps,
 .preset-icon-container path.line.casing.tag-highway-ladder {
+    stroke: #6f1f1f;
+}
+path.line.stroke.tag-highway-steps,
+.preset-icon-container path.line.casing.tag-highway-steps {
     stroke: #81d25c;
 }
 .preset-icon-container path.line.stroke.tag-highway-steps,

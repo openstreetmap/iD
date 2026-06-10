@@ -1,35 +1,75 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit';
 
 import { select as d3_select } from 'd3-selection';
 
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect, modeSelectNote } from '../modes';
-import { utilObjectOmit, utilQsString, utilStringQs } from '../util';
+import { utilQsString, utilStringQs } from '../util';
 import { utilArrayIdentical } from '../util/array';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { localizer, t } from '../core/localizer';
 import { prefs } from '../core/preferences';
 
+function getNewHash(arg) {
+    const original = utilStringQs(window.location.hash);
+    const update = typeof arg === 'function' ? arg(original) : arg;
+    if (!update || typeof update !== 'object') return;
+
+    const updated = { ...original, ...update };
+    Object.keys(update)
+        .filter(key => update[key] === null || update[key] === undefined)
+        .forEach(key => delete updated[key]);
+
+    return '#' + utilQsString(updated, true);
+}
+
+/**
+ * Updates the URL hash by applying a partial patch.
+ *
+ * Keys with nullish values will be removed from the hash.
+ *
+ * @param {(?Object<string, any>|function (Object<string, any>): Object<string, any>)} updater Either
+ * - a plain object of key/value pairs to merge into the hash, or
+ * - a function `(currentHash) => patchObject` that returns such an object.
+ * @returns {boolean} Whether the hash was updated.
+ */
+export function patchHash(updater) {
+    if (!updater || !['function', 'object'].includes(typeof updater)) return false;
+
+    const latestHash = getNewHash(updater);
+    if (!latestHash || window.location.hash === latestHash) return false;
+
+    // Update the URL hash without affecting the browser navigation stack,
+    // though unavoidably creating a browser history entry
+    window.history.replaceState(null, '', latestHash);
+
+    // save last used map location for future
+    const { map } = utilStringQs(latestHash);
+    if (map) prefs('map-location', map);
+    return true;
+}
 
 export function behaviorHash(context) {
 
-    // cached window.location.hash
-    var _cachedHash = null;
     // allowable latitude range
     var _latitudeLimit = 90 - 1e-8;
 
-    function computedHashParameters() {
+    function computeHashUpdate() {
+        if (context.inIntro()) return null;
+
         var map = context.map();
         var center = map.center();
         var zoom = map.zoom();
         var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
-        var oldParams = utilObjectOmit(utilStringQs(window.location.hash),
-            ['comment', 'source', 'hashtags', 'walkthrough']
-        );
-        var newParams = {};
+        const newParams = {
+            comment: null,
+            source: null,
+            hashtags: null,
+            walkthrough: null,
+            id: null
+        };
 
-        delete oldParams.id;
         var selected = context.selectedIDs().filter(function(id) {
             return context.hasEntity(id);
         });
@@ -43,11 +83,7 @@ export function behaviorHash(context) {
             '/' + center[1].toFixed(precision) +
             '/' + center[0].toFixed(precision);
 
-        return Object.assign(oldParams, newParams);
-    }
-
-    function computedHash() {
-        return '#' + utilQsString(computedHashParameters(), true);
+        return newParams;
     }
 
     function computedTitle(includeChangeCount) {
@@ -91,7 +127,7 @@ export function behaviorHash(context) {
         return baseTitle;
     }
 
-    function updateTitle(includeChangeCount) {
+    function updateTitle(includeChangeCount = true) {
         if (!context.setsDocumentTitle()) return;
 
         var newTitle = computedTitle(includeChangeCount);
@@ -100,40 +136,14 @@ export function behaviorHash(context) {
         }
     }
 
-    function updateHashIfNeeded() {
-        if (context.inIntro()) return;
-
-        var latestHash = computedHash();
-        if (_cachedHash !== latestHash) {
-            _cachedHash = latestHash;
-
-            // Update the URL hash without affecting the browser navigation stack,
-            // though unavoidably creating a browser history entry
-            window.history.replaceState(null, '', latestHash);
-
-            // set the title we want displayed for the browser tab/window
-            updateTitle(true /* includeChangeCount */);
-
-            // save last used map location for future
-            const q = utilStringQs(latestHash);
-            if (q.map) {
-                prefs('map-location', q.map);
-            }
-        }
-    }
-
-    var _throttledUpdate = _throttle(updateHashIfNeeded, 500);
-    var _throttledUpdateTitle = _throttle(function() {
-        updateTitle(true /* includeChangeCount */);
+    var _throttledUpdate = throttle(() => {
+        patchHash(computeHashUpdate);
+        updateTitle();
     }, 500);
+    var _throttledUpdateTitle = throttle(updateTitle, 500);
 
     function hashchange() {
-        // ignore spurious hashchange events
-        if (window.location.hash === _cachedHash) return;
-
-        _cachedHash = window.location.hash;
-
-        var q = utilStringQs(_cachedHash);
+        var q = utilStringQs(window.location.hash);
 
         if (q.theme) {
           context.theme(q.theme);
@@ -147,11 +157,11 @@ export function behaviorHash(context) {
         var mapArgs = (q.map || '').split('/').map(Number);
         if (mapArgs.length < 3 || mapArgs.some(isNaN)) {
             // replace bogus hash
-            updateHashIfNeeded();
-
+            patchHash(computeHashUpdate);
+            updateTitle();
         } else {
             // don't update if the new hash already reflects the state of iD
-            if (_cachedHash === computedHash()) return;
+            if (window.location.hash === getNewHash(computeHashUpdate)) return;
 
             var mode = context.mode();
 
@@ -224,14 +234,14 @@ export function behaviorHash(context) {
             const mapArgs = prefs('map-location').split('/').map(Number);
             context.map().centerZoom([mapArgs[2], Math.min(_latitudeLimit, Math.max(-_latitudeLimit, mapArgs[1]))], mapArgs[0]);
 
-            updateHashIfNeeded();
+            patchHash(computeHashUpdate);
 
             behavior.hadLocation = true;
         }
 
         hashchange();
 
-        updateTitle(false);
+        updateTitle(false /* includeChangeCount */);
     }
 
     behavior.off = function() {

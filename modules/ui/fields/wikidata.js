@@ -26,8 +26,7 @@ export function uiFieldWikidata(field, context) {
     var _hintKey = field.key === 'wikidata' ? 'name' : field.key.split(':')[0];
 
     var combobox = uiCombobox(context, 'combo-' + field.safeid)
-        .caseSensitive(true)
-        .minItems(1);
+        .caseSensitive(true);
 
 
     function wiki(selection) {
@@ -109,7 +108,9 @@ export function uiFieldWikidata(field, context) {
         enter
             .append('div')
             .attr('class', 'label')
-            .html(function(d) { return t.html('wikidata.' + d); });
+            .each(function(d) {
+                d3_select(this).call(t.addOrUpdate('wikidata.' + d));
+            });
 
         enter
             .append('input')
@@ -126,11 +127,10 @@ export function uiFieldWikidata(field, context) {
             .call(svgIcon('#iD-operation-copy'))
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
-                d3_select(this.parentNode)
+                const text = d3_select(this.parentNode)
                     .select('input')
-                    .node()
-                    .select();
-                document.execCommand('copy');
+                    .property('value');
+                navigator.clipboard.writeText(text);
             });
 
     }
@@ -208,7 +208,7 @@ export function uiFieldWikidata(field, context) {
                 var foundPreferred;
                 for (var i in langs) {
                     var lang = langs[i];
-                    var siteID = lang.replace('-', '_') + 'wiki';
+                    var siteID = lang.replaceAll('-', '_') + 'wiki';
                     if (entity.sitelinks[siteID]) {
                         foundPreferred = true;
                         newWikipediaValue = lang + ':' + entity.sitelinks[siteID].title;
@@ -229,7 +229,7 @@ export function uiFieldWikidata(field, context) {
                         // if no wikipedia pages are linked to this wikidata entity, delete that tag
                         newWikipediaValue = null;
                     } else {
-                        var wikiLang = wikiSiteKeys[0].slice(0, -4).replace('_', '-');
+                        var wikiLang = wikiSiteKeys[0].slice(0, -4).replaceAll('_', '-');
                         var wikiTitle = entity.sitelinks[wikiSiteKeys[0]].title;
                         newWikipediaValue = wikiLang + ':' + wikiTitle;
                     }

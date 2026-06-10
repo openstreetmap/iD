@@ -71,6 +71,7 @@ export function uiPane(id, context) {
 
         if (!_paneTooltip) {
             _paneTooltip = uiTooltip()
+                .scrollContainer(context.container().select('.over-map'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
                 .title(() => _description)
                 .keys([_key]);

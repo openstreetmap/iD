@@ -233,7 +233,7 @@ export function uiFieldAddress(field, context) {
         ]);
 
         var widths = addressFormat.widths || {
-            housenumber: 1/5, unit: 1/5, street: 1/2, place: 1/2,
+            housenumber: 1/5, unit: 1/5, floor: 1/5, street: 1/2, place: 1/2,
             city: 2/3, state: 1/4, postcode: 1/3
         };
 
@@ -321,7 +321,6 @@ export function uiFieldAddress(field, context) {
 
             d3_select(this)
                 .call(uiCombobox(context, `address-${d.isAutoStreetPlace ? 'street-place' : d.id}`)
-                    .minItems(1)
                     .caseSensitive(true)
                     .fetcher(function(typedValue, callback) {
                         typedValue = typedValue.toLowerCase();

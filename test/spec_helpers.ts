@@ -1,13 +1,8 @@
 import { beforeAll, beforeEach, afterEach } from 'vitest';
-import { use } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 import 'happen';
 import fetchMock from 'fetch-mock';
 import 'fake-indexeddb/auto';
 import envs from '../config/envs.js';
-
-use(sinonChai);
 
 declare var global: typeof globalThis;
 declare var jsdom: typeof globalThis;
@@ -15,7 +10,6 @@ declare var jsdom: typeof globalThis;
 global.before = beforeEach;
 global.after = afterEach;
 global.fetchMock = fetchMock;
-global.sinon = sinon;
 global.VITEST = true;
 
 // create global variables for this data, to match what the esbuild config does
@@ -140,30 +134,6 @@ window.d3 = iD.d3; // Remove this if we can avoid exporting all of d3.js
 delete window.PointerEvent;  // force the browser to use mouse events
 
 // some sticky fallbacks
-const capabilities = `<?xml version="1.0" encoding="UTF-8"?>
-<osm version="0.6" generator="OpenStreetMap server" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
-  <api>
-    <version minimum="0.6" maximum="0.6"/>
-    <area maximum="0.25"/>
-    <note_area maximum="25"/>
-    <tracepoints per_page="5000"/>
-    <waynodes maximum="2000"/>
-    <changesets maximum_elements="10000"/>
-    <timeout seconds="300"/>
-    <status database="online" api="online" gpx="online"/>
-  </api>
-  <policy>
-    <imagery>
-      <blacklist regex=".*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*"/>
-      <blacklist regex="http://xdworld\.vworld\.kr:8080/.*"/>
-      <blacklist regex=".*\.here\.com[/:].*"/>
-    </imagery>
-  </policy>
-</osm>`;
-
-fetchMock.sticky('https://www.openstreetmap.org/api/capabilities', capabilities, {sticky: true});
-fetchMock.sticky('http://www.openstreetmap.org/api/capabilities', capabilities, {sticky: true});
-
 const vegbilderOwsCapabilities = `<?xml version="1.0" encoding="UTF-8"?>
 <wfs:WFS_Capabilities version="2.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

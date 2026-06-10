@@ -1,11 +1,11 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit';
 import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './helpers';
 import { services } from '../services';
 
 
 export function svgKartaviewImages(projection, context, dispatch) {
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    var throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 12;
     var minMarkerZoom = 16;
     var minViewfieldZoom = 18;
@@ -165,12 +165,10 @@ export function svgKartaviewImages(projection, context, dispatch) {
         var showMarkers = (z >= minMarkerZoom);
         var showViewfields = (z >= minViewfieldZoom);
 
-        var service = getService();
-        var sequences = [];
-        var images = [];
+        const service = getService();
 
-        sequences = (service ? service.sequences(projection) : []);
-        images = (service && showMarkers ? service.images(projection) : []);
+        let sequences = (service ? service.sequences(projection) : []);
+        let images = (service && showMarkers ? service.images(projection) : []);
         dispatch.call('photoDatesChanged', this, 'kartaview', [
             ...filterImages(images, true).map(p => p.captured_at),
             ...filterSequences(sequences, true).map(s => s.properties.captured_at)]);
@@ -185,7 +183,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
             .remove();
 
         // enter/update
-        traces = traces.enter()
+        traces.enter()
             .append('path')
             .attr('class', 'sequence')
             .merge(traces)
