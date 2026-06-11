@@ -48,6 +48,8 @@ declare global {
       unknown,
       unknown
     >;
+
+    export type Selector = (selection: Selection) => void;
   }
 }
 

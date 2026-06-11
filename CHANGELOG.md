@@ -39,13 +39,20 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.41.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Render short radio field options inline on one row when they fit side-by-side ([#12343], thanks [@FloEdelmann])
+* Allow coastlines and roads with long bus routes to be split ([#10615], thanks [@k-yle])
 * Make tags like `contact:instagram` clickable if they contain a plain username, or a full URL ([#12306], thanks [@k-yle])
+* Render the `side` arrow of cyclist waiting aid features ([#12374], thanks [@RudyTheDev])
 #### :scissors: Operations
 #### :camera: Street-Level
+* Add high-resolution toggle for Mapilio photo viewer ([#12353], thanks [@sezerbozbiyik])
 #### :white_check_mark: Validation
+* Fix bug causing first click not focussing the respective features when clicking on a validation message in the upload dialog ([#8848])
+* Check the flow direction of `waterway=pressurised` ([#12386], thanks [@paulklie])
 #### :bug: Bugfixes
 * Restore dedicated rendering of ski pistes and building parts ([#12297], thanks [@matkoniecz])
 * Pressing backspace while in the feature type selecting mode should not delete the object
+* Fix combo box dropdown not always opening automatically when changing focus from other input fields ([#12299])
 * Fix minor styling issues in the presets list ([#12321], thanks [@k-yle])
 * Hide icons that failed to load in the relations list ([#12320], thanks [@k-yle])
 * Fix some false-positive warnings about mismatched geometry ([#12339], thanks [@k-yle])
@@ -55,14 +62,26 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 #### :hammer: Development
 * Remove redundant software dependencies to reduce the amount of the code that is bundled with iD ([#11634], [#12307], thanks [@k-yle])
+* Update name-suggestion-index to v7.2 ([#12337], thanks [@bjornstar])
+* Introduce location hash `change` events ([#12429])
 
+[#8848]: https://github.com/openstreetmap/iD/issues/8848
+[#10615]: https://github.com/openstreetmap/iD/pull/10615
 [#11634]: https://github.com/openstreetmap/iD/pull/11634
 [#12297]: https://github.com/openstreetmap/iD/issues/12297
+[#12299]: https://github.com/openstreetmap/iD/issues/12299
 [#12306]: https://github.com/openstreetmap/iD/pull/12306
 [#12307]: https://github.com/openstreetmap/iD/pull/12307
 [#12320]: https://github.com/openstreetmap/iD/pull/12320
 [#12321]: https://github.com/openstreetmap/iD/pull/12321
+[#12337]: https://github.com/openstreetmap/iD/issues/12337
 [#12339]: https://github.com/openstreetmap/iD/pull/12339
+[#12343]: https://github.com/openstreetmap/iD/pull/12343
+[#12353]: https://github.com/openstreetmap/iD/pull/12353
+[#12374]: https://github.com/openstreetmap/iD/pull/12374
+[#12386]: https://github.com/openstreetmap/iD/pull/12386
+[#12429]: https://github.com/openstreetmap/iD/pull/12429
+[@FloEdelmann]: https://github.com/FloEdelmann
 
 
 # 2.40.0

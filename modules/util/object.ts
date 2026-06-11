@@ -1,5 +1,5 @@
-export function utilObjectOmit(obj, omitKeys) {
-    return Object.keys(obj).reduce(function(result, key) {
+export function utilObjectOmit<T extends object, K extends keyof T>(obj: T, omitKeys: K[]): Omit<T, K> {
+    return (<K[]>Object.keys(obj)).reduce<any>(function(result, key) {
         if (omitKeys.indexOf(key) === -1) {
             result[key] = obj[key];  // keep
         }
@@ -7,20 +7,18 @@ export function utilObjectOmit(obj, omitKeys) {
     }, {});
 }
 
-/**
- * @template T
- * @typedef {{ [key: string]: { [value: string]: T } }} TagDictionary<T>
- */
+export interface TagDictionary<T> {
+    [key: TagKey]: {
+        [value: TagValue]: T
+    }
+}
+
 
 /**
  * searches a dictionary for a match, such as `osmOneWayForwardTags`,
  * `osmAreaKeysExceptions`, etc.
- * @template T
- * @param {Tags} tags
- * @param {TagDictionary<T>} tagDictionary
- * @returns {T | undefined}
  */
-export function utilCheckTagDictionary(tags, tagDictionary) {
+export function utilCheckTagDictionary<T>(tags:Tags, tagDictionary: TagDictionary<T>): T | undefined {
     for (const key in tags) {
         const value = tags[key];
         if (tagDictionary[key] && value in tagDictionary[key]) {
@@ -33,11 +31,9 @@ export function utilCheckTagDictionary(tags, tagDictionary) {
 /**
  * converts every value in an object to a string, if
  * it's not already a string.
- * @param {Record<string, unknown>} object
  */
-export function stringifyProperties(object) {
-    /** @type {Tags} */
-    const tags = {};
+export function stringifyProperties(object: Record<string, unknown>): Tags {
+    const tags: Tags = {};
     for (const key in object) {
         switch (typeof object[key]) {
             case 'undefined':

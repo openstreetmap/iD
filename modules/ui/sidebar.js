@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit/compat';
+import { throttle } from 'es-toolkit';
 
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import {
@@ -48,6 +48,9 @@ export function uiSidebar(context) {
             .append('div')
             .attr('class', 'sidebar-resizer')
             .on(_pointerPrefix + 'down.sidebar-resizer', pointerdown);
+
+        const throttledInspectorRedraw = throttle(() => inspectorWrap.call(inspector), 200);
+        d3_select(window).on('resize.sidebar', throttledInspectorRedraw);
 
         var downPointerId, lastClientX, containerLocGetter;
 
@@ -125,6 +128,8 @@ export function uiSidebar(context) {
                 } else {
                     context.ui().onResize([-dx * scaleX, 0]);
                 }
+
+                throttledInspectorRedraw();
             }
         }
 
@@ -139,6 +144,8 @@ export function uiSidebar(context) {
                 .on('touchmove.sidebar-resizer', null)
                 .on(_pointerPrefix + 'move.sidebar-resizer', null)
                 .on(_pointerPrefix + 'up.sidebar-resizer pointercancel.sidebar-resizer', null);
+
+            inspectorWrap.call(inspector);
         }
 
         var featureListWrap = selection

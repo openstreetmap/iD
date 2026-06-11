@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit/compat';
+import { throttle } from 'es-toolkit';
 
 import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './helpers';
@@ -142,7 +142,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
         if (!showsPano || !showsFlat) {
             sequences = sequences.filter(function(sequence) {
-                if (sequence.properties.hasOwnProperty('is_pano')) {
+                if (Object.hasOwnProperty.call(sequence.properties, 'is_pano')) {
                     if (sequence.properties.is_pano) return showsPano;
                     return showsFlat;
                 }

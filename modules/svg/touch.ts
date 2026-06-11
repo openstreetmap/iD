@@ -1,6 +1,6 @@
 export function svgTouch() {
 
-    function drawTouch(selection) {
+    function drawTouch(selection: d3.Selection) {
         selection.selectAll('.layer-touch')
             .data(['areas', 'lines', 'points', 'turns', 'markers'])
             .enter()

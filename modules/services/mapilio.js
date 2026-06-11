@@ -3,7 +3,7 @@ import { select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import { deepEqual } from 'fast-equals';
-import Protobuf from 'pbf';
+import { PbfReader } from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 
@@ -30,7 +30,9 @@ const imgZoom = d3_zoom()
 const pannellumViewerCSS = 'pannellum/pannellum.css';
 const pannellumViewerJS = 'pannellum/pannellum.js';
 const resolution = 1080;
+const hdResolution = 2080;
 
+let _useHd = false;
 let _activeImage;
 let _cache;
 let _loadViewerPromise;
@@ -101,8 +103,8 @@ function loadTile(which, url, tile) {
 
 // Load the data from the vector tile into cache
 function loadTileDataToCache(data, tile) {
-    const vectorTile = new VectorTile(new Protobuf(data));
-    if (vectorTile.layers.hasOwnProperty(pointLayer)) {
+    const vectorTile = new VectorTile(new PbfReader(data));
+    if (Object.hasOwnProperty.call(vectorTile.layers, pointLayer)) {
         const features = [];
         const cache = _cache.images;
         const layer = vectorTile.layers[pointLayer];
@@ -137,7 +139,7 @@ function loadTileDataToCache(data, tile) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty(lineLayer)) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, lineLayer)) {
         const cache = _cache.sequences;
         const layer = vectorTile.layers[lineLayer];
 
@@ -174,7 +176,8 @@ function getImageData(imageId, sequenceId) {
         .then(function (data) {
             let index = data.data.findIndex((feature) => feature.id === imageId);
             const {filename, uploaded_hash} = data.data[index];
-            _sceneOptions.panorama = imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + resolution;
+            const targetResolution = _useHd ? hdResolution : resolution;
+            _sceneOptions.panorama = imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + targetResolution;
         });
 }
 
@@ -331,17 +334,52 @@ export default {
         let wrap = context.container().select('.photoviewer .mapilio-wrapper');
         let attribution = wrap.selectAll('.photo-attribution').text('\u00A0');
 
+        let _username = '';
+
         getUserData(d.created_by_id).then((username) => {
           if (username) {
+            _username = username;
+          }
+
+        }).finally(() => {
+
+            attribution
+             .append('input')
+             .attr('type','checkbox')
+             .property('checked', _useHd)
+             .on('click',(e) => {
+                e.stopPropagation();
+                _useHd = e.target.checked;
+                let parts = _sceneOptions.panorama.split('/');
+
+                if (_useHd){
+                    parts[parts.length - 1] = hdResolution;
+                    _sceneOptions.panorama= parts.join('/');
+                    loadTheImage();
+                } else {
+                    parts[parts.length - 1] = resolution;
+                    _sceneOptions.panorama=parts.join('/');
+                    loadTheImage();
+                }
+             });
+
+            attribution
+             .append('span')
+             .text('High Resolution');
+
+            attribution
+             .append('span')
+             .text('|');
+
             attribution
               .append('span')
               .attr('class', 'captured_by')
-              .text('@' + username);
+              .text('@' + _username);
+
             attribution
               .append('span')
               .text('|');
-          }
-        }).finally(() => {
+
           if (d.capture_time) {
             attribution
               .append('span')
@@ -376,8 +414,7 @@ export default {
             .classed('hide', !_cache.images.forImageId.hasOwnProperty(+id + 1));
 
 
-        getImageData(d.id,d.sequence_id).then(function () {
-
+        function loadTheImage(){
             if (d.isPano) {
                 if (!_pannellumViewer) {
                     that.initViewer();
@@ -400,7 +437,9 @@ export default {
                 // make non-panoramic photo viewer
                 that.initOnlyPhoto(context);
             }
-        });
+        }
+
+        getImageData(d.id,d.sequence_id).then(loadTheImage);
 
         return this;
     },

@@ -33,8 +33,7 @@ export function uiFieldCombo(field, context) {
     var _allowCustomValues = field.type !== 'manyCombo' && field.customValues !== false;
     var _snake_case = (field.snake_case || (field.snake_case === undefined));
     var _combobox = uiCombobox(context, 'combo-' + field.safeid)
-        .caseSensitive(field.caseSensitive)
-        .minItems(1);
+        .caseSensitive(field.caseSensitive);
     var _container = d3_select(null);
     var _inputWrap = d3_select(null);
     var _input = d3_select(null);
@@ -598,9 +597,6 @@ export function uiFieldCombo(field, context) {
                 }
                 t[field.key] = context.cleanTagValue(arr.filter(Boolean).join(';'));
             }
-
-            window.setTimeout(function() { _input.node().focus(); }, 10);
-
         } else {
             var rawValue = utilGetSetValue(_input);
 
@@ -749,7 +745,7 @@ export function uiFieldCombo(field, context) {
             _combobox
                 .on('accept', function() {
                     _input.node().blur();
-                    _input.node().focus();
+                    window.setTimeout(function() { _input.node().focus(); }, 10);
                 });
 
             _input

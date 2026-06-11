@@ -1,15 +1,19 @@
-import { throttle } from 'es-toolkit/compat';
+import { throttle } from 'es-toolkit';
 
 import { select as d3_select } from 'd3-selection';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect, modeSelectNote } from '../modes';
-import { utilQsString, utilStringQs } from '../util';
+import { utilQsString, utilRebind, utilStringQs } from '../util';
 import { utilArrayIdentical } from '../util/array';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { localizer, t } from '../core/localizer';
 import { prefs } from '../core/preferences';
+
+
+const dispatch = d3_dispatch('change');
 
 function getNewHash(arg) {
     const original = utilStringQs(window.location.hash);
@@ -44,9 +48,13 @@ export function patchHash(updater) {
     // though unavoidably creating a browser history entry
     window.history.replaceState(null, '', latestHash);
 
+    // trigger change event
+    dispatch.call('change');
+
     // save last used map location for future
     const { map } = utilStringQs(latestHash);
     if (map) prefs('map-location', map);
+
     return true;
 }
 
@@ -260,5 +268,5 @@ export function behaviorHash(context) {
         window.location.hash = '';
     };
 
-    return behavior;
+    return utilRebind(behavior, dispatch, 'on');
 }
