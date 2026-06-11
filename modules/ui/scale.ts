@@ -1,16 +1,17 @@
 import { displayLength } from '../util/units';
 import { geoLonToMeters, geoMetersToLon } from '../geo';
 import { localizer } from '../core/localizer';
+import type { Vec2 } from '../geo/vector';
 
 
-export function uiScale(context) {
+export function uiScale(context: iD.Context) {
     var projection = context.projection,
         isImperial = !localizer.usesMetric(),
         maxLength = 180,
         tickHeight = 8;
 
 
-    function scaleDefs(loc1, loc2) {
+    function scaleDefs(loc1: Vec2, loc2: Vec2) {
         var lat = (loc2[1] + loc1[1]) / 2,
             conversion = (isImperial ? 3.28084 : 1),
             dist = geoLonToMeters(loc2[0] - loc1[0], lat) * conversion,
@@ -43,7 +44,7 @@ export function uiScale(context) {
     }
 
 
-    function update(selection) {
+    function update(selection: d3.Selection) {
         // choose loc1, loc2 along bottom of viewport (near where the scale will be drawn)
         var dims = context.map().dimensions(),
             loc1 = projection.invert([0, dims[1]]),
@@ -59,7 +60,7 @@ export function uiScale(context) {
     }
 
 
-    return function(selection) {
+    return function(selection: d3.Selection) {
         function switchUnits() {
             isImperial = !isImperial;
             selection.call(update);

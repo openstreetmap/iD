@@ -2,7 +2,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import Protobuf from 'pbf';
+import { PbfReader } from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 import { geoExtent } from '../geo';
@@ -89,7 +89,7 @@ function loadTile(which, url, tile) {
 
 // Load the data from the vector tile into cache
 function loadTileDataToCache(data, tile, which) {
-    const vectorTile = new VectorTile(new Protobuf(data));
+    const vectorTile = new VectorTile(new PbfReader(data));
     let features,
         cache,
         layer,
@@ -98,7 +98,7 @@ function loadTileDataToCache(data, tile, which) {
         loc,
         d;
 
-    if (vectorTile.layers.hasOwnProperty('image')) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, 'image')) {
         features = [];
         cache = _mlyCache.images;
         layer = vectorTile.layers.image;
@@ -125,7 +125,7 @@ function loadTileDataToCache(data, tile, which) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty('sequence')) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, 'sequence')) {
         cache = _mlyCache.sequences;
         layer = vectorTile.layers.sequence;
 
@@ -139,7 +139,7 @@ function loadTileDataToCache(data, tile, which) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty('point')) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, 'point')) {
         features = [];
         cache = _mlyCache[which];
         layer = vectorTile.layers.point;
@@ -165,7 +165,7 @@ function loadTileDataToCache(data, tile, which) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty('traffic_sign')) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, 'traffic_sign')) {
         features = [];
         cache = _mlyCache[which];
         layer = vectorTile.layers.traffic_sign;
@@ -697,7 +697,7 @@ export default {
             for (var i = 0; i < decodedGeometry.length; i++) {
                 uintArray[i] = decodedGeometry.charCodeAt(i);
             }
-            const tile = new VectorTile(new Protobuf(uintArray.buffer));
+            const tile = new VectorTile(new PbfReader(uintArray.buffer));
             const layer = tile.layers['mpy-or'];
 
             const geometries = layer.feature(0).loadGeometry();
