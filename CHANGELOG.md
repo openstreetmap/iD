@@ -55,6 +55,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix combo box dropdown not always opening automatically when changing focus from other input fields ([#12299])
 * Fix minor styling issues in the presets list ([#12321], thanks [@k-yle])
 * Hide icons that failed to load in the relations list ([#12320], thanks [@k-yle])
+* Fix some false-positive warnings about mismatched geometry ([#12339], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -74,6 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12320]: https://github.com/openstreetmap/iD/pull/12320
 [#12321]: https://github.com/openstreetmap/iD/pull/12321
 [#12337]: https://github.com/openstreetmap/iD/issues/12337
+[#12339]: https://github.com/openstreetmap/iD/pull/12339
 [#12343]: https://github.com/openstreetmap/iD/pull/12343
 [#12353]: https://github.com/openstreetmap/iD/pull/12353
 [#12374]: https://github.com/openstreetmap/iD/pull/12374
