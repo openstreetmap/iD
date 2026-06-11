@@ -16,7 +16,7 @@ import { utilEditDistance, utilGetSetValue, utilRebind, utilTriggerEvent } from 
 var _comboHideTimerID;
 
 export function fuzzyMatch(search, string) {
-    const numAllowedTypos = Math.floor(search.length / 4);
+    const numAllowedTypos = Math.floor(search.length / 5);
     if (utilEditDistance(search, string, {substring: true}) <= numAllowedTypos) {
         return true;
     }
