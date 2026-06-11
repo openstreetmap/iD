@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.41.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Render short radio field options inline on one row when they fit side-by-side ([#12343], thanks [@FloEdelmann])
 * Allow coastlines and roads with long bus routes to be split ([#10615], thanks [@k-yle])
 * Make tags like `contact:instagram` clickable if they contain a plain username, or a full URL ([#12306], thanks [@k-yle])
 * Render the `side` arrow of cyclist waiting aid features ([#12374], thanks [@RudyTheDev])
@@ -73,10 +74,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12320]: https://github.com/openstreetmap/iD/pull/12320
 [#12321]: https://github.com/openstreetmap/iD/pull/12321
 [#12337]: https://github.com/openstreetmap/iD/issues/12337
+[#12343]: https://github.com/openstreetmap/iD/pull/12343
 [#12353]: https://github.com/openstreetmap/iD/pull/12353
 [#12374]: https://github.com/openstreetmap/iD/pull/12374
 [#12386]: https://github.com/openstreetmap/iD/pull/12386
 [#12429]: https://github.com/openstreetmap/iD/pull/12429
+[@FloEdelmann]: https://github.com/FloEdelmann
 
 
 # 2.40.0
