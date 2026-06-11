@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Render short radio field options inline on one row when they fit side-by-side ([#12343], thanks [@FloEdelmann])
+* Allow coastlines and roads with long bus routes to be split ([#10615], thanks [@k-yle])
 * Make tags like `contact:instagram` clickable if they contain a plain username, or a full URL ([#12306], thanks [@k-yle])
 * Render the `side` arrow of cyclist waiting aid features ([#12374], thanks [@RudyTheDev])
 #### :scissors: Operations
@@ -61,8 +62,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Remove redundant software dependencies to reduce the amount of the code that is bundled with iD ([#11634], [#12307], thanks [@k-yle])
 * Update name-suggestion-index to v7.2 ([#12337], thanks [@bjornstar])
+* Introduce location hash `change` events ([#12429])
 
 [#8848]: https://github.com/openstreetmap/iD/issues/8848
+[#10615]: https://github.com/openstreetmap/iD/pull/10615
 [#11634]: https://github.com/openstreetmap/iD/pull/11634
 [#12297]: https://github.com/openstreetmap/iD/issues/12297
 [#12299]: https://github.com/openstreetmap/iD/issues/12299
@@ -75,6 +78,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12353]: https://github.com/openstreetmap/iD/pull/12353
 [#12374]: https://github.com/openstreetmap/iD/pull/12374
 [#12386]: https://github.com/openstreetmap/iD/pull/12386
+[#12429]: https://github.com/openstreetmap/iD/pull/12429
 [@FloEdelmann]: https://github.com/FloEdelmann
 
 
