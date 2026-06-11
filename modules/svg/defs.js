@@ -113,8 +113,8 @@ export function svgDefs(context) {
                 .attr('fill', options.color);
         }
         const embankmentColors = {
-            color: '#444',
-            strokeColor: 'rgba(200, 200, 200, 0.75)'
+            strokeColor: '#444',
+            color: 'rgba(200, 200, 200, 0.75)'
         };
         addBothSidedMarker('embankment', { ...embankmentColors, offset: 1.5 });
         addSidedMarker('embankment-right', { ...embankmentColors, offset: 1.5 });
