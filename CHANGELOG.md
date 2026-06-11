@@ -44,6 +44,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Make tags like `contact:instagram` clickable if they contain a plain username, or a full URL ([#12306], thanks [@k-yle])
 * Show suggestions in combobox dropdown also when the entered text contains a few typos ([#8802])
 * Render the `side` arrow of cyclist waiting aid features ([#12374], thanks [@RudyTheDev])
+* Show titles and descriptions when searching for wikidata items ([#12436], thanks [@k-yle])
+
 #### :scissors: Operations
 #### :camera: Street-Level
 * Add high-resolution toggle for Mapilio photo viewer ([#12353], thanks [@sezerbozbiyik])
@@ -85,6 +87,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12374]: https://github.com/openstreetmap/iD/pull/12374
 [#12386]: https://github.com/openstreetmap/iD/pull/12386
 [#12429]: https://github.com/openstreetmap/iD/pull/12429
+[#12436]: https://github.com/openstreetmap/iD/pull/12436
 [@FloEdelmann]: https://github.com/FloEdelmann
 
 
