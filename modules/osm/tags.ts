@@ -214,7 +214,10 @@ export const osmOneWayForwardTags: TagDictionary<boolean> = {
         'spillway': true,
         'stream': true,
         'tidal_channel': true
-    }
+    },
+    'flow_direction': {
+        'forward' : true,
+    },
 };
 export const osmOneWayBackwardTags: TagDictionary<boolean> = {
     'conveying': {
@@ -222,6 +225,9 @@ export const osmOneWayBackwardTags: TagDictionary<boolean> = {
     },
     'oneway': {
         '-1': true,
+    },
+    'flow_direction': {
+        'backward' : true,
     },
 };
 export const osmOneWayBiDirectionalTags: TagDictionary<boolean> = {
@@ -232,6 +238,17 @@ export const osmOneWayBiDirectionalTags: TagDictionary<boolean> = {
         'alternating': true,
         'reversible': true,
     },
+    'flow_direction': {
+        'both' : true
+    },
+};
+export const osmOneWayNoTags: TagDictionary<boolean> = {
+    'oneway': {
+        'no': true
+    },
+    'flow_direction': {
+        'unknown' : true
+    }
 };
 export const osmOneWayTags = merge(
     osmOneWayForwardTags,
