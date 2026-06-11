@@ -157,6 +157,42 @@ describe('iD.util', function() {
         });
     });
 
+    describe('utilEditDistance, for substring', function() {
+        it('returns zero for same strings', function() {
+            expect(iD.utilEditDistance('foo', 'foo', {substring: true})).to.eql(0);
+        });
+
+        it('returns zero for exact substring match', function() {
+            expect(iD.utilEditDistance('foo', 'asd foo bar', {substring: true})).to.eql(0);
+        });
+
+        it('reports an insertion of 1', function() {
+            expect(iD.utilEditDistance('fooa', 'asd fo1oa fasd', {substring: true})).to.eql(1);
+        });
+
+        it('reports a replacement of 1', function() {
+            expect(iD.utilEditDistance('foob', 'asd fooa fasd', {substring: true})).to.eql(1);
+        });
+
+        it('does not fail on empty input', function() {
+            expect(iD.utilEditDistance('', '', {substring: true})).to.eql(0);
+        });
+
+        it.each([
+            ['c', 0],
+            ['co', 0],
+            ['cof', 0],
+            ['cofe', 1],
+            ['cofee', 1],
+            ['cofees', 2],
+            ['cofeesh', 2],
+            ['cofeesho', 2],
+            ['cofeeshop', 2]
+        ])('while (mis)typing', function(str, expected) {
+            expect(iD.utilEditDistance(str, 'Coffee Shop', {substring: true})).to.eql(expected);
+        });
+    });
+
     describe('utilUnicodeCharsCount', function() {
         it('counts empty string', function() {
             expect(iD.utilUnicodeCharsCount('')).to.eql(0);
