@@ -61,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Remove redundant software dependencies to reduce the amount of the code that is bundled with iD ([#11634], [#12307], thanks [@k-yle])
 * Update name-suggestion-index to v7.2 ([#12337], thanks [@bjornstar])
+* Introduce location hash `change` events ([#12429])
 
 [#8848]: https://github.com/openstreetmap/iD/issues/8848
 [#10615]: https://github.com/openstreetmap/iD/pull/10615
@@ -75,6 +76,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12353]: https://github.com/openstreetmap/iD/pull/12353
 [#12374]: https://github.com/openstreetmap/iD/pull/12374
 [#12386]: https://github.com/openstreetmap/iD/pull/12386
+[#12429]: https://github.com/openstreetmap/iD/pull/12429
 
 
 # 2.40.0
