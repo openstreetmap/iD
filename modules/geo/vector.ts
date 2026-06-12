@@ -1,5 +1,6 @@
 export type Vec2 = [x: number, y: number];
 export type Vec3 = [x: number, y: number, z: number];
+export type Vec4 = [a: number, b: number, c: number, d: number];
 
 // vector equals
 export function geoVecEqual(a: Vec2, b: Vec2, epsilon?: number) {

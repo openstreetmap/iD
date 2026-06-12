@@ -39,7 +39,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.41.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Render short radio field options inline on one row when they fit side-by-side ([#12343], thanks [@FloEdelmann])
+* Allow coastlines and roads with long bus routes to be split ([#10615], thanks [@k-yle])
 * Make tags like `contact:instagram` clickable if they contain a plain username, or a full URL ([#12306], thanks [@k-yle])
+* Show suggestions in combobox dropdown also when the entered text contains a few typos ([#8802])
 * Render the `side` arrow of cyclist waiting aid features ([#12374], thanks [@RudyTheDev])
 #### :scissors: Operations
 #### :camera: Street-Level
@@ -54,6 +57,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix minor styling issues in the presets list ([#12321], thanks [@k-yle])
 * Hide icons that failed to load in the relations list ([#12320], thanks [@k-yle])
 * Refresh entity editor to show all relations of a feature when the entity was loaded directly, e.g. via URL parameter ([#12369], thanks [@tordans])
+* Fix some false-positive warnings about mismatched geometry ([#12339], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -61,8 +65,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Remove redundant software dependencies to reduce the amount of the code that is bundled with iD ([#11634], [#12307], thanks [@k-yle])
 * Update name-suggestion-index to v7.2 ([#12337], thanks [@bjornstar])
+* Introduce location hash `change` events ([#12429])
 
+[#8802]: https://github.com/openstreetmap/iD/issues/8802
 [#8848]: https://github.com/openstreetmap/iD/issues/8848
+[#10615]: https://github.com/openstreetmap/iD/pull/10615
 [#11634]: https://github.com/openstreetmap/iD/pull/11634
 [#12297]: https://github.com/openstreetmap/iD/issues/12297
 [#12299]: https://github.com/openstreetmap/iD/issues/12299
@@ -71,10 +78,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12320]: https://github.com/openstreetmap/iD/pull/12320
 [#12321]: https://github.com/openstreetmap/iD/pull/12321
 [#12337]: https://github.com/openstreetmap/iD/issues/12337
+[#12339]: https://github.com/openstreetmap/iD/pull/12339
+[#12343]: https://github.com/openstreetmap/iD/pull/12343
 [#12353]: https://github.com/openstreetmap/iD/pull/12353
 [#12369]: github.com/openstreetmap/iD/pull/12369
 [#12374]: https://github.com/openstreetmap/iD/pull/12374
 [#12386]: https://github.com/openstreetmap/iD/pull/12386
+[#12429]: https://github.com/openstreetmap/iD/pull/12429
+[@FloEdelmann]: https://github.com/FloEdelmann
 
 
 # 2.40.0
