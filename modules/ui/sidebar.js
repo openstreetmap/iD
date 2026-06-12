@@ -49,7 +49,7 @@ export function uiSidebar(context) {
             .attr('class', 'sidebar-resizer')
             .on(_pointerPrefix + 'down.sidebar-resizer', pointerdown);
 
-        const throttledInspectorRedraw = throttle(() => inspectorWrap.call(inspector), 200);
+        const throttledInspectorRedraw = throttle(() => inspectorWrap.call(inspector, { redrawEntityEditor: true }), 200);
         d3_select(window).on('resize.sidebar', throttledInspectorRedraw);
 
         var downPointerId, lastClientX, containerLocGetter;
@@ -145,7 +145,7 @@ export function uiSidebar(context) {
                 .on(_pointerPrefix + 'move.sidebar-resizer', null)
                 .on(_pointerPrefix + 'up.sidebar-resizer pointercancel.sidebar-resizer', null);
 
-            inspectorWrap.call(inspector);
+            inspectorWrap.call(inspector, { redrawEntityEditor: true });
         }
 
         var featureListWrap = selection
