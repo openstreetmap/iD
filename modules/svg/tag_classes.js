@@ -11,7 +11,7 @@ export function svgTagClasses() {
     ];
     const statuses = Object.keys(osmLifecyclePrefixes);
     const secondaries = [
-        'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
+        'oneway', 'bridge', 'tunnel', 'barrier',
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
         'public_transport', 'location', 'parking', 'golf', 'type', 'leisure',
         'man_made', 'indoor', 'construction', 'proposed', 'bicycle', 'foot'
