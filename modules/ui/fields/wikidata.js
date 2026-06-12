@@ -162,7 +162,7 @@ export function uiFieldWikidata(field, context) {
                         .attr('lang', item.display.label.language)
                         .text(item.display.label.value),
                     description: item.display.description && item.display.description.value,
-                    title: item.aliases,
+                    title: item.aliases.join(', '),
                     terms: item.aliases
                 };
             });
