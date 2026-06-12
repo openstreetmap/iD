@@ -201,9 +201,16 @@ describe('iD.validations.invalid_format', function () {
             expect(fixes).to.have.lengthOf(0);
         });
 
-        it('should propose to remove URL from Wikimedia Commons tag', function() {
+        it.each([
+            // URL with hash
+            'https://commons.wikimedia.org/wiki/File:OpenStreetMap-Editor_iD_Logo.svg#mw-jump-to-license',
+            // percent-encoded URLs -> should be decoded
+            'https://commons.wikimedia.org/wiki/File:Guidepost_%2863202%29.jpg',
+            'https://commons.wikimedia.org/wiki/File:OSM_%EA%B2%80%ED%86%A0_%EC%9A%94%EC%B2%AD_%EB%B3%B5%EC%82%AC.png',
+            'https://commons.wikimedia.org/wiki/File%3ARed_Spiral_Bike_Rack.jpg',
+        ])('should propose to remove URL from Wikimedia Commons tag', function(url) {
             var entity = createPointWithTags({
-                'wikimedia_commons': 'https://commons.wikimedia.org/wiki/File:OpenStreetMap-Editor_iD_Logo.svg#mw-jump-to-license'
+                'wikimedia_commons': url
             });
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(1);
@@ -213,7 +220,11 @@ describe('iD.validations.invalid_format', function () {
             expect(fixes).to.have.lengthOf(1);
             issues[0].fixes(context)[0].onClick(context);
             const fixedEntity = context.entity(entity.id);
-            expect(fixedEntity.tags.wikimedia_commons).to.eql('File:OpenStreetMap-Editor iD Logo.svg');
+            const expected = decodeURIComponent(url)
+                .replace('https://commons.wikimedia.org/wiki/', '')
+                .replace(/#.*/, '')
+                .replace(/_/g, ' ');
+            expect(fixedEntity.tags.wikimedia_commons).to.eql(expected);
         });
     });
 

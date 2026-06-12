@@ -204,12 +204,12 @@ export function validationFormatting() {
             if (isValidURL(value, true)) {
                 // wikimedia_commons should not contain a valid URL, see
                 // https://wiki.openstreetmap.org/w/index.php?title=Key:wikimedia_commons&oldid=2959709#Common_tagging_mistakes
-                const regex = /\/wiki\/(File|Category):(.*)/;
+                const regex = /\/wiki\/(File|Category)(:|%3A)(.*)/;
                 const url = new URL(value);
                 const path = url.pathname;
                 if (url.host === 'commons.wikimedia.org' && regex.test(path)) {
                     const parts = path.match(regex);
-                    const newValue = decodeURIComponent(`${parts[1]}:${parts[2]}`).replace(/_/g, ' ');
+                    const newValue = decodeURIComponent(`${parts[1]}:${parts[3]}`).replace(/_/g, ' ');
                     const previewDiff = utilTagDiff({ wikimedia_commons: value }, { wikimedia_commons: newValue });
                     issues.push(new validationIssue({
                         ...wikimediaCommonsValidationIssueBase,
