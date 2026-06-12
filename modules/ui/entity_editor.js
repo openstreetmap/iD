@@ -24,7 +24,7 @@ export function uiEntityEditor(context) {
     var _coalesceChanges = false;
     var _modified = false;
     var _base;
-    var _entityIDs;
+    var _entityIDs = [];
     var _activePresets = [];
     var _newFeature;
 
