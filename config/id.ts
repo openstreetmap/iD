@@ -1,17 +1,3 @@
-import {
-  idPresetsCdnUrl,
-  idOciCdnUrl,
-  idNsiCdnUrl,
-  idWmfSitematrixCdnUrl,
-  idApiConnectionUrl,
-  idApiConnectionApiUrl,
-  idApiConnectionClientId,
-  idApiConnection,
-  idTaginfoApiUrl,
-  idNominatimApiUrl,
-  idShowDonationMessage
-} from './env.js';
-
 export interface OsmApiConnection {
   url: string;
   apiUrl?: string;
@@ -21,13 +7,13 @@ export interface OsmApiConnection {
 type OsmApiConnectionKey = 'live' | 'dev';
 
 // cdns for external data packages
-const presetsCdnUrl = idPresetsCdnUrl
+const presetsCdnUrl = import.meta.env.ID_PRESETS_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}/';
-const ociCdnUrl = idOciCdnUrl
+const ociCdnUrl = import.meta.env.ID_OCI_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/osm-community-index@{version}/';
-const wmfSitematrixCdnUrl = idWmfSitematrixCdnUrl
+const wmfSitematrixCdnUrl = import.meta.env.ID_WMF_SITEMATRIX_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/wmf-sitematrix@{version}/';
-const nsiCdnUrl = idNsiCdnUrl
+const nsiCdnUrl = import.meta.env.ID_NSI_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/name-suggestion-index@{version}/';
 
 // api urls and settings
@@ -44,6 +30,11 @@ const defaultOsmApiConnections: Record<OsmApiConnectionKey, OsmApiConnection> = 
 };
 
 const osmApiConnections: OsmApiConnection[] = [];
+
+const idApiConnectionUrl = import.meta.env.ID_API_CONNECTION_URL ?? null;
+const idApiConnectionApiUrl = import.meta.env.ID_API_CONNECTION_API_URL ?? null;
+const idApiConnectionClientId = import.meta.env.ID_API_CONNECTION_CLIENT_ID ?? null;
+const idApiConnection = import.meta.env.ID_API_CONNECTION ?? null;
 
 if (idApiConnectionUrl !== null &&
     idApiConnectionClientId !== null) {
@@ -66,13 +57,13 @@ if (idApiConnectionUrl !== null &&
 }
 
 // auxiliary OSM services
-const taginfoApiUrl = idTaginfoApiUrl
+const taginfoApiUrl = import.meta.env.ID_TAGINFO_API_URL
   || 'https://taginfo.openstreetmap.org/api/4/';
-const nominatimApiUrl = idNominatimApiUrl
+const nominatimApiUrl = import.meta.env.ID_NOMINATIM_API_URL
   || 'https://nominatim.openstreetmap.org/';
 
 // support/donation message on upload success screen
-const showDonationMessage = idShowDonationMessage !== 'false';
+const showDonationMessage = import.meta.env.ID_SHOW_DONATION_MESSAGE !== 'false';
 
 export {
   presetsCdnUrl,
