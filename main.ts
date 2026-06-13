@@ -22,8 +22,10 @@ function init(): void {
     .containerNode(container);
   if (!context) return;
 
-  window.context = context;
-  window.id = context;
+  if (import.meta.env.DEV) {
+    window.context = context;
+    window.id = context;
+  }
   context.init();
 
   const q = iD.utilStringQs(window.location.hash);
