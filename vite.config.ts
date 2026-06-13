@@ -1,12 +1,17 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import browserslist from 'browserslist';
+import browserslistToEsbuild from 'browserslist-to-esbuild';
 import { browserslistToTargets } from 'lightningcss';
 import { defineConfig } from 'vitest/config';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { idCssPlugin } from './scripts/build_css';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Single source of truth: package.json "browserslist"
+const cssTargets = browserslistToTargets(browserslist());
+const jsTargets = browserslistToEsbuild();
 
 export default defineConfig(({ mode }) => ({
   base: './',
@@ -22,7 +27,7 @@ export default defineConfig(({ mode }) => ({
   css: {
     transformer: 'lightningcss',
     lightningcss: {
-      targets: browserslistToTargets(browserslist()),
+      targets: cssTargets,
     },
   },
   build: {
@@ -30,6 +35,7 @@ export default defineConfig(({ mode }) => ({
     outDir: 'dist',
     sourcemap: true,
     cssCodeSplit: false,
+    target: jsTargets,
     rollupOptions: {
       input: path.resolve(__dirname, 'main.ts'),
       output: {
