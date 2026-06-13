@@ -1,6 +1,3 @@
-/**
- * Single CSS entry for Vite. Order matches previous build_css.js (sorted by filename).
- */
 @import './00_reset.css';
 @import './10_colors.css';
 @import './20_map.css';
