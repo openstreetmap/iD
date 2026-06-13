@@ -299,6 +299,8 @@ Test your code and make sure it passes.
 
 Follow the steps in the [how to get started guide](https://github.com/openstreetmap/iD/wiki/How-to-get-started#build-and-test-instructions) on how to build and run iD. The development server runs at **http://127.0.0.1:8080** (see `vite.config.ts`).
 
+To inspect bundle size, run `npm run stats:view` — this builds with `--mode stats` and serves `docs/statistics.html` at **http://127.0.0.1:4174**.
+
 
 ### Licensing
 
