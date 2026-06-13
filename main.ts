@@ -1,10 +1,10 @@
 /**
- * Entry point for the iD editor (Vite dev and build).
- * In dev, Vite serves this and transforms on the fly; in build, this is bundled to dist/iD.min.js.
+ * Standalone app bootstrap.
+ *
+ * Loaded only by the standalone iD page, after the iD library (`iD.min.js`,
+ * built from `lib.ts`) has set `window.iD`. Embedders do not load this file;
+ * they create and configure their own `coreContext`.
  */
-import './css/entry.css';
-import './modules/id.js';
-
 const container = document.getElementById('id-container');
 
 function init(): void {

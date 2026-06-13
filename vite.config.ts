@@ -37,9 +37,14 @@ export default defineConfig(({ mode }) => ({
     cssCodeSplit: false,
     target: jsTargets,
     rollupOptions: {
-      input: path.resolve(__dirname, 'main.ts'),
+      input: {
+        // Library bundle used by embedders: exposes `window.iD` + emits iD.css.
+        'iD.min': path.resolve(__dirname, 'lib.ts'),
+        // Standalone-page bootstrap; embedders do not load this.
+        bootstrap: path.resolve(__dirname, 'main.ts'),
+      },
       output: {
-        entryFileNames: 'iD.min.js',
+        entryFileNames: '[name].js',
         format: 'es',
         assetFileNames: (asset) =>
           asset.name?.endsWith('.css') ? 'iD.css' : 'assets/[name]-[hash][extname]',
