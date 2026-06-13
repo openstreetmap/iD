@@ -8,9 +8,7 @@ import { idCssPlugin } from './scripts/build_css';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const isBuildStats = process.env.BUILD_STATS === 'true';
-
-export default defineConfig(() => ({
+export default defineConfig(({ mode }) => ({
   base: './',
   envPrefix: 'ID_',
   server: {
@@ -44,7 +42,7 @@ export default defineConfig(() => ({
   },
   plugins: [
     idCssPlugin(),
-    ...(isBuildStats
+    ...(mode === 'stats'
       ? [
           visualizer({
             filename: 'docs/statistics.html',
