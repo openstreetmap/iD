@@ -64,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Refresh entity editor to show all relations of a feature when the entity was loaded directly, e.g. via URL parameter ([#12369], thanks [@tordans])
 * Fix some false-positive warnings about mismatched geometry ([#12339], thanks [@k-yle])
 #### :earth_asia: Localization
+* Change the example phone format for Türkiye ([#12446], thanks [@w2r4])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
@@ -92,7 +93,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12386]: https://github.com/openstreetmap/iD/pull/12386
 [#12429]: https://github.com/openstreetmap/iD/pull/12429
 [#12436]: https://github.com/openstreetmap/iD/pull/12436
+[#12446]: https://github.com/openstreetmap/iD/pull/12446
 [@FloEdelmann]: https://github.com/FloEdelmann
+[@w2r4]: https://github.com/w2r4
 
 
 # 2.40.0
