@@ -2,8 +2,8 @@ import { t } from '../core/localizer';
 import { uiModal } from './modal';
 
 
-export function uiRestore(context) {
-  return function(selection) {
+export function uiRestore(context: iD.Context) {
+  return function(selection: d3.Selection) {
     if (!context.history().hasRestorableChanges()) return;
 
     let modalSelection = uiModal(selection, true);
@@ -65,6 +65,6 @@ export function uiRestore(context) {
       .append('div')
       .call(t.append('restore.reset'));
 
-    restore.node().focus();
+    restore.node()!.focus();
   };
 }

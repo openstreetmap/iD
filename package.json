@@ -1,6 +1,6 @@
 {
   "name": "@openstreetmap/id",
-  "version": "2.41.0-dev",
+  "version": "2.42.0-dev",
   "description": "A friendly editor for OpenStreetMap",
   "main": "dist/iD.min.js",
   "repository": {
@@ -53,7 +53,7 @@
   "dependencies": {
     "@mapbox/geojson-area": "^0.2.2",
     "@mapbox/sexagesimal": "1.2.0",
-    "@mapbox/vector-tile": "^2.0.4",
+    "@mapbox/vector-tile": "^3.0.0",
     "@rapideditor/country-coder": "~5.6.0",
     "@rapideditor/location-conflation": "~3.0.0",
     "@tmcw/togeojson": "^7.1.2",
@@ -71,7 +71,7 @@
     "node-diff3": "~3.2.0",
     "osm-auth": "^3.1.1",
     "pannellum": "2.5.7",
-    "pbf": "^4.0.1",
+    "pbf": "^5.0.0",
     "polyclip-ts": "^0.16.8",
     "rbush": "4.0.1",
     "whatwg-fetch": "^3.6.20",
@@ -79,7 +79,7 @@
   },
   "devDependencies": {
     "@actions/github-script": "github:actions/github-script#v9",
-    "@enzet/roentgen": "^0.14.0",
+    "@enzet/roentgen": "^0.15.0",
     "@eslint/js": "^10.0.1",
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/free-brands-svg-icons": "^7.2.0",
@@ -87,7 +87,7 @@
     "@fortawesome/free-solid-svg-icons": "^7.2.0",
     "@mapbox/maki": "^8.2.0",
     "@openstreetmap/editor-layer-index": "github:osmlab/editor-layer-index#gh-pages",
-    "@openstreetmap/id-tagging-schema": "^6.13.4",
+    "@openstreetmap/id-tagging-schema": "^6.18.0",
     "@rapideditor/mapillary_sprite_source": "^1.8.0",
     "@rapideditor/temaki": "^5.11.0",
     "@transifex/api": "^7.1.5",
@@ -134,7 +134,7 @@
     "shelljs": "^0.10.0",
     "shx": "^0.4.0",
     "svg-sprite": "2.0.4",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.56.0",
     "vite": "^8.0.1",
     "vitest": "^4.1.0"

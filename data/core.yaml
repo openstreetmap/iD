@@ -1546,6 +1546,8 @@ en:
         reference: Intersecting highways should share a junction vertex.
     area_as_point:
       message: '{feature} should be an area, not a point'
+    area_as_line:
+      message: '{feature} should be a closed area, not a line'
     close_nodes:
       title: "Very Close Points"
       tip: "Find redundant and crowded points"
@@ -1635,9 +1637,14 @@ en:
         message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
       website:
-        message: '{feature} has an invalid URL'
-        message_multi: '{feature} has multiple invalid URLs'
+        message: '{feature} has an invalid URL in {where}'
+        message_multi: '{feature} has multiple invalid URLs in {where}'
         reference: 'URLs must start with "http://" or "https://".'
+      wikimedia_commons:
+        message: '{feature} has a suspicious Wikimedia Commons tag'
+        reference:
+          wrong_key: 'Wikimedia Commons links should preferably use the wikimedia_commons tag.'
+          wrong_value: 'Wikimedia Commons tags should only contain the file or category instead of the full URL.'
     line_as_area:
       message: '{feature} should be a line, not an area'
     line_as_point:
@@ -1784,6 +1791,8 @@ en:
         title: Continue drawing from end
       convert_to_line:
         title: Convert this to a line
+      convert_to_area:
+        title: Convert this to an area
         annotation: Converted an area to a line.
       delete_feature:
         title: Delete this feature
@@ -2199,7 +2208,7 @@ en:
         title: "Selecting features"
         select_one: "Select a single feature"
         select_multi: "Select multiple features"
-        lasso: "Draw a selection lasso around features"
+        lasso: "Draw a selection lasso to select points in an area"
         search: "Find features matching search text"
       with_selected:
         title: "With features selected"

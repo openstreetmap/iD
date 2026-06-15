@@ -140,6 +140,7 @@ export function uiPresetList(context) {
             .attr('class', 'preset-list')
             .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets));
 
+        listWrap.node().scrollTo({ top: 0 });
         context.features().on('change.preset-list', updateForFeatureHiddenState);
     }
 
