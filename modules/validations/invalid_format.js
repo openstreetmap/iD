@@ -3,6 +3,8 @@ import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions/change_tags';
 import { osmUrlKeys } from '../osm/tags';
+import { showTagDiffReference } from './outdated_tags';
+import { utilTagDiff } from '../util';
 import { utilIsValidURL as isValidURL } from '../util/util';
 
 export function validationFormatting() {
@@ -29,13 +31,27 @@ export function validationFormatting() {
                 .call(t.append('issues.invalid_format.email.reference'));
         }
 
-        function cleanWikimediaCommonsReference(value) {
+        function isFixableURL(url) {
+            try {
+                // must be a valid URL after adding a protocol
+                const link = new URL(`https://${url}`);
+                // should contain at least something that looks like a TLD
+                return link.hostname.includes('.');
+            } catch {
+                return false;
+            }
+        }
+
+        function cleanWikimediaCommonsReference(value, allTags) {
             if (!value) return null;
+            if (allTags.wikimedia_commons) return null;
             for (const prefix of ['file', 'datei', 'fichier', 'plik']) {
                 if (!value.toLowerCase().startsWith(prefix + ':')) continue;
-                return 'File' + decodeURIComponent(value.slice(prefix.length));
+                return 'File' + value.slice(prefix.length);
             }
-            if (value.startsWith('Category:')) return decodeURIComponent(value);
+            if (value.startsWith('Category:')) {
+                return value;
+            }
             return null;
         }
 
@@ -53,13 +69,14 @@ export function validationFormatting() {
             subtype: 'website',
             severity: 'warning',
             message: function(context) {
-                var entity = context.hasEntity(this.entityIds[0]);
+                const entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.invalid_format.website.message' + (this.data?.count > 1 ? '_multi' : ''),
                     { feature: utilDisplayLabel(entity, context.graph()), site: this.data?.value }) : '';
             },
             dynamicFixes: function(context) {
-                const wikimedia_commons_reference = cleanWikimediaCommonsReference(this.data?.value);
-                const fixes = [{ protocol: 'https', icon: 'temaki-lock' }, { protocol: 'http' }]
+                if (this.data?.count > 1) return [];
+                if (!this.data?.isFixable) return [];
+                return [{ protocol: 'https', icon: 'temaki-lock' }, { protocol: 'http' }]
                     .filter(fix => isValidURL(fix.protocol + '://' + this.data?.value, true))
                     .map(fix => new validationIssueFix({
                         icon: fix.icon,
@@ -70,11 +87,7 @@ export function validationFormatting() {
                             if (!entity) return;
                             const key = this.issue.data.key;
                             const tags = Object.assign({}, entity.tags);
-                            tags[key] = entity.tags[key]
-                                .split(';')
-                                .map(s => s.trim())
-                                .map(s => isValidURL(s) ? s : fix.protocol + '://' + s)
-                                .join(';');
+                            tags[key] = this.issue.data.fix.replace('{protocol}', fix.protocol);
 
                             context.perform(
                                 actionChangeTags(entityID, tags),
@@ -82,62 +95,143 @@ export function validationFormatting() {
                             );
                         }
                     }));
-                if (this.data?.key === 'image' && !entity.tags.wikimedia_commons && wikimedia_commons_reference) {
-                    fixes.push(new validationIssueFix({
-                        icon: 'iD-icon-out-link',
-                        title: t.append('issues.fix.move_value_to_wikimedia_commons.title'),
-                        onClick: function() {
-                            const entityID = this.issue.entityIds[0];
-                            const entity = context.entity(entityID);
-                            if (!entity) return;
-                            const key = this.issue.data.key;
-                            const tags = Object.assign({}, entity.tags);
-                            tags.wikimedia_commons = wikimedia_commons_reference;
-                            delete tags[key];
-
-                            context.perform(
-                                actionChangeTags(entityID, tags),
-                                t('issues.fix.move_value_to_wikimedia_commons.annotation')
-                            );
-                        }
-                    }));
-                }
-                return fixes;
             },
-            reference: showReferenceWebsite,
             entityIds: [entity.id]
         };
 
-        Object.entries(entity.tags).map(function([key, tag]) {
-            if (!osmUrlKeys.has(key)) return null;
-            if (!tag) return null;
-            const value = tag.trim();
-            if (!value) return null;
-            if (!value.includes(';')) {
-                // No semicolon, validate whole value
-                if (isValidURL(value)) return null;
-                return {
-                    ...websiteValidationIssueBase,
-                    data: { key, value },
-                    hash: key + '=' + value
-                };
+        function websiteReferenceWithDiff(oldTags, newTags) {
+            return selection => showTagDiffReference(
+                selection,
+                showReferenceWebsite,
+                utilTagDiff(oldTags, newTags)
+            );
+        }
+
+        Object.entries(entity.tags).map(function([key, value]) {
+            if (!osmUrlKeys.has(key)) return false;
+            if (!value?.trim()) return false;
+            if (key === 'image' && cleanWikimediaCommonsReference(value, entity.tags)) {
+                // wikimedia commons tags are handled separately below
+                return false;
             }
-            const invalidParts = value.split(';').map(s => s.trim()).filter(x => !isValidURL(x));
-            if (!invalidParts.length) {
-                if (isValidURL(value)) return null;
-                // All split parts valid, but whole value still invalid
-                return {
-                    ...websiteValidationIssueBase,
-                    data: { key, value },
-                    hash: key + '=' + value
-                };
-            }
+            const invalidParts = value.split(';')
+                .map(s => s.trim())
+                .filter(x => !isValidURL(x));
+            if (invalidParts.length === 0) return false;
+            const isFixable = invalidParts.some(isFixableURL);
+            const fix = value
+                .split(';')
+                .map(s => s.trim())
+                .map(s => isValidURL(s) || !isFixableURL(s) ? s : `{protocol}://${s}`)
+                .join(';');
             return {
                 ...websiteValidationIssueBase,
-                data: { key, value: invalidParts.join(', '), count: invalidParts.length },
-                hash: key + '=' + invalidParts.join()
+                data: {
+                    key,
+                    isFixable,
+                    fix,
+                    count: invalidParts.length,
+                },
+                hash: key + '=' + invalidParts.join(';'),
+                reference: isFixable
+                    ? websiteReferenceWithDiff(entity.tags, {...entity.tags, [key]: fix.replace('{protocol}', 'https') })
+                    : showReferenceWebsite
             };
-        }).filter(issue => issue !== null).forEach(issueData => issues.push(new validationIssue(issueData)));
+        }).filter(Boolean)
+        .forEach(issueData => issues.push(new validationIssue(issueData)));
+
+        const wikimediaCommonsValidationIssueBase = {
+            type: type,
+            subtype: 'wikimedia_commons',
+            message: function(context) {
+                const entity = context.hasEntity(this.entityIds[0]);
+                return entity ? t.append('issues.invalid_format.wikimedia_commons.message',
+                    { feature: utilDisplayLabel(entity, context.graph()), site: this.data?.value }) : '';
+            },
+            entityIds: [entity.id]
+        };
+
+        if (entity.tags.image) {
+            const value = entity.tags.image;
+            const fix = cleanWikimediaCommonsReference(value, entity.tags);
+            if (fix) {
+                issues.push(new validationIssue({
+                    ...wikimediaCommonsValidationIssueBase,
+                    severity: 'suggestion',
+                    data: { key: 'image', fix },
+                    hash: 'image=' + value,
+                    dynamicFixes: function(context) {
+                        const wikimedia_commons_reference = this.data?.fix;
+                        return [new validationIssueFix({
+                            title: t.append('issues.fix.move_value_to_wikimedia_commons.title'),
+                            onClick: function() {
+                                const entityID = this.issue.entityIds[0];
+                                const entity = context.entity(entityID);
+                                if (!entity) return;
+                                const key = this.issue.data.key;
+                                const tags = Object.assign({}, entity.tags);
+                                tags.wikimedia_commons = wikimedia_commons_reference;
+                                delete tags[key];
+
+                                context.perform(
+                                    actionChangeTags(entityID, tags),
+                                    t('issues.fix.move_value_to_wikimedia_commons.annotation')
+                                );
+                            }
+                        })];
+                    },
+                    reference: selection => showTagDiffReference(
+                        selection,
+                        t.append('issues.invalid_format.wikimedia_commons.reference.wrong_key'),
+                        utilTagDiff(entity.tags, { ...entity.tags, image: undefined, wikimedia_commons: fix })
+                    )
+                }));
+            }
+        }
+
+        if (entity.tags.wikimedia_commons) {
+            const value = entity.tags.wikimedia_commons;
+            if (isValidURL(value, true)) {
+                // wikimedia_commons should not contain a valid URL, see
+                // https://wiki.openstreetmap.org/w/index.php?title=Key:wikimedia_commons&oldid=2959709#Common_tagging_mistakes
+                const regex = /\/wiki\/(File|Category)(:|%3A)(.*)/;
+                const url = new URL(value);
+                const path = url.pathname;
+                if (url.host === 'commons.wikimedia.org' && regex.test(path)) {
+                    const parts = path.match(regex);
+                    const newValue = decodeURIComponent(`${parts[1]}:${parts[3]}`).replace(/_/g, ' ');
+                    const previewDiff = utilTagDiff({ wikimedia_commons: value }, { wikimedia_commons: newValue });
+                    issues.push(new validationIssue({
+                        ...wikimediaCommonsValidationIssueBase,
+                        severity: 'warning',
+                        data: {},
+                        hash: 'wikimedia_commons=' + value,
+                        dynamicFixes: function(context) {
+                            return [new validationIssueFix({
+                                title: t.append('issues.fix.upgrade_tags.title'),
+                                onClick: function() {
+                                    const entityID = this.issue.entityIds[0];
+                                    const entity = context.entity(entityID);
+                                    if (!entity) return;
+                                    const tags = Object.assign({}, entity.tags);
+                                    tags.wikimedia_commons = newValue;
+
+                                    context.perform(
+                                        actionChangeTags(entityID, tags),
+                                        t('issues.fix.upgrade_tags.annotation')
+                                    );
+                                }
+                            })];
+                        },
+                        reference: selection => showTagDiffReference(
+                            selection,
+                            t.append('issues.invalid_format.wikimedia_commons.reference.wrong_value'),
+                            previewDiff
+                        ),
+                    }));
+                }
+            }
+        }
 
         if (entity.tags.email) {
             // Multiple emails are possible
