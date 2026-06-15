@@ -6,7 +6,7 @@ import * as countryCoder from '@rapideditor/country-coder';
 import { fileFetcher } from '../../core/file_fetcher';
 import { localizer, t } from '../../core/localizer';
 import { services } from '../../services';
-import { uiCombobox } from '../combobox';
+import { fuzzyMatch, uiCombobox } from '../combobox';
 import { svgIcon } from '../../svg/icon';
 
 import { utilKeybinding } from '../../util/keybinding';
@@ -33,8 +33,7 @@ export function uiFieldCombo(field, context) {
     var _allowCustomValues = field.type !== 'manyCombo' && field.customValues !== false;
     var _snake_case = (field.snake_case || (field.snake_case === undefined));
     var _combobox = uiCombobox(context, 'combo-' + field.safeid)
-        .caseSensitive(field.caseSensitive)
-        .minItems(1);
+        .caseSensitive(field.caseSensitive);
     var _container = d3_select(null);
     var _inputWrap = d3_select(null);
     var _input = d3_select(null);
@@ -262,6 +261,9 @@ export function uiFieldCombo(field, context) {
             selection.attr('readonly', 'readonly');
         }
 
+        // clear previously existing old event handlers (e.g. when switching preset)
+        selection.call(uiCombobox.off, context);
+
         if (_showTagInfoSuggestions && services.taginfo) {
             selection.call(_combobox.fetcher(setTaginfoValues), attachTo);
             setTaginfoValues('', setPlaceholder);
@@ -387,7 +389,16 @@ export function uiFieldCombo(field, context) {
 
 
     function setTaginfoValues(q, callback) {
-        var queryFilter = d => d.value.toLowerCase().includes(q.toLowerCase()) || d.key.toLowerCase().includes(q.toLowerCase());
+        var queryFilter = d => {
+            const value = d.value.toLowerCase();
+            const key = d.key.toLowerCase();
+            const search  = q.toLowerCase();
+            if (value.includes(search)) return true;
+            if (key.includes(search)) return true;
+            if (d.klass !== 'raw-option' && fuzzyMatch(search, value)) return true;
+            if (d.klass !== 'raw-option' && fuzzyMatch(search, key)) return true;
+            return false;
+        };
         if (hasStaticValues()) {
             setStaticValues(callback, queryFilter);
 
@@ -595,9 +606,6 @@ export function uiFieldCombo(field, context) {
                 }
                 t[field.key] = context.cleanTagValue(arr.filter(Boolean).join(';'));
             }
-
-            window.setTimeout(function() { _input.node().focus(); }, 10);
-
         } else {
             var rawValue = utilGetSetValue(_input);
 
@@ -703,9 +711,9 @@ export function uiFieldCombo(field, context) {
             .attr('type', 'text')
             .attr('dir', 'auto')
             .attr('id', field.domId)
+            .merge(_input)
             .call(utilNoAuto)
-            .call(initCombo, _container)
-            .merge(_input);
+            .call(initCombo, _container);
 
         if (_isSemi) {
             _inputWrap.call(_lengthIndicator);
@@ -746,7 +754,7 @@ export function uiFieldCombo(field, context) {
             _combobox
                 .on('accept', function() {
                     _input.node().blur();
-                    _input.node().focus();
+                    window.setTimeout(function() { _input.node().focus(); }, 10);
                 });
 
             _input

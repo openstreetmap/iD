@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit/compat';
+import { throttle } from 'es-toolkit';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
@@ -185,6 +185,11 @@ function parseJSON(payload, callback, options) {
     if (typeof json !== 'object') json = JSON.parse(payload);
 
     if (!json.elements) return callback({ message: 'No JSON', status: -1 });
+
+    if (typeof json.elements.at(-1)?.error === 'string') {
+        const errorMessage = payload.elements.at(-1).error;
+        return callback({ message: errorMessage, status: -1 });
+    }
 
     var children = json.elements;
 

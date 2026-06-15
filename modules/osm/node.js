@@ -97,18 +97,17 @@ const prototype = {
         } else {
             // generic side tag
 
-            // unfortunately, the proposal for highway=cyclist_waiting_aid used
-            // an ambiguous definition for `side`, which basically makes the tag
-            // useless in the situation where the parent way (the cycleway) is
-            // bidirectional. It's impossible for software to determine which
-            // direction the mapper is referring to…
-            const hideSideTag = (
+            // for `highway=cyclist_waiting_aid`, `side` (i.e. from cyclist's perspective) will be ambiguous
+            // unless the `direction` is explicitly specified (even on one-way roads).
+            const isSideTagAmbiguous = (
                 this.tags.highway === 'cyclist_waiting_aid' &&
-                resolver.parentWays(this).some(way => !way.isOneWayForwards())
+                this.tags.side !== 'both' &&
+                this.tags.direction !== 'forward' &&
+                this.tags.direction !== 'backward'
             );
 
             const sideTag = SIDE_TAGS.map(key => this.tags[key]).find(Boolean);
-            if (SIDES.has(sideTag?.toLowerCase()) && !hideSideTag) {
+            if (SIDES.has(sideTag?.toLowerCase()) && !isSideTagAmbiguous) {
                 rawValues.push({
                     type: 'side',
                     value: sideTag?.toLowerCase(),
@@ -196,6 +195,12 @@ const prototype = {
 
                 const isSide = type === 'side' && SIDES.has(v);
 
+                // In case of `highway=cyclist_waiting_aid`, if the `side` is to be shown, then
+                // it will be explicitly specified by the `direction` from the cyclist's perspective (not way's perspective)
+                const isSideFlipped = isSide &&
+                    this.tags.highway === 'cyclist_waiting_aid' &&
+                    this.tags.direction === 'backward';
+
                 // string direction - inspect parent ways
                 const lookBackward =
                     (this.tags['traffic_sign:backward'] || v === (isSide ? 'left' : 'backward') || v === 'both' || v === 'all');
@@ -212,7 +217,7 @@ const prototype = {
                     // +90 because geoAngle returns angle from X axis, not Y (north)
                     results.push({
                         type: isSide ? 'side' : 'direction',
-                        angle: (geoAngle(this, resolver.entity(nodeId), projection) * (180 / Math.PI)) + (isSide ? 0 : 90)
+                        angle: (geoAngle(this, resolver.entity(nodeId), projection) * (180 / Math.PI)) + (isSide ? (isSideFlipped ? 180 : 0) : 90)
                     });
                 }, this);
             }

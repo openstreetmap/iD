@@ -1,5 +1,5 @@
 # Please see the documentation for all configuration options:
-# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+# https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference
 
 version: 2
 updates:
@@ -7,6 +7,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    open-pull-requests-limit: 20
     cooldown:
       semver-minor-days: 7
       semver-patch-days: 7
@@ -40,6 +41,14 @@ updates:
       vite:
         patterns:
           - "vite*"
+          - "@vitest/*"
+        applies-to: version-updates
+      mapbox:
+        patterns:
+          - "@mapbox/*"
+          - "pbf"
+        exclude-patterns:
+          - "@mapbox/maki"
         applies-to: version-updates
     labels:
       - "chore-dependabot"

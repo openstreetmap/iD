@@ -1,4 +1,4 @@
-export function behaviorEdit(context) {
+export function behaviorEdit(context: iD.Context) {
 
     function behavior() {
         context.map()

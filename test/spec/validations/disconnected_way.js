@@ -73,6 +73,28 @@ describe('iD.validations.disconnected_way', function() {
         expect(issue.entityIds[0]).to.eql('w-1');
     });
 
+    it('flags disconnected highway multipolygon', function() {
+        createWay({});
+        const r = new iD.osmRelation({ id: 'r-1', members: [{
+            type: 'way',
+            id: 'w-1',
+            role: 'outer'
+        }], tags: {
+            highway: 'pedestrian',
+            type: 'multipolygon'
+        } });
+
+        context.perform(iD.actionAddEntity(r));
+        var issues = validate();
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('disconnected_way');
+        expect(issue.subtype).to.eql('highway');
+        expect(issue.severity).to.eql('warning');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('r-1');
+    });
+
     it('ignores highway with connected entrance vertex', function() {
         var n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
         var n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });

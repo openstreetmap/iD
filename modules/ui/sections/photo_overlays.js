@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit/compat';
+import { debounce } from 'es-toolkit';
 import { select as d3_select } from 'd3-selection';
 
 import { localizer, t } from '../../core/localizer';

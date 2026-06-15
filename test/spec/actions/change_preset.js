@@ -100,7 +100,7 @@ describe('iD.actionChangePreset', function() {
                 building: 'yes', // case 1: the preset's own tags.
                 'roof:colour': 'pink', // case 2: a field which exists in the old preset, but not the new one.
                 check_date: '2025-12-05', // case 3: a field which exists in the old AND new preset.
-                grades: '0-13', // case 4: a field which exists only in the new preset, not in the old one.
+                surface: 'grass', // case 4: a field which exists only in the new preset, not in the old one.
                 'ref:SG:address_id': '1234', // case 5: a tag which does not exist in either preset
             },
             loc: [0, 0],
@@ -110,7 +110,7 @@ describe('iD.actionChangePreset', function() {
         const fields = {
             'roof:colour': iD.presetField('roof:colour', { key: 'roof:colour', geometry: 'point' }),
             check_date: iD.presetField('check_date', { key: 'check_date', geometry: 'point' }),
-            grades: iD.presetField('roof:colour', { key: 'grades', geometry: 'point' }),
+            surface: iD.presetField('surface', { key: 'surface', geometry: 'point' }),
         };
 
         const oldPreset = iD.presetPreset(
@@ -120,17 +120,17 @@ describe('iD.actionChangePreset', function() {
             fields,
         );
         const newPreset = iD.presetPreset(
-            'amenity/school',
-            { tags: { amenity: 'school' }, fields: ['check_date', 'grades'] },
+            'leisure/pitch',
+            { tags: { leisure: 'pitch' }, fields: ['check_date', 'surface'] },
             undefined,
             fields,
         );
         const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
         expect(action(graph).entity(entity.id).tags).toStrictEqual({
-            amenity: 'school', // case 1: the preset's own tags were replaced.
+            leisure: 'pitch', // case 1: the preset's own tags were replaced.
             // case 2: the field which exists in the old preset was removed (roof:colour).
             check_date: '2025-12-05', // case 3: the field which exists in the old AND new preset was kept.
-            grades: '0-13', // case 4: a field which exists only in the new preset was also kept.
+            surface: 'grass', // case 4: a field which exists only in the new preset was also kept.
             'ref:SG:address_id': '1234', // case 5: tags which do not exist in either preset are kept
         });
     });
@@ -165,15 +165,170 @@ describe('iD.actionChangePreset', function() {
         });
     });
 
-    // https://github.com/openstreetmap/iD/issues/9372
-    it('does not preserve field tags when changing from a subpreset to its parent', function() {
-        var entity = new iD.osmNode({tags: {highway: 'service', service: 'driveway'}});
-        var graph = new iD.coreGraph([entity]);
-        var oldPreset = iD.presetPreset('highway/service/driveway', {tags: {highway: 'service', service: 'driveway'}});
-        var newPreset = iD.presetPreset('highway/service', {tags: {highway: 'service'}, fields: ['field']}, undefined, {
-            field: iD.presetField('field', {key: 'service'})
+    // https://github.com/openstreetmap/iD/issues/12075
+    it.each([{
+        fieldType: 'multiCombo',
+        fieldId: 'recycling',
+        fieldKey: 'recycling:',
+        fieldKeys: [],
+        oldTags: { 'recycling:paper': 'yes', 'recycling:others': 'no' },
+        tagsToPreserve: {}
+    }, {
+        fieldType: 'localized',
+        fieldId: 'name',
+        fieldKey: 'name',
+        fieldKeys: [],
+        oldTags: { 'name': 'foo', 'name:en': 'bar', 'name:etymology:wikidata': 'Q860' },
+        tagsToPreserve: { 'name:etymology:wikidata': 'Q860' }
+    }, {
+        fieldType: 'directionalCombo',
+        fieldId: 'cycleway',
+        fieldKey: 'cycleway',
+        fieldKeys: [ 'cycleway:left', 'cycleway:right' ],
+        oldTags: { 'cycleway:left': 'no', 'cycleway:both': 'separate', 'cycleway:foo': 'bar' },
+        tagsToPreserve: { 'cycleway:foo': 'bar' }
+    }])('does not preserve $fieldType field tags that are only present in the old preset', ({
+        fieldType, fieldId, fieldKey, fieldKeys, oldTags, tagsToPreserve
+    }) => {
+        const entity = iD.osmNode({
+            tags: {
+                amenity: 'recycling',
+                ...oldTags,
+                unrelatedTagKey: 'unrelatedTagValue',
+            },
+            loc: [0, 0],
         });
-        var action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
-        expect(action(graph).entity(entity.id).tags).to.eql({highway: 'service'});
+        const graph = new iD.coreGraph([entity]);
+
+        const fields = {
+            [fieldId]: iD.presetField(fieldId, { type: fieldType, key: fieldKey, keys: fieldKeys }),
+        };
+
+        const oldPreset = iD.presetPreset(
+            'amenity/recycling',
+            { tags: { amenity: 'recycling' }, fields: [fieldId] },
+            undefined,
+            fields,
+        );
+        const newPreset = iD.presetPreset(
+            'amenity/bench',
+            { tags: { amenity: 'bench' }, fields: [] },
+            undefined,
+            fields,
+        );
+        const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
+        expect(action(graph).entity(entity.id).tags).toStrictEqual({
+            // no field tags are preserved
+            ...tagsToPreserve,
+            unrelatedTagKey: 'unrelatedTagValue',
+            amenity: 'bench',
+        });
+    });
+
+    // https://github.com/openstreetmap/iD/pull/12218#issuecomment-4314204446
+    it.each([{
+        fieldType: 'multiCombo',
+        fieldId: 'recycling',
+        fieldKey: 'recycling:',
+        fieldKeys: [],
+        oldTags: { 'recycling:paper': 'yes', 'recycling:others': 'no' }
+    }, {
+        fieldType: 'localized',
+        fieldId: 'name',
+        fieldKey: 'name',
+        fieldKeys: [],
+        oldTags: { 'name': 'foo', 'name:en': 'bar', 'name:etymology:wikidata': 'Q860' }
+    }, {
+        fieldType: 'directionalCombo',
+        fieldId: 'cycleway',
+        fieldKey: 'cycleway',
+        fieldKeys: [ 'cycleway:left', 'cycleway:right' ],
+        oldTags: { 'cycleway:left': 'no', 'cycleway:both': 'separate', 'cycleway:foo': 'bar' }
+    }])('preserve $fieldType field tags when they are present in the old and the new preset', ({
+        fieldType, fieldId, fieldKey, fieldKeys, oldTags
+    }) => {
+        const entity = iD.osmNode({
+            tags: {
+                amenity: 'recycling',
+                ...oldTags,
+            },
+            loc: [0, 0],
+        });
+        const graph = new iD.coreGraph([entity]);
+
+        const fields = {
+            [fieldId]: iD.presetField(fieldId, { type: fieldType, key: fieldKey, keys: fieldKeys }),
+        };
+
+        const oldPreset = iD.presetPreset(
+            'amenity/recycling',
+            { tags: { amenity: 'recycling' }, fields: [fieldId] },
+            undefined,
+            fields,
+        );
+        const newPreset = iD.presetPreset(
+            'amenity/bench',
+            { tags: { amenity: 'bench' }, fields: [fieldId] },
+            undefined,
+            fields,
+        );
+        const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
+        expect(action(graph).entity(entity.id).tags).toStrictEqual({
+            // all field tags are preserved
+            ...oldTags,
+            amenity: 'bench', // override primary preset tag
+        });
+    });
+
+
+    // https://github.com/openstreetmap/iD/issues/12071
+    it('preserves tags of the old preset when selecting a new preset with a field for the old preset\'s primary tag', () => {
+        const entity = iD.osmNode({
+            tags: {
+                building: 'yes', // the preset's own tags.
+                'building:colour': 'green', // a field which exists in the preset
+            },
+            loc: [0, 0],
+        });
+        const graph = new iD.coreGraph([entity]);
+
+        const fields = {
+            'building:colour': iD.presetField('building:colour', { key: 'building:colour' }),
+            'building': iD.presetField('building', { key: 'building' }),
+        };
+
+        const oldPreset = iD.presetPreset(
+            'building/yes',
+            { tags: { building: 'yes' }, fields: ['building:colour'] },
+            undefined,
+            fields,
+        );
+        const newPreset = iD.presetPreset(
+            'amenity/school',
+            { tags: { amenity: 'school' }, fields: ['building'] },
+            undefined,
+            fields,
+        );
+        const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
+        expect(action(graph).entity(entity.id).tags).toStrictEqual({
+            // all tags are preserved
+            amenity: 'school',
+            building: 'yes',
+            'building:colour': 'green',
+        });
+    });
+
+    // https://github.com/openstreetmap/iD/issues/9372
+    it('does not preserve old preset\'s primary tags when changing from a subpreset to its parent', () => {
+        const entity = new iD.osmNode({tags: {highway: 'service', service: 'driveway', name: 'foo bar'}});
+        const graph = new iD.coreGraph([entity]);
+        const fields = {
+            field: iD.presetField('field', {key: 'service'}),
+            name: iD.presetField('name', {key: 'name'})
+        };
+        const oldPreset = iD.presetPreset('highway/service/driveway', {tags: {highway: 'service', service: 'driveway'}, fields: ['name']}, undefined, fields);
+        const newPreset = iD.presetPreset('highway/service', {tags: {highway: 'service'}, fields: ['field', 'name']}, undefined, fields);
+        const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
+        expect(action(graph).entity(entity.id).tags).to.eql({highway: 'service', name: 'foo bar'});
     });
 });

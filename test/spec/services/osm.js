@@ -196,6 +196,34 @@ describe('iD.serviceOsm', function () {
             expect(spy).to.have.been.calledOnce;
         });
 
+        it('handles errors in partial JOSN response', async () => {
+            const partialResponse = JSON.parse(response);
+            partialResponse.elements.push({ error: 'server error' });
+            const partialResponseWithError = JSON.stringify(partialResponse);
+            fetchMock.mock(`https://www.openstreetmap.org${path}`, {
+                body: partialResponseWithError,
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const promise = promisify(connection.loadFromAPI).call(connection, path);
+            await expect(promise).rejects.toThrow(expect.objectContaining({ status: -1, message: 'server error' }));
+        });
+
+        it('handles empty response gracefully', async () => {
+            const emptyResponse = JSON.parse(response);
+            emptyResponse.elements = [];
+            fetchMock.mock(`https://www.openstreetmap.org${path}`, {
+                body: JSON.stringify(emptyResponse),
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const payload = await promisify(connection.loadFromAPI).call(connection, path);
+            expect(typeof payload).to.eql('object');
+            expect(payload).toHaveLength(0);
+        });
+
         it('uses apiUrl', async () => {
             fetchMock.mock('https://api.openstreetmap.org' + path, {
                 body: response,

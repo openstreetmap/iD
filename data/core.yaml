@@ -984,6 +984,9 @@ en:
       header: Custom Background Settings
       instructions:
         info: Enter a tile URL template below.
+        license_disclaimer: Make sure that the used background imagery is allowed to be used for mapping.
+        license_faq: Read more.
+        license_faq_url: "https://wiki.openstreetmap.org/wiki/FAQ#What_images_and_maps_may_I_use_to_make_maps_from?"
         wms:
           tokens_label: "Supported WMS tokens:"
           tokens:
@@ -1130,7 +1133,6 @@ en:
     tooltip: "Streetside photos from Microsoft"
     title: "Bing Streetside"
     report: Report a privacy concern with this image
-    view_on_bing: "View on Bing Maps"
     hires: "High resolution"
   vegbilder:
     title: "Vegbilder"
@@ -1544,6 +1546,8 @@ en:
         reference: Intersecting highways should share a junction vertex.
     area_as_point:
       message: '{feature} should be an area, not a point'
+    area_as_line:
+      message: '{feature} should be a closed area, not a line'
     close_nodes:
       title: "Very Close Points"
       tip: "Find redundant and crowded points"
@@ -1787,6 +1791,8 @@ en:
         title: Continue drawing from end
       convert_to_line:
         title: Convert this to a line
+      convert_to_area:
+        title: Convert this to an area
         annotation: Converted an area to a line.
       delete_feature:
         title: Delete this feature
@@ -2202,7 +2208,7 @@ en:
         title: "Selecting features"
         select_one: "Select a single feature"
         select_multi: "Select multiple features"
-        lasso: "Draw a selection lasso around features"
+        lasso: "Draw a selection lasso to select points in an area"
         search: "Find features matching search text"
       with_selected:
         title: "With features selected"

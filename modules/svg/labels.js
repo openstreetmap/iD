@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit/compat';
+import { throttle } from 'es-toolkit';
 
 import { geoPath as d3_geoPath } from 'd3-geo';
 import RBush from 'rbush';
@@ -814,8 +814,9 @@ const nonPrimaryKeys = new Set([
     'fixme',
     'layer',
     'level',
-    'level:ref',
-    'note'
+    'note',
+    'start_date',
+    'ele'
 ]);
 const nonPrimaryKeysRegex = /^(ref|survey|note|([^:]+:|old_|alt_)addr):/;
 export function isAddressPoint(tags) {

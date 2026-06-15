@@ -1115,10 +1115,10 @@ summary.hide-toggle::-webkit-details-marker {
     object-fit: contain;
     border-radius: 2px;
     z-index: 2;
-    visibility: hidden;
+    display: none;
 }
 .preset-icon-container.showing-img img.image-icon {
-    visibility: visible;
+    display: initial;
 }
 .preset-icon-container.showing-img *:not(.image-icon) {
     display: none;
@@ -2095,6 +2095,25 @@ input.date-selector {
     overflow: hidden;
 }
 
+/* One-line (horizontal) layout when all options fit on a single row */
+.form-field-input-radio.one-line {
+    overflow: hidden;
+}
+.form-field-input-radio.one-line > label {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+}
+.form-field-input-radio.one-line > label:first-of-type {
+    border-end-start-radius: 4px;
+}
+.form-field-input-radio.one-line > label:last-of-type {
+    border-end-start-radius: 0;
+}
+.form-field-input-radio.one-line > label:not(:first-of-type) {
+    border-inline-start: none;
+}
+
 
 /* Field - roadheight and roadspeed
 ------------------------------------------------------- */
@@ -2949,6 +2968,10 @@ img.tag-reference-wiki-image {
     height: 18px;
     margin-left: 5px;
     margin-bottom: -4.5px;
+}
+.section-raw-membership-editor .member-row img.member-entity-icon.hide,
+.section-raw-member-editor .member-row img.member-entity-icon.hide {
+    display: none;
 }
 .section-raw-membership-editor .member-row span.member-entity-ref-color,
 .section-raw-member-editor .member-row span.member-entity-ref-color,
@@ -5250,7 +5273,6 @@ img.tile-debug {
 
 .save-success .link-out {
     margin: 0px 5px;
-    white-space: nowrap;
 }
 
 .save-summary,

@@ -38,7 +38,6 @@ export function uiSectionRawMembershipEditor(context) {
 
     var taginfo = services.taginfo;
     var nearbyCombo = uiCombobox(context, 'parent-relation')
-        .minItems(1)
         .fetcher(fetchNearbyRelations)
         .itemsMouseEnter(function(d3_event, d) {
             if (d.relation) utilHighlightEntities([d.relation.id], true, context);
@@ -423,9 +422,12 @@ export function uiSectionRawMembershipEditor(context) {
             const matched = presetManager.match(d.relation, context.graph());
             if (matched.suggestion) {
                 // if matching an NSI preset: append icon
-                d3_select(this)
-                    .append('img')
+                const img = d3_select(this)
+                    .append('img');
+                img
                     .classed('member-entity-icon', true)
+                    .on('load', () => img.classed('hide', false))
+                    .on('error', () => img.classed('hide', true))
                     .attr('src', matched.imageURL);
             }
         });

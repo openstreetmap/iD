@@ -5,6 +5,7 @@ import { actionChangeTags } from '../actions/change_tags';
 import { osmUrlKeys } from '../osm/tags';
 import { showTagDiffReference } from './outdated_tags';
 import { utilTagDiff } from '../util';
+import { utilIsValidURL as isValidURL } from '../util/util';
 
 export function validationFormatting() {
     var type = 'invalid_format';
@@ -30,17 +31,6 @@ export function validationFormatting() {
                 .call(t.append('issues.invalid_format.email.reference'));
         }
 
-        function isValidURL(url, strict = false) {
-            try {
-                // First try strict WHATWG parsing
-                const link = new URL(url);
-                return link.protocol.startsWith('http');
-            } catch {
-                if (strict) return false;
-                // Fallback: accept if it looks like a valid scheme://something, even if semicolons are present
-                return /^https?:\/\/\S+$/i.test(url);
-            }
-        }
         function isFixableURL(url) {
             try {
                 // must be a valid URL after adding a protocol
