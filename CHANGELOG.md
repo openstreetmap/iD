@@ -41,12 +41,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
+* Show which field (or tag) produced an _invalid URL_ validation message ([#12449])
 #### :bug: Bugfixes
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
+
+[#12449]: https://github.com/openstreetmap/iD/pull/12449
 
 
 # 2.41.0

@@ -1637,8 +1637,8 @@ en:
         message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
       website:
-        message: '{feature} has an invalid URL'
-        message_multi: '{feature} has multiple invalid URLs'
+        message: '{feature} has an invalid URL in {where}'
+        message_multi: '{feature} has multiple invalid URLs in {where}'
         reference: 'URLs must start with "http://" or "https://".'
       wikimedia_commons:
         message: '{feature} has a suspicious Wikimedia Commons tag'

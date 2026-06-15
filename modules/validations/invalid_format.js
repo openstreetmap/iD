@@ -4,10 +4,10 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions/change_tags';
 import { osmUrlKeys } from '../osm/tags';
 import { showTagDiffReference } from './outdated_tags';
-import { utilTagDiff } from '../util';
-import { utilIsValidURL as isValidURL } from '../util/util';
+import { utilTagDiff, utilIsValidURL as isValidURL } from '../util/util';
+import { presetManager } from '../presets';
 
-export function validationFormatting() {
+export function validationFormatting(context) {
     var type = 'invalid_format';
 
     var validation = function(entity) {
@@ -64,14 +64,18 @@ export function validationFormatting() {
                 .call(t.append('issues.invalid_format.website.reference'));
         }
 
-        const websiteValidationIssueBase = {
+        const createWebsiteValidationIssueBase = keyOrField => ({
             type: type,
             subtype: 'website',
             severity: 'warning',
             message: function(context) {
                 const entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t.append('issues.invalid_format.website.message' + (this.data?.count > 1 ? '_multi' : ''),
-                    { feature: utilDisplayLabel(entity, context.graph()), site: this.data?.value }) : '';
+                return entity ? t.append('issues.invalid_format.website.message' + (this.data?.count > 1 ? '_multi' : ''), {
+                    feature: utilDisplayLabel(entity, context.graph()), site: this.data?.value,
+                    where: typeof keyOrField === 'string'
+                        ? selection => selection.append('code').text(keyOrField)
+                        : keyOrField.label()
+                }) : '';
             },
             dynamicFixes: function(context) {
                 if (this.data?.count > 1) return [];
@@ -97,7 +101,7 @@ export function validationFormatting() {
                     }));
             },
             entityIds: [entity.id]
-        };
+        });
 
         function websiteReferenceWithDiff(oldTags, newTags) {
             return selection => showTagDiffReference(
@@ -124,8 +128,17 @@ export function validationFormatting() {
                 .map(s => s.trim())
                 .map(s => isValidURL(s) || !isFixableURL(s) ? s : `{protocol}://${s}`)
                 .join(';');
+            const graph = context.graph();
+            const entityExtent = entity.extent(graph);
+            const preset = presetManager.match(entity, graph);
+            const allFields = [
+                ...preset.fields(entityExtent.center()),
+                ...preset.moreFields(entityExtent.center()),
+                ...presetManager.universal()
+            ];
+            let keyOrField = allFields.find(f => f.key === key || f.keys?.includes(key)) || key;
             return {
-                ...websiteValidationIssueBase,
+                ...createWebsiteValidationIssueBase(keyOrField),
                 data: {
                     key,
                     isFixable,
@@ -247,8 +260,9 @@ export function validationFormatting() {
                     severity: 'warning',
                     message: function(context) {
                         var entity = context.hasEntity(this.entityIds[0]);
-                        return entity ? t.append('issues.invalid_format.email.message' + this.data,
-                            { feature: utilDisplayLabel(entity, context.graph()), email: emails.join(', ') }) : '';
+                        return entity ? t.append('issues.invalid_format.email.message' + this.data, {
+                            feature: utilDisplayLabel(entity, context.graph()), email: emails.join(', ')
+                        }) : '';
                     },
                     reference: showReferenceEmail,
                     entityIds: [entity.id],
