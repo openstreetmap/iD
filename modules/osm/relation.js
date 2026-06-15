@@ -6,7 +6,7 @@ import { geoExtent, geoPolygonContainsPolygon, geoPolygonIntersectsPolygon } fro
 import { osmIdManager } from './id_manager';
 
 /**
- * @typedef {{ type: import('./id_manager').FeatureType; id: string; role: string }} RelationMember
+ * @typedef {{ type: import('./id_manager').OsmType; id: string; role: string }} RelationMember
  */
 
 /**
