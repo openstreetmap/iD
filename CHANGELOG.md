@@ -36,7 +36,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
-# Unreleased (2.41.0-dev)
+# 2.41.0
+##### 2026-Jun-15
 
 #### :sparkles: Usability & Accessibility
 * Render short radio field options inline on one row when they fit side-by-side ([#12343], thanks [@FloEdelmann])
@@ -45,8 +46,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show suggestions in combobox dropdown also when the entered text contains a few typos ([#8802])
 * Render the `side` arrow of cyclist waiting aid features ([#12374], thanks [@RudyTheDev])
 * Show titles and descriptions when searching for wikidata items ([#12436], thanks [@k-yle])
-
-#### :scissors: Operations
 #### :camera: Street-Level
 * Add high-resolution toggle for Mapilio photo viewer ([#12353], thanks [@sezerbozbiyik])
 #### :white_check_mark: Validation
@@ -67,9 +66,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix async autocomplete (e.g. from taginfo) from overriding the entered value in fields and the raw tag editor after the input element has been de-selected ([#12439])
 #### :earth_asia: Localization
 * Change the example phone format for Türkiye ([#12446], thanks [@w2r4])
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
-#### :rocket: Presets
 #### :hammer: Development
 * Remove redundant software dependencies to reduce the amount of the code that is bundled with iD ([#11634], [#12307], thanks [@k-yle])
 * Update name-suggestion-index to v7.2 ([#12337], thanks [@bjornstar])
