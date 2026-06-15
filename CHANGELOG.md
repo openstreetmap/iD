@@ -63,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Hide icons that failed to load in the relations list ([#12320], thanks [@k-yle])
 * Refresh entity editor to show all relations of a feature when the entity was loaded directly, e.g. via URL parameter ([#12369], thanks [@tordans])
 * Fix some false-positive warnings about mismatched geometry ([#12339], thanks [@k-yle])
+* Fix note commenting UI not being rendered initially when starting iD with a note preselected ([#12442])
 #### :earth_asia: Localization
 * Change the example phone format for Türkiye ([#12446], thanks [@w2r4])
 #### :hourglass: Performance
@@ -94,6 +95,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12429]: https://github.com/openstreetmap/iD/pull/12429
 [#12436]: https://github.com/openstreetmap/iD/pull/12436
 [#12446]: https://github.com/openstreetmap/iD/pull/12446
+[#12442]: https://github.com/openstreetmap/iD/issues/12442
 [@FloEdelmann]: https://github.com/FloEdelmann
 [@w2r4]: https://github.com/w2r4
 

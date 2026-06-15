@@ -221,7 +221,7 @@ export function behaviorHash(context) {
             // targeting specific features: download, select, and zoom to them
             const selectIds = q.id.split(',');
             if (selectIds.length === 1 && selectIds[0].startsWith('note/')) {
-                const noteId = selectIds[0].split('/')[1];
+                const noteId = +selectIds[0].split('/')[1];
                 context.moveToNote(noteId, !q.map);
             } else {
                 context.zoomToEntities(
