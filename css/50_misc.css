@@ -376,7 +376,6 @@ path.line.casing.tag-man_made-embankment {
 
 /* Surface - unpaved */
 path.line.casing.tag-unpaved {
-    /*stroke: #ccc;*/
     stroke-linecap: butt;
     stroke-dasharray: 4, 4;
 }
@@ -384,11 +383,9 @@ path.line.casing.tag-unpaved {
     stroke-dasharray: 3, 3;
 }
 path.line.casing.tag-bridge.tag-unpaved {
-    /*stroke: #000;*/
     stroke-dasharray: none;
 }
 path.line.stroke.tag-bridge.tag-unpaved {
-    /*stroke: #000;*/
     stroke-linecap: butt;
     stroke-dasharray: 6,2;
 }
