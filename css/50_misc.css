@@ -361,26 +361,16 @@ path.line.casing.tag-location-underwater {
 
 
 /* embankments / cuttings */
-path.line.shadow.tag-embankment,
-path.line.shadow.tag-cutting {
-    stroke-width: 28;
+/* see also #ideditor-sided-marker-embankment */
+path.line.stroke.tag-man_made-embankment {
+    stroke: #444;
+    stroke-width: 2px;
 }
-path.line.casing.tag-embankment,
-path.line.casing.tag-cutting {
-    stroke-opacity: 0.5;
-    stroke: #000;
-    stroke-width: 22;
-    stroke-dasharray: 2, 4;
+path.line.casing.tag-man_made-embankment {
+    stroke: rgba(200, 200, 200, 0.75);
     stroke-linecap: butt;
-}
-
-.low-zoom path.line.shadow.tag-embankment,
-.low-zoom path.line.shadow.tag-cutting {
-    stroke-width: 14;
-}
-.low-zoom path.line.casing.tag-embankment,
-.low-zoom path.line.casing.tag-cutting {
-    stroke-width: 10;
+    stroke-dasharray: none;
+    stroke-width: 2.5px;
 }
 
 

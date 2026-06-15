@@ -357,7 +357,7 @@ describe('iD.osmWay', function() {
             expect(new iD.osmWay({tags: { barrier: 'kerb' }}).sidednessIdentifier()).to.eql('barrier');
             expect(new iD.osmWay({tags: { barrier: 'guard_rail' }}).sidednessIdentifier()).to.eql('guard_rail');
             expect(new iD.osmWay({tags: { barrier: 'city_wall' }}).sidednessIdentifier()).to.eql('barrier');
-            expect(new iD.osmWay({tags: { man_made: 'embankment' }}).sidednessIdentifier()).to.eql('man_made');
+            expect(new iD.osmWay({tags: { man_made: 'quay' }}).sidednessIdentifier()).to.eql('man_made');
             expect(new iD.osmWay({tags: { 'abandoned:barrier': 'retaining_wall' }}).sidednessIdentifier()).to.eql('barrier');
         });
 

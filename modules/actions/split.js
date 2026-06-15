@@ -472,6 +472,7 @@ export function actionSplit(nodeIds, newWayIds) {
             return false;
         }
     };
+    action.waysForNode = waysForNode;
 
     action.ways = function(graph) {
         return waysForNodes(nodeIds, graph);
