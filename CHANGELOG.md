@@ -46,6 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show suggestions in combobox dropdown also when the entered text contains a few typos ([#8802])
 * Render the `side` arrow of cyclist waiting aid features ([#12374], thanks [@RudyTheDev])
 * Show titles and descriptions when searching for wikidata items ([#12436], thanks [@k-yle])
+* New rendering for embankments and cuttings ([#12396])
 #### :camera: Street-Level
 * Add high-resolution toggle for Mapilio photo viewer ([#12353], thanks [@sezerbozbiyik])
 #### :white_check_mark: Validation
@@ -89,6 +90,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12369]: https://github.com/openstreetmap/iD/pull/12369
 [#12374]: https://github.com/openstreetmap/iD/pull/12374
 [#12386]: https://github.com/openstreetmap/iD/pull/12386
+[#12396]: https://github.com/openstreetmap/iD/pull/12396
 [#12429]: https://github.com/openstreetmap/iD/pull/12429
 [#12436]: https://github.com/openstreetmap/iD/pull/12436
 [#12439]: https://github.com/openstreetmap/iD/issues/12439
