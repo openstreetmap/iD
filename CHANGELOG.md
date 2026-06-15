@@ -48,8 +48,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
+* Fix unit tests failing with nodejs v26 ([#12401], thanks [@brianstrauch])
 
+[#12401]: https://github.com/openstreetmap/iD/pull/12401
 [#12449]: https://github.com/openstreetmap/iD/pull/12449
+[@brianstrauch]: https://github.com/brianstrauch
 
 
 # 2.41.0
