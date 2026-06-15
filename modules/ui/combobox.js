@@ -336,6 +336,7 @@ export function uiCombobox(context, klass) {
 
         function tryAutocomplete() {
             if (!_canAutocomplete) return;
+            if (input.node() !== document.activeElement) return;
 
             var val = _caseSensitive ? value() : value().toLowerCase();
             if (!val) return;

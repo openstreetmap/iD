@@ -64,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Refresh entity editor to show all relations of a feature when the entity was loaded directly, e.g. via URL parameter ([#12369], thanks [@tordans])
 * Fix some false-positive warnings about mismatched geometry ([#12339], thanks [@k-yle])
 * Fix note commenting UI not being rendered initially when starting iD with a note preselected ([#12442])
+* Fix async autocomplete (e.g. from taginfo) from overriding the entered value in fields and the raw tag editor after the input element has been de-selected ([#12439])
 #### :earth_asia: Localization
 * Change the example phone format for Türkiye ([#12446], thanks [@w2r4])
 #### :hourglass: Performance
@@ -94,8 +95,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12386]: https://github.com/openstreetmap/iD/pull/12386
 [#12429]: https://github.com/openstreetmap/iD/pull/12429
 [#12436]: https://github.com/openstreetmap/iD/pull/12436
-[#12446]: https://github.com/openstreetmap/iD/pull/12446
+[#12439]: https://github.com/openstreetmap/iD/issues/12439
 [#12442]: https://github.com/openstreetmap/iD/issues/12442
+[#12446]: https://github.com/openstreetmap/iD/pull/12446
 [@FloEdelmann]: https://github.com/FloEdelmann
 [@w2r4]: https://github.com/w2r4
 
