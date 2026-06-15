@@ -292,7 +292,7 @@ export function uiEntityEditor(context) {
 
         if (val && _entityIDs && utilArrayIdentical(_entityIDs, val)) return entityEditor;  // exit early if no change
 
-        _entityIDs = val;
+        _entityIDs = val || [];
 
         loadActivePresets(true);
 
