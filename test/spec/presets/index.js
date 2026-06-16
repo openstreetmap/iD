@@ -365,7 +365,6 @@ describe('iD.presetIndex', function () {
                 '2161a712': {
                     'key': 'building',
                     'label': 'Building',
-                    'overrideLabel': 'Building',
                     'type': 'text'
                 }
             }
