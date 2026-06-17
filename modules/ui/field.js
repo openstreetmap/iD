@@ -76,8 +76,8 @@ export function uiField(context, presetField, entityIDs, options) {
             var original = context.graph().base().entities[entityID];
             var latest = context.graph().entity(entityID);
             if (original) {
-                var originalKeys = allKeys(original.tags);
-                var latestKeys = allKeys(_tags);
+                const originalKeys = allKeys(original.tags);
+                const latestKeys = allKeys(_tags);
                 return latestKeys.concat(originalKeys).some(function (key) {
                     return latest.tags[key] !== original.tags[key];
                 });
