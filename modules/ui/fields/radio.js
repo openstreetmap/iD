@@ -92,6 +92,7 @@ export function uiFieldRadio(field, context) {
         // by applying inline styles, forcing a layout read, then removing them.
         const labelNodes = labels.nodes();
         labelNodes.forEach(node => {
+            node._originalStyle = node.style;
             node.style.flex = '0 0 auto';
             node.style.width = 'auto';
         });
@@ -100,8 +101,8 @@ export function uiFieldRadio(field, context) {
         const maxLabelWidth = Math.max(...labelNodes.map(node => node.getBoundingClientRect().width));
 
         labelNodes.forEach(node => {
-            node.style.flex = '';
-            node.style.width = '';
+            node.style = node._originalStyle;
+            delete node._originalStyle;
         });
 
         // All labels fit on one equal-width line without truncation when the widest

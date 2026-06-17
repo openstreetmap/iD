@@ -43,6 +43,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Show which field (or tag) produced an _invalid URL_ validation message ([#12449])
 #### :bug: Bugfixes
+* Fix radio fields being always in single line mode when feature was selected while sidebar was collapsed ([#12454])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -52,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#12401]: https://github.com/openstreetmap/iD/pull/12401
 [#12449]: https://github.com/openstreetmap/iD/pull/12449
+[#12454]: https://github.com/openstreetmap/iD/issues/12454
 [@brianstrauch]: https://github.com/brianstrauch
 
 

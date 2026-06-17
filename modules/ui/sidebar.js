@@ -410,6 +410,8 @@ export function uiSidebar(context) {
                             .style('width', widthPct + '%');
                     }
                 });
+
+            inspectorWrap.call(inspector, { redrawEntityEditor: true });
         };
 
         // toggle the sidebar collapse when double-clicking the resizer
