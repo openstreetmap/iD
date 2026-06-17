@@ -228,5 +228,122 @@ describe('iD.uiField as multiCombo', () => {
             });
         });
     });
+
+    describe('remove', () => {
+        function wireChange(field: any, entityID: string) {
+            // Simulates entity_editor.changeTags()
+            field.on('change', (changed: Record<string, string | undefined>) => {
+                const tags = Object.assign({}, context.entity(entityID).tags);
+                Object.keys(changed).forEach((key: string) => {
+                    if (changed[key] === undefined) {
+                        delete tags[key];
+                    } else {
+                        tags[key] = changed[key]!;
+                    }
+                });
+                context.perform(iD.actionChangeTags(entityID, tags));
+            });
+        }
+
+        describe('relevant tags', () => {
+            it('removes all field tags', () => {
+                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+                context.history().merge([entity]);
+
+                const field = iD.uiField(context, presetField, ['n1'], { show: true });
+                field.tags(entity.tags);
+                field.render(selection);
+
+                wireChange(field, 'n1');
+                selection.select('.field-label > .remove-icon').dispatch('click');
+
+                expect(context.entity('n1').tags).toEqual({});
+            });
+
+            it('removes newly-added tags', () => {
+                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+                context.history().merge([entity]);
+
+                const newTags = { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'fuel:propane': 'yes' };
+                context.perform(iD.actionChangeTags('n1', newTags));
+
+                const field = iD.uiField(context, presetField, ['n1'], { show: true });
+                field.tags(newTags);
+                field.render(selection);
+
+                wireChange(field, 'n1');
+                selection.select('.field-label > .remove-icon').dispatch('click');
+
+                expect(context.entity('n1').tags).toEqual({});
+            });
+
+            it('removes remaining tags when one was already removed', () => {
+                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+                context.history().merge([entity]);
+
+                const newTags = { 'fuel:diesel': 'yes' };
+                context.perform(iD.actionChangeTags('n1', newTags));
+
+                const field = iD.uiField(context, presetField, ['n1'], { show: true });
+                field.tags(newTags);
+                field.render(selection);
+
+                wireChange(field, 'n1');
+                selection.select('.field-label > .remove-icon').dispatch('click');
+
+                expect(context.entity('n1').tags).toEqual({});
+            });
+        });
+
+        describe('unrelated tags', () => {
+            it('remove doesn\'t affect unrelated existing tag', () => {
+                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'existing': 'yes' } });
+                context.history().merge([entity]);
+
+                const field = iD.uiField(context, presetField, ['n1'], { show: true });
+                field.tags(entity.tags);
+                field.render(selection);
+
+                wireChange(field, 'n1');
+                selection.select('.field-label > .remove-icon').dispatch('click');
+
+                expect(context.entity('n1').tags).toEqual({ 'existing': 'yes' });
+            });
+
+            it('remove doesn\'t affect unrelated added tag', () => {
+                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+                context.history().merge([entity]);
+
+                const newTags = { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'additional': 'yes' };
+                context.perform(iD.actionChangeTags('n1', newTags));
+
+                const field = iD.uiField(context, presetField, ['n1'], { show: true });
+                field.tags(newTags);
+                field.render(selection);
+
+                wireChange(field, 'n1');
+                selection.select('.field-label > .remove-icon').dispatch('click');
+
+                expect(context.entity('n1').tags).toEqual({ 'additional': 'yes' });
+            });
+
+            it('remove doesn\'t restore a previously removed unrelated tag', () => {
+                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'temporary': 'yes' } });
+                context.history().merge([entity]);
+
+                const newTags = { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' };
+                context.perform(iD.actionChangeTags('n1', newTags));
+
+                const field = iD.uiField(context, presetField, ['n1'], { show: true });
+                field.tags(newTags);
+                field.render(selection);
+
+                wireChange(field, 'n1');
+                selection.select('.field-label > .remove-icon').dispatch('click');
+
+                expect(context.entity('n1').tags).toEqual({});
+            });
+        });
+    });
 });
 
