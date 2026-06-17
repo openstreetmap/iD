@@ -38,7 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.42.0-dev)
 
 #### :sparkles: Usability & Accessibility
-* Render `highway=track` using different styles depending on the `tracktype` ([#12392])
+* Render `highway=track` using different styles depending on the `tracktype` ([#12392], thanks [@RudyTheDev])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -46,6 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix false positive in oneway road detection when secondary oneway tags (like `piste:type=downhill`) are present ([#8724])
 #### :bug: Bugfixes
 * Fix radio fields being always in single line mode when feature was selected while sidebar was collapsed ([#12454])
+* Fix undo and remove buttons for `multiCombo` fields ([#12406], thanks [@RudyTheDev])
 #### :earth_asia: Localization
 * Improve some edge cases of rendering of mixed right-to-left and left-to-right text ([#8713])
 #### :hourglass: Performance
@@ -58,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8724]: https://github.com/openstreetmap/iD/issues/8724
 [#12392]: https://github.com/openstreetmap/iD/pull/12392
 [#12401]: https://github.com/openstreetmap/iD/pull/12401
+[#12406]: https://github.com/openstreetmap/iD/pull/12406
 [#12449]: https://github.com/openstreetmap/iD/pull/12449
 [#12454]: https://github.com/openstreetmap/iD/issues/12454
 [@brianstrauch]: https://github.com/brianstrauch
