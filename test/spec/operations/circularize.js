@@ -19,6 +19,7 @@ describe('iD.operationCircularize', function () {
     };
     fakeContext.inIntro = () => false;
     fakeContext.connection = () => {};
+    fakeContext.validator = () => ({ validate: () => {} });
 
     describe('#available', function () {
         beforeEach(function () {
