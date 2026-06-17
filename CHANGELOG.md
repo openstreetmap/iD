@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.42.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Render `highway=track` using different styles depending on the `tracktype` ([#12392])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -49,6 +50,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 #### :hammer: Development
 
+[#12392]: https://github.com/openstreetmap/iD/pull/12392
 [#12449]: https://github.com/openstreetmap/iD/pull/12449
 
 
