@@ -82,6 +82,35 @@ export function uiFieldRadio(field, context) {
     }
 
 
+    function updateOneLineLayout() {
+        const wrapNode = wrap.node();
+        if (!wrapNode || labels.empty()) return;
+
+        wrap.classed('one-line', false);
+
+        // Temporarily measure each label at its natural content width (no grow/shrink)
+        // by applying inline styles, forcing a layout read, then removing them.
+        const labelNodes = labels.nodes();
+        labelNodes.forEach(node => {
+            node._originalStyle = node.style;
+            node.style.flex = '0 0 auto';
+            node.style.width = 'auto';
+        });
+
+        const containerWidth = wrapNode.getBoundingClientRect().width;
+        const maxLabelWidth = Math.max(...labelNodes.map(node => node.getBoundingClientRect().width));
+
+        labelNodes.forEach(node => {
+            node.style = node._originalStyle;
+            delete node._originalStyle;
+        });
+
+        // All labels fit on one equal-width line without truncation when the widest
+        // label's natural width fits within each cell's equal share of the container.
+        wrap.classed('one-line', maxLabelWidth * labelNodes.length <= containerWidth);
+    }
+
+
     function structureExtras(selection, tags) {
         var selected = selectedKey() || tags.layer !== undefined;
         var type = presetManager.field(selected);
@@ -332,6 +361,8 @@ export function uiFieldRadio(field, context) {
 
             wrap.call(structureExtras, tags);
         }
+
+        updateOneLineLayout();
     };
 
 

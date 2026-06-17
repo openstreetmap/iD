@@ -17,7 +17,7 @@ export function uiInspector(context) {
     var _newFeature = false;
 
 
-    function inspector(selection) {
+    function inspector(selection, options = {}) {
         presetList
             .entityIDs(_entityIDs)
             .autofocus(_newFeature)
@@ -36,19 +36,40 @@ export function uiInspector(context) {
 
         var enter = wrap.enter()
             .append('div')
-            .attr('class', 'panewrap');
+            .classed('panewrap', true);
+            //.style('right', shouldDefaultToPresetList() ? '-100%' : '0%');
 
         enter
             .append('div')
-            .attr('class', 'preset-list-pane pane');
+            .classed('preset-list-pane pane', true);
 
         enter
             .append('div')
-            .attr('class', 'entity-editor-pane pane');
+            .classed('entity-editor-pane pane', true);
 
         wrap = wrap.merge(enter);
         presetPane = wrap.selectAll('.preset-list-pane');
         editorPane = wrap.selectAll('.entity-editor-pane');
+
+        if (!options?.redrawEntityEditor) {
+            // initial rendering, or new feature selected
+            if (shouldDefaultToPresetList()) {
+                wrap.style('right', '-100%');
+                editorPane.classed('hide', true);
+                presetPane.classed('hide', false)
+                    .call(presetList);
+            } else {
+                wrap.style('right', '0%');
+                presetPane.classed('hide', true);
+                editorPane.classed('hide', false)
+                    .call(entityEditor);
+            }
+        } else {
+            // refreshing entity editor (e.g. when sidebar is resized)
+            if (!editorPane.classed('hide')) {
+                editorPane.call(entityEditor);
+            }
+        }
 
         function shouldDefaultToPresetList() {
             // always show the inspector on hover
@@ -81,18 +102,6 @@ export function uiInspector(context) {
 
             // otherwise show preset list for uninteresting vertices
             return true;
-        }
-
-        if (shouldDefaultToPresetList()) {
-            wrap.style('right', '-100%');
-            editorPane.classed('hide', true);
-            presetPane.classed('hide', false)
-                .call(presetList);
-        } else {
-            wrap.style('right', '0%');
-            presetPane.classed('hide', true);
-            editorPane.classed('hide', false)
-                .call(entityEditor);
         }
 
         var footer = selection.selectAll('.footer')

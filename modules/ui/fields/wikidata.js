@@ -161,7 +161,8 @@ export function uiFieldWikidata(field, context) {
                         .attr('class', 'localized-text')
                         .attr('lang', item.display.label.language)
                         .text(item.display.label.value),
-                    title: item.display.description && item.display.description.value,
+                    description: item.display.description && item.display.description.value,
+                    title: item.id + (item.aliases?.length > 0 ? ' (' + item.aliases.join(', ') + ')' : ''),
                     terms: item.aliases
                 };
             });

@@ -497,13 +497,19 @@ export function utilSetTransform(el: d3.Selection, x: number, y: number, scale: 
 // Calculates Levenshtein distance between two strings
 // see:  https://en.wikipedia.org/wiki/Levenshtein_distance
 // first converts the strings to lowercase and replaces diacritic marks with ascii equivalents.
-export function utilEditDistance(a: string, b: string): number {
+//
+// if options.substring is true, it instead calculates the minimal Levenshtein distance between
+// the string a and any substring of b
+// see: https://en.wikipedia.org/wiki/Approximate_string_matching#Problem_formulation_and_algorithms
+export function utilEditDistance(a: string, b: string, options?: {
+    substring?: boolean
+}): number {
     a = removeDiacritics(a.toLowerCase());
     b = removeDiacritics(b.toLowerCase());
-    if (a.length === 0) return b.length;
+    if (a.length === 0) return options?.substring ? 0 : b.length;
     if (b.length === 0) return a.length;
     const matrix = [];
-    for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
+    for (let i = 0; i <= b.length; i++) { matrix[i] = options?.substring ? [0] : [i]; }
     for (let j = 0; j <= a.length; j++) { matrix[0][j] = j; }
     for (let i = 1; i <= b.length; i++) {
         for (let j = 1; j <= a.length; j++) {
@@ -515,6 +521,9 @@ export function utilEditDistance(a: string, b: string): number {
                     matrix[i-1][j] + 1)); // deletion
             }
         }
+    }
+    if (options?.substring) {
+        return Math.min(...matrix.map(r => r[a.length]));
     }
     return matrix[b.length][a.length];
 }
