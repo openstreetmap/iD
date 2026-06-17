@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Show which field (or tag) produced an _invalid URL_ validation message ([#12449])
+* Fix false positive in oneway road detection when secondary oneway tags (like `piste:type=downhill`) are present ([#8724])
 #### :bug: Bugfixes
 * Fix radio fields being always in single line mode when feature was selected while sidebar was collapsed ([#12454])
 #### :earth_asia: Localization
@@ -51,6 +52,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Fix unit tests failing with nodejs v26 ([#12401], thanks [@brianstrauch])
 
+[#8724]: https://github.com/openstreetmap/iD/issues/8724
 [#12401]: https://github.com/openstreetmap/iD/pull/12401
 [#12449]: https://github.com/openstreetmap/iD/pull/12449
 [#12454]: https://github.com/openstreetmap/iD/issues/12454
