@@ -2104,6 +2104,9 @@ input.date-selector {
     min-width: 0;
     width: auto;
 }
+.form-field-input-radio.one-line.equal-spacing > label {
+    flex: 1 1 0;
+}
 .form-field-input-radio.one-line > label:first-of-type {
     border-end-start-radius: 4px;
 }
