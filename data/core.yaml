@@ -2299,6 +2299,9 @@ en:
     coordinate_pair: "{latitude}, {longitude}"
     # translate the letters but leave the format the same
     year_month_day: "YYYY-MM-DD"
+  fields:
+    access:
+      add_type: Add a new mode of transport
   wikidata:
     identifier: "Identifier"
     label: "Label"

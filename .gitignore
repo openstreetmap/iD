@@ -14,6 +14,7 @@ transifex.auth
 /dist/data/
 /dist/img/*.svg
 /dist/locales/en.min.json
+/dist/tagging-translations/
 /dist/mapillary-js/
 /dist/pannellum/
 
