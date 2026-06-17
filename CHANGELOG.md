@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.42.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Display radio field options in a two-column layout if there is insufficient space for them in a single line ([#12455])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -54,6 +55,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12401]: https://github.com/openstreetmap/iD/pull/12401
 [#12449]: https://github.com/openstreetmap/iD/pull/12449
 [#12454]: https://github.com/openstreetmap/iD/issues/12454
+[#12455]: https://github.com/openstreetmap/iD/pull/12455
 [@brianstrauch]: https://github.com/brianstrauch
 
 

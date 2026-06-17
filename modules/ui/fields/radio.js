@@ -82,11 +82,12 @@ export function uiFieldRadio(field, context) {
     }
 
 
-    function updateOneLineLayout() {
+    function updateLayout() {
         const wrapNode = wrap.node();
         if (!wrapNode || labels.empty()) return;
 
         wrap.classed('one-line', false);
+        wrap.classed('two-column', false);
 
         // Temporarily measure each label at its natural content width (no grow/shrink)
         // by applying inline styles, forcing a layout read, then removing them.
@@ -98,7 +99,14 @@ export function uiFieldRadio(field, context) {
         });
 
         const containerWidth = wrapNode.getBoundingClientRect().width;
-        const maxLabelWidth = Math.max(...labelNodes.map(node => node.getBoundingClientRect().width));
+        const labelWidths = labelNodes.map(node => node.getBoundingClientRect().width);
+        const sumLabelWidth = labelWidths.reduce((a, b) => a + b);
+        if (labelWidths.length % 2 === 1) {
+            // for odd number of entries, we can skip the last entry as there is the
+            // full width available
+            labelWidths.pop();
+        }
+        const maxLabelWidth = Math.max(...labelWidths);
 
         labelNodes.forEach(node => {
             node.style = node._originalStyle;
@@ -107,7 +115,14 @@ export function uiFieldRadio(field, context) {
 
         // All labels fit on one equal-width line without truncation when the widest
         // label's natural width fits within each cell's equal share of the container.
-        wrap.classed('one-line', maxLabelWidth * labelNodes.length <= containerWidth);
+        wrap.classed('one-line', sumLabelWidth <= containerWidth);
+        // Otherwise, if all labels fit on half width of the container -> we can use
+        // a more compact two column layout
+        wrap.classed('two-column',
+            sumLabelWidth > containerWidth // not if already one-line layout
+            && maxLabelWidth <= Math.ceil(containerWidth / 2) // has to fit in half-width column
+            && labelNodes.length > 3 // skip if only 3 or fewer options -> looks unbalanced
+        );
     }
 
 
@@ -362,7 +377,7 @@ export function uiFieldRadio(field, context) {
             wrap.call(structureExtras, tags);
         }
 
-        updateOneLineLayout();
+        updateLayout();
     };
 
 

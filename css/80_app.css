@@ -2100,7 +2100,7 @@ input.date-selector {
     overflow: hidden;
 }
 .form-field-input-radio.one-line > label {
-    flex: 1 1 0;
+    flex: 1 1 auto;
     min-width: 0;
     width: auto;
 }
@@ -2111,6 +2111,27 @@ input.date-selector {
     border-end-start-radius: 0;
 }
 .form-field-input-radio.one-line > label:not(:first-of-type) {
+    border-inline-start: none;
+}
+
+/* Two-column layout when all options fit on a half-width box */
+.form-field-input-radio.two-column {
+    overflow: hidden;
+}
+.form-field-input-radio.two-column > label {
+    flex: 1 1 auto;
+    min-width: 50%;
+    max-width: 100%;
+    width: 50%;
+}
+.form-field-input-radio.two-column > label:nth-last-of-type(2):nth-of-type(odd),
+.form-field-input-radio.two-column > label:last-of-type:nth-of-type(odd) {
+    border-end-start-radius: 4px;
+}
+.form-field-input-radio.two-column > label:last-of-type:nth-of-type(even) {
+    border-end-start-radius: 0;
+}
+.form-field-input-radio.two-column > label:nth-of-type(even) {
     border-inline-start: none;
 }
 
