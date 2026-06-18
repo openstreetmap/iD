@@ -165,7 +165,7 @@ describe('iD.uiFieldWikipedia', function() {
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
 
-        var spy = sinon.spy();
+        var spy = vi.fn();
         wikipedia.on('change.spy', spy);
 
         // Create an XHR server that will respond after 60ms
@@ -218,10 +218,10 @@ describe('iD.uiFieldWikipedia', function() {
         await setTimeout(100);
         expect(context.entity(entity.id).tags.wikidata).to.equal('Q216353');
 
-        expect(spy.callCount).to.equal(4);
-        expect(spy.getCall(0)).to.have.been.calledWith({ wikipedia: 'de:Skip' });   // 'Skip' on change
-        expect(spy.getCall(1)).to.have.been.calledWith({ wikipedia: 'de:Skip' });   // 'Skip' on blur
-        expect(spy.getCall(2)).to.have.been.calledWith({ wikipedia: 'de:Title' });  // 'Title' on change +10ms
-        expect(spy.getCall(3)).to.have.been.calledWith({ wikipedia: 'de:Title' });  // 'Title' on blur   +10ms
+        expect(spy).toHaveBeenCalledTimes(4);
+        expect(spy).toHaveBeenNthCalledWith(1, { wikipedia: 'de:Skip' });   // 'Skip' on change
+        expect(spy).toHaveBeenNthCalledWith(2, { wikipedia: 'de:Skip' });   // 'Skip' on blur
+        expect(spy).toHaveBeenNthCalledWith(3, { wikipedia: 'de:Title' });  // 'Title' on change +10ms
+        expect(spy).toHaveBeenNthCalledWith(4, { wikipedia: 'de:Title' });  // 'Title' on blur   +10ms
     });
 });
