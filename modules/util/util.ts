@@ -1,8 +1,5 @@
 import { color as d3_color, type RGBColor } from 'd3';
 import { remove as removeDiacritics } from 'diacritics';
-
-import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
-
 import { t, localizer } from '../core/localizer';
 import { utilArrayUnion } from './array';
 import { utilDetect } from './detect';
@@ -308,12 +305,6 @@ export function utilDisplayName(entity: iD.OsmEntity, flags: {
 
 export function utilDisplayNameForPath(entity: iD.OsmEntity): string {
     let name = utilDisplayName(entity, { isMapLabel: true });
-    const isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
-    const isNewChromium = Number(utilDetect().version.split('.')[0]) >= 96.0;
-
-    if (!isFirefox && !isNewChromium && name && rtlRegex.test(name)) {
-        name = fixRTLTextForSvg(name);
-    }
 
     return name;
 }

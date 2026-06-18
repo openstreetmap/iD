@@ -60,7 +60,6 @@
     "@turf/bbox": "^7.2.0",
     "@turf/bbox-clip": "^7.2.0",
     "abortcontroller-polyfill": "^1.7.8",
-    "alif-toolkit": "^1.3.0",
     "diacritics": "1.3.0",
     "es-toolkit": "^1.45.0",
     "exifr": "^7.1.3",
