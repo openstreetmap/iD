@@ -9,7 +9,6 @@ declare var jsdom: typeof globalThis;
 
 global.before = beforeEach;
 global.after = afterEach;
-global.fetchMock = fetchMock;
 global.VITEST = true;
 
 // create global variables for this data, to match what the esbuild config does

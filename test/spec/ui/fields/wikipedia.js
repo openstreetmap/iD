@@ -1,3 +1,4 @@
+import fetchMock from 'fetch-mock';
 import { setTimeout } from 'node:timers/promises';
 import { fn } from '@vitest/spy';
 
