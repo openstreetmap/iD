@@ -19,11 +19,11 @@ describe('iD.serviceOsm', function () {
         connection.logout();
     }
 
-    before(function() {
+    beforeEach(() => {
         iD.services.osm = iD.serviceOsm;
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.osm;
     });
 

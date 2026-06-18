@@ -108,11 +108,11 @@ describe('iD.serviceVegbilder', function() {
     }));
   }
 
-  before(function() {
+  beforeEach(() => {
     iD.services.vegbilder = iD.serviceVegbilder;
   });
 
-  after(function() {
+  afterEach(() => {
     delete iD.services.vegbilder;
   });
 

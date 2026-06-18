@@ -3,7 +3,7 @@ import { setTimeout } from 'node:timers/promises';
 describe('iD.uiFieldLocalized', function() {
     var context, selection, field;
 
-    before(function() {
+    beforeEach(() => {
         iD.fileFetcher.cache().languages = {
           de: { nativeName: 'Deutsch' },
           en: { nativeName: 'English' }
@@ -11,7 +11,7 @@ describe('iD.uiFieldLocalized', function() {
         iD.fileFetcher.cache().territory_languages = {};
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.fileFetcher.cache().languages;
         delete iD.fileFetcher.cache().territory_languages;
     });

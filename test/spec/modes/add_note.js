@@ -1,12 +1,12 @@
 describe.skip('iD.modeAddNote', function() {
     var context;
 
-    before(function() {
+    beforeEach(() => {
         window.location.hash = '#background=none';  // Try not to load imagery
         iD.services.osm = iD.serviceOsm;
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.osm;
     });
 

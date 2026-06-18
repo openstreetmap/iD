@@ -5,11 +5,11 @@ describe('iD.serviceTaginfo', function() {
     var taginfo;
 
 
-    before(function() {
+    beforeEach(() => {
         iD.services.taginfo = iD.serviceTaginfo;
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.taginfo;
     });
 

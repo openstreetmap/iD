@@ -4,11 +4,11 @@ import { setTimeout } from 'node:timers/promises';
 describe('iD.serviceOsmWikibase', function () {
   var wikibase;
 
-  before(function () {
+  beforeEach(function () {
     iD.services.osmWikibase = iD.serviceOsmWikibase;
   });
 
-  after(function () {
+  afterEach(function () {
     delete iD.services.osmWikibase;
   });
 

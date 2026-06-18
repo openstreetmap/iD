@@ -1,7 +1,7 @@
 describe('iD.validations.impossible_oneway', function() {
     let context;
 
-    before(function() {
+    beforeEach(() => {
         iD.services.osm = iD.serviceOsm;
         iD.services.osm.isDataLoaded = () => true;
     });
@@ -10,7 +10,7 @@ describe('iD.validations.impossible_oneway', function() {
         context = iD.coreContext().assetPath('../dist/').init();
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.osm;
     });
 
