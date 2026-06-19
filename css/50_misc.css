@@ -376,7 +376,6 @@ path.line.casing.tag-man_made-embankment {
 
 /* Surface - unpaved */
 path.line.casing.tag-unpaved {
-    stroke: #ccc;
     stroke-linecap: butt;
     stroke-dasharray: 4, 4;
 }
@@ -384,7 +383,14 @@ path.line.casing.tag-unpaved {
     stroke-dasharray: 3, 3;
 }
 path.line.casing.tag-bridge.tag-unpaved {
-    stroke: #000;
+    stroke-dasharray: none;
+}
+path.line.stroke.tag-bridge.tag-unpaved {
+    stroke-linecap: butt;
+    stroke-dasharray: 6,2;
+}
+path.line.casing.tag-tunnel.tag-unpaved {
+    stroke-dasharray: 6,2;
 }
 /* Surface - semipaved */
 path.line.casing.tag-semipaved {
@@ -398,6 +404,28 @@ path.line.casing.tag-bridge.tag-semipaved {
     stroke: #000;
 }
 
+/* Track - based on grading (tracktype) */
+path.line.casing.tag-highway-track {
+    stroke: #ddd;
+    stroke-linecap: butt;
+}
+path.line.casing.tag-highway-track.tag-ungraded { stroke-dasharray: 7, 3, 3, 3, 3, 3; }
+path.line.casing.tag-highway-track.tag-tracktype-grade2 { stroke-dasharray: 10, 4; }
+path.line.casing.tag-highway-track.tag-tracktype-grade3 { stroke-dasharray: 6, 4; }
+path.line.casing.tag-highway-track.tag-tracktype-grade4 { stroke-dasharray: 4, 6; }
+path.line.casing.tag-highway-track.tag-tracktype-grade5 { stroke-dasharray: 3, 8; }
+path.line.casing.tag-highway-track.tag-bridge { stroke-dasharray: none; }
+path.line.stroke.tag-highway-track.tag-bridge { stroke-linecap: butt; }
+path.line.stroke.tag-highway-track.tag-bridge.tag-ungraded { stroke-dasharray: 7, 3, 3, 3, 3, 3; }
+path.line.stroke.tag-highway-track.tag-bridge.tag-tracktype-grade2 { stroke-dasharray: 12, 2; }
+path.line.stroke.tag-highway-track.tag-bridge.tag-tracktype-grade3 { stroke-dasharray: 8, 6; }
+path.line.stroke.tag-highway-track.tag-bridge.tag-tracktype-grade4 { stroke-dasharray: 6, 6; }
+path.line.stroke.tag-highway-track.tag-bridge.tag-tracktype-grade5 { stroke-dasharray: 4, 8; }
+path.line.casing.tag-highway-track.tag-tunnel.tag-ungraded { stroke-dasharray: 7, 3, 3, 3, 3, 3; }
+path.line.casing.tag-highway-track.tag-tunnel.tag-tracktype-grade2 { stroke-dasharray: 12, 2; }
+path.line.casing.tag-highway-track.tag-tunnel.tag-tracktype-grade3 { stroke-dasharray: 8, 6; }
+path.line.casing.tag-highway-track.tag-tunnel.tag-tracktype-grade4 { stroke-dasharray: 6, 6; }
+path.line.casing.tag-highway-track.tag-tunnel.tag-tracktype-grade5 { stroke-dasharray: 4, 8; }
 
 /* Status (e.g. proposed, abandoned) */
 path.area.stroke.tag-status:not(.tag-status-disused),
