@@ -596,13 +596,13 @@ en:
   osm_api_status:
     message:
       error: Unable to reach the OpenStreetMap API. Your edits are safe locally. Check your network connection.
-      error_400: "Bad Request: The server could not understand your request."
-      error_401: "Unauthorized: Please ensure you are logged in."
-      error_403: "Forbidden: You don't have permission to perform this action."
-      error_404: "Not Found: The requested data could not be found."
-      error_502: "Bad Gateway: The OpenStreetMap API is experiencing issues."
-      error_503: "Service Unavailable: The OpenStreetMap API is temporarily down for maintenance."
-      error_504: "Gateway Timeout: The OpenStreetMap API is taking too long to respond."
+      error_400: "Bad Request: The server could not understand your request. Your edits are safe locally."
+      error_401: "Unauthorized: Please ensure you are logged in. Your edits are safe locally."
+      error_403: "Forbidden: You don't have permission to perform this action. Your edits are safe locally."
+      error_404: "Not Found: The requested data could not be found. Your edits are safe locally."
+      error_502: "Bad Gateway: The OpenStreetMap API is experiencing issues. Your edits are safe locally."
+      error_503: "Service Unavailable: The OpenStreetMap API is temporarily down for maintenance. Your edits are safe locally."
+      error_504: "Gateway Timeout: The OpenStreetMap API is taking too long to respond. Your edits are safe locally."
       offline: The OpenStreetMap API is offline. Your edits are safe locally. Please come back later.
       readonly: The OpenStreetMap API is currently read-only. You can continue editing, but must wait to save your changes.
       rateLimit: The OpenStreetMap API is limiting anonymous connections. You can fix this by logging in.
