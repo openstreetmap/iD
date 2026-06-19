@@ -1,3 +1,4 @@
+import { select as d3_select } from 'd3-selection';
 import { spyOn } from '@vitest/spy';
 
 describe('iD.presetField', function() {
@@ -55,7 +56,7 @@ describe('iD.presetField', function() {
 
             var context = iD.coreContext().assetPath('../dist/').init();
             var uiField = iD.uiFieldCombo(field, context);
-            uiField(d3.select(document.createElement('div')).classed('form-field-input-wrap', true));
+            uiField(d3_select(document.createElement('div')).classed('form-field-input-wrap', true));
             uiField.tags({k: 'v'});
             expect(field.t.append).not.toHaveBeenCalled();
             expect(other.t.append).toHaveBeenCalled();

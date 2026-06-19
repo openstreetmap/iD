@@ -1,3 +1,5 @@
+import { select as d3_select } from 'd3-selection';
+
 describe.skip('iD.modeAddNote', function() {
     var context;
 
@@ -11,7 +13,7 @@ describe.skip('iD.modeAddNote', function() {
     });
 
     beforeEach(function() {
-        var container = d3.select(document.createElement('div'));
+        var container = d3_select(document.createElement('div'));
         context = iD.coreContext().assetPath('../dist/').container(container).init();
 
         context.loadTiles = function () {};
@@ -38,7 +40,7 @@ describe.skip('iD.modeAddNote', function() {
         //         if (mode.id === 'select-note') {
         //             expect(iD.services.osm.caches().note.note[-1]).toEqual(note);
         //             context.mode().exit();
-        //             d3.select('window').on('click.draw-block', null);
+        //             d3_select('window').on('click.draw-block', null);
         //             context.on('enter.addNoteTest', null);
         //             done();
         //         }
@@ -55,7 +57,7 @@ describe.skip('iD.modeAddNote', function() {
         //     expect(context.selectedNoteID()).toEqual(-1);
         //     expect(context.mode().id).to.equal('select-note');
         //     context.mode().exit();
-        //     d3.select('window').on('click.draw-block', null);
+        //     d3_select('window').on('click.draw-block', null);
         // });
     });
 

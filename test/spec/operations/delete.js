@@ -1,3 +1,5 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.operationDelete', function () {
     let graph;
 
@@ -11,7 +13,7 @@ describe('iD.operationDelete', function () {
         ui: () => ({
             sidebar:{}
         }),
-        container: () => d3.select()
+        container: () => d3_select()
     };
 
     describe('selects next node automatically', function () {

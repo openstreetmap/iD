@@ -1,3 +1,5 @@
+import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
+
 describe('iD.uiSectionRawTagEditor', function() {
     var taglist, element, entity, context;
 
@@ -8,7 +10,7 @@ describe('iD.uiSectionRawTagEditor', function() {
             .tags(tags)
             .expandedByDefault(true);
 
-        element = d3.select('body')
+        element = d3_select('body')
             .append('div')
             .attr('class', 'ui-wrap')
             .call(taglist.render);
@@ -22,7 +24,7 @@ describe('iD.uiSectionRawTagEditor', function() {
     });
 
     afterEach(function () {
-        d3.selectAll('.ui-wrap')
+        d3_selectAll('.ui-wrap')
             .remove();
     });
 

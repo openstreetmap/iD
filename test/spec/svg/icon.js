@@ -1,8 +1,10 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.svgIcon', function () {
     var selection;
 
     beforeEach(function () {
-        selection = d3.select(document.createElement('div'));
+        selection = d3_select(document.createElement('div'));
     });
 
     it('creates a generic SVG icon', function () {

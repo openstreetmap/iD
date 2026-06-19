@@ -1,8 +1,10 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.uiSectionBackgroundList', function () {
     let context, container;
 
     beforeEach(function () {
-        container = d3.select('body').append('div').attr('class', 'id-container');
+        container = d3_select('body').append('div').attr('class', 'id-container');
         context = iD.coreContext().assetPath('../dist/').init();
         context.container(container);
     });

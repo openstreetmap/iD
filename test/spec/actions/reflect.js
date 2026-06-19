@@ -1,5 +1,7 @@
+import { geoMercator as d3_geoMercator } from 'd3-geo';
+
 describe('iD.actionReflect', function() {
-    var projection = d3.geoMercator();
+    var projection = d3_geoMercator();
 
     it('does not create or remove nodes', function () {
         var graph = new iD.coreGraph([

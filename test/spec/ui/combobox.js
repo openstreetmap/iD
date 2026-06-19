@@ -1,4 +1,5 @@
 import { fn } from '@vitest/spy';
+import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
 
 describe('uiCombobox', function() {
     var body, context, container, content, input, combobox;
@@ -65,7 +66,7 @@ describe('uiCombobox', function() {
     }
 
     beforeEach(function() {
-        body = d3.select('body');
+        body = d3_select('body');
         container = body.append('div').attr('class', 'ideditor');
         context = iD.coreContext().assetPath('../dist/').init().container(container);
         content = container.append('div');
@@ -92,7 +93,7 @@ describe('uiCombobox', function() {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('↓');
-        expect(d3.selectAll('.ideditor > div.combobox').size()).toEqual(1);
+        expect(d3_selectAll('.ideditor > div.combobox').size()).toEqual(1);
     });
 
     it('filters entries to those matching the value', function() {

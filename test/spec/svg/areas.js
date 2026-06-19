@@ -1,9 +1,12 @@
+import { select as d3_select } from 'd3-selection';
+import { geoProjection as d3_geoProjection } from 'd3-geo';
+
 describe('iD.svgAreas', function () {
     var context, _surface, _savedAreaKeys;
     var all = function() { return true; };
     var none = function() { return false; };
 
-    var projection = d3.geoProjection(function(x, y) { return [x, -y]; })
+    var projection = d3_geoProjection(function(x, y) { return [x, -y]; })
         .translate([0, 0])
         .scale(iD.geoZoomToScale(17))
         .clipExtent([[0, 0], [Infinity, Infinity]]);
@@ -11,7 +14,7 @@ describe('iD.svgAreas', function () {
 
     beforeEach(function () {
         context = iD.coreContext().assetPath('../dist/').init();
-        d3.select(document.createElement('div'))
+        d3_select(document.createElement('div'))
             .attr('class', 'main-map')
             .call(context.map().centerZoom([0, 0], 17));
         _surface = context.surface();

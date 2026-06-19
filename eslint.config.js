@@ -141,7 +141,6 @@ export default tseslint.config(
         ...globals.node,
         ...globals.vitest,
         ...vitest.environments.env.globals,
-        'd3': 'readonly',
         'expect': 'writable',
         'iD': 'readonly',
         'jsdom': 'readonly',

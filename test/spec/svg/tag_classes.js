@@ -1,8 +1,10 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.svgTagClasses', function () {
     var selection;
 
     beforeEach(function () {
-        selection = d3.select(document.createElement('div'));
+        selection = d3_select(document.createElement('div'));
     });
 
     it('adds no classes to elements whose datum has no tags', function() {
@@ -292,7 +294,7 @@ describe('iD.svgTagClasses', function () {
     });
 
     it('works on SVG elements', function() {
-        selection = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'g'));
+        selection = d3_select(document.createElementNS('http://www.w3.org/2000/svg', 'g'));
         selection
             .datum(new iD.osmWay())
             .call(iD.svgTagClasses());

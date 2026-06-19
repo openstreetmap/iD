@@ -1,10 +1,12 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.behaviorHover', function() {
     var _container;
     var _context;
     var _graph;
 
     beforeEach(function() {
-        _container = d3.select('body').append('div');
+        _container = d3_select('body').append('div');
         _context = {
             hover: function() {},
             mode: function() { return { id: 'browse' }; },
