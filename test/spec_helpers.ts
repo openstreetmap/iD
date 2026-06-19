@@ -1,11 +1,8 @@
 import { beforeAll } from 'vitest';
-import 'happen';
 import fetchMock from 'fetch-mock';
 import 'fake-indexeddb/auto';
 import envs from '../config/envs.js';
 
-declare var global: typeof globalThis;
-declare var jsdom: typeof globalThis;
 
 global.fetchMock = fetchMock;
 global.VITEST = true;
@@ -15,18 +12,6 @@ for (const [key, value] of Object.entries(envs)) {
   Reflect.set(global, key, JSON.parse(value));
 }
 
-// the 'happen' library explicitly references `window` when creating an event,
-// but we need to use jsdom's window, so we have to patch initEvent.
-const { initMouseEvent } = MouseEvent.prototype;
-MouseEvent.prototype.initMouseEvent = function (...args) {
-  args[3] = jsdom.window;
-  return initMouseEvent.apply(this, args);
-};
-const { initUIEvent } = UIEvent.prototype;
-UIEvent.prototype.initUIEvent = function (...args) {
-  args[3] = jsdom.window;
-  return initUIEvent.apply(this, args);
-};
 
 // must be imported after global envs are defined
 await import('../modules/id.js');

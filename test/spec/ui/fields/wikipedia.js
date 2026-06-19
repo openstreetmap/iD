@@ -83,12 +83,12 @@ describe('iD.uiFieldWikipedia', function() {
         wikipedia.on('change.spy', spy);
 
         iD.utilGetSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
-        happen.once(selection.selectAll('.wiki-lang').node(), { type: 'change' });
-        happen.once(selection.selectAll('.wiki-lang').node(), { type: 'blur' });
+        selection.selectAll('.wiki-lang').node().dispatchEvent(new Event('change'));
+        selection.selectAll('.wiki-lang').node().dispatchEvent(new Event('blur'));
 
         iD.utilGetSetValue(selection.selectAll('.wiki-title'), 'Title');
-        happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
-        happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
+        selection.selectAll('.wiki-title').node().dispatchEvent(new Event('change'));
+        selection.selectAll('.wiki-title').node().dispatchEvent(new Event('blur'));
 
         expect(spy).to.have.callCount(4);
         expect(spy).to.have.been.calledWith({ wikipedia: undefined});  // lang on change
@@ -104,7 +104,7 @@ describe('iD.uiFieldWikipedia', function() {
         selection.call(wikipedia);
 
         iD.utilGetSetValue(selection.selectAll('.wiki-title'), 'http://de.wikipedia.org/wiki/Title');
-        happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
+        selection.selectAll('.wiki-title').node().dispatchEvent(new Event('change'));
 
         expect(iD.utilGetSetValue(selection.selectAll('.wiki-lang'))).to.equal('Deutsch');
         expect(iD.utilGetSetValue(selection.selectAll('.wiki-title'))).to.equal('Title');
@@ -165,7 +165,7 @@ describe('iD.uiFieldWikipedia', function() {
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
 
-        var spy = sinon.spy();
+        var spy = vi.fn();
         wikipedia.on('change.spy', spy);
 
         // Create an XHR server that will respond after 60ms
@@ -181,8 +181,8 @@ describe('iD.uiFieldWikipedia', function() {
         // Set title to "Skip"
         iD.utilGetSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
         iD.utilGetSetValue(selection.selectAll('.wiki-title'), 'Skip');
-        happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
-        happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
+        selection.selectAll('.wiki-title').node().dispatchEvent(new Event('change'));
+        selection.selectAll('.wiki-title').node().dispatchEvent(new Event('blur'));
 
         // t0
         expect(context.entity(entity.id).tags.wikidata).to.be.undefined;
@@ -201,8 +201,8 @@ describe('iD.uiFieldWikipedia', function() {
         // t30:  graph change - Set title to "Title"
         window.setTimeout(function() {
             iD.utilGetSetValue(selection.selectAll('.wiki-title'), 'Title');
-            happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
-            happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
+            selection.selectAll('.wiki-title').node().dispatchEvent(new Event('change'));
+            selection.selectAll('.wiki-title').node().dispatchEvent(new Event('blur'));
         }, 30);
 
         // t60:  at t0 + 60ms (delay), wikidata SHOULD NOT be set because graph has changed.
@@ -218,10 +218,10 @@ describe('iD.uiFieldWikipedia', function() {
         await setTimeout(100);
         expect(context.entity(entity.id).tags.wikidata).to.equal('Q216353');
 
-        expect(spy.callCount).to.equal(4);
-        expect(spy.getCall(0)).to.have.been.calledWith({ wikipedia: 'de:Skip' });   // 'Skip' on change
-        expect(spy.getCall(1)).to.have.been.calledWith({ wikipedia: 'de:Skip' });   // 'Skip' on blur
-        expect(spy.getCall(2)).to.have.been.calledWith({ wikipedia: 'de:Title' });  // 'Title' on change +10ms
-        expect(spy.getCall(3)).to.have.been.calledWith({ wikipedia: 'de:Title' });  // 'Title' on blur   +10ms
+        expect(spy).toHaveBeenCalledTimes(4);
+        expect(spy).toHaveBeenNthCalledWith(1, { wikipedia: 'de:Skip' });   // 'Skip' on change
+        expect(spy).toHaveBeenNthCalledWith(2, { wikipedia: 'de:Skip' });   // 'Skip' on blur
+        expect(spy).toHaveBeenNthCalledWith(3, { wikipedia: 'de:Title' });  // 'Title' on change +10ms
+        expect(spy).toHaveBeenNthCalledWith(4, { wikipedia: 'de:Title' });  // 'Title' on blur   +10ms
     });
 });

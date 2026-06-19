@@ -24,6 +24,7 @@ const patterns: TagDictionary<string | Tags[]> = {
         construction: 'construction',
         farmland: 'farmland',
         farmyard: 'farmyard',
+        flowerbed: 'flowers',
         forest: [
             { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
             { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },

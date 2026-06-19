@@ -212,6 +212,7 @@ export function svgDefs(context) {
                 ['cemetery_jewish', 'cemetery_jewish'],
                 ['farmland', 'farmland'],
                 ['farmyard', 'farmyard'],
+                ['flowers', 'flowers'],
                 ['forest', 'forest'],
                 ['forest_broadleaved', 'forest_broadleaved'],
                 ['forest_needleleaved', 'forest_needleleaved'],
