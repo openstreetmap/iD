@@ -3,28 +3,56 @@ import { actionCircularize } from '../actions/circularize';
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';
 import { svgPath } from '../svg';
+import { osmIdManager, osmJoinWays, osmWay } from '../osm';
+import { actionAddEntity, actionDeleteWay } from '../actions';
 
 
 export function operationCircularize(context, selectedIDs) {
-    var _extent;
-    var _actions = selectedIDs.map(getAction).filter(Boolean);
-    var _amount = _actions.length === 1 ? 'single' : 'multiple';
-    var _coords = utilGetAllNodes(selectedIDs, context.graph())
+    const _extent = selectedIDs.length > 0 ? selectedIDs
+        .map(id => context.graph().entity(id).extent(context.graph()))
+        .reduce((a, b) => a.extend(b)) : undefined;
+    const _amount = selectedIDs
+        .filter(id => checkActionAllowed(id, context.graph()))
+        .length === 1 ? 'single' : 'multiple';
+    const _coords = utilGetAllNodes(selectedIDs, context.graph())
         .map(function(n) { return n.loc; });
 
-    function getAction(entityID) {
+    const _actions = function() {
+        // try joining unclosed ways into loops
+        const initialGraph = context.graph();
+        const joined = osmJoinWays(selectedIDs
+            .filter(id => checkActionAllowed(id, context.graph()))
+            .map(id => ({ type: 'way', id })),
+            initialGraph);
+        const rings = joined
+            .map(ring => ring.length === 1
+                // ring consists of a single closed way: use it directly
+                ? ring[0]
+                // otherwise: create temporary auxiliary way to circularize
+                // the nodes of the closed loop
+                : new osmWay({
+                    id: osmIdManager.newId('way'),
+                    nodes: ring.nodes.map(n => n.id)
+                }));
+        return [
+            // add temporary auxiliary ways (if necessary)
+            ...rings
+                .filter(way => !initialGraph.hasEntity(way.id))
+                .map(way => actionAddEntity(way)),
+            // circularize closed ways
+            ...rings
+                .map(way => actionCircularize(way.id, context.projection)),
+            // clean up temporary auxiliary ways
+            ...rings
+                .filter(way => !initialGraph.hasEntity(way.id))
+                .map(way => actionDeleteWay(way.id)),
+        ];
+    }();
 
-        var entity = context.entity(entityID);
-
-        if (entity.type !== 'way' || new Set(entity.nodes).size <= 1) return null;
-
-        if (!_extent) {
-            _extent =  entity.extent(context.graph());
-        } else {
-            _extent = _extent.extend(entity.extent(context.graph()));
-        }
-
-        return actionCircularize(entityID, context.projection);
+    function checkActionAllowed(entityID, graph) {
+        const entity = graph.entity(entityID);
+        if (entity.type !== 'way' || new Set(entity.nodes).size <= 1) return false;
+        return true;
     }
 
     var operation = function() {
@@ -32,7 +60,7 @@ export function operationCircularize(context, selectedIDs) {
 
         var combinedAction = function(graph, t) {
             _actions.forEach(function(action) {
-                if (!action.disabled(graph)) {
+                if (!action.disabled?.(graph)) {
                     graph = action(graph, t);
                 }
             });
@@ -49,7 +77,8 @@ export function operationCircularize(context, selectedIDs) {
 
 
     operation.available = function() {
-        return _actions.length && selectedIDs.length === _actions.length;
+        const graph = context.graph();
+        return selectedIDs.length > 0 && selectedIDs.every(id => checkActionAllowed(id, graph));
     };
 
 
@@ -57,17 +86,22 @@ export function operationCircularize(context, selectedIDs) {
     operation.disabled = function() {
         if (!_actions.length) return '';
 
-        var actionDisableds = _actions.map(function(action) {
-            return action.disabled(context.graph());
-        }).filter(Boolean);
+        let graph = context.graph();
+        const actionDisableds = _actions
+            .map(action => {
+                const reason = action.disabled?.(graph);
+                if (typeof reason !== 'string') graph = action(graph);
+                return reason;
+            });
 
-        if (actionDisableds.length === _actions.length) {
+        if (actionDisableds.every(reason => reason === undefined || reason !== false)) {
             // none of the features can be circularized
 
-            if (new Set(actionDisableds).size > 1) {
+            if (new Set(actionDisableds.filter(Boolean)).size > 1) {
                 return 'multiple_blockers';
             }
-            return actionDisableds[0];
+
+            return actionDisableds.filter(Boolean)[0];
         } else if (_extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         } else if (someMissing()) {
@@ -95,11 +129,12 @@ export function operationCircularize(context, selectedIDs) {
 
 
     operation.getAuxiliaryGeometry = function() {
-        const graph = context.graph();
-        return _actions.map((action, idx) => {
-            if (!action.disabled(graph)) {
-                const previewGraph = action(graph, t);
-                const way = previewGraph.hasEntity(selectedIDs[idx]);
+        let previewGraph = context.graph();
+        return _actions.map(action => {
+            if (!action.disabled?.(previewGraph)) {
+                previewGraph = action(previewGraph, t);
+                if (action.id !== 'circularize') return false;
+                const way = previewGraph.hasEntity(action.getWayId());
                 const getPath = svgPath(context.projection, previewGraph, false);
                 return {
                     id: way.id,
