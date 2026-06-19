@@ -5,12 +5,12 @@ import { setTimeout } from 'node:timers/promises';
 describe('iD.serviceNominatim', function() {
     var nominatim;
 
-    before(function() {
+    beforeEach(() => {
         iD.services.geocoder = iD.serviceNominatim;
         fetchMock.reset();
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.geocoder;
     });
 

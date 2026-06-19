@@ -1,12 +1,12 @@
 describe('iD.osmWay', function() {
     var _savedAreaKeys;
 
-    before(function() {
+    beforeEach(() => {
         _savedAreaKeys = iD.osmAreaKeys;
         iD.osmSetAreaKeys({ building: {} });
     });
 
-    after(function() {
+    afterEach(() => {
         iD.osmSetAreaKeys(_savedAreaKeys);
     });
 

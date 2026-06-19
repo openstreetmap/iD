@@ -39,12 +39,12 @@ describe('iD.servicePanoramax', function() {
         }],
     };
 
-    before(function() {
+    beforeEach(() => {
         iD.services.panoramax = iD.servicePanoramax;
         fetchMock.reset();
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.panoramax;
     });
 

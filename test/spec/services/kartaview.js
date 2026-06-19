@@ -6,12 +6,12 @@ describe('iD.serviceKartaview', function() {
     var dimensions = [64, 64];
     var context, kartaview;
 
-    before(function() {
+    beforeEach(() => {
         iD.services.kartaview = iD.serviceKartaview;
         fetchMock.reset();
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.kartaview;
     });
 

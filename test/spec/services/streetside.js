@@ -6,11 +6,11 @@ describe('iD.serviceStreetside', function() {
     var dimensions = [64, 64];
     var context, streetside;
 
-    before(function() {
+    beforeEach(() => {
         iD.services.streetside = iD.serviceStreetside;
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.streetside;
     });
 

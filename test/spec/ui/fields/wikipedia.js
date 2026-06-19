@@ -5,7 +5,7 @@ import { fn } from '@vitest/spy';
 describe('iD.uiFieldWikipedia', function() {
     var entity, context, selection, field;
 
-    before(function() {
+    beforeEach(() => {
         iD.fileFetcher.cache().wmf_sitematrix = [
           ['German','Deutsch','de'],
           ['English','English','en']
@@ -14,7 +14,7 @@ describe('iD.uiFieldWikipedia', function() {
         iD.services.wikidata = iD.serviceWikidata;
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.fileFetcher.cache().wmf_sitematrix;
         delete iD.services.wikipedia;
         delete iD.services.wikidata;

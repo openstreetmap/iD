@@ -1,9 +1,6 @@
-import type { afterEach, beforeEach } from 'vitest';
 declare global {
   declare var iD: typeof import('.');
   declare var d3: typeof import('d3');
-  declare var before: typeof beforeEach;
-  declare var after: typeof afterEach;
   declare var VITEST: true;
 
   declare type EntityID = string;

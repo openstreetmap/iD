@@ -134,9 +134,7 @@ export default tseslint.config(
     languageOptions: {
       globals: {
         ...globals.node,
-        ...globals.jest,
-        'after': 'readonly',
-        'before': 'readonly',
+        ...globals.vitest,
         'd3': 'readonly',
         'expect': 'writable',
         'iD': 'readonly',
