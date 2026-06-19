@@ -218,4 +218,39 @@ describe('iD.svgLines', function () {
             expect(selection.empty()).to.be.true;
         });
     });
+
+    describe('directional-combo-indicator-markers', function() {
+        it('has directional combo indicator markers for active side', function() {
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [50, 0]});
+            var way = iD.osmWay({id: 'directional-way', tags: {highway: 'residential'}, nodes: [a.id, b.id]});
+            var graph = new iD.coreGraph([a, b, way]);
+
+            context.setDirectionalComboIndicator({
+                side: 'right',
+                entityIDs: [way.id]
+            });
+
+            surface.call(iD.svgLines(projection, context), graph, [way], all);
+            var selection = surface.selectAll('g.directional-combo-group > path');
+            expect(selection.size()).to.be.above(0);
+            selection.nodes().forEach(function(node) {
+                expect(node.attributes['marker-mid'].nodeValue)
+                    .to.eql('url(#ideditor-directionalcombo-marker-right)');
+            });
+        });
+
+        it('has no directional combo indicator markers when inactive', function() {
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [50, 0]});
+            var way = iD.osmWay({id: 'directional-way', tags: {highway: 'residential'}, nodes: [a.id, b.id]});
+            var graph = new iD.coreGraph([a, b, way]);
+
+            context.setDirectionalComboIndicator(null);
+
+            surface.call(iD.svgLines(projection, context), graph, [way], all);
+            var selection = surface.selectAll('g.directional-combo-group > path');
+            expect(selection.empty()).to.be.true;
+        });
+    });
 });

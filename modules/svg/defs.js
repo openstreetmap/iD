@@ -2,6 +2,9 @@ import { svg as d3_svg } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
 import { utilArrayUniq } from '../util';
+import {
+    DIRECTIONAL_COMBO_ARROW_DOWN_PATH, DIRECTIONAL_COMBO_ARROW_UP_PATH, DIRECTIONAL_COMBO_ARROW_VIEWBOX
+} from './directional_combo_arrow';
 
 
 /*
@@ -123,6 +126,36 @@ export function svgDefs(context) {
         addBothSidedMarker('cutting', { ...embankmentColors, offset: -1.5 });
         addSidedMarker('cutting-right', { ...embankmentColors, offset: 1.5, style: 'mirrored' });
         addSidedMarker('cutting-left', { ...embankmentColors, offset: -2.5 });
+
+        /**
+         * Adds directional combo indicator marker on one side of a way.
+         * @param {'left' | 'right'} side
+         * @returns {void}
+         */
+        function addDirectionalComboMarker(side) {
+            const gap = 1.4;
+            const pathD = side === 'left' ? DIRECTIONAL_COMBO_ARROW_UP_PATH : DIRECTIONAL_COMBO_ARROW_DOWN_PATH;
+            const refY = side === 'left' ? 2 + gap : -gap;
+            const markerW = 3;
+            const markerH = 6;
+            _defsSelection
+                .append('marker')
+                .attr('id', 'ideditor-directionalcombo-marker-' + side)
+                .attr('viewBox', DIRECTIONAL_COMBO_ARROW_VIEWBOX)
+                .attr('refX', 1)
+                .attr('refY', refY)
+                .attr('markerWidth', markerW)
+                .attr('markerHeight', markerH)
+                .attr('markerUnits', 'strokeWidth')
+                .attr('orient', 'auto')
+                .append('path')
+                .attr('class', 'directionalcombo-marker-path directionalcombo-marker-' + side + '-path')
+                .attr('d', pathD)
+                .attr('stroke', 'none')
+                .attr('fill', '#7092ff');
+        }
+        addDirectionalComboMarker('left');
+        addDirectionalComboMarker('right');
 
         _defsSelection
             .append('marker')

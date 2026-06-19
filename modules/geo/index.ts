@@ -27,6 +27,18 @@ export { geoPolygonContainsPolygon } from './geom.js';
 export { geoPolygonIntersectsPolygon } from './geom.js';
 export { geoViewportEdge } from './geom.js';
 
+export {
+    WAY_STRAIGHTNESS_MAX_SPREAD_DEG,
+    WAY_STRAIGHTNESS_MAX_TORTUOSITY,
+    WAY_STRAIGHTNESS_MAX_TOTAL_TURN_DEG,
+    WAY_STRAIGHTNESS_MAX_TURN_DEG,
+    WAY_STRAIGHTNESS_MIN_VISIBLE_LENGTH,
+    geoPolylineStraightness,
+    geoVisiblePolylineInExtent,
+    geoWayDominantHeadingInViewport,
+    geoWayStraightnessInViewport
+} from './way_viewport_straightness.js';
+
 export { geoRawMercator } from './raw_mercator.js';
 
 export { geoVecAdd } from './vector.js';
