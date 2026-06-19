@@ -140,7 +140,6 @@ export default tseslint.config(
         'd3': 'readonly',
         'expect': 'writable',
         'fetchMock': 'readonly',
-        'happen': 'readonly',
         'iD': 'readonly',
         'jsdom': 'readonly',
         'vi': 'readonly'
