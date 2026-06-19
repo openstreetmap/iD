@@ -139,10 +139,8 @@ export default tseslint.config(
         'before': 'readonly',
         'd3': 'readonly',
         'expect': 'writable',
-        'happen': 'readonly',
         'iD': 'readonly',
         'jsdom': 'readonly',
-        'sinon': 'readonly',
         'vi': 'readonly'
       }
     },
