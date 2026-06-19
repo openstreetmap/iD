@@ -1,5 +1,3 @@
-import type FetchMock from 'fetch-mock';
-
 declare global {
   declare var iD: typeof import('.');
   declare var d3: typeof import('d3');

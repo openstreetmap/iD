@@ -4,7 +4,6 @@ import 'fake-indexeddb/auto';
 import envs from '../config/envs.js';
 
 
-global.fetchMock = fetchMock;
 global.VITEST = true;
 
 // create global variables for this data, to match what the esbuild config does
