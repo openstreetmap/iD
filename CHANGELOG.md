@@ -48,6 +48,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix radio fields being always in single line mode when feature was selected while sidebar was collapsed ([#12454])
 * Fix undo and remove buttons for `multiCombo` fields ([#12406], thanks [@RudyTheDev])
+* Fix a crash when cancelling drawing a line while hovering other features with a `directionalCombo` field ([#12467])
 #### :earth_asia: Localization
 * Improve some edge cases of rendering of mixed right-to-left and left-to-right text ([#8713])
 #### :hourglass: Performance
@@ -64,6 +65,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12449]: https://github.com/openstreetmap/iD/pull/12449
 [#12454]: https://github.com/openstreetmap/iD/issues/12454
 [#12458]: https://github.com/openstreetmap/iD/pull/12458
+[#12467]: https://github.com/openstreetmap/iD/issues/12467
 [@brianstrauch]: https://github.com/brianstrauch
 
 
