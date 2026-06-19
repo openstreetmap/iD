@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Render `highway=track` using different styles depending on the `tracktype` ([#12392], thanks [@RudyTheDev])
+* Add dedicated pattern for `landuse=flowerbed` features ([#12458], thanks [@RudyTheDev])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -62,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12406]: https://github.com/openstreetmap/iD/pull/12406
 [#12449]: https://github.com/openstreetmap/iD/pull/12449
 [#12454]: https://github.com/openstreetmap/iD/issues/12454
+[#12458]: https://github.com/openstreetmap/iD/pull/12458
 [@brianstrauch]: https://github.com/brianstrauch
 
 
