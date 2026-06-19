@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
 import { osmEntity } from '../osm';
-import { osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
+import { osmIsInterestingTag, osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
 import { utilRebind } from '../util/rebind';
 import { utilArrayGroupBy, utilArrayUnion, utilStringQs } from '../util';
 import { isAddressPoint } from '../svg/labels';
@@ -156,12 +156,12 @@ export function rendererFeatures(context) {
             !_rules.pistes.filter(tags);
     });
 
-    defineRule('boundaries', function isBoundary(tags, geometry) {
+    defineRule('boundaries', function isBoundary(tags, geometry, parents) {
         // This rule applies if the object has no interesting tags, and if either:
         //   (a) is a way having a `boundary=*` tag, or
         //   (b) is a relation of `type=boundary`.
         return (
-            (geometry === 'line' && !!tags.boundary) ||
+            (geometry === 'line' && (!!tags.boundary || parents.some(p => p.tags.type === 'boundary'))) ||
             (geometry === 'relation' && tags.type === 'boundary')
         ) && !(
             traffic_roads[tags.highway] ||
@@ -237,8 +237,9 @@ export function rendererFeatures(context) {
     // Lines or areas that don't match another feature filter.
     // IMPORTANT: The 'others' feature must be the last one defined,
     //   so that code in getMatches can skip this test if `hasMatch = true`
-    defineRule('others', function isOther(tags, geometry) {
-        return (geometry === 'line' || geometry === 'area');
+    defineRule('others', function isOther(tags, geometry, parents) {
+        return geometry === 'area' ||
+            geometry === 'line' && (parents.length === 0 || Object.keys(tags).find(k => osmIsInterestingTag(k)));
     });
 
 
@@ -432,35 +433,29 @@ export function rendererFeatures(context) {
             var hasMatch = false;
 
             for (var i = 0; i < _keys.length; i++) {
+                const parents = features.getParents(entity, resolver, geometry);
+
                 if (_keys[i] === 'others') {
                     if (hasMatch) continue;
 
-                    // If an entity...
-                    //   1. is a way that hasn't matched other 'interesting' feature rules,
+                    // If an entity is a way that hasn't matched other 'interesting' feature rules,
+                    // ...then match whatever feature rules the parent relation(s) have matched.
+                    // see #2548, #2887
+                    //
+                    // IMPORTANT:
+                    // For this to work, getMatches must be called on relations before ways.
+                    //
                     if (entity.type === 'way') {
-                        var parents = features.getParents(entity, resolver, geometry);
-
-                        //   2a. belongs only to a single multipolygon relation
-                        if ((parents.length === 1 && parents[0].isMultipolygon()) ||
-                            // 2b. or belongs only to boundary relations
-                            (parents.length > 0 && parents.every(function(parent) { return parent.tags.type === 'boundary'; }))) {
-
-                            // ...then match whatever feature rules the parent relation has matched.
-                            // see #2548, #2887
-                            //
-                            // IMPORTANT:
-                            // For this to work, getMatches must be called on relations before ways.
-                            //
-                            var pkey = osmEntity.key(parents[0]);
+                        for (const parent of parents) {
+                            const pkey = osmEntity.key(parent);
                             if (_cache[pkey] && _cache[pkey].matches) {
-                                matches = Object.assign({}, _cache[pkey].matches);  // shallow copy
-                                continue;
+                                matches = Object.assign(matches, _cache[pkey].matches);
                             }
                         }
                     }
                 }
 
-                if (_rules[_keys[i]].filter(entity.tags, geometry)) {
+                if (_rules[_keys[i]].filter(entity.tags, geometry, parents)) {
                     matches[_keys[i]] = true;
                     hasMatch = true;
                 }
