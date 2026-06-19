@@ -1,4 +1,5 @@
 import { fn } from '@vitest/spy';
+import fetchMock from 'fetch-mock';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.serviceKartaview', function() {

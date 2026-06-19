@@ -1,4 +1,5 @@
 import { fn } from '@vitest/spy';
+import fetchMock from 'fetch-mock';
 import { setTimeout } from 'node:timers/promises';
 import { promisify } from 'node:util';
 import { fakeServer } from 'nise';
