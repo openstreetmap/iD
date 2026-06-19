@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 #### :scissors: Operations
+* Allow circularize operation also when multiple selected ways form a closed loop ([#12457])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Show which field (or tag) produced an _invalid URL_ validation message ([#12449])
@@ -54,6 +55,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12401]: https://github.com/openstreetmap/iD/pull/12401
 [#12449]: https://github.com/openstreetmap/iD/pull/12449
 [#12454]: https://github.com/openstreetmap/iD/issues/12454
+[#12457]: https://github.com/openstreetmap/iD/pull/12457
 [@brianstrauch]: https://github.com/brianstrauch
 
 
