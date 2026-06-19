@@ -1,7 +1,6 @@
 declare global {
   declare var iD: typeof import('.');
   declare var d3: typeof import('d3');
-  declare var fetchMock: FetchMock.FetchMockStatic;
   declare var VITEST: true;
 
   declare type EntityID = string;
