@@ -8,8 +8,8 @@ describe('iD.behaviorSelect', function() {
         var mapNode = context.container().select('.main-map').node();
         var rect = mapNode.getBoundingClientRect();
         var click = { clientX: rect.left, clientY: rect.top };
-        happen.mousedown(el, Object.assign({}, click, o));
-        happen.mouseup(el, Object.assign({}, click, o));
+        el.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, view: jsdom.window, ...click, ...o }));
+        el.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, view: jsdom.window, ...click, ...o }));
     }
 
     beforeEach(function() {
