@@ -1,4 +1,8 @@
-export type FeatureType = 'node' | 'way' | 'relation';
+export type OsmType = 'node' | 'way' | 'relation';
+/**
+ * Combined internal representation of the OSM type and OSM id of an entity.
+ */
+export type EntityId = string;
 
 /**
  * All newly created features need an ID, so this singleton
@@ -13,29 +17,29 @@ class OsmIdManager {
         relation: -1,
     };
 
-    fromOSM(type: FeatureType, id: number) {
+    fromOSM(type: OsmType, id: number): EntityId {
         return type[0] + id;
     }
 
-    toOSM(id: string) {
+    toOSM(id: EntityId): number {
         var match = id.match(/^[cnwr](-?\d+)$/);
         if (match) {
-            return match[1];
+            return +match[1];
         }
-        return '';
+        return NaN;
     }
 
-    type(id: string) {
-        return <FeatureType>(
+    type(id: EntityId): OsmType {
+        return <OsmType>(
             { c: 'changeset', n: 'node', w: 'way', r: 'relation' }[id[0]]
         );
     }
 
-    key(entity: iD.OsmEntity) {
+    key(entity: iD.OsmEntity): string {
         return entity.id + 'v' + (entity.v || 0);
     }
 
-    newId(type: FeatureType) {
+    newId(type: OsmType): EntityId {
         return this.fromOSM(type, this.next[type]--);
     }
 }
