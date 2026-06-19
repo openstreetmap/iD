@@ -38,24 +38,38 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.42.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Display radio field options in a two-column layout if there is insufficient space for them in a single line ([#12455])
+* Render `highway=track` using different styles depending on the `tracktype` ([#12392], thanks [@RudyTheDev])
+* Add dedicated pattern for `landuse=flowerbed` features ([#12458], thanks [@RudyTheDev])
 #### :scissors: Operations
 * Allow circularize operation also when multiple selected ways form a closed loop ([#12457])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Show which field (or tag) produced an _invalid URL_ validation message ([#12449])
+* Fix false positive in oneway road detection when secondary oneway tags (like `piste:type=downhill`) are present ([#8724])
 #### :bug: Bugfixes
 * Fix radio fields being always in single line mode when feature was selected while sidebar was collapsed ([#12454])
+* Fix undo and remove buttons for `multiCombo` fields ([#12406], thanks [@RudyTheDev])
+* Fix a crash when cancelling drawing a line while hovering other features with a `directionalCombo` field ([#12467])
 #### :earth_asia: Localization
+* Improve some edge cases of rendering of mixed right-to-left and left-to-right text ([#8713])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
 * Fix unit tests failing with nodejs v26 ([#12401], thanks [@brianstrauch])
 
+[#8713]: https://github.com/openstreetmap/iD/issues/8713
+[#8724]: https://github.com/openstreetmap/iD/issues/8724
+[#12392]: https://github.com/openstreetmap/iD/pull/12392
 [#12401]: https://github.com/openstreetmap/iD/pull/12401
+[#12406]: https://github.com/openstreetmap/iD/pull/12406
 [#12449]: https://github.com/openstreetmap/iD/pull/12449
 [#12454]: https://github.com/openstreetmap/iD/issues/12454
+[#12455]: https://github.com/openstreetmap/iD/pull/12455
 [#12457]: https://github.com/openstreetmap/iD/pull/12457
+[#12458]: https://github.com/openstreetmap/iD/pull/12458
+[#12467]: https://github.com/openstreetmap/iD/issues/12467
 [@brianstrauch]: https://github.com/brianstrauch
 
 
