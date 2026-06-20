@@ -4044,6 +4044,39 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     margin: 5px;
 }
 
+/* Themes preferences */
+.theme-options-container .theme-pref {
+    margin-bottom: 10px;
+}
+.theme-options-container .theme-select {
+    width: 100%;
+}
+.theme-options-container .theme-upload-input {
+    width: 100%;
+}
+.theme-options-container .theme-uploaded-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+}
+.theme-options-container .theme-uploaded-remove {
+    flex: 0 0 auto;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+/* theme-aware icon color, matching `.form-field-button .icon` */
+.theme-options-container .theme-uploaded-remove .icon {
+    fill: var(--text-color);
+    opacity: 0.5;
+}
+@media (hover: hover) {
+    .theme-options-container .theme-uploaded-remove:hover .icon {
+        opacity: 1;
+    }
+}
+
 .display-control .control-wrap {
     display: flex;
     align-items: center;

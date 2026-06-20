@@ -15,6 +15,7 @@ export { uiSectionRawMemberEditor } from './raw_member_editor';
 export { uiSectionRawMembershipEditor } from './raw_membership_editor';
 export { uiSectionRawTagEditor } from './raw_tag_editor';
 export { uiSectionSelectionList } from './selection_list';
+export { uiSectionThemes } from './themes';
 export { uiSectionValidationIssues } from './validation_issues';
 export { uiSectionValidationOptions } from './validation_options';
 export { uiSectionValidationRules } from './validation_rules';

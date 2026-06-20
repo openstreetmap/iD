@@ -1019,6 +1019,13 @@ en:
     title: Preferences
     description: Preferences
     key: P
+    theme:
+      title: Theme
+      select: Theme
+      default: Default
+      upload: Import a CSS file
+      upload_description: Add a custom theme from a .css file kept in your browser.
+      remove: Remove theme
     privacy:
       title: Privacy
       privacy_link: View the iD privacy policy
