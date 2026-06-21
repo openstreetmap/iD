@@ -2,6 +2,7 @@ import {
     appendThemeTagClasses,
     extractTagKeysFromCss,
     getThemeSecondaryTagKeys,
+    sanitizeThemeCss,
     setThemeSecondaryTagKeys
 } from '../../../modules/core/themes';
 
@@ -60,6 +61,26 @@ describe('theme tag classes', function() {
             const classes = ['tag-cuisine'];
             appendThemeTagClasses(classes, { cuisine: 'pizza' });
             expect(classes).to.eql(['tag-cuisine', 'tag-cuisine-pizza']);
+        });
+    });
+
+    describe('sanitizeThemeCss', function() {
+        // [name, input, expected]
+        const cases = [
+            ['drops @import (quoted)', '@import "evil.css";.a{color:red}', '.a{color:red}'],
+            ['drops @import url()', '@import url(//evil/x);.a{}', '.a{}'],
+            ['neutralizes external url', '.a{background:url(http://evil/x)}', '.a{background:none}'],
+            ['neutralizes quoted external url', '.a{background:url(\'http://e/x\')}', '.a{background:none}'],
+            ['neutralizes protocol-relative url', '.a{background:url(//e/x)}', '.a{background:none}'],
+            ['keeps inline data: url', '.a{background:url(data:image/png;base64,AAAA)}', '.a{background:url(data:image/png;base64,AAAA)}'],
+            ['leaves plain css untouched', '.a{color:red}', '.a{color:red}'],
+            ['non-string returns empty', null, '']
+        ];
+
+        cases.forEach(function([name, input, expected]) {
+            it(name, function() {
+                expect(sanitizeThemeCss(input)).to.equal(expected);
+            });
         });
     });
 

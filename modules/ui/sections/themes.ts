@@ -81,6 +81,9 @@ export function uiSectionThemes(context: any) {
         uploadEnter.append('div')
             .attr('class', 'editing-option-description')
             .call(t.append('preferences.theme.upload_description'));
+        uploadEnter.append('div')
+            .attr('class', 'editing-option-description theme-upload-warning')
+            .call(t.append('preferences.theme.upload_warning'));
 
         container = containerEnter.merge(container);
 

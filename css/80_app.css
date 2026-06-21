@@ -4066,6 +4066,9 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     border: none;
     padding: 0;
 }
+.theme-options-container .theme-upload-warning {
+    color: var(--warning-text, #d97706);
+}
 /* theme-aware icon color, matching `.form-field-button .icon` */
 .theme-options-container .theme-uploaded-remove .icon {
     fill: var(--text-color);

@@ -1025,6 +1025,7 @@ en:
       default: Default
       upload: Import a CSS file
       upload_description: Add a custom theme from a .css file kept in your browser.
+      upload_warning: Only import themes from sources you trust. A theme's CSS can change the editor's appearance.
       remove: Remove theme
     privacy:
       title: Privacy
