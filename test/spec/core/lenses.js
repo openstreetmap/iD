@@ -1,15 +1,15 @@
 import {
-    appendThemeTagClasses,
+    appendLensTagClasses,
     extractTagKeysFromCss,
-    getThemeSecondaryTagKeys,
-    sanitizeThemeCss,
-    setThemeSecondaryTagKeys
-} from '../../../modules/core/themes';
+    getLensSecondaryTagKeys,
+    sanitizeLensCss,
+    setLensSecondaryTagKeys
+} from '../../../modules/core/lenses';
 
-describe('theme tag classes', function() {
+describe('lens tag classes', function() {
 
     afterEach(function() {
-        setThemeSecondaryTagKeys([]);
+        setLensSecondaryTagKeys([]);
     });
 
     describe('extractTagKeysFromCss', function() {
@@ -35,8 +35,8 @@ describe('theme tag classes', function() {
         });
     });
 
-    describe('appendThemeTagClasses', function() {
-        // [name, theme keys, tags, expected appended classes]
+    describe('appendLensTagClasses', function() {
+        // [name, lens keys, tags, expected appended classes]
         const cases = [
             ['plain key', ['cuisine'], { cuisine: 'pizza' }, ['tag-cuisine', 'tag-cuisine-pizza']],
             ['colon real key matches _ class', ['piste_type'], { 'piste:type': 'downhill' }, ['tag-piste_type', 'tag-piste_type-downhill']],
@@ -44,27 +44,27 @@ describe('theme tag classes', function() {
             ['mixed : and _', ['piste_type_for_x'], { 'piste:type_for_x': 'a' }, ['tag-piste_type_for_x', 'tag-piste_type_for_x-a']],
             ['value no is skipped', ['tunnel'], { tunnel: 'no' }, []],
             ['key absent', ['cuisine'], { amenity: 'cafe' }, []],
-            ['no theme keys', [], { cuisine: 'pizza' }, []]
+            ['no lens keys', [], { cuisine: 'pizza' }, []]
         ];
 
         cases.forEach(function([name, keys, tags, expected]) {
             it(name, function() {
-                setThemeSecondaryTagKeys(keys);
+                setLensSecondaryTagKeys(keys);
                 const classes = [];
-                appendThemeTagClasses(classes, tags);
+                appendLensTagClasses(classes, tags);
                 expect(classes).to.eql(expected);
             });
         });
 
         it('does not duplicate classes already present', function() {
-            setThemeSecondaryTagKeys(['cuisine']);
+            setLensSecondaryTagKeys(['cuisine']);
             const classes = ['tag-cuisine'];
-            appendThemeTagClasses(classes, { cuisine: 'pizza' });
+            appendLensTagClasses(classes, { cuisine: 'pizza' });
             expect(classes).to.eql(['tag-cuisine', 'tag-cuisine-pizza']);
         });
     });
 
-    describe('sanitizeThemeCss', function() {
+    describe('sanitizeLensCss', function() {
         // [name, input, expected]
         const cases = [
             ['drops @import (quoted)', '@import "evil.css";.a{color:red}', '.a{color:red}'],
@@ -79,17 +79,17 @@ describe('theme tag classes', function() {
 
         cases.forEach(function([name, input, expected]) {
             it(name, function() {
-                expect(sanitizeThemeCss(input)).to.equal(expected);
+                expect(sanitizeLensCss(input)).to.equal(expected);
             });
         });
     });
 
-    describe('set/getThemeSecondaryTagKeys', function() {
+    describe('set/getLensSecondaryTagKeys', function() {
         it('round-trips and resets', function() {
-            setThemeSecondaryTagKeys(['a', 'b', 'a']);
-            expect(getThemeSecondaryTagKeys().sort()).to.eql(['a', 'b']);
-            setThemeSecondaryTagKeys([]);
-            expect(getThemeSecondaryTagKeys()).to.eql([]);
+            setLensSecondaryTagKeys(['a', 'b', 'a']);
+            expect(getLensSecondaryTagKeys().sort()).to.eql(['a', 'b']);
+            setLensSecondaryTagKeys([]);
+            expect(getLensSecondaryTagKeys()).to.eql([]);
         });
     });
 });

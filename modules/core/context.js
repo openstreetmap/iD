@@ -11,7 +11,7 @@ import { t } from '../core/localizer';
 import { fileFetcher } from './file_fetcher';
 import { localizer } from './localizer';
 import { prefs } from './preferences';
-import { applyTheme, THEME_PREF, UPLOADED_THEMES_PREF } from './themes';
+import { applyLens, LENS_PREF, UPLOADED_LENSES_PREF } from './lenses';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
@@ -620,15 +620,15 @@ export function coreContext() {
       _validator.init();
       _features.init();
 
-      // apply the active CSS theme (injected CSS + tag classes), and re-apply +
-      // redraw whenever the selected theme or the stored themes change
-      applyTheme();
-      function onThemeChange() {
-        applyTheme();
+      // apply the active CSS lens (injected CSS + tag classes), and re-apply +
+      // redraw whenever the selected lens or the stored lenses change
+      applyLens();
+      function onLensChange() {
+        applyLens();
         if (_map) _map.pan([0, 0]);   // force a redraw so classes are recomputed
       }
-      prefs.onChange(THEME_PREF, onThemeChange);
-      prefs.onChange(UPLOADED_THEMES_PREF, onThemeChange);
+      prefs.onChange(LENS_PREF, onLensChange);
+      prefs.onChange(UPLOADED_LENSES_PREF, onLensChange);
 
       // Migrate history data from localStorage to IndexedDB
       _history.migrateHistoryData();
