@@ -148,10 +148,6 @@ export function uiFieldCombo(field, context) {
         });
         if (found) return found.key;
 
-        if (field.type === 'typeCombo' && !dval) {
-            return 'yes';
-        }
-
         return restrictTagValueSpelling(dval) || undefined;
     }
 
