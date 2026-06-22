@@ -880,6 +880,14 @@ en:
       title: Show Measurement Panel
       tooltip: Show geometry values for the selection.
     style_options: Style Options
+    lens:
+      title: Lens
+      select: Lens
+      default: Default
+      upload: Import a CSS file
+      upload_description: Add a custom lens from a .css file kept in your browser.
+      upload_warning: Only import lenses from sources you trust. A lens's CSS can change the editor's appearance.
+      remove: Remove lens
     highlight_edits:
       key: G
     map_features: Map Features
@@ -1019,14 +1027,6 @@ en:
     title: Preferences
     description: Preferences
     key: P
-    lens:
-      title: Lens
-      select: Lens
-      default: Default
-      upload: Import a CSS file
-      upload_description: Add a custom lens from a .css file kept in your browser.
-      upload_warning: Only import lenses from sources you trust. A lens's CSS can change the editor's appearance.
-      remove: Remove lens
     privacy:
       title: Privacy
       privacy_link: View the iD privacy policy

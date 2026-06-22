@@ -15,7 +15,7 @@ import {
 } from '../../core/lenses';
 
 /**
- * Preferences section to pick a UI lens: the built-in default, or a CSS file
+ * Map data section to pick a UI lens: the built-in default, or a CSS file
  * imported by the user (kept in localStorage). Selecting a lens injects its CSS
  * and applies its tag-based styling to the map.
  *
@@ -26,13 +26,13 @@ export function uiSectionLenses(context: any) {
 
     // uiSection is authored in JS; its fluent setters are added dynamically and
     // are not visible to TS, hence the `any`.
-    const section: any = (uiSection('preferences-lenses', context) as any)
-        .label(() => t.append('preferences.lens.title'))
+    const section: any = (uiSection('map-data-lenses', context) as any)
+        .label(() => t.append('map_data.lens.title'))
         .disclosureContent(renderDisclosureContent);
 
     /** Display label for a lens entry (the built-in one is localized). */
     function lensLabel(entry: LensEntry): string {
-        return entry.source === 'default' ? t('preferences.lens.default') : (entry.name || entry.id);
+        return entry.source === 'default' ? t('map_data.lens.default') : (entry.name || entry.id);
     }
 
     /** Read the selected CSS file, store it as a lens and select it. */
@@ -63,7 +63,7 @@ export function uiSectionLenses(context: any) {
         const pickerEnter = containerEnter.append('div').attr('class', 'lens-pref');
         pickerEnter.append('label')
             .attr('class', 'lens-select-label')
-            .call(t.append('preferences.lens.select'));
+            .call(t.append('map_data.lens.select'));
         pickerEnter.append('select')
             .attr('class', 'lens-select')
             .on('change', function(this: HTMLSelectElement) { setSelectedLensId(this.value); });
@@ -72,7 +72,7 @@ export function uiSectionLenses(context: any) {
         const uploadEnter = containerEnter.append('div').attr('class', 'lens-pref lens-upload');
         uploadEnter.append('label')
             .attr('class', 'lens-upload-label')
-            .call(t.append('preferences.lens.upload'));
+            .call(t.append('map_data.lens.upload'));
         uploadEnter.append('input')
             .attr('type', 'file')
             .attr('class', 'lens-upload-input')
@@ -80,10 +80,10 @@ export function uiSectionLenses(context: any) {
             .on('change', onUploadFile);
         uploadEnter.append('div')
             .attr('class', 'editing-option-description')
-            .call(t.append('preferences.lens.upload_description'));
+            .call(t.append('map_data.lens.upload_description'));
         uploadEnter.append('div')
             .attr('class', 'editing-option-description lens-upload-warning')
-            .call(t.append('preferences.lens.upload_warning'));
+            .call(t.append('map_data.lens.upload_warning'));
 
         container = containerEnter.merge(container);
 
@@ -119,7 +119,7 @@ export function uiSectionLenses(context: any) {
         itemsEnter.append('span').attr('class', 'lens-uploaded-name');
         itemsEnter.append('button')
             .attr('class', 'lens-uploaded-remove')
-            .attr('title', () => t('preferences.lens.remove'))
+            .attr('title', () => t('map_data.lens.remove'))
             .on('click', (_d3_event: any, d: any) => removeUploadedLens(d.id))
             .call(svgIcon('#iD-operation-delete'));
 
