@@ -37,7 +37,7 @@ export function buildCSS() {
           ])
           .process(css, { from: 'dist/iD.css', to: 'dist/iD.css' });
       })
-      .then(result => fs.writeFileSync('dist/iD.css', result.css))
+      .then(result => fs.writeFileSync('dist/iD.css', wrapInCascadeLayer(result.css)))
       .then(() => {
         console.timeEnd(END);
         console.log('');
@@ -49,6 +49,20 @@ export function buildCSS() {
         _currBuild = null;
         process.exit(1);
       });
+}
+
+
+// Wrap all core CSS in a named cascade layer so user-provided "lens" CSS, which
+// is injected outside any layer, always wins regardless of selector specificity
+// (unlayered styles beat layered ones). `@charset`, if present, must stay first.
+function wrapInCascadeLayer(css) {
+  let prefix = '';
+  const charset = css.match(/^@charset[^;]+;\s*/);
+  if (charset) {
+    prefix = charset[0];
+    css = css.slice(charset[0].length);
+  }
+  return `${prefix}@layer ideditor {\n${css}\n}\n`;
 }
 
 

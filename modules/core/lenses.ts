@@ -225,6 +225,11 @@ const LENS_STYLE_ELEMENT_ID = 'id-lens-css';
  * Inject the active lens's CSS into a dedicated <style> in the document head
  * (created on first use). Switching lenses replaces its content, so the previous
  * lens's rules are dropped. No-op outside a browser (e.g. tests without a DOM).
+ *
+ * The CSS is injected as-is, outside any cascade layer. Core styles are wrapped
+ * in `@layer ideditor` at build time (see scripts/build_css.js), and unlayered
+ * rules always beat layered ones, so a lens overrides core styling at any
+ * specificity — no `!important` and no selector-specificity juggling needed.
  */
 export function injectLensCss(): void {
     if (typeof document === 'undefined') return;
