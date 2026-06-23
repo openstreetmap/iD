@@ -54,7 +54,7 @@ export function osmRemoveLifecyclePrefix(key: TagKey): TagKey {
     return key;
 }
 
-export var osmAreaKeys: TagDictionary<true> = {};
+export let osmAreaKeys: TagDictionary<true> = {};
 export function osmSetAreaKeys(value: TagDictionary<true>): void {
     osmAreaKeys = value;
 }
@@ -64,7 +64,7 @@ export function osmSetAreaKeys(value: TagDictionary<true>): void {
 // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
 // similarly, some tags are both used as a primary key for area features,
 // but also as an attribute tag for linear features (e.g. `emergency=yes`)
-export var osmAreaKeysExceptions: TagDictionary<boolean> = {
+export const osmAreaKeysExceptions: TagDictionary<boolean> = {
     highway: {
         elevator: true,
         rest_area: true,
@@ -121,20 +121,20 @@ export function osmTagSuggestingArea(tags: Tags): Tags | null {
     return null;
 }
 
-export var osmLineTags: TagDictionary<true> = {};
+export let osmLineTags: TagDictionary<true> = {};
 export function osmSetLineTags(value: TagDictionary<true>): void {
     osmLineTags = value;
 }
 
 // Tags that indicate a node can be a standalone point
 // e.g. { amenity: { bar: true, parking: true, ... } ... }
-export var osmPointTags: TagDictionary<true> = {};
+export let osmPointTags: TagDictionary<true> = {};
 export function osmSetPointTags(value: TagDictionary<true>): void {
     osmPointTags = value;
 }
 // Tags that indicate a node can be part of a way
 // e.g. { amenity: { parking: true, ... }, highway: { stop: true ... } ... }
-export var osmVertexTags: TagDictionary<true> = {};
+export let osmVertexTags: TagDictionary<true> = {};
 export function osmSetVertexTags(value: TagDictionary<true>): void {
     osmVertexTags = value;
 }
@@ -240,7 +240,7 @@ export const osmOneWayTags = merge(
 );
 
 // solid and smooth surfaces akin to the assumed default road surface in OSM
-export var osmPavedTags: TagDictionary<boolean> = {
+export const osmPavedTags: TagDictionary<boolean> = {
     'surface': {
         'paved': true,
         'asphalt': true,
@@ -256,7 +256,7 @@ export var osmPavedTags: TagDictionary<boolean> = {
 };
 
 // solid, if somewhat uncommon surfaces with a high range of smoothness
-export var osmSemipavedTags: TagDictionary<boolean> = {
+export const osmSemipavedTags: TagDictionary<boolean> = {
     'surface': {
         'bricks': true,
         'cobblestone': true,
@@ -271,7 +271,20 @@ export var osmSemipavedTags: TagDictionary<boolean> = {
     }
 };
 
-export var osmRightSideIsInsideTags: TagDictionary<true | string> = {
+/**
+ * `true` means that the right side of the way is representing the "interesting"
+ * side of the feature, e.g.:
+ *   - the face of a cliff
+ *   - the steep side of a retaining wall
+ *   - the road side of a kerb
+ *   - the downstream side of a weir
+ * strings indicate special cases:
+ *   - coastlines have the land on the right hand side, but we want to mark the ocean
+ *   - guard rails have the road on the right, but we use dedicated markers that represent the posts of the guard rail
+ *   - embankments can be on either or (typically) both sides of a road  or railway
+ *   - cuttings (see embankments, and they also) use inverted triangles as markers
+ */
+export const osmSidednessTags: TagDictionary<true | string> = {
     'natural': {
         'cliff': true,
         'coastline': 'coastline'
@@ -283,17 +296,30 @@ export var osmRightSideIsInsideTags: TagDictionary<true | string> = {
         'city_wall': true,
     },
     'man_made': {
-        'embankment': true,
+        'embankment': 'embankment-man_made',
         'quay': true
     },
     'waterway': {
         'weir': true
-    }
+    },
+    'cutting': {
+        'yes': 'cutting',
+        'both': 'cutting',
+        'left': 'cutting-left',
+        'right': 'cutting-right'
+    },
+    'embankment': {
+        'yes': 'embankment',
+        'dyke': 'embankment',
+        'both': 'embankment',
+        'left': 'embankment-left',
+        'right': 'embankment-right'
+    },
 };
 
 // "highway" tag values for pedestrian or vehicle right-of-ways that make up the routable network
 // (does not include `raceway`)
-export var osmRoutableHighwayTagValues: Record<TagValue, true> = {
+export const osmRoutableHighwayTagValues: Record<TagValue, true> = {
     motorway: true, trunk: true, primary: true, secondary: true, tertiary: true, residential: true,
     motorway_link: true, trunk_link: true, primary_link: true, secondary_link: true, tertiary_link: true,
     unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true, busway: true,
@@ -304,24 +330,24 @@ export const osmRoutableAerowayTags: Record<TagValue, true> = {
     runway: true, taxiway: true
 };
 // "highway" tag values that generally do not allow motor vehicles
-export var osmPathHighwayTagValues: Record<TagValue, true> = {
+export const osmPathHighwayTagValues: Record<TagValue, true> = {
     path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true, ladder: true
 };
 
 // "railway" tag values representing existing railroad tracks (purposely does not include 'abandoned')
-export var osmRailwayTrackTagValues: Record<TagValue, true> = {
+export const osmRailwayTrackTagValues: Record<TagValue, true> = {
     rail: true, light_rail: true, tram: true, subway: true,
     monorail: true, funicular: true, miniature: true, narrow_gauge: true,
     disused: true, preserved: true
 };
 
 // "waterway" tag values for line features representing water flow
-export var osmFlowingWaterwayTagValues: Record<string, true> = {
-    canal: true, ditch: true, drain: true, fish_pass: true, flowline: true, river: true, stream: true, tidal_channel: true
+export const osmFlowingWaterwayTagValues: Record<string, true> = {
+    canal: true, ditch: true, drain: true, fish_pass: true, flowline: true, river: true, stream: true, tidal_channel: true, pressurised: true
 };
 
 // Tag values that represent actual land use (areas)
-export var osmLanduseTags: Record<TagKey, Record<TagValue, true> | true> = {
+export const osmLanduseTags: Record<TagKey, Record<TagValue, true> | true> = {
     'amenity': {
         'bicycle_parking': true,
         'college': true,
@@ -400,7 +426,7 @@ export function osmShouldRenderDirection(vertexTags: Tags, wayTags: Tags): boole
     return true;
 }
 
-export var osmSummableTags: Set<TagKey> = new Set([
+export const osmSummableTags: Set<TagKey> = new Set([
     'step_count',
     'parking:both:capacity',
     'parking:left:capacity',

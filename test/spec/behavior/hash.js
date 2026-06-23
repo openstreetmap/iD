@@ -1,4 +1,5 @@
 import { setTimeout } from 'node:timers/promises';
+import { fn } from '@vitest/spy';
 
 describe('iD.behaviorHash', function () {
 
@@ -80,10 +81,23 @@ describe('iD.behaviorHash', function () {
 
     it('accepts default changeset comment as hash parameter', function () {
         window.location.hash = '#comment=foo+bar%20%2B1';
-        var container = d3.select(document.createElement('div'));
-        context = iD.coreContext().assetPath('../dist/').init().container(container);
+        const container = d3.select(document.createElement('div'));
+        const context = iD.coreContext().assetPath('../dist/').init().container(container);
         iD.behaviorHash(context);
         expect(context.defaultChangesetComment()).to.eql('foo bar +1');
-        hash.off();
+    });
+
+    it('dispatches a (throttled) change event', async () => {
+        await setTimeout(100); // wait a bit to let previous tests settle down
+        const spy = fn();
+        hash();
+        hash.on('change', spy);
+        context.map().center([45.98, 7.66]);
+        await setTimeout(10);
+        // too little time passed -> no event yet
+        expect(spy).to.have.not.been.called;
+        await setTimeout(600);
+        // enough time has passed -> event should have been triggered
+        expect(spy).to.have.been.called;
     });
 });

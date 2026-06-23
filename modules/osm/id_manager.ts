@@ -31,6 +31,7 @@ class OsmIdManager {
         );
     }
 
+    /** A function suitable for use as the second argument to d3.selection#data(). */
     key(entity: iD.OsmEntity) {
         return entity.id + 'v' + (entity.v || 0);
     }

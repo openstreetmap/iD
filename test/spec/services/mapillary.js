@@ -3,11 +3,11 @@ describe('iD.serviceMapillary', function() {
     var context, mapillary;
 
 
-    before(function() {
+    beforeEach(() => {
         iD.services.mapillary = iD.serviceMapillary;
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.mapillary;
     });
 

@@ -3,7 +3,7 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 import { geoExtent, geoVecCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
-import { osmTagSuggestingArea, osmRightSideIsInsideTags, osmRemoveLifecyclePrefix, osmOneWayBiDirectionalTags, osmOneWayBackwardTags, osmOneWayForwardTags, osmOneWayTags } from './tags';
+import { osmTagSuggestingArea, osmSidednessTags, osmRemoveLifecyclePrefix, osmOneWayBiDirectionalTags, osmOneWayBackwardTags, osmOneWayForwardTags, osmOneWayTags } from './tags';
 import { utilArrayUniq, utilCheckTagDictionary } from '../util';
 import { osmIdManager } from './id_manager';
 
@@ -176,15 +176,15 @@ const prototype = {
         for (const realKey in this.tags) {
             const value = this.tags[realKey];
             const key = osmRemoveLifecyclePrefix(realKey);
-            if (key in osmRightSideIsInsideTags && (value in osmRightSideIsInsideTags[key])) {
-                if (osmRightSideIsInsideTags[key][value] === true) {
+            if (key in osmSidednessTags && (value in osmSidednessTags[key])) {
+                if (osmSidednessTags[key][value] === true) {
                     return key;
                 } else {
                     // if the map's value is something other than a
                     // literal true, we should use it so we can
                     // special case some keys (e.g. natural=coastline
                     // is handled differently to other naturals).
-                    return osmRightSideIsInsideTags[key][value];
+                    return osmSidednessTags[key][value];
                 }
             }
         }
