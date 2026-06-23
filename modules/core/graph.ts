@@ -1,4 +1,4 @@
-import { debug, type EntityId } from '../index';
+import { debug, type EntityId, type NodeId, type RelationId, type WayId } from '../index';
 import type { osmNode } from '../osm/node';
 import type { osmRelation } from '../osm/relation';
 import type { osmWay } from '../osm/way';
@@ -31,10 +31,18 @@ export class coreGraph {
     this.frozen = !mutable;
   }
 
+    hasEntity(id: NodeId): osmNode | undefined;
+    hasEntity(id: WayId): osmWay | undefined;
+    hasEntity(id: RelationId): osmRelation | undefined;
+    hasEntity<T extends iD.OsmEntity>(id: EntityId): T | undefined;
     hasEntity<T extends iD.OsmEntity>(id: EntityId) {
         return this.entities[id] as T | undefined;
     }
 
+    entity(id: NodeId): osmNode;
+    entity(id: WayId): osmWay;
+    entity(id: RelationId): osmRelation;
+    entity<T extends iD.OsmEntity>(id: EntityId): T;
     entity<T extends iD.OsmEntity>(id: EntityId) {
         var entity = this.entities[id];
 

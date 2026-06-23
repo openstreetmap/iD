@@ -8,7 +8,6 @@ import { utilArrayUniq, utilCheckTagDictionary } from '../util';
 import { OsmAbstractEntity, type OsmEntityProps } from './abstract-entity';
 import type { TagDictionary } from '../util/object';
 import type { coreGraph } from '../core/graph';
-import type { osmNode } from './node';
 import { osmIdManager, type ChangesetId, type NodeId, type WayId } from './id_manager';
 import { debug } from '..';
 
@@ -264,8 +263,8 @@ export class osmWay extends OsmAbstractEntity {
     // returns an array of objects representing the segments between the nodes in this way
     segments(graph: coreGraph) {
         const segmentExtent = (graph: coreGraph) => {
-            var n1 = graph.hasEntity<osmNode>(this.nodes[0]);
-            var n2 = graph.hasEntity<osmNode>(this.nodes[1]);
+            var n1 = graph.hasEntity(this.nodes[0]);
+            var n2 = graph.hasEntity(this.nodes[1]);
             return n1 && n2 && geoExtent([
                 [
                     Math.min(n1.loc[0], n2.loc[0]),

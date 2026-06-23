@@ -5,7 +5,7 @@ import { asyncPrefs, prefs } from './preferences';
 import { coreDifference } from './difference';
 import { coreGraph } from './graph';
 import { coreTree } from './tree';
-import type { EntityId, OsmEntity } from '../osm';
+import type { EntityId, OsmEntity, WayId } from '../osm';
 import { createEntity, osmIdManager  } from '../osm';
 import { uiLoading } from '../ui/loading';
 import {
@@ -16,15 +16,15 @@ import type { geoExtent } from '../geo';
 import { EventDispatcher } from '../util/class';
 import type { Vec2 } from '../geo/vector';
 
-export interface Action {
-    (graph: coreGraph, t?: number | null): coreGraph
+export interface Action<T = never> {
+    (graph: coreGraph, t?: number | null, extraData?: T): coreGraph
     id?: string;
-    getWayId?(): EntityId;
+    getWayId?(): WayId;
     disabled?(graph: coreGraph): string | false | undefined;
     transitionable?: boolean;
 
     copies?(): Record<string, OsmEntity>;
-    useLongAxis?: GetSet<Action, boolean>;
+    useLongAxis?: GetSet<this, boolean>;
     getReflectAxis?(graph: coreGraph): Vec2[];
 }
 

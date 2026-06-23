@@ -179,7 +179,7 @@ export class osmNode extends OsmAbstractEntity {
                 // the turnout side tag is only meaningfully defined for switches with 3 branches - one incoming and two outgoing
                 if (ids.length !== 3) return;
 
-                ids.forEach(id => branchVectors[id] = geoVecNormalize(geoVecSubtract(projection(resolver.entity<osmNode>(id).loc), projection(this.loc))));
+                ids.forEach(id => branchVectors[id] = geoVecNormalize(geoVecSubtract(projection(resolver.entity(id).loc), projection(this.loc))));
 
                 const sortedIds = ids.map(id => {
                     const otherVectorSum = ids

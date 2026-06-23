@@ -315,6 +315,7 @@ export function coreContext() {
 
 
   /* Graph */
+  /** @type {import('./graph').coreGraph['hasEntity']} */
   context.hasEntity = (id) => _history.graph().hasEntity(id);
   /** @type {import('./graph').coreGraph['entity']} */
   context.entity = (id) => _history.graph().entity(id);

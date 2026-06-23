@@ -656,7 +656,7 @@ export function utilCompareIDs(left: EntityID, right: EntityID): number {
 // Database IDs (with positive numbers) before editor ones (with negative numbers).
 // Among each category, the closest number to 0 is the oldest.
 // Test IDs (any string that does not conform to OSM's ID scheme) are taken last.
-export function utilOldestID(ids: EntityID[]): EntityID | undefined {
+export function utilOldestID<T extends EntityID>(ids: T[]): T | undefined {
     if (ids.length === 0) {
         return undefined;
     }
