@@ -556,15 +556,17 @@ export function utilWrap(index: number, length: number): number {
 }
 
 
+export type Functor<T> = (...args: any[]) => T;
 /**
  * a replacement for functor
  *
  * @param value any value
  * @returns a function that returns that value or the value if it's a function
  */
-export function utilFunctor<T>(value: T | (() => T)): () => T {
-    if (typeof value === 'function') return value as (() => T);
-    return () => value;
+export function utilFunctor<T>(value: T | Functor<T>): Functor<T> {
+    if (typeof value === 'function') return value as Functor<T>;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    return (..._args: any[]) => value;
 }
 
 

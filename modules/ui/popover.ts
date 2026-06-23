@@ -1,104 +1,125 @@
 import { select as d3_select } from 'd3-selection';
-import { utilFunctor } from '../util/util';
+import { utilFunctor, type Functor } from '../util/util';
 
-var _popoverID = 0;
+let _popoverID = 0;
+const MIN_MARGIN = 10;
 
-export function uiPopover(klass) {
-    var _id = _popoverID++;
-    var _anchorSelection = d3_select(null);
-    var popover = function(selection) {
-        _anchorSelection = selection;
-        selection.each(setup);
-    };
-    var _animation = utilFunctor(false);
-    var _placement = utilFunctor('top'); // top, bottom, left, right
-    var _alignment = utilFunctor('center');  // leading, center, trailing
-    var _scrollContainer = utilFunctor(d3_select(null));
-    var _content;
-    var _displayType = utilFunctor('');
-    var _hasArrow = utilFunctor(true);
+// use pointer events on supported platforms; fallback to mouse events
+const _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
-    // use pointer events on supported platforms; fallback to mouse events
-    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+export class uiPopover {
+    private _id = _popoverID++;
+    private klass: string;
 
-    popover.displayType = function(val) {
+    private _anchorSelection: d3.Selection<HTMLElement> = d3_select(null!);
+    private _animation: Functor<boolean> = utilFunctor(false);
+    private _placement: Functor<string> = utilFunctor('top'); // top, bottom, left, right
+    private _alignment: Functor<string> = utilFunctor('center');  // leading, center, trailing
+    private _scrollContainer: Functor<d3.Selection<HTMLElement>> = utilFunctor(d3_select(null!));
+    private _content : Functor<(selection: d3.Selection<HTMLElement>) => void> = () => () => {};
+    private _displayType: Functor<string> = utilFunctor('');
+    private _hasArrow: Functor<boolean> = utilFunctor(true);
+
+    constructor(klass?: string) {
+        this.klass = klass || '';
+    }
+
+    render(selection: d3.Selection<HTMLElement>) {
+        this._anchorSelection = selection;
+        selection.each(this.setup);
+    }
+
+    displayType(): Functor<string>;
+    displayType(val: string | Functor<string>): this;
+    displayType(val?: string | Functor<string>) {
         if (arguments.length) {
-            _displayType = utilFunctor(val);
-            return popover;
+            this._displayType = utilFunctor(val!);
+            return this;
         } else {
-            return _displayType;
+            return this._displayType;
         }
-    };
+    }
 
-    popover.hasArrow = function(val) {
+    hasArrow(): Functor<boolean>;
+    hasArrow(val: boolean | Functor<boolean>): this;
+    hasArrow(val?: boolean | Functor<boolean>) {
         if (arguments.length) {
-            _hasArrow = utilFunctor(val);
-            return popover;
+            this._hasArrow = utilFunctor(val!);
+            return this;
         } else {
-            return _hasArrow;
+            return this._hasArrow;
         }
-    };
+    }
 
-    popover.placement = function(val) {
+    placement(): Functor<string>;
+    placement(val: string | Functor<string>): this;
+    placement(val?: string | Functor<string>) {
         if (arguments.length) {
-            _placement = utilFunctor(val);
-            return popover;
+            this._placement = utilFunctor(val!);
+            return this;
         } else {
-            return _placement;
+            return this._placement;
         }
-    };
+    }
 
-    popover.alignment = function(val) {
+    alignment(): Functor<string>;
+    alignment(val: string | Functor<string>): this;
+    alignment(val?: string | Functor<string>) {
+        if (val !== undefined) {
+            this._alignment = utilFunctor(val);
+            return this;
+        } else {
+            return this._alignment;
+        }
+    }
+
+    scrollContainer(): Functor<d3.Selection<HTMLElement>>;
+    scrollContainer(val: d3.Selection<HTMLElement> | Functor<d3.Selection<HTMLElement>>): this;
+    scrollContainer(val?: d3.Selection<HTMLElement> | Functor<d3.Selection<HTMLElement>>) {
         if (arguments.length) {
-            _alignment = utilFunctor(val);
-            return popover;
+            this._scrollContainer = utilFunctor(val!);
+            return this;
         } else {
-            return _alignment;
+            return this._scrollContainer;
         }
-    };
+    }
 
-    popover.scrollContainer = function(val) {
+    content(): Functor<(selection: d3.Selection<HTMLElement>) => void>;
+    content(val: Functor<(selection: d3.Selection<HTMLElement>) => void>): this;
+    content(val?: Functor<(selection: d3.Selection<HTMLElement>) => void>) {
         if (arguments.length) {
-            _scrollContainer = utilFunctor(val);
-            return popover;
+            this._content = val!;
+            return this;
         } else {
-            return _scrollContainer;
+            return this._content;
         }
-    };
+    }
 
-    popover.content = function(val) {
-        if (arguments.length) {
-            _content = val;
-            return popover;
-        } else {
-            return _content;
-        }
-    };
-
-    popover.isShown = function() {
-        var popoverSelection = _anchorSelection.select('.popover-' + _id);
+    isShown(): boolean {
+        const popoverSelection = this._anchorSelection.select('.popover-' + this._id);
         return !popoverSelection.empty() && popoverSelection.classed('in');
-    };
+    }
 
-    popover.show = function() {
-        _anchorSelection.each(show);
-    };
+    show(): void {
+        if (this._anchorSelection.empty()) return;
+        this._anchorSelection.each(show);
+    }
 
-    popover.updateContent = function() {
-        _anchorSelection.each(updateContent);
-    };
+    updateContent(): void {
+        this._anchorSelection.each(updateContent);
+    }
 
-    popover.hide = function() {
-        _anchorSelection.each(hide);
-    };
+    hide(): void {
+        this._anchorSelection.each(hide);
+    }
 
-    popover.toggle = function() {
-        _anchorSelection.each(toggle);
-    };
+    toggle(): void {
+        this._anchorSelection.each(toggle);
+    }
 
-    popover.destroy = function(selection, selector) {
+    destroy(selection: d3.Selection<HTMLElement>, selector?: string): void {
         // by default, just destroy the current popover
-        selector = selector || '.popover-' + _id;
+        selector = selector || '.popover-' + this._id;
 
         selection
             .on(_pointerPrefix + 'enter.popover', null)
@@ -114,32 +135,32 @@ export function uiPopover(klass) {
             .attr('data-original-title', null)
             .selectAll(selector)
             .remove();
-    };
+    }
 
+    destroyAny(selection: d3.Selection<HTMLElement>) {
+        selection.call(this.destroy, '.popover');
+    }
 
-    popover.destroyAny = function(selection) {
-        selection.call(popover.destroy, '.popover');
-    };
-
-    function setup() {
-        var anchor = d3_select(this);
-        var animate = _animation.apply(this, arguments);
-        var popoverSelection = anchor.selectAll('.popover-' + _id)
+    setup(node: HTMLElement, ...args: any[]) {
+        const anchor = d3_select(node);
+        const animate = this._animation.apply(this, args);
+        let popoverSelection = anchor.selectAll<HTMLDivElement, any>('.popover-' + this._id)
             .data([0]);
 
 
-        var enter = popoverSelection.enter()
+        const enter = popoverSelection.enter()
             .append('div')
-            .attr('class', 'popover popover-' + _id + ' ' + (klass ? klass : ''))
-            .classed('arrowed', _hasArrow.apply(this, arguments));
+            .classed(`popover popover-${this._id}`, true)
+            .classed(this.klass, true)
+            .classed('arrowed', this._hasArrow.apply(node, args));
 
         enter
             .append('div')
-            .attr('class', 'popover-arrow');
+            .classed('popover-arrow', true);
 
         enter
             .append('div')
-            .attr('class', 'popover-inner');
+            .classed('popover-inner', true);
 
         popoverSelection = enter
             .merge(popoverSelection);
@@ -148,11 +169,12 @@ export function uiPopover(klass) {
             popoverSelection.classed('fade', true);
         }
 
-        var display = _displayType.apply(this, arguments);
+        const display = this._displayType.apply(node, args);
 
         if (display === 'hover') {
-            var _lastNonMouseEnterTime;
-            anchor.on(_pointerPrefix + 'enter.popover', function(d3_event) {
+            let _lastNonMouseEnterTime: number;
+            const self = this;
+            anchor.on(_pointerPrefix + 'enter.popover', function(d3_event: PointerEvent) {
 
                 if (d3_event.pointerType) {
                     if (d3_event.pointerType !== 'mouse') {
@@ -172,17 +194,17 @@ export function uiPopover(klass) {
                 // don't show if buttons are pressed, e.g. during click and drag of map
                 if (d3_event.buttons !== 0) return;
 
-                show.apply(this, arguments);
+                self._show(node, ...args);
             })
             .on(_pointerPrefix + 'leave.popover', function() {
-                hide.apply(this, arguments);
+                self._hide(node, ...args);
             })
             // show on focus too for better keyboard navigation support
             .on('focus.popover', function() {
-                show.apply(this, arguments);
+                self._show(node, ...args);
             })
             .on('blur.popover', function() {
-                hide.apply(this, arguments);
+                self._hide(node, ...args);
             });
 
         } else if (display === 'clickFocus') {
@@ -202,62 +224,62 @@ export function uiPopover(klass) {
                 .attr('tabindex', 0)
                 .on('blur.popover', function() {
                     anchor.each(function() {
-                        hide.apply(this, arguments);
+                        self._hide(node, ...args);
                     });
                 });
         }
     }
 
 
-    function show() {
-        var anchor = d3_select(this);
-        var popoverSelection = anchor.selectAll('.popover-' + _id);
+    private _show(node: HTMLElement, ...args: any[]) {
+        const anchor = d3_select<HTMLElement, any>(node);
+        const popoverSelection = anchor.selectAll<HTMLDivElement, any>('.popover-' + this._id);
 
         if (popoverSelection.empty()) {
             // popover was removed somehow, put it back
-            anchor.call(popover.destroy);
-            anchor.each(setup);
+            const self = this;
+            anchor.call(function() { self.destroy(this); });
+            anchor.each(this.setup);
             popoverSelection = anchor.selectAll('.popover-' + _id);
         }
 
         popoverSelection.classed('in', true);
 
-        var displayType = _displayType.apply(this, arguments);
+        var displayType = _displayType.apply(this, args as []);
         if (displayType === 'clickFocus') {
             anchor.classed('active', true);
-            popoverSelection.node().focus();
+            popoverSelection.node()!.focus();
         }
 
         anchor.each(updateContent);
     }
 
-    function updateContent() {
+    private updateContent(node: HTMLElement, ...args: any[]) {
         var anchor = d3_select(this);
 
         if (_content) {
-            anchor.selectAll('.popover-' + _id + ' > .popover-inner')
-                .call(_content.apply(this, arguments));
+            anchor.selectAll<HTMLElement, any>('.popover-' + _id + ' > .popover-inner')
+                .call(_content.apply(this, args));
         }
 
-        updatePosition.apply(this, arguments);
+        updatePosition.apply(this, args);
         // hack: update multiple times to fix instances where the absolute offset is
         // set before the dynamic popover size is calculated by the browser
-        updatePosition.apply(this, arguments);
-        updatePosition.apply(this, arguments);
+        updatePosition.apply(this, args);
+        updatePosition.apply(this, args);
     }
 
 
-    function updatePosition() {
-
+    function updatePosition(this: HTMLElement, ...args: any[]) {
         var anchor = d3_select(this);
-        var popoverSelection = anchor.selectAll('.popover-' + _id);
+        var popoverSelection = anchor.selectAll<HTMLDivElement, any>('.popover-' + _id);
 
-        var scrollContainer = _scrollContainer && _scrollContainer.apply(this, arguments);
+        var scrollContainer = _scrollContainer && _scrollContainer.apply(this, args);
         var scrollNode = scrollContainer && !scrollContainer.empty() && scrollContainer.node();
         var scrollLeft = scrollNode ? scrollNode.scrollLeft : 0;
         var scrollTop = scrollNode ? scrollNode.scrollTop : 0;
 
-        var placement = _placement.apply(this, arguments);
+        var placement = _placement.apply(this, args as []);
         popoverSelection
             .classed('left', false)
             .classed('right', false)
@@ -265,15 +287,15 @@ export function uiPopover(klass) {
             .classed('bottom', false)
             .classed(placement, true);
 
-        var alignment = _alignment.apply(this, arguments);
+        var alignment = _alignment.apply(this, args as []);
         var alignFactor = 0.5;
         if (alignment === 'leading') {
             alignFactor = 0;
         } else if (alignment === 'trailing') {
             alignFactor = 1;
         }
-        var anchorFrame = getFrame(anchor.node());
-        var popoverFrame = getFrame(popoverSelection.node());
+        var anchorFrame = getFrame(anchor.node()!);
+        var popoverFrame = getFrame(popoverSelection.node()!);
         var position;
 
         switch (placement) {
@@ -305,8 +327,7 @@ export function uiPopover(klass) {
 
         if (position) {
             if (scrollNode) {
-                const MIN_MARGIN = 10;
-                const popoverRect = popoverSelection.node().getBoundingClientRect();
+                const popoverRect = popoverSelection.node()!.getBoundingClientRect();
                 const scrollNodeRect = scrollNode.getBoundingClientRect();
                 const arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
 
@@ -334,16 +355,12 @@ export function uiPopover(klass) {
                 }
             }
 
-            popoverSelection
-                .style('left', ~~position.x + 'px')
-                .style('top', ~~position.y + 'px');
+            popoverSelection.style('left', ~~position.x + 'px').style('top', ~~position.y + 'px');
         } else {
-            popoverSelection
-                .style('left', null)
-                .style('top', null);
+            popoverSelection.style('left', null).style('top', null);
         }
 
-        function getFrame(node) {
+        function getFrame(node: HTMLElement) {
             var positionStyle = d3_select(node).style('position');
             if (positionStyle === 'absolute' || positionStyle === 'static') {
                 return {
@@ -364,20 +381,20 @@ export function uiPopover(klass) {
     }
 
 
-    function hide() {
+    function hide(this: HTMLElement, ...args: any[]) {
         var anchor = d3_select(this);
-        if (_displayType.apply(this, arguments) === 'clickFocus') {
+        if (_displayType.apply(this, args) === 'clickFocus') {
             anchor.classed('active', false);
         }
         anchor.selectAll('.popover-' + _id).classed('in', false);
     }
 
 
-    function toggle() {
+    function toggle(this: HTMLElement, args: any[]) {
         if (d3_select(this).select('.popover-' + _id).classed('in')) {
-            hide.apply(this, arguments);
+            hide.apply(this, args);
         } else {
-            show.apply(this, arguments);
+            show.apply(this, args);
         }
     }
 

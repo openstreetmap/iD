@@ -10,6 +10,7 @@ import { actionReverse } from '../../actions/reverse';
 import { svgIcon } from '../../svg/icon';
 import { utilCheckTagDictionary } from '../../util';
 import { osmOneWayTags } from '../../osm/tags';
+import { uiTooltip } from '../tooltip';
 
 export { uiFieldCheck as uiFieldDefaultCheck };
 export { uiFieldCheck as uiFieldOnewayCheck };
@@ -23,10 +24,10 @@ export function uiFieldCheck(field: any, context: iD.Context) {
 
     let _tags: TagsMulti;
 
-    let input:    d3.Selection<HTMLInputElement>  | d3.Selection<null> = d3_select(null);
-    let text:     d3.Selection<HTMLSpanElement>   | d3.Selection<null> = d3_select(null);
-    let label:    d3.Selection<HTMLLabelElement>  | d3.Selection<null> = d3_select(null);
-    let reverser: d3.Selection<HTMLButtonElement> | d3.Selection<null> = d3_select(null);
+    let input:    d3.Selection<HTMLInputElement>  = d3_select(null!);
+    let text:     d3.Selection<HTMLSpanElement>   = d3_select(null!);
+    let label:    d3.Selection<HTMLLabelElement>  = d3_select(null!);
+    let reverser: d3.Selection<HTMLButtonElement> = d3_select(null!);
 
     let _impliedYes: boolean;
     let _entityIDs: EntityID[]  = [];
@@ -88,10 +89,15 @@ export function uiFieldCheck(field: any, context: iD.Context) {
         const pseudoDirection = first < last;
         const icon = pseudoDirection ? '#iD-icon-forward' : '#iD-icon-backward';
 
+        var tooltip = uiTooltip()
+            .title(() => t.append('operations.reverse.description.line'))
+            .keys([t('operations.reverse.key')]);
+
         selection.selectAll('.reverser-span')
             .text('')
             .call(t.append('inspector.check.reverser'))
-            .call(svgIcon(icon, 'inline'));
+            .call(svgIcon(icon, 'inline'))
+            .call(tooltip);
 
         return selection;
     }
