@@ -75,6 +75,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@brianstrauch]: https://github.com/brianstrauch
 
 
+# 2.41.1
+##### 2026-Jun-23
+
+#### :bug: Bugfixes
+* Fix a bug causing encrypted background imagery layers from not being loaded correctly
+#### :hammer: Development
+* Make `context.ui().hash` available right after `init()`
+
+
 # 2.41.0
 ##### 2026-Jun-15
 
