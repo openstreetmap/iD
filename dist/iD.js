@@ -37629,7 +37629,7 @@ Please report this to https://github.com/markedjs/marked.`, e3) {
     "package.json"() {
       package_default = {
         name: "@openstreetmap/id",
-        version: "2.41.0",
+        version: "2.41.1",
         description: "A friendly editor for OpenStreetMap",
         main: "dist/iD.min.js",
         repository: {
@@ -50348,7 +50348,7 @@ Please report this to https://github.com/markedjs/marked.`, e3) {
           _imageryIndex.features[source.id] = feature3;
           return feature3;
         }).filter(Boolean);
-        for (const source of features) {
+        for (const source of sources) {
           if (source.encrypted) {
             source.template = await utilAesDecrypt(source.template);
           }
@@ -75223,7 +75223,6 @@ ${_t.html("settings.custom_background.instructions.license_disclaimer")}
       }
       ui.onResize();
       map4.redrawEnable(true);
-      ui.hash = behaviorHash(context);
       ui.hash();
       if (!ui.hash.hadLocation) {
         map4.centerZoom([0, 0], 2);
@@ -75334,6 +75333,7 @@ ${_t.html("settings.custom_background.instructions.license_disclaimer")}
     ui.sidebar = uiSidebar(context);
     ui.photoviewer = uiPhotoviewer(context);
     ui.shortcuts = uiShortcuts(context);
+    ui.hash = behaviorHash(context);
     ui.onResize = function(withPan) {
       var map4 = context.map();
       var mapDimensions = utilGetDimensions(context.container().select(".main-content"), true);
