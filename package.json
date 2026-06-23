@@ -114,7 +114,7 @@
     "fake-indexeddb": "^6.2.5",
     "fetch-mock": "^11.1.1",
     "globals": "^17.3.0",
-    "js-yaml": "^4.1.1",
+    "js-yaml": "^5.0.0",
     "jsdom": "^29.0.0",
     "json-stringify-pretty-compact": "^3.0.0",
     "mapillary-js": "4.1.2",
