@@ -180,7 +180,14 @@ export function behaviorSelect(context) {
             }
         } else {
             _lastMouseEvent = d3_event;
-            _lastInteractionType = 'rightclick';
+            if (d3_event.pointerType === 'touch' || d3_event.pointerType === 'pen' ||
+                d3_event.mozInputSource && ( // firefox doesn't give a pointerType on contextmenu events
+                    d3_event.mozInputSource === MouseEvent.MOZ_SOURCE_TOUCH ||
+                    d3_event.mozInputSource === MouseEvent.MOZ_SOURCE_PEN)) {
+                _lastInteractionType = 'touch';
+            } else {
+                _lastInteractionType = 'rightclick';
+            }
         }
 
         _showMenu = true;
@@ -208,6 +215,11 @@ export function behaviorSelect(context) {
         }
 
         var targetDatum = lastEvent.target.__data__;
+        if (targetDatum === 0 && lastEvent.target.parentNode.__data__) {
+            // some targets (like markers of the street level photo
+            // layers) have the data bound to the parent node
+            targetDatum = lastEvent.target.parentNode.__data__;
+        }
 
         var multiselectEntityId;
 
@@ -343,6 +355,9 @@ export function behaviorSelect(context) {
                 .selectedErrorID(datum.id)
                 .enter(modeSelectError(context, datum.id, datum.service));
 
+        } else if (datum.service === 'photo') {
+            // street level photo was selected:
+            // don't change mode and selection
         } else {
             // targeting nothing
             context.selectedNoteID(null);

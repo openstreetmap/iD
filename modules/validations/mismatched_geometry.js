@@ -1,4 +1,5 @@
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
+
 import { actionAddVertex } from '../actions/add_vertex';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
@@ -9,7 +10,8 @@ import { osmNodeGeometriesForTags, osmTagSuggestingArea } from '../osm/tags';
 import { presetManager } from '../presets';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 import { t } from '../core/localizer';
-import { utilDisplayLabel, utilTagText } from '../util';
+import { utilTagText } from '../util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
@@ -20,14 +22,21 @@ export function validationMismatchedGeometry() {
         if (entity.type !== 'way' || entity.isClosed()) return null;
 
         var tagSuggestingArea = entity.tagSuggestingArea();
+
         if (!tagSuggestingArea) {
             return null;
         }
 
         var asLine = presetManager.matchTags(tagSuggestingArea, 'line');
         var asArea = presetManager.matchTags(tagSuggestingArea, 'area');
-        if (asLine && asArea && (asLine === asArea)) {
-            // these tags also allow lines and making this an area wouldn't matter
+        if (asLine && asArea && deepEqual(asLine.tags, asArea.tags)) {
+            // this tag also allows lines and making this an area wouldn't matter
+            return null;
+        }
+
+        if (asLine.isFallback() && asArea.isFallback() && !deepEqual(tagSuggestingArea, { area: 'yes' })) {
+            // if the entity matches the fallback preset, regardless of the
+            // geometry, then changing the geometry will not help.
             return null;
         }
 
@@ -77,10 +86,25 @@ export function validationMismatchedGeometry() {
         }
     }
 
-    function lineTaggedAsAreaIssue(entity) {
+    function areaTaggedAsLineIssue(entity) {
 
         var tagSuggestingArea = tagSuggestingLineIsArea(entity);
         if (!tagSuggestingArea) return null;
+
+        var validAsLine = false;
+        var presetAsLine = presetManager.matchTags(entity.tags, 'line');
+        if (presetAsLine) {
+            validAsLine = true;
+            var key = Object.keys(tagSuggestingArea)[0];
+            if (presetAsLine.tags[key] && presetAsLine.tags[key] === '*') {
+                // only matches a fallback preset of the tag which is suggesting to be an area
+                validAsLine = false;
+            }
+            if (Object.keys(presetAsLine.tags).length === 0) {
+                // only matches the fallback "line" preset
+                validAsLine = false;
+            }
+        }
 
         return new validationIssue({
             type: type,
@@ -103,10 +127,13 @@ export function validationMismatchedGeometry() {
                 var entity = context.entity(this.entityIds[0]);
                 var connectEndsOnClick = makeConnectEndpointsFixOnClick(entity, context.graph());
 
-                fixes.push(new validationIssueFix({
-                    title: t.append('issues.fix.connect_endpoints.title'),
-                    onClick: connectEndsOnClick
-                }));
+                if (!validAsLine) {
+                    // only suggest to "connect the ends" if the feature is not also valid as a line
+                    fixes.push(new validationIssueFix({
+                        title: t.append('issues.fix.connect_endpoints.title'),
+                        onClick: connectEndsOnClick
+                    }));
+                }
 
                 fixes.push(new validationIssueFix({
                     icon: 'iD-operation-delete',
@@ -173,7 +200,11 @@ export function validationMismatchedGeometry() {
                         .attr('class', 'issue-reference')
                         .call(t.append('issues.vertex_as_point.reference'));
                 },
-                entityIds: [entity.id]
+                entityIds: [entity.id],
+                dynamicFixes: () => [new validationIssueFix({
+                    icon: 'iD-operation-move',
+                    title: t.append('issues.fix.reposition_point_to_vertex.title')
+                })]
             });
 
         } else if (geometry === 'vertex' && !allowedGeometries.vertex && allowedGeometries.point) {
@@ -216,14 +247,22 @@ export function validationMismatchedGeometry() {
 
         var sourceGeom = entity.geometry(graph);
 
-        var targetGeoms = entity.type === 'way' ? ['point', 'vertex'] : ['line', 'area'];
-
-        if (sourceGeom === 'area') targetGeoms.unshift('line');
+        // order matters. if there are multiple valid geometries,
+        // suggest way geometry for ways, and node geometry for nodes.
+        var targetGeoms = entity.type === 'node'
+            ? ['point', 'vertex', 'line', 'area']
+            : ['line', 'area', 'point', 'vertex'];
 
         var asSource = presetManager.match(entity, graph);
 
-        var targetGeom = targetGeoms.find(nodeGeom => {
-            var asTarget = presetManager.matchTags(entity.tags, nodeGeom);
+        const targetGeom = targetGeoms.find(nodeGeom => {
+            if (nodeGeom === sourceGeom) return false;
+
+            const asTarget = presetManager.matchTags(
+                entity.tags,
+                nodeGeom,
+                entity.extent(graph).center(),
+            );
             if (!asSource || !asTarget ||
                 asSource === asTarget ||
                 // sometimes there are two presets with the same tags for different geometries
@@ -245,10 +284,11 @@ export function validationMismatchedGeometry() {
 
         var subtype = targetGeom + '_as_' + sourceGeom;
 
-        if (targetGeom === 'vertex') targetGeom = 'point';
-        if (sourceGeom === 'vertex') sourceGeom = 'point';
-
         var referenceId = targetGeom + '_as_' + sourceGeom;
+
+        // reuse translations
+        if (referenceId === 'vertex_as_line') referenceId = 'point_as_line';
+        if (referenceId === 'vertex_as_area') referenceId = 'point_as_area';
 
         var dynamicFixes;
         if (targetGeom === 'point') {
@@ -256,6 +296,16 @@ export function validationMismatchedGeometry() {
 
         } else if (sourceGeom === 'area' && targetGeom === 'line') {
             dynamicFixes = lineToAreaDynamicFixes;
+        }
+        if (
+            sourceGeom === 'line' &&
+            targetGeom === 'area' &&
+            entity.type === 'way' &&
+            entity.isClosed()
+        ) {
+            // the line is already closed, but iD is not treating it
+            // as a closed line. This is trivial to fix by adding area=yes.
+            dynamicFixes = closedAreaToLineDynamicFixes;
         }
 
         return new validationIssue({
@@ -312,6 +362,26 @@ export function validationMismatchedGeometry() {
                 onClick: convertOnClick
             })
         ];
+    }
+
+    function closedAreaToLineDynamicFixes() {
+        const fix = new validationIssueFix({
+            icon: 'iD-icon-area',
+            title: t.append('issues.fix.convert_to_area.title'),
+            onClick: function(context) {
+                const entityId = this.issue.entityIds[0];
+                const entity = context.entity(entityId);
+                const newTags = {
+                    ...entity.tags,
+                    area: 'yes',
+                };
+                context.perform(
+                    actionChangeTags(entityId, newTags),
+                    t('issues.fix.convert_to_line.annotation')
+                );
+            },
+        });
+        return [fix];
     }
 
     function extractPointDynamicFixes(context) {
@@ -401,8 +471,8 @@ export function validationMismatchedGeometry() {
         var vertexPoint = vertexPointIssue(entity, graph);
         if (vertexPoint) return [vertexPoint];
 
-        var lineAsArea = lineTaggedAsAreaIssue(entity);
-        if (lineAsArea) return [lineAsArea];
+        var areaAsLine = areaTaggedAsLineIssue(entity);
+        if (areaAsLine) return [areaAsLine];
 
         var mismatch = otherMismatchIssue(entity, graph);
         if (mismatch) return [mismatch];

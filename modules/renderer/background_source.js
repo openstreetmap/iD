@@ -1,17 +1,17 @@
 import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
 import { json as d3_json } from 'd3-fetch';
-import { escape } from 'lodash';
 
 import { t, localizer } from '../core/localizer';
 import { geoExtent, geoSphericalDistance } from '../geo';
 import { utilQsString, utilStringQs } from '../util';
 import { utilAesDecrypt } from '../util/aes';
 import { IntervalTasksQueue } from '../util/IntervalTasksQueue';
+import { localeDateString } from '../util/date';
 
 var isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 
 // listen for DPI change, e.g. when dragging a browser window from a retina to non-retina screen
-window.matchMedia(`
+window.matchMedia?.(`
         (-webkit-min-device-pixel-ratio: 2), /* Safari */
         (min-resolution: 2dppx),             /* standard */
         (min-resolution: 192dpi)             /* fallback */
@@ -20,14 +20,6 @@ window.matchMedia(`
     isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 });
 
-
-function localeDateString(s) {
-    if (!s) return null;
-    var options = { day: 'numeric', month: 'short', year: 'numeric' };
-    var d = new Date(s);
-    if (isNaN(d.getTime())) return null;
-    return d.toLocaleDateString(localizer.localeCode(), options);
-}
 
 function vintageRange(vintage) {
     var s;
@@ -47,7 +39,7 @@ export function rendererBackgroundSource(data) {
     var _name = source.name;
     var _description = source.description;
     var _best = !!source.best;
-    var _template = source.encrypted ? utilAesDecrypt(source.template) : source.template;
+    var _template = source.template;
 
     source.tileSize = data.tileSize || 256;
     source.zoomExtent = data.zoomExtent || [0, 22];
@@ -69,26 +61,26 @@ export function rendererBackgroundSource(data) {
 
     source.name = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t('imagery.' + id_safe + '.name', { default: escape(_name) });
+        return t('imagery.' + id_safe + '.name', { default: _name });
     };
 
 
     source.label = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.append('imagery.' + id_safe + '.name', { default: escape(_name) });
+        return t.append('imagery.' + id_safe + '.name', { default: _name });
     };
 
 
     source.hasDescription = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).text;
-        return descriptionText !== '';
+        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).texts.join('');
+        return !!descriptionText;
     };
 
 
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.append('imagery.' + id_safe + '.description', { default: escape(_description) });
+        return t.append('imagery.' + id_safe + '.description', { default: _description });
     };
 
 
@@ -230,8 +222,9 @@ export function rendererBackgroundSource(data) {
     };
 
 
-    source.validZoom = function(z) {
-        return source.zoomExtent[0] <= z &&
+    source.validZoom = function(z, underzoom) {
+        if (underzoom === undefined) underzoom = 0;
+        return source.zoomExtent[0] - underzoom <= z &&
             (source.overzoom || source.zoomExtent[1] > z);
     };
 
@@ -243,8 +236,7 @@ export function rendererBackgroundSource(data) {
 
     /* hides a source from the list, but leaves it available for use */
     source.isHidden = function() {
-        return source.id === 'DigitalGlobe-Premium-vintage' ||
-            source.id === 'DigitalGlobe-Standard-vintage';
+        return false; // currently there are no hidden layers
     };
 
 
@@ -284,14 +276,15 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     */
     const strictParam = 'n';
 
-    var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/AerialOSM?include=ImageryProviders&uriScheme=https&key=' + key;
     var cache = {};
     var inflight = {};
     var providers = [];
     var taskQueue = new IntervalTasksQueue(250);
     var metadataLastZoom = -1;
 
-    d3_json(url)
+    key
+        .then(keyString => `https://dev.virtualearth.net/REST/v1/Imagery/Metadata/AerialOSM?include=ImageryProviders&uriScheme=https&key=${keyString}`)
+        .then(d3_json)
         .then(function(json) {
             let imageryResource = json.resourceSets[0].resources[0];
 
@@ -340,12 +333,12 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     };
 
 
-    bing.getMetadata = function(center, tileCoord, callback) {
+    bing.getMetadata = async function(center, tileCoord, callback) {
         var tileID = tileCoord.slice(0, 3).join('/');
         var zoom = Math.min(tileCoord[2], 21);
         var centerPoint = center[1] + ',' + center[0];  // lat,lng
         var url = 'https://dev.virtualearth.net/REST/v1/Imagery/BasicMetadata/AerialOSM/' + centerPoint +
-                '?zl=' + zoom + '&key=' + key;
+                '?zl=' + zoom + '&key=' + await key;
 
         if (inflight[tileID]) return;
 
@@ -503,8 +496,8 @@ rendererBackgroundSource.Esri = function(data) {
                     vintage: vintage,
                     source: clean(result.NICE_NAME),
                     description: clean(result.NICE_DESC),
-                    resolution: clean(+parseFloat(result.SRC_RES).toFixed(4)),
-                    accuracy: clean(+parseFloat(result.SRC_ACC).toFixed(4))
+                    resolution: clean(+Number(result.SRC_RES).toFixed(4)),
+                    accuracy: clean(+Number(result.SRC_ACC).toFixed(4))
                 };
 
                 // append units - meters
@@ -583,7 +576,7 @@ rendererBackgroundSource.Custom = function(template) {
             var parts = cleaned.split('?', 2);
             var qs = utilStringQs(parts[1]);
 
-            ['access_token', 'connectId', 'token'].forEach(function(param) {
+            ['access_token', 'connectId', 'token', 'Signature'].forEach(function(param) {
                 if (qs[param]) {
                     qs[param] = '{apikey}';
                 }

@@ -6,23 +6,26 @@ import {
 } from 'd3-selection';
 
 import RBush from 'rbush';
-import { t, localizer } from '../core/localizer';
-import { jsonpRequest } from '../util/jsonp_request';
+import { t } from '../core/localizer';
 
 import {
   geoExtent, geoMetersToLat, geoMetersToLon, geoPointInPolygon,
-  geoRotate, geoScaleToZoom, geoVecLength
+  geoRotate, geoVecLength
 } from '../geo';
 
-import { utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
+import { utilAesDecrypt, utilArrayUnion, utilRebind, utilTiler, utilUniqueDomId } from '../util';
+
+import { services } from './';
+import { searchLimited } from '../util/partition';
+import { localeTimestamp } from '../util/date';
+import { patchHash } from '../behavior';
 
 
-const bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
-const streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
-const bubbleAppKey = 'AuftgJsO0Xs8Ts4M1xZUQJQXJNsvmh3IV8DkNieCiy3tCwCUMq76-WpkrBtNAuEm';
-const pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
-const pannellumViewerJS = 'pannellum-streetside/pannellum.js';
-const maxResults = 2000;
+const streetsideApi = 'https://dev.virtualearth.net/REST/v1/Imagery/MetaData/Streetside?mapArea={bbox}&key={key}&count={count}&uriScheme=https';
+const maxResults = 500;
+const bubbleAppKey = utilAesDecrypt('5c875730b09c6b422433e807e1ff060b6536c791dbfffcffc4c6b18a1bdba1f14593d151adb50e19e1be1ab19aef813bf135d0f103475e5c724dec94389e45d0');
+const pannellumViewerCSS = 'pannellum/pannellum.css';
+const pannellumViewerJS = 'pannellum/pannellum.js';
 const tileZoom = 16.5;
 const tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
 const dispatch = d3_dispatch('loadedImages', 'viewerChanged');
@@ -56,19 +59,6 @@ function abortRequest(i) {
   i.abort();
 }
 
-
-/**
- * localeTimeStamp().
- */
-function localeTimestamp(s) {
-  if (!s) return null;
-  const options = { day: 'numeric', month: 'short', year: 'numeric' };
-  const d = new Date(s);
-  if (isNaN(d.getTime())) return null;
-  return d.toLocaleString(localizer.localeCode(), options);
-}
-
-
 /**
  * loadTiles() wraps the process of generating tiles and then fetching image points for each tile.
  */
@@ -98,40 +88,43 @@ function loadNextTilePage(which, url, tile) {
   const id = tile.id + ',' + String(nextPage);
   if (cache.loaded[id] || cache.inflight[id]) return;
 
-  cache.inflight[id] = getBubbles(url, tile, (bubbles) => {
+  cache.inflight[id] = getBubbles(url, tile, response => {
     cache.loaded[id] = true;
     delete cache.inflight[id];
-    if (!bubbles) return;
+    if (!response) return;
 
-    // [].shift() removes the first element, some statistics info, not a bubble point
-    bubbles.shift();
+    if (response.resourceSets[0].resources.length === maxResults) {
+      // there are more bubbles than the response can fit: re-fetch using tile split into 4
+      const split = tile.extent.split();
+      loadNextTilePage(which, url, { id: tile.id + ',a', extent: split[0] });
+      loadNextTilePage(which, url, { id: tile.id + ',b', extent: split[1] });
+      loadNextTilePage(which, url, { id: tile.id + ',c', extent: split[2] });
+      loadNextTilePage(which, url, { id: tile.id + ',d', extent: split[3] });
+    }
 
-    const features = bubbles.map(bubble => {
-      if (cache.points[bubble.id]) return null;  // skip duplicates
+    const features = response.resourceSets[0].resources.map(bubble => {
+      const bubbleId = bubble.imageUrl;
+      if (cache.points[bubbleId]) return null;  // skip duplicates
 
-      const loc = [bubble.lo, bubble.la];
+      // workaround for https://github.com/openstreetmap/iD/issues/10341#issuecomment-2275724738
+      const loc = [
+        bubble.lon || bubble.longitude,
+        bubble.lat || bubble.latitude
+      ];
       const d = {
+        service: 'photo',
         loc: loc,
-        key: bubble.id,
-        ca: bubble.he,
-        captured_at: bubble.cd,
+        key: bubbleId,
+        imageUrl: bubble.imageUrl
+          .replace('{subdomain}', bubble.imageUrlSubdomains[0]),
+        ca: bubble.he || bubble.heading,
+        captured_at: bubble.vintageEnd,
         captured_by: 'microsoft',
-        // nbn: bubble.nbn,
-        // pbn: bubble.pbn,
-        // ad: bubble.ad,
-        // rn: bubble.rn,
-        pr: bubble.pr,  // previous
-        ne: bubble.ne,  // next
         pano: true,
         sequenceKey: null
       };
 
-      cache.points[bubble.id] = d;
-
-      // a sequence starts here
-      if (bubble.pr === undefined) {
-        cache.leaders.push(bubble.id);
-      }
+      cache.points[bubbleId] = d;
 
       return {
         minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
@@ -141,66 +134,10 @@ function loadNextTilePage(which, url, tile) {
 
     cache.rtree.load(features);
 
-    connectSequences();
-
     if (which === 'bubbles') {
       dispatch.call('loadedImages');
     }
   });
-}
-
-
-// call this sometimes to connect the bubbles into sequences
-function connectSequences() {
-  let cache = _ssCache.bubbles;
-  let keepLeaders = [];
-
-  for (let i = 0; i < cache.leaders.length; i++) {
-    let bubble = cache.points[cache.leaders[i]];
-    let seen = {};
-
-    // try to make a sequence.. use the key of the leader bubble.
-    let sequence = { key: bubble.key, bubbles: [] };
-    let complete = false;
-
-    do {
-      sequence.bubbles.push(bubble);
-      seen[bubble.key] = true;
-
-      if (bubble.ne === undefined) {
-        complete = true;
-      } else {
-        bubble = cache.points[bubble.ne];  // advance to next
-      }
-    } while (bubble && !seen[bubble.key] && !complete);
-
-
-    if (complete) {
-      _ssCache.sequences[sequence.key] = sequence;
-
-      // assign bubbles to the sequence
-      for (let j = 0; j < sequence.bubbles.length; j++) {
-        sequence.bubbles[j].sequenceKey = sequence.key;
-      }
-
-      // create a GeoJSON LineString
-      sequence.geojson = {
-        type: 'LineString',
-        properties: {
-          captured_at: sequence.bubbles[0] ? sequence.bubbles[0].captured_at : null,
-          captured_by: sequence.bubbles[0] ? sequence.bubbles[0].captured_by : null,
-          key: sequence.key
-        },
-        coordinates: sequence.bubbles.map(d => d.loc)
-      };
-
-    } else {
-      keepLeaders.push(cache.leaders[i]);
-    }
-  }
-
-  // couldn't complete these, save for later
-  cache.leaders = keepLeaders;
 }
 
 
@@ -209,50 +146,34 @@ function connectSequences() {
  */
 function getBubbles(url, tile, callback) {
   let rect = tile.extent.rectangle();
-  let urlForRequest = url + utilQsString({
-    n: rect[3],
-    s: rect[1],
-    e: rect[2],
-    w: rect[0],
-    c: maxResults,
-    appkey: bubbleAppKey,
-    jsCallback: '{callback}'
-  });
+    const controller = new AbortController();
 
-  return jsonpRequest(urlForRequest, (data) => {
-    if (!data || data.error) {
-      callback(null);
-    } else {
-      callback(data);
-    }
-  });
-}
-
-
-// partition viewport into higher zoom tiles
-function partitionViewport(projection) {
-  let z = geoScaleToZoom(projection.scale());
-  let z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
-  let tiler = utilTiler().zoomExtent([z2, z2]);
-
-  return tiler.getTiles(projection)
-    .map(tile => tile.extent);
-}
-
-
-// no more than `limit` results per partition.
-function searchLimited(limit, projection, rtree) {
-  limit = limit || 5;
-
-  return partitionViewport(projection)
-    .reduce((result, extent) => {
-      let found = rtree.search(extent.bbox())
-        .slice(0, limit)
-        .map(d => d.data);
-
-      return (found.length ? result.concat(found) : result);
-    }, []);
-}
+    bubbleAppKey
+      .then(key => url
+        .replace('{key}', key)
+        .replace('{bbox}', [rect[1], rect[0], rect[3], rect[2]].join(','))
+        .replace('{count}', maxResults)
+      )
+      .then(url => fetch(url, { signal: controller.signal }))
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error(response.status + ' ' + response.statusText);
+        }
+        return response.json();
+      }).then(function(result) {
+        if (!result) {
+          callback(null);
+        }
+        return callback(result || []);
+      }).catch(function(err) {
+        if (err.name === 'AbortError') {
+        // ignore aborted requests, e.g. from duplicate requests while zooming/panning the map
+        } else {
+          throw new Error(err);
+        }
+      });
+    return controller;
+  }
 
 
 /**
@@ -418,7 +339,7 @@ export default {
     }
 
     _ssCache = {
-      bubbles: { inflight: {}, loaded: {}, nextPage: {}, rtree: new RBush(), points: {}, leaders: [] },
+      bubbles: { inflight: {}, loaded: {}, nextPage: {}, rtree: new RBush(), points: {} },
       sequences: {}
     };
   },
@@ -466,7 +387,7 @@ export default {
     // by default: request 2 nearby tiles so we can connect sequences.
     if (margin === undefined) margin = 2;
 
-    loadTiles('bubbles', bubbleApi, projection, margin);
+    loadTiles('bubbles', streetsideApi, projection, margin);
   },
 
 
@@ -553,7 +474,7 @@ export default {
 
 
     // create working canvas for stitching together images
-    wrap = wrap
+    wrap
       .merge(wrapEnter)
       .call(setupCanvas, true);
 
@@ -691,18 +612,18 @@ export default {
    * showViewer()
    */
   showViewer: function(context) {
-
-    let wrap = context.container().select('.photoviewer')
-      .classed('hide', false);
-
-    let isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
+    const wrap = context.container().select('.photoviewer');
+    const isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
 
     if (isHidden) {
+      for (const service of Object.values(services)) {
+        if (service === this) continue;
+        if (typeof service.hideViewer === 'function') {
+          service.hideViewer(context);
+        }
+      }
       wrap
-        .selectAll('.photo-wrapper:not(.ms-wrapper)')
-        .classed('hide', true);
-
-      wrap
+        .classed('hide', false)
         .selectAll('.photo-wrapper.ms-wrapper')
         .classed('hide', false);
     }
@@ -726,7 +647,7 @@ export default {
     context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
       .classed('currentView', false);
 
-    this.updateUrlImage(null);
+    patchHash({ photo: null });
 
     return this.setStyles(context, null, true);
   },
@@ -753,7 +674,7 @@ export default {
 
     if (!d) return this;
 
-    this.updateUrlImage(key);
+    patchHash({ photo: 'streetside/' + key });
 
     _sceneOptions.northOffset = d.ca;
 
@@ -831,28 +752,11 @@ export default {
 
     line2
       .append('a')
-      .attr('class', 'image-view-link')
-      .attr('target', '_blank')
-      .attr('href', 'https://www.bing.com/maps?cp=' + d.loc[1] + '~' + d.loc[0] +
-        '&lvl=17&dir=' + d.ca + '&style=x&v=2&sV=1')
-      .call(t.append('streetside.view_on_bing'));
-
-    line2
-      .append('a')
       .attr('class', 'image-report-link')
       .attr('target', '_blank')
       .attr('href', 'https://www.bing.com/maps/privacyreport/streetsideprivacyreport?bubbleid=' +
         encodeURIComponent(d.key) + '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
       .call(t.append('streetside.report'));
-
-
-    let bubbleIdQuadKey = d.key.toString(4);
-    const paddingNeeded = 16 - bubbleIdQuadKey.length;
-    for (let i = 0; i < paddingNeeded; i++) {
-      bubbleIdQuadKey = '0' + bubbleIdQuadKey;
-    }
-    const imgUrlPrefix = streetsideImagesApi + 'hs' + bubbleIdQuadKey;
-    const imgUrlSuffix = '.jpg?g=6338&n=z';
 
     // Cubemap face code order matters here: front=01, right=02, back=03, left=10, up=11, down=12
     const faceKeys = ['01','02','03','10','11','12'];
@@ -864,7 +768,9 @@ export default {
         const xy = qkToXY(quadKey);
         return {
           face: faceKey,
-          url: imgUrlPrefix + faceKey + quadKey + imgUrlSuffix,
+          url: d.imageUrl
+            .replace('{faceId}', faceKey)
+            .replace('{tileId}', quadKey),
           x: xy[0],
           y: xy[1]
         };
@@ -955,19 +861,6 @@ export default {
     }
 
     return this;
-  },
-
-
-  updateUrlImage: function(imageKey) {
-      if (!window.mocha) {
-          var hash = utilStringQs(window.location.hash);
-          if (imageKey) {
-              hash.photo = 'streetside/' + imageKey;
-          } else {
-              delete hash.photo;
-          }
-          window.location.replace('#' + utilQsString(hash, true));
-      }
   },
 
 

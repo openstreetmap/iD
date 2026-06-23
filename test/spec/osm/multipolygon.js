@@ -1,159 +1,13 @@
-describe('iD.osmIsOldMultipolygonOuterMember', function() {
-    it('returns the parent relation of a simple multipolygon outer', function() {
-        var outer = iD.osmWay({tags: {'natural':'wood'}});
-        var relation = iD.osmRelation(
-            {tags: {type: 'multipolygon'}, members: [{id: outer.id, role: 'outer'}]}
-        );
-        var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.equal(relation);
-    });
-
-    it('returns the parent relation of a simple multipolygon outer, assuming role outer if unspecified', function() {
-        var outer = iD.osmWay({tags: {'natural':'wood'}});
-        var relation = iD.osmRelation(
-            {tags: {type: 'multipolygon'}, members: [{id: outer.id}]}
-        );
-        var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.equal(relation);
-    });
-
-    it('returns false if entity is not a way', function() {
-        var outer = iD.osmNode({tags: {'natural':'wood'}});
-        var relation = iD.osmRelation(
-            {tags: {type: 'multipolygon'}, members: [{id: outer.id, role: 'outer'}]}
-        );
-        var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.be.false;
-    });
-
-    it('returns false if entity does not have interesting tags', function() {
-        var outer = iD.osmWay({tags: {'tiger:reviewed':'no'}});
-        var relation = iD.osmRelation(
-            {tags: {type: 'multipolygon'}, members: [{id: outer.id, role: 'outer'}]}
-        );
-        var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.be.false;
-    });
-
-    it('returns false if entity does not have a parent relation', function() {
-        var outer = iD.osmWay({tags: {'natural':'wood'}});
-        var graph = iD.coreGraph([outer]);
-        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.be.false;
-    });
-
-    it('returns false if the parent is not a multipolygon', function() {
-        var outer = iD.osmWay({tags: {'natural':'wood'}});
-        var relation = iD.osmRelation(
-            {tags: {type: 'route'}, members: [{id: outer.id, role: 'outer'}]}
-        );
-        var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.be.false;
-    });
-
-    it('returns false if the parent has interesting tags', function() {
-        var outer = iD.osmWay({tags: {'natural':'wood'}});
-        var relation = iD.osmRelation(
-            {tags: {natural: 'wood', type: 'multipolygon'}, members: [{id: outer.id, role: 'outer'}]}
-        );
-        var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.be.false;
-    });
-
-    it('returns the parent relation of a simple multipolygon outer, ignoring uninteresting parent tags', function() {
-        var outer = iD.osmWay({tags: {'natural':'wood'}});
-        var relation = iD.osmRelation(
-            {tags: {'tiger:reviewed':'no', type: 'multipolygon'}, members: [{id: outer.id, role: 'outer'}]}
-        );
-        var graph = iD.coreGraph([outer, relation]);
-        expect(iD.osmIsOldMultipolygonOuterMember(outer, graph)).to.equal(relation);
-    });
-
-    it('returns false if the parent has multiple outer ways', function() {
-        var outer1 = iD.osmWay({tags: {'natural':'wood'}});
-        var outer2 = iD.osmWay({tags: {'natural':'wood'}});
-        var relation = iD.osmRelation(
-            {tags: {type: 'multipolygon'}, members: [{id: outer1.id, role: 'outer'}, {id: outer2.id, role: 'outer'}]}
-        );
-        var graph = iD.coreGraph([outer1, outer2, relation]);
-        expect(iD.osmIsOldMultipolygonOuterMember(outer1, graph)).to.be.false;
-        expect(iD.osmIsOldMultipolygonOuterMember(outer2, graph)).to.be.false;
-    });
-
-    it('returns false if the parent has multiple outer ways, assuming role outer if unspecified', function() {
-        var outer1 = iD.osmWay({tags: {'natural':'wood'}});
-        var outer2 = iD.osmWay({tags: {'natural':'wood'}});
-        var relation = iD.osmRelation(
-            {tags: {type: 'multipolygon'}, members: [{id: outer1.id}, {id: outer2.id}]}
-        );
-        var graph = iD.coreGraph([outer1, outer2, relation]);
-        expect(iD.osmIsOldMultipolygonOuterMember(outer1, graph)).to.be.false;
-        expect(iD.osmIsOldMultipolygonOuterMember(outer2, graph)).to.be.false;
-    });
-
-    it('returns false if the entity is not an outer', function() {
-        var inner = iD.osmWay({tags: {'natural':'wood'}});
-        var relation = iD.osmRelation(
-            {tags: {type: 'multipolygon'}, members: [{id: inner.id, role: 'inner'}]}
-        );
-        var graph = iD.coreGraph([inner, relation]);
-        expect(iD.osmIsOldMultipolygonOuterMember(inner, graph)).to.be.false;
-    });
-});
-
-
-describe('iD.osmOldMultipolygonOuterMember', function() {
-    it('returns the outer member of a simple multipolygon', function() {
-        var inner = iD.osmWay();
-        var outer = iD.osmWay({tags: {'natural':'wood'}});
-        var relation = iD.osmRelation({tags: {type: 'multipolygon'}, members: [
-            {id: outer.id, role: 'outer'},
-            {id: inner.id, role: 'inner'}]
-        });
-        var graph = iD.coreGraph([inner, outer, relation]);
-
-        expect(iD.osmOldMultipolygonOuterMember(inner, graph)).to.equal(outer);
-        expect(iD.osmOldMultipolygonOuterMember(outer, graph)).to.equal(outer);
-    });
-
-    it('returns falsy for a complex multipolygon', function() {
-        var inner = iD.osmWay();
-        var outer1 = iD.osmWay({tags: {'natural':'wood'}});
-        var outer2 = iD.osmWay({tags: {'natural':'wood'}});
-        var relation = iD.osmRelation({tags: {type: 'multipolygon'}, members: [
-            {id: outer1.id, role: 'outer'},
-            {id: outer2.id, role: 'outer'},
-            {id: inner.id, role: 'inner'}]
-        });
-        var graph = iD.coreGraph([inner, outer1, outer2, relation]);
-
-        expect(iD.osmOldMultipolygonOuterMember(inner, graph)).not.to.be.ok;
-        expect(iD.osmOldMultipolygonOuterMember(outer1, graph)).not.to.be.ok;
-        expect(iD.osmOldMultipolygonOuterMember(outer2, graph)).not.to.be.ok;
-    });
-
-    it('handles incomplete relations', function() {
-        var way = iD.osmWay({id: 'w'});
-        var relation = iD.osmRelation({id: 'r', tags: {type: 'multipolygon'}, members: [
-            {id: 'o', role: 'outer'},
-            {id: 'w', role: 'inner'}]
-        });
-        var graph = iD.coreGraph([way, relation]);
-
-        expect(iD.osmOldMultipolygonOuterMember(way, graph)).not.to.be.ok;
-    });
-});
-
-
 describe('iD.osmJoinWays', function() {
     function getIDs(objects) {
         return objects.map(function(node) { return node.id; });
     }
 
     it('returns an array of members with nodes properties', function() {
-        var node = iD.osmNode({id: 'a', loc: [0, 0]});
-        var way  = iD.osmWay({id: '-', nodes: ['a']});
+        var node = new iD.osmNode({id: 'a', loc: [0, 0]});
+        var way  = new iD.osmWay({id: '-', nodes: ['a']});
         var member = {id: '-', type: 'way'};
-        var graph = iD.coreGraph([node, way]);
+        var graph = new iD.coreGraph([node, way]);
 
         var result = iD.osmJoinWays([member], graph);
 
@@ -168,12 +22,12 @@ describe('iD.osmJoinWays', function() {
         //
         //  a ---> b ===> c
         //
-        var a = iD.osmNode({id: 'a', loc: [0, 0]});
-        var b = iD.osmNode({id: 'b', loc: [1, 0]});
-        var c = iD.osmNode({id: 'c', loc: [2, 0]});
-        var w1 = iD.osmWay({id: '-', nodes: ['a', 'b']});
-        var w2 = iD.osmWay({id: '=', nodes: ['b', 'c']});
-        var graph = iD.coreGraph([a, b, c, w1, w2]);
+        var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+        var b = new iD.osmNode({id: 'b', loc: [1, 0]});
+        var c = new iD.osmNode({id: 'c', loc: [2, 0]});
+        var w1 = new iD.osmWay({id: '-', nodes: ['a', 'b']});
+        var w2 = new iD.osmWay({id: '=', nodes: ['b', 'c']});
+        var graph = new iD.coreGraph([a, b, c, w1, w2]);
 
         var result = iD.osmJoinWays([w1, w2], graph);
         expect(result.length).to.equal(1);
@@ -188,12 +42,12 @@ describe('iD.osmJoinWays', function() {
         //
         //  a ---> b ===> c
         //
-        var a = iD.osmNode({id: 'a', loc: [0, 0]});
-        var b = iD.osmNode({id: 'b', loc: [1, 0]});
-        var c = iD.osmNode({id: 'c', loc: [2, 0]});
-        var w1 = iD.osmWay({id: '-', nodes: ['a', 'b']});
-        var w2 = iD.osmWay({id: '=', nodes: ['b', 'c']});
-        var graph = iD.coreGraph([a, b, c, w1, w2]);
+        var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+        var b = new iD.osmNode({id: 'b', loc: [1, 0]});
+        var c = new iD.osmNode({id: 'c', loc: [2, 0]});
+        var w1 = new iD.osmWay({id: '-', nodes: ['a', 'b']});
+        var w2 = new iD.osmWay({id: '=', nodes: ['b', 'c']});
+        var graph = new iD.coreGraph([a, b, c, w1, w2]);
 
         var result = iD.osmJoinWays([w2, w1], graph);
         expect(result.length).to.equal(1);
@@ -209,16 +63,16 @@ describe('iD.osmJoinWays', function() {
         //  a ---> b ===> c
         //  r: ['-', '=']
         //
-        var a = iD.osmNode({id: 'a', loc: [0, 0]});
-        var b = iD.osmNode({id: 'b', loc: [1, 0]});
-        var c = iD.osmNode({id: 'c', loc: [2, 0]});
-        var w1 = iD.osmWay({id: '-', nodes: ['a', 'b']});
-        var w2 = iD.osmWay({id: '=', nodes: ['b', 'c']});
-        var r = iD.osmRelation({id: 'r', members: [
+        var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+        var b = new iD.osmNode({id: 'b', loc: [1, 0]});
+        var c = new iD.osmNode({id: 'c', loc: [2, 0]});
+        var w1 = new iD.osmWay({id: '-', nodes: ['a', 'b']});
+        var w2 = new iD.osmWay({id: '=', nodes: ['b', 'c']});
+        var r = new iD.osmRelation({id: 'r', members: [
             {id: '-', type: 'way'},
             {id: '=', type: 'way'}
         ]});
-        var graph = iD.coreGraph([a, b, c, w1, w2, r]);
+        var graph = new iD.coreGraph([a, b, c, w1, w2, r]);
 
         var result = iD.osmJoinWays(r.members, graph);
         expect(result.length).to.equal(1);
@@ -234,16 +88,16 @@ describe('iD.osmJoinWays', function() {
         //  a ---> b ===> c
         //  r: ['=', '-']
         //
-        var a = iD.osmNode({id: 'a', loc: [0, 0]});
-        var b = iD.osmNode({id: 'b', loc: [1, 0]});
-        var c = iD.osmNode({id: 'c', loc: [2, 0]});
-        var w1 = iD.osmWay({id: '-', nodes: ['a', 'b']});
-        var w2 = iD.osmWay({id: '=', nodes: ['b', 'c']});
-        var r = iD.osmRelation({id: 'r', members: [
+        var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+        var b = new iD.osmNode({id: 'b', loc: [1, 0]});
+        var c = new iD.osmNode({id: 'c', loc: [2, 0]});
+        var w1 = new iD.osmWay({id: '-', nodes: ['a', 'b']});
+        var w2 = new iD.osmWay({id: '=', nodes: ['b', 'c']});
+        var r = new iD.osmRelation({id: 'r', members: [
             {id: '=', type: 'way'},
             {id: '-', type: 'way'}
         ]});
-        var graph = iD.coreGraph([a, b, c, w1, w2, r]);
+        var graph = new iD.coreGraph([a, b, c, w1, w2, r]);
 
         var result = iD.osmJoinWays(r.members, graph);
         expect(result.length).to.equal(1);
@@ -259,19 +113,19 @@ describe('iD.osmJoinWays', function() {
         //  a <=== b ---> c ~~~> d
         //  r: ['-', '~', '=']
         //
-        var a = iD.osmNode({id: 'a', loc: [0, 0]});
-        var b = iD.osmNode({id: 'b', loc: [1, 0]});
-        var c = iD.osmNode({id: 'c', loc: [2, 0]});
-        var d = iD.osmNode({id: 'd', loc: [3, 0]});
-        var w1 = iD.osmWay({id: '-', nodes: ['b', 'c']});
-        var w2 = iD.osmWay({id: '=', nodes: ['b', 'a']});
-        var w3 = iD.osmWay({id: '~', nodes: ['c', 'd']});
-        var r = iD.osmRelation({id: 'r', members: [
+        var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+        var b = new iD.osmNode({id: 'b', loc: [1, 0]});
+        var c = new iD.osmNode({id: 'c', loc: [2, 0]});
+        var d = new iD.osmNode({id: 'd', loc: [3, 0]});
+        var w1 = new iD.osmWay({id: '-', nodes: ['b', 'c']});
+        var w2 = new iD.osmWay({id: '=', nodes: ['b', 'a']});
+        var w3 = new iD.osmWay({id: '~', nodes: ['c', 'd']});
+        var r = new iD.osmRelation({id: 'r', members: [
             {id: '-', type: 'way'},
             {id: '~', type: 'way'},
             {id: '=', type: 'way'}
         ]});
-        var graph = iD.coreGraph([a, b, c, d, w1, w2, w3, r]);
+        var graph = new iD.coreGraph([a, b, c, d, w1, w2, w3, r]);
 
         var result = iD.osmJoinWays(r.members, graph);
         expect(result.length).to.equal(1);
@@ -290,12 +144,12 @@ describe('iD.osmJoinWays', function() {
         // Result:
         //   a ---> b ===> c    (and tags on === reversed)
         //
-        var a = iD.osmNode({id: 'a', loc: [0, 0]});
-        var b = iD.osmNode({id: 'b', loc: [1, 0]});
-        var c = iD.osmNode({id: 'c', loc: [2, 0]});
-        var w1 = iD.osmWay({id: '-', nodes: ['a', 'b']});
-        var w2 = iD.osmWay({id: '=', nodes: ['c', 'b'], tags: {'oneway': 'yes', 'lanes:forward': 2}});
-        var graph = iD.coreGraph([a, b, c, w1, w2]);
+        var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+        var b = new iD.osmNode({id: 'b', loc: [1, 0]});
+        var c = new iD.osmNode({id: 'c', loc: [2, 0]});
+        var w1 = new iD.osmWay({id: '-', nodes: ['a', 'b']});
+        var w2 = new iD.osmWay({id: '=', nodes: ['c', 'b'], tags: {'oneway': 'yes', 'lanes:forward': 2}});
+        var graph = new iD.coreGraph([a, b, c, w1, w2]);
 
         var result = iD.osmJoinWays([w1, w2], graph);
         expect(result.length).to.equal(1);
@@ -316,16 +170,16 @@ describe('iD.osmJoinWays', function() {
         // Result:
         //   a ---> b ===> c   (and --- reversed)
         //
-        var a = iD.osmNode({id: 'a', loc: [0, 0]});
-        var b = iD.osmNode({id: 'b', loc: [1, 0]});
-        var c = iD.osmNode({id: 'c', loc: [2, 0]});
-        var w1 = iD.osmWay({id: '-', nodes: ['b', 'a'], tags: {'oneway': 'yes', 'lanes:forward': 2}});
-        var w2 = iD.osmWay({id: '=', nodes: ['b', 'c']});
-        var r = iD.osmRelation({id: 'r', members: [
+        var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+        var b = new iD.osmNode({id: 'b', loc: [1, 0]});
+        var c = new iD.osmNode({id: 'c', loc: [2, 0]});
+        var w1 = new iD.osmWay({id: '-', nodes: ['b', 'a'], tags: {'oneway': 'yes', 'lanes:forward': 2}});
+        var w2 = new iD.osmWay({id: '=', nodes: ['b', 'c']});
+        var r = new iD.osmRelation({id: 'r', members: [
             {id: '-', type: 'way'},
             {id: '=', type: 'way'}
         ]});
-        var graph = iD.coreGraph([a, b, c, w1, w2, r]);
+        var graph = new iD.coreGraph([a, b, c, w1, w2, r]);
 
         var result = iD.osmJoinWays(r.members, graph);
         expect(result.length).to.equal(1);
@@ -337,15 +191,15 @@ describe('iD.osmJoinWays', function() {
     });
 
     it('ignores non-way members', function() {
-        var node = iD.osmNode({loc: [0, 0]});
+        var node = new iD.osmNode({loc: [0, 0]});
         var member = {id: 'n', type: 'node'};
-        var graph = iD.coreGraph([node]);
+        var graph = new iD.coreGraph([node]);
         expect(iD.osmJoinWays([member], graph)).to.eql([]);
     });
 
     it('ignores incomplete members', function() {
         var member = {id: 'w', type: 'way'};
-        var graph = iD.coreGraph();
+        var graph = new iD.coreGraph();
         expect(iD.osmJoinWays([member], graph)).to.eql([]);
     });
 
@@ -355,17 +209,17 @@ describe('iD.osmJoinWays', function() {
         //    / \
         //   a   c     d ---> e ===> f
         //
-        var a = iD.osmNode({id: 'a', loc: [0, 0]});
-        var b = iD.osmNode({id: 'b', loc: [1, 1]});
-        var c = iD.osmNode({id: 'c', loc: [2, 0]});
-        var d = iD.osmNode({id: 'd', loc: [5, 0]});
-        var e = iD.osmNode({id: 'e', loc: [6, 0]});
-        var f = iD.osmNode({id: 'f', loc: [7, 0]});
-        var w1 = iD.osmWay({id: '/', nodes: ['a', 'b']});
-        var w2 = iD.osmWay({id: '\\', nodes: ['b', 'c']});
-        var w3 = iD.osmWay({id: '-', nodes: ['d', 'e']});
-        var w4 = iD.osmWay({id: '=', nodes: ['e', 'f']});
-        var graph = iD.coreGraph([a, b, c, d, e, f, w1, w2, w3, w4]);
+        var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+        var b = new iD.osmNode({id: 'b', loc: [1, 1]});
+        var c = new iD.osmNode({id: 'c', loc: [2, 0]});
+        var d = new iD.osmNode({id: 'd', loc: [5, 0]});
+        var e = new iD.osmNode({id: 'e', loc: [6, 0]});
+        var f = new iD.osmNode({id: 'f', loc: [7, 0]});
+        var w1 = new iD.osmWay({id: '/', nodes: ['a', 'b']});
+        var w2 = new iD.osmWay({id: '\\', nodes: ['b', 'c']});
+        var w3 = new iD.osmWay({id: '-', nodes: ['d', 'e']});
+        var w4 = new iD.osmWay({id: '=', nodes: ['e', 'f']});
+        var graph = new iD.coreGraph([a, b, c, d, e, f, w1, w2, w3, w4]);
 
         var result = iD.osmJoinWays([w1, w2, w3, w4], graph);
 
@@ -391,23 +245,23 @@ describe('iD.osmJoinWays', function() {
         //
         //   r: ['/', '\', '-', '=']
         //
-        var a = iD.osmNode({id: 'a', loc: [0, 0]});
-        var b = iD.osmNode({id: 'b', loc: [1, 1]});
-        var c = iD.osmNode({id: 'c', loc: [2, 0]});
-        var d = iD.osmNode({id: 'd', loc: [5, 0]});
-        var e = iD.osmNode({id: 'e', loc: [6, 0]});
-        var f = iD.osmNode({id: 'f', loc: [7, 0]});
-        var w1 = iD.osmWay({id: '/', nodes: ['a', 'b']});
-        var w2 = iD.osmWay({id: '\\', nodes: ['b', 'c']});
-        var w3 = iD.osmWay({id: '-', nodes: ['d', 'e']});
-        var w4 = iD.osmWay({id: '=', nodes: ['e', 'f']});
-        var r = iD.osmRelation({id: 'r', members: [
+        var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+        var b = new iD.osmNode({id: 'b', loc: [1, 1]});
+        var c = new iD.osmNode({id: 'c', loc: [2, 0]});
+        var d = new iD.osmNode({id: 'd', loc: [5, 0]});
+        var e = new iD.osmNode({id: 'e', loc: [6, 0]});
+        var f = new iD.osmNode({id: 'f', loc: [7, 0]});
+        var w1 = new iD.osmWay({id: '/', nodes: ['a', 'b']});
+        var w2 = new iD.osmWay({id: '\\', nodes: ['b', 'c']});
+        var w3 = new iD.osmWay({id: '-', nodes: ['d', 'e']});
+        var w4 = new iD.osmWay({id: '=', nodes: ['e', 'f']});
+        var r = new iD.osmRelation({id: 'r', members: [
             {id: '/', type: 'way'},
             {id: '\\', type: 'way'},
             {id: '-', type: 'way'},
             {id: '=', type: 'way'}
         ]});
-        var graph = iD.coreGraph([a, b, c, d, e, f, w1, w2, w3, w4, r]);
+        var graph = new iD.coreGraph([a, b, c, d, e, f, w1, w2, w3, w4, r]);
         var result = iD.osmJoinWays(r.members, graph);
 
         expect(result.length).to.equal(2);
@@ -432,17 +286,17 @@ describe('iD.osmJoinWays', function() {
         //
         //   r: ['=', '-', '~', '\', '/', '-', '=']
         //
-        var a = iD.osmNode({id: 'a', loc: [0, 0]});
-        var b = iD.osmNode({id: 'b', loc: [1, 0]});
-        var c = iD.osmNode({id: 'c', loc: [2, 0]});
-        var d = iD.osmNode({id: 'd', loc: [4, 0]});
-        var e = iD.osmNode({id: 'e', loc: [3, 1]});
-        var w1 = iD.osmWay({id: '=', nodes: ['b', 'a']});
-        var w2 = iD.osmWay({id: '-', nodes: ['b', 'c']});
-        var w3 = iD.osmWay({id: '~', nodes: ['c', 'd']});
-        var w4 = iD.osmWay({id: '\\', nodes: ['d', 'e']});
-        var w5 = iD.osmWay({id: '/', nodes: ['c', 'e']});
-        var r = iD.osmRelation({id: 'r', members: [
+        var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+        var b = new iD.osmNode({id: 'b', loc: [1, 0]});
+        var c = new iD.osmNode({id: 'c', loc: [2, 0]});
+        var d = new iD.osmNode({id: 'd', loc: [4, 0]});
+        var e = new iD.osmNode({id: 'e', loc: [3, 1]});
+        var w1 = new iD.osmWay({id: '=', nodes: ['b', 'a']});
+        var w2 = new iD.osmWay({id: '-', nodes: ['b', 'c']});
+        var w3 = new iD.osmWay({id: '~', nodes: ['c', 'd']});
+        var w4 = new iD.osmWay({id: '\\', nodes: ['d', 'e']});
+        var w5 = new iD.osmWay({id: '/', nodes: ['c', 'e']});
+        var r = new iD.osmRelation({id: 'r', members: [
             {id: '=', type: 'way'},
             {id: '-', type: 'way'},
             {id: '~', type: 'way'},
@@ -451,7 +305,7 @@ describe('iD.osmJoinWays', function() {
             {id: '-', type: 'way'},
             {id: '=', type: 'way'}
         ]});
-        var graph = iD.coreGraph([a, b, c, d, e, w1, w2, w3, w4, w5, r]);
+        var graph = new iD.coreGraph([a, b, c, d, e, w1, w2, w3, w4, w5, r]);
 
         var result = iD.osmJoinWays(r.members, graph);
         expect(result.length).to.equal(1);

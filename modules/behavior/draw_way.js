@@ -42,7 +42,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
     function createDrawNode(loc) {
         // don't make the draw node until we actually need it
-        _drawNode = osmNode({ loc: loc });
+        _drawNode = new osmNode({ loc: loc });
 
         context.pauseChangeDispatch();
         context.replace(function actionAddDrawNode(graph) {
@@ -424,8 +424,10 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     }
 
     /** see PR #8671 and #9340 */
-    function followMode() {
+    function followMode(d3_event) {
         if (_didResolveTempEdit) return;
+
+        d3_event.preventDefault();
 
         try {
             // If we're drawing an area, the first node = last node.
@@ -501,7 +503,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 id: nextNode.id,
                 properties: { target: true, entity: nextNode },
             });
-        } catch (ex) {
+        } catch {
             context.ui().flash
                 .duration(4000)
                 .iconName('#iD-icon-no')
@@ -547,6 +549,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     drawWay.cancel = function() {
         context.pauseChangeDispatch();
         resetToStartGraph();
+        context.enter(modeBrowse(context));
         context.resumeChangeDispatch();
 
         window.setTimeout(function() {
@@ -557,8 +560,6 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             .classed('nope', false)
             .classed('nope-disabled', false)
             .classed('nope-suppressed', false);
-
-        context.enter(modeBrowse(context));
     };
 
 

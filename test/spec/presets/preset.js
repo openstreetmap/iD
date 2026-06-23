@@ -1,3 +1,5 @@
+import { spyOn } from '@vitest/spy';
+
 describe('iD.presetPreset', function() {
 
     describe('#fields', function() {
@@ -41,29 +43,29 @@ describe('iD.presetPreset', function() {
     describe('#matchScore', function() {
         it('returns -1 if preset does not match tags', function() {
             var preset = iD.presetPreset('test', {tags: {foo: 'bar'}});
-            var entity = iD.osmWay({tags: {highway: 'motorway'}});
+            var entity = new iD.osmWay({tags: {highway: 'motorway'}});
             expect(preset.matchScore(entity.tags)).to.equal(-1);
         });
 
         it('returns the value of the matchScore property when matched', function() {
             var preset = iD.presetPreset('test', {tags: {highway: 'motorway'}, matchScore: 0.2});
-            var entity = iD.osmWay({tags: {highway: 'motorway'}});
+            var entity = new iD.osmWay({tags: {highway: 'motorway'}});
             expect(preset.matchScore(entity.tags)).to.equal(0.2);
         });
 
         it('defaults to the number of matched tags', function() {
             var preset = iD.presetPreset('test', {tags: {highway: 'residential'}});
-            var entity = iD.osmWay({tags: {highway: 'residential'}});
+            var entity = new iD.osmWay({tags: {highway: 'residential'}});
             expect(preset.matchScore(entity.tags)).to.equal(1);
 
             preset = iD.presetPreset('test', {tags: {highway: 'service', service: 'alley'}});
-            entity = iD.osmWay({tags: {highway: 'service', service: 'alley'}});
+            entity = new iD.osmWay({tags: {highway: 'service', service: 'alley'}});
             expect(preset.matchScore(entity.tags)).to.equal(2);
         });
 
         it('counts * as a match for any value with score 0.5', function() {
             var preset = iD.presetPreset('test', {tags: {building: '*'}});
-            var entity = iD.osmWay({tags: {building: 'yep'}});
+            var entity = new iD.osmWay({tags: {building: 'yep'}});
             expect(preset.matchScore(entity.tags)).to.equal(0.5);
         });
 
@@ -77,12 +79,12 @@ describe('iD.presetPreset', function() {
                 addTags: { 'name': 'Walmart Neighborhood Market' }
             });
 
-            var supercenter = iD.osmWay({ tags: {
+            var supercenter = new iD.osmWay({ tags: {
                 'brand:wikidata': 'Q483551',
                 'shop': 'supermarket',
                 'name': 'Walmart Supercenter'
             }});
-            var market = iD.osmWay({ tags: {
+            var market = new iD.osmWay({ tags: {
                 'brand:wikidata': 'Q483551',
                 'shop': 'supermarket',
                 'name': 'Walmart Neighborhood Market'
@@ -121,12 +123,12 @@ describe('iD.presetPreset', function() {
     describe('#setTags', function() {
         var _savedAreaKeys;
 
-        before(function () {
+        beforeEach(function () {
             _savedAreaKeys = iD.osmAreaKeys;
             iD.osmSetAreaKeys({ building: {}, natural: {} });
         });
 
-        after(function () {
+        afterEach(function () {
             iD.osmSetAreaKeys(_savedAreaKeys);
         });
 
@@ -202,16 +204,41 @@ describe('iD.presetPreset', function() {
             expect(preset.unsetTags({highway: 'pedestrian', area: 'yes'}, 'area')).to.eql({});
         });
 
-        it('preserves tags that do not match field default tags', function() {
+        it('preserves tags that do not match field default value', function() {
             var isAddable = true;
             var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
             var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
             expect(preset.unsetTags({building: 'yep'}, 'area')).to.eql({ building: 'yep'});
         });
 
+        it('preserves tags that do match field default value, but do not match geometry', function() {
+            var isAddable = true;
+            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
+            var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
+            expect(preset.unsetTags({building: 'yes'}, 'line')).to.eql({ building: 'yes'});
+        });
+
         it('preserves tags that are not listed in removeTags', function() {
             var preset = iD.presetPreset('test', {tags: {a: 'b'}, removeTags: {}});
             expect(preset.unsetTags({a: 'b'}, 'area')).to.eql({a: 'b'});
+        });
+
+        it('preserves field default tags when "skipFieldDefaults" flag is on', function() {
+            var isAddable = true;
+            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
+            var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
+            expect(preset.unsetTags({building: 'yes'}, 'area', undefined, true)).to.eql({building: 'yes'});
+        });
+
+        it('preserves "ignoringKeys" tags', function() {
+            var preset = iD.presetPreset('test', {tags: {a: 'a', b: 'b'}});
+            expect(preset.unsetTags({a: 'a', b: 'b'}, 'area', ['b'])).to.eql({b: 'b'});
+        });
+
+        it('preserves "ignoringKeys" tags from default fields', function() {
+            var field = iD.presetField('field', {key: 'b', geometry: 'area', default: 'default'});
+            var preset = iD.presetPreset('test', {fields: ['field']}, true, {field: field});
+            expect(preset.unsetTags({b: 'default'}, 'area', ['b'])).to.eql({b: 'default'});
         });
 
         it('uses tags from addTags if removeTags is not defined', function() {
@@ -238,22 +265,22 @@ describe('iD.presetPreset', function() {
             allPresets.preset = preset;
 
             // mock localizer
-            sinon.spy(other, 't');
-            sinon.spy(preset, 't');
+            spyOn(other, 't');
+            spyOn(preset, 't');
 
             preset.name();
             expect(other.t).to.have.been.calledOnce;
             expect(preset.t).not.to.have.been.called;
 
-            other.t.resetHistory();
-            preset.t.resetHistory();
+            other.t.mockClear();
+            preset.t.mockClear();
 
             preset.aliases();
             expect(other.t).to.have.been.calledOnce;
             expect(preset.t).not.to.have.been.called;
 
-            other.t.resetHistory();
-            preset.t.resetHistory();
+            other.t.mockClear();
+            preset.t.mockClear();
 
             preset.terms();
             expect(other.t).to.have.been.calledOnce;

@@ -1,6 +1,7 @@
 import {
     select as d3_select
 } from 'd3-selection';
+import { clamp } from 'es-toolkit/compat';
 
 import { t } from '../core/localizer';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -8,6 +9,9 @@ import { svgIcon } from '../svg/icon';
 import { utilGetDimensions } from '../util/dimensions';
 import { utilRebind } from '../util';
 import { services } from '../services';
+import { uiTooltip } from './tooltip';
+import { actionChangeTags } from '../actions';
+import { geoSphericalDistance } from '../geo';
 
 export function uiPhotoviewer(context) {
 
@@ -15,15 +19,19 @@ export function uiPhotoviewer(context) {
 
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
+    const addPhotoIdButton = new Set(['mapillary', 'panoramax']);
+
     function photoviewer(selection) {
         selection
             .append('button')
             .attr('class', 'thumb-hide')
             .attr('title', t('icons.close'))
             .on('click', function () {
-                if (services.streetside) { services.streetside.hideViewer(context); }
-                if (services.mapillary) { services.mapillary.hideViewer(context); }
-                if (services.kartaview) { services.kartaview.hideViewer(context); }
+                for (const service of Object.values(services)) {
+                    if (typeof service.hideViewer === 'function') {
+                        service.hideViewer(context);
+                    }
+                }
             })
             .append('div')
             .call(svgIcon('#iD-icon-close'));
@@ -59,6 +67,135 @@ export function uiPhotoviewer(context) {
                 buildResizeListener(selection, 'resize', dispatch, { resizeOnY: true })
             );
 
+        // update sett_photo_from_viewer button on selection change and when tags change
+        context.features().on('change.setPhotoFromViewer', function() {
+            setPhotoTagButton();
+        });
+        context.history().on('change.setPhotoFromViewer', function() {
+            setPhotoTagButton();
+        });
+
+
+        function setPhotoTagButton() {
+            const service = getServiceId();
+            const isActiveForService = addPhotoIdButton.has(service) &&
+                services[service].isViewerOpen() &&
+                layerEnabled(service) &&
+                context.mode().id === 'select';
+
+            renderAddPhotoIdButton(service, isActiveForService);
+
+            function layerEnabled(which) {
+                const layers = context.layers();
+                const layer = layers.layer(which);
+                return layer.enabled();
+            }
+
+            function getServiceId() {
+                for (const serviceId in services) {
+                    const service = services[serviceId];
+                    if (typeof service.isViewerOpen === 'function') {
+                        if (service.isViewerOpen()) {
+                            return serviceId;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            function renderAddPhotoIdButton(service, shouldDisplay) {
+                const button = selection.selectAll('.set-photo-from-viewer')
+                    .data(shouldDisplay ? [0] : []);
+
+                button.exit()
+                    .remove();
+
+                const buttonEnter = button.enter()
+                    .append('button')
+                    .attr('class', 'set-photo-from-viewer')
+                    .call(svgIcon('#fas-eye-dropper'))
+                    .call(uiTooltip()
+                        .title(() => t.append('inspector.set_photo_from_viewer.enable'))
+                        .placement('right')
+                    );
+
+                buttonEnter
+                    .select('.tooltip')
+                    .classed('dark', true)
+                    .style('width', '300px');
+
+                buttonEnter
+                    .merge(button)
+                    .on('click', function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const activeServiceId = getServiceId();
+                        const image = services[activeServiceId].getActiveImage();
+
+                        const action = graph =>
+                            context.selectedIDs().reduce((graph, entityID) => {
+                                const tags = graph.entity(entityID).tags;
+                                const action = actionChangeTags(entityID, {...tags, [activeServiceId]: image.id});
+                                return action(graph);
+                            }, graph);
+
+                        const annotation = t('operations.change_tags.annotation');
+                        context.perform(action, annotation);
+                        buttonDisable('already_set');
+                    });
+
+                if (service === 'panoramax') {
+                    const panoramaxControls = selection.select('.panoramax-wrapper .pnlm-zoom-controls.pnlm-controls');
+
+                    panoramaxControls
+                        .style('margin-top', shouldDisplay ? '36px' : '6px');
+                }
+
+                if (!shouldDisplay) return;
+
+                const activeImage = services[service].getActiveImage();
+
+                const graph = context.graph();
+                const entities = context.selectedIDs()
+                    .map(id => graph.hasEntity(id))
+                    .filter(Boolean);
+
+                if (entities.map(entity => entity.tags[service])
+                    .every(value => value === activeImage?.id)) {
+                    buttonDisable('already_set');
+                } else if (activeImage && entities
+                    .map(entity => entity.extent(context.graph()).center())
+                    .every(loc => geoSphericalDistance(loc, activeImage.loc) > 100)) {
+                    buttonDisable('too_far');
+                } else {
+                    buttonDisable(false);
+                }
+            }
+
+            function buttonDisable(reason) {
+                const disabled = reason !== false;
+                const button = selection.selectAll('.set-photo-from-viewer').data([0]);
+                button.attr('disabled', disabled ? 'true' : null);
+                button.classed('disabled', disabled);
+                button.call(uiTooltip().destroyAny);
+                if (disabled) {
+                    button.call(uiTooltip()
+                        .title(() => t.append(`inspector.set_photo_from_viewer.disable.${reason}`))
+                        .placement('right')
+                    );
+                } else {
+                    button.call(uiTooltip()
+                        .title(() => t.append('inspector.set_photo_from_viewer.enable'))
+                        .placement('right')
+                    );
+                }
+
+                button.select('.tooltip')
+                    .classed('dark', true)
+                    .style('width', '300px');
+            }
+        }
+
         function buildResizeListener(target, eventName, dispatch, options) {
 
             var resizeOnX = !!options.resizeOnX;
@@ -80,22 +217,22 @@ export function uiPhotoviewer(context) {
                 var mapSize = context.map().dimensions();
 
                 if (resizeOnX) {
-                    var maxWidth = mapSize[0];
-                    var newWidth = clamp((startWidth + d3_event.clientX - startX), minWidth, maxWidth);
+                    var mapWidth = mapSize[0];
+                    const viewerMargin = parseInt(d3_select('.photoviewer').style('margin-left'), 10);
+                    var newWidth = clamp((startWidth + d3_event.clientX - startX), minWidth, mapWidth - viewerMargin * 2);
                     target.style('width', newWidth + 'px');
                 }
 
                 if (resizeOnY) {
-                    var maxHeight = mapSize[1] - 90;  // preserve space at top/bottom of map
+                    const menuHeight = utilGetDimensions(d3_select('.top-toolbar'))[1] +
+                                       utilGetDimensions(d3_select('.map-footer'))[1];
+                    const viewerMargin = parseInt(d3_select('.photoviewer').style('margin-bottom'), 10);
+                    var maxHeight = mapSize[1] - menuHeight - viewerMargin * 2;  // preserve space at top/bottom of map
                     var newHeight = clamp((startHeight + startY - d3_event.clientY), minHeight, maxHeight);
                     target.style('height', newHeight + 'px');
                 }
 
-                dispatch.call(eventName, target, utilGetDimensions(target, true));
-            }
-
-            function clamp(num, min, max) {
-                return Math.max(min, Math.min(num, max));
+                dispatch.call(eventName, target, subtractPadding(utilGetDimensions(target, true), target));
             }
 
             function stopResize(d3_event) {
@@ -137,21 +274,37 @@ export function uiPhotoviewer(context) {
         var photoviewer = context.container().select('.photoviewer');
         var content = context.container().select('.main-content');
         var mapDimensions = utilGetDimensions(content, true);
-        // shrink photo viewer if it is too big
-        // (-90 preserves space at top and bottom of map used by menus)
+        const menuHeight = utilGetDimensions(d3_select('.top-toolbar'))[1] +
+                           utilGetDimensions(d3_select('.map-footer'))[1];
+        const viewerMargin = parseInt(d3_select('.photoviewer').style('margin-bottom'), 10);
+        // shrink photo viewer if it is too big (preserves space at top and bottom of map used by menus)
         var photoDimensions = utilGetDimensions(photoviewer, true);
-        if (photoDimensions[0] > mapDimensions[0] || photoDimensions[1] > (mapDimensions[1] - 90)) {
+        if (photoDimensions[0] > mapDimensions[0] || photoDimensions[1] > (mapDimensions[1] - menuHeight - viewerMargin * 2)) {
             var setPhotoDimensions = [
                 Math.min(photoDimensions[0], mapDimensions[0]),
-                Math.min(photoDimensions[1], mapDimensions[1] - 90),
+                Math.min(photoDimensions[1], mapDimensions[1] - menuHeight - viewerMargin * 2),
             ];
 
             photoviewer
                 .style('width', setPhotoDimensions[0] + 'px')
                 .style('height', setPhotoDimensions[1] + 'px');
 
-            dispatch.call('resize', photoviewer, setPhotoDimensions);
+            dispatch.call('resize', photoviewer, subtractPadding(setPhotoDimensions, photoviewer));
+        } else {
+            dispatch.call('resize', photoviewer, subtractPadding(photoDimensions, photoviewer));
         }
+    };
+
+    function subtractPadding(dimensions, selection) {
+        return [
+            dimensions[0] - parseFloat(selection.style('padding-left')) - parseFloat(selection.style('padding-right')),
+            dimensions[1] - parseFloat(selection.style('padding-top')) - parseFloat(selection.style('padding-bottom'))
+        ];
+    }
+
+    photoviewer.viewerSize = function() {
+        const photoviewer = context.container().select('.photoviewer');
+        return subtractPadding(utilGetDimensions(photoviewer, true), photoviewer);
     };
 
     return utilRebind(photoviewer, dispatch, 'on');

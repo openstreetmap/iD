@@ -26,22 +26,27 @@ describe('iD.svgLayers', function () {
     it('creates default data layers', function () {
         container.call(iD.svgLayers(projection, context));
         var nodes = container.selectAll('svg .data-layer').nodes();
-        expect(nodes.length).to.eql(15);
-        expect(d3.select(nodes[0]).classed('osm')).to.be.true;
-        expect(d3.select(nodes[1]).classed('notes')).to.be.true;
-        expect(d3.select(nodes[2]).classed('data')).to.be.true;
-        expect(d3.select(nodes[3]).classed('keepRight')).to.be.true;
-        expect(d3.select(nodes[4]).classed('improveOSM')).to.be.true;
-        expect(d3.select(nodes[5]).classed('osmose')).to.be.true;
-        expect(d3.select(nodes[6]).classed('streetside')).to.be.true;
-        expect(d3.select(nodes[7]).classed('mapillary')).to.be.true;
-        expect(d3.select(nodes[8]).classed('mapillary-position')).to.be.true;
-        expect(d3.select(nodes[9]).classed('mapillary-map-features')).to.be.true;
-        expect(d3.select(nodes[10]).classed('mapillary-signs')).to.be.true;
-        expect(d3.select(nodes[11]).classed('kartaview')).to.be.true;
-        expect(d3.select(nodes[12]).classed('debug')).to.be.true;
-        expect(d3.select(nodes[13]).classed('geolocate')).to.be.true;
-        expect(d3.select(nodes[14]).classed('touch')).to.be.true;
+        expect(nodes.length).to.eql(17);
+        /* eslint-disable no-useless-assignment */
+        let i = 0;
+        expect(d3.select(nodes[i++]).classed('osm')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('notes')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('data')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('osmose')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('streetside')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('mapillary')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('mapillary-position')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('mapillary-map-features')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('mapillary-signs')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('kartaview')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('mapilio')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('vegbilder')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('panoramax')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('local-photos')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('debug')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('geolocate')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('touch')).to.be.true;
+        /* eslint-enable no-useless-assignment */
     });
 
 });

@@ -6,7 +6,7 @@ import { utilGetSetValue, utilNoAuto } from '../util';
 
 
 export function uiFormFields(context) {
-    var moreCombo = uiCombobox(context, 'more-fields').minItems(1);
+    var moreCombo = uiCombobox(context, 'more-fields');
     var _fieldsArr = [];
     var _lastPlaceholder = '';
     var _state = '';
@@ -16,7 +16,8 @@ export function uiFormFields(context) {
     function formFields(selection) {
         var allowedFields = _fieldsArr.filter(function(field) { return field.isAllowed(); });
         var shown = allowedFields.filter(function(field) { return field.isShown(); });
-        var notShown = allowedFields.filter(function(field) { return !field.isShown(); });
+        var notShown = allowedFields.filter(function(field) { return !field.isShown(); })
+            .sort(function(a, b) { return (a.universal === b.universal ? 0 : a.universal ? 1 : -1); });
 
         var container = selection.selectAll('.form-fields-container')
             .data([0]);

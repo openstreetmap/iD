@@ -2,12 +2,13 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
 import { t, localizer } from '../core/localizer';
-import { locationManager } from '../core/locations';
+import { locationManager } from '../core/location_manager';
 import { svgIcon } from '../svg/icon';
 import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo/extent';
 import { uiFieldHelp } from './field_help';
 import { uiFields } from './fields';
+import { LANGUAGE_SUFFIX_REGEX } from './fields/localized';
 import { uiTagReference } from './tag_reference';
 import { utilRebind, utilUniqueDomId } from '../util';
 
@@ -38,11 +39,8 @@ export function uiField(context, presetField, entityIDs, options) {
 
     var _locked = false;
     var _lockedTip = uiTooltip()
-        .title(() => t.append('inspector.lock.suggestion', { label: field.title }))
+        .title(() => t.append('inspector.lock.suggestion', { label: field.label() }))
         .placement('bottom');
-
-
-    field.keys = field.keys || [field.key];
 
     // only create the fields that are actually being shown
     if (_show && !field.impl) {
@@ -67,20 +65,33 @@ export function uiField(context, presetField, entityIDs, options) {
     }
 
 
+    function allKeys(tags) {
+        return field.allKeys(tags);
+    }
+
+
     function isModified() {
         if (!entityIDs || !entityIDs.length) return false;
         return entityIDs.some(function(entityID) {
             var original = context.graph().base().entities[entityID];
             var latest = context.graph().entity(entityID);
-            return field.keys.some(function(key) {
-                return original ? latest.tags[key] !== original.tags[key] : latest.tags[key];
-            });
+            if (original) {
+                const originalKeys = allKeys(original.tags);
+                const latestKeys = allKeys(_tags);
+                return latestKeys.concat(originalKeys).some(function (key) {
+                    return latest.tags[key] !== original.tags[key];
+                });
+            } else {
+                return allKeys(_tags).some(function (key) {
+                    return !!latest.tags[key];
+                });
+            }
         });
     }
 
 
     function tagsContainFieldKey() {
-        return field.keys.some(function(key) {
+        return allKeys(_tags).some(function(key) {
             if (field.type === 'multiCombo') {
                 for (var tagKey in _tags) {
                     if (tagKey.indexOf(key) === 0) {
@@ -88,6 +99,15 @@ export function uiField(context, presetField, entityIDs, options) {
                     }
                 }
                 return false;
+            }
+            if (field.type === 'localized') {
+                for (let tagKey in _tags) {
+                    // matches for field:<code>, where <code> is a BCP 47 locale code
+                    let match = tagKey.match(LANGUAGE_SUFFIX_REGEX);
+                    if (match && match[1] === field.key && match[2]) {
+                        return true;
+                    }
+                }
             }
             return _tags[key] !== undefined;
         });
@@ -99,7 +119,23 @@ export function uiField(context, presetField, entityIDs, options) {
         d3_event.preventDefault();
         if (!entityIDs || _locked) return;
 
-        dispatch.call('revert', d, d.keys);
+        let keys = allKeys(_tags);
+
+        if (entityIDs) {
+            for (let i = 0; i < entityIDs.length; i++) {
+                const entityID = entityIDs[i];
+                const original = context.graph().base().entities[entityID];
+                if (original) {
+                    allKeys(original.tags).forEach(function(key) {
+                        if (keys.indexOf(key) === -1) {
+                            keys.push(key);
+                        }
+                    });
+                }
+            }
+        }
+
+        dispatch.call('revert', d, keys);
     }
 
 
@@ -109,7 +145,7 @@ export function uiField(context, presetField, entityIDs, options) {
         if (_locked) return;
 
         var t = {};
-        d.keys.forEach(function(key) {
+        allKeys(_tags).forEach(function(key) {
             t[key] = undefined;
         });
 
@@ -193,10 +229,14 @@ export function uiField(context, presetField, entityIDs, options) {
                 if (options.wrap && options.info) {
                     var referenceKey = d.key || '';
                     if (d.type === 'multiCombo') {   // lookup key without the trailing ':'
-                        referenceKey = referenceKey.replace(/:$/, '');
+                        referenceKey = referenceKey.replace(/:$/, ':*');
                     }
 
-                    reference = uiTagReference(d.reference || { key: referenceKey }, context);
+                    var referenceOptions = d.reference || {
+                        key: referenceKey,
+                        value: _tags[referenceKey]
+                    };
+                    reference = uiTagReference(referenceOptions, context);
                     if (_state === 'hover') {
                         reference.showing(false);
                     }
@@ -310,8 +350,8 @@ export function uiField(context, presetField, entityIDs, options) {
         })) return false;
 
         if (entityIDs && _entityExtent && field.locationSetID) {   // is field allowed in this location?
-            var validLocations = locationManager.locationsAt(_entityExtent.center());
-            if (!validLocations[field.locationSetID]) return false;
+            var validHere = locationManager.locationSetsAt(_entityExtent.center());
+            if (!validHere.has(field.locationSetID)) return false;
         }
 
         var prerequisiteTag = field.prerequisiteTag;
@@ -323,15 +363,21 @@ export function uiField(context, presetField, entityIDs, options) {
             if (!entityIDs.every(function(entityID) {
                 var entity = context.graph().entity(entityID);
                 if (prerequisiteTag.key) {
-                    var value = entity.tags[prerequisiteTag.key];
-                    if (!value) return false;
+                    var value = entity.tags[prerequisiteTag.key] || '';
 
+                    if (prerequisiteTag.valuesNot) {
+                        return !prerequisiteTag.valuesNot.includes(value);
+                    }
                     if (prerequisiteTag.valueNot) {
                         return prerequisiteTag.valueNot !== value;
+                    }
+                    if (prerequisiteTag.values) {
+                        return prerequisiteTag.values.includes(value);
                     }
                     if (prerequisiteTag.value) {
                         return prerequisiteTag.value === value;
                     }
+                    if (!value) return false;
                 } else if (prerequisiteTag.keyNot) {
                     if (entity.tags[prerequisiteTag.keyNot]) return false;
                 }

@@ -3,6 +3,7 @@ import { json as d3_json } from 'd3-fetch';
 import RBush from 'rbush';
 import { geoExtent } from '../geo';
 import { utilQsString } from '../util';
+import { localizer } from '../core';
 
 import { nominatimApiUrl } from '../../config/id.js';
 
@@ -56,7 +57,12 @@ export default {
         var controller = new AbortController();
         _inflight[url] = controller;
 
-        d3_json(url, { signal: controller.signal })
+        d3_json(url, {
+            signal: controller.signal,
+            headers: {
+                'Accept-Language': localizer.localeCodes().join(',')
+            }
+        })
             .then(function(result) {
                 delete _inflight[url];
                 if (result && result.error) {
@@ -75,14 +81,23 @@ export default {
 
 
     search: function (val, callback) {
-        var searchVal = encodeURIComponent(val);
-        var url = apibase + 'search/' + searchVal + '?limit=10&format=json';
+        const params = {
+            q: val,
+            limit:10,
+            format: 'json'
+        };
+        var url = apibase + 'search?' + utilQsString(params);
 
         if (_inflight[url]) return;
         var controller = new AbortController();
         _inflight[url] = controller;
 
-        d3_json(url, { signal: controller.signal })
+        d3_json(url, {
+            signal: controller.signal,
+            headers: {
+                'Accept-Language': localizer.localeCodes().join(',')
+            }
+        })
             .then(function(result) {
                 delete _inflight[url];
                 if (result && result.error) {

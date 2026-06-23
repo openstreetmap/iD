@@ -8,7 +8,7 @@ import { modeBrowse } from '../../modes/browse';
 import { osmEntity } from '../../osm/entity';
 import { svgIcon } from '../../svg/icon';
 import { uiCurtain } from '../curtain';
-import { utilArrayDifference, utilArrayUniq } from '../../util';
+import { utilArrayDifference, utilArrayUniq, utilStringQs } from '../../util';
 
 import { uiIntroWelcome } from './welcome';
 import { uiIntroNavigation } from './navigation';
@@ -17,6 +17,7 @@ import { uiIntroArea } from './area';
 import { uiIntroLine } from './line';
 import { uiIntroBuilding } from './building';
 import { uiIntroStartEditing } from './start_editing';
+import { patchHash } from '../../behavior';
 
 
 const chapterUi = {
@@ -41,7 +42,7 @@ const chapterFlow = [
 
 
 export function uiIntro(context) {
-  const INTRO_IMAGERY = 'EsriWorldImageryClarity';
+  const INTRO_IMAGERY = 'Bing';
   let _introGraph = {};
   let _currChapter;
 
@@ -67,7 +68,7 @@ export function uiIntro(context) {
     // Save current map state
     let osm = context.connection();
     let history = context.history().toJSON();
-    let hash = window.location.hash;
+    let hash = utilStringQs(window.location.hash);
     let center = context.map().center();
     let zoom = context.map().zoom();
     let background = context.background().baseLayerSource();
@@ -87,7 +88,7 @@ export function uiIntro(context) {
     // Load semi-real data used in intro
     if (osm) { osm.toggle(false).reset(); }
     context.history().reset();
-    context.history().merge(Object.values(coreGraph().load(_introGraph).entities));
+    context.history().merge(Object.values(new coreGraph().load(_introGraph).entities));
     context.history().checkpoint('initial');
 
     // Setup imagery
@@ -163,7 +164,10 @@ export function uiIntro(context) {
       overlays.forEach(d => context.background().toggleOverlayLayer(d));
       if (history) { context.history().fromJSON(history, false); }
       context.map().centerZoom(center, zoom);
-      window.location.replace(hash);
+      patchHash(oldHash => ({
+        ...Object.fromEntries(Object.keys(oldHash).map(k => [k, null])),
+        ...hash
+      }));
       context.inIntro(false);
     });
 

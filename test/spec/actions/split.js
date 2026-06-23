@@ -5,11 +5,11 @@ describe('iD.actionSplit', function () {
             //
             //  a ---> b ---> c         split at 'b' not disabled
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmNode({ id: 'c', loc: [2, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] })
             ]);
 
             expect(iD.actionSplit('b').disabled(graph)).not.to.be.ok;
@@ -23,14 +23,14 @@ describe('iD.actionSplit', function () {
             //         |
             //         d
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [-1, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmNode({ id: 'c', loc: [0, 1] }),
-                iD.osmNode({ id: 'd', loc: [0, -1] }),
-                iD.osmNode({ id: '*', loc: [0, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', '*', 'b'] }),
-                iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [-1, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [0, 1] }),
+                new iD.osmNode({ id: 'd', loc: [0, -1] }),
+                new iD.osmNode({ id: '*', loc: [0, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', '*', 'b'] }),
+                new iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
             ]);
 
             expect(iD.actionSplit('*').disabled(graph)).not.to.be.ok;
@@ -44,14 +44,14 @@ describe('iD.actionSplit', function () {
             //         |
             //         d
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [-1, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmNode({ id: 'c', loc: [0, 1] }),
-                iD.osmNode({ id: 'd', loc: [0, -1] }),
-                iD.osmNode({ id: '*', loc: [0, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', '*', 'b'] }),
-                iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [-1, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [0, 1] }),
+                new iD.osmNode({ id: 'd', loc: [0, -1] }),
+                new iD.osmNode({ id: '*', loc: [0, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', '*', 'b'] }),
+                new iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
             ]);
 
             expect(iD.actionSplit('*').limitWays(['-']).disabled(graph)).not.to.be.ok;
@@ -65,12 +65,12 @@ describe('iD.actionSplit', function () {
             //  | /
             //  a -- b
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 0] }),
-                iD.osmNode({ id: 'b', loc: [0, 2] }),
-                iD.osmNode({ id: 'c', loc: [1, 2] }),
-                iD.osmNode({ id: 'd', loc: [1, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'a', 'd'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [0, 2] }),
+                new iD.osmNode({ id: 'c', loc: [1, 2] }),
+                new iD.osmNode({ id: 'd', loc: [1, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'a', 'd'] })
             ]);
 
             expect(iD.actionSplit('a').disabled(graph)).not.to.be.ok;
@@ -80,10 +80,10 @@ describe('iD.actionSplit', function () {
             //
             //  a ---> b                split at 'a' disabled - 'not eligible'
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b'] })
             ]);
 
             expect(iD.actionSplit('a').disabled(graph)).to.equal('not_eligible');
@@ -93,10 +93,10 @@ describe('iD.actionSplit', function () {
             //
             //  a ---> b                split at 'b' disabled - 'not eligible'
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b'] })
             ]);
 
             expect(iD.actionSplit('b').disabled(graph)).to.equal('not_eligible');
@@ -110,17 +110,113 @@ describe('iD.actionSplit', function () {
             //         |                (there is no '=' here)
             //         d
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [-1, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmNode({ id: 'c', loc: [0, 1] }),
-                iD.osmNode({ id: 'd', loc: [0, -1] }),
-                iD.osmNode({ id: '*', loc: [0, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', '*', 'b'] }),
-                iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [-1, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [0, 1] }),
+                new iD.osmNode({ id: 'd', loc: [0, -1] }),
+                new iD.osmNode({ id: '*', loc: [0, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', '*', 'b'] }),
+                new iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
             ]);
 
             expect(iD.actionSplit('*').limitWays(['-', '=']).disabled(graph)).to.equal('not_eligible');
+        });
+
+        it('returns \'parent_incomplete\' when parent relations are too incomplete', function () {
+            //
+            // Situation:
+            //    a ---> b ---> c         split at 'b'
+            //    Relation: ['?', '-']    member '?' missing
+            //
+            // Expected result:
+            //    forbidden, because correct order of -/= cannot be determined
+            //
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
+                new iD.osmRelation({id: 'r', members: [
+                    { id: '?', type: 'way' },
+                    { id: '-', type: 'way' }
+                ]})
+            ]);
+
+            var action = iD.actionSplit('b', ['=']);
+            expect(action.disabled(graph)).to.equal('parent_incomplete');
+        });
+
+        it('allows split operation for single-member relations', function () {
+            //
+            // Situation:
+            //    a ---> b ---> c         split at 'b'
+            //    Relation: ['-']
+            //
+            // Expected result:
+            //    any order is allowed, because the way is the only member of the relation
+            //
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
+                new iD.osmRelation({id: 'r', members: [
+                    { id: '-', type: 'way' }
+                ]})
+            ]);
+
+            var action = iD.actionSplit('b', ['=']);
+            expect(action.disabled(graph)).to.be.not.ok;
+        });
+
+        it('returns \'simple_roundabout\' when a closed roundabout is part of a route relations', function () {
+            //
+            // Situation:
+            //    x ~~~> b / a ---> b ---> c ---> a / c ===> y      split at 'b'
+            //    Relation: ['~', '-', '='], '-' tagged as 'junction=roundabout'
+            //
+            // Expected result:
+            //    forbidden, because the split action would break the connectedness of the route relation
+            //
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [1, 1] }),
+                new iD.osmNode({ id: 'x', loc: [-1, -1] }),
+                new iD.osmNode({ id: 'y', loc: [2, 2] }),
+                new iD.osmWay({ id: '~', nodes: ['x', 'b'] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'a'], tags: { junction: 'roundabout' } }),
+                new iD.osmWay({ id: '=', nodes: ['c', 'y'] }),
+                new iD.osmRelation({id: 'r', members: [
+                    { id: '~', type: 'way' },
+                    { id: '-', type: 'way' },
+                    { id: '=', type: 'way' }
+                ], tags: { type: 'route' }})
+            ]);
+
+            var action = iD.actionSplit('b', ['*']);
+            expect(action.disabled(graph)).to.equal('simple_roundabout');
+        });
+
+        it('allows splitting of a closed roundabout that is part of a junction relation', function () {
+            //
+            // Situation:
+            //    a ---> b ---> c ---> a      split at 'b'
+            //    Relation: ['-'], '-' tagged as 'junction=roundabout'
+            //
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [1, 1] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'a'], tags: { junction: 'roundabout' } }),
+                new iD.osmRelation({id: 'r', members: [
+                    { id: '-', type: 'way' }
+                ], tags: { type: 'junction' }})
+            ]);
+
+            var action = iD.actionSplit('a', ['*']);
+            expect(action.disabled(graph)).to.not.be.ok;
         });
     });
 
@@ -135,11 +231,11 @@ describe('iD.actionSplit', function () {
             // Expected result:
             //    a ---> b ===> c
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmNode({ id: 'c', loc: [2, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] })
             ]);
 
             graph = iD.actionSplit('b', ['='])(graph);
@@ -150,11 +246,11 @@ describe('iD.actionSplit', function () {
 
         it('copies tags to the new way', function () {
             var tags = { highway: 'residential' };
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmNode({ id: 'c', loc: [2, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'], tags: tags })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'], tags: tags })
             ]);
 
             graph = iD.actionSplit('b', ['='])(graph);
@@ -172,14 +268,14 @@ describe('iD.actionSplit', function () {
             // Expected result:
             //    a ---> b ---> c ---> d ===> e ===> f
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmNode({ id: 'c', loc: [2, 0] }),
-                iD.osmNode({ id: 'd', loc: [3, 0] }),
-                iD.osmNode({ id: 'e', loc: [4, 0] }),
-                iD.osmNode({ id: 'f', loc: [5, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                new iD.osmNode({ id: 'd', loc: [3, 0] }),
+                new iD.osmNode({ id: 'e', loc: [4, 0] }),
+                new iD.osmNode({ id: 'f', loc: [5, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f'] })
             ]);
 
             graph = iD.actionSplit('d', ['='])(graph);
@@ -196,14 +292,14 @@ describe('iD.actionSplit', function () {
             // Expected result:
             //    a ===> b ===> c ---> d ---> e ---> f
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmNode({ id: 'c', loc: [2, 0] }),
-                iD.osmNode({ id: 'd', loc: [3, 0] }),
-                iD.osmNode({ id: 'e', loc: [4, 0] }),
-                iD.osmNode({ id: 'f', loc: [5, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                new iD.osmNode({ id: 'd', loc: [3, 0] }),
+                new iD.osmNode({ id: 'e', loc: [4, 0] }),
+                new iD.osmNode({ id: 'f', loc: [5, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f'] })
             ]);
 
             graph = iD.actionSplit('c', ['='])(graph);
@@ -220,13 +316,13 @@ describe('iD.actionSplit', function () {
             // Expected result:
             //    a ---> b ---> c ===> d ===> e
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmNode({ id: 'c', loc: [2, 0] }),
-                iD.osmNode({ id: 'd', loc: [3, 0] }),
-                iD.osmNode({ id: 'e', loc: [4, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'e'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                new iD.osmNode({ id: 'd', loc: [3, 0] }),
+                new iD.osmNode({ id: 'e', loc: [4, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'e'] })
             ]);
 
             graph = iD.actionSplit('c', ['='])(graph);
@@ -243,12 +339,12 @@ describe('iD.actionSplit', function () {
             // Expected result:
             //    a -----------------> d ===> e ===> f
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 0] }),
-                iD.osmNode({ id: 'd', loc: [3, 0] }),
-                iD.osmNode({ id: 'e', loc: [4, 0] }),
-                iD.osmNode({ id: 'f', loc: [5, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'd', 'e', 'f'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'd', loc: [3, 0] }),
+                new iD.osmNode({ id: 'e', loc: [4, 0] }),
+                new iD.osmNode({ id: 'f', loc: [5, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'd', 'e', 'f'] })
             ]);
 
             graph = iD.actionSplit('d', ['='])(graph);
@@ -269,13 +365,13 @@ describe('iD.actionSplit', function () {
             //           |
             //           d
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [-1, 0] }),
-                iD.osmNode({ id: 'b', loc: [0, 0] }),
-                iD.osmNode({ id: 'c', loc: [1, 0] }),
-                iD.osmNode({ id: 'd', loc: [0, -1] }),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
-                iD.osmWay({id: '|', nodes: ['d', 'b']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [-1, 0] }),
+                new iD.osmNode({ id: 'b', loc: [0, 0] }),
+                new iD.osmNode({ id: 'c', loc: [1, 0] }),
+                new iD.osmNode({ id: 'd', loc: [0, -1] }),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                new iD.osmWay({id: '|', nodes: ['d', 'b']})
             ]);
 
             graph = iD.actionSplit('b', ['='])(graph);
@@ -301,14 +397,14 @@ describe('iD.actionSplit', function () {
             //         ¦
             //         d
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [-1, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmNode({ id: 'c', loc: [0, 1] }),
-                iD.osmNode({ id: 'd', loc: [0, -1] }),
-                iD.osmNode({ id: '*', loc: [0, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', '*', 'b'] }),
-                iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [-1, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [0, 1] }),
+                new iD.osmNode({ id: 'd', loc: [0, -1] }),
+                new iD.osmNode({ id: '*', loc: [0, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', '*', 'b'] }),
+                new iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
             ]);
 
             graph = iD.actionSplit('*', ['=', '¦'])(graph);
@@ -327,14 +423,14 @@ describe('iD.actionSplit', function () {
             //         |
             //         d
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [-1, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmNode({ id: 'c', loc: [0, 1] }),
-                iD.osmNode({ id: 'd', loc: [0, -1] }),
-                iD.osmNode({ id: '*', loc: [0, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', '*', 'b'] }),
-                iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [-1, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [0, 1] }),
+                new iD.osmNode({ id: 'd', loc: [0, -1] }),
+                new iD.osmNode({ id: '*', loc: [0, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', '*', 'b'] }),
+                new iD.osmWay({ id: '|', nodes: ['c', '*', 'd'] })
             ]);
 
             var g1 = iD.actionSplit('*', ['=']).limitWays(['-'])(graph);
@@ -370,12 +466,12 @@ describe('iD.actionSplit', function () {
             //          /  |
             //         c - a == d
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 0] }),
-                iD.osmNode({ id: 'b', loc: [0, 2] }),
-                iD.osmNode({ id: 'c', loc: [-1, 0] }),
-                iD.osmNode({ id: 'd', loc: [1, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'a', 'd'] })
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [0, 2] }),
+                new iD.osmNode({ id: 'c', loc: [-1, 0] }),
+                new iD.osmNode({ id: 'd', loc: [1, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'a', 'd'] })
             ]);
 
             graph = iD.actionSplit('a', ['='])(graph);
@@ -391,12 +487,12 @@ describe('iD.actionSplit', function () {
             //    |      |
             //    d ---- c
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 1] }),
-                iD.osmNode({ id: 'b', loc: [1, 1] }),
-                iD.osmNode({ id: 'c', loc: [1, 0] }),
-                iD.osmNode({ id: 'd', loc: [0, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 1] }),
+                new iD.osmNode({ id: 'b', loc: [1, 1] }),
+                new iD.osmNode({ id: 'c', loc: [1, 0] }),
+                new iD.osmNode({ id: 'd', loc: [0, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
 
             var g1 = iD.actionSplit('a', ['='])(graph);
@@ -415,6 +511,108 @@ describe('iD.actionSplit', function () {
             expect(g4.entity('-').nodes).to.eql(['b', 'c', 'd']);
             expect(g4.entity('=').nodes).to.eql(['d', 'a', 'b']);
         });
+
+        it('splits a closed way at the given points', function () {
+            //
+            // Situation:
+            //    a ---- b
+            //    |      |
+            //    d ---- c
+            //
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 1] }),
+                new iD.osmNode({ id: 'b', loc: [1, 1] }),
+                new iD.osmNode({ id: 'c', loc: [1, 0] }),
+                new iD.osmNode({ id: 'd', loc: [0, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            ]);
+
+            var g1 = iD.actionSplit(['a', 'b'], ['='])(graph);
+            expect(g1.entity('-').nodes).to.eql(['b', 'c', 'd', 'a']);
+            expect(g1.entity('=').nodes).to.eql(['a', 'b']);
+        });
+
+        it('splits an open way at multiple given points', function () {
+            //
+            // Situation:
+            //    a ---- b -- c -- d
+            //
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [0, 1] }),
+                new iD.osmNode({ id: 'c', loc: [0, 1.5] }),
+                new iD.osmNode({ id: 'd', loc: [0, 2] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd']})
+            ]);
+
+            var g1 = iD.actionSplit(['b', 'c'], ['=', '≡'])(graph);
+            expect(g1.entity('-').nodes).to.eql(['a', 'b']); // original id remains on longest section
+            expect(g1.entity('=').nodes).to.eql(['b', 'c']);
+            expect(g1.entity('≡').nodes).to.eql(['c', 'd']);
+        });
+
+        it('splits an open way at multiple given points specified in any order', function () {
+            //
+            // Situation:
+            //    a -- b -- c -- d -- e
+            //
+            // #12120
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [0, 1] }),
+                new iD.osmNode({ id: 'c', loc: [0, 2] }),
+                new iD.osmNode({ id: 'd', loc: [0, 3] }),
+                new iD.osmNode({ id: 'e', loc: [0, 4] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'e']})
+            ]);
+
+            var g1 = iD.actionSplit(['c', 'b', 'd'], ['=', '≡', '≣'])(graph);
+            expect([
+                g1.entity('-').nodes,
+                g1.entity('=').nodes,
+                g1.entity('≡').nodes,
+                g1.entity('≣').nodes
+            ].sort((a, b) => a[0] > b[0] ? 1 : -1)).to.eql([
+                ['a', 'b'],
+                ['b', 'c'],
+                ['c', 'd'],
+                ['d', 'e']
+            ]);
+        });
+
+        it('distributes the number of steps proportionally', () => {
+            const tags = { highway: 'steps', step_count: '40' };
+            let graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [4, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'], tags: tags })
+            ]);
+
+            graph = iD.actionSplit('b', ['='])(graph);
+
+            // step count should be distributed according the the resulting ways'
+            // segment lengths
+            expect(graph.entity('=').tags.step_count).to.equal('10');
+            expect(graph.entity('-').tags.step_count).to.equal('30');
+        });
+
+        it('preserves the total number of steps', () => {
+            const tags = { highway: 'steps', step_count: '42' };
+            let graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [4, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'], tags: tags })
+            ]);
+
+            graph = iD.actionSplit('b', ['='])(graph);
+
+            // the sum of the resulting step count should be preserved
+            // even when the intermediate values are rounded
+            expect(+graph.entity('=').tags.step_count +
+                   +graph.entity('-').tags.step_count).to.equal(42);
+        });
     });
 
 
@@ -424,30 +622,64 @@ describe('iD.actionSplit', function () {
             return graph.entity('r').members.map(function (m) { return m.id; });
         }
 
-
-        it('handles incomplete relations', function () {
+        it('allows split action on partially incomplete relation, when member before split is present', function () {
             //
             // Situation:
-            //    a ---> b ---> c         split at 'b'
-            //    Relation: ['~', '-']
+            //    a ~~~> b ---> c ---> d        split at 'c'
+            //    Relation: ['~', '-', '?']     member '?' missing
             //
             // Expected result:
-            //    a ---> b ===> c
-            //    Relation: ['~', '-', '=']
+            //    a ~~~> b ---> c ===> d
+            //    Relation: ['~', '-', '=', '?']
             //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmNode({ id: 'c', loc: [2, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
-                iD.osmRelation({id: 'r', members: [
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                new iD.osmNode({ id: 'd', loc: [3, 0] }),
+                new iD.osmWay({ id: '~', nodes: ['a', 'b'] }),
+                new iD.osmWay({ id: '-', nodes: ['b', 'c', 'd'] }),
+                new iD.osmRelation({id: 'r', members: [
                     { id: '~', type: 'way' },
-                    { id: '-', type: 'way' }
+                    { id: '-', type: 'way' },
+                    { id: '?', type: 'way' }
                 ]})
             ]);
 
-            graph = iD.actionSplit('b', ['='])(graph);
-            expect(members(graph)).to.eql(['~', '-', '=']);
+            var action = iD.actionSplit('c', ['=']);
+            expect(action.disabled(graph)).to.be.not.ok;
+            graph = action(graph);
+            expect(members(graph)).to.eql(['~', '-', '=', '?']);
+        });
+
+        it('allows split action on partially incomplete relation, when member after split is present', function () {
+            //
+            // Situation:
+            //    a ---> b ---> c ~~~> d        split at 'b'
+            //    Relation: ['?', '-', '~']     member '?' missing
+            //
+            // Expected result:
+            //    a ---> b ===> c ~~~> d
+            //    Relation: ['?', '-', '=', '~']
+            //
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                new iD.osmNode({ id: 'd', loc: [3, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
+                new iD.osmWay({ id: '~', nodes: ['c', 'd'] }),
+                new iD.osmRelation({id: 'r', members: [
+                    { id: '?', type: 'way' },
+                    { id: '-', type: 'way' },
+                    { id: '~', type: 'way' }
+                ]})
+            ]);
+
+            var action = iD.actionSplit('b', ['=']);
+            expect(action.disabled(graph)).to.be.not.ok;
+            graph = action(graph);
+            expect(members(graph)).to.eql(['?', '-', '=', '~']);
         });
 
 
@@ -463,12 +695,12 @@ describe('iD.actionSplit', function () {
                 //    a ---> b ===> c
                 //    Relation: ['-', '=']
                 //
-                var graph = iD.coreGraph([
-                    iD.osmNode({ id: 'a', loc: [0, 0] }),
-                    iD.osmNode({ id: 'b', loc: [1, 0] }),
-                    iD.osmNode({ id: 'c', loc: [2, 0] }),
-                    iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
-                    iD.osmRelation({id: 'r', members: [
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                    new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                    new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                    new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
+                    new iD.osmRelation({id: 'r', members: [
                         { id: '-', type: 'way', role: 'forward' }
                     ]})
                 ]);
@@ -491,14 +723,14 @@ describe('iD.actionSplit', function () {
                 //    a ---> b ===> c ~~~> d
                 //    Relation: ['-', '=', '~']
                 //
-                var graph = iD.coreGraph([
-                    iD.osmNode({ id: 'a', loc: [0, 0] }),
-                    iD.osmNode({ id: 'b', loc: [1, 0] }),
-                    iD.osmNode({ id: 'c', loc: [2, 0] }),
-                    iD.osmNode({ id: 'd', loc: [3, 0] }),
-                    iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
-                    iD.osmWay({ id: '~', nodes: ['c', 'd'] }),
-                    iD.osmRelation({id: 'r', members: [
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                    new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                    new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                    new iD.osmNode({ id: 'd', loc: [3, 0] }),
+                    new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
+                    new iD.osmWay({ id: '~', nodes: ['c', 'd'] }),
+                    new iD.osmRelation({id: 'r', members: [
                         { id: '-', type: 'way' },
                         { id: '~', type: 'way' }
                     ]})
@@ -518,14 +750,14 @@ describe('iD.actionSplit', function () {
                 //    a ---> b ===> c ~~~> d
                 //    Relation: ['~', '=', '-']
                 //
-                var graph = iD.coreGraph([
-                    iD.osmNode({ id: 'a', loc: [0, 0] }),
-                    iD.osmNode({ id: 'b', loc: [1, 0] }),
-                    iD.osmNode({ id: 'c', loc: [2, 0] }),
-                    iD.osmNode({ id: 'd', loc: [3, 0] }),
-                    iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
-                    iD.osmWay({ id: '~', nodes: ['c', 'd'] }),
-                    iD.osmRelation({id: 'r', members: [
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                    new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                    new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                    new iD.osmNode({ id: 'd', loc: [3, 0] }),
+                    new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
+                    new iD.osmWay({ id: '~', nodes: ['c', 'd'] }),
+                    new iD.osmRelation({id: 'r', members: [
                         { id: '~', type: 'way' },
                         { id: '-', type: 'way' }
                     ]})
@@ -545,13 +777,13 @@ describe('iD.actionSplit', function () {
                 //    a ---> b ---> c ===> d
                 //    Relation: ['-', '=']
                 //
-                var graph = iD.coreGraph([
-                    iD.osmNode({ id: 'a', loc: [0, 0] }),
-                    iD.osmNode({ id: 'b', loc: [1, 0] }),
-                    iD.osmNode({ id: 'c', loc: [2, 0] }),
-                    iD.osmNode({ id: 'd', loc: [3, 0] }),
-                    iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd'] }),
-                    iD.osmRelation({id: 'r', members: [
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                    new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                    new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                    new iD.osmNode({ id: 'd', loc: [3, 0] }),
+                    new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd'] }),
+                    new iD.osmRelation({id: 'r', members: [
                         { id: '-', type: 'way', role: 'forward' }
                     ]})
                 ]);
@@ -574,13 +806,13 @@ describe('iD.actionSplit', function () {
                 //    a ===> b ---> c ---> d
                 //    Relation: ['=', '-']
                 //
-                var graph = iD.coreGraph([
-                    iD.osmNode({ id: 'a', loc: [0, 0] }),
-                    iD.osmNode({ id: 'b', loc: [1, 0] }),
-                    iD.osmNode({ id: 'c', loc: [2, 0] }),
-                    iD.osmNode({ id: 'd', loc: [3, 0] }),
-                    iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd'] }),
-                    iD.osmRelation({id: 'r', members: [
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                    new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                    new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                    new iD.osmNode({ id: 'd', loc: [3, 0] }),
+                    new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd'] }),
+                    new iD.osmRelation({id: 'r', members: [
                         { id: '-', type: 'way', role: 'forward' }
                     ]})
                 ]);
@@ -593,49 +825,49 @@ describe('iD.actionSplit', function () {
                 ]);
             });
 
-            it('reorders members as node, way, relation (for Public Transport routing)', function () {
-                var graph = iD.coreGraph([
-                    iD.osmNode({ id: 'a', loc: [0, 0] }),
-                    iD.osmNode({ id: 'b', loc: [1, 0] }),
-                    iD.osmNode({ id: 'c', loc: [2, 0] }),
-                    iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
-                    iD.osmRelation({id: 'r', members: [
-                        { id: 'n1', type: 'node', role: 'forward' },
+            it('preserves other members (example: Public Transport routing)', function () {
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                    new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                    new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                    new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
+                    new iD.osmRelation({id: 'r', members: [
+                        { id: 'n1', type: 'node', role: 'stop' },
                         { id: '-', type: 'way', role: 'forward' },
-                        { id: 'r1', type: 'relation', role: 'forward' },
-                        { id: 'n2', type: 'node', role: 'forward' }
+                        { id: 'r1', type: 'relation', role: '' },
+                        { id: 'n2', type: 'node', role: 'stop' }
                     ]})
                 ]);
 
                 graph = iD.actionSplit('b', ['='])(graph);
 
                 expect(graph.entity('r').members).to.eql([
-                    { id: 'n1', type: 'node', role: 'forward' },
-                    { id: 'n2', type: 'node', role: 'forward' },
+                    { id: 'n1', type: 'node', role: 'stop' },
                     { id: '-', type: 'way', role: 'forward' },
                     { id: '=', type: 'way', role: 'forward' },
-                    { id: 'r1', type: 'relation', role: 'forward'}
+                    { id: 'r1', type: 'relation', role: ''},
+                    { id: 'n2', type: 'node', role: 'stop' }
                 ]);
             });
         });
 
         describe('splitting out-and-back routes', function () {
-            var a = iD.osmNode({ id: 'a', loc: [0, 0] });
-            var b = iD.osmNode({ id: 'b', loc: [0, 1] });
-            var c = iD.osmNode({ id: 'c', loc: [0, 2] });
-            var d = iD.osmNode({ id: 'd', loc: [0, 3] });
-            var e = iD.osmNode({ id: 'e', loc: [0, 4] });
+            var a = new iD.osmNode({ id: 'a', loc: [0, 0] });
+            var b = new iD.osmNode({ id: 'b', loc: [0, 1] });
+            var c = new iD.osmNode({ id: 'c', loc: [0, 2] });
+            var d = new iD.osmNode({ id: 'd', loc: [0, 3] });
+            var e = new iD.osmNode({ id: 'e', loc: [0, 4] });
 
             //
             // Situation:
             //    a ---> b ---> c ---> d ~~~> e
             //    Relation: ['-', '~', '~', '-']
             //
-            var outAndBack1 = iD.coreGraph([
+            var outAndBack1 = new iD.coreGraph([
                 a, b, c, d, e,
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
-                iD.osmWay({id: '~', nodes: ['d', 'e']}),
-                iD.osmRelation({id: 'r', members: [
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+                new iD.osmWay({id: '~', nodes: ['d', 'e']}),
+                new iD.osmRelation({id: 'r', members: [
                     {id: '-', type: 'way'},
                     {id: '~', type: 'way'},
                     {id: '~', type: 'way'},
@@ -648,11 +880,11 @@ describe('iD.actionSplit', function () {
             //    a <--- b <--- c <--- d ~~~> e
             //    Relation: ['-', '~', '~', '-']
             //
-            var outAndBack2 = iD.coreGraph([
+            var outAndBack2 = new iD.coreGraph([
                 a, b, c, d, e,
-                iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a']}),
-                iD.osmWay({id: '~', nodes: ['d', 'e']}),
-                iD.osmRelation({id: 'r', members: [
+                new iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a']}),
+                new iD.osmWay({id: '~', nodes: ['d', 'e']}),
+                new iD.osmRelation({id: 'r', members: [
                     {id: '-', type: 'way'},
                     {id: '~', type: 'way'},
                     {id: '~', type: 'way'},
@@ -665,11 +897,11 @@ describe('iD.actionSplit', function () {
             //    a ---> b ---> c ---> d <~~~ e
             //    Relation: ['-', '~', '~', '-']
             //
-            var outAndBack3 = iD.coreGraph([
+            var outAndBack3 = new iD.coreGraph([
                 a, b, c, d, e,
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
-                iD.osmWay({id: '~', nodes: ['e', 'd']}),
-                iD.osmRelation({id: 'r', members: [
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+                new iD.osmWay({id: '~', nodes: ['e', 'd']}),
+                new iD.osmRelation({id: 'r', members: [
                     {id: '-', type: 'way'},
                     {id: '~', type: 'way'},
                     {id: '~', type: 'way'},
@@ -682,11 +914,11 @@ describe('iD.actionSplit', function () {
             //    a <--- b <--- c <--- d <~~~ e
             //    Relation: ['-', '~', '~', '-']
             //
-            var outAndBack4 = iD.coreGraph([
+            var outAndBack4 = new iD.coreGraph([
                 a, b, c, d, e,
-                iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a']}),
-                iD.osmWay({id: '~', nodes: ['e', 'd']}),
-                iD.osmRelation({id: 'r', members: [
+                new iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a']}),
+                new iD.osmWay({id: '~', nodes: ['e', 'd']}),
+                new iD.osmRelation({id: 'r', members: [
                     {id: '-', type: 'way'},
                     {id: '~', type: 'way'},
                     {id: '~', type: 'way'},
@@ -816,11 +1048,11 @@ describe('iD.actionSplit', function () {
         });
 
         describe('splitting hat routes', function () {
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [1, 0]});
-            var c = iD.osmNode({id: 'c', loc: [2, 1]});
-            var d = iD.osmNode({id: 'd', loc: [3, 0]});
-            var e = iD.osmNode({id: 'e', loc: [4, 0]});
+            var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = new iD.osmNode({id: 'b', loc: [1, 0]});
+            var c = new iD.osmNode({id: 'c', loc: [2, 1]});
+            var d = new iD.osmNode({id: 'd', loc: [3, 0]});
+            var e = new iD.osmNode({id: 'e', loc: [4, 0]});
 
             //
             // Situation:
@@ -830,13 +1062,13 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['-', '#', '~', '#', '=']
             //
-            var hat1a = iD.coreGraph([
+            var hat1a = new iD.coreGraph([
                 a, b, c, d, e,
-                iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '#', nodes: ['b', 'c', 'd']}),
-                iD.osmWay({id: '~', nodes: ['b', 'd']}),
-                iD.osmWay({id: '=', nodes: ['d', 'e']}),
-                iD.osmRelation({
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '#', nodes: ['b', 'c', 'd']}),
+                new iD.osmWay({id: '~', nodes: ['b', 'd']}),
+                new iD.osmWay({id: '=', nodes: ['d', 'e']}),
+                new iD.osmRelation({
                     id: 'r', members: [
                         {id: '-', type: 'way'},
                         {id: '#', type: 'way'},
@@ -855,13 +1087,13 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['-', '~', '#', '~', '=']
             //
-            var hat1b = iD.coreGraph([
+            var hat1b = new iD.coreGraph([
                 a, b, c, d, e,
-                iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '#', nodes: ['b', 'c', 'd']}),
-                iD.osmWay({id: '~', nodes: ['b', 'd']}),
-                iD.osmWay({id: '=', nodes: ['d', 'e']}),
-                iD.osmRelation({
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '#', nodes: ['b', 'c', 'd']}),
+                new iD.osmWay({id: '~', nodes: ['b', 'd']}),
+                new iD.osmWay({id: '=', nodes: ['d', 'e']}),
+                new iD.osmRelation({
                     id: 'r', members: [
                         {id: '-', type: 'way'},
                         {id: '~', type: 'way'},
@@ -880,13 +1112,13 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['-', '#', '~', '#', '=']
             //
-            var hat2 = iD.coreGraph([
+            var hat2 = new iD.coreGraph([
                 a, b, c, d, e,
-                iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '#', nodes: ['d', 'c', 'b']}),
-                iD.osmWay({id: '~', nodes: ['b', 'd']}),
-                iD.osmWay({id: '=', nodes: ['d', 'e']}),
-                iD.osmRelation({
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '#', nodes: ['d', 'c', 'b']}),
+                new iD.osmWay({id: '~', nodes: ['b', 'd']}),
+                new iD.osmWay({id: '=', nodes: ['d', 'e']}),
+                new iD.osmRelation({
                     id: 'r', members: [
                         {id: '-', type: 'way'},
                         {id: '#', type: 'way'},
@@ -905,13 +1137,13 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['-', '#', '~', '#', '=']
             //
-            var hat3 = iD.coreGraph([
+            var hat3 = new iD.coreGraph([
                 a, b, c, d, e,
-                iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '#', nodes: ['d', 'c', 'b']}),
-                iD.osmWay({id: '~', nodes: ['d', 'b']}),
-                iD.osmWay({id: '=', nodes: ['d', 'e']}),
-                iD.osmRelation({
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '#', nodes: ['d', 'c', 'b']}),
+                new iD.osmWay({id: '~', nodes: ['d', 'b']}),
+                new iD.osmWay({id: '=', nodes: ['d', 'e']}),
+                new iD.osmRelation({
                     id: 'r', members: [
                         {id: '-', type: 'way'},
                         {id: '#', type: 'way'},
@@ -930,13 +1162,13 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['-', '#', '~', '#', '=']
             //
-            var hat4 = iD.coreGraph([
+            var hat4 = new iD.coreGraph([
                 a, b, c, d, e,
-                iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '#', nodes: ['b', 'c', 'd']}),
-                iD.osmWay({id: '~', nodes: ['d', 'b']}),
-                iD.osmWay({id: '=', nodes: ['d', 'e']}),
-                iD.osmRelation({
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '#', nodes: ['b', 'c', 'd']}),
+                new iD.osmWay({id: '~', nodes: ['d', 'b']}),
+                new iD.osmWay({id: '=', nodes: ['d', 'e']}),
+                new iD.osmRelation({
                     id: 'r', members: [
                         {id: '-', type: 'way'},
                         {id: '#', type: 'way'},
@@ -955,13 +1187,13 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['-', '#', '~', '#', '=']
             //
-            var hat5 = iD.coreGraph([
+            var hat5 = new iD.coreGraph([
                 a, b, c, d, e,
-                iD.osmWay({id: '-', nodes: ['b', 'a']}),
-                iD.osmWay({id: '#', nodes: ['b', 'c', 'd']}),
-                iD.osmWay({id: '~', nodes: ['b', 'd']}),
-                iD.osmWay({id: '=', nodes: ['e', 'd']}),
-                iD.osmRelation({
+                new iD.osmWay({id: '-', nodes: ['b', 'a']}),
+                new iD.osmWay({id: '#', nodes: ['b', 'c', 'd']}),
+                new iD.osmWay({id: '~', nodes: ['b', 'd']}),
+                new iD.osmWay({id: '=', nodes: ['e', 'd']}),
+                new iD.osmRelation({
                     id: 'r', members: [
                         {id: '-', type: 'way'},
                         {id: '#', type: 'way'},
@@ -1077,12 +1309,12 @@ describe('iD.actionSplit', function () {
         });
 
         describe('splitting spoon routes', function () {
-            var a = iD.osmNode({ id: 'a', loc: [0, 0] });
-            var b = iD.osmNode({ id: 'b', loc: [0, 1] });
-            var c = iD.osmNode({ id: 'c', loc: [1, 1] });
-            var d = iD.osmNode({ id: 'd', loc: [1, 0] });
-            var e = iD.osmNode({ id: 'e', loc: [2, 0] });
-            var f = iD.osmNode({ id: 'f', loc: [3, 0] });
+            var a = new iD.osmNode({ id: 'a', loc: [0, 0] });
+            var b = new iD.osmNode({ id: 'b', loc: [0, 1] });
+            var c = new iD.osmNode({ id: 'c', loc: [1, 1] });
+            var d = new iD.osmNode({ id: 'd', loc: [1, 0] });
+            var e = new iD.osmNode({ id: 'e', loc: [2, 0] });
+            var f = new iD.osmNode({ id: 'f', loc: [3, 0] });
 
             //
             // Situation:
@@ -1092,11 +1324,11 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['~', '-', '~']
             //
-            var spoon1 = iD.coreGraph([
+            var spoon1 = new iD.coreGraph([
                 a, b, c, d, e, f,
-                iD.osmWay({id: '-', nodes: ['d', 'a', 'b', 'c', 'd']}),
-                iD.osmWay({id: '~', nodes: ['d', 'e', 'f']}),
-                iD.osmRelation({id: 'r', members: [
+                new iD.osmWay({id: '-', nodes: ['d', 'a', 'b', 'c', 'd']}),
+                new iD.osmWay({id: '~', nodes: ['d', 'e', 'f']}),
+                new iD.osmRelation({id: 'r', members: [
                     {id: '~', type: 'way'},
                     {id: '-', type: 'way'},
                     {id: '~', type: 'way'}
@@ -1111,11 +1343,11 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['~', '-', '~']
             //
-            var spoon2 = iD.coreGraph([
+            var spoon2 = new iD.coreGraph([
                 a, b, c, d, e, f,
-                iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a', 'd']}),
-                iD.osmWay({id: '~', nodes: ['d', 'e', 'f']}),
-                iD.osmRelation({id: 'r', members: [
+                new iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a', 'd']}),
+                new iD.osmWay({id: '~', nodes: ['d', 'e', 'f']}),
+                new iD.osmRelation({id: 'r', members: [
                     {id: '~', type: 'way'},
                     {id: '-', type: 'way'},
                     {id: '~', type: 'way'}
@@ -1130,11 +1362,11 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['~', '-', '~']
             //
-            var spoon3 = iD.coreGraph([
+            var spoon3 = new iD.coreGraph([
                 a, b, c, d, e, f,
-                iD.osmWay({id: '-', nodes: ['d', 'a', 'b', 'c', 'd']}),
-                iD.osmWay({id: '~', nodes: ['f', 'e', 'd']}),
-                iD.osmRelation({id: 'r', members: [
+                new iD.osmWay({id: '-', nodes: ['d', 'a', 'b', 'c', 'd']}),
+                new iD.osmWay({id: '~', nodes: ['f', 'e', 'd']}),
+                new iD.osmRelation({id: 'r', members: [
                     {id: '~', type: 'way'},
                     {id: '-', type: 'way'},
                     {id: '~', type: 'way'}
@@ -1149,11 +1381,11 @@ describe('iD.actionSplit', function () {
             //
             //    Relation: ['~', '-', '~']
             //
-            var spoon4 = iD.coreGraph([
+            var spoon4 = new iD.coreGraph([
                 a, b, c, d, e, f,
-                iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a', 'd']}),
-                iD.osmWay({id: '~', nodes: ['f', 'e', 'd']}),
-                iD.osmRelation({id: 'r', members: [
+                new iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a', 'd']}),
+                new iD.osmWay({id: '~', nodes: ['f', 'e', 'd']}),
+                new iD.osmRelation({id: 'r', members: [
                     {id: '~', type: 'way'},
                     {id: '-', type: 'way'},
                     {id: '~', type: 'way'}
@@ -1306,6 +1538,167 @@ describe('iD.actionSplit', function () {
 
         });
 
+        describe('splitting Y routes', function () {
+            var a = new iD.osmNode({ id: 'a', loc: [0, 0] });
+            var b = new iD.osmNode({ id: 'b', loc: [1, 0] });
+            var c = new iD.osmNode({ id: 'c', loc: [2, 0] });
+            var d = new iD.osmNode({ id: 'd', loc: [2, -1] });
+            var e = new iD.osmNode({ id: 'e', loc: [3, -1] });
+
+            it('splits excursion part of a forking route', function () {
+                //
+                // Situation:
+                //    a ---> b ~~~> c
+                //           #
+                //           #####> d ###> e
+                //
+                //    Relation: ['-', '~', '#']
+                //
+                //
+                // Expected result:
+                //    a ---> b ~~~> c
+                //           #
+                //           #####> d ***> e
+                //
+                //    Relation: ['-', '~', '#', '*']
+                //
+                var graph = new iD.coreGraph([
+                    a, b, c, d, e,
+                    new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                    new iD.osmWay({id: '~', nodes: ['b', 'c']}),
+                    new iD.osmWay({id: '#', nodes: ['b', 'd', 'e']}),
+                    new iD.osmRelation({id: 'r', members: [
+                        {id: '-', type: 'way', role: 'main'},
+                        {id: '~', type: 'way', role: 'main'},
+                        {id: '#', type: 'way', role: 'excursion'}
+                    ]})
+                ]);
+                graph = iD.actionSplit('d', ['*'])(graph);
+
+                expect(graph.entity('*').nodes).to.eql(['d', 'e']);
+                expect(members(graph)).to.eql(['-', '~', '#', '*']);
+                expect(graph.entity('r').members.find(m => m.id === '*').role).to.eql('excursion');
+            });
+
+            it('splits main part of forking route', function () {
+                //
+                // Situation:
+                //    a ---> b ###> c
+                //           ~
+                //           ~~~~~> d ~~~> e
+                //
+                //    Relation: ['-', '~', '#']
+                //
+                //
+                // Expected result:
+                //    a ---> b ###> c
+                //           ~
+                //           ~~~~~> d ***> e
+                //
+                //    Relation: ['-', '~', '*', '#']
+                //
+                var graph = new iD.coreGraph([
+                    a, b, c, d, e,
+                    new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                    new iD.osmWay({id: '~', nodes: ['b', 'd', 'e']}),
+                    new iD.osmWay({id: '#', nodes: ['b', 'c']}),
+                    new iD.osmRelation({id: 'r', members: [
+                        {id: '-', type: 'way', role: 'main'},
+                        {id: '~', type: 'way', role: 'main'},
+                        {id: '#', type: 'way', role: 'excursion'}
+                    ]})
+                ]);
+                graph = iD.actionSplit('d', ['*'])(graph);
+
+                expect(graph.entity('*').nodes).to.eql(['d', 'e']);
+                expect(members(graph)).to.eql(['-', '~', '*', '#']);
+                expect(graph.entity('r').members.find(m => m.id === '*').role).to.eql('main');
+            });
+        });
+
+        describe('splitting dual carriageway routes', function () {
+            var a = new iD.osmNode({ id: 'a', loc: [0, 0] });
+            var b = new iD.osmNode({ id: 'b', loc: [1, 0] });
+            var c = new iD.osmNode({ id: 'c', loc: [2, 0] });
+            var d = new iD.osmNode({ id: 'd', loc: [3, 0] });
+            var e = new iD.osmNode({ id: 'e', loc: [1.5, -1] });
+
+            it('splits dual-carriageway route, preserving role (forward way)', function () {
+                //
+                // Situation:
+                //    a ---> b <~~~~~ c ===> d
+                //           #        #
+                //           ###> e ###
+                //
+                //    Relation: ['-', '~', '#', '=']
+                //
+                //
+                // Expected result:
+                //    a ---> b <~~~~~ c ===> d
+                //           #        *
+                //           ###> e ***
+                //
+                //    Relation: ['-', '~', '#', '*', '=']
+                //
+                var graph = new iD.coreGraph([
+                    a, b, c, d, e,
+                    new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                    new iD.osmWay({id: '~', nodes: ['b', 'c']}),
+                    new iD.osmWay({id: '#', nodes: ['b', 'e', 'c']}),
+                    new iD.osmWay({id: '=', nodes: ['c', 'd']}),
+                    new iD.osmRelation({id: 'r', members: [
+                        {id: '-', type: 'way'},
+                        {id: '~', type: 'way', role: 'forward'},
+                        {id: '#', type: 'way', role: 'forward'},
+                        {id: '=', type: 'way'}
+                    ]})
+                ]);
+                graph = iD.actionSplit('e', ['*'])(graph);
+
+                expect(graph.entity('*').nodes).to.eql(['e', 'c']);
+                expect(members(graph)).to.eql(['-', '~', '#', '*', '=']);
+                expect(graph.entity('r').members.find(m => m.id === '*').role).to.eql('forward');
+            });
+
+            it('splits dual-carriageway route, preserving role (backward way)', function () {
+                //
+                // Situation:
+                //    a ---> b <~~~~~ c ===> d
+                //           #        #
+                //           ### e <###
+                //
+                //    Relation: ['-', '~', '#', '=']
+                //
+                //
+                // Expected result:
+                //    a ---> b <~~~~~ c ===> d
+                //           *        #
+                //           **< e <###
+                //
+                //    Relation: ['-', '~', '*', '#', '=']
+                //
+                var graph = new iD.coreGraph([
+                    a, b, c, d, e,
+                    new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                    new iD.osmWay({id: '~', nodes: ['b', 'c']}),
+                    new iD.osmWay({id: '#', nodes: ['c', 'e', 'b']}),
+                    new iD.osmWay({id: '=', nodes: ['c', 'd']}),
+                    new iD.osmRelation({id: 'r', members: [
+                        {id: '-', type: 'way'},
+                        {id: '~', type: 'way', role: 'forward'},
+                        {id: '#', type: 'way', role: 'backward'},
+                        {id: '=', type: 'way'}
+                    ]})
+                ]);
+                graph = iD.actionSplit('e', ['*'])(graph);
+
+                expect(graph.entity('*').nodes).to.eql(['e', 'b']);
+                expect(members(graph)).to.eql(['-', '~', '*', '#', '=']);
+                expect(graph.entity('r').members.find(m => m.id === '*').role).to.eql('backward');
+            });
+
+        });
+
 
         describe('type = multipolygon', function () {
 
@@ -1322,12 +1715,12 @@ describe('iD.actionSplit', function () {
                 //    ||     |
                 //    d ==== c
                 //
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0,1]}),
-                    iD.osmNode({id: 'b', loc: [1,1]}),
-                    iD.osmNode({id: 'c', loc: [1,0]}),
-                    iD.osmNode({id: 'd', loc: [0,0]}),
-                    iD.osmWay({id: '-', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0,1]}),
+                    new iD.osmNode({id: 'b', loc: [1,1]}),
+                    new iD.osmNode({id: 'c', loc: [1,0]}),
+                    new iD.osmNode({id: 'd', loc: [0,0]}),
+                    new iD.osmWay({id: '-', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
 
                 graph = iD.actionSplit('a', ['='])(graph);
@@ -1343,64 +1736,97 @@ describe('iD.actionSplit', function () {
                 ]);
             });
 
+            it('transfers relation memberships of an area to the resulting multipolygon', function () {
+                // Situation: same as above, but the way was also a member of a
+                // site relation. #12024
+                let graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0,1]}),
+                    new iD.osmNode({id: 'b', loc: [1,1]}),
+                    new iD.osmNode({id: 'c', loc: [1,0]}),
+                    new iD.osmNode({id: 'd', loc: [0,0]}),
+                    new iD.osmWay({id: '-', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
+                    new iD.osmRelation({id: 's', members: [
+                        {id: '-', role: 'main', type: 'way'}
+                    ], tags: {
+                        type: 'site'
+                    }})
+                ]);
+
+                graph = iD.actionSplit('a', ['='])(graph);
+
+                expect(graph.parentRelations(graph.entity('-')).length).to.eql(1);
+                const relation = graph.parentRelations(graph.entity('-'))[0];
+                expect(graph.entity('s').members.length).to.eql(1);
+                expect(graph.entity('s').members[0]).to.eql(
+                    {id: relation.id, role: 'main', type: 'relation'}
+                );
+            });
+
             it('splits only the line of a node shared by a line and an area', function () {
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0,1]}),
-                    iD.osmNode({id: 'b', loc: [1,1]}),
-                    iD.osmNode({id: 'c', loc: [1,0]}),
-                    iD.osmWay({id: '-',  nodes: ['a', 'b', 'c']}),
-                    iD.osmWay({id: '=',  nodes: ['a', 'b', 'c', 'a'], tags: {area: 'yes'}})
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [0,1]}),
+                    new iD.osmNode({id: 'b', loc: [1,1]}),
+                    new iD.osmNode({id: 'c', loc: [1,0]}),
+                    new iD.osmWay({id: '-',  nodes: ['a', 'b', 'c']}),
+                    new iD.osmWay({id: '=',  nodes: ['a', 'b', 'c', 'a'], tags: {area: 'yes'}})
                 ]);
 
                 graph = iD.actionSplit('b', ['~'])(graph);
 
-                expect(graph.entity('-').nodes).to.eql(['b', 'c']);
-                expect(graph.entity('~').nodes).to.eql(['a', 'b']);
+                expect(graph.entity('~').nodes).to.eql(['b', 'c']);
+                expect(graph.entity('-').nodes).to.eql(['a', 'b']);
                 expect(graph.entity('=').nodes).to.eql(['a', 'b', 'c', 'a']);
                 expect(graph.parentRelations(graph.entity('='))).to.have.length(0);
             });
 
-            it('converts simple multipolygon to a proper multipolygon', function () {
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a'}),
-                    iD.osmNode({id: 'b'}),
-                    iD.osmNode({id: 'c'}),
-                    iD.osmWay({'id': '-', nodes: ['a', 'b', 'c'], tags: { area: 'yes' }}),
-                    iD.osmRelation({id: 'r', members: [{id: '-', type: 'way', role: 'outer'}], tags: {type: 'multipolygon'}})
+            it('preserves coastline tag on the ways when creating a multipolygon', function () {
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({id: 'a', loc: [1,0]}),
+                    new iD.osmNode({id: 'b', loc: [1,1]}),
+                    new iD.osmNode({id: 'c', loc: [0,1]}),
+                    new iD.osmNode({id: 'd', loc: [0,0]}),
+                    new iD.osmWay({id: '-', tags: {natural: 'coastline', area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
 
-                graph = iD.actionSplit('b', ['='])(graph);
+                graph = iD.actionSplit('a', ['='])(graph);
+                expect(graph.entity('-').tags).to.eql({natural: 'coastline'});
+                expect(graph.entity('=').tags).to.eql({natural: 'coastline'});
+                expect(graph.parentRelations(graph.entity('-'))).to.have.length(1);
 
-                expect(graph.entity('-').tags).to.eql({});
-                expect(graph.entity('r').tags).to.eql({type: 'multipolygon', area: 'yes' });
-                var ids = graph.entity('r').members.map(function(m) { return m.id; });
-                expect(ids).to.have.ordered.members(['-', '=']);
+                var relation = graph.parentRelations(graph.entity('-'))[0];
+                expect(relation.tags).to.eql({type: 'multipolygon', area: 'yes'});
+                expect(relation.members).to.eql([
+                    {id: '-', role: 'outer', type: 'way'},
+                    {id: '=', role: 'outer', type: 'way'}
+                ]);
             });
         });
 
 
-        ['restriction', 'restriction:bus', 'manoeuvre'].forEach(function (type) {
+        ['restriction', 'restriction:bus', 'manoeuvre', 'destination_sign'].forEach(function (type) {
+            const viaRole = type === 'destination_sign' ? 'intersection' : 'via';
+
             describe('type = ' + type, function () {
-                var a = iD.osmNode({id: 'a', loc: [0, 0]});
-                var b = iD.osmNode({id: 'b', loc: [1, 0]});
-                var c = iD.osmNode({id: 'c', loc: [2, 0]});
-                var d = iD.osmNode({id: 'd', loc: [3, 0]});
-                var e = iD.osmNode({id: 'e', loc: [4, 0]});
-                var f = iD.osmNode({id: 'f', loc: [5, 0]});
+                var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+                var b = new iD.osmNode({id: 'b', loc: [1, 0]});
+                var c = new iD.osmNode({id: 'c', loc: [2, 0]});
+                var d = new iD.osmNode({id: 'd', loc: [3, 0]});
+                var e = new iD.osmNode({id: 'e', loc: [4, 0]});
+                var f = new iD.osmNode({id: 'f', loc: [5, 0]});
 
                 //
                 // Situation:
                 //    a ----> b ----> c ----> d ~~~~ e
                 // A restriction from ---- to ~~~~ via node d.
                 //
-                var restriction1 = iD.coreGraph([
+                var restriction1 = new iD.coreGraph([
                     a, b, c, d, e,
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
-                    iD.osmWay({id: '~', nodes: ['d', 'e']}),
-                    iD.osmRelation({id: 'r', tags: {type: type}, members: [
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+                    new iD.osmWay({id: '~', nodes: ['d', 'e']}),
+                    new iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '-', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]})
                 ]);
 
@@ -1409,14 +1835,14 @@ describe('iD.actionSplit', function () {
                 //    a ----> b ----> c ----> d ~~~~ e
                 // A restriction from ~~~~ to ---- via node d.
                 //
-                var restriction2 = iD.coreGraph([
+                var restriction2 = new iD.coreGraph([
                     a, b, c, d, e,
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
-                    iD.osmWay({id: '~', nodes: ['d', 'e']}),
-                    iD.osmRelation({id: 'r', tags: {type: type}, members: [
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+                    new iD.osmWay({id: '~', nodes: ['d', 'e']}),
+                    new iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '~', role: 'from', type: 'way'},
                         {id: '-', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]})
                 ]);
 
@@ -1425,14 +1851,14 @@ describe('iD.actionSplit', function () {
                 //    a ----> b ----> c ----> d ~~~~ e
                 // A restriction from ---- to ---- via node d.
                 //
-                var restriction3 = iD.coreGraph([
+                var restriction3 = new iD.coreGraph([
                     a, b, c, d, e,
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
-                    iD.osmWay({id: '~', nodes: ['d', 'e']}),
-                    iD.osmRelation({id: 'r', tags: {type: type}, members: [
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+                    new iD.osmWay({id: '~', nodes: ['d', 'e']}),
+                    new iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '-', role: 'from', type: 'way'},
                         {id: '-', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]})
                 ]);
 
@@ -1445,15 +1871,15 @@ describe('iD.actionSplit', function () {
                 //
                 // A restriction from ---- to ~~~~ via way |
                 //
-                var restriction4 = iD.coreGraph([
+                var restriction4 = new iD.coreGraph([
                     a, b, c, d, e, f,
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
-                    iD.osmWay({id: '|', nodes: ['d', 'e']}),
-                    iD.osmWay({id: '~', nodes: ['e', 'f']}),
-                    iD.osmRelation({id: 'r', tags: {type: type}, members: [
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+                    new iD.osmWay({id: '|', nodes: ['d', 'e']}),
+                    new iD.osmWay({id: '~', nodes: ['e', 'f']}),
+                    new iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '-', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: '|', role: 'via', type: 'way'}
+                        {id: '|', role: viaRole, type: 'way'}
                     ]})
                 ]);
 
@@ -1466,15 +1892,15 @@ describe('iD.actionSplit', function () {
                 //
                 // A restriction from ~~~~ to ---- via way |
                 //
-                var restriction5 = iD.coreGraph([
+                var restriction5 = new iD.coreGraph([
                     a, b, c, d, e, f,
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
-                    iD.osmWay({id: '|', nodes: ['d', 'e']}),
-                    iD.osmWay({id: '~', nodes: ['e', 'f']}),
-                    iD.osmRelation({id: 'r', tags: {type: type}, members: [
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+                    new iD.osmWay({id: '|', nodes: ['d', 'e']}),
+                    new iD.osmWay({id: '~', nodes: ['e', 'f']}),
+                    new iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '~', role: 'from', type: 'way'},
                         {id: '-', role: 'to', type: 'way'},
-                        {id: '|', role: 'via', type: 'way'}
+                        {id: '|', role: viaRole, type: 'way'}
                     ]})
                 ]);
 
@@ -1487,14 +1913,14 @@ describe('iD.actionSplit', function () {
                 //
                 // A restriction from | to ‖ via way ----
                 //
-                var restriction6 = iD.coreGraph([
+                var restriction6 = new iD.coreGraph([
                     a, b, c, d, e, f,
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
-                    iD.osmWay({id: '|', nodes: ['e', 'a']}),
-                    iD.osmWay({id: '‖', nodes: ['f', 'd']}),
-                    iD.osmRelation({id: 'r', tags: {type: type}, members: [
+                    new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+                    new iD.osmWay({id: '|', nodes: ['e', 'a']}),
+                    new iD.osmWay({id: '‖', nodes: ['f', 'd']}),
+                    new iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '|', role: 'from', type: 'way'},
-                        {id: '-', role: 'via', type: 'way'},
+                        {id: '-', role: viaRole, type: 'way'},
                         {id: '‖', role: 'to', type: 'way'}
                     ]})
                 ]);
@@ -1504,14 +1930,14 @@ describe('iD.actionSplit', function () {
                 //    a <---- b <---- c <---- d ~~~~ e
                 // A restriction from ---- to ~~~~ via d.
                 //
-                var restriction7 = iD.coreGraph([
+                var restriction7 = new iD.coreGraph([
                     a, b, c, d, e,
-                    iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a']}),
-                    iD.osmWay({id: '~', nodes: ['d', 'e']}),
-                    iD.osmRelation({id: 'r', tags: {type: type}, members: [
+                    new iD.osmWay({id: '-', nodes: ['d', 'c', 'b', 'a']}),
+                    new iD.osmWay({id: '~', nodes: ['d', 'e']}),
+                    new iD.osmRelation({id: 'r', tags: {type: type}, members: [
                         {id: '-', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]})
                 ]);
 
@@ -1527,7 +1953,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '=', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -1543,7 +1969,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '-', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -1559,7 +1985,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '~', role: 'from', type: 'way'},
                         {id: '=', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -1575,7 +2001,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '~', role: 'from', type: 'way'},
                         {id: '-', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -1591,7 +2017,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '=', role: 'from', type: 'way'},
                         {id: '=', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -1607,7 +2033,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '-', role: 'from', type: 'way'},
                         {id: '-', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -1627,7 +2053,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '=', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: '|', role: 'via', type: 'way'}
+                        {id: '|', role: viaRole, type: 'way'}
                     ]);
                 });
 
@@ -1647,7 +2073,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '-', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: '|', role: 'via', type: 'way'}
+                        {id: '|', role: viaRole, type: 'way'}
                     ]);
                 });
 
@@ -1667,7 +2093,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '~', role: 'from', type: 'way'},
                         {id: '=', role: 'to', type: 'way'},
-                        {id: '|', role: 'via', type: 'way'}
+                        {id: '|', role: viaRole, type: 'way'}
                     ]);
                 });
 
@@ -1687,7 +2113,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '~', role: 'from', type: 'way'},
                         {id: '-', role: 'to', type: 'way'},
-                        {id: '|', role: 'via', type: 'way'}
+                        {id: '|', role: viaRole, type: 'way'}
                     ]);
                 });
 
@@ -1706,8 +2132,8 @@ describe('iD.actionSplit', function () {
 
                     expect(graph.entity('r').members).to.eql([
                         {id: '|', role: 'from', type: 'way'},
-                        {id: '-', role: 'via', type: 'way'},
-                        {id: '=', role: 'via', type: 'way'},
+                        {id: '-', role: viaRole, type: 'way'},
+                        {id: '=', role: viaRole, type: 'way'},
                         {id: '‖', role: 'to', type: 'way'}
                     ]);
                 });
@@ -1727,8 +2153,8 @@ describe('iD.actionSplit', function () {
 
                     expect(graph.entity('r').members).to.eql([
                         {id: '|', role: 'from', type: 'way'},
-                        {id: '-', role: 'via', type: 'way'},
-                        {id: '=', role: 'via', type: 'way'},
+                        {id: '-', role: viaRole, type: 'way'},
+                        {id: '=', role: viaRole, type: 'way'},
                         {id: '‖', role: 'to', type: 'way'}
                     ]);
                 });
@@ -1745,7 +2171,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '-', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
 
@@ -1761,7 +2187,7 @@ describe('iD.actionSplit', function () {
                     expect(graph.entity('r').members).to.eql([
                         {id: '=', role: 'from', type: 'way'},
                         {id: '~', role: 'to', type: 'way'},
-                        {id: 'd', role: 'via', type: 'node'}
+                        {id: 'd', role: viaRole, type: 'node'}
                     ]);
                 });
             });

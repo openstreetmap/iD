@@ -1,15 +1,36 @@
+import { select as d3_select } from 'd3-selection';
+import { setTimeout } from 'node:timers/promises';
+
 describe('iD.validations.outdated_tags', function () {
     var context;
 
-    before(function() {
+    beforeEach(() => {
         iD.fileFetcher.cache().deprecated = [
+          { old: { building: 'roof' }, replace: { building: 'roof', layer: '1' } },
           { old: { highway: 'no' } },
-          { old: { highway: 'ford' }, replace: { ford: '*' } }
+          { old: { highway: 'ford' }, replace: { ford: '*' } },
+          { old: { amenity: 'bench', capacity: '*' }, replace: { amenity: 'bench', seats: '$1' } },
+          { old: { oldKey1: '*', oldKey2: '*' }, replace: { newKey1: '$1', newKey2: '$2' } }
         ];
+        iD.services.nsi = {
+            status: () => 'ok',
+            upgradeTags: (tags) => {
+                // mock implementation of NSI: All it does it suggest
+                // adding `brand:wikidata` if there's a matching `brand`.
+                const NSI = { 'Fish Bowl': 'Q110785465' };
+                if (tags.brand && NSI[tags.brand] && tags['brand:wikidata'] !== NSI[tags.brand]) {
+                    return {
+                        matched: {},
+                        newTags: { ...tags, 'brand:wikidata': NSI[tags.brand] }
+                    };
+                }
+            },
+        };
     });
 
-    after(function() {
+    afterEach(() => {
         iD.fileFetcher.cache().deprecated = [];
+        delete iD.services.nsi;
     });
 
     beforeEach(function() {
@@ -18,9 +39,9 @@ describe('iD.validations.outdated_tags', function () {
 
 
     function createWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = new iD.osmNode({id: 'n-2', loc: [4,5]});
+        var w = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -30,11 +51,11 @@ describe('iD.validations.outdated_tags', function () {
     }
 
     function createRelation(wayTags, relationTags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3', 'n-1'], tags: wayTags});
-        var r = iD.osmRelation({id: 'r-1', members: [{id: 'w-1'}], tags: relationTags});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = new iD.osmNode({id: 'n-2', loc: [4,5]});
+        var n3 = new iD.osmNode({id: 'n-3', loc: [5,5]});
+        var w = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3', 'n-1'], tags: wayTags});
+        var r = new iD.osmRelation({id: 'r-1', members: [{id: 'w-1'}], tags: relationTags});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -55,91 +76,217 @@ describe('iD.validations.outdated_tags', function () {
         return issues;
     }
 
-    it('has no errors on init', function(done) {
+    it('has no errors on init', async () => {
         var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('has no errors on good tags', function(done) {
+    it('has no errors on good tags', async () => {
         createWay({'highway': 'unclassified'});
         var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('flags deprecated tag with replacement', function(done) {
+    it('flags deprecated tag with replacement', async () => {
         createWay({'highway': 'ford'});
         var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('outdated_tags');
-            expect(issue.subtype).to.eql('deprecated_tags');
-            expect(issue.severity).to.eql('warning');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('outdated_tags');
+        expect(issue.subtype).to.eql('deprecated_tags');
+        expect(issue.severity).to.eql('warning');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
     });
 
-    it('flags deprecated tag with no replacement', function(done) {
+    it('flags deprecated tag with no replacement', async () => {
         createWay({'highway': 'no'});
         var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('outdated_tags');
-            expect(issue.subtype).to.eql('deprecated_tags');
-            expect(issue.severity).to.eql('warning');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('outdated_tags');
+        expect(issue.subtype).to.eql('deprecated_tags');
+        expect(issue.severity).to.eql('warning');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
     });
 
-    it('ignores way with no relations', function(done) {
+    it('flags deprecated tag with transfer replacement', async () => {
+        createWay({'amenity': 'bench', 'capacity': '4'});
+        var validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('outdated_tags');
+        expect(issue.subtype).to.eql('deprecated_tags');
+        expect(issue.severity).to.eql('warning');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
+        issues[0].dynamicFixes()[0].onClick(context);
+        expect(context.graph().entity('w-1').tags).toStrictEqual({
+            amenity: 'bench',
+            seats: '4'
+        });
+    });
+
+    it('flags deprecated tag with multiple transfer tags', async () => {
+        createWay({'oldKey1': 'foo', 'oldKey2': 'bar'});
+        var validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('outdated_tags');
+        expect(issue.subtype).to.eql('deprecated_tags');
+        expect(issue.severity).to.eql('warning');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
+        issues[0].dynamicFixes()[0].onClick(context);
+        expect(context.graph().entity('w-1').tags).toStrictEqual({
+            newKey1: 'foo',
+            newKey2: 'bar'
+        });
+    });
+
+    it('ignores way with no relations', async () => {
         createWay({});
         var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('ignores multipolygon tagged on the relation', function(done) {
+    it('ignores multipolygon tagged on the relation', async () => {
         createRelation({}, { type: 'multipolygon', building: 'yes' });
         var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('flags multipolygon tagged on the outer way', function(done) {
-        createRelation({ building: 'yes' }, { type: 'multipolygon' });
-        var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.not.have.lengthOf(0);
-            var issue = issues[0];
-            expect(issue.type).to.eql('outdated_tags');
-            expect(issue.subtype).to.eql('old_multipolygon');
-            expect(issue.entityIds).to.have.lengthOf(2);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            expect(issue.entityIds[1]).to.eql('r-1');
-            done();
-        }, 20);
+    it('flags suggestions from NSI', async () => {
+        createWay({ amenity: 'fast_food', brand: 'Fish Bowl' });
+        const validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        const issues = validate(validator);
+
+        expect(issues).toHaveLength(1);
+        expect(issues[0]).toMatchObject({
+            type: 'outdated_tags',
+            subtype: 'noncanonical_brand',
+            severity: 'warning',
+            entityIds: ['w-1'],
+        });
+
+        // click on "Upgrade Tags"
+        issues[0].dynamicFixes()[0].onClick(context);
+        expect(context.graph().entity('w-1').tags).toStrictEqual({
+            amenity: 'fast_food',
+            brand: 'Fish Bowl',
+            'brand:wikidata': 'Q110785465', // added
+        });
     });
 
+    it('generates 2 separate issues for deprecated tags and NSI suggestions', async () => {
+        createWay({ highway: 'ford', amenity: 'fast_food', brand: 'Fish Bowl' });
+        const validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        const issues = validate(validator);
+
+        expect(issues).toHaveLength(2);
+        expect(issues[0]).toMatchObject({
+            type: 'outdated_tags',
+            subtype: 'deprecated_tags',
+            severity: 'warning',
+            entityIds: ['w-1'],
+        });
+        expect(issues[1]).toMatchObject({
+            type: 'outdated_tags',
+            subtype: 'noncanonical_brand',
+            severity: 'warning',
+            entityIds: ['w-1'],
+        });
+
+        // click on "Upgrade Tags" (to fix the deprecated issue)
+        issues[0].dynamicFixes()[0].onClick(context);
+        expect(context.graph().entity('w-1').tags).toStrictEqual({
+            amenity: 'fast_food',
+            brand: 'Fish Bowl',
+            // brand:wikidata not added yet
+            ford: 'yes' // tag upgraded
+        });
+
+        // click on "Upgrade Tags" (to fix the NSI suggestion)
+        issues[1].dynamicFixes()[0].onClick(context);
+        expect(context.graph().entity('w-1').tags).toStrictEqual({
+            amenity: 'fast_food',
+            brand: 'Fish Bowl',
+            'brand:wikidata': 'Q110785465', // added
+            ford: 'yes' // tag already added
+        });
+    });
+
+    it('includes unchanged context tags of deprecation rule in tag reference', async () => {
+        createWay({ building: 'roof' });
+        const validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        const issues = validate(validator);
+        expect(issues).toHaveLength(1);
+        const selection = d3_select(document.createElement('div'));
+        issues[0].reference(selection);
+        const tagReference = selection.selectAll('table .tagDiff-row').data();
+        expect(tagReference).toHaveLength(2);
+        expect(tagReference.some(ref => ref.type === '+' && ref.key === 'layer')).toBeTruthy();
+        expect(tagReference.some(ref => ref.type === '~' && ref.key === 'building')).toBeTruthy();
+    });
+
+    it('generates 2 separate issues for incomplete tags and NSI suggestions', async () => {
+        createWay({ building: 'roof', amenity: 'fast_food', brand: 'Fish Bowl' });
+        const validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        const issues = validate(validator);
+
+        expect(issues).toHaveLength(2);
+        expect(issues[0]).toMatchObject({
+            type: 'outdated_tags',
+            subtype: 'incomplete_tags',
+            severity: 'warning',
+            entityIds: ['w-1'],
+        });
+        expect(issues[1]).toMatchObject({
+            type: 'outdated_tags',
+            subtype: 'noncanonical_brand',
+            severity: 'warning',
+            entityIds: ['w-1'],
+        });
+
+        // click on "Upgrade Tags" (to fix the incomplete_tags issue)
+        issues[0].dynamicFixes()[0].onClick(context);
+        expect(context.graph().entity('w-1').tags).toStrictEqual({
+            amenity: 'fast_food',
+            brand: 'Fish Bowl',
+            // brand:wikidata not added yet
+            building: 'roof',
+            layer: '1', // tag added
+        });
+
+        // click on "Upgrade Tags" (to fix the NSI suggestion)
+        issues[1].dynamicFixes()[0].onClick(context);
+        expect(context.graph().entity('w-1').tags).toStrictEqual({
+            amenity: 'fast_food',
+            brand: 'Fish Bowl',
+            'brand:wikidata': 'Q110785465', // added
+            building: 'roof',
+            layer: '1', // tag already added
+        });
+    });
 });

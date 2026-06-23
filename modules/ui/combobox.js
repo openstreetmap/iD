@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
+import { utilEditDistance, utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 
 
 // This code assumes that the combobox values will not have duplicate entries.
@@ -15,8 +15,15 @@ import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 
 var _comboHideTimerID;
 
+export function fuzzyMatch(search, string) {
+    const numAllowedTypos = Math.floor(search.length / 5);
+    if (utilEditDistance(search, string, {substring: true}) <= numAllowedTypos) {
+        return true;
+    }
+}
+
 export function uiCombobox(context, klass) {
-    var dispatch = d3_dispatch('accept', 'cancel');
+    var dispatch = d3_dispatch('accept', 'cancel', 'update');
     var container = context.container();
 
     var _suggestions = [];
@@ -26,19 +33,25 @@ export function uiCombobox(context, klass) {
     var _canAutocomplete = true;
     var _caseSensitive = false;
     var _cancelFetch = false;
-    var _minItems = 2;
+    var _minItems = 1;
     var _tDown = 0;
     var _mouseEnterHandler, _mouseLeaveHandler;
 
     var _fetcher = function(val, cb) {
+        val = val.toLowerCase();
         cb(_data.filter(function(d) {
             var terms = d.terms || [];
             terms.push(d.value);
+            if (d.key) {
+                terms.push(d.key);
+            }
             return terms.some(function(term) {
-                return term
+                term = term
                     .toString()
-                    .toLowerCase()
-                    .indexOf(val.toLowerCase()) !== -1;
+                    .toLowerCase();
+                if (term.indexOf(val.toLowerCase()) !== -1) return true;
+                if (fuzzyMatch(val, term)) return true;
+                return false;
             });
         }));
     };
@@ -54,6 +67,7 @@ export function uiCombobox(context, klass) {
             .on('keyup.combo-input', keyup)
             .on('input.combo-input', change)
             .on('mousedown.combo-input', mousedown)
+            .on('mouseup.combo-input', mouseup)
             .each(function() {
                 var parent = this.parentNode;
                 var sibling = this.nextSibling;
@@ -81,6 +95,9 @@ export function uiCombobox(context, klass) {
             if (input.classed('disabled')) return;
             _tDown = +new Date();
 
+            // mousedown should never bubble up (see #10481)
+            d3_event.stopPropagation();
+
             // clear selection
             var start = input.property('selectionStart');
             var end = input.property('selectionEnd');
@@ -89,13 +106,10 @@ export function uiCombobox(context, klass) {
                 input.node().setSelectionRange(val.length, val.length);
                 return;
             }
-
-            input.on('mouseup.combo-input', mouseup);
         }
 
 
         function mouseup(d3_event) {
-            input.on('mouseup.combo-input', null);
             if (d3_event.button !== 0) return;    // left click only
             if (input.classed('disabled')) return;
             if (input.node() !== document.activeElement) return;   // exit if this input is not focused
@@ -151,18 +165,8 @@ export function uiCombobox(context, klass) {
                 .on('scroll.combo-scroll', render, true);
         }
 
-
         function hide() {
-            if (_comboHideTimerID) {
-                window.clearTimeout(_comboHideTimerID);
-                _comboHideTimerID = undefined;
-            }
-
-            container.selectAll('.combobox')
-                .remove();
-
-            container
-                .on('scroll.combo-scroll', null);
+            _hide(container);
         }
 
 
@@ -179,7 +183,8 @@ export function uiCombobox(context, klass) {
                     input.on('input.combo-input', function() {
                         var start = input.property('selectionStart');
                         input.node().setSelectionRange(start, start);
-                        input.on('input.combo-input', change);
+                        input.on('input.combo-input', change); // reset event handler
+                        change(false);
                     });
                     break;
 
@@ -190,6 +195,7 @@ export function uiCombobox(context, klass) {
                 case 13:  // ↩ Return
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
+                    accept(d3_event);
                     break;
 
                 case 38:  // ↑ Up arrow
@@ -218,22 +224,19 @@ export function uiCombobox(context, klass) {
                 case 27:  // ⎋ Escape
                     cancel();
                     break;
-
-                case 13:  // ↩ Return
-                    accept(d3_event);
-                    break;
             }
         }
 
 
         // Called whenever the input value is changed (e.g. on typing)
-        function change() {
-            fetchComboData(value(), function() {
+        function change(doAutoComplete) {
+            if (doAutoComplete === undefined) doAutoComplete = true;
+            fetchComboData(value(), function(skipAutosuggest) {
                 _selected = null;
                 var val = input.property('value');
 
                 if (_suggestions.length) {
-                    if (input.property('selectionEnd') === val.length) {
+                    if (doAutoComplete && !skipAutosuggest && input.property('selectionEnd') === val.length) {
                         _selected = tryAutocomplete();
                     }
 
@@ -271,7 +274,8 @@ export function uiCombobox(context, klass) {
                 // pick new _selected
                 index = Math.max(Math.min(index + dir, _suggestions.length - 1), 0);
                 _selected = _suggestions[index].value;
-                input.property('value', _selected);
+                utilGetSetValue(input, _selected);
+                dispatch.call('update');
             }
 
             render();
@@ -295,7 +299,7 @@ export function uiCombobox(context, klass) {
             // https://stackoverflow.com/questions/11039885/scrollintoview-causing-the-whole-page-to-move
             var selected = combo.selectAll('.combobox-option.selected').node();
             if (selected) {
-                selected.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                selected.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' });
             }
         }
 
@@ -316,7 +320,7 @@ export function uiCombobox(context, klass) {
         function fetchComboData(v, cb) {
             _cancelFetch = false;
 
-            _fetcher.call(input, v, function(results) {
+            _fetcher.call(input, v, function(results, skipAutosuggest) {
                 // already chose a value, don't overwrite or autocomplete it
                 if (_cancelFetch) return;
 
@@ -324,7 +328,7 @@ export function uiCombobox(context, klass) {
                 results.forEach(function(d) { _fetched[d.value] = d; });
 
                 if (cb) {
-                    cb();
+                    cb(skipAutosuggest);
                 }
             });
         }
@@ -332,16 +336,25 @@ export function uiCombobox(context, klass) {
 
         function tryAutocomplete() {
             if (!_canAutocomplete) return;
+            if (input.node() !== document.activeElement) return;
 
             var val = _caseSensitive ? value() : value().toLowerCase();
             if (!val) return;
 
             // Don't autocomplete if user is typing a number - #4935
-            if (!isNaN(parseFloat(val)) && isFinite(val)) return;
+            if (isFinite(val)) return;
+
+            const suggestionValues = [];
+            _suggestions.forEach(s => {
+                suggestionValues.push(s.value);
+                if (s.key && s.key !== s.value) {
+                    suggestionValues.push(s.key);
+                }
+            });
 
             var bestIndex = -1;
-            for (var i = 0; i < _suggestions.length; i++) {
-                var suggestion = _suggestions[i].value;
+            for (var i = 0; i < suggestionValues.length; i++) {
+                var suggestion = suggestionValues[i];
                 var compare = _caseSensitive ? suggestion : suggestion.toLowerCase();
 
                 // if search string matches suggestion exactly, pick it..
@@ -356,9 +369,10 @@ export function uiCombobox(context, klass) {
             }
 
             if (bestIndex !== -1) {
-                var bestVal = _suggestions[bestIndex].value;
+                var bestVal = suggestionValues[bestIndex];
                 input.property('value', bestVal);
-                input.node().setSelectionRange(val.length, bestVal.length);
+                input.node().setSelectionRange(val.length, bestVal.length, 'backward');
+                dispatch.call('update');
                 return bestVal;
             }
         }
@@ -381,23 +395,34 @@ export function uiCombobox(context, klass) {
                 .remove();
 
             // enter/update
-            options.enter()
+            const enter = options.enter()
                 .append('a')
                 .attr('class', function(d) {
-                    return 'combobox-option ' + (d.klass || '');
+                    return 'combobox-option ' + (d.klass || '') + (d.description ? ' has-description' : '');
                 })
-                .attr('title', function(d) { return d.title; })
-                .each(function(d) {
+                .attr('title', function(d) { return d.title; });
+
+            enter.each(function(d) {
+                    const sel = d3_select(this);
+                    const labelSpan = sel.append('span')
+                        .attr('class', 'combobox-option-label');
                     if (d.display) {
-                        d.display(d3_select(this));
+                        d.display(labelSpan);
                     } else {
-                        d3_select(this).text(d.value);
+                        labelSpan.text(d.value);
                     }
-                })
+                    if (d.description) {
+                        sel.append('span')
+                            .attr('class', 'combobox-option-description')
+                            .text(d.description);
+                    }
+                });
+
+            enter
                 .on('mouseenter', _mouseEnterHandler)
                 .on('mouseleave', _mouseLeaveHandler)
                 .merge(options)
-                .classed('selected', function(d) { return d.value === _selected; })
+                .classed('selected', function(d) { return d.value === _selected || d.key === _selected; })
                 .on('click.combo-option', accept)
                 .order();
 
@@ -427,8 +452,15 @@ export function uiCombobox(context, klass) {
             var val = utilGetSetValue(input);
             thiz.setSelectionRange(val.length, val.length);
 
-            d = _fetched[val];
-            dispatch.call('accept', thiz, d, val);
+            if (!d) {
+                d = _fetched[val];
+            }
+
+            if (val !== '') {
+                // skipped if nothing was selected
+                dispatch.call('accept', thiz, d, val);
+            }
+
             hide();
         }
 
@@ -448,6 +480,7 @@ export function uiCombobox(context, klass) {
             thiz.setSelectionRange(val.length, val.length);
 
             dispatch.call('cancel', thiz);
+
             hide();
         }
 
@@ -500,7 +533,22 @@ export function uiCombobox(context, klass) {
 }
 
 
+function _hide(container) {
+    if (_comboHideTimerID) {
+        window.clearTimeout(_comboHideTimerID);
+        _comboHideTimerID = undefined;
+    }
+
+    container.selectAll('.combobox')
+        .remove();
+
+    container
+        .on('scroll.combo-scroll', null);
+}
+
+
 uiCombobox.off = function(input, context) {
+    _hide(context.container());
     input
         .on('focus.combo-input', null)
         .on('blur.combo-input', null)
@@ -508,7 +556,9 @@ uiCombobox.off = function(input, context) {
         .on('keyup.combo-input', null)
         .on('input.combo-input', null)
         .on('mousedown.combo-input', null)
-        .on('mouseup.combo-input', null);
+        .on('mouseup.combo-input', null)
+        .on('mousedown.combo-caret', null)
+        .on('mouseup.combo-caret', null);
 
 
     context.container()

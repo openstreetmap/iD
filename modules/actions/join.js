@@ -1,6 +1,6 @@
 import { actionDeleteRelation } from './delete_relation';
 import { actionDeleteWay } from './delete_way';
-import { osmIsInterestingTag } from '../osm/tags';
+import { osmIsInterestingTag, osmSummableTags } from '../osm/tags';
 import { osmJoinWays } from '../osm/multipolygon';
 import { geoPathIntersections } from '../geo';
 import { utilArrayGroupBy, utilArrayIdentical, utilArrayIntersection, utilOldestID } from '../util';
@@ -61,7 +61,12 @@ export function actionJoin(ids) {
                 graph = graph.replace(parent.replaceMember(way, survivor));
             });
 
-            survivor = survivor.mergeTags(way.tags);
+            const summedTags = {};
+            for (const key in way.tags) {
+                if (!canSumTags(key, way.tags, survivor.tags)) continue;
+                summedTags[key] = (+way.tags[key] + +survivor.tags[key]).toString();
+            }
+            survivor = survivor.mergeTags(way.tags, summedTags);
 
             graph = graph.replace(survivor);
             graph = actionDeleteWay(way.id)(graph);
@@ -72,7 +77,7 @@ export function actionJoin(ids) {
         function checkForSimpleMultipolygon() {
             if (!survivor.isClosed()) return;
 
-            var multipolygons = graph.parentMultipolygons(survivor).filter(function(multipolygon) {
+            const multipolygons = graph.parentMultipolygons(survivor).filter(multipolygon => {
                 // find multipolygons where the survivor is the only member
                 return multipolygon.members.length === 1;
             });
@@ -80,9 +85,9 @@ export function actionJoin(ids) {
             // skip if this is the single member of multiple multipolygons
             if (multipolygons.length !== 1) return;
 
-            var multipolygon = multipolygons[0];
+            const multipolygon = multipolygons[0];
 
-            for (var key in survivor.tags) {
+            for (const key in survivor.tags) {
                 if (multipolygon.tags[key] &&
                     // don't collapse if tags cannot be cleanly merged
                     multipolygon.tags[key] !== survivor.tags[key]) return;
@@ -90,9 +95,14 @@ export function actionJoin(ids) {
 
             survivor = survivor.mergeTags(multipolygon.tags);
             graph = graph.replace(survivor);
+            for (const relation of graph.parentRelations(multipolygon)) {
+                // transfer membership of collapsed single-member multipolygon
+                // onto resulting basic area, #9064
+                graph = graph.replace(relation.replaceMember(multipolygon, survivor));
+            }
             graph = actionDeleteRelation(multipolygon.id, true /* allow untagged members */)(graph);
 
-            var tags = Object.assign({}, survivor.tags);
+            const tags = Object.assign({}, survivor.tags);
             if (survivor.geometry(graph) !== 'area') {
                 // ensure the feature persists as an area
                 tags.area = 'yes';
@@ -133,7 +143,7 @@ export function actionJoin(ids) {
         var sortedParentRelations = function (id) {
             return graph.parentRelations(graph.entity(id))
                 .filter((rel) => !rel.isRestriction() && !rel.isConnectivity())
-                .sort((a, b) => a.id - b.id);
+                .sort((a, b) => a.id.localeCompare(b.id));
         };
         var relsA = sortedParentRelations(ids[0]);
         for (i = 1; i < ids.length; i++) {
@@ -181,6 +191,8 @@ export function actionJoin(ids) {
             for (var k in way.tags) {
                 if (!(k in tags)) {
                     tags[k] = way.tags[k];
+                } else if (canSumTags(k, tags, way.tags)) {
+                    tags[k] = (+tags[k] + +way.tags[k]).toString();
                 } else if (tags[k] && osmIsInterestingTag(k) && tags[k] !== way.tags[k]) {
                     conflicting = true;
                 }
@@ -195,6 +207,12 @@ export function actionJoin(ids) {
             return 'conflicting_tags';
         }
     };
+
+    function canSumTags(key, tagsA, tagsB) {
+        return osmSummableTags.has(key) &&
+            isFinite(tagsA[key]) &&
+            isFinite(tagsB[key]);
+    }
 
 
     return action;

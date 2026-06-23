@@ -3,7 +3,7 @@ import { actionReverse } from '../actions/reverse';
 import { actionSplit } from '../actions/split';
 import { coreGraph } from '../core/graph';
 import { geoAngle, geoSphericalDistance } from '../geo';
-import { osmEntity } from './entity';
+import { osmIdManager } from './id_manager';
 import { utilArrayDifference, utilArrayUniq } from '../util';
 
 
@@ -17,7 +17,7 @@ export function osmTurn(turn) {
 
 export function osmIntersection(graph, startVertexId, maxDistance) {
     maxDistance = maxDistance || 30;    // in meters
-    var vgraph = coreGraph();           // virtual graph
+    var vgraph = new coreGraph();           // virtual graph
     var i, j, k;
 
 
@@ -43,6 +43,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             'unclassified': true,
             'living_street': true,
             'service': true,
+            'busway': true,
             'road': true,
             'track': true
         };
@@ -57,11 +58,8 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     var vertexIds = [];
     var vertex;
     var ways = [];
-    var wayIds = [];
     var way;
-    var nodes = [];
     var node;
-    var parents = [];
     var parent;
 
     // `actions` will store whatever actions must be performed to satisfy
@@ -89,7 +87,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             hasWays = true;
 
             // check the way's children for more key vertices
-            nodes = utilArrayUniq(graph.childNodes(way));
+            const nodes = utilArrayUniq(graph.childNodes(way));
             for (j = 0; j < nodes.length; j++) {
                 node = nodes[j];
                 if (node === vertex) continue;                                           // same thing
@@ -98,7 +96,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
                 // a key vertex will have parents that are also roads
                 var hasParents = false;
-                parents = graph.parentWays(node);
+                const parents = graph.parentWays(node);
                 for (k = 0; k < parents.length; k++) {
                     parent = parents[k];
                     if (parent === way) continue;                 // same thing
@@ -157,7 +155,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
 
     // STEP 4:  Split ways on key vertices
-    var origCount = osmEntity.id.next.way;
+    var origCount = osmIdManager.next.way;
     vertices.forEach(function(v) {
         // This is an odd way to do it, but we need to find all the ways that
         // will be split here, then split them one at a time to ensure that these
@@ -184,7 +182,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     //     these actions later if the user decides to create a turn restriction
     //  2. Avoids churning way ids just by hovering over a vertex
     //     and displaying the turn restriction editor
-    osmEntity.id.next.way = origCount;
+    osmIdManager.next.way = origCount;
 
 
     // STEP 5:  Update arrays to point to vgraph entities
@@ -193,8 +191,8 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     ways = [];
 
     vertexIds.forEach(function(id) {
-        var vertex = vgraph.entity(id);
-        var parents = vgraph.parentWays(vertex);
+        const vertex = vgraph.entity(id);
+        const parents = vgraph.parentWays(vertex);
         vertices.push(vertex);
         ways = ways.concat(parents);
     });
@@ -203,14 +201,15 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     ways = utilArrayUniq(ways);
 
     vertexIds = vertices.map(function(v) { return v.id; });
-    wayIds = ways.map(function(w) { return w.id; });
+    const wayIds = ways.map(function(w) { return w.id; });
 
 
     // STEP 6:  Update the ways with some metadata that will be useful for
     // walking the intersection graph later and rendering turn arrows.
 
     function withMetadata(way, vertexIds) {
-        var __oneWay = way.isOneWay();
+        // bidirectional ways are two-way from an intersection's perspective
+        var __oneWay = way.isOneWay() && !way.isBiDirectional();
 
         // which affixes are key vertices?
         var __first = (vertexIds.indexOf(way.first()) !== -1);
@@ -263,7 +262,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                 continue;
             }
 
-            parents = vgraph.parentWays(vertex);
+            let parents = vgraph.parentWays(vertex);
             if (parents.length < 3) {
                 if (vertexIds.indexOf(vertexId) !== -1) {
                     vertexIds.splice(vertexIds.indexOf(vertexId), 1);   // stop checking this one
@@ -363,178 +362,190 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             if (currPath.length >= maxPathLength) return;
             currPath.push(entity.id);
             currRestrictions = (currRestrictions || []).slice();  // shallow copy
-            var i, j;
 
             if (entity.type === 'node') {
-                var parents = vgraph.parentWays(entity);
-                var nextWays = [];
+                stepNode(entity, currPath, currRestrictions);
+            } else {  // entity.type === 'way'
+                stepWay(entity, currPath, currRestrictions, matchedRestriction);
+            }
+        }
 
-                // which ways can we step into?
-                for (i = 0; i < parents.length; i++) {
-                    var way = parents[i];
+        function stepNode(entity, currPath, currRestrictions) {
+            var i, j;
+            var parents = vgraph.parentWays(entity);
+            var nextWays = [];
 
-                    // if next way is a oneway incoming to this vertex, skip
-                    if (way.__oneWay && way.nodes[0] !== entity.id) continue;
+            // which ways can we step into?
+            for (i = 0; i < parents.length; i++) {
+                var way = parents[i];
 
-                    // if we have seen it before (allowing for an initial u-turn), skip
-                    if (currPath.indexOf(way.id) !== -1 && currPath.length >= 3) continue;
+                // if next way is a oneway incoming to this vertex, skip
+                if (way.__oneWay && way.nodes[0] !== entity.id) continue;
 
-                    // Check all "current" restrictions (where we've already walked the `FROM`)
-                    var restrict = null;
-                    for (j = 0; j < currRestrictions.length; j++) {
-                        var restriction = currRestrictions[j];
-                        var f = restriction.memberByRole('from');
-                        var v = restriction.membersByRole('via');
-                        var t = restriction.memberByRole('to');
-                        var isOnly = /^only_/.test(restriction.tags.restriction);
+                // if we have seen it before (allowing for an initial u-turn), skip
+                if (currPath.indexOf(way.id) !== -1 && currPath.length >= 3) continue;
 
-                        // Does the current path match this turn restriction?
-                        var matchesFrom = (f.id === fromWayId);
-                        var matchesViaTo = false;
-                        var isAlongOnlyPath = false;
+                // Check all "current" restrictions (where we've already walked the `FROM`)
+                var restrict = null;
+                for (j = 0; j < currRestrictions.length; j++) {
+                    var restriction = currRestrictions[j];
+                    var f = restriction.memberByRole('from');
+                    var v = restriction.membersByRole('via');
+                    var t = restriction.memberByRole('to');
+                    var isNo = /^no_/.test(restriction.tags.restriction);
+                    var isOnly = /^only_/.test(restriction.tags.restriction);
 
-                        if (t.id === way.id) {     // match TO
-
-                            if (v.length === 1 && v[0].type === 'node') {    // match VIA node
-                                matchesViaTo = (v[0].id === entity.id && (
-                                    (matchesFrom && currPath.length === 2) ||
-                                    (!matchesFrom && currPath.length > 2)
-                                ));
-
-                            } else {                                         // match all VIA ways
-                                var pathVias = [];
-                                for (k = 2; k < currPath.length; k +=2 ) {   // k = 2 skips FROM
-                                    pathVias.push(currPath[k]);              // (path goes way-node-way...)
-                                }
-                                var restrictionVias = [];
-                                for (k = 0; k < v.length; k++) {
-                                    if (v[k].type === 'way') {
-                                        restrictionVias.push(v[k].id);
-                                    }
-                                }
-                                var diff = utilArrayDifference(pathVias, restrictionVias);
-                                matchesViaTo = !diff.length;
-                            }
-
-                        } else if (isOnly) {
-                            for (k = 0; k < v.length; k++) {
-                                // way doesn't match TO, but is one of the via ways along the path of an "only"
-                                if (v[k].type === 'way' && v[k].id === way.id) {
-                                    isAlongOnlyPath = true;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (matchesViaTo) {
-                            if (isOnly) {
-                                restrict = { id: restriction.id, direct: matchesFrom, from: f.id, only: true, end: true };
-                            } else {
-                                restrict = { id: restriction.id, direct: matchesFrom, from: f.id, no: true, end: true };
-                            }
-                        } else {    // indirect - caused by a different nearby restriction
-                            if (isAlongOnlyPath) {
-                                restrict = { id: restriction.id, direct: false, from: f.id, only: true, end: false };
-                            } else if (isOnly) {
-                                restrict = { id: restriction.id, direct: false, from: f.id, no: true, end: true };
-                            }
-                        }
-
-                        // stop looking if we find a "direct" restriction (matching FROM, VIA, TO)
-                        if (restrict && restrict.direct) break;
+                    if (!(isNo || isOnly)) {
+                        continue; // skip unsupported restriction values
                     }
 
-                    nextWays.push({ way: way, restrict: restrict });
-                }
+                    // Does the current path match this turn restriction?
+                    var matchesFrom = (f.id === fromWayId);
+                    var matchesViaTo = false;
+                    var isAlongOnlyPath = false;
 
-                nextWays.forEach(function(nextWay) {
-                    step(nextWay.way, currPath, currRestrictions, nextWay.restrict);
-                });
+                    if (t.id === way.id) {     // match TO
 
+                        if (v.length === 1 && v[0].type === 'node') {    // match VIA node
+                            matchesViaTo = (v[0].id === entity.id && (
+                                (matchesFrom && currPath.length === 2) ||
+                                (!matchesFrom && currPath.length > 2)
+                            ));
 
-            } else {  // entity.type === 'way'
-                if (currPath.length >= 3) {     // this is a "complete" path..
-                    var turnPath = currPath.slice();   // shallow copy
+                        } else {                                         // match all VIA ways
+                            var pathVias = [];
+                            for (k = 2; k < currPath.length; k +=2 ) {   // k = 2 skips FROM
+                                pathVias.push(currPath[k]);              // (path goes way-node-way...)
+                            }
+                            var restrictionVias = [];
+                            for (k = 0; k < v.length; k++) {
+                                if (v[k].type === 'way') {
+                                    restrictionVias.push(v[k].id);
+                                }
+                            }
+                            var diff = utilArrayDifference(pathVias, restrictionVias);
+                            matchesViaTo = !diff.length;
+                        }
 
-                    // an indirect restriction - only include the partial path (starting at FROM)
-                    if (matchedRestriction && matchedRestriction.direct === false) {
-                        for (i = 0; i < turnPath.length; i++) {
-                            if (turnPath[i] === matchedRestriction.from) {
-                                turnPath = turnPath.slice(i);
+                    } else if (isOnly) {
+                        for (k = 0; k < v.length; k++) {
+                            // way doesn't match TO, but is one of the via ways along the path of an "only"
+                            if (v[k].type === 'way' && v[k].id === way.id) {
+                                isAlongOnlyPath = true;
                                 break;
                             }
                         }
                     }
 
-                    var turn = pathToTurn(turnPath);
-                    if (turn) {
-                        if (matchedRestriction) {
-                            turn.restrictionID = matchedRestriction.id;
-                            turn.no = matchedRestriction.no;
-                            turn.only = matchedRestriction.only;
-                            turn.direct = matchedRestriction.direct;
+                    if (matchesViaTo) {
+                        if (isOnly) {
+                            restrict = { id: restriction.id, direct: matchesFrom, from: f.id, only: true, end: true };
+                        } else {
+                            restrict = { id: restriction.id, direct: matchesFrom, from: f.id, no: true, end: true };
                         }
-                        turns.push(osmTurn(turn));
+                    } else {    // indirect - caused by a different nearby restriction
+                        if (isAlongOnlyPath) {
+                            restrict = { id: restriction.id, direct: false, from: f.id, only: true, end: false };
+                        } else if (isOnly) {
+                            restrict = { id: restriction.id, direct: false, from: f.id, no: true, end: true };
+                        }
                     }
 
-                    if (currPath[0] === currPath[2]) return;   // if we made a u-turn - stop here
+                    // stop looking if we find a "direct" restriction (matching FROM, VIA, TO)
+                    if (restrict && restrict.direct) break;
                 }
 
-                if (matchedRestriction && matchedRestriction.end) return;  // don't advance any further
+                nextWays.push({ way: way, restrict: restrict });
+            }
 
-                // which nodes can we step into?
-                var n1 = vgraph.entity(entity.first());
-                var n2 = vgraph.entity(entity.last());
-                var dist = geoSphericalDistance(n1.loc, n2.loc);
-                var nextNodes = [];
+            nextWays.forEach(function(nextWay) {
+                step(nextWay.way, currPath, currRestrictions, nextWay.restrict);
+            });
+        }
 
-                if (currPath.length > 1) {
-                    if (dist > maxDistance) return;   // the next node is too far
-                    if (!entity.__via) return;        // this way is a leaf / can't be a via
+        function stepWay(entity, currPath, currRestrictions, matchedRestriction) {
+            var i;
+            if (currPath.length >= 3) {     // this is a "complete" path..
+                var turnPath = currPath.slice();   // shallow copy
+
+                // an indirect restriction - only include the partial path (starting at FROM)
+                if (matchedRestriction && matchedRestriction.direct === false) {
+                    for (i = 0; i < turnPath.length; i++) {
+                        if (turnPath[i] === matchedRestriction.from) {
+                            turnPath = turnPath.slice(i);
+                            break;
+                        }
+                    }
                 }
 
-                if (!entity.__oneWay &&                     // bidirectional..
-                    keyVertexIds.indexOf(n1.id) !== -1 &&   // key vertex..
-                    currPath.indexOf(n1.id) === -1) {       // haven't seen it yet..
-                    nextNodes.push(n1);                     // can advance to first node
+                var turn = pathToTurn(turnPath);
+                if (turn) {
+                    if (matchedRestriction) {
+                        turn.restrictionID = matchedRestriction.id;
+                        turn.no = matchedRestriction.no;
+                        turn.only = matchedRestriction.only;
+                        turn.direct = matchedRestriction.direct;
+                    }
+                    turns.push(osmTurn(turn));
                 }
-                if (keyVertexIds.indexOf(n2.id) !== -1 &&   // key vertex..
-                    currPath.indexOf(n2.id) === -1) {       // haven't seen it yet..
-                    nextNodes.push(n2);                     // can advance to last node
-                }
 
-                nextNodes.forEach(function(nextNode) {
-                    // gather restrictions FROM this way
-                    var fromRestrictions = vgraph.parentRelations(entity).filter(function(r) {
-                        if (!r.isRestriction()) return false;
+                if (currPath[0] === currPath[2]) return;   // if we made a u-turn - stop here
+            }
 
-                        var f = r.memberByRole('from');
-                        if (!f || f.id !== entity.id) return false;
+            if (matchedRestriction && matchedRestriction.end) return;  // don't advance any further
 
-                        var isOnly = /^only_/.test(r.tags.restriction);
-                        if (!isOnly) return true;
+            // which nodes can we step into?
+            var n1 = vgraph.entity(entity.first());
+            var n2 = vgraph.entity(entity.last());
+            var dist = geoSphericalDistance(n1.loc, n2.loc);
+            var nextNodes = [];
 
-                        // `only_` restrictions only matter along the direction of the VIA - #4849
-                        var isOnlyVia = false;
-                        var v = r.membersByRole('via');
-                        if (v.length === 1 && v[0].type === 'node') {   // via node
-                            isOnlyVia = (v[0].id === nextNode.id);
-                        } else {                                        // via way(s)
-                            for (var i = 0; i < v.length; i++) {
-                                if (v[i].type !== 'way') continue;
-                                var viaWay = vgraph.entity(v[i].id);
-                                if (viaWay.first() === nextNode.id || viaWay.last() === nextNode.id) {
-                                    isOnlyVia = true;
-                                    break;
-                                }
+            if (currPath.length > 1) {
+                if (dist > maxDistance) return;   // the next node is too far
+                if (!entity.__via) return;        // this way is a leaf / can't be a via
+            }
+
+            if (!entity.__oneWay &&                     // bidirectional..
+                keyVertexIds.indexOf(n1.id) !== -1 &&   // key vertex..
+                currPath.indexOf(n1.id) === -1) {       // haven't seen it yet..
+                nextNodes.push(n1);                     // can advance to first node
+            }
+            if (keyVertexIds.indexOf(n2.id) !== -1 &&   // key vertex..
+                currPath.indexOf(n2.id) === -1) {       // haven't seen it yet..
+                nextNodes.push(n2);                     // can advance to last node
+            }
+
+            nextNodes.forEach(function(nextNode) {
+                // gather restrictions FROM this way
+                var fromRestrictions = vgraph.parentRelations(entity).filter(function(r) {
+                    if (!r.isRestriction()) return false;
+
+                    var f = r.memberByRole('from');
+                    if (!f || f.id !== entity.id) return false;
+
+                    var isOnly = /^only_/.test(r.tags.restriction);
+                    if (!isOnly) return true;
+
+                    // `only_` restrictions only matter along the direction of the VIA - #4849
+                    var isOnlyVia = false;
+                    var v = r.membersByRole('via');
+                    if (v.length === 1 && v[0].type === 'node') {   // via node
+                        isOnlyVia = (v[0].id === nextNode.id);
+                    } else {                                        // via way(s)
+                        for (var i = 0; i < v.length; i++) {
+                            if (v[i].type !== 'way') continue;
+                            var viaWay = vgraph.entity(v[i].id);
+                            if (viaWay.first() === nextNode.id || viaWay.last() === nextNode.id) {
+                                isOnlyVia = true;
+                                break;
                             }
                         }
-                        return isOnlyVia;
-                    });
-
-                    step(nextNode, currPath, currRestrictions.concat(fromRestrictions), false);
+                    }
+                    return isOnlyVia;
                 });
-            }
+
+                step(nextNode, currPath, currRestrictions.concat(fromRestrictions), false);
+            });
         }
 
 
@@ -553,8 +564,11 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                 if (way.__oneWay) return null;
 
                 isUturn = true;
-                viaNodeId = fromVertexId = toVertexId = path[1];
-                fromNodeId = toNodeId = adjacentNode(fromWayId, viaNodeId);
+                viaNodeId = path[1];
+                fromVertexId = path[1];
+                toVertexId = path[1];
+                fromNodeId = adjacentNode(fromWayId, viaNodeId);
+                toNodeId = fromNodeId;
 
             } else {
                 isUturn = false;

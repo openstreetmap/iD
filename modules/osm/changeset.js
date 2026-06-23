@@ -4,10 +4,9 @@ import { geoExtent } from '../geo';
 
 export function osmChangeset() {
     if (!(this instanceof osmChangeset)) {
-        return (new osmChangeset()).initialize(arguments);
-    } else if (arguments.length) {
-        this.initialize(arguments);
+        return new osmChangeset(...arguments);
     }
+    this.initialize(arguments);
 }
 
 

@@ -1,6 +1,4 @@
-import { Matcher } from 'name-suggestion-index';
-import parseVersion from 'vparse';
-
+import { Matcher, buildIDPresets } from 'name-suggestion-index';
 import { fileFetcher, locationManager } from '../core';
 import { presetManager } from '../presets';
 
@@ -9,6 +7,7 @@ import { nsiCdnUrl } from '../../config/id.js';
 // Make very sure this resolves to iD's `package.json`
 // If you mess up the `../`s, the resolver may import another random package.json from somewhere else.
 import packageJSON from '../../package.json';
+
 
 // This service contains all the code related to the **name-suggestion-index** (aka NSI)
 // NSI contains the most correct tagging for many commonly mapped features.
@@ -47,17 +46,15 @@ const notBranches = /(coop|express|wireless|factory|outlet)/i;
 //
 function setNsiSources() {
   const nsiVersion = packageJSON.dependencies['name-suggestion-index'] || packageJSON.devDependencies['name-suggestion-index'];
-  const v = parseVersion(nsiVersion);
-  const vMinor = `${v.major}.${v.minor}`;
-  const cdn = nsiCdnUrl.replace('{version}', vMinor);
+  const cdn = nsiCdnUrl.replace('{version}', nsiVersion);
   const sources = {
-    'nsi_data': cdn + 'dist/nsi.min.json',
-    'nsi_dissolved': cdn + 'dist/dissolved.min.json',
-    'nsi_features': cdn + 'dist/featureCollection.min.json',
-    'nsi_generics': cdn + 'dist/genericWords.min.json',
-    'nsi_presets': cdn + 'dist/presets/nsi-id-presets.min.json',
-    'nsi_replacements': cdn + 'dist/replacements.min.json',
-    'nsi_trees': cdn + 'dist/trees.min.json'
+    'nsi_data': cdn + 'dist/json/nsi.min.json',
+    'nsi_dissolved': cdn + 'dist/wikidata/dissolved.min.json',
+    'nsi_features': cdn + 'dist/json/featureCollection.min.json',
+    'nsi_generics': cdn + 'dist/json/genericWords.min.json',
+    'nsi_replacements': cdn + 'dist/json/replacements.min.json',
+    'nsi_trees': cdn + 'dist/json/trees.min.json',
+    'nsi_wikidata': cdn + 'dist/wikidata/wikidata.min.json',
   };
 
   let fileMap = fileFetcher.fileMap();
@@ -73,17 +70,47 @@ function setNsiSources() {
 function loadNsiPresets() {
   return (
     Promise.all([
-      fileFetcher.get('nsi_presets'),
-      fileFetcher.get('nsi_features')
+      fileFetcher.get('nsi_data'),
+      fileFetcher.get('nsi_dissolved'),
+      fileFetcher.get('nsi_features'),
+      fileFetcher.get('nsi_wikidata'),
     ])
-    .then(vals => {
+    .then(([
+        nsi_data,
+        nsi_dissolved,
+        nsi_features,
+        nsi_wikidata
+    ]) => {
+      const nsiPresets = buildIDPresets(nsi_data.nsi, {
+        sourcePresets: presetManager.getPresets(),
+        wikidata: nsi_wikidata.wikidata,
+        dissolved: nsi_dissolved.dissolved,
+      }).presets;
+
       // Add `suggestion=true` to all the nsi presets
       // The preset json schema doesn't include it, but the iD code still uses it
-      Object.values(vals[0].presets).forEach(preset => preset.suggestion = true);
+      for (const preset of Object.values(nsiPresets)) {
+        preset.suggestion = true;
+      }
+
+      // nsi does not specify *:wikipedia (anymore):
+      // clean up previous values to prevent that the wikidata/wikipedia information
+      // is going to be out of sync, see #9103
+      for (const preset of Object.values(nsiPresets)) {
+        if (preset.tags['brand:wikidata']) {
+          preset.removeTags = {'brand:wikipedia': '*', ...(preset.removeTags || preset.addTags || preset.tags)};
+        }
+        if (preset.tags['operator:wikidata']) {
+          preset.removeTags = {'operator:wikipedia': '*', ...(preset.removeTags || preset.addTags || preset.tags)};
+        }
+        if (preset.tags['network:wikidata']) {
+          preset.removeTags = {'network:wikipedia': '*', ...(preset.removeTags || preset.addTags || preset.tags)};
+        }
+      }
 
       presetManager.merge({
-        presets: vals[0].presets,
-        featureCollection: vals[1]
+        presets: nsiPresets,
+        featureCollection: nsi_features
       });
     })
   );
@@ -101,20 +128,26 @@ function loadNsiData() {
       fileFetcher.get('nsi_replacements'),
       fileFetcher.get('nsi_trees')
     ])
-    .then(vals => {
+    .then(([
+        nsi_data,          // the raw name-suggestion-index data
+        nsi_dissolved,     // list of dissolved items
+        nsi_replacements,  // trivial old->new qid replacements
+        nsi_trees          // metadata about trees, main tags
+    ]) => {
       _nsi = {
-        data:          vals[0].nsi,            // the raw name-suggestion-index data
-        dissolved:     vals[1].dissolved,      // list of dissolved items
-        replacements:  vals[2].replacements,   // trivial old->new qid replacements
-        trees:         vals[3].trees,          // metadata about trees, main tags
-        kvt:           new Map(),              // Map (k -> Map (v -> t) )
-        qids:          new Map(),              // Map (wd/wp tag values -> qids)
-        ids:           new Map()               // Map (id -> NSI item)
+        data:          nsi_data.nsi,
+        dissolved:     nsi_dissolved.dissolved,
+        replacements:  nsi_replacements.replacements,
+        trees:         nsi_trees.trees,
+        kvt:           new Map(),  // Map (k -> Map (v -> t) )
+        qids:          new Map(),  // Map (wd/wp tag values -> qids)
+        ids:           new Map()   // Map (id -> NSI item)
       };
 
-      _nsi.matcher = new Matcher();
-      _nsi.matcher.buildMatchIndex(_nsi.data);
-      _nsi.matcher.buildLocationIndex(_nsi.data, locationManager.loco());
+      const matcher = new Matcher();
+      _nsi.matcher = matcher;
+      matcher.buildMatchIndex(_nsi.data);
+      matcher.buildLocationIndex(_nsi.data, locationManager);
 
       Object.keys(_nsi.data).forEach(tkv => {
         const category = _nsi.data[tkv];
@@ -461,13 +494,10 @@ function _upgradeTags(tags, loc) {
     return changed ? { newTags: newTags, matched: null } : null;
   }
 
-  // Order the [key,value,name] tuples - test primary names before alternate names
+  // Order the [key,value,name] tuples - test primary before alternate
   const tuples = gatherTuples(tryKVs, tryNames);
-  let foundPrimary = false;
-  let bestItem;
 
-  // Test [key,value,name] tuples against the NSI matcher until we get a primary match or exhaust all options.
-  for (let i = 0; (i < tuples.length && !foundPrimary); i++) {
+  for (let i = 0; i < tuples.length; i++) {
     const tuple = tuples[i];
     const hits = _nsi.matcher.match(tuple.k, tuple.v, tuple.n, loc);   // Attempt to match an item in NSI
 
@@ -476,15 +506,14 @@ function _upgradeTags(tags, loc) {
 
     // A match may contain multiple results, the first one is likely the best one for this location
     // e.g. `['pfk-a54c14', 'kfc-1ff19c', 'kfc-658eea']`
+    let itemID, item;
     for (let j = 0; j < hits.length; j++) {
       const hit = hits[j];
-      const isPrimary = (hits[j].match === 'primary');
-      const itemID = hit.itemID;
+      itemID = hit.itemID;
       if (_nsi.dissolved[itemID]) continue;       // Don't upgrade to a dissolved item
 
-      const item = _nsi.ids.get(itemID);
+      item = _nsi.ids.get(itemID);
       if (!item) continue;
-
       const mainTag = item.mainTag;               // e.g. `brand:wikidata`
       const itemQID = item.tags[mainTag];         // e.g. `brand:wikidata` qid
       const notQID = newTags[`not:${mainTag}`];   // e.g. `not:brand:wikidata` qid
@@ -493,25 +522,18 @@ function _upgradeTags(tags, loc) {
         (!itemQID || itemQID === notQID) ||       // No `*:wikidata` or matched a `not:*:wikidata`
         (newTags.office && !item.tags.office)     // feature may be a corporate office for a brand? - #6416
       ) {
+        item = null;
         continue;  // continue looking
-      }
-
-      // If we get here, the hit is good..
-      if (!bestItem || isPrimary) {
-        bestItem = item;
-        if (isPrimary) {
-          foundPrimary = true;
-        }
-        break;  // can ignore the rest of the hits from this match
+      } else {
+        break;     // use `item`
       }
     }
-  }
 
+    // Can't use any of these hits, try next tuple..
+    if (!item) continue;
 
-  // At this point we have matched a canonical item and can suggest tag upgrades..
-  if (bestItem) {
-    const itemID = bestItem.id;
-    const item = JSON.parse(JSON.stringify(bestItem));   // deep copy
+    // At this point we have matched a canonical item and can suggest tag upgrades..
+    item = JSON.parse(JSON.stringify(item));   // deep copy
     const tkv = item.tkv;
     const parts = tkv.split('/', 3);     // tkv = "tree/key/value"
     const k = parts[1];
@@ -524,7 +546,7 @@ function _upgradeTags(tags, loc) {
 
     // These tags can be toplevel tags -or- attributes - so we generally want to preserve existing values - #8615
     // We'll only _replace_ the tag value if this tag is the toplevel/defining tag for the matched item (`k`)
-    ['building', 'emergency', 'internet_access', 'takeaway'].forEach(osmkey => {
+    ['building', 'emergency', 'internet_access', 'opening_hours', 'takeaway'].forEach(osmkey => {
       if (k !== osmkey) preserveTags.push(`^${osmkey}$`);
     });
 
@@ -657,17 +679,9 @@ export default {
     setNsiSources();
     presetManager.ensureLoaded()
       .then(() => loadNsiPresets())
-      .then(() => delay(100))  // wait briefly for locationSets to enter the locationManager queue
-      .then(() => locationManager.mergeLocationSets([]))   // wait for locationSets to resolve
       .then(() => loadNsiData())
       .then(() => _nsiStatus = 'ok')
       .catch(() => _nsiStatus = 'failed');
-
-    function delay(msec) {
-      return new Promise(resolve => {
-        window.setTimeout(resolve, msec);
-      });
-    }
   },
 
 

@@ -6,6 +6,7 @@ import { utilArrayIdentical } from '../../util/array';
 import { t } from '../../core/localizer';
 import { utilHighlightEntities } from '../../util';
 import { uiSection } from '../section';
+import { validationIssue } from '../../core/validation';
 
 
 export function uiSectionEntityIssues(context) {
@@ -24,7 +25,7 @@ export function uiSectionEntityIssues(context) {
             return _issues.length > 0;
         })
         .label(function() {
-            return t.append('inspector.title_count', { title: t('issues.list_title'), count: _issues.length });
+            return t.append('inspector.title_count', { title: t.append('issues.list_title'), count: _issues.length });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -92,21 +93,18 @@ export function uiSectionEntityIssues(context) {
             .append('button')
             .attr('class', 'issue-text')
             .on('click', function(d3_event, d) {
-
                 makeActiveIssue(d.id); // expand only the clicked item
 
-                var extent = d.extent(context.graph());
+                const extent = d.extent(context.graph());
                 if (extent) {
-                    var setZoom = Math.max(context.map().zoom(), 19);
-                    context.map().unobscuredCenterZoomEase(extent.center(), setZoom);
+                    context.map().zoomToEase(extent);
                 }
             });
 
         textEnter
             .each(function(d) {
-                var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
                 d3_select(this)
-                    .call(svgIcon(iconName, 'issue-icon'));
+                    .call(svgIcon(validationIssue.ICONS[d.severity], 'issue-icon'));
             });
 
         textEnter

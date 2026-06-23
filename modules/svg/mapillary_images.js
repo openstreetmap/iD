@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit';
 
 import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './helpers';
@@ -6,7 +6,7 @@ import { services } from '../services';
 
 
 export function svgMapillaryImages(projection, context, dispatch) {
-    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    const throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     const minZoom = 12;
     const minMarkerZoom = 16;
     const minViewfieldZoom = 18;
@@ -108,7 +108,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
     }
 
 
-    function filterImages(images) {
+    function filterImages(images, skipDateFilter = false) {
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
@@ -120,12 +120,12 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 return showsFlat;
             });
         }
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             images = images.filter(function(image) {
                 return new Date(image.captured_at).getTime() >= new Date(fromDate).getTime();
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             images = images.filter(function(image) {
                 return new Date(image.captured_at).getTime() <= new Date(toDate).getTime();
             });
@@ -134,7 +134,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         return images;
     }
 
-    function filterSequences(sequences) {
+    function filterSequences(sequences, skipDateFilter = false) {
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
@@ -142,19 +142,19 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
         if (!showsPano || !showsFlat) {
             sequences = sequences.filter(function(sequence) {
-                if (sequence.properties.hasOwnProperty('is_pano')) {
+                if (Object.hasOwnProperty.call(sequence.properties, 'is_pano')) {
                     if (sequence.properties.is_pano) return showsPano;
                     return showsFlat;
                 }
                 return false;
             });
         }
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.captured_at).getTime() >= new Date(fromDate).getTime().toString();
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.captured_at).getTime() <= new Date(toDate).getTime().toString();
             });
@@ -164,7 +164,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
     }
 
     function update() {
-
         const z = ~~context.map().zoom();
         const showMarkers = (z >= minMarkerZoom);
         const showViewfields = (z >= minViewfieldZoom);
@@ -172,9 +171,21 @@ export function svgMapillaryImages(projection, context, dispatch) {
         const service = getService();
         let sequences = (service ? service.sequences(projection) : []);
         let images = (service && showMarkers ? service.images(projection) : []);
+        // images[0]
+        // {
+        //    "loc":[13.235349655151367,52.50694232952122],
+        //    "captured_at":1619457514500,
+        //    "ca":0,
+        //    "id":505488307476058,
+        //    "is_pano":false,
+        //    "sequence_id":"zcyumxorbza3dq3twjybam"
+        //    }
+        dispatch.call('photoDatesChanged', this, 'mapillary', [
+            ...filterImages(images, true).map(p => p.captured_at),
+            ...filterSequences(sequences, true).map(s => s.properties.captured_at)]);
 
         images = filterImages(images);
-        sequences = filterSequences(sequences, service);
+        sequences = filterSequences(sequences);
 
         service.filterViewer(context);
 
@@ -186,7 +197,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .remove();
 
         // enter/update
-        traces = traces.enter()
+        traces.enter()
             .append('path')
             .attr('class', 'sequence')
             .merge(traces)
@@ -285,8 +296,11 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 update();
                 service.loadImages(projection);
             } else {
+                dispatch.call('photoDatesChanged', this, 'mapillary', []);
                 editOff();
             }
+        } else {
+            dispatch.call('photoDatesChanged', this, 'mapillary', []);
         }
     }
 
@@ -308,6 +322,10 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
     drawImages.supported = function() {
         return !!getService();
+    };
+
+    drawImages.rendered = function(zoom) {
+      return zoom >= minZoom;
     };
 
 

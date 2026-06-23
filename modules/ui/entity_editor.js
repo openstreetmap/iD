@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import deepEqual from 'fast-deep-equal';
+import { select as d3_select } from 'd3-selection';
+import { deepEqual } from 'fast-equals';
 
 import { presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
@@ -23,7 +24,7 @@ export function uiEntityEditor(context) {
     var _coalesceChanges = false;
     var _modified = false;
     var _base;
-    var _entityIDs;
+    var _entityIDs = [];
     var _activePresets = [];
     var _newFeature;
 
@@ -47,7 +48,7 @@ export function uiEntityEditor(context) {
         headerEnter
             .append('button')
             .attr('class', 'preset-reset preset-choose')
-            .attr('title', t(`icons.${direction}`))
+            .attr('title', t('inspector.back_tooltip'))
             .call(svgIcon(`#iD-icon-${direction}`));
 
         headerEnter
@@ -117,7 +118,8 @@ export function uiEntityEditor(context) {
         });
 
         context.history()
-            .on('change.entity-editor', historyChanged);
+            .on('change.entity-editor', historyChanged)
+            .on('merge.entity-editor', () => historyChanged());
 
         function historyChanged(difference) {
             if (selection.selectAll('.entity-editor').empty()) return;
@@ -142,10 +144,10 @@ export function uiEntityEditor(context) {
             if (priorActivePreset && _activePresets.length === 1 && priorActivePreset !== _activePresets[0]) {
                 // flash the button to indicate the preset changed
                 context.container().selectAll('.entity-editor button.preset-reset .label')
-                    .style('background-color', '#fff')
-                    .transition()
-                    .duration(750)
-                    .style('background-color', null);
+                    .classed('flash-bg', true)
+                    .on('animationend', function() {
+                        d3_select(this).classed('flash-bg', false);
+                    });
             }
         }
     }
@@ -163,14 +165,19 @@ export function uiEntityEditor(context) {
 
             var tags = Object.assign({}, entity.tags);   // shallow copy
 
-            for (var k in changed) {
-                if (!k) continue;
-                var v = changed[k];
-                if (typeof v === 'object') {
-                    // a "key only" tag change
-                    tags[k] = tags[v.oldKey];
-                } else if (v !== undefined || tags.hasOwnProperty(k)) {
-                    tags[k] = v;
+            if (typeof changed === 'function') {
+                // a complex callback tag change
+                tags = changed(tags);
+            } else {
+                for (var k in changed) {
+                    if (!k) continue;
+                    var v = changed[k];
+                    if (typeof v === 'object') {
+                        // a "key only" tag change
+                        tags[k] = tags[v.oldKey];
+                    } else if (v !== undefined || tags.hasOwnProperty(k)) {
+                        tags[k] = v;
+                    }
                 }
             }
 
@@ -194,11 +201,11 @@ export function uiEntityEditor(context) {
             var annotation = t('operations.change_tags.annotation');
 
             if (_coalesceChanges) {
-                context.overwrite(combinedAction, annotation);
+                context.replace(combinedAction, annotation);
             } else {
                 context.perform(combinedAction, annotation);
-                _coalesceChanges = !!onInput;
             }
+            _coalesceChanges = !!onInput;
         }
 
         // if leaving field (blur event), rerun validation
@@ -251,10 +258,9 @@ export function uiEntityEditor(context) {
             var annotation = t('operations.change_tags.annotation');
 
             if (_coalesceChanges) {
-                context.overwrite(combinedAction, annotation);
+                context.replace(combinedAction, annotation);
             } else {
                 context.perform(combinedAction, annotation);
-                _coalesceChanges = false;
             }
         }
 
@@ -286,7 +292,7 @@ export function uiEntityEditor(context) {
 
         if (val && _entityIDs && utilArrayIdentical(_entityIDs, val)) return entityEditor;  // exit early if no change
 
-        _entityIDs = val;
+        _entityIDs = val || [];
 
         loadActivePresets(true);
 

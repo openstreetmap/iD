@@ -1,49 +1,97 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit';
 
 import { select as d3_select } from 'd3-selection';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes/browse';
-import { modeSelect } from '../modes/select';
-import { utilDisplayLabel, utilObjectOmit, utilQsString, utilStringQs } from '../util';
+import { modeSelect, modeSelectNote } from '../modes';
+import { utilQsString, utilRebind, utilStringQs } from '../util';
 import { utilArrayIdentical } from '../util/array';
-import { t } from '../core/localizer';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
+import { localizer, t } from '../core/localizer';
 import { prefs } from '../core/preferences';
+
+
+const dispatch = d3_dispatch('change');
+
+function getNewHash(arg) {
+    const original = utilStringQs(window.location.hash);
+    const update = typeof arg === 'function' ? arg(original) : arg;
+    if (!update || typeof update !== 'object') return;
+
+    const updated = { ...original, ...update };
+    Object.keys(update)
+        .filter(key => update[key] === null || update[key] === undefined)
+        .forEach(key => delete updated[key]);
+
+    return '#' + utilQsString(updated, true);
+}
+
+/**
+ * Updates the URL hash by applying a partial patch.
+ *
+ * Keys with nullish values will be removed from the hash.
+ *
+ * @param {(?Object<string, any>|function (Object<string, any>): Object<string, any>)} updater Either
+ * - a plain object of key/value pairs to merge into the hash, or
+ * - a function `(currentHash) => patchObject` that returns such an object.
+ * @returns {boolean} Whether the hash was updated.
+ */
+export function patchHash(updater) {
+    if (!updater || !['function', 'object'].includes(typeof updater)) return false;
+
+    const latestHash = getNewHash(updater);
+    if (!latestHash || window.location.hash === latestHash) return false;
+
+    // Update the URL hash without affecting the browser navigation stack,
+    // though unavoidably creating a browser history entry
+    window.history.replaceState(null, '', latestHash);
+
+    // trigger change event
+    dispatch.call('change');
+
+    // save last used map location for future
+    const { map } = utilStringQs(latestHash);
+    if (map) prefs('map-location', map);
+
+    return true;
+}
 
 export function behaviorHash(context) {
 
-    // cached window.location.hash
-    var _cachedHash = null;
     // allowable latitude range
     var _latitudeLimit = 90 - 1e-8;
 
-    function computedHashParameters() {
+    function computeHashUpdate() {
+        if (context.inIntro()) return null;
+
         var map = context.map();
         var center = map.center();
         var zoom = map.zoom();
         var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
-        var oldParams = utilObjectOmit(utilStringQs(window.location.hash),
-            ['comment', 'source', 'hashtags', 'walkthrough']
-        );
-        var newParams = {};
+        const newParams = {
+            comment: null,
+            source: null,
+            hashtags: null,
+            walkthrough: null,
+            id: null
+        };
 
-        delete oldParams.id;
         var selected = context.selectedIDs().filter(function(id) {
             return context.hasEntity(id);
         });
         if (selected.length) {
             newParams.id = selected.join(',');
+        } else if (context.selectedNoteID()) {
+            newParams.id = `note/${context.selectedNoteID()}`;
         }
 
         newParams.map = zoom.toFixed(2) +
             '/' + center[1].toFixed(precision) +
             '/' + center[0].toFixed(precision);
 
-        return Object.assign(oldParams, newParams);
-    }
-
-    function computedHash() {
-        return '#' + utilQsString(computedHashParameters(), true);
+        return newParams;
     }
 
     function computedTitle(includeChangeCount) {
@@ -87,7 +135,7 @@ export function behaviorHash(context) {
         return baseTitle;
     }
 
-    function updateTitle(includeChangeCount) {
+    function updateTitle(includeChangeCount = true) {
         if (!context.setsDocumentTitle()) return;
 
         var newTitle = computedTitle(includeChangeCount);
@@ -96,50 +144,32 @@ export function behaviorHash(context) {
         }
     }
 
-    function updateHashIfNeeded() {
-        if (context.inIntro()) return;
-
-        var latestHash = computedHash();
-        if (_cachedHash !== latestHash) {
-            _cachedHash = latestHash;
-
-            // Update the URL hash without affecting the browser navigation stack,
-            // though unavoidably creating a browser history entry
-            window.history.replaceState(null, computedTitle(false /* includeChangeCount */), latestHash);
-
-            // set the title we want displayed for the browser tab/window
-            updateTitle(true /* includeChangeCount */);
-
-            // save last used map location for future
-            const q = utilStringQs(latestHash);
-            if (q.map) {
-                prefs('map-location', q.map);
-            }
-        }
-    }
-
-    var _throttledUpdate = _throttle(updateHashIfNeeded, 500);
-    var _throttledUpdateTitle = _throttle(function() {
-        updateTitle(true /* includeChangeCount */);
+    var _throttledUpdate = throttle(() => {
+        patchHash(computeHashUpdate);
+        updateTitle();
     }, 500);
+    var _throttledUpdateTitle = throttle(updateTitle, 500);
 
     function hashchange() {
+        var q = utilStringQs(window.location.hash);
 
-        // ignore spurious hashchange events
-        if (window.location.hash === _cachedHash) return;
+        if (q.theme) {
+          context.theme(q.theme);
+        }
 
-        _cachedHash = window.location.hash;
+        if (q.locale && q.locale !== localizer.preferredLocaleCodes().join(',')) {
+          localizer.preferredLocaleCodes(q.locale);
+          context.ui().restart();
+        }
 
-        var q = utilStringQs(_cachedHash);
         var mapArgs = (q.map || '').split('/').map(Number);
-
         if (mapArgs.length < 3 || mapArgs.some(isNaN)) {
             // replace bogus hash
-            updateHashIfNeeded();
-
+            patchHash(computeHashUpdate);
+            updateTitle();
         } else {
             // don't update if the new hash already reflects the state of iD
-            if (_cachedHash === computedHash()) return;
+            if (window.location.hash === getNewHash(computeHashUpdate)) return;
 
             var mode = context.mode();
 
@@ -147,11 +177,14 @@ export function behaviorHash(context) {
 
             if (q.id && mode) {
                 var ids = q.id.split(',').filter(function(id) {
-                    return context.hasEntity(id);
+                    return context.hasEntity(id) || id.startsWith('note/');
                 });
-                if (ids.length &&
-                    (mode.id === 'browse' || (mode.id === 'select' && !utilArrayIdentical(mode.selectedIDs(), ids)))) {
-                    context.enter(modeSelect(context, ids));
+                if (ids.length && ['browse', 'select-note', 'select'].includes(mode.id)) {
+                    if (ids.length === 1 && ids[0].startsWith('note/')) {
+                        context.enter(modeSelectNote(context, ids[0]));
+                    } else if (!utilArrayIdentical(mode.selectedIDs(), ids)) {
+                        context.enter(modeSelect(context, ids));
+                    }
                     return;
                 }
             }
@@ -185,10 +218,17 @@ export function behaviorHash(context) {
         var q = utilStringQs(window.location.hash);
 
         if (q.id) {
-            //if (!context.history().hasRestorableChanges()) {
             // targeting specific features: download, select, and zoom to them
-            context.zoomToEntity(q.id.split(',')[0], !q.map);
-            //}
+            const selectIds = q.id.split(',');
+            if (selectIds.length === 1 && selectIds[0].startsWith('note/')) {
+                const noteId = +selectIds[0].split('/')[1];
+                context.moveToNote(noteId, !q.map);
+            } else {
+                context.zoomToEntities(
+                    // convert ids to short form id: node/123 -> n123
+                    selectIds.map(id => id.replace(/([nwr])[^/]*\//, '$1')),
+                    !q.map);
+            }
         }
 
         if (q.walkthrough === 'true') {
@@ -202,14 +242,14 @@ export function behaviorHash(context) {
             const mapArgs = prefs('map-location').split('/').map(Number);
             context.map().centerZoom([mapArgs[2], Math.min(_latitudeLimit, Math.max(-_latitudeLimit, mapArgs[1]))], mapArgs[0]);
 
-            updateHashIfNeeded();
+            patchHash(computeHashUpdate);
 
             behavior.hadLocation = true;
         }
 
         hashchange();
 
-        updateTitle(false);
+        updateTitle(false /* includeChangeCount */);
     }
 
     behavior.off = function() {
@@ -228,5 +268,5 @@ export function behaviorHash(context) {
         window.location.hash = '';
     };
 
-    return behavior;
+    return utilRebind(behavior, dispatch, 'on');
 }

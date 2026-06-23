@@ -1,5 +1,7 @@
+import { setTimeout } from 'node:timers/promises';
+import { fn } from '@vitest/spy';
+
 describe('iD.behaviorHash', function () {
-    mocha.globals('__onhashchange.hash');
 
     var hash, context;
 
@@ -31,16 +33,14 @@ describe('iD.behaviorHash', function () {
         expect(context.map().zoom()).to.equal(20.0);
     });
 
-    it('centerZooms map at requested coordinates on hash change', function (done) {
+    it('centerZooms map at requested coordinates on hash change', async () => {
         hash();
-        d3.select(window).on('hashchange', function () {
-            expect(context.map().center()[0]).to.be.closeTo(-77.02405, 0.1);
-            expect(context.map().center()[1]).to.be.closeTo(38.87952, 0.1);
-            expect(context.map().zoom()).to.equal(20.0);
-            d3.select(window).on('hashchange', null);
-            done();
-        });
         window.location.hash = '#background=none&map=20.00/38.87952/-77.02405';
+        await new Promise(cb => { d3.select(window).on('hashchange', cb); });
+        expect(context.map().center()[0]).to.be.closeTo(-77.02405, 0.1);
+        expect(context.map().center()[1]).to.be.closeTo(38.87952, 0.1);
+        expect(context.map().zoom()).to.equal(20.0);
+        d3.select(window).on('hashchange', null);
     });
 
     it('sets hadLocation if map-location is in local storage', function () {
@@ -69,13 +69,35 @@ describe('iD.behaviorHash', function () {
         iD.prefs('map-location', null);
     });
 
-    it('stores the current zoom and coordinates in window.location.hash on map move events', function (done) {
+    it('stores the current zoom and coordinates in window.location.hash on map move events', async () => {
         hash();
         context.map().center([-77.0, 38.9]);
         context.map().zoom(2.0);
-        window.setTimeout(function() {
-            expect(window.location.hash).to.equal('#background=none&map=2.00/38.9/-77.0');
-            done();
-        }, 600);
+        await setTimeout(600);
+        // the hash might contain other things like `disable_features`
+        expect(window.location.hash).to.include('background=none');
+        expect(window.location.hash).to.include('map=2.00/38.9/-77.0');
+    });
+
+    it('accepts default changeset comment as hash parameter', function () {
+        window.location.hash = '#comment=foo+bar%20%2B1';
+        const container = d3.select(document.createElement('div'));
+        const context = iD.coreContext().assetPath('../dist/').init().container(container);
+        iD.behaviorHash(context);
+        expect(context.defaultChangesetComment()).to.eql('foo bar +1');
+    });
+
+    it('dispatches a (throttled) change event', async () => {
+        await setTimeout(100); // wait a bit to let previous tests settle down
+        const spy = fn();
+        hash();
+        hash.on('change', spy);
+        context.map().center([45.98, 7.66]);
+        await setTimeout(10);
+        // too little time passed -> no event yet
+        expect(spy).to.have.not.been.called;
+        await setTimeout(600);
+        // enough time has passed -> event should have been triggered
+        expect(spy).to.have.been.called;
     });
 });

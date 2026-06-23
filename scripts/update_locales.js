@@ -1,46 +1,33 @@
 /* eslint-disable no-console */
 /* Downloads the latest translations from Transifex */
-const chalk = require('chalk');
-const fs = require('fs');
-const fetch = require('node-fetch');
-const btoa = require('btoa');
-const YAML = require('js-yaml');
+import fs from 'node:fs';
+import { styleText } from 'node:util';
+import { load as loadYaml } from 'js-yaml';
+import { transifexApi } from '@transifex/api';
+import * as languageNames from './language_names.js';
 
 const resourceIds = ['core', 'imagery', 'community'];
 const reviewedOnlyLangs = ['vi'];
 const outdir = 'dist/locales/';
-const apiroot = 'https://www.transifex.com/api/2';
-const projectURL = `${apiroot}/project/id-editor`;
 
-const languageNames = require('./language_names.js');
 
+const transifexOrganization = 'openstreetmap';
+const transifexProject = 'id-editor';
 
 // Transifex doesn't allow anonymous downloading
-let auth;
 /* eslint-disable no-process-env */
 if (process.env.transifex_password) {
   // Deployment scripts may prefer environment variables
-  auth = {
-    user: process.env.transifex_user || 'api',
-    password: process.env.transifex_password
-  };
+  transifexApi.setup({ auth: process.env.transifex_password });
 } else {
   // Credentials can be stored in transifex.auth as a json object. This file is gitignored.
-  // You can use an API key instead of your password: https://docs.transifex.com/api/introduction#authentication
-  // in which case for user parameter value should be: "api"
+  // You must use an API token for authentication: You can generate one at https://app.transifex.com/user/settings/api/.
   // {
-  //   "user": "username",
-  //   "password": "password"
+  //   "password": "<api_key>"
   // }
-  auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
+  transifexApi.setup({ auth: JSON.parse(fs.readFileSync('./transifex.auth', 'utf8')).password });
 }
 /* eslint-enable no-process-env */
-
-const fetchOpts = {
-  headers: {
-    'Authorization': 'Basic ' + btoa(auth.user + ':' + auth.password),
-  }
-};
 
 const dataShortcuts = JSON.parse(fs.readFileSync('data/shortcuts.json', 'utf8'));
 
@@ -64,38 +51,48 @@ dataShortcuts.forEach(tab => {
 
 let coverageByLocaleCode = {};
 
+/**
+ * transifex uses underscores and `@` for locale codes. iD only uses
+ * hyphens, so that all locale codes are valid BCP 47 language tags.
+ * @param {string} code
+ */
+const normaliseLocaleCode = (code) => code.replace(/[@_]/g, '-');
+
 // There's a race condition here, but it's highly unlikely that the info will
 // return after the resources. There's an error check just in case.
 asyncMap(resourceIds, getResourceInfo, gotResourceInfo);
 asyncMap(resourceIds, getResource, gotResource);
 
-function getResourceInfo(resourceId, callback) {
-  let url = 'https://api.transifex.com/organizations/openstreetmap/projects/id-editor/resources/' + resourceId;
-  fetch(url, fetchOpts)
-    .then(res => {
-      console.log(`${res.status}: ${url}`);
-      return res.json();
-    })
-    .then(json => {
-      callback(null, json);
-    })
-    .catch(err => callback(err));
+async function getResourceInfo(resourceId, callback) {
+  try {
+    const result = [];
+    for await (const stat of transifexApi.ResourceLanguageStats.filter({
+      project: `o:${transifexOrganization}:p:${transifexProject}`,
+      resource: `o:${transifexOrganization}:p:${transifexProject}:r:${resourceId}`
+    }).all()) {
+      result.push(stat);
+    }
+    console.log(`got resource language stats collection for ${resourceId}`);
+    callback(null, result);
+  } catch (err) {
+    console.error(`error while getting resource language stats collection for ${resourceId}`);
+    callback(err);
+  }
 }
 function gotResourceInfo(err, results) {
   if (err) return console.log(err);
-  results.forEach(function(info) {
-    for (let code in info.stats) {
-      let type = 'translated';
+  results.forEach(info => {
+    info.forEach(stat => {
+      let code = normaliseLocaleCode(stat.relationships.language.data.id.substr(2));
+      let type = 'translated_strings';
       if (reviewedOnlyLangs.indexOf(code) !== -1) {
-        // reviewed_1 = reviewed, reviewed_2 = proofread
-        type = 'reviewed_1';
+        type = 'reviewed_strings';
       }
-      let coveragePart = info.stats[code][type].percentage / results.length;
+      let coveragePart = (stat.attributes[type] /  stat.attributes.total_strings) / results.length;
 
-      code = code.replace(/_/g, '-');
       if (coverageByLocaleCode[code] === undefined) coverageByLocaleCode[code] = 0;
       coverageByLocaleCode[code] += coveragePart;
-    }
+    });
   });
 }
 
@@ -118,12 +115,14 @@ function gotResource(err, results) {
     en: { rtl: false, pct: 1 }
   };
   asyncMap(Object.keys(allStrings),
-    (code, done) => {
+    (rawCode, done) => {
+      const code = normaliseLocaleCode(rawCode);
+
       if (code === 'en') {
         done();
       } else {
         let obj = {};
-        obj[code] = allStrings[code] || {};
+        obj[code] = allStrings[rawCode] || {};
         let lNames = languageNames.languageNamesInLanguageOf(code) || {};
         if (Object.keys(lNames).length) {
           obj[code].languageNames = lNames;
@@ -134,8 +133,10 @@ function gotResource(err, results) {
         }
         fs.writeFileSync(`${outdir}${code}.min.json`, JSON.stringify(obj));
 
-        getLanguageInfo(code, (err, info) => {
-          let rtl = info && info.rtl;
+        getLanguageInfo(rawCode, (err, info) => {
+          if (err) return console.log(err);
+
+          let rtl = info && info.attributes && info.attributes.rtl;
           // exceptions: see #4783
           if (code === 'ckb') {
             rtl = true;
@@ -145,7 +146,7 @@ function gotResource(err, results) {
 
           let coverage = coverageByLocaleCode[code];
           if (coverage === undefined) {
-            console.log('Could not get language coverage');
+            console.log(`Could not get language coverage for ${code}`, coverageByLocaleCode);
             process.exit(1);
           }
           // we don't need high precision here, but we need to know if it's exactly 100% or not
@@ -174,11 +175,10 @@ function gotResource(err, results) {
 
 
 function getResource(resourceId, callback) {
-  let resourceURL = `${projectURL}/resource/${resourceId}`;
-  getLanguages(resourceURL, (err, codes) => {
+  getLanguages((err, codes) => {
     if (err) return callback(err);
 
-    asyncMap(codes, getLanguage(resourceURL), (err, results) => {
+    asyncMap(codes, getLanguage(resourceId), (err, results) => {
       if (err) return callback(err);
 
       let locale = {};
@@ -187,35 +187,7 @@ function getResource(resourceId, callback) {
           locale[codes[i]] = { community: result };  // add namespace
 
         } else {
-          if (resourceId === 'presets') {
-            // remove terms that were not really translated
-            let presets = (result.presets && result.presets.presets) || {};
-            for (const key of Object.keys(presets)) {
-              let preset = presets[key];
-              if (!preset.terms) continue;
-              preset.terms = preset.terms.replace(/<.*>/, '').trim();
-              if (!preset.terms) {
-                delete preset.terms;
-                if (!Object.keys(preset).length) {
-                  delete presets[key];
-                }
-              }
-            }
-          } else if (resourceId === 'fields') {
-            // remove terms that were not really translated
-            let fields = (result.presets && result.presets.fields) || {};
-            for (const key of Object.keys(fields)) {
-              let field = fields[key];
-              if (!field.terms) continue;
-              field.terms = field.terms.replace(/\[.*\]/, '').trim();
-              if (!field.terms) {
-                delete field.terms;
-                if (!Object.keys(field).length) {
-                  delete fields[key];
-                }
-              }
-            }
-          } else if (resourceId === 'core') {
+          if (resourceId === 'core') {
             checkForDuplicateShortcuts(codes[i], result);
           }
 
@@ -229,56 +201,60 @@ function getResource(resourceId, callback) {
 }
 
 
-function getLanguage(resourceURL) {
-  return (code, callback) => {
-    code = code.replace(/-/g, '_');
-    let url = `${resourceURL}/translation/${code}`;
-    // fetch only reviewed strings for some languages
-    if (reviewedOnlyLangs.indexOf(code) !== -1) {
-      url += '?mode=reviewed';
+function getLanguage(resourceId) {
+  return async (code, callback) => {
+    try {
+      // random delay to avoid rate-limit of Transifex' API
+      await delay(Math.random() * 60000);
+      const url = await transifexApi.ResourceTranslationsAsyncDownload.download({
+        resource: {data:{type:'resources', id:`o:${transifexOrganization}:p:${transifexProject}:r:${resourceId}`}},
+        language: {data:{type:'languages', id:`l:${code}`}},
+        // fetch only reviewed strings for some languages
+        mode: reviewedOnlyLangs.indexOf(code) !== -1 ? 'reviewed' : 'default'
+      });
+      const data = await fetch(url).then(d => d.text());
+      console.log(`got translations for ${resourceId}, language ${code}`);
+      callback(null, loadYaml(data)[code]);
+    } catch (err) {
+      console.error(`error while getting translations for ${resourceId}, language ${code}`, err);
+      callback(err);
     }
-    fetch(url, fetchOpts)
-      .then(res => {
-        console.log(`${res.status}: ${url}`);
-        return res.json();
-      })
-      .then(json => {
-        callback(null, YAML.load(json.content)[code]);
-      })
-      .catch(err => callback(err));
   };
 }
 
 
-function getLanguageInfo(code, callback) {
-  code = code.replace(/-/g, '_');
-  let url = `${apiroot}/language/${code}`;
-  fetch(url, fetchOpts)
-    .then(res => {
-      console.log(`${res.status}: ${url}`);
-      return res.json();
-    })
-    .then(json => {
-      callback(null, json);
-    })
-    .catch(err => callback(err));
+async function getLanguageInfo(code, callback) {
+  try {
+    const lng = await transifexApi.Language.get({
+      code: code
+    });
+    console.log(`got language details for ${code}`);
+    callback(null, lng);
+  } catch (err) {
+    console.error(`error while getting language details for ${code}`);
+    callback(err);
+  }
 }
 
 
-function getLanguages(resourceURL, callback) {
-  let url = `${resourceURL}?details`;
-  fetch(url, fetchOpts)
-    .then(res => {
-      console.log(`${res.status}: ${url}`);
-      return res.json();
-    })
-    .then(json => {
-      callback(null, json.available_languages
-        .map(d => d.code.replace(/_/g, '-'))
-        .filter(d => d !== 'en')
-      );
-    })
-    .catch(err => callback(err));
+async function getLanguages(callback) {
+  try {
+    const result = [];
+    const project = await transifexApi.Project.get({
+      organization: `o:${transifexOrganization}`,
+      slug: transifexProject
+    });
+    const lngs = await project.fetch('languages');
+    for await (const lng of lngs.all()) {
+      if (lng.attributes.code === 'en') continue;
+      result.push(lng.attributes.code);
+    }
+    console.log('got project languages');
+    callback(null, result);
+  } catch (err) {
+    console.error('error while getting project languages');
+    callback(err);
+  }
 }
 
 
@@ -293,7 +269,7 @@ function asyncMap(inputs, func, callback) {
   function next() {
     callFunc(index++);
     if (index < inputs.length) {
-      setTimeout(next, 200);
+      setTimeout(next, 50);
     }
   }
 
@@ -331,10 +307,14 @@ function checkForDuplicateShortcuts(code, coreStrings) {
       let shortcut = modifier + rep;
       if (usedShortcuts[shortcut] && usedShortcuts[shortcut] !== shortcutPathString) {
         let message = code + ': duplicate shortcut "' + shortcut + '" for "' + usedShortcuts[shortcut] + '" and "' + shortcutPathString + '"';
-        console.warn(chalk.yellow(message));
+        console.warn(styleText('yellow', message));
       } else {
         usedShortcuts[shortcut] = shortcutPathString;
       }
     }
   });
+}
+
+function delay(t) {
+  return new Promise(resolve => { setTimeout(resolve, t); });
 }

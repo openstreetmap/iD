@@ -13,62 +13,116 @@ export function svgDefs(context) {
     var _defsSelection = d3_select(null);
 
     var _spritesheetIds = [
-        'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'community-sprite'
+        'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'roentgen-sprite', 'community-sprite'
     ];
 
     function drawDefs(selection) {
         _defsSelection = selection.append('defs');
 
         // add markers
-        _defsSelection
-            .append('marker')
-            .attr('id', 'ideditor-oneway-marker')
-            .attr('viewBox', '0 0 10 5')
-            .attr('refX', 2.5)
-            .attr('refY', 2.5)
-            .attr('markerWidth', 2)
-            .attr('markerHeight', 2)
-            .attr('markerUnits', 'strokeWidth')
-            .attr('orient', 'auto')
-            .append('path')
-            .attr('class', 'oneway-marker-path')
-            .attr('d', 'M 5,3 L 0,3 L 0,2 L 5,2 L 5,0 L 10,2.5 L 5,5 z')
-            .attr('stroke', 'none')
-            .attr('fill', '#000')
-            .attr('opacity', '0.75');
 
         // SVG markers have to be given a colour where they're defined
         // (they can't inherit it from the line they're attached to),
         // so we need to manually define markers for each color of tag
         // (also, it's slightly nicer if we can control the
         // positioning for different tags)
-        function addSidedMarker(name, color, offset) {
+
+        /** @param {string} name @param {string} colour */
+        function addOnewayMarker(name, colour) {
+            _defsSelection
+                .append('marker')
+                .attr('id', `ideditor-oneway-marker-${name}`)
+                .attr('viewBox', '0 0 10 5')
+                .attr('refX', 4)
+                .attr('refY', 2.5)
+                .attr('markerWidth', 2)
+                .attr('markerHeight', 2)
+                .attr('markerUnits', 'strokeWidth')
+                .attr('orient', 'auto')
+                .append('path')
+                .attr('class', 'oneway-marker-path')
+                .attr('d', 'M 6,3 L 0,3 L 0,2 L 6,2 L 5,0 L 10,2.5 L 5,5 z')
+                .attr('stroke', 'none')
+                .attr('fill', colour)
+                .attr('opacity', '1');
+        }
+        addOnewayMarker('black', '#333'); // default
+        addOnewayMarker('white', '#fff'); // for dark lines (bridges under construction, railways, etc.)
+        addOnewayMarker('gray', '#eee'); // for railway lines
+
+
+        function addSidedMarker(name, options) {
+            const path = {
+                circle: 'M 0,0.5 a 0.5,0.5 0 1,0 1,0 a 0.5,0.5 0 1,0 -1,0',
+                mirrored: 'M 0,1 l 1,-1 l 1,1 z',
+                default: 'M 0,0 l 1,1 l 1,-1 z'
+            }[options.style || 'default'];
             _defsSelection
                 .append('marker')
                 .attr('id', 'ideditor-sided-marker-' + name)
                 .attr('viewBox', '0 0 2 2')
                 .attr('refX', 1)
-                .attr('refY', -offset)
+                .attr('refY', -options.offset)
                 .attr('markerWidth', 1.5)
                 .attr('markerHeight', 1.5)
                 .attr('markerUnits', 'strokeWidth')
                 .attr('orient', 'auto')
                 .append('path')
                 .attr('class', 'sided-marker-path sided-marker-' + name + '-path')
-                .attr('d', 'M 0,0 L 1,1 L 2,0 z')
-                .attr('stroke', 'none')
-                .attr('fill', color);
+                .attr('d', path)
+                .attr('stroke', options.strokeColor || 'none')
+                .attr('stroke-width', options.strokeColor ? 0.1 : 0)
+                .attr('fill', options.color);
         }
-        addSidedMarker('natural', 'rgb(170, 170, 170)', 0);
+        addSidedMarker('natural', { color: 'rgb(170, 170, 170)', offset: 0 });
         // for a coastline, the arrows are (somewhat unintuitively) on
         // the water side, so let's color them blue (with a gap) to
         // give a stronger indication
-        addSidedMarker('coastline', '#77dede', 1);
-        addSidedMarker('waterway', '#77dede', 1);
+        addSidedMarker('coastline', { color: '#77dede', offset: 1 });
+        addSidedMarker('waterway', { color: '#77dede', offset: 1 });
         // barriers have a dashed line, and separating the triangle
         // from the line visually suits that
-        addSidedMarker('barrier', '#ddd', 1);
-        addSidedMarker('man_made', '#fff', 0);
+        addSidedMarker('barrier', { color: '#ddd', offset: 1 });
+        // dedicated style for guard rails (#9594):
+        // marker on opposite side, circles instead of triangles
+        addSidedMarker('guard_rail', { color: '#ddd', offset: -1.5, style: 'circle' });
+        addSidedMarker('man_made', { color: '#fff', offset: 0 });
+        function addBothSidedMarker(name, options) {
+            let mirror = false;
+            if (options.offset < 0) {
+                options.offset = Math.abs(options.offset);
+                mirror = true;
+            }
+            _defsSelection
+                .append('marker')
+                .attr('id', 'ideditor-sided-marker-' + name)
+                .attr('viewBox', `0,-${1+options.offset}, 2,${2*(1+options.offset)}`)
+                .attr('refX', 1)
+                .attr('refY', 0)
+                .attr('markerWidth', 1.5)
+                .attr('markerHeight', 1.5 * (2 + options.offset))
+                .attr('markerUnits', 'strokeWidth')
+                .attr('orient', 'auto')
+                .append('path')
+                .attr('class', 'sided-marker-path sided-marker-' + name + '-path')
+                .attr('d', mirror
+                    ? `M 0,${-options.offset-1} l 1,1 l 1,-1 z M 0,${1+options.offset} l 1,-1 l 1,1 z`
+                    : `M 0,${options.offset} l 1,1 l 1,-1 z M 0,${-options.offset} l 1,-1 l 1,1 z`)
+                .attr('stroke', options.strokeColor || 'none')
+                .attr('stroke-width', options.strokeColor ? 0.1 : 0)
+                .attr('fill', options.color);
+        }
+        const embankmentColors = {
+            strokeColor: '#444',
+            color: 'rgba(200, 200, 200, 0.75)'
+        };
+        addBothSidedMarker('embankment', { ...embankmentColors, offset: 1.5 });
+        addSidedMarker('embankment-right', { ...embankmentColors, offset: 1.5 });
+        addSidedMarker('embankment-left', { ...embankmentColors, offset: -2.5, style: 'mirrored' });
+        addSidedMarker('embankment-man_made', { ...embankmentColors, offset: 1 });
+        addBothSidedMarker('cutting', { ...embankmentColors, offset: -1.5 });
+        addSidedMarker('cutting-right', { ...embankmentColors, offset: 1.5, style: 'mirrored' });
+        addSidedMarker('cutting-left', { ...embankmentColors, offset: -2.5 });
 
         _defsSelection
             .append('marker')
@@ -107,6 +161,44 @@ export function svgDefs(context) {
             .attr('stroke-width', '0.5px')
             .attr('stroke-opacity', '0.75');
 
+        _defsSelection
+            .append('marker')
+            .attr('id', 'ideditor-viewfield-marker-side')
+            .attr('viewBox', '0 0 16 16')
+            .attr('refX', 8)
+            .attr('refY', 16)
+            .attr('markerWidth', 4)
+            .attr('markerHeight', 4)
+            .attr('markerUnits', 'strokeWidth')
+            .attr('orient', 'auto')
+            .append('path')
+            .attr('class', 'viewfield-marker-path')
+            .attr('d', 'M 3 14 C 8 13 8 13 13 14 L 8 5 Z')
+            .attr('fill', '#333')
+            .attr('fill-opacity', '0.75')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', '0.5px')
+            .attr('stroke-opacity', '0.75');
+
+        _defsSelection
+            .append('marker')
+            .attr('id', 'ideditor-viewfield-marker-side-wireframe')
+            .attr('viewBox', '0 0 16 16')
+            .attr('refX', 8)
+            .attr('refY', 16)
+            .attr('markerWidth', 4)
+            .attr('markerHeight', 4)
+            .attr('markerUnits', 'strokeWidth')
+            .attr('orient', 'auto')
+            .append('path')
+            .attr('class', 'viewfield-marker-path')
+            .attr('d', 'M 3 14 C 8 13 8 13 13 14 L 8 5 Z')
+            .attr('fill', 'none')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', '0.5px')
+            .attr('stroke-opacity', '0.75');
+
+
         // add patterns
         var patterns = _defsSelection.selectAll('pattern')
             .data([
@@ -120,6 +212,7 @@ export function svgDefs(context) {
                 ['cemetery_jewish', 'cemetery_jewish'],
                 ['farmland', 'farmland'],
                 ['farmyard', 'farmyard'],
+                ['flowers', 'flowers'],
                 ['forest', 'forest'],
                 ['forest_broadleaved', 'forest_broadleaved'],
                 ['forest_needleleaved', 'forest_needleleaved'],
@@ -177,6 +270,29 @@ export function svgDefs(context) {
             .attr('y', 0)
             .attr('width', function (d) { return d; })
             .attr('height', function (d) { return d; });
+
+        // add svg filters
+        const filters = _defsSelection.selectAll('filter')
+            .data(['alpha-slope5'])
+            .enter()
+            .append('filter')
+            .attr('id', d => d);
+        // Alters the alpha channel such that everything but
+        // (almost) transparent pixels are rendered fully opaque:
+        // This is used in a workaround for how chrome is rendering
+        // the edges of `img` elements when the page zoom is not a
+        // "round value": the semi-transparent pixels of neighboring
+        // tiles cannot "add up" to a fully opaque background layer.
+        // See https://github.com/openstreetmap/iD/issues/10747
+        // and https://github.com/openstreetmap/iD/pull/10594
+        const alphaSlope5 = filters.filter('#alpha-slope5')
+            .append('feComponentTransfer');
+        alphaSlope5.append('feFuncR').attr('type', 'identity');
+        alphaSlope5.append('feFuncG').attr('type', 'identity');
+        alphaSlope5.append('feFuncB').attr('type', 'identity');
+        alphaSlope5.append('feFuncA')
+            .attr('type', 'linear')
+            .attr('slope', 5);
 
         // add symbol spritesheets
         addSprites(_spritesheetIds, true);

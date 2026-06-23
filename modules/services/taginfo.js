@@ -1,15 +1,22 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit';
 
 import { json as d3_json } from 'd3-fetch';
 
 import { utilObjectOmit, utilQsString } from '../util';
 import { localizer } from '../core/localizer';
+import { allowUpperCaseTagValues } from '../osm/tags';
 
 import { taginfoApiUrl } from '../../config/id.js';
 
 var apibase = taginfoApiUrl;
 var _inflight = {};
 var _popularKeys = {};
+// manually exclude some additional keys – #5377, #7485, #10287, #11733
+// these will be returned by keys(), but taginfo will not be queried for values() requests
+var _extraExcludedKeys = /^(addr:.+|postal_code|via|((int_|loc_|nat_|official_|old_|ref_|reg_|short_|full_|sorting_|alt_|artist_|long_|bridge:|tunnel:)?name(:left|:right)?(:[a-z]+)?))$/;
+
+var _extraExcludedKeyNames = /^(hashtags?|created_by)$/;
+
 var _taginfoCache = {};
 
 var tag_sorts = {
@@ -71,7 +78,7 @@ function clean(params) {
 function filterKeys(type) {
     var count_type = type ? 'count_' + type : 'count_all';
     return function(d) {
-        return parseFloat(d[count_type]) > 2500 || d.in_wiki;
+        return Number(d[count_type]) > 2500 || d.in_wiki;
     };
 }
 
@@ -79,18 +86,20 @@ function filterKeys(type) {
 function filterMultikeys(prefix) {
     return function(d) {
         // d.key begins with prefix, and d.key contains no additional ':'s
-        var re = new RegExp('^' + prefix + '(.*)$');
+        var re = new RegExp('^' + prefix + '(.*)$', 'i');
         var matches = d.key.match(re) || [];
         return (matches.length === 2 && matches[1].indexOf(':') === -1);
     };
 }
 
 
-function filterValues(allowUpperCase) {
+function filterValues(allowUpperCase, key) {
     return function(d) {
         if (d.value.match(/[;,]/) !== null) return false;  // exclude some punctuation
-        if (!allowUpperCase && d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
-        return d.count > 100 || d.in_wiki; // exclude rare undocumented tags
+        if (!allowUpperCase &&
+            !(key === 'type' && d.value === 'associatedStreet') &&
+            d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
+        return d.count > 100; // exclude rare tags
     };
 }
 
@@ -99,7 +108,7 @@ function filterRoles(geometry) {
     return function(d) {
         if (d.role === '') return false; // exclude empty role
         if (d.role.match(/[A-Z*;,]/) !== null) return false;  // exclude uppercase letters and some punctuation
-        return parseFloat(d[tag_members_fractions[geometry]]) > 0.0;
+        return Number(d[tag_members_fractions[geometry]]) > 0.0;
     };
 }
 
@@ -137,7 +146,7 @@ function sortKeys(a, b) {
 }
 
 
-var debouncedRequest = _debounce(request, 300, { leading: false });
+var debouncedRequest = debounce(request, 300, { edges: ['trailing'] });
 
 function request(url, params, exactMatch, callback, loaded) {
     if (_inflight[url]) return;
@@ -192,20 +201,7 @@ export default {
     init: function() {
         _inflight = {};
         _taginfoCache = {};
-        _popularKeys = {
-            // manually exclude some keys – #5377, #7485
-            postal_code: true,
-            full_name: true,
-            loc_name: true,
-            reg_name: true,
-            short_name: true,
-            sorting_name: true,
-            artist_name: true,
-            nat_name: true,
-            long_name: true,
-            via: true,
-            'bridge:name': true
-        };
+        _popularKeys = [];
 
         // Fetch popular keys.  We'll exclude these from `values`
         // lookups because they stress taginfo, and they aren't likely
@@ -251,7 +247,7 @@ export default {
                 callback(err);
             } else {
                 var f = filterKeys(params.filter);
-                var result = d.data.filter(f).sort(sortKeys).map(valKey);
+                var result = d.data.filter(f).filter(d => !_extraExcludedKeyNames.test(d.key)).sort(sortKeys).map(valKey);
                 _taginfoCache[url] = result;
                 callback(null, result);
             }
@@ -288,7 +284,7 @@ export default {
     values: function(params, callback) {
         // Exclude popular keys from values lookups.. see #3955
         var key = params.key;
-        if (key && _popularKeys[key]) {
+        if (key && _popularKeys[key] === true || _extraExcludedKeys.test(key)) {
             callback(null, []);
             return;
         }
@@ -312,9 +308,8 @@ export default {
                 // A few OSM keys expect values to contain uppercase values (see #3377).
                 // This is not an exhaustive list (e.g. `name` also has uppercase values)
                 // but these are the fields where taginfo value lookup is most useful.
-                var re = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer|country|target|brewery|cai_scale/;
-                var allowUpperCase = re.test(params.key);
-                var f = filterValues(allowUpperCase);
+                var allowUpperCase = allowUpperCaseTagValues.test(params.key);
+                var f = filterValues(allowUpperCase, params.key);
 
                 var result = d.data.filter(f).map(valKeyDescription);
                 _taginfoCache[url] = result;

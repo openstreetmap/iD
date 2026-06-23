@@ -26,12 +26,12 @@ describe('iD.svgAreas', function () {
 
 
     it('adds way and area classes', function () {
-        var graph = iD.coreGraph([
-            iD.osmNode({id: 'a', loc: [0, 0]}),
-            iD.osmNode({id: 'b', loc: [1, 0]}),
-            iD.osmNode({id: 'c', loc: [1, 1]}),
-            iD.osmNode({id: 'd', loc: [0, 1]}),
-            iD.osmWay({id: 'w', tags: {area: 'yes', building: 'yes'}, nodes: ['a', 'b', 'c', 'a']})
+        var graph = new iD.coreGraph([
+            new iD.osmNode({id: 'a', loc: [0, 0]}),
+            new iD.osmNode({id: 'b', loc: [1, 0]}),
+            new iD.osmNode({id: 'c', loc: [1, 1]}),
+            new iD.osmNode({id: 'd', loc: [0, 1]}),
+            new iD.osmWay({id: 'w', tags: {area: 'yes', building: 'yes'}, nodes: ['a', 'b', 'c', 'a']})
         ]);
 
         _surface.call(iD.svgAreas(projection, context), graph, [graph.entity('w')], none);
@@ -41,12 +41,12 @@ describe('iD.svgAreas', function () {
     });
 
     it('adds tag classes', function () {
-        var graph = iD.coreGraph([
-            iD.osmNode({id: 'a', loc: [0, 0]}),
-            iD.osmNode({id: 'b', loc: [1, 0]}),
-            iD.osmNode({id: 'c', loc: [1, 1]}),
-            iD.osmNode({id: 'd', loc: [0, 1]}),
-            iD.osmWay({id: 'w', tags: {area: 'yes', building: 'yes'}, nodes: ['a', 'b', 'c', 'a']})
+        var graph = new iD.coreGraph([
+            new iD.osmNode({id: 'a', loc: [0, 0]}),
+            new iD.osmNode({id: 'b', loc: [1, 0]}),
+            new iD.osmNode({id: 'c', loc: [1, 1]}),
+            new iD.osmNode({id: 'd', loc: [0, 1]}),
+            new iD.osmWay({id: 'w', tags: {area: 'yes', building: 'yes'}, nodes: ['a', 'b', 'c', 'a']})
         ]);
 
         _surface.call(iD.svgAreas(projection, context), graph, [graph.entity('w')], none);
@@ -56,13 +56,13 @@ describe('iD.svgAreas', function () {
     });
 
     it('handles deletion of a way and a member vertex (#1903)', function () {
-        var graph = iD.coreGraph([
-            iD.osmNode({id: 'a', loc: [0, 0]}),
-            iD.osmNode({id: 'b', loc: [1, 0]}),
-            iD.osmNode({id: 'c', loc: [1, 1]}),
-            iD.osmNode({id: 'd', loc: [1, 1]}),
-            iD.osmWay({id: 'w', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'a']}),
-            iD.osmWay({id: 'x', tags: {area: 'yes'}, nodes: ['a', 'b', 'd', 'a']})
+        var graph = new iD.coreGraph([
+            new iD.osmNode({id: 'a', loc: [0, 0]}),
+            new iD.osmNode({id: 'b', loc: [1, 0]}),
+            new iD.osmNode({id: 'c', loc: [1, 1]}),
+            new iD.osmNode({id: 'd', loc: [1, 1]}),
+            new iD.osmWay({id: 'w', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'a']}),
+            new iD.osmWay({id: 'x', tags: {area: 'yes'}, nodes: ['a', 'b', 'd', 'a']})
         ]);
 
         _surface.call(iD.svgAreas(projection, context), graph, [graph.entity('x')], all);
@@ -73,17 +73,17 @@ describe('iD.svgAreas', function () {
     });
 
     describe('z-indexing', function() {
-        var graph = iD.coreGraph([
-            iD.osmNode({id: 'a', loc: [-0.0002,  0.0001]}),
-            iD.osmNode({id: 'b', loc: [ 0.0002,  0.0001]}),
-            iD.osmNode({id: 'c', loc: [ 0.0002, -0.0001]}),
-            iD.osmNode({id: 'd', loc: [-0.0002, -0.0001]}),
-            iD.osmNode({id: 'e', loc: [-0.0004,  0.0002]}),
-            iD.osmNode({id: 'f', loc: [ 0.0004,  0.0002]}),
-            iD.osmNode({id: 'g', loc: [ 0.0004, -0.0002]}),
-            iD.osmNode({id: 'h', loc: [-0.0004, -0.0002]}),
-            iD.osmWay({id: 's', tags: {area: 'yes', building: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
-            iD.osmWay({id: 'l', tags: {area: 'yes', landuse: 'park'}, nodes: ['e', 'f', 'g', 'h', 'e']})
+        var graph = new iD.coreGraph([
+            new iD.osmNode({id: 'a', loc: [-0.0002,  0.0001]}),
+            new iD.osmNode({id: 'b', loc: [ 0.0002,  0.0001]}),
+            new iD.osmNode({id: 'c', loc: [ 0.0002, -0.0001]}),
+            new iD.osmNode({id: 'd', loc: [-0.0002, -0.0001]}),
+            new iD.osmNode({id: 'e', loc: [-0.0004,  0.0002]}),
+            new iD.osmNode({id: 'f', loc: [ 0.0004,  0.0002]}),
+            new iD.osmNode({id: 'g', loc: [ 0.0004, -0.0002]}),
+            new iD.osmNode({id: 'h', loc: [-0.0004, -0.0002]}),
+            new iD.osmWay({id: 's', tags: {area: 'yes', building: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
+            new iD.osmWay({id: 'l', tags: {area: 'yes', landuse: 'park'}, nodes: ['e', 'f', 'g', 'h', 'e']})
         ]);
 
         it('stacks smaller areas above larger ones in a single render', function () {
@@ -118,12 +118,12 @@ describe('iD.svgAreas', function () {
     });
 
     it('renders fills for multipolygon areas', function () {
-        var a = iD.osmNode({loc: [1, 1]});
-        var b = iD.osmNode({loc: [2, 2]});
-        var c = iD.osmNode({loc: [3, 3]});
-        var w = iD.osmWay({nodes: [a.id, b.id, c.id, a.id]});
-        var r = iD.osmRelation({tags: {type: 'multipolygon'}, members: [{id: w.id, type: 'way'}]});
-        var graph = iD.coreGraph([a, b, c, w, r]);
+        var a = new iD.osmNode({loc: [1, 1]});
+        var b = new iD.osmNode({loc: [2, 2]});
+        var c = new iD.osmNode({loc: [3, 3]});
+        var w = new iD.osmWay({nodes: [a.id, b.id, c.id, a.id]});
+        var r = new iD.osmRelation({tags: {type: 'multipolygon'}, members: [{id: w.id, type: 'way'}]});
+        var graph = new iD.coreGraph([a, b, c, w, r]);
         var areas = [w, r];
 
         _surface.call(iD.svgAreas(projection, context), graph, areas, none);
@@ -132,43 +132,15 @@ describe('iD.svgAreas', function () {
     });
 
     it('renders no strokes for multipolygon areas', function () {
-        var a = iD.osmNode({loc: [1, 1]});
-        var b = iD.osmNode({loc: [2, 2]});
-        var c = iD.osmNode({loc: [3, 3]});
-        var w = iD.osmWay({nodes: [a.id, b.id, c.id, a.id]});
-        var r = iD.osmRelation({tags: {type: 'multipolygon'}, members: [{id: w.id, type: 'way'}]});
-        var graph = iD.coreGraph([a, b, c, w, r]);
+        var a = new iD.osmNode({loc: [1, 1]});
+        var b = new iD.osmNode({loc: [2, 2]});
+        var c = new iD.osmNode({loc: [3, 3]});
+        var w = new iD.osmWay({nodes: [a.id, b.id, c.id, a.id]});
+        var r = new iD.osmRelation({tags: {type: 'multipolygon'}, members: [{id: w.id, type: 'way'}]});
+        var graph = new iD.coreGraph([a, b, c, w, r]);
         var areas = [w, r];
 
         _surface.call(iD.svgAreas(projection, context), graph, areas, none);
-
-        expect(_surface.selectAll('.stroke').size()).to.equal(0);
-    });
-
-    it('renders fill for a multipolygon with tags on the outer way', function() {
-        var a = iD.osmNode({loc: [1, 1]});
-        var b = iD.osmNode({loc: [2, 2]});
-        var c = iD.osmNode({loc: [3, 3]});
-        var w = iD.osmWay({tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]});
-        var r = iD.osmRelation({members: [{id: w.id, type: 'way'}], tags: {type: 'multipolygon'}});
-        var graph = iD.coreGraph([a, b, c, w, r]);
-
-        _surface.call(iD.svgAreas(projection, context), graph, [w, r], none);
-
-        expect(_surface.selectAll('.way.fill').size()).to.equal(0);
-        expect(_surface.selectAll('.relation.fill').size()).to.equal(1);
-        expect(_surface.select('.relation.fill').classed('tag-natural-wood')).to.be.true;
-    });
-
-    it('renders no strokes for a multipolygon with tags on the outer way', function() {
-        var a = iD.osmNode({loc: [1, 1]});
-        var b = iD.osmNode({loc: [2, 2]});
-        var c = iD.osmNode({loc: [3, 3]});
-        var w = iD.osmWay({tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]});
-        var r = iD.osmRelation({members: [{id: w.id, type: 'way'}], tags: {type: 'multipolygon'}});
-        var graph = iD.coreGraph([a, b, c, w, r]);
-
-        _surface.call(iD.svgAreas(projection, context), graph, [w, r], none);
 
         expect(_surface.selectAll('.stroke').size()).to.equal(0);
     });

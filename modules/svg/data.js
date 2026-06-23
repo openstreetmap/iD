@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit';
 
 import { geoBounds as d3_geoBounds, geoPath as d3_geoPath } from 'd3-geo';
 import { text as d3_text } from 'd3-fetch';
@@ -20,7 +20,7 @@ var _geojson;
 
 
 export function svgData(projection, context, dispatch) {
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    var throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     var _showLabels = true;
     var detected = utilDetect();
     var layer = d3_select(null);
@@ -28,6 +28,13 @@ export function svgData(projection, context, dispatch) {
     var _fileList;
     var _template;
     var _src;
+
+    const supportedFormats = [
+        '.gpx',
+        '.kml',
+        '.geojson',
+        '.json'
+    ];
 
 
     function init() {
@@ -48,6 +55,9 @@ export function svgData(projection, context, dispatch) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
                 if (!detected.filedrop) return;
+                var f = d3_event.dataTransfer.files[0];
+                var extension = getExtension(f.name);
+                if (!supportedFormats.includes(extension)) return;
                 drawData.fileList(d3_event.dataTransfer.files);
             })
             .on('dragenter.svgData', over)
@@ -245,7 +255,7 @@ export function svgData(projection, context, dispatch) {
             .remove();
 
         // enter/update
-        paths = paths.enter()
+        paths.enter()
             .append('path')
             .attr('class', function(d) {
                 var datagroup = this.parentNode.__data__;
@@ -282,7 +292,7 @@ export function svgData(projection, context, dispatch) {
                 .remove();
 
             // enter/update
-            labels = labels.enter()
+            labels.enter()
                 .append('text')
                 .attr('class', function(d) { return textClass + ' ' + featureClasses(d); })
                 .merge(labels)
@@ -304,7 +314,7 @@ export function svgData(projection, context, dispatch) {
     function getExtension(fileName) {
         if (!fileName) return;
 
-        var re = /\.(gpx|kml|(geo)?json)$/i;
+        var re = /\.(gpx|kml|(geo)?json|png)$/i;
         var match = fileName.toLowerCase().match(re);
         return match && match.length && match[0];
     }
@@ -402,22 +412,11 @@ export function svgData(projection, context, dispatch) {
         // test source against OSM imagery blocklists..
         var osm = context.connection();
         if (osm) {
-            var blocklists = osm.imageryBlocklists();
-            var fail = false;
-            var tested = 0;
-            var regex;
-
-            for (var i = 0; i < blocklists.length; i++) {
-                regex = blocklists[i];
-                fail = regex.test(val);
-                tested++;
-                if (fail) break;
-            }
-
-            // ensure at least one test was run.
-            if (!tested) {
-                regex = /.*\.google(apis)?\..*\/(vt|kh)[\?\/].*([xyz]=.*){3}.*/;
-                fail = regex.test(val);
+            for (const regex of osm.imageryBlocklists()) {
+                if (regex.test(val)) {
+                    // matches a blocked sources -> do not set template
+                    return;
+                };
             }
         }
 
@@ -457,9 +456,9 @@ export function svgData(projection, context, dispatch) {
         if (!arguments.length) return _fileList;
 
         _template = null;
-        _fileList = fileList;
         _geojson = null;
         _src = null;
+        _fileList = fileList;
 
         if (!fileList || !fileList.length) return this;
         var f = fileList[0];

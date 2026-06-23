@@ -4,7 +4,7 @@ export { behaviorDrag } from './drag';
 export { behaviorDrawWay } from './draw_way';
 export { behaviorDraw } from './draw';
 export { behaviorEdit } from './edit';
-export { behaviorHash } from './hash';
+export { behaviorHash, patchHash } from './hash';
 export { behaviorHover } from './hover';
 export { behaviorLasso } from './lasso';
 export { behaviorOperation } from './operation';

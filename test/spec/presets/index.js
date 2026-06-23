@@ -1,12 +1,14 @@
+import { locationManager, presetIndex } from '../../../modules';
+
 describe('iD.presetIndex', function () {
     var _savedPresets, _savedAreaKeys;
 
-    before(function() {
+    beforeEach(() => {
         _savedPresets = iD.fileFetcher.cache().preset_presets;
         _savedAreaKeys = iD.osmAreaKeys;
     });
 
-    after(function() {
+    afterEach(() => {
         iD.fileFetcher.cache().preset_presets = _savedPresets;
         iD.osmSetAreaKeys(_savedAreaKeys);
     });
@@ -14,28 +16,28 @@ describe('iD.presetIndex', function () {
 
     describe('#init', function () {
         it('has a fallback point preset', function () {
-            var node = iD.osmNode({ id: 'n' });
-            var graph = iD.coreGraph([node]);
+            var node = new iD.osmNode({ id: 'n' });
+            var graph = new iD.coreGraph([node]);
             var presets = iD.presetIndex();
             expect(presets.match(node, graph).id).to.eql('point');
         });
         it('has a fallback line preset', function () {
-            var node = iD.osmNode({ id: 'n' });
-            var way = iD.osmWay({ id: 'w', nodes: ['n'] });
-            var graph = iD.coreGraph([node, way]);
+            var node = new iD.osmNode({ id: 'n' });
+            var way = new iD.osmWay({ id: 'w', nodes: ['n'] });
+            var graph = new iD.coreGraph([node, way]);
             var presets = iD.presetIndex();
             expect(presets.match(way, graph).id).to.eql('line');
         });
         it('has a fallback area preset', function () {
-            var node = iD.osmNode({ id: 'n' });
-            var way = iD.osmWay({ id: 'w', nodes: ['n'], tags: { area: 'yes' }});
-            var graph = iD.coreGraph([node, way]);
+            var node = new iD.osmNode({ id: 'n' });
+            var way = new iD.osmWay({ id: 'w', nodes: ['n'], tags: { area: 'yes' }});
+            var graph = new iD.coreGraph([node, way]);
             var presets = iD.presetIndex();
             expect(presets.match(way, graph).id).to.eql('area');
         });
         it('has a fallback relation preset', function () {
-            var relation = iD.osmRelation({ id: 'r' });
-            var graph = iD.coreGraph([relation]);
+            var relation = new iD.osmRelation({ id: 'r' });
+            var graph = new iD.coreGraph([relation]);
             var presets = iD.presetIndex();
             expect(presets.match(relation, graph).id).to.eql('relation');
         });
@@ -48,55 +50,47 @@ describe('iD.presetIndex', function () {
             park: { tags: { leisure: 'park' }, geometry: ['point', 'area'] }
         };
 
-        it('returns a collection containing presets matching a geometry and tags', function (done) {
+        it('returns a collection containing presets matching a geometry and tags', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            presets.ensureLoaded().then(function() {
-                var way = iD.osmWay({ tags: { highway: 'residential' } });
-                var graph = iD.coreGraph([way]);
-                expect(presets.match(way, graph).id).to.eql('residential');
-                done();
-            });
+            await presets.ensureLoaded();
+            var way = new iD.osmWay({ tags: { highway: 'residential' } });
+            var graph = new iD.coreGraph([way]);
+            expect(presets.match(way, graph).id).to.eql('residential');
         });
 
-        it('returns the appropriate fallback preset when no tags match', function (done) {
+        it('returns the appropriate fallback preset when no tags match', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var point = iD.osmNode();
-            var line = iD.osmWay({ tags: { foo: 'bar' } });
-            var graph = iD.coreGraph([point, line]);
+            var point = new iD.osmNode();
+            var line = new iD.osmWay({ tags: { foo: 'bar' } });
+            var graph = new iD.coreGraph([point, line]);
 
-            presets.ensureLoaded().then(function() {
-                expect(presets.match(point, graph).id).to.eql('point');
-                expect(presets.match(line, graph).id).to.eql('line');
-                done();
-            });
+            await presets.ensureLoaded();
+            expect(presets.match(point, graph).id).to.eql('point');
+            expect(presets.match(line, graph).id).to.eql('line');
         });
 
-        it('matches vertices on a line as points', function (done) {
+        it('matches vertices on a line as points', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var point = iD.osmNode({ tags: { leisure: 'park' } });
-            var line = iD.osmWay({ nodes: [point.id], tags: { 'highway': 'residential' } });
-            var graph = iD.coreGraph([point, line]);
+            var point = new iD.osmNode({ tags: { leisure: 'park' } });
+            var line = new iD.osmWay({ nodes: [point.id], tags: { 'highway': 'residential' } });
+            var graph = new iD.coreGraph([point, line]);
 
-            presets.ensureLoaded().then(function() {
-                expect(presets.match(point, graph).id).to.eql('point');
-                done();
-            });
+            await presets.ensureLoaded();
+            expect(presets.match(point, graph).id).to.eql('point');
         });
 
-        it('matches vertices on an addr:interpolation line as points', function (done) {
+        it('matches vertices on an addr:interpolation line as points', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var point = iD.osmNode({ tags: { leisure: 'park' } });
-            var line = iD.osmWay({ nodes: [point.id], tags: { 'addr:interpolation': 'even' } });
-            var graph = iD.coreGraph([point, line]);
+            var point = new iD.osmNode({ tags: { leisure: 'park' } });
+            var line = new iD.osmWay({ nodes: [point.id], tags: { 'addr:interpolation': 'even' } });
+            var graph = new iD.coreGraph([point, line]);
 
-            presets.ensureLoaded().then(function() {
-                expect(presets.match(point, graph).id).to.eql('park');
-                done();
-            });
+            await presets.ensureLoaded();
+            expect(presets.match(point, graph).id).to.eql('park');
         });
     });
 
@@ -112,68 +106,55 @@ describe('iD.presetIndex', function () {
             'natural/wood': { tags: { 'natural': 'wood' }, geometry: ['point', 'area'] }
         };
 
-        it('includes keys for presets with area geometry', function (done) {
+        it('includes keys for presets with area geometry', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            presets.ensureLoaded().then(function() {
-                expect(presets.areaKeys()).to.include.keys('natural');
-                done();
-            });
+            await presets.ensureLoaded();
+            expect(presets.areaKeys()).to.include.keys('natural');
         });
 
-        it('discards key-values for presets with a line geometry', function (done) {
+        it('discards key-values for presets with a line geometry', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            presets.ensureLoaded().then(function() {
-                expect(presets.areaKeys().natural).to.include.keys('tree_row');
-                expect(presets.areaKeys().natural.tree_row).to.be.true;
-                done();
-            });
+            await presets.ensureLoaded();
+            expect(presets.areaKeys().natural).to.include.keys('tree_row');
+            expect(presets.areaKeys().natural.tree_row).to.be.true;
+
         });
 
-        it('discards key-values for presets with both area and line geometry', function (done) {
+        it('discards key-values for presets with both area and line geometry', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            presets.ensureLoaded().then(function() {
-                expect(presets.areaKeys().leisure).to.include.keys('track');
-                done();
-            });
+            await presets.ensureLoaded();
+            expect(presets.areaKeys().leisure).to.include.keys('track');
         });
 
-        it('does not discard key-values for presets with neither area nor line geometry', function (done) {
+        it('does not discard key-values for presets with neither area nor line geometry', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            presets.ensureLoaded().then(function() {
-                expect(presets.areaKeys().natural).not.to.include.keys('peak');
-                done();
-            });
+            await presets.ensureLoaded();
+            expect(presets.areaKeys().natural).not.to.include.keys('peak');
         });
 
-        it('does not discard generic \'*\' key-values', function (done) {
+        it('does not discard generic \'*\' key-values', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            presets.ensureLoaded().then(function() {
-                expect(presets.areaKeys().natural).not.to.include.keys('natural');
-                done();
-            });
+            await presets.ensureLoaded();
+            expect(presets.areaKeys().natural).not.to.include.keys('natural');
         });
 
-        it('ignores keys like \'highway\' that are assumed to be lines', function (done) {
+        it('ignores keys like \'highway\' that are assumed to be lines', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            presets.ensureLoaded().then(function() {
-                expect(presets.areaKeys()).not.to.include.keys('highway');
-                done();
-            });
+            await presets.ensureLoaded();
+            expect(presets.areaKeys()).not.to.include.keys('highway');
         });
 
-        it('ignores suggestion presets', function (done) {
+        it('ignores suggestion presets', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            presets.ensureLoaded().then(function() {
-                expect(presets.areaKeys()).not.to.include.keys('amenity');
-                done();
-            });
+            await presets.ensureLoaded();
+            expect(presets.areaKeys()).not.to.include.keys('amenity');
         });
     });
 
@@ -185,102 +166,91 @@ describe('iD.presetIndex', function () {
             bench: { tags: { amenity: 'bench' }, geometry: ['point', 'line'] }
         };
 
-        it('addablePresetIDs is initially null', function (done) {
+        it('addablePresetIDs is initially null', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            presets.ensureLoaded().then(function() {
-                expect(presets.addablePresetIDs()).to.be.null;
-                done();
-            });
+            await presets.ensureLoaded();
+            expect(presets.addablePresetIDs()).to.be.null;
         });
 
-        it('can set and get addablePresetIDs', function (done) {
+        it('can set and get addablePresetIDs', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            presets.ensureLoaded().then(function() {
+            await presets.ensureLoaded();
 
-                expect(presets.item('residential').addable()).to.be.true;
-                expect(presets.item('park').addable()).to.be.true;
+            expect(presets.item('residential').addable()).to.be.true;
+            expect(presets.item('park').addable()).to.be.true;
 
-                var ids = new Set(['residential']);   // can only add preset with this ID
-                presets.addablePresetIDs(ids);
+            var ids = new Set(['residential']);   // can only add preset with this ID
+            presets.addablePresetIDs(ids);
 
-                expect(presets.item('residential').addable()).to.be.true;
-                expect(presets.item('park').addable()).to.be.false;
-                expect(presets.addablePresetIDs()).to.eql(ids);
+            expect(presets.item('residential').addable()).to.be.true;
+            expect(presets.item('park').addable()).to.be.false;
+            expect(presets.addablePresetIDs()).to.eql(ids);
 
-                presets.addablePresetIDs(null);
-                expect(presets.item('residential').addable()).to.be.true;
-                expect(presets.item('park').addable()).to.be.true;
-
-                done();
-            });
+            presets.addablePresetIDs(null);
+            expect(presets.item('residential').addable()).to.be.true;
+            expect(presets.item('park').addable()).to.be.true;
         });
 
-        it('ignores invalid IDs in addablePresetIDs', function (done) {
+        it('ignores invalid IDs in addablePresetIDs', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            presets.ensureLoaded().then(function() {
+            await presets.ensureLoaded();
 
-                expect(presets.item(null)).to.eql(undefined);
-                expect(presets.item(undefined)).to.eql(undefined);
-                expect(presets.item('')).to.eql(undefined);
-                expect(presets.item('garbage')).to.eql(undefined);
-                expect(presets.item('residential').addable()).to.be.true;
-                expect(presets.item('park').addable()).to.be.true;
+            expect(presets.item(null)).to.eql(undefined);
+            expect(presets.item(undefined)).to.eql(undefined);
+            expect(presets.item('')).to.eql(undefined);
+            expect(presets.item('garbage')).to.eql(undefined);
+            expect(presets.item('residential').addable()).to.be.true;
+            expect(presets.item('park').addable()).to.be.true;
 
-                var ids = new Set([null, undefined, '', 'garbage', 'residential']);   // can only add preset with these IDs
-                presets.addablePresetIDs(ids);
+            var ids = new Set([null, undefined, '', 'garbage', 'residential']);   // can only add preset with these IDs
+            presets.addablePresetIDs(ids);
 
-                expect(presets.item(null)).to.eql(undefined);
-                expect(presets.item(undefined)).to.eql(undefined);
-                expect(presets.item('')).to.eql(undefined);
-                expect(presets.item('garbage')).to.eql(undefined);
-                expect(presets.item('residential').addable()).to.be.true;
-                expect(presets.item('park').addable()).to.be.false;
-                expect(presets.addablePresetIDs()).to.eql(ids);
+            expect(presets.item(null)).to.eql(undefined);
+            expect(presets.item(undefined)).to.eql(undefined);
+            expect(presets.item('')).to.eql(undefined);
+            expect(presets.item('garbage')).to.eql(undefined);
+            expect(presets.item('residential').addable()).to.be.true;
+            expect(presets.item('park').addable()).to.be.false;
+            expect(presets.addablePresetIDs()).to.eql(ids);
 
-                presets.addablePresetIDs(null);
-                expect(presets.item(null)).to.eql(undefined);
-                expect(presets.item(undefined)).to.eql(undefined);
-                expect(presets.item('')).to.eql(undefined);
-                expect(presets.item('garbage')).to.eql(undefined);
-                expect(presets.item('residential').addable()).to.be.true;
-                expect(presets.item('park').addable()).to.be.true;
-
-                done();
-            });
+            presets.addablePresetIDs(null);
+            expect(presets.item(null)).to.eql(undefined);
+            expect(presets.item(undefined)).to.eql(undefined);
+            expect(presets.item('')).to.eql(undefined);
+            expect(presets.item('garbage')).to.eql(undefined);
+            expect(presets.item('residential').addable()).to.be.true;
+            expect(presets.item('park').addable()).to.be.true;
         });
 
-        it('addablePresetIDs are default presets', function (done) {
+        it('addablePresetIDs are default presets', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            presets.ensureLoaded().then(function() {
-                var ids = new Set(['bench', 'residential']);   // can only add presets with these IDs
-                presets.addablePresetIDs(ids);
+            await presets.ensureLoaded();
+            var ids = new Set(['bench', 'residential']);   // can only add presets with these IDs
+            presets.addablePresetIDs(ids);
 
-                var areaDefaults = presets.defaults('area', 10).collection;
-                expect(areaDefaults.length).to.eql(0);
+            var areaDefaults = presets.defaults('area', 10).collection;
+            expect(areaDefaults.length).to.eql(0);
 
-                var pointDefaults = presets.defaults('point', 10).collection;
-                expect(pointDefaults.length).to.eql(1);
-                expect(pointDefaults[0].id).to.eql('bench');
+            var pointDefaults = presets.defaults('point', 10).collection;
+            expect(pointDefaults.length).to.eql(1);
+            expect(pointDefaults[0].id).to.eql('bench');
 
-                var lineDefaults = presets.defaults('line', 10).collection;
-                expect(lineDefaults.length).to.eql(2);
-                expect(lineDefaults[0].id).to.eql('bench');
-                expect(lineDefaults[1].id).to.eql('residential');
-
-                done();
-            });
+            var lineDefaults = presets.defaults('line', 10).collection;
+            expect(lineDefaults.length).to.eql(2);
+            expect(lineDefaults[0].id).to.eql('bench');
+            expect(lineDefaults[1].id).to.eql('residential');
         });
     });
 
 
     describe.skip('#build', function () {
         it('builds presets from provided', function () {
-            var surfShop = iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
-            var graph = iD.coreGraph([surfShop]);
+            var surfShop = new iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
+            var graph = new iD.coreGraph([surfShop]);
             var presets = iD.presetIndex();
             var presetData = {
                 presets: {
@@ -297,10 +267,10 @@ describe('iD.presetIndex', function () {
         });
 
         it('configures presets\' initial visibility', function () {
-            var surfShop = iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
-            var firstStreetJetty = iD.osmNode({ tags: { man_made: 'jetty' } });
+            var surfShop = new iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
+            var firstStreetJetty = new iD.osmNode({ tags: { man_made: 'jetty' } });
             var entities = [surfShop, firstStreetJetty];
-            var graph = iD.coreGraph(entities);
+            var graph = new iD.coreGraph(entities);
             var presets = iD.presetIndex();
             var presetData = {
                 presets: {
@@ -347,40 +317,34 @@ describe('iD.presetIndex', function () {
             }
         };
 
-        it('prefers building to multipolygon', function (done) {
+        it('prefers building to multipolygon', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var relation = iD.osmRelation({ tags: { type: 'multipolygon', building: 'yes' } });
-            var graph = iD.coreGraph([relation]);
-            presets.ensureLoaded().then(function() {
-                var match = presets.match(relation, graph);
-                expect(match.id).to.eql('building');
-                done();
-            });
+            var relation = new iD.osmRelation({ tags: { type: 'multipolygon', building: 'yes' } });
+            var graph = new iD.coreGraph([relation]);
+            await presets.ensureLoaded();
+            var match = presets.match(relation, graph);
+            expect(match.id).to.eql('building');
         });
 
-        it('prefers building to address', function (done) {
+        it('prefers building to address', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var way = iD.osmWay({ tags: { area: 'yes', building: 'yes', 'addr:housenumber': '1234' } });
-            var graph = iD.coreGraph([way]);
-            presets.ensureLoaded().then(function() {
-                var match = presets.match(way, graph);
-                expect(match.id).to.eql('building');
-                done();
-            });
+            var way = new iD.osmWay({ tags: { area: 'yes', building: 'yes', 'addr:housenumber': '1234' } });
+            var graph = new iD.coreGraph([way]);
+            await presets.ensureLoaded();
+            var match = presets.match(way, graph);
+            expect(match.id).to.eql('building');
         });
 
-        it('prefers pedestrian to area', function (done) {
+        it('prefers pedestrian to area', async () => {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
-            var way = iD.osmWay({ tags: { area: 'yes', highway: 'pedestrian' } });
-            var graph = iD.coreGraph([way]);
-            presets.ensureLoaded().then(function() {
-                var match = presets.match(way, graph);
-                expect(match.id).to.eql('highway/pedestrian_area');
-                done();
-            });
+            var way = new iD.osmWay({ tags: { area: 'yes', highway: 'pedestrian' } });
+            var graph = new iD.coreGraph([way]);
+            await presets.ensureLoaded();
+            var match = presets.match(way, graph);
+            expect(match.id).to.eql('highway/pedestrian_area');
         });
     });
 
@@ -401,7 +365,6 @@ describe('iD.presetIndex', function () {
                 '2161a712': {
                     'key': 'building',
                     'label': 'Building',
-                    'overrideLabel': 'Building',
                     'type': 'text'
                 }
             }
@@ -416,15 +379,15 @@ describe('iD.presetIndex', function () {
         });
 
         it('builds presets w/external sources set to addable', function () {
-            var surfShop = iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
-            var graph = iD.coreGraph([surfShop]);
+            var surfShop = new iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
+            var graph = new iD.coreGraph([surfShop]);
             var url = 'https://fakemaprules.io/fake.json';
 
-            // no exernal presets yet
+            // no external presets yet
             expect(iD.presetIndex().match(surfShop, graph).id).to.eql('point');
 
             // reset graph...
-            graph = iD.coreGraph([surfShop]);
+            graph = new iD.coreGraph([surfShop]);
 
             // add the validations query param...
             iD.presetIndex().fromExternal(url, function (externalPresets) {
@@ -460,6 +423,36 @@ describe('iD.presetIndex', function () {
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(presetData)]
             );
             _server.respond();
+        });
+    });
+
+    describe('PresetIndex.recents', () => {
+        it('fills all recent slots even when some remembered presets are not available in the current region (#11405)', () => {
+            const testIndex = presetIndex();
+
+            locationManager.locationSetsAt = () => new Map(Object.entries({ 'world': 1 }));
+
+            const p1 = { id: 'p1', matchGeometry: () => true, locationSetID: 'world' };
+            const p2 = { id: 'p2', matchGeometry: () => true, locationSetID: 'us_only' }; // Invalid
+            const p3 = { id: 'p3', matchGeometry: () => true, locationSetID: 'world' };
+            const p4 = { id: 'p4', matchGeometry: () => true, locationSetID: 'us_only' }; // Invalid
+            const p5 = { id: 'p5', matchGeometry: () => true, locationSetID: 'world' };
+
+            testIndex.recent = () => ({
+                matchGeometry: () => ({
+                    collection: [p1, p2, p3, p4, p5]
+                })
+            });
+
+            const locCoords = [0, 51];
+            const result = testIndex.defaults('point', 10, true, locCoords);
+
+            const ids = result.collection.map(p => p.id);
+
+            expect(ids).to.include('p5');
+            expect(ids).to.not.include('p2');
+            expect(ids).to.not.include('p4');
+            expect(ids.slice(0, 3)).to.eql(['p1', 'p3', 'p5']);
         });
     });
 

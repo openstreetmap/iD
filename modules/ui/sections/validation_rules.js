@@ -1,6 +1,4 @@
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
@@ -103,12 +101,14 @@ export function uiSectionValidationRules(context) {
 
         label
             .append('span')
-            .html(function(d) {
+            .each(function(d) {
                 var params = {};
                 if (d === 'unsquare_way') {
-                    params.val = { html: '<span class="square-degrees"></span>' };
+                    params.val = selection => selection
+                        .append('span')
+                        .classed('square-degrees', true);
                 }
-                return t.html('issues.' + d + '.title', params);
+                d3_select(this).call(t.append('issues.' + d + '.title', params));
             });
 
         // Update
@@ -160,7 +160,7 @@ export function uiSectionValidationRules(context) {
     function changeSquare() {
         var input = d3_select(this);
         var degStr = utilGetSetValue(input).trim();
-        var degNum = parseFloat(degStr, 10);
+        var degNum = Number(degStr);
 
         if (!isFinite(degNum)) {
             degNum = DEFAULTSQUARE;

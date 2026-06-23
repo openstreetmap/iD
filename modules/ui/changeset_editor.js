@@ -1,4 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../presets';
 import { t } from '../core/localizer';
@@ -6,7 +7,8 @@ import { svgIcon } from '../svg/icon';
 import { uiCombobox} from './combobox';
 import { uiField } from './field';
 import { uiFormFields } from './form_fields';
-import { utilArrayUniqBy, utilRebind, utilTriggerEvent } from '../util';
+import { utilArrayUniqBy, utilCleanOsmString, utilDetect, utilRebind, utilTriggerEvent, utilUnicodeCharsCount } from '../util';
+import { getIncompatibleSources } from '../validations/incompatible_source';
 
 
 export function uiChangesetEditor(context) {
@@ -32,7 +34,7 @@ export function uiChangesetEditor(context) {
 
             _fieldsArr = [
                 uiField(context, presets.field('comment'), null, { show: true, revert: false }),
-                uiField(context, presets.field('source'), null, { show: false, revert: false }),
+                uiField(context, presets.field('source'), null, { show: true, revert: false }),
                 uiField(context, presets.field('hashtags'), null, { show: false, revert: false }),
             ];
 
@@ -56,6 +58,7 @@ export function uiChangesetEditor(context) {
 
         if (initial) {
             var commentField = selection.select('.form-field-comment textarea');
+            const sourceField = _fieldsArr.find(field => field.id === 'source');
             var commentNode = commentField.node();
 
             if (commentNode) {
@@ -77,42 +80,95 @@ export function uiChangesetEditor(context) {
                         return comment ? { title: comment, value: comment } : null;
                     }).filter(Boolean);
 
-                    commentField
-                        .call(commentCombo
-                            .data(utilArrayUniqBy(comments, 'title'))
-                        );
+                    if (!utilDetect().isMobileFirefox) {
+                        // disable on mobile firefox, as it is buggy
+                        // https://github.com/openstreetmap/iD/issues/9011
+                        commentField
+                            .call(commentCombo
+                                .data(utilArrayUniqBy(comments, 'title'))
+                            );
+                    }
+
+                    // add extra dropdown options to the `source` field
+                    // based on the values used in recent changesets.
+                    const recentSources = changesets
+                        .flatMap((changeset) => changeset.tags.source?.split(';'))
+                        .filter(value => !sourceField.options?.includes(value))
+                        .filter(Boolean)
+                        .map(title => ({ title, value: title, klass: 'raw-option' }));
+
+                    sourceField.impl.setCustomOptions(utilArrayUniqBy(recentSources, 'title'));
                 });
             }
         }
 
-        // Add warning if comment mentions Google
-        var hasGoogle = _tags.comment.match(/google/i);
-        var commentWarning = selection.select('.form-field-comment').selectAll('.comment-warning')
-            .data(hasGoogle ? [0] : []);
+        function findIncompatibleSources(str, which) {
+            const incompatibleSources = getIncompatibleSources(str);
+            if (!incompatibleSources) return false;
+            return incompatibleSources.map(rule => {
+                const value = rule.regex.exec(str)[1];
+                return {
+                    id: `incompatible_source.${which}.${rule.id}`,
+                    msg: selection => {
+                        selection.call(t.append(`commit.changeset_incompatible_source.${which}`, { value }));
+                        selection.append('br');
+                        selection
+                            .append('a')
+                            .attr('href', t('commit.changeset_incompatible_source.link'))
+                            .call(t.append(`issues.incompatible_source.reference.${rule.id}`));
+                    }
+                };
+            });
+        }
 
-        commentWarning.exit()
-            .transition()
-            .duration(200)
-            .style('opacity', 0)
-            .remove();
+        function renderWarnings(warnings, selection, klass) {
+            const entries = selection.selectAll(`.${klass}`)
+                .data(warnings, d => d.id);
 
-        var commentEnter = commentWarning.enter()
-            .insert('div', '.tag-reference-body')
-            .attr('class', 'field-warning comment-warning')
-            .style('opacity', 0);
+            entries.exit()
+                .transition()
+                .duration(200)
+                .style('opacity', 0)
+                .remove();
 
-        commentEnter
-            .append('a')
-            .attr('target', '_blank')
-            .call(svgIcon('#iD-icon-alert', 'inline'))
-            .attr('href', t('commit.google_warning_link'))
-            .append('span')
-            .call(t.append('commit.google_warning'));
+            const enter = entries.enter()
+                .append('div')
+                .classed('field-warning', true)
+                .classed(klass, true)
+                .style('opacity', 0);
 
-        commentEnter
-            .transition()
-            .duration(200)
-            .style('opacity', 1);
+            enter
+                .call(svgIcon('#iD-icon-alert', 'inline'))
+                .append('span');
+
+            enter
+                .transition()
+                .duration(200)
+                .style('opacity', 1);
+
+            entries.merge(enter).selectAll('div > span')
+                .text('')
+                .each(function(d) {
+                    d3_select(this).call(d.msg);
+                });
+        }
+
+        // Show warning(s) if comment mentions an invalid source
+        const commentWarnings = findIncompatibleSources(_tags.comment, 'comment');
+        // also show warning when comment length exceeds 255 chars
+        const maxChars = context.maxCharsForTagValue();
+        const strLen = utilUnicodeCharsCount(utilCleanOsmString(_tags.comment, Number.POSITIVE_INFINITY));
+        if (strLen > maxChars || !true) {
+            commentWarnings.push({
+                id: 'message too long',
+                msg: t.append('commit.changeset_comment_length_warning', { maxChars: maxChars }),
+            });
+        }
+        renderWarnings(commentWarnings, selection.select('.form-field-comment'), 'comment-warning');
+
+        // Show warning(s) if sources contain an invalid source
+        const sourceWarnings = findIncompatibleSources(_tags.source, 'source');
+        renderWarnings(sourceWarnings, selection.select('.form-field-source'), 'source-warning');
     }
 
 

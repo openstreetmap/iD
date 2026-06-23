@@ -46,10 +46,20 @@
 .fill-partial path.area.fill.tag-indoor {
     stroke-width: 20px;
 }
+.fill-partial path.area.fill.tag-amenity-parking_space {
+    stroke-width: 30px;
+}
 .ideditor.mode-browse .fill-partial path.area.fill,
 .ideditor.mode-select .fill-partial path.area.fill,
 .ideditor.mode-select-data .fill-partial path.area.fill,
 .ideditor.mode-select-error .fill-partial path.area.fill,
 .ideditor.mode-select-note .fill-partial path.area.fill {
     pointer-events: visibleStroke;
+}
+.ideditor.mode-browse .fill-full path.area.fill,
+.ideditor.mode-select .fill-full path.area.fill,
+.ideditor.mode-select-data .fill-full path.area.fill,
+.ideditor.mode-select-error .fill-full path.area.fill,
+.ideditor.mode-select-note .fill-full path.area.fill {
+    pointer-events: visibleFill;
 }

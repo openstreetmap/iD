@@ -1,5 +1,5 @@
 import { geoPolygonContainsPolygon } from '../geo';
-import { osmJoinWays, osmRelation } from '../osm';
+import { osmJoinWays, osmRelation, osmWayOnlyTags } from '../osm';
 import { utilArrayGroupBy, utilArrayIntersection, utilObjectOmit, utilOldestID } from '../util';
 
 
@@ -92,7 +92,7 @@ export function actionMergePolygon(ids, newRelationId) {
             var oldestID = utilOldestID(entities.multipolygon.map((entity) => entity.id));
             relation = entities.multipolygon.find((entity) => entity.id === oldestID);
         } else {
-            relation = osmRelation({ id: newRelationId, tags: { type: 'multipolygon' }});
+            relation = new osmRelation({ id: newRelationId, tags: { type: 'multipolygon' }});
         }
 
         entities.multipolygon.forEach(function(m) {
@@ -107,8 +107,17 @@ export function actionMergePolygon(ids, newRelationId) {
                 return m.id === way.id && m.role !== 'inner';
             }
             if (members.some(isThisOuter)) {
-                relation = relation.mergeTags(way.tags);
-                graph = graph.replace(way.update({ tags: {} }));
+                //filter out tags that shouldn't be moved to the multipolygon relation
+                var areaTags = Object.assign({}, way.tags);
+                var lineTags = {};
+                for (var key in areaTags) {
+                    if (osmWayOnlyTags[key] && osmWayOnlyTags[key][areaTags[key]]) {
+                        lineTags[key] = areaTags[key];
+                        delete areaTags[key];
+                    }
+                }
+                relation = relation.mergeTags(areaTags);
+                graph = graph.replace(way.update({ tags: lineTags }));
             }
         });
 

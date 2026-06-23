@@ -1,7 +1,7 @@
 describe('maprules', function() {
     var _ruleChecks, _savedAreaKeys, validationRules;
 
-    before(function() {
+    beforeEach(() => {
         _savedAreaKeys = iD.osmAreaKeys;
         iD.osmSetAreaKeys({ building: {}, amenity: {} });
 
@@ -10,7 +10,7 @@ describe('maprules', function() {
         _ruleChecks = iD.serviceMapRules.ruleChecks();
     });
 
-    after(function() {
+    afterEach(() => {
         iD.osmSetAreaKeys(_savedAreaKeys);
         delete iD.services.maprules;
     });
@@ -163,7 +163,17 @@ describe('maprules', function() {
     });
     describe('#clearRules', function() {
         it('clears _validationRules array', function() {
+            iD.serviceMapRules.clearRules();
+            expect(iD.serviceMapRules.validationRules()).to.be.empty;
+
+            iD.serviceMapRules.addRule({
+                geometry:'node',
+                equals: {amenity:'marketplace'},
+                absence:'name',
+                warning:'\'Marketplace\' preset must be coupled with name'
+            });
             expect(iD.serviceMapRules.validationRules().length).to.eql(1);
+
             iD.serviceMapRules.clearRules();
             expect(iD.serviceMapRules.validationRules()).to.be.empty;
         });
@@ -310,7 +320,7 @@ describe('maprules', function() {
     });
     describe('rule', function() {
         var selectors;
-        before(function() {
+        beforeEach(() => {
             selectors = [
                 {
                     geometry:'node',
@@ -373,7 +383,7 @@ describe('maprules', function() {
         });
         describe('#matches', function() {
             var selectors, entities;
-            before(function() {
+            beforeEach(() => {
                 selectors = [
                     {
                         geometry:'node',
@@ -430,15 +440,15 @@ describe('maprules', function() {
                     }
                 ];
                 entities = [
-                    iD.osmEntity({ type: 'node', tags: { amenity: 'marketplace' }}),
-                    iD.osmWay({ tags: { building: 'house', amenity: 'clinic' }, nodes: [ 'a', 'b', 'c', 'a' ]}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 6 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 9 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 5 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 10 }}),
-                    iD.osmWay({ tags: { amenity: 'clinic', emergency: 'definitely' }, nodes: [ 'd', 'e', 'f', 'd' ]}),
-                    iD.osmWay({ tags: { highway: 'residential', structure: 'bridge' }}),
+                    new iD.osmNode({ tags: { amenity: 'marketplace' }}),
+                    new iD.osmWay({ tags: { building: 'house', amenity: 'clinic' }, nodes: [ 'a', 'b', 'c', 'a' ]}),
+                    new iD.osmNode({ tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
+                    new iD.osmNode({ tags: { man_made: 'tower', height: 6 }}),
+                    new iD.osmNode({ tags: { man_made: 'tower', height: 9 }}),
+                    new iD.osmNode({ tags: { man_made: 'tower', height: 5 }}),
+                    new iD.osmNode({ tags: { man_made: 'tower', height: 10 }}),
+                    new iD.osmWay({ tags: { amenity: 'clinic', emergency: 'definitely' }, nodes: [ 'd', 'e', 'f', 'd' ]}),
+                    new iD.osmWay({ tags: { highway: 'residential', structure: 'bridge' }}),
                 ];
 
                 iD.serviceMapRules.clearRules();
@@ -457,7 +467,7 @@ describe('maprules', function() {
                     positiveRegex: { structure: ['embarkment', 'bridge'] },
                     error: '\'suburban road\' structure tag cannot be \'bridge\' or \'tunnel\''
                 };
-                var entity = iD.osmWay({ tags: { highway: 'residential', structure: 'tunnel' }});
+                var entity = new iD.osmWay({ tags: { highway: 'residential', structure: 'tunnel' }});
                 iD.serviceMapRules.clearRules();
                 iD.serviceMapRules.addRule(selector);
                 var rule = iD.serviceMapRules.validationRules()[0];
@@ -468,7 +478,7 @@ describe('maprules', function() {
         describe('#findIssues', function() {
             var selectors, entities, _graph;
 
-            before(function() {
+            beforeEach(() => {
                 selectors = [
                     {
                         geometry:'node',
@@ -525,26 +535,26 @@ describe('maprules', function() {
                     }
                 ];
                 entities = [
-                    iD.osmEntity({ type: 'node', tags: { amenity: 'marketplace' }}),
-                    iD.osmWay({ tags: { building: 'house', amenity: 'clinic' }, nodes: [ 'a', 'b', 'c', 'a' ]}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 6 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 9 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 5 }}),
-                    iD.osmEntity({ type: 'node', tags: { man_made: 'tower', height: 10 }}),
-                    iD.osmWay({ tags: { amenity: 'clinic', emergency: 'definitely' }, nodes: [ 'd', 'e', 'f', 'd' ]}),
-                    iD.osmWay({ tags: { highway: 'residential', structure: 'bridge' }}),
+                    new iD.osmNode({ tags: { amenity: 'marketplace' }}),
+                    new iD.osmWay({ tags: { building: 'house', amenity: 'clinic' }, nodes: [ 'a', 'b', 'c', 'a' ]}),
+                    new iD.osmNode({ tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
+                    new iD.osmNode({ tags: { man_made: 'tower', height: 6 }}),
+                    new iD.osmNode({ tags: { man_made: 'tower', height: 9 }}),
+                    new iD.osmNode({ tags: { man_made: 'tower', height: 5 }}),
+                    new iD.osmNode({ tags: { man_made: 'tower', height: 10 }}),
+                    new iD.osmWay({ tags: { amenity: 'clinic', emergency: 'definitely' }, nodes: [ 'd', 'e', 'f', 'd' ]}),
+                    new iD.osmWay({ tags: { highway: 'residential', structure: 'bridge' }}),
                 ];
 
                 var wayNodes = [
-                    iD.osmNode({ id: 'a' }),
-                    iD.osmNode({ id: 'b' }),
-                    iD.osmNode({ id: 'c' }),
-                    iD.osmNode({ id: 'd' }),
-                    iD.osmNode({ id: 'e' }),
-                    iD.osmNode({ id: 'f' }),
+                    new iD.osmNode({ id: 'a' }),
+                    new iD.osmNode({ id: 'b' }),
+                    new iD.osmNode({ id: 'c' }),
+                    new iD.osmNode({ id: 'd' }),
+                    new iD.osmNode({ id: 'e' }),
+                    new iD.osmNode({ id: 'f' }),
                 ];
-                _graph = iD.coreGraph(entities.concat(wayNodes));
+                _graph = new iD.coreGraph(entities.concat(wayNodes));
                 iD.serviceMapRules.clearRules();
                 selectors.forEach(function(selector) { iD.serviceMapRules.addRule(selector); });
                 validationRules = iD.serviceMapRules.validationRules();
@@ -562,7 +572,7 @@ describe('maprules', function() {
 
                     expect(issues.length).to.eql(1);
                     expect(issue.entityIds).to.eql([entity.id]);
-                    expect(issue.message(context)).to.eql(selector[type]);
+                    expect(issue.message(iD.coreContext())).to.eql(selector[type]);
                     expect(type).to.eql(issue.severity);
                 });
             });
