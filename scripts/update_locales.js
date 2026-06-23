@@ -2,7 +2,7 @@
 /* Downloads the latest translations from Transifex */
 import fs from 'node:fs';
 import { styleText } from 'node:util';
-import YAML from 'js-yaml';
+import { load as loadYaml } from 'js-yaml';
 import { transifexApi } from '@transifex/api';
 import * as languageNames from './language_names.js';
 
@@ -214,7 +214,7 @@ function getLanguage(resourceId) {
       });
       const data = await fetch(url).then(d => d.text());
       console.log(`got translations for ${resourceId}, language ${code}`);
-      callback(null, YAML.load(data)[code]);
+      callback(null, loadYaml(data)[code]);
     } catch (err) {
       console.error(`error while getting translations for ${resourceId}, language ${code}`, err);
       callback(err);
