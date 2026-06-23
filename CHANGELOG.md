@@ -53,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix a crash when cancelling drawing a line while hovering other features with a `directionalCombo` field ([#12467])
 #### :earth_asia: Localization
 * Improve some edge cases of rendering of mixed right-to-left and left-to-right text ([#8713])
+* When labelling features, match locale codes like `zh-CN` to name tags like `name:zh-Hans` ([#10911], thanks [@k-yle])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
@@ -61,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#8713]: https://github.com/openstreetmap/iD/issues/8713
 [#8724]: https://github.com/openstreetmap/iD/issues/8724
+[#10911]: https://github.com/openstreetmap/iD/pull/10911
 [#12392]: https://github.com/openstreetmap/iD/pull/12392
 [#12401]: https://github.com/openstreetmap/iD/pull/12401
 [#12406]: https://github.com/openstreetmap/iD/pull/12406

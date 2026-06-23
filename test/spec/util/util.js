@@ -402,6 +402,17 @@ describe('iD.util', function() {
         it('uses only the housenumber for map labels', () => {
             expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '31', 'addr:street': 'Princes Street' } }, { isMapLabel: true })).to.eql('31');
         });
+
+        describe('localised names', () => {
+            it('considers the original locale code first', () => {
+                expect(iD.utilDisplayName({ tags: { name: '5', 'name:en': '4', 'name:en-Latn': '3', 'name:en-US': '2', 'name:en-Latn-US': '1' } }, undefined, true)).toBe('1');
+            });
+            it('fallbacks to the maximized locale', () => {
+                expect(iD.utilDisplayName({ tags: { name: '5', 'name:en': '4', 'name:en-Latn': '3', 'name:en-US': '2' } }, undefined, true)).toBe('2');
+                expect(iD.utilDisplayName({ tags: { name: '5', 'name:en': '4', 'name:en-Latn': '3' } }, undefined, true)).toBe('3');
+                expect(iD.utilDisplayName({ tags: { name: '5', 'name:en': '4' } }, undefined, true)).toBe('4');
+            });
+        });
     });
 
     describe('utilOldestID', function() {
