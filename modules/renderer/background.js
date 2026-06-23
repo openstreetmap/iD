@@ -61,7 +61,7 @@ export function rendererBackground(context) {
 
         }).filter(Boolean);
 
-        for (const source of features) {
+        for (const source of sources) {
           if (source.encrypted) {
             source.template = await utilAesDecrypt(source.template);
           }
