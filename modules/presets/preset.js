@@ -230,10 +230,14 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
     if (geometry && !skipFieldDefaults) {
       _this.fields(loc).forEach(field => {
-        if (field.matchGeometry(geometry) && field.key &&
-            field.default === tags[field.key] &&
-            (!ignoringKeys || ignoringKeys.indexOf(field.key) === -1)) {
-          delete tags[field.key];
+        const key = field.key;
+        if (ignoringKeys && ignoringKeys.includes(key)) {
+            // skip setting particular field's default value
+            return;
+        }
+        if (field.matchGeometry(geometry) && key &&
+            field.default === tags[key]) {
+          delete tags[key];
         }
       });
     }
@@ -243,7 +247,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
 
-  _this.setTags = (tags, geometry, skipFieldDefaults, loc) => {
+  _this.setTags = (tags, geometry, ignoringKeys, skipFieldDefaults, loc) => {
     const addTags = _this.addTags;
     tags = Object.assign({}, tags);   // shallow copy
 
@@ -282,8 +286,14 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
     if (geometry && !skipFieldDefaults) {
       _this.fields(loc).forEach(field => {
-        if (field.matchGeometry(geometry) && field.key && !tags[field.key] && field.default) {
-          tags[field.key] = field.default;
+        const key = field.key;
+        if (ignoringKeys && ignoringKeys.includes(key)) {
+            // skip setting particular field's default value
+            return;
+        }
+        if (field.matchGeometry(geometry) && key &&
+            !tags[key] && field.default) {
+          tags[key] = field.default;
         }
       });
     }

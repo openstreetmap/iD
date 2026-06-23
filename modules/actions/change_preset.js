@@ -8,9 +8,9 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
         const loc = entity.extent(graph).center();
 
         // preserve tags that the new preset might care about, if any
-        let preserveKeys;
+        let preserveKeys = [];
+        let oldPresetFieldKeys = [];
         if (newPreset) {
-            preserveKeys = [];
             if (newPreset.addTags) {
                 preserveKeys = preserveKeys.concat(Object.keys(newPreset.addTags));
             }
@@ -37,7 +37,7 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
 
                 if (oldPreset.id !== newPreset.id) {
                     // 'field-keys' are keys used by fields (different to the keys used by preset itself)
-                    const oldPresetFieldKeys = [
+                    oldPresetFieldKeys = [
                         ...oldPreset.fields(loc),
                         ...oldPreset.moreFields(loc)
                     ].flatMap(f => f.allKeys(tags));
@@ -46,7 +46,7 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
                     const fieldKeysToRemove = utilArrayDifference(oldPresetFieldKeys, preserveKeys);
                     let reducedTags = utilObjectOmit(tags, fieldKeysToRemove);
                     reducedTags = oldPreset.unsetTags(reducedTags, geometry, preserveKeys, false, loc);
-                    reducedTags = newPreset.setTags(reducedTags, geometry, skipFieldDefaults, loc);
+                    reducedTags = newPreset.setTags(reducedTags, geometry, oldPresetFieldKeys, skipFieldDefaults, loc);
 
                     if (oldPreset.matchScore(reducedTags) === -1 /* -1 means, the preset does not match */) {
                         // only actually remove tags if the old preset is fully orthogonal
@@ -62,7 +62,7 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
             }
         }
         if (oldPreset) tags = oldPreset.unsetTags(tags, geometry, preserveKeys, false, loc);
-        if (newPreset) tags = newPreset.setTags(tags, geometry, skipFieldDefaults, loc);
+        if (newPreset) tags = newPreset.setTags(tags, geometry, oldPresetFieldKeys, skipFieldDefaults, loc);
 
         return graph.replace(entity.update({tags: tags}));
     };

@@ -17,7 +17,7 @@ export function modeAddLine(context, mode) {
 
     function defaultTags(loc) {
         var defaultTags = {};
-        if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'line', false, loc);
+        if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'line', [], false, loc);
         return defaultTags;
     }
 
