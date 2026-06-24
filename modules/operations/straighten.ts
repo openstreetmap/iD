@@ -4,18 +4,19 @@ import { actionStraightenWay } from '../actions/straighten_way';
 import { behaviorOperation } from '../behavior/operation';
 import { utilArrayDifference, utilGetAllNodes, utilTotalExtent } from '../util/index';
 import { svgPath } from '../svg';
+import { osmWay, type NodeId, type WayId } from '../osm';
 
 
-export function operationStraighten(context, selectedIDs) {
-    var _wayIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'w'; });
-    var _nodeIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'n'; });
+export const operationStraighten: iD.CreateOperation = (context, selectedIDs) => {
+    var _wayIDs = selectedIDs.filter(function(id): id is WayId { return id.charAt(0) === 'w'; });
+    var _nodeIDs = selectedIDs.filter(function(id): id is NodeId { return id.charAt(0) === 'n'; });
     var _amount = ((_wayIDs.length ? _wayIDs : _nodeIDs).length === 1 ? 'single' : 'multiple');
 
     var _nodes = utilGetAllNodes(selectedIDs, context.graph());
     var _coords = _nodes.map(function(n) { return n.loc; });
     var _extent = utilTotalExtent(selectedIDs, context.graph());
     var _action = chooseAction();
-    var _geometry;
+    var _geometry: 'point' | 'line';
 
 
     function chooseAction() {
@@ -26,8 +27,8 @@ export function operationStraighten(context, selectedIDs) {
 
         // straighten selected ways (possibly between range of 2 selected nodes)
         } else if (_wayIDs.length > 0 && (_nodeIDs.length === 0 || _nodeIDs.length === 2)) {
-            var startNodeIDs = [];
-            var endNodeIDs = [];
+            var startNodeIDs: string[] = [];
+            var endNodeIDs: string[] = [];
 
             for (var i = 0; i < selectedIDs.length; i++) {
                 var entity = context.entity(selectedIDs[i]);
@@ -76,7 +77,7 @@ export function operationStraighten(context, selectedIDs) {
     }
 
 
-    function operation() {
+    const operation: iD.Operation = function() {
         if (!_action) return;
 
         context.perform(_action, operation.annotation());
@@ -84,7 +85,7 @@ export function operationStraighten(context, selectedIDs) {
         window.setTimeout(function() {
             context.validator().validate();
         }, 300);  // after any transition
-    }
+    };
 
 
     operation.available = function() {
@@ -93,7 +94,7 @@ export function operationStraighten(context, selectedIDs) {
 
 
     operation.disabled = function() {
-        var reason = _action.disabled(context.graph());
+        var reason = _action!.disabled!(context.graph());
         if (reason) {
             return reason;
         } else if (_extent.percentContainedIn(context.map().extent()) < 0.8) {
@@ -124,10 +125,10 @@ export function operationStraighten(context, selectedIDs) {
 
     operation.getAuxiliaryGeometry = function() {
         const graph = context.graph();
-        const previewGraph = _action(graph);
+        const previewGraph = _action!(graph);
         const getPath = svgPath(context.projection, previewGraph, false);
         return selectedIDs.map(entityId => {
-            const entity = previewGraph.hasEntity(entityId);
+            const entity = previewGraph.hasEntity<osmWay>(entityId)!;
             return {
                 id: entity.id,
                 path: getPath(entity),
@@ -156,4 +157,4 @@ export function operationStraighten(context, selectedIDs) {
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
-}
+};

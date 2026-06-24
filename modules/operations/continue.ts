@@ -3,16 +3,18 @@ import { modeDrawLine } from '../modes/draw_line';
 import { behaviorOperation } from '../behavior/operation';
 import { utilArrayGroupBy } from '../util';
 import { actionChangeTags } from '../actions';
+import type { osmNode } from '../osm';
 
 
-export function operationContinue(context, selectedIDs) {
+export const operationContinue: iD.CreateOperation = (context, selectedIDs) => {
 
     var _entities = selectedIDs.map(function(id) { return context.graph().entity(id); });
-    var _geometries = Object.assign(
-        { line: [], vertex: [] },
-        utilArrayGroupBy(_entities, function(entity) { return entity.geometry(context.graph()); })
-    );
-    var _vertex = _geometries.vertex.length && _geometries.vertex[0];
+    var _geometries = {
+        line: [],
+        vertex: [],
+        ...utilArrayGroupBy(_entities, function(entity) { return entity.geometry(context.graph()); })
+    };
+    var _vertex = <osmNode>(_geometries.vertex.length && _geometries.vertex[0]);
 
 
     function candidateWays() {
@@ -28,11 +30,11 @@ export function operationContinue(context, selectedIDs) {
     var _candidates = candidateWays();
 
 
-    var operation = function() {
+    const operation: iD.Operation = function() {
         var candidate = _candidates[0];
 
         // remove fixme=continue or noexit=yes from the vertex.
-        const tagsToRemove = new Set();
+        const tagsToRemove = new Set<string>();
         if (_vertex.tags.fixme === 'continue') tagsToRemove.add('fixme');
         if (_vertex.tags.noexit === 'yes') tagsToRemove.add('noexit');
 
@@ -95,4 +97,4 @@ export function operationContinue(context, selectedIDs) {
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
-}
+};

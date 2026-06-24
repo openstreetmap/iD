@@ -1,6 +1,6 @@
 import { t } from '../core/localizer';
 
-import { actionJoin } from '../actions/join';
+import { actionJoin, type ActionJoin } from '../actions/join';
 import { actionMerge } from '../actions/merge';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionMergePolygon } from '../actions/merge_polygon';
@@ -8,34 +8,36 @@ import { actionMergePolygon } from '../actions/merge_polygon';
 import { behaviorOperation } from '../behavior/operation';
 import { modeSelect } from '../modes/select';
 import { presetManager } from '../presets';
+import type { Action } from '../core/history';
+import type { NodeId, WayId } from '../osm';
 
-export function operationMerge(context, selectedIDs) {
+export const operationMerge: iD.CreateOperation = (context, selectedIDs) => {
 
     var _action = getAction();
 
-    function getAction() {
+    function getAction(): Action | ActionJoin {
         // prefer a non-disabled action first
-        var join = actionJoin(selectedIDs);
-        if (!join.disabled(context.graph())) return join;
+        var join = actionJoin(selectedIDs as WayId[]);
+        if (!join.disabled!(context.graph())) return join;
 
         var merge = actionMerge(selectedIDs);
-        if (!merge.disabled(context.graph())) return merge;
+        if (!merge.disabled!(context.graph())) return merge;
 
         var mergePolygon = actionMergePolygon(selectedIDs);
-        if (!mergePolygon.disabled(context.graph())) return mergePolygon;
+        if (!mergePolygon.disabled!(context.graph())) return mergePolygon;
 
-        var mergeNodes = actionMergeNodes(selectedIDs);
-        if (!mergeNodes.disabled(context.graph())) return mergeNodes;
+        var mergeNodes = actionMergeNodes(selectedIDs as NodeId[]);
+        if (!mergeNodes.disabled!(context.graph())) return mergeNodes;
 
         // otherwise prefer an action with an interesting disabled reason
-        if (join.disabled(context.graph()) !== 'not_eligible') return join;
-        if (merge.disabled(context.graph()) !== 'not_eligible') return merge;
-        if (mergePolygon.disabled(context.graph()) !== 'not_eligible') return mergePolygon;
+        if (join.disabled!(context.graph()) !== 'not_eligible') return join;
+        if (merge.disabled!(context.graph()) !== 'not_eligible') return merge;
+        if (mergePolygon.disabled!(context.graph()) !== 'not_eligible') return mergePolygon;
 
         return mergeNodes;
     }
 
-    var operation = function() {
+    const operation: iD.Operation = function() {
 
         if (operation.disabled()) return;
 
@@ -58,12 +60,12 @@ export function operationMerge(context, selectedIDs) {
     };
 
     operation.disabled = function() {
-        var actionDisabled = _action.disabled(context.graph());
+        var actionDisabled = _action.disabled!(context.graph());
         if (actionDisabled) return actionDisabled;
 
         var osm = context.connection();
         if (osm &&
-            _action.resultingWayNodesLength &&
+            'resultingWayNodesLength' in _action &&
             _action.resultingWayNodesLength(context.graph()) > osm.maxWayNodes()) {
             return 'too_many_vertices';
         }
@@ -96,4 +98,4 @@ export function operationMerge(context, selectedIDs) {
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
-}
+};

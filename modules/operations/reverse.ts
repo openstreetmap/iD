@@ -3,9 +3,9 @@ import { actionReverse } from '../actions/reverse';
 import { behaviorOperation } from '../behavior/operation';
 
 
-export function operationReverse(context, selectedIDs) {
+export const operationReverse: iD.CreateOperation = (context, selectedIDs) => {
 
-    var operation = function() {
+    const operation: iD.Operation = function() {
         context.perform(function combinedReverseAction(graph) {
             actions().forEach(function(action) {
                 graph = action(graph);
@@ -15,7 +15,7 @@ export function operationReverse(context, selectedIDs) {
         context.validator().validate();
     };
 
-    function actions(situation) {
+    function actions(situation?: string) {
         return selectedIDs.map(function(entityID) {
             var entity = context.hasEntity(entityID);
             if (!entity) return null;
@@ -29,7 +29,7 @@ export function operationReverse(context, selectedIDs) {
             if (entity.type !== 'node' && geometry !== 'line') return null;
 
             var action = actionReverse(entityID);
-            if (action.disabled(context.graph())) return null;
+            if (action.disabled!(context.graph())) return null;
 
             return action;
         }).filter(Boolean);
@@ -38,7 +38,7 @@ export function operationReverse(context, selectedIDs) {
     function reverseTypeID() {
         var acts = actions();
         var nodeActionCount = acts.filter(function(act) {
-            var entity = context.hasEntity(act.entityID());
+            var entity = context.hasEntity(act.entityID!());
             return entity && entity.type === 'node';
         }).length;
         if (nodeActionCount === 0) return 'line';
@@ -74,4 +74,4 @@ export function operationReverse(context, selectedIDs) {
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
-}
+};

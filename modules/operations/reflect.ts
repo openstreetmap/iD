@@ -3,19 +3,10 @@ import { actionReflect } from '../actions/reflect';
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes, utilTotalExtent } from '../util/util';
 import { svgPath } from '../svg';
+import { osmWay, type EntityId } from '../osm';
 
 
-export function operationReflectShort(context, selectedIDs) {
-    return operationReflect(context, selectedIDs, 'short');
-}
-
-
-export function operationReflectLong(context, selectedIDs) {
-    return operationReflect(context, selectedIDs, 'long');
-}
-
-
-export function operationReflect(context, selectedIDs, axis) {
+const operationReflect = (axis: 'long' | 'short'): iD.CreateOperation => (context, selectedIDs) => {
     axis = axis || 'long';
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
@@ -24,9 +15,9 @@ export function operationReflect(context, selectedIDs, axis) {
 
 
     var _action = actionReflect(selectedIDs, context.projection)
-        .useLongAxis(Boolean(axis === 'long'));
+        .useLongAxis!(Boolean(axis === 'long'));
 
-    var operation = function() {
+    const operation: iD.Operation = function() {
         context.perform(_action, operation.annotation());
 
         window.setTimeout(function() {
@@ -68,7 +59,7 @@ export function operationReflect(context, selectedIDs, axis) {
             return false;
         }
 
-        function incompleteRelation(id) {
+        function incompleteRelation(id: EntityId) {
             var entity = context.entity(id);
             return entity.type === 'relation' && !entity.isComplete(context.graph());
         }
@@ -77,7 +68,7 @@ export function operationReflect(context, selectedIDs, axis) {
 
     operation.getAuxiliaryGeometry = function() {
         const graph = context.graph();
-        const [p, q] = _action.getReflectAxis(graph);
+        const [p, q] = _action.getReflectAxis!(graph);
         const previewGraph = _action(graph);
         const getPath = svgPath(context.projection, previewGraph, false);
         return [{
@@ -85,7 +76,7 @@ export function operationReflect(context, selectedIDs, axis) {
             path: `M ${p[0]} ${p[1]} L ${q[0]} ${q[1]}`,
             klass: 'reflect-axis'
         }, ...selectedIDs.map(entityId => {
-            const entity = previewGraph.hasEntity(entityId);
+            const entity = previewGraph.hasEntity<osmWay>(entityId)!;
             return {
                 id: entity.id,
                 path: getPath(entity),
@@ -114,4 +105,7 @@ export function operationReflect(context, selectedIDs, axis) {
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
-}
+};
+
+export const operationReflectShort = operationReflect('short');
+export const operationReflectLong = operationReflect('long');

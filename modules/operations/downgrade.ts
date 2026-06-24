@@ -4,14 +4,15 @@ import { modeSelect } from '../modes/select';
 import { t } from '../core/localizer';
 import { uiCmd } from '../ui/cmd';
 import { presetManager } from '../presets';
+import type { EntityId } from '../osm';
 
-export function operationDowngrade(context, selectedIDs) {
+export const operationDowngrade: iD.CreateOperation = (context, selectedIDs) => {
     var _affectedFeatureCount = 0;
     var _downgradeType = downgradeTypeForEntityIDs(selectedIDs);
 
     var _multi = _affectedFeatureCount === 1 ? 'single' : 'multiple';
 
-    function downgradeTypeForEntityIDs(entityIds) {
+    function downgradeTypeForEntityIDs(entityIds: EntityId[]) {
         var downgradeType;
         _affectedFeatureCount = 0;
         for (var i in entityIds) {
@@ -33,9 +34,10 @@ export function operationDowngrade(context, selectedIDs) {
         return downgradeType;
     }
 
-    function downgradeTypeForEntityID(entityID) {
+    function downgradeTypeForEntityID(entityID: EntityId) {
         var graph = context.graph();
         var entity = graph.entity(entityID);
+        // @ts-expect-error -- FIXME: typedefs
         var preset = presetManager.match(entity, graph);
 
         if (!preset || preset.isFallback()) return null;
@@ -65,7 +67,7 @@ export function operationDowngrade(context, selectedIDs) {
     var buildingKeysToKeep = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin', 'source', 'type', 'wheelchair'];
     var addressKeysToKeep = ['source'];
 
-    var operation = function () {
+    const operation: iD.Operation = function () {
         context.perform(function(graph) {
 
             for (var i in selectedIDs) {
@@ -73,7 +75,7 @@ export function operationDowngrade(context, selectedIDs) {
                 var type = downgradeTypeForEntityID(entityID);
                 if (!type) continue;
 
-                var tags = Object.assign({}, graph.entity(entityID).tags);  // shallow copy
+                var tags: Tags = Object.assign({}, graph.entity(entityID).tags);  // shallow copy
                 for (var key in tags) {
                     if (type === 'address' && addressKeysToKeep.indexOf(key) !== -1) continue;
                     if (type === 'building') {
@@ -110,7 +112,7 @@ export function operationDowngrade(context, selectedIDs) {
         }
         return false;
 
-        function hasWikidataTag(id) {
+        function hasWikidataTag(id: EntityId) {
             var entity = context.entity(id);
             return entity.tags.wikidata && entity.tags.wikidata.trim().length > 0;
         }
@@ -143,4 +145,4 @@ export function operationDowngrade(context, selectedIDs) {
 
 
     return operation;
-}
+};

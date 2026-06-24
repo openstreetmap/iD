@@ -6,9 +6,10 @@ import { modeBrowse } from '../modes/browse';
 import { modeSelect } from '../modes/select';
 import { uiCmd } from '../ui/cmd';
 import { utilGetAllNodes, utilTotalExtent } from '../util';
+import { EntityId } from '../osm';
 
 
-export function operationDelete(context, selectedIDs) {
+export const operationDelete: iD.CreateOperation = (context, selectedIDs) => {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
     var action = actionDeleteMultiple(selectedIDs);
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
@@ -16,7 +17,7 @@ export function operationDelete(context, selectedIDs) {
     var extent = utilTotalExtent(selectedIDs, context.graph());
 
 
-    var operation = function() {
+    const operation: iD.Operation = function () {
         var nextSelectedID;
         var nextSelectedLoc;
 
@@ -28,9 +29,9 @@ export function operationDelete(context, selectedIDs) {
             var parent = parents[0];
 
             // Select the next closest node in the way.
-            if (geometry === 'vertex') {
+            if (entity.type === 'node' && geometry === 'vertex') {
                 var nodes = parent.nodes;
-                var i = nodes.indexOf(id);
+                var i = nodes.indexOf(entity.id);
 
                 if (i === 0) {
                     i++;
@@ -100,17 +101,17 @@ export function operationDelete(context, selectedIDs) {
             return false;
         }
 
-        function hasWikidataTag(id) {
+        function hasWikidataTag(id: EntityId) {
             var entity = context.entity(id);
             return entity.tags.wikidata && entity.tags.wikidata.trim().length > 0;
         }
 
-        function incompleteRelation(id) {
+        function incompleteRelation(id: EntityId) {
             var entity = context.entity(id);
             return entity.type === 'relation' && !entity.isComplete(context.graph());
         }
 
-        function protectedMember(id) {
+        function protectedMember(id: EntityId) {
             var entity = context.entity(id);
             if (entity.type !== 'way') return false;
 
@@ -118,7 +119,7 @@ export function operationDelete(context, selectedIDs) {
             for (var i = 0; i < parents.length; i++) {
                 var parent = parents[i];
                 var type = parent.tags.type;
-                var role = parent.memberById(id).role || 'outer';
+                var role = parent.memberById(id)!.role || 'outer';
                 if (type === 'route' || type === 'boundary' || (type === 'multipolygon' && role === 'outer')) {
                     return true;
                 }
@@ -149,4 +150,4 @@ export function operationDelete(context, selectedIDs) {
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
-}
+};

@@ -3,18 +3,21 @@ import { actionOrthogonalize } from '../actions/orthogonalize';
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';
 import { svgPath } from '../svg';
+import type { geoExtent } from '../geo';
+import type { Action } from '../core/history';
+import { osmWay, type EntityId } from '../osm';
 
 
-export function operationOrthogonalize(context, selectedIDs) {
-    var _extent;
-    var _type;
+export const operationOrthogonalize: iD.CreateOperation = (context, selectedIDs) => {
+    var _extent: geoExtent | undefined;
+    var _type: 'feature' | 'corner' | undefined;
     var _actions = selectedIDs.map(chooseAction).filter(Boolean);
     var _amount = _actions.length === 1 ? 'single' : 'multiple';
     var _coords = utilGetAllNodes(selectedIDs, context.graph())
         .map(function(n) { return n.loc; });
 
 
-    function chooseAction(entityID) {
+    function chooseAction(entityID: EntityId) {
 
         var entity = context.entity(entityID);
         var geometry = entity.geometry(context.graph());
@@ -29,17 +32,17 @@ export function operationOrthogonalize(context, selectedIDs) {
         if (entity.type === 'way' && new Set(entity.nodes).size > 2 ) {
             if (_type && _type !== 'feature') return null;
             _type = 'feature';
-            return actionOrthogonalize(entityID, context.projection);
+            return actionOrthogonalize(entity.id, context.projection);
 
         // square a single vertex
-        } else if (geometry === 'vertex') {
+        } else if (entity.type === 'node' && geometry === 'vertex') {
             if (_type && _type !== 'corner') return null;
             _type = 'corner';
             var graph = context.graph();
             var parents = graph.parentWays(entity);
             if (parents.length === 1) {
                 var way = parents[0];
-                if (way.nodes.indexOf(entityID) !== -1) {
+                if (way.nodes.indexOf(entity.id) !== -1) {
                     return actionOrthogonalize(way.id, context.projection, entityID);
                 }
             }
@@ -49,12 +52,12 @@ export function operationOrthogonalize(context, selectedIDs) {
     }
 
 
-    var operation = function() {
+    const operation: iD.Operation = function() {
         if (!_actions.length) return;
 
-        var combinedAction = function(graph, t) {
+        var combinedAction: Action = function(graph, t) {
             _actions.forEach(function(action) {
-                if (!action.disabled(graph)) {
+                if (!action.disabled!(graph)) {
                     graph = action(graph, t);
                 }
             });
@@ -71,7 +74,7 @@ export function operationOrthogonalize(context, selectedIDs) {
 
 
     operation.available = function() {
-        return _actions.length && selectedIDs.length === _actions.length;
+        return !!_actions.length && selectedIDs.length === _actions.length;
     };
 
 
@@ -80,7 +83,7 @@ export function operationOrthogonalize(context, selectedIDs) {
         if (!_actions.length) return '';
 
         var actionDisableds = _actions.map(function(action) {
-            return action.disabled(context.graph());
+            return action.disabled!(context.graph());
         }).filter(Boolean);
 
         if (actionDisableds.length === _actions.length) {
@@ -120,9 +123,9 @@ export function operationOrthogonalize(context, selectedIDs) {
     operation.getAuxiliaryGeometry = function() {
         const graph = context.graph();
         return _actions.map((action, idx) => {
-            if (!action.disabled(graph)) {
-                const previewGraph = action(graph, t);
-                const way = previewGraph.hasEntity(selectedIDs[idx]);
+            if (!action.disabled!(graph)) {
+                const previewGraph = action(graph);
+                const way = previewGraph.hasEntity<osmWay>(selectedIDs[idx])!;
                 const getPath = svgPath(context.projection, previewGraph, false);
                 return {
                     id: way.id,
@@ -155,4 +158,4 @@ export function operationOrthogonalize(context, selectedIDs) {
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
-}
+};

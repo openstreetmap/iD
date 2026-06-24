@@ -66,7 +66,7 @@ export function coreTree(head: coreGraph) {
                 segments = segments.concat(entitySegments);
             }
         });
-        if (segments.length) _segmentsRTree.load(segments.map(segmentBBox).filter(x => !!x));
+        if (segments.length) _segmentsRTree.load(segments.map(segmentBBox).filter(Boolean));
     }
 
 

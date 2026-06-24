@@ -1,3 +1,5 @@
+import type { EntityId } from './osm';
+
 declare global {
   /** opposite transformation of {@link Readonly} */
   type UnReadonly<T> = {
@@ -24,6 +26,13 @@ declare global {
     (): T;
   }
 
+    // override to make Array#filter(Boolean) work,
+    // from https://github.com/mattpocock/ts-reset
+    type NonFalsy<T> = T extends false | 0 | 0n | '' | null | undefined ? never : T;
+    interface Array<T> {
+        filter<S extends T>(predicate: BooleanConstructor, thisArg?: any): NonFalsy<S>[];
+    }
+
   declare namespace iD {
     export type Context = ReturnType<typeof iD.coreContext>;
 
@@ -36,6 +45,34 @@ declare global {
     export type OsmAbstractEntity = import('./osm/abstract-entity').OsmAbstractEntity;
 
     export type Projection = import('./geo/raw_mercator').Projection;
+
+
+    type Operation = {
+        (event?: KeyboardEvent): void;
+        available(situation: string): boolean | string | undefined;
+        disabled(): false | string;
+        tooltip(): TAppend;
+        annotation(): string;
+        availableForKeypress?(): boolean;
+        icon?(): string;
+        id: string;
+        keys: string[];
+        title: TAppend;
+        behavior?: unknown;
+        mouseOnly?: boolean;
+        relatedEntityIds?(): EntityId[];
+        point?(point: Vec2): unknown;
+        getAuxiliaryGeometry?(): {
+            id: string;
+            path: string;
+            klass: string;
+        }[];
+        interrupts?: {
+            [interruptId: string]: () => Promise<void>;
+        };
+    }
+
+    type CreateOperation = (context: iD.Context, selectedIDs: EntityId[]) => Operation;
   }
 
   declare namespace d3 {

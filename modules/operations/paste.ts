@@ -5,13 +5,15 @@ import { geoExtent, geoVecSubtract } from '../geo';
 import { t } from '../core/localizer';
 import { uiCmd } from '../ui/cmd';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
+import type { Vec2 } from '../geo/vector';
+import type { EntityId } from '../osm';
 
 // see also `behaviorPaste`
-export function operationPaste(context) {
+export const operationPaste: iD.CreateOperation = (context) => {
 
-    var _pastePoint;
+    var _pastePoint: Vec2 | undefined;
 
-    var operation = function() {
+    const operation: iD.Operation = function() {
 
         if (!_pastePoint) return;
 
@@ -21,16 +23,17 @@ export function operationPaste(context) {
         var projection = context.projection;
         var extent = geoExtent();
         var oldGraph = context.copyGraph();
-        var newIDs = [];
+        var newIDs: EntityId[] = [];
 
         var action = actionCopyEntities(oldIDs, oldGraph);
         context.perform(action);
 
-        var copies = action.copies();
+        var copies = action.copies!();
         var originals = new Set();
         Object.values(copies).forEach(function(entity) { originals.add(entity.id); });
 
-        for (var id in copies) {
+        for (var _id in copies) {
+            const id = <EntityId>_id;
             var oldEntity = oldGraph.entity(id);
             var newEntity = copies[id];
 
@@ -54,7 +57,7 @@ export function operationPaste(context) {
         var delta = geoVecSubtract(_pastePoint, copyPoint);
 
         // Move the pasted objects to be anchored at the paste location
-        context.replace(actionMove(newIDs, delta, projection), operation.annotation());
+        context.replace(actionMove(newIDs, delta, projection, undefined!), operation.annotation()); // FIXME: hack
         context.enter(modeSelect(context, newIDs));
     };
 
@@ -68,7 +71,7 @@ export function operationPaste(context) {
     };
 
     operation.disabled = function() {
-        return !context.copyIDs().length;
+        return !context.copyIDs().length as false; // FIXME: hack
     };
 
     operation.tooltip = function() {
@@ -93,4 +96,4 @@ export function operationPaste(context) {
     operation.title = t.append('operations.paste.title');
 
     return operation;
-}
+};
