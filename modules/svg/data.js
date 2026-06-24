@@ -7,7 +7,7 @@ import { select as d3_select } from 'd3-selection';
 import stringify from 'fast-json-stable-stringify';
 import { gpx, kml } from '@tmcw/togeojson';
 
-import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
+import { geoExtent} from '../geo';
 import { services } from '../services';
 import { svgPath } from './helpers';
 import { utilDetect } from '../util/detect';
@@ -513,7 +513,6 @@ export function svgData(projection, context, dispatch) {
         if (!features.length) return;
 
         var map = context.map();
-        var viewport = map.trimmedExtent().polygon();
         var coords = features.reduce(function(coords, feature) {
             var geom = feature.geometry;
             if (!geom) return coords;
@@ -540,10 +539,8 @@ export function svgData(projection, context, dispatch) {
             return utilArrayUnion(coords, c);
         }, []);
 
-        if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
-            var extent = geoExtent(d3_geoBounds({ type: 'LineString', coordinates: coords }));
-            map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
-        }
+        var extent = geoExtent(d3_geoBounds({ type: 'LineString', coordinates: coords }));
+        map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
 
         return this;
     };
