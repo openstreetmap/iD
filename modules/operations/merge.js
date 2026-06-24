@@ -59,7 +59,7 @@ export function operationMerge(context, selectedIDs) {
 
     operation.disabled = function() {
         var actionDisabled = _action.disabled(context.graph());
-        if (actionDisabled) return actionDisabled;
+        if (actionDisabled) return actionDisabled.type || actionDisabled;
 
         var osm = context.connection();
         if (osm &&
@@ -80,6 +80,13 @@ export function operationMerge(context, selectedIDs) {
             if (disabled === 'restriction' || disabled === 'connectivity') {
                 return t.append('operations.merge.damage_relation',
                     { relation: presetManager.item('type/' + disabled).name() });
+            }
+            if (disabled === 'conflicting_tags') {
+                var actionDisabled = _action.disabled(context.graph());
+                if (actionDisabled.keys && actionDisabled.keys.length) {
+                    return t.append('operations.merge.conflicting_tags_details',
+                        { keys: actionDisabled.keys.join(', ') });
+                }
             }
             return t.append('operations.merge.' + disabled);
         }
