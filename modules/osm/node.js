@@ -79,11 +79,32 @@ const prototype = {
 
     // Inspect tags and geometry to determine which direction(s) this node/vertex points
     directions: function(resolver, projection) {
+        const hasPartialOneway = way => {
+            if (!way?.tags) return false;
+
+            for (const key of Object.keys(way.tags)) {
+                if (!key.startsWith('oneway:')) continue;
+
+                const value = (way.tags[key] || '').toLowerCase();
+                if (value === 'no') return true;
+                if (value === '-1' && way.isOneWayForwards()) return true;
+                if (value === 'yes' && way.isOneWayBackwards()) return true;
+            }
+            return false;
+        };
+
         /** @type {{ type: 'side' | 'turnout_side' | 'direction'; value: string }[]} */
         const rawValues = [];
+        const isAllWayStopIntersection =
+            this.isHighwayIntersection(resolver) &&
+            this.tags.highway === 'stop' &&
+            (this.tags.stop || '').toLowerCase() === 'all';
+        const isTrafficSignalsIntersection =
+            this.isHighwayIntersection(resolver) &&
+            this.tags.highway === 'traffic_signals';
 
         // which tag to use?
-        if (this.isHighwayIntersection(resolver) && (this.tags.stop || '').toLowerCase() === 'all') {
+        if (isAllWayStopIntersection) {
             // all-way stop tag on a highway intersection
             rawValues.push({
                 type: 'direction',
@@ -136,14 +157,27 @@ const prototype = {
         /** @type {{ type: 'side' | 'direction'; angle: number }[]} */
         const results = [];
 
-        const neighborNodeReducer = (neighbor, { lookBackward = true, lookForward = true } = {}) => function(collection, { nodes }) {
+        const neighborNodeReducer = (neighbor, { lookBackward = true, lookForward = true, filterOutbound = false } = {}) => function(collection, way) {
+            const nodes = way.nodes;
             nodes.forEach((_, i) => {
                 if (nodes[i] !== neighbor.id) return;  // not a match of current entity
 
-                if (lookForward && i > 0) {
+                let inboundFromPrev = true;
+                let inboundFromNext = true;
+                const isStrictOneWay = filterOutbound && way.isOneWay() && !way.isBiDirectional() && !hasPartialOneway(way);
+
+                if (isStrictOneWay) {
+                    if (way.isOneWayForwards()) {
+                        inboundFromNext = false;
+                    } else if (way.isOneWayBackwards()) {
+                        inboundFromPrev = false;
+                    }
+                }
+
+                if (lookForward && i > 0 && inboundFromPrev) {
                     collection[nodes[i - 1]] = true;  // look back to prev node
                 }
-                if (lookBackward && i < nodes.length - 1) {
+                if (lookBackward && i < nodes.length - 1 && inboundFromNext) {
                     collection[nodes[i + 1]] = true;  // look ahead to next node
                 }
             });
@@ -208,10 +242,11 @@ const prototype = {
                     (this.tags['traffic_sign:forward'] || v === (isSide ? 'right' : 'forward') || v === 'both' || v === 'all');
 
                 if (!lookForward && !lookBackward) return;
+                const shouldFilterOutbound = (isAllWayStopIntersection || isTrafficSignalsIntersection) && lookForward && lookBackward;
 
                 const nodeIds = resolver.parentWays(this)
                     .filter(way => osmShouldRenderDirection(this.tags, way.tags))
-                    .reduce(neighborNodeReducer(this, { lookForward, lookBackward }), {});
+                    .reduce(neighborNodeReducer(this, { lookForward, lookBackward, filterOutbound: shouldFilterOutbound }), {});
 
                 Object.keys(nodeIds).forEach(function(nodeId) {
                     // +90 because geoAngle returns angle from X axis, not Y (north)
