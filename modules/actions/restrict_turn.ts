@@ -1,21 +1,6 @@
 import type { Action } from '../core/history';
-import type { EntityId, NodeId, RelationId, WayId } from '../osm';
+import type { EntityId, osmTurn } from '../osm';
 import { osmRelation, type RelationMember } from '../osm/relation';
-
-export interface Turn {
-    restrictionID: RelationId;
-    from: {
-        way: WayId;
-    };
-    via: {
-        node: NodeId;
-        ways: WayId[];
-    };
-    to: {
-        way: WayId;
-    }
-}
-
 
 // `actionRestrictTurn` creates a turn restriction relation.
 //
@@ -33,7 +18,7 @@ export interface Turn {
 // relation. Normally, this will be undefined and the relation will
 // automatically be assigned a new ID.
 //
-export function actionRestrictTurn(turn: Turn, restrictionType: string, restrictionID: EntityId): Action {
+export function actionRestrictTurn(turn: osmTurn, restrictionType: string, restrictionID: EntityId): Action {
 
     const action: Action = function(graph) {
         var fromWay = graph.entity(turn.from.way);

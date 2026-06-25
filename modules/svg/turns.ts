@@ -1,18 +1,21 @@
+import type { osmTurn } from '../osm';
+import type { coreGraph } from '../core';
 import { geoAngle, geoPathLength } from '../geo';
+import type { Projection } from '../geo/raw_mercator';
 
 
-export function svgTurns(projection, context) {
+export function svgTurns(projection: Projection, context: iD.Context) {
 
-    function icon(turn) {
+    function icon(turn: osmTurn) {
         var u = turn.u ? '-u' : '';
         if (turn.no) return '#iD-turn-no' + u;
         if (turn.only) return '#iD-turn-only' + u;
         return '#iD-turn-yes' + u;
     }
 
-    function drawTurns(selection, graph, turns) {
+    function drawTurns(this: unknown, selection:d3.Selection, graph: coreGraph, turns: osmTurn[]) {
 
-        function turnTransform(d) {
+        function turnTransform(d: osmTurn) {
             var pxRadius = 50;
             var toWay = graph.entity(d.to.way);
             var toPoints = graph.childNodes(toWay)
@@ -38,7 +41,7 @@ export function svgTurns(projection, context) {
         var touchLayer = selection.selectAll('.layer-touch.turns');
 
         // Draw turns..
-        var groups = drawLayer.selectAll('g.turn')
+        var groups = drawLayer.selectAll<SVGGElement, osmTurn>('g.turn')
             .data(turns, function(d) { return d.key; });
 
         // exit
@@ -89,7 +92,7 @@ export function svgTurns(projection, context) {
 
         // Draw touch targets..
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
-        groups = touchLayer.selectAll('g.turn')
+        groups = touchLayer.selectAll<SVGGElement, osmTurn>('g.turn')
             .data(turns, function(d) { return d.key; });
 
         // exit
