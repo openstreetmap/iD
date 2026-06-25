@@ -2,7 +2,7 @@
 
 // cdns for external data packages
 const presetsCdnUrl = ENV__ID_PRESETS_CDN_URL
-  || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}/';
+  || 'https://cdn.jsdelivr.net/gh/openstreetmap/id-tagging-schema@4caef0205e5bd8ca1809d17c85a0624c8f282826/';
 const ociCdnUrl = ENV__ID_OCI_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/osm-community-index@{version}/';
 const wmfSitematrixCdnUrl = ENV__ID_WMF_SITEMATRIX_CDN_URL

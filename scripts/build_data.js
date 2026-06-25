@@ -21,7 +21,7 @@ dotenv.config({ quiet: true });
 
 const presetsVersion = packageJson.devDependencies['@openstreetmap/id-tagging-schema'];
 /* eslint-disable no-process-env */
-const presetsUrl = (process.env.ID_PRESETS_CDN_URL || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}').replace('{presets_version}', presetsVersion);
+const presetsUrl = (process.env.ID_PRESETS_CDN_URL || 'https://cdn.jsdelivr.net/gh/openstreetmap/id-tagging-schema@4caef0205e5bd8ca1809d17c85a0624c8f282826').replace('{presets_version}', presetsVersion);
 /* eslint-enable no-process-env */
 
 let _currBuild = null;
