@@ -2,11 +2,14 @@ import { select as d3_select } from 'd3-selection';
 
 import { svgPointTransform } from './helpers';
 import { geoMetersToLat } from '../geo';
+import type { Projection } from '../geo/raw_mercator';
+import type { osmNode } from '../osm';
+import type { Vec2 } from '../geo/vector';
 
 
-export function svgGeolocate(projection) {
-    var layer = d3_select(null);
-    var _position;
+export function svgGeolocate(projection: Projection) {
+    var layer = d3_select<SVGGElement, 0>(null!);
+    var _position: GeolocationPosition;
 
 
     function init() {
@@ -40,13 +43,13 @@ export function svgGeolocate(projection) {
         layer.style('display', 'none');
     }
 
-    function transform(d) {
+    function transform(d: Pick<osmNode, 'loc'>) {
         return svgPointTransform(projection)(d);
     }
 
-    function accuracy(accuracy, loc) { // converts accuracy to pixels...
+    function accuracy(accuracy: number, loc: Vec2) { // converts accuracy to pixels...
         var degreesRadius = geoMetersToLat(accuracy),
-            tangentLoc = [loc[0], loc[1] + degreesRadius],
+            tangentLoc: Vec2 = [loc[0], loc[1] + degreesRadius],
             projectedTangent = projection(tangentLoc),
             projectedLoc = projection([loc[0], loc[1]]);
 
@@ -55,9 +58,9 @@ export function svgGeolocate(projection) {
     }
 
     function update() {
-        var geolocation = { loc: [_position.coords.longitude, _position.coords.latitude] };
+        var geolocation: Pick<osmNode, 'loc'> = { loc: [_position.coords.longitude, _position.coords.latitude] };
 
-        var groups = layer.selectAll('.geolocations').selectAll('.geolocation')
+        var groups = layer.selectAll<SVGGElement, any>('.geolocations').selectAll<SVGGElement, any>('.geolocation')
             .data([geolocation]);
 
         groups.exit()
@@ -91,10 +94,10 @@ export function svgGeolocate(projection) {
         layer.select('.geolocate-radius').attr('r', accuracy(_position.coords.accuracy, geolocation.loc));
     }
 
-    function drawLocation(selection) {
+    function drawLocation(selection: d3.Selection) {
         var enabled = svgGeolocate.enabled;
 
-        layer = selection.selectAll('.layer-geolocate')
+        layer = selection.selectAll<SVGGElement, 0>('.layer-geolocate')
             .data([0]);
 
         layer.exit()
@@ -119,7 +122,7 @@ export function svgGeolocate(projection) {
         }
     }
 
-    drawLocation.enabled = function (position, enabled) {
+    drawLocation.enabled = function (position: GeolocationPosition, enabled: boolean) {
         if (!arguments.length) return svgGeolocate.enabled;
         _position = position;
         svgGeolocate.enabled = enabled;
@@ -135,3 +138,5 @@ export function svgGeolocate(projection) {
     init();
     return drawLocation;
 }
+svgGeolocate.enabled = false;
+svgGeolocate.initialized = false;

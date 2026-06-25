@@ -335,7 +335,7 @@ export function coreContext() {
     dispatch.call('enter', this, _mode);
   };
 
-  /** @returns {string[]} */
+  /** @returns {import('../osm').EntityId[]} */
   context.selectedIDs = () => (_mode && _mode.selectedIDs && _mode.selectedIDs()) || [];
   context.activeID = () => _mode && _mode.activeID && _mode.activeID();
 
@@ -407,10 +407,11 @@ export function coreContext() {
 
 
   /* Map */
-  /** @type {ReturnType<rendererMap>} */
+  /** @type {ReturnType<typeof rendererMap>} */
   let _map;
   context.map = () => _map;
   context.layers = () => _map.layers();
+  /** @returns {d3.Selection} */
   context.surface = () => _map.surface;
   context.editableDataEnabled = () => _map.editableDataEnabled();
   context.surfaceRect = () => _map.surface.node().getBoundingClientRect();

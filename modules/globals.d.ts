@@ -64,7 +64,7 @@ declare global {
         point?(point: Vec2): unknown;
         getAuxiliaryGeometry?(): {
             id: string;
-            path: string;
+            path: string | null;
             klass: string;
         }[];
         interrupts?: {
@@ -79,7 +79,7 @@ declare global {
     export type Selection<T = any> = import('d3').Selection<
       T,
       any,
-      unknown,
+      any,
       unknown
     >;
 
@@ -89,6 +89,10 @@ declare global {
     interface ObjectConstructor {
         // custom overload so that `Object.keys(Record<T, …>)` returns `T[]`
         keys<T>(o: T extends Record<infer K, unknown> ? [K] extends [string] ? T : never : never): (keyof T)[];
+    }
+
+    interface ParentNode extends Node {
+        __data__: any;
     }
 }
 

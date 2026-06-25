@@ -1,5 +1,16 @@
+import type { Vec2 } from '../geo/vector';
+
+type Props = Omit<QAItem, 'loc' | 'service' | 'itemType' | 'id'>
+
 export class QAItem {
-  constructor(loc, service, itemType, id, props) {
+  static nextId: number;
+  loc: Vec2;
+  service: any;
+  itemType: string;
+  id: string;
+  icon?: unknown;
+
+  constructor(loc: Vec2, service: any, itemType: string, id: string, props: Props) {
     // Store required properties
     this.loc = loc;
     this.service = service.title;
@@ -16,10 +27,11 @@ export class QAItem {
     }
   }
 
-  update(props) {
+  update(props: Props) {
     // You can't override this initial information
     const { loc, service, itemType, id } = this;
 
+    // @ts-expect-error -- hack
     Object.keys(props).forEach(prop => this[prop] = props[prop]);
 
     this.loc = loc;
