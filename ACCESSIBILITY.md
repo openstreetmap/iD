@@ -144,7 +144,7 @@ iD is largely platform-independent, meaning it should work on any system that ru
 | 🟠 | Slow connection | iD downloads a lot of data all throughout use, so slow connections can significantly slow down mapping | [#7788](https://github.com/openstreetmap/iD/issues/7788) |
 | ✅ | Intermittent connection | Downloaded data can be edited during temporary connection losses. A banner message is displayed. Reconnection is attempted automatically and a "Retry" button is also provided |
 | 🟠 | [Mobile phone connection](https://en.wikipedia.org/wiki/Cellular_network) | A fast, reliable phone network can be used for mapping. However, iD downloads data indiscriminately and can thus gobble up limited data plans | [#7788](https://github.com/openstreetmap/iD/issues/7788) |
-| 🤷 | [Tor](https://en.wikipedia.org/wiki/Tor_%28anonymity_network%29) connection | |
+| ✅ | [Tor](https://en.wikipedia.org/wiki/Tor_%28anonymity_network%29) connection | No special support is needed. Note that OpenStreetMap account creation is not part of iD. |
 
 <br/>
 
