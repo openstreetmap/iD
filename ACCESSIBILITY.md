@@ -185,7 +185,7 @@ translated to one or more languages.
 | ✅ | Help docs and walkthrough | | |
 | ✅ | Letter hotkeys | E.g. <kbd>S</kbd> for Straighten makes sense in English, but not every language | |
 | ✅ | Preset names and search terms | | |
-| 🟠 | Fields | Combo fields may show raw tag values. The Wikipedia field lists Wiki names in their native languages | [#2708](https://github.com/openstreetmap/iD/issues/2708) |
+| 🟠 | Fields | Fields may show raw tag values. The Wikipedia field lists Wiki names in their native languages | [#1829 in tagging](https://github.com/openstreetmap/id-tagging-schema/issues/1829) |
 | ❌ | Tags | OpenStreetMap tags are English-only as a limitation of the database | |
 | ❌ | Relation member roles | OpenStreetMap roles are also limited to English | |
 | 🟠 | Imagery metadata | | [#7724](https://github.com/openstreetmap/iD/issues/7724) |
