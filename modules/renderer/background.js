@@ -35,11 +35,7 @@ export function rendererBackground(context) {
       .then(async sources => {
         if (_imageryIndex) return _imageryIndex;
 
-        _imageryIndex = {
-          imagery: sources,
-          features: {}
-        };
-
+        const featuresById = {};
         // use which-polygon to support efficient index and querying for imagery
         const features = sources.map(source => {
           if (!source.polygon) return null;
@@ -56,7 +52,7 @@ export function rendererBackground(context) {
             geometry: { type: 'MultiPolygon', coordinates: rings }
           };
 
-          _imageryIndex.features[source.id] = feature;
+          featuresById[source.id] = feature;
           return feature;
 
         }).filter(Boolean);
@@ -67,19 +63,21 @@ export function rendererBackground(context) {
           }
         }
 
-        _imageryIndex.query = whichPolygon({ type: 'FeatureCollection', features: features });
-
-
-        // Instantiate `rendererBackgroundSource` objects for each source
-        _imageryIndex.backgrounds = sources.map(source => {
-          if (source.type === 'bing') {
-            return rendererBackgroundSource.Bing(source, dispatch);
-          } else if (/^EsriWorldImagery/.test(source.id)) {
-            return rendererBackgroundSource.Esri(source);
-          } else {
-            return rendererBackgroundSource(source);
-          }
-        });
+        _imageryIndex = {
+          imagery: sources,
+          features: featuresById,
+          query: whichPolygon({ type: 'FeatureCollection', features: features }),
+          backgrounds: sources.map(source => {
+            // Instantiate `rendererBackgroundSource` objects for each source
+            if (source.type === 'bing') {
+              return rendererBackgroundSource.Bing(source, dispatch);
+            } else if (/^EsriWorldImagery/.test(source.id)) {
+              return rendererBackgroundSource.Esri(source);
+            } else {
+              return rendererBackgroundSource(source);
+            }
+          })
+        };
 
         // Add 'None'
         _imageryIndex.backgrounds.unshift(rendererBackgroundSource.None());

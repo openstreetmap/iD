@@ -75,6 +75,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@brianstrauch]: https://github.com/brianstrauch
 
 
+# 2.41.2
+##### 2026-Jun-29
+
+* Prevent an intermittent crash when loading iD on Firefox ([#12494])
+
+[#12494]: https://github.com/openstreetmap/iD/issues/12494
+
+
 # 2.41.1
 ##### 2026-Jun-23
 
