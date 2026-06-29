@@ -39,7 +39,6 @@ export function geoVecInterp(a: Vec2, b: Vec2, t: number): Vec2 {
     ];
 }
 
-// http://jsperf.com/id-dist-optimization
 export function geoVecLength(a: Vec2, b?: Vec2) {
     return Math.sqrt(geoVecLengthSquare(a,b));
 }
