@@ -161,7 +161,12 @@ export function uiFieldWikidata(field, context) {
                         .attr('class', 'localized-text')
                         .attr('lang', item.display.label.language)
                         .text(item.display.label.value),
-                    description: item.display.description && item.display.description.value,
+                    description: item.display.description ? (
+                        selection => selection.append('span')
+                            .attr('class', 'localized-text')
+                            .attr('lang', item.display.description.language)
+                            .text(item.display.description.value)
+                    ) : undefined,
                     title: item.id + (item.aliases?.length > 0 ? ' (' + item.aliases.join(', ') + ')' : ''),
                     terms: item.aliases
                 };
