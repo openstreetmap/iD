@@ -847,7 +847,7 @@ en:
       description: Show Location Panel
       tooltip: Show coordinates and regional details.
     fix_misalignment: Imagery Offset
-    offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
+    offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values."
     offset_label: "Adjust Imagery Offset"
     nudge:
       top: "nudge top"
