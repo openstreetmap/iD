@@ -7,7 +7,7 @@ import {
 
 import { utilArrayIdentical } from '../util/array';
 import { utilFastMouse } from '../util';
-import { osmEntity, osmNote, QAItem } from '../osm';
+import { OsmAbstractEntity, osmNote, QAItem } from '../osm';
 import { services } from '../services';
 import { uiDataEditor } from './data_editor';
 import { uiFeatureList } from './feature_list';
@@ -225,7 +225,7 @@ export function uiSidebar(context) {
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
 
-            } else if (!_current && (datum instanceof osmEntity)) {
+            } else if (!_current && (datum instanceof OsmAbstractEntity)) {
                 featureListWrap
                     .classed('inspector-hidden', true);
 

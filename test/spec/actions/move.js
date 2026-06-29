@@ -84,15 +84,15 @@ describe('iD.actionMove', function() {
         //          |       |
         // u0 ----- b ----- u1
 
-        const b = iD.osmNode({ loc: [0, 0] });
-        const d = iD.osmNode({ loc: [0, 8] });
-        const moved = iD.osmWay({ nodes: [b.id, d.id] });
+        const b = new iD.osmNode({ loc: [0, 0] });
+        const d = new iD.osmNode({ loc: [0, 8] });
+        const moved = new iD.osmWay({ nodes: [b.id, d.id] });
 
-        const u0 = iD.osmNode({ loc: [-10,  0] });
-        const u1 = iD.osmNode({ loc: [ 10,  0] });
-        const u2 = iD.osmNode({ loc: [ 10, 10] });
-        const u3 = iD.osmNode({ loc: [-10, 10] });
-        const unmoved = iD.osmWay({ nodes: [u0.id, b.id, u1.id, u2.id, u3.id] });
+        const u0 = new iD.osmNode({ loc: [-10,  0] });
+        const u1 = new iD.osmNode({ loc: [ 10,  0] });
+        const u2 = new iD.osmNode({ loc: [ 10, 10] });
+        const u3 = new iD.osmNode({ loc: [-10, 10] });
+        const unmoved = new iD.osmWay({ nodes: [u0.id, b.id, u1.id, u2.id, u3.id] });
 
         const graph = new iD.coreGraph([
             b, d, moved,
