@@ -37629,7 +37629,7 @@ Please report this to https://github.com/markedjs/marked.`, e3) {
     "package.json"() {
       package_default = {
         name: "@openstreetmap/id",
-        version: "2.41.1",
+        version: "2.41.2",
         description: "A friendly editor for OpenStreetMap",
         main: "dist/iD.min.js",
         repository: {
@@ -50471,6 +50471,10 @@ Please report this to https://github.com/markedjs/marked.`, e3) {
     };
     background.sources = (extent2, zoom, includeCurrent) => {
       if (!_imageryIndex) return [];
+      if (!_imageryIndex.query) {
+        console.error("imagery index improperly initialized", JSON.stringify(_imageryIndex), _imageryIndex.query);
+        return [];
+      }
       let visible = {};
       (_imageryIndex.query.bbox(extent2.rectangle(), true) || []).forEach((d4) => visible[d4.id] = true);
       const currSource = baseLayer.source();
