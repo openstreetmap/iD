@@ -263,6 +263,12 @@ export function rendererBackground(context) {
 
   background.sources = (extent, zoom, includeCurrent) => {
     if (!_imageryIndex) return [];   // called before init()?
+    if (!_imageryIndex.query) {
+        // https://github.com/openstreetmap/iD/issues/12494
+        // eslint-disable-next-line no-console
+        console.error('imagery index improperly initialized', JSON.stringify(_imageryIndex), _imageryIndex.query);
+        return [];
+    }
 
     let visible = {};
     (_imageryIndex.query.bbox(extent.rectangle(), true) || [])
