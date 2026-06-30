@@ -344,7 +344,7 @@ export function svgLabels(projection, context) {
                     var renderAs = renderNodeAs[entity.id];
                     if (renderAs.geometry === 'vertex' && zoom < 17) continue;
                     while (renderAs.isAddr && width > 36) {
-                        name = `${name.substring(0, name.replace(/…$/, '').length - 1)}…`;
+                        name = `${Array.from(name.replace(/…$/, '')).slice(0, -1).join('')}…`;
                         width = textWidth(name, fontSize, selection.select('g.layer-osm.labels').node());
                     }
 
