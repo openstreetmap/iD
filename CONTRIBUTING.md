@@ -152,7 +152,7 @@ Translations are managed using the
 the [iD's project page](https://app.transifex.com/openstreetmap/id-editor/) and
 click **Translate** to start translating. The registration form asks for a "business email" but you may provide
 a regular one. If you try to join via the Transifex home page "Sign up" link you may be unable to create an
-account. After registration your account must be approved; you won't be able to translate until that happens.
+account. After registration your account must be manually approved; you won't be able to translate until that happens.
 
 Translations are divided into separate resources:
 
