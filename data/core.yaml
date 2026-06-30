@@ -847,7 +847,7 @@ en:
       description: Show Location Panel
       tooltip: Show coordinates and regional details.
     fix_misalignment: Imagery Offset
-    offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
+    offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values."
     offset_label: "Adjust Imagery Offset"
     nudge:
       top: "nudge top"
@@ -984,6 +984,9 @@ en:
       header: Custom Background Settings
       instructions:
         info: Enter a tile URL template below.
+        license_disclaimer: Make sure that the used background imagery is allowed to be used for mapping.
+        license_faq: Read more.
+        license_faq_url: "https://wiki.openstreetmap.org/wiki/FAQ#What_images_and_maps_may_I_use_to_make_maps_from?"
         wms:
           tokens_label: "Supported WMS tokens:"
           tokens:
@@ -1064,7 +1067,7 @@ en:
       format: "{place}{separator}{region}"
       separator: ", "
     help_html: Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.
-    help_link_text: Details
+    help_link_text: Details on how to refresh the page to see your changes.
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     view_on_osm: "View Changes on OSM"
     changeset_id: "Your changeset #: {changeset_id}"
@@ -1130,7 +1133,6 @@ en:
     tooltip: "Streetside photos from Microsoft"
     title: "Bing Streetside"
     report: Report a privacy concern with this image
-    view_on_bing: "View on Bing Maps"
     hires: "High resolution"
   vegbilder:
     title: "Vegbilder"
@@ -1544,6 +1546,8 @@ en:
         reference: Intersecting highways should share a junction vertex.
     area_as_point:
       message: '{feature} should be an area, not a point'
+    area_as_line:
+      message: '{feature} should be a closed area, not a line'
     close_nodes:
       title: "Very Close Points"
       tip: "Find redundant and crowded points"
@@ -1633,9 +1637,14 @@ en:
         message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
       website:
-        message: '{feature} has an invalid URL'
-        message_multi: '{feature} has multiple invalid URLs'
+        message: '{feature} has an invalid URL in {where}'
+        message_multi: '{feature} has multiple invalid URLs in {where}'
         reference: 'URLs must start with "http://" or "https://".'
+      wikimedia_commons:
+        message: '{feature} has a suspicious Wikimedia Commons tag'
+        reference:
+          wrong_key: 'Wikimedia Commons links should preferably use the wikimedia_commons tag.'
+          wrong_value: 'Wikimedia Commons tags should only contain the file or category instead of the full URL.'
     line_as_area:
       message: '{feature} should be a line, not an area'
     line_as_point:
@@ -1782,6 +1791,8 @@ en:
         title: Continue drawing from end
       convert_to_line:
         title: Convert this to a line
+      convert_to_area:
+        title: Convert this to an area
         annotation: Converted an area to a line.
       delete_feature:
         title: Delete this feature
@@ -1789,6 +1800,8 @@ en:
         title: Extract this point
       ignore_issue:
         title: Ignore this issue
+      ignore_suggestion:
+        title: Ignore this suggestion
       merge_close_vertices:
         annotation: Merged very close points in a way.
       merge_points:
@@ -2195,7 +2208,7 @@ en:
         title: "Selecting features"
         select_one: "Select a single feature"
         select_multi: "Select multiple features"
-        lasso: "Draw a selection lasso around features"
+        lasso: "Draw a selection lasso to select points in an area"
         search: "Find features matching search text"
       with_selected:
         title: "With features selected"

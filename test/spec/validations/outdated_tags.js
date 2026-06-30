@@ -4,7 +4,7 @@ import { setTimeout } from 'node:timers/promises';
 describe('iD.validations.outdated_tags', function () {
     var context;
 
-    before(function() {
+    beforeEach(() => {
         iD.fileFetcher.cache().deprecated = [
           { old: { building: 'roof' }, replace: { building: 'roof', layer: '1' } },
           { old: { highway: 'no' } },
@@ -28,7 +28,7 @@ describe('iD.validations.outdated_tags', function () {
         };
     });
 
-    after(function() {
+    afterEach(() => {
         iD.fileFetcher.cache().deprecated = [];
         delete iD.services.nsi;
     });
@@ -39,9 +39,9 @@ describe('iD.validations.outdated_tags', function () {
 
 
     function createWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = new iD.osmNode({id: 'n-2', loc: [4,5]});
+        var w = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -51,11 +51,11 @@ describe('iD.validations.outdated_tags', function () {
     }
 
     function createRelation(wayTags, relationTags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3', 'n-1'], tags: wayTags});
-        var r = iD.osmRelation({id: 'r-1', members: [{id: 'w-1'}], tags: relationTags});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = new iD.osmNode({id: 'n-2', loc: [4,5]});
+        var n3 = new iD.osmNode({id: 'n-3', loc: [5,5]});
+        var w = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3', 'n-1'], tags: wayTags});
+        var r = new iD.osmRelation({id: 'r-1', members: [{id: 'w-1'}], tags: relationTags});
 
         context.perform(
             iD.actionAddEntity(n1),

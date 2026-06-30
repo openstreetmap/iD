@@ -636,7 +636,7 @@ export function validationCrossingWays(context) {
                             // the loc that would result in the full expected length
                             var idealNodeLoc = locGetter(idealLengthMeters);
 
-                            newNode = osmNode();
+                            newNode = new osmNode();
                             graph = actionAddMidpoint({ loc: idealNodeLoc, edge: edge }, newNode)(graph);
 
                         } else {
@@ -661,7 +661,7 @@ export function validationCrossingWays(context) {
                                 var insetLength = crossingToEdgeEndDistance - minEdgeLengthMeters;
                                 if (insetLength > minEdgeLengthMeters) {
                                     var insetNodeLoc = locGetter(insetLength);
-                                    newNode = osmNode();
+                                    newNode = new osmNode();
                                     graph = actionAddMidpoint({ loc: insetNodeLoc, edge: edge }, newNode)(graph);
                                 }
                             }
@@ -740,7 +740,7 @@ export function validationCrossingWays(context) {
                 context.perform(
                     function actionConnectCrossingWays(graph) {
                         // create the new node for the points
-                        var node = osmNode({ loc: loc, tags: connectionTags });
+                        var node = new osmNode({ loc: loc, tags: connectionTags });
                         graph = graph.replace(node);
 
                         var nodesToMerge = [node.id];
@@ -774,7 +774,7 @@ export function validationCrossingWays(context) {
         return fix;
     }
 
-    /** @returns {osmEntity | undefined} */
+    /** @returns {iD.OsmEntity | undefined} */
     function getSelectedFeature() {
         const mode = context.mode();
         if (!mode || mode.id !== 'select') return undefined;

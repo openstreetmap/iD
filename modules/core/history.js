@@ -6,12 +6,13 @@ import { asyncPrefs, prefs } from './preferences';
 import { coreDifference } from './difference';
 import { coreGraph } from './graph';
 import { coreTree } from './tree';
-import { osmEntity } from '../osm/entity';
+import { createEntity } from '../osm/create-entity';
 import { uiLoading } from '../ui/loading';
 import {
     utilArrayDifference, utilArrayGroupBy, utilArrayUnion,
     utilObjectOmit, utilRebind, utilSessionMutex
 } from '../util';
+import { osmIdManager } from '../osm';
 
 
 export function coreHistory(context) {
@@ -351,7 +352,7 @@ export function coreHistory(context) {
                 _stack = _checkpoints[key].stack;
                 _index = _checkpoints[key].index;
             } else {
-                _stack = [{graph: coreGraph()}];
+                _stack = [{graph: new coreGraph()}];
                 _index = 0;
                 _tree = coreTree(_stack[0].graph);
                 _checkpoints = {};
@@ -456,7 +457,7 @@ export function coreHistory(context) {
                 Object.keys(i.graph.entities).forEach(function(id) {
                     var entity = i.graph.entities[id];
                     if (entity) {
-                        var key = osmEntity.key(entity);
+                        var key = osmIdManager.key(entity);
                         allEntities[key] = entity;
                         modified.push(key);
                     } else {
@@ -505,7 +506,7 @@ export function coreHistory(context) {
                 entities: Object.values(allEntities),
                 baseEntities: Object.values(baseEntities),
                 stack: s,
-                nextIDs: osmEntity.id.next,
+                nextIDs: osmIdManager.next,
                 index: _index,
                 // note the time the changes were saved
                 timestamp: (new Date()).getTime()
@@ -516,21 +517,22 @@ export function coreHistory(context) {
         fromJSON: function(h, loadChildNodes) {
             var loadComplete = true;
 
-            osmEntity.id.next = h.nextIDs;
+            osmIdManager.next = h.nextIDs;
             _index = h.index;
 
             if (h.version === 2 || h.version === 3) {
                 var allEntities = {};
 
-                h.entities.forEach(function(entity) {
-                    allEntities[osmEntity.key(entity)] = osmEntity(entity);
+                h.entities.forEach(function(rawEntity) {
+                    const entity = createEntity(rawEntity);
+                    allEntities[osmIdManager.key(entity)] = entity;
                 });
 
                 if (h.version === 3) {
                     // This merges originals for changed entities into the base of
                     // the _stack even if the current _stack doesn't have them (for
                     // example when iD has been restarted in a different region)
-                    var baseEntities = h.baseEntities.map(function(d) { return osmEntity(d); });
+                    var baseEntities = h.baseEntities.map(function(d) { return createEntity(d); });
                     var stack = _stack.map(function(state) { return state.graph; });
                     _stack[0].graph.rebase(baseEntities, stack, true);
                     _tree.rebase(baseEntities, true);
@@ -603,7 +605,7 @@ export function coreHistory(context) {
                     }
 
                     return {
-                        graph: coreGraph(_stack[0].graph).load(entities),
+                        graph: new coreGraph(_stack[0].graph).load(entities),
                         annotation: d.annotation,
                         imageryUsed: d.imageryUsed,
                         photoOverlaysUsed: d.photoOverlaysUsed,
@@ -618,10 +620,10 @@ export function coreHistory(context) {
 
                     for (var i in d.entities) {
                         var entity = d.entities[i];
-                        entities[i] = entity === 'undefined' ? undefined : osmEntity(entity);
+                        entities[i] = entity === 'undefined' ? undefined : createEntity(entity);
                     }
 
-                    d.graph = coreGraph(_stack[0].graph).load(entities);
+                    d.graph = new coreGraph(_stack[0].graph).load(entities);
                     return d;
                 });
             }

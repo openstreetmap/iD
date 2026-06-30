@@ -18,10 +18,10 @@ describe('iD.svgLines', function () {
 
 
     it('adds way and line classes', function () {
-        var a = iD.osmNode({loc: [0, 0]});
-        var b = iD.osmNode({loc: [1, 1]});
-        var line = iD.osmWay({nodes: [a.id, b.id]});
-        var graph = iD.coreGraph([a, b, line]);
+        var a = new iD.osmNode({loc: [0, 0]});
+        var b = new iD.osmNode({loc: [1, 1]});
+        var line = new iD.osmWay({nodes: [a.id, b.id]});
+        var graph = new iD.coreGraph([a, b, line]);
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
@@ -30,11 +30,11 @@ describe('iD.svgLines', function () {
     });
 
     it('adds relation and area classes for untagged line member of multipolygon', function () {
-        var a = iD.osmNode({loc: [0, 0]});
-        var b = iD.osmNode({loc: [1, 1]});
-        var line = iD.osmWay({nodes: [a.id, b.id]});
-        var relation = iD.osmRelation({members: [{id: line.id}], tags: {type: 'multipolygon', natural: 'wood'}});
-        var graph = iD.coreGraph([a, b, line, relation]);
+        var a = new iD.osmNode({loc: [0, 0]});
+        var b = new iD.osmNode({loc: [1, 1]});
+        var line = new iD.osmWay({nodes: [a.id, b.id]});
+        var relation = new iD.osmRelation({members: [{id: line.id}], tags: {type: 'multipolygon', natural: 'wood'}});
+        var graph = new iD.coreGraph([a, b, line, relation]);
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
@@ -43,10 +43,10 @@ describe('iD.svgLines', function () {
     });
 
     it('adds tag classes', function () {
-        var a = iD.osmNode({loc: [0, 0]});
-        var b = iD.osmNode({loc: [1, 1]});
-        var line = iD.osmWay({nodes: [a.id, b.id], tags: {highway: 'residential'}});
-        var graph = iD.coreGraph([a, b, line]);
+        var a = new iD.osmNode({loc: [0, 0]});
+        var b = new iD.osmNode({loc: [1, 1]});
+        var line = new iD.osmWay({nodes: [a.id, b.id], tags: {highway: 'residential'}});
+        var graph = new iD.coreGraph([a, b, line]);
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
@@ -55,11 +55,11 @@ describe('iD.svgLines', function () {
     });
 
     it('adds stroke classes for the tags of the parent relation of multipolygon members', function() {
-        var a = iD.osmNode({loc: [0, 0]});
-        var b = iD.osmNode({loc: [1, 1]});
-        var line = iD.osmWay({nodes: [a.id, b.id]});
-        var relation = iD.osmRelation({members: [{id: line.id}], tags: {type: 'multipolygon', natural: 'wood'}});
-        var graph = iD.coreGraph([a, b, line, relation]);
+        var a = new iD.osmNode({loc: [0, 0]});
+        var b = new iD.osmNode({loc: [1, 1]});
+        var line = new iD.osmWay({nodes: [a.id, b.id]});
+        var relation = new iD.osmRelation({members: [{id: line.id}], tags: {type: 'multipolygon', natural: 'wood'}});
+        var graph = new iD.coreGraph([a, b, line, relation]);
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
@@ -67,13 +67,13 @@ describe('iD.svgLines', function () {
     });
 
     describe('z-indexing', function() {
-        var graph = iD.coreGraph([
-            iD.osmNode({id: 'a', loc: [0, 0]}),
-            iD.osmNode({id: 'b', loc: [1, 1]}),
-            iD.osmNode({id: 'c', loc: [0, 0]}),
-            iD.osmNode({id: 'd', loc: [1, 1]}),
-            iD.osmWay({id: 'lo', tags: {highway: 'residential', layer: '0'}, nodes: ['a', 'b']}),
-            iD.osmWay({id: 'hi', tags: {highway: 'residential', layer: '1'}, nodes: ['c', 'd']})
+        var graph = new iD.coreGraph([
+            new iD.osmNode({id: 'a', loc: [0, 0]}),
+            new iD.osmNode({id: 'b', loc: [1, 1]}),
+            new iD.osmNode({id: 'c', loc: [0, 0]}),
+            new iD.osmNode({id: 'd', loc: [1, 1]}),
+            new iD.osmWay({id: 'lo', tags: {highway: 'residential', layer: '0'}, nodes: ['a', 'b']}),
+            new iD.osmWay({id: 'hi', tags: {highway: 'residential', layer: '1'}, nodes: ['c', 'd']})
         ]);
 
         it('stacks higher lines above lower ones in a single render', function () {
@@ -112,10 +112,10 @@ describe('iD.svgLines', function () {
     });
 
     it('rounds layers down to the nearest whole number for rendering', () => {
-        const graph = iD.coreGraph([
-            iD.osmNode({id: 'a', loc: [0, 0]}),
-            iD.osmNode({id: 'b', loc: [1, 1]}),
-            iD.osmWay({id: 'w1', tags: {highway: 'residential', layer: '-2.5'}, nodes: ['a', 'b']}),
+        const graph = new iD.coreGraph([
+            new iD.osmNode({id: 'a', loc: [0, 0]}),
+            new iD.osmNode({id: 'b', loc: [1, 1]}),
+            new iD.osmWay({id: 'w1', tags: {highway: 'residential', layer: '-2.5'}, nodes: ['a', 'b']}),
         ]);
         surface.call(iD.svgLines(projection, context), graph, [graph.entity('w1')], none);
 
@@ -130,15 +130,15 @@ describe('iD.svgLines', function () {
             // use 1e-2 to make sure segments are long enough to get
             // markers, but not so long that they get split and have
             // multiple marker segments.
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
-            var c = iD.osmNode({id: 'c', loc: [0, 1e-2]});
+            var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = new iD.osmNode({id: 'b', loc: [1e-2, 0]});
+            var c = new iD.osmNode({id: 'c', loc: [0, 1e-2]});
 
-            var i_o = iD.osmWay({id: 'implied-oneway', tags: {waterway: 'stream'}, nodes: [a.id, b.id]});
-            var e_o = iD.osmWay({id: 'explicit-oneway', tags: {highway: 'residential', oneway: 'yes'}, nodes: [a.id, c.id]});
-            var e_b = iD.osmWay({id: 'explicit-backwards', tags: {highway: 'residential', oneway: '-1'}, nodes: [b.id, c.id]});
+            var i_o = new iD.osmWay({id: 'implied-oneway', tags: {waterway: 'stream'}, nodes: [a.id, b.id]});
+            var e_o = new iD.osmWay({id: 'explicit-oneway', tags: {highway: 'residential', oneway: 'yes'}, nodes: [a.id, c.id]});
+            var e_b = new iD.osmWay({id: 'explicit-backwards', tags: {highway: 'residential', oneway: '-1'}, nodes: [b.id, c.id]});
 
-            var graph = iD.coreGraph([a, b, c, i_o, e_o, e_b]);
+            var graph = new iD.coreGraph([a, b, c, i_o, e_o, e_b]);
 
             surface.call(iD.svgLines(projection, context), graph, [i_o, e_o, e_b], all);
 
@@ -151,12 +151,12 @@ describe('iD.svgLines', function () {
         });
 
         it('has two marker layers for alternating oneway ways', function() {
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
+            var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = new iD.osmNode({id: 'b', loc: [1e-2, 0]});
 
-            var e_a = iD.osmWay({id: 'explicit-alternating', tags: {highway: 'residential', oneway: 'alternating'}, nodes: [a.id, b.id]});
+            var e_a = new iD.osmWay({id: 'explicit-alternating', tags: {highway: 'residential', oneway: 'alternating'}, nodes: [a.id, b.id]});
 
-            var graph = iD.coreGraph([a, b, e_a]);
+            var graph = new iD.coreGraph([a, b, e_a]);
 
             surface.call(iD.svgLines(projection, context), graph, [e_a], all);
 
@@ -167,14 +167,14 @@ describe('iD.svgLines', function () {
         });
 
         it('has no marker layer for oneway=no ways', function() {
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
-            var c = iD.osmNode({id: 'c', loc: [0, 1e-2]});
+            var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = new iD.osmNode({id: 'b', loc: [1e-2, 0]});
+            var c = new iD.osmNode({id: 'c', loc: [0, 1e-2]});
 
-            var e_no = iD.osmWay({id: 'explicit-no-oneway', tags: {highway: 'residential', oneway: 'no'}, nodes: [a.id, b.id]});
-            var i_no = iD.osmWay({id: 'implied-no-oneway', tags: {highway: 'residential' }, nodes: [a.id, c.id]});
+            var e_no = new iD.osmWay({id: 'explicit-no-oneway', tags: {highway: 'residential', oneway: 'no'}, nodes: [a.id, b.id]});
+            var i_no = new iD.osmWay({id: 'implied-no-oneway', tags: {highway: 'residential' }, nodes: [a.id, c.id]});
 
-            var graph = iD.coreGraph([a, b, c, e_no, i_no]);
+            var graph = new iD.coreGraph([a, b, c, e_no, i_no]);
 
             surface.call(iD.svgLines(projection, context), graph, [i_no, e_no], all);
             var selection = surface.selectAll('g.onewaygroup > path');
@@ -184,17 +184,17 @@ describe('iD.svgLines', function () {
 
     describe('sided-markers', function() {
         it('has marker layer for sided way', function() {
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
-            var c = iD.osmNode({id: 'c', loc: [0, 1e-2]});
-            var d = iD.osmNode({id: 'd', loc: [1e-2, 1e-2]});
+            var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = new iD.osmNode({id: 'b', loc: [1e-2, 0]});
+            var c = new iD.osmNode({id: 'c', loc: [0, 1e-2]});
+            var d = new iD.osmNode({id: 'd', loc: [1e-2, 1e-2]});
 
-            var i_n = iD.osmWay({id: 'implied-natural', tags: {natural: 'cliff'}, nodes: [a.id, b.id]});
-            var i_nc = iD.osmWay({id: 'implied-coastline', tags: {natural: 'coastline'}, nodes: [a.id, c.id]});
-            var i_b = iD.osmWay({id: 'implied-barrier', tags: {barrier: 'city_wall'}, nodes: [a.id, d.id]});
-            var i_mm = iD.osmWay({id: 'implied-man_made', tags: {man_made: 'embankment'}, nodes: [b.id, c.id]});
+            var i_n = new iD.osmWay({id: 'implied-natural', tags: {natural: 'cliff'}, nodes: [a.id, b.id]});
+            var i_nc = new iD.osmWay({id: 'implied-coastline', tags: {natural: 'coastline'}, nodes: [a.id, c.id]});
+            var i_b = new iD.osmWay({id: 'implied-barrier', tags: {barrier: 'city_wall'}, nodes: [a.id, d.id]});
+            var i_mm = new iD.osmWay({id: 'implied-man_made', tags: {man_made: 'quay'}, nodes: [b.id, c.id]});
 
-            var graph = iD.coreGraph([a, b, c, d, i_n, i_nc, i_b, i_mm]);
+            var graph = new iD.coreGraph([a, b, c, d, i_n, i_nc, i_b, i_mm]);
 
             surface.call(iD.svgLines(projection, context), graph, [i_n, i_nc, i_b, i_mm], all);
             var selection = surface.selectAll('g.sidedgroup > path');
@@ -206,12 +206,12 @@ describe('iD.svgLines', function () {
         });
 
         it('has no marker layer for two_sided way', function() {
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
+            var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = new iD.osmNode({id: 'b', loc: [1e-2, 0]});
 
-            var e_ts = iD.osmWay({id: 'explicit-two-sided', tags: {barrier: 'city_wall', two_sided: 'yes'}, nodes: [a.id, b.id]});
+            var e_ts = new iD.osmWay({id: 'explicit-two-sided', tags: {barrier: 'city_wall', two_sided: 'yes'}, nodes: [a.id, b.id]});
 
-            var graph = iD.coreGraph([a, b, e_ts]);
+            var graph = new iD.coreGraph([a, b, e_ts]);
 
             surface.call(iD.svgLines(projection, context), graph, [e_ts], all);
             var selection = surface.selectAll('g.sidedgroup > path');

@@ -1,4 +1,5 @@
 import { fn } from '@vitest/spy';
+import fetchMock from 'fetch-mock';
 import { setTimeout } from 'node:timers/promises';
 import { promisify } from 'node:util';
 import { fakeServer } from 'nise';
@@ -19,11 +20,11 @@ describe('iD.serviceOsm', function () {
         connection.logout();
     }
 
-    before(function() {
+    beforeEach(() => {
         iD.services.osm = iD.serviceOsm;
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.osm;
     });
 
@@ -84,34 +85,34 @@ describe('iD.serviceOsm', function () {
 
     describe('#entityURL', function() {
         it('provides an entity url for a node', function() {
-            var e = iD.osmNode({id: 'n1'});
+            var e = new iD.osmNode({id: 'n1'});
             expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/node/1');
         });
 
         it('provides an entity url for a way', function() {
-            var e = iD.osmWay({id: 'w1'});
+            var e = new iD.osmWay({id: 'w1'});
             expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/way/1');
         });
 
         it('provides an entity url for a relation', function() {
-            var e = iD.osmRelation({id: 'r1'});
+            var e = new iD.osmRelation({id: 'r1'});
             expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/relation/1');
         });
     });
 
     describe('#historyURL', function() {
         it('provides a history url for a node', function() {
-            var e = iD.osmNode({id: 'n1'});
+            var e = new iD.osmNode({id: 'n1'});
             expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/node/1/history');
         });
 
         it('provides a history url for a way', function() {
-            var e = iD.osmWay({id: 'w1'});
+            var e = new iD.osmWay({id: 'w1'});
             expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/way/1/history');
         });
 
         it('provides a history url for a relation', function() {
-            var e = iD.osmRelation({id: 'r1'});
+            var e = new iD.osmRelation({id: 'r1'});
             expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/relation/1/history');
         });
     });
@@ -194,6 +195,34 @@ describe('iD.serviceOsm', function () {
 
             await expect(promise).rejects.toThrow(expect.objectContaining({ status: 429 }));
             expect(spy).to.have.been.calledOnce;
+        });
+
+        it('handles errors in partial JOSN response', async () => {
+            const partialResponse = JSON.parse(response);
+            partialResponse.elements.push({ error: 'server error' });
+            const partialResponseWithError = JSON.stringify(partialResponse);
+            fetchMock.mock(`https://www.openstreetmap.org${path}`, {
+                body: partialResponseWithError,
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const promise = promisify(connection.loadFromAPI).call(connection, path);
+            await expect(promise).rejects.toThrow(expect.objectContaining({ status: -1, message: 'server error' }));
+        });
+
+        it('handles empty response gracefully', async () => {
+            const emptyResponse = JSON.parse(response);
+            emptyResponse.elements = [];
+            fetchMock.mock(`https://www.openstreetmap.org${path}`, {
+                body: JSON.stringify(emptyResponse),
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const payload = await promisify(connection.loadFromAPI).call(connection, path);
+            expect(typeof payload).to.eql('object');
+            expect(payload).toHaveLength(0);
         });
 
         it('uses apiUrl', async () => {

@@ -2,8 +2,7 @@ import { geoSphericalDistance } from '../geo/geo';
 import { osmRelation } from '../osm/relation';
 import { osmWay } from '../osm/way';
 import { utilArrayIntersection, utilWrap } from '../util';
-import { osmSummableTags } from '../osm/tags';
-
+import { osmSummableTags, osmWayOnlyTags } from '../osm/tags';
 
 // Split a way at the given node.
 //
@@ -97,7 +96,7 @@ export function actionSplit(nodeIds, newWayIds) {
     }
 
     function split(graph, nodeId, wayA, newWayId, otherNodeIds) {
-        var wayB = osmWay({ id: newWayId, tags: wayA.tags });   // `wayB` is the NEW way
+        var wayB = new osmWay({ id: newWayId, tags: wayA.tags });   // `wayB` is the NEW way
         var nodesA;
         var nodesB;
         var isArea = wayA.isArea();
@@ -227,12 +226,13 @@ export function actionSplit(nodeIds, newWayIds) {
                 type: 'multipolygon'
             };
             const lineTags = {};
-            if (areaTags.natural === 'coastline') {
-                // preserve coastline tag on a polygonal way when it is split, #9563
-                delete areaTags.natural;
-                lineTags.natural = 'coastline';
+            for (const key in areaTags) {
+                if (osmWayOnlyTags[key] && osmWayOnlyTags[key][areaTags[key]]) {
+                    lineTags[key] = areaTags[key];
+                    delete areaTags[key];
+                }
             }
-            const multipolygon = osmRelation({
+            const multipolygon = new osmRelation({
                 tags: areaTags,
                 members: [
                     { id: wayA.id, role: 'outer', type: 'way' },
@@ -472,6 +472,7 @@ export function actionSplit(nodeIds, newWayIds) {
             return false;
         }
     };
+    action.waysForNode = waysForNode;
 
     action.ways = function(graph) {
         return waysForNodes(nodeIds, graph);

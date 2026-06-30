@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit/compat';
+import { throttle } from 'es-toolkit';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
@@ -7,7 +7,7 @@ import RBush from 'rbush';
 
 import { JXON } from '../util/jxon';
 import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
-import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
+import { osmIdManager, osmNode, osmNote, osmRelation, osmWay } from '../osm';
 import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilObjectOmit, utilRebind, utilTiler, utilQsString } from '../util';
 import { localizer } from '../core/localizer.js';
 import { utilGzip } from '../util/util';
@@ -186,6 +186,11 @@ function parseJSON(payload, callback, options) {
 
     if (!json.elements) return callback({ message: 'No JSON', status: -1 });
 
+    if (typeof json.elements.at(-1)?.error === 'string') {
+        const errorMessage = payload.elements.at(-1).error;
+        return callback({ message: errorMessage, status: -1 });
+    }
+
     var children = json.elements;
 
     var handle = window.requestIdleCallback(function() {
@@ -206,7 +211,7 @@ function parseJSON(payload, callback, options) {
 
         var uid;
 
-        uid = osmEntity.id.fromOSM(child.type, child.id);
+        uid = osmIdManager.fromOSM(child.type, child.id);
         if (options.skipSeen) {
             if (_tileCache.seen[uid]) return null;  // avoid reparsing a "seen" entity
             _tileCache.seen[uid] = true;
@@ -293,7 +298,7 @@ function parseNoteJSON(payload, callback, _options) {
         var note = new osmNote(props);
         var item = encodeNoteRtree(note);
         _noteCache.note[note.id] = note;
-        updateRtree(item, true);
+        updateRtree(item, item);
 
         return note;
     });
@@ -301,11 +306,11 @@ function parseNoteJSON(payload, callback, _options) {
 }
 
 // replace or remove note from rtree
-function updateRtree(item, replace) {
+function updateRtree(item, replaceItem) {
     _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
 
-    if (replace) {
-        _noteCache.rtree.insert(item);
+    if (replaceItem) {
+        _noteCache.rtree.insert(replaceItem);
     }
 }
 
@@ -484,8 +489,8 @@ export default {
     // GET /api/0.6/node/#id
     // GET /api/0.6/[way|relation]/#id/full
     loadEntity: function(id, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
+        var type = osmIdManager.type(id);
+        var osmID = osmIdManager.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
@@ -514,8 +519,8 @@ export default {
     // Load a single entity with a specific version
     // GET /api/0.6/[node|way|relation]/#id/#version
     loadEntityVersion: function(id, version, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
+        var type = osmIdManager.type(id);
+        var osmID = osmIdManager.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
@@ -531,8 +536,8 @@ export default {
     // Load the relations of a single entity with the given.
     // GET /api/0.6/[node|way|relation]/#id/relations
     loadEntityRelations: function(id, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
+        var type = osmIdManager.type(id);
+        var osmID = osmIdManager.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
@@ -551,11 +556,11 @@ export default {
     // GET /api/0.6/[nodes|ways|relations]?#parameters
     loadMultiple: function(ids, callback) {
         var that = this;
-        var groups = utilArrayGroupBy(utilArrayUniq(ids), osmEntity.id.type);
+        var groups = utilArrayGroupBy(utilArrayUniq(ids), osmIdManager.type);
 
         Object.keys(groups).forEach(function(k) {
             var type = k + 's';   // nodes, ways, relations
-            var osmIDs = groups[k].map(function(id) { return osmEntity.id.toOSM(id); });
+            var osmIDs = groups[k].map(function(id) { return osmIdManager.toOSM(id); });
             var options = { skipSeen: false };
 
             utilArrayChunk(osmIDs, 150).forEach(function(arr) {
@@ -1278,8 +1283,9 @@ export default {
     replaceNote: function(note) {
         if (!(note instanceof osmNote) || !note.id) return;
 
+        const item = encodeNoteRtree(_noteCache.note[note.id] || note);
         _noteCache.note[note.id] = note;
-        updateRtree(encodeNoteRtree(note), true);  // true = replace
+        updateRtree(item, encodeNoteRtree(note));
         return note;
     },
 

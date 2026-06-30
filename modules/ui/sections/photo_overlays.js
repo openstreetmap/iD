@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit/compat';
+import { debounce } from 'es-toolkit';
 import { select as d3_select } from 'd3-selection';
 
 import { localizer, t } from '../../core/localizer';
@@ -553,7 +553,9 @@ export function uiSectionPhotoOverlays(context) {
     /**
      * Toggles StreetView on/off
      */
-    function toggleStreetSide(){
+    function toggleStreetSide(d3_event) {
+        d3_event.preventDefault();
+
         let layerContainer = d3_select('.photo-overlay-container');
         if (!_layersHidden){
             const streetLayerIDs = context.photos().overlayLayerIDs();

@@ -1115,10 +1115,10 @@ summary.hide-toggle::-webkit-details-marker {
     object-fit: contain;
     border-radius: 2px;
     z-index: 2;
-    visibility: hidden;
+    display: none;
 }
 .preset-icon-container.showing-img img.image-icon {
-    visibility: visible;
+    display: initial;
 }
 .preset-icon-container.showing-img *:not(.image-icon) {
     display: none;
@@ -1825,11 +1825,16 @@ input.date-selector {
 
 .form-field-input-multicombo .input-wrap {
     border: 1px solid var(--border-color-2);
-    width: 180px;
+    width: auto;
+    max-width: 100%;
 }
 .form-field-input-multicombo input {
     border: none;
-    width: 100%;
+}
+.form-field-input-multicombo input.combobox-input {
+    max-width: 100%;
+    min-width: 180px;
+    field-sizing: content;
 }
 
 .form-field-input-multicombo input:focus {
@@ -2088,6 +2093,49 @@ input.date-selector {
     height: 0;
     display: block;
     overflow: hidden;
+}
+
+/* One-line (horizontal) layout when all options fit on a single row */
+.form-field-input-radio.one-line {
+    overflow: hidden;
+}
+.form-field-input-radio.one-line > label {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+}
+.form-field-input-radio.one-line.equal-spacing > label {
+    flex: 1 1 0;
+}
+.form-field-input-radio.one-line > label:first-of-type {
+    border-end-start-radius: 4px;
+}
+.form-field-input-radio.one-line > label:last-of-type {
+    border-end-start-radius: 0;
+}
+.form-field-input-radio.one-line > label:not(:first-of-type) {
+    border-inline-start: none;
+}
+
+/* Two-column layout when all options fit on a half-width box */
+.form-field-input-radio.two-column {
+    overflow: hidden;
+}
+.form-field-input-radio.two-column > label {
+    flex: 1 1 auto;
+    min-width: 50%;
+    max-width: 100%;
+    width: 50%;
+}
+.form-field-input-radio.two-column > label:nth-last-of-type(2):nth-of-type(odd),
+.form-field-input-radio.two-column > label:last-of-type:nth-of-type(odd) {
+    border-end-start-radius: 4px;
+}
+.form-field-input-radio.two-column > label:last-of-type:nth-of-type(even) {
+    border-end-start-radius: 0;
+}
+.form-field-input-radio.two-column > label:nth-of-type(even) {
+    border-inline-start: none;
 }
 
 
@@ -2944,6 +2992,10 @@ img.tag-reference-wiki-image {
     height: 18px;
     margin-left: 5px;
     margin-bottom: -4.5px;
+}
+.section-raw-membership-editor .member-row img.member-entity-icon.hide,
+.section-raw-member-editor .member-row img.member-entity-icon.hide {
+    display: none;
 }
 .section-raw-membership-editor .member-row span.member-entity-ref-color,
 .section-raw-member-editor .member-row span.member-entity-ref-color,
@@ -4862,6 +4914,12 @@ img.tile-debug {
     }
 }
 
+.attribution-wrap .attribution span {
+    background-color: rgba(0,0,0,0.33);
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+
 .attribution-wrap .attribution .source-image {
     height: 20px;
     vertical-align: middle;
@@ -5239,7 +5297,6 @@ img.tile-debug {
 
 .save-success .link-out {
     margin: 0px 5px;
-    white-space: nowrap;
 }
 
 .save-summary,

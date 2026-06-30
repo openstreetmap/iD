@@ -2,10 +2,10 @@ describe('iD.util', function() {
 
     describe('utilGetAllNodes', function() {
         it('gets all descendant nodes of a way', function() {
-            var a = iD.osmNode({ id: 'a' });
-            var b = iD.osmNode({ id: 'b' });
-            var w = iD.osmWay({ id: 'w', nodes: ['a','b','a'] });
-            var graph = iD.coreGraph([a, b, w]);
+            var a = new iD.osmNode({ id: 'a' });
+            var b = new iD.osmNode({ id: 'b' });
+            var w = new iD.osmWay({ id: 'w', nodes: ['a','b','a'] });
+            var graph = new iD.coreGraph([a, b, w]);
             var result = iD.utilGetAllNodes(['w'], graph);
 
             expect(result).to.have.members([a, b]);
@@ -13,12 +13,12 @@ describe('iD.util', function() {
         });
 
         it('gets all descendant nodes of a relation', function() {
-            var a = iD.osmNode({ id: 'a' });
-            var b = iD.osmNode({ id: 'b' });
-            var c = iD.osmNode({ id: 'c' });
-            var w = iD.osmWay({ id: 'w', nodes: ['a','b','a'] });
-            var r = iD.osmRelation({ id: 'r', members: [{id: 'w'}, {id: 'c'}] });
-            var graph = iD.coreGraph([a, b, c, w, r]);
+            var a = new iD.osmNode({ id: 'a' });
+            var b = new iD.osmNode({ id: 'b' });
+            var c = new iD.osmNode({ id: 'c' });
+            var w = new iD.osmWay({ id: 'w', nodes: ['a','b','a'] });
+            var r = new iD.osmRelation({ id: 'r', members: [{id: 'w'}, {id: 'c'}] });
+            var graph = new iD.coreGraph([a, b, c, w, r]);
             var result = iD.utilGetAllNodes(['r'], graph);
 
             expect(result).to.have.members([a, b, c]);
@@ -26,15 +26,15 @@ describe('iD.util', function() {
         });
 
         it('gets all descendant nodes of multiple ids', function() {
-            var a = iD.osmNode({ id: 'a' });
-            var b = iD.osmNode({ id: 'b' });
-            var c = iD.osmNode({ id: 'c' });
-            var d = iD.osmNode({ id: 'd' });
-            var e = iD.osmNode({ id: 'e' });
-            var w1 = iD.osmWay({ id: 'w1', nodes: ['a','b','a'] });
-            var w2 = iD.osmWay({ id: 'w2', nodes: ['c','b','a','c'] });
-            var r = iD.osmRelation({ id: 'r', members: [{id: 'w1'}, {id: 'd'}] });
-            var graph = iD.coreGraph([a, b, c, d, e, w1, w2, r]);
+            var a = new iD.osmNode({ id: 'a' });
+            var b = new iD.osmNode({ id: 'b' });
+            var c = new iD.osmNode({ id: 'c' });
+            var d = new iD.osmNode({ id: 'd' });
+            var e = new iD.osmNode({ id: 'e' });
+            var w1 = new iD.osmWay({ id: 'w1', nodes: ['a','b','a'] });
+            var w2 = new iD.osmWay({ id: 'w2', nodes: ['c','b','a','c'] });
+            var r = new iD.osmRelation({ id: 'r', members: [{id: 'w1'}, {id: 'd'}] });
+            var graph = new iD.coreGraph([a, b, c, d, e, w1, w2, r]);
             var result = iD.utilGetAllNodes(['r', 'w2', 'e'], graph);
 
             expect(result).to.have.members([a, b, c, d, e]);
@@ -42,10 +42,10 @@ describe('iD.util', function() {
         });
 
         it('handles recursive relations', function() {
-            var a = iD.osmNode({ id: 'a' });
-            var r1 = iD.osmRelation({ id: 'r1', members: [{id: 'r2'}] });
-            var r2 = iD.osmRelation({ id: 'r2', members: [{id: 'r1'}, {id: 'a'}] });
-            var graph = iD.coreGraph([a, r1, r2]);
+            var a = new iD.osmNode({ id: 'a' });
+            var r1 = new iD.osmRelation({ id: 'r1', members: [{id: 'r2'}] });
+            var r2 = new iD.osmRelation({ id: 'r2', members: [{id: 'r1'}, {id: 'a'}] });
+            var graph = new iD.coreGraph([a, r1, r2]);
             var result = iD.utilGetAllNodes(['r1'], graph);
 
             expect(result).to.have.members([a]);
@@ -74,12 +74,12 @@ describe('iD.util', function() {
 
     describe('utilCombinedTags', function() {
         it('sorts tag values by frequency then alphabetically', function() {
-            var n1 = iD.osmNode({ id: 'n-1', tags: { surface: 'paved' } });
-            var n2 = iD.osmNode({ id: 'n-2', tags: { surface: 'paved' } });
-            var n3 = iD.osmNode({ id: 'n-3', tags: { surface: 'paved' } });
-            var n4 = iD.osmNode({ id: 'n-4', tags: { surface: 'asphalt' } });
-            var n5 = iD.osmNode({ id: 'n-5', tags: { surface: 'gravel' } });
-            var graph = iD.coreGraph([n1, n2, n3, n4, n5]);
+            var n1 = new iD.osmNode({ id: 'n-1', tags: { surface: 'paved' } });
+            var n2 = new iD.osmNode({ id: 'n-2', tags: { surface: 'paved' } });
+            var n3 = new iD.osmNode({ id: 'n-3', tags: { surface: 'paved' } });
+            var n4 = new iD.osmNode({ id: 'n-4', tags: { surface: 'asphalt' } });
+            var n5 = new iD.osmNode({ id: 'n-5', tags: { surface: 'gravel' } });
+            var graph = new iD.coreGraph([n1, n2, n3, n4, n5]);
             var result = iD.utilCombinedTags(['n-1', 'n-2', 'n-3', 'n-4', 'n-5'], graph);
 
             expect(result.surface).to.be.an('array');
@@ -89,9 +89,9 @@ describe('iD.util', function() {
         });
 
         it('returns raw value when all entities share the same tag value', function() {
-            var n1 = iD.osmNode({ id: 'n-1', tags: { highway: 'residential' } });
-            var n2 = iD.osmNode({ id: 'n-2', tags: { highway: 'residential' } });
-            var graph = iD.coreGraph([n1, n2]);
+            var n1 = new iD.osmNode({ id: 'n-1', tags: { highway: 'residential' } });
+            var n2 = new iD.osmNode({ id: 'n-2', tags: { highway: 'residential' } });
+            var graph = new iD.coreGraph([n1, n2]);
             var result = iD.utilCombinedTags(['n-1', 'n-2'], graph);
 
             expect(result.highway).to.eql('residential');
@@ -157,22 +157,39 @@ describe('iD.util', function() {
         });
     });
 
-    describe('utilAsyncMap', function() {
-        it('handles correct replies', function() {
-            iD.utilAsyncMap([1, 2, 3],
-                function(d, c) { c(null, d * 2); },
-                function(err, res) {
-                    expect(err).to.eql([null, null, null]);
-                    expect(res).to.eql([2, 4, 6]);
-                });
+    describe('utilEditDistance, for substring', function() {
+        it('returns zero for same strings', function() {
+            expect(iD.utilEditDistance('foo', 'foo', {substring: true})).to.eql(0);
         });
-        it('handles errors', function() {
-            iD.utilAsyncMap([1, 2, 3],
-                function(d, c) { c('whoops ' + d, null); },
-                function(err, res) {
-                    expect(err).to.eql(['whoops 1', 'whoops 2', 'whoops 3']);
-                    expect(res).to.eql([null, null, null]);
-                });
+
+        it('returns zero for exact substring match', function() {
+            expect(iD.utilEditDistance('foo', 'asd foo bar', {substring: true})).to.eql(0);
+        });
+
+        it('reports an insertion of 1', function() {
+            expect(iD.utilEditDistance('fooa', 'asd fo1oa fasd', {substring: true})).to.eql(1);
+        });
+
+        it('reports a replacement of 1', function() {
+            expect(iD.utilEditDistance('foob', 'asd fooa fasd', {substring: true})).to.eql(1);
+        });
+
+        it('does not fail on empty input', function() {
+            expect(iD.utilEditDistance('', '', {substring: true})).to.eql(0);
+        });
+
+        it.each([
+            ['c', 0],
+            ['co', 0],
+            ['cof', 0],
+            ['cofe', 1],
+            ['cofee', 1],
+            ['cofees', 2],
+            ['cofeesh', 2],
+            ['cofeesho', 2],
+            ['cofeeshop', 2]
+        ])('while (mis)typing', function(str, expected) {
+            expect(iD.utilEditDistance(str, 'Coffee Shop', {substring: true})).to.eql(expected);
         });
     });
 
@@ -384,6 +401,17 @@ describe('iD.util', function() {
         });
         it('uses only the housenumber for map labels', () => {
             expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '31', 'addr:street': 'Princes Street' } }, { isMapLabel: true })).to.eql('31');
+        });
+
+        describe('localised names', () => {
+            it('considers the original locale code first', () => {
+                expect(iD.utilDisplayName({ tags: { name: '5', 'name:en': '4', 'name:en-Latn': '3', 'name:en-US': '2', 'name:en-Latn-US': '1' } }, undefined, true)).toBe('1');
+            });
+            it('fallbacks to the maximized locale', () => {
+                expect(iD.utilDisplayName({ tags: { name: '5', 'name:en': '4', 'name:en-Latn': '3', 'name:en-US': '2' } }, undefined, true)).toBe('2');
+                expect(iD.utilDisplayName({ tags: { name: '5', 'name:en': '4', 'name:en-Latn': '3' } }, undefined, true)).toBe('3');
+                expect(iD.utilDisplayName({ tags: { name: '5', 'name:en': '4' } }, undefined, true)).toBe('4');
+            });
         });
     });
 

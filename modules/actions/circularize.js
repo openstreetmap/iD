@@ -145,7 +145,7 @@ export function actionCircularize(wayId, projection) {
                     }
                 }
 
-                node = osmNode({ loc: geoVecInterp(origNode.loc, loc, t) });
+                node = new osmNode({ loc: geoVecInterp(origNode.loc, loc, t) });
                 graph = graph.replace(node);
 
                 nodes.splice(endNodeIndex + j, 0, node);
@@ -303,6 +303,14 @@ export function actionCircularize(wayId, projection) {
         }
         return 'already_circular';
     };
+
+
+    action.getWayId = function() {
+        return wayId;
+    };
+
+
+    action.id = 'circularize';
 
 
     action.transitionable = true;

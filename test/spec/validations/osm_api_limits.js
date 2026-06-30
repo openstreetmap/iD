@@ -1,7 +1,7 @@
 describe('iD.validations.osm_api_limits', function () {
     let context;
 
-    before(function() {
+    beforeEach(() => {
         iD.services.osm = iD.serviceOsm;
         iD.services.osm.maxWayNodes = () => 10;
         iD.services.osm.on = () => undefined;
@@ -12,7 +12,7 @@ describe('iD.validations.osm_api_limits', function () {
         context.surface = () => d3.select('#nop'); // mock with NOP
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.osm;
     });
 
@@ -20,9 +20,9 @@ describe('iD.validations.osm_api_limits', function () {
     function createWay(numNodes) {
         var nodes = [];
         for (var i = 0; i < numNodes; i++) {
-            nodes.push(iD.osmNode({ id: 'n-' + i, loc: [i, i]}));
+            nodes.push(new iD.osmNode({ id: 'n-' + i, loc: [i, i]}));
         }
-        var w = iD.osmWay({id: 'w-1', tags: {},
+        var w = new iD.osmWay({id: 'w-1', tags: {},
             nodes: nodes.map(function(n) { return n.id; }) });
 
         context.perform.apply(null, nodes
@@ -81,9 +81,9 @@ describe('iD.validations.osm_api_limits', function () {
     it('fix a simple case at an intersection vertex', function() {
         createWay(12);
 
-        var n2 = iD.osmNode({id: 'n-0', loc: [0,0]});
-        var n1 = iD.osmNode({id: 'n-8', loc: [8,8]});
-        var w = iD.osmWay({id: 'w-2', nodes: ['n-0', 'n-8'], tags: {}});
+        var n2 = new iD.osmNode({id: 'n-0', loc: [0,0]});
+        var n1 = new iD.osmNode({id: 'n-8', loc: [8,8]});
+        var w = new iD.osmWay({id: 'w-2', nodes: ['n-0', 'n-8'], tags: {}});
 
         context.perform(
             iD.actionAddEntity(n1),

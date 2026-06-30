@@ -5,10 +5,11 @@ import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 import RBush from 'rbush';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
-import { utilQsString, utilRebind, utilSetTransform, utilStringQs, utilTiler } from '../util';
+import { utilQsString, utilRebind, utilSetTransform, utilTiler } from '../util';
 import { services } from './';
 import { searchLimited } from '../util/partition';
 import { localeDateString } from '../util/date';
+import { patchHash } from '../behavior';
 
 
 var apibase = 'https://kartaview.org';
@@ -363,7 +364,7 @@ export default {
     hideViewer: function(context) {
         _oscSelectedImage = null;
 
-        this.updateUrlImage(null);
+        patchHash({ photo: null });
 
         var viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
@@ -386,7 +387,7 @@ export default {
 
         _oscSelectedImage = d;
 
-        this.updateUrlImage(imageKey);
+        patchHash({ photo: 'kartaview/' + imageKey });
 
         var viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
@@ -514,17 +515,6 @@ export default {
         }
 
         return this;
-    },
-
-
-    updateUrlImage: function(imageKey) {
-        const hash = utilStringQs(window.location.hash);
-        if (imageKey) {
-            hash.photo = 'kartaview/' + imageKey;
-        } else {
-            delete hash.photo;
-        }
-        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
     },
 
 

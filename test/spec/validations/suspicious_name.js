@@ -1,12 +1,12 @@
 describe('iD.validations.suspicious_name', function () {
     var context;
 
-    before(function() {
+    beforeEach(() => {
         iD.services.nsi = iD.serviceNsi;
-        iD.fileFetcher.cache().nsi_presets = { presets: {} };
         iD.fileFetcher.cache().nsi_features = { type: 'FeatureCollection', features: [] };
         iD.fileFetcher.cache().nsi_dissolved = { dissolved: {} };
         iD.fileFetcher.cache().nsi_replacements = { replacements: {} };
+        iD.fileFetcher.cache().nsi_wikidata = { wikidata: {} };
 
         iD.fileFetcher.cache().nsi_trees = {
           trees: {
@@ -38,7 +38,7 @@ describe('iD.validations.suspicious_name', function () {
         };
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.nsi;
     });
 
@@ -47,10 +47,10 @@ describe('iD.validations.suspicious_name', function () {
     });
 
     function createWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3'], tags: tags});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = new iD.osmNode({id: 'n-2', loc: [4,5]});
+        var n3 = new iD.osmNode({id: 'n-3', loc: [5,5]});
+        var w = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3'], tags: tags});
 
         context.perform(
             iD.actionAddEntity(n1),

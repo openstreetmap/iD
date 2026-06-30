@@ -4,7 +4,7 @@ import { t } from '../core/localizer';
 import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
 import { utilObjectOmit } from '../util';
 import { utilSafeClassName } from '../util/util';
-import { locationManager } from '../core/LocationManager';
+import { locationManager } from '../core/location_manager';
 
 
 //
@@ -322,12 +322,12 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
         let parent = allPresets[parentID];
         if (loc) {
           const validHere = locationManager.locationSetsAt(loc);
-          if (parent?.locationSetID && !validHere[parent.locationSetID]) {
+          if (parent?.locationSetID && !validHere.has(parent.locationSetID)) {
             // this is a preset for which a regional variant of the main preset exists
             const candidateIDs = Object.keys(allPresets).filter(k => k.startsWith(parentID));
             parent = allPresets[candidateIDs.find(candidateID => {
               const candidate = allPresets[candidateID];
-              return validHere[candidate.locationSetID] && deepEqual(candidate.tags, parent.tags);
+              return validHere.has(candidate.locationSetID) && deepEqual(candidate.tags, parent.tags);
             })];
           }
         }
@@ -337,7 +337,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
     if (loc) {
       const validHere = locationManager.locationSetsAt(loc);
-      resolved = resolved.filter(field => !field.locationSetID || validHere[field.locationSetID]);
+      resolved = resolved.filter(field => !field.locationSetID || validHere.has(field.locationSetID));
     }
 
     return resolved;

@@ -1,6 +1,7 @@
 // @ts-check
 import js from '@eslint/js';
 import globals from 'globals';
+import confusingGlobals from 'confusing-browser-globals';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
@@ -40,7 +41,6 @@ export default tseslint.config(
       'indent': ['off', 4],
       'keyword-spacing': 'error',
       'linebreak-style': ['error', 'unix'],
-      'no-await-in-loop': 'error',
       'no-caller': 'error',
       'no-catch-shadow': 'error',
       'no-console': 'warn',
@@ -74,6 +74,7 @@ export default tseslint.config(
       'no-promise-executor-return': 'error',
       'no-proto': 'error',
       'no-prototype-builtins': 'off',
+      'no-restricted-globals': ['error', ...confusingGlobals],
       'no-restricted-properties': 'error',
       'no-return-assign': 'off',
       'no-return-await': 'error',
@@ -133,16 +134,11 @@ export default tseslint.config(
     languageOptions: {
       globals: {
         ...globals.node,
-        ...globals.jest,
-        'after': 'readonly',
-        'before': 'readonly',
+        ...globals.vitest,
         'd3': 'readonly',
         'expect': 'writable',
-        'fetchMock': 'readonly',
-        'happen': 'readonly',
         'iD': 'readonly',
         'jsdom': 'readonly',
-        'sinon': 'readonly',
         'vi': 'readonly'
       }
     },

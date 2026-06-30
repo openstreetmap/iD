@@ -39,7 +39,7 @@ export function rendererBackgroundSource(data) {
     var _name = source.name;
     var _description = source.description;
     var _best = !!source.best;
-    var _template = source.encrypted ? utilAesDecrypt(source.template) : source.template;
+    var _template = source.template;
 
     source.tileSize = data.tileSize || 256;
     source.zoomExtent = data.zoomExtent || [0, 22];
@@ -276,14 +276,15 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     */
     const strictParam = 'n';
 
-    var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/AerialOSM?include=ImageryProviders&uriScheme=https&key=' + key;
     var cache = {};
     var inflight = {};
     var providers = [];
     var taskQueue = new IntervalTasksQueue(250);
     var metadataLastZoom = -1;
 
-    d3_json(url)
+    key
+        .then(keyString => `https://dev.virtualearth.net/REST/v1/Imagery/Metadata/AerialOSM?include=ImageryProviders&uriScheme=https&key=${keyString}`)
+        .then(d3_json)
         .then(function(json) {
             let imageryResource = json.resourceSets[0].resources[0];
 
@@ -332,12 +333,12 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     };
 
 
-    bing.getMetadata = function(center, tileCoord, callback) {
+    bing.getMetadata = async function(center, tileCoord, callback) {
         var tileID = tileCoord.slice(0, 3).join('/');
         var zoom = Math.min(tileCoord[2], 21);
         var centerPoint = center[1] + ',' + center[0];  // lat,lng
         var url = 'https://dev.virtualearth.net/REST/v1/Imagery/BasicMetadata/AerialOSM/' + centerPoint +
-                '?zl=' + zoom + '&key=' + key;
+                '?zl=' + zoom + '&key=' + await key;
 
         if (inflight[tileID]) return;
 

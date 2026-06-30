@@ -7,7 +7,7 @@ import { svgIcon } from '../svg/icon';
 import { uiCombobox} from './combobox';
 import { uiField } from './field';
 import { uiFormFields } from './form_fields';
-import { utilArrayUniqBy, utilCleanOsmString, utilRebind, utilTriggerEvent, utilUnicodeCharsCount } from '../util';
+import { utilArrayUniqBy, utilCleanOsmString, utilDetect, utilRebind, utilTriggerEvent, utilUnicodeCharsCount } from '../util';
 import { getIncompatibleSources } from '../validations/incompatible_source';
 
 
@@ -80,10 +80,14 @@ export function uiChangesetEditor(context) {
                         return comment ? { title: comment, value: comment } : null;
                     }).filter(Boolean);
 
-                    commentField
-                        .call(commentCombo
-                            .data(utilArrayUniqBy(comments, 'title'))
-                        );
+                    if (!utilDetect().isMobileFirefox) {
+                        // disable on mobile firefox, as it is buggy
+                        // https://github.com/openstreetmap/iD/issues/9011
+                        commentField
+                            .call(commentCombo
+                                .data(utilArrayUniqBy(comments, 'title'))
+                            );
+                    }
 
                     // add extra dropdown options to the `source` field
                     // based on the values used in recent changesets.

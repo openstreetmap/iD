@@ -89,44 +89,58 @@ export function validationDisconnectedWay() {
         }
 
         function routingIslandForEntity(entity) {
+            const routingIsland = new Set();  // the interconnected routable features
+            const entitiesToCheck = [];       // the queue of remaining routable ways to traverse
 
-            var routingIsland = new Set();  // the interconnected routable features
-            var waysToCheck = [];           // the queue of remaining routable ways to traverse
-
-            function queueParentWays(node) {
-                graph.parentWays(node).forEach(function(parentWay) {
+            function queueParents(node) {
+                graph.parentWays(node).forEach((parentWay) => {
                     if (!routingIsland.has(parentWay) &&    // only check each feature once
-                        isRoutableWay(parentWay, false)) {  // only check routable features
+                        isRoutableWay(parentWay)            // only check routable features
+                    ) {
                         routingIsland.add(parentWay);
-                        waysToCheck.push(parentWay);
+                        entitiesToCheck.push(parentWay);
                     }
+                    // also include routable parent multipolygons
+                    graph.parentRelations(parentWay)
+                        .filter(isRoutableRelation)
+                        .filter(relation => !routingIsland.has(relation))
+                        .forEach(parentRelation => {
+                            routingIsland.add(parentRelation);
+                            entitiesToCheck.push(parentRelation);
+                        });
                 });
             }
 
             if (entity.type === 'way' &&
-                isRoutableWay(entity, true) &&
+                isRoutableWay(entity) &&
                 !shouldSkipRoutableWay(entity)
             ) {
-
                 routingIsland.add(entity);
-                waysToCheck.push(entity);
-
+                entitiesToCheck.push(entity);
+            } else if (entity.type === 'relation' && isRoutableRelation(entity)) {
+                routingIsland.add(entity);
+                entitiesToCheck.push(entity);
             } else if (entity.type === 'node' && isRoutableNode(entity)) {
-
                 routingIsland.add(entity);
-                queueParentWays(entity);
-
+                queueParents(entity);
             } else {
                 // this feature isn't routable, cannot be a routing island
                 return null;
             }
 
-            while (waysToCheck.length) {
-                var wayToCheck = waysToCheck.pop();
-                var childNodes = graph.childNodes(wayToCheck);
-                for (var i in childNodes) {
-                    var vertex = childNodes[i];
-
+            while (entitiesToCheck.length) {
+                const entityToCheck = entitiesToCheck.pop();
+                let childNodes;
+                if (entityToCheck.type === 'way') {
+                    childNodes = graph.childNodes(entityToCheck);
+                } else if (entityToCheck.type === 'relation') {
+                    childNodes = entityToCheck.members
+                        .filter(member => member.role === 'outer' && member.type === 'way')
+                        .map(m => graph.hasEntity(m.id))
+                        .filter(Boolean)
+                        .flatMap(way => graph.childNodes(way));
+                }
+                for (const vertex of childNodes) {
                     if (isConnectedVertex(vertex)) {
                         // found a link to the wider network, not a routing island
                         return null;
@@ -136,7 +150,7 @@ export function validationDisconnectedWay() {
                         routingIsland.add(vertex);
                     }
 
-                    queueParentWays(vertex);
+                    queueParents(vertex);
                 }
             }
 
@@ -163,7 +177,7 @@ export function validationDisconnectedWay() {
             return false;
         }
 
-        function isRoutableWay(way, ignoreInnerWays) {
+        function isRoutableWay(way) {
             if (isTaggedAsHighway(way)) return true;
             if (way.tags.route === 'ferry') return true;
             if (way.tags.aerialway && way.tags.aerialway !== 'no' && way.tags.aerialway !== 'goods') {
@@ -173,11 +187,10 @@ export function validationDisconnectedWay() {
 
             return graph.parentRelations(way).some(function(parentRelation) {
                 if (parentRelation.tags.type === 'route' &&
-                    parentRelation.tags.route === 'ferry') return true;
-
-                if (parentRelation.isMultipolygon() &&
-                    isTaggedAsHighway(parentRelation) &&
-                    (!ignoreInnerWays || parentRelation.memberById(way.id).role !== 'inner')) return true;
+                    parentRelation.tags.route === 'ferry'
+                ) {
+                    return true;
+                }
 
                 return false;
             });
@@ -193,6 +206,10 @@ export function validationDisconnectedWay() {
                 return true;
             }
             return false;
+        }
+
+        function isRoutableRelation(relation) {
+            return relation.isMultipolygon() && isTaggedAsHighway(relation);
         }
 
         function makeContinueDrawingFixIfAllowed(textDirection, vertexID, whichEnd) {

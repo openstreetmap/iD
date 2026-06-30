@@ -1,0 +1,5 @@
+# Commits listed in this file will not be shown in the git blame.
+# Useful for commits that make mass-reformatting changes.
+
+# use the `new` operator to instantiate coreGraph & osmEntity classes (#12151)
+547b60149c1383f93185c1e28173bb48b6f82334
