@@ -1,0 +1,10 @@
+# Netlify custom response headers — https://docs.netlify.com/routing/headers/
+#
+# Staging deploys bundle id-tagging-schema under /id-tagging-schema/dist/.
+# Allow external tools to fetch preset JSON cross-origin from ideditor.netlify.app.
+# Deploy: .github/workflows/staging.yml
+
+[[headers]]
+  for = "/id-tagging-schema/dist/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
