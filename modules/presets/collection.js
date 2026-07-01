@@ -170,15 +170,15 @@ export function presetCollection(collection) {
     // matches key=value to preset.tags
     let leadingTagKeyValues = [];
     if (value.includes('=')) {
-    leadingTagKeyValues = searchable.filter(a => a.tags &&
-      Object.keys(a.tags).some(key => key + '=' + a.tags[key] === value))
-    .concat(searchable.filter(a => a.tags &&
-      Object.keys(a.tags).some(key => leading(key + '=' + a.tags[key]))))
-    .concat(searchable.filter(a => a.addTags &&
-      Object.keys(a.addTags).some(key => key + '=' + a.addTags[key] === value)))
-    .concat(searchable.filter(a => a.addTags &&
-      Object.keys(a.addTags).some(key => leading(key + '=' + a.addTags[key]))));
-}
+      leadingTagKeyValues = searchable.filter(a => a.tags &&
+          Object.keys(a.tags).some(key => key + '=' + a.tags[key] === value))
+        .concat(searchable.filter(a => a.tags &&
+          Object.keys(a.tags).some(key => leading(key + '=' + a.tags[key]))))
+        .concat(searchable.filter(a => a.addTags &&
+          Object.keys(a.addTags).some(key => key + '=' + a.addTags[key] === value)))
+        .concat(searchable.filter(a => a.addTags &&
+          Object.keys(a.addTags).some(key => leading(key + '=' + a.addTags[key]))));
+    }
 
     // also match cases where preset string is inside searched term
     const presetsInValues = searchable
