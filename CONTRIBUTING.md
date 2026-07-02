@@ -9,6 +9,86 @@ everyone to feel comfortable contributing to iD.
 
 The project is currently maintained by [@tyr_asd](https://github.com/tyrasd) and [@k-yle](https://github.com/k-yle/). Get in touch if you have any questions.
 
+
+## Translating
+
+Translations are managed using the
+[Transifex](https://app.transifex.com/openstreetmap/id-editor/) platform. Sign up to Transifex via the
+["Join This Project"](https://app.transifex.com/join/?o=openstreetmap&p=id-editor&t=opensource) link on
+the [iD's project page](https://app.transifex.com/openstreetmap/id-editor/) and
+click **Translate** to start translating. The registration form asks for a "business email" but you may provide
+a regular one. If you try to join via the Transifex home page "Sign up" link you may be unable to create an
+account. After registration your account must be manually approved; you won't be able to translate until that happens.
+
+Translations are divided into separate resources:
+* *core* - contains text for the main interface of iD
+* *presets* - contains the text for labeling feature presets
+* *imagery* - contains text for imagery names and descriptions
+
+The words in brackets, for example `{name}`, should not be translated into a
+new language: it's replaced with a place name when iD presents the text. So a
+French translation of `Couldn't locate a place named '{name}'` would look like
+`Impossible de localiser l'endroit nommé '{name}'`.
+
+The translations for presets, [maintained in the id-tagging-schema repository](https://github.com/openstreetmap/id-tagging-schema), consist of the names of presets, labels for
+preset fields, and lists of search terms. You do _not_ need to translate the
+search terms literally -- use a set of synonyms and related terms appropriate
+to the target language, separated by commas.
+For more information on translating the presets [please see this id-tagging-schema contribution guide](https://github.com/openstreetmap/id-tagging-schema/blob/main/CONTRIBUTING.md#translating).
+
+You can check your translations on the [development preview site](https://ideditor.netlify.app),
+which is updated every time we change the `develop` branch.
+
+[iD translation project on Transifex](https://app.transifex.com/openstreetmap/id-editor/)
+
+To get notifications when translation source files change, click **Watch
+project** button near the bottom of the project page. You can edit your
+[notification settings](https://app.transifex.com/user/settings/notices/) if you're
+getting too many notifications.
+
+Translations are licensed under
+[ISC](https://raw.github.com/openstreetmap/iD/develop/LICENSE.md), the same license
+as iD.
+
+**Why are there so many duplicate "Type" translations?** There are multiple
+distinct preset fields with the label "Type". You can see some context on the
+"Details" tab in Transifex:
+
+![image](https://f.cloud.github.com/assets/98601/324275/1a5cfc8c-9ae0-11e2-9a38-36c0f14d532d.png)
+
+The "key" field indicates that this is the "Type" label for the
+"[aeroway](http://wiki.openstreetmap.org/wiki/Aeroway)" preset, i.e. you should
+translate it as you would translate "type" in "type of aeroway".
+
+These are separate translations for uniformity reasons and because some languages
+ may translate "type" differently in "type of aeroway" and "type of amenity", for
+ example.
+
+**Why can't I find the Osmose QA layer translations?** The Osmose QA strings are
+ pulled in from the external Osmose API. You can contribute to the
+ [Osmose Transifex project](https://app.transifex.com/openstreetmap-france/osmose/)
+ and the results will be seen in iD once deployed.
+
+Note that if you want to add/update English translations in Osmose then you will
+ need to head on over to the [Osmose backend source code](https://github.com/osm-fr/osmose-backend).
+
+### Translations in Code
+
+iD translates strings with a `t` function: `t('foo.bar')` translates the key
+`foo.bar` into the current language. If you introduce new translatable strings,
+only display them in the interface through the `t()` function.
+
+Then, add the new string to `data/core.yaml`. The translation system, Transifex,
+will automatically detect the change.
+
+If you are adding or updating an existing string, update it in `data/core.yaml`
+and run `npm run build` to generate the `en.min.json` file automatically. Only
+commit the `data/core.yaml` file in your pull request. The translation system,
+Transifex, will automatically detect the changes.
+
+`npm run translations` can be used to pull the latest translations from Transifex.
+
+
 ## Submitting Issues
 
 We'd love to hear your feedback about iD. Please [search existing issues](https://github.com/search?l=&q=repo%3Aopenstreetmap%2FiD&type=Issues)
@@ -141,84 +221,6 @@ the ![live](http://labl.es/svg?text=live&bgcolor=d32232) button in the bottom ba
 switch to the development database.
 
 
-## Translating
-
-Translations are managed using the
-[Transifex](https://app.transifex.com/openstreetmap/id-editor/) platform. Sign up to Transifex via the
-["Join This Project"](https://app.transifex.com/join/?o=openstreetmap&p=id-editor&t=opensource) link on
-the [iD's project page](https://app.transifex.com/openstreetmap/id-editor/) and
-click **Translate** to start translating. If you try to join via the home page "Sign up" link you won't
-be able to create an account without a "business email". Translations are divided into
-separate resources:
-
-* *core* - contains text for the main interface of iD
-* *presets* - contains the text for labeling feature presets
-* *imagery* - contains text for imagery names and descriptions
-
-The words in brackets, for example `{name}`, should not be translated into a
-new language: it's replaced with a place name when iD presents the text. So a
-French translation of `Couldn't locate a place named '{name}'` would look like
-`Impossible de localiser l'endroit nommé '{name}'`.
-
-The translations for presets, [maintained in the id-tagging-schema repository](https://github.com/openstreetmap/id-tagging-schema), consist of the names of presets, labels for
-preset fields, and lists of search terms. You do _not_ need to translate the
-search terms literally -- use a set of synonyms and related terms appropriate
-to the target language, separated by commas.
-For more information on translating the presets [please see this id-tagging-schema contribution guide](https://github.com/openstreetmap/id-tagging-schema/blob/main/CONTRIBUTING.md#translating).
-
-You can check your translations on the [development preview site](https://ideditor.netlify.app),
-which is updated every time we change the `develop` branch.
-
-[iD translation project on Transifex](https://app.transifex.com/openstreetmap/id-editor/)
-
-To get notifications when translation source files change, click **Watch
-project** button near the bottom of the project page. You can edit your
-[notification settings](https://app.transifex.com/user/settings/notices/) if you're
-getting too many notifications.
-
-Translations are licensed under
-[ISC](https://raw.github.com/openstreetmap/iD/develop/LICENSE.md), the same license
-as iD.
-
-**Why are there so many duplicate "Type" translations?** There are multiple
-distinct preset fields with the label "Type". You can see some context on the
-"Details" tab in Transifex:
-
-![image](https://f.cloud.github.com/assets/98601/324275/1a5cfc8c-9ae0-11e2-9a38-36c0f14d532d.png)
-
-The "key" field indicates that this is the "Type" label for the
-"[aeroway](http://wiki.openstreetmap.org/wiki/Aeroway)" preset, i.e. you should
-translate it as you would translate "type" in "type of aeroway".
-
-These are separate translations for uniformity reasons and because some languages
- may translate "type" differently in "type of aeroway" and "type of amenity", for
- example.
-
-**Why can't I find the Osmose QA layer translations?** The Osmose QA strings are
- pulled in from the external Osmose API. You can contribute to the
- [Osmose Transifex project](https://app.transifex.com/openstreetmap-france/osmose/)
- and the results will be seen in iD once deployed.
-
-Note that if you want to add/update English translations in Osmose then you will
- need to head on over to the [Osmose backend source code](https://github.com/osm-fr/osmose-backend).
-
-### Translations in Code
-
-iD translates strings with a `t` function: `t('foo.bar')` translates the key
-`foo.bar` into the current language. If you introduce new translatable strings,
-only display them in the interface through the `t()` function.
-
-Then, add the new string to `data/core.yaml`. The translation system, Transifex,
-will automatically detect the change.
-
-If you are adding or updating an existing string, update it in `data/core.yaml`
-and run `npm run build` to generate the `en.min.json` file automatically. Only
-commit the `data/core.yaml` file in your pull request. The translation system,
-Transifex, will automatically detect the changes.
-
-`npm run translations` can be used to pull the latest translations from Transifex.
-
-
 ## Contributing Documentation
 
 Documentation is maintained as a series of [Markdown](http://daringfireball.net/projects/markdown/)
@@ -330,7 +332,7 @@ If you are new to GitHub or git you can read the [GitHub Guides](https://guides.
 
 Additionally here is a step-by-step workflow example for beginners:
 
-1. [Login](https://github.com/login) to your GitHub account or [create](https://services.github.com/on-demand/intro-to-github/create-github-account) a GitHub account, if you do not already have one.
+1. [Login](https://github.com/login) to your GitHub account or [create](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github) a GitHub account, if you do not already have one.
 
 2. Go to the [iD main repository](https://github.com/openstreetmap/iD) and fork iD into your GitHub account (Fork is top right).
 

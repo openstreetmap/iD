@@ -27,6 +27,13 @@ import { osmWay } from './way';
 // Incomplete members (those for which `graph.hasEntity(element.id)` returns
 // false) and non-way members are ignored.
 //
+/**
+ * @typedef {RelationMember[] & { nodes: iD.OsmNode[] }} Sequence
+ * @typedef {Sequence[] & { actions: unknown[] }} Sequences
+ * @param {import('./relation').RelationMember[]} toJoin
+ * @param {iD.Graph} graph
+ * @returns {Sequences}
+ */
 export function osmJoinWays(toJoin, graph) {
     function resolve(member) {
         return graph.childNodes(graph.entity(member.id));

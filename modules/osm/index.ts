@@ -1,5 +1,6 @@
+export * from './abstract-entity';
 export { osmChangeset } from './changeset';
-export { osmEntity } from './entity';
+export * from './create-entity';
 export * from './id_manager';
 export { osmNode } from './node';
 export { osmNote } from './note';

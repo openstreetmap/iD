@@ -3,12 +3,12 @@ import { locationManager, presetIndex } from '../../../modules';
 describe('iD.presetIndex', function () {
     var _savedPresets, _savedAreaKeys;
 
-    before(function() {
+    beforeEach(() => {
         _savedPresets = iD.fileFetcher.cache().preset_presets;
         _savedAreaKeys = iD.osmAreaKeys;
     });
 
-    after(function() {
+    afterEach(() => {
         iD.fileFetcher.cache().preset_presets = _savedPresets;
         iD.osmSetAreaKeys(_savedAreaKeys);
     });
@@ -365,7 +365,6 @@ describe('iD.presetIndex', function () {
                 '2161a712': {
                     'key': 'building',
                     'label': 'Building',
-                    'overrideLabel': 'Building',
                     'type': 'text'
                 }
             }

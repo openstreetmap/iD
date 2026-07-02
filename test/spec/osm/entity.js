@@ -1,13 +1,15 @@
-describe('iD.osmEntity', function () {
+describe('iD.createEntity', function () {
     it('returns a subclass of the appropriate type', function () {
-        expect(iD.osmEntity({type: 'node'})).be.an.instanceOf(iD.osmNode);
-        expect(iD.osmEntity({type: 'way'})).be.an.instanceOf(iD.osmWay);
-        expect(iD.osmEntity({type: 'relation'})).be.an.instanceOf(iD.osmRelation);
-        expect(iD.osmEntity({id: 'n1'})).be.an.instanceOf(iD.osmNode);
-        expect(iD.osmEntity({id: 'w1'})).be.an.instanceOf(iD.osmWay);
-        expect(iD.osmEntity({id: 'r1'})).be.an.instanceOf(iD.osmRelation);
+        expect(iD.createEntity({type: 'node'})).be.an.instanceOf(iD.osmNode);
+        expect(iD.createEntity({type: 'way'})).be.an.instanceOf(iD.osmWay);
+        expect(iD.createEntity({type: 'relation'})).be.an.instanceOf(iD.osmRelation);
+        expect(iD.createEntity({id: 'n1'})).be.an.instanceOf(iD.osmNode);
+        expect(iD.createEntity({id: 'w1'})).be.an.instanceOf(iD.osmWay);
+        expect(iD.createEntity({id: 'r1'})).be.an.instanceOf(iD.osmRelation);
     });
+});
 
+describe('iD.OsmAbstractEntity', function () {
     if (iD.debug) {
         it('is frozen', function () {
             expect(Object.isFrozen(new iD.osmNode())).to.be.true;
@@ -15,6 +17,13 @@ describe('iD.osmEntity', function () {
 
         it('freezes tags', function () {
             expect(Object.isFrozen(new iD.osmNode().tags)).to.be.true;
+        });
+
+        it('freezes node-specific properties such as loc', () => {
+            expect(() => {
+                const node = iD.osmNode();
+                node.loc[1] = 1;
+            }).toThrow();
         });
     }
 
@@ -45,7 +54,7 @@ describe('iD.osmEntity', function () {
         it('returns a new Entity', function () {
             var n = new iD.osmNode();
             var result = n.copy(null, {});
-            expect(result).to.be.an.instanceof(iD.osmEntity);
+            expect(result).to.be.an.instanceof(iD.OsmAbstractEntity);
             expect(result).not.to.equal(n);
         });
 
@@ -87,7 +96,7 @@ describe('iD.osmEntity', function () {
         it('returns a new Entity', function () {
             var a = new iD.osmNode();
             var b = a.update({});
-            expect(b instanceof iD.osmEntity).to.be.true;
+            expect(b instanceof iD.OsmAbstractEntity).to.be.true;
             expect(a).not.to.equal(b);
         });
 
@@ -131,7 +140,7 @@ describe('iD.osmEntity', function () {
         it('returns a new Entity if changed', function () {
             var a = new iD.osmNode({tags: {a: 'a'}});
             var b = a.mergeTags({a: 'b'});
-            expect(b instanceof iD.osmEntity).to.be.true;
+            expect(b instanceof iD.OsmAbstractEntity).to.be.true;
             expect(a).not.to.equal(b);
         });
 
@@ -170,8 +179,8 @@ describe('iD.osmEntity', function () {
         });
 
         it('accepts override tags', function () {
-            const a = iD.osmEntity({tags: {a: 'a', c: '1'}});
-            const b = iD.osmEntity({tags: {b: 'b', c: '2'}});
+            const a = new iD.osmNode({tags: {a: 'a', c: '1'}});
+            const b = new iD.osmNode({tags: {b: 'b', c: '2'}});
 
             const merged = a.mergeTags(b.tags, { c: '3' });
 

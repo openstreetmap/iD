@@ -1,6 +1,8 @@
 // Patterns only work in Firefox when set directly on element.
+import type { TagDictionary } from '../util/object';
+
 // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
-var patterns = {
+const patterns: TagDictionary<string | Tags[]> = {
     // tag - pattern name
     // -or-
     // tag - value - pattern name
@@ -22,6 +24,7 @@ var patterns = {
         construction: 'construction',
         farmland: 'farmland',
         farmyard: 'farmyard',
+        flowerbed: 'flowers',
         forest: [
             { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
             { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
@@ -76,7 +79,7 @@ var patterns = {
     }
 };
 
-export function svgTagPattern(tags) {
+export function svgTagPattern(tags: Tags): string | null {
     // Skip pattern filling if this is a building (buildings don't get patterns applied)
     if (tags.building && tags.building !== 'no') {
         return null;

@@ -3,7 +3,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../presets';
 import { geoScaleToZoom } from '../geo';
-import { osmEntity } from '../osm';
+import { osmIdManager } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 
@@ -33,7 +33,7 @@ export function svgVertices(projection, context) {
     function fastEntityKey(d) {
         var mode = context.mode();
         var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
-        return isMoving ? d.id : osmEntity.key(d);
+        return isMoving ? d.id : osmIdManager.key(d);
     }
 
 
@@ -182,7 +182,7 @@ export function svgVertices(projection, context) {
             .merge(dgroups);
 
         var viewfields = dgroups.selectAll('.viewfield')
-            .data(getDirections, function key(d) { return osmEntity.key(d); });
+            .data(getDirections, function key(d) { return osmIdManager.key(d); });
 
         // exit
         viewfields.exit()

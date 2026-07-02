@@ -1,7 +1,7 @@
 describe('iD.validations.suspicious_name', function () {
     var context;
 
-    before(function() {
+    beforeEach(() => {
         iD.services.nsi = iD.serviceNsi;
         iD.fileFetcher.cache().nsi_features = { type: 'FeatureCollection', features: [] };
         iD.fileFetcher.cache().nsi_dissolved = { dissolved: {} };
@@ -38,7 +38,7 @@ describe('iD.validations.suspicious_name', function () {
         };
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.nsi;
     });
 

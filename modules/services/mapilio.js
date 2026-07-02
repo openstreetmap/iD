@@ -3,7 +3,7 @@ import { select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import { deepEqual } from 'fast-equals';
-import Protobuf from 'pbf';
+import { PbfReader } from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 
@@ -103,8 +103,8 @@ function loadTile(which, url, tile) {
 
 // Load the data from the vector tile into cache
 function loadTileDataToCache(data, tile) {
-    const vectorTile = new VectorTile(new Protobuf(data));
-    if (vectorTile.layers.hasOwnProperty(pointLayer)) {
+    const vectorTile = new VectorTile(new PbfReader(data));
+    if (Object.hasOwnProperty.call(vectorTile.layers, pointLayer)) {
         const features = [];
         const cache = _cache.images;
         const layer = vectorTile.layers[pointLayer];
@@ -139,7 +139,7 @@ function loadTileDataToCache(data, tile) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty(lineLayer)) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, lineLayer)) {
         const cache = _cache.sequences;
         const layer = vectorTile.layers[lineLayer];
 

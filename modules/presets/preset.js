@@ -3,7 +3,7 @@ import { deepEqual } from 'fast-equals';
 import { t } from '../core/localizer';
 import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
 import { utilObjectOmit } from '../util';
-import { utilSafeClassName } from '../util/util';
+import { utilSafeClassName, utilStripDiacritics } from '../util/util';
 import { locationManager } from '../core/location_manager';
 
 
@@ -165,7 +165,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.searchNameStripped = () => {
     if (!_searchNameStripped) {
-      _searchNameStripped = stripDiacritics(_this.searchName());
+      _searchNameStripped = utilStripDiacritics(_this.searchName());
     }
     return _searchNameStripped;
   };
@@ -180,7 +180,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   _this.searchAliasesStripped = () => {
     if (!_searchAliasesStripped) {
       _searchAliasesStripped = _this.searchAliases();
-      _searchAliasesStripped = _searchAliasesStripped.map(stripDiacritics);
+      _searchAliasesStripped = _searchAliasesStripped.map(utilStripDiacritics);
     }
     return _searchAliasesStripped;
   };
@@ -372,15 +372,6 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
       return true;
     }
-  }
-
-
-  function stripDiacritics(s) {
-    // split combined diacritical characters into their parts
-    if (s.normalize) s = s.normalize('NFD');
-    // remove diacritics
-    s = s.replace(/[\u0300-\u036f]/g, '');
-    return s;
   }
 
   return _this;

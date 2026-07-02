@@ -35,7 +35,6 @@ export function uiSectionBackgroundList(context) {
         _backgroundList = container.enter()
             .append('ul')
             .attr('class', 'layer-list layer-background-list')
-            .attr('dir', 'auto')
             .merge(container);
 
 
