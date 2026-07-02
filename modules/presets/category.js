@@ -1,4 +1,5 @@
 import { t } from '../core/localizer';
+import { utilStripDiacritics } from '../util/util';
 import { presetCollection } from './collection';
 
 
@@ -48,13 +49,7 @@ export function presetCategory(categoryID, category, allPresets) {
   };
 
   _this.searchNameStripped = () => {
-    if (!_searchNameStripped) {
-      _searchNameStripped = _this.searchName();
-      // split combined diacritical characters into their parts
-      if (_searchNameStripped.normalize) _searchNameStripped = _searchNameStripped.normalize('NFD');
-      // remove diacritics
-      _searchNameStripped = _searchNameStripped.replace(/[\u0300-\u036f]/g, '');
-    }
+    _searchNameStripped ||= utilStripDiacritics(_this.searchName());
     return _searchNameStripped;
   };
 
