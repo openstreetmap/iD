@@ -331,7 +331,7 @@ If you are new to GitHub or git you can read the [GitHub Guides](https://guides.
 
 Additionally here is a step-by-step workflow example for beginners:
 
-1. [Login](https://github.com/login) to your GitHub account or [create](https://services.github.com/on-demand/intro-to-github/create-github-account) a GitHub account, if you do not already have one.
+1. [Login](https://github.com/login) to your GitHub account or [create](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github) a GitHub account, if you do not already have one.
 
 2. Go to the [iD main repository](https://github.com/openstreetmap/iD) and fork iD into your GitHub account (Fork is top right).
 
