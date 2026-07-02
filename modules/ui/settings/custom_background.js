@@ -36,7 +36,7 @@ export function uiSettingsCustomBackground() {
 ${t.html('settings.custom_background.instructions.info')}
 
 ${t.html('settings.custom_background.instructions.license_disclaimer')}
-[${t.html('settings.custom_background.instructions.license_faq')}](${t('settings.custom_background.instructions.license_faq_url')})
+<a href="${t('settings.custom_background.instructions.license_faq_url')}" target="_blank">${t.html('settings.custom_background.instructions.license_faq')}</a>
 
 #### ${t.html('settings.custom_background.instructions.wms.tokens_label')}
 * ${t.html('settings.custom_background.instructions.wms.tokens.proj')}
