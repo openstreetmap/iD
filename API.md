@@ -228,7 +228,7 @@ certain parts of the iD code to be replaced at runtime by custom code or data.
 
 iD is written in a modular style and bundled with [rollup.js](http://rollupjs.org/),
 which makes hot code replacement tricky.  (ES6 module exports are
-[immutable live bindings](http://www.2ality.com/2015/07/es6-module-exports.html)).
+[immutable live bindings](https://web.archive.org/web/20251130073344/https://2ality.com/2015/07/es6-module-exports.html)).
 Because of this, the parts of iD which are designed for customization are exported
 as live-bound objects that can be overridden at runtime _before initializing the iD context_.
 
