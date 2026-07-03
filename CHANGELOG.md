@@ -37,6 +37,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # Unreleased (2.42.0-dev)
 
+#### :shield: Security
+* Sanitize imported lens CSS by dropping `@import` and external `url()` references, to prevent remote fetches and data exfiltration ([#12473])
+#### :tada: New Features
+* Add a Lens preference to import and apply custom CSS lenses, including styling map features by OSM tag ([#12473])
 #### :sparkles: Usability & Accessibility
 * Display radio field options in a two-column layout if there is insufficient space for them in a single line ([#12455])
 * Render `highway=track` using different styles depending on the `tracktype` ([#12392], thanks [@RudyTheDev])
@@ -72,6 +76,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12457]: https://github.com/openstreetmap/iD/pull/12457
 [#12458]: https://github.com/openstreetmap/iD/pull/12458
 [#12467]: https://github.com/openstreetmap/iD/issues/12467
+[#12473]: https://github.com/openstreetmap/iD/pull/12473
 [@brianstrauch]: https://github.com/brianstrauch
 
 
