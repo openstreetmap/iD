@@ -103,7 +103,7 @@ export function rendererFeatures(context) {
         100);
 
     defineRule('points', (tags, geometry) =>
-        geometry === 'point' && !isAddressPoint(tags, geometry),
+        geometry === 'point' && !isAddressPoint(tags, geometry) && tags.power !== 'no',
         200);
 
     defineRule('traffic_roads', function isTrafficRoad(tags) {
