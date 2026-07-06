@@ -1,3 +1,5 @@
+import { utilStripDiacritics } from '../../../modules/util/util';
+
 describe('iD.util', function() {
 
     describe('utilGetAllNodes', function() {
@@ -433,6 +435,14 @@ describe('iD.util', function() {
         });
         it('returns the first ID in the list otherwise', function() {
             expect(iD.utilOldestID(['z', 'a', 'A', 'Z'])).to.eql('z');
+        });
+    });
+
+    describe('utilStripDiacritics', function() {
+        it('strips diacritics', function() {
+            expect(utilStripDiacritics('äüö')).to.eql('auo');
+            expect(utilStripDiacritics('é')).to.eql('e');
+            expect(utilStripDiacritics('x'+String.fromCharCode(0x330) /* unicode: combining tilde below */)).to.eql('x');
         });
     });
 });
