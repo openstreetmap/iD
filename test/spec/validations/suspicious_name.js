@@ -1,12 +1,12 @@
 describe('iD.validations.suspicious_name', function () {
     var context;
 
-    before(function() {
+    beforeEach(() => {
         iD.services.nsi = iD.serviceNsi;
-        iD.fileFetcher.cache().nsi_presets = { presets: {} };
         iD.fileFetcher.cache().nsi_features = { type: 'FeatureCollection', features: [] };
         iD.fileFetcher.cache().nsi_dissolved = { dissolved: {} };
         iD.fileFetcher.cache().nsi_replacements = { replacements: {} };
+        iD.fileFetcher.cache().nsi_wikidata = { wikidata: {} };
 
         iD.fileFetcher.cache().nsi_trees = {
           trees: {
@@ -38,7 +38,7 @@ describe('iD.validations.suspicious_name', function () {
         };
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.nsi;
     });
 

@@ -75,18 +75,18 @@ describe('iD.behaviorHover', function() {
             _container.append('span').attr('class', 'hover');
             _container.call(iD.behaviorHover(_context).altDisables(true));
 
-            happen.keydown(window, { keyCode: 18 });
+            window.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 18 }));
             expect(_container.selectAll('.hover').size()).toEqual(0);
             expect(_container.selectAll('.hover-suppressed').size()).toEqual(1);
-            happen.keyup(window, { keyCode: 18 });
+            window.dispatchEvent(new KeyboardEvent('keyup', { keyCode: 18 }));
         });
 
         it('adds the .hover-disabled class to the surface', function () {
             _container.call(iD.behaviorHover(_context).altDisables(true));
 
-            happen.keydown(window, { keyCode: 18 });
+            window.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 18 }));
             expect(_container.classed('hover-disabled')).toBe(true);
-            happen.keyup(window, { keyCode: 18 });
+            window.dispatchEvent(new KeyboardEvent('keyup', { keyCode: 18 }));
         });
     });
 
@@ -95,8 +95,8 @@ describe('iD.behaviorHover', function() {
             _container.append('span').attr('class', 'hover-suppressed');
             _container.call(iD.behaviorHover(_context).altDisables(true));
 
-            happen.keydown(window, { keyCode: 18 });
-            happen.keyup(window, { keyCode: 18 });
+            window.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 18 }));
+            window.dispatchEvent(new KeyboardEvent('keyup', { keyCode: 18 }));
             expect(_container.selectAll('.hover').size()).toEqual(1);
             expect(_container.selectAll('.hover-suppressed').size()).toEqual(0);
         });
@@ -104,8 +104,8 @@ describe('iD.behaviorHover', function() {
         it('removes the .hover-disabled class from the surface', function () {
             _container.call(iD.behaviorHover(_context).altDisables(true));
 
-            happen.keydown(window, { keyCode: 18 });
-            happen.keyup(window, { keyCode: 18 });
+            window.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 18 }));
+            window.dispatchEvent(new KeyboardEvent('keyup', { keyCode: 18 }));
             expect(_container.classed('hover-disabled')).toBe(false);
         });
     });

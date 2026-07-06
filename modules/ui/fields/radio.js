@@ -66,7 +66,12 @@ export function uiFieldRadio(field, context) {
 
         enter
             .append('span')
-            .each(function(d) { strings.t.append('options.' + d, { 'default': d })(d3_select(this)); });
+            .each(function(d) {
+                const labelId = strings.hasTextForStringId('options.' + d + '.title')
+                    ? 'options.' + d + '.title'
+                    : 'options.' + d;
+                strings.t.append(labelId, { 'default': d })(d3_select(this));
+            });
 
         labels = labels
             .merge(enter);
@@ -74,6 +79,52 @@ export function uiFieldRadio(field, context) {
         radios = labels.selectAll('input')
             .on('change', changeRadio);
 
+    }
+
+
+    function updateLayout() {
+        const wrapNode = wrap.node();
+        if (!wrapNode || labels.empty()) return;
+
+        wrap.classed('one-line', false);
+        wrap.classed('two-column', false);
+
+        // Temporarily measure each label at its natural content width (no grow/shrink)
+        // by applying inline styles, forcing a layout read, then removing them.
+        const labelNodes = labels.nodes();
+        labelNodes.forEach(node => {
+            node._originalStyle = node.style;
+            node.style.flex = '0 0 auto';
+            node.style.width = 'auto';
+        });
+
+        const containerWidth = wrapNode.getBoundingClientRect().width;
+        const labelWidths = labelNodes.map(node => node.getBoundingClientRect().width);
+        const sumLabelWidth = labelWidths.reduce((a, b) => a + b);
+        const maxLabelWidth = Math.max(...labelWidths);
+        if (labelWidths.length % 2 === 1) {
+            // for odd number of entries, we can skip the last entry as there is the
+            // full width available
+            labelWidths.pop();
+        }
+        const maxLabelWidthTwoColumns = Math.max(...labelWidths);
+
+        labelNodes.forEach(node => {
+            node.style = node._originalStyle;
+            delete node._originalStyle;
+        });
+
+        // All labels fit on one equal-width line without truncation when the widest
+        // label's natural width fits within each cell's equal share of the container.
+        wrap.classed('one-line', sumLabelWidth <= containerWidth);
+        wrap.classed('equal-spacing', maxLabelWidth * labelNodes.length <= containerWidth);
+        // Otherwise, if all labels fit on half width of the container -> we can use
+        // a more compact two column layout
+        wrap.classed('two-column',
+            sumLabelWidth > containerWidth // not if already one-line layout
+            && maxLabelWidthTwoColumns <= Math.ceil(containerWidth / 2) // has to fit in half-width column
+            && labelNodes.length > 3 // skip if only 3 or fewer options -> looks unbalanced
+        );
     }
 
 
@@ -327,6 +378,8 @@ export function uiFieldRadio(field, context) {
 
             wrap.call(structureExtras, tags);
         }
+
+        updateLayout();
     };
 
 

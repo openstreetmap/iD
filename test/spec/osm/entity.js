@@ -1,13 +1,15 @@
-describe('iD.osmEntity', function () {
+describe('iD.createEntity', function () {
     it('returns a subclass of the appropriate type', function () {
-        expect(iD.osmEntity({type: 'node'})).toBeInstanceOf(iD.osmNode);
-        expect(iD.osmEntity({type: 'way'})).toBeInstanceOf(iD.osmWay);
-        expect(iD.osmEntity({type: 'relation'})).toBeInstanceOf(iD.osmRelation);
-        expect(iD.osmEntity({id: 'n1'})).toBeInstanceOf(iD.osmNode);
-        expect(iD.osmEntity({id: 'w1'})).toBeInstanceOf(iD.osmWay);
-        expect(iD.osmEntity({id: 'r1'})).toBeInstanceOf(iD.osmRelation);
+        expect(iD.createEntity({type: 'node'})).toBeInstanceOf(iD.osmNode);
+        expect(iD.createEntity({type: 'way'})).toBeInstanceOf(iD.osmWay);
+        expect(iD.createEntity({type: 'relation'})).toBeInstanceOf(iD.osmRelation);
+        expect(iD.createEntity({id: 'n1'})).toBeInstanceOf(iD.osmNode);
+        expect(iD.createEntity({id: 'w1'})).toBeInstanceOf(iD.osmWay);
+        expect(iD.createEntity({id: 'r1'})).toBeInstanceOf(iD.osmRelation);
     });
+});
 
+describe('iD.OsmAbstractEntity', function () {
     if (iD.debug) {
         it('is frozen', function () {
             expect(Object.isFrozen(new iD.osmNode())).toBe(true);
@@ -15,6 +17,13 @@ describe('iD.osmEntity', function () {
 
         it('freezes tags', function () {
             expect(Object.isFrozen(new iD.osmNode().tags)).toBe(true);
+        });
+
+        it('freezes node-specific properties such as loc', () => {
+            expect(() => {
+                const node = iD.osmNode();
+                node.loc[1] = 1;
+            }).toThrow();
         });
     }
 
@@ -45,7 +54,7 @@ describe('iD.osmEntity', function () {
         it('returns a new Entity', function () {
             var n = new iD.osmNode();
             var result = n.copy(null, {});
-            expect(result).toBeInstanceOf(iD.osmEntity);
+            expect(result).toBeInstanceOf(iD.OsmAbstractEntity);
             expect(result).not.toBe(n);
         });
 
@@ -87,7 +96,7 @@ describe('iD.osmEntity', function () {
         it('returns a new Entity', function () {
             var a = new iD.osmNode();
             var b = a.update({});
-            expect(b instanceof iD.osmEntity).toBe(true);
+            expect(b instanceof iD.OsmAbstractEntity).toBe(true);
             expect(a).not.toBe(b);
         });
 
@@ -131,7 +140,7 @@ describe('iD.osmEntity', function () {
         it('returns a new Entity if changed', function () {
             var a = new iD.osmNode({tags: {a: 'a'}});
             var b = a.mergeTags({a: 'b'});
-            expect(b instanceof iD.osmEntity).toBe(true);
+            expect(b instanceof iD.OsmAbstractEntity).toBe(true);
             expect(a).not.toBe(b);
         });
 
@@ -170,8 +179,8 @@ describe('iD.osmEntity', function () {
         });
 
         it('accepts override tags', function () {
-            const a = iD.osmEntity({tags: {a: 'a', c: '1'}});
-            const b = iD.osmEntity({tags: {b: 'b', c: '2'}});
+            const a = new iD.osmNode({tags: {a: 'a', c: '1'}});
+            const b = new iD.osmNode({tags: {b: 'b', c: '2'}});
 
             const merged = a.mergeTags(b.tags, { c: '3' });
 

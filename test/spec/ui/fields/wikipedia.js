@@ -1,10 +1,11 @@
+import fetchMock from 'fetch-mock';
 import { setTimeout } from 'node:timers/promises';
 import { fn } from '@vitest/spy';
 
 describe('iD.uiFieldWikipedia', function() {
     var entity, context, selection, field;
 
-    before(function() {
+    beforeEach(() => {
         iD.fileFetcher.cache().wmf_sitematrix = [
           ['German','Deutsch','de'],
           ['English','English','en']
@@ -13,7 +14,7 @@ describe('iD.uiFieldWikipedia', function() {
         iD.services.wikidata = iD.serviceWikidata;
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.fileFetcher.cache().wmf_sitematrix;
         delete iD.services.wikipedia;
         delete iD.services.wikidata;
@@ -83,12 +84,12 @@ describe('iD.uiFieldWikipedia', function() {
         wikipedia.on('change.spy', spy);
 
         iD.utilGetSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
-        happen.once(selection.selectAll('.wiki-lang').node(), { type: 'change' });
-        happen.once(selection.selectAll('.wiki-lang').node(), { type: 'blur' });
+        selection.selectAll('.wiki-lang').node().dispatchEvent(new Event('change'));
+        selection.selectAll('.wiki-lang').node().dispatchEvent(new Event('blur'));
 
         iD.utilGetSetValue(selection.selectAll('.wiki-title'), 'Title');
-        happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
-        happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
+        selection.selectAll('.wiki-title').node().dispatchEvent(new Event('change'));
+        selection.selectAll('.wiki-title').node().dispatchEvent(new Event('blur'));
 
         expect(spy).to.have.callCount(4);
         expect(spy).toHaveBeenCalledWith({ wikipedia: undefined});  // lang on change
@@ -104,7 +105,7 @@ describe('iD.uiFieldWikipedia', function() {
         selection.call(wikipedia);
 
         iD.utilGetSetValue(selection.selectAll('.wiki-title'), 'http://de.wikipedia.org/wiki/Title');
-        happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
+        selection.selectAll('.wiki-title').node().dispatchEvent(new Event('change'));
 
         expect(iD.utilGetSetValue(selection.selectAll('.wiki-lang'))).toEqual('Deutsch');
         expect(iD.utilGetSetValue(selection.selectAll('.wiki-title'))).toEqual('Title');
@@ -181,8 +182,8 @@ describe('iD.uiFieldWikipedia', function() {
         // Set title to "Skip"
         iD.utilGetSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
         iD.utilGetSetValue(selection.selectAll('.wiki-title'), 'Skip');
-        happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
-        happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
+        selection.selectAll('.wiki-title').node().dispatchEvent(new Event('change'));
+        selection.selectAll('.wiki-title').node().dispatchEvent(new Event('blur'));
 
         // t0
         expect(context.entity(entity.id).tags.wikidata).toBeUndefined();
@@ -201,8 +202,8 @@ describe('iD.uiFieldWikipedia', function() {
         // t30:  graph change - Set title to "Title"
         window.setTimeout(function() {
             iD.utilGetSetValue(selection.selectAll('.wiki-title'), 'Title');
-            happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
-            happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
+            selection.selectAll('.wiki-title').node().dispatchEvent(new Event('change'));
+            selection.selectAll('.wiki-title').node().dispatchEvent(new Event('blur'));
         }, 30);
 
         // t60:  at t0 + 60ms (delay), wikidata SHOULD NOT be set because graph has changed.

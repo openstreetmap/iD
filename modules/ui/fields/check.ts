@@ -10,6 +10,7 @@ import { actionReverse } from '../../actions/reverse';
 import { svgIcon } from '../../svg/icon';
 import { utilCheckTagDictionary } from '../../util';
 import { osmOneWayTags } from '../../osm/tags';
+import type { EntityId } from '../../osm';
 
 export { uiFieldCheck as uiFieldDefaultCheck };
 export { uiFieldCheck as uiFieldOnewayCheck };
@@ -29,7 +30,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
     let reverser: d3.Selection<HTMLButtonElement> | d3.Selection<null> = d3_select(null);
 
     let _impliedYes: boolean;
-    let _entityIDs: EntityID[]  = [];
+    let _entityIDs: EntityId[]  = [];
     let _value: TagValueUpdate;
 
 
@@ -182,7 +183,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
     };
 
 
-    check.entityIDs = function(val?: string[]) {
+    check.entityIDs = function(val?: EntityId[]) {
         if (!arguments.length) return _entityIDs;
         _entityIDs = val!;
         return check;

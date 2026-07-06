@@ -545,6 +545,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     drawWay.cancel = function() {
         context.pauseChangeDispatch();
         resetToStartGraph();
+        context.enter(modeBrowse(context));
         context.resumeChangeDispatch();
 
         window.setTimeout(function() {
@@ -555,8 +556,6 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             .classed('nope', false)
             .classed('nope-disabled', false)
             .classed('nope-suppressed', false);
-
-        context.enter(modeBrowse(context));
     };
 
 

@@ -1,7 +1,7 @@
 describe('iD.validations.osm_api_limits', function () {
     let context;
 
-    before(function() {
+    beforeEach(() => {
         iD.services.osm = iD.serviceOsm;
         iD.services.osm.maxWayNodes = () => 10;
         iD.services.osm.on = () => undefined;
@@ -12,7 +12,7 @@ describe('iD.validations.osm_api_limits', function () {
         context.surface = () => d3.select('#nop'); // mock with NOP
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.osm;
     });
 

@@ -116,7 +116,7 @@ describe('iD.coreLocalizer', function() {
             expect(localiser.localesToUseFrom(SUPPORTED_LANGS)).toStrictEqual(matching);
         });
 
-        after(function() {
+        afterEach(() => {
             iD.coreLocalizer().preferredLocaleCodes([]);
         });
     });

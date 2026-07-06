@@ -192,7 +192,7 @@ describe('iD.svgLines', function () {
             var i_n = new iD.osmWay({id: 'implied-natural', tags: {natural: 'cliff'}, nodes: [a.id, b.id]});
             var i_nc = new iD.osmWay({id: 'implied-coastline', tags: {natural: 'coastline'}, nodes: [a.id, c.id]});
             var i_b = new iD.osmWay({id: 'implied-barrier', tags: {barrier: 'city_wall'}, nodes: [a.id, d.id]});
-            var i_mm = new iD.osmWay({id: 'implied-man_made', tags: {man_made: 'embankment'}, nodes: [b.id, c.id]});
+            var i_mm = new iD.osmWay({id: 'implied-man_made', tags: {man_made: 'quay'}, nodes: [b.id, c.id]});
 
             var graph = new iD.coreGraph([a, b, c, d, i_n, i_nc, i_b, i_mm]);
 

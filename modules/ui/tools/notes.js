@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit/compat';
+import { debounce } from 'es-toolkit';
 
 import { select as d3_select } from 'd3-selection';
 
@@ -48,7 +48,7 @@ export function uiToolNotes(context) {
 
     tool.render = function(selection) {
 
-        var debouncedUpdate = debounce(update, 500, { leading: true, trailing: true });
+        var debouncedUpdate = debounce(update, 500, { edges: ['leading', 'trailing'] });
 
         context.map()
             .on('move.notes', debouncedUpdate)

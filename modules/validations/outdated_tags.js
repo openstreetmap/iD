@@ -122,7 +122,7 @@ export function validationOutdatedTags() {
 
           return t.append(`issues.outdated_tags.${prefix}message`, { feature });
         },
-        reference: selection => showReference(
+        reference: selection => showTagDiffReference(
           selection,
           t.append(`issues.outdated_tags.${prefix}reference`),
           [...deprecationDiff, ...deprecationDiffContext]
@@ -160,7 +160,7 @@ export function validationOutdatedTags() {
             ? t.append('issues.outdated_tags.noncanonical_brand.message_incomplete', { feature })
             : t.append('issues.outdated_tags.noncanonical_brand.message', { feature });
         },
-        reference: selection => showReference(
+        reference: selection => showTagDiffReference(
           selection,
           t.append('issues.outdated_tags.noncanonical_brand.reference'),
           nsiDiff
@@ -229,50 +229,48 @@ export function validationOutdatedTags() {
 
       return actionChangeTags(currEntity.id, newTags)(graph);
     }
-
-
-    function showReference(selection, reference, tagDiff) {
-      let enter = selection.selectAll('.issue-reference')
-        .data([0])
-        .enter();
-
-      enter
-        .append('div')
-        .attr('class', 'issue-reference')
-        .call(reference);
-
-      enter
-        .append('strong')
-        .call(t.append('issues.suggested'));
-
-      enter
-        .append('table')
-        .attr('class', 'tagDiff-table')
-        .selectAll('.tagDiff-row')
-        .data(tagDiff)
-        .enter()
-        .append('tr')
-        .attr('class', 'tagDiff-row')
-        .append('td')
-        .attr('class', d => {
-          const klass = 'tagDiff-cell';
-          switch (d.type) {
-            case '+':
-              return `${klass} tagDiff-cell-add`;
-            case '-':
-              return `${klass} tagDiff-cell-remove`;
-            default:
-              return `${klass} tagDiff-cell-unchanged`;
-          }
-        })
-        .text(d => d.display);
-    }
   }
-
 
   let validation = oldTagIssues;
 
   validation.type = type;
 
   return validation;
+}
+
+export function showTagDiffReference(selection, reference, tagDiff) {
+    let enter = selection.selectAll('.issue-reference')
+    .data([0])
+    .enter();
+
+    enter
+    .append('div')
+    .attr('class', 'issue-reference')
+    .call(reference);
+
+    enter
+    .append('strong')
+    .call(t.append('issues.suggested'));
+
+    enter
+    .append('table')
+    .attr('class', 'tagDiff-table')
+    .selectAll('.tagDiff-row')
+    .data(tagDiff)
+    .enter()
+    .append('tr')
+    .attr('class', 'tagDiff-row')
+    .append('td')
+    .attr('class', d => {
+        const klass = 'tagDiff-cell';
+        switch (d.type) {
+        case '+':
+            return `${klass} tagDiff-cell-add`;
+        case '-':
+            return `${klass} tagDiff-cell-remove`;
+        default:
+            return `${klass} tagDiff-cell-unchanged`;
+        }
+    })
+    .text(d => d.display);
 }

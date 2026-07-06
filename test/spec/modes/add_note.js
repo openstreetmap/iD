@@ -1,12 +1,12 @@
 describe.skip('iD.modeAddNote', function() {
     var context;
 
-    before(function() {
+    beforeEach(() => {
         window.location.hash = '#background=none';  // Try not to load imagery
         iD.services.osm = iD.serviceOsm;
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.osm;
     });
 
@@ -44,16 +44,16 @@ describe.skip('iD.modeAddNote', function() {
         //         }
         //     });
 
-        //     happen.mousedown(context.surface().node(), {});
-        //     happen.mouseup(window, {});
+        //     context.surface().node().dispatchEvent(new MouseEvent('mousedown'));
+        //     window.dispatchEvent(new MouseEvent('mouseup'));
         // });
 
         // this won't work because draw behavior can only snap to entities, not notes
         // it('selects an existing note rather than adding a new one', function() {
-        //     happen.mousedown(context.surface().node(), {});
-        //     happen.mouseup(window, {});
+        //     context.surface().node().dispatchEvent(new MouseEvent('mousedown'));
+        //     window.dispatchEvent(new MouseEvent('mouseup'));
         //     expect(context.selectedNoteID()).toEqual(-1);
-        //     expect(context.mode().id).toEqual('select-note');
+        //     expect(context.mode().id).to.equal('select-note');
         //     context.mode().exit();
         //     d3.select('window').on('click.draw-block', null);
         // });
@@ -61,7 +61,7 @@ describe.skip('iD.modeAddNote', function() {
 
     // describe('pressing ⎋', function() {
     //     it('exits to browse mode', function(done) {
-    //         happen.keydown(document, {keyCode: 27});
+    //         document.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 27 }));
     //         window.setTimeout(function() {
     //             expect(context.mode().id).toEqual('browse');
     //             done();

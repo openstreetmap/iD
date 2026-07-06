@@ -1,7 +1,7 @@
 describe('maprules', function() {
     var _ruleChecks, _savedAreaKeys, validationRules;
 
-    before(function() {
+    beforeEach(() => {
         _savedAreaKeys = iD.osmAreaKeys;
         iD.osmSetAreaKeys({ building: {}, amenity: {} });
 
@@ -10,7 +10,7 @@ describe('maprules', function() {
         _ruleChecks = iD.serviceMapRules.ruleChecks();
     });
 
-    after(function() {
+    afterEach(() => {
         iD.osmSetAreaKeys(_savedAreaKeys);
         delete iD.services.maprules;
     });
@@ -320,7 +320,7 @@ describe('maprules', function() {
     });
     describe('rule', function() {
         var selectors;
-        before(function() {
+        beforeEach(() => {
             selectors = [
                 {
                     geometry:'node',
@@ -383,7 +383,7 @@ describe('maprules', function() {
         });
         describe('#matches', function() {
             var selectors, entities;
-            before(function() {
+            beforeEach(() => {
                 selectors = [
                     {
                         geometry:'node',
@@ -478,7 +478,7 @@ describe('maprules', function() {
         describe('#findIssues', function() {
             var selectors, entities, _graph;
 
-            before(function() {
+            beforeEach(() => {
                 selectors = [
                     {
                         geometry:'node',

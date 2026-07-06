@@ -4,12 +4,27 @@ import {
 
 import { utilArrayUniq } from './array';
 
+export interface Binding {
+    id: string;
+    event: {
+        key: string | string[] | undefined;
+        keyCode: number;
+        modifiers: {
+            shiftKey: boolean;
+            ctrlKey: boolean;
+            altKey: boolean;
+            metaKey: boolean;
+        };
+    };
+    capture: boolean;
+    callback(event: KeyboardEvent): void;
+}
 
-export function utilKeybinding(namespace) {
-    var _keybindings = {};
+export function utilKeybinding(namespace: string) {
+    var _keybindings: Record<string, Binding> = {};
 
 
-    function testBindings(d3_event, isCapturing) {
+    function testBindings(d3_event: KeyboardEvent, isCapturing: boolean) {
         var didMatch = false;
         var bindings = Object.keys(_keybindings).map(function(id) { return _keybindings[id]; });
 
@@ -44,7 +59,7 @@ export function utilKeybinding(namespace) {
         }
 
 
-        function matches(d3_event, binding, testShift) {
+        function matches(d3_event: KeyboardEvent, binding: Binding, testShift: boolean) {
             var event = d3_event;
             var isMatch = false;
             var tryKeyCode = true;
@@ -91,13 +106,13 @@ export function utilKeybinding(namespace) {
     }
 
 
-    function capture(d3_event) {
+    function capture(d3_event: KeyboardEvent) {
         testBindings(d3_event, true);
     }
 
 
-    function bubble(d3_event) {
-        var tagName = d3_select(d3_event.target).node().tagName;
+    function bubble(d3_event: KeyboardEvent) {
+        var tagName = d3_select(d3_event.target as HTMLElement).node()!.tagName;
         if (tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA') {
             return;
         }
@@ -105,7 +120,7 @@ export function utilKeybinding(namespace) {
     }
 
 
-    function keybinding(selection) {
+    function keybinding(selection?: d3.Selection) {
         selection = selection || d3_select(document);
         selection.on('keydown.capture.' + namespace, capture, true);
         selection.on('keydown.bubble.' + namespace, bubble, false);
@@ -113,8 +128,8 @@ export function utilKeybinding(namespace) {
     }
 
     // was: keybinding.off()
-    keybinding.unbind = function(selection) {
-        _keybindings = [];
+    keybinding.unbind = function(selection?: d3.Selection) {
+        _keybindings = {};
         selection = selection || d3_select(document);
         selection.on('keydown.capture.' + namespace, null);
         selection.on('keydown.bubble.' + namespace, null);
@@ -129,8 +144,8 @@ export function utilKeybinding(namespace) {
 
 
     // Remove one or more keycode bindings.
-    keybinding.off = function(codes, capture) {
-        var arr = utilArrayUniq([].concat(codes));
+    keybinding.off = function(codes: string | string[], capture: boolean) {
+        var arr = utilArrayUniq(typeof codes === 'string' ? [codes] : codes);
 
         for (var i = 0; i < arr.length; i++) {
             var id = arr[i] + (capture ? '-capture' : '-bubble');
@@ -141,16 +156,16 @@ export function utilKeybinding(namespace) {
 
 
     // Add one or more keycode bindings.
-    keybinding.on = function(codes, callback, capture) {
+    keybinding.on = function(codes: string | string[], callback: Binding['callback'], capture: boolean) {
         if (typeof callback !== 'function') {
             return keybinding.off(codes, capture);
         }
 
-        var arr = utilArrayUniq([].concat(codes));
+        var arr = utilArrayUniq(typeof codes === 'string' ? [codes] : codes);
 
         for (var i = 0; i < arr.length; i++) {
             var id = arr[i] + (capture ? '-capture' : '-bubble');
-            var binding = {
+            var binding: Binding = {
                 id: id,
                 capture: capture,
                 callback: callback,
@@ -172,7 +187,7 @@ export function utilKeybinding(namespace) {
 
             _keybindings[id] = binding;
 
-            var matches = arr[i].toLowerCase().match(/(?:(?:[^+⇧⌃⌥⌘])+|[⇧⌃⌥⌘]|\+\+|^\+$)/g);
+            var matches = arr[i].toLowerCase().match(/(?:(?:[^+⇧⌃⌥⌘])+|[⇧⌃⌥⌘]|\+\+|^\+$)/g)!;
             for (var j = 0; j < matches.length; j++) {
                 // Normalise matching errors
                 if (matches[j] === '++') matches[j] = '+';
@@ -210,14 +225,14 @@ utilKeybinding.modifierCodes = {
     '⌥': 18, alt: 18, option: 18,
     // META, on Mac: ⌘ (CMD), on Windows (Win), on Linux (Super)
     '⌘': 91, meta: 91, cmd: 91, 'super': 91, win: 91
-};
+} as Record<string, number>;
 
 utilKeybinding.modifierProperties = {
     16: 'shiftKey',
     17: 'ctrlKey',
     18: 'altKey',
     91: 'metaKey'
-};
+} as Record<number, keyof Binding['event']['modifiers']>;
 
 utilKeybinding.plusKeys = ['plus', 'ffplus', '=', 'ffequals', '≠', '±'];
 utilKeybinding.minusKeys = ['_', '-', 'ffminus', 'dash', '–', '—'];
@@ -322,7 +337,7 @@ utilKeybinding.keys = {
     f23: 'F23',
     f24: 'F24',
     f25: 'F25'
-};
+} as Record<string, string | string[]>;
 
 utilKeybinding.keyCodes = {
     // Backspace key, on Mac: ⌫ (Backspace)
@@ -396,7 +411,7 @@ utilKeybinding.keyCodes = {
     ']': 221, 'close-bracket': 221,
     // Apostrophe, or Quote, or '
     '\'': 222, quote: 222, apostrophe: 222
-};
+} as Record<string, number>;
 
 // NUMPAD 0-9
 var i = 95, n = 0;

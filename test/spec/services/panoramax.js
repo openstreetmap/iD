@@ -1,4 +1,5 @@
 import { fn } from '@vitest/spy';
+import fetchMock from 'fetch-mock';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.servicePanoramax', function() {
@@ -38,12 +39,12 @@ describe('iD.servicePanoramax', function() {
         }],
     };
 
-    before(function() {
+    beforeEach(() => {
         iD.services.panoramax = iD.servicePanoramax;
         fetchMock.reset();
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.panoramax;
     });
 

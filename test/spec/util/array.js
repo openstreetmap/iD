@@ -120,4 +120,18 @@ describe('iD.utilArray', function() {
         });
     });
 
+    describe('iD.utilArrayPowerset', () => {
+        it('can generate a powerset', () => {
+            expect(iD.utilArrayPowerset([1, 2, 3])).toStrictEqual([
+                [],
+                [1],
+                [2],
+                [1, 2],
+                [3],
+                [1, 3],
+                [2, 3],
+                [1, 2, 3],
+            ]);
+        });
+    });
 });

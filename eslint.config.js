@@ -138,14 +138,10 @@ export default tseslint.config(
     languageOptions: {
       globals: {
         ...globals.node,
-        ...globals.jest,
+        ...globals.vitest,
         ...vitest.environments.env.globals,
-        'after': 'readonly',
-        'before': 'readonly',
         'd3': 'readonly',
         'expect': 'writable',
-        'fetchMock': 'readonly',
-        'happen': 'readonly',
         'iD': 'readonly',
         'jsdom': 'readonly',
         'vi': 'readonly'

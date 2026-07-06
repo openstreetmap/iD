@@ -1,5 +1,5 @@
 // Returns true if a and b have the same elements at the same indices.
-export function utilArrayIdentical(a, b) {
+export function utilArrayIdentical<T>(a: T[], b: T[]): boolean {
     // an array is always identical to itself
     if (a === b) return true;
 
@@ -9,6 +9,13 @@ export function utilArrayIdentical(a, b) {
         if (a[i] !== b[i]) return false;
     }
     return true;
+}
+
+export function utilArrayPowerset<T>(array: T[]): T[][] {
+    return array.reduce<T[][]>(
+        (accum, value) => [...accum, ...accum.map((pick) => [...pick, value])],
+        [[]],
+    );
 }
 
 // http://2ality.com/2015/01/es6-set-operations.html
@@ -21,11 +28,10 @@ export function utilArrayIdentical(a, b) {
 //   [1]
 // utilArrayDifference(b, a)
 //   [4]
-/** @template T @param {T[]} a @param {T[]} b @returns {T[]} */
-export function utilArrayDifference(a, b) {
-    var other = new Set(b);
+export function utilArrayDifference<T>(a: Iterable<T>, b: Iterable<T>): T[] {
+    const other = new Set(b);
     return Array.from(new Set(a))
-        .filter(function(v) { return !other.has(v); });
+        .filter(v => !other.has(v));
 }
 
 // Intersection (a ∩ b): create a set that contains those elements of set a that are also in set b.
@@ -33,10 +39,10 @@ export function utilArrayDifference(a, b) {
 // var b = [4,3,2];
 // utilArrayIntersection(a, b)
 //   [2,3]
-export function utilArrayIntersection(a, b) {
-    var other = new Set(b);
+export function utilArrayIntersection<T>(a: Iterable<T>, b: Iterable<T>): T[] {
+    const other = new Set(b);
     return Array.from(new Set(a))
-        .filter(function(v) { return other.has(v); });
+        .filter(v => other.has(v));
 }
 
 // Union (a ∪ b): create a set that contains the elements of both set a and set b.
@@ -44,9 +50,9 @@ export function utilArrayIntersection(a, b) {
 // var b = [4,3,2];
 // utilArrayUnion(a, b)
 //   [1,2,3,4]
-export function utilArrayUnion(a, b) {
-    var result = new Set(a);
-    b.forEach(function(v) { result.add(v); });
+export function utilArrayUnion<T>(a: Iterable<T>, b: T[]): T[] {
+    const result = new Set(a);
+    b.forEach(v => result.add(v));
     return Array.from(result);
 }
 
@@ -54,7 +60,7 @@ export function utilArrayUnion(a, b) {
 // var a = [1,1,2,3,3];
 // utilArrayUniq(a)
 //   [1,2,3]
-export function utilArrayUniq(a) {
+export function utilArrayUniq<T>(a: Iterable<T>): T[] {
     return Array.from(new Set(a));
 }
 
@@ -63,13 +69,12 @@ export function utilArrayUniq(a) {
 // var a = [1,2,3,4,5,6,7];
 // utilArrayChunk(a, 3);
 //   [[1,2,3],[4,5,6],[7]];
-export function utilArrayChunk(a, chunkSize) {
+export function utilArrayChunk<T>(a: T[], chunkSize?: number): T[][] {
     if (!chunkSize || chunkSize < 0) return [a.slice()];
 
     var result = new Array(Math.ceil(a.length / chunkSize));
-    return Array.from(result, function(item, i) {
-        return a.slice(i * chunkSize, i * chunkSize + chunkSize);
-    });
+    return Array.from(result, (item, i) =>
+        a.slice(i * chunkSize, i * chunkSize + chunkSize));
 }
 
 
@@ -77,10 +82,8 @@ export function utilArrayChunk(a, chunkSize) {
 // var a = [[1,2,3],[4,5,6],[7]];
 // utilArrayFlatten(a);
 //   [1,2,3,4,5,6,7];
-export function utilArrayFlatten(a) {
-    return a.reduce(function(acc, val) {
-        return acc.concat(val);
-    }, []);
+export function utilArrayFlatten<T>(a: T[][]): T[] {
+    return a.reduce((acc, val) => acc.concat(val), []);
 }
 
 
@@ -106,21 +109,16 @@ export function utilArrayFlatten(a) {
 //     4: [{type: 'Dog', name: 'Spot'}],
 //     5: [{type: 'Cat', name: 'Tiger'}, {type: 'Dog', name: 'Rover'}]
 //   }
-export function utilArrayGroupBy(a, key) {
-    return a.reduce(function(acc, item) {
-        var group = (typeof key === 'function') ? key(item) : item[key];
+export function utilArrayGroupBy<T>(a: T[], key: keyof T): Record<string, T[]>;
+export function utilArrayGroupBy<T, K extends string | number | symbol>(a: T[], key: (item: T) => K): Record<K, T[]>;
+export function utilArrayGroupBy<T, K extends string | number | symbol>(a: T[], key: keyof T | ((item: T) => K)): Record<K, T[]> {
+    return a.reduce<Record<K, T[]>>((acc, item) => {
+        const group: K = (typeof key === 'function') ? key(item) : <K>item[key];
         (acc[group] = acc[group] || []).push(item);
         return acc;
-    }, {});
+    }, <Record<K, T[]>>{});
 }
 
-
-/**
- * @template T
- * @param {T[]} a
- * @param {string | ((item: T) => string)} key
- * @returns {T[]}
- */
 // Returns an Array with all the duplicates removed
 // where uniqueness determined by the given key
 // `key` can be passed as a property or as a key function
@@ -144,10 +142,12 @@ export function utilArrayGroupBy(a, key) {
 //     { type: 'Cat', name: 'Tiger' },
 //     { type: 'Cat', name: 'Leo' }
 //   }
-export function utilArrayUniqBy(a, key) {
-    var seen = new Set();
-    return a.reduce(function(acc, item) {
-        var val = (typeof key === 'function') ? key(item) : item[key];
+export function utilArrayUniqBy<T>(a: T[], key: keyof T): T[];
+export function utilArrayUniqBy<T, K>(a: T[], key: (item: T) => K): T[];
+export function utilArrayUniqBy<T, K>(a: T[], key: keyof T | ((item: T) => K)): T[] {
+    var seen: Set<K> = new Set();
+    return a.reduce<T[]>((acc, item) => {
+        const val: K = (typeof key === 'function') ? key(item) : <K>item[key];
         if (val && !seen.has(val)) {
             seen.add(val);
             acc.push(item);

@@ -774,7 +774,7 @@ export function validationCrossingWays(context) {
         return fix;
     }
 
-    /** @returns {osmEntity | undefined} */
+    /** @returns {iD.OsmEntity | undefined} */
     function getSelectedFeature() {
         const mode = context.mode();
         if (!mode || mode.id !== 'select') return undefined;

@@ -16,17 +16,17 @@ describe.skip('iD.modeAddPoint', function() {
 
     describe('clicking the map', function () {
         it('adds a point', function() {
-            happen.mousedown(context.surface().node(), {});
-            happen.mouseup(window, {});
+            context.surface().node().dispatchEvent(new MouseEvent('mousedown'));
+            window.dispatchEvent(new MouseEvent('mouseup'));
             expect(context.history().changes().created).toHaveLength(1);
             context.mode().exit();
             d3.select('window').on('click.draw-block', null);
         });
 
         it('selects an existing point rather than adding a new one', function() {
-            happen.mousedown(context.surface().node(), {});
-            happen.mouseup(window, {});
-            expect(context.mode().id).toEqual('select');
+            context.surface().node().dispatchEvent(new MouseEvent('mousedown'));
+            window.dispatchEvent(new MouseEvent('mouseup'));
+            expect(context.mode().id).to.equal('select');
             expect(context.mode().selectedIDs()).toEqual([context.history().changes().created[0].id]);
             context.mode().exit();
         });
@@ -34,7 +34,7 @@ describe.skip('iD.modeAddPoint', function() {
 
     // describe('pressing ⎋', function() {
     //     it.skip('exits to browse mode', function(done) {
-    //         happen.keydown(document, {keyCode: 27});
+    //         document.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 27 }));
     //         window.setTimeout(function() {
     //             expect(context.mode().id).toEqual('browse');
     //             done();

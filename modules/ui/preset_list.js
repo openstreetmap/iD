@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { debounce } from 'es-toolkit/compat';
+import { debounce } from 'es-toolkit';
 
 import { presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
@@ -73,9 +73,7 @@ export function uiPresetList(context) {
 
         function keypress(d3_event) {
             // enter
-            var value = search.property('value');
-            if (d3_event.keyCode === 13 && // ↩ Return
-                value.length) {
+            if (d3_event.keyCode === 13) { // ↩ Return
                 list.selectAll('.preset-list-item:first-child')
                     .each(function(d) { d.choose.call(this); });
             }
@@ -117,7 +115,7 @@ export function uiPresetList(context) {
             .call(utilNoAuto)
             .on('keydown', initialKeydown)
             .on('keypress', keypress)
-            .on('input', debounce(inputevent));
+            .on('input', debounce(inputevent, 0));
 
         if (_autofocus) {
             search.node().focus();
@@ -140,6 +138,7 @@ export function uiPresetList(context) {
             .attr('class', 'preset-list')
             .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets));
 
+        listWrap.node().scrollTo({ top: 0 });
         context.features().on('change.preset-list', updateForFeatureHiddenState);
     }
 

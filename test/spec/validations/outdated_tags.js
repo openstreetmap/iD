@@ -4,7 +4,7 @@ import { setTimeout } from 'node:timers/promises';
 describe('iD.validations.outdated_tags', function () {
     var context;
 
-    before(function() {
+    beforeEach(() => {
         iD.fileFetcher.cache().deprecated = [
           { old: { building: 'roof' }, replace: { building: 'roof', layer: '1' } },
           { old: { highway: 'no' } },
@@ -28,7 +28,7 @@ describe('iD.validations.outdated_tags', function () {
         };
     });
 
-    after(function() {
+    afterEach(() => {
         iD.fileFetcher.cache().deprecated = [];
         delete iD.services.nsi;
     });

@@ -82,149 +82,173 @@ describe('iD.svgTagClasses', function () {
         expect(selection.attr('class')).toEqual(null);
     });
 
-    it('adds tag-unpaved for highway=track with no surface tagging', function() {
-        selection
-            .datum(new iD.osmWay({tags: {highway: 'track'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(true);
+    describe('surface paving', function() {
+        it('does not add tag-unpaved for non-track highways with no surface tagging', function() {
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'tertiary'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(false);
+
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'foo'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(false);
+        });
+
+        it('does not add tag-unpaved for non-track highways with explicit paved surface tagging', function() {
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'tertiary', surface: 'asphalt'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(false);
+
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'foo', tracktype: 'grade1'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(false);
+        });
+
+        it('does not add tag-unpaved for aeroways with explicit paved surface tagging', function() {
+            selection
+                .datum(new iD.osmWay({tags: {aeroway: 'taxiway', surface: 'asphalt'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(false);
+
+            selection
+                .datum(new iD.osmWay({tags: {aeroway: 'runway', surface: 'paved'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(false);
+        });
+
+        it('adds tag-unpaved for non-track highways with explicit unpaved surface tagging', function() {
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'tertiary', surface: 'dirt'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(true);
+
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'foo', tracktype: 'grade3'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(true);
+        });
+
+        it('adds tag-semipaved for non-track highways with explicit semipaved surface tagging', function() {
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'tertiary', surface: 'paving_stones'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(false);
+            expect(selection.classed('tag-semipaved')).toBe(true);
+
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'foo', surface: 'wood'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(false);
+            expect(selection.classed('tag-semipaved')).toBe(true);
+        });
+
+        it('adds tag-unpaved for aeroways with explicit unpaved surface tagging', function() {
+            selection
+                .datum(new iD.osmWay({tags: {aeroway: 'taxiway', surface: 'dirt'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(true);
+
+            selection
+                .datum(new iD.osmWay({tags: {aeroway: 'runway', surface: 'unpaved'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(true);
+        });
+
+        it('adds tag-semipaved for aeroways with explicit semipaved surface tagging', function() {
+            selection
+                .datum(new iD.osmWay({tags: {aeroway: 'taxiway', surface: 'paving_stones'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(false);
+            expect(selection.classed('tag-semipaved')).toBe(true);
+
+            selection
+                .datum(new iD.osmWay({tags: {aeroway: 'runway', surface: 'wood'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(false);
+            expect(selection.classed('tag-semipaved')).toBe(true);
+        });
+
+        it('does not add tag-unpaved for non-highways/aeroways', function() {
+            selection
+                .datum(new iD.osmWay({tags: {railway: 'abandoned', surface: 'gravel'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(false);
+
+            selection
+                .datum(new iD.osmWay({tags: {amenity: 'parking', surface: 'dirt'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-unpaved')).toBe(false);
+        });
+
+        it('does not add tag-paved/tag-unpaved for highway=track regardless of surface tagging', function() {
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'track'}})) // i.e. implied unpaved
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-paved')).toBe(false);
+            expect(selection.classed('tag-unpaved')).toBe(false);
+
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'track', surface: 'asphalt'}})) // i.e. paved
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-paved')).toBe(false);
+            expect(selection.classed('tag-unpaved')).toBe(false);
+
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'track', surface: 'gravel'}})) // i.e. unpaved
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-paved')).toBe(false);
+            expect(selection.classed('tag-unpaved')).toBe(false);
+
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'track', tracktype: 'grade1'}})) // i.e. paved
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-paved')).toBe(false);
+            expect(selection.classed('tag-unpaved')).toBe(false);
+
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'track', tracktype: 'grade3'}})) // i.e. unpaved
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-paved')).toBe(false);
+            expect(selection.classed('tag-unpaved')).toBe(false);
+        });
     });
 
-    it('does not add tag-unpaved for highway=track with explicit paved surface tagging', function() {
-        selection
-            .datum(new iD.osmWay({tags: {highway: 'track', surface: 'asphalt'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
+    describe('track grading', function() {
+        it('adds tag-ungraded for highway=track with no grade tagging', function () {
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'track'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-ungraded')).toBe(true);
+        });
 
-        selection
-            .datum(new iD.osmWay({tags: {highway: 'track', tracktype: 'grade1'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
-    });
+        it('adds tag-ungraded for highway=track with unknown grade tagging', function () {
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'track', tracktype: 'superb_grade'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-ungraded')).toBe(true);
+        });
 
-    it('adds tag-unpaved for highway=track with explicit unpaved surface tagging', function() {
-        selection
-            .datum(new iD.osmWay({tags: {highway: 'track', surface: 'dirt'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(true);
+        it('does not add tag-ungraded for highway=track with explicit grade tagging', function () {
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'track', tracktype: 'grade3'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-ungraded')).toBe(false);
+        });
 
-        selection
-            .datum(new iD.osmWay({tags: {highway: 'track', tracktype: 'grade3'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(true);
-    });
+        it('adds tag-ungraded for highway=track even with surface tagging', function () {
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'track', surface: 'asphalt'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-ungraded')).toBe(true);
 
-    it('does not add tag-unpaved for non-track highways with no surface tagging', function() {
-        selection
-            .datum(new iD.osmWay({tags: {highway: 'tertiary'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
-
-        selection
-            .datum(new iD.osmWay({tags: {highway: 'foo'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
-    });
-
-    it('does not add tag-unpaved for non-track highways with explicit paved surface tagging', function() {
-        selection
-            .datum(new iD.osmWay({tags: {highway: 'tertiary', surface: 'asphalt'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
-
-        selection
-            .datum(new iD.osmWay({tags: {highway: 'foo', tracktype: 'grade1'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
-    });
-
-    it('does not add tag-unpaved for aeroways with explicit paved surface tagging', function() {
-        selection
-            .datum(new iD.osmWay({tags: {aeroway: 'taxiway', surface: 'asphalt'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
-
-        selection
-            .datum(new iD.osmWay({tags: {aeroway: 'runway', surface: 'paved'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
-    });
-
-    it('adds tag-unpaved for non-track highways with explicit unpaved surface tagging', function() {
-        selection
-            .datum(new iD.osmWay({tags: {highway: 'tertiary', surface: 'dirt'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(true);
-
-        selection
-            .datum(new iD.osmWay({tags: {highway: 'foo', tracktype: 'grade3'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(true);
-    });
-
-    it('adds tag-semipaved for non-track highways with explicit semipaved surface tagging', function() {
-        selection
-            .datum(new iD.osmWay({tags: {highway: 'tertiary', surface: 'paving_stones'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
-        expect(selection.classed('tag-semipaved')).toBe(true);
-
-        selection
-            .datum(new iD.osmWay({tags: {highway: 'foo', surface: 'wood'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
-        expect(selection.classed('tag-semipaved')).toBe(true);
-    });
-
-    it('adds tag-unpaved for aeroways with explicit unpaved surface tagging', function() {
-        selection
-            .datum(new iD.osmWay({tags: {aeroway: 'taxiway', surface: 'dirt'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(true);
-
-        selection
-            .datum(new iD.osmWay({tags: {aeroway: 'runway', surface: 'unpaved'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(true);
-    });
-
-    it('adds tag-semipaved for aeroways with explicit semipaved surface tagging', function() {
-        selection
-            .datum(new iD.osmWay({tags: {aeroway: 'taxiway', surface: 'paving_stones'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
-        expect(selection.classed('tag-semipaved')).toBe(true);
-
-        selection
-            .datum(new iD.osmWay({tags: {aeroway: 'runway', surface: 'wood'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
-        expect(selection.classed('tag-semipaved')).toBe(true);
-    });
-
-    it('does not add tag-unpaved for non-highways/aeroways', function() {
-        selection
-            .datum(new iD.osmWay({tags: {railway: 'abandoned', surface: 'gravel'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
-
-        selection
-            .datum(new iD.osmWay({tags: {amenity: 'parking', surface: 'dirt'}}))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-unpaved')).toBe(false);
-    });
-
-    it('does not add tag-wikidata if no wikidata tag', function() {
-        selection
-            .datum(new iD.osmWay())
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-wikidata')).toBe(false);
-    });
-
-    it('adds tag-wikidata if entity has a wikidata tag', function() {
-        selection
-            .datum(new iD.osmWay({ tags: { wikidata: 'Q18275868' } }))
-            .call(iD.svgTagClasses());
-        expect(selection.classed('tag-wikidata')).toBe(true);
+            selection
+                .datum(new iD.osmWay({tags: {highway: 'track', surface: 'dirt'}}))
+                .call(iD.svgTagClasses());
+            expect(selection.classed('tag-ungraded')).toBe(true);
+        });
     });
 
     it('adds tag-wikidata if entity has a brand:wikidata tag', function() {

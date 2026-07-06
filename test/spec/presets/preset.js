@@ -123,12 +123,12 @@ describe('iD.presetPreset', function() {
     describe('#setTags', function() {
         var _savedAreaKeys;
 
-        before(function () {
+        beforeEach(function () {
             _savedAreaKeys = iD.osmAreaKeys;
             iD.osmSetAreaKeys({ building: {}, natural: {} });
         });
 
-        after(function () {
+        afterEach(function () {
             iD.osmSetAreaKeys(_savedAreaKeys);
         });
 

@@ -1,3 +1,4 @@
+import fetchMock from 'fetch-mock';
 import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 
@@ -108,11 +109,11 @@ describe('iD.serviceVegbilder', function() {
     }));
   }
 
-  before(function() {
+  beforeEach(() => {
     iD.services.vegbilder = iD.serviceVegbilder;
   });
 
-  after(function() {
+  afterEach(() => {
     delete iD.services.vegbilder;
   });
 

@@ -1,16 +1,17 @@
 import { fn } from '@vitest/spy';
+import fetchMock from 'fetch-mock';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.serviceKartaview', function() {
     var dimensions = [64, 64];
     var context, kartaview;
 
-    before(function() {
+    beforeEach(() => {
         iD.services.kartaview = iD.serviceKartaview;
         fetchMock.reset();
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.kartaview;
     });
 

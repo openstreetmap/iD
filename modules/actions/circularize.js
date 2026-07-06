@@ -305,6 +305,14 @@ export function actionCircularize(wayId, projection) {
     };
 
 
+    action.getWayId = function() {
+        return wayId;
+    };
+
+
+    action.id = 'circularize';
+
+
     action.transitionable = true;
 
 
