@@ -47,21 +47,21 @@ describe('iD.behaviorSelect', function() {
 
     it('refuses to enter select mode with no ids', function() {
         context.enter(iD.modeSelect(context, []));
-        expect(context.mode().id, 'empty array').to.eql('browse');
+        expect(context.mode().id, 'empty array').toEqual('browse');
         context.enter(iD.modeSelect(context, undefined));
-        expect(context.mode().id, 'undefined').to.eql('browse');
+        expect(context.mode().id, 'undefined').toEqual('browse');
     });
 
     it('refuses to enter select mode with nonexistent ids', function() {
         context.enter(iD.modeSelect(context, ['w-1']));
-        expect(context.mode().id).to.eql('browse');
+        expect(context.mode().id).toEqual('browse');
     });
 
     it('click on entity selects the entity', async () => {
         var el = context.surface().selectAll('.' + a.id).node();
         simulateClick(el, {});
         await setTimeout(50);
-        expect(context.selectedIDs()).to.eql([a.id]);
+        expect(context.selectedIDs()).toEqual([a.id]);
     });
 
     it('click on empty space clears the selection', async () => {
@@ -69,7 +69,7 @@ describe('iD.behaviorSelect', function() {
         var el = context.surface().node();
         simulateClick(el, {});
         await setTimeout(50);
-        expect(context.mode().id).to.eql('browse');
+        expect(context.mode().id).toEqual('browse');
     });
 
     it('shift-click on unselected entity adds it to the selection', async () => {
@@ -77,7 +77,7 @@ describe('iD.behaviorSelect', function() {
         var el = context.surface().selectAll('.' + b.id).node();
         simulateClick(el, { shiftKey: true });
         await setTimeout(50);
-        expect(context.selectedIDs()).to.eql([a.id, b.id]);
+        expect(context.selectedIDs()).toEqual([a.id, b.id]);
     });
 
     it('shift-click on selected entity removes it from the selection', async () => {
@@ -85,7 +85,7 @@ describe('iD.behaviorSelect', function() {
         var el = context.surface().selectAll('.' + b.id).node();
         simulateClick(el, { shiftKey: true });
         await setTimeout(50);
-        expect(context.selectedIDs()).to.eql([a.id]);
+        expect(context.selectedIDs()).toEqual([a.id]);
     });
 
     it('shift-click on last selected entity clears the selection', async () => {
@@ -93,7 +93,7 @@ describe('iD.behaviorSelect', function() {
         var el = context.surface().selectAll('.' + a.id).node();
         simulateClick(el, { shiftKey: true });
         await setTimeout(50);
-        expect(context.mode().id).to.eql('browse');
+        expect(context.mode().id).toEqual('browse');
     });
 
     it('shift-click on empty space leaves the selection unchanged', async () => {
@@ -101,6 +101,6 @@ describe('iD.behaviorSelect', function() {
         var el = context.surface().node();
         simulateClick(el, { shiftKey: true });
         await setTimeout(50);
-        expect(context.selectedIDs()).to.eql([a.id]);
+        expect(context.selectedIDs()).toEqual([a.id]);
     });
 });

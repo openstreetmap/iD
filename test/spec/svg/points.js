@@ -20,7 +20,7 @@ describe('iD.svgPoints', function () {
 
         surface.call(iD.svgPoints(projection, context), graph, [point]);
 
-        expect(surface.select('.point').classed('tag-amenity')).to.be.true;
-        expect(surface.select('.point').classed('tag-amenity-cafe')).to.be.true;
+        expect(surface.select('.point').classed('tag-amenity')).toBe(true);
+        expect(surface.select('.point').classed('tag-amenity-cafe')).toBe(true);
     });
 });

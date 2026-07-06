@@ -2,7 +2,7 @@ describe('iD.actionAddMember', function() {
     it('adds an member to a relation at the specified index', function() {
         var r = new iD.osmRelation({members: [{id: '1'}, {id: '3'}]});
         var g = iD.actionAddMember(r.id, {id: '2'}, 1)(new iD.coreGraph([r]));
-        expect(g.entity(r.id).members).to.eql([{id: '1'}, {id: '2'}, {id: '3'}]);
+        expect(g.entity(r.id).members).toEqual([{id: '1'}, {id: '2'}, {id: '3'}]);
     });
 
     describe('inserts way members at a sensible index', function() {
@@ -25,7 +25,7 @@ describe('iD.actionAddMember', function() {
             ]);
 
             graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['~', '-', '=']);
+            expect(members(graph)).toEqual(['~', '-', '=']);
         });
 
         it('adds the member to a relation with no members', function() {
@@ -37,7 +37,7 @@ describe('iD.actionAddMember', function() {
             ]);
 
             graph = iD.actionAddMember('r', {id: '-', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['-']);
+            expect(members(graph)).toEqual(['-']);
         });
 
         it('appends the member if the ways are not connecting', function() {
@@ -56,7 +56,7 @@ describe('iD.actionAddMember', function() {
             ]);
 
             graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['-', '=']);
+            expect(members(graph)).toEqual(['-', '=']);
         });
 
         it('appends the member if the way connects at end', function() {
@@ -74,7 +74,7 @@ describe('iD.actionAddMember', function() {
             ]);
 
             graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['-', '=']);
+            expect(members(graph)).toEqual(['-', '=']);
         });
 
         it('inserts the member if the way connects at beginning', function() {
@@ -95,7 +95,7 @@ describe('iD.actionAddMember', function() {
             ]);
 
             graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['=', '-', '~']);
+            expect(members(graph)).toEqual(['=', '-', '~']);
         });
 
         it('inserts the member if the way connects in middle', function() {
@@ -116,7 +116,7 @@ describe('iD.actionAddMember', function() {
             ]);
 
             graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['-', '=', '~']);
+            expect(members(graph)).toEqual(['-', '=', '~']);
         });
 
         it('keeps stops and platforms ordered before node, way, relation (for PTv2 routes)', function() {
@@ -142,7 +142,7 @@ describe('iD.actionAddMember', function() {
             ]);
 
             graph = iD.actionAddMember('r', { id: '=', type: 'way', role: 'forward' })(graph);
-            expect(graph.entity('r').members).to.eql([
+            expect(graph.entity('r').members).toEqual([
                 { id: 'n1', type: 'node', role: 'stop' },
                 { id: 'w1', type: 'way', role: 'platform' },
                 { id: 'n2', type: 'node', role: 'stop_entry_only' },

@@ -21,19 +21,19 @@ describe('iD.actionRestrictTurn', function() {
         graph = action(graph);
 
         var r = graph.entity('r');
-        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_straight_on'});
+        expect(r.tags).toEqual({type: 'restriction', restriction: 'no_straight_on'});
 
         var f = r.memberByRole('from');
-        expect(f.id).to.eql('=');
-        expect(f.type).to.eql('way');
+        expect(f.id).toEqual('=');
+        expect(f.type).toEqual('way');
 
         var v = r.memberByRole('via');
-        expect(v.id).to.eql('*');
-        expect(v.type).to.eql('node');
+        expect(v.id).toEqual('*');
+        expect(v.type).toEqual('node');
 
         var t = r.memberByRole('to');
-        expect(t.id).to.eql('-');
-        expect(t.type).to.eql('way');
+        expect(t.id).toEqual('-');
+        expect(t.type).toEqual('way');
     });
 
 
@@ -63,18 +63,18 @@ describe('iD.actionRestrictTurn', function() {
         graph = action(graph);
 
         var r = graph.entity('r');
-        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_u_turn'});
+        expect(r.tags).toEqual({type: 'restriction', restriction: 'no_u_turn'});
 
         var f = r.memberByRole('from');
-        expect(f.id).to.eql('=');
-        expect(f.type).to.eql('way');
+        expect(f.id).toEqual('=');
+        expect(f.type).toEqual('way');
 
         var v = r.memberByRole('via');
-        expect(v.id).to.eql('|');
-        expect(v.type).to.eql('way');
+        expect(v.id).toEqual('|');
+        expect(v.type).toEqual('way');
 
         var t = r.memberByRole('to');
-        expect(t.id).to.eql('-');
-        expect(t.type).to.eql('way');
+        expect(t.id).toEqual('-');
+        expect(t.type).toEqual('way');
     });
 });

@@ -14,7 +14,7 @@ describe('iD.rendererFeatures', function() {
     describe('#keys', function() {
         it('returns feature keys', function() {
             var keys = features.keys();
-            expect(keys).to.include(
+            expect(keys).toContain(
                 'points', 'traffic_roads', 'service_roads', 'paths',
                 'buildings', 'landuse', 'boundaries', 'water', 'rail',
                 'power', 'past_future', 'others'
@@ -25,8 +25,8 @@ describe('iD.rendererFeatures', function() {
     describe('#disable', function() {
         it('disables features', function() {
             features.disable('water');
-            expect(features.disabled()).to.include('water');
-            expect(features.enabled()).to.not.include('water');
+            expect(features.disabled()).toContain('water');
+            expect(features.enabled()).not.toContain('water');
         });
     });
 
@@ -34,20 +34,20 @@ describe('iD.rendererFeatures', function() {
         it('enables features', function() {
             features.disable('water');
             features.enable('water');
-            expect(features.disabled()).to.not.include('water');
-            expect(features.enabled()).to.include('water');
+            expect(features.disabled()).not.toContain('water');
+            expect(features.enabled()).toContain('water');
         });
     });
 
     describe('#toggle', function() {
         it('toggles features', function() {
             features.toggle('water');
-            expect(features.disabled()).to.include('water');
-            expect(features.enabled()).to.not.include('water');
+            expect(features.disabled()).toContain('water');
+            expect(features.enabled()).not.toContain('water');
 
             features.toggle('water');
-            expect(features.disabled()).to.not.include('water');
-            expect(features.enabled()).to.include('water');
+            expect(features.disabled()).not.toContain('water');
+            expect(features.enabled()).toContain('water');
         });
     });
 
@@ -70,18 +70,18 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
             stats = features.stats();
 
-            expect(stats.boundaries).to.eql(1);
-            expect(stats.buildings).to.eql(1);
-            expect(stats.landuse).to.eql(0);
-            expect(stats.traffic_roads).to.eql(1);
-            expect(stats.service_roads).to.eql(0);
-            expect(stats.others).to.eql(1);
-            expect(stats.past_future).to.eql(1);
-            expect(stats.paths).to.eql(0);
-            expect(stats.points).to.eql(5);
-            expect(stats.power).to.eql(1);
-            expect(stats.rail).to.eql(1);
-            expect(stats.water).to.eql(1);
+            expect(stats.boundaries).toEqual(1);
+            expect(stats.buildings).toEqual(1);
+            expect(stats.landuse).toEqual(0);
+            expect(stats.traffic_roads).toEqual(1);
+            expect(stats.service_roads).toEqual(0);
+            expect(stats.others).toEqual(1);
+            expect(stats.past_future).toEqual(1);
+            expect(stats.paths).toEqual(0);
+            expect(stats.points).toEqual(5);
+            expect(stats.power).toEqual(1);
+            expect(stats.rail).toEqual(1);
+            expect(stats.water).toEqual(1);
         });
     });
 
@@ -242,8 +242,8 @@ describe('iD.rendererFeatures', function() {
             ids.forEach(function(id) {
                 var entity = graph.entity(id);
                 var geometry = entity.geometry(graph);
-                expect(features.getMatches(entity, graph, geometry), 'doMatch: ' + id)
-                    .to.have.property(rule);
+                const matches = features.getMatches(entity, graph, geometry);
+                expect(matches).toHaveProperty(rule);
             });
         }
 
@@ -251,8 +251,8 @@ describe('iD.rendererFeatures', function() {
             ids.forEach(function(id) {
                 var entity = graph.entity(id);
                 var geometry = entity.geometry(graph);
-                expect(features.getMatches(entity, graph, geometry), 'dontMatch: ' + id)
-                    .not.to.have.property(rule);
+                const matches = features.getMatches(entity, graph, geometry);
+                expect(matches).not.toHaveProperty(rule);
             });
         }
 
@@ -548,10 +548,10 @@ describe('iD.rendererFeatures', function() {
             features.disable('paths');
             features.gatherStats(all, graph, dimensions);
 
-            expect(features.isHiddenChild(a, graph, geometry)).to.be.true;
-            expect(features.isHiddenChild(b, graph, geometry)).to.be.true;
-            expect(features.isHidden(a, graph, geometry)).to.be.true;
-            expect(features.isHidden(b, graph, geometry)).to.be.true;
+            expect(features.isHiddenChild(a, graph, geometry)).toBe(true);
+            expect(features.isHiddenChild(b, graph, geometry)).toBe(true);
+            expect(features.isHidden(a, graph, geometry)).toBe(true);
+            expect(features.isHidden(b, graph, geometry)).toBe(true);
         });
 
         it('hides uninteresting (e.g. untagged or "other") member ways on a hidden multipolygon relation', function() {
@@ -576,10 +576,10 @@ describe('iD.rendererFeatures', function() {
             features.disable('landuse');
             features.gatherStats(all, graph, dimensions);
 
-            expect(features.isHidden(outer, graph, outer.geometry(graph))).to.be.true;     // #2548
-            expect(features.isHidden(inner1, graph, inner1.geometry(graph))).to.be.true;   // #2548
-            expect(features.isHidden(inner2, graph, inner2.geometry(graph))).to.be.true;   // #2548
-            expect(features.isHidden(inner3, graph, inner3.geometry(graph))).to.be.false;  // #2887
+            expect(features.isHidden(outer, graph, outer.geometry(graph))).toBe(true);     // #2548
+            expect(features.isHidden(inner1, graph, inner1.geometry(graph))).toBe(true);   // #2548
+            expect(features.isHidden(inner2, graph, inner2.geometry(graph))).toBe(true);   // #2548
+            expect(features.isHidden(inner3, graph, inner3.geometry(graph))).toBe(false);  // #2887
         });
 
         it('hides only versioned entities', function() {
@@ -593,8 +593,8 @@ describe('iD.rendererFeatures', function() {
             features.disable('points');
             features.gatherStats(all, graph, dimensions);
 
-            expect(features.isHidden(a, graph, ageo)).to.be.true;
-            expect(features.isHidden(b, graph, bgeo)).to.be.false;
+            expect(features.isHidden(a, graph, ageo)).toBe(true);
+            expect(features.isHidden(b, graph, bgeo)).toBe(false);
         });
 
         it('#forceVisible', function() {
@@ -607,7 +607,7 @@ describe('iD.rendererFeatures', function() {
             features.gatherStats(all, graph, dimensions);
             features.forceVisible(['a']);
 
-            expect(features.isHidden(a, graph, ageo)).to.be.false;
+            expect(features.isHidden(a, graph, ageo)).toBe(false);
         });
 
         it('auto-hides features', function() {
@@ -625,8 +625,8 @@ describe('iD.rendererFeatures', function() {
             autoHidden = features.autoHidden();
             msg = i + ' points';
 
-            expect(hidden, msg).to.not.include('points');
-            expect(autoHidden, msg).to.not.include('points');
+            expect(hidden, msg).not.toContain('points');
+            expect(autoHidden, msg).not.toContain('points');
 
             graph.rebase([new iD.osmNode({version: 1})], [graph]);
 
@@ -636,8 +636,8 @@ describe('iD.rendererFeatures', function() {
             autoHidden = features.autoHidden();
             msg = (i + 1) + ' points';
 
-            expect(hidden, msg).to.include('points');
-            expect(autoHidden, msg).to.include('points');
+            expect(hidden, msg).toContain('points');
+            expect(autoHidden, msg).toContain('points');
         });
 
         it('doubles auto-hide threshold when doubling viewport size', function() {
@@ -656,8 +656,8 @@ describe('iD.rendererFeatures', function() {
             autoHidden = features.autoHidden();
             msg = i + ' points';
 
-            expect(hidden, msg).to.not.include('points');
-            expect(autoHidden, msg).to.not.include('points');
+            expect(hidden, msg).not.toContain('points');
+            expect(autoHidden, msg).not.toContain('points');
 
             graph.rebase([new iD.osmNode({version: 1})], [graph]);
 
@@ -667,8 +667,8 @@ describe('iD.rendererFeatures', function() {
             autoHidden = features.autoHidden();
             msg = (i + 1) + ' points';
 
-            expect(hidden, msg).to.include('points');
-            expect(autoHidden, msg).to.include('points');
+            expect(hidden, msg).toContain('points');
+            expect(autoHidden, msg).toContain('points');
         });
     });
 

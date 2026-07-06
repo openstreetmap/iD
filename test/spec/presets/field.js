@@ -14,15 +14,15 @@ describe('iD.presetField', function() {
             spyOn(field, 't');
 
             field.title();
-            expect(other.t).to.have.been.calledOnce;
-            expect(field.t).not.to.have.been.called;
+            expect(other.t).toHaveBeenCalledOnce();
+            expect(field.t).not.toHaveBeenCalled();
 
             other.t.mockClear();
             field.t.mockClear();
 
             field.terms();
-            expect(other.t).to.have.been.calledOnce;
-            expect(field.t).not.to.have.been.called;
+            expect(other.t).toHaveBeenCalledOnce();
+            expect(field.t).not.toHaveBeenCalled();
         });
 
         it('references placeholder of another field', function() {
@@ -37,8 +37,8 @@ describe('iD.presetField', function() {
             spyOn(field, 't');
 
             field.placeholder();
-            expect(other.t).to.have.been.calledOnce;
-            expect(field.t).not.to.have.been.called;
+            expect(other.t).toHaveBeenCalledOnce();
+            expect(field.t).not.toHaveBeenCalled();
         });
 
         it('references string options of another field', function() {
@@ -57,8 +57,8 @@ describe('iD.presetField', function() {
             var uiField = iD.uiFieldCombo(field, context);
             uiField(d3.select(document.createElement('div')).classed('form-field-input-wrap', true));
             uiField.tags({k: 'v'});
-            expect(field.t.append).not.to.have.been.called;
-            expect(other.t.append).to.have.been.called;
+            expect(field.t.append).not.toHaveBeenCalled();
+            expect(other.t.append).toHaveBeenCalled();
         });
     });
 });

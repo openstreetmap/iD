@@ -76,7 +76,7 @@ describe('iD.servicePanoramax', function() {
 
             panoramax.init();
             var cache2 = panoramax.cache();
-            expect(cache).to.equal(cache2);
+            expect(cache).toEqual(cache2);
         });
     });
 
@@ -86,7 +86,7 @@ describe('iD.servicePanoramax', function() {
             panoramax.setActiveImage(context, {key: 'baz'});
 
             panoramax.reset();
-            expect(panoramax.cache()).to.not.have.property('foo');
+            expect(panoramax.cache()).not.toHaveProperty('foo');
         });
     });
 
@@ -108,8 +108,8 @@ describe('iD.servicePanoramax', function() {
             panoramax.loadImages(context.projection);
 
             await setTimeout(200);
-            expect(spy).to.have.been.not.called;
-            expect(fetchMock.calls().length).to.eql(0);   // no tile requests of any kind
+            expect(spy).not.toHaveBeenCalled();
+            expect(fetchMock.calls().length).toEqual(0);   // no tile requests of any kind
         });
 
         it('handle API error response', async ({ expect }) => {
@@ -131,7 +131,7 @@ describe('iD.servicePanoramax', function() {
             panoramax.cache().images.rtree.load(features);
             var res = panoramax.images(context.projection);
 
-            expect(res).to.deep.eql([
+            expect(res).toEqual([
                 { id: '0', loc: [10,0], heading: 90, sequence_id: '100', account_id: '0' },
                 { id: '1', loc: [10,0], heading: 90, sequence_id: '100', account_id: '1' }
             ]);
@@ -149,25 +149,25 @@ describe('iD.servicePanoramax', function() {
 
             panoramax.cache().images.rtree.load(features);
             var res = panoramax.images(context.projection);
-            expect(res).to.have.length.of.at.most(5);
+            expect(res.length).toBeLessThanOrEqual(5);
         });
 
         it('handle invalid image data', function() {
             const invalidImage = { id: null, sequence_id: null };
             panoramax.setActiveImage(invalidImage);
-            expect(panoramax.getActiveImage()).to.be.null;
+            expect(panoramax.getActiveImage()).toBeNull();
         });
 
         it('return empty array when no images are available', function() {
             const result = panoramax.images(context.projection);
-            expect(result).to.deep.equal([]);
+            expect(result).toEqual([]);
         });
 
         it('load images quickly under normal conditions', function() {
             const start = performance.now();
             panoramax.loadImages(context.projection);
             const duration = performance.now() - start;
-            expect(duration).to.be.lessThan(1000);
+            expect(duration).toBeLessThan(1000);
         });
     });
 
@@ -184,7 +184,7 @@ describe('iD.servicePanoramax', function() {
             panoramax.cache().sequences.lineString['100'] = { rotation: 0, images: [ features[0].data, features[1].data, features[2].data ] };
 
             var res = panoramax.sequences(context.projection, 15);
-            expect(res).to.deep.eql([{
+            expect(res).toEqual([{
                 rotation: 0, images: [features[0].data, features[1].data, features[2].data]
             }]);
         });
@@ -195,7 +195,7 @@ describe('iD.servicePanoramax', function() {
             const photo = { id: 'foo', sequence_id: '100'};
             panoramax.cache().images = { forImageId: { foo: photo }};
             panoramax.selectImage(context, 'foo');
-            expect(panoramax.getActiveImage().id).to.eql(photo.id);
+            expect(panoramax.getActiveImage().id).toEqual(photo.id);
         });
     });
 });

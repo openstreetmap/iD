@@ -18,7 +18,7 @@ describe.skip('iD.modeAddPoint', function() {
         it('adds a point', function() {
             context.surface().node().dispatchEvent(new MouseEvent('mousedown'));
             window.dispatchEvent(new MouseEvent('mouseup'));
-            expect(context.history().changes().created).to.have.length(1);
+            expect(context.history().changes().created).toHaveLength(1);
             context.mode().exit();
             d3.select('window').on('click.draw-block', null);
         });
@@ -27,7 +27,7 @@ describe.skip('iD.modeAddPoint', function() {
             context.surface().node().dispatchEvent(new MouseEvent('mousedown'));
             window.dispatchEvent(new MouseEvent('mouseup'));
             expect(context.mode().id).to.equal('select');
-            expect(context.mode().selectedIDs()).to.eql([context.history().changes().created[0].id]);
+            expect(context.mode().selectedIDs()).toEqual([context.history().changes().created[0].id]);
             context.mode().exit();
         });
     });
@@ -36,7 +36,7 @@ describe.skip('iD.modeAddPoint', function() {
     //     it.skip('exits to browse mode', function(done) {
     //         document.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 27 }));
     //         window.setTimeout(function() {
-    //             expect(context.mode().id).to.equal('browse');
+    //             expect(context.mode().id).toEqual('browse');
     //             done();
     //         }, 200);
     //     });

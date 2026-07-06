@@ -44,38 +44,38 @@ describe('iD.validations.osm_api_limits', function () {
 
     it('has no errors on init', function() {
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags way with more than the maximum number of allowed nodes', function() {
         createWay(12);
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('osm_api_limits');
-        expect(issue.subtype).to.eql('exceededMaxWayNodes');
-        expect(issue.severity).to.eql('error');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('osm_api_limits');
+        expect(issue.subtype).toEqual('exceededMaxWayNodes');
+        expect(issue.severity).toEqual('error');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
 
         var fixes = issue.fixes(context);
-        expect(fixes).to.have.lengthOf(1);
+        expect(fixes).toHaveLength(1);
         fixes[0].onClick(context);
         issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('can fix an extreme case', function() {
         createWay(33);
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
 
         var fixes = issue.fixes(context);
-        expect(fixes).to.have.lengthOf(1);
+        expect(fixes).toHaveLength(1);
         fixes[0].onClick(context);
         issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('fix a simple case at an intersection vertex', function() {
@@ -92,14 +92,14 @@ describe('iD.validations.osm_api_limits', function () {
         );
 
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
 
         var fixes = issue.fixes(context);
-        expect(fixes).to.have.lengthOf(1);
+        expect(fixes).toHaveLength(1);
         fixes[0].onClick(context);
         issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
 
         context.graph().entity('w-1').nodes.length === 8;
     });

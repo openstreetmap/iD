@@ -70,8 +70,8 @@ describe('iD.uiFieldWikipedia', function() {
         selection.call(wikipedia);
         wikipedia.tags({wikipedia: 'en:Title'});
 
-        expect(iD.utilGetSetValue(selection.selectAll('.wiki-lang'))).to.equal('English');
-        expect(iD.utilGetSetValue(selection.selectAll('.wiki-title'))).to.equal('Title');
+        expect(iD.utilGetSetValue(selection.selectAll('.wiki-lang'))).toEqual('English');
+        expect(iD.utilGetSetValue(selection.selectAll('.wiki-title'))).toEqual('Title');
     });
 
     it('sets language, value', async () => {
@@ -92,10 +92,10 @@ describe('iD.uiFieldWikipedia', function() {
         selection.selectAll('.wiki-title').node().dispatchEvent(new Event('blur'));
 
         expect(spy).to.have.callCount(4);
-        expect(spy).to.have.been.calledWith({ wikipedia: undefined});  // lang on change
-        expect(spy).to.have.been.calledWith({ wikipedia: undefined});  // lang on blur
-        expect(spy).to.have.been.calledWith({ wikipedia: 'de:Title' });   // title on change
-        expect(spy).to.have.been.calledWith({ wikipedia: 'de:Title' });   // title on blur
+        expect(spy).toHaveBeenCalledWith({ wikipedia: undefined});  // lang on change
+        expect(spy).toHaveBeenCalledWith({ wikipedia: undefined});  // lang on blur
+        expect(spy).toHaveBeenCalledWith({ wikipedia: 'de:Title' });   // title on change
+        expect(spy).toHaveBeenCalledWith({ wikipedia: 'de:Title' });   // title on blur
     });
 
     it('recognizes pasted URLs', async () => {
@@ -107,20 +107,20 @@ describe('iD.uiFieldWikipedia', function() {
         iD.utilGetSetValue(selection.selectAll('.wiki-title'), 'http://de.wikipedia.org/wiki/Title');
         selection.selectAll('.wiki-title').node().dispatchEvent(new Event('change'));
 
-        expect(iD.utilGetSetValue(selection.selectAll('.wiki-lang'))).to.equal('Deutsch');
-        expect(iD.utilGetSetValue(selection.selectAll('.wiki-title'))).to.equal('Title');
+        expect(iD.utilGetSetValue(selection.selectAll('.wiki-lang'))).toEqual('Deutsch');
+        expect(iD.utilGetSetValue(selection.selectAll('.wiki-title'))).toEqual('Title');
     });
 
     describe('encodePath', function() {
         it('returns an encoded URI component that contains the title with spaces replaced by underscores', () => {
             var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
-            expect(wikipedia.encodePath('? (film)', undefined)).to.equal('%3F_(film)');
+            expect(wikipedia.encodePath('? (film)', undefined)).toEqual('%3F_(film)');
         });
 
         it('returns an encoded URI component that includes an anchor fragment', () => {
             var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
             // this can be tested manually by entering '? (film)#Themes and style in the search box before focusing out'
-            expect(wikipedia.encodePath('? (film)', 'Themes and style')).to.equal('%3F_(film)#Themes_and_style');
+            expect(wikipedia.encodePath('? (film)', 'Themes and style')).toEqual('%3F_(film)#Themes_and_style');
         });
     });
 
@@ -128,22 +128,22 @@ describe('iD.uiFieldWikipedia', function() {
         it('returns an encoded URI anchor fragment', () => {
             var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
             // this can be similarly tested by entering 'Section#Arts, entertainment and media' in the search box before focusing out'
-            expect(wikipedia.encodeURIAnchorFragment('Theme?')).to.equal('#Theme%3F');
+            expect(wikipedia.encodeURIAnchorFragment('Theme?')).toEqual('#Theme%3F');
         });
 
         it('replaces all whitespace characters with underscore', () => {
             var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
-            expect(wikipedia.encodeURIAnchorFragment('Themes And Styles')).to.equal('#Themes_And_Styles');
+            expect(wikipedia.encodeURIAnchorFragment('Themes And Styles')).toEqual('#Themes_And_Styles');
         });
 
         it('encodes % characters, does not replace them with a dot', () => {
             var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
-            expect(wikipedia.encodeURIAnchorFragment('Is%this_100% correct')).to.equal('#Is%25this_100%25_correct');
+            expect(wikipedia.encodeURIAnchorFragment('Is%this_100% correct')).toEqual('#Is%25this_100%25_correct');
         });
 
         it('encodes characters that are URI encoded characters', () => {
             var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
-            expect(wikipedia.encodeURIAnchorFragment('Section %20%25')).to.equal('#Section_%2520%2525');
+            expect(wikipedia.encodeURIAnchorFragment('Section %20%25')).toEqual('#Section_%2520%2525');
         });
     });
 
@@ -158,7 +158,7 @@ describe('iD.uiFieldWikipedia', function() {
         await setTimeout(20);
         selection.call(wikipedia2);
         wikipedia2.tags({});
-        expect(iD.utilGetSetValue(selection.selectAll('.wiki-lang'))).to.equal('Deutsch');
+        expect(iD.utilGetSetValue(selection.selectAll('.wiki-lang'))).toEqual('Deutsch');
     });
 
     it.skip('does not set delayed wikidata tag if graph has changed', async () => {
@@ -166,7 +166,7 @@ describe('iD.uiFieldWikipedia', function() {
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
 
-        var spy = vi.fn();
+        var spy = fn();
         wikipedia.on('change.spy', spy);
 
         // Create an XHR server that will respond after 60ms
@@ -186,7 +186,7 @@ describe('iD.uiFieldWikipedia', function() {
         selection.selectAll('.wiki-title').node().dispatchEvent(new Event('blur'));
 
         // t0
-        expect(context.entity(entity.id).tags.wikidata).to.be.undefined;
+        expect(context.entity(entity.id).tags.wikidata).toBeUndefined();
 
         // Create a new XHR server that will respond after 60ms to
         // separate requests after this point from those before
@@ -210,19 +210,19 @@ describe('iD.uiFieldWikipedia', function() {
 
         // t70:  check that wikidata unchanged
         window.setTimeout(function() {
-            expect(context.entity(entity.id).tags.wikidata).to.be.undefined;
+            expect(context.entity(entity.id).tags.wikidata).toBeUndefined();
         }, 70);
 
         // t90:  at t30 + 60ms (delay), wikidata SHOULD be set because graph is unchanged.
 
         // t100:  check that wikidata has changed
         await setTimeout(100);
-        expect(context.entity(entity.id).tags.wikidata).to.equal('Q216353');
+        expect(context.entity(entity.id).tags.wikidata).toEqual('Q216353');
 
-        expect(spy).toHaveBeenCalledTimes(4);
-        expect(spy).toHaveBeenNthCalledWith(1, { wikipedia: 'de:Skip' });   // 'Skip' on change
-        expect(spy).toHaveBeenNthCalledWith(2, { wikipedia: 'de:Skip' });   // 'Skip' on blur
-        expect(spy).toHaveBeenNthCalledWith(3, { wikipedia: 'de:Title' });  // 'Title' on change +10ms
-        expect(spy).toHaveBeenNthCalledWith(4, { wikipedia: 'de:Title' });  // 'Title' on blur   +10ms
+        expect(spy.callCount).toEqual(4);
+        expect(spy.getCall(0)).toHaveBeenCalledWith({ wikipedia: 'de:Skip' });   // 'Skip' on change
+        expect(spy.getCall(1)).toHaveBeenCalledWith({ wikipedia: 'de:Skip' });   // 'Skip' on blur
+        expect(spy.getCall(2)).toHaveBeenCalledWith({ wikipedia: 'de:Title' });  // 'Title' on change +10ms
+        expect(spy.getCall(3)).toHaveBeenCalledWith({ wikipedia: 'de:Title' });  // 'Title' on blur   +10ms
     });
 });
