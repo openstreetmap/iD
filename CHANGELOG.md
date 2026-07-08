@@ -37,6 +37,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # Unreleased (2.42.0-dev)
 
+#### :mega: Release Highlights
+* Update id-tagging-schema to [version 7](https://github.com/ideditor/schema-builder/blob/main/MIGRATION_GUIDE.md#v7-migration-guide) ([#12358])
 #### :sparkles: Usability & Accessibility
 * Display radio field options in a two-column layout if there is insufficient space for them in a single line ([#12455])
 * Render `highway=track` using different styles depending on the `tracktype` ([#12392], thanks [@RudyTheDev])
@@ -64,6 +66,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8713]: https://github.com/openstreetmap/iD/issues/8713
 [#8724]: https://github.com/openstreetmap/iD/issues/8724
 [#10911]: https://github.com/openstreetmap/iD/pull/10911
+[#12358]: https://github.com/openstreetmap/iD/pull/12358
 [#12392]: https://github.com/openstreetmap/iD/pull/12392
 [#12401]: https://github.com/openstreetmap/iD/pull/12401
 [#12406]: https://github.com/openstreetmap/iD/pull/12406
