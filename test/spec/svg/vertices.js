@@ -25,6 +25,6 @@ describe('iD.svgVertices', function () {
         var extent = iD.geoExtent([0, 0], [1, 1]);
 
         surface.call(iD.svgVertices(projection, context), graph, [node], filter, extent);
-        expect(surface.select('.vertex').classed('shared')).to.be.true;
+        expect(surface.select('.vertex').classed('shared')).toBe(true);
     });
 });

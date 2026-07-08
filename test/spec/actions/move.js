@@ -7,14 +7,14 @@ describe('iD.actionMove', function() {
     //         var node  = new iD.osmNode({loc: [0, 0]}),
     //             action = iD.actionMove([node.id], [0, 0], projection),
     //             graph = new iD.coreGraph([node]);
-    //         expect(action.disabled(graph)).not.to.be.ok;
+    //         expect(action.disabled(graph)).toBeFalsy();
     //     });
 
     //     it('returns \'incomplete_relation\' for an incomplete relation', function() {
     //         var relation = new iD.osmRelation({members: [{id: 1}]}),
     //             action = iD.actionMove([relation.id], [0, 0], projection),
     //             graph = new iD.coreGraph([relation]);
-    //         expect(action.disabled(graph)).to.equal('incomplete_relation');
+    //         expect(action.disabled(graph)).toEqual('incomplete_relation');
     //     });
 
     //     it('returns falsy for a complete relation', function() {
@@ -22,7 +22,7 @@ describe('iD.actionMove', function() {
     //             relation = new iD.osmRelation({members: [{id: node.id}]}),
     //             action = iD.actionMove([relation.id], [0, 0], projection),
     //             graph = new iD.coreGraph([node, relation]);
-    //         expect(action.disabled(graph)).not.to.be.ok;
+    //         expect(action.disabled(graph)).toBeFalsy();
     //     });
     // });
 
@@ -34,10 +34,10 @@ describe('iD.actionMove', function() {
             graph  = iD.actionMove([way.id], delta, projection)(new iD.coreGraph([node1, node2, way])),
             loc1   = graph.entity(node1.id).loc,
             loc2   = graph.entity(node2.id).loc;
-        expect(loc1[0]).to.be.closeTo( 1.440, 0.001);
-        expect(loc1[1]).to.be.closeTo(-2.159, 0.001);
-        expect(loc2[0]).to.be.closeTo( 6.440, 0.001);
-        expect(loc2[1]).to.be.closeTo( 7.866, 0.001);
+        expect(loc1[0]).toBeCloseTo( 1.440, 3);
+        expect(loc1[1]).toBeCloseTo(-2.159, 3);
+        expect(loc2[0]).toBeCloseTo( 6.440, 3);
+        expect(loc2[1]).toBeCloseTo( 7.866, 3);
     });
 
     it('moves repeated nodes only once', function() {
@@ -46,8 +46,8 @@ describe('iD.actionMove', function() {
             delta  = [2, 3],
             graph  = iD.actionMove([way.id], delta, projection)(new iD.coreGraph([node, way])),
             loc    = graph.entity(node.id).loc;
-        expect(loc[0]).to.be.closeTo( 1.440, 0.001);
-        expect(loc[1]).to.be.closeTo(-2.159, 0.001);
+        expect(loc[0]).toBeCloseTo( 1.440, 3);
+        expect(loc[1]).toBeCloseTo(-2.159, 3);
     });
 
     it('moves multiple ways', function() {
@@ -57,8 +57,8 @@ describe('iD.actionMove', function() {
             delta  = [2, 3],
             graph  = iD.actionMove([way1.id, way2.id], delta, projection)(new iD.coreGraph([node, way1, way2])),
             loc    = graph.entity(node.id).loc;
-        expect(loc[0]).to.be.closeTo( 1.440, 0.001);
-        expect(loc[1]).to.be.closeTo(-2.159, 0.001);
+        expect(loc[0]).toBeCloseTo( 1.440, 3);
+        expect(loc[1]).toBeCloseTo(-2.159, 3);
     });
 
     it('moves leaf nodes of a relation', function() {
@@ -68,8 +68,8 @@ describe('iD.actionMove', function() {
             delta    = [2, 3],
             graph    = iD.actionMove([relation.id], delta, projection)(new iD.coreGraph([node, way, relation])),
             loc      = graph.entity(node.id).loc;
-        expect(loc[0]).to.be.closeTo( 1.440, 0.001);
-        expect(loc[1]).to.be.closeTo(-2.159, 0.001);
+        expect(loc[0]).toBeCloseTo( 1.440, 3);
+        expect(loc[1]).toBeCloseTo(-2.159, 3);
     });
 
     it('prevents intersections', function() {
@@ -105,12 +105,12 @@ describe('iD.actionMove', function() {
 
             const limitedDelta = action.delta();
 
-            expect(limitedDelta[0]).to.be.closeTo(expectedDelta[0], epsilon);
-            expect(limitedDelta[1]).to.be.closeTo(expectedDelta[1], epsilon);
+            expect(limitedDelta[0]).toBeCloseTo(expectedDelta[0], epsilon);
+            expect(limitedDelta[1]).toBeCloseTo(expectedDelta[1], epsilon);
 
-            expect(result.entity(d.id).loc[0]).to.be.closeTo(
+            expect(result.entity(d.id).loc[0]).toBeCloseTo(
                 graph.entity(d.id).loc[0] + expectedDelta[0], epsilon);
-            expect(result.entity(d.id).loc[1]).to.be.closeTo(
+            expect(result.entity(d.id).loc[1]).toBeCloseTo(
                 graph.entity(d.id).loc[1] + expectedDelta[1], epsilon);
         }
 

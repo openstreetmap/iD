@@ -36,8 +36,8 @@ describe('iD.svgAreas', function () {
 
         _surface.call(iD.svgAreas(projection, context), graph, [graph.entity('w')], none);
 
-        expect(_surface.select('path.way').classed('way')).to.be.true;
-        expect(_surface.select('path.area').classed('area')).to.be.true;
+        expect(_surface.select('path.way').classed('way')).toBe(true);
+        expect(_surface.select('path.area').classed('area')).toBe(true);
     });
 
     it('adds tag classes', function () {
@@ -51,8 +51,8 @@ describe('iD.svgAreas', function () {
 
         _surface.call(iD.svgAreas(projection, context), graph, [graph.entity('w')], none);
 
-        expect(_surface.select('.area').classed('tag-building')).to.be.true;
-        expect(_surface.select('.area').classed('tag-building-yes')).to.be.true;
+        expect(_surface.select('.area').classed('tag-building')).toBe(true);
+        expect(_surface.select('.area').classed('tag-building-yes')).toBe(true);
     });
 
     it('handles deletion of a way and a member vertex (#1903)', function () {
@@ -69,7 +69,7 @@ describe('iD.svgAreas', function () {
         graph = graph.remove(graph.entity('x')).remove(graph.entity('d'));
 
         _surface.call(iD.svgAreas(projection, context), graph, [graph.entity('w')], all);
-        expect(_surface.select('.area').size()).to.equal(1);
+        expect(_surface.select('.area').size()).toEqual(1);
     });
 
     describe('z-indexing', function() {
@@ -89,31 +89,31 @@ describe('iD.svgAreas', function () {
         it('stacks smaller areas above larger ones in a single render', function () {
             _surface.call(iD.svgAreas(projection, context), graph, [graph.entity('s'), graph.entity('l')], none);
 
-            expect(_surface.select('.area:nth-child(1)').classed('tag-landuse-park')).to.be.true;
-            expect(_surface.select('.area:nth-child(2)').classed('tag-building-yes')).to.be.true;
+            expect(_surface.select('.area:nth-child(1)').classed('tag-landuse-park')).toBe(true);
+            expect(_surface.select('.area:nth-child(2)').classed('tag-building-yes')).toBe(true);
         });
 
         it('stacks smaller areas above larger ones in a single render (reverse)', function () {
             _surface.call(iD.svgAreas(projection, context), graph, [graph.entity('l'), graph.entity('s')], none);
 
-            expect(_surface.select('.area:nth-child(1)').classed('tag-landuse-park')).to.be.true;
-            expect(_surface.select('.area:nth-child(2)').classed('tag-building-yes')).to.be.true;
+            expect(_surface.select('.area:nth-child(1)').classed('tag-landuse-park')).toBe(true);
+            expect(_surface.select('.area:nth-child(2)').classed('tag-building-yes')).toBe(true);
         });
 
         it('stacks smaller areas above larger ones in separate renders', function () {
             _surface.call(iD.svgAreas(projection, context), graph, [graph.entity('s')], none);
             _surface.call(iD.svgAreas(projection, context), graph, [graph.entity('l')], none);
 
-            expect(_surface.select('.area:nth-child(1)').classed('tag-landuse-park')).to.be.true;
-            expect(_surface.select('.area:nth-child(2)').classed('tag-building-yes')).to.be.true;
+            expect(_surface.select('.area:nth-child(1)').classed('tag-landuse-park')).toBe(true);
+            expect(_surface.select('.area:nth-child(2)').classed('tag-building-yes')).toBe(true);
         });
 
         it('stacks smaller areas above larger ones in separate renders (reverse)', function () {
             _surface.call(iD.svgAreas(projection, context), graph, [graph.entity('l')], none);
             _surface.call(iD.svgAreas(projection, context), graph, [graph.entity('s')], none);
 
-            expect(_surface.select('.area:nth-child(1)').classed('tag-landuse-park')).to.be.true;
-            expect(_surface.select('.area:nth-child(2)').classed('tag-building-yes')).to.be.true;
+            expect(_surface.select('.area:nth-child(1)').classed('tag-landuse-park')).toBe(true);
+            expect(_surface.select('.area:nth-child(2)').classed('tag-building-yes')).toBe(true);
         });
     });
 
@@ -128,7 +128,7 @@ describe('iD.svgAreas', function () {
 
         _surface.call(iD.svgAreas(projection, context), graph, areas, none);
 
-        expect(_surface.select('.fill').classed('relation')).to.be.true;
+        expect(_surface.select('.fill').classed('relation')).toBe(true);
     });
 
     it('renders no strokes for multipolygon areas', function () {
@@ -142,6 +142,6 @@ describe('iD.svgAreas', function () {
 
         _surface.call(iD.svgAreas(projection, context), graph, areas, none);
 
-        expect(_surface.selectAll('.stroke').size()).to.equal(0);
+        expect(_surface.selectAll('.stroke').size()).toEqual(0);
     });
 });

@@ -85,31 +85,31 @@ describe('iD.validations.mismatched_geometry', function () {
 
     it('has no errors on init', function() {
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores points', function() {
         createPoint({ building: 'yes' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores open way without area tag', function() {
         createOpenWay({});
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores closed way with area tag', function() {
         createClosedWay({ building: 'yes' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores open way with tag that allows both lines and areas', function() {
         createOpenWay({ man_made: 'yes' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags open way with area tag, and has autofix to connect the ends', async () => {
@@ -117,13 +117,13 @@ describe('iD.validations.mismatched_geometry', function () {
         iD.osmSetAreaKeys({ building: {} });
         const way = createOpenWay({ building: 'yes' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('mismatched_geometry');
-        expect(issue.subtype).to.eql('area_as_line');
-        expect(issue.severity).to.eql('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('mismatched_geometry');
+        expect(issue.subtype).toEqual('area_as_line');
+        expect(issue.severity).toEqual('warning');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
 
         expect(issue.dynamicFixes(context)).toHaveLength(2);
         const fix0 = d3_select(document.createElement('div'));
@@ -140,13 +140,13 @@ describe('iD.validations.mismatched_geometry', function () {
         iD.osmSetAreaKeys({ building: {} });
         const way = createOpenWay({ building: 'yes' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('mismatched_geometry');
-        expect(issue.subtype).to.eql('area_as_line');
-        expect(issue.severity).to.eql('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('mismatched_geometry');
+        expect(issue.subtype).toEqual('area_as_line');
+        expect(issue.severity).toEqual('warning');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
 
         expect(issue.dynamicFixes(context)).toHaveLength(2);
 
@@ -162,13 +162,13 @@ describe('iD.validations.mismatched_geometry', function () {
     it('flags open way with both area and line tags', function() {
         const way = createOpenWay({ area: 'yes', barrier: 'fence' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('mismatched_geometry');
-        expect(issue.subtype).to.eql('area_as_line');
-        expect(issue.severity).to.eql('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('mismatched_geometry');
+        expect(issue.subtype).toEqual('area_as_line');
+        expect(issue.severity).toEqual('warning');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
 
         const container = d3_select(document.createElement('div'));
         issue.fixes(context)[0].title(container);
@@ -265,7 +265,7 @@ describe('iD.validations.mismatched_geometry', function () {
 
         createOpenWay({ 'disused:waterway': 'security_lock' });
         const issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('does not error if the best preset is limited to certain regions', async () => {
@@ -273,6 +273,6 @@ describe('iD.validations.mismatched_geometry', function () {
 
         createClosedWay({ amenity: 'library' });
         const issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 });

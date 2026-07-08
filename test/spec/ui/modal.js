@@ -16,12 +16,12 @@ describe('iD.uiModal', function () {
 
     it('can be instantiated', function() {
         var selection = iD.uiModal(elem);
-        expect(selection).to.be.ok;
+        expect(selection).toBeTruthy();
     });
 
     it('has a content section', function () {
         var selection = iD.uiModal(elem);
-        expect(selection.selectAll('div.content').size()).to.equal(1);
+        expect(selection.selectAll('div.content').size()).toEqual(1);
     });
 
     it('can be dismissed by calling close function', async () => {
@@ -29,7 +29,7 @@ describe('iD.uiModal', function () {
         selection.close();
         await setTimeout(275);
         d3.timerFlush();
-        expect(selection.node().parentNode).to.be.null;
+        expect(selection.node().parentNode).toBeNull();
     });
 
     it('can be dismissed by clicking the close button', async () => {
@@ -37,7 +37,7 @@ describe('iD.uiModal', function () {
         selection.select('button.close').node().dispatchEvent(new MouseEvent('click'));
         await setTimeout(275);
         d3.timerFlush();
-        expect(selection.node().parentNode).to.be.null;
+        expect(selection.node().parentNode).toBeNull();
     });
 
     it('can be dismissed by pressing escape', async () => {
@@ -46,7 +46,7 @@ describe('iD.uiModal', function () {
         document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
         await setTimeout(275);
         d3.timerFlush();
-        expect(selection.node().parentNode).to.be.null;
+        expect(selection.node().parentNode).toBeNull();
     });
 
     it('can be dismissed by pressing backspace', async () => {
@@ -55,7 +55,7 @@ describe('iD.uiModal', function () {
         document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Backspace' }));
         await setTimeout(275);
         d3.timerFlush();
-        expect(selection.node().parentNode).to.be.null;
+        expect(selection.node().parentNode).toBeNull();
     });
 
 });

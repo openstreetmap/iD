@@ -1,15 +1,15 @@
-import { debug } from '../index';
+import { debug, type EntityId } from '../index';
 import type { osmNode } from '../osm/node';
 import type { osmRelation } from '../osm/relation';
 import type { osmWay } from '../osm/way';
 import { utilArrayDifference } from '../util';
 
 export class coreGraph {
-    entities: { [id: string]: iD.OsmEntity | undefined };
-    _parentWays: { [id: string]: Set<string> };
-    _parentRels: { [id: string]: Set<string> };
-    transients: { [id: string]: { [key: string]: unknown } };
-    _childNodes: { [id: string]: osmNode[] };
+    entities: { [id: EntityId]: iD.OsmEntity | undefined };
+    _parentWays: { [id: EntityId]: Set<EntityId> };
+    _parentRels: { [id: EntityId]: Set<EntityId> };
+    transients: { [id: EntityId]: { [key: string]: unknown } };
+    _childNodes: { [id: EntityId]: osmNode[] };
     frozen: boolean;
 
   constructor(other?: coreGraph, mutable?: boolean) {
@@ -31,11 +31,11 @@ export class coreGraph {
     this.frozen = !mutable;
   }
 
-    hasEntity<T extends iD.OsmEntity>(id: string) {
+    hasEntity<T extends iD.OsmEntity>(id: EntityId) {
         return this.entities[id] as T | undefined;
     }
 
-    entity<T extends iD.OsmEntity>(id: string) {
+    entity<T extends iD.OsmEntity>(id: EntityId) {
         var entity = this.entities[id];
 
         if (!entity) {
@@ -44,7 +44,7 @@ export class coreGraph {
         return entity as T;
     }
 
-    geometry(id: string) {
+    geometry(id: EntityId) {
         return this.entity(id).geometry(this);
     }
 
@@ -203,8 +203,8 @@ export class coreGraph {
         parentRels = parentRels || this._parentRels;
 
         var type = entity && entity.type || oldentity && oldentity.type;
-        let removed: string[] = [];
-        let added: string[] = [];
+        let removed: EntityId[] = [];
+        let added: EntityId[] = [];
         let i: number;
 
         if (type === 'way') {   // Update parentWays
@@ -283,7 +283,7 @@ export class coreGraph {
         });
     }
 
-    revert(id: string) {
+    revert(id: EntityId) {
         var baseEntity = this.base().entities[id];
         var headEntity = this.entities[id];
         if (headEntity === baseEntity) return this;
@@ -306,11 +306,12 @@ export class coreGraph {
     }
 
     // Obliterates any existing entities
-    load(entities: { [key: string | number]: iD.OsmEntity }) {
+    load(entities: { [key: EntityId | number]: iD.OsmEntity }) {
         var base = this.base();
         this.entities = Object.create(base.entities);
 
-        for (var i in entities) {
+        for (var _i in entities) {
+            const i = <EntityId>_i;
             this.entities[i] = entities[i];
             this._updateCalculated(base.entities[i], this.entities[i]);
         }

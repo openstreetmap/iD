@@ -12,11 +12,11 @@ describe('iD.rendererTileLayer', function() {
     });
 
     it('is instantiated', function() {
-        expect(c).to.be.ok;
+        expect(c).toBeTruthy();
     });
 
     it('#dimensions', function() {
-        expect(c.dimensions([100, 100])).to.equal(c);
-        expect(c.dimensions()).to.eql([100,100]);
+        expect(c.dimensions([100, 100])).toEqual(c);
+        expect(c.dimensions()).toEqual([100,100]);
     });
 });

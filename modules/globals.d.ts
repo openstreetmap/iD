@@ -43,6 +43,11 @@ declare global {
 
     export type Selector = (selection: Selection) => void;
   }
+
+    interface ObjectConstructor {
+        // custom overload so that `Object.keys(Record<T, …>)` returns `T[]`
+        keys<T>(o: T extends Record<infer K, unknown> ? [K] extends [string] ? T : never : never): (keyof T)[];
+    }
 }
 
 export {};

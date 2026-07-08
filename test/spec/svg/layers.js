@@ -13,39 +13,39 @@ describe('iD.svgLayers', function () {
 
     it('creates a surface', function () {
         container.call(iD.svgLayers(projection, context));
-        expect(container.selectAll('svg').classed('surface')).to.be.true;
+        expect(container.selectAll('svg').classed('surface')).toBe(true);
     });
 
     it('creates surface defs', function () {
         container.call(iD.svgLayers(projection, context));
         var nodes = container.selectAll('svg defs').nodes();
-        expect(nodes.length).to.eql(1);
-        expect(d3.select(nodes[0]).classed('surface-defs')).to.be.true;
+        expect(nodes.length).toEqual(1);
+        expect(d3.select(nodes[0]).classed('surface-defs')).toBe(true);
     });
 
     it('creates default data layers', function () {
         container.call(iD.svgLayers(projection, context));
         var nodes = container.selectAll('svg .data-layer').nodes();
-        expect(nodes.length).to.eql(17);
+        expect(nodes.length).toEqual(17);
         /* eslint-disable no-useless-assignment */
         let i = 0;
-        expect(d3.select(nodes[i++]).classed('osm')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('notes')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('data')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('osmose')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('streetside')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('mapillary')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('mapillary-position')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('mapillary-map-features')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('mapillary-signs')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('kartaview')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('mapilio')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('vegbilder')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('panoramax')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('local-photos')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('debug')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('geolocate')).to.be.true;
-        expect(d3.select(nodes[i++]).classed('touch')).to.be.true;
+        expect(d3.select(nodes[i++]).classed('osm')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('notes')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('data')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('osmose')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('streetside')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('mapillary')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('mapillary-position')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('mapillary-map-features')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('mapillary-signs')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('kartaview')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('mapilio')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('vegbilder')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('panoramax')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('local-photos')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('debug')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('geolocate')).toBe(true);
+        expect(d3.select(nodes[i++]).classed('touch')).toBe(true);
         /* eslint-enable no-useless-assignment */
     });
 

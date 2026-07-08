@@ -5,9 +5,9 @@ describe('iD.actionDeleteMultiple', function () {
             r      = new iD.osmRelation(),
             action = iD.actionDeleteMultiple([n.id, w.id, r.id]),
             graph  = action(new iD.coreGraph([n, w, r]));
-        expect(graph.hasEntity(n.id)).to.be.undefined;
-        expect(graph.hasEntity(w.id)).to.be.undefined;
-        expect(graph.hasEntity(r.id)).to.be.undefined;
+        expect(graph.hasEntity(n.id)).toBeUndefined();
+        expect(graph.hasEntity(w.id)).toBeUndefined();
+        expect(graph.hasEntity(r.id)).toBeUndefined();
     });
 
     it('deletes a way and one of its nodes', function () {
@@ -15,8 +15,8 @@ describe('iD.actionDeleteMultiple', function () {
             w      = new iD.osmWay({nodes: [n.id]}),
             action = iD.actionDeleteMultiple([w.id, n.id]),
             graph  = action(new iD.coreGraph([n, w]));
-        expect(graph.hasEntity(w.id)).to.be.undefined;
-        expect(graph.hasEntity(n.id)).to.be.undefined;
+        expect(graph.hasEntity(w.id)).toBeUndefined();
+        expect(graph.hasEntity(n.id)).toBeUndefined();
     });
 
     // This was moved to operationDelete.  We should test operations and move this test there.
@@ -26,7 +26,7 @@ describe('iD.actionDeleteMultiple', function () {
     //             relation = new iD.osmRelation({members: [{id: 'w'}]}),
     //             graph    = new iD.coreGraph([node, relation]),
     //             action   = iD.actionDeleteMultiple([node.id, relation.id]);
-    //         expect(action.disabled(graph)).to.equal('incomplete_relation');
+    //         expect(action.disabled(graph)).toEqual('incomplete_relation');
     //     });
     // });
 });

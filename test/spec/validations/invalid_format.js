@@ -24,7 +24,7 @@ describe('iD.validations.invalid_format', function () {
                 url: 'https://www.valid-site.net/path?query=1'
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(0);
+            expect(issues).toHaveLength(0);
         });
 
         it('should flag URLs missing scheme', function() {
@@ -32,9 +32,9 @@ describe('iD.validations.invalid_format', function () {
                 website: 'example.com'
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(1);
-            expect(issues[0].type).to.eql('invalid_format');
-            expect(issues[0].subtype).to.eql('website');
+            expect(issues).toHaveLength(1);
+            expect(issues[0].type).toEqual('invalid_format');
+            expect(issues[0].subtype).toEqual('website');
         });
 
         it('should flag malformed URLs', function() {
@@ -43,10 +43,10 @@ describe('iD.validations.invalid_format', function () {
                 url: 'invalid://bad url with spaces'
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(2);
+            expect(issues).toHaveLength(2);
             issues.forEach(function(issue) {
-                expect(issue.type).to.eql('invalid_format');
-                expect(issue.subtype).to.eql('website');
+                expect(issue.type).toEqual('invalid_format');
+                expect(issue.subtype).toEqual('website');
             });
         });
 
@@ -55,10 +55,10 @@ describe('iD.validations.invalid_format', function () {
                 website: 'https://example.com;invalid-url;http://valid.org'
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(1);
-            expect(issues[0].type).to.eql('invalid_format');
-            expect(issues[0].subtype).to.eql('website');
-            expect(issues[0].data.count).to.eql(1);
+            expect(issues).toHaveLength(1);
+            expect(issues[0].type).toEqual('invalid_format');
+            expect(issues[0].subtype).toEqual('website');
+            expect(issues[0].data.count).toEqual(1);
         });
 
         it('should handle multiple invalid URLs', function() {
@@ -66,10 +66,10 @@ describe('iD.validations.invalid_format', function () {
                 website: 'bad-url1;bad-url2'
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(1);
-            expect(issues[0].type).to.eql('invalid_format');
-            expect(issues[0].subtype).to.eql('website');
-            expect(issues[0].data.count).to.eql(2);
+            expect(issues).toHaveLength(1);
+            expect(issues[0].type).toEqual('invalid_format');
+            expect(issues[0].subtype).toEqual('website');
+            expect(issues[0].data.count).toEqual(2);
         });
 
         it('should validate all URL tags', function() {
@@ -80,10 +80,10 @@ describe('iD.validations.invalid_format', function () {
                 'source:url': 'still-bad'
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(4);
+            expect(issues).toHaveLength(4);
             issues.forEach(function(issue) {
-                expect(issue.type).to.eql('invalid_format');
-                expect(issue.subtype).to.eql('website');
+                expect(issue.type).toEqual('invalid_format');
+                expect(issue.subtype).toEqual('website');
             });
         });
 
@@ -93,7 +93,7 @@ describe('iD.validations.invalid_format', function () {
                 url: undefined
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(0);
+            expect(issues).toHaveLength(0);
         });
 
         it('should not flag URLs with accented characters', function() {
@@ -101,7 +101,7 @@ describe('iD.validations.invalid_format', function () {
                 website: 'https://www.rando92.fr/randonner/itinéraires/'
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(0);
+            expect(issues).toHaveLength(0);
         });
 
         it('should not flag internationalized domain names', function() {
@@ -109,7 +109,7 @@ describe('iD.validations.invalid_format', function () {
                 website: 'https://teaomārama.school.nz'
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(0);
+            expect(issues).toHaveLength(0);
         });
 
         it('should not flag URLs with uppercase letters in domain', function() {
@@ -117,7 +117,7 @@ describe('iD.validations.invalid_format', function () {
                 website: 'https://www.TownChronicle.com'
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(0);
+            expect(issues).toHaveLength(0);
         });
 
         it('should only flag well known tags containing URLs', function() {
@@ -126,7 +126,7 @@ describe('iD.validations.invalid_format', function () {
                 'wikimedia_commons': 'File:photo.jpg'
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(0);
+            expect(issues).toHaveLength(0);
         });
 
         it('should add a protocol in the suggested fix', function() {
@@ -134,11 +134,11 @@ describe('iD.validations.invalid_format', function () {
                 website: 'example.com'
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(1);
-            expect(issues[0].type).to.eql('invalid_format');
-            expect(issues[0].subtype).to.eql('website');
+            expect(issues).toHaveLength(1);
+            expect(issues[0].type).toEqual('invalid_format');
+            expect(issues[0].subtype).toEqual('website');
             const fixes = issues[0].dynamicFixes(context);
-            expect(fixes).to.have.lengthOf.above(0);
+            expect(fixes.length).toBeGreaterThan(0);
             issues[0].fixes(context)[0].onClick(context);
             const fixedEntity = context.entity(entity.id);
             expect(fixedEntity.tags.website).to.eql(`https://${entity.tags.website}`);
@@ -150,10 +150,10 @@ describe('iD.validations.invalid_format', function () {
             });
             var issues = validate(entity);
             expect(issues).to.have.lengthOf(1);
-            expect(issues[0].type).to.eql('invalid_format');
-            expect(issues[0].subtype).to.eql('website');
+            expect(issues[0].type).toEqual('invalid_format');
+            expect(issues[0].subtype).toEqual('website');
             const fixes = issues[0].dynamicFixes(context);
-            expect(fixes).to.have.lengthOf(0);
+            expect(fixes).toHaveLength(0);
         });
     });
 
@@ -166,15 +166,15 @@ describe('iD.validations.invalid_format', function () {
                 image: value
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(1);
-            expect(issues[0].type).to.eql('invalid_format');
-            expect(issues[0].subtype).to.eql('wikimedia_commons');
+            expect(issues).toHaveLength(1);
+            expect(issues[0].type).toEqual('invalid_format');
+            expect(issues[0].subtype).toEqual('wikimedia_commons');
             const fixes = issues[0].dynamicFixes(context);
-            expect(fixes).to.have.lengthOf(1);
+            expect(fixes).toHaveLength(1);
             issues[0].fixes(context)[0].onClick(context);
             const fixedEntity = context.entity(entity.id);
-            expect(fixedEntity.tags.image).to.be.undefined;
-            expect(fixedEntity.tags.wikimedia_commons).to.eql(entity.tags.image);
+            expect(fixedEntity.tags.image).toBeUndefined();
+            expect(fixedEntity.tags.wikimedia_commons).toEqual(entity.tags.image);
         });
 
         it('should not suggest moving tag when image tag contains a semicolon', function() {
@@ -234,7 +234,7 @@ describe('iD.validations.invalid_format', function () {
                 email: 'test@example.com'
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(0);
+            expect(issues).toHaveLength(0);
         });
 
         it('should flag invalid emails', function() {
@@ -242,9 +242,9 @@ describe('iD.validations.invalid_format', function () {
                 email: 'not-an-email'
             });
             var issues = validate(entity);
-            expect(issues).to.have.lengthOf(1);
-            expect(issues[0].type).to.eql('invalid_format');
-            expect(issues[0].subtype).to.eql('email');
+            expect(issues).toHaveLength(1);
+            expect(issues[0].type).toEqual('invalid_format');
+            expect(issues[0].subtype).toEqual('email');
         });
     });
 });

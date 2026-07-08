@@ -18,6 +18,6 @@ describe('iD.uiAccount', function () {
         var onChangeAccountHandler;
         iD.uiAccount({ connection: () => osmConnectionMock })(selection);
         onChangeAccountHandler.call();
-        expect(selection.select('.userInfo span.label').text()).to.equal('x<br>y');
+        expect(selection.select('.userInfo span.label').text()).toEqual('x<br>y');
     });
 });

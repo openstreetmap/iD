@@ -17,34 +17,34 @@ describe('iD.uiCmd', function () {
     it('does not overwrite mac keybindings', function () {
         ua = 'Mac';
         iD.utilDetect(true);  // force redetection
-        expect(iD.uiCmd('⌘A')).to.eql('⌘A');
+        expect(iD.uiCmd('⌘A')).toEqual('⌘A');
     });
 
     it('changes keys to linux versions', function () {
         ua = 'Linux';
         iD.utilDetect(true);  // force redetection
-        expect(iD.uiCmd('⌘⌫')).to.eql('Ctrl+Backspace');
-        expect(iD.uiCmd('⌘A')).to.eql('Ctrl+A');
-        expect(iD.uiCmd('⇧A')).to.eql('Shift+A');
-        expect(iD.uiCmd('⌘⇧A')).to.eql('Ctrl+Shift+A');
-        expect(iD.uiCmd('⌘⇧Z')).to.eql('Ctrl+Shift+Z');
+        expect(iD.uiCmd('⌘⌫')).toEqual('Ctrl+Backspace');
+        expect(iD.uiCmd('⌘A')).toEqual('Ctrl+A');
+        expect(iD.uiCmd('⇧A')).toEqual('Shift+A');
+        expect(iD.uiCmd('⌘⇧A')).toEqual('Ctrl+Shift+A');
+        expect(iD.uiCmd('⌘⇧Z')).toEqual('Ctrl+Shift+Z');
     });
 
     it('changes keys to win versions', function () {
         ua = 'Win';
         iD.utilDetect(true);  // force redetection
-        expect(iD.uiCmd('⌘⌫')).to.eql('Ctrl+Backspace');
-        expect(iD.uiCmd('⌘A')).to.eql('Ctrl+A');
-        expect(iD.uiCmd('⇧A')).to.eql('Shift+A');
-        expect(iD.uiCmd('⌘⇧A')).to.eql('Ctrl+Shift+A');
-        expect(iD.uiCmd('⌘⇧Z')).to.eql('Ctrl+Y');  // special case
+        expect(iD.uiCmd('⌘⌫')).toEqual('Ctrl+Backspace');
+        expect(iD.uiCmd('⌘A')).toEqual('Ctrl+A');
+        expect(iD.uiCmd('⇧A')).toEqual('Shift+A');
+        expect(iD.uiCmd('⌘⇧A')).toEqual('Ctrl+Shift+A');
+        expect(iD.uiCmd('⌘⇧Z')).toEqual('Ctrl+Y');  // special case
     });
 
     it('handles multi-character keys', function () {
         ua = 'Win';
         iD.utilDetect(true);  // force redetection
-        expect(iD.uiCmd('f11')).to.eql('f11');
-        expect(iD.uiCmd('⌘plus')).to.eql('Ctrl+plus');
+        expect(iD.uiCmd('f11')).toEqual('f11');
+        expect(iD.uiCmd('⌘plus')).toEqual('Ctrl+plus');
     });
 
 });
