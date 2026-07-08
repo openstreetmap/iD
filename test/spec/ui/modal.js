@@ -34,7 +34,7 @@ describe('iD.uiModal', function () {
 
     it('can be dismissed by clicking the close button', async () => {
         var selection = iD.uiModal(elem);
-        happen.click(selection.select('button.close').node());
+        selection.select('button.close').node().dispatchEvent(new MouseEvent('click'));
         await setTimeout(275);
         d3.timerFlush();
         expect(selection.node().parentNode).to.be.null;
@@ -42,8 +42,8 @@ describe('iD.uiModal', function () {
 
     it('can be dismissed by pressing escape', async () => {
         var selection = iD.uiModal(elem);
-        happen.keydown(document, {keyCode: 27});
-        happen.keyup(document, {keyCode: 27});
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+        document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
         await setTimeout(275);
         d3.timerFlush();
         expect(selection.node().parentNode).to.be.null;
@@ -51,8 +51,8 @@ describe('iD.uiModal', function () {
 
     it('can be dismissed by pressing backspace', async () => {
         var selection = iD.uiModal(elem);
-        happen.keydown(document, {keyCode: 8});
-        happen.keyup(document, {keyCode: 8});
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Backspace' }));
+        document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Backspace' }));
         await setTimeout(275);
         d3.timerFlush();
         expect(selection.node().parentNode).to.be.null;

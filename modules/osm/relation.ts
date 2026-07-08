@@ -1,49 +1,43 @@
 import { geoArea as d3_geoArea } from 'd3-geo';
+import type { Feature, FeatureCollection, MultiPolygon, GeoJSON } from 'geojson';
 
-import { osmEntity } from './entity';
-import { osmJoinWays } from './multipolygon';
+import { osmJoinWays, type Sequence } from './multipolygon';
 import { geoExtent, geoPolygonContainsPolygon, geoPolygonIntersectsPolygon } from '../geo';
-import { osmIdManager } from './id_manager';
+import { OsmAbstractEntity, type OsmEntityProps, type OsmEntity } from './abstract-entity';
+import { debug } from '..';
+import { osmIdManager, type ChangesetId, type EntityId, type OsmType, type RelationId } from './id_manager';
+import type { coreGraph } from '../core/graph';
+import type { Vec2 } from '../geo/vector';
 
-/**
- * @typedef {{ type: import('./id_manager').FeatureType; id: string; role: string }} RelationMember
- */
+export interface RelationMember { type: OsmType; id: EntityId; role: string };
 
-/**
- * @typedef {typeof prototype & iD.AbstractEntity} OsmRelation
- * @returns {OsmRelation}
- */
-export function osmRelation() {
-    if (!(this instanceof osmRelation)) {
-        return new osmRelation(...arguments);
+export class osmRelation extends OsmAbstractEntity {
+    declare readonly type: 'relation';
+    declare readonly id: RelationId;
+    declare readonly members: RelationMember[];
+
+    constructor(...args: Partial<OsmEntityProps & Pick<osmRelation, 'members'>>[]) {
+        super({ type: 'relation', members: [] }, ...args);
+        if (debug) Object.freeze(this.members);
     }
-    this.initialize(arguments);
-}
 
+    static creationOrder(a: osmRelation, b: osmRelation) {
+        var aId = parseInt(osmIdManager.toOSM(a.id), 10);
+        var bId = parseInt(osmIdManager.toOSM(b.id), 10);
 
-osmEntity.relation = osmRelation;
+        if (aId < 0 || bId < 0) return aId - bId;
+        return bId - aId;
+    }
 
-osmRelation.prototype = Object.create(osmEntity.prototype);
-
-
-osmRelation.creationOrder = function(a, b) {
-    var aId = parseInt(osmIdManager.toOSM(a.id), 10);
-    var bId = parseInt(osmIdManager.toOSM(b.id), 10);
-
-    if (aId < 0 || bId < 0) return aId - bId;
-    return bId - aId;
-};
-
-
-const prototype = {
-    type: /** @type {'relation'} */ ('relation'),
-    members: /** @type {RelationMember[]} */ ([]),
-
-
-    copy: function(resolver, copies) {
+    copy(resolver: coreGraph, copies: { [id: RelationId]: any }) {
         if (copies[this.id]) return copies[this.id];
 
-        var copy = osmEntity.prototype.copy.call(this, resolver, copies);
+        var copy = new osmRelation(this, {
+            id: undefined,
+            user: undefined,
+            version: undefined,
+        });
+        copies[this.id] = copy;
 
         var members = this.members.map(function(member) {
             return Object.assign({}, member, { id: resolver.entity(member.id).copy(resolver, copies).id });
@@ -53,11 +47,10 @@ const prototype = {
         copies[this.id] = copy;
 
         return copy;
-    },
+    }
 
-
-    extent: function(resolver, memo) {
-        return resolver.transient(this, 'extent', function() {
+    extent(resolver: coreGraph, memo?: { [id: EntityId]: boolean }): geoExtent {
+        return resolver.transient(this, 'extent', () => {
             if (memo && memo[this.id]) return geoExtent();
             memo = memo || {};
             memo[this.id] = true;
@@ -71,44 +64,40 @@ const prototype = {
             }
             return extent;
         });
-    },
+    }
 
-
-    geometry: function(graph) {
-        return graph.transient(this, 'geometry', function() {
+    geometry(graph: coreGraph) {
+        return graph.transient(this, 'geometry', () => {
             return this.isMultipolygon() ? 'area' : 'relation';
         });
-    },
+    }
 
-
-    isDegenerate: function() {
+    isDegenerate() {
         return this.members.length === 0;
-    },
-
+    }
 
     // Return an array of members, each extended with an 'index' property whose value
     // is the member index.
-    indexedMembers: function() {
+    indexedMembers() {
         var result = new Array(this.members.length);
         for (var i = 0; i < this.members.length; i++) {
             result[i] = Object.assign({}, this.members[i], {index: i});
         }
         return result;
-    },
-
+    }
 
     // Return the first member with the given role. A copy of the member object
     // is returned, extended with an 'index' property whose value is the member index.
-    memberByRole: function(role) {
+    memberByRole(role: string) {
         for (var i = 0; i < this.members.length; i++) {
             if (this.members[i].role === role) {
                 return Object.assign({}, this.members[i], {index: i});
             }
         }
-    },
+    }
 
     // Same as memberByRole, but returns all members with the given role
-    membersByRole: function(role) {
+    membersByRole(role: string) {
         var result = [];
         for (var i = 0; i < this.members.length; i++) {
             if (this.members[i].role === role) {
@@ -116,68 +105,68 @@ const prototype = {
             }
         }
         return result;
-    },
+    }
 
     // Return the first member with the given id. A copy of the member object
     // is returned, extended with an 'index' property whose value is the member index.
-    memberById: function(id) {
+    memberById(id: EntityId) {
         for (var i = 0; i < this.members.length; i++) {
             if (this.members[i].id === id) {
                 return Object.assign({}, this.members[i], {index: i});
             }
         }
-    },
-
+    }
 
     // Return the first member with the given id and role. A copy of the member object
     // is returned, extended with an 'index' property whose value is the member index.
-    memberByIdAndRole: function(id, role) {
+    memberByIdAndRole(id: EntityId, role: string) {
         for (var i = 0; i < this.members.length; i++) {
             if (this.members[i].id === id && this.members[i].role === role) {
                 return Object.assign({}, this.members[i], {index: i});
             }
         }
-    },
+    }
 
-
-    addMember: function(member, index) {
+    addMember(member: RelationMember, index: number) {
         var members = this.members.slice();
         members.splice(index === undefined ? members.length : index, 0, member);
         return this.update({members: members});
-    },
+    }
 
-
-    updateMember: function(member, index) {
+    updateMember(member: Partial<RelationMember>, index: number) {
         var members = this.members.slice();
         members.splice(index, 1, Object.assign({}, members[index], member));
         return this.update({members: members});
-    },
+    }
 
-
-    removeMember: function(index) {
+    removeMember(index: number) {
         var members = this.members.slice();
         members.splice(index, 1);
         return this.update({members: members});
-    },
+    }
 
-
-    removeMembersWithID: function(id) {
-        var members = this.members.filter(function(m) { return m.id !== id; });
+    removeMembersWithID(id: EntityId) {
+        var members = this.members.filter(function (m) {
+            return m.id !== id;
+        });
         return this.update({members: members});
-    },
+    }
 
-    moveMember: function(fromIndex, toIndex) {
+    moveMember(fromIndex: number, toIndex: number) {
         var members = this.members.slice();
         members.splice(toIndex, 0, members.splice(fromIndex, 1)[0]);
         return this.update({members: members});
-    },
-
+    }
 
     // Wherever a member appears with id `needle.id`, replace it with a member
     // with id `replacement.id`, type `replacement.type`, and the original role,
     // By default, adding a duplicate member (by id and role) is prevented.
     // Return an updated relation.
-    replaceMember: function(needle, replacement, keepDuplicates) {
+    replaceMember(
+        needle: OsmEntity,
+        replacement: OsmEntity,
+        keepDuplicates?: boolean,
+    ) {
         if (!this.memberById(needle.id)) return this;
 
         var members = [];
@@ -192,11 +181,10 @@ const prototype = {
         }
 
         return this.update({ members: members });
-    },
+    }
 
-
-    asJXON: function(changeset_id) {
-        var r = {
+    asJXON(changeset_id: ChangesetId) {
+        var r: any = {
             relation: {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
@@ -209,7 +197,7 @@ const prototype = {
                         }
                     };
                 }, this),
-                tag: Object.keys(this.tags).map(function(k) {
+                tag: Object.keys(this.tags).map((k) => {
                     return { keyAttributes: { k: k, v: this.tags[k] } };
                 }, this)
             }
@@ -218,11 +206,10 @@ const prototype = {
             r.relation['@changeset'] = changeset_id;
         }
         return r;
-    },
+    }
 
-
-    asGeoJSON: function(resolver) {
-        return resolver.transient(this, 'GeoJSON', function () {
+    asGeoJSON(resolver: coreGraph): MultiPolygon | FeatureCollection {
+        return resolver.transient(this, 'GeoJSON', () => {
             if (this.isMultipolygon()) {
                 return {
                     type: 'MultiPolygon',
@@ -233,37 +220,33 @@ const prototype = {
                     type: 'FeatureCollection',
                     properties: this.tags,
                     features: this.members.map(function (member) {
-                        return Object.assign({role: member.role}, resolver.entity(member.id).asGeoJSON(resolver));
+                        return Object.assign({role: member.role}, resolver.entity(member.id).asGeoJSON(resolver)) as GeoJSON as Feature;
                     })
                 };
             }
         });
-    },
+    }
 
-
-    area: function(resolver) {
-        return resolver.transient(this, 'area', function() {
+    area(resolver: coreGraph) {
+        return resolver.transient(this, 'area', () => {
             return d3_geoArea(this.asGeoJSON(resolver));
         });
-    },
+    }
 
-
-    isMultipolygon: function() {
+    isMultipolygon() {
         return this.tags.type === 'multipolygon';
-    },
+    }
 
-
-    isComplete: function(resolver) {
+    isComplete(resolver: coreGraph) {
         for (var i = 0; i < this.members.length; i++) {
             if (!resolver.hasEntity(this.members[i].id)) {
                 return false;
             }
         }
         return true;
-    },
+    }
 
-
-    hasFromViaTo: function() {
+    hasFromViaTo() {
         return (
             this.members.some(function(m) { return m.role === 'from'; }) &&
             this.members.some((m) =>
@@ -272,15 +255,13 @@ const prototype = {
             ) &&
             this.members.some(function(m) { return m.role === 'to'; })
         );
-    },
+    }
 
-
-    isRestriction: function() {
+    isRestriction() {
         return !!(this.tags.type && this.tags.type.match(/^restriction:?/));
-    },
+    }
 
-
-    isValidRestriction: function() {
+    isValidRestriction() {
         if (!this.isRestriction()) return false;
 
         var froms = this.members.filter(function(m) { return m.role === 'from'; });
@@ -297,11 +278,11 @@ const prototype = {
         if (vias.length > 1 && vias.some(function(m) { return m.type !== 'way'; })) return false;
 
         return true;
-    },
+    }
 
-    isConnectivity: function() {
+    isConnectivity() {
         return !!(this.tags.type && this.tags.type.match(/^connectivity:?/));
-    },
+    }
 
     // Returns an array [A0, ... An], each Ai being an array of node arrays [Nds0, ... Ndsm],
     // where Nds0 is an outer ring and subsequent Ndsi's (if any i > 0) being inner rings.
@@ -313,14 +294,11 @@ const prototype = {
     // includes the nodes of all way members, but some Nds may be unclosed and some inner
     // rings not matched with the intended outer ring.
     //
-    multipolygon: function(resolver) {
-        var outers = this.members.filter(function(m) { return 'outer' === (m.role || 'outer'); });
-        var inners = this.members.filter(function(m) { return 'inner' === m.role; });
+    multipolygon(resolver: coreGraph) {
+        const _outers = this.members.filter(function(m) { return 'outer' === (m.role || 'outer'); });
+        const _inners = this.members.filter(function(m) { return 'inner' === m.role; });
 
-        outers = osmJoinWays(outers, resolver);
-        inners = osmJoinWays(inners, resolver);
-
-        var sequenceToLineString = function(sequence) {
+        const sequenceToLineString = function (sequence: Sequence) {
             if (sequence.nodes.length > 2 &&
                 sequence.nodes[0] !== sequence.nodes[sequence.nodes.length - 1]) {
                 // close unclosed parts to ensure correct area rendering - #2945
@@ -329,8 +307,8 @@ const prototype = {
             return sequence.nodes.map(function(node) { return node.loc; });
         };
 
-        outers = outers.map(sequenceToLineString);
-        inners = inners.map(sequenceToLineString);
+        const outers = osmJoinWays(_outers, resolver).map(sequenceToLineString);
+        const inners = osmJoinWays(_inners, resolver).map(sequenceToLineString);
 
         var result = outers.map(function(o) {
             // Heuristic for detecting counterclockwise winding order. Assumes
@@ -338,7 +316,7 @@ const prototype = {
             return [d3_geoArea({ type: 'Polygon', coordinates: [o] }) > 2 * Math.PI ? o.reverse() : o];
         });
 
-        function findOuter(inner) {
+        function findOuter(inner: Vec2[]) {
             var o, outer;
 
             for (o = 0; o < outers.length; o++) {
@@ -373,5 +351,4 @@ const prototype = {
 
         return result;
     }
-};
-Object.assign(osmRelation.prototype, prototype);
+}

@@ -290,6 +290,8 @@ export function uiPaneHelp(context) {
             helpPane.selection().select('.pane-heading h2').call(d.title);
 
             body.html(d.content);
+            body.selectAll('p')
+                .attr('dir', 'auto');
             body.selectAll('a')
                 .attr('target', '_blank');
             menuItems.classed('selected', function(m) {

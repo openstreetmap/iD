@@ -60,8 +60,8 @@ question.
 
 ## Can I use iD with my own OSM server?
 
-Yes, you can. You will need to [install](https://github.com/openstreetmap/openstreetmap-website/blob/master/INSTALL.md)
-and [configure](https://github.com/openstreetmap/openstreetmap-website/blob/master/CONFIGURE.md)
+Yes, you can. You will need to [install](https://github.com/openstreetmap/openstreetmap-website/blob/master/doc/INSTALL.md)
+and [configure](https://github.com/openstreetmap/openstreetmap-website/blob/master/doc/CONFIGURE.md)
 an instance of the Rails Port, the server that runs the OpenStreetMap website and API.
 
 Once you have the Rails Port running, you may edit as normal using the version of iD that

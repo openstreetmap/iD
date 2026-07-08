@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit/compat';
+import { throttle } from 'es-toolkit';
 
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import {
@@ -7,7 +7,7 @@ import {
 
 import { utilArrayIdentical } from '../util/array';
 import { utilFastMouse } from '../util';
-import { osmEntity, osmNote, QAItem } from '../osm';
+import { OsmAbstractEntity, osmNote, QAItem } from '../osm';
 import { services } from '../services';
 import { uiDataEditor } from './data_editor';
 import { uiFeatureList } from './feature_list';
@@ -48,6 +48,9 @@ export function uiSidebar(context) {
             .append('div')
             .attr('class', 'sidebar-resizer')
             .on(_pointerPrefix + 'down.sidebar-resizer', pointerdown);
+
+        const throttledInspectorRedraw = throttle(() => inspectorWrap.call(inspector, { redrawEntityEditor: true }), 200);
+        d3_select(window).on('resize.sidebar', throttledInspectorRedraw);
 
         var downPointerId, lastClientX, containerLocGetter;
 
@@ -125,6 +128,8 @@ export function uiSidebar(context) {
                 } else {
                     context.ui().onResize([-dx * scaleX, 0]);
                 }
+
+                throttledInspectorRedraw();
             }
         }
 
@@ -139,6 +144,8 @@ export function uiSidebar(context) {
                 .on('touchmove.sidebar-resizer', null)
                 .on(_pointerPrefix + 'move.sidebar-resizer', null)
                 .on(_pointerPrefix + 'up.sidebar-resizer pointercancel.sidebar-resizer', null);
+
+            inspectorWrap.call(inspector, { redrawEntityEditor: true });
         }
 
         var featureListWrap = selection
@@ -218,7 +225,7 @@ export function uiSidebar(context) {
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
 
-            } else if (!_current && (datum instanceof osmEntity)) {
+            } else if (!_current && (datum instanceof OsmAbstractEntity)) {
                 featureListWrap
                     .classed('inspector-hidden', true);
 
@@ -403,6 +410,8 @@ export function uiSidebar(context) {
                             .style('width', widthPct + '%');
                     }
                 });
+
+            inspectorWrap.call(inspector, { redrawEntityEditor: true });
         };
 
         // toggle the sidebar collapse when double-clicking the resizer

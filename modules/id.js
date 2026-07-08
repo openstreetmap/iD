@@ -1,7 +1,3 @@
-// polyfill window.fetch and AbortController (not included in core-js)
-import 'whatwg-fetch';
-import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
-
 // polyfill idle callback functions (not included in core-js)
 window.requestIdleCallback = window.requestIdleCallback ||
     function(cb) {

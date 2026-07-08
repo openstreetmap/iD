@@ -1,35 +1,40 @@
-import { osmEntity } from './entity';
+// @ts-nocheck -- too many errors from JXON logic
+import type { Feature } from 'geojson';
 import { geoExtent } from '../geo';
+import { OsmAbstractEntity, type OsmEntityProps, type OsmEntity } from './abstract-entity';
+import type { ChangesetId } from './id_manager';
 
-
-export function osmChangeset() {
-    if (!(this instanceof osmChangeset)) {
-        return new osmChangeset(...arguments);
-    }
-    this.initialize(arguments);
+export interface OsmChange {
+  created: OsmEntity[];
+  modified: OsmEntity[];
+  deleted: OsmEntity[];
 }
 
+export class osmChangeset extends OsmAbstractEntity {
+    declare readonly type: 'changeset';
+    declare readonly id: ChangesetId;
 
-osmEntity.changeset = osmChangeset;
+    constructor(...args: Partial<OsmEntityProps>[]) {
+        super({ type: 'changeset' }, ...args);
+    }
 
-osmChangeset.prototype = Object.create(osmEntity.prototype);
+    copy(): never {
+        throw new Error('not allowed');
+    }
 
-Object.assign(osmChangeset.prototype, {
+    isDegenerate() {
+        return true;
+    }
 
-    type: 'changeset',
-
-
-    extent: function() {
+    extent() {
         return new geoExtent();
-    },
+    }
 
-
-    geometry: function() {
+    geometry() {
         return 'changeset';
-    },
+    }
 
-
-    asJXON: function() {
+    asJXON() {
         return {
             osm: {
                 changeset: {
@@ -41,12 +46,11 @@ Object.assign(osmChangeset.prototype, {
                 }
             }
         };
-    },
-
+    }
 
     // Generate [osmChange](http://wiki.openstreetmap.org/wiki/OsmChange)
     // XML. Returns a string.
-    osmChangeJXON: function(changes) {
+    osmChangeJXON(changes: OsmChange) {
         var changeset_id = this.id;
 
         function nest(x, order) {
@@ -112,7 +116,7 @@ Object.assign(osmChangeset.prototype, {
             return changes;
         }
 
-        function rep(entity) {
+        function rep(entity: OsmEntity) {
             return entity.asJXON(changeset_id);
         }
 
@@ -125,11 +129,9 @@ Object.assign(osmChangeset.prototype, {
                 'delete': Object.assign(nest(changes.deleted.map(rep), ['relation', 'way', 'node']), { '@if-unused': true })
             }
         };
-    },
-
-
-    asGeoJSON: function() {
-        return {};
     }
 
-});
+    asGeoJSON() {
+        return {} as Feature;
+    }
+}

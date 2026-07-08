@@ -1,3 +1,5 @@
+import { utilStripDiacritics } from '../../../modules/util/util';
+
 describe('iD.util', function() {
 
     describe('utilGetAllNodes', function() {
@@ -157,22 +159,39 @@ describe('iD.util', function() {
         });
     });
 
-    describe('utilAsyncMap', function() {
-        it('handles correct replies', function() {
-            iD.utilAsyncMap([1, 2, 3],
-                function(d, c) { c(null, d * 2); },
-                function(err, res) {
-                    expect(err).to.eql([null, null, null]);
-                    expect(res).to.eql([2, 4, 6]);
-                });
+    describe('utilEditDistance, for substring', function() {
+        it('returns zero for same strings', function() {
+            expect(iD.utilEditDistance('foo', 'foo', {substring: true})).to.eql(0);
         });
-        it('handles errors', function() {
-            iD.utilAsyncMap([1, 2, 3],
-                function(d, c) { c('whoops ' + d, null); },
-                function(err, res) {
-                    expect(err).to.eql(['whoops 1', 'whoops 2', 'whoops 3']);
-                    expect(res).to.eql([null, null, null]);
-                });
+
+        it('returns zero for exact substring match', function() {
+            expect(iD.utilEditDistance('foo', 'asd foo bar', {substring: true})).to.eql(0);
+        });
+
+        it('reports an insertion of 1', function() {
+            expect(iD.utilEditDistance('fooa', 'asd fo1oa fasd', {substring: true})).to.eql(1);
+        });
+
+        it('reports a replacement of 1', function() {
+            expect(iD.utilEditDistance('foob', 'asd fooa fasd', {substring: true})).to.eql(1);
+        });
+
+        it('does not fail on empty input', function() {
+            expect(iD.utilEditDistance('', '', {substring: true})).to.eql(0);
+        });
+
+        it.each([
+            ['c', 0],
+            ['co', 0],
+            ['cof', 0],
+            ['cofe', 1],
+            ['cofee', 1],
+            ['cofees', 2],
+            ['cofeesh', 2],
+            ['cofeesho', 2],
+            ['cofeeshop', 2]
+        ])('while (mis)typing', function(str, expected) {
+            expect(iD.utilEditDistance(str, 'Coffee Shop', {substring: true})).to.eql(expected);
         });
     });
 
@@ -385,6 +404,17 @@ describe('iD.util', function() {
         it('uses only the housenumber for map labels', () => {
             expect(iD.utilDisplayName({ tags: { 'addr:housenumber': '31', 'addr:street': 'Princes Street' } }, { isMapLabel: true })).to.eql('31');
         });
+
+        describe('localised names', () => {
+            it('considers the original locale code first', () => {
+                expect(iD.utilDisplayName({ tags: { name: '5', 'name:en': '4', 'name:en-Latn': '3', 'name:en-US': '2', 'name:en-Latn-US': '1' } }, undefined, true)).toBe('1');
+            });
+            it('fallbacks to the maximized locale', () => {
+                expect(iD.utilDisplayName({ tags: { name: '5', 'name:en': '4', 'name:en-Latn': '3', 'name:en-US': '2' } }, undefined, true)).toBe('2');
+                expect(iD.utilDisplayName({ tags: { name: '5', 'name:en': '4', 'name:en-Latn': '3' } }, undefined, true)).toBe('3');
+                expect(iD.utilDisplayName({ tags: { name: '5', 'name:en': '4' } }, undefined, true)).toBe('4');
+            });
+        });
     });
 
     describe('utilOldestID', function() {
@@ -405,6 +435,14 @@ describe('iD.util', function() {
         });
         it('returns the first ID in the list otherwise', function() {
             expect(iD.utilOldestID(['z', 'a', 'A', 'Z'])).to.eql('z');
+        });
+    });
+
+    describe('utilStripDiacritics', function() {
+        it('strips diacritics', function() {
+            expect(utilStripDiacritics('äüö')).to.eql('auo');
+            expect(utilStripDiacritics('é')).to.eql('e');
+            expect(utilStripDiacritics('x'+String.fromCharCode(0x330) /* unicode: combining tilde below */)).to.eql('x');
         });
     });
 });

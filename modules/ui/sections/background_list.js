@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit/compat';
+import { debounce } from 'es-toolkit';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
 import { select as d3_select } from 'd3-selection';
 
@@ -35,7 +35,6 @@ export function uiSectionBackgroundList(context) {
         _backgroundList = container.enter()
             .append('ul')
             .attr('class', 'layer-list layer-background-list')
-            .attr('dir', 'auto')
             .merge(container);
 
 

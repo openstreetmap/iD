@@ -1,7 +1,7 @@
 describe('iD.validations.impossible_oneway', function() {
     let context;
 
-    before(function() {
+    beforeEach(() => {
         iD.services.osm = iD.serviceOsm;
         iD.services.osm.isDataLoaded = () => true;
     });
@@ -10,7 +10,7 @@ describe('iD.validations.impossible_oneway', function() {
         context = iD.coreContext().assetPath('../dist/').init();
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.osm;
     });
 
@@ -145,6 +145,24 @@ describe('iD.validations.impossible_oneway', function() {
                 new iD.osmWay({ id: 'w-2', nodes: ['n-3', 'n-2'], tags: {
                     'highway': 'unclassified',
                     'oneway' : '-1'
+                }})
+            ].map(iD.actionAddEntity));
+
+            const issues = validate();
+            expect(issues).to.have.lengthOf(0);
+        });
+
+        it('does not flag non-oneway road with secondary tags implying oneway-ness', function() {
+            context.perform(...[
+                new iD.osmNode({ id: 'n-0', loc: [0, 0] }),
+                new iD.osmNode({ id: 'n-1', loc: [1, 0] }),
+                new iD.osmNode({ id: 'n-2', loc: [2, 0] }),
+                new iD.osmWay({ id: 'w-0', nodes: ['n-0', 'n-1'], tags: {
+                    'highway': 'unclassified',
+                }}),
+                new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: {
+                    'highway': 'track',
+                    'piste:type': 'downhill'
                 }})
             ].map(iD.actionAddEntity));
 

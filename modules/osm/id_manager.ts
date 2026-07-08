@@ -1,4 +1,17 @@
-export type FeatureType = 'node' | 'way' | 'relation';
+import type { OsmEntity } from './abstract-entity';
+
+export type OsmType = 'changeset' | 'node' | 'way' | 'relation';
+export type OsmTypeShort = 'c' | 'n' | 'w' | 'r';
+
+/**
+ * Combined internal representation of the OSM type and OSM id of an entity.
+ */
+export type EntityId = `${OsmTypeShort}${number}`;
+export type NodeId = `n${number}`;
+export type WayId = `w${number}`;
+export type RelationId = `r${number}`;
+export type ChangesetId = `c${number}`;
+
 
 /**
  * All newly created features need an ID, so this singleton
@@ -13,11 +26,11 @@ class OsmIdManager {
         relation: -1,
     };
 
-    fromOSM(type: FeatureType, id: number) {
-        return type[0] + id;
+    fromOSM(type: OsmType, id: number): EntityId {
+        return <EntityId>(type[0] + id);
     }
 
-    toOSM(id: string) {
+    toOSM(id: EntityId): string {
         var match = id.match(/^[cnwr](-?\d+)$/);
         if (match) {
             return match[1];
@@ -25,17 +38,18 @@ class OsmIdManager {
         return '';
     }
 
-    type(id: string) {
-        return <FeatureType>(
+    type(id: EntityId): OsmType {
+        return <OsmType>(
             { c: 'changeset', n: 'node', w: 'way', r: 'relation' }[id[0]]
         );
     }
 
-    key(entity: iD.OsmEntity) {
-        return entity.id + 'v' + (entity.v || 0);
+    /** A function suitable for use as the second argument to d3.selection#data(). */
+    key(entity: OsmEntity): EntityId {
+        return <EntityId>(entity.id + 'v' + (entity.v || 0));
     }
 
-    newId(type: FeatureType) {
+    newId(type: OsmType): EntityId {
         return this.fromOSM(type, this.next[type]--);
     }
 }

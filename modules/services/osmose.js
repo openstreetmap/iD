@@ -4,7 +4,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
 import { marked } from 'marked';
-import Protobuf from 'pbf';
+import { PbfReader } from 'pbf';
 import { VectorTile } from '@mapbox/vector-tile';
 
 import { fileFetcher } from '../core/file_fetcher';
@@ -136,7 +136,7 @@ export default {
           delete _cache.inflightTile[tile.id];
           _cache.loadedTile[tile.id] = true;
 
-          var vectorTile = new VectorTile(new Protobuf(data));
+          var vectorTile = new VectorTile(new PbfReader(data));
           data = vectorTile.layers.issues;
           const features = [];
           for (let i = 0; i < data.length; i++) {

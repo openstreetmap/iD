@@ -1,19 +1,18 @@
-/** @typedef {{ old: Tags; replace?: Tags }[]} DataDeprecated */
+export type DataDeprecated = { old: Tags; replace?: Tags }[];
 
 /** @param {Tags} tags @param {DataDeprecated} dataDeprecated */
-export function getDeprecatedTags(tags, dataDeprecated) {
+export function getDeprecatedTags(tags: Tags, dataDeprecated: DataDeprecated): DataDeprecated {
   // if there are no tags, none can be deprecated
   if (Object.keys(tags).length === 0) return [];
 
-  /** @type {DataDeprecated} */
-  var deprecated = [];
+  var deprecated: DataDeprecated = [];
   dataDeprecated.forEach((d) => {
     const oldKeys = Object.keys(d.old);
     const transferKeys = oldKeys.filter(key => d.old[key] === '*');
     if (d.replace) {
       var hasExistingValues = Object.keys(d.replace).some((replaceKey) => {
         if (!tags[replaceKey] || d.old[replaceKey]) return false;
-        var replaceValue = d.replace[replaceKey];
+        var replaceValue = d.replace![replaceKey];
         if (replaceValue === '*') return false;
         if (replaceValue.startsWith('$1') && tags[replaceKey] === tags[transferKeys[+replaceValue.substring(1) - 1]]) return false;
         if (replaceValue === tags[replaceKey]) return false;
@@ -38,7 +37,7 @@ export function getDeprecatedTags(tags, dataDeprecated) {
           if (d.replace && d.old[oldKey] === d.replace[oldKey]) {
             var replaceKeys = Object.keys(d.replace);
             return !replaceKeys.every((replaceKey) => {
-              return tags[replaceKey] === d.replace[replaceKey];
+              return tags[replaceKey] === d.replace![replaceKey];
             });
           } else {
             return true;
@@ -57,11 +56,9 @@ export function getDeprecatedTags(tags, dataDeprecated) {
   return deprecated;
 }
 
-/** @type {{ [key: string]: string[] }} */
-var _deprecatedTagValuesByKey;
+var _deprecatedTagValuesByKey: { [key: string]: string[] };
 
-/** @param {DataDeprecated} dataDeprecated */
-export function deprecatedTagValuesByKey(dataDeprecated) {
+export function deprecatedTagValuesByKey(dataDeprecated: DataDeprecated) {
     if (!_deprecatedTagValuesByKey) {
         _deprecatedTagValuesByKey = {};
         dataDeprecated.forEach((d) => {

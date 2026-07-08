@@ -40,10 +40,8 @@ export function presetField(fieldID, field, allFields) {
     return _this;
   };
 
-  _this.title = () => _this.overrideLabel || _this.resolveReference('label').t('label', { 'default': fieldID });
-  _this.label = () => _this.overrideLabel ?
-      selection => selection.text(_this.overrideLabel) :
-      _this.resolveReference('label').t.append('label', { 'default': fieldID });
+  _this.title = () => _this.resolveReference('label').t('label', { 'default': fieldID });
+  _this.label = () => _this.resolveReference('label').t.append('label', { 'default': fieldID });
 
   _this.placeholder = () => _this.resolveReference('placeholder').t('placeholder', { 'default': '' });
 

@@ -71,4 +71,59 @@ describe('iD.actionMove', function() {
         expect(loc[0]).to.be.closeTo( 1.440, 0.001);
         expect(loc[1]).to.be.closeTo(-2.159, 0.001);
     });
+
+    it('prevents intersections', function() {
+        const epsilon = 1E-6;
+        // Use a simple planar projection so we can reason about intersections in 2D.
+        const planar = p => p;
+        planar.invert = p => p;
+
+        // u3 ------------- u2
+        //                  |
+        //          d       |
+        //          |       |
+        // u0 ----- b ----- u1
+
+        const b = new iD.osmNode({ loc: [0, 0] });
+        const d = new iD.osmNode({ loc: [0, 8] });
+        const moved = new iD.osmWay({ nodes: [b.id, d.id] });
+
+        const u0 = new iD.osmNode({ loc: [-10,  0] });
+        const u1 = new iD.osmNode({ loc: [ 10,  0] });
+        const u2 = new iD.osmNode({ loc: [ 10, 10] });
+        const u3 = new iD.osmNode({ loc: [-10, 10] });
+        const unmoved = new iD.osmWay({ nodes: [u0.id, b.id, u1.id, u2.id, u3.id] });
+
+        const graph = new iD.coreGraph([
+            b, d, moved,
+            u0, u1, u2, u3, unmoved
+        ]);
+
+        function tryDelta(delta, expectedDelta) {
+            const action = iD.actionMove([moved.id], delta, planar);
+            const result = action(graph);
+
+            const limitedDelta = action.delta();
+
+            expect(limitedDelta[0]).to.be.closeTo(expectedDelta[0], epsilon);
+            expect(limitedDelta[1]).to.be.closeTo(expectedDelta[1], epsilon);
+
+            expect(result.entity(d.id).loc[0]).to.be.closeTo(
+                graph.entity(d.id).loc[0] + expectedDelta[0], epsilon);
+            expect(result.entity(d.id).loc[1]).to.be.closeTo(
+                graph.entity(d.id).loc[1] + expectedDelta[1], epsilon);
+        }
+
+        // small movement: no clamping necessary
+        tryDelta([0, 1], [0, 1]);
+        // small movement, but would intersect other part of unmoved way:
+        // stay snapped to original segment
+        tryDelta([0, 3], [0, 0]);
+        // larger movement: snap to top segment of unmoved way
+        tryDelta([0, 6], [0, 10]);
+        // large movement: move beyond top segment
+        tryDelta([0, 12], [0, 12]);
+        // movement perpendicular: no restrictions
+        tryDelta([6, 0], [6, 0]);
+    });
 });
