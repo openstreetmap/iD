@@ -69,6 +69,37 @@ export function uiSectionRawMembershipEditor(context) {
         return parents;
     }
 
+    function getConnectedRelations() {
+        const graph = context.graph();
+        const connectedRelationIDs = new Set();
+
+        _entityIDs.forEach((entityID) => {
+            const entity = graph.hasEntity(entityID);
+            if (!entity) return;
+
+            const connectedWays = new Set();
+
+            if (entity.type === 'node') {
+                graph.parentWays(entity)
+                    .forEach(way => connectedWays.add(way));
+            } else if (entity.type === 'way') {
+                entity.nodes.forEach(nodeID => {
+                    const node = graph.hasEntity(nodeID);
+                    if (!node) return;
+                    graph.parentWays(node)
+                        .filter(way => !_entityIDs.includes(way.id))
+                        .forEach(way => connectedWays.add(way));
+                });
+            }
+
+            connectedWays.forEach(way => {
+                graph.parentRelations(way)
+                    .forEach(relation => connectedRelationIDs.add(relation.id));
+            });
+        });
+        return connectedRelationIDs;
+    }
+
     function getMemberships() {
 
         var memberships = [];
@@ -328,35 +359,7 @@ export function uiSectionRawMembershipEditor(context) {
                 });
             });
 
-            const connectedRelationIDs = new Set();
-            const selected = graph.hasEntity(entityID);
-
-            if (selected) {
-                const connectedWays = new Set();
-
-                if (selected.type === 'node') {
-                    graph.parentWays(selected).forEach(way => {
-                        connectedWays.add(way);
-                    });
-                } else if (selected.type === 'way') {
-                    selected.nodes.forEach(nodeID => {
-                        const node = graph.hasEntity(nodeID);
-                        if (node) {
-                            graph.parentWays(node).forEach(way => {
-                                if (way.id !== selected.id) {
-                                    connectedWays.add(way);
-                                }
-                            });
-                        }
-                    });
-                }
-
-                connectedWays.forEach(way => {
-                    graph.parentRelations(way).forEach(relation => {
-                        connectedRelationIDs.add(relation.id);
-                    });
-                });
-            }
+            const connectedRelationIDs = getConnectedRelations();
 
             result.sort(function (a, b) {
                 const isRelationAConnectedToSelection = connectedRelationIDs.has(a.relation.id);
