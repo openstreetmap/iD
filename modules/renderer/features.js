@@ -211,7 +211,7 @@ export function rendererFeatures(context) {
     });
 
     defineRule('power', function isPower(tags) {
-        return !!tags.power && tag.power !== 'no';
+        return !!tags.power && tags.power !== 'no';
     });
 
     // contains a past/future tag, but not in active use as a road/path/cycleway/etc..
