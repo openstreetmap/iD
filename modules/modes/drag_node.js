@@ -145,7 +145,7 @@ export function modeDragNode(context) {
 
         if (_wasMidpoint) {
             var midpoint = entity;
-            entity = osmNode();
+            entity = new osmNode();
             context.perform(actionAddMidpoint(midpoint, entity));
             entity = context.entity(entity.id);   // get post-action entity
 
@@ -279,7 +279,7 @@ export function modeDragNode(context) {
 
         // if snapping to way - add midpoint there and consider that the target..
         if (edge) {
-            var midpoint = osmNode();
+            var midpoint = new osmNode();
             var action = actionAddMidpoint({
                 loc: edge.loc,
                 edge: [target.nodes[edge.index - 1], target.nodes[edge.index]]

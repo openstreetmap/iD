@@ -3,11 +3,11 @@ describe('iD.serviceMapillary', function() {
     var context, mapillary;
 
 
-    before(function() {
+    beforeEach(() => {
         iD.services.mapillary = iD.serviceMapillary;
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.mapillary;
     });
 
@@ -36,7 +36,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.init();
             var cache2 = mapillary.cache();
-            expect(cache).to.equal(cache2);
+            expect(cache).toEqual(cache2);
         });
     });
 
@@ -47,7 +47,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.selectImage(context, { key: 'baz', loc: [10,0] });
 
             mapillary.reset();
-            expect(mapillary.cache()).to.not.have.property('foo');
+            expect(mapillary.cache()).not.toHaveProperty('foo');
         });
     });
 
@@ -63,7 +63,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.cache().images.rtree.load(features);
             var res = mapillary.images(context.projection);
 
-            expect(res).to.deep.eql([
+            expect(res).toEqual([
                 { key: '0', loc: [10,0], ca: 90 },
                 { key: '1', loc: [10,0], ca: 90 }
             ]);
@@ -81,7 +81,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.cache().images.rtree.load(features);
             var res = mapillary.images(context.projection);
-            expect(res).to.have.length.of.at.most(5);
+            expect(res.length).toBeLessThanOrEqual(5);
         });
     });
 
@@ -97,7 +97,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.cache().signs.rtree.load(features);
             var res = mapillary.signs(context.projection);
 
-            expect(res).to.deep.eql([
+            expect(res).toEqual([
                 { key: '0', loc: [10,0] },
                 { key: '1', loc: [10,0] }
             ]);
@@ -115,7 +115,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.cache().signs.rtree.load(features);
             var res = mapillary.signs(context.projection);
-            expect(res).to.have.length.of.at.most(5);
+            expect(res.length).toBeLessThanOrEqual(5);
         });
     });
 
@@ -131,7 +131,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.cache().points.rtree.load(features);
             var res = mapillary.mapFeatures(context.projection);
 
-            expect(res).to.deep.eql([
+            expect(res).toEqual([
                 { key: '0', loc: [10,0] },
                 { key: '1', loc: [10,0] }
             ]);
@@ -153,7 +153,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.cache().points.rtree.load(features);
             var res = mapillary.mapFeatures(context.projection);
-            expect(res).to.have.length.of.at.most(5);
+            expect(res.length).toBeLessThanOrEqual(5);
         });
     });
 
@@ -187,7 +187,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.cache().sequences.lineString['-'] = [gj];
 
             var res = mapillary.sequences(context.projection);
-            expect(res).to.deep.eql([gj]);
+            expect(res).toEqual([gj]);
         });
     });
 
@@ -196,7 +196,7 @@ describe('iD.serviceMapillary', function() {
         it('gets and sets the selected image', function() {
             const photo = { id: 'baz', originalLngLat: {lng: 10, lat: 0}};
             mapillary.setActiveImage(photo);
-            expect(mapillary.getActiveImage().id).to.eql(photo.id);
+            expect(mapillary.getActiveImage().id).toEqual(photo.id);
         });
     });
 
@@ -206,7 +206,7 @@ describe('iD.serviceMapillary', function() {
             context.photos().setDateFilter('fromDate', '2020-01-01');
             context.photos().setDateFilter('toDate', '2021-01-01');
             var filter = mapillary.filterViewer(context);
-            expect(filter.length).to.be.equal(3);
+            expect(filter.length).toBe(3);
         });
     });
 });

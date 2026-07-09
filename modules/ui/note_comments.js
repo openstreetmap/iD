@@ -1,9 +1,10 @@
 import { select as d3_select } from 'd3-selection';
 
 import { prefs } from '../core/preferences';
-import { t, localizer } from '../core/localizer';
+import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { services } from '../services';
+import { localeDateString } from '../util/date';
 
 
 export function uiNoteComments() {
@@ -63,8 +64,11 @@ export function uiNoteComments() {
         metadataEnter
             .append('div')
             .attr('class', 'comment-date')
-            .html(function(d) {
-                return t.html('note.status.' + d.action, { when: localeDateString(d.date) || '' });
+            .each(function(d) {
+                d3_select(this).call(
+                    t.addOrUpdate('note.status.' + d.action, {
+                        when: localeDateString(d.date.replace(' UTC', 'Z').replace(' ', 'T')),
+                    }));
             });
 
         mainEnter
@@ -102,16 +106,6 @@ export function uiNoteComments() {
                     .attr('alt', user.display_name);
             });
         });
-    }
-
-
-    function localeDateString(s) {
-        if (!s) return null;
-        var options = { day: 'numeric', month: 'short', year: 'numeric' };
-        s = s.replace(/-/g, '/'); // fix browser-specific Date() issues
-        var d = new Date(s);
-        if (isNaN(d.getTime())) return null;
-        return d.toLocaleDateString(localizer.localeCode(), options);
     }
 
 

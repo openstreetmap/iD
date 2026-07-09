@@ -15,15 +15,23 @@ export function behaviorOperation(context) {
 
         d3_event.preventDefault();
 
+        const disabled = _operation.disabled();
+
         if (!_operation.available()) {
             context.ui().flash
                 .duration(4000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation disabled')
                 .label(t.append('operations._unavailable', {
-                    operation: t(`operations.${_operation.id}.title`) || _operation.id
+                    operation: t.append(`operations.${_operation.id}.title`) || _operation.id
                 }))();
-        } else if (_operation.disabled()) {
+        } else if (disabled) {
+            const interrupt = _operation.interrupts?.[disabled];
+            if (interrupt) {
+                interrupt();
+                return;
+            }
+
             context.ui().flash
                 .duration(4000)
                 .iconName('#iD-operation-' + _operation.id)

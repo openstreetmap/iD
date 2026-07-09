@@ -1,4 +1,6 @@
+import { select as d3_select } from 'd3-selection';
 import { marked } from 'marked';
+
 import { svgIcon } from '../../svg/icon';
 import { uiIntro } from '../intro/intro';
 import { uiPane } from '../pane';
@@ -264,7 +266,8 @@ export function uiPaneHelp(context) {
         }, '');
 
         return {
-            title: t.html(helpkey + '.title'),
+            title: t.addOrUpdate(helpkey + '.title'),
+            _title: t(helpkey + '.title'),
             content: marked(text.trim())
                 // use keyboard key styling for shortcuts
                 .replace(/<code>/g, '<kbd>')
@@ -284,16 +287,18 @@ export function uiPaneHelp(context) {
 
             var rtl = (localizer.textDirection() === 'rtl');
             content.property('scrollTop', 0);
-            helpPane.selection().select('.pane-heading h2').html(d.title);
+            helpPane.selection().select('.pane-heading h2').call(d.title);
 
             body.html(d.content);
+            body.selectAll('p')
+                .attr('dir', 'auto');
             body.selectAll('a')
                 .attr('target', '_blank');
             menuItems.classed('selected', function(m) {
-                return m.title === d.title;
+                return m._title === d._title;
             });
 
-            nav.html('');
+            nav.text('');
             if (rtl) {
                 nav.call(drawNext).call(drawPrevious);
             } else {
@@ -314,7 +319,7 @@ export function uiPaneHelp(context) {
 
                     nextLink
                         .append('span')
-                        .html(docs[i + 1].title)
+                        .call(docs[i + 1].title)
                         .call(svgIcon((rtl ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
                 }
             }
@@ -334,7 +339,7 @@ export function uiPaneHelp(context) {
                     prevLink
                         .call(svgIcon((rtl ? '#iD-icon-forward' : '#iD-icon-backward'), 'inline'))
                         .append('span')
-                        .html(docs[i - 1].title);
+                        .call(docs[i - 1].title);
                 }
             }
         }
@@ -364,7 +369,9 @@ export function uiPaneHelp(context) {
             .append('a')
             .attr('role', 'button')
             .attr('href', '#')
-            .html(function(d) { return d.title; })
+            .each(function(d) {
+                d3_select(this).call(d.title);
+            })
             .on('click', function(d3_event, d) {
                 d3_event.preventDefault();
                 clickHelp(d, docs.indexOf(d));

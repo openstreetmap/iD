@@ -22,13 +22,8 @@ please open a request there with the link and license details.
 ## I'm having trouble seeing some of the colors. Is there a way to customize or change them?
 
 Because iD uses CSS and SVG for all its rendering, users can override the colors
-with the [Stylish extension](https://en.wikipedia.org/wiki/Stylish) on Firefox or Chrome.
-Stylish also allows users to share custom styles with others.
-
-You can find detailed instructions on how to install Stylish
-[here on learnosm.org](http://learnosm.org/en/hot-tips/enhance/).
-
-See also: https://github.com/openstreetmap/iD/issues/3095#issuecomment-224988925
+with the [Stylish extension](https://en.wikipedia.org/wiki/Stylish_(software)) on Firefox or Chrome.
+Stylish also allows users to share custom styles with others. See also: https://github.com/openstreetmap/iD/issues/3095#issuecomment-224988925
 
 
 ## Why not use canvas rather than SVG?
@@ -65,8 +60,8 @@ question.
 
 ## Can I use iD with my own OSM server?
 
-Yes, you can. You will need to [install](https://github.com/openstreetmap/openstreetmap-website/blob/master/INSTALL.md)
-and [configure](https://github.com/openstreetmap/openstreetmap-website/blob/master/CONFIGURE.md)
+Yes, you can. You will need to [install](https://github.com/openstreetmap/openstreetmap-website/blob/master/doc/INSTALL.md)
+and [configure](https://github.com/openstreetmap/openstreetmap-website/blob/master/doc/CONFIGURE.md)
 an instance of the Rails Port, the server that runs the OpenStreetMap website and API.
 
 Once you have the Rails Port running, you may edit as normal using the version of iD that

@@ -2,6 +2,8 @@ import { t } from '../core/localizer';
 import { actionSplit } from '../actions/split';
 import { behaviorOperation } from '../behavior/operation';
 import { modeSelect } from '../modes/select';
+import { uiAsyncModal } from '../ui/modal_async';
+import { uiLoading } from '../ui';
 
 
 export function operationSplit(context, selectedIDs) {
@@ -65,10 +67,62 @@ export function operationSplit(context, selectedIDs) {
         return false;
     };
 
+    operation.interrupts = {
+        parent_incomplete: async () => {
+            const graph = context.graph();
+
+            const confirmed = await uiAsyncModal(context).open(
+                t.append('operations.split.title'),
+                t.append('operations.split.parent_incomplete'),
+            );
+
+            if (!confirmed) return; // user cancelled the operation
+
+
+            const loading = uiLoading(context).blocking(true);
+            context.container().call(loading);
+
+            /** @type {Set<string>} */
+            const requiredWayIds = new Set();
+
+            // find vertex->ways->relations, then find the adjacent way for
+            // each relation.
+            for (const nodeId of _vertexIds) {
+                const ways = _action.waysForNode(nodeId, graph);
+                for (const way of ways) {
+                    const relations = graph.parentRelations(way);
+                    for (const relation of relations) {
+                        const indexOfWay = relation.members.findIndex(m => m.id === way.id);
+
+                        const prevWay = relation.members[indexOfWay - 1]?.id;
+                        const nextWay = relation.members[indexOfWay + 1]?.id;
+
+                        if (prevWay) requiredWayIds.add(prevWay);
+                        if (nextWay) requiredWayIds.add(nextWay);
+                    }
+                }
+            }
+
+            // only download the ways that aren't downloaded yet
+            const waysToLoad = [...requiredWayIds]
+                .filter(wayId => !context.graph().hasEntity(wayId))
+                .map((wayId) => new Promise(resolve => {
+                    context.loadEntity(wayId, resolve);
+                }));
+
+            await Promise.all(waysToLoad);
+
+            loading.close();
+
+            // now we can resume the interrupted operation
+            operation();
+        }
+    };
+
 
     operation.tooltip = function() {
         var disable = operation.disabled();
-        return disable ?
+        return disable && !operation.interrupts?.[disable] ?
             t.append('operations.split.' + disable) :
             t.append('operations.split.description.' + _geometry + '.' + _waysAmount + '.' + _nodesAmount + '_node');
     };

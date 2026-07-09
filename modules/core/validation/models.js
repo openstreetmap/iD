@@ -65,7 +65,9 @@ export function validationIssue(attrs) {
         if (issue.severity === 'warning' || issue.severity === 'suggestion') {
             // allow ignoring any issue that's not an error
             fixes.push(new validationIssueFix({
-                title: t.append('issues.fix.ignore_issue.title'),
+                title: this.severity === 'suggestion'
+                    ? t.append('issues.fix.ignore_suggestion.title')
+                    : t.append('issues.fix.ignore_issue.title'),
                 icon: 'iD-icon-close',
                 onClick: function() {
                     context.validator().ignoreIssue(this.issue.id);

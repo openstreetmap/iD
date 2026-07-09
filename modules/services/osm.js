@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
@@ -7,7 +7,7 @@ import RBush from 'rbush';
 
 import { JXON } from '../util/jxon';
 import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
-import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
+import { osmIdManager, osmNode, osmNote, osmRelation, osmWay } from '../osm';
 import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilObjectOmit, utilRebind, utilTiler, utilQsString } from '../util';
 import { localizer } from '../core/localizer.js';
 import { utilGzip } from '../util/util';
@@ -50,6 +50,7 @@ var _off;
 
 // set a default but also load this from the API status
 var _maxWayNodes = 2000;
+let _maxChangesetElements = 10_000;
 
 
 function authLoading() {
@@ -185,6 +186,11 @@ function parseJSON(payload, callback, options) {
 
     if (!json.elements) return callback({ message: 'No JSON', status: -1 });
 
+    if (typeof json.elements.at(-1)?.error === 'string') {
+        const errorMessage = payload.elements.at(-1).error;
+        return callback({ message: errorMessage, status: -1 });
+    }
+
     var children = json.elements;
 
     var handle = window.requestIdleCallback(function() {
@@ -205,7 +211,7 @@ function parseJSON(payload, callback, options) {
 
         var uid;
 
-        uid = osmEntity.id.fromOSM(child.type, child.id);
+        uid = osmIdManager.fromOSM(child.type, child.id);
         if (options.skipSeen) {
             if (_tileCache.seen[uid]) return null;  // avoid reparsing a "seen" entity
             _tileCache.seen[uid] = true;
@@ -292,7 +298,7 @@ function parseNoteJSON(payload, callback, _options) {
         var note = new osmNote(props);
         var item = encodeNoteRtree(note);
         _noteCache.note[note.id] = note;
-        updateRtree(item, true);
+        updateRtree(item, item);
 
         return note;
     });
@@ -300,11 +306,11 @@ function parseNoteJSON(payload, callback, _options) {
 }
 
 // replace or remove note from rtree
-function updateRtree(item, replace) {
+function updateRtree(item, replaceItem) {
     _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
 
-    if (replace) {
-        _noteCache.rtree.insert(item);
+    if (replaceItem) {
+        _noteCache.rtree.insert(replaceItem);
     }
 }
 
@@ -483,8 +489,8 @@ export default {
     // GET /api/0.6/node/#id
     // GET /api/0.6/[way|relation]/#id/full
     loadEntity: function(id, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
+        var type = osmIdManager.type(id);
+        var osmID = osmIdManager.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
@@ -513,8 +519,8 @@ export default {
     // Load a single entity with a specific version
     // GET /api/0.6/[node|way|relation]/#id/#version
     loadEntityVersion: function(id, version, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
+        var type = osmIdManager.type(id);
+        var osmID = osmIdManager.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
@@ -530,8 +536,8 @@ export default {
     // Load the relations of a single entity with the given.
     // GET /api/0.6/[node|way|relation]/#id/relations
     loadEntityRelations: function(id, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
+        var type = osmIdManager.type(id);
+        var osmID = osmIdManager.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
@@ -550,11 +556,11 @@ export default {
     // GET /api/0.6/[nodes|ways|relations]?#parameters
     loadMultiple: function(ids, callback) {
         var that = this;
-        var groups = utilArrayGroupBy(utilArrayUniq(ids), osmEntity.id.type);
+        var groups = utilArrayGroupBy(utilArrayUniq(ids), osmIdManager.type);
 
         Object.keys(groups).forEach(function(k) {
             var type = k + 's';   // nodes, ways, relations
-            var osmIDs = groups[k].map(function(id) { return osmEntity.id.toOSM(id); });
+            var osmIDs = groups[k].map(function(id) { return osmIdManager.toOSM(id); });
             var options = { skipSeen: false };
 
             utilArrayChunk(osmIDs, 150).forEach(function(arr) {
@@ -801,6 +807,9 @@ export default {
 
                 _imageryBlocklists = payload.policy.imagery.blacklist.map(item => new RegExp(item.regex, 'i'));
 
+                const maxChangesetElements = payload.api.changesets.maximum_elements;
+                if (!Number.isNaN(maxChangesetElements)) _maxChangesetElements = maxChangesetElements;
+
                 return callback(undefined, payload.api.status.api);
             }
         }
@@ -812,7 +821,7 @@ export default {
         // throttle to avoid unnecessary API calls
         if (!this.throttledReloadApiStatus) {
             var that = this;
-            this.throttledReloadApiStatus = _throttle(function() {
+            this.throttledReloadApiStatus = throttle(function() {
                 that.status(function(err, status) {
                     if (status !== _cachedApiStatus) {
                         _cachedApiStatus = status;
@@ -829,6 +838,9 @@ export default {
     maxWayNodes: function() {
         return _maxWayNodes;
     },
+
+
+    maxChangesetElements: () => _maxChangesetElements,
 
 
     // Load data (entities) from the API in tiles
@@ -952,7 +964,7 @@ export default {
 
         var that = this;
         var path = `/api/0.6/notes.json?limit=${noteOptions.limit}&closed=${noteOptions.closed}&bbox=`;
-        var throttleLoadUsers = _throttle(function() {
+        var throttleLoadUsers = throttle(function() {
             var uids = Object.keys(_userCache.toLoad);
             if (!uids.length) return;
             that.loadUsers(uids, function() {});  // eagerly load user details
@@ -1271,8 +1283,9 @@ export default {
     replaceNote: function(note) {
         if (!(note instanceof osmNote) || !note.id) return;
 
+        const item = encodeNoteRtree(_noteCache.note[note.id] || note);
         _noteCache.note[note.id] = note;
-        updateRtree(encodeNoteRtree(note), true);  // true = replace
+        updateRtree(item, encodeNoteRtree(note));
         return note;
     },
 

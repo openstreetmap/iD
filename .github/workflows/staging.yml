@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: workflows
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version-file: '.nvmrc'
       # install and build development version of id-tagging-schema
       - name: Checkout the id-tagging-schema repository code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           repository: openstreetmap/id-tagging-schema
           path: './id-tagging-schema'
@@ -27,13 +27,11 @@ jobs:
         working-directory: './id-tagging-schema'
       - run: npm audit signatures
         working-directory: './id-tagging-schema'
-      - run: npm run translations
+      - run: npm run dist -- translations
         working-directory: './id-tagging-schema'
         env:
           transifex_password: ${{secrets.TX_TOKEN}}
         if: env.transifex_password != null
-      - run: npm run dist
-        working-directory: './id-tagging-schema'
       - name: id-tagging-schema - Create directories
         run: mkdir dist/id-tagging-schema && mv id-tagging-schema/dist dist/id-tagging-schema/dist
       # build iD using freshest version of presets and ELI
@@ -55,4 +53,4 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{secrets.NETLIFY_AUTH_TOKEN}}
           NETLIFY_SITE_ID: ${{secrets.NETLIFY_SITE_ID}}
-        run: ./node_modules/.bin/netlify deploy --no-build --prod --dir=dist
+        run: npx netlify-cli deploy --no-build --prod --dir=dist

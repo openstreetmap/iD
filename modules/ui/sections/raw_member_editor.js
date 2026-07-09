@@ -10,7 +10,7 @@ import { actionDeleteMember } from '../../actions/delete_member';
 import { actionMoveMember } from '../../actions/move_member';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
-import { osmEntity } from '../../osm';
+import { osmIdManager } from '../../osm';
 import { getRelationColor } from '../../osm/tags';
 import { svgIcon } from '../../svg/icon';
 import { services } from '../../services';
@@ -35,7 +35,7 @@ export function uiSectionRawMemberEditor(context) {
 
             var gt = entity.members.length > _maxMembers ? '>' : '';
             var count = gt + entity.members.slice(0, _maxMembers).length;
-            return t.append('inspector.title_count', { title: t('inspector.members'), count: count });
+            return t.append('inspector.title_count', { title: t.append('inspector.members'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -150,8 +150,8 @@ export function uiSectionRawMemberEditor(context) {
 
         var items = list.selectAll('li')
             .data(memberships, function(d) {
-                return osmEntity.key(d.relation) + ',' + d.index + ',' +
-                    (d.member ? osmEntity.key(d.member) : 'incomplete');
+                return osmIdManager.key(d.relation) + ',' + d.index + ',' +
+                    (d.member ? osmIdManager.key(d.member) : 'incomplete');
             });
 
         items.exit()
@@ -207,9 +207,12 @@ export function uiSectionRawMemberEditor(context) {
                         const matched = presetManager.match(d, context.graph());
                         if (matched.suggestion) {
                             // if matching an NSI preset: append icon
-                            d3_select(this)
-                                .append('img')
+                            const img = d3_select(this)
+                                .append('img');
+                            img
                                 .classed('member-entity-icon', true)
+                                .on('load', () => img.classed('hide', false))
+                                .on('error', () => img.classed('hide', true))
                                 .attr('src', matched.imageURL);
                         }
                     });

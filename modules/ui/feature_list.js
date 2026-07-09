@@ -10,7 +10,7 @@ import { coreGraph } from '../core/graph';
 import { geoSphericalDistance } from '../geo/geo';
 import { geoExtent } from '../geo';
 import { modeSelect } from '../modes/select';
-import { osmEntity } from '../osm/entity';
+import { createEntity } from '../osm/create-entity';
 import { getRelationColor } from '../osm/tags';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
@@ -22,6 +22,7 @@ import {
     utilHighlightEntities,
     utilNoAuto
 } from '../util';
+import { osmIdManager } from '../osm';
 
 
 export const idMatch = q => {
@@ -214,7 +215,7 @@ export function uiFeatureList(context) {
 
                     // Make a temporary osmEntity so we can preset match
                     // and better localize the search result - #4725
-                    var id = osmEntity.id.fromOSM(d.osm_type, d.osm_id);
+                    var id = osmIdManager.fromOSM(d.osm_type, d.osm_id);
                     var tags = {};
                     tags[d.class] = d.type;
 
@@ -223,8 +224,8 @@ export function uiFeatureList(context) {
                         attrs.nodes = ['a','a'];  // so that geometry area is possible
                     }
 
-                    var tempEntity = osmEntity(attrs);
-                    var tempGraph = coreGraph([tempEntity]);
+                    var tempEntity = createEntity(attrs);
+                    var tempGraph = new coreGraph([tempEntity]);
                     var matched = presetManager.match(tempEntity, tempGraph);
                     var type = (matched && matched.name()) || utilDisplayType(id);
 

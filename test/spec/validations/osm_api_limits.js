@@ -1,7 +1,7 @@
 describe('iD.validations.osm_api_limits', function () {
     let context;
 
-    before(function() {
+    beforeEach(() => {
         iD.services.osm = iD.serviceOsm;
         iD.services.osm.maxWayNodes = () => 10;
         iD.services.osm.on = () => undefined;
@@ -12,7 +12,7 @@ describe('iD.validations.osm_api_limits', function () {
         context.surface = () => d3.select('#nop'); // mock with NOP
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.osm;
     });
 
@@ -20,9 +20,9 @@ describe('iD.validations.osm_api_limits', function () {
     function createWay(numNodes) {
         var nodes = [];
         for (var i = 0; i < numNodes; i++) {
-            nodes.push(iD.osmNode({ id: 'n-' + i, loc: [i, i]}));
+            nodes.push(new iD.osmNode({ id: 'n-' + i, loc: [i, i]}));
         }
-        var w = iD.osmWay({id: 'w-1', tags: {},
+        var w = new iD.osmWay({id: 'w-1', tags: {},
             nodes: nodes.map(function(n) { return n.id; }) });
 
         context.perform.apply(null, nodes
@@ -44,46 +44,46 @@ describe('iD.validations.osm_api_limits', function () {
 
     it('has no errors on init', function() {
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags way with more than the maximum number of allowed nodes', function() {
         createWay(12);
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('osm_api_limits');
-        expect(issue.subtype).to.eql('exceededMaxWayNodes');
-        expect(issue.severity).to.eql('error');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('osm_api_limits');
+        expect(issue.subtype).toEqual('exceededMaxWayNodes');
+        expect(issue.severity).toEqual('error');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
 
         var fixes = issue.fixes(context);
-        expect(fixes).to.have.lengthOf(1);
+        expect(fixes).toHaveLength(1);
         fixes[0].onClick(context);
         issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('can fix an extreme case', function() {
         createWay(33);
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
 
         var fixes = issue.fixes(context);
-        expect(fixes).to.have.lengthOf(1);
+        expect(fixes).toHaveLength(1);
         fixes[0].onClick(context);
         issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('fix a simple case at an intersection vertex', function() {
         createWay(12);
 
-        var n2 = iD.osmNode({id: 'n-0', loc: [0,0]});
-        var n1 = iD.osmNode({id: 'n-8', loc: [8,8]});
-        var w = iD.osmWay({id: 'w-2', nodes: ['n-0', 'n-8'], tags: {}});
+        var n2 = new iD.osmNode({id: 'n-0', loc: [0,0]});
+        var n1 = new iD.osmNode({id: 'n-8', loc: [8,8]});
+        var w = new iD.osmWay({id: 'w-2', nodes: ['n-0', 'n-8'], tags: {}});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -92,14 +92,14 @@ describe('iD.validations.osm_api_limits', function () {
         );
 
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
 
         var fixes = issue.fixes(context);
-        expect(fixes).to.have.lengthOf(1);
+        expect(fixes).toHaveLength(1);
         fixes[0].onClick(context);
         issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
 
         context.graph().entity('w-1').nodes.length === 8;
     });

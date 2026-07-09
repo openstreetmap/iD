@@ -52,12 +52,14 @@ export async function planePhotoFrame(context, selection) {
         _planeWrapper.call(_imgZoom.transform, transform);
     }
 
-    _planeWrapper = selection;
+    _planeWrapper = selection.append('div')
+        .classed('plane-frame-wrapper', true);
     _planeWrapper.call(_imgZoom);
 
     _imageWrapper = _planeWrapper
       .append('div')
-      .attr('class', 'photo-frame plane-frame')
+      .classed('photo-frame', true)
+      .classed('plane-frame', true)
       .classed('hide', true);
 
     _photo = _imageWrapper

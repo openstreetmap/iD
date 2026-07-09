@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit';
 
 import { geoBounds as d3_geoBounds, geoPath as d3_geoPath } from 'd3-geo';
 import { text as d3_text } from 'd3-fetch';
@@ -20,7 +20,7 @@ var _geojson;
 
 
 export function svgData(projection, context, dispatch) {
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    var throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     var _showLabels = true;
     var detected = utilDetect();
     var layer = d3_select(null);

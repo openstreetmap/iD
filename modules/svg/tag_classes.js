@@ -3,18 +3,18 @@ import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags, osmLifecyclePr
 
 
 export function svgTagClasses() {
-    var primaries = [
+    const primaries = [
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
         'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
         'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
         'roller_coaster', 'building:part', 'indoor', 'climbing'
     ];
-    var statuses = Object.keys(osmLifecyclePrefixes);
-    var secondaries = [
-        'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
+    const statuses = Object.keys(osmLifecyclePrefixes);
+    const secondaries = [
+        'oneway', 'bridge', 'tunnel', 'barrier',
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
         'public_transport', 'location', 'parking', 'golf', 'type', 'leisure',
-        'man_made', 'indoor', 'construction', 'proposed'
+        'man_made', 'indoor', 'construction', 'proposed', 'bicycle', 'foot'
     ];
     var _tags = function(entity) { return entity.tags; };
 
@@ -39,11 +39,10 @@ export function svgTagClasses() {
 
 
     tagClasses.getClassesString = function(t, value) {
-        var primary, status;
-        var i, j, k, v;
+        let primary, status;
 
         // in some situations we want to render perimeter strokes a certain way
-        var overrideGeometry;
+        let overrideGeometry;
         if (/\bstroke\b/.test(value)) {
             if (!!t.barrier && t.barrier !== 'no') {
                 overrideGeometry = 'line';
@@ -51,25 +50,18 @@ export function svgTagClasses() {
         }
 
         // preserve base classes (nothing with `tag-`)
-        var classes = value.trim().split(/\s+/)
-            .filter(function(klass) {
-                return klass.length && !/^tag-/.test(klass);
-            })
-            .map(function(klass) {  // special overrides for some perimeter strokes
-                return (klass === 'line' || klass === 'area') ? (overrideGeometry || klass) : klass;
-            });
+        const classes = value.trim().split(/\s+/)
+            .filter(klass => klass.length && !/^tag-/.test(klass))
+            .map(klass => (klass === 'line' || klass === 'area')
+                // special overrides for some perimeter strokes
+                ? (overrideGeometry || klass)
+                : klass);
 
         // pick at most one primary classification tag..
-        for (i = 0; i < primaries.length; i++) {
-            k = primaries[i];
-            v = t[k];
+        for (let k of primaries) {
+            const v = t[k];
+            k = k.replace(':', '_');
             if (!v || v === 'no') continue;
-
-            if (k === 'piste:type') {  // avoid a ':' in the class name
-                k = 'piste';
-            } else if (k === 'building:part') {  // avoid a ':' in the class name
-                k = 'building_part';
-            }
 
             primary = k;
             if (statuses.indexOf(v) !== -1) {   // e.g. `railway=abandoned`
@@ -84,13 +76,13 @@ export function svgTagClasses() {
         }
 
         if (!primary) {
-            for (i = 0; i < statuses.length; i++) {
-                for (j = 0; j < primaries.length; j++) {
-                    k = statuses[i] + ':' + primaries[j];  // e.g. `demolished:building=yes`
-                    v = t[k];
+            for (const prefix of statuses) {
+                for (const key of primaries) {
+                    const k = prefix + ':' + key;  // e.g. `demolished:building=yes`
+                    const v = t[k];
                     if (!v || v === 'no') continue;
 
-                    status = statuses[i];
+                    status = prefix;
                     break;
                 }
             }
@@ -98,9 +90,8 @@ export function svgTagClasses() {
 
         // add at most one status tag, only if relates to primary tag..
         if (!status) {
-            for (i = 0; i < statuses.length; i++) {
-                k = statuses[i];
-                v = t[k];
+            for (const k of statuses) {
+                const v = t[k];
                 if (!v || v === 'no') continue;
 
                 if (v === 'yes') {   // e.g. `railway=rail + abandoned=yes`
@@ -123,9 +114,8 @@ export function svgTagClasses() {
         }
 
         // add any secondary tags
-        for (i = 0; i < secondaries.length; i++) {
-            k = secondaries[i];
-            v = t[k];
+        for (const k of secondaries) {
+            const v = t[k];
             if (!v || v === 'no' || k === primary) continue;
             classes.push('tag-' + k);
             classes.push('tag-' + k + '-' + v);
@@ -133,21 +123,29 @@ export function svgTagClasses() {
 
         // For highways, look for surface tagging..
         if ((primary === 'highway' && !osmPathHighwayTagValues[t.highway]) || primary === 'aeroway') {
-            var surface = t.highway === 'track' ? 'unpaved' : 'paved';
-            for (k in t) {
-                v = t[k];
-                if (k in osmPavedTags) {
-                    surface = osmPavedTags[k][v] ? 'paved' : 'unpaved';
+            if (t.highway !== 'track') { // tracks are styled by grade and not surface
+                let surface = 'paved';
+                for (const k in t) {
+                    const v = t[k];
+                    if (k in osmPavedTags) {
+                        surface = osmPavedTags[k][v] ? 'paved' : 'unpaved';
+                    }
+                    if (k in osmSemipavedTags && !!osmSemipavedTags[k][v]) {
+                        surface = 'semipaved';
+                    }
                 }
-                if (k in osmSemipavedTags && !!osmSemipavedTags[k][v]) {
-                    surface = 'semipaved';
+                classes.push('tag-' + surface);
+            } else {
+                // Tracks with no `tracktype` for default/unknown grade-based styling
+                if (t.highway === 'track' &&
+                    (!t.tracktype || (t.tracktype !== 'grade1' && t.tracktype !== 'grade2' && t.tracktype !== 'grade3' && t.tracktype !== 'grade4' && t.tracktype !== 'grade5'))) {
+                    classes.push('tag-ungraded');
                 }
             }
-            classes.push('tag-' + surface);
         }
 
         // If this is a wikidata-tagged item, add a class for that..
-        var qid = (
+        const qid = (
             t.wikidata ||
             t['flag:wikidata'] ||
             t['brand:wikidata'] ||

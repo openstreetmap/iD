@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { isEmpty } from 'lodash-es';
+import { isEmpty } from 'es-toolkit/compat';
 
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
@@ -21,7 +21,7 @@ export function uiSectionRawTagEditor(id, context) {
         .classes('raw-tag-editor')
         .label(function() {
             var count = Object.keys(_tags).filter(function(d) { return d; }).length;
-            return t.append('inspector.title_count', { title: t('inspector.tags'), count: count });
+            return t.append('inspector.title_count', { title: t.append('inspector.tags'), count: count });
         })
         .expandedByDefault(false)
         .disclosureContent(renderDisclosureContent);
@@ -390,7 +390,6 @@ export function uiSectionRawTagEditor(id, context) {
 
         if (Array.isArray(value.datum().value)) {
             value.call(uiCombobox(context, 'tag-value')
-                .minItems(1)
                 .fetcher(function(value, callback) {
                     var keyString = utilGetSetValue(key);
                     if (!_tags[keyString]) return;

@@ -2,7 +2,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../../presets';
 import { modeSelect } from '../../modes/select';
-import { osmEntity } from '../../osm';
+import { osmIdManager } from '../../osm';
 import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
 import { t } from '../../core/localizer';
@@ -17,7 +17,7 @@ export function uiSectionSelectionList(context) {
             return _selectedIDs.length > 1;
         })
         .label(function() {
-            return t.append('inspector.title_count', { title: t('inspector.features'), count: _selectedIDs.length });
+            return t.append('inspector.title_count', { title: t.append('inspector.features'), count: _selectedIDs.length });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -62,7 +62,7 @@ export function uiSectionSelectionList(context) {
             .filter(Boolean);
 
         var items = list.selectAll('.feature-list-item')
-            .data(entities, osmEntity.key);
+            .data(entities, osmIdManager.key);
 
         items.exit()
             .remove();

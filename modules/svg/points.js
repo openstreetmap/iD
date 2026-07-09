@@ -1,9 +1,9 @@
-import deepEqual from 'fast-deep-equal';
-import { clamp } from 'lodash-es';
+import { deepEqual } from 'fast-equals';
+import { clamp } from 'es-toolkit/compat';
 import { select as d3_select } from 'd3';
 
 import { geoScaleToZoom } from '../geo';
-import { osmEntity } from '../osm';
+import { osmIdManager } from '../osm';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { presetManager } from '../presets';
@@ -40,7 +40,7 @@ export function svgPoints(projection, context) {
     function fastEntityKey(d) {
         const mode = context.mode();
         const isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
-        return isMoving ? d.id : osmEntity.key(d);
+        return isMoving ? d.id : osmIdManager.key(d);
     }
 
 

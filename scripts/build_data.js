@@ -3,8 +3,8 @@ import fs from 'node:fs';
 import { styleText } from 'node:util';
 import prettyStringify from 'json-stringify-pretty-compact';
 import shell from 'shelljs';
-import YAML from 'js-yaml';
-import { pull } from 'lodash-es';
+import { load as loadYaml } from 'js-yaml';
+import { pull } from 'es-toolkit/compat';
 import dotenv from 'dotenv';
 import cldrTerritoryInfo from 'cldr-core/supplemental/territoryInfo.json' with { type: 'json' };
 import packageJson from '../package.json' with { type: 'json' };
@@ -91,7 +91,6 @@ function buildData() {
     minifyJSON('data/address_formats.json', 'dist/data/address_formats.min.json'),
     minifyJSON('data/imagery.json', 'dist/data/imagery.min.json'),
     minifyJSON('data/intro_graph.json', 'dist/data/intro_graph.min.json'),
-    minifyJSON('data/keepRight.json', 'dist/data/keepRight.min.json'),
     minifyJSON('data/languages.json', 'dist/data/languages.min.json'),
     minifyJSON('data/phone_formats.json', 'dist/data/phone_formats.min.json'),
     minifyJSON('data/qa_data.json', 'dist/data/qa_data.min.json'),
@@ -200,15 +199,15 @@ function generateTerritoryLanguages() {
 
 function writeEnJson() {
   const readCoreYaml = fs.readFileSync('data/core.yaml', 'utf8');
-  const readImagery = fs.readFileSync('node_modules/editor-layer-index/i18n/en.yaml', 'utf8');
+  const readImagery = fs.readFileSync('node_modules/@openstreetmap/editor-layer-index/i18n/en.yaml', 'utf8');
   const readCommunity = fs.readFileSync('node_modules/osm-community-index/i18n/en.yaml', 'utf8');
   const readManualImagery = fs.readFileSync('data/manual_imagery.json', 'utf8');
 
   return Promise.all([readCoreYaml, readImagery, readCommunity, readManualImagery])
     .then(data => {
-      let core = YAML.load(data[0]);
-      let imagery = YAML.load(data[1]);
-      let community = YAML.load(data[2]);
+      let core = loadYaml(data[0]);
+      let imagery = loadYaml(data[1]);
+      let community = loadYaml(data[2]);
       let manualImagery = JSON.parse(data[3]);
 
       for (let i in manualImagery) {

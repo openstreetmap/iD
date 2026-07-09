@@ -26,8 +26,7 @@ export function uiFieldWikidata(field, context) {
     var _hintKey = field.key === 'wikidata' ? 'name' : field.key.split(':')[0];
 
     var combobox = uiCombobox(context, 'combo-' + field.safeid)
-        .caseSensitive(true)
-        .minItems(1);
+        .caseSensitive(true);
 
 
     function wiki(selection) {
@@ -109,7 +108,9 @@ export function uiFieldWikidata(field, context) {
         enter
             .append('div')
             .attr('class', 'label')
-            .html(function(d) { return t.html('wikidata.' + d); });
+            .each(function(d) {
+                d3_select(this).call(t.addOrUpdate('wikidata.' + d));
+            });
 
         enter
             .append('input')
@@ -160,7 +161,13 @@ export function uiFieldWikidata(field, context) {
                         .attr('class', 'localized-text')
                         .attr('lang', item.display.label.language)
                         .text(item.display.label.value),
-                    title: item.display.description && item.display.description.value,
+                    description: item.display.description ? (
+                        selection => selection.append('span')
+                            .attr('class', 'localized-text')
+                            .attr('lang', item.display.description.language)
+                            .text(item.display.description.value)
+                    ) : undefined,
+                    title: item.id + (item.aliases?.length > 0 ? ' (' + item.aliases.join(', ') + ')' : ''),
                     terms: item.aliases
                 };
             });

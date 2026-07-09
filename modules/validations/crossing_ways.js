@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash-es';
+import { deepEqual } from 'fast-equals';
 
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
@@ -376,20 +376,6 @@ export function validationCrossingWays(context) {
 
 
     function createIssue(crossing, graph) {
-
-        // use the entities with the tags that define the feature type
-        crossing.wayInfos.sort(function(way1Info, way2Info) {
-            var type1 = way1Info.featureType;
-            var type2 = way2Info.featureType;
-            if (type1 === type2) {
-                return utilDisplayLabel(way1Info.way, graph) > utilDisplayLabel(way2Info.way, graph);
-            } else if (type1 === 'waterway') {
-                return true;
-            } else if (type2 === 'waterway') {
-                return false;
-            }
-            return type1 < type2;
-        });
         var entities = crossing.wayInfos.map(function(wayInfo) {
             return getFeatureWithFeatureTypeTagsForWay(wayInfo.way, graph);
         });
@@ -462,7 +448,7 @@ export function validationCrossingWays(context) {
                 if (connectionTags) {
                     fixes.push(makeConnectWaysFix(this.data.connectionTags));
                     let lessLikelyConnectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph, true);
-                    if (lessLikelyConnectionTags && !isEqual(connectionTags, lessLikelyConnectionTags)) {
+                    if (lessLikelyConnectionTags && !deepEqual(connectionTags, lessLikelyConnectionTags)) {
                         fixes.push(makeConnectWaysFix(lessLikelyConnectionTags));
                     }
                 }
@@ -506,6 +492,13 @@ export function validationCrossingWays(context) {
                     icon: 'iD-operation-move',
                     title: t.append('issues.fix.reposition_features.title')
                 }));
+
+                if (featureType1 === 'building' || featureType2 === 'building') {
+                    // if the validation is about overlapping buildings:
+                    // show "reposition features" suggestion first, as that is most often
+                    // most sensible fix for those errors, see #11329
+                    fixes.unshift(fixes.pop());
+                }
 
                 return fixes;
             }
@@ -643,7 +636,7 @@ export function validationCrossingWays(context) {
                             // the loc that would result in the full expected length
                             var idealNodeLoc = locGetter(idealLengthMeters);
 
-                            newNode = osmNode();
+                            newNode = new osmNode();
                             graph = actionAddMidpoint({ loc: idealNodeLoc, edge: edge }, newNode)(graph);
 
                         } else {
@@ -668,7 +661,7 @@ export function validationCrossingWays(context) {
                                 var insetLength = crossingToEdgeEndDistance - minEdgeLengthMeters;
                                 if (insetLength > minEdgeLengthMeters) {
                                     var insetNodeLoc = locGetter(insetLength);
-                                    newNode = osmNode();
+                                    newNode = new osmNode();
                                     graph = actionAddMidpoint({ loc: insetNodeLoc, edge: edge }, newNode)(graph);
                                 }
                             }
@@ -747,7 +740,7 @@ export function validationCrossingWays(context) {
                 context.perform(
                     function actionConnectCrossingWays(graph) {
                         // create the new node for the points
-                        var node = osmNode({ loc: loc, tags: connectionTags });
+                        var node = new osmNode({ loc: loc, tags: connectionTags });
                         graph = graph.replace(node);
 
                         var nodesToMerge = [node.id];
@@ -781,7 +774,7 @@ export function validationCrossingWays(context) {
         return fix;
     }
 
-    /** @returns {osmEntity | undefined} */
+    /** @returns {iD.OsmEntity | undefined} */
     function getSelectedFeature() {
         const mode = context.mode();
         if (!mode || mode.id !== 'select') return undefined;

@@ -1,12 +1,12 @@
 describe.skip('iD.modeAddNote', function() {
     var context;
 
-    before(function() {
+    beforeEach(() => {
         window.location.hash = '#background=none';  // Try not to load imagery
         iD.services.osm = iD.serviceOsm;
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.osm;
     });
 
@@ -36,7 +36,7 @@ describe.skip('iD.modeAddNote', function() {
 
         //     context.on('enter.addNoteTest', function(mode) {
         //         if (mode.id === 'select-note') {
-        //             expect(iD.services.osm.caches().note.note[-1]).to.eql(note);
+        //             expect(iD.services.osm.caches().note.note[-1]).toEqual(note);
         //             context.mode().exit();
         //             d3.select('window').on('click.draw-block', null);
         //             context.on('enter.addNoteTest', null);
@@ -44,15 +44,15 @@ describe.skip('iD.modeAddNote', function() {
         //         }
         //     });
 
-        //     happen.mousedown(context.surface().node(), {});
-        //     happen.mouseup(window, {});
+        //     context.surface().node().dispatchEvent(new MouseEvent('mousedown'));
+        //     window.dispatchEvent(new MouseEvent('mouseup'));
         // });
 
         // this won't work because draw behavior can only snap to entities, not notes
         // it('selects an existing note rather than adding a new one', function() {
-        //     happen.mousedown(context.surface().node(), {});
-        //     happen.mouseup(window, {});
-        //     expect(context.selectedNoteID()).to.eql(-1);
+        //     context.surface().node().dispatchEvent(new MouseEvent('mousedown'));
+        //     window.dispatchEvent(new MouseEvent('mouseup'));
+        //     expect(context.selectedNoteID()).toEqual(-1);
         //     expect(context.mode().id).to.equal('select-note');
         //     context.mode().exit();
         //     d3.select('window').on('click.draw-block', null);
@@ -61,9 +61,9 @@ describe.skip('iD.modeAddNote', function() {
 
     // describe('pressing ⎋', function() {
     //     it('exits to browse mode', function(done) {
-    //         happen.keydown(document, {keyCode: 27});
+    //         document.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 27 }));
     //         window.setTimeout(function() {
-    //             expect(context.mode().id).to.equal('browse');
+    //             expect(context.mode().id).toEqual('browse');
     //             done();
     //         }, 200);
     //     });

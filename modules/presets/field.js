@@ -1,4 +1,5 @@
 import { localizer, t } from '../core/localizer';
+import { LANGUAGE_SUFFIX_REGEX } from '../ui/fields';
 import { utilSafeClassName } from '../util/util';
 
 
@@ -22,7 +23,7 @@ export function presetField(fieldID, field, allFields) {
   };
 
   _this.t = (scope, options) => t(`_tagging.presets.fields.${fieldID}.${scope}`, options);
-  _this.t.html = (scope, options) => t.html(`_tagging.presets.fields.${fieldID}.${scope}`, options);
+  _this.t.all = (scope, options) => t.all(`_tagging.presets.fields.${fieldID}.${scope}`, options);
   _this.t.append = (scope, options) => t.append(`_tagging.presets.fields.${fieldID}.${scope}`, options);
   _this.hasTextForStringId = (scope) => localizer.hasTextForStringId(`_tagging.presets.fields.${fieldID}.${scope}`);
 
@@ -39,19 +40,45 @@ export function presetField(fieldID, field, allFields) {
     return _this;
   };
 
-  _this.title = () => _this.overrideLabel || _this.resolveReference('label').t('label', { 'default': fieldID });
-  _this.label = () => _this.overrideLabel ?
-      selection => selection.text(_this.overrideLabel) :
-      _this.resolveReference('label').t.append('label', { 'default': fieldID });
+  _this.title = () => _this.resolveReference('label').t('label', { 'default': fieldID });
+  _this.label = () => _this.resolveReference('label').t.append('label', { 'default': fieldID });
 
   _this.placeholder = () => _this.resolveReference('placeholder').t('placeholder', { 'default': '' });
 
-  _this.originalTerms = (_this.terms || []).join();
+  _this.originalTerms = _this.terms || [];
 
-  _this.terms = () => _this.resolveReference('label').t('terms', { 'default': _this.originalTerms })
-    .toLowerCase().trim().split(/\s*,+\s*/);
+  _this.terms = () => _this.resolveReference('label').t.all('terms', { 'default': _this.originalTerms });
 
   _this.increment = (_this.type === 'number' || _this.type === 'integer') ? (_this.increment || 1) : undefined;
+
+  /** all keys controlled by this field */
+  _this.allKeys = (tags) => {
+    const allKeys = new Set();
+    if (_this.key) allKeys.add(_this.key);
+    if (_this.keys) _this.keys.forEach(key => allKeys.add(key));
+    if (field.type === 'directionalCombo' && _this.key) {
+        // directionalCombo fields can have an additional key describing the for
+        // cases where both directions share a "common" value.
+        // The field also support *:both. The preset decides which field to write to.
+        const baseKey = field.key.replace(/:both$/, '');
+        allKeys.add(baseKey);
+        allKeys.add(`${baseKey}:both`);
+    }
+    if (field.type === 'localized' && field.key && tags) {
+        const prefix = `${field.key}:`;
+        Object.keys(tags)
+            .filter(k => k.startsWith(prefix))
+            .filter(k => LANGUAGE_SUFFIX_REGEX.test(k))
+            .forEach(key => allKeys.add(key));
+    }
+    if (field.type === 'multiCombo' && field.key && tags) {
+        const prefix = field.key + (field.key.endsWith(':') ? '' : ':');
+        Object.keys(tags)
+            .filter(k => k.startsWith(prefix))
+            .forEach(key => allKeys.add(key));
+    }
+    return [...allKeys];
+  };
 
   return _this;
 }

@@ -25,7 +25,7 @@ export function uiSectionEntityIssues(context) {
             return _issues.length > 0;
         })
         .label(function() {
-            return t.append('inspector.title_count', { title: t('issues.list_title'), count: _issues.length });
+            return t.append('inspector.title_count', { title: t.append('issues.list_title'), count: _issues.length });
         })
         .disclosureContent(renderDisclosureContent);
 

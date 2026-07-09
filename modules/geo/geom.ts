@@ -10,7 +10,7 @@ import {
     geoVecInterp, geoVecLength, geoVecSubtract,
     type Vec2
 } from './vector.js';
-import type { OsmNode } from '../osm/node.js';
+import type { osmNode as OsmNode } from '../osm/node.js';
 import type { Projection } from './raw_mercator.js';
 
 

@@ -1,10 +1,10 @@
-import { isEqual } from 'lodash-es';
+import { deepEqual } from 'fast-equals';
 
 import { t } from '../core/localizer';
 import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
 import { utilObjectOmit } from '../util';
-import { utilSafeClassName } from '../util/util';
-import { locationManager } from '../core/LocationManager';
+import { utilSafeClassName, utilStripDiacritics } from '../util/util';
+import { locationManager } from '../core/location_manager';
 
 
 //
@@ -27,11 +27,11 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.safeid = utilSafeClassName(presetID);  // for use in css classes, selectors, element ids
 
-  _this.originalTerms = (_this.terms || []).join();
+  _this.originalTerms = _this.terms || [];
 
   _this.originalName = _this.name || '';
 
-  _this.originalAliases = (_this.aliases || []).join('\n');
+  _this.originalAliases = _this.aliases || [];
 
   _this.originalScore = _this.matchScore || 1;
 
@@ -89,10 +89,14 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     return score;
   };
 
-
   _this.t = (scope, options) => {
     const textID = `_tagging.presets.presets.${presetID}.${scope}`;
     return t(textID, options);
+  };
+
+  _this.t.all = (scope, options) => {
+    const textID = `_tagging.presets.presets.${presetID}.${scope}`;
+    return t.all(textID, options);
   };
 
   _this.t.append = (scope, options) => {
@@ -144,16 +148,12 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.aliases = () => {
     return resolveReference('originalName')
-      .t('aliases', { 'default': _this.originalAliases })
-      .trim()
-      .split(/\s*[\r\n]+\s*/)
-      .filter(Boolean);
+        .t.all('aliases', { 'default': _this.originalAliases });
   };
 
   _this.terms = () => {
     return resolveReference('originalName')
-      .t('terms', { 'default': _this.originalTerms })
-      .toLowerCase().trim().split(/\s*,+\s*/);
+        .t.all('terms', { 'default': _this.originalTerms });
   };
 
   _this.searchName = () => {
@@ -165,7 +165,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.searchNameStripped = () => {
     if (!_searchNameStripped) {
-      _searchNameStripped = stripDiacritics(_this.searchName());
+      _searchNameStripped = utilStripDiacritics(_this.searchName());
     }
     return _searchNameStripped;
   };
@@ -180,7 +180,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   _this.searchAliasesStripped = () => {
     if (!_searchAliasesStripped) {
       _searchAliasesStripped = _this.searchAliases();
-      _searchAliasesStripped = _searchAliasesStripped.map(stripDiacritics);
+      _searchAliasesStripped = _searchAliasesStripped.map(utilStripDiacritics);
     }
     return _searchAliasesStripped;
   };
@@ -322,12 +322,12 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
         let parent = allPresets[parentID];
         if (loc) {
           const validHere = locationManager.locationSetsAt(loc);
-          if (parent?.locationSetID && !validHere[parent.locationSetID]) {
+          if (parent?.locationSetID && !validHere.has(parent.locationSetID)) {
             // this is a preset for which a regional variant of the main preset exists
             const candidateIDs = Object.keys(allPresets).filter(k => k.startsWith(parentID));
             parent = allPresets[candidateIDs.find(candidateID => {
               const candidate = allPresets[candidateID];
-              return validHere[candidate.locationSetID] && isEqual(candidate.tags, parent.tags);
+              return validHere.has(candidate.locationSetID) && deepEqual(candidate.tags, parent.tags);
             })];
           }
         }
@@ -337,7 +337,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
     if (loc) {
       const validHere = locationManager.locationSetsAt(loc);
-      resolved = resolved.filter(field => !field.locationSetID || validHere[field.locationSetID]);
+      resolved = resolved.filter(field => !field.locationSetID || validHere.has(field.locationSetID));
     }
 
     return resolved;
@@ -372,15 +372,6 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
       return true;
     }
-  }
-
-
-  function stripDiacritics(s) {
-    // split combined diacritical characters into their parts
-    if (s.normalize) s = s.normalize('NFD');
-    // remove diacritics
-    s = s.replace(/[\u0300-\u036f]/g, '');
-    return s;
   }
 
   return _this;

@@ -1,21 +1,9 @@
-import { beforeAll, beforeEach, afterEach } from 'vitest';
-import { use } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import 'happen';
+import { beforeAll } from 'vitest';
 import fetchMock from 'fetch-mock';
 import 'fake-indexeddb/auto';
 import envs from '../config/envs.js';
 
-use(sinonChai);
 
-declare var global: typeof globalThis;
-declare var jsdom: typeof globalThis;
-
-global.before = beforeEach;
-global.after = afterEach;
-global.fetchMock = fetchMock;
-global.sinon = sinon;
 global.VITEST = true;
 
 // create global variables for this data, to match what the esbuild config does
@@ -23,18 +11,6 @@ for (const [key, value] of Object.entries(envs)) {
   Reflect.set(global, key, JSON.parse(value));
 }
 
-// the 'happen' library explicitly references `window` when creating an event,
-// but we need to use jsdom's window, so we have to patch initEvent.
-const { initMouseEvent } = MouseEvent.prototype;
-MouseEvent.prototype.initMouseEvent = function (...args) {
-  args[3] = jsdom.window;
-  return initMouseEvent.apply(this, args);
-};
-const { initUIEvent } = UIEvent.prototype;
-UIEvent.prototype.initUIEvent = function (...args) {
-  args[3] = jsdom.window;
-  return initUIEvent.apply(this, args);
-};
 
 // must be imported after global envs are defined
 await import('../modules/id.js');

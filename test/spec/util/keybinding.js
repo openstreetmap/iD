@@ -1,9 +1,11 @@
+import { fn } from '@vitest/spy';
+
 describe('iD.utilKeybinding', function() {
     var keybinding, spy, input;
 
     beforeEach(function () {
         keybinding = iD.utilKeybinding('keybinding-test');
-        spy = sinon.spy();
+        spy = fn();
         input = d3.select('body')
             .append('input');
     });
@@ -15,87 +17,87 @@ describe('iD.utilKeybinding', function() {
 
     describe('#on', function () {
         it('returns self', function () {
-            expect(keybinding.on('a', spy)).to.equal(keybinding);
+            expect(keybinding.on('a', spy)).toEqual(keybinding);
         });
 
         it('adds a binding for the specified bare key', function () {
             d3.select(document).call(keybinding.on('A', spy));
 
-            happen.keydown(document, {keyCode: 65, metaKey: true});
-            expect(spy).not.to.have.been.called;
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'a', metaKey: true }));
+            expect(spy).not.toHaveBeenCalled();
 
-            happen.keydown(document, {keyCode: 65});
-            expect(spy).to.have.been.calledOnce;
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }));
+            expect(spy).toHaveBeenCalledOnce();
         });
 
         it('adds a binding for the specified key combination', function () {
             d3.select(document).call(keybinding.on('⌘+A', spy));
 
-            happen.keydown(document, {keyCode: 65});
-            expect(spy).not.to.have.been.called;
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }));
+            expect(spy).not.toHaveBeenCalled();
 
-            happen.keydown(document, {keyCode: 65, metaKey: true});
-            expect(spy).to.have.been.calledOnce;
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'a', metaKey: true }));
+            expect(spy).toHaveBeenCalledOnce();
         });
 
         it('matches the binding even when shift is present', function () {
             d3.select(document).call(keybinding.on('A', spy));
 
-            happen.keydown(document, {keyCode: 65, shiftKey: true});
-            expect(spy).to.have.been.calledOnce;
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'a', shiftKey: true }));
+            expect(spy).toHaveBeenCalledOnce();
         });
 
         it('matches shifted bindings before unshifted bindings', function () {
-            var spy2 = sinon.spy();
+            const spy2 = fn();
             d3.select(document).call(keybinding.on('A', spy2));
             d3.select(document).call(keybinding.on('⇧A', spy));
 
-            happen.keydown(document, {keyCode: 65, shiftKey: true});
-            expect(spy).to.have.been.calledOnce;
-            expect(spy2).not.to.have.been.called;
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'a', shiftKey: true }));
+            expect(spy).toHaveBeenCalledOnce();
+            expect(spy2).not.toHaveBeenCalled();
         });
 
         it('ignores alt and control if both are present (e.g. as AltGr) #4096', function () {
             d3.select(document).call(keybinding.on('A', spy));
 
-            happen.keydown(document, {keyCode: 65, altKey: true, ctrlKey: true});
-            expect(spy).to.have.been.calledOnce;
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'a', altKey: true, ctrlKey: true }));
+            expect(spy).toHaveBeenCalledOnce();
         });
 
         it('adds multiple bindings given an array of keys', function () {
             d3.select(document).call(keybinding.on(['A','B'], spy));
 
-            happen.keydown(document, {keyCode: 65});
-            expect(spy).to.have.been.calledOnce;
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }));
+            expect(spy).toHaveBeenCalledOnce();
 
-            happen.keydown(document, {keyCode: 66});
-            expect(spy).to.have.been.calledTwice;
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'b' }));
+            expect(spy).toHaveBeenCalledTimes(2);
         });
 
         it('does not dispatch when focus is in input elements by default', function () {
             d3.select(document).call(keybinding.on('A', spy));
 
-            happen.keydown(input.node(), {keyCode: 65});
-            expect(spy).not.to.have.been.called;
+            input.node().dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }));
+            expect(spy).not.toHaveBeenCalled();
         });
 
         it('dispatches when focus is in input elements when the capture flag was passed', function () {
             d3.select(document).call(keybinding.on('A', spy, true));
 
-            happen.keydown(input.node(), {keyCode: 65});
-            expect(spy).to.have.been.calledOnce;
+            input.node().dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }));
+            expect(spy).toHaveBeenCalledOnce();
         });
 
         it('resets bindings when keybinding.unbind is called', function () {
             d3.select(document).call(keybinding.on('A', spy));
-            happen.keydown(document, {keyCode: 65});
-            expect(spy).to.have.been.calledOnce;
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }));
+            expect(spy).toHaveBeenCalledOnce();
 
-            spy = sinon.spy();
+            const spy2 = fn();
             d3.select(document).call(keybinding.unbind);
-            d3.select(document).call(keybinding.on('A', spy));
-            happen.keydown(document, {keyCode: 65});
-            expect(spy).to.have.been.calledOnce;
+            d3.select(document).call(keybinding.on('A', spy2));
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }));
+            expect(spy2).toHaveBeenCalledOnce();
         });
 
     });

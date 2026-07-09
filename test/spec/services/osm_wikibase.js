@@ -1,13 +1,15 @@
+import { fn } from '@vitest/spy';
+import fetchMock from 'fetch-mock';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.serviceOsmWikibase', function () {
   var wikibase;
 
-  before(function () {
+  beforeEach(function () {
     iD.services.osmWikibase = iD.serviceOsmWikibase;
   });
 
-  after(function () {
+  afterEach(function () {
     delete iD.services.osmWikibase;
   });
 
@@ -265,7 +267,7 @@ describe('iD.serviceOsmWikibase', function () {
 
   describe('#getEntity', function () {
     it('calls the given callback with the results of the getEntity data item query', async () => {
-      var callback = sinon.spy();
+      const callback = fn();
       fetchMock.mock(/action=wbgetentities/, {
         body: JSON.stringify({
           entities: {
@@ -282,7 +284,7 @@ describe('iD.serviceOsmWikibase', function () {
       wikibase.getEntity({ key: 'amenity', value: 'parking', langCodes: ['fr'] }, callback);
 
       await setTimeout(50);
-      expect(parseQueryString(fetchMock.calls(/action=wbgetentities/)[0][0])).to.eql(
+      expect(parseQueryString(fetchMock.calls(/action=wbgetentities/)[0][0])).toEqual(
         {
           action: 'wbgetentities',
           sites: 'wiki',
@@ -293,7 +295,7 @@ describe('iD.serviceOsmWikibase', function () {
           format: 'json',
         }
       );
-      expect(callback).to.have.been.calledWith(null, {
+      expect(callback).toHaveBeenCalledWith(null, {
         key: keyData(),
         tag: tagData()
       });
@@ -303,26 +305,26 @@ describe('iD.serviceOsmWikibase', function () {
 
 
   it('creates correct sitelinks', function () {
-    expect(wikibase.toSitelink('amenity')).to.eql('Key:amenity');
-    expect(wikibase.toSitelink('amenity_')).to.eql('Key:amenity');
-    expect(wikibase.toSitelink('_amenity_')).to.eql('Key: amenity');
-    expect(wikibase.toSitelink('amenity or_not_')).to.eql('Key:amenity or not');
-    expect(wikibase.toSitelink('amenity', 'parking')).to.eql('Tag:amenity=parking');
-    expect(wikibase.toSitelink(' amenity_', '_parking_')).to.eql('Tag: amenity = parking');
-    expect(wikibase.toSitelink('amenity or_not', '_park ing_')).to.eql('Tag:amenity or not= park ing');
+    expect(wikibase.toSitelink('amenity')).toEqual('Key:amenity');
+    expect(wikibase.toSitelink('amenity_')).toEqual('Key:amenity');
+    expect(wikibase.toSitelink('_amenity_')).toEqual('Key: amenity');
+    expect(wikibase.toSitelink('amenity or_not_')).toEqual('Key:amenity or not');
+    expect(wikibase.toSitelink('amenity', 'parking')).toEqual('Tag:amenity=parking');
+    expect(wikibase.toSitelink(' amenity_', '_parking_')).toEqual('Tag: amenity = parking');
+    expect(wikibase.toSitelink('amenity or_not', '_park ing_')).toEqual('Tag:amenity or not= park ing');
   });
 
   it('gets correct value from entity', function () {
     wikibase.addLocale('de', 'Q6994');
     wikibase.addLocale('fr', 'Q7792');
-    expect(wikibase.claimToValue(tagData(), 'P4', 'en')).to.eql('Primary image.jpg');
-    expect(wikibase.claimToValue(keyData(), 'P6', 'en')).to.eql('Q15');
-    expect(wikibase.claimToValue(keyData(), 'P6', 'fr')).to.eql('Q15');
-    expect(wikibase.claimToValue(keyData(), 'P6', 'de')).to.eql('Q14');
+    expect(wikibase.claimToValue(tagData(), 'P4', 'en')).toEqual('Primary image.jpg');
+    expect(wikibase.claimToValue(keyData(), 'P6', 'en')).toEqual('Q15');
+    expect(wikibase.claimToValue(keyData(), 'P6', 'fr')).toEqual('Q15');
+    expect(wikibase.claimToValue(keyData(), 'P6', 'de')).toEqual('Q14');
   });
 
   it('gets monolingual value from entity as an object', function () {
-    expect(wikibase.monolingualClaimToValueObj(tagData(), 'P31')).to.eql({
+    expect(wikibase.monolingualClaimToValueObj(tagData(), 'P31')).toEqual({
       cs: 'Cs:Key:bridge:movable',
       de: 'DE:Key:bridge:movable',
       fr: 'FR:Key:bridge:movable',

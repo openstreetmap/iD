@@ -9,7 +9,7 @@ import { actionChangeMember } from '../../actions/change_member';
 import { actionDeleteMembers } from '../../actions/delete_members';
 
 import { modeSelect } from '../../modes/select';
-import { osmEntity, osmRelation } from '../../osm';
+import { osmIdManager, osmRelation } from '../../osm';
 import { getRelationColor, isColorValid } from '../../osm/tags';
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
@@ -32,13 +32,12 @@ export function uiSectionRawMembershipEditor(context) {
             var parents = getSharedParentRelations();
             var gt = parents.length > _maxMemberships ? '>' : '';
             var count = gt + parents.slice(0, _maxMemberships).length;
-            return t.append('inspector.title_count', { title: t('inspector.relations'), count: count });
+            return t.append('inspector.title_count', { title: t.append('inspector.relations'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
     var taginfo = services.taginfo;
     var nearbyCombo = uiCombobox(context, 'parent-relation')
-        .minItems(1)
         .fetcher(fetchNearbyRelations)
         .itemsMouseEnter(function(d3_event, d) {
             if (d.relation) utilHighlightEntities([d.relation.id], true, context);
@@ -113,7 +112,7 @@ export function uiSectionRawMembershipEditor(context) {
             membership = {
                 relation: relation,
                 members: [],
-                hash: osmEntity.key(relation)
+                hash: osmIdManager.key(relation)
             };
             for (index = 0; index < relation.members.length; index++) {
                 member = relation.members[index];
@@ -130,7 +129,7 @@ export function uiSectionRawMembershipEditor(context) {
                         membership = {
                             relation: relation,
                             members: [],
-                            hash: osmEntity.key(relation)
+                            hash: osmIdManager.key(relation)
                         };
                     }
                 }
@@ -257,7 +256,7 @@ export function uiSectionRawMembershipEditor(context) {
             context.validator().validate();
 
         } else {
-            var relation = osmRelation();
+            var relation = new osmRelation();
             context.perform(
                 actionAddEntity(relation),
                 actionAddMembers(relation.id, _entityIDs, role),
@@ -464,9 +463,12 @@ export function uiSectionRawMembershipEditor(context) {
             const matched = presetManager.match(d.relation, context.graph());
             if (matched.suggestion) {
                 // if matching an NSI preset: append icon
-                d3_select(this)
-                    .append('img')
+                const img = d3_select(this)
+                    .append('img');
+                img
                     .classed('member-entity-icon', true)
+                    .on('load', () => img.classed('hide', false))
+                    .on('error', () => img.classed('hide', true))
                     .attr('src', matched.imageURL);
             }
         });

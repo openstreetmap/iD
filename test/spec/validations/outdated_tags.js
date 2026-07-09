@@ -4,11 +4,13 @@ import { setTimeout } from 'node:timers/promises';
 describe('iD.validations.outdated_tags', function () {
     var context;
 
-    before(function() {
+    beforeEach(() => {
         iD.fileFetcher.cache().deprecated = [
           { old: { building: 'roof' }, replace: { building: 'roof', layer: '1' } },
           { old: { highway: 'no' } },
-          { old: { highway: 'ford' }, replace: { ford: '*' } }
+          { old: { highway: 'ford' }, replace: { ford: '*' } },
+          { old: { amenity: 'bench', capacity: '*' }, replace: { amenity: 'bench', seats: '$1' } },
+          { old: { oldKey1: '*', oldKey2: '*' }, replace: { newKey1: '$1', newKey2: '$2' } }
         ];
         iD.services.nsi = {
             status: () => 'ok',
@@ -26,7 +28,7 @@ describe('iD.validations.outdated_tags', function () {
         };
     });
 
-    after(function() {
+    afterEach(() => {
         iD.fileFetcher.cache().deprecated = [];
         delete iD.services.nsi;
     });
@@ -37,9 +39,9 @@ describe('iD.validations.outdated_tags', function () {
 
 
     function createWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = new iD.osmNode({id: 'n-2', loc: [4,5]});
+        var w = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -49,11 +51,11 @@ describe('iD.validations.outdated_tags', function () {
     }
 
     function createRelation(wayTags, relationTags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3', 'n-1'], tags: wayTags});
-        var r = iD.osmRelation({id: 'r-1', members: [{id: 'w-1'}], tags: relationTags});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = new iD.osmNode({id: 'n-2', loc: [4,5]});
+        var n3 = new iD.osmNode({id: 'n-3', loc: [5,5]});
+        var w = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3', 'n-1'], tags: wayTags});
+        var r = new iD.osmRelation({id: 'r-1', members: [{id: 'w-1'}], tags: relationTags});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -78,7 +80,7 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('has no errors on good tags', async () => {
@@ -86,7 +88,7 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags deprecated tag with replacement', async () => {
@@ -94,13 +96,13 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('outdated_tags');
-        expect(issue.subtype).to.eql('deprecated_tags');
-        expect(issue.severity).to.eql('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('outdated_tags');
+        expect(issue.subtype).toEqual('deprecated_tags');
+        expect(issue.severity).toEqual('warning');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags deprecated tag with no replacement', async () => {
@@ -108,13 +110,51 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('outdated_tags');
-        expect(issue.subtype).to.eql('deprecated_tags');
-        expect(issue.severity).to.eql('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('outdated_tags');
+        expect(issue.subtype).toEqual('deprecated_tags');
+        expect(issue.severity).toEqual('warning');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
+    });
+
+    it('flags deprecated tag with transfer replacement', async () => {
+        createWay({'amenity': 'bench', 'capacity': '4'});
+        var validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).toHaveLength(1);
+        var issue = issues[0];
+        expect(issue.type).toEqual('outdated_tags');
+        expect(issue.subtype).toEqual('deprecated_tags');
+        expect(issue.severity).toEqual('warning');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
+        issues[0].dynamicFixes()[0].onClick(context);
+        expect(context.graph().entity('w-1').tags).toStrictEqual({
+            amenity: 'bench',
+            seats: '4'
+        });
+    });
+
+    it('flags deprecated tag with multiple transfer tags', async () => {
+        createWay({'oldKey1': 'foo', 'oldKey2': 'bar'});
+        var validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).toHaveLength(1);
+        var issue = issues[0];
+        expect(issue.type).toEqual('outdated_tags');
+        expect(issue.subtype).toEqual('deprecated_tags');
+        expect(issue.severity).toEqual('warning');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
+        issues[0].dynamicFixes()[0].onClick(context);
+        expect(context.graph().entity('w-1').tags).toStrictEqual({
+            newKey1: 'foo',
+            newKey2: 'bar'
+        });
     });
 
     it('ignores way with no relations', async () => {
@@ -122,7 +162,7 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores multipolygon tagged on the relation', async () => {
@@ -130,7 +170,7 @@ describe('iD.validations.outdated_tags', function () {
         var validator = iD.validationOutdatedTags(context);
         await setTimeout(20);
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags suggestions from NSI', async () => {

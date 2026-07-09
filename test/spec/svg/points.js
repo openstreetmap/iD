@@ -15,12 +15,12 @@ describe('iD.svgPoints', function () {
 
 
     it('adds tag classes', function () {
-        var point = iD.osmNode({tags: {amenity: 'cafe'}, loc: [0, 0]});
-        var graph = iD.coreGraph([point]);
+        var point = new iD.osmNode({tags: {amenity: 'cafe'}, loc: [0, 0]});
+        var graph = new iD.coreGraph([point]);
 
         surface.call(iD.svgPoints(projection, context), graph, [point]);
 
-        expect(surface.select('.point').classed('tag-amenity')).to.be.true;
-        expect(surface.select('.point').classed('tag-amenity-cafe')).to.be.true;
+        expect(surface.select('.point').classed('tag-amenity')).toBe(true);
+        expect(surface.select('.point').classed('tag-amenity-cafe')).toBe(true);
     });
 });

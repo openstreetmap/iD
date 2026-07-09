@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
 import { t, localizer } from '../core/localizer';
-import { locationManager } from '../core/LocationManager';
+import { locationManager } from '../core/location_manager';
 import { svgIcon } from '../svg/icon';
 import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo/extent';
@@ -39,7 +39,7 @@ export function uiField(context, presetField, entityIDs, options) {
 
     var _locked = false;
     var _lockedTip = uiTooltip()
-        .title(() => t.append('inspector.lock.suggestion', { label: field.title }))
+        .title(() => t.append('inspector.lock.suggestion', { label: field.label() }))
         .placement('bottom');
 
     // only create the fields that are actually being shown
@@ -65,16 +65,8 @@ export function uiField(context, presetField, entityIDs, options) {
     }
 
 
-    function allKeys() {
-        let keys = field.keys || [field.key];
-        if (field.type === 'directionalCombo' && field.key) {
-            // directionalCombo fields can have an additional key describing the for
-            // cases where both directions share a "common" value.
-            // The field also support *:both. The preset decides which field to write to.
-            const baseKey = field.key.replace(/:both$/, '');
-            keys = keys.concat(baseKey, `${baseKey}:both`);
-        }
-        return keys;
+    function allKeys(tags) {
+        return field.allKeys(tags);
     }
 
 
@@ -83,15 +75,23 @@ export function uiField(context, presetField, entityIDs, options) {
         return entityIDs.some(function(entityID) {
             var original = context.graph().base().entities[entityID];
             var latest = context.graph().entity(entityID);
-            return allKeys().some(function(key) {
-                return original ? latest.tags[key] !== original.tags[key] : latest.tags[key];
-            });
+            if (original) {
+                const originalKeys = allKeys(original.tags);
+                const latestKeys = allKeys(_tags);
+                return latestKeys.concat(originalKeys).some(function (key) {
+                    return latest.tags[key] !== original.tags[key];
+                });
+            } else {
+                return allKeys(_tags).some(function (key) {
+                    return !!latest.tags[key];
+                });
+            }
         });
     }
 
 
     function tagsContainFieldKey() {
-        return allKeys().some(function(key) {
+        return allKeys(_tags).some(function(key) {
             if (field.type === 'multiCombo') {
                 for (var tagKey in _tags) {
                     if (tagKey.indexOf(key) === 0) {
@@ -119,7 +119,23 @@ export function uiField(context, presetField, entityIDs, options) {
         d3_event.preventDefault();
         if (!entityIDs || _locked) return;
 
-        dispatch.call('revert', d, allKeys());
+        let keys = allKeys(_tags);
+
+        if (entityIDs) {
+            for (let i = 0; i < entityIDs.length; i++) {
+                const entityID = entityIDs[i];
+                const original = context.graph().base().entities[entityID];
+                if (original) {
+                    allKeys(original.tags).forEach(function(key) {
+                        if (keys.indexOf(key) === -1) {
+                            keys.push(key);
+                        }
+                    });
+                }
+            }
+        }
+
+        dispatch.call('revert', d, keys);
     }
 
 
@@ -129,7 +145,7 @@ export function uiField(context, presetField, entityIDs, options) {
         if (_locked) return;
 
         var t = {};
-        allKeys().forEach(function(key) {
+        allKeys(_tags).forEach(function(key) {
             t[key] = undefined;
         });
 
@@ -335,7 +351,7 @@ export function uiField(context, presetField, entityIDs, options) {
 
         if (entityIDs && _entityExtent && field.locationSetID) {   // is field allowed in this location?
             var validHere = locationManager.locationSetsAt(_entityExtent.center());
-            if (!validHere[field.locationSetID]) return false;
+            if (!validHere.has(field.locationSetID)) return false;
         }
 
         var prerequisiteTag = field.prerequisiteTag;

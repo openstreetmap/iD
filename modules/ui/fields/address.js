@@ -321,7 +321,6 @@ export function uiFieldAddress(field, context) {
 
             d3_select(this)
                 .call(uiCombobox(context, `address-${d.isAutoStreetPlace ? 'street-place' : d.id}`)
-                    .minItems(1)
                     .caseSensitive(true)
                     .fetcher(function(typedValue, callback) {
                         typedValue = typedValue.toLowerCase();

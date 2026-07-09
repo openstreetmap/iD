@@ -7,13 +7,13 @@ describe('iD.svgIcon', function () {
 
     it('creates a generic SVG icon', function () {
         selection.call(iD.svgIcon('#iD-icon-bug'));
-        expect(selection.select('svg').classed('icon')).to.be.true;
-        expect(selection.select('use').attr('xlink:href')).to.eql('#iD-icon-bug');
+        expect(selection.select('svg').classed('icon')).toBe(true);
+        expect(selection.select('use').attr('xlink:href')).toEqual('#iD-icon-bug');
     });
 
     it('classes the \'svg\' and \'use\' elements', function () {
         selection.call(iD.svgIcon('#iD-icon-bug', 'svg-class', 'use-class'));
-        expect(selection.select('svg').classed('icon svg-class')).to.be.true;
-        expect(selection.select('use').classed('use-class')).to.be.true;
+        expect(selection.select('svg').classed('icon svg-class')).toBe(true);
+        expect(selection.select('use').classed('use-class')).toBe(true);
     });
 });

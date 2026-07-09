@@ -1,4 +1,4 @@
-import { locationManager } from '../core/LocationManager';
+import { locationManager } from '../core/location_manager';
 import { utilArrayUniq } from '../util/array';
 import { utilEditDistance } from '../util';
 
@@ -65,6 +65,14 @@ export function presetCollection(collection) {
       return index === 0;
     }
 
+    function presetInSearchTerm(presetText) {
+      if (presetText.length === 0) {
+        return false;
+      }
+      const index = value.indexOf(presetText.toLowerCase().trim());
+      return index === 0 || value[index - 1] === ' ';
+    }
+
     function sortPresets(nameProp, aliasesProp) {
       return function sortNames(a, b) {
         let aCompare = a[nameProp]();
@@ -102,7 +110,7 @@ export function presetCollection(collection) {
     let pool = _this.collection;
     if (Array.isArray(loc)) {
       const validHere = locationManager.locationSetsAt(loc);
-      pool = pool.filter(a => !a.locationSetID || validHere[a.locationSetID]);
+      pool = pool.filter(a => !a.locationSetID || validHere.has(a.locationSetID));
     }
 
     const searchable = pool.filter(a => a.searchable !== false && a.suggestion !== true);
@@ -168,6 +176,13 @@ export function presetCollection(collection) {
           Object.keys(a.tags).some(key => leading(key + '=' + a.tags[key]))));
     }
 
+    // also match cases where preset string is inside searched term
+    const presetsInValues = searchable
+      .filter(a => ([a.searchName()].concat(a.searchAliases(), a.terms(), a.searchNameStripped(), a.searchAliasesStripped())).some(presetInSearchTerm));
+
+    const presetsInValuesViaSuggested = suggestions
+      .filter(a => ([a.searchName()].concat(a.searchAliases(), a.terms(), a.searchNameStripped(), a.searchAliasesStripped())).some(presetInSearchTerm));
+
     let results = leadingNames.concat(
       leadingSuggestions,
       leadingNamesStripped,
@@ -178,7 +193,9 @@ export function presetCollection(collection) {
       similarName,
       similarSuggestions,
       similarTerms,
-      leadingTagKeyValues
+      leadingTagKeyValues,
+      presetsInValues,
+      presetsInValuesViaSuggested
     ).slice(0, MAXRESULTS - 1);
 
     if (geometry) {

@@ -183,7 +183,6 @@ export function svgPath(projection, graph, isArea) {
 
 export function svgPointTransform(projection) {
     var svgpoint = function(entity) {
-        // http://jsperf.com/short-array-join
         var pt = projection(entity.loc);
         return 'translate(' + pt[0] + ',' + pt[1] + ')';
     };

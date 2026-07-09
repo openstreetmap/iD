@@ -14,6 +14,6 @@ describe('iD.behaviorLasso', function () {
     });
 
     it('can be initialized', function () {
-        expect(context.surface().call(lasso)).to.be.ok;
+        expect(context.surface().call(lasso)).toBeTruthy();
     });
 });

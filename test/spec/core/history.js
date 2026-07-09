@@ -1,3 +1,4 @@
+import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 import { clear } from 'idb-keyval';
 import { asyncPrefs } from '../../../modules/core/preferences';
@@ -7,135 +8,134 @@ describe('iD.coreHistory', function () {
     var actionNoop = function(g) { return g; };
     var actionAddNode = function (nodeID) {
         return function(g) {
-            return g.replace(iD.osmNode({ id: nodeID }));
+            return g.replace(new iD.osmNode({ id: nodeID }));
         };
     };
 
     beforeEach(function () {
         context = iD.coreContext().assetPath('../dist/').init();
         history = context.history();
-        spy = sinon.spy();
+        spy = fn();
     });
 
     describe('#graph', function () {
         it('returns the current graph', function () {
-            expect(history.graph()).to.be.an.instanceOf(iD.coreGraph);
+            expect(history.graph()).toBeInstanceOf(iD.coreGraph);
         });
     });
 
     describe('#merge', function () {
         it('merges the entities into all graph versions', function () {
-            var n = iD.osmNode({id: 'n'});
+            var n = new iD.osmNode({id: 'n'});
             history.merge([n]);
-            expect(history.graph().entity('n')).to.equal(n);
+            expect(history.graph().entity('n')).toEqual(n);
         });
 
         it('emits a merge event with the new entities', function () {
-            var n = iD.osmNode({id: 'n'});
+            var n = new iD.osmNode({id: 'n'});
             history.on('merge', spy);
             history.merge([n]);
-            expect(spy).to.have.been.calledWith([n]);
+            expect(spy).toHaveBeenCalledWith([n]);
         });
     });
 
     describe('#perform', function () {
         it('returns a difference', function () {
-            expect(history.perform(actionNoop).changes()).to.eql({});
+            expect(history.perform(actionNoop).changes()).toEqual({});
         });
 
         it('updates the graph', function () {
-            var node = iD.osmNode();
+            var node = new iD.osmNode();
             history.perform(function (graph) { return graph.replace(node); });
-            expect(history.graph().entity(node.id)).to.equal(node);
+            expect(history.graph().entity(node.id)).toEqual(node);
         });
 
         it('pushes an undo annotation', function () {
             history.perform(actionNoop, 'annotation');
-            expect(history.undoAnnotation()).to.equal('annotation');
+            expect(history.undoAnnotation()).toEqual('annotation');
         });
 
         it('emits a change event', function () {
             history.on('change', spy);
             var difference = history.perform(actionNoop);
-            expect(spy).to.have.been.calledWith(difference);
-            expect(spy.callCount).to.eql(1);
+            expect(spy).toHaveBeenCalledExactlyOnceWith(difference);
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.coreGraph());
-            var action2 = sinon.stub().returns(iD.coreGraph());
+            const action1 = fn().mockReturnValue(new iD.coreGraph());
+            const action2 = fn().mockReturnValue(new iD.coreGraph());
             history.perform(action1, action2, 'annotation');
-            expect(action1).to.have.been.called;
-            expect(action2).to.have.been.called;
-            expect(history.undoAnnotation()).to.equal('annotation');
+            expect(action1).toHaveBeenCalled();
+            expect(action2).toHaveBeenCalled();
+            expect(history.undoAnnotation()).toEqual('annotation');
         });
 
         it('performs transitionable actions in a transition', async () => {
-            var action1 = function() { return iD.coreGraph(); };
+            var action1 = function() { return new iD.coreGraph(); };
             action1.transitionable = true;
             history.on('change', spy);
             await history.perform(action1);
             await setTimeout(300);
-            expect(spy.callCount).to.be.above(2);
+            expect(spy.mock.calls.length).toBeGreaterThan(2);
         });
     });
 
     describe('#replace', function () {
         it('returns a difference', function () {
-            expect(history.replace(actionNoop).changes()).to.eql({});
+            expect(history.replace(actionNoop).changes()).toEqual({});
         });
 
         it('updates the graph', function () {
-            var node = iD.osmNode();
+            var node = new iD.osmNode();
             history.replace(function (graph) { return graph.replace(node); });
-            expect(history.graph().entity(node.id)).to.equal(node);
+            expect(history.graph().entity(node.id)).toEqual(node);
         });
 
         it('replaces the undo annotation', function () {
             history.perform(actionNoop, 'annotation1');
             history.replace(actionNoop, 'annotation2');
-            expect(history.undoAnnotation()).to.equal('annotation2');
+            expect(history.undoAnnotation()).toEqual('annotation2');
         });
 
         it('emits a change event', function () {
             history.on('change', spy);
             var difference = history.replace(actionNoop);
-            expect(spy).to.have.been.calledWith(difference);
+            expect(spy).toHaveBeenCalledWith(difference);
         });
 
         it('performs multiple actions', function () {
-            var action1 = sinon.stub().returns(iD.coreGraph());
-            var action2 = sinon.stub().returns(iD.coreGraph());
+            const action1 = fn().mockReturnValue(new iD.coreGraph());
+            const action2 = fn().mockReturnValue(new iD.coreGraph());
             history.replace(action1, action2, 'annotation');
-            expect(action1).to.have.been.called;
-            expect(action2).to.have.been.called;
-            expect(history.undoAnnotation()).to.equal('annotation');
+            expect(action1).toHaveBeenCalled();
+            expect(action2).toHaveBeenCalled();
+            expect(history.undoAnnotation()).toEqual('annotation');
         });
     });
 
     describe('#pop', function () {
         it('returns a difference', function () {
             history.perform(actionNoop, 'annotation');
-            expect(history.pop().changes()).to.eql({});
+            expect(history.pop().changes()).toEqual({});
         });
 
         it('updates the graph', function () {
             history.perform(actionNoop, 'annotation');
             history.pop();
-            expect(history.undoAnnotation()).to.be.undefined;
+            expect(history.undoAnnotation()).toBeUndefined();
         });
 
         it('does not push the redo stack', function () {
             history.perform(actionNoop, 'annotation');
             history.pop();
-            expect(history.redoAnnotation()).to.be.undefined;
+            expect(history.redoAnnotation()).toBeUndefined();
         });
 
         it('emits a change event', function () {
             history.perform(actionNoop);
             history.on('change', spy);
             var difference = history.pop();
-            expect(spy).to.have.been.calledWith(difference);
+            expect(spy).toHaveBeenCalledWith(difference);
         });
 
         it('pops n times', function () {
@@ -143,7 +143,7 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop, 'annotation2');
             history.perform(actionNoop, 'annotation3');
             history.pop(2);
-            expect(history.undoAnnotation()).to.equal('annotation1');
+            expect(history.undoAnnotation()).toEqual('annotation1');
         });
 
         it('pops 0 times', function () {
@@ -151,7 +151,7 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop, 'annotation2');
             history.perform(actionNoop, 'annotation3');
             history.pop(0);
-            expect(history.undoAnnotation()).to.equal('annotation3');
+            expect(history.undoAnnotation()).toEqual('annotation3');
         });
 
         it('pops 1 time if argument is invalid', function () {
@@ -159,47 +159,47 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop, 'annotation2');
             history.perform(actionNoop, 'annotation3');
             history.pop('foo');
-            expect(history.undoAnnotation()).to.equal('annotation2');
+            expect(history.undoAnnotation()).toEqual('annotation2');
             history.pop(-1);
-            expect(history.undoAnnotation()).to.equal('annotation1');
+            expect(history.undoAnnotation()).toEqual('annotation1');
         });
     });
 
     describe('#undo', function () {
         it('returns a difference', function () {
-            expect(history.undo().changes()).to.eql({});
+            expect(history.undo().changes()).toEqual({});
         });
 
         it('pops the undo stack', function () {
             history.perform(actionNoop, 'annotation');
             history.undo();
-            expect(history.undoAnnotation()).to.be.undefined;
+            expect(history.undoAnnotation()).toBeUndefined();
         });
 
         it('pushes the redo stack', function () {
             history.perform(actionNoop, 'annotation');
             history.undo();
-            expect(history.redoAnnotation()).to.equal('annotation');
+            expect(history.redoAnnotation()).toEqual('annotation');
         });
 
         it('emits an undone event', function () {
             history.perform(actionNoop);
             history.on('undone', spy);
             history.undo();
-            expect(spy).to.have.been.called;
+            expect(spy).toHaveBeenCalled();
         });
 
         it('emits a change event', function () {
             history.perform(actionNoop);
             history.on('change', spy);
             var difference = history.undo();
-            expect(spy).to.have.been.calledWith(difference);
+            expect(spy).toHaveBeenCalledWith(difference);
         });
     });
 
     describe('#redo', function () {
         it('returns a difference', function () {
-            expect(history.redo().changes()).to.eql({});
+            expect(history.redo().changes()).toEqual({});
         });
 
         it('does redo into an annotated state', function () {
@@ -207,8 +207,8 @@ describe('iD.coreHistory', function () {
             history.on('redone', spy);
             history.undo();
             history.redo();
-            expect(history.undoAnnotation()).to.equal('annotation');
-            expect(spy).to.have.been.called;
+            expect(history.undoAnnotation()).toEqual('annotation');
+            expect(spy).toHaveBeenCalled();
         });
 
         it('does not redo into a non-annotated state', function () {
@@ -216,7 +216,7 @@ describe('iD.coreHistory', function () {
             history.on('redone', spy);
             history.undo();
             history.redo();
-            expect(spy).not.to.have.been.called;
+            expect(spy).not.toHaveBeenCalled();
         });
 
         it('emits a change event', function () {
@@ -224,7 +224,7 @@ describe('iD.coreHistory', function () {
             history.undo();
             history.on('change', spy);
             var difference = history.redo();
-            expect(spy).to.have.been.calledWith(difference);
+            expect(spy).toHaveBeenCalledWith(difference);
         });
     });
 
@@ -236,18 +236,18 @@ describe('iD.coreHistory', function () {
             history.pauseChangeDispatch();
 
             history.perform(actionNoop, 'perform');
-            expect(spy).to.have.not.been.called;
+            expect(spy).not.toHaveBeenCalled();
             history.replace(actionNoop, 'replace');
-            expect(spy).to.have.not.been.called;
+            expect(spy).not.toHaveBeenCalled();
             history.undo();
-            expect(spy).to.have.not.been.called;
+            expect(spy).not.toHaveBeenCalled();
             history.redo();
-            expect(spy).to.have.not.been.called;
+            expect(spy).not.toHaveBeenCalled();
             history.pop();
-            expect(spy).to.have.not.been.called;
+            expect(spy).not.toHaveBeenCalled();
 
             var diff = history.resumeChangeDispatch();
-            expect(spy).to.have.been.calledOnceWith(diff);
+            expect(spy).toHaveBeenCalledExactlyOnceWith(diff);
         });
 
         it('does nothing if resume called before pause', function() {
@@ -255,7 +255,7 @@ describe('iD.coreHistory', function () {
             history.on('change', spy);
 
             history.resumeChangeDispatch();
-            expect(spy).to.have.not.been.called;
+            expect(spy).not.toHaveBeenCalled();
         });
 
         it('uses earliest difference if pause called multiple times', function() {
@@ -269,43 +269,43 @@ describe('iD.coreHistory', function () {
             history.perform(actionAddNode('b'), 'perform');
 
             var diff = history.resumeChangeDispatch();
-            expect(spy).to.have.been.calledOnceWith(diff);
-            expect(diff.changes()).to.include.keys(['a', 'b']);
+            expect(spy).toHaveBeenCalledExactlyOnceWith(diff);
+            expect(Object.keys(diff.changes())).toEqual(expect.arrayContaining(['a', 'b']));
         });
     });
 
     describe('#changes', function () {
         it('includes created entities', function () {
-            var node = iD.osmNode();
+            var node = new iD.osmNode();
             history.perform(function (graph) { return graph.replace(node); });
-            expect(history.changes().created).to.eql([node]);
+            expect(history.changes().created).toEqual([node]);
         });
 
         it('includes modified entities', function () {
-            var node1 = iD.osmNode({id: 'n1'});
+            var node1 = new iD.osmNode({id: 'n1'});
             var node2 = node1.update({ tags: { yes: 'no' } });
             history.merge([node1]);
             history.perform(function (graph) { return graph.replace(node2); });
-            expect(history.changes().modified).to.eql([node2]);
+            expect(history.changes().modified).toEqual([node2]);
         });
 
         it('includes deleted entities', function () {
-            var node = iD.osmNode({id: 'n1'});
+            var node = new iD.osmNode({id: 'n1'});
             history.merge([node]);
             history.perform(function (graph) { return graph.remove(node); });
-            expect(history.changes().deleted).to.eql([node]);
+            expect(history.changes().deleted).toEqual([node]);
         });
     });
 
     describe('#hasChanges', function() {
         it('is true when any of change\'s values are nonempty', function() {
-            var node = iD.osmNode();
+            var node = new iD.osmNode();
             history.perform(function (graph) { return graph.replace(node); });
-            expect(history.hasChanges()).to.eql(true);
+            expect(history.hasChanges()).toEqual(true);
         });
 
         it('is false when all of change\'s values are empty', function() {
-            expect(history.hasChanges()).to.eql(false);
+            expect(history.hasChanges()).toEqual(false);
         });
     });
 
@@ -315,14 +315,14 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop, 'annotation');
             history.undo();
             history.reset();
-            expect(history.undoAnnotation()).to.be.undefined;
-            expect(history.redoAnnotation()).to.be.undefined;
+            expect(history.undoAnnotation()).toBeUndefined();
+            expect(history.redoAnnotation()).toBeUndefined();
         });
 
         it('emits a change event', function () {
             history.on('change', spy);
             history.reset();
-            expect(spy).to.have.been.called;
+            expect(spy).toHaveBeenCalled();
         });
     });
 
@@ -340,19 +340,19 @@ describe('iD.coreHistory', function () {
             history.perform(actionNoop, 'annotation8');
 
             history.reset('check1');
-            expect(history.undoAnnotation()).to.equal('annotation3');
+            expect(history.undoAnnotation()).toEqual('annotation3');
 
             history.reset('check2');
-            expect(history.undoAnnotation()).to.equal('annotation5');
+            expect(history.undoAnnotation()).toEqual('annotation5');
 
             history.reset('check1');
-            expect(history.undoAnnotation()).to.equal('annotation3');
+            expect(history.undoAnnotation()).toEqual('annotation3');
         });
 
         it('emits a change event', function () {
             history.on('change', spy);
             history.reset();
-            expect(spy).to.have.been.called;
+            expect(spy).toHaveBeenCalled();
         });
     });
 
@@ -360,14 +360,14 @@ describe('iD.coreHistory', function () {
         it('doesn\'t generate unsaveable changes', function() {
             history.perform(actionAddNode('n-1'));
             history.perform(iD.actionDeleteNode('n-1'));
-            expect(history.toJSON()).to.be.not.ok;
+            expect(history.toJSON()).toBeFalsy();
         });
 
         it('generates v3 JSON', function() {
-            var node_1 = iD.osmNode({id: 'n-1'});
-            var node1 = iD.osmNode({id: 'n1'});
-            var node2 = iD.osmNode({id: 'n2'});
-            var node3 = iD.osmNode({id: 'n3'});
+            var node_1 = new iD.osmNode({id: 'n-1'});
+            var node1 = new iD.osmNode({id: 'n1'});
+            var node2 = new iD.osmNode({id: 'n2'});
+            var node3 = new iD.osmNode({id: 'n3'});
             history.merge([node1, node2, node3]);
             history.perform(iD.actionAddEntity(node_1));           // addition
             history.perform(iD.actionChangeTags('n2', {k: 'v'}));  // modification
@@ -376,16 +376,16 @@ describe('iD.coreHistory', function () {
             var json = history.toJSON();
             var node2_upd = node2.update({tags: {k: 'v'}});
 
-            expect(json.version).to.eql(3);
-            expect(json.entities).to.deep.own.include(node_1);
-            expect(json.entities).to.not.include(node1);
-            expect(json.entities).to.deep.own.include(node2_upd);
-            expect(json.entities).to.not.include(node3);
+            expect(json.version).toEqual(3);
+            expect(json.entities).toContainEqual(expect.objectContaining(node_1));
+            expect(json.entities).not.toContain(node1);
+            expect(json.entities).toContainEqual(expect.objectContaining(node2_upd));
+            expect(json.entities).not.toContain(node3);
 
-            expect(json.baseEntities).to.not.include(node_1);
-            expect(json.baseEntities).to.not.include(node1);
-            expect(json.baseEntities).to.deep.own.include(node2);
-            expect(json.baseEntities).to.deep.own.include(node3);
+            expect(json.baseEntities).not.toContain(node_1);
+            expect(json.baseEntities).not.toContain(node1);
+            expect(json.baseEntities).toContainEqual(expect.objectContaining(node2));
+            expect(json.baseEntities).toContainEqual(expect.objectContaining(node3));
         });
     });
 
@@ -400,10 +400,10 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
-            expect(history.undoAnnotation()).to.eql('Added a point.');
-            expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(history.graph().entity('n-1')).toEqual(new iD.osmNode({id: 'n-1', loc: [1, 2]}));
+            expect(history.undoAnnotation()).toEqual('Added a point.');
+            expect(history.imageryUsed()).toEqual(['Bing']);
+            expect(iD.osmIdManager.next).toEqual({node: -2, way: -1, relation: -1});
         });
 
         it('restores from v1 JSON (modification)', function() {
@@ -417,10 +417,10 @@ describe('iD.coreHistory', function () {
                 'index': 2
             };
             history.fromJSON(json);
-            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [2, 3], v: 1}));
-            expect(history.undoAnnotation()).to.eql('Moved a point.');
-            expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(history.graph().entity('n-1')).toEqual(new iD.osmNode({id: 'n-1', loc: [2, 3], v: 1}));
+            expect(history.undoAnnotation()).toEqual('Moved a point.');
+            expect(history.imageryUsed()).toEqual(['Bing']);
+            expect(iD.osmIdManager.next).toEqual({node: -2, way: -1, relation: -1});
         });
 
         it('restores from v1 JSON (deletion)', function() {
@@ -433,11 +433,11 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            history.merge([iD.osmNode({id: 'n1'})]);
-            expect(history.graph().hasEntity('n1')).to.be.undefined;
-            expect(history.undoAnnotation()).to.eql('Deleted a point.');
-            expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -1, way: -2, relation: -3});
+            history.merge([new iD.osmNode({id: 'n1'})]);
+            expect(history.graph().hasEntity('n1')).toBeUndefined();
+            expect(history.undoAnnotation()).toEqual('Deleted a point.');
+            expect(history.imageryUsed()).toEqual(['Bing']);
+            expect(iD.osmIdManager.next).toEqual({node: -1, way: -2, relation: -3});
         });
 
         it('restores from v2 JSON (creation)', function() {
@@ -454,11 +454,11 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
-            expect(history.undoAnnotation()).to.eql('Added a point.');
-            expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
-            expect(history.difference().created().length).to.eql(1);
+            expect(history.graph().entity('n-1')).toEqual(new iD.osmNode({id: 'n-1', loc: [1, 2]}));
+            expect(history.undoAnnotation()).toEqual('Added a point.');
+            expect(history.imageryUsed()).toEqual(['Bing']);
+            expect(iD.osmIdManager.next).toEqual({node: -2, way: -1, relation: -1});
+            expect(history.difference().created().length).toEqual(1);
         });
 
         it('restores from v2 JSON (modification)', function() {
@@ -475,12 +475,12 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            history.merge([iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
-            expect(history.graph().entity('n1')).to.eql(iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
-            expect(history.undoAnnotation()).to.eql('Moved a point.');
-            expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
-            expect(history.difference().modified().length).to.eql(1);
+            history.merge([new iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
+            expect(history.graph().entity('n1')).toEqual(new iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
+            expect(history.undoAnnotation()).toEqual('Moved a point.');
+            expect(history.imageryUsed()).toEqual(['Bing']);
+            expect(iD.osmIdManager.next).toEqual({node: -2, way: -1, relation: -1});
+            expect(history.difference().modified().length).toEqual(1);
         });
 
         it('restores from v2 JSON (deletion)', function() {
@@ -495,12 +495,12 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            history.merge([iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
-            expect(history.graph().hasEntity('n1')).to.be.undefined;
-            expect(history.undoAnnotation()).to.eql('Deleted a point.');
-            expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -1, way: -2, relation: -3});
-            expect(history.difference().deleted().length).to.eql(1);
+            history.merge([new iD.osmNode({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
+            expect(history.graph().hasEntity('n1')).toBeUndefined();
+            expect(history.undoAnnotation()).toEqual('Deleted a point.');
+            expect(history.imageryUsed()).toEqual(['Bing']);
+            expect(iD.osmIdManager.next).toEqual({node: -1, way: -2, relation: -3});
+            expect(history.difference().deleted().length).toEqual(1);
         });
 
         it('restores from v3 JSON (creation)', function() {
@@ -518,11 +518,11 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
-            expect(history.undoAnnotation()).to.eql('Added a point.');
-            expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
-            expect(history.difference().created().length).to.eql(1);
+            expect(history.graph().entity('n-1')).toEqual(new iD.osmNode({id: 'n-1', loc: [1, 2]}));
+            expect(history.undoAnnotation()).toEqual('Added a point.');
+            expect(history.imageryUsed()).toEqual(['Bing']);
+            expect(iD.osmIdManager.next).toEqual({node: -2, way: -1, relation: -1});
+            expect(history.difference().created().length).toEqual(1);
         });
 
         it('restores from v3 JSON (modification)', function() {
@@ -540,11 +540,11 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            expect(history.graph().entity('n1')).to.eql(iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
-            expect(history.undoAnnotation()).to.eql('Moved a point.');
-            expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
-            expect(history.difference().modified().length).to.eql(1);
+            expect(history.graph().entity('n1')).toEqual(new iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
+            expect(history.undoAnnotation()).toEqual('Moved a point.');
+            expect(history.imageryUsed()).toEqual(['Bing']);
+            expect(iD.osmIdManager.next).toEqual({node: -2, way: -1, relation: -1});
+            expect(history.difference().modified().length).toEqual(1);
         });
 
         it('restores from v3 JSON (deletion)', function() {
@@ -560,11 +560,11 @@ describe('iD.coreHistory', function () {
                 'index': 1
             };
             history.fromJSON(json);
-            expect(history.graph().hasEntity('n1')).to.be.undefined;
-            expect(history.undoAnnotation()).to.eql('Deleted a point.');
-            expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.osmEntity.id.next).to.eql({node: -1, way: -2, relation: -3});
-            expect(history.difference().deleted().length).to.eql(1);
+            expect(history.graph().hasEntity('n1')).toBeUndefined();
+            expect(history.undoAnnotation()).toEqual('Deleted a point.');
+            expect(history.imageryUsed()).toEqual(['Bing']);
+            expect(iD.osmIdManager.next).toEqual({node: -1, way: -2, relation: -3});
+            expect(history.difference().deleted().length).toEqual(1);
         });
     });
 
@@ -576,7 +576,7 @@ describe('iD.coreHistory', function () {
         it('asyncPrefs get and set work correctly', async function() {
             await asyncPrefs.set('test_async_key', 'test_async_value');
             var retrievedData = await asyncPrefs.get('test_async_key');
-            expect(retrievedData).to.equal('test_async_value');
+            expect(retrievedData).toEqual('test_async_value');
         });
 
         it('migrates history data from localStorage to IndexedDB', async function() {
@@ -593,8 +593,8 @@ describe('iD.coreHistory', function () {
             await history.migrateHistoryData();
 
             var migratedData = await asyncPrefs.get('saved_history');
-            expect(migratedData).to.deep.equal(testHistoryData);
-            expect(iD.prefs(oldKey)).to.be.null;
+            expect(migratedData).toEqual(testHistoryData);
+            expect(iD.prefs(oldKey)).toBeNull();
         });
     });
 });
