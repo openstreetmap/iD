@@ -44,6 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render `highway=track` using different styles depending on the `tracktype` ([#12392], thanks [@RudyTheDev])
 * Add dedicated pattern for `landuse=flowerbed` features ([#12458], thanks [@RudyTheDev])
 * Apply most recently used preset when immediately pressing <kbd>Enter</kbd> in the preset list ([#12526])
+* Prioritize parent relations of connected features in relation membership dropdown list ([#11896], thanks [@bhavyaKhatri2703])
 #### :scissors: Operations
 * Allow circularize operation also when multiple selected ways form a closed loop ([#12457])
 #### :camera: Street-Level
@@ -66,6 +67,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8713]: https://github.com/openstreetmap/iD/issues/8713
 [#8724]: https://github.com/openstreetmap/iD/issues/8724
 [#10911]: https://github.com/openstreetmap/iD/pull/10911
+[#11896]: https://github.com/openstreetmap/iD/pull/11896
 [#12358]: https://github.com/openstreetmap/iD/pull/12358
 [#12392]: https://github.com/openstreetmap/iD/pull/12392
 [#12401]: https://github.com/openstreetmap/iD/pull/12401
