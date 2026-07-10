@@ -409,6 +409,7 @@ export function coreContext() {
   let _map;
   context.map = () => _map;
   context.layers = () => _map.layers();
+  /** @returns {d3.Selection} */
   context.surface = () => _map.surface;
   context.editableDataEnabled = () => _map.editableDataEnabled();
   context.surfaceRect = () => _map.surface.node().getBoundingClientRect();

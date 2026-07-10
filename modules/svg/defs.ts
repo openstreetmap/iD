@@ -8,15 +8,15 @@ import { utilArrayUniq } from '../util';
     A standalone SVG element that contains only a `defs` sub-element. To be
     used once globally, since defs IDs must be unique within a document.
 */
-export function svgDefs(context) {
+export function svgDefs(context: iD.Context) {
 
-    var _defsSelection = d3_select(null);
+    var _defsSelection = d3_select<SVGDefsElement, unknown>(null!);
 
     var _spritesheetIds = [
         'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'roentgen-sprite', 'pinhead-sprite', 'community-sprite'
     ];
 
-    function drawDefs(selection) {
+    function drawDefs(selection: d3.Selection) {
         _defsSelection = selection.append('defs');
 
         // add markers
@@ -27,8 +27,7 @@ export function svgDefs(context) {
         // (also, it's slightly nicer if we can control the
         // positioning for different tags)
 
-        /** @param {string} name @param {string} colour */
-        function addOnewayMarker(name, colour) {
+        function addOnewayMarker(name: string, colour: string) {
             _defsSelection
                 .append('marker')
                 .attr('id', `ideditor-oneway-marker-${name}`)
@@ -51,7 +50,13 @@ export function svgDefs(context) {
         addOnewayMarker('gray', '#eee'); // for railway lines
 
 
-        function addSidedMarker(name, options) {
+        interface Options {
+            style?: 'default' | 'circle' | 'mirrored';
+            offset: number;
+            color: string;
+            strokeColor?: string;
+        }
+        function addSidedMarker(name: string, options: Options) {
             const path = {
                 circle: 'M 0,0.5 a 0.5,0.5 0 1,0 1,0 a 0.5,0.5 0 1,0 -1,0',
                 mirrored: 'M 0,1 l 1,-1 l 1,1 z',
@@ -87,7 +92,7 @@ export function svgDefs(context) {
         // marker on opposite side, circles instead of triangles
         addSidedMarker('guard_rail', { color: '#ddd', offset: -1.5, style: 'circle' });
         addSidedMarker('man_made', { color: '#fff', offset: 0 });
-        function addBothSidedMarker(name, options) {
+        function addBothSidedMarker(name: string, options: Options) {
             let mirror = false;
             if (options.offset < 0) {
                 options.offset = Math.abs(options.offset);
@@ -298,7 +303,7 @@ export function svgDefs(context) {
         addSprites(_spritesheetIds, true);
     }
 
-    function addSprites(ids, overrideColors) {
+    function addSprites(ids: string[], overrideColors: boolean) {
         _spritesheetIds = utilArrayUniq(_spritesheetIds.concat(ids));
 
         var spritesheets = _defsSelection
@@ -311,12 +316,12 @@ export function svgDefs(context) {
             .attr('class', function(d) { return 'spritesheet spritesheet-' + d; })
             .each(function(d) {
                 var url = context.imagePath(d + '.svg');
-                var node = d3_select(this).node();
+                var node = d3_select(this).node()!;
 
                 d3_svg(url)
                     .then(function(svg) {
                         node.appendChild(
-                            d3_select(svg.documentElement).attr('id', 'ideditor-' + d).node()
+                            d3_select(svg.documentElement).attr('id', 'ideditor-' + d).node()!
                         );
                         if (overrideColors && d !== 'iD-sprite') {   // allow icon colors to be overridden..
                             d3_select(node).selectAll('path')
