@@ -10,20 +10,25 @@ import { geoVecInterp, geoVecLength } from '../geo';
 import { osmNode } from '../osm/node';
 import { utilArrayUniq } from '../util';
 import { radiansToMeters } from '../ui/panels';
+import type { Projection } from '../geo/raw_mercator';
+import type { Action } from '../core/history';
+import type { NodeId, WayId } from '../osm';
+import type { coreGraph } from '../core';
+import type { Vec2 } from '../geo/vector';
 
 
 const MAX_SEGMENT_LENGTH = 4;
 export const MIN_VERTICES = 12;
 export const MAX_VERTICES = 32;
 
-export function actionCircularize(wayId, projection) {
+export function actionCircularize(wayId: WayId, projection: Projection) {
 
-    var action = function(graph, t) {
-        if (t === null || !isFinite(t)) t = 1;
+    const action: Action = function(graph, t) {
+        if (t === null || t === undefined || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
         const way = graph.entity(wayId);
-        const origNodes = {};
+        const origNodes: Record<string, osmNode> = {};
 
         for (const node of graph.childNodes(way)) {
             if (!origNodes[node.id]) {
@@ -32,7 +37,7 @@ export function actionCircularize(wayId, projection) {
         }
 
         if (!way.isConvex(graph)) {
-            graph = action.makeConvex(graph);
+            graph = makeConvex(graph);
         }
 
         const nodes = utilArrayUniq(graph.childNodes(way));
@@ -42,7 +47,7 @@ export function actionCircularize(wayId, projection) {
         const centroid = (points.length === 2)
             ? geoVecInterp(points[0], points[1], 0.5)
             : d3_polygonCentroid(points);
-        const radius = d3_median(points, p => geoVecLength(centroid, p));
+        const radius = d3_median(points, p => geoVecLength(centroid, p))!;
         const maxAngle = getMaxAngle(centroid, radius);
         const sign = d3_polygonArea(points) > 0 ? 1 : -1;
         let ids, i, j, k;
@@ -73,8 +78,8 @@ export function actionCircularize(wayId, projection) {
             var endNodeIndex = nodes.indexOf(endNode);
             var numberNewPoints = -1;
             var indexRange = endNodeIndex - startNodeIndex;
-            var nearNodes = {};
-            var inBetweenNodes = [];
+            var nearNodes: Record<string, number> = {};
+            var inBetweenNodes: NodeId[] = [];
             var startAngle, endAngle, totalAngle, eachAngle;
             var angle, loc, node, origNode;
 
@@ -206,7 +211,7 @@ export function actionCircularize(wayId, projection) {
      * never returns fewer than MIN_VERTICES or more than MAX_VERTICES.
      * #12139
      */
-    function getMaxAngle(centroid, radius) {
+    function getMaxAngle(centroid: Vec2, radius: number) {
         const radiusM = radiansToMeters(geoLength({ type: 'LineString', coordinates: [
             projection.invert(centroid),
             projection.invert([centroid[0] + radius, centroid[1]])
@@ -218,12 +223,12 @@ export function actionCircularize(wayId, projection) {
     }
 
 
-    action.makeConvex = function(graph) {
+    function makeConvex(graph: coreGraph) {
         var way = graph.entity(wayId);
         var nodes = utilArrayUniq(graph.childNodes(way));
         var points = nodes.map(function(n) { return projection(n.loc); });
         var sign = d3_polygonArea(points) > 0 ? 1 : -1;
-        var hull = d3_polygonHull(points);
+        var hull = d3_polygonHull(points)!;
         var i, j;
 
         // D3 convex hulls go counterclockwise..
@@ -261,13 +266,13 @@ export function actionCircularize(wayId, projection) {
         var way = graph.entity(wayId);
         var nodes = utilArrayUniq(graph.childNodes(way));
         var points = nodes.map(function(n) { return projection(n.loc); });
-        var hull = d3_polygonHull(points);
+        var hull = d3_polygonHull(points)!;
         var epsilonAngle =  Math.PI / 180;
         if (hull.length !== points.length || hull.length < 3){
             return false;
         }
         const centroid = d3_polygonCentroid(points);
-        const radius = d3_median(points, p => geoVecLength(centroid, p));
+        const radius = d3_median(points, p => geoVecLength(centroid, p))!;
         const maxAngle = getMaxAngle(centroid, radius);
 
         var i, actualPoint;

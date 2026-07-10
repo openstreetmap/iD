@@ -1,8 +1,11 @@
+import type { Action } from '../core/history';
 import { geoEdgeEqual } from '../geo';
+import type { Vec2 } from '../geo/vector';
+import type { EntityId, osmNode } from '../osm';
 import { utilArrayIntersection } from '../util';
 
 
-export function actionAddMidpoint(midpoint, node) {
+export function actionAddMidpoint(midpoint: { loc: Vec2; edge: [EntityId, EntityId] }, node: osmNode): Action {
     return function(graph) {
         graph = graph.replace(node.move(midpoint.loc));
 

@@ -14,6 +14,23 @@ import {
 } from '../util';
 import { osmIdManager } from '../osm';
 
+/**
+ * @import { WayId, OsmEntity } from '../osm';
+ * @import { coreGraph } from './graph';
+ * @import { Vec2 } from '../geo/vector';
+ * @template [T = never]
+ * @typedef {{
+    (graph: coreGraph, t?: number | null, extraData?: T): coreGraph
+    id?: string;
+    getWayId?(): WayId;
+    disabled?(graph: coreGraph): string | false | undefined;
+    transitionable?: boolean;
+
+    copies?(): Record<string, OsmEntity>;
+    useLongAxis?: GetSet<this, boolean>;
+    getReflectAxis?(graph: coreGraph): Vec2[];
+ }} Action */
+
 
 export function coreHistory(context) {
     var dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone', 'storage_error');
