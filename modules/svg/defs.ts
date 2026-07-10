@@ -13,7 +13,7 @@ export function svgDefs(context: iD.Context) {
     var _defsSelection = d3_select<SVGDefsElement, unknown>(null!);
 
     var _spritesheetIds = [
-        'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'roentgen-sprite', 'community-sprite'
+        'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'roentgen-sprite', 'pinhead-sprite', 'community-sprite'
     ];
 
     function drawDefs(selection: d3.Selection) {

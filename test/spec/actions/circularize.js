@@ -1,17 +1,19 @@
+import { polygonCentroid as d3_polygonCentroid, polygonArea as d3_polygonArea } from 'd3-polygon';
+import { geoMercator as d3_geoMercator } from 'd3-geo';
 import { MAX_VERTICES, MIN_VERTICES } from '../../../modules/actions/circularize';
 
 describe('iD.actionCircularize', function () {
-    const projection = d3.geoMercator().scale(150);
+    const projection = d3_geoMercator().scale(150);
 
     function isCircular(id, graph, _projection) {
         if (!_projection) _projection = projection;
         const points = graph.childNodes(graph.entity(id))
             .map(function (n) { return _projection(n.loc); });
-        const centroid = d3.polygonCentroid(points);
+        const centroid = d3_polygonCentroid(points);
         const radius = iD.geoVecLength(centroid, points[0]);
         const n = points.length - 1;
         const estArea = Math.pow(radius, 2) * n / 2 * Math.sin(2 * Math.PI / n); // regular n-gon area
-        const trueArea = Math.abs(d3.polygonArea(points));
+        const trueArea = Math.abs(d3_polygonArea(points));
         const pctDiff = Math.abs(estArea - trueArea) / estArea;
 
         return pctDiff < 1E-3; // area within 0.1% of expected area of regular polygon with n vertices
@@ -32,7 +34,7 @@ describe('iD.actionCircularize', function () {
 
     function area(id, graph) {
         var points = graph.childNodes(graph.entity(id)).map(function (n) { return n.loc; });
-        return d3.polygonArea(points);
+        return d3_polygonArea(points);
     }
 
 
@@ -66,7 +68,7 @@ describe('iD.actionCircularize', function () {
                 new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
 
-        const projection = d3.geoMercator().scale(150 * 1e5);
+        const projection = d3_geoMercator().scale(150 * 1e5);
         graph = iD.actionCircularize('-', projection)(graph);
 
         expect(isCircular('-', graph, projection)).toBeTruthy();

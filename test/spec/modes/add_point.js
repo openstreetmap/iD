@@ -1,8 +1,10 @@
+import { select as d3_select } from 'd3-selection';
+
 describe.skip('iD.modeAddPoint', function() {
     var context;
 
     beforeEach(function() {
-        var container = d3.select(document.createElement('div'));
+        var container = d3_select(document.createElement('div'));
         context = iD.coreContext().assetPath('../dist/').container(container).init();
         context.loadTiles = function () {};
 
@@ -20,7 +22,7 @@ describe.skip('iD.modeAddPoint', function() {
             window.dispatchEvent(new MouseEvent('mouseup'));
             expect(context.history().changes().created).toHaveLength(1);
             context.mode().exit();
-            d3.select('window').on('click.draw-block', null);
+            d3_select('window').on('click.draw-block', null);
         });
 
         it('selects an existing point rather than adding a new one', function() {

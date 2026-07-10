@@ -1,8 +1,10 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.validations.crossing_ways', function () {
     var context;
 
     beforeEach(function() {
-        const container = d3.select('body').append('div');
+        const container = d3_select('body').append('div');
         context = iD.coreContext().assetPath('../dist/').init().container(container);
         container
             .append('div')

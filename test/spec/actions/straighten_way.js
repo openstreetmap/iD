@@ -1,5 +1,7 @@
+import { geoMercator as d3_geoMercator } from 'd3-geo';
+
 describe('iD.actionStraightenWay', function () {
-    var projection = d3.geoMercator();
+    var projection = d3_geoMercator();
 
     describe('#disabled', function () {
         it('returns falsy for ways with internal nodes near centerline', function () {

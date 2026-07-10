@@ -1,3 +1,5 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.validations.osm_api_limits', function () {
     let context;
 
@@ -9,7 +11,7 @@ describe('iD.validations.osm_api_limits', function () {
 
     beforeEach(function() {
         context = iD.coreContext().assetPath('../dist/').init();
-        context.surface = () => d3.select('#nop'); // mock with NOP
+        context.surface = () => d3_select('#nop'); // mock with NOP
     });
 
     afterEach(() => {

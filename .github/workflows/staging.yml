@@ -27,13 +27,11 @@ jobs:
         working-directory: './id-tagging-schema'
       - run: npm audit signatures
         working-directory: './id-tagging-schema'
-      - run: npm run translations
+      - run: npm run dist -- translations
         working-directory: './id-tagging-schema'
         env:
           transifex_password: ${{secrets.TX_TOKEN}}
         if: env.transifex_password != null
-      - run: npm run dist
-        working-directory: './id-tagging-schema'
       - name: id-tagging-schema - Create directories
         run: mkdir dist/id-tagging-schema && mv id-tagging-schema/dist dist/id-tagging-schema/dist
       # build iD using freshest version of presets and ELI

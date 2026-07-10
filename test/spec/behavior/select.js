@@ -1,4 +1,5 @@
 import { setTimeout } from 'node:timers/promises';
+import { select as d3_select } from 'd3-selection';
 
 describe('iD.behaviorSelect', function() {
     var a, b, context, behavior, container;
@@ -13,7 +14,7 @@ describe('iD.behaviorSelect', function() {
     }
 
     beforeEach(function() {
-        container = d3.select('body').append('div');
+        container = d3_select('body').append('div');
         context = iD.coreContext().assetPath('../dist/').init().container(container);
 
         a = new iD.osmNode({loc: [0, 0]});
