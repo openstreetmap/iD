@@ -34,16 +34,15 @@ export function uiFieldCheck(field: any, context: iD.Context) {
     let _value: TagValueUpdate;
 
 
-    var stringsField = field.resolveReference('stringsCrossReference');
-    if (!options && stringsField.options) {
-        options = stringsField.options;
+    if (!options && field.options) {
+        options = field.options;
     }
 
     if (options) {
         for (var i in options) {
             var v = options[i];
             values.push(v === 'undefined' ? undefined : v);
-            texts.push(stringsField.t.append('options.' + v, { 'default': v }));
+            texts.push(field.t.append('options.' + v, { 'default': v }));
         }
     } else {
         values = [undefined, 'yes'];
