@@ -262,10 +262,11 @@ describe('iD.rendererFeatures', function() {
 
             doMatch('points', [
                 'point_bar', 'point_dock', 'point_rail_station',
-                'point_generator', 'point_old_rail_station'
+                'point_old_rail_station'
             ]);
 
             dontMatch('points', [
+                'point_generator',
                 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
