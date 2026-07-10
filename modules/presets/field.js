@@ -7,8 +7,7 @@ import { utilSafeClassName } from '../util/util';
 // `presetField` decorates a given `field` Object
 // with some extra methods for searching and matching geometry
 //
-export function presetField(fieldID, field, allFields) {
-  allFields = allFields || {};
+export function presetField(fieldID, field) {
   let _this = Object.assign({}, field);   // shallow copy
 
   _this.id = fieldID;
@@ -27,27 +26,14 @@ export function presetField(fieldID, field, allFields) {
   _this.t.append = (scope, options) => t.append(`_tagging.presets.fields.${fieldID}.${scope}`, options);
   _this.hasTextForStringId = (scope) => localizer.hasTextForStringId(`_tagging.presets.fields.${fieldID}.${scope}`);
 
-  _this.resolveReference = which => {
-    const referenceRegex = /^\{(.*)\}$/;
-    const match = (field[which] || '').match(referenceRegex);
-    if (match) {
-      const field = allFields[match[1]];
-      if (field) {
-        return field;
-      }
-      console.error(`Unable to resolve referenced field: ${match[1]}`);  // eslint-disable-line no-console
-    }
-    return _this;
-  };
+  _this.title = () => _this.t('label', { 'default': fieldID });
+  _this.label = () => _this.t.append('label', { 'default': fieldID });
 
-  _this.title = () => _this.resolveReference('label').t('label', { 'default': fieldID });
-  _this.label = () => _this.resolveReference('label').t.append('label', { 'default': fieldID });
-
-  _this.placeholder = () => _this.resolveReference('placeholder').t('placeholder', { 'default': '' });
+  _this.placeholder = () => _this.t('placeholder', { 'default': '' });
 
   _this.originalTerms = _this.terms || [];
 
-  _this.terms = () => _this.resolveReference('label').t.all('terms', { 'default': _this.originalTerms });
+  _this.terms = () => _this.t.all('terms', { 'default': _this.originalTerms });
 
   _this.increment = (_this.type === 'number' || _this.type === 'integer') ? (_this.increment || 1) : undefined;
 
