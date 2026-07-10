@@ -71,7 +71,7 @@ describe('iD.uiFieldRadio', () => {
         });
     });
 
-    describe('radio with stringsCrossReference', () => {
+    describe('radio with strings.options', () => {
         let context: iD.Context;
         let selection: d3.Selection;
 
@@ -80,14 +80,18 @@ describe('iD.uiFieldRadio', () => {
             selection = d3_select(document.createElement('div'));
         });
 
-        it('renders option labels from .title when the referenced field has nested title/description option strings', () => {
-            const accessField = iD.presetField('access', { type: 'combo', key: 'access' });
-            const field = iD.presetField('access_boolean', {
+        it('renders option labels from .title when the field has nested title/description option strings', () => {
+            const field = iD.presetField('access', {
                 type: 'radio',
                 key: 'access',
-                stringsCrossReference: '{access}',
+                strings: {
+                    options: {
+                        yes: { title: 'Allowed' },
+                        no: { title: 'Prohibited' },
+                    }
+                },
                 options: ['yes', 'no'],
-            }, { access: accessField });
+            });
 
             const instance = iD.uiFieldRadio(field, context);
 

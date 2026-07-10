@@ -102,7 +102,7 @@ export function presetIndex() {
         let f = d.fields[fieldID];
 
         if (f) {   // add or replace
-          f = presetField(fieldID, f, _fields);
+          f = presetField(fieldID, f);
           if (f.locationSet) newLocationSets.push(f);
           _fields[fieldID] = f;
 

@@ -16,8 +16,7 @@ export function uiFieldRadio(field, context) {
     var wrap = d3_select(null);
     var labels = d3_select(null);
     var radios = d3_select(null);
-    var strings = field.resolveReference('stringsCrossReference');
-    var radioData = (field.options || strings.options || field.keys).slice();  // shallow copy
+    var radioData = (field.options || field.keys).slice();  // shallow copy
     var typeField;
     var layerField;
     let _tags = {};
@@ -61,16 +60,16 @@ export function uiFieldRadio(field, context) {
             .append('input')
             .attr('type', 'radio')
             .attr('name', field.id)
-            .attr('value', function(d) { return strings.t('options.' + d, { 'default': d }); })
+            .attr('value', function(d) { return field.t('options.' + d, { 'default': d }); })
             .attr('checked', false);
 
         enter
             .append('span')
             .each(function(d) {
-                const labelId = strings.hasTextForStringId('options.' + d + '.title')
+                const labelId = field.hasTextForStringId('options.' + d + '.title')
                     ? 'options.' + d + '.title'
                     : 'options.' + d;
-                strings.t.append(labelId, { 'default': d })(d3_select(this));
+                field.t.append(labelId, { 'default': d })(d3_select(this));
             });
 
         labels = labels
