@@ -1,4 +1,5 @@
 import { setTimeout } from 'node:timers/promises';
+import { select as d3_select } from 'd3-selection';
 
 describe('iD.uiFieldLocalized', function() {
     var context, selection, field;
@@ -18,7 +19,7 @@ describe('iD.uiFieldLocalized', function() {
 
     beforeEach(function() {
         context = iD.coreContext().assetPath('../dist/').init();
-        selection = d3.select(document.createElement('div'));
+        selection = d3_select(document.createElement('div'));
         field = iD.presetField('name', { key: 'name', type: 'localized' });
         field.locked = function() { return false; };
     });

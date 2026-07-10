@@ -1,3 +1,4 @@
+import { select as d3_select } from 'd3-selection';
 import type { EntityId } from '../../../modules';
 
 describe('iD.uiField as multiCombo', () => {
@@ -7,7 +8,7 @@ describe('iD.uiField as multiCombo', () => {
 
     beforeEach(() => {
         context = iD.coreContext().assetPath('../dist/').init();
-        selection = d3.select(document.createElement('div'));
+        selection = d3_select(document.createElement('div'));
 
         presetField = iD.presetField('fuel', { key: 'fuel:', type: 'multiCombo' });
     });

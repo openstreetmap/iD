@@ -1,3 +1,5 @@
+import { geoMercator as d3_geoMercator } from 'd3-geo';
+
 describe('iD.actionOrthogonalize', function () {
     var projection = function (l) { return l; };
     projection.invert = projection;
@@ -129,7 +131,7 @@ describe('iD.actionOrthogonalize', function () {
         });
 
         it('preserves the shape of skinny quads', function () {
-            var projection = d3.geoMercator();
+            var projection = d3_geoMercator();
             var tests = [[
                 [-77.0339864831478, 38.8616391227204],
                 [-77.0209775298677, 38.8613609264884],

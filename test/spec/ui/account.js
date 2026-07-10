@@ -1,6 +1,8 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.uiAccount', function () {
     it('properly escapes user name', function() {
-        var selection = d3.select('body').append('div');
+        var selection = d3_select('body').append('div');
         var osmConnectionMock = {
             authenticated: () => true,
             userDetails: (callback) => {

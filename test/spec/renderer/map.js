@@ -1,13 +1,15 @@
 import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
+import { select as d3_select } from 'd3-selection';
+import { timerFlush as d3_timerFlush } from 'd3-timer';
 import css from '../../../css/55_cursors.css?raw';
 
 describe('iD.Map', function() {
     var content, context, map;
 
     beforeEach(function() {
-        d3.select('head').append('style').html(css);
-        content = d3.select('body').append('div');
+        d3_select('head').append('style').html(css);
+        content = d3_select('body').append('div');
         context = iD.coreContext().assetPath('../dist/').init().container(content);
         map = context.map();
         content.call(map);
@@ -53,7 +55,7 @@ describe('iD.Map', function() {
             expect(map.zoom(4)).toEqual(map);
             map.zoomIn();
             await setTimeout(275);
-            d3.timerFlush();
+            d3_timerFlush();
             expect(map.zoom()).toBeCloseTo(5, 6);
         });
     });
@@ -63,7 +65,7 @@ describe('iD.Map', function() {
             expect(map.zoom(4)).toEqual(map);
             map.zoomOut();
             await setTimeout(275);
-            d3.timerFlush();
+            d3_timerFlush();
             expect(map.zoom()).toBeCloseTo(3, 6);
         });
     });
@@ -106,7 +108,7 @@ describe('iD.Map', function() {
             expect(map.center([10, 10])).toEqual(map);
             expect(map.centerEase([20, 20], 250)).toEqual(map);
             await setTimeout(275);
-            d3.timerFlush();
+            d3_timerFlush();
             expect(map.center()[0]).toBeCloseTo(20, 6);
             expect(map.center()[1]).toBeCloseTo(20, 6);
         });
@@ -149,7 +151,7 @@ describe('iD.Map', function() {
         var mode, behavior, point, vertex, line, area, midpoint;
 
         beforeEach(function() {
-            mode = d3.select('body').append('div');
+            mode = d3_select('body').append('div');
             behavior = mode.append('div');
 
             point    = behavior.append('div').attr('class', 'node point');

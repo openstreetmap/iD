@@ -1,3 +1,5 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.uiFieldRadio', () => {
     describe('structureRadio', () => {
         let context: iD.Context;
@@ -5,7 +7,7 @@ describe('iD.uiFieldRadio', () => {
 
         beforeEach(() => {
             context = iD.coreContext().assetPath('../dist/').init();
-            selection = d3.select(document.createElement('div'));
+            selection = d3_select(document.createElement('div'));
         });
 
         it.each<[fromTags: Tags, optionToClick: string, toTags: Tags]>([
@@ -62,7 +64,7 @@ describe('iD.uiFieldRadio', () => {
             const index = field.keys.indexOf(optionToClick);
             const radioToClick = options[index].querySelector('input')!;
             radioToClick.checked = true;
-            d3.select(radioToClick).dispatch('change');
+            d3_select(radioToClick).dispatch('change');
 
             expect(onChange).toHaveBeenCalledTimes(1);
             expect(onChange).toHaveBeenNthCalledWith(1, toTags);
@@ -75,7 +77,7 @@ describe('iD.uiFieldRadio', () => {
 
         beforeEach(() => {
             context = iD.coreContext().assetPath('../dist/').init();
-            selection = d3.select(document.createElement('div'));
+            selection = d3_select(document.createElement('div'));
         });
 
         it('renders option labels from .title when the field has nested title/description option strings', () => {

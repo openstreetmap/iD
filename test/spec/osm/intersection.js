@@ -1,3 +1,5 @@
+import { geoMercator as d3_geoMercator } from 'd3-geo';
+
 describe('iD.osmIntersection', function() {
     var maxDist = Infinity;
 
@@ -1572,7 +1574,7 @@ describe('iD.osmIntersection', function() {
 
 
 describe('iD.osmInferRestriction', function() {
-    var projection = d3.geoMercator().scale(250 / Math.PI);
+    var projection = d3_geoMercator().scale(250 / Math.PI);
 
     it('infers the restriction type based on the turn angle', function() {
         //

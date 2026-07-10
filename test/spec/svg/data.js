@@ -1,10 +1,12 @@
 import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
+import { select as d3_select } from 'd3-selection';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 describe('iD.svgData', function () {
     var context;
     var surface;
-    var dispatch = d3.dispatch('change');
+    var dispatch = d3_dispatch('change');
     var projection = iD.geoRawMercator()
         .translate([6934098.868981334, 4092682.5519805425])
         .scale(iD.geoZoomToScale(17))
@@ -87,7 +89,7 @@ describe('iD.svgData', function () {
 
     beforeEach(function () {
         context = iD.coreContext().assetPath('../dist/').init();
-        d3.select(document.createElement('div'))
+        d3_select(document.createElement('div'))
             .attr('class', 'main-map')
             .call(context.map().centerZoom([-74.389286, 40.1502754], 17));
 

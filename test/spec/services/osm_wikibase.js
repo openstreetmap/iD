@@ -1,6 +1,8 @@
 import { fn } from '@vitest/spy';
 import fetchMock from 'fetch-mock';
 import { setTimeout } from 'node:timers/promises';
+import { select as d3_select } from 'd3-selection';
+
 
 describe('iD.serviceOsmWikibase', function () {
   var wikibase;
@@ -337,7 +339,7 @@ describe('iD.serviceOsmWikibase', function () {
   describe('linkifyWikiText', () => {
     it('handles normal text', () => {
       const main = document.createElement('main');
-      d3.select(main).call(iD.serviceOsmWikibase.linkifyWikiText('hello'));
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText('hello'));
 
       expect(main.innerHTML).toBe('<span>hello</span>');
       expect(main.textContent).toBe('hello');
@@ -345,7 +347,7 @@ describe('iD.serviceOsmWikibase', function () {
 
     it('prevents XSS attacks', () => {
       const main = document.createElement('main');
-      d3.select(main).call(iD.serviceOsmWikibase.linkifyWikiText('123 <script>bad</script> 456'));
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText('123 <script>bad</script> 456'));
 
       expect(main.innerHTML).toBe('<span>123 &lt;script&gt;bad&lt;/script&gt; 456</span>');
       expect(main.textContent).toBe('123 <script>bad</script> 456');
@@ -353,7 +355,7 @@ describe('iD.serviceOsmWikibase', function () {
 
     it('linkifies the tag: and key: syntax', () => {
       const main = document.createElement('main');
-      d3.select(main).call(iD.serviceOsmWikibase.linkifyWikiText('use tag:natural=water with key:water instead'));
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText('use tag:natural=water with key:water instead'));
 
       expect(main.innerHTML).toBe([
         '<span>use </span>',
@@ -367,7 +369,7 @@ describe('iD.serviceOsmWikibase', function () {
 
     it('works if the string is 100% a link', () => {
       const main = document.createElement('main');
-      d3.select(main).call(iD.serviceOsmWikibase.linkifyWikiText('tag:natural=water'));
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText('tag:natural=water'));
 
       expect(main.innerHTML).toBe([
         '<a href="https://wiki.openstreetmap.org/wiki/Tag:natural=water" target="_blank" rel="noreferrer"><code>natural=water</code></a>',
@@ -377,7 +379,7 @@ describe('iD.serviceOsmWikibase', function () {
 
     it('works if the link is the first part of the string', () => {
       const main = document.createElement('main');
-      d3.select(main).call(iD.serviceOsmWikibase.linkifyWikiText('tag:craft=sailmaker is better'));
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText('tag:craft=sailmaker is better'));
 
       expect(main.innerHTML).toBe([
         '<a href="https://wiki.openstreetmap.org/wiki/Tag:craft=sailmaker" target="_blank" rel="noreferrer"><code>craft=sailmaker</code></a>',
@@ -388,7 +390,7 @@ describe('iD.serviceOsmWikibase', function () {
 
     it('works if the link is the last part of the string', () => {
       const main = document.createElement('main');
-      d3.select(main).call(iD.serviceOsmWikibase.linkifyWikiText('prefer tag:craft=sailmaker'));
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText('prefer tag:craft=sailmaker'));
 
       expect(main.innerHTML).toBe([
         '<span>prefer </span>',
@@ -399,7 +401,7 @@ describe('iD.serviceOsmWikibase', function () {
 
     it('handles empty strings', () => {
       const main = document.createElement('main');
-      d3.select(main).call(iD.serviceOsmWikibase.linkifyWikiText(''));
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText(''));
 
       expect(main.innerHTML).toBe('');
       expect(main.textContent).toBe('');

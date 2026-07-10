@@ -1,6 +1,7 @@
 import fetchMock from 'fetch-mock';
 import { setTimeout } from 'node:timers/promises';
 import { fn } from '@vitest/spy';
+import { select as d3_select } from 'd3-selection';
 
 describe('iD.uiFieldWikipedia', function() {
     var entity, context, selection, field;
@@ -24,7 +25,7 @@ describe('iD.uiFieldWikipedia', function() {
         entity = new iD.osmNode({id: 'n12345'});
         context = iD.coreContext().assetPath('../dist/').init();
         context.history().merge([entity]);
-        selection = d3.select(document.createElement('div'));
+        selection = d3_select(document.createElement('div'));
         field = iD.presetField('wikipedia', {
             key: 'wikipedia',
             keys: ['wikipedia', 'wikidata'],

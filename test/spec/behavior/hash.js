@@ -1,5 +1,6 @@
 import { setTimeout } from 'node:timers/promises';
 import { fn } from '@vitest/spy';
+import { select as d3_select } from 'd3-selection';
 
 describe('iD.behaviorHash', function () {
 
@@ -7,7 +8,7 @@ describe('iD.behaviorHash', function () {
 
     beforeEach(function () {
         window.location.hash = '#background=none';   // Try not to load imagery
-        var container = d3.select(document.createElement('div'));
+        var container = d3_select(document.createElement('div'));
         context = iD.coreContext().assetPath('../dist/').init().container(container);
         container.call(context.map());
         hash = iD.behaviorHash(context);
@@ -36,11 +37,11 @@ describe('iD.behaviorHash', function () {
     it('centerZooms map at requested coordinates on hash change', async () => {
         hash();
         window.location.hash = '#background=none&map=20.00/38.87952/-77.02405';
-        await new Promise(cb => { d3.select(window).on('hashchange', cb); });
+        await new Promise(cb => { d3_select(window).on('hashchange', cb); });
         expect(context.map().center()[0]).toBeCloseTo(-77.02405, 1);
         expect(context.map().center()[1]).toBeCloseTo(38.87952, 1);
         expect(context.map().zoom()).toEqual(20.0);
-        d3.select(window).on('hashchange', null);
+        d3_select(window).on('hashchange', null);
     });
 
     it('sets hadLocation if map-location is in local storage', function () {
@@ -81,7 +82,7 @@ describe('iD.behaviorHash', function () {
 
     it('accepts default changeset comment as hash parameter', function () {
         window.location.hash = '#comment=foo+bar%20%2B1';
-        const container = d3.select(document.createElement('div'));
+        const container = d3_select(document.createElement('div'));
         const context = iD.coreContext().assetPath('../dist/').init().container(container);
         iD.behaviorHash(context);
         expect(context.defaultChangesetComment()).to.eql('foo bar +1');

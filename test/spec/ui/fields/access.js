@@ -1,9 +1,11 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.uiFieldAccess', function() {
     var context, selection, field;
 
     beforeEach(function() {
         context = iD.coreContext().assetPath('../dist/').init();
-        selection = d3.select(document.createElement('div'));
+        selection = d3_select(document.createElement('div'));
         field = iD.presetField('access', {
             keys: ['access', 'foot', 'motor_vehicle', 'bicycle', 'horse'],
             type: 'access'

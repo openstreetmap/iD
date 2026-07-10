@@ -1,10 +1,12 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.rendererFeatures', function() {
     var dimensions = [1000, 1000];
     var context, features;
 
     beforeEach(function() {
         context = iD.coreContext().assetPath('../dist/').init();
-        d3.select(document.createElement('div'))
+        d3_select(document.createElement('div'))
             .attr('class', 'main-map')
             .call(context.map());
         context.map().zoom(16);
