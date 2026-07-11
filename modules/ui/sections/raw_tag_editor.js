@@ -278,6 +278,24 @@ export function uiSectionRawTagEditor(id, context) {
                 return Array.isArray(d.value) ? '' : d.value;
             });
 
+        // Add wikidata link for Q-ID values
+        items.selectAll('.value-wrap')
+            .each(function(d) {
+                var wrap = d3_select(this);
+                wrap.selectAll('.wikidata-link').remove();
+
+                var val = Array.isArray(d.value) ? null : d.value;
+                if (d.key && d.key.endsWith(':wikidata') && val && /^Q\d+$/.test(val)) {
+                    wrap.append('a')
+                        .attr('class', 'wikidata-link')
+                        .attr('href', 'https://www.wikidata.org/wiki/' + val)
+                        .attr('target', '_blank')
+                        .attr('rel', 'noopener')
+                        .attr('title', 'wikidata.org/wiki/' + val)
+                        .call(svgIcon('#iD-icon-out-link'));
+                }
+            });
+
         items.selectAll('button.remove')
             .classed('disabled', d => d.key === '')
             .on(('PointerEvent' in window ? 'pointer' : 'mouse') + 'down', // 'click' fires too late - #5878

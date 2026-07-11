@@ -1,3 +1,4 @@
+import { select as d3_select } from 'd3-selection';
 import { t } from '../core/localizer';
 
 import { actionChangePreset } from '../actions/change_preset';
@@ -272,5 +273,22 @@ export function showTagDiffReference(selection, reference, tagDiff) {
             return `${klass} tagDiff-cell-unchanged`;
         }
     })
-    .text(d => d.display);
+    .each(function(d) {
+        const el = d3_select(this);
+        const isWikidata = d.key.endsWith(':wikidata') && d.newVal && /^Q\d+$/.test(d.newVal);
+
+        if (isWikidata) {
+            const qid = d.newVal;
+            const prefix = d.display.substring(0, d.display.lastIndexOf('=') + 1);
+            el.text(prefix);
+            el.append('a')
+                .attr('class', 'tagDiff-wikidata-link')
+                .attr('href', 'https://www.wikidata.org/wiki/' + qid)
+                .attr('target', '_blank')
+                .attr('rel', 'noopener')
+                .text(qid);
+        } else {
+            el.text(d.display);
+        }
+    });
 }

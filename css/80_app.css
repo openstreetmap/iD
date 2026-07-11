@@ -2945,6 +2945,39 @@ img.tag-reference-wiki-image {
     border-top: 1px solid var(--border-color);
 }
 
+/* Wikidata link in raw tag editor */
+.tag-row .value-wrap {
+    position: relative;
+}
+.tag-row .value-wrap input.value {
+    width: calc(100% - 20px);
+}
+.tag-row .value-wrap .wikidata-link {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    color: var(--text-color);
+    opacity: 0.4;
+    text-decoration: none;
+    pointer-events: auto;
+}
+@media (hover: hover) {
+    .tag-row .value-wrap .wikidata-link:hover {
+        opacity: 1;
+        color: var(--accent-color);
+    }
+}
+.tag-row .value-wrap .wikidata-link .icon {
+    width: 12px;
+    height: 12px;
+}
+
 
 /* Raw Member / Membership Editor
 ------------------------------------------------------- */
