@@ -3637,6 +3637,15 @@ div.full-screen > button:focus {
     border-radius: 3px 0 0 3px;
 }
 
+.layer-list select {
+    padding-left: 4px;
+    padding-bottom: 1px;
+}
+.ideditor[dir='rtl'] .layer-list select {
+    padding-left: 0px;
+    padding-right: 4px;
+}
+
 .map-data-pane .vectortile-container .vectortile-header {
     padding-bottom: 5px;
 }
