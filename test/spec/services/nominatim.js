@@ -40,10 +40,10 @@ describe('iD.serviceNominatim', function() {
             nominatim.countryCode([16, 48], callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {zoom: '13', format: 'json', addressdetails: '1', lat: '48', lon: '16'}
             );
-            expect(callback).to.have.been.calledWith(null, 'at');
+            expect(callback).toHaveBeenCalledWith(null, 'at');
         });
     });
 
@@ -59,10 +59,10 @@ describe('iD.serviceNominatim', function() {
             nominatim.reverse([16, 48], callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {zoom: '13', format: 'json', addressdetails: '1', lat: '48', lon: '16'}
             );
-            expect(callback).to.have.been.calledWith(null, {address: {country_code:'at'}});
+            expect(callback).toHaveBeenCalledWith(null, {address: {country_code:'at'}});
 
             fetchMock.reset();
             fetchMock.mock(new RegExp('https://nominatim.openstreetmap.org/reverse'), {
@@ -75,13 +75,13 @@ describe('iD.serviceNominatim', function() {
             nominatim.reverse([17, 49], callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {zoom: '13', format: 'json', addressdetails: '1', lat: '49', lon: '17'}
             );
-            expect(fetchMock.calls()[0][1].headers).to.eql({
+            expect(fetchMock.calls()[0][1].headers).toEqual({
                 'Accept-Language': 'en'
             });
-            expect(callback).to.have.been.calledWith(null, {address: {country_code:'cz'}});
+            expect(callback).toHaveBeenCalledWith(null, {address: {country_code:'cz'}});
         });
 
         it('should cache nearby result', async () => {
@@ -95,10 +95,10 @@ describe('iD.serviceNominatim', function() {
             nominatim.reverse([16, 48], callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {zoom: '13', format: 'json', addressdetails: '1', lat: '48', lon: '16'}
             );
-            expect(callback).to.have.been.calledWith(null, {address: {country_code:'at'}});
+            expect(callback).toHaveBeenCalledWith(null, {address: {country_code:'at'}});
 
             fetchMock.resetHistory();
 
@@ -106,7 +106,7 @@ describe('iD.serviceNominatim', function() {
             nominatim.reverse([16.000001, 48.000001], callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(null, {address: {country_code:'at'}});
+            expect(callback).toHaveBeenCalledWith(null, {address: {country_code:'at'}});
         });
 
         it('calls the given callback with an error', async () => {
@@ -121,10 +121,10 @@ describe('iD.serviceNominatim', function() {
 
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {zoom: '13', format: 'json', addressdetails: '1', lat: '1000', lon: '1000'}
             );
-            expect(callback).to.have.been.calledWith('Unable to geocode');
+            expect(callback).toHaveBeenCalledWith('Unable to geocode');
         });
     });
 
@@ -141,15 +141,15 @@ describe('iD.serviceNominatim', function() {
             nominatim.search('philadelphia', callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql({
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual({
                 q: 'philadelphia',
                 format: 'json',
                 limit: '10'
             });
-            expect(fetchMock.calls()[0][1].headers).to.eql({
+            expect(fetchMock.calls()[0][1].headers).toEqual({
                 'Accept-Language': 'en'
             });
-            expect(callback).to.have.been.calledOnce;
+            expect(callback).toHaveBeenCalledOnce();
         });
     });
 

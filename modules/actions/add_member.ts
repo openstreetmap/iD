@@ -1,8 +1,13 @@
+import type { coreGraph } from '../core/graph';
+import type { Action } from '../core/history';
+import type { osmWay, RelationId } from '../osm';
 import { osmJoinWays } from '../osm/multipolygon';
+import type { osmRelation, RelationMember } from '../osm/relation';
 import { utilArrayGroupBy, utilObjectOmit } from '../util';
 
+interface MemberWithIndex extends RelationMember { index?: number };
 
-export function actionAddMember(relationId, member, memberIndex) {
+export function actionAddMember(relationId: RelationId, member: RelationMember, memberIndex: number): Action {
 
     return function action(graph) {
         var relation = graph.entity(relationId);
@@ -29,12 +34,12 @@ export function actionAddMember(relationId, member, memberIndex) {
 
 
     // Add a way member into the relation "wherever it makes sense".
-    function addWayMember(relation, graph) {
+    function addWayMember(relation: osmRelation, graph: coreGraph) {
         var groups, item, i, j, k;
 
         // remove PTv2 stops and platforms before doing anything.
         var PTv2members = [];
-        var members = [];
+        var members: MemberWithIndex[] = [];
         for (i = 0; i < relation.members.length; i++) {
             var m = relation.members[i];
             if (/stop|platform/.test(m.role)) {
@@ -70,12 +75,12 @@ export function actionAddMember(relationId, member, memberIndex) {
             // k = each member in segment
             for (k = 0; k < segment.length; k++) {
                 item = segment[k];
-                var way = graph.entity(item.id);
+                var way = graph.entity<osmWay>(item.id);
 
                 // reorder `members` if necessary
                 if (k > 0) {
                     if (j+k >= members.length || item.index !== members[j+k].index) {
-                        moveMember(members, item.index, j+k);
+                        moveMember(members, item.index!, j+k);
                     }
                 }
 
@@ -84,7 +89,7 @@ export function actionAddMember(relationId, member, memberIndex) {
         }
 
         // Final pass: skip dead items, remove index properties
-        var wayMembers = [];
+        var wayMembers: RelationMember[] = [];
         for (i = 0; i < members.length; i++) {
             item = members[i];
             if (item.index === -1) continue;
@@ -122,7 +127,7 @@ export function actionAddMember(relationId, member, memberIndex) {
         // segment                 5 4 7 6
         // members       0 1 2 3 x 5 4 7 6 x 8 9    keep 6 in j+k
         //
-        function moveMember(arr, findIndex, toIndex) {
+        function moveMember(arr: MemberWithIndex[], findIndex: number, toIndex: number) {
             var i;
             for (i = 0; i < arr.length; i++) {
                 if (arr[i].index === findIndex) {
@@ -139,7 +144,7 @@ export function actionAddMember(relationId, member, memberIndex) {
 
         // This is the same as `Relation.indexedMembers`,
         // Except we don't want to index all the members, only the ways
-        function withIndex(arr) {
+        function withIndex(arr: RelationMember[]) {
             var result = new Array(arr.length);
             for (var i = 0; i < arr.length; i++) {
                 result[i] = Object.assign({}, arr[i]);   // shallow copy

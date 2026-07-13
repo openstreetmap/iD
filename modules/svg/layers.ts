@@ -1,4 +1,4 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { dispatch as d3_dispatch, type Dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
 import { svgData } from './data';
@@ -20,19 +20,36 @@ import { svgNotes } from './notes';
 import { svgTouch } from './touch';
 import { utilArrayDifference, utilRebind } from '../util';
 import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
+import type { Projection } from '../geo/raw_mercator';
+import type { Vec2 } from '../geo/vector';
+
+export type LayerDispatch = Dispatch<object, {
+    change: [];
+    photoDatesChanged: [];
+}>
+
+export interface SvgLayer {
+    (selection: d3.Selection): void;
+    enabled?(position: GeolocationPosition | boolean, enabled: boolean): boolean | SvgLayer;
+}
+
+export interface SvgLayerItem {
+    id: string;
+    layer: SvgLayer;
+}
 
 
-export function svgLayers(projection, context) {
+export function svgLayers(projection: Projection, context: iD.Context) {
     var dispatch = d3_dispatch('change', 'photoDatesChanged');
-    var svg = d3_select(null);
-    var _layers = [
+    var svg = d3_select<SVGSVGElement, 0>(null!);
+    var _layers: SvgLayerItem[] = [
         { id: 'osm', layer: svgOsm(projection, context, dispatch) },
         { id: 'notes', layer: svgNotes(projection, context, dispatch) },
         { id: 'data', layer: svgData(projection, context, dispatch) },
         { id: 'osmose', layer: svgOsmose(projection, context, dispatch) },
         { id: 'streetside', layer: svgStreetside(projection, context, dispatch)},
         { id: 'mapillary', layer: svgMapillaryImages(projection, context, dispatch) },
-        { id: 'mapillary-position', layer: svgMapillaryPosition(projection, context, dispatch) },
+        { id: 'mapillary-position', layer: svgMapillaryPosition(projection, context) },
         { id: 'mapillary-map-features',  layer: svgMapillaryMapFeatures(projection, context, dispatch) },
         { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },
         { id: 'kartaview', layer: svgKartaviewImages(projection, context, dispatch) },
@@ -40,14 +57,14 @@ export function svgLayers(projection, context) {
         { id: 'vegbilder', layer: svgVegbilder(projection, context, dispatch) },
         { id: 'panoramax', layer: svgPanoramaxImages(projection, context, dispatch) },
         { id: 'local-photos', layer: svgLocalPhotos(projection, context, dispatch) },
-        { id: 'debug', layer: svgDebug(projection, context, dispatch) },
-        { id: 'geolocate', layer: svgGeolocate(projection, context, dispatch) },
-        { id: 'touch', layer: svgTouch(projection, context, dispatch) },
+        { id: 'debug', layer: svgDebug(projection, context) },
+        { id: 'geolocate', layer: svgGeolocate(projection) },
+        { id: 'touch', layer: svgTouch() },
     ];
 
 
-    function drawLayers(selection) {
-        svg = selection.selectAll('.surface')
+    function drawLayers(selection: d3.Selection) {
+        svg = selection.selectAll<SVGSVGElement, 0>('.surface')
             .data([0]);
 
         svg = svg.enter()
@@ -62,7 +79,7 @@ export function svgLayers(projection, context) {
             .append('defs')
             .attr('class', 'surface-defs');
 
-        var groups = svg.selectAll('.data-layer')
+        var groups = svg.selectAll<SVGGElement, SvgLayerItem>('.data-layer')
             .data(_layers);
 
         groups.exit()
@@ -81,21 +98,21 @@ export function svgLayers(projection, context) {
     };
 
 
-    drawLayers.layer = function(id) {
+    drawLayers.layer = function(id: string) {
         var obj = _layers.find(function(o) { return o.id === id; });
         return obj && obj.layer;
     };
 
 
-    drawLayers.only = function(what) {
-        var arr = [].concat(what);
+    drawLayers.only = function(what: string[]) {
+        var arr = [...what];
         var all = _layers.map(function(layer) { return layer.id; });
         return drawLayers.remove(utilArrayDifference(all, arr));
     };
 
 
-    drawLayers.remove = function(what) {
-        var arr = [].concat(what);
+    drawLayers.remove = function(what: string[]) {
+        var arr = [...what];
         arr.forEach(function(id) {
             _layers = _layers.filter(function(o) { return o.id !== id; });
         });
@@ -104,8 +121,8 @@ export function svgLayers(projection, context) {
     };
 
 
-    drawLayers.add = function(what) {
-        var arr = [].concat(what);
+    drawLayers.add = function(what: SvgLayerItem[]) {
+        var arr = [...what];
         arr.forEach(function(obj) {
             if ('id' in obj && 'layer' in obj) {
                 _layers.push(obj);
@@ -116,7 +133,7 @@ export function svgLayers(projection, context) {
     };
 
 
-    drawLayers.dimensions = function(val) {
+    drawLayers.dimensions = function(val: Vec2) {
         if (!arguments.length) return utilGetDimensions(svg);
         utilSetDimensions(svg, val);
         return this;

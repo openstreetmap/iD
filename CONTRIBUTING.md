@@ -16,10 +16,11 @@ Translations are managed using the
 [Transifex](https://app.transifex.com/openstreetmap/id-editor/) platform. Sign up to Transifex via the
 ["Join This Project"](https://app.transifex.com/join/?o=openstreetmap&p=id-editor&t=opensource) link on
 the [iD's project page](https://app.transifex.com/openstreetmap/id-editor/) and
-click **Translate** to start translating. If you try to join via the home page "Sign up" link you won't
-be able to create an account without a "business email". Translations are divided into
-separate resources:
+click **Translate** to start translating. The registration form asks for a "business email" but you may provide
+a regular one. If you try to join via the Transifex home page "Sign up" link you may be unable to create an
+account. After registration your account must be manually approved; you won't be able to translate until that happens.
 
+Translations are divided into separate resources:
 * *core* - contains text for the main interface of iD
 * *presets* - contains the text for labeling feature presets
 * *imagery* - contains text for imagery names and descriptions
@@ -331,7 +332,7 @@ If you are new to GitHub or git you can read the [GitHub Guides](https://guides.
 
 Additionally here is a step-by-step workflow example for beginners:
 
-1. [Login](https://github.com/login) to your GitHub account or [create](https://services.github.com/on-demand/intro-to-github/create-github-account) a GitHub account, if you do not already have one.
+1. [Login](https://github.com/login) to your GitHub account or [create](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github) a GitHub account, if you do not already have one.
 
 2. Go to the [iD main repository](https://github.com/openstreetmap/iD) and fork iD into your GitHub account (Fork is top right).
 

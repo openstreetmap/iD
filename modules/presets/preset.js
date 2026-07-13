@@ -1,9 +1,7 @@
-import { deepEqual } from 'fast-equals';
-
 import { t } from '../core/localizer';
 import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
 import { utilObjectOmit } from '../util';
-import { utilSafeClassName } from '../util/util';
+import { utilSafeClassName, utilStripDiacritics } from '../util/util';
 import { locationManager } from '../core/location_manager';
 
 
@@ -21,17 +19,15 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   let _searchAliases;         // cache
   let _searchAliasesStripped; // cache
 
-  const referenceRegex = /^\{(.*)\}$/;
-
   _this.id = presetID;
 
   _this.safeid = utilSafeClassName(presetID);  // for use in css classes, selectors, element ids
 
-  _this.originalTerms = (_this.terms || []).join();
+  _this.originalTerms = _this.terms || [];
 
   _this.originalName = _this.name || '';
 
-  _this.originalAliases = (_this.aliases || []).join('\n');
+  _this.originalAliases = _this.aliases || [];
 
   _this.originalScore = _this.matchScore || 1;
 
@@ -89,10 +85,14 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     return score;
   };
 
-
   _this.t = (scope, options) => {
     const textID = `_tagging.presets.presets.${presetID}.${scope}`;
     return t(textID, options);
+  };
+
+  _this.t.all = (scope, options) => {
+    const textID = `_tagging.presets.presets.${presetID}.${scope}`;
+    return t.all(textID, options);
   };
 
   _this.t.append = (scope, options) => {
@@ -100,25 +100,13 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     return t.append(textID, options);
   };
 
-  function resolveReference(which) {
-    const match = (_this[which] || '').match(referenceRegex);
-    if (match) {
-      const preset = allPresets[match[1]];
-      if (preset) {
-        return preset;
-      }
-      console.error(`Unable to resolve referenced preset: ${match[1]}`);  // eslint-disable-line no-console
-    }
-    return _this;
-  }
-
   _this.name = () => {
-    return resolveReference('originalName')
+    return _this
       .t('name', { 'default': _this.originalName || presetID });
   };
 
   _this.nameLabel = () => {
-    return resolveReference('originalName')
+    return _this
       .t.append('name', { 'default': _this.originalName || presetID });
   };
 
@@ -143,17 +131,13 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
   _this.aliases = () => {
-    return resolveReference('originalName')
-      .t('aliases', { 'default': _this.originalAliases })
-      .trim()
-      .split(/\s*[\r\n]+\s*/)
-      .filter(Boolean);
+    return _this
+        .t.all('aliases', { 'default': _this.originalAliases });
   };
 
   _this.terms = () => {
-    return resolveReference('originalName')
-      .t('terms', { 'default': _this.originalTerms })
-      .toLowerCase().trim().split(/\s*,+\s*/);
+    return _this
+        .t.all('terms', { 'default': _this.originalTerms });
   };
 
   _this.searchName = () => {
@@ -165,7 +149,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.searchNameStripped = () => {
     if (!_searchNameStripped) {
-      _searchNameStripped = stripDiacritics(_this.searchName());
+      _searchNameStripped = utilStripDiacritics(_this.searchName());
     }
     return _searchNameStripped;
   };
@@ -180,7 +164,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   _this.searchAliasesStripped = () => {
     if (!_searchAliasesStripped) {
       _searchAliasesStripped = _this.searchAliases();
-      _searchAliasesStripped = _searchAliasesStripped.map(stripDiacritics);
+      _searchAliasesStripped = _searchAliasesStripped.map(utilStripDiacritics);
     }
     return _searchAliasesStripped;
   };
@@ -301,39 +285,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   // Replace {preset} placeholders with the fields of the specified presets.
   function resolveFields(which, loc) {
     const fieldIDs = (which === 'fields' ? _this.originalFields : _this.originalMoreFields);
-    let resolved = [];
-
-    fieldIDs.forEach(fieldID => {
-      const match = fieldID.match(referenceRegex);
-      if (match !== null) {    // a presetID wrapped in braces {}
-        resolved = resolved.concat(inheritFields(allPresets[match[1]], which, loc));
-      } else if (allFields[fieldID]) {    // a normal fieldID
-        resolved.push(allFields[fieldID]);
-      } else {
-        console.log(`Cannot resolve "${fieldID}" found in ${_this.id}.${which}`);  // eslint-disable-line no-console
-      }
-    });
-
-    // no fields resolved, so use the parent's if possible
-    if (!resolved.length) {
-      const endIndex = _this.id.lastIndexOf('/');
-      const parentID = endIndex && _this.id.substring(0, endIndex);
-      if (parentID) {
-        let parent = allPresets[parentID];
-        if (loc) {
-          const validHere = locationManager.locationSetsAt(loc);
-          if (parent?.locationSetID && !validHere.has(parent.locationSetID)) {
-            // this is a preset for which a regional variant of the main preset exists
-            const candidateIDs = Object.keys(allPresets).filter(k => k.startsWith(parentID));
-            parent = allPresets[candidateIDs.find(candidateID => {
-              const candidate = allPresets[candidateID];
-              return validHere.has(candidate.locationSetID) && deepEqual(candidate.tags, parent.tags);
-            })];
-          }
-        }
-        resolved = inheritFields(parent, which, loc);
-      }
-    }
+    let resolved = fieldIDs.map(fieldID => allFields[fieldID]);
 
     if (loc) {
       const validHere = locationManager.locationSetsAt(loc);
@@ -341,46 +293,6 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     }
 
     return resolved;
-
-
-    // returns an array of fields to inherit from the given presetID, if found
-    function inheritFields(parent, which, loc) {
-      if (!parent) return [];
-
-      if (which === 'fields') {
-        return parent.fields(loc).filter(shouldInherit);
-      } else if (which === 'moreFields') {
-        return parent.moreFields(loc).filter(shouldInherit);
-      } else {
-        return [];
-      }
-    }
-
-
-    // Skip `fields` for the keys which define the preset.
-    // These are usually `typeCombo` fields like `shop=*`
-    function shouldInherit(f) {
-      if (f.key && _this.tags[f.key] !== undefined &&
-        // inherit anyway if multiple values are allowed or just a checkbox
-        f.type !== 'multiCombo' && f.type !== 'semiCombo' && f.type !== 'manyCombo' && f.type !== 'check'
-      ) return false;
-      if (f.key && (_this.originalFields.some(originalField => f.key === allFields[originalField]?.key)
-             || _this.originalMoreFields.some(originalField => f.key === allFields[originalField]?.key))) {
-        // current preset already has a field for this field
-        return false;
-      }
-
-      return true;
-    }
-  }
-
-
-  function stripDiacritics(s) {
-    // split combined diacritical characters into their parts
-    if (s.normalize) s = s.normalize('NFD');
-    // remove diacritics
-    s = s.replace(/[\u0300-\u036f]/g, '');
-    return s;
   }
 
   return _this;

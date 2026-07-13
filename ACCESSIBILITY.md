@@ -38,6 +38,7 @@ elsewhere in this document.
 | 🟩 | ![opera logo] | [Opera](https://en.wikipedia.org/wiki/Opera_(web_browser)) | |
 | 🟩 | ![edge logo] | [Edge](https://en.wikipedia.org/wiki/Microsoft_Edge) | |
 | ❌ | ![ie logo] | [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer) | IE has been discontinued, but [IE 11 is still maintained](https://docs.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge). iD uses features of modern web standard which are not supported by Internet Explorer. |
+| 🟩 | ![tor logo] | [Tor Browser](https://en.wikipedia.org/wiki/Tor_(network)#Tor_Browser) | Note that OpenStreetMap account creation is not part of iD. |
 | ✅ | ![webkit logo] | [iOS](https://en.wikipedia.org/wiki/IOS) browsers | All browsers on iOS (e.g. Safari, Chrome, Firefox, Edge) use the [WebKit](https://en.wikipedia.org/wiki/WebKit) engine and should thus have equivalent support |
 | 🟩 | ![android logo] | [Android](https://en.wikipedia.org/wiki/Android_(operating_system)) browsers | Browsers on Android can use their own engines, so support may vary, but there are currently no known issues |
 | 🟩 | 🌐 | Others | iD should run on any browser implementing [modern web standards](https://www.w3.org/standards/). Hardware factors such as screen size may affect usability |
@@ -47,6 +48,7 @@ elsewhere in this document.
 [chrome logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/40px-Google_Chrome_icon_%28September_2014%29.svg.png
 [firefox logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/40px-Firefox_logo%2C_2019.svg.png
 [edge logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Microsoft_Edge_logo_%282015%E2%80%932019%29.svg/40px-Microsoft_Edge_logo_%282015%E2%80%932019%29.svg.png
+[tor logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Tor_Browser_icon.svg/40px-Tor_Browser_icon_(New).png
 [ie logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/40px-Internet_Explorer_10%2B11_logo.svg.png
 [webkit logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/WebKit_logo.svg/40px-WebKit_logo.svg.png
 [android logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/40px-Android_robot.svg.png
@@ -144,7 +146,6 @@ iD is largely platform-independent, meaning it should work on any system that ru
 | 🟠 | Slow connection | iD downloads a lot of data all throughout use, so slow connections can significantly slow down mapping | [#7788](https://github.com/openstreetmap/iD/issues/7788) |
 | ✅ | Intermittent connection | Downloaded data can be edited during temporary connection losses. A banner message is displayed. Reconnection is attempted automatically and a "Retry" button is also provided |
 | 🟠 | [Mobile phone connection](https://en.wikipedia.org/wiki/Cellular_network) | A fast, reliable phone network can be used for mapping. However, iD downloads data indiscriminately and can thus gobble up limited data plans | [#7788](https://github.com/openstreetmap/iD/issues/7788) |
-| 🤷 | [Tor](https://en.wikipedia.org/wiki/Tor_%28anonymity_network%29) connection | |
 
 <br/>
 

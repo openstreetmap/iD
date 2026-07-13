@@ -1,6 +1,5 @@
 declare global {
   declare var iD: typeof import('.');
-  declare var d3: typeof import('d3');
   declare var VITEST: true;
 
   declare type TagKey = string;
@@ -34,15 +33,20 @@ declare global {
   }
 
   declare namespace d3 {
-    export type Selection<T = any> = import('d3').Selection<
+    export type Selection<T = any> = import('d3-selection').Selection<
       T,
       any,
-      unknown,
+      any,
       unknown
     >;
 
     export type Selector = (selection: Selection) => void;
   }
+
+    interface ObjectConstructor {
+        // custom overload so that `Object.keys(Record<T, …>)` returns `T[]`
+        keys<T>(o: T extends Record<infer K, unknown> ? [K] extends [string] ? T : never : never): (keyof T)[];
+    }
 }
 
 export {};

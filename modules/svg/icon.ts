@@ -1,5 +1,5 @@
-export function svgIcon(name, svgklass, useklass) {
-    return function drawIcon(selection) {
+export function svgIcon(name: string, svgklass: string, useklass?: string) {
+    return function drawIcon(selection: d3.Selection) {
         selection.selectAll('svg.icon' + (svgklass ? '.' + svgklass.split(' ')[0] : ''))
             .data([0])
             .enter()
@@ -7,6 +7,6 @@ export function svgIcon(name, svgklass, useklass) {
             .attr('class', 'icon ' + (svgklass || ''))
             .append('use')
             .attr('xlink:href', name)
-            .attr('class', useklass);
+            .attr('class', useklass!);
     };
 }

@@ -1,5 +1,4 @@
 import { color as d3_color, type RGBColor } from 'd3';
-import { remove as removeDiacritics } from 'diacritics';
 
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
@@ -495,6 +494,9 @@ export function utilSetTransform(el: d3.Selection, x: number, y: number, scale: 
     return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));
 }
 
+export function utilStripDiacritics(string: string) {
+    return string.normalize('NFD').replace(/\p{Dia}/gu, '');
+}
 
 // Calculates Levenshtein distance between two strings
 // see:  https://en.wikipedia.org/wiki/Levenshtein_distance
@@ -506,8 +508,8 @@ export function utilSetTransform(el: d3.Selection, x: number, y: number, scale: 
 export function utilEditDistance(a: string, b: string, options?: {
     substring?: boolean
 }): number {
-    a = removeDiacritics(a.toLowerCase());
-    b = removeDiacritics(b.toLowerCase());
+    a = utilStripDiacritics(a.toLowerCase());
+    b = utilStripDiacritics(b.toLowerCase());
     if (a.length === 0) return options?.substring ? 0 : b.length;
     if (b.length === 0) return a.length;
     const matrix = [];
@@ -656,7 +658,7 @@ export function utilCompareIDs(left: EntityID, right: EntityID): number {
 // Database IDs (with positive numbers) before editor ones (with negative numbers).
 // Among each category, the closest number to 0 is the oldest.
 // Test IDs (any string that does not conform to OSM's ID scheme) are taken last.
-export function utilOldestID(ids: EntityID[]): EntityID | undefined {
+export function utilOldestID<T extends EntityID>(ids: T[]): T | undefined {
     if (ids.length === 0) {
         return undefined;
     }

@@ -1,6 +1,13 @@
 import { actionReverse } from '../actions/reverse';
+import type { coreGraph } from '../core';
 import { osmWay } from './way';
+import type { Action } from '../core/history';
+import type { RelationMember } from './relation';
+import type { osmNode } from './node';
 
+
+export type Sequences<T extends RelationMember | osmWay> = Sequence<T>[] & { actions: Action[] };
+export type Sequence<T extends RelationMember | osmWay> = T[] & { nodes: osmNode[] };
 
 // Join `toJoin` array into sequences of connecting ways.
 
@@ -27,22 +34,15 @@ import { osmWay } from './way';
 // Incomplete members (those for which `graph.hasEntity(element.id)` returns
 // false) and non-way members are ignored.
 //
-/**
- * @typedef {RelationMember[] & { nodes: iD.OsmNode[] }} Sequence
- * @typedef {Sequence[] & { actions: unknown[] }} Sequences
- * @param {import('./relation').RelationMember[]} toJoin
- * @param {iD.Graph} graph
- * @returns {Sequences}
- */
-export function osmJoinWays(toJoin, graph) {
-    function resolve(member) {
+export function osmJoinWays<T extends RelationMember | osmWay>(toJoin: T[], graph: coreGraph): Sequences<T> {
+    function resolve(member: T) {
         return graph.childNodes(graph.entity(member.id));
     }
 
-    function reverse(item) {
+    function reverse(item: T): T {
         var action = actionReverse(item.id, { reverseOneway: true });
         sequences.actions.push(action);
-        return (item instanceof osmWay) ? action(graph).entity(item.id) : item;
+        return (item instanceof osmWay) ? action(graph).entity(item.id) as T : item;
     }
 
     // make a copy containing only the items to join
@@ -61,20 +61,20 @@ export function osmJoinWays(toJoin, graph) {
         }
     }
 
-    var sequences = [];
+    var sequences = [] as unknown as Sequences<T>;
     sequences.actions = [];
 
     while (toJoin.length) {
         // start a new sequence
-        var item = toJoin.shift();
-        var currWays = [item];
+        var item = toJoin.shift()!;
+        var currWays = [item] as Sequence<T>;
         var currNodes = resolve(item).slice();
 
         // add to it
         while (toJoin.length) {
             var start = currNodes[0];
             var end = currNodes[currNodes.length - 1];
-            var fn = null;
+            var fn: typeof Array.prototype.push | null = null;
             var nodes = null;
 
             // Find the next way/member to join.
@@ -125,8 +125,8 @@ export function osmJoinWays(toJoin, graph) {
                 break;
             }
 
-            fn.apply(currWays, [item]);
-            fn.apply(currNodes, nodes);
+            fn!.apply(currWays, [item]);
+            fn!.apply(currNodes, nodes);
 
             toJoin.splice(i, 1);
         }

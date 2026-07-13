@@ -1,4 +1,6 @@
-export function svgTouch() {
+import type { SvgLayer } from './layers';
+
+export function svgTouch(): SvgLayer {
 
     function drawTouch(selection: d3.Selection) {
         selection.selectAll('.layer-touch')
