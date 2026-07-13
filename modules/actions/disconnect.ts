@@ -1,4 +1,11 @@
+import type { coreGraph } from '../core';
+import type { Action } from '../core/history';
+import { type EntityId, type NodeId } from '../osm';
 import { osmNode } from '../osm/node';
+
+export interface ActionDisconnect extends Action {
+    limitWays(wayIds?: EntityId[]): EntityId[] | this;
+}
 
 
 // Disconnect the ways at the given node.
@@ -15,18 +22,18 @@ import { osmNode } from '../osm/node';
 //   https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/UnjoinNodeAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/UnGlueAction.java
 //
-export function actionDisconnect(nodeId, newNodeId) {
-    var wayIds;
+export function actionDisconnect(nodeId: NodeId, newNodeId?: EntityId): ActionDisconnect {
+    var wayIds: EntityId[];
 
-    var disconnectableRelationTypes = {
+    const disconnectableRelationTypes: Record<string, true> = {
         'associatedStreet': true,
         'enforcement': true,
         'site': true,
     };
 
-    var action = function(graph) {
+    const action: ActionDisconnect = function(graph) {
         var node = graph.entity(nodeId);
-        var connections = action.connections(graph);
+        var connections = getConnections(graph);
 
         connections.forEach(function(connection) {
             var way = graph.entity(connection.wayID);
@@ -49,7 +56,7 @@ export function actionDisconnect(nodeId, newNodeId) {
     };
 
 
-    action.connections = function(graph) {
+    function getConnections(graph: coreGraph) {
         var candidates = [];
         var keeping = false;
         var parentWays = graph.parentWays(graph.entity(nodeId));
@@ -84,11 +91,11 @@ export function actionDisconnect(nodeId, newNodeId) {
 
 
     action.disabled = function(graph) {
-        var connections = action.connections(graph);
+        var connections = getConnections(graph);
         if (connections.length === 0) return 'not_connected';
 
         var parentWays = graph.parentWays(graph.entity(nodeId));
-        var seenRelationIds = {};
+        var seenRelationIds: Record<EntityId, EntityId> = {};
         var sharedRelation;
 
         parentWays.forEach(function(way) {
@@ -117,7 +124,7 @@ export function actionDisconnect(nodeId, newNodeId) {
 
     action.limitWays = function(val) {
         if (!arguments.length) return wayIds;
-        wayIds = val;
+        wayIds = val!;
         return action;
     };
 

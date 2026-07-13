@@ -1,6 +1,9 @@
 import { actionDeleteNode } from './delete_node';
 import { actionDeleteWay } from './delete_way';
 import { utilArrayUniq, utilOldestID } from '../util';
+import type { Action } from '../core/history';
+import type { EntityId, osmNode, osmRelation, osmWay, NodeId } from '../osm';
+import type { RelationMember } from '../osm/relation';
 
 
 // Connect the ways at the given nodes.
@@ -17,10 +20,10 @@ import { utilArrayUniq, utilOldestID } from '../util';
 //   https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MergeNodesAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/MergeNodesAction.java
 //
-export function actionConnect(nodeIDs) {
-    var action = function(graph) {
+export function actionConnect(nodeIDs: NodeId[]): Action {
+    var action: Action = function(graph) {
         var survivor;
-        var node;
+        var node: osmNode;
         var parents;
         var i, j;
 
@@ -29,7 +32,7 @@ export function actionConnect(nodeIDs) {
         // last one if there are only new nodes.
         nodeIDs.reverse();
 
-        var interestingIDs = [];
+        var interestingIDs: NodeId[] = [];
         for (i = 0; i < nodeIDs.length; i++) {
             node = graph.entity(nodeIDs[i]);
             if (node.hasInterestingTags()) {
@@ -38,7 +41,7 @@ export function actionConnect(nodeIDs) {
                 }
             }
         }
-        survivor = graph.entity(utilOldestID(interestingIDs.length > 0 ? interestingIDs : nodeIDs));
+        survivor = graph.entity(utilOldestID(interestingIDs.length > 0 ? interestingIDs : nodeIDs)!);
 
         // Replace all non-surviving nodes with the survivor and merge tags.
         for (i = 0; i < nodeIDs.length; i++) {
@@ -74,15 +77,18 @@ export function actionConnect(nodeIDs) {
 
 
     action.disabled = function(graph) {
-        var seen = {};
-        var restrictionIDs = [];
+        var seen: Record<EntityId, string> = {};
+        var restrictionIDs: EntityId[] = [];
         var survivor;
-        var node, way;
-        var relations, relation, role;
+        var node: osmNode;
+        var way: osmWay;
+        var relations;
+        var relation: osmRelation;
+        var role;
         var i, j, k;
 
         // Select the node with the oldest ID as the survivor.
-        survivor = graph.entity(utilOldestID(nodeIDs));
+        survivor = graph.entity(utilOldestID(nodeIDs)!);
 
         // 1. disable if the nodes being connected have conflicting relation roles
         for (i = 0; i < nodeIDs.length; i++) {
@@ -91,7 +97,7 @@ export function actionConnect(nodeIDs) {
 
             for (j = 0; j < relations.length; j++) {
                 relation = relations[j];
-                role = relation.memberById(node.id).role || '';
+                role = relation.memberById(node.id)!.role || '';
 
                 // if this node is a via node in a restriction, remember for later
                 if (relation.hasFromViaTo()) {
@@ -133,16 +139,16 @@ export function actionConnect(nodeIDs) {
 
             var memberWays = relation.members
                 .filter(function(m) { return m.type === 'way'; })
-                .map(function(m) { return graph.entity(m.id); });
+                .map(function(m) { return graph.entity<osmWay>(m.id); });
 
             memberWays = utilArrayUniq(memberWays);
-            var f = relation.memberByRole('from');
-            var t = relation.memberByRole('to');
+            var f = relation.memberByRole('from')!;
+            var t = relation.memberByRole('to')!;
             var isUturn = (f.id === t.id);
 
             // 2a. disable if connection would damage a restriction
             // (a key node is a node at the junction of ways)
-            var nodes = { from: [], via: [], to: [], keyfrom: [], keyto: [] };
+            var nodes: Record<string, EntityId[]> = { from: [], via: [], to: [], keyfrom: [], keyto: [] };
             for (j = 0; j < relation.members.length; j++) {
                 collectNodes(relation.members[j], nodes);
             }
@@ -225,18 +231,18 @@ export function actionConnect(nodeIDs) {
 
 
         // if a key node appears multiple times (indexOf !== lastIndexOf) it's a FROM-VIA or TO-VIA junction
-        function hasDuplicates(n, i, arr) {
+        function hasDuplicates<T>(n: T, i: number, arr: T[]) {
             return arr.indexOf(n) !== arr.lastIndexOf(n);
         }
 
-        function keyNodeFilter(froms, tos) {
-            return function(n) {
+        function keyNodeFilter<T>(froms: T[], tos: T[]) {
+            return function(n: T) {
                 return froms.indexOf(n) === -1 && tos.indexOf(n) === -1;
             };
         }
 
-        function collectNodes(member, collection) {
-            var entity = graph.hasEntity(member.id);
+        function collectNodes(member: RelationMember, collection: Record<string, EntityId[]>) {
+            var entity = graph.hasEntity<osmWay>(member.id);
             if (!entity) return;
 
             var role = member.role || '';
