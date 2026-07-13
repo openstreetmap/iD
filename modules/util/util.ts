@@ -32,35 +32,83 @@ export function utilTotalExtent(array: EntityID[] | iD.OsmEntity[], graph: coreG
 }
 
 export type TagDiff = {
-    type: '-' | '+';
-    key: string;
-    oldVal: string;
-    newVal: string;
+    type: '-' | '+' | '~';
+    key: TagKey;
+    oldVal: TagValue;
+    newVal: TagValue;
     display: string;
+    render: (selection: d3.Selection<HTMLElement>) => void;
 };
-export function utilTagDiff(oldTags: Tags, newTags: Tags): TagDiff[] {
+export function utilTagDiff(oldTags: Tags, newTags: Tags, contextKeys: TagKey[] = []): TagDiff[] {
     const tagDiff : TagDiff[] = [];
     const keys = utilArrayUnion(Object.keys(oldTags), Object.keys(newTags)).sort();
     keys.forEach(function(k) {
         const oldVal = oldTags[k];
         const newVal = newTags[k];
 
+        function renderWithValueLink(
+            selection: d3.Selection<HTMLElement>,
+            keyPart: string,
+            valuePart: string,
+            link: string
+        ) {
+            selection.append('span')
+                .text(keyPart);
+            selection.append('a')
+                .attr('href', link)
+                .attr('target', '_blank')
+                .text(valuePart);
+        }
+
         if ((oldVal || oldVal === '') && (newVal === undefined || newVal !== oldVal)) {
+            const keyPart = `- ${k}=`;
             tagDiff.push({
                 type: '-',
                 key: k,
                 oldVal: oldVal,
                 newVal: newVal,
-                display: '- ' + k + '=' + oldVal
+                display: `${keyPart}${oldVal}`,
+                render: selection => {
+                    if (k.split(':').includes('wikidata') && oldVal.startsWith('Q')) {
+                        renderWithValueLink(selection, keyPart, oldVal, `https://www.wikidata.org/wiki/${oldVal}`);
+                    } else {
+                        selection.text(`${keyPart}${oldVal}`);
+                    }
+                }
             });
         }
         if ((newVal || newVal === '') && (oldVal === undefined || newVal !== oldVal)) {
+            const keyPart = `+ ${k}=`;
             tagDiff.push({
                 type: '+',
                 key: k,
                 oldVal: oldVal,
                 newVal: newVal,
-                display: '+ ' + k + '=' + newVal
+                display: `${keyPart}${newVal}`,
+                render: selection => {
+                    if (k.split(':').includes('wikidata') && newVal.startsWith('Q')) {
+                        renderWithValueLink(selection, keyPart, newVal, `https://www.wikidata.org/wiki/${newVal}`);
+                    } else {
+                        selection.text(`${keyPart}${newVal}`);
+                    }
+                }
+            });
+        }
+        if (contextKeys.includes(k) && newVal === oldVal) {
+            const keyPart = `${decodeURIComponent('%C2%A0' /* &nbsp; */)} ${k}=`;
+            tagDiff.push({
+                type: '~',
+                key: k,
+                oldVal: newVal,
+                newVal: newVal,
+                display: `${keyPart}${newVal}`,
+                render: selection => {
+                    if (k.split(':').includes('wikidata') && newVal.startsWith('Q')) {
+                        renderWithValueLink(selection, keyPart, newVal, `https://www.wikidata.org/wiki/${newVal}`);
+                    } else {
+                        selection.text(`${keyPart}${newVal}`);
+                    }
+                }
             });
         }
     });

@@ -45,6 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add dedicated pattern for `landuse=flowerbed` features ([#12458], thanks [@RudyTheDev])
 * Apply most recently used preset when immediately pressing <kbd>Enter</kbd> in the preset list ([#12526])
 * Prioritize parent relations of connected features in relation membership dropdown list ([#11896], thanks [@bhavyaKhatri2703])
+* Link `*:wikidata` tags to wikidata in suggested tag upgrade list ([#12531])
 #### :scissors: Operations
 * Allow circularize operation also when multiple selected ways form a closed loop ([#12457])
 #### :camera: Street-Level
@@ -81,6 +82,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12467]: https://github.com/openstreetmap/iD/issues/12467
 [#12511]: https://github.com/openstreetmap/iD/pull/12511
 [#12526]: https://github.com/openstreetmap/iD/issues/12526
+[#12531]: https://github.com/openstreetmap/iD/issues/12531
 [@brianstrauch]: https://github.com/brianstrauch
 [@greymoth-jp]: https://github.com/greymoth-jp
 
