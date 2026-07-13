@@ -73,7 +73,7 @@ export function rendererBackgroundSource(data) {
 
     source.hasDescription = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).texts.join('');
+        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: _description }).texts.join('');
         return !!descriptionText;
     };
 
