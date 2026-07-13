@@ -8,7 +8,7 @@ import type { Vec2 } from '../geo/vector';
 import type { SvgLayer } from './layers';
 
 
-type WithLoc = Pick<osmNode, 'loc'>;
+export type WithLoc = Pick<osmNode, 'loc'>;
 
 export function svgGeolocate(projection: Projection): SvgLayer {
     var layer = d3_select<SVGGElement, 0>(null!);

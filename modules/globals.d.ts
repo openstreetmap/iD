@@ -47,6 +47,11 @@ declare global {
         // custom overload so that `Object.keys(Record<T, …>)` returns `T[]`
         keys<T>(o: T extends Record<infer K, unknown> ? [K] extends [string] ? T : never : never): (keyof T)[];
     }
+
+    interface ParentNode extends Node {
+        /** used internally by d3 to store the values passed to `.data()` */
+        __data__: any;
+    }
 }
 
 export {};
