@@ -1,18 +1,22 @@
 import { actionDeleteMultiple } from './delete_multiple';
 import { utilArrayUniq } from '../util';
+import type { Action } from '../core/history';
+import type { OsmEntity } from '../osm/abstract-entity';
+import type { coreGraph } from '../core/graph';
+import type { RelationId } from '../osm';
 
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteRelationAction.as
-export function actionDeleteRelation(relationID, allowUntaggedMembers) {
+export function actionDeleteRelation(relationID: RelationId, allowUntaggedMembers?: boolean): Action {
 
-    function canDeleteEntity(entity, graph) {
+    function canDeleteEntity(entity: OsmEntity, graph: coreGraph) {
         return !graph.parentWays(entity).length &&
             !graph.parentRelations(entity).length &&
             (!entity.hasInterestingTags() && !allowUntaggedMembers);
     }
 
 
-    var action = function(graph) {
+    const action: Action = function(graph) {
         var relation = graph.entity(relationID);
 
         graph.parentRelations(relation)

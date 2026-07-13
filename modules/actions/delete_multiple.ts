@@ -1,9 +1,11 @@
+import type { Action } from '../core/history';
+import type { EntityId } from '../osm';
 import { actionDeleteNode } from './delete_node';
 import { actionDeleteRelation } from './delete_relation';
 import { actionDeleteWay } from './delete_way';
 
 
-export function actionDeleteMultiple(ids) {
+export function actionDeleteMultiple(ids: EntityId[]): Action {
     var actions = {
         way: actionDeleteWay,
         node: actionDeleteNode,
@@ -11,10 +13,10 @@ export function actionDeleteMultiple(ids) {
     };
 
 
-    var action = function(graph) {
+    const action: Action = function(graph) {
         ids.forEach(function(id) {
             if (graph.hasEntity(id)) { // It may have been deleted already.
-                graph = actions[graph.entity(id).type](id)(graph);
+                graph = actions[graph.entity(id).type](id as never)(graph);
             }
         });
 
