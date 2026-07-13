@@ -51,6 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix radio fields being always in single line mode when feature was selected while sidebar was collapsed ([#12454])
 * Fix undo and remove buttons for `multiCombo` fields ([#12406], thanks [@RudyTheDev])
 * Fix a crash when cancelling drawing a line while hovering other features with a `directionalCombo` field ([#12467])
+* Make sure rendering of truncated address labels does not result in broken unicode characters ([#12511], thanks [@greymoth-jp])
 #### :earth_asia: Localization
 * Improve some edge cases of rendering of mixed right-to-left and left-to-right text ([#8713])
 * When labelling features, match locale codes like `zh-CN` to name tags like `name:zh-Hans` ([#10911], thanks [@k-yle])
@@ -72,7 +73,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12457]: https://github.com/openstreetmap/iD/pull/12457
 [#12458]: https://github.com/openstreetmap/iD/pull/12458
 [#12467]: https://github.com/openstreetmap/iD/issues/12467
+[#12511]: https://github.com/openstreetmap/iD/pull/12511
 [@brianstrauch]: https://github.com/brianstrauch
+[@greymoth-jp]: https://github.com/greymoth-jp
 
 
 # 2.41.2
