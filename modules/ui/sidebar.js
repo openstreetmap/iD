@@ -15,6 +15,7 @@ import { uiInspector } from './inspector';
 import { uiOsmoseEditor } from './osmose_editor';
 import { uiNoteEditor } from './note_editor';
 import { localizer } from '../core/localizer';
+import { prefs } from '../core/preferences';
 
 
 export function uiSidebar(context) {
@@ -42,7 +43,12 @@ export function uiSidebar(context) {
         selection
             .style('min-width', minWidth + 'px')
             .style('max-width', '400px')
-            .style('width', '33.3333%');
+            .style('width', prefs('sidebar-width') || '33.3333%');
+
+        // Restore collapsed state
+        if (prefs('sidebar-collapsed') === 'true') {
+            selection.classed('collapsed', true);
+        }
 
         var resizer = selection
             .append('div')
@@ -144,6 +150,14 @@ export function uiSidebar(context) {
                 .on('touchmove.sidebar-resizer', null)
                 .on(_pointerPrefix + 'move.sidebar-resizer', null)
                 .on(_pointerPrefix + 'up.sidebar-resizer pointercancel.sidebar-resizer', null);
+
+            // Save the current sidebar width and collapsed state
+            var isCollapsed = selection.classed('collapsed');
+            prefs('sidebar-collapsed', isCollapsed);
+            if (!isCollapsed && containerWidth) {
+                var widthPct = (sidebarWidth / containerWidth) * 100;
+                prefs('sidebar-width', widthPct + '%');
+            }
 
             inspectorWrap.call(inspector, { redrawEntityEditor: true });
         }
@@ -400,6 +414,9 @@ export function uiSidebar(context) {
                         // hide the sidebar's content after it transitions offscreen
                         selection.classed('collapsed', isCollapsing);
                     }
+
+                    // Save the collapsed state
+                    prefs('sidebar-collapsed', selection.classed('collapsed'));
 
                     // switch back from px to %
                     if (!isCollapsing) {
