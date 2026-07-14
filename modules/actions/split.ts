@@ -3,6 +3,19 @@ import { osmRelation } from '../osm/relation';
 import { osmWay } from '../osm/way';
 import { utilArrayIntersection, utilWrap } from '../util';
 import { osmSummableTags, osmWayOnlyTags } from '../osm/tags';
+import type { NodeId, RelationId, WayId } from '../osm';
+import type { coreGraph } from '../core';
+import type { Action } from '../core/history';
+
+type HistoryStrategy = 'longest' | 'first';
+
+export interface ActionSplit extends Action {
+    getCreatedWayIDs?(): WayId[];
+    waysForNode(nodeId: NodeId, graph: coreGraph): osmWay[];
+    ways(graph: coreGraph): osmWay[];
+    limitWays(wayIds?: WayId[]): WayId[] | this;
+    keepHistoryOn(val?: HistoryStrategy): HistoryStrategy | this;
+}
 
 // Split a way at the given node.
 //
@@ -18,21 +31,21 @@ import { osmSummableTags, osmWayOnlyTags } from '../osm/tags';
 // Reference:
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 //
-export function actionSplit(nodeIds, newWayIds) {
+export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit {
     // accept single ID for backwards-compatibility
     if (typeof nodeIds === 'string') nodeIds = [nodeIds];
 
-    var _wayIDs;
+    var _wayIDs: WayId[];
     // the strategy for picking which way will have a new version and which way is newly created
-    var _keepHistoryOn = 'longest'; // 'longest', 'first'
+    var _keepHistoryOn: HistoryStrategy = 'longest'; // 'longest', 'first'
 
     // these closed ways have to be treated in a special way when contained in a (route) relation
     const circularJunctions = ['roundabout', 'circular'];
 
     // The IDs of the ways actually created by running this action
-    var _createdWayIDs = [];
+    var _createdWayIDs: WayId[] = [];
 
-    function dist(graph, nA, nB) {
+    function dist(graph: coreGraph, nA: NodeId, nB: NodeId) {
         var locA = graph.entity(nA).loc;
         var locB = graph.entity(nB).loc;
         var epsilon = 1e-6;
@@ -49,14 +62,14 @@ export function actionSplit(nodeIds, newWayIds) {
     // of nodes).
     // For example: bone-shaped areas get split across their waist
     // line, circles across the diameter.
-    function splitArea(nodes, idxA, graph) {
+    function splitArea(nodes: NodeId[], idxA: number, graph: coreGraph) {
         var lengths = new Array(nodes.length);
         var length;
         var i;
         var best = 0;
         var idxB;
 
-        function wrap(index) {
+        function wrap(index: number) {
             return utilWrap(index, nodes.length);
         }
 
@@ -84,10 +97,10 @@ export function actionSplit(nodeIds, newWayIds) {
             }
         }
 
-        return idxB;
+        return idxB!;
     }
 
-    function totalLengthBetweenNodes(graph, nodes) {
+    function totalLengthBetweenNodes(graph: coreGraph, nodes: NodeId[]) {
         var totalLength = 0;
         for (var i = 0; i < nodes.length - 1; i++) {
             totalLength += dist(graph, nodes[i], nodes[i + 1]);
@@ -95,7 +108,7 @@ export function actionSplit(nodeIds, newWayIds) {
         return totalLength;
     }
 
-    function split(graph, nodeId, wayA, newWayId, otherNodeIds) {
+    function split(graph: coreGraph, nodeId: NodeId, wayA: osmWay, newWayId: WayId | undefined, otherNodeIds: NodeId[]) {
         var wayB = new osmWay({ id: newWayId, tags: wayA.tags });   // `wayB` is the NEW way
         var nodesA;
         var nodesB;
@@ -150,8 +163,8 @@ export function actionSplit(nodeIds, newWayIds) {
                 count > 0 &&
                 // ensure integer
                 Math.round(count) === count) {
-                var tagsA = Object.assign({}, wayA.tags);
-                var tagsB = Object.assign({}, wayB.tags);
+                var tagsA = { ...wayA.tags };
+                var tagsB = { ...wayB.tags };
 
                 var ratioA = lengthA / (lengthA + lengthB);
                 var countA = Math.round(count * ratioA);
@@ -172,23 +185,23 @@ export function actionSplit(nodeIds, newWayIds) {
                 // 1. Splitting a FROM/TO way - only `wayA` OR `wayB` remains in relation
                 //    (whichever one is connected to the VIA node/ways)
                 // 2. Splitting a VIA way - `wayB` remains in relation as a VIA way
-                var f = relation.memberByRole('from');
+                var f = relation.memberByRole('from')!;
                 var v = [
                     ...relation.membersByRole('via'),
                     ...relation.membersByRole('intersection'),
                 ];
-                var t = relation.memberByRole('to');
+                var t = relation.memberByRole('to')!;
                 var i;
 
                 if (f.id === wayA.id || t.id === wayA.id) {
                     // 1. split a FROM/TO
                     var keepB = false;
                     if (v.length === 1 && v[0].type === 'node') {   // check via node
-                        keepB = wayB.contains(v[0].id);
+                        keepB = wayB.contains(v[0].id as NodeId);
                     } else {                                        // check via way(s)
                         for (i = 0; i < v.length; i++) {
                             if (v[i].type === 'way') {
-                                var wayVia = graph.hasEntity(v[i].id);
+                                var wayVia = graph.hasEntity<osmWay>(v[i].id);
                                 if (wayVia && utilArrayIntersection(wayB.nodes, wayVia.nodes).length) {
                                     keepB = true;
                                     break;
@@ -221,11 +234,11 @@ export function actionSplit(nodeIds, newWayIds) {
         });
 
         if (isArea) {
-            const areaTags = {
+            const areaTags: Tags = {
                 ...wayA.tags,
                 type: 'multipolygon'
             };
-            const lineTags = {};
+            const lineTags: Tags = {};
             for (const key in areaTags) {
                 if (osmWayOnlyTags[key] && osmWayOnlyTags[key][areaTags[key]]) {
                     lineTags[key] = areaTags[key];
@@ -271,11 +284,11 @@ export function actionSplit(nodeIds, newWayIds) {
     // are not met, the order of the relation members will at most be incorrect
     // between the existing and newly created way; other relation members are
     // kept unmodified.
-    function splitWayMember(graph, relationId, wayA, wayB) {
+    function splitWayMember(graph: coreGraph, relationId: RelationId, wayA: osmWay, wayB: osmWay) {
         // returns true if way1 connects to way2 at either end node, or if one
         // of the two ways is tagged as a "roundabout" and connects to the other
         // way at any of its nodes.
-        function connects(way1, way2) {
+        function connects(way1: osmWay, way2: osmWay) {
             if (way1.nodes.length < 2 || way2.nodes.length < 2) return false;
             if (circularJunctions.includes(way1.tags.junction) && way1.isClosed()) {
                 return way1.nodes.some(nodeId =>
@@ -364,7 +377,7 @@ export function actionSplit(nodeIds, newWayIds) {
                 if (wayAconnectsPrev && wayBconnectsPrev && wayAconnectsNext && wayBconnectsNext) {
                     // look one further member ahead
                     if (i > 2 && graph.hasEntity(members[i - 2].id)) {
-                        const prev2Entity = graph.entity(members[i - 2].id);
+                        const prev2Entity = graph.entity<osmWay>(members[i - 2].id);
                         if (connects(prev2Entity, wayA) && !connects(prev2Entity, wayB)) {
                             // prev-2 member connects only to A: insert B before A
                             insertMembers.push({at: i, role: member.role});
@@ -378,7 +391,7 @@ export function actionSplit(nodeIds, newWayIds) {
                     }
                     // look one further member behind
                     if (i < members.length - 2 && graph.hasEntity(members[i + 2].id)) {
-                        const next2Entity = graph.entity(members[i + 2].id);
+                        const next2Entity = graph.entity<osmWay>(members[i + 2].id);
                         if (connects(next2Entity, wayA) && !connects(next2Entity, wayB)) {
                             // next+2 member connects only to A: insert B after A
                             insertMembers.push({at: i + 1, role: member.role});
@@ -413,7 +426,7 @@ export function actionSplit(nodeIds, newWayIds) {
         return graph;
     }
 
-    const action = function(graph) {
+    const action: ActionSplit = function(graph) {
         _createdWayIDs = [];
         let newWayIndex = 0;
         const candidates = waysForNodes(nodeIds, graph);
@@ -421,11 +434,11 @@ export function actionSplit(nodeIds, newWayIds) {
             for (const i in nodeIds) {
                 const nodeId = nodeIds[i];
                 candidate = graph.entity(candidate.id);
-                graph = split(graph, nodeId, candidate, newWayIds && newWayIds[newWayIndex], nodeIds.slice(i + 1));
+                graph = split(graph, nodeId, candidate, newWayIds && newWayIds[newWayIndex], nodeIds.slice(+i + 1));
                 for (const wayId of _createdWayIDs) {
                     // also try to split created ways resulting from previous splits
                     // #12120
-                    graph = split(graph, nodeId, graph.entity(wayId), newWayIds && newWayIds[newWayIndex], nodeIds.slice(i + 1));
+                    graph = split(graph, nodeId, graph.entity(wayId), newWayIds && newWayIds[newWayIndex], nodeIds.slice(+i + 1));
                 }
                 newWayIndex += 1;
             }
@@ -437,7 +450,7 @@ export function actionSplit(nodeIds, newWayIds) {
         return _createdWayIDs;
     };
 
-    function waysForNodes(nodeIds, graph) {
+    function waysForNodes(nodeIds: NodeId[], graph: coreGraph) {
         const splittableWays = nodeIds
             .map(nodeId => waysForNode(nodeId, graph))
             .reduce((cur, acc) => utilArrayIntersection(cur, acc));
@@ -454,11 +467,11 @@ export function actionSplit(nodeIds, newWayIds) {
         return splittableWays;
     }
 
-    function waysForNode(nodeId, graph) {
+    function waysForNode(nodeId: NodeId, graph: coreGraph): osmWay[] {
         const node = graph.entity(nodeId);
         return graph.parentWays(node).filter(isSplittable);
 
-        function isSplittable(way) {
+        function isSplittable(way: osmWay) {
             // If the ways to split are specified, ignore everything else.
             if (_wayIDs && !_wayIDs.includes(way.id)) return false;
 
@@ -521,14 +534,14 @@ export function actionSplit(nodeIds, newWayIds) {
 
     action.limitWays = function(val) {
         if (!arguments.length) return _wayIDs;
-        _wayIDs = val;
+        _wayIDs = val!;
         return action;
     };
 
 
     action.keepHistoryOn = function(val) {
         if (!arguments.length) return _keepHistoryOn;
-        _keepHistoryOn = val;
+        _keepHistoryOn = val!;
         return action;
     };
 
