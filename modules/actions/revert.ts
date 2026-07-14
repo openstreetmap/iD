@@ -1,9 +1,11 @@
+import type { Action } from '../core/history';
+import type { EntityId, NodeId } from '../osm';
 import { actionDeleteRelation } from './delete_relation';
 import { actionDeleteWay } from './delete_way';
 
 
-export function actionRevert(id) {
-    var action = function(graph) {
+export function actionRevert(id: EntityId): Action {
+    const action: Action = function(graph) {
         var entity = graph.hasEntity(id),
             base = graph.base().entities[id];
 
@@ -11,7 +13,7 @@ export function actionRevert(id) {
             if (entity.type === 'node') {
                 graph.parentWays(entity)
                     .forEach(function(parent) {
-                        parent = parent.removeNode(id);
+                        parent = parent.removeNode(id as NodeId);
                         graph = graph.replace(parent);
 
                         if (parent.isDegenerate()) {

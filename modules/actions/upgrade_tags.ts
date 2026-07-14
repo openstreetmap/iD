@@ -1,9 +1,12 @@
-export function actionUpgradeTags(entityId, oldTags, replaceTags) {
+import type { Action } from '../core/history';
+import type { EntityId } from '../osm';
+
+export function actionUpgradeTags(entityId: EntityId, oldTags: Tags, replaceTags: Tags): Action {
 
     return function(graph) {
         var entity = graph.entity(entityId);
-        var tags = Object.assign({}, entity.tags);  // shallow copy
-        var transferValues = [];
+        var tags: Tags = Object.assign({}, entity.tags);  // shallow copy
+        var transferValues: TagValue[] = [];
         var semiIndex;
 
         for (var oldTagKey in oldTags) {
