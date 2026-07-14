@@ -63,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 * Improve some edge cases of rendering of mixed right-to-left and left-to-right text ([#8713])
 * When labelling features, match locale codes like `zh-CN` to name tags like `name:zh-Hans` ([#10911], thanks [@k-yle])
+* The autocomplete for changeset comments now supports mobile devices, and keyboard layouts with dead keys or IME popups ([#12565], thanks [@k-yle])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
@@ -89,6 +90,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12526]: https://github.com/openstreetmap/iD/issues/12526
 [#12531]: https://github.com/openstreetmap/iD/issues/12531
 [#12561]: https://github.com/openstreetmap/iD/pull/12561
+[#12565]: https://github.com/openstreetmap/iD/pull/12565
 [#12586]: https://github.com/openstreetmap/iD/pull/12586/
 [@brianstrauch]: https://github.com/brianstrauch
 [@jguddas]: https://github.com/jguddas
