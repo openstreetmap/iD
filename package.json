@@ -96,7 +96,7 @@
     "@types/which-polygon": "^2.2.5",
     "@typescript/native": "npm:typescript@^7.0.2",
     "@vitest/coverage-v8": "^4.1.4",
-    "@vitest/eslint-plugin": "^1.6.16",
+    "@vitest/eslint-plugin": "^1.6.23",
     "@waysidemapping/pinhead": "^15.23.0",
     "autoprefixer": "^10.4.21",
     "browserslist": "^4.27.0",
