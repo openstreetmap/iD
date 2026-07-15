@@ -1,10 +1,12 @@
+import type { Action } from '../core/history';
+import type { NodeId } from '../osm';
 import { actionDeleteRelation } from './delete_relation';
 import { actionDeleteWay } from './delete_way';
 
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteNodeAction.as
-export function actionDeleteNode(nodeId) {
-    var action = function(graph) {
+export function actionDeleteNode(nodeId: NodeId): Action {
+    const action: Action = function(graph) {
         var node = graph.entity(nodeId);
 
         graph.parentWays(node)

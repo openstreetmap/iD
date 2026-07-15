@@ -45,6 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add dedicated pattern for `landuse=flowerbed` features ([#12458], thanks [@RudyTheDev])
 * Apply most recently used preset when immediately pressing <kbd>Enter</kbd> in the preset list ([#12526])
 * Prioritize parent relations of connected features in relation membership dropdown list ([#11896], thanks [@bhavyaKhatri2703])
+* Link `*:wikidata` tags to wikidata in suggested tag upgrade list ([#12531])
 * Group related background layers when they look like yearly variants of the same source ([#12561])
 #### :scissors: Operations
 * Allow circularize operation also when multiple selected ways form a closed loop ([#12457])
@@ -56,6 +57,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix radio fields being always in single line mode when feature was selected while sidebar was collapsed ([#12454])
 * Fix undo and remove buttons for `multiCombo` fields ([#12406], thanks [@RudyTheDev])
 * Fix a crash when cancelling drawing a line while hovering other features with a `directionalCombo` field ([#12467])
+* Make sure rendering of truncated address labels does not result in broken unicode characters ([#12511], thanks [@greymoth-jp])
 #### :earth_asia: Localization
 * Improve some edge cases of rendering of mixed right-to-left and left-to-right text ([#8713])
 * When labelling features, match locale codes like `zh-CN` to name tags like `name:zh-Hans` ([#10911], thanks [@k-yle])
@@ -79,9 +81,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12457]: https://github.com/openstreetmap/iD/pull/12457
 [#12458]: https://github.com/openstreetmap/iD/pull/12458
 [#12467]: https://github.com/openstreetmap/iD/issues/12467
+[#12511]: https://github.com/openstreetmap/iD/pull/12511
 [#12526]: https://github.com/openstreetmap/iD/issues/12526
+[#12531]: https://github.com/openstreetmap/iD/issues/12531
 [#12561]: https://github.com/openstreetmap/iD/pull/12561
 [@brianstrauch]: https://github.com/brianstrauch
+[@greymoth-jp]: https://github.com/greymoth-jp
 
 
 # 2.41.2

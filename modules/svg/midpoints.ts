@@ -1,16 +1,28 @@
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
-import { geoAngle, geoLineIntersection, geoVecInterp, geoVecLength } from '../geo';
+import { geoAngle, geoLineIntersection, geoVecInterp, geoVecLength, type geoExtent } from '../geo';
+import type { Projection } from '../geo/raw_mercator';
+import type { coreGraph } from '../core';
+import type { NodeId, osmWay } from '../osm';
+import type { Feature } from 'geojson';
+import type { Vec2 } from '../geo/vector';
 
+export interface Midpoint {
+    type: 'midpoint',
+    id: string;
+    loc: Vec2;
+    edge: [NodeId, NodeId],
+    parents: osmWay[];
+}
 
-export function svgMidpoints(projection, context) {
+export function svgMidpoints(projection: Projection, context: iD.Context) {
     var targetRadius = 8;
 
-    function drawTargets(selection, graph, entities, filter) {
+    function drawTargets(selection: d3.Selection, graph: coreGraph, entities: Midpoint[], filter: (node: Midpoint) => boolean) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var getTransform = svgPointTransform(projection).geojson;
 
-        var data = entities.map(function(midpoint) {
+        var data = entities.map(function(midpoint): Feature {
             return {
                 type: 'Feature',
                 id: midpoint.id,
@@ -25,9 +37,9 @@ export function svgMidpoints(projection, context) {
             };
         });
 
-        var targets = selection.selectAll('.midpoint.target')
-            .filter(function(d) { return filter(d.properties.entity); })
-            .data(data, function key(d) { return d.id; });
+        var targets = selection.selectAll<SVGCircleElement, Feature>('.midpoint.target')
+            .filter(function(d) { return filter(d.properties!.entity); })
+            .data(data, function key(d) { return d.id!; });
 
         // exit
         targets.exit()
@@ -43,7 +55,7 @@ export function svgMidpoints(projection, context) {
     }
 
 
-    function drawMidpoints(selection, graph, entities, filter, extent) {
+    function drawMidpoints(selection: d3.Selection, graph: coreGraph, entities: osmWay[], filter: (way: osmWay) => boolean, extent: geoExtent) {
         var drawLayer = selection.selectAll('.layer-osm.points .points-group.midpoints');
         var touchLayer = selection.selectAll('.layer-touch.points');
 
@@ -55,7 +67,7 @@ export function svgMidpoints(projection, context) {
         }
 
         var poly = extent.polygon();
-        var midpoints = {};
+        var midpoints: Record<string, Midpoint> = {};
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
@@ -80,7 +92,7 @@ export function svgMidpoints(projection, context) {
                         loc = point;
                     } else {
                         for (var k = 0; k < 4; k++) {
-                            point = geoLineIntersection([a.loc, b.loc], [poly[k], poly[k + 1]]);
+                            point = geoLineIntersection([a.loc, b.loc], [poly[k], poly[k + 1]])!;
                             if (point &&
                                 geoVecLength(projection(a.loc), projection(point)) > 20 &&
                                 geoVecLength(projection(b.loc), projection(point)) > 20) {
@@ -104,7 +116,7 @@ export function svgMidpoints(projection, context) {
         }
 
 
-        function midpointFilter(d) {
+        function midpointFilter(d: Midpoint) {
             if (midpoints[d.id]) return true;
 
             for (var i = 0; i < d.parents.length; i++) {
@@ -117,7 +129,7 @@ export function svgMidpoints(projection, context) {
         }
 
 
-        var groups = drawLayer.selectAll('.midpoint')
+        var groups = drawLayer.selectAll<SVGGElement, Midpoint>('.midpoint')
             .filter(midpointFilter)
             .data(Object.values(midpoints), function(d) { return d.id; });
 
@@ -147,7 +159,7 @@ export function svgMidpoints(projection, context) {
                 var angle = geoAngle(a, b, projection) * (180 / Math.PI);
                 return translate(d) + ' rotate(' + angle + ')';
             })
-            .call(svgTagClasses().tags(
+            .call(svgTagClasses<Midpoint>().tags(
                 function(d) { return d.parents[0].tags; }
             ));
 

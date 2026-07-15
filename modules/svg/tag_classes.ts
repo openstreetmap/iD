@@ -1,25 +1,29 @@
 import { select as d3_select } from 'd3-selection';
 import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags, osmLifecyclePrefixes } from '../osm/tags';
+import type { GeometryType } from '../osm';
 
+export type TagGetter<T> = (entity: T) => Tags;
 
-export function svgTagClasses() {
+export function svgTagClasses<T>() {
     const primaries = [
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
         'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
         'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
         'roller_coaster', 'building:part', 'indoor', 'climbing'
     ];
-    const statuses = Object.keys(osmLifecyclePrefixes);
+    const statuses: string[] = Object.keys(osmLifecyclePrefixes);
     const secondaries = [
         'oneway', 'bridge', 'tunnel', 'barrier',
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
         'public_transport', 'location', 'parking', 'golf', 'type', 'leisure',
         'man_made', 'indoor', 'construction', 'proposed', 'bicycle', 'foot'
     ];
-    var _tags = function(entity) { return entity.tags; };
+
+    // this function is the default callback, but it can be overridden
+    var _tags: TagGetter<any> = function(entity) { return entity.tags; };
 
 
-    var tagClasses = function(selection) {
+    const tagClasses = function(selection: d3.Selection) {
         selection.each(function tagClassesEach(entity) {
             var value = this.className;
 
@@ -38,11 +42,11 @@ export function svgTagClasses() {
     };
 
 
-    tagClasses.getClassesString = function(t, value) {
+    tagClasses.getClassesString = function(t: Tags, value: string) {
         let primary, status;
 
         // in some situations we want to render perimeter strokes a certain way
-        let overrideGeometry;
+        let overrideGeometry: GeometryType;
         if (/\bstroke\b/.test(value)) {
             if (!!t.barrier && t.barrier !== 'no') {
                 overrideGeometry = 'line';
@@ -166,11 +170,14 @@ export function svgTagClasses() {
     };
 
 
-    tagClasses.tags = function(val) {
+    function tags(): TagGetter<T>
+    function tags(val: TagGetter<T>): typeof tagClasses;
+    function tags(val?: TagGetter<T>): typeof tagClasses | TagGetter<T> {
         if (!arguments.length) return _tags;
-        _tags = val;
+        _tags = val!;
         return tagClasses;
     };
+    tagClasses.tags = tags;
 
     return tagClasses;
 }

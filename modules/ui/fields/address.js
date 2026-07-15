@@ -9,6 +9,11 @@ import { uiCombobox } from '../combobox';
 import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilTriggerEvent } from '../../util';
 import { t } from '../../core/localizer';
 
+/** @typedef {{
+    countryCodes: string[];
+    format: string[][];
+    widths?: Record<string, number>;
+}[]} AddressFormatsJSON */
 
 export function uiFieldAddress(field, context) {
     var dispatch = d3_dispatch('change');

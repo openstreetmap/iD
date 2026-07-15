@@ -1,3 +1,4 @@
+import { omit } from 'es-toolkit';
 import { utilStripDiacritics } from '../../../modules/util/util';
 
 describe('iD.util', function() {
@@ -55,22 +56,40 @@ describe('iD.util', function() {
         });
     });
 
-    it('utilTagDiff', function() {
-        var oldTags = { a: 'one', b: 'two', c: 'three' };
-        var newTags = { a: 'one', b: 'three', d: 'four' };
-        var diff = iD.utilTagDiff(oldTags, newTags);
-        expect(diff).toHaveLength(4);
-        expect(diff[0]).toEqual({
-            type: '-', key: 'b', oldVal: 'two', newVal: 'three', display: '- b=two'        // delete-modify
+    describe('utilTagDiff', function() {
+        it('returns the difference of two sets of tags', function() {
+            var oldTags = { a: 'one', b: 'two', c: 'three' };
+            var newTags = { a: 'one', b: 'three', d: 'four' };
+            var diff = iD.utilTagDiff(oldTags, newTags);
+            expect(diff).toHaveLength(4);
+            expect(omit(diff[0], ['render'])).toEqual({
+                type: '-', key: 'b', oldVal: 'two', newVal: 'three', display: '- b=two'        // delete-modify
+            });
+            expect(omit(diff[1], ['render'])).toEqual({
+                type: '+', key: 'b', oldVal: 'two', newVal: 'three', display: '+ b=three'      // insert-modify
+            });
+            expect(omit(diff[2], ['render'])).toEqual({
+                type: '-', key: 'c', oldVal: 'three', newVal: undefined, display: '- c=three'  // delete
+            });
+            expect(omit(diff[3], ['render'])).toEqual({
+                type: '+', key: 'd', oldVal: undefined, newVal: 'four', display: '+ d=four'    // insert
+            });
         });
-        expect(diff[1]).toEqual({
-            type: '+', key: 'b', oldVal: 'two', newVal: 'three', display: '+ b=three'      // insert-modify
-        });
-        expect(diff[2]).toEqual({
-            type: '-', key: 'c', oldVal: 'three', newVal: undefined, display: '- c=three'  // delete
-        });
-        expect(diff[3]).toEqual({
-            type: '+', key: 'd', oldVal: undefined, newVal: 'four', display: '+ d=four'    // insert
+
+        it('includes context tags if requested', function() {
+            var oldTags = { a: 'one', b: 'two' };
+            var newTags = { a: 'one', b: 'three' };
+            var diff = iD.utilTagDiff(oldTags, newTags, ['a']);
+            expect(diff).toHaveLength(3);
+            expect(omit(diff[0], ['render'])).toEqual({
+                type: '~', key: 'a', oldVal: 'one', newVal: 'one', display: '  a=one'          // delete
+            });
+            expect(omit(diff[1], ['render'])).toEqual({
+                type: '-', key: 'b', oldVal: 'two', newVal: 'three', display: '- b=two'        // delete-modify
+            });
+            expect(omit(diff[2], ['render'])).toEqual({
+                type: '+', key: 'b', oldVal: 'two', newVal: 'three', display: '+ b=three'      // insert-modify
+            });
         });
     });
 

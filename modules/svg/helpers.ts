@@ -5,6 +5,12 @@ import {
 } from 'd3-geo';
 
 import { geoVecAdd, geoVecAngle, geoVecLength } from '../geo';
+import type { EntityId, NodeId, OsmEntity, osmNode, osmWay, WayId } from '../osm';
+import type { coreGraph } from '../core';
+import type { ClipExtent, Projection } from '../geo/raw_mercator';
+import type { Vec2 } from '../geo/vector';
+import type { Feature, LineString } from 'geojson';
+import type { WithLoc } from './geolocate';
 
 
 // Touch targets control which other vertices we can drag a vertex onto.
@@ -20,7 +26,7 @@ import { geoVecAdd, geoVecAngle, geoVecLength } from '../geo';
 // 1 = passive vertex - yes touch/connect
 // 2 = adjacent vertex - yes but pay attention segmenting a line here
 //
-export function svgPassiveVertex(node, graph, activeID) {
+export function svgPassiveVertex(node: osmNode, graph: coreGraph, activeID: NodeId) {
     if (!activeID) return 1;
     if (activeID === node.id) return 0;
 
@@ -58,29 +64,35 @@ export function svgPassiveVertex(node, graph, activeID) {
     return 1;   // ok
 }
 
+export interface MarkerSegment {
+    id: WayId;
+    index: number;
+    d: string;
+}
 
 /**
- *
- * @param {iD.Projection} projection
- * @param {iD.Graph} graph
  * @param {Number} dt spacing between segments
- * @param {Function<Boolean>} [shouldReverse]
- * @param {Function<Boolean>} [bothDirections]
  */
-export function svgMarkerSegments(projection, graph, dt, shouldReverse = () => false, bothDirections = () => false) {
+export function svgMarkerSegments(
+    projection: Projection,
+    graph: coreGraph,
+    dt: number,
+    shouldReverse: (entity: osmWay) => boolean = () => false,
+    bothDirections: (entity: osmWay) => boolean = () => false
+) {
     /**
-     * @param {iD.OsmWay} entity
-     * @returns {[{id: String, d: String}]} list of svg path segments corres
+     * @returns list of svg path segments corres
      */
-    return function(entity) {
+    return function(entity: osmWay): MarkerSegment[] {
         let i = 0;
         let offset = dt / 2;
-        const segments = [];
+        const segments: MarkerSegment[] = [];
 
         const clip = paddedClipExtent(projection);
 
         const coordinates = graph.childNodes(entity).map(function(n) { return n.loc; });
-        let a, b;
+        let a: Vec2 | null;
+        let b: Vec2;
 
         const _shouldReverse = shouldReverse(entity);
         const _bothDirections = bothDirections(entity);
@@ -89,6 +101,8 @@ export function svgMarkerSegments(projection, graph, dt, shouldReverse = () => f
             type: 'LineString',
             coordinates: coordinates
         }, projection.stream(clip({
+            polygonStart() {},
+            polygonEnd() {},
             lineStart: function() {},
             lineEnd: function() { a = null; },
             point: function(x, y) {
@@ -101,7 +115,7 @@ export function svgMarkerSegments(projection, graph, dt, shouldReverse = () => f
                         const heading = geoVecAngle(a, b);
                         const dx = dt * Math.cos(heading);
                         const dy = dt * Math.sin(heading);
-                        let p = [
+                        let p: Vec2 = [
                             a[0] + offset * Math.cos(heading),
                             a[1] + offset * Math.sin(heading)
                         ];
@@ -145,27 +159,22 @@ export function svgMarkerSegments(projection, graph, dt, shouldReverse = () => f
 }
 
 
-/**
- * @param {iD.Projection} projection
- * @param {iD.Graph} graph
- * @param {Boolean} isArea
- */
-export function svgPath(projection, graph, isArea) {
-    const cache = {};
+export function svgPath(projection: Projection, graph?: coreGraph, isArea?: boolean) {
+    const cache: Record<EntityId, string | null> = {};
     const project = projection.stream;
     const clip = paddedClipExtent(projection, isArea);
     const path = d3_geoPath()
         .projection({stream: function(output) { return project(clip(output)); }});
 
-    const svgpath = function(entity) {
+    const svgpath = function(entity: osmWay) {
         if (entity.id in cache) {
             return cache[entity.id];
         } else {
-            return cache[entity.id] = path(entity.asGeoJSON(graph));
+            return cache[entity.id] = path(entity.asGeoJSON(graph!));
         }
     };
 
-    svgpath.geojson = function(d) {
+    svgpath.geojson = function(d: any) {
         if (d.__featurehash__ !== undefined) {
             if (d.__featurehash__ in cache) {
                 return cache[d.__featurehash__];
@@ -181,22 +190,22 @@ export function svgPath(projection, graph, isArea) {
 }
 
 
-export function svgPointTransform(projection) {
-    var svgpoint = function(entity) {
+export function svgPointTransform(projection: Projection) {
+    const svgpoint = function(entity: WithLoc) {
         var pt = projection(entity.loc);
         return 'translate(' + pt[0] + ',' + pt[1] + ')';
     };
 
-    svgpoint.geojson = function(d) {
-        return svgpoint(d.properties.entity);
+    svgpoint.geojson = function(d: Feature) {
+        return svgpoint(d.properties!.entity);
     };
 
     return svgpoint;
 }
 
 
-export function svgRelationMemberTags(graph) {
-    return function(entity) {
+export function svgRelationMemberTags(graph: coreGraph) {
+    return function(entity: OsmEntity) {
         var tags = entity.tags;
         var shouldCopyMultipolygonTags = !entity.hasInterestingTags();
         graph.parentRelations(entity).forEach(function(relation) {
@@ -209,8 +218,18 @@ export function svgRelationMemberTags(graph) {
     };
 }
 
+export type SegmentFeature = Feature<LineString, {
+    nope?: true;
+    target: true;
+    entity: osmWay;
+    nodes: [start: osmNode, end: osmNode];
+    index: number;
+}>;
 
-export function svgSegmentWay(way, graph, activeID) {
+export function svgSegmentWay(way: osmWay, graph: coreGraph, activeID: NodeId): {
+    passive: SegmentFeature[];
+    active: SegmentFeature[];
+} {
     // When there is no activeID, we can memoize this expensive computation
     if (activeID === undefined) {
         return graph.transient(way, 'waySegments', getWaySegments);
@@ -220,8 +239,10 @@ export function svgSegmentWay(way, graph, activeID) {
 
     function getWaySegments() {
         const isActiveWay = (way.nodes.indexOf(activeID) !== -1);
-        const features = { passive: [], active: [] };
-        let start = {};
+        const features: { passive: SegmentFeature[]; active: SegmentFeature[]; } = { passive: [], active: [] };
+
+        interface Start { node: osmNode; type: number; }
+        let start: Start | { type?: undefined } = {};
 
         for (var i = 0; i < way.nodes.length; i++) {
             const node = graph.entity(way.nodes[i]);
@@ -245,7 +266,7 @@ export function svgSegmentWay(way, graph, activeID) {
 
         return features;
 
-        function pushActive(start, end, index) {
+        function pushActive(start: Start, end: Start, index: number) {
             features.active.push({
                 type: 'Feature',
                 id: way.id + '-' + index + '-nope',
@@ -263,7 +284,7 @@ export function svgSegmentWay(way, graph, activeID) {
             });
         }
 
-        function pushPassive(start, end, index) {
+        function pushPassive(start: Start, end: Start, index: number) {
             features.passive.push({
                 type: 'Feature',
                 id: way.id + '-' + index,
@@ -294,14 +315,11 @@ export function svgSegmentWay(way, graph, activeID) {
  * When drawing lines, pad viewport by 5px.
  * When drawing areas, pad viewport by 65px in each direction to allow
  * for 60px area fill stroke (see ".fill-partial path.fill" css rule)
- *
- * @param {import('../geo/raw_mercator').Projection} projection
- * @param {Boolean} isArea
  */
-function paddedClipExtent(projection, isArea = false) {
+function paddedClipExtent(projection: Projection, isArea = false) {
     var padding = isArea ? 65 : 5;
     var viewport = projection.clipExtent();
-    var paddedExtent = [
+    var paddedExtent: ClipExtent = [
         [viewport[0][0] - padding, viewport[0][1] - padding],
         [viewport[1][0] + padding, viewport[1][1] + padding]
     ];

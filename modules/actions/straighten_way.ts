@@ -1,26 +1,31 @@
 import { actionDeleteNode } from './delete_node';
 import { geoVecDot, geoVecInterp, geoVecLength } from '../geo';
 import { utilArrayDifference } from '../util';
+import { type EntityId, type NodeId, type osmNode, type WayId } from '../osm';
+import type { Projection } from '../geo/raw_mercator';
+import type { Action } from '../core/history';
+import type { Vec2 } from '../geo/vector';
+import type { coreGraph } from '../core';
 
 
 /*
  * Based on https://github.com/openstreetmap/potlatch2/net/systemeD/potlatch2/tools/Straighten.as
  */
-export function actionStraightenWay(selectedIDs, projection) {
+export function actionStraightenWay(selectedIDs: EntityId[], projection: Projection): Action {
 
-    function positionAlongWay(a, o, b) {
+    function positionAlongWay(a: Vec2, o: Vec2, b: Vec2) {
         return geoVecDot(a, b, o) / geoVecDot(b, b, o);
     }
 
     // Return all selected ways as a continuous, ordered array of nodes
-    function allNodes(graph) {
-        var startNodes = [];
-        var endNodes = [];
-        var remainingWays = [];
-        var selectedWays = selectedIDs.filter(function(w) {
+    function allNodes(graph: coreGraph): osmNode[] {
+        var startNodes: NodeId[] = [];
+        var endNodes: NodeId[] = [];
+        var remainingWays: NodeId[][] = [];
+        var selectedWays = selectedIDs.filter(function(w): w is WayId {
             return graph.entity(w).type === 'way';
         });
-        var selectedNodes = selectedIDs.filter(function(n) {
+        var selectedNodes = selectedIDs.filter(function(n): n is NodeId {
             return graph.entity(n).type === 'node';
         });
 
@@ -47,14 +52,14 @@ export function actionStraightenWay(selectedIDs, projection) {
             .concat(utilArrayDifference(endNodes, startNodes))[0];
 
         // Create nested function outside of loop to avoid "function in loop" lint error
-        var getNextWay = function(currNode, remainingWays) {
+        var getNextWay = function(currNode: NodeId, remainingWays: NodeId[][]) {
             return remainingWays.filter(function(way) {
                 return way[0] === currNode || way[way.length-1] === currNode;
             })[0];
         };
 
         // Add nodes to end of nodes array, until all ways are added
-        let nodes = [];
+        let nodes: NodeId[] = [];
         while (remainingWays.length) {
             const nextWay = getNextWay(currNode, remainingWays);
             remainingWays = utilArrayDifference(remainingWays, [nextWay]);
@@ -79,15 +84,15 @@ export function actionStraightenWay(selectedIDs, projection) {
         return nodes.map(function(n) { return graph.entity(n); });
     }
 
-    function shouldKeepNode(node, graph) {
+    function shouldKeepNode(node: osmNode, graph: coreGraph) {
         return graph.parentWays(node).length > 1 ||
             graph.parentRelations(node).length ||
             node.hasInterestingTags();
     }
 
 
-    var action = function(graph, t) {
-        if (t === null || !isFinite(t)) t = 1;
+    var action: Action = function(graph, t) {
+        if (t === null || t === undefined || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
         var nodes = allNodes(graph);

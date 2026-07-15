@@ -1,6 +1,17 @@
+import type { coreGraph } from '../core';
+import type { Action } from '../core/history';
+import type { EntityId, OsmEntity, osmWay } from '../osm';
 import { presetManager } from '../presets';
 
-/*
+export interface ActionReverse extends Action {
+    entityID(): EntityId;
+}
+
+export interface ReverseOptions {
+    reverseOneway?: boolean;
+}
+
+/**
 Order the nodes of a way in reverse order and reverse any direction dependent tags
 other than `oneway`. (We assume that correcting a backwards oneway is the primary
 reason for reversing a way.)
@@ -19,10 +30,10 @@ References:
     http://wiki.openstreetmap.org/wiki/Tag:highway%3Dstop
     http://wiki.openstreetmap.org/wiki/Key:traffic_sign#On_a_way_or_area
 */
-export function actionReverse(entityID, options) {
+export function actionReverse(entityID: EntityId, options?: ReverseOptions): ActionReverse {
     var numeric = /^([+\-]?)(?=[\d.])/;
     var directionKey = /direction$/;
-    var keyReplacements = [
+    var keyReplacements: [RegExp, string][] = [
         [/:right$/, ':left'],
         [/:left$/, ':right'],
         [/:forward$/, ':backward'],
@@ -32,7 +43,7 @@ export function actionReverse(entityID, options) {
         [/:forward:/, ':backward:'],
         [/:backward:/, ':forward:']
     ];
-    var valueReplacements = {
+    var valueReplacements: Record<TagValue, TagValue> = {
         left: 'right',
         right: 'left',
         up: 'down',
@@ -66,19 +77,19 @@ export function actionReverse(entityID, options) {
             prerequisiteTags: [{}]
         }
     ];
-    var roleReplacements = {
+    var roleReplacements: Record<string, string> = {
         forward: 'backward',
         backward: 'forward',
         forwards: 'backward',
         backwards: 'forward'
     };
-    var onewayReplacements = {
+    var onewayReplacements: Record<TagValue, TagValue> = {
         yes: '-1',
         '1': '-1',
         '-1': 'yes'
     };
 
-    var compassReplacements = {
+    var compassReplacements: Record<TagValue, TagValue> = {
         N: 'S',
         NNE: 'SSW',
         NE: 'SW',
@@ -98,7 +109,7 @@ export function actionReverse(entityID, options) {
     };
 
 
-    function reverseKey(key) {
+    function reverseKey(key: TagKey) {
         if (keysToKeepUnchanged.some(keyRegex => keyRegex.test(key))) {
             return key;
         }
@@ -112,7 +123,7 @@ export function actionReverse(entityID, options) {
     }
 
 
-    function reverseValue(key, value, includeAbsolute, allTags) {
+    function reverseValue(key: TagKey, value: TagValue, includeAbsolute: boolean, allTags: Tags) {
         for (let { keyRegex, prerequisiteTags } of keyValuesToKeepUnchanged) {
             if (keyRegex.test(key) && prerequisiteTags.some(expectedTags =>
                 Object.entries(expectedTags).every(([k, v]) => {
@@ -149,8 +160,9 @@ export function actionReverse(entityID, options) {
         return valueReplacements[value] || value;
     }
 
-    /** @returns {false | string} - returns false or the name of the direction key */
-    function supportsDirectionField(node, graph) {
+    /** @returns false or the name of the direction key */
+    function supportsDirectionField(node: OsmEntity, graph: coreGraph): false | TagKey {
+        // @ts-expect-error -- will be fixed in a different PR
         const preset = presetManager.match(node, graph);
         const loc = node.extent(graph).center();
         const geometry = node.geometry(graph);
@@ -174,13 +186,13 @@ export function actionReverse(entityID, options) {
 
 
     // Reverse the direction of tags attached to the nodes - #3076
-    function reverseNodeTags(graph, nodeIDs) {
+    function reverseNodeTags(graph: coreGraph, nodeIDs: EntityId[]) {
         for (var i = 0; i < nodeIDs.length; i++) {
             var node = graph.hasEntity(nodeIDs[i]);
             if (!node || !Object.keys(node.tags).length) continue;
 
             let anyChanges = false;
-            var tags = {};
+            var tags: Tags = {};
             for (var key in node.tags) {
                 const value = node.tags[key];
 
@@ -205,9 +217,9 @@ export function actionReverse(entityID, options) {
     }
 
 
-    function reverseWay(graph, way) {
+    function reverseWay(graph: coreGraph, way: osmWay) {
         var nodes = way.nodes.slice().reverse();
-        var tags = {};
+        var tags: Tags = {};
         var role;
 
         for (var key in way.tags) {
@@ -230,7 +242,7 @@ export function actionReverse(entityID, options) {
     }
 
 
-    var action = function(graph) {
+    const action: ActionReverse = function(graph) {
         var entity = graph.entity(entityID);
         if (entity.type === 'way') {
             return reverseWay(graph, entity);

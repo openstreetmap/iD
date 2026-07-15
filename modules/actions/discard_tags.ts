@@ -1,4 +1,9 @@
-export function actionDiscardTags(difference, discardTags) {
+import type { Discarded } from '@openstreetmap/id-tagging-schema';
+import type { coreDifference } from '../core/difference';
+import type { Action } from '../core/history';
+import type { OsmEntity } from '../osm/abstract-entity';
+
+export function actionDiscardTags(difference: coreDifference, discardTags: Discarded): Action {
   discardTags = discardTags || {};
 
   return (graph) => {
@@ -6,10 +11,10 @@ export function actionDiscardTags(difference, discardTags) {
     difference.created().forEach(checkTags);
     return graph;
 
-    function checkTags(entity) {
+    function checkTags(entity: OsmEntity) {
       const keys = Object.keys(entity.tags);
       let didDiscard = false;
-      let tags = {};
+      let tags: Tags = {};
 
       for (let i = 0; i < keys.length; i++) {
         const k = keys[i];

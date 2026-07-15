@@ -1,11 +1,14 @@
+import type { coreGraph } from '../core/graph';
+import type { Action } from '../core/history';
+import type { osmNode, WayId } from '../osm';
 import { osmNodeGeometriesForTags } from '../osm/tags';
 import { actionDeleteRelation } from './delete_relation';
 
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteWayAction.as
-export function actionDeleteWay(wayID) {
+export function actionDeleteWay(wayID: WayId): Action {
 
-    function canDeleteNode(node, graph) {
+    function canDeleteNode(node: osmNode, graph: coreGraph) {
         // don't delete nodes still attached to ways or relations
         if (graph.parentWays(node).length ||
             graph.parentRelations(node).length) return false;
@@ -22,7 +25,7 @@ export function actionDeleteWay(wayID) {
     }
 
 
-    var action = function(graph) {
+    const action: Action = function(graph) {
         var way = graph.entity(wayID);
 
         graph.parentRelations(way).forEach(function(parent) {
