@@ -5,6 +5,7 @@ import {
 import { t } from '../core/localizer';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
+import { uiSetInlineLoading } from './inline_loading';
 
 
 // Pass `what` object of the form:
@@ -32,6 +33,7 @@ export function uiTagReference(what) {
 
         _button
             .classed('tag-reference-loading', true);
+        uiSetInlineLoading(_button, true);
 
         wikibase.getDocs(what, gotDocs);
     }
@@ -112,6 +114,7 @@ export function uiTagReference(what) {
 
         _button
             .classed('tag-reference-loading', false);
+        uiSetInlineLoading(_button, false);
 
         _body
             .classed('expanded', true)
