@@ -40,10 +40,11 @@ export function uiSidebar(context) {
         var dragOffset;
 
         // Set the initial width constraints
+        var savedWidth = prefs('sidebar-width');
         selection
             .style('min-width', minWidth + 'px')
-            .style('max-width', '400px')
-            .style('width', prefs('sidebar-width') || '33.3333%');
+            .style('max-width', savedWidth ? '85%' : '400px')
+            .style('width', (savedWidth || 33.3333) + '%');
 
         // Restore collapsed state
         if (prefs('sidebar-collapsed') === 'true') {
@@ -156,7 +157,7 @@ export function uiSidebar(context) {
             prefs('sidebar-collapsed', isCollapsed);
             if (!isCollapsed && containerWidth) {
                 var widthPct = (sidebarWidth / containerWidth) * 100;
-                prefs('sidebar-width', widthPct + '%');
+                prefs('sidebar-width', widthPct);
             }
 
             inspectorWrap.call(inspector, { redrawEntityEditor: true });
