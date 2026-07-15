@@ -1,6 +1,80 @@
 import { presetsCdnUrl, ociCdnUrl, wmfSitematrixCdnUrl } from '../../config/id.js';
-
+import type {
+    Discarded,
+    Deprecated,
+    PresetCategories,
+    PresetDefaults,
+    Fields,
+    Presets,
+} from '@openstreetmap/id-tagging-schema';
+import type { LocoFeatureCollection } from '@rapideditor/location-conflation';
+import type {
+    NsiGenericWordsJSON,
+    NsiDissolved,
+    NsiPresets,
+    NsiReplacementsJSON,
+    NsiTreesJSON,
+    NsiWikidataJSON,
+    NsiJSON,
+} from 'name-suggestion-index';
+import type { ShortcutsJSON } from '../ui/shortcuts.js';
+import type { QAData } from '../services/osmose.js';
+import type { LanguagesJSON, LocalesJSON, Translations } from './localizer.js';
+import type { AddressFormatsJSON } from '../ui/fields/address.js';
+import type { WmfSite } from '../ui/fields/wikipedia.js';
+import type { EntityId } from '../osm/id_manager.js';
+import type { OsmEntity } from '../osm/abstract-entity.js';
 import packageJSON from '../../package.json';
+
+
+interface Definitions {
+  address_formats: AddressFormatsJSON;
+  imagery: unknown;
+  intro_graph: Record<EntityId, OsmEntity>;
+  languages: LanguagesJSON;
+  locales: LocalesJSON;
+  phone_formats: Record<string, string>;
+  qa_data: QAData;
+  shortcuts: ShortcutsJSON;
+  territory_languages: Record<string, string[]>;
+  oci_defaults: unknown;
+  oci_features: unknown;
+  oci_resources: unknown;
+
+  presets_package: typeof packageJSON;
+  deprecated: Deprecated;
+  discarded: Discarded;
+  preset_categories: PresetCategories;
+  preset_defaults: PresetDefaults;
+  preset_fields: Fields;
+  preset_presets: Presets;
+  wmf_sitematrix: WmfSite[];
+
+  nsi_data: NsiJSON;
+  nsi_dissolved: NsiDissolved;
+  nsi_features: LocoFeatureCollection;
+  nsi_generics: NsiGenericWordsJSON;
+  nsi_presets: NsiPresets;
+  nsi_replacements: NsiReplacementsJSON;
+  nsi_trees: NsiTreesJSON;
+  nsi_wikidata: NsiWikidataJSON;
+
+  'locales_index_*': { [locale: string]: Translations };
+};
+
+export type FileId = keyof Definitions;
+
+export type FileMap = Partial<Record<FileId, string>>;
+export type AssetMap = Record<string, string>;
+
+export interface coreFileFetcher {
+    cache(): void;
+    get<T extends FileId>(which: T): Promise<Definitions[T]>;
+    fileMap: GetSet<coreFileFetcher, FileMap>;
+    assetPath: GetSet<coreFileFetcher, string>;
+    assetMap: GetSet<coreFileFetcher, AssetMap>
+    asset(val: string): string;
+}
 
 let _mainFileFetcher = coreFileFetcher(); // singleton
 
@@ -13,9 +87,9 @@ export function coreFileFetcher() {
   const ociVersion = packageJSON.devDependencies['osm-community-index'];
   const presetsVersion = packageJSON.devDependencies['@openstreetmap/id-tagging-schema'];
 
-  let _this = {};
-  let _inflight = {};
-  let _fileMap = {
+  const _this: coreFileFetcher = function() {};
+  let _inflight: Record<string, Promise<any>> = {};
+  let _fileMap: FileMap = {
     'address_formats': 'data/address_formats.min.json',
     'imagery': 'data/imagery.min.json',
     'intro_graph': 'data/intro_graph.min.json',
@@ -38,7 +112,7 @@ export function coreFileFetcher() {
     'wmf_sitematrix': wmfSitematrixCdnUrl.replace('{version}', '0.2') + 'data/wikipedia.min.json'
   };
 
-  let _cachedData = {};
+  let _cachedData: { [T in FileId]?: Definitions[T] } = {};
   // expose the cache; useful for tests
   _this.cache = () => _cachedData;
 
@@ -67,7 +141,7 @@ export function coreFileFetcher() {
     }
   };
 
-  function getUrl(url, which) {
+  function getUrl<T extends FileId>(url: string, which: T): Promise<Definitions[T]> {
     let prom = _inflight[url];
     if (!prom) {
       prom = (window.VITEST ? import(`../${url}`) : fetch(url))
@@ -102,23 +176,23 @@ export function coreFileFetcher() {
   // Accessor for the file map
   _this.fileMap = function(val) {
     if (!arguments.length) return _fileMap;
-    _fileMap = val;
+    _fileMap = val!;
     return _this;
-  };
+  } as GetSet<coreFileFetcher, FileMap>;
 
   let _assetPath = '';
   _this.assetPath = function(val) {
     if (!arguments.length) return _assetPath;
-    _assetPath = val;
+    _assetPath = val!;
     return _this;
-  };
+  } as GetSet<coreFileFetcher, string>;
 
-  let _assetMap = {};
+  let _assetMap: AssetMap = {};
   _this.assetMap = function(val) {
     if (!arguments.length) return _assetMap;
-    _assetMap = val;
+    _assetMap = val!;
     return _this;
-  };
+  } as GetSet<coreFileFetcher, AssetMap>;
 
   _this.asset = (val) => {
     if (/^http(s)?:\/\//i.test(val)) return val;
