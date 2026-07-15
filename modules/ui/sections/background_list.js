@@ -166,7 +166,7 @@ export function uiSectionBackgroundList(context) {
 
     function drawListItems(layerList, type, change, filter) {
         const sources = [];
-        const dateLikeRegex = /(.+?\s\(?)((?:[-\/, 0-9]{2,}|DTM|DSM|DOM|DEM)+\s*)(\)?(?:\s|$).*)/;
+        const dateLikeRegex = /(.+?\s\(?)((?:(?:\d{2,}|[-\/, ])+|DTM|DSM|DOM|DEM)+\s*)(\)?(?:\s|$).*)/;
         context.background()
             .sources(context.map().extent(), context.map().zoom(), true)
             .filter(filter)
@@ -178,7 +178,8 @@ export function uiSectionBackgroundList(context) {
             .forEach(source => {
                 const name = source.name();
                 if (dateLikeRegex.test(name)) {
-                    const [ prefix, variant, suffix ] = name.match(dateLikeRegex).slice(1);
+                    let [ prefix, variant, suffix ] = name.match(dateLikeRegex).slice(1);
+                    variant = variant.replace(/^[-\/, ]+/, '').replace(/[-\/, ]+$/, ''); // strip away extra punctuation
                     const main = sources.find((s) =>
                         s.prefix === prefix && s.suffix === suffix);
                     if (main) {
