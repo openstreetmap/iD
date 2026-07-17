@@ -235,7 +235,7 @@ of each new section of documentation should be of the form
 This will be used for navigation and as its title in iD. To add a new piece
 of documentation, simply add to [/data/core.yaml](/data/core.yaml) in the
 same format as the rest, include your new corresponding `docKey` in
-[/modules/ui/help.js](/modules/ui/help.js) and call `npm run build`.
+[/modules/ui/panes/help.js](/modules/ui/panes/help.js) and call `npm run build`.
 
 
 ## Editing Presets or Tagging
