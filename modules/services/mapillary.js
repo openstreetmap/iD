@@ -105,6 +105,7 @@ function loadTileDataToCache(data, tile, which) {
 
         for (i = 0; i < layer.length; i++) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+            const unsafeId = typeof feature.properties.id === 'number' && feature.properties.id > Number.MAX_SAFE_INTEGER; // #12575
             loc = feature.geometry.coordinates;
             d = {
                 service: 'photo',
@@ -112,6 +113,7 @@ function loadTileDataToCache(data, tile, which) {
                 captured_at: feature.properties.captured_at,
                 ca: feature.properties.compass_angle,
                 id: feature.properties.id,
+                unsafeId,
                 is_pano: feature.properties.is_pano,
                 sequence_id: feature.properties.sequence_id,
             };
@@ -146,6 +148,7 @@ function loadTileDataToCache(data, tile, which) {
 
         for (i = 0; i < layer.length; i++) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+            if (typeof feature.properties.id === 'number' && feature.properties.id > Number.MAX_SAFE_INTEGER) continue; // skip unsafe ids #12575
             loc = feature.geometry.coordinates;
 
             d = {
@@ -172,6 +175,7 @@ function loadTileDataToCache(data, tile, which) {
 
         for (i = 0; i < layer.length; i++) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+            if (typeof feature.properties.id === 'number' && feature.properties.id > Number.MAX_SAFE_INTEGER) continue; // skip unsafe ids #12575
             loc = feature.geometry.coordinates;
 
             d = {
@@ -574,12 +578,28 @@ export default {
 
 
     // Move to an image
-    selectImage: function(context, imageId) {
-        if (_mlyViewer && imageId) {
-            _mlyViewer.moveTo(imageId)
+    selectImage: function(image) {
+        if (!_mlyViewer || !image.id) return this;
+
+        if (!image.unsafeId) {
+            _mlyViewer.moveTo(image.id)
                 .then(image => this.setActiveImage(image))
                 .catch(function(e) {
                     console.error('mly3', e); // eslint-disable-line no-console
+                });
+        } else {
+            fetch(`https://graph.mapillary.com/image_ids?sequence_id=${image.sequence_id}`, { headers: { 'Authorization': `OAuth ${accessToken}` } })
+                .then(response => response.json())
+                .then(result => {
+                    const correctedId = result.data.map(d => d.id).find(id =>
+                        id.startsWith(`${image.id}`.substring(0, 10)));
+                    if (!correctedId) {
+                        console.error('unable to determine corrected photo id for'); // eslint-disable-line no-console
+                    } else {
+                        image.id = correctedId;
+                        image.unsafeId = false;
+                        this.selectImage(image);
+                    };
                 });
         }
 
