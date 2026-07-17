@@ -73,7 +73,7 @@ Pass these parameters as a `x-www-form-urlencoded` string in the _hash_ portion 
 
 ##### iD on openstreetmap.org (Rails Port)
 
-When constructing a URL to an instance of iD embedded on the [OpenStreetMap website](github.com/openstreetmap/openstreetmap-website/) (e.g. `https://www.openstreetmap.org/edit?editor=id`), the following parameters
+When constructing a URL to an instance of iD embedded on the [OpenStreetMap website](https://github.com/openstreetmap/openstreetmap-website/) (e.g. `https://www.openstreetmap.org/edit?editor=id`), the following parameters
 are available as **URL hash parameters**.
 _Example:_ `https://www.openstreetmap.org/edit?editor=id#gpx=https://gist.githubusercontent.com/answerquest/9445352b60ca5b44714675eae00f243a/raw/56a6343a29223318f4a697bfd16cbb2c3b8155ad/sample_boundary.gpx`
 
