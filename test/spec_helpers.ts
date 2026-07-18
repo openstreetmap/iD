@@ -85,6 +85,12 @@ cached.locale_tagging_en = {
               description: 'Access allowed only with a valid permit or license'
             }
           }
+        },
+        surface_segregated: {
+          types: {
+            'cycleway:surface': 'Cycleway',
+            'footway:surface': 'Footway'
+          }
         }
       }
     }

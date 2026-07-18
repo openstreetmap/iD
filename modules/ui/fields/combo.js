@@ -1172,6 +1172,9 @@ export function uiFieldCombo(field, context) {
     };
 
 
+    combo.displayValue = displayValue;
+
+
     combo.focus = function() {
         _input.node().focus();
     };

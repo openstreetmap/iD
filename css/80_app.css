@@ -1591,10 +1591,11 @@ input.date-selector {
 }
 
 
-/* Field - Access, DirectionalCombo
+/* Field - Access, DirectionalCombo, SegregatedCombo
 ------------------------------------------------------- */
 .form-field-input-access,
-.form-field-input-directionalcombo {
+.form-field-input-directionalCombo,
+.form-field-input-segregatedCombo {
     flex: 1 1 auto;
     display: flex;
     flex-flow: row wrap;
@@ -1621,10 +1622,12 @@ input.date-selector {
     flex-flow: row nowrap;
 }
 .form-field ul.rows li.labeled-input > div {
+    display: flex;
     flex: 1 1 auto;
     width: 100%;
     border-radius: 0;
     line-height: 0.95rem;
+    align-items: center;
 }
 .form-field ul.rows li input {
     border-radius: 0;
@@ -1634,11 +1637,11 @@ input.date-selector {
 .form-field ul.rows li button {
     border-width: 0;
 }
-.ideditor[dir='ltr'] .form-field ul.rows li.labeled-input input,
+.ideditor[dir='ltr'] .form-field ul.rows li.labeled-input:has(> .label) input,
 .ideditor[dir='ltr'] .form-field ul.rows li button {
     border-left-width: 1px;
 }
-.ideditor[dir='rtl'] .form-field ul.rows li.labeled-input input,
+.ideditor[dir='rtl'] .form-field ul.rows li.labeled-input:has(> .label) input,
 .ideditor[dir='rtl'] .form-field ul.rows li button {
     border-right-width: 1px;
 }

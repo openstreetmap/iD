@@ -109,6 +109,18 @@ export function uiField(context, presetField, entityIDs, options) {
                     }
                 }
             }
+
+            if (field.type === 'segregatedCombo' && field.fallbackKey) {
+                // For segregatedCombo with a fallback, only the sub-keys (not the main/fallback key) count as
+                // "having a value" for the purpose of bypassing `prerequisiteTag` checks.
+                // e.g. `surface=asphalt` alone doesn't suppress the `segregated=yes` prerequisite.
+
+                if (key === field.keys[0]) return false; // not the main/fallback key
+                return Array.isArray(_tags)
+                    ? _tags.some(function(entityTags) { return entityTags && entityTags[key] !== undefined; }) // multiple entities
+                    : _tags[key] !== undefined; // one entity
+            }
+
             return _tags[key] !== undefined;
         });
     }
@@ -341,6 +353,12 @@ export function uiField(context, presetField, entityIDs, options) {
     // A non-allowed field is hidden from the user altogether
     field.isAllowed = function() {
 
+        // A fallback field is not allowed if the primary field is shown.
+        // e.g. "surface" is potentially allowed only when "surface_segregated" is not shown.
+        if (options.fallbackFor) {
+            return !options.fallbackFor.isAllowed();
+        }
+
         if (entityIDs &&
             entityIDs.length > 1 &&
             uiFields[field.type].supportsMultiselection === false) return false;
@@ -360,7 +378,14 @@ export function uiField(context, presetField, entityIDs, options) {
             !tagsContainFieldKey() && // ignore tagging prerequisites if a value is already present
             prerequisiteTag) {
 
-            if (!entityIDs.every(function(entityID) {
+           var prerequisiteCheck =
+               // For segregatedCombo, show the field if any entity satisfies the prerequisite
+               // e.g. still show `surface_segregated` even if not all entities have `segregated=yes`
+               field.type === 'segregatedCombo'
+                    ? entityIDs.some.bind(entityIDs)
+                    : entityIDs.every.bind(entityIDs);
+
+            if (!prerequisiteCheck(function(entityID) {
                 var entity = context.graph().entity(entityID);
                 if (prerequisiteTag.key) {
                     var value = entity.tags[prerequisiteTag.key] || '';
