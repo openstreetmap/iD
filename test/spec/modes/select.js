@@ -149,5 +149,55 @@ describe('iD.modeSelect', function() {
 
             expect(context.selectedIDs()).toEqual(['r1']);
         });
+
+        it('selects shared child node when two connected ways are selected', function() {
+            const node1 = new iD.osmNode({id: 'n1', loc: [0, 0]});
+            const node2 = new iD.osmNode({id: 'n2', loc: [1, 1]});
+            const node3 = new iD.osmNode({id: 'n3', loc: [2, 2]});
+            const node4 = new iD.osmNode({id: 'n4', loc: [3, 3]});
+
+            const way1 = new iD.osmWay({id: 'w1', nodes: ['n1', 'n2', 'n3']});
+            const way2 = new iD.osmWay({id: 'w2', nodes: ['n3', 'n4']});
+
+            context.perform(
+                iD.actionAddEntity(node1),
+                iD.actionAddEntity(node2),
+                iD.actionAddEntity(node3),
+                iD.actionAddEntity(node4),
+                iD.actionAddEntity(way1),
+                iD.actionAddEntity(way2)
+            );
+
+            context.enter(iD.modeSelect(context, ['w1', 'w2']));
+
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', ctrlKey: true }));
+
+            expect(context.selectedIDs()).toEqual(['n3']);
+        });
+
+        it('does not affect selection when two independent ways are selected', function() {
+            const node1 = new iD.osmNode({id: 'n1', loc: [0, 0]});
+            const node2 = new iD.osmNode({id: 'n2', loc: [1, 1]});
+            const node3 = new iD.osmNode({id: 'n3', loc: [3, 3]});
+            const node4 = new iD.osmNode({id: 'n4', loc: [4, 4]});
+
+            const way1 = new iD.osmWay({id: 'w1', nodes: ['n1', 'n2']});
+            const way2 = new iD.osmWay({id: 'w2', nodes: ['n3', 'n4']});
+
+            context.perform(
+                iD.actionAddEntity(node1),
+                iD.actionAddEntity(node2),
+                iD.actionAddEntity(node3),
+                iD.actionAddEntity(node4),
+                iD.actionAddEntity(way1),
+                iD.actionAddEntity(way2)
+            );
+
+            context.enter(iD.modeSelect(context, ['w1', 'w2']));
+
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', ctrlKey: true }));
+
+            expect(context.selectedIDs()).toEqual(['w1', 'w2']);
+        });
     });
 });
