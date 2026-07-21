@@ -6,13 +6,30 @@ import { asyncPrefs, prefs } from './preferences';
 import { coreDifference } from './difference';
 import { coreGraph } from './graph';
 import { coreTree } from './tree';
-import { osmEntity } from '../osm/entity';
+import { createEntity } from '../osm/create-entity';
 import { uiLoading } from '../ui/loading';
 import {
     utilArrayDifference, utilArrayGroupBy, utilArrayUnion,
     utilObjectOmit, utilRebind, utilSessionMutex
 } from '../util';
 import { osmIdManager } from '../osm';
+
+/**
+ * @import { WayId, OsmEntity } from '../osm';
+ * @import { coreGraph } from './graph';
+ * @import { Vec2 } from '../geo/vector';
+ * @template [T = never]
+ * @typedef {{
+    (graph: coreGraph, t?: number | null, extraData?: T): coreGraph
+    id?: string;
+    getWayId?(): WayId;
+    disabled?(graph: coreGraph): string | false | undefined;
+    transitionable?: boolean;
+
+    copies?(): Record<string, OsmEntity>;
+    useLongAxis?: GetSet<this, boolean>;
+    getReflectAxis?(graph: coreGraph): Vec2[];
+ }} Action */
 
 
 export function coreHistory(context) {
@@ -523,15 +540,16 @@ export function coreHistory(context) {
             if (h.version === 2 || h.version === 3) {
                 var allEntities = {};
 
-                h.entities.forEach(function(entity) {
-                    allEntities[osmIdManager.key(entity)] = osmEntity(entity);
+                h.entities.forEach(function(rawEntity) {
+                    const entity = createEntity(rawEntity);
+                    allEntities[osmIdManager.key(entity)] = entity;
                 });
 
                 if (h.version === 3) {
                     // This merges originals for changed entities into the base of
                     // the _stack even if the current _stack doesn't have them (for
                     // example when iD has been restarted in a different region)
-                    var baseEntities = h.baseEntities.map(function(d) { return osmEntity(d); });
+                    var baseEntities = h.baseEntities.map(function(d) { return createEntity(d); });
                     var stack = _stack.map(function(state) { return state.graph; });
                     _stack[0].graph.rebase(baseEntities, stack, true);
                     _tree.rebase(baseEntities, true);
@@ -619,7 +637,7 @@ export function coreHistory(context) {
 
                     for (var i in d.entities) {
                         var entity = d.entities[i];
-                        entities[i] = entity === 'undefined' ? undefined : osmEntity(entity);
+                        entities[i] = entity === 'undefined' ? undefined : createEntity(entity);
                     }
 
                     d.graph = new coreGraph(_stack[0].graph).load(entities);

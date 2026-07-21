@@ -6,7 +6,7 @@ describe('iD.svgRelationMemberTags', function() {
         ]);
 
         expect(iD.svgRelationMemberTags(graph)(graph.entity('w')))
-            .to.eql({type: 'multipolygon'});
+            .toEqual({type: 'multipolygon'});
     });
 
     it('includes tags from parent boundary relations', function() {
@@ -16,6 +16,6 @@ describe('iD.svgRelationMemberTags', function() {
         ]);
 
         expect(iD.svgRelationMemberTags(graph)(graph.entity('w')))
-            .to.eql({type: 'boundary'});
+            .toEqual({type: 'boundary'});
     });
 });

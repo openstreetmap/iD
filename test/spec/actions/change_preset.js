@@ -6,21 +6,21 @@ describe('iD.actionChangePreset', function() {
         var entity = new iD.osmNode({tags: {old: 'true'}});
         var graph = new iD.coreGraph([entity]);
         var action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
-        expect(action(graph).entity(entity.id).tags).to.eql({new: 'true'});
+        expect(action(graph).entity(entity.id).tags).toEqual({new: 'true'});
     });
 
     it('adds the tags of a new preset to an entity without an old preset', function() {
         var entity = new iD.osmNode();
         var graph = new iD.coreGraph([entity]);
         var action = iD.actionChangePreset(entity.id, null, newPreset);
-        expect(action(graph).entity(entity.id).tags).to.eql({new: 'true'});
+        expect(action(graph).entity(entity.id).tags).toEqual({new: 'true'});
     });
 
     it('removes the tags of an old preset from an entity without a new preset', function() {
         var entity = new iD.osmNode({tags: {old: 'true'}});
         var graph = new iD.coreGraph([entity]);
         var action = iD.actionChangePreset(entity.id, oldPreset, null);
-        expect(action(graph).entity(entity.id).tags).to.eql({});
+        expect(action(graph).entity(entity.id).tags).toEqual({});
     });
 
     it('preserves the tags that are defined in neither preset when changing from one preset to another', function() {
@@ -29,7 +29,7 @@ describe('iD.actionChangePreset', function() {
         const oldPreset = iD.presetPreset('old', {tags: {old: 'true'}});
         const newPreset = iD.presetPreset('new', {tags: {new: 'true'}});
         const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
-        expect(action(graph).entity(entity.id).tags).to.eql({new: 'true', other: 'other'});
+        expect(action(graph).entity(entity.id).tags).toEqual({new: 'true', other: 'other'});
     });
 
     // https://github.com/openstreetmap/iD/issues/8159
@@ -61,7 +61,7 @@ describe('iD.actionChangePreset', function() {
             'plant:output:electricity': '*'
         }});
         var action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
-        expect(action(graph).entity(entity.id).tags).to.eql({
+        expect(action(graph).entity(entity.id).tags).toEqual({
             'power': 'plant',
             'plant:source': 'solar',
             'plant:method': 'photovoltaic',
@@ -79,7 +79,7 @@ describe('iD.actionChangePreset', function() {
             field: iD.presetField('field', {key: 'building'})
         });
         var action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
-        expect(action(graph).entity(entity.id).tags).to.eql({amenity: 'school', building: 'yes'});
+        expect(action(graph).entity(entity.id).tags).toEqual({amenity: 'school', building: 'yes'});
     });
 
     it('does not preserves the tags of a non-matching field in the new preset', function() {
@@ -90,7 +90,7 @@ describe('iD.actionChangePreset', function() {
             field: iD.presetField('field', {key: 'building', geometry: 'area'})
         });
         var action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
-        expect(action(graph).entity(entity.id).tags).to.eql({amenity: 'school'});
+        expect(action(graph).entity(entity.id).tags).toEqual({amenity: 'school'});
     });
 
     // https://github.com/openstreetmap/iD/pull/11696
@@ -190,7 +190,7 @@ describe('iD.actionChangePreset', function() {
     }])('does not preserve $fieldType field tags that are only present in the old preset', ({
         fieldType, fieldId, fieldKey, fieldKeys, oldTags, tagsToPreserve
     }) => {
-        const entity = iD.osmNode({
+        const entity = new iD.osmNode({
             tags: {
                 amenity: 'recycling',
                 ...oldTags,
@@ -247,7 +247,7 @@ describe('iD.actionChangePreset', function() {
     }])('preserve $fieldType field tags when they are present in the old and the new preset', ({
         fieldType, fieldId, fieldKey, fieldKeys, oldTags
     }) => {
-        const entity = iD.osmNode({
+        const entity = new iD.osmNode({
             tags: {
                 amenity: 'recycling',
                 ...oldTags,
@@ -283,7 +283,7 @@ describe('iD.actionChangePreset', function() {
 
     // https://github.com/openstreetmap/iD/issues/12071
     it('preserves tags of the old preset when selecting a new preset with a field for the old preset\'s primary tag', () => {
-        const entity = iD.osmNode({
+        const entity = new iD.osmNode({
             tags: {
                 building: 'yes', // the preset's own tags.
                 'building:colour': 'green', // a field which exists in the preset
@@ -329,6 +329,6 @@ describe('iD.actionChangePreset', function() {
         const oldPreset = iD.presetPreset('highway/service/driveway', {tags: {highway: 'service', service: 'driveway'}, fields: ['name']}, undefined, fields);
         const newPreset = iD.presetPreset('highway/service', {tags: {highway: 'service'}, fields: ['field', 'name']}, undefined, fields);
         const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
-        expect(action(graph).entity(entity.id).tags).to.eql({highway: 'service', name: 'foo bar'});
+        expect(action(graph).entity(entity.id).tags).toEqual({highway: 'service', name: 'foo bar'});
     });
 });

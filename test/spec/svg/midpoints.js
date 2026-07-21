@@ -1,8 +1,11 @@
+import { select as d3_select } from 'd3-selection';
+import { geoProjection as d3_geoProjection } from 'd3-geo';
+
 describe('iD.svgMidpoints', function () {
     var context, surface;
     var _selectedIDs = [];
     var filter = function() { return true; };
-    var projection = d3.geoProjection(function(x, y) { return [x, -y]; })
+    var projection = d3_geoProjection(function(x, y) { return [x, -y]; })
         .translate([0, 0])
         .scale(iD.geoZoomToScale(17))
         .clipExtent([[0, 0], [Infinity, Infinity]]);
@@ -17,7 +20,7 @@ describe('iD.svgMidpoints', function () {
             selectedIDs: function() { return _selectedIDs; }
         });
 
-        d3.select(document.createElement('div'))
+        d3_select(document.createElement('div'))
             .attr('class', 'main-map')
             .call(context.map().centerZoom([0, 0], 17));
 
@@ -37,7 +40,7 @@ describe('iD.svgMidpoints', function () {
         context.hasEntity = function(id) { return graph.entities[id]; };
 
         surface.call(iD.svgMidpoints(projection, context), graph, [line], filter, extent);
-        expect(surface.selectAll('.midpoint').datum().loc).to.eql([0.5, 0]);
+        expect(surface.selectAll('.midpoint').datum().loc).toEqual([0.5, 0]);
     });
 
     it('doesn\'t create midpoint on segment with pixel length less than 40', function () {
@@ -52,7 +55,7 @@ describe('iD.svgMidpoints', function () {
         context.hasEntity = function(id) { return graph.entities[id]; };
 
         surface.call(iD.svgMidpoints(projection, context), graph, [line], filter, extent);
-        expect(surface.selectAll('.midpoint').nodes()).to.have.length(0);
+        expect(surface.selectAll('.midpoint').nodes()).toHaveLength(0);
     });
 
     it('doesn\'t create midpoint on segment completely outside of the extent', function () {
@@ -67,7 +70,7 @@ describe('iD.svgMidpoints', function () {
         context.hasEntity = function(id) { return graph.entities[id]; };
 
         surface.call(iD.svgMidpoints(projection, context), graph, [line], filter, extent);
-        expect(surface.selectAll('.midpoint').nodes()).to.have.length(0);
+        expect(surface.selectAll('.midpoint').nodes()).toHaveLength(0);
     });
 
     it('creates midpoint on extent edge for segment partially outside of the extent', function () {
@@ -82,7 +85,7 @@ describe('iD.svgMidpoints', function () {
         context.hasEntity = function(id) { return graph.entities[id]; };
 
         surface.call(iD.svgMidpoints(projection, context), graph, [line], filter, extent);
-        expect(surface.selectAll('.midpoint').datum().loc).to.eql([1, 0]);
+        expect(surface.selectAll('.midpoint').datum().loc).toEqual([1, 0]);
     });
 
     it('doesn\'t create midpoint on extent edge for segment with pixel length less than 20', function () {
@@ -97,7 +100,7 @@ describe('iD.svgMidpoints', function () {
         context.hasEntity = function(id) { return graph.entities[id]; };
 
         surface.call(iD.svgMidpoints(projection, context), graph, [line], filter, extent);
-        expect(surface.selectAll('.midpoint').nodes()).to.have.length(0);
+        expect(surface.selectAll('.midpoint').nodes()).toHaveLength(0);
     });
 
 });

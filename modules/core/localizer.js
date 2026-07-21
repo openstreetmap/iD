@@ -16,6 +16,23 @@ export {
     _t as t
 };
 
+/** @typedef {{
+    [localeCode: string]: {
+        base?: string;
+        script?: string;
+        nativeName?: string;
+    };
+}} LanguagesJSON */
+
+/** @typedef {{
+    [localeCode: string]: {
+        rtl: boolean;
+        pct?: number;
+    }
+}} LocalesJSON */
+
+/** @typedef {unknown} Translations */
+
 //
 // coreLocalizer manages language and locale parameters including translated strings
 //
@@ -289,6 +306,14 @@ export function coreLocalizer() {
             localeString = localeString[path.pop()];
         }
 
+        if (Array.isArray(localeString)) {
+            // found an array of localized strings!
+            // for example: `terms` or `aliases` from id-tagging-schema
+            // -> resolve each string of the array individually
+            return localeString.map((_, idx) =>
+                localizer.tInfo(`${origStringId}.${idx}`, replacements, locale));
+        }
+
         if (localeString !== undefined) {
             if (replacements) {
               if (typeof localeString === 'object' && Object.keys(localeString).length) {
@@ -353,8 +378,8 @@ export function coreLocalizer() {
               }
             }
             return {
-                texts: [localeString],
-                locale
+              texts: [localeString],
+              locale
             };
         }
         // no localized string found...
@@ -375,8 +400,8 @@ export function coreLocalizer() {
           };
         }
 
-        const missing = `Missing ${locale} translation: ${origStringId}`;
-        if (typeof console !== 'undefined') console.error(missing);  // eslint-disable-line
+        const missing = `Missing translation: ${origStringId}`;
+        console.error(`${missing} (last tried locale: ${locale})`);  // eslint-disable-line
 
         return {
             texts: [missing],
@@ -384,13 +409,33 @@ export function coreLocalizer() {
         };
     };
 
-    localizer.hasTextForStringId = function(stringId) {
-        return !!localizer.tInfo(stringId, { default: 'nothing found'}).locale;
+    localizer.hasTextForStringId = function(stringId, locale) {
+        return !!localizer.tInfo(stringId, { default: 'nothing found'}, locale).locale;
     };
 
     // Returns only the localized text, discarding the locale info
     localizer.t = function(stringId, replacements, locale) {
-        return localizer.tInfo(stringId, replacements, locale).texts.join('');
+        const info = localizer.tInfo(stringId, replacements, locale);
+        if (Array.isArray(info)) {
+            console.error(`${origStringId} is unexpectedly an array of texts`);  // eslint-disable-line
+            return '';
+        }
+        return info.texts.join('');
+    };
+
+    // Returns only the localized text, discarding the locale info
+    localizer.t.all = function(stringId, replacements, locale) {
+        /*if (!localizer.hasTextForStringId(stringId, locale)) {
+            console.error(`Missing translation: ${stringId}`);  // eslint-disable-line
+            return [];
+        }*/
+        const infos = localizer.tInfo(stringId, { ...replacements, default: 'nothing found' }, locale);
+        if (!Array.isArray(infos)) {
+            if (replacements && 'default' in replacements) return replacements.default;
+            console.error(`Missing translation: ${stringId} (expected: array of texts)`);  // eslint-disable-line
+            return [];
+        }
+        return infos.map(tInfo => tInfo.texts.join(''));
     };
 
     // Returns the localized text wrapped in an HTML element encoding the locale info
@@ -425,6 +470,10 @@ export function coreLocalizer() {
       /** @param {d3.Selection} selection */
       const ret = function(selection) {
         const info = localizer.tInfo(stringId, replacements, locale);
+        if (Array.isArray(info)) {
+            console.error(`${stringId} is unexpectedly an array of texts`);  // eslint-disable-line
+            return;
+        }
         const texts = [
           replacements?.prefix,
           ...info.texts,
@@ -450,6 +499,10 @@ export function coreLocalizer() {
     localizer.t.addOrUpdate = function(stringId, replacements, locale) {
       const ret = function(selection) {
         const info = localizer.tInfo(stringId, replacements, locale);
+        if (Array.isArray(info)) {
+            console.error(`${stringId} is unexpectedly an array of texts`);  // eslint-disable-line
+            return;
+        }
         const texts = [
           replacements?.prefix,
           ...info.texts,

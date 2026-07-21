@@ -11,7 +11,10 @@ import {
 import { presetManager } from '../presets';
 import { osmIdManager, osmIsInterestingTag } from '../osm';
 import { utilDetect } from '../util/detect';
-import { utilArrayDifference, utilArrayUniq, utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
+import {
+    utilArrayDifference, utilArrayUniq, utilDisplayName, utilDisplayNameForPath, utilEntitySelector,
+    utilUnicodeCharsCount, utilUnicodeCharsTruncated
+} from '../util';
 
 
 
@@ -343,8 +346,9 @@ export function svgLabels(projection, context) {
                     if (wireframe) continue;
                     var renderAs = renderNodeAs[entity.id];
                     if (renderAs.geometry === 'vertex' && zoom < 17) continue;
+                    let charsRemaining = utilUnicodeCharsCount(name) - 1;
                     while (renderAs.isAddr && width > 36) {
-                        name = `${name.substring(0, name.replace(/…$/, '').length - 1)}…`;
+                        name = `${utilUnicodeCharsTruncated(name.replace(/…$/, ''), charsRemaining--)}…`;
                         width = textWidth(name, fontSize, selection.select('g.layer-osm.labels').node());
                     }
 

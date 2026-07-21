@@ -132,7 +132,7 @@ export function operationCircularize(context, selectedIDs) {
         let previewGraph = context.graph();
         return _actions.map(action => {
             if (!action.disabled?.(previewGraph)) {
-                previewGraph = action(previewGraph, t);
+                previewGraph = action(previewGraph);
                 if (action.id !== 'circularize') return false;
                 const way = previewGraph.hasEntity(action.getWayId());
                 const getPath = svgPath(context.projection, previewGraph, false);

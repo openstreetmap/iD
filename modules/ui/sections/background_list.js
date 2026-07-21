@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit';
+import { debounce, sortBy } from 'es-toolkit';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
 import { select as d3_select } from 'd3-selection';
 
@@ -136,11 +136,15 @@ export function uiSectionBackgroundList(context) {
 
     function setTooltips(selection) {
         selection.each(function(d, i, nodes) {
-            var item = d3_select(this).select('label');
-            var span = item.select('span');
-            var placement = (i < nodes.length / 2) ? 'bottom' : 'top';
-            var hasDescription = d.hasDescription();
-            var isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
+            const item = d3_select(this).select('label');
+            const select = d3_select(this).select('select').node();
+            if (select) {
+                d = d.variants[select.selectedIndex].source;
+            }
+            const hasDescription = d.hasDescription();
+            const span = item.select('span');
+            const isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
+            const placement = (i < nodes.length / 2) ? 'bottom' : 'top';
 
             item.call(uiTooltip().destroyAny);
 
@@ -159,14 +163,47 @@ export function uiSectionBackgroundList(context) {
         });
     }
 
+
     function drawListItems(layerList, type, change, filter) {
-        var sources = context.background()
+        const sources = [];
+        const dateLikeRegex = /(.+?\s\(?)((?:(?:\d{2,}|[-\/, ])+|DTM|DSM|DOM|DEM)+\s*)(\)?(?:\s|$).*)/;
+        context.background()
             .sources(context.map().extent(), context.map().zoom(), true)
             .filter(filter)
             .sort(function(a, b) {
                 return a.best() && !b.best() ? -1
                     : b.best() && !a.best() ? 1
                     : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
+            })
+            .forEach(source => {
+                const name = source.name();
+                if (dateLikeRegex.test(name)) {
+                    let [ prefix, variant, suffix ] = name.match(dateLikeRegex).slice(1);
+                    variant = variant.replace(/^[-\/, ]+/, '').replace(/[-\/, ]+$/, ''); // strip away extra punctuation
+                    const main = sources.find((s) =>
+                        s.prefix === prefix && s.suffix === suffix);
+                    if (main) {
+                        main.variants.push({ variant, source });
+                    } else {
+                        sources.push({
+                            ...source,
+                            prefix,
+                            suffix,
+                            variants: [{ variant, source }]
+                        });
+                    }
+                } else {
+                    sources.push({
+                        ...source,
+                        variants: [{ source }]
+                    });
+                }
+            });
+        sources.forEach(source => {
+                source.variants = sortBy(source.variants, [
+                    variant => variant.source.best(),
+                    variant => variant.variant
+                ]).reverse();
             });
 
         var layerLinks = layerList.selectAll('li')
@@ -193,11 +230,36 @@ export function uiSectionBackgroundList(context) {
             .attr('value', function(d) {
                 return d.id;
             })
-            .on('change', change);
+            .on('change', function(d3_event, d) {
+                if (d.variants.length > 1) {
+                    const selectedVariantIndex = d3_select(this.parentElement).select('select').node().selectedIndex;
+                    change(d3_event, d.variants[selectedVariantIndex].source);
+                } else {
+                    change(d3_event, d);
+                }
+            });
 
         label
             .append('span')
-            .each(function(d) { d.label()(d3_select(this)); });
+            .each(function(d) {
+                const self = d3_select(this);
+                if (d.variants.length > 1) {
+                    self.append('span').text(d.prefix + ' ');
+                    self.append('select')
+                        .on('change', function(d3_event, d) {
+                            change(d3_event, d.variants[this.selectedIndex].source);
+                        })
+                        .selectAll('option')
+                        .data(d => d.variants)
+                        .enter()
+                        .append('option')
+                        .attr('value', d => d.source.id)
+                        .text(d => d.variant);
+                    self.append('span').text(' ' + d.suffix);
+                } else {
+                    d.label()(self);
+                }
+            });
 
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')
@@ -228,15 +290,22 @@ export function uiSectionBackgroundList(context) {
 
     function updateLayerSelections(selection) {
         function active(d) {
-            return context.background().showsLayer(d);
+            return d.variants.some((variant) =>
+                context.background().showsLayer(variant.source));
         }
 
-        selection.selectAll('li')
+        const item = selection.selectAll('li')
             .classed('active', active)
-            .classed('switch', function(d) { return d.id === previousBackgroundID(); })
-            .call(setTooltips)
-            .selectAll('input')
+            .classed('switch', (d) => d.variants.some((variant) =>
+                variant.source.id === previousBackgroundID()))
+            .call(setTooltips);
+        item.selectAll('input')
             .property('checked', active);
+        item.filter(active)
+            .selectAll('select')
+            .property('selectedIndex', (d) =>
+                d.variants.findIndex((variant) =>
+                    context.background().showsLayer(variant.source)));
     }
 
 

@@ -37,10 +37,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # Unreleased (2.42.0-dev)
 
+#### :newspaper: News
+* Update id-tagging-schema to [version 7](https://github.com/ideditor/schema-builder/blob/main/MIGRATION_GUIDE.md#v7-migration-guide), allowing to add more detailed information to be defined for presets and fields, adding [_pinhead_](https://pinhead.ink/) icon set, and unlocking additional functionality to be implemented for presets in the future ([#12358])
 #### :sparkles: Usability & Accessibility
 * Display radio field options in a two-column layout if there is insufficient space for them in a single line ([#12455])
 * Render `highway=track` using different styles depending on the `tracktype` ([#12392], thanks [@RudyTheDev])
 * Add dedicated pattern for `landuse=flowerbed` features ([#12458], thanks [@RudyTheDev])
+* Apply most recently used preset when immediately pressing <kbd>Enter</kbd> in the preset list ([#12526])
+* Prioritize parent relations of connected features in relation membership dropdown list ([#11896], thanks [@bhavyaKhatri2703])
+* Link `*:wikidata` tags to wikidata in suggested tag upgrade list ([#12531])
+* Group related background layers when they look like yearly variants of the same source ([#12561])
 #### :scissors: Operations
 * Allow circularize operation also when multiple selected ways form a closed loop ([#12457])
 * Allow follow operation in more situations (e.g. when there are multiple coincident ways to follow) ([#9340], thanks [@jguddas])
@@ -52,6 +58,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix radio fields being always in single line mode when feature was selected while sidebar was collapsed ([#12454])
 * Fix undo and remove buttons for `multiCombo` fields ([#12406], thanks [@RudyTheDev])
 * Fix a crash when cancelling drawing a line while hovering other features with a `directionalCombo` field ([#12467])
+* Make sure rendering of truncated address labels does not result in broken unicode characters ([#12511], thanks [@greymoth-jp])
 #### :earth_asia: Localization
 * Improve some edge cases of rendering of mixed right-to-left and left-to-right text ([#8713])
 * When labelling features, match locale codes like `zh-CN` to name tags like `name:zh-Hans` ([#10911], thanks [@k-yle])
@@ -65,6 +72,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8724]: https://github.com/openstreetmap/iD/issues/8724
 [#9340]: https://github.com/openstreetmap/iD/pull/9340
 [#10911]: https://github.com/openstreetmap/iD/pull/10911
+[#11896]: https://github.com/openstreetmap/iD/pull/11896
+[#12358]: https://github.com/openstreetmap/iD/pull/12358
 [#12392]: https://github.com/openstreetmap/iD/pull/12392
 [#12401]: https://github.com/openstreetmap/iD/pull/12401
 [#12406]: https://github.com/openstreetmap/iD/pull/12406
@@ -74,8 +83,30 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12457]: https://github.com/openstreetmap/iD/pull/12457
 [#12458]: https://github.com/openstreetmap/iD/pull/12458
 [#12467]: https://github.com/openstreetmap/iD/issues/12467
+[#12511]: https://github.com/openstreetmap/iD/pull/12511
+[#12526]: https://github.com/openstreetmap/iD/issues/12526
+[#12531]: https://github.com/openstreetmap/iD/issues/12531
+[#12561]: https://github.com/openstreetmap/iD/pull/12561
 [@brianstrauch]: https://github.com/brianstrauch
 [@jguddas]: https://github.com/jguddas
+[@greymoth-jp]: https://github.com/greymoth-jp
+
+
+# 2.41.2
+##### 2026-Jun-29
+
+* Prevent an intermittent crash when loading iD on Firefox ([#12494])
+
+[#12494]: https://github.com/openstreetmap/iD/issues/12494
+
+
+# 2.41.1
+##### 2026-Jun-23
+
+#### :bug: Bugfixes
+* Fix a bug causing encrypted background imagery layers from not being loaded correctly
+#### :hammer: Development
+* Make `context.ui().hash` available right after `init()`
 
 
 # 2.41.0

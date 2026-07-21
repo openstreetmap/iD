@@ -1,3 +1,5 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.uiEntityEditor', function () {
     beforeEach(function () {
         iD.fileFetcher.cache().preset_presets = {
@@ -7,12 +9,12 @@ describe('iD.uiEntityEditor', function () {
 
     it('refreshes selected entity details when history merge fires', async () => {
         await iD.presetManager.ensureLoaded(true);
-        const container = d3.select(document.createElement('div'));
+        const container = d3_select(document.createElement('div'));
         const selection = container.append('div');
         const context = iD.coreContext().assetPath('../dist/').init().container(container);
 
         context.history().merge([
-            iD.osmNode({ id: 'n1', loc: [0, 0], tags: { crossing: 'marked', highway: 'crossing' } })
+            new iD.osmNode({ id: 'n1', loc: [0, 0], tags: { crossing: 'marked', highway: 'crossing' } })
         ]);
 
         const editor = iD.uiEntityEditor(context)
@@ -24,7 +26,7 @@ describe('iD.uiEntityEditor', function () {
         expect(editor.presets()[0].id).toBe('point');
 
         context.history().merge([
-            iD.osmWay({ id: 'w1', nodes: ['n1', 'n2'] })
+            new iD.osmWay({ id: 'w1', nodes: ['n1', 'n2'] })
         ]);
 
         expect(editor.presets()[0].id).toBe('vertex_only');

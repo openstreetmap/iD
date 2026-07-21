@@ -19,6 +19,14 @@ const _tileZoom = 14;
 const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/api/0.3';
 let _osmoseData = { icons: {}, items: [] };
 
+/** @typedef {{
+    osmose: {
+        icons: {
+            [id: string]: string;
+        }
+    };
+}} QAData */
+
 // This gets reassigned if reset
 let _cache;
 

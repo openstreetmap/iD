@@ -1,3 +1,6 @@
+import { select as d3_select } from 'd3-selection';
+import type { EntityId } from '../../../modules';
+
 describe('iD.uiField as multiCombo', () => {
     let context: iD.Context;
     let selection: d3.Selection;
@@ -5,7 +8,7 @@ describe('iD.uiField as multiCombo', () => {
 
     beforeEach(() => {
         context = iD.coreContext().assetPath('../dist/').init();
-        selection = d3.select(document.createElement('div'));
+        selection = d3_select(document.createElement('div'));
 
         presetField = iD.presetField('fuel', { key: 'fuel:', type: 'multiCombo' });
     });
@@ -14,7 +17,7 @@ describe('iD.uiField as multiCombo', () => {
         // Checks that various ways to modify the tags/values results in the correct detection of modified state
 
         it('field is not marked modified when tags are original', () => {
-            const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+            const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
             context.history().merge([entity]);
 
             // no action performed on the entity, so tags are still original
@@ -27,7 +30,7 @@ describe('iD.uiField as multiCombo', () => {
         });
 
         it('marks field as modified when value is changed', () => {
-            const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+            const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
             context.history().merge([entity]);
 
             // Change `fuel:petrol=no' to `fuel:petrol=yes'
@@ -42,7 +45,7 @@ describe('iD.uiField as multiCombo', () => {
         });
 
         it('marks field as modified when tag is changed', () => {
-            const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+            const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
             context.history().merge([entity]);
 
             // Change `fuel:diesel=yes' to `fuel:HGV_diesel=yes'
@@ -57,7 +60,7 @@ describe('iD.uiField as multiCombo', () => {
         });
 
         it('marks field as modified when existing tag is removed', () => {
-            const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+            const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
             context.history().merge([entity]);
 
             // Remove `fuel:petrol=no'
@@ -72,7 +75,7 @@ describe('iD.uiField as multiCombo', () => {
         });
 
         it('marks field as modified when a new tag is added', () => {
-            const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+            const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
             context.history().merge([entity]);
 
             // Add `fuel:propane=yes'
@@ -88,7 +91,7 @@ describe('iD.uiField as multiCombo', () => {
     });
 
     describe('undo', () => {
-        function wireRevert(field: any, entityID: string) {
+        function wireRevert(field: any, entityID: EntityId) {
             // Simulate entity_editor.revertTags()
             field.on('revert', (keys: string[]) => {
                 const original = context.graph().base().entities[entityID]!;
@@ -100,7 +103,7 @@ describe('iD.uiField as multiCombo', () => {
 
         describe('relevant tags', () => {
             it('undo reverts changed value', () => {
-                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+                const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
                 context.history().merge([entity]);
 
                 // Change `fuel:petrol=no' to `fuel:petrol=yes'
@@ -118,7 +121,7 @@ describe('iD.uiField as multiCombo', () => {
             });
 
             it('undo reverts changed tag', () => {
-                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+                const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
                 context.history().merge([entity]);
 
                 // Change `fuel:diesel=yes' to `fuel:HGV_diesel=yes'
@@ -136,7 +139,7 @@ describe('iD.uiField as multiCombo', () => {
             });
 
             it('undo reverts added tag', () => {
-                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+                const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
                 context.history().merge([entity]);
 
                 // Add `fuel:propane=yes'
@@ -154,7 +157,7 @@ describe('iD.uiField as multiCombo', () => {
             });
 
             it('undo reverts removed tag', () => {
-                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+                const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
                 context.history().merge([entity]);
 
                 // Remove `fuel:petrol=no'
@@ -174,7 +177,7 @@ describe('iD.uiField as multiCombo', () => {
 
         describe('unrelated tags', () => {
             it('undo doesn\'t affect unrelated value change', () => {
-                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'existing': 'yes' } });
+                const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'existing': 'yes' } });
                 context.history().merge([entity]);
 
                 // For us, just change `fuel:petrol=no' to `fuel:petrol=yes',
@@ -192,7 +195,7 @@ describe('iD.uiField as multiCombo', () => {
             });
 
             it('undo doesn\'t affect unrelated tag addition', () => {
-                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+                const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
                 context.history().merge([entity]);
 
                 // For us, just change `fuel:petrol=no' to `fuel:petrol=yes',
@@ -210,7 +213,7 @@ describe('iD.uiField as multiCombo', () => {
             });
 
             it('undo doesn\'t affect unrelated tag removal', () => {
-                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'temporary': 'yes' } });
+                const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'temporary': 'yes' } });
                 context.history().merge([entity]);
 
                 // For us, just change `fuel:petrol=no' to `fuel:petrol=yes',
@@ -230,11 +233,11 @@ describe('iD.uiField as multiCombo', () => {
     });
 
     describe('remove', () => {
-        function wireChange(field: any, entityID: string) {
+        function wireChange(field: any, entityID: EntityId) {
             // Simulates entity_editor.changeTags()
             field.on('change', (changed: Record<string, string | undefined>) => {
                 const tags = Object.assign({}, context.entity(entityID).tags);
-                Object.keys(changed).forEach((key: string) => {
+                Object.keys(changed).forEach((key) => {
                     if (changed[key] === undefined) {
                         delete tags[key];
                     } else {
@@ -247,7 +250,7 @@ describe('iD.uiField as multiCombo', () => {
 
         describe('relevant tags', () => {
             it('removes all field tags', () => {
-                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+                const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
                 context.history().merge([entity]);
 
                 const field = iD.uiField(context, presetField, ['n1'], { show: true });
@@ -261,7 +264,7 @@ describe('iD.uiField as multiCombo', () => {
             });
 
             it('removes newly-added tags', () => {
-                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+                const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
                 context.history().merge([entity]);
 
                 const newTags = { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'fuel:propane': 'yes' };
@@ -278,7 +281,7 @@ describe('iD.uiField as multiCombo', () => {
             });
 
             it('removes remaining tags when one was already removed', () => {
-                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+                const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
                 context.history().merge([entity]);
 
                 const newTags = { 'fuel:diesel': 'yes' };
@@ -297,7 +300,7 @@ describe('iD.uiField as multiCombo', () => {
 
         describe('unrelated tags', () => {
             it('remove doesn\'t affect unrelated existing tag', () => {
-                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'existing': 'yes' } });
+                const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'existing': 'yes' } });
                 context.history().merge([entity]);
 
                 const field = iD.uiField(context, presetField, ['n1'], { show: true });
@@ -311,7 +314,7 @@ describe('iD.uiField as multiCombo', () => {
             });
 
             it('remove doesn\'t affect unrelated added tag', () => {
-                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
+                const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' } });
                 context.history().merge([entity]);
 
                 const newTags = { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'additional': 'yes' };
@@ -328,7 +331,7 @@ describe('iD.uiField as multiCombo', () => {
             });
 
             it('remove doesn\'t restore a previously removed unrelated tag', () => {
-                const entity = iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'temporary': 'yes' } });
+                const entity = new iD.osmNode({ id: 'n1', tags: { 'fuel:diesel': 'yes', 'fuel:petrol': 'no', 'temporary': 'yes' } });
                 context.history().merge([entity]);
 
                 const newTags = { 'fuel:diesel': 'yes', 'fuel:petrol': 'no' };

@@ -32,46 +32,46 @@ describe('iD.validations.incompatible_source', function () {
 
     it('has no errors on init', function() {
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with no source tag', function() {
         createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café'});
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with okay source tag', function() {
         createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'survey'});
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with excepted source tag', function() {
         createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'Google drive'});
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags way with incompatible source tag', function() {
         createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'Google Maps'});
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('incompatible_source');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('incompatible_source');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('does not flag buildings in the google-africa-buildings dataset', function() {
         createWay({ building: 'yes', source: 'esri/Google_Africa_Buildings' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('does not flag buildings in the google-open-buildings dataset', function() {
         createWay({ building: 'yes', source: 'esri/Google_Open_Buildings' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 });

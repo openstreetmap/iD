@@ -1,3 +1,5 @@
+import { select as d3_select } from 'd3-selection';
+
 import { t } from '../core/localizer';
 
 import { actionChangePreset } from '../actions/change_preset';
@@ -91,17 +93,10 @@ export function validationOutdatedTags() {
         }
       });
     }
-    const deprecationDiff = utilTagDiff(oldTags, newTags);
     const deprecationDiffContext = Object.keys(oldTags)
         .filter(key => deprecatedTags?.some(deprecated => deprecated.replace?.[key] !== undefined))
-        .filter(key => newTags[key] === oldTags[key])
-        .map(key => ({
-          type: '~',
-          key,
-          oldVal: oldTags[key],
-          newVal: newTags[key],
-          display: decodeURIComponent('%C2%A0' /* &nbsp; */) + ' ' + key + '=' + oldTags[key]
-        }));
+        .filter(key => newTags[key] === oldTags[key]);
+    const deprecationDiff = utilTagDiff(oldTags, newTags, deprecationDiffContext);
 
     let issues = [];
     issues.provisional = (_waitingForDeprecated || waitingForNsi);
@@ -125,7 +120,7 @@ export function validationOutdatedTags() {
         reference: selection => showTagDiffReference(
           selection,
           t.append(`issues.outdated_tags.${prefix}reference`),
-          [...deprecationDiff, ...deprecationDiffContext]
+          deprecationDiff
         ),
         entityIds: [entity.id],
         hash: utilHashcode(JSON.stringify(deprecationDiff)),
@@ -272,5 +267,7 @@ export function showTagDiffReference(selection, reference, tagDiff) {
             return `${klass} tagDiff-cell-unchanged`;
         }
     })
-    .text(d => d.display);
+    .each(function(d) {
+        d3_select(this).call(d.render);
+    });
 }

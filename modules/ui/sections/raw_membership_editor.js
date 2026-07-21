@@ -68,6 +68,37 @@ export function uiSectionRawMembershipEditor(context) {
         return parents;
     }
 
+    function getConnectedRelations() {
+        const graph = context.graph();
+        const connectedRelationIDs = new Set();
+
+        _entityIDs.forEach((entityID) => {
+            const entity = graph.hasEntity(entityID);
+            if (!entity) return;
+
+            const connectedWays = new Set();
+
+            if (entity.type === 'node') {
+                graph.parentWays(entity)
+                    .forEach(way => connectedWays.add(way));
+            } else if (entity.type === 'way') {
+                entity.nodes.forEach(nodeID => {
+                    const node = graph.hasEntity(nodeID);
+                    if (!node) return;
+                    graph.parentWays(node)
+                        .filter(way => !_entityIDs.includes(way.id))
+                        .forEach(way => connectedWays.add(way));
+                });
+            }
+
+            connectedWays.forEach(way => {
+                graph.parentRelations(way)
+                    .forEach(relation => connectedRelationIDs.add(relation.id));
+            });
+        });
+        return connectedRelationIDs;
+    }
+
     function getMemberships() {
 
         var memberships = [];
@@ -327,7 +358,17 @@ export function uiSectionRawMembershipEditor(context) {
                 });
             });
 
-            result.sort(function(a, b) {
+            const connectedRelationIDs = getConnectedRelations();
+
+            result.sort(function (a, b) {
+                const isRelationAConnectedToSelection = connectedRelationIDs.has(a.relation.id);
+                const isRelationBConnectedToSelection = connectedRelationIDs.has(b.relation.id);
+
+                // if exactly one of the relations is connected to the selected entity,
+                // prioritize the connected relation over the unconnected one
+                if (isRelationAConnectedToSelection && !isRelationBConnectedToSelection) return -1;
+                if (!isRelationAConnectedToSelection && isRelationBConnectedToSelection) return 1;
+
                 return osmRelation.creationOrder(a.relation, b.relation);
             });
 

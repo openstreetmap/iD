@@ -411,10 +411,14 @@ export function uiCombobox(context, klass) {
                     } else {
                         labelSpan.text(d.value);
                     }
-                    if (d.description) {
+                    if (typeof d.description === 'string') {
                         sel.append('span')
                             .attr('class', 'combobox-option-description')
                             .text(d.description);
+                    } else if (typeof d.description === 'function') {
+                        sel.append('span')
+                            .attr('class', 'combobox-option-description')
+                            .call(d.description);
                     }
                 });
 

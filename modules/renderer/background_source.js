@@ -73,7 +73,7 @@ export function rendererBackgroundSource(data) {
 
     source.hasDescription = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).texts.join('');
+        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: _description }).texts.join('');
         return !!descriptionText;
     };
 
@@ -136,6 +136,7 @@ export function rendererBackgroundSource(data) {
                 var lat = Math.atan(Math.sinh(Math.PI * (1 - 2 * y / zoomSize)));
 
                 switch (source.projection) {
+                    case 'CRS:84':
                     case 'EPSG:4326':
                         return {
                             x: lon * 180 / Math.PI,
@@ -165,7 +166,10 @@ export function rendererBackgroundSource(data) {
                 case 'wkid':
                     return projection.replace(/^EPSG:/, '');
                 case 'bbox':
-                    // WMS 1.3 flips x/y for some coordinate systems including EPSG:4326 - #7557
+                    // WMS versions prior 1.3.0 require easting / northing (x,y) coordinate order for bbox parameter
+                    // WMS version 1.3.0 requires axis ordering as specified in the CRS - #7557
+                    // E.g. http://epsg.io/4326 > Coordinate system: ... Orientations: north, east.
+                    //      http://epsg.io/3857 > Coordinate system: ... Orientations: east, north.
                     if (projection === 'EPSG:4326' &&
                         // The CRS parameter implies version 1.3 (prior versions use SRS)
                         /VERSION=1.3|CRS={proj}/.test(source.template().toUpperCase())) {

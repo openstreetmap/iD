@@ -73,7 +73,7 @@ Pass these parameters as a `x-www-form-urlencoded` string in the _hash_ portion 
 
 ##### iD on openstreetmap.org (Rails Port)
 
-When constructing a URL to an instance of iD embedded on the [OpenStreetMap website](github.com/openstreetmap/openstreetmap-website/) (e.g. `https://www.openstreetmap.org/edit?editor=id`), the following parameters
+When constructing a URL to an instance of iD embedded on the [OpenStreetMap website](https://github.com/openstreetmap/openstreetmap-website/) (e.g. `https://www.openstreetmap.org/edit?editor=id`), the following parameters
 are available as **URL hash parameters**.
 _Example:_ `https://www.openstreetmap.org/edit?editor=id#gpx=https://gist.githubusercontent.com/answerquest/9445352b60ca5b44714675eae00f243a/raw/56a6343a29223318f4a697bfd16cbb2c3b8155ad/sample_boundary.gpx`
 
@@ -228,7 +228,7 @@ certain parts of the iD code to be replaced at runtime by custom code or data.
 
 iD is written in a modular style and bundled with [rollup.js](http://rollupjs.org/),
 which makes hot code replacement tricky.  (ES6 module exports are
-[immutable live bindings](http://www.2ality.com/2015/07/es6-module-exports.html)).
+[immutable live bindings](https://web.archive.org/web/20251130073344/https://2ality.com/2015/07/es6-module-exports.html)).
 Because of this, the parts of iD which are designed for customization are exported
 as live-bound objects that can be overridden at runtime _before initializing the iD context_.
 
