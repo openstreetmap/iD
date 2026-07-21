@@ -24,7 +24,8 @@ import * as Operations from '../operations/index';
 import { uiCmd } from '../ui/cmd';
 import {
     utilArrayIntersection, utilArrayUnion, utilDeepMemberSelector, utilEntityOrDeepMemberSelector,
-    utilEntitySelector, utilKeybinding, utilTotalExtent, utilGetAllNodes
+    utilEntitySelector, utilKeybinding, utilTotalExtent, utilGetAllNodes,
+    utilArrayUniq
 } from '../util';
 
 
@@ -125,8 +126,7 @@ export function modeSelect(context, selectedIDs) {
                 return [];  // selection includes non-area/non-line
             }
             var currChilds = graph.childNodes(entity).map(function(node) { return node.id; });
-            // De-duplicate to exclude revisited nodes
-            currChilds = [...new Set(currChilds)];
+            currChilds = utilArrayUniq(currChilds);
             if (!childs.length) {
                 childs = currChilds;
                 continue;
