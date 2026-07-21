@@ -434,11 +434,20 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             // (example: _origWay.nodes = [1,2,3,4,1])
             const isDrawingArea = _origWay.nodes.length > 1 && _origWay.nodes[0] === _origWay.nodes[_origWay.nodes.length - 1];
 
+            let secondLastNodeId, lastNodeId;
             // (example: isDrawingArea = true; _origWay.nodes = [1,2,3,4,1]; secondLastNodeId = 3; lastNodeId = 4)
             // (example: isDrawingArea = false; _origWay.nodes = [1,2,3,4,5]; secondLastNodeId = 4; lastNodeId = 5)
-            const secondLastNodeId = _origWay.nodes[_origWay.nodes.length + (isDrawingArea ? -3 : -2)];
-            const lastNodeId = _origWay.nodes[_origWay.nodes.length + (isDrawingArea ? -2 : -1)];
+            if (isDrawingArea) {
+                [secondLastNodeId, lastNodeId] = _origWay.nodes.slice(-3);
+            } else if (_nodeIndex === 0) {
+                // appending an unclosed way at the start
+                [lastNodeId, secondLastNodeId] = _origWay.nodes.slice(0);
+            } else {
+                [secondLastNodeId, lastNodeId] = _origWay.nodes.slice(-2);
+            }
 
+            // Unlike startGraph, the full history graph may contain unsaved vertices to follow.
+            // https://github.com/openstreetmap/iD/issues/8749
             const historyGraph = context.history().graph();
             // Get all ways that include the last created node and are not the way you are currently drawing
             const lastNodesParents = historyGraph.parentWays(historyGraph.entity(lastNodeId)).filter(w => w.id !== wayID);
