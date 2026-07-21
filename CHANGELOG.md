@@ -59,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix undo and remove buttons for `multiCombo` fields ([#12406], thanks [@RudyTheDev])
 * Fix a crash when cancelling drawing a line while hovering other features with a `directionalCombo` field ([#12467])
 * Make sure rendering of truncated address labels does not result in broken unicode characters ([#12511], thanks [@greymoth-jp])
+* Do not select start/end vertex of an area or closed way multiple times when selecting all vertices of a way using the keyboard shortcut ([#12586], thanks [@RudyTheDev])
 #### :earth_asia: Localization
 * Improve some edge cases of rendering of mixed right-to-left and left-to-right text ([#8713])
 * When labelling features, match locale codes like `zh-CN` to name tags like `name:zh-Hans` ([#10911], thanks [@k-yle])
@@ -88,6 +89,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12526]: https://github.com/openstreetmap/iD/issues/12526
 [#12531]: https://github.com/openstreetmap/iD/issues/12531
 [#12561]: https://github.com/openstreetmap/iD/pull/12561
+[#12586]: https://github.com/openstreetmap/iD/pull/12586/
 [@brianstrauch]: https://github.com/brianstrauch
 [@jguddas]: https://github.com/jguddas
 [@greymoth-jp]: https://github.com/greymoth-jp
