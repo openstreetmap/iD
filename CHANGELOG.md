@@ -43,6 +43,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add dedicated pattern for `landuse=flowerbed` features ([#12458], thanks [@RudyTheDev])
 #### :scissors: Operations
 * Allow circularize operation also when multiple selected ways form a closed loop ([#12457])
+* Allow follow operation in more situations (e.g. when there are multiple coincident ways to follow) ([#9340], thanks [@jguddas])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Show which field (or tag) produced an _invalid URL_ validation message ([#12449])
@@ -62,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#8713]: https://github.com/openstreetmap/iD/issues/8713
 [#8724]: https://github.com/openstreetmap/iD/issues/8724
+[#9340]: https://github.com/openstreetmap/iD/pull/9340
 [#10911]: https://github.com/openstreetmap/iD/pull/10911
 [#12392]: https://github.com/openstreetmap/iD/pull/12392
 [#12401]: https://github.com/openstreetmap/iD/pull/12401
@@ -73,6 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12458]: https://github.com/openstreetmap/iD/pull/12458
 [#12467]: https://github.com/openstreetmap/iD/issues/12467
 [@brianstrauch]: https://github.com/brianstrauch
+[@jguddas]: https://github.com/jguddas
 
 
 # 2.41.0
