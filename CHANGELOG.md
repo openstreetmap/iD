@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Group related background layers when they look like yearly variants of the same source ([#12561])
 #### :scissors: Operations
 * Allow circularize operation also when multiple selected ways form a closed loop ([#12457])
+* Allow follow operation in more situations (e.g. when there are multiple coincident ways to follow) ([#9340], thanks [@jguddas])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Show which field (or tag) produced an _invalid URL_ validation message ([#12449])
@@ -69,6 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#8713]: https://github.com/openstreetmap/iD/issues/8713
 [#8724]: https://github.com/openstreetmap/iD/issues/8724
+[#9340]: https://github.com/openstreetmap/iD/pull/9340
 [#10911]: https://github.com/openstreetmap/iD/pull/10911
 [#11896]: https://github.com/openstreetmap/iD/pull/11896
 [#12358]: https://github.com/openstreetmap/iD/pull/12358
@@ -86,6 +88,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12531]: https://github.com/openstreetmap/iD/issues/12531
 [#12561]: https://github.com/openstreetmap/iD/pull/12561
 [@brianstrauch]: https://github.com/brianstrauch
+[@jguddas]: https://github.com/jguddas
 [@greymoth-jp]: https://github.com/greymoth-jp
 
 
