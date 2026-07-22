@@ -4,8 +4,11 @@ import { modeSelect } from '../modes/select';
 import { t } from '../core/localizer';
 import { presetManager } from '../presets';
 import { utilArrayUniq } from '../util/array';
+import type { Action, CreateOperation, Operation } from '../core/history';
+import type { geoExtent } from '../geo';
+import type { NodeId } from '../osm';
 
-export function operationExtract(context, selectedIDs) {
+export const operationExtract: CreateOperation = (context, selectedIDs) => {
 
     var _amount = selectedIDs.length === 1 ? 'single' : 'multiple';
     var _geometries = utilArrayUniq(selectedIDs.map(function(entityID) {
@@ -13,7 +16,7 @@ export function operationExtract(context, selectedIDs) {
     }).filter(Boolean));
     var _geometryID = _geometries.length === 1 ? _geometries[0] : 'feature';
 
-    var _extent;
+    var _extent: geoExtent | undefined;
     var _actions = selectedIDs.map(function(entityID) {
         var graph = context.graph();
         var entity = graph.hasEntity(entityID);
@@ -22,6 +25,7 @@ export function operationExtract(context, selectedIDs) {
         if (entity.type === 'node' && graph.parentWays(entity).length === 0) return null;
 
         if (entity.type !== 'node') {
+            // @ts-expect-error -- will be fixed in a different PR
             var preset = presetManager.match(entity, graph);
             // only allow extraction from ways/relations if the preset supports points
             if (preset.geometry.indexOf('point') === -1) return null;
@@ -29,16 +33,15 @@ export function operationExtract(context, selectedIDs) {
 
         _extent = _extent ? _extent.extend(entity.extent(graph)) : entity.extent(graph);
 
-        return actionExtract(entityID, context.projection);
+        return actionExtract(entityID as NodeId, context.projection);
     }).filter(Boolean);
 
-    /** @param {KeyboardEvent | undefined} d3_event */
-    var operation = function (d3_event) {
+    const operation: Operation = function (d3_event: KeyboardEvent | undefined) {
         const shiftKeyPressed = d3_event?.shiftKey || false;
 
-        var combinedAction = function(graph) {
+        var combinedAction: Action = function(graph) {
             _actions.forEach(function(action) {
-                graph = action(graph, shiftKeyPressed);
+                graph = action(graph, undefined, shiftKeyPressed);
             });
             return graph;
         };
@@ -52,7 +55,7 @@ export function operationExtract(context, selectedIDs) {
 
 
     operation.available = function () {
-        return _actions.length && selectedIDs.length === _actions.length;
+        return !!_actions.length && selectedIDs.length === _actions.length;
     };
 
 
@@ -92,4 +95,4 @@ export function operationExtract(context, selectedIDs) {
 
 
     return operation;
-}
+};

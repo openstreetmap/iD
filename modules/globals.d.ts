@@ -48,6 +48,13 @@ declare global {
         keys<T>(o: T extends Record<infer K, unknown> ? [K] extends [string] ? T : never : never): (keyof T)[];
     }
 
+    // override to make Array#filter(Boolean) work,
+    // from https://github.com/mattpocock/ts-reset
+    type NonFalsy<T> = T extends false | 0 | 0n | '' | null | undefined ? never : T;
+    interface Array<T> {
+        filter<S extends T>(predicate: BooleanConstructor, thisArg?: any): NonFalsy<S>[];
+    }
+
     interface ParentNode extends Node {
         /** used internally by d3 to store the values passed to `.data()` */
         __data__: any;
