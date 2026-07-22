@@ -3,7 +3,7 @@ import { select as d3_select } from 'd3-selection';
 describe('iD.uiFieldCombo', () => {
     describe('semiCombo', () => {
         let context: iD.Context;
-        let selection: d3.Selection;
+        let selection: d3.Selection<HTMLDivElement>;
 
         beforeEach(() => {
             context = iD.coreContext().assetPath('../dist/').init();

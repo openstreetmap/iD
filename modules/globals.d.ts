@@ -33,7 +33,7 @@ declare global {
   }
 
   declare namespace d3 {
-    export type Selection<T = any> = import('d3-selection').Selection<
+    export type Selection<T = HTMLElement> = import('d3-selection').Selection<
       T,
       any,
       any,

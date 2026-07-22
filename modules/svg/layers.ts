@@ -29,7 +29,7 @@ export type LayerDispatch = Dispatch<object, {
 }>
 
 export interface SvgLayer {
-    (selection: d3.Selection): void;
+    (selection: d3.Selection<SVGGElement>): void;
     enabled?(position: GeolocationPosition | boolean, enabled: boolean): boolean | SvgLayer;
 }
 

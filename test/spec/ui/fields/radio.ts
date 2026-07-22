@@ -3,7 +3,7 @@ import { select as d3_select } from 'd3-selection';
 describe('iD.uiFieldRadio', () => {
     describe('structureRadio', () => {
         let context: iD.Context;
-        let selection: d3.Selection;
+        let selection: d3.Selection<HTMLDivElement>;
 
         beforeEach(() => {
             context = iD.coreContext().assetPath('../dist/').init();
@@ -73,7 +73,7 @@ describe('iD.uiFieldRadio', () => {
 
     describe('radio with strings.options', () => {
         let context: iD.Context;
-        let selection: d3.Selection;
+        let selection: d3.Selection<HTMLDivElement>;
 
         beforeEach(() => {
             context = iD.coreContext().assetPath('../dist/').init();

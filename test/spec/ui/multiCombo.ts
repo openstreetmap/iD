@@ -3,7 +3,7 @@ import type { EntityId } from '../../../modules';
 
 describe('iD.uiField as multiCombo', () => {
     let context: iD.Context;
-    let selection: d3.Selection;
+    let selection: d3.Selection<HTMLDivElement>;
     let presetField: any; // not TS yet
 
     beforeEach(() => {
