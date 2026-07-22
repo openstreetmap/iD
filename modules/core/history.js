@@ -17,7 +17,7 @@ import { osmIdManager } from '../osm';
 /**
  * @import { WayId, OsmEntity, EntityId } from '../osm';
  * @import { coreGraph } from './graph';
- * @import { TRenderLocalizedText } from './localizer';
+ * @import { LocalizedTextRenderer } from './localizer';
  * @import { Vec2 } from '../geo/vector';
  * @template [T = never]
  * @typedef {{
@@ -36,13 +36,13 @@ import { osmIdManager } from '../osm';
     (event?: KeyboardEvent): void;
     available(situation: string): boolean | string | undefined;
     disabled(): false | string;
-    tooltip(): TRenderLocalizedText;
+    tooltip(): LocalizedTextRenderer;
     annotation(): string;
     availableForKeypress?(): boolean;
     icon?(): string;
     id: string;
     keys: string[];
-    title: TRenderLocalizedText;
+    title: LocalizedTextRenderer;
     behavior?: unknown;
     mouseOnly?: boolean;
     relatedEntityIds?(): EntityId[];

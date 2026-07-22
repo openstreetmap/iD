@@ -33,7 +33,7 @@ export {
 
 /** @typedef {unknown} Translations */
 
-/** @typedef {any} TRenderLocalizedText */
+/** @typedef {any} LocalizedTextRenderer */
 
 //
 // coreLocalizer manages language and locale parameters including translated strings
