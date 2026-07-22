@@ -1,3 +1,4 @@
+import type { Geometry } from '@openstreetmap/id-tagging-schema';
 import type { GeoJSON } from 'geojson';
 import { debug, createEntity, osmIdManager, type OsmType, type EntityId } from '../index';
 import { osmIsInterestingTag } from './tags';
@@ -10,7 +11,6 @@ import type { coreGraph } from '../core/graph';
 import type { geoExtent } from '../geo';
 
 export type OsmEntity = osmNode | osmWay | osmRelation;
-export type GeometryType = 'point' | 'vertex' | 'area' | 'line' | 'relation';
 
 export interface OsmEntityProps {
     type: OsmType;
@@ -66,7 +66,7 @@ export abstract class OsmAbstractEntity implements OsmEntityProps {
 
     abstract copy(resolver: coreGraph, copies: { [id: EntityId]: unknown }): this;
 
-    abstract geometry(graph: coreGraph): GeometryType;
+    abstract geometry(graph: coreGraph): Geometry;
 
     abstract extent(
         resolver: coreGraph,
