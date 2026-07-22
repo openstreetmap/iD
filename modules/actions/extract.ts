@@ -1,13 +1,20 @@
 import { geoPath as d3_geoPath } from 'd3-geo';
 
 import { osmNode } from '../osm/node';
+import type { Action } from '../core/history';
+import type { NodeId, OsmEntity } from '../osm';
+import type { Projection } from '../geo/raw_mercator';
+import type { coreGraph } from '../core';
 
-export function actionExtract(entityID, projection) {
+export interface ActionExtract extends Action<boolean> {
+    getExtractedNodeID(): NodeId;
+}
 
-    var extractedNodeID;
+export function actionExtract(entityID: NodeId, projection: Projection): ActionExtract {
 
-    /** @param {boolean} shiftKeyPressed */
-    var action = function(graph, shiftKeyPressed) {
+    var extractedNodeID: NodeId;
+
+    const action: ActionExtract = function(graph, _t, shiftKeyPressed) {
         var entity = graph.entity(entityID);
 
         if (entity.type === 'node') {
@@ -17,8 +24,7 @@ export function actionExtract(entityID, projection) {
         return extractFromWayOrRelation(entity, graph);
     };
 
-    /** @param {boolean} shiftKeyPressed */
-    function extractFromNode(node, graph, shiftKeyPressed) {
+    function extractFromNode(node: osmNode, graph: coreGraph, shiftKeyPressed: boolean | undefined) {
 
         extractedNodeID = node.id;
 
@@ -42,7 +48,7 @@ export function actionExtract(entityID, projection) {
             }, graph);
     }
 
-    function extractFromWayOrRelation(entity, graph) {
+    function extractFromWayOrRelation(entity: OsmEntity, graph: coreGraph) {
 
         var fromGeometry = entity.geometry(graph);
 
@@ -56,7 +62,7 @@ export function actionExtract(entityID, projection) {
             extractedLoc = entity.extent(graph).center();
         }
 
-        var indoorAreaValues = {
+        var indoorAreaValues: Record<TagValue, boolean> = {
             area: true,
             corridor: true,
             elevator: true,
@@ -69,8 +75,8 @@ export function actionExtract(entityID, projection) {
 
         var isIndoorArea = fromGeometry === 'area' && entity.tags.indoor && indoorAreaValues[entity.tags.indoor];
 
-        var entityTags = Object.assign({}, entity.tags);  // shallow copy
-        var pointTags = {};
+        var entityTags = { ...entity.tags };  // shallow copy
+        var pointTags: Tags = {};
         for (var key in entityTags) {
 
             if (entity.type === 'relation' &&
