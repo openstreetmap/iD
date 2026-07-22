@@ -1,6 +1,6 @@
+import type { Geometry } from '@openstreetmap/id-tagging-schema';
 import { select as d3_select } from 'd3-selection';
 import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags, osmLifecyclePrefixes } from '../osm/tags';
-import type { GeometryType } from '../osm';
 
 export type TagGetter<T> = (entity: T) => Tags;
 
@@ -46,7 +46,7 @@ export function svgTagClasses<T>() {
         let primary, status;
 
         // in some situations we want to render perimeter strokes a certain way
-        let overrideGeometry: GeometryType;
+        let overrideGeometry: Geometry;
         if (/\bstroke\b/.test(value)) {
             if (!!t.barrier && t.barrier !== 'no') {
                 overrideGeometry = 'line';

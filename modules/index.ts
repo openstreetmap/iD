@@ -23,5 +23,4 @@ export * from './validations/index';
 // This is only done in testing because of the performance penalty.
 export let debug = false;
 
-/** @param {boolean} newValue */
-export const setDebug = (newValue) => { debug = newValue; };
+export const setDebug = (newValue: boolean) => { debug = newValue; };
