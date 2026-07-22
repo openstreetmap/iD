@@ -4,13 +4,13 @@ describe('iD.coreLocalizer', function() {
     describe('#localized-text', function() {
         it('appends localized text to the DOM', function() {
             var selection = d3_select(document.createElement('div'));
-            selection.call(iD.localizer.t.append('icons.download' /* <- just any random string */));
+            selection.call(iD.localizer.t_append('icons.download' /* <- just any random string */));
             expect(selection.selectChild().classed('localized-text')).toBe(true);
         });
     });
     describe('#floatFormatter', function () {
         it('uses the specified number of fraction digits', function () {
-            var localizer = iD.coreLocalizer();
+            var localizer = new iD.coreLocalizer();
             var formatFloat = localizer.floatFormatter('en');
             expect(formatFloat(-0.1)).toEqual('-0.1');
             expect(formatFloat(-0.1, 0)).toEqual('-0');
@@ -18,7 +18,7 @@ describe('iD.coreLocalizer', function() {
             expect(formatFloat(0.0, 1)).toEqual('0.0');
         });
         it('roundtrips English numbers', function () {
-            var localizer = iD.coreLocalizer();
+            var localizer = new iD.coreLocalizer();
             var parseFloat = localizer.floatParser('en');
             var formatFloat = localizer.floatFormatter('en');
             expect(formatFloat(parseFloat('0.1'))).toEqual('0.1');
@@ -32,7 +32,7 @@ describe('iD.coreLocalizer', function() {
     });
     describe('#floatParser', function () {
         it('roundtrips English numbers', function () {
-            var localizer = iD.coreLocalizer();
+            var localizer = new iD.coreLocalizer();
             var formatFloat = localizer.floatFormatter('en');
             var parseFloat = localizer.floatParser('en');
             expect(parseFloat(formatFloat(-0.1))).toEqual(-0.1);
@@ -42,7 +42,7 @@ describe('iD.coreLocalizer', function() {
             expect(parseFloat(formatFloat(3.14159))).toEqual(3.14159);
         });
         it('roundtrips Spanish numbers', function () {
-            var localizer = iD.coreLocalizer();
+            var localizer = new iD.coreLocalizer();
             var formatFloat = localizer.floatFormatter('es');
             var parseFloat = localizer.floatParser('es');
             expect(parseFloat(formatFloat(-0.1))).toEqual(-0.1);
@@ -52,7 +52,7 @@ describe('iD.coreLocalizer', function() {
             expect(parseFloat(formatFloat(3.14159))).toEqual(3.14159);
         });
         it('roundtrips Hebrew numbers', function () {
-            var localizer = iD.coreLocalizer();
+            var localizer = new iD.coreLocalizer();
             var formatFloat = localizer.floatFormatter('he');
             var parseFloat = localizer.floatParser('he');
             expect(parseFloat(formatFloat(-0.1))).toEqual(-0.1);
@@ -62,7 +62,7 @@ describe('iD.coreLocalizer', function() {
             expect(parseFloat(formatFloat(3.14159))).toEqual(3.14159);
         });
         it('roundtrips Arabic numbers', function () {
-            var localizer = iD.coreLocalizer();
+            var localizer = new iD.coreLocalizer();
             var formatFloat = localizer.floatFormatter('ar-EG');
             var parseFloat = localizer.floatParser('ar-EG');
             expect(parseFloat(formatFloat(-0.1))).toEqual(-0.1);
@@ -72,7 +72,7 @@ describe('iD.coreLocalizer', function() {
             expect(parseFloat(formatFloat(3.14159))).toEqual(3.14159);
         });
         it('roundtrips Bengali numbers', function () {
-            var localizer = iD.coreLocalizer();
+            var localizer = new iD.coreLocalizer();
             var formatFloat = localizer.floatFormatter('bn');
             var parseFloat = localizer.floatParser('bn');
             expect(parseFloat(formatFloat(-0.1))).toEqual(-0.1);
@@ -84,7 +84,7 @@ describe('iD.coreLocalizer', function() {
     });
     describe('#decimalPlaceCounter', function () {
         it('counts decimal places in English numbers', function () {
-            var localizer = iD.coreLocalizer();
+            var localizer = new iD.coreLocalizer();
             var countDecimalPlaces = localizer.decimalPlaceCounter('en');
             expect(countDecimalPlaces('-0')).toEqual(0);
             expect(countDecimalPlaces('-0.1')).toEqual(1);
@@ -113,13 +113,13 @@ describe('iD.coreLocalizer', function() {
             [['zh-Hans'], ['zh', 'en']],
             [['fr-Latn'], ['fr', 'en']],
         ])('resolves %s to %s', (requested, matching) => {
-            const localiser = iD.coreLocalizer();
-            localiser.preferredLocaleCodes(requested);
-            expect(localiser.localesToUseFrom(SUPPORTED_LANGS)).toStrictEqual(matching);
+            const localizer = new iD.coreLocalizer();
+            localizer.preferredLocaleCodes(requested);
+            expect(localizer.localesToUseFrom(SUPPORTED_LANGS)).toStrictEqual(matching);
         });
 
         afterEach(() => {
-            iD.coreLocalizer().preferredLocaleCodes([]);
+            new iD.coreLocalizer().preferredLocaleCodes([]);
         });
     });
 });

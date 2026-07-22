@@ -24,10 +24,10 @@ export function uiFieldCheck(field: any, context: iD.Context) {
 
     let _tags: TagsMulti;
 
-    let input:    d3.Selection<HTMLInputElement>  | d3.Selection<null> = d3_select(null);
-    let text:     d3.Selection<HTMLSpanElement>   | d3.Selection<null> = d3_select(null);
-    let label:    d3.Selection<HTMLLabelElement>  | d3.Selection<null> = d3_select(null);
-    let reverser: d3.Selection<HTMLButtonElement> | d3.Selection<null> = d3_select(null);
+    let input    = d3_select<HTMLInputElement, any>(null!);
+    let text     = d3_select<HTMLSpanElement, any>(null!);
+    let label    = d3_select<HTMLLabelElement, any>(null!);
+    let reverser = d3_select<HTMLButtonElement, any>(null!);
 
     let _impliedYes: boolean;
     let _entityIDs: EntityId[]  = [];
@@ -88,7 +88,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
         const pseudoDirection = first < last;
         const icon = pseudoDirection ? '#iD-icon-forward' : '#iD-icon-backward';
 
-        selection.selectAll('.reverser-span')
+        selection.selectAll<HTMLElement, any>('.reverser-span')
             .text('')
             .call(t.append('inspector.check.reverser'))
             .call(svgIcon(icon, 'inline'));

@@ -1,4 +1,4 @@
-import { t } from '../core/localizer';
+import { localizer, t } from '../core/localizer';
 import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
 import { utilObjectOmit } from '../util';
 import { utilSafeClassName, utilStripDiacritics } from '../util/util';
@@ -90,9 +90,9 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     return t(textID, options);
   };
 
-  _this.t.all = (scope, options) => {
+  _this.t_all = (scope, options) => {
     const textID = `_tagging.presets.presets.${presetID}.${scope}`;
-    return t.all(textID, options);
+    return localizer.t_all(textID, options);
   };
 
   _this.t.append = (scope, options) => {
@@ -132,12 +132,12 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.aliases = () => {
     return _this
-        .t.all('aliases', { 'default': _this.originalAliases });
+        .t_all('aliases', { 'default': _this.originalAliases });
   };
 
   _this.terms = () => {
     return _this
-        .t.all('terms', { 'default': _this.originalTerms });
+        .t_all('terms', { 'default': _this.originalTerms });
   };
 
   _this.searchName = () => {

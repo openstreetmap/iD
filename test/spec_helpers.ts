@@ -94,7 +94,7 @@ cached.locale_tagging_en = {
 // Load the actual data from `dist/locales/` for the 'general' scope
 iD.localizer.loadLocale('en', 'general', 'locales');
 // Load the fake data seeded above for the 'tagging' scope
-iD.localizer.loadLocale('en', 'tagging');
+iD.localizer.loadLocale('en', 'tagging', undefined!);
 
 
 // Initializing `coreContext` initializes `_background`, which tries loading:
@@ -160,5 +160,5 @@ fetchMock.config.fallbackToNetwork = true;
 fetchMock.config.overwriteRoutes = false;
 
 beforeAll(async () => {
-  await iD.coreLocalizer().ensureLoaded();
+  await new iD.coreLocalizer().ensureLoaded();
 });
