@@ -169,7 +169,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                             }
                             return graph;
                         },
-                        t('operations.reverse.annotation.line', { n: 1 })
+                        t('operations.reverse.annotation.line', { n: '1' })
                     );
 
                     // must manually revalidate since no 'change' event was called
