@@ -83,7 +83,7 @@ function loadNsiPresets() {
     ]) => {
       const allPresets = presetManager.getPresets();
       const nsiPresets = buildIDPresets(nsi_data.nsi, {
-        sourcePresets: allPresets,
+        sourcePresets: presetManager.getRawPresets(),
         wikidata: nsi_wikidata.wikidata,
         dissolved: nsi_dissolved.dissolved,
       }).presets;

@@ -39,6 +39,7 @@ export function presetIndex() {
 
   let _this = presetCollection([POINT, LINE, AREA, RELATION]);
   let _presets = { point: POINT, line: LINE, area: AREA, relation: RELATION };
+  const _rawPresets = {};
 
   let _defaults = {
     point: presetCollection([POINT]),
@@ -119,6 +120,7 @@ export function presetIndex() {
 
         if (p) {   // add or replace
           const isAddable = !_addablePresetIDs || _addablePresetIDs.has(presetID);
+          _rawPresets[presetID] = p;
           p = presetPreset(presetID, p, isAddable, _fields, _presets);
           if (p.locationSet) newLocationSets.push(p);
           _presets[presetID] = p;
@@ -127,6 +129,7 @@ export function presetIndex() {
           const existing = _presets[presetID];
           if (existing && !existing.isFallback()) {
             delete _presets[presetID];
+            delete _rawPresets[presetID];
           }
         }
       });
@@ -471,6 +474,8 @@ export function presetIndex() {
     );
   };
 
+
+  _this.getRawPresets = () => _rawPresets;
 
   _this.getPresets = () => {
     return _presets;
