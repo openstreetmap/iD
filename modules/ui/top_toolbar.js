@@ -3,13 +3,14 @@ import {
 } from 'd3-selection';
 
 import { debounce } from 'es-toolkit';
-import { uiToolDrawModes, uiToolNotes, uiToolSave, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
+import { uiToolDrawModes, uiToolNotes, uiToolSave, uiToolSidebarToggle, uiToolSplit, uiToolUndoRedo } from './tools';
 
 
 export function uiTopToolbar(context) {
 
     var sidebarToggle = uiToolSidebarToggle(context),
         modes = uiToolDrawModes(context),
+        split = uiToolSplit(context),
         notes = uiToolNotes(context),
         undoRedo = uiToolUndoRedo(context),
         save = uiToolSave(context);
@@ -40,7 +41,8 @@ export function uiTopToolbar(context) {
             var tools = [
                 sidebarToggle,
                 'spacer',
-                modes
+                modes,
+                split
             ];
 
             tools.push('spacer');
