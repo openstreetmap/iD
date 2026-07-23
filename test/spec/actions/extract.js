@@ -553,6 +553,50 @@ describe('iD.actionExtract', function () {
         });
     });
 
+    describe('building area', function () {
+        var projection = iD.geoRawMercator().scale(150);
+        var nodes = [
+            new iD.osmNode({ id: 'a', loc: [0, 0] }),
+            new iD.osmNode({ id: 'b', loc: [1, 0] }),
+            new iD.osmNode({ id: 'c', loc: [1, 1] }),
+            new iD.osmNode({ id: 'd', loc: [0, 1] })
+        ];
+
+        it('moves address tags from address-only buildings to the extracted node', function () {
+            var graph = new iD.coreGraph(nodes.concat([
+                new iD.osmWay({
+                    id: '-',
+                    nodes: ['a', 'b', 'c', 'd', 'a'],
+                    tags: { building: 'yes', 'addr:housenumber': '123', 'addr:street': 'Main Street' }
+                })
+            ]));
+            var action = iD.actionExtract('-', projection);
+            var assertionGraph = action(graph);
+            var building = assertionGraph.entity('-');
+            var extractedNode = assertionGraph.entity(action.getExtractedNodeID());
+
+            expect(building.tags).toEqual({ building: 'yes' });
+            expect(extractedNode.tags).toEqual({ 'addr:housenumber': '123', 'addr:street': 'Main Street' });
+        });
+
+        it('keeps address tags on buildings with point tags', function () {
+            var graph = new iD.coreGraph(nodes.concat([
+                new iD.osmWay({
+                    id: '-',
+                    nodes: ['a', 'b', 'c', 'd', 'a'],
+                    tags: { building: 'yes', amenity: 'restaurant', 'addr:housenumber': '123', 'addr:street': 'Main Street' }
+                })
+            ]));
+            var action = iD.actionExtract('-', projection);
+            var assertionGraph = action(graph);
+            var building = assertionGraph.entity('-');
+            var extractedNode = assertionGraph.entity(action.getExtractedNodeID());
+
+            expect(building.tags).toEqual({ building: 'yes', 'addr:housenumber': '123', 'addr:street': 'Main Street' });
+            expect(extractedNode.tags).toEqual({ amenity: 'restaurant', 'addr:housenumber': '123', 'addr:street': 'Main Street' });
+        });
+    });
+
 
     describe('with relation', function () {
         var graph;
