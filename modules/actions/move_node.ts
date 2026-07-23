@@ -1,9 +1,12 @@
+import type { Action } from '../core/history';
 import { geoVecInterp } from '../geo';
+import type { Vec2 } from '../geo/vector';
+import type { NodeId } from '../osm';
 
-export function actionMoveNode(nodeID, toLoc) {
+export function actionMoveNode(nodeID: NodeId, toLoc: Vec2): Action {
 
-    var action = function(graph, t) {
-        if (t === null || !isFinite(t)) t = 1;
+    const action: Action = function(graph, t) {
+        if (t === null || t === undefined || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
         var node = graph.entity(nodeID);

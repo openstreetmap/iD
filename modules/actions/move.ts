@@ -1,19 +1,48 @@
+import type { coreGraph } from '../core';
+import type { Action } from '../core/history';
 import {
   geoAngle, geoChooseEdge, geoPathIntersections, geoPathLength,
   geoVecAdd, geoVecEqual, geoVecInterp, geoVecSubtract
 } from '../geo';
+import type { Projection } from '../geo/raw_mercator';
+import type { EntityId, osmWay, NodeId, WayId } from '../osm';
 
 import { osmNode } from '../osm/node';
 import { utilArrayIntersection } from '../util';
+import type { Vec2 } from '../geo/vector';
+
+export interface Intersection {
+    nodeId: NodeId;
+    movedId: WayId;
+    unmovedId: WayId;
+    movedIsEP: boolean;
+    unmovedIsEP: boolean;
+}
+
+export interface Cache {
+    moving: Record<EntityId, unknown>;
+    nodes: NodeId[];
+    ways: WayId[];
+    startLoc: Record<NodeId, Vec2>;
+    intersections: Intersection[];
+    ok: boolean;
+    replacedVertex: {
+        [key: string]: osmNode;
+    }
+}
+
+export interface ActionMove extends Action {
+    delta(): Vec2;
+}
 
 
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
-export function actionMove(moveIDs, tryDelta, projection, cache) {
+export function actionMove(moveIDs: EntityId[], tryDelta: Vec2, projection: Projection, cache: Cache): ActionMove {
     var _delta = tryDelta;
 
-    function setupCache(graph) {
-        function canMove(nodeID) {
+    function setupCache(graph: coreGraph) {
+        function canMove(nodeID: EntityId) {
             // Allow movement of any node that is in the selectedIDs list..
             if (moveIDs.indexOf(nodeID) !== -1) return true;
 
@@ -28,7 +57,7 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
             return parentsMoving;
         }
 
-        function cacheEntities(ids) {
+        function cacheEntities(ids: EntityId[]) {
             for (var i = 0; i < ids.length; i++) {
                 var id = ids[i];
                 if (cache.moving[id]) continue;
@@ -38,10 +67,10 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
                 if (!entity) continue;
 
                 if (entity.type === 'node') {
-                    cache.nodes.push(id);
-                    cache.startLoc[id] = entity.loc;
+                    cache.nodes.push(entity.id);
+                    cache.startLoc[entity.id] = entity.loc;
                 } else if (entity.type === 'way') {
-                    cache.ways.push(id);
+                    cache.ways.push(entity.id);
                     cacheEntities(entity.nodes);
                 } else {
                     cacheEntities(entity.members.map(function(member) {
@@ -51,8 +80,8 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
             }
         }
 
-        function cacheIntersections(ids) {
-            function isEndpoint(way, id) {
+        function cacheIntersections(ids: WayId[]) {
+            function isEndpoint(way: osmWay, id: NodeId) {
                 return !way.isClosed() && !!way.affix(id);
             }
 
@@ -94,7 +123,7 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
 
 
         if (!cache) {
-            cache = {};
+            cache = {} as Cache;
         }
         if (!cache.ok) {
             cache.moving = {};
@@ -129,7 +158,7 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
     //  a       c
     //
     //
-    function replaceMovedVertex(nodeId, wayId, graph, delta) {
+    function replaceMovedVertex(nodeId: NodeId, wayId: WayId, graph: coreGraph, delta: Vec2 | null) {
         var way = graph.entity(wayId);
         var moved = graph.entity(nodeId);
         var movedIndex = way.nodes.indexOf(nodeId);
@@ -175,8 +204,8 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
         if (angle > 175 && angle < 185) return graph;
 
         // moving forward or backward along way?
-        var p1 = [prev.loc, orig.loc, moved.loc, next.loc].map(projection);
-        var p2 = [prev.loc, moved.loc, orig.loc, next.loc].map(projection);
+        var p1: Vec2[] = [prev.loc, orig.loc, moved.loc, next.loc].map(projection);
+        var p2: Vec2[] = [prev.loc, moved.loc, orig.loc, next.loc].map(projection);
         var d1 = geoPathLength(p1);
         var d2 = geoPathLength(p2);
         var insertAt = (d1 <= d2) ? movedIndex : nextIndex;
@@ -191,12 +220,13 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
 
     // Remove duplicate vertex that might have been added by
     // replaceMovedVertex.  This is done after the unzorro checks.
-    function removeDuplicateVertices(wayId, graph) {
+    function removeDuplicateVertices(wayId: WayId, graph: coreGraph) {
         var way = graph.entity(wayId);
         var epsilon = 1e-6;
-        var prev, curr;
+        var prev: osmNode | undefined;
+        var curr: osmNode | undefined;
 
-        function isInteresting(node, graph) {
+        function isInteresting(node: osmNode, graph: coreGraph) {
             return graph.parentWays(node).length > 1 ||
                 graph.parentRelations(node).length ||
                 node.hasInterestingTags();
@@ -239,7 +269,7 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
     //              |
     //              e
     //
-    function unZorroIntersection(intersection, graph) {
+    function unZorroIntersection(intersection: Intersection, graph: coreGraph) {
         var vertex = graph.entity(intersection.nodeId);
         var way1 = graph.entity(intersection.movedId);
         var way2 = graph.entity(intersection.unmovedId);
@@ -255,34 +285,34 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
         if (way1.isClosed() && way1.first() === vertex.id) nodes1.push(nodes1[0]);
         if (way2.isClosed() && way2.first() === vertex.id) nodes2.push(nodes2[0]);
 
-        var edge1 = !isEP1 && geoChooseEdge(nodes1, projection(vertex.loc), projection);
-        var edge2 = !isEP2 && geoChooseEdge(nodes2, projection(vertex.loc), projection);
+        var edge1 = isEP1 ? undefined : geoChooseEdge(nodes1, projection(vertex.loc), projection);
+        var edge2 = isEP2 ? undefined : geoChooseEdge(nodes2, projection(vertex.loc), projection);
         var loc;
 
         // snap vertex to nearest edge (or some point between them)..
         if (!isEP1 && !isEP2) {
             var epsilon = 1e-6, maxIter = 10;
             for (var i = 0; i < maxIter; i++) {
-                loc = geoVecInterp(edge1.loc, edge2.loc, 0.5);
+                loc = geoVecInterp(edge1!.loc!, edge2!.loc!, 0.5);
                 edge1 = geoChooseEdge(nodes1, projection(loc), projection);
                 edge2 = geoChooseEdge(nodes2, projection(loc), projection);
-                if (Math.abs(edge1.distance - edge2.distance) < epsilon) break;
+                if (Math.abs(edge1!.distance - edge2!.distance) < epsilon) break;
             }
         } else if (!isEP1) {
-            loc = edge1.loc;
+            loc = edge1!.loc;
         } else {
-            loc = edge2.loc;
+            loc = edge2!.loc;
         }
 
-        graph = graph.replace(vertex.move(loc));
+        graph = graph.replace(vertex.move(loc!));
 
         // if zorro happened, reorder nodes..
-        if (!isEP1 && edge1.index !== way1.nodes.indexOf(vertex.id)) {
-            way1 = way1.removeNode(vertex.id).addNode(vertex.id, edge1.index);
+        if (!isEP1 && edge1!.index !== way1.nodes.indexOf(vertex.id)) {
+            way1 = way1.removeNode(vertex.id).addNode(vertex.id, edge1!.index);
             graph = graph.replace(way1);
         }
-        if (!isEP2 && edge2.index !== way2.nodes.indexOf(vertex.id)) {
-            way2 = way2.removeNode(vertex.id).addNode(vertex.id, edge2.index);
+        if (!isEP2 && edge2!.index !== way2.nodes.indexOf(vertex.id)) {
+            way2 = way2.removeNode(vertex.id).addNode(vertex.id, edge2!.index);
             graph = graph.replace(way2);
         }
 
@@ -290,7 +320,7 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
     }
 
 
-    function cleanupIntersections(graph) {
+    function cleanupIntersections(graph: coreGraph) {
         for (var i = 0; i < cache.intersections.length; i++) {
             var obj = cache.intersections[i];
             graph = replaceMovedVertex(obj.nodeId, obj.movedId, graph, _delta);
@@ -305,8 +335,8 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
 
 
     // check if moving way endpoint can cross an unmoved way, if so limit delta..
-    function limitDelta(graph) {
-        function moveNode(loc) {
+    function limitDelta(graph: coreGraph) {
+        function moveNode(loc: Vec2) {
             return geoVecAdd(projection(loc), _delta);
         }
 
@@ -331,14 +361,14 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
                 // snap delta back to the edge we are attached to, so we only move along the edge,
                 // not away from it since that causes intersection(s)
                 var edge = geoChooseEdge(unmovedNodes, end, projection);
-                _delta = geoVecSubtract(projection(edge.loc), start);
+                _delta = geoVecSubtract(projection(edge!.loc!), start);
                 break; // any further attempts/intersections will result in the same calculation
             }
         }
     }
 
 
-    var action = function(graph) {
+    const action: ActionMove = function(graph) {
         if (_delta[0] === 0 && _delta[1] === 0) return graph;
 
         setupCache(graph);
@@ -348,7 +378,7 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
         }
 
         for (var i = 0; i < cache.nodes.length; i++) {
-            var node = graph.entity(cache.nodes[i]);
+            var node = graph.entity<osmNode>(cache.nodes[i]);
             var start = projection(node.loc);
             var end = geoVecAdd(start, _delta);
             graph = graph.replace(node.move(projection.invert(end)));

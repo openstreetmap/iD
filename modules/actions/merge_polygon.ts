@@ -1,11 +1,19 @@
+import type { coreGraph } from '../core';
+import type { Action } from '../core/history';
 import { geoPolygonContainsPolygon } from '../geo';
-import { osmJoinWays, osmRelation, osmWayOnlyTags } from '../osm';
+import { osmJoinWays, osmRelation, osmWayOnlyTags, type EntityId, type osmWay } from '../osm';
+import type { Sequence } from '../osm/multipolygon';
+import type { RelationMember } from '../osm/relation';
 import { utilArrayGroupBy, utilArrayIntersection, utilObjectOmit, utilOldestID } from '../util';
 
 
-export function actionMergePolygon(ids, newRelationId) {
+export function actionMergePolygon(ids: EntityId[], newRelationId?: EntityId): Action {
 
-    function groupEntities(graph) {
+    function groupEntities(graph: coreGraph): {
+        closedWay: osmWay[];
+        multipolygon: osmRelation[];
+        other: (osmWay | osmRelation)[];
+    } {
         var entities = ids.map(function (id) { return graph.entity(id); });
         var geometryGroups = utilArrayGroupBy(entities, function(entity) {
             if (entity.type === 'way' && entity.isClosed()) {
@@ -24,17 +32,17 @@ export function actionMergePolygon(ids, newRelationId) {
     }
 
 
-    var action = function(graph) {
+    var action: Action = function(graph) {
         var entities = groupEntities(graph);
 
         // An array representing all the polygons that are part of the multipolygon.
         //
         // Each element is itself an array of objects with an id property, and has a
         // locs property which is an array of the locations forming the polygon.
-        var polygons = entities.multipolygon.reduce(function(polygons, m) {
+        var polygons = entities.multipolygon.reduce<Sequence<RelationMember>[]>(function(polygons, m) {
             return polygons.concat(osmJoinWays(m.members, graph));
         }, []).concat(entities.closedWay.map(function(d) {
-            var member = [{id: d.id}];
+            var member = [{id: d.id}] as Sequence<RelationMember>;
             member.nodes = graph.childNodes(d);
             return member;
         }));
@@ -53,7 +61,7 @@ export function actionMergePolygon(ids, newRelationId) {
         });
 
         // Sort all polygons as either outer or inner ways
-        var members = [];
+        var members: RelationMember[] = [];
         var outer = true;
 
         while (polygons.length) {
@@ -62,15 +70,15 @@ export function actionMergePolygon(ids, newRelationId) {
             contained = contained.filter(isContained).map(filterContained);
         }
 
-        function isContained(d, i) {
+        function isContained(d: unknown, i: number) {
             return contained[i].some(function(val) { return val; });
         }
 
-        function filterContained(d) {
+        function filterContained<T>(d: T[]): T[] {
             return d.filter(isContained);
         }
 
-        function extractUncontained(polygons) {
+        function extractUncontained(polygons: RelationMember[][]) {
             polygons.forEach(function(d, i) {
                 if (!isContained(d, i)) {
                     d.forEach(function(member) {
@@ -87,10 +95,10 @@ export function actionMergePolygon(ids, newRelationId) {
 
         // Move all tags to one relation.
         // Keep the oldest multipolygon alive if it exists.
-        var relation;
+        var relation: osmRelation;
         if (entities.multipolygon.length > 0) {
             var oldestID = utilOldestID(entities.multipolygon.map((entity) => entity.id));
-            relation = entities.multipolygon.find((entity) => entity.id === oldestID);
+            relation = entities.multipolygon.find((entity) => entity.id === oldestID)!;
         } else {
             relation = new osmRelation({ id: newRelationId, tags: { type: 'multipolygon' }});
         }
@@ -103,13 +111,13 @@ export function actionMergePolygon(ids, newRelationId) {
         });
 
         entities.closedWay.forEach(function(way) {
-            function isThisOuter(m) {
+            function isThisOuter(m: RelationMember) {
                 return m.id === way.id && m.role !== 'inner';
             }
             if (members.some(isThisOuter)) {
                 //filter out tags that shouldn't be moved to the multipolygon relation
-                var areaTags = Object.assign({}, way.tags);
-                var lineTags = {};
+                var areaTags = { ...way.tags };
+                var lineTags: Tags = {};
                 for (var key in areaTags) {
                     if (osmWayOnlyTags[key] && osmWayOnlyTags[key][areaTags[key]]) {
                         lineTags[key] = areaTags[key];
@@ -139,7 +147,7 @@ export function actionMergePolygon(ids, newRelationId) {
         }
 
         if (!entities.multipolygon.length) {
-            var sharedMultipolygons = [];
+            var sharedMultipolygons: osmRelation[] = [];
             entities.closedWay.forEach(function(way, i) {
                 if (i === 0) {
                     sharedMultipolygons = graph.parentMultipolygons(way);
