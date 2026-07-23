@@ -1,5 +1,6 @@
-import { osmRelation } from '../osm/relation';
-
+import type { Action } from '../core/history';
+import type { osmTurn, RelationId } from '../osm';
+import { osmRelation, type RelationMember } from '../osm/relation';
 
 // `actionRestrictTurn` creates a turn restriction relation.
 //
@@ -17,14 +18,14 @@ import { osmRelation } from '../osm/relation';
 // relation. Normally, this will be undefined and the relation will
 // automatically be assigned a new ID.
 //
-export function actionRestrictTurn(turn, restrictionType, restrictionID) {
+export function actionRestrictTurn(turn: osmTurn, restrictionType: string, restrictionID?: RelationId): Action {
 
     return function(graph) {
         var fromWay = graph.entity(turn.from.way);
         var toWay = graph.entity(turn.to.way);
         var viaNode = turn.via.node && graph.entity(turn.via.node);
         var viaWays = turn.via.ways && turn.via.ways.map(function(id) { return graph.entity(id); });
-        var members = [];
+        var members: RelationMember[] = [];
 
         members.push({ id: fromWay.id, type: 'way',  role: 'from' });
 

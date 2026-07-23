@@ -27,6 +27,13 @@ export class osmWay extends OsmAbstractEntity {
   declare readonly id: WayId;
   declare readonly nodes: NodeId[];
 
+    /** @deprecated hack used for turn restrictions */ declare __first?: boolean;
+    /** @deprecated hack used for turn restrictions */ declare __last?: boolean;
+    /** @deprecated hack used for turn restrictions */ declare __from?: boolean;
+    /** @deprecated hack used for turn restrictions */ declare __via?: boolean;
+    /** @deprecated hack used for turn restrictions */ declare __to?: boolean;
+    /** @deprecated hack used for turn restrictions */ declare __oneWay?: boolean;
+
     constructor(...args: Partial<OsmEntityProps & Pick<osmWay, 'nodes'>>[]) {
         super({ type: 'way', nodes: [] }, ...args);
         if (debug) Object.freeze(this.nodes);
