@@ -1,4 +1,4 @@
-import { actionExtract } from '../actions/extract';
+import { actionExtract, actionExtractMovesAddressTags } from '../actions/extract';
 import { behaviorOperation } from '../behavior/operation';
 import { modeSelect } from '../modes/select';
 import { t } from '../core/localizer';
@@ -27,7 +27,7 @@ export const operationExtract: CreateOperation = (context, selectedIDs) => {
         if (entity.type !== 'node') {
             var preset = presetManager.match(entity, graph);
             // only allow extraction from ways/relations if the preset supports points
-            if (preset.geometry.indexOf('point') === -1) return null;
+            if (preset.geometry.indexOf('point') === -1 && !actionExtractMovesAddressTags(entity)) return null;
         }
 
         _extent = _extent ? _extent.extend(entity.extent(graph)) : entity.extent(graph);
