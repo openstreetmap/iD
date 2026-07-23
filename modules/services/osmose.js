@@ -12,6 +12,7 @@ import { localizer } from '../core/localizer';
 import { geoExtent, geoVecAdd } from '../geo';
 import { QAItem } from '../osm';
 import { utilRebind, utilTiler, utilQsString } from '../util';
+import { ApiError } from '../util/error';
 
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
@@ -283,7 +284,7 @@ export default {
 
   postUpdate(issue, callback) {
     if (_cache.inflightPost[issue.id]) {
-      return callback({ message: 'Issue update already inflight', status: -2 }, issue);
+      return callback(new ApiError('Issue update already inflight', -2), issue);
     }
 
     // UI sets the status to either 'done' or 'false'
