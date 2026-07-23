@@ -7,7 +7,7 @@ import { select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import { prefs } from '../core/preferences';
-import { geoExtent, geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../geo';
+import { geoExtent, geoPointInPolygon, geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { svgAreas, svgLabels, svgLayers, svgLines, svgMidpoints, svgPoints, svgVertices } from '../svg';
 import { utilFastMouse, utilFunctor, utilSetTransform, utilEntityAndDeepMemberIDs } from '../util/util';
@@ -58,6 +58,7 @@ export function rendererMap(context) {
     var _getMouseCoords;
     var _lastPointerEvent;
     var _lastWithinEditableZoom;
+    var _indoorFocusActive = false;
 
     // whether a pointerdown event started the zoom
     var _pointerDown = false;
@@ -276,6 +277,8 @@ export function rendererMap(context) {
                 .call(drawAreas, graph, data, filter)
                 .call(drawMidpoints, graph, data, filter, map.trimmedExtent());
 
+            updateIndoorFocus(context.history().intersects(map.extent()), graph);
+
             dispatch.call('drawn', this, { full: false });
 
             // redraw everything else later
@@ -387,7 +390,126 @@ export function rendererMap(context) {
             .call(drawPoints, graph, data, filter)
             .call(drawLabels, graph, data, filter, _dimensions, fullRedraw);
 
+        updateIndoorFocus(all, graph);
+
         dispatch.call('drawn', this, {full: true});
+    }
+
+    function updateIndoorFocus(data, graph) {
+        const selected = context.selectedIDs()
+            .map(id => graph.hasEntity(id))
+            .filter(Boolean);
+
+        const focusValues = { level: new Set(), layer: new Set() };
+        const focusEntities = new Set();
+        let isIndoorSelection = false;
+
+        function collect(entity) {
+            if (!entity || focusEntities.has(entity.id)) return;
+            focusEntities.add(entity.id);
+            const tags = entity.tags || {};
+            isIndoorSelection ||= Boolean(tags.indoor && tags.indoor !== 'no') ||
+                Boolean(tags.indoormark && tags.indoormark !== 'no') ||
+                tags.level !== undefined ||
+                tags.layer !== undefined;
+
+            for (const key of ['level', 'layer']) {
+                String(tags[key] || '').split(/[;,]/)
+                    .map(value => value.trim())
+                    .filter(Boolean)
+                    .forEach(value => focusValues[key].add(value));
+            }
+        }
+
+        for (const entity of selected) {
+            collect(entity);
+            graph.parentWays(entity).forEach(collect);
+            graph.parentRelations(entity).forEach(collect);
+        }
+
+        function datumEntity(d) {
+            return d?.properties?.entity || d?.entity || (d?.tags && d?.id ? d : null);
+        }
+
+        function sortAreaPaths(focusTest) {
+            surface.selectAll('.layer-osm.areas .areagroup')
+                .selectAll('path.area')
+                .sort((a, b) => {
+                    const entityA = datumEntity(a);
+                    const entityB = datumEntity(b);
+                    if (focusTest) {
+                        const focusedA = focusTest(entityA);
+                        const focusedB = focusTest(entityB);
+                        if (focusedA !== focusedB) return focusedA ? 1 : -1;
+                    }
+                    const areaA = entityA?.area ? Math.abs(entityA.area(graph)) : 0;
+                    const areaB = entityB?.area ? Math.abs(entityB.area(graph)) : 0;
+                    return areaB - areaA;
+                });
+        }
+
+        const hasFocusValue = focusValues.level.size || focusValues.layer.size;
+        const active = Boolean(selected.length && isIndoorSelection && hasFocusValue);
+        const wasActive = _indoorFocusActive;
+        _indoorFocusActive = active;
+        _selection.classed('indoor-focus', active);
+        context.container().classed('indoor-focus', active);
+        if (!active) {
+            surface.selectAll('.indoor-dim').classed('indoor-dim', false);
+            if (wasActive) sortAreaPaths();
+            return;
+        }
+
+        const keep = new Set(focusEntities);
+        for (const entity of selected) {
+            utilEntityAndDeepMemberIDs([entity.id], graph).forEach(id => keep.add(id));
+            if (entity.type === 'way') entity.nodes.forEach(id => keep.add(id));
+        }
+
+        const center = selected[0].extent(graph).center();
+        for (const entity of data) {
+            if (!entity.tags.building) continue;
+            let containsFocus = false;
+            if (entity.type === 'way') {
+                const polygon = entity.nodes
+                    .map(id => graph.hasEntity(id))
+                    .filter(Boolean)
+                    .map(node => node.loc);
+                containsFocus = polygon.length > 3 && geoPointInPolygon(center, polygon);
+            } else if (entity.type === 'relation') {
+                containsFocus = entity.extent(graph).contains(center);
+            }
+            if (!containsFocus) continue;
+
+            utilEntityAndDeepMemberIDs([entity.id], graph).forEach(id => keep.add(id));
+            if (entity.type === 'way') entity.nodes.forEach(id => keep.add(id));
+        }
+
+        const focusCache = new Map();
+        function onFocusLevel(entity) {
+            if (!entity) return true;
+            if (keep.has(entity.id)) return true;
+            if (focusCache.has(entity.id)) return focusCache.get(entity.id);
+
+            const candidates = [entity]
+                .concat(graph.parentWays(entity))
+                .concat(graph.parentRelations(entity));
+            const result = candidates.some(candidate => {
+                const tags = candidate.tags || {};
+                return ['level', 'layer'].some(key => {
+                    if (!focusValues[key].size) return false;
+                    return String(tags[key] || '').split(/[;,]/)
+                        .map(value => value.trim())
+                        .some(value => focusValues[key].has(value));
+                });
+            });
+            focusCache.set(entity.id, result);
+            return result;
+        }
+
+        surface.selectAll('.layer-osm *')
+            .classed('indoor-dim', d => !onFocusLevel(datumEntity(d)));
+        sortAreaPaths(onFocusLevel);
     }
 
     map.init = function() {
