@@ -114,7 +114,7 @@ export function uiInspector(context) {
 
         footer
             .call(uiViewOnOSM(context)
-                .what(context.hasEntity(_entityIDs.length === 1 && _entityIDs[0]))
+                .what(context.hasEntity(_entityIDs?.length === 1 && _entityIDs[0]))
             );
     }
 
