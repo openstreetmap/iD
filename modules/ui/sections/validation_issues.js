@@ -52,15 +52,15 @@ export function uiSectionValidationIssues(id, severity, context) {
         const withDistance = _issues.map(issue => {
             const extent = issue.extent(graph);
             return {
-                ...issue,
+                issue,
                 dist: extent ? geoSphericalDistance(center, extent.center()) : 0
             };
         });
         const issues = sortBy(withDistance, [
-            issue => rules.indexOf(issue.type),
-            'subtype',
+            ({ issue }) => rules.indexOf(issue.type),
+            row => row.issue.subtype,
             'dist'
-        ]).slice(0, 1000);
+        ]).slice(0, 1000).map(({ issue }) => issue);
 
         //renderIgnoredIssuesReset(_warningsSelection);
 
