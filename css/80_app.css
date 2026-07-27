@@ -4865,22 +4865,40 @@ img.tile-debug {
     flex: 0 0 100%;
     flex-flow: row nowrap;
     justify-content: space-between;
-    height: 100%;
     position: absolute;
     right: 0;
     left: 0;
 }
+.main-footer-wrap {
+    height: 100%;
+}
 
-.footer-show {
-    bottom: 0px;
+.flash-wrap {
+    height: auto;
+    min-height: 100%;
+    bottom: 0;
+    transition: transform 75ms linear;
+}
+
+.main-footer-wrap.footer-show {
+    bottom: 0;
     transition: bottom 75ms linear;
 }
 
-.footer-hide {
+.main-footer-wrap.footer-hide {
     bottom: -100%;
     transition: bottom 75ms linear;
 }
 
+.flash-wrap.footer-show {
+    bottom: 0;
+    transform: translateY(0);
+}
+
+.flash-wrap.footer-hide {
+    bottom: 0;
+    transform: translateY(100%);
+}
 
 /* Attribution
 ------------------------------------------------------- */
@@ -4948,9 +4966,11 @@ img.tile-debug {
 ------------------------------------------------------- */
 .flash-content {
     display: flex;
-    flex: 1 0 auto;
+    flex: 1 1 0;
     flex-flow: row nowrap;
     align-items: center;
+    min-width: 0;
+    width: 100%;
     padding: 2px;
 }
 
@@ -4980,6 +5000,9 @@ img.tile-debug {
 
 .flash-text {
     flex: 1 1 auto;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 /* Scale bar
