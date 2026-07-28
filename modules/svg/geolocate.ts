@@ -11,7 +11,7 @@ import type { SvgLayer } from './layers';
 export type WithLoc = Pick<osmNode, 'loc'>;
 
 export function svgGeolocate(projection: Projection): SvgLayer {
-    var layer = d3_select<SVGGElement, 0>(null!);
+    var layer: d3.Selection<SVGGElement> = d3_select(null!);
     var _position: GeolocationPosition;
 
 
@@ -97,7 +97,7 @@ export function svgGeolocate(projection: Projection): SvgLayer {
         layer.select('.geolocate-radius').attr('r', accuracy(_position.coords.accuracy, geolocation.loc));
     }
 
-    function drawLocation(selection: d3.Selection) {
+    function drawLocation(selection: d3.Selection<SVGGElement>) {
         var enabled = svgGeolocate.enabled;
 
         layer = selection.selectAll<SVGGElement, 0>('.layer-geolocate')

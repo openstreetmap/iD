@@ -57,7 +57,7 @@ export function svgMidpoints(projection: Projection, context: iD.Context) {
 
     function drawMidpoints(selection: d3.Selection, graph: coreGraph, entities: osmWay[], filter: (way: osmWay) => boolean, extent: geoExtent) {
         var drawLayer = selection.selectAll('.layer-osm.points .points-group.midpoints');
-        var touchLayer = selection.selectAll('.layer-touch.points');
+        var touchLayer = selection.selectAll<HTMLElement, any>('.layer-touch.points');
 
         var mode = context.mode();
         if ((mode && mode.id !== 'select') || !context.map().withinEditableZoom()) {

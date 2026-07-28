@@ -78,7 +78,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
     }
 
 
-    function reverserSetText(selection: d3.Selection) {
+    function reverserSetText(selection: d3.Selection<HTMLButtonElement>) {
         const entity = _entityIDs.length && context.hasEntity(_entityIDs[0]);
         if (reverserHidden() || !entity) return selection;
 

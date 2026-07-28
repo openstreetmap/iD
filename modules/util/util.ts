@@ -621,7 +621,7 @@ export function utilFunctor<T>(value: T | (() => T)): () => T {
 
 
 export function utilNoAuto(selection: d3.Selection): d3.Selection {
-    const isText = (selection.size() && selection.node().tagName.toLowerCase() === 'textarea');
+    const isText = (selection.size() && selection.node()!.tagName.toLowerCase() === 'textarea');
 
     return selection
         // assign 'new-password' even for non-password fields to prevent browsers (Chrome) ignoring 'off'
