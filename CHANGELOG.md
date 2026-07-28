@@ -62,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Prevent duplicate values from being added to 'semiCombo' fields when there is whitespace surrounding the semicolon ([#12623])
 * Make sure rendering of truncated address labels does not result in broken unicode characters ([#12511], thanks [@greymoth-jp])
 * Do not select start/end vertex of an area or closed way multiple times when selecting all vertices of a way using the keyboard shortcut ([#12586], thanks [@RudyTheDev])
+* Fix vertices of multipolygons not being movable in some special circumstances ([#10120], thanks [@k-yle])
 #### :earth_asia: Localization
 * Improve some edge cases of rendering of mixed right-to-left and left-to-right text ([#8713])
 * When labelling features, match locale codes like `zh-CN` to name tags like `name:zh-Hans` ([#10911], thanks [@k-yle])
@@ -76,6 +77,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8724]: https://github.com/openstreetmap/iD/issues/8724
 [#9340]: https://github.com/openstreetmap/iD/pull/9340
 [#9734]: https://github.com/openstreetmap/iD/issues/9734
+[#10120]: https://github.com/openstreetmap/iD/pull/10120
 [#10911]: https://github.com/openstreetmap/iD/pull/10911
 [#11896]: https://github.com/openstreetmap/iD/pull/11896
 [#12358]: https://github.com/openstreetmap/iD/pull/12358
