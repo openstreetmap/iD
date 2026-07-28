@@ -4,7 +4,7 @@ import { json as d3_json } from 'd3-fetch';
 import { t, localizer } from '../core/localizer';
 import { geoExtent, geoSphericalDistance } from '../geo';
 import { utilQsString, utilStringQs } from '../util';
-import { utilAesDecrypt } from '../util/aes';
+
 import { IntervalTasksQueue } from '../util/IntervalTasksQueue';
 import { localeDateString } from '../util/date';
 
@@ -271,7 +271,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     data.template = 'https://ecn.t{switch:0,1,2,3}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=1&pr=odbl&n=z';
 
     var bing = rendererBackgroundSource(data);
-    var key = utilAesDecrypt('5c875730b09c6b422433e807e1ff060b6536c791dbfffcffc4c6b18a1bdba1f14593d151adb50e19e1be1ab19aef813bf135d0f103475e5c724dec94389e45d0');
+    var key = Promise.resolve(ENV__ID_BING_KEY);
     /*
     missing tile image strictness param (n=)
     •	n=f -> (Fail) returns a 404

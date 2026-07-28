@@ -18,6 +18,8 @@ const envs = {
   ENV__ID_NOMINATIM_API_URL: JSON.stringify(process.env.ID_NOMINATIM_API_URL || null),
 
   ENV__ID_SHOW_DONATION_MESSAGE: JSON.stringify(process.env.ID_SHOW_DONATION_MESSAGE || null),
+
+  ENV__ID_BING_KEY: JSON.stringify(process.env.ID_BING_KEY || null),
 };
 
 export default envs;
