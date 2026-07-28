@@ -7,6 +7,15 @@ import { locationManager } from '../core/location_manager';
 import type { presetField } from './field';
 import type { Vec2 } from '../geo/vector';
 
+type PresetRelationMember = NonNullable<Preset['relation']>['members'][number];
+
+export interface PresetRoleDefinitions {
+  [role: string]: {
+    label: string;
+    member: PresetRelationMember;
+  }
+}
+
 export interface presetPreset extends Omit<Preset,
   | 'fields'
   | 'moreFields'
@@ -32,6 +41,7 @@ export interface presetPreset extends Omit<Preset,
   locationSetID?: string;
   matchGeometry(geometry: Geometry): boolean;
   matchAllGeometry(geometries: Geometry[]): boolean;
+  relationSchema(): PresetRoleDefinitions | undefined;
   matchScore(entityTags: Tags): number;
   setTags(tags: Tags, geometry: Geometry, skipFieldDefaults?: boolean, loc?: Vec2): Tags;
   unsetTags(tags: Tags, geometry: Geometry, ignoringKeys?: string[], skipFieldDefaults?: boolean, loc?: Vec2): Tags;
@@ -109,6 +119,19 @@ export function presetPreset(
   _this.matchGeometry = (geom) => _this.geometry.indexOf(geom) >= 0;
 
   _this.matchAllGeometry = (geoms) => geoms.every(_this.matchGeometry);
+
+  _this.relationSchema = () => {
+    if (!_this.relation) return undefined;
+
+    const labels: PresetRoleDefinitions = {};
+    for (const member of _this.relation.members) {
+      labels[member.role] = {
+        label: _this.t(`relation.role_labels.${member.role}`),
+        member,
+      };
+    }
+    return labels;
+  };
 
   _this.matchScore = (entityTags) => {
     const tags = _this.tags;

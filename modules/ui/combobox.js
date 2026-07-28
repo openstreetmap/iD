@@ -23,7 +23,7 @@ export function fuzzyMatch(search, string) {
 }
 
 export function uiCombobox(context, klass) {
-    var dispatch = d3_dispatch('accept', 'cancel', 'update');
+    var dispatch = d3_dispatch('accept', 'cancel', 'update', 'render');
     var container = context.container();
 
     var _suggestions = [];
@@ -59,6 +59,9 @@ export function uiCombobox(context, klass) {
     var combobox = function(input, attachTo) {
         if (!input || input.empty()) return;
 
+        /** @type {MouseEvent | undefined} */
+        let _lastPointerUpEvent;
+
         input
             .classed('combobox-input', true)
             .on('focus.combo-input', focus)
@@ -67,7 +70,8 @@ export function uiCombobox(context, klass) {
             .on('keyup.combo-input', keyup)
             .on('input.combo-input', d3_event => change(d3_event))
             .on('mousedown.combo-input', mousedown)
-            .on('mouseup.combo-input', mouseup)
+            .on('mouseup.combo-input', toggle)
+            .on('click.combo-input', toggle)
             .each(function() {
                 var parent = this.parentNode;
                 var sibling = this.nextSibling;
@@ -133,6 +137,13 @@ export function uiCombobox(context, klass) {
             } else {
                 hide();
             }
+        }
+
+        /** @param {MouseEvent} d3_event */
+        function toggle(d3_event) {
+            if (_lastPointerUpEvent && (d3_event.timeStamp - _lastPointerUpEvent.timeStamp < 100)) return;
+            _lastPointerUpEvent = d3_event;
+            mouseup(d3_event);
         }
 
 
@@ -439,6 +450,8 @@ export function uiCombobox(context, klass) {
                 .style('left', (rect.left + 5 - containerRect.left) + 'px')
                 .style('width', (rect.width - 10) + 'px')
                 .style('top', (rect.height + rect.top - containerRect.top) + 'px');
+
+            dispatch.call('render');
         }
 
 
@@ -562,6 +575,7 @@ uiCombobox.off = function(input, context) {
         .on('input.combo-input', null)
         .on('mousedown.combo-input', null)
         .on('mouseup.combo-input', null)
+        .on('click.combo-input', null)
         .on('mousedown.combo-caret', null)
         .on('mouseup.combo-caret', null);
 
