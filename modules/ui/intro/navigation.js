@@ -5,7 +5,7 @@ import {
 } from 'd3-selection';
 
 import { presetManager } from '../../presets';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { utilRebind } from '../../util/rebind';
@@ -111,12 +111,12 @@ export function uiIntroNavigation(context, reveal) {
         var onClick = function() { continueTo(pointsLinesAreas); };
 
         reveal('.main-map .surface', helpHtml('intro.navigation.features'),
-            { buttonText: t.html('intro.ok'), buttonCallback: onClick }
+            { buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
         );
 
         context.map().on('drawn.intro', function() {
             reveal('.main-map .surface', helpHtml('intro.navigation.features'),
-                { duration: 0, buttonText: t.html('intro.ok'), buttonCallback: onClick }
+                { duration: 0, buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
             );
         });
 
@@ -130,12 +130,12 @@ export function uiIntroNavigation(context, reveal) {
         var onClick = function() { continueTo(nodesWays); };
 
         reveal('.main-map .surface', helpHtml('intro.navigation.points_lines_areas'),
-            { buttonText: t.html('intro.ok'), buttonCallback: onClick }
+            { buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
         );
 
         context.map().on('drawn.intro', function() {
             reveal('.main-map .surface', helpHtml('intro.navigation.points_lines_areas'),
-                { duration: 0, buttonText: t.html('intro.ok'), buttonCallback: onClick }
+                { duration: 0, buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
             );
         });
 
@@ -149,12 +149,12 @@ export function uiIntroNavigation(context, reveal) {
         var onClick = function() { continueTo(clickTownHall); };
 
         reveal('.main-map .surface', helpHtml('intro.navigation.nodes_ways'),
-            { buttonText: t.html('intro.ok'), buttonCallback: onClick }
+            { buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
         );
 
         context.map().on('drawn.intro', function() {
             reveal('.main-map .surface', helpHtml('intro.navigation.nodes_ways'),
-                { duration: 0, buttonText: t.html('intro.ok'), buttonCallback: onClick }
+                { duration: 0, buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
             );
         });
 
@@ -218,7 +218,7 @@ export function uiIntroNavigation(context, reveal) {
         var onClick = function() { continueTo(editorTownHall); };
 
         reveal(box, helpHtml('intro.navigation.selected_townhall'),
-            { buttonText: t.html('intro.ok'), buttonCallback: onClick }
+            { buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
         );
 
         context.map().on('move.intro drawn.intro', function() {
@@ -226,7 +226,7 @@ export function uiIntroNavigation(context, reveal) {
             if (!entity) return;
             var box = pointBox(entity.loc, context);
             reveal(box, helpHtml('intro.navigation.selected_townhall'),
-                { duration: 0, buttonText: t.html('intro.ok'), buttonCallback: onClick }
+                { duration: 0, buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
             );
         });
 
@@ -254,7 +254,7 @@ export function uiIntroNavigation(context, reveal) {
 
         reveal('.entity-editor-pane',
             helpHtml('intro.navigation.editor_townhall'),
-            { buttonText: t.html('intro.ok'), buttonCallback: onClick }
+            { buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
         );
 
         context.on('exit.intro', function() {
@@ -292,7 +292,7 @@ export function uiIntroNavigation(context, reveal) {
 
         reveal('.entity-editor-pane .section-feature-type',
             helpHtml('intro.navigation.preset_townhall', { preset: preset.name() }),
-            { buttonText: t.html('intro.ok'), buttonCallback: onClick }
+            { buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
         );
 
         context.on('exit.intro', function() {
@@ -326,7 +326,7 @@ export function uiIntroNavigation(context, reveal) {
 
         reveal('.entity-editor-pane .section-preset-fields',
             helpHtml('intro.navigation.fields_townhall'),
-            { buttonText: t.html('intro.ok'), buttonCallback: onClick }
+            { buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
         );
 
         context.on('exit.intro', function() {
@@ -442,7 +442,7 @@ export function uiIntroNavigation(context, reveal) {
 
         reveal(box,
             helpHtml('intro.navigation.selected_street', { name: t('intro.graph.name.spring-street') }),
-            { duration: 600, buttonText: t.html('intro.ok'), buttonCallback: onClick }
+            { duration: 600, buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
         );
 
         timeout(function() {
@@ -453,7 +453,7 @@ export function uiIntroNavigation(context, reveal) {
                 box.height = 500;
                 reveal(box,
                     helpHtml('intro.navigation.selected_street', { name: t('intro.graph.name.spring-street') }),
-                    { duration: 0, buttonText: t.html('intro.ok'), buttonCallback: onClick }
+                    { duration: 0, buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
                 );
             });
         }, 600);  // after reveal.
@@ -528,7 +528,7 @@ export function uiIntroNavigation(context, reveal) {
         reveal('.ideditor',
             helpHtml('intro.navigation.play', { next: t('intro.points.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-point',
-                buttonText: t.html('intro.ok'),
+                buttonText: localizer.t_html('intro.ok'),
                 buttonCallback: function() { reveal('.ideditor'); }
             }
         );

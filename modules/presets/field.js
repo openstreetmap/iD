@@ -22,7 +22,7 @@ export function presetField(fieldID, field) {
   };
 
   _this.t = (scope, options) => t(`_tagging.presets.fields.${fieldID}.${scope}`, options);
-  _this.t.all = (scope, options) => t.all(`_tagging.presets.fields.${fieldID}.${scope}`, options);
+  _this.t_all = (scope, options) => localizer.t_all(`_tagging.presets.fields.${fieldID}.${scope}`, options);
   _this.t.append = (scope, options) => t.append(`_tagging.presets.fields.${fieldID}.${scope}`, options);
   _this.hasTextForStringId = (scope) => localizer.hasTextForStringId(`_tagging.presets.fields.${fieldID}.${scope}`);
 
@@ -33,7 +33,7 @@ export function presetField(fieldID, field) {
 
   _this.originalTerms = _this.terms || [];
 
-  _this.terms = () => _this.t.all('terms', { 'default': _this.originalTerms });
+  _this.terms = () => _this.t_all('terms', { 'default': _this.originalTerms });
 
   _this.increment = (_this.type === 'number' || _this.type === 'integer') ? (_this.increment || 1) : undefined;
 

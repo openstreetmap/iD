@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { presetManager } from '../../presets';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { utilArrayUniq, utilRebind } from '../../util';
@@ -165,12 +165,12 @@ export function uiIntroBuilding(context, reveal) {
         var onClick = function() { continueTo(addHouse); };
 
         revealHouse(house, helpHtml('intro.buildings.retry_building'),
-            { buttonText: t.html('intro.ok'), buttonCallback: onClick }
+            { buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
         );
 
         context.map().on('move.intro drawn.intro', function() {
             revealHouse(house, helpHtml('intro.buildings.retry_building'),
-                { duration: 0, buttonText: t.html('intro.ok'), buttonCallback: onClick }
+                { duration: 0, buttonText: localizer.t_html('intro.ok'), buttonCallback: onClick }
             );
         });
 
@@ -408,7 +408,7 @@ export function uiIntroBuilding(context, reveal) {
         context.enter(modeBrowse(context));
 
         revealHouse(house, helpHtml('intro.buildings.retry_square'), {
-            buttonText: t.html('intro.ok'),
+            buttonText: localizer.t_html('intro.ok'),
             buttonCallback: function() { continueTo(rightClickHouse); }
         });
 
@@ -422,7 +422,7 @@ export function uiIntroBuilding(context, reveal) {
         context.history().checkpoint('doneSquare');
 
         revealHouse(house, helpHtml('intro.buildings.done_square'), {
-            buttonText: t.html('intro.ok'),
+            buttonText: localizer.t_html('intro.ok'),
             buttonCallback: function() { continueTo(addTank); }
         });
 
@@ -738,7 +738,7 @@ export function uiIntroBuilding(context, reveal) {
         context.enter(modeBrowse(context));
 
         revealTank(tank, helpHtml('intro.buildings.retry_circle'), {
-            buttonText: t.html('intro.ok'),
+            buttonText: localizer.t_html('intro.ok'),
             buttonCallback: function() { continueTo(rightClickTank); }
         });
 
@@ -753,7 +753,7 @@ export function uiIntroBuilding(context, reveal) {
         reveal('.ideditor',
             helpHtml('intro.buildings.play', { next: t('intro.startediting.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-startEditing',
-                buttonText: t.html('intro.ok'),
+                buttonText: localizer.t_html('intro.ok'),
                 buttonCallback: function() { reveal('.ideditor'); }
             }
         );

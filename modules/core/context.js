@@ -442,6 +442,7 @@ export function coreContext() {
 
 
   /* Container */
+  /** @type d3.Selection<HTMLElement> */
   let _container = d3_select(null);
   /** @type {'light' | 'dark'} */
   let _theme;

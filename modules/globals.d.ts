@@ -40,7 +40,7 @@ declare global {
       unknown
     >;
 
-    export type Selector = (selection: Selection) => void;
+    export type Selector = <T extends HTMLElement>(selection: Selection<T>) => void;
   }
 
     interface ObjectConstructor {
