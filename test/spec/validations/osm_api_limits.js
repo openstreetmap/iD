@@ -1,0 +1,108 @@
+import { select as d3_select } from 'd3-selection';
+
+describe('iD.validations.osm_api_limits', function () {
+    let context;
+
+    beforeEach(() => {
+        iD.services.osm = iD.serviceOsm;
+        iD.services.osm.maxWayNodes = () => 10;
+        iD.services.osm.on = () => undefined;
+    });
+
+    beforeEach(function() {
+        context = iD.coreContext().assetPath('../dist/').init();
+        context.surface = () => d3_select('#nop'); // mock with NOP
+    });
+
+    afterEach(() => {
+        delete iD.services.osm;
+    });
+
+
+    function createWay(numNodes) {
+        var nodes = [];
+        for (var i = 0; i < numNodes; i++) {
+            nodes.push(new iD.osmNode({ id: 'n-' + i, loc: [i, i]}));
+        }
+        var w = new iD.osmWay({id: 'w-1', tags: {},
+            nodes: nodes.map(function(n) { return n.id; }) });
+
+        context.perform.apply(null, nodes
+            .map(function(n) { return iD.actionAddEntity(n); })
+            .concat(iD.actionAddEntity(w))
+        );
+    }
+
+    function validate() {
+        var validator = iD.validationOsmApiLimits(context);
+        var changes = context.history().changes();
+        var entities = changes.modified.concat(changes.created);
+        var issues = [];
+        entities.forEach(function(entity) {
+            issues = issues.concat(validator(entity, context.graph()));
+        });
+        return issues;
+    }
+
+    it('has no errors on init', function() {
+        var issues = validate();
+        expect(issues).toHaveLength(0);
+    });
+
+    it('flags way with more than the maximum number of allowed nodes', function() {
+        createWay(12);
+        var issues = validate();
+        expect(issues).toHaveLength(1);
+        var issue = issues[0];
+        expect(issue.type).toEqual('osm_api_limits');
+        expect(issue.subtype).toEqual('exceededMaxWayNodes');
+        expect(issue.severity).toEqual('error');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
+
+        var fixes = issue.fixes(context);
+        expect(fixes).toHaveLength(1);
+        fixes[0].onClick(context);
+        issues = validate();
+        expect(issues).toHaveLength(0);
+    });
+
+    it('can fix an extreme case', function() {
+        createWay(33);
+        var issues = validate();
+        expect(issues).toHaveLength(1);
+        var issue = issues[0];
+
+        var fixes = issue.fixes(context);
+        expect(fixes).toHaveLength(1);
+        fixes[0].onClick(context);
+        issues = validate();
+        expect(issues).toHaveLength(0);
+    });
+
+    it('fix a simple case at an intersection vertex', function() {
+        createWay(12);
+
+        var n2 = new iD.osmNode({id: 'n-0', loc: [0,0]});
+        var n1 = new iD.osmNode({id: 'n-8', loc: [8,8]});
+        var w = new iD.osmWay({id: 'w-2', nodes: ['n-0', 'n-8'], tags: {}});
+
+        context.perform(
+            iD.actionAddEntity(n1),
+            iD.actionAddEntity(n2),
+            iD.actionAddEntity(w)
+        );
+
+        var issues = validate();
+        expect(issues).toHaveLength(1);
+        var issue = issues[0];
+
+        var fixes = issue.fixes(context);
+        expect(fixes).toHaveLength(1);
+        fixes[0].onClick(context);
+        issues = validate();
+        expect(issues).toHaveLength(0);
+
+        context.graph().entity('w-1').nodes.length === 8;
+    });
+});

@@ -5,7 +5,6 @@ import * as countryCoder from '@rapideditor/country-coder';
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
 import { t, localizer } from '../../core/localizer';
-import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 import { uiCombobox } from '../combobox';
@@ -14,10 +13,10 @@ import { uiLengthIndicator } from '../length_indicator';
 
 var _languagesArray = [];
 
+export const LANGUAGE_SUFFIX_REGEX = /^(.*):([a-z]{2,3}(?:-[A-Z][a-z]{3})?(?:-[A-Z]{2}|-[0-9]{3})?(?:-[a-z][a-z0-9]{4,7}|-[0-9][a-z0-9]{3})?)$/;
 
 export function uiFieldLocalized(field, context) {
     var dispatch = d3_dispatch('change', 'input');
-    var wikipedia = services.wikipedia;
     var input = d3_select(null);
     var localizedInputs = d3_select(null);
     var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
@@ -47,7 +46,6 @@ export function uiFieldLocalized(field, context) {
     var _buttonTip = uiTooltip()
         .title(() => t.append('translate.translate'))
         .placement('left');
-    var _wikiTitles;
     var _entityIDs = [];
 
 
@@ -127,7 +125,7 @@ export function uiFieldLocalized(field, context) {
             // matches for field:<code>, where <code> is a BCP 47 locale code
             // motivation is to avoid matching on similarly formatted tags that are
             // not for languages, e.g. name:left, name:source, etc.
-            var m = k.match(/^(.*):([a-z]{2,3}(?:-[A-Z][a-z]{3})?(?:-[A-Z]{2})?)$/);
+            var m = k.match(LANGUAGE_SUFFIX_REGEX);
             if (m && m[1] === field.key && m[2]) {
                 var item = { lang: m[2], value: tags[k] };
                 if (existingLangs.has(item.lang)) {
@@ -171,6 +169,7 @@ export function uiFieldLocalized(field, context) {
         input = input.enter()
             .append('input')
             .attr('type', 'text')
+            .attr('dir', 'auto')
             .attr('id', field.domId)
             .attr('class', 'localized-main')
             .call(utilNoAuto)
@@ -220,7 +219,7 @@ export function uiFieldLocalized(field, context) {
         localizedInputs.selectAll('button, input')
             .classed('disabled', !!isLocked)
             .attr('readonly', isLocked || null);
-        selection.selectAll('.combobox-caret').classed('nope', true);
+        selection.selectAll('.combobox-caret').classed('nope', !!isLocked);
 
 
         function addNew(d3_event) {
@@ -295,8 +294,6 @@ export function uiFieldLocalized(field, context) {
 
         if (newKey && value) {
             tags[newKey] = value;
-        } else if (newKey && _wikiTitles && _wikiTitles[d.lang]) {
-            tags[newKey] = _wikiTitles[d.lang];
         }
 
         d.lang = lang;
@@ -425,6 +422,7 @@ export function uiFieldLocalized(field, context) {
                 wrap
                     .append('input')
                     .attr('type', 'text')
+                    .attr('dir', 'auto')
                     .attr('class', 'localized-value')
                     .on('blur', changeValue)
                     .on('change', changeValue);
@@ -469,6 +467,9 @@ export function uiFieldLocalized(field, context) {
             .attr('placeholder', function(d) {
                 return Array.isArray(d.value) ? t('inspector.multiple_values') : t('translate.localized_translation_name');
             })
+            .attr('lang', function (d) {
+                return d.lang;
+            })
             .classed('mixed', function(d) {
                 return Array.isArray(d.value);
             });
@@ -477,18 +478,6 @@ export function uiFieldLocalized(field, context) {
 
     localized.tags = function(tags) {
         _tags = tags;
-
-        // Fetch translations from wikipedia
-        if (typeof tags.wikipedia === 'string' && !_wikiTitles) {
-            _wikiTitles = {};
-            var wm = tags.wikipedia.match(/([^:]+):(.+)/);
-            if (wm && wm[0] && wm[1]) {
-                wikipedia.translations(wm[1], wm[2], function(err, d) {
-                    if (err || !d) return;
-                    _wikiTitles = d;
-                });
-            }
-        }
 
         var isMixed = Array.isArray(tags[field.key]);
 

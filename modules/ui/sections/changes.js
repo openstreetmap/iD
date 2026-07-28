@@ -26,7 +26,7 @@ export function uiSectionChanges(context) {
         .label(function() {
             var history = context.history();
             var summary = history.difference().summary();
-            return t.append('inspector.title_count', { title: t('commit.changes'), count: summary.length });
+            return t.append('inspector.title_count', { title: t.append('commit.changes'), count: summary.length });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -71,7 +71,10 @@ export function uiSectionChanges(context) {
         buttons
             .append('span')
             .attr('class', 'change-type')
-            .html(function(d) { return t.html('commit.' + d.changeType) + ' '; });
+            .each(function(d) {
+                d3_select(this).call(
+                    t.append('commit.' + d.changeType, { suffix: ' ' }));
+                });
 
         buttons
             .append('strong')
@@ -90,11 +93,8 @@ export function uiSectionChanges(context) {
                 if (name !== '') {
                     string += ':';
                 }
-                return string += ' ' + name;
+                return string + ' ' + name;
             });
-
-        items = itemsEnter
-            .merge(items);
 
 
         // Download changeset link
@@ -123,7 +123,7 @@ export function uiSectionChanges(context) {
             .call(t.append('commit.download_changes'));
 
 
-        function mouseover(d) {
+        function mouseover(d3_event, d) {
             if (d.entity) {
                 context.surface().selectAll(
                     utilEntityOrMemberSelector([d.entity.id], context.graph())

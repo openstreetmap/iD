@@ -1,4 +1,3 @@
-
 import { services } from '../services';
 import { actionNoop } from '../actions/noop';
 import { behaviorDrag } from '../behavior/drag';

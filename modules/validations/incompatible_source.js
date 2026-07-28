@@ -1,26 +1,38 @@
 import { t } from '../core/localizer';
-import { utilDisplayLabel } from '../util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
+const incompatibleRules = [
+  {
+    id: 'amap',
+    regex: /(^amap$|^amap\.com|autonavi|mapabc|高德)/i,
+    exceptRegex: /高德([路山桥街巷]|大道)/i
+  },
+  {
+    id: 'baidu',
+    regex: /(baidu|mapbar|百度)/i
+  },
+  {
+    id: 'google',
+    regex: /(google)/i,
+    exceptRegex: /((books|drive)\.google|google\s?(books|drive|plus))|(esri\/Google_(Africa|Open)_Buildings)/i
+  }
+];
+
+/**
+ * @param {string} str String (e.g. tag value) to check for incompatible sources
+ * @returns {{id:string, regex: RegExp, exceptRegex?: RegExp}[]}
+ */
+export function getIncompatibleSources(str) {
+  return incompatibleRules
+    .filter(rule =>
+      rule.regex.test(str) &&
+      !rule.exceptRegex?.test(str)
+    );
+}
 
 export function validationIncompatibleSource() {
   const type = 'incompatible_source';
-  const incompatibleRules = [
-    {
-      id: 'amap',
-      regex: /(^amap$|^amap\.com|autonavi|mapabc|高德)/i
-    },
-    {
-      id: 'baidu',
-      regex: /(baidu|mapbar|百度)/i
-    },
-    {
-      id: 'google',
-      regex: /google/i,
-      exceptRegex: /((books|drive)\.google|google\s?(books|drive|plus))|(esri\/Google_Africa_Buildings)/i
-    }
-  ];
-
 
   const validation = function checkIncompatibleSource(entity) {
     const entitySources = entity.tags && entity.tags.source && entity.tags.source.split(';');
@@ -29,16 +41,8 @@ export function validationIncompatibleSource() {
     const entityID = entity.id;
 
     return entitySources
-      .map(source => {
-        const matchRule = incompatibleRules.find(rule => {
-          if (!rule.regex.test(source)) return false;
-          if (rule.exceptRegex && rule.exceptRegex.test(source)) return false;
-          return true;
-        });
-
-        if (!matchRule) return null;
-
-        return new validationIssue({
+      .flatMap(source => getIncompatibleSources(source)
+        .map(matchRule => new validationIssue({
           type: type,
           severity: 'warning',
           message: (context) => {
@@ -56,10 +60,8 @@ export function validationIncompatibleSource() {
               new validationIssueFix({ title: t.append('issues.fix.remove_proprietary_data.title') })
             ];
           }
-        });
-
-      }).filter(Boolean);
-
+        }))
+      );
 
       function getReference(id) {
         return function showReference(selection) {

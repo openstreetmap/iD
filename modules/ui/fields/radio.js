@@ -19,6 +19,7 @@ export function uiFieldRadio(field, context) {
     var radioData = (field.options || field.keys).slice();  // shallow copy
     var typeField;
     var layerField;
+    let _tags = {};
     var _oldType = {};
     var _entityIDs = [];
 
@@ -55,17 +56,21 @@ export function uiFieldRadio(field, context) {
         enter = labels.enter()
             .append('label');
 
-        var stringsField = field.resolveReference('stringsCrossReference');
         enter
             .append('input')
             .attr('type', 'radio')
             .attr('name', field.id)
-            .attr('value', function(d) { return stringsField.t('options.' + d, { 'default': d }); })
+            .attr('value', function(d) { return field.t('options.' + d, { 'default': d }); })
             .attr('checked', false);
 
         enter
             .append('span')
-            .each(function(d) { stringsField.t.append('options.' + d, { 'default': d })(d3_select(this)); });
+            .each(function(d) {
+                const labelId = field.hasTextForStringId('options.' + d + '.title')
+                    ? 'options.' + d + '.title'
+                    : 'options.' + d;
+                field.t.append(labelId, { 'default': d })(d3_select(this));
+            });
 
         labels = labels
             .merge(enter);
@@ -73,6 +78,52 @@ export function uiFieldRadio(field, context) {
         radios = labels.selectAll('input')
             .on('change', changeRadio);
 
+    }
+
+
+    function updateLayout() {
+        const wrapNode = wrap.node();
+        if (!wrapNode || labels.empty()) return;
+
+        wrap.classed('one-line', false);
+        wrap.classed('two-column', false);
+
+        // Temporarily measure each label at its natural content width (no grow/shrink)
+        // by applying inline styles, forcing a layout read, then removing them.
+        const labelNodes = labels.nodes();
+        labelNodes.forEach(node => {
+            node._originalStyle = node.style;
+            node.style.flex = '0 0 auto';
+            node.style.width = 'auto';
+        });
+
+        const containerWidth = wrapNode.getBoundingClientRect().width;
+        const labelWidths = labelNodes.map(node => node.getBoundingClientRect().width);
+        const sumLabelWidth = labelWidths.reduce((a, b) => a + b);
+        const maxLabelWidth = Math.max(...labelWidths);
+        if (labelWidths.length % 2 === 1) {
+            // for odd number of entries, we can skip the last entry as there is the
+            // full width available
+            labelWidths.pop();
+        }
+        const maxLabelWidthTwoColumns = Math.max(...labelWidths);
+
+        labelNodes.forEach(node => {
+            node.style = node._originalStyle;
+            delete node._originalStyle;
+        });
+
+        // All labels fit on one equal-width line without truncation when the widest
+        // label's natural width fits within each cell's equal share of the container.
+        wrap.classed('one-line', sumLabelWidth <= containerWidth);
+        wrap.classed('equal-spacing', maxLabelWidth * labelNodes.length <= containerWidth);
+        // Otherwise, if all labels fit on half width of the container -> we can use
+        // a more compact two column layout
+        wrap.classed('two-column',
+            sumLabelWidth > containerWidth // not if already one-line layout
+            && maxLabelWidthTwoColumns <= Math.ceil(containerWidth / 2) // has to fit in half-width column
+            && labelNodes.length > 3 // skip if only 3 or fewer options -> looks unbalanced
+        );
     }
 
 
@@ -127,7 +178,7 @@ export function uiFieldRadio(field, context) {
             .attr('class', 'labeled-input structure-type-item');
 
         typeEnter
-            .append('span')
+            .append('div')
             .attr('class', 'label structure-label-type')
             .attr('for', 'preset-input-' + selected)
             .call(t.append('inspector.radio.structure.type'));
@@ -172,7 +223,7 @@ export function uiFieldRadio(field, context) {
             .attr('class', 'labeled-input structure-layer-item');
 
         layerEnter
-            .append('span')
+            .append('div')
             .attr('class', 'label structure-label-layer')
             .attr('for', 'preset-input-layer')
             .call(t.append('inspector.radio.structure.layer'));
@@ -224,9 +275,6 @@ export function uiFieldRadio(field, context) {
 
 
     function changeLayer(t, onInput) {
-        if (t.layer === '0') {
-            t.layer = undefined;
-        }
         dispatch.call('change', this, t, onInput);
     }
 
@@ -253,9 +301,15 @@ export function uiFieldRadio(field, context) {
 
         if (field.type === 'structureRadio') {
             if (activeKey === 'bridge') {
-                t.layer = '1';
+                // if there already is an a layer tag, respect it if it's >0
+                const hasExistingLayer = !Number.isNaN(+_tags.layer) && +_tags.layer > 0;
+
+                t.layer = hasExistingLayer ? _tags.layer : '1';
             } else if (activeKey === 'tunnel' && t.tunnel !== 'building_passage') {
-                t.layer = '-1';
+                // if there already is an a layer tag, respect it if it's <0
+                const hasExistingLayer = !Number.isNaN(+_tags.layer) && +_tags.layer < 0;
+
+                t.layer = hasExistingLayer ? _tags.layer : '-1';
             } else {
                 t.layer = undefined;
             }
@@ -266,6 +320,7 @@ export function uiFieldRadio(field, context) {
 
 
     radio.tags = function(tags) {
+        _tags = tags;
         function isOptionChecked(d) {
             if (field.key) {
                 return tags[field.key] === d;
@@ -311,14 +366,19 @@ export function uiFieldRadio(field, context) {
         }
 
         if (field.type === 'structureRadio') {
-            // For waterways without a tunnel tag, set 'culvert' as
-            // the _oldType to default to if the user picks 'tunnel'
             if (!!tags.waterway && !_oldType.tunnel) {
+                // default waterway tunnels to 'culvert'
                 _oldType.tunnel = 'culvert';
+            }
+            if (!!tags.waterway && !_oldType.bridge) {
+                // default waterway bridges to 'aqueduct'
+                _oldType.bridge = 'aqueduct';
             }
 
             wrap.call(structureExtras, tags);
         }
+
+        updateLayout();
     };
 
 

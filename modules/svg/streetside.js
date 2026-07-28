@@ -1,11 +1,11 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit';
 import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './helpers';
 import { services } from '../services';
 
 
 export function svgStreetside(projection, context, dispatch) {
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    var throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 14;
     var minMarkerZoom = 16;
     var minViewfieldZoom = 18;
@@ -157,18 +157,18 @@ export function svgStreetside(projection, context, dispatch) {
     }
 
 
-    function filterBubbles(bubbles) {
+    function filterBubbles(bubbles, skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
         var usernames = context.photos().usernames();
 
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             var fromTimestamp = new Date(fromDate).getTime();
             bubbles = bubbles.filter(function(bubble) {
                 return new Date(bubble.captured_at).getTime() >= fromTimestamp;
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             var toTimestamp = new Date(toDate).getTime();
             bubbles = bubbles.filter(function(bubble) {
                 return new Date(bubble.captured_at).getTime() <= toTimestamp;
@@ -183,18 +183,18 @@ export function svgStreetside(projection, context, dispatch) {
         return bubbles;
     }
 
-    function filterSequences(sequences) {
+    function filterSequences(sequences, skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
         var usernames = context.photos().usernames();
 
-        if (fromDate) {
+        if (fromDate && !skipDateFilter) {
             var fromTimestamp = new Date(fromDate).getTime();
             sequences = sequences.filter(function(sequences) {
                 return new Date(sequences.properties.captured_at).getTime() >= fromTimestamp;
             });
         }
-        if (toDate) {
+        if (toDate && !skipDateFilter) {
             var toTimestamp = new Date(toDate).getTime();
             sequences = sequences.filter(function(sequences) {
                 return new Date(sequences.properties.captured_at).getTime() <= toTimestamp;
@@ -233,12 +233,16 @@ export function svgStreetside(projection, context, dispatch) {
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
 
+        dispatch.call('photoDatesChanged', this, 'streetside', [
+            ...filterBubbles(bubbles, true).map(p => p.captured_at),
+            ...filterSequences(sequences, true).map(t => t.properties.vintageStart)]);
+
         // exit
         traces.exit()
             .remove();
 
         // enter/update
-        traces = traces.enter()
+        traces.enter()
             .append('path')
             .attr('class', 'sequence')
             .merge(traces)
@@ -349,8 +353,11 @@ export function svgStreetside(projection, context, dispatch) {
                 update();
                 service.loadBubbles(projection);
             } else {
+                dispatch.call('photoDatesChanged', this, 'streetside', []);
                 editOff();
             }
+        } else {
+            dispatch.call('photoDatesChanged', this, 'streetside', []);
         }
     }
 

@@ -10,13 +10,14 @@ import { actionDeleteMember } from '../../actions/delete_member';
 import { actionMoveMember } from '../../actions/move_member';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
-import { osmEntity } from '../../osm';
-import { isColourValid } from '../../osm/tags';
+import { osmIdManager } from '../../osm';
+import { getRelationColor } from '../../osm/tags';
 import { svgIcon } from '../../svg/icon';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
 import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto, utilUniqueDomId } from '../../util';
+import { prefs } from '../../core';
 
 
 export function uiSectionRawMemberEditor(context) {
@@ -34,7 +35,7 @@ export function uiSectionRawMemberEditor(context) {
 
             var gt = entity.members.length > _maxMembers ? '>' : '';
             var count = gt + entity.members.slice(0, _maxMembers).length;
-            return t.append('inspector.title_count', { title: t('inspector.members'), count: count });
+            return t.append('inspector.title_count', { title: t.append('inspector.members'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -46,7 +47,7 @@ export function uiSectionRawMemberEditor(context) {
         d3_event.preventDefault();
 
         // display the loading indicator
-        d3_select(this.parentNode).classed('tag-reference-loading', true);
+        d3_select(this).classed('loading', true);
         context.loadEntity(d.id, function() {
             section.reRender();
         });
@@ -149,8 +150,8 @@ export function uiSectionRawMemberEditor(context) {
 
         var items = list.selectAll('li')
             .data(memberships, function(d) {
-                return osmEntity.key(d.relation) + ',' + d.index + ',' +
-                    (d.member ? osmEntity.key(d.member) : 'incomplete');
+                return osmIdManager.key(d.relation) + ',' + d.index + ',' +
+                    (d.member ? osmIdManager.key(d.member) : 'incomplete');
             });
 
         items.exit()
@@ -193,15 +194,51 @@ export function uiSectionRawMemberEditor(context) {
                         .attr('class', 'member-entity-type')
                         .text(function(d) {
                             var matched = presetManager.match(d.member, context.graph());
+                            while (matched?.suggestion) {
+                                // if is NSI preset: look for a parent preset
+                                matched = matched.getParentPreset();
+                            }
                             return (matched && matched.name()) || utilDisplayType(d.member.id);
                         });
+
+                    const showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
+                    labelLink.each(function(d) {
+                        if (!showThirdPartyIcons) return;
+                        const matched = presetManager.match(d, context.graph());
+                        if (matched.suggestion) {
+                            // if matching an NSI preset: append icon
+                            const img = d3_select(this)
+                                .append('img');
+                            img
+                                .classed('member-entity-icon', true)
+                                .on('load', () => img.classed('hide', false))
+                                .on('error', () => img.classed('hide', true))
+                                .attr('src', matched.imageURL);
+                        }
+                    });
+
+                    labelLink.each(function(d) {
+                        if (d.type !== 'relation') return;
+                        const relColors = getRelationColor(d.member.tags, '#555');
+                        const hasRef = d.member.tags.ref;
+                        if (relColors.isValid || hasRef) {
+                            const refs = (d.member.tags.ref || '').split(';');
+                            for (const ref of refs) {
+                                d3_select(this)
+                                    .append('span')
+                                    .classed('member-entity-ref-color', true)
+                                    .style('border-color', relColors.color)
+                                    .style('background-color', relColors.color)
+                                    .style('color', relColors.textColor)
+                                    .text(ref);
+                            }
+                        }
+                    });
 
                     labelLink
                         .append('span')
                         .attr('class', 'member-entity-name')
-                        .classed('has-colour', d => d.member.type === 'relation' && d.member.tags.colour && isColourValid(d.member.tags.colour))
-                        .style('border-color', d => d.member.type === 'relation' && d.member.tags.colour)
-                        .text(function(d) { return utilDisplayName(d.member); });
+                        .text(function(d) { return utilDisplayName(d.member, { hideRef: true }); });
 
                     label
                         .append('button')

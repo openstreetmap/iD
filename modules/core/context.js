@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce, throttle } from 'es-toolkit/compat';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
@@ -14,7 +14,7 @@ import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
 import { geoRawMercator } from '../geo/raw_mercator';
-import { modeSelect } from '../modes/select';
+import { modeSelect, modeSelectNote } from '../modes';
 import { presetManager } from '../presets';
 import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
 import { services } from '../services';
@@ -24,7 +24,7 @@ import { utilKeybinding, utilRebind, utilStringQs, utilCleanOsmString } from '..
 
 export function coreContext() {
   const dispatch = d3_dispatch('enter', 'exit', 'change');
-  let context = utilRebind({}, dispatch, 'on');
+  const context = {};
   let _deferred = new Set();
 
   context.version = packageJSON.version;
@@ -40,16 +40,22 @@ export function coreContext() {
   let _defaultChangesetComment = context.initialHashParams.comment;
   let _defaultChangesetSource = context.initialHashParams.source;
   let _defaultChangesetHashtags = context.initialHashParams.hashtags;
+
+  /** @type {GetSet<iD.Context, string>} */
   context.defaultChangesetComment = function(val) {
     if (!arguments.length) return _defaultChangesetComment;
     _defaultChangesetComment = val;
     return context;
   };
+
+  /** @type {GetSet<iD.Context, string>} */
   context.defaultChangesetSource = function(val) {
     if (!arguments.length) return _defaultChangesetSource;
     _defaultChangesetSource = val;
     return context;
   };
+
+  /** @type {GetSet<iD.Context, string>} */
   context.defaultChangesetHashtags = function(val) {
     if (!arguments.length) return _defaultChangesetHashtags;
     _defaultChangesetHashtags = val;
@@ -61,6 +67,7 @@ export function coreContext() {
 
   // If true, iD will update the title based on what the user is doing
   let _setsDocumentTitle = true;
+  /** @type {GetSet<iD.Context, boolean>} */
   context.setsDocumentTitle = function(val) {
     if (!arguments.length) return _setsDocumentTitle;
     _setsDocumentTitle = val;
@@ -68,6 +75,7 @@ export function coreContext() {
   };
   // The part of the title that is always the same
   let _documentTitleBase = document.title;
+  /** @type {GetSet<iD.Context, string>} */
   context.documentTitleBase = function(val) {
     if (!arguments.length) return _documentTitleBase;
     _documentTitleBase = val;
@@ -75,7 +83,7 @@ export function coreContext() {
   };
 
 
-  /* User interface and keybinding */
+  /** User interface and keybinding @type {ReturnType<uiInit>} */
   let _ui;
   context.ui = () => _ui;
   context.lastPointerType = () => _ui.lastPointerType();
@@ -89,8 +97,11 @@ export function coreContext() {
   // Instantiate the connection here because it doesn't require passing in
   // `context` and it's needed for pre-init calls like `preauth`
   let _connection = services.osm;
+  /** @type {ReturnType<coreHistory>} */
   let _history;
+  /** @type {ReturnType<coreValidator>} */
   let _validator;
+  /** @type {ReturnType<coreUploader>} */
   let _uploader;
   context.connection = () => _connection;
   context.history = () => _history;
@@ -106,6 +117,7 @@ export function coreContext() {
   };
 
 
+  /** @param {string | string[]} locale */
   // A string or array or locale codes to prefer over the browser's settings
   context.locale = function(locale) {
     if (!arguments.length) return localizer.localeCode();
@@ -117,12 +129,6 @@ export function coreContext() {
   function afterLoad(cid, callback) {
     return (err, result) => {
       if (err) {
-        // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-        if (err.status === 400 || err.status === 401 || err.status === 403) {
-          if (_connection) {
-            _connection.logout();
-          }
-        }
         if (typeof callback === 'function') {
           callback(err);
         }
@@ -176,6 +182,7 @@ export function coreContext() {
       _connection.loadEntityRelations(entityID, afterLoad(cid, callback));
     }
   };
+
   // Download single note
   context.loadNote = (entityID, callback) => {
     if (_connection) {
@@ -185,23 +192,28 @@ export function coreContext() {
   };
 
   context.zoomToEntity = (entityID, zoomTo) => {
+    context.zoomToEntities([entityID], zoomTo);
+  };
 
+  context.zoomToEntities = (entityIDs, zoomTo) => {
     // be sure to load the entity even if we're not going to zoom to it
-    context.loadEntity(entityID, (err, result) => {
+    let loadedEntities = [];
+    const throttledZoomTo = throttle(() => _map.zoomTo(loadedEntities), 500);
+    entityIDs.forEach(entityID => context.loadEntity(entityID, (err, result) => {
       if (err) return;
+      const entity = result.data.find(e => e.id === entityID);
+      if (!entity) return;
+      loadedEntities.push(entity);
       if (zoomTo !== false) {
-          const entity = result.data.find(e => e.id === entityID);
-          if (entity) {
-            _map.zoomTo(entity);
-          }
+        throttledZoomTo();
       }
-    });
+    }));
 
     _map.on('drawn.zoomToEntity', () => {
-      if (!context.hasEntity(entityID)) return;
+      if (!entityIDs.every(entityID => context.hasEntity(entityID))) return;
       _map.on('drawn.zoomToEntity', null);
       context.on('enter.zoomToEntity', null);
-      context.enter(modeSelect(context, [entityID]));
+      context.enter(modeSelect(context, entityIDs));
     });
 
     context.on('enter.zoomToEntity', () => {
@@ -209,6 +221,23 @@ export function coreContext() {
         _map.on('drawn.zoomToEntity', null);
         context.on('enter.zoomToEntity', null);
       }
+    });
+  };
+
+  context.moveToNote = (noteId, moveTo) => {
+    context.loadNote(noteId, (err) => {
+      if (err) return;
+      // zoom to, used note loc
+      const note = services.osm.getNote(noteId);
+      if (!note) return;
+      if (moveTo !== false) {
+        context.map().center(note.loc);
+      }
+      // open note layer
+      const noteLayer = context.layers().layer('notes');
+      noteLayer.enabled(true);
+      // select the note
+      context.enter(modeSelectNote(context, noteId));
     });
   };
 
@@ -273,8 +302,9 @@ export function coreContext() {
 
   // Debounce save, since it's a synchronous localStorage write,
   // and history changes can happen frequently (e.g. when dragging).
-  context.debouncedSave = _debounce(context.save, 350);
+  context.debouncedSave = debounce(context.save, 100);
 
+  /** @template {Function} T @param {T} fn @returns {T} */
   function withDebouncedSave(fn) {
     return function() {
       const result = fn.apply(_history, arguments);
@@ -303,6 +333,7 @@ export function coreContext() {
     dispatch.call('enter', this, _mode);
   };
 
+  /** @returns {import('../osm').EntityId[]} */
   context.selectedIDs = () => (_mode && _mode.selectedIDs && _mode.selectedIDs()) || [];
   context.activeID = () => _mode && _mode.activeID && _mode.activeID();
 
@@ -328,10 +359,13 @@ export function coreContext() {
 
 
   /* Copy/Paste */
+  /** @type {iD.Graph} */
   let _copyGraph;
   context.copyGraph = () => _copyGraph;
 
+  /** @type {string[]} */
   let _copyIDs = [];
+  /** @type {GetSet<iD.Context, string[]>} */
   context.copyIDs = function(val) {
     if (!arguments.length) return _copyIDs;
     _copyIDs = val;
@@ -348,11 +382,13 @@ export function coreContext() {
 
 
   /* Background */
+  /** @type {ReturnType<rendererBackground>} */
   let _background;
   context.background = () => _background;
 
 
   /* Features */
+  /** @type {ReturnType<rendererFeatures>} */
   let _features;
   context.features = () => _features;
   context.hasHiddenConnections = (id) => {
@@ -363,14 +399,17 @@ export function coreContext() {
 
 
   /* Photos */
+  /** @type {ReturnType<rendererPhotos>} */
   let _photos;
   context.photos = () => _photos;
 
 
   /* Map */
+  /** @type {ReturnType<typeof rendererMap>} */
   let _map;
   context.map = () => _map;
   context.layers = () => _map.layers();
+  /** @returns {d3.Selection} */
   context.surface = () => _map.surface;
   context.editableDataEnabled = () => _map.editableDataEnabled();
   context.surfaceRect = () => _map.surface.node().getBoundingClientRect();
@@ -391,7 +430,9 @@ export function coreContext() {
     downloaded: false   // downloaded data from osm
   };
   context.debugFlags = () => _debugFlags;
+  /** @param {keyof _debugFlags} flag */
   context.getDebug = (flag) => flag && _debugFlags[flag];
+  /** @param {keyof _debugFlags} flag @param {boolean} val */
   context.setDebug = function(flag, val) {
     if (arguments.length === 1) val = true;
     _debugFlags[flag] = val;
@@ -402,15 +443,27 @@ export function coreContext() {
 
   /* Container */
   let _container = d3_select(null);
+  /** @type {'light' | 'dark'} */
+  let _theme;
+
+  /** @type {GetSet<iD.Context, typeof _container>} */
   context.container = function(val) {
     if (!arguments.length) return _container;
     _container = val;
     _container.classed('ideditor', true);
+    _container.classed('theme-dark', _theme === 'dark');
+    _container.classed('theme-light', _theme === 'light');
     return context;
   };
   context.containerNode = function(val) {
     if (!arguments.length) return context.container().node();
     context.container(d3_select(val));
+    return context;
+  };
+  context.theme = function(val) {
+    if (!arguments.length) return _theme;
+    _theme = val;
+    context.container(_container); // refresh theme
     return context;
   };
 
@@ -424,6 +477,7 @@ export function coreContext() {
 
   /* Assets */
   let _assetPath = '';
+  /** @type {GetSet<iD.Context, string>} */
   context.assetPath = function(val) {
     if (!arguments.length) return _assetPath;
     _assetPath = val;
@@ -431,7 +485,9 @@ export function coreContext() {
     return context;
   };
 
+  /** @type {Tags} */
   let _assetMap = {};
+  /** @type {GetSet<iD.Context, Tags>} */
   context.assetMap = function(val) {
     if (!arguments.length) return _assetMap;
     _assetMap = val;
@@ -439,17 +495,19 @@ export function coreContext() {
     return context;
   };
 
+  /** @param {string} val */
   context.asset = (val) => {
     if (/^http(s)?:\/\//i.test(val)) return val;
     const filename = _assetPath + val;
     return _assetMap[filename] || filename;
   };
 
+  /** @param {string} val */
   context.imagePath = (val) => context.asset(`img/${val}`);
 
 
   /* reset (aka flush) */
-  context.reset = context.flush = () => {
+  context.reset = () => {
     context.debouncedSave.cancel();
 
     Array.from(_deferred).forEach(handle => {
@@ -475,14 +533,27 @@ export function coreContext() {
 
     return context;
   };
+  context.flush = context.reset;
 
 
   /* Projections */
   context.projection = geoRawMercator();
   context.curtainProjection = geoRawMercator();
 
+  // these lines are required to define the type-definitions.
+  // the actual value is assigned below, in the `init` function.
+  context.graph = /** @type {() => iD.Graph} */ (undefined);
+  context.pauseChangeDispatch = /** @type {Function} */ (undefined);
+  context.resumeChangeDispatch = /** @type {Function} */ (undefined);
+  context.perform = /** @type {typeof _history.perform} */ (undefined);
+  context.replace = /** @type {typeof _history.replace} */ (undefined);
+  context.pop = /** @type {typeof _history.pop} */ (undefined);
+  context.overwrite = /** @type {typeof _history.overwrite} */ (undefined);
+  context.undo = /** @type {typeof _history.undo} */ (undefined);
+  context.redo = /** @type {typeof _history.redo} */ (undefined);
+  context.on = /** @type {any} */ (undefined);
 
-  /* Init */
+  /** @returns {typeof context} */
   context.init = () => {
 
     instantiateInternal();
@@ -503,7 +574,6 @@ export function coreContext() {
       context.perform = withDebouncedSave(_history.perform);
       context.replace = withDebouncedSave(_history.replace);
       context.pop = withDebouncedSave(_history.pop);
-      context.overwrite = withDebouncedSave(_history.overwrite);
       context.undo = withDebouncedSave(_history.undo);
       context.redo = withDebouncedSave(_history.redo);
 
@@ -530,6 +600,10 @@ export function coreContext() {
         localizer.preferredLocaleCodes(context.initialHashParams.locale);
       }
 
+      if (context.initialHashParams.theme) {
+        context.theme(context.initialHashParams.theme);
+      }
+
       // kick off some async work
       localizer.ensureLoaded();
       presetManager.ensureLoaded();
@@ -544,6 +618,9 @@ export function coreContext() {
       _map.init();
       _validator.init();
       _features.init();
+
+      // Migrate history data from localStorage to IndexedDB
+      _history.migrateHistoryData();
 
       if (services.maprules && context.initialHashParams.maprules) {
         d3_json(context.initialHashParams.maprules)
@@ -565,5 +642,5 @@ export function coreContext() {
     }
   };
 
-  return context;
+  return utilRebind(context, dispatch, 'on');
 }

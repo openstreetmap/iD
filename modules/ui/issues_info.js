@@ -29,7 +29,8 @@ export function uiIssuesInfo(context) {
         var liveIssues = context.validator().getIssues({
             what: prefs('validate-what') || 'edited',
             where: prefs('validate-where') || 'all'
-        });
+        }).filter(issue => issue.severity !== 'suggestion');
+
         if (liveIssues.length) {
             warningsItem.count = liveIssues.length;
             shownItems.push(warningsItem);

@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
-import { locationManager } from '../core/LocationManager';
+import { locationManager } from '../core/location_manager';
 
 import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetLineTags, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetCategory } from './category';
@@ -25,7 +25,11 @@ export { _mainPresetIndex as presetManager };
 //
 export function presetIndex() {
   const dispatch = d3_dispatch('favoritePreset', 'recentsChange');
-  const MAXRECENTS = 30;
+
+  /** the number of recent presets to save */
+  const MAX_RECENTS_TO_STORE = 30;
+  /** the number of recent presets to show in the preset list */
+  const MAX_RECENTS_TO_SHOW = 8;
 
   // seed the preset lists with geometry fallbacks
   const POINT = presetPreset('point', { name: 'Point', tags: {}, geometry: ['point', 'vertex'], matchScore: 0.1 } );
@@ -35,6 +39,7 @@ export function presetIndex() {
 
   let _this = presetCollection([POINT, LINE, AREA, RELATION]);
   let _presets = { point: POINT, line: LINE, area: AREA, relation: RELATION };
+  const _rawPresets = {};
 
   let _defaults = {
     point: presetCollection([POINT]),
@@ -56,8 +61,9 @@ export function presetIndex() {
   let _loadPromise;
 
 
-  _this.ensureLoaded = () => {
-    if (_loadPromise) return _loadPromise;
+  /** @param {boolean=} bypassCache - used by unit tests */
+  _this.ensureLoaded = (bypassCache) => {
+    if (_loadPromise && !bypassCache) return _loadPromise;
 
     return _loadPromise = Promise.all([
         fileFetcher.get('preset_categories'),
@@ -97,7 +103,7 @@ export function presetIndex() {
         let f = d.fields[fieldID];
 
         if (f) {   // add or replace
-          f = presetField(fieldID, f, _fields);
+          f = presetField(fieldID, f);
           if (f.locationSet) newLocationSets.push(f);
           _fields[fieldID] = f;
 
@@ -114,6 +120,7 @@ export function presetIndex() {
 
         if (p) {   // add or replace
           const isAddable = !_addablePresetIDs || _addablePresetIDs.has(presetID);
+          _rawPresets[presetID] = p;
           p = presetPreset(presetID, p, isAddable, _fields, _presets);
           if (p.locationSet) newLocationSets.push(p);
           _presets[presetID] = p;
@@ -122,6 +129,7 @@ export function presetIndex() {
           const existing = _presets[presetID];
           if (existing && !existing.isFallback()) {
             delete _presets[presetID];
+            delete _rawPresets[presetID];
           }
         }
       });
@@ -178,12 +186,12 @@ export function presetIndex() {
 
     // Merge Custom Features
     if (d.featureCollection && Array.isArray(d.featureCollection.features)) {
-      locationManager.mergeCustomGeoJSON(d.featureCollection);
+      locationManager.addFeatures(d.featureCollection);
     }
 
     // Resolve all locationSet features.
     if (newLocationSets.length) {
-      locationManager.mergeLocationSets(newLocationSets);
+      locationManager.registerLocationSets(newLocationSets);
     }
 
     return _this;
@@ -226,7 +234,7 @@ export function presetIndex() {
         const candidate = indexMatches[i];
         const score = candidate.matchScore(tags);
 
-        if (score === -1){
+        if (score === -1) {
           continue;
         }
         matchCandidates.push({score, candidate});
@@ -238,15 +246,15 @@ export function presetIndex() {
       }
     }
 
-    if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)){
+    if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)) {
       const validHere = locationManager.locationSetsAt(loc);
-      if (!validHere[bestMatch.locationSetID]) {
+      if (!validHere.has(bestMatch.locationSetID)) {
+        bestMatch = undefined;
         matchCandidates.sort((a, b) => (a.score < b.score) ? 1 : -1);
         for (let i = 0; i < matchCandidates.length; i++) {
           const candidateScore = matchCandidates[i];
-          if (!candidateScore.candidate.locationSetID || validHere[candidateScore.candidate.locationSetID]) {
+          if (!candidateScore.candidate.locationSetID || validHere.has(candidateScore.candidate.locationSetID)) {
             bestMatch = candidateScore.candidate;
-            bestScore = candidateScore.score;
             break;
           }
         }
@@ -255,7 +263,7 @@ export function presetIndex() {
 
     // If any part of an address is present, allow fallback to "Address" preset - #4353
     if (!bestMatch || bestMatch.isFallback()) {
-      for (let k in tags){
+      for (let k in tags) {
           if (/^addr:/.test(k) && keyIndex['addr:*'] && keyIndex['addr:*']['*']) {
             bestMatch = keyIndex['addr:*']['*'][0];
             break;
@@ -405,9 +413,14 @@ export function presetIndex() {
 
 
   _this.defaults = (geometry, n, startWithRecents, loc, extraPresets) => {
+    const validHere = Array.isArray(loc) ? locationManager.locationSetsAt(loc) : null;
+
     let recents = [];
     if (startWithRecents) {
-      recents = _this.recent().matchGeometry(geometry).collection.slice(0, 4);
+        // filtering before slicing to prevent unused slots in the recent preset list, issue #11405
+        recents = _this.recent().matchGeometry(geometry).collection
+        .filter(a => !a.locationSetID || (validHere && validHere.has(a.locationSetID)))
+        .slice(0, MAX_RECENTS_TO_SHOW);
     }
 
     let defaults;
@@ -416,7 +429,9 @@ export function presetIndex() {
         var preset = _this.item(id);
         if (preset && preset.matchGeometry(geometry)) return preset;
         return null;
-      }).filter(Boolean);
+      })
+        .filter(Boolean)
+        .filter(a => !a.locationSetID || validHere.has(a.locationSetID));
     } else {
       defaults = _defaults[geometry].collection.concat(_this.fallback(geometry));
     }
@@ -424,11 +439,6 @@ export function presetIndex() {
     let result = presetCollection(
       utilArrayUniq(recents.concat(defaults).concat(extraPresets || [])).slice(0, n - 1)
     );
-
-    if (Array.isArray(loc)) {
-      const validHere = locationManager.locationSetsAt(loc);
-      result.collection = result.collection.filter(a => !a.locationSetID || validHere[a.locationSetID]);
-    }
 
     return result;
   };
@@ -462,6 +472,13 @@ export function presetIndex() {
         .map(d => d.preset)
         .filter(d => d.searchable !== false))
     );
+  };
+
+
+  _this.getRawPresets = () => _rawPresets;
+
+  _this.getPresets = () => {
+    return _presets;
   };
 
 
@@ -593,7 +610,7 @@ export function presetIndex() {
     }
 
     // remove the last recent (first in, first out)
-    while (items.length >= MAXRECENTS) {
+    while (items.length >= MAX_RECENTS_TO_STORE) {
       items.pop();
     }
 

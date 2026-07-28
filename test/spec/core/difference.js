@@ -1,200 +1,200 @@
 describe('iD.coreDifference', function () {
     describe('#changes', function () {
         it('includes created entities', function () {
-            var node = iD.osmNode({id: 'n'});
-            var base = iD.coreGraph();
+            var node = new iD.osmNode({id: 'n'});
+            var base = new iD.coreGraph();
             var head = base.replace(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({n: {base: undefined, head: node}});
+            expect(diff.changes()).toEqual({n: {base: undefined, head: node}});
         });
 
         it('includes undone created entities', function () {
-            var node = iD.osmNode({id: 'n'});
-            var base = iD.coreGraph();
+            var node = new iD.osmNode({id: 'n'});
+            var base = new iD.coreGraph();
             var head = base.replace(node);
             var diff = iD.coreDifference(head, base);
-            expect(diff.changes()).to.eql({n: {base: node, head: undefined}});
+            expect(diff.changes()).toEqual({n: {base: node, head: undefined}});
         });
 
         it('includes modified entities', function () {
-            var n1 = iD.osmNode({id: 'n'});
+            var n1 = new iD.osmNode({id: 'n'});
             var n2 = n1.update({ tags: { yes: 'no' } });
-            var base = iD.coreGraph([n1]);
+            var base = new iD.coreGraph([n1]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({n: {base: n1, head: n2}});
+            expect(diff.changes()).toEqual({n: {base: n1, head: n2}});
         });
 
         it('includes undone modified entities', function () {
-            var n1 = iD.osmNode({id: 'n'});
+            var n1 = new iD.osmNode({id: 'n'});
             var n2 = n1.update({ tags: { yes: 'no' } });
-            var base = iD.coreGraph([n1]);
+            var base = new iD.coreGraph([n1]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(head, base);
-            expect(diff.changes()).to.eql({n: {base: n2, head: n1}});
+            expect(diff.changes()).toEqual({n: {base: n2, head: n1}});
         });
 
         it('doesn\'t include updated but identical entities', function () {
-            var n1 = iD.osmNode({id: 'n'});
+            var n1 = new iD.osmNode({id: 'n'});
             var n2 = n1.update();
-            var base = iD.coreGraph([n1]);
+            var base = new iD.coreGraph([n1]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({});
+            expect(diff.changes()).toEqual({});
         });
 
         it('includes deleted entities', function () {
-            var node = iD.osmNode({id: 'n'});
-            var base = iD.coreGraph([node]);
+            var node = new iD.osmNode({id: 'n'});
+            var base = new iD.coreGraph([node]);
             var head = base.remove(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({n: {base: node, head: undefined}});
+            expect(diff.changes()).toEqual({n: {base: node, head: undefined}});
         });
 
         it('includes undone deleted entities', function () {
-            var node = iD.osmNode({id: 'n'});
-            var base = iD.coreGraph([node]);
+            var node = new iD.osmNode({id: 'n'});
+            var base = new iD.coreGraph([node]);
             var head = base.remove(node);
             var diff = iD.coreDifference(head, base);
-            expect(diff.changes()).to.eql({n: {base: undefined, head: node}});
+            expect(diff.changes()).toEqual({n: {base: undefined, head: node}});
         });
 
         it('doesn\'t include created entities that were subsequently deleted', function () {
-            var node = iD.osmNode();
-            var base = iD.coreGraph();
+            var node = new iD.osmNode();
+            var base = new iD.coreGraph();
             var head = base.replace(node).remove(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({});
+            expect(diff.changes()).toEqual({});
         });
 
         it('doesn\'t include created entities that were subsequently reverted', function () {
-            var node = iD.osmNode({id: 'n-1'});
-            var base = iD.coreGraph();
+            var node = new iD.osmNode({id: 'n-1'});
+            var base = new iD.coreGraph();
             var head = base.replace(node).revert('n-1');
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({});
+            expect(diff.changes()).toEqual({});
         });
 
         it('doesn\'t include modified entities that were subsequently reverted', function () {
-            var n1 = iD.osmNode({id: 'n'});
+            var n1 = new iD.osmNode({id: 'n'});
             var n2 = n1.update({ tags: { yes: 'no' } });
-            var base = iD.coreGraph([n1]);
+            var base = new iD.coreGraph([n1]);
             var head = base.replace(n2).revert('n');
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({});
+            expect(diff.changes()).toEqual({});
         });
 
         it('doesn\'t include deleted entities that were subsequently reverted', function () {
-            var node = iD.osmNode({id: 'n'});
-            var base = iD.coreGraph([node]);
+            var node = new iD.osmNode({id: 'n'});
+            var base = new iD.coreGraph([node]);
             var head = base.remove(node).revert('n');
             var diff = iD.coreDifference(base, head);
-            expect(diff.changes()).to.eql({});
+            expect(diff.changes()).toEqual({});
         });
     });
 
     describe('#extantIDs', function () {
         it('includes the ids of created entities', function () {
-            var node = iD.osmNode({id: 'n'});
-            var base = iD.coreGraph();
+            var node = new iD.osmNode({id: 'n'});
+            var base = new iD.coreGraph();
             var head = base.replace(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.extantIDs()).to.eql(['n']);
+            expect(diff.extantIDs()).toEqual(['n']);
         });
 
         it('includes the ids of modified entities', function () {
-            var n1 = iD.osmNode({id: 'n'});
+            var n1 = new iD.osmNode({id: 'n'});
             var n2 = n1.move([1, 2]);
-            var base = iD.coreGraph([n1]);
+            var base = new iD.coreGraph([n1]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.extantIDs()).to.eql(['n']);
+            expect(diff.extantIDs()).toEqual(['n']);
         });
 
         it('omits the ids of deleted entities', function () {
-            var node = iD.osmNode({id: 'n'});
-            var base = iD.coreGraph([node]);
+            var node = new iD.osmNode({id: 'n'});
+            var base = new iD.coreGraph([node]);
             var head = base.remove(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.extantIDs()).to.eql([]);
+            expect(diff.extantIDs()).toEqual([]);
         });
 
         it('omits the ids of members of modified relations by default', function () {
-            var w1 = iD.osmWay({id: 'w1'});
-            var w2 = iD.osmWay({id: 'w2'});
-            var r1 = iD.osmRelation({
+            var w1 = new iD.osmWay({id: 'w1'});
+            var w2 = new iD.osmWay({id: 'w2'});
+            var r1 = new iD.osmRelation({
                 id: 'r',
                 tags: { type: 'multipolygon' },
                 members: [{role: 'outer', id: 'w1', type: 'way'}, {role: '', id: 'w2', type: 'way'}]
             });
             var r2 = r1.update({ tags: { type: 'multipolygon', landuse: 'residential' }});
-            var base = iD.coreGraph([r1, w1, w2]);
+            var base = new iD.coreGraph([r1, w1, w2]);
             var head = base.replace(r2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.extantIDs()).to.eql(['r']);
+            expect(diff.extantIDs()).toEqual(['r']);
         });
 
         it('includes the ids of members of modified relations with option', function () {
-            var w1 = iD.osmWay({id: 'w1'});
-            var w2 = iD.osmWay({id: 'w2'});
-            var r1 = iD.osmRelation({
+            var w1 = new iD.osmWay({id: 'w1'});
+            var w2 = new iD.osmWay({id: 'w2'});
+            var r1 = new iD.osmRelation({
                 id: 'r',
                 tags: { type: 'multipolygon' },
                 members: [{role: 'outer', id: 'w1', type: 'way'}, {role: '', id: 'w2', type: 'way'}]
             });
             var r2 = r1.update({ tags: { type: 'multipolygon', landuse: 'residential' }});
-            var base = iD.coreGraph([r1, w1, w2]);
+            var base = new iD.coreGraph([r1, w1, w2]);
             var head = base.replace(r2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.extantIDs(true)).to.eql(['r', 'w1', 'w2']);
+            expect(diff.extantIDs(true)).toEqual(['r', 'w1', 'w2']);
         });
     });
 
     describe('#created', function () {
         it('returns an array of created entities', function () {
-            var node = iD.osmNode({id: 'n'});
-            var base = iD.coreGraph();
+            var node = new iD.osmNode({id: 'n'});
+            var base = new iD.coreGraph();
             var head = base.replace(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.created()).to.eql([node]);
+            expect(diff.created()).toEqual([node]);
         });
     });
 
     describe('#modified', function () {
         it('returns an array of modified entities', function () {
-            var n1 = iD.osmNode({id: 'n'});
+            var n1 = new iD.osmNode({id: 'n'});
             var n2 = n1.move([1, 2]);
-            var base = iD.coreGraph([n1]);
+            var base = new iD.coreGraph([n1]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.modified()).to.eql([n2]);
+            expect(diff.modified()).toEqual([n2]);
         });
     });
 
     describe('#deleted', function () {
         it('returns an array of deleted entities', function () {
-            var node = iD.osmNode({id: 'n'});
-            var base = iD.coreGraph([node]);
+            var node = new iD.osmNode({id: 'n'});
+            var base = new iD.coreGraph([node]);
             var head = base.remove(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.deleted()).to.eql([node]);
+            expect(diff.deleted()).toEqual([node]);
         });
     });
 
     describe('#summary', function () {
-        var base = iD.coreGraph([
-            iD.osmNode({id: 'a', tags: {crossing: 'marked'}}),
-            iD.osmNode({id: 'b'}),
-            iD.osmNode({id: 'v'}),
-            iD.osmWay({id: '-', nodes: ['a', 'b']})
+        var base = new iD.coreGraph([
+            new iD.osmNode({id: 'a', tags: {crossing: 'marked'}}),
+            new iD.osmNode({id: 'b'}),
+            new iD.osmNode({id: 'v'}),
+            new iD.osmWay({id: '-', nodes: ['a', 'b']})
         ]);
 
         it('reports a created way as created', function() {
-            var way = iD.osmWay({id: '+'});
+            var way = new iD.osmWay({id: '+'});
             var head = base.replace(way);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'created',
                 entity: way,
                 graph: head
@@ -206,7 +206,7 @@ describe('iD.coreDifference', function () {
             var head = base.remove(way);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'deleted',
                 entity: way,
                 graph: base
@@ -218,7 +218,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(way);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: way,
                 graph: head
@@ -230,7 +230,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: head.entity('-'),
                 graph: head
@@ -238,12 +238,12 @@ describe('iD.coreDifference', function () {
         });
 
         it('reports a way as modified when a member vertex is added', function() {
-            var vertex = iD.osmNode({id: 'c'});
+            var vertex = new iD.osmNode({id: 'c'});
             var way = base.entity('-').addNode('c');
             var head = base.replace(vertex).replace(way);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: way,
                 graph: head
@@ -255,7 +255,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(way);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: way,
                 graph: head
@@ -264,11 +264,11 @@ describe('iD.coreDifference', function () {
 
         it('reports a created way containing a moved vertex as being created', function() {
             var vertex = base.entity('b').move([0,3]);
-            var way = iD.osmWay({id: '+', nodes: ['b']});
+            var way = new iD.osmWay({id: '+', nodes: ['b']});
             var head = base.replace(way).replace(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'created',
                 entity: way,
                 graph: head
@@ -280,12 +280,12 @@ describe('iD.coreDifference', function () {
         });
 
         it('reports a created way with a created vertex as being created', function() {
-            var vertex = iD.osmNode({id: 'c'});
-            var way = iD.osmWay({id: '+', nodes: ['c']});
+            var vertex = new iD.osmNode({id: 'c'});
+            var way = new iD.osmWay({id: '+', nodes: ['c']});
             var head = base.replace(vertex).replace(way);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'created',
                 entity: way,
                 graph: head
@@ -297,7 +297,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: vertex,
                 graph: head
@@ -309,7 +309,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: head.entity('-'),
                 graph: head
@@ -325,7 +325,7 @@ describe('iD.coreDifference', function () {
             var head = base.replace(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: head.entity('-'),
                 graph: head
@@ -337,7 +337,7 @@ describe('iD.coreDifference', function () {
             var head = base.remove(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'deleted',
                 entity: vertex,
                 graph: base
@@ -345,12 +345,12 @@ describe('iD.coreDifference', function () {
         });
 
         it('reports a vertex as created when it has tags', function() {
-            var vertex = iD.osmNode({id: 'c', tags: {crossing: 'marked'}});
+            var vertex = new iD.osmNode({id: 'c', tags: {crossing: 'marked'}});
             var way = base.entity('-').addNode('c');
             var head = base.replace(way).replace(vertex);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.summary()).to.eql([{
+            expect(diff.summary()).toEqual([{
                 changeType: 'modified',
                 entity: way,
                 graph: head
@@ -364,127 +364,127 @@ describe('iD.coreDifference', function () {
 
     describe('#complete', function () {
         it('includes created entities', function () {
-            var node = iD.osmNode({id: 'n'});
-            var base = iD.coreGraph();
+            var node = new iD.osmNode({id: 'n'});
+            var base = new iD.coreGraph();
             var head = base.replace(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.complete().n).to.equal(node);
+            expect(diff.complete().n).toEqual(node);
         });
 
         it('includes modified entities', function () {
-            var n1 = iD.osmNode({id: 'n'});
+            var n1 = new iD.osmNode({id: 'n'});
             var n2 = n1.move([1, 2]);
-            var base = iD.coreGraph([n1]);
+            var base = new iD.coreGraph([n1]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
-            expect(diff.complete().n).to.equal(n2);
+            expect(diff.complete().n).toEqual(n2);
         });
 
         it('includes deleted entities', function () {
-            var node = iD.osmNode({id: 'n'});
-            var base = iD.coreGraph([node]);
+            var node = new iD.osmNode({id: 'n'});
+            var base = new iD.coreGraph([node]);
             var head = base.remove(node);
             var diff = iD.coreDifference(base, head);
-            expect(diff.complete()).to.eql({n: undefined});
+            expect(diff.complete()).toEqual({n: undefined});
         });
 
         it('includes nodes added to a way', function () {
-            var n1 = iD.osmNode({id: 'n1'});
-            var n2 = iD.osmNode({id: 'n2'});
-            var w1 = iD.osmWay({id: 'w', nodes: ['n1']});
+            var n1 = new iD.osmNode({id: 'n1'});
+            var n2 = new iD.osmNode({id: 'n2'});
+            var w1 = new iD.osmWay({id: 'w', nodes: ['n1']});
             var w2 = w1.addNode('n2');
-            var base = iD.coreGraph([n1, n2, w1]);
+            var base = new iD.coreGraph([n1, n2, w1]);
             var head = base.replace(w2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().n2).to.equal(n2);
+            expect(diff.complete().n2).toEqual(n2);
         });
 
         it('includes nodes removed from a way', function () {
-            var n1 = iD.osmNode({id: 'n1'});
-            var n2 = iD.osmNode({id: 'n2'});
-            var w1 = iD.osmWay({id: 'w', nodes: ['n1', 'n2']});
+            var n1 = new iD.osmNode({id: 'n1'});
+            var n2 = new iD.osmNode({id: 'n2'});
+            var w1 = new iD.osmWay({id: 'w', nodes: ['n1', 'n2']});
             var w2 = w1.removeNode('n2');
-            var base = iD.coreGraph([n1, n2, w1]);
+            var base = new iD.coreGraph([n1, n2, w1]);
             var head = base.replace(w2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().n2).to.equal(n2);
+            expect(diff.complete().n2).toEqual(n2);
         });
 
         it('includes multipolygon members', function () {
-            var w1 = iD.osmWay({id: 'w1'});
-            var w2 = iD.osmWay({id: 'w2'});
-            var r1 = iD.osmRelation({
+            var w1 = new iD.osmWay({id: 'w1'});
+            var w2 = new iD.osmWay({id: 'w2'});
+            var r1 = new iD.osmRelation({
                 id: 'r',
                 tags: { type: 'multipolygon' },
                 members: [{role: 'outer', id: 'w1', type: 'way'}, {role: '', id: 'w2', type: 'way'}]
             });
             var r2 = r1.updateMember({role: 'inner', id: 'w2', type: 'way'}, 1);
-            var base = iD.coreGraph([w1, w2, r1]);
+            var base = new iD.coreGraph([w1, w2, r1]);
             var head = base.replace(r2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().w2).to.equal(w2);
+            expect(diff.complete().w2).toEqual(w2);
         });
 
         it('includes parent ways of modified nodes', function () {
-            var n1   = iD.osmNode({id: 'n'});
+            var n1   = new iD.osmNode({id: 'n'});
             var n2   = n1.move([1, 2]);
-            var way  = iD.osmWay({id: 'w', nodes: ['n']});
-            var base = iD.coreGraph([n1, way]);
+            var way  = new iD.osmWay({id: 'w', nodes: ['n']});
+            var base = new iD.coreGraph([n1, way]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().w).to.equal(way);
+            expect(diff.complete().w).toEqual(way);
         });
 
         it('includes parent relations of modified entities', function () {
-            var n1   = iD.osmNode({id: 'n'});
+            var n1   = new iD.osmNode({id: 'n'});
             var n2   = n1.move([1, 2]);
-            var rel  = iD.osmRelation({id: 'r', members: [{id: 'n'}]});
-            var base = iD.coreGraph([n1, rel]);
+            var rel  = new iD.osmRelation({id: 'r', members: [{id: 'n'}]});
+            var base = new iD.coreGraph([n1, rel]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().r).to.equal(rel);
+            expect(diff.complete().r).toEqual(rel);
         });
 
         it('includes parent relations of modified entities, recursively', function () {
-            var n1   = iD.osmNode({id: 'n'});
+            var n1   = new iD.osmNode({id: 'n'});
             var n2   = n1.move([1, 2]);
-            var rel1 = iD.osmRelation({id: 'r1', members: [{id: 'n'}]});
-            var rel2 = iD.osmRelation({id: 'r2', members: [{id: 'r1'}]});
-            var base = iD.coreGraph([n1, rel1, rel2]);
+            var rel1 = new iD.osmRelation({id: 'r1', members: [{id: 'n'}]});
+            var rel2 = new iD.osmRelation({id: 'r2', members: [{id: 'r1'}]});
+            var base = new iD.coreGraph([n1, rel1, rel2]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().r2).to.equal(rel2);
+            expect(diff.complete().r2).toEqual(rel2);
         });
 
         it('includes parent relations of parent ways of modified nodes', function () {
-            var n1   = iD.osmNode({id: 'n'});
+            var n1   = new iD.osmNode({id: 'n'});
             var n2   = n1.move([1, 2]);
-            var way  = iD.osmWay({id: 'w', nodes: ['n']});
-            var rel  = iD.osmRelation({id: 'r', members: [{id: 'w'}]});
-            var base = iD.coreGraph([n1, way, rel]);
+            var way  = new iD.osmWay({id: 'w', nodes: ['n']});
+            var rel  = new iD.osmRelation({id: 'r', members: [{id: 'w'}]});
+            var base = new iD.coreGraph([n1, way, rel]);
             var head = base.replace(n2);
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete().r).to.equal(rel);
+            expect(diff.complete().r).toEqual(rel);
         });
 
         it('copes with recursive relations', function () {
-            var node = iD.osmNode({id: 'n'});
-            var rel1 = iD.osmRelation({id: 'r1', members: [{id: 'n'}, {id: 'r2'}]});
-            var rel2 = iD.osmRelation({id: 'r2', members: [{id: 'r1'}]});
-            var base = iD.coreGraph([node, rel1, rel2]);
+            var node = new iD.osmNode({id: 'n'});
+            var rel1 = new iD.osmRelation({id: 'r1', members: [{id: 'n'}, {id: 'r2'}]});
+            var rel2 = new iD.osmRelation({id: 'r2', members: [{id: 'r1'}]});
+            var base = new iD.coreGraph([node, rel1, rel2]);
             var head = base.replace(node.move([1, 2]));
             var diff = iD.coreDifference(base, head);
 
-            expect(diff.complete()).to.be.ok;
+            expect(diff.complete()).toBeTruthy();
         });
 
-        it('limits changes to those within a given extent');
+        it.todo('limits changes to those within a given extent');
     });
 });

@@ -12,7 +12,15 @@ export function uiAccount(context) {
     if (!osm.authenticated()) {  // logged out
       render(selection, null);
     } else {
-      osm.userDetails((err, user) => render(selection, user));
+      osm.userDetails((err, user) => {
+        if (err && err.status === 401) {
+          // 401 Unauthorized
+          // cannot load own user data: there must be something wrong (e.g. API token was revoked)
+          // -> log out to allow user to reauthenticate
+          osm.logout();
+        }
+        render(selection, user);
+      });
     }
   }
 
@@ -54,7 +62,12 @@ export function uiAccount(context) {
         .on('click', e => {
           e.preventDefault();
           osm.logout();
-          tryLogout();
+          // OAuth2's idea of "logout" is just to get rid of the bearer token.
+          // If we try to "login" again, it will just grab the token again.
+          // What a user probably _really_ expects is to logout of OSM so that they can switch users.
+          // So, we open a popup with a "Logout" button. After logging out, they can login again using
+          // the same popup window.
+          osm.authenticate(undefined, { switchUser: true });
         });
 
     } else {    // no user
@@ -72,29 +85,6 @@ export function uiAccount(context) {
           osm.authenticate();
         });
     }
-  }
-
-
-  // OAuth2's idea of "logout" is just to get rid of the bearer token.
-  // If we try to "login" again, it will just grab the token again.
-  // What a user probably _really_ expects is to logout of OSM so that they can switch users.
-  function tryLogout()  {
-    if (!osm) return;
-
-    const url = osm.getUrlRoot() + '/logout?referer=%2Flogin';
-    // Create a 600x550 popup window in the center of the screen
-    const w = 600;
-    const h = 550;
-    const settings = [
-      ['width', w],
-      ['height', h],
-      ['left', window.screen.width / 2 - w / 2],
-      ['top', window.screen.height / 2 - h / 2],
-    ]
-    .map(x => x.join('='))
-    .join(',');
-
-    window.open(url, '_blank', settings);
   }
 
 

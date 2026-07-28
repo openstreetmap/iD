@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit';
 import {
     select as d3_select
 } from 'd3-selection';
@@ -116,7 +116,9 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .html(function(d) { return t.html('map_data.layers.' + d.id + '.title'); });
+            .each(function(d) {
+                d3_select(this).call(t.append('map_data.layers.' + d.id + '.title'));
+            });
 
 
         // Update
@@ -128,7 +130,7 @@ export function uiSectionDataLayers(context) {
     }
 
     function drawQAItems(selection) {
-        var qaKeys = ['keepRight', 'improveOSM', 'osmose'];
+        var qaKeys = ['osmose'];
         var qaLayers = layers.all().filter(function(obj) { return qaKeys.indexOf(obj.id) !== -1; });
 
         var ul = selection
@@ -444,7 +446,7 @@ export function uiSectionDataLayers(context) {
 
     context.map()
         .on('move.uiSectionDataLayers',
-            _debounce(function() {
+            debounce(function() {
                 // Detroit layers may have moved in or out of view
                 window.requestIdleCallback(section.reRender);
             }, 1000)

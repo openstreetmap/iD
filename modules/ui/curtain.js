@@ -56,7 +56,7 @@ export function uiCurtain(containerNode) {
      * Reveal cuts the curtain to highlight the given box,
      * and shows a tooltip with instructions next to the box.
      *
-     * @param  {String|ClientRect} [box]   box used to cut the curtain
+     * @param  {String|ClientRect|HTMLElement} [box]   box used to cut the curtain
      * @param  {String}    [text]          text for a tooltip
      * @param  {Object}    [options]
      * @param  {string}    [options.tooltipClass]    optional class to add to the tooltip
@@ -74,6 +74,8 @@ export function uiCurtain(containerNode) {
         }
         if (box && box.getBoundingClientRect) {
             box = copyBox(box.getBoundingClientRect());
+        }
+        if (box) {
             var containerRect = containerNode.getBoundingClientRect();
             box.top -= containerRect.top;
             box.left -= containerRect.left;
@@ -158,8 +160,8 @@ export function uiCurtain(containerNode) {
             }
 
             // determine tooltip placement..
-
-            if (tooltipBox.top + tooltipBox.height < 100) {
+            const onLeftOrRightEdge = tooltipBox.left + tooltipBox.width / 2 > w - 100 || tooltipBox.left + tooltipBox.width / 2 < 100;
+            if (tooltipBox.top + tooltipBox.height < 100 && !onLeftOrRightEdge) {
                 // tooltip below box..
                 side = 'bottom';
                 pos = [
@@ -167,7 +169,7 @@ export function uiCurtain(containerNode) {
                     tooltipBox.top + tooltipBox.height
                 ];
 
-            } else if (tooltipBox.top > h - 140) {
+            } else if (tooltipBox.top > h - 140 && !onLeftOrRightEdge) {
                 // tooltip above box..
                 side = 'top';
                 pos = [

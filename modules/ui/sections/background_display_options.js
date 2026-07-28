@@ -1,6 +1,7 @@
 import {
     select as d3_select
 } from 'd3-selection';
+import { clamp } from 'es-toolkit/compat';
 
 import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
@@ -26,10 +27,6 @@ export function uiSectionBackgroundDisplayOptions(context) {
         saturation: 1,
         sharpness: 1
     };
-
-    function clamp(x, min, max) {
-        return Math.max(min, Math.min(x, max));
-    }
 
     function updateValue(d, val) {
         val = clamp(val, _minVal, _maxVal);
@@ -60,7 +57,9 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('class', function(d) { return 'display-control display-control-' + d; });
 
         slidersEnter
-            .html(function(d) { return t.html('background.' + d); })
+            .each(function(d) {
+                d3_select(this).call(t.append('background.' + d));
+            })
             .append('span')
             .attr('class', function(d) { return 'display-option-value display-option-value-' + d; });
 
@@ -74,7 +73,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('type', 'range')
             .attr('min', _minVal)
             .attr('max', _maxVal)
-            .attr('step', '0.05')
+            .attr('step', '0.01')
             .on('input', function(d3_event, d) {
                 var val = d3_select(this).property('value');
                 if (!val && d3_event && d3_event.target) {

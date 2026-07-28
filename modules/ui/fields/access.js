@@ -4,6 +4,7 @@ import { select as d3_select } from 'd3-selection';
 import { uiCombobox } from '../combobox';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 import { t } from '../../core/localizer';
+import { formatTag } from './tag_title';
 
 export function uiFieldAccess(field, context) {
     var dispatch = d3_dispatch('change');
@@ -37,10 +38,13 @@ export function uiFieldAccess(field, context) {
             .attr('class', function(d) { return 'labeled-input preset-access-' + d; });
 
         enter
-            .append('span')
+            .append('div')
             .attr('class', 'label preset-label-access')
             .attr('for', function(d) { return 'preset-input-access-' + d; })
-            .html(function(d) { return field.t.html('types.' + d); });
+            .each(function(d) {
+                d3_select(this).call(
+                    field.t.append('types.' + d));
+            });
 
         enter
             .append('div')
@@ -53,7 +57,7 @@ export function uiFieldAccess(field, context) {
                 d3_select(this)
                     .call(uiCombobox(context, 'access-' + d)
                         .data(access.options(d))
-                    );
+                    , d3_select(this.parentNode.parentNode));
             });
 
 
@@ -98,15 +102,15 @@ export function uiFieldAccess(field, context) {
             options.splice(options.length - 4, 0, 'dismount');
         }
 
-        var stringsField = field.resolveReference('stringsCrossReference');
         return options.map(function(option) {
             return {
-                title: stringsField.t('options.' + option + '.description'),
+                title: formatTag(type, option),
+                description: field.hasTextForStringId('options.' + option + '.description')
+                    ? field.t('options.' + option + '.description') : undefined,
                 value: option
             };
         });
     };
-
 
     const placeholdersByTag = {
         highway: {
@@ -120,9 +124,18 @@ export function uiFieldAccess(field, context) {
                 bicycle: 'no',
                 horse: 'no'
             },
+            ladder: {
+                foot: 'yes',
+                motor_vehicle: 'no',
+                bicycle: 'no',
+                horse: 'no'
+            },
             pedestrian: {
                 foot: 'yes',
                 motor_vehicle: 'no'
+            },
+            living_street: {
+                foot: 'yes'
             },
             cycleway: {
                 motor_vehicle: 'no',
@@ -271,55 +284,67 @@ export function uiFieldAccess(field, context) {
         utilGetSetValue(items.selectAll('.preset-input-access'), function(d) {
                 return typeof tags[d] === 'string' ? tags[d] : '';
             })
-            .classed('mixed', function(d) {
-                return tags[d] && Array.isArray(tags[d]);
+            .classed('mixed', function(accessField) {
+                return tags[accessField] && Array.isArray(tags[accessField])
+                    || new Set(getAllPlaceholders(tags, accessField)).size > 1;
             })
-            .attr('title', function(d) {
-                return tags[d] && Array.isArray(tags[d]) && tags[d].filter(Boolean).join('\n');
+            .attr('title', function(accessField) {
+                return tags[accessField] && Array.isArray(tags[accessField]) && tags[accessField].filter(Boolean).join('\n');
             })
-            .attr('placeholder', function(d) {
-                if (tags[d] && Array.isArray(tags[d])) {
+            .attr('placeholder', function(accessField) {
+                let placeholders = getAllPlaceholders(tags, accessField);
+                if (new Set(placeholders).size === 1) {
+                    // all objects have the same implied access
+                    return placeholders[0];
+                } else {
                     return t('inspector.multiple_values');
                 }
-                if (d === 'bicycle' || d === 'motor_vehicle') {
-                    if (tags.vehicle && typeof tags.vehicle === 'string') {
-                        return tags.vehicle;
-                    }
+            });
+
+            function getAllPlaceholders(tags, accessField) {
+                let allTags = tags[Symbol.for('allTags')];
+                if (allTags && allTags.length > 1) {
+                    // multi selection
+                    const placeholders = [];
+                    allTags.forEach(tags => {
+                        placeholders.push(getPlaceholder(tags, accessField));
+                    });
+                    return placeholders;
+                } else {
+                    return [getPlaceholder(tags, accessField)];
                 }
-                if (tags.access && typeof tags.access === 'string') {
+            }
+
+            function getPlaceholder(tags, accessField) {
+                if (tags[accessField]) {
+                    return tags[accessField];
+                }
+                // implied access
+                // motorroad: https://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Access_restrictions
+                if (tags.motorroad === 'yes' && (accessField === 'foot' || accessField === 'bicycle' || accessField === 'horse')) {
+                    return 'no';
+                }
+                // inherited access
+                if (tags.vehicle && (accessField === 'bicycle' || accessField === 'motor_vehicle')) {
+                    return tags.vehicle;
+                }
+                if (tags.access) {
                     return tags.access;
                 }
-                function getPlaceholdersByTag(key, placeholdersByKey) {
-                    if (typeof tags[key] === 'string') {
-                        if (placeholdersByKey[tags[key]] &&
-                            placeholdersByKey[tags[key]][d]) {
-                            return placeholdersByKey[tags[key]][d];
-                        }
-                    } else {
-                        var impliedAccesses = tags[key].filter(Boolean).map(function(val) {
-                            return placeholdersByKey[val] && placeholdersByKey[val][d];
-                        }).filter(Boolean);
-
-                        if (impliedAccesses.length === tags[key].length &&
-                            new Set(impliedAccesses).size === 1) {
-                            // if all the barrier values have the same implied access for this type then use that
-                            return impliedAccesses[0];
-                        }
-                    }
-                }
+                // default access by road/barrier type
                 for (const key in placeholdersByTag) {
                     if (tags[key]) {
-                        const impliedAccess = getPlaceholdersByTag(key, placeholdersByTag[key]);
-                        if (impliedAccess) {
-                            return impliedAccess;
+                        if (placeholdersByTag[key][tags[key]] &&
+                            placeholdersByTag[key][tags[key]][accessField]) {
+                            return placeholdersByTag[key][tags[key]][accessField];
                         }
                     }
                 }
-                if (d === 'access' && !tags.barrier) {
+                if (accessField === 'access' && !tags.barrier) {
                     return 'yes';
                 }
                 return field.placeholder();
-            });
+            }
     };
 
 

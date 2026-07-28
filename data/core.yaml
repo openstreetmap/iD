@@ -8,6 +8,7 @@ en:
     copy: copy
     view_on: view on {domain}
     visit_website: visit website
+    edit_in: edit in {tool}
     favorite: favorite
     list: list
     text: text
@@ -58,6 +59,8 @@ en:
     drag_node:
       connected_to_hidden: This can't be edited because it is connected to a hidden feature.
   operations:
+    _unavailable:
+      Cannot perform “{operation}” on currently selected features.
     add:
       annotation:
         point: Added a point.
@@ -88,8 +91,8 @@ en:
     copy:
       title: Copy
       description:
-        one: Set this feature for pasting.
-        other: Set these features for pasting.
+        one: Copy this feature to paste it later.
+        other: Copy these features to paste them later.
       annotation:
         one: Copied a feature.
         other: "Copied {n} features."
@@ -499,6 +502,8 @@ en:
           one: "Split a feature."
           other: "Split {n} features."
       not_eligible: Lines can't be split at their beginning or end.
+      parent_incomplete: This line cannot be split because a parent relation isn’t fully downloaded. Download the full relation.
+      simple_roundabout: This line cannot be split because this roundabout is part of a larger relation. You must remove it from the relation first.
       connected_to_hidden: This can't be split because it is connected to a hidden feature.
     restriction:
       annotation:
@@ -594,6 +599,7 @@ en:
       offline: The OpenStreetMap API is offline. Your edits are safe locally. Please come back later.
       readonly: The OpenStreetMap API is currently read-only. You can continue editing, but must wait to save your changes.
       rateLimit: The OpenStreetMap API is limiting anonymous connections. You can fix this by logging in.
+      rateLimited: The OpenStreetMap API is limiting your connection, please wait.
       local_storage_full: You have made too many edits to back up. Consider saving your changes now.
     retry: Retry
   commit:
@@ -608,6 +614,7 @@ en:
     download_changes: Download osmChange file
     errors: Errors
     warnings: Warnings
+    suggestions: Suggestions
     modified: Modified
     deleted: Deleted
     created: Created
@@ -616,8 +623,10 @@ en:
     about_changeset_comments: About changeset comments
     about_changeset_comments_link: //wiki.openstreetmap.org/wiki/Good_changeset_comments
     changeset_comment_length_warning: "Changeset comments can have a maximum of {maxChars} characters."
-    google_warning: "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden."
-    google_warning_link: https://www.openstreetmap.org/copyright
+    changeset_incompatible_source:
+      comment: 'You mentioned "{value}" in this changeset comment.'
+      source: 'You mentioned "{value}" as a source of this changeset.'
+      link: https://www.openstreetmap.org/copyright
   contributors:
     list: "Edits by {users}"
     truncated_list:
@@ -690,7 +699,6 @@ en:
     search: Search worldwide...
     no_results_worldwide: No results found
   geolocate:
-    key: L
     title: Show My Location
     locating: "Locating, please wait..."
     location_unavailable: Your location is unavailable.
@@ -700,9 +708,9 @@ en:
       title: Zoom To Selection
       no_selection: Nothing to zoom to.
     show_more: Show More
+    last_touched: Last touched {timeago} by {user}
     view_on_osm: View on openstreetmap.org
     view_on_osmose: View on osmose.openstreetmap.fr
-    view_on_keepRight: View on keepright.at
     feature_type: Feature Type
     fields: Fields
     tags: Tags
@@ -711,7 +719,7 @@ en:
     features: Features
     title_count: "{title} ({count})"
     add_to_relation: Add to a relation
-    add_to_tag: Add a tag
+    add_tag: Add new tag
     new_relation: New relation...
     choose_relation: Choose a parent relation
     role: Role
@@ -735,6 +743,7 @@ en:
     back_tooltip: Change feature type
     remove: Remove
     search: Search
+    search_feature_type: Search feature type
     unknown: Unknown
     incomplete: <not downloaded>
     feature_list: Search features
@@ -760,6 +769,8 @@ en:
     add_fields: "Add field:"
     lock:
       suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "Tags" section.'
+    display_name_addr: "{housenumber} {streetOrPlace}"
+    display_name_addr_with_unit: "{unit}, {housenumber} {streetOrPlace}"
     display_name:
       direction: "{direction}"
       network: "{network}"
@@ -776,6 +787,22 @@ en:
       network_ref_direction: "{network} {ref} {direction}"
       network_ref_from_to: "{network} {ref} from {from} to {to}"
       network_ref_from_to_via: "{network} {ref} from {from} to {to} via {via}"
+      name_direction: "{name} {direction}"
+      network_name: "{network} {name}"
+      name_from_to: "{name} from {from} to {to}"
+      name_from_to_via: "{name} from {from} to {to} via {via}"
+      network_name_direction: "{network} {name} {direction}"
+      network_name_from_to: "{network} {name} from {from} to {to}"
+      network_name_from_to_via: "{network} {name} from {from} to {to} via {via}"
+      name: "{name}"
+      ref_name: "{ref}: {name}"
+      ref_name_direction: "{ref}: {name} {direction}"
+      ref_name_from_to: "{ref}: {name} from {from} to {to}"
+      ref_name_from_to_via: "{ref}: {name} from {from} to {to} via {via}"
+      network_ref_name: "{network} {ref}: {name}"
+      network_ref_name_direction: "{network} {ref}: {name} {direction}"
+      network_ref_name_from_to: "{network} {ref}: {name} from {from} to {to}"
+      network_ref_name_from_to_via: "{network} {ref}: {name} from {from} to {to} via {via}"
     speed_unit: "Speed unit"
     roadheight:
       # symbol for meters
@@ -786,6 +813,11 @@ en:
       inch: in
     max_length_reached: "This string is longer than the maximum length of {maxChars} characters. Anything exceeding that length will be truncated."
     set_today: "Sets the value to today."
+    set_photo_from_viewer:
+      enable: "Tag this photo ID on the currently selected map feature"
+      disable:
+        already_set: "This photo is already tagged on the selected map feature"
+        too_far: "This photo is too far away from the selected map feature"
   background:
     title: Background
     description: Background Settings
@@ -815,7 +847,7 @@ en:
       description: Show Location Panel
       tooltip: Show coordinates and regional details.
     fix_misalignment: Imagery Offset
-    offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
+    offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values."
     offset_label: "Adjust Imagery Offset"
     nudge:
       top: "nudge top"
@@ -834,12 +866,6 @@ en:
       notes:
         tooltip: Note data from OpenStreetMap
         title: OpenStreetMap Notes
-      keepRight:
-        tooltip: Data issues detected by keepright.at
-        title: KeepRight Issues
-      improveOSM:
-        tooltip: Missing data detected by improveosm.org
-        title: ImproveOSM Issues
       osmose:
         tooltip: Data issues detected by osmose.openstreetmap.fr
         title: Osmose Issues
@@ -884,10 +910,18 @@ en:
     username_filter:
       title: "Username"
       tooltip: "Show only photos by this user"
+    age_slider_filter:
+      title: "Date Range"
+      tooltip: "Shows only photos that are newer than the selected date"
+      label_all: "All photos visible."
+      label_date: "Showing photos newer than {date}."
   feature:
     points:
       description: Points
       tooltip: "Points of Interest"
+    address_points:
+      description: Address Points
+      tooltip: "Addresses Mapped as Individual Points"
     traffic_roads:
       description: Traffic Roads
       tooltip: "Highways, Streets, etc."
@@ -950,6 +984,9 @@ en:
       header: Custom Background Settings
       instructions:
         info: Enter a tile URL template below.
+        license_disclaimer: Make sure that the used background imagery is allowed to be used for mapping.
+        license_faq: Read more.
+        license_faq_url: "https://wiki.openstreetmap.org/wiki/FAQ#What_images_and_maps_may_I_use_to_make_maps_from?"
         wms:
           tokens_label: "Supported WMS tokens:"
           tokens:
@@ -1030,10 +1067,16 @@ en:
       format: "{place}{separator}{region}"
       separator: ", "
     help_html: Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.
-    help_link_text: Details
+    help_link_text: Details on how to refresh the page to see your changes.
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     view_on_osm: "View Changes on OSM"
     changeset_id: "Your changeset #: {changeset_id}"
+    supporting:
+      title: "OpenStreetMap is free to use, but not free to run"
+      details: "Its stability, quality, independence, and strength depend on donations from people like you."
+      donation:
+        title: "Support the map"
+        details: "Any donation will go directly towards keeping OpenStreetMap running."
     like_osm: "Like OpenStreetMap? Connect with others:"
     more: More
     events: Events
@@ -1082,282 +1125,14 @@ en:
       elems_title: Features
       fix_title: Fix Guidelines
       trap_title: Common Mistakes
-    improveOSM:
-      title: ImproveOSM Detection
-      geometry_types:
-        path: paths
-        parking: parking
-        road: roads
-        both: roads and parking
-      directions:
-        east: east
-        north: north
-        northeast: northeast
-        northwest: northwest
-        south: south
-        southeast: southeast
-        southwest: southwest
-        west: west
-      error_types:
-        ow:
-          title: Missing One-way
-          description: 'Along this section of {highway}, {percentage}% of {num_trips} recorded trips travel from {from_node} to {to_node}. There may be missing a "oneway" tag.'
-        mr:
-          title: Missing Geometry
-          description: '{num_trips} recorded trips in this area suggest there may be unmapped {geometry_type} here.'
-          description_alt: 'Data from a 3rd party suggests there may be unmapped {geometry_type} here.'
-        tr:
-          title: Missing Turn Restriction
-          description: '{num_passed} of {num_trips} recorded trips (travelling {travel_direction}) make a turn from {from_way} to {to_way} at {junction}. There may be a missing "{turn_restriction}" restriction.'
     keepRight:
-      title: KeepRight
       detail_description: Description
-      comment: Comment
-      comment_placeholder: Enter a comment to share with other users.
       close: Close (Issue Fixed)
       ignore: Remove (False Positive)
-      save_comment: Save Comment
-      close_comment: Close and Comment
-      ignore_comment: Remove and Comment
-      error_parts:
-        this_node: 'this node'
-        this_way: 'this way'
-        this_relation: 'this relation'
-        this_oneway: 'this oneway'
-        this_highway: 'this highway'
-        this_railway: 'this railway'
-        this_waterway: 'this waterway'
-        this_cycleway: 'this cycleway'
-        this_cycleway_footpath: 'this cycleway/footpath'
-        this_riverbank: 'this riverbank'
-        this_crossing: 'this crossing'
-        this_railway_crossing: 'this railway crossing'
-        this_bridge: 'this bridge'
-        this_tunnel: 'this tunnel'
-        this_boundary: 'this boundary'
-        this_turn_restriction: 'this turn restriction'
-        this_roundabout: 'this roundabout'
-        this_mini_roundabout: 'this mini-roundabout'
-        this_track: 'this track'
-        this_feature: 'this feature'
-        highway: 'highway'
-        railway: 'railway'
-        waterway: 'waterway'
-        cycleway: 'cycleway'
-        cycleway_footpath: 'cycleway/footpath'
-        riverbank: 'riverbank'
-        place_of_worship: 'place of worship'
-        pub: 'pub'
-        restaurant: 'restaurant'
-        school: 'school'
-        university: 'university'
-        hospital: 'hospital'
-        library: 'library'
-        theatre: 'theatre'
-        courthouse: 'courthouse'
-        bank: 'bank'
-        cinema: 'cinema'
-        pharmacy: 'pharmacy'
-        cafe: 'cafe'
-        fast_food: 'fast food'
-        fuel: 'fuel'
-        from: 'from'
-        to: 'to'
-        left_hand: 'left-hand'
-        right_hand: 'right-hand'
-      errorTypes:
-        20:
-          title: 'Multiple nodes on the same spot'
-          description: 'There is more than one node in this spot. Node IDs: {var1}.'
-        30:
-          title: 'Non-closed area'
-          description: '{var1} is tagged with "{var2}" and should be a closed loop.'
-        40:
-          title: 'Impossible oneway'
-          description: 'The first node {var1} of {var2} is not connected to any other way.'
-        41:
-          description: 'The last node {var1} of {var2} is not connected to any other way.'
-        42:
-          description: 'You cannot reach {var1} because all ways leading from it are oneway.'
-        43:
-          description: 'You cannot escape from {var1} because all ways leading to it are oneway.'
-        50:
-          title: 'Almost junction'
-          description: '{var1} is very close but not connected to way {var2}.'
-        60:
-          title: 'Deprecated tag'
-          description: '{var1} uses deprecated tag "{var2}". Please use "{var3}" instead.'
-        70:
-          title: 'Missing tag'
-          description: '{var1} has an empty tag: "{var2}".'
-        71:
-          description: '{var1} has no tags.'
-        72:
-          description: '{var1} is not member of any way and doesn''t have any tags.'
-        73:
-          description: '{var1} has a "{var2}" tag but no "highway" tag.'
-        74:
-          description: '{var1} has an empty tag: "{var2}".'
-        75:
-          description: '{var1} has a name "{var2}" but no other tags.'
-        90:
-          title: 'Motorway without ref tag'
-          description: '{var1} is tagged as a motorway and therefore needs a "ref", "nat_ref", or "int_ref" tag.'
-        100:
-          title: 'Place of worship without religion'
-          description: '{var1} is tagged as a place of worship and therefore needs a religion tag.'
-        110:
-          title: 'Point of interest without name'
-          description: '{var1} is tagged as a "{var2}" and therefore needs a name tag.'
-        120:
-          title: 'Way without nodes'
-          description: '{var1} has just one single node.'
-        130:
-          title: 'Disconnected way'
-          description: '{var1} is not connected to the rest of the map.'
-        150:
-          title: 'Railway crossing without tag'
-          description: '{var1} of a highway and a railway needs to be tagged as "railway=crossing" or "railway=level_crossing".'
-        160:
-          title: 'Railway layer conflict'
-          description: 'There are ways in different layers (e.g. tunnel or bridge) meeting at {var1}.'
-        170:
-          title: 'FIXME tagged item'
-          description: '{var1} has a FIXME tag: {var2}'
-        180:
-          title: 'Relation without type'
-          description: '{var1} is missing a "type" tag.'
-        190:
-          title: 'Intersection without junction'
-          description: '{var1} intersects the {var2} {var3} but there is no junction node, bridge, or tunnel.'
-        200:
-          title: 'Overlapping ways'
-          description: '{var1} overlaps the {var2} {var3}.'
-        210:
-          title: 'Self-intersecting way'
-          description: 'There is an unspecified issue with self intersecting ways.'
-        211:
-          description: '{var1} contains more than one node multiple times. Nodes are {var2}. This may or may not be an error.'
-        212:
-          description: '{var1} has only two different nodes and contains one of them more than once.'
-        220:
-          title: 'Misspelled tag'
-          description: '{var1} is tagged "{var2}" where "{var3}" looks like "{var4}".'
-        221:
-          description: '{var1} has a suspicious tag "{var2}".'
-        230:
-          title: 'Layer conflict'
-          description: '{var1} is a junction of ways on different layers.'
-        231:
-          description: '{var1} is a junction of ways on different layers: {var2}.'
-          layer: '(layer: {layer})'
-        232:
-          description: '{var1} is tagged with "layer={var2}". This need not be an error but it looks strange.'
-        270:
-          title: 'Unusual motorway connection'
-          description: '{var1} is a junction of a motorway and a highway other than "motorway", "motorway_link", "trunk", "rest_area", or "construction". Connection to "service" or "unclassified" is only valid if it has "access=no/private", or it leads to a motorway service area, or if it is a "service=parking_aisle".'
-        280:
-          title: 'Boundary issue'
-          description: 'There is an unspecified issue with this boundary.'
-        281:
-          title: 'Boundary missing name'
-          description: '{var1} has no name.'
-        282:
-          title: 'Boundary missing admin level'
-          description: 'The boundary of {var1} has no valid numeric admin_level. Please do not mix admin levels (e.g. "6;7"). Always tag the lowest admin_level of all boundaries.'
-        283:
-          title: 'Boundary not a closed loop'
-          description: 'The boundary of {var1} is not a closed loop.'
-        284:
-          title: 'Boundary is split'
-          description: 'The boundary of {var1} splits here.'
-        285:
-          title: 'Boundary admin_level too high'
-          description: '{var1} has "admin_level={var2}" but belongs to a relation with lower "admin_level" (e.g. higher priority); it should have the lowest "admin_level" of all relations.'
-        290:
-          title: 'Restriction issue'
-          description: 'There is an unspecified issue with this restriction.'
-        291:
-          title: 'Restriction missing type'
-          description: '{var1} has an unrecognized restriction type.'
-        292:
-          title: 'Restriction missing "from" way'
-          description: '{var1} has {var2} "from" members, but it should have 1.'
-        293:
-          title: 'Restriction missing "to" way'
-          description: '{var1} has {var2} "to" members, but it should have 1.'
-        294:
-          title: 'Restriction "from" or "to" is not a way'
-          description: '{var1} has "from" or "to" members which should be ways. {var2}.'
-        295:
-          title: 'Restriction "via" is not an endpoint'
-          description: '{var1} has a "via" (node {var2}) which is not the first or the last member of "{var3}" (way {var4}).'
-        296:
-          title: 'Unusual restriction angle'
-          description: '{var1} has a restriction type "{var2}" but the angle is {var3} degrees. Maybe the restriction type is not appropriate?'
-        297:
-          title: 'Wrong direction of "to" way'
-          description: '{var1} does not match the direction of "to" way {var2}.'
-        298:
-          title: 'Redundant restriction - oneway'
-          description: '{var1} may be redundant. Entry already prohibited by "oneway" tag on {var2}.'
-        300:
-          title: 'Missing maxspeed'
-          description: '{var1} is missing a "maxspeed" tag and is tagged as motorway, trunk, primary, or secondary.'
-        310:
-          title: 'Roundabout issue'
-          description: 'There is an unspecified issue with this roundabout.'
-        311:
-          title: 'Roundabout not closed loop'
-          description: '{var1} is part of a roundabout but is not closed-loop. (Split carriageways approaching a roundabout should not be tagged as roundabout).'
-        312:
-          title: 'Roundabout wrong direction'
-          description: 'If {var1} is in a country with {var2} traffic then its orientation goes the wrong way around.'
-        313:
-          title: 'Roundabout weakly connected'
-          description: '{var1} has only {var2} other road(s) connected. Roundabouts typically have 3 or more.'
-        320:
-          title: 'Improper link connection'
-          description: '{var1} is tagged as "{var2}" but doesn''t have a connection to any other "{var3}" or "{var4}".'
-        350:
-          title: 'Improper bridge tag'
-          description: '{var1} doesn''t have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: {var2}.'
-        360:
-          title: 'Missing local name tag'
-          description: 'It would be nice if {var1} had a local name tag "name:XX={var2}" where XX shows the language of its common name "{var2}".'
-        370:
-          title: 'Doubled places'
-          description: '{var1} has tags in common with the surrounding way {var2} {var3} and seems to be redundant.'
-          including_the_name: "(including the name {name})"
-        380:
-          title: 'Non-physical use of sport tag'
-          description: '{var1} is tagged "{var2}" but has no physical tag (e.g. "leisure", "building", "amenity", or "highway").'
-        390:
-          title: 'Missing tracktype'
-          description: '{var1} doesn''t have a "tracktype" tag.'
-        400:
-          title: 'Geometry issue'
-          description: 'There is an unspecified issue with the geometry here.'
-        401:
-          title: 'Missing turn restriction'
-          description: 'Ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning.'
-        402:
-          title: 'Impossible angle'
-          description: '{var1} bends in a very sharp angle here.'
-        410:
-          title: 'Website issue'
-          description: 'There is an unspecified issue with a contact website or URL.'
-        411:
-          description: '{var1} may have an outdated URL: {var2} returned HTTP status code {var3}.'
-        412:
-          description: '{var1} may have an outdated URL: {var2} contained suspicious text "{var3}".'
-        413:
-          description: '{var1} may have an outdated URL: {var2} did not contain keywords "{var3}".'
   streetside:
     tooltip: "Streetside photos from Microsoft"
     title: "Bing Streetside"
     report: Report a privacy concern with this image
-    view_on_bing: "View on Bing Maps"
     hires: "High resolution"
   vegbilder:
     title: "Vegbilder"
@@ -1441,6 +1216,12 @@ en:
   mapilio:
     title: Mapilio
     tooltip: "Street-level photos from Mapilio"
+  panoramax:
+    title: Panoramax
+    tooltip: "Street-level photos from Panoramax"
+    report: "Report"
+    captured_by: "Captured by {username}"
+    hd: "High resolution"
   street_side:
     minzoom_tooltip: "Zoom in to see street-side photos"
   local_photos:
@@ -1465,6 +1246,7 @@ en:
       reopened: "reopened {when}"
       commented: "commented {when}"
       closed: "closed {when}"
+      hidden: "hidden {when}"
     newComment: New Comment
     inputPlaceholder: Enter a comment to share with other users.
     close: Close Note
@@ -1491,7 +1273,7 @@ en:
       before_start: "You should be familiar with OpenStreetMap and this editor before you start editing. iD contains a walkthrough to teach you the basics of editing OpenStreetMap. Press the \"{start_the_walkthrough}\" button on this screen to start the tutorial—it takes only about 15 minutes."
       open_source_h: "Open Source"
       open_source: "The iD editor is a collaborative open source project, and you are using version {version} now. The source code is available [on GitHub](https://github.com/openstreetmap/iD)."
-      open_source_attribution: "This project includes icons from [Maki](https://github.com/mapbox/maki) (CC0), [temaki](https://github.com/ideditor/temaki) (CC0), [Fontawesome](https://github.com/FortAwesome/Font-Awesome) (CC BY 4.0) and [Map Machine](https://github.com/enzet/map-machine) (CC BY 4.0)."
+      open_source_attribution: "This project includes icons from [Maki](https://github.com/mapbox/maki) (CC0), [temaki](https://github.com/ideditor/temaki) (CC0), [Fontawesome](https://github.com/FortAwesome/Font-Awesome) (CC BY 4.0), [Röntgen](https://github.com/enzet/Roentgen) (CC BY 4.0) and [Pinhead](https://pinhead.ink/) (CC0)."
       open_source_help: "You can help iD by [translating](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating) or [reporting bugs](https://github.com/openstreetmap/iD/issues)."
     overview:
       title: Overview
@@ -1654,7 +1436,7 @@ en:
       offset_change: "Press the small triangle buttons to adjust the imagery offset in small steps, or hold the {leftclick} left mouse button and drag within the gray square to slide the imagery into alignment."
     streetlevel:
       title: Street Level Photos
-      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), and [KartaView](https://kartaview.org)."
+      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from a variety of different providers, such as [Panoramax](https://panoramax.fr), [Mapillary](https://www.mapillary.com), or [KartaView](https://kartaview.org)."
       using_h: "Using Street Level Photos"
       using: "To use street level photos for mapping, open the {data_icon} **{map_data}** panel on the side of the map to enable or disable the available photo overlays."
       photos: "When enabled, the photo overlay displays a line along the sequence of photos. At higher zoom levels, a circle marks at each photo location, and at even higher zoom levels, a cone indicates the direction the camera was facing when the photo was taken."
@@ -1671,7 +1453,7 @@ en:
       title: Quality Assurance
       intro: "*Quality Assurance* (Q/A) tools can find improper tags, disconnected roads, and other issues with OpenStreetMap, which mappers can then fix. To view existing Q/A issues, open the {data_icon} **{map_data}** panel and enable a specific Q/A layer."
       tools_h: "Tools"
-      tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) and [Osmose](https://osmose.openstreetmap.fr/)."
+      tools: "The following tools are currently supported: [Osmose](https://osmose.openstreetmap.fr/)."
       issues_h: "Handling Issues"
       issues: "Handling Q/A issues is similar to handling notes. Select a marker to view the issue details in the sidebar. Each tool has its own capabilities, but generally you can comment and/or close an issue."
     field:
@@ -1714,6 +1496,8 @@ en:
       list_title: "Errors"
     warnings:
       list_title: "Warnings"
+    suggestions:
+      list_title: "Suggestions"
     rules:
       title: Rules
     user_resolved_issues: Issues resolved by your edits
@@ -1724,7 +1508,7 @@ en:
         everything_in_view: Everything in view looks fine
         edits: Your edits look fine
         edits_in_view: Your edits in view look fine
-        no_edits: You have no edits yet
+        no_edits: You have no unsaved changes
       hidden_issues:
         none: Detected issues will appear here
         elsewhere: "Issues elsewhere: {count}"
@@ -1762,6 +1546,8 @@ en:
         reference: Intersecting highways should share a junction vertex.
     area_as_point:
       message: '{feature} should be an area, not a point'
+    area_as_line:
+      message: '{feature} should be a closed area, not a line'
     close_nodes:
       title: "Very Close Points"
       tip: "Find redundant and crowded points"
@@ -1774,6 +1560,16 @@ en:
       title: Crossing Ways
       message: "{feature} crosses {feature2}"
       tip: "Find features that incorrectly cross over one another"
+      aeroway-aeroway:
+        reference: "Crossing aeroways should be connected."
+      aeroway-building:
+        reference: "Aeroways crossing buildings should use bridges or different layers."
+      aeroway-highway:
+        reference: "Aeroways crossing railways should be connected."
+      aeroway-railway:
+        reference: "Aeroways crossing highways should be connected."
+      aeroway-waterway:
+        reference: "Aeroways crossing waterways should use tunnels."
       building-building:
         reference: "Buildings should not intersect except on different layers."
       building-highway:
@@ -1833,9 +1629,6 @@ en:
         amap: "Amap products are proprietary and must not be used as references."
         baidu: "Baidu products are proprietary and must not be used as references."
         google: "Google products are proprietary and must not be used as references."
-    incorrect_name:
-      message: '{feature} has the mistaken name "{name}"'
-      message_language: '{feature} has the mistaken name "{name}" in {language}'
     invalid_format:
       title: Invalid Formatting
       tip: Find tags with unexpected formats
@@ -1843,6 +1636,15 @@ en:
         message: '{feature} has an invalid email address'
         message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
+      website:
+        message: '{feature} has an invalid URL in {where}'
+        message_multi: '{feature} has multiple invalid URLs in {where}'
+        reference: 'URLs must start with "http://" or "https://".'
+      wikimedia_commons:
+        message: '{feature} has a suspicious Wikimedia Commons tag'
+        reference:
+          wrong_key: 'Wikimedia Commons links should preferably use the wikimedia_commons tag.'
+          wrong_value: 'Wikimedia Commons tags should only contain the file or category instead of the full URL.'
     line_as_area:
       message: '{feature} should be a line, not an area'
     line_as_point:
@@ -1867,6 +1669,15 @@ en:
         message: "{feature} has no descriptive tags"
       relation_type:
         message: "{feature} is a relation without a type"
+    mutually_exclusive_tags:
+      title: Contradictory Tags
+      tip: "Find features that have contradictory tags."
+      default:
+        message: "{feature} has both {tag1} and {tag2}"
+        reference: 'The tags "{tag1}" and "{tag2}" contradict each other. Only one tag should be set.'
+      same_value:
+        message: "{feature}: {tag1} and {tag2} have same value"
+        reference: 'The tags "{tag1}" and "{tag2}" have the same value. Only one tag should be set.'
     old_multipolygon:
       message: "{multipolygon} has misplaced tags"
       reference: "Multipolygons should be tagged on their relation, not their outer way."
@@ -1933,6 +1744,14 @@ en:
     vertex_as_point:
       message: '{feature} should be attached to a line or area based on its tags'
       reference: "Some features shouldn't be standalone points."
+    osm_api_limits:
+      title: OSM Data Limitations
+      tip: Limits and rules imposed by the OSM API on uploaded features
+      max_way_nodes:
+        message: Way has too many vertices
+        reference: "The maximum number of vertices of a way is {maxWayNodes}. Split the feature into smaller parts or otherwise reduce the number of nodes of the affected way."
+      max_changeset_elements:
+        reference: "You've edited {changesetElements} elements in this changeset, but the maximum number allowed is {maxChangesetElements}. Therefore, your edit is too large to upload. You need to export your changes as an osmChange file and use a different editor to upload it."
     fix:
       add_a_bridge:
         title: Add a bridge
@@ -1940,6 +1759,15 @@ en:
       add_a_tunnel:
         title: Add a tunnel
         annotation: Added a tunnel.
+      add_a_culvert:
+        title: Add a culvert
+        annotation: Added a culvert.
+      add_protocol_http:
+        title: Set HTTP for the URL
+        annotation: Set HTTP for the URL.
+      add_protocol_https:
+        title: Set HTTPS for the URL
+        annotation: Set HTTPS for the URL.
       address_the_concern:
         title: Address the concern
       connect_almost_junction:
@@ -1963,6 +1791,8 @@ en:
         title: Continue drawing from end
       convert_to_line:
         title: Convert this to a line
+      convert_to_area:
+        title: Convert this to an area
         annotation: Converted an area to a line.
       delete_feature:
         title: Delete this feature
@@ -1970,6 +1800,8 @@ en:
         title: Extract this point
       ignore_issue:
         title: Ignore this issue
+      ignore_suggestion:
+        title: Ignore this suggestion
       merge_close_vertices:
         annotation: Merged very close points in a way.
       merge_points:
@@ -1979,6 +1811,9 @@ en:
       move_tags:
         title: Move the tags
         annotation: Moved tags.
+      move_value_to_wikimedia_commons:
+        title: Set image as from Wikimedia Commons
+        annotation: Set image as from Wikimedia Commons.
       remove_from_relation:
         title: Remove from relation
       remove_generic_name:
@@ -1992,10 +1827,15 @@ en:
       remove_tag:
         title: Remove the tag
         annotation: Removed tag.
+      remove_named_tag:
+        title: 'Remove the "{tag}" tag'
+        annotation: 'Removed "{tag}" tag.'
       remove_tags:
         title: Remove the tags
       remove_the_name:
         title: Remove the name
+      reposition_point_to_vertex:
+        title: Move the point onto a line
       reposition_features:
         title: Reposition the features
       reverse_feature:
@@ -2008,6 +1848,8 @@ en:
         title: Set as inner
       set_as_outer:
         title: Set as outer
+      split_way:
+        title: Split the way into smaller pieces.
       square_feature:
         title: Square this feature
       tag_as_disconnected:
@@ -2021,11 +1863,13 @@ en:
         annotation: Tagged a way as having unsquare corners.
       tag_this_as_higher:
         title: Tag this as higher
+        informative_title: Tag {feature} as higher
       tag_this_as_lower:
         title: Tag this as lower
+        informative_title: Tag {feature} as lower
       upgrade_tags:
-        title: Upgrade the tags
-        annotation: Upgraded old tags.
+        title: Accept the suggested updates
+        annotation: Accepted the suggested updates
       use_different_layers:
         title: Use different layers
       use_different_layers_or_levels:
@@ -2193,11 +2037,13 @@ en:
       add_point: "They mark a specific location, and describe what's there. **Press the {point_icon} {point} button to add a new point.**"
       place_point: "To place the new point on the map, position your mouse cursor where the point should go, then {leftclick} left-click or press `{space}`. **Move the mouse pointer over this building, then left-click or press `{space}`.**"
       place_point_touch: "To place the new point on the map, {tap_icon} tap the location where it should go. **Tap the center of this building.**"
+      place_point_error: "The point should be placed inside the building area, not on its outline. Let's try again."
       search_cafe: "There are many different features that can be represented by points. The point you just added is a cafe. **Search for '{preset}'.**"
       choose_cafe: "**Choose {preset} from the list.**"
       feature_editor: "The point is now marked as a cafe. Using the feature editor, we can add more information about the cafe."
       fields_info: "In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure."
       add_name: "Let's pretend that you have local knowledge of this cafe, and you know its name. **Add a name for the cafe.**"
+      add_reminder: "All entered information should be objective and verifiable."
       add_close: "The feature editor will remember all of your changes automatically. **When you are finished adding the name, press the {button} button or `{esc}` to close the feature editor.**"
       reselect: "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Select the cafe you just created.**"
       update: "Let's fill in some more details for this cafe. You can change its name, add a cuisine, or add an address. **Change the cafe details.**"
@@ -2341,7 +2187,6 @@ en:
         pan_more: "Pan map by one screenful"
         zoom: "Zoom in / Zoom out"
         zoom_more: "Zoom in / Zoom out by a lot"
-        geolocate: "Zoom to my location"
       help:
         title: "Help"
         help: "Show help/documentation"
@@ -2363,7 +2208,7 @@ en:
         title: "Selecting features"
         select_one: "Select a single feature"
         select_multi: "Select multiple features"
-        lasso: "Draw a selection lasso around features"
+        lasso: "Draw a selection lasso to select points in an area"
         search: "Find features matching search text"
       with_selected:
         title: "With features selected"
@@ -2380,6 +2225,8 @@ en:
       way_selected:
         title: "With way selected"
         child: "Select child nodes"
+      enable:
+        streetlevel: "Toggle active street level photo layers"
     editing:
       title: "Editing"
       drawing:
@@ -2394,9 +2241,10 @@ en:
       operations:
         title: "Operations"
         continue_line: "Continue a line at the selected endpoint"
-        merge: "Combine (merge) selected features"
+        merge: "Merge selected features"
         disconnect: "Disconnect selected features"
         extract: "Extract a point from a feature"
+        extract_without_relations: "Extract a point from a feature, without extracting its relations"
         split: "Split features at the selected points"
         reverse: "Reverse selected features"
         move: "Move selected features"

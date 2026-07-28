@@ -6,10 +6,9 @@
     <link rel='stylesheet' href='dist/iD.css'>
     <link rel='icon' type='image/png' href='data:image/png;base64,iVBORw0KGgo='>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
-    <meta name='apple-mobile-web-app-capable' content='yes'/>
+    <meta name='mobile-web-app-capable' content='yes'/>
     <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'/>
     <style type='text/css'>
-      /* apply document-level styling to standalone iD only */
       html, body {
         width: 100%;
         height: 100%;
@@ -17,6 +16,12 @@
         padding: 0;
         /* disable elastic page bounce upon scroll */
         overflow: hidden;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          /* start with dark background while loading page in dark mode */
+          background-color: #212529;
+        }
       }
     </style>
   </head>

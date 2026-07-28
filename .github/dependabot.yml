@@ -1,5 +1,5 @@
 # Please see the documentation for all configuration options:
-# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+# https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference
 
 version: 2
 updates:
@@ -7,7 +7,59 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    open-pull-requests-limit: 20
+    cooldown:
+      semver-minor-days: 7
+      semver-patch-days: 7
+    groups:
+      fontawesome:
+        patterns:
+          - "@fortawesome/*"
+        applies-to: version-updates
+      types:
+        patterns:
+          - "@types/*"
+        applies-to: version-updates
+      rapideditor:
+        patterns:
+          - "@rapideditor/*"
+        applies-to: version-updates
+      turf:
+        patterns:
+          - "@turf/*"
+        applies-to: version-updates
+      eslint:
+        patterns:
+          - "@eslint/*"
+          - "eslint"
+          - "typescript-eslint"
+        applies-to: version-updates
+      cldr:
+        patterns:
+          - "cldr*"
+        applies-to: version-updates
+      vite:
+        patterns:
+          - "vite*"
+          - "@vitest/*"
+        applies-to: version-updates
+      mapbox:
+        patterns:
+          - "@mapbox/*"
+          - "pbf"
+        exclude-patterns:
+          - "@mapbox/maki"
+        applies-to: version-updates
     labels:
       - "chore-dependabot"
-    ignore:
-      - dependency-name: "sinon"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+        applies-to: version-updates
+    labels:
+      - "chore-dependabot"

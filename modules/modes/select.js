@@ -24,7 +24,8 @@ import * as Operations from '../operations/index';
 import { uiCmd } from '../ui/cmd';
 import {
     utilArrayIntersection, utilArrayUnion, utilDeepMemberSelector, utilEntityOrDeepMemberSelector,
-    utilEntitySelector, utilKeybinding, utilTotalExtent, utilGetAllNodes
+    utilEntitySelector, utilKeybinding, utilTotalExtent, utilGetAllNodes,
+    utilArrayUniq
 } from '../util';
 
 
@@ -125,6 +126,7 @@ export function modeSelect(context, selectedIDs) {
                 return [];  // selection includes non-area/non-line
             }
             var currChilds = graph.childNodes(entity).map(function(node) { return node.id; });
+            currChilds = utilArrayUniq(currChilds);
             if (!childs.length) {
                 childs = currChilds;
                 continue;
@@ -192,7 +194,6 @@ export function modeSelect(context, selectedIDs) {
     };
 
     function loadOperations() {
-
         _operations.forEach(function(operation) {
             if (operation.behavior) {
                 context.uninstall(operation.behavior);
@@ -200,29 +201,39 @@ export function modeSelect(context, selectedIDs) {
         });
 
         _operations = Object.values(Operations)
-            .map(function(o) { return o(context, selectedIDs); })
-            .filter(function(o) { return o.id !== 'delete' && o.id !== 'downgrade' && o.id !== 'copy'; })
+            .map(o => o(context, selectedIDs))
+            .filter(o => o.id !== 'delete' && o.id !== 'downgrade' && o.id !== 'copy')
             .concat([
                 // group copy/downgrade/delete operation together at the end of the list
                 Operations.operationCopy(context, selectedIDs),
                 Operations.operationDowngrade(context, selectedIDs),
                 Operations.operationDelete(context, selectedIDs)
-            ]).filter(function(operation) {
-                return operation.available();
+            ]);
+
+        _operations
+            .filter(operation => operation.available())
+            .forEach(operation => {
+                if (operation.behavior) {
+                    context.install(operation.behavior);
+                }
             });
 
-        _operations.forEach(function(operation) {
-            if (operation.behavior) {
-                context.install(operation.behavior);
-            }
-        });
+        // unavailable operations: still install keybindings
+        // to show information message about the unavailability of the operation
+        _operations
+            .filter(operation => !operation.available())
+            .forEach(operation => {
+                if (operation.behavior) {
+                    operation.behavior.on();
+                }
+            });
 
         // remove any displayed menu
         context.ui().closeEditMenu();
     }
 
     mode.operations = function() {
-        return _operations;
+        return _operations.filter(operation => operation.available());
     };
 
 
@@ -251,7 +262,10 @@ export function modeSelect(context, selectedIDs) {
         _behaviors.forEach(context.install);
 
         keybinding
-            .on(t('inspector.zoom_to.key'), mode.zoomToSelected)
+            .on(t('inspector.zoom_to.key'), (d3_event) => {
+                d3_event.preventDefault();
+                mode.zoomToSelected();
+            })
             .on(['[', 'pgup'], previousVertex)
             .on([']', 'pgdown'], nextVertex)
             .on(['{', uiCmd('⌘['), 'home'], firstVertex)
@@ -426,14 +440,14 @@ export function modeSelect(context, selectedIDs) {
                 var next = entity.nodes[choice.index];
 
                 context.perform(
-                    actionAddMidpoint({ loc: choice.loc, edge: [prev, next] }, osmNode()),
+                    actionAddMidpoint({ loc: choice.loc, edge: [prev, next] }, new osmNode()),
                     t('operations.add.annotation.vertex')
                 );
                 context.validator().validate();
 
             } else if (entity.type === 'midpoint') {
                 context.perform(
-                    actionAddMidpoint({ loc: entity.loc, edge: entity.edge }, osmNode()),
+                    actionAddMidpoint({ loc: entity.loc, edge: entity.edge }, new osmNode()),
                     t('operations.add.annotation.vertex')
                 );
                 context.validator().validate();
@@ -638,7 +652,7 @@ export function modeSelect(context, selectedIDs) {
 
         _focusedVertexIds = null;
 
-        _operations.forEach(function(operation) {
+        _operations.forEach(operation => {
             if (operation.behavior) {
                 context.uninstall(operation.behavior);
             }

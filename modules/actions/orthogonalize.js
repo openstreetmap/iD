@@ -2,7 +2,7 @@ import { actionDeleteNode } from './delete_node';
 import {
     geoVecAdd, geoVecEqual, geoVecInterp, geoVecLength, geoVecNormalize,
     geoVecProject, geoVecScale, geoVecSubtract,
-    geoOrthoNormalizedDotProduct, geoOrthoCalcScore, geoOrthoCanOrthogonalize
+    geoOrthoCalcScore, geoOrthoCanOrthogonalize, geoVecNormalizedDot
 } from '../geo';
 
 
@@ -19,7 +19,7 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
         if (t === null || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
-        var way = graph.entity(wayID);
+        let way = graph.entity(wayID);
         way = way.removeNode('');   // sanity check - remove any consecutive duplicates
 
         if (way.tags.nonsquare) {
@@ -56,9 +56,9 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
 
         if (points.length === 3) {   // move only one vertex for right triangle
             for (i = 0; i < 1000; i++) {
-                motions = points.map(calcMotion);
+                const motion = calcMotion(points[1], 1, points);
 
-                points[corner.i].coord = geoVecAdd(points[corner.i].coord, motions[corner.i]);
+                points[corner.i].coord = geoVecAdd(points[corner.i].coord, motion);
                 score = corner.dotp;
                 if (score < epsilon) {
                     break;
@@ -70,18 +70,18 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
             graph = graph.replace(node.move(geoVecInterp(node.loc, loc, t)));
 
         } else {
-            var straights = [];
-            var simplified = [];
+            const straights = [];
+            const simplified = [];
 
             // Remove points from nearly straight sections..
             // This produces a simplified shape to orthogonalize
             for (i = 0; i < points.length; i++) {
                 point = points[i];
-                var dotp = 0;
+                let dotp = 0;
                 if (isClosed || (i > 0 && i < points.length - 1)) {
-                    var a = points[(i - 1 + points.length) % points.length];
-                    var b = points[(i + 1) % points.length];
-                    dotp = Math.abs(geoOrthoNormalizedDotProduct(a.coord, b.coord, point.coord));
+                    const a = points[(i - 1 + points.length) % points.length];
+                    const b = points[(i + 1) % points.length];
+                    dotp = Math.abs(geoVecNormalizedDot(a.coord, b.coord, point.coord));
                 }
 
                 if (dotp > upperThreshold) {
@@ -213,23 +213,24 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
 
 
     action.disabled = function(graph) {
-        var way = graph.entity(wayID);
-        way = way.removeNode('');  // sanity check - remove any consecutive duplicates
+        let way = graph.entity(wayID);
+        way = way.removeNode('');   // sanity check - remove any consecutive duplicates
         graph = graph.replace(way);
 
-        var isClosed = way.isClosed();
-        var nodes = graph.childNodes(way).slice();  // shallow copy
+        let isClosed = way.isClosed();
+        let nodes = graph.childNodes(way).slice();  // shallow copy
         if (isClosed) nodes.pop();
 
-        var allowStraightAngles = false;
+        let allowStraightAngles = false;
         if (vertexID !== undefined) {
             allowStraightAngles = true;
             nodes = nodeSubset(nodes, vertexID, isClosed);
             if (nodes.length !== 3) return 'end_vertex';
+            isClosed = false; // from now on: treat these 3 ways as a line
         }
 
-        var coords = nodes.map(function(n) { return projection(n.loc); });
-        var score = geoOrthoCanOrthogonalize(coords, isClosed, epsilon, threshold, allowStraightAngles);
+        const coords = nodes.map(function(n) { return projection(n.loc); });
+        const score = geoOrthoCanOrthogonalize(coords, isClosed, epsilon, threshold, allowStraightAngles);
 
         if (score === null) {
             return 'not_squarish';

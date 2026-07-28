@@ -1,10 +1,12 @@
-/* eslint-disable no-console */
-const fs = require('fs');
-const prettyStringify = require('json-stringify-pretty-compact');
+import fs from 'node:fs';
+import { createRequire } from 'node:module';
+import prettyStringify from 'json-stringify-pretty-compact';
+
+const require = createRequire(import.meta.url);
 
 /** @type {import("geojson").FeatureCollection} */
 const sources = JSON.parse(
-  fs.readFileSync(require.resolve('editor-layer-index/imagery.geojson'), 'utf8')
+  fs.readFileSync(require.resolve('@openstreetmap/editor-layer-index/imagery.geojson'), 'utf8')
 );
 
 if (fs.existsSync('./data/manual_imagery.json')) {
@@ -77,7 +79,8 @@ const supportedWMSProjections = [
   'EPSG:102100',
   'EPSG:3785',
   // WGS 84 (Equirectangular)
-  'EPSG:4326'
+  'EPSG:4326',
+  'CRS:84'
 ];
 
 sources.features.forEach(feature => {

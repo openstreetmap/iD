@@ -154,7 +154,7 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
         var key = wayId + '_' + nodeId;
         var orig = cache.replacedVertex[key];
         if (!orig) {
-            orig = osmNode();
+            orig = new osmNode();
             cache.replacedVertex[key] = orig;
             cache.startLoc[orig.id] = cache.startLoc[nodeId];
         }
@@ -327,10 +327,12 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
             var unmovedPath = unmovedNodes.map(function(n) { return projection(n.loc); });
             var hits = geoPathIntersections(movedPath, unmovedPath);
 
-            for (var j = 0; i < hits.length; i++) {
-                if (geoVecEqual(hits[j], end)) continue;
+            if (hits.length) {
+                // snap delta back to the edge we are attached to, so we only move along the edge,
+                // not away from it since that causes intersection(s)
                 var edge = geoChooseEdge(unmovedNodes, end, projection);
                 _delta = geoVecSubtract(projection(edge.loc), start);
+                break; // any further attempts/intersections will result in the same calculation
             }
         }
     }

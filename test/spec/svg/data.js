@@ -1,7 +1,12 @@
+import { fn } from '@vitest/spy';
+import { setTimeout } from 'node:timers/promises';
+import { select as d3_select } from 'd3-selection';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
 describe('iD.svgData', function () {
     var context;
     var surface;
-    var dispatch = d3.dispatch('change');
+    var dispatch = d3_dispatch('change');
     var projection = iD.geoRawMercator()
         .translate([6934098.868981334, 4092682.5519805425])
         .scale(iD.geoZoomToScale(17))
@@ -84,7 +89,7 @@ describe('iD.svgData', function () {
 
     beforeEach(function () {
         context = iD.coreContext().assetPath('../dist/').init();
-        d3.select(document.createElement('div'))
+        d3_select(document.createElement('div'))
             .attr('class', 'main-map')
             .call(context.map().centerZoom([-74.389286, 40.1502754], 17));
 
@@ -97,7 +102,7 @@ describe('iD.svgData', function () {
         surface.call(render);
 
         var layers = surface.selectAll('g.layer-mapdata').nodes();
-        expect(layers.length).to.eql(1);
+        expect(layers.length).toEqual(1);
     });
 
     it('draws geojson', function () {
@@ -106,80 +111,74 @@ describe('iD.svgData', function () {
 
         var path;
         path = surface.selectAll('path.shadow');
-        expect(path.nodes().length).to.eql(1);
+        expect(path.nodes().length).toEqual(1);
         expect(path.attr('d')).to.match(/^M.*z$/);
         path = surface.selectAll('path.stroke');
-        expect(path.nodes().length).to.eql(1);
+        expect(path.nodes().length).toEqual(1);
         expect(path.attr('d')).to.match(/^M.*z$/);
     });
 
     describe('#fileList', function() {
-        it('handles gpx files', function (done) {
+        it('handles gpx files', async () => {
             var files = [ makeFile(gpx, 'test.gpx', 'application/gpx+xml') ];
             var render = iD.svgData(projection, context, dispatch);
-            var spy = sinon.spy();
+            const spy = fn();
             dispatch.on('change', spy);
             render.fileList(files);
 
-            window.setTimeout(function() {
-                expect(spy).to.have.been.calledOnce;
-                surface.call(render);
-                var path;
-                path = surface.selectAll('path.shadow');
-                expect(path.nodes().length).to.eql(1);
-                expect(path.attr('d')).to.match(/^M.*z$/);
-                path = surface.selectAll('path.stroke');
-                expect(path.nodes().length).to.eql(1);
-                expect(path.attr('d')).to.match(/^M.*z$/);
-                done();
-            }, 200);
+            await setTimeout(200);
+            expect(spy).toHaveBeenCalledOnce();
+            surface.call(render);
+            var path;
+            path = surface.selectAll('path.shadow');
+            expect(path.nodes().length).toEqual(1);
+            expect(path.attr('d')).to.match(/^M.*z$/);
+            path = surface.selectAll('path.stroke');
+            expect(path.nodes().length).toEqual(1);
+            expect(path.attr('d')).to.match(/^M.*z$/);
         });
 
-        it('handles kml files', function (done) {
+        it('handles kml files', async () => {
             var files = [ makeFile(kml, 'test.kml', 'application/vnd.google-earth.kml+xml') ];
             var render = iD.svgData(projection, context, dispatch);
-            var spy = sinon.spy();
+            const spy = fn();
             dispatch.on('change', spy);
             render.fileList(files);
 
-            window.setTimeout(function() {
-                expect(spy).to.have.been.calledOnce;
-                surface.call(render);
-                var path;
-                path = surface.selectAll('path.shadow');
-                expect(path.nodes().length).to.eql(1);
-                expect(path.attr('d')).to.match(/^M.*z$/);
-                path = surface.selectAll('path.stroke');
-                expect(path.nodes().length).to.eql(1);
-                expect(path.attr('d')).to.match(/^M.*z$/);
-                done();
-            }, 200);
+            await setTimeout(200);
+            expect(spy).toHaveBeenCalledOnce();
+            surface.call(render);
+            var path;
+            path = surface.selectAll('path.shadow');
+            expect(path.nodes().length).toEqual(1);
+            expect(path.attr('d')).to.match(/^M.*z$/);
+            path = surface.selectAll('path.stroke');
+            expect(path.nodes().length).toEqual(1);
+            expect(path.attr('d')).to.match(/^M.*z$/);
         });
 
-        it('handles geojson files', function (done) {
+        it('handles geojson files', async () => {
             var files = [ makeFile(geojson, 'test.geojson', 'application/vnd.geo+json') ];
             var render = iD.svgData(projection, context, dispatch);
-            var spy = sinon.spy();
+            const spy = fn();
             dispatch.on('change', spy);
             render.fileList(files);
 
-            window.setTimeout(function() {
-                expect(spy).to.have.been.calledOnce;
-                surface.call(render);
-                var path;
-                path = surface.selectAll('path.shadow');
-                expect(path.nodes().length).to.eql(1);
-                expect(path.attr('d')).to.match(/^M.*z$/);
-                path = surface.selectAll('path.stroke');
-                expect(path.nodes().length).to.eql(1);
-                expect(path.attr('d')).to.match(/^M.*z$/);
-                expect(render.geojson().features[0].properties.osm_id).to.be.a('string');
-                expect(render.geojson().features[0].properties.flag).to.be.a('string');
-                expect(render.geojson().features[0].properties.list).to.be.a('string');
-                expect(render.geojson().features[0].properties.null).to.be.a('string');
-                expect(render.geojson().features[0].properties.object).to.be.a('string');
-                done();
-            }, 200);
+            await setTimeout(200);
+            expect(spy).toHaveBeenCalledOnce();
+            surface.call(render);
+            var path;
+            path = surface.selectAll('path.shadow');
+            expect(path.nodes().length).toEqual(1);
+            expect(path.attr('d')).to.match(/^M.*z$/);
+            path = surface.selectAll('path.stroke');
+            expect(path.nodes().length).toEqual(1);
+            expect(path.attr('d')).to.match(/^M.*z$/);
+            expect(render.geojson().features[0].properties.osm_id).toBeTypeOf('string');
+            expect(render.geojson().features[0].properties.flag).toBeTypeOf('string');
+            expect(render.geojson().features[0].properties.list).toBeTypeOf('string');
+            expect(render.geojson().features[0].properties.null).toBeTypeOf('string');
+            expect(render.geojson().features[0].properties.object).toBeTypeOf('string');
         });
     });
 
@@ -190,12 +189,12 @@ describe('iD.svgData', function () {
             surface.call(render);
 
             var label = surface.selectAll('text.label');
-            expect(label.nodes().length).to.eql(1);
-            expect(label.text()).to.eql('New Jersey');
+            expect(label.nodes().length).toEqual(1);
+            expect(label.text()).toEqual('New Jersey');
 
             var halo = surface.selectAll('text.label-halo');
-            expect(halo.nodes().length).to.eql(1);
-            expect(halo.text()).to.eql('New Jersey');
+            expect(halo.nodes().length).toEqual(1);
+            expect(halo.text()).toEqual('New Jersey');
         });
 
 
@@ -203,8 +202,8 @@ describe('iD.svgData', function () {
             var render = iD.svgData(projection, context, dispatch).geojson(gj).showLabels(false);
             surface.call(render);
 
-            expect(surface.selectAll('text.label').empty()).to.be.ok;
-            expect(surface.selectAll('text.label-halo').empty()).to.be.ok;
+            expect(surface.selectAll('text.label').empty()).toBeTruthy();
+            expect(surface.selectAll('text.label-halo').empty()).toBeTruthy();
         });
     });
 

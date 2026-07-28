@@ -6,17 +6,22 @@ import {
 } from 'd3-selection';
 
 import RBush from 'rbush';
-import { t, localizer } from '../core/localizer';
+import { t } from '../core/localizer';
 
 import {
   geoExtent, geoMetersToLat, geoMetersToLon, geoPointInPolygon,
-  geoRotate, geoScaleToZoom, geoVecLength
+  geoRotate, geoVecLength
 } from '../geo';
 
-import { utilAesDecrypt, utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
+import { utilAesDecrypt, utilArrayUnion, utilRebind, utilTiler, utilUniqueDomId } from '../util';
+
+import { services } from './';
+import { searchLimited } from '../util/partition';
+import { localeTimestamp } from '../util/date';
+import { patchHash } from '../behavior';
 
 
-const streetsideApi = 'https://dev.virtualearth.net/REST/v1/Imagery/MetaData/Streetside?mapArea={bbox}&key={key}&count={count}';
+const streetsideApi = 'https://dev.virtualearth.net/REST/v1/Imagery/MetaData/Streetside?mapArea={bbox}&key={key}&count={count}&uriScheme=https';
 const maxResults = 500;
 const bubbleAppKey = utilAesDecrypt('5c875730b09c6b422433e807e1ff060b6536c791dbfffcffc4c6b18a1bdba1f14593d151adb50e19e1be1ab19aef813bf135d0f103475e5c724dec94389e45d0');
 const pannellumViewerCSS = 'pannellum/pannellum.css';
@@ -53,19 +58,6 @@ let _loadViewerPromise;
 function abortRequest(i) {
   i.abort();
 }
-
-
-/**
- * localeTimeStamp().
- */
-function localeTimestamp(s) {
-  if (!s) return null;
-  const options = { day: 'numeric', month: 'short', year: 'numeric' };
-  const d = new Date(s);
-  if (isNaN(d.getTime())) return null;
-  return d.toLocaleString(localizer.localeCode(), options);
-}
-
 
 /**
  * loadTiles() wraps the process of generating tiles and then fetching image points for each tile.
@@ -114,14 +106,18 @@ function loadNextTilePage(which, url, tile) {
       const bubbleId = bubble.imageUrl;
       if (cache.points[bubbleId]) return null;  // skip duplicates
 
-      const loc = [bubble.lon, bubble.lat];
+      // workaround for https://github.com/openstreetmap/iD/issues/10341#issuecomment-2275724738
+      const loc = [
+        bubble.lon || bubble.longitude,
+        bubble.lat || bubble.latitude
+      ];
       const d = {
+        service: 'photo',
         loc: loc,
         key: bubbleId,
-        imageUrl: bubble.imageUrl.replace('{subdomain}',
-          bubble.imageUrlSubdomains[0]
-        ),
-        ca: bubble.he,
+        imageUrl: bubble.imageUrl
+          .replace('{subdomain}', bubble.imageUrlSubdomains[0]),
+        ca: bubble.he || bubble.heading,
         captured_at: bubble.vintageEnd,
         captured_by: 'microsoft',
         pano: true,
@@ -150,13 +146,15 @@ function loadNextTilePage(which, url, tile) {
  */
 function getBubbles(url, tile, callback) {
   let rect = tile.extent.rectangle();
-  let urlForRequest = url
-    .replace('{key}', bubbleAppKey)
-    .replace('{bbox}', [rect[1], rect[0], rect[3], rect[2]].join(','))
-    .replace('{count}', maxResults);
-
     const controller = new AbortController();
-    fetch(urlForRequest, { signal: controller.signal })
+
+    bubbleAppKey
+      .then(key => url
+        .replace('{key}', key)
+        .replace('{bbox}', [rect[1], rect[0], rect[3], rect[2]].join(','))
+        .replace('{count}', maxResults)
+      )
+      .then(url => fetch(url, { signal: controller.signal }))
       .then(function(response) {
         if (!response.ok) {
           throw new Error(response.status + ' ' + response.statusText);
@@ -176,32 +174,6 @@ function getBubbles(url, tile, callback) {
       });
     return controller;
   }
-
-
-// partition viewport into higher zoom tiles
-function partitionViewport(projection) {
-  let z = geoScaleToZoom(projection.scale());
-  let z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
-  let tiler = utilTiler().zoomExtent([z2, z2]);
-
-  return tiler.getTiles(projection)
-    .map(tile => tile.extent);
-}
-
-
-// no more than `limit` results per partition.
-function searchLimited(limit, projection, rtree) {
-  limit = limit || 5;
-
-  return partitionViewport(projection)
-    .reduce((result, extent) => {
-      let found = rtree.search(extent.bbox())
-        .slice(0, limit)
-        .map(d => d.data);
-
-      return (found.length ? result.concat(found) : result);
-    }, []);
-}
 
 
 /**
@@ -502,7 +474,7 @@ export default {
 
 
     // create working canvas for stitching together images
-    wrap = wrap
+    wrap
       .merge(wrapEnter)
       .call(setupCanvas, true);
 
@@ -640,18 +612,18 @@ export default {
    * showViewer()
    */
   showViewer: function(context) {
-
-    let wrap = context.container().select('.photoviewer')
-      .classed('hide', false);
-
-    let isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
+    const wrap = context.container().select('.photoviewer');
+    const isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
 
     if (isHidden) {
+      for (const service of Object.values(services)) {
+        if (service === this) continue;
+        if (typeof service.hideViewer === 'function') {
+          service.hideViewer(context);
+        }
+      }
       wrap
-        .selectAll('.photo-wrapper:not(.ms-wrapper)')
-        .classed('hide', true);
-
-      wrap
+        .classed('hide', false)
         .selectAll('.photo-wrapper.ms-wrapper')
         .classed('hide', false);
     }
@@ -675,7 +647,7 @@ export default {
     context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
       .classed('currentView', false);
 
-    this.updateUrlImage(null);
+    patchHash({ photo: null });
 
     return this.setStyles(context, null, true);
   },
@@ -702,7 +674,7 @@ export default {
 
     if (!d) return this;
 
-    this.updateUrlImage(key);
+    patchHash({ photo: 'streetside/' + key });
 
     _sceneOptions.northOffset = d.ca;
 
@@ -777,14 +749,6 @@ export default {
     let line2 = attribution
       .append('div')
       .attr('class', 'attribution-row');
-
-    line2
-      .append('a')
-      .attr('class', 'image-view-link')
-      .attr('target', '_blank')
-      .attr('href', 'https://www.bing.com/maps?cp=' + d.loc[1] + '~' + d.loc[0] +
-        '&lvl=17&dir=' + d.ca + '&style=x&v=2&sV=1')
-      .call(t.append('streetside.view_on_bing'));
 
     line2
       .append('a')
@@ -897,19 +861,6 @@ export default {
     }
 
     return this;
-  },
-
-
-  updateUrlImage: function(imageKey) {
-      if (!window.mocha) {
-          var hash = utilStringQs(window.location.hash);
-          if (imageKey) {
-              hash.photo = 'streetside/' + imageKey;
-          } else {
-              delete hash.photo;
-          }
-          window.location.replace('#' + utilQsString(hash, true));
-      }
   },
 
 

@@ -1,91 +1,85 @@
+import { setTimeout } from 'node:timers/promises';
+import { select as d3_select } from 'd3-selection';
+import { timerFlush as d3_timerFlush } from 'd3-timer';
+
 describe('iD.uiConfirm', function () {
     var elem;
 
     beforeEach(function() {
-        elem = d3.select('body')
+        elem = d3_select('body')
             .append('div')
             .attr('class', 'confirm-wrap');
     });
 
     afterEach(function() {
-        d3.select('.confirm-wrap')
+        d3_select('.confirm-wrap')
             .remove();
     });
 
     it('can be instantiated', function () {
         var selection = iD.uiConfirm(elem);
-        expect(selection).to.be.ok;
+        expect(selection).toBeTruthy();
     });
 
     it('has a header section', function () {
         var selection = iD.uiConfirm(elem);
-        expect(selection.selectAll('div.content div.header').size()).to.equal(1);
+        expect(selection.selectAll('div.content div.header').size()).toEqual(1);
     });
 
     it('has a message section', function () {
         var selection = iD.uiConfirm(elem);
-        expect(selection.selectAll('div.content div.message-text').size()).to.equal(1);
+        expect(selection.selectAll('div.content div.message-text').size()).toEqual(1);
     });
 
     it('has a buttons section', function () {
         var selection = iD.uiConfirm(elem);
-        expect(selection.selectAll('div.content div.buttons').size()).to.equal(1);
+        expect(selection.selectAll('div.content div.buttons').size()).toEqual(1);
     });
 
     it('can have an ok button added to it', function () {
         var selection = iD.uiConfirm(elem).okButton();
-        expect(selection.selectAll('div.content div.buttons button.action').size()).to.equal(1);
+        expect(selection.selectAll('div.content div.buttons button.action').size()).toEqual(1);
     });
 
-    it('can be dismissed by calling close function', function (done) {
+    it('can be dismissed by calling close function', async () => {
         var selection = iD.uiConfirm(elem);
         selection.close();
-        window.setTimeout(function() {
-            d3.timerFlush();
-            expect(selection.node().parentNode).to.be.null;
-            done();
-        }, 275);
+        await setTimeout(275);
+        d3_timerFlush();
+        expect(selection.node().parentNode).toBeNull();
     });
 
-    it('can be dismissed by clicking the close button', function (done) {
+    it('can be dismissed by clicking the close button', async () => {
         var selection = iD.uiConfirm(elem);
-        happen.click(selection.select('button.close').node());
-        window.setTimeout(function() {
-            d3.timerFlush();
-            expect(selection.node().parentNode).to.be.null;
-            done();
-        }, 275);
+        selection.select('button.close').node().dispatchEvent(new MouseEvent('click'));
+        await setTimeout(275);
+        d3_timerFlush();
+        expect(selection.node().parentNode).toBeNull();
     });
 
-    it('can be dismissed by pressing escape', function (done) {
+    it('can be dismissed by pressing escape', async () => {
         var selection = iD.uiConfirm(elem);
-        happen.keydown(document, {keyCode: 27});
-        happen.keyup(document, {keyCode: 27});
-        window.setTimeout(function() {
-            d3.timerFlush();
-            expect(selection.node().parentNode).to.be.null;
-            done();
-        }, 275);
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+        document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
+        await setTimeout(275);
+        d3_timerFlush();
+        expect(selection.node().parentNode).toBeNull();
     });
 
-    it('can be dismissed by pressing backspace', function (done) {
+    it('can be dismissed by pressing backspace', async () => {
         var selection = iD.uiConfirm(elem);
-        happen.keydown(document, {keyCode: 8});
-        happen.keyup(document, {keyCode: 8});
-        window.setTimeout(function() {
-            d3.timerFlush();
-            expect(selection.node().parentNode).to.be.null;
-            done();
-        }, 275);
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Backspace' }));
+        document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Backspace' }));
+        await setTimeout(275);
+        d3_timerFlush();
+        expect(selection.node().parentNode).toBeNull();
     });
 
-    it('can be dismissed by clicking the ok button', function (done) {
+    it('can be dismissed by clicking the ok button', async () => {
         var selection = iD.uiConfirm(elem).okButton();
-        happen.click(selection.select('div.content div.buttons button.action').node());
-        window.setTimeout(function() {
-            d3.timerFlush();
-            expect(selection.node().parentNode).to.be.null;
-            done();
-        }, 275);
+        selection.select('div.content div.buttons button.action').node().dispatchEvent(new MouseEvent('click'));
+        await setTimeout(275);
+        d3_timerFlush();
+        expect(selection.node().parentNode).toBeNull();
     });
 });

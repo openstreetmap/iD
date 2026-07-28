@@ -1,11 +1,17 @@
+import { fn } from '@vitest/spy';
+import fetchMock from 'fetch-mock';
+import { setTimeout } from 'node:timers/promises';
+import { select as d3_select } from 'd3-selection';
+
+
 describe('iD.serviceOsmWikibase', function () {
   var wikibase;
 
-  before(function () {
+  beforeEach(function () {
     iD.services.osmWikibase = iD.serviceOsmWikibase;
   });
 
-  after(function () {
+  afterEach(function () {
     delete iD.services.osmWikibase;
   });
 
@@ -262,8 +268,8 @@ describe('iD.serviceOsmWikibase', function () {
   };
 
   describe('#getEntity', function () {
-    it('calls the given callback with the results of the getEntity data item query', function (done) {
-      var callback = sinon.spy();
+    it('calls the given callback with the results of the getEntity data item query', async () => {
+      const callback = fn();
       fetchMock.mock(/action=wbgetentities/, {
         body: JSON.stringify({
           entities: {
@@ -275,53 +281,52 @@ describe('iD.serviceOsmWikibase', function () {
         }),
         status: 200,
         headers: { 'Content-Type': 'application/json' }
-    });
+      });
 
       wikibase.getEntity({ key: 'amenity', value: 'parking', langCodes: ['fr'] }, callback);
 
-      window.setTimeout(function () {
-        expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
-          {
-            action: 'wbgetentities',
-            sites: 'wiki',
-            titles: 'Locale:fr|Key:amenity|Tag:amenity=parking',
-            languages: 'fr',
-            languagefallback: '1',
-            origin: '*',
-            format: 'json',
-          }
-        );
-        expect(callback).to.have.been.calledWith(null, {
-          key: keyData(),
-          tag: tagData()
-        });
-        done();
-      }, 50);
+      await setTimeout(50);
+      expect(parseQueryString(fetchMock.calls(/action=wbgetentities/)[0][0])).toEqual(
+        {
+          action: 'wbgetentities',
+          sites: 'wiki',
+          titles: 'Locale:fr|Key:amenity|Tag:amenity=parking',
+          languages: 'fr',
+          languagefallback: '1',
+          origin: '*',
+          format: 'json',
+        }
+      );
+      expect(callback).toHaveBeenCalledWith(null, {
+        key: keyData(),
+        tag: tagData()
+      });
+      expect(wikibase.getLocaleIDs()).toStrictEqual({ fr: 'Q7792' });
     });
   });
 
 
   it('creates correct sitelinks', function () {
-    expect(wikibase.toSitelink('amenity')).to.eql('Key:amenity');
-    expect(wikibase.toSitelink('amenity_')).to.eql('Key:amenity');
-    expect(wikibase.toSitelink('_amenity_')).to.eql('Key: amenity');
-    expect(wikibase.toSitelink('amenity or_not_')).to.eql('Key:amenity or not');
-    expect(wikibase.toSitelink('amenity', 'parking')).to.eql('Tag:amenity=parking');
-    expect(wikibase.toSitelink(' amenity_', '_parking_')).to.eql('Tag: amenity = parking');
-    expect(wikibase.toSitelink('amenity or_not', '_park ing_')).to.eql('Tag:amenity or not= park ing');
+    expect(wikibase.toSitelink('amenity')).toEqual('Key:amenity');
+    expect(wikibase.toSitelink('amenity_')).toEqual('Key:amenity');
+    expect(wikibase.toSitelink('_amenity_')).toEqual('Key: amenity');
+    expect(wikibase.toSitelink('amenity or_not_')).toEqual('Key:amenity or not');
+    expect(wikibase.toSitelink('amenity', 'parking')).toEqual('Tag:amenity=parking');
+    expect(wikibase.toSitelink(' amenity_', '_parking_')).toEqual('Tag: amenity = parking');
+    expect(wikibase.toSitelink('amenity or_not', '_park ing_')).toEqual('Tag:amenity or not= park ing');
   });
 
   it('gets correct value from entity', function () {
     wikibase.addLocale('de', 'Q6994');
     wikibase.addLocale('fr', 'Q7792');
-    expect(wikibase.claimToValue(tagData(), 'P4', 'en')).to.eql('Primary image.jpg');
-    expect(wikibase.claimToValue(keyData(), 'P6', 'en')).to.eql('Q15');
-    expect(wikibase.claimToValue(keyData(), 'P6', 'fr')).to.eql('Q15');
-    expect(wikibase.claimToValue(keyData(), 'P6', 'de')).to.eql('Q14');
+    expect(wikibase.claimToValue(tagData(), 'P4', 'en')).toEqual('Primary image.jpg');
+    expect(wikibase.claimToValue(keyData(), 'P6', 'en')).toEqual('Q15');
+    expect(wikibase.claimToValue(keyData(), 'P6', 'fr')).toEqual('Q15');
+    expect(wikibase.claimToValue(keyData(), 'P6', 'de')).toEqual('Q14');
   });
 
   it('gets monolingual value from entity as an object', function () {
-    expect(wikibase.monolingualClaimToValueObj(tagData(), 'P31')).to.eql({
+    expect(wikibase.monolingualClaimToValueObj(tagData(), 'P31')).toEqual({
       cs: 'Cs:Key:bridge:movable',
       de: 'DE:Key:bridge:movable',
       fr: 'FR:Key:bridge:movable',
@@ -331,4 +336,75 @@ describe('iD.serviceOsmWikibase', function () {
     });
   });
 
+  describe('linkifyWikiText', () => {
+    it('handles normal text', () => {
+      const main = document.createElement('main');
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText('hello'));
+
+      expect(main.innerHTML).toBe('<span>hello</span>');
+      expect(main.textContent).toBe('hello');
+    });
+
+    it('prevents XSS attacks', () => {
+      const main = document.createElement('main');
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText('123 <script>bad</script> 456'));
+
+      expect(main.innerHTML).toBe('<span>123 &lt;script&gt;bad&lt;/script&gt; 456</span>');
+      expect(main.textContent).toBe('123 <script>bad</script> 456');
+    });
+
+    it('linkifies the tag: and key: syntax', () => {
+      const main = document.createElement('main');
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText('use tag:natural=water with key:water instead'));
+
+      expect(main.innerHTML).toBe([
+        '<span>use </span>',
+        '<a href="https://wiki.openstreetmap.org/wiki/Tag:natural=water" target="_blank" rel="noreferrer"><code>natural=water</code></a>',
+        '<span> with </span>',
+        '<a href="https://wiki.openstreetmap.org/wiki/Key:water" target="_blank" rel="noreferrer"><code>water=*</code></a>',
+        '<span> instead</span>'
+      ].join(''));
+      expect(main.textContent).toBe('use natural=water with water=* instead');
+    });
+
+    it('works if the string is 100% a link', () => {
+      const main = document.createElement('main');
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText('tag:natural=water'));
+
+      expect(main.innerHTML).toBe([
+        '<a href="https://wiki.openstreetmap.org/wiki/Tag:natural=water" target="_blank" rel="noreferrer"><code>natural=water</code></a>',
+      ].join(''));
+      expect(main.textContent).toBe('natural=water');
+    });
+
+    it('works if the link is the first part of the string', () => {
+      const main = document.createElement('main');
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText('tag:craft=sailmaker is better'));
+
+      expect(main.innerHTML).toBe([
+        '<a href="https://wiki.openstreetmap.org/wiki/Tag:craft=sailmaker" target="_blank" rel="noreferrer"><code>craft=sailmaker</code></a>',
+        '<span> is better</span>'
+      ].join(''));
+      expect(main.textContent).toBe('craft=sailmaker is better');
+    });
+
+    it('works if the link is the last part of the string', () => {
+      const main = document.createElement('main');
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText('prefer tag:craft=sailmaker'));
+
+      expect(main.innerHTML).toBe([
+        '<span>prefer </span>',
+        '<a href="https://wiki.openstreetmap.org/wiki/Tag:craft=sailmaker" target="_blank" rel="noreferrer"><code>craft=sailmaker</code></a>',
+      ].join(''));
+      expect(main.textContent).toBe('prefer craft=sailmaker');
+    });
+
+    it('handles empty strings', () => {
+      const main = document.createElement('main');
+      d3_select(main).call(iD.serviceOsmWikibase.linkifyWikiText(''));
+
+      expect(main.innerHTML).toBe('');
+      expect(main.textContent).toBe('');
+    });
+  });
 });

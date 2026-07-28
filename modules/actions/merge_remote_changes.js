@@ -1,10 +1,9 @@
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 import { diff3Merge } from 'node-diff3';
-import { escape } from 'lodash';
 
 import { t } from '../core/localizer';
 import { actionDeleteMultiple } from './delete_multiple';
-import { osmEntity } from '../osm';
+import { createEntity } from '../osm';
 import { utilArrayUnion, utilArrayUniq } from '../util';
 
 
@@ -14,8 +13,8 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
     var _conflicts = [];
 
 
-    function user(d) {
-        return (typeof formatUser === 'function') ? formatUser(d) : escape(d);
+    function user(user) {
+        return (typeof formatUser === 'function') ? selection => selection.call(formatUser, user) : selection => selection.text(user);
     }
 
 
@@ -32,7 +31,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
             return target.update({loc: remote.loc});
         }
 
-        _conflicts.push(t.html('merge_remote_changes.conflict.location', { user: { html: user(remote.user) } }));
+        _conflicts.push(t.append('merge_remote_changes.conflict.location', { user: user(remote.user) } ));
         return target;
     }
 
@@ -65,7 +64,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
                 } else if (deepEqual(c.o, c.b)) {  // only changed locally
                     nodes.push.apply(nodes, c.a);
                 } else {       // changed both locally and remotely
-                    _conflicts.push(t.html('merge_remote_changes.conflict.nodelist', { user: { html: user(remote.user) } }));
+                    _conflicts.push(t.append('merge_remote_changes.conflict.nodelist', { user: user(remote.user) }));
                     break;
                 }
             }
@@ -108,18 +107,18 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
                 updates.replacements.push(remote);
 
             } else if (_option === 'force_local' && local) {
-                target = osmEntity(local);
+                target = createEntity(local);
                 if (remote) {
                     target = target.update({ version: remote.version });
                 }
                 updates.replacements.push(target);
 
             } else if (_option === 'safe' && local && remote && local.version !== remote.version) {
-                target = osmEntity(local, { version: remote.version });
+                target = createEntity(local, { version: remote.version });
                 if (remote.visible) {
                     target = mergeLocation(remote, target);
                 } else {
-                    _conflicts.push(t.html('merge_remote_changes.conflict.deleted', { user: { html: user(remote.user) } }));
+                    _conflicts.push(t.append('merge_remote_changes.conflict.deleted', { user: user(remote.user) }));
                 }
 
                 if (_conflicts.length !== ccount) break;
@@ -150,7 +149,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
             return target.update({members: remote.members});
         }
 
-        _conflicts.push(t.html('merge_remote_changes.conflict.memberlist', { user: { html: user(remote.user) } }));
+        _conflicts.push(t.append('merge_remote_changes.conflict.memberlist', { user: user(remote.user) }));
         return target;
     }
 
@@ -177,8 +176,8 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
 
             if (o[k] !== b[k] && a[k] !== b[k]) {    // changed remotely..
                 if (o[k] !== a[k]) {      // changed locally..
-                    _conflicts.push(t.html('merge_remote_changes.conflict.tags',
-                        { tag: k, local: a[k], remote: b[k], user: { html: user(remote.user) } }));
+                    _conflicts.push(t.append('merge_remote_changes.conflict.tags',
+                        { tag: k, local: a[k], remote: b[k], user: user(remote.user) }));
                 } else {                  // unchanged locally, accept remote change..
                     if (b.hasOwnProperty(k)) {
                         tags[k] = b[k];
@@ -209,7 +208,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
         var base = graph.base().entities[id];
         var local = localGraph.entity(id);
         var remote = remoteGraph.entity(id);
-        var target = osmEntity(local, { version: remote.version });
+        var target = createEntity(local, { version: remote.version });
 
         // delete/undelete
         if (!remote.visible) {
@@ -224,7 +223,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
                 return graph.replace(target);
 
             } else {
-                _conflicts.push(t.html('merge_remote_changes.conflict.deleted', { user: { html: user(remote.user) } }));
+                _conflicts.push(t.append('merge_remote_changes.conflict.deleted', { user: user(remote.user) }));
                 return graph;  // do nothing
             }
         }

@@ -1,4 +1,8 @@
 /* base styles */
+.ideditor {
+    background-color: var(--bg-color);
+}
+
 .layer-osm path {
     fill: none;
 }
@@ -32,9 +36,7 @@
 
 /* No interactivity except what we specifically allow */
 .data-layer.osm *,
-.data-layer.notes *,
-.data-layer.keepRight *,
-.data-layer.improveOSM * {
+.data-layer.notes * {
     pointer-events: none;
 }
 
@@ -259,14 +261,6 @@ text.pointlabel {
     transition: opacity 100ms linear;
 }
 
-/* Opera doesn't support dominant-baseline. See #715 */
-/* Safari 10 seems to have regressed too */
-.linelabel-halo .textpath,
-.linelabel .textpath {
-  baseline-shift: -33%;
-  dominant-baseline: auto;
-}
-
 .labels-group.halo text {
     opacity: 0.7;
     stroke: #fff;
@@ -294,12 +288,14 @@ text.point {
 
 
 /* Wikidata-tagged */
-g.point.tag-wikidata path.stroke {
+g.point.tag-wikidata path.stroke,
+g.vertex.tag-wikidata circle.stroke {
     stroke-width: 2px;
     stroke: #666;
     fill: #eee;
 }
-g.point.tag-wikidata .icon {
+g.point.tag-wikidata .icon,
+g.vertex.tag-wikidata .icon {
     color: #666;
 }
 
@@ -354,6 +350,20 @@ g.vertex.highlighted .shadow {
 .surface.tr path.shadow.related.only,
 .surface.tr g.vertex.related.only .shadow {
     stroke: #68f;
+}
+
+/* Auxiliary temporary geometries for operations, e.g. reflect axis indicator */
+g.auxiliary path.reflect-axis {
+    stroke: #7092ff;
+    stroke-width: 3;
+    stroke-dasharray: 8, 4;
+    stroke-linecap: round;
+    pointer-events: none;
+}
+g.auxiliary path.preview {
+    stroke: #ccc;
+    stroke-width: 2;
+    stroke-dasharray: 8, 4;
 }
 
 /* Visual Diffs

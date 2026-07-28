@@ -2,12 +2,14 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import Protobuf from 'pbf';
+import { PbfReader } from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
-
-import { geoExtent, geoScaleToZoom } from '../geo';
-import { utilQsString, utilRebind, utilTiler, utilStringQs } from '../util';
+import { geoExtent } from '../geo';
+import { utilRebind, utilTiler } from '../util';
+import { services } from './';
+import { searchLimited } from '../util/partition';
+import { patchHash } from '../behavior';
 
 const accessToken = 'MLY|4100327730013843|5bb78b81720791946a9a7b956c57b7cf';
 const apiUrl = 'https://graph.mapillary.com/';
@@ -30,6 +32,7 @@ let _mlyShowFeatureDetections = false;
 let _mlyShowSignDetections = false;
 let _mlyViewer;
 let _mlyViewerFilter = ['all'];
+let _isViewerOpen = false;
 
 
 // Load all data for the specified type from Mapillary vector tiles
@@ -86,7 +89,7 @@ function loadTile(which, url, tile) {
 
 // Load the data from the vector tile into cache
 function loadTileDataToCache(data, tile, which) {
-    const vectorTile = new VectorTile(new Protobuf(data));
+    const vectorTile = new VectorTile(new PbfReader(data));
     let features,
         cache,
         layer,
@@ -95,19 +98,22 @@ function loadTileDataToCache(data, tile, which) {
         loc,
         d;
 
-    if (vectorTile.layers.hasOwnProperty('image')) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, 'image')) {
         features = [];
         cache = _mlyCache.images;
         layer = vectorTile.layers.image;
 
         for (i = 0; i < layer.length; i++) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+            const unsafeId = typeof feature.properties.id === 'number' && feature.properties.id > Number.MAX_SAFE_INTEGER; // #12575
             loc = feature.geometry.coordinates;
             d = {
+                service: 'photo',
                 loc: loc,
                 captured_at: feature.properties.captured_at,
                 ca: feature.properties.compass_angle,
                 id: feature.properties.id,
+                unsafeId,
                 is_pano: feature.properties.is_pano,
                 sequence_id: feature.properties.sequence_id,
             };
@@ -121,8 +127,7 @@ function loadTileDataToCache(data, tile, which) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty('sequence')) {
-        features = [];
+    if (Object.hasOwnProperty.call(vectorTile.layers, 'sequence')) {
         cache = _mlyCache.sequences;
         layer = vectorTile.layers.sequence;
 
@@ -136,16 +141,18 @@ function loadTileDataToCache(data, tile, which) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty('point')) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, 'point')) {
         features = [];
         cache = _mlyCache[which];
         layer = vectorTile.layers.point;
 
         for (i = 0; i < layer.length; i++) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+            if (typeof feature.properties.id === 'number' && feature.properties.id > Number.MAX_SAFE_INTEGER) continue; // skip unsafe ids #12575
             loc = feature.geometry.coordinates;
 
             d = {
+                service: 'photo',
                 loc: loc,
                 id: feature.properties.id,
                 first_seen_at: feature.properties.first_seen_at,
@@ -161,16 +168,18 @@ function loadTileDataToCache(data, tile, which) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty('traffic_sign')) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, 'traffic_sign')) {
         features = [];
         cache = _mlyCache[which];
         layer = vectorTile.layers.traffic_sign;
 
         for (i = 0; i < layer.length; i++) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+            if (typeof feature.properties.id === 'number' && feature.properties.id > Number.MAX_SAFE_INTEGER) continue; // skip unsafe ids #12575
             loc = feature.geometry.coordinates;
 
             d = {
+                service: 'photo',
                 loc: loc,
                 id: feature.properties.id,
                 first_seen_at: feature.properties.first_seen_at,
@@ -204,33 +213,6 @@ function loadData(url) {
             return result.data || [];
         });
 }
-
-
-// Partition viewport into higher zoom tiles
-function partitionViewport(projection) {
-    const z = geoScaleToZoom(projection.scale());
-    const z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
-    const tiler = utilTiler().zoomExtent([z2, z2]);
-
-    return tiler.getTiles(projection)
-        .map(function(tile) { return tile.extent; });
-}
-
-
-// Return no more than `limit` results per partition.
-function searchLimited(limit, projection, rtree) {
-    limit = limit || 5;
-
-    return partitionViewport(projection)
-        .reduce(function(result, extent) {
-            const found = rtree.search(extent.bbox())
-                .slice(0, limit)
-                .map(function(d) { return d.data; });
-
-            return (found.length ? result.concat(found) : result);
-        }, []);
-}
-
 
 export default {
     // Initialize Mapillary
@@ -461,23 +443,25 @@ export default {
 
     // Make the image viewer visible
     showViewer: function(context) {
-        const wrap = context.container().select('.photoviewer')
-            .classed('hide', false);
-
+        const wrap = context.container().select('.photoviewer');
         const isHidden = wrap.selectAll('.photo-wrapper.mly-wrapper.hide').size();
 
         if (isHidden && _mlyViewer) {
-            wrap
-                .selectAll('.photo-wrapper:not(.mly-wrapper)')
-                .classed('hide', true);
+            for (const service of Object.values(services)) {
+                if (service === this) continue;
+                if (typeof service.hideViewer === 'function') {
+                    service.hideViewer(context);
+                }
+            }
 
-            wrap
+            wrap.classed('hide', false)
                 .selectAll('.photo-wrapper.mly-wrapper')
                 .classed('hide', false);
 
             _mlyViewer.resize();
         }
 
+        _isViewerOpen = true;
         return this;
     },
 
@@ -498,27 +482,21 @@ export default {
             .selectAll('.photo-wrapper')
             .classed('hide', true);
 
-        this.updateUrlImage(null);
+        patchHash({ photo: null });
 
         dispatch.call('imageChanged');
         dispatch.call('loadedMapFeatures');
         dispatch.call('loadedSigns');
 
+        _isViewerOpen = false;
+
         return this.setStyles(context, null);
     },
 
 
-    // Update the URL with current image id
-    updateUrlImage: function(imageId) {
-        if (!window.mocha) {
-            const hash = utilStringQs(window.location.hash);
-            if (imageId) {
-                hash.photo = 'mapillary/' + imageId;
-            } else {
-                delete hash.photo;
-            }
-            window.location.replace('#' + utilQsString(hash, true));
-        }
+    // Get viewer status
+    isViewerOpen: function() {
+            return _isViewerOpen;
     },
 
 
@@ -534,7 +512,6 @@ export default {
 
     // Initialize image viewer (Mapillar JS)
     initViewer: function(context) {
-        const that = this;
         if (!window.mapillary) return;
 
         const opts = {
@@ -564,7 +541,7 @@ export default {
         }
 
         _mlyViewer = new mapillary.Viewer(opts);
-        _mlyViewer.on('image', imageChanged);
+        _mlyViewer.on('image', imageChanged.bind(this));
         _mlyViewer.on('bearing', bearingChanged);
 
         if (_mlyViewerFilter) {
@@ -577,17 +554,17 @@ export default {
         });
 
         // imageChanged: called after the viewer has changed images and is ready.
-        function imageChanged(node) {
-            that.resetTags();
-            const image = node.image;
-            that.setActiveImage(image);
-            that.setStyles(context, null);
+        function imageChanged(photo) {
+            this.resetTags();
+            const image = photo.image;
+            this.setActiveImage(image);
+            this.setStyles(context, null);
             const loc = [image.originalLngLat.lng, image.originalLngLat.lat];
             context.map().centerEase(loc);
-            that.updateUrlImage(image.id);
+            patchHash({ photo: 'mapillary/' + image.id });
 
             if (_mlyShowFeatureDetections || _mlyShowSignDetections) {
-                that.updateDetections(image.id, `${apiUrl}/${image.id}/detections?access_token=${accessToken}&fields=id,image,geometry,value`);
+                this.updateDetections(image.id, `${apiUrl}/${image.id}/detections?access_token=${accessToken}&fields=id,image,geometry,value`);
             }
             dispatch.call('imageChanged');
         }
@@ -601,11 +578,28 @@ export default {
 
 
     // Move to an image
-    selectImage: function(context, imageId) {
-        if (_mlyViewer && imageId) {
-            _mlyViewer.moveTo(imageId)
+    selectImage: function(image) {
+        if (!_mlyViewer || !image.id) return this;
+
+        if (!image.unsafeId) {
+            _mlyViewer.moveTo(image.id)
+                .then(image => this.setActiveImage(image))
                 .catch(function(e) {
                     console.error('mly3', e); // eslint-disable-line no-console
+                });
+        } else {
+            fetch(`https://graph.mapillary.com/image_ids?sequence_id=${image.sequence_id}`, { headers: { 'Authorization': `OAuth ${accessToken}` } })
+                .then(response => response.json())
+                .then(result => {
+                    const correctedId = result.data.map(d => d.id).find(id =>
+                        id.startsWith(`${image.id}`.substring(0, 10)));
+                    if (!correctedId) {
+                        console.error('unable to determine corrected photo id for'); // eslint-disable-line no-console
+                    } else {
+                        image.id = correctedId;
+                        image.unsafeId = false;
+                        this.selectImage(image);
+                    };
                 });
         }
 
@@ -723,7 +717,7 @@ export default {
             for (var i = 0; i < decodedGeometry.length; i++) {
                 uintArray[i] = decodedGeometry.charCodeAt(i);
             }
-            const tile = new VectorTile(new Protobuf(uintArray.buffer));
+            const tile = new VectorTile(new PbfReader(uintArray.buffer));
             const layer = tile.layers['mpy-or'];
 
             const geometries = layer.feature(0).loadGeometry();

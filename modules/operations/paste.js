@@ -1,11 +1,10 @@
-
 import { actionCopyEntities } from '../actions/copy_entities';
 import { actionMove } from '../actions/move';
 import { modeSelect } from '../modes/select';
 import { geoExtent, geoVecSubtract } from '../geo';
 import { t } from '../core/localizer';
 import { uiCmd } from '../ui/cmd';
-import { utilDisplayLabel } from '../util/util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 
 // see also `behaviorPaste`
 export function operationPaste(context) {
@@ -78,7 +77,10 @@ export function operationPaste(context) {
         if (!ids.length) {
             return t.append('operations.paste.nothing_copied');
         }
-        return t.append('operations.paste.description', { feature: utilDisplayLabel(oldGraph.entity(ids[0]), oldGraph), n: ids.length });
+        return t.append('operations.paste.description', {
+            feature: utilDisplayLabel(oldGraph.entity(ids[0]), oldGraph),
+            n: ids.length
+        });
     };
 
     operation.annotation = function() {

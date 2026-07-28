@@ -123,6 +123,7 @@ export function uiInfo(context) {
 
         context.keybinding()
             .on(uiCmd('⌘' + t('info_panels.key')), function(d3_event) {
+                if (d3_event.shiftKey) return;
                 d3_event.stopImmediatePropagation();
                 d3_event.preventDefault();
                 info.toggle();

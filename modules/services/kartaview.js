@@ -4,9 +4,12 @@ import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import RBush from 'rbush';
 
-import { localizer } from '../core/localizer';
 import { geoExtent, geoScaleToZoom } from '../geo';
-import { utilArrayUnion, utilQsString, utilRebind, utilSetTransform, utilStringQs, utilTiler } from '../util';
+import { utilQsString, utilRebind, utilSetTransform, utilTiler } from '../util';
+import { services } from './';
+import { searchLimited } from '../util/partition';
+import { localeDateString } from '../util/date';
+import { patchHash } from '../behavior';
 
 
 var apibase = 'https://kartaview.org';
@@ -100,12 +103,13 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
                 if (which === 'images') {
                     d = {
+                        service: 'photo',
                         loc: loc,
                         key: item.id,
                         ca: +item.heading,
                         captured_at: (item.shot_date || item.date_added),
                         captured_by: item.username,
-                        imagePath: item.lth_name,
+                        imagePath: item.name,
                         sequence_id: item.sequence_id,
                         sequence_index: +item.sequence_index
                     };
@@ -144,33 +148,6 @@ function loadNextTilePage(which, currZoom, url, tile) {
         });
 }
 
-
-// partition viewport into higher zoom tiles
-function partitionViewport(projection) {
-    var z = geoScaleToZoom(projection.scale());
-    var z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
-    var tiler = utilTiler().zoomExtent([z2, z2]);
-
-    return tiler.getTiles(projection)
-        .map(function(tile) { return tile.extent; });
-}
-
-
-// no more than `limit` results per partition.
-function searchLimited(limit, projection, rtree) {
-    limit = limit || 5;
-
-    return partitionViewport(projection)
-        .reduce(function(result, extent) {
-            var found = rtree.search(extent.bbox())
-                .slice(0, limit)
-                .map(function(d) { return d.data; });
-
-            return (found.length ? result.concat(found) : result);
-        }, []);
-}
-
-
 export default {
 
     init: function() {
@@ -190,8 +167,6 @@ export default {
             images: { inflight: {}, loaded: {}, nextPage: {}, rtree: new RBush(), forImageKey: {} },
             sequences: {}
         };
-
-        _oscSelectedImage = null;
     },
 
 
@@ -367,17 +342,17 @@ export default {
 
 
     showViewer: function(context) {
-        var viewer = context.container().select('.photoviewer')
-            .classed('hide', false);
-
-        var isHidden = viewer.selectAll('.photo-wrapper.kartaview-wrapper.hide').size();
+        const wrap = context.container().select('.photoviewer');
+        const isHidden = wrap.selectAll('.photo-wrapper.kartaview-wrapper.hide').size();
 
         if (isHidden) {
-            viewer
-                .selectAll('.photo-wrapper:not(.kartaview-wrapper)')
-                .classed('hide', true);
-
-            viewer
+            for (const service of Object.values(services)) {
+                if (service === this) continue;
+                if (typeof service.hideViewer === 'function') {
+                    service.hideViewer(context);
+                }
+            }
+            wrap.classed('hide', false)
                 .selectAll('.photo-wrapper.kartaview-wrapper')
                 .classed('hide', false);
         }
@@ -389,7 +364,7 @@ export default {
     hideViewer: function(context) {
         _oscSelectedImage = null;
 
-        this.updateUrlImage(null);
+        patchHash({ photo: null });
 
         var viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
@@ -412,7 +387,7 @@ export default {
 
         _oscSelectedImage = d;
 
-        this.updateUrlImage(imageKey);
+        patchHash({ photo: 'kartaview/' + imageKey });
 
         var viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
@@ -444,7 +419,7 @@ export default {
             imageWrap
                 .append('img')
                 .attr('class', 'kartaview-image')
-                .attr('src', apibase + '/' + d.imagePath)
+                .attr('src', (apibase + '/' + d.imagePath).replace(/^https:\/\/kartaview\.org\/storage(\d+)\//, 'https://storage$1.openstreetcam.org/'))
                 .style('transform', 'rotate(' + r + 'deg)');
 
             if (d.captured_by) {
@@ -480,15 +455,6 @@ export default {
         }
 
         return this;
-
-
-        function localeDateString(s) {
-            if (!s) return null;
-            var options = { day: 'numeric', month: 'short', year: 'numeric' };
-            var d = new Date(s);
-            if (isNaN(d.getTime())) return null;
-            return d.toLocaleDateString(localizer.localeCode(), options);
-        }
     },
 
 
@@ -517,29 +483,23 @@ export default {
                 .classed('currentView', false);
         }
 
-        var hoveredImageKey = hovered && hovered.key;
-        var hoveredSequenceKey = this.getSequenceKeyForImage(hovered);
-        var hoveredSequence = hoveredSequenceKey && _oscCache.sequences[hoveredSequenceKey];
-        var hoveredImageKeys = (hoveredSequence && hoveredSequence.images.map(function (d) { return d.key; })) || [];
+        var hoveredImageId = hovered && hovered.key;
+        var hoveredSequenceId = this.getSequenceKeyForImage(hovered);
 
         var viewer = context.container().select('.photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
-        var selectedImageKey = selected && selected.key;
-        var selectedSequenceKey = this.getSequenceKeyForImage(selected);
-        var selectedSequence = selectedSequenceKey && _oscCache.sequences[selectedSequenceKey];
-        var selectedImageKeys = (selectedSequence && selectedSequence.images.map(function (d) { return d.key; })) || [];
+        var selectedImageId = selected && selected.key;
+        var selectedSequenceId = this.getSequenceKeyForImage(selected);
 
         // highlight sibling viewfields on either the selected or the hovered sequences
-        var highlightedImageKeys = utilArrayUnion(hoveredImageKeys, selectedImageKeys);
-
         context.container().selectAll('.layer-kartaview .viewfield-group')
-            .classed('highlighted', function(d) { return highlightedImageKeys.indexOf(d.key) !== -1; })
-            .classed('hovered', function(d) { return d.key === hoveredImageKey; })
-            .classed('currentView', function(d) { return d.key === selectedImageKey; });
+            .classed('highlighted', function(d) { return d.sequence_id === selectedSequenceId || d.id === hoveredImageId; })
+            .classed('hovered', function(d) { return d.key === hoveredImageId; })
+            .classed('currentView', function(d) { return d.key === selectedImageId; });
 
         context.container().selectAll('.layer-kartaview .sequence')
-            .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceKey; })
-            .classed('currentView', function(d) { return d.properties.key === selectedSequenceKey; });
+            .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceId; })
+            .classed('currentView', function(d) { return d.properties.key === selectedSequenceId; });
 
         // update viewfields if needed
         context.container().selectAll('.layer-kartaview .viewfield-group .viewfield')
@@ -547,7 +507,7 @@ export default {
 
         function viewfieldPath() {
             var d = this.parentNode.__data__;
-            if (d.pano && d.key !== selectedImageKey) {
+            if (d.pano && d.key !== selectedImageId) {
                 return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
                 return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
@@ -555,19 +515,6 @@ export default {
         }
 
         return this;
-    },
-
-
-    updateUrlImage: function(imageKey) {
-        if (!window.mocha) {
-            var hash = utilStringQs(window.location.hash);
-            if (imageKey) {
-                hash.photo = 'kartaview/' + imageKey;
-            } else {
-                delete hash.photo;
-            }
-            window.location.replace('#' + utilQsString(hash, true));
-        }
     },
 
 

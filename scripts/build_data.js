@@ -1,24 +1,25 @@
 /* eslint-disable no-console */
-const chalk = require('chalk');
-const fs = require('fs');
-const prettyStringify = require('json-stringify-pretty-compact');
-const shell = require('shelljs');
-const YAML = require('js-yaml');
-const fetch = require('node-fetch');
-const lodash = require('lodash');
-
-const languageNames = require('./language_names.js');
+import fs from 'node:fs';
+import { styleText } from 'node:util';
+import prettyStringify from 'json-stringify-pretty-compact';
+import shell from 'shelljs';
+import { load as loadYaml } from 'js-yaml';
+import { pull } from 'es-toolkit/compat';
+import dotenv from 'dotenv';
+import cldrTerritoryInfo from 'cldr-core/supplemental/territoryInfo.json' with { type: 'json' };
+import packageJson from '../package.json' with { type: 'json' };
+import * as languageNames from './language_names.js';
 
 // fontawesome icons
-const fontawesome = require('@fortawesome/fontawesome-svg-core');
-const fas = require('@fortawesome/free-solid-svg-icons').fas;
-const far = require('@fortawesome/free-regular-svg-icons').far;
-const fab = require('@fortawesome/free-brands-svg-icons').fab;
+import * as fontawesome from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 fontawesome.library.add(fas, far, fab);
 
-const dotenv = require('dotenv');
-dotenv.config();
-const presetsVersion = require('../package.json').devDependencies['@openstreetmap/id-tagging-schema'];
+dotenv.config({ quiet: true });
+
+const presetsVersion = packageJson.devDependencies['@openstreetmap/id-tagging-schema'];
 /* eslint-disable no-process-env */
 const presetsUrl = (process.env.ID_PRESETS_CDN_URL || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}').replace('{presets_version}', presetsVersion);
 /* eslint-enable no-process-env */
@@ -29,16 +30,14 @@ let _currBuild = null;
 // if called directly, do the thing.
 if (process.argv[1].indexOf('build_data.js') > -1) {
   buildData();
-} else {
-  module.exports = buildData;
 }
 
 
 function buildData() {
   if (_currBuild) return _currBuild;
 
-  const START = '🏗   ' + chalk.yellow('Building data...');
-  const END = '👍  ' + chalk.green('data built');
+  const START = '🏗   ' + styleText('yellow', 'Building data...');
+  const END = '👍  ' + styleText('green', 'data built');
 
   console.log('');
   console.log(START);
@@ -72,7 +71,8 @@ function buildData() {
     'fas-th-list',
     'fas-user-cog',
     'fas-calendar-days',
-    'fas-rotate'
+    'fas-rotate',
+    'fas-eye-dropper'
   ]);
   // add icons for QA integrations
   readQAIssueIcons(faIcons);
@@ -91,7 +91,6 @@ function buildData() {
     minifyJSON('data/address_formats.json', 'dist/data/address_formats.min.json'),
     minifyJSON('data/imagery.json', 'dist/data/imagery.min.json'),
     minifyJSON('data/intro_graph.json', 'dist/data/intro_graph.min.json'),
-    minifyJSON('data/keepRight.json', 'dist/data/keepRight.min.json'),
     minifyJSON('data/languages.json', 'dist/data/languages.min.json'),
     minifyJSON('data/phone_formats.json', 'dist/data/phone_formats.min.json'),
     minifyJSON('data/qa_data.json', 'dist/data/qa_data.min.json'),
@@ -101,12 +100,7 @@ function buildData() {
       // Fetch the icons that are needed by the expected tagging schema version
       fetchOrRequire(`${presetsUrl}/dist/presets.min.json`),
       fetchOrRequire(`${presetsUrl}/dist/preset_categories.min.json`),
-      fetchOrRequire(`${presetsUrl}/dist/fields.min.json`),
-      // WARNING: we fetch the bleeding edge data too to make sure we're always hosting the
-      // latest icons, but note that the format could break at any time
-      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/presets.min.json'),
-      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/preset_categories.min.json'),
-      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/fields.min.json')
+      fetchOrRequire(`${presetsUrl}/dist/fields.min.json`)
     ])
     .then(responses => Promise.all(responses.map(response => response.json())))
     .then((results) => {
@@ -119,10 +113,20 @@ function buildData() {
             faIcons.add(datum.icon);
           }
           if (datum.icons) {
-            Object.values(datum.icons).filter(icon => /^fa[srb]-/.test(icon)).forEach(faIcons.add);
+            Object.values(datum.icons)
+              .filter(icon => /^fa[srb]-/.test(icon))
+              .forEach(icon => faIcons.add(icon));
           }
         }
       });
+    }).then(() =>
+      // also fetch the bleeding edge data too to make sure we're always hosting the latest icons
+      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/interim/icons.json')
+    ).then(response => response.json()).then(cuttingEdgeIcons => {
+      cuttingEdgeIcons
+        .filter(icon => /^fa[srb]-/.test(icon))
+        .forEach(icon => faIcons.add(icon));
+    }).then(() => {
       // copy over only those Font Awesome icons that we need
       writeFaIcons(faIcons);
     })
@@ -161,7 +165,7 @@ function readQAIssueIcons(faIcons) {
 
 
 function generateTerritoryLanguages() {
-  let allRawInfo = require('cldr-core/supplemental/territoryInfo.json').supplemental.territoryInfo;
+  const allRawInfo = cldrTerritoryInfo.supplemental.territoryInfo;
   let territoryLanguages = {};
 
   Object.keys(allRawInfo).forEach(territoryCode => {
@@ -181,8 +185,13 @@ function generateTerritoryLanguages() {
 
   // override/adjust some territory languages which are not included in CLDR data
   territoryLanguages.pk.push('pnb', 'scl', 'trw', 'kls'); // https://github.com/openstreetmap/iD/pull/9242
-  lodash.pull(territoryLanguages.pk, 'pa-Arab', 'lah', 'tg-Arab'); // - " -
-  territoryLanguages.it.push('lld'); // https://en.wikipedia.org/wiki/Ladin_language
+  pull(territoryLanguages.pk, 'pa-Arab', 'lah', 'tg-Arab'); // - " -
+  territoryLanguages.au = [
+     'en', 'aus', 'aer', 'aoi', 'bdy', 'coa', 'dgw', 'gjm', 'gjr', 'gup',
+    'jay', 'mwf', 'mwp', 'nys', 'pih', 'piu', 'pjt', 'rop', 'tcs', 'tiw',
+    'ulk', 'wbp', 'wrh', 'wth', 'wyi', 'xdk', 'xni', 'xph', 'xrd', 'zku'
+  ]; // https://github.com/openstreetmap/iD/pull/10684
+  territoryLanguages.nz.push('rrm'); // https://github.com/openstreetmap/iD/pull/10684
 
   return territoryLanguages;
 }
@@ -190,15 +199,15 @@ function generateTerritoryLanguages() {
 
 function writeEnJson() {
   const readCoreYaml = fs.readFileSync('data/core.yaml', 'utf8');
-  const readImagery = fs.readFileSync('node_modules/editor-layer-index/i18n/en.yaml', 'utf8');
+  const readImagery = fs.readFileSync('node_modules/@openstreetmap/editor-layer-index/i18n/en.yaml', 'utf8');
   const readCommunity = fs.readFileSync('node_modules/osm-community-index/i18n/en.yaml', 'utf8');
   const readManualImagery = fs.readFileSync('data/manual_imagery.json', 'utf8');
 
   return Promise.all([readCoreYaml, readImagery, readCommunity, readManualImagery])
     .then(data => {
-      let core = YAML.load(data[0]);
-      let imagery = YAML.load(data[1]);
-      let community = YAML.load(data[2]);
+      let core = loadYaml(data[0]);
+      let imagery = loadYaml(data[1]);
+      let community = loadYaml(data[2]);
       let manualImagery = JSON.parse(data[3]);
 
       for (let i in manualImagery) {
@@ -244,7 +253,10 @@ function writeFaIcons(faIcons) {
     const name = key.substring(4);
     const def = fontawesome.findIconDefinition({ prefix: prefix, iconName: name });
     try {
-      fs.writeFileSync(`svg/fontawesome/${key}.svg`, fontawesome.icon(def).html.toString());
+      const svg = fontawesome.icon(def, {
+        attributes: { xmlns: 'http://www.w3.org/2000/svg' },
+      }).html.toString();
+      fs.writeFileSync(`svg/fontawesome/${key}.svg`, svg);
     } catch (error) {
       console.error(`Error: No FontAwesome icon for ${key}`);
       throw (error);
@@ -271,11 +283,9 @@ function minifyJSON(inPath, outPath) {
 
 function fetchOrRequire(url) {
   if (url.startsWith('.')) {
-    return Promise.resolve({ json: () => Promise.resolve(require(url)) });
+    return import(url, { with: { type: 'json' } })
+      .then(module => ({ json: () => module.default }));
   } else {
     return fetch(url);
   }
 }
-
-
-module.exports = buildData;

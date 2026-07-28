@@ -1,5 +1,5 @@
 import { actionMergeNodes } from '../actions/merge_nodes';
-import { utilDisplayLabel } from '../util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { t } from '../core/localizer';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { osmPathHighwayTagValues } from '../osm/tags';

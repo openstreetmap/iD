@@ -6,7 +6,7 @@ import { modeSelect } from '../modes/select';
 import { modeSelectData } from '../modes/select_data';
 import { modeSelectNote } from '../modes/select_note';
 import { modeSelectError } from '../modes/select_error';
-import { osmEntity, osmNote, QAItem } from '../osm';
+import { OsmAbstractEntity, osmNote, QAItem } from '../osm';
 import { utilFastMouse } from '../util/util';
 
 
@@ -215,6 +215,11 @@ export function behaviorSelect(context) {
         }
 
         var targetDatum = lastEvent.target.__data__;
+        if (targetDatum === 0 && lastEvent.target.parentNode.__data__) {
+            // some targets (like markers of the street level photo
+            // layers) have the data bound to the parent node
+            targetDatum = lastEvent.target.parentNode.__data__;
+        }
 
         var multiselectEntityId;
 
@@ -293,7 +298,7 @@ export function behaviorSelect(context) {
 
         var newMode;
 
-        if (datum instanceof osmEntity) {
+        if (datum instanceof OsmAbstractEntity) {
             // targeting an entity
             var selectedIDs = context.selectedIDs();
             context.selectedNoteID(null);
@@ -350,6 +355,9 @@ export function behaviorSelect(context) {
                 .selectedErrorID(datum.id)
                 .enter(modeSelectError(context, datum.id, datum.service));
 
+        } else if (datum.service === 'photo') {
+            // street level photo was selected:
+            // don't change mode and selection
         } else {
             // targeting nothing
             context.selectedNoteID(null);
