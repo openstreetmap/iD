@@ -1479,6 +1479,22 @@ button.preset-reset .label.flash-bg {
     fill: var(--text-color);
 }
 
+/* the lock icon is a toggle button, not a boxed field-label action button - #12330 */
+.field-label .label-textannotation .lock-icon {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+}
+.field-label .label-textannotation .lock-icon:hover .icon,
+.field-label .label-textannotation .lock-icon:focus .icon {
+    opacity: .8;
+}
+
 .field-label .modified-icon,
 .field-label .remove-icon,
 .field-label .remove-icon-multilingual {
