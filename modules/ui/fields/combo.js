@@ -64,7 +64,7 @@ export function uiFieldCombo(field, context) {
     }
 
     function splitAtSemicolon(s) {
-        return (s || '').split(';').map(s => s.trim());
+        return (s || '').split(';').map(s => s.trim()).filter(Boolean);
     }
     function clean(s) {
         return splitAtSemicolon(s).join(';');
