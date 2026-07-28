@@ -184,7 +184,7 @@ export function uiCombobox(context, klass) {
                         var start = input.property('selectionStart');
                         input.node().setSelectionRange(start, start);
                         input.on('input.combo-input', change); // reset event handler
-                        change(false);
+                        change(undefined, false);
                     });
                     break;
 
@@ -229,8 +229,9 @@ export function uiCombobox(context, klass) {
 
 
         // Called whenever the input value is changed (e.g. on typing)
-        function change(doAutoComplete) {
+        function change(d3_event, doAutoComplete) {
             if (doAutoComplete === undefined) doAutoComplete = true;
+            if (d3_event?.isComposing) doAutoComplete = false;
             fetchComboData(value(), function(skipAutosuggest) {
                 _selected = null;
                 var val = input.property('value');
