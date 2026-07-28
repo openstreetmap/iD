@@ -63,10 +63,11 @@ export function uiFieldCombo(field, context) {
         return s.replace(/\s+/g, '_');
     }
 
+    function splitAtSemicolon(s) {
+        return (s || '').split(';').map(s => s.trim());
+    }
     function clean(s) {
-        return s.split(';')
-            .map(function(s) { return s.trim(); })
-            .join(';');
+        return splitAtSemicolon(s).join(';');
     }
 
     // windows does not support emoji flags
@@ -569,7 +570,7 @@ export function uiFieldCombo(field, context) {
             } else if (_isSemi) {
                 val = tagValue(utilGetSetValue(_input)) || '';
                 val = val.replace(/,/g, ';');
-                vals = val.split(';');
+                vals = splitAtSemicolon(val);
             }
             vals = vals.filter(Boolean);
 
@@ -854,7 +855,7 @@ export function uiFieldCombo(field, context) {
                 if (Array.isArray(tags[field.key])) {
 
                     tags[field.key].forEach(function(tagVal) {
-                        var thisVals = (tagVal || '').split(';').filter(Boolean);
+                        var thisVals = splitAtSemicolon(tagVal);
                         allValues = allValues.concat(thisVals);
                         if (!commonValues) {
                             commonValues = thisVals;
@@ -865,7 +866,7 @@ export function uiFieldCombo(field, context) {
                     allValues = allValues.filter(Boolean);
 
                 } else {
-                    allValues =  (tags[field.key] || '').split(';').filter(Boolean);
+                    allValues = splitAtSemicolon(tags[field.key]);
                     commonValues = allValues;
                 }
 

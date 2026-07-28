@@ -59,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix radio fields being always in single line mode when feature was selected while sidebar was collapsed ([#12454])
 * Fix undo and remove buttons for `multiCombo` fields ([#12406], thanks [@RudyTheDev])
 * Fix a crash when cancelling drawing a line while hovering other features with a `directionalCombo` field ([#12467])
+* Prevent duplicate values from being added to 'semiCombo' fields when there is whitespace surrounding the semicolon ([#12623])
 * Make sure rendering of truncated address labels does not result in broken unicode characters ([#12511], thanks [@greymoth-jp])
 * Do not select start/end vertex of an area or closed way multiple times when selecting all vertices of a way using the keyboard shortcut ([#12586], thanks [@RudyTheDev])
 #### :earth_asia: Localization
@@ -91,6 +92,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12531]: https://github.com/openstreetmap/iD/issues/12531
 [#12561]: https://github.com/openstreetmap/iD/pull/12561
 [#12586]: https://github.com/openstreetmap/iD/pull/12586
+[#12623]: https://github.com/openstreetmap/iD/pull/12623
 [#12569]: https://github.com/openstreetmap/iD/issues/12569
 [@brianstrauch]: https://github.com/brianstrauch
 [@jguddas]: https://github.com/jguddas
