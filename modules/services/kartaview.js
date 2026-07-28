@@ -10,6 +10,7 @@ import { services } from './';
 import { searchLimited } from '../util/partition';
 import { localeDateString } from '../util/date';
 import { patchHash } from '../behavior';
+import { photoZoom } from './photo_zoom';
 
 
 var apibase = 'https://kartaview.org';
@@ -267,6 +268,8 @@ export default {
             .append('button')
             .on('click.forward', step(1))
             .text('►');
+
+        controlsEnter.call(photoZoom(imgZoom, wrapEnter));
 
         wrapEnter
             .append('div')

@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 import { utilSetTransform, utilRebind } from '../util';
+import { photoZoom } from './photo_zoom';
 
 
 export async function planePhotoFrame(context, selection) {
@@ -12,6 +13,7 @@ export async function planePhotoFrame(context, selection) {
     let _photo;
     let _imageWrapper;
     let _planeWrapper;
+    let _zoomControls;
     let _viewerDimensions = [];
     let _photoDimensions = [];
     const _imgZoom = d3_zoom()
@@ -66,6 +68,11 @@ export async function planePhotoFrame(context, selection) {
       .append('img')
       .attr('class', 'plane-photo');
 
+    const controls = selection.select('.photo-controls-wrap > div');
+    controls.call(photoZoom(_imgZoom, _planeWrapper));
+    _zoomControls = controls.selectAll('button.photo-zoom')
+        .classed('hide', true);
+
     context.ui().photoviewer.on('resize.plane', function(dimensions) {
       _viewerDimensions = dimensions;
       updateTransform();
@@ -90,6 +97,8 @@ export async function planePhotoFrame(context, selection) {
                 .classed('hide', false);
         }
 
+        _zoomControls.classed('hide', false);
+
         // set initial viewer size
         _viewerDimensions = context.ui().photoviewer.viewerSize();
         updateTransform();
@@ -105,6 +114,8 @@ export async function planePhotoFrame(context, selection) {
         context
             .select('photo-frame.plane-frame')
             .classed('hide', false);
+
+        _zoomControls.classed('hide', true);
 
         return module;
     };

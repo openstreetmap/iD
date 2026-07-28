@@ -13,6 +13,7 @@ import { services } from './';
 import { searchLimited } from '../util/partition';
 import { localeDateString } from '../util/date';
 import { patchHash } from '../behavior';
+import { photoZoom } from './photo_zoom';
 
 const apiUrl = 'https://end.mapilio.com';
 const imageBaseUrl = 'https://cdn.mapilio.com/im';
@@ -412,6 +413,9 @@ export default {
         wrap
             .selectAll('button.forward')
             .classed('hide', !_cache.images.forImageId.hasOwnProperty(+id + 1));
+        wrap
+            .selectAll('button.photo-zoom')
+            .classed('hide', d.isPano);
 
 
         function loadTheImage(){
@@ -511,12 +515,16 @@ export default {
             .append('div')
             .attr('id', 'ideditor-viewer-mapilio-pnlm');
 
-        wrapEnter
+        const photoWrap = wrapEnter
             .append('div')
             .attr('id', 'ideditor-viewer-mapilio-simple-wrap')
-            .call(imgZoom.on('zoom', zoomPan))
+            .call(imgZoom.on('zoom', zoomPan));
+
+        photoWrap
             .append('div')
             .attr('id', 'ideditor-viewer-mapilio-simple');
+
+        controlsEnter.call(photoZoom(imgZoom, photoWrap));
 
 
 
