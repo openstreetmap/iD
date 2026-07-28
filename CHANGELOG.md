@@ -47,6 +47,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Prioritize parent relations of connected features in relation membership dropdown list ([#11896], thanks [@bhavyaKhatri2703])
 * Link `*:wikidata` tags to wikidata in suggested tag upgrade list ([#12531])
 * Group related background layers when they look like yearly variants of the same source ([#12561])
+* Render cemetery section areas with a thinner outline to easier select underlying cemetery area ([#12569])
 #### :scissors: Operations
 * Allow circularize operation also when multiple selected ways form a closed loop ([#12457])
 * Allow follow operation in more situations (e.g. when there are multiple coincident ways to follow) ([#9340], thanks [@jguddas]), or when appending a line from its start node ([#9734])
@@ -58,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix radio fields being always in single line mode when feature was selected while sidebar was collapsed ([#12454])
 * Fix undo and remove buttons for `multiCombo` fields ([#12406], thanks [@RudyTheDev])
 * Fix a crash when cancelling drawing a line while hovering other features with a `directionalCombo` field ([#12467])
+* Prevent duplicate values from being added to 'semiCombo' fields when there is whitespace surrounding the semicolon ([#12623])
 * Make sure rendering of truncated address labels does not result in broken unicode characters ([#12511], thanks [@greymoth-jp])
 * Do not select start/end vertex of an area or closed way multiple times when selecting all vertices of a way using the keyboard shortcut ([#12586], thanks [@RudyTheDev])
 #### :earth_asia: Localization
@@ -91,7 +93,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12531]: https://github.com/openstreetmap/iD/issues/12531
 [#12561]: https://github.com/openstreetmap/iD/pull/12561
 [#12565]: https://github.com/openstreetmap/iD/pull/12565
-[#12586]: https://github.com/openstreetmap/iD/pull/12586/
+[#12586]: https://github.com/openstreetmap/iD/pull/12586
+[#12623]: https://github.com/openstreetmap/iD/pull/12623
+[#12569]: https://github.com/openstreetmap/iD/issues/12569
 [@brianstrauch]: https://github.com/brianstrauch
 [@jguddas]: https://github.com/jguddas
 [@greymoth-jp]: https://github.com/greymoth-jp
