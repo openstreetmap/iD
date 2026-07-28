@@ -2,7 +2,7 @@
 
 // cdns for external data packages
 const presetsCdnUrl = ENV__ID_PRESETS_CDN_URL
-  || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}/';
+  || 'https://pr-1538--ideditor-presets-preview.netlify.app/'; // temporary, until the iDTS PR is merged
 const ociCdnUrl = ENV__ID_OCI_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/osm-community-index@{version}/';
 const wmfSitematrixCdnUrl = ENV__ID_WMF_SITEMATRIX_CDN_URL
