@@ -3,23 +3,37 @@ import { diff3Merge } from 'node-diff3';
 
 import { t } from '../core/localizer';
 import { actionDeleteMultiple } from './delete_multiple';
-import { createEntity } from '../osm';
+import { createEntity, type osmNode, type EntityId, type NodeId, type OsmEntity, type osmRelation, type osmWay } from '../osm';
 import { utilArrayUnion, utilArrayUniq } from '../util';
+import type { coreGraph } from '../core';
+import type { Action } from '../core/history';
+import type { Vec2 } from '../geo/vector';
+
+export type MergeStrategy = 'safe' | 'force_local' | 'force_remote';
 
 
-export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTags, formatUser) {
-    discardTags = discardTags || {};
-    var _option = 'safe';  // 'safe', 'force_local', 'force_remote'
-    var _conflicts = [];
+export interface MergeUpdates {
+    removeIds: EntityId[];
+    replacements: OsmEntity[];
+}
+
+export interface ActionMergeRemoteChanges extends Action {
+    withOption?(val?: MergeStrategy): MergeStrategy | this;
+    conflicts(): d3.Selector[];
+}
+
+export function actionMergeRemoteChanges(id: EntityId, localGraph: coreGraph, remoteGraph: coreGraph, discardTags: Record<string, true> = {}, formatUser?: any): ActionMergeRemoteChanges {
+    var _option: MergeStrategy = 'safe';  // 'safe', 'force_local', 'force_remote'
+    var _conflicts: d3.Selector[] = [];
 
 
-    function user(user) {
-        return (typeof formatUser === 'function') ? selection => selection.call(formatUser, user) : selection => selection.text(user);
+    function user(user: string | undefined): d3.Selector {
+        return (typeof formatUser === 'function') ? selection => selection.call(formatUser, user) : selection => selection.text(user!);
     }
 
 
-    function mergeLocation(remote, target) {
-        function pointEqual(a, b) {
+    function mergeLocation(remote: osmNode, target: osmNode): osmNode {
+        function pointEqual(a: Vec2, b: Vec2) {
             var epsilon = 1e-6;
             return (Math.abs(a[0] - b[0]) < epsilon) && (Math.abs(a[1] - b[1]) < epsilon);
         }
@@ -36,7 +50,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
     }
 
 
-    function mergeNodes(base, remote, target) {
+    function mergeNodes(base: osmWay, remote: osmWay, target: osmWay): osmWay {
         if (_option === 'force_local' || deepEqual(target.nodes, remote.nodes)) {
             return target;
         }
@@ -48,7 +62,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
         var o = base.nodes || [];
         var a = target.nodes || [];
         var b = remote.nodes || [];
-        var nodes = [];
+        var nodes: NodeId[] = [];
         var hunks = diff3Merge(a, o, b, { excludeFalseConflicts: true });
 
         for (var i = 0; i < hunks.length; i++) {
@@ -58,7 +72,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
             } else {
                 // for all conflicts, we can assume c.a !== c.b
                 // because `diff3Merge` called with `true` option to exclude false conflicts..
-                var c = hunk.conflict;
+                var c = hunk.conflict!;
                 if (deepEqual(c.o, c.a)) {  // only changed remotely
                     nodes.push.apply(nodes, c.b);
                 } else if (deepEqual(c.o, c.b)) {  // only changed locally
@@ -74,8 +88,8 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
     }
 
 
-    function mergeChildren(targetWay, children, updates, graph) {
-        function isUsed(node, targetWay) {
+    function mergeChildren(targetWay: osmWay, children: NodeId[], updates: MergeUpdates, graph: coreGraph) {
+        function isUsed(node: osmNode, targetWay: osmWay) {
             var hasInterestingParent = graph.parentWays(node)
                 .some(function(way) { return way.id !== targetWay.id; });
 
@@ -107,14 +121,14 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
                 updates.replacements.push(remote);
 
             } else if (_option === 'force_local' && local) {
-                target = createEntity(local);
+                target = createEntity(local) as osmNode;
                 if (remote) {
                     target = target.update({ version: remote.version });
                 }
                 updates.replacements.push(target);
 
             } else if (_option === 'safe' && local && remote && local.version !== remote.version) {
-                target = createEntity(local, { version: remote.version });
+                target = createEntity(local, { version: remote.version }) as osmNode;
                 if (remote.visible) {
                     target = mergeLocation(remote, target);
                 } else {
@@ -130,7 +144,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
     }
 
 
-    function updateChildren(updates, graph) {
+    function updateChildren(updates: MergeUpdates, graph: coreGraph) {
         for (var i = 0; i < updates.replacements.length; i++) {
             graph = graph.replace(updates.replacements[i]);
         }
@@ -141,7 +155,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
     }
 
 
-    function mergeMembers(remote, target) {
+    function mergeMembers(remote: osmRelation, target: osmRelation): osmRelation {
         if (_option === 'force_local' || deepEqual(target.members, remote.members)) {
             return target;
         }
@@ -154,7 +168,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
     }
 
 
-    function mergeTags(base, remote, target) {
+    function mergeTags(base: OsmEntity, remote: OsmEntity, target: OsmEntity): OsmEntity {
         if (_option === 'force_local' || deepEqual(target.tags, remote.tags)) {
             return target;
         }
@@ -168,7 +182,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
         var b = remote.tags || {};
         var keys = utilArrayUnion(utilArrayUnion(Object.keys(o), Object.keys(a)), Object.keys(b))
             .filter(function(k) { return !discardTags[k]; });
-        var tags = Object.assign({}, a);   // shallow copy
+        var tags = { ...a };   // shallow copy
         var changed = false;
 
         for (var i = 0; i < keys.length; i++) {
@@ -203,12 +217,12 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
     //                 /
     //  `graph.base()` --- ... --- `remoteGraph`
     //
-    var action = function(graph) {
+    const action: ActionMergeRemoteChanges = function(graph) {
         var updates = { replacements: [], removeIds: [] };
-        var base = graph.base().entities[id];
+        var base = graph.base().entities[id]!;
         var local = localGraph.entity(id);
         var remote = remoteGraph.entity(id);
-        var target = createEntity(local, { version: remote.version });
+        var target = createEntity(local, { version: remote.version }) as OsmEntity;
 
         // delete/undelete
         if (!remote.visible) {
@@ -216,7 +230,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
                 return actionDeleteMultiple([id])(graph);
 
             } else if (_option === 'force_local') {
-                if (target.type === 'way') {
+                if (target.type === 'way' && local.type === 'way') {
                     target = mergeChildren(target, utilArrayUniq(local.nodes), updates, graph);
                     graph = updateChildren(updates, graph);
                 }
@@ -229,16 +243,16 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
         }
 
         // merge
-        if (target.type === 'node') {
+        if (target.type === 'node' && remote.type === 'node') {
             target = mergeLocation(remote, target);
 
-        } else if (target.type === 'way') {
+        } else if (target.type === 'way' && remote.type === 'way' && base.type === 'way' && local.type === 'way') {
             // pull in any child nodes that may not be present locally..
             graph.rebase(remoteGraph.childNodes(remote), [graph], false);
             target = mergeNodes(base, remote, target);
             target = mergeChildren(target, utilArrayUnion(local.nodes, remote.nodes), updates, graph);
 
-        } else if (target.type === 'relation') {
+        } else if (target.type === 'relation' && remote.type === 'relation') {
             target = mergeMembers(remote, target);
         }
 
@@ -253,7 +267,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
 
 
     action.withOption = function(opt) {
-        _option = opt;
+        _option = opt!;
         return action;
     };
 

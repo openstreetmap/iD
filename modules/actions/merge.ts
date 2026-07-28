@@ -1,19 +1,28 @@
+import type { coreGraph } from '../core';
+import type { Action } from '../core/history';
+import type { EntityId, osmNode, osmRelation, osmWay } from '../osm';
 import { osmTagSuggestingArea } from '../osm/tags';
 import { utilArrayGroupBy, utilArrayUniq, utilCompareIDs } from '../util';
 
 
-export function actionMerge(ids) {
+export function actionMerge(ids: EntityId[]): Action {
 
-    function groupEntitiesByGeometry(graph) {
+    function groupEntitiesByGeometry(graph: coreGraph) {
         var entities = ids.map(function(id) { return graph.entity(id); });
         return Object.assign(
             { point: [], area: [], line: [], relation: [] },
             utilArrayGroupBy(entities, function(entity) { return entity.geometry(graph); })
-        );
+        ) as {
+            point: osmNode[];
+            vertex: osmNode[];
+            line: osmWay[];
+            area: osmWay[];
+            relation: osmRelation[];
+        };
     }
 
 
-    var action = function(graph) {
+    var action: Action = function(graph) {
         var geometries = groupEntitiesByGeometry(graph);
         var target = geometries.area[0] || geometries.line[0];
         var points = geometries.point;
@@ -35,12 +44,12 @@ export function actionMerge(ids) {
 
                 var inserted = false;
 
-                var canBeReplaced = function(node) {
+                var canBeReplaced = function(node: osmNode) {
                     return !(graph.parentWays(node).length > 1 ||
                         graph.parentRelations(node).length);
                 };
 
-                var replaceNode = function(node) {
+                var replaceNode = function(node: osmNode) {
                     graph = graph.replace(point.update({ tags: node.tags, loc: node.loc }));
                     target = target.replaceNode(node.id, point.id);
                     graph = graph.replace(target);
@@ -94,7 +103,7 @@ export function actionMerge(ids) {
         });
 
         if (target.tags.area === 'yes') {
-            var tags = Object.assign({}, target.tags); // shallow copy
+            var tags = { ...target.tags }; // shallow copy
             delete tags.area;
             if (osmTagSuggestingArea(tags)) {
                 // remove the `area` tag if area geometry is now implied - #3851

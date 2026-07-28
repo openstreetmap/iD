@@ -4,9 +4,15 @@ import {
     geoVecProject, geoVecScale, geoVecSubtract,
     geoOrthoCalcScore, geoOrthoCanOrthogonalize, geoVecNormalizedDot
 } from '../geo';
+import type { osmNode, EntityId, WayId } from '../osm';
+import type { Projection } from '../geo/raw_mercator';
+import type { Action } from '../core/history';
+import type { Vec2 } from '../geo/vector';
 
 
-export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) {
+interface Point { id: EntityId; coord: Vec2 }
+
+export function actionOrthogonalize(wayID: WayId, projection: Projection, vertexID?: EntityId, degThresh?: number, ep?: number): Action {
     var epsilon = ep || 1e-4;
     var threshold = degThresh || 13;  // degrees within right or straight to alter
 
@@ -15,15 +21,15 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
     var upperThreshold = Math.cos(threshold * Math.PI / 180);
 
 
-    var action = function(graph, t) {
-        if (t === null || !isFinite(t)) t = 1;
-        t = Math.min(Math.max(+t, 0), 1);
+    var action: Action = function(graph, t) {
+        if (t === null || !isFinite(t!)) t = 1;
+        t = Math.min(Math.max(+t!, 0), 1);
 
         let way = graph.entity(wayID);
         way = way.removeNode('');   // sanity check - remove any consecutive duplicates
 
         if (way.tags.nonsquare) {
-            var tags = Object.assign({}, way.tags);
+            var tags = { ...way.tags };
             // since we're squaring, remove indication that this is physically unsquare
             delete tags.nonsquare;
             way = way.update({tags: tags});
@@ -42,10 +48,10 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
 
         // note: all geometry functions here use the unclosed node/point/coord list
 
-        var nodeCount = {};
-        var points = [];
+        var nodeCount: Record<EntityId, number> = {};
+        var points: Point[] = [];
         var corner = { i: 0, dotp: 1 };
-        var node, point, loc, score, motions, i, j;
+        var node: osmNode, point, loc, score, motions, i, j;
 
         for (i = 0; i < nodes.length; i++) {
             node = nodes[i];
@@ -144,7 +150,7 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
                     // move interesting points to the nearest edge..
                     var choice = geoVecProject(point.coord, bestCoords);
                     if (choice) {
-                        loc = projection.invert(choice.target);
+                        loc = projection.invert(choice.target!);
                         graph = graph.replace(node.move(geoVecInterp(node.loc, loc, t)));
                     }
                 }
@@ -154,14 +160,14 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
         return graph;
 
 
-        function clonePoints(array) {
+        function clonePoints(array: Point[]): Point[] {
             return array.map(function(p) {
                 return { id: p.id, coord: [p.coord[0], p.coord[1]] };
             });
         }
 
 
-        function calcMotion(point, i, array) {
+        function calcMotion(point: Point, i: number, array: Point[]): Vec2 {
             // don't try to move the endpoints of a non-closed way.
             if (!isClosed && (i === 0 || i === array.length - 1)) return [0, 0];
             // don't try to move a node that appears more than once (self intersection)
@@ -194,7 +200,7 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
 
     // if we are only orthogonalizing one vertex,
     // get that vertex and the previous and next
-    function nodeSubset(nodes, vertexID, isClosed) {
+    function nodeSubset(nodes: osmNode[], vertexID: EntityId, isClosed: boolean) {
         var first = isClosed ? 0 : 1;
         var last = isClosed ? nodes.length : nodes.length - 1;
 
