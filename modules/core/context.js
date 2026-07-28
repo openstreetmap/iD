@@ -20,6 +20,7 @@ import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } fro
 import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilKeybinding, utilRebind, utilStringQs, utilCleanOsmString } from '../util';
+import { ApiError } from '../util/error';
 
 
 export function coreContext() {
@@ -136,7 +137,7 @@ export function coreContext() {
 
       } else if (_connection && _connection.getConnectionId() !== cid) {
         if (typeof callback === 'function') {
-          callback({ message: 'Connection Switched', status: -1 });
+          callback(new ApiError('Connection Switched', -1));
         }
         return;
 
