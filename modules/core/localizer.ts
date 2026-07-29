@@ -47,20 +47,20 @@ type TInfo = {
     texts: (string | d3.Selector)[]
 };
 
-type Replacements = {
+export type Replacements = {
     [key: string]: number | string | d3.Selector | undefined
 } & {
     default?: string,
     prefix?: string,
     suffix?: string
 };
-type ReplacementsSimple = {
+export type ReplacementsSimple = {
     [key: string]: number | string | undefined
 } & {
     default?: string
 };
 type ReplacementsSimpleMulti = {
-    [key: string]: number | string | undefined
+    [key: string]: number | string | string[] | undefined
 } & {
     default?: string[]
 };

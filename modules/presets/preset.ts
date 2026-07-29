@@ -1,41 +1,98 @@
+import type { Geometry, Preset } from '@openstreetmap/id-tagging-schema';
 import { localizer, t } from '../core/localizer';
 import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
 import { utilObjectOmit } from '../util';
 import { utilSafeClassName, utilStripDiacritics } from '../util/util';
 import { locationManager } from '../core/location_manager';
+import type { presetField } from './field';
+import type { Vec2 } from '../geo/vector';
 
+export interface presetPreset extends Omit<Preset,
+  | 'fields'
+  | 'moreFields'
+  | 'matchScore'
+  | 'addTags'
+  | 'removeTags'
+  | 'name'
+  | 'aliases'
+  | 'terms'
+  | 'reference'
+> {
+  id: string;
+  safeid: string;
+  originalTerms: string[];
+  originalName: string;
+  originalAliases: string[];
+  originalScore: number;
+  originalReference: Partial<NonNullable<Preset['reference']>>;
+  originalFields: string[];
+  originalMoreFields: string[];
+  fields(loc?: Vec2): presetField[];
+  moreFields(loc?: Vec2): presetField[];
+  locationSetID?: string;
+  matchGeometry(geometry: Geometry): boolean;
+  matchAllGeometry(geometries: Geometry[]): boolean;
+  matchScore(entityTags: Tags): number;
+  setTags(tags: Tags, geometry: Geometry, skipFieldDefaults?: boolean, loc?: Vec2): Tags;
+  unsetTags(tags: Tags, geometry: Geometry, ignoringKeys?: string[], skipFieldDefaults?: boolean, loc?: Vec2): Tags;
+  t: presetField['t'];
+  t_all: typeof localizer.t_all;
+  addTags: Tags;
+  removeTags: Tags;
+  name(): string;
+  nameLabel(): d3.Selector;
+  subtitle(): string | undefined | null;
+  subtitleLabel(): d3.Selector | null;
+  suggestion?: boolean;
+  aliases(): string[];
+  terms(): string[];
+  reference(): { key: string; value?: string } | { qid: string };
+  searchName(): string;
+  searchNameStripped(): string;
+  searchAliases(): string[];
+  searchAliasesStripped(): string[];
+  isFallback(): boolean;
+  getParentPreset(): presetPreset | undefined;
+  addable: GetSet<presetPreset, boolean>;
+}
 
 //
 // `presetPreset` decorates a given `preset` Object
 // with some extra methods for searching and matching geometry
 //
-export function presetPreset(presetID, preset, addable, allFields, allPresets) {
+export function presetPreset(
+  presetID: string,
+  preset: Preset,
+  addable?: boolean,
+  allFields: Record<string, presetField> = {},
+  allPresets: Record<string, presetPreset> = {},
+) {
   allFields = allFields || {};
   allPresets = allPresets || {};
-  let _this = Object.assign({}, preset); // shallow copy
+  let _this = <presetPreset>(<unknown>Object.assign({}, preset)); // shallow copy
   let _addable = addable || false;
-  let _searchName;            // cache
-  let _searchNameStripped;    // cache
-  let _searchAliases;         // cache
-  let _searchAliasesStripped; // cache
+  let _searchName: string;            // cache
+  let _searchNameStripped: string;    // cache
+  let _searchAliases: string[];         // cache
+  let _searchAliasesStripped: string[]; // cache
 
   _this.id = presetID;
 
   _this.safeid = utilSafeClassName(presetID);  // for use in css classes, selectors, element ids
 
-  _this.originalTerms = _this.terms || [];
+  _this.originalTerms = preset.terms || [];
 
-  _this.originalName = _this.name || '';
+  _this.originalName = preset.name || '';
 
-  _this.originalAliases = _this.aliases || [];
+  _this.originalAliases = preset.aliases || [];
 
-  _this.originalScore = _this.matchScore || 1;
+  _this.originalScore = preset.matchScore || 1;
 
-  _this.originalReference = _this.reference || {};
+  _this.originalReference = preset.reference || {};
 
-  _this.originalFields = (_this.fields || []);
+  _this.originalFields = (preset.fields || []);
 
-  _this.originalMoreFields = (_this.moreFields || []);
+  _this.originalMoreFields = (preset.moreFields || []);
 
   _this.fields = loc => resolveFields('fields', loc);
 
@@ -55,7 +112,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.matchScore = (entityTags) => {
     const tags = _this.tags;
-    let seen = {};
+    let seen: Record<TagKey, true> = {};
     let score = 0;
 
     // match on tags
@@ -85,7 +142,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     return score;
   };
 
-  _this.t = (scope, options) => {
+  const _t: presetPreset['t'] = (scope, options) => {
     const textID = `_tagging.presets.presets.${presetID}.${scope}`;
     return t(textID, options);
   };
@@ -95,10 +152,11 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     return localizer.t_all(textID, options);
   };
 
-  _this.t.append = (scope, options) => {
+  _t.append = (scope, options) => {
     const textID = `_tagging.presets.presets.${presetID}.${scope}`;
     return t.append(textID, options);
   };
+  _this.t = _t;
 
   _this.name = () => {
     return _this
@@ -179,7 +237,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     if (!arguments.length) return _addable;
     _addable = val;
     return _this;
-  };
+  } as presetPreset['addable'];
 
 
   _this.reference = () => {
@@ -196,7 +254,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     }
 
     // Lookup documentation on OSM Wikibase...
-    let key = _this.originalReference.key || Object.keys(utilObjectOmit(_this.tags, 'name'))[0];
+    let key = _this.originalReference.key || Object.keys(utilObjectOmit(_this.tags, ['name']))[0];
     let value = _this.originalReference.value || _this.tags[key];
 
     if (value === '*') {
@@ -283,7 +341,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   // For a preset without fields, use the fields of the parent preset.
   // Replace {preset} placeholders with the fields of the specified presets.
-  function resolveFields(which, loc) {
+  function resolveFields(which: 'fields' | 'moreFields', loc?: Vec2) {
     const fieldIDs = (which === 'fields' ? _this.originalFields : _this.originalMoreFields);
     let resolved = fieldIDs.map(fieldID => allFields[fieldID]);
 
