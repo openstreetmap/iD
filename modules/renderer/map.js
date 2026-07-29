@@ -284,6 +284,7 @@ export function rendererMap(context) {
 
         map.dimensions(utilGetDimensions(selection));
     }
+    map.surface = undefined; // defined later
 
 
     function zoomEventFilter(d3_event) {

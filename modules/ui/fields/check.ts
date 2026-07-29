@@ -73,7 +73,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
     function reverserHidden() {
         if (!context.container().select('div.inspector-hover').empty()) return true;
         const entity = _entityIDs.length && context.hasEntity(_entityIDs[0]);
-        if (entity.type !== 'way') return true;
+        if (!entity || entity.type !== 'way') return true;
         return !(_value === 'yes' || (_impliedYes && !_value));
     }
 
