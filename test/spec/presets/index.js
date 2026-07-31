@@ -426,6 +426,52 @@ describe('iD.presetIndex', function () {
         });
     });
 
+    describe('#merge (field optionsLocationSet)', () => {
+        it('resolves optionsLocationSetID for combo field options with a locationSet', () => {
+            const testIndex = presetIndex();
+
+            testIndex.merge({
+                fields: {
+                    surface: {
+                        key: 'surface',
+                        type: 'combo',
+                        label: 'Surface',
+                        options: ['dirt', 'laterite'],
+                        optionsLocationSet: {
+                            laterite: { include: ['th', 'in'] }
+                        }
+                    }
+                }
+            });
+
+            const field = testIndex.field('surface');
+            expect(field.optionsLocationSetID).toBeDefined();
+            // `laterite` has its own locationSet, so it gets a real, non-world id
+            expect(field.optionsLocationSetID.laterite).toBeDefined();
+            expect(field.optionsLocationSetID.laterite).not.toEqual('+[Q2]');
+            // `dirt` has no entry in optionsLocationSet, so it's never restricted
+            expect(field.optionsLocationSetID.dirt).toBeUndefined();
+        });
+
+        it('leaves optionsLocationSetID undefined for fields without optionsLocationSet', () => {
+            const testIndex = presetIndex();
+
+            testIndex.merge({
+                fields: {
+                    surface: {
+                        key: 'surface',
+                        type: 'combo',
+                        label: 'Surface',
+                        options: ['dirt', 'laterite']
+                    }
+                }
+            });
+
+            const field = testIndex.field('surface');
+            expect(field.optionsLocationSetID).toBeUndefined();
+        });
+    });
+
     describe('PresetIndex.recents', () => {
         it('fills all recent slots even when some remembered presets are not available in the current region (#11405)', () => {
             const testIndex = presetIndex();

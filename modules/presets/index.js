@@ -96,6 +96,7 @@ export function presetIndex() {
   //}
   _this.merge = (d) => {
     let newLocationSets = [];
+    let newOptionLocationSets = [];   // [{ field, value, wrapper }]
 
     // Merge Fields
     if (d.fields) {
@@ -105,6 +106,14 @@ export function presetIndex() {
         if (f) {   // add or replace
           f = presetField(fieldID, f);
           if (f.locationSet) newLocationSets.push(f);
+          if (f.optionsLocationSet) {
+            f.optionsLocationSetID = {};
+            Object.keys(f.optionsLocationSet).forEach(value => {
+              const wrapper = { locationSet: f.optionsLocationSet[value] };
+              newLocationSets.push(wrapper);
+              newOptionLocationSets.push({ field: f, value: value, wrapper: wrapper });
+            });
+          }
           _fields[fieldID] = f;
 
         } else {   // remove
@@ -193,6 +202,11 @@ export function presetIndex() {
     if (newLocationSets.length) {
       locationManager.registerLocationSets(newLocationSets);
     }
+
+    // Copy each option's resolved locationSetID back onto its field.
+    newOptionLocationSets.forEach(({ field, value, wrapper }) => {
+      field.optionsLocationSetID[value] = wrapper.locationSetID;
+    });
 
     return _this;
   };
