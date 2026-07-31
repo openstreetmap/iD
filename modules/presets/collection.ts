@@ -1,71 +1,74 @@
 import { locationManager } from '../core/location_manager';
 import { utilArrayUniq } from '../util/array';
 import { utilEditDistance } from '../util';
+import type { presetPreset } from './preset';
+import type { Geometry } from '@openstreetmap/id-tagging-schema';
+import type { Vec2 } from '../geo/vector';
 
 
 //
 // `presetCollection` is a wrapper around an `Array` of presets `collection`,
 // and decorated with some extra methods for searching and matching geometry
 //
-export function presetCollection(collection) {
+export function presetCollection(collection: presetPreset[]) {
   const MAXRESULTS = 50;
-  let _this = {};
-  let _memo = {};
+  const _this = function() {};
+  let _memo: { [id: string]: presetPreset } = {};
 
   _this.collection = collection;
 
-  _this.item = (id) => {
+  _this.item = (id: string) => {
     if (_memo[id]) return _memo[id];
     const found = _this.collection.find(d => d.id === id);
     if (found) _memo[id] = found;
     return found;
   };
 
-  _this.index = (id) => _this.collection.findIndex(d => d.id === id);
+  _this.index = (id: string) => _this.collection.findIndex(d => d.id === id);
 
-  _this.matchGeometry = (geometry) => {
+  _this.matchGeometry = (geometry: Geometry) => {
     return presetCollection(
       _this.collection.filter(d => d.matchGeometry(geometry))
     );
   };
 
-  _this.matchAllGeometry = (geometries) => {
+  _this.matchAllGeometry = (geometries: Geometry[]) => {
     return presetCollection(
       _this.collection.filter(d => d && d.matchAllGeometry(geometries))
     );
   };
 
-  _this.matchAnyGeometry = (geometries) => {
+  _this.matchAnyGeometry = (geometries: Geometry[]) => {
     return presetCollection(
       _this.collection.filter(d => geometries.some(geom => d.matchGeometry(geom)))
     );
   };
 
-  _this.fallback = (geometry) => {
+  _this.fallback = (geometry: Geometry) => {
     let id = geometry;
     if (id === 'vertex') id = 'point';
     return _this.item(id);
   };
 
-  _this.search = (value, geometry, loc) => {
+  _this.search = (value: string, geometry?: Geometry | Geometry[], loc?: Vec2) => {
     if (!value) return _this;
 
     // don't remove diacritical characters since we're assuming the user is being intentional
     value = value.toLowerCase().trim();
 
     // match at name beginning or just after a space (e.g. "office" -> match "Law Office")
-    function leading(a) {
+    function leading(a: string) {
       const index = a.indexOf(value);
       return index === 0 || a[index - 1] === ' ';
     }
 
     // match at name beginning only
-    function leadingStrict(a) {
+    function leadingStrict(a: string) {
       const index = a.indexOf(value);
       return index === 0;
     }
 
-    function presetInSearchTerm(presetText) {
+    function presetInSearchTerm(presetText: string) {
       if (presetText.length === 0) {
         return false;
       }
@@ -73,15 +76,15 @@ export function presetCollection(collection) {
       return index === 0 || value[index - 1] === ' ';
     }
 
-    function sortPresets(nameProp, aliasesProp) {
-      return function sortNames(a, b) {
+    function sortPresets(nameProp: 'searchName' | 'searchNameStripped', aliasesProp?: 'searchAliases' | 'searchAliasesStripped') {
+      return function sortNames(a: presetPreset, b: presetPreset) {
         let aCompare = a[nameProp]();
         let bCompare = b[nameProp]();
         if (aliasesProp) {
           // also search in aliases
-          const findMatchingAlias = strings => {
+          const findMatchingAlias = (strings: string[]) => {
             if (strings.some(s => s === value)) {
-              return strings.find(s => s === value);
+              return strings.find(s => s === value)!;
             } else {
               return strings.filter(s => s.includes(value)).sort((a,b) => a.length - b.length)[0];
             }
@@ -168,7 +171,7 @@ export function presetCollection(collection) {
       });
 
     // matches key=value to preset.tags
-    let leadingTagKeyValues = [];
+    let leadingTagKeyValues: presetPreset[] = [];
     if (value.includes('=')) {
       leadingTagKeyValues = searchable.filter(a => a.tags &&
           Object.keys(a.tags).some(key => key + '=' + a.tags[key] === value))
@@ -204,9 +207,9 @@ export function presetCollection(collection) {
 
     if (geometry) {
       if (typeof geometry === 'string') {
-        results.push(_this.fallback(geometry));
+        results.push(_this.fallback(geometry)!);
       } else {
-        geometry.forEach(geom => results.push(_this.fallback(geom)));
+        geometry.forEach(geom => results.push(_this.fallback(geom)!));
       }
     }
 
@@ -216,3 +219,5 @@ export function presetCollection(collection) {
 
   return _this;
 }
+
+export interface presetCollection extends ReturnType<typeof presetCollection> {}
