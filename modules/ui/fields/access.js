@@ -289,7 +289,7 @@ export function uiFieldAccess(field, context) {
                     || new Set(getAllPlaceholders(tags, accessField)).size > 1;
             })
             .attr('title', function(accessField) {
-                return tags[accessField] && Array.isArray(tags[accessField]) && tags[accessField].filter(Boolean).join('\n');
+                return Array.isArray(tags[accessField]) ? tags[accessField].filter(Boolean).join('\n') : undefined;
             })
             .attr('placeholder', function(accessField) {
                 let placeholders = getAllPlaceholders(tags, accessField);

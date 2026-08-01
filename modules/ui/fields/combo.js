@@ -944,8 +944,9 @@ export function uiFieldCombo(field, context) {
                     if (!['yes', 'no'].includes(d.state)) {
                         return d.state;
                     }
-                    return null;
+                    return undefined;
                 })
+
                 .classed('negated', d => d.state === 'no');
 
             if (!_isSemi) {

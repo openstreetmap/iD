@@ -351,7 +351,7 @@ export function uiFieldRadio(field, context) {
             })
             .classed('mixed', isMixed)
             .attr('title', function(d) {
-                return isMixed(d) ? t('inspector.unshared_value_tooltip') : null;
+                return isMixed(d) ? t('inspector.unshared_value_tooltip') : undefined;
             });
 
 
