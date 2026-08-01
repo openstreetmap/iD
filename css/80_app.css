@@ -4927,20 +4927,17 @@ img.tile-debug {
     }
 }
 
-.attribution-wrap .attribution span {
-    background-color: rgba(0,0,0,0.33);
-    padding: 3px 6px;
-    border-radius: 4px;
-}
-
 .attribution-wrap .attribution .source-image {
     height: 20px;
     vertical-align: middle;
     border-radius: 3px;
 }
 
-.attribution-wrap .attribution span {
+.attribution-wrap .attribution .attribution-text {
+    background-color: rgba(0,0,0,0.33);
+    border-radius: 4px;
     margin: 0 3px;
+    padding: 3px 6px;
 }
 
 
