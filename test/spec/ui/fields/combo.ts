@@ -23,7 +23,7 @@ describe('iD.uiFieldCombo', () => {
             const field = iD.presetField('a', {
                 key: 'destination:symbol',
                 type: 'semiCombo',
-                allowDuplicates: true
+                allowDuplicates: true,
             });
 
             const onChange = vi.fn();
@@ -31,7 +31,7 @@ describe('iD.uiFieldCombo', () => {
             const instance = iD.uiFieldCombo(field, context);
             selection.call(instance);
 
-            let tags = { 'destination:symbol': 'none;none;Jurong East;none;Māngere' };
+            const tags = { 'destination:symbol': 'none;none;Jurong East;none;Māngere' };
             instance.tags(tags);
             instance.on('change', onChange);
 
@@ -43,7 +43,7 @@ describe('iD.uiFieldCombo', () => {
             expect(onChange).toHaveBeenCalledTimes(1);
             expect(onChange).toHaveBeenCalledWith({
                 // the `none` value at the correct index was deleted
-                'destination:symbol': 'none;none;Jurong East;Māngere'
+                'destination:symbol': 'none;none;Jurong East;Māngere',
             });
         });
 
@@ -63,7 +63,7 @@ describe('iD.uiFieldCombo', () => {
 
             expect(onChange).toHaveBeenCalledTimes(1);
             expect(onChange).toHaveBeenCalledWith({
-                destination: 'none;kirribilli' // whitespace was trimmed, no duplicate
+                destination: 'none;kirribilli', // whitespace was trimmed, no duplicate
             });
         });
     });

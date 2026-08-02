@@ -339,6 +339,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 * When changing presets, delete tags from the old preset which are not in the new preset ([#11696], thanks [@k-yle])
 #### :hammer: Development
+* Replace ESLint with [Oxlint](https://oxc.rs/docs/guide/usage/linter) and [Oxfmt](https://oxc.rs/docs/guide/usage/formatter): JavaScript keeps develop lint only (no formatter); TypeScript gets stricter lint plus Oxfmt on an explicit allowlist only; CI and local use `npm run lint:ci`
 * Use `<details>` element for collapsible _disclosure_ content ([#11952], thanks [@Shrinks99])
 * Use JSON endpoints for (almost) all OSM APIs ([#11661], thanks [@k-yle])
 * Replace `lodash` with `es-toolkit` ([#12016], thanks [@tordans])

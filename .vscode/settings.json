@@ -1,5 +1,21 @@
 {
     "i18n-ally.readonly": true,
     "i18n-ally.localesPaths": ["data"],
-    "i18n-ally.pathMatcher": "core.yaml"
+    "i18n-ally.pathMatcher": "core.yaml",
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.formatOnSave": false,
+    "[javascript]": {
+        "editor.formatOnSave": false
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode",
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "modificationsIfAvailable"
+    },
+    "[json]": {
+        "editor.formatOnSave": false
+    },
+    "[jsonc]": {
+        "editor.formatOnSave": false
+    }
 }

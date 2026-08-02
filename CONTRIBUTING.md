@@ -250,15 +250,38 @@ We like when people get involved! iD is a busy project, so it helps if you first
 open an issue to ask whether an idea makes sense,
 instead of surprising us with a pull request.
 
-### JavaScript / Typescript
+### JavaScript (legacy)
 
-New and/or updated code uses modern JavaScript ES6+ syntax, and incrementally more and more TypeScript.
+Most of the codebase is still JavaScript (`.js`, `.mjs`, `.cjs`). Treat these files as **legacy**: keep their existing style when you edit them. Do not reformat a whole file when you only change part of it.
 
-We mostly follow the Airbnb style guide for [Modern ES6 JavaScript](https://github.com/airbnb/javascript). We ask that you follow the convention of using 4 space indent in JavaScript and Typescript files. Always use spaces for indentation, never tabs.
+We mostly follow the Airbnb style guide for [Modern ES6 JavaScript](https://github.com/airbnb/javascript). Use **4 space** indentation (never tabs). Some older files still follow [ES5](https://github.com/airbnb/javascript/tree/es5-deprecated/es5) or an older ES6 style (including 2-space indentation); match the file you are in.
 
-JavaScript and Typescript code should pass through [ESLint](http://eslint.org/) (`npm run lint`) with no warnings. In case you do get errors or warnings, you can run `npm run lint:fix` to apply some code style fixes, eslint can perform.
+JavaScript is linted with [Oxlint](https://oxc.rs/docs/guide/usage/linter) (`npm run lint:check` / `npm run lint`) using the develop-parity rules in [`oxlint.config.mjs`](oxlint.config.mjs). There is **no** autoformatter for JavaScript. Prefer migrating a file to TypeScript over large cleanups in place.
 
-Note that some older parts of the iD code were initially written with [ES5](https://github.com/airbnb/javascript/tree/es5-deprecated/es5) syntax in mind, and for a period also using ES6 with a lightly different coding style guide in mind (particularly only using 2-space indentation instead of 4 spaces). If you come across such a file, and want to make changes to it, please refrain from reformatting the whole file when only modifying a part of the code and instead adhere to the respective file's legacy format. If you're however migrating such a source file fully from JavaScript to Typescript, please use the modern syntax for the updated file.
+### TypeScript
+
+New code should be TypeScript (`.ts` under `modules/` and `test/` where it fits). Style is enforced by tooling rather than a written style guide:
+
+- **Lint (all `.ts`):** develop-parity rules, same base as JavaScript (see [`oxlint.config.mjs`](oxlint.config.mjs)).
+- **Lint (allowlisted `.ts` only):** stricter TypeScript rules (`no-var`, `prefer-const`, …).
+- **Format (allowlisted `.ts` only):** [Oxfmt](https://oxc.rs/docs/guide/usage/formatter).
+
+The allowlist is shared: [`oxc.allowlist.mjs`](oxc.allowlist.mjs) (used by Oxfmt and the stricter Oxlint override).
+
+Allowlist workflow:
+
+- **New `.ts` file** (did not exist before): add it to the allowlist immediately.
+- **JS → TS migration:** merge the migration PR first; add the file to the allowlist later in a follow-up formatting PR, and list that formatting commit in [`.git-blame-ignore-revs`](.git-blame-ignore-revs).
+
+**Editor:** install the [Oxc VS Code extension](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode). Format-on-save is enabled for TypeScript (`modificationsIfAvailable` when Git context is available), but Oxfmt only formats allowlisted files.
+
+### Lint and format commands
+
+All of these use the same roots: `config/`, `scripts/`, `test/spec/`, `modules/`.
+
+- **`npm run lint`** / **`npm run format`** — autofix (Oxlint with `--fix` / `--fix-suggestions` / `--fix-dangerously`; Oxfmt writes allowlisted TypeScript).
+- **`npm run lint:check`** / **`npm run format:check`** — report issues only, do not write files (must pass with **no lint errors**; warnings do not fail the build).
+- **`npm run lint:ci`** — `format:check` then `lint:check` (CI, after `npm run test`).
 
 
 ### HTML

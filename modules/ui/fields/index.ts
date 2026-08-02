@@ -14,11 +14,7 @@ export * from './textarea';
 export * from './wikidata';
 export * from './wikipedia';
 
-import {
-    uiFieldCheck,
-    uiFieldDefaultCheck,
-    uiFieldOnewayCheck
-} from './check';
+import { uiFieldCheck, uiFieldDefaultCheck, uiFieldOnewayCheck } from './check';
 
 import {
     uiFieldCombo,
@@ -26,7 +22,7 @@ import {
     uiFieldMultiCombo,
     uiFieldNetworkCombo,
     uiFieldSemiCombo,
-    uiFieldTypeCombo
+    uiFieldTypeCombo,
 } from './combo';
 
 import {
@@ -38,13 +34,10 @@ import {
     uiFieldSchedule,
     uiFieldTel,
     uiFieldText,
-    uiFieldUrl
+    uiFieldUrl,
 } from './input';
 
-import {
-    uiFieldRadio,
-    uiFieldStructureRadio
-} from './radio';
+import { uiFieldRadio, uiFieldStructureRadio } from './radio';
 
 import { uiFieldAccess } from './access';
 import { uiFieldAddress } from './address';
@@ -58,7 +51,7 @@ import { uiFieldTextarea } from './textarea';
 import { uiFieldWikidata } from './wikidata';
 import { uiFieldWikipedia } from './wikipedia';
 
-export var uiFields = {
+export const uiFields = {
     access: uiFieldAccess,
     address: uiFieldAddress,
     check: uiFieldCheck,
@@ -91,5 +84,5 @@ export var uiFields = {
     typeCombo: uiFieldTypeCombo,
     url: uiFieldUrl,
     wikidata: uiFieldWikidata,
-    wikipedia: uiFieldWikipedia
+    wikipedia: uiFieldWikipedia,
 };

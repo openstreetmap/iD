@@ -1,44 +1,59 @@
 import { actionDeleteNode } from './delete_node';
 import {
-    geoVecAdd, geoVecEqual, geoVecInterp, geoVecLength, geoVecNormalize,
-    geoVecProject, geoVecScale, geoVecSubtract,
-    geoOrthoCalcScore, geoOrthoCanOrthogonalize, geoVecNormalizedDot
+    geoVecAdd,
+    geoVecEqual,
+    geoVecInterp,
+    geoVecLength,
+    geoVecNormalize,
+    geoVecProject,
+    geoVecScale,
+    geoVecSubtract,
+    geoOrthoCalcScore,
+    geoOrthoCanOrthogonalize,
+    geoVecNormalizedDot,
 } from '../geo';
 import type { osmNode, EntityId, WayId } from '../osm';
 import type { Projection } from '../geo/raw_mercator';
 import type { Action } from '../core/history';
 import type { Vec2 } from '../geo/vector';
 
+interface Point {
+    id: EntityId;
+    coord: Vec2;
+}
 
-interface Point { id: EntityId; coord: Vec2 }
-
-export function actionOrthogonalize(wayID: WayId, projection: Projection, vertexID?: EntityId, degThresh?: number, ep?: number): Action {
-    var epsilon = ep || 1e-4;
-    var threshold = degThresh || 13;  // degrees within right or straight to alter
+export function actionOrthogonalize(
+    wayID: WayId,
+    projection: Projection,
+    vertexID?: EntityId,
+    degThresh?: number,
+    ep?: number,
+): Action {
+    const epsilon = ep || 1e-4;
+    const threshold = degThresh || 13; // degrees within right or straight to alter
 
     // We test normalized dot products so we can compare as cos(angle)
-    var lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180);
-    var upperThreshold = Math.cos(threshold * Math.PI / 180);
+    const lowerThreshold = Math.cos(((90 - threshold) * Math.PI) / 180);
+    const upperThreshold = Math.cos((threshold * Math.PI) / 180);
 
-
-    var action: Action = function(graph, t) {
+    const action: Action = function (graph, t) {
         if (t === null || !isFinite(t!)) t = 1;
         t = Math.min(Math.max(+t!, 0), 1);
 
         let way = graph.entity(wayID);
-        way = way.removeNode('');   // sanity check - remove any consecutive duplicates
+        way = way.removeNode(''); // sanity check - remove any consecutive duplicates
 
         if (way.tags.nonsquare) {
-            var tags = { ...way.tags };
+            const tags = { ...way.tags };
             // since we're squaring, remove indication that this is physically unsquare
             delete tags.nonsquare;
-            way = way.update({tags: tags});
+            way = way.update({ tags: tags });
         }
 
         graph = graph.replace(way);
 
-        var isClosed = way.isClosed();
-        var nodes = graph.childNodes(way).slice();  // shallow copy
+        const isClosed = way.isClosed();
+        let nodes = graph.childNodes(way).slice(); // shallow copy
         if (isClosed) nodes.pop();
 
         if (vertexID !== undefined) {
@@ -48,10 +63,10 @@ export function actionOrthogonalize(wayID: WayId, projection: Projection, vertex
 
         // note: all geometry functions here use the unclosed node/point/coord list
 
-        var nodeCount: Record<EntityId, number> = {};
-        var points: Point[] = [];
-        var corner = { i: 0, dotp: 1 };
-        var node: osmNode, point, loc, score, motions, i, j;
+        const nodeCount: Record<EntityId, number> = {};
+        const points: Point[] = [];
+        const corner = { i: 0, dotp: 1 };
+        let node: osmNode, point, loc, score, motions, i, j;
 
         for (i = 0; i < nodes.length; i++) {
             node = nodes[i];
@@ -59,8 +74,8 @@ export function actionOrthogonalize(wayID: WayId, projection: Projection, vertex
             points.push({ id: node.id, coord: projection(node.loc) });
         }
 
-
-        if (points.length === 3) {   // move only one vertex for right triangle
+        if (points.length === 3) {
+            // move only one vertex for right triangle
             for (i = 0; i < 1000; i++) {
                 const motion = calcMotion(points[1], 1, points);
 
@@ -74,7 +89,6 @@ export function actionOrthogonalize(wayID: WayId, projection: Projection, vertex
             node = graph.entity(nodes[corner.i].id);
             loc = projection.invert(points[corner.i].coord);
             graph = graph.replace(node.move(geoVecInterp(node.loc, loc, t)));
-
         } else {
             const straights = [];
             const simplified = [];
@@ -98,8 +112,8 @@ export function actionOrthogonalize(wayID: WayId, projection: Projection, vertex
             }
 
             // Orthogonalize the simplified shape
-            var bestPoints = clonePoints(simplified);
-            var originalPoints = clonePoints(simplified);
+            let bestPoints = clonePoints(simplified);
+            const originalPoints = clonePoints(simplified);
 
             score = Infinity;
             for (i = 0; i < 1000; i++) {
@@ -108,7 +122,7 @@ export function actionOrthogonalize(wayID: WayId, projection: Projection, vertex
                 for (j = 0; j < motions.length; j++) {
                     simplified[j].coord = geoVecAdd(simplified[j].coord, motions[j]);
                 }
-                var newScore = geoOrthoCalcScore(simplified, isClosed, epsilon, threshold);
+                const newScore = geoOrthoCalcScore(simplified, isClosed, epsilon, threshold);
                 if (newScore < score) {
                     bestPoints = clonePoints(simplified);
                     score = newScore;
@@ -118,7 +132,9 @@ export function actionOrthogonalize(wayID: WayId, projection: Projection, vertex
                 }
             }
 
-            var bestCoords = bestPoints.map(function(p) { return p.coord; });
+            const bestCoords = bestPoints.map(function (p) {
+                return p.coord;
+            });
             if (isClosed) bestCoords.push(bestCoords[0]);
 
             // move the nodes that should move
@@ -134,21 +150,21 @@ export function actionOrthogonalize(wayID: WayId, projection: Projection, vertex
             // move the nodes along straight segments
             for (i = 0; i < straights.length; i++) {
                 point = straights[i];
-                if (nodeCount[point.id] > 1) continue;   // skip self-intersections
+                if (nodeCount[point.id] > 1) continue; // skip self-intersections
 
                 node = graph.entity(point.id);
 
-                if (t === 1 &&
+                if (
+                    t === 1 &&
                     graph.parentWays(node).length === 1 &&
                     graph.parentRelations(node).length === 0 &&
                     !node.hasInterestingTags()
                 ) {
                     // remove uninteresting points..
                     graph = actionDeleteNode(node.id)(graph);
-
                 } else {
                     // move interesting points to the nearest edge..
-                    var choice = geoVecProject(point.coord, bestCoords);
+                    const choice = geoVecProject(point.coord, bestCoords);
                     if (choice) {
                         loc = projection.invert(choice.target!);
                         graph = graph.replace(node.move(geoVecInterp(node.loc, loc, t)));
@@ -159,13 +175,11 @@ export function actionOrthogonalize(wayID: WayId, projection: Projection, vertex
 
         return graph;
 
-
         function clonePoints(array: Point[]): Point[] {
-            return array.map(function(p) {
+            return array.map(function (p) {
                 return { id: p.id, coord: [p.coord[0], p.coord[1]] };
             });
         }
-
 
         function calcMotion(point: Point, i: number, array: Point[]): Vec2 {
             // don't try to move the endpoints of a non-closed way.
@@ -173,43 +187,43 @@ export function actionOrthogonalize(wayID: WayId, projection: Projection, vertex
             // don't try to move a node that appears more than once (self intersection)
             if (nodeCount[array[i].id] > 1) return [0, 0];
 
-            var a = array[(i - 1 + array.length) % array.length].coord;
-            var origin = point.coord;
-            var b = array[(i + 1) % array.length].coord;
-            var p = geoVecSubtract(a, origin);
-            var q = geoVecSubtract(b, origin);
+            const a = array[(i - 1 + array.length) % array.length].coord;
+            const origin = point.coord;
+            const b = array[(i + 1) % array.length].coord;
+            let p = geoVecSubtract(a, origin);
+            let q = geoVecSubtract(b, origin);
 
-            var scale = 2 * Math.min(geoVecLength(p), geoVecLength(q));
+            const scale = 2 * Math.min(geoVecLength(p), geoVecLength(q));
             p = geoVecNormalize(p);
             q = geoVecNormalize(q);
 
-            var dotp = (p[0] * q[0] + p[1] * q[1]);
-            var val = Math.abs(dotp);
+            const dotp = p[0] * q[0] + p[1] * q[1];
+            const val = Math.abs(dotp);
 
-            if (val < lowerThreshold) {  // nearly orthogonal
+            if (val < lowerThreshold) {
+                // nearly orthogonal
                 corner.i = i;
                 corner.dotp = val;
-                var vec = geoVecNormalize(geoVecAdd(p, q));
+                const vec = geoVecNormalize(geoVecAdd(p, q));
                 return geoVecScale(vec, 0.1 * dotp * scale);
             }
 
-            return [0, 0];   // do nothing
+            return [0, 0]; // do nothing
         }
     };
-
 
     // if we are only orthogonalizing one vertex,
     // get that vertex and the previous and next
     function nodeSubset(nodes: osmNode[], vertexID: EntityId, isClosed: boolean) {
-        var first = isClosed ? 0 : 1;
-        var last = isClosed ? nodes.length : nodes.length - 1;
+        const first = isClosed ? 0 : 1;
+        const last = isClosed ? nodes.length : nodes.length - 1;
 
-        for (var i = first; i < last; i++) {
+        for (let i = first; i < last; i++) {
             if (nodes[i].id === vertexID) {
                 return [
                     nodes[(i - 1 + nodes.length) % nodes.length],
                     nodes[i],
-                    nodes[(i + 1) % nodes.length]
+                    nodes[(i + 1) % nodes.length],
                 ];
             }
         }
@@ -217,14 +231,13 @@ export function actionOrthogonalize(wayID: WayId, projection: Projection, vertex
         return [];
     }
 
-
-    action.disabled = function(graph) {
+    action.disabled = function (graph) {
         let way = graph.entity(wayID);
-        way = way.removeNode('');   // sanity check - remove any consecutive duplicates
+        way = way.removeNode(''); // sanity check - remove any consecutive duplicates
         graph = graph.replace(way);
 
         let isClosed = way.isClosed();
-        let nodes = graph.childNodes(way).slice();  // shallow copy
+        let nodes = graph.childNodes(way).slice(); // shallow copy
         if (isClosed) nodes.pop();
 
         let allowStraightAngles = false;
@@ -235,8 +248,16 @@ export function actionOrthogonalize(wayID: WayId, projection: Projection, vertex
             isClosed = false; // from now on: treat these 3 ways as a line
         }
 
-        const coords = nodes.map(function(n) { return projection(n.loc); });
-        const score = geoOrthoCanOrthogonalize(coords, isClosed, epsilon, threshold, allowStraightAngles);
+        const coords = nodes.map(function (n) {
+            return projection(n.loc);
+        });
+        const score = geoOrthoCanOrthogonalize(
+            coords,
+            isClosed,
+            epsilon,
+            threshold,
+            allowStraightAngles,
+        );
 
         if (score === null) {
             return 'not_squarish';
@@ -246,7 +267,6 @@ export function actionOrthogonalize(wayID: WayId, projection: Projection, vertex
             return false;
         }
     };
-
 
     action.transitionable = true;
 

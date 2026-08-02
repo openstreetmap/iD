@@ -8,94 +8,113 @@ import type { Feature } from 'geojson';
 import type { Vec2 } from '../geo/vector';
 
 export interface Midpoint {
-    type: 'midpoint',
+    type: 'midpoint';
     id: string;
     loc: Vec2;
-    edge: [NodeId, NodeId],
+    edge: [NodeId, NodeId];
     parents: osmWay[];
 }
 
 export function svgMidpoints(projection: Projection, context: iD.Context) {
-    var targetRadius = 8;
+    const targetRadius = 8;
 
-    function drawTargets(selection: d3.Selection, graph: coreGraph, entities: Midpoint[], filter: (node: Midpoint) => boolean) {
-        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
-        var getTransform = svgPointTransform(projection).geojson;
+    function drawTargets(
+        selection: d3.Selection,
+        graph: coreGraph,
+        entities: Midpoint[],
+        filter: (node: Midpoint) => boolean,
+    ) {
+        const fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        const getTransform = svgPointTransform(projection).geojson;
 
-        var data = entities.map(function(midpoint): Feature {
+        const data = entities.map(function (midpoint): Feature {
             return {
                 type: 'Feature',
                 id: midpoint.id,
                 properties: {
                     target: true,
-                    entity: midpoint
+                    entity: midpoint,
                 },
                 geometry: {
                     type: 'Point',
-                    coordinates: midpoint.loc
-                }
+                    coordinates: midpoint.loc,
+                },
             };
         });
 
-        var targets = selection.selectAll<SVGCircleElement, Feature>('.midpoint.target')
-            .filter(function(d) { return filter(d.properties!.entity); })
-            .data(data, function key(d) { return d.id!; });
+        const targets = selection
+            .selectAll<SVGCircleElement, Feature>('.midpoint.target')
+            .filter(function (d) {
+                return filter(d.properties!.entity);
+            })
+            .data(data, function key(d) {
+                return d.id!;
+            });
 
         // exit
-        targets.exit()
-            .remove();
+        targets.exit().remove();
 
         // enter/update
-        targets.enter()
+        targets
+            .enter()
             .append('circle')
             .attr('r', targetRadius)
             .merge(targets)
-            .attr('class', function(d) { return 'node midpoint target ' + fillClass + d.id; })
+            .attr('class', function (d) {
+                return 'node midpoint target ' + fillClass + d.id;
+            })
             .attr('transform', getTransform);
     }
 
+    function drawMidpoints(
+        selection: d3.Selection,
+        graph: coreGraph,
+        entities: osmWay[],
+        filter: (way: osmWay) => boolean,
+        extent: geoExtent,
+    ) {
+        const drawLayer = selection.selectAll('.layer-osm.points .points-group.midpoints');
+        const touchLayer = selection.selectAll<HTMLElement, any>('.layer-touch.points');
 
-    function drawMidpoints(selection: d3.Selection, graph: coreGraph, entities: osmWay[], filter: (way: osmWay) => boolean, extent: geoExtent) {
-        var drawLayer = selection.selectAll('.layer-osm.points .points-group.midpoints');
-        var touchLayer = selection.selectAll<HTMLElement, any>('.layer-touch.points');
-
-        var mode = context.mode();
+        const mode = context.mode();
         if ((mode && mode.id !== 'select') || !context.map().withinEditableZoom()) {
             drawLayer.selectAll('.midpoint').remove();
             touchLayer.selectAll('.midpoint.target').remove();
             return;
         }
 
-        var poly = extent.polygon();
-        var midpoints: Record<string, Midpoint> = {};
+        const poly = extent.polygon();
+        const midpoints: Record<string, Midpoint> = {};
 
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
+        for (let i = 0; i < entities.length; i++) {
+            const entity = entities[i];
 
             if (entity.type !== 'way') continue;
             if (!filter(entity)) continue;
             if (context.selectedIDs().indexOf(entity.id) < 0) continue;
 
-            var nodes = graph.childNodes(entity);
-            for (var j = 0; j < nodes.length - 1; j++) {
-                var a = nodes[j];
-                var b = nodes[j + 1];
-                var id = [a.id, b.id].sort().join('-');
+            const nodes = graph.childNodes(entity);
+            for (let j = 0; j < nodes.length - 1; j++) {
+                const a = nodes[j];
+                const b = nodes[j + 1];
+                const id = [a.id, b.id].sort().join('-');
 
                 if (midpoints[id]) {
                     midpoints[id].parents.push(entity);
                 } else if (geoVecLength(projection(a.loc), projection(b.loc)) > 40) {
-                    var point = geoVecInterp(a.loc, b.loc, 0.5);
-                    var loc = null;
+                    let point = geoVecInterp(a.loc, b.loc, 0.5);
+                    let loc = null;
 
                     if (extent.intersects(point)) {
                         loc = point;
                     } else {
-                        for (var k = 0; k < 4; k++) {
+                        for (let k = 0; k < 4; k++) {
                             point = geoLineIntersection([a.loc, b.loc], [poly[k], poly[k + 1]])!;
-                            if (point &&
+                            if (
+                                point &&
                                 geoVecLength(projection(a.loc), projection(point)) > 20 &&
-                                geoVecLength(projection(b.loc), projection(point)) > 20) {
+                                geoVecLength(projection(b.loc), projection(point)) > 20
+                            ) {
                                 loc = point;
                                 break;
                             }
@@ -108,18 +127,17 @@ export function svgMidpoints(projection: Projection, context: iD.Context) {
                             id: id,
                             loc: loc,
                             edge: [a.id, b.id],
-                            parents: [entity]
+                            parents: [entity],
                         };
                     }
                 }
             }
         }
 
-
         function midpointFilter(d: Midpoint) {
             if (midpoints[d.id]) return true;
 
-            for (var i = 0; i < d.parents.length; i++) {
+            for (let i = 0; i < d.parents.length; i++) {
                 if (filter(d.parents[i])) {
                     return true;
                 }
@@ -128,49 +146,42 @@ export function svgMidpoints(projection: Projection, context: iD.Context) {
             return false;
         }
 
-
-        var groups = drawLayer.selectAll<SVGGElement, Midpoint>('.midpoint')
+        let groups = drawLayer
+            .selectAll<SVGGElement, Midpoint>('.midpoint')
             .filter(midpointFilter)
-            .data(Object.values(midpoints), function(d) { return d.id; });
+            .data(Object.values(midpoints), function (d) {
+                return d.id;
+            });
 
-        groups.exit()
-            .remove();
+        groups.exit().remove();
 
-        var enter = groups.enter()
-            .insert('g', ':first-child')
-            .attr('class', 'midpoint');
+        const enter = groups.enter().insert('g', ':first-child').attr('class', 'midpoint');
 
-        enter
-            .append('polygon')
-            .attr('points', '-6,8 10,0 -6,-8')
-            .attr('class', 'shadow');
+        enter.append('polygon').attr('points', '-6,8 10,0 -6,-8').attr('class', 'shadow');
 
-        enter
-            .append('polygon')
-            .attr('points', '-3,4 5,0 -3,-4')
-            .attr('class', 'fill');
+        enter.append('polygon').attr('points', '-3,4 5,0 -3,-4').attr('class', 'fill');
 
         groups = groups
             .merge(enter)
-            .attr('transform', function(d) {
-                var translate = svgPointTransform(projection);
-                var a = graph.entity(d.edge[0]);
-                var b = graph.entity(d.edge[1]);
-                var angle = geoAngle(a, b, projection) * (180 / Math.PI);
+            .attr('transform', function (d) {
+                const translate = svgPointTransform(projection);
+                const a = graph.entity(d.edge[0]);
+                const b = graph.entity(d.edge[1]);
+                const angle = geoAngle(a, b, projection) * (180 / Math.PI);
                 return translate(d) + ' rotate(' + angle + ')';
             })
-            .call(svgTagClasses<Midpoint>().tags(
-                function(d) { return d.parents[0].tags; }
-            ));
+            .call(
+                svgTagClasses<Midpoint>().tags(function (d) {
+                    return d.parents[0].tags;
+                }),
+            );
 
         // Propagate data bindings.
         groups.select('polygon.shadow');
         groups.select('polygon.fill');
 
-
         // Draw touch targets..
-        touchLayer
-            .call(drawTargets, graph, Object.values(midpoints), midpointFilter);
+        touchLayer.call(drawTargets, graph, Object.values(midpoints), midpointFilter);
     }
 
     return drawMidpoints;

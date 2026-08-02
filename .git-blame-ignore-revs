@@ -6,3 +6,6 @@
 
 # Install `@vitest/eslint-plugin` (#12300)
 52f577e68c8bab069476a5fe920a9bf86ceaf1e7
+
+# Allowlisted TypeScript reformatting (Oxfmt / Oxlint)
+d969fe0d8d949b7c7f5ce7ea7382e178a7d86cb9
