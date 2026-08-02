@@ -28,11 +28,10 @@ updates:
         patterns:
           - "@turf/*"
         applies-to: version-updates
-      eslint:
+      oxc:
         patterns:
-          - "@eslint/*"
-          - "eslint"
-          - "typescript-eslint"
+          - "oxlint"
+          - "oxfmt"
         applies-to: version-updates
       cldr:
         patterns:

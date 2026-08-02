@@ -35,6 +35,7 @@ jobs:
     - run: npm audit signatures
     - run: npm run all
     - run: npm run test
+    - run: npm run lint:ci
 
     - name: '[PR Preview] Upload dist folder'
       if: ${{github.event_name == 'pull_request' && matrix.node-version.isLatest}}
