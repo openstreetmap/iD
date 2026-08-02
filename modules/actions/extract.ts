@@ -11,11 +11,10 @@ export interface ActionExtract extends Action<boolean> {
 }
 
 export function actionExtract(entityID: NodeId, projection: Projection): ActionExtract {
+    let extractedNodeID: NodeId;
 
-    var extractedNodeID: NodeId;
-
-    const action: ActionExtract = function(graph, _t, shiftKeyPressed) {
-        var entity = graph.entity(entityID);
+    const action: ActionExtract = function (graph, _t, shiftKeyPressed) {
+        const entity = graph.entity(entityID);
 
         if (entity.type === 'node') {
             return extractFromNode(entity, graph, shiftKeyPressed);
@@ -24,63 +23,71 @@ export function actionExtract(entityID: NodeId, projection: Projection): ActionE
         return extractFromWayOrRelation(entity, graph);
     };
 
-    function extractFromNode(node: osmNode, graph: coreGraph, shiftKeyPressed: boolean | undefined) {
-
+    function extractFromNode(
+        node: osmNode,
+        graph: coreGraph,
+        shiftKeyPressed: boolean | undefined,
+    ) {
         extractedNodeID = node.id;
 
         // Create a new node to replace the one we will detach
-        var replacement = new osmNode({ loc: node.loc });
+        const replacement = new osmNode({ loc: node.loc });
         graph = graph.replace(replacement);
 
         // Process each way in turn, updating the graph as we go
-        graph = graph.parentWays(node)
-            .reduce(function(accGraph, parentWay) {
-                return accGraph.replace(parentWay.replaceNode(entityID, replacement.id));
-            }, graph);
+        graph = graph.parentWays(node).reduce(function (accGraph, parentWay) {
+            return accGraph.replace(parentWay.replaceNode(entityID, replacement.id));
+        }, graph);
 
         if (!shiftKeyPressed) return graph;
 
         // Process any relations too
         // but only if the user holds down the shift key while triggering the operation.
-        return graph.parentRelations(node)
-            .reduce(function(accGraph, parentRel) {
-                return accGraph.replace(parentRel.replaceMember(node, replacement));
-            }, graph);
+        return graph.parentRelations(node).reduce(function (accGraph, parentRel) {
+            return accGraph.replace(parentRel.replaceMember(node, replacement));
+        }, graph);
     }
 
     function extractFromWayOrRelation(entity: OsmEntity, graph: coreGraph) {
+        const fromGeometry = entity.geometry(graph);
 
-        var fromGeometry = entity.geometry(graph);
+        const keysToCopyAndRetain = ['source', 'wheelchair'];
+        const keysToRetain = ['area'];
+        const buildingKeysToRetain = [
+            'architect',
+            'building',
+            'height',
+            'layer',
+            'nycdoitt:bin',
+            'ref:GB:uprn',
+            'ref:linz:building_id',
+        ];
 
-        var keysToCopyAndRetain = ['source', 'wheelchair'];
-        var keysToRetain = ['area'];
-        var buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin', 'ref:GB:uprn', 'ref:linz:building_id'];
-
-        var extractedLoc = d3_geoPath(projection).centroid(entity.asGeoJSON(graph));
+        let extractedLoc = d3_geoPath(projection).centroid(entity.asGeoJSON(graph));
         extractedLoc = extractedLoc && projection.invert(extractedLoc);
-        if (!extractedLoc  || !isFinite(extractedLoc[0]) || !isFinite(extractedLoc[1])) {
+        if (!extractedLoc || !isFinite(extractedLoc[0]) || !isFinite(extractedLoc[1])) {
             extractedLoc = entity.extent(graph).center();
         }
 
-        var indoorAreaValues: Record<TagValue, boolean> = {
+        const indoorAreaValues: Record<TagValue, boolean> = {
             area: true,
             corridor: true,
             elevator: true,
             level: true,
-            room: true
+            room: true,
         };
 
-        var isBuilding = (entity.tags.building && entity.tags.building !== 'no') ||
+        const isBuilding =
+            (entity.tags.building && entity.tags.building !== 'no') ||
             (entity.tags['building:part'] && entity.tags['building:part'] !== 'no');
 
-        var isIndoorArea = fromGeometry === 'area' && entity.tags.indoor && indoorAreaValues[entity.tags.indoor];
+        const isIndoorArea =
+            fromGeometry === 'area' && entity.tags.indoor && indoorAreaValues[entity.tags.indoor];
 
-        var entityTags = { ...entity.tags };  // shallow copy
-        var pointTags: Tags = {};
-        for (var key in entityTags) {
-
-            if (entity.type === 'relation' &&
-                key === 'type') {
+        const entityTags = { ...entity.tags }; // shallow copy
+        const pointTags: Tags = {};
+        for (const key in entityTags) {
+            if (entity.type === 'relation' && key === 'type') {
                 continue;
             }
 
@@ -90,9 +97,13 @@ export function actionExtract(entityID: NodeId, projection: Projection): ActionE
 
             if (isBuilding) {
                 // don't transfer building-related tags
-                if (buildingKeysToRetain.indexOf(key) !== -1 ||
+                if (
+                    buildingKeysToRetain.indexOf(key) !== -1 ||
                     key.match(/^building:.{1,}/) ||
-                    key.match(/^roof:.{1,}/)) continue;
+                    key.match(/^roof:.{1,}/)
+                ) {
+                    continue;
+                }
             }
             // leave `indoor` tag on the area
             if (isIndoorArea && key === 'indoor') {
@@ -103,8 +114,7 @@ export function actionExtract(entityID: NodeId, projection: Projection): ActionE
             pointTags[key] = entityTags[key];
 
             // leave addresses and some other tags so they're on both features
-            if (keysToCopyAndRetain.indexOf(key) !== -1 ||
-                key.match(/^addr:.{1,}/)) {
+            if (keysToCopyAndRetain.indexOf(key) !== -1 || key.match(/^addr:.{1,}/)) {
                 continue;
             } else if (isIndoorArea && key === 'level') {
                 // leave `level` on both features
@@ -120,15 +130,15 @@ export function actionExtract(entityID: NodeId, projection: Projection): ActionE
             entityTags.area = 'yes';
         }
 
-        var replacement = new osmNode({ loc: extractedLoc, tags: pointTags });
+        const replacement = new osmNode({ loc: extractedLoc, tags: pointTags });
         graph = graph.replace(replacement);
 
         extractedNodeID = replacement.id;
 
-        return graph.replace(entity.update({tags: entityTags}));
+        return graph.replace(entity.update({ tags: entityTags }));
     }
 
-    action.getExtractedNodeID = function() {
+    action.getExtractedNodeID = function () {
         return extractedNodeID;
     };
 

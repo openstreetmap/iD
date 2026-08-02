@@ -6,14 +6,12 @@ import type { coreGraph } from './graph';
 import type { OsmEntity } from '../osm/abstract-entity';
 import type { EntityId, osmNode, osmRelation, osmWay } from '../osm';
 
-
 interface Change {
     base: OsmEntity | undefined;
     head: OsmEntity | undefined;
 }
 
 type ChangeType = 'created' | 'modified' | 'deleted';
-
 
 /**
     iD.coreDifference represents the difference between two graphs.
@@ -33,8 +31,8 @@ export function coreDifference(base: coreGraph, head: coreGraph) {
     } = {};
 
     function checkEntityID(id: EntityId) {
-        var h = head.entities[id];
-        var b = base.entities[id];
+        const h = head.entities[id];
+        const b = base.entities[id];
 
         if (h === b) return;
         if (_changes[id]) return;
@@ -51,17 +49,35 @@ export function coreDifference(base: coreGraph, head: coreGraph) {
         }
 
         if (h && b) {
-            if (h.type === 'relation' && b.type === 'relation' && h.members && b.members && !deepEqual(h.members, b.members)) {
+            if (
+                h.type === 'relation' &&
+                b.type === 'relation' &&
+                h.members &&
+                b.members &&
+                !deepEqual(h.members, b.members)
+            ) {
                 _changes[id] = { base: b, head: h };
                 _didChange.geometry = true;
                 _didChange.properties = true;
                 return;
             }
-            if (h.type === 'node' && b.type === 'node' && h.loc && b.loc && !geoVecEqual(h.loc, b.loc)) {
+            if (
+                h.type === 'node' &&
+                b.type === 'node' &&
+                h.loc &&
+                b.loc &&
+                !geoVecEqual(h.loc, b.loc)
+            ) {
                 _changes[id] = { base: b, head: h };
                 _didChange.geometry = true;
             }
-            if (h.type === 'way' && b.type === 'way' && h.nodes && b.nodes && !deepEqual(h.nodes, b.nodes)) {
+            if (
+                h.type === 'way' &&
+                b.type === 'way' &&
+                h.nodes &&
+                b.nodes &&
+                !deepEqual(h.nodes, b.nodes)
+            ) {
                 _changes[id] = { base: b, head: h };
                 _didChange.geometry = true;
             }
@@ -76,40 +92,45 @@ export function coreDifference(base: coreGraph, head: coreGraph) {
         // HOT CODE: there can be many thousands of downloaded entities, so looping
         // through them all can become a performance bottleneck. Optimize by
         // resolving duplicates and using a basic `for` loop
-        var ids = utilArrayUniq(Object.keys(head.entities).concat(Object.keys(base.entities)));
-        for (var i = 0; i < ids.length; i++) {
+        const ids = utilArrayUniq(Object.keys(head.entities).concat(Object.keys(base.entities)));
+        for (let i = 0; i < ids.length; i++) {
             checkEntityID(ids[i]);
         }
     }
     load();
 
-
     function length() {
         return Object.keys(_changes).length;
-    };
-
+    }
 
     function changes() {
         return _changes;
-    };
-
+    }
 
     // pass true to include affected relation members
     function extantIDs(includeRelMembers?: boolean) {
-        var result = new Set<EntityId>();
-        Object.keys(_changes).forEach(function(id) {
+        const result = new Set<EntityId>();
+        Object.keys(_changes).forEach(function (id) {
             if (_changes[id].head) {
                 result.add(id);
             }
 
-            var h = _changes[id].head;
-            var b = _changes[id].base;
-            var entity = (h || b)!;
+            const h = _changes[id].head;
+            const b = _changes[id].base;
+            const entity = (h || b)!;
 
             if (includeRelMembers && entity.type === 'relation') {
-                var mh = h ? (h as osmRelation).members.map(function(m) { return m.id; }) : [];
-                var mb = b ? (b as osmRelation).members.map(function(m) { return m.id; }) : [];
-                utilArrayUnion(mh, mb).forEach(function(memberID) {
+                const mh = h
+                    ? (h as osmRelation).members.map(function (m) {
+                          return m.id;
+                      })
+                    : [];
+                const mb = b
+                    ? (b as osmRelation).members.map(function (m) {
+                          return m.id;
+                      })
+                    : [];
+                utilArrayUnion(mh, mb).forEach(function (memberID) {
                     if (head.hasEntity(memberID)) {
                         result.add(memberID);
                     }
@@ -118,44 +139,40 @@ export function coreDifference(base: coreGraph, head: coreGraph) {
         });
 
         return Array.from(result);
-    };
-
+    }
 
     function modified() {
-        var result: OsmEntity[] = [];
-        Object.values(_changes).forEach(function(change) {
+        const result: OsmEntity[] = [];
+        Object.values(_changes).forEach(function (change) {
             if (change.base && change.head) {
                 result.push(change.head);
             }
         });
         return result;
-    };
-
+    }
 
     function created() {
-        var result: OsmEntity[] = [];
-        Object.values(_changes).forEach(function(change) {
+        const result: OsmEntity[] = [];
+        Object.values(_changes).forEach(function (change) {
             if (!change.base && change.head) {
                 result.push(change.head);
             }
         });
         return result;
-    };
-
+    }
 
     function deleted() {
-        var result: OsmEntity[] = [];
-        Object.values(_changes).forEach(function(change) {
+        const result: OsmEntity[] = [];
+        Object.values(_changes).forEach(function (change) {
             if (change.base && !change.head) {
                 result.push(change.base);
             }
         });
         return result;
-    };
-
+    }
 
     function summary() {
-        var relevant: {
+        const relevant: {
             [id: EntityId]: {
                 entity: OsmEntity;
                 graph: coreGraph;
@@ -163,19 +180,21 @@ export function coreDifference(base: coreGraph, head: coreGraph) {
             };
         } = {};
 
-        var keys = Object.keys(_changes);
-        for (var i = 0; i < keys.length; i++) {
-            var change = _changes[keys[i]];
+        const keys = Object.keys(_changes);
+        for (let i = 0; i < keys.length; i++) {
+            const change = _changes[keys[i]];
 
             if (change.head && change.head.geometry(head) !== 'vertex') {
                 addEntity(change.head, head, change.base ? 'modified' : 'created');
-
             } else if (change.base && change.base.geometry(base) !== 'vertex') {
                 addEntity(change.base, base, 'deleted');
-
-            } else if (change.base && change.head) { // modified vertex
-                var moved    = !deepEqual((change.base as osmNode).loc,  (change.head as osmNode).loc);
-                var retagged = !deepEqual(change.base.tags, change.head.tags);
+            } else if (change.base && change.head) {
+                // modified vertex
+                const moved = !deepEqual(
+                    (change.base as osmNode).loc,
+                    (change.head as osmNode).loc,
+                );
+                const retagged = !deepEqual(change.base.tags, change.head.tags);
 
                 if (moved) {
                     addParents(change.head);
@@ -184,64 +203,64 @@ export function coreDifference(base: coreGraph, head: coreGraph) {
                 if (retagged || (moved && change.head.hasInterestingTags())) {
                     addEntity(change.head, head, 'modified');
                 }
-
-            } else if (change.head && change.head.hasInterestingTags()) { // created vertex
+            } else if (change.head && change.head.hasInterestingTags()) {
+                // created vertex
                 addEntity(change.head, head, 'created');
-
-            } else if (change.base && change.base.hasInterestingTags()) { // deleted vertex
+            } else if (change.base && change.base.hasInterestingTags()) {
+                // deleted vertex
                 addEntity(change.base, base, 'deleted');
             }
         }
 
         return Object.values(relevant);
 
-
         function addEntity(entity: OsmEntity, graph: coreGraph, changeType: ChangeType) {
             relevant[entity.id] = {
                 entity: entity,
                 graph: graph,
-                changeType: changeType
+                changeType: changeType,
             };
         }
 
         function addParents(entity: OsmEntity) {
-            var parents = head.parentWays(entity);
-            for (var j = parents.length - 1; j >= 0; j--) {
-                var parent = parents[j];
+            const parents = head.parentWays(entity);
+            for (let j = parents.length - 1; j >= 0; j--) {
+                const parent = parents[j];
                 if (!(parent.id in relevant)) {
                     addEntity(parent, head, 'modified');
                 }
             }
         }
-    };
-
+    }
 
     // returns complete set of entities that require a redraw
     //  (optionally within given `extent`)
     function complete(extent?: geoExtent) {
-        var result: { [id: EntityId]: OsmEntity | undefined; } = {};
+        const result: { [id: EntityId]: OsmEntity | undefined } = {};
 
         for (const _id in _changes) {
             const id = <EntityId>_id;
             const change = _changes[id];
 
-            var h = change.head;
-            var b = change.base;
-            var entity = (h || b)!;
-            var i;
+            const h = change.head;
+            const b = change.base;
+            const entity = (h || b)!;
+            let i;
 
-            if (extent &&
+            if (
+                extent &&
                 (!h || !h.intersects(extent, head)) &&
-                (!b || !b.intersects(extent, base))) {
+                (!b || !b.intersects(extent, base))
+            ) {
                 continue;
             }
 
             result[id] = h;
 
             if (entity.type === 'way') {
-                var nh = h ? (h as osmWay).nodes : [];
-                var nb = b ? (b as osmWay).nodes : [];
-                var diff;
+                const nh = h ? (h as osmWay).nodes : [];
+                const nb = b ? (b as osmWay).nodes : [];
+                let diff;
 
                 diff = utilArrayDifference(nh, nb);
                 for (i = 0; i < diff.length; i++) {
@@ -255,13 +274,21 @@ export function coreDifference(base: coreGraph, head: coreGraph) {
             }
 
             if (entity.type === 'relation' && entity.isMultipolygon()) {
-                var mh = h ? (h as osmRelation).members.map(function(m) { return m.id; }) : [];
-                var mb = b ? (b as osmRelation).members.map(function(m) { return m.id; }) : [];
-                var ids = utilArrayUnion(mh, mb);
+                const mh = h
+                    ? (h as osmRelation).members.map(function (m) {
+                          return m.id;
+                      })
+                    : [];
+                const mb = b
+                    ? (b as osmRelation).members.map(function (m) {
+                          return m.id;
+                      })
+                    : [];
+                const ids = utilArrayUnion(mh, mb);
                 for (i = 0; i < ids.length; i++) {
-                    var member = head.hasEntity(ids[i]);
-                    if (!member) continue;   // not downloaded
-                    if (extent && !member.intersects(extent, head)) continue;   // not visible
+                    const member = head.hasEntity(ids[i]);
+                    if (!member) continue; // not downloaded
+                    if (extent && !member.intersects(extent, head)) continue; // not visible
                     result[ids[i]] = member;
                 }
             }
@@ -272,17 +299,19 @@ export function coreDifference(base: coreGraph, head: coreGraph) {
 
         return result;
 
-
-        function addParents(parents: OsmEntity[], result: { [id: EntityId]: OsmEntity | undefined; }) {
-            for (var i = 0; i < parents.length; i++) {
-                var parent = parents[i];
+        function addParents(
+            parents: OsmEntity[],
+            result: { [id: EntityId]: OsmEntity | undefined },
+        ) {
+            for (let i = 0; i < parents.length; i++) {
+                const parent = parents[i];
                 if (parent.id in result) continue;
 
                 result[parent.id] = parent;
                 addParents(head.parentRelations(parent), result);
             }
         }
-    };
+    }
 
     const _diff = {
         length,
@@ -299,4 +328,4 @@ export function coreDifference(base: coreGraph, head: coreGraph) {
     return _diff;
 }
 
-export interface coreDifference extends ReturnType<typeof coreDifference> {}
+export type coreDifference = ReturnType<typeof coreDifference>;
