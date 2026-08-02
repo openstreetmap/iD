@@ -184,8 +184,7 @@ export class osmWay extends OsmAbstractEntity {
             if (key in osmSidednessTags && (value in osmSidednessTags[key])) {
                 if (osmSidednessTags[key][value] === true) {
                     return key;
-                } 
-                
+                }
                 // embankment=yes/dyke/both and cutting=yes/both are both-sided
                 // by default, but a separate `embankment:side=*` or
                 // `cutting:side=*` tag can narrow it to just one side.
@@ -195,7 +194,6 @@ export class osmWay extends OsmAbstractEntity {
                         return `${key}-${side}`;
                     }
                 }
-               
                 // if the map's value is something other than a
                 // literal true, we should use it so we can
                 // special case some keys (e.g. natural=coastline
