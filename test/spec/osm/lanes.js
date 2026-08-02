@@ -876,6 +876,28 @@ describe('iD.Lanes', function() {
             expect(maxspeed).toEqual(50);
         });
 
+        it('should parse single digit maxspeed correctly', function() {
+            var maxspeed = new iD.osmWay({
+                tags: {
+                    highway: 'living_street',
+                    lanes: 5,
+                    'maxspeed': '5'
+                }
+            }).lanes().metadata.maxspeed;
+            expect(maxspeed).toEqual(5);
+        });
+
+        it('should parse single digit maxspeed with units correctly', function() {
+            var maxspeed = new iD.osmWay({
+                tags: {
+                    highway: 'service',
+                    lanes: 5,
+                    'maxspeed': '5 mph'
+                }
+            }).lanes().metadata.maxspeed;
+            expect(maxspeed).toEqual(5);
+        });
+
         it('should return undefined when incorrect maxspeed unit provided', function() {
             var maxspeed = new iD.osmWay({
                 tags: {

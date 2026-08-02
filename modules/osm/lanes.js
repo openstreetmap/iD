@@ -119,7 +119,7 @@ function parseMaxspeed(tags) {
     var maxspeed = tags.maxspeed;
     if (!maxspeed) return;
 
-    var maxspeedRegex = /^([0-9][\.0-9]+?)(?:[ ]?(?:km\/h|kmh|kph|mph|knots))?$/;
+    var maxspeedRegex = /^([0-9][\.0-9]*?)(?:[ ]?(?:km\/h|kmh|kph|mph|knots))?$/;
     if (!maxspeedRegex.test(maxspeed)) return;
 
     return parseInt(maxspeed, 10);
