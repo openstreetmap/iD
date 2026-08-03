@@ -117,6 +117,13 @@ export function geoHasLineIntersections(activeNodes: OsmNode[], inactiveNodes: O
         for (k = 0; k < inactives.length; k++) {
             var p = actives[j];
             var q = inactives[k];
+            // skip if segments share an endpoint, e.g. where two rings of the
+            // same multipolygon touch at a node
+            if (geoVecEqual(p[1], q[0]) || geoVecEqual(p[0], q[1]) ||
+                geoVecEqual(p[0], q[0]) || geoVecEqual(p[1], q[1]) ) {
+                continue;
+            }
+
             var hit = geoLineIntersection(p, q);
             if (hit) {
                 return true;
