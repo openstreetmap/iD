@@ -5,7 +5,7 @@ import browserslistToEsbuild from 'browserslist-to-esbuild';
 import { browserslistToTargets } from 'lightningcss';
 import { defineConfig } from 'vitest/config';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { idCssPlugin } from './scripts/build_css';
+import { idCssPlugin } from './scripts/build_css.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
