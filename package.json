@@ -21,7 +21,6 @@
     "build:app": "vite build",
     "build:data": "shx mkdir -p dist/data && node scripts/build_data.js",
     "build:stats": "vite build --mode stats",
-    "stats:view": "npm run build:stats && npx -y serve docs -p 4174",
     "clean": "shx rm -f dist/*.js dist/*.map dist/*.css dist/img/*.svg",
     "dist": "run-p dist:**",
     "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",

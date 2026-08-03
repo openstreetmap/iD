@@ -2,6 +2,13 @@ declare global {
   declare var iD: typeof import('.');
   declare var VITEST: true;
 
+  interface Window {
+    /** @deprecated Debug-only. Use container DOM `.iD` once #11039 is resolved. */
+    context?: iD.Context;
+    /** @deprecated Debug-only. */
+    id?: iD.Context;
+  }
+
   declare type TagKey = string;
   declare type TagValue = string;
   declare type TagValueUpdate = string | undefined;

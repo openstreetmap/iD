@@ -1,4 +1,6 @@
-/// <reference types="vite/client" />
+interface ViteTypeOptions {
+  strictImportMetaEnv: boolean;
+}
 
 interface ImportMetaEnv {
   readonly ID_PRESETS_CDN_URL: string | undefined;
@@ -17,14 +19,3 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
-
-declare global {
-  interface Window {
-    /** @deprecated Debug-only. Use container DOM `.iD` once #11039 is resolved. */
-    context?: iD.Context;
-    /** @deprecated Debug-only. */
-    id?: iD.Context;
-  }
-}
-
-export {};
