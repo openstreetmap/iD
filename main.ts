@@ -17,10 +17,10 @@ function init(): void {
   }
 
   const assetBase = import.meta.env.DEV ? 'dist/' : '';
+  // `containerNode` is a GetSet; with an argument it returns the context, but TS widens to the getter union.
   const context = iD.coreContext()
     .assetPath(assetBase)
-    .containerNode(container);
-  if (!context) return;
+    .containerNode(container) as iD.Context;
 
   if (import.meta.env.DEV) {
     window.context = context;
