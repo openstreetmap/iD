@@ -31,10 +31,11 @@ const defaultOsmApiConnections: Record<OsmApiConnectionKey, OsmApiConnection> = 
 
 const osmApiConnections: OsmApiConnection[] = [];
 
-const idApiConnectionUrl = import.meta.env.ID_API_CONNECTION_URL ?? null;
-const idApiConnectionApiUrl = import.meta.env.ID_API_CONNECTION_API_URL ?? null;
-const idApiConnectionClientId = import.meta.env.ID_API_CONNECTION_CLIENT_ID ?? null;
-const idApiConnection = import.meta.env.ID_API_CONNECTION ?? null;
+// Empty strings from `.env` must fall through like the old esbuild `|| null` path.
+const idApiConnectionUrl = import.meta.env.ID_API_CONNECTION_URL || null;
+const idApiConnectionApiUrl = import.meta.env.ID_API_CONNECTION_API_URL || null;
+const idApiConnectionClientId = import.meta.env.ID_API_CONNECTION_CLIENT_ID || null;
+const idApiConnection = import.meta.env.ID_API_CONNECTION || null;
 
 if (idApiConnectionUrl !== null &&
     idApiConnectionClientId !== null) {
