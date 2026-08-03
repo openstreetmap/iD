@@ -76,7 +76,7 @@ export default tseslint.config(
       'no-promise-executor-return': 'error',
       'no-proto': 'error',
       'no-prototype-builtins': 'off',
-      'no-restricted-globals': ['error', ...confusingGlobals],
+      'no-restricted-globals': ['error', ...confusingGlobals, { name: 'context', message: 'Use iD context via approved API (#11039), not window.context.' }],
       'no-restricted-properties': 'error',
       'no-return-assign': 'off',
       'no-return-await': 'error',

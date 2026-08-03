@@ -5,12 +5,27 @@
         "allowJs": true,
         "skipLibCheck": true,
         "esModuleInterop": true,
-        "lib": ["esnext", "dom"],
+        "lib": [
+            "esnext",
+            "dom"
+        ],
         "target": "esnext",
         "module": "preserve",
         "moduleResolution": "bundler",
         "resolveJsonModule": true,
-        "types": ["vitest/globals", "vitest/jsdom"]
+        "types": [
+            "vitest/globals",
+            "vitest/jsdom",
+            "vite/client"
+        ]
     },
-    "include": ["modules", "test"]
+    "include": [
+        "modules",
+        "test",
+        "**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
 }

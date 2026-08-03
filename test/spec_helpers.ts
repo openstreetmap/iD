@@ -1,18 +1,9 @@
 import { beforeAll } from 'vitest';
 import fetchMock from 'fetch-mock';
 import 'fake-indexeddb/auto';
-import envs from '../config/envs.js';
-
 
 global.VITEST = true;
 
-// create global variables for this data, to match what the esbuild config does
-for (const [key, value] of Object.entries(envs)) {
-  Reflect.set(global, key, JSON.parse(value));
-}
-
-
-// must be imported after global envs are defined
 await import('../modules/id.js');
 const iD = global.iD;
 iD.setDebug(true);

@@ -3,7 +3,6 @@
   <head>
     <meta charset='utf-8'>
     <title>iD</title>
-    <link rel='stylesheet' href='dist/iD.css'>
     <link rel='icon' type='image/png' href='data:image/png;base64,iVBORw0KGgo='>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
     <meta name='mobile-web-app-capable' content='yes'/>
@@ -28,37 +27,7 @@
 
   <body>
     <div id='id-container'></div>
-
-    <script>
-      var container = document.getElementById('id-container');
-      var newScript = document.createElement('script');
-      newScript.type = 'text/javascript';
-      newScript.onload = checkScript;
-      newScript.onerror = checkScript;
-      newScript.src = 'dist/iD.js';
-
-      document.getElementsByTagName('head')[0].appendChild(newScript);
-
-
-      function checkScript() {
-        if (typeof iD === 'undefined' || !iD.utilDetect().support) {
-          container.innerHTML = 'Sorry, your browser is not currently supported. Please use another <a href="https://github.com/openstreetmap/iD#basics">browser</a> or <a href="https://wiki.openstreetmap.org/wiki/Editors">editor</a> to contribute to the map.';
-          container.style.padding = '20px';
-
-        } else {
-          var context = iD.coreContext()
-            .assetPath('dist/')
-            .containerNode(container);
-          window.context = window.id = context;  // for debugging
-          context.init();
-
-          // disable boundaries (unless we have an explicit disable_features list)
-          var q = iD.utilStringQs(window.location.hash);
-          if (!q.hasOwnProperty('disable_features')) {
-            context.features().disable('boundaries');
-          }
-        }
-      }
-    </script>
+    <script type='module' src='/lib.ts'></script>
+    <script type='module' src='/main.ts'></script>
   </body>
 </html>

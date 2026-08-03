@@ -11,6 +11,7 @@ transifex.auth
 /dist/*.js
 /dist/*.css
 /dist/*.map
+/dist/index.html
 /dist/data/
 /dist/img/*.svg
 /dist/locales/en.min.json
