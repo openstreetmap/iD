@@ -40,8 +40,8 @@ export default defineConfig(({ mode }) => ({
       input: {
         // Library bundle used by embedders: exposes `window.iD` + emits iD.css.
         'iD.min': path.resolve(__dirname, 'lib.ts'),
-        // Standalone-page bootstrap; embedders do not load this.
-        bootstrap: path.resolve(__dirname, 'main.ts'),
+        // Standalone page: Vite generates dist/index.html (+ index.js) from this.
+        index: path.resolve(__dirname, 'index.html'),
       },
       output: {
         entryFileNames: '[name].js',
