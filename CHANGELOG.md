@@ -63,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Make sure rendering of truncated address labels does not result in broken unicode characters ([#12511], thanks [@greymoth-jp])
 * Do not select start/end vertex of an area or closed way multiple times when selecting all vertices of a way using the keyboard shortcut ([#12586], thanks [@RudyTheDev])
 * Fix vertices of multipolygons not being movable in some special circumstances ([#10120], thanks [@k-yle])
+* Fix single-digit `maxspeed` values (like `5` or `5 mph`) not being parsed ([#12664])
 #### :earth_asia: Localization
 * Improve some edge cases of rendering of mixed right-to-left and left-to-right text ([#8713])
 * When labelling features, match locale codes like `zh-CN` to name tags like `name:zh-Hans` ([#10911], thanks [@k-yle])
@@ -98,6 +99,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12586]: https://github.com/openstreetmap/iD/pull/12586
 [#12623]: https://github.com/openstreetmap/iD/pull/12623
 [#12569]: https://github.com/openstreetmap/iD/issues/12569
+[#12664]: https://github.com/openstreetmap/iD/pull/12664
 [@brianstrauch]: https://github.com/brianstrauch
 [@jguddas]: https://github.com/jguddas
 [@greymoth-jp]: https://github.com/greymoth-jp
