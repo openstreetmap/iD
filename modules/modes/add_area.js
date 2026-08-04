@@ -17,7 +17,7 @@ export function modeAddArea(context, mode) {
 
     function defaultTags(loc) {
         var defaultTags = { area: 'yes' };
-        if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'area', false, loc);
+        if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'area', [], false, loc);
         return defaultTags;
     }
 

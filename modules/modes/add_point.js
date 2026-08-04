@@ -21,7 +21,7 @@ export function modeAddPoint(context, mode) {
 
     function defaultTags(loc) {
         var defaultTags = {};
-        if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'point', false, loc);
+        if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'point', [], false, loc);
         return defaultTags;
     }
 
