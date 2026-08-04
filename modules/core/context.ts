@@ -1,19 +1,17 @@
-import { debounce, throttle } from 'es-toolkit/compat';
+import { debounce, throttle, type DebouncedFunc } from 'es-toolkit/compat';
 
-import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { dispatch as d3_dispatch, type Dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
 import packageJSON from '../../package.json';
-
-import { t } from '../core/localizer';
-
-import { fileFetcher } from './file_fetcher';
-import { localizer } from './localizer';
+import type { EntityId, NoteId, osmChangeset, OsmEntity } from '../osm';
+import { t, localizer } from './localizer';
+import { fileFetcher, type AssetMap } from './file_fetcher';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
-import { geoRawMercator } from '../geo/raw_mercator';
+import { geoRawMercator, type Projection } from '../geo/raw_mercator';
 import { modeSelect, modeSelectNote } from '../modes';
 import { presetManager } from '../presets';
 import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
@@ -21,12 +19,168 @@ import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilKeybinding, utilRebind, utilStringQs, utilCleanOsmString } from '../util';
 import { ApiError } from '../util/error';
+import type { coreGraph } from '.';
+import type { Vec2 } from '../geo/vector';
+
+type Theme = 'light' | 'dark';
+
+type EventMap = {
+    enter: [];
+    exit: [];
+    change: [];
+}
+
+export interface Mode {
+    id: string;
+    enter(): void;
+    exit(): void;
+    selectedIDs?(): EntityId[];
+    activeID?(): EntityId;
+}
+
+export interface Behaviour extends d3.Selector {
+    off: d3.Selector;
+}
+
+interface HashParams {
+    theme?: Theme;
+    presets?: string;
+    locale?: string;
+    maprules?: string;
+    comment?: string;
+    source?: string;
+    hashtags?: string;
+}
+
+type DebugFlags =
+    /** tile boundaries */
+    | 'tile'
+    /** label collision bounding boxes */
+    | 'collision'
+    /** imagery bounding polygons */
+    | 'imagery'
+    /** touch targets */
+    | 'target'
+    /** downloaded data from osm */
+    | 'downloaded';
 
 
-export function coreContext() {
+interface LoadedData {
+    data: OsmEntity[];
+}
+
+export interface coreContext extends Pick<Dispatch<object, EventMap>, 'on'> {
+    version: string;
+    privacyVersion: string;
+    initialHashParams: HashParams;
+    changeset: osmChangeset | null;
+    defaultChangesetComment: GetSet<coreContext, string>;
+    defaultChangesetSource: GetSet<coreContext, string>;
+    defaultChangesetHashtags: GetSet<coreContext, string>;
+    setsDocumentTitle: GetSet<coreContext, boolean>;
+    documentTitleBase: GetSet<coreContext, string>;
+    ui(): ReturnType<typeof uiInit>;
+    lastPointerType(): PointerEvent['pointerType'];
+    keybinding(): ReturnType<typeof utilKeybinding>;
+
+    connection(): typeof services.osm;
+    history(): coreHistory;
+    validator(): ReturnType<typeof coreValidator>;
+    uploader(): ReturnType<typeof coreUploader>;
+    preauth(newOptions: OSMAuth.OSMAuthOptions): coreContext;
+    locale: GetSet<coreContext, string | string[]>;
+    loadTiles(projection: Projection, callback?: Callback<LoadedData>): void;
+    loadTileAtLoc(loc: Vec2, callback?: Callback<LoadedData>): void;
+    loadEntity(entityID: EntityId, callback: Callback<LoadedData>): void;
+    loadNote(entityID: NoteId, callback: Callback<LoadedData>): void;
+    zoomToEntity(entityID: EntityId, zoomTo?: boolean): void;
+    zoomToEntities(entityIDs: EntityId[], zoomTo?: boolean): void;
+
+    moveToNote(noteId: NoteId, moveTo?: boolean): void;
+    minEditableZoom: GetSet<coreContext, number>;
+    maxCharsForTagKey(): number;
+    maxCharsForTagValue(): number;
+    maxCharsForRelationRole(): number;
+
+    cleanTagKey(val: TagKey): TagKey;
+    cleanTagValue(val: TagValue): TagValue;
+    cleanRelationRole(val: string): string;
+
+    inIntro: GetSet<coreContext, boolean>;
+    save(): void;
+    debouncedSave: DebouncedFunc<coreContext['save']>;
+    hasEntity: coreGraph['hasEntity'];
+    entity: coreGraph['entity'];
+
+    selectedIDs(): EntityId[];
+    activeID(): EntityId | undefined;
+    selectedNoteID: GetSet<coreContext, NoteId | null>;
+    selectedErrorID: GetSet<coreContext, string | null>;
+
+    mode(): Mode;
+    enter(mode: Mode): void;
+
+    install(behavior: Behaviour): void;
+    uninstall(behavior: Behaviour): void;
+
+    copyGraph(): coreGraph;
+    copyIDs: GetSet<coreContext, EntityId[]>;
+    copyLonLat: GetSet<coreContext, Vec2>;
+
+    background(): ReturnType<typeof rendererBackground>;
+
+    features(): ReturnType<typeof rendererFeatures>;
+    hasHiddenConnections(id: EntityId): boolean;
+
+    photos(): ReturnType<typeof rendererPhotos>;
+
+
+    map(): ReturnType<typeof rendererMap>;
+    layers(): any;
+    surface(): d3.Selection;
+    editableDataEnabled(): boolean;
+    surfaceRect(): DOMRect;
+    editable(): boolean;
+
+
+    debugFlags(): Record<DebugFlags, boolean>;
+    getDebug(flag: DebugFlags): boolean;
+    setDebug(flag: DebugFlags): coreContext;
+    setDebug(flag: DebugFlags, val: boolean): coreContext;
+
+    container: GetSet<coreContext, d3.Selection>;
+    containerNode: GetSet<coreContext, HTMLElement>;
+
+
+    theme: GetSet<coreContext, Theme>;
+    embed: GetSet<coreContext, boolean>;
+    assetPath: GetSet<coreContext, string>;
+    assetMap: GetSet<coreContext, AssetMap>;
+    asset(val: string): string;
+    imagePath(val: string): string;
+    reset(): void;
+    flush(): void;
+
+    projection: Projection;
+    curtainProjection: Projection;
+
+    graph(): coreGraph;
+    pauseChangeDispatch(): void;
+    resumeChangeDispatch(): void;
+    perform: any;
+    replace: coreHistory['replace'];
+    pop: coreHistory['pop'];
+    undo: coreHistory['undo'];
+    redo: coreHistory['redo'];
+
+    init(): coreContext;
+}
+
+
+export function coreContext(this: object): coreContext {
   const dispatch = d3_dispatch('enter', 'exit', 'change');
-  const context = {};
-  let _deferred = new Set();
+  const context: coreContext = function () {};
+  let _deferred = new Set<number>();
 
   context.version = packageJSON.version;
   context.privacyVersion = '20201202';
@@ -42,50 +196,45 @@ export function coreContext() {
   let _defaultChangesetSource = context.initialHashParams.source;
   let _defaultChangesetHashtags = context.initialHashParams.hashtags;
 
-  /** @type {GetSet<iD.Context, string>} */
   context.defaultChangesetComment = function(val) {
     if (!arguments.length) return _defaultChangesetComment;
     _defaultChangesetComment = val;
     return context;
-  };
+  } as coreContext['defaultChangesetComment'];
 
-  /** @type {GetSet<iD.Context, string>} */
   context.defaultChangesetSource = function(val) {
     if (!arguments.length) return _defaultChangesetSource;
     _defaultChangesetSource = val;
     return context;
-  };
+  } as coreContext['defaultChangesetSource'];
 
-  /** @type {GetSet<iD.Context, string>} */
   context.defaultChangesetHashtags = function(val) {
     if (!arguments.length) return _defaultChangesetHashtags;
     _defaultChangesetHashtags = val;
     return context;
-  };
+  } as coreContext['defaultChangesetHashtags'];
 
   /* Document title */
   /* (typically shown as the label for the browser window/tab) */
 
   // If true, iD will update the title based on what the user is doing
   let _setsDocumentTitle = true;
-  /** @type {GetSet<iD.Context, boolean>} */
   context.setsDocumentTitle = function(val) {
     if (!arguments.length) return _setsDocumentTitle;
     _setsDocumentTitle = val;
     return context;
-  };
+  } as coreContext['setsDocumentTitle'];
   // The part of the title that is always the same
   let _documentTitleBase = document.title;
-  /** @type {GetSet<iD.Context, string>} */
   context.documentTitleBase = function(val) {
     if (!arguments.length) return _documentTitleBase;
     _documentTitleBase = val;
     return context;
-  };
+  } as coreContext['documentTitleBase'];
 
 
-  /** User interface and keybinding @type {ReturnType<uiInit>} */
-  let _ui;
+  /** User interface and keybinding */
+  let _ui: ReturnType<typeof uiInit>;
   context.ui = () => _ui;
   context.lastPointerType = () => _ui.lastPointerType();
 
@@ -98,12 +247,9 @@ export function coreContext() {
   // Instantiate the connection here because it doesn't require passing in
   // `context` and it's needed for pre-init calls like `preauth`
   let _connection = services.osm;
-  /** @type {ReturnType<coreHistory>} */
-  let _history;
-  /** @type {ReturnType<coreValidator>} */
-  let _validator;
-  /** @type {ReturnType<coreUploader>} */
-  let _uploader;
+  let _history: coreHistory;
+  let _validator: ReturnType<typeof coreValidator>;
+  let _uploader: ReturnType<typeof coreUploader>;
   context.connection = () => _connection;
   context.history = () => _history;
   context.validator = () => _validator;
@@ -118,16 +264,15 @@ export function coreContext() {
   };
 
 
-  /** @param {string | string[]} locale */
   // A string or array or locale codes to prefer over the browser's settings
   context.locale = function(locale) {
     if (!arguments.length) return localizer.localeCode();
     localizer.preferredLocaleCodes(locale);
     return context;
-  };
+  } as coreContext['locale'];
 
 
-  function afterLoad(cid, callback) {
+  function afterLoad(cid: number, callback?: Callback<LoadedData>): Callback<LoadedData> {
     return (err, result) => {
       if (err) {
         if (typeof callback === 'function') {
@@ -141,8 +286,8 @@ export function coreContext() {
         }
         return;
 
-      } else {
-        _history.merge(result.data, result.extent);
+      } else if (result) {
+        _history.merge(result.data);
         if (typeof callback === 'function') {
           callback(err, result);
         }
@@ -198,11 +343,11 @@ export function coreContext() {
 
   context.zoomToEntities = (entityIDs, zoomTo) => {
     // be sure to load the entity even if we're not going to zoom to it
-    let loadedEntities = [];
+    let loadedEntities: OsmEntity[] = [];
     const throttledZoomTo = throttle(() => _map.zoomTo(loadedEntities), 500);
     entityIDs.forEach(entityID => context.loadEntity(entityID, (err, result) => {
       if (err) return;
-      const entity = result.data.find(e => e.id === entityID);
+      const entity = result!.data.find(e => e.id === entityID);
       if (!entity) return;
       loadedEntities.push(entity);
       if (zoomTo !== false) {
@@ -250,7 +395,7 @@ export function coreContext() {
       _connection.tileZoom(val);
     }
     return context;
-  };
+  } as coreContext['minEditableZoom'];
 
   // String length limits in Unicode characters, not JavaScript UTF-16 code units
   context.maxCharsForTagKey = () => 255;
@@ -268,7 +413,7 @@ export function coreContext() {
     if (!arguments.length) return _inIntro;
     _inIntro = val;
     return context;
-  };
+  } as coreContext['inIntro'];
 
   // Immediately save the user's history to localstorage, if possible
   // This is called someteimes, but also on the `window.onbeforeunload` handler
@@ -305,23 +450,22 @@ export function coreContext() {
   // and history changes can happen frequently (e.g. when dragging).
   context.debouncedSave = debounce(context.save, 100);
 
-  /** @template {Function} T @param {T} fn @returns {T} */
-  function withDebouncedSave(fn) {
-    return function() {
-      const result = fn.apply(_history, arguments);
+  function withDebouncedSave<T extends (...args: any) => any>(fn: T): T {
+    return function(...args) {
+      const result = fn.apply(_history, args);
       context.debouncedSave();
       return result;
-    };
+    } as T;
   }
 
 
   /* Graph */
-  context.hasEntity = (id) => _history.graph().hasEntity(id);
-  context.entity = (id) => _history.graph().entity(id);
+  context.hasEntity = ((id: EntityId) => _history.graph().hasEntity(id)) as coreGraph['hasEntity'];
+  context.entity = ((id: EntityId) => _history.graph().entity(id)) as coreGraph['entity'];
 
 
   /* Modes */
-  let _mode;
+  let _mode: Mode;
   context.mode = () => _mode;
   context.enter = (newMode) => {
     if (_mode) {
@@ -334,24 +478,23 @@ export function coreContext() {
     dispatch.call('enter', this, _mode);
   };
 
-  /** @returns {import('../osm').EntityId[]} */
   context.selectedIDs = () => (_mode && _mode.selectedIDs && _mode.selectedIDs()) || [];
   context.activeID = () => _mode && _mode.activeID && _mode.activeID();
 
-  let _selectedNoteID;
+  let _selectedNoteID: NoteId | null;
   context.selectedNoteID = function(noteID) {
     if (!arguments.length) return _selectedNoteID;
     _selectedNoteID = noteID;
     return context;
-  };
+  } as coreContext['selectedNoteID'];
 
   // NOTE: Don't change the name of this until UI v3 is merged
-  let _selectedErrorID;
+  let _selectedErrorID: string | null;
   context.selectedErrorID = function(errorID) {
     if (!arguments.length) return _selectedErrorID;
     _selectedErrorID = errorID;
     return context;
-  };
+  } as coreContext['selectedErrorID'];
 
 
   /* Behaviors */
@@ -360,37 +503,32 @@ export function coreContext() {
 
 
   /* Copy/Paste */
-  /** @type {iD.Graph} */
-  let _copyGraph;
+  let _copyGraph: coreGraph;
   context.copyGraph = () => _copyGraph;
 
-  /** @type {string[]} */
-  let _copyIDs = [];
-  /** @type {GetSet<iD.Context, string[]>} */
+  let _copyIDs: EntityId[] = [];
   context.copyIDs = function(val) {
     if (!arguments.length) return _copyIDs;
     _copyIDs = val;
     _copyGraph = _history.graph();
     return context;
-  };
+  } as coreContext['copyIDs'];
 
-  let _copyLonLat;
+  let _copyLonLat: Vec2;
   context.copyLonLat = function(val) {
     if (!arguments.length) return _copyLonLat;
     _copyLonLat = val;
     return context;
-  };
+  } as coreContext['copyLonLat'];
 
 
   /* Background */
-  /** @type {ReturnType<rendererBackground>} */
-  let _background;
+  let _background: ReturnType<typeof rendererBackground>;
   context.background = () => _background;
 
 
   /* Features */
-  /** @type {ReturnType<rendererFeatures>} */
-  let _features;
+  let _features: ReturnType<typeof rendererFeatures>;
   context.features = () => _features;
   context.hasHiddenConnections = (id) => {
     const graph = _history.graph();
@@ -400,17 +538,14 @@ export function coreContext() {
 
 
   /* Photos */
-  /** @type {ReturnType<rendererPhotos>} */
-  let _photos;
+  let _photos: ReturnType<typeof rendererPhotos>;
   context.photos = () => _photos;
 
 
   /* Map */
-  /** @type {ReturnType<typeof rendererMap>} */
-  let _map;
+  let _map: ReturnType<typeof rendererMap>;
   context.map = () => _map;
   context.layers = () => _map.layers();
-  /** @returns {d3.Selection} */
   context.surface = () => _map.surface;
   context.editableDataEnabled = () => _map.editableDataEnabled();
   context.surfaceRect = () => _map.surface.node().getBoundingClientRect();
@@ -423,7 +558,7 @@ export function coreContext() {
 
 
   /* Debug */
-  let _debugFlags = {
+  let _debugFlags: Record<DebugFlags, boolean> = {
     tile: false,        // tile boundaries
     collision: false,   // label collision bounding boxes
     imagery: false,     // imagery bounding polygons
@@ -431,24 +566,19 @@ export function coreContext() {
     downloaded: false   // downloaded data from osm
   };
   context.debugFlags = () => _debugFlags;
-  /** @param {keyof _debugFlags} flag */
   context.getDebug = (flag) => flag && _debugFlags[flag];
-  /** @param {keyof _debugFlags} flag @param {boolean} val */
   context.setDebug = function(flag, val) {
     if (arguments.length === 1) val = true;
     _debugFlags[flag] = val;
     dispatch.call('change');
     return context;
-  };
+  } as coreContext['setDebug'];
 
 
   /* Container */
-  /** @type d3.Selection<HTMLElement> */
-  let _container = d3_select(null);
-  /** @type {'light' | 'dark'} */
-  let _theme;
+  let _container = d3_select<HTMLElement, void>(null!);
+  let _theme: Theme;
 
-  /** @type {GetSet<iD.Context, typeof _container>} */
   context.container = function(val) {
     if (!arguments.length) return _container;
     _container = val;
@@ -456,55 +586,52 @@ export function coreContext() {
     _container.classed('theme-dark', _theme === 'dark');
     _container.classed('theme-light', _theme === 'light');
     return context;
-  };
+  } as coreContext['container'];
+
   context.containerNode = function(val) {
     if (!arguments.length) return context.container().node();
     context.container(d3_select(val));
     return context;
-  };
+  } as coreContext['containerNode'];
+
   context.theme = function(val) {
     if (!arguments.length) return _theme;
     _theme = val;
     context.container(_container); // refresh theme
     return context;
-  };
+  } as coreContext['theme'];
 
-  let _embed;
+  let _embed: boolean;
   context.embed = function(val) {
     if (!arguments.length) return _embed;
     _embed = val;
     return context;
-  };
+  } as coreContext['embed'];
 
 
   /* Assets */
   let _assetPath = '';
-  /** @type {GetSet<iD.Context, string>} */
   context.assetPath = function(val) {
     if (!arguments.length) return _assetPath;
     _assetPath = val;
     fileFetcher.assetPath(val);
     return context;
-  };
+  } as coreContext['assetPath'];
 
-  /** @type {Tags} */
-  let _assetMap = {};
-  /** @type {GetSet<iD.Context, Tags>} */
+  let _assetMap: AssetMap = {};
   context.assetMap = function(val) {
     if (!arguments.length) return _assetMap;
     _assetMap = val;
     fileFetcher.assetMap(val);
     return context;
-  };
+  } as coreContext['assetMap'];
 
-  /** @param {string} val */
   context.asset = (val) => {
     if (/^http(s)?:\/\//i.test(val)) return val;
     const filename = _assetPath + val;
     return _assetMap[filename] || filename;
   };
 
-  /** @param {string} val */
   context.imagePath = (val) => context.asset(`img/${val}`);
 
 
@@ -518,8 +645,8 @@ export function coreContext() {
     });
 
     Object.values(services).forEach(service => {
-      if (service && typeof service.reset === 'function') {
-        service.reset(context);
+      if (service && 'reset' in service && typeof service.reset === 'function') {
+        service.reset();
       }
     });
 
@@ -544,18 +671,16 @@ export function coreContext() {
 
   // these lines are required to define the type-definitions.
   // the actual value is assigned below, in the `init` function.
-  context.graph = /** @type {() => iD.Graph} */ (undefined);
-  context.pauseChangeDispatch = /** @type {Function} */ (undefined);
-  context.resumeChangeDispatch = /** @type {Function} */ (undefined);
-  context.perform = /** @type {typeof _history.perform} */ (undefined);
-  context.replace = /** @type {typeof _history.replace} */ (undefined);
-  context.pop = /** @type {typeof _history.pop} */ (undefined);
-  context.overwrite = /** @type {typeof _history.overwrite} */ (undefined);
-  context.undo = /** @type {typeof _history.undo} */ (undefined);
-  context.redo = /** @type {typeof _history.redo} */ (undefined);
-  context.on = /** @type {any} */ (undefined);
+  context.graph = undefined!;
+  context.pauseChangeDispatch = undefined!;
+  context.resumeChangeDispatch = undefined!;
+  context.perform = undefined!;
+  context.replace = undefined!;
+  context.pop = undefined!;
+  context.undo = undefined!;
+  context.redo = undefined!;
+  context.on = undefined!;
 
-  /** @returns {typeof context} */
   context.init = () => {
 
     instantiateInternal();
@@ -595,6 +720,7 @@ export function coreContext() {
     function initializeDependents() {
 
       if (context.initialHashParams.presets) {
+        // @ts-expect-error -- will be fixed in a different PR
         presetManager.addablePresetIDs(new Set(context.initialHashParams.presets.split(',')));
       }
 
@@ -608,6 +734,7 @@ export function coreContext() {
 
       // kick off some async work
       localizer.ensureLoaded();
+      // @ts-expect-error -- will be fixed in a different PR
       presetManager.ensureLoaded();
       _background.ensureLoaded();
 
@@ -625,10 +752,10 @@ export function coreContext() {
       _history.migrateHistoryData();
 
       if (services.maprules && context.initialHashParams.maprules) {
-        d3_json(context.initialHashParams.maprules)
+        d3_json<unknown[]>(context.initialHashParams.maprules)
           .then(mapcss => {
             services.maprules.init();
-            mapcss.forEach(mapcssSelector => services.maprules.addRule(mapcssSelector));
+            mapcss!.forEach(mapcssSelector => services.maprules.addRule(mapcssSelector));
           })
           .catch(() => { /* ignore */ });
       }

@@ -18,6 +18,11 @@ declare global {
     (): T;
   }
 
+  declare type Callback<T> = {
+    (error: Error, data?: undefined): void;
+    (error: null, data: T): void;
+  };
+
   declare namespace iD {
     export type Context = ReturnType<typeof iD.coreContext>;
 
