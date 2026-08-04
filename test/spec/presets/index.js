@@ -381,7 +381,7 @@ describe('iD.presetIndex', function () {
         it('builds presets w/external sources set to addable', function () {
             var surfShop = new iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
             var graph = new iD.coreGraph([surfShop]);
-            var url = 'https://fakemaprules.io/fake.json';
+            var url = 'https://example.com/fake.json';
 
             // no external presets yet
             expect(iD.presetIndex().match(surfShop, graph).id).toEqual('point');
@@ -401,7 +401,7 @@ describe('iD.presetIndex', function () {
         });
 
         it('makes only the external presets initially addable', function () {
-            var url = 'https://fakemaprules.io/fake.json';
+            var url = 'https://example.com/fake.json';
 
             iD.presetIndex().fromExternal(url, function(externalPresets) {
                 var external = externalPresets.collection.reduce(function(presets, preset) {

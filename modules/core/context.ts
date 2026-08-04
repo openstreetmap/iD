@@ -1,7 +1,6 @@
 import { debounce, throttle, type DebouncedFunc } from 'es-toolkit/compat';
 
 import { dispatch as d3_dispatch, type Dispatch } from 'd3-dispatch';
-import { json as d3_json } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
 import packageJSON from '../../package.json';
@@ -46,7 +45,6 @@ interface HashParams {
     theme?: Theme;
     presets?: string;
     locale?: string;
-    maprules?: string;
     comment?: string;
     source?: string;
     hashtags?: string;
@@ -750,15 +748,6 @@ export function coreContext(this: object): coreContext {
 
       // Migrate history data from localStorage to IndexedDB
       _history.migrateHistoryData();
-
-      if (services.maprules && context.initialHashParams.maprules) {
-        d3_json<unknown[]>(context.initialHashParams.maprules)
-          .then(mapcss => {
-            services.maprules.init();
-            mapcss!.forEach(mapcssSelector => services.maprules.addRule(mapcssSelector));
-          })
-          .catch(() => { /* ignore */ });
-      }
 
       // if the container isn't available, e.g. when testing, don't load the UI
       if (!context.container().empty()) {
