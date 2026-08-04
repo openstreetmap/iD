@@ -11,7 +11,9 @@
     "dictionaries": [
         "custom-dictionary"
     ],
-    "words": [],
+    "words": [
+        "osmcal"
+    ],
     "ignoreWords": [],
     "import": []
 }

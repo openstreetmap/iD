@@ -1079,7 +1079,6 @@ en:
         details: "Any donation will go directly towards keeping OpenStreetMap running."
     like_osm: "Like OpenStreetMap? Connect with others:"
     more: More
-    events: Events
     languages: "Languages: {languages}"
     missing: "Is something missing from this list?"
     tell_us: "Tell us!"
