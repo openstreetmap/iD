@@ -410,6 +410,7 @@ en:
         multiple: Rotate these features around their center point.
       key: R
       annotation:
+        point: Rotated a point.
         line: Rotated a line.
         area: Rotated an area.
         relation: Rotated a relation.
