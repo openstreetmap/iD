@@ -325,7 +325,7 @@ export function coreContext() {
   context.mode = () => _mode;
   context.enter = (newMode) => {
     if (_mode) {
-      _mode.exit();
+      _mode.exit(newMode);
       dispatch.call('exit', this, _mode);
     }
 
