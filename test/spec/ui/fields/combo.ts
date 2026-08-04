@@ -1,3 +1,4 @@
+import type { Field } from '@openstreetmap/id-tagging-schema';
 import { select as d3_select } from 'd3-selection';
 
 describe('iD.uiFieldCombo', () => {
@@ -11,7 +12,7 @@ describe('iD.uiFieldCombo', () => {
         });
 
         it('filters out duplicates by default', () => {
-            const field = iD.presetField('a', { key: 'destination:symbol', type: 'semiCombo' });
+            const field = iD.presetField('a', { key: 'destination:symbol', type: 'semiCombo' } as Field);
             const instance = iD.uiFieldCombo(field, context);
             selection.call(instance);
             instance.tags({ 'destination:symbol': 'none;none;Jurong East;none;Māngere' });
@@ -24,7 +25,7 @@ describe('iD.uiFieldCombo', () => {
                 key: 'destination:symbol',
                 type: 'semiCombo',
                 allowDuplicates: true
-            });
+            } as Field);
 
             const onChange = vi.fn();
 
@@ -48,7 +49,7 @@ describe('iD.uiFieldCombo', () => {
         });
 
         it('does not add duplicates if the only difference is whitespace', () => {
-            const field = iD.presetField('a', { key: 'destination', type: 'semiCombo' });
+            const field = iD.presetField('a', { key: 'destination', type: 'semiCombo' } as Field);
 
             const onChange = vi.fn();
 

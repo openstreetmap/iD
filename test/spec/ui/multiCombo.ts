@@ -1,5 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 import type { EntityId } from '../../../modules';
+import type { Field } from '@openstreetmap/id-tagging-schema';
 
 describe('iD.uiField as multiCombo', () => {
     let context: iD.Context;
@@ -10,7 +11,7 @@ describe('iD.uiField as multiCombo', () => {
         context = iD.coreContext().assetPath('../dist/').init();
         selection = d3_select(document.createElement('div'));
 
-        presetField = iD.presetField('fuel', { key: 'fuel:', type: 'multiCombo' });
+        presetField = iD.presetField('fuel', { key: 'fuel:', type: 'multiCombo' } as Field);
     });
 
     describe('modified', () => {
