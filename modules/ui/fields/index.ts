@@ -4,7 +4,6 @@ export * from './input';
 export * from './access';
 export * from './address';
 export * from './directional_combo';
-export * from './lanes';
 export * from './localized';
 export * from './roadheight';
 export * from './roadspeed';
@@ -49,7 +48,6 @@ import {
 import { uiFieldAccess } from './access';
 import { uiFieldAddress } from './address';
 import { uiFieldDirectionalCombo } from './directional_combo';
-import { uiFieldLanes } from './lanes';
 import { uiFieldLocalized } from './localized';
 import { uiFieldRoadheight } from './roadheight';
 import { uiFieldRoadspeed } from './roadspeed';
@@ -71,7 +69,6 @@ export var uiFields = {
     email: uiFieldEmail,
     identifier: uiFieldIdentifier,
     integer: uiFieldInteger,
-    lanes: uiFieldLanes,
     localized: uiFieldLocalized,
     roadheight: uiFieldRoadheight,
     roadspeed: uiFieldRoadspeed,
