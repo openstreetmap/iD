@@ -72,7 +72,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 #### :hammer: Development
 * Fix unit tests failing with nodejs v26 ([#12401], thanks [@brianstrauch])
-* :warning: Remove the unused lane parsing code, which was left over from an unfinished lane editor and was not reachable from any preset ([#12664], thanks [@wantaekchoi])
+* Remove the unused lane parsing code, which was left over from an unfinished lane editor and was not reachable from any preset ([#12664], thanks [@wantaekchoi])
 
 [#8713]: https://github.com/openstreetmap/iD/issues/8713
 [#8724]: https://github.com/openstreetmap/iD/issues/8724
