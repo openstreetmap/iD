@@ -1,16 +1,40 @@
+import type { Geometry, PresetCategory } from '@openstreetmap/id-tagging-schema';
 import { t } from '../core/localizer';
 import { utilStripDiacritics } from '../util/util';
 import { presetCollection } from './collection';
+import type { presetPreset } from './preset';
 
+export type presetCategory = Omit<PresetCategory, 'members' | 'name'> & {
+  id: string;
+  members: presetCollection;
+  geometry: Geometry[];
+  matchGeometry(geometry: Geometry): boolean;
+  matchAllGeometry(geometries: Geometry[]): boolean;
+  matchScore(): number;
+  name(): string;
+  nameLabel(): d3.Selector;
+  terms(): string[];
+  searchName(): string;
+  searchNameStripped(): string;
+  searchAliases(): string[];
+  searchAliasesStripped(): string[];
+  suggestion?: undefined;
+  /** @deprecated - appears to be unused */
+  originalName?: string;
+}
 
 //
 // `presetCategory` builds a `presetCollection` of member presets,
 // decorated with some extra methods for searching and matching geometry
 //
-export function presetCategory(categoryID, category, allPresets) {
-  let _this = Object.assign({}, category);   // shallow copy
-  let _searchName; // cache
-  let _searchNameStripped; // cache
+export function presetCategory(
+  categoryID: string,
+  category: PresetCategory,
+  allPresets: Record<string, presetPreset>,
+) {
+  let _this = <presetCategory>(<unknown>(Object.assign({}, category)));   // shallow copy
+  let _searchName: string | undefined; // cache
+  let _searchNameStripped: string; // cache
 
   _this.id = categoryID;
 
@@ -19,7 +43,7 @@ export function presetCategory(categoryID, category, allPresets) {
   );
 
   _this.geometry = _this.members.collection
-    .reduce((acc, preset) => {
+    .reduce<Geometry[]>((acc, preset) => {
       for (let i in preset.geometry) {
         const geometry = preset.geometry[i];
         if (acc.indexOf(geometry) === -1) {
@@ -43,7 +67,7 @@ export function presetCategory(categoryID, category, allPresets) {
 
   _this.searchName = () => {
     if (!_searchName) {
-      _searchName = (_this.suggestion ? _this.originalName : _this.name()).toLowerCase();
+      _searchName = (_this.suggestion ? _this.originalName! : _this.name()).toLowerCase();
     }
     return _searchName;
   };

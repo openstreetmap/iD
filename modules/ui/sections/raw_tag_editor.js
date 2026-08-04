@@ -115,7 +115,7 @@ export function uiSectionRawTagEditor(id, context) {
                     .classed('hide', (d.id !== 'text'))
                     .each(setTextareaHeight);
 
-                wrap.selectAll('.tag-list, .add-row')
+                wrap.selectAll('.tag-list')
                     .classed('hide', (d.id !== 'list'));
             })
             .each(function(d) {

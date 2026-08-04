@@ -121,11 +121,6 @@ export function osmTagSuggestingArea(tags: Tags): Tags | null {
     return null;
 }
 
-export let osmLineTags: TagDictionary<true> = {};
-export function osmSetLineTags(value: TagDictionary<true>): void {
-    osmLineTags = value;
-}
-
 // Tags that indicate a node can be a standalone point
 // e.g. { amenity: { bar: true, parking: true, ... } ... }
 export let osmPointTags: TagDictionary<true> = {};

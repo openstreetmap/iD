@@ -81,20 +81,16 @@ function loadNsiPresets() {
         nsi_features,
         nsi_wikidata
     ]) => {
-      const allPresets = presetManager.getPresets();
       const nsiPresets = buildIDPresets(nsi_data.nsi, {
         sourcePresets: presetManager.getRawPresets(),
         wikidata: nsi_wikidata.wikidata,
         dissolved: nsi_dissolved.dissolved,
       }).presets;
 
-      for (const [id, preset] of Object.entries(nsiPresets)) {
+      for (const preset of Object.values(nsiPresets)) {
         // Add `suggestion=true` to all the nsi presets
         // The preset json schema doesn't include it, but the iD code still uses it
         preset.suggestion = true;
-        // stop-gap while https://github.com/osmlab/name-suggestion-index/pull/12449 is not out yet
-        preset.fields = (preset.fields?.filter(f => !f.startsWith('{')) || []).concat(
-            allPresets[id.split('/').slice(0, -1).join('/')].fields().map(f => f.id));
       }
 
       // nsi does not specify *:wikipedia (anymore):

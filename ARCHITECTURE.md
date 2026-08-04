@@ -94,7 +94,6 @@ many members.
 The osm module also includes code related to special kinds of objects in OpenStreetMap.
 
 * `iD.osmIntersection` - code for working with turn restrictions
-* `iD.osmLanes` - code for working with traffic and turn lanes
 * `iD.osmMultipolygon` - code for working with multipolygon relations
 
 

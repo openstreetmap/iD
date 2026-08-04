@@ -11,6 +11,7 @@ export type NodeId = `n${number}`;
 export type WayId = `w${number}`;
 export type RelationId = `r${number}`;
 export type ChangesetId = `c${number}`;
+export type NoteId = number;
 
 
 /**

@@ -2,7 +2,6 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 import type { LineString, Polygon } from 'geojson';
 
 import { geoExtent, geoVecCross } from '../geo';
-import { osmLanes } from './lanes';
 import { osmTagSuggestingArea, osmSidednessTags, osmRemoveLifecyclePrefix, osmOneWayBiDirectionalTags, osmOneWayBackwardTags, osmOneWayForwardTags, osmOneWayTags } from './tags';
 import { utilArrayUniq, utilCheckTagDictionary } from '../util';
 import { OsmAbstractEntity, type OsmEntityProps } from './abstract-entity';
@@ -203,10 +202,6 @@ export class osmWay extends OsmAbstractEntity {
         }
 
         return this.sidednessIdentifier() !== null;
-    }
-
-    lanes() {
-        return osmLanes(this);
     }
 
     isClosed() {

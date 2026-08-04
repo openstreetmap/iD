@@ -1993,6 +1993,10 @@ input.date-selector {
 .form-field-input-check > span {
     flex: 1 1 auto;
 }
+.form-field-input-check > span.raw-value {
+    font-family: monospace;
+    color: var(--text-color);
+}
 .form-field-input-check > span.mixed {
     font-style: italic;
 }
@@ -2056,6 +2060,10 @@ input.date-selector {
     background-color: var(--bg-color);
     color: var(--link-color);
     cursor: pointer;
+}
+.form-field-input-radio > label .raw-value {
+    font-family: monospace;
+    color: var(--text-color);
 }
 .form-field-input-radio > label.mixed {
     font-style: italic;
@@ -3325,13 +3333,29 @@ img.tag-reference-wiki-image {
     border-radius: 5px 0 0 5px;
 }
 
-/* custom data editor - no info/delete buttons */
-.data-editor.raw-tag-editor .tag-row button {
+.data-editor {
+    padding: 20px;
+}
+/* custom data editor: no info/delete/add buttons */
+.data-editor.raw-tag-editor .tag-row button,
+.data-editor.raw-tag-editor .add-tag {
     display: none;
 }
 .data-editor.raw-tag-editor .tag-row .key-wrap,
 .data-editor.raw-tag-editor .tag-row .value-wrap {
     width: 50%;
+}
+.data-editor.raw-tag-editor.tag-row {
+    background-color: transparent;
+}
+.data-editor.raw-tag-editor li:first-child input.value {
+    border-start-end-radius: 4px;
+}
+.data-editor.raw-tag-editor li:nth-last-child(2) input.key {
+    border-end-start-radius: 4px;
+}
+.data-editor.raw-tag-editor li:nth-last-child(2) input.value {
+    border-end-end-radius: 4px;
 }
 
 
@@ -4927,20 +4951,17 @@ img.tile-debug {
     }
 }
 
-.attribution-wrap .attribution span {
-    background-color: rgba(0,0,0,0.33);
-    padding: 3px 6px;
-    border-radius: 4px;
-}
-
 .attribution-wrap .attribution .source-image {
     height: 20px;
     vertical-align: middle;
     border-radius: 3px;
 }
 
-.attribution-wrap .attribution span {
+.attribution-wrap .attribution .attribution-text {
+    background-color: rgba(0,0,0,0.33);
+    border-radius: 4px;
     margin: 0 3px;
+    padding: 3px 6px;
 }
 
 

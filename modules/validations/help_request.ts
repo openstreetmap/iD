@@ -1,12 +1,13 @@
 import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import type { CreateValidator, Validator } from '../core/validation/models';
 
 
-export function validationHelpRequest(context) {
+export const validationHelpRequest: CreateValidator = (context) => {
     var type = 'help_request';
 
-    var validation = function checkFixmeTag(entity) {
+    const validation: Validator = function checkFixmeTag(entity) {
 
         if (!entity.tags.fixme) return [];
 
@@ -40,7 +41,7 @@ export function validationHelpRequest(context) {
             entityIds: [entity.id]
         })];
 
-        function showReference(selection) {
+        function showReference(selection: d3.Selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()
@@ -53,4 +54,4 @@ export function validationHelpRequest(context) {
     validation.type = type;
 
     return validation;
-}
+};
