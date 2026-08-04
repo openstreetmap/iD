@@ -7,16 +7,15 @@ export function actionCopyEntities(
     ids: EntityId[],
     fromGraph: coreGraph,
 ): Action {
-    var _copies: Record<EntityId, OsmEntity> = {};
+    const _copies: Record<EntityId, OsmEntity> = {};
 
     const action: Action = function (graph) {
         ids.forEach(function (id) {
             fromGraph.entity(id).copy(fromGraph, _copies);
         });
 
-        for (var _id in _copies) {
-            const id = <EntityId>_id;
-            graph = graph.replace(_copies[id]);
+        for (const id in _copies) {
+            graph = graph.replace(_copies[<EntityId>id]);
         }
 
         return graph;
