@@ -16,7 +16,6 @@ export function uiFieldRadio(field, context) {
     var wrap = d3_select(null);
     var labels = d3_select(null);
     var radios = d3_select(null);
-    var radioData = (field.options || field.keys).slice();  // shallow copy
     var typeField;
     var layerField;
     let _tags = {};
@@ -36,7 +35,7 @@ export function uiFieldRadio(field, context) {
         wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
-        var enter = wrap.enter()
+        const enter = wrap.enter()
             .append('div')
             .attr('class', 'form-field-input-wrap form-field-input-radio');
 
@@ -50,17 +49,32 @@ export function uiFieldRadio(field, context) {
 
         placeholder = wrap.selectAll('.placeholder');
 
-        labels = wrap.selectAll('label')
-            .data(radioData);
+        updateRadios();
 
-        enter = labels.enter()
+
+    }
+
+
+    function updateRadios() {
+        const allOptions = [...(field.options || field.keys)];
+        if (_tags[field.key] && !allOptions.includes(_tags[field.key])) {
+            // include other values as (temporary) option #12082
+            //allOptions.push(`"${_tags[field.key]}"`);
+            allOptions.push(_tags[field.key]);
+        }
+
+        labels = wrap.selectAll('label')
+            .data(allOptions, d => d);
+
+        labels.exit().remove();
+        const enter = labels.enter()
             .append('label');
 
         enter
             .append('input')
             .attr('type', 'radio')
             .attr('name', field.id)
-            .attr('value', function(d) { return field.t('options.' + d, { 'default': d }); })
+            .attr('value', (d) => field.t('options.' + d, { 'default': d }))
             .attr('checked', false);
 
         enter
@@ -69,7 +83,11 @@ export function uiFieldRadio(field, context) {
                 const labelId = field.hasTextForStringId('options.' + d + '.title')
                     ? 'options.' + d + '.title'
                     : 'options.' + d;
-                field.t.append(labelId, { 'default': d })(d3_select(this));
+                field.t.append(labelId, {
+                    'default': selection => selection
+                        .classed('raw-value', true)
+                        .text(`"${d}"`)
+                })(d3_select(this));
             });
 
         labels = labels
@@ -78,6 +96,18 @@ export function uiFieldRadio(field, context) {
         radios = labels.selectAll('input')
             .on('change', changeRadio);
 
+
+        function isOptionChecked(d) {
+            if (field.key) {
+                return _tags[field.key] === d;
+            }
+            return !!(typeof _tags[d] === 'string' && _tags[d].toLowerCase() !== 'no');
+        }
+
+        radios.property('checked', function(d) {
+            return isOptionChecked(d) &&
+                (field.key || allOptions.filter(isOptionChecked).length === 1);
+        });
     }
 
 
@@ -321,12 +351,6 @@ export function uiFieldRadio(field, context) {
 
     radio.tags = function(tags) {
         _tags = tags;
-        function isOptionChecked(d) {
-            if (field.key) {
-                return tags[field.key] === d;
-            }
-            return !!(typeof tags[d] === 'string' && tags[d].toLowerCase() !== 'no');
-        }
 
         function isMixed(d) {
             if (field.key) {
@@ -335,10 +359,7 @@ export function uiFieldRadio(field, context) {
             return Array.isArray(tags[d]);
         }
 
-        radios.property('checked', function(d) {
-            return isOptionChecked(d) &&
-                (field.key || field.options.filter(isOptionChecked).length === 1);
-        });
+        updateRadios();
 
         labels
             .classed('active', function(d) {

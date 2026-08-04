@@ -1993,6 +1993,10 @@ input.date-selector {
 .form-field-input-check > span {
     flex: 1 1 auto;
 }
+.form-field-input-check > span.raw-value {
+    font-family: monospace;
+    color: var(--text-color);
+}
 .form-field-input-check > span.mixed {
     font-style: italic;
 }
@@ -2056,6 +2060,10 @@ input.date-selector {
     background-color: var(--bg-color);
     color: var(--link-color);
     cursor: pointer;
+}
+.form-field-input-radio > label .raw-value {
+    font-family: monospace;
+    color: var(--text-color);
 }
 .form-field-input-radio > label.mixed {
     font-style: italic;

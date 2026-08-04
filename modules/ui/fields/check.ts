@@ -224,7 +224,8 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                 : typeof textForValue === 'string'
                     ? (selection: d3.Selection) => selection.text(textForValue)
                     : textForValue)
-            .classed('mixed', isMixed);
+            .classed('mixed', isMixed)
+            .classed('raw-value', !options.includes(tag));
 
         label
             .classed('set', !!_value);

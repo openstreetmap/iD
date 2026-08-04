@@ -58,8 +58,8 @@ describe('iD.uiFieldRadio', () => {
             // confirm that bridge+tunnel buttons are displayed
             const options = selection.selectAll<HTMLLabelElement, unknown>('label').nodes();
             expect(options).toHaveLength(2);
-            expect(options[0].querySelector('.localized-text')?.innerHTML).toBe('bridge');
-            expect(options[1].querySelector('.localized-text')?.innerHTML).toBe('tunnel');
+            expect(options[0].querySelector('.raw-value')?.innerHTML).toBe('"bridge"');
+            expect(options[1].querySelector('.raw-value')?.innerHTML).toBe('"tunnel"');
 
             // click one of the radio button
             const index = field.keys!.indexOf(optionToClick);
