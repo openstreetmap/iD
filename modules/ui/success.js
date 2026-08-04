@@ -12,16 +12,21 @@ import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from '../ui/disclosure';
 import { utilRebind } from '../util/rebind';
+import { geoSphericalDistance } from '../geo/geo.js';
+import { escape } from 'es-toolkit';
 
 
 let _oci = null;
+/** @type OsmCalEvent[] */
+let _osmCalEvents = null;
 
 export function uiSuccess(context) {
-  const MAXEVENTS = 2;
+  const MAXEVENTS = 4;
   const dispatch = d3_dispatch('cancel');
   let _changeset;
   let _location;
   ensureOSMCommunityIndex();   // start fetching the data
+  ensureOSMCal();
 
 
   function ensureOSMCommunityIndex() {
@@ -58,20 +63,14 @@ export function uiSuccess(context) {
       });
   }
 
+  function ensureOSMCal() {
+    return fileFetcher
+        .get('osmcal_events')
+        .then(events => {
+            if (!_osmCalEvents) _osmCalEvents = events;
 
-  // string-to-date parsing in JavaScript is weird
-  function parseEventDate(when) {
-    if (!when) return;
-
-    let raw = when.trim();
-    if (!raw) return;
-
-    if (!/Z$/.test(raw)) {   // if no trailing 'Z', add one
-      raw += 'Z';            // this forces date to be parsed as a UTC date
-    }
-
-    const parsed = new Date(raw);
-    return new Date(parsed.toUTCString().slice(0, 25));  // convert to local timezone
+            return _osmCalEvents;
+        });
   }
 
 
@@ -210,7 +209,7 @@ export function uiSuccess(context) {
     }
 
     // Get OSM community index features intersecting the map..
-    ensureOSMCommunityIndex()
+    const fetchCommunitiesData = ensureOSMCommunityIndex()
       .then(oci => {
         const loc = context.map().center();
         const validHere = locationManager.locationSetsAt(loc);
@@ -234,14 +233,74 @@ export function uiSuccess(context) {
 
         // sort communities by feature area ascending, community order descending
         communities.sort((a, b) => a.area - b.area || b.order - a.order);
-
-        body
-          .call(showCommunityLinks, communities.map(c => c.resource));
+        return communities
+          .map(c => c.resource)
+          .map(resource => ({
+            id: resource.id,
+            url: resource.resolved.url,
+            icon: `#community-${resource.type}`,
+            name: resource.resolved.name,
+            description: resource.resolved.description,
+            extendedDescription: resource.resolved.extendedDescription,
+            languageCodes: resource.languageCodes,
+          }));
       });
+    const fetchEventsData = ensureOSMCal()
+      .then(osmCalData => {
+        const nearbyEvents = [];
+        for (const event of osmCalData) {
+          if (event.cancelled) {
+            // cancelled event
+            continue;
+          }
+          const eventLoc = event.location?.coords;
+          if (!eventLoc) {
+            // global event
+            continue;
+          }
+          const loc = context.map().center();
+          const distance = geoSphericalDistance(eventLoc, loc);
+          if (distance > 100_000) {
+            // more than 100km away
+            continue;
+          }
+          const date = new Date(event.date.start);
+          const now = new Date();
+          if (date - now > 1000 * 60 * 60 * 24 * 30) {
+            // more than 30 days in the future
+            continue;
+          }
+          nearbyEvents.push(event);
+        }
+
+        nearbyEvents.sort((a, b) => {
+          // sort by date ascending
+          return a.date.start < b.date.start ? -1 : a.date.start > b.date.start ? 1 : 0;
+        });
+
+        return nearbyEvents
+          .slice(0, MAXEVENTS) // limit number of events shown
+          .map((event, idx) => ({
+            id: `osmcal-${idx}`,
+            url: event.url,
+            icon: '#pinhead-calendar',
+            name: selection => selection.text(event.name),
+            description: selection => selection.text(`${escape(event.date.human_short)}, ${escape(event.location.short)}`),
+            extendedDescription: selection => selection.text(`${escape(event.date.human)}, ${escape(event.location.venue)}`),
+          }));
+      });
+
+    Promise.all([fetchCommunitiesData, fetchEventsData])
+        .then(([communities, events]) => {
+            body.call(showEngagementLinks, [
+                ...events,
+                ...communities
+            ]);
+        });
   }
 
 
-  function showCommunityLinks(selection, resources) {
+  function showEngagementLinks(selection, resources) {
     let communityLinks = selection
       .append('div')
       .attr('class', 'save-communityLinks');
@@ -266,11 +325,11 @@ export function uiSuccess(context) {
       .attr('class', 'cell-icon community-icon')
       .append('a')
       .attr('target', '_blank')
-      .attr('href', d => d.resolved.url)
+      .attr('href', d => d.url)
       .append('svg')
       .attr('class', 'logo-small')
       .append('use')
-      .attr('xlink:href', d => `#community-${d.type}`);
+      .attr('xlink:href', d => d.icon);
 
     let communityDetail = rowEnter
       .append('td')
@@ -299,54 +358,39 @@ export function uiSuccess(context) {
 
     selection
       .append('div')
-      .attr('class', 'community-name')
-      .html(d.resolved.nameHTML);
+      .classed('community-name', true)
+      .append('a')
+      .attr('target', '_blank')
+      .attr('href', d => d.url)
+      .each(function(d) {
+        if (typeof d.name === 'string') {
+          d3_select(this).html(d.name);
+        } else {
+          d3_select(this).call(d.name);
+        }
+      });
 
     selection
       .append('div')
       .attr('class', 'community-description')
-      .html(d.resolved.descriptionHTML);
+      .each(function(d) {
+        if (typeof d.description === 'string') {
+          d3_select(this).html(d.description);
+        } else {
+          d3_select(this).call(d.description);
+        }
+      });
 
     // Create an expanding section if any of these are present..
-    if (d.resolved.extendedDescriptionHTML || (d.languageCodes && d.languageCodes.length)) {
+    if (d.extendedDescription || (d.languageCodes && d.languageCodes.length)) {
       selection
         .append('div')
-        .call(uiDisclosure(context, `community-more-${d.id}`, false)
+        .call(uiDisclosure(context, `community-more-${communityID}`, false)
           .expanded(false)
           .updatePreference(false)
           .label(() => t.append('success.more'))
           .content(showMore)
         );
-    }
-
-    let nextEvents = (d.events || [])
-      .map(event => {
-        event.date = parseEventDate(event.when);
-        return event;
-      })
-      .filter(event => {      // date is valid and future (or today)
-        const t = event.date.getTime();
-        const now = (new Date()).setHours(0,0,0,0);
-        return !isNaN(t) && t >= now;
-      })
-      .sort((a, b) => {       // sort by date ascending
-        return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
-      })
-      .slice(0, MAXEVENTS);   // limit number of events shown
-
-    if (nextEvents.length) {
-      selection
-        .append('div')
-        .call(uiDisclosure(context, `community-events-${d.id}`, false)
-          .expanded(false)
-          .updatePreference(false)
-          .label(t.append('success.events'))
-          .content(showNextEvents)
-        )
-        .select('.hide-toggle')
-        .append('span')
-        .attr('class', 'badge-text')
-        .text(nextEvents.length);
     }
 
 
@@ -358,11 +402,17 @@ export function uiSuccess(context) {
         .append('div')
         .attr('class', 'community-more');
 
-      if (d.resolved.extendedDescriptionHTML) {
+      if (d.extendedDescription) {
         moreEnter
           .append('div')
           .attr('class', 'community-extended-description')
-          .html(d.resolved.extendedDescriptionHTML);
+          .each(function(d) {
+            if (typeof d.extendedDescription === 'string') {
+              d3_select(this).html(d.extendedDescription);
+            } else {
+              d3_select(this).call(d.extendedDescription);
+            }
+          });
       }
 
       if (d.languageCodes && d.languageCodes.length) {
@@ -375,68 +425,6 @@ export function uiSuccess(context) {
           .attr('class', 'community-languages')
           .call(t.append('success.languages', { languages: languageList }));
       }
-    }
-
-
-    function showNextEvents(selection) {
-      let events = selection
-        .append('div')
-        .attr('class', 'community-events');
-
-      let item = events.selectAll('.community-event')
-        .data(nextEvents);
-
-      let itemEnter = item.enter()
-        .append('div')
-        .attr('class', 'community-event');
-
-      itemEnter
-        .append('div')
-        .attr('class', 'community-event-name')
-        .append('a')
-        .attr('target', '_blank')
-        .attr('href', d => d.url)
-        .text(d => {
-          let name = d.name;
-          if (d.i18n && d.id) {
-            name = t(`community.${communityID}.events.${d.id}.name`, { default: name });
-          }
-          return name;
-        });
-
-      itemEnter
-        .append('div')
-        .attr('class', 'community-event-when')
-        .text(d => {
-          let options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
-          if (d.date.getHours() || d.date.getMinutes()) {   // include time if it has one
-            options.hour = 'numeric';
-            options.minute = 'numeric';
-          }
-          return d.date.toLocaleString(localizer.localeCode(), options);
-        });
-
-      itemEnter
-        .append('div')
-        .attr('class', 'community-event-where')
-        .text(d => {
-          let where = d.where;
-          if (d.i18n && d.id) {
-            where = t(`community.${communityID}.events.${d.id}.where`, { default: where });
-          }
-          return where;
-        });
-
-      itemEnter
-        .append('div')
-        .attr('class', 'community-event-description')
-        .text(d => {
-          let description = d.description;
-          if (d.i18n && d.id) {
-            description = t(`community.${communityID}.events.${d.id}.description`, { default: description });
-          }
-          return description;
-        });
     }
   }
 

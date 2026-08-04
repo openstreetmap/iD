@@ -24,8 +24,28 @@ import type { AddressFormatsJSON } from '../ui/fields/address.js';
 import type { WmfSite } from '../ui/fields/wikipedia.js';
 import type { EntityId } from '../osm/id_manager.js';
 import type { OsmEntity } from '../osm/abstract-entity.js';
+import { type Vec2 } from '../geo/vector.js';
 import packageJSON from '../../package.json';
 
+
+interface OsmCalEvent {
+    name: string;
+    url: string;
+    date: {
+        start: string;
+        end?: string;
+        human: string;
+        human_short: string;
+        whole_day: boolean;
+    },
+    location?: {
+        short?: string;
+        detailed?: string;
+        coords: Vec2;
+        venue: string;
+    },
+    cancelled: boolean;
+}
 
 interface Definitions {
   address_formats: AddressFormatsJSON;
@@ -40,6 +60,8 @@ interface Definitions {
   oci_defaults: unknown;
   oci_features: unknown;
   oci_resources: unknown;
+
+  osmcal_events: OsmCalEvent[];
 
   presets_package: typeof packageJSON;
   deprecated: Deprecated;
@@ -103,6 +125,7 @@ export function coreFileFetcher() {
     'oci_defaults': ociCdnUrl.replace('{version}', ociVersion) + 'dist/json/defaults.min.json',
     'oci_features': ociCdnUrl.replace('{version}', ociVersion) + 'dist/json/featureCollection.min.json',
     'oci_resources': ociCdnUrl.replace('{version}', ociVersion) + 'dist/json/resources.min.json',
+    'osmcal_events': 'https://osmcal.org/api/v2/events/',
     'presets_package': presetsCdnUrl.replace('{presets_version}', presetsVersion) + 'package.json',
     'deprecated': presetsCdnUrl + 'dist/deprecated.min.json',
     'discarded': presetsCdnUrl + 'dist/discarded.min.json',
