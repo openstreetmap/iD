@@ -3325,13 +3325,29 @@ img.tag-reference-wiki-image {
     border-radius: 5px 0 0 5px;
 }
 
-/* custom data editor - no info/delete buttons */
-.data-editor.raw-tag-editor .tag-row button {
+.data-editor {
+    padding: 20px;
+}
+/* custom data editor: no info/delete/add buttons */
+.data-editor.raw-tag-editor .tag-row button,
+.data-editor.raw-tag-editor .add-tag {
     display: none;
 }
 .data-editor.raw-tag-editor .tag-row .key-wrap,
 .data-editor.raw-tag-editor .tag-row .value-wrap {
     width: 50%;
+}
+.data-editor.raw-tag-editor.tag-row {
+    background-color: transparent;
+}
+.data-editor.raw-tag-editor li:first-child input.value {
+    border-start-end-radius: 4px;
+}
+.data-editor.raw-tag-editor li:nth-last-child(2) input.key {
+    border-end-start-radius: 4px;
+}
+.data-editor.raw-tag-editor li:nth-last-child(2) input.value {
+    border-end-end-radius: 4px;
 }
 
 
