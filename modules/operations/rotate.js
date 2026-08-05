@@ -69,10 +69,14 @@ export function operationRotate(context, selectedIDs) {
 
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
-        return disable ?
-            t.append('operations.rotate.' + disable + '.' + multi) :
-            t.append('operations.rotate.description.' + multi);
+        const disable = operation.disabled();
+        if (disable) {
+            return t.append('operations.rotate.' + disable + '.' + multi);
+        }
+        if (isPointDirectionRotate()) {
+            return t.append('operations.rotate.description.point');
+        }
+        return t.append('operations.rotate.description.' + multi);
     };
 
 
