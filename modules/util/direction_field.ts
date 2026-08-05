@@ -12,6 +12,21 @@ export function utilIsDirectionKey(key: string | undefined): key is TagKey {
 
 
 /**
+ * Whether the tag-reference UI should mention Rotate (R).
+ * Preset fields pass `fieldType`; raw tags fall back to a numeric value check.
+ */
+export function utilShowsDirectionRotateHint(what: {
+    key?: string;
+    value?: string;
+    fieldType?: string;
+}): boolean {
+    if (!utilIsDirectionKey(what.key)) return false;
+    if (what.fieldType) return what.fieldType === 'number';
+    return what.value !== undefined && what.value !== '' && isFinite(Number(what.value));
+}
+
+
+/**
  * Find a direction field on the entity's preset.
  * @param numeric when true, match angle fields (`type: number`);
  *   when false, match relative fields used by reverse (`forward`/`backward`).

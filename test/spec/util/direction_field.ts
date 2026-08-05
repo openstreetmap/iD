@@ -32,6 +32,14 @@ describe('iD.utilDirectionFieldKey / iD.utilRotatePointDirectionKey', () => {
         expect(iD.utilIsDirectionKey(undefined)).toBeFalsy();
     });
 
+    it('shows the rotate hint only for numeric direction fields or values', () => {
+        expect(iD.utilShowsDirectionRotateHint({ key: 'direction', fieldType: 'number' })).toBeTruthy();
+        expect(iD.utilShowsDirectionRotateHint({ key: 'direction', fieldType: 'combo' })).toBeFalsy();
+        expect(iD.utilShowsDirectionRotateHint({ key: 'direction', value: '90' })).toBeTruthy();
+        expect(iD.utilShowsDirectionRotateHint({ key: 'direction', value: 'forward' })).toBeFalsy();
+        expect(iD.utilShowsDirectionRotateHint({ key: 'direction' })).toBeFalsy();
+    });
+
     it('finds a numeric direction field on the preset', async () => {
         await (iD.presetManager as any).ensureLoaded(true);
         const node = new iD.osmNode({ tags: { amenity: 'bench' } });

@@ -5,7 +5,7 @@ import {
 import { t } from '../core/localizer';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
-import { utilIsDirectionKey } from '../util/direction_field';
+import { utilShowsDirectionRotateHint } from '../util/direction_field';
 import { uiCmd } from './cmd';
 
 
@@ -96,7 +96,7 @@ export function uiTagReference(what) {
         }
 
         // Rotate (R) adjusts numeric direction / *:direction on the map.
-        if (utilIsDirectionKey(what.key)) {
+        if (utilShowsDirectionRotateHint(what)) {
             _body
                 .append('p')
                 .attr('class', 'tag-reference-shortcut-hint')
