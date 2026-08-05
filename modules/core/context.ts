@@ -720,7 +720,6 @@ export function coreContext(this: object): coreContext {
     function initializeDependents() {
 
       if (context.initialHashParams.presets) {
-        // @ts-expect-error -- will be fixed in a different PR
         presetManager.addablePresetIDs(new Set(context.initialHashParams.presets.split(',')));
       }
 
@@ -734,7 +733,6 @@ export function coreContext(this: object): coreContext {
 
       // kick off some async work
       localizer.ensureLoaded();
-      // @ts-expect-error -- will be fixed in a different PR
       presetManager.ensureLoaded();
       _background.ensureLoaded();
 

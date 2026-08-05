@@ -162,7 +162,6 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
 
     /** @returns false or the name of the direction key */
     function supportsDirectionField(node: OsmEntity, graph: coreGraph): false | TagKey {
-        // @ts-expect-error -- will be fixed in a different PR
         const preset = presetManager.match(node, graph);
         const loc = node.extent(graph).center();
         const geometry = node.geometry(graph);
