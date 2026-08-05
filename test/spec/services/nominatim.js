@@ -124,7 +124,7 @@ describe('iD.serviceNominatim', function() {
             expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {zoom: '13', format: 'json', addressdetails: '1', lat: '1000', lon: '1000'}
             );
-            expect(callback).toHaveBeenCalledWith('Unable to geocode');
+            expect(callback).toHaveBeenCalledWith(new Error('Unable to geocode'));
         });
     });
 

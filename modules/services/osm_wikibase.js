@@ -27,7 +27,7 @@ function request(url, callback) {
         .catch(function(err) {
             delete _inflight[url];
             if (err.name === 'AbortError') return;
-            if (callback) callback(err.message);
+            if (callback) callback(err);
         });
 }
 
@@ -220,7 +220,8 @@ export default {
             if (err) {
                 callback(err);
             } else if (!d.success || d.error) {
-                callback(d.error.messages.map(function(v) { return v.html['*']; }).join('<br>'));
+                const errorMessage = d.error?.messages.map(v => v.html['*']).join('<br />') || 'Unknown Error';
+                callback(new Error(errorMessage));
             } else {
                 Object.values(d.entities).forEach(function(res) {
                     if (res.missing !== '') {
@@ -281,7 +282,7 @@ export default {
 
             var entity = data.rtype || data.tag || data.key;
             if (!entity) {
-                callback('No entity');
+                callback(new Error('No entity'));
                 return;
             }
 

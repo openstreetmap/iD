@@ -379,7 +379,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
                 })
                 .catch(function (err) {
                     delete inflight[tileID];
-                    if (callback) callback(err.message);
+                    if (callback) callback(err);
                 });
         });
     };
@@ -518,7 +518,7 @@ rendererBackgroundSource.Esri = function(data) {
             })
             .catch(function(err) {
                 delete inflight[tileID];
-                if (callback) callback(err.message);
+                if (callback) callback(err);
             });
 
 
