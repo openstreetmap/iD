@@ -1,4 +1,5 @@
 import { t, localizer } from '../core/localizer';
+import { actionChangeTags } from '../actions/change_tags';
 import { modeDrawLine } from '../modes/draw_line';
 import { operationDelete } from '../operations/delete';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
@@ -14,7 +15,58 @@ export function validationDisconnectedWay() {
     }
 
     var validation = function checkDisconnectedWay(entity, graph) {
+        if (entity.type === 'node' && entity.tags.noexit === 'yes') {
+            var segmentCount = 0;
+            graph.parentWays(entity).forEach(function(way) {
+                if (!isTaggedAsHighway(way)) return;
+                way.nodes.forEach(function(nodeID, index) {
+                    if (nodeID !== entity.id) return;
+                    if (index > 0 && graph.hasEntity(way.nodes[index - 1])) segmentCount++;
+                    if (index < way.nodes.length - 1 && graph.hasEntity(way.nodes[index + 1])) segmentCount++;
+                });
+            });
 
+            if (segmentCount !== 1) {
+                return [new validationIssue({
+                    type: type,
+                    subtype: 'invalid_noexit',
+                    severity: 'warning',
+                    message: function(context) {
+                        var node = context.hasEntity(this.entityIds[0]);
+                        var label = node && utilDisplayLabel(node, context.graph());
+                        return t.append('issues.disconnected_way.invalid_noexit.message', { feature: label });
+                    },
+                    reference: function(selection) {
+                        selection.selectAll('.issue-reference')
+                            .data([0])
+                            .enter()
+                            .append('div')
+                            .attr('class', 'issue-reference')
+                            .call(t.append('issues.disconnected_way.invalid_noexit.reference'));
+                    },
+                    entityIds: [entity.id],
+                    loc: entity.loc,
+                    dynamicFixes: function() {
+                        return [new validationIssueFix({
+                            icon: 'iD-operation-delete',
+                            title: t.append('issues.fix.remove_named_tag.title', { tag: 'noexit' }),
+                            onClick: function(context) {
+                                var entityId = this.issue.entityIds[0];
+                                var node = context.hasEntity(entityId);
+                                if (!node) return;
+
+                                var tags = Object.assign({}, node.tags);
+                                delete tags.noexit;
+                                context.perform(
+                                    actionChangeTags(entityId, tags),
+                                    t('issues.fix.remove_named_tag.annotation', { tag: 'noexit' })
+                                );
+                            }
+                        })];
+                    }
+                })];
+            }
+        }
         var routingIslandWays = routingIslandForEntity(entity);
         if (!routingIslandWays) return [];
 

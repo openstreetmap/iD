@@ -1610,6 +1610,9 @@ en:
           one: "{highway} is disconnected from other roads and paths"
           other: "{count} routable features are connected only to each other"
         reference: "All roads, paths, and ferry routes should connect to form a single routing network. This feature (or small collection of features) is either disconnected from the routing network or only connected to it via a feature that few applications consider routable."
+      invalid_noexit:
+        message: '{feature} is tagged "noexit=yes" but is not at the end of a road'
+        reference: 'The "noexit=yes" tag should only be used on nodes with one incident road segment.'
     fixme_tag:
       message: '{feature} has a "Fix Me" request'
       reference: 'A "fixme" tag indicates that a mapper has requested help with a feature.'

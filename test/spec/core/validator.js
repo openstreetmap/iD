@@ -165,4 +165,28 @@ describe('iD.coreValidator', function() {
         issues = validator.getIssues();
         expect(issues).toHaveLength(1);
     });
+
+    it('reports invalid noexit through the validator lifecycle', async () => {
+        var n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { entrance: 'yes' } });
+        var n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5], tags: { noexit: 'yes' } });
+        var n3 = new iD.osmNode({ id: 'n-3', loc: [4, 6], tags: { entrance: 'yes' } });
+        var w1 = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway: 'residential' } });
+        var w2 = new iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { highway: 'residential' } });
+        context.perform(
+            iD.actionAddEntity(n1),
+            iD.actionAddEntity(n2),
+            iD.actionAddEntity(n3),
+            iD.actionAddEntity(w1),
+            iD.actionAddEntity(w2)
+        );
+        var validator = new iD.coreValidator(context);
+        validator.init();
+        await validator.validate();
+
+        var issues = validator.getEntityIssues(n2.id);
+        expect(issues).toHaveLength(1);
+        expect(issues[0].type).toEqual('disconnected_way');
+        expect(issues[0].subtype).toEqual('invalid_noexit');
+        expect(issues[0].entityIds).toEqual([n2.id]);
+    });
 });

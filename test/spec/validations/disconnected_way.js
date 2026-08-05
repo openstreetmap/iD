@@ -33,6 +33,27 @@ describe('iD.validations.disconnected_way', function() {
         );
     }
 
+    function createNoExitWays(wayNodes, nodeTags, wayTags) {
+        var nodes = [
+            new iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { entrance: 'yes' } }),
+            new iD.osmNode({ id: 'n-2', loc: [4, 5], tags: nodeTags }),
+            new iD.osmNode({ id: 'n-3', loc: [4, 6], tags: { entrance: 'yes' } })
+        ];
+        var ways = wayNodes.map(function(nodeIDs, index) {
+            return new iD.osmWay({ id: 'w-' + (index + 1), nodes: nodeIDs,
+                tags: wayTags && wayTags[index] || { highway: 'residential' } });
+        });
+
+        context.perform(
+            ...nodes.map(function(node) { return iD.actionAddEntity(node); }),
+            ...ways.map(function(way) { return iD.actionAddEntity(way); })
+        );
+
+        return nodes[1];
+    }
+
+    function validateEntity(entity) { return iD.validationDisconnectedWay(context)(entity, context.graph()); }
+
     function validate() {
         var validator = iD.validationDisconnectedWay(context);
         var changes = context.history().changes();
@@ -167,5 +188,55 @@ describe('iD.validations.disconnected_way', function() {
         );
 
         expect(validate()).toHaveLength(0);
+    });
+
+    it('allows noexit at the endpoint of one highway', function() {
+        var node = createNoExitWays([['n-1', 'n-2']], { noexit: 'yes' });
+        expect(validateEntity(node)).toHaveLength(0);
+    });
+
+    it('flags noexit at a node joining two highways', function() {
+        var node = createNoExitWays([
+            ['n-1', 'n-2'],
+            ['n-2', 'n-3']
+        ], { noexit: 'yes' });
+        expect(validateEntity(node)).toEqual([expect.objectContaining({ type: 'disconnected_way', subtype: 'invalid_noexit', severity: 'warning', entityIds: ['n-2'] })]);
+    });
+    it('flags noexit at an interior node', function() {
+        var node = createNoExitWays([['n-1', 'n-2', 'n-3']], { noexit: 'yes' });
+        expect(validateEntity(node)).toEqual([expect.objectContaining({ type: 'disconnected_way', subtype: 'invalid_noexit', severity: 'warning', entityIds: ['n-2'] })]);
+    });
+    it('flags noexit in closed and repeated topology', function() {
+        var node = createNoExitWays([['n-2', 'n-1', 'n-3', 'n-2', 'n-1', 'n-2']], { noexit: 'yes' });
+        expect(validateEntity(node)).toEqual([expect.objectContaining({ type: 'disconnected_way', subtype: 'invalid_noexit', severity: 'warning', entityIds: ['n-2'] })]);
+    });
+    it('ignores way-tagged noexit', function() {
+        var node = createNoExitWays([['n-1', 'n-2']], {}, [{ highway: 'residential', noexit: 'yes' }]);
+        expect(validateEntity(node)).toHaveLength(0);
+    });
+    it('ignores non-yes noexit values', function() {
+        var node = createNoExitWays([['n-1', 'n-2']], { noexit: 'no' });
+        expect(validateEntity(node)).toHaveLength(0);
+    });
+
+    it('removes noexit without losing other current tags', function() {
+        var node = createNoExitWays([['n-1', 'n-2'], ['n-2', 'n-3']], {
+            noexit: 'yes',
+            source: 'survey'
+        });
+        var issue = validateEntity(node)[0];
+
+        context.perform(iD.actionChangeTags(node.id, {
+            noexit: 'yes',
+            source: 'survey',
+            surface: 'asphalt'
+        }));
+
+        var fix = issue.fixes(context)[0];
+        fix.onClick(context);
+        expect(context.entity(node.id).tags).toEqual({
+            source: 'survey',
+            surface: 'asphalt'
+        });
     });
 });
