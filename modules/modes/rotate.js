@@ -72,11 +72,11 @@ export function modeRotate(context, entityIDs) {
         // projection changed, recalculate _pivot
         var projection = context.projection;
         var currTransform = projection.transform();
-        if (!_prevTransform ||
+        const transformChanged = !_prevTransform ||
             currTransform.k !== _prevTransform.k ||
             currTransform.x !== _prevTransform.x ||
-            currTransform.y !== _prevTransform.y) {
-
+            currTransform.y !== _prevTransform.y;
+        if (transformChanged) {
             var nodes = utilGetAllNodes(entityIDs, context.graph());
             var points = nodes.map(function(n) { return projection(n.loc); });
             _pivot = getPivot(points);
@@ -87,11 +87,15 @@ export function modeRotate(context, entityIDs) {
         var currMouse = context.map().mouse(d3_event);
 
         if (_pointDirectionKey) {
-            // Point the direction at the mouse: OSM azimuth 0 = north, clockwise.
-            const dx = currMouse[0] - _pivot[0];
-            const dy = currMouse[1] - _pivot[1];
-            const absoluteDegrees = utilWrap(Math.atan2(dx, -dy) * (180 / Math.PI), 360);
-            fn(actionRotatePointDirection(entityIDs[0], absoluteDegrees, _pointDirectionKey));
+            // Skip the first move after pan/zoom so the direction does not jump
+            // (geometry rotate does the same via a zero delta).
+            if (!transformChanged) {
+                // Point the direction at the mouse: OSM azimuth 0 = north, clockwise.
+                const dx = currMouse[0] - _pivot[0];
+                const dy = currMouse[1] - _pivot[1];
+                const absoluteDegrees = utilWrap(Math.atan2(dx, -dy) * (180 / Math.PI), 360);
+                fn(actionRotatePointDirection(entityIDs[0], absoluteDegrees, _pointDirectionKey));
+            }
         } else {
             const currAngle = Math.atan2(currMouse[1] - _pivot[1], currMouse[0] - _pivot[0]);
             if (typeof _prevAngle === 'undefined') _prevAngle = currAngle;
