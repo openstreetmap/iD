@@ -2928,6 +2928,13 @@ button.raw-tag-option svg.icon {
 .tag-reference-link .icon:first-child {
     margin-left: 0;
 }
+.tag-reference-separator {
+    border-top: 1px solid var(--border-color);
+    margin: 8px 0;
+}
+.shortcut-hint {
+    margin: 0;
+}
 
 img.tag-reference-wiki-image {
     float: right;

@@ -733,6 +733,7 @@ en:
     edit_reference: "edit/translate documentation"
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
+    direction_rotate_help: "Press {key} to adjust this value on the map."
     key_value: "key=value"
     empty: (empty)
     multiple_values: Multiple Values
