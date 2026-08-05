@@ -9,6 +9,7 @@ import {
 
 import { t } from '../core/localizer';
 import { actionRotate } from '../actions/rotate';
+import { actionRotatePointDirection } from '../actions/rotate_point_direction';
 import { actionNoop } from '../actions/noop';
 import { behaviorEdit } from '../behavior/edit';
 import { geoVecInterp, geoVecLength } from '../geo/vector';
@@ -52,6 +53,7 @@ export function modeRotate(context, entityIDs) {
     var _prevAngle;
     var _prevTransform;
     var _pivot;
+    let _pointDirectionRotate = false;
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -86,7 +88,12 @@ export function modeRotate(context, entityIDs) {
         if (typeof _prevAngle === 'undefined') _prevAngle = currAngle;
         var delta = currAngle - _prevAngle;
 
-        fn(actionRotate(entityIDs, _pivot, delta, projection));
+        if (_pointDirectionRotate) {
+            const deltaDegrees = delta * (180 / Math.PI);
+            fn(actionRotatePointDirection(entityIDs[0], deltaDegrees));
+        } else {
+            fn(actionRotate(entityIDs, _pivot, delta, projection));
+        }
 
         _prevTransform = currTransform;
         _prevAngle = currAngle;
@@ -111,6 +118,18 @@ export function modeRotate(context, entityIDs) {
     }
 
 
+    function isPointDirectionRotate(graph) {
+        if (entityIDs.length !== 1) return false;
+
+        const entity = graph.hasEntity(entityIDs[0]);
+        if (!entity || entity.type !== 'node') return false;
+        if (graph.geometry(entity.id) !== 'point') return false;
+
+        const direction = Number(entity.tags.direction);
+        return isFinite(direction);
+    }
+
+
     function finish(d3_event) {
         d3_event.stopPropagation();
         context.replace(actionNoop(), annotation);
@@ -131,6 +150,7 @@ export function modeRotate(context, entityIDs) {
 
     mode.enter = function() {
         _prevGraph = null;
+        _pointDirectionRotate = isPointDirectionRotate(context.graph());
         context.features().forceVisible(entityIDs);
 
         behaviors.forEach(context.install);
