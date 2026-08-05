@@ -45,5 +45,8 @@ export { utilUniqueDomId } from './util';
 export { utilWrap } from './util';
 export { utilCleanOsmString } from './util';
 
+export { utilDirectionFieldKey, utilIsDirectionKey, utilRotatePointDirectionKey, utilSelectedRotatePointDirectionKey } from './direction_field';
+
+
 export { dmsCoordinatePair } from './units';
 export { dmsMatcher } from './units';

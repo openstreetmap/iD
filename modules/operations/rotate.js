@@ -1,6 +1,7 @@
 import { t } from '../core/localizer';
 import { behaviorOperation } from '../behavior/operation';
 import { modeRotate } from '../modes/rotate';
+import { utilSelectedRotatePointDirectionKey } from '../util/direction_field';
 import { utilGetAllNodes, utilTotalExtent } from '../util/util';
 
 
@@ -11,17 +12,6 @@ export function operationRotate(context, selectedIDs) {
     var coords = nodes.map(function(n) { return n.loc; });
     const extent = utilTotalExtent(selectedIDs, graph);
 
-    function isPointDirectionRotate() {
-        if (selectedIDs.length !== 1) return false;
-
-        const entity = graph.hasEntity(selectedIDs[0]);
-        if (!entity || entity.type !== 'node') return false;
-        if (graph.geometry(entity.id) !== 'point') return false;
-
-        const direction = Number(entity.tags.direction);
-        return isFinite(direction);
-    }
-
 
     var operation = function() {
         context.enter(modeRotate(context, selectedIDs));
@@ -29,7 +19,7 @@ export function operationRotate(context, selectedIDs) {
 
 
     operation.available = function() {
-        return nodes.length >= 2 || isPointDirectionRotate();
+        return nodes.length >= 2 || !!utilSelectedRotatePointDirectionKey(selectedIDs, graph);
     };
 
 
@@ -73,7 +63,7 @@ export function operationRotate(context, selectedIDs) {
         if (disable) {
             return t.append('operations.rotate.' + disable + '.' + multi);
         }
-        if (isPointDirectionRotate()) {
+        if (utilSelectedRotatePointDirectionKey(selectedIDs, graph)) {
             return t.append('operations.rotate.description.point');
         }
         return t.append('operations.rotate.description.' + multi);

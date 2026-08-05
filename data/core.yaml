@@ -412,6 +412,7 @@ en:
       key: R
       annotation:
         point: Rotated a point.
+        vertex: Rotated a node in a way.
         line: Rotated a line.
         area: Rotated an area.
         relation: Rotated a relation.

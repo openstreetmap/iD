@@ -22,7 +22,9 @@ import { operationMove } from '../operations/move';
 import { operationOrthogonalize } from '../operations/orthogonalize';
 import { operationReflectLong, operationReflectShort } from '../operations/reflect';
 
+import { utilSelectedRotatePointDirectionKey } from '../util/direction_field';
 import { utilKeybinding } from '../util/keybinding';
+import { utilWrap } from '../util';
 import { utilFastMouse, utilGetAllNodes } from '../util/util';
 
 
@@ -53,7 +55,7 @@ export function modeRotate(context, entityIDs) {
     var _prevAngle;
     var _prevTransform;
     var _pivot;
-    let _pointDirectionRotate = false;
+    let _pointDirectionKey = false;
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -83,20 +85,22 @@ export function modeRotate(context, entityIDs) {
 
 
         var currMouse = context.map().mouse(d3_event);
-        var currAngle = Math.atan2(currMouse[1] - _pivot[1], currMouse[0] - _pivot[0]);
 
-        if (typeof _prevAngle === 'undefined') _prevAngle = currAngle;
-        var delta = currAngle - _prevAngle;
-
-        if (_pointDirectionRotate) {
-            const deltaDegrees = delta * (180 / Math.PI);
-            fn(actionRotatePointDirection(entityIDs[0], deltaDegrees));
+        if (_pointDirectionKey) {
+            // Point the direction at the mouse: OSM azimuth 0 = north, clockwise.
+            const dx = currMouse[0] - _pivot[0];
+            const dy = currMouse[1] - _pivot[1];
+            const absoluteDegrees = utilWrap(Math.atan2(dx, -dy) * (180 / Math.PI), 360);
+            fn(actionRotatePointDirection(entityIDs[0], absoluteDegrees, _pointDirectionKey));
         } else {
+            const currAngle = Math.atan2(currMouse[1] - _pivot[1], currMouse[0] - _pivot[0]);
+            if (typeof _prevAngle === 'undefined') _prevAngle = currAngle;
+            const delta = currAngle - _prevAngle;
             fn(actionRotate(entityIDs, _pivot, delta, projection));
+            _prevAngle = currAngle;
         }
 
         _prevTransform = currTransform;
-        _prevAngle = currAngle;
         _prevGraph = context.graph();
     }
 
@@ -115,18 +119,6 @@ export function modeRotate(context, entityIDs) {
             }
         }
         return _pivot;
-    }
-
-
-    function isPointDirectionRotate(graph) {
-        if (entityIDs.length !== 1) return false;
-
-        const entity = graph.hasEntity(entityIDs[0]);
-        if (!entity || entity.type !== 'node') return false;
-        if (graph.geometry(entity.id) !== 'point') return false;
-
-        const direction = Number(entity.tags.direction);
-        return isFinite(direction);
     }
 
 
@@ -150,7 +142,7 @@ export function modeRotate(context, entityIDs) {
 
     mode.enter = function() {
         _prevGraph = null;
-        _pointDirectionRotate = isPointDirectionRotate(context.graph());
+        _pointDirectionKey = utilSelectedRotatePointDirectionKey(entityIDs, context.graph());
         context.features().forceVisible(entityIDs);
 
         behaviors.forEach(context.install);

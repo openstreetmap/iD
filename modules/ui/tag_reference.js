@@ -5,6 +5,7 @@ import {
 import { t } from '../core/localizer';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
+import { utilIsDirectionKey } from '../util/direction_field';
 import { uiCmd } from './cmd';
 
 
@@ -94,15 +95,11 @@ export function uiTagReference(what) {
               .call(t.append(docs.wiki.text));
         }
 
-        // Rotate (R) adjusts numeric direction=* on standalone points.
-        if (what.key === 'direction') {
-            _body
-                .append('div')
-                .attr('class', 'tag-reference-separator');
-
+        // Rotate (R) adjusts numeric direction / *:direction on the map.
+        if (utilIsDirectionKey(what.key)) {
             _body
                 .append('p')
-                .attr('class', 'shortcut-hint')
+                .attr('class', 'tag-reference-shortcut-hint')
                 .call(t.append('inspector.direction_rotate_help', {
                     key: uiCmd.display(t('operations.rotate.key'))
                 }));
