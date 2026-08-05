@@ -226,7 +226,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                     ? (selection: d3.Selection) => selection.text(textForValue)
                     : textForValue)
             .classed('mixed', isMixed)
-            .classed('raw-value', !options.includes(tag))
+            .classed('raw-value', !values.some(value => value === tag))
             .attr('title', function() {
                 if (isMixed) return t('inspector.unshared_value_tooltip');
                 if (!_value) return null;
