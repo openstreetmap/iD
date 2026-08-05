@@ -19,7 +19,7 @@ export default {
     // Search for Wikidata items matching the query
     itemsForSearchQuery: function(query, callback, language) {
         if (!query) {
-            if (callback) callback('No query', {});
+            if (callback) callback(new Error('No query'));
             return;
         }
 
@@ -55,7 +55,7 @@ export default {
                 if (callback) callback(null, result.search || {});
             })
             .catch(function(err) {
-                if (callback) callback(err.message, {});
+                if (callback) callback(err);
             });
     },
 
@@ -64,7 +64,7 @@ export default {
     // return an array of corresponding Wikidata entities.
     itemsByTitle: function(lang, title, callback) {
         if (!title) {
-            if (callback) callback('No title', {});
+            if (callback) callback(new Error('No title'));
             return;
         }
 
@@ -87,7 +87,7 @@ export default {
                 if (callback) callback(null, result.entities || {});
             })
             .catch(function(err) {
-                if (callback) callback(err.message, {});
+                if (callback) callback(err);
             });
     },
 
@@ -105,7 +105,7 @@ export default {
 
     entityByQID: function(qid, callback) {
         if (!qid) {
-            callback('No qid', {});
+            callback(new Error('No qid'));
             return;
         }
         if (_wikidataCache[qid]) {
@@ -134,7 +134,7 @@ export default {
                 if (callback) callback(null, result.entities[qid] || {});
             })
             .catch(function(err) {
-                if (callback) callback(err.message, {});
+                if (callback) callback(err);
             });
     },
 
@@ -157,7 +157,7 @@ export default {
         var langs = this.languagesToQuery();
         this.entityByQID(params.qid, function(err, entity) {
             if (err || !entity) {
-                callback(err || 'No entity');
+                callback(err || new Error('No entity'));
                 return;
             }
 
