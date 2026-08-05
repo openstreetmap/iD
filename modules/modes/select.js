@@ -644,7 +644,7 @@ export function modeSelect(context, selectedIDs) {
     };
 
 
-    mode.exit = function() {
+    mode.exit = function(nextMode) {
 
         // we could enter the mode multiple times but it's only new the first time
         _newFeature = false;
@@ -689,7 +689,10 @@ export function modeSelect(context, selectedIDs) {
             .classed('related', false);
 
         context.map().on('drawn.select', null);
-        context.ui().sidebar.hide();
+        // Keep the feature editor open when entering rotate (same selection).
+        if (!nextMode || nextMode.id !== 'rotate') {
+            context.ui().sidebar.hide();
+        }
         context.features().forceVisible([]);
 
         var entity = singular();

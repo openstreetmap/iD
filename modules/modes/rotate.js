@@ -188,7 +188,7 @@ export function modeRotate(context, entityIDs) {
     };
 
 
-    mode.exit = function() {
+    mode.exit = function(nextMode) {
         behaviors.forEach(context.uninstall);
 
         context.surface()
@@ -204,6 +204,11 @@ export function modeRotate(context, entityIDs) {
         d3_select(document)
             .call(keybinding.unbind);
 
+        // select.enter will refresh the editor; hide only when leaving selection
+        // entirely (e.g. undo → browse).
+        if (!nextMode || nextMode.id !== 'select') {
+            context.ui().sidebar.hide();
+        }
         context.features().forceVisible([]);
     };
 
