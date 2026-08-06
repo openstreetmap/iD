@@ -234,7 +234,7 @@ export const osmOneWayTags = merge(
     osmOneWayBiDirectionalTags,
 );
 
-// solid and smooth surfaces akin to the assumed default road surface in OSM
+// solid and smooth surfaces akin to the assumed default road or path surface
 export const osmPavedTags: TagDictionary<boolean> = {
     'surface': {
         'paved': true,
@@ -243,6 +243,7 @@ export const osmPavedTags: TagDictionary<boolean> = {
         'chipseal': true,
         'concrete:lanes': true,
         'concrete:plates': true,
+        'metal': true,
         'tiles': true
     },
     'tracktype': {
@@ -250,7 +251,7 @@ export const osmPavedTags: TagDictionary<boolean> = {
     }
 };
 
-// solid, if somewhat uncommon surfaces with a high range of smoothness
+// solid, if somewhat uncommon surfaces with a high range of smoothness used on roads or paths
 export const osmSemipavedTags: TagDictionary<boolean> = {
     'surface': {
         'bricks': true,
@@ -259,7 +260,6 @@ export const osmSemipavedTags: TagDictionary<boolean> = {
         'sett': true,
         'paving_stones': true,
         'grass_paver': true,
-        'metal': true,
         'metal_grid': true,
         'fibre_reinforced_polymer_grate': true,
         'wood': true
