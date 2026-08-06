@@ -38,7 +38,7 @@ export const osmLifecyclePrefixes = {
     // dilapidated to nonexistent
     abandoned: true, was: true,
     // nonexistent, still may appear in imagery
-    dismantled: true, razed: true, demolished: true, destroyed: true, removed: true, obliterated: true,
+    dismantled: true, razed: true, demolished: true, destroyed: true, removed: true,
     // existent occasionally, e.g. stormwater drainage basin
     intermittent: true
 };
