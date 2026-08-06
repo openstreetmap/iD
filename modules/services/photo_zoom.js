@@ -18,7 +18,15 @@ const zoomControls = [{
 
 export function photoZoom(zoom, target) {
     return function(selection) {
-        let buttons = selection.selectAll('button.photo-zoom')
+        let controls = selection.selectAll('.photo-zoom-controls')
+            .data([0]);
+
+        controls = controls.enter()
+            .append('div')
+            .attr('class', 'photo-zoom-controls')
+            .merge(controls);
+
+        let buttons = controls.selectAll('button.photo-zoom')
             .data(zoomControls);
 
         buttons.exit()

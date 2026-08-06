@@ -269,7 +269,7 @@ export default {
             .on('click.forward', step(1))
             .text('►');
 
-        controlsEnter.call(photoZoom(imgZoom, wrapEnter));
+        wrapEnter.call(photoZoom(imgZoom, wrapEnter));
 
         wrapEnter
             .append('div')

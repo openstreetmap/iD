@@ -524,7 +524,7 @@ export default {
             .append('div')
             .attr('id', 'ideditor-viewer-mapilio-simple');
 
-        controlsEnter.call(photoZoom(imgZoom, photoWrap));
+        wrapEnter.call(photoZoom(imgZoom, photoWrap));
 
 
 

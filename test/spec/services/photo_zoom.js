@@ -30,9 +30,11 @@ describe('photoZoom', function() {
     });
 
     it('renders accessible zoom buttons', function() {
+        const zoomControls = controls.select('.photo-zoom-controls');
         const zoomIn = controls.select('button.photo-zoom-in');
         const zoomOut = controls.select('button.photo-zoom-out');
 
+        expect(zoomControls.empty()).toBeFalsy();
         expect(zoomIn.text()).toEqual('+');
         expect(zoomIn.attr('aria-label')).toEqual('Zoom In');
         expect(zoomOut.text()).toEqual('−');
@@ -87,6 +89,7 @@ describe('photoZoom', function() {
 
         const buttons = frameContainer.selectAll('button.photo-zoom');
         expect(buttons.size()).toEqual(2);
+        expect(frameContainer.select('.photo-controls button.photo-zoom').empty()).toBeTruthy();
         expect(buttons.classed('hide')).toBeTruthy();
 
         frame.showPhotoFrame(frameContainer);

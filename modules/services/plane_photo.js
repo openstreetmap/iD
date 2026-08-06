@@ -68,9 +68,8 @@ export async function planePhotoFrame(context, selection) {
       .append('img')
       .attr('class', 'plane-photo');
 
-    const controls = selection.select('.photo-controls-wrap > div');
-    controls.call(photoZoom(_imgZoom, _planeWrapper));
-    _zoomControls = controls.selectAll('button.photo-zoom')
+    selection.call(photoZoom(_imgZoom, _planeWrapper));
+    _zoomControls = selection.selectAll('button.photo-zoom')
         .classed('hide', true);
 
     context.ui().photoviewer.on('resize.plane', function(dimensions) {
