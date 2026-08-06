@@ -1,11 +1,33 @@
 import { json as d3_json } from 'd3-fetch';
+import type { Entities, Item, ItemId, PropertyId, SearchResponse, SearchResult, Site, SnakWithValue, Term, WbGetEntitiesResponse } from 'wikibase-sdk';
 
 import { utilQsString } from '../util';
 import { localizer } from '../core/localizer';
 
 var apibase = 'https://www.wikidata.org/w/api.php?';
-var _wikidataCache = {};
+var _wikidataCache: { [qId: ItemId]: Item } = {};
 
+export interface WikibaseApiResponse {
+    success: 0 | 1;
+    error: WbGetEntitiesResponse['error'];
+    entities: {
+        [qId: ItemId]: Item;
+    };
+}
+
+
+export interface WikibaseResult {
+    title: string;
+    description: d3.Selector;
+    descriptionLocaleCode: string;
+    editURL: string;
+    imageURL?: string;
+    wiki?: {
+        title: string;
+        text: string;
+        url: string;
+    };
+}
 
 export default {
 
@@ -17,7 +39,7 @@ export default {
 
 
     // Search for Wikidata items matching the query
-    itemsForSearchQuery: function(query, callback, language) {
+    itemsForSearchQuery: function(query: string, callback: Callback<SearchResult[]>, language?: string) {
         if (!query) {
             if (callback) callback(new Error('No query'));
             return;
@@ -40,7 +62,8 @@ export default {
         });
 
         d3_json(url)
-            .then(result => {
+            .then(_result => {
+                const result = _result as SearchResponse;
                 if (result && result.error) {
                     if (result.error.code === 'badvalue' &&
                         result.error.info.includes(lang) &&
@@ -49,7 +72,7 @@ export default {
                         this.itemsForSearchQuery(query, callback, lang.split('-')[0]);
                         return;
                     } else {
-                        throw new Error(result.error);
+                        throw new Error(JSON.stringify(result.error));
                     }
                 }
                 if (callback) callback(null, result.search || {});
@@ -62,7 +85,7 @@ export default {
 
     // Given a Wikipedia language and article title,
     // return an array of corresponding Wikidata entities.
-    itemsByTitle: function(lang, title, callback) {
+    itemsByTitle: function(lang?: string, title?: string, callback?: Callback<Entities>) {
         if (!title) {
             if (callback) callback(new Error('No title'));
             return;
@@ -80,9 +103,10 @@ export default {
         });
 
         d3_json(url)
-            .then(function(result) {
+            .then(function(_result) {
+                const result = _result as WikibaseApiResponse;
                 if (result && result.error) {
-                    throw new Error(result.error);
+                    throw new Error(JSON.stringify(result.error));
                 }
                 if (callback) callback(null, result.entities || {});
             })
@@ -103,7 +127,7 @@ export default {
     },
 
 
-    entityByQID: function(qid, callback) {
+    entityByQID: function(qid: ItemId, callback: Callback<Item>) {
         if (!qid) {
             callback(new Error('No qid'));
             return;
@@ -127,9 +151,10 @@ export default {
         });
 
         d3_json(url)
-            .then(function(result) {
+            .then(function(_result) {
+                const result = _result as WikibaseApiResponse;
                 if (result && result.error) {
-                    throw new Error(result.error);
+                    throw new Error(JSON.stringify(result.error));
                 }
                 if (callback) callback(null, result.entities[qid] || {});
             })
@@ -153,7 +178,7 @@ export default {
     //   wiki:         { title: 'string', text: 'string', url: 'string' }
     // }
     //
-    getDocs: function(params, callback) {
+    getDocs: function(params: { qid: ItemId }, callback: Callback<WikibaseResult>) {
         var langs = this.languagesToQuery();
         this.entityByQID(params.qid, function(err, entity) {
             if (err || !entity) {
@@ -162,18 +187,18 @@ export default {
             }
 
             var i;
-            var description;
+            let description: Term | undefined;
             for (i in langs) {
                 let code = langs[i];
-                if (entity.descriptions[code] && entity.descriptions[code].language === code) {
+                if (entity.descriptions?.[code]?.language === code) {
                     description = entity.descriptions[code];
                     break;
                 }
             }
-            if (!description && Object.values(entity.descriptions).length) description = Object.values(entity.descriptions)[0];
+            if (!description && Object.values(entity.descriptions || {}).length) description = Object.values(entity.descriptions || {})[0];
 
             // prepare result
-            var result = {
+            const result: WikibaseResult = {
                 title: entity.id,
                 description: selection => selection.text(description ? description.value : ''),
                 descriptionLocaleCode: description ? description.language : '',
@@ -183,12 +208,12 @@ export default {
             // add image
             if (entity.claims) {
                 var imageroot = 'https://commons.wikimedia.org/w/index.php';
-                var props = ['P154','P18'];  // logo image, image
+                const props: PropertyId[] = ['P154', 'P18'];  // logo image, image
                 var prop, image;
                 for (i = 0; i < props.length; i++) {
                     prop = entity.claims[props[i]];
                     if (prop && Object.keys(prop).length > 0) {
-                        image = prop[Object.keys(prop)[0]].mainsnak.datavalue.value;
+                        image = (Object.values(prop)[0].mainsnak as SnakWithValue).datavalue.value;
                         if (image) {
                             result.imageURL = imageroot + '?' + utilQsString({
                                 title: 'Special:Redirect/file/' + image,
@@ -205,9 +230,9 @@ export default {
 
                 // must be one of these that we requested..
                 for (i = 0; i < langs.length; i++) {   // check each, in order of preference
-                    var w = langs[i] + 'wiki';
+                    var w = langs[i] + 'wiki' as Site;
                     if (entity.sitelinks[w]) {
-                        var title = entity.sitelinks[w].title;
+                        var title = entity.sitelinks[w]!.title;
                         var tKey = 'inspector.wiki_reference';
                         if (!englishLocale && langs[i] === 'en') {   // user's locale isn't English but
                             tKey = 'inspector.wiki_en_reference';    // we are sending them to enwiki anyway..
