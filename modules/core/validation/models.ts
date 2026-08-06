@@ -132,6 +132,9 @@ export class validationIssueFix<T = unknown> {
     icon?: string;
     entityIds?: EntityId[];
 
+    /** @deprecated used by the crossing_ways validator, purely for unit tests */
+    _connectionTags?: Tags;
+
     issue: validationIssue<T> | null;
 
     constructor(attrs: Omit<validationIssueFix<T>, 'issue'>) {
