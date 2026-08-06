@@ -6,8 +6,11 @@ import { geoOrthoCanOrthogonalize } from '../geo/ortho';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';
+import type { coreGraph } from '../core/graph';
+import type { OsmEntity, osmWay, WayId } from '../osm';
+import type { CreateValidator, Validator } from '../core/validation/models';
 
-export function validationUnsquareWay(context) {
+export const validationUnsquareWay: CreateValidator = (context) => {
     var type = 'unsquare_way';
     var DEFAULT_DEG_THRESHOLD = 5;   // see also issues.js
 
@@ -15,13 +18,13 @@ export function validationUnsquareWay(context) {
     var epsilon = 0.05;
     var nodeThreshold = 10;
 
-    function isBuilding(entity, graph) {
+    function isBuilding(entity: OsmEntity, graph: coreGraph): entity is osmWay {
         if (entity.type !== 'way' || entity.geometry(graph) !== 'area') return false;
-        return entity.tags.building && entity.tags.building !== 'no';
+        return !!entity.tags.building && entity.tags.building !== 'no';
     }
 
 
-    var validation = function checkUnsquareWay(entity, graph) {
+    const validation: Validator = function checkUnsquareWay(entity, graph) {
 
         if (!isBuilding(entity, graph)) return [];
 
@@ -56,7 +59,9 @@ export function validationUnsquareWay(context) {
 
         // user-configurable square threshold
         var storedDegreeThreshold = prefs('validate-square-degrees');
-        var degreeThreshold = isFinite(storedDegreeThreshold) ? Number(storedDegreeThreshold) : DEFAULT_DEG_THRESHOLD;
+        // NOTE: this is an existing bug, the unsquare_way validator does not
+        // work unless you toggle the switch on an off. This will be fixed separately.
+        var degreeThreshold = storedDegreeThreshold === null || isFinite(+storedDegreeThreshold) ? Number(storedDegreeThreshold) : DEFAULT_DEG_THRESHOLD;
 
         var points = nodes.map(function(node) { return context.projection(node.loc); });
         if (!geoOrthoCanOrthogonalize(points, isClosed, epsilon, degreeThreshold, true)) return [];
@@ -80,7 +85,7 @@ export function validationUnsquareWay(context) {
                         icon: 'iD-operation-orthogonalize',
                         title: t.append('issues.fix.square_feature.title'),
                         onClick: function(context, completionHandler) {
-                            var entityId = this.issue.entityIds[0];
+                            var entityId = this.issue!.entityIds[0] as WayId;
                             // use same degree threshold as for detection
                             context.perform(
                                 actionOrthogonalize(entityId, context.projection, undefined, degreeThreshold),
@@ -109,7 +114,7 @@ export function validationUnsquareWay(context) {
             }
         })];
 
-        function showReference(selection) {
+        function showReference(selection: d3.Selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()
@@ -122,4 +127,4 @@ export function validationUnsquareWay(context) {
     validation.type = type;
 
     return validation;
-}
+};
