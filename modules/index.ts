@@ -23,4 +23,6 @@ export * from './validations/index';
 // This is only done in testing because of the performance penalty.
 export let debug = false;
 
-export const setDebug = (newValue: boolean) => { debug = newValue; };
+export const setDebug = (newValue: boolean) => {
+    debug = newValue;
+};

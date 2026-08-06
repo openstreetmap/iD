@@ -35,21 +35,21 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
     // accept single ID for backwards-compatibility
     if (typeof nodeIds === 'string') nodeIds = [nodeIds];
 
-    var _wayIDs: WayId[];
+    let _wayIDs: WayId[];
     // the strategy for picking which way will have a new version and which way is newly created
-    var _keepHistoryOn: HistoryStrategy = 'longest'; // 'longest', 'first'
+    let _keepHistoryOn: HistoryStrategy = 'longest'; // 'longest', 'first'
 
     // these closed ways have to be treated in a special way when contained in a (route) relation
     const circularJunctions = ['roundabout', 'circular'];
 
     // The IDs of the ways actually created by running this action
-    var _createdWayIDs: WayId[] = [];
+    let _createdWayIDs: WayId[] = [];
 
     function dist(graph: coreGraph, nA: NodeId, nB: NodeId) {
-        var locA = graph.entity(nA).loc;
-        var locB = graph.entity(nB).loc;
-        var epsilon = 1e-6;
-        return (locA && locB) ? geoSphericalDistance(locA, locB) : epsilon;
+        const locA = graph.entity(nA).loc;
+        const locB = graph.entity(nB).loc;
+        const epsilon = 1e-6;
+        return locA && locB ? geoSphericalDistance(locA, locB) : epsilon;
     }
 
     // If the way is closed, we need to search for a partner node
@@ -63,11 +63,11 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
     // For example: bone-shaped areas get split across their waist
     // line, circles across the diameter.
     function splitArea(nodes: NodeId[], idxA: number, graph: coreGraph) {
-        var lengths = new Array(nodes.length);
-        var length;
-        var i;
-        var best = 0;
-        var idxB;
+        const lengths = new Array(nodes.length);
+        let length;
+        let i;
+        let best = 0;
+        let idxB;
 
         function wrap(index: number) {
             return utilWrap(index, nodes.length);
@@ -90,7 +90,7 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
 
         // determine best opposite node to split
         for (i = 0; i < nodes.length; i++) {
-            var cost = lengths[i] / dist(graph, nodes[idxA], nodes[i]);
+            const cost = lengths[i] / dist(graph, nodes[idxA], nodes[i]);
             if (cost > best) {
                 idxB = i;
                 best = cost;
@@ -101,23 +101,32 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
     }
 
     function totalLengthBetweenNodes(graph: coreGraph, nodes: NodeId[]) {
-        var totalLength = 0;
-        for (var i = 0; i < nodes.length - 1; i++) {
+        let totalLength = 0;
+        for (let i = 0; i < nodes.length - 1; i++) {
             totalLength += dist(graph, nodes[i], nodes[i + 1]);
         }
         return totalLength;
     }
 
-    function split(graph: coreGraph, nodeId: NodeId, wayA: osmWay, newWayId: WayId | undefined, otherNodeIds: NodeId[]) {
-        var wayB = new osmWay({ id: newWayId, tags: wayA.tags });   // `wayB` is the NEW way
-        var nodesA;
-        var nodesB;
-        var isArea = wayA.isArea();
+    function split(
+        graph: coreGraph,
+        nodeId: NodeId,
+        wayA: osmWay,
+        newWayId: WayId | undefined,
+        otherNodeIds: NodeId[],
+    ) {
+        let wayB = new osmWay({ id: newWayId, tags: wayA.tags }); // `wayB` is the NEW way
+        let nodesA;
+        let nodesB;
+        const isArea = wayA.isArea();
 
         if (wayA.isClosed()) {
-            var nodes = wayA.nodes.slice(0, -1);
-            var idxA = nodes.indexOf(nodeId);
-            var idxB = otherNodeIds.length > 0 ? nodes.indexOf(otherNodeIds[0]) : splitArea(nodes, idxA, graph);
+            const nodes = wayA.nodes.slice(0, -1);
+            const idxA = nodes.indexOf(nodeId);
+            const idxB =
+                otherNodeIds.length > 0
+                    ? nodes.indexOf(otherNodeIds[0])
+                    : splitArea(nodes, idxA, graph);
 
             if (idxB < idxA) {
                 nodesA = nodes.slice(idxA).concat(nodes.slice(0, idxB + 1));
@@ -127,23 +136,22 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
                 nodesB = nodes.slice(idxB).concat(nodes.slice(0, idxA + 1));
             }
         } else {
-            var idx = wayA.nodes.indexOf(nodeId, 1);
+            const idx = wayA.nodes.indexOf(nodeId, 1);
             nodesA = wayA.nodes.slice(0, idx + 1);
             nodesB = wayA.nodes.slice(idx);
         }
 
         if (nodesA.length < 2 || nodesB.length < 2) return graph;
 
-        var lengthA = totalLengthBetweenNodes(graph, nodesA);
-        var lengthB = totalLengthBetweenNodes(graph, nodesB);
+        let lengthA = totalLengthBetweenNodes(graph, nodesA);
+        let lengthB = totalLengthBetweenNodes(graph, nodesB);
 
-        if (_keepHistoryOn === 'longest' &&
-            lengthB > lengthA) {
+        if (_keepHistoryOn === 'longest' && lengthB > lengthA) {
             // keep the history on the longer way, regardless of the node count
             wayA = wayA.update({ nodes: nodesB });
             wayB = wayB.update({ nodes: nodesA });
 
-            var temp = lengthA;
+            const temp = lengthA;
             lengthA = lengthB;
             lengthB = temp;
         } else {
@@ -155,19 +163,21 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
             if (!osmSummableTags.has(key)) continue;
 
             // divide up the the e.g. step count proportionally between the two ways
-            var count = Number(wayA.tags[key]);
-            if (count &&
+            const count = Number(wayA.tags[key]);
+            if (
+                count &&
                 // ensure a number
                 isFinite(count) &&
                 // ensure positive
                 count > 0 &&
                 // ensure integer
-                Math.round(count) === count) {
-                var tagsA = { ...wayA.tags };
-                var tagsB = { ...wayB.tags };
+                Math.round(count) === count
+            ) {
+                const tagsA = { ...wayA.tags };
+                const tagsB = { ...wayB.tags };
 
-                var ratioA = lengthA / (lengthA + lengthB);
-                var countA = Math.round(count * ratioA);
+                const ratioA = lengthA / (lengthA + lengthB);
+                const countA = Math.round(count * ratioA);
                 tagsA[key] = countA.toString();
                 tagsB[key] = (count - countA).toString();
 
@@ -179,30 +189,35 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
         graph = graph.replace(wayA);
         graph = graph.replace(wayB);
 
-        graph.parentRelations(wayA).forEach(function(relation) {
+        graph.parentRelations(wayA).forEach(function (relation) {
             if (relation.hasFromViaTo()) {
                 // Turn restrictions - make sure:
                 // 1. Splitting a FROM/TO way - only `wayA` OR `wayB` remains in relation
                 //    (whichever one is connected to the VIA node/ways)
                 // 2. Splitting a VIA way - `wayB` remains in relation as a VIA way
-                var f = relation.memberByRole('from')!;
-                var v = [
+                const f = relation.memberByRole('from')!;
+                const v = [
                     ...relation.membersByRole('via'),
                     ...relation.membersByRole('intersection'),
                 ];
-                var t = relation.memberByRole('to')!;
-                var i;
+                const t = relation.memberByRole('to')!;
+                let i;
 
                 if (f.id === wayA.id || t.id === wayA.id) {
                     // 1. split a FROM/TO
-                    var keepB = false;
-                    if (v.length === 1 && v[0].type === 'node') {   // check via node
+                    let keepB = false;
+                    if (v.length === 1 && v[0].type === 'node') {
+                        // check via node
                         keepB = wayB.contains(v[0].id as NodeId);
-                    } else {                                        // check via way(s)
+                    } else {
+                        // check via way(s)
                         for (i = 0; i < v.length; i++) {
                             if (v[i].type === 'way') {
-                                var wayVia = graph.hasEntity<osmWay>(v[i].id);
-                                if (wayVia && utilArrayIntersection(wayB.nodes, wayVia.nodes).length) {
+                                const wayVia = graph.hasEntity<osmWay>(v[i].id);
+                                if (
+                                    wayVia &&
+                                    utilArrayIntersection(wayB.nodes, wayVia.nodes).length
+                                ) {
                                     keepB = true;
                                     break;
                                 }
@@ -214,7 +229,6 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
                         relation = relation.replaceMember(wayA, wayB);
                         graph = graph.replace(relation);
                     }
-
                 } else {
                     // 2. split a VIA
                     for (i = 0; i < v.length; i++) {
@@ -223,7 +237,6 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
                         }
                     }
                 }
-
             } else {
                 if (isArea) return; // handled below
                 // All other relations (Routes, Multipolygons, etc):
@@ -236,7 +249,7 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
         if (isArea) {
             const areaTags: Tags = {
                 ...wayA.tags,
-                type: 'multipolygon'
+                type: 'multipolygon',
             };
             const lineTags: Tags = {};
             for (const key in areaTags) {
@@ -249,8 +262,8 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
                 tags: areaTags,
                 members: [
                     { id: wayA.id, role: 'outer', type: 'way' },
-                    { id: wayB.id, role: 'outer', type: 'way' }
-                ]
+                    { id: wayB.id, role: 'outer', type: 'way' },
+                ],
             });
 
             graph = graph.replace(multipolygon);
@@ -291,17 +304,21 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
         function connects(way1: osmWay, way2: osmWay) {
             if (way1.nodes.length < 2 || way2.nodes.length < 2) return false;
             if (circularJunctions.includes(way1.tags.junction) && way1.isClosed()) {
-                return way1.nodes.some(nodeId =>
-                    nodeId === way2.nodes[0] ||
-                    nodeId === way2.nodes[way2.nodes.length - 1]);
+                return way1.nodes.some(
+                    (nodeId) =>
+                        nodeId === way2.nodes[0] || nodeId === way2.nodes[way2.nodes.length - 1],
+                );
             } else if (circularJunctions.includes(way2.tags.junction) && way2.isClosed()) {
-                return way2.nodes.some(nodeId =>
-                    nodeId === way1.nodes[0] ||
-                    nodeId === way1.nodes[way1.nodes.length - 1]);
+                return way2.nodes.some(
+                    (nodeId) =>
+                        nodeId === way1.nodes[0] || nodeId === way1.nodes[way1.nodes.length - 1],
+                );
             }
             if (way1.nodes[0] === way2.nodes[0]) return true;
             if (way1.nodes[0] === way2.nodes[way2.nodes.length - 1]) return true;
-            if (way1.nodes[way1.nodes.length - 1] === way2.nodes[way2.nodes.length - 1]) return true;
+            if (way1.nodes[way1.nodes.length - 1] === way2.nodes[way2.nodes.length - 1]) {
+                return true;
+            }
             if (way1.nodes[way1.nodes.length - 1] === way2.nodes[0]) return true;
             return false;
         }
@@ -313,7 +330,8 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
         const members = relation.members;
         for (let i = 0; i < members.length; i++) {
             const member = members[i];
-            if (member.id === wayA.id) { // wayA is the existing way
+            if (member.id === wayA.id) {
+                // wayA is the existing way
                 // determine connection matrix of wayA, wayB and their neighboring members
                 let wayAconnectsPrev = false;
                 let wayAconnectsNext = false;
@@ -361,16 +379,22 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
                 // * unconnected ways
                 // * members for a loop
                 // * a few invalid/undefined cases (e.g. forks with no proper solution)
-                if (wayAconnectsPrev && !wayAconnectsNext ||
-                    !wayBconnectsPrev && wayBconnectsNext && !(!wayAconnectsPrev && wayAconnectsNext)
+                if (
+                    (wayAconnectsPrev && !wayAconnectsNext) ||
+                    (!wayBconnectsPrev &&
+                        wayBconnectsNext &&
+                        !(!wayAconnectsPrev && wayAconnectsNext))
                 ) {
-                    insertMembers.push({at: i + 1, role: member.role});
+                    insertMembers.push({ at: i + 1, role: member.role });
                     continue;
                 }
-                if (!wayAconnectsPrev && wayAconnectsNext ||
-                    wayBconnectsPrev && !wayBconnectsNext && !(wayAconnectsPrev && !wayAconnectsNext)
+                if (
+                    (!wayAconnectsPrev && wayAconnectsNext) ||
+                    (wayBconnectsPrev &&
+                        !wayBconnectsNext &&
+                        !(wayAconnectsPrev && !wayAconnectsNext))
                 ) {
-                    insertMembers.push({at: i, role: member.role});
+                    insertMembers.push({ at: i, role: member.role });
                     continue;
                 }
                 // loops: try to look one further member ahead/behind to resolve the connectivity
@@ -380,12 +404,12 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
                         const prev2Entity = graph.entity<osmWay>(members[i - 2].id);
                         if (connects(prev2Entity, wayA) && !connects(prev2Entity, wayB)) {
                             // prev-2 member connects only to A: insert B before A
-                            insertMembers.push({at: i, role: member.role});
+                            insertMembers.push({ at: i, role: member.role });
                             continue;
                         }
                         if (connects(prev2Entity, wayB) && !connects(prev2Entity, wayA)) {
                             // prev-2 member connects only to B: insert B after A
-                            insertMembers.push({at: i + 1, role: member.role});
+                            insertMembers.push({ at: i + 1, role: member.role });
                             continue;
                         }
                     }
@@ -394,12 +418,12 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
                         const next2Entity = graph.entity<osmWay>(members[i + 2].id);
                         if (connects(next2Entity, wayA) && !connects(next2Entity, wayB)) {
                             // next+2 member connects only to A: insert B after A
-                            insertMembers.push({at: i + 1, role: member.role});
+                            insertMembers.push({ at: i + 1, role: member.role });
                             continue;
                         }
                         if (connects(next2Entity, wayB) && !connects(next2Entity, wayA)) {
                             // next+2 member connects only to B: insert B before A
-                            insertMembers.push({at: i, role: member.role});
+                            insertMembers.push({ at: i, role: member.role });
                             continue;
                         }
                     }
@@ -408,25 +432,30 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
                 // could not determine how new member should connect (e.g. existing way was not
                 // connected to other member ways): insert them in the original orientation of wayA
                 if (wayA.nodes[wayA.nodes.length - 1] === wayB.nodes[0]) {
-                    insertMembers.push({at: i + 1, role: member.role});
+                    insertMembers.push({ at: i + 1, role: member.role });
                 } else {
-                    insertMembers.push({at: i, role: member.role});
+                    insertMembers.push({ at: i, role: member.role });
                 }
             }
         }
         // insert new member(s) at the determined indices
-        insertMembers.reverse().forEach(item => {
-            graph = graph.replace(relation.addMember({
-                id: wayB.id,
-                type: 'way',
-                role: item.role
-            }, item.at));
+        insertMembers.reverse().forEach((item) => {
+            graph = graph.replace(
+                relation.addMember(
+                    {
+                        id: wayB.id,
+                        type: 'way',
+                        role: item.role,
+                    },
+                    item.at,
+                ),
+            );
             relation = graph.entity(relation.id);
         });
         return graph;
     }
 
-    const action: ActionSplit = function(graph) {
+    const action: ActionSplit = function (graph) {
         _createdWayIDs = [];
         let newWayIndex = 0;
         const candidates = waysForNodes(nodeIds, graph);
@@ -434,11 +463,23 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
             for (const i in nodeIds) {
                 const nodeId = nodeIds[i];
                 candidate = graph.entity(candidate.id);
-                graph = split(graph, nodeId, candidate, newWayIds && newWayIds[newWayIndex], nodeIds.slice(+i + 1));
+                graph = split(
+                    graph,
+                    nodeId,
+                    candidate,
+                    newWayIds && newWayIds[newWayIndex],
+                    nodeIds.slice(+i + 1),
+                );
                 for (const wayId of _createdWayIDs) {
                     // also try to split created ways resulting from previous splits
                     // #12120
-                    graph = split(graph, nodeId, graph.entity(wayId), newWayIds && newWayIds[newWayIndex], nodeIds.slice(+i + 1));
+                    graph = split(
+                        graph,
+                        nodeId,
+                        graph.entity(wayId),
+                        newWayIds && newWayIds[newWayIndex],
+                        nodeIds.slice(+i + 1),
+                    );
                 }
                 newWayIndex += 1;
             }
@@ -446,21 +487,21 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
         return graph;
     };
 
-    action.getCreatedWayIDs = function() {
+    action.getCreatedWayIDs = function () {
         return _createdWayIDs;
     };
 
     function waysForNodes(nodeIds: NodeId[], graph: coreGraph) {
         const splittableWays = nodeIds
-            .map(nodeId => waysForNode(nodeId, graph))
+            .map((nodeId) => waysForNode(nodeId, graph))
             .reduce((cur, acc) => utilArrayIntersection(cur, acc));
 
         if (!_wayIDs) {
             // If the ways to split aren't specified, only split the lines.
             // If there are no lines to split, split the areas.
-            const hasLine = splittableWays.some(way => way.geometry(graph) === 'line');
+            const hasLine = splittableWays.some((way) => way.geometry(graph) === 'line');
             if (hasLine) {
-                return splittableWays.filter(way => way.geometry(graph) === 'line');
+                return splittableWays.filter((way) => way.geometry(graph) === 'line');
             }
         }
 
@@ -484,15 +525,14 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
             }
             return false;
         }
-    };
+    }
     action.waysForNode = waysForNode;
 
-    action.ways = function(graph) {
+    action.ways = function (graph) {
         return waysForNodes(nodeIds, graph);
     };
 
-
-    action.disabled = function(graph) {
+    action.disabled = function (graph) {
         const candidates = waysForNodes(nodeIds, graph);
         if (candidates.length === 0 || (_wayIDs && _wayIDs.length !== candidates.length)) {
             return 'not_eligible';
@@ -506,45 +546,51 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
                         ...parentRelation.membersByRole('via'),
                         ...parentRelation.membersByRole('intersection'),
                     ];
-                    if (!vias.every(via => graph.hasEntity(via.id))) {
+                    if (!vias.every((via) => graph.hasEntity(via.id))) {
                         return 'parent_incomplete';
                     }
                 } else {
                     // other relations (e.g. route relations): at least one members before or after way must be present
                     for (let i = 0; i < parentRelation.members.length; i++) {
                         if (parentRelation.members[i].id === way.id) {
-                            const memberBeforePresent = i > 0 && graph.hasEntity(parentRelation.members[i - 1].id);
-                            const memberAfterPresent = i < parentRelation.members.length - 1 && graph.hasEntity(parentRelation.members[i + 1].id);
-                            if (!memberBeforePresent && !memberAfterPresent && parentRelation.members.length > 1) {
+                            const memberBeforePresent =
+                                i > 0 && graph.hasEntity(parentRelation.members[i - 1].id);
+                            const memberAfterPresent =
+                                i < parentRelation.members.length - 1 &&
+                                graph.hasEntity(parentRelation.members[i + 1].id);
+                            if (
+                                !memberBeforePresent &&
+                                !memberAfterPresent &&
+                                parentRelation.members.length > 1
+                            ) {
                                 return 'parent_incomplete';
                             }
                         }
                     }
                 }
                 const relTypesExceptions = ['junction', 'enforcement']; // some relation types should not prehibit a member from being split
-                if (circularJunctions.includes(way.tags.junction) &&
+                if (
+                    circularJunctions.includes(way.tags.junction) &&
                     way.isClosed() &&
-                    !relTypesExceptions.includes(parentRelation.tags.type)) {
+                    !relTypesExceptions.includes(parentRelation.tags.type)
+                ) {
                     return 'simple_roundabout';
                 }
             }
         }
     };
 
-
-    action.limitWays = function(val) {
+    action.limitWays = function (val) {
         if (!arguments.length) return _wayIDs;
         _wayIDs = val!;
         return action;
     };
 
-
-    action.keepHistoryOn = function(val) {
+    action.keepHistoryOn = function (val) {
         if (!arguments.length) return _keepHistoryOn;
         _keepHistoryOn = val!;
         return action;
     };
-
 
     return action;
 }

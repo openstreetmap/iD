@@ -5,35 +5,41 @@ import type { OsmEntity } from '../osm/abstract-entity';
 import type { coreGraph } from '../core/graph';
 import type { RelationId } from '../osm';
 
-
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteRelationAction.as
-export function actionDeleteRelation(relationID: RelationId, allowUntaggedMembers?: boolean): Action {
-
+export function actionDeleteRelation(
+    relationID: RelationId,
+    allowUntaggedMembers?: boolean,
+): Action {
     function canDeleteEntity(entity: OsmEntity, graph: coreGraph) {
-        return !graph.parentWays(entity).length &&
+        return (
+            !graph.parentWays(entity).length &&
             !graph.parentRelations(entity).length &&
-            (!entity.hasInterestingTags() && !allowUntaggedMembers);
+            !entity.hasInterestingTags() &&
+            !allowUntaggedMembers
+        );
     }
 
+    const action: Action = function (graph) {
+        const relation = graph.entity(relationID);
 
-    const action: Action = function(graph) {
-        var relation = graph.entity(relationID);
+        graph.parentRelations(relation).forEach(function (parent) {
+            parent = parent.removeMembersWithID(relationID);
+            graph = graph.replace(parent);
 
-        graph.parentRelations(relation)
-            .forEach(function(parent) {
-                parent = parent.removeMembersWithID(relationID);
-                graph = graph.replace(parent);
+            if (parent.isDegenerate()) {
+                graph = actionDeleteRelation(parent.id)(graph);
+            }
+        });
 
-                if (parent.isDegenerate()) {
-                    graph = actionDeleteRelation(parent.id)(graph);
-                }
-            });
-
-        var memberIDs = utilArrayUniq(relation.members.map(function(m) { return m.id; }));
-        memberIDs.forEach(function(memberID) {
+        const memberIDs = utilArrayUniq(
+            relation.members.map(function (m) {
+                return m.id;
+            }),
+        );
+        memberIDs.forEach(function (memberID) {
             graph = graph.replace(relation.removeMembersWithID(memberID));
 
-            var entity = graph.entity(memberID);
+            const entity = graph.entity(memberID);
             if (canDeleteEntity(entity, graph)) {
                 graph = actionDeleteMultiple([memberID])(graph);
             }
@@ -41,7 +47,6 @@ export function actionDeleteRelation(relationID: RelationId, allowUntaggedMember
 
         return graph.remove(relation);
     };
-
 
     return action;
 }

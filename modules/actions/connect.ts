@@ -5,7 +5,6 @@ import type { Action } from '../core/history';
 import type { EntityId, osmNode, osmRelation, osmWay, NodeId } from '../osm';
 import type { RelationMember } from '../osm/relation';
 
-
 // Connect the ways at the given nodes.
 //
 // First choose a node to be the survivor, with preference given
@@ -21,18 +20,18 @@ import type { RelationMember } from '../osm/relation';
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/MergeNodesAction.java
 //
 export function actionConnect(nodeIDs: NodeId[]): Action {
-    var action: Action = function(graph) {
-        var survivor;
-        var node: osmNode;
-        var parents;
-        var i, j;
+    const action: Action = function (graph) {
+        let survivor;
+        let node: osmNode;
+        let parents;
+        let i, j;
 
         // Select the node with the ID passed as parameter if it is in the list,
         // otherwise select the node with the oldest ID as the survivor, or the
         // last one if there are only new nodes.
         nodeIDs.reverse();
 
-        var interestingIDs: NodeId[] = [];
+        const interestingIDs: NodeId[] = [];
         for (i = 0; i < nodeIDs.length; i++) {
             node = graph.entity(nodeIDs[i]);
             if (node.hasInterestingTags()) {
@@ -41,7 +40,9 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
                 }
             }
         }
-        survivor = graph.entity(utilOldestID(interestingIDs.length > 0 ? interestingIDs : nodeIDs)!);
+        survivor = graph.entity(
+            utilOldestID(interestingIDs.length > 0 ? interestingIDs : nodeIDs)!,
+        );
 
         // Replace all non-surviving nodes with the survivor and merge tags.
         for (i = 0; i < nodeIDs.length; i++) {
@@ -75,20 +76,18 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
         return graph;
     };
 
-
-    action.disabled = function(graph) {
-        var seen: Record<EntityId, string> = {};
-        var restrictionIDs: EntityId[] = [];
-        var survivor;
-        var node: osmNode;
-        var way: osmWay;
-        var relations;
-        var relation: osmRelation;
-        var role;
-        var i, j, k;
+    action.disabled = function (graph) {
+        const seen: Record<EntityId, string> = {};
+        let restrictionIDs: EntityId[] = [];
+        let node: osmNode;
+        let way: osmWay;
+        let relations;
+        let relation: osmRelation;
+        let role;
+        let i, j, k;
 
         // Select the node with the oldest ID as the survivor.
-        survivor = graph.entity(utilOldestID(nodeIDs)!);
+        const survivor = graph.entity(utilOldestID(nodeIDs)!);
 
         // 1. disable if the nodes being connected have conflicting relation roles
         for (i = 0; i < nodeIDs.length; i++) {
@@ -116,9 +115,9 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
         for (i = 0; i < nodeIDs.length; i++) {
             node = graph.entity(nodeIDs[i]);
 
-            var parents = graph.parentWays(node);
+            const parents = graph.parentWays(node);
             for (j = 0; j < parents.length; j++) {
-                var parent = parents[j];
+                const parent = parents[j];
                 relations = graph.parentRelations(parent);
 
                 for (k = 0; k < relations.length; k++) {
@@ -130,25 +129,34 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
             }
         }
 
-
         // test restrictions
         restrictionIDs = utilArrayUniq(restrictionIDs);
         for (i = 0; i < restrictionIDs.length; i++) {
             relation = graph.entity(restrictionIDs[i]);
             if (!relation.isComplete(graph)) continue;
 
-            var memberWays = relation.members
-                .filter(function(m) { return m.type === 'way'; })
-                .map(function(m) { return graph.entity<osmWay>(m.id); });
+            let memberWays = relation.members
+                .filter(function (m) {
+                    return m.type === 'way';
+                })
+                .map(function (m) {
+                    return graph.entity<osmWay>(m.id);
+                });
 
             memberWays = utilArrayUniq(memberWays);
-            var f = relation.memberByRole('from')!;
-            var t = relation.memberByRole('to')!;
-            var isUturn = (f.id === t.id);
+            const f = relation.memberByRole('from')!;
+            const t = relation.memberByRole('to')!;
+            const isUturn = f.id === t.id;
 
             // 2a. disable if connection would damage a restriction
             // (a key node is a node at the junction of ways)
-            var nodes: Record<string, EntityId[]> = { from: [], via: [], to: [], keyfrom: [], keyto: [] };
+            const nodes: Record<string, EntityId[]> = {
+                from: [],
+                via: [],
+                to: [],
+                keyfrom: [],
+                keyto: [],
+            };
             for (j = 0; j < relation.members.length; j++) {
                 collectNodes(relation.members[j], nodes);
             }
@@ -156,45 +164,68 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
             nodes.keyfrom = utilArrayUniq(nodes.keyfrom.filter(hasDuplicates));
             nodes.keyto = utilArrayUniq(nodes.keyto.filter(hasDuplicates));
 
-            var filter = keyNodeFilter(nodes.keyfrom, nodes.keyto);
+            const filter = keyNodeFilter(nodes.keyfrom, nodes.keyto);
             nodes.from = nodes.from.filter(filter);
             nodes.via = nodes.via.filter(filter);
             nodes.to = nodes.to.filter(filter);
 
-            var connectFrom = false;
-            var connectVia = false;
-            var connectTo = false;
-            var connectKeyFrom = false;
-            var connectKeyTo = false;
+            let connectFrom = false;
+            let connectVia = false;
+            let connectTo = false;
+            let connectKeyFrom = false;
+            let connectKeyTo = false;
 
             for (j = 0; j < nodeIDs.length; j++) {
-                var n = nodeIDs[j];
-                if (nodes.from.indexOf(n) !== -1)    { connectFrom = true; }
-                if (nodes.via.indexOf(n) !== -1)     { connectVia = true; }
-                if (nodes.to.indexOf(n) !== -1)      { connectTo = true; }
-                if (nodes.keyfrom.indexOf(n) !== -1) { connectKeyFrom = true; }
-                if (nodes.keyto.indexOf(n) !== -1)   { connectKeyTo = true; }
+                const n = nodeIDs[j];
+                if (nodes.from.indexOf(n) !== -1) {
+                    connectFrom = true;
+                }
+                if (nodes.via.indexOf(n) !== -1) {
+                    connectVia = true;
+                }
+                if (nodes.to.indexOf(n) !== -1) {
+                    connectTo = true;
+                }
+                if (nodes.keyfrom.indexOf(n) !== -1) {
+                    connectKeyFrom = true;
+                }
+                if (nodes.keyto.indexOf(n) !== -1) {
+                    connectKeyTo = true;
+                }
             }
-            if (connectFrom && connectTo && !isUturn) { return 'restriction'; }
-            if (connectFrom && connectVia) { return 'restriction'; }
-            if (connectTo   && connectVia) { return 'restriction'; }
+            if (connectFrom && connectTo && !isUturn) {
+                return 'restriction';
+            }
+            if (connectFrom && connectVia) {
+                return 'restriction';
+            }
+            if (connectTo && connectVia) {
+                return 'restriction';
+            }
 
             // connecting to a key node -
             // if both nodes are on a member way (i.e. part of the turn restriction),
             // the connecting node must be adjacent to the key node.
             if (connectKeyFrom || connectKeyTo) {
-                if (nodeIDs.length !== 2) { return 'restriction'; }
-
-                var n0 = null;
-                var n1 = null;
-                for (j = 0; j < memberWays.length; j++) {
-                    way = memberWays[j];
-                    if (way.contains(nodeIDs[0])) { n0 = nodeIDs[0]; }
-                    if (way.contains(nodeIDs[1])) { n1 = nodeIDs[1]; }
+                if (nodeIDs.length !== 2) {
+                    return 'restriction';
                 }
 
-                if (n0 && n1) {    // both nodes are part of the restriction
-                    var ok = false;
+                let n0 = null;
+                let n1 = null;
+                for (j = 0; j < memberWays.length; j++) {
+                    way = memberWays[j];
+                    if (way.contains(nodeIDs[0])) {
+                        n0 = nodeIDs[0];
+                    }
+                    if (way.contains(nodeIDs[1])) {
+                        n1 = nodeIDs[1];
+                    }
+                }
+
+                if (n0 && n1) {
+                    // both nodes are part of the restriction
+                    let ok = false;
                     for (j = 0; j < memberWays.length; j++) {
                         way = memberWays[j];
                         if (way.areAdjacent(n0, n1)) {
@@ -211,7 +242,7 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
             // 2b. disable if nodes being connected will destroy a member way in a restriction
             // (to test, make a copy and try actually connecting the nodes)
             for (j = 0; j < memberWays.length; j++) {
-                way = memberWays[j].update({});   // make copy
+                way = memberWays[j].update({}); // make copy
                 for (k = 0; k < nodeIDs.length; k++) {
                     if (nodeIDs[k] === survivor.id) continue;
 
@@ -229,23 +260,22 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
 
         return false;
 
-
         // if a key node appears multiple times (indexOf !== lastIndexOf) it's a FROM-VIA or TO-VIA junction
         function hasDuplicates<T>(n: T, i: number, arr: T[]) {
             return arr.indexOf(n) !== arr.lastIndexOf(n);
         }
 
         function keyNodeFilter<T>(froms: T[], tos: T[]) {
-            return function(n: T) {
+            return function (n: T) {
                 return froms.indexOf(n) === -1 && tos.indexOf(n) === -1;
             };
         }
 
         function collectNodes(member: RelationMember, collection: Record<string, EntityId[]>) {
-            var entity = graph.hasEntity<osmWay>(member.id);
+            const entity = graph.hasEntity<osmWay>(member.id);
             if (!entity) return;
 
-            var role = member.role || '';
+            const role = member.role || '';
             if (!collection[role]) {
                 collection[role] = [];
             }
@@ -256,9 +286,8 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
                     collection.keyfrom.push(member.id);
                     collection.keyto.push(member.id);
                 }
-
             } else if (member.type === 'way') {
-                collection[role].push.apply(collection[role], entity.nodes);
+                collection[role].push(...entity.nodes);
                 if (role === 'from' || role === 'via') {
                     collection.keyfrom.push(entity.first());
                     collection.keyfrom.push(entity.last());
@@ -270,7 +299,6 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
             }
         }
     };
-
 
     return action;
 }

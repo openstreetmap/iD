@@ -2,27 +2,26 @@ import type { Action } from '../core/history';
 import type { EntityId } from '../osm';
 
 export function actionUpgradeTags(entityId: EntityId, oldTags: Tags, replaceTags: Tags): Action {
+    return function (graph) {
+        const entity = graph.entity(entityId);
+        const tags: Tags = Object.assign({}, entity.tags); // shallow copy
+        const transferValues: TagValue[] = [];
+        let semiIndex;
 
-    return function(graph) {
-        var entity = graph.entity(entityId);
-        var tags: Tags = Object.assign({}, entity.tags);  // shallow copy
-        var transferValues: TagValue[] = [];
-        var semiIndex;
-
-        for (var oldTagKey in oldTags) {
+        for (const oldTagKey in oldTags) {
             if (!(oldTagKey in tags)) continue;
             // wildcard match
             if (oldTags[oldTagKey] === '*') {
                 // note the value since we might need to transfer it
                 transferValues.push(tags[oldTagKey]);
                 delete tags[oldTagKey];
-            // exact match
+                // exact match
             } else if (oldTags[oldTagKey] === tags[oldTagKey]) {
                 delete tags[oldTagKey];
-            // match is within semicolon-delimited values
+                // match is within semicolon-delimited values
             } else {
-                var vals = tags[oldTagKey].split(';').filter(Boolean);
-                var oldIndex = vals.indexOf(oldTags[oldTagKey]);
+                const vals = tags[oldTagKey].split(';').filter(Boolean);
+                const oldIndex = vals.indexOf(oldTags[oldTagKey]);
                 if (vals.length === 1 || oldIndex === -1) {
                     delete tags[oldTagKey];
                 } else {
@@ -37,8 +36,8 @@ export function actionUpgradeTags(entityId: EntityId, oldTags: Tags, replaceTags
         }
 
         if (replaceTags) {
-            for (var replaceKey in replaceTags) {
-                var replaceValue = replaceTags[replaceKey];
+            for (const replaceKey in replaceTags) {
+                const replaceValue = replaceTags[replaceKey];
                 if (replaceValue === '*') {
                     if (tags[replaceKey] && tags[replaceKey] !== 'no') {
                         // allow any pre-existing value except `no` (troll tag)
@@ -52,7 +51,7 @@ export function actionUpgradeTags(entityId: EntityId, oldTags: Tags, replaceTags
                 } else {
                     if (tags[replaceKey] && oldTags[replaceKey] && semiIndex !== undefined) {
                         // don't override preexisting values
-                        var existingVals = tags[replaceKey].split(';').filter(Boolean);
+                        const existingVals = tags[replaceKey].split(';').filter(Boolean);
                         if (existingVals.indexOf(replaceValue) === -1) {
                             existingVals.splice(semiIndex, 0, replaceValue);
                             tags[replaceKey] = existingVals.join(';');

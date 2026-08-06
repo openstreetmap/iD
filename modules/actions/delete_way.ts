@@ -4,16 +4,13 @@ import type { osmNode, WayId } from '../osm';
 import { osmNodeGeometriesForTags } from '../osm/tags';
 import { actionDeleteRelation } from './delete_relation';
 
-
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteWayAction.as
 export function actionDeleteWay(wayID: WayId): Action {
-
     function canDeleteNode(node: osmNode, graph: coreGraph) {
         // don't delete nodes still attached to ways or relations
-        if (graph.parentWays(node).length ||
-            graph.parentRelations(node).length) return false;
+        if (graph.parentWays(node).length || graph.parentRelations(node).length) return false;
 
-        var geometries = osmNodeGeometriesForTags(node.tags);
+        const geometries = osmNodeGeometriesForTags(node.tags);
         // don't delete if this node can be a standalone point
         if (geometries.point) return false;
         // delete if this node only be a vertex
@@ -24,11 +21,10 @@ export function actionDeleteWay(wayID: WayId): Action {
         return !node.hasInterestingTags();
     }
 
+    const action: Action = function (graph) {
+        const way = graph.entity(wayID);
 
-    const action: Action = function(graph) {
-        var way = graph.entity(wayID);
-
-        graph.parentRelations(way).forEach(function(parent) {
+        graph.parentRelations(way).forEach(function (parent) {
             parent = parent.removeMembersWithID(wayID);
             graph = graph.replace(parent);
 
@@ -37,10 +33,10 @@ export function actionDeleteWay(wayID: WayId): Action {
             }
         });
 
-        (new Set(way.nodes)).forEach(function(nodeID) {
+        new Set(way.nodes).forEach(function (nodeID) {
             graph = graph.replace(way.removeNode(nodeID));
 
-            var node = graph.entity(nodeID);
+            const node = graph.entity(nodeID);
             if (canDeleteNode(node, graph)) {
                 graph = graph.remove(node);
             }
@@ -48,7 +44,6 @@ export function actionDeleteWay(wayID: WayId): Action {
 
         return graph.remove(way);
     };
-
 
     return action;
 }

@@ -5,7 +5,6 @@ import type { Action } from '../core/history';
 import type { RelationMember } from './relation';
 import type { osmNode } from './node';
 
-
 export type Sequences<T extends RelationMember | osmWay> = Sequence<T>[] & { actions: Action[] };
 export type Sequence<T extends RelationMember | osmWay> = T[] & { nodes: osmNode[] };
 
@@ -34,26 +33,29 @@ export type Sequence<T extends RelationMember | osmWay> = T[] & { nodes: osmNode
 // Incomplete members (those for which `graph.hasEntity(element.id)` returns
 // false) and non-way members are ignored.
 //
-export function osmJoinWays<T extends RelationMember | osmWay>(toJoin: T[], graph: coreGraph): Sequences<T> {
+export function osmJoinWays<T extends RelationMember | osmWay>(
+    toJoin: T[],
+    graph: coreGraph,
+): Sequences<T> {
     function resolve(member: T) {
         return graph.childNodes(graph.entity(member.id));
     }
 
     function reverse(item: T): T {
-        var action = actionReverse(item.id, { reverseOneway: true });
+        const action = actionReverse(item.id, { reverseOneway: true });
         sequences.actions.push(action);
-        return (item instanceof osmWay) ? action(graph).entity(item.id) as T : item;
+        return item instanceof osmWay ? (action(graph).entity(item.id) as T) : item;
     }
 
     // make a copy containing only the items to join
-    toJoin = toJoin.filter(function(member) {
+    toJoin = toJoin.filter(function (member) {
         return member.type === 'way' && graph.hasEntity(member.id);
     });
 
     // Are the things we are joining relation members or `osmWays`?
     // If `osmWays`, skip the "prefer a forward path" code below (see #4872)
-    var i;
-    var joinAsMembers = true;
+    let i;
+    let joinAsMembers = true;
     for (i = 0; i < toJoin.length; i++) {
         if (toJoin[i] instanceof osmWay) {
             joinAsMembers = false;
@@ -61,21 +63,21 @@ export function osmJoinWays<T extends RelationMember | osmWay>(toJoin: T[], grap
         }
     }
 
-    var sequences = [] as unknown as Sequences<T>;
+    const sequences = [] as unknown as Sequences<T>;
     sequences.actions = [];
 
     while (toJoin.length) {
         // start a new sequence
-        var item = toJoin.shift()!;
-        var currWays = [item] as Sequence<T>;
-        var currNodes = resolve(item).slice();
+        let item = toJoin.shift()!;
+        const currWays = [item] as Sequence<T>;
+        const currNodes = resolve(item).slice();
 
         // add to it
         while (toJoin.length) {
-            var start = currNodes[0];
-            var end = currNodes[currNodes.length - 1];
-            var fn: typeof Array.prototype.push | null = null;
-            var nodes = null;
+            let start = currNodes[0];
+            let end = currNodes[currNodes.length - 1];
+            let fn: typeof Array.prototype.push | null = null;
+            let nodes = null;
 
             // Find the next way/member to join.
             for (i = 0; i < toJoin.length; i++) {
@@ -88,7 +90,11 @@ export function osmJoinWays<T extends RelationMember | osmWay>(toJoin: T[], grap
                 // order does not matter - but for routes, it does. (see #4589)
                 // If we started this sequence backwards (i.e. next member way attaches to
                 // the start node and not the end node), reverse the initial way before continuing.
-                if (joinAsMembers && currWays.length === 1 && nodes[0] !== end && nodes[nodes.length - 1] !== end &&
+                if (
+                    joinAsMembers &&
+                    currWays.length === 1 &&
+                    nodes[0] !== end &&
+                    nodes[nodes.length - 1] !== end &&
                     (nodes[nodes.length - 1] === start || nodes[0] === start)
                 ) {
                     currWays[0] = reverse(currWays[0]);
@@ -98,20 +104,20 @@ export function osmJoinWays<T extends RelationMember | osmWay>(toJoin: T[], grap
                 }
 
                 if (nodes[0] === end) {
-                    fn = currNodes.push;               // join to end
+                    fn = currNodes.push; // join to end
                     nodes = nodes.slice(1);
                     break;
                 } else if (nodes[nodes.length - 1] === end) {
-                    fn = currNodes.push;               // join to end
+                    fn = currNodes.push; // join to end
                     nodes = nodes.slice(0, -1).reverse();
                     item = reverse(item);
                     break;
                 } else if (nodes[nodes.length - 1] === start) {
-                    fn = currNodes.unshift;            // join to beginning
+                    fn = currNodes.unshift; // join to beginning
                     nodes = nodes.slice(0, -1);
                     break;
                 } else if (nodes[0] === start) {
-                    fn = currNodes.unshift;            // join to beginning
+                    fn = currNodes.unshift; // join to beginning
                     nodes = nodes.slice(1).reverse();
                     item = reverse(item);
                     break;
@@ -121,7 +127,8 @@ export function osmJoinWays<T extends RelationMember | osmWay>(toJoin: T[], grap
                 }
             }
 
-            if (!nodes) {     // couldn't find a joinable way/member
+            if (!nodes) {
+                // couldn't find a joinable way/member
                 break;
             }
 

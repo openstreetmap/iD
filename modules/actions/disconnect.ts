@@ -7,7 +7,6 @@ export interface ActionDisconnect extends Action {
     limitWays(wayIds?: EntityId[]): EntityId[] | this;
 }
 
-
 // Disconnect the ways at the given node.
 //
 // Optionally, disconnect only the given ways.
@@ -23,21 +22,21 @@ export interface ActionDisconnect extends Action {
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/UnGlueAction.java
 //
 export function actionDisconnect(nodeId: NodeId, newNodeId?: EntityId): ActionDisconnect {
-    var wayIds: EntityId[];
+    let wayIds: EntityId[];
 
     const disconnectableRelationTypes: Record<string, true> = {
-        'associatedStreet': true,
-        'enforcement': true,
-        'site': true,
+        associatedStreet: true,
+        enforcement: true,
+        site: true,
     };
 
-    const action: ActionDisconnect = function(graph) {
-        var node = graph.entity(nodeId);
-        var connections = getConnections(graph);
+    const action: ActionDisconnect = function (graph) {
+        const node = graph.entity(nodeId);
+        const connections = getConnections(graph);
 
-        connections.forEach(function(connection) {
-            var way = graph.entity(connection.wayID);
-            var newNode = new osmNode({id: newNodeId, loc: node.loc, tags: node.tags});
+        connections.forEach(function (connection) {
+            const way = graph.entity(connection.wayID);
+            const newNode = new osmNode({ id: newNodeId, loc: node.loc, tags: node.tags });
 
             graph = graph.replace(newNode);
             if (connection.index === 0 && way.isArea()) {
@@ -55,29 +54,30 @@ export function actionDisconnect(nodeId: NodeId, newNodeId?: EntityId): ActionDi
         return graph;
     };
 
-
     function getConnections(graph: coreGraph) {
-        var candidates = [];
-        var keeping = false;
-        var parentWays = graph.parentWays(graph.entity(nodeId));
-        var way, waynode;
-        for (var i = 0; i < parentWays.length; i++) {
+        const candidates = [];
+        let keeping = false;
+        const parentWays = graph.parentWays(graph.entity(nodeId));
+        let way, waynode;
+        for (let i = 0; i < parentWays.length; i++) {
             way = parentWays[i];
             if (wayIds && wayIds.indexOf(way.id) === -1) {
                 keeping = true;
                 continue;
             }
-            if (way.isArea() && (way.nodes[0] === nodeId)) {
+            if (way.isArea() && way.nodes[0] === nodeId) {
                 candidates.push({ wayID: way.id, index: 0 });
             } else {
-                for (var j = 0; j < way.nodes.length; j++) {
+                for (let j = 0; j < way.nodes.length; j++) {
                     waynode = way.nodes[j];
                     if (waynode === nodeId) {
-                        if (way.isClosed() &&
+                        if (
+                            way.isClosed() &&
                             parentWays.length > 1 &&
                             wayIds &&
                             wayIds.indexOf(way.id) !== -1 &&
-                            j === way.nodes.length - 1) {
+                            j === way.nodes.length - 1
+                        ) {
                             continue;
                         }
                         candidates.push({ wayID: way.id, index: j });
@@ -87,47 +87,46 @@ export function actionDisconnect(nodeId: NodeId, newNodeId?: EntityId): ActionDi
         }
 
         return keeping ? candidates : candidates.slice(1);
-    };
+    }
 
-
-    action.disabled = function(graph) {
-        var connections = getConnections(graph);
+    action.disabled = function (graph) {
+        const connections = getConnections(graph);
         if (connections.length === 0) return 'not_connected';
 
-        var parentWays = graph.parentWays(graph.entity(nodeId));
-        var seenRelationIds: Record<EntityId, EntityId> = {};
-        var sharedRelation;
+        const parentWays = graph.parentWays(graph.entity(nodeId));
+        const seenRelationIds: Record<EntityId, EntityId> = {};
+        let sharedRelation;
 
-        parentWays.forEach(function(way) {
-            var relations = graph.parentRelations(way);
+        parentWays.forEach(function (way) {
+            const relations = graph.parentRelations(way);
             relations
-            .filter(relation => !disconnectableRelationTypes[relation.tags.type])
-            .forEach(function(relation) {
-                if (relation.id in seenRelationIds) {
-                    if (wayIds) {
-                        if (wayIds.indexOf(way.id) !== -1 ||
-                            wayIds.indexOf(seenRelationIds[relation.id]) !== -1) {
+                .filter((relation) => !disconnectableRelationTypes[relation.tags.type])
+                .forEach(function (relation) {
+                    if (relation.id in seenRelationIds) {
+                        if (wayIds) {
+                            if (
+                                wayIds.indexOf(way.id) !== -1 ||
+                                wayIds.indexOf(seenRelationIds[relation.id]) !== -1
+                            ) {
+                                sharedRelation = relation;
+                            }
+                        } else {
                             sharedRelation = relation;
                         }
                     } else {
-                        sharedRelation = relation;
+                        seenRelationIds[relation.id] = way.id;
                     }
-                } else {
-                    seenRelationIds[relation.id] = way.id;
-                }
-            });
+                });
         });
 
         if (sharedRelation) return 'relation';
     };
 
-
-    action.limitWays = function(val) {
+    action.limitWays = function (val) {
         if (!arguments.length) return wayIds;
         wayIds = val!;
         return action;
     };
-
 
     return action;
 }

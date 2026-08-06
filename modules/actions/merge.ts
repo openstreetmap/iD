@@ -4,14 +4,16 @@ import type { EntityId, osmNode, osmRelation, osmWay } from '../osm';
 import { osmTagSuggestingArea } from '../osm/tags';
 import { utilArrayGroupBy, utilArrayUniq, utilCompareIDs } from '../util';
 
-
 export function actionMerge(ids: EntityId[]): Action {
-
     function groupEntitiesByGeometry(graph: coreGraph) {
-        var entities = ids.map(function(id) { return graph.entity(id); });
+        const entities = ids.map(function (id) {
+            return graph.entity(id);
+        });
         return Object.assign(
             { point: [], area: [], line: [], relation: [] },
-            utilArrayGroupBy(entities, function(entity) { return entity.geometry(graph); })
+            utilArrayGroupBy(entities, function (entity) {
+                return entity.geometry(graph);
+            }),
         ) as {
             point: osmNode[];
             vertex: osmNode[];
@@ -21,35 +23,35 @@ export function actionMerge(ids: EntityId[]): Action {
         };
     }
 
+    const action: Action = function (graph) {
+        const geometries = groupEntitiesByGeometry(graph);
+        let target = geometries.area[0] || geometries.line[0];
+        const points = geometries.point;
 
-    var action: Action = function(graph) {
-        var geometries = groupEntitiesByGeometry(graph);
-        var target = geometries.area[0] || geometries.line[0];
-        var points = geometries.point;
-
-        points.forEach(function(point) {
+        points.forEach(function (point) {
             target = target.mergeTags(point.tags);
             graph = graph.replace(target);
 
-            graph.parentRelations(point).forEach(function(parent) {
+            graph.parentRelations(point).forEach(function (parent) {
                 graph = graph.replace(parent.replaceMember(point, target));
             });
 
-            var nodes = utilArrayUniq(graph.childNodes(target));
-            var removeNode = point;
+            const nodes = utilArrayUniq(graph.childNodes(target));
+            let removeNode = point;
 
             if (!point.isNew()) {
                 // Try to preserve the original point if it already has
                 // an ID in the database.
 
-                var inserted = false;
+                let inserted = false;
 
-                var canBeReplaced = function(node: osmNode) {
-                    return !(graph.parentWays(node).length > 1 ||
-                        graph.parentRelations(node).length);
+                const canBeReplaced = function (node: osmNode) {
+                    return !(
+                        graph.parentWays(node).length > 1 || graph.parentRelations(node).length
+                    );
                 };
 
-                var replaceNode = function(node: osmNode) {
+                const replaceNode = function (node: osmNode) {
                     graph = graph.replace(point.update({ tags: node.tags, loc: node.loc }));
                     target = target.replaceNode(node.id, point.id);
                     graph = graph.replace(target);
@@ -57,8 +59,8 @@ export function actionMerge(ids: EntityId[]): Action {
                     inserted = true;
                 };
 
-                var i;
-                var node;
+                let i;
+                let node;
 
                 // First, try to replace a new child node on the target way.
                 for (i = 0; i < nodes.length; i++) {
@@ -74,8 +76,7 @@ export function actionMerge(ids: EntityId[]): Action {
                     // uninteresting child node instead.
                     for (i = 0; i < nodes.length; i++) {
                         node = nodes[i];
-                        if (canBeReplaced(node) &&
-                            !node.hasInterestingTags()) {
+                        if (canBeReplaced(node) && !node.hasInterestingTags()) {
                             replaceNode(node);
                             break;
                         }
@@ -86,8 +87,7 @@ export function actionMerge(ids: EntityId[]): Action {
                         // but more recent child node.
                         for (i = 0; i < nodes.length; i++) {
                             node = nodes[i];
-                            if (canBeReplaced(node) &&
-                                utilCompareIDs(point.id, node.id) < 0) {
+                            if (canBeReplaced(node) && utilCompareIDs(point.id, node.id) < 0) {
                                 replaceNode(node);
                                 break;
                             }
@@ -103,7 +103,7 @@ export function actionMerge(ids: EntityId[]): Action {
         });
 
         if (target.tags.area === 'yes') {
-            var tags = { ...target.tags }; // shallow copy
+            const tags = { ...target.tags }; // shallow copy
             delete tags.area;
             if (osmTagSuggestingArea(tags)) {
                 // remove the `area` tag if area geometry is now implied - #3851
@@ -115,16 +115,16 @@ export function actionMerge(ids: EntityId[]): Action {
         return graph;
     };
 
-
-    action.disabled = function(graph) {
-        var geometries = groupEntitiesByGeometry(graph);
-        if (geometries.point.length === 0 ||
-            (geometries.area.length + geometries.line.length) !== 1 ||
-            geometries.relation.length !== 0) {
+    action.disabled = function (graph) {
+        const geometries = groupEntitiesByGeometry(graph);
+        if (
+            geometries.point.length === 0 ||
+            geometries.area.length + geometries.line.length !== 1 ||
+            geometries.relation.length !== 0
+        ) {
             return 'not_eligible';
         }
     };
-
 
     return action;
 }

@@ -10,18 +10,16 @@ import type { coreGraph } from '../core';
 import type { osmNode as OsmNode } from '../osm/node';
 import type { EntityId as EntityID } from '../osm';
 
-
 export function utilTagText(entity: iD.OsmEntity): string {
     const obj = (entity && entity.tags) || {};
     return Object.keys(obj)
-        .map(k => k + '=' + obj[k])
+        .map((k) => k + '=' + obj[k])
         .join(', ');
 }
 
-
 export function utilTotalExtent(array: EntityID[] | iD.OsmEntity[], graph: coreGraph): geoExtent {
     const extent = geoExtent();
-    let entity : iD.OsmEntity | undefined;
+    let entity: iD.OsmEntity | undefined;
     for (const val of array) {
         entity = typeof val === 'string' ? graph.hasEntity(val) : val;
         if (entity) {
@@ -40,9 +38,9 @@ export type TagDiff = {
     render: (selection: d3.Selection<HTMLElement>) => void;
 };
 export function utilTagDiff(oldTags: Tags, newTags: Tags, contextKeys: TagKey[] = []): TagDiff[] {
-    const tagDiff : TagDiff[] = [];
+    const tagDiff: TagDiff[] = [];
     const keys = utilArrayUnion(Object.keys(oldTags), Object.keys(newTags)).sort();
-    keys.forEach(function(k) {
+    keys.forEach(function (k) {
         const oldVal = oldTags[k];
         const newVal = newTags[k];
 
@@ -50,14 +48,10 @@ export function utilTagDiff(oldTags: Tags, newTags: Tags, contextKeys: TagKey[] 
             selection: d3.Selection<HTMLElement>,
             keyPart: string,
             valuePart: string,
-            link: string
+            link: string,
         ) {
-            selection.append('span')
-                .text(keyPart);
-            selection.append('a')
-                .attr('href', link)
-                .attr('target', '_blank')
-                .text(valuePart);
+            selection.append('span').text(keyPart);
+            selection.append('a').attr('href', link).attr('target', '_blank').text(valuePart);
         }
 
         if ((oldVal || oldVal === '') && (newVal === undefined || newVal !== oldVal)) {
@@ -68,13 +62,18 @@ export function utilTagDiff(oldTags: Tags, newTags: Tags, contextKeys: TagKey[] 
                 oldVal: oldVal,
                 newVal: newVal,
                 display: `${keyPart}${oldVal}`,
-                render: selection => {
+                render: (selection) => {
                     if (k.split(':').includes('wikidata') && oldVal.startsWith('Q')) {
-                        renderWithValueLink(selection, keyPart, oldVal, `https://www.wikidata.org/wiki/${oldVal}`);
+                        renderWithValueLink(
+                            selection,
+                            keyPart,
+                            oldVal,
+                            `https://www.wikidata.org/wiki/${oldVal}`,
+                        );
                     } else {
                         selection.text(`${keyPart}${oldVal}`);
                     }
-                }
+                },
             });
         }
         if ((newVal || newVal === '') && (oldVal === undefined || newVal !== oldVal)) {
@@ -85,13 +84,18 @@ export function utilTagDiff(oldTags: Tags, newTags: Tags, contextKeys: TagKey[] 
                 oldVal: oldVal,
                 newVal: newVal,
                 display: `${keyPart}${newVal}`,
-                render: selection => {
+                render: (selection) => {
                     if (k.split(':').includes('wikidata') && newVal.startsWith('Q')) {
-                        renderWithValueLink(selection, keyPart, newVal, `https://www.wikidata.org/wiki/${newVal}`);
+                        renderWithValueLink(
+                            selection,
+                            keyPart,
+                            newVal,
+                            `https://www.wikidata.org/wiki/${newVal}`,
+                        );
                     } else {
                         selection.text(`${keyPart}${newVal}`);
                     }
-                }
+                },
             });
         }
         if (contextKeys.includes(k) && newVal === oldVal) {
@@ -102,24 +106,27 @@ export function utilTagDiff(oldTags: Tags, newTags: Tags, contextKeys: TagKey[] 
                 oldVal: newVal,
                 newVal: newVal,
                 display: `${keyPart}${newVal}`,
-                render: selection => {
+                render: (selection) => {
                     if (k.split(':').includes('wikidata') && newVal.startsWith('Q')) {
-                        renderWithValueLink(selection, keyPart, newVal, `https://www.wikidata.org/wiki/${newVal}`);
+                        renderWithValueLink(
+                            selection,
+                            keyPart,
+                            newVal,
+                            `https://www.wikidata.org/wiki/${newVal}`,
+                        );
                     } else {
                         selection.text(`${keyPart}${newVal}`);
                     }
-                }
+                },
             });
         }
     });
     return tagDiff;
 }
 
-
 export function utilEntitySelector(ids: EntityID[]): string {
     return ids.length ? '.' + ids.join(',.') : 'nothing';
 }
-
 
 // returns an selector to select entity ids for:
 //  - entityIDs passed in
@@ -133,12 +140,9 @@ export function utilEntityOrMemberSelector(ids: EntityID[], graph: coreGraph) {
         const entity = graph.hasEntity(id);
         if (!entity || entity.type !== 'relation') return;
 
-        entity.members
-            .map(member => member.id)
-            .forEach(id => seen.add(id));
+        entity.members.map((member) => member.id).forEach((id) => seen.add(id));
     }
 }
-
 
 // returns an selector to select entity ids for:
 //  - entityIDs passed in
@@ -146,7 +150,6 @@ export function utilEntityOrMemberSelector(ids: EntityID[], graph: coreGraph) {
 export function utilEntityOrDeepMemberSelector(ids: EntityID[], graph: coreGraph): string {
     return utilEntitySelector(utilEntityAndDeepMemberIDs(ids, graph));
 }
-
 
 // returns an selector to select entity ids for:
 //  - entityIDs passed in
@@ -163,15 +166,17 @@ export function utilEntityAndDeepMemberIDs(ids: EntityID[], graph: coreGraph): E
         const entity = graph.hasEntity(id);
         if (!entity || entity.type !== 'relation') return;
 
-        entity.members
-            .map(member => member.id)
-            .forEach(collectDeepDescendants);   // recurse
+        entity.members.map((member) => member.id).forEach(collectDeepDescendants); // recurse
     }
 }
 
 // returns an selector to select entity ids for:
 //  - deep descendant entityIDs for any of those entities that are relations
-export function utilDeepMemberSelector(ids: EntityID[], graph: coreGraph, skipMultipolygonMembers: boolean): string {
+export function utilDeepMemberSelector(
+    ids: EntityID[],
+    graph: coreGraph,
+    skipMultipolygonMembers: boolean,
+): string {
     const idsSet = new Set(ids);
     const seen: Set<EntityID> = new Set();
     const returners: Set<EntityID> = new Set();
@@ -189,20 +194,21 @@ export function utilDeepMemberSelector(ids: EntityID[], graph: coreGraph, skipMu
         const entity = graph.hasEntity(id);
         if (!entity || entity.type !== 'relation') return;
         if (skipMultipolygonMembers && entity.isMultipolygon()) return;
-        entity.members
-            .map(member => member.id)
-            .forEach(collectDeepDescendants);   // recurse
+        entity.members.map((member) => member.id).forEach(collectDeepDescendants); // recurse
     }
 }
 
-
 // Adds or removes highlight styling for the specified entities
-export function utilHighlightEntities(ids: EntityID[], highlighted: boolean, context: iD.Context): void {
-    context.surface()
+export function utilHighlightEntities(
+    ids: EntityID[],
+    highlighted: boolean,
+    context: iD.Context,
+): void {
+    context
+        .surface()
         .selectAll(utilEntityOrDeepMemberSelector(ids, context.graph()))
         .classed('highlighted', highlighted);
 }
-
 
 // returns an Array that is the union of:
 //  - nodes for any nodeIDs passed in
@@ -227,9 +233,7 @@ export function utilGetAllNodes(ids: EntityID[], graph: coreGraph): OsmNode[] {
         } else if (entity.type === 'way') {
             entity.nodes.forEach(collectNodes);
         } else {
-            entity.members
-                .map(member => member.id)
-                .forEach(collectNodes);   // recurse
+            entity.members.map((member) => member.id).forEach(collectNodes); // recurse
         }
     }
 }
@@ -244,23 +248,30 @@ export function utilGetAllNodes(ids: EntityID[], graph: coreGraph): OsmNode[] {
  *             - isMapLabel:  If true, this name is for a label on the map.
  *                            If falsy, it's for a label elsewhere in the UI.
  */
-export function utilDisplayName(entity: iD.OsmEntity, flags: {
-    hideNetwork?: boolean,
-    hideRef?: boolean,
-    isMapLabel?: boolean
-}): string {
-    const name = localizer.expandedLocaleCodes()
-        .map(code => entity.tags[`name:${code}`])
-        .find(Boolean) || entity.tags.name || '';
+export function utilDisplayName(
+    entity: iD.OsmEntity,
+    flags: {
+        hideNetwork?: boolean;
+        hideRef?: boolean;
+        isMapLabel?: boolean;
+    },
+): string {
+    const name =
+        localizer
+            .expandedLocaleCodes()
+            .map((code) => entity.tags[`name:${code}`])
+            .find(Boolean) ||
+        entity.tags.name ||
+        '';
 
     const tags = {
         direction: entity.tags.direction,
         from: entity.tags.from,
         name,
-        network: flags?.hideNetwork ? undefined : (entity.tags.cycle_network || entity.tags.network),
+        network: flags?.hideNetwork ? undefined : entity.tags.cycle_network || entity.tags.network,
         ref: flags?.hideRef ? undefined : entity.tags.ref,
         to: entity.tags.to,
-        via: entity.tags.via
+        via: entity.tags.via,
     };
 
     // A right or left-right arrow likely indicates a formulaic “name” as specified by the Public Transport v2 schema.
@@ -312,7 +323,7 @@ export function utilDisplayName(entity: iD.OsmEntity, flags: {
         'unsigned_ref',
         'seamark:name',
         'sector:name',
-        'lock_name'
+        'lock_name',
     ];
 
     if (entity.tags.highway === 'milestone' || entity.tags.railway === 'milestone') {
@@ -354,7 +365,6 @@ export function utilDisplayName(entity: iD.OsmEntity, flags: {
     return '';
 }
 
-
 export function utilDisplayNameForPath(entity: iD.OsmEntity): string {
     let name = utilDisplayName(entity, { isMapLabel: true });
     const isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
@@ -367,25 +377,29 @@ export function utilDisplayNameForPath(entity: iD.OsmEntity): string {
     return name;
 }
 
-
 export function utilDisplayType(id: EntityID): string {
     switch (id.charAt(0)) {
-        case 'n': return t('inspector.node');
-        case 'w': return t('inspector.way');
-        case 'r': return t('inspector.relation');
-        default: throw new Error('entity id with invalid or missing type');
+        case 'n':
+            return t('inspector.node');
+        case 'w':
+            return t('inspector.way');
+        case 'r':
+            return t('inspector.relation');
+        default:
+            throw new Error('entity id with invalid or missing type');
     }
 }
-
 
 export function utilEntityRoot(entityType: 'node' | 'way' | 'relation'): 'n' | 'w' | 'r' {
     switch (entityType) {
-        case 'node': return 'n';
-        case 'way': return 'w';
-        case 'relation': return 'r';
+        case 'node':
+            return 'n';
+        case 'way':
+            return 'w';
+        case 'relation':
+            return 'r';
     }
 }
-
 
 // Returns a single object containing the tags of all the given entities.
 // Example:
@@ -412,14 +426,13 @@ export function utilCombinedTags(entityIDs: EntityID[], graph: coreGraph): TagsM
     const allTags: Tags[] = [];
 
     const entities = entityIDs
-        .map(entityID => graph.hasEntity(entityID))
-        .filter(x => x !== undefined);
-
+        .map((entityID) => graph.hasEntity(entityID))
+        .filter((x) => x !== undefined);
 
     // gather the aggregate keys
     for (const entity of entities) {
         const keys = Object.keys(entity.tags).filter(Boolean);
-        keys.forEach(function(key) {
+        keys.forEach(function (key) {
             allKeys.add(key);
         });
     }
@@ -439,7 +452,8 @@ export function utilCombinedTags(entityIDs: EntityID[], graph: coreGraph): TagsM
                         // first alternate value, replace single value with array
                         tags[key] = [tags[key], value];
                     }
-                } else { // type is array
+                } else {
+                    // type is array
                     if (tags[key].indexOf(value) === -1) {
                         // subsequent alternate value, add to array
                         tags[key].push(value);
@@ -457,7 +471,7 @@ export function utilCombinedTags(entityIDs: EntityID[], graph: coreGraph): TagsM
         if (!Array.isArray(tags[key])) continue;
 
         // sort values by frequency then alphabetically
-        tags[key] = tags[key].sort(function(val1, val2) {
+        tags[key] = tags[key].sort(function (val1, val2) {
             const count2 = tagCounts[key + '=' + val2];
             const count1 = tagCounts[key + '=' + val1];
             if (count2 !== count1) {
@@ -470,17 +484,18 @@ export function utilCombinedTags(entityIDs: EntityID[], graph: coreGraph): TagsM
         });
     }
 
-    return Object.defineProperty(tags, Symbol.for('allTags'), { enumerable: false, value: allTags });
+    return Object.defineProperty(tags, Symbol.for('allTags'), {
+        enumerable: false,
+        value: allTags,
+    });
 }
 
-
-export function utilStringQs(str: string): {[k: string]: string} {
+export function utilStringQs(str: string): { [k: string]: string } {
     str = str.replace(/^[#?]{0,2}/, ''); // advance past any leading '?' or '#' characters
     return Object.fromEntries(new URLSearchParams(str));
 }
 
-
-export function utilQsString(obj: {[k: string]: string}, softEncode: boolean) {
+export function utilQsString(obj: { [k: string]: string }, softEncode: boolean) {
     let str = new URLSearchParams(obj).toString();
     if (softEncode) {
         // for better readability of URL hashes: optionally
@@ -491,7 +506,6 @@ export function utilQsString(obj: {[k: string]: string}, softEncode: boolean) {
     }
     return str;
 }
-
 
 export function utilPrefixDOMProperty(property: string): string | false {
     const prefixes = ['webkit', 'ms', 'moz', 'o'];
@@ -512,7 +526,6 @@ export function utilPrefixDOMProperty(property: string): string | false {
     return false;
 }
 
-
 export function utilPrefixCSSProperty(property: string): string | false {
     const prefixes = ['webkit', 'ms', 'Moz', 'O'];
     let i = -1;
@@ -525,19 +538,26 @@ export function utilPrefixCSSProperty(property: string): string | false {
 
     while (++i < n) {
         if (prefixes[i] + property in s) {
-            return '-' + prefixes[i].toLowerCase() + property.replace(/([A-Z])/g, '-$1').toLowerCase();
+            return (
+                '-' + prefixes[i].toLowerCase() + property.replace(/([A-Z])/g, '-$1').toLowerCase()
+            );
         }
     }
 
     return false;
 }
 
-
 let transformProperty;
-export function utilSetTransform(el: d3.Selection, x: number, y: number, scale: number): d3.Selection {
+export function utilSetTransform(
+    el: d3.Selection,
+    x: number,
+    y: number,
+    scale: number,
+): d3.Selection {
     transformProperty ||= utilPrefixCSSProperty('Transform');
     const prop = transformProperty;
-    const translate = utilDetect().opera ? 'translate('   + x + 'px,' + y + 'px)'
+    const translate = utilDetect().opera
+        ? 'translate(' + x + 'px,' + y + 'px)'
         : 'translate3d(' + x + 'px,' + y + 'px,0)';
     return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));
 }
@@ -553,33 +573,44 @@ export function utilStripDiacritics(string: string) {
 // if options.substring is true, it instead calculates the minimal Levenshtein distance between
 // the string a and any substring of b
 // see: https://en.wikipedia.org/wiki/Approximate_string_matching#Problem_formulation_and_algorithms
-export function utilEditDistance(a: string, b: string, options?: {
-    substring?: boolean
-}): number {
+export function utilEditDistance(
+    a: string,
+    b: string,
+    options?: {
+        substring?: boolean;
+    },
+): number {
     a = utilStripDiacritics(a.toLowerCase());
     b = utilStripDiacritics(b.toLowerCase());
     if (a.length === 0) return options?.substring ? 0 : b.length;
     if (b.length === 0) return a.length;
     const matrix = [];
-    for (let i = 0; i <= b.length; i++) { matrix[i] = options?.substring ? [0] : [i]; }
-    for (let j = 0; j <= a.length; j++) { matrix[0][j] = j; }
+    for (let i = 0; i <= b.length; i++) {
+        matrix[i] = options?.substring ? [0] : [i];
+    }
+    for (let j = 0; j <= a.length; j++) {
+        matrix[0][j] = j;
+    }
     for (let i = 1; i <= b.length; i++) {
         for (let j = 1; j <= a.length; j++) {
-            if (b.charAt(i-1) === a.charAt(j-1)) {
-                matrix[i][j] = matrix[i-1][j-1];
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
             } else {
-                matrix[i][j] = Math.min(matrix[i-1][j-1] + 1, // substitution
-                    Math.min(matrix[i][j-1] + 1, // insertion
-                    matrix[i-1][j] + 1)); // deletion
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j - 1] + 1, // substitution
+                    Math.min(
+                        matrix[i][j - 1] + 1, // insertion
+                        matrix[i - 1][j] + 1,
+                    ),
+                ); // deletion
             }
         }
     }
     if (options?.substring) {
-        return Math.min(...matrix.map(r => r[a.length]));
+        return Math.min(...matrix.map((r) => r[a.length]));
     }
     return matrix[b.length][a.length];
 }
-
 
 // a d3.mouse-alike which
 // 1. Only works on HTML elements, not SVG
@@ -590,23 +621,18 @@ export function utilFastMouse(container: HTMLElement) {
     const rectTop = rect.top;
     const clientLeft = +container.clientLeft;
     const clientTop = +container.clientTop;
-    return function(e: MouseEvent) {
-        return [
-            e.clientX - rectLeft - clientLeft,
-            e.clientY - rectTop - clientTop
-        ];
+    return function (e: MouseEvent) {
+        return [e.clientX - rectLeft - clientLeft, e.clientY - rectTop - clientTop];
     };
 }
-
 
 // wraps an index to an interval [0..length-1]
 export function utilWrap(index: number, length: number): number {
     if (index < 0) {
-        index += Math.ceil(-index/length)*length;
+        index += Math.ceil(-index / length) * length;
     }
     return index % length;
 }
-
 
 /**
  * a replacement for functor
@@ -615,26 +641,26 @@ export function utilWrap(index: number, length: number): number {
  * @returns a function that returns that value or the value if it's a function
  */
 export function utilFunctor<T>(value: T | (() => T)): () => T {
-    if (typeof value === 'function') return value as (() => T);
+    if (typeof value === 'function') return value as () => T;
     return () => value;
 }
 
-
 export function utilNoAuto(selection: d3.Selection): d3.Selection {
-    const isText = (selection.size() && selection.node()!.tagName.toLowerCase() === 'textarea');
+    const isText = selection.size() && selection.node()!.tagName.toLowerCase() === 'textarea';
 
-    return selection
-        // assign 'new-password' even for non-password fields to prevent browsers (Chrome) ignoring 'off'
-        .attr('autocomplete', 'new-password')
-        .attr('autocorrect', 'off')
-        .attr('autocapitalize', 'off')
-        .attr('data-1p-ignore', 'true')  // 1Password
-        .attr('data-bwignore', 'true')   // Bitwarden
-        .attr('data-form-type', 'other') // Dashlane
-        .attr('data-lpignore', 'true')   // LastPass
-        .attr('spellcheck', isText ? 'true' : 'false');
+    return (
+        selection
+            // assign 'new-password' even for non-password fields to prevent browsers (Chrome) ignoring 'off'
+            .attr('autocomplete', 'new-password')
+            .attr('autocorrect', 'off')
+            .attr('autocapitalize', 'off')
+            .attr('data-1p-ignore', 'true') // 1Password
+            .attr('data-bwignore', 'true') // Bitwarden
+            .attr('data-form-type', 'other') // Dashlane
+            .attr('data-lpignore', 'true') // LastPass
+            .attr('spellcheck', isText ? 'true' : 'false')
+    );
 }
-
 
 // https://stackoverflow.com/questions/194846/is-there-any-kind-of-hash-code-function-in-javascript
 // https://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
@@ -645,7 +671,7 @@ export function utilHashcode(str: string): number {
     }
     for (let i = 0; i < str.length; i++) {
         const char = str.charCodeAt(i);
-        hash = ((hash << 5) - hash) + char;
+        hash = (hash << 5) - hash + char;
         hash = hash & hash; // Convert to 32bit integer
     }
     return hash;
@@ -730,9 +756,9 @@ export function utilOldestID<T extends EntityID>(ids: T[]): T | undefined {
 export function utilCleanOsmString(val: any, maxChars: number) {
     // be lenient with input
     if (val === undefined || val === null) {
-      val = '';
+        val = '';
     } else {
-      val = val.toString();
+        val = val.toString();
     }
 
     // remove whitespace
@@ -747,7 +773,7 @@ export function utilCleanOsmString(val: any, maxChars: number) {
 
 // https://stackoverflow.com/a/70360753/1627467
 export function getLuma(color: string): number {
-    const {r, g, b} = d3_color(color) as RGBColor;
+    const { r, g, b } = d3_color(color) as RGBColor;
     return 0.2999 * r + 0.587 * g + 0.114 * b;
 }
 
@@ -757,11 +783,9 @@ export function utilGzip(input: string) {
     if (!globalThis.CompressionStream) return undefined;
 
     try {
-        const stream = new Response(input).body!.pipeThrough(
-            new CompressionStream('gzip')
-        );
+        const stream = new Response(input).body!.pipeThrough(new CompressionStream('gzip'));
         return new Response(stream).blob();
-     } catch {
+    } catch {
         // if an error is thrown, it means the browser supports
         // CompressionStream but not the specific algorithm.
         return undefined;

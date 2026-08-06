@@ -31,9 +31,9 @@ References:
     http://wiki.openstreetmap.org/wiki/Key:traffic_sign#On_a_way_or_area
 */
 export function actionReverse(entityID: EntityId, options?: ReverseOptions): ActionReverse {
-    var numeric = /^([+\-]?)(?=[\d.])/;
-    var directionKey = /direction$/;
-    var keyReplacements: [RegExp, string][] = [
+    const numeric = /^([+\-]?)(?=[\d.])/;
+    const directionKey = /direction$/;
+    const keyReplacements: [RegExp, string][] = [
         [/:right$/, ':left'],
         [/:left$/, ':right'],
         [/:forward$/, ':backward'],
@@ -41,9 +41,9 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
         [/:right:/, ':left:'],
         [/:left:/, ':right:'],
         [/:forward:/, ':backward:'],
-        [/:backward:/, ':forward:']
+        [/:backward:/, ':forward:'],
     ];
-    var valueReplacements: Record<TagValue, TagValue> = {
+    const valueReplacements: Record<TagValue, TagValue> = {
         left: 'right',
         right: 'left',
         up: 'down',
@@ -57,39 +57,44 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
     // way direction and thus should not be reversed.
     const keysToKeepUnchanged = [
         // https://github.com/openstreetmap/iD/issues/10736
-        /^red_turn:(right|left):?/
+        /^red_turn:(right|left):?/,
     ];
     // If a key matches the key regex and any of the provided context
     // tag sets, it will not be reversed.
-    const keyValuesToKeepUnchanged = [{
-            keyRegex: /^.*(_|:)?(description|name|note|website|ref|source|comment|watch|attribution)(_|:)?/,
-            prerequisiteTags: [{}]
-        }, {
+    const keyValuesToKeepUnchanged = [
+        {
+            keyRegex:
+                /^.*(_|:)?(description|name|note|website|ref|source|comment|watch|attribution)(_|:)?/,
+            prerequisiteTags: [{}],
+        },
+        {
             // Turn lanes are left/right to key (not way) direction - #5674
             keyRegex: /^turn:lanes:?/,
-            prerequisiteTags: [{}]
-        }, {
+            prerequisiteTags: [{}],
+        },
+        {
             // https://github.com/openstreetmap/iD/issues/10128
             keyRegex: /^side$/,
-            prerequisiteTags: [{highway: 'cyclist_waiting_aid'}]
-        }, {
+            prerequisiteTags: [{ highway: 'cyclist_waiting_aid' }],
+        },
+        {
             keyRegex: /^railway:turnout_side$/,
-            prerequisiteTags: [{}]
-        }
+            prerequisiteTags: [{}],
+        },
     ];
-    var roleReplacements: Record<string, string> = {
+    const roleReplacements: Record<string, string> = {
         forward: 'backward',
         backward: 'forward',
         forwards: 'backward',
-        backwards: 'forward'
+        backwards: 'forward',
     };
-    var onewayReplacements: Record<TagValue, TagValue> = {
+    const onewayReplacements: Record<TagValue, TagValue> = {
         yes: '-1',
         '1': '-1',
-        '-1': 'yes'
+        '-1': 'yes',
     };
 
-    var compassReplacements: Record<TagValue, TagValue> = {
+    const compassReplacements: Record<TagValue, TagValue> = {
         N: 'S',
         NNE: 'SSW',
         NE: 'SW',
@@ -105,16 +110,15 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
         W: 'E',
         WNW: 'ESE',
         NW: 'SE',
-        NNW: 'SSE'
+        NNW: 'SSE',
     };
 
-
     function reverseKey(key: TagKey) {
-        if (keysToKeepUnchanged.some(keyRegex => keyRegex.test(key))) {
+        if (keysToKeepUnchanged.some((keyRegex) => keyRegex.test(key))) {
             return key;
         }
-        for (var i = 0; i < keyReplacements.length; ++i) {
-            var replacement = keyReplacements[i];
+        for (let i = 0; i < keyReplacements.length; ++i) {
+            const replacement = keyReplacements[i];
             if (replacement[0].test(key)) {
                 return key.replace(replacement[0], replacement[1]);
             }
@@ -122,40 +126,45 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
         return key;
     }
 
-
     function reverseValue(key: TagKey, value: TagValue, includeAbsolute: boolean, allTags: Tags) {
-        for (let { keyRegex, prerequisiteTags } of keyValuesToKeepUnchanged) {
-            if (keyRegex.test(key) && prerequisiteTags.some(expectedTags =>
-                Object.entries(expectedTags).every(([k, v]) => {
-                    return allTags[k] && (v === '*' || allTags[k] === v);
-                })
-            )) {
+        for (const { keyRegex, prerequisiteTags } of keyValuesToKeepUnchanged) {
+            if (
+                keyRegex.test(key) &&
+                prerequisiteTags.some((expectedTags) =>
+                    Object.entries(expectedTags).every(([k, v]) => {
+                        return allTags[k] && (v === '*' || allTags[k] === v);
+                    }),
+                )
+            ) {
                 return value;
             }
         }
 
         if (key === 'incline' && numeric.test(value)) {
-            return value.replace(numeric, function(_, sign) { return sign === '-' ? '' : '-'; });
-
+            return value.replace(numeric, function (_, sign) {
+                return sign === '-' ? '' : '-';
+            });
         } else if (options && options.reverseOneway && key === 'oneway') {
             return onewayReplacements[value] || value;
-
         } else if (includeAbsolute && directionKey.test(key)) {
-            return value.split(';').map(value => {
-                if (compassReplacements[value]) return compassReplacements[value];
+            return value
+                .split(';')
+                .map((value) => {
+                    if (compassReplacements[value]) return compassReplacements[value];
 
-                var degrees = Number(value);
-                if (isFinite(degrees)) {
-                    if (degrees < 180) {
-                        degrees += 180;
+                    let degrees = Number(value);
+                    if (isFinite(degrees)) {
+                        if (degrees < 180) {
+                            degrees += 180;
+                        } else {
+                            degrees -= 180;
+                        }
+                        return degrees.toString();
                     } else {
-                        degrees -= 180;
+                        return valueReplacements[value] || value;
                     }
-                    return degrees.toString();
-                } else {
-                    return valueReplacements[value] || value;
-                }
-            }).join(';');
+                })
+                .join(';');
         }
         return valueReplacements[value] || value;
     }
@@ -169,8 +178,9 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
 
         const fields = [...preset.fields(loc), ...preset.moreFields(loc)];
 
-        const maybeDirectionField = fields.find(field => {
-            const isDirectionField = field.key && (field.key === 'direction' || field.key.endsWith(':direction'));
+        const maybeDirectionField = fields.find((field) => {
+            const isDirectionField =
+                field.key && (field.key === 'direction' || field.key.endsWith(':direction'));
             // some direction fields are for angles, so ensure that the
             // direction field on this preset is not a numeric field.
             const isRelativeDirection = field.type !== 'number';
@@ -184,16 +194,15 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
         return maybeDirectionField?.key || false;
     }
 
-
     // Reverse the direction of tags attached to the nodes - #3076
     function reverseNodeTags(graph: coreGraph, nodeIDs: EntityId[]) {
-        for (var i = 0; i < nodeIDs.length; i++) {
-            var node = graph.hasEntity(nodeIDs[i]);
+        for (let i = 0; i < nodeIDs.length; i++) {
+            const node = graph.hasEntity(nodeIDs[i]);
             if (!node || !Object.keys(node.tags).length) continue;
 
             let anyChanges = false;
-            var tags: Tags = {};
-            for (var key in node.tags) {
+            const tags: Tags = {};
+            for (const key in node.tags) {
                 const value = node.tags[key];
 
                 const newKey = reverseKey(key);
@@ -211,25 +220,24 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
                 tags[directionKey] = 'forward';
             }
 
-            graph = graph.replace(node.update({tags: tags}));
+            graph = graph.replace(node.update({ tags: tags }));
         }
         return graph;
     }
 
-
     function reverseWay(graph: coreGraph, way: osmWay) {
-        var nodes = way.nodes.slice().reverse();
-        var tags: Tags = {};
-        var role;
+        const nodes = way.nodes.slice().reverse();
+        const tags: Tags = {};
+        let role;
 
-        for (var key in way.tags) {
+        for (const key in way.tags) {
             tags[reverseKey(key)] = reverseValue(key, way.tags[key], false, way.tags);
         }
 
-        graph.parentRelations(way).forEach(function(relation) {
-            relation.members.forEach(function(member, index) {
+        graph.parentRelations(way).forEach(function (relation) {
+            relation.members.forEach(function (member, index) {
                 if (member.id === way.id && (role = roleReplacements[member.role])) {
-                    relation = relation.updateMember({role: role}, index);
+                    relation = relation.updateMember({ role: role }, index);
                     graph = graph.replace(relation);
                 }
             });
@@ -237,30 +245,27 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
 
         // Reverse any associated directions on nodes on the way and then replace
         // the way itself with the reversed node ids and updated way tags
-        return reverseNodeTags(graph, nodes)
-            .replace(way.update({nodes: nodes, tags: tags}));
+        return reverseNodeTags(graph, nodes).replace(way.update({ nodes: nodes, tags: tags }));
     }
 
-
-    const action: ActionReverse = function(graph) {
-        var entity = graph.entity(entityID);
+    const action: ActionReverse = function (graph) {
+        const entity = graph.entity(entityID);
         if (entity.type === 'way') {
             return reverseWay(graph, entity);
         }
         return reverseNodeTags(graph, [entityID]);
     };
 
-    action.disabled = function(graph) {
-        var entity = graph.hasEntity(entityID);
+    action.disabled = function (graph) {
+        const entity = graph.hasEntity(entityID);
         if (!entity || entity.type === 'way') return false;
 
-        for (var key in entity.tags) {
-            var value = entity.tags[key];
+        for (const key in entity.tags) {
+            const value = entity.tags[key];
             if (reverseKey(key) !== key || reverseValue(key, value, true, entity.tags) !== value) {
                 return false;
             }
         }
-
 
         // exception for features whose presets have a direction
         // field - they're flipable even if they don't have a
@@ -270,7 +275,7 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
         return 'nondirectional_node';
     };
 
-    action.entityID = function() {
+    action.entityID = function () {
         return entityID;
     };
 
