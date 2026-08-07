@@ -5,6 +5,7 @@ import * as countryCoder from '@rapideditor/country-coder';
 
 import { fileFetcher } from '../../core/file_fetcher';
 import { localizer, t } from '../../core/localizer';
+import { locationManager } from '../../core/location_manager';
 import { services } from '../../services';
 import { fuzzyMatch, uiCombobox } from '../combobox';
 import { svgIcon } from '../../svg/icon';
@@ -278,6 +279,21 @@ export function uiFieldCombo(field, context) {
             ? field.t(`options.${value}.description`) : undefined;
     }
 
+    // Some combo options are only offered in specific regions (`optionsLocationSet` on the field).
+    // An option with no entry there, or when we can't tell where we are, is allowed everywhere.
+    /** @param {string} value @returns {boolean} */
+    function optionAllowedHere(value) {
+        if (!field.optionsLocationSetID) return true;
+        const locationSetID = field.optionsLocationSetID[value];
+        if (!locationSetID) return true;
+
+        const extent = combinedEntityExtent();
+        if (!extent) return true;
+
+        const validHere = locationManager.locationSetsAt(extent.center());
+        return validHere.has(locationSetID);
+    }
+
     function getOptions(allOptions) {
         const localeCode = localizer.localeCode();
         // Get dropdown list for language: key via localizer instead of taginfo
@@ -346,6 +362,7 @@ export function uiFieldCombo(field, context) {
         } else {
             options = [].concat(field.options, field.options).filter(Boolean);
         }
+        options = options.filter(optionAllowedHere);
         const result = options.map(function(v) {
             const labelId = getLabelId(field, v);
             return {
@@ -435,6 +452,16 @@ export function uiFieldCombo(field, context) {
                     value = value.slice(field.key.length);
                 }
                 return value === restrictTagValueSpelling(value);
+            });
+
+            // don't show options that are region-restricted and we're outside their region
+            // (taginfo doesn't know about optionsLocationSet, so this can't be left to it)
+            data = data.filter(d => {
+                var value = d.value;
+                if (_isMulti) {
+                    value = value.slice(field.key.length);
+                }
+                return optionAllowedHere(value);
             });
 
             var deprecatedValues = deprecatedTagValuesByKey(_dataDeprecated)[field.key];
