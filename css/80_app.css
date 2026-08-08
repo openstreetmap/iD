@@ -3589,31 +3589,19 @@ div.full-screen > button:focus {
 .layer-list li:not(:last-child) {
     border-bottom: 1px solid var(--border-color);
 }
-.layer-list li:active {
+/* Tint each cell, not the whole `li`, so edit/delete (and similar) buttons
+   can hover independently of the label / selected state. */
+.layer-list li.active > *,
+.layer-list li.switch > * {
+    background: var(--selected-bg-color);
+}
+.layer-list li label:active,
+.layer-list li button:active {
     background-color: var(--bg-color-3);
 }
 @media (hover: hover) {
-    .layer-list li:hover {
-        background-color: var(--bg-color-3);
-    }
-}
-
-.layer-list li.active button,
-.layer-list li.switch button,
-.layer-list li.active,
-.layer-list li.switch {
-    background: var(--selected-bg-color);
-}
-
-/* Background list: highlight only the hovered cell (the label or a single
-   edit/delete button), not the whole row — so hovering a button doesn't also
-   tint the label, and the label keeps its selected tint while a button is hovered. */
-@media (hover: hover) {
-    .background-pane .layer-list li:not(.active):not(.switch):hover {
-        background-color: transparent;
-    }
-    .background-pane .layer-list li label:hover,
-    .background-pane .layer-list li button:hover {
+    .layer-list li label:hover,
+    .layer-list li button:hover {
         background-color: var(--bg-color-3);
     }
 }
