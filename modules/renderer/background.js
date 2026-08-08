@@ -13,8 +13,6 @@ import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
 import {
   cleanCustomTemplate,
-  LEGACY_CUSTOM_SOURCE_ID,
-  MIGRATED_LEGACY_CUSTOM_ID,
   nextCustomId,
   readCustomTemplates,
   writeCustomTemplates
@@ -598,22 +596,16 @@ export function rendererBackground(context) {
         });
       }
 
-      // Decide which background layer to display.
-      // - `custom:<url>` adds/selects that URL (deduped); empty URL falls through
-      // - bare `custom` is the pre-multi-custom hash id → migrated `custom-1`
+      // Decide which background layer to display. A `custom:<url>` hash adds the
+      // URL to the saved list (deduped) and selects it; an empty/invalid custom
+      // URL is ignored and falls through to the normal default selection.
       const customTemplate = (requestedBackground && requestedBackground.indexOf('custom:') === 0)
         ? requestedBackground.replace(/^custom:/, '')
         : null;
       const customSource = customTemplate ? background.addOrGetCustomSource(customTemplate) : null;
-      const legacyCustomSource = (requestedBackground === LEGACY_CUSTOM_SOURCE_ID)
-        ? (background.findSource(MIGRATED_LEGACY_CUSTOM_ID)
-          || imageryIndex.backgrounds.find(d => d.isCustom)
-          || null)
-        : null;
 
       background.baseLayerSource(
         customSource ||
-        legacyCustomSource ||
         background.findSource(requestedBackground) ||
         best ||
         isLastUsedValid && background.findSource(lastUsedBackground) ||

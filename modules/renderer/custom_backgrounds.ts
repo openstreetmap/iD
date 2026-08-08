@@ -17,10 +17,10 @@ const CUSTOM_TEMPLATES_KEY = 'background-custom-templates';
 const CUSTOM_TEMPLATE_LEGACY_KEY = 'background-custom-template';
 // Monotonic counter so custom ids are never reused, even after a deletion.
 const CUSTOM_NEXT_ID_KEY = 'background-custom-next-id';
-/** Legacy single-custom source id (pre multi-custom support). */
-export const LEGACY_CUSTOM_SOURCE_ID = 'custom';
-/** Id assigned when migrating the legacy single custom entry. */
-export const MIGRATED_LEGACY_CUSTOM_ID = 'custom-1';
+// Legacy single-custom source id (pre multi-custom support).
+const LEGACY_CUSTOM_SOURCE_ID = 'custom';
+// Id assigned when migrating the legacy single custom entry.
+const MIGRATED_LEGACY_CUSTOM_ID = 'custom-1';
 
 
 /**

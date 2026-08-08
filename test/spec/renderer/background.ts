@@ -285,17 +285,6 @@ describe('iD.rendererBackground', function() {
             expect(asSource(bg.baseLayerSource()).isCustom).not.toBe(true);
         });
 
-        it('selects a saved custom for a bare "custom" background hash (legacy id)', async function() {
-            const t = 'https://barecustom-' + uniq() + '/{z}/{x}/{y}.png';
-            asSource(bg.addOrGetCustomSource(t));
-            window.location.hash = '#background=custom';
-
-            await bg.init();
-
-            expect(asSource(bg.baseLayerSource()).isCustom).toBe(true);
-            expect(asSource(bg.baseLayerSource()).template()).toBe(t);
-        });
-
         it('keeps the map on the merged duplicate when the selected custom is edited to an existing template (RC4)', function() {
             const ta = 'https://mergesel-a-' + uniq() + '/{z}/{x}/{y}.png';
             const tb = 'https://mergesel-b-' + uniq() + '/{z}/{x}/{y}.png';
