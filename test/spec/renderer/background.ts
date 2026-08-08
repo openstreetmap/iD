@@ -1,13 +1,6 @@
 import { prefs } from '../../../modules/core/preferences';
 import type { CustomTemplate } from '../../../modules/renderer/custom_backgrounds';
 
-function setPref(key: string, value: string | null): void {
-    prefs(key, value);
-}
-function getPref(key: string): string | null {
-    return prefs(key);
-}
-
 // The runtime background sources are built in loosely-typed JS (they surface as
 // `object`), so we narrow the surface the tests actually read.
 interface CustomSource {
@@ -35,9 +28,9 @@ describe('iD.rendererBackground', function() {
     function uniq(): string { return (++_uniqCounter).toString(); }
 
     function clearCustomPrefs() {
-        setPref('background-custom-templates', null);
-        setPref('background-custom-template', null);
-        setPref('background-custom-next-id', null);
+        prefs('background-custom-templates', null);
+        prefs('background-custom-template', null);
+        prefs('background-custom-next-id', null);
     }
 
     let context: iD.Context;
@@ -51,36 +44,36 @@ describe('iD.rendererBackground', function() {
         });
 
         it('migrates a legacy single custom template into the list', function() {
-            setPref('background-custom-template', 'https://legacy/{z}/{x}/{y}.png');
+            prefs('background-custom-template', 'https://legacy/{z}/{x}/{y}.png');
             context = iD.coreContext().assetPath('../dist/').init();
 
             const list = context.background().customTemplates();
             expect(list).toHaveLength(1);
             expect(list[0].template).toBe('https://legacy/{z}/{x}/{y}.png');
             expect(list[0].id).toBe('custom-1');
-            expect(getPref('background-custom-template')).toBeNull();
+            expect(prefs('background-custom-template')).toBeNull();
         });
 
         it('rewrites legacy background-last-used prefs on migration', function() {
-            setPref('background-custom-template', 'https://legacy/{z}/{x}/{y}.png');
-            setPref('background-last-used', 'custom');
-            setPref('background-last-used-toggle', 'custom');
+            prefs('background-custom-template', 'https://legacy/{z}/{x}/{y}.png');
+            prefs('background-last-used', 'custom');
+            prefs('background-last-used-toggle', 'custom');
             context = iD.coreContext().assetPath('../dist/').init();
             context.background().customTemplates();
 
-            expect(getPref('background-last-used')).toBe('custom-1');
-            expect(getPref('background-last-used-toggle')).toBe('custom-1');
+            expect(prefs('background-last-used')).toBe('custom-1');
+            expect(prefs('background-last-used-toggle')).toBe('custom-1');
         });
 
         it('returns an empty list when there is no saved custom', function() {
             context = iD.coreContext().assetPath('../dist/').init();
             expect(context.background().customTemplates()).toEqual([]);
-            expect(getPref('background-custom-templates')).toBeNull();
+            expect(prefs('background-custom-templates')).toBeNull();
         });
 
         it('does not re-migrate once the new list preference exists', function() {
-            setPref('background-custom-templates', JSON.stringify([]));
-            setPref('background-custom-template', 'https://legacy/{z}/{x}/{y}.png');
+            prefs('background-custom-templates', JSON.stringify([]));
+            prefs('background-custom-template', 'https://legacy/{z}/{x}/{y}.png');
             context = iD.coreContext().assetPath('../dist/').init();
 
             expect(context.background().customTemplates()).toEqual([]);
@@ -197,12 +190,12 @@ describe('iD.rendererBackground', function() {
         it('clears background-last-used references when a custom is deleted', function() {
             const tmpl = 'https://lastused-' + uniq() + '/{z}/{x}/{y}.png';
             const id = asSource(bg.addOrGetCustomSource(tmpl)).id;
-            setPref('background-last-used', id);
-            setPref('background-last-used-toggle', id);
+            prefs('background-last-used', id);
+            prefs('background-last-used-toggle', id);
 
             bg.removeCustomSource(id);
-            expect(getPref('background-last-used')).not.toBe(id);
-            expect(getPref('background-last-used-toggle')).not.toBe(id);
+            expect(prefs('background-last-used')).not.toBe(id);
+            expect(prefs('background-last-used-toggle')).not.toBe(id);
         });
     });
 
