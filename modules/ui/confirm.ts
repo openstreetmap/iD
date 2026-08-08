@@ -2,7 +2,13 @@ import { t } from '../core/localizer';
 import { uiModal } from './modal';
 
 
-export function uiConfirm(selection: d3.Selection<HTMLElement>) {
+/** A confirm modal: shaded selection plus `close` / `okButton`. */
+export type UiConfirm = ReturnType<typeof uiModal> & {
+    okButton: () => ReturnType<typeof uiModal>;
+};
+
+
+export function uiConfirm(selection: d3.Selection<HTMLElement>): UiConfirm {
     const modalSelection = uiModal(selection);
 
     modalSelection.select('.modal')
@@ -20,8 +26,7 @@ export function uiConfirm(selection: d3.Selection<HTMLElement>) {
         .attr('class', 'modal-section buttons cf');
 
 
-    return Object.assign(
-        modalSelection, {
+    return Object.assign(modalSelection, {
         okButton: function() {
             buttons
                 .append('button')

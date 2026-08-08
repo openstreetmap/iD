@@ -827,6 +827,13 @@ en:
     best_imagery: Best known imagery source for this location
     switch: Switch back to this background
     custom: Custom
+    custom_label: "Custom: {val}"
+    custom_add: Add custom background
+    custom_delete:
+      tooltip: Delete this custom background
+      header: Delete custom background
+      message: "Delete “{name}”? This cannot be undone."
+      confirm: Delete
     overlays: Overlays
     imagery_problem_faq: Report an Imagery Problem
     reset: reset
@@ -983,19 +990,18 @@ en:
       tooltip: Edit custom background
       header: Custom Background Settings
       instructions:
-        info: Enter a tile URL template below.
         license_disclaimer: Make sure that the used background imagery is allowed to be used for mapping.
         license_faq: Read more.
         license_faq_url: "https://wiki.openstreetmap.org/wiki/FAQ#What_images_and_maps_may_I_use_to_make_maps_from?"
         wms:
-          tokens_label: "Supported WMS tokens:"
+          tokens_label: "Supported WMS tokens"
           tokens:
             proj: "`{proj}`: requested projection (`EPSG:3857` only)"
             wkid: "`{wkid}`: same as proj, but without the EPSG (`3857` only)"
             dimensions: "`{width}`, `{height}`: requested image dimensions (`256` only)"
             bbox: "`{bbox}`: requested bounding box (e.g. `minX,minY,maxX,maxY`)"
         tms:
-          tokens_label: "Supported TMS tokens:"
+          tokens_label: "Supported TMS tokens"
           tokens:
             xyz: "`{zoom}` or `{z}`, `{x}`, `{y}`: Z/X/Y tile coordinates"
             flipped_y: "`{-y}` or `{ty}`: flipped TMS-style Y coordinates"
@@ -1003,7 +1009,10 @@ en:
             quadtile: "`{u}`: quadtile (Bing) scheme"
             scale_factor: "`{@2x}` or `{r}`: resolution scale factor"
         example: "Example:"
+      name:
+        label: "Name (optional)"
       template:
+        label: Tile URL template
         placeholder: Enter a url template
     custom_data:
       tooltip: Edit custom data layer

@@ -801,7 +801,17 @@ summary.hide-toggle {
     line-height: 25px;
     width: fit-content;
 }
-details.disclosure-wrap[open] summary.hide-toggle {
+/* heading + trailing controls (add button, view switcher) on one row */
+summary.hide-toggle:has(.disclosure-header-options) {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+summary.hide-toggle .hide-toggle-label {
+    flex: 0 1 auto;
+    min-width: 0;
+}
+details.disclosure-wrap:open > summary.hide-toggle {
     margin-bottom: 10px;
 }
 summary.hide-toggle::-webkit-details-marker {
@@ -2729,48 +2739,57 @@ div.combobox:has(.has-description) {
 }
 
 
-/* Raw Tag Editor
+/* Disclosure header options (icon buttons in the summary row;
+   used by the raw tag editor view switcher and the background pane add button)
 ------------------------------------------------------- */
-.raw-tag-options {
+.disclosure-header-options {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-end;
-    margin-top: -28px;
+    align-items: center;
+    margin-inline-start: auto;
 }
-button.raw-tag-option {
+/* hide heading controls while the section is collapsed */
+details.disclosure-wrap:not(:open) > summary .disclosure-header-options {
+    display: none;
+}
+button.disclosure-header-option {
     flex: 0 0 auto;
     padding: 3px;
     background: var(--muted-text-color);
     color: var(--bg-color-3);
     margin: 0 3px;
 }
-button.raw-tag-option:focus,
-button.raw-tag-option.active {
+button.disclosure-header-option:focus,
+button.disclosure-header-option.active {
     color: var(--bg-color);
     background: var(--link-focus-color);
 }
 @media (hover: hover) {
-    button.raw-tag-option:hover {
+    button.disclosure-header-option:hover {
         color: var(--bg-color);
         background: var(--link-focus-color);
     }
 }
-button.raw-tag-option.selected {
+button.disclosure-header-option.selected {
     color: var(--bg-color);
     background: var(--link-color);
+    /* already the active view — no further action, so not a pointer */
+    cursor: default;
 }
-button.raw-tag-option svg.icon {
+button.disclosure-header-option svg.icon {
     width: 14px;
     height: 14px;
     display: block;
 }
-.ideditor[dir='ltr'] button.raw-tag-option-list {
+.ideditor[dir='ltr'] button.disclosure-header-option-list {
     transform: scaleX(-1);
     filter: FlipH;
     -ms-filter: "FlipH";
 }
 
 
+/* Raw Tag Editor
+------------------------------------------------------- */
 .tag-text {
     width: 100%;
     height: 100%;
@@ -3570,26 +3589,28 @@ div.full-screen > button:focus {
 .layer-list li:not(:last-child) {
     border-bottom: 1px solid var(--border-color);
 }
-.layer-list li:active {
+/* Tint each cell, not the whole `li`, so edit/delete (and similar) buttons
+   can hover independently of the label / selected state. */
+.layer-list li.active > *,
+.layer-list li.switch > * {
+    background: var(--selected-bg-color);
+}
+.layer-list li label:active,
+.layer-list li button:active {
     background-color: var(--bg-color-3);
 }
 @media (hover: hover) {
-    .layer-list li:hover {
+    .layer-list li label:hover,
+    .layer-list li button:hover {
         background-color: var(--bg-color-3);
     }
-}
-
-.layer-list li.active button,
-.layer-list li.switch button,
-.layer-list li.active,
-.layer-list li.switch {
-    background: var(--selected-bg-color);
 }
 
 .layer-list li.best > div.best {
     padding: 5px;
     flex: 0 0 auto;
     align-self: center;
+    cursor: help;
 }
 
 .ideditor[dir='rtl'] .list-item-data-browse svg {
@@ -3622,10 +3643,18 @@ div.full-screen > button:focus {
     display: block;
     overflow: hidden;
     width: calc(100% - 20px); /* Ensures radio input width within flexbox */
+    line-height: 1rem; /* tighten labels, esp. ones that wrap to two lines */
 }
 
 .layer-list label span.localized-text {
     line-height: 0.95rem;
+}
+
+/* clamp background layer labels to a single line; the row tooltip reveals the
+   full text when it overflows */
+.background-pane .layer-list label > span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .layer-list input.list-item-input {
@@ -3650,6 +3679,7 @@ div.full-screen > button:focus {
 
 .map-data-pane .layer-list button .icon,
 .background-pane .layer-list button .icon {
+    fill: var(--text-color);
     opacity: 0.5;
 }
 
@@ -5523,14 +5553,62 @@ img.tile-debug {
     width: 100%;
 }
 
-.settings-custom-background .instructions-template {
+/* license disclaimer, shown as an info callout */
+.settings-custom-background .settings-custom-background-callout {
+    border: 1px solid var(--link-color);
+    border-radius: 4px;
+    background: var(--selected-bg-color);
+    padding: 8px 10px;
     margin-bottom: 20px;
+}
+.settings-custom-background .settings-custom-background-callout p {
+    margin: 0;
+}
+.settings-custom-background .settings-custom-background-callout a {
+    text-decoration: underline;
+}
+
+/* form field labels and inputs */
+.settings-custom-background .field-name-label,
+.settings-custom-background .field-template-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.settings-custom-background input.field-name {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.settings-custom-background textarea.field-template {
+    display: block; /* avoid inline baseline gap under the control */
+    width: 100%;
+    margin: 0 0 5px 0; /* same gap as label → field */
+}
+/* form help under the template field */
+.settings-custom-background .instructions-example {
+    font-size: 12px;
+    margin: 0 0 20px 0; /* section spacing before token disclosures */
+}
+.settings-custom-background .instructions-example code {
+    margin-inline-start: 0.35em;
+    word-break: break-all;
+    background: none;
+    padding: 0;
+}
+/* collapsible WMS/TMS token reference — tight pair, no extra margin
+   below (modal-section padding already provides the 20px section gap) */
+.settings-custom-background .instructions-template > *:not(:last-child) {
+    margin-bottom: 5px;
+}
+.settings-custom-background .instructions-template summary.hide-toggle {
+    font-size: 13px;
+    line-height: 1.3; /* override inspector 25px heading line-height */
 }
 .settings-custom-background .instructions-template p {
     margin-bottom: 0;
 }
 .settings-custom-background .instructions-template ul {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 .settings-custom-background .instructions-template ul li {
     list-style-type: disc;
@@ -5776,6 +5854,12 @@ button.conflicts-button {
     padding: 10px;
     font-weight: normal;
     background-color: var(--bg-color);
+}
+/* long custom tile URL templates in background-list tooltips */
+.tooltip-text code {
+    display: inline-block;
+    max-width: 100%;
+    word-break: break-all;
 }
 
 .popover-arrow {

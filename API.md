@@ -13,7 +13,10 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   or a custom tile URL. A custom URL is specified in the format `custom:<url>`,
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
   `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
-  DNS multiplexing.<br/>
+  DNS multiplexing. A `custom:<url>` value is added to the user's saved list of
+  custom backgrounds in localStorage (if not already present) and selected.
+  Conversely, the URL reflects only the *currently selected* custom background,
+  so it cannot share the full list of saved custom backgrounds at once.<br/>
   _Example:_ `background=custom:https://tile.openstreetmap.org/{zoom}/{x}/{y}.png`
 * __`comment`__ - Prefills the changeset comment.<br/>
   _Example:_ `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon`

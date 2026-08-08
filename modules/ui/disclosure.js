@@ -14,6 +14,7 @@ export function uiDisclosure(context, key, expandedDefault) {
     let _label = utilFunctor('');
     let _updatePreference = true;
     let _content = function () {};
+    let _headerOptions = null;
 
 
     const disclosure = function(selection) {
@@ -35,10 +36,14 @@ export function uiDisclosure(context, key, expandedDefault) {
 
         const summaryEnter = detailsEnter
             .append('summary')
-            .attr('class', 'hide-toggle hide-toggle-' + key)
+            .attr('class', 'hide-toggle hide-toggle-' + key);
+
+        const labelEnter = summaryEnter
+            .append('span')
+            .attr('class', 'hide-toggle-label')
             .call(svgIcon('', 'pre-text', 'hide-toggle-icon'));
 
-        summaryEnter
+        labelEnter
             .append('span')
             .attr('class', 'hide-toggle-text');
 
@@ -66,6 +71,18 @@ export function uiDisclosure(context, key, expandedDefault) {
             labelSelection.text(label);
         } else {
             labelSelection.text('').call(label);
+        }
+
+        if (_headerOptions) {
+            const options = summary.selectAll('.disclosure-header-options')
+                .data([0]);
+            options.enter()
+                .append('div')
+                .attr('class', 'disclosure-header-options')
+                // don't toggle the disclosure when interacting with header controls
+                .on('click', d3_event => d3_event.stopPropagation());
+            summary.selectAll('.disclosure-header-options')
+                .call(_headerOptions);
         }
 
         const contentWrap = details.selectAll('.disclosure-content');
@@ -96,6 +113,10 @@ export function uiDisclosure(context, key, expandedDefault) {
             if (_updatePreference) {
                 prefs('disclosure.' + key + '.expanded', _expanded);
             }
+
+            // keep the open attribute in sync (we preventDefault the native toggle)
+            // so :open / :not(:open) CSS for header options works
+            details.property('open', _expanded);
 
             updateSummary();
 
@@ -134,6 +155,15 @@ export function uiDisclosure(context, key, expandedDefault) {
     disclosure.content = function(val) {
         if (!arguments.length) return _content;
         _content = val;
+        return disclosure;
+    };
+
+
+    // Optional controls rendered inside the summary (e.g. view toggle, add button).
+    // Hidden via CSS when the disclosure is closed (`details:not(:open)`).
+    disclosure.headerOptions = function(val) {
+        if (!arguments.length) return _headerOptions;
+        _headerOptions = val;
         return disclosure;
     };
 

@@ -5,7 +5,11 @@ import { svgIcon } from '../svg/icon';
 import { utilKeybinding } from '../util';
 
 
-/** @returns {d3.Selection<HTMLElement>} */
+/**
+ * @param {d3.Selection<HTMLElement>} selection
+ * @param {boolean} [blocking]
+ * @returns {d3.Selection<HTMLElement> & { close: () => void }}
+ */
 export function uiModal(selection, blocking) {
   let keybinding = utilKeybinding('modal');
   let previous = selection.select('div.modal');
@@ -48,7 +52,7 @@ export function uiModal(selection, blocking) {
     .on('focus.keytrap', moveFocusToLast);
 
   if (!blocking) {
-    shaded.on('click.remove-modal', (d3_event) => {
+    shaded.on('click.remove-modal', function(d3_event) {
       if (d3_event.target === this) {
         shaded.close();
       }
