@@ -2729,50 +2729,52 @@ div.combobox:has(.has-description) {
 }
 
 
-/* Raw Tag Editor
+/* Disclosure header options (icon buttons on the disclosure heading line)
 ------------------------------------------------------- */
-.raw-tag-options {
+.disclosure-header-options {
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-end;
     margin-top: -28px;
 }
-button.raw-tag-option {
+button.disclosure-header-option {
     flex: 0 0 auto;
     padding: 3px;
     background: var(--muted-text-color);
     color: var(--bg-color-3);
     margin: 0 3px;
 }
-button.raw-tag-option:focus,
-button.raw-tag-option.active {
+button.disclosure-header-option:focus,
+button.disclosure-header-option.active {
     color: var(--bg-color);
     background: var(--link-focus-color);
 }
 @media (hover: hover) {
-    button.raw-tag-option:hover {
+    button.disclosure-header-option:hover {
         color: var(--bg-color);
         background: var(--link-focus-color);
     }
 }
-button.raw-tag-option.selected {
+button.disclosure-header-option.selected {
     color: var(--bg-color);
     background: var(--link-color);
     /* already the active view — no further action, so not a pointer */
     cursor: default;
 }
-button.raw-tag-option svg.icon {
+button.disclosure-header-option svg.icon {
     width: 14px;
     height: 14px;
     display: block;
 }
-.ideditor[dir='ltr'] button.raw-tag-option-list {
+.ideditor[dir='ltr'] button.disclosure-header-option-list {
     transform: scaleX(-1);
     filter: FlipH;
     -ms-filter: "FlipH";
 }
 
 
+/* Raw Tag Editor
+------------------------------------------------------- */
 .tag-text {
     width: 100%;
     height: 100%;

@@ -79,8 +79,8 @@ export function uiSectionRawTagEditor(id, context) {
         rowData.push({ index: rowData.length, key: '', value: '' });
 
 
-        // View Options
-        var options = wrap.selectAll('.raw-tag-options')
+        // View Options (disclosure-header-option chrome on the heading line)
+        var options = wrap.selectAll('.disclosure-header-options')
             .data([0]);
 
         options.exit()
@@ -88,17 +88,17 @@ export function uiSectionRawTagEditor(id, context) {
 
         var optionsEnter = options.enter()
             .insert('div', ':first-child')
-            .attr('class', 'raw-tag-options')
+            .attr('class', 'disclosure-header-options')
             .attr('role', 'tablist');
 
-        var optionEnter = optionsEnter.selectAll('.raw-tag-option')
+        var optionEnter = optionsEnter.selectAll('.disclosure-header-option')
             .data(availableViews, function(d) { return d.id; })
             .enter();
 
         optionEnter
             .append('button')
             .attr('class', function(d) {
-                return 'raw-tag-option raw-tag-option-' + d.id + (_tagView === d.id ? ' selected' : '');
+                return 'disclosure-header-option disclosure-header-option-' + d.id + (_tagView === d.id ? ' selected' : '');
             })
             .attr('aria-selected', function(d) { return _tagView === d.id; })
             .attr('role', 'tab')
@@ -107,7 +107,7 @@ export function uiSectionRawTagEditor(id, context) {
                 _tagView = d.id;
                 prefs('raw-tag-editor-view', d.id);
 
-                wrap.selectAll('.raw-tag-option')
+                wrap.selectAll('.disclosure-header-option')
                     .classed('selected', function(datum) { return datum === d; })
                     .attr('aria-selected', function(datum) { return datum === d; });
 
