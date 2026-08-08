@@ -79,7 +79,8 @@ export function uiSectionRawTagEditor(id, context) {
         rowData.push({ index: rowData.length, key: '', value: '' });
 
 
-        // View Options (disclosure-header-option chrome on the heading line)
+        // View Options (shared disclosure-header-option chrome with the
+        // background pane's "add custom" button)
         var options = wrap.selectAll('.disclosure-header-options')
             .data([0]);
 

@@ -4,9 +4,11 @@ import { select as d3_select } from 'd3-selection';
 
 import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
+import { customIdNumber } from '../../renderer/custom_backgrounds';
 import { uiTooltip } from '../tooltip';
 import { svgIcon } from '../../svg/icon';
 import { uiCmd } from '../cmd';
+import { uiConfirm } from '../confirm';
 import { uiSettingsCustomBackground } from '../settings/custom_background';
 import { uiMapInMap } from '../map_in_map';
 import { uiSection } from '../section';
@@ -27,6 +29,25 @@ export function uiSectionBackgroundList(context) {
     }
 
     function renderDisclosureContent(selection) {
+
+        // "Add custom background" button on the disclosure heading line
+        selection.selectAll('.disclosure-header-options')
+            .data([0])
+            .enter()
+            .insert('div', ':first-child')
+            .attr('class', 'disclosure-header-options')
+            .append('button')
+            .attr('class', 'disclosure-header-option add-custom-background')
+            .attr('aria-label', t('background.custom_add'))
+            .call(uiTooltip()
+                .title(() => t.append('background.custom_add'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                addCustom();
+            })
+            .call(svgIcon('#iD-icon-plus'));
 
         // the background list
         var container = selection.selectAll('.layer-background-list')
@@ -135,6 +156,10 @@ export function uiSectionBackgroundList(context) {
     }
 
     function setTooltips(selection) {
+        // Keep tooltips inside the scrollable pane; without this, wide URL
+        // tooltips are centered on the row and clipped by overflow-x: hidden.
+        const paneContent = context.container().select('.background-pane .pane-content');
+
         selection.each(function(d, i, nodes) {
             const item = d3_select(this).select('label');
             const select = d3_select(this).select('select').node();
@@ -145,24 +170,39 @@ export function uiSectionBackgroundList(context) {
             const span = item.select('span');
             const isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
             const placement = (i < nodes.length / 2) ? 'bottom' : 'top';
+            const isPrevious = d.id === previousBackgroundID();
+            const customTemplate = d.isCustom ? (d.template() || '').trim() : '';
 
             item.call(uiTooltip().destroyAny);
 
-            if (d.id === previousBackgroundID()) {
+            // Custom rows always show the full template URL (label may be a
+            // short name or a cleaned host/path). Keep the ⌘B hint when this
+            // row is also the quick-switch target.
+            if (customTemplate) {
                 item.call(uiTooltip()
                     .placement(placement)
+                    .scrollContainer(paneContent)
+                    .title(() => selection => {
+                        selection.append('code').text(customTemplate);
+                    })
+                    .keys(isPrevious ? [uiCmd('⌘' + t('background.key'))] : null)
+                );
+            } else if (isPrevious) {
+                item.call(uiTooltip()
+                    .placement(placement)
+                    .scrollContainer(paneContent)
                     .title(() => t.append('background.switch'))
                     .keys([uiCmd('⌘' + t('background.key'))])
                 );
             } else if (hasDescription || isOverflowing) {
                 item.call(uiTooltip()
                     .placement(placement)
+                    .scrollContainer(paneContent)
                     .title(() => hasDescription ? d.description() : d.label())
                 );
             }
         });
     }
-
 
     function drawListItems(layerList, type, change, filter) {
         const sources = [];
@@ -171,17 +211,28 @@ export function uiSectionBackgroundList(context) {
             .sources(context.map().extent(), context.map().zoom(), true)
             .filter(filter)
             .sort(function(a, b) {
-                return a.best() && !b.best() ? -1
-                    : b.best() && !a.best() ? 1
-                    : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
+                // custom backgrounds always sort to the top, in stable creation
+                // order (by id), so renaming one does not reorder the list
+                if (a.isCustom !== b.isCustom) return a.isCustom ? -1 : 1;
+                if (a.isCustom && b.isCustom) return customIdNumber(a.id) - customIdNumber(b.id);
+                if (a.best() && !b.best()) return -1;
+                if (b.best() && !a.best()) return 1;
+                return d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
             })
             .forEach(source => {
+                if (source.isCustom) {
+                    sources.push({
+                        ...source,
+                        variants: [{ source }]
+                    });
+                    return;
+                }
                 const name = source.name();
                 if (dateLikeRegex.test(name)) {
                     let [ prefix, variant, suffix ] = name.match(dateLikeRegex).slice(1);
                     variant = variant.replace(/^[-\/, ]+/, '').replace(/[-\/, ]+$/, ''); // strip away extra punctuation
                     const main = sources.find((s) =>
-                        s.prefix === prefix && s.suffix === suffix);
+                        !s.isCustom && s.prefix === prefix && s.suffix === suffix);
                     if (main) {
                         main.variants.push({ variant, source });
                     } else {
@@ -200,11 +251,13 @@ export function uiSectionBackgroundList(context) {
                 }
             });
         sources.forEach(source => {
+            if (!source.isCustom && source.variants.length > 1) {
                 source.variants = sortBy(source.variants, [
                     variant => variant.source.best(),
                     variant => variant.variant
                 ]).reverse();
-            });
+            }
+        });
 
         var layerLinks = layerList.selectAll('li')
             // We have to be a bit inefficient about reordering the list since
@@ -217,7 +270,7 @@ export function uiSectionBackgroundList(context) {
 
         var enter = layerLinks.enter()
             .append('li')
-            .classed('layer-custom', function(d) { return d.id === 'custom'; })
+            .classed('layer-custom', function(d) { return d.isCustom; })
             .classed('best', function(d) { return d.best(); });
 
         var label = enter
@@ -235,7 +288,7 @@ export function uiSectionBackgroundList(context) {
                     const selectedVariantIndex = d3_select(this.parentElement).select('select').node().selectedIndex;
                     change(d3_event, d.variants[selectedVariantIndex].source);
                 } else {
-                    change(d3_event, d);
+                    change(d3_event, d.variants[0].source);
                 }
             });
 
@@ -261,18 +314,35 @@ export function uiSectionBackgroundList(context) {
                 }
             });
 
-        enter.filter(function(d) { return d.id === 'custom'; })
+        const customControls = enter.filter(function(d) { return d.isCustom; });
+
+        customControls
             .append('button')
-            .attr('class', 'layer-browse')
+            .attr('class', 'layer-edit-custom')
             .call(uiTooltip()
                 .title(() => t.append('settings.custom_background.tooltip'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
-            .on('click', function(d3_event) {
+            .on('click', function(d3_event, d) {
                 d3_event.preventDefault();
-                editCustom();
+                d3_event.stopPropagation();
+                editCustom(d);
             })
-            .call(svgIcon('#iD-icon-more'));
+            .call(svgIcon('#iD-icon-edit'));
+
+        customControls
+            .append('button')
+            .attr('class', 'layer-delete-custom')
+            .call(uiTooltip()
+                .title(() => t.append('background.custom_delete.tooltip'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function(d3_event, d) {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                deleteCustom(d);
+            })
+            .call(svgIcon('#iD-operation-delete'));
 
         enter.filter(function(d) { return d.best(); })
             .append('div')
@@ -283,6 +353,14 @@ export function uiSectionBackgroundList(context) {
             )
             .append('span')
             .text('★');
+
+        // render the label text on enter; on update re-render only custom rows,
+        // whose labels can change after an edit (regular imagery labels are
+        // static, and this runs on every map-move driven reRender)
+        enter.merge(layerLinks.filter(function(d) { return d.isCustom; }))
+            .select('label > span')
+            .text(null)
+            .each(function(d) { d.label()(d3_select(this)); });
 
         layerList
             .call(updateLayerSelections);
@@ -310,38 +388,88 @@ export function uiSectionBackgroundList(context) {
 
 
     function chooseBackground(d) {
-        if (d.id === 'custom' && !d.template()) {
-            return editCustom();
+        if (d.isCustom && !d.template()) {
+            return editCustom(d);
         }
 
+        // only record a quick-switch target when the background actually changes,
+        // so e.g. renaming the selected custom does not clobber the ⌘B toggle
         var previousBackground = context.background().baseLayerSource();
-        prefs('background-last-used-toggle', previousBackground.id);
+        if (previousBackground && previousBackground.id !== d.id) {
+            prefs('background-last-used-toggle', previousBackground.id);
+        }
         prefs('background-last-used', d.id);
         context.background().baseLayerSource(d);
     }
 
 
+    /**
+     * Called when a custom background is added or edited via the settings modal:
+     * select the affected source and refresh the list rows.
+     * @param {{source: object}} d - the change payload dispatched by the modal
+     */
     function customChanged(d) {
-        var background = context.background();
-        var customSource = background.findSource('custom');
-        if (!customSource) return;
-
-        if (d && d.template) {
-            customSource.template(d.template);
-            chooseBackground(customSource);
-        } else {
-            customSource.template('');
-            var noneSource = background.findSource('none');
-            if (noneSource) {
-                chooseBackground(noneSource);
-            }
+        if (d && d.source) {
+            chooseBackground(d.source);
         }
+        section.reRender();
     }
 
 
-    function editCustom() {
+    /** Open the settings modal to add a new custom background. */
+    function addCustom() {
         context.container()
-            .call(_settingsCustomBackground);
+            .call(_settingsCustomBackground.forEntry(null));
+    }
+
+
+    /**
+     * Open the settings modal to edit an existing custom background.
+     * @param {object} d - the custom background source to edit
+     */
+    function editCustom(d) {
+        const entry = { id: d.id, name: d.customName(), template: d.template() };
+        context.container()
+            .call(_settingsCustomBackground.forEntry(entry));
+    }
+
+
+    /**
+     * Confirm, then delete a custom background. removeCustomSource falls back to
+     * 'None' if the deleted layer was the selected one.
+     * @param {object} d - the custom background source to delete
+     */
+    function deleteCustom(d) {
+        const modal = uiConfirm(context.container());
+
+        modal.select('.modal-section.header')
+            .append('h3')
+            .call(t.append('background.custom_delete.header'));
+
+        modal.select('.modal-section.message-text')
+            .append('p')
+            .call(t.append('background.custom_delete.message', { name: d.name() }));
+
+        const buttons = modal.select('.modal-section.buttons');
+
+        // close() (not remove()) so the modal's document keybinding is unbound
+        buttons
+            .append('button')
+            .attr('class', 'button cancel-button secondary-action')
+            .call(t.append('confirm.cancel'))
+            .on('click.cancel', function() {
+                modal.close();
+            });
+
+        buttons
+            .append('button')
+            .attr('class', 'button action')
+            .call(t.append('background.custom_delete.confirm'))
+            .on('click.delete', function() {
+                modal.close();
+                context.background().removeCustomSource(d.id);
+                section.reRender();
+            });
     }
 
 

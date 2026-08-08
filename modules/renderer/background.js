@@ -11,6 +11,14 @@ import { fileFetcher } from '../core/file_fetcher';
 import { geoMetersToOffset, geoOffsetToMeters, geoExtent } from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
+import {
+  cleanCustomTemplate,
+  LEGACY_CUSTOM_SOURCE_ID,
+  MIGRATED_LEGACY_CUSTOM_ID,
+  nextCustomId,
+  readCustomTemplates,
+  writeCustomTemplates
+} from './custom_backgrounds';
 import { utilAesDecrypt, utilStringQs } from '../util';
 import { utilRebind } from '../util/rebind';
 import { patchHash } from '../behavior';
@@ -82,10 +90,11 @@ export function rendererBackground(context) {
         // Add 'None'
         _imageryIndex.backgrounds.unshift(rendererBackgroundSource.None());
 
-        // Add 'Custom'
-        let template = prefs('background-custom-template') || '';
-        const custom = rendererBackgroundSource.Custom(template);
-        _imageryIndex.backgrounds.unshift(custom);
+        // Add saved custom backgrounds (migrating the legacy single template)
+        readCustomTemplates().forEach(entry => {
+          const custom = rendererBackgroundSource.Custom(entry.template, entry.id, entry.name);
+          _imageryIndex.backgrounds.unshift(custom);
+        });
 
         return _imageryIndex;
       });
@@ -208,7 +217,7 @@ export function rendererBackground(context) {
     const notableOffset = Math.abs(x) > EPSILON || Math.abs(y) > EPSILON;
 
     let id = currSource.id;
-    if (id === 'custom') {
+    if (currSource.isCustom) {
       id = `custom:${currSource.template()}`;
     }
 
@@ -337,6 +346,127 @@ export function rendererBackground(context) {
   };
 
 
+  // The saved custom backgrounds, as persisted in preferences.
+  background.customTemplates = function() {
+    return readCustomTemplates();
+  };
+
+
+  /**
+   * Find an existing custom source by exact template, or create, persist and
+   * register a new one. This is the single mutation path shared by the URL
+   * restore, the add/edit modal and tests, so the saved list and the in-memory
+   * sources never drift apart.
+   * @param {string} template - the tile URL template
+   * @param {string} [name] - optional display name (used only when creating)
+   * @returns {object|null} the custom source, or null if called before init()
+   */
+  background.addOrGetCustomSource = function(template, name) {
+    if (!_imageryIndex) return null;
+    template = cleanCustomTemplate(template);
+    name = (name || '').trim();
+    if (!template) return null;   // never persist an empty/whitespace URL
+
+    const existing = _imageryIndex.backgrounds.find(d => d.isCustom && d.template() === template);
+    if (existing) return existing;
+
+    const list = readCustomTemplates();
+    const entry = { id: nextCustomId(), name: name, template: template };
+    list.push(entry);
+    writeCustomTemplates(list);
+
+    const source = rendererBackgroundSource.Custom(entry.template, entry.id, entry.name);
+    _imageryIndex.backgrounds.unshift(source);
+    return source;
+  };
+
+
+  /**
+   * Update a saved custom background's template and/or name in place, keeping
+   * its id (and therefore its selection) stable. If the new template already
+   * exists in another entry, the two are merged: this entry is removed and the
+   * existing duplicate is returned instead.
+   * @param {string} id - the id of the entry to update
+   * @param {{template?: string, name?: string}} opts - fields to change
+   * @returns {object|null} the resulting source, or null if not found
+   */
+  background.updateCustomSource = function(id, opts) {
+    if (!_imageryIndex) return null;
+
+    const source = _imageryIndex.backgrounds.find(d => d.isCustom && d.id === id);
+    if (!source) return null;
+
+    const newTemplate = (opts && 'template' in opts)
+      ? cleanCustomTemplate(opts.template)
+      : source.template();
+    const newName = (opts && 'name' in opts)
+      ? (opts.name || '').trim()
+      : source.customName();
+
+    if (!newTemplate) return source;   // ignore blanking the URL
+
+    const duplicate = _imageryIndex.backgrounds.find(d =>
+      d.isCustom && d.id !== id && d.template() === newTemplate);
+    if (duplicate) {
+      // collapse onto the existing entry, carrying over a newly-typed name
+      if (newName) {
+        duplicate.customName(newName);
+        const dupList = readCustomTemplates();
+        const dupEntry = dupList.find(e => e.id === duplicate.id);
+        if (dupEntry) {
+          dupEntry.name = newName;
+          writeCustomTemplates(dupList);
+        }
+      }
+      // move the selection onto the duplicate before removing the edited entry,
+      // so removeCustomSource does not fall back to 'none' mid-edit (which would
+      // also record 'none' as the quick-switch target)
+      if (baseLayer.source() === source) {
+        background.baseLayerSource(duplicate);
+      }
+      background.removeCustomSource(id);
+      return duplicate;
+    }
+
+    source.template(newTemplate);
+    source.customName(newName);
+
+    const list = readCustomTemplates();
+    const entry = list.find(e => e.id === id);
+    if (entry) {
+      entry.template = newTemplate;
+      entry.name = newName || '';
+      writeCustomTemplates(list);
+    }
+    return source;
+  };
+
+
+  /**
+   * Remove a saved custom background. Also clears any `background-last-used` /
+   * quick-switch reference to it (those persist the id, and the monotonic counter
+   * means the id is never reissued, so a stale reference would otherwise dangle).
+   * If it is the current base layer, fall back to the 'none' source.
+   * @param {string} id - the id of the entry to remove
+   */
+  background.removeCustomSource = function(id) {
+    if (!_imageryIndex) return;
+
+    const source = _imageryIndex.backgrounds.find(d => d.isCustom && d.id === id);
+    const wasSelected = source && baseLayer.source() === source;
+
+    _imageryIndex.backgrounds = _imageryIndex.backgrounds.filter(d => !(d.isCustom && d.id === id));
+    writeCustomTemplates(readCustomTemplates().filter(e => e.id !== id));
+
+    if (prefs('background-last-used') === id) prefs('background-last-used', null);
+    if (prefs('background-last-used-toggle') === id) prefs('background-last-used-toggle', null);
+
+    if (wasSelected) {
+      background.baseLayerSource(background.findSource('none'));
+    }
+  };
+
+
   background.bing = () => {
     background.baseLayerSource(background.findSource('Bing'));
   };
@@ -451,7 +581,7 @@ export function rendererBackground(context) {
 
     return loadPromise.then(imageryIndex => {
       const extent = context.map().extent();
-      const validBackgrounds = background.sources(extent).filter(d => d.id !== 'none' && d.id !== 'custom');
+      const validBackgrounds = background.sources(extent).filter(d => d.id !== 'none' && !d.isCustom);
       const first = validBackgrounds.length && validBackgrounds[0];
       const isLastUsedValid = !!validBackgrounds.find(d => d.id && d.id === lastUsedBackground);
 
@@ -468,22 +598,29 @@ export function rendererBackground(context) {
         });
       }
 
-      // Decide which background layer to display
-      if (requestedBackground && requestedBackground.indexOf('custom:') === 0) {
-        const template = requestedBackground.replace(/^custom:/, '');
-        const custom = background.findSource('custom');
-        background.baseLayerSource(custom.template(template));
-        prefs('background-custom-template', template);
-      } else {
-        background.baseLayerSource(
-          background.findSource(requestedBackground) ||
-          best ||
-          isLastUsedValid && background.findSource(lastUsedBackground) ||
-          background.findSource('Bing') ||
-          first ||
-          background.findSource('none')
-        );
-      }
+      // Decide which background layer to display.
+      // - `custom:<url>` adds/selects that URL (deduped); empty URL falls through
+      // - bare `custom` is the pre-multi-custom hash id → migrated `custom-1`
+      const customTemplate = (requestedBackground && requestedBackground.indexOf('custom:') === 0)
+        ? requestedBackground.replace(/^custom:/, '')
+        : null;
+      const customSource = customTemplate ? background.addOrGetCustomSource(customTemplate) : null;
+      const legacyCustomSource = (requestedBackground === LEGACY_CUSTOM_SOURCE_ID)
+        ? (background.findSource(MIGRATED_LEGACY_CUSTOM_ID)
+          || imageryIndex.backgrounds.find(d => d.isCustom)
+          || null)
+        : null;
+
+      background.baseLayerSource(
+        customSource ||
+        legacyCustomSource ||
+        background.findSource(requestedBackground) ||
+        best ||
+        isLastUsedValid && background.findSource(lastUsedBackground) ||
+        background.findSource('Bing') ||
+        first ||
+        background.findSource('none')
+      );
 
       const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
       if (locator) {

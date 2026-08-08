@@ -2729,13 +2729,22 @@ div.combobox:has(.has-description) {
 }
 
 
-/* Disclosure header options (icon buttons on the disclosure heading line)
+/* Disclosure header options (icon buttons on the disclosure heading line;
+   used by the raw tag editor view switcher and the background pane add button)
 ------------------------------------------------------- */
 .disclosure-header-options {
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-end;
     margin-top: -28px;
+}
+/* map-pane disclosure headings are slightly taller than the inspector's.
+   Negative margin pulls the options onto the heading line; margin-bottom
+   restores the usual 10px gap before the section content (see
+   details.disclosure-wrap[open] summary.hide-toggle { margin-bottom: 10px }). */
+.map-pane .disclosure-header-options {
+    margin-top: -32px;
+    margin-bottom: 12px;
 }
 button.disclosure-header-option {
     flex: 0 0 auto;
@@ -3590,6 +3599,19 @@ div.full-screen > button:focus {
     background: var(--selected-bg-color);
 }
 
+/* Background list: highlight only the hovered cell (the label or a single
+   edit/delete button), not the whole row — so hovering a button doesn't also
+   tint the label, and the label keeps its selected tint while a button is hovered. */
+@media (hover: hover) {
+    .background-pane .layer-list li:not(.active):not(.switch):hover {
+        background-color: transparent;
+    }
+    .background-pane .layer-list li label:hover,
+    .background-pane .layer-list li button:hover {
+        background-color: var(--bg-color-3);
+    }
+}
+
 .layer-list li.best > div.best {
     padding: 5px;
     flex: 0 0 auto;
@@ -3627,10 +3649,18 @@ div.full-screen > button:focus {
     display: block;
     overflow: hidden;
     width: calc(100% - 20px); /* Ensures radio input width within flexbox */
+    line-height: 1rem; /* tighten labels, esp. ones that wrap to two lines */
 }
 
 .layer-list label span.localized-text {
     line-height: 0.95rem;
+}
+
+/* clamp background layer labels to a single line; the row tooltip reveals the
+   full text when it overflows */
+.background-pane .layer-list label > span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .layer-list input.list-item-input {
@@ -3655,6 +3685,7 @@ div.full-screen > button:focus {
 
 .map-data-pane .layer-list button .icon,
 .background-pane .layer-list button .icon {
+    fill: var(--text-color);
     opacity: 0.5;
 }
 
@@ -5528,18 +5559,75 @@ img.tile-debug {
     width: 100%;
 }
 
-.settings-custom-background .instructions-template {
-    margin-bottom: 20px;
+/* license disclaimer, shown as an info callout */
+.settings-custom-background .settings-custom-background-callout {
+    border: 1px solid var(--link-color);
+    border-radius: 4px;
+    background: var(--selected-bg-color);
+    padding: 8px 10px;
+    margin-bottom: 15px;
+}
+.settings-custom-background .settings-custom-background-callout p {
+    margin: 0;
+}
+.settings-custom-background .settings-custom-background-callout a {
+    text-decoration: underline;
+}
+
+/* form field labels and inputs */
+.settings-custom-background .field-name-label,
+.settings-custom-background .field-template-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.settings-custom-background input.field-name,
+.settings-custom-background textarea.field-template {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* help block: a help icon followed by the indented token reference */
+.settings-custom-background .settings-custom-background-help {
+    display: flex;
+    gap: 8px;
+}
+.settings-custom-background .settings-custom-background-help > .icon {
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    opacity: 0.6;
+}
+.settings-custom-background .settings-custom-background-help .instructions-template {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.settings-custom-background .instructions-template .disclosure-wrap {
+    margin-bottom: 5px;
+}
+.settings-custom-background .instructions-template summary.hide-toggle {
+    font-size: 13px;
 }
 .settings-custom-background .instructions-template p {
     margin-bottom: 0;
 }
 .settings-custom-background .instructions-template ul {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 .settings-custom-background .instructions-template ul li {
     list-style-type: disc;
     list-style-position: inside;
+}
+.settings-custom-background .instructions-example {
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35em;
+}
+.settings-custom-background .instructions-example code {
+    word-break: break-all;
 }
 
 .settings-custom-data .instructions-url {
@@ -5786,6 +5874,16 @@ button.conflicts-button {
        hyphenation can't fit it. */
     hyphens: auto;
     overflow-wrap: break-word;
+}
+/* full tile URL templates in custom-background row tooltips — keep narrower
+   than the map pane content so scrollContainer can park them without clipping */
+.map-pane .tooltip .popover-inner:has(code) {
+    max-width: 260px;
+}
+.tooltip-text code {
+    display: inline-block;
+    max-width: 100%;
+    word-break: break-all;
 }
 
 .popover-arrow {

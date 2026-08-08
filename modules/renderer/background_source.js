@@ -7,6 +7,7 @@ import { utilQsString, utilStringQs } from '../util';
 import { utilAesDecrypt } from '../util/aes';
 import { IntervalTasksQueue } from '../util/IntervalTasksQueue';
 import { localeDateString } from '../util/date';
+import { customTemplateLabel } from './custom_backgrounds';
 
 var isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 
@@ -73,7 +74,10 @@ export function rendererBackgroundSource(data) {
 
     source.hasDescription = function() {
         const id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        const descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: _description }).texts.join('');
+        // `_description || ''` avoids escape(undefined) === 'undefined' (truthy),
+        // which made description-less sources (None, custom) report a description
+        // and show an empty tooltip.
+        const descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description || '') }).texts.join('');
         return !!descriptionText;
     };
 
@@ -103,7 +107,7 @@ export function rendererBackgroundSource(data) {
 
     source.template = function(val) {
         if (!arguments.length) return _template;
-        if (source.id === 'custom' || source.id === 'Bing') {
+        if (source.isCustom || source.id === 'Bing') {
             _template = val;
         }
         return source;
@@ -116,8 +120,8 @@ export function rendererBackgroundSource(data) {
 
 
         // Guess a type based on the tokens present in the template
-        // (This is for 'custom' source, where we don't know)
-        if (!source.type || source.id === 'custom') {
+        // (This is for custom sources, where we don't know)
+        if (!source.type || source.isCustom) {
             if (/SERVICE=WMS|\{(proj|wkid|bbox)\}/.test(result)) {
                 source.type = 'wms';
                 source.projection = 'EPSG:3857';  // guess
@@ -559,27 +563,60 @@ rendererBackgroundSource.None = function() {
 };
 
 
-rendererBackgroundSource.Custom = function(template) {
-    var source = rendererBackgroundSource({ id: 'custom', template: template });
+/**
+ * A user-defined custom background source. Several may exist at once, each with
+ * its own stable `id` and an optional display `name`. Identified by `isCustom`.
+ * @param {string} template - the tile URL template
+ * @param {string} [id] - stable, unique source id (defaults to 'custom')
+ * @param {string} [name] - optional user-provided display name
+ * @returns {object} the custom background source
+ */
+rendererBackgroundSource.Custom = function(template, id, name) {
+    const source = rendererBackgroundSource({ id: id || 'custom', template: template });
+    let _customName = name;
+
+    source.isCustom = true;
+
+
+    source.customName = function(val) {
+        if (!arguments.length) return _customName;
+        _customName = val;
+        return source;
+    };
+
+
+    // The display text is the user-provided name, or a shortened URL, or just
+    // "Custom" while the source is still empty.
+    function displayVal() {
+        return _customName || customTemplateLabel(source.template());
+    }
 
 
     source.name = function() {
-        return t('background.custom');
+        const val = displayVal();
+        if (!val) {
+            return t('background.custom');
+        }
+        return t('background.custom_label', { val: val });
     };
 
     source.label = function() {
-        return t.append('background.custom');
+        const val = displayVal();
+        if (!val) {
+            return t.append('background.custom');
+        }
+        return t.append('background.custom_label', { val: val });
     };
 
 
     source.imageryUsed = function() {
         // sanitize personal connection tokens - #6801
-        var cleaned = source.template();
+        let cleaned = source.template();
 
         // from query string parameters
         if (cleaned.indexOf('?') !== -1) {
-            var parts = cleaned.split('?', 2);
-            var qs = utilStringQs(parts[1]);
+            const parts = cleaned.split('?', 2);
+            const qs = utilStringQs(parts[1]);
 
             ['access_token', 'connectId', 'token', 'Signature'].forEach(function(param) {
                 if (qs[param]) {

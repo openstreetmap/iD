@@ -106,4 +106,59 @@ describe('iD.rendererBackgroundSource.Custom', function() {
         });
     });
 
+    describe('.Custom', function() {
+        it('is flagged isCustom and uses the supplied id and name', function() {
+            const source = iD.rendererBackgroundSource.Custom('https://ex.com/{z}/{x}/{y}.png', 'custom-7', 'My Tiles');
+            expect(source.isCustom).toBe(true);
+            expect(source.id).to.equal('custom-7');
+            expect(source.customName()).to.equal('My Tiles');
+            expect(source.template()).to.equal('https://ex.com/{z}/{x}/{y}.png');
+        });
+
+        it('defaults the id to "custom" when none is supplied', function() {
+            const source = iD.rendererBackgroundSource.Custom('x');
+            expect(source.id).to.equal('custom');
+            expect(source.isCustom).toBe(true);
+        });
+
+        it('allows updating the template (custom sources are editable)', function() {
+            const source = iD.rendererBackgroundSource.Custom('a', 'custom-1');
+            source.template('b');
+            expect(source.template()).to.equal('b');
+        });
+
+        it('keeps the template as supplied (cleanup happens at the persistence layer)', function() {
+            const tmpl = 'https://ex.com/{z}/{x}/{y}.png\n\n';
+            const source = iD.rendererBackgroundSource.Custom(tmpl, 'custom-1');
+            expect(source.template()).to.equal(tmpl);
+        });
+
+        it('guesses the tms type for a custom source with a generated id', function() {
+            const source = iD.rendererBackgroundSource.Custom('{z}/{x}/{y}', 'custom-3');
+            expect(source.url([0,1,2])).to.equal('2/0/1');
+        });
+
+        it('reports no description (row tooltip shows the full template URL instead)', function() {
+            const source = iD.rendererBackgroundSource.Custom('https://ex.com/{z}/{x}/{y}.png', 'custom-1');
+            expect(source.hasDescription()).toBe(false);
+        });
+
+        it('uses a cleaned host/folders label when no name is given', function() {
+            const source = iD.rendererBackgroundSource.Custom(
+                'https://www.mapproxy.codefor.de/tiles/1.0.0/alkis_sw/mercator/{z}/{x}/{y}.png?token=secret',
+                'custom-1'
+            );
+            expect(source.name()).to.equal('Custom: mapproxy.codefor.de/tiles/1.0.0/alkis_sw/mercator');
+        });
+
+        it('uses the user-provided name when set', function() {
+            const source = iD.rendererBackgroundSource.Custom(
+                'https://ex.com/{z}/{x}/{y}.png',
+                'custom-1',
+                'My Tiles'
+            );
+            expect(source.name()).to.equal('Custom: My Tiles');
+        });
+    });
+
 });
