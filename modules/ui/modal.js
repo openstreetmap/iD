@@ -48,7 +48,8 @@ export function uiModal(selection, blocking) {
     .on('focus.keytrap', moveFocusToLast);
 
   if (!blocking) {
-    shaded.on('click.remove-modal', (d3_event) => {
+    // non-arrow: `this` must be the shaded element (target === shade, not modal)
+    shaded.on('click.remove-modal', function(d3_event) {
       if (d3_event.target === this) {
         shaded.close();
       }
