@@ -801,7 +801,17 @@ summary.hide-toggle {
     line-height: 25px;
     width: fit-content;
 }
-details.disclosure-wrap[open] summary.hide-toggle {
+/* heading + trailing controls (add button, view switcher) on one row */
+summary.hide-toggle:has(.disclosure-header-options) {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+summary.hide-toggle .hide-toggle-label {
+    flex: 0 1 auto;
+    min-width: 0;
+}
+details.disclosure-wrap:open > summary.hide-toggle {
     margin-bottom: 10px;
 }
 summary.hide-toggle::-webkit-details-marker {
@@ -2729,22 +2739,18 @@ div.combobox:has(.has-description) {
 }
 
 
-/* Disclosure header options (icon buttons on the disclosure heading line;
+/* Disclosure header options (icon buttons in the summary row;
    used by the raw tag editor view switcher and the background pane add button)
 ------------------------------------------------------- */
 .disclosure-header-options {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-end;
-    margin-top: -28px;
+    align-items: center;
+    margin-inline-start: auto;
 }
-/* map-pane disclosure headings are slightly taller than the inspector's.
-   Negative margin pulls the options onto the heading line; margin-bottom
-   restores the usual 10px gap before the section content (see
-   details.disclosure-wrap[open] summary.hide-toggle { margin-bottom: 10px }). */
-.map-pane .disclosure-header-options {
-    margin-top: -32px;
-    margin-bottom: 12px;
+/* hide heading controls while the section is collapsed */
+details.disclosure-wrap:not(:open) > summary .disclosure-header-options {
+    display: none;
 }
 button.disclosure-header-option {
     flex: 0 0 auto;

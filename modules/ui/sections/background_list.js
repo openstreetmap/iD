@@ -22,20 +22,17 @@ export function uiSectionBackgroundList(context) {
 
     var section = uiSection('background-list', context)
         .label(() => t.append('background.backgrounds'))
+        .disclosureHeaderOptions(renderHeaderOptions)
         .disclosureContent(renderDisclosureContent);
 
     function previousBackgroundID() {
         return prefs('background-last-used-toggle');
     }
 
-    function renderDisclosureContent(selection) {
-
-        // "Add custom background" button on the disclosure heading line
-        selection.selectAll('.disclosure-header-options')
+    function renderHeaderOptions(selection) {
+        selection.selectAll('button.add-custom-background')
             .data([0])
             .enter()
-            .insert('div', ':first-child')
-            .attr('class', 'disclosure-header-options')
             .append('button')
             .attr('class', 'disclosure-header-option add-custom-background')
             .attr('aria-label', t('background.custom_add'))
@@ -45,9 +42,13 @@ export function uiSectionBackgroundList(context) {
             )
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
+                d3_event.stopPropagation();
                 addCustom();
             })
             .call(svgIcon('#iD-icon-plus'));
+    }
+
+    function renderDisclosureContent(selection) {
 
         // the background list
         var container = selection.selectAll('.layer-background-list')

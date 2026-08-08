@@ -24,6 +24,7 @@ export function uiSectionRawTagEditor(id, context) {
             return t.append('inspector.title_count', { title: t.append('inspector.tags'), count: count });
         })
         .expandedByDefault(false)
+        .disclosureHeaderOptions(renderHeaderOptions)
         .disclosureContent(renderDisclosureContent);
 
     var taginfo = services.taginfo;
@@ -53,6 +54,53 @@ export function uiSectionRawTagEditor(id, context) {
         _didInteract = true;
     }
 
+    function renderHeaderOptions(selection) {
+        selection.attr('role', 'tablist');
+
+        var option = selection.selectAll('.disclosure-header-option')
+            .data(availableViews, function(d) { return d.id; });
+
+        option.exit()
+            .remove();
+
+        option.enter()
+            .append('button')
+            .attr('class', function(d) {
+                return 'disclosure-header-option disclosure-header-option-' + d.id;
+            })
+            .attr('role', 'tab')
+            .attr('title', function(d) { return t('icons.' + d.id); })
+            .on('click', function(d3_event, d) {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+
+                _tagView = d.id;
+                prefs('raw-tag-editor-view', d.id);
+
+                selection.selectAll('.disclosure-header-option')
+                    .classed('selected', function(datum) { return datum === d; })
+                    .attr('aria-selected', function(datum) { return datum === d; });
+
+                // content lives in the sibling .disclosure-content, not in this summary
+                var wrap = d3_select(this.closest('details')).selectAll('.disclosure-content');
+
+                wrap.selectAll('.tag-text')
+                    .classed('hide', (d.id !== 'text'))
+                    .each(setTextareaHeight);
+
+                wrap.selectAll('.tag-list')
+                    .classed('hide', (d.id !== 'list'));
+            })
+            .each(function(d) {
+                d3_select(this)
+                    .call(svgIcon(d.icon));
+            });
+
+        selection.selectAll('.disclosure-header-option')
+            .classed('selected', function(d) { return _tagView === d.id; })
+            .attr('aria-selected', function(d) { return _tagView === d.id; });
+    }
+
     function renderDisclosureContent(wrap) {
 
         // remove deleted keys
@@ -77,52 +125,6 @@ export function uiSectionRawTagEditor(id, context) {
 
         // append blank row last
         rowData.push({ index: rowData.length, key: '', value: '' });
-
-
-        // View Options (shared disclosure-header-option chrome with the
-        // background pane's "add custom" button)
-        var options = wrap.selectAll('.disclosure-header-options')
-            .data([0]);
-
-        options.exit()
-            .remove();
-
-        var optionsEnter = options.enter()
-            .insert('div', ':first-child')
-            .attr('class', 'disclosure-header-options')
-            .attr('role', 'tablist');
-
-        var optionEnter = optionsEnter.selectAll('.disclosure-header-option')
-            .data(availableViews, function(d) { return d.id; })
-            .enter();
-
-        optionEnter
-            .append('button')
-            .attr('class', function(d) {
-                return 'disclosure-header-option disclosure-header-option-' + d.id + (_tagView === d.id ? ' selected' : '');
-            })
-            .attr('aria-selected', function(d) { return _tagView === d.id; })
-            .attr('role', 'tab')
-            .attr('title', function(d) { return t('icons.' + d.id); })
-            .on('click', function(d3_event, d) {
-                _tagView = d.id;
-                prefs('raw-tag-editor-view', d.id);
-
-                wrap.selectAll('.disclosure-header-option')
-                    .classed('selected', function(datum) { return datum === d; })
-                    .attr('aria-selected', function(datum) { return datum === d; });
-
-                wrap.selectAll('.tag-text')
-                    .classed('hide', (d.id !== 'text'))
-                    .each(setTextareaHeight);
-
-                wrap.selectAll('.tag-list')
-                    .classed('hide', (d.id !== 'list'));
-            })
-            .each(function(d) {
-                d3_select(this)
-                    .call(svgIcon(d.icon));
-            });
 
 
         // View as Text

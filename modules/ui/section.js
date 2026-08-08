@@ -17,6 +17,7 @@ export function uiSection(id, context) {
     var _label;
     var _expandedByDefault = utilFunctor(true);
     var _disclosureContent;
+    var _disclosureHeaderOptions;
     var _disclosureExpanded;
 
     var _containerSelection = d3_select(null);
@@ -58,6 +59,12 @@ export function uiSection(id, context) {
     section.disclosureContent = function(val) {
         if (!arguments.length) return _disclosureContent;
         _disclosureContent = val;
+        return section;
+    };
+
+    section.disclosureHeaderOptions = function(val) {
+        if (!arguments.length) return _disclosureHeaderOptions;
+        _disclosureHeaderOptions = val;
         return section;
     };
 
@@ -118,6 +125,9 @@ export function uiSection(id, context) {
                         if (expanded) { selection.node().parentNode.scrollTop += 200; }
                     })*/
                     .content(_disclosureContent);
+                if (_disclosureHeaderOptions) {
+                    _disclosure.headerOptions(_disclosureHeaderOptions);
+                }
             }
             if (_disclosureExpanded !== undefined) {
                 _disclosure.expanded(_disclosureExpanded);
