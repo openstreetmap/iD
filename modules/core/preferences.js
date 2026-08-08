@@ -20,9 +20,22 @@ const _listeners = {};
 // within and between iD sessions on the same site.
 //
 /**
+ * Read a preference.
+ * @overload
  * @param {string} k
- * @param {string?} [v]
+ * @returns {string | null}
+ */
+/**
+ * Write or delete a preference (`null` deletes).
+ * @overload
+ * @param {string} k
+ * @param {string | null} v
  * @returns {boolean} true if the action succeeded
+ */
+/**
+ * @param {string} k
+ * @param {string | null} [v]
+ * @returns {string | null | boolean}
  */
 function corePreferences(k, v) {
   try {

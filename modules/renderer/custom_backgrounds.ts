@@ -1,9 +1,5 @@
 import { prefs } from '../core/preferences';
 
-// The stored JSDoc type of `prefs` is inaccurate (it reports the setter's
-// boolean result); on a get it returns the stored string or null.
-const getPref = prefs as unknown as (k: string, v?: string | null) => string | null;
-
 /** A saved custom background entry, as persisted in preferences. */
 export interface CustomTemplate {
     id: string;
@@ -28,11 +24,11 @@ const MIGRATED_LEGACY_CUSTOM_ID = 'custom-1';
  * after migration to `custom-1`, so quick-toggle (⌘B) keeps working.
  */
 function migrateLegacyBackgroundPrefs(): void {
-    if (getPref('background-last-used') === LEGACY_CUSTOM_SOURCE_ID) {
-        getPref('background-last-used', MIGRATED_LEGACY_CUSTOM_ID);
+    if (prefs('background-last-used') === LEGACY_CUSTOM_SOURCE_ID) {
+        prefs('background-last-used', MIGRATED_LEGACY_CUSTOM_ID);
     }
-    if (getPref('background-last-used-toggle') === LEGACY_CUSTOM_SOURCE_ID) {
-        getPref('background-last-used-toggle', MIGRATED_LEGACY_CUSTOM_ID);
+    if (prefs('background-last-used-toggle') === LEGACY_CUSTOM_SOURCE_ID) {
+        prefs('background-last-used-toggle', MIGRATED_LEGACY_CUSTOM_ID);
     }
 }
 
@@ -102,10 +98,10 @@ function maxCustomIdNumber(list: CustomTemplate[]): number {
  * @returns the saved entries
  */
 export function readCustomTemplates(): CustomTemplate[] {
-    const raw = getPref(CUSTOM_TEMPLATES_KEY);
+    const raw = prefs(CUSTOM_TEMPLATES_KEY);
     let list: CustomTemplate[];
     if (raw === null || raw === undefined) {
-        const legacy = getPref(CUSTOM_TEMPLATE_LEGACY_KEY);
+        const legacy = prefs(CUSTOM_TEMPLATE_LEGACY_KEY);
         list = legacy ? [{ id: MIGRATED_LEGACY_CUSTOM_ID, name: '', template: legacy }] : [];
         writeCustomTemplates(list);
         if (legacy) migrateLegacyBackgroundPrefs();
@@ -118,8 +114,8 @@ export function readCustomTemplates(): CustomTemplate[] {
         }
     }
 
-    if (getPref(CUSTOM_NEXT_ID_KEY) === null || getPref(CUSTOM_NEXT_ID_KEY) === undefined) {
-        getPref(CUSTOM_NEXT_ID_KEY, String(maxCustomIdNumber(list)));
+    if (prefs(CUSTOM_NEXT_ID_KEY) === null || prefs(CUSTOM_NEXT_ID_KEY) === undefined) {
+        prefs(CUSTOM_NEXT_ID_KEY, String(maxCustomIdNumber(list)));
     }
     return list;
 }
@@ -130,7 +126,7 @@ export function readCustomTemplates(): CustomTemplate[] {
  * @param list - the entries to store
  */
 export function writeCustomTemplates(list: CustomTemplate[]): void {
-    getPref(CUSTOM_TEMPLATES_KEY, JSON.stringify(list));
+    prefs(CUSTOM_TEMPLATES_KEY, JSON.stringify(list));
 }
 
 
@@ -142,9 +138,9 @@ export function writeCustomTemplates(list: CustomTemplate[]): void {
  * @returns a fresh, unique id
  */
 export function nextCustomId(): string {
-    let seq = parseInt(getPref(CUSTOM_NEXT_ID_KEY) ?? '', 10);
+    let seq = parseInt(prefs(CUSTOM_NEXT_ID_KEY) ?? '', 10);
     if (isNaN(seq)) seq = 0;
     seq += 1;
-    getPref(CUSTOM_NEXT_ID_KEY, String(seq));
+    prefs(CUSTOM_NEXT_ID_KEY, String(seq));
     return 'custom-' + seq;
 }
