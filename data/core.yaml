@@ -1011,7 +1011,6 @@ en:
         example: "Example:"
       name:
         label: "Name (optional)"
-        placeholder: e.g. Berlin aerial 2025
       template:
         label: Tile URL template
         placeholder: Enter a url template

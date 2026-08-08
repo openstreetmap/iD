@@ -73,7 +73,6 @@ export function uiSettingsCustomBackground(context: iD.Context): RenderFn {
             .append('input')
             .attr('class', 'field-name')
             .attr('type', 'text')
-            .attr('placeholder', t('settings.custom_background.name.placeholder'))
             // utilNoAuto is typed against a loose d3.Selection
             .call(utilNoAuto as any)
             .property('value', origName);
