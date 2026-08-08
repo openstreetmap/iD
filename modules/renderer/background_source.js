@@ -611,12 +611,12 @@ rendererBackgroundSource.Custom = function(template, id, name) {
 
     source.imageryUsed = function() {
         // sanitize personal connection tokens - #6801
-        let cleaned = source.template();
+        var cleaned = source.template();
 
         // from query string parameters
         if (cleaned.indexOf('?') !== -1) {
-            const parts = cleaned.split('?', 2);
-            const qs = utilStringQs(parts[1]);
+            var parts = cleaned.split('?', 2);
+            var qs = utilStringQs(parts[1]);
 
             ['access_token', 'connectId', 'token', 'Signature'].forEach(function(param) {
                 if (qs[param]) {
