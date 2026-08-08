@@ -88,7 +88,7 @@ export function rendererBackground(context) {
         // Add 'None'
         _imageryIndex.backgrounds.unshift(rendererBackgroundSource.None());
 
-        // Add saved custom backgrounds (migrating the legacy single template)
+        // Add saved custom backgrounds
         readCustomTemplates().forEach(entry => {
           const custom = rendererBackgroundSource.Custom(entry.template, entry.id, entry.name);
           _imageryIndex.backgrounds.unshift(custom);

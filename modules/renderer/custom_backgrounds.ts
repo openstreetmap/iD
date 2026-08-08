@@ -20,20 +20,6 @@ const MIGRATED_LEGACY_CUSTOM_ID = 'custom-1';
 
 
 /**
- * Rewrite stored background prefs that still reference the legacy `custom` id
- * after migration to `custom-1`, so quick-toggle (⌘B) keeps working.
- */
-function migrateLegacyBackgroundPrefs(): void {
-    if (prefs('background-last-used') === LEGACY_CUSTOM_SOURCE_ID) {
-        prefs('background-last-used', MIGRATED_LEGACY_CUSTOM_ID);
-    }
-    if (prefs('background-last-used-toggle') === LEGACY_CUSTOM_SOURCE_ID) {
-        prefs('background-last-used-toggle', MIGRATED_LEGACY_CUSTOM_ID);
-    }
-}
-
-
-/**
  * Normalize a custom tile URL template before persistence and dedupe.
  * Strips paste noise (leading/trailing whitespace, newlines) so localStorage
  * never keeps an unclean copy of what the user pasted.
@@ -90,21 +76,36 @@ function maxCustomIdNumber(list: CustomTemplate[]): number {
 
 
 /**
- * Read the saved custom background entries from preferences. On first run under
- * the multi-custom model the legacy single-template preference is migrated once;
- * afterwards the new key is the single source of truth. The monotonic id counter
- * is also seeded here on first read (before any deletion can happen), so a
- * `custom-<n>` id is never reused even after the highest entry is deleted.
+ * Read the saved custom background entries from preferences.
+ *
+ * One-time migration (only when the new list key is absent): copy the legacy
+ * single-template pref into `custom-1`, rewrite `background-last-used*` from
+ * `custom` → `custom-1`, and delete the legacy key. Afterwards the list key is
+ * the only source of truth.
+ *
+ * The monotonic id counter is seeded on first read so a `custom-<n>` id is
+ * never reused after the highest entry is deleted.
  * @returns the saved entries
  */
 export function readCustomTemplates(): CustomTemplate[] {
     const raw = prefs(CUSTOM_TEMPLATES_KEY);
     let list: CustomTemplate[];
-    if (raw === null || raw === undefined) {
+
+    if (raw === null) {
         const legacy = prefs(CUSTOM_TEMPLATE_LEGACY_KEY);
-        list = legacy ? [{ id: MIGRATED_LEGACY_CUSTOM_ID, name: '', template: legacy }] : [];
-        writeCustomTemplates(list);
-        if (legacy) migrateLegacyBackgroundPrefs();
+        if (legacy) {
+            list = [{ id: MIGRATED_LEGACY_CUSTOM_ID, name: '', template: legacy }];
+            writeCustomTemplates(list);
+            prefs(CUSTOM_TEMPLATE_LEGACY_KEY, null);
+            if (prefs('background-last-used') === LEGACY_CUSTOM_SOURCE_ID) {
+                prefs('background-last-used', MIGRATED_LEGACY_CUSTOM_ID);
+            }
+            if (prefs('background-last-used-toggle') === LEGACY_CUSTOM_SOURCE_ID) {
+                prefs('background-last-used-toggle', MIGRATED_LEGACY_CUSTOM_ID);
+            }
+        } else {
+            list = [];
+        }
     } else {
         try {
             const parsed = JSON.parse(raw);
@@ -114,7 +115,7 @@ export function readCustomTemplates(): CustomTemplate[] {
         }
     }
 
-    if (prefs(CUSTOM_NEXT_ID_KEY) === null || prefs(CUSTOM_NEXT_ID_KEY) === undefined) {
+    if (prefs(CUSTOM_NEXT_ID_KEY) === null) {
         prefs(CUSTOM_NEXT_ID_KEY, String(maxCustomIdNumber(list)));
     }
     return list;

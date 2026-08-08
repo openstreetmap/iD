@@ -60,6 +60,7 @@ describe('iD.rendererBackground', function() {
             expect(list).toHaveLength(1);
             expect(list[0].template).toBe('https://legacy/{z}/{x}/{y}.png');
             expect(list[0].id).toBe('custom-1');
+            expect(getPref('background-custom-template')).toBeNull();
         });
 
         it('rewrites legacy background-last-used prefs on migration', function() {
@@ -73,9 +74,10 @@ describe('iD.rendererBackground', function() {
             expect(getPref('background-last-used-toggle')).toBe('custom-1');
         });
 
-        it('migrates to an empty list when there is no legacy template', function() {
+        it('returns an empty list when there is no saved custom', function() {
             context = iD.coreContext().assetPath('../dist/').init();
             expect(context.background().customTemplates()).toEqual([]);
+            expect(getPref('background-custom-templates')).toBeNull();
         });
 
         it('does not re-migrate once the new list preference exists', function() {
