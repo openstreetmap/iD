@@ -14,27 +14,20 @@ type CustomBackgroundModal = d3.Selection<HTMLElement> & {
     okButton: () => CustomBackgroundModal;
 };
 
-type RenderFn = ((selection: d3.Selection<HTMLElement>) => void) & {
-    forEntry: (entry: CustomTemplate | null | undefined) => RenderFn;
-    on: (...args: unknown[]) => RenderFn;
-};
-
 
 /**
- * Modal for adding or editing a single custom background. Use `forEntry(entry)`
- * to edit an existing entry (`{ id, name, template }`) or `forEntry(null)` to add
- * a new one, then call the returned render with a selection. Dispatches `change`
- * with `{ source }` (the affected/selected source) on save.
+ * Modal for adding or editing a single custom background.
+ * Open with `.call(settings, entry)` to edit, or `.call(settings)` / `.call(settings, null)`
+ * to add. Dispatches `change` with `{ source }` on save.
  */
-export function uiSettingsCustomBackground(context: iD.Context): RenderFn {
+export function uiSettingsCustomBackground(context: iD.Context) {
     const dispatch = d3_dispatch('change');
-    // the entry being edited, or null when adding a new one
-    let _entry: CustomTemplate | null = null;
 
-    function render(selection: d3.Selection<HTMLElement>) {
-        const isEdit = !!(_entry && _entry.id);
-        const origName = isEdit ? (_entry!.name || '') : '';
-        const origTemplate = isEdit ? (_entry!.template || '') : '';
+    function render(selection: d3.Selection<HTMLElement>, entry?: CustomTemplate | null) {
+        const current = entry || null;
+        const isEdit = !!(current && current.id);
+        const origName = current ? (current.name || '') : '';
+        const origTemplate = current ? (current.template || '') : '';
 
         const example = 'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png';
         const modal = uiConfirm(selection).okButton() as unknown as CustomBackgroundModal;
@@ -197,7 +190,6 @@ export function uiSettingsCustomBackground(context: iD.Context): RenderFn {
 
         // close without changing anything
         function clickCancel(this: any) {
-            _entry = null;
             this.blur();
             modal.close();
         }
@@ -211,26 +203,18 @@ export function uiSettingsCustomBackground(context: iD.Context): RenderFn {
             this.blur();
             modal.close();
 
-            const background = context.background() as any;
+            const background = context.background();
             let source;
-            if (isEdit && _entry) {
-                source = background.updateCustomSource(_entry.id, { template: template, name: name });
+            if (isEdit && current) {
+                source = background.updateCustomSource(current.id, { template: template, name: name });
             } else {
                 source = background.addOrGetCustomSource(template, name);
             }
 
-            _entry = null;
             dispatch.call('change', this, { source: source });
         }
     }
 
 
-    // Set the entry to edit before opening; pass null/undefined to add a new one.
-    (render as RenderFn).forEntry = function(entry) {
-        _entry = entry || null;
-        return render as RenderFn;
-    };
-
-
-    return utilRebind(render, dispatch, 'on') as unknown as RenderFn;
+    return utilRebind(render, dispatch, 'on');
 }
