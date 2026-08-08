@@ -2758,6 +2758,8 @@ button.raw-tag-option.active {
 button.raw-tag-option.selected {
     color: var(--bg-color);
     background: var(--link-color);
+    /* already the active view — no further action, so not a pointer */
+    cursor: default;
 }
 button.raw-tag-option svg.icon {
     width: 14px;
