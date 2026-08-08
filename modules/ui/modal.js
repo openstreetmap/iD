@@ -5,7 +5,11 @@ import { svgIcon } from '../svg/icon';
 import { utilKeybinding } from '../util';
 
 
-/** @returns {d3.Selection<HTMLElement>} */
+/**
+ * @param {d3.Selection<HTMLElement>} selection
+ * @param {boolean} [blocking]
+ * @returns {d3.Selection<HTMLElement> & { close: () => void }}
+ */
 export function uiModal(selection, blocking) {
   let keybinding = utilKeybinding('modal');
   let previous = selection.select('div.modal');

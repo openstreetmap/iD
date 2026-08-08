@@ -620,7 +620,8 @@ export function utilFunctor<T>(value: T | (() => T)): () => T {
 }
 
 
-export function utilNoAuto(selection: d3.Selection): d3.Selection {
+// Accept any element type so `.call(utilNoAuto)` works on input/textarea/etc.
+export function utilNoAuto(selection: d3.Selection<any>): d3.Selection<any> {
     const isText = (selection.size() && selection.node()!.tagName.toLowerCase() === 'textarea');
 
     return selection

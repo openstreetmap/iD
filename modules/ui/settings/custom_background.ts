@@ -9,12 +9,6 @@ import { uiConfirm } from '../confirm';
 import { uiDisclosure } from '../disclosure';
 
 
-type CustomBackgroundModal = d3.Selection<HTMLElement> & {
-    close: () => void;
-    okButton: () => CustomBackgroundModal;
-};
-
-
 /**
  * Modal for adding or editing a single custom background.
  * Open with `.call(settings, entry)` to edit, or `.call(settings)` / `.call(settings, null)`
@@ -30,7 +24,7 @@ export function uiSettingsCustomBackground(context: iD.Context) {
         const origTemplate = current ? (current.template || '') : '';
 
         const example = 'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png';
-        const modal = uiConfirm(selection).okButton() as unknown as CustomBackgroundModal;
+        const modal = uiConfirm(selection).okButton();
 
         modal
             .classed('settings-modal settings-custom-background', true);
@@ -50,7 +44,7 @@ export function uiSettingsCustomBackground(context: iD.Context) {
         const calloutDiv = textSection
             .append('div')
             .attr('class', 'settings-custom-background-callout')
-            .html(marked.parse(licenseMarkdown) as string);
+            .html(marked.parse(licenseMarkdown, { async: false }));
         calloutDiv.selectAll('p').attr('dir', 'auto');
         calloutDiv.selectAll('a')   // "Read more" opens in a new tab
             .attr('target', '_blank')
@@ -66,8 +60,7 @@ export function uiSettingsCustomBackground(context: iD.Context) {
             .append('input')
             .attr('class', 'field-name')
             .attr('type', 'text')
-            // utilNoAuto is typed against a loose d3.Selection
-            .call(utilNoAuto as any)
+            .call(utilNoAuto)
             .property('value', origName);
 
         // tile URL template
@@ -80,7 +73,7 @@ export function uiSettingsCustomBackground(context: iD.Context) {
             .append('textarea')
             .attr('class', 'field-template')
             .attr('placeholder', t('settings.custom_background.template.placeholder'))
-            .call(utilNoAuto as any)
+            .call(utilNoAuto)
             .on('input.custom-background', updateSaveDisabled)
             .property('value', origTemplate);
 
@@ -114,7 +107,7 @@ export function uiSettingsCustomBackground(context: iD.Context) {
                             .attr('class', 'token-list')
                             .html(marked.parse(tokenPaths
                                 .map(path => `* ${localizer.t_html(path)}`)
-                                .join('\n')) as string)
+                                .join('\n'), { async: false }))
                             .selectAll('p')
                             .attr('dir', 'auto');
                     })
@@ -167,17 +160,17 @@ export function uiSettingsCustomBackground(context: iD.Context) {
             .call(t.append('confirm.cancel'));
 
 
-        buttonSection.select('.cancel-button')
+        buttonSection.select<HTMLButtonElement>('.cancel-button')
             .on('click.cancel', clickCancel);
 
-        buttonSection.select('.ok-button')
+        buttonSection.select<HTMLButtonElement>('.ok-button')
             .on('click.save', clickSave);
 
         updateSaveDisabled();
 
         // focus the name field when the modal opens (uiConfirm's okButton() focuses
         // the OK button by default; focusing here overrides that)
-        nameInput.node()!.focus();
+        nameInput.node()?.focus();
 
 
         // keep Save disabled while the URL template is empty, so a save can never
@@ -185,19 +178,19 @@ export function uiSettingsCustomBackground(context: iD.Context) {
         // persistence. Use the trash button to delete.
         function updateSaveDisabled() {
             buttonSection.select('.ok-button')
-                .attr('disabled', templateInput.property('value').trim() ? null : true);
+                .attr('disabled', String(templateInput.property('value')).trim() ? null : true);
         }
 
         // close without changing anything
-        function clickCancel(this: any) {
+        function clickCancel(this: HTMLButtonElement) {
             this.blur();
             modal.close();
         }
 
         // add or update the custom background, then notify the list
-        function clickSave(this: any) {
-            const template = templateInput.property('value') as string;
-            const name = textSection.select('.field-name').property('value') as string;
+        function clickSave(this: HTMLButtonElement) {
+            const template = String(templateInput.property('value'));
+            const name = String(textSection.select('.field-name').property('value'));
             if (!template.trim()) return;   // Save is disabled in this state; guard anyway
 
             this.blur();

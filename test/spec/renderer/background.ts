@@ -1,13 +1,11 @@
-// The stored JSDoc type of iD.prefs reports the setter's boolean result and
-// disallows null; at runtime a get returns the stored string (or null) and a
-// set accepts null to clear. Wrap it for the tests.
+import { prefs } from '../../../modules/core/preferences';
 import type { CustomTemplate } from '../../../modules/renderer/custom_backgrounds';
 
 function setPref(key: string, value: string | null): void {
-    (iD.prefs as any)(key, value);
+    prefs(key, value);
 }
 function getPref(key: string): string | null {
-    return (iD.prefs as any)(key);
+    return prefs(key);
 }
 
 // The runtime background sources are built in loosely-typed JS (they surface as
