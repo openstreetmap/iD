@@ -1801,10 +1801,9 @@ en:
         title: Continue drawing from end
       convert_to_line:
         title: Convert this to a line
-        annotation: Converted an area to a line.
       convert_to_area:
         title: Convert this to an area
-        annotation: Converted a line to an area.
+        annotation: Converted an area to a line.
       delete_feature:
         title: Delete this feature
       extract_point:
