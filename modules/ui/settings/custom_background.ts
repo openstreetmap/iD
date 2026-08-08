@@ -3,7 +3,6 @@ import { marked } from 'marked';
 
 import { localizer, t } from '../../core/localizer';
 import type { CustomTemplate } from '../../renderer/custom_backgrounds';
-import { svgIcon } from '../../svg/icon';
 import { utilNoAuto, utilRebind } from '../../util';
 import { uiConfirm } from '../confirm';
 import { uiDisclosure } from '../disclosure';
@@ -77,16 +76,22 @@ export function uiSettingsCustomBackground(context: iD.Context) {
             .on('input.custom-background', updateSaveDisabled)
             .property('value', origTemplate);
 
-        // help block: a help icon, collapsible WMS/TMS token refs (closed by
-        // default), then the always-visible example URL
-        const helpBlock = textSection
+        // form help directly under the template field (div, not p — modal-section
+        // adds padding-bottom to non-last p elements)
+        const exampleRow = textSection
             .append('div')
-            .attr('class', 'settings-custom-background-help');
+            .attr('class', 'instructions-example deemphasize');
 
-        helpBlock
-            .call(svgIcon('#iD-icon-help', 'inline'));
+        exampleRow
+            .append('span')
+            .call(t.append('settings.custom_background.instructions.example'));
 
-        const instructions = helpBlock
+        exampleRow
+            .append('code')
+            .text(example);
+
+        // collapsible WMS/TMS token reference (closed by default)
+        const instructions = textSection
             .append('div')
             .attr('class', 'instructions-template');
 
@@ -136,19 +141,6 @@ export function uiSettingsCustomBackground(context: iD.Context) {
                 'settings.custom_background.instructions.tms.tokens.scale_factor'
             ]
         );
-
-        const exampleRow = instructions
-            .append('div')
-            .attr('class', 'instructions-example');
-
-        exampleRow
-            .append('span')
-            .attr('class', 'instructions-example-label')
-            .call(t.append('settings.custom_background.instructions.example'));
-
-        exampleRow
-            .append('code')
-            .text(example);
 
 
         // insert a cancel button
