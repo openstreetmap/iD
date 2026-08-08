@@ -5881,11 +5881,6 @@ button.conflicts-button {
     hyphens: auto;
     overflow-wrap: break-word;
 }
-/* full tile URL templates in custom-background row tooltips — keep narrower
-   than the map pane content so scrollContainer can park them without clipping */
-.map-pane .tooltip .popover-inner:has(code) {
-    max-width: 260px;
-}
 .tooltip-text code {
     display: inline-block;
     max-width: 100%;
