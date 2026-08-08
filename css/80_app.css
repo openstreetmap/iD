@@ -5875,12 +5875,8 @@ button.conflicts-button {
     padding: 10px;
     font-weight: normal;
     background-color: var(--bg-color);
-    /* long, unspaced terms must not overflow the tooltip: prefer hyphenation
-       (uses the text's `lang`, breaking with a "-"); only break mid-word if
-       hyphenation can't fit it. */
-    hyphens: auto;
-    overflow-wrap: break-word;
 }
+/* long custom tile URL templates in background-list tooltips */
 .tooltip-text code {
     display: inline-block;
     max-width: 100%;

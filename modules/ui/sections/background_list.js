@@ -157,8 +157,8 @@ export function uiSectionBackgroundList(context) {
     }
 
     function setTooltips(selection) {
-        // Keep tooltips inside the scrollable pane; without this, wide URL
-        // tooltips are centered on the row and clipped by overflow-x: hidden.
+        // Keep wide custom-URL tooltips inside the scrollable pane; without
+        // this they are centered on the row and clipped by overflow-x: hidden.
         const paneContent = context.container().select('.background-pane .pane-content');
 
         selection.each(function(d, i, nodes) {
@@ -191,14 +191,12 @@ export function uiSectionBackgroundList(context) {
             } else if (isPrevious) {
                 item.call(uiTooltip()
                     .placement(placement)
-                    .scrollContainer(paneContent)
                     .title(() => t.append('background.switch'))
                     .keys([uiCmd('⌘' + t('background.key'))])
                 );
             } else if (hasDescription || isOverflowing) {
                 item.call(uiTooltip()
                     .placement(placement)
-                    .scrollContainer(paneContent)
                     .title(() => hasDescription ? d.description() : d.label())
                 );
             }
