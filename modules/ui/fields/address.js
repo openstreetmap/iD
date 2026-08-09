@@ -371,7 +371,8 @@ export function uiFieldAddress(field, context) {
                 countryCode = t('intro.graph.countrycode');
             } else {
                 var center = extent.center();
-                countryCode = countryCoder.iso1A2Code(center);
+                // even if we do not have data for this territory/country, the editor will generate a default format for us.
+                countryCode = countryCoder.iso1A2Code(center, { level: 'territory' });
             }
             if (countryCode) {
                 _countryCode = countryCode.toLowerCase();
