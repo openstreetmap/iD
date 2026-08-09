@@ -72,6 +72,14 @@
     ]
   },
   {
+    "countryCodes": ["hk"],
+    "format": [
+      ["door", "floor"],
+      ["unit", "housename"],
+      ["housenumber", "street+place"]
+    ]
+  },
+  {
     "countryCodes": ["ma"],
     "format": [
       ["housename"],
