@@ -54,6 +54,7 @@ export function presetIndex() {
   // Index of presets by (geometry, tag key).
   let _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
   let _loadPromise;
+  let _presetVersion = 0;
 
 
   /** @param {boolean=} bypassCache - used by unit tests */
@@ -188,6 +189,8 @@ export function presetIndex() {
       locationManager.registerLocationSets(newLocationSets);
     }
 
+    // Bump the version so callers can invalidate anything derived from the preset data
+    _presetVersion++;
     return _this;
   };
 
@@ -454,6 +457,10 @@ export function presetIndex() {
   _this.getPresets = () => {
     return _presets;
   };
+
+  // the version of the preset data - incremented whenever presets are (re)loaded,
+  // so callers (e.g. the display label cache) can invalidate derived results
+  _this.version = () => _presetVersion;
 
 
   function RibbonItem(preset) {

@@ -1,11 +1,58 @@
 import type { Deprecated as DataDeprecated } from '@openstreetmap/id-tagging-schema';
 
+interface DeprecatedEntry {
+  index: number;
+  d: DataDeprecated[number];
+}
+
+var _deprecatedIndex: { data: DataDeprecated; byKey: Map<string, DeprecatedEntry[]> };
+
+// Group the deprecated entries by old key so an entity only examines the
+// entries that could possibly match its tags, instead of scanning the whole
+// list (several hundred entries) for every entity on every validation pass.
+function deprecatedIndexByKey(dataDeprecated: DataDeprecated): Map<string, DeprecatedEntry[]> {
+  if (!_deprecatedIndex || _deprecatedIndex.data !== dataDeprecated) {
+    var byKey = new Map<string, DeprecatedEntry[]>();
+    dataDeprecated.forEach((d, index) => {
+      var oldKeys = Object.keys(d.old);
+      oldKeys.forEach((oldKey) => {
+        var list = byKey.get(oldKey);
+        if (list) {
+          list.push({ index, d });
+        } else {
+          byKey.set(oldKey, [{ index, d }]);
+        }
+      });
+    });
+    _deprecatedIndex = { data: dataDeprecated, byKey };
+  }
+  return _deprecatedIndex.byKey;
+}
+
 export function getDeprecatedTags(tags: Tags, dataDeprecated: DataDeprecated): DataDeprecated {
   // if there are no tags, none can be deprecated
   if (Object.keys(tags).length === 0) return [];
 
+  // A deprecated entry can only match when at least one of its old keys is
+  // present in the entity's tags, so gather the candidates from the tags and
+  // keep the data order by sorting on the original index.
+  var byKey = deprecatedIndexByKey(dataDeprecated);
+  var seen = new Set<number>();
+  var candidates: DeprecatedEntry[] = [];
+  Object.keys(tags).forEach((tagKey) => {
+    var list = byKey.get(tagKey);
+    if (!list) return;
+    list.forEach((entry) => {
+      if (!seen.has(entry.index)) {
+        seen.add(entry.index);
+        candidates.push(entry);
+      }
+    });
+  });
+  candidates.sort((a, b) => a.index - b.index);
+
   var deprecated: DataDeprecated = [];
-  dataDeprecated.forEach((d) => {
+  candidates.forEach(({ d }) => {
     const oldKeys = Object.keys(d.old);
     const transferKeys = oldKeys.filter(key => d.old[key] === '*');
     if (d.replace) {

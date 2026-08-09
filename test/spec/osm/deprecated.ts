@@ -85,6 +85,20 @@ describe('getDeprecatedTags', () => {
       },
     ]);
   });
+
+  it('does not match a multi-key entry when only one old key is present', () => {
+    // the entity only carries the second old key, the entry must not match
+    expect(getDeprecatedTags({ gambling: 'casino' }, deprecated)).toStrictEqual([]);
+  });
+
+  it('preserves data order when matches come through different keys', () => {
+    expect(
+      getDeprecatedTags({ highway: 'no', speedlimit: '50' }, deprecated),
+    ).toStrictEqual([
+      { old: { highway: 'no' } },
+      { old: { speedlimit: '*' }, replace: { maxspeed: '$1' } },
+    ]);
+  });
 });
 
 describe('deprecatedTagValuesByKey', () => {
