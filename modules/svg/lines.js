@@ -2,7 +2,7 @@ import { deepEqual } from 'fast-equals';
 import { range as d3_range } from 'd3-array';
 
 import {
-    svgMarkerSegments, svgPath, svgRelationMemberTags, svgSegmentWay
+    svgAttrIfChanged, svgMarkerSegments, svgPath, svgRelationMemberTags, svgSegmentWay
 } from './helpers';
 import { svgTagClasses } from './tag_classes';
 
@@ -23,6 +23,21 @@ function onewayArrowColour(tags) {
 
 export function svgLines(projection, context) {
     var detected = utilDetect();
+
+    // Hoisted per renderer so the class memo's `_id` is stable across
+    // redraws and the memo can actually hit on pan/zoom. Two instances:
+    // one per distinct `tags` getter (own tags on enter, relation tags on
+    // update) - sharing one instance would let the second pass hit memo
+    // entries computed with the other pass's tags getter.
+    var tagClasses = svgTagClasses();
+    var tagClassesRelation = svgTagClasses();
+
+    // Hoisted per renderer so the sort memo is stable across redraws and
+    // can actually hit on pan/zoom. waystack reads only the selected set
+    // and each way's tags, so a linegroup whose data and selection are
+    // unchanged since the last draw is already in stack order and can skip
+    // the sort, which would otherwise reorder every path via the DOM.
+    var sortCache = {};
 
     var highway_stack = {
         motorway: 0,
@@ -85,7 +100,7 @@ export function svgLines(projection, context) {
         targets.enter()
             .append('path')
             .merge(targets)
-            .attr('d', getPath)
+            .call(svgAttrIfChanged, 'd', getPath)
             .attr('class', function(d) {
                 return 'way line target target-allowed ' + targetClass + d.id;
             })
@@ -105,7 +120,7 @@ export function svgLines(projection, context) {
         nopes.enter()
             .append('path')
             .merge(nopes)
-            .attr('d', getPath)
+            .call(svgAttrIfChanged, 'd', getPath)
             .attr('class', function(d) {
                 return 'way line target target-nope ' + nopeClass + d.id;
             })
@@ -116,14 +131,32 @@ export function svgLines(projection, context) {
     function drawLines(selection, graph, entities, filter) {
         var base = context.history().base();
 
+        // Snapshot the selection once for this draw. The layer filter and
+        // waystack both test membership per way, and the selection cannot
+        // change mid-draw, so capture it in a Set instead of calling
+        // selectedIDs() per entity per linegroup pass.
+        var selected = new Set(context.selectedIDs());
+
+        // waystack sorts by selection and highway rank, so the order can
+        // change only when the selection or the data changes. Snapshot the
+        // selection so the sort can be skipped when neither changed.
+        var selectedSig = context.selectedIDs().slice().sort().join(',');
+
         function waystack(a, b) {
-            var selected = context.selectedIDs();
-            var scoreA = selected.indexOf(a.id) !== -1 ? 20 : 0;
-            var scoreB = selected.indexOf(b.id) !== -1 ? 20 : 0;
+            var scoreA = selected.has(a.id) ? 20 : 0;
+            var scoreB = selected.has(b.id) ? 20 : 0;
 
             if (a.tags.highway) { scoreA -= highway_stack[a.tags.highway]; }
             if (b.tags.highway) { scoreB -= highway_stack[b.tags.highway]; }
             return scoreA - scoreB;
+        }
+
+        function sameSequence(a, b) {
+            if (a.length !== b.length) return false;
+            for (var i = 0; i < a.length; i++) {
+                if (a[i] !== b[i]) return false;
+            }
+            return true;
         }
 
 
@@ -133,17 +166,29 @@ export function svgLines(projection, context) {
             var isDrawing = mode && /^draw/.test(mode.id);
             var selectedClass = (!isDrawing && isSelected) ? 'selected ' : '';
 
+            // Data and linegroup node per layer, captured while the join
+            // runs so the sort skip below can compare without re-reading
+            // the DOM
+            var layerData = {};
+            var layerNodes = {};
+            var getData = getPathData(isSelected);
+
             var lines = selection
                 .selectAll('path')
                 .filter(filter)
-                .data(getPathData(isSelected), osmIdManager.key);
+                .data(function() {
+                    var layer = this.parentNode.__data__;
+                    layerData[layer] = getData.call(this);
+                    layerNodes[layer] = this;
+                    return layerData[layer];
+                }, osmIdManager.key);
 
             lines.exit()
                 .remove();
 
             // Optimization: Call expensive TagClasses only on enter selection. This
             // works because osmIdManager.key is defined to include the entity v attribute.
-            lines.enter()
+            lines = lines.enter()
                 .append('path')
                 .attr('class', function(d) {
 
@@ -182,11 +227,46 @@ export function svgLines(projection, context) {
                         base.entities[d.id] &&
                         !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
                 })
-                .call(svgTagClasses())
-                .merge(lines)
-                .sort(waystack)
-                .attr('d', getPath)
-                .call(svgTagClasses().tags(svgRelationMemberTags(graph)));
+                .call(tagClasses.graph(graph))
+                .merge(lines);
+
+            // Skip the sort when the data and selection are unchanged since
+            // the last draw of this linegroup: the DOM is then already in
+            // stack order. Sorting would otherwise reorder every path via
+            // the DOM, one compareDocumentPosition at a time. The cache key
+            // includes the highlighted suffix because klass is shared by the
+            // normal and highlighted linegroups, and the covered and
+            // uncovered layer passes share the entry, safe because the two
+            // layer ranges are disjoint.
+            var cacheKey = klass + (isSelected ? ' highlighted' : '');
+            var entry = sortCache[cacheKey];
+            var unchanged = !!(entry && entry.sig === selectedSig);
+            var layer;
+            if (unchanged) {
+                for (layer in layerData) {
+                    if (entry.nodes[layer] !== layerNodes[layer] ||
+                        !sameSequence(entry.data[layer], layerData[layer])) {
+                        unchanged = false;
+                        break;
+                    }
+                }
+            }
+
+            // The memo is refreshed only when a sort actually runs, a skip
+            // leaves it untouched.
+            if (!unchanged) {
+                lines.sort(waystack);
+                entry = sortCache[cacheKey] ||
+                    (sortCache[cacheKey] = { sig: selectedSig, data: {}, nodes: {} });
+                entry.sig = selectedSig;
+                for (layer in layerData) {
+                    entry.data[layer] = layerData[layer];
+                    entry.nodes[layer] = layerNodes[layer];
+                }
+            }
+
+            lines.call(svgAttrIfChanged, 'd', getPath)
+                .call(tagClassesRelation.tags(svgRelationMemberTags(graph)).graph(graph));
 
             return selection;
         }
@@ -197,11 +277,8 @@ export function svgLines(projection, context) {
                 var layer = this.parentNode.__data__;
                 var data = pathdata[layer] || [];
                 return data.filter(function(d) {
-                    if (isSelected) {
-                        return context.selectedIDs().indexOf(d.id) !== -1;
-                    } else {
-                        return context.selectedIDs().indexOf(d.id) === -1;
-                    }
+                    var isSel = selected.has(d.id);
+                    return isSelected ? isSel : !isSel;
                 });
             };
         }
@@ -232,7 +309,7 @@ export function svgLines(projection, context) {
                 .attr('class', pathclass)
                 .merge(markers)
                 .attr('marker-mid', marker)
-                .attr('d', function(d) { return d.d; });
+                .call(svgAttrIfChanged, 'd', d => d.d);
 
             if (detected.ie) {
                 markers.each(function() { this.parentNode.insertBefore(this, this); });

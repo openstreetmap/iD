@@ -307,4 +307,106 @@ describe('iD.svgTagClasses', function () {
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal('tag-piste_type tag-piste_type-nordic');
     });
+
+    describe('memoization', function() {
+        function spyOnClassesString(tagClasses) {
+            var calls = 0;
+            var original = tagClasses.getClassesString;
+            tagClasses.getClassesString = function(t, value) {
+                calls++;
+                return original.call(this, t, value);
+            };
+            return function() { return calls; };
+        }
+
+        it('hits the memo across redraws when using the same instance', function() {
+            var tagClasses = iD.svgTagClasses();
+            var calls = spyOnClassesString(tagClasses);
+            var graph = {};
+
+            var way = new iD.osmWay({ id: 'w1', v: 1 });
+            selection
+                .attr('class', 'way line w1')
+                .datum(way);
+
+            selection.call(tagClasses.graph(graph));   // first redraw: compute
+            selection.call(tagClasses.graph(graph));   // second redraw: memo hit
+
+            expect(selection.attr('class')).toEqual('way line w1');
+            expect(calls()).toEqual(1);
+        });
+
+        it('does not hit the memo across redraws when using a fresh instance', function() {
+            var graph = {};
+            var way = new iD.osmWay({ id: 'w1', v: 1 });
+            selection
+                .attr('class', 'way line w1')
+                .datum(way);
+
+            var first = iD.svgTagClasses();
+            var calls = spyOnClassesString(first);
+            selection.call(first.graph(graph));
+            expect(calls()).toEqual(1);
+
+            var second = iD.svgTagClasses();
+            calls = spyOnClassesString(second);
+            selection.call(second.graph(graph));
+            expect(calls()).toEqual(1);
+        });
+
+        it('invalidates the memo when the graph changes', function() {
+            var tagClasses = iD.svgTagClasses();
+            var calls = spyOnClassesString(tagClasses);
+            var graphA = {};
+            var graphB = {};
+
+            var way = new iD.osmWay({ id: 'w2', v: 1 });
+            selection
+                .attr('class', 'way line w2')
+                .datum(way);
+
+            selection.call(tagClasses.graph(graphA));   // graph A: compute
+            selection.call(tagClasses.graph(graphA));   // graph A: memo hit
+            expect(calls()).toEqual(1);
+
+            selection.call(tagClasses.graph(graphB));   // graph B: recompute
+            expect(calls()).toEqual(2);
+        });
+
+        it('does not reuse midpoint classes computed for a different parent way', function() {
+            var graph = {};
+            var wayA = new iD.osmWay({ id: 'w100', v: 1, tags: { highway: 'residential' } });
+            var wayB = new iD.osmWay({ id: 'w101', v: 1, tags: { highway: 'track' } });
+
+            // midpoints are plain objects with a version-less id
+            function midpoint(parent) {
+                return {
+                    type: 'midpoint',
+                    id: 'n1000-n2000',
+                    loc: [0, 0],
+                    edge: ['n1000', 'n2000'],
+                    parents: [parent]
+                };
+            }
+
+            var tagClasses = iD.svgTagClasses();
+            var s1 = d3_select(document.createElement('div'))
+                .attr('class', 'midpoint')
+                .datum(midpoint(wayA));
+            var s2 = d3_select(document.createElement('div'))
+                .attr('class', 'midpoint')
+                .datum(midpoint(wayB));
+
+            s1.call(tagClasses.tags(function(d) { return d.parents[0].tags; })
+                .keyExt(function(d) { return iD.osmIdManager.key(d.parents[0]); })
+                .graph(graph));
+            s2.call(tagClasses.tags(function(d) { return d.parents[0].tags; })
+                .keyExt(function(d) { return iD.osmIdManager.key(d.parents[0]); })
+                .graph(graph));
+
+            expect(s1.classed('tag-highway-residential')).toBe(true);
+            expect(s2.classed('tag-highway-track')).toBe(true);
+            expect(s2.classed('tag-highway-residential')).toBe(false);
+        });
+    });
 });

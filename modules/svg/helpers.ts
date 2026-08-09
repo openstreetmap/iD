@@ -5,10 +5,11 @@ import {
 } from 'd3-geo';
 
 import { geoVecAdd, geoVecAngle, geoVecLength } from '../geo';
-import type { EntityId, NodeId, OsmEntity, osmNode, osmWay, WayId } from '../osm';
+import type { NodeId, OsmEntity, osmNode, osmWay, WayId } from '../osm';
 import type { coreGraph } from '../core';
 import type { ClipExtent, Projection } from '../geo/raw_mercator';
 import type { Vec2 } from '../geo/vector';
+import type { Selection } from 'd3-selection';
 import type { Feature, LineString } from 'geojson';
 import type { WithLoc } from './geolocate';
 
@@ -160,26 +161,50 @@ export function svgMarkerSegments(
 
 
 export function svgPath(projection: Projection, graph?: coreGraph, isArea?: boolean) {
-    const cache: Record<EntityId, string | null> = {};
     const project = projection.stream;
     const clip = paddedClipExtent(projection, isArea);
     const path = d3_geoPath()
         .projection({stream: function(output) { return project(clip(output)); }});
 
+    // Cache path strings in the graph's transient store so they survive
+    // across redraws. The entry is tagged with the projection state it was
+    // computed for, and replaced (not accumulated) when the projection
+    // changes - keeping only the current projection's paths prevents the
+    // strings for every zoom level we've passed through from piling up in
+    // memory until the graph changes. The graph transients are invalidated
+    // when the graph changes (edits create a new graph, tile merges
+    // invalidate the affected entities).
+    const projectionKey = projection.scale() + '|' + projection.translate().join(',') +
+        '|' + projection.clipExtent().join(',') + (isArea ? '|area' : '');
+    const slot = 'svgPath' + (isArea ? ':area' : '');
+
     const svgpath = function(entity: osmWay) {
-        if (entity.id in cache) {
-            return cache[entity.id];
+        if (graph) {
+            const cached = graph.transient<{ key: string, value: string | null }>(entity, slot, () => {
+                return { key: projectionKey, value: path(entity.asGeoJSON(graph)) };
+            });
+            if (cached.key !== projectionKey) {
+                // the projection changed since this was cached - replace it
+                const updated = { key: projectionKey, value: path(entity.asGeoJSON(graph)) };
+                const transients = graph.transients[entity.id];
+                if (transients) transients[slot] = updated;
+                return updated.value;
+            }
+            return cached.value;
         } else {
-            return cache[entity.id] = path(entity.asGeoJSON(graph!));
+            return path(entity.asGeoJSON(graph!));
         }
     };
 
+    // GeoJSON features (e.g. from the vector data layer) are not graph
+    // entities, so cache them per call as before
+    const geojsonCache: Record<string, string | null> = {};
     svgpath.geojson = function(d: any) {
         if (d.__featurehash__ !== undefined) {
-            if (d.__featurehash__ in cache) {
-                return cache[d.__featurehash__];
+            if (d.__featurehash__ in geojsonCache) {
+                return geojsonCache[d.__featurehash__];
             } else {
-                return cache[d.__featurehash__] = path(d);
+                return geojsonCache[d.__featurehash__] = path(d);
             }
         } else {
             return path(d);
@@ -201,6 +226,30 @@ export function svgPointTransform(projection: Projection) {
     };
 
     return svgpoint;
+}
+
+
+/**
+ * Set an attribute on each element of the selection, but only when the
+ * value has changed. Writing an unchanged attribute still invalidates the
+ * element's style, which forces a style/layout recalculation of the whole
+ * map subtree on a full redraw.
+ */
+export function svgAttrIfChanged<GElement extends Element, Datum>(
+    selection: Selection<GElement, Datum, any, any>,
+    name: string,
+    getValue: (d: Datum) => string | null
+) {
+    selection.each(function(d) {
+        const value = getValue(d);
+        if (this.getAttribute(name) !== value) {
+            if (value === null) {
+                this.removeAttribute(name);
+            } else {
+                this.setAttribute(name, value);
+            }
+        }
+    });
 }
 
 

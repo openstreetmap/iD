@@ -1,4 +1,4 @@
-import { select as d3_select } from 'd3-selection';
+import { select as d3_select, selection as d3_selection } from 'd3-selection';
 import { geoProjection as d3_geoProjection } from 'd3-geo';
 
 describe('iD.svgLines', function () {
@@ -17,6 +17,40 @@ describe('iD.svgLines', function () {
             .attr('class', 'main-map')
             .call(context.map().centerZoom([0, 0], 17));
         surface = context.surface();
+    });
+
+
+    it('skips the line sort on an unchanged redraw', function () {
+        var a = new iD.osmNode({loc: [0, 0]});
+        var b = new iD.osmNode({loc: [1, 1]});
+        var line = new iD.osmWay({nodes: [a.id, b.id]});
+        var graph = new iD.coreGraph([a, b, line]);
+        var renderer = iD.svgLines(projection, context);
+
+        var originalSort = d3_selection.prototype.sort;
+        var sortCalls = 0;
+        d3_selection.prototype.sort = function() {
+            sortCalls++;
+            return originalSort.apply(this, arguments);
+        };
+        try {
+            surface.call(renderer, graph, [line], all);
+            var callsAfterFirst = sortCalls;
+            expect(callsAfterFirst).toBeGreaterThan(0);
+
+            // unchanged data and selection: the sort is skipped
+            surface.call(renderer, graph, [line], all);
+            expect(sortCalls).toBe(callsAfterFirst);
+
+            // changed data: the sort runs again
+            var c = new iD.osmNode({loc: [2, 2]});
+            var line2 = new iD.osmWay({nodes: [a.id, c.id]});
+            var graph2 = new iD.coreGraph([a, b, c, line, line2]);
+            surface.call(renderer, graph2, [line, line2], all);
+            expect(sortCalls).toBeGreaterThan(callsAfterFirst);
+        } finally {
+            d3_selection.prototype.sort = originalSort;
+        }
     });
 
 

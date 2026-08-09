@@ -1,8 +1,21 @@
 import type { Geometry } from '@openstreetmap/id-tagging-schema';
 import { select as d3_select } from 'd3-selection';
+import type { coreGraph } from '../core';
+import { osmIdManager } from '../osm';
 import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags, osmLifecyclePrefixes } from '../osm/tags';
 
 export type TagGetter<T> = (entity: T) => Tags;
+
+// Memoize getClassesString() results across redraws: with tens of thousands of
+// elements re-joined on every full redraw, recomputing the class string for
+// each one dominates the redraw time. The memo is reset only when the graph
+// object changes identity (edits create a new graph object). Tile-merge
+// rebases mutate the graph in place and do NOT reset the memo: that is safe
+// because rebase only adds entities absent from the base graph, so the tags
+// of entities already in the graph never change on a merge (see coreGraph.rebase).
+let _classMemo = new Map<string, string>();
+let _classMemoGraph: coreGraph | undefined;
+let _instanceId = 0;
 
 export function svgTagClasses<T>() {
     const primaries = [
@@ -21,9 +34,23 @@ export function svgTagClasses<T>() {
 
     // this function is the default callback, but it can be overridden
     var _tags: TagGetter<any> = function(entity) { return entity.tags; };
+    var _graph: coreGraph | undefined;
+    const _id = String(++_instanceId);
+
+    // Optional extra memo key component. Non-entity datums (e.g. midpoints)
+    // have version-less osmIdManager.key()s (`id + 'v0'`), so the memo alone
+    // cannot tell when the classes input changed (e.g. a midpoint whose
+    // parent way was switched without the graph changing). Callers with such
+    // datums must include whatever identifies the tags source - for
+    // midpoints, the parent way's key.
+    let _keyExt: ((entity: T) => string) | undefined;
 
 
     const tagClasses = function(selection: d3.Selection<SVGGElement>) {
+        if (_graph !== _classMemoGraph) {
+            _classMemo = new Map();
+            _classMemoGraph = _graph;
+        }
         selection.each(function tagClassesEach(entity) {
             var value: any = this.className;
 
@@ -31,15 +58,37 @@ export function svgTagClasses<T>() {
                 value = value.baseVal;
             }
 
-            var t = _tags(entity);
+            var key = osmIdManager.key(entity) + '|' + value + '|' + _id
+                + (_keyExt ? '|' + _keyExt(entity) : '');
 
-            var computed = tagClasses.getClassesString(t, value);
+            var computed = _classMemo.get(key);
+            if (computed === undefined) {
+                computed = tagClasses.getClassesString(_tags(entity), value);
+                _classMemo.set(key, computed);
+            }
 
             if (computed !== value) {
                 d3_select(this).attr('class', computed);
             }
         });
     };
+
+
+    function graph(): coreGraph | undefined;
+    function graph(val: coreGraph | undefined): typeof tagClasses;
+    function graph(val?: coreGraph | undefined): typeof tagClasses | coreGraph | undefined {
+        if (!arguments.length) return _graph;
+        _graph = val;
+        return tagClasses;
+    };
+    tagClasses.graph = graph;
+
+
+    function keyExt(fn: ((entity: T) => string) | undefined): typeof tagClasses {
+        _keyExt = fn;
+        return tagClasses;
+    };
+    tagClasses.keyExt = keyExt;
 
 
     tagClasses.getClassesString = function(t: Tags, value: string) {

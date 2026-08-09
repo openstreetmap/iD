@@ -11,6 +11,7 @@ export { svgMapillaryImages } from './mapillary_images.js';
 export { svgMapillarySigns } from './mapillary_signs.js';
 export { svgMidpoints } from './midpoints.js';
 export { svgNotes } from './notes.js';
+export { svgAttrIfChanged } from './helpers.js';
 export { svgMarkerSegments } from './helpers.js';
 export { svgKartaviewImages } from './kartaview_images.js';
 export { svgOsm } from './osm.js';

@@ -1,9 +1,9 @@
-import { svgPointTransform } from './helpers';
+import { svgAttrIfChanged, svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { geoAngle, geoLineIntersection, geoVecInterp, geoVecLength, type geoExtent } from '../geo';
 import type { Projection } from '../geo/raw_mercator';
 import type { coreGraph } from '../core';
-import type { NodeId, osmWay } from '../osm';
+import { osmIdManager, type NodeId, type osmWay } from '../osm';
 import type { Feature } from 'geojson';
 import type { Vec2 } from '../geo/vector';
 
@@ -17,6 +17,10 @@ export interface Midpoint {
 
 export function svgMidpoints(projection: Projection, context: iD.Context) {
     var targetRadius = 8;
+
+    // Hoisted per renderer so the class memo's `_id` is stable across
+    // redraws and the memo can actually hit on pan/zoom.
+    const tagClasses = svgTagClasses<Midpoint>();
 
     function drawTargets(selection: d3.Selection, graph: coreGraph, entities: Midpoint[], filter: (node: Midpoint) => boolean) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
@@ -51,7 +55,7 @@ export function svgMidpoints(projection: Projection, context: iD.Context) {
             .attr('r', targetRadius)
             .merge(targets)
             .attr('class', function(d) { return 'node midpoint target ' + fillClass + d.id; })
-            .attr('transform', getTransform);
+            .call(svgAttrIfChanged, 'transform', getTransform);
     }
 
 
@@ -152,16 +156,22 @@ export function svgMidpoints(projection: Projection, context: iD.Context) {
 
         groups = groups
             .merge(enter)
-            .attr('transform', function(d) {
+            .call(svgAttrIfChanged, 'transform', function(d) {
                 var translate = svgPointTransform(projection);
                 var a = graph.entity(d.edge[0]);
                 var b = graph.entity(d.edge[1]);
                 var angle = geoAngle(a, b, projection) * (180 / Math.PI);
                 return translate(d) + ' rotate(' + angle + ')';
             })
-            .call(svgTagClasses<Midpoint>().tags(
+            // Midpoints are plain objects, so their `osmIdManager.key()` is
+            // version-less (`id + 'v0'`). Key the memo on the parent way as
+            // well: a midpoint that exits and re-enters (e.g. when zooming)
+            // while the graph is unchanged must not hit a memo entry computed
+            // for a different parent way over the same node pair.
+            .call(tagClasses.tags(
                 function(d) { return d.parents[0].tags; }
-            ));
+            ).keyExt(function(d) { return osmIdManager.key(d.parents[0]); })
+            .graph(graph));
 
         // Propagate data bindings.
         groups.select('polygon.shadow');

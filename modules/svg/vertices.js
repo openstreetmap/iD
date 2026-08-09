@@ -4,10 +4,14 @@ import { select as d3_select } from 'd3-selection';
 import { presetManager } from '../presets';
 import { geoScaleToZoom } from '../geo';
 import { osmIdManager } from '../osm';
-import { svgPassiveVertex, svgPointTransform } from './helpers';
+import { svgAttrIfChanged, svgPassiveVertex, svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 
 export function svgVertices(projection, context) {
+    // Hoisted per renderer so the class memo's `_id` is stable across
+    // redraws and the memo can actually hit on pan/zoom.
+    var tagClasses = svgTagClasses();
+
     var radiuses = {
         //       z16-, z17,   z18+,  w/icon
         shadow: [6,    7.5,   7.5,   12],
@@ -90,8 +94,8 @@ export function svgVertices(projection, context) {
                         }
 
                         d3_select(this)
-                            .attr('r', r)
-                            .attr('visibility', (i && klass === 'fill') ? 'hidden' : null);
+                            .call(svgAttrIfChanged, 'r', function() { return String(r); })
+                            .call(svgAttrIfChanged, 'visibility', function() { return (i && klass === 'fill') ? 'hidden' : null; });
                     });
             });
         }
@@ -128,7 +132,7 @@ export function svgVertices(projection, context) {
         // update
         groups = groups
             .merge(enter)
-            .attr('transform', svgPointTransform(projection))
+            .call(svgAttrIfChanged, 'transform', svgPointTransform(projection))
             .classed('sibling', function(d) { return d.id in sets.selected; })
             .classed('shared', function(d) { return graph.isShared(d); })
             .classed('endpoint', function(d) { return d.isEndpoint(graph); })
@@ -141,7 +145,7 @@ export function svgVertices(projection, context) {
             .classed('retagged', function(d) {
                 return base.entities[d.id] && !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
             })
-            .call(svgTagClasses())
+            .call(tagClasses.graph(graph))
             .call(updateAttributes);
 
         // Vertices with icons get a `use`.
@@ -195,7 +199,7 @@ export function svgVertices(projection, context) {
             .attr('d', 'M0,0H0')
             .merge(viewfields)
             .attr('marker-start', d => 'url(#ideditor-viewfield-marker' + (d.type === 'side' ? '-side' : '') + (wireframe ? '-wireframe' : '') + ')')
-            .attr('transform', d => `rotate(${d.angle})`);
+            .call(svgAttrIfChanged, 'transform', d => `rotate(${d.angle})`);
     }
 
 
@@ -255,7 +259,7 @@ export function svgVertices(projection, context) {
                 return 'node vertex target target-allowed '
                 + targetClass + d.id;
             })
-            .attr('transform', getTransform);
+            .call(svgAttrIfChanged, 'transform', getTransform);
 
 
         // NOPE
@@ -273,7 +277,7 @@ export function svgVertices(projection, context) {
             .attr('r', function(d) { return (_radii[d.properties.entity.id] || radiuses.shadow[3]); })
             .merge(nopes)
             .attr('class', function(d) { return 'node vertex target target-nope ' + nopeClass + d.id; })
-            .attr('transform', getTransform);
+            .call(svgAttrIfChanged, 'transform', getTransform);
     }
 
 

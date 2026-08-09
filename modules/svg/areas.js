@@ -2,11 +2,15 @@ import { deepEqual } from 'fast-equals';
 import { bisector as d3_bisector } from 'd3-array';
 
 import { osmIdManager } from '../osm';
-import { svgPath, svgSegmentWay } from './helpers';
+import { svgAttrIfChanged, svgPath, svgSegmentWay } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { svgTagPattern } from './tag_pattern';
 
 export function svgAreas(projection, context) {
+
+    // Hoisted per renderer so the class memo's `_id` is stable across
+    // redraws and the memo can actually hit on pan/zoom.
+    var tagClasses = svgTagClasses();
 
 
     function getPatternStyle(tags) {
@@ -62,7 +66,7 @@ export function svgAreas(projection, context) {
         targets.enter()
             .append('path')
             .merge(targets)
-            .attr('d', getPath)
+            .call(svgAttrIfChanged, 'd', getPath)
             .attr('class', function(d) { return 'way area target target-allowed ' + targetClass + d.id; })
             .classed('segment-edited', segmentWasEdited);
 
@@ -81,7 +85,7 @@ export function svgAreas(projection, context) {
         nopes.enter()
             .append('path')
             .merge(nopes)
-            .attr('d', getPath)
+            .call(svgAttrIfChanged, 'd', getPath)
             .attr('class', function(d) { return 'way area target target-nope ' + nopeClass + d.id; })
             .classed('segment-edited', segmentWasEdited);
     }
@@ -133,7 +137,7 @@ export function svgAreas(projection, context) {
 
         clipPaths.merge(clipPathsEnter)
            .selectAll('path')
-           .attr('d', path);
+           .call(svgAttrIfChanged, 'd', path);
 
 
         var drawLayer = selection.selectAll('.layer-osm.areas');
@@ -172,12 +176,28 @@ export function svgAreas(projection, context) {
             .merge(paths)
             .each(function(entity) {
                 var layer = this.parentNode.__data__;
-                this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
+                var klass = entity.type + ' area ' + layer + ' ' + entity.id;
+                // Only write the base class when it isn't already present.
+                // On update redraws the element's class already starts with
+                // it (plus state classes like `added` and the `tag-*` classes
+                // appended below), so a raw `!==` comparison would rewrite
+                // the attribute on every redraw and defeat the
+                // unchanged-attribute-write optimization.
+                var current = this.getAttribute('class');
+                if (current !== klass && !(current && current.startsWith(klass + ' '))) {
+                    this.setAttribute('class', klass);
+                }
 
                 if (layer === 'fill') {
-                    this.setAttribute('clip-path', 'url(#ideditor-' + entity.id + '-clippath)');
-                    this.style.fill = getPatternStyle(entity.tags);
-                    this.style.stroke = this.style.fill;
+                    var clipPath = 'url(#ideditor-' + entity.id + '-clippath)';
+                    if (this.getAttribute('clip-path') !== clipPath) {
+                        this.setAttribute('clip-path', clipPath);
+                    }
+                    var fill = getPatternStyle(entity.tags);
+                    if (this.style.fill !== fill) {
+                        this.style.fill = fill;
+                        this.style.stroke = fill;
+                    }
                 }
             })
             .classed('added', function(d) {
@@ -193,8 +213,8 @@ export function svgAreas(projection, context) {
                     base.entities[d.id] &&
                     !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
             })
-            .call(svgTagClasses())
-            .attr('d', path);
+            .call(tagClasses.graph(graph))
+            .call(svgAttrIfChanged, 'd', path);
 
 
         // Draw touch targets..

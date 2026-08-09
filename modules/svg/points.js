@@ -4,12 +4,16 @@ import { select as d3_select } from 'd3';
 
 import { geoScaleToZoom } from '../geo';
 import { osmIdManager } from '../osm';
-import { svgPointTransform } from './helpers';
+import { svgAttrIfChanged, svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { presetManager } from '../presets';
 import { textWidth, isAddressPoint } from './labels';
 
 export function svgPoints(projection, context) {
+
+    // Hoisted per renderer so the class memo's `_id` is stable across
+    // redraws and the memo can actually hit on pan/zoom.
+    var tagClasses = svgTagClasses();
 
     function markerPath(selection, klass) {
         selection
@@ -82,7 +86,7 @@ export function svgPoints(projection, context) {
             .attr('height', d => d.properties.isAddr ? 16 : 30)
             .attr('class', function(d) { return 'node point target ' + fillClass + d.id; })
             .merge(targets)
-            .attr('transform', getTransform);
+            .call(svgAttrIfChanged, 'transform', getTransform);
     }
 
 
@@ -146,7 +150,7 @@ export function svgPoints(projection, context) {
 
         groups = groups
             .merge(enter)
-            .attr('transform', svgPointTransform(projection))
+            .call(svgAttrIfChanged, 'transform', svgPointTransform(projection))
             .classed('added', function(d) {
                 return !base.entities[d.id]; // if it doesn't exist in the base graph, it's new
             })
@@ -156,7 +160,7 @@ export function svgPoints(projection, context) {
             .classed('retagged', function(d) {
                 return base.entities[d.id] && !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
             })
-            .call(svgTagClasses());
+            .call(tagClasses.graph(graph));
 
         groups.select('.shadow');   // propagate bound data
         groups.select('.stroke');   // propagate bound data
