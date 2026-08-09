@@ -326,6 +326,11 @@ export function svgLabels(projection, context) {
             area: []
         };
 
+        // The label layer node is the same for every label, so look it up once.
+        // It is created once in svgOsm and never replaced, so it stays valid
+        // for the whole pass.
+        var labelLayerNode = selection.select('g.layer-osm.labels').node();
+
         // Try and find a valid label for labellable entities
         for (k = 0; k < labelable.length; k++) {
             var fontSize = labelStack[k][3];
@@ -337,7 +342,7 @@ export function svgLabels(projection, context) {
                 let name = geometry === 'line'
                     ? utilDisplayNameForPath(entity)
                     : utilDisplayName(entity, { isMapLabel: true });
-                var width = name && textWidth(name, fontSize, selection.select('g.layer-osm.labels').node());
+                var width = name && textWidth(name, fontSize, labelLayerNode);
                 var p = null;
 
                 if (geometry === 'point' || geometry === 'vertex') {
@@ -349,7 +354,7 @@ export function svgLabels(projection, context) {
                     let charsRemaining = utilUnicodeCharsCount(name) - 1;
                     while (renderAs.isAddr && width > 36) {
                         name = `${utilUnicodeCharsTruncated(name.replace(/…$/, ''), charsRemaining--)}…`;
-                        width = textWidth(name, fontSize, selection.select('g.layer-osm.labels').node());
+                        width = textWidth(name, fontSize, labelLayerNode);
                     }
 
                     p = getPointLabel(entity, width, fontSize, renderAs);
@@ -793,7 +798,41 @@ export function svgLabels(projection, context) {
 }
 
 
+// NOTE: `_textWidthCache` is shared by all three measurement paths — first-pass
+// widths measured on the offscreen canvas, widths that fell back to the
+// detached SVG element, and any that fell back to measuring attached. The
+// populations are identical today only because labels carry no font-family of
+// their own (every path measures with the body font stack, which is what
+// labels inherit). If a CSS font-family rule is ever added to
+// .arealabel/.linelabel/.pointlabel, the paths would silently produce
+// different widths for the same (size, text) key — key the cache by font then.
 const _textWidthCache = {};
+// Offscreen canvas for label text measurement — canvas 2D `measureText` is
+// substantially faster than SVG `getComputedTextLength` (the latter was ~14%
+// of JS busy time in the settled-editor zoom trace), and it never touches the
+// DOM or forces layout. Reused for every measurement; never attached.
+const _measureCtx = document.createElement('canvas').getContext('2d');
+// Detached SVG text element — kept only as the fallback measurement path
+// (e.g. when the canvas 2D context is unavailable or measures 0 width).
+const _measureTextElem = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+// Capture the label font lazily on the first textWidth() call, from the root
+// stack. Labels carry no font-family of their own, so they inherit the one on
+// <body>; measuring with it on the canvas/detached element below avoids
+// forcing a synchronous style/layout flush of the whole map on every cache
+// miss — including the very first label pass, when no real label exists in
+// the container yet to copy from. Capturing at module load would be fragile:
+// the bundle loads async and can execute before the stylesheets finish, so
+// the captured family could freeze in the UA default — and any future CSS
+// font-family on a label ancestor would never be seen. By the first
+// measurement the document is interactive and CSS is applied.
+let _labelFontFamily;
+function labelFontFamily() {
+    if (_labelFontFamily === undefined) {
+        _labelFontFamily = getComputedStyle(document.body).fontFamily;
+    }
+    return _labelFontFamily;
+}
+
 export function textWidth(text, size, container) {
     _textWidthCache[size] ||= {};
     let c = _textWidthCache[size];
@@ -801,14 +840,41 @@ export function textWidth(text, size, container) {
     if (c[text]) {
         return c[text];
     }
-    const elem = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    elem.style.fontSize = `${size}px`;
-    elem.style.fontWeight = 'bold';
-    elem.textContent = text;
-    container.appendChild(elem);
-    c[text] = elem.getComputedTextLength();
-    elem.remove();
-    return c[text];
+
+    const fontFamily = labelFontFamily();
+
+    let width;
+    if (_measureCtx && fontFamily) {
+        _measureCtx.font = `bold ${size}px ${fontFamily}`;
+        width = _measureCtx.measureText(text).width;
+    }
+
+    // Fall back to the detached SVG element if the canvas context was
+    // unavailable, or if the canvas measurement came back empty.
+    if (width === undefined || (width === 0 && text.length > 0)) {
+        if (fontFamily) {
+            _measureTextElem.style.fontSize = `${size}px`;
+            _measureTextElem.style.fontWeight = 'bold';
+            _measureTextElem.style.fontFamily = fontFamily;
+            _measureTextElem.textContent = text;
+            width = _measureTextElem.getComputedTextLength();
+        }
+
+        // Fall back to measuring attached if the computed body font was empty,
+        // or if the detached measurement came back empty.
+        if (width === undefined || (width === 0 && text.length > 0)) {
+            const elem = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            elem.style.fontSize = `${size}px`;
+            elem.style.fontWeight = 'bold';
+            elem.textContent = text;
+            container.appendChild(elem);
+            width = elem.getComputedTextLength();
+            elem.remove();
+        }
+    }
+
+    c[text] = width;
+    return width;
 }
 
 

@@ -140,6 +140,7 @@ export interface coreContext extends Pick<Dispatch<object, EventMap>, 'on'> {
     surface(): d3.Selection;
     editableDataEnabled(): boolean;
     surfaceRect(): DOMRect;
+    invalidateSurfaceRect(): coreContext;
     editable(): boolean;
 
 
@@ -548,7 +549,46 @@ export function coreContext(this: object): coreContext {
   context.layers = () => _map.layers();
   context.surface = () => _map.surface;
   context.editableDataEnabled = () => _map.editableDataEnabled();
-  context.surfaceRect = () => _map.surface.node().getBoundingClientRect();
+  // Cache the surface rect for the current animation frame. getBoundingClientRect()
+  // on the surface (which contains the whole map DOM) forces layout, so it should
+  // not be called once per consumer per frame. The rect is cached per frame and
+  // self-corrects on the next frame: any change — including CSS-transform
+  // gestures, which move the rect mid-frame — is bounded to one frame, after
+  // which the cache is dropped and the next read measures fresh.
+  let _surfaceRect: DOMRect | undefined;
+  let _surfaceRectFrame = 0;
+  context.surfaceRect = () => {
+    // Without requestAnimationFrame there is no frame boundary to bound the
+    // cache to, so measure directly instead of caching.
+    if (typeof window.requestAnimationFrame !== 'function') {
+      return _map.surface.node().getBoundingClientRect();
+    }
+    if (_surfaceRectFrame === 0) {
+      _surfaceRect = _map.surface.node().getBoundingClientRect();
+      const frame = window.requestAnimationFrame(() => {
+        // Only reset if this is still the current frame, so that a stale
+        // callback from before an invalidateSurfaceRect() can't re-enable
+        // measurement early (which would cost an extra forced-layout read).
+        if (_surfaceRectFrame === frame) {
+          _surfaceRectFrame = 0;
+        }
+      });
+      _surfaceRectFrame = frame;
+    }
+    return _surfaceRect!;
+  };
+  // Drop the cached rect synchronously when the surface size changes.
+  // The resize/sidebar-toggle chain runs entirely inside the event task
+  // (window resize -> ui.onResize -> map.dimensions -> throttled redraw ->
+  // 'drawn' -> edit_menu repositioning), so a reset that waits for the
+  // next animation frame would leave those consumers reading the
+  // pre-resize rect. The rAF reset above still bounds repeated reads
+  // within a single animation frame after the next measurement.
+  context.invalidateSurfaceRect = () => {
+    _surfaceRect = undefined;
+    _surfaceRectFrame = 0;
+    return context;
+  };
   context.editable = () => {
     // don't allow editing during save
     const mode = context.mode();

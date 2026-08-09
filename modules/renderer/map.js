@@ -807,11 +807,23 @@ export function rendererMap(context) {
     map.dimensions = function(val) {
         if (!arguments.length) return _dimensions;
 
-        _dimensions = val;
-        drawLayers.dimensions(_dimensions);
-        context.background().dimensions(_dimensions);
-        projection.clipExtent([[0, 0], _dimensions]);
-        _getMouseCoords = utilFastMouse(supersurface.node());
+        // Early-out on no-op resizes: ui.onResize fires on every window
+        // resize event even when the map size is unchanged, and skipping the
+        // update (including invalidateSurfaceRect) keeps the cached surface
+        // rect alive across those.
+        if (val[0] !== _dimensions[0] || val[1] !== _dimensions[1]) {
+            _dimensions = val;
+            drawLayers.dimensions(_dimensions);
+            context.background().dimensions(_dimensions);
+            projection.clipExtent([[0, 0], _dimensions]);
+            _getMouseCoords = utilFastMouse(supersurface.node());
+
+            // The surface size changed synchronously inside this event task,
+            // so drop the cached surface rect now: consumers that read it
+            // before the next animation frame (e.g. the edit menu repositioning
+            // on 'drawn') must see the new geometry, not the pre-resize rect.
+            context.invalidateSurfaceRect();
+        }
 
         scheduleRedraw();
         return map;
