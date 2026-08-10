@@ -35,6 +35,20 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# Unreleased (2.43.0-dev)
+
+#### :sparkles: Usability & Accessibility
+#### :scissors: Operations
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+#### :bug: Bugfixes
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+#### :hammer: Development
+
+
 # 2.42.0
 ##### 2026-Aug-10
 
@@ -64,7 +78,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Do not select start/end vertex of an area or closed way multiple times when selecting all vertices of a way using the keyboard shortcut ([#12586], thanks [@RudyTheDev])
 * Fix vertices of multipolygons not being movable in some special circumstances ([#10120], thanks [@k-yle])
 * Fix minor bugs with the country and language input fields ([#12652], thanks [@k-yle])
-* Fix a condition where a modified node was falsely categorized as _delted_ in the changeset summary when it was changed from a _point_ to a _vertex_ geometry ([#12709])
+* Fix a condition where a modified node was falsely categorized as _deleted_ in the changeset summary when it was changed from a _point_ to a _vertex_ geometry ([#12709])
 #### :earth_asia: Localization
 * Improve some edge cases of rendering of mixed right-to-left and left-to-right text ([#8713])
 * When labelling features, match locale codes like `zh-CN` to name tags like `name:zh-Hans` ([#10911], thanks [@k-yle])
