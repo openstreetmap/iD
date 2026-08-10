@@ -1,16 +1,21 @@
 import { locationManager, presetIndex } from '../../../modules';
 
 describe('iD.presetIndex', function () {
-    var _savedPresets, _savedAreaKeys;
+    var _savedPresets, _savedAreaKeys, _savedLocationSetsAt;
 
     beforeEach(() => {
         _savedPresets = iD.fileFetcher.cache().preset_presets;
         _savedAreaKeys = iD.osmAreaKeys;
+        _savedLocationSetsAt = locationManager.locationSetsAt;
     });
 
     afterEach(() => {
         iD.fileFetcher.cache().preset_presets = _savedPresets;
         iD.osmSetAreaKeys(_savedAreaKeys);
+        // the #11405 test below replaces locationSetsAt on the shared
+        // singleton; restore it so other spec files in the same vitest
+        // worker do not see the stub (this leaked across files before)
+        locationManager.locationSetsAt = _savedLocationSetsAt;
     });
 
 
