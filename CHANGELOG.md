@@ -35,7 +35,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.42.0-dev)
+# 2.42.0
+##### 2026-Aug-10
 
 #### :newspaper: News
 * Update id-tagging-schema to [version 7](https://github.com/ideditor/schema-builder/blob/main/MIGRATION_GUIDE.md#v7-migration-guide), allowing to add more detailed information to be defined for presets and fields, adding [_pinhead_](https://pinhead.ink/) icon set, and unlocking additional functionality to be implemented for presets in the future ([#12358])
@@ -51,7 +52,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 * Allow circularize operation also when multiple selected ways form a closed loop ([#12457])
 * Allow follow operation in more situations (e.g. when there are multiple coincident ways to follow) ([#9340], thanks [@jguddas]), or when appending a line from its start node ([#9734])
-#### :camera: Street-Level
 #### :white_check_mark: Validation
 * Show which field (or tag) produced an _invalid URL_ validation message ([#12449])
 * Fix false positive in oneway road detection when secondary oneway tags (like `piste:type=downhill`) are present ([#8724])
@@ -69,14 +69,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Improve some edge cases of rendering of mixed right-to-left and left-to-right text ([#8713])
 * When labelling features, match locale codes like `zh-CN` to name tags like `name:zh-Hans` ([#10911], thanks [@k-yle])
 * The autocomplete for changeset comments now supports mobile devices, and keyboard layouts with dead keys or IME popups ([#12565], thanks [@k-yle])
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * For radio fields: show "unknown" values (that don't match one of the specified radio options) as a temporary placeholder raw value option ([#12082])
 * Show tooltips with tag values (and descriptions if available) for options of `radio` and `check` fields (thanks [@bhavyaKhatri2703])
 #### :hammer: Development
 * Fix unit tests failing with nodejs v26 ([#12401], thanks [@brianstrauch])
 * Remove the unused lane parsing code, which was left over from an unfinished lane editor and was not reachable from any preset ([#12664], thanks [@wantaekchoi])
+* Converted a number of source code files from javascript to typescript (thanks [@k-yle])
 
 [#8713]: https://github.com/openstreetmap/iD/issues/8713
 [#8724]: https://github.com/openstreetmap/iD/issues/8724
