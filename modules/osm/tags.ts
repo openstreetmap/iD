@@ -277,7 +277,7 @@ export const osmSemipavedTags: TagDictionary<boolean> = {
  *   - coastlines have the land on the right hand side, but we want to mark the ocean
  *   - guard rails have the road on the right, but we use dedicated markers that represent the posts of the guard rail
  *   - embankments can be on either or (typically) both sides of a road  or railway, they use inverted triangles as markers
- *   - cuttings (see embankments, triangles have reversed directions) 
+ *   - cuttings (see embankments, triangles have reversed directions)
  */
 export const osmSidednessTags: TagDictionary<true | string> = {
     'natural': {
