@@ -47,7 +47,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
+* Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
 
+[#12679]: https://github.com/openstreetmap/iD/pull/12679
 
 # 2.42.0
 ##### 2026-Aug-10

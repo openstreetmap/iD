@@ -447,10 +447,6 @@ A tag of a feature has an unexpected syntax.
 
 * `email`: the `email` tag does not look like "user@example.com"
 
-##### `maprules`
-
-An issue with the active [MapRules](https://github.com/radiant-maxar/maprules) validation rules.
-
 ##### `mismatched_geometry`
 
 A feature's tags indicate it should have a different geometry than it currently does.
