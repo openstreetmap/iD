@@ -172,6 +172,16 @@ en:
       not_downloaded:
         single: This can't be made square because parts of it have not yet been downloaded.
         multiple: These can't be made square because parts of them have not yet been downloaded.
+    distribute:
+      title: Distribute Evenly
+      description: Spread out these points evenly along a straight line.
+      annotation: Distributed {n} points.
+      disabled:
+        too_few: Distributing requires at least 3 points.
+        already_distributed: These points can't be made distributed any more evenly than they already are.
+        too_large: These points can't be distributed because not enough of them are currently visible.
+        not_downloaded: These points can't be distributed because parts of them have not yet been downloaded.
+        connected_to_hidden: These points can't be distributed because some are connected to hidden features.
     straighten:
       title: Straighten
       description:
@@ -2256,6 +2266,7 @@ en:
         rotate: "Rotate selected features"
         orthogonalize: "Square corners of a line or area"
         straighten: "Straighten a line or points"
+        distribute: "Distribute points evenly along a line"
         circularize: "Circularize a closed line or area"
         reflect_long: "Flip features across the longer axis"
         reflect_short: "Flip features across the shorter axis"

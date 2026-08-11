@@ -330,6 +330,11 @@
             "text": "shortcuts.editing.operations.straighten"
           },
           {
+            "modifiers": ["⇧"],
+            "shortcuts": ["operations.straighten.key"],
+            "text": "shortcuts.editing.operations.distribute"
+          },
+          {
             "shortcuts": ["operations.circularize.key"],
             "text": "shortcuts.editing.operations.circularize"
           },
