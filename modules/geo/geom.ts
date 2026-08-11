@@ -280,10 +280,14 @@ export function geoPolygonIntersectsPolygon(outer: Vec2[], inner: Vec2[], checkS
 }
 
 
+/** can return `undefined` if there are <3 points, or if all points form a straight line */
 // http://gis.stackexchange.com/questions/22895/finding-minimum-area-rectangle-for-given-points
 // http://gis.stackexchange.com/questions/3739/generalisation-strategies-for-building-outlines/3756#3756
 export function geoGetSmallestSurroundingRectangle(points: Vec2[]) {
-    var hull = d3_polygonHull(points)!;
+    var hull = d3_polygonHull(points);
+
+    if (!hull || hull.length < 3) return undefined;
+
     var centroid = d3_polygonCentroid(hull);
     var minArea = Infinity;
     var ssrExtent!: geoExtent;
@@ -311,6 +315,37 @@ export function geoGetSmallestSurroundingRectangle(points: Vec2[]) {
         poly: geoRotate(ssrExtent.polygon(), ssrAngle, centroid),
         angle: ssrAngle
     };
+}
+
+
+/**
+ * returns the endpoints of an axis of symmetry of the `points` bounding rect.
+ * By default this is the long axis, unless `useLongAxis` is false.
+ */
+export function geoGetAxis(points: Vec2[], useLongAxis = true): [Vec2, Vec2] | undefined {
+    const ssr = geoGetSmallestSurroundingRectangle(points);
+    if (!ssr) {
+        // if there are exactly 2 or 3 points, then use the outermost points
+        const hull = d3_polygonHull(points) || points;
+        if (hull.length === 2) return [hull[0], hull[1]];
+
+        // if there are exactly 0 or 1 points, then there is no axis
+        return undefined;
+    }
+
+    // Choose line pq = axis of symmetry.
+    // The shape's surrounding rectangle has 2 axes of symmetry.
+    // Snap points to the long axis
+    const p1: Vec2 = [(ssr.poly[0][0] + ssr.poly[1][0]) / 2, (ssr.poly[0][1] + ssr.poly[1][1]) / 2 ];
+    const q1: Vec2 = [(ssr.poly[2][0] + ssr.poly[3][0]) / 2, (ssr.poly[2][1] + ssr.poly[3][1]) / 2 ];
+    const p2: Vec2 = [(ssr.poly[3][0] + ssr.poly[4][0]) / 2, (ssr.poly[3][1] + ssr.poly[4][1]) / 2 ];
+    const q2: Vec2 = [(ssr.poly[1][0] + ssr.poly[2][0]) / 2, (ssr.poly[1][1] + ssr.poly[2][1]) / 2 ];
+
+    const isLong = (geoVecLength(p1, q1) > geoVecLength(p2, q2));
+    if (isLong === useLongAxis) {
+        return [p1, q1];
+    }
+    return [p2, q2];
 }
 
 
