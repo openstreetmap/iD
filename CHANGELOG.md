@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.43.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Increase the colour contrast of the blue text used for links and preset fields ([#12724], thanks [@k-yle])
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
 * Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thanks [@Geo-2695])
 * Allow to press `=` key to switch between _key_ and _value_ part of tags in the raw tag editor ([#12828], thanks [@hemaksh2007jain-bit]) and allow to press _Enter_ key to switch between tag parts or next tag in the raw tag editor
@@ -62,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8424]: https://github.com/openstreetmap/iD/issues/8424
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
+[#12724]: https://github.com/openstreetmap/iD/pull/12724
 [#12736]: https://github.com/openstreetmap/iD/pull/12736
 [#12740]: https://github.com/openstreetmap/iD/issues/12740
 [#12800]: https://github.com/openstreetmap/iD/pull/12800
