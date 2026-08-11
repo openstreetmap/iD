@@ -1,6 +1,7 @@
 import type { coreGraph } from '../core';
 import type { EntityId, OsmEntity } from '../osm';
 import { presetManager } from '../presets';
+import { utilHasDirectionDegrees } from './direction_degrees';
 
 
 /**
@@ -13,7 +14,7 @@ export function utilIsDirectionKey(key: string | undefined): key is TagKey {
 
 /**
  * Whether the tag-reference UI should mention Rotate (R).
- * Preset fields pass `fieldType`; raw tags fall back to a numeric value check.
+ * Preset fields pass `fieldType`; raw tags fall back to a degrees/cardinal check.
  */
 export function utilShowsDirectionRotateHint(what: {
     key?: string;
@@ -22,7 +23,7 @@ export function utilShowsDirectionRotateHint(what: {
 }): boolean {
     if (!utilIsDirectionKey(what.key)) return false;
     if (what.fieldType) return what.fieldType === 'number';
-    return what.value !== undefined && what.value !== '' && isFinite(Number(what.value));
+    return utilHasDirectionDegrees(what.value);
 }
 
 
@@ -63,8 +64,9 @@ export function utilDirectionFieldKey(
 
 /**
  * Resolve which direction tag key rotate should use for a node.
- * Prefers an existing numeric `*:direction` / `direction` tag, otherwise a
- * numeric direction field on the preset (so R can set an absent tag).
+ * Prefers an existing degrees/cardinal `*:direction` / `direction` tag (including
+ * multi-value), otherwise a numeric direction field on the preset (so R can set
+ * an absent tag).
  */
 export function utilRotatePointDirectionKey(
     node: OsmEntity,
@@ -74,7 +76,7 @@ export function utilRotatePointDirectionKey(
 
     for (const key of Object.keys(node.tags)) {
         if (!utilIsDirectionKey(key)) continue;
-        if (!isFinite(Number(node.tags[key]))) continue;
+        if (!utilHasDirectionDegrees(node.tags[key])) continue;
         // Prefer prefixed keys (e.g. camera:direction) over plain direction.
         if (key !== 'direction') return key;
         plainDirectionKey = key;

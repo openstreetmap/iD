@@ -46,6 +46,20 @@ describe('iD.operationRotate', () => {
         expect(iD.operationRotate(fakeContext, [node.id]).available()).toBeTruthy();
     });
 
+    it('is available for points with multi-value direction tags', () => {
+        const node = new iD.osmNode({ id: 'n1', tags: { direction: '120;300' } });
+        graph = new iD.coreGraph().replace(node);
+
+        expect(iD.operationRotate(fakeContext, [node.id]).available()).toBeTruthy();
+    });
+
+    it('is available for points with cardinal direction tags', () => {
+        const node = new iD.osmNode({ id: 'n1', tags: { direction: 'N' } });
+        graph = new iD.coreGraph().replace(node);
+
+        expect(iD.operationRotate(fakeContext, [node.id]).available()).toBeTruthy();
+    });
+
     it('is available for points with numeric camera:direction tags', () => {
         const node = new iD.osmNode({ id: 'n1', tags: { 'camera:direction': '90' } });
         graph = new iD.coreGraph().replace(node);

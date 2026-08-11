@@ -1,11 +1,12 @@
 import type { Action } from '../core/history';
 import type { EntityId } from '../osm';
 import { utilRotatePointDirectionKey } from '../util/direction_field';
-import { utilWrap } from '../util';
+import { utilRetargetDirectionDegreesValue } from '../util/direction_degrees';
 
 
 /**
- * Set a node's numeric direction tag to `degrees` (OSM azimuth, clockwise from north).
+ * Set a node's direction tag so it aims at `degrees` (OSM azimuth, clockwise from north).
+ * Multi-value tags keep relative offsets; cardinals become numeric degrees.
  */
 export function actionRotatePointDirection(
     entityID: EntityId,
@@ -19,8 +20,10 @@ export function actionRotatePointDirection(
         const directionKey = key || utilRotatePointDirectionKey(entity, graph);
         if (!directionKey) return graph;
 
-        // Keep values aligned with iD direction tagging (whole degrees, [0, 360)).
-        const nextDirection = Math.round(utilWrap(degrees, 360)).toString();
+        const nextDirection = utilRetargetDirectionDegreesValue(
+            entity.tags[directionKey],
+            degrees
+        );
         if (nextDirection === entity.tags[directionKey]) return graph;
 
         const tags = Object.assign({}, entity.tags, { [directionKey]: nextDirection });

@@ -53,4 +53,40 @@ describe('iD.actionRotatePointDirection', () => {
 
         expect(graph.entity(node.id).tags.direction).toEqual('10');
     });
+
+    it('preserves two-sided offsets with a shared delta', () => {
+        const node = new iD.osmNode({ tags: { direction: '120;300' } });
+        const graph = iD.actionRotatePointDirection(node.id, 90)(
+            new iD.coreGraph().replace(node)
+        );
+
+        expect(graph.entity(node.id).tags.direction).toEqual('90;270');
+    });
+
+    it('converts cardinals to numeric degrees', () => {
+        const node = new iD.osmNode({ tags: { direction: 'N' } });
+        const graph = iD.actionRotatePointDirection(node.id, 45)(
+            new iD.coreGraph().replace(node)
+        );
+
+        expect(graph.entity(node.id).tags.direction).toEqual('45');
+    });
+
+    it('converts lowercase intercardinals to numeric degrees', () => {
+        const node = new iD.osmNode({ tags: { direction: 'ne' } });
+        const graph = iD.actionRotatePointDirection(node.id, 90)(
+            new iD.coreGraph().replace(node)
+        );
+
+        expect(graph.entity(node.id).tags.direction).toEqual('90');
+    });
+
+    it('preserves junk segments while retargeting parseable ones', () => {
+        const node = new iD.osmNode({ tags: { direction: '120;error;300' } });
+        const graph = iD.actionRotatePointDirection(node.id, 90)(
+            new iD.coreGraph().replace(node)
+        );
+
+        expect(graph.entity(node.id).tags.direction).toEqual('90;error;270');
+    });
 });

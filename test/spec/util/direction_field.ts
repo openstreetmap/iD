@@ -32,10 +32,12 @@ describe('iD.utilDirectionFieldKey / iD.utilRotatePointDirectionKey', () => {
         expect(iD.utilIsDirectionKey(undefined)).toBeFalsy();
     });
 
-    it('shows the rotate hint only for numeric direction fields or values', () => {
+    it('shows the rotate hint only for numeric direction fields or degrees values', () => {
         expect(iD.utilShowsDirectionRotateHint({ key: 'direction', fieldType: 'number' })).toBeTruthy();
         expect(iD.utilShowsDirectionRotateHint({ key: 'direction', fieldType: 'combo' })).toBeFalsy();
         expect(iD.utilShowsDirectionRotateHint({ key: 'direction', value: '90' })).toBeTruthy();
+        expect(iD.utilShowsDirectionRotateHint({ key: 'direction', value: '120;300' })).toBeTruthy();
+        expect(iD.utilShowsDirectionRotateHint({ key: 'direction', value: 'N' })).toBeTruthy();
         expect(iD.utilShowsDirectionRotateHint({ key: 'direction', value: 'forward' })).toBeFalsy();
         expect(iD.utilShowsDirectionRotateHint({ key: 'direction' })).toBeFalsy();
     });
@@ -66,6 +68,15 @@ describe('iD.utilDirectionFieldKey / iD.utilRotatePointDirectionKey', () => {
         const graph = new iD.coreGraph().replace(node);
 
         expect(iD.utilRotatePointDirectionKey(node, graph)).toEqual('camera:direction');
+    });
+
+    it('recognizes multi-value and cardinal direction tags', async () => {
+        await (iD.presetManager as any).ensureLoaded(true);
+        const multi = new iD.osmNode({ tags: { direction: '120;300' } });
+        const cardinal = new iD.osmNode({ tags: { direction: 'N' } });
+
+        expect(iD.utilRotatePointDirectionKey(multi, new iD.coreGraph().replace(multi))).toEqual('direction');
+        expect(iD.utilRotatePointDirectionKey(cardinal, new iD.coreGraph().replace(cardinal))).toEqual('direction');
     });
 
     it('falls back to a numeric preset field when the tag is absent', async () => {
