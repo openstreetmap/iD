@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
+* fix the crossing_ways validator not working ([#12734], thanks [@k-yle])
 #### :bug: Bugfixes
 #### :earth_asia: Localization
 #### :hourglass: Performance
@@ -50,6 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
 
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
+[#12734]: https://github.com/openstreetmap/iD/pull/12734
 
 # 2.42.0
 ##### 2026-Aug-10
