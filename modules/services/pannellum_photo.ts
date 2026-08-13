@@ -1,21 +1,40 @@
 import { select as d3_select } from 'd3-selection';
-import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { dispatch as d3_dispatch, type Dispatch } from 'd3-dispatch';
 import { utilRebind } from '../util';
+import type { coreContext } from '../core';
 
 
 const pannellumViewerCSS = 'pannellum/pannellum.css';
 const pannellumViewerJS = 'pannellum/pannellum.js';
 
-export async function pannellumPhotoFrame(context, selection) {
+export interface PhotoFramePhoto {
+    image_path: string;
+    preview_path?: Pannellum.ConfigOptions['preview'];
+    ca?: Pannellum.ConfigOptions['northOffset'];
+}
+
+export interface PhotoFrame {
+    event: Pick<Dispatch<object, { viewerChanged: [] }>, 'on'>;
+
+    loadPannellum?(context: coreContext): Promise<[void, void]>;
+    showPhotoFrame(selection: d3.Selection): PhotoFrame;
+    hidePhotoFrame(selection: d3.Selection): PhotoFrame;
+    selectPhoto(photo: PhotoFramePhoto, keepOrientation?: boolean): PhotoFrame;
+    getYaw: Pannellum.Viewer['getYaw'];
+    getPitch?: Pannellum.Viewer['getPitch'];
+    getHfov?: Pannellum.Viewer['getHfov'];
+}
+
+export async function pannellumPhotoFrame(context: coreContext, selection: d3.Selection<HTMLDivElement>) {
     const dispatch = d3_dispatch('viewerChanged');
 
-    const module = {};
+    const module: PhotoFrame = function() {};
     module.event = utilRebind(module, dispatch, 'on');
     module.loadPannellum = function(context) {
         const head = d3_select('head');
 
         return Promise.all([
-            new Promise((resolve, reject) => {
+            new Promise<void>((resolve, reject) => {
                 // load pannellum viewer css
                 head
                     .selectAll('#ideditor-pannellum-viewercss')
@@ -29,7 +48,7 @@ export async function pannellumPhotoFrame(context, selection) {
                     .on('load.pannellum', resolve)
                     .on('error.pannellum', reject);
             }),
-            new Promise((resolve, reject) => {
+            new Promise<void>((resolve, reject) => {
                 // load pannellum viewer js
                 head
                     .selectAll('#ideditor-pannellum-viewerjs')
@@ -45,9 +64,9 @@ export async function pannellumPhotoFrame(context, selection) {
         ]);
     };
 
-    let _currScenes = [];
+    let _currScenes: string[] = [];
     let _pannellumViewer;
-    let _activeSceneKey;
+    let _activeSceneKey: string;
 
     selection
         .append('div')
@@ -83,7 +102,6 @@ export async function pannellumPhotoFrame(context, selection) {
 
     /**
      * Shows the photo frame if hidden
-     * @param {*} context the HTML wrap of the frame
      */
     module.showPhotoFrame = function(context) {
         const isHidden = context.selectAll('.photo-frame.pannellum-frame.hide').size();
@@ -103,7 +121,6 @@ export async function pannellumPhotoFrame(context, selection) {
 
     /**
      * Hides the photo frame if shown
-     * @param {*} context the HTML wrap of the frame
      */
     module.hidePhotoFrame = function(viewerContext) {
         viewerContext
@@ -115,14 +132,14 @@ export async function pannellumPhotoFrame(context, selection) {
 
     /**
      * Renders an image inside the frame
-     * @param {*} data the image data, it should contain an image_path attribute, a link to the actual image.
-     * @param {boolean} keepOrientation if true, HFOV, pitch and yaw will be kept between images
+     * @param data the image data, it should contain an image_path attribute, a link to the actual image.
+     * @param keepOrientation if true, HFOV, pitch and yaw will be kept between images
      */
     module.selectPhoto = function(data, keepOrientation) {
         const key = data.image_path;
         _activeSceneKey = key;
         if (!_currScenes.includes(key)) {
-            let newSceneOptions = {
+            let newSceneOptions: Pannellum.ConfigOptions = {
                 showFullscreenCtrl: false,
                 autoLoad: false,
                 compass: false,
@@ -143,8 +160,8 @@ export async function pannellumPhotoFrame(context, selection) {
 
         if (keepOrientation) {
             yaw = module.getYaw();
-            pitch = module.getPitch();
-            hfov = module.getHfov();
+            pitch = module.getPitch!();
+            hfov = module.getHfov!();
         }
         if (_pannellumViewer.isLoaded() !== false) {
             _pannellumViewer.loadScene(key, pitch, yaw, hfov);
@@ -167,7 +184,7 @@ export async function pannellumPhotoFrame(context, selection) {
         }
 
         if (_currScenes.length > 3) {
-            const old_key = _currScenes.shift();
+            const old_key = _currScenes.shift()!;
             _pannellumViewer.removeScene(old_key);
         }
 

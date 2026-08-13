@@ -534,7 +534,7 @@ export function utilPrefixCSSProperty(property: string): string | false {
 
 
 let transformProperty;
-export function utilSetTransform(el: d3.Selection, x: number, y: number, scale: number): d3.Selection {
+export function utilSetTransform<T extends d3.Selection<any>>(el: T, x: number, y: number, scale: number): T {
     transformProperty ||= utilPrefixCSSProperty('Transform');
     const prop = transformProperty;
     const translate = utilDetect().opera ? 'translate('   + x + 'px,' + y + 'px)'
