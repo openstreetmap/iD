@@ -6,7 +6,7 @@ import * as countryCoder from '@rapideditor/country-coder';
 import { fileFetcher } from '../../core/file_fetcher';
 import { localizer, t } from '../../core/localizer';
 import { services } from '../../services';
-import { fuzzyMatch, uiCombobox } from '../combobox';
+import { fuzzyMatch, uiCombobox, type ComboData } from '../combobox';
 import { svgIcon } from '../../svg/icon';
 
 import { utilKeybinding } from '../../util/keybinding';
@@ -15,6 +15,14 @@ import { uiLengthIndicator } from '../length_indicator';
 import { deprecatedTagValuesByKey } from '../../osm/deprecated';
 import { osmIsoCountryKeys } from '../../osm/tags';
 import { formatTag } from './tag_title';
+import type { CreateUiField, FieldImpl } from '../field';
+import type { presetField } from '../../presets';
+import type { EntityId } from '../../osm';
+import type { Deprecated } from '@openstreetmap/id-tagging-schema';
+
+interface ComboDataWithIndex extends ComboData {
+    index: number;
+}
 
 export {
     uiFieldCombo as uiFieldManyCombo,
@@ -24,7 +32,7 @@ export {
     uiFieldCombo as uiFieldTypeCombo
 };
 
-export function uiFieldCombo(field, context) {
+export const uiFieldCombo: CreateUiField = (field, context) => {
     var dispatch = d3_dispatch('change');
     var _isMulti = (field.type === 'multiCombo' || field.type === 'manyCombo');
     var _isNetwork = (field.type === 'networkCombo');
@@ -33,21 +41,21 @@ export function uiFieldCombo(field, context) {
     var _allowCustomValues = field.type !== 'manyCombo' && field.customValues !== false;
     var _snake_case = (field.snake_case || (field.snake_case === undefined));
     var _combobox = uiCombobox(context, 'combo-' + field.safeid)
-        .caseSensitive(field.caseSensitive);
-    var _container = d3_select(null);
-    var _inputWrap = d3_select(null);
-    var _input = d3_select(null);
-    var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
-    var _comboData = [];
-    var _multiData = [];
-    var _entityIDs = [];
-    var _tags;
-    var _countryCode;
-    var _staticPlaceholder;
-    var _customOptions = [];
+        .caseSensitive(!!field.caseSensitive);
+    var _container = d3_select<HTMLUListElement | HTMLDivElement, 0>(null!);
+    var _inputWrap = d3_select<HTMLLIElement, 0>(null!);
+    var _input = d3_select<HTMLInputElement, 0>(null!);
+    var _lengthIndicator = uiLengthIndicator<HTMLLIElement | HTMLUListElement | HTMLDivElement>(context.maxCharsForTagValue());
+    var _comboData: ComboData[] = [];
+    var _multiData: ComboData[] = [];
+    var _entityIDs: EntityId[] = [];
+    var _tags: TagsMulti;
+    var _countryCode: string | false | undefined | null;
+    var _staticPlaceholder: string | undefined;
+    var _customOptions: ComboData[] = [];
 
     // initialize deprecated tags array
-    var _dataDeprecated = [];
+    var _dataDeprecated: Deprecated = [];
     fileFetcher.get('deprecated')
         .then(function(d) { _dataDeprecated = d; })
         .catch(function() { /* ignore */ });
@@ -59,14 +67,14 @@ export function uiFieldCombo(field, context) {
     }
 
 
-    function snake(s) {
+    function snake(s: string) {
         return s.replace(/\s+/g, '_');
     }
 
-    function splitAtSemicolon(s) {
+    function splitAtSemicolon(s: string) {
         return (s || '').split(';').map(s => s.trim()).filter(Boolean);
     }
-    function clean(s) {
+    function clean(s: string) {
         return splitAtSemicolon(s).join(';');
     }
 
@@ -74,7 +82,7 @@ export function uiFieldCombo(field, context) {
     const showEmojiFlags = utilDetect().os !== 'win';
 
     // adds emoji flags to country dropdown and input
-    function addFlagIcon(selection, name, flag) {
+    function addFlagIcon(selection: d3.Selection, name: string, flag: string | undefined) {
       if (showEmojiFlags && flag) {
         const icon = selection.insert('span', ':first-child')
           .attr('class', 'tag-value-icon');
@@ -89,8 +97,8 @@ export function uiFieldCombo(field, context) {
     }
 
     // cache for language and region maps
-    let languageByCodes = null;
-    let regionByCodes = null;
+    let languageByCodes: Record<string, string> | null = null;
+    let regionByCodes: { [countryCode: string]: { name: string; flag: string | undefined } } | null = null;
 
     // Helper to get regionByCodes
     const buildCountry = () => {
@@ -106,8 +114,8 @@ export function uiFieldCombo(field, context) {
         const code = feature.properties.iso1A2;
         let flag = feature.properties.emojiFlag;
         // if the flag is not present like for 'FX' code, we will look for the corresponding country flag for that code
-        if (!flag && features?.properties?.country) {
-          flag = countryCoder.feature(feature.properties.country).properties.emojiFlag;
+        if (!flag && feature?.properties?.country) { // FIXME: genuine bug
+          flag = countryCoder.feature(feature.properties.country!)!.properties.emojiFlag;
         }
         if (!code) continue;
 
@@ -141,7 +149,7 @@ export function uiFieldCombo(field, context) {
 
     // returns the tag value for a display value
     // (for multiCombo, dval should be the key suffix, not the entire key)
-    function tagValue(dval) {
+    function tagValue(dval: string) {
         dval = clean(dval || '');
 
         var found = getOptions(true).find(function(o) {
@@ -156,7 +164,7 @@ export function uiFieldCombo(field, context) {
         return restrictTagValueSpelling(dval) || undefined;
     }
 
-    function restrictTagValueSpelling(dval) {
+    function restrictTagValueSpelling(dval: string) {
         if (_snake_case) {
             dval = snake(dval);
         }
@@ -173,7 +181,7 @@ export function uiFieldCombo(field, context) {
     }
 
 
-    function getLabelId(field, v) {
+    function getLabelId(field: presetField, v: string) {
         return field.hasTextForStringId(`options.${v}.title`)
             ? `options.${v}.title`
             : `options.${v}`;
@@ -182,7 +190,7 @@ export function uiFieldCombo(field, context) {
 
     // returns the display value for a tag value
     // (for multiCombo, tval should be the key suffix, not the entire key)
-    function displayValue(tval) {
+    function displayValue(tval: string) {
       tval = tval || '';
       // Issue #11652
       // Ignore language: key and when tval is not others
@@ -191,7 +199,7 @@ export function uiFieldCombo(field, context) {
         if (langName) return langName;
       }
 
-      if (osmIsoCountryKeys.has(field.key) && tval) {
+      if (osmIsoCountryKeys.has(field.key!) && tval) {
         const data = buildCountry()[tval];
         if (data) return data.name;
         return tval;
@@ -212,7 +220,7 @@ export function uiFieldCombo(field, context) {
 
     // returns function which renders the display value for a tag value
     // (for multiCombo, tval should be the key suffix, not the entire key)
-    function renderValue(tval) {
+    function renderValue(tval: string): d3.SelectorExact<HTMLElement> {
       tval = tval || '';
 
       // Issue #11652
@@ -222,7 +230,7 @@ export function uiFieldCombo(field, context) {
         if (langName) return selection => selection.text(langName);
       }
 
-      if (osmIsoCountryKeys.has(field.key) && tval) {
+      if (osmIsoCountryKeys.has(field.key!) && tval) {
         const data = buildCountry()[tval];
         if (data) return selection => addFlagIcon(selection, data.name, data.flag);
         return selection => selection.text(tval);
@@ -246,7 +254,7 @@ export function uiFieldCombo(field, context) {
     // objectDifference([{value:1}, {value:2}, {value:3}], [{value:2}])
     // > [{value:1}, {value:3}]
     //
-    function objectDifference(a, b) {
+    function objectDifference(a: ComboData[], b: ComboData[]) {
         return a.filter(function(d1) {
             return !b.some(function(d2) {
                 return d1.value === d2.value;
@@ -255,7 +263,7 @@ export function uiFieldCombo(field, context) {
     }
 
 
-    function initCombo(selection, attachTo) {
+    function initCombo(selection: d3.Selection<HTMLInputElement>, attachTo?: d3.Selection) {
         if (!_allowCustomValues) {
             selection.attr('readonly', 'readonly');
         }
@@ -272,23 +280,23 @@ export function uiFieldCombo(field, context) {
         }
     }
 
-    /** Preset description for this option value. @param {string} value @returns {string|undefined} */
-    function presetDescription(value) {
+    /** Preset description for this option value. */
+    function presetDescription(value: string) {
         return field.hasTextForStringId(`options.${value}.description`)
             ? field.t(`options.${value}.description`) : undefined;
     }
 
-    function getOptions(allOptions) {
+    function getOptions(allOptions?: boolean): ComboData[] {
         const localeCode = localizer.localeCode();
         // Get dropdown list for language: key via localizer instead of taginfo
         if (field.key === 'language:') {
           const langMap = buildLanguages();
 
-          let options = Object.entries(langMap).map(([code, name]) => {
+          let options: ComboData[] = Object.entries(langMap).map(([code, name]) => {
             return {
               key: code,
               value: name,
-              title: formatTag(field.key, code, true),
+              title: formatTag(field.key!, code, true),
               display: selection => selection.text(name)
             };
           });
@@ -317,14 +325,14 @@ export function uiFieldCombo(field, context) {
         }
 
         // Get dropdown list for country key
-        if (osmIsoCountryKeys.has(field.key)) {
+        if (osmIsoCountryKeys.has(field.key!)) {
           const countryMap = buildCountry();
 
-          let options = Object.entries(countryMap).map(([c, {name, flag}]) => {
+          let options = Object.entries(countryMap).map(([c, {name, flag}]): ComboData => {
             return {
               key: c,
               value: name,
-              title: formatTag(field.key, c),
+              title: formatTag(field.key!, c),
               display: selection => addFlagIcon(selection, name, flag),
               sortname: name, // store just the name without emojis to sort the names
               klass: 'has-icon' // to specifically target the emoji css
@@ -332,7 +340,7 @@ export function uiFieldCombo(field, context) {
           });
 
           options.sort((a, b) => {
-            return a.sortname.localeCompare(b.sortname, localeCode);
+            return a.sortname!.localeCompare(b.sortname!, localeCode);
           });
 
           return options;
@@ -344,14 +352,14 @@ export function uiFieldCombo(field, context) {
         if (allOptions !== true) {
             options = field.options || field.options;
         } else {
-            options = [].concat(field.options, field.options).filter(Boolean);
+            options = [...field.options, ...field.options].filter(Boolean);
         }
-        const result = options.map(function(v) {
+        const result = options.map(function(v): ComboData {
             const labelId = getLabelId(field, v);
             return {
                 key: v,
                 value: field.t(labelId, { default: v }),
-                title: formatTag(field.key, v, _isMulti),
+                title: formatTag(field.key!, v, _isMulti),
                 description: presetDescription(v),
                 display: addComboboxIcons(field.t.append(labelId, { default: v }), v),
                 klass: field.hasTextForStringId(labelId) ? '' : 'raw-option'
@@ -366,7 +374,7 @@ export function uiFieldCombo(field, context) {
     }
 
 
-    function setStaticValues(callback, filter) {
+    function setStaticValues(callback: (data: ComboData[]) => void, filter?: (item: ComboData) => void) {
         _comboData = getOptions();
 
         if (filter !== undefined) {
@@ -524,7 +532,7 @@ export function uiFieldCombo(field, context) {
     }
 
 
-    function setPlaceholder(values) {
+    function setPlaceholder(values: ComboData[]) {
 
         if (_isMulti || _isSemi) {
             _staticPlaceholder = field.placeholder() || t('inspector.add');
@@ -542,7 +550,7 @@ export function uiFieldCombo(field, context) {
         }
 
         var ph;
-        if (!_isMulti && !_isSemi && _tags && Array.isArray(_tags[field.key])) {
+        if (!_isMulti && !_isSemi && _tags && Array.isArray(_tags[field.key!])) {
             ph = t('inspector.multiple_values');
         } else {
             ph =  _staticPlaceholder;
@@ -555,12 +563,12 @@ export function uiFieldCombo(field, context) {
         // options and they're all currently used
         var hideAdd = (!_allowCustomValues && !values.length);
         _container.selectAll('.chiplist .input-wrap')
-            .style('display', hideAdd ? 'none' : null);
+            .style('display', hideAdd ? 'none' : null!);
     }
 
 
     function change() {
-        var t = {};
+        var t: TagsUpdate = {};
         var val;
 
         if (_isMulti || _isSemi) {
@@ -572,7 +580,7 @@ export function uiFieldCombo(field, context) {
                 val = val.replace(/,/g, ';');
                 vals = splitAtSemicolon(val);
             }
-            vals = vals.filter(Boolean);
+            vals = vals!.filter(Boolean);
 
             if (!vals.length) return;
 
@@ -589,7 +597,7 @@ export function uiFieldCombo(field, context) {
                         if (typeof old === 'string' && old.toLowerCase() !== 'no') return;
                     }
                     key = context.cleanTagKey(key);
-                    field.keys.push(key);
+                    field.keys!.push(key);
                     t[key] = 'yes';
                 });
 
@@ -599,26 +607,26 @@ export function uiFieldCombo(field, context) {
                 if (!field.allowDuplicates) {
                     arr = utilArrayUniq(arr);
                 }
-                t[field.key] = context.cleanTagValue(arr.filter(Boolean).join(';'));
+                t[field.key!] = context.cleanTagValue(arr.filter(Boolean).join(';'));
             }
         } else {
             var rawValue = utilGetSetValue(_input);
 
             // don't override multiple values with blank string
-            if (!rawValue && Array.isArray(_tags[field.key])) return;
+            if (!rawValue && Array.isArray(_tags[field.key!])) return;
 
             val = context.cleanTagValue(tagValue(rawValue));
-            t[field.key] = val || undefined;
+            t[field.key!] = val || undefined;
         }
 
         dispatch.call('change', this, t);
     }
 
 
-    function removeMultikey(d3_event, d) {
+    function removeMultikey(this: HTMLAnchorElement, d3_event: MouseEvent, d: ComboDataWithIndex) {
         d3_event.preventDefault();
         d3_event.stopPropagation();
-        var t = {};
+        var t: TagsUpdate = {};
         if (_isMulti) {
             t[d.key] = undefined;
         } else if (_isSemi) {
@@ -631,37 +639,37 @@ export function uiFieldCombo(field, context) {
             if (!field.allowDuplicates) {
                 arr = utilArrayUniq(arr);
             }
-            t[field.key] = arr.length ? arr.join(';') : undefined;
+            t[field.key!] = arr.length ? arr.join(';') : undefined;
 
-            _lengthIndicator.update(t[field.key]);
+            _lengthIndicator.update(t[field.key!]);
         }
         dispatch.call('change', this, t);
     }
 
 
-    function invertMultikey(d3_event, d) {
+    function invertMultikey(this: HTMLInputElement, d3_event: MouseEvent, d: ComboDataWithIndex) {
         d3_event.preventDefault();
         d3_event.stopPropagation();
-        var t = {};
+        var t: Tags = {};
         if (_isMulti) {
-            t[d.key] = _tags[d.key] === 'yes' ? 'no' : 'yes';
+            t[d.key!] = _tags[d.key!] === 'yes' ? 'no' : 'yes';
         }
         dispatch.call('change', this, t);
     }
 
 
-    function combo(selection) {
-        _container = selection.selectAll('.form-field-input-wrap')
+    const combo: FieldImpl = (selection) => {
+        _container = selection.selectAll<HTMLUListElement | HTMLDivElement, 0>('.form-field-input-wrap')
             .data([0]);
 
         var type = (_isMulti || _isSemi) ? 'multicombo': 'combo';
         _container = _container.enter()
-            .append('div')
+            .append<'div' | 'ul'>('div')
             .attr('class', 'form-field-input-wrap form-field-input-' + type)
             .merge(_container);
 
         if (_isMulti || _isSemi) {
-            _container = _container.selectAll('.chiplist')
+            _container = _container.selectAll<HTMLUListElement | HTMLDivElement, 0>('.chiplist')
                 .data([0]);
 
             var listClass = 'chiplist';
@@ -673,15 +681,15 @@ export function uiFieldCombo(field, context) {
             }
 
             _container = _container.enter()
-                .append('ul')
+                .append<'div' | 'ul'>('ul')
                 .attr('class', listClass)
                 .on('click', function() {
-                    window.setTimeout(function() { _input.node().focus(); }, 10);
+                    window.setTimeout(function() { _input.node()!.focus(); }, 10);
                 })
                 .merge(_container);
 
 
-            _inputWrap = _container.selectAll('.input-wrap')
+            _inputWrap = _container.selectAll<HTMLLIElement, 0>('.input-wrap')
                 .data([0]);
 
             _inputWrap = _inputWrap.enter()
@@ -692,12 +700,12 @@ export function uiFieldCombo(field, context) {
             // Hide 'Add' button if this field uses fixed set of
             // options and they're all currently used
             var hideAdd = (!_allowCustomValues && !_comboData.length);
-            _inputWrap.style('display', hideAdd ? 'none' : null);
+            _inputWrap.style('display', hideAdd ? 'none' : null!);
 
-            _input = _inputWrap.selectAll('input')
+            _input = _inputWrap.selectAll<HTMLInputElement, 0>('input')
                 .data([0]);
         } else {
-            _input = _container.selectAll('input')
+            _input = _container.selectAll<HTMLInputElement, 0>('input')
                 .data([0]);
         }
 
@@ -728,9 +736,9 @@ export function uiFieldCombo(field, context) {
             .on('input', function() {
                 let val = utilGetSetValue(_input);
                 updateIcon(val);
-                if (_isSemi && _tags[field.key]) {
+                if (_isSemi && _tags[field.key!]) {
                     // when adding a new value to existing ones
-                    val += ';' + _tags[field.key];
+                    val += ';' + _tags[field.key!];
                 }
                 _lengthIndicator.update(val);
             });
@@ -739,7 +747,7 @@ export function uiFieldCombo(field, context) {
             .on('keydown.field', function(d3_event) {
                 switch (d3_event.keyCode) {
                     case 13: // ↩ Return
-                        _input.node().blur(); // blurring also enters the value
+                        _input.node()!.blur(); // blurring also enters the value
                         d3_event.stopPropagation();
                         break;
                 }
@@ -748,8 +756,8 @@ export function uiFieldCombo(field, context) {
         if (_isMulti || _isSemi) {
             _combobox
                 .on('accept', function() {
-                    _input.node().blur();
-                    window.setTimeout(function() { _input.node().focus(); }, 10);
+                    _input.node()!.blur();
+                    window.setTimeout(function() { _input.node()!.focus(); }, 10);
                 });
 
             _input
@@ -758,15 +766,15 @@ export function uiFieldCombo(field, context) {
 
         _combobox
             .on('cancel', function() {
-                _input.node().blur();
+                _input.node()!.blur();
             })
             .on('update', function() {
                 updateIcon(utilGetSetValue(_input));
             });
-    }
+    };
 
-    function updateIcon(value) {
-        value = tagValue(value);
+    function updateIcon(value: string) {
+        value = tagValue(value)!;
         let container = _container;
         if (field.type === 'multiCombo' || field.type === 'semiCombo') {
             container = _container.select('.input-wrap');
@@ -774,7 +782,7 @@ export function uiFieldCombo(field, context) {
 
         // For the country emoji flags
         container.selectAll('.tag-value-icon').remove();
-        if (osmIsoCountryKeys.has(field.key) && value) {
+        if (osmIsoCountryKeys.has(field.key!) && value) {
           const data = buildCountry()[value];
 
           if (data && data.flag && showEmojiFlags) {
@@ -806,25 +814,25 @@ export function uiFieldCombo(field, context) {
     combo.tags = function(tags) {
         _tags = tags;
 
-        var isMixed = Array.isArray(tags[field.key]);
-        var showsValue = value => !isMixed && value && !(field.type === 'typeCombo' && value === 'yes');
-        var isRawValue = value => showsValue(value)
+        var isMixed = Array.isArray(tags[field.key!]);
+        var showsValue = (value: string | string[] | undefined): value is string => !isMixed && !!value && !(field.type === 'typeCombo' && value === 'yes');
+        var isRawValue = (value: string | string[]  | undefined) => showsValue(value)
             && !field.hasTextForStringId(`options.${value}`)
             && !field.hasTextForStringId(`options.${value}.title`)
-            && !(osmIsoCountryKeys.has(field.key) && value in buildCountry());
-        var isKnownValue = value => showsValue(value) && !isRawValue(value);
+            && !(osmIsoCountryKeys.has(field.key!) && value in buildCountry());
+        var isKnownValue = (value: string | string[]  | undefined) => showsValue(value) && !isRawValue(value);
         var isReadOnly = !_allowCustomValues;
 
         if (_isMulti || _isSemi) {
             _multiData = [];
 
-            var maxLength;
+            var maxLength!: number;
 
             if (_isMulti) {
                 // Build _multiData array containing keys already set..
                 for (var k in tags) {
                     if (field.key && k.indexOf(field.key) !== 0) continue;
-                    if (!field.key && field.keys.indexOf(k) === -1) continue;
+                    if (!field.key && field.keys!.indexOf(k) === -1) continue;
 
                     var v = tags[k];
 
@@ -840,7 +848,7 @@ export function uiFieldCombo(field, context) {
 
                 if (field.key) {
                     // Set keys for form-field modified (needed for undo and reset buttons)..
-                    field.keys = _multiData.map(function(d) { return d.key; });
+                    field.keys = _multiData.map(function(d) { return d.key!; });
 
                     // limit the input length so it fits after prepending the key prefix
                     maxLength = context.maxCharsForTagKey() - utilUnicodeCharsCount(field.key);
@@ -850,11 +858,12 @@ export function uiFieldCombo(field, context) {
 
             } else if (_isSemi) {
 
-                var allValues = [];
-                var commonValues;
-                if (Array.isArray(tags[field.key])) {
+                var allValues: string[] = [];
+                var commonValues!: string[];
+                const value = tags[field.key!];
+                if (Array.isArray(value)) {
 
-                    tags[field.key].forEach(function(tagVal) {
+                    value.forEach(function(tagVal) {
                         var thisVals = splitAtSemicolon(tagVal);
                         allValues = allValues.concat(thisVals);
                         if (!commonValues) {
@@ -866,7 +875,7 @@ export function uiFieldCombo(field, context) {
                     allValues = allValues.filter(Boolean);
 
                 } else {
-                    allValues = splitAtSemicolon(tags[field.key]);
+                    allValues = splitAtSemicolon(value);
                     commonValues = allValues;
                 }
 
@@ -900,14 +909,14 @@ export function uiFieldCombo(field, context) {
             // Hide 'Add' button if this field is already at its character limit
             var hideAdd = maxLength <= 0 || (!_allowCustomValues && !_comboData.length);
             _container.selectAll('.chiplist .input-wrap')
-                .style('display', hideAdd ? 'none' : null);
+                .style('display', hideAdd ? 'none' : null!);
 
             var allowDragAndDrop = _isSemi // only semiCombo values are ordered
-                && !Array.isArray(tags[field.key]);
+                && !Array.isArray(tags[field.key!]);
 
             // Render chips
-            var chips = _container.selectAll('.chip')
-                .data(_multiData.map((item, index) => ({ ...item, index })));
+            var chips = _container.selectAll<HTMLLIElement, ComboData>('.chip')
+                .data<ComboDataWithIndex>(_multiData.map((item, index) => ({ ...item, index })));
 
             chips.exit()
                 .remove();
@@ -927,21 +936,21 @@ export function uiFieldCombo(field, context) {
             chips = chips.merge(enter)
                 .order()
                 .classed('raw-value', function(d) {
-                    var k = d.key;
-                    if (_isMulti) k = k.replace(field.key, '');
+                    var k = d.key!;
+                    if (_isMulti) k = k.replace(field.key!, '');
                     // Ignore the raw-value class for key language:
                     if (field.key === 'language:' && localizer.languageName(k) !== k) return false;
                     return !field.hasTextForStringId('options.' + k);
                 })
                 .classed('draggable', allowDragAndDrop)
                 .classed('mixed', function(d) {
-                    return d.isMixed;
+                    return !!d.isMixed;
                 })
                 .attr('title', function(d) {
                     if (d.isMixed) {
                         return t('inspector.unshared_value_tooltip');
                     }
-                    if (!['yes', 'no'].includes(d.state)) {
+                    if (!['yes', 'no'].includes(d.state!)) {
                         return d.state;
                     }
                     return null;
@@ -953,7 +962,7 @@ export function uiFieldCombo(field, context) {
                 chips.insert('input', 'span')
                     .attr('type', 'checkbox')
                     .property('checked', d => d.state === 'yes')
-                    .property('indeterminate', d => d.isMixed || !['yes', 'no'].includes(d.state))
+                    .property('indeterminate', d => d.isMixed || !['yes', 'no'].includes(d.state!))
                     .on('click', invertMultikey);
             }
 
@@ -963,7 +972,7 @@ export function uiFieldCombo(field, context) {
 
             chips.each(function(d) {
                 const selection = d3_select(this);
-                const text_span = selection.select('span');
+                const text_span = selection.select<HTMLSpanElement>('span');
                 const field_buttons = selection.select('.field_buttons');
                 const clean_value = d.value.trim();
                 text_span.text('');
@@ -991,7 +1000,7 @@ export function uiFieldCombo(field, context) {
                 text_span.text(d.value);
             });
 
-            chips.select('a.remove')
+            chips.select<HTMLAnchorElement>('a.remove')
                 .attr('href', '#')
                 .on('click', removeMultikey)
                 .attr('class', 'remove')
@@ -999,39 +1008,39 @@ export function uiFieldCombo(field, context) {
 
             updateIcon('');
         } else {
-            var mixedValues = isMixed && tags[field.key].map(function(val) {
+            var mixedValues = isMixed && tags[field.key!].map(function(val) {
                 return displayValue(val);
             }).filter(Boolean);
 
-            utilGetSetValue(_input, !isMixed ? displayValue(tags[field.key]) : '')
-                .data([tags[field.key]])
+            utilGetSetValue(_input, !isMixed ? displayValue(tags[field.key!]) : '')
+                .data([tags[field.key!]])
                 .classed('raw-value', isRawValue)
                 .classed('known-value', isKnownValue)
                 .attr('readonly', isReadOnly ? 'readonly' : undefined)
-                .attr('title', isMixed ? mixedValues.join('\n') : (tags[field.key] ? formatTag(field.key, tags[field.key], _isMulti) : undefined))
+                .attr('title', isMixed ? mixedValues.join('\n') : (tags[field.key!] ? formatTag(field.key!, tags[field.key!], _isMulti) : undefined))
                 .attr('placeholder', isMixed ? t('inspector.multiple_values') : _staticPlaceholder || '')
                 .classed('mixed', isMixed)
                 .on('keydown.deleteCapture', function(d3_event) {
                     if (isReadOnly &&
-                        isKnownValue(tags[field.key]) &&
+                        isKnownValue(tags[field.key!]) &&
                         (d3_event.keyCode === utilKeybinding.keyCodes['⌫'] ||
                         d3_event.keyCode === utilKeybinding.keyCodes['⌦'])) {
 
                         d3_event.preventDefault();
                         d3_event.stopPropagation();
 
-                        var t = {};
-                        t[field.key] = undefined;
+                        var t: TagsUpdate = {};
+                        t[field.key!] = undefined;
                         dispatch.call('change', this, t);
                     }
                 });
 
-            if (!Array.isArray(tags[field.key])) {
-                updateIcon(tags[field.key]);
+            if (!Array.isArray(tags[field.key!])) {
+                updateIcon(tags[field.key!]);
             }
 
             if (!isMixed) {
-                _lengthIndicator.update(tags[field.key]);
+                _lengthIndicator.update(tags[field.key!]);
             }
         }
 
@@ -1044,13 +1053,14 @@ export function uiFieldCombo(field, context) {
         _input.on('input.refreshStyles', refreshStyles);
         _combobox.on('update.refreshStyles', refreshStyles);
         refreshStyles();
-    };
+    } as FieldImpl['tags'];
 
-    function registerDragAndDrop(selection) {
+    function registerDragAndDrop(selection: d3.Selection<HTMLLIElement>) {
 
         // allow drag and drop re-ordering of chips
-        var dragOrigin, targetIndex;
-        selection.call(d3_drag()
+        let dragOrigin: { x: number; y: number } | undefined;
+        let targetIndex: number | undefined | null;
+        selection.call(d3_drag<HTMLLIElement, unknown>()
             .on('start', function(d3_event) {
                 dragOrigin = {
                     x: d3_event.x,
@@ -1059,8 +1069,8 @@ export function uiFieldCombo(field, context) {
                 targetIndex = null;
             })
             .on('drag', function(d3_event) {
-                var x = d3_event.x - dragOrigin.x,
-                    y = d3_event.y - dragOrigin.y;
+                var x = d3_event.x - dragOrigin!.x,
+                    y = d3_event.y - dragOrigin!.y;
 
                 if (!d3_select(this).classed('dragging') &&
                     // don't display drag until dragging beyond a distance threshold
@@ -1072,25 +1082,25 @@ export function uiFieldCombo(field, context) {
                     .classed('dragging', true);
 
                 targetIndex = null;
-                var targetIndexOffsetTop = null;
-                var draggedTagWidth = d3_select(this).node().offsetWidth;
+                var targetIndexOffsetTop: number | null = null;
+                var draggedTagWidth = d3_select(this).node()!.offsetWidth;
 
                 if (field.key === 'destination' || field.key === 'via') { // meaning tags are full width
-                    _container.selectAll('.chip')
+                    _container.selectAll<HTMLLIElement, unknown>('.chip')
                         .style('transform', function(d2, index2) {
-                            var node = d3_select(this).node();
+                            var node = d3_select(this).node()!;
 
                             if (index === index2) {
                                 return 'translate(' + x + 'px, ' + y + 'px)';
                             // move the dragged tag up the order
                             } else if (index2 > index && d3_event.y > node.offsetTop) {
-                                if (targetIndex === null || index2 > targetIndex) {
+                                if (targetIndex === null || index2 > targetIndex!) {
                                     targetIndex = index2;
                                 }
                                 return 'translateY(-100%)';
                             // move the dragged tag down the order
                             } else if (index2 < index && d3_event.y < node.offsetTop + node.offsetHeight) {
-                                if (targetIndex === null || index2 < targetIndex) {
+                                if (targetIndex === null || index2 < targetIndex!) {
                                     targetIndex = index2;
                                 }
                                 return 'translateY(100%)';
@@ -1098,9 +1108,9 @@ export function uiFieldCombo(field, context) {
                             return null;
                         });
                 } else {
-                    _container.selectAll('.chip')
+                    _container.selectAll<HTMLLIElement, unknown>('.chip')
                         .each(function(d2, index2) {
-                            var node = d3_select(this).node();
+                            var node = d3_select(this).node()!;
 
                             // check the cursor is in the bounding box
                             if (
@@ -1115,7 +1125,7 @@ export function uiFieldCombo(field, context) {
                             }
                         })
                         .style('transform', function(d2, index2) {
-                            var node = d3_select(this).node();
+                            var node = d3_select(this).node()!;
 
                             if (index === index2) {
                                 return 'translate(' + x + 'px, ' + y + 'px)';
@@ -1123,9 +1133,9 @@ export function uiFieldCombo(field, context) {
 
                             // only translate tags in the same row
                             if (node.offsetTop === targetIndexOffsetTop) {
-                                if (index2 < index && index2 >= targetIndex) {
+                                if (index2 < index && index2 >= targetIndex!) {
                                     return 'translateX(' + draggedTagWidth + 'px)';
-                                } else if (index2 > index && index2 <= targetIndex) {
+                                } else if (index2 > index && index2 <= targetIndex!) {
                                     return 'translateX(-' + draggedTagWidth + 'px)';
                                 }
                             }
@@ -1150,14 +1160,14 @@ export function uiFieldCombo(field, context) {
                     _multiData.splice(index, 1);
                     _multiData.splice(targetIndex, 0, element);
 
-                    var t = {};
+                    var t: TagsUpdate = {};
 
                     if (_multiData.length) {
-                        t[field.key] = _multiData.map(function(element) {
+                        t[field.key!] = _multiData.map(function(element) {
                             return element.key;
                         }).join(';');
                     } else {
-                        t[field.key] = undefined;
+                        t[field.key!] = undefined;
                     }
 
                     dispatch.call('change', this, t);
@@ -1174,7 +1184,7 @@ export function uiFieldCombo(field, context) {
 
 
     combo.focus = function() {
-        _input.node().focus();
+        _input.node()!.focus();
     };
 
 
@@ -1182,13 +1192,13 @@ export function uiFieldCombo(field, context) {
         if (!arguments.length) return _entityIDs;
         _entityIDs = val;
         return combo;
-    };
+    } as FieldImpl['entityIDs'];
 
 
     function combinedEntityExtent() {
-        return _entityIDs && _entityIDs.length && utilTotalExtent(_entityIDs, context.graph());
+        return _entityIDs && !!_entityIDs.length && utilTotalExtent(_entityIDs, context.graph());
     }
 
 
     return utilRebind(combo, dispatch, 'on');
-}
+};

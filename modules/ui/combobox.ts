@@ -26,10 +26,15 @@ export interface ComboData {
     value: string;
     key?: string;
     terms?: string[];
-    title: string | null;
+    title?: string | null;
     description?: string;
     klass?: string;
     display?(span: d3.Selection<HTMLSpanElement>): void;
+
+    // only for combo
+    sortname?: string;
+    isMixed?: boolean;
+    state?: string;
 }
 
 type ItemCallback = (event: unknown, d: ComboData) => void;
@@ -426,7 +431,7 @@ export function uiCombobox(context: iD.Context, klass?: string) {
                 .attr('class', function(d) {
                     return 'combobox-option ' + (d.klass || '') + (d.description ? ' has-description' : '');
                 })
-                .attr('title', function(d) { return d.title; });
+                .attr('title', function(d) { return d.title || null; });
 
             enter.each(function(d) {
                     const sel = d3_select(this);
