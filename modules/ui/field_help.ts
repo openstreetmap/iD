@@ -138,7 +138,7 @@ export function uiFieldHelp(context: iD.Context, fieldName: string) {
     }
 
 
-    fieldHelp.button = function(selection: d3.Selection) {
+    fieldHelp.button = function(selection: d3.Selection<HTMLLabelElement>) {
         if (_body.empty()) return;
 
         var button = selection.selectAll<HTMLButtonElement, 0>('.field-help-button')
@@ -173,7 +173,7 @@ export function uiFieldHelp(context: iD.Context, fieldName: string) {
     }
 
 
-    fieldHelp.body = function(selection: d3.Selection) {
+    fieldHelp.body = function(selection: d3.Selection<HTMLDivElement>) {
         // This control expects the field to have a form-field-input-wrap div
         _wrap = selection.selectAll('.form-field-input-wrap');
         if (_wrap.empty()) return;

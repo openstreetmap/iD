@@ -8,18 +8,19 @@ import {
     utilRebind
 } from '../../util';
 import { uiLengthIndicator } from '..';
+import type { CreateUiField, FieldImpl } from '../field';
 
 
-export function uiFieldTextarea(field, context) {
+export const uiFieldTextarea: CreateUiField = (field, context) => {
     var dispatch = d3_dispatch('change');
-    var input = d3_select(null);
-    var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue())
+    var input = d3_select<HTMLTextAreaElement, 0>(null!);
+    var _lengthIndicator = uiLengthIndicator<HTMLDivElement>(context.maxCharsForTagValue())
         .silent(field.usage === 'changeset' && field.key === 'comment');
-    var _tags;
+    var _tags: Tags;
 
 
-    function textarea(selection) {
-        var wrap = selection.selectAll('.form-field-input-wrap')
+    const textarea: FieldImpl = (selection) => {
+        var wrap = selection.selectAll<HTMLDivElement, 0>('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
@@ -28,7 +29,7 @@ export function uiFieldTextarea(field, context) {
             .style('position', 'relative')
             .merge(wrap);
 
-        input = wrap.selectAll('textarea')
+        input = wrap.selectAll<HTMLTextAreaElement, 0>('textarea')
             .data([0]);
 
         input = input.enter()
@@ -43,43 +44,43 @@ export function uiFieldTextarea(field, context) {
 
         wrap.call(_lengthIndicator);
 
-        function change(onInput) {
-            return function() {
+        function change(onInput?: boolean) {
+            return function(this: any) {
 
                 var val = utilGetSetValue(input);
                 if (!onInput) val = context.cleanTagValue(val);
 
                 // don't override multiple values with blank string
-                if (!val && Array.isArray(_tags[field.key])) return;
+                if (!val && Array.isArray(_tags[field.key!])) return;
 
-                var t = {};
-                t[field.key] = val || undefined;
+                var t: TagsUpdate = {};
+                t[field.key!] = val || undefined;
                 dispatch.call('change', this, t, onInput);
             };
         }
-    }
+    };
 
 
     textarea.tags = function(tags) {
         _tags = tags;
 
-        var isMixed = Array.isArray(tags[field.key]);
+        const value = tags[field.key!];
 
-        utilGetSetValue(input, !isMixed && tags[field.key] ? tags[field.key] : '')
-            .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)
-            .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
-            .classed('mixed', isMixed);
+        utilGetSetValue(input, !Array.isArray(value) && value ? value : '')
+            .attr('title', Array.isArray(value) ? value.filter(Boolean).join('\n') : null)
+            .attr('placeholder', Array.isArray(value) ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
+            .classed('mixed', Array.isArray(value));
 
-        if (!isMixed) {
-            _lengthIndicator.update(tags[field.key]);
+        if (!Array.isArray(value)) {
+            _lengthIndicator.update(value);
         }
-    };
+    } as FieldImpl['tags'];
 
 
     textarea.focus = function() {
-        input.node().focus();
+        input.node()!.focus();
     };
 
 
     return utilRebind(textarea, dispatch, 'on');
-}
+};

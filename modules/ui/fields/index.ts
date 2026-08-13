@@ -57,8 +57,9 @@ import { uiFieldRestrictions } from './restrictions';
 import { uiFieldTextarea } from './textarea';
 import { uiFieldWikidata } from './wikidata';
 import { uiFieldWikipedia } from './wikipedia';
+import type { CreateUiField } from '../field';
 
-export var uiFields = {
+export var uiFields: Record<string, CreateUiField> = {
     access: uiFieldAccess,
     address: uiFieldAddress,
     check: uiFieldCheck,

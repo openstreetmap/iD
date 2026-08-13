@@ -11,9 +11,52 @@ import { uiFields } from './fields';
 import { LANGUAGE_SUFFIX_REGEX } from './fields/localized';
 import { uiTagReference } from './tag_reference';
 import { utilRebind, utilUniqueDomId } from '../util';
+import type { presetField } from '../presets';
+import type { EntityId } from '../osm';
+import type { ComboData } from './combobox';
+
+interface Options {
+    show?: boolean;
+    wrap?: boolean;
+    remove?: boolean;
+    revert?: boolean;
+    info?: boolean;
+}
+
+export interface FieldImpl {
+    (selection: d3.Selection<HTMLDivElement>): void;
+    entityIDs?: GetSet<this, EntityId[]>;
+    tags: GetSet<this, TagsMulti>;
+    focus(): void;
+
+    setCustomOptions?(options: ComboData[]): void;
+}
+export interface CreateUiField {
+    (field: uiField, context: iD.Context): FieldImpl;
+    supportsMultiselection?: boolean;
+}
+
+interface EventMap {
+    change: [t: unknown, onInput?: unknown];
+    revert: [keys: TagKey[]];
+}
+
+export interface uiField extends presetField {
+    domId: string;
+    impl: FieldImpl;
+    entityIDs: EntityId[];
+    render(selection: d3.Selection): void;
+    state: GetSet<this, string>;
+    tags: GetSet<this, Tags>;
+    locked: GetSet<this, boolean>;
+    show(): void;
+    isShown(): boolean | undefined;
+    isAllowed(): boolean;
+    focus(): void;
+}
 
 
-export function uiField(context, presetField, entityIDs, options) {
+export function uiField(context: iD.Context, presetField: presetField, entityIDs: EntityId[], options?: Options) {
     options = Object.assign({
         show: true,
         wrap: true,
@@ -22,14 +65,14 @@ export function uiField(context, presetField, entityIDs, options) {
         info: true
     }, options);
 
-    var dispatch = d3_dispatch('change', 'revert');
-    var field = Object.assign({}, presetField);   // shallow copy
+    var dispatch = d3_dispatch<object, EventMap>('change', 'revert');
+    var field = <uiField>Object.assign({}, presetField);   // shallow copy
     field.domId = utilUniqueDomId('form-field-' + field.safeid);
     var _show = options.show;
     var _state = '';
-    var _tags = {};
+    var _tags: Tags = {};
 
-    var _entityExtent;
+    var _entityExtent: geoExtent;
     if (entityIDs && entityIDs.length) {
         _entityExtent = entityIDs.reduce(function(extent, entityID) {
             var entity = context.graph().entity(entityID);
@@ -38,7 +81,7 @@ export function uiField(context, presetField, entityIDs, options) {
     }
 
     var _locked = false;
-    var _lockedTip = uiTooltip()
+    var _lockedTip = uiTooltip<HTMLDivElement>()
         .title(() => t.append('inspector.lock.suggestion', { label: field.label() }))
         .placement('bottom');
 
@@ -65,7 +108,7 @@ export function uiField(context, presetField, entityIDs, options) {
     }
 
 
-    function allKeys(tags) {
+    function allKeys(tags: Tags) {
         return field.allKeys(tags);
     }
 
@@ -79,7 +122,7 @@ export function uiField(context, presetField, entityIDs, options) {
                 const originalKeys = allKeys(original.tags);
                 const latestKeys = allKeys(_tags);
                 return latestKeys.concat(originalKeys).some(function (key) {
-                    return latest.tags[key] !== original.tags[key];
+                    return latest.tags[key] !== original!.tags[key];
                 });
             } else {
                 return allKeys(_tags).some(function (key) {
@@ -114,7 +157,7 @@ export function uiField(context, presetField, entityIDs, options) {
     }
 
 
-    function revert(d3_event, d) {
+    function revert(d3_event: MouseEvent, d: uiField) {
         d3_event.stopPropagation();
         d3_event.preventDefault();
         if (!entityIDs || _locked) return;
@@ -139,12 +182,12 @@ export function uiField(context, presetField, entityIDs, options) {
     }
 
 
-    function remove(d3_event, d) {
+    function remove(d3_event: MouseEvent, d: uiField) {
         d3_event.stopPropagation();
         d3_event.preventDefault();
         if (_locked) return;
 
-        var t = {};
+        var t: TagsUpdate = {};
         allKeys(_tags).forEach(function(key) {
             t[key] = undefined;
         });
@@ -154,7 +197,7 @@ export function uiField(context, presetField, entityIDs, options) {
 
 
     field.render = function(selection) {
-        var container = selection.selectAll('.form-field')
+        var container = selection.selectAll<HTMLDivElement, uiField>('.form-field')
             .data([field]);
 
         // Enter
@@ -236,7 +279,7 @@ export function uiField(context, presetField, entityIDs, options) {
                         key: referenceKey,
                         value: _tags[referenceKey]
                     };
-                    reference = uiTagReference(referenceOptions, context);
+                    reference = uiTagReference(referenceOptions);
                     if (_state === 'hover') {
                         reference.showing(false);
                     }
@@ -249,7 +292,7 @@ export function uiField(context, presetField, entityIDs, options) {
                 if (help) {
                     selection
                         .call(help.body)
-                        .select('.field-label')
+                        .select<HTMLLabelElement>('.field-label')
                         .call(help.button);
                 }
 
@@ -293,7 +336,7 @@ export function uiField(context, presetField, entityIDs, options) {
         if (!arguments.length) return _state;
         _state = val;
         return field;
-    };
+    } as uiField['state'];
 
 
     field.tags = function(val) {
@@ -309,14 +352,14 @@ export function uiField(context, presetField, entityIDs, options) {
         }
 
         return field;
-    };
+    } as uiField['tags'];
 
 
     field.locked = function(val) {
         if (!arguments.length) return _locked;
         _locked = val;
         return field;
-    };
+    } as uiField['locked'];
 
 
     field.show = function() {
@@ -325,7 +368,7 @@ export function uiField(context, presetField, entityIDs, options) {
             createField();
         }
         if (field.default && field.key && _tags[field.key] !== field.default) {
-            var t = {};
+            var t: Tags = {};
             t[field.key] = field.default;
             dispatch.call('change', this, t);
         }
@@ -354,7 +397,7 @@ export function uiField(context, presetField, entityIDs, options) {
             if (!validHere.has(field.locationSetID)) return false;
         }
 
-        var prerequisiteTag = field.prerequisiteTag;
+        var prerequisiteTag = field.prerequisiteTag!;
 
         if (entityIDs &&
             !tagsContainFieldKey() && // ignore tagging prerequisites if a value is already present
@@ -362,19 +405,19 @@ export function uiField(context, presetField, entityIDs, options) {
 
             if (!entityIDs.every(function(entityID) {
                 var entity = context.graph().entity(entityID);
-                if (prerequisiteTag.key) {
+                if ('key' in prerequisiteTag) {
                     var value = entity.tags[prerequisiteTag.key] || '';
 
-                    if (prerequisiteTag.valuesNot) {
+                    if ('valuesNot' in prerequisiteTag) {
                         return !prerequisiteTag.valuesNot.includes(value);
                     }
-                    if (prerequisiteTag.valueNot) {
+                    if ('valueNot' in prerequisiteTag) {
                         return prerequisiteTag.valueNot !== value;
                     }
-                    if (prerequisiteTag.values) {
+                    if ('values' in prerequisiteTag) {
                         return prerequisiteTag.values.includes(value);
                     }
-                    if (prerequisiteTag.value) {
+                    if ('value' in prerequisiteTag) {
                         return prerequisiteTag.value === value;
                     }
                     if (!value) return false;

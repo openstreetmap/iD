@@ -10,7 +10,7 @@ import { uiPopover } from './popover';
 
 export interface uiLengthIndicator<T extends Element> {
     (selection: d3.Selection<T>): void
-    update(val: string): void;
+    update(val: string | string[] | undefined | null): void;
     silent: GetSet<this, boolean>;
 }
 

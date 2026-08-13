@@ -14,6 +14,8 @@ import { isColorValid } from '../../osm/tags';
 import { uiLengthIndicator } from '..';
 import { uiTooltip } from '../tooltip';
 import { utilIsValidURL } from '../../util/util';
+import type { CreateUiField, FieldImpl } from '../field';
+import type { EntityId } from '../../osm';
 
 export {
     uiFieldText as uiFieldColour,
@@ -30,16 +32,20 @@ export {
 const likelyRawNumberFormat = /^-?(0\.\d*|\d*\.\d{0,2}(\d{4,})?|\d{4,}\.\d{3})$/;
 const yoHoursURLFormat = 'https://projets.pavie.info/yohours/?oh={value}';
 
-export function uiFieldText(field, context) {
-    var dispatch = d3_dispatch('change');
-    var input = d3_select(null);
-    var outlinkButton = d3_select(null);
-    var wrap = d3_select(null);
-    var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
-    var _entityIDs = [];
-    var _tags;
-    var _phoneFormats = {};
-    const isDirectionField = field.key.split(':').some(keyPart => keyPart === 'direction');
+interface EventMap {
+    change: [TagsUpdate | ((tags: TagsUpdate) => void), onInput?: unknown];
+}
+
+export const uiFieldText: CreateUiField = (field, context) => {
+    var dispatch = d3_dispatch<object, EventMap>('change');
+    var input = d3_select<HTMLInputElement, 0>(null!);
+    var outlinkButton = d3_select<HTMLButtonElement, 0>(null!);
+    var wrap = d3_select<HTMLDivElement, 0>(null!);
+    var _lengthIndicator = uiLengthIndicator<HTMLDivElement>(context.maxCharsForTagValue());
+    var _entityIDs: EntityId[] = [];
+    var _tags: Tags;
+    var _phoneFormats: Record<string, string> = {};
+    const isDirectionField = field.key!.split(':').some(keyPart => keyPart === 'direction');
     const formatFloat = localizer.floatFormatter(localizer.languageCode());
     const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
     const countDecimalPlaces = localizer.decimalPlaceCounter(localizer.languageCode());
@@ -57,7 +63,7 @@ export function uiFieldText(field, context) {
     function calcLocked() {
         // Protect certain fields that have a companion `*:wikidata` value
         var isLocked = (field.id === 'brand' || field.id === 'network' || field.id === 'operator' || field.id === 'flag') &&
-            _entityIDs.length &&
+            !!_entityIDs.length &&
             _entityIDs.some(function(entityID) {
                 var entity = context.graph().hasEntity(entityID);
                 if (!entity) return false;
@@ -65,6 +71,7 @@ export function uiFieldText(field, context) {
                 // Features linked to Wikidata are likely important and should be protected
                 if (entity.tags.wikidata) return true;
 
+                // @ts-expect-error -- will be fixed in a different PR
                 var preset = presetManager.match(entity, context.graph());
                 var isSuggestion = preset && preset.suggestion;
 
@@ -77,11 +84,11 @@ export function uiFieldText(field, context) {
     }
 
 
-    function i(selection) {
+    const i: FieldImpl = (selection) => {
         calcLocked();
         var isLocked = field.locked();
 
-        wrap = selection.selectAll('.form-field-input-wrap')
+        wrap = selection.selectAll<HTMLDivElement, 0>('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
@@ -89,7 +96,7 @@ export function uiFieldText(field, context) {
             .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
-        input = wrap.selectAll('input')
+        input = wrap.selectAll<HTMLInputElement, 0>('input')
             .data([0]);
 
         input = input.enter()
@@ -118,9 +125,9 @@ export function uiFieldText(field, context) {
 
             input.attr('type', 'text');
 
-            var inc = field.increment;
+            var inc = field.increment!;
 
-            var buttons = wrap.selectAll('.increment, .decrement')
+            var buttons = wrap.selectAll<HTMLButtonElement, 0>('.increment, .decrement')
                 .data(rtl ? [inc, -inc] : [-inc, inc]);
 
             buttons.enter()
@@ -138,10 +145,10 @@ export function uiFieldText(field, context) {
                     d3_event.preventDefault();
 
                     // do nothing if this is a multi-selection with mixed values
-                    var isMixed = Array.isArray(_tags[field.key]);
+                    var isMixed = Array.isArray(_tags[field.key!]);
                     if (isMixed) return;
 
-                    var raw_vals = input.node().value || '0';
+                    var raw_vals = input.node()!.value || '0';
                     var vals = raw_vals.split(';');
                     vals = vals.map(function(v) {
                         v = v.trim();
@@ -156,7 +163,7 @@ export function uiFieldText(field, context) {
 
                         // do nothing if the value is neither a number, nor a cardinal direction
                         if (!isFinite(num)) return v;
-                        num = parseFloat(num);
+                        num = parseFloat(num as any);
                         if (!isFinite(num)) return v;
 
                         num += d;
@@ -170,13 +177,13 @@ export function uiFieldText(field, context) {
                             ? (v.includes('.') ? v.split('.')[1].length : 0)
                             : countDecimalPlaces(v));
                     });
-                    input.node().value = vals.join(';');
+                    input.node()!.value = vals.join(';');
                     change()();
                 });
         } else if (field.type === 'identifier' && field.urlFormat && field.pattern) {
 
             input.attr('type', 'text');
-            outlinkButton = wrap.selectAll('.foreign-id-permalink')
+            outlinkButton = wrap.selectAll<HTMLButtonElement, 0>('.foreign-id-permalink')
                 .data([0]);
 
             outlinkButton = outlinkButton.enter()
@@ -184,7 +191,7 @@ export function uiFieldText(field, context) {
                 .call(svgIcon('#iD-icon-out-link'))
                 .attr('class', 'form-field-button foreign-id-permalink')
                 .attr('title', function() {
-                    var domainResults = /^https?:\/\/(.{1,}?)\//.exec(field.urlFormat);
+                    var domainResults = /^https?:\/\/(.{1,}?)\//.exec(field.urlFormat!)!;
                     if (domainResults.length >= 2 && domainResults[1]) {
                         var domain = domainResults[1];
                         return t('icons.view_on', { domain: domain });
@@ -204,7 +211,7 @@ export function uiFieldText(field, context) {
 
             input.attr('type', 'text');
 
-            outlinkButton = wrap.selectAll('.foreign-id-permalink')
+            outlinkButton = wrap.selectAll<HTMLButtonElement, 0>('.foreign-id-permalink')
                 .data([0]);
 
             outlinkButton.enter()
@@ -222,7 +229,7 @@ export function uiFieldText(field, context) {
         } else if (field.type === 'url') {
             input.attr('type', 'text');
 
-            outlinkButton = wrap.selectAll('.foreign-id-permalink')
+            outlinkButton = wrap.selectAll<HTMLButtonElement, 0>('.foreign-id-permalink')
                 .data([0]);
 
             outlinkButton.enter()
@@ -246,7 +253,7 @@ export function uiFieldText(field, context) {
 
             updateDateField();
         }
-    }
+    };
 
 
     function updateColourPreview() {
@@ -269,7 +276,7 @@ export function uiFieldText(field, context) {
             .append('input')
             .attr('type', 'color')
             .attr('class', 'colour-selector')
-            .on('input', debounce(function(d3_event) {
+            .on('input', debounce(function(this: HTMLInputElement, d3_event) {
                 d3_event.preventDefault();
                 var colour = this.value;
                 if (!isColorValid(colour)) return;
@@ -280,7 +287,7 @@ export function uiFieldText(field, context) {
         wrap.selectAll('input.colour-selector')
             .attr('value', colour);
 
-        var chooserButton = wrap.selectAll('.colour-preview')
+        var chooserButton = wrap.selectAll<HTMLDivElement, string>('.colour-preview')
             .data([colour]);
         chooserButton = chooserButton
             .enter()
@@ -294,12 +301,12 @@ export function uiFieldText(field, context) {
                 .call(svgIcon('#iD-icon-edit'));
         }
         chooserButton
-            .on('click', () => wrap.select('.colour-selector').node().showPicker());
+            .on('click', () => wrap.select<HTMLInputElement>('.colour-selector').node()!.showPicker());
     }
 
 
     function updateDateField() {
-        function isDateValid(date) {
+        function isDateValid(date: string) {
             return date.match(/^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$/);
         }
 
@@ -314,7 +321,7 @@ export function uiFieldText(field, context) {
                 .append('button')
                 .attr('class', 'form-field-button date-set-today')
                 .call(svgIcon('#fas-rotate'))
-                .call(uiTooltip().title(() => t.append('inspector.set_today')))
+                .call(uiTooltip<HTMLButtonElement>().title(() => t.append('inspector.set_today')))
                 .on('click', () => {
                     utilGetSetValue(input, today);
                     change()();
@@ -342,7 +349,7 @@ export function uiFieldText(field, context) {
                 .append('input')
                 .attr('type', 'date')
                 .attr('class', 'date-selector')
-                .on('input', debounce(function(d3_event) {
+                .on('input', debounce(function(this: HTMLInputElement, d3_event) {
                     d3_event.preventDefault();
                     var date = this.value;
                     if (!isDateValid(date)) return;
@@ -353,7 +360,7 @@ export function uiFieldText(field, context) {
             wrap.selectAll('input.date-selector')
                 .attr('value', date);
 
-            var calendarButton = wrap.selectAll('.date-calendar')
+            var calendarButton = wrap.selectAll<HTMLButtonElement, string>('.date-calendar')
                 .data([date]);
             calendarButton = calendarButton
                 .enter()
@@ -362,7 +369,7 @@ export function uiFieldText(field, context) {
                 .call(svgIcon('#fas-calendar-days'));
 
             calendarButton
-                .on('click', () => wrap.select('.date-selector').node().showPicker());
+                .on('click', () => wrap.select<HTMLInputElement>('.date-selector').node()!.showPicker());
         }
     }
 
@@ -383,7 +390,7 @@ export function uiFieldText(field, context) {
             // detect whether countryCode is actually territory-level
             const countryCodeSovereign = countryCoder.iso1A2Code(extent.center());
             if (countryCodeSovereign !== countryCode) {
-                format = _phoneFormats[countryCodeSovereign.toLowerCase()];
+                format = _phoneFormats[countryCodeSovereign!.toLowerCase()];
             }
         }
         if (format) {
@@ -392,7 +399,6 @@ export function uiFieldText(field, context) {
     }
 
 
-    /** @returns {string | null} */
     function getExternalLink() {
         const value = utilGetSetValue(input).trim();
         if (!value) return null;
@@ -404,7 +410,7 @@ export function uiFieldText(field, context) {
             if (utilIsValidURL(value, true)) return value;
             const id = value.match(new RegExp(field.pattern))?.[0];
             if (id) {
-                return field.urlFormat.replace(/{value}/, encodeURIComponent(id));
+                return field.urlFormat!.replace(/{value}/, encodeURIComponent(id));
             }
         }
         if (field.type === 'schedule') {
@@ -415,7 +421,7 @@ export function uiFieldText(field, context) {
 
 
     // clamp number to min/max
-    function clamped(num) {
+    function clamped(num: number) {
         if (field.minValue !== undefined) {
             num = Math.max(num, field.minValue);
         }
@@ -427,28 +433,28 @@ export function uiFieldText(field, context) {
 
 
     // returns all values of a (potential) multiselection and/or multi-key field
-    function getVals(tags) {
+    function getVals(tags0: Tags) {
         if (field.keys) {
             const multiSelection = context.selectedIDs();
-            tags = multiSelection.length > 1
+            const tags = multiSelection.length > 1
                 ? context.selectedIDs()
                     .map(id => context.graph().entity(id))
                     .map(entity => entity.tags)
-                : [tags];
-            return tags.map(tags => new Set(field.keys
-                    .reduce((acc, key) => acc.concat(tags[key]), [])
+                : [tags0];
+            return tags.map(tags => new Set(field.keys!
+                    .reduce<TagValue[]>((acc, key) => [...acc, ...tags[key]], [])
                     .filter(Boolean)))
-                .map(vals => vals.size === 0 ? new Set([undefined]) : vals)
+                .map((vals): Set<string | undefined> => vals.size === 0 ? new Set([undefined]) : vals)
                 .reduce((a, b) => new Set([...a, ...b]));
         } else {
-            return new Set([].concat(tags[field.key]));
+            return new Set([...tags0[field.key!]]);
         }
     }
 
 
-    function change(onInput) {
-        return function() {
-            var t = {};
+    function change(onInput?: unknown) {
+        return function(this: any) {
+            var t: TagsUpdate = {};
             var val = utilGetSetValue(input);
             if (!onInput) val = context.cleanTagValue(val);
 
@@ -484,19 +490,19 @@ export function uiFieldText(field, context) {
                 }).join(';');
             }
             if (!onInput) utilGetSetValue(input, displayVal);
-            t[field.key] = val || undefined;
+            t[field.key!] = val || undefined;
             if (field.keys) {
                 // for multi-key fields with: handle alternative tag keys gracefully
                 // https://github.com/openstreetmap/id-tagging-schema/issues/905
                 dispatch.call('change', this, tags => {
-                    if (field.keys.some(key => tags[key])) {
+                    if (field.keys!.some(key => tags[key])) {
                         // use exiting key(s)
-                        field.keys.filter(key => tags[key]).forEach(key => {
+                        field.keys!.filter(key => tags[key]).forEach(key => {
                             tags[key] = val || undefined;
                         });
                     } else {
                         // fall back to default key if none of the `keys` is preset
-                        tags[field.key] = val || undefined;
+                        tags[field.key!] = val || undefined;
                     }
                     return tags;
                 }, onInput);
@@ -511,7 +517,7 @@ export function uiFieldText(field, context) {
         if (!arguments.length) return _entityIDs;
         _entityIDs = val;
         return i;
-    };
+    } as FieldImpl['entityIDs'];
 
     i.tags = function(tags) {
         _tags = tags;
@@ -519,7 +525,7 @@ export function uiFieldText(field, context) {
         const vals = getVals(tags);
         const isMixed = vals.size > 1;
         let val = vals.size === 1 ? [...vals][0] ?? '' : '';
-        let shouldUpdate;
+        let shouldUpdate: ((a: string, b: string) => boolean) | undefined;
 
         if ((field.type === 'number' || field.type === 'integer') && val) {
             const numbers = val.split(';').map(function(v) {
@@ -556,7 +562,7 @@ export function uiFieldText(field, context) {
         }
 
         utilGetSetValue(input, val, shouldUpdate)
-            .attr('title', isMixed ? [...vals].join('\n') : undefined)
+            .attr('title', isMixed ? [...vals].join('\n') : undefined!)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
             .classed('mixed', isMixed);
 
@@ -565,7 +571,7 @@ export function uiFieldText(field, context) {
             if (isMixed) {
                 buttons.attr('disabled', 'disabled').classed('disabled', true);
             } else {
-                var raw_vals = tags[field.key] || '0';
+                var raw_vals = tags[field.key!] || '0';
                 const canIncDec = raw_vals.split(';').some((val) =>
                     isFinite(Number(val))
                     || (isDirectionField && (val.trim().toLowerCase() in cardinal))
@@ -586,9 +592,9 @@ export function uiFieldText(field, context) {
         }
 
         if (!isMixed) {
-            _lengthIndicator.update(tags[field.key]);
+            _lengthIndicator.update(tags[field.key!]);
         }
-    };
+    } as FieldImpl['tags'];
 
 
     i.focus = function() {
@@ -601,4 +607,4 @@ export function uiFieldText(field, context) {
     }
 
     return utilRebind(i, dispatch, 'on');
-}
+};
