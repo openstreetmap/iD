@@ -9,21 +9,53 @@ import whichPolygon from 'which-polygon';
 import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
 import { geoMetersToOffset, geoOffsetToMeters, geoExtent } from '../geo';
-import { rendererBackgroundSource } from './background_source';
+import { rendererBackgroundSource, type TileSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
 import { utilAesDecrypt, utilStringQs } from '../util';
 import { utilRebind } from '../util/rebind';
 import { patchHash } from '../behavior';
+import type { Feature, MultiPolygon } from 'geojson';
+import type { ImageryLayer } from './eli.def';
+import type { Vec2 } from '../geo/vector';
 
+interface ImageryIndex {
+    imagery: ImageryLayer[];
+    features: {
+        [id: string]: Feature<MultiPolygon, { id: string }>;
+    };
+    query: whichPolygon.Query<{ id: string }>;
+    backgrounds: TileSource[];
+ }
 
-let _imageryIndex = null;
+let _imageryIndex: ImageryIndex | null = null;
 
-export function rendererBackground(context) {
+interface rendererBackground {
+    (selection: d3.Selection): void;
+    updateImagery(): void;
+    sources(extent: geoExtent, zoom?: number, includeCurrent?: boolean): TileSource[];
+    dimensions(val: Vec2): void;
+    baseLayerSource: GetSet<this, TileSource>;
+    findSource(id: string): TileSource | undefined | null;
+    bing(): void;
+    showsLayer(d: TileSource): void;
+    overlayLayerSources(): TileSource[];
+    toggleOverlayLayer(d: TileSource): void;
+    nudge(d: Vec2, zoom: number): rendererBackground;
+    offset: GetSet<this, Vec2>;
+    brightness: GetSet<this, number>;
+    contrast: GetSet<this, number>;
+    saturation: GetSet<this, number>;
+    sharpness: GetSet<this, number>;
+    ensureLoaded(): Promise<ImageryIndex>;
+    init(): void;
+}
+
+export function rendererBackground(context: iD.Context) {
   const dispatch = d3_dispatch('change');
   const baseLayer = rendererTileLayer(context).projection(context.projection);
-  let _checkedBlocklists = [];
+  let _checkedBlocklists: string[] = [];
   let _isValid = true;
-  let _overlayLayers = [];
+  let _overlayLayers: rendererTileLayer[] = [];
   let _brightness = 1;
   let _contrast = 1;
   let _saturation = 1;
@@ -35,7 +67,7 @@ export function rendererBackground(context) {
       .then(async sources => {
         if (_imageryIndex) return _imageryIndex;
 
-        const featuresById = {};
+        const featuresById: ImageryIndex['features'] = {};
         // use which-polygon to support efficient index and querying for imagery
         const features = sources.map(source => {
           if (!source.polygon) return null;
@@ -46,7 +78,7 @@ export function rendererBackground(context) {
           // what we want: [ [[outer]],[[outer]],[[outer]] ]
           const rings = source.polygon.map(ring => [ring]);
 
-          const feature = {
+          const feature: Feature<MultiPolygon, { id: string }> = {
             type: 'Feature',
             properties: { id: source.id },
             geometry: { type: 'MultiPolygon', coordinates: rings }
@@ -92,7 +124,7 @@ export function rendererBackground(context) {
   }
 
 
-  function background(selection) {
+  const background: rendererBackground = (selection) => {
     const currSource = baseLayer.source();
 
     // If we are displaying an Esri basemap at high zoom,
@@ -100,7 +132,7 @@ export function rendererBackground(context) {
     if (context.map().zoom() > 18) {
       if (currSource && /^EsriWorldImagery/.test(currSource.id)) {
         const center = context.map().center();
-        currSource.fetchTilemap(center);
+        currSource.fetchTilemap!(center);
       }
     }
 
@@ -129,7 +161,7 @@ export function rendererBackground(context) {
       baseFilter += ` blur(${blur}px)`;
     }
 
-    let base = selection.selectAll('.layer-background')
+    let base = selection.selectAll<HTMLDivElement, 0>('.layer-background')
       .data([0]);
 
     base = base.enter()
@@ -137,10 +169,10 @@ export function rendererBackground(context) {
       .attr('class', 'layer layer-background')
       .merge(base);
 
-    base.style('filter', baseFilter || null);
+    base.style('filter', baseFilter || null!);
 
 
-    let imagery = base.selectAll('.layer-imagery')
+    let imagery = base.selectAll<HTMLDivElement, 0>('.layer-imagery')
       .data([0]);
 
     imagery.enter()
@@ -163,7 +195,7 @@ export function rendererBackground(context) {
       maskFilter += ` brightness(${brightness})`;
     }
 
-    let mask = base.selectAll('.layer-unsharp-mask')
+    let mask = base.selectAll<HTMLDivElement, 0>('.layer-unsharp-mask')
       .data(_sharpness > 1 ? [0] : []);
 
     mask.exit()
@@ -174,11 +206,11 @@ export function rendererBackground(context) {
       .attr('class', 'layer layer-mask layer-unsharp-mask')
       .merge(mask)
       .call(baseLayer)
-      .style('filter', maskFilter || null)
-      .style('mix-blend-mode', mixBlendMode || null);
+      .style('filter', maskFilter || null!)
+      .style('mix-blend-mode', mixBlendMode || null!);
 
 
-    let overlays = selection.selectAll('.layer-overlay')
+    let overlays = selection.selectAll<HTMLDivElement, rendererTileLayer>('.layer-overlay')
       .data(_overlayLayers, d => d.source().name());
 
     overlays.exit()
@@ -189,7 +221,7 @@ export function rendererBackground(context) {
       .attr('class', 'layer layer-overlay')
       .merge(overlays)
       .each((layer, i, nodes) => d3_select(nodes[i]).call(layer));
-  }
+  };
 
 
   background.updateImagery = function() {
@@ -235,7 +267,7 @@ export function rendererBackground(context) {
       imageryUsed.push(dataLayer.getSrc());
     }
 
-    const photoOverlayLayers = {
+    const photoOverlayLayers: Record<string, string> = {
       streetside: 'Bing Streetside',
       mapillary: 'Mapillary Images',
       'mapillary-map-features': 'Mapillary Map Features',
@@ -262,8 +294,8 @@ export function rendererBackground(context) {
   background.sources = (extent, zoom, includeCurrent) => {
     if (!_imageryIndex) return [];   // called before init()?
 
-    let visible = {};
-    (_imageryIndex.query.bbox(extent.rectangle(), true) || [])
+    let visible: { [id: string]: true } = {};
+    (_imageryIndex.query.bbox(extent.rectangle()) || [])
       .forEach(d => visible[d.id] = true);
 
     const currSource = baseLayer.source();
@@ -324,11 +356,11 @@ export function rendererBackground(context) {
       fail = regex.test(template);
     }
 
-    baseLayer.source(!fail ? d : background.findSource('none'));
+    baseLayer.source(!fail ? d : background.findSource('none')!);
     dispatch.call('change');
     background.updateImagery();
     return background;
-  };
+  } as rendererBackground['baseLayerSource'];
 
 
   background.findSource = (id) => {
@@ -338,7 +370,7 @@ export function rendererBackground(context) {
 
 
   background.bing = () => {
-    background.baseLayerSource(background.findSource('Bing'));
+    background.baseLayerSource(background.findSource('Bing')!);
   };
 
 
@@ -355,7 +387,7 @@ export function rendererBackground(context) {
 
 
   background.toggleOverlayLayer = (d) => {
-    let layer;
+    let layer: rendererTileLayer;
     for (let i = 0; i < _overlayLayers.length; i++) {
       layer = _overlayLayers[i];
       if (layer.source() === d) {
@@ -400,7 +432,7 @@ export function rendererBackground(context) {
       background.updateImagery();
     }
     return background;
-  };
+  } as rendererBackground['offset'];
 
 
   background.brightness = function(d) {
@@ -408,7 +440,7 @@ export function rendererBackground(context) {
     _brightness = d;
     if (context.mode()) dispatch.call('change');
     return background;
-  };
+  } as rendererBackground['brightness'];
 
 
   background.contrast = function(d) {
@@ -416,7 +448,7 @@ export function rendererBackground(context) {
     _contrast = d;
     if (context.mode()) dispatch.call('change');
     return background;
-  };
+  } as rendererBackground['contrast'];
 
 
   background.saturation = function(d) {
@@ -424,7 +456,7 @@ export function rendererBackground(context) {
     _saturation = d;
     if (context.mode()) dispatch.call('change');
     return background;
-  };
+  } as rendererBackground['saturation'];
 
 
   background.sharpness = function(d) {
@@ -432,9 +464,9 @@ export function rendererBackground(context) {
     _sharpness = d;
     if (context.mode()) dispatch.call('change');
     return background;
-  };
+  } as rendererBackground['sharpness'];
 
-  let _loadPromise;
+  let _loadPromise: Promise<ImageryIndex>;
 
   background.ensureLoaded = () => {
     if (_loadPromise) return _loadPromise;
@@ -463,7 +495,7 @@ export function rendererBackground(context) {
           let bbox = turf_bbox(turf_bboxClip(
                 { type: 'MultiPolygon', coordinates: [ s.polygon || [extent.polygon()] ] },
                 extent.rectangle()));
-          let area = geoExtent(bbox.slice(0,2), bbox.slice(2,4)).area();
+          let area = geoExtent(bbox.slice(0,2) as Vec2, bbox.slice(2,4) as Vec2).area();
           return area / viewArea > 0.5; // min visible size: 50% of viewport area
         });
       }
@@ -471,7 +503,7 @@ export function rendererBackground(context) {
       // Decide which background layer to display
       if (requestedBackground && requestedBackground.indexOf('custom:') === 0) {
         const template = requestedBackground.replace(/^custom:/, '');
-        const custom = background.findSource('custom');
+        const custom = background.findSource('custom')!;
         background.baseLayerSource(custom.template(template));
         prefs('background-custom-template', template);
       } else {
@@ -481,7 +513,7 @@ export function rendererBackground(context) {
           isLastUsedValid && background.findSource(lastUsedBackground) ||
           background.findSource('Bing') ||
           first ||
-          background.findSource('none')
+          background.findSource('none')!
         );
       }
 
@@ -491,8 +523,8 @@ export function rendererBackground(context) {
       }
 
       const overlays = (hash.overlays || '').split(',');
-      overlays.forEach(overlay => {
-        overlay = background.findSource(overlay);
+      overlays.forEach(overlayId => {
+        const overlay = background.findSource(overlayId);
         if (overlay) {
           background.toggleOverlayLayer(overlay);
         }
@@ -509,10 +541,11 @@ export function rendererBackground(context) {
         const offset = hash.offset
           .replace(/;/g, ',')
           .split(',')
+          .map(Number)
           .map(n => !isNaN(n) && n);
 
         if (offset.length === 2) {
-          background.offset(geoMetersToOffset(offset));
+          background.offset(geoMetersToOffset(offset as Vec2));
         }
       }
     })

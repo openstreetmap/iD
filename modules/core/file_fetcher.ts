@@ -22,6 +22,7 @@ import type { QAData } from '../services/osmose.js';
 import type { LanguagesJSON, LocaleDataKey, LocaleIndexKey, LocalesJSON, Translations } from './localizer.js';
 import type { AddressFormatsJSON } from '../ui/fields/address.js';
 import type { WmfSite } from '../ui/fields/wikipedia.js';
+import type { ImageryLayer } from '../renderer/eli.def.js';
 import type { EntityId } from '../osm/id_manager.js';
 import type { OsmEntity } from '../osm/abstract-entity.js';
 import packageJSON from '../../package.json';
@@ -29,7 +30,7 @@ import packageJSON from '../../package.json';
 
 interface Definitions {
   address_formats: AddressFormatsJSON;
-  imagery: unknown;
+  imagery: ImageryLayer[];
   intro_graph: Record<EntityId, OsmEntity>;
   languages: LanguagesJSON;
   locales: LocalesJSON;

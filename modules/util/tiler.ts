@@ -2,20 +2,45 @@ import { range as d3_range } from 'd3-array';
 import { clamp } from 'es-toolkit/compat';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
+import type { Vec2, Vec3 } from '../geo/vector';
+import type { Projection } from '../geo/raw_mercator';
+import type { Feature, FeatureCollection } from 'geojson';
 
-/** @typedef {{ id: string; xyz: import('../geo/vector').Vec3; extent: geoExtent }} Tile */
+export interface Tile {
+    id: string;
+    xyz: Vec3;
+    extent: geoExtent
+}
+
+export type Tiles = Vec3[] & {
+    translate: Vec2;
+    scale: number;
+}
+
+export interface utilTiler {
+    (): Tiles;
+    getTiles(projection: Projection): Tile[];
+    getGeoJSON(projection: Projection): FeatureCollection;
+    tileSize: GetSet<this, number>;
+    zoomExtent: GetSet<this, Vec2>;
+    size: GetSet<this, Vec2>;
+    scale: GetSet<this, number>;
+    translate: GetSet<this, Vec2>;
+    margin: GetSet<this, number>;
+    skipNullIsland: GetSet<this, boolean>;
+}
 
 export function utilTiler() {
-    var _size = [256, 256];
+    let _size: Vec2 = [256, 256];
     var _scale = 256;
     var _tileSize = 256;
     var _zoomExtent = [0, 20];
-    var _translate = [_size[0] / 2, _size[1] / 2];
+    let _translate: Vec2 = [_size[0] / 2, _size[1] / 2];
     var _margin = 0;
     var _skipNullIsland = false;
 
 
-    function nearNullIsland(tile) {
+    function nearNullIsland(tile: Vec3) {
         var x = tile[0];
         var y = tile[1];
         var z = tile[2];
@@ -30,14 +55,14 @@ export function utilTiler() {
     }
 
 
-    function tiler() {
+    const tiler: utilTiler = () => {
         var z = geoScaleToZoom(_scale / (2 * Math.PI), _tileSize);
         var z0 = clamp(Math.round(z), _zoomExtent[0], _zoomExtent[1]);
         var tileMin = 0;
         var tileMax = Math.pow(2, z0) - 1;
         var log2ts = Math.log(_tileSize) * Math.LOG2E;
         var k = Math.pow(2, z - z0 + log2ts);
-        var origin = [
+        const origin: Vec2 = [
             (_translate[0] - _scale / 2) / k,
             (_translate[1] - _scale / 2) / k
         ];
@@ -51,7 +76,7 @@ export function utilTiler() {
             clamp(Math.ceil(_size[1] / k - origin[1]) + _margin,  tileMin, tileMax + 1)
         );
 
-        var tiles = [];
+        var tiles = [] as Vec3[] as Tiles;
         for (var i = 0; i < rows.length; i++) {
             var y = rows[i];
             for (var j = 0; j < cols.length; j++) {
@@ -70,12 +95,11 @@ export function utilTiler() {
         tiles.scale = k;
 
         return tiles;
-    }
+    };
 
 
     /**
      * getTiles() returns an array of tiles that cover the map view
-     * @returns {false | Tile[]}
      */
     tiler.getTiles = function(projection) {
         var origin = [
@@ -114,7 +138,7 @@ export function utilTiler() {
      * getGeoJSON() returns a FeatureCollection for debugging tiles
      */
     tiler.getGeoJSON = function(projection) {
-        var features = tiler.getTiles(projection).map(function(tile) {
+        var features = tiler.getTiles(projection).map(function(tile): Feature {
             return {
                 type: 'Feature',
                 properties: {
@@ -139,36 +163,35 @@ export function utilTiler() {
         if (!arguments.length) return _tileSize;
         _tileSize = val;
         return tiler;
-    };
+    } as utilTiler['tileSize'];
 
 
-    /** @type {GetSet<typeof tiler, Vec2>} */
     tiler.zoomExtent = function(val) {
         if (!arguments.length) return _zoomExtent;
         _zoomExtent = val;
         return tiler;
-    };
+    } as utilTiler['zoomExtent'];
 
 
     tiler.size = function(val) {
         if (!arguments.length) return _size;
         _size = val;
         return tiler;
-    };
+    } as utilTiler['size'];
 
 
     tiler.scale = function(val) {
         if (!arguments.length) return _scale;
         _scale = val;
         return tiler;
-    };
+    } as utilTiler['scale'];
 
 
     tiler.translate = function(val) {
         if (!arguments.length) return _translate;
         _translate = val;
         return tiler;
-    };
+    } as utilTiler['translate'];
 
 
     // number to extend the rows/columns beyond those covering the viewport
@@ -176,15 +199,14 @@ export function utilTiler() {
         if (!arguments.length) return _margin;
         _margin = +val;
         return tiler;
-    };
+    } as utilTiler['margin'];
 
 
-    /** @type {GetSet<typeof tiler, boolean>} */
     tiler.skipNullIsland = function(val) {
         if (!arguments.length) return _skipNullIsland;
         _skipNullIsland = val;
         return tiler;
-    };
+    } as utilTiler['skipNullIsland'];
 
 
     return tiler;

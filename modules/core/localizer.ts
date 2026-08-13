@@ -42,7 +42,7 @@ export interface LocalizedTextRenderer extends d3.Selector {
 };
 
 /** the return type from `tInfo()` */
-type TInfo = {
+export type TInfo = {
     locale: string | null,
     texts: (string | d3.Selector)[]
 };

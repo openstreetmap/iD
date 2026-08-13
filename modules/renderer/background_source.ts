@@ -1,12 +1,17 @@
 import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
 import { json as d3_json } from 'd3-fetch';
 
-import { t, localizer } from '../core/localizer';
+import { t, localizer, type LocalizedTextRenderer, type TInfo } from '../core/localizer';
 import { geoExtent, geoSphericalDistance } from '../geo';
 import { utilQsString, utilStringQs } from '../util';
 import { utilAesDecrypt } from '../util/aes';
 import { IntervalTasksQueue } from '../util/IntervalTasksQueue';
 import { localeDateString } from '../util/date';
+import type { Vec2, Vec3 } from '../geo/vector';
+import type { ImageryLayer } from './eli.def';
+import type { TileRequest } from './tile_layer';
+import type { BBox } from 'which-polygon';
+import type { Dispatch } from 'd3';
 
 var isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 
@@ -20,8 +25,13 @@ window.matchMedia?.(`
     isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 });
 
+export interface Vintage {
+    start: string | null;
+    end: string | null;
+    range?: string;
+}
 
-function vintageRange(vintage) {
+function vintageRange(vintage: Vintage) {
     let s;
     if (vintage.start || vintage.end) {
         s = (vintage.start || '?');
@@ -32,14 +42,55 @@ function vintageRange(vintage) {
     return s;
 }
 
+export interface TileSourceMetadata {
+    vintage?: Vintage;
+    source?: string;
+    description?: string;
+    resolution?: string;
+    accuracy?: string;
+}
 
-export function rendererBackgroundSource(data) {
-    const source = { ...data };   // shallow copy
+
+export interface TileSource extends Omit<RawTileSource, 'name' | 'description' | 'template' | 'best' | 'url'> {
+    overlay: boolean;
+    startDate: string;
+    endDate: string;
+    url(tiles: Vec3): string;
+    offset: GetSet<this, Vec2>;
+    validZoom(zoom: number, underzoom: number): boolean;
+    fetchTilemap?(center: Vec2): unknown;
+    getMetadata(center: Vec2, d: TileRequest, callback: Callback<TileSourceMetadata>): void;
+    terms_url?: string;
+    nudge(val: Vec2, zoomlevel: number): TileSource;
+    name(): string;
+    label(): LocalizedTextRenderer;
+    hasDescription(): boolean;
+    description(): LocalizedTextRenderer;
+    imageryUsed(): string | null;
+    best(): boolean;
+    template: GetSet<this, string>;
+    area(): number;
+    isLocatorOverlay(): boolean;
+    isHidden(): false;
+    projection: string;
+    copyrightNotices(zoom: number, extent: geoExtent): string | undefined;
+}
+
+export type RawTileSource = Partial<ImageryLayer> & {
+    id: string;
+    template: string;
+    tileSize?: number;
+    zoomExtent?: Vec2;
+    overzoom?: boolean;
+}
+
+export function rendererBackgroundSource(data: RawTileSource) {
+    const source = { ...data } as unknown as TileSource;   // shallow copy
     let _offset = [0, 0];
-    const _name = source.name;
-    const _description = source.description;
+    const _name = data.name;
+    const _description = data.description;
     const _best = !!source.best;
-    let _template = source.template;
+    let _template = data.template;
 
     source.tileSize = data.tileSize || 256;
     source.zoomExtent = data.zoomExtent || [0, 22];
@@ -49,7 +100,7 @@ export function rendererBackgroundSource(data) {
         if (!arguments.length) return _offset;
         _offset = val;
         return source;
-    };
+    } as TileSource['offset'];
 
 
     source.nudge = function(val, zoomlevel) {
@@ -73,7 +124,7 @@ export function rendererBackgroundSource(data) {
 
     source.hasDescription = function() {
         const id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        const descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: _description }).texts.join('');
+        const descriptionText = (localizer.tInfo('imagery.' + id_safe + '.description', { default: _description }) as TInfo).texts.join('');
         return !!descriptionText;
     };
 
@@ -107,7 +158,7 @@ export function rendererBackgroundSource(data) {
             _template = val;
         }
         return source;
-    };
+    } as TileSource['template'];
 
 
     source.url = function(coord) {
@@ -130,7 +181,7 @@ export function rendererBackgroundSource(data) {
 
 
         if (source.type === 'wms') {
-            var tileToProjectedCoords = (function(x, y, z) {
+            var tileToProjectedCoords = (function(x: number, y: number, z: number) {
                 var zoomSize = Math.pow(2, z);
                 var lon = x / zoomSize * Math.PI * 2 - Math.PI;
                 var lat = Math.atan(Math.sinh(Math.PI * (1 - 2 * y / zoomSize)));
@@ -143,9 +194,12 @@ export function rendererBackgroundSource(data) {
                             y: lat * 180 / Math.PI
                         };
                     default: // EPSG:3857 and synonyms
+                        // @ts-expect-error -- typedefs are wrong
                         var mercCoords = d3_geoMercatorRaw(lon, lat);
                         return {
+                            // @ts-expect-error -- typedefs are wrong
                             x: 20037508.34 / Math.PI * mercCoords[0],
+                            // @ts-expect-error -- typedefs are wrong
                             y: 20037508.34 / Math.PI * mercCoords[1]
                         };
                 }
@@ -160,7 +214,7 @@ export function rendererBackgroundSource(data) {
               switch (key) {
                 case 'width':
                 case 'height':
-                    return tileSize;
+                    return String(tileSize);
                 case 'proj':
                     return projection;
                 case 'wkid':
@@ -178,13 +232,13 @@ export function rendererBackgroundSource(data) {
                         return minXmaxY.x + ',' + maxXminY.y + ',' + maxXminY.x + ',' + minXmaxY.y;
                     }
                 case 'w':
-                    return minXmaxY.x;
+                    return String(minXmaxY.x);
                 case 's':
-                    return maxXminY.y;
+                    return String(maxXminY.y);
                 case 'n':
-                    return maxXminY.x;
+                    return String(maxXminY.x);
                 case 'e':
-                    return minXmaxY.y;
+                    return String(minXmaxY.y);
                 default:
                     return token;
               }
@@ -192,11 +246,11 @@ export function rendererBackgroundSource(data) {
 
         } else if (source.type === 'tms') {
             result = result
-                .replace('{x}', coord[0])
-                .replace('{y}', coord[1])
+                .replace('{x}', String(coord[0]))
+                .replace('{y}', String(coord[1]))
                 // TMS-flipped y coordinate
-                .replace(/\{[t-]y\}/, Math.pow(2, coord[2]) - coord[1] - 1)
-                .replace(/\{z(oom)?\}/, coord[2])
+                .replace(/\{[t-]y\}/, String(Math.pow(2, coord[2]) - coord[1] - 1))
+                .replace(/\{z(oom)?\}/, String(coord[2]))
                 // only fetch retina tiles for retina screens
                 .replace(/\{@2x\}|\{r\}/, isRetina ? '@2x' : '');
 
@@ -228,8 +282,8 @@ export function rendererBackgroundSource(data) {
 
     source.validZoom = function(z, underzoom) {
         if (underzoom === undefined) underzoom = 0;
-        return source.zoomExtent[0] - underzoom <= z &&
-            (source.overzoom || source.zoomExtent[1] > z);
+        return source.zoomExtent![0] - underzoom <= z &&
+            (source.overzoom || source.zoomExtent![1] > z);
     };
 
 
@@ -248,7 +302,7 @@ export function rendererBackgroundSource(data) {
 
 
     source.getMetadata = function(center, tileCoord, callback) {
-        var vintage = {
+        var vintage: Vintage = {
             start: localeDateString(source.startDate),
             end: localeDateString(source.endDate)
         };
@@ -263,9 +317,41 @@ export function rendererBackgroundSource(data) {
 }
 
 
-rendererBackgroundSource.Bing = function(data, dispatch) {
+rendererBackgroundSource.Bing = function(data: RawTileSource, dispatch: Dispatch<object, { 'change': [] }>) {
     // https://docs.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata
     // https://docs.microsoft.com/en-us/bingmaps/rest-services/directly-accessing-the-bing-maps-tiles
+    interface BingProvider {
+         attribution: string;
+        areas: {
+            zoom: Vec2;
+            extent: geoExtent;
+        }[];
+
+    }
+    interface BingMetadata {
+        resourceSets: {
+            resources: {
+                imageUrl: string;
+                imageUrlSubdomains: string[];
+                imageryProviders: {
+                    attribution: string;
+                    coverageAreas: {
+                        zoomMin: number;
+                        zoomMax: number;
+                        bbox: BBox
+                    }[];
+                }[];
+            }[]
+        }[];
+    }
+    interface BingVintage {
+        resourceSets: {
+            resources: {
+                vintageStart: string;
+                vintageEnd: string;
+            }[];
+        }[];
+    }
 
     //fallback url template
     data.template = 'https://ecn.t{switch:0,1,2,3}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=1&pr=odbl&n=z';
@@ -280,17 +366,17 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     */
     const strictParam = 'n';
 
-    var cache = {};
-    var inflight = {};
-    var providers = [];
+    var cache: { [tileId: string]: { metadata?: TileSourceMetadata } } = {};
+    var inflight: { [tileId: string]: true } = {};
+    var providers: BingProvider[] = [];
     var taskQueue = new IntervalTasksQueue(250);
     var metadataLastZoom = -1;
 
     key
         .then(keyString => `https://dev.virtualearth.net/REST/v1/Imagery/Metadata/AerialOSM?include=ImageryProviders&uriScheme=https&key=${keyString}`)
-        .then(d3_json)
+        .then(d3_json<BingMetadata>)
         .then(function(json) {
-            let imageryResource = json.resourceSets[0].resources[0];
+            let imageryResource = json!.resourceSets[0].resources[0];
 
             //retrieve and prepare up to date imagery template
             let template = imageryResource.imageUrl; //https://ecn.{subdomain}.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=10339
@@ -350,7 +436,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
             cache[tileID] = {};
         }
         if (cache[tileID] && cache[tileID].metadata) {
-            return callback(null, cache[tileID].metadata);
+            return callback(null, cache[tileID].metadata!);
         }
 
         inflight[tileID] = true;
@@ -361,13 +447,13 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         }
 
         taskQueue.enqueue(() => {
-            d3_json(url)
+            d3_json<BingVintage>(url)
                 .then(function (result) {
                     delete inflight[tileID];
                     if (!result) {
                         throw new Error('Unknown Error');
                     }
-                    var vintage = {
+                    var vintage: Vintage = {
                         start: localeDateString(result.resourceSets[0].resources[0].vintageStart),
                         end: localeDateString(result.resourceSets[0].resources[0].vintageEnd)
                     };
@@ -393,16 +479,33 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
 
 
 
-rendererBackgroundSource.Esri = function(data) {
+rendererBackgroundSource.Esri = function(data: RawTileSource) {
     // in addition to using the tilemap at zoom level 20, overzoom real tiles - #4327 (deprecated technique, but it works)
     if (data.template.match(/blankTile/) === null) {
         data.template = data.template + '?blankTile=false';
     }
 
+    interface EsriMetadata {
+        features: {
+            attributes: {
+                MinMapLevel: number;
+                MaxMapLevel: number;
+                SRC_DATE2: string;
+                NICE_NAME: string;
+                NICE_DESC: string;
+                SRC_RES: number;
+                SRC_ACC: number;
+
+                error?: { message: string };
+                features: unknown[];
+            };
+        }[];
+    }
+
     var esri = rendererBackgroundSource(data);
-    var cache = {};
-    var inflight = {};
-    var _prevCenter;
+    var cache: { [tileId: string]: { metadata?: TileSourceMetadata } } = {};
+    var inflight: { [tileId: string]: boolean } = {};
+    var _prevCenter: Vec2;
 
     // use a tilemap service to set maximum zoom for esri tiles dynamically
     // https://developers.arcgis.com/documentation/tiled-elevation-service/
@@ -425,7 +528,7 @@ rendererBackgroundSource.Esri = function(data) {
         var tilemapUrl = dummyUrl.replace(/tile\/[0-9]+\/[0-9]+\/[0-9]+\?blankTile=false/, 'tilemap') + '/' + z + '/' + y + '/' + x + '/8/8';
 
         // make the request and introspect the response from the tilemap server
-        d3_json(tilemapUrl)
+        d3_json<{ data: number[] }>(tilemapUrl)
             .then(function(tilemap) {
                 if (!tilemap) {
                     throw new Error('Unknown Error');
@@ -440,7 +543,7 @@ rendererBackgroundSource.Esri = function(data) {
                 }
 
                 // if any tiles are missing at level 20 we restrict maxZoom to 19
-                esri.zoomExtent[1] = (hasTiles ? 22 : 19);
+                esri.zoomExtent![1] = (hasTiles ? 22 : 19);
             })
             .catch(function() {
                 /* ignore */
@@ -454,11 +557,9 @@ rendererBackgroundSource.Esri = function(data) {
             return callback(null, {});
         }
         var tileID = tileCoord.slice(0, 3).join('/');
-        var zoom = Math.min(tileCoord[2], esri.zoomExtent[1]);
+        var zoom = Math.min(tileCoord[2], esri.zoomExtent![1]);
         var centerPoint = center[0] + ',' + center[1];  // long, lat (as it should be)
         var unknown = t('info_panels.background.unknown');
-        var vintage = {};
-        var metadata = {};
 
         if (inflight[tileID]) return;
 
@@ -470,15 +571,15 @@ rendererBackgroundSource.Esri = function(data) {
             cache[tileID] = {};
         }
         if (cache[tileID] && cache[tileID].metadata) {
-            return callback(null, cache[tileID].metadata);
+            return callback(null, cache[tileID].metadata!);
         }
 
         inflight[tileID] = true;
-        d3_json(url)
-            .then(function(result) {
+        d3_json<EsriMetadata>(url)
+            .then(function(_result) {
                 delete inflight[tileID];
 
-                result = result.features
+                const result = _result!.features
                     .map(f => f.attributes)
                     .find(a => a.MinMapLevel <= zoom && a.MaxMapLevel >= zoom);
 
@@ -492,12 +593,12 @@ rendererBackgroundSource.Esri = function(data) {
 
                 // pass through the discrete capture date from metadata
                 var captureDate = localeDateString(result.SRC_DATE2);
-                vintage = {
+                const vintage: Vintage = {
                     start: captureDate,
                     end: captureDate,
-                    range: captureDate
+                    range: captureDate!
                 };
-                metadata = {
+                const metadata: TileSourceMetadata = {
                     vintage: vintage,
                     source: clean(result.NICE_NAME),
                     description: clean(result.NICE_DESC),
@@ -506,10 +607,10 @@ rendererBackgroundSource.Esri = function(data) {
                 };
 
                 // append units - meters
-                if (isFinite(metadata.resolution)) {
+                if (isFinite(+metadata.resolution!)) {
                     metadata.resolution += ' m';
                 }
-                if (isFinite(metadata.accuracy)) {
+                if (isFinite(+metadata.accuracy!)) {
                     metadata.accuracy += ' m';
                 }
 
@@ -522,7 +623,7 @@ rendererBackgroundSource.Esri = function(data) {
             });
 
 
-        function clean(val) {
+        function clean(val: string | number) {
             return String(val).trim() || unknown;
         }
     };
@@ -559,7 +660,7 @@ rendererBackgroundSource.None = function() {
 };
 
 
-rendererBackgroundSource.Custom = function(template) {
+rendererBackgroundSource.Custom = function(template: string) {
     var source = rendererBackgroundSource({ id: 'custom', template: template });
 
 
