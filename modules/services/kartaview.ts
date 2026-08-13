@@ -1,37 +1,102 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
-import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
+import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity, type D3ZoomEvent } from 'd3-zoom';
 
 import RBush from 'rbush';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { utilQsString, utilRebind, utilSetTransform, utilTiler } from '../util';
-import { services } from './';
-import { searchLimited } from '../util/partition';
+import { services } from '.';
+import { searchLimited, type WithBbox } from '../util/partition';
 import { localeDateString } from '../util/date';
 import { patchHash } from '../behavior';
+import type { Projection } from '../geo/raw_mercator';
+import type { Tile } from '../util/tiler';
+import type { LineString } from 'geojson';
+import type { PhotoFramePhoto } from './pannellum_photo';
+import type { Vec2 } from '../geo/vector';
+import type { coreContext } from '../core';
 
+export interface KartaviewImage extends Partial<PhotoFramePhoto> {
+    service: 'photo';
+    loc: Vec2;
+    key: string;
+    imagePath: string;
+    sequence_id: string;
+    sequence_index: number;
+    captured_at: string;
+    captured_by: string;
+    id?: string;
+}
+
+interface RawBubble {
+    lat: string;
+    lng: string;
+    id: string;
+    heading: string;
+    shot_date: string;
+    date_added: string;
+    username: string;
+    name: string;
+    sequence_id: string;
+    sequence_index: string;
+}
+
+interface ApiResponse {
+    currentPageItems: RawBubble[];
+}
+
+export type KartaviewSequence = LineString & {
+    properties: {
+        key: string;
+        captured_at: string | null;
+        captured_by: string | null;
+    };
+};
 
 var apibase = 'https://kartaview.org';
 var maxResults = 1000;
 var tileZoom = 14;
 var tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
 var dispatch = d3_dispatch('loadedImages');
-var imgZoom = d3_zoom()
+var imgZoom = d3_zoom<HTMLDivElement, 0>()
     .extent([[0, 0], [320, 240]])
     .translateExtent([[0, 0], [320, 240]])
     .scaleExtent([1, 15]);
-var _oscCache;
-var _oscSelectedImage;
-var _loadViewerPromise;
+var _oscCache: {
+    images: {
+        rtree: RBush<WithBbox<KartaviewImage>>;
+        inflight: {
+            [tileId: string]: AbortController;
+        };
+        loaded: {
+            [tileId: string]: true;
+        };
+        nextPage: {
+            [tileId: string]: number;
+        };
+        forImageKey: {
+            [imageKey: string]: KartaviewImage;
+        }
+    };
+    sequences: {
+        [sequenceId: string]: {
+            rotation: number;
+            images: KartaviewImage[];
+        }
+    }
+};
+var _oscSelectedImage: KartaviewImage | null;
+var _loadViewerPromise: Promise<void>;
 
 
-function abortRequest(controller) {
+function abortRequest(controller: AbortController) {
     controller.abort();
 }
 
 
-function maxPageAtZoom(z) {
+function maxPageAtZoom(z: number) {
     if (z < 15)   return 2;
     if (z === 15) return 5;
     if (z === 16) return 10;
@@ -41,7 +106,7 @@ function maxPageAtZoom(z) {
 }
 
 
-function loadTiles(which, url, projection) {
+function loadTiles(which: 'images', url: string, projection: Projection) {
     var currZoom = Math.floor(geoScaleToZoom(projection.scale()));
     var tiles = tiler.getTiles(projection);
 
@@ -61,20 +126,20 @@ function loadTiles(which, url, projection) {
 }
 
 
-function loadNextTilePage(which, currZoom, url, tile) {
+function loadNextTilePage(which: 'images', currZoom: number, url: string, tile: Tile) {
     var cache = _oscCache[which];
     var bbox = tile.extent.bbox();
     var maxPages = maxPageAtZoom(currZoom);
     var nextPage = cache.nextPage[tile.id] || 1;
     var params = utilQsString({
-        ipp: maxResults,
-        page: nextPage,
+        ipp: String(maxResults),
+        page: String(nextPage),
         // client_id: clientId,
         bbTopLeft: [bbox.maxY, bbox.minX].join(','),
         bbBottomRight: [bbox.minY, bbox.maxX].join(',')
     }, true);
 
-    if (nextPage > maxPages) return;
+    if (nextPage > maxPages!) return;
 
     var id = tile.id + ',' + String(nextPage);
     if (cache.loaded[id] || cache.inflight[id]) return;
@@ -89,7 +154,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     };
 
-    d3_json(url, options)
+    d3_json<ApiResponse>(url, options)
         .then(function(data) {
             cache.loaded[id] = true;
             delete cache.inflight[id];
@@ -98,8 +163,8 @@ function loadNextTilePage(which, currZoom, url, tile) {
             }
 
             var features = data.currentPageItems.map(function(item) {
-                var loc = [+item.lng, +item.lat];
-                var d;
+                var loc: Vec2 = [+item.lng, +item.lat];
+                var d!: KartaviewImage;
 
                 if (which === 'images') {
                     d = {
@@ -148,17 +213,18 @@ function loadNextTilePage(which, currZoom, url, tile) {
         });
 }
 
-export default {
+export default new class {
+    event!: Pick<typeof dispatch, 'on'>;
 
-    init: function() {
+    init() {
         if (!_oscCache) {
             this.reset();
         }
 
         this.event = utilRebind(this, dispatch, 'on');
-    },
+    }
 
-    reset: function() {
+    reset() {
         if (_oscCache) {
             Object.values(_oscCache.images.inflight).forEach(abortRequest);
         }
@@ -167,28 +233,28 @@ export default {
             images: { inflight: {}, loaded: {}, nextPage: {}, rtree: new RBush(), forImageKey: {} },
             sequences: {}
         };
-    },
+    }
 
 
-    images: function(projection) {
+    images(projection: Projection) {
         var limit = 5;
         return searchLimited(limit, projection, _oscCache.images.rtree);
-    },
+    }
 
 
-    sequences: function(projection) {
+    sequences(projection: Projection) {
         var viewport = projection.clipExtent();
-        var min = [viewport[0][0], viewport[1][1]];
-        var max = [viewport[1][0], viewport[0][1]];
+        var min: Vec2 = [viewport[0][0], viewport[1][1]];
+        var max: Vec2 = [viewport[1][0], viewport[0][1]];
         var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
-        var sequenceKeys = {};
+        var sequenceKeys: Record<string, true> = {};
 
         // all sequences for images in viewport
         _oscCache.images.rtree.search(bbox)
             .forEach(function(d) { sequenceKeys[d.data.sequence_id] = true; });
 
         // make linestrings from those sequences
-        var lineStrings = [];
+        var lineStrings: KartaviewSequence[] = [];
         Object.keys(sequenceKeys)
             .forEach(function(sequenceKey) {
                 var seq = _oscCache.sequences[sequenceKey];
@@ -196,6 +262,7 @@ export default {
 
                 if (images) {
                     lineStrings.push({
+                        // note: this looks like geojson, but it's not. It's missing the 'geometry' subproperty
                         type: 'LineString',
                         coordinates: images.map(function (d) { return d.loc; }).filter(Boolean),
                         properties: {
@@ -207,27 +274,27 @@ export default {
                 }
             });
         return lineStrings;
-    },
+    }
 
 
-    cachedImage: function(imageKey) {
+    cachedImage(imageKey: string) {
         return _oscCache.images.forImageKey[imageKey];
-    },
+    }
 
 
-    loadImages: function(projection) {
+    loadImages(projection: Projection) {
         var url = apibase + '/1.0/list/nearby-photos/';
         loadTiles('images', url, projection);
-    },
+    }
 
 
-    ensureViewerLoaded: function(context) {
+    ensureViewerLoaded(context: coreContext) {
 
         if (_loadViewerPromise) return _loadViewerPromise;
 
         // add kartaview-wrapper
-        var wrap = context.container().select('.photoviewer').selectAll('.kartaview-wrapper')
-            .data([0]);
+        var wrap = context.container().select('.photoviewer').selectAll<Element, 0>('.kartaview-wrapper')
+            .data<0>([0]);
 
         var that = this;
 
@@ -281,14 +348,14 @@ export default {
         });
 
 
-        function zoomPan(d3_event) {
+        function zoomPan(d3_event: D3ZoomEvent<HTMLDivElement, 0>) {
             var t = d3_event.transform;
             context.container().select('.photoviewer .kartaview-image-wrap')
                 .call(utilSetTransform, t.x, t.y, t.k);
         }
 
 
-        function rotate(deg) {
+        function rotate(deg: number) {
             return function() {
                 if (!_oscSelectedImage) return;
                 var sequenceKey = _oscSelectedImage.sequence_id;
@@ -302,7 +369,7 @@ export default {
                 if (r < -180) r += 360;
                 sequence.rotation = r;
 
-                var wrap = context.container().select('.photoviewer .kartaview-wrapper');
+                var wrap = context.container().select<HTMLDivElement>('.photoviewer .kartaview-wrapper');
 
                 wrap
                     .transition()
@@ -316,7 +383,7 @@ export default {
             };
         }
 
-        function step(stepBy) {
+        function step(stepBy: number) {
             return function() {
                 if (!_oscSelectedImage) return;
                 var sequenceKey = _oscSelectedImage.sequence_id;
@@ -338,17 +405,17 @@ export default {
         _loadViewerPromise = Promise.resolve();
 
         return _loadViewerPromise;
-    },
+    }
 
 
-    showViewer: function(context) {
+    showViewer(context: coreContext) {
         const wrap = context.container().select('.photoviewer');
         const isHidden = wrap.selectAll('.photo-wrapper.kartaview-wrapper.hide').size();
 
         if (isHidden) {
             for (const service of Object.values(services)) {
                 if (service === this) continue;
-                if (typeof service.hideViewer === 'function') {
+                if (service && 'hideViewer' in service && typeof service.hideViewer === 'function') {
                     service.hideViewer(context);
                 }
             }
@@ -358,10 +425,10 @@ export default {
         }
 
         return this;
-    },
+    }
 
 
-    hideViewer: function(context) {
+    hideViewer(context: coreContext) {
         _oscSelectedImage = null;
 
         patchHash({ photo: null });
@@ -378,10 +445,10 @@ export default {
             .classed('currentView', false);
 
         return this.setStyles(context, null, true);
-    },
+    }
 
 
-    selectImage: function(context, imageKey) {
+    selectImage(context: coreContext, imageKey: string) {
 
         var d = this.cachedImage(imageKey);
 
@@ -399,7 +466,7 @@ export default {
 
         if (!d) return this;
 
-        var wrap = context.container().select('.photoviewer .kartaview-wrapper');
+        var wrap = context.container().select<HTMLDivElement>('.photoviewer .kartaview-wrapper');
         var imageWrap = wrap.selectAll('.kartaview-image-wrap');
         var attribution = wrap.selectAll('.photo-attribution').text('');
 
@@ -455,23 +522,23 @@ export default {
         }
 
         return this;
-    },
+    }
 
 
-    getSelectedImage: function() {
+    getSelectedImage() {
         return _oscSelectedImage;
-    },
+    }
 
 
-    getSequenceKeyForImage: function(d) {
+    getSequenceKeyForImage(d: KartaviewImage | undefined | null) {
         return d && d.sequence_id;
-    },
+    }
 
 
     // Updates the currently highlighted sequence and selected bubble.
     // Reset is only necessary when interacting with the viewport because
     // this implicitly changes the currently selected bubble/sequence
-    setStyles: function(context, hovered, reset) {
+    setStyles(context: coreContext, hovered?: KartaviewImage | null, reset?: boolean) {
         if (reset) {  // reset all layers
             context.container().selectAll('.viewfield-group')
                 .classed('highlighted', false)
@@ -492,21 +559,21 @@ export default {
         var selectedSequenceId = this.getSequenceKeyForImage(selected);
 
         // highlight sibling viewfields on either the selected or the hovered sequences
-        context.container().selectAll('.layer-kartaview .viewfield-group')
+        context.container().selectAll<SVGGElement, KartaviewImage>('.layer-kartaview .viewfield-group')
             .classed('highlighted', function(d) { return d.sequence_id === selectedSequenceId || d.id === hoveredImageId; })
             .classed('hovered', function(d) { return d.key === hoveredImageId; })
             .classed('currentView', function(d) { return d.key === selectedImageId; });
 
-        context.container().selectAll('.layer-kartaview .sequence')
+        context.container().selectAll<SVGGElement, KartaviewSequence>('.layer-kartaview .sequence')
             .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceId; })
             .classed('currentView', function(d) { return d.properties.key === selectedSequenceId; });
 
         // update viewfields if needed
-        context.container().selectAll('.layer-kartaview .viewfield-group .viewfield')
+        context.container().selectAll<SVGPathElement, void>('.layer-kartaview .viewfield-group .viewfield')
             .attr('d', viewfieldPath);
 
-        function viewfieldPath() {
-            var d = this.parentNode.__data__;
+        function viewfieldPath(this: SVGPathElement) {
+            var d = this.parentNode!.__data__;
             if (d.pano && d.key !== selectedImageId) {
                 return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
@@ -515,10 +582,10 @@ export default {
         }
 
         return this;
-    },
+    }
 
 
-    cache: function() {
+    cache() {
         return _oscCache;
     }
 

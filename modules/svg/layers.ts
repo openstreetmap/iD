@@ -22,6 +22,7 @@ import { utilArrayDifference, utilRebind } from '../util';
 import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
 import type { Projection } from '../geo/raw_mercator';
 import type { Vec2 } from '../geo/vector';
+import type { coreContext } from '../core';
 
 export type LayerDispatch = Dispatch<object, {
     change: [];
@@ -30,7 +31,7 @@ export type LayerDispatch = Dispatch<object, {
 
 export interface SvgLayer {
     (selection: d3.Selection<SVGGElement>): void;
-    enabled?(position: GeolocationPosition | boolean, enabled: boolean): boolean | SvgLayer;
+    enabled?(position: GeolocationPosition | boolean, enabled?: boolean): boolean | SvgLayer;
 }
 
 export interface SvgLayerItem {
@@ -39,7 +40,7 @@ export interface SvgLayerItem {
 }
 
 
-export function svgLayers(projection: Projection, context: iD.Context) {
+export function svgLayers(projection: Projection, context: coreContext) {
     var dispatch = d3_dispatch('change', 'photoDatesChanged');
     var svg = d3_select<SVGSVGElement, 0>(null!);
     var _layers: SvgLayerItem[] = [
