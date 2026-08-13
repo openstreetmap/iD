@@ -8,10 +8,15 @@ import {
 } from '../util';
 import { uiPopover } from './popover';
 
+export interface uiLengthIndicator<T extends Element> {
+    (selection: d3.Selection<T>): void
+    update(val: string): void;
+    silent: GetSet<this, boolean>;
+}
 
-export function uiLengthIndicator(maxChars) {
-    var _wrap = d3_select(null);
-    var _tooltip = uiPopover('tooltip max-length-warning')
+export function uiLengthIndicator<T extends HTMLElement>(maxChars: number) {
+    var _wrap: d3.Selection<HTMLSpanElement> = d3_select(null!);
+    var _tooltip = uiPopover<T, unknown>('tooltip max-length-warning')
         .placement('bottom')
         .hasArrow(true)
         .content(() => selection => {
@@ -21,8 +26,8 @@ export function uiLengthIndicator(maxChars) {
         });
     var _silent = false;
 
-    var lengthIndicator = function(selection) {
-        _wrap = selection.selectAll('span.length-indicator-wrap').data([0]);
+    const lengthIndicator: uiLengthIndicator<T> = function(selection: d3.Selection<T>) {
+        _wrap = selection.selectAll<HTMLSpanElement, 0>('span.length-indicator-wrap').data([0]);
         _wrap = _wrap.enter()
             .append('span')
             .merge(_wrap)
@@ -33,7 +38,7 @@ export function uiLengthIndicator(maxChars) {
     lengthIndicator.update = function(val) {
         const strLen = utilUnicodeCharsCount(utilCleanOsmString(val, Number.POSITIVE_INFINITY));
 
-        let indicator = _wrap.selectAll('span.length-indicator')
+        let indicator = _wrap.selectAll<HTMLSpanElement, 0>('span.length-indicator')
             .data([strLen]);
 
         indicator.enter()
@@ -62,7 +67,7 @@ export function uiLengthIndicator(maxChars) {
         if (!arguments.length) return _silent;
         _silent = val;
         return lengthIndicator;
-    };
+    } as uiLengthIndicator<T>['silent'];
 
     return lengthIndicator;
 }

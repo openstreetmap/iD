@@ -10,15 +10,21 @@ import { uiOsmoseHeader } from './osmose_header';
 import { uiViewOnOsmose } from './view_on_osmose';
 
 import { utilRebind } from '../util';
+import type { QAItem } from '../osm';
 
-export function uiOsmoseEditor(context) {
+export interface uiOsmoseEditor {
+    (selection: d3.Selection<HTMLDivElement>): void;
+    error: GetSet<this, QAItem>;
+}
+
+export function uiOsmoseEditor(context: iD.Context) {
   const dispatch = d3_dispatch('change');
   const qaDetails = uiOsmoseDetails(context);
-  const qaHeader = uiOsmoseHeader(context);
+  const qaHeader = uiOsmoseHeader();
 
-  let _qaItem;
+  let _qaItem: QAItem;
 
-  function osmoseEditor(selection) {
+  const osmoseEditor: uiOsmoseEditor = (selection) => {
 
     const header = selection.selectAll('.header')
       .data([0]);
@@ -38,7 +44,7 @@ export function uiOsmoseEditor(context) {
       .append('h2')
         .call(t.append('QA.osmose.title'));
 
-    let body = selection.selectAll('.body')
+    let body = selection.selectAll<HTMLDivElement, 0>('.body')
       .data([0]);
 
     body = body.enter()
@@ -46,7 +52,7 @@ export function uiOsmoseEditor(context) {
         .attr('class', 'body')
       .merge(body);
 
-    let editor = body.selectAll('.qa-editor')
+    let editor = body.selectAll<HTMLDivElement, 0>('.qa-editor')
       .data([0]);
 
     editor.enter()
@@ -57,20 +63,20 @@ export function uiOsmoseEditor(context) {
         .call(qaDetails.issue(_qaItem))
         .call(osmoseSaveSection);
 
-    const footer = selection.selectAll('.footer')
+    const footer = selection.selectAll<HTMLDivElement, 0>('.footer')
       .data([0]);
 
     footer.enter()
       .append('div')
       .attr('class', 'footer')
       .merge(footer)
-      .call(uiViewOnOsmose(context).what(_qaItem));
-  }
+      .call(uiViewOnOsmose().what(_qaItem));
+  };
 
-  function osmoseSaveSection(selection) {
+  function osmoseSaveSection(selection: d3.Selection<HTMLDivElement>) {
     const isSelected = (_qaItem && _qaItem.id === context.selectedErrorID());
     const isShown = (_qaItem && isSelected);
-    let saveSection = selection.selectAll('.qa-save')
+    let saveSection = selection.selectAll<HTMLDivElement, QAItem>('.qa-save')
       .data(
         (isShown ? [_qaItem] : []),
         d => `${d.id}-${d.status || 0}`
@@ -91,9 +97,9 @@ export function uiOsmoseEditor(context) {
         .call(qaSaveButtons);
   }
 
-  function qaSaveButtons(selection) {
+  function qaSaveButtons(selection: d3.Selection<HTMLDivElement>) {
     const isSelected = (_qaItem && _qaItem.id === context.selectedErrorID());
-    let buttonSection = selection.selectAll('.buttons')
+    let buttonSection = selection.selectAll<HTMLDivElement, QAItem>('.buttons')
       .data((isSelected ? [_qaItem] : []), d => d.status + d.id);
 
     // exit
@@ -117,7 +123,7 @@ export function uiOsmoseEditor(context) {
     buttonSection = buttonSection
       .merge(buttonEnter);
 
-    buttonSection.select('.close-button')
+    buttonSection.select<HTMLButtonElement>('.close-button')
       .call(t.append('QA.keepRight.close'))
       .on('click.close', function(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
@@ -128,7 +134,7 @@ export function uiOsmoseEditor(context) {
         }
       });
 
-    buttonSection.select('.ignore-button')
+    buttonSection.select<HTMLButtonElement>('.ignore-button')
       .call(t.append('QA.keepRight.ignore'))
       .on('click.ignore', function(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
@@ -145,7 +151,7 @@ export function uiOsmoseEditor(context) {
     if (!arguments.length) return _qaItem;
     _qaItem = val;
     return osmoseEditor;
-  };
+  } as uiOsmoseEditor['error'];
 
   return utilRebind(osmoseEditor, dispatch, 'on');
 }

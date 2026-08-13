@@ -5,53 +5,66 @@ import {
 import { svgIcon } from '../svg/icon';
 import { t, localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
+import type { uiSection } from './section';
 
+export interface uiPane {
+    id: string;
+    label: GetSet<this, d3.SelectorExact<HTMLHeadingElement>>;
+    key: GetSet<this, string>;
+    description: GetSet<this, string>;
+    iconName: GetSet<this, string>;
+    sections: GetSet<this, uiSection[]>;
+    selection(): d3.Selection<HTMLDivElement>;
+    togglePane(d3_event: KeyboardEvent): void;
+    renderToggleButton(selection: d3.Selection): void;
+    renderContent(selection: d3.Selection<HTMLDivElement>): void;
+    renderPane(selection: d3.Selection): void;
+}
 
-export function uiPane(id, context) {
+export function uiPane(id: string, context: iD.Context) {
 
-    var _key;
-    var _label = '';
+    var _key: string;
+    var _label = '' as unknown as d3.SelectorExact<HTMLHeadingElement>;
     var _description = '';
     var _iconName = '';
-    var _sections; // array of uiSection objects
+    var _sections: uiSection[]; // array of uiSection objects
 
-    var _paneSelection = d3_select(null);
+    var _paneSelection = d3_select<HTMLDivElement, unknown>(null!);
 
-    var _paneTooltip;
+    var _paneTooltip: uiTooltip<HTMLButtonElement>;
 
-    var pane = {
-        id: id
-    };
+    const pane: uiPane = function() {};
+    pane.id = id;
 
     pane.label = function(val) {
         if (!arguments.length) return _label;
         _label = val;
         return pane;
-    };
+    } as uiPane['label'];
 
     pane.key = function(val) {
         if (!arguments.length) return _key;
         _key = val;
         return pane;
-    };
+    } as uiPane['key'];
 
     pane.description = function(val) {
         if (!arguments.length) return _description;
         _description = val;
         return pane;
-    };
+    } as uiPane['description'];
 
     pane.iconName = function(val) {
         if (!arguments.length) return _iconName;
         _iconName = val;
         return pane;
-    };
+    } as uiPane['iconName'];
 
     pane.sections = function(val) {
         if (!arguments.length) return _sections;
         _sections = val;
         return pane;
-    };
+    } as uiPane['sections'];
 
     pane.selection = function() {
         return _paneSelection;
@@ -70,7 +83,7 @@ export function uiPane(id, context) {
     pane.renderToggleButton = function(selection) {
 
         if (!_paneTooltip) {
-            _paneTooltip = uiTooltip()
+            _paneTooltip = uiTooltip<HTMLButtonElement>()
                 .scrollContainer(context.container().select('.over-map'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
                 .title(() => _description)

@@ -1,13 +1,13 @@
 import { t, localizer } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
+import type { UiTool } from './types.def';
 
-export function uiToolSidebarToggle(context) {
+export function uiToolSidebarToggle(context: iD.Context) {
 
-    var tool = {
-        id: 'sidebar_toggle',
-        label: t.append('toolbar.inspect')
-    };
+    const tool: UiTool = function () {};
+    tool.id = 'sidebar_toggle';
+    tool.label = t.append('toolbar.inspect');
 
     tool.render = function(selection) {
         selection
@@ -17,7 +17,7 @@ export function uiToolSidebarToggle(context) {
             .on('click', function() {
                 context.ui().sidebar.toggle();
             })
-            .call(uiTooltip()
+            .call(uiTooltip<HTMLButtonElement>()
                 .placement('bottom')
                 .title(() => t.append('sidebar.tooltip'))
                 .keys([t('sidebar.key')])

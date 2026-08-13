@@ -1,11 +1,15 @@
 import { services } from '../services';
 import { t } from '../core/localizer';
+import type { QAItem } from '../osm';
 
+export interface uiOsmoseHeader extends d3.Selector {
+    issue: GetSet<this, QAItem>;
+}
 
 export function uiOsmoseHeader() {
-  let _qaItem;
+  let _qaItem: QAItem;
 
-  function issueTitle(d) {
+  function issueTitle(d: QAItem) {
     const unknown = t('inspector.unknown');
 
     if (!d) return unknown;
@@ -15,8 +19,8 @@ export function uiOsmoseHeader() {
     return ('title' in s) ? s.title : unknown;
   }
 
-  function osmoseHeader(selection) {
-    const header = selection.selectAll('.qa-header')
+  const osmoseHeader: uiOsmoseHeader = (selection) => {
+    const header = selection.selectAll<HTMLDivElement, QAItem>('.qa-header')
       .data(
         (_qaItem ? [_qaItem] : []),
         d => `${d.id}-${d.status || 0}`
@@ -32,6 +36,7 @@ export function uiOsmoseHeader() {
     const svgEnter = headerEnter
       .append('div')
         .attr('class', 'qa-header-icon')
+        // @ts-expect-error -- string < number
         .classed('new', d => d.id < 0)
       .append('svg')
         .attr('width', '20px')
@@ -57,13 +62,13 @@ export function uiOsmoseHeader() {
       .append('div')
         .attr('class', 'qa-header-label')
         .text(issueTitle);
-  }
+  };
 
   osmoseHeader.issue = function(val) {
     if (!arguments.length) return _qaItem;
     _qaItem = val;
     return osmoseHeader;
-  };
+  } as uiOsmoseHeader['issue'];
 
   return osmoseHeader;
 }

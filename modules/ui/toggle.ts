@@ -8,9 +8,9 @@ import { select as d3_select } from 'd3-selection';
 //
 // When the selection is a direct child of a <details> element, the
 // parent's `open` property is used instead of the `hide` class.
-export function uiToggle(show, callback) {
-    return function(selection) {
-        const parent = selection.node().parentNode;
+export function uiToggle<T extends Element>(show: boolean, callback?: (this: T) => void) {
+    return function(selection: d3.Selection<T>) {
+        const parent = selection.node()!.parentNode as HTMLDialogElement;
         const isDetails = parent && parent.tagName === 'DETAILS';
 
         // ensure content is visible before animating

@@ -1,15 +1,24 @@
+import type { coreGraph } from '../core';
 import { t } from '../core/localizer';
-import { OsmAbstractEntity, osmNote, osmRelation, osmWay } from '../osm';
+import { OsmAbstractEntity, osmNote, osmRelation, osmWay, type OsmEntity } from '../osm';
 import { svgIcon } from '../svg/icon';
 import { getRelativeDate } from '../util/date';
 
+type osmNote = any;
 
-export function uiViewOnOSM(context) {
-    var _what;   // an osmEntity or osmNote
+type What = OsmEntity | osmNote;
+
+export interface uiViewOnOSM extends d3.Selector {
+    what: GetSet<uiViewOnOSM, What>;
+}
 
 
-    function viewOnOSM(selection) {
-        var url;
+export function uiViewOnOSM(context:iD.Context) {
+    var _what: What;   // an osmEntity or osmNote
+
+
+    function viewOnOSM(selection: d3.Selection) {
+        var url!: string;
         if (_what instanceof OsmAbstractEntity) {
             url = context.connection().historyURL(_what);
         } else if (_what instanceof osmNote) {
@@ -17,7 +26,7 @@ export function uiViewOnOSM(context) {
         }
 
         var data = ((!_what || _what.isNew()) ? [] : [_what]);
-        var link = selection.selectAll('.view-on-osm')
+        var link = selection.selectAll<HTMLElement, What>('.view-on-osm')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -39,7 +48,7 @@ export function uiViewOnOSM(context) {
 
             linkEnter
                 .call(t.append('inspector.last_touched', {
-                    timeago: getRelativeDate(new Date(timestamp)),
+                    timeago: getRelativeDate(new Date(timestamp!)),
                     user
                 }))
                 .attr('title', t('inspector.view_on_osm'));
@@ -55,22 +64,17 @@ export function uiViewOnOSM(context) {
         if (!arguments.length) return _what;
         _what = _;
         return viewOnOSM;
-    };
+    } as uiViewOnOSM['what'];
 
     return viewOnOSM;
 }
 
 
-/**
- * @param {iD.Graph} graph
- * @param {iD.OsmEntity} feature
- */
-uiViewOnOSM.findLastModifiedChild = (graph, feature) => {
+uiViewOnOSM.findLastModifiedChild = (graph: coreGraph, feature: OsmEntity) => {
     let latest = feature;
 
-    /** @param {iD.OsmEntity} obj */
-    function recurseChilds(obj) {
-        if (obj.timestamp > latest.timestamp) {
+    function recurseChilds(obj: OsmEntity) {
+        if (obj.timestamp! > latest.timestamp!) {
             latest = obj;
         }
         if (obj instanceof osmWay) {

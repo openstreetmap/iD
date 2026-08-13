@@ -20,8 +20,15 @@ const _listeners = {};
 // within and between iD sessions on the same site.
 //
 /**
+ * @overload getter
  * @param {string} k
- * @param {string?} [v]
+ * @param {undefined} [v]
+ * @returns {string} the value
+ */
+/**
+ * @overload setter
+ * @param {string} k
+ * @param {string | number | boolean | null} v
  * @returns {boolean} true if the action succeeded
  */
 function corePreferences(k, v) {

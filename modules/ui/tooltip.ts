@@ -2,56 +2,69 @@ import { utilFunctor } from '../util/util';
 import { t } from '../core/localizer';
 import { uiPopover } from './popover';
 
-export function uiTooltip(klass) {
+type Title = d3.Selector | string;
 
-    var tooltip = uiPopover((klass || '') + ' tooltip')
-        .displayType('hover');
+type TitleFunc<This extends HTMLElement, T> = d3.ValueFn<This, T, Title>;
+type KeysFunc<This extends HTMLElement, T> = d3.ValueFn<This, T, string[]>;
 
-    var _title = function() {
-        var title = this.getAttribute('data-original-title');
+export interface uiTooltip<This extends HTMLElement = HTMLElement, T = unknown> extends uiPopover<This, T> {
+    title: GetSetFunctor<this, string, TitleFunc<This, T>>;
+    heading: GetSetFunctor<this, string, TitleFunc<This, T>>;
+    keys: GetSetFunctor<this, string[], KeysFunc<This, T>>;
+}
+
+export function uiTooltip<This extends HTMLElement, T = unknown>(klass?: string) {
+
+    const tooltip = uiPopover<This, T>((klass || '') + ' tooltip') as uiTooltip<This, T>;
+    tooltip.displayType('hover');
+
+    var _title: TitleFunc<This, T> = function(this: This) {
+        var title = this.getAttribute('data-original-title')!;
         if (title) {
             return title;
         } else {
-            title = this.getAttribute('title');
+            title = this.getAttribute('title')!;
             this.removeAttribute('title');
             this.setAttribute('data-original-title', title);
         }
         return title;
     };
 
-    var _heading = utilFunctor(null);
-    var _keys = utilFunctor(null);
+    var _heading: TitleFunc<This, T> = utilFunctor<Title, [d: T]>(null!);
+    var _keys: KeysFunc<This, T> = utilFunctor<string[], [d: T]>(null!);
 
     tooltip.title = function(val) {
         if (!arguments.length) return _title;
-        _title = utilFunctor(val);
+        _title = utilFunctor<Title, Parameters<TitleFunc<This, T>>>(val);
         return tooltip;
-    };
+    } as uiTooltip<This, T>['title'];
 
     tooltip.heading = function(val) {
         if (!arguments.length) return _heading;
-        _heading = utilFunctor(val);
+        _heading = utilFunctor<Title, Parameters<TitleFunc<This, T>>>(val);
         return tooltip;
-    };
+    } as uiTooltip<This, T>['heading'];
 
     tooltip.keys = function(val) {
         if (!arguments.length) return _keys;
-        _keys = utilFunctor(val);
+        _keys = utilFunctor<string[], Parameters<KeysFunc<This, T>>>(val);
         return tooltip;
-    };
+    } as uiTooltip<This, T>['keys'];
 
-    tooltip.content(function() {
-        var heading = _heading.apply(this, arguments);
-        var text = _title.apply(this, arguments);
-        var keys = _keys.apply(this, arguments);
+    tooltip.content(function(...args) {
+        // these must be `const`, otherwise the narrowing below is not
+        // preserved inside the closures which reference them.
+        const heading = _heading.apply(this, args);
+        const text = _title.apply(this, args);
+        const keys = _keys.apply(this, args);
 
-        var headingCallback = typeof heading === 'function' ? heading : s => s.text(heading);
-        var textCallback = typeof text === 'function' ? text : s => s.text(text);
+        var headingCallback = typeof heading === 'function' ? heading : (s: d3.Selection<HTMLDivElement>) => s.text(heading);
+        var textCallback = typeof text === 'function' ? text : (s: d3.Selection<HTMLDivElement>) => s.text(text);
 
         return function(selection) {
 
             var headingSelect = selection
-                .selectAll('.tooltip-heading')
+                .selectAll<HTMLDivElement, Title>('.tooltip-heading')
                 .data(heading ? [heading] :[]);
 
             headingSelect.exit()
@@ -65,7 +78,7 @@ export function uiTooltip(klass) {
                 .call(headingCallback);
 
             var textSelect = selection
-                .selectAll('.tooltip-text')
+                .selectAll<HTMLDivElement, Title>('.tooltip-text')
                 .data(text ? [text] :[]);
 
             textSelect.exit()
@@ -80,7 +93,7 @@ export function uiTooltip(klass) {
                 .call(textCallback);
 
             var keyhintWrap = selection
-                .selectAll('.keyhint-wrap')
+                .selectAll<HTMLDivElement, 0>('.keyhint-wrap')
                 .data(keys && keys.length ? [0] : []);
 
             keyhintWrap.exit()

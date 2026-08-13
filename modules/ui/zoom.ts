@@ -2,16 +2,25 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, localizer } from '../core/localizer';
+import { t, localizer, type LocalizedTextRenderer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
 import { uiTooltip } from './tooltip';
 import { utilKeybinding } from '../util/keybinding';
 
+interface Zoom {
+    id: string;
+    icon: string;
+    title: LocalizedTextRenderer
+    action(event: WheelEvent): void;
+    disabled(): boolean;
+    disabledTitle: LocalizedTextRenderer;
+    key: string;
+}
 
-export function uiZoom(context) {
+export function uiZoom(context: iD.Context) {
 
-    var zooms = [{
+    var zooms: Zoom[] = [{
         id: 'zoom-in',
         icon: 'iD-icon-plus',
         title: t.append('zoom.in'),
@@ -33,32 +42,32 @@ export function uiZoom(context) {
         key: '-'
     }];
 
-    function zoomIn(d3_event) {
+    function zoomIn(d3_event: WheelEvent | KeyboardEvent) {
         if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomIn();
     }
 
-    function zoomOut(d3_event) {
+    function zoomOut(d3_event: WheelEvent | KeyboardEvent) {
         if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomOut();
     }
 
-    function zoomInFurther(d3_event) {
+    function zoomInFurther(d3_event: WheelEvent | KeyboardEvent) {
         if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomInFurther();
     }
 
-    function zoomOutFurther(d3_event) {
+    function zoomOutFurther(d3_event: WheelEvent | KeyboardEvent) {
         if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomOutFurther();
     }
 
-    return function(selection) {
-        var tooltipBehavior = uiTooltip()
+    return function(selection: d3.Selection) {
+        var tooltipBehavior = uiTooltip<HTMLButtonElement, Zoom>()
             .scrollContainer(context.container().select('.over-map'))
             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             .title(function(d) {
@@ -71,14 +80,14 @@ export function uiZoom(context) {
                 return [d.key];
             });
 
-        var lastPointerUpType;
+        var lastPointerUpType: string | null;
 
         var buttons = selection.selectAll('button')
             .data(zooms)
             .enter()
             .append('button')
             .attr('class', function(d) { return d.id; })
-            .on('pointerup.editor', function(d3_event) {
+            .on('pointerup.editor', function(d3_event: PointerEvent) {
                 lastPointerUpType = d3_event.pointerType;
             })
             .on('click.editor', function(d3_event, d) {

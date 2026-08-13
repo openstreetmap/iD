@@ -5,73 +5,87 @@ import {
 import { uiDisclosure } from './disclosure';
 import { utilFunctor } from '../util';
 
+export interface uiSection {
+    id: string;
+    classes: GetSetFunctor<this, string>;
+    label: GetSetFunctor<this, string | d3.Selector>;
+    expandedByDefault: GetSetFunctor<this, boolean>;
+    shouldDisplay: GetSet<this, boolean | (() => boolean)>;
+    content: GetSet<this, d3.Selector>;
+    disclosureContent: GetSet<this, d3.SelectorExact<HTMLDivElement>>;
+    disclosureExpanded: GetSet<this, boolean>;
+    render(selection: d3.Selection<HTMLDivElement>): void;
+    reRender(): void;
+    selection(): d3.Selection<HTMLDivElement>;
+    disclosure(): uiDisclosure;
+}
+
 // A unit of controls or info to be used in a layout, such as within a pane.
 // Can be labeled and collapsible.
-export function uiSection(id, context) {
+export function uiSection(id: string, context: iD.Context) {
 
     var _classes = utilFunctor('');
-    var _shouldDisplay;
-    var _content;
+    var _shouldDisplay: () => boolean;
+    var _content: d3.Selector;
 
-    var _disclosure;
-    var _label;
+    var _disclosure: uiDisclosure;
+    var _label: () => string | d3.Selector;
     var _expandedByDefault = utilFunctor(true);
-    var _disclosureContent;
-    var _disclosureExpanded;
+    var _disclosureContent: d3.SelectorExact<HTMLDivElement>;
+    var _disclosureExpanded: boolean | undefined;
 
-    var _containerSelection = d3_select(null);
+    var _containerSelection = d3_select<HTMLDivElement, 0>(null!);
 
-    var section = {
-        id: id
-    };
+    const section: uiSection = function() {};
+    section.id = id;
 
     section.classes = function(val) {
         if (!arguments.length) return _classes;
         _classes = utilFunctor(val);
         return section;
-    };
+    } as uiSection['classes'];
 
     section.label = function(val) {
         if (!arguments.length) return _label;
-        _label = utilFunctor(val);
+        _label = utilFunctor<string | d3.Selector, []>(val);
         return section;
-    };
+    } as uiSection['label'];
 
     section.expandedByDefault = function(val) {
         if (!arguments.length) return _expandedByDefault;
         _expandedByDefault = utilFunctor(val);
         return section;
-    };
+    } as uiSection['expandedByDefault'];
 
     section.shouldDisplay = function(val) {
         if (!arguments.length) return _shouldDisplay;
         _shouldDisplay = utilFunctor(val);
         return section;
-    };
+    } as uiSection['shouldDisplay'];
 
     section.content = function(val) {
         if (!arguments.length) return _content;
         _content = val;
         return section;
-    };
+    } as uiSection['content'];
 
     section.disclosureContent = function(val) {
         if (!arguments.length) return _disclosureContent;
         _disclosureContent = val;
         return section;
-    };
+    } as uiSection['disclosureContent'];
 
     section.disclosureExpanded = function(val) {
         if (!arguments.length) return _disclosureExpanded;
         _disclosureExpanded = val;
         return section;
-    };
+    } as uiSection['disclosureExpanded'];
 
     // may be called multiple times
     section.render = function(selection) {
 
         _containerSelection = selection
-            .selectAll('.section-' + id)
+            .selectAll<HTMLDivElement, 0>('.section-' + id)
             .data([0]);
 
         var sectionEnter = _containerSelection
@@ -100,7 +114,7 @@ export function uiSection(id, context) {
     };
 
     // may be called multiple times
-    function renderContent(selection) {
+    function renderContent(selection: d3.Selection<HTMLDivElement>) {
         if (_shouldDisplay) {
             var shouldDisplay = _shouldDisplay();
             selection.classed('hide', !shouldDisplay);

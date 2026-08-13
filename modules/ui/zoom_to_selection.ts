@@ -2,20 +2,20 @@ import { t, localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
 import { svgIcon } from '../svg/icon';
 
-export function uiZoomToSelection(context) {
+export function uiZoomToSelection(context: iD.Context) {
 
     function isDisabled() {
         var mode = context.mode();
         return !mode || !mode.zoomToSelected;
     }
 
-    var _lastPointerUpType;
+    var _lastPointerUpType: string | null;
 
-    function pointerup(d3_event) {
+    function pointerup(d3_event: PointerEvent) {
         _lastPointerUpType = d3_event.pointerType;
     }
 
-    function click(d3_event) {
+    function click(d3_event: MouseEvent) {
         d3_event.preventDefault();
 
         if (isDisabled()) {
@@ -36,9 +36,9 @@ export function uiZoomToSelection(context) {
         _lastPointerUpType = null;
     }
 
-    return function(selection) {
+    return function(selection: d3.Selection) {
 
-        var tooltipBehavior = uiTooltip()
+        var tooltipBehavior = uiTooltip<HTMLButtonElement>()
             .scrollContainer(context.container().select('.over-map'))
             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             .title(function() {

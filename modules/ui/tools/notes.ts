@@ -10,13 +10,15 @@ import {
 import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
+import type { UiTool } from './types.def';
 
-export function uiToolNotes(context) {
+type Mode = ReturnType<typeof modeAddNote> & { icon?: string };
 
-    var tool = {
-        id: 'notes',
-        label: t.append('modes.add_note.label')
-    };
+export function uiToolNotes(context: iD.Context) {
+
+    const tool: UiTool = function() {};
+    tool.id = 'notes';
+    tool.label = t.append('modes.add_note.label');
 
     var mode = modeAddNote(context);
 
@@ -64,8 +66,8 @@ export function uiToolNotes(context) {
             var showNotes = notesEnabled();
             var data = showNotes ? [mode] : [];
 
-            var buttons = selection.selectAll('button.add-button')
-                .data(data, function(d) { return d.id; });
+            var buttons = selection.selectAll<HTMLButtonElement, Mode>('button.add-button')
+                .data<Mode>(data, function(d) { return d.id; });
 
             // exit
             buttons.exit()
@@ -88,7 +90,7 @@ export function uiToolNotes(context) {
                         context.enter(d);
                     }
                 })
-                .call(uiTooltip()
+                .call(uiTooltip<HTMLButtonElement, Mode>()
                     .placement('bottom')
                     .title(function(d) { return d.description; })
                     .keys(function(d) { return [d.key]; })

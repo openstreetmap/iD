@@ -8,16 +8,23 @@ import { t, localizer } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiCmd } from '../cmd';
 import { uiTooltip } from '../tooltip';
+import type { UiTool } from './types.def';
 
+interface Command {
+    id: string;
+    cmd: string;
+    action(): void;
+    annotation(): string;
+    icon: string;
+}
 
-export function uiToolUndoRedo(context) {
+export function uiToolUndoRedo(context: iD.Context) {
 
-    var tool = {
-        id: 'undo_redo',
-        label: t.append('toolbar.undo_redo')
-    };
+    const tool: UiTool = function() {};
+    tool.id = 'undo_redo';
+    tool.label = t.append('toolbar.undo_redo');
 
-    var commands = [{
+    const commands: Command[] = [{
         id: 'undo',
         cmd: uiCmd('⌘Z'),
         action: function() {
@@ -45,8 +52,8 @@ export function uiToolUndoRedo(context) {
     }
 
 
-    tool.render = function(selection) {
-        var tooltipBehavior = uiTooltip()
+    tool.render = function(selection: d3.Selection) {
+        var tooltipBehavior = uiTooltip<HTMLButtonElement, Command>()
             .placement('bottom')
             .title(function (d) {
                 return d.annotation() ?
@@ -58,14 +65,14 @@ export function uiToolUndoRedo(context) {
             })
             .scrollContainer(context.container().select('.top-toolbar'));
 
-        var lastPointerUpType;
+        var lastPointerUpType: string | null;
 
         var buttons = selection.selectAll('button')
             .data(commands)
             .enter()
             .append('button')
             .attr('class', function(d) { return 'disabled ' + d.id + '-button bar-button'; })
-            .on('pointerup', function(d3_event) {
+            .on('pointerup', function(d3_event: PointerEvent) {
                 // `pointerup` is always called before `click`
                 lastPointerUpType = d3_event.pointerType;
             })

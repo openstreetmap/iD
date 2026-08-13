@@ -4,22 +4,29 @@ import { t } from '../core/localizer';
 import { uiCombobox } from './combobox';
 import { utilGetSetValue, utilNoAuto } from '../util';
 
+type uiField = any;
 
-export function uiFormFields(context) {
+export interface uiFormFields extends d3.Selector {
+    fieldsArr: GetSet<this, uiField[]>;
+    state: GetSet<this, string>;
+    klass: GetSet<this, string>;
+}
+
+export function uiFormFields(context: iD.Context) {
     var moreCombo = uiCombobox(context, 'more-fields');
-    var _fieldsArr = [];
+    var _fieldsArr: uiField[] = [];
     var _lastPlaceholder = '';
     var _state = '';
     var _klass = '';
 
 
-    function formFields(selection) {
+    const formFields: uiFormFields = (selection) => {
         var allowedFields = _fieldsArr.filter(function(field) { return field.isAllowed(); });
         var shown = allowedFields.filter(function(field) { return field.isShown(); });
         var notShown = allowedFields.filter(function(field) { return !field.isShown(); })
             .sort(function(a, b) { return (a.universal === b.universal ? 0 : a.universal ? 1 : -1); });
 
-        var container = selection.selectAll('.form-fields-container')
+        var container = selection.selectAll<HTMLDivElement, 0>('.form-fields-container')
             .data([0]);
 
         container = container.enter()
@@ -28,7 +35,7 @@ export function uiFormFields(context) {
             .merge(container);
 
 
-        var fields = container.selectAll('.wrap-form-field')
+        var fields = container.selectAll<HTMLDivElement, uiField>('.wrap-form-field')
             .data(shown, function(d) { return d.id + (d.entityIDs ? d.entityIDs.join() : ''); });
 
         fields.exit()
@@ -51,7 +58,7 @@ export function uiFormFields(context) {
             });
 
 
-        var titles = [];
+        var titles: string[] = [];
         var moreFields = notShown.map(function(field) {
             var title = field.title();
             titles.push(title);
@@ -72,7 +79,7 @@ export function uiFormFields(context) {
         var placeholder = titles.slice(0,3).join(', ') + ((titles.length > 3) ? '…' : '');
 
 
-        var more = selection.selectAll('.more-fields')
+        var more = selection.selectAll<HTMLLabelElement, 0>('.more-fields')
             .data((_state === 'hover' || moreFields.length === 0) ? [] : [0]);
 
         more.exit()
@@ -91,7 +98,7 @@ export function uiFormFields(context) {
             .merge(more);
 
 
-        var input = more.selectAll('.value')
+        var input = more.selectAll<HTMLInputElement, 0>('.value')
             .data([0]);
 
         input.exit()
@@ -115,7 +122,7 @@ export function uiFormFields(context) {
                     field.show();
                     selection.call(formFields);  // rerender
                     field.focus();
-                })
+                }) as any
             );
 
         // avoid updating placeholder excessively (triggers style recalc)
@@ -123,26 +130,26 @@ export function uiFormFields(context) {
             input.attr('placeholder', placeholder);
             _lastPlaceholder = placeholder;
         }
-    }
+    };
 
 
     formFields.fieldsArr = function(val) {
         if (!arguments.length) return _fieldsArr;
         _fieldsArr = val || [];
         return formFields;
-    };
+    } as uiFormFields['fieldsArr'];
 
     formFields.state = function(val) {
         if (!arguments.length) return _state;
         _state = val;
         return formFields;
-    };
+    } as uiFormFields['state'];
 
     formFields.klass = function(val) {
         if (!arguments.length) return _klass;
         _klass = val;
         return formFields;
-    };
+    } as uiFormFields['klass'];
 
 
     return formFields;

@@ -11,13 +11,13 @@ import { icon } from './intro/helper';
 // This currently only works with the 'restrictions' field
 // It borrows some code from uiHelp
 
-export function uiFieldHelp(context, fieldName) {
-    var fieldHelp = {};
-    var _inspector = d3_select(null);
-    var _wrap = d3_select(null);
-    var _body = d3_select(null);
+export function uiFieldHelp(context: iD.Context, fieldName: string) {
+    const fieldHelp = function() {};
+    var _inspector = d3_select<HTMLElement, unknown>(null!);
+    var _wrap = d3_select<HTMLElement, unknown>(null!);
+    var _body = d3_select<HTMLDivElement, 0>(null!);
 
-    var fieldHelpKeys = {
+    var fieldHelpKeys: Record<string, [parent: string, children: string[]][]> = {
         restrictions: [
             ['about',[
                 'about',
@@ -51,7 +51,7 @@ export function uiFieldHelp(context, fieldName) {
         ]
     };
 
-    var fieldHelpHeadings = {};
+    var fieldHelpHeadings: Record<string, number> = {};
 
     var replacements = {
         distField: { html: localizer.t_html('restriction.controls.distance') },
@@ -79,7 +79,7 @@ export function uiFieldHelp(context, fieldName) {
         return {
             key: helpkey,
             title: localizer.t_html(helpkey + '.title'),
-            html: marked(text.trim())
+            html: marked(text.trim(), { async: false })
         };
     });
 
@@ -108,7 +108,7 @@ export function uiFieldHelp(context, fieldName) {
     }
 
 
-    function clickHelp(index) {
+    function clickHelp(index: number) {
         var d = docs[index];
         var tkeys = fieldHelpKeys[fieldName][index][1];
 
@@ -138,10 +138,10 @@ export function uiFieldHelp(context, fieldName) {
     }
 
 
-    fieldHelp.button = function(selection) {
+    fieldHelp.button = function(selection: d3.Selection) {
         if (_body.empty()) return;
 
-        var button = selection.selectAll('.field-help-button')
+        var button = selection.selectAll<HTMLButtonElement, 0>('.field-help-button')
             .data([0]);
 
         // enter/update
@@ -163,8 +163,8 @@ export function uiFieldHelp(context, fieldName) {
 
 
     function updatePosition() {
-        var wrap = _wrap.node();
-        var inspector = _inspector.node();
+        var wrap = _wrap.node()!;
+        var inspector = _inspector.node()!;
         var wRect = wrap.getBoundingClientRect();
         var iRect = inspector.getBoundingClientRect();
 
@@ -173,7 +173,7 @@ export function uiFieldHelp(context, fieldName) {
     }
 
 
-    fieldHelp.body = function(selection) {
+    fieldHelp.body = function(selection: d3.Selection) {
         // This control expects the field to have a form-field-input-wrap div
         _wrap = selection.selectAll('.form-field-input-wrap');
         if (_wrap.empty()) return;
@@ -182,7 +182,7 @@ export function uiFieldHelp(context, fieldName) {
         _inspector = context.container().select('.sidebar .entity-editor-pane .inspector-body');
         if (_inspector.empty()) return;
 
-        _body = _inspector.selectAll('.field-help-body')
+        _body = _inspector.selectAll<HTMLDivElement, 0>('.field-help-body')
             .data([0]);
 
         var enter = _body.enter()

@@ -4,12 +4,12 @@ import { uiTooltip } from '../tooltip';
 import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
 
-export function uiSectionPrivacy(context) {
+export function uiSectionPrivacy(context: iD.Context) {
     let section = uiSection('preferences-third-party', context)
       .label(() => t.append('preferences.privacy.title'))
       .disclosureContent(renderDisclosureContent);
 
-    function renderDisclosureContent(selection) {
+    function renderDisclosureContent(selection: d3.Selection<HTMLDivElement>) {
       // enter
       selection.selectAll('.privacy-options-list')
         .data([0])
@@ -24,7 +24,7 @@ export function uiSectionPrivacy(context) {
         .append('li')
         .attr('class', 'privacy-third-party-icons-item')
         .append('label')
-        .call(uiTooltip()
+        .call(uiTooltip<HTMLLabelElement>()
           .title(() => t.append('preferences.privacy.third_party_icons.tooltip'))
           .placement('bottom')
         );

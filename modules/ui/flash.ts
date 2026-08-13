@@ -1,14 +1,22 @@
-import { timeout as d3_timeout } from 'd3-timer';
+import { timeout as d3_timeout, type Timer } from 'd3-timer';
 
-export function uiFlash(context) {
-    var _flashTimer;
+export interface uiFlash {
+    (): d3.Selection<HTMLDivElement>;
+    duration: GetSet<uiFlash, number>;
+    label: GetSet<uiFlash, string | d3.Selector>;
+    iconName: GetSet<uiFlash, string>;
+    iconClass: GetSet<uiFlash, string>;
+}
+
+export function uiFlash(context: iD.Context) {
+    var _flashTimer: Timer | null;
 
     var _duration = 2000;
     var _iconName = '#iD-icon-no';
     var _iconClass = 'disabled';
-    var _label = s => s.text('');
+    var _label = (s: d3.Selection<HTMLDivElement>) => s.text('');
 
-    function flash() {
+    const flash: uiFlash = function() {
         if (_flashTimer) {
             _flashTimer.stop();
         }
@@ -20,7 +28,7 @@ export function uiFlash(context) {
             .classed('footer-hide', false)
             .classed('footer-show', true);
 
-        var content = context.container().select('.flash-wrap').selectAll('.flash-content')
+        var content = context.container().select('.flash-wrap').selectAll<HTMLDivElement, 0>('.flash-content')
             .data([0]);
 
         // Enter
@@ -62,7 +70,7 @@ export function uiFlash(context) {
             .attr('xlink:href', _iconName);
 
         content
-            .selectAll('.flash-text')
+            .selectAll<HTMLDivElement, void>('.flash-text')
             .attr('class', 'flash-text')
             .call(_label);
 
@@ -78,14 +86,14 @@ export function uiFlash(context) {
         }, _duration);
 
         return content;
-    }
+    };
 
 
     flash.duration = function(_) {
         if (!arguments.length) return _duration;
         _duration = _;
         return flash;
-    };
+    } as uiFlash['duration'];
 
     flash.label = function(_) {
         if (!arguments.length) return _label;
@@ -95,19 +103,19 @@ export function uiFlash(context) {
             _label = selection => selection.text('').call(_);
         }
         return flash;
-    };
+    } as uiFlash['label'];
 
     flash.iconName = function(_) {
         if (!arguments.length) return _iconName;
         _iconName = _;
         return flash;
-    };
+    } as uiFlash['iconName'];
 
     flash.iconClass = function(_) {
         if (!arguments.length) return _iconClass;
         _iconClass = _;
         return flash;
-    };
+    } as uiFlash['iconClass'];
 
     return flash;
 }

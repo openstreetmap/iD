@@ -282,6 +282,7 @@ export default {
     return (itemType in _cache.colors) ? _cache.colors[itemType] : '#FFFFFF';
   },
 
+  /** @param {QAItem} issue @param {Callback<QAItem>} callback */
   postUpdate(issue, callback) {
     if (_cache.inflightPost[issue.id]) {
       return callback(new ApiError('Issue update already inflight', -2), issue);

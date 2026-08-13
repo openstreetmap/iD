@@ -1,4 +1,11 @@
+import type { BaseType } from 'd3-selection';
+
 declare global {
+  /** opposite transformation of {@link Readonly} */
+  type UnReadonly<T> = {
+    -readonly [P in keyof T]: T[P] extends object ? UnReadonly<T[P]> : P;
+  };
+
   declare var iD: typeof import('.');
   declare var VITEST: true;
 
@@ -18,6 +25,17 @@ declare global {
     (): T;
   }
 
+  /** Like {@link GetSet}, but for use with `utilFunctor`. */
+  declare type GetSetFunctor<This, T, Functor extends (...args: any[]) => unknown = (...args: unknown[]) => T> = {
+    (value: T | Functor): This;
+    (): Functor;
+  }
+
+  declare type Callback<T> = {
+    (error: Error, data?: undefined): void;
+    (error: null, data: T): void;
+  };
+
   declare namespace iD {
     export type Context = ReturnType<typeof iD.coreContext>;
 
@@ -33,14 +51,15 @@ declare global {
   }
 
   declare namespace d3 {
-    export type Selection<T = HTMLElement> = import('d3-selection').Selection<
+    export type Selection<T extends BaseType = HTMLElement> = import('d3-selection').Selection<
       T,
       any,
       any,
-      unknown
+      any
     >;
 
-    export type Selector = <T extends HTMLElement>(selection: Selection<T>) => void;
+    export type Selector = <T extends Element>(selection: Selection<T>) => void;
+    export type SelectorExact<T extends Element> = (selection: Selection<T>) => void;
   }
 
     interface ObjectConstructor {

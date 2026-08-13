@@ -1,14 +1,21 @@
 import { select as d3_select } from 'd3-selection';
 import { geoExtent } from '../geo';
 import { uiToggle } from './toggle';
+import type { Vec2 } from '../geo/vector';
 
+interface Lasso {
+    (selection: d3.Selection): void;
+    coordinates: Vec2[];
+    extent(): geoExtent;
+    p: GetSet<Lasso, Vec2>;
+    close(): void;
+}
 
-export function uiLasso(context) {
-    var group, polygon;
+export function uiLasso(context: iD.Context) {
+    let group: d3.Selection<SVGGElement>;
+    let polygon: d3.Selection<SVGPathElement>;
 
-    lasso.coordinates = [];
-
-    function lasso(selection) {
+    const lasso: Lasso = function(selection) {
         context.container()
             .classed('lasso', true);
 
@@ -22,7 +29,9 @@ export function uiLasso(context) {
 
         group
             .call(uiToggle(true));
-    }
+    };
+
+    lasso.coordinates = [];
 
 
     function draw() {
@@ -45,7 +54,7 @@ export function uiLasso(context) {
         lasso.coordinates.push(_);
         draw();
         return lasso;
-    };
+    } as GetSet<Lasso, Vec2>;
 
 
     lasso.close = function() {

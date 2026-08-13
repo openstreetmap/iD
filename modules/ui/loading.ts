@@ -1,15 +1,23 @@
 import { select as d3_select } from 'd3-selection';
 import { uiModal } from './modal';
+import type { LocalizedTextRenderer } from '../core/localizer';
 
+export interface uiLoading {
+    <T extends HTMLElement>(selection: d3.Selection<T>): void;
+    message: GetSet<uiLoading, string | LocalizedTextRenderer>;
+    blocking: GetSet<uiLoading, boolean>;
+    close(): void;
+    isShown(): false | ParentNode | null;
+}
 
-export function uiLoading(context) {
-  let _modalSelection = d3_select(null);
-  let _message = '';
+export function uiLoading(context: iD.Context) {
+  let _modalSelection = d3_select<HTMLDivElement, 0>(null!);
+  let _message: string | LocalizedTextRenderer = '';
   let _blocking = false;
 
 
-  let loading = (selection) => {
-    _modalSelection = uiModal(selection, _blocking);
+  const loading: uiLoading = <T extends HTMLElement>(selection: d3.Selection<T>) => {
+    _modalSelection = uiModal<T>(selection, _blocking);
 
     let loadertext = _modalSelection.select('.content')
       .classed('loading-modal', true)
@@ -42,14 +50,14 @@ export function uiLoading(context) {
     if (!arguments.length) return _message;
     _message = val;
     return loading;
-  };
+  } as uiLoading['message'];
 
 
   loading.blocking = function(val) {
     if (!arguments.length) return _blocking;
     _blocking = val;
     return loading;
-  };
+  } as uiLoading['blocking'];
 
 
   loading.close = () => {
@@ -58,7 +66,7 @@ export function uiLoading(context) {
 
 
   loading.isShown = () => {
-    return _modalSelection && !_modalSelection.empty() && _modalSelection.node().parentNode;
+    return _modalSelection && !_modalSelection.empty() && _modalSelection.node()!.parentNode;
   };
 
 

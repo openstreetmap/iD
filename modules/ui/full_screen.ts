@@ -1,8 +1,9 @@
+// @ts-nocheck -- endless issues due to vendor-prefixed DOM properties
 import { uiCmd } from './cmd';
 import { utilDetect } from '../util/detect';
 
-export function uiFullScreen(context) {
-    var element = context.container().node();
+export function uiFullScreen(context: iD.Context) {
+    var element = context.container().node()!;
     // var button = d3_select(null);
 
 

@@ -1,8 +1,10 @@
-import { t, localizer } from '../../core/localizer';
+import { t, localizer, type ReplacementsHTML } from '../../core/localizer';
 import { geoSphericalDistance, geoVecNormalizedDot } from '../../geo';
+import type { Vec2 } from '../../geo/vector';
+import type { OsmEntity } from '../../osm';
 import { uiCmd } from '../cmd';
 
-export function pointBox(loc, context) {
+export function pointBox(loc: Vec2, context: iD.Context) {
     var rect = context.surfaceRect();
     var point = context.curtainProjection(loc);
     return {
@@ -13,9 +15,15 @@ export function pointBox(loc, context) {
     };
 }
 
+interface Box {
+    left: number;
+    top: number;
+    width?: number;
+    height?: number;
+}
 
-export function pad(locOrBox, padding, context) {
-    var box;
+export function pad(locOrBox: Vec2 | Box, padding: number, context: iD.Context): Box {
+    var box: Box;
     if (locOrBox instanceof Array) {
         var rect = context.surfaceRect();
         var point = context.curtainProjection(locOrBox);
@@ -36,18 +44,18 @@ export function pad(locOrBox, padding, context) {
 }
 
 
-export function icon(name, svgklass, useklass) {
+export function icon(name: string, svgklass?: string, useklass?: string) {
     return '<svg class="icon ' + (svgklass || '') + '">' +
          '<use xlink:href="' + name + '"' +
          (useklass ? ' class="' + useklass + '"' : '') + '></use></svg>';
 }
 
-var helpStringReplacements;
+var helpStringReplacements: ReplacementsHTML;
 
 // Returns the localized HTML element for `id` with a standardized set of icon, key, and
 // label replacements suitable for tutorials and documentation. Optionally supplemented
 // with custom `replacements`
-export function helpHtml(id, replacements) {
+export function helpHtml(id: string, replacements: ReplacementsHTML) {
     // only load these the first time
     if (!helpStringReplacements) {
         /* eslint-disable sort-keys */
@@ -149,7 +157,7 @@ export function helpHtml(id, replacements) {
         };
         /* eslint-enable sort-keys */
         for (var key in helpStringReplacements) {
-            helpStringReplacements[key] = { html: helpStringReplacements[key] };
+            helpStringReplacements[key] = { html: helpStringReplacements[key] as string };
         }
     }
 
@@ -166,7 +174,7 @@ export function helpHtml(id, replacements) {
 }
 
 
-function slugify(text) {
+function slugify(text: string) {
     return text.toString().toLowerCase()
         .replace(/\s+/g, '-')           // Replace spaces with -
         .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
@@ -177,8 +185,8 @@ function slugify(text) {
 
 
 // console warning for missing walkthrough names
-export var missingStrings = {};
-function checkKey(key, text) {
+export var missingStrings: Record<TagKey, string> = {};
+function checkKey(key: TagKey, text: string) {
     if (t(key, { default: undefined}) === undefined) {
         if (missingStrings.hasOwnProperty(key)) return;  // warn once
         missingStrings[key] = text;
@@ -188,7 +196,7 @@ function checkKey(key, text) {
 }
 
 
-export function localize(obj) {
+export function localize(obj: UnReadonly<OsmEntity>) {
     var key;
 
     // Assign name if entity has one..
@@ -232,7 +240,7 @@ export function localize(obj) {
 
 
 // Used to detect squareness.. some duplicataion of code from actionOrthogonalize.
-export function isMostlySquare(points) {
+export function isMostlySquare(points: Vec2[]) {
     // note: uses 15 here instead of the 12 from actionOrthogonalize because
     // actionOrthogonalize can actually straighten some larger angles as it iterates
     var threshold = 15; // degrees within right or straight
@@ -255,12 +263,12 @@ export function isMostlySquare(points) {
 }
 
 
-export function selectMenuItem(context, operation) {
+export function selectMenuItem(context: iD.Context, operation: string) {
     return context.container().select('.edit-menu .edit-menu-item-' + operation);
 }
 
 
-export function transitionTime(point1, point2) {
+export function transitionTime(point1: Vec2, point2: Vec2) {
     var distance = geoSphericalDistance(point1, point2);
     if (distance === 0) {
         return 0;

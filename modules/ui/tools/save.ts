@@ -5,17 +5,17 @@ import { modeSave } from '../../modes';
 import { svgIcon } from '../../svg';
 import { uiCmd } from '../cmd';
 import { uiTooltip } from '../tooltip';
+import type { UiTool } from './types.def';
 
 
-export function uiToolSave(context) {
+export function uiToolSave(context: iD.Context) {
 
-    var tool = {
-        id: 'save',
-        label: t.append('save.title')
-    };
+    const tool: UiTool = function() {};
+    tool.id = 'save';
+    tool.label = t.append('save.title');
 
-    var button = null;
-    var tooltipBehavior = null;
+    var button: d3.Selection<HTMLButtonElement> | null = null;
+    var tooltipBehavior: uiTooltip<HTMLButtonElement> | null = null;
     var history = context.history();
     var key = uiCmd('⌘S');
     var _numChanges = 0;
@@ -29,14 +29,14 @@ export function uiToolSave(context) {
         return _numChanges === 0 || isSaving();
     }
 
-    function save(d3_event) {
+    function save(d3_event: Event) {
         d3_event.preventDefault();
         if (!context.inIntro() && !isSaving() && history.hasChanges()) {
             context.enter(modeSave(context));
         }
     }
 
-    function bgColor(numChanges) {
+    function bgColor(numChanges: number) {
         var step;
         if (numChanges === 0) {
             return null;
@@ -64,7 +64,7 @@ export function uiToolSave(context) {
         if (button) {
             button
                 .classed('disabled', isDisabled())
-                .style('--accent-color', bgColor(_numChanges));
+                .style('--accent-color', bgColor(_numChanges)!);
 
             button.select('span.count')
                 .text(_numChanges);
@@ -73,13 +73,13 @@ export function uiToolSave(context) {
 
 
     tool.render = function(selection) {
-        tooltipBehavior = uiTooltip()
+        tooltipBehavior = uiTooltip<HTMLButtonElement>()
             .placement('bottom')
             .title(() => t.append('save.no_changes'))
             .keys([key])
             .scrollContainer(context.container().select('.top-toolbar'));
 
-        var lastPointerUpType;
+        var lastPointerUpType: string | null;
 
         button = selection
             .append('button')
@@ -131,7 +131,7 @@ export function uiToolSave(context) {
                         .classed('disabled', isDisabled());
 
                     if (isSaving()) {
-                        button.call(tooltipBehavior.hide);
+                        button.call(tooltipBehavior!.hide);
                     }
                 }
             });

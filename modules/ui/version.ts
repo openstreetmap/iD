@@ -5,12 +5,12 @@ import { uiTooltip } from './tooltip';
 
 
 // these are module variables so they are preserved through a ui.restart()
-var sawVersion = null;
+var sawVersion: string | null = null;
 var isNewVersion = false;
 var isNewUser = false;
 
 
-export function uiVersion(context) {
+export function uiVersion(context: iD.Context) {
 
     var currVersion = context.version;
     var matchedVersion = currVersion.match(/\d+\.\d+\.\d+.*/);
@@ -27,7 +27,7 @@ export function uiVersion(context) {
         sawVersion = currVersion;
     }
 
-    return function(selection) {
+    return function(selection: d3.Selection) {
         selection
             .append('a')
             .attr('target', '_blank')
@@ -42,7 +42,7 @@ export function uiVersion(context) {
                 .attr('target', '_blank')
                 .attr('href', `https://github.com/openstreetmap/iD/releases/tag/v${currVersion}`)
                 .call(svgIcon('#maki-gift'))
-                .call(uiTooltip()
+                .call(uiTooltip<HTMLAnchorElement>()
                     .title(() => t.append('version.whats_new', { version: currVersion }))
                     .placement('top')
                     .scrollContainer(context.container().select('.main-footer-wrap'))

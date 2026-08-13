@@ -1,12 +1,11 @@
 import { select as d3_select } from 'd3-selection';
 
-import { t } from './../core/localizer';
+import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { utilKeybinding } from '../util';
 
 
-/** @returns {d3.Selection<HTMLElement>} */
-export function uiModal(selection, blocking) {
+export function uiModal<T extends HTMLElement>(this: any, selection: d3.Selection<T>, blocking?: boolean) {
   let keybinding = utilKeybinding('modal');
   let previous = selection.select('div.modal');
   let animate = previous.empty();
@@ -21,7 +20,7 @@ export function uiModal(selection, blocking) {
     .attr('class', 'shaded')
     .style('opacity', 0);
 
-  shaded.close = () => {
+  const close = () => {
     shaded
       .transition()
       .duration(200)
@@ -48,9 +47,9 @@ export function uiModal(selection, blocking) {
     .on('focus.keytrap', moveFocusToLast);
 
   if (!blocking) {
-    shaded.on('click.remove-modal', (d3_event) => {
+    shaded.on('click.remove-modal', (d3_event: MouseEvent) => {
       if (d3_event.target === this) {
-        shaded.close();
+        close();
       }
     });
 
@@ -58,12 +57,12 @@ export function uiModal(selection, blocking) {
       .append('button')
       .attr('class', 'close')
       .attr('title', t('icons.close'))
-      .on('click', shaded.close)
+      .on('click', close)
       .call(svgIcon('#iD-icon-close'));
 
     keybinding
-      .on('⌫', shaded.close)
-      .on('⎋', shaded.close);
+      .on('⌫', close)
+      .on('⎋', close);
 
     d3_select(document)
       .call(keybinding);
@@ -84,31 +83,31 @@ export function uiModal(selection, blocking) {
     shaded.style('opacity', 1);
   }
 
-  return shaded;
+  return Object.assign(shaded, { close });
 
 
-  function moveFocusToFirst() {
+  function moveFocusToFirst(this: HTMLInputElement) {
     let node = modal
       // there are additional rules about what's focusable, but this suits our purposes
-      .select('a, button, input:not(.keytrap), select, textarea')
+      .select<HTMLElement>('a, button, input:not(.keytrap), select, textarea')
       .node();
 
     if (node) {
       node.focus();
     } else {
-      d3_select(this).node().blur();
+      d3_select(this).node()!.blur();
     }
   }
 
-  function moveFocusToLast() {
+  function moveFocusToLast(this: HTMLInputElement) {
     let nodes = modal
-      .selectAll('a, button, input:not(.keytrap), select, textarea')
+      .selectAll<HTMLElement, 0>('a, button, input:not(.keytrap), select, textarea')
       .nodes();
 
     if (nodes.length) {
       nodes[nodes.length - 1].focus();
     } else {
-      d3_select(this).node().blur();
+      d3_select(this).node()!.blur();
     }
   }
 }

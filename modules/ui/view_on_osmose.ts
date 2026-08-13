@@ -3,10 +3,14 @@ import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 import { QAItem } from '../osm';
 
-export function uiViewOnOsmose() {
-  let _qaItem;
+export interface uiViewOnOsmose extends d3.Selector {
+    what: GetSet<uiViewOnOsmose, QAItem>;
+}
 
-  function viewOnOsmose(selection) {
+export function uiViewOnOsmose() {
+  let _qaItem: QAItem;
+
+  const viewOnOsmose: uiViewOnOsmose = (selection) => {
     let url;
     if (services.osmose && (_qaItem instanceof QAItem)) {
       url = services.osmose.itemURL(_qaItem);
@@ -31,13 +35,13 @@ export function uiViewOnOsmose() {
     linkEnter
       .append('span')
         .call(t.append('inspector.view_on_osmose'));
-  }
+  };
 
   viewOnOsmose.what = function(val) {
     if (!arguments.length) return _qaItem;
     _qaItem = val;
     return viewOnOsmose;
-  };
+  } as uiViewOnOsmose['what'];
 
   return viewOnOsmose;
 }

@@ -1,6 +1,5 @@
 import {
     select as d3_select,
-    type BaseType
 } from 'd3-selection';
 
 import { utilArrayUniq } from './array';
@@ -17,7 +16,7 @@ export interface Binding {
             metaKey: boolean;
         };
     };
-    capture: boolean;
+    capture: boolean | undefined;
     callback(event: KeyboardEvent): void;
 }
 
@@ -121,17 +120,17 @@ export function utilKeybinding(namespace: string) {
     }
 
 
-    function keybinding(selection?: d3.Selection<BaseType>) {
-        selection = selection || d3_select<BaseType, any>(document);
+    function keybinding(selection?: d3.Selection<any>) {
+        selection = selection || d3_select(document);
         selection.on('keydown.capture.' + namespace, capture, true);
         selection.on('keydown.bubble.' + namespace, bubble, false);
         return keybinding;
     }
 
     // was: keybinding.off()
-    keybinding.unbind = function(selection?: d3.Selection<BaseType>) {
+    keybinding.unbind = function(selection?: d3.Selection<any>) {
         _keybindings = {};
-        selection = selection || d3_select<BaseType, any>(document);
+        selection = selection || d3_select(document);
         selection.on('keydown.capture.' + namespace, null);
         selection.on('keydown.bubble.' + namespace, null);
         return keybinding;
@@ -145,7 +144,7 @@ export function utilKeybinding(namespace: string) {
 
 
     // Remove one or more keycode bindings.
-    keybinding.off = function(codes: string | string[], capture: boolean) {
+    keybinding.off = function(codes: string | string[], capture?: boolean) {
         var arr = utilArrayUniq(typeof codes === 'string' ? [codes] : codes);
 
         for (var i = 0; i < arr.length; i++) {
@@ -157,7 +156,7 @@ export function utilKeybinding(namespace: string) {
 
 
     // Add one or more keycode bindings.
-    keybinding.on = function(codes: string | string[], callback: Binding['callback'], capture: boolean) {
+    keybinding.on = function(codes: string | string[], callback: Binding['callback'], capture?: boolean) {
         if (typeof callback !== 'function') {
             return keybinding.off(codes, capture);
         }

@@ -614,13 +614,13 @@ export function utilWrap(index: number, length: number): number {
  * @param value any value
  * @returns a function that returns that value or the value if it's a function
  */
-export function utilFunctor<T>(value: T | (() => T)): () => T {
+export function utilFunctor<T, U extends unknown[]>(value: T | ((...args: U) => T)): (...args: U) => T {
     if (typeof value === 'function') return value as (() => T);
     return () => value;
 }
 
 
-export function utilNoAuto(selection: d3.Selection): d3.Selection {
+export function utilNoAuto<T extends HTMLElement>(selection: d3.Selection<T>): d3.Selection<T> {
     const isText = (selection.size() && selection.node()!.tagName.toLowerCase() === 'textarea');
 
     return selection

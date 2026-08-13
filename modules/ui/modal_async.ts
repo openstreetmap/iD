@@ -2,7 +2,7 @@ import { t } from '../core/localizer';
 import { uiConfirm } from './confirm';
 
 export function uiAsyncModal(context: iD.Context) {
-    let _modal: d3.Selection<HTMLElement>;
+    let _modal: d3.Selection<HTMLDivElement>;
 
     /**
      * Open a model, and returns a promise. The promise

@@ -64,7 +64,7 @@ type ReplacementsSimpleMulti = {
 } & {
     default?: string[]
 };
-type ReplacementsHTML = {
+export type ReplacementsHTML = {
     [key: string]: string | { html: string}
 } & {
     default?: string
@@ -527,7 +527,7 @@ export class coreLocalizer {
 
     // Adds localized text wrapped as an HTML span element with locale info to the DOM
     t_append(stringId: string, replacements?: Replacements, locale?: string): LocalizedTextRenderer {
-        const ret: LocalizedTextRenderer = <T extends HTMLElement>(selection: d3.Selection<T>) => {
+        const ret: LocalizedTextRenderer = <T extends Element>(selection: d3.Selection<T>) => {
             const info = this.tInfo(stringId, replacements, locale);
             if (Array.isArray(info)) {
                 console.error(`${stringId} is unexpectedly an array of texts`);  // eslint-disable-line
@@ -556,7 +556,7 @@ export class coreLocalizer {
 
     // Adds or updates a localized text wrapped as an HTML span element with locale info to the DOM
     t_addOrUpdate(stringId: string, replacements?: Replacements, locale?: string): LocalizedTextRenderer {
-        const ret: LocalizedTextRenderer = <T extends HTMLElement>(selection: d3.Selection<T>) => {
+        const ret: LocalizedTextRenderer = <T extends Element>(selection: d3.Selection<T>) => {
             const info = this.tInfo(stringId, replacements, locale);
             if (Array.isArray(info)) {
                 console.error(`${stringId} is unexpectedly an array of texts`);  // eslint-disable-line

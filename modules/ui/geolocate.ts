@@ -7,7 +7,7 @@ import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
 import { uiLoading } from './loading';
 
-export function uiGeolocate(context) {
+export function uiGeolocate(context: iD.Context) {
     var _geolocationOptions = {
         // prioritize speed and power usage over precision
         enableHighAccuracy: false,
@@ -16,10 +16,10 @@ export function uiGeolocate(context) {
     };
     var _locating = uiLoading(context).message(t.addOrUpdate('geolocate.locating')).blocking(true);
     var _layer = context.layers().layer('geolocate');
-    var _position;
-    var _extent;
-    var _timeoutID;
-    var _button = d3_select(null);
+    var _position: GeolocationPosition;
+    var _extent: geoExtent;
+    var _timeoutID: ReturnType<typeof setTimeout> | undefined;
+    var _button = d3_select<HTMLButtonElement, unknown>(null!);
 
     function click() {
         if (context.inIntro()) return;
@@ -48,7 +48,7 @@ export function uiGeolocate(context) {
         map.centerZoomEase(_extent.center(), Math.min(20, map.extentZoom(_extent)));
     }
 
-    function success(geolocation) {
+    function success(geolocation: GeolocationPosition) {
         _position = geolocation;
         var coords = _position.coords;
         _extent = geoExtent([coords.longitude, coords.latitude]).padByMeters(coords.accuracy);
@@ -80,7 +80,7 @@ export function uiGeolocate(context) {
         _button.attr('aria-pressed', _layer.enabled());
     }
 
-    return function(selection) {
+    return function(selection: d3.Selection) {
         if (!navigator.geolocation || !navigator.geolocation.getCurrentPosition) return;
 
         _button = selection
@@ -88,7 +88,7 @@ export function uiGeolocate(context) {
             .on('click', click)
             .attr('aria-pressed', false)
             .call(svgIcon('#iD-icon-geolocate', 'light'))
-            .call(uiTooltip()
+            .call(uiTooltip<HTMLButtonElement>()
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
                 .title(() => t.append('geolocate.title'))
             );
