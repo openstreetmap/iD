@@ -30,6 +30,7 @@ import {
 
 
 export function modeSelect(context, selectedIDs) {
+    /** @type {import('../core/context').Mode} */
     var mode = {};
     mode.id = 'select';
     mode.button = 'browse';

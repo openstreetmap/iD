@@ -2,24 +2,29 @@ import { t } from '../core/localizer';
 import { behaviorOperation } from '../behavior/operation';
 import { uiCmd } from '../ui/cmd';
 import { utilArrayGroupBy, utilTotalExtent } from '../util';
+import type { OsmEntity } from '../osm/abstract-entity';
+import type { coreGraph } from '../core/graph';
+import type { EntityId, osmNode, osmRelation, osmWay } from '../osm';
+import type { Vec2 } from '../geo/vector';
+import type { CreateOperation, Operation } from '../core/history';
 
-export function operationCopy(context, selectedIDs) {
+export const operationCopy: CreateOperation = (context, selectedIDs) => {
 
     function getFilteredIdsToCopy() {
         return selectedIDs.filter(function(selectedID) {
-            var entity = context.graph().hasEntity(selectedID);
+            var entity = context.graph().hasEntity(selectedID)!;
             // don't copy untagged vertices separately from ways
             return entity.hasInterestingTags() || entity.geometry(context.graph()) !== 'vertex';
         });
     }
 
-    var operation = function() {
+    const operation: Operation = function() {
 
         var graph = context.graph();
         var selected = groupEntities(getFilteredIdsToCopy(), graph);
-        var canCopy = [];
-        var skip = {};
-        var entity;
+        var canCopy: EntityId[] = [];
+        var skip: Record<EntityId, boolean> = {};
+        var entity: OsmEntity;
         var i;
 
         for (i = 0; i < selected.relation.length; i++) {
@@ -55,18 +60,24 @@ export function operationCopy(context, selectedIDs) {
     };
 
 
-    function groupEntities(ids, graph) {
+    function groupEntities(ids: EntityId[], graph: coreGraph): {
+        relation: osmRelation[];
+        way: osmWay[];
+        node: osmNode[];
+    } {
         var entities = ids.map(function (id) { return graph.entity(id); });
-        return Object.assign(
-            { relation: [], way: [], node: [] },
-            utilArrayGroupBy(entities, 'type')
-        );
+        return {
+            relation: [],
+            way: [],
+            node: [],
+            ...utilArrayGroupBy(entities, 'type'),
+        };
     }
 
 
-    function getDescendants(id, graph, descendants) {
+    function getDescendants(id: EntityId, graph: coreGraph, descendants: Record<EntityId, boolean>) {
         var entity = graph.entity(id);
-        var children;
+        var children: EntityId[];
 
         descendants = descendants || {};
 
@@ -123,8 +134,8 @@ export function operationCopy(context, selectedIDs) {
     };
 
 
-    var _point;
-    operation.point = function(val) {
+    var _point: Vec2;
+    operation.point = function(val: Vec2) {
         _point = val;
         return operation;
     };
@@ -136,4 +147,4 @@ export function operationCopy(context, selectedIDs) {
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
-}
+};
