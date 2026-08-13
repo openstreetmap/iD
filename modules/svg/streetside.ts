@@ -2,17 +2,21 @@ import { throttle } from 'es-toolkit';
 import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './helpers';
 import { services } from '../services';
+import type { Projection } from '../geo/raw_mercator';
+import type { coreContext } from '../core';
+import type { Dispatch } from 'd3';
+import type { Bubble, BubbleSequence } from '../services/streetside';
 
 
-export function svgStreetside(projection, context, dispatch) {
+export function svgStreetside(projection: Projection, context: coreContext, dispatch: Dispatch<object>) {
     var throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 14;
     var minMarkerZoom = 16;
     var minViewfieldZoom = 18;
-    var layer = d3_select(null);
+    let layer: d3.Selection<SVGGElement> = d3_select(null!);
     var _viewerYaw = 0;
-    var _selectedSequence = null;
-    var _streetside;
+    var _selectedSequence: string | null = null;
+    var _streetside: typeof services.streetside | null;
 
     /**
      * init().
@@ -87,7 +91,7 @@ export function svgStreetside(projection, context, dispatch) {
     /**
      * click() Handles 'bubble' point click event.
      */
-    function click(d3_event, d) {
+    function click(d3_event: MouseEvent, d: Bubble) {
         var service = getService();
         if (!service) return;
 
@@ -100,7 +104,7 @@ export function svgStreetside(projection, context, dispatch) {
         service
             .ensureViewerLoaded(context)
             .then(function() {
-                service
+                service!
                     .selectImage(context, d.key)
                     .yaw(_viewerYaw)
                     .showViewer(context);
@@ -112,7 +116,7 @@ export function svgStreetside(projection, context, dispatch) {
     /**
      * mouseover().
      */
-    function mouseover(d3_event, d) {
+    function mouseover(d3_event: MouseEvent, d: Bubble) {
         var service = getService();
         if (service) service.setStyles(context, d);
     }
@@ -128,9 +132,9 @@ export function svgStreetside(projection, context, dispatch) {
     /**
      * transform().
      */
-    function transform(d) {
+    function transform(d: Bubble) {
         var t = svgPointTransform(projection)(d);
-        var rot = d.ca + _viewerYaw;
+        var rot = d.ca! + _viewerYaw;
         if (rot) {
             t += ' rotate(' + Math.floor(rot) + ',0,0)';
         }
@@ -152,12 +156,12 @@ export function svgStreetside(projection, context, dispatch) {
         // e.g. during drags or easing.
         if (context.map().isTransformed()) return;
 
-        layer.selectAll('.viewfield-group.currentView')
+        layer.selectAll<SVGGElement, Bubble>('.viewfield-group.currentView')
             .attr('transform', transform);
     }
 
 
-    function filterBubbles(bubbles, skipDateFilter = false) {
+    function filterBubbles(bubbles: Bubble[], skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
         var usernames = context.photos().usernames();
@@ -183,7 +187,7 @@ export function svgStreetside(projection, context, dispatch) {
         return bubbles;
     }
 
-    function filterSequences(sequences, skipDateFilter = false) {
+    function filterSequences(sequences: BubbleSequence[], skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
         var usernames = context.photos().usernames();
@@ -212,7 +216,7 @@ export function svgStreetside(projection, context, dispatch) {
     /**
      * update().
      */
-    function update() {
+    function update(this: any) {
         var viewer = context.container().select('.photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
         var z = ~~context.map().zoom();
@@ -220,8 +224,8 @@ export function svgStreetside(projection, context, dispatch) {
         var showViewfields = (z >= minViewfieldZoom);
         var service = getService();
 
-        var sequences = [];
-        var bubbles = [];
+        var sequences: BubbleSequence[] = [];
+        var bubbles: Bubble[] = [];
 
         if (context.photos().showsPanoramic()) {
             sequences = (service ? service.sequences(projection) : []);
@@ -230,7 +234,7 @@ export function svgStreetside(projection, context, dispatch) {
             bubbles = filterBubbles(bubbles);
         }
 
-        var traces = layer.selectAll('.sequences').selectAll('.sequence')
+        var traces = layer.selectAll('.sequences').selectAll<SVGPathElement, BubbleSequence>('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
 
         dispatch.call('photoDatesChanged', this, 'streetside', [
@@ -249,7 +253,7 @@ export function svgStreetside(projection, context, dispatch) {
             .attr('d', svgPath(projection).geojson);
 
 
-        var groups = layer.selectAll('.markers').selectAll('.viewfield-group')
+        var groups = layer.selectAll('.markers').selectAll<SVGGElement, Bubble>('.viewfield-group')
             .data(bubbles, function(d) {
                 // force reenter once bubbles are attached to a sequence
                 return d.key + (d.sequenceKey ? 'v1' : 'v0');
@@ -305,8 +309,8 @@ export function svgStreetside(projection, context, dispatch) {
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
 
-        function viewfieldPath() {
-            var d = this.parentNode.__data__;
+        function viewfieldPath(this: SVGPathElement) {
+            var d = this.parentNode!.__data__;
             if (d.pano) {
                 return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
@@ -321,11 +325,11 @@ export function svgStreetside(projection, context, dispatch) {
      * drawImages is the method that is returned (and that runs) every time 'svgStreetside()' is called.
      * 'svgStreetside()' is called from index.js
      */
-    function drawImages(selection) {
+    function drawImages(this: any, selection: d3.Selection<SVGGElement>) {
         var enabled = svgStreetside.enabled;
         var service = getService();
 
-        layer = selection.selectAll('.layer-streetside-images')
+        layer = selection.selectAll<SVGGElement, 0>('.layer-streetside-images')
             .data(service ? [0] : []);
 
         layer.exit()
@@ -365,7 +369,7 @@ export function svgStreetside(projection, context, dispatch) {
     /**
      * drawImages.enabled().
      */
-    drawImages.enabled = function(_) {
+    drawImages.enabled = function(_: boolean) {
         if (!arguments.length) return svgStreetside.enabled;
         svgStreetside.enabled = _;
         if (svgStreetside.enabled) {
@@ -386,7 +390,7 @@ export function svgStreetside(projection, context, dispatch) {
         return !!getService();
     };
 
-    drawImages.rendered = function(zoom) {
+    drawImages.rendered = function(zoom: number) {
       return zoom >= minZoom;
     };
 
@@ -394,3 +398,5 @@ export function svgStreetside(projection, context, dispatch) {
 
     return drawImages;
 }
+svgStreetside.enabled = false;
+svgStreetside.initialized = false;

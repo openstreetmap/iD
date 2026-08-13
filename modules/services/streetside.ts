@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { timer as d3_timer } from 'd3-timer';
 
@@ -16,10 +17,49 @@ import {
 import { utilAesDecrypt, utilArrayUnion, utilRebind, utilTiler, utilUniqueDomId } from '../util';
 
 import { services } from './';
-import { searchLimited } from '../util/partition';
+import { searchLimited, type WithBbox } from '../util/partition';
 import { localeTimestamp } from '../util/date';
 import { patchHash } from '../behavior';
+import type { Projection } from '../geo/raw_mercator';
+import type { Tile } from '../util/tiler';
+import type { Vec2 } from '../geo/vector';
+import type { PhotoFramePhoto } from './pannellum_photo';
+import type { Feature, LineString } from 'geojson';
+import type { coreContext } from '../core';
 
+
+export interface Bubble extends Partial<PhotoFramePhoto> {
+    service: 'photo';
+    key: string;
+    sequenceKey: string | null;
+    imageUrl: string;
+    loc: Vec2;
+    captured_by: string;
+    captured_at: Date;
+    pano: boolean;
+    vintageStart?: unknown;
+}
+
+export type BubbleSequence = Feature<LineString, Bubble>;
+
+interface RawBubble {
+    imageUrl: string;
+    imageUrlSubdomains: string[];
+    lat?: number;
+    vintageEnd: string;
+    lon?: number;
+    he?: number;
+    latitude: number;
+    longitude: number;
+    heading: number;
+}
+
+
+interface BubbleResult {
+    resourceSets: {
+        resources: RawBubble[];
+    }[];
+}
 
 const streetsideApi = 'https://dev.virtualearth.net/REST/v1/Imagery/MetaData/Streetside?mapArea={bbox}&key={key}&count={count}&uriScheme=https';
 const maxResults = 500;
@@ -36,9 +76,32 @@ const defaultHfov = 45;
 let _hires = false;
 let _resolution = 512;    // higher numbers are slower - 512, 1024, 2048, 4096
 let _currScene = 0;
-let _ssCache;
-let _pannellumViewer;
-let _sceneOptions = {
+let _ssCache: {
+    bubbles: {
+        rtree: RBush<WithBbox<Bubble>>;
+        inflight: {
+            [tileId: string]: AbortController;
+        };
+        loaded: {
+            [tileId: string]: true;
+        };
+        nextPage: {
+            [tileId: string]: number;
+        };
+        points: {
+            [bubbleId: string]: Bubble;
+        };
+    };
+    /** @deprecated -- not actually used */
+    sequences: {
+        [sequenceId: string]: {
+            geojson: BubbleSequence;
+            bubbles: Bubble[];
+        };
+    };
+};
+let _pannellumViewer: Pannellum.Viewer;
+let _sceneOptions: Pannellum.ConfigOptions = {
   showFullscreenCtrl: false,
   autoLoad: true,
   compass: true,
@@ -47,22 +110,22 @@ let _sceneOptions = {
   maxHfov: maxHfov,
   hfov: defaultHfov,
   type: 'cubemap',
-  cubeMap: []
+  cubeMap: [] as any, // defined later
 };
-let _loadViewerPromise;
+let _loadViewerPromise: Promise<void> | null;
 
 
 /**
  * abortRequest().
  */
-function abortRequest(i) {
+function abortRequest(i: AbortController) {
   i.abort();
 }
 
 /**
  * loadTiles() wraps the process of generating tiles and then fetching image points for each tile.
  */
-function loadTiles(which, url, projection, margin) {
+function loadTiles(which: 'bubbles', url: string, projection: Projection, margin: number) {
   const tiles = tiler.margin(margin).getTiles(projection);
 
   // abort inflight requests that are no longer needed
@@ -82,7 +145,7 @@ function loadTiles(which, url, projection, margin) {
 /**
  * loadNextTilePage() load data for the next tile page in line.
  */
-function loadNextTilePage(which, url, tile) {
+function loadNextTilePage(which: 'bubbles', url: string, tile: Omit<Tile, 'xyz'>) {
   const cache = _ssCache[which];
   const nextPage = cache.nextPage[tile.id] || 0;
   const id = tile.id + ',' + String(nextPage);
@@ -107,18 +170,18 @@ function loadNextTilePage(which, url, tile) {
       if (cache.points[bubbleId]) return null;  // skip duplicates
 
       // workaround for https://github.com/openstreetmap/iD/issues/10341#issuecomment-2275724738
-      const loc = [
+      const loc: Vec2 = [
         bubble.lon || bubble.longitude,
         bubble.lat || bubble.latitude
       ];
-      const d = {
+      const d: Bubble = {
         service: 'photo',
         loc: loc,
         key: bubbleId,
         imageUrl: bubble.imageUrl
           .replace('{subdomain}', bubble.imageUrlSubdomains[0]),
         ca: bubble.he || bubble.heading,
-        captured_at: bubble.vintageEnd,
+        captured_at: new Date(bubble.vintageEnd),
         captured_by: 'microsoft',
         pano: true,
         sequenceKey: null
@@ -144,7 +207,7 @@ function loadNextTilePage(which, url, tile) {
 /**
  * getBubbles() handles the request to the server for a tile extent of 'bubbles' (streetside image locations).
  */
-function getBubbles(url, tile, callback) {
+function getBubbles(url: string, tile: Omit<Tile, 'xyz'>, callback: (result: BubbleResult | null) => void) {
   let rect = tile.extent.rectangle();
     const controller = new AbortController();
 
@@ -152,7 +215,7 @@ function getBubbles(url, tile, callback) {
       .then(key => url
         .replace('{key}', key)
         .replace('{bbox}', [rect[1], rect[0], rect[3], rect[2]].join(','))
-        .replace('{count}', maxResults)
+        .replace('{count}', String(maxResults))
       )
       .then(url => fetch(url, { signal: controller.signal }))
       .then(function(response) {
@@ -164,7 +227,7 @@ function getBubbles(url, tile, callback) {
         if (!result) {
           callback(null);
         }
-        return callback(result || []);
+        return callback(result || null);
       }).catch(function(err) {
         if (err.name === 'AbortError') {
         // ignore aborted requests, e.g. from duplicate requests while zooming/panning the map
@@ -179,17 +242,17 @@ function getBubbles(url, tile, callback) {
 /**
  * loadImage()
  */
-function loadImage(imgInfo) {
-  return new Promise(resolve => {
+function loadImage(imgInfo: Face) {
+  return new Promise<{ imgInfo: Face; status: 'ok' | 'error' }>(resolve => {
     let img = new Image();
     img.onload = () => {
-      let canvas = document.getElementById('ideditor-canvas' + imgInfo.face);
-      let ctx = canvas.getContext('2d');
+      let canvas = document.getElementById('ideditor-canvas' + imgInfo.face) as HTMLCanvasElement;
+      let ctx = canvas.getContext('2d')!;
       ctx.drawImage(img, imgInfo.x, imgInfo.y);
       resolve({ imgInfo: imgInfo, status: 'ok' });
     };
     img.onerror = () => {
-      resolve({ data: imgInfo, status: 'error' });
+      resolve({ imgInfo, status: 'error' });
     };
     img.setAttribute('crossorigin', '');
     img.src = imgInfo.url;
@@ -200,28 +263,42 @@ function loadImage(imgInfo) {
 /**
  * loadCanvas()
  */
-function loadCanvas(imageGroup) {
+function loadCanvas(imageGroup: Face[]) {
   return Promise.all(imageGroup.map(loadImage))
     .then((data) => {
-      let canvas = document.getElementById('ideditor-canvas' + data[0].imgInfo.face);
-      const which = { '01': 0, '02': 1, '03': 2, '10': 3, '11': 4, '12': 5 };
+      let canvas = document.getElementById('ideditor-canvas' + data[0].imgInfo.face) as HTMLCanvasElement;
+      const which = { '01': 0, '02': 1, '03': 2, '10': 3, '11': 4, '12': 5 } as const;
       let face = data[0].imgInfo.face;
-      _sceneOptions.cubeMap[which[face]] = canvas.toDataURL('image/jpeg', 1.0);
+      _sceneOptions.cubeMap![which[face]] = canvas.toDataURL('image/jpeg', 1.0);
       return { status: 'loadCanvas for face ' + data[0].imgInfo.face + 'ok'};
     });
 }
 
+enum FaceKey {
+    Front = '01',
+    Right = '02',
+    Back = '03',
+    Left = '10',
+    Up = '11',
+    Down = '12',
+};
+interface Face {
+    face: FaceKey;
+    url: string;
+    x: number;
+    y: number;
+}
 
 /**
  * loadFaces()
  */
-function loadFaces(faceGroup) {
+function loadFaces(faceGroup: Face[][]) {
   return Promise.all(faceGroup.map(loadCanvas))
     .then(() => { return { status: 'loadFaces done' }; });
 }
 
 
-function setupCanvas(selection, reset) {
+function setupCanvas(selection: d3.Selection<HTMLDivElement>, reset?: boolean) {
   if (reset) {
     selection.selectAll('#ideditor-stitcher-canvases')
       .remove();
@@ -245,7 +322,7 @@ function setupCanvas(selection, reset) {
 }
 
 
-function qkToXY(qk) {
+function qkToXY(qk: string): Vec2 {
   let x = 0;
   let y = 0;
   let scale = 256;
@@ -317,23 +394,24 @@ function getQuadKeys() {
 }
 
 
+export default new class {
+    event!: Pick<typeof dispatch, 'on'>;
 
-export default {
   /**
    * init() initialize streetside.
    */
-  init: function() {
+  init() {
     if (!_ssCache) {
       this.reset();
     }
 
     this.event = utilRebind(this, dispatch, 'on');
-  },
+  }
 
   /**
    * reset() reset the cache.
    */
-  reset: function() {
+  reset() {
     if (_ssCache) {
       Object.values(_ssCache.bubbles.inflight).forEach(abortRequest);
     }
@@ -342,29 +420,29 @@ export default {
       bubbles: { inflight: {}, loaded: {}, nextPage: {}, rtree: new RBush(), points: {} },
       sequences: {}
     };
-  },
+  }
 
   /**
    * bubbles()
    */
-  bubbles: function(projection) {
+  bubbles(projection: Projection) {
     const limit = 5;
     return searchLimited(limit, projection, _ssCache.bubbles.rtree);
-  },
+  }
 
 
-  cachedImage: function(imageKey) {
+  cachedImage(imageKey: string) {
       return _ssCache.bubbles.points[imageKey];
-  },
+  }
 
 
-  sequences: function(projection) {
+  sequences(projection: Projection) {
     const viewport = projection.clipExtent();
-    const min = [viewport[0][0], viewport[1][1]];
-    const max = [viewport[1][0], viewport[0][1]];
+    const min: Vec2 = [viewport[0][0], viewport[1][1]];
+    const max: Vec2 = [viewport[1][0], viewport[0][1]];
     const bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
-    let seen = {};
-    let results = [];
+    let seen: Record<string, true> = {};
+    let results: BubbleSequence[] = [];
 
     // all sequences for bubbles in viewport
     _ssCache.bubbles.rtree.search(bbox)
@@ -377,47 +455,48 @@ export default {
       });
 
     return results;
-  },
+  }
 
 
   /**
    * loadBubbles()
    */
-  loadBubbles: function(projection, margin) {
+  loadBubbles(projection: Projection, margin?: number) {
     // by default: request 2 nearby tiles so we can connect sequences.
     if (margin === undefined) margin = 2;
 
     loadTiles('bubbles', streetsideApi, projection, margin);
-  },
+  }
 
 
-  viewer: function() {
+  viewer() {
     return _pannellumViewer;
-  },
+  }
 
 
-  initViewer: function () {
+  initViewer() {
     if (!window.pannellum) return;
     if (_pannellumViewer) return;
 
     _currScene += 1;
     const sceneID = _currScene.toString();
-    const options = {
+
+    const options: Pannellum.TourOptions = {
       'default': { firstScene: sceneID },
       scenes: {}
     };
     options.scenes[sceneID] = _sceneOptions;
 
     _pannellumViewer = window.pannellum.viewer('ideditor-viewer-streetside', options);
-  },
+  }
 
 
-  ensureViewerLoaded: function(context) {
+  ensureViewerLoaded(context: coreContext) {
 
     if (_loadViewerPromise) return _loadViewerPromise;
 
     // create ms-wrapper, a photo wrapper class
-    let wrap = context.container().select('.photoviewer').selectAll('.ms-wrapper')
+    let wrap = context.container().select('.photoviewer').selectAll<HTMLDivElement, 0>('.ms-wrapper')
       .data([0]);
 
     // inject ms-wrapper into the photoviewer div
@@ -485,7 +564,7 @@ export default {
       }
     });
 
-    _loadViewerPromise = new Promise((resolve, reject) => {
+    _loadViewerPromise = new Promise<void>((resolve, reject) => {
 
       let loadedCount = 0;
       function loaded() {
@@ -529,7 +608,7 @@ export default {
 
     return _loadViewerPromise;
 
-    function step(stepBy) {
+    function step(stepBy: number) {
       return () => {
         let viewer = context.container().select('.photoviewer');
         let selected = viewer.empty() ? undefined : viewer.datum();
@@ -542,19 +621,19 @@ export default {
 
         // construct a search trapezoid pointing out from current bubble
         const meters = 35;
-        let p1 = [
+        let p1: Vec2 = [
           origin[0] + geoMetersToLon(meters / 5, origin[1]),
           origin[1]
         ];
-        let p2 = [
+        let p2: Vec2 = [
           origin[0] + geoMetersToLon(meters / 2, origin[1]),
           origin[1] + geoMetersToLat(meters)
         ];
-        let p3 = [
+        let p3: Vec2 = [
           origin[0] - geoMetersToLon(meters / 2, origin[1]),
           origin[1] + geoMetersToLat(meters)
         ];
-        let p4 = [
+        let p4: Vec2 = [
           origin[0] - geoMetersToLon(meters / 5, origin[1]),
           origin[1]
         ];
@@ -577,7 +656,7 @@ export default {
             if (!geoPointInPolygon(d.data.loc, poly)) return;
 
             let dist = geoVecLength(d.data.loc, selected.loc);
-            let theta = selected.ca - d.data.ca;
+            let theta = selected.ca - d.data.ca!;
             let minTheta = Math.min(Math.abs(theta), 360 - Math.abs(theta));
             if (minTheta > 20) {
               dist += 5;  // penalize distance if camera angles don't match
@@ -599,26 +678,26 @@ export default {
           .showViewer(context);
       };
     }
-  },
+  }
 
 
-  yaw: function(yaw) {
+  yaw(yaw: number) {
     if (typeof yaw !== 'number') return yaw;
     _sceneOptions.yaw = yaw;
     return this;
-  },
+  }
 
   /**
    * showViewer()
    */
-  showViewer: function(context) {
+  showViewer(context: coreContext) {
     const wrap = context.container().select('.photoviewer');
     const isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
 
     if (isHidden) {
       for (const service of Object.values(services)) {
         if (service === this) continue;
-        if (typeof service.hideViewer === 'function') {
+        if (service && 'hideViewer' in service && typeof service.hideViewer === 'function') {
           service.hideViewer(context);
         }
       }
@@ -629,13 +708,13 @@ export default {
     }
 
     return this;
-  },
+  }
 
 
   /**
    * hideViewer()
    */
-  hideViewer: function (context) {
+  hideViewer(context: coreContext) {
     let viewer = context.container().select('.photoviewer');
     if (!viewer.empty()) viewer.datum(null);
 
@@ -650,13 +729,13 @@ export default {
     patchHash({ photo: null });
 
     return this.setStyles(context, null, true);
-  },
+  }
 
 
   /**
    * selectImage().
    */
-  selectImage: function (context, key) {
+  selectImage(context: coreContext, key: string) {
     let that = this;
 
     let d = this.cachedImage(key);
@@ -666,7 +745,7 @@ export default {
 
     this.setStyles(context, null, true);
 
-    let wrap = context.container().select('.photoviewer .ms-wrapper');
+    let wrap = context.container().select<HTMLDivElement>('.photoviewer .ms-wrapper');
     let attribution = wrap.selectAll('.photo-attribution').html('');
 
     wrap.selectAll('.pnlm-load-box')   // display "loading.."
@@ -759,12 +838,12 @@ export default {
       .call(t.append('streetside.report'));
 
     // Cubemap face code order matters here: front=01, right=02, back=03, left=10, up=11, down=12
-    const faceKeys = ['01','02','03','10','11','12'];
+    const faceKeys = [FaceKey.Front, FaceKey.Right, FaceKey.Back, FaceKey.Left, FaceKey.Up, FaceKey.Down];
 
     // Map images to cube faces
     let quadKeys = getQuadKeys();
     let faces = faceKeys.map((faceKey) => {
-      return quadKeys.map((quadKey) => {
+      return quadKeys.map((quadKey): Face => {
         const xy = qkToXY(quadKey);
         return {
           face: faceKey,
@@ -800,18 +879,18 @@ export default {
       });
 
     return this;
-  },
+  }
 
 
-  getSequenceKeyForBubble: function(d) {
+  getSequenceKeyForBubble(d: Bubble | undefined | null) {
     return d && d.sequenceKey;
-  },
+  }
 
 
   // Updates the currently highlighted sequence and selected bubble.
   // Reset is only necessary when interacting with the viewport because
   // this implicitly changes the currently selected bubble/sequence
-  setStyles: function (context, hovered, reset) {
+  setStyles(context: coreContext, hovered?: Bubble | null, reset?: boolean) {
     if (reset) {  // reset all layers
       context.container().selectAll('.viewfield-group')
         .classed('highlighted', false)
@@ -838,21 +917,21 @@ export default {
     // highlight sibling viewfields on either the selected or the hovered sequences
     let highlightedBubbleKeys = utilArrayUnion(hoveredBubbleKeys, selectedBubbleKeys);
 
-    context.container().selectAll('.layer-streetside-images .viewfield-group')
+    context.container().selectAll<SVGGElement, Bubble>('.layer-streetside-images .viewfield-group')
       .classed('highlighted', d => highlightedBubbleKeys.indexOf(d.key) !== -1)
       .classed('hovered',     d => d.key === hoveredBubbleKey)
       .classed('currentView', d => d.key === selectedBubbleKey);
 
-    context.container().selectAll('.layer-streetside-images .sequence')
+    context.container().selectAll<SVGGElement, BubbleSequence>('.layer-streetside-images .sequence')
       .classed('highlighted', d => d.properties.key === hoveredSequenceKey)
       .classed('currentView', d => d.properties.key === selectedSequenceKey);
 
     // update viewfields if needed
-    context.container().selectAll('.layer-streetside-images .viewfield-group .viewfield')
+    context.container().selectAll<SVGPathElement, void>('.layer-streetside-images .viewfield-group .viewfield')
       .attr('d', viewfieldPath);
 
-    function viewfieldPath() {
-      let d = this.parentNode.__data__;
+    function viewfieldPath(this: SVGPathElement) {
+      let d = this.parentNode!.__data__;
       if (d.pano && d.key !== selectedBubbleKey) {
         return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
       } else {
@@ -861,13 +940,13 @@ export default {
     }
 
     return this;
-  },
+  }
 
 
   /**
    * cache().
    */
-  cache: function () {
+  cache() {
     return _ssCache;
   }
 };
