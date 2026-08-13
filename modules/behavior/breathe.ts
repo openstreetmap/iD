@@ -8,33 +8,50 @@ import {
 import { select as d3_select } from 'd3-selection';
 import { scaleQuantize as d3_scaleQuantize } from 'd3-scale';
 import { timer as d3_timer } from 'd3-timer';
+import type { Behaviour } from '../core/context';
+import type { Timer, Transition } from 'd3';
 
+type Surface = any;
+type FromTo = 'from' | 'to';
+interface TransitionableCss {
+    opacity?: number;
+    width?: number;
+};
+interface CssParams {
+    tag?: string;
+    from: TransitionableCss;
+    to: TransitionableCss;
+}
+
+export interface BehaviourBreathe extends Behaviour {
+    restartIfNeeded(surface: Surface): void;
+}
 
 export function behaviorBreathe() {
     var duration = 800;
     var steps = 4;
     var selector = '.selected.shadow, .selected .shadow';
-    var _selected = d3_select(null);
+    var _selected = d3_select<HTMLElement, 0>(null!);
     var _classed = '';
-    var _params = {};
+    var _params: { [id: string]: CssParams } = {};
     var _done = false;
-    var _timer;
+    var _timer: Timer;
 
 
-    function ratchetyInterpolator(a, b, steps, units) {
+    function ratchetyInterpolator(a: number | string | undefined, b: number | string | undefined, steps: number, units?: string) {
         a = Number(a);
         b = Number(b);
         var sample = d3_scaleQuantize()
             .domain([0, 1])
             .range(d3_quantize(d3_interpolateNumber(a, b), steps));
 
-        return function(t) {
+        return function(t: number) {
             return String(sample(t)) + (units || '');
         };
     }
 
 
-    function reset(selection) {
+    function reset(selection: d3.Selection) {
         selection
             .style('stroke-opacity', null)
             .style('stroke-width', null)
@@ -43,8 +60,8 @@ export function behaviorBreathe() {
     }
 
 
-    function setAnimationParams(transition, fromTo) {
-        var toFrom = (fromTo === 'from' ? 'to' : 'from');
+    function setAnimationParams(transition: Transition<HTMLElement, any, any, any>, fromTo: FromTo) {
+        var toFrom: FromTo = (fromTo === 'from' ? 'to' : 'from');
 
         transition
             .styleTween('stroke-opacity', function(d) {
@@ -80,13 +97,13 @@ export function behaviorBreathe() {
     }
 
 
-    function calcAnimationParams(selection) {
+    function calcAnimationParams(selection: d3.Selection) {
         selection
             .call(reset)
             .each(function(d) {
                 var s = d3_select(this);
-                var tag = s.node().tagName;
-                var p = {'from': {}, 'to': {}};
+                var tag = s.node()!.tagName;
+                var p: CssParams = {'from': {}, 'to': {}};
                 var opacity;
                 var width;
 
@@ -110,14 +127,14 @@ export function behaviorBreathe() {
     }
 
 
-    function run(surface, fromTo) {
-        var toFrom = (fromTo === 'from' ? 'to' : 'from');
-        var currSelected = surface.selectAll(selector);
+    function run(surface: d3.Selection, fromTo: FromTo) {
+        var toFrom: FromTo = (fromTo === 'from' ? 'to' : 'from');
+        var currSelected = surface.selectAll<HTMLElement, 0>(selector);
         var currClassed = surface.attr('class');
 
         if (_done || currSelected.empty()) {
             _selected.call(reset);
-            _selected = d3_select(null);
+            _selected = d3_select<HTMLElement, 0>(null!);
             return;
         }
 
@@ -148,7 +165,7 @@ export function behaviorBreathe() {
             });
     }
 
-    function behavior(surface) {
+    const behavior: BehaviourBreathe = function(surface) {
         _done = false;
         _timer = d3_timer(function() {
             // wait for elements to actually become selected
@@ -160,7 +177,7 @@ export function behaviorBreathe() {
             _timer.stop();
             return true;
         }, 20);
-    }
+    };
 
     behavior.restartIfNeeded = function(surface) {
         if (_selected.empty()) {

@@ -4,8 +4,9 @@ import type { Vec2 } from '../geo/vector';
 import type { EntityId, osmNode } from '../osm';
 import { utilArrayIntersection } from '../util';
 
+export type Edge = [EntityId, EntityId];
 
-export function actionAddMidpoint(midpoint: { loc: Vec2; edge: [EntityId, EntityId] }, node: osmNode): Action {
+export function actionAddMidpoint(midpoint: { loc: Vec2; edge: Edge }, node: osmNode): Action {
     return function(graph) {
         graph = graph.replace(node.move(midpoint.loc));
 

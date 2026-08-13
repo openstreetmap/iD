@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
@@ -6,12 +7,31 @@ import {
 } from 'd3-selection';
 
 import { geoVecLength } from '../geo';
-import { osmNote } from '../osm';
+import { osmNote, type OsmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
 import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../util';
+import type { Behaviour } from '../core/context';
+import type { Vec2 } from '../geo/vector';
 
+type Entity = OsmEntity;
+type OriginFunc = ((entity: OsmEntity) => Vec2) | null;
 
-/*
+interface BehaviourDrag extends Behaviour {
+    selector: GetSet<BehaviourDrag, string>;
+    origin: GetSet<BehaviourDrag, OriginFunc>;
+    cancel(): BehaviourDrag;
+    targetNode: GetSet<BehaviourDrag, HTMLElement>;
+    targetEntity: GetSet<BehaviourDrag, Entity>;
+    surface: GetSet<BehaviourDrag, HTMLElement>;
+}
+
+interface EventMap {
+    start: [event: PointerEvent, targetEntity: Entity];
+    move: [event: PointerEvent, targetEntity: Entity, end: Vec2, start: Vec2];
+    end: [event: PointerEvent, targetEntity: Entity];
+}
+
+/**
     `behaviorDrag` is like `d3_behavior.drag`, with the following differences:
 
     * The `origin` function is expected to return an [x, y] tuple rather than an
@@ -27,23 +47,23 @@ import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../
  */
 
 export function behaviorDrag() {
-    var dispatch = d3_dispatch('start', 'move', 'end');
+    var dispatch = d3_dispatch<Window, EventMap>('start', 'move', 'end');
 
     // see also behaviorSelect
     var _tolerancePx = 1; // keep this low to facilitate pixel-perfect micromapping
     var _penTolerancePx = 4; // styluses can be touchy so require greater movement - #1981
 
-    var _origin = null;
+    var _origin: OriginFunc  = null;
     var _selector = '';
-    var _targetNode;
-    var _targetEntity;
-    var _surface;
-    var _pointerId;
+    var _targetNode: HTMLElement | undefined;
+    var _targetEntity: Entity;
+    var _surface: HTMLElement;
+    var _pointerId: number | 'mouse' | null;
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
-    var d3_event_userSelectProperty = utilPrefixCSSProperty('UserSelect');
+    var d3_event_userSelectProperty = utilPrefixCSSProperty('UserSelect') as string;
     var d3_event_userSelectSuppress = function() {
             var selection = d3_selection();
             var select = selection.style(d3_event_userSelectProperty);
@@ -54,7 +74,7 @@ export function behaviorDrag() {
         };
 
 
-    function pointerdown(d3_event) {
+    function pointerdown(this: HTMLElement, d3_event: PointerEvent) {
 
         if (_pointerId) return;
 
@@ -65,7 +85,7 @@ export function behaviorDrag() {
         // only force reflow once per drag
         var pointerLocGetter = utilFastMouse(_surface || _targetNode.parentNode);
 
-        var offset;
+        var offset: Vec2;
         var startOrigin = pointerLocGetter(d3_event);
         var started = false;
         var selectEnable = d3_event_userSelectSuppress();
@@ -84,7 +104,7 @@ export function behaviorDrag() {
         d3_event.stopPropagation();
 
 
-        function pointermove(d3_event) {
+        function pointermove(this: Window, d3_event: PointerEvent) {
             if (_pointerId !== (d3_event.pointerId || 'mouse')) return;
 
             var p = pointerLocGetter(d3_event);
@@ -113,7 +133,7 @@ export function behaviorDrag() {
         }
 
 
-        function pointerup(d3_event) {
+        function pointerup(this: Window, d3_event: PointerEvent) {
             if (_pointerId !== (d3_event.pointerId || 'mouse')) return;
 
             _pointerId = null;
@@ -133,21 +153,21 @@ export function behaviorDrag() {
     }
 
 
-    function behavior(selection) {
-        var matchesSelector = utilPrefixDOMProperty('matchesSelector');
+    const behavior: BehaviourDrag = function(selection) {
+        var matchesSelector = utilPrefixDOMProperty('matchesSelector') as 'matches';
         var delegate = pointerdown;
 
         if (_selector) {
             delegate = function(d3_event) {
                 var root = this;
-                var target = d3_event.target;
-                for (; target && target !== root; target = target.parentNode) {
+                var target = d3_event.target as HTMLElement;
+                for (; target && target !== root; target = target.parentNode as HTMLElement) {
                     var datum = target.__data__;
 
                     _targetEntity = datum instanceof osmNote ? datum
                         : datum && datum.properties && datum.properties.entity;
 
-                    if (_targetEntity && target[matchesSelector](_selector)) {
+                    if (_targetEntity && target && target[matchesSelector](_selector)) {
                         return pointerdown.call(target, d3_event);
                     }
                 }
@@ -156,7 +176,7 @@ export function behaviorDrag() {
 
         selection
             .on(_pointerPrefix + 'down.drag' + _selector, delegate);
-    }
+    };
 
 
     behavior.off = function(selection) {
@@ -169,14 +189,14 @@ export function behaviorDrag() {
         if (!arguments.length) return _selector;
         _selector = _;
         return behavior;
-    };
+    } as GetSet<BehaviourDrag, string>;
 
 
     behavior.origin = function(_) {
         if (!arguments.length) return _origin;
         _origin = _;
         return behavior;
-    };
+    } as GetSet<BehaviourDrag, OriginFunc>;
 
 
     behavior.cancel = function() {
@@ -191,21 +211,21 @@ export function behaviorDrag() {
         if (!arguments.length) return _targetNode;
         _targetNode = _;
         return behavior;
-    };
+    } as GetSet<BehaviourDrag, HTMLElement>;
 
 
     behavior.targetEntity = function(_) {
         if (!arguments.length) return _targetEntity;
         _targetEntity = _;
         return behavior;
-    };
+    } as GetSet<BehaviourDrag, Entity>;
 
 
     behavior.surface = function(_) {
         if (!arguments.length) return _surface;
         _surface = _;
         return behavior;
-    };
+    } as GetSet<BehaviourDrag, HTMLElement>;
 
 
     return utilRebind(behavior, dispatch, 'on');

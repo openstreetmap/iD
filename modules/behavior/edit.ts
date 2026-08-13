@@ -1,4 +1,6 @@
-export function behaviorEdit(context: iD.Context) {
+import type { coreContext } from '../core';
+
+export function behaviorEdit(context: coreContext) {
 
     function behavior() {
         context.map()

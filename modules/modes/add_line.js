@@ -5,9 +5,18 @@ import { actionAddVertex } from '../actions/add_vertex';
 import { behaviorAddWay } from '../behavior/add_way';
 import { modeDrawLine } from './draw_line';
 import { osmNode, osmWay } from '../osm';
+import { t } from '../core';
+import { presetManager } from '../presets';
 
 
-export function modeAddLine(context, mode) {
+export function modeAddLine(context) {
+    const mode = {
+        title: t.append('modes.add_line.title'),
+        button: 'line',
+        description: t.append('modes.add_line.description'),
+        preset: presetManager.item('line'),
+        key: '2'
+    };
     mode.id = 'add-line';
 
     var behavior = behaviorAddWay(context)

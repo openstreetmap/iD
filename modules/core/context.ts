@@ -5,15 +5,15 @@ import { json as d3_json } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
 import packageJSON from '../../package.json';
-import type { EntityId, NoteId, osmChangeset, OsmEntity } from '../osm';
-import { t, localizer } from './localizer';
+import type { EntityId, NoteId, osmChangeset, OsmEntity, WayId } from '../osm';
+import { t, localizer, type LocalizedTextRenderer } from './localizer';
 import { fileFetcher, type AssetMap } from './file_fetcher';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
 import { geoRawMercator, type Projection } from '../geo/raw_mercator';
 import { modeSelect, modeSelectNote } from '../modes';
-import { presetManager } from '../presets';
+import { presetManager, type presetPreset } from '../presets';
 import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
@@ -32,15 +32,23 @@ type EventMap = {
 
 export interface Mode {
     id: string;
+    title?: LocalizedTextRenderer;
+    button?: string;
+    description?: LocalizedTextRenderer;
+    key?: string;
+    wayID?: WayId;
     enter(): void;
     exit(): void;
     selectedIDs?(): EntityId[];
     activeID?(): EntityId;
     follow?: GetSet<Mode, boolean>;
+    preset?: presetPreset;
 }
 
-export interface Behaviour extends d3.Selector {
+export interface Behaviour extends d3.Selector, Pick<Dispatch<Behaviour, any>, 'on'> {
     off: d3.Selector;
+    hover?(): void;
+    activeID?(): EntityId;
 }
 
 interface HashParams {
@@ -65,6 +73,10 @@ type DebugFlags =
     /** downloaded data from osm */
     | 'downloaded';
 
+/** @typedef {d3.Selector & {
+    off: d3.Selector;
+    hover?(): void;
+}} Behaviour */
 
 interface LoadedData {
     data: OsmEntity[];

@@ -17,6 +17,7 @@ import { osmNode } from '../osm/node';
 import { utilRebind } from '../util/rebind';
 import { utilKeybinding } from '../util';
 
+/** @returns {import('../core/context').Behaviour} */
 export function behaviorDrawWay(context, wayID, mode, startGraph) {
     const keybinding = utilKeybinding('drawWay');
 

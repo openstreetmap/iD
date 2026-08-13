@@ -1,11 +1,16 @@
 import { t } from '../core';
+import type { Behaviour, coreContext } from '../core/context';
+import type { Operation } from '../core/history';
+
+interface BehaviourOperation extends Behaviour {
+    which: GetSet<BehaviourOperation, Operation>;
+}
 
 /* Creates a keybinding behavior for an operation */
-export function behaviorOperation(context) {
-    var _operation;
+export function behaviorOperation(context: coreContext) {
+    var _operation: Operation;
 
-    /** @param {KeyboardEvent} d3_event */
-    function keypress(d3_event) {
+    function keypress(d3_event: KeyboardEvent) {
         // prevent operations during low zoom selection
         if (!context.map().withinEditableZoom()) return;
 
@@ -50,13 +55,13 @@ export function behaviorOperation(context) {
     }
 
 
-    function behavior() {
+    const behavior: BehaviourOperation = function() {
         if (_operation && _operation.available()) {
             behavior.on();
         }
 
         return behavior;
-    }
+    };
 
 
     behavior.on = function() {
@@ -75,7 +80,7 @@ export function behaviorOperation(context) {
         if (!arguments.length) return _operation;
         _operation = _;
         return behavior;
-    };
+    } as GetSet<BehaviourOperation, Operation>;
 
 
     return behavior;

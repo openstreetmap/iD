@@ -1,15 +1,17 @@
 import { t } from '../core/localizer';
 import { behaviorDrawWay } from '../behavior/draw_way';
+import type { coreContext, coreGraph } from '../core';
+import type { WayId } from '../osm';
+import type { Mode } from '../core/context';
 
 
-export function modeDrawArea(context, wayID, startGraph, button) {
-    var mode = {
-        button: button,
-        id: 'draw-area'
-    };
+export function modeDrawArea(context: coreContext, wayID: WayId, startGraph: coreGraph, button?: string) {
+    const mode: Mode = function(){};
+    mode.button = button;
+    mode.id = 'draw-area';
 
-    var behavior = behaviorDrawWay(context, wayID, mode, startGraph)
-        .on('rejectedSelfIntersection.modeDrawArea', function() {
+    var behavior = behaviorDrawWay(context, wayID, mode, startGraph);
+    behavior.on('rejectedSelfIntersection.modeDrawArea', function() {
             context.ui().flash
                 .iconName('#iD-icon-no')
                 .label(t.append('self_intersection.error.areas'))();
@@ -30,7 +32,7 @@ export function modeDrawArea(context, wayID, startGraph, button) {
     };
 
     mode.activeID = function() {
-        return (behavior && behavior.activeID()) || [];
+        return (behavior && behavior.activeID!()) || [];
     };
 
     return mode;

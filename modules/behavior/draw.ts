@@ -9,31 +9,40 @@ import { behaviorEdit } from './edit';
 import { behaviorHover } from './hover';
 import { geoChooseEdge, geoVecLength } from '../geo';
 import { utilFastMouse, utilKeybinding, utilRebind } from '../util';
+import type { Behaviour, coreContext } from '../core/context';
+import type { Vec2 } from '../geo/vector';
+import type { osmNode } from '../osm';
 
 var _disableSpace = false;
-var _lastSpace = null;
+var _lastSpace: Vec2 | null = null;
 
 
-export function behaviorDraw(context) {
+export function behaviorDraw(context: coreContext) {
     var dispatch = d3_dispatch(
         'move', 'down', 'downcancel', 'click', 'clickWay', 'clickNode', 'undo', 'cancel', 'finish'
     );
 
     var keybinding = utilKeybinding('draw');
 
-    var _hover = behaviorHover(context)
-        .altDisables(true)
-        .ignoreVertex(true)
-        .on('hover', context.ui().sidebar.hover);
+    var _hover = behaviorHover(context);
+    _hover.altDisables(true);
+    _hover.ignoreVertex(true);
+    _hover.on('hover', context.ui().sidebar.hover);
     var _edit = behaviorEdit(context);
 
     var _closeTolerance = 4;
     var _tolerance = 12;
     var _mouseLeave = false;
-    var _lastMouse = null;
-    var _lastPointerUpEvent;
+    var _lastMouse: PointerEvent | null = null;
+    var _lastPointerUpEvent: PointerEvent | undefined;
 
-    var _downPointer;
+    var _downPointer: null | {
+        id: number | 'mouse';
+        pointerLocGetter(event: MouseEvent): Vec2;
+        downTime: number;
+        downLoc: Vec2;
+        isCancelled?: boolean;
+    };
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -41,12 +50,12 @@ export function behaviorDraw(context) {
 
     // related code
     // - `mode/drag_node.js` `datum()`
-    function datum(d3_event) {
+    function datum(d3_event: KeyboardEvent | MouseEvent | PointerEvent) {
         var mode = context.mode();
         var isNote = mode && (mode.id.indexOf('note') !== -1);
         if (d3_event.altKey || isNote) return {};
 
-        var element;
+        var element: EventTarget | null;
         if (d3_event.type === 'keydown') {
             element = _lastMouse && _lastMouse.target;
         } else {
@@ -55,11 +64,11 @@ export function behaviorDraw(context) {
 
         // When drawing, snap only to touch targets..
         // (this excludes area fills and active drawing elements)
-        var d = element.__data__;
+        var d = (element as HTMLElement).__data__;
         return (d && d.properties && d.properties.target) ? d : {};
     }
 
-    function pointerdown(d3_event) {
+    function pointerdown(this: HTMLElement, d3_event: PointerEvent) {
 
         if (_downPointer) return;
 
@@ -74,7 +83,7 @@ export function behaviorDraw(context) {
         dispatch.call('down', this, d3_event, datum(d3_event));
     }
 
-    function pointerup(d3_event) {
+    function pointerup(d3_event: PointerEvent) {
 
         if (!_downPointer || _downPointer.id !== (d3_event.pointerId || 'mouse')) return;
 
@@ -107,7 +116,7 @@ export function behaviorDraw(context) {
         }
     }
 
-    function pointermove(d3_event) {
+    function pointermove(this: any, d3_event: PointerEvent) {
         if (_downPointer &&
             _downPointer.id === (d3_event.pointerId || 'mouse') &&
             !_downPointer.isCancelled) {
@@ -133,7 +142,7 @@ export function behaviorDraw(context) {
         dispatch.call('move', this, d3_event, datum(d3_event));
     }
 
-    function pointercancel(d3_event) {
+    function pointercancel(this: any, d3_event: PointerEvent) {
         if (_downPointer &&
             _downPointer.id === (d3_event.pointerId || 'mouse')) {
 
@@ -152,7 +161,8 @@ export function behaviorDraw(context) {
         _mouseLeave = true;
     }
 
-    function allowsVertex(d) {
+    function allowsVertex(d: osmNode) {
+        // @ts-expect-error -- fixed in a different PR
         return d.geometry(context.graph()) === 'vertex' || presetManager.allowsVertex(d, context.graph());
     }
 
@@ -160,7 +170,7 @@ export function behaviorDraw(context) {
     // - `mode/drag_node.js`     `doMove()`
     // - `behavior/draw.js`      `click()`
     // - `behavior/draw_way.js`  `move()`
-    function click(d3_event, loc) {
+    function click(this: any, d3_event: MouseEvent | KeyboardEvent, loc: Vec2) {
         var d = datum(d3_event);
         var target = d && d.properties && d.properties.entity;
 
@@ -170,7 +180,7 @@ export function behaviorDraw(context) {
             dispatch.call('clickNode', this, target, d);
             return;
 
-        } else if (target && target.type === 'way' && (mode.id !== 'add-point' || mode.preset.matchGeometry('vertex'))) {   // Snap to a way
+        } else if (target && target.type === 'way' && (mode.id !== 'add-point' || mode.preset!.matchGeometry('vertex'))) {   // Snap to a way
             var choice = geoChooseEdge(
                 context.graph().childNodes(target), loc, context.projection, context.activeID()
             );
@@ -179,7 +189,7 @@ export function behaviorDraw(context) {
                 dispatch.call('clickWay', this, choice.loc, edge, d);
                 return;
             }
-        } else if (mode.id !== 'add-point' || mode.preset.matchGeometry('point')) {
+        } else if (mode.id !== 'add-point' || mode.preset!.matchGeometry('point')) {
             var locLatLng = context.projection.invert(loc);
             _disableSpace = true;
             _lastSpace = loc;
@@ -189,7 +199,7 @@ export function behaviorDraw(context) {
     }
 
     // treat a spacebar press like a click
-    function space(d3_event) {
+    function space(d3_event: KeyboardEvent) {
         d3_event.preventDefault();
         d3_event.stopPropagation();
 
@@ -215,25 +225,25 @@ export function behaviorDraw(context) {
     }
 
 
-    function backspace(d3_event) {
+    function backspace(d3_event: KeyboardEvent) {
         d3_event.preventDefault();
         dispatch.call('undo');
     }
 
 
-    function del(d3_event) {
+    function del(d3_event: KeyboardEvent) {
         d3_event.preventDefault();
         dispatch.call('cancel');
     }
 
 
-    function ret(d3_event) {
+    function ret(d3_event: KeyboardEvent) {
         d3_event.preventDefault();
         dispatch.call('finish');
     }
 
 
-    function behavior(selection) {
+    const behavior: Behaviour = function(selection) {
         context.install(_hover);
         context.install(_edit);
 
@@ -261,7 +271,7 @@ export function behaviorDraw(context) {
             .call(keybinding);
 
         return behavior;
-    }
+    };
 
 
     behavior.off = function(selection) {

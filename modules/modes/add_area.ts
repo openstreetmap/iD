@@ -1,34 +1,46 @@
 import { actionAddEntity } from '../actions/add_entity';
-import { actionAddMidpoint } from '../actions/add_midpoint';
+import { actionAddMidpoint, type Edge } from '../actions/add_midpoint';
 import { actionAddVertex } from '../actions/add_vertex';
 
 import { behaviorAddWay } from '../behavior/add_way';
 import { modeDrawArea } from './draw_area';
-import { osmNode, osmWay } from '../osm';
+import { osmNode, osmWay, type WayId } from '../osm';
+import { t } from '../core';
+import { presetManager } from '../presets';
+import type { coreContext, Mode } from '../core/context';
+import type { Vec2 } from '../geo/vector';
+import type { Action } from '../core/history';
 
 
-export function modeAddArea(context, mode) {
+export function modeAddArea(context: coreContext) {
+    const mode: Mode = function() {};
+    mode.title = t.append('modes.add_area.title');
+    mode.button = 'area';
+    mode.description = t.append('modes.add_area.description');
+    mode.preset = presetManager.item('area');
+    mode.key = '3';
     mode.id = 'add-area';
 
-    var behavior = behaviorAddWay(context)
+    var behavior = behaviorAddWay(context);
+    behavior
         .on('start', start)
         .on('startFromWay', startFromWay)
         .on('startFromNode', startFromNode);
 
-    function defaultTags(loc) {
-        var defaultTags = { area: 'yes' };
+    function defaultTags(loc: Vec2) {
+        var defaultTags: Tags = { area: 'yes' };
         if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'area', false, loc);
         return defaultTags;
     }
 
-    function actionClose(wayId) {
+    function actionClose(wayId: WayId): Action {
         return function (graph) {
             return graph.replace(graph.entity(wayId).close());
         };
     }
 
 
-    function start(loc) {
+    function start(loc: Vec2) {
         var startGraph = context.graph();
         var node = new osmNode({ loc: loc });
         var way = new osmWay({ tags: defaultTags(loc) });
@@ -44,7 +56,7 @@ export function modeAddArea(context, mode) {
     }
 
 
-    function startFromWay(loc, edge) {
+    function startFromWay(loc: Vec2, edge: Edge) {
         var startGraph = context.graph();
         var node = new osmNode({ loc: loc });
         var way = new osmWay({ tags: defaultTags(loc) });
@@ -61,7 +73,7 @@ export function modeAddArea(context, mode) {
     }
 
 
-    function startFromNode(node) {
+    function startFromNode(node: osmNode) {
         var startGraph = context.graph();
         var way = new osmWay({ tags: defaultTags(node.loc) });
 

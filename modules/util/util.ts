@@ -9,6 +9,7 @@ import { geoExtent } from '../geo/extent';
 import type { coreGraph } from '../core';
 import type { osmNode as OsmNode } from '../osm/node';
 import type { EntityId as EntityID } from '../osm';
+import type { Vec2 } from '../geo/vector';
 
 
 export function utilTagText(entity: iD.OsmEntity): string {
@@ -590,7 +591,7 @@ export function utilFastMouse(container: HTMLElement) {
     const rectTop = rect.top;
     const clientLeft = +container.clientLeft;
     const clientTop = +container.clientTop;
-    return function(e: MouseEvent) {
+    return function(e: MouseEvent): Vec2 {
         return [
             e.clientX - rectLeft - clientLeft,
             e.clientY - rectTop - clientTop

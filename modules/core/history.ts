@@ -34,7 +34,7 @@ export interface Action<T = never> {
 
 export interface Operation {
     (event?: KeyboardEvent): void;
-    available(situation: string): boolean | string | undefined;
+    available(situation?: string): boolean | string | undefined;
     disabled(): false | string;
     tooltip(): LocalizedTextRenderer;
     annotation(): string;
@@ -46,7 +46,7 @@ export interface Operation {
     behavior?: unknown;
     mouseOnly?: boolean;
     relatedEntityIds?(): EntityId[];
-    point?(point: Vec2): unknown;
+    point?(point: Vec2 | null): unknown;
     getAuxiliaryGeometry?(): {
         id: string;
         path: string | null;

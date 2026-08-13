@@ -5,8 +5,18 @@ import {
 } from 'd3-selection';
 
 import { presetManager } from '../presets';
-import { OsmAbstractEntity, osmNote, QAItem } from '../osm';
+import { OsmAbstractEntity, osmNote, QAItem, type NodeId, type OsmEntity, type osmNode } from '../osm';
 import { utilKeybinding, utilRebind } from '../util';
+import type { Behaviour, coreContext } from '../core/context';
+import type { Feature, Geometry } from 'geojson';
+
+type Datum = OsmEntity | null | Feature<Geometry, { entity: OsmEntity }>;
+
+export interface BehaviourHover extends Behaviour {
+    altDisables: GetSet<BehaviourHover, boolean>;
+    ignoreVertex: GetSet<BehaviourHover, boolean>;
+    initialNodeID: GetSet<BehaviourHover, NodeId>;
+}
 
 /*
    The hover behavior adds the `.hover` class on pointerover to all elements to which
@@ -17,20 +27,20 @@ import { utilKeybinding, utilRebind } from '../util';
    Only one of these elements can have the :hover pseudo-class, but all of them will
    have the .hover class.
  */
-export function behaviorHover(context) {
+export function behaviorHover(context: coreContext) {
     var dispatch = d3_dispatch('hover');
     var _selection = d3_select(null);
-    var _newNodeId = null;
-    var _initialNodeID = null;
-    var _altDisables;
-    var _ignoreVertex;
-    var _targets = [];
+    var _newNodeId: NodeId | null | undefined = null;
+    var _initialNodeID: NodeId | null = null;
+    var _altDisables: boolean | undefined;
+    var _ignoreVertex: boolean | undefined;
+    var _targets: (Datum)[] = [];
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
 
-    function keydown(d3_event) {
+    function keydown(this: any, d3_event: KeyboardEvent) {
         if (_altDisables && d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             _selection.selectAll('.hover')
                 .classed('hover-suppressed', true)
@@ -44,7 +54,7 @@ export function behaviorHover(context) {
     }
 
 
-    function keyup(d3_event) {
+    function keyup(this: any, d3_event: KeyboardEvent) {
         if (_altDisables && d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false)
@@ -58,7 +68,7 @@ export function behaviorHover(context) {
     }
 
 
-    function behavior(selection) {
+    const behavior: BehaviourHover = function(selection) {
         _selection = selection;
 
         _targets = [];
@@ -82,8 +92,8 @@ export function behaviorHover(context) {
             .on('keyup.hover', keyup);
 
 
-        function eventTarget(d3_event) {
-            var datum = d3_event.target && d3_event.target.__data__;
+        function eventTarget(d3_event: MouseEvent): Datum {
+            var datum: Feature<Geometry, { entity: OsmEntity; }> = d3_event.target && (d3_event.target as HTMLElement).__data__;
             if (typeof datum !== 'object') return null;
             if (!(datum instanceof OsmAbstractEntity) && datum.properties && (datum.properties.entity instanceof OsmAbstractEntity)) {
                 return datum.properties.entity;
@@ -91,7 +101,7 @@ export function behaviorHover(context) {
             return datum;
         }
 
-        function pointerover(d3_event) {
+        function pointerover(d3_event: PointerEvent) {
             // ignore mouse hovers with buttons pressed unless dragging
             if (context.mode().id.indexOf('drag') === -1 &&
                 (!d3_event.pointerType || d3_event.pointerType === 'mouse') &&
@@ -104,7 +114,7 @@ export function behaviorHover(context) {
             }
         }
 
-        function pointerout(d3_event) {
+        function pointerout(d3_event: PointerEvent) {
 
             var target = eventTarget(d3_event);
             var index = _targets.indexOf(target);
@@ -114,20 +124,21 @@ export function behaviorHover(context) {
             }
         }
 
-        function allowsVertex(d) {
+        function allowsVertex(d: osmNode) {
+            // @ts-expect-error -- will be fixed in a different PR
             return d.geometry(context.graph()) === 'vertex' || presetManager.allowsVertex(d, context.graph());
         }
 
-        function modeAllowsHover(target) {
+        function modeAllowsHover(target: OsmEntity) {
             var mode = context.mode();
             if (mode.id === 'add-point') {
-                return mode.preset.matchGeometry('vertex') ||
+                return mode.preset!.matchGeometry('vertex') ||
                     (target.type !== 'way' && target.geometry(context.graph()) !== 'vertex');
             }
             return true;
         }
 
-        function updateHover(d3_event, targets) {
+        function updateHover(this: any, d3_event: MouseEvent, targets: (Datum)[]) {
 
             _selection.selectAll('.hover')
                 .classed('hover', false);
@@ -159,7 +170,7 @@ export function behaviorHover(context) {
                 var datum = targets[i];
 
                 // What are we hovering over?
-                if (datum.__featurehash__) {
+                if (datum && '__featurehash__' in datum && datum.__featurehash__) {
                     // hovering custom data
                     selector += ', .data' + datum.__featurehash__;
 
@@ -190,7 +201,7 @@ export function behaviorHover(context) {
 
             dispatch.call('hover', this, !suppressed && targets);
         }
-    }
+    };
 
 
     behavior.off = function(selection) {
@@ -207,7 +218,7 @@ export function behaviorHover(context) {
             .on(_pointerPrefix + 'down.hover', null);
 
         d3_select(window)
-            .on(_pointerPrefix + 'up.hover pointercancel.hover', null, true)
+            .on(_pointerPrefix + 'up.hover pointercancel.hover', null) // FIXME: bug ?
             .on('keydown.hover', null)
             .on('keyup.hover', null);
     };
@@ -217,18 +228,18 @@ export function behaviorHover(context) {
         if (!arguments.length) return _altDisables;
         _altDisables = val;
         return behavior;
-    };
+    } as GetSet<BehaviourHover, boolean>;
 
     behavior.ignoreVertex = function(val) {
         if (!arguments.length) return _ignoreVertex;
         _ignoreVertex = val;
         return behavior;
-    };
+    } as GetSet<BehaviourHover, boolean>;
 
     behavior.initialNodeID = function(nodeId) {
         _initialNodeID = nodeId;
         return behavior;
-    };
+    } as GetSet<BehaviourHover, NodeId>;
 
     return utilRebind(behavior, dispatch, 'on');
 }

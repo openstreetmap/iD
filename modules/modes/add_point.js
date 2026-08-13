@@ -6,9 +6,17 @@ import { osmNode } from '../osm/node';
 import { actionAddEntity } from '../actions/add_entity';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionAddMidpoint } from '../actions/add_midpoint';
+import { presetManager } from '../presets';
 
 
-export function modeAddPoint(context, mode) {
+export function modeAddPoint(context) {
+    const mode = {
+        title: t.append('modes.add_point.title'),
+        button: 'point',
+        description: t.append('modes.add_point.description'),
+        preset: presetManager.item('point'),
+        key: '1'
+    };
 
     mode.id = 'add-point';
 
