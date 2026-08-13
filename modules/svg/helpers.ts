@@ -26,7 +26,7 @@ import type { WithLoc } from './geolocate';
 // 1 = passive vertex - yes touch/connect
 // 2 = adjacent vertex - yes but pay attention segmenting a line here
 //
-export function svgPassiveVertex(node: osmNode, graph: coreGraph, activeID: NodeId) {
+export function svgPassiveVertex(node: osmNode, graph: coreGraph, activeID: NodeId | undefined) {
     if (!activeID) return 1;
     if (activeID === node.id) return 0;
 
@@ -226,7 +226,7 @@ export type SegmentFeature = Feature<LineString, {
     index: number;
 }>;
 
-export function svgSegmentWay(way: osmWay, graph: coreGraph, activeID: NodeId): {
+export function svgSegmentWay(way: osmWay, graph: coreGraph, activeID: NodeId | undefined): {
     passive: SegmentFeature[];
     active: SegmentFeature[];
 } {
@@ -238,7 +238,7 @@ export function svgSegmentWay(way: osmWay, graph: coreGraph, activeID: NodeId): 
     }
 
     function getWaySegments() {
-        const isActiveWay = (way.nodes.indexOf(activeID) !== -1);
+        const isActiveWay = (way.nodes.indexOf(activeID!) !== -1);
         const features: { passive: SegmentFeature[]; active: SegmentFeature[]; } = { passive: [], active: [] };
 
         interface Start { node: osmNode; type: number; }

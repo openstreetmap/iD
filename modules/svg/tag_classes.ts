@@ -23,7 +23,7 @@ export function svgTagClasses<T>() {
     var _tags: TagGetter<any> = function(entity) { return entity.tags; };
 
 
-    const tagClasses = function(selection: d3.Selection<SVGGElement>) {
+    const tagClasses = function(selection: d3.Selection<SVGGElement> | d3.Selection<SVGPathElement>) {
         selection.each(function tagClassesEach(entity) {
             var value: any = this.className;
 

@@ -73,6 +73,7 @@ export function coreHistory(context) {
     var _photoOverlaysUsed = [];
     var _checkpoints = {};
     var _pausedGraph;
+    /** @type {{ graph: coreGraph }[]} */
     var _stack;
     var _index;
     var _tree;

@@ -2,12 +2,30 @@ import { deepEqual } from 'fast-equals';
 import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../presets';
-import { geoScaleToZoom } from '../geo';
-import { osmIdManager } from '../osm';
+import { geoScaleToZoom, type geoExtent } from '../geo';
+import type { osmNode} from '../osm';
+import { osmIdManager, type EntityId, type NodeId, type OsmEntity } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
+import type { Projection } from '../geo/raw_mercator';
+import type { coreGraph } from '../core';
+import type { Feature } from 'geojson';
 
-export function svgVertices(projection, context) {
+interface Selected {
+    /** important vertices (render always) */
+    persistent: Record<NodeId, osmNode>;
+    /** selected + siblings of selected (render always) */
+    selected: Record<NodeId, osmNode>;
+    /** hovered + siblings of hovered (render only in draw modes) */
+    hovered: Record<NodeId, true>;
+}
+
+interface Direction {
+    type: 'side' | 'direction';
+    angle: number;
+}
+
+export function svgVertices(projection: Projection, context: iD.Context) {
     var radiuses = {
         //       z16-, z17,   z18+,  w/icon
         shadow: [6,    7.5,   7.5,   12],
@@ -15,33 +33,33 @@ export function svgVertices(projection, context) {
         fill:   [1,    1.5,   1.5,   1.5]
     };
 
-    var _currHoverTarget;
-    var _currPersistent = {};
+    var _currHoverTarget: Feature;
+    var _currPersistent: Record<NodeId, osmNode> = {};
     var _currHover = {};
     var _prevHover = {};
-    var _currSelected = {};
+    var _currSelected : Record<NodeId, osmNode>= {};
     var _prevSelected = {};
-    var _radii = {};
+    var _radii: Record<NodeId, number> = {};
 
 
-    function sortY(a, b) {
+    function sortY(a: osmNode, b: osmNode) {
         return b.loc[1] - a.loc[1];
     }
 
     // Avoid exit/enter if we're just moving stuff around.
     // The node will get a new version but we only need to run the update selection.
-    function fastEntityKey(d) {
+    function fastEntityKey(d: osmNode) {
         var mode = context.mode();
         var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
         return isMoving ? d.id : osmIdManager.key(d);
     }
 
 
-    function draw(selection, graph, vertices, sets, filter) {
+    function draw(selection: d3.Selection<SVGGElement>, graph: coreGraph, vertices: osmNode[], sets: Selected, filter: (node: osmNode) => boolean) {
         sets = sets || { selected: {}, important: {}, hovered: {} };
 
-        var icons = {};
-        var directions = {};
+        var icons: Record<NodeId, unknown> = {};
+        var directions: Record<NodeId, Direction[] | false> = {};
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = geoScaleToZoom(projection.scale());
         var z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
@@ -49,13 +67,14 @@ export function svgVertices(projection, context) {
         var base = context.history().base();
 
 
-        function getIcon(d) {
+        function getIcon(d: osmNode) {
             // always check latest entity, as fastEntityKey avoids enter/exit now
             var entity = graph.entity(d.id);
             if (entity.id in icons) return icons[entity.id];
 
             icons[entity.id] =
                 entity.hasInterestingTags() &&
+                // @ts-expect-error -- will be fixed in a different PR
                 presetManager.match(entity, graph).icon;
 
             return icons[entity.id];
@@ -63,7 +82,7 @@ export function svgVertices(projection, context) {
 
 
         // memoize directions results, return false for empty arrays (for use in filter)
-        function getDirections(entity) {
+        function getDirections(entity: osmNode) {
             if (entity.id in directions) return directions[entity.id];
 
             var angles = entity.directions(graph, projection);
@@ -72,10 +91,10 @@ export function svgVertices(projection, context) {
         }
 
 
-        function updateAttributes(selection) {
-            ['shadow', 'stroke', 'fill'].forEach(function(klass) {
+        function updateAttributes(selection: d3.Selection<SVGGElement>) {
+            (['shadow', 'stroke', 'fill'] as const).forEach(function(klass) {
                 var rads = radiuses[klass];
-                selection.selectAll('.' + klass)
+                selection.selectAll<SVGGElement, osmNode>('.' + klass)
                     .each(function(entity) {
                         var i = z && getIcon(entity);
                         var r = rads[i ? 3 : z];
@@ -98,7 +117,7 @@ export function svgVertices(projection, context) {
 
         vertices.sort(sortY);
 
-        var groups = selection.selectAll('g.vertex')
+        var groups = selection.selectAll<SVGGElement, osmNode>('g.vertex')
             .filter(filter)
             .data(vertices, fastEntityKey);
 
@@ -136,17 +155,17 @@ export function svgVertices(projection, context) {
                 return !base.entities[d.id]; // if it doesn't exist in the base graph, it's new
             })
             .classed('moved', function(d) {
-                return base.entities[d.id] && !deepEqual(graph.entities[d.id].loc, base.entities[d.id].loc);
+                return !!base.entities[d.id] && !deepEqual(graph.entity(d.id).loc, base.entity(d.id).loc);
             })
             .classed('retagged', function(d) {
-                return base.entities[d.id] && !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
+                return !!base.entities[d.id] && !deepEqual(graph.entities[d.id]!.tags, base.entities[d.id]!.tags);
             })
             .call(svgTagClasses())
             .call(updateAttributes);
 
         // Vertices with icons get a `use`.
         var iconUse = groups
-            .selectAll('.icon')
+            .selectAll<SVGGElement, osmNode>('.icon')
             .data(function data(d) { return zoom >= 17 && getIcon(d) ? [d] : []; }, fastEntityKey);
 
         // exit
@@ -168,7 +187,7 @@ export function svgVertices(projection, context) {
 
         // Vertices with directions get viewfields
         var dgroups = groups
-            .selectAll('.viewfieldgroup')
+            .selectAll<SVGGElement, osmNode>('.viewfieldgroup')
             .data(function data(d) { return zoom >= 18 && getDirections(d) ? [d] : []; }, fastEntityKey);
 
         // exit
@@ -181,7 +200,8 @@ export function svgVertices(projection, context) {
             .attr('class', 'viewfieldgroup')
             .merge(dgroups);
 
-        var viewfields = dgroups.selectAll('.viewfield')
+        var viewfields = dgroups.selectAll<SVGPathElement, osmNode>('.viewfield')
+            // @ts-expect-error -- does this work
             .data(getDirections, function key(d) { return osmIdManager.key(d); });
 
         // exit
@@ -199,12 +219,12 @@ export function svgVertices(projection, context) {
     }
 
 
-    function drawTargets(selection, graph, entities, filter) {
+    function drawTargets(selection: d3.Selection<SVGGElement>, graph: coreGraph, entities: osmNode[], filter: (node: osmNode) => boolean) {
         var targetClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
         var getTransform = svgPointTransform(projection).geojson;
         var activeID = context.activeID();
-        var data = { targets: [], nopes: [] };
+        var data: { targets: Feature[]; nopes: Feature[]; } = { targets: [], nopes: [] };
 
         entities.forEach(function(node) {
             if (activeID === node.id) return;   // draw no target on the activeID
@@ -235,9 +255,9 @@ export function svgVertices(projection, context) {
         });
 
         // Targets allow hover and vertex snapping
-        var targets = selection.selectAll('.vertex.target-allowed')
-            .filter(function(d) { return filter(d.properties.entity); })
-            .data(data.targets, function key(d) { return d.id; });
+        var targets = selection.selectAll<SVGCircleElement, Feature>('.vertex.target-allowed')
+            .filter(function(d) { return filter(d.properties!.entity); })
+            .data(data.targets, function key(d) { return d.id!; });
 
         // exit
         targets.exit()
@@ -247,7 +267,7 @@ export function svgVertices(projection, context) {
         targets.enter()
             .append('circle')
             .attr('r', function(d) {
-                return _radii[d.id]
+                return _radii[d.id as NodeId]
                   || radiuses.shadow[3];
             })
             .merge(targets)
@@ -259,9 +279,9 @@ export function svgVertices(projection, context) {
 
 
         // NOPE
-        var nopes = selection.selectAll('.vertex.target-nope')
-            .filter(function(d) { return filter(d.properties.entity); })
-            .data(data.nopes, function key(d) { return d.id; });
+        var nopes = selection.selectAll<SVGCircleElement, Feature>('.vertex.target-nope')
+            .filter(function(d) { return filter(d.properties!.entity); })
+            .data(data.nopes, function key(d) { return d.id!; });
 
         // exit
         nopes.exit()
@@ -270,7 +290,7 @@ export function svgVertices(projection, context) {
         // enter/update
         nopes.enter()
             .append('circle')
-            .attr('r', function(d) { return (_radii[d.properties.entity.id] || radiuses.shadow[3]); })
+            .attr('r', function(d) { return (_radii[d.properties!.entity.id] || radiuses.shadow[3]); })
             .merge(nopes)
             .attr('class', function(d) { return 'node vertex target target-nope ' + nopeClass + d.id; })
             .attr('transform', getTransform);
@@ -280,7 +300,7 @@ export function svgVertices(projection, context) {
     // Points can also render as vertices:
     // 1. in wireframe mode or
     // 2. at higher zooms if they have a direction
-    function renderAsVertex(entity, graph, wireframe, zoom) {
+    function renderAsVertex(entity: osmNode, graph: coreGraph, wireframe: boolean, zoom: number) {
         var geometry = entity.geometry(graph);
         return geometry === 'vertex' || (geometry === 'point' && (
             wireframe || (zoom >= 18 && entity.directions(graph, projection).length)
@@ -288,9 +308,9 @@ export function svgVertices(projection, context) {
     }
 
 
-    function isEditedNode(node, base, head) {
-        var baseNode = base.entities[node.id];
-        var headNode = head.entities[node.id];
+    function isEditedNode(node: osmNode, base: coreGraph, head: coreGraph) {
+        var baseNode = base.entities[node.id] as osmNode;
+        var headNode = head.entities[node.id] as osmNode;
         return !headNode ||
             !baseNode ||
             !deepEqual(headNode.tags, baseNode.tags) ||
@@ -298,12 +318,12 @@ export function svgVertices(projection, context) {
     }
 
 
-    function getSiblingAndChildVertices(ids, graph, wireframe, zoom) {
-        var results = {};
+    function getSiblingAndChildVertices(ids: EntityId[], graph: coreGraph, wireframe: boolean, zoom: number) {
+        var results: Record<NodeId, osmNode> = {};
 
-        var seenIds = {};
+        var seenIds: Record<EntityId, true> = {};
 
-        function addChildVertices(entity) {
+        function addChildVertices(entity: OsmEntity) {
 
             // avoid redundant work and infinite recursion of circular relations
             if (seenIds[entity.id]) return;
@@ -352,7 +372,7 @@ export function svgVertices(projection, context) {
     }
 
 
-    function drawVertices(selection, graph, entities, filter, extent, fullRedraw) {
+    function drawVertices(selection: d3.Selection, graph: coreGraph, entities: osmNode[], filter: (node: osmNode) => boolean, extent: geoExtent, fullRedraw: boolean) {
         var wireframe = context.surface().classed('fill-wireframe');
         var visualDiff = context.surface().classed('highlight-edited');
         var zoom = geoScaleToZoom(projection.scale());
@@ -360,8 +380,8 @@ export function svgVertices(projection, context) {
         var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
         var base = context.history().base();
 
-        var drawLayer = selection.selectAll('.layer-osm.points .points-group.vertices');
-        var touchLayer = selection.selectAll('.layer-touch.points');
+        var drawLayer = selection.selectAll<SVGGElement, unknown>('.layer-osm.points .points-group.vertices');
+        var touchLayer = selection.selectAll<SVGGElement, unknown>('.layer-touch.points');
 
         if (fullRedraw) {
             _currPersistent = {};
@@ -395,7 +415,7 @@ export function svgVertices(projection, context) {
         }
 
         // 3 sets of vertices to consider:
-        var sets = {
+        var sets: Selected = {
             persistent: _currPersistent,  // persistent = important vertices (render always)
             selected: _currSelected,      // selected + siblings of selected (render always)
             hovered: _currHover           // hovered + siblings of hovered (render only in draw modes)
@@ -406,7 +426,7 @@ export function svgVertices(projection, context) {
         // Draw the vertices..
         // The filter function controls the scope of what objects d3 will touch (exit/enter/update)
         // Adjust the filter function to expand the scope beyond whatever entities were passed in.
-        var filterRendered = function(d) {
+        var filterRendered = function(d: osmNode) {
             return d.id in _currPersistent || d.id in _currSelected || d.id in _currHover || filter(d);
         };
         drawLayer
@@ -414,23 +434,24 @@ export function svgVertices(projection, context) {
 
         // Draw touch targets..
         // When drawing, render all targets (not just those affected by a partial redraw)
-        var filterTouch = function(d) {
+        var filterTouch = function(d: osmNode) {
             return isMoving ? true : filterRendered(d);
         };
         touchLayer
             .call(drawTargets, graph, currentVisible(all), filterTouch);
 
 
-        function currentVisible(which) {
+        function currentVisible(which: typeof _currSelected) {
             return Object.keys(which)
-                .map(graph.hasEntity, graph)     // the current version of this entity
+                .map(graph.hasEntity<osmNode>, graph)     // the current version of this entity
+                .filter(Boolean)
                 .filter(function (entity) { return entity && entity.intersects(extent, graph); });
         }
     }
 
 
     // partial redraw - only update the selected items..
-    drawVertices.drawSelected = function(selection, graph, extent) {
+    drawVertices.drawSelected = function(selection: d3.Selection, graph: coreGraph, extent: geoExtent) {
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = geoScaleToZoom(projection.scale());
 
@@ -453,13 +474,13 @@ export function svgVertices(projection, context) {
         }
 
         // note that drawVertices will add `_currSelected` automatically if needed..
-        var filter = function(d) { return d.id in _prevSelected; };
+        var filter = function(d: osmNode) { return d.id in _prevSelected; };
         drawVertices(selection, graph, Object.values(_prevSelected), filter, extent, false);
     };
 
 
     // partial redraw - only update the hovered items..
-    drawVertices.drawHover = function(selection, graph, target, extent) {
+    drawVertices.drawHover = function(selection: d3.Selection, graph: coreGraph, target: Feature, extent: geoExtent) {
         if (target === _currHoverTarget) return;  // continue only if something changed
 
         var wireframe = context.surface().classed('fill-wireframe');
@@ -476,7 +497,7 @@ export function svgVertices(projection, context) {
         }
 
         // note that drawVertices will add `_currHover` automatically if needed..
-        var filter = function(d) { return d.id in _prevHover; };
+        var filter = function(d: osmNode) { return d.id in _prevHover; };
         drawVertices(selection, graph, Object.values(_prevHover), filter, extent, false);
     };
 

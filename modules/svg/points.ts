@@ -3,15 +3,18 @@ import { clamp } from 'es-toolkit/compat';
 import { select as d3_select } from 'd3';
 
 import { geoScaleToZoom } from '../geo';
-import { osmIdManager } from '../osm';
+import { osmIdManager, type osmNode } from '../osm';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { presetManager } from '../presets';
 import { textWidth, isAddressPoint } from './labels';
+import type { Projection } from '../geo/raw_mercator';
+import type { coreGraph } from '../core';
+import type { Feature } from 'geojson';
 
-export function svgPoints(projection, context) {
+export function svgPoints(projection: Projection, context: iD.Context) {
 
-    function markerPath(selection, klass) {
+    function markerPath(selection: d3.Selection<SVGPathElement>, klass: string) {
         selection
             .attr('class', klass)
             .attr('transform', d => isAddressPoint(d.tags)
@@ -26,29 +29,29 @@ export function svgPoints(projection, context) {
             });
     }
 
-    function sortY(a, b) {
+    function sortY(a: osmNode, b: osmNode) {
         return b.loc[1] - a.loc[1];
     }
 
-    function addressShieldWidth(d, selection) {
-        const width = textWidth(d.tags['addr:housenumber'] || d.tags['addr:housename'] || '', 10, selection.node().parentElement);
+    function addressShieldWidth(d: osmNode, selection: d3.Selection<SVGPathElement> | d3.Selection<SVGGElement>) {
+        const width = textWidth(d.tags['addr:housenumber'] || d.tags['addr:housename'] || '', 10, selection.node()!.parentElement);
         return clamp(width, 10, 34) + 8;
     };
 
     // Avoid exit/enter if we're just moving stuff around.
     // The node will get a new version but we only need to run the update selection.
-    function fastEntityKey(d) {
+    function fastEntityKey(d: osmNode) {
         const mode = context.mode();
         const isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
         return isMoving ? d.id : osmIdManager.key(d);
     }
 
 
-    function drawTargets(selection, graph, entities, filter) {
+    function drawTargets(selection: d3.Selection<SVGGElement>, graph: coreGraph, entities: osmNode[], filter: (node: osmNode) => boolean) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var getTransform = svgPointTransform(projection).geojson;
         var activeID = context.activeID();
-        var data = [];
+        var data: Feature[] = [];
 
         entities.forEach(function(node) {
             if (activeID === node.id) return;   // draw no target on the activeID
@@ -65,9 +68,9 @@ export function svgPoints(projection, context) {
             });
         });
 
-        var targets = selection.selectAll('.point.target')
-            .filter(d => filter(d.properties.entity))
-            .data(data, d => fastEntityKey(d.properties.entity));
+        var targets = selection.selectAll<SVGRectElement, Feature>('.point.target')
+            .filter(d => filter(d.properties!.entity))
+            .data(data, d => fastEntityKey(d.properties!.entity));
 
         // exit
         targets.exit()
@@ -76,23 +79,23 @@ export function svgPoints(projection, context) {
         // enter/update
         targets.enter()
             .append('rect')
-            .attr('x', d => d.properties.isAddr ? -addressShieldWidth(d.properties.entity, selection) / 2 : -10)
-            .attr('y', d => d.properties.isAddr ? -8 : -26)
-            .attr('width', d => d.properties.isAddr ? addressShieldWidth(d.properties.entity, selection) : 20)
-            .attr('height', d => d.properties.isAddr ? 16 : 30)
+            .attr('x', d => d.properties!.isAddr ? -addressShieldWidth(d.properties!.entity, selection) / 2 : -10)
+            .attr('y', d => d.properties!.isAddr ? -8 : -26)
+            .attr('width', d => d.properties!.isAddr ? addressShieldWidth(d.properties!.entity, selection) : 20)
+            .attr('height', d => d.properties!.isAddr ? 16 : 30)
             .attr('class', function(d) { return 'node point target ' + fillClass + d.id; })
             .merge(targets)
             .attr('transform', getTransform);
     }
 
 
-    function drawPoints(selection, graph, entities, filter) {
+    function drawPoints(selection: d3.Selection, graph: coreGraph, entities: osmNode[], filter: (node: osmNode) => boolean) {
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = geoScaleToZoom(projection.scale());
         var base = context.history().base();
 
         // Points with a direction will render as vertices at higher zooms..
-        function renderAsPoint(entity) {
+        function renderAsPoint(entity: osmNode) {
             return entity.geometry(graph) === 'point' &&
                 !(zoom >= 18 && entity.directions(graph, projection).length);
         }
@@ -102,11 +105,11 @@ export function svgPoints(projection, context) {
         points.sort(sortY);
 
 
-        var drawLayer = selection.selectAll('.layer-osm.points .points-group.points');
-        var touchLayer = selection.selectAll('.layer-touch.points');
+        var drawLayer = selection.selectAll<SVGGElement, unknown>('.layer-osm.points .points-group.points');
+        var touchLayer = selection.selectAll<SVGGElement, unknown>('.layer-touch.points');
 
         // Draw points..
-        var groups = drawLayer.selectAll('g.point')
+        var groups = drawLayer.selectAll<SVGGElement, osmNode>('g.point')
             .filter(filter)
             .data(points, fastEntityKey);
 
@@ -151,10 +154,10 @@ export function svgPoints(projection, context) {
                 return !base.entities[d.id]; // if it doesn't exist in the base graph, it's new
             })
             .classed('moved', function(d) {
-                return base.entities[d.id] && !deepEqual(graph.entities[d.id].loc, base.entities[d.id].loc);
+                return !!base.entities[d.id] && !deepEqual(graph.entity(d.id).loc, base.entity(d.id).loc);
             })
             .classed('retagged', function(d) {
-                return base.entities[d.id] && !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
+                return !!base.entities[d.id] && !deepEqual(graph.entities[d.id]!.tags, base.entities[d.id]!.tags);
             })
             .call(svgTagClasses());
 
@@ -162,6 +165,7 @@ export function svgPoints(projection, context) {
         groups.select('.stroke');   // propagate bound data
         groups.select('.icon')      // propagate bound data
             .attr('xlink:href', function(entity) {
+                // @ts-expect-error -- will be fixed in a different PR
                 var preset = presetManager.match(entity, graph);
                 var picon = preset && preset.icon;
                 return picon ? '#' + picon : '';
