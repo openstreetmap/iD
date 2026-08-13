@@ -7,7 +7,9 @@ import type {
     Fields,
     Presets,
 } from '@openstreetmap/id-tagging-schema';
-import type { LocoFeatureCollection } from '@rapideditor/location-conflation';
+import type { OciDefaults, OciResource } from 'osm-community-index';
+import type { FeatureCollection, MultiPolygon, Polygon } from 'geojson';
+import type { LocoFeatureCollection, LocoProperties } from '@rapideditor/location-conflation';
 import type {
     NsiGenericWordsJSON,
     NsiDissolved,
@@ -37,9 +39,9 @@ interface Definitions {
   qa_data: QAData;
   shortcuts: ShortcutsJSON;
   territory_languages: Record<string, string[]>;
-  oci_defaults: unknown;
-  oci_features: unknown;
-  oci_resources: unknown;
+  oci_defaults: { defaults: OciDefaults };
+  oci_features: FeatureCollection<Polygon | MultiPolygon, LocoProperties>;
+  oci_resources: { resources: Record<string, OciResource> };
 
   presets_package: typeof packageJSON;
   deprecated: Deprecated;

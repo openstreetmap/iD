@@ -260,6 +260,8 @@ JavaScript and Typescript code should pass through [ESLint](http://eslint.org/) 
 
 Note that some older parts of the iD code were initially written with [ES5](https://github.com/airbnb/javascript/tree/es5-deprecated/es5) syntax in mind, and for a period also using ES6 with a lightly different coding style guide in mind (particularly only using 2-space indentation instead of 4 spaces). If you come across such a file, and want to make changes to it, please refrain from reformatting the whole file when only modifying a part of the code and instead adhere to the respective file's legacy format. If you're however migrating such a source file fully from JavaScript to Typescript, please use the modern syntax for the updated file.
 
+For more information, see [ARCHITECTURE.md §TypeScript](./ARCHITECTURE.md#typescript).
+
 
 ### HTML
 

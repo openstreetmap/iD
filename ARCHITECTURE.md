@@ -343,7 +343,9 @@ The constructor function returns a draw function which accepts a d3 selection.
 Drawing is then accomplished with
 [d3.selection#call](https://github.com/d3/d3-selection/blob/main/README.md#selection_call):
 
-```js
+```ts
+    let footer = select<HTMLDivElement, unknown>(null!);
+
     footer = footer.enter()
         .append('div')
         .attr('class', 'footer')
@@ -363,6 +365,187 @@ inspector(container); // render the inspector
 inspector.tags(); // retrieve the current tags
 inspector.on('change', callback); // get notified when a tag change is made
 ```
+
+### TypeScript
+
+#### _d3-selection_ with TypeScript
+
+Using TypeScript for UI code is quite complicated, because subtyping does not work with [`d3.Selection`](https://npm.im/d3-selection).
+
+Consider the function: `function f(arg: HTMLElement) {}`. This function will:
+- accept [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement)
+- accept a more-specific subclass, such as [`HTMLDivElement`](https://developer.mozilla.org/docs/Web/API/HTMLDivElement)
+- NOT accept a broader class like [`Element`](https://developer.mozilla.org/docs/Web/API/Element).
+
+When using `d3.Selection<…>`, this kind of subtyping does not work, because `d3.Selection<…>` is [_invariant_](https://en.wikipedia.org/wiki/Type_variance).
+Therefore, if a function accepts `d3.Selection<HTMLElement>`, then you must provide exactly the same type.
+You **cannot give the function a more specific subclass** like `d3.Selection<HTMLDivElement>`.
+
+The solution is to use generic types. In the example above, `uiViewOnOSM()` should be defined as:
+
+```ts
+function uiViewOnOSM() {
+    return <T>(selection: d3.Selection<T>) => {
+
+    };
+}
+
+// or more concisely:
+function uiViewOnOSM(): d3.Selector {
+    return (selection) => {
+
+    };
+}
+```
+
+The more concise syntax works because this repository defines `d3.Selector` and `d3.Selection<…>` as global types.
+
+---
+
+Another quirk is that `d3_select(…)` automatically assumes that the parent type is `HTMLElement`,
+which is often not true (for example, when working with SVGs).
+`d3_select(…)` only allows you to define the first 2 type-arguments, not all 4.
+The workaround is to switch to this syntax:
+```diff
+- const selection = d3_select<SVGGElement, unknown>(null!);
++ const selection: d3.Selection<SVGGElement> = d3_select(null!);
+```
+
+
+
+#### ES5 classes with TypeScript
+
+Many classes are written using ES5 syntax ([expando declarations](https://github.com/microsoft/typescript-go/blob/main/CHANGES.md#expando-declarations)), instead of the [ES6 `class` syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes).
+
+In the ES5 syntax, methods are declared by adding a property to the function.
+To make it easier to migrate to ES6 classes in the future, we should use one of these two approaches when adding TypeScript definitions:
+
+##### 1. Inline defintions + infer class
+
+```diff
+  export function uiViewOnOSM() {
+-   const viewOnOSM = {};
++   const viewOnOSM = function(){};
+
+    viewOnOSM.data = 0;
+
+-   viewOnOSM.setData = function (newValue) {
++   viewOnOSM.setData = function (newValue: number) {
+      this.data = newValue;
+    };
+
+    return viewOnOSM;
+  }
+
++ export interface uiViewOnOSM extends ReturnType<typeof uiViewOnOSM> {};
+```
+
+1. the initial defintion must use `function(){}`, so that Function prototype properties are automatically inferred.
+   `{}` will not work.
+2. type-annotations are added to methods inline.
+3. The file must export an inteface with the same name as the function (`uiViewOnOSM`).
+   This relies on [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html),
+   so that the same identifier (`uiViewOnOSM`) can be used as both a type and a runtime function.
+   This is to mimic the behaviour of ES6 classes, to make future migration easier.
+   It should be an `interface`, not a `type`, for [better readability in error messages](https://github.com/microsoft/TypeScript-Website/blob/c8170c35/packages/documentation/copy/en/handbook-v2/Everyday%20Types.md?plain=1#L483).
+
+##### 2. Explicit, separate defintions
+
+An alternative approach is to explicitly define all class properties and methods in a separate declaration:
+
+```diff
++ export interface uiViewOnOSM {
++   (): void; // constructor
++   data: number;
++   setData(newValue: number): void;
++ }
+
+- export function uiViewOnOSM() {
++ export function uiViewOnOSM(): uiViewOnOSM {
+-   const viewOnOSM = function(){};
++   const viewOnOSM: uiViewOnOSM = function(){};
+
+    viewOnOSM.data = 0;
+
+    viewOnOSM.setData = function (newValue) {
+      this.data = newValue;
+    };
+
+    return viewOnOSM;
+  }
+```
+
+1. _same as above_
+2. no need to add type-annotations inline, since it's inferred from the interface declaration.
+3. _same as above_
+
+
+#### ES5 getter/setters with TypeScript
+
+In 2012, the author of _d3_ [recommended a coding style](https://bost.ocks.org/mike/chart/#reconfiguration) which uses chainable class methods that can behave as both a getter or a setter, depending on the number of function arguments.
+This is typically written as:
+
+```ts
+/** @type {GetSet<typeof myClass, number>} */
+myClass.targetNode = function(_) {
+  if (!arguments.length) return _targetNode;
+  _targetNode = _;
+  return myClass;
+};
+```
+
+In JavaScript files, the JSDoc annotation `GetSet<…, …>` can be added atop the function to enable intellisense.
+
+In TypeScript files, it's more convoluted, since TypeScript's support for the [legacy `arguments` object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) is suboptimal.
+There are several possible solutions:
+1. for ES6 class syntax, [use this syntax](https://www.typescriptlang.org/play/?#code/MYGwhgzhAEC2CeBhcVoG8BQ1vQPoBcwAnAcwFN8A5AewBMyBCALmgDsBXWAIzKIG4MWHIVIUa9ABQBKFh268BOaCPJU6ZCQDcwIdmVmceRGcoAWASwiLhxVeI0A6J7YgsA2gF1oAH2hu5Rh5S6EJK2OYAZtASDC4OIGSsJPimwUQU7ESsZpYOBLZi6tZhORB5KoX00AC80C5uAAwexWHp+JnZKZYtAL4CPYIYCfjQAB41bGQA7nBIKBDSodAOFWqSDVJLKwVrGgCMm0rborvSAqGjAgD0V9AAegD8QA) (7 lines instead of 5).
+2. for ES5 class syntax, [use this syntax](https://www.typescriptlang.org/play/?#code/GYVwdgxgLglg9mABAWwJ4GEA2BDAzrgCgEpEBvAKESsQgVykQH0oALGXRAXkVElgWJkAvgG5K1TAFMGzbACcA5tIBycACaSAhAC5EYEMgBGkuWPFVe0eEijylUVRuK79Rk2Oo9wVhIluKVdUkCADdsTBBJFwNjOSJdKFQAB0k4YCZWdg9qS34bO0CnADoSu1xdAG0AXUQAH0QK11iqkgpPTxh0gk0yoqkwBVYSOWkQOSRZAIcg7PaMgumNLkQyioAGKtn2kagxiczcLdFzDLZcIv97R0lly8LJLZOdvdOs8iFycikGAA9ltCweEIRBOFwW1wIaxBnjBUwhAEZodRYVcgsQzNQfmIAPTYxAAPQA-EA) (8 lines instead of 5).
+3. for ES5 class syntax, an alternative is to [use the global `GetSet<…, …>` helper](https://www.typescriptlang.org/play/?#code/CYUwxgNghgTiAEBzCB7ARlC8DeAoe8ALgJ4AOCA4iIQMrUA8AKgBYCWAzgDTyMB88AXhz4C8ABQA3TAFcQALh4BKBSw4BuEQTHKeGggF9chkAA9SKGIRz6NuAPQPHd3C9YA7QiBgAzKGAQAtsQAwtDs7MKiRLCI1AByKKAKVLQMhGxc8G7SAWhevBqGuN7SbmCErChu8EGhUOHakaJgVexWAPrpHAq1YRFCJWUVVY3YNprwENTwnTHxiQhCAAy2UZ0ZAHSEc4QJoILwg+WV1dswsbsLYu2KTVEErN7iAIQxOSAe7BtTbojpt3BCNIYNVZud5qA9PcCGCLntFjCodDAcDQV12Ej4Pp4PUaiE+gBtADkZzhCyJAF1MRMUSCZujCi4plYTAdevV2NoJlsdvCxEtFNzSRCQGIAIyCqI88GXUDaVYEEwaBzwAB6AH5cEA).
+  This is the most concise, but it requires a typecast.
+
+For new code, neither of these options should be used.
+ES6 classes natively support [custom getter/setter functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set).
+
+#### Dispatching events with TypeScript
+
+In ES5 classes, _d3-dispatch_ is bound to the class using `utilRebind`.
+To make typescript understand this, you need to use the following pattern:
+
+```diff
+- export interface uiViewOnOSM {
++ export interface uiViewOnOSM extends Pick<Dispatch<uiViewOnOSM, EventMap>, 'on'> {
+    (): void;
+  }
+
+  function uiViewOnOSM(): uiViewOnOSM {
++   const dispatch = d3_dispatch<uiViewOnOSM, EventMap>('change', 'start', …);
+
+    const viewOnOSM = function(){};
+
+-   return viewOnOSM;
++   return utilRebind(viewOnOSM, dispatch, 'on');
+  }
+```
+
+In ES6 classes, configuring _d3-dispatch_ is much easier:
+
+```diff
+- export class coreHistory {
++ export class coreHistory extends EventDispatcher<EventMap> {
+  constructor() {
++   super('change', 'start', …);
+  }
+```
+
+In both cases, you should define `EventMap` which lists each event name, and the arguments that it accepts:
+
+```ts
+type EventMap = {
+  change: [newValue: string], // the event has 1 argument (a string)
+  start: [], // the event has no arguments
+};
+```
+
 
 ### Validation Module
 
