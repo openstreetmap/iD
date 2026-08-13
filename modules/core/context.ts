@@ -415,6 +415,7 @@ export function coreContext(this: object): coreContext {
 
   // Immediately save the user's history to localstorage, if possible
   // This is called someteimes, but also on the `window.onbeforeunload` handler
+  let _suspendingId = 0;
   context.save = () => {
     // no history save, no message onbeforeunload
     if (_inIntro || context.container().select('.modal').size()) return;
@@ -437,7 +438,8 @@ export function coreContext(this: object): coreContext {
     }
 
     if (canSave) {
-      _history.save();
+      if (_suspendingId) cancelIdleCallback(_suspendingId);
+      _suspendingId = requestIdleCallback(_history.save);
     }
     if (_history.hasChanges()) {
       return t('save.unsaved_changes');
