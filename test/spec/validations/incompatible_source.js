@@ -63,6 +63,19 @@ describe('iD.validations.incompatible_source', function () {
         expect(issue.entityIds[0]).toEqual('w-1');
     });
 
+    it('flags way with a goo.gl source shortlink', function() {
+        createWay({ amenity: 'cafe', source: 'https://maps.app.goo.gl/example' });
+        var issues = validate();
+        expect(issues).toHaveLength(1);
+        expect(issues[0].type).toEqual('incompatible_source');
+    });
+
+    it('does not flag a lookalike goo.gl source domain', function() {
+        createWay({ amenity: 'cafe', source: 'https://goo.gl.example.com/map' });
+        var issues = validate();
+        expect(issues).toHaveLength(0);
+    });
+
     it('does not flag buildings in the google-africa-buildings dataset', function() {
         createWay({ building: 'yes', source: 'esri/Google_Africa_Buildings' });
         var issues = validate();

@@ -1,6 +1,7 @@
 import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import { utilGoogleSourceRegex } from '../util/google_source';
 import type { CreateValidator, Validator } from '../core/validation/models';
 
 const incompatibleRules = [
@@ -15,7 +16,7 @@ const incompatibleRules = [
   },
   {
     id: 'google',
-    regex: /(google)/i,
+    regex: utilGoogleSourceRegex,
     exceptRegex: /((books|drive)\.google|google\s?(books|drive|plus))|(esri\/Google_(Africa|Open)_Buildings)/i
   }
 ];

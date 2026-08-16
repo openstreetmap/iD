@@ -12,6 +12,7 @@ import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilObjectOmit, utilRe
 import { localizer } from '../core/localizer.js';
 import { utilGzip } from '../util/util';
 import { ApiError } from '../util/error';
+import { utilGoogleImageryRegex } from '../util/google_source';
 import { osmApiConnections } from '../../config/id.js';
 
 
@@ -33,7 +34,7 @@ var oauth = new osmAuth({
 var _apiConnections = osmApiConnections;
 
 // hardcode default block of Google Maps
-var _imageryBlocklists = [/.*\.google(apis)?\..*\/(vt|kh)[\?\/].*([xyz]=.*){3}.*/];
+var _imageryBlocklists = [utilGoogleImageryRegex];
 var _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: new RBush() };
 var _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: new RBush() };
 var _userCache = { toLoad: {}, user: {} };

@@ -12,6 +12,7 @@ import { geoMetersToOffset, geoOffsetToMeters, geoExtent } from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
 import { utilAesDecrypt, utilStringQs } from '../util';
+import { utilGoogleImageryRegex } from '../util/google_source';
 import { utilRebind } from '../util/rebind';
 import { patchHash } from '../behavior';
 
@@ -320,7 +321,7 @@ export function rendererBackground(context) {
 
     // ensure at least one test was run.
     if (!tested) {
-      regex = /.*\.google(apis)?\..*\/(vt|kh)[\?\/].*([xyz]=.*){3}.*/;
+      regex = utilGoogleImageryRegex;
       fail = regex.test(template);
     }
 
