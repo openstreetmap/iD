@@ -1,3 +1,4 @@
+import type { Field } from '@openstreetmap/id-tagging-schema';
 import { select as d3_select } from 'd3-selection';
 
 describe('iD.uiFieldRadio', () => {
@@ -46,7 +47,7 @@ describe('iD.uiFieldRadio', () => {
                 type: 'structureRadio',
                 keys: ['bridge', 'tunnel'],
                 options: ['bridge', 'tunnel'],
-            });
+            } as Field);
             const instance = iD.uiFieldRadio(field, context);
             const onChange = vi.fn();
 
@@ -57,11 +58,11 @@ describe('iD.uiFieldRadio', () => {
             // confirm that bridge+tunnel buttons are displayed
             const options = selection.selectAll<HTMLLabelElement, unknown>('label').nodes();
             expect(options).toHaveLength(2);
-            expect(options[0].querySelector('.localized-text')?.innerHTML).toBe('bridge');
-            expect(options[1].querySelector('.localized-text')?.innerHTML).toBe('tunnel');
+            expect(options[0].querySelector('.raw-value')?.innerHTML).toBe('"bridge"');
+            expect(options[1].querySelector('.raw-value')?.innerHTML).toBe('"tunnel"');
 
             // click one of the radio button
-            const index = field.keys.indexOf(optionToClick);
+            const index = field.keys!.indexOf(optionToClick);
             const radioToClick = options[index].querySelector('input')!;
             radioToClick.checked = true;
             d3_select(radioToClick).dispatch('change');
@@ -86,12 +87,12 @@ describe('iD.uiFieldRadio', () => {
                 key: 'access',
                 strings: {
                     options: {
-                        yes: { title: 'Allowed' },
-                        no: { title: 'Prohibited' },
+                        yes: { title: 'Allowed', description: '' },
+                        no: { title: 'Prohibited', description: '' },
                     }
                 },
                 options: ['yes', 'no'],
-            });
+            } as Partial<Field> as Field);
 
             const instance = iD.uiFieldRadio(field, context);
 

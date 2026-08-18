@@ -310,7 +310,7 @@ export default {
       .then(after)
       .catch(err => {
         delete _cache.inflightPost[issue.id];
-        if (callback) callback(err.message);
+        if (callback) callback(err);
       });
   },
 

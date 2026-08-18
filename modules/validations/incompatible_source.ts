@@ -1,6 +1,7 @@
 import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import type { CreateValidator, Validator } from '../core/validation/models';
 
 const incompatibleRules = [
   {
@@ -20,10 +21,9 @@ const incompatibleRules = [
 ];
 
 /**
- * @param {string} str String (e.g. tag value) to check for incompatible sources
- * @returns {{id:string, regex: RegExp, exceptRegex?: RegExp}[]}
+ * @param str String (e.g. tag value) to check for incompatible sources
  */
-export function getIncompatibleSources(str) {
+export function getIncompatibleSources(str: string) {
   return incompatibleRules
     .filter(rule =>
       rule.regex.test(str) &&
@@ -31,10 +31,10 @@ export function getIncompatibleSources(str) {
     );
 }
 
-export function validationIncompatibleSource() {
+export const validationIncompatibleSource: CreateValidator = () => {
   const type = 'incompatible_source';
 
-  const validation = function checkIncompatibleSource(entity) {
+  const validation: Validator = function checkIncompatibleSource(entity) {
     const entitySources = entity.tags && entity.tags.source && entity.tags.source.split(';');
     if (!entitySources) return [];
 
@@ -63,8 +63,8 @@ export function validationIncompatibleSource() {
         }))
       );
 
-      function getReference(id) {
-        return function showReference(selection) {
+      function getReference(id: string) {
+        return function showReference(selection: d3.Selection) {
           selection.selectAll('.issue-reference')
             .data([0])
             .enter()
@@ -78,4 +78,4 @@ export function validationIncompatibleSource() {
     validation.type = type;
 
     return validation;
-}
+};

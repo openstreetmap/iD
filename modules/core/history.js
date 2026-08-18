@@ -59,6 +59,7 @@ import { osmIdManager } from '../osm';
 
 /** @typedef {(context: iD.Context, selectedIDs: EntityId[]) => Operation} CreateOperation */
 
+/** @typedef {ReturnType<typeof coreHistory>} coreHistory */
 
 export function coreHistory(context) {
     var dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone', 'storage_error');

@@ -136,7 +136,7 @@ complicated than the green action items.
 Purple labels are for **non-action items**. These might be a question or feature request
 that needs some discussion about whether it belongs in iD.  Discuss before working on these.
 
-* https://github.com/openstreetmap/iD/labels/considering
+* https://github.com/openstreetmap/iD/labels/considering%2Funclear
   https://github.com/openstreetmap/iD/labels/question
 
 Yellow labels are for **chores**. These are things like code cleanup, upgrades, tests,

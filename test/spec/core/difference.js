@@ -186,6 +186,7 @@ describe('iD.coreDifference', function () {
             new iD.osmNode({id: 'a', tags: {crossing: 'marked'}}),
             new iD.osmNode({id: 'b'}),
             new iD.osmNode({id: 'v'}),
+            new iD.osmNode({id: 'p', tags: {power: 'pole'}}),
             new iD.osmWay({id: '-', nodes: ['a', 'b']})
         ]);
 
@@ -357,6 +358,25 @@ describe('iD.coreDifference', function () {
             }, {
                 changeType: 'created',
                 entity: vertex,
+                graph: head
+            }]);
+        });
+
+        it('reports a vertex as modified when it was previously a point', function() {
+            let node = base.entity('p');
+            var way = base.entity('-').addNode('p');
+            node = node.mergeTags({ref: '42'});
+            const head = base.replace(way).replace(node);
+            const diff = iD.coreDifference(base, head);
+            console.error(diff.summary()[1]);
+
+            expect(diff.summary()).toEqual([{
+                changeType: 'modified',
+                entity: way,
+                graph: head
+            }, {
+                changeType: 'modified',
+                entity: node,
                 graph: head
             }]);
         });

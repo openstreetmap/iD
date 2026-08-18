@@ -128,7 +128,7 @@ export function coreFileFetcher() {
     const file = _fileMap[which];
     const url = file && _this.asset(file);
     if (!url) {
-      return Promise.reject(`Unknown data file for "${which}"`);
+      return Promise.reject(new Error(`Unknown data file for "${which}"`));
     }
 
     if (url.includes('{presets_version}')) {
