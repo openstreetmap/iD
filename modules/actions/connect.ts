@@ -90,6 +90,30 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
         // Select the node with the oldest ID as the survivor.
         survivor = graph.entity(utilOldestID(nodeIDs)!);
 
+        // Disable if connecting these nodes would create a repeated interior
+        // vertex in an area.
+        var parentWayIDs = new Set<EntityId>();
+        for (i = 0; i < nodeIDs.length; i++) {
+            node = graph.entity(nodeIDs[i]);
+            graph.parentWays(node).forEach(parent => parentWayIDs.add(parent.id));
+        }
+        for (const parentWayID of parentWayIDs) {
+            way = graph.entity<osmWay>(parentWayID);
+            if (!way.isArea()) continue;
+
+            var result = way;
+            for (i = 0; i < nodeIDs.length; i++) {
+                if (nodeIDs[i] !== survivor.id) {
+                    result = result.replaceNode(nodeIDs[i], survivor.id);
+                }
+            }
+
+            var interiorNodes = result.isClosed() ? result.nodes.slice(0, -1) : result.nodes;
+            if (new Set(interiorNodes).size !== interiorNodes.length) {
+                return 'paths_intersect';
+            }
+        }
+
         // 1. disable if the nodes being connected have conflicting relation roles
         for (i = 0; i < nodeIDs.length; i++) {
             node = graph.entity(nodeIDs[i]);
