@@ -249,6 +249,13 @@ describe('iD.validations.outdated_tags', function () {
         expect(tagReference.some(ref => ref.type === '~' && ref.key === 'building')).toBeTruthy();
     });
 
+    it('does not raise an error in valid situations', async () => {
+        createWay({ building: 'roof', layer: '1' });
+        const validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        expect(validate(validator)).toHaveLength(0);
+    });
+
     it('generates 2 separate issues for incomplete tags and NSI suggestions', async () => {
         createWay({ building: 'roof', amenity: 'fast_food', brand: 'Fish Bowl' });
         const validator = iD.validationOutdatedTags(context);
