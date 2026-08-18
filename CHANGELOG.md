@@ -35,6 +35,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.42.1
+##### 2026-Aug-18
+
+#### :bug: Bugfixes
+* fix `imagery_used` set to None ([#12721], thanks [@k-yle])
+
+[#12721]: https://github.com/openstreetmap/iD/pull/12721
+
+
 # 2.42.0
 ##### 2026-Aug-10
 
