@@ -188,6 +188,25 @@ g.vertex.selected .shadow {
     fill-opacity: 0.7;
 }
 
+/* circle to visualize radius/diameter */
+g.point .radius,
+g.vertex .radius {
+    fill: #333;
+    fill-opacity: 0.6;
+    stroke: #fff;
+    stroke-width: 0.5px;
+    stroke-opacity: 0.75;
+}
+
+.fill-wireframe g.point .radius,
+.fill-wireframe g.vertex .radius {
+    fill: none;
+}
+.surface.tr g.point .radius,
+.surface.tr g.vertex .radius {
+    display: none;
+}
+
 
 /* lines */
 .preset-icon .icon.iD-other-line {

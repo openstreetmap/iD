@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.43.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -54,6 +55,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
 
+[#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 [#12721]: https://github.com/openstreetmap/iD/pull/12721
 [#12722]: https://github.com/openstreetmap/iD/pull/12722
