@@ -39,9 +39,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 ##### 2026-Aug-18
 
 #### :bug: Bugfixes
-* fix `imagery_used` set to None ([#12721], thanks [@k-yle])
+* Fix `imagery_used` set to None ([#12721], thanks [@k-yle])
+* Fix Mapillary viewer not loading traffic signs and detected map features ([#12722], thanks [@k-yle])
 
 [#12721]: https://github.com/openstreetmap/iD/pull/12721
+[#12722]: https://github.com/openstreetmap/iD/pull/12722
 
 
 # 2.42.0
