@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
+* Fix the `outdated_tags` validator raising erroneous tag upgrades where no tags are actually proposed to be changed ([#12736], thanks [@k-yle])
 * Fix the `crossing_ways` validator not working ([#12734], thanks [@k-yle])
 #### :bug: Bugfixes
 * Fix auto-completion not working in the "Add field" dropdown ([#12735], thanks [@k-yle])
@@ -58,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12722]: https://github.com/openstreetmap/iD/pull/12722
 [#12734]: https://github.com/openstreetmap/iD/pull/12734
 [#12735]: https://github.com/openstreetmap/iD/pull/12735
+[#12736]: https://github.com/openstreetmap/iD/pull/12736
 
 # 2.42.0
 ##### 2026-Aug-10
