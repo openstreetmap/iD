@@ -98,6 +98,9 @@ export async function pannellumPhotoFrame(context, selection) {
                 .classed('hide', false);
         }
 
+        context.selectAll('button.photo-zoom')
+            .classed('hide', true);
+
         return module;
     };
 
