@@ -42,7 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
-* Fix mapillary broken ([#12722], thanks [@k-yle])
+* Fix Mapillary viewer not loading traffic signs and detected map features ([#12722], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
