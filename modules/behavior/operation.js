@@ -15,8 +15,6 @@ export function behaviorOperation(context) {
 
         d3_event.preventDefault();
 
-        const disabled = _operation.disabled();
-
         if (!_operation.available()) {
             context.ui().flash
                 .duration(4000)
@@ -25,7 +23,12 @@ export function behaviorOperation(context) {
                 .label(t.append('operations._unavailable', {
                     operation: t.append(`operations.${_operation.id}.title`) || _operation.id
                 }))();
-        } else if (disabled) {
+            return;
+        }
+
+        const disabled = _operation.disabled();
+
+        if (disabled) {
             const interrupt = _operation.interrupts?.[disabled];
             if (interrupt) {
                 interrupt();
