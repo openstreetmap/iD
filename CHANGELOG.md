@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* fix `imagery_used` set to None ([#12721], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -50,6 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
 
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
+[#12721]: https://github.com/openstreetmap/iD/pull/12721
 
 # 2.42.0
 ##### 2026-Aug-10
