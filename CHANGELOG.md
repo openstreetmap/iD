@@ -35,6 +35,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.42.2
+##### 2026-Aug-19
+
+Fix missing build output (`dist`) in previous patch release.
+
+
 # 2.42.1
 ##### 2026-Aug-18
 
