@@ -21,6 +21,70 @@ describe('iD.actionMergeNodes', function () {
 
             expect(iD.actionMergeNodes(['b', 'e']).disabled(graph)).toBeFalsy();
         });
+
+        it('returns paths_intersect when merging nonadjacent nodes of an area', function() {
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [2, 0] }),
+                new iD.osmNode({ id: 'c', loc: [1, 1] }),
+                new iD.osmNode({ id: 'd', loc: [2, 2] }),
+                new iD.osmNode({ id: 'e', loc: [0, 2] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a'], tags: { area: 'yes' } })
+            ]);
+
+            expect(iD.actionMergeNodes(['b', 'd']).disabled(graph)).toEqual('paths_intersect');
+        });
+
+        it('allows merging adjacent nodes of an area', function() {
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [2, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 2] }),
+                new iD.osmNode({ id: 'd', loc: [0, 2] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a'], tags: { area: 'yes' } })
+            ]);
+
+            expect(iD.actionMergeNodes(['b', 'c']).disabled(graph)).toBeFalsy();
+        });
+
+        it('allows merging three consecutive nodes of an area', function() {
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [2, 0] }),
+                new iD.osmNode({ id: 'c', loc: [3, 1] }),
+                new iD.osmNode({ id: 'd', loc: [2, 2] }),
+                new iD.osmNode({ id: 'e', loc: [0, 2] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a'], tags: { area: 'yes' } })
+            ]);
+
+            expect(iD.actionMergeNodes(['b', 'c', 'd']).disabled(graph)).toBeFalsy();
+        });
+
+        it('allows merging nonadjacent nodes of a linear way', function() {
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 0] }),
+                new iD.osmNode({ id: 'd', loc: [3, 0] }),
+                new iD.osmNode({ id: 'e', loc: [4, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'e'] })
+            ]);
+
+            expect(iD.actionMergeNodes(['b', 'd']).disabled(graph)).toBeFalsy();
+        });
+
+        it('allows a merge that does not worsen an invalid area', function() {
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [2, 0] }),
+                new iD.osmNode({ id: 'c', loc: [1, 1] }),
+                new iD.osmNode({ id: 'd', loc: [0, 2] }),
+                new iD.osmNode({ id: 'e', loc: [2, 2] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'b', 'd', 'a'], tags: { area: 'yes' } })
+            ]);
+
+            expect(iD.actionMergeNodes(['d', 'e']).disabled(graph)).toBeFalsy();
+        });
     });
 
 

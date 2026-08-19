@@ -6,6 +6,37 @@ import type { EntityId, osmNode, osmRelation, osmWay, NodeId } from '../osm';
 import type { RelationMember } from '../osm/relation';
 
 
+function wouldIntroduceRepeatedAreaNode(way: osmWay, nodeIDs: NodeId[], survivorID: NodeId) {
+    if (!way.isArea()) return false;
+
+    var result = way;
+    for (const nodeID of nodeIDs) {
+        if (nodeID !== survivorID) {
+            result = result.replaceNode(nodeID, survivorID);
+        }
+    }
+
+    var originalNodes = way.isClosed() ? way.nodes.slice(0, -1) : way.nodes;
+    var originalCounts = new Map<NodeId, number>();
+    for (const nodeID of originalNodes) {
+        originalCounts.set(nodeID, (originalCounts.get(nodeID) ?? 0) + 1);
+    }
+
+    var resultNodes = result.isClosed() ? result.nodes.slice(0, -1) : result.nodes;
+    var resultCounts = new Map<NodeId, number>();
+    for (const nodeID of resultNodes) {
+        resultCounts.set(nodeID, (resultCounts.get(nodeID) ?? 0) + 1);
+    }
+
+    for (const [nodeID, count] of resultCounts) {
+        if (count > 1 && count > (originalCounts.get(nodeID) ?? 0)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 // Connect the ways at the given nodes.
 //
 // First choose a node to be the survivor, with preference given
@@ -89,6 +120,20 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
 
         // Select the node with the oldest ID as the survivor.
         survivor = graph.entity(utilOldestID(nodeIDs)!);
+
+        // Disable if connecting these nodes would create a repeated interior
+        // vertex in an area.
+        var parentWayIDs = new Set<EntityId>();
+        for (i = 0; i < nodeIDs.length; i++) {
+            node = graph.entity(nodeIDs[i]);
+            graph.parentWays(node).forEach(parent => parentWayIDs.add(parent.id));
+        }
+        for (const parentWayID of parentWayIDs) {
+            way = graph.entity<osmWay>(parentWayID);
+            if (wouldIntroduceRepeatedAreaNode(way, nodeIDs, survivor.id)) {
+                return 'paths_intersect';
+            }
+        }
 
         // 1. disable if the nodes being connected have conflicting relation roles
         for (i = 0; i < nodeIDs.length; i++) {
