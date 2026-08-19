@@ -41,7 +41,7 @@ export function uiAttribution(context) {
           { default: d.terms_text || (d.terms_url && d.name()) }
         );
 
-        if (d.icon && !d.overlay) {
+        if (d.icon) {
           attribution
             .append('img')
             .attr('class', 'source-image')
