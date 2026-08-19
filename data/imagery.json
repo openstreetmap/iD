@@ -178007,9 +178007,8 @@
     "zoomExtent": [0, 20],
     "terms_url": "https://www.openstreetmap.org/copyright",
     "terms_text": "© OpenStreetMap contributors",
-    "terms_html": "<span style='display: inline-block; padding: 0 8px; background-color: rgba(0,0,0,0.5);'><span style='color: #eee;'>GPS Direction:</span> <span style='font-size: 15px; padding-left: 2px; font-weight: bold;'> <span style='color: #0ee;'>&larr;</span> <span style='color: #96f;'>&darr;</span> <span style='color: #6e0;'>&uarr;</span> <span style='color: #f63;'>&rarr;</span> </span></span> © <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>.",
     "description": "Public GPS traces uploaded to OpenStreetMap.",
-    "icon": "https://osmlab.github.io/editor-layer-index/sources/world/OpenStreetMap-GPS.png",
+    "icon": "https://osmlab.github.io/editor-layer-index/sources/world/OpenStreetMap-GPS.svg",
     "overlay": true
   },
   {
