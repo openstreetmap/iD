@@ -10,9 +10,10 @@ import { uiTagReference } from '../tag_reference';
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
-import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
+import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff, utilUnicodeCharsCount } from '../../util';
 import { allowUpperCaseTagValues } from '../../osm/tags';
 import { fileFetcher } from '../../core';
+import { uiLengthIndicator } from '../length_indicator';
 
 
 export function uiSectionRawTagEditor(id, context) {
@@ -196,7 +197,20 @@ export function uiSectionRawTagEditor(id, context) {
             .call(utilNoAuto)
             .on('focus', interacted)
             .on('blur', valueChange)
-            .on('change', valueChange);
+            .on('change', valueChange)
+            .on('input', function() {
+                var lengthIndicator = d3_select(this.parentNode).datum().__lengthIndicator;
+                if (lengthIndicator) {
+                    lengthIndicator.update(this.value);
+                }
+            });
+
+        innerWrap.select('.value-wrap')
+            .each(function() {
+                var lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
+                d3_select(this).datum().__lengthIndicator = lengthIndicator;
+                d3_select(this).call(lengthIndicator);
+            });
 
         innerWrap
             .append('button')
@@ -257,12 +271,17 @@ export function uiSectionRawTagEditor(id, context) {
                 (_, newKey) => _pendingChange === null || isEmpty(_pendingChange) || _pendingChange[newKey] // if there are pending changes: skip untouched tags
             );
 
+        const maxChars = context.maxCharsForTagValue();
         items.selectAll('input.value')
             .attr('title', function(d) {
                 return Array.isArray(d.value) ? d.value.filter(Boolean).join('\n') : d.value;
             })
             .classed('mixed', function(d) {
                 return Array.isArray(d.value);
+            })
+            .classed('warning', function(d) {
+                if (Array.isArray(d.value)) return false;
+                return d.value && utilUnicodeCharsCount(d.value) > maxChars;
             })
             .attr('placeholder', function(d) {
                 return Array.isArray(d.value) ? t('inspector.multiple_values') : null;
@@ -276,6 +295,15 @@ export function uiSectionRawTagEditor(id, context) {
                     return null;
                 }
                 return Array.isArray(d.value) ? '' : d.value;
+            })
+            .each(function(d) {
+                if (!Array.isArray(d.value)) {
+                    var valueWrap = d3_select(this.parentNode);
+                    var lengthIndicator = valueWrap.datum().__lengthIndicator;
+                    if (lengthIndicator) {
+                        lengthIndicator.update(d.value || '');
+                    }
+                }
             });
 
         items.selectAll('button.remove')

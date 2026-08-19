@@ -451,6 +451,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add `railway=crossing` tag when connecting two railways using the validation fix ([#9226], thanks [@paulklie])
 * Enable validation of invalid URLs in tags like `website` ([#6831], [#11499], thanks [@hlfan])
 #### :bug: Bugfixes
+* Show warning in raw tag editor when tag values exceed 255 characters ([#10241], thanks [@JaiswalShivang])
 * Fix typo: `parking:left:capacity` duplicated in osmSummableTags, missing `parking:right:capacity` ([#11819], thanks [@JaiswalShivang])
 * Fix some gpx/geojson properties not visible, such as numbers or complex data structures ([#11636], thanks [@k-yle])
 * Fix error setting custom background ([#11862], thanks [@Kayd-06])
