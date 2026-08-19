@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Warn about `goo.gl` shortlinks as sources, alongside full Google URLs ([#12740])
 * Allow (address) points at the same coordinate if they have different `addr:floor` ([#8424])
+* Only suggest deleting `wikidata`/`wikipedia` tags if they have the same value as the suggested `*:wikidata` tags from NSI ([#12758], thanks [@k-yle])
 * Implement functionality to show tooltips for individual validation fixes.
 * Improve wording for "connect the features (manually)" fix for routing-islands validator, and show tooltip with further instructions ([#8402])
 #### :bug: Bugfixes
@@ -74,6 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12724]: https://github.com/openstreetmap/iD/pull/12724
 [#12736]: https://github.com/openstreetmap/iD/pull/12736
 [#12740]: https://github.com/openstreetmap/iD/issues/12740
+[#12758]: https://github.com/openstreetmap/iD/pull/12758
 [#12760]: https://github.com/openstreetmap/iD/pull/12760
 [#12800]: https://github.com/openstreetmap/iD/pull/12800
 [#12802]: https://github.com/openstreetmap/iD/pull/12802
