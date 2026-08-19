@@ -28443,7 +28443,7 @@ ${source}
         }
         // returns an array of objects representing the segments between the nodes in this way
         segments(graph) {
-          const segmentExtent = (graph2) => {
+          function segmentExtent(graph2) {
             var n1 = graph2.hasEntity(this.nodes[0]);
             var n22 = graph2.hasEntity(this.nodes[1]);
             return n1 && n22 && geoExtent([
@@ -28456,7 +28456,8 @@ ${source}
                 Math.max(n1.loc[1], n22.loc[1])
               ]
             ]);
-          };
+          }
+          ;
           return graph.transient(this, "segments", () => {
             var segments = [];
             for (var i3 = 0; i3 < this.nodes.length - 1; i3++) {
@@ -36313,7 +36314,7 @@ Please report this to https://github.com/markedjs/marked.`, e3) {
     "package.json"() {
       package_default = {
         name: "@openstreetmap/id",
-        version: "2.42.0",
+        version: "2.42.2",
         description: "A friendly editor for OpenStreetMap",
         main: "dist/iD.min.js",
         repository: {
@@ -40062,7 +40063,7 @@ Please report this to https://github.com/markedjs/marked.`, e3) {
       const deprecationDiff = utilTagDiff(oldTags, newTags, deprecationDiffContext);
       let issues = [];
       issues.provisional = _waitingForDeprecated || waitingForNsi;
-      if (deprecationDiff.length) {
+      if (deprecationDiff.some((d3) => d3.type !== "~")) {
         const isOnlyAddingTags = !deprecationDiff.some((d3) => d3.type === "-");
         const prefix = isOnlyAddingTags ? "incomplete." : "";
         issues.push(new validationIssue({
@@ -52739,7 +52740,7 @@ Please report this to https://github.com/markedjs/marked.`, e3) {
     };
     var combobox = function(input, attachTo) {
       if (!input || input.empty()) return;
-      input.classed("combobox-input", true).on("focus.combo-input", focus).on("blur.combo-input", blur3).on("keydown.combo-input", keydown).on("keyup.combo-input", keyup).on("input.combo-input", change).on("mousedown.combo-input", mousedown).on("mouseup.combo-input", mouseup).each(function() {
+      input.classed("combobox-input", true).on("focus.combo-input", focus).on("blur.combo-input", blur3).on("keydown.combo-input", keydown).on("keyup.combo-input", keyup).on("input.combo-input", (d3_event) => change(d3_event)).on("mousedown.combo-input", mousedown).on("mouseup.combo-input", mouseup).each(function() {
         var parent = this.parentNode;
         var sibling = this.nextSibling;
         select_default2(parent).selectAll(".combobox-caret").filter(function(d3) {
@@ -52818,7 +52819,7 @@ Please report this to https://github.com/markedjs/marked.`, e3) {
             input.on("input.combo-input", function() {
               var start2 = input.property("selectionStart");
               input.node().setSelectionRange(start2, start2);
-              input.on("input.combo-input", change);
+              input.on("input.combo-input", (d3_event2) => change(d3_event2));
               change(void 0, false);
             });
             break;
@@ -72366,20 +72367,16 @@ ${_mainLocalizer.t_html("settings.custom_background.instructions.license_disclai
           const main = sources.find((s2) => s2.prefix === prefix && s2.suffix === suffix);
           if (main) {
             main.variants.push({ variant, source });
+            return;
           } else {
-            sources.push({
-              ...source,
-              prefix,
-              suffix,
-              variants: [{ variant, source }]
-            });
+            source.prefix = prefix;
+            source.suffix = suffix;
+            source.variants = [{ variant, source }];
           }
         } else {
-          sources.push({
-            ...source,
-            variants: [{ source }]
-          });
+          source.variants = [{ source }];
         }
+        sources.push(source);
       });
       sources.forEach((source) => {
         source.variants = sortBy2(source.variants, [
@@ -93374,15 +93371,15 @@ this.ifd0Offset: ${this.ifd0Offset}, file.byteLength: ${e3.byteLength}`), e3.tif
       const service = getService();
       if (!service) return;
       context.map().centerEase(d3.loc);
-      const selectedImageId = service.getActiveImage() && service.getActiveImage().id;
+      const selectedImage = service.getActiveImage();
       service.getDetections(d3.id).then((detections) => {
         if (detections.length) {
-          const imageId = detections[0].image.id;
-          if (imageId === selectedImageId) {
-            service.highlightDetection(detections[0]).selectImage(context, imageId);
+          const { image } = detections[0];
+          if (selectedImage && image.id === selectedImage.id) {
+            service.highlightDetection(detections[0]).selectImage(image);
           } else {
             service.ensureViewerLoaded(context).then(function() {
-              service.highlightDetection(detections[0]).selectImage(context, imageId).showViewer(context);
+              service.highlightDetection(detections[0]).selectImage(image).showViewer(context);
             });
           }
         }
@@ -93519,15 +93516,15 @@ this.ifd0Offset: ${this.ifd0Offset}, file.byteLength: ${e3.byteLength}`), e3.tif
       const service = getService();
       if (!service) return;
       context.map().centerEase(d3.loc);
-      const selectedImageId = service.getActiveImage() && service.getActiveImage().id;
+      const selectedImage = service.getActiveImage();
       service.getDetections(d3.id).then((detections) => {
         if (detections.length) {
-          const imageId = detections[0].image.id;
-          if (imageId === selectedImageId) {
-            service.highlightDetection(detections[0]).selectImage(context, imageId);
+          const { image } = detections[0];
+          if (selectedImage && image.id === selectedImage.id) {
+            service.highlightDetection(detections[0]).selectImage(image);
           } else {
             service.ensureViewerLoaded(context).then(function() {
-              service.highlightDetection(detections[0]).selectImage(context, imageId).showViewer(context);
+              service.highlightDetection(detections[0]).selectImage(image).showViewer(context);
             });
           }
         }
