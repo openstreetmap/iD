@@ -1,3 +1,4 @@
+import { actionChangeTags } from '../actions/change_tags';
 import { operationDelete } from '../operations/delete';
 import { osmIsInterestingTag } from '../osm/tags';
 import { t } from '../core/localizer';
@@ -34,6 +35,19 @@ export function validationMissingTag(context) {
         return entity.type === 'way' && entity.tags.highway === 'road';
     }
 
+    // There was a highway=<road_type> tag that was changed to highway=construction without
+    // adding a construction=<road_type> tag.
+    function hadRoadTypeChangedToConstruction(context, entity) {
+        let origGraph = context.history().base();
+        if (!origGraph.hasEntity(entity.id)) {
+            return false;
+        }
+        const origTags = origGraph.entity(entity.id).tags;
+        const wasKnownType = 'highway' in origTags && origTags.highway !== 'road' && origTags.highway !== 'construction';
+        const isUnknownType = entity.tags.highway === 'construction' && !('construction' in entity.tags);
+        return entity.type === 'way' && wasKnownType && isUnknownType;
+    }
+
     function isUntypedRelation(entity) {
         return entity.type === 'relation' && !entity.tags.type;
     }
@@ -62,18 +76,73 @@ export function validationMissingTag(context) {
         }
 
         // flag an unknown road even if it's a member of a relation
-        if (!subtype && isUnknownRoad(entity)) {
-            subtype = 'highway_classification';
+        if (!subtype) {
+            if (isUnknownRoad(entity)) {
+                subtype = 'highway_classification';
+            } else if (hadRoadTypeChangedToConstruction(context, entity)) {
+                subtype = 'highway_classification_construction';
+            }
         }
 
         if (!subtype) return [];
 
-        var messageID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag.' + subtype;
-        var referenceID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag';
-
         // can always delete if the user created it in the first place..
-        var canDelete = (entity.version === undefined || entity.v !== undefined);
-        var severity = (canDelete && subtype !== 'highway_classification') ? 'error' : 'warning';
+        var userCreatedEntity = (entity.version === undefined || entity.v !== undefined);
+
+        // If tags are missing, display a warning with a dynamic fix offering to select a
+        // (new) preset.
+        let messageID = `issues.missing_tag.${subtype}.message`;
+        let referenceID = 'issues.missing_tag.reference';
+        let mainFixLabel = 'issues.fix.select_preset.title';
+        let mainFixAction = function(context) {
+            context.ui().sidebar.showPresetList();
+        };
+        let mainFixIcon = 'iD-icon-search';
+        let severity = 'warning';
+        // Whether the warning should contain a fix that will (attempt) to delete
+        // the entity with missing tags.
+        let offerDeletionFix = true;
+
+        switch (subtype) {
+            // An entity lacks tags to make it relevant, for example:
+            // - no tags at all (and not a way in a relation or a node in a way)
+            // - a node without tags that is not part of a way)
+            // - a relation without a type=... tag
+            case 'any':
+            case 'descriptive':
+            case 'relation_type':
+                if (userCreatedEntity) {
+                    severity = 'error';
+                }
+                break;
+            // A way tagged as highway=road (a more precise highway value should be
+            // used).
+            case 'highway_classification':
+                messageID = 'issues.unknown_road.message';
+                referenceID = 'issues.unknown_road.reference';
+                mainFixLabel = 'issues.fix.select_road_type.title';
+                break;
+            // A way had a highway!=road tag, but it was changed to highway=construction
+            // without a a construction=... tag.
+            case 'highway_classification_construction':
+                messageID = 'issues.unknown_road.message';
+                referenceID = 'issues.unknown_road.reference';
+                mainFixLabel = 'issues.fix.restore_road_type.title';
+                mainFixIcon = 'iD-icon-undo';
+                offerDeletionFix = false;
+                mainFixAction = function(context) {
+                    // We checked in hadRoadTypeChangedToConstruction() that a highway tag
+                    // did exist before the edit and can thus just collect it here.
+                    const origRoadType = context.history().base().entity(entity.id).tags.highway;
+                    let newTags = Object.assign({}, entity.tags);   // shallow copy
+                    newTags.construction = origRoadType;
+                    context.perform(
+                        actionChangeTags(entity.id, newTags),
+                        t('operations.change_tags.annotation')
+                    );
+                };
+                break;
+        }
 
         return [new validationIssue({
             type: type,
@@ -81,7 +150,7 @@ export function validationMissingTag(context) {
             severity: severity,
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t.append('issues.' + messageID + '.message', {
+                return entity ? t.append(messageID, {
                     feature: utilDisplayLabel(entity, context.graph())
                 }) : '';
             },
@@ -91,40 +160,36 @@ export function validationMissingTag(context) {
 
                 var fixes = [];
 
-                var selectFixType = subtype === 'highway_classification' ? 'select_road_type' : 'select_preset';
-
                 fixes.push(new validationIssueFix({
-                    icon: 'iD-icon-search',
-                    title: t.append('issues.fix.' + selectFixType + '.title'),
-                    onClick: function(context) {
-                        context.ui().sidebar.showPresetList();
-                    }
+                    icon: mainFixIcon,
+                    title: t.append(mainFixLabel),
+                    onClick: mainFixAction
                 }));
 
-                var deleteOnClick;
+                if (offerDeletionFix) {
+                    var deleteOnClick;
+                    var id = this.entityIds[0];
+                    var operation = operationDelete(context, [id]);
+                    var disabledReasonID = operation.disabled();
+                    if (!disabledReasonID) {
+                        deleteOnClick = function(context) {
+                            var id = this.issue.entityIds[0];
+                            var operation = operationDelete(context, [id]);
+                            if (!operation.disabled()) {
+                                operation();
+                            }
+                        };
+                    }
 
-                var id = this.entityIds[0];
-                var operation = operationDelete(context, [id]);
-                var disabledReasonID = operation.disabled();
-                if (!disabledReasonID) {
-                    deleteOnClick = function(context) {
-                        var id = this.issue.entityIds[0];
-                        var operation = operationDelete(context, [id]);
-                        if (!operation.disabled()) {
-                            operation();
-                        }
-                    };
+                    fixes.push(
+                        new validationIssueFix({
+                            icon: 'iD-operation-delete',
+                            title: t.append('issues.fix.delete_feature.title'),
+                            disabledReason: disabledReasonID ? t('operations.delete.' + disabledReasonID + '.single') : undefined,
+                            onClick: deleteOnClick
+                        })
+                    );
                 }
-
-                fixes.push(
-                    new validationIssueFix({
-                        icon: 'iD-operation-delete',
-                        title: t.append('issues.fix.delete_feature.title'),
-                        disabledReason: disabledReasonID ? t('operations.delete.' + disabledReasonID + '.single') : undefined,
-                        onClick: deleteOnClick
-                    })
-                );
-
                 return fixes;
             }
         })];
@@ -135,7 +200,7 @@ export function validationMissingTag(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .call(t.append('issues.' + referenceID + '.reference'));
+                .call(t.append(referenceID));
         }
     };
 
