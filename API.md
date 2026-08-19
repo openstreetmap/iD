@@ -285,7 +285,6 @@ Optional properties:
 * `polygon` - Array of coordinate rings within which imagery is valid.  If omitted, imagery is assumed to be valid worldwide
 * `overzoom` - Can this imagery be scaled up when zooming in beyond the max zoom?  Defaults to `true`
 * `terms_url` - Url to link to when displaying the imagery terms
-* `terms_html` - HTML content to display in the imagery terms
 * `terms_text` - Text content to display in the imagery terms
 * `best` - If set to `true`, this imagery is considered "better than Bing" and may be chosen by default when iD starts.  Will display with a star in the background imagery list.  Defaults to `false`
 

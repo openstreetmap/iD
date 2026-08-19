@@ -29,11 +29,6 @@ export function uiAttribution(context) {
       .each((d, i, nodes) => {
         let attribution = d3_select(nodes[i]);
 
-        if (d.terms_html) {
-          attribution.html(d.terms_html);
-          return;
-        }
-
         if (d.terms_url) {
           attribution = attribution
             .append('a')
