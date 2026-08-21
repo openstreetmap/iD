@@ -235,7 +235,6 @@ export function modeSelect(context, selectedIDs) {
         return _operations.filter(operation => operation.available());
     };
 
-
     mode.enter = function() {
         if (!checkSelectedIDs()) return;
 
