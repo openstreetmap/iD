@@ -78,32 +78,54 @@ export function validationCrossingWays(context) {
     }
 
 
-    function isLegitCrossing(tags1, featureType1, tags2, featureType2) {
+    function isLegitCrossing(tags1, featureType1, tags2, featureType2, wayTags1, wayTags2) {
 
+        wayTags1 = wayTags1 || tags1;
+        wayTags2 = wayTags2 || tags2;
+        
         // assume 0 by default
-        var level1 = tags1.level || '0';
-        var level2 = tags2.level || '0';
+        var level1 =  wayTags1.level || '0';
+        var level2 =  wayTags2.level || '0';
 
-        if (taggedAsIndoor(tags1) && taggedAsIndoor(tags2) && level1 !== level2) {
+        if (taggedAsIndoor(wayTags1) && taggedAsIndoor( wayTags2) && level1 !== level2) {
             // assume features don't interact if they're indoor on different levels
             return true;
         }
+
+        // assume 0 by default; don't use way.layer() since we account for structures here
+        var layer1 = wayTags1.layer || '0';
+        var layer2 = wayTags2.layer || '0';
+
+       if (allowsBridge(featureType1) && allowsBridge(featureType2)) {
+            if (hasTag(wayTags1, 'bridge') !== hasTag(wayTags2, 'bridge')) {
+                // allow for everything EXCEPT same-type roads on same layer
+                if (featureType1 !== 'highway' || featureType2 !== 'highway' || layer1 !== layer2) return true;
+            }
+            if (hasTag(wayTags1, 'bridge') && hasTag(wayTags2, 'bridge') && layer1 !== layer2) return true;
+        } else if (allowsBridge(featureType1) && hasTag(wayTags1, 'bridge')) return true;
+        else if (allowsBridge(featureType2) && hasTag(wayTags2, 'bridge')) return true;
+
+       if (allowsTunnel(featureType1) && allowsTunnel(featureType2)) {
+            if (hasTag(wayTags1, 'tunnel') !== hasTag(wayTags2, 'tunnel')) {
+                if (featureType1 !== 'highway' || featureType2 !== 'highway' || layer1 !== layer2) return true;
+            }
+            if (hasTag(wayTags1, 'tunnel') && hasTag(wayTags2, 'tunnel') && layer1 !== layer2) return true;
+        } else if (allowsTunnel(featureType1) && hasTag(wayTags1, 'tunnel')) return true;
+        else if (allowsTunnel(featureType2) && hasTag(wayTags2, 'tunnel')) return true;
+
+        if (layer1 !== layer2) return true;
 
         // don't flag crossing waterways and pier/highways
         if (featureType1 === 'waterway' && featureType2 === 'highway' && tags2.man_made === 'pier') return true;
         if (featureType2 === 'waterway' && featureType1 === 'highway' && tags1.man_made === 'pier') return true;
 
-        if (tags1.layer !== undefined && tags1.layer === tags2.layer) return false; // Warn if both have the same defined layer
-
-        const isElement1Bridge = allowsBridge(featureType1) && hasTag(tags1, 'bridge');
-        const isElement2Bridge = allowsBridge(featureType2) && hasTag(tags2, 'bridge');
-        if (isElement1Bridge !== isElement2Bridge) return true; // Either one is bridge, the other is not
-
-        const isElement1Tunnel = allowsTunnel(featureType1) && hasTag(tags1, 'tunnel');
-        const isElement2Tunnel = allowsTunnel(featureType2) && hasTag(tags2, 'tunnel');
-        if (isElement1Tunnel !== isElement2Tunnel ) return true; // Either one is tunnel, the other is not
-
-        return (tags1.layer || '0') !== (tags2.layer || '0');
+        if (featureType1 === 'building' || featureType2 === 'building' ||
+            taggedAsIndoor(wayTags1) || taggedAsIndoor(wayTags2)) {
+            // Buildings on different layers are genuinely stacked - this is valid
+            if (layer1 !== layer2) return true;
+            return false;  // else always warn, nothing resolves it
+        }
+        return false;
     }
 
 
@@ -283,7 +305,8 @@ export function validationCrossingWays(context) {
                 way2FeatureType = getFeatureType(taggedFeature2, graph);
 
                 if (way2FeatureType === null ||
-                    isLegitCrossing(taggedFeature1.tags, way1FeatureType, taggedFeature2.tags, way2FeatureType)) {
+                    isLegitCrossing(taggedFeature1.tags, way1FeatureType, taggedFeature2.tags, way2FeatureType,
+                                    way1.tags, way2.tags)) {
                     continue;
                 }
 
@@ -392,6 +415,7 @@ export function validationCrossingWays(context) {
                                 allowsTunnel(featureType2) && hasTag(entities[1].tags, 'tunnel');
         var isCrossingBridges = allowsBridge(featureType1) && hasTag(entities[0].tags, 'bridge') &&
                                 allowsBridge(featureType2) && hasTag(entities[1].tags, 'bridge');
+        var isBothBuildings = featureType1 === 'building' && featureType2 === 'building';
 
         var subtype = [featureType1, featureType2].sort().join('-');
 
@@ -463,8 +487,14 @@ export function validationCrossingWays(context) {
                     featureType1 === 'building' ||
                     featureType2 === 'building')  {
 
-                    fixes.push(makeChangeLayerFix('higher'));
-                    fixes.push(makeChangeLayerFix('lower'));
+                    // For overlapping buildings, do not suggest changing the `layer=*` tag.
+                    // The geometry of the overlapping buildings should be fixed instead.
+                    if (!isBothBuildings &&
+                        !taggedAsIndoor(entities[0].tags) &&
+                        !taggedAsIndoor(entities[1].tags)) {
+                        fixes.push(makeChangeLayerFix('higher'));
+                        fixes.push(makeChangeLayerFix('lower'));
+                    }
 
                 // can only add bridge/tunnel if both features are lines
                 } else if (context.graph().geometry(this.entityIds[0]) === 'line' &&
