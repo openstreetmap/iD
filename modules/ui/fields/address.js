@@ -383,6 +383,8 @@ export function uiFieldAddress(field, context) {
                     countryCoder.iso1A2Code(center),
                 ];
             }
+            // country codes can be null (e.g. unclaimed ocean); we don't want that.
+            countryCodes = countryCodes.filter((item) => item !== null);
             if (countryCodes) {
                 _countryCodes = countryCodes.map((x) => x.toLowerCase());
                 updateForCountryCodes();
