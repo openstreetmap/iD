@@ -201,18 +201,14 @@ export function uiFieldAddress(field, context) {
         if (!_countryCodes) return;
 
         // find the country with a usable format
-        var addressFormat;
-        for (var countryIter = 0; countryIter < _countryCodes.length && !addressFormat; countryIter++) {
-            var currentCountryCode = _countryCodes[countryIter];
-
-            for (var i = 0; i < _addressFormats.length; i++) {
-                var format = _addressFormats[i];
-                if (!format.countryCodes) {
-                    addressFormat = format;   // choose the default format, keep going
-                } else if (format.countryCodes.indexOf(currentCountryCode) !== -1) {
-                    addressFormat = format;   // choose the country format, stop here
-                    break;
-                }
+        const defaultAddressFormat = _addressFormats.find((item) => !item.countryCodes);
+        console.assert(defaultAddressFormat !== undefined); // if undefined, then the config files are wrong.
+        let addressFormat = defaultAddressFormat;
+        for (const currentCountryCode of _countryCodes) {
+            const foundFormat = _addressFormats.find(format => (format.countryCodes?.includes(currentCountryCode)));
+            if (foundFormat) {
+                addressFormat = foundFormat;
+                break;
             }
         }
 
