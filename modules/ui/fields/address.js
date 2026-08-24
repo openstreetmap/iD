@@ -198,7 +198,7 @@ export function uiFieldAddress(field, context) {
 
     function updateForCountryCodes() {
 
-        if (!_countryCodes) return;
+        if (!(_countryCodes?.length)) return;
 
         // find the country with a usable format
         const defaultAddressFormat = _addressFormats.find((item) => !item.countryCodes);
@@ -381,7 +381,7 @@ export function uiFieldAddress(field, context) {
             }
             // country codes can be null/undefined (e.g. unclaimed ocean); we don't want that.
             countryCodes = countryCodes.filter((item) => !!item);
-            if (countryCodes) {
+            if (countryCodes?.length) {
                 _countryCodes = countryCodes.map((x) => x.toLowerCase());
                 updateForCountryCodes();
             }
