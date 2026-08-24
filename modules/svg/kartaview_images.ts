@@ -1,16 +1,20 @@
 import { throttle } from 'es-toolkit';
+import type { Dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './helpers';
 import { services } from '../services';
+import type { Projection } from '../geo/raw_mercator';
+import type { KartaviewImage, KartaviewSequence } from '../services/kartaview';
+import type { coreContext } from '../core';
 
 
-export function svgKartaviewImages(projection, context, dispatch) {
+export function svgKartaviewImages(projection: Projection, context: coreContext, dispatch: Dispatch<object>) {
     var throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 12;
     var minMarkerZoom = 16;
     var minViewfieldZoom = 18;
-    var layer = d3_select(null);
-    var _kartaview;
+    let layer: d3.Selection<SVGGElement> = d3_select(null!);
+    var _kartaview: typeof services.kartaview | null;
 
 
     function init() {
@@ -69,14 +73,14 @@ export function svgKartaviewImages(projection, context, dispatch) {
     }
 
 
-    function click(d3_event, d) {
+    function click(d3_event: MouseEvent, d: KartaviewImage) {
         var service = getService();
         if (!service) return;
 
         service
             .ensureViewerLoaded(context)
             .then(function() {
-                service.selectImage(context, d.key)
+                service!.selectImage(context, d.key)
                     .showViewer(context);
             });
 
@@ -84,7 +88,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
     }
 
 
-    function mouseover(d3_event, d) {
+    function mouseover(d3_event: MouseEvent, d: KartaviewImage) {
         var service = getService();
         if (service) service.setStyles(context, d);
     }
@@ -96,7 +100,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
     }
 
 
-    function transform(d) {
+    function transform(d: KartaviewImage) {
         var t = svgPointTransform(projection)(d);
         if (d.ca) {
             t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
@@ -105,7 +109,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
     }
 
 
-    function filterImages(images, skipDateFilter = false) {
+    function filterImages(images: KartaviewImage[], skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
         var usernames = context.photos().usernames();
@@ -131,7 +135,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
         return images;
     }
 
-    function filterSequences(sequences, skipDateFilter = false) {
+    function filterSequences(sequences: KartaviewSequence[], skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
         var usernames = context.photos().usernames();
@@ -139,13 +143,13 @@ export function svgKartaviewImages(projection, context, dispatch) {
         if (fromDate && !skipDateFilter) {
             var fromTimestamp = new Date(fromDate).getTime();
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.captured_at).getTime() >= fromTimestamp;
+                return new Date(sequence.properties.captured_at!).getTime() >= fromTimestamp;
             });
         }
         if (toDate && !skipDateFilter) {
             var toTimestamp = new Date(toDate).getTime();
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.captured_at).getTime() <= toTimestamp;
+                return new Date(sequence.properties.captured_at!).getTime() <= toTimestamp;
             });
         }
         if (usernames) {
@@ -157,7 +161,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
         return sequences;
     }
 
-    function update() {
+    function update(this: any) {
         var viewer = context.container().select('.photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
 
@@ -175,7 +179,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
         sequences = filterSequences(sequences);
         images = filterImages(images);
 
-        var traces = layer.selectAll('.sequences').selectAll('.sequence')
+        var traces = layer.selectAll('.sequences').selectAll<SVGPathElement, KartaviewSequence>('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
 
         // exit
@@ -190,7 +194,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
             .attr('d', svgPath(projection).geojson);
 
 
-        var groups = layer.selectAll('.markers').selectAll('.viewfield-group')
+        var groups = layer.selectAll('.markers').selectAll<SVGGElement, KartaviewImage>('.viewfield-group')
             .data(images, function(d) { return d.key; });
 
         // exit
@@ -243,11 +247,11 @@ export function svgKartaviewImages(projection, context, dispatch) {
     }
 
 
-    function drawImages(selection) {
+    function drawImages(this: object, selection: d3.Selection<SVGGElement>) {
         var enabled = svgKartaviewImages.enabled,
             service = getService();
 
-        layer = selection.selectAll('.layer-kartaview')
+        layer = selection.selectAll<SVGGElement, number>('.layer-kartaview')
             .data(service ? [0] : []);
 
         layer.exit()
@@ -284,7 +288,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
     }
 
 
-    drawImages.enabled = function(_) {
+    drawImages.enabled = function(_: boolean) {
         if (!arguments.length) return svgKartaviewImages.enabled;
         svgKartaviewImages.enabled = _;
         if (svgKartaviewImages.enabled) {
@@ -303,7 +307,7 @@ export function svgKartaviewImages(projection, context, dispatch) {
         return !!getService();
     };
 
-    drawImages.rendered = function(zoom) {
+    drawImages.rendered = function(zoom: number) {
       return zoom >= minZoom;
     };
 
@@ -311,3 +315,5 @@ export function svgKartaviewImages(projection, context, dispatch) {
     init();
     return drawImages;
 }
+svgKartaviewImages.initialized = false;
+svgKartaviewImages.enabled = false;
