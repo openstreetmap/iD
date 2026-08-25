@@ -328,11 +328,14 @@ li.hide {
 .content {
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.25);
 }
-.loading.loading {
-    background-color: #aaa;
-    background-blend-mode: var(--bg-blend-mode);
-    background-image: url(img/loader_bg.gif);
+.loading {
+    animation: load-crawl linear infinite 1s;
+    background-image: repeating-linear-gradient(45deg, var(--border-color) 0 15%, #0000 15% 50%);
     background-size: 5px 5px;
+}
+@keyframes load-crawl {
+    0% { background-position: 0px; }
+    to { background-position: 5px; }
 }
 
 
