@@ -193,7 +193,6 @@ function getCLDROverrides() {
     'wbl': {
       nativeName: 'وخی'
     },
-    wlp: { nativeName: 'Warlpiri' },
     wrh: { nativeName: 'Wiradjuri' },
     wth: { nativeName: 'Wathawurrung' },
     'wuu': {
