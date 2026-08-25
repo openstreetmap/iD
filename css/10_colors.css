@@ -30,7 +30,6 @@
 
     --bg-filter: none;
     --mix-blend-mode: normal;
-    --bg-blend-mode: normal;
 
     --valid-bg-color: #cfc;
     --valid-label-color: #afa;
@@ -97,7 +96,6 @@
 
         --bg-filter: invert();
         --mix-blend-mode: screen;
-        --bg-blend-mode: difference;
 
         --valid-bg-color: #030;
         --valid-label-color: #050;
