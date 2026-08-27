@@ -450,7 +450,7 @@ export function uiInit(context) {
         }
 
         var osm = context.connection();
-        var auth = uiLoading(context).message(t.addOrUpdate('loading_auth')).blocking(true);
+        var auth = uiLoading().message(t.addOrUpdate('loading_auth')).blocking(true);
 
         if (osm && auth) {
             osm
@@ -684,7 +684,7 @@ export function uiInit(context) {
 
     context.uploader()
         .on('saveStarted.ui', function() {
-            _saveLoading = uiLoading(context)
+            _saveLoading = uiLoading()
                 .message(t.addOrUpdate('save.uploading'))
                 .blocking(true);
             context.container().call(_saveLoading);  // block input during upload
