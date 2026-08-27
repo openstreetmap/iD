@@ -15,7 +15,9 @@ const incompatibleRules = [
   },
   {
     id: 'google',
-    regex: /(google)/i,
+    // `goo.gl` is Google's link shortener. Third-party use was discontinued in
+    // 2025, so surviving links effectively point only at Google properties.
+    regex: /(google|\bgoo\.gl\b)/i,
     exceptRegex: /((books|drive)\.google|google\s?(books|drive|plus))|(esri\/Google_(Africa|Open)_Buildings)/i
   }
 ];
