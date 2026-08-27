@@ -1,5 +1,8 @@
 /* Downloads the latest translations from Transifex */
 import fs from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import ianaRegistry from 'language-subtag-registry/data/json/registry.json' with { type: 'json' };
 
 const cldrMainDir = 'node_modules/cldr-localenames-full/main/';
 const rematchCodes: Record<string, string> = {
@@ -79,7 +82,6 @@ function getCLDROverrides(): CLDROverrides {
       script: 'Latn',
       nativeName: 'Pó-sing-gṳ̂ (Báⁿ-uā-ci̍)'
     },
-    dgw: { nativeName: 'Daungwurrung' },
     'gan': {
       nativeName: '贛語'
     },
@@ -93,7 +95,6 @@ function getCLDROverrides(): CLDROverrides {
       script: 'Hant',
       nativeName: '贛語（繁體）'
     },
-    gjm: { nativeName: 'Gunditjmara' },
     gjr: { nativeName: 'Gurindji Kriol' },
     gup: { nativeName: 'Bininj Gun-Wok' },
     'hak': {
@@ -163,15 +164,12 @@ function getCLDROverrides(): CLDROverrides {
       script: 'Latn',
       nativeName: 'Bân-lâm-gú (Tâi-lô)'
     },
-    nys: { nativeName: 'Nyungar' },
     pih: { nativeName: 'Pitkern–Norfuk', names: { en: 'Pitcairn-Norfolk', ty: 'Pitcairnais' } },
     piu: { nativeName: 'Pintupi' },
-    pjt: { nativeName: 'Pitjantjatjara' },
     'pnb': {
       nativeName: 'پنجابی'
     },
     rop: { nativeName: 'Australian Kriol' },
-    rrm: { nativeName: 'Moriori' },
     'scl': {
       nativeName: 'ݜݨیاٗ'
     },
@@ -185,8 +183,6 @@ function getCLDROverrides(): CLDROverrides {
       nativeName: 'وخی'
     },
     wlp: { nativeName: 'Warlpiri' },
-    wrh: { nativeName: 'Wiradjuri' },
-    wth: { nativeName: 'Wathawurrung' },
     'wuu': {
       nativeName: '吳語'
     },
@@ -200,21 +196,18 @@ function getCLDROverrides(): CLDROverrides {
       script: 'Hant',
       nativeName: '吳語（正體）'
     },
-    wyi: { nativeName: 'Woiwurrung' },
     xdk: { nativeName: 'Dharug' },
     xni: { nativeName: 'Ngarigo' },
     xph: { nativeName: 'Tyerrernotepanner', names: { en: 'North Midlands Tasmanian' } },
-    xrd: { nativeName: 'Gundungurra' },
     'zh-Latn-pinyin': {
       base: 'zh',
       script: 'Latn',
       nativeName: 'Zhōngwén (Hànyǔ Pīnyīn)'
     },
-    zku: { nativeName: 'Kaurna' },
   };
 }
 
-function getLangNamesInNativeLang() {
+export async function getLangNamesInNativeLang() {
   const unordered = getCLDROverrides();
   for (const key in unordered) {
     delete unordered[key].names; // this is added later
@@ -256,6 +249,25 @@ function getLangNamesInNativeLang() {
     unordered[code] = {};
   });
 
+  // for locales that aren't in CLDR and don't have hardcoded overrides in this file,
+  // use the nativeName from the IANA registry. This only applies to language codes
+  // that are used at least once in OSM.
+  const fromTaginfo = await getNameTagsFromTaginfo();
+  const ianaRegistryObject = Object.fromEntries(
+    ianaRegistry
+        .filter(row => row.Type === 'language' && !row.Deprecated && !row.Macrolanguage && row.Scope !== 'collection')
+        .map(row => [row.Subtag, row.Description[0]])
+  );
+
+  for (const code of fromTaginfo) {
+    if (unordered[code]?.nativeName) continue; // already exists
+    if (!(code in ianaRegistryObject)) continue; // unknown value
+
+    unordered[code] = {
+        nativeName: ianaRegistryObject[code],
+    };
+  }
+
   // delete codes which should not be used
   delete unordered['pa-Arab']; // https://github.com/openstreetmap/iD/pull/9241/
   delete unordered['pa-Guru']; // - " -
@@ -265,10 +277,68 @@ function getLangNamesInNativeLang() {
   return ordered;
 }
 
-export const langNamesInNativeLang = getLangNamesInNativeLang();
+/** fetches every `name:*` tag from taginfo */
+async function getNameTagsFromTaginfo(): Promise<string[]> {
+    // this data rarely changes, so cache it for a month locally. Otherwise
+    // it would slow down builds for frequent contributors.
+    const cacheFile = join(tmpdir(), `iD-taginfo-name-tags-${new Date().toISOString().slice(0, 7)}.json`);
+    if (fs.existsSync(cacheFile)) {
+        return JSON.parse(await fs.promises.readFile(cacheFile, 'utf8'));
+    }
 
-export function languageNamesInLanguageOf(code: string) {
+    interface TaginfoResponse {
+        page: number;
+        rp: number;
+        total: number;
+        data: { key: string; }[];
+    }
+
+    const codes: string[] = [];
+
+    // eslint-disable-next-line no-constant-condition
+    for (let page = 1; true; page++) {
+        const qs = new URLSearchParams({
+            query: 'name:',
+            sortname: 'count_all',
+            sortorder: 'desc',
+            rp: '999',
+            page: `${page}`
+        });
+        // eslint-disable-next-line no-console
+        console.log(`fetching name:* tags from taginfo (page ${page})`);
+        const response: TaginfoResponse = await fetch(
+            `https://taginfo.openstreetmap.org/api/4/keys/all?${qs}`
+        ).then(r => r.json());
+
+        if (!response.data.length) break; // reached the final page
+
+        const filtered = response.data
+            .map(row => row.key.replace(/^name:/, ''))
+            .filter(value => {
+                try {
+                    // only keep valid locale codes to exclude tags like
+                    // `name:etymology` and `name:2008-2011`
+                    return new Intl.Locale(value);
+                } catch {
+                    return false;
+                }
+            });
+
+        codes.push(...filtered);
+    }
+
+    await fs.promises.writeFile(cacheFile, JSON.stringify(codes));
+
+    return codes;
+}
+
+let langNamesInNativeLang;
+
+export async function languageNamesInLanguageOf(code: string) {
   if (rematchCodes[code]) code = rematchCodes[code];
+
+  // eslint-disable-next-line require-atomic-updates
+  langNamesInNativeLang ||= await getLangNamesInNativeLang();
 
   const { language } = new Intl.Locale(code);
 

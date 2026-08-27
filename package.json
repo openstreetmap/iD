@@ -117,6 +117,7 @@
     "js-yaml": "^5.0.0",
     "jsdom": "^30.0.0",
     "json-stringify-pretty-compact": "^3.0.0",
+    "language-subtag-registry": "^0.4.2",
     "mapillary-js": "4.1.2",
     "name-suggestion-index": "~8.0",
     "nise": "^6.1.1",
