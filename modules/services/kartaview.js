@@ -239,6 +239,12 @@ export default {
             .on('dblclick.zoom', null);
 
         wrapEnter
+            .append('svg')
+            .attr('class', 'photo-spinner')
+            .append('use')
+            .attr('href', '#iD-loader');
+
+        wrapEnter
             .append('div')
             .attr('class', 'photo-attribution fillD');
 

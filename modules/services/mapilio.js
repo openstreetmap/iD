@@ -332,6 +332,7 @@ export default {
         if (!d) return this;
 
         let wrap = context.container().select('.photoviewer .mapilio-wrapper');
+        wrap.append('svg').attr('class', 'photo-spinner').append('use').attr('href', '#iD-loader');
         let attribution = wrap.selectAll('.photo-attribution').text('\u00A0');
 
         let _username = '';

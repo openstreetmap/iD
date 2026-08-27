@@ -667,10 +667,10 @@ button.add-note svg.icon {
     width: 20px;
     pointer-events: none;
 }
-.spinner img {
+.spinner svg {
     height: 100%;
     width: 100%;
-    background: transparent;
+    background: #0005;
     border-radius: 100%;
 }
 .ideditor[dir='rtl'] .spinner img {
@@ -5222,8 +5222,9 @@ img.tile-debug {
 
 .modal .loader {
     margin-bottom: 10px;
-    filter: var(--bg-filter);
-    mix-blend-mode: var(--mix-blend-mode);
+    height: 40px;
+    width: 100%;
+    stroke: var(--border-color);
 }
 .modal .description {
     text-align: center;
