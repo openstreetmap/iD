@@ -309,6 +309,12 @@ export default new class Kartaview implements IStreetSide {
             .on('dblclick.zoom', null);
 
         wrapEnter
+            .append('svg')
+            .attr('class', 'photo-spinner')
+            .append('use')
+            .attr('href', '#iD-spinner');
+
+        wrapEnter
             .append('div')
             .attr('class', 'photo-attribution fillD');
 
