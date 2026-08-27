@@ -15,8 +15,9 @@ const incompatibleRules = [
   },
   {
     id: 'google',
-    // `goo.gl` is Google's link shortener. Third-party use was discontinued in
-    // 2025, so surviving links effectively point only at Google properties.
+    // `goo.gl` is Google's own link shortener. Third parties have not been able
+    // to create links on it since 2019, while Google products still generate
+    // them (`maps.app.goo.gl`), so a shortlink in a source is a Google source.
     regex: /(google|\bgoo\.gl\b)/i,
     exceptRegex: /((books|drive)\.google|google\s?(books|drive|plus))|(esri\/Google_(Africa|Open)_Buildings)/i
   }
