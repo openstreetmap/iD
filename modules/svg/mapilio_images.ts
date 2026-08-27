@@ -3,15 +3,19 @@ import { throttle } from 'es-toolkit';
 import { select as d3_select } from 'd3-selection';
 import { services } from '../services';
 import {svgPath, svgPointTransform} from './helpers';
+import type { Projection } from '../geo/raw_mercator';
+import type { Dispatch } from 'd3';
+import type { MapilioImage, RawMapilioSequence } from '../services/mapilio';
+import type { coreContext } from '../core';
 
 
-export function svgMapilioImages(projection, context, dispatch) {
+export function svgMapilioImages(projection: Projection, context: coreContext, dispatch: Dispatch<object>) {
     const throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     const imageMinZoom = 16;
     const lineMinZoom = 10;
     const viewFieldZoomLevel = 18;
-    let layer = d3_select(null);
-    let _mapilio;
+    let layer: d3.Selection<SVGGElement> = d3_select(null!);
+    let _mapilio: typeof services.mapilio | null;
     let _viewerYaw = 0;
 
     function init() {
@@ -39,7 +43,7 @@ export function svgMapilioImages(projection, context, dispatch) {
      * @param {Boolean} skipDateFilter if true, the set date filters will be ignored
      * @returns array of filtered images
      */
-    function filterImages(images, skipDateFilter = false) {
+    function filterImages(images: MapilioImage[], skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
 
@@ -63,18 +67,18 @@ export function svgMapilioImages(projection, context, dispatch) {
      * @param {Boolean} skipDateFilter if true, the set date filters will be ignored
      * @returns array of filtered sequences
      */
-    function filterSequences(sequences, skipDateFilter = false) {
+    function filterSequences(sequences: RawMapilioSequence[], skipDateFilter = false) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
 
         if (fromDate && !skipDateFilter) {
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.capture_time).getTime() >= new Date(fromDate).getTime().toString();
+                return new Date(sequence.properties.capture_time).getTime() >= new Date(fromDate).getTime();
             });
         }
         if (toDate && !skipDateFilter) {
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.capture_time).getTime() <= new Date(toDate).getTime().toString();
+                return new Date(sequence.properties.capture_time).getTime() <= new Date(toDate).getTime();
             });
         }
 
@@ -105,7 +109,7 @@ export function svgMapilioImages(projection, context, dispatch) {
             .on('end', editOff);
     }
 
-    function transform(d, selectedImageId) {
+    function transform(d: MapilioImage, selectedImageId: number) {
         let t = svgPointTransform(projection)(d);
         let rot = d.heading || 0;
 
@@ -129,11 +133,11 @@ export function svgMapilioImages(projection, context, dispatch) {
         layer.style('display', 'none');
     }
 
-    function click(d3_event, image) {
+    function click(d3_event: MouseEvent, image: MapilioImage) {
         const service = getService();
         if (!service) return;
 
-        service.ensureViewerLoaded(context, image.id)
+        service.ensureViewerLoaded(context)
             .then(() => {
                 service.selectImage(context, image.id)
                     .showViewer(context);
@@ -142,7 +146,7 @@ export function svgMapilioImages(projection, context, dispatch) {
         context.map().centerEase(image.loc);
     }
 
-    function mouseover(d3_event, image) {
+    function mouseover(d3_event: MouseEvent, image: MapilioImage) {
         const service = getService();
         if (service) service.setStyles(context, image);
     }
@@ -153,12 +157,12 @@ export function svgMapilioImages(projection, context, dispatch) {
         if (service) service.setStyles(context, null);
     }
 
-    async function update() {
+    async function update(this: any) {
         const zoom = ~~context.map().zoom();
         const showViewfields = (zoom >= viewFieldZoomLevel);
-        const service = getService();
+        const service = getService()!;
 
-        let sequences = (service ? service.sequences(projection, zoom) : []);
+        let sequences = (service ? service.sequences(projection) : []);
         let images = (service && zoom >= imageMinZoom ? service.images(projection) : []);
 
         dispatch.call('photoDatesChanged', this, 'mapilio', [
@@ -169,12 +173,14 @@ export function svgMapilioImages(projection, context, dispatch) {
         images = await filterImages(images);
         sequences = await filterSequences(sequences);
 
+
+        // @ts-expect-error --  bug, there is no such method
         const activeImage = service.getActiveImage?.();
         const activeImageId = activeImage ? activeImage.id : null;
 
         let traces = layer
             .selectAll('.sequences')
-            .selectAll('.sequence')
+            .selectAll<SVGPathElement, RawMapilioSequence>('.sequence')
             .data(sequences, function(d) { return d.properties.id; });
 
         // exit
@@ -188,8 +194,8 @@ export function svgMapilioImages(projection, context, dispatch) {
 
         const groups = layer
             .selectAll('.markers')
-            .selectAll('.viewfield-group')
-            .data(images, function(d) { return d.id; });
+            .selectAll<SVGGElement, RawMapilioSequence>('.viewfield-group')
+            .data(images, function(d) { return d.id!; });
 
         // exit
         groups.exit().remove();
@@ -212,6 +218,7 @@ export function svgMapilioImages(projection, context, dispatch) {
             .sort(function(a, b) {
                 if (a.id === activeImageId) return 1;
                 if (b.id === activeImageId) return -1;
+                // @ts-expect-error -- bug, this field does not exist
                 return a.capture_time_parsed - b.capture_time_parsed;
             })
             .attr('transform', d => transform(d, activeImageId))
@@ -239,8 +246,8 @@ export function svgMapilioImages(projection, context, dispatch) {
 
         service.setStyles(context, null);
 
-        function viewfieldPath() {
-            if (this.parentNode.__data__.isPano) {
+        function viewfieldPath(this: SVGPathElement) {
+            if (this.parentNode!.__data__.isPano) {
                 return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
                 return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
@@ -249,11 +256,11 @@ export function svgMapilioImages(projection, context, dispatch) {
 
     }
 
-    function drawImages(selection) {
+    function drawImages(this: any, selection: d3.Selection<SVGGElement>) {
         const enabled = svgMapilioImages.enabled;
         const service = getService();
 
-        layer = selection.selectAll('.layer-mapilio')
+        layer = selection.selectAll<SVGGElement, 0>('.layer-mapilio')
             .data(service ? [0] : []);
 
         layer.exit().remove();
@@ -280,15 +287,16 @@ export function svgMapilioImages(projection, context, dispatch) {
                     editOn();
                     update();
                     service.loadImages(projection);
-                    service.loadLines(projection, zoom);
+                    service.loadLines(projection);
                 } else if (zoom >= lineMinZoom) {
                     editOn();
                     update();
                     service.loadImages(projection);
-                    service.loadLines(projection, zoom);
+                    service.loadLines(projection);
                 } else {
                     editOff();
                     dispatch.call('photoDatesChanged', this, 'mapilio', []);
+                    // @ts-expect-error -- bug, null is not valid
                     service.selectImage(context, null);
                 }
             } else {
@@ -299,7 +307,7 @@ export function svgMapilioImages(projection, context, dispatch) {
         }
     }
 
-    drawImages.enabled = function(_) {
+    drawImages.enabled = function(_: boolean) {
         if (!arguments.length) return svgMapilioImages.enabled;
         svgMapilioImages.enabled = _;
         if (svgMapilioImages.enabled) {
@@ -318,7 +326,7 @@ export function svgMapilioImages(projection, context, dispatch) {
         return !!getService();
     };
 
-    drawImages.rendered = function(zoom) {
+    drawImages.rendered = function(zoom: number) {
       return zoom >= lineMinZoom;
     };
 
@@ -326,3 +334,5 @@ export function svgMapilioImages(projection, context, dispatch) {
     init();
     return drawImages;
 }
+svgMapilioImages.enabled = false;
+svgMapilioImages.initialized = false;

@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
+import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity, type D3ZoomEvent } from 'd3-zoom';
 
 import { deepEqual } from 'fast-equals';
 import { PbfReader } from 'pbf';
@@ -9,10 +10,15 @@ import { VectorTile } from '@mapbox/vector-tile';
 
 import { utilRebind, utilTiler, utilSetTransform } from '../util';
 import { geoExtent } from '../geo';
-import { services } from './';
-import { searchLimited } from '../util/partition';
+import { services } from '.';
+import { searchLimited, type WithBbox } from '../util/partition';
 import { localeDateString } from '../util/date';
 import { patchHash } from '../behavior';
+import type { Projection } from '../geo/raw_mercator';
+import type { Tile } from '../util/tiler';
+import type { Vec2 } from '../geo/vector';
+import type { Feature, LineString, Point } from 'geojson';
+import type { coreContext } from '../core';
 
 const apiUrl = 'https://end.mapilio.com';
 const imageBaseUrl = 'https://cdn.mapilio.com/im';
@@ -23,7 +29,7 @@ const tileStyle = '&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&
 
 const minZoom = 14;
 const dispatch = d3_dispatch('loadedImages', 'loadedLines');
-const imgZoom = d3_zoom()
+const imgZoom = d3_zoom<HTMLDivElement, 0>()
     .extent([[0, 0], [320, 240]])
     .translateExtent([[0, 0], [320, 240]])
     .scaleExtent([1, 15]);
@@ -32,12 +38,71 @@ const pannellumViewerJS = 'pannellum/pannellum.js';
 const resolution = 1080;
 const hdResolution = 2080;
 
+export interface MapilioImage {
+    service: 'photo';
+    loc: Vec2;
+    capture_time: string;
+    created_by_id: string;
+    id: number;
+    sequence_id: string;
+    heading: number;
+    resolution: string;
+    isPano: boolean;
+}
+
+export type RawMapilioSequence = Feature<LineString, {
+    id: string;
+    sequence_uuid: string;
+    capture_time: string;
+}>;
+
+type RawFeature = Feature<Point, {
+    id: number;
+    sequence_uuid: string;
+    capture_time: string;
+    created_by_id: string;
+    resolution: `${number}x${number}`;
+    heading: number;
+}>;
+
+interface SequenceDetails {
+    data: {
+        id: number;
+        filename: string;
+        uploaded_hash: string;
+    }[];
+}
+
 let _useHd = false;
-let _activeImage;
-let _cache;
-let _loadViewerPromise;
-let _pannellumViewer;
-let _sceneOptions = {
+let _activeImage: {
+    id: number;
+    sequence_id: string;
+} | null;
+let _cache: {
+    images: {
+        rtree: RBush<WithBbox<MapilioImage>>;
+        forImageId: {
+            [imageId: string]: MapilioImage;
+        };
+    },
+    sequences: {
+        rtree: RBush<RawMapilioSequence>;
+        lineString: {
+            [sequenceId: string]: RawMapilioSequence[];
+        };
+    };
+    requests: {
+        loaded: {
+            [tileId: string]: boolean;
+        };
+        inflight: {
+            [tileId: string]: AbortController;
+        };
+    };
+};
+let _loadViewerPromise: Promise<void> | null;
+let _pannellumViewer: Pannellum.Viewer | null;
+let _sceneOptions: Pannellum.ConfigOptions = {
     showFullscreenCtrl: false,
     autoLoad: true,
     yaw: 0,
@@ -47,8 +112,10 @@ let _sceneOptions = {
 };
 let _currScene = 0;
 
+type Which = 'line' | 'images';
+
 // Load all data for the specified type from Mapilio vector tiles
-function loadTiles(which, url, maxZoom, projection) {
+function loadTiles(which: Which, url: string, maxZoom: number, projection: Projection) {
     const tiler = utilTiler().zoomExtent([minZoom, maxZoom]).skipNullIsland(true);
     const tiles = tiler.getTiles(projection);
 
@@ -59,15 +126,16 @@ function loadTiles(which, url, maxZoom, projection) {
 
 
 // Load all data for the specified type from one vector tile
-function loadTile(which, url, tile) {
+function loadTile(which: Which, url: string, tile: Tile) {
     const cache = _cache.requests;
     const tileId = `${tile.id}-${which}`;
     if (cache.loaded[tileId] || cache.inflight[tileId]) return;
     const controller = new AbortController();
     cache.inflight[tileId] = controller;
-    const requestUrl = url.replace('{x}', tile.xyz[0])
-        .replace('{y}', tile.xyz[1])
-        .replace('{z}', tile.xyz[2]);
+    const requestUrl = url
+        .replace('{x}', String(tile.xyz[0]))
+        .replace('{y}', String(tile.xyz[1]))
+        .replace('{z}', String(tile.xyz[2]));
 
     fetch(requestUrl, { signal: controller.signal })
         .then(function(response) {
@@ -83,7 +151,7 @@ function loadTile(which, url, tile) {
                 throw new Error('No Data');
             }
 
-            loadTileDataToCache(data, tile, which);
+            loadTileDataToCache(data, tile);
 
             if (which === 'images') {
                 dispatch.call('loadedImages');
@@ -102,7 +170,7 @@ function loadTile(which, url, tile) {
 
 
 // Load the data from the vector tile into cache
-function loadTileDataToCache(data, tile) {
+function loadTileDataToCache(data: ArrayBuffer, tile: Tile) {
     const vectorTile = new VectorTile(new PbfReader(data));
     if (Object.hasOwnProperty.call(vectorTile.layers, pointLayer)) {
         const features = [];
@@ -110,15 +178,15 @@ function loadTileDataToCache(data, tile) {
         const layer = vectorTile.layers[pointLayer];
 
         for (let i = 0; i < layer.length; i++) {
-            const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
-            const loc = feature.geometry.coordinates;
+            const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]) as RawFeature;
+            const loc = feature.geometry.coordinates as Vec2;
 
-            let resolutionArr = feature.properties.resolution.split('x');
+            let resolutionArr = feature.properties.resolution.split('x').map(Number) as Vec2;
             let sourceWidth = Math.max(resolutionArr[0], resolutionArr[1]);
             let sourceHeight = Math.min(resolutionArr[0] ,resolutionArr[1]);
             let isPano = sourceWidth % sourceHeight === 0;
 
-            const d = {
+            const d: MapilioImage = {
                 service: 'photo',
                 loc: loc,
                 capture_time: feature.properties.capture_time,
@@ -144,7 +212,7 @@ function loadTileDataToCache(data, tile) {
         const layer = vectorTile.layers[lineLayer];
 
         for (let i = 0; i < layer.length; i++) {
-            const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+            const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]) as RawMapilioSequence;
             if (cache.lineString[feature.properties.sequence_uuid]) {
                 const cacheEntry = cache.lineString[feature.properties.sequence_uuid];
                 if (cacheEntry.some(f => {
@@ -164,7 +232,7 @@ function loadTileDataToCache(data, tile) {
 
 }
 
-function getImageData(imageId, sequenceId) {
+function getImageData(imageId: number, sequenceId: string) {
 
     return fetch(apiUrl + `/api/sequence-detail?sequence_uuid=${sequenceId}`, {method: 'GET'})
         .then(function (response) {
@@ -173,7 +241,7 @@ function getImageData(imageId, sequenceId) {
             }
             return response.json();
         })
-        .then(function (data) {
+        .then(function (data: SequenceDetails) {
             let index = data.data.findIndex((feature) => feature.id === imageId);
             const {filename, uploaded_hash} = data.data[index];
             const targetResolution = _useHd ? hdResolution : resolution;
@@ -181,7 +249,7 @@ function getImageData(imageId, sequenceId) {
         });
 }
 
-function getUserData(userId) {
+function getUserData(userId: string) {
   return fetch(apiUrl + `/api/search-user?options[parameters][id]=${userId}`, {method: 'GET'})
     .then(function (response) {
       if (!response.ok) {
@@ -195,18 +263,20 @@ function getUserData(userId) {
 }
 
 
-export default {
+export default new class {
+    event!: Pick<typeof dispatch, 'on'>;
+
     // Initialize Mapilio
-    init: function() {
+    init() {
         if (!_cache) {
             this.reset();
         }
 
         this.event = utilRebind(this, dispatch, 'on');
-    },
+    }
 
     // Reset cache and state
-    reset: function() {
+    reset() {
         if (_cache) {
             Object.values(_cache.requests.inflight).forEach(function(request) { request.abort(); });
         }
@@ -216,39 +286,39 @@ export default {
             sequences: { rtree: new RBush(), lineString: {} },
             requests: { loaded: {}, inflight: {} }
         };
-    },
+    }
 
     // Get visible images
-    images: function(projection) {
+    images(projection: Projection) {
         const limit = 5;
         return searchLimited(limit, projection, _cache.images.rtree);
-    },
+    }
 
-    cachedImage: function(imageKey) {
+    cachedImage(imageKey: number) {
         return _cache.images.forImageId[imageKey];
-    },
+    }
 
 
     // Load images in the visible area
-    loadImages: function(projection) {
+    loadImages(projection: Projection) {
         let url = baseTileUrl + pointLayer + tileStyle;
         loadTiles('images', url, 14, projection);
-    },
+    }
 
     // Load line in the visible area
-    loadLines: function(projection) {
+    loadLines(projection: Projection) {
         let url = baseTileUrl + lineLayer + tileStyle;
         loadTiles('line', url, 14, projection);
-    },
+    }
 
     // Get visible sequences
-    sequences: function(projection) {
+    sequences(projection: Projection) {
         const viewport = projection.clipExtent();
-        const min = [viewport[0][0], viewport[1][1]];
-        const max = [viewport[1][0], viewport[0][1]];
+        const min: Vec2 = [viewport[0][0], viewport[1][1]];
+        const max: Vec2 = [viewport[1][0], viewport[0][1]];
         const bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
-        const sequenceIds = {};
-        let lineStrings = [];
+        const sequenceIds: Record<string, true> = {};
+        let lineStrings: RawMapilioSequence[] = [];
 
         _cache.images.rtree.search(bbox)
             .forEach(function(d) {
@@ -264,10 +334,10 @@ export default {
         });
 
         return lineStrings;
-    },
+    }
 
     // Set the currently visible image
-    setActiveImage: function(image) {
+    setActiveImage(image?: MapilioImage) {
         if (image) {
             _activeImage = {
                 id: image.id,
@@ -276,18 +346,18 @@ export default {
         } else {
             _activeImage = null;
         }
-    },
+    }
 
 
     // Update the currently highlighted sequence and selected bubble.
-    setStyles: function(context, hovered) {
+    setStyles(context: coreContext, hovered?: MapilioImage | null) {
         const hoveredImageId = hovered && hovered.id;
         const hoveredSequenceId = hovered && hovered.sequence_id;
         const selectedSequenceId = _activeImage && _activeImage.sequence_id;
         const selectedImageId =  _activeImage && _activeImage.id;
 
-        const markers = context.container().selectAll('.layer-mapilio .viewfield-group');
-        const sequences = context.container().selectAll('.layer-mapilio .sequence');
+        const markers = context.container().selectAll<SVGElement, MapilioImage>('.layer-mapilio .viewfield-group');
+        const sequences = context.container().selectAll<SVGElement, RawFeature>('.layer-mapilio .sequence');
 
         markers.classed('highlighted', function(d) { return d.id === hoveredImageId; })
             .classed('hovered', function(d) { return d.id === hoveredImageId; })
@@ -297,24 +367,24 @@ export default {
             .classed('currentView', function(d) { return d.properties.sequence_uuid === selectedSequenceId; });
 
         return this;
-    },
+    }
 
-    initViewer: function () {
+    initViewer() {
         if (!window.pannellum) return;
         if (_pannellumViewer) return;
 
         _currScene += 1;
         const sceneID = _currScene.toString();
-        const options = {
+        const options: Pannellum.TourOptions = {
             'default': { firstScene: sceneID },
             scenes: {}
         };
         options.scenes[sceneID] = _sceneOptions;
 
         _pannellumViewer = window.pannellum.viewer('ideditor-viewer-mapilio-pnlm', options);
-    },
+    }
 
-    selectImage: function (context, id) {
+    selectImage(context: coreContext, id: number) {
 
         let that = this;
 
@@ -331,7 +401,7 @@ export default {
 
         if (!d) return this;
 
-        let wrap = context.container().select('.photoviewer .mapilio-wrapper');
+        let wrap = context.container().select<HTMLDivElement>('.photoviewer .mapilio-wrapper');
         let attribution = wrap.selectAll('.photo-attribution').text('\u00A0');
 
         let _username = '';
@@ -350,7 +420,7 @@ export default {
              .on('click',(e) => {
                 e.stopPropagation();
                 _useHd = e.target.checked;
-                let parts = _sceneOptions.panorama.split('/');
+                let parts: (string | number)[] = _sceneOptions.panorama!.split('/');
 
                 if (_useHd){
                     parts[parts.length - 1] = hdResolution;
@@ -442,9 +512,9 @@ export default {
         getImageData(d.id,d.sequence_id).then(loadTheImage);
 
         return this;
-    },
+    }
 
-    initOnlyPhoto: function (context) {
+    initOnlyPhoto(context: coreContext) {
 
         if (_pannellumViewer) {
             _pannellumViewer.destroy();
@@ -456,15 +526,15 @@ export default {
         let imgWrap = wrap.select('img');
 
         if (!imgWrap.empty()) {
-            imgWrap.attr('src',_sceneOptions.panorama);
+            imgWrap.attr('src',_sceneOptions.panorama!);
         } else {
             wrap.append('img')
-                .attr('src',_sceneOptions.panorama);
+                .attr('src', _sceneOptions.panorama!);
         }
 
-    },
+    }
 
-    ensureViewerLoaded: function(context) {
+    ensureViewerLoaded(context: coreContext) {
 
         let that = this;
 
@@ -476,8 +546,8 @@ export default {
 
         if (_loadViewerPromise) return _loadViewerPromise;
 
-        let wrap = context.container().select('.photoviewer').selectAll('.mapilio-wrapper')
-            .data([0]);
+        let wrap = context.container().select('.photoviewer').selectAll<HTMLDivElement, 0>('.mapilio-wrapper')
+            .data<0>([0]);
 
         let wrapEnter = wrap.enter()
             .append('div')
@@ -527,7 +597,7 @@ export default {
             }
         });
 
-        _loadViewerPromise = new Promise((resolve, reject) => {
+        _loadViewerPromise = new Promise<void>((resolve, reject) => {
             let loadedCount = 0;
             function loaded() {
                 loadedCount += 1;
@@ -569,7 +639,7 @@ export default {
                 _loadViewerPromise = null;
             });
 
-        function step(stepBy) {
+        function step(stepBy: number) {
             return function () {
                 if (!_activeImage) return;
                 const imageId = _activeImage.id;
@@ -585,23 +655,23 @@ export default {
             };
         }
 
-        function zoomPan(d3_event) {
+        function zoomPan(d3_event: D3ZoomEvent<HTMLDivElement, 0>) {
             var t = d3_event.transform;
             context.container().select('.photoviewer #ideditor-viewer-mapilio-simple')
                 .call(utilSetTransform, t.x, t.y, t.k);
         }
 
         return _loadViewerPromise;
-    },
+    }
 
-    showViewer:function (context) {
+    showViewer(context: coreContext) {
         const wrap = context.container().select('.photoviewer');
         const isHidden = wrap.selectAll('.photo-wrapper.mapilio-wrapper.hide').size();
 
         if (isHidden) {
             for (const service of Object.values(services)) {
                 if (service === this) continue;
-                if (typeof service.hideViewer === 'function') {
+                if (service && 'hideViewer' in service && typeof service.hideViewer === 'function') {
                     service.hideViewer(context);
                 }
             }
@@ -611,12 +681,12 @@ export default {
         }
 
         return this;
-    },
+    }
 
     /**
      * hideViewer()
      */
-    hideViewer: function (context) {
+    hideViewer(context: coreContext) {
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
 
@@ -632,10 +702,10 @@ export default {
 
         this.setActiveImage();
         return this.setStyles(context, null);
-    },
+    }
 
     // Return the current cache
-    cache: function() {
+    cache() {
         return _cache;
     }
 };
