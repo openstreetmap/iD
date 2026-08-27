@@ -8,7 +8,7 @@ import { pull } from 'es-toolkit/compat';
 import dotenv from 'dotenv';
 import cldrTerritoryInfo from 'cldr-core/supplemental/territoryInfo.json' with { type: 'json' };
 import packageJson from '../package.json' with { type: 'json' };
-import * as languageNames from './language_names.js';
+import * as languageNames from './language_names.ts';
 
 // fontawesome icons
 import * as fontawesome from '@fortawesome/fontawesome-svg-core';
