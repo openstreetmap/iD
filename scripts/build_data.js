@@ -29,11 +29,11 @@ let _currBuild = null;
 
 // if called directly, do the thing.
 if (process.argv[1].indexOf('build_data.js') > -1) {
-  buildData();
+  await buildData();
 }
 
 
-function buildData() {
+async function buildData() {
   if (_currBuild) return _currBuild;
 
   const START = '🏗   ' + styleText('yellow', 'Building data...');
@@ -82,7 +82,7 @@ function buildData() {
 
   writeEnJson();
 
-  const languageInfo = languageNames.langNamesInNativeLang;
+  const languageInfo = await languageNames.getLangNamesInNativeLang();
   fs.writeFileSync('data/languages.json', prettyStringify(languageInfo, { maxLength: 200 }));
   fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
 
@@ -132,6 +132,7 @@ function buildData() {
     })
   ];
 
+  // eslint-disable-next-line require-atomic-updates -- false positive
   return _currBuild =
     Promise.all(tasks)
     .then(() => {
@@ -204,7 +205,7 @@ function writeEnJson() {
   const readManualImagery = fs.readFileSync('data/manual_imagery.json', 'utf8');
 
   return Promise.all([readCoreYaml, readImagery, readCommunity, readManualImagery])
-    .then(data => {
+    .then(async data => {
       let core = loadYaml(data[0]);
       let imagery = loadYaml(data[1]);
       let community = loadYaml(data[2]);
@@ -239,7 +240,7 @@ function writeEnJson() {
 
       enjson.en.imagery = imagery.en.imagery;
       enjson.en.community = community.en;
-      enjson.en.languageNames = languageNames.languageNamesInLanguageOf('en');
+      enjson.en.languageNames = await languageNames.languageNamesInLanguageOf('en');
       enjson.en.scriptNames = languageNames.scriptNamesInLanguageOf('en');
 
       fs.writeFileSync('dist/locales/en.min.json', JSON.stringify(enjson));
