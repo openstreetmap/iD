@@ -5,6 +5,7 @@ import { osmJoinWays, type Sequence } from './multipolygon';
 import { geoExtent, geoPolygonContainsPolygon, geoPolygonIntersectsPolygon } from '../geo';
 import { OsmAbstractEntity, type OsmEntityProps, type OsmEntity } from './abstract-entity';
 import { debug } from '..';
+import { utilArrayUniq } from '../util';
 import { osmIdManager, type ChangesetId, type EntityId, type OsmType, type RelationId } from './id_manager';
 import type { coreGraph } from '../core/graph';
 import type { Vec2 } from '../geo/vector';
@@ -74,6 +75,10 @@ export class osmRelation extends OsmAbstractEntity {
 
     isDegenerate() {
         return this.members.length === 0;
+    }
+
+    children(): EntityId[] {
+        return utilArrayUniq(this.members.map((member) => member.id));
     }
 
     // Return an array of members, each extended with an 'index' property whose value
