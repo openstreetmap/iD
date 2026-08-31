@@ -7,6 +7,16 @@ import { fakeServer } from 'nise';
 describe('iD.serviceOsm', function () {
     var context, connection, spy;
     var serverXHR;
+    const capabilitiesJSON = {
+        api: {
+            waynodes: { maximum: 2000 },
+            status: { database: 'online', api: 'online', gpx: 'online' },
+            changesets: { maximum_elements: 10000 }
+        },
+        policy: {
+            imagery: { blacklist: [{ regex: '.foo.com' }, { regex: '.bar.org' }] }
+        }
+    };
 
     function login() {
         connection.switch({
@@ -30,6 +40,10 @@ describe('iD.serviceOsm', function () {
 
     beforeEach(function () {
         serverXHR = fakeServer.create();      // authenticated calls use XHR via osm-auth
+        fetchMock.mock(/\/api\/capabilities\.json$/, {
+            body: JSON.stringify(capabilitiesJSON),
+            status: 200,
+        });
         context = iD.coreContext().assetPath('../dist/').init();
         connection = context.connection();
         connection.switch({ url: 'https://www.openstreetmap.org' });
@@ -38,6 +52,7 @@ describe('iD.serviceOsm', function () {
     });
 
     afterEach(function() {
+        connection.throttledReloadApiStatus?.cancel();
         fetchMock.reset();
         serverXHR.restore();
     });
@@ -239,7 +254,7 @@ describe('iD.serviceOsm', function () {
 
             await promisify(connection.loadFromAPI).call(connection, path);
 
-            expect(fetchMock.calls().length).toEqual(1);
+            expect(fetchMock.calls().length).toEqual(2); // /capabilities is also called
             expect(fetchMock.calls()[0][0]).toEqual('https://api.openstreetmap.org' + path);
         });
     });
@@ -703,26 +718,8 @@ describe('iD.serviceOsm', function () {
 
 
     describe('API capabilities', function() {
-        var capabilitiesJSON = {
-            api: {
-                waynodes: { maximum: 2000 },
-                status: { database: 'online', api: 'online', gpx: 'online' },
-                changesets: { maximum_elements: 10000 }
-            },
-            policy: {
-                imagery: { blacklist: [{ regex: '.foo.com' }, { regex: '.bar.org' }] }
-            }
-        };
-
         describe('#status', function() {
             it('gets API status', async () => {
-                fetchMock.mock('https://www.openstreetmap.org/api/capabilities.json', {
-                    body: JSON.stringify(capabilitiesJSON),
-                    status: 200,
-                }, {
-                    overwriteRoutes: true
-                });
-
                 const val = await promisify(connection.status).call(connection);
                 expect(val).toEqual('online');
             });
@@ -730,13 +727,6 @@ describe('iD.serviceOsm', function () {
 
         describe('#imageryBlocklists', function() {
             it('updates imagery blocklists', async () => {
-                fetchMock.mock('https://www.openstreetmap.org/api/capabilities.json', {
-                    body: JSON.stringify(capabilitiesJSON),
-                    status: 200,
-                }, {
-                    overwriteRoutes: true
-                });
-
                 await promisify(connection.status).call(connection);
                 var blocklists = connection.imageryBlocklists();
                 expect(blocklists).toEqual([new RegExp('\.foo\.com', 'i'), new RegExp('\.bar\.org', 'i')]);
