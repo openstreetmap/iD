@@ -84,6 +84,10 @@ export class osmNode extends OsmAbstractEntity {
         );
     }
 
+    children(): never[] {
+        return [];
+    }
+
     // Inspect tags and geometry to determine which direction(s) this node/vertex points
     directions(resolver: coreGraph, projection: Projection) {
         const rawValues: { type: 'side' | 'turnout_side' | 'direction'; value: string | number }[] = [];

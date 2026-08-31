@@ -247,6 +247,10 @@ export class osmWay extends OsmAbstractEntity {
         return (new Set(this.nodes).size < (this.isClosed() ? 3 : 2));
     }
 
+    children(): NodeId[] {
+        return utilArrayUniq(this.nodes);
+    }
+
     areAdjacent(n1: NodeId, n2: NodeId) {
         for (var i = 0; i < this.nodes.length; i++) {
             if (this.nodes[i] === n1) {
