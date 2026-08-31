@@ -244,7 +244,7 @@ export function utilGetAllNodes(ids: EntityID[], graph: coreGraph): OsmNode[] {
  *             - isMapLabel:  If true, this name is for a label on the map.
  *                            If falsy, it's for a label elsewhere in the UI.
  */
-export function utilDisplayName(entity: iD.OsmEntity, flags: {
+export function utilDisplayName(entity: iD.OsmEntity, flags?: {
     hideNetwork?: boolean,
     hideRef?: boolean,
     isMapLabel?: boolean
