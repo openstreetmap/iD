@@ -8,7 +8,7 @@ var OSM_PRECISION = 7;
 /**
  * Returns a localized representation of the given length measurement.
  *
- * @param {Number} m area in meters
+ * @param {Number} m length in meters
  * @param {Boolean} isImperial true for U.S. customary units; false for metric
  */
 export function displayLength(m: number, isImperial: boolean) {
