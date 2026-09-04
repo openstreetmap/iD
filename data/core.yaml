@@ -1024,7 +1024,7 @@ en:
       privacy_link: View the iD privacy policy
       third_party_icons:
         description: Show Third Party Icons
-        tooltip: Uncheck this box to avoid loading icons from third party sites such as Wikimedia Commons, Facebook, or Twitter.
+        tooltip: Uncheck this box to avoid loading icons from third-party sites such as Wikimedia Commons or Facebook.
   restore:
     heading: You have unsaved changes
     description: "Do you wish to restore unsaved changes from a previous editing session?"
