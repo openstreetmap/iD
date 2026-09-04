@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
+* Warn about `goo.gl` shortlinks as sources, alongside full Google URLs ([#12740])
 #### :bug: Bugfixes
 #### :earth_asia: Localization
 #### :hourglass: Performance
@@ -51,6 +52,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
 
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
+[#12740]: https://github.com/openstreetmap/iD/issues/12740
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 
 
