@@ -24,15 +24,15 @@ import * as Operations from '../operations/index';
 import { uiCmd } from '../ui/cmd';
 import {
     utilArrayIntersection, utilArrayUnion, utilDeepMemberSelector, utilEntityOrDeepMemberSelector,
-    utilEntitySelector, utilKeybinding, utilTotalExtent, utilGetAllNodes
+    utilEntitySelector, utilKeybinding, utilTotalExtent, utilGetAllNodes,
+    utilArrayUniq
 } from '../util';
 
 
 export function modeSelect(context, selectedIDs) {
-    var mode = {
-        id: 'select',
-        button: 'browse'
-    };
+    var mode = {};
+    mode.id = 'select';
+    mode.button = 'browse';
 
     var keybinding = utilKeybinding('select');
 
@@ -125,6 +125,7 @@ export function modeSelect(context, selectedIDs) {
                 return [];  // selection includes non-area/non-line
             }
             var currChilds = graph.childNodes(entity).map(function(node) { return node.id; });
+            currChilds = utilArrayUniq(currChilds);
             if (!childs.length) {
                 childs = currChilds;
                 continue;

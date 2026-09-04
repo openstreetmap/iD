@@ -1,15 +1,13 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
-
 import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
 import { locationManager } from '../core/location_manager';
 
-import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetLineTags, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
+import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
 import { presetPreset } from './preset';
-import { utilArrayUniq, utilRebind } from '../util';
+import { utilArrayUniq } from '../util';
 
 export { presetCategory };
 export { presetCollection };
@@ -24,8 +22,6 @@ export { _mainPresetIndex as presetManager };
 // with methods for loading new data and returning defaults
 //
 export function presetIndex() {
-  const dispatch = d3_dispatch('favoritePreset', 'recentsChange');
-
   /** the number of recent presets to save */
   const MAX_RECENTS_TO_STORE = 30;
   /** the number of recent presets to show in the preset list */
@@ -39,6 +35,7 @@ export function presetIndex() {
 
   let _this = presetCollection([POINT, LINE, AREA, RELATION]);
   let _presets = { point: POINT, line: LINE, area: AREA, relation: RELATION };
+  const _rawPresets = {};
 
   let _defaults = {
     point: presetCollection([POINT]),
@@ -53,7 +50,6 @@ export function presetIndex() {
   let _universal = [];
   let _addablePresetIDs = null;   // Set of preset IDs that the user can add
   let _recents;
-  let _favorites;
 
   // Index of presets by (geometry, tag key).
   let _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
@@ -78,7 +74,6 @@ export function presetIndex() {
           fields: vals[3]
         });
         osmSetAreaKeys(_this.areaKeys());
-        osmSetLineTags(_this.lineTags());
         osmSetPointTags(_this.pointTags());
         osmSetVertexTags(_this.vertexTags());
       });
@@ -102,7 +97,7 @@ export function presetIndex() {
         let f = d.fields[fieldID];
 
         if (f) {   // add or replace
-          f = presetField(fieldID, f, _fields);
+          f = presetField(fieldID, f);
           if (f.locationSet) newLocationSets.push(f);
           _fields[fieldID] = f;
 
@@ -119,6 +114,7 @@ export function presetIndex() {
 
         if (p) {   // add or replace
           const isAddable = !_addablePresetIDs || _addablePresetIDs.has(presetID);
+          _rawPresets[presetID] = p;
           p = presetPreset(presetID, p, isAddable, _fields, _presets);
           if (p.locationSet) newLocationSets.push(p);
           _presets[presetID] = p;
@@ -127,6 +123,7 @@ export function presetIndex() {
           const existing = _presets[presetID];
           if (existing && !existing.isFallback()) {
             delete _presets[presetID];
+            delete _rawPresets[presetID];
           }
         }
       });
@@ -344,26 +341,6 @@ export function presetIndex() {
   };
 
 
-  _this.lineTags = () => {
-    return _this.collection.filter((lineTags, d) => {
-      // ignore name-suggestion-index, deprecated, and generic presets
-      if (d.suggestion || d.replacement || d.searchable === false) return lineTags;
-
-      // only care about the primary tag
-      const keys = d.tags && Object.keys(d.tags);
-      const key = keys && keys.length && keys[0];  // pick the first tag
-      if (!key) return lineTags;
-
-      // if this can be a line
-      if (d.geometry.indexOf('line') !== -1) {
-        lineTags[key] = lineTags[key] || [];
-        lineTags[key].push(d.tags);
-      }
-      return lineTags;
-    }, {});
-  };
-
-
   _this.pointTags = () => {
     return _this.collection.reduce((pointTags, d) => {
       // ignore name-suggestion-index, deprecated, and generic presets
@@ -472,18 +449,17 @@ export function presetIndex() {
   };
 
 
+  _this.getRawPresets = () => _rawPresets;
+
   _this.getPresets = () => {
     return _presets;
   };
 
 
-  function RibbonItem(preset, source) {
+  function RibbonItem(preset) {
     let item = {};
     item.preset = preset;
-    item.source = source;
 
-    item.isFavorite = () => item.source === 'favorite';
-    item.isRecent = () => item.source === 'recent';
     item.matches = (preset) => item.preset.id === preset.id;
     item.minified = () => ({ pID: item.preset.id });
 
@@ -491,37 +467,20 @@ export function presetIndex() {
   }
 
 
-  function ribbonItemForMinified(d, source) {
+  function ribbonItemForMinified(d) {
     if (d && d.pID) {
       const preset = _this.item(d.pID);
       if (!preset) return null;
-      return RibbonItem(preset, source);
+      return RibbonItem(preset);
     }
     return null;
   }
-
-
-  _this.getGenericRibbonItems = () => {
-    return ['point', 'line', 'area'].map(id => RibbonItem(_this.item(id), 'generic'));
-  };
-
-
-  _this.getAddable = () => {
-      if (!_addablePresetIDs) return [];
-
-      return _addablePresetIDs.map((id) => {
-        const preset = _this.item(id);
-        if (preset) return RibbonItem(preset, 'addable');
-        return null;
-      }).filter(Boolean);
-  };
 
 
   function setRecents(items) {
     _recents = items;
     const minifiedItems = items.map(d => d.minified());
     prefs('preset_recents', JSON.stringify(minifiedItems));
-    dispatch.call('recentsChange');
   }
 
 
@@ -530,35 +489,12 @@ export function presetIndex() {
       // fetch from local storage
       _recents = (JSON.parse(prefs('preset_recents')) || [])
         .reduce((acc, d) => {
-          let item = ribbonItemForMinified(d, 'recent');
+          let item = ribbonItemForMinified(d);
           if (item && item.preset.addable()) acc.push(item);
           return acc;
         }, []);
     }
     return _recents;
-  };
-
-
-  _this.addRecent = (preset, besidePreset, after) => {
-    const recents = _this.getRecents();
-
-    const beforeItem = _this.recentMatching(besidePreset);
-    let toIndex = recents.indexOf(beforeItem);
-    if (after) toIndex += 1;
-
-    const newItem = RibbonItem(preset, 'recent');
-    recents.splice(toIndex, 0, newItem);
-    setRecents(recents);
-  };
-
-
-  _this.removeRecent = (preset) => {
-    const item = _this.recentMatching(preset);
-    if (item) {
-      let items = _this.getRecents();
-      items.splice(items.indexOf(item), 1);
-      setRecents(items);
-    }
   };
 
 
@@ -573,26 +509,6 @@ export function presetIndex() {
   };
 
 
-  _this.moveItem = (items, fromIndex, toIndex) => {
-    if (fromIndex === toIndex ||
-      fromIndex < 0 || toIndex < 0 ||
-      fromIndex >= items.length || toIndex >= items.length
-    ) return null;
-
-    items.splice(toIndex, 0, items.splice(fromIndex, 1)[0]);
-    return items;
-  };
-
-
-  _this.moveRecent = (item, beforeItem) => {
-    const recents = _this.getRecents();
-    const fromIndex = recents.indexOf(item);
-    const toIndex = recents.indexOf(beforeItem);
-    const items = _this.moveItem(recents, fromIndex, toIndex);
-    if (items) setRecents(items);
-  };
-
-
   _this.setMostRecent = (preset) => {
     if (preset.searchable === false) return;
 
@@ -601,7 +517,7 @@ export function presetIndex() {
     if (item) {
       items.splice(items.indexOf(item), 1);
     } else {
-      item = RibbonItem(preset, 'recent');
+      item = RibbonItem(preset);
     }
 
     // remove the last recent (first in, first out)
@@ -614,86 +530,5 @@ export function presetIndex() {
     setRecents(items);
   };
 
-  function setFavorites(items) {
-    _favorites = items;
-    const minifiedItems = items.map(d => d.minified());
-    prefs('preset_favorites', JSON.stringify(minifiedItems));
-
-    // call update
-    dispatch.call('favoritePreset');
-  }
-
-  _this.addFavorite = (preset, besidePreset, after) => {
-      const favorites = _this.getFavorites();
-
-      const beforeItem = _this.favoriteMatching(besidePreset);
-      let toIndex = favorites.indexOf(beforeItem);
-      if (after) toIndex += 1;
-
-      const newItem = RibbonItem(preset, 'favorite');
-      favorites.splice(toIndex, 0, newItem);
-      setFavorites(favorites);
-  };
-
-  _this.toggleFavorite = (preset) => {
-    const favs = _this.getFavorites();
-    const favorite = _this.favoriteMatching(preset);
-    if (favorite) {
-      favs.splice(favs.indexOf(favorite), 1);
-    } else {
-      // only allow 10 favorites
-      if (favs.length === 10) {
-          // remove the last favorite (last in, first out)
-          favs.pop();
-      }
-      // append array
-      favs.push(RibbonItem(preset, 'favorite'));
-    }
-    setFavorites(favs);
-  };
-
-
-  _this.removeFavorite = (preset) => {
-    const item = _this.favoriteMatching(preset);
-    if (item) {
-      const items = _this.getFavorites();
-      items.splice(items.indexOf(item), 1);
-      setFavorites(items);
-    }
-  };
-
-
-  _this.getFavorites = () => {
-    if (!_favorites) {
-
-      // fetch from local storage
-      let rawFavorites = JSON.parse(prefs('preset_favorites'));
-
-      if (!rawFavorites) {
-        rawFavorites = [];
-        prefs('preset_favorites', JSON.stringify(rawFavorites));
-      }
-
-      _favorites = rawFavorites.reduce((output, d) => {
-        const item = ribbonItemForMinified(d, 'favorite');
-        if (item && item.preset.addable()) output.push(item);
-        return output;
-      }, []);
-    }
-    return _favorites;
-  };
-
-
-  _this.favoriteMatching = (preset) => {
-    const favs = _this.getFavorites();
-    for (let index in favs) {
-      if (favs[index].matches(preset)) {
-        return favs[index];
-      }
-    }
-    return null;
-  };
-
-
-  return utilRebind(_this, dispatch, 'on');
+  return _this;
 }

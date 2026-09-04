@@ -6,20 +6,20 @@ describe('iD.coreContext', function() {
     describe('#assetPath', function() {
         it('sets and gets assetPath', function() {
             var context = iD.coreContext();
-            expect(context.assetPath()).to.eql('');
+            expect(context.assetPath()).toEqual('');
 
             context.assetPath('iD/');
-            expect(context.assetPath()).to.eql('iD/');
+            expect(context.assetPath()).toEqual('iD/');
         });
     });
 
     describe('#assetMap', function() {
         it('sets and gets assetMap', function() {
             var context = iD.coreContext();
-            expect(context.assetMap()).to.eql({});
+            expect(context.assetMap()).toEqual({});
 
             context.assetMap(assets);
-            expect(context.assetMap()).to.eql(assets);
+            expect(context.assetMap()).toEqual(assets);
         });
     });
 
@@ -30,14 +30,14 @@ describe('iD.coreContext', function() {
         });
 
         it('ignores absolute urls', function() {
-            expect(context.asset('HTTP://hello')).to.eql('HTTP://hello');
-            expect(context.asset('https://world')).to.eql('https://world');
+            expect(context.asset('HTTP://hello')).toEqual('HTTP://hello');
+            expect(context.asset('https://world')).toEqual('https://world');
         });
         it('looks first in assetMap', function() {
-            expect(context.asset('img/loader.gif')).to.eql('/assets/iD/img/loader-b66184b5c4afbccc25f.gif');
+            expect(context.asset('img/loader.gif')).toEqual('/assets/iD/img/loader-b66184b5c4afbccc25f.gif');
         });
         it('falls back to prepending assetPath', function() {
-            expect(context.asset('img/spinner.gif')).to.eql('iD/img/spinner.gif');
+            expect(context.asset('img/spinner.gif')).toEqual('iD/img/spinner.gif');
         });
     });
 
@@ -48,10 +48,10 @@ describe('iD.coreContext', function() {
         });
 
         it('looks first in assetMap', function() {
-            expect(context.imagePath('loader.gif')).to.eql('/assets/iD/img/loader-b66184b5c4afbccc25f.gif');
+            expect(context.imagePath('loader.gif')).toEqual('/assets/iD/img/loader-b66184b5c4afbccc25f.gif');
         });
         it('falls back to prepending assetPath', function() {
-            expect(context.imagePath('spinner.gif')).to.eql('iD/img/spinner.gif');
+            expect(context.imagePath('spinner.gif')).toEqual('iD/img/spinner.gif');
         });
     });
 
@@ -66,16 +66,16 @@ describe('iD.coreContext', function() {
                 downloaded: false
             };
 
-            expect(context.debugFlags()).to.eql(flags);
+            expect(context.debugFlags()).toEqual(flags);
 
             context.setDebug('tile', true);
-            expect(context.getDebug('tile')).to.be.true;
+            expect(context.getDebug('tile')).toBe(true);
 
             context.setDebug('collision');
-            expect(context.getDebug('collision')).to.be.true;
+            expect(context.getDebug('collision')).toBe(true);
 
             context.setDebug('tile', false);
-            expect(context.getDebug('tile')).to.be.false;
+            expect(context.getDebug('tile')).toBe(false);
         });
     });
 

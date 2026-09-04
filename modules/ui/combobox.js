@@ -65,7 +65,7 @@ export function uiCombobox(context, klass) {
             .on('blur.combo-input', blur)
             .on('keydown.combo-input', keydown)
             .on('keyup.combo-input', keyup)
-            .on('input.combo-input', change)
+            .on('input.combo-input', d3_event => change(d3_event))
             .on('mousedown.combo-input', mousedown)
             .on('mouseup.combo-input', mouseup)
             .each(function() {
@@ -183,8 +183,8 @@ export function uiCombobox(context, klass) {
                     input.on('input.combo-input', function() {
                         var start = input.property('selectionStart');
                         input.node().setSelectionRange(start, start);
-                        input.on('input.combo-input', change); // reset event handler
-                        change(false);
+                        input.on('input.combo-input', d3_event => change(d3_event)); // reset event handler
+                        change(undefined, false);
                     });
                     break;
 
@@ -229,8 +229,9 @@ export function uiCombobox(context, klass) {
 
 
         // Called whenever the input value is changed (e.g. on typing)
-        function change(doAutoComplete) {
+        function change(d3_event, doAutoComplete) {
             if (doAutoComplete === undefined) doAutoComplete = true;
+            if (d3_event?.isComposing) doAutoComplete = false;
             fetchComboData(value(), function(skipAutosuggest) {
                 _selected = null;
                 var val = input.property('value');

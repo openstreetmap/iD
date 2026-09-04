@@ -78,7 +78,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .ensureViewerLoaded(context)
             .then(function() {
                 service
-                    .selectImage(context, image.id)
+                    .selectImage(image)
                     .showViewer(context);
             });
 

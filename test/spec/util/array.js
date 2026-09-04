@@ -2,8 +2,8 @@ describe('iD.utilArray', function() {
     it('utilArrayDifference returns difference of two Arrays', function() {
         var a = [1, 2, 3];
         var b = [4, 3, 2];
-        expect(iD.utilArrayDifference([], [])).to.eql([]);
-        expect(iD.utilArrayDifference([], a)).to.eql([]);
+        expect(iD.utilArrayDifference([], [])).toEqual([]);
+        expect(iD.utilArrayDifference([], a)).toEqual([]);
         expect(iD.utilArrayDifference(a, [])).to.have.members([1, 2, 3]);
         expect(iD.utilArrayDifference(a, b)).to.have.members([1]);
         expect(iD.utilArrayDifference(b, a)).to.have.members([4]);
@@ -12,9 +12,9 @@ describe('iD.utilArray', function() {
     it('utilArrayIntersection returns intersection of two Arrays', function() {
         var a = [1, 2, 3];
         var b = [4, 3, 2];
-        expect(iD.utilArrayIntersection([], [])).to.eql([]);
-        expect(iD.utilArrayIntersection([], a)).to.eql([]);
-        expect(iD.utilArrayIntersection(a, [])).to.eql([]);
+        expect(iD.utilArrayIntersection([], [])).toEqual([]);
+        expect(iD.utilArrayIntersection([], a)).toEqual([]);
+        expect(iD.utilArrayIntersection(a, [])).toEqual([]);
         expect(iD.utilArrayIntersection(a, b)).to.have.members([2, 3]);
         expect(iD.utilArrayIntersection(b, a)).to.have.members([2, 3]);
     });
@@ -22,7 +22,7 @@ describe('iD.utilArray', function() {
     it('utilArrayUnion returns union of two Arrays', function() {
         var a = [1, 2, 3];
         var b = [4, 3, 2];
-        expect(iD.utilArrayUnion([], [])).to.eql([]);
+        expect(iD.utilArrayUnion([], [])).toEqual([]);
         expect(iD.utilArrayUnion([], a)).to.have.members([1, 2, 3]);
         expect(iD.utilArrayUnion(a, [])).to.have.members([1, 2, 3]);
         expect(iD.utilArrayUnion(a, b)).to.have.members([1, 2, 3, 4]);
@@ -31,25 +31,25 @@ describe('iD.utilArray', function() {
 
     it('utilArrayUniq returns unique values in an Array', function() {
         var a = [1, 1, 2, 3, 3];
-        expect(iD.utilArrayUniq([])).to.eql([]);
+        expect(iD.utilArrayUniq([])).toEqual([]);
         expect(iD.utilArrayUniq(a)).to.have.members([1, 2, 3]);
     });
 
     it('utilArrayChunk returns array split into given sized chunks', function() {
         var a = [1, 2, 3, 4, 5, 6, 7];
         // bad chunkSizes, just copy whole array into a single chunk
-        expect(iD.utilArrayChunk(a)).to.eql([[1, 2, 3, 4, 5, 6, 7]]);
-        expect(iD.utilArrayChunk(a), -1).to.eql([[1, 2, 3, 4, 5, 6, 7]]);
-        expect(iD.utilArrayChunk(a), 0).to.eql([[1, 2, 3, 4, 5, 6, 7]]);
+        expect(iD.utilArrayChunk(a)).toEqual([[1, 2, 3, 4, 5, 6, 7]]);
+        expect(iD.utilArrayChunk(a, -1)).toEqual([[1, 2, 3, 4, 5, 6, 7]]);
+        expect(iD.utilArrayChunk(a, 0)).toEqual([[1, 2, 3, 4, 5, 6, 7]]);
         // good chunkSizes
-        expect(iD.utilArrayChunk(a, 2)).to.eql([[1, 2], [3, 4], [5, 6], [7]]);
-        expect(iD.utilArrayChunk(a, 3)).to.eql([[1, 2, 3], [4, 5, 6], [7]]);
-        expect(iD.utilArrayChunk(a, 4)).to.eql([[1, 2, 3, 4], [5, 6, 7]]);
+        expect(iD.utilArrayChunk(a, 2)).toEqual([[1, 2], [3, 4], [5, 6], [7]]);
+        expect(iD.utilArrayChunk(a, 3)).toEqual([[1, 2, 3], [4, 5, 6], [7]]);
+        expect(iD.utilArrayChunk(a, 4)).toEqual([[1, 2, 3, 4], [5, 6, 7]]);
     });
 
     it('utilArrayFlatten returns two level array as single level', function() {
         var a = [[1, 2, 3], [4, 5, 6], [7]];
-        expect(iD.utilArrayFlatten(a)).to.eql([1, 2, 3, 4, 5, 6, 7]);
+        expect(iD.utilArrayFlatten(a)).toEqual([1, 2, 3, 4, 5, 6, 7]);
     });
 
     describe('utilArrayGroupBy', function() {
@@ -65,7 +65,7 @@ describe('iD.utilArray', function() {
                 'Dog': [{type: 'Dog', name: 'Spot'}, {type: 'Dog', name: 'Rover'}],
                 'Cat': [{type: 'Cat', name: 'Tiger'}, {type: 'Cat', name: 'Leo'}]
             };
-            expect(iD.utilArrayGroupBy(pets, 'type')).to.eql(expected);
+            expect(iD.utilArrayGroupBy(pets, 'type')).toEqual(expected);
         });
 
         it('groups by key function', function() {
@@ -75,14 +75,14 @@ describe('iD.utilArray', function() {
                 5: [{type: 'Cat', name: 'Tiger'}, {type: 'Dog', name: 'Rover'}]
             };
             var keyFn = function(item) { return item.name.length; };
-            expect(iD.utilArrayGroupBy(pets, keyFn)).to.eql(expected);
+            expect(iD.utilArrayGroupBy(pets, keyFn)).toEqual(expected);
         });
 
         it('undefined key function', function() {
             var expected = {
                 undefined: pets
             };
-            expect(iD.utilArrayGroupBy(pets)).to.eql(expected);
+            expect(iD.utilArrayGroupBy(pets)).toEqual(expected);
         });
     });
 
@@ -101,7 +101,7 @@ describe('iD.utilArray', function() {
                 //{ type: 'Dog', name: 'Rover' },   // not unique by type
                 //{ type: 'Cat', name: 'Leo' }      // not unique by type
             ];
-            expect(iD.utilArrayUniqBy(pets, 'type')).to.eql(expected);
+            expect(iD.utilArrayUniqBy(pets, 'type')).toEqual(expected);
         });
 
         it('groups by key function', function() {
@@ -112,15 +112,15 @@ describe('iD.utilArray', function() {
                 { type: 'Cat', name: 'Leo' }
             ];
             var keyFn = function(item) { return item.name.length; };
-            expect(iD.utilArrayUniqBy(pets, keyFn)).to.eql(expected);
+            expect(iD.utilArrayUniqBy(pets, keyFn)).toEqual(expected);
         });
 
         it('undefined key function', function() {
-            expect(iD.utilArrayUniqBy(pets)).to.eql([]);
+            expect(iD.utilArrayUniqBy(pets)).toEqual([]);
         });
     });
 
-    describe(iD.utilArrayPowerset, () => {
+    describe('iD.utilArrayPowerset', () => {
         it('can generate a powerset', () => {
             expect(iD.utilArrayPowerset([1, 2, 3])).toStrictEqual([
                 [],

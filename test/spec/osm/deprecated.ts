@@ -1,7 +1,7 @@
+import type { Deprecated as DataDeprecated } from '@openstreetmap/id-tagging-schema';
 import {
   deprecatedTagValuesByKey,
   getDeprecatedTags,
-  type DataDeprecated,
 } from '../../../modules/osm/deprecated';
 
 var deprecated: DataDeprecated = [

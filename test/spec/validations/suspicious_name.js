@@ -74,7 +74,7 @@ describe('iD.validations.suspicious_name', function () {
         var validator = iD.validationSuspiciousName(context);
 
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with no tags', () => {
@@ -82,7 +82,7 @@ describe('iD.validations.suspicious_name', function () {
         var validator = iD.validationSuspiciousName(context);
 
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores feature with no name', () => {
@@ -90,7 +90,7 @@ describe('iD.validations.suspicious_name', function () {
         var validator = iD.validationSuspiciousName(context);
 
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores feature with a specific name', () => {
@@ -98,7 +98,7 @@ describe('iD.validations.suspicious_name', function () {
         var validator = iD.validationSuspiciousName(context);
 
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores feature with a specific name that includes a generic name', () => {
@@ -106,7 +106,7 @@ describe('iD.validations.suspicious_name', function () {
         var validator = iD.validationSuspiciousName(context);
 
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores feature matching excludeNamed pattern in name-suggestion-index', () => {
@@ -114,7 +114,7 @@ describe('iD.validations.suspicious_name', function () {
         var validator = iD.validationSuspiciousName(context);
 
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags feature matching a excludeGeneric pattern in name-suggestion-index', () => {
@@ -122,12 +122,12 @@ describe('iD.validations.suspicious_name', function () {
         var validator = iD.validationSuspiciousName(context);
 
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('suspicious_name');
-        expect(issue.subtype).to.eql('generic_name');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('suspicious_name');
+        expect(issue.subtype).toEqual('generic_name');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags feature matching a global exclude pattern in name-suggestion-index', () => {
@@ -135,12 +135,12 @@ describe('iD.validations.suspicious_name', function () {
         var validator = iD.validationSuspiciousName(context);
 
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('suspicious_name');
-        expect(issue.subtype).to.eql('generic_name');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('suspicious_name');
+        expect(issue.subtype).toEqual('generic_name');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags feature with a name that is just a defining tag key', () => {
@@ -148,12 +148,12 @@ describe('iD.validations.suspicious_name', function () {
         var validator = iD.validationSuspiciousName(context);
 
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('suspicious_name');
-        expect(issue.subtype).to.eql('generic_name');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('suspicious_name');
+        expect(issue.subtype).toEqual('generic_name');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags feature with a name that is just a defining tag value', () => {
@@ -161,12 +161,12 @@ describe('iD.validations.suspicious_name', function () {
         var validator = iD.validationSuspiciousName(context);
 
         var issues = validate(validator);
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('suspicious_name');
-        expect(issue.subtype).to.eql('generic_name');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('suspicious_name');
+        expect(issue.subtype).toEqual('generic_name');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags feature with a name that matches the preset name', async () => {
@@ -175,9 +175,9 @@ describe('iD.validations.suspicious_name', function () {
         const validator = iD.validationSuspiciousName(context);
 
         const issues = validate(validator);
-        expect(issues).to.have.lengthOf(1);
-        expect(issues[0].type).to.eql('suspicious_name');
-        expect(issues[0].hash).to.eql('name:ca=Velero');
+        expect(issues).toHaveLength(1);
+        expect(issues[0].type).toEqual('suspicious_name');
+        expect(issues[0].hash).toEqual('name:ca=Velero');
     });
 
     it('flags feature with a name that matches a preset alias', async () => {
@@ -186,9 +186,9 @@ describe('iD.validations.suspicious_name', function () {
         const validator = iD.validationSuspiciousName(context);
 
         const issues = validate(validator);
-        expect(issues).to.have.lengthOf(1);
-        expect(issues[0].type).to.eql('suspicious_name');
-        expect(issues[0].hash).to.eql('name:it=Velaio');
+        expect(issues).toHaveLength(1);
+        expect(issues[0].type).toEqual('suspicious_name');
+        expect(issues[0].hash).toEqual('name:it=Velaio');
     });
 
     it('flags feature with a name that matches the preset name and tag name', async () => {
@@ -197,12 +197,12 @@ describe('iD.validations.suspicious_name', function () {
         const validator = iD.validationSuspiciousName(context);
 
         const issues = validate(validator);
-        expect(issues).to.have.lengthOf(2);
-        expect(issues[0].type).to.eql('suspicious_name');
-        expect(issues[0].hash).to.eql('name:mi=boatbuilder');
+        expect(issues).toHaveLength(2);
+        expect(issues[0].type).toEqual('suspicious_name');
+        expect(issues[0].hash).toEqual('name:mi=boatbuilder');
 
-        expect(issues[1].type).to.eql('suspicious_name');
-        expect(issues[1].hash).to.eql('name=cOnStRuCtOr de barco');
+        expect(issues[1].type).toEqual('suspicious_name');
+        expect(issues[1].hash).toEqual('name=cOnStRuCtOr de barco');
     });
 
     it('ignores feature with a name that matches an ignored preset\'s name', async () => {
@@ -211,6 +211,6 @@ describe('iD.validations.suspicious_name', function () {
         const validator = iD.validationSuspiciousName(context);
 
         const issues = validate(validator);
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 });

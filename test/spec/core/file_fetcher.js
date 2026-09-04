@@ -3,12 +3,12 @@ describe('iD.coreFileFetcher', function() {
     describe('#fileMap', function() {
         it('gets the fileMap', function() {
             var data = iD.coreFileFetcher();
-            expect(data.fileMap()).to.be.a('object');
+            expect(data.fileMap()).toBeTypeOf('object');
         });
         it('sets the fileMap', function() {
             var data = iD.coreFileFetcher();
             var files = { 'intro_graph': 'data/intro_graph.min.json' };
-            expect(data.fileMap(files)).to.be.ok;
+            expect(data.fileMap(files)).toBeTruthy();
         });
     });
 
@@ -18,10 +18,10 @@ describe('iD.coreFileFetcher', function() {
             data.cache().test = { hello: 'world' };
 
             var prom = data.get('test');
-            expect(prom).to.be.a('promise');
+            expect(prom).toBeInstanceOf(Promise);
             data = await prom;
-            expect(data).to.be.a('object');
-            expect(data.hello).to.eql('world');
+            expect(data).toBeTypeOf('object');
+            expect(data.hello).toEqual('world');
         });
 
         it('returns a promise rejected if we can not get the data', async () => {
@@ -34,10 +34,10 @@ describe('iD.coreFileFetcher', function() {
             var files = { 'intro_graph': 'data/intro_graph.min.json' };
             var data = iD.coreFileFetcher().assetPath('../dist/').fileMap(files);
             var prom = data.get('intro_graph');
-            expect(prom).to.be.a('promise');
+            expect(prom).toBeInstanceOf(Promise);
             data = await prom;
-            expect(data).to.be.a('object');
-            expect(data.n2061.tags.name).to.eql('Three Rivers City Hall');
+            expect(data).toBeTypeOf('object');
+            expect(data.n2061.tags.name).toEqual('Three Rivers City Hall');
         });
     });
 

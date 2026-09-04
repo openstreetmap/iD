@@ -12,12 +12,21 @@ import { localizer } from '../core/localizer';
 import { geoExtent, geoVecAdd } from '../geo';
 import { QAItem } from '../osm';
 import { utilRebind, utilTiler, utilQsString } from '../util';
+import { ApiError } from '../util/error';
 
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
 const _tileZoom = 14;
 const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/api/0.3';
 let _osmoseData = { icons: {}, items: [] };
+
+/** @typedef {{
+    osmose: {
+        icons: {
+            [id: string]: string;
+        }
+    };
+}} QAData */
 
 // This gets reassigned if reset
 let _cache;
@@ -275,7 +284,7 @@ export default {
 
   postUpdate(issue, callback) {
     if (_cache.inflightPost[issue.id]) {
-      return callback({ message: 'Issue update already inflight', status: -2 }, issue);
+      return callback(new ApiError('Issue update already inflight', -2), issue);
     }
 
     // UI sets the status to either 'done' or 'false'
@@ -301,7 +310,7 @@ export default {
       .then(after)
       .catch(err => {
         delete _cache.inflightPost[issue.id];
-        if (callback) callback(err.message);
+        if (callback) callback(err);
       });
   },
 

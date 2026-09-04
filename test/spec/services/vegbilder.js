@@ -143,13 +143,13 @@ describe('iD.serviceVegbilder', function() {
 
       vegbilder.init();
       const cache2 = vegbilder.cache();
-      expect(cache).to.equal(cache2);
+      expect(cache).toEqual(cache2);
     });
 
     it('fetches available layers', function() {
       const availableLayers = vegbilder.cache().wfslayers;
-      expect(availableLayers).to.have.key('vegbilder_1_0:Vegbilder_2020');
-      expect(availableLayers).to.not.have.key('not_matched_layer:Vegbilder_2020');
+      expect(availableLayers.has('vegbilder_1_0:Vegbilder_2020')).toBe(true);
+      expect(availableLayers.has('not_matched_layer:Vegbilder_2020')).toBe(false);
     });
   });
 
@@ -157,7 +157,7 @@ describe('iD.serviceVegbilder', function() {
     it('resets cache', async function() {
       vegbilder.cache().foo = 'bar';
       await vegbilder.reset();
-      expect(vegbilder.cache()).to.not.have.property('foo');
+      expect(vegbilder.cache()).not.toHaveProperty('foo');
     });
   });
 
@@ -211,7 +211,7 @@ describe('iD.serviceVegbilder', function() {
 
       return new Promise((resolve) => {
         vegbilder.on('loadedImages', () => {
-          expect(fetchMock.calls().length).to.eql(1);
+          expect(fetchMock.calls().length).toEqual(1);
           resolve();
         });
 
@@ -254,8 +254,8 @@ describe('iD.serviceVegbilder', function() {
 
       await setTimeout(200);
 
-      expect(spy).to.have.been.not.called;
-      expect(fetchMock.calls().length).to.eql(0);
+      expect(spy).not.toHaveBeenCalled();
+      expect(fetchMock.calls().length).toEqual(0);
     });
   });
 
@@ -266,7 +266,7 @@ describe('iD.serviceVegbilder', function() {
       vegbilder.cache().rtree.load(features);
       const result = vegbilder.images(context.projection);
 
-      expect(result).to.deep.eql(testImages.slice(0, 2));
+      expect(result).toEqual(testImages.slice(0, 2));
     });
 
     it('limits results no more than 5 stacked images in one spot', function() {
@@ -274,8 +274,8 @@ describe('iD.serviceVegbilder', function() {
 
       vegbilder.cache().rtree.load(features);
       const result = vegbilder.images(context.projection);
-      expect(features).to.have.length.of.at.least(6);
-      expect(result).to.have.length.of.at.most(5);
+      expect(features.length).toBeGreaterThanOrEqual(6);
+      expect(result.length).toBeLessThanOrEqual(5);
     });
   });
   describe('#sequences', function() {
@@ -298,7 +298,7 @@ describe('iD.serviceVegbilder', function() {
       }
 
       const result = vegbilder.sequences(context.projection);
-      expect(result).to.deep.eql([{
+      expect(result).toEqual([{
         type: 'LineString',
         coordinates: [[5.7, 58.90001], [5.7, 58.90002], [5.7, 59.90003]],
         key: '1',

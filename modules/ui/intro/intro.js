@@ -1,4 +1,4 @@
-import { t, localizer } from '../../core/localizer';
+import { localizer } from '../../core/localizer';
 import { localize } from './helper';
 
 import { prefs } from '../../core/preferences';
@@ -195,7 +195,7 @@ export function uiIntro(context) {
 
     buttons
       .append('span')
-      .html(d => t.html(d.title));
+      .html(d => localizer.t_html(d.title));
 
     buttons
       .append('span')

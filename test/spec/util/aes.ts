@@ -1,15 +1,15 @@
 describe('iD.utilAes', function() {
 
     it('encrypting and decrypting nothing yields nothing', async () => {
-        expect(await iD.utilAesEncrypt('')).to.eql('');
-        expect(await iD.utilAesDecrypt('')).to.eql('');
+        expect(await iD.utilAesEncrypt('')).toEqual('');
+        expect(await iD.utilAesDecrypt('')).toEqual('');
     });
 
     it('encrypts and decrypts with default key', async () => {
         var text = 'Hello iD!';
         var encrypted = '5597506f958c68543c';
-        expect(await iD.utilAesEncrypt(text)).to.eql(encrypted);
-        expect(await iD.utilAesDecrypt(encrypted)).to.eql(text);
+        expect(await iD.utilAesEncrypt(text)).toEqual(encrypted);
+        expect(await iD.utilAesDecrypt(encrypted)).toEqual(text);
     });
 
     it('encrypts and decrypts with a custom 16-bit key', async () => {
@@ -19,8 +19,8 @@ describe('iD.utilAes', function() {
         ];
         var text = 'Hello iD!';
         var encrypted = '9ff50e32b04f86640a';
-        expect(await iD.utilAesEncrypt(text, key)).to.eql(encrypted);
-        expect(await iD.utilAesDecrypt(encrypted, key)).to.eql(text);
+        expect(await iD.utilAesEncrypt(text, key)).toEqual(encrypted);
+        expect(await iD.utilAesDecrypt(encrypted, key)).toEqual(text);
     });
 
     it('encrypts and decrypts with a custom 24-bit key', async () => {
@@ -31,8 +31,8 @@ describe('iD.utilAes', function() {
         ];
         var text = 'Hello iD!';
         var encrypted = '85fc05011fa7848417';
-        expect(await iD.utilAesEncrypt(text, key)).to.eql(encrypted);
-        expect(await iD.utilAesDecrypt(encrypted, key)).to.eql(text);
+        expect(await iD.utilAesEncrypt(text, key)).toEqual(encrypted);
+        expect(await iD.utilAesDecrypt(encrypted, key)).toEqual(text);
     });
 
     it('encrypts and decrypts with a custom 32-bit key', async () => {
@@ -44,7 +44,7 @@ describe('iD.utilAes', function() {
         ];
         var text = 'Hello iD!';
         var encrypted = '13c21d3dc25165c57c';
-        expect(await iD.utilAesEncrypt(text, key)).to.eql(encrypted);
-        expect(await iD.utilAesDecrypt(encrypted, key)).to.eql(text);
+        expect(await iD.utilAesEncrypt(text, key)).toEqual(encrypted);
+        expect(await iD.utilAesDecrypt(encrypted, key)).toEqual(text);
     });
 });

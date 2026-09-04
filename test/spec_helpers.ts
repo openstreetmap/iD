@@ -94,7 +94,7 @@ cached.locale_tagging_en = {
 // Load the actual data from `dist/locales/` for the 'general' scope
 iD.localizer.loadLocale('en', 'general', 'locales');
 // Load the fake data seeded above for the 'tagging' scope
-iD.localizer.loadLocale('en', 'tagging');
+iD.localizer.loadLocale('en', 'tagging', undefined!);
 
 
 // Initializing `coreContext` initializes `_background`, which tries loading:
@@ -108,9 +108,6 @@ cached.preset_presets = {};
 cached.deprecated = [];
 // Initializing `coreContext` initializes `_uploader`, which tries loading:
 cached.discarded = {};
-
-// @ts-expect-error
-window.d3 = iD.d3; // Remove this if we can avoid exporting all of d3.js
 
 // @ts-expect-error
 delete window.PointerEvent;  // force the browser to use mouse events
@@ -163,5 +160,5 @@ fetchMock.config.fallbackToNetwork = true;
 fetchMock.config.overwriteRoutes = false;
 
 beforeAll(async () => {
-  await iD.coreLocalizer().ensureLoaded();
+  await new iD.coreLocalizer().ensureLoaded();
 });

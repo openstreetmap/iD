@@ -1,3 +1,5 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.uiFieldDirectionalCombo', () => {
     /** @type {iD.Context} */
     let context;
@@ -6,7 +8,7 @@ describe('iD.uiFieldDirectionalCombo', () => {
 
     beforeEach(() => {
         context = iD.coreContext().assetPath('../dist/').init();
-        selection = d3.select(document.createElement('div'));
+        selection = d3_select(document.createElement('div'));
     });
 
     describe.each(['cycleway', 'cycleway:both'])('preset uses %s', (commonKey) => {
@@ -69,7 +71,7 @@ describe('iD.uiFieldDirectionalCombo', () => {
 
 
             left.value = 'shoulder';
-            d3.select(left).dispatch('change');
+            d3_select(left).dispatch('change');
 
             expect(onChange).toHaveBeenCalledTimes(1);
             expect(onChange).toHaveBeenCalledWith({ [commonKey]: 'shoulder' });
@@ -90,7 +92,7 @@ describe('iD.uiFieldDirectionalCombo', () => {
             expect(right.value).toBe('lane');
 
             left.value = 'shoulder';
-            d3.select(left).dispatch('change');
+            d3_select(left).dispatch('change');
 
             expect(onChange).toHaveBeenCalledTimes(1);
             expect(onChange).toHaveBeenNthCalledWith(1, {
@@ -99,7 +101,7 @@ describe('iD.uiFieldDirectionalCombo', () => {
             });
 
             right.value = 'shoulder';
-            d3.select(right).dispatch('change');
+            d3_select(right).dispatch('change');
 
             expect(onChange).toHaveBeenCalledTimes(2);
             expect(onChange).toHaveBeenNthCalledWith(2, {
@@ -191,7 +193,7 @@ describe('iD.uiFieldDirectionalCombo', () => {
             expect(right.value).toBe('no');
 
             left.value = 'separate';
-            d3.select(left).dispatch('change');
+            d3_select(left).dispatch('change');
 
             expect(onChange).toHaveBeenCalledTimes(1);
             expect(onChange).toHaveBeenNthCalledWith(1, {
@@ -200,7 +202,7 @@ describe('iD.uiFieldDirectionalCombo', () => {
             });
 
             right.value = 'separate';
-            d3.select(right).dispatch('change');
+            d3_select(right).dispatch('change');
 
             expect(onChange).toHaveBeenCalledTimes(2);
             expect(onChange).toHaveBeenNthCalledWith(2, {

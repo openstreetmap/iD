@@ -5,7 +5,7 @@ import {
 } from 'd3-interpolate';
 
 import { presetManager } from '../../presets';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { utilRebind } from '../../util/rebind';
@@ -457,7 +457,7 @@ export function uiIntroArea(context, reveal) {
 
         reveal('.entity-editor-pane',
             helpHtml('intro.areas.retry_add_field', { field: descriptionField.title() }), {
-            buttonText: t.html('intro.ok'),
+            buttonText: localizer.t_html('intro.ok'),
             buttonCallback: function() { continueTo(clickAddField); }
         });
 
@@ -477,7 +477,7 @@ export function uiIntroArea(context, reveal) {
         reveal('.ideditor',
             helpHtml('intro.areas.play', { next: t('intro.lines.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-line',
-                buttonText: t.html('intro.ok'),
+                buttonText: localizer.t_html('intro.ok'),
                 buttonCallback: function() { reveal('.ideditor'); }
             }
         );

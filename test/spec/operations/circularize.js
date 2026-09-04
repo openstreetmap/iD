@@ -40,60 +40,60 @@ describe('iD.operationCircularize', function () {
         });
 
         it('is not available for no selected ids', function () {
-            expect(iD.operationCircularize(fakeContext, []).available()).to.be.not.ok;
+            expect(iD.operationCircularize(fakeContext, []).available()).toBeFalsy();
         });
 
         it('is disabled for way with only 2 nodes', function () {
             const operation = iD.operationCircularize(fakeContext, ['w1']);
-            expect(operation.available()).to.be.ok;
-            expect(operation.disabled()).to.eql('not_closed');
+            expect(operation.available()).toBeTruthy();
+            expect(operation.disabled()).toEqual('not_closed');
         });
 
         it('is available for a closed way', function () {
             const operation = iD.operationCircularize(fakeContext, ['w2']);
-            expect(operation.available()).to.be.ok;
-            expect(operation.disabled()).to.eql(false);
+            expect(operation.available()).toBeTruthy();
+            expect(operation.disabled()).toEqual(false);
         });
 
         it('is disabled for an unclosed way', function () {
             const operation = iD.operationCircularize(fakeContext, ['w4']);
-            expect(operation.available()).to.be.ok;
-            expect(operation.disabled()).to.eql('not_closed');
+            expect(operation.available()).toBeTruthy();
+            expect(operation.disabled()).toEqual('not_closed');
         });
 
         it('is available for a multiselection of closed ways', function () {
             const operation = iD.operationCircularize(fakeContext, ['w2', 'w3']);
-            expect(operation.available()).to.be.ok;
-            expect(operation.disabled()).to.eql(false);
+            expect(operation.available()).toBeTruthy();
+            expect(operation.disabled()).toEqual(false);
         });
 
         it('is available for a multiselection of unclosed ways forming a ring', function () {
             const operation = iD.operationCircularize(fakeContext, ['w4', 'w5', 'w6']);
-            expect(operation.available()).to.be.ok;
-            expect(operation.disabled()).to.eql(false);
+            expect(operation.available()).toBeTruthy();
+            expect(operation.disabled()).toEqual(false);
         });
 
         it('is disabled for a multiselection of unclosed ways not forming a ring', function () {
             const operation = iD.operationCircularize(fakeContext, ['w4', 'w6']);
-            expect(operation.available()).to.be.ok;
-            expect(operation.disabled()).to.eql('not_closed');
+            expect(operation.available()).toBeTruthy();
+            expect(operation.disabled()).toEqual('not_closed');
         });
 
         it('is not available for a multiselection of a closed way and a non-way entity', function () {
             const operation = iD.operationCircularize(fakeContext, ['w2', 'n11']);
-            expect(operation.available()).to.be.not.ok;
+            expect(operation.available()).toBeFalsy();
         });
 
         it('is available for a multiselection of a closed way and some unclosed ways forming a loop', function () {
             const operation = iD.operationCircularize(fakeContext, ['w2', 'w4', 'w5', 'w6']);
-            expect(operation.available()).to.be.ok;
+            expect(operation.available()).toBeTruthy();
             expect(operation.disabled()).to.eql(false);
         });
 
-        it('is available for a multiselection of a closed way and some unclosed ways forming a loop', function () {
+        it('is available for a multiselection of a closed way and some unclosed ways not forming a loop', function () {
             const operation = iD.operationCircularize(fakeContext, ['w2', 'w4', 'w5']);
-            expect(operation.available()).to.be.ok;
-            expect(operation.disabled()).to.eql(false);
+            expect(operation.available()).toBeTruthy();
+            expect(operation.disabled()).toEqual(false);
         });
 
         it('performs operation without creating superfluous entities', function () {

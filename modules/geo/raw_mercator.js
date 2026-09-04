@@ -62,7 +62,7 @@ export function geoRawMercator() {
     };
 
 
-    /** @type {GetSet<typeof projection, Vec2>} */
+    /** @type {GetSet<typeof projection, ClipExtent>} */
     projection.clipExtent = function(_) {
         if (!arguments.length) return clipExtent;
         clipExtent = _;

@@ -73,9 +73,7 @@ export function uiPresetList(context) {
 
         function keypress(d3_event) {
             // enter
-            var value = search.property('value');
-            if (d3_event.keyCode === 13 && // ↩ Return
-                value.length) {
+            if (d3_event.keyCode === 13) { // ↩ Return
                 list.selectAll('.preset-list-item:first-child')
                     .each(function(d) { d.choose.call(this); });
             }

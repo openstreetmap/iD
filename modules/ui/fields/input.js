@@ -20,6 +20,7 @@ export {
     uiFieldText as uiFieldEmail,
     uiFieldText as uiFieldIdentifier,
     uiFieldText as uiFieldNumber,
+    uiFieldText as uiFieldInteger,
     uiFieldText as uiFieldSchedule,
     uiFieldText as uiFieldTel,
     uiFieldText as uiFieldUrl,

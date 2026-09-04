@@ -19,7 +19,7 @@ describe('iD.actionMergeNodes', function () {
                 new iD.osmWay({ id: '|', nodes: ['d', 'e'] })
             ]);
 
-            expect(iD.actionMergeNodes(['b', 'e']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionMergeNodes(['b', 'e']).disabled(graph)).toBeFalsy();
         });
     });
 
@@ -32,11 +32,11 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['a', 'b'])(graph);
 
-        expect(graph.hasEntity('a')).to.be.undefined;
+        expect(graph.hasEntity('a')).toBeUndefined();
 
         var survivor = graph.hasEntity('b');
-        expect(survivor).to.be.an.instanceof(iD.osmNode);
-        expect(survivor.loc).to.eql([2, 2], 'average loc');
+        expect(survivor).toBeInstanceOf(iD.osmNode);
+        expect(survivor.loc).toEqual([2, 2], 'average loc');
     });
 
 
@@ -48,12 +48,12 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['a', 'b'])(graph);
 
-        expect(graph.hasEntity('a')).to.be.undefined;
+        expect(graph.hasEntity('a')).toBeUndefined();
 
         var survivor = graph.hasEntity('b');
-        expect(survivor).to.be.an.instanceof(iD.osmNode);
-        expect(survivor.tags).to.eql({ highway: 'traffic_signals' }, 'merge all tags');
-        expect(survivor.loc).to.eql([0, 0], 'use loc of interesting node');
+        expect(survivor).toBeInstanceOf(iD.osmNode);
+        expect(survivor.tags).toEqual({ highway: 'traffic_signals' }, 'merge all tags');
+        expect(survivor.loc).toEqual([0, 0], 'use loc of interesting node');
     });
 
 
@@ -64,11 +64,11 @@ describe('iD.actionMergeNodes', function () {
         ]);
         graph = iD.actionMergeNodes(['a', 'b'])(graph);
 
-        expect(graph.hasEntity('a')).to.be.undefined;
+        expect(graph.hasEntity('a')).toBeUndefined();
 
         var survivor = graph.hasEntity('b');
-        expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
-        expect(survivor.loc).to.eql([0, 0], 'average loc of both interesting nodes');
+        expect(survivor.tags).toEqual({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
+        expect(survivor.loc).toEqual([0, 0], 'average loc of both interesting nodes');
     });
 
 
@@ -80,12 +80,12 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['n1', 'n2'])(graph);
 
-        expect(graph.hasEntity('n1')).to.be.undefined;
+        expect(graph.hasEntity('n1')).toBeUndefined();
 
         var survivor = graph.hasEntity('n2');
-        expect(survivor).to.be.an.instanceof(iD.osmNode);
-        expect(survivor.tags).to.eql({ highway: 'traffic_signals' }, 'merge all tags');
-        expect(survivor.loc).to.eql([4, 4], 'use loc of interesting node');
+        expect(survivor).toBeInstanceOf(iD.osmNode);
+        expect(survivor.tags).toEqual({ highway: 'traffic_signals' }, 'merge all tags');
+        expect(survivor.loc).toEqual([4, 4], 'use loc of interesting node');
     });
 
 
@@ -97,12 +97,12 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['n1', 'b'])(graph);
 
-        expect(graph.hasEntity('b')).to.be.undefined;
+        expect(graph.hasEntity('b')).toBeUndefined();
 
         var survivor = graph.hasEntity('n1');
-        expect(survivor).to.be.an.instanceof(iD.osmNode);
-        expect(survivor.tags).to.eql({ highway: 'traffic_signals' }, 'merge all tags');
-        expect(survivor.loc).to.eql([4, 4], 'use loc of interesting node');
+        expect(survivor).toBeInstanceOf(iD.osmNode);
+        expect(survivor.tags).toEqual({ highway: 'traffic_signals' }, 'merge all tags');
+        expect(survivor.loc).toEqual([4, 4], 'use loc of interesting node');
     });
 
 
@@ -115,11 +115,11 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['n2', 'n1', 'n3'])(graph);
 
-        expect(graph.hasEntity('n2')).to.be.undefined;
-        expect(graph.hasEntity('n3')).to.be.undefined;
+        expect(graph.hasEntity('n2')).toBeUndefined();
+        expect(graph.hasEntity('n3')).toBeUndefined();
 
         var survivor = graph.hasEntity('n1');
-        expect(survivor).to.be.an.instanceof(iD.osmNode);
+        expect(survivor).toBeInstanceOf(iD.osmNode);
     });
 
 
@@ -133,12 +133,12 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['n2', 'n1', 'n3', 'n4'])(graph);
 
-        expect(graph.hasEntity('n1')).to.be.undefined;
-        expect(graph.hasEntity('n3')).to.be.undefined;
-        expect(graph.hasEntity('n4')).to.be.undefined;
+        expect(graph.hasEntity('n1')).toBeUndefined();
+        expect(graph.hasEntity('n3')).toBeUndefined();
+        expect(graph.hasEntity('n4')).toBeUndefined();
 
         var survivor = graph.hasEntity('n2');
-        expect(survivor).to.be.an.instanceof(iD.osmNode);
+        expect(survivor).toBeInstanceOf(iD.osmNode);
     });
 
 
@@ -157,12 +157,12 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['b', 'c'])(graph);
 
-        expect(graph.hasEntity('b')).to.be.undefined;
+        expect(graph.hasEntity('b')).toBeUndefined();
 
         var survivor = graph.hasEntity('c');
-        expect(survivor).to.be.an.instanceof(iD.osmNode);
-        expect(survivor.loc).to.eql([1, 2]);
-        expect(graph.parentWays(survivor).length).to.equal(1);
+        expect(survivor).toBeInstanceOf(iD.osmNode);
+        expect(survivor.loc).toEqual([1, 2]);
+        expect(graph.parentWays(survivor).length).toEqual(1);
     });
 
 
@@ -188,12 +188,12 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['b', 'd'])(graph);
 
-        expect(graph.hasEntity('b')).to.be.undefined;
+        expect(graph.hasEntity('b')).toBeUndefined();
 
         var survivor = graph.hasEntity('d');
-        expect(survivor).to.be.an.instanceof(iD.osmNode);
-        expect(survivor.loc).to.eql([0, 1]);
-        expect(graph.parentWays(survivor).length).to.equal(2);
+        expect(survivor).toBeInstanceOf(iD.osmNode);
+        expect(survivor.loc).toEqual([0, 1]);
+        expect(graph.parentWays(survivor).length).toEqual(2);
     });
 
 
@@ -225,13 +225,13 @@ describe('iD.actionMergeNodes', function () {
 
         graph = iD.actionMergeNodes(['b', 'd', 'e'])(graph);
 
-        expect(graph.hasEntity('b')).to.be.undefined;
-        expect(graph.hasEntity('d')).to.be.undefined;
+        expect(graph.hasEntity('b')).toBeUndefined();
+        expect(graph.hasEntity('d')).toBeUndefined();
 
         var survivor = graph.hasEntity('e');
-        expect(survivor).to.be.an.instanceof(iD.osmNode);
-        expect(survivor.loc).to.eql([0, 0]);
-        expect(graph.parentWays(survivor).length).to.equal(3);
+        expect(survivor).toBeInstanceOf(iD.osmNode);
+        expect(survivor.loc).toEqual([0, 0]);
+        expect(graph.parentWays(survivor).length).toEqual(3);
     });
 
 });

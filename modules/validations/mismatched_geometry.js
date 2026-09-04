@@ -289,6 +289,8 @@ export function validationMismatchedGeometry() {
         // reuse translations
         if (referenceId === 'vertex_as_line') referenceId = 'point_as_line';
         if (referenceId === 'vertex_as_area') referenceId = 'point_as_area';
+        if (referenceId === 'line_as_vertex') referenceId = 'line_as_point';
+        if (referenceId === 'area_as_vertex') referenceId = 'area_as_point';
 
         var dynamicFixes;
         if (targetGeom === 'point') {

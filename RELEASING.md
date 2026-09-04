@@ -10,7 +10,7 @@ you'll need to create a Transifex account, ask the project's maintainers for adm
 on the iD project, and then create this file with contents like
 
   ````json
-  { "user":"api", "password": "<your-transifex-api-key>" }
+  { "password": "<your-transifex-api-key>" }
   ````
 
   where you insert your personal [transifex api token](https://app.transifex.com/user/settings/api/). This file is not version-controlled and will not be checked in.

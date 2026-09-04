@@ -82,14 +82,14 @@ function loadNsiPresets() {
         nsi_wikidata
     ]) => {
       const nsiPresets = buildIDPresets(nsi_data.nsi, {
-        sourcePresets: presetManager.getPresets(),
+        sourcePresets: presetManager.getRawPresets(),
         wikidata: nsi_wikidata.wikidata,
         dissolved: nsi_dissolved.dissolved,
       }).presets;
 
-      // Add `suggestion=true` to all the nsi presets
-      // The preset json schema doesn't include it, but the iD code still uses it
       for (const preset of Object.values(nsiPresets)) {
+        // Add `suggestion=true` to all the nsi presets
+        // The preset json schema doesn't include it, but the iD code still uses it
         preset.suggestion = true;
       }
 

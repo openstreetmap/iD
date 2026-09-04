@@ -2,7 +2,7 @@ import { t } from '../core/localizer';
 import { uiConfirm } from './confirm';
 
 export function uiAsyncModal(context: iD.Context) {
-    let _modal: d3.Selection;
+    let _modal: d3.Selection<HTMLElement>;
 
     /**
      * Open a model, and returns a promise. The promise
@@ -19,7 +19,7 @@ export function uiAsyncModal(context: iD.Context) {
                     .call(title);
 
                 // insert the modal body
-                const textSection = _modal.select('.modal-section.message-text');
+                const textSection = _modal.select<HTMLElement>('.modal-section.message-text');
                 textSection.call(subtitle);
 
                 // insert a cancel button

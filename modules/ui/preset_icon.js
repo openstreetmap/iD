@@ -293,7 +293,8 @@ export function uiPresetIcon() {
     const isTemaki = picon && /^temaki-/.test(picon);
     const isFa = picon && /^fa[srb]-/.test(picon);
     const isRöntgen = picon && /^roentgen-/.test(picon);
-    const isiDIcon = picon && !(isMaki || isTemaki || isFa || isRöntgen);
+    const isPinhead = picon && /^pinhead-/.test(picon);
+    const isiDIcon = picon && !(isMaki || isTemaki || isFa || isRöntgen || isPinhead);
 
     let icon = container.selectAll('.preset-icon')
       .data(picon ? [0] : []);

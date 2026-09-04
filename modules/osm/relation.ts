@@ -49,7 +49,7 @@ export class osmRelation extends OsmAbstractEntity {
         return copy;
     }
 
-    extent(resolver: coreGraph, memo?: { [id: EntityId]: boolean }): geoExtent {
+    extent(resolver: coreGraph, memo?: { [id: RelationId]: boolean }): geoExtent {
         return resolver.transient(this, 'extent', () => {
             if (memo && memo[this.id]) return geoExtent();
             memo = memo || {};
@@ -298,7 +298,7 @@ export class osmRelation extends OsmAbstractEntity {
         const _outers = this.members.filter(function(m) { return 'outer' === (m.role || 'outer'); });
         const _inners = this.members.filter(function(m) { return 'inner' === m.role; });
 
-        const sequenceToLineString = function (sequence: Sequence) {
+        const sequenceToLineString = function (sequence: Sequence<RelationMember>) {
             if (sequence.nodes.length > 2 &&
                 sequence.nodes[0] !== sequence.nodes[sequence.nodes.length - 1]) {
                 // close unclosed parts to ensure correct area rendering - #2945

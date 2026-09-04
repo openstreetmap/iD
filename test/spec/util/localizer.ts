@@ -1,4 +1,4 @@
-describe(iD.utilExpandLocaleCode, () => {
+describe('iD.utilExpandLocaleCode', () => {
     // these tests depend on the JS runtime's bundled ICU data,
     // so they should only cover common cases that don't differ
     // between runtimes.
