@@ -44,6 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 #### :earth_asia: Localization
+* Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
@@ -52,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
+[#12802]: https://github.com/openstreetmap/iD/pull/12802
 
 
 # 2.42.1
