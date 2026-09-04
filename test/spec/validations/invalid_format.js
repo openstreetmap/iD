@@ -1,3 +1,6 @@
+import { select as d3_select } from 'd3-selection';
+import { locationManager } from '../../../modules/core/location_manager';
+
 describe('iD.validations.invalid_format', function () {
     var context;
 
@@ -225,6 +228,275 @@ describe('iD.validations.invalid_format', function () {
                 .replace(/#.*/, '')
                 .replace(/_/g, ' ');
             expect(fixedEntity.tags.wikimedia_commons).to.eql(expected);
+        });
+    });
+
+    describe('Integer field validation', function() {
+        const fieldID = 'test_integer';
+        const duplicateFieldID = 'test_integer_duplicate';
+        const presetID = 'test/integer';
+        const originalLocationSetsAt = locationManager.locationSetsAt;
+
+        beforeEach(function() {
+            iD.presetManager.merge({
+                fields: {
+                    [fieldID]: { key: 'test:count', type: 'integer' }
+                },
+                presets: {
+                    [presetID]: {
+                        tags: { amenity: 'test_integer' },
+                        geometry: ['point'],
+                        fields: [fieldID]
+                    }
+                }
+            });
+        });
+
+        afterEach(function() {
+            locationManager.locationSetsAt = originalLocationSetsAt;
+            iD.presetManager.merge({
+                fields: {
+                    [fieldID]: null,
+                    [duplicateFieldID]: null
+                },
+                presets: { [presetID]: null }
+            });
+        });
+
+        it.each(['-2', '+7', '0', '42', '01', '1; 2'])(
+            'accepts integer field value %s',
+            function(value) {
+                const entity = createPointWithTags({
+                    amenity: 'test_integer',
+                    'test:count': value
+                });
+
+                expect(validate(entity)).toHaveLength(0);
+            }
+        );
+
+        it('reports a universal integer field only once when the preset also includes it', function() {
+            iD.presetManager.merge({
+                fields: {
+                    [fieldID]: { key: 'test:count', type: 'integer', universal: true }
+                }
+            });
+            const entity = createPointWithTags({
+                amenity: 'test_integer',
+                'test:count': '1.5'
+            });
+
+            expect(validate(entity)).toHaveLength(1);
+        });
+
+        it('reports a tag only once when multiple integer fields control the same key', function() {
+            iD.presetManager.merge({
+                fields: {
+                    [duplicateFieldID]: {
+                        key: 'test:count',
+                        type: 'integer',
+                        universal: true
+                    }
+                }
+            });
+            const entity = createPointWithTags({
+                amenity: 'test_integer',
+                'test:count': '1.5'
+            });
+
+            expect(validate(entity)).toHaveLength(1);
+        });
+
+        it.each([
+            'abc',
+            '2.5',
+            '1; 2.5',
+            '1;',
+            '9007199254740992.5',
+            '5.0000000000000001',
+            '1e3',
+            '0x10'
+        ])(
+            'flags non-integer field value %s',
+            function(value) {
+                const entity = createPointWithTags({
+                    amenity: 'test_integer',
+                    'test:count': value
+                });
+
+                const issues = validate(entity);
+                expect(issues).toHaveLength(1);
+                expect(issues[0].data).toEqual({
+                    key: 'test:count',
+                    value
+                });
+            }
+        );
+
+        it('validates populated alternative keys for an integer field', function() {
+            iD.presetManager.merge({
+                fields: {
+                    [fieldID]: {
+                        keys: ['test:count', 'test:count:alt'],
+                        type: 'integer'
+                    }
+                }
+            });
+            const entity = createPointWithTags({
+                amenity: 'test_integer',
+                'test:count': '2',
+                'test:count:alt': '2.5'
+            });
+
+            const issues = validate(entity);
+            expect(issues).toHaveLength(1);
+            expect(issues[0].data.key).toEqual('test:count:alt');
+        });
+
+        it('validates integer fields listed as more fields', function() {
+            iD.presetManager.merge({
+                presets: {
+                    [presetID]: {
+                        tags: { amenity: 'test_integer' },
+                        geometry: ['point'],
+                        moreFields: [fieldID]
+                    }
+                }
+            });
+            const entity = createPointWithTags({
+                amenity: 'test_integer',
+                'test:count': '2.5'
+            });
+
+            expect(validate(entity)).toHaveLength(1);
+        });
+
+        it('validates universal integer fields on fallback presets', function() {
+            iD.presetManager.merge({
+                fields: {
+                    [fieldID]: { key: 'test:count', type: 'integer', universal: true }
+                }
+            });
+            const entity = createPointWithTags({
+                amenity: 'not_a_test_preset',
+                'test:count': '2.5'
+            });
+
+            expect(validate(entity)).toHaveLength(1);
+        });
+
+        it('ignores integer fields that do not match the entity geometry', function() {
+            iD.presetManager.merge({
+                fields: {
+                    [fieldID]: {
+                        key: 'test:count',
+                        type: 'integer',
+                        universal: true,
+                        geometry: ['line']
+                    }
+                }
+            });
+            const entity = createPointWithTags({
+                amenity: 'not_a_test_preset',
+                'test:count': '2.5'
+            });
+
+            expect(validate(entity)).toHaveLength(0);
+        });
+
+        it('ignores universal integer fields outside their location set', function() {
+            locationManager.locationSetsAt = () => new Map();
+            iD.presetManager.merge({
+                fields: {
+                    [fieldID]: {
+                        key: 'test:count',
+                        type: 'integer',
+                        universal: true,
+                        locationSet: { include: ['Q2'] }
+                    }
+                }
+            });
+            const entity = createPointWithTags({
+                amenity: 'test_integer',
+                'test:count': '1.5'
+            });
+
+            expect(validate(entity)).toHaveLength(0);
+        });
+
+        it('uses the graph snapshot supplied by the validator', function() {
+            locationManager.locationSetsAt = loc => {
+                return loc[0] > 5 ? new Map([['+[Q2]', 1]]) : new Map();
+            };
+            iD.presetManager.merge({
+                fields: {
+                    [fieldID]: {
+                        key: 'test:count',
+                        type: 'integer',
+                        universal: true,
+                        geometry: ['line'],
+                        locationSet: { include: ['Q2'] }
+                    }
+                }
+            });
+
+            const way = new iD.osmWay({
+                id: 'w-1',
+                nodes: ['n-1', 'n-2'],
+                tags: { 'test:count': '1.5' }
+            });
+            context.perform(
+                iD.actionAddEntity(new iD.osmNode({ id: 'n-1', loc: [0, 0] })),
+                iD.actionAddEntity(new iD.osmNode({ id: 'n-2', loc: [1, 0] })),
+                iD.actionAddEntity(way)
+            );
+
+            const snapshotGraph = new iD.coreGraph([
+                new iD.osmNode({ id: 'n-1', loc: [10, 10] }),
+                new iD.osmNode({ id: 'n-2', loc: [11, 10] }),
+                way
+            ]);
+            const validator = iD.validationFormatting(context);
+
+            expect(validator(way, snapshotGraph)).toHaveLength(1);
+        });
+
+        it('does not apply integer validation to number fields', function() {
+            iD.presetManager.merge({
+                fields: {
+                    [fieldID]: { key: 'test:count', type: 'number' }
+                }
+            });
+            const entity = createPointWithTags({
+                amenity: 'test_integer',
+                'test:count': '2.5'
+            });
+
+            expect(validate(entity)).toHaveLength(0);
+        });
+
+        it('flags a fractional value for an integer field', function() {
+            const entity = createPointWithTags({
+                amenity: 'test_integer',
+                'test:count': '1.5'
+            });
+
+            const issues = validate(entity);
+            expect(issues).toHaveLength(1);
+            expect(issues[0].type).toEqual('invalid_format');
+            expect(issues[0].subtype).toEqual('integer');
+            expect(issues[0].data).toEqual({
+                key: 'test:count',
+                value: '1.5'
+            });
+
+            const container = d3_select(document.createElement('div'));
+            issues[0].message(context)(container);
+            expect(container.text()).toEqual('test/integer has a non-integer value in test:count');
+
+            container.html('');
+            issues[0].reference(container);
+            expect(container.text()).toEqual('This value must be an integer.');
         });
     });
 
