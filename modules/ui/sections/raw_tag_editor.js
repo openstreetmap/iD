@@ -183,6 +183,16 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('class', 'key')
             .call(utilNoAuto)
             .on('focus', interacted)
+            .on('keydown',function(d3_event){
+                    if (d3_event.key === '='){
+                        d3_event.preventDefault();
+                        var row = d3_select(this.parentNode.parentNode);
+                        var value = row.select('input.value').node();
+                        if (value){
+                            value.focus();
+                        }
+                    }
+                })
             .on('blur', keyChange)
             .on('change', keyChange);
 

@@ -48,6 +48,15 @@ describe('iD.uiSectionRawTagEditor', function() {
         expect(element.select('.tag-list').selectAll('input').nodes()[3].value).toBe('');
     });
 
+    it('moves focus to the value input when pressing equals in the key input', function(){
+        element.remove();
+        render({});
+        var key = element.select('.tag-list input.key');
+        var value = element.select('.tag-list input.value');
+        iD.utilTriggerEvent(key,'keydown',{key:'='});
+        expect(document.activeElement).toBe(value.node());
+    });
+
     it('removes tags when clicking the remove button', async () => {
         const tags = new Promise(cb => {
             taglist.on('change', (_, tags) => cb(tags));
