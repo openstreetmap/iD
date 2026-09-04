@@ -3,15 +3,18 @@ import { throttle } from 'es-toolkit';
 import { select as d3_select } from 'd3-selection';
 import { svgPointTransform } from './helpers';
 import { services } from '../services';
+import type { Projection } from '../geo/raw_mercator';
+import type { MlyImage } from '../services/mapillary';
+import type { coreContext } from '../core';
 
 
-export function svgMapillaryPosition(projection, context) {
+export function svgMapillaryPosition(projection: Projection, context: coreContext) {
     const throttledRedraw = throttle(function () { update(); }, 1000);
     const minZoom = 12;
     const minViewfieldZoom = 18;
-    let layer = d3_select(null);
-    let _mapillary;
-    let viewerCompassAngle;
+    let layer: d3.Selection<SVGGElement> = d3_select(null!);
+    let _mapillary: typeof services.mapillary | null;
+    let viewerCompassAngle: number | null;
 
 
     function init() {
@@ -29,9 +32,9 @@ export function svgMapillaryPosition(projection, context) {
 
                 if (context.map().isTransformed()) return;
 
-                layer.selectAll('.viewfield-group.currentView')
+                layer.selectAll<SVGGElement, MlyImage>('.viewfield-group.currentView')
                     .filter(function(d) {
-                        return d.is_pano;
+                        return !!d.is_pano;
                     })
                     .attr('transform', transform);
             });
@@ -53,7 +56,7 @@ export function svgMapillaryPosition(projection, context) {
     }
 
 
-    function transform(d) {
+    function transform(d: MlyImage) {
         let t = svgPointTransform(projection)(d);
         if (d.is_pano && viewerCompassAngle !== null && isFinite(viewerCompassAngle)) {
             t += ' rotate(' + Math.floor(viewerCompassAngle) + ',0,0)';
@@ -71,7 +74,7 @@ export function svgMapillaryPosition(projection, context) {
         const service = getService();
         const image = service && service.getActiveImage();
 
-        const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
+        const groups = layer.selectAll('.markers').selectAll<SVGGElement, MlyImage>('.viewfield-group')
             .data(image ? [image] : [], function(d) { return d.id; });
 
         // exit
@@ -117,10 +120,10 @@ export function svgMapillaryPosition(projection, context) {
     }
 
 
-    function drawImages(selection) {
+    function drawImages(selection: d3.Selection<SVGGElement>) {
         const service = getService();
 
-        layer = selection.selectAll('.layer-mapillary-position')
+        layer = selection.selectAll<SVGGElement, 0>('.layer-mapillary-position')
             .data(service ? [0] : []);
 
         layer.exit()
@@ -157,7 +160,7 @@ export function svgMapillaryPosition(projection, context) {
         return !!getService();
     };
 
-    drawImages.rendered = function(zoom) {
+    drawImages.rendered = function(zoom: number) {
       return zoom >= minZoom;
     };
 
@@ -165,3 +168,4 @@ export function svgMapillaryPosition(projection, context) {
     init();
     return drawImages;
 }
+svgMapillaryPosition.initialized = false;
