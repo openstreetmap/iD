@@ -941,7 +941,7 @@ en:
       description: Indoor Features
       tooltip: "Rooms, Corridors, Stairwells, etc."
     landuse:
-      description: Landuse Features
+      description: Land Use Features
       tooltip: "Forests, Farmland, Parks, Residential, Commercial, etc."
     boundaries:
       description: Boundaries
