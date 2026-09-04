@@ -5,7 +5,6 @@ import type { NodeId } from '../osm';
 import type { coreGraph } from '../core/graph';
 import type { Vec2 } from '../geo/vector';
 
-
 // `actionMergeNodes` is just a combination of:
 //
 // 1. move all the nodes to a common location
